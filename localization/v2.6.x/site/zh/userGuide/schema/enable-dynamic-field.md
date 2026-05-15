@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 允许你通过<strong>动态</strong>字段这一特殊功能，插入结构灵活、不断变化的实体。该字段以名为<code translate="no">$meta</code> 的隐藏 JSON 字段实现，它会自动存储数据中任何未在 Collections Schema 中<strong>明确定义的</strong>字段。</p>
+    </button></h1><p>Milvus 允许你通过<strong>动态</strong>字段这一特殊功能，插入结构灵活、不断发展的实体。该字段以名为<code translate="no">$meta</code> 的隐藏 JSON 字段实现，它会自动存储数据中任何未在 Collections Schema 中<strong>明确定义的</strong>字段。</p>
 <h2 id="How-it-works" class="common-anchor-header">工作原理<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -261,6 +261,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -377,6 +378,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;data&quot;: [
     {
@@ -415,20 +417,50 @@ curl --request POST \
 <div class="alert note">
 <p>动态字段键的索引是<strong>可选的</strong>。在没有索引的情况下，您仍然可以通过动态字段键进行查询或过滤，但这可能会因暴力搜索而导致性能降低。</p>
 </div>
-<h3 id="JSON-path-indexing-syntax" class="common-anchor-header">JSON 路径索引语法</h3><p>要创建 JSON 路径索引，请指定</p>
+<h3 id="JSON-path-indexing-syntax" class="common-anchor-header">JSON 路径索引语法<button data-href="#JSON-path-indexing-syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要创建 JSON 路径索引，请指定</p>
 <ul>
-<li><p><strong>JSON path</strong>(<code translate="no">json_path</code>)：要索引的 JSON 对象中的键或嵌套字段的路径。</p>
+<li><p><strong>JSON path</strong>(<code translate="no">json_path</code>)：您要索引的 JSON 对象中的键或嵌套字段的路径。</p>
 <ul>
 <li><p>举例说明：<code translate="no">metadata[&quot;category&quot;]</code></p>
 <p>这定义了索引引擎应在 JSON 结构中查找的位置。</p></li>
 </ul></li>
-<li><p><strong>JSON 铸造类型</strong>(<code translate="no">json_cast_type</code>)：Milvus 在解释和索引指定路径上的值时应使用的数据类型。</p>
+<li><p><strong>JSON 类型</strong>(<code translate="no">json_cast_type</code>)：Milvus 在解释和索引指定路径上的值时应使用的数据类型。</p>
 <ul>
 <li><p>该类型必须与被索引字段的实际数据类型相匹配。</p></li>
-<li><p>有关完整列表，请参阅<a href="/docs/zh/use-json-fields.md#Supported-JSON-cast-types">支持的 JSON 类型</a>。</p></li>
+<li><p>有关完整列表，请参阅<a href="/docs/zh/v2.6.x/use-json-fields.md#Supported-JSON-cast-types">支持的 JSON 类型</a>。</p></li>
 </ul></li>
 </ul>
-<h3 id="Use-JSON-path-to-index-dynamic-field-keys" class="common-anchor-header">使用 JSON 路径索引动态字段键</h3><p>由于动态字段是 JSON 字段，因此可以使用 JSON 路径语法索引其中的任何键。这既适用于简单的标量值，也适用于复杂的嵌套结构。</p>
+<h3 id="Use-JSON-path-to-index-dynamic-field-keys" class="common-anchor-header">使用 JSON 路径索引动态字段键<button data-href="#Use-JSON-path-to-index-dynamic-field-keys" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>由于动态字段是 JSON 字段，因此可以使用 JSON 路径语法索引其中的任何键。这既适用于简单的标量值，也适用于复杂的嵌套结构。</p>
 <p><strong>JSON 路径示例：</strong></p>
 <ul>
 <li><p>对于简单的键<code translate="no">overview</code>,<code translate="no">words</code></p></li>
@@ -632,7 +664,22 @@ indexOpt4 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;m
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="common-anchor-header">使用 JSON 转换函数进行类型转换<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span></h3><p>如果动态字段键包含格式不正确的值（例如以字符串形式存储的数字），可以使用铸型函数进行转换：</p>
+<h3 id="Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="common-anchor-header">使用 JSON 转换函数进行类型转换<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span><button data-href="#Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>如果动态字段键包含格式不正确的值（如存储为字符串的数字），可以使用铸型函数进行转换：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Convert a string to double before indexing</span>
@@ -692,10 +739,25 @@ indexOpt5 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;m
 <div class="alert note">
 <ul>
 <li><p>如果类型转换失败（例如，值<code translate="no">&quot;not_a_number&quot;</code> 无法转换为数字），该值将被跳过并取消索引。</p></li>
-<li><p>有关铸型函数参数的详细信息，请参阅<a href="/docs/zh/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">JSON 字段</a>。</p></li>
+<li><p>有关铸型函数参数的详细信息，请参阅<a href="/docs/zh/v2.6.x/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">JSON 字段</a>。</p></li>
 </ul>
 </div>
-<h3 id="Apply-indexes-to-the-collection" class="common-anchor-header">为 Collections 应用索引</h3><p>定义索引参数后，可使用<code translate="no">create_index()</code> 将其应用到 Collections：</p>
+<h3 id="Apply-indexes-to-the-collection" class="common-anchor-header">为 Collections 应用索引<button data-href="#Apply-indexes-to-the-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>定义索引参数后，可使用<code translate="no">create_index()</code> 将其应用到 Collections：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_index(
@@ -746,6 +808,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
@@ -772,7 +835,7 @@ curl --request POST \
 <li><p>对于非 JSON 键（如字符串、数字、布尔值），可直接通过键名引用。</p></li>
 <li><p>对于存储 JSON 对象的键，可使用 JSON 路径语法访问嵌套值。</p></li>
 </ul>
-<p>根据上一节中<a href="/docs/zh/enable-dynamic-field.md#Insert-entities-to-the-collection">的 </a><a href="/docs/zh/enable-dynamic-field.md#Insert-entities-to-the-collection">实体示例</a>，有效的过滤表达式包括</p>
+<p>根据上一节中<a href="/docs/zh/v2.6.x/enable-dynamic-field.md#Insert-entities-to-the-collection">的 </a><a href="/docs/zh/v2.6.x/enable-dynamic-field.md#Insert-entities-to-the-collection">实体示例</a>，有效的过滤表达式包括</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;overview == &quot;Great product&quot;&#x27;</span>                <span class="hljs-comment"># Non-JSON key</span>
@@ -896,6 +959,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;data\&quot;: [
@@ -910,7 +974,7 @@ curl --request POST \
 <div class="alert note">
 <p>默认情况下，结果中不包含动态字段键，必须明确请求。</p>
 </div>
-<p>有关支持的操作符和过滤表达式的完整列表，请参阅<a href="/docs/zh/filtered-search.md">过滤搜索</a>。</p>
+<p>有关支持的操作符和过滤表达式的完整列表，请参阅<a href="/docs/zh/v2.6.x/filtered-search.md">过滤搜索</a>。</p>
 <h2 id="Put-it-all-together" class="common-anchor-header">将所有内容放在一起<button data-href="#Put-it-all-together" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -926,15 +990,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>至此，你已经学会了如何使用动态字段来灵活存储和索引 Schema 中未定义的键。一旦插入了动态字段键，就可以像在筛选表达式中使用其他字段一样使用它--不需要特殊的语法。</p>
+    </button></h2><p>至此，你已经学会了如何使用动态字段来灵活存储和索引 Schema 中未定义的键。一旦插入了动态字段键，你就可以像在筛选表达式中使用其他字段一样使用它--不需要特殊的语法。</p>
 <p>要完成实际应用中的工作流程，你还需要</p>
 <ul>
 <li><p><strong>在你的向量字段上创建索引</strong>（每个 Collections 都必须这样做）</p>
-<p>请参阅<a href="/docs/zh/create-collection.md#Optional-Set-Index-Parameters">设置索引参数</a></p></li>
+<p>请参阅<a href="/docs/zh/v2.6.x/create-collection.md#Optional-Set-Index-Parameters">设置索引参数</a></p></li>
 <li><p><strong>加载 Collections</strong></p>
-<p>请参阅<a href="/docs/zh/load-and-release.md">加载和释放</a></p></li>
+<p>请参阅<a href="/docs/zh/v2.6.x/load-and-release.md">加载和释放</a></p></li>
 <li><p><strong>使用 JSON 路径过滤器进行搜索或查询</strong></p>
-<p>请参阅<a href="/docs/zh/filtered-search.md">过滤搜索</a>和<a href="/docs/zh/json-operators.md">JSON 操作符</a></p></li>
+<p>请参阅<a href="/docs/zh/v2.6.x/filtered-search.md">过滤搜索</a>和<a href="/docs/zh/v2.6.x/json-operators.md">JSON 操作符</a></p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">常见问题<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -951,19 +1015,79 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="common-anchor-header">何时应在 Schema 中明确定义字段，而不是使用动态字段键？</h3><p>在以下情况下，您应在模式中明确定义字段，而不是使用动态字段键：</p>
+    </button></h2><h3 id="When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="common-anchor-header">何时应在 Schema 中明确定义字段，而不是使用动态字段键？<button data-href="#When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在以下情况下，您应在模式中明确定义字段，而不是使用动态字段键：</p>
 <ul>
 <li><p><strong>字段经常包含在 output_fields 中</strong>：只有明确定义的字段才能保证通过<code translate="no">output_fields</code> 有效检索。动态字段键没有针对高频检索进行优化，可能会产生性能开销。</p></li>
 <li><p><strong>字段被频繁访问或过滤</strong>：虽然索引动态字段键可提供与固定 Schema 字段类似的过滤性能，但明确定义的字段可提供更清晰的结构和更好的可维护性。</p></li>
 <li><p><strong>您需要完全控制字段行为</strong>：显式字段支持 Schema 级约束、验证和更清晰的类型，这对于管理数据完整性和一致性非常有用。</p></li>
 <li><p><strong>您希望避免索引不一致</strong>：动态字段键中的数据更容易出现类型或结构不一致的情况。使用固定的 Schema 有助于确保数据质量，尤其是在计划使用索引或铸造的情况下。</p></li>
 </ul>
-<h3 id="Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="common-anchor-header">能否在同一动态字段键上创建多个具有不同数据类型的索引？</h3><p>不能，<strong>每个 JSON 路径只能</strong>创建<strong>一个索引</strong>。即使动态字段键包含混合类型的值（例如，一些字符串和一些数字），在为该路径创建索引时也必须选择单一的<code translate="no">json_cast_type</code> 。目前还不支持对同一键建立不同类型的多个索引。</p>
-<h3 id="When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="common-anchor-header">索引动态字段键时，如果数据铸造失败怎么办？</h3><p>如果在动态字段键上创建了索引，但数据转换失败，例如，要转换到<code translate="no">double</code> 的值是一个非数字字符串，如<code translate="no">&quot;abc&quot;</code>，那么<strong>在创建索引时，</strong>这些特定值将被<strong>静默跳过</strong>。它们不会出现在索引中，因此也<strong>不会在基于过滤器的搜索或</strong>依赖索引<strong>的查询结果中返回</strong>。</p>
+<h3 id="Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="common-anchor-header">能否在同一动态字段键上创建多个具有不同数据类型的索引？<button data-href="#Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>不能，<strong>每个 JSON 路径只能</strong>创建<strong>一个索引</strong>。即使动态字段键包含混合类型的值（例如，一些字符串和一些数字），在为该路径创建索引时也必须选择单一的<code translate="no">json_cast_type</code> 。目前还不支持对同一键建立不同类型的多个索引。</p>
+<h3 id="When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="common-anchor-header">索引动态字段键时，如果数据铸造失败怎么办？<button data-href="#When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>如果在动态字段键上创建了索引，但数据转换失败，例如，要转换到<code translate="no">double</code> 的值是一个非数字字符串，如<code translate="no">&quot;abc&quot;</code>，那么<strong>在创建索引时，</strong>这些特定值将被<strong>静默跳过</strong>。它们不会出现在索引中，因此也<strong>不会在基于过滤器的搜索或</strong>依赖索引<strong>的查询结果中返回</strong>。</p>
 <p>这将产生一些重要影响：</p>
 <ul>
 <li><p><strong>无法回退到完全扫描</strong>：如果大多数实体都被成功索引，过滤查询将完全依赖索引。即使实体在逻辑上与过滤条件相匹配，结果集中也会排除筛选失败的实体。</p></li>
 <li><p><strong>搜索准确性风险</strong>：在数据质量不一致的大型数据集中（尤其是动态字段键），这种行为会导致意外的结果丢失。在编制索引之前，确保数据格式的一致性和有效性至关重要。</p></li>
 <li><p><strong>谨慎使用铸型函数</strong>：如果在索引编制过程中使用<code translate="no">json_cast_function</code> 将字符串转换为数字，请确保字符串值可以可靠地转换。<code translate="no">json_cast_type</code> 与实际转换类型不匹配会导致错误或跳过条目。</p></li>
 </ul>
-<h3 id="What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="common-anchor-header">如果我的查询使用的数据类型与索引铸型不同，会发生什么情况？</h3><p>如果您的查询使用的动态字段键的<strong>数据类型</strong>与索引中使用的<strong>数据类型不同</strong>（例如，当索引被转换为<code translate="no">double</code> 时使用字符串比较进行查询），系统将<strong>不会使用索引</strong>，并可能<em>在可能的情况</em>下退回到全扫描。为获得最佳性能和准确性，请确保您的查询类型与创建索引时使用的<code translate="no">json_cast_type</code> 匹配。</p>
+<h3 id="What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="common-anchor-header">如果我的查询使用的数据类型与索引铸型不同，会发生什么情况？<button data-href="#What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>如果您的查询使用的动态字段键的<strong>数据类型</strong>与索引中使用的<strong>数据类型不同</strong>（例如，当索引被转换为<code translate="no">double</code> 时使用字符串比较进行查询），系统将<strong>不会使用索引</strong>，并可能<em>在可能的情况</em>下退回到全扫描。为获得最佳性能和准确性，请确保您的查询类型与创建索引时使用的<code translate="no">json_cast_type</code> 匹配。</p>

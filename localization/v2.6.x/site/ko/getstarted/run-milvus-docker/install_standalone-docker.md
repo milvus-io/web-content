@@ -38,7 +38,7 @@ title: Docker에서 Milvus 실행하기(Linux)
       </svg>
     </button></h2><ul>
 <li><a href="https://docs.docker.com/get-docker/">Docker를 설치합니다</a>.</li>
-<li>설치하기 전에<a href="/docs/ko/prerequisite-docker.md">하드웨어 및 소프트웨어 요구 사항을 확인하세요</a>.</li>
+<li>설치하기 전에<a href="/docs/ko/v2.6.x/prerequisite-docker.md">하드웨어 및 소프트웨어 요구 사항을 확인하세요</a>.</li>
 </ul>
 <h2 id="Install-Milvus-in-Docker" class="common-anchor-header">Docker에 Milvus 설치<button data-href="#Install-Milvus-in-Docker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -63,10 +63,10 @@ title: Docker에서 Milvus 실행하기(Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>v2.6.15의 새로운 기능:</strong></p>
+<p><strong>v2.6.16의 새로운 기능:</strong></p>
 <ul>
 <li><strong>스트리밍 노드</strong>: 향상된 데이터 처리 기능</li>
-<li><strong>Woodpecker MQ</strong>: 유지 관리 오버헤드가 줄어든 메시지 큐 개선, 자세한 내용은 <a href="/docs/ko/use-woodpecker.md">Woodpecker 사용</a> 참조</li>
+<li><strong>Woodpecker MQ</strong>: 유지 관리 오버헤드가 줄어든 메시지 큐 개선, 자세한 내용은 <a href="/docs/ko/v2.6.x/use-woodpecker.md">Woodpecker 사용</a> 참조</li>
 <li><strong>최적화된 아키텍처</strong>: 더 나은 성능을 위한 통합된 구성 요소</li>
 </ul>
 <p>항상 최신 스크립트를 다운로드하여 최신 구성 및 아키텍처 개선 사항을 적용하세요.</p>
@@ -80,7 +80,7 @@ title: Docker에서 Milvus 실행하기(Linux)
 <li>기본 Milvus 구성을 변경하려면 현재 폴더의 <strong>user.yaml</strong> 파일에 설정을 추가한 다음 서비스를 다시 시작하세요.</li>
 <li>Milvus 데이터 볼륨은 현재 폴더의 <strong>volumes/milvus에</strong> 매핑됩니다.</li>
 </ul>
-<p>Milvus WebUI( <code translate="no">http://127.0.0.1:9091/webui/</code> )에 액세스하여 Milvus 인스턴스에 대해 자세히 알아볼 수 있습니다. 자세한 내용은 <a href="/docs/ko/milvus-webui.md">Milvus WebUI를</a> 참조하세요.</p>
+<p>Milvus WebUI( <code translate="no">http://127.0.0.1:9091/webui/</code> )에 액세스하여 Milvus 인스턴스에 대해 자세히 알아볼 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/milvus-webui.md">Milvus WebUI를</a> 참조하세요.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(선택 사항) Milvus 구성 업데이트하기<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -106,7 +106,7 @@ EOF
 <p>그런 다음 다음과 같이 서비스를 다시 시작합니다:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh restart</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>해당 구성 항목은 <a href="/docs/ko/system_configuration.md">시스템 구성을</a> 참조하세요.</p>
+<p>해당 구성 항목은 <a href="/docs/ko/v2.6.x/system_configuration.md">시스템 구성을</a> 참조하세요.</p>
 <h2 id="Upgrade-Milvus" class="common-anchor-header">Milvus 업그레이드<button data-href="#Upgrade-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -175,27 +175,27 @@ EOF
       </svg>
     </button></h2><p>Docker에 Milvus를 설치했으면 다음을 수행할 수 있습니다:</p>
 <ul>
-<li><p><a href="/docs/ko/quickstart.md">빠른 시작을</a> 확인하여 Milvus의 기능을 확인합니다.</p></li>
+<li><p><a href="/docs/ko/v2.6.x/quickstart.md">빠른 시작을</a> 확인하여 Milvus의 기능을 확인합니다.</p></li>
 <li><p>Milvus의 기본 동작에 대해 알아보세요:</p>
 <ul>
-<li><a href="/docs/ko/manage_databases.md">데이터베이스 관리</a></li>
-<li><a href="/docs/ko/manage-collections.md">컬렉션 관리</a></li>
-<li><a href="/docs/ko/manage-partitions.md">파티션 관리</a></li>
-<li><a href="/docs/ko/insert-update-delete.md">삽입, 위로 올리기 및 삭제</a></li>
-<li><a href="/docs/ko/single-vector-search.md">단일 벡터 검색</a></li>
-<li><a href="/docs/ko/multi-vector-search.md">하이브리드 검색</a></li>
+<li><a href="/docs/ko/v2.6.x/manage_databases.md">데이터베이스 관리</a></li>
+<li><a href="/docs/ko/v2.6.x/manage-collections.md">컬렉션 관리</a></li>
+<li><a href="/docs/ko/v2.6.x/manage-partitions.md">파티션 관리</a></li>
+<li><a href="/docs/ko/v2.6.x/insert-update-delete.md">삽입, 위로 올리기 및 삭제</a></li>
+<li><a href="/docs/ko/v2.6.x/single-vector-search.md">단일 벡터 검색</a></li>
+<li><a href="/docs/ko/v2.6.x/multi-vector-search.md">하이브리드 검색</a></li>
 </ul></li>
-<li><p><a href="/docs/ko/upgrade_milvus_cluster-helm.md">헬름 차트를 사용하여 Milvus 업그레이드</a>.</p></li>
-<li><p><a href="/docs/ko/scaleout.md">Milvus 클러스터 확장하기</a>.</p></li>
+<li><p><a href="/docs/ko/v2.6.x/upgrade_milvus_cluster-helm.md">헬름 차트를 사용하여 Milvus 업그레이드</a>.</p></li>
+<li><p><a href="/docs/ko/v2.6.x/scaleout.md">Milvus 클러스터 확장하기</a>.</p></li>
 <li><p>Milvu 클러스터를 클라우드에 배포하세요:</p>
 <ul>
-<li><a href="/docs/ko/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/ko/gcp.md">구글 클라우드</a></li>
-<li><a href="/docs/ko/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/ko/v2.6.x/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/ko/v2.6.x/gcp.md">구글 클라우드</a></li>
+<li><a href="/docs/ko/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Milvus 통합 가시성 및 관리를 위한 직관적인 웹 인터페이스인 Milvus <a href="/docs/ko/milvus-webui.md">WebUI를</a> 살펴보세요.</p></li>
-<li><p>Milvus 데이터 백업을 위한 오픈 소스 도구인 Milvus <a href="/docs/ko/milvus_backup_overview.md">Backup을</a> 살펴보세요.</p></li>
-<li><p>Milvus 디버깅 및 동적 구성 업데이트를 위한 오픈 소스 도구인 <a href="/docs/ko/birdwatcher_overview.md">Birdwatcher에</a> 대해 알아보세요.</p></li>
+<li><p>Milvus 통합 가시성 및 관리를 위한 직관적인 웹 인터페이스인 Milvus <a href="/docs/ko/v2.6.x/milvus-webui.md">WebUI를</a> 살펴보세요.</p></li>
+<li><p>Milvus 데이터 백업을 위한 오픈 소스 도구인 Milvus <a href="/docs/ko/v2.6.x/milvus_backup_overview.md">Backup을</a> 살펴보세요.</p></li>
+<li><p>Milvus 디버깅 및 동적 구성 업데이트를 위한 오픈 소스 도구인 <a href="/docs/ko/v2.6.x/birdwatcher_overview.md">Birdwatcher에</a> 대해 알아보세요.</p></li>
 <li><p>직관적인 Milvus 관리를 위한 오픈 소스 GUI 도구인 <a href="https://github.com/zilliztech/attu">Attu를</a> 살펴보세요.</p></li>
-<li><p><a href="/docs/ko/monitor.md">Prometheus로 Milvus 모니터링</a>.</p></li>
+<li><p><a href="/docs/ko/v2.6.x/monitor.md">Prometheus로 Milvus 모니터링</a>.</p></li>
 </ul>

@@ -36,7 +36,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a>アルゴリズムは全文検索で広く使用されている用語ベースの関連性スコアリングアルゴリズムです。Milvusでは、BM25はスパース検索パイプラインとして実装されており、テキストをタームウェイト表現に変換し、分散スパースインデックスを使用してトップ<em>K</em>文書を検索する。</p>
+    </button></h2><p><a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a>アルゴリズムは全文検索で広く使用されている用語ベースの関連性スコアリングアルゴリズムです。Milvusでは、BM25をスパース検索パイプラインとして実装し、テキストをタームウェイト表現に変換し、分散スパースインデックスを使用してトップ<em>K</em>文書を検索する。</p>
 <p>全体的なワークフローは、同じテキスト解析ロジックを共有する<strong>文書取り込みと</strong> <strong>クエリテキスト処理の</strong>2つの対称パスから構成される。</p>
 <h3 id="Document-ingestion-From-text-to-sparse-representation" class="common-anchor-header">文書の取り込みテキストからスパース表現へ<button data-href="#Document-ingestion-From-text-to-sparse-representation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -154,7 +154,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>BM25関数を使用する前に、コレクション・スキーマを計画し、それが辞書的フルテキスト検索をサポートしていることを確認してください：</p>
+    </button></h2><p>BM25機能を使用する前に、コレクションスキーマを計画し、それが字句解析的なフルテキスト検索をサポートしていることを確認してください：</p>
 <ul>
 <li><p><strong>生コンテンツのテキストフィールド</strong></p>
 <p>コレクションには、生のテキストを格納する<code translate="no">VARCHAR</code> フィールドが必要です。このフィールドは、全文検索のために処理されるテキストのソースです。</p></li>
@@ -492,6 +492,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -552,6 +553,7 @@ client.insert(InsertReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;text&quot;: &quot;information retrieval is a field of study.&quot;},
@@ -641,6 +643,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data-raw <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

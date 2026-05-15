@@ -36,7 +36,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>É possível utilizar <code translate="no">upsert</code> para inserir uma nova entidade ou atualizar uma entidade existente, dependendo se a chave primária fornecida no pedido de upsert existe na coleção. Se a chave primária não for encontrada, ocorre uma operação de inserção. Caso contrário, será efectuada uma operação de atualização.</p>
+    </button></h2><p>Pode utilizar <code translate="no">upsert</code> para inserir uma nova entidade ou atualizar uma entidade existente, dependendo se a chave primária fornecida no pedido de upsert existe na coleção. Se a chave primária não for encontrada, ocorre uma operação de inserção. Caso contrário, será efectuada uma operação de atualização.</p>
 <p>Um upsert no Milvus funciona em modo de <strong>substituição</strong> ou <strong>de fusão</strong>.</p>
 <h3 id="Upsert-in-override-mode" class="common-anchor-header">Upsert em modo de substituição<button data-href="#Upsert-in-override-mode" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -59,7 +59,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" />
    </span> <span class="img-wrapper"> <span>Upsert em modo de substituição</span> </span></p>
 <p>Se a coleção de destino tiver <code translate="no">autoid</code> ativado no seu campo primário, o Milvus irá gerar uma nova chave primária para os dados transportados na carga do pedido antes de os inserir.</p>
-<p>Para os campos com <code translate="no">nullable</code> ativado, pode omiti-los no pedido <code translate="no">upsert</code> se não necessitarem de actualizações.</p>
+<p>Para os campos com <code translate="no">nullable</code> ativado, pode omiti-los no pedido <code translate="no">upsert</code> se não necessitarem de qualquer atualização.</p>
 <h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">Upsert no modo de mesclagem<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -97,7 +97,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Há várias notas especiais que devem ser consideradas antes de usar o recurso de mesclagem. Os casos a seguir assumem que você tem uma coleção com dois campos escalares denominados <code translate="no">title</code> e <code translate="no">issue</code>, juntamente com uma chave primária <code translate="no">id</code> e um campo vetorial denominado <code translate="no">vector</code>.</p>
+    </button></h3><p>Há várias notas especiais que devem ser consideradas antes de usar o recurso de mesclagem. Os casos a seguir supõem que você tenha uma coleção com dois campos escalares denominados <code translate="no">title</code> e <code translate="no">issue</code>, juntamente com uma chave primária <code translate="no">id</code> e um campo vetorial denominado <code translate="no">vector</code>.</p>
 <ul>
 <li><p><strong>Campos de inserção ascendente com</strong> <code translate="no">nullable</code> <strong>ativado.</strong></p>
 <p>Suponha que o campo <code translate="no">issue</code> possa ser nulo. Ao fazer o upsert desses campos, observe que:</p>
@@ -116,7 +116,7 @@ summary: >-
 </ul></li>
 <li><p><strong>Fazer upsert de um campo JSON.</strong></p>
 <p>Suponha que a coleção de exemplo tenha um campo JSON definido por esquema chamado <code translate="no">extras</code>, e os pares de valores chave nesse campo JSON de uma entidade sejam semelhantes a <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
-<p>Quando você insere o campo <code translate="no">extras</code> de uma entidade com dados JSON modificados, observe que o campo JSON é tratado como um todo e não é possível atualizar chaves individuais seletivamente. Em outras palavras, o campo JSON <strong>NÃO</strong> suporta upsert no modo <strong>de mesclagem</strong>.</p></li>
+<p>Quando você insere o campo <code translate="no">extras</code> de uma entidade com dados JSON modificados, observe que o campo JSON é tratado como um todo e não é possível atualizar chaves individuais seletivamente. Por outras palavras, o campo JSON <strong>NÃO</strong> suporta upsert no modo <strong>de fusão</strong>.</p></li>
 </ul>
 <h3 id="Limits--Restrictions" class="common-anchor-header">Limites e restrições<button data-href="#Limits--Restrictions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -303,6 +303,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/upsert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;title&quot;: &quot;Artificial Intelligence in Real Life&quot;, &quot;issue&quot;: &quot;vol.12&quot;},
@@ -449,6 +450,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/upsert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 10, &quot;vector&quot;: [0.06998888224297328, 0.8582816610326578, -0.9657938677934292, 0.6527905683627726, -0.8668460657158576], &quot;title&quot;: &quot;Layour Design Reference&quot;, &quot;issue&quot;: &quot;vol.34&quot;},
@@ -591,6 +593,7 @@ _, err = client.Upsert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/upsert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,

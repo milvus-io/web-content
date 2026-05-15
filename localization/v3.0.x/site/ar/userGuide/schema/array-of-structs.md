@@ -63,7 +63,7 @@ summary: >-
 <p>لتحديد ما إذا كان حقل StructArray يناسب سيناريوهات تطبيقك بسرعة، ضع في اعتبارك ما إذا كانت</p>
 <ul>
 <li><p>بياناتك في بنية هرمية، مثل مستند واحد مع العديد من الأجزاء المشروحة.</p></li>
-<li><p>يجب أن تكون نتيجة البحث هي المستند، وليس القطع، كما في المثال أعلاه.</p></li>
+<li><p>يجب أن تكون نتيجة البحث هي المستند، وليس الأجزاء، كما في المثال أعلاه.</p></li>
 <li><p>تحتوي نتائج البحث على عدد هائل من الكيانات المكررة، وتواجه صعوبة في استرداد النتائج النهائية باستخدام تقنيات مثل التجميع وإلغاء التكرار وإعادة الترتيب.</p></li>
 </ul>
 <p>إذا كانت إجاباتك على الأسئلة أعلاه بنعم، فيجب عليك استخدام StructArray.</p>
@@ -169,7 +169,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لإضافة حقل StructArray في Milvus، تحتاج إلى تحديد حقل مصفوفة عند إنشاء مجموعة، وتعيين نوع البيانات لعناصرها إلى Struct. العملية كالتالي:</p>
+    </button></h2><p>لإضافة حقل StructArray في Milvus، تحتاج إلى تعريف حقل مصفوفة عند إنشاء مجموعة، وتعيين نوع البيانات لعناصرها إلى Struct. العملية كالتالي:</p>
 <ol>
 <li><p>قم بتعيين نوع بيانات الحقل إلى <code translate="no">DataType.ARRAY</code> عند إضافة الحقل كحقل مصفوفة إلى مخطط المجموعة.</p></li>
 <li><p>قم بتعيين سمة الحقل <code translate="no">element_type</code> إلى <code translate="no">DataType.STRUCT</code> لجعل الحقل مصفوفة هيكلية.</p></li>
@@ -508,7 +508,7 @@ INDEX_PARAMS=<span class="hljs-string">&#x27;[
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>عندما تنشئ فهارس على حقل فرعي لهيكل قياسي فرعي فإن ميلفوس ينشئ الفهرس فعليًا على <strong>مستوى العنصر</strong> وليس على مستوى الصف، لتسريع التصفية القياسية.</p>
+    </button></h3><p>عندما تنشئ فهارس على حقل فرعي هيكلي قياسي، يقوم ميلفوس في الواقع ببناء الفهرس على <strong>مستوى العنصر،</strong> وليس على مستوى الصف، لتسريع التصفية القياسية.</p>
 <p>يقوم مقتطف التعليمات البرمجية التالي بإنشاء فهرس على حقل فرعي بنيوي فرعي قياسي باسم <code translate="no">chunks[text]</code>.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
@@ -579,6 +579,7 @@ client.createCollection(requestCreate);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/create&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;description\&quot;: \&quot;A collection for storing book information with struct array chunks\&quot;,
@@ -694,6 +695,7 @@ row.add(<span class="hljs-string">&quot;chunks&quot;</span>, structArr);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/insert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -818,11 +820,11 @@ client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot
     </button></h2><p>يمكنك إجراء عمليات بحث متجهية في حقول المتجهات في مجموعة وفي StructArray.</p>
 <p>على وجه التحديد، يجب عليك ربط اسم حقل StructArray وأسماء حقول المتجهات المستهدفة داخل عناصر Struct كقيمة للمعلمة <code translate="no">anns_field</code> في طلب البحث، واستخدام <code translate="no">EmbeddingList</code> لتنظيم متجهات الاستعلام بشكل منظم.</p>
 <div class="alert note">
-<p>يوفر Milvus <code translate="no">EmbeddingList</code> لمساعدتك في تنظيم ناقلات الاستعلام لعمليات البحث مقابل قائمة تضمين في StructArray بشكل أكثر دقة. يحتوي كل <code translate="no">EmbeddingList</code> على تضمين متجه على الأقل ويتوقع عددًا من الكيانات الأعلىK في المقابل.</p>
+<p>يوفر Milvus <code translate="no">EmbeddingList</code> لمساعدتك في تنظيم متجهات الاستعلام لعمليات البحث مقابل قائمة تضمين في StructArray بشكل أكثر دقة. يحتوي كل <code translate="no">EmbeddingList</code> على تضمين متجه على الأقل ويتوقع عددًا من الكيانات الأعلىK في المقابل.</p>
 <p>ومع ذلك، يمكن استخدام <code translate="no">EmbeddingList</code> فقط في طلبات <code translate="no">search()</code> دون البحث عن النطاق أو تجميع معلمات البحث، ناهيك عن طلبات <code translate="no">search_iterator()</code>.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.client.embedding_list <span class="hljs-keyword">import</span> EmbeddingList
 
 <span class="hljs-comment"># each query embedding list triggers a single search</span>
@@ -886,6 +888,7 @@ embeddingList1=<span class="hljs-string">&#x27;[[0.2,0.9,0.4,-0.3,0.2]]&#x27;</s
 embeddingList2=<span class="hljs-string">&#x27;[[-0.2,-0.2,0.5,0.6,0.9],[-0.4,0.3,0.5,0.8,0.2]]&#x27;</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>],
@@ -990,6 +993,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>, <span class="hljs-variable">$embeddingList2</span>],
@@ -1093,7 +1097,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكنك استخدام <strong>عوامل تصفية العناصر</strong> <strong>والمشغلات في عائلة المطابقة</strong> لإجراء تصفية عددية ضد حقل فرعي عددية في StructArray. للمزيد من التفاصيل والأمثلة على نوعي المشغلين أعلاه، راجع <a href="/docs/ar/struct-array-operators.md">صفيف مشغلي الهياكل</a>.</p>
+    </button></h2><p>يمكنك استخدام <strong>عوامل تصفية العناصر</strong> <strong>والمشغلات في عائلة المطابقة</strong> لإجراء تصفية عددية ضد حقل فرعي قياسي في StructArray. للمزيد من التفاصيل والأمثلة على نوعي المشغلين أعلاه، راجع <a href="/docs/ar/struct-array-operators.md">صفيف مشغلي الهياكل</a>.</p>
 <h3 id="Element-filters" class="common-anchor-header">مرشحات العناصر<button data-href="#Element-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1120,7 +1124,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <span class="hljs-comment"># incorrect, resulting errors</span>
 element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>) &amp;&amp; <span class="hljs-built_in">id</span> &gt; <span class="hljs-number">0</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Match-family-operators" class="common-anchor-header">عوامل عائلة التطابق<button data-href="#Match-family-operators" class="anchor-icon" translate="no">
+<h3 id="Match-family-operators" class="common-anchor-header">عوامل عائلة المطابقة<button data-href="#Match-family-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

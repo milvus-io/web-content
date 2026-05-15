@@ -42,12 +42,12 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Valores predefinidos</strong>: Os campos ARRAY não suportam valores predefinidos. No entanto, você pode definir o atributo <code translate="no">nullable</code> como <code translate="no">True</code> para permitir valores nulos. Para obter detalhes, consulte <a href="/docs/pt/nullable-and-default.md">Nullable &amp; Default</a>.</p></li>
+<li><p><strong>Valores predefinidos</strong>: Os campos ARRAY não suportam valores predefinidos. No entanto, você pode definir o atributo <code translate="no">nullable</code> como <code translate="no">True</code> para permitir valores nulos. Para obter detalhes, consulte <a href="/docs/pt/v2.6.x/nullable-and-default.md">Nullable &amp; Default</a>.</p></li>
 <li><p><strong>Tipo de dados:</strong> Todos os elementos de um campo ARRAY têm de partilhar o mesmo tipo de dados, que é definido pelo parâmetro <code translate="no">element_type</code>. Quando <code translate="no">element_type</code> é definido como <code translate="no">VARCHAR</code>, tem também de especificar <code translate="no">max_length</code> para os elementos da matriz. O parâmetro <code translate="no">element_type</code> aceita qualquer tipo de dados escalares suportado pelo Milvus, com exceção de <code translate="no">JSON</code>.</p></li>
 <li><p><strong>Capacidade da matriz</strong>: O número de elementos num campo ARRAY tem de ser inferior ou igual à capacidade máxima definida aquando da criação da matriz, tal como especificado em <code translate="no">max_capacity</code>. O valor deve ser um número inteiro dentro do intervalo de <strong>1</strong> a <strong>4096</strong>.</p></li>
 <li><p><strong>Tratamento de strings</strong>: Os valores de cadeia de caracteres nos campos de matriz são armazenados como estão, sem escape semântico ou conversão. Por exemplo, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> e <code translate="no">&quot;a\&quot;b&quot;</code> são armazenados como introduzidos, enquanto <code translate="no">'a'b'</code> e <code translate="no">&quot;a&quot;b&quot;</code> são considerados valores inválidos.</p></li>
 </ul>
-<h2 id="Add-ARRAY-field" class="common-anchor-header">Adicionar um campo ARRAY<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
+<h2 id="Add-ARRAY-field" class="common-anchor-header">Adicionar campo ARRAY<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -70,7 +70,7 @@ summary: >-
 </ol>
 <p>Eis como definir um esquema de coleção que inclui campos ARRAY:</p>
 <div class="alert note">
-<p>Se definir <code translate="no">enable_dynamic_fields=True</code> aquando da definição do esquema, o Milvus permite-lhe inserir campos escalares que não foram previamente definidos. No entanto, isto pode aumentar a complexidade das consultas e da gestão, podendo afetar o desempenho. Para obter mais informações, consulte <a href="/docs/pt/enable-dynamic-field.md">Campo dinâmico</a>.</p>
+<p>Se definir <code translate="no">enable_dynamic_fields=True</code> aquando da definição do esquema, o Milvus permite-lhe inserir campos escalares que não foram previamente definidos. No entanto, isto pode aumentar a complexidade das consultas e da gestão, podendo afetar o desempenho. Para obter mais informações, consulte <a href="/docs/pt/v2.6.x/enable-dynamic-field.md">Campo dinâmico</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -271,7 +271,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>A indexação ajuda a melhorar o desempenho da pesquisa e da consulta. No Milvus, a indexação é obrigatória para campos vetoriais, mas opcional para campos escalares.</p>
-<p>O exemplo seguinte cria índices no campo vetorial <code translate="no">embedding</code> e no campo ARRAY <code translate="no">tags</code>, ambos utilizando o tipo de índice <code translate="no">AUTOINDEX</code>. Com este tipo, o Milvus seleciona automaticamente o índice mais adequado com base no tipo de dados. Também pode personalizar o tipo de índice e os parâmetros para cada campo. Para obter detalhes, consulte <a href="/docs/pt/index-explained.md">Índice explicado</a>.</p>
+<p>O exemplo seguinte cria índices no campo vetorial <code translate="no">embedding</code> e no campo ARRAY <code translate="no">tags</code>, ambos utilizando o tipo de índice <code translate="no">AUTOINDEX</code>. Com este tipo, o Milvus seleciona automaticamente o índice mais adequado com base no tipo de dados. Também pode personalizar o tipo de índice e os parâmetros para cada campo. Para obter detalhes, consulte <a href="/docs/pt/v2.6.x/index-explained.md">Índice explicado</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
@@ -384,6 +384,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -500,6 +501,7 @@ client.<span class="hljs-title function_">insert</span>({
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {
@@ -599,6 +601,7 @@ fmt.Println(<span class="hljs-string">&quot;ratings&quot;</span>, rs.GetColumn(<
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;tags IS NOT NULL&quot;,
@@ -676,6 +679,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;my_collection&quot;,
   &quot;filter&quot;: &quot;ratings[0] &gt; 4&quot;,
@@ -775,6 +779,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -788,4 +793,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:-0.24793813,&quot;embedding&quot;:[0.12,0.34,0.56],&quot;id&quot;:1,&quot;ratings&quot;:{&quot;Data&quot;:{&quot;LongData&quot;:{&quot;data&quot;:[5,4,3]}}},&quot;tags&quot;:{&quot;Data&quot;:{&quot;StringData&quot;:{&quot;data&quot;:[&quot;pop&quot;,&quot;rock&quot;,&quot;classic&quot;]}}}}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Além disso, o Milvus suporta operadores avançados de filtragem de matriz como <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code> e <code translate="no">ARRAY_LENGTH</code> para aprimorar ainda mais os recursos de consulta. Para obter mais detalhes, consulte <a href="/docs/pt/array-operators.md">Operadores ARRAY</a>.</p>
+<p>Além disso, o Milvus suporta operadores avançados de filtragem de matriz como <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code> e <code translate="no">ARRAY_LENGTH</code> para aprimorar ainda mais os recursos de consulta. Para obter mais detalhes, consulte <a href="/docs/pt/v2.6.x/array-operators.md">Operadores ARRAY</a>.</p>

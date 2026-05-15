@@ -37,8 +37,8 @@ summary: 本页演示导入准备好的数据的程序。
       </svg>
     </button></h2><ul>
 <li><p>您已经准备好数据并将其放入 Milvus 存储桶。</p>
-<p>如果没有，您应该先使用<strong>RemoteBulkWriter</strong>准备数据，并确保准备好的数据已经传输到与您的 Milvus 实例一起启动的 MinIO 实例上的 Milvus 数据桶中。有关详细信息，请参阅<a href="/docs/zh/prepare-source-data.md">准备源数据</a>。</p></li>
-<li><p>您已经使用用于准备数据的 Schema 创建了一个 Collections。如果没有，请参阅<a href="/docs/zh/manage-collections.md">管理 Collections</a>。</p></li>
+<p>如果没有，您应该先使用<strong>RemoteBulkWriter</strong>准备数据，并确保准备好的数据已经传输到与您的 Milvus 实例一起启动的 MinIO 实例上的 Milvus 数据桶中。有关详细信息，请参阅<a href="/docs/zh/v2.6.x/prepare-source-data.md">准备源数据</a>。</p></li>
+<li><p>您已经使用用于准备数据的 Schema 创建了一个 Collections。如果没有，请参阅<a href="/docs/zh/v2.6.x/manage-collections.md">管理 Collections</a>。</p></li>
 </ul>
 <div class="language-python">
 <p>下面的代码片段使用给定的 Schema 创建了一个简单的 Collections。有关参数的更多信息，请参阅 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>和 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>SDK 参考资料。</p>
@@ -110,6 +110,7 @@ job_id = resp.json()[<span class="hljs-string">&#x27;data&#x27;</span>][<span cl
 
 curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&quot; \
 --header &quot;Content-Type: application/json&quot; \
+--header &quot;Request-Timeout: 10&quot; \
 --data-raw &#x27;{
     &quot;files&quot;: [
         [
@@ -223,6 +224,7 @@ resp = get_import_progress(
 
 curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&quot; \
 --header &quot;Content-Type: application/json&quot; \
+--header &quot;Request-Timeout: 10&quot; \
 --data-raw &#x27;{
     &quot;jobId&quot;: &quot;449839014328146739&quot;
 }&#x27;
@@ -307,6 +309,7 @@ resp = list_import_jobs(
 
 curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot; \
 --header &quot;Content-Type: application/json&quot; \
+--header &quot;Request-Timeout: 10&quot; \
 --data-raw &#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;
 }&#x27;
@@ -382,7 +385,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
 <li><p>有关删除行为的限制：</p>
 <ul>
 <li><p>在导入任务状态为 "<strong>已完成 "</strong>之前，不保证删除成功。</p></li>
-<li><p>在任务状态为 "<strong>已完成</strong>"后，则保证删除成功。</p></li>
+<li><p>在任务状态为 "<strong>已完成</strong>"之后，删除将保证成功。</p></li>
 </ul></li>
 </ul>
 <h2 id="Recommendations" class="common-anchor-header">建议<button data-href="#Recommendations" class="anchor-icon" translate="no">

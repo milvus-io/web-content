@@ -24,7 +24,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus ermöglicht es Ihnen, dynamisch neue Felder zu bestehenden Sammlungen hinzuzufügen, so dass Sie Ihr Datenschema leicht weiterentwickeln können, wenn sich Ihre Anwendungsanforderungen ändern. Dieser Leitfaden zeigt Ihnen anhand von praktischen Beispielen, wie Sie Felder in verschiedenen Szenarien hinzufügen können.</p>
+    </button></h1><p>Milvus ermöglicht es Ihnen, dynamisch neue Felder zu bestehenden Sammlungen hinzuzufügen, so dass Sie Ihr Datenschema leicht weiterentwickeln können, wenn sich Ihre Anwendungsanforderungen ändern. Diese Anleitung zeigt Ihnen anhand von praktischen Beispielen, wie Sie Felder in verschiedenen Szenarien hinzufügen können.</p>
 <h2 id="Considerations" class="common-anchor-header">Überlegungen<button data-href="#Considerations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -45,7 +45,7 @@ beta: Milvus 2.6.x
 <li><p>Sie können skalare Felder hinzufügen (<code translate="no">INT64</code>, <code translate="no">VARCHAR</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, usw.). Vektorfelder können nicht zu bestehenden Sammlungen hinzugefügt werden.</p></li>
 <li><p>Neue Felder müssen löschbar sein (nullable=True), damit vorhandene Entitäten, die keine Werte für das neue Feld haben, berücksichtigt werden können.</p></li>
 <li><p>Das Hinzufügen von Feldern zu geladenen Sammlungen erhöht den Speicherverbrauch.</p></li>
-<li><p>Es gibt eine Höchstgrenze für die Anzahl der Felder pro Sammlung. Für Details, siehe <a href="/docs/de/limitations.md#Number-of-resources-in-a-collection">Milvus Limits</a>.</p></li>
+<li><p>Es gibt eine Höchstgrenze für die Anzahl der Felder pro Sammlung. Für Details, siehe <a href="/docs/de/v2.6.x/limitations.md#Number-of-resources-in-a-collection">Milvus Limits</a>.</p></li>
 <li><p>Feldnamen müssen unter statischen Feldern eindeutig sein.</p></li>
 <li><p>Sie können kein <code translate="no">$meta</code> Feld hinzufügen, um die dynamische Feldfunktionalität für Sammlungen zu aktivieren, die ursprünglich nicht mit <code translate="no">enable_dynamic_field=True</code> erstellt wurden.</p></li>
 </ul>
@@ -64,14 +64,14 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Diese Anleitung setzt voraus, dass Sie Folgendes haben</p>
+    </button></h2><p>Diese Anleitung setzt voraus, dass Sie über Folgendes verfügen</p>
 <ul>
 <li><p>Eine laufende Milvus-Instanz</p></li>
 <li><p>Milvus SDK installiert</p></li>
 <li><p>Eine bestehende Sammlung</p></li>
 </ul>
 <div class="alert note">
-<p>Weitere Informationen zur Erstellung von Sammlungen und zu den grundlegenden Vorgängen finden Sie in unserem Dokument <a href="/docs/de/create-collection.md">Sammlung erstellen</a>.</p>
+<p>Weitere Informationen zur Erstellung von Sammlungen und zu den grundlegenden Vorgängen finden Sie in unserem Dokument <a href="/docs/de/v2.6.x/create-collection.md">Sammlung erstellen</a>.</p>
 </div>
 <h2 id="Basic-usage" class="common-anchor-header">Grundlegende Verwendung<button data-href="#Basic-usage" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -170,6 +170,7 @@ client.addCollectionField(AddCollectionFieldReq.builder()
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/fields/add&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;product_catalog&quot;,
@@ -268,6 +269,7 @@ client.add_collection_field(
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/fields/add&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;product_catalog&quot;,
@@ -374,6 +376,7 @@ client.addCollectionField(AddCollectionFieldReq.builder()
 <span class="hljs-comment"># ❌ This is NOT supported</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/fields/add&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;existing_collection&quot;,
@@ -386,8 +389,8 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <button class="copy-code-btn"></button></code></pre>
 <p>So aktivieren Sie die dynamische Schemafunktionalität:</p>
 <ul>
-<li><p><strong>Neue Sammlung</strong>: Setzen Sie <code translate="no">enable_dynamic_field</code> auf True, wenn Sie die Sammlung erstellen. Einzelheiten finden Sie unter <a href="/docs/de/create-collection.md#Create-Schema">Sammlung erstellen</a></p></li>
-<li><p><strong>Vorhandene Sammlung</strong>: Setzen Sie die Eigenschaft auf Sammlungsebene <code translate="no">dynamicfield.enabled</code> auf True. Weitere Informationen finden Sie unter <a href="/docs/de/modify-collection.md#Example-4-Enable-dynamic-field">Ändern einer Sammlung</a>.</p></li>
+<li><p><strong>Neue Sammlung</strong>: Setzen Sie <code translate="no">enable_dynamic_field</code> auf True, wenn Sie die Sammlung erstellen. Einzelheiten finden Sie unter <a href="/docs/de/v2.6.x/create-collection.md#Create-Schema">Sammlung erstellen</a></p></li>
+<li><p><strong>Vorhandene Sammlung</strong>: Setzen Sie die Eigenschaft auf Sammlungsebene <code translate="no">dynamicfield.enabled</code> auf True. Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/modify-collection.md#Example-4-Enable-dynamic-field">Ändern einer Sammlung</a>.</p></li>
 </ul>
 <h3 id="What-happens-when-I-add-a-field-with-the-same-name-as-a-dynamic-field-key" class="common-anchor-header">Was passiert, wenn ich ein Feld mit demselben Namen wie ein dynamischer Feldschlüssel hinzufüge?<button data-href="#What-happens-when-I-add-a-field-with-the-same-name-as-a-dynamic-field-key" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -516,6 +519,7 @@ insertR = client.insert(InsertReq.builder()
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Step 1: Insert initial data with dynamic fields...&quot;</span>
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/entities/insert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
@@ -530,6 +534,7 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
 <span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\nStep 2: Add static field with same name as dynamic field...&quot;</span>
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/collections/fields/add&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
@@ -543,6 +548,7 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
 <span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\nStep 3: Insert new data after adding static field...&quot;</span>
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/entities/insert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
@@ -634,6 +640,7 @@ results = client.<span class="hljs-title function_">query</span>({
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Query 1: Static field only (dynamic field masked)...&quot;</span>
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/entities/query&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
@@ -644,6 +651,7 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
 <span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\nQuery 2: Both static and original dynamic values...&quot;</span>
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/entities/query&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
@@ -654,6 +662,7 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
 <span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\nQuery 3: New entity with static field value...&quot;</span>
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/entities/query&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,

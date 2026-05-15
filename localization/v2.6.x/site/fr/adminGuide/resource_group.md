@@ -38,7 +38,7 @@ title: Gestion des groupes de ressources
     </button></h2><p>Un groupe de ressources peut contenir plusieurs ou tous les nœuds de requête d'un cluster Milvus. Vous décidez de la manière dont vous souhaitez répartir les nœuds de requête entre les groupes de ressources en fonction de ce qui vous semble le plus judicieux. Par exemple, dans un scénario à plusieurs collections, vous pouvez allouer un nombre approprié de nœuds de requête à chaque groupe de ressources et charger les collections dans différents groupes de ressources, de sorte que les opérations au sein de chaque collection soient physiquement indépendantes de celles des autres collections.</p>
 <p>Notez qu'une instance Milvus maintient un groupe de ressources par défaut pour contenir tous les nœuds de requête au démarrage et le nomme <strong>__default_resource_group</strong>.</p>
 <p>À partir de la version 2.4.1, Milvus fournit une API de groupe de ressources déclarative, tandis que l'ancienne API de groupe de ressources a été supprimée. La nouvelle API déclarative permet aux utilisateurs d'atteindre l'idempotence, afin de faciliter le développement secondaire dans les environnements "cloud-native".</p>
-<h2 id="Concepts-of-resource-group" class="common-anchor-header">Concepts de groupe de ressources<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
+<h2 id="Concepts-of-resource-group" class="common-anchor-header">Concepts du groupe de ressources<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -90,7 +90,7 @@ title: Gestion des groupes de ressources
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Tous les exemples de code sur cette page sont dans PyMilvus 2.6.12. Mettez à jour votre installation PyMilvus avant de les exécuter.</p>
+<p>Tous les exemples de code sur cette page sont dans PyMilvus 2.6.13. Mettez à jour votre installation PyMilvus avant de les exécuter.</p>
 </div>
 <ol>
 <li><p>Créer un groupe de ressources.</p>
@@ -183,7 +183,7 @@ milvus_client.load_partitions(collection, [partition], replica_number=<span clas
 <p>Notez que <code translate="no">_resource_groups</code> est un paramètre facultatif et que s'il n'est pas spécifié, Milvus chargera les répliques sur les nœuds de requête dans le groupe de ressources par défaut.</p>
 <p>Pour que Milus charge chaque réplique d'une collection dans un groupe de ressources distinct, assurez-vous que le nombre de groupes de ressources est égal au nombre de répliques.</p></li>
 <li><p>Transférer les répliques entre les groupes de ressources.</p>
-<p>Milvus utilise les <a href="/docs/fr/replica.md">répliques</a> pour équilibrer la charge entre les <a href="/docs/fr/glossary.md#Segment">segments</a> distribués sur plusieurs nœuds de requête. Vous pouvez déplacer certaines répliques d'une collection d'un groupe de ressources à un autre de la manière suivante :</p>
+<p>Milvus utilise les <a href="/docs/fr/v2.6.x/replica.md">répliques</a> pour équilibrer la charge entre les <a href="/docs/fr/v2.6.x/glossary.md#Segment">segments</a> distribués sur plusieurs nœuds de requête. Vous pouvez déplacer certaines répliques d'une collection d'un groupe de ressources à un autre de la manière suivante :</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 collection_name = <span class="hljs-string">&#x27;c&#x27;</span>
@@ -348,6 +348,6 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h1><p>Pour déployer une instance Milvus multi-tenant, lisez ce qui suit :</p>
 <ul>
-<li><a href="/docs/fr/rbac.md">Activer le RBAC</a></li>
-<li><a href="/docs/fr/users_and_roles.md">Utilisateurs et rôles</a></li>
+<li><a href="/docs/fr/v2.6.x/rbac.md">Activer le RBAC</a></li>
+<li><a href="/docs/fr/v2.6.x/users_and_roles.md">Utilisateurs et rôles</a></li>
 </ul>

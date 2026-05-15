@@ -174,6 +174,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/load&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
@@ -187,6 +188,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/get_load_state&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
@@ -294,7 +296,7 @@ Not support yet
 <button class="copy-code-btn"></button></code></pre>
 <p>Wenn Sie sich dafür entscheiden, bestimmte Felder zu laden, sollten Sie beachten, dass nur die in <code translate="no">load_fields</code> enthaltenen Felder als Filter und Ausgabefelder in Suchen und Abfragen verwendet werden können. Sie sollten immer die Namen des Primärfeldes und mindestens ein Vektorfeld in <code translate="no">load_fields</code> aufnehmen.</p>
 <p>Sie können auch <code translate="no">skip_load_dynamic_field</code> verwenden, um zu bestimmen, ob das dynamische Feld geladen werden soll. Das dynamische Feld ist ein reserviertes JSON-Feld namens <strong>$meta</strong> und speichert alle nicht schema-definierten Felder und ihre Werte in Schlüssel-Wert-Paaren. Beim Laden des dynamischen Feldes werden alle Schlüssel in den Feldern geladen und stehen für die Filterung und Ausgabe zur Verfügung. Wenn nicht alle Schlüssel des dynamischen Feldes an der Filterung und Ausgabe von Metadaten beteiligt sind, setzen Sie <code translate="no">skip_load_dynamic_field</code> auf <code translate="no">True</code>.</p>
-<p>Um nach dem Laden der Sammlung weitere Felder zu laden, müssen Sie die Sammlung zuerst freigeben, um mögliche Fehler zu vermeiden, die aufgrund von Indexänderungen ausgelöst werden.</p>
+<p>Um nach dem Laden der Sammlung weitere Felder zu laden, müssen Sie die Sammlung zuerst freigeben, um mögliche Fehler zu vermeiden, die aufgrund von Indexänderungen auftreten.</p>
 <h2 id="Release-Collection" class="common-anchor-header">Sammlung freigeben<button data-href="#Release-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -392,6 +394,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/release&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
@@ -405,6 +408,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/get_load_state&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>

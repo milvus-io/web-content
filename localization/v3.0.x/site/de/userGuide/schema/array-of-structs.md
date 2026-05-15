@@ -391,7 +391,7 @@ SCHEMA=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Die hervorgehobenen Zeilen im obigen Codebeispiel veranschaulichen, wie man ein StructArray in ein Auflistungsschema einfügt.</p>
-<h2 id="Set-index-params" class="common-anchor-header">Index-Parameter setzen<button data-href="#Set-index-params" class="anchor-icon" translate="no">
+<h2 id="Set-index-params" class="common-anchor-header">Index-Parameter festlegen<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -579,6 +579,7 @@ client.createCollection(requestCreate);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/create&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;description\&quot;: \&quot;A collection for storing book information with struct array chunks\&quot;,
@@ -694,6 +695,7 @@ row.add(<span class="hljs-string">&quot;chunks&quot;</span>, structArr);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/insert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -818,7 +820,7 @@ client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot
     </button></h2><p>Sie können Vektorsuchen in den Vektorfeldern einer Sammlung und in einem StructArray durchführen.</p>
 <p>Konkret sollten Sie den Namen des StructArray-Feldes und die der Zielvektorfelder innerhalb von Struct-Elementen als Wert für den <code translate="no">anns_field</code> -Parameter in einer Suchanfrage verketten und <code translate="no">EmbeddingList</code> verwenden, um Abfragevektoren ordentlich zu organisieren.</p>
 <div class="alert note">
-<p>Milvus stellt <code translate="no">EmbeddingList</code> zur Verfügung, um Abfragevektoren für die Suche nach einer Einbettungsliste in einem StructArray übersichtlicher zu gestalten. Jede <code translate="no">EmbeddingList</code> enthält mindestens eine Vektoreinbettung und erwartet im Gegenzug eine Anzahl von topK Entitäten.</p>
+<p>Milvus stellt <code translate="no">EmbeddingList</code> zur Verfügung, um Abfragevektoren für Suchen gegen eine Einbettungsliste in einem StructArray übersichtlicher zu organisieren. Jede <code translate="no">EmbeddingList</code> enthält mindestens eine Vektoreinbettung und erwartet im Gegenzug eine Anzahl von topK Entitäten.</p>
 <p>Allerdings kann <code translate="no">EmbeddingList</code> nur in <code translate="no">search()</code> Anfragen ohne Bereichssuche oder Gruppierungs-Suchparameter verwendet werden, geschweige denn in <code translate="no">search_iterator()</code> Anfragen.</p>
 </div>
 <div class="multipleCode">
@@ -886,6 +888,7 @@ embeddingList1=<span class="hljs-string">&#x27;[[0.2,0.9,0.4,-0.3,0.2]]&#x27;</s
 embeddingList2=<span class="hljs-string">&#x27;[[-0.2,-0.2,0.5,0.6,0.9],[-0.4,0.3,0.5,0.8,0.2]]&#x27;</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>],
@@ -990,6 +993,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>, <span class="hljs-variable">$embeddingList2</span>],

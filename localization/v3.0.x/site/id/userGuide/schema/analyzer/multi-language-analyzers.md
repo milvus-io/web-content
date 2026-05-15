@@ -47,9 +47,9 @@ beta: Milvus 2.5.11+
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Fitur ini hanya bekerja dengan pengambilan teks berbasis BM25 dan vektor jarang. Untuk informasi lebih lanjut, lihat <a href="/docs/id/full-text-search.md">Pencarian Teks Lengkap</a>.</p></li>
+<li><p>Fitur ini hanya berfungsi dengan pengambilan teks berbasis BM25 dan vektor jarang. Untuk informasi lebih lanjut, lihat <a href="/docs/id/full-text-search.md">Pencarian Teks Lengkap</a>.</p></li>
 <li><p>Setiap dokumen dalam satu koleksi hanya dapat menggunakan satu penganalisis, yang ditentukan oleh nilai bidang pengenal bahasanya.</p></li>
-<li><p>Kinerja dapat bervariasi, tergantung pada kompleksitas penganalisis dan ukuran data teks Anda.</p></li>
+<li><p>Kinerja dapat bervariasi, tergantung pada kerumitan penganalisis dan ukuran data teks Anda.</p></li>
 </ul>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -547,7 +547,7 @@ schema.WithFunction(function.WithName(<span class="hljs-string">&quot;text_to_ve
   ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Fungsi ini secara otomatis menerapkan penganalisis yang sesuai untuk setiap entri teks berdasarkan pengenal bahasanya. Untuk informasi lebih lanjut tentang pencarian teks berbasis BM25, lihat <a href="/docs/id/full-text-search.md">Pencarian Teks Lengkap</a>.</p>
+<p>Fungsi ini secara otomatis menerapkan penganalisis yang sesuai untuk setiap entri teks berdasarkan pengenal bahasanya. Untuk informasi lebih lanjut tentang pengambilan teks berbasis BM25, lihat <a href="/docs/id/full-text-search.md">Pencarian Teks Lengkap</a>.</p>
 <h3 id="Configure-index-params" class="common-anchor-header">Mengonfigurasi parameter indeks<button data-href="#Configure-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -676,6 +676,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;multilingual_documents\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -819,6 +820,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;multilingual_documents&quot;,
   &quot;data&quot;: [
@@ -992,6 +994,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;multilingual_documents&quot;,
   &quot;data&quot;: [&quot;artificial intelligence&quot;],
@@ -1117,6 +1120,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;multilingual_documents&quot;,
   &quot;data&quot;: [&quot;人工智能&quot;],

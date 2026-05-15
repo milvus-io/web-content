@@ -52,7 +52,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/full-text-search.png" alt="Full Text Search" class="doc-image" id="full-text-search" />
    </span> <span class="img-wrapper"> <span>全文検索</span> </span></p>
-<p>全文検索を使用するには、以下の主な手順に従ってください：</p>
+<p>全文検索を使用するには、主に以下の手順に従ってください：</p>
 <ol>
 <li><p><a href="/docs/ja/full-text-search.md#Create-a-collection-for-BM25-full-text-search">コレクションを作成</a>します：必要なフィールドを設定し、生テキストをスパース埋め込みに変換する BM25 関数を定義します。</p></li>
 <li><p><a href="/docs/ja/full-text-search.md#Insert-text-data">データを挿入</a>します：生テキスト文書をコレクションに取り込む。</p></li>
@@ -447,7 +447,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>インデックスの構築とクエリに使用されるアルゴリズム。有効な値：</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (デフォルト)：MaxScore アルゴ リ ズ ム を使用 し た最適化 さ れた DAAT （Document-at-a-Time） ク エ リ 処理。MaxScoreは、高い<em>k</em>値や多くの用語を含むクエリに対して、影響が最小になりそうな用語やドキュメントをスキップすることで、より優れたパフォーマンスを提供します。MaxScoreは、最大インパクトスコアに基づいて用語を必須グループと非必須グループに分割し、トップkの結果に貢献する用語に焦点を当てることでこれを実現する。</p></li><li><p><code translate="no">"DAAT_WAND"</code>:WANDアルゴリズムを使用したDAATクエリ処理の最適化。WANDは非競合文書をスキップするために最大インパクトスコアを活用することで、より少ないヒット文書を評価する。このため、WANDは<em>k</em>値が小さいクエリや短いクエリではスキップがより効率的である。</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>:Basic Term-at-a-Time (TAAT)クエリー処理。<code translate="no">DAAT_MAXSCORE</code> 、<code translate="no">DAAT_WAND</code> と比較すると遅いが、<code translate="no">TAAT_NAIVE</code> にはユニークな利点がある。グローバルコレクションパラメータ（avgdl）の変更に関係なく静的なままキャッシュされた最大インパクトスコアを使用するDAATアルゴリズムとは異なり、<code translate="no">TAAT_NAIVE</code> 、そのような変更に動的に適応する。</p></li></ul></td>
+     <td><p>インデックスの構築とクエリに使用されるアルゴリズム。有効な値：</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (デフォルト)：MaxScore アルゴ リ ズ ム を使用 し た最適化 さ れた DAAT （Document-at-a-Time） ク エ リ 処理。MaxScoreは、高い<em>k</em>値や多くの用語を含むクエリに対して、影響が最小になりそうな用語やドキュメントをスキップすることで、より優れたパフォーマンスを提供します。MaxScoreは、最大インパクトスコアに基づいて用語を必須グループと非必須グループに分割し、トップkの結果に貢献できる用語に焦点を当てることでこれを実現する。</p></li><li><p><code translate="no">"DAAT_WAND"</code>:WANDアルゴリズムを使用したDAATクエリ処理の最適化。WANDは非競合文書をスキップするために最大インパクトスコアを活用することで、より少ないヒット文書を評価する。このため、WANDは<em>k</em>値が小さいクエリや短いクエリではスキップがより効率的である。</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>:Basic Term-at-a-Time (TAAT)クエリー処理。<code translate="no">DAAT_MAXSCORE</code> 、<code translate="no">DAAT_WAND</code> と比較すると遅いが、<code translate="no">TAAT_NAIVE</code> にはユニークな利点がある。グローバルコレクションパラメータ（avgdl）の変更に関係なく静的なままキャッシュされた最大インパクトスコアを使用するDAATアルゴリズムとは異なり、<code translate="no">TAAT_NAIVE</code> 、そのような変更に動的に適応する。</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
@@ -513,6 +513,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -574,6 +575,7 @@ client.insert(InsertReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;text&quot;: &quot;information retrieval is a field of study.&quot;},
@@ -662,6 +664,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data-raw <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -696,7 +699,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">data</code></p></td>
-     <td><p>自然言語による生のクエリテキスト。MilvusはBM25関数を使用して、テキストクエリを自動的にスパースベクトルに変換します。</p></td>
+     <td><p>自然言語による生のクエリテキスト。milvusはBM25関数を使用して、テキストクエリを自動的にスパースベクトルに変換します。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">anns_field</code></p></td>

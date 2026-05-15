@@ -2,7 +2,7 @@
 id: users_and_roles.md
 title: ユーザーとロールの作成
 summary: >-
-  MilvusはRBACによってきめ細かなアクセス制御を実現します。ユーザとロールの作成から始め、ロールに特権や特権グループを割り当て、最後にユーザにロールを付与することでアクセス制御を管理することができます。この方法により、アクセス管理の効率性と安全性を確保することができます。ここでは、Milvusにおけるユーザとロールの作成方法を紹介します。
+  MilvusはRBACによってきめ細かなアクセス制御を実現します。ユーザとロールの作成から始め、ロールに特権や特権グループを割り当て、最後にユーザにロールを付与してアクセス制御を管理します。この方法により、アクセス管理の効率性と安全性を確保することができます。ここでは、Milvusにおけるユーザとロールの作成方法を紹介します。
 ---
 <h1 id="Create-Users--Roles" class="common-anchor-header">ユーザーとロールの作成<button data-href="#Create-Users--Roles" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -36,7 +36,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvusインスタンスの初期化後、Milvusへの初回接続時に認証用のルートユーザが自動生成されます。ルートユーザのユーザ名は<code translate="no">root</code> で、パスワードは<code translate="no">Milvus</code> です。ルートユーザのデフォルトロールは<code translate="no">admin</code> で、すべてのリソースにアクセスできます。データの安全性を確保するため、不正アクセスを防止するためにルートユーザの認証情報を安全に管理してください。</p>
-<p>日常的な運用では、ルート・ユーザーを使用する代わりに、ユーザーを作成することをお勧めします。</p>
+<p>日常業務では、ルート・ユーザーを使用する代わりに、ユーザーを作成することをお勧めします。</p>
 <h3 id="Create-a-user" class="common-anchor-header">ユーザーの作成<button data-href="#Create-a-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -130,6 +130,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;userName&quot;: &quot;user_1&quot;,
     &quot;password&quot;: &quot;P@ssw0rd&quot;
@@ -193,6 +194,7 @@ client.updatePassword(updatePasswordReq);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/update_password&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;newPassword&quot;: &quot;P@ssw0rd!&quot;,
     &quot;userName&quot;: &quot;user_1&quot;,
@@ -235,6 +237,7 @@ client.list_users()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/list&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>以下は出力例です。<code translate="no">root</code> は Milvus で自動的に生成されたデフォルトのユーザーです。<code translate="no">user_1</code> は作成されたばかりの新しいユーザーです。</p>
@@ -303,6 +306,7 @@ client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;
 }&#x27;</span>
@@ -345,6 +349,7 @@ client.list_roles()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/list&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>以下は出力例です。<code translate="no">admin</code> はmilvusのデフォルトのロールです。<code translate="no">role_a</code> は作成されたばかりの新しいロールです。</p>

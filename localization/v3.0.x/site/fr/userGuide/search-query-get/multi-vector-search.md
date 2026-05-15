@@ -35,7 +35,7 @@ summary: >-
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hybrid-search-workflow.png" alt="Hybrid Search Workflow" class="doc-image" id="hybrid-search-workflow" />
-   </span> <span class="img-wrapper"> <span>Flux de travail de la recherche hybride</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Processus de recherche hybride</span> </span></p>
 <p>La recherche hybride multi-vectorielle intègre différentes méthodes de recherche ou couvre des encastrements provenant de diverses modalités :</p>
 <ul>
 <li><p><strong>Recherche de vecteurs denses et épars</strong>: Les <a href="/docs/fr/dense-vector.md">vecteurs denses</a> sont excellents pour capturer les relations sémantiques, tandis que les <a href="/docs/fr/sparse_vector.md">vecteurs épars</a> sont très efficaces pour la correspondance précise des mots-clés. La recherche hybride combine ces approches pour fournir à la fois une compréhension conceptuelle large et une pertinence exacte des termes, améliorant ainsi les résultats de la recherche. En tirant parti des points forts de chaque méthode, la recherche hybride surmonte les limites des approches individuelles et offre de meilleures performances pour les requêtes complexes. Voici un <a href="/docs/fr/full_text_search_with_milvus.md">guide</a> plus détaillé sur la recherche hybride qui combine la recherche sémantique et la recherche en texte intégral.</p></li>
@@ -522,6 +522,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -657,6 +658,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;text&quot;: &quot;Red cotton t-shirt with round neck&quot; , &quot;text_dense&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, ...], &quot;image_dense&quot;: [0.6366019600530924, -0.09323198122475052, ...]},
@@ -990,6 +992,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/hybrid_search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;search\&quot;: <span class="hljs-variable">${req}</span>,

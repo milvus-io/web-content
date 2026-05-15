@@ -36,7 +36,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vous pouvez utiliser <code translate="no">upsert</code> pour insérer une nouvelle entité ou mettre à jour une entité existante, selon que la clé primaire fournie dans la demande d'insertion existe ou non dans la collection. Si la clé primaire n'est pas trouvée, une opération d'insertion est effectuée. Dans le cas contraire, une opération de mise à jour est effectuée.</p>
+    </button></h2><p>Vous pouvez utiliser <code translate="no">upsert</code> pour insérer une nouvelle entité ou mettre à jour une entité existante, selon que la clé primaire fournie dans la requête upsert existe ou non dans la collection. Si la clé primaire n'est pas trouvée, une opération d'insertion est effectuée. Dans le cas contraire, une opération de mise à jour est effectuée.</p>
 <p>Dans Milvus, un upsert fonctionne en mode <strong>prioritaire</strong> ou en mode <strong>fusion</strong>.</p>
 <h3 id="Upsert-in-override-mode" class="common-anchor-header">Insertion en mode prioritaire<button data-href="#Upsert-in-override-mode" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -111,7 +111,7 @@ summary: >-
 <ul>
 <li><p>Si vous effectuez un upsert alors que <code translate="no">partial_update</code> est désactivé, le comportement par défaut est de <strong>passer outre</strong>. Cela signifie que la valeur du champ dynamique sera remplacée par tous les champs non définis par le schéma inclus dans la demande et par leurs valeurs.</p>
 <p>Par exemple, si les données incluses dans la requête sont <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code>, les paires clé-valeur du champ dynamique de l'entité cible seront mises à jour en conséquence.</p></li>
-<li><p>Si vous effectuez un upsert avec <code translate="no">partial_update</code> activé, le comportement par défaut est la <strong>fusion</strong>. Cela signifie que la valeur du champ dynamique sera fusionnée avec tous les champs non définis par le schéma inclus dans la demande et leurs valeurs.</p>
+<li><p>Si vous effectuez un upsert avec l'option <code translate="no">partial_update</code>, le comportement par défaut est la <strong>fusion</strong>. Cela signifie que la valeur du champ dynamique sera fusionnée avec tous les champs non définis par le schéma inclus dans la demande et leurs valeurs.</p>
 <p>Par exemple, si les données incluses dans la demande sont <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>, les paires clé-valeur du champ dynamique de l'entité cible deviendront <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> après l'insertion.</p></li>
 </ul></li>
 <li><p><strong>Insertion d'un champ JSON.</strong></p>
@@ -156,7 +156,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dans cette section, nous allons upsuper des entités dans une collection nommée <code translate="no">my_collection</code>. Cette collection ne comporte que deux champs, nommés <code translate="no">id</code>, <code translate="no">vector</code>, <code translate="no">title</code> et <code translate="no">issue</code>. Le champ <code translate="no">id</code> est le champ primaire, tandis que les champs <code translate="no">title</code> et <code translate="no">issue</code> sont des champs scalaires.</p>
+    </button></h2><p>Dans cette section, nous allons extraire des entités dans une collection nommée <code translate="no">my_collection</code>. Cette collection ne comporte que deux champs, nommés <code translate="no">id</code>, <code translate="no">vector</code>, <code translate="no">title</code> et <code translate="no">issue</code>. Le champ <code translate="no">id</code> est le champ primaire, tandis que les champs <code translate="no">title</code> et <code translate="no">issue</code> sont des champs scalaires.</p>
 <p>Les trois entités, si elles existent dans la collection, seront remplacées par celles incluses dans la demande d'insertion.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -303,6 +303,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/upsert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;title&quot;: &quot;Artificial Intelligence in Real Life&quot;, &quot;issue&quot;: &quot;vol.12&quot;},
@@ -449,6 +450,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/upsert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 10, &quot;vector&quot;: [0.06998888224297328, 0.8582816610326578, -0.9657938677934292, 0.6527905683627726, -0.8668460657158576], &quot;title&quot;: &quot;Layour Design Reference&quot;, &quot;issue&quot;: &quot;vol.34&quot;},
@@ -591,6 +593,7 @@ _, err = client.Upsert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/upsert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,

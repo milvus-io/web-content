@@ -577,6 +577,7 @@ client.createCollection(requestCreate);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/create&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;description\&quot;: \&quot;A collection for storing book information with struct array chunks\&quot;,
@@ -692,6 +693,7 @@ row.add(<span class="hljs-string">&quot;chunks&quot;</span>, structArr);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/insert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -884,6 +886,7 @@ embeddingList1=<span class="hljs-string">&#x27;[[0.2,0.9,0.4,-0.3,0.2]]&#x27;</s
 embeddingList2=<span class="hljs-string">&#x27;[[-0.2,-0.2,0.5,0.6,0.9],[-0.4,0.3,0.5,0.8,0.2]]&#x27;</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>],
@@ -988,6 +991,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>, <span class="hljs-variable">$embeddingList2</span>],
@@ -1140,7 +1144,7 @@ element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>) &amp;&amp; 
 <li><p><code translate="no">MATCH_ALL(chunks, $[text] LIKE &quot;Red%&quot;)</code></p>
 <p>這會傳回所有資料塊中文字子欄位都以 "Red" 開頭的實體。</p></li>
 <li><p><code translate="no">MATCH_LEAST(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>
-<p>這會傳回至少包含<code translate="no">k</code> chunks 的實體，這些 chunks 在<code translate="no">text</code> 子字段中以「Red」開頭。</p></li>
+<p>這會傳回至少包含<code translate="no">k</code> chunks，且<code translate="no">text</code> sub-field 以「Red」開頭的實體。</p></li>
 <li><p><code translate="no">MATCH_MOST(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>
 <p>這會傳回在<code translate="no">text</code> 子欄位中最多包含以「Red」開頭的<code translate="no">k</code> 元組的實體。</p></li>
 <li><p><code translate="no">MATCH_EXACT(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>
@@ -1161,4 +1165,4 @@ element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>) &amp;&amp; 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>本機 StructArray 資料類型的開發代表 Milvus 處理複雜資料結構能力的一大進步。為了更好地理解它的用例和最大限度地利用這個新功能，我們鼓勵您閱讀《<a href="/docs/zh-hant/best-practices-for-array-of-structs.md">使用結構陣列的模式設計》（Schema Design Using an Array of Structs</a>）。</p>
+    </button></h2><p>本機 StructArray 資料類型的開發代表 Milvus 處理複雜資料結構能力的一大進步。為了更好地理解它的用例和最大限度地利用這個新功能，我們鼓勵您閱讀<a href="/docs/zh-hant/best-practices-for-array-of-structs.md">使用結構陣列的模式設計</a>。</p>

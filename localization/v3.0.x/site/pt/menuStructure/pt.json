@@ -2053,7 +2053,7 @@
       {
         "label": "Observador de aves",
         "id": "birdwatcher",
-        "order": 2,
+        "order": 3,
         "children": [
           {
             "label": "Visão geral",
@@ -2071,6 +2071,37 @@
             "label": "Guias de utilização",
             "id": "birdwatcher_usage_guides.md",
             "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "CDC de Milvus",
+        "id": "milvus_cdc",
+        "order": 2,
+        "children": [
+          {
+            "label": "Visão geral",
+            "id": "milvus_cdc_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Configurar a replicação CDC",
+            "id": "set_up_cdc_replication.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Comutação",
+            "id": "cdc_switchover.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Transferência em caso de falha",
+            "id": "cdc_failover.md",
+            "order": 3,
             "children": []
           }
         ]

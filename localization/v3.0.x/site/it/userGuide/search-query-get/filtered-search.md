@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Una ricerca RNA trova le incorporazioni vettoriali più simili a quelle specificate. Tuttavia, i risultati della ricerca potrebbero non essere sempre corretti. È possibile includere condizioni di filtraggio in una richiesta di ricerca, in modo che Milvus effettui un filtraggio dei metadati prima di effettuare le ricerche ANN, riducendo l'ambito di ricerca dall'intera raccolta alle sole entità che corrispondono alle condizioni di filtraggio specificate.</p>
+    </button></h1><p>Una ricerca RNA trova le incorporazioni vettoriali più simili a quelle specificate. Tuttavia, i risultati della ricerca potrebbero non essere sempre corretti. È possibile includere condizioni di filtraggio in una richiesta di ricerca, in modo che Milvus esegua un filtraggio dei metadati prima di effettuare ricerche ANN, riducendo l'ambito di ricerca dall'intera raccolta alle sole entità che corrispondono alle condizioni di filtraggio specificate.</p>
 <h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -137,7 +137,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>I seguenti frammenti di codice mostrano una ricerca con filtraggio standard; la richiesta nel frammento di codice seguente contiene una condizione di filtraggio e diversi campi di output.</p>
+    </button></h3><p>I seguenti frammenti di codice dimostrano una ricerca con filtraggio standard; la richiesta nel frammento di codice seguente contiene una condizione di filtraggio e diversi campi di output.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -267,6 +267,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -279,7 +280,7 @@ curl --request POST \
 }&#x27;</span>
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>La condizione di filtraggio contenuta nella richiesta di ricerca legge <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code>. Utilizza l'operatore and per includere due condizioni: la prima chiede di trovare le entità che hanno un valore che inizia con <code translate="no">red</code> nel campo <code translate="no">color</code> e l'altra chiede di trovare le entità che hanno un valore maggiore di <code translate="no">50</code> nel campo <code translate="no">likes</code>. Ci sono solo due entità che soddisfano questi requisiti. Con il top-K impostato su <code translate="no">3</code>, Milvus calcolerà la distanza tra queste due entità e il vettore della query e le restituirà come risultati della ricerca.</p>
+<p>La condizione di filtraggio contenuta nella richiesta di ricerca legge <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code>. Utilizza l'operatore and per includere due condizioni: la prima chiede di trovare le entità che hanno un valore che inizia con <code translate="no">red</code> nel campo <code translate="no">color</code> e l'altra chiede di trovare le entità con un valore maggiore di <code translate="no">50</code> nel campo <code translate="no">likes</code>. Ci sono solo due entità che soddisfano questi requisiti. Con il top-K impostato su <code translate="no">3</code>, Milvus calcolerà la distanza tra queste due entità e il vettore della query e le restituirà come risultati della ricerca.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>
         <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span> 
@@ -453,6 +454,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

@@ -37,7 +37,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>一般的なAIデータパイプラインでは、AWS S3などのストレージシステム上にParquetなどの形式でデータを保存している場合があります。このような外部保存データをMilvusで利用するには、通常、ETL（Extract-Transform-Load）パイプラインを使用してMilvusのストレージにインポートする必要があります。</p>
+    </button></h2><p>一般的なAIデータパイプラインでは、AWS S3などのストレージシステム上にParquetなどの形式でデータを保存している場合があります。このような外部保存データをMilvusで利用するためには、通常、ETL（Extract-Transform-Load）パイプラインを使用してMilvusのストレージにインポートする必要があります。</p>
 <p>このBring-your-data-to-Milvusワークフローは、同期が難しい冗長なデータを作成し、データの一貫性を確保するためのエンジニアリングメンテナンスの負担を増やします。</p>
 <p>
   
@@ -48,7 +48,7 @@ beta: Milvus 3.0.x
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-compute-to-data.png" alt="Bring compute to data workflow" class="doc-image" id="bring-compute-to-data-workflow" />
    </span> <span class="img-wrapper"> <span>データワークフローに計算をもたらす</span> </span></p>
-<p>一度作成された外部コレクションは、データに直接アクセスすることができ、データを保存している場所と同じ場所に保管することができます。バックグラウンドでMilvusはマニフェストファイルを作成し、Milvusメタデータと外部データファイルの行のマッピングを記録します。マニフェストファイルの準備ができたら、他の管理コレクションと同様に外部コレクションにインデックスを作成することができます。</p>
+<p>一度作成された外部コレクションは、データに直接アクセスすることができ、データを保存している場所と同じ場所に保管することができます。バックグラウンドでMilvusはマニフェストファイルを作成し、Milvusメタデータと外部データファイルの行のマッピングを記録します。マニフェストファイルの準備ができたら、他の管理コレクションと同様に外部コレクションにインデックスを作成できます。</p>
 <p>データが変更されると、手動で秒以下の更新をトリガすることでメタデータが更新され、Milvusは常に最新の状態に保たれます。</p>
 <h2 id="Step-1-Create-schema" class="common-anchor-header">ステップ1: スキーマの作成<button data-href="#Step-1-Create-schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -589,6 +589,7 @@ err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span 
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${PROJECT_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;dbName\&quot;: \&quot;my_database\&quot;,
     \&quot;collectionName\&quot;: \&quot;test_collection\&quot;,
@@ -704,6 +705,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${PROJECT_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;dbName\&quot;: \&quot;my_database\&quot;,
     \&quot;collectionName\&quot;: \&quot;test_collection\&quot;,
@@ -792,6 +794,7 @@ jobID := refreshResult.JobID
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${PROJECT_ENDPOINT}</span>/v2/vectordb/jobs/external_collection/refresh&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;dbName\&quot;: \&quot;my_database\&quot;,
     \&quot;collectionName\&quot;: \&quot;test_collection\&quot;,
@@ -802,7 +805,7 @@ jobID := refreshResult.JobID
 <p>リフレッシュ操作は非同期なので、イテレーションを設定してその進捗を監視する必要がある。</p>
 <div class="alert note">
 <ul>
-<li><p>リフレッシュ操作はデータファイルのメタデータをスキャンし、それに応じてマニフェストファイルを生成します。通常、150～250ミリ秒かかります。</p></li>
+<li><p>リフレッシュ操作はデータファイルのメタデータをスキャンし、それに応じてマニフェストファイルを生成します。通常150～250ミリ秒かかります。</p></li>
 <li><p>マニフェストファイルはMilvusのメタデータと外部ファイルの行のマッピングを記録します。</p></li>
 <li><p>ソース データに更新があった場合、Milvus を最新の状態に保つために手動で再度 refresh を呼び出す必要があります。</p></li>
 <li><p>アクティブなメタデータをすべて削除し、挿入を伴わないリフレッシュは拒否されます。</p></li>
@@ -823,5 +826,5 @@ jobID := refreshResult.JobID
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>外部コレクションをリフレッシュした後は、他の管理対象コレクションと同様に、外部コレクションでコレクションのロードと解放、類似検索とクエリを実行できます。ただし、オンデマンド・コンピューティング用のデータベース内のコレクションは、検索とクエリのためにオンデマンド・クラスタにアタッチする必要があります。</p>
+    </button></h2><p>外部コレクションのリフレッシュが完了したら、他の管理対象コレクションと同様に、外部コレクションでコレクションのロードと解放、類似検索とクエリを実行できます。</p>
 <p>検索、クエリ、取得、ハイブリッド検索などのDQL操作を行う前に、セッションを作成してオンデマンド・クラスターの計算リソースをアタッチする必要があります。</p>

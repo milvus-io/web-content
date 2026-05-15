@@ -41,7 +41,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Dopo l'inizializzazione di un'istanza Milvus, viene generato automaticamente un utente root per l'autenticazione quando ci si connette a Milvus per la prima volta. Il nome utente dell'utente root è <code translate="no">root</code> e la password è <code translate="no">Milvus</code>. Il ruolo predefinito dell'utente root è <code translate="no">admin</code>, che ha accesso a tutte le risorse. Per garantire la sicurezza dei dati, si consiglia di conservare le credenziali dell'utente root per evitare accessi non autorizzati.</p>
-<p>Per le operazioni quotidiane, si consiglia di creare degli utenti invece di usare l'utente root.</p>
+<p>Per le operazioni quotidiane, si consiglia di creare degli utenti invece di utilizzare l'utente root.</p>
 <h3 id="Create-a-user" class="common-anchor-header">Creare un utente<button data-href="#Create-a-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -135,6 +135,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;userName&quot;: &quot;user_1&quot;,
     &quot;password&quot;: &quot;P@ssw0rd&quot;
@@ -198,6 +199,7 @@ client.updatePassword(updatePasswordReq);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/update_password&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;newPassword&quot;: &quot;P@ssw0rd!&quot;,
     &quot;userName&quot;: &quot;user_1&quot;,
@@ -240,6 +242,7 @@ client.list_users()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/list&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Di seguito è riportato un esempio di output. <code translate="no">root</code> è l'utente predefinito generato automaticamente in Milvus. <code translate="no">user_1</code> è il nuovo utente appena creato.</p>
@@ -308,6 +311,7 @@ client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;
 }&#x27;</span>
@@ -350,6 +354,7 @@ client.list_roles()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/list&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Di seguito è riportato un esempio di output. <code translate="no">admin</code> è il ruolo predefinito in Milvus. <code translate="no">role_a</code> è il nuovo ruolo appena creato.</p>

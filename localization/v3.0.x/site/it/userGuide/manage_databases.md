@@ -37,7 +37,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Milvus, un database serve come unità logica per organizzare e gestire i dati. Per migliorare la sicurezza dei dati e ottenere la multi-tenancy, è possibile creare più database per isolare logicamente i dati per applicazioni o tenant diversi. Ad esempio, si crea un database per archiviare i dati dell'utente A e un altro database per l'utente B.</p>
+    </button></h2><p>In Milvus, un database serve come unità logica per organizzare e gestire i dati. Per migliorare la sicurezza dei dati e ottenere la multi-tenancy, è possibile creare più database per isolare logicamente i dati per diverse applicazioni o tenant. Ad esempio, si crea un database per memorizzare i dati dell'utente A e un altro database per l'utente B.</p>
 <h2 id="Create-database" class="common-anchor-header">Creare un database<button data-href="#Create-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -113,6 +113,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database_1&quot;
 }&#x27;</span>
@@ -154,6 +155,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database_2&quot;,
     &quot;properties&quot;: {
@@ -225,6 +227,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/describe&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;default&quot;
 }&#x27;</span>
@@ -285,7 +288,7 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">timezone</code></p></td>
      <td><p>stringa</p></td>
-     <td><p>Specifica il fuso orario predefinito applicato alle operazioni sensibili all'ora all'interno del database, in particolare per i campi <code translate="no">TIMESTAMPTZ</code>. Le collezioni ereditano il fuso orario del database, a meno che non sia impostato un fuso orario a livello di collezione. Un parametro timezone a livello di query può temporaneamente sovrascrivere i valori predefiniti del database e delle raccolte. Il valore deve essere un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identificatore di fuso orario IANA</a> valido (ad esempio, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> o <strong>UTC</strong>). Per maggiori dettagli sull'uso di un campo <code translate="no">TIMESTAMPTZ</code>, consultare la sezione <a href="/docs/it/timestamptz-field.md">Campo TIMESTAMPTZ</a>.</p></td>
+     <td><p>Specifica il fuso orario predefinito applicato alle operazioni sensibili all'ora all'interno del database, in particolare per i campi <code translate="no">TIMESTAMPTZ</code>. Le collezioni ereditano il fuso orario del database, a meno che non sia impostato un fuso orario a livello di collezione. Un parametro timezone a livello di query può temporaneamente sovrascrivere i valori predefiniti del database e della collezione. Il valore deve essere un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identificatore di fuso orario IANA</a> valido (ad esempio, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> o <strong>UTC</strong>). Per maggiori dettagli sull'uso di un campo <code translate="no">TIMESTAMPTZ</code>, consultare la sezione <a href="/docs/it/timestamptz-field.md">Campo TIMESTAMPTZ</a>.</p></td>
    </tr>
 </table>
 <h3 id="Alter-database-properties" class="common-anchor-header">Modifica delle proprietà del database<button data-href="#Alter-database-properties" class="anchor-icon" translate="no">
@@ -336,6 +339,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/alter&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database&quot;,
     &quot;properties&quot;: {
@@ -390,6 +394,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/alter&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database&quot;,
     &quot;propertyKeys&quot;: [
@@ -483,6 +488,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/drop&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database&quot;
 }&#x27;</span>

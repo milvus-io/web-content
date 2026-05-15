@@ -91,7 +91,7 @@ summary: >-
 <li><p><strong>Políticas de retención por registro.</strong> Vida útil por documento en canalizaciones IoT, almacenes de documentos o almacenes de características MLOps.</p></li>
 <li><p><strong>Mezcla de datos fríos y calientes.</strong> Las entidades de corta duración coexisten con las de larga duración en la misma colección.</p></li>
 <li><p><strong>Caducidad basada en el cumplimiento.</strong> Minimización de datos al estilo GDPR en la que cada registro tiene su propia fecha de caducidad.</p></li>
-<li><p><strong>Expiración en el tiempo.</strong> Una entidad representa un registro que sólo es válido hasta un momento determinado (el final de una campaña o de una sesión).</p></li>
+<li><p><strong>Caducidad en el tiempo.</strong> Una entidad representa un registro que sólo es válido hasta un momento determinado (el final de una campaña o de una sesión).</p></li>
 </ul>
 <div class="alert note">
 <p>Las entidades caducadas no aparecerán en ningún resultado de búsqueda o consulta. Sin embargo, pueden permanecer en el almacenamiento hasta la posterior compactación de datos, que debe realizarse en las próximas 24 horas.</p>
@@ -282,6 +282,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -374,6 +375,7 @@ index_params.add_index(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;properties\&quot;: {
@@ -442,6 +444,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/drop_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;propertyKeys\&quot;: [
@@ -798,7 +801,7 @@ List&lt;Float&gt; vector = <span class="hljs-keyword">new</span> <span class="hl
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Si la colección ya existe y no tiene <code translate="no">collection.ttl.seconds</code> establecido, añada una columna <code translate="no">TIMESTAMPTZ</code> con <code translate="no">add_collection_field</code>, luego márquela como campo TTL con <code translate="no">alter_collection_properties</code>. Si lo desea, puede añadir filas históricas para rellenar sus fechas de caducidad. Las filas que no rellene se mantendrán en <code translate="no">NULL</code> y nunca caducarán.</p>
+    </button></h3><p>Si la colección ya existe y no tiene <code translate="no">collection.ttl.seconds</code> establecido, añada una columna <code translate="no">TIMESTAMPTZ</code> con <code translate="no">add_collection_field</code>, luego márquela como campo TTL con <code translate="no">alter_collection_properties</code>. Si lo desea, puede añadir filas históricas para rellenar sus fechas de caducidad; las filas que no rellene se mantendrán en <code translate="no">NULL</code> y nunca caducarán.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
@@ -1180,7 +1183,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="When-does-data-expire-due-to-TTL-settings" class="common-anchor-header">¿Cuándo expiran los datos debido a la configuración TTL?<button data-href="#When-does-data-expire-due-to-TTL-settings" class="anchor-icon" translate="no">
+    </button></h2><h3 id="When-does-data-expire-due-to-TTL-settings" class="common-anchor-header">¿Cuándo caducan los datos debido a la configuración del TTL?<button data-href="#When-does-data-expire-due-to-TTL-settings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

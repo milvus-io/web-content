@@ -37,7 +37,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Cuando las entidades de los resultados de la búsqueda comparten el mismo valor en un campo escalar, esto indica que son similares en un atributo concreto, lo que puede afectar negativamente a los resultados de la búsqueda.</p>
-<p>Supongamos que una colección almacena varios documentos (denotados por <strong>docId</strong>). Para conservar tanta información semántica como sea posible al convertir los documentos en vectores, cada documento se divide en párrafos (o <strong>trozos</strong>) más pequeños y manejables y se almacenan como entidades independientes. Aunque el documento esté dividido en secciones más pequeñas, a menudo los usuarios siguen interesados en identificar qué documentos son los más relevantes para sus necesidades.</p>
+<p>Supongamos que una colección almacena varios documentos (denotados por <strong>docId</strong>). Para conservar tanta información semántica como sea posible al convertir los documentos en vectores, cada documento se divide en párrafos (o <strong>trozos</strong>) más pequeños y manejables y se almacenan como entidades independientes. Aunque el documento esté dividido en secciones más pequeñas, los usuarios suelen seguir interesados en identificar qué documentos son los más relevantes para sus necesidades.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ann-search.png" alt="Ann Search" class="doc-image" id="ann-search" />
@@ -213,6 +213,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -352,6 +353,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

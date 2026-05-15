@@ -8,8 +8,8 @@ summary: >-
   En comparación con los vectores dispersos, los vectores densos contienen más
   información en el mismo nivel dimensional, ya que cada dimensión contiene
   valores significativos. Esta representación puede capturar eficazmente
-  patrones y relaciones complejas, facilitando el análisis y el procesamiento de
-  datos en espacios de altas dimensiones. Los vectores densos suelen tener un
+  patrones y relaciones complejas, facilitando el análisis y procesamiento de
+  datos en espacios de alta dimensión. Los vectores densos suelen tener un
   número fijo de dimensiones, que oscila entre unas pocas docenas y varios
   cientos o incluso miles, en función de la aplicación y los requisitos
   específicos.
@@ -29,7 +29,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Los vectores densos son representaciones numéricas de datos muy utilizadas en el aprendizaje automático y el análisis de datos. Consisten en matrices con números reales, donde la mayoría o todos los elementos son distintos de cero. En comparación con los vectores dispersos, los vectores densos contienen más información en el mismo nivel dimensional, ya que cada dimensión contiene valores significativos. Esta representación puede capturar eficazmente patrones y relaciones complejas, facilitando el análisis y procesamiento de datos en espacios de alta dimensión. Los vectores densos suelen tener un número fijo de dimensiones, que oscila entre unas pocas docenas y varios cientos o incluso miles, en función de la aplicación y los requisitos específicos.</p>
+    </button></h1><p>Los vectores densos son representaciones numéricas de datos muy utilizadas en el aprendizaje automático y el análisis de datos. Consisten en matrices con números reales, donde la mayoría o todos los elementos son distintos de cero. En comparación con los vectores dispersos, los vectores densos contienen más información en el mismo nivel dimensional, ya que cada dimensión contiene valores significativos. Esta representación puede capturar eficazmente patrones y relaciones complejas, facilitando el análisis y el procesamiento de datos en espacios de altas dimensiones. Los vectores densos suelen tener un número fijo de dimensiones, que oscila entre unas pocas docenas y varios cientos o incluso miles, en función de la aplicación y los requisitos específicos.</p>
 <p>Los vectores densos se utilizan principalmente en escenarios que requieren comprender la semántica de los datos, como la búsqueda semántica y los sistemas de recomendación. En la búsqueda semántica, los vectores densos ayudan a capturar las conexiones subyacentes entre consultas y documentos, mejorando la relevancia de los resultados de búsqueda. En los sistemas de recomendación, ayudan a identificar similitudes entre usuarios y elementos, ofreciendo sugerencias más personalizadas.</p>
 <h2 id="Overview" class="common-anchor-header">Resumen<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -375,6 +375,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -449,6 +450,7 @@ client.<span class="hljs-title function_">insert</span>({
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;dense_vector&quot;: [0.1, 0.2, 0.3, 0.4]},
@@ -557,6 +559,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

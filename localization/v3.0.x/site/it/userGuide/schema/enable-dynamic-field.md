@@ -23,7 +23,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus consente di inserire entità con strutture flessibili ed evolutive attraverso una funzione speciale chiamata <strong>campo dinamico</strong>. Questo campo è implementato come un campo JSON nascosto chiamato <code translate="no">$meta</code>, che memorizza automaticamente tutti i campi dei dati <strong>non esplicitamente definiti</strong> nello schema della collezione.</p>
+    </button></h1><p>Milvus consente di inserire entità con strutture flessibili ed evolutive attraverso una funzione speciale chiamata <strong>campo dinamico</strong>. Questo campo è implementato come un campo JSON nascosto chiamato <code translate="no">$meta</code>, che memorizza automaticamente tutti i campi dei dati che <strong>non sono esplicitamente definiti</strong> nello schema della collezione.</p>
 <h2 id="How-it-works" class="common-anchor-header">Come funziona<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -264,6 +264,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -380,6 +381,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;data&quot;: [
     {
@@ -809,6 +811,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
@@ -959,6 +962,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;data\&quot;: [
@@ -1067,12 +1071,12 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Se è stato creato un indice su una chiave di campo dinamico e il casting dei dati non riesce, ad esempio se un valore destinato a essere lanciato su <code translate="no">double</code> è una stringa non numerica come <code translate="no">&quot;abc&quot;</code>, quei valori specifici verranno <strong>silenziosamente saltati durante la creazione dell'indice</strong>. Non appariranno nell'indice e quindi <strong>non saranno restituiti nei risultati di ricerche basate su filtri o query</strong> che si basano sull'indice.</p>
+    </button></h3><p>Se si è creato un indice su una chiave di campo dinamico e il casting dei dati non riesce, ad esempio se un valore destinato a essere lanciato su <code translate="no">double</code> è una stringa non numerica come <code translate="no">&quot;abc&quot;</code>, quei valori specifici verranno <strong>silenziosamente saltati durante la creazione dell'indice</strong>. Non appariranno nell'indice e quindi <strong>non saranno restituiti nei risultati di ricerche basate su filtri o query</strong> che si basano sull'indice.</p>
 <p>Questo ha alcune importanti implicazioni:</p>
 <ul>
-<li><p><strong>Nessun fallback alla scansione completa</strong>: Se la maggior parte delle entità viene indicizzata con successo, le query di filtraggio si baseranno interamente sull'indice. Le entità con errori di casting saranno escluse dal set di risultati, anche se corrispondono logicamente alla condizione del filtro.</p></li>
+<li><p><strong>Nessun fallback alla scansione completa</strong>: Se la maggior parte delle entità è indicizzata con successo, le query di filtraggio si baseranno interamente sull'indice. Le entità con errori di casting saranno escluse dal set di risultati, anche se corrispondono logicamente alla condizione del filtro.</p></li>
 <li><p><strong>Rischio di accuratezza della ricerca</strong>: In grandi insiemi di dati in cui la qualità dei dati è incoerente (soprattutto nelle chiavi di campo dinamiche), questo comportamento può portare a risultati mancanti inaspettati. È fondamentale garantire una formattazione dei dati coerente e valida prima dell'indicizzazione.</p></li>
-<li><p><strong>Usare con cautela le funzioni cast</strong>: Se si usa <code translate="no">json_cast_function</code> per convertire le stringhe in numeri durante l'indicizzazione, assicurarsi che i valori delle stringhe siano convertibili in modo affidabile. Una mancata corrispondenza tra <code translate="no">json_cast_type</code> e il tipo effettivamente convertito provocherà errori o voci saltate.</p></li>
+<li><p><strong>Usare con cautela le funzioni cast</strong>: Se si utilizza <code translate="no">json_cast_function</code> per convertire le stringhe in numeri durante l'indicizzazione, assicurarsi che i valori delle stringhe siano convertibili in modo affidabile. Una mancata corrispondenza tra <code translate="no">json_cast_type</code> e il tipo effettivamente convertito provocherà errori o voci saltate.</p></li>
 </ul>
 <h3 id="What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="common-anchor-header">Cosa succede se la query utilizza un tipo di dati diverso dal tipo di cast indicizzato?<button data-href="#What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
       <svg translate="no"

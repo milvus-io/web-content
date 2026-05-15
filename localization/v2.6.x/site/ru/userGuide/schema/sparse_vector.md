@@ -44,10 +44,10 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-representation.png" alt="Sparse Vector Representation" class="doc-image" id="sparse-vector-representation" />
    </span> <span class="img-wrapper"> <span>Представление разреженных векторов</span> </span></p>
-<p>С помощью токенизации и скоринга документы можно представить в виде векторов мешков слов, где каждое измерение соответствует определенному слову в словаре. Только слова, присутствующие в документе, имеют ненулевые значения, что создает разреженное представление вектора. Разреженные векторы могут быть получены с помощью двух подходов:</p>
+<p>С помощью токенизации и скоринга документы могут быть представлены в виде векторов мешков слов, где каждое измерение соответствует определенному слову в словаре. Только слова, присутствующие в документе, имеют ненулевые значения, что создает разреженное представление вектора. Разреженные векторы могут быть получены с помощью двух подходов:</p>
 <ul>
-<li><p><strong>Традиционные статистические методы</strong>, такие как <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (Term Frequency-Inverse Document Frequency) и <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> (Best Matching 25), присваивают вес словам на основе их частоты и важности в корпусе документов. Эти методы вычисляют простую статистику в виде баллов для каждого измерения, которое представляет собой лексему.  Milvus обеспечивает встроенный <strong>полнотекстовый поиск</strong> с помощью метода BM25, который автоматически преобразует текст в разреженные векторы, устраняя необходимость в ручной предварительной обработке. Такой подход идеально подходит для поиска по ключевым словам, где важны точность и точное совпадение. Дополнительную информацию см. в разделе <a href="/docs/ru/full-text-search.md">"Полнотекстовый поиск"</a>.</p></li>
-<li><p><strong>Нейронные модели с разреженным вкраплением</strong> - это методы, позволяющие генерировать разреженные представления путем обучения на больших наборах данных. Как правило, это модели глубокого обучения с архитектурой Transformer, способные расширять и взвешивать термины на основе семантического контекста. Milvus также поддерживает сгенерированные извне разреженные вкрапления из моделей типа <a href="https://arxiv.org/abs/2109.10086">SPLADE</a>. Подробности см. в разделе <a href="/docs/ru/embeddings.md#Embedding-Overview">"Вкрапления"</a>.</include></p></li>
+<li><p><strong>Традиционные статистические методы</strong>, такие как <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (Term Frequency-Inverse Document Frequency) и <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> (Best Matching 25), присваивают вес словам на основе их частоты и важности в корпусе документов. Эти методы вычисляют простую статистику в виде баллов для каждого измерения, которое представляет собой лексему.  Milvus обеспечивает встроенный <strong>полнотекстовый поиск</strong> с помощью метода BM25, который автоматически преобразует текст в разреженные векторы, устраняя необходимость в ручной предварительной обработке. Такой подход идеально подходит для поиска по ключевым словам, где важны точность и точное совпадение. Дополнительную информацию см. в разделе <a href="/docs/ru/v2.6.x/full-text-search.md">"Полнотекстовый поиск"</a>.</p></li>
+<li><p><strong>Нейронные модели с разреженным вкраплением</strong> - это методы генерации разреженных представлений путем обучения на больших наборах данных. Как правило, это модели глубокого обучения с архитектурой Transformer, способные расширять и взвешивать термины на основе семантического контекста. Milvus также поддерживает сгенерированные извне разреженные вкрапления из моделей типа <a href="https://arxiv.org/abs/2109.10086">SPLADE</a>. Подробности см. в разделе <a href="/docs/ru/v2.6.x/embeddings.md#Embedding-Overview">"Вкрапления"</a>.</include></p></li>
 </ul>
 <p>Разрозненные векторы и оригинальный текст могут храниться в Milvus для эффективного поиска. На диаграмме ниже показан общий процесс.</p>
 <p>
@@ -55,7 +55,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
    </span> <span class="img-wrapper"> <span>Процесс работы с разреженными векторами</span> </span></p>
 <div class="alert note">
-<p>Помимо разреженных векторов, Milvus также поддерживает плотные векторы и двоичные векторы. Плотные векторы идеально подходят для фиксации глубоких семантических связей, а двоичные векторы - для таких сценариев, как быстрое сравнение сходства и дедупликация контента. Дополнительные сведения см. в разделах <a href="/docs/ru/dense-vector.md">"Плотный вектор"</a> и <a href="/docs/ru/binary-vector.md">"Двоичный вектор"</a>.</p>
+<p>Помимо разреженных векторов, Milvus также поддерживает плотные векторы и двоичные векторы. Плотные векторы идеально подходят для фиксации глубоких семантических связей, а двоичные векторы - для таких сценариев, как быстрое сравнение сходства и дедупликация контента. Дополнительные сведения см. в разделах <a href="/docs/ru/v2.6.x/dense-vector.md">"Плотный вектор"</a> и <a href="/docs/ru/v2.6.x/binary-vector.md">"Двоичный вектор"</a>.</p>
 </div>
 <h2 id="Data-Formats" class="common-anchor-header">Форматы данных<button data-href="#Data-Formats" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -72,7 +72,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В следующих разделах мы покажем, как хранить векторы, полученные с помощью моделей разреженного встраивания, таких как SPLADE. Если вы ищете что-то в дополнение к семантическому поиску на основе плотных векторов, мы рекомендуем <a href="/docs/ru/full-text-search.md">Full Text Search</a> with BM25 вместо SPLADE для простоты. Если вы провели оценку качества и решили использовать SPLADE, вы можете обратиться к разделу <a href="/docs/ru/embeddings.md#Embedding-Overview">Embeddings</a>, чтобы узнать, как генерировать разреженные векторы с помощью SPLADE.</p>
+    </button></h2><p>В следующих разделах мы покажем, как хранить векторы, полученные с помощью моделей разреженного встраивания, таких как SPLADE. Если вы ищете что-то в дополнение к семантическому поиску на основе плотных векторов, мы рекомендуем <a href="/docs/ru/v2.6.x/full-text-search.md">Full Text Search</a> with BM25 вместо SPLADE для простоты. Если вы провели оценку качества и решили использовать SPLADE, вы можете обратиться к разделу <a href="/docs/ru/v2.6.x/embeddings.md#Embedding-Overview">Embeddings</a>, чтобы узнать, как генерировать разреженные векторы с помощью SPLADE.</p>
 <p>Milvus поддерживает ввод разреженных векторов в следующих форматах:</p>
 <ul>
 <li><p><strong>Список словарей (в формате <code translate="no">{dimension_index: value, ...}</code>)</strong></p>
@@ -283,7 +283,7 @@ schema.WithField(entity.NewField().
 <li><p><code translate="no">text</code>: В этом поле хранятся текстовые строки с использованием типа данных <code translate="no">VARCHAR</code>, максимальная длина которых составляет 65535 байт.</p></li>
 </ul>
 <div class="alert note">
-<p>Чтобы включить Milvus или сгенерировать вкрапления разреженных векторов из указанного текстового поля при вставке данных, необходимо выполнить дополнительный шаг с использованием функции. Для получения дополнительной информации обратитесь к разделу <a href="/docs/ru/full-text-search.md">"Полнотекстовый поиск"</a>.</p>
+<p>Чтобы включить Milvus или сгенерировать вкрапления разреженных векторов из указанного текстового поля при вставке данных, необходимо выполнить дополнительный шаг с использованием функции. Для получения дополнительной информации обратитесь к разделу <a href="/docs/ru/v2.6.x/full-text-search.md">"Полнотекстовый поиск"</a>.</p>
 </div>
 <h2 id="Set-Index-Parameters" class="common-anchor-header">Установка параметров индекса<button data-href="#Set-Index-Parameters" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -300,7 +300,7 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Процесс создания индекса для разреженных векторов аналогичен процессу создания индекса для <a href="/docs/ru/dense-vector.md">плотных векторов</a>, но отличается указанием типа индекса (<code translate="no">index_type</code>), метрики расстояния (<code translate="no">metric_type</code>) и параметров индекса (<code translate="no">params</code>).</p>
+    </button></h2><p>Процесс создания индекса для разреженных векторов аналогичен процессу создания индекса для <a href="/docs/ru/v2.6.x/dense-vector.md">плотных векторов</a>, но отличается указанием типа индекса (<code translate="no">index_type</code>), метрики расстояния (<code translate="no">metric_type</code>) и параметров индекса (<code translate="no">params</code>).</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -360,9 +360,9 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <button class="copy-code-btn"></button></code></pre>
 <p>В этом примере используется тип индекса <code translate="no">SPARSE_INVERTED_INDEX</code> с метрикой <code translate="no">IP</code>. Для получения более подробной информации см. следующие ресурсы:</p>
 <ul>
-<li><p><a href="/docs/ru/sparse-inverted-index.md">SPARSE_INVERTED_INDEX</a>: объяснение индекса и его параметров</p></li>
-<li><p><a href="/docs/ru/metric.md">Типы метрик</a>: Поддерживаемые типы метрик для различных типов полей</p></li>
-<li><p><a href="/docs/ru/full-text-search.md">Полнотекстовый поиск</a>: Подробное руководство по полнотекстовому поиску</p></li>
+<li><p><a href="/docs/ru/v2.6.x/sparse-inverted-index.md">SPARSE_INVERTED_INDEX</a>: объяснение индекса и его параметров</p></li>
+<li><p><a href="/docs/ru/v2.6.x/metric.md">Типы метрик</a>: Поддерживаемые типы метрик для различных типов полей</p></li>
+<li><p><a href="/docs/ru/v2.6.x/full-text-search.md">Полнотекстовый поиск</a>: Подробное руководство по полнотекстовому поиску</p></li>
 </ul>
 <h2 id="Create-Collection" class="common-anchor-header">Создание коллекции<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -379,7 +379,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>После того как настройки разреженного вектора и индекса завершены, можно создать коллекцию, содержащую разреженные векторы. В примере ниже используется <a href="/docs/ru/create-collection.md"><code translate="no">create_collection</code></a> для создания коллекции с именем <code translate="no">my_collection</code>.</p>
+    </button></h2><p>После того как настройки разреженного вектора и индекса завершены, можно создать коллекцию, содержащую разреженные векторы. В примере ниже используется <a href="/docs/ru/v2.6.x/create-collection.md"><code translate="no">create_collection</code></a> для создания коллекции с именем <code translate="no">my_collection</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -419,6 +419,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -544,6 +545,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {
@@ -696,6 +698,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: $queryData,
@@ -708,4 +711,4 @@ curl --request POST \
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.63,&quot;id&quot;:&quot;453577185629572535&quot;,&quot;pk&quot;:&quot;453577185629572535&quot;},{&quot;distance&quot;:0.1,&quot;id&quot;:&quot;453577185629572534&quot;,&quot;pk&quot;:&quot;453577185629572534&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Дополнительные сведения о параметрах поиска сходства см. в разделе <a href="/docs/ru/single-vector-search.md">Базовый векторный поиск</a>.</p>
+<p>Дополнительные сведения о параметрах поиска сходства см. в разделе <a href="/docs/ru/v2.6.x/single-vector-search.md">Базовый векторный поиск</a>.</p>

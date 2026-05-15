@@ -24,7 +24,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p><strong>Функция BM25</strong> обеспечивает <a href="/docs/ru/full-text-search.md">полнотекстовый поиск</a>, преобразуя исходный текст в <strong>разреженные векторы</strong> и оценивая документы по лексической релевантности. Она применяет сопоставление на основе терминов и взвешивание с учетом частоты, чтобы поддерживать эффективный поиск текстовых документов, которые близко соответствуют терминам запроса.</p>
-<p>Как локальная текстовая функция, функция BM25 работает внутри Milvus и не требует вывода модели или внешних интеграций. Она обеспечивает детерминированный и прозрачный механизм поиска для сценариев поиска по тексту.</p>
+<p>Как локальная текстовая функция, функция BM25 работает внутри Milvus и не требует вывода модели или внешних интеграций. Она обеспечивает детерминированный и прозрачный механизм поиска в сценариях поиска по тексту.</p>
 <h2 id="How-BM25-works" class="common-anchor-header">Принцип работы BM25<button data-href="#How-BM25-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -496,6 +496,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -556,6 +557,7 @@ client.insert(InsertReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;text&quot;: &quot;information retrieval is a field of study.&quot;},
@@ -645,6 +647,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data-raw <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

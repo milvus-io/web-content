@@ -25,7 +25,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>المتجهات الثنائية هي شكل خاص من أشكال تمثيل البيانات التي تحول متجهات الفاصلة العائمة التقليدية عالية الأبعاد إلى متجهات ثنائية تحتوي على 0 و1 فقط. لا يؤدي هذا التحويل إلى ضغط حجم المتجه فحسب، بل يقلل أيضًا من تكاليف التخزين والتكاليف الحسابية مع الاحتفاظ بالمعلومات الدلالية. عندما لا تكون الدقة للخصائص غير الحرجة ضرورية، يمكن للمتجهات الثنائية أن تحافظ بشكل فعال على معظم سلامة وفائدة متجهات الفاصلة العائمة الأصلية.</p>
-<p>تتمتع المتجهات الثنائية بمجموعة واسعة من التطبيقات، خاصة في الحالات التي تكون فيها الكفاءة الحسابية وتحسين التخزين أمرًا بالغ الأهمية. في أنظمة الذكاء الاصطناعي واسعة النطاق، مثل محركات البحث أو أنظمة التوصية، تعتبر المعالجة الآنية لكميات هائلة من البيانات أمرًا أساسيًا. من خلال تقليل حجم المتجهات، تساعد المتجهات الثنائية في تقليل زمن الاستجابة والتكاليف الحسابية دون التضحية بالدقة بشكل كبير. بالإضافة إلى ذلك، تُعدّ المتجهات الثنائية مفيدة في البيئات المحدودة الموارد، مثل الأجهزة المحمولة والأنظمة المدمجة، حيث تكون الذاكرة وقوة المعالجة محدودة. من خلال استخدام المتجهات الثنائية، يمكن تنفيذ وظائف الذكاء الاصطناعي المعقدة في هذه البيئات المحدودة مع الحفاظ على الأداء العالي.</p>
+<p>تتمتع المتجهات الثنائية بمجموعة واسعة من التطبيقات، خاصة في الحالات التي تكون فيها الكفاءة الحسابية وتحسين التخزين أمرًا بالغ الأهمية. في أنظمة الذكاء الاصطناعي واسعة النطاق، مثل محركات البحث أو أنظمة التوصية، تعد المعالجة الآنية لكميات هائلة من البيانات أمرًا أساسيًا. من خلال تقليل حجم المتجهات، تساعد المتجهات الثنائية في تقليل زمن الاستجابة والتكاليف الحسابية دون التضحية بالدقة بشكل كبير. بالإضافة إلى ذلك، تُعدّ المتجهات الثنائية مفيدة في البيئات المحدودة الموارد، مثل الأجهزة المحمولة والأنظمة المدمجة، حيث تكون الذاكرة وقوة المعالجة محدودة. من خلال استخدام المتجهات الثنائية، يمكن تنفيذ وظائف الذكاء الاصطناعي المعقدة في هذه البيئات المحدودة مع الحفاظ على الأداء العالي.</p>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -54,7 +54,7 @@ summary: >-
 <li><p><strong>طول ثابت:</strong> يظل طول المتجه ثابتًا بغض النظر عن طول النص الأصلي، مما يجعل الفهرسة والاسترجاع أسهل.</p></li>
 <li><p><strong>بسيط وبديهي:</strong> يعكس مباشرةً وجود الكلمات الرئيسية، مما يجعله مناسبًا لبعض مهام الاسترجاع المتخصصة.</p></li>
 </ul>
-<p>يمكن إنشاء المتجهات الثنائية من خلال طرق مختلفة. في معالجة النصوص، يمكن استخدام المفردات المحددة مسبقًا لتعيين البتات المقابلة بناءً على وجود الكلمات. بالنسبة لمعالجة الصور، يمكن لخوارزميات التجزئة الإدراكية (مثل <a href="https://en.wikipedia.org/wiki/Perceptual_hashing">pHash</a>) توليد ميزات ثنائية للصور. في تطبيقات التعلّم الآلي، يمكن جعل مخرجات النموذج ثنائية للحصول على تمثيلات متجهات ثنائية.</p>
+<p>يمكن إنشاء المتجهات الثنائية من خلال طرق مختلفة. في معالجة النصوص، يمكن استخدام المفردات المحددة مسبقًا لتعيين البتات المقابلة بناءً على وجود الكلمات. بالنسبة لمعالجة الصور، يمكن لخوارزميات التجزئة الإدراكية (مثل <a href="https://en.wikipedia.org/wiki/Perceptual_hashing">pHash</a>) توليد ميزات ثنائية للصور. في تطبيقات التعلّم الآلي، يمكن تحويل مخرجات النماذج إلى ثنائية للحصول على تمثيلات متجهات ثنائية.</p>
 <p>بعد تحويلها إلى متجهات ثنائية، يمكن تخزين البيانات في ميلفوس للإدارة واسترجاع المتجهات. يوضح الرسم البياني أدناه العملية الأساسية.</p>
 <p>
   
@@ -336,6 +336,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -447,6 +448,7 @@ client.<span class="hljs-title function_">insert</span>({
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;data\&quot;: <span class="hljs-variable">$data</span>,
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;
@@ -559,6 +561,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$data</span>,

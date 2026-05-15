@@ -24,10 +24,8 @@ summary: >-
       </svg>
     </button></h1><p>Las entidades de una colección son registros de datos que comparten el mismo conjunto de campos. Los valores de los campos de cada registro de datos forman una entidad. En esta página se explica cómo insertar entidades en una colección.</p>
 <div class="alert note">
-<p>Si añade dinámicamente nuevos campos después de que se haya creado la colección, y no especifica valores para estos campos al insertar entidades, Milvus los rellena automáticamente con sus valores por defecto definidos o NULL si no se establecen valores por defecto. Para más detalles, consulte <a href="/docs/es/add-fields-to-an-existing-collection.md">Añadir campos a una colección existente</a>.</p>
-<div class="alert note">
 <ul>
-<li><p><strong>Campos añadidos después de la creación de la colección</strong>: Si añade nuevos campos a una colección después de crearla y no especifica valores durante la inserción, Milvus los rellena automáticamente con los valores por defecto definidos o NULL si no se han establecido valores por defecto. Para más detalles, consulte <a href="/docs/es/add-fields-to-an-existing-collection.md">Añadir campos a una colección existente</a>.</p></li>
+<li><p><strong>Campos añadidos después de la creación de la colección</strong>: Si añade nuevos campos a una colección después de crearla y no especifica valores durante la inserción, Milvus los rellena automáticamente con los valores predeterminados definidos o NULL si no se han establecido valores predeterminados. Para más detalles, consulte <a href="/docs/es/add-fields-to-an-existing-collection.md">Añadir campos a una colección existente</a>.</p></li>
 <li><p><strong>Gestión de duplicados</strong>: La operación estándar <code translate="no">insert</code> no comprueba si hay claves primarias duplicadas. Al insertar datos con una clave primaria existente, se crea una nueva entidad con la misma clave, lo que provoca la duplicación de datos y posibles problemas de aplicación. Para actualizar entidades existentes o evitar duplicados, utilice la operación <strong><code translate="no">upsert</code></strong> en su lugar. Para obtener más información, consulte <a href="/docs/es/upsert-entities.md">Upsert Entidades</a>.</p></li>
 </ul>
 </div>
@@ -224,6 +222,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},
@@ -398,6 +397,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 10, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},

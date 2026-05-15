@@ -1,7 +1,7 @@
 ---
 id: grant_privileges.md
 title: ロールへの特権または特権グループの付与
-summary: ロールを作成すると、そのロールに権限を付与することができます。このガイドでは、ロールに特権または特権グループを付与する方法を紹介します。
+summary: ロールが作成されると、そのロールに権限を付与することができます。このガイドでは、ロールに特権または特権グループを付与する方法を紹介します。
 ---
 <h1 id="Grant-Privilege-or-Privilege-Group-to-Roles" class="common-anchor-header">ロールへの特権または特権グループの付与<button data-href="#Grant-Privilege-or-Privilege-Group-to-Roles" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -216,7 +216,7 @@ summary: ロールを作成すると、そのロールに権限を付与する�
 <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Management/compact.md">コンパクト化</a></p></td>
 </tr>
 <tr>
-<td><p>コレクション名の変更</p></td>
+<td><p>コレクションの名前の変更</p></td>
 <td><p>コレクション名の変更</p></td>
 <td><p><a href="/docs/ja/modify-collection.md">コレクション名の変更</a></p></td>
 </tr>
@@ -530,6 +530,7 @@ err = client.GrantV2(ctx, milvusclient.NewGrantV2Option(<span class="hljs-string
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/grant_privilege_v2&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;,
     &quot;privilege&quot;: &quot;Search&quot;,
@@ -541,6 +542,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/grant_privilege_v2&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;,
     &quot;privilege&quot;: &quot;privilege_group_1&quot;,
@@ -552,6 +554,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/grant_privilege_v2&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;,
     &quot;privilege&quot;: &quot;ClusterReadOnly&quot;,
@@ -575,7 +578,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>次の例は、<code translate="no">describe_role</code> メソッドを使用して、ロール<code translate="no">role_a</code> に付与された権限を表示する方法を示しています。</p>
+    </button></h2><p>次の例では、<code translate="no">describe_role</code> メソッドを使用して、ロール<code translate="no">role_a</code> に付与された権限を表示する方法を示します。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -605,6 +608,7 @@ role, err := client.DescribeRole(ctx, milvusclient.NewDescribeRoleOption(<span c
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/describe&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;
 }&#x27;</span>
@@ -732,6 +736,7 @@ err = client.RevokePrivilegeV2(ctx, milvusclient.NewRevokePrivilegeV2Option(<spa
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/revoke_privilege_v2&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;,
     &quot;privilege&quot;: &quot;Search&quot;,
@@ -743,6 +748,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/revoke_privilege_v2&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;,
     &quot;privilege&quot;: &quot;Search&quot;,
@@ -754,6 +760,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/revoke_privilege_v2&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;,
     &quot;privilege&quot;: &quot;ClusterReadOnly&quot;,

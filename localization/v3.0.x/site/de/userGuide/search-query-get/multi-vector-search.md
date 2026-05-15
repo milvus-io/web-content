@@ -350,7 +350,7 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Nach der Definition des Sammlungsschemas ist der nächste Schritt die Konfiguration der Vektorindizes und die Festlegung der Ähnlichkeitsmetriken. Im gegebenen Beispiel:</p>
+    </button></h3><p>Nach der Definition des Sammlungsschemas ist der nächste Schritt, die Vektorindizes zu konfigurieren und die Ähnlichkeitsmetriken festzulegen. Im gegebenen Beispiel:</p>
 <ul>
 <li><p><code translate="no">text_dense_index</code>: wird ein Index vom Typ <code translate="no">AUTOINDEX</code> mit dem Metrik-Typ <code translate="no">IP</code> für das Text-Density-Vektorfeld erstellt.</p></li>
 <li><p><code translate="no">text_sparse_index</code>Ein Index des Typs<code translate="no">SPARSE_INVERTED_INDEX</code>mit dem Metrik-Typ <code translate="no">BM25</code> wird für das Text-Sparse-Vektorfeld verwendet.</p></li>
@@ -521,6 +521,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -656,6 +657,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;text&quot;: &quot;Red cotton t-shirt with round neck&quot; , &quot;text_dense&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, ...], &quot;image_dense&quot;: [0.6366019600530924, -0.09323198122475052, ...]},
@@ -989,6 +991,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/hybrid_search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;search\&quot;: <span class="hljs-variable">${req}</span>,
@@ -1002,7 +1005,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>Die Ausgabe sieht folgendermaßen aus:</p>
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;[&#x27;id: 1, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 2, distance: 0.006422005593776703, entity: {}&#x27;]&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>Mit dem Parameter <code translate="no">limit=2</code>, der für die Hybrid Search angegeben wurde, ordnet Milvus die sechs Ergebnisse aus den drei Suchvorgängen neu an. Letztendlich werden nur die beiden ähnlichsten Ergebnisse zurückgegeben.</p>
+<p>Mit dem Parameter <code translate="no">limit=2</code>, der für die hybride Suche angegeben wurde, ordnet Milvus die sechs Ergebnisse aus den drei Suchvorgängen neu an. Letztendlich werden nur die beiden ähnlichsten Ergebnisse zurückgegeben.</p>
 <h2 id="Advanced-usage" class="common-anchor-header">Erweiterte Verwendung<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

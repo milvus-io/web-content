@@ -289,7 +289,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">hybride Suche</a> ist eine API für die hybride Suche seit Milvus 2.4.0. Sie können mehrere Vektorfelder durchsuchen und diese fusionieren. Eine Vektorsuche, die mit der Filterung von Skalarfeldern kombiniert wird, wird als "gefilterte Suche" bezeichnet. Weitere Informationen finden Sie unter <a href="/docs/de/multi-vector-search.md">Hybride Suche</a>.</p>
+    </button></h2><p>Die<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">hybride Suche</a> ist eine API für die hybride Suche seit Milvus 2.4.0. Sie können mehrere Vektorfelder durchsuchen und diese fusionieren. Eine Vektorsuche, die mit der Filterung von Skalarfeldern kombiniert ist, wird als "gefilterte Suche" bezeichnet. Weitere Informationen finden Sie unter <a href="/docs/de/multi-vector-search.md">Hybride Suche</a>.</p>
 <h2 id="Index" class="common-anchor-header">Index<button data-href="#Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -439,7 +439,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/milvus-cdc-overview.md">Milvus CDC</a> (Change data capture) ist ein benutzerfreundliches Tool, das inkrementelle Daten in Milvus-Instanzen erfassen und synchronisieren kann. Es stellt die Zuverlässigkeit von Geschäftsdaten sicher, indem es sie nahtlos zwischen Quell- und Zielinstanzen überträgt und so eine einfache inkrementelle Sicherung und Disaster Recovery ermöglicht.</p>
+    </button></h2><p><a href="https://milvus.io/docs/milvus_cdc_overview.md">Milvus CDC</a> (Change Data Capture) ist ein Tool zur Replikation von Datenänderungen von einem Milvus-Cluster zu einem anderen für die Primary-Standby Disaster Recovery.</p>
 <h2 id="Milvus-CLI" class="common-anchor-header">Milvus CLI<button data-href="#Milvus-CLI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

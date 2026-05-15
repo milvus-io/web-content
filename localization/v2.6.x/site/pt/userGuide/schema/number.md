@@ -61,7 +61,7 @@ summary: >-
 </table>
 <p>Para declarar um campo numérico, basta definir o endereço <code translate="no">datatype</code> como um dos tipos de dados numéricos disponíveis. Por exemplo, <code translate="no">DataType.INT64</code> para um campo de número inteiro ou <code translate="no">DataType.FLOAT</code> para um campo de vírgula flutuante.</p>
 <div class="alert note">
-<p>O Milvus suporta valores nulos e valores por defeito para campos numéricos. Para ativar estas funcionalidades, defina <code translate="no">nullable</code> para <code translate="no">True</code> e <code translate="no">default_value</code> para um valor numérico. Para mais informações, consulte <a href="/docs/pt/nullable-and-default.md">Nullable &amp; Default</a>.</p>
+<p>O Milvus suporta valores nulos e valores por defeito para campos numéricos. Para ativar estas funcionalidades, defina <code translate="no">nullable</code> para <code translate="no">True</code> e <code translate="no">default_value</code> para um valor numérico. Para mais informações, consulte <a href="/docs/pt/v2.6.x/nullable-and-default.md">Nullable &amp; Default</a>.</p>
 </div>
 <h2 id="Add-number-field" class="common-anchor-header">Adicionar campo numérico<button data-href="#Add-number-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -84,7 +84,7 @@ summary: >-
 <li><p><code translate="no">price</code>: armazena dados de float, permite valores nulos, mas não tem um valor predefinido.</p></li>
 </ul>
 <div class="alert note">
-<p>Se definir <code translate="no">enable_dynamic_fields=True</code> ao definir o esquema, o Milvus permite-lhe inserir campos escalares que não foram previamente definidos. No entanto, isto pode aumentar a complexidade das consultas e da gestão, afectando potencialmente o desempenho. Para obter mais informações, consulte <a href="/docs/pt/enable-dynamic-field.md">Campo dinâmico</a>.</p>
+<p>Se definir <code translate="no">enable_dynamic_fields=True</code> ao definir o esquema, o Milvus permite-lhe inserir campos escalares que não foram previamente definidos. No entanto, isto pode aumentar a complexidade das consultas e da gestão, afectando potencialmente o desempenho. Para obter mais informações, consulte <a href="/docs/pt/v2.6.x/enable-dynamic-field.md">Campo dinâmico</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -266,7 +266,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>A indexação ajuda a melhorar o desempenho da pesquisa e da consulta. No Milvus, a indexação é obrigatória para campos vetoriais, mas opcional para campos escalares.</p>
-<p>O exemplo seguinte cria índices no campo vetorial <code translate="no">embedding</code> e no campo escalar <code translate="no">age</code>, ambos utilizando o tipo de índice <code translate="no">AUTOINDEX</code>. Com este tipo, o Milvus seleciona automaticamente o índice mais adequado com base no tipo de dados. Também pode personalizar o tipo de índice e os parâmetros para cada campo. Para obter detalhes, consulte <a href="/docs/pt/index-explained.md">Índice explicado</a>.</p>
+<p>O exemplo seguinte cria índices no campo vetorial <code translate="no">embedding</code> e no campo escalar <code translate="no">age</code>, ambos utilizando o tipo de índice <code translate="no">AUTOINDEX</code>. Com este tipo, o Milvus seleciona automaticamente o índice mais adequado com base no tipo de dados. Também pode personalizar o tipo de índice e os parâmetros para cada campo. Para obter detalhes, consulte <a href="/docs/pt/v2.6.x/index-explained.md">Índice explicado</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
@@ -384,6 +384,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -483,6 +484,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;age&quot;: 25, &quot;price&quot;: 99.99, &quot;pk&quot;: 1, &quot;embedding&quot;: [0.1, 0.2, 0.3]},
@@ -508,7 +510,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
         ></path>
       </svg>
     </button></h2><p>Depois de inserir entidades, utilize o método <code translate="no">query</code> para obter entidades que correspondam às expressões de filtro especificadas.</p>
-<p>Para recuperar entidades onde o <code translate="no">age</code> é maior que 30:</p>
+<p>Para recuperar entidades em que o <code translate="no">age</code> é maior que 30:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;age &gt; 30&#x27;</span>
@@ -568,6 +570,7 @@ fmt.Println(<span class="hljs-string">&quot;price&quot;</span>, queryResult.GetC
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;age &gt; 30&quot;,
@@ -648,6 +651,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;my_collection&quot;,
   &quot;filter&quot;: &quot;price is null&quot;,
@@ -722,6 +726,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;my_collection&quot;,
   &quot;filter&quot;: &quot;age == 18&quot;,
@@ -827,6 +832,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -839,4 +845,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:35,&quot;distance&quot;:-0.19054288,&quot;id&quot;:3,&quot;price&quot;:199.99},{&quot;age&quot;:30,&quot;distance&quot;:-0.20163085,&quot;id&quot;:2,&quot;price&quot;:149.5},{&quot;age&quot;:25,&quot;distance&quot;:-0.2364331,&quot;id&quot;:1,&quot;price&quot;:99.99}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Neste exemplo, primeiro definimos um vetor de consulta e adicionamos uma condição de filtro <code translate="no">25 &lt;= age &lt;= 35</code> durante a pesquisa. Isso garante que os resultados da pesquisa não sejam apenas semelhantes ao vetor de consulta, mas também atendam à faixa etária especificada. Para obter mais informações, consulte <a href="/docs/pt/filtering">Filtragem</a>.</p>
+<p>Neste exemplo, primeiro definimos um vetor de consulta e adicionamos uma condição de filtro <code translate="no">25 &lt;= age &lt;= 35</code> durante a pesquisa. Isso garante que os resultados da pesquisa não sejam apenas semelhantes ao vetor de consulta, mas também atendam à faixa etária especificada. Para obter mais informações, consulte <a href="/docs/pt/v2.6.x/filtering">Filtragem</a>.</p>

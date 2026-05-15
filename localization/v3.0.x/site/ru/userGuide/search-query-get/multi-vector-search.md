@@ -92,7 +92,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Для многовекторного гибридного поиска мы должны определить несколько векторных полей в схеме коллекции. Подробнее об ограничениях на количество векторных полей, допустимых в коллекции, см. в разделе <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Лимиты Zilliz Cloud</a>.  Однако при необходимости можно настроить параметр <a href="/docs/ru/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> чтобы включить в коллекцию до 10 векторных полей.</p>
+    </button></h3><p>Для многовекторного гибридного поиска мы должны определить несколько векторных полей в схеме коллекции. Подробнее об ограничениях на количество векторных полей, допустимых в коллекции, см. в разделе <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Лимиты Zilliz Cloud</a>.  Однако при необходимости вы можете настроить параметр <a href="/docs/ru/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> чтобы включить в коллекцию до 10 векторных полей.</p>
 <p>В этом примере в схему включены следующие поля:</p>
 <ul>
 <li><p><code translate="no">id</code>: Служит в качестве первичного ключа для хранения текстовых идентификаторов. Это поле имеет тип данных <code translate="no">INT64</code>.</p></li>
@@ -351,7 +351,7 @@ schema.WithField(entity.NewField().
       </svg>
     </button></h3><p>После определения схемы коллекции следующим шагом будет настройка векторных индексов и указание метрик сходства. В приведенном примере:</p>
 <ul>
-<li><p><code translate="no">text_dense_index</code>: индекс типа <code translate="no">AUTOINDEX</code> с метрическим типом <code translate="no">IP</code> создается для векторного поля text dense.</p></li>
+<li><p><code translate="no">text_dense_index</code>: для векторного поля text dense создается индекс типа <code translate="no">AUTOINDEX</code> с метрикой <code translate="no">IP</code>.</p></li>
 <li><p><code translate="no">text_sparse_index</code>: индекс типа<code translate="no">SPARSE_INVERTED_INDEX</code>с метрическим типом <code translate="no">BM25</code> используется для текстового разреженного векторного поля.</p></li>
 <li><p><code translate="no">image_dense_index</code>: индекс типа <code translate="no">AUTOINDEX</code> с метрическим типом <code translate="no">IP</code> создается для плотного векторного поля изображения.</p></li>
 </ul>
@@ -520,6 +520,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -548,7 +549,7 @@ curl --request POST \
 <li><p><code translate="no">text_dense</code>: список из 768 значений с плавающей точкой, представляющий плотную вставку текстового описания</p></li>
 <li><p><code translate="no">image_dense</code>: список из 512 значений с плавающей точкой, представляющий плотную вставку изображения продукта.</p></li>
 </ul>
-<p>Вы можете использовать одинаковые или разные модели для генерации плотных вкраплений для каждого поля. В этом примере два плотных вложения имеют разные размеры, что говорит о том, что они были сгенерированы разными моделями. При последующем определении каждого поиска обязательно используйте соответствующую модель для генерации соответствующего вложения запроса.</p>
+<p>Вы можете использовать одинаковые или разные модели для генерации плотных вкраплений для каждого поля. В этом примере два плотных вкрапления имеют разные размеры, что говорит о том, что они были сгенерированы разными моделями. При последующем определении каждого поиска обязательно используйте соответствующую модель для генерации соответствующего вложения запроса.</p>
 <p>Поскольку в этом примере используется встроенная функция BM25 для генерации разреженных вкраплений из текстового поля, вам не нужно задавать разреженные векторы вручную. Однако если вы решили не использовать BM25, вы должны предварительно вычислить и предоставить разреженные вкрапления самостоятельно.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -655,6 +656,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;text&quot;: &quot;Red cotton t-shirt with round neck&quot; , &quot;text_dense&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, ...], &quot;image_dense&quot;: [0.6366019600530924, -0.09323198122475052, ...]},
@@ -988,6 +990,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/hybrid_search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;search\&quot;: <span class="hljs-variable">${req}</span>,

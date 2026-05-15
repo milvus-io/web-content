@@ -18,10 +18,10 @@ summary: 了解如何在 Milvus 启用 TLS 代理。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>TLS（传输层安全）是确保通信安全的加密协议。Milvus 代理使用 TLS 单向和双向验证。</p>
+    </button></h1><p>TLS（传输层安全）是一种确保通信安全的加密协议。Milvus 代理使用 TLS 单向和双向验证。</p>
 <p>本主题将介绍如何在 Milvus 代理中启用 TLS，用于 gRPC 和 RESTful 流量。</p>
 <div class="alert note">
-<p>TLS 和用户身份验证是两种不同的安全方法。如果在 Milvus 系统中同时启用了用户身份验证和 TLS，则需要提供用户名、密码和证书文件路径。有关如何启用用户身份验证的信息，请参阅<a href="/docs/zh/authenticate.md">验证用户访问</a>。</p>
+<p>TLS 和用户身份验证是两种不同的安全方法。如果在 Milvus 系统中同时启用了用户身份验证和 TLS，则需要提供用户名、密码和证书文件路径。有关如何启用用户身份验证的信息，请参阅<a href="/docs/zh/v2.6.x/authenticate.md">验证用户访问</a>。</p>
 </div>
 <h2 id="Create-your-own-certificate" class="common-anchor-header">创建自己的证书<button data-href="#Create-your-own-certificate" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -38,13 +38,43 @@ summary: 了解如何在 Milvus 启用 TLS 代理。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Prerequisites" class="common-anchor-header">前提条件</h3><p>确保已安装 OpenSSL。如果尚未安装，请先<a href="https://github.com/openssl/openssl/blob/master/INSTALL.md">构建并安装</a>OpenSSL。</p>
+    </button></h2><h3 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>确保已安装 OpenSSL。如果尚未安装，请先<a href="https://github.com/openssl/openssl/blob/master/INSTALL.md">构建并安装</a>OpenSSL。</p>
 <pre><code translate="no" class="language-shell">openssl version
 <button class="copy-code-btn"></button></code></pre>
 <p>如果未安装 OpenSSL。可在 Ubuntu 中使用以下命令安装。</p>
 <pre><code translate="no" class="language-shell">sudo apt install openssl
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-files" class="common-anchor-header">创建文件</h3><ol>
+<h3 id="Create-files" class="common-anchor-header">创建文件<button data-href="#Create-files" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>创建<code translate="no">gen.sh</code> 文件。</li>
 </ol>
 <pre><code translate="no"><span class="hljs-built_in">mkdir</span> cert &amp;&amp; <span class="hljs-built_in">cd</span> cert
@@ -98,13 +128,43 @@ openssl req -new -key client.key\
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <p><code translate="no">gen.sh</code> 文件中的变量对创建证书签名请求文件的过程至关重要。前五个变量是基本的签名信息，包括国家、州、地点、组织、组织单位。在配置<code translate="no">CommonName</code> 时需要谨慎，因为它将在客户端与服务器通信时进行验证。</p>
-<h3 id="Run-gensh-to-generate-certificate" class="common-anchor-header">运行<code translate="no">gen.sh</code> 生成证书</h3><p>运行<code translate="no">gen.sh</code> 文件创建证书。</p>
+<h3 id="Run-gensh-to-generate-certificate" class="common-anchor-header">运行<code translate="no">gen.sh</code> 生成证书<button data-href="#Run-gensh-to-generate-certificate" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>运行<code translate="no">gen.sh</code> 文件创建证书。</p>
 <pre><code translate="no"><span class="hljs-built_in">chmod</span> +x gen.sh
 ./gen.sh
 <button class="copy-code-btn"></button></code></pre>
 <p>将创建以下七个文件：<code translate="no">ca.key</code>,<code translate="no">ca.pem</code>,<code translate="no">ca.srl</code>,<code translate="no">server.key</code>,<code translate="no">server.pem</code>,<code translate="no">client.key</code>,<code translate="no">client.pem</code> 。</p>
 <p>请确保<code translate="no">ca.key</code>,<code translate="no">ca.pem</code>,<code translate="no">ca.srl</code> 安全，以便以后更新证书。<code translate="no">server.key</code> 和<code translate="no">server.pem</code> 文件由服务器使用，而<code translate="no">client.key</code> 和<code translate="no">client.pem</code> 文件由客户端使用。</p>
-<h3 id="Renew-certificates-optional" class="common-anchor-header">更新证书（可选）</h3><p>如果您想在某些情况下更新证书，例如证书即将过期，可以使用以下脚本。</p>
+<h3 id="Renew-certificates-optional" class="common-anchor-header">更新证书（可选）<button data-href="#Renew-certificates-optional" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>如果您想在某些情况下更新证书，例如证书即将过期，可以使用以下脚本。</p>
 <p>您的工作目录中需要<code translate="no">ca.key</code>,<code translate="no">ca.pem</code>,<code translate="no">ca.srl</code> 。</p>
 <p><details><summary><code translate="no">renew.sh</code></summary></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/usr/bin/env sh</span>
@@ -163,7 +223,22 @@ openssl req -new -key client.key\
         ></path>
       </svg>
     </button></h2><p>本节概述了使用 TLS 加密配置 Milvus 服务器的步骤。</p>
-<h3 id="Setup-for-Docker-Compose" class="common-anchor-header">为 Docker Compose 设置</h3><h4 id="1-Modify-the-Milvus-server-configuration" class="common-anchor-header">1.修改 Milvus 服务器配置</h4><p>要启用外部 TLS，请在<code translate="no">milvus.yaml</code> 文件中添加以下配置：</p>
+<h3 id="Setup-for-Docker-Compose" class="common-anchor-header">为 Docker Compose 设置<button data-href="#Setup-for-Docker-Compose" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="1-Modify-the-Milvus-server-configuration" class="common-anchor-header">1.修改 Milvus 服务器配置</h4><p>要启用外部 TLS，请在<code translate="no">milvus.yaml</code> 文件中添加以下配置：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">http:</span>
     <span class="hljs-comment"># for now milvus do not support config restful on same port with grpc</span>
@@ -231,7 +306,22 @@ openssl req -new -key client.key\
 <h5 id="Deploy-Milvus-using-Docker-Compose" class="common-anchor-header">使用 Docker Compose 部署 Milvus</h5><p>执行以下命令部署 Milvus：</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Setup-for-Milvus-Operator" class="common-anchor-header">为 Milvus 操作符进行设置</h3><p>将证书文件放到工作目录中。目录结构应如下所示：</p>
+<h3 id="Setup-for-Milvus-Operator" class="common-anchor-header">为 Milvus 操作符进行设置<button data-href="#Setup-for-Milvus-Operator" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>将证书文件放到工作目录中。目录结构应如下所示：</p>
 <pre><code translate="no">├── milvus.yaml (<span class="hljs-keyword">to</span> be created later)
 ├── server.pem
 ├── server.<span class="hljs-keyword">key</span>
@@ -306,7 +396,22 @@ openssl req -new -key client.key\
 <p>创建 Milvus CR：</p>
 <pre><code translate="no" class="language-bash">kubectl create -f milvus.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="setup-for-Milvus-Helm" class="common-anchor-header">设置为 Milvus Helm</h3><p>将证书文件放入工作目录。目录结构应如下所示：</p>
+<h3 id="setup-for-Milvus-Helm" class="common-anchor-header">设置为 Milvus Helm<button data-href="#setup-for-Milvus-Helm" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>将证书文件放入工作目录。目录结构应如下所示：</p>
 <pre><code translate="no">├── values.yaml (<span class="hljs-keyword">to</span> be created later)
 ├── server.pem
 ├── server.<span class="hljs-keyword">key</span>
@@ -404,7 +509,22 @@ helm install my-release milvus/milvus -f values.yaml
         ></path>
       </svg>
     </button></h2><p>对于 SDK 交互，根据 TLS 模式使用以下设置。</p>
-<h3 id="One-way-TLS-connection" class="common-anchor-header">单向 TLS 连接</h3><p>提供<code translate="no">server.pem</code> 的路径，并确保<code translate="no">server_name</code> 与证书中配置的<code translate="no">CommonName</code> 匹配。</p>
+<h3 id="One-way-TLS-connection" class="common-anchor-header">单向 TLS 连接<button data-href="#One-way-TLS-connection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>提供<code translate="no">server.pem</code> 的路径，并确保<code translate="no">server_name</code> 与证书中配置的<code translate="no">CommonName</code> 匹配。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -414,7 +534,22 @@ client = MilvusClient(
     server_name=<span class="hljs-string">&quot;localhost&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Two-way-TLS-connection" class="common-anchor-header">双向 TLS 连接</h3><p>提供<code translate="no">client.pem</code> 、<code translate="no">client.key</code> 和<code translate="no">ca.pem</code> 的路径，并确保<code translate="no">server_name</code> 与证书中配置的<code translate="no">CommonName</code> 匹配。</p>
+<h3 id="Two-way-TLS-connection" class="common-anchor-header">双向 TLS 连接<button data-href="#Two-way-TLS-connection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>提供<code translate="no">client.pem</code> 、<code translate="no">client.key</code> 和<code translate="no">ca.pem</code> 的路径，并确保<code translate="no">server_name</code> 与证书中配置的<code translate="no">CommonName</code> 匹配。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -443,7 +578,43 @@ client = MilvusClient(
         ></path>
       </svg>
     </button></h2><p>对于 RESTful API，可以使用<code translate="no">curl</code> 命令检查 TLS。</p>
-<h3 id="One-way-TLS-connection" class="common-anchor-header">单向 TLS 连接</h3><pre><code translate="no" class="language-bash">curl --cacert path_to/ca.pem https://localhost:8080/v2/vectordb/collections/list
+<h3 id="One-way-TLS-connection" class="common-anchor-header">单向 TLS 连接<button data-href="#One-way-TLS-connection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-bash">curl --cacert path_to/ca.pem \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+  https://localhost:8080/v2/vectordb/collections/list
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Two-way-TLS-connection" class="common-anchor-header">双向 TLS 连接</h3><pre><code translate="no" class="language-bash">curl --cert path_to/client.pem --key path_to/client.key --cacert path_to/ca.pem https://localhost:8080/v2/vectordb/collections/list
+<h3 id="Two-way-TLS-connection" class="common-anchor-header">双向 TLS 连接<button data-href="#Two-way-TLS-connection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-bash">curl --cert path_to/client.pem \
+  --key path_to/client.key \
+  --cacert path_to/ca.pem \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+  https://localhost:8080/v2/vectordb/collections/list
 <button class="copy-code-btn"></button></code></pre>

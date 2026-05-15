@@ -73,7 +73,7 @@ summary: توفر عملية upsert طريقة ملائمة لإدراج أو ت
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يمكنك أيضًا استخدام العلامة <code translate="no">partial_update</code> لجعل طلب الإضافة يعمل في وضع الدمج. يتيح لك ذلك تضمين الحقول التي تحتاج إلى تحديث فقط في حمولة الطلب.</p>
+    </button></h3><p>يمكنك أيضًا استخدام العلامة <code translate="no">partial_update</code> لجعل طلب الإضافة يعمل في وضع الدمج. يسمح لك هذا بتضمين الحقول التي تحتاج إلى تحديث فقط في حمولة الطلب.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-in-merge-mode.png" alt="Upsert In Merge Mode" class="doc-image" id="upsert-in-merge-mode" />
@@ -95,7 +95,7 @@ summary: توفر عملية upsert طريقة ملائمة لإدراج أو ت
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>هناك العديد من الملاحظات الخاصة التي يجب مراعاتها قبل استخدام ميزة الدمج. تفترض الحالات التالية أن لديك مجموعة تحتوي على حقلين قياسيين باسم <code translate="no">title</code> و <code translate="no">issue</code> ، إلى جانب مفتاح أساسي <code translate="no">id</code> وحقل متجه يسمى <code translate="no">vector</code>.</p>
+    </button></h3><p>هناك العديد من الملاحظات الخاصة التي يجب أن تأخذها بعين الاعتبار قبل استخدام ميزة الدمج. تفترض الحالات التالية أن لديك مجموعة تحتوي على حقلين قياسيين باسم <code translate="no">title</code> و <code translate="no">issue</code> ، إلى جانب مفتاح أساسي <code translate="no">id</code> وحقل متجه يسمى <code translate="no">vector</code>.</p>
 <ul>
 <li><p><strong>حقول Upsert مع</strong> <strong>تمكين</strong> <code translate="no">nullable</code> <strong>.</strong></p>
 <p>افترض أن الحقل <code translate="no">issue</code> يمكن أن يكون فارغًا. عندما تقوم بإدراج هذه الحقول، لاحظ ذلك:</p>
@@ -114,7 +114,7 @@ summary: توفر عملية upsert طريقة ملائمة لإدراج أو ت
 </ul></li>
 <li><p><strong>إعادة إدراج حقل JSON.</strong></p>
 <p>لنفترض أن مجموعة الأمثلة تحتوي على حقل JSON معرّف من قبل المخطط اسمه <code translate="no">extras</code> ، وأزواج القيمة الرئيسية في حقل JSON هذا في كيان ما مشابهة لـ <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
-<p>عندما تقوم بإدراج الحقل <code translate="no">extras</code> الخاص بكيان ما ببيانات JSON المعدلة، لاحظ أنه يتم التعامل مع حقل JSON ككل، ولا يمكنك تحديث المفاتيح الفردية بشكل انتقائي. وبعبارة أخرى، <strong>لا</strong> يدعم حقل JSON عملية الإدراج في وضع <strong>الدمج</strong>.</p></li>
+<p>عندما تقوم بإدراج الحقل <code translate="no">extras</code> الخاص بكيان ما مع بيانات JSON المعدلة، لاحظ أنه يتم التعامل مع حقل JSON ككل، ولا يمكنك تحديث المفاتيح الفردية بشكل انتقائي. وبعبارة أخرى، <strong>لا</strong> يدعم حقل JSON عملية الإدراج في وضع <strong>الدمج</strong>.</p></li>
 </ul>
 <h3 id="Limits--Restrictions" class="common-anchor-header">الحدود والقيود<button data-href="#Limits--Restrictions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -301,6 +301,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/upsert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;title&quot;: &quot;Artificial Intelligence in Real Life&quot;, &quot;issue&quot;: &quot;vol.12&quot;},
@@ -447,6 +448,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/upsert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 10, &quot;vector&quot;: [0.06998888224297328, 0.8582816610326578, -0.9657938677934292, 0.6527905683627726, -0.8668460657158576], &quot;title&quot;: &quot;Layour Design Reference&quot;, &quot;issue&quot;: &quot;vol.34&quot;},
@@ -589,6 +591,7 @@ _, err = client.Upsert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/upsert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,

@@ -119,14 +119,14 @@ summary: >-
 <li><p>Il<strong>TTL a livello di entità</strong> consente a ogni entità di memorizzare il proprio tempo di scadenza assoluto in un campo <code translate="no">TIMESTAMPTZ</code>. Un <code translate="no">NULL</code> in quel campo significa che l'entità non scade mai.</p></li>
 </ul>
 <p>Una collezione utilizza <strong>una</strong> modalità alla volta: le due modalità si escludono a vicenda. Passare da una modalità all'altra è un'operazione in più fasi; vedere Migrazione tra le due modalità.</p>
-<p>Usare questa tabella per scegliere una modalità:</p>
+<p>Utilizzare questa tabella per scegliere una modalità:</p>
 <table>
    <tr>
      <th><p><strong>Se la vostra situazione è...</strong></p></th>
      <th><p><strong>Utilizzare</strong></p></th>
    </tr>
    <tr>
-     <td><p>Ogni entità della raccolta deve seguire la stessa finestra di conservazione</p></td>
+     <td><p>Ogni entità della collezione deve seguire la stessa finestra di conservazione</p></td>
      <td><p>TTL a livello di collezione</p></td>
    </tr>
    <tr>
@@ -134,7 +134,7 @@ summary: >-
      <td><p>TTL a livello di collezione</p></td>
    </tr>
    <tr>
-     <td><p>Entità diverse hanno bisogno di tempi di vita diversi nella stessa raccolta (per tenant, hot/cold, per documento)</p></td>
+     <td><p>Entità diverse necessitano di tempi di vita diversi nella stessa raccolta (per inquilino, caldo/freddo, per documento)</p></td>
      <td><p>TTL a livello di entità</p></td>
    </tr>
    <tr>
@@ -282,6 +282,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -374,6 +375,7 @@ index_params.add_index(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;properties\&quot;: {
@@ -442,6 +444,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/drop_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;propertyKeys\&quot;: [
@@ -464,7 +467,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Il TTL a livello di entità consente a ogni entità di avere un proprio tempo di scadenza assoluto. Il tempo è memorizzato in una colonna <code translate="no">TIMESTAMPTZ</code> dedicata, dichiarata nello schema, e contrassegnata come campo TTL attraverso la proprietà della collezione <code translate="no">ttl_field</code>.</p>
+    </button></h2><p>Il TTL a livello di entità consente a ogni entità di avere un proprio tempo di scadenza assoluto. Il tempo è memorizzato in una colonna <code translate="no">TIMESTAMPTZ</code> dedicata, dichiarata nello schema e contrassegnata come campo TTL dalla proprietà della collezione <code translate="no">ttl_field</code>.</p>
 <h3 id="Enable-on-a-new-collection" class="common-anchor-header">Abilitazione su una nuova collezione<button data-href="#Enable-on-a-new-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -658,7 +661,7 @@ List&lt;Float&gt; vector = <span class="hljs-keyword">new</span> <span class="hl
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In ogni query e ricerca vettoriale, il server inserisce automaticamente il filtro TTL: non dovrete scriverne uno voi e le entità scadute non appariranno mai nei risultati:</p>
+<p>In ogni query e ricerca vettoriale, il server inserisce automaticamente il filtro TTL: non dovrete scriverne uno voi, e le entità scadute non appariranno mai nei risultati:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

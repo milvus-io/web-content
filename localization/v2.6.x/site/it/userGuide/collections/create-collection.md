@@ -38,12 +38,12 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Una collezione è una tabella bidimensionale con colonne fisse e righe variabili. Ogni colonna rappresenta un campo e ogni riga rappresenta un'entità. Per implementare questa gestione strutturale dei dati è necessario uno schema. Ogni entità da inserire deve soddisfare i vincoli definiti nello schema.</p>
-<p>È possibile determinare ogni aspetto di una collezione, compreso il suo schema, i parametri dell'indice, il tipo di metrica e se caricarla o meno al momento della creazione, per garantire che la collezione soddisfi pienamente i propri requisiti.</p>
+<p>È possibile determinare ogni aspetto di una collezione, compresi lo schema, i parametri dell'indice, il tipo di metrica e se caricarla o meno al momento della creazione, per garantire che la collezione soddisfi pienamente i requisiti.</p>
 <p>Per creare una raccolta, è necessario</p>
 <ul>
-<li><p><a href="/docs/it/create-collection.md#Create-Schema">Creare lo schema</a></p></li>
-<li><p><a href="/docs/it/create-collection.md#Optional-Set-Index-Parameters">Impostare i parametri dell'indice</a> (opzionale)</p></li>
-<li><p><a href="/docs/it/create-collection.md#Create-a-Collection">Creare la raccolta</a></p></li>
+<li><p><a href="/docs/it/v2.6.x/create-collection.md#Create-Schema">Creare lo schema</a></p></li>
+<li><p><a href="/docs/it/v2.6.x/create-collection.md#Optional-Set-Index-Parameters">Impostare i parametri dell'indice</a> (opzionale)</p></li>
+<li><p><a href="/docs/it/v2.6.x/create-collection.md#Create-a-Collection">Creare la raccolta</a></p></li>
 </ul>
 <h2 id="Create-Schema" class="common-anchor-header">Creare uno schema<button data-href="#Create-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,10 +60,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Uno schema definisce la struttura dei dati di una raccolta. Quando si crea una raccolta, è necessario progettare lo schema in base alle proprie esigenze. Per maggiori dettagli, consultare <a href="/docs/it/schema.md">Schema spiegato</a>.</p>
+    </button></h2><p>Uno schema definisce la struttura dei dati di una raccolta. Quando si crea una raccolta, è necessario progettare lo schema in base alle proprie esigenze. Per maggiori dettagli, consultare <a href="/docs/it/v2.6.x/schema.md">Schema spiegato</a>.</p>
 <p>I seguenti frammenti di codice creano uno schema con il campo dinamico abilitato e tre campi obbligatori denominati <code translate="no">my_id</code>, <code translate="no">my_vector</code> e <code translate="no">my_varchar</code>.</p>
 <div class="alert note">
-<p>È possibile impostare valori predefiniti per qualsiasi campo scalare e renderlo nullable. Per maggiori dettagli, consultare <a href="/docs/it/nullable-and-default.md">Nullable e Default</a>.</p>
+<p>È possibile impostare valori predefiniti per qualsiasi campo scalare e renderlo nullable. Per maggiori dettagli, consultare <a href="/docs/it/v2.6.x/nullable-and-default.md">Nullable e Default</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -226,7 +226,7 @@ schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">
     </button></h2><p>La creazione di un indice su un campo specifico accelera la ricerca su questo campo. Un indice registra l'ordine delle entità all'interno di un insieme. Come mostrato nei seguenti frammenti di codice, è possibile utilizzare <code translate="no">metric_type</code> e <code translate="no">index_type</code> per selezionare i modi appropriati per Milvus di indicizzare un campo e misurare le somiglianze tra le incorporazioni vettoriali.</p>
 <p>In Milvus, si può usare <code translate="no">AUTOINDEX</code> come tipo di indice per tutti i campi vettoriali e uno tra <code translate="no">COSINE</code>, <code translate="no">L2</code> e <code translate="no">IP</code> come tipo di metrica in base alle proprie esigenze.</p>
 <p>Come dimostrato nel frammento di codice precedente, è necessario impostare sia il tipo di indice che il tipo di metrica per i campi vettoriali e solo il tipo di indice per i campi scalari. Gli indici sono obbligatori per i campi vettoriali e si consiglia di creare indici sui campi scalari usati frequentemente nelle condizioni di filtraggio.</p>
-<p>Per maggiori dettagli, consultare la sezione <a href="/docs/it/index-vector-fields.md">Indicizzazione dei campi vettoriali</a> e <a href="/docs/it/index-scalar-fields.md">Indicizzazione dei campi scalari</a>.</p>
+<p>Per maggiori dettagli, consultare la sezione <a href="/docs/it/v2.6.x/index-vector-fields.md">Indicizzazione dei campi vettoriali</a> e <a href="/docs/it/v2.6.x/index-scalar-fields.md">Indicizzazione dei campi scalari</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.3. Prepare index parameters</span>
@@ -400,6 +400,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_1\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -491,6 +492,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_2\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -500,6 +502,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/get_load_state&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_2\&quot;
 }&quot;</span>
@@ -520,7 +523,22 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>È possibile impostare le proprietà della collezione da creare per adattarla al proprio servizio. Le proprietà applicabili sono le seguenti.</p>
-<h3 id="Set-Shard-Number" class="common-anchor-header">Imposta numero di frammenti</h3><p>I frammenti sono fette orizzontali di una raccolta e ogni frammento corrisponde a un canale di ingresso dei dati. Per impostazione predefinita, ogni raccolta ha un frammento. È possibile specificare il numero di shard durante la creazione di una raccolta per adattarlo al volume dei dati e al carico di lavoro.</p>
+<h3 id="Set-Shard-Number" class="common-anchor-header">Imposta numero di frammenti<button data-href="#Set-Shard-Number" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>I frammenti sono fette orizzontali di una raccolta e ogni frammento corrisponde a un canale di ingresso dei dati. Per impostazione predefinita, ogni raccolta ha un frammento. È possibile specificare il numero di shard durante la creazione di una raccolta per adattarlo al volume dei dati e al carico di lavoro.</p>
 <p>Come linea guida generale, quando si imposta il numero di shard si deve tenere conto di quanto segue:</p>
 <ul>
 <li><strong>Dimensione dei dati:</strong> Una pratica comune è quella di avere uno shard ogni 200 milioni di entità. Si può anche stimare in base alla dimensione totale dei dati, ad esempio aggiungendo uno shard per ogni 100 GB di dati che si prevede di inserire.</li>
@@ -568,13 +586,29 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_3\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Enable-mmap" class="common-anchor-header">Abilitare mmap</h3><p>Milvus abilita mmap su tutte le raccolte per impostazione predefinita, consentendo a Milvus di mappare i dati grezzi dei campi in memoria invece di caricarli completamente. Questo riduce l'impronta di memoria e aumenta la capacità della raccolta. Per maggiori dettagli su mmap, vedere <a href="/docs/it/mmap.md">Uso di mmap</a>.</p>
+<h3 id="Enable-mmap" class="common-anchor-header">Abilitare mmap<button data-href="#Enable-mmap" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus abilita mmap su tutte le raccolte per impostazione predefinita, consentendo a Milvus di mappare i dati grezzi dei campi in memoria invece di caricarli completamente. Questo riduce l'impronta di memoria e aumenta la capacità della raccolta. Per maggiori dettagli su mmap, vedere <a href="/docs/it/v2.6.x/mmap.md">Uso di mmap</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#plaintext">plaintext</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With mmap</span>
@@ -621,13 +655,29 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_5\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Collection-TTL" class="common-anchor-header">Impostare il TTL dell'insieme</h3><p>Se i dati di una raccolta devono essere abbandonati per un periodo specifico, si può impostare il suo Time-To-Live (TTL) in secondi. Una volta scaduto il TTL, Milvus cancella le entità della raccolta. La cancellazione è asincrona, il che significa che le ricerche e le interrogazioni sono ancora possibili prima che la cancellazione sia completata.</p>
+<h3 id="Set-Collection-TTL" class="common-anchor-header">Impostare il TTL dell'insieme<button data-href="#Set-Collection-TTL" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Se i dati di una raccolta devono essere abbandonati per un periodo specifico, si può impostare il suo Time-To-Live (TTL) in secondi. Una volta scaduto il TTL, Milvus cancella le entità della raccolta. La cancellazione è asincrona, il che significa che le ricerche e le interrogazioni sono ancora possibili prima che la cancellazione sia completata.</p>
 <p>Il seguente frammento di codice imposta il TTL a un giorno (86400 secondi). Si consiglia di impostare il TTL almeno a un paio di giorni.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -677,13 +727,29 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_5\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Consistency-Level" class="common-anchor-header">Impostare il livello di consistenza</h3><p>Quando si crea una raccolta, è possibile impostare il livello di coerenza per le ricerche e le query nella raccolta. È anche possibile modificare il livello di consistenza dell'insieme durante una ricerca o una query specifica.</p>
+<h3 id="Set-Consistency-Level" class="common-anchor-header">Impostare il livello di consistenza<button data-href="#Set-Consistency-Level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Quando si crea una raccolta, è possibile impostare il livello di coerenza per le ricerche e le query nella raccolta. È anche possibile modificare il livello di consistenza dell'insieme durante una ricerca o una query specifica.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With consistency level</span>
@@ -730,12 +796,28 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_6\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Per ulteriori informazioni sui livelli di consistenza, vedere <a href="/docs/it/tune_consistency.md">Livello di consistenza</a>.</p>
-<h3 id="Enable-Dynamic-Field" class="common-anchor-header">Abilitare il campo dinamico</h3><p>Il campo dinamico di una collezione è un campo riservato JavaScript Object Notation (JSON) chiamato <strong>$meta</strong>. Una volta abilitato questo campo, Milvus salva tutti i campi non definiti da schemi in ogni entità e i loro valori come coppie chiave-valore nel campo riservato.</p>
-<p>Per i dettagli su come utilizzare il campo dinamico, consultare <a href="/docs/it/enable-dynamic-field.md">Campo dinamico</a>.</p>
+<p>Per ulteriori informazioni sui livelli di consistenza, vedere <a href="/docs/it/v2.6.x/tune_consistency.md">Livello di consistenza</a>.</p>
+<h3 id="Enable-Dynamic-Field" class="common-anchor-header">Abilitare il campo dinamico<button data-href="#Enable-Dynamic-Field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Il campo dinamico di una collezione è un campo riservato JavaScript Object Notation (JSON) chiamato <strong>$meta</strong>. Una volta abilitato questo campo, Milvus salva tutti i campi non definiti da schemi in ogni entità e i loro valori come coppie chiave-valore nel campo riservato.</p>
+<p>Per i dettagli su come utilizzare il campo dinamico, consultare <a href="/docs/it/v2.6.x/enable-dynamic-field.md">Campo dinamico</a>.</p>

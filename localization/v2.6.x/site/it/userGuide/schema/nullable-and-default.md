@@ -45,10 +45,10 @@ summary: >-
     </button></h2><ul>
 <li><p>Solo i campi scalari, escluso il campo primario, supportano i valori predefiniti e l'attributo nullable.</p></li>
 <li><p>I campi JSON e Array non supportano i valori predefiniti.</p></li>
-<li><p>I valori predefiniti o l'attributo nullable possono essere configurati solo durante la creazione della collezione e non possono essere modificati in seguito.</p></li>
-<li><p>I campi contrassegnati come nullable non possono essere usati come chiavi di partizione. Per ulteriori informazioni sulle chiavi di partizione, consultare la sezione <a href="/docs/it/use-partition-key.md">Uso della chiave di partizione</a>.</p></li>
+<li><p>I valori predefiniti o l'attributo nullable possono essere configurati solo durante la creazione della raccolta e non possono essere modificati in seguito.</p></li>
+<li><p>I campi contrassegnati come nullable non possono essere usati come chiavi di partizione. Per ulteriori informazioni sulle chiavi di partizione, consultare la sezione <a href="/docs/it/v2.6.x/use-partition-key.md">Uso della chiave di partizione</a>.</p></li>
 <li><p>Quando si crea un indice su un campo scalare con l'attributo nullable abilitato, i valori nulli saranno esclusi dall'indice.</p></li>
-<li><p><strong>Campi JSON e ARRAY</strong>: Quando si usano gli operatori <code translate="no">IS NULL</code> o <code translate="no">IS NOT NULL</code> per filtrare i campi JSON o ARRAY, questi operatori lavorano a livello di colonna, il che significa che valutano solo se l'intero oggetto JSON o array è nullo. Ad esempio, se una chiave all'interno di un oggetto JSON è nulla, non verrà riconosciuta dal filtro <code translate="no">IS NULL</code>. Per ulteriori informazioni, consultare gli <a href="/docs/it/basic-operators.md">Operatori di base</a>.</p></li>
+<li><p><strong>Campi JSON e ARRAY</strong>: Quando si usano gli operatori <code translate="no">IS NULL</code> o <code translate="no">IS NOT NULL</code> per filtrare i campi JSON o ARRAY, questi operatori lavorano a livello di colonna, il che significa che valutano solo se l'intero oggetto JSON o array è nullo. Ad esempio, se una chiave all'interno di un oggetto JSON è nulla, non sarà riconosciuta dal filtro <code translate="no">IS NULL</code>. Per ulteriori informazioni, consultare <a href="/docs/it/v2.6.x/basic-operators.md">Operatori di base</a>.</p></li>
 </ul>
 <h2 id="Nullable-attribute" class="common-anchor-header">Attributo Nullable<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -66,7 +66,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>L'attributo <code translate="no">nullable</code> consente di memorizzare valori nulli in una collezione, fornendo flessibilità nella gestione di dati sconosciuti.</p>
-<h3 id="Set-the-nullable-attribute" class="common-anchor-header">Impostare l'attributo nullable</h3><p>Quando si crea una collezione, usare <code translate="no">nullable=True</code> per definire i campi nullable (l'impostazione predefinita è <code translate="no">False</code>). L'esempio seguente crea un insieme chiamato <code translate="no">my_collection</code> e imposta il campo <code translate="no">age</code> come nullable:</p>
+<h3 id="Set-the-nullable-attribute" class="common-anchor-header">Impostare l'attributo nullable<button data-href="#Set-the-nullable-attribute" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Quando si crea una collezione, usare <code translate="no">nullable=True</code> per definire i campi nullable (l'impostazione predefinita è <code translate="no">False</code>). L'esempio seguente crea un insieme chiamato <code translate="no">my_collection</code> e imposta il campo <code translate="no">age</code> come nullable:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -262,13 +277,29 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-entities" class="common-anchor-header">Inserire entità</h3><p>Quando si inseriscono dati in un campo nullable, si inserisce null o si omette direttamente il campo:</p>
+<h3 id="Insert-entities" class="common-anchor-header">Inserire entità<button data-href="#Insert-entities" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Quando si inseriscono dati in un campo nullable, si inserisce null o si omette direttamente il campo:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
@@ -330,6 +361,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 1, &quot;vector&quot;: [0.1, 0.2, 0.3, 0.4, 0.5], &quot;age&quot;: 30},
@@ -339,7 +371,22 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Search-and-query-with-null-values" class="common-anchor-header">Ricerca e interrogazione con valori nulli</h3><p>Quando si utilizza il metodo <code translate="no">search</code>, se un campo contiene valori <code translate="no">null</code>, il risultato della ricerca restituirà il campo come nullo:</p>
+<h3 id="Search-and-query-with-null-values" class="common-anchor-header">Ricerca e interrogazione con valori nulli<button data-href="#Search-and-query-with-null-values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Quando si utilizza il metodo <code translate="no">search</code>, se un campo contiene valori <code translate="no">null</code>, il risultato della ricerca restituirà il campo come nullo:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
@@ -412,6 +459,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -479,6 +527,7 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;age &gt;= 0&quot;,
@@ -534,6 +583,7 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;expr&quot;: &quot;&quot;,
@@ -559,7 +609,22 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
         ></path>
       </svg>
     </button></h2><p>I valori predefiniti sono valori predefiniti assegnati ai campi scalari. Se non si fornisce un valore per un campo con un valore predefinito durante l'inserimento, il sistema utilizza automaticamente il valore predefinito.</p>
-<h3 id="Set-default-values" class="common-anchor-header">Impostazione dei valori predefiniti</h3><p>Quando si crea una collezione, utilizzare il parametro <code translate="no">default_value</code> per definire il valore predefinito di un campo. L'esempio seguente mostra come impostare il valore predefinito di <code translate="no">age</code> su <code translate="no">18</code> e di <code translate="no">status</code> su <code translate="no">&quot;active&quot;</code>:</p>
+<h3 id="Set-default-values" class="common-anchor-header">Impostazione dei valori predefiniti<button data-href="#Set-default-values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Quando si crea una collezione, utilizzare il parametro <code translate="no">default_value</code> per definire il valore predefinito di un campo. L'esempio seguente mostra come impostare il valore predefinito di <code translate="no">age</code> su <code translate="no">18</code> e di <code translate="no">status</code> su <code translate="no">&quot;active&quot;</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema = client.create_schema(
@@ -764,13 +829,29 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-entities" class="common-anchor-header">Inserire entità</h3><p>Quando si inseriscono i dati, se si omettono i campi con un valore predefinito o si imposta il loro valore su null, il sistema utilizza il valore predefinito:</p>
+<h3 id="Insert-entities" class="common-anchor-header">Inserire entità<button data-href="#Insert-entities" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Quando si inseriscono i dati, se si omettono i campi con un valore predefinito o si imposta il loro valore su null, il sistema utilizza il valore predefinito:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
@@ -838,6 +919,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 1, &quot;vector&quot;: [0.1, 0.2, 0.3, 0.4, 0.5], &quot;age&quot;: 30, &quot;status&quot;: &quot;premium&quot;},
@@ -849,9 +931,24 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Per ulteriori informazioni sull'efficacia delle impostazioni dei valori nullable e predefiniti, consultare le <a href="/docs/it/nullable-and-default.md#Applicable-rules">Regole applicabili</a>.</p>
+<p>Per ulteriori informazioni sull'efficacia delle impostazioni dei valori nullable e predefiniti, consultare le <a href="/docs/it/v2.6.x/nullable-and-default.md#Applicable-rules">Regole applicabili</a>.</p>
 </div>
-<h3 id="Search-and-query-with-default-values" class="common-anchor-header">Ricerca e interrogazione con valori predefiniti</h3><p>Le entità che contengono valori predefiniti sono trattate come tutte le altre entità durante le ricerche vettoriali e i filtri scalari. È possibile includere valori predefiniti come parte delle operazioni <code translate="no">search</code> e <code translate="no">query</code>.</p>
+<h3 id="Search-and-query-with-default-values" class="common-anchor-header">Ricerca e interrogazione con valori predefiniti<button data-href="#Search-and-query-with-default-values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Le entità che contengono valori predefiniti sono trattate come tutte le altre entità durante le ricerche vettoriali e i filtri scalari. È possibile includere valori predefiniti come parte delle operazioni <code translate="no">search</code> e <code translate="no">query</code>.</p>
 <p>Ad esempio, in un'operazione <code translate="no">search</code>, le entità con <code translate="no">age</code> impostato sul valore predefinito di <code translate="no">18</code> saranno incluse nei risultati:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -931,6 +1028,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -1027,6 +1125,7 @@ fmt.Println(<span class="hljs-string">&quot;status: &quot;</span>, resultSet.Get
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;age == 18&quot;,
@@ -1039,6 +1138,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;status == \&quot;active\&quot;&quot;,

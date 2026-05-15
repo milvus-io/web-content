@@ -717,7 +717,7 @@
             "children": []
           },
           {
-            "label": "Indici vettoriali flottanti",
+            "label": "Indici vettoriali fluttuanti",
             "id": "floating-vector-indexes",
             "order": 1,
             "isMenu": true,
@@ -1979,7 +1979,7 @@
       {
         "label": "Birdwatcher",
         "id": "birdwatcher",
-        "order": 2,
+        "order": 3,
         "children": [
           {
             "label": "Panoramica",
@@ -1997,6 +1997,37 @@
             "label": "Guide all'uso",
             "id": "birdwatcher_usage_guides.md",
             "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "CDC Milvus",
+        "id": "milvus_cdc",
+        "order": 2,
+        "children": [
+          {
+            "label": "Panoramica",
+            "id": "milvus_cdc_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Impostazione della replica CDC",
+            "id": "set_up_cdc_replication.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Passaggio al digitale",
+            "id": "cdc_switchover.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Failover",
+            "id": "cdc_failover.md",
+            "order": 3,
             "children": []
           }
         ]
@@ -2913,7 +2944,7 @@
             "children": []
           },
           {
-            "label": "Ricerca di somiglianza audio",
+            "label": "Ricerca della somiglianza audio",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []

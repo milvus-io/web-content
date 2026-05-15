@@ -27,7 +27,7 @@ summary: >-
 <li><p>Especifique o parâmetro <code translate="no">max_length</code>, que define o número máximo de bytes que o campo <code translate="no">VARCHAR</code> pode armazenar. O intervalo válido para <code translate="no">max_length</code> é de 1 a 65.535.</p></li>
 </ul>
 <div class="alert note">
-<p>O Milvus suporta valores nulos e valores predefinidos para os campos <code translate="no">VARCHAR</code>. Para ativar estas funcionalidades, defina <code translate="no">nullable</code> para <code translate="no">True</code> e <code translate="no">default_value</code> para um valor de cadeia de caracteres. Para obter detalhes, consulte <a href="/docs/pt/nullable-and-default.md">Nullable &amp; Default</a>.</p>
+<p>O Milvus suporta valores nulos e valores predefinidos para os campos <code translate="no">VARCHAR</code>. Para ativar estas funcionalidades, defina <code translate="no">nullable</code> para <code translate="no">True</code> e <code translate="no">default_value</code> para um valor de cadeia de caracteres. Para obter detalhes, consulte <a href="/docs/pt/v2.6.x/nullable-and-default.md">Nullable &amp; Default</a>.</p>
 </div>
 <h2 id="Add-VARCHAR-field" class="common-anchor-header">Adicionar um campo VARCHAR<button data-href="#Add-VARCHAR-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -50,7 +50,7 @@ summary: >-
 <li><p><code translate="no">varchar_field2</code>: armazena até 200 bytes, permite valores nulos, mas não tem um valor predefinido.</p></li>
 </ul>
 <div class="alert note">
-<p>Se definir <code translate="no">enable_dynamic_fields=True</code> aquando da definição do esquema, o Milvus permite-lhe inserir campos escalares que não foram previamente definidos. No entanto, isto pode aumentar a complexidade das consultas e da gestão, afectando potencialmente o desempenho. Para obter mais informações, consulte <a href="/docs/pt/enable-dynamic-field.md">Campo dinâmico</a>.</p>
+<p>Se definir <code translate="no">enable_dynamic_fields=True</code> aquando da definição do esquema, o Milvus permite-lhe inserir campos escalares que não foram previamente definidos. No entanto, isto pode aumentar a complexidade das consultas e da gestão, afectando potencialmente o desempenho. Para obter mais informações, consulte <a href="/docs/pt/v2.6.x/enable-dynamic-field.md">Campo dinâmico</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -249,9 +249,9 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>A indexação ajuda a melhorar o desempenho da pesquisa e da consulta. No Milvus, a indexação é obrigatória para campos vetoriais, mas opcional para campos escalares.</p>
-<p>O exemplo seguinte cria índices no campo vetorial <code translate="no">embedding</code> e no campo escalar <code translate="no">varchar_field1</code>, ambos utilizando o tipo de índice <code translate="no">AUTOINDEX</code>. Com este tipo, o Milvus seleciona automaticamente o índice mais adequado com base no tipo de dados. Também pode personalizar o tipo de índice e os parâmetros para cada campo. Para mais detalhes, consulte <a href="/docs/pt/index-explained.md">Índice Explicado</a>.</p>
+<p>O exemplo seguinte cria índices no campo vetorial <code translate="no">embedding</code> e no campo escalar <code translate="no">varchar_field1</code>, ambos utilizando o tipo de índice <code translate="no">AUTOINDEX</code>. Com este tipo, o Milvus seleciona automaticamente o índice mais adequado com base no tipo de dados. Também pode personalizar o tipo de índice e os parâmetros para cada campo. Para mais detalhes, consulte <a href="/docs/pt/v2.6.x/index-explained.md">Índice Explicado</a>.</p>
 <div class="alert note">
-<p>Pode também construir um índice <code translate="no">NGRAM</code> para acelerar a filtragem <code translate="no">LIKE</code> nos campos <code translate="no">VARCHAR</code>. Para obter detalhes, consulte <a href="/docs/pt/ngram.md">NGRAM</a>.</p>
+<p>Pode também construir um índice <code translate="no">NGRAM</code> para acelerar a filtragem <code translate="no">LIKE</code> nos campos <code translate="no">VARCHAR</code>. Para obter detalhes, consulte <a href="/docs/pt/v2.6.x/ngram.md">NGRAM</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -378,6 +378,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -496,6 +497,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;varchar_field1&quot;: &quot;Product A&quot;, &quot;varchar_field2&quot;: &quot;High quality product&quot;, &quot;pk&quot;: 1, &quot;embedding&quot;: [0.1, 0.2, 0.3]},
@@ -588,6 +590,7 @@ fmt.Println(<span class="hljs-string">&quot;varchar_field2&quot;</span>, queryRe
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;varchar_field1 == \&quot;Product A\&quot;&quot;,
@@ -657,6 +660,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;varchar_field2 is null&quot;,
@@ -724,6 +728,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;varchar_field1 == \&quot;Unknown\&quot;&quot;,
@@ -828,6 +833,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

@@ -20,9 +20,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Berdasarkan file indeks yang merekam urutan penyematan vektor yang diurutkan, pencarian Approximate Nearest Neighbor (ANN) menemukan subkumpulan penyematan vektor berdasarkan vektor kueri yang dibawa dalam permintaan pencarian yang diterima, membandingkan vektor kueri dengan vektor yang ada di subkelompok, dan mengembalikan hasil yang paling mirip. Dengan pencarian ANN, Milvus memberikan pengalaman pencarian yang efisien. Halaman ini membantu Anda mempelajari cara melakukan pencarian ANN dasar.</p>
+    </button></h1><p>Berdasarkan file indeks yang merekam urutan penyematan vektor yang diurutkan, pencarian Approximate Nearest Neighbor (ANN) menemukan subkumpulan penyematan vektor berdasarkan vektor kueri yang dibawa dalam permintaan pencarian yang diterima, membandingkan vektor kueri dengan vektor yang ada dalam subkelompok, dan mengembalikan hasil yang paling mirip. Dengan pencarian ANN, Milvus memberikan pengalaman pencarian yang efisien. Halaman ini membantu Anda mempelajari cara melakukan pencarian ANN dasar.</p>
 <div class="alert note">
-<p>Jika Anda secara dinamis menambahkan bidang baru setelah koleksi dibuat, pencarian yang menyertakan bidang-bidang ini akan mengembalikan nilai default yang ditentukan atau NULL untuk entitas yang belum secara eksplisit menetapkan nilai. Untuk detailnya, lihat Menambahkan <a href="/docs/id/add-fields-to-an-existing-collection.md">Bidang ke Koleksi yang Sudah Ada</a>.</p>
+<p>Jika Anda secara dinamis menambahkan bidang baru setelah koleksi dibuat, pencarian yang menyertakan bidang-bidang ini akan mengembalikan nilai default yang ditentukan atau NULL untuk entitas yang tidak secara eksplisit menetapkan nilai. Untuk detailnya, lihat Menambahkan <a href="/docs/id/add-fields-to-an-existing-collection.md">Bidang ke Koleksi yang Sudah Ada</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -223,6 +223,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -250,7 +251,7 @@ curl --request POST \
 <span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus mengurutkan hasil pencarian berdasarkan skor kemiripannya dengan vektor kueri dalam urutan menurun. Skor kemiripan juga disebut sebagai jarak ke vektor kueri, dan rentang nilainya bervariasi dengan jenis metrik yang digunakan.</p>
+<p>Milvus mengurutkan hasil pencarian berdasarkan nilai kemiripannya dengan vektor kueri dalam urutan menurun. Skor kemiripan juga disebut sebagai jarak ke vektor kueri, dan rentang nilainya bervariasi dengan jenis metrik yang digunakan.</p>
 <p>Tabel berikut mencantumkan jenis metrik yang berlaku dan rentang jarak yang sesuai.</p>
 <table>
    <tr>
@@ -453,6 +454,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -537,6 +539,7 @@ curl --request POST \
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
@@ -673,6 +676,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -717,7 +721,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dalam hasil pencarian, Milvus menyertakan nilai bidang utama dan jarak/skor kemiripan dari entitas yang berisi sematan vektor K teratas secara default. Anda dapat menyertakan nama-nama bidang target, termasuk bidang vektor dan skalar, dalam permintaan pencarian sebagai bidang keluaran untuk membuat hasil pencarian membawa nilai-nilai dari bidang lain dalam entitas-entitas ini.</p>
+    </button></h2><p>Dalam hasil pencarian, Milvus menyertakan nilai bidang utama dan jarak/skor kemiripan dari entitas yang mengandung sematan vektor K teratas secara default. Anda dapat menyertakan nama-nama bidang target, termasuk bidang vektor dan skalar, dalam permintaan pencarian sebagai bidang keluaran untuk membuat hasil pencarian membawa nilai dari bidang lain dalam entitas ini.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search</span>
@@ -832,6 +836,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -1052,6 +1057,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -1102,6 +1108,7 @@ curl --request POST \
 
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;quick_setup&quot;,
   &quot;annsField&quot;: &quot;vector&quot;,

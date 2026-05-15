@@ -21,7 +21,7 @@ summary: >-
       </svg>
     </button></h1><p>Milvusでは、ANN検索に加えて、クエリーによるメタデータのフィルタリングもサポートしています。このページでは、Query、Get、QueryIteratorを使用して、エンティティの取得、メタデータのフィルタリング、クエリ結果のソート、スカラー値の集約を行う方法を紹介します。</p>
 <div class="alert note">
-<p>コレクション作成後に新しいフィールドを動的に追加すると、これらのフィールドを含むクエリは、定義された既定 値を返すか、明示的に値が設定されていないエンティティの場合は NULL を返します。詳細は、"<a href="/docs/ja/add-fields-to-an-existing-collection.md">既存のコレクションへのフィールドの追加</a>" を参照してください。</p>
+<p>コレクション作成後に新しいフィールドを動的に追加した場合、これらのフィールドを含むクエリは、定義された既定 値を返すか、明示的に値を設定していないエンティティの場合は NULL を返します。詳細は、"<a href="/docs/ja/add-fields-to-an-existing-collection.md">既存のコレクションへのフィールドの追加</a>" を参照してください。</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -209,6 +209,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/get&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;id&quot;: [0, 1, 2],
@@ -319,6 +320,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;color like \&quot;red%\&quot;&quot;,
@@ -396,7 +398,7 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Pagination-with-Sort" class="common-anchor-header">ソートによるページネーション</h4><p><code translate="no">limit</code> 、<code translate="no">offset</code> とともに<code translate="no">order_by</code> を使用すると、ソートされた結果のページ送りができます。例えば、複数のページにわたって価格順にソートされた商品リストを表示する場合、各ページには、重複やずれのない正しい価格順で次のバッチが表示されます。</p>
+<h4 id="Pagination-with-Sort" class="common-anchor-header">ソートによるページネーション</h4><p><code translate="no">limit</code> 、<code translate="no">offset</code> とともに<code translate="no">order_by</code> を使用すると、ソートされた結果のページ送りができます。例えば、価格順にソートされた商品リストを複数のページにわたって表示する場合、各ページには、重複やずれのない正しい価格順で次のバッチが表示されます。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Page 1</span>
@@ -449,7 +451,7 @@ page2 = client.query(
 <li><p><code translate="no">sum</code> および<code translate="no">avg</code> は数値のみです。<code translate="no">FLOAT</code> や<code translate="no">DOUBLE</code> などの数値フィールドに適用できますが、<code translate="no">VARCHAR</code> フィールドに適用するとエラーが返されます。</p></li>
 </ul>
 <p>集約を有効にするには、<code translate="no">group_by_fields</code> を<code translate="no">query()</code> に渡し、集約式 (<code translate="no">count(*)</code>,<code translate="no">count(&lt;field&gt;)</code>,<code translate="no">min(&lt;field&gt;)</code>,<code translate="no">max(&lt;field&gt;)</code>,<code translate="no">sum(&lt;field&gt;)</code>,<code translate="no">avg(&lt;field&gt;)</code>) を<code translate="no">output_fields</code> に追加します。</p>
-<p>次の例では、<code translate="no">color</code> フィールドによってエンティティをグループ化し、各色グループのエンティティの数を返す：</p>
+<p>次の例では、<code translate="no">color</code> フィールドによってエンティティをグループ化し、各色グループ内のエンティティの数を返す：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -787,6 +789,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/get&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -799,6 +802,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/get&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],

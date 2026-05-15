@@ -142,7 +142,7 @@ summary: >-
      <td><p>TTL на уровне сущности</p></td>
    </tr>
    <tr>
-     <td><p>Сохранение определяется временной меткой предприятия, а не временной меткой вставки</p></td>
+     <td><p>Хранение определяется временной меткой предприятия, а не временной меткой вставки</p></td>
      <td><p>TTL на уровне сущности</p></td>
    </tr>
    <tr>
@@ -282,6 +282,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -374,6 +375,7 @@ index_params.add_index(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;properties\&quot;: {
@@ -442,6 +444,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/drop_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;propertyKeys\&quot;: [
@@ -1100,7 +1103,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Исторические сущности, для которых вы не заполняете <code translate="no">expire_at</code>, будут иметь <code translate="no">NULL</code> в этом столбце, что означает, что срок их действия никогда не истечет. Заполняйте только те строки, которые должны иметь ограниченное время жизни.</p>
+<p>Исторические сущности, для которых вы не заполнили <code translate="no">expire_at</code>, будут иметь <code translate="no">NULL</code> в этом столбце, что означает, что срок их действия никогда не истечет. Заполняйте только те строки, которые должны иметь ограниченное время жизни.</p>
 <h3 id="Switch-from-entity-level-to-collection-level-TTL" class="common-anchor-header">Переход от TTL на уровне сущности к TTL на уровне коллекции<button data-href="#Switch-from-entity-level-to-collection-level-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

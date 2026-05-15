@@ -121,7 +121,7 @@ beta: Milvus 2.6.4+
 </table></p>
 <p>Bidang skalar dalam bidang Array of Structs tidak mendukung indeks.</p></li>
 <li><p><strong>Memasukkan data</strong></p>
-<p>Structs tidak mendukung upsert dalam mode penggabungan. Namun, Anda masih bisa melakukan upsert dalam mode timpa untuk memperbarui data di Structs. Untuk detail mengenai perbedaan antara upsert dalam mode penggabungan dan mode timpa, lihat <a href="/docs/id/upsert-entities.md#Overview">Upsert Entitas</a>.</p></li>
+<p>Structs tidak mendukung upsert dalam mode penggabungan. Namun, Anda masih bisa melakukan upsert dalam mode timpa untuk memperbarui data di Structs. Untuk detail mengenai perbedaan antara upsert dalam mode penggabungan dan mode timpa, lihat <a href="/docs/id/v2.6.x/upsert-entities.md#Overview">Upsert Entitas</a>.</p></li>
 <li><p><strong>Pemfilteran skalar</strong></p>
 <p>Anda tidak dapat menggunakan Array of Structs atau bidang apa pun di dalam elemen Struct dalam memfilter ekspresi di dalam pencarian dan kueri.</p></li>
 </ul>
@@ -378,7 +378,7 @@ SCHEMA=<span class="hljs-string">&#x27;{
         ></path>
       </svg>
     </button></h2><p>Pengindeksan wajib dilakukan untuk semua bidang vektor, termasuk bidang vektor di dalam koleksi dan bidang vektor yang didefinisikan di dalam elemen Struct.</p>
-<p>Parameter indeks yang berlaku bervariasi, tergantung jenis indeks yang digunakan. Untuk detail tentang parameter indeks yang berlaku, lihat <a href="/docs/id/index-explained.md">Penjelasan Indeks</a> dan halaman dokumentasi khusus untuk jenis indeks yang Anda pilih.</p>
+<p>Parameter indeks yang berlaku bervariasi, tergantung jenis indeks yang digunakan. Untuk detail tentang parameter indeks yang berlaku, lihat <a href="/docs/id/v2.6.x/index-explained.md">Penjelasan Indeks</a> dan halaman dokumentasi khusus untuk jenis indeks yang Anda pilih.</p>
 <p>Untuk mengindeks daftar sematan, Anda perlu menyetel jenis indeksnya ke <code translate="no">AUTOINDEX</code> atau <code translate="no">HNSW</code>, dan menggunakan <code translate="no">MAX_SIM_COSINE</code> sebagai jenis metrik untuk Milvus untuk mengukur kemiripan di antara daftar sematan.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -500,6 +500,7 @@ client.createCollection(requestCreate);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/create&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;description\&quot;: \&quot;A collection for storing book information with struct array chunks\&quot;,
@@ -615,6 +616,7 @@ row.add(<span class="hljs-string">&quot;chunks&quot;</span>, structArr);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/insert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -739,7 +741,7 @@ client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot
     </button></h2><p>Anda dapat melakukan pencarian vektor pada bidang vektor dari koleksi dan Array of Structs.</p>
 <p>Secara khusus, Anda harus menggabungkan nama bidang Array of Structs dan nama bidang vektor target di dalam elemen Struct sebagai nilai untuk parameter <code translate="no">anns_field</code> di dalam permintaan pencarian, dan menggunakan <code translate="no">EmbeddingList</code> untuk mengatur vektor kueri dengan rapi.</p>
 <div class="alert note">
-<p>Milvus menyediakan <code translate="no">EmbeddingList</code> untuk membantu Anda mengatur vektor kueri untuk pencarian terhadap daftar sematan dalam Array of Structs dengan lebih rapi. Setiap <code translate="no">EmbeddingList</code> berisi setidaknya sebuah vektor embedding dan mengharapkan sejumlah entitas topK sebagai balasannya.</p>
+<p>Milvus menyediakan <code translate="no">EmbeddingList</code> untuk membantu Anda mengatur vektor kueri untuk pencarian terhadap daftar sematan dalam Array of Structs dengan lebih rapi. Setiap <code translate="no">EmbeddingList</code> berisi setidaknya sebuah vektor penyematan dan mengharapkan sejumlah entitas topK sebagai balasannya.</p>
 <p>Namun, <code translate="no">EmbeddingList</code> hanya dapat digunakan dalam permintaan <code translate="no">search()</code> tanpa pencarian rentang atau pengelompokan parameter pencarian, apalagi permintaan <code translate="no">search_iterator()</code>.</p>
 </div>
 <div class="multipleCode">
@@ -807,6 +809,7 @@ embeddingList1=<span class="hljs-string">&#x27;[[0.2,0.9,0.4,-0.3,0.2]]&#x27;</s
 embeddingList2=<span class="hljs-string">&#x27;[[-0.2,-0.2,0.5,0.6,0.9],[-0.4,0.3,0.5,0.8,0.2]]&#x27;</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>],
@@ -911,6 +914,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>, <span class="hljs-variable">$embeddingList2</span>],
@@ -998,7 +1002,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>Pada contoh kode di atas, <code translate="no">embeddingList1</code> adalah daftar sematan satu vektor, sedangkan <code translate="no">embeddingList2</code> berisi dua vektor. Masing-masing memicu permintaan pencarian terpisah dan mengharapkan daftar entitas yang paling mirip.</p>
+<p>Pada contoh kode di atas, <code translate="no">embeddingList1</code> adalah daftar sematan satu vektor, sedangkan <code translate="no">embeddingList2</code> berisi dua vektor. Masing-masing memicu permintaan pencarian terpisah dan mengharapkan daftar entitas yang paling mirip dengan K teratas.</p>
 <h2 id="Next-steps" class="common-anchor-header">Langkah selanjutnya<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1014,4 +1018,4 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pengembangan tipe data Array of Structs merupakan kemajuan besar dalam kemampuan Milvus untuk menangani struktur data yang kompleks. Untuk lebih memahami kasus penggunaannya dan memaksimalkan fitur baru ini, Anda dianjurkan untuk membaca <a href="/docs/id/best-practices-for-array-of-structs.md">Desain Skema Menggunakan Array of Structs</a>.</p>
+    </button></h2><p>Pengembangan tipe data Array of Structs merupakan kemajuan besar dalam kemampuan Milvus untuk menangani struktur data yang kompleks. Untuk lebih memahami kasus penggunaannya dan memaksimalkan fitur baru ini, Anda dianjurkan untuk membaca <a href="/docs/id/v2.6.x/best-practices-for-array-of-structs.md">Desain Skema Menggunakan Array of Structs</a>.</p>

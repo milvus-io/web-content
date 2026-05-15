@@ -42,7 +42,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Cuando las entidades de los resultados de la búsqueda comparten el mismo valor en un campo escalar, esto indica que son similares en un atributo concreto, lo que puede afectar negativamente a los resultados de la búsqueda.</p>
-<p>Supongamos que una colección almacena varios documentos (denotados por <strong>docId</strong>). Para conservar tanta información semántica como sea posible al convertir los documentos en vectores, cada documento se divide en párrafos (o <strong>trozos</strong>) más pequeños y manejables y se almacenan como entidades independientes. Aunque el documento esté dividido en secciones más pequeñas, los usuarios suelen seguir interesados en identificar qué documentos son los más relevantes para sus necesidades.</p>
+<p>Supongamos que una colección almacena varios documentos (denotados por <strong>docId</strong>). Para conservar tanta información semántica como sea posible al convertir los documentos en vectores, cada documento se divide en párrafos (o <strong>trozos</strong>) más pequeños y manejables y se almacenan como entidades independientes. Aunque el documento esté dividido en secciones más pequeñas, a menudo los usuarios siguen interesados en identificar qué documentos son los más relevantes para sus necesidades.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ann-search.png" alt="Ann Search" class="doc-image" id="ann-search" />
@@ -218,6 +218,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -357,6 +358,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -396,5 +398,5 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <li><p><strong>Número de grupos</strong>: El parámetro <code translate="no">limit</code> controla el número de grupos a partir de los cuales se devuelven los resultados de la búsqueda, en lugar del número específico de entidades dentro de cada grupo. Establecer un <code translate="no">limit</code> adecuado ayuda a controlar la diversidad de la búsqueda y el rendimiento de la consulta. Reducir <code translate="no">limit</code> puede reducir los costes de cálculo si los datos están densamente distribuidos o el rendimiento es un problema.</p></li>
 <li><p><strong>Entidades por grupo</strong>: El parámetro <code translate="no">group_size</code> controla el número de entidades devueltas por grupo. Ajustar <code translate="no">group_size</code> en función de su caso de uso puede aumentar la riqueza de los resultados de búsqueda. Sin embargo, si los datos están distribuidos de forma desigual, algunos grupos pueden devolver menos entidades de las especificadas por <code translate="no">group_size</code>, especialmente en escenarios de datos limitados.</p></li>
 <li><p><strong>Tamaño de grupo estricto</strong>: En <code translate="no">strict_group_size=True</code>, el sistema intentará devolver el número especificado de entidades (<code translate="no">group_size</code>) para cada grupo, a menos que no haya suficientes datos en ese grupo. Esta configuración garantiza un recuento coherente de entidades por grupo, pero puede reducir el rendimiento en caso de distribución desigual de los datos o de recursos limitados. Si no se requiere un recuento estricto de entidades, la configuración de <code translate="no">strict_group_size=False</code> puede mejorar la velocidad de consulta.</p></li>
-<li><p>Si los vectores de consulta ya existen en la colección de destino, considere la posibilidad de utilizar <code translate="no">ids</code> en lugar de recuperarlos antes de las búsquedas. Para obtener más información, consulte <a href="/docs/es/primary-key-search.md">Búsqueda por clave principal</a>.</p></li>
+<li><p>Si los vectores de consulta ya existen en la colección de destino, considere la posibilidad de utilizar <code translate="no">ids</code> en lugar de recuperarlos antes de las búsquedas. Para obtener más información, consulte <a href="/docs/es/v2.6.x/primary-key-search.md">Búsqueda por clave principal</a>.</p></li>
 </ul>

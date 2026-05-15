@@ -94,7 +94,7 @@ summary: >-
 <li><p><strong>انتهاء الصلاحية في وقت العمل.</strong> يمثل الكيان سجلاً صالحًا فقط حتى لحظة ما مطلقة (انتهاء الحملة أو انتهاء صلاحية الجلسة).</p></li>
 </ul>
 <div class="alert note">
-<p>لن تظهر الكيانات منتهية الصلاحية في أي نتائج بحث أو استعلام. ومع ذلك، قد تبقى في المخزن حتى يتم ضغط البيانات اللاحق، والذي يجب أن يتم خلال الـ 24 ساعة القادمة.</p>
+<p>لن تظهر الكيانات منتهية الصلاحية في أي نتائج بحث أو استعلام. ومع ذلك، فإنها قد تبقى في المخزن حتى يتم ضغط البيانات اللاحق، والذي يجب أن يتم في غضون الـ 24 ساعة القادمة.</p>
 <p>يمكنك التحكم في وقت تشغيل ضغط البيانات عن طريق تعيين عنصر التكوين <code translate="no">dataCoord.compaction.expiry.tolerance</code> في ملف تكوين Milvus الخاص بك.</p>
 <p>يتم تعيين عنصر التكوين هذا افتراضيًا إلى <code translate="no">-1</code> ، مما يشير إلى تطبيق الفاصل الزمني الحالي لضغط البيانات. ومع ذلك، عندما تقوم بتغيير قيمته إلى عدد صحيح موجب، مثل <code translate="no">12</code> ، سيتم تشغيل ضغط البيانات بعدد الساعات المحددة بعد انتهاء صلاحية أي كيانات.</p>
 </div>
@@ -282,6 +282,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -374,6 +375,7 @@ index_params.add_index(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;properties\&quot;: {
@@ -442,6 +444,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/drop_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;propertyKeys\&quot;: [
@@ -660,7 +663,7 @@ List&lt;Float&gt; vector = <span class="hljs-keyword">new</span> <span class="hl
 <button class="copy-code-btn"></button></code></pre>
 <p>في كل استعلام وبحث متجه، يقوم الخادم تلقائيًا بإدخال عامل تصفية TTL - لا تكتب واحدًا بنفسك أبدًا، ولا تظهر الكيانات منتهية الصلاحية في النتائج أبدًا:</p>
 <div class="multipleCode">
-   <a href="#python">بيثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)

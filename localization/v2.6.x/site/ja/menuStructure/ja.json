@@ -646,7 +646,7 @@
             ]
           },
           {
-            "label": "コレクションフィールドの変更",
+            "label": "コレクション・フィールドの変更",
             "id": "alter-collection-field.md",
             "order": 15,
             "children": []
@@ -1979,7 +1979,7 @@
       {
         "label": "バードウォッチャー",
         "id": "birdwatcher",
-        "order": 2,
+        "order": 3,
         "children": [
           {
             "label": "概要",
@@ -1997,6 +1997,37 @@
             "label": "利用ガイド",
             "id": "birdwatcher_usage_guides.md",
             "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Milvus CDC",
+        "id": "milvus_cdc",
+        "order": 2,
+        "children": [
+          {
+            "label": "概要",
+            "id": "milvus_cdc_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "CDCレプリケーションのセットアップ",
+            "id": "set_up_cdc_replication.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "スイッチオーバー",
+            "id": "cdc_switchover.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "フェイルオーバー",
+            "id": "cdc_failover.md",
+            "order": 3,
             "children": []
           }
         ]

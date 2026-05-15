@@ -89,7 +89,7 @@ beta: Milvus 2.6.4+
 <td><p><code translate="no">BOOLEAN</code></p></td>
 </tr>
 </table></p>
-<p>保持 Collections 层面和 Structs 组合中的向量字段数量不大于或等于 10。</p></li>
+<p>无论是在 Collections 层面还是在 Structs 组合中，向量字段的数量都不得大于或等于 10。</p></li>
 <li><p><strong>可归零和默认值</strong></p>
 <p>数组结构体字段不可为空，也不接受任何默认值。</p></li>
 <li><p><strong>函数</strong></p>
@@ -117,7 +117,7 @@ beta: Milvus 2.6.4+
 </table></p>
 <p>结构数组字段中的标量字段不支持索引。</p></li>
 <li><p><strong>倒插数据</strong></p>
-<p>结构体在合并模式下不支持向上插入。但是，您仍然可以在覆盖模式下执行上插入操作，以更新 Structs 中的数据。有关合并模式下的<a href="/docs/zh/upsert-entities.md#Overview">upsert</a> 和覆盖模式下的<a href="/docs/zh/upsert-entities.md#Overview">upsert</a> 之间差异的详细信息，请参阅 "<a href="/docs/zh/upsert-entities.md#Overview">upsert 实体</a>"。</p></li>
+<p>结构体在合并模式下不支持向上插入。但是，您仍然可以在覆盖模式下执行上插入操作，以更新 Structs 中的数据。有关合并模式下的<a href="/docs/zh/v2.6.x/upsert-entities.md#Overview">upsert</a> 和覆盖模式下的<a href="/docs/zh/v2.6.x/upsert-entities.md#Overview">upsert</a> 之间差异的详细信息，请参阅 "<a href="/docs/zh/v2.6.x/upsert-entities.md#Overview">upsert 实体</a>"。</p></li>
 <li><p><strong>标量过滤</strong></p>
 <p>在搜索和查询的过滤表达式中，不能使用结构体数组或其结构体元素中的任何字段。</p></li>
 </ul>
@@ -374,7 +374,7 @@ SCHEMA=<span class="hljs-string">&#x27;{
         ></path>
       </svg>
     </button></h2><p>所有向量字段都必须设置索引，包括 Collections 中的向量字段和元素 Struct 中定义的向量字段。</p>
-<p>适用的索引参数因使用的索引类型而异。有关适用索引参数的详细信息，请参阅<a href="/docs/zh/index-explained.md">Index Explained</a>和所选索引类型的特定文档页面。</p>
+<p>适用的索引参数因使用的索引类型而异。有关适用索引参数的详细信息，请参阅<a href="/docs/zh/v2.6.x/index-explained.md">Index Explained</a>和所选索引类型的特定文档页面。</p>
 <p>要为嵌入列表建立索引，需要将其索引类型设为<code translate="no">AUTOINDEX</code> 或<code translate="no">HNSW</code> ，并使用<code translate="no">MAX_SIM_COSINE</code> 作为 Milvus 的度量类型，以衡量嵌入列表之间的相似性。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -496,6 +496,7 @@ client.createCollection(requestCreate);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/create&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;description\&quot;: \&quot;A collection for storing book information with struct array chunks\&quot;,
@@ -611,6 +612,7 @@ row.add(<span class="hljs-string">&quot;chunks&quot;</span>, structArr);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/insert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -803,6 +805,7 @@ embeddingList1=<span class="hljs-string">&#x27;[[0.2,0.9,0.4,-0.3,0.2]]&#x27;</s
 embeddingList2=<span class="hljs-string">&#x27;[[-0.2,-0.2,0.5,0.6,0.9],[-0.4,0.3,0.5,0.8,0.2]]&#x27;</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>],
@@ -907,6 +910,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>, <span class="hljs-variable">$embeddingList2</span>],
@@ -1010,4 +1014,4 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>本地结构数组数据类型的开发代表着 Milvus 处理复杂数据结构能力的重大进步。为更好地了解其使用案例并最大限度地利用这一新功能，我们建议您阅读《<a href="/docs/zh/best-practices-for-array-of-structs.md">使用结构数组的 Schema 设计</a>》。</p>
+    </button></h2><p>本地结构数组数据类型的开发代表着 Milvus 处理复杂数据结构能力的重大进步。为了更好地了解其使用案例并最大限度地利用这一新功能，我们建议您阅读《<a href="/docs/zh/v2.6.x/best-practices-for-array-of-structs.md">使用结构数组的 Schema 设计</a>》。</p>

@@ -75,7 +75,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Sie können auch das Kennzeichen <code translate="no">partial_update</code> verwenden, um eine Upsert-Anfrage im Merge-Modus zu bearbeiten. Dadurch können Sie nur die Felder, die aktualisiert werden müssen, in die Nutzlast der Anforderung aufnehmen.</p>
+    </button></h3><p>Sie können auch das Kennzeichen <code translate="no">partial_update</code> verwenden, um eine Upsert-Anfrage im Merge-Modus zu bearbeiten. Dadurch können Sie nur die Felder in die Nutzlast der Anforderung aufnehmen, die aktualisiert werden müssen.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-in-merge-mode.png" alt="Upsert In Merge Mode" class="doc-image" id="upsert-in-merge-mode" />
@@ -109,7 +109,7 @@ summary: >-
 <p>Angenommen, Sie haben den dynamischen Schlüssel in der Beispielsammlung aktiviert, und die Schlüssel-Wert-Paare im dynamischen Feld einer Entität sind ähnlich wie <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
 <p>Wenn Sie die Entität mit Schlüsseln wie <code translate="no">author</code>, <code translate="no">year</code> oder <code translate="no">tags</code> einfügen oder andere Schlüssel hinzufügen, beachten Sie Folgendes:</p>
 <ul>
-<li><p>Wenn Sie mit deaktiviertem <code translate="no">partial_update</code> einfügen, ist das Standardverhalten, dass das dynamische Feld <strong>überschrieben</strong> wird. Das bedeutet, dass der Wert des dynamischen Feldes von allen nicht schema-definierten Feldern, die in der Anfrage enthalten sind, und deren Werten überschrieben wird.</p>
+<li><p>Wenn Sie mit deaktiviertem <code translate="no">partial_update</code> einfügen, ist das Standardverhalten, dass das dynamische Feld <strong>überschrieben wird</strong>. Das bedeutet, dass der Wert des dynamischen Feldes von allen nicht schema-definierten Feldern, die in der Anfrage enthalten sind, und ihren Werten überschrieben wird.</p>
 <p>Wenn die in der Anfrage enthaltenen Daten beispielsweise <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code> sind, werden die Schlüssel-Wert-Paare im dynamischen Feld der Zielentität auf diesen Wert aktualisiert.</p></li>
 <li><p>Wenn Sie upsert mit <code translate="no">partial_update</code> aktivieren, ist das Standardverhalten das <strong>Zusammenführen</strong>. Das bedeutet, dass der Wert des dynamischen Feldes mit allen nicht schema-definierten Feldern, die in der Anfrage enthalten sind, und deren Werten zusammengeführt wird.</p>
 <p>Wenn die in der Anfrage enthaltenen Daten beispielsweise <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> sind, werden die Schlüssel-Wert-Paare im dynamischen Feld der Zielentität nach dem Upsert zu <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code>.</p></li>
@@ -303,6 +303,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/upsert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;title&quot;: &quot;Artificial Intelligence in Real Life&quot;, &quot;issue&quot;: &quot;vol.12&quot;},
@@ -339,7 +340,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie können Entitäten auch in eine bestimmte Partition einfügen. Die folgenden Codeschnipsel gehen davon aus, dass Sie eine Partition namens <strong>PartitionA</strong> in Ihrer Sammlung haben.</p>
+    </button></h2><p>Sie können auch Entitäten in eine bestimmte Partition einfügen. Die folgenden Codeschnipsel gehen davon aus, dass Sie eine Partition namens <strong>PartitionA</strong> in Ihrer Sammlung haben.</p>
 <p>Die drei Entitäten, falls in der Partition vorhanden, werden durch die in der Anfrage enthaltenen überschrieben.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -449,6 +450,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/upsert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 10, &quot;vector&quot;: [0.06998888224297328, 0.8582816610326578, -0.9657938677934292, 0.6527905683627726, -0.8668460657158576], &quot;title&quot;: &quot;Layour Design Reference&quot;, &quot;issue&quot;: &quot;vol.34&quot;},
@@ -591,6 +593,7 @@ _, err = client.Upsert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/upsert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,

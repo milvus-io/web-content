@@ -135,6 +135,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;userName&quot;: &quot;user_1&quot;,
     &quot;password&quot;: &quot;P@ssw0rd&quot;
@@ -198,6 +199,7 @@ client.updatePassword(updatePasswordReq);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/update_password&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;newPassword&quot;: &quot;P@ssw0rd!&quot;,
     &quot;userName&quot;: &quot;user_1&quot;,
@@ -240,6 +242,7 @@ client.list_users()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/list&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>A continuación se muestra un ejemplo de salida. <code translate="no">root</code> es el usuario por defecto generado automáticamente en Milvus. <code translate="no">user_1</code> es el nuevo usuario que se acaba de crear.</p>
@@ -279,7 +282,7 @@ client.list_users()
     </button></h3><p>El siguiente ejemplo muestra cómo crear un rol denominado <code translate="no">role_a</code>.</p>
 <p>El nombre del rol debe seguir la siguiente regla</p>
 <ul>
-<li>Debe empezar por una letra y sólo puede incluir letras mayúsculas o minúsculas, números y guiones bajos.</li>
+<li>Debe comenzar con una letra y sólo puede incluir letras mayúsculas o minúsculas, números y guiones bajos.</li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -308,6 +311,7 @@ client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;
 }&#x27;</span>
@@ -350,6 +354,7 @@ client.list_roles()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/list&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>A continuación se muestra un ejemplo de salida. <code translate="no">admin</code> es el rol por defecto en Milvus. <code translate="no">role_a</code> es el nuevo rol que se acaba de crear.</p>

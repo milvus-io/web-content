@@ -439,7 +439,7 @@ title: Terminología
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus<a href="https://milvus.io/docs/milvus-cdc-overview.md">CDC</a> (Change data capture) es una herramienta fácil de usar que puede capturar y sincronizar datos incrementales en instancias de Milvus. Garantiza la fiabilidad de los datos empresariales transfiriéndolos sin problemas entre las instancias de origen y de destino, lo que permite realizar fácilmente copias de seguridad incrementales y recuperaciones en caso de desastre.</p>
+    </button></h2><p><a href="https://milvus.io/docs/milvus_cdc_overview.md">Milvus CDC</a> (captura de datos de cambio) es una herramienta utilizada para replicar los cambios de datos de un clúster Milvus a otro para la recuperación de desastres primaria-standby.</p>
 <h2 id="Milvus-CLI" class="common-anchor-header">Milvus CLI<button data-href="#Milvus-CLI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -455,7 +455,7 @@ title: Terminología
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/cli_overview.md">La interfaz de línea de comandos</a> (CLI) de<a href="https://milvus.io/docs/cli_overview.md">Milvus</a> es una herramienta de línea de comandos que admite la conexión a bases de datos, operaciones de datos e importación y exportación de datos. Basada en <a href="https://github.com/milvus-io/pymilvus">Milvus Python SDK</a>, permite la ejecución de comandos a través de un terminal utilizando indicaciones interactivas de línea de comandos.</p>
+    </button></h2><p><a href="https://milvus.io/docs/cli_overview.md">Milvus Command-Line Interface</a> (CLI) es una herramienta de línea de comandos que soporta la conexión a bases de datos, operaciones de datos e importación y exportación de datos. Basada en <a href="https://github.com/milvus-io/pymilvus">Milvus Python SDK</a>, permite la ejecución de comandos a través de un terminal utilizando indicaciones interactivas de línea de comandos.</p>
 <h2 id="Milvus-Migration" class="common-anchor-header">Milvus Migration<button data-href="#Milvus-Migration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -471,7 +471,7 @@ title: Terminología
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus<a href="https://github.com/zilliztech/milvus-migration/">Migration</a> es una herramienta de código abierto diseñada para facilitar la migración de datos desde varias fuentes de datos a Milvus 2.x.</p>
+    </button></h2><p>Milvus<a href="https://github.com/zilliztech/milvus-migration/">Migration</a> es una herramienta de código abierto diseñada para facilitar la migración de datos de varias fuentes de datos a Milvus 2.x.</p>
 <h2 id="Milvus-cluster" class="common-anchor-header">Cluster de Milvus<button data-href="#Milvus-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -793,7 +793,7 @@ title: Terminología
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un vector de incrustación es una abstracción de características de datos no estructurados, como correos electrónicos, datos de sensores IoT, fotos de Instagram, estructuras de proteínas, etc. Matemáticamente hablando, un vector de incrustación es una matriz de números en coma flotante o binarios. Las técnicas modernas de incrustación se utilizan para convertir datos no estructurados en vectores de incrustación. Milvus soporta tanto vectores densos como dispersos desde 2.4.0.</p>
+    </button></h2><p>Un vector de incrustación es una abstracción de características de datos no estructurados, como correos electrónicos, datos de sensores IoT, fotos de Instagram, estructuras de proteínas, etc. Matemáticamente hablando, un vector de incrustación es una matriz de números en coma flotante o binarios. Las técnicas modernas de incrustación se utilizan para convertir datos no estructurados en vectores de incrustación. Milvus soporta tanto vectores densos como dispersos desde la versión 2.4.0.</p>
 <h2 id="WAL-Storage" class="common-anchor-header">Almacenamiento WAL<button data-href="#WAL-Storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -2,8 +2,8 @@
 id: bm25-function.md
 title: BM25 기능
 summary: >-
-  BM25 기능은 원시 텍스트를 희소 벡터로 변환하고 어휘 관련성에 따라 문서에 점수를 매겨 전체 텍스트 검색을 가능하게 합니다. 용어 기반
-  매칭과 빈도 인식 가중치를 적용하여 쿼리 용어와 밀접하게 일치하는 텍스트 문서를 효율적으로 검색할 수 있도록 지원합니다.
+  BM25 기능은 원시 텍스트를 희소 벡터로 변환하고 어휘 관련성을 기반으로 문서에 점수를 매겨 전체 텍스트 검색을 가능하게 합니다. 용어
+  기반 매칭과 빈도 인식 가중치를 적용하여 쿼리 용어와 밀접하게 일치하는 텍스트 문서를 효율적으로 검색할 수 있도록 지원합니다.
 ---
 <h1 id="BM25-Function" class="common-anchor-header">BM25 기능<button data-href="#BM25-Function" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>BM25 기능은</strong> 원시 텍스트를 희소 <strong>벡터로</strong> 변환하고 어휘 관련성에 따라 문서에 점수를 매겨 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 가능하게 합니다. 용어 기반 매칭과 빈도 인식 가중치를 적용하여 쿼리 용어와 밀접하게 일치하는 텍스트 문서를 효율적으로 검색할 수 있도록 지원합니다.</p>
+    </button></h1><p><strong>BM25 기능은</strong> 원시 텍스트를 희소 <strong>벡터로</strong> 변환하고 어휘 관련성을 기반으로 문서에 점수를 매겨 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 가능하게 합니다. 용어 기반 매칭과 빈도 인식 가중치를 적용하여 쿼리 용어와 밀접하게 일치하는 텍스트 문서를 효율적으로 검색할 수 있도록 지원합니다.</p>
 <p>로컬 텍스트 함수인 BM25 함수는 Milvus 내에서 실행되며 모델 추론이나 외부 통합이 필요하지 않습니다. 이 기능은 텍스트 기반 검색 시나리오를 위한 결정론적이고 투명한 검색 메커니즘을 제공합니다.</p>
 <h2 id="How-BM25-works" class="common-anchor-header">BM25 작동 방식<button data-href="#How-BM25-works" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -493,6 +493,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -553,6 +554,7 @@ client.insert(InsertReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;text&quot;: &quot;information retrieval is a field of study.&quot;},
@@ -642,6 +644,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data-raw <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

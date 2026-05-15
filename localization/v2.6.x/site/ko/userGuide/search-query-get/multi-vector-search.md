@@ -30,7 +30,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>하이브리드 검색 워크플로</span> </span></p>
 <p>다중 벡터 하이브리드 검색은 서로 다른 검색 방법을 통합하거나 다양한 양식의 임베딩을 포괄합니다:</p>
 <ul>
-<li><p><strong>스파스-밀도 벡터 검색</strong>: <a href="/docs/ko/dense-vector.md">고밀도 벡터는</a> 의미론적 관계를 포착하는 데 탁월한 반면, <a href="/docs/ko/sparse_vector.md">스파스 벡터는</a> 정확한 키워드 매칭에 매우 효과적입니다. 하이브리드 검색은 이러한 접근 방식을 결합하여 폭넓은 개념 이해와 정확한 용어 관련성을 모두 제공함으로써 검색 결과를 개선합니다. 하이브리드 검색은 각 방법의 강점을 활용함으로써 개별 접근 방식의 한계를 극복하고 복잡한 쿼리에 대해 더 나은 성능을 제공합니다. 시맨틱 검색과 전체 텍스트 검색을 결합한 하이브리드 검색에 대한 자세한 <a href="/docs/ko/full_text_search_with_milvus.md">가이드는</a> 다음과 같습니다.</p></li>
+<li><p><strong>스파스-밀도 벡터 검색</strong>: <a href="/docs/ko/v2.6.x/dense-vector.md">고밀도 벡터는</a> 의미론적 관계를 포착하는 데 탁월한 반면, <a href="/docs/ko/v2.6.x/sparse_vector.md">스파스 벡터는</a> 정확한 키워드 매칭에 매우 효과적입니다. 하이브리드 검색은 이러한 접근 방식을 결합하여 폭넓은 개념 이해와 정확한 용어 관련성을 모두 제공함으로써 검색 결과를 개선합니다. 하이브리드 검색은 각 방법의 강점을 활용함으로써 개별 접근 방식의 한계를 극복하고 복잡한 쿼리에 대해 더 나은 성능을 제공합니다. 시맨틱 검색과 전체 텍스트 검색을 결합한 하이브리드 검색에 대한 자세한 <a href="/docs/ko/v2.6.x/full_text_search_with_milvus.md">가이드는</a> 다음과 같습니다.</p></li>
 <li><p><strong>멀티모달 벡터 검색</strong>: 멀티모달 벡터 검색은 텍스트, 이미지, 오디오 등 다양한 데이터 유형에 걸쳐 검색할 수 있는 강력한 기술입니다. 이 접근 방식의 가장 큰 장점은 다양한 방식을 매끄럽고 일관된 검색 환경으로 통합할 수 있다는 점입니다. 예를 들어, 제품 검색에서 사용자가 텍스트 쿼리를 입력하면 텍스트와 이미지로 설명된 제품을 모두 찾을 수 있습니다. 하이브리드 검색 방식을 통해 이러한 검색 방식을 결합하면 검색 정확도를 높이거나 검색 결과를 더욱 풍부하게 만들 수 있습니다.</p></li>
 </ul>
 <h2 id="Example" class="common-anchor-header">예시<button data-href="#Example" class="anchor-icon" translate="no">
@@ -86,7 +86,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>다중 벡터 하이브리드 검색의 경우 컬렉션 스키마 내에 여러 개의 벡터 필드를 정의해야 합니다. 컬렉션에 허용되는 벡터 필드 개수 제한에 대한 자세한 내용은 <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">질리즈 클라우드 제한을</a> 참조하세요.  그러나 필요한 경우, 컬렉션에 최대 10개까지 벡터 필드를 포함하도록 <a href="/docs/ko/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> 를 조정하여 필요에 따라 컬렉션에 최대 10개까지 벡터 필드를 포함할 수 있습니다.</p>
+    </button></h3><p>다중 벡터 하이브리드 검색의 경우 컬렉션 스키마 내에 여러 개의 벡터 필드를 정의해야 합니다. 컬렉션에 허용되는 벡터 필드 개수 제한에 대한 자세한 내용은 <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">질리즈 클라우드 제한을</a> 참조하세요.  그러나 필요한 경우, 컬렉션에 최대 10개까지 벡터 필드를 포함하도록 <a href="/docs/ko/v2.6.x/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> 를 조정하여 필요에 따라 컬렉션에 최대 10개까지 벡터 필드를 포함할 수 있습니다.</p>
 <p>이 예제에서는 다음 필드를 스키마에 포함합니다:</p>
 <ul>
 <li><p><code translate="no">id</code>: 텍스트 ID를 저장하는 기본 키 역할을 합니다. 이 필드의 데이터 유형은 <code translate="no">INT64</code> 입니다.</p></li>
@@ -95,7 +95,7 @@ summary: >-
 <li><p><code translate="no">text_sparse</code>: 텍스트의 스파스 벡터를 저장하는 데 사용됩니다. 이 필드는 데이터 유형 <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 <li><p><code translate="no">image_dense</code>: 제품 이미지의 고밀도 벡터를 저장하는 데 사용됩니다. 이 필드는 벡터 차원이 512인 데이터 유형 <code translate="no">FLOAT_VETOR</code> 입니다.</p></li>
 </ul>
-<p>텍스트 필드에서 전체 텍스트 검색을 수행하기 위해 기본 제공 BM25 알고리즘을 사용하므로 스키마에 Milvus <code translate="no">Function</code> 를 추가해야 합니다. 자세한 내용은 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p>
+<p>텍스트 필드에서 전체 텍스트 검색을 수행하기 위해 기본 제공 BM25 알고리즘을 사용하므로 스키마에 Milvus <code translate="no">Function</code> 를 추가해야 합니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
@@ -349,7 +349,7 @@ schema.WithField(entity.NewField().
 <li><p><code translate="no">text_sparse_index</code>: <code translate="no">BM25</code> 메트릭 유형이<code translate="no">SPARSE_INVERTED_INDEX</code>유형의 인덱스가 텍스트 스파스 벡터 필드에 사용됩니다.</p></li>
 <li><p><code translate="no">image_dense_index</code>이미지 고밀도 벡터 필드에 대해 <code translate="no">IP</code> 메트릭 유형이 포함된 <code translate="no">AUTOINDEX</code> 유형의 인덱스가 생성됩니다.</p></li>
 </ul>
-<p>필요와 데이터 유형에 가장 적합하도록 필요에 따라 다른 인덱스 유형을 선택할 수 있습니다. 지원되는 인덱스 유형에 대한 자세한 내용은 <a href="/docs/ko/index-vector-fields.md">사용 가능한 인덱스 유형에</a> 대한 설명서를 참조하세요.</p>
+<p>필요와 데이터 유형에 가장 적합하도록 필요에 따라 다른 인덱스 유형을 선택할 수 있습니다. 지원되는 인덱스 유형에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/index-vector-fields.md">사용 가능한 인덱스 유형에</a> 대한 설명서를 참조하세요.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
@@ -514,6 +514,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -649,6 +650,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;text&quot;: &quot;Red cotton t-shirt with round neck&quot; , &quot;text_dense&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, ...], &quot;image_dense&quot;: [0.6366019600530924, -0.09323198122475052, ...]},
@@ -689,7 +691,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
         ></path>
       </svg>
     </button></h3><p>하이브리드 검색은 <code translate="no">hybrid_search()</code> 함수에서 여러 개의 <code translate="no">AnnSearchRequest</code> 을 생성하여 구현되며, 각 <code translate="no">AnnSearchRequest</code> 은 특정 벡터 필드에 대한 기본 ANN 검색 요청을 나타냅니다. 따라서 하이브리드 검색을 수행하기 전에 각 벡터 필드에 대해 <code translate="no">AnnSearchRequest</code> 을 생성해야 합니다.</p>
-<p>또한 <code translate="no">AnnSearchRequest</code> 에서 <code translate="no">expr</code> 파라미터를 구성하여 하이브리드 검색의 필터링 조건을 설정할 수 있습니다. <a href="/docs/ko/filtered-search.md">필터링된 검색</a> 및 <a href="/docs/ko/boolean.md">필터링 설명을</a> 참조하세요.</p>
+<p>또한 <code translate="no">AnnSearchRequest</code> 에서 <code translate="no">expr</code> 파라미터를 구성하여 하이브리드 검색의 필터링 조건을 설정할 수 있습니다. <a href="/docs/ko/v2.6.x/filtered-search.md">필터링된 검색</a> 및 <a href="/docs/ko/v2.6.x/boolean.md">필터링 설명을</a> 참조하세요.</p>
 <div class="alert note">
 <p>하이브리드 검색에서 각 <code translate="no">AnnSearchRequest</code> 은 하나의 쿼리 데이터만 지원합니다.</p>
 </div>
@@ -843,7 +845,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>ANN 검색 결과 집합을 병합하고 재랭크하려면 적절한 재랭크 전략을 선택하는 것이 필수적입니다. Milvus는 여러 유형의 재랭크 전략을 제공합니다. 이러한 재랭크 메커니즘에 대한 자세한 내용은 <a href="/docs/ko/weighted-ranker.md">가중치 랭커</a> 또는 <a href="/docs/ko/rrf-ranker.md">RRF 랭커를</a> 참조하세요.</p>
+    </button></h3><p>ANN 검색 결과 집합을 병합하고 재랭크하려면 적절한 재랭크 전략을 선택하는 것이 필수적입니다. Milvus는 여러 유형의 재랭크 전략을 제공합니다. 이러한 재랭크 메커니즘에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/weighted-ranker.md">가중치 랭커</a> 또는 <a href="/docs/ko/v2.6.x/rrf-ranker.md">RRF 랭커를</a> 참조하세요.</p>
 <p>이 예제에서는 특정 검색어에 특별히 중점을 두지 않으므로 RRFRanker 전략으로 진행하겠습니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -982,6 +984,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/hybrid_search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;search\&quot;: <span class="hljs-variable">${req}</span>,
@@ -1027,7 +1030,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h3><p>컬렉션에 <code translate="no">TIMESTAMPTZ</code> 필드가 있는 경우 하이브리드 검색 호출에서 <code translate="no">timezone</code> 매개변수를 설정하여 단일 작업에 대해 데이터베이스 또는 컬렉션 기본 시간대를 일시적으로 재정의할 수 있습니다. 이렇게 하면 작업 중에 <code translate="no">TIMESTAMPTZ</code> 값이 표시되고 비교되는 방식이 제어됩니다.</p>
-<p><code translate="no">timezone</code> 값은 유효한 <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 표준 시간대 식별자</a> (예: <strong>아시아/상하이</strong>, <strong>미국/시카고</strong> 또는 <strong>UTC</strong>)여야 합니다. <code translate="no">TIMESTAMPTZ</code> 필드 사용 방법에 대한 자세한 내용은 <a href="/docs/ko/timestamptz-field.md">TIMESTAMPTZ 필드를</a> 참조하세요.</p>
+<p><code translate="no">timezone</code> 값은 유효한 <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 표준 시간대 식별자</a> (예: <strong>아시아/상하이</strong>, <strong>미국/시카고</strong> 또는 <strong>UTC</strong>)여야 합니다. <code translate="no">TIMESTAMPTZ</code> 필드 사용 방법에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/timestamptz-field.md">TIMESTAMPTZ 필드를</a> 참조하세요.</p>
 <p>아래 예는 하이브리드 검색 작업을 위해 임시로 시간대를 설정하는 방법을 보여줍니다:</p>
 <pre><code translate="no" class="language-python">res = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,

@@ -84,7 +84,7 @@ summary: >-
     </button></h2><p>Milvusは初日から非常に効率的なベクトルデータベースシステムとして設計されました。ほとんどの場合、Milvusは他のベクトルデータベースを2～5倍凌駕しています（VectorDBBenchの結果を参照）。この高い性能は、いくつかの重要な設計上の決定の結果です：</p>
 <p><strong>ハードウェアを考慮した最適化</strong>：Milvusを様々なハードウェア環境に対応させるため、AVX512、SIMD、GPU、NVMe SSDなど、多くのハードウェアアーキテクチャとプラットフォームに特化して性能を最適化しました。</p>
 <p><strong>高度な検索アルゴリズム</strong>：milvusは、IVF、HNSW、DiskANNなど、幅広いインメモリおよびオンディスクインデックス/検索アルゴリズムをサポートしており、そのすべてが深く最適化されています。FAISSやHNSWLibのような一般的な実装と比較して、Milvusは30%から70%の性能向上を実現しています。</p>
-<p><strong>C++の検索エンジン</strong>：ベクトルデータベースの性能の80%以上は検索エンジンによって決まります。Milvusは、高性能、低レベル最適化、効率的なリソース管理のために、この重要なコンポーネントにC++を使用しています。最も重要な点として、Milvusはハードウェアの能力をフルに活用するために、アセンブリレベルのベクトル化からマルチスレッド並列化、スケジューリングに至るまで、ハードウェアを意識した数多くのコード最適化を統合しています。</p>
+<p><strong>C++の検索エンジン</strong>：ベクトルデータベースの性能の80%以上は検索エンジンによって決まります。Milvusは、高性能、低レベル最適化、効率的なリソース管理のために、この重要なコンポーネントにC++を使用しています。最も重要なことは、Milvusはハードウェアの能力を十分に活用するために、アセンブリレベルのベクトル化からマルチスレッド並列化、スケジューリングに至るまで、ハードウェアを意識した数多くのコード最適化を統合していることです。</p>
 <p><strong>列指向</strong>：Milvusは列指向のベクトルデータベースシステムです。主な利点はデータアクセスパターンにある。クエリを実行する際、列指向データベースは行全体ではなく、クエリに関係する特定のフィールドのみを読み込むため、アクセスされるデータ量が大幅に削減される。さらに、列ベースのデータに対する操作は簡単にベクトル化することができるため、列全体に一度に操作を適用することができ、パフォーマンスをさらに向上させることができます。</p>
 <h2 id="What-Makes-Milvus-so-Scalable" class="common-anchor-header">Milvusがスケーラブルである理由<button data-href="#What-Makes-Milvus-so-Scalable" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -220,7 +220,7 @@ summary: >-
 <li><p><strong>様々なベクターインデックスタイプのサポートとハードウェアアクセラレーション</strong></p>
 <p>Milvusはシステムとコアベクトルサーチエンジンを分離しているため、HNSW、IVF、FLAT（ブルートフォース）、SCANN、DiskANN、<a href="/docs/ja/index-explained.md">量子化ベースの</a>バリエーションや<a href="/docs/ja/mmap.md">mmapなど</a>、さまざまなシナリオに最適化された主要なベクトルインデックスタイプをすべてサポートすることができます。Milvusは、<a href="/docs/ja/boolean.md">メタデータフィルタリングや</a> <a href="/docs/ja/range-search.md">範囲検索などの</a>高度な機能のためにベクトル検索を最適化します。さらに、Milvusはベクトル検索のパフォーマンスを向上させるハードウェアアクセラレーションを実装し、NVIDIAの<a href="/docs/ja/gpu-cagra.md">CAGRAの</a>ようなGPUインデックスをサポートします。</p></li>
 <li><p><strong>柔軟なマルチテナンシーとホット/コールドストレージ</strong></p>
-<p>Milvusはデータベース、コレクション、パーティション、パーティションキーレベルでの分離により<a href="/docs/ja/multi_tenancy.md#Multi-tenancy-strategies">マルチテナントを</a>サポートします。この柔軟な戦略により、単一のクラスタで数百から数百万のテナントを処理することができ、最適化された検索パフォーマンスと柔軟なアクセス制御を保証します。Milvusはホット/コールドストレージによりコスト効率を高めます。頻繁にアクセスされるホットデータはメモリまたはSSDに保存してパフォーマンスを向上させ、アクセス頻度の低いコールドデータは低速でコスト効率の高いストレージに保存します。このメカニズムにより、重要なタスクに対して高いパフォーマンスを維持しながら、コストを大幅に削減することができます。</p></li>
+<p>Milvusはデータベース、コレクション、パーティション、パーティションキーレベルでの分離により<a href="/docs/ja/multi_tenancy.md#Multi-tenancy-strategies">マルチテナントを</a>サポートします。この柔軟な戦略により、単一のクラスタで数百から数百万のテナントを扱うことができ、最適化された検索パフォーマンスと柔軟なアクセス制御も保証します。Milvusはホット/コールドストレージによりコスト効率を高めます。頻繁にアクセスされるホットデータはメモリまたはSSDに保存してパフォーマンスを向上させ、アクセス頻度の低いコールドデータは低速でコスト効率の高いストレージに保存します。このメカニズムにより、重要なタスクに対して高いパフォーマンスを維持しながら、コストを大幅に削減することができます。</p></li>
 <li><p><strong>全文検索とハイブリッド検索のためのスパース・ベクトル</strong></p>
 <p>密なベクトルによるセマンティック検索に加えて、MilvusはSPLADEやBGE-M3のような学習されたスパース埋め込みだけでなく、BM25による<a href="/docs/ja/full-text-search.md">全文検索も</a>ネイティブにサポートしています。ユーザはスパースベクタと密なベクタを同じコレクションに格納し、複数の検索リクエストの結果を再ランク付けする関数を定義することができます。<a href="/docs/ja/full_text_search_with_milvus.md">セマンティック検索＋全文検索のハイブリッド検索の</a>例をご覧ください。</p></li>
 <li><p><strong>データセキュリティときめ細かなアクセス制御</strong></p>
@@ -266,7 +266,7 @@ summary: >-
 <li><p>Birdwatcher BirdwatcherはMilvusのデバッグツールです。etcdに接続することで、Milvusシステムの状態を確認したり、その場で設定を行うことができます。詳細は<a href="/docs/ja/birdwatcher_overview.md">BirdWatcherを</a>ご参照ください。</p></li>
 <li><p>PromethusとGrafanaの統合 PrometheusはKubernetesのためのオープンソースのシステム監視とアラートツールキットです。Grafanaはオープンソースの可視化スタックで、あらゆるデータソースと接続できます。PromethusとGrafanaを監視サービスプロバイダとして利用することで、分散したMilvusのパフォーマンスを視覚的に監視することができます。詳細については、<a href="/docs/ja/monitor.md">監視サービスのデプロイを</a>参照してください。</p></li>
 <li><p>Milvusバックアップ Milvusバックアップは、Milvusデータのバックアップとリストアを可能にするツールです。CLIとAPIの両方を提供し、様々なアプリケーションシナリオに対応します。詳細は<a href="/docs/ja/milvus_backup_overview.md">Milvus Backupを</a>ご参照ください。</p></li>
-<li><p>Milvus Capture Data Change (CDC) Milvus-CDCはMilvusインスタンス内の増分データをキャプチャして同期し、ソースインスタンスとターゲットインスタンス間でシームレスに転送することでビジネスデータの信頼性を確保し、増分バックアップやディザスタリカバリを容易に行うことができます。詳細は<a href="/docs/ja/milvus-cdc-overview.md">Milvus CDCを</a>ご参照ください。</p></li>
-<li><p>Milvusコネクタ Milvusは、MilvusとApache Sparkなどのサードパーティツールをシームレスに統合するためのコネクタ群を計画しています。現在、Spark Connectorを使用することで、MilvusのデータをApache Sparkに供給し、機械学習処理を行うことができます。詳細は<a href="/docs/ja/integrate_with_spark.md">Spark-Milvus Connectorを</a>ご参照ください。</p></li>
+<li><p>Milvus Capture Data Change (CDC) Milvus CDCはMilvusクラスタ間のデータ変更をレプリケートし、プライマリ・スタンバイのディザスタリカバリを実現します。詳細は<a href="/docs/ja/milvus_cdc_overview.md">Milvus CDCを</a>ご参照ください。</p></li>
+<li><p>Milvusコネクタ Milvusは、MilvusとApache Sparkなどのサードパーティツールをシームレスに統合するためのコネクタを計画しています。現在、Spark Connectorを使用することで、MilvusのデータをApache Sparkに供給し、機械学習処理を行うことができます。詳細は<a href="/docs/ja/integrate_with_spark.md">Spark-Milvus Connectorを</a>ご参照ください。</p></li>
 <li><p>Vector Transmission Services (VTS) Milvusは、MilvusインスタンスとZillizクラスタ、Elasticsearch、Postgres (PgVector)、別のMilvusインスタンスなどのデータソース間でデータを転送するためのツールセットを提供しています。詳細は<a href="https://github.com/zilliztech/vts">VTSを</a>ご参照ください。</p></li>
 </ul>

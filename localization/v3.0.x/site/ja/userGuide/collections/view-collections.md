@@ -106,9 +106,10 @@ fmt.Println(collectionNames)
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/list&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">quick_setup</code> という名前のコレクションを既に作成している場合、上記の例の結果は以下のようになるはずです。</p>
+<p>すでに<code translate="no">quick_setup</code> という名前のコレクションを作成している場合、上記の例の結果は以下のようになるはずです。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span><span class="hljs-string">&quot;quick_setup&quot;</span><span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Describe-Collection" class="common-anchor-header">コレクションの記述<button data-href="#Describe-Collection" class="anchor-icon" translate="no">
@@ -162,6 +163,7 @@ fmt.Println(collection)
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/describe&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;
 }&#x27;</span>

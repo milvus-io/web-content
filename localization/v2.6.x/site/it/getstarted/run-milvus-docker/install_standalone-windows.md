@@ -189,7 +189,7 @@ Delete successfully.​
 <li><p>Aprire Docker Desktop in modalità amministratore facendo clic con il pulsante destro del mouse e selezionando <strong>Esegui come amministratore</strong>.</p></li>
 <li><p>Eseguite i seguenti comandi in PowerShell o nel Prompt dei comandi di Windows per scaricare il file di configurazione di Docker Compose per Milvus Standalone e avviare Milvus.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.15/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.16/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -230,7 +230,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Scaricare il file di configurazione di Milvus.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.15/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.16/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Avviare Milvus.</p>
@@ -331,7 +331,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/docker-desktop-wsl-01.png" alt="Use the WSL 2 based engine in Docker Desktop Settings" class="doc-image" id="use-the-wsl-2-based-engine-in-docker-desktop-settings" />
-   </span> <span class="img-wrapper"> <span>Utilizzare il motore basato su WSL 2 nelle impostazioni di Docker Desktop</span> </span></p></li>
+   </span> <span class="img-wrapper"> <span>Utilizzare il motore basato su WSL 2 in Impostazioni di Docker Desktop</span> </span></p></li>
 <li><p>Selezionate tra le distribuzioni WSL 2 installate quella su cui volete abilitare l'integrazione di Docker andando in: <strong>Impostazioni</strong> &gt; <strong>Risorse</strong> &gt; <strong>Integrazione WSL</strong>.</p>
 <p>
   
@@ -356,7 +356,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
     </button></h3><p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" />
-   </span> <span class="img-wrapper"> <span>Errore di lettura della configurazione non riuscito all'avvio di Milvus</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Errore di lettura della configurazione fallito all'avvio di Milvus</span> </span></p>
 <p>Per risolvere l'errore visualizzato all'avvio di Milvus, che recita "Read config failed", è necessario verificare se il volume montato nel contenitore Milvus è corretto. Se il volume è montato correttamente nel contenitore, si può usare il comando <code translate="no">docker exec</code> per entrare nel contenitore ed elencare la cartella <strong>/milvus/configs</strong> come segue.</p>
 <p>
   
@@ -380,27 +380,27 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
       </svg>
     </button></h2><p>Dopo aver installato Milvus in Docker, è possibile:</p>
 <ul>
-<li><p>Controllare <a href="/docs/it/quickstart.md">Quickstart</a> per vedere cosa può fare Milvus.</p></li>
+<li><p>Controllare <a href="/docs/it/v2.6.x/quickstart.md">Quickstart</a> per vedere cosa può fare Milvus.</p></li>
 <li><p>Imparare le operazioni di base di Milvus:</p>
 <ul>
-<li><a href="/docs/it/manage_databases.md">Gestire i database</a></li>
-<li><a href="/docs/it/manage-collections.md">Gestire le collezioni</a></li>
-<li><a href="/docs/it/manage-partitions.md">Gestire le partizioni</a></li>
-<li><a href="/docs/it/insert-update-delete.md">Inserire, inserire ed eliminare</a></li>
-<li><a href="/docs/it/single-vector-search.md">Ricerca a vettore singolo</a></li>
-<li><a href="/docs/it/multi-vector-search.md">Ricerca ibrida</a></li>
+<li><a href="/docs/it/v2.6.x/manage_databases.md">Gestire i database</a></li>
+<li><a href="/docs/it/v2.6.x/manage-collections.md">Gestire le collezioni</a></li>
+<li><a href="/docs/it/v2.6.x/manage-partitions.md">Gestire le partizioni</a></li>
+<li><a href="/docs/it/v2.6.x/insert-update-delete.md">Inserire, inserire ed eliminare</a></li>
+<li><a href="/docs/it/v2.6.x/single-vector-search.md">Ricerca a vettore singolo</a></li>
+<li><a href="/docs/it/v2.6.x/multi-vector-search.md">Ricerca ibrida</a></li>
 </ul></li>
-<li><p><a href="/docs/it/upgrade_milvus_cluster-helm.md">Aggiornare Milvus usando Helm Chart</a>.</p></li>
-<li><p><a href="/docs/it/scaleout.md">Scalare il cluster Milvus</a>.</p></li>
+<li><p><a href="/docs/it/v2.6.x/upgrade_milvus_cluster-helm.md">Aggiornare Milvus usando Helm Chart</a>.</p></li>
+<li><p><a href="/docs/it/v2.6.x/scaleout.md">Scalare il cluster Milvus</a>.</p></li>
 <li><p>Distribuire il cluster Milvus su cloud:</p>
 <ul>
-<li><a href="/docs/it/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/it/gcp.md">Google Cloud</a></li>
-<li><a href="/docs/it/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/it/v2.6.x/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/it/v2.6.x/gcp.md">Google Cloud</a></li>
+<li><a href="/docs/it/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Esplorate <a href="/docs/it/milvus-webui.md">Milvus WebUI</a>, un'interfaccia web intuitiva per l'osservabilità e la gestione di Milvus.</p></li>
-<li><p>Esplorate <a href="/docs/it/milvus_backup_overview.md">Milvus Backup</a>, uno strumento open-source per il backup dei dati Milvus.</p></li>
-<li><p>Esplorate <a href="/docs/it/birdwatcher_overview.md">Birdwatcher</a>, uno strumento open-source per il debug di Milvus e gli aggiornamenti dinamici della configurazione.</p></li>
+<li><p>Esplorate <a href="/docs/it/v2.6.x/milvus-webui.md">Milvus WebUI</a>, un'interfaccia web intuitiva per l'osservabilità e la gestione di Milvus.</p></li>
+<li><p>Esplorate <a href="/docs/it/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, uno strumento open-source per il backup dei dati Milvus.</p></li>
+<li><p>Esplorate <a href="/docs/it/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, uno strumento open-source per il debug di Milvus e gli aggiornamenti dinamici della configurazione.</p></li>
 <li><p>Esplorate <a href="https://github.com/zilliztech/attu">Attu</a>, uno strumento open-source per la gestione intuitiva di Milvus.</p></li>
-<li><p><a href="/docs/it/monitor.md">Monitorate Milvus con Prometheus</a>.</p></li>
+<li><p><a href="/docs/it/v2.6.x/monitor.md">Monitorate Milvus con Prometheus</a>.</p></li>
 </ul>

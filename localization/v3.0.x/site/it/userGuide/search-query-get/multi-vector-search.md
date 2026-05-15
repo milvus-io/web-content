@@ -99,7 +99,7 @@ summary: >-
 <li><p><code translate="no">text</code>: Utilizzato per memorizzare il contenuto testuale. Questo campo è del tipo di dati <code translate="no">VARCHAR</code> con una lunghezza massima di 1000 byte. L'opzione <code translate="no">enable_analyzer</code> è impostata su <code translate="no">True</code> per facilitare la ricerca full-text.</p></li>
 <li><p><code translate="no">text_dense</code>: Utilizzato per memorizzare vettori densi dei testi. Questo campo è del tipo di dati <code translate="no">FLOAT_VECTOR</code> con una dimensione del vettore di 768.</p></li>
 <li><p><code translate="no">text_sparse</code>: Utilizzato per memorizzare vettori radi dei testi. Questo campo è del tipo di dati <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
-<li><p><code translate="no">image_dense</code>: Utilizzato per memorizzare vettori densi delle immagini dei prodotti. Questo campo è del tipo di dati <code translate="no">FLOAT_VETOR</code> con una dimensione del vettore di 512.</p></li>
+<li><p><code translate="no">image_dense</code>: Utilizzato per memorizzare vettori densi delle immagini dei prodotti. Questo campo è del tipo di dati <code translate="no">FLOAT_VETOR</code> con una dimensione di vettore di 512.</p></li>
 </ul>
 <p>Poiché si utilizzerà l'algoritmo integrato BM25 per eseguire una ricerca full-text sul campo di testo, è necessario aggiungere il Milvus <code translate="no">Function</code> allo schema. Per ulteriori dettagli, consultare la sezione <a href="/docs/it/full-text-search.md">Ricerca a tutto testo</a>.</p>
 <div class="multipleCode">
@@ -353,7 +353,7 @@ schema.WithField(entity.NewField().
 <ul>
 <li><p><code translate="no">text_dense_index</code>: per il campo vettoriale denso di testo viene creato un indice di tipo <code translate="no">AUTOINDEX</code> con metrica <code translate="no">IP</code>.</p></li>
 <li><p><code translate="no">text_sparse_index</code>: un indice di tipo<code translate="no">SPARSE_INVERTED_INDEX</code>con metrica <code translate="no">BM25</code> viene utilizzato per il campo vettoriale di testo rado.</p></li>
-<li><p><code translate="no">image_dense_index</code>: per il campo vettoriale denso di immagini viene creato un indice di tipo <code translate="no">AUTOINDEX</code> con metrica <code translate="no">IP</code>.</p></li>
+<li><p><code translate="no">image_dense_index</code>: per il campo vettoriale denso dell'immagine viene creato un indice del tipo <code translate="no">AUTOINDEX</code> con il tipo metrico <code translate="no">IP</code>.</p></li>
 </ul>
 <p>È possibile scegliere altri tipi di indice, a seconda delle esigenze e dei tipi di dati. Per ulteriori informazioni sui tipi di indice supportati, consultare la documentazione sui <a href="/docs/it/index-vector-fields.md">tipi di indice disponibili</a>.</p>
 <div class="multipleCode">
@@ -520,6 +520,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -549,7 +550,7 @@ curl --request POST \
 <li><p><code translate="no">image_dense</code>: un elenco di 512 valori in virgola mobile che rappresentano l'incorporazione densa dell'immagine del prodotto.</p></li>
 </ul>
 <p>Si possono usare gli stessi modelli o modelli diversi per generare le incorporazioni dense per ogni campo. In questo esempio, le due incorporazioni dense hanno dimensioni diverse, il che suggerisce che sono state generate da modelli diversi. Quando si definisce ogni ricerca in un secondo momento, assicurarsi di utilizzare il modello corrispondente per generare l'incorporamento appropriato della query.</p>
-<p>Poiché questo esempio utilizza la funzione BM25 integrata per generare embedding sparsi dal campo di testo, non è necessario fornire manualmente vettori sparsi. Tuttavia, se si sceglie di non utilizzare BM25, è necessario precompilare e fornire autonomamente gli embedding sparsi.</p>
+<p>Poiché questo esempio utilizza la funzione incorporata BM25 per generare embedding sparsi dal campo di testo, non è necessario fornire manualmente vettori sparsi. Tuttavia, se si sceglie di non utilizzare BM25, è necessario precompilare e fornire autonomamente gli embedding sparsi.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
@@ -655,6 +656,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;text&quot;: &quot;Red cotton t-shirt with round neck&quot; , &quot;text_dense&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, ...], &quot;image_dense&quot;: [0.6366019600530924, -0.09323198122475052, ...]},
@@ -988,6 +990,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/hybrid_search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;search\&quot;: <span class="hljs-variable">${req}</span>,
@@ -1001,7 +1004,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>L'output è il seguente:</p>
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;[&#x27;id: 1, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 2, distance: 0.006422005593776703, entity: {}&#x27;]&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>Con il parametro <code translate="no">limit=2</code> specificato per la ricerca ibrida, Milvus classifica i sei risultati ottenuti dalle tre ricerche. Alla fine, verranno restituiti solo i primi due risultati più simili.</p>
+<p>Con il parametro <code translate="no">limit=2</code> specificato per la ricerca ibrida, Milvus classifica i sei risultati ottenuti dalle tre ricerche. Alla fine verranno restituiti solo i primi due risultati più simili.</p>
 <h2 id="Advanced-usage" class="common-anchor-header">Utilizzo avanzato<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -221,6 +221,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -451,6 +452,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -535,6 +537,7 @@ curl --request POST \
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
@@ -671,6 +674,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -830,6 +834,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -1050,6 +1055,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -1100,6 +1106,7 @@ curl --request POST \
 
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;quick_setup&quot;,
   &quot;annsField&quot;: &quot;vector&quot;,
@@ -1130,16 +1137,16 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <ul>
 <li><p>過濾搜尋</p>
 <p>您可以在搜尋請求中加入過濾條件，讓 Milvus 在進行 ANN 搜尋之前先進行元資料過濾，將搜尋範圍從整個集合縮小到只有符合指定過濾條件的實體。</p>
-<p>關於元資料篩選和篩選條件的更多資訊，請參閱篩選<a href="/docs/zh-hant/filtered-search.md">搜尋</a>、<a href="/docs/zh-hant/boolean.md">篩選解釋</a>和相關主題。</p></li>
+<p>更多關於元資料篩選和篩選條件，請參考篩選<a href="/docs/zh-hant/filtered-search.md">搜尋</a>、<a href="/docs/zh-hant/boolean.md">篩選解釋</a>和相關主題。</p></li>
 <li><p>範圍搜尋</p>
 <p>您可以在特定範圍內限制返回實體的距離或分數，以改善搜尋結果的相關性。在 Milvus 中，範圍搜尋涉及以與查詢向量最相似的向量嵌入為中心，畫出兩個同心圓。搜尋請求指定兩個圓圈的半徑，Milvus 會傳回屬於外圈但不屬於內圈的所有向量嵌入。</p>
 <p>更多關於範圍搜尋，請參考<a href="/docs/zh-hant/range-search.md">範圍搜尋</a>。</p></li>
 <li><p>群組搜尋</p>
-<p>如果返回的實體在特定欄位中持有相同的值，搜尋結果可能無法代表向量空間中所有向量內嵌的分佈。若要分散搜尋結果，請考慮使用群組搜尋。</p>
+<p>如果返回的實體在特定欄位中持有相同的值，搜尋結果可能無法代表向量空間中所有向量內嵌的分佈。若要使搜尋結果多樣化，請考慮使用群組搜尋。</p>
 <p>關於群組搜尋的更多資訊，請參閱<a href="/docs/zh-hant/grouping-search.md">群組搜尋</a>、</p></li>
 <li><p>混合搜尋</p>
 <p>一個集合可以包含多個向量場，以儲存使用不同嵌入模型產生的向量嵌入。如此一來，您就可以使用混合搜尋來重新排序這些向量欄位的搜尋結果，從而提高召回率。</p>
-<p>有關混合搜尋的詳細資訊，請參閱<a href="/docs/zh-hant/multi-vector-search.md">混合搜尋</a>。</p></li>
+<p>有關混合搜尋的更多資訊，請參閱<a href="/docs/zh-hant/multi-vector-search.md">混合搜尋</a>。</p></li>
 <li><p>搜尋迭代器</p>
 <p>單一 ANN 搜尋最多會返回 16,384 個實體。如果您需要在單一搜尋中返回更多實體，請考慮使用搜尋迭接器。</p>
 <p>有關搜尋迭接器的詳細資訊，請參閱搜尋迭<a href="/docs/zh-hant/with-iterators.md">接器</a>。</p></li>

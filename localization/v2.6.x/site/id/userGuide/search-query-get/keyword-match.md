@@ -25,7 +25,7 @@ summary: >-
       </svg>
     </button></h1><p>Pencocokan teks di Milvus memungkinkan pencarian dokumen yang tepat berdasarkan istilah tertentu. Fitur ini terutama digunakan untuk pencarian yang difilter untuk memenuhi kondisi tertentu dan dapat menggabungkan pemfilteran skalar untuk menyaring hasil kueri, sehingga memungkinkan pencarian kemiripan dalam vektor yang memenuhi kriteria skalar.</p>
 <div class="alert note">
-<p>Pencocokan teks berfokus pada pencarian kemunculan yang tepat dari istilah kueri, tanpa menilai relevansi dokumen yang dicocokkan. Jika Anda ingin mengambil dokumen yang paling relevan berdasarkan makna semantik dan pentingnya istilah kueri, kami sarankan Anda menggunakan <a href="/docs/id/full-text-search.md">Pencarian Teks Lengkap</a>.</p>
+<p>Pencocokan teks berfokus pada pencarian kemunculan yang tepat dari istilah kueri, tanpa menilai relevansi dokumen yang dicocokkan. Jika Anda ingin mengambil dokumen yang paling relevan berdasarkan makna semantik dan pentingnya istilah kueri, kami sarankan Anda menggunakan <a href="/docs/id/v2.6.x/full-text-search.md">Pencarian Teks Lengkap</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -44,8 +44,8 @@ summary: >-
       </svg>
     </button></h2><p>Milvus mengintegrasikan <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> untuk mendukung indeks terbalik yang mendasarinya dan pencarian teks berbasis istilah. Untuk setiap entri teks, Milvus mengindeksnya dengan mengikuti prosedur:</p>
 <ol>
-<li><p><a href="/docs/id/analyzer-overview.md">Penganalisis</a>: Penganalisis memproses teks masukan dengan menokenya menjadi kata-kata individual, atau token, dan kemudian menerapkan filter sesuai kebutuhan. Hal ini memungkinkan Milvus untuk membangun indeks berdasarkan token-token ini.</p></li>
-<li><p><a href="/docs/id/index-explained.md">Pengindeksan</a>: Setelah analisis teks, Milvus membuat indeks terbalik yang memetakan setiap token unik ke dokumen yang mengandungnya.</p></li>
+<li><p><a href="/docs/id/v2.6.x/analyzer-overview.md">Penganalisis</a>: Penganalisis memproses teks masukan dengan menokenya menjadi kata-kata individual, atau token, dan kemudian menerapkan filter sesuai kebutuhan. Hal ini memungkinkan Milvus untuk membangun indeks berdasarkan token-token ini.</p></li>
+<li><p><a href="/docs/id/v2.6.x/index-explained.md">Pengindeksan</a>: Setelah analisis teks, Milvus membuat indeks terbalik yang memetakan setiap token unik ke dokumen yang mengandungnya.</p></li>
 </ol>
 <p>Ketika pengguna melakukan pencocokan teks, indeks terbalik digunakan untuk mengambil semua dokumen yang mengandung istilah dengan cepat. Hal ini jauh lebih cepat daripada memindai setiap dokumen satu per satu.</p>
 <p>
@@ -67,7 +67,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pencocokan teks bekerja pada <a href="/docs/id/string.md"><code translate="no">VARCHAR</code></a> yang pada dasarnya adalah tipe data string di Milvus. Untuk mengaktifkan pencocokan teks, setel <code translate="no">enable_analyzer</code> dan <code translate="no">enable_match</code> ke <code translate="no">True</code>, lalu secara opsional konfigurasikan <a href="/docs/id/analyzer-overview.md">penganalisis</a> untuk analisis teks saat menentukan skema koleksi Anda.</p>
+    </button></h2><p>Pencocokan teks bekerja pada <a href="/docs/id/v2.6.x/string.md"><code translate="no">VARCHAR</code></a> yang pada dasarnya adalah tipe data string di Milvus. Untuk mengaktifkan pencocokan teks, setel <code translate="no">enable_analyzer</code> dan <code translate="no">enable_match</code> ke <code translate="no">True</code>, lalu secara opsional konfigurasikan <a href="/docs/id/v2.6.x/analyzer-overview.md">penganalisis</a> untuk analisis teks saat menentukan skema koleksi Anda.</p>
 <h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">Tetapkan <code translate="no">enable_analyzer</code> dan <code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -218,7 +218,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h3><p>Performa dan keakuratan pencocokan kata kunci bergantung pada penganalisis yang dipilih. Penganalisis yang berbeda disesuaikan dengan berbagai bahasa dan struktur teks, sehingga memilih yang tepat dapat secara signifikan memengaruhi hasil pencarian untuk kasus penggunaan spesifik Anda.</p>
-<p>Secara default, Milvus menggunakan <code translate="no">standard</code> analyzer, yang menandai teks berdasarkan spasi dan tanda baca, menghapus token yang lebih panjang dari 40 karakter, dan mengubah teks menjadi huruf kecil. Tidak ada parameter tambahan yang diperlukan untuk menerapkan pengaturan default ini. Untuk informasi lebih lanjut, lihat <a href="/docs/id/standard-analyzer.md">Standar</a>.</p>
+<p>Secara default, Milvus menggunakan <code translate="no">standard</code> analyzer, yang menandai teks berdasarkan spasi dan tanda baca, menghapus token yang lebih panjang dari 40 karakter, dan mengubah teks menjadi huruf kecil. Tidak ada parameter tambahan yang diperlukan untuk menerapkan pengaturan default ini. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/standard-analyzer.md">Standar</a>.</p>
 <p>Jika diperlukan penganalisis yang berbeda, Anda dapat mengonfigurasinya menggunakan parameter <code translate="no">analyzer_params</code>. Misalnya, untuk menerapkan penganalisis <code translate="no">english</code> untuk memproses teks bahasa Inggris:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -305,7 +305,7 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus juga menyediakan berbagai penganalisis lain yang cocok untuk berbagai bahasa dan skenario. Untuk lebih jelasnya, lihat <a href="/docs/id/analyzer-overview.md">Ikhtisar Penganalisis</a>.</p>
+<p>Milvus juga menyediakan berbagai penganalisis lain yang cocok untuk berbagai bahasa dan skenario. Untuk lebih jelasnya, lihat <a href="/docs/id/v2.6.x/analyzer-overview.md">Ikhtisar Penganalisis</a>.</p>
 <h2 id="Use-text-match" class="common-anchor-header">Menggunakan pencocokan teks<button data-href="#Use-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -404,7 +404,7 @@ schema.WithField(entity.NewField().
     </button></h3><p>Pencocokan teks dapat digunakan bersama dengan pencarian kemiripan vektor untuk mempersempit cakupan pencarian dan meningkatkan kinerja pencarian. Dengan memfilter koleksi menggunakan pencocokan teks sebelum pencarian kemiripan vektor, Anda dapat mengurangi jumlah dokumen yang perlu dicari, sehingga menghasilkan waktu kueri yang lebih cepat.</p>
 <p>Dalam contoh ini, ekspresi <code translate="no">filter</code> memfilter hasil pencarian untuk hanya menyertakan dokumen yang cocok dengan istilah yang ditentukan <code translate="no">keyword1</code> atau <code translate="no">keyword2</code>. Pencarian kemiripan vektor kemudian dilakukan pada subset dokumen yang difilter ini.</p>
 <div class="alert note">
-<p>Anda dapat menyorot istilah yang cocok di hasil pencarian dengan mengonfigurasi penyorot teks. Lihat Penyorot <a href="/docs/id/text-highlighter.md">Teks</a> untuk detailnya.</p>
+<p>Anda dapat menyorot istilah yang cocok di hasil pencarian dengan mengonfigurasi penyorot teks. Lihat Penyorot <a href="/docs/id/v2.6.x/text-highlighter.md">Teks</a> untuk detailnya.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -470,6 +470,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;annsField&quot;: &quot;embeddings&quot;,
@@ -499,7 +500,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pencocokan teks juga dapat digunakan untuk pemfilteran skalar dalam operasi kueri. Dengan menetapkan ekspresi <code translate="no">TEXT_MATCH</code> dalam parameter <code translate="no">expr</code> pada metode <code translate="no">query()</code>, Anda dapat mengambil dokumen yang cocok dengan istilah yang diberikan.</p>
+    </button></h3><p>Pencocokan teks juga dapat digunakan untuk pemfilteran skalar dalam operasi kueri. Dengan menetapkan ekspresi <code translate="no">TEXT_MATCH</code> dalam parameter <code translate="no">expr</code> dari metode <code translate="no">query()</code>, Anda dapat mengambil dokumen yang cocok dengan istilah yang diberikan.</p>
 <p>Contoh di bawah ini mengambil dokumen di mana bidang <code translate="no">text</code> berisi kedua istilah <code translate="no">keyword1</code> dan <code translate="no">keyword2</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -549,6 +550,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$filter</span>&quot;</span><span class="hljs-string">&#x27;,

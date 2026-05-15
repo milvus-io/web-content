@@ -120,7 +120,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Um die Funktion des dynamischen Feldes zu nutzen, setzen Sie <code translate="no">enable_dynamic_field=True</code> bei der Erstellung des Sammelschemas:</p>
+    </button></h2><p>Um die Funktion des dynamischen Feldes zu nutzen, setzen Sie <code translate="no">enable_dynamic_field=True</code> bei der Erstellung des Sammlungsschemas:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -264,6 +264,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -380,6 +381,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;data&quot;: [
     {
@@ -809,6 +811,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
@@ -859,7 +862,7 @@ filter := <span class="hljs-string">&#x27;dynamic_json[&quot;nested&quot;][&quot
 <span class="hljs-built_in">export</span> filterWords=<span class="hljs-string">&#x27;words &gt;= 100&#x27;</span>
 <span class="hljs-built_in">export</span> filterNestedValue=<span class="hljs-string">&#x27;dynamic_json[&quot;nested&quot;][&quot;value&quot;] &lt; 50&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Abrufen von dynamischen Feldschlüsseln</strong>: Um dynamische Feldschlüssel in Such- oder Abfrageergebnissen zurückzugeben, müssen Sie diese explizit im Parameter <code translate="no">output_fields</code> angeben und dabei dieselbe JSON-Pfadsyntax wie bei der Filterung verwenden:</p>
+<p><strong>Abrufen von dynamischen Feldschlüsseln</strong>: Um dynamische Feldschlüssel in Such- oder Abfrageergebnissen zurückzugeben, müssen Sie sie explizit im Parameter <code translate="no">output_fields</code> angeben und dabei dieselbe JSON-Pfadsyntax wie bei der Filterung verwenden:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example: Include dynamic field keys in search results</span>
@@ -959,6 +962,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;data\&quot;: [
@@ -1070,8 +1074,8 @@ curl --request POST \
     </button></h3><p>Wenn Sie einen Index für einen dynamischen Feldschlüssel erstellt haben und das Daten-Casting fehlschlägt - z. B. wenn ein Wert, der in <code translate="no">double</code> umgewandelt werden soll, eine nicht numerische Zeichenfolge wie <code translate="no">&quot;abc&quot;</code>ist -, werden diese spezifischen Werte <strong>bei der Indexerstellung übersprungen</strong>. Sie erscheinen nicht im Index und werden daher auch <strong>nicht in filterbasierten Such- oder Abfrageergebnissen angezeigt</strong>, die auf dem Index basieren.</p>
 <p>Dies hat einige wichtige Auswirkungen:</p>
 <ul>
-<li><p><strong>Kein Fallback auf Full Scan</strong>: Wenn die Mehrheit der Entitäten erfolgreich indiziert ist, verlassen sich die Filterabfragen vollständig auf den Index. Entitäten, bei denen das Casting fehlgeschlagen ist, werden aus der Ergebnismenge ausgeschlossen - auch wenn sie logischerweise der Filterbedingung entsprechen.</p></li>
-<li><p><strong>Risiko der Suchgenauigkeit</strong>: In großen Datensätzen mit inkonsistenter Datenqualität (insbesondere bei dynamischen Feldschlüsseln) kann dieses Verhalten zu unerwarteten fehlenden Ergebnissen führen. Es ist wichtig, dass vor der Indizierung eine konsistente und gültige Datenformatierung sichergestellt wird.</p></li>
+<li><p><strong>Kein Fallback auf Full Scan</strong>: Wenn die Mehrheit der Entitäten erfolgreich indiziert ist, verlassen sich die Filterabfragen vollständig auf den Index. Entitäten, bei denen das Casting fehlgeschlagen ist, werden aus der Ergebnismenge ausgeschlossen - selbst wenn sie logischerweise der Filterbedingung entsprechen.</p></li>
+<li><p><strong>Risiko der Suchgenauigkeit</strong>: In großen Datenbeständen, in denen die Datenqualität uneinheitlich ist (insbesondere bei dynamischen Feldschlüsseln), kann dieses Verhalten zu unerwarteten fehlenden Ergebnissen führen. Es ist wichtig, dass vor der Indizierung eine konsistente und gültige Datenformatierung sichergestellt wird.</p></li>
 <li><p><strong>Verwenden Sie Cast-Funktionen mit Bedacht</strong>: Wenn Sie <code translate="no">json_cast_function</code> verwenden, um Strings während der Indizierung in Zahlen zu konvertieren, stellen Sie sicher, dass die String-Werte zuverlässig konvertierbar sind. Eine Nichtübereinstimmung zwischen <code translate="no">json_cast_type</code> und dem tatsächlich konvertierten Typ führt zu Fehlern oder übersprungenen Einträgen.</p></li>
 </ul>
 <h3 id="What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="common-anchor-header">Was passiert, wenn meine Abfrage einen anderen Datentyp als den indizierten Cast-Typ verwendet?<button data-href="#What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">

@@ -55,7 +55,7 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">DOUBLE</code></p></td>
-     <td><p>Bilangan floating-point presisi ganda 64-bit, untuk data dengan presisi tinggi seperti informasi keuangan atau perhitungan ilmiah.</p></td>
+     <td><p>Angka floating-point presisi ganda 64-bit, untuk data dengan presisi tinggi seperti informasi keuangan atau perhitungan ilmiah.</p></td>
    </tr>
 </table>
 <p>Untuk mendeklarasikan bidang angka, cukup setel <code translate="no">datatype</code> ke salah satu tipe data numerik yang tersedia. Sebagai contoh, <code translate="no">DataType.INT64</code> untuk field bilangan bulat atau <code translate="no">DataType.FLOAT</code> untuk field floating-point.</p>
@@ -383,6 +383,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -482,6 +483,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;age&quot;: 25, &quot;price&quot;: 99.99, &quot;pk&quot;: 1, &quot;embedding&quot;: [0.1, 0.2, 0.3]},
@@ -567,6 +569,7 @@ fmt.Println(<span class="hljs-string">&quot;price&quot;</span>, queryResult.GetC
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;age &gt; 30&quot;,
@@ -647,13 +650,14 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;my_collection&quot;,
   &quot;filter&quot;: &quot;price is null&quot;,
   &quot;outputFields&quot;: [&quot;age&quot;, &quot;price&quot;, &quot;pk&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk mengambil entitas di mana <code translate="no">age</code> memiliki nilai <code translate="no">18</code>, gunakan ekspresi berikut di bawah ini. Karena nilai default dari <code translate="no">age</code> adalah <code translate="no">18</code>, hasil yang diharapkan adalah entitas dengan <code translate="no">age</code> yang secara eksplisit disetel ke <code translate="no">18</code> atau dengan <code translate="no">age</code> yang disetel ke null.</p>
+<p>Untuk mengambil entitas di mana <code translate="no">age</code> memiliki nilai <code translate="no">18</code>, gunakan ekspresi berikut di bawah ini. Karena nilai default dari <code translate="no">age</code> adalah <code translate="no">18</code>, hasil yang diharapkan adalah entitas dengan <code translate="no">age</code> yang secara eksplisit disetel ke <code translate="no">18</code> atau dengan <code translate="no">age</code> yang disetel ke nol.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;age == 18&#x27;</span>
@@ -721,6 +725,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;my_collection&quot;,
   &quot;filter&quot;: &quot;age == 18&quot;,
@@ -826,6 +831,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

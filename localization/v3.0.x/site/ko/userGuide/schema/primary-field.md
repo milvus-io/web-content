@@ -98,7 +98,7 @@ summary: >-
    </tr>
    <tr>
      <td><p>자동 ID</p></td>
-     <td><p>Milvus는 삽입되거나 가져온 엔티티에 대한 고유 식별자를 자동으로 생성합니다.</p></td>
+     <td><p>Milvus는 삽입하거나 가져온 엔티티에 대한 고유 식별자를 자동으로 생성합니다.</p></td>
      <td><p>ID를 수동으로 관리할 필요가 없는 대부분의 시나리오에 적합합니다.</p></td>
    </tr>
    <tr>
@@ -278,6 +278,7 @@ client.createCollection(requestCreate);
 
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/collections/create&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_autoid\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$SCHEMA</span>
@@ -362,6 +363,7 @@ System.out.printf(<span class="hljs-string">&quot;Generated IDs: %s\n&quot;</spa
 
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/entities/insert&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_autoid\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$INSERT_DATA</span>
@@ -536,6 +538,7 @@ client.createCollection(requestCreate);
 
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/collections/create&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_manual_ids\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$SCHEMA</span>
@@ -627,6 +630,7 @@ System.out.printf(<span class="hljs-string">&quot;Generated IDs: %s\n&quot;</spa
 <span class="hljs-comment"># 插入数据</span>
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/entities/insert&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_manual_ids\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$INSERT_DATA</span>
@@ -692,7 +696,7 @@ curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/
 <button class="copy-code-btn"></button></code></pre>
 <p>이 구성에서 <code translate="no">clusterID</code> 은 AutoID 생성에 사용되는 고유 식별자를 0에서 7까지 지정합니다(최대 8개 클러스터 지원).</p>
 <div class="alert note">
-<p>Milvus는 내부적으로 비트 반전을 처리하여 향후 ID 중복 없이 확장할 수 있습니다. 클러스터 ID를 설정하는 것 외에 수동 구성이 필요하지 않습니다.</p>
+<p>Milvus는 내부적으로 비트 반전을 처리하여 향후 ID 중복 없이 확장할 수 있습니다. 클러스터 ID를 설정하는 것 외에는 수동 구성이 필요하지 않습니다.</p>
 </div>
 <h2 id="Reference-How-AutoID-works" class="common-anchor-header">참조: AutoID 작동 방식<button data-href="#Reference-How-AutoID-works" class="anchor-icon" translate="no">
       <svg translate="no"

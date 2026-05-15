@@ -149,9 +149,9 @@ summary: >-
 <li><p><code translate="no">STL_SORT</code></p>
 <p>Di solito si applica all'accelerazione di tipo range o order sui valori numerici, come <code translate="no">strctA[num_val]</code>. Per i dettagli, fare riferimento a <a href="/docs/it/stl-sort.md">STL_SORT</a>.</p></li>
 </ul></li>
-<li><p><strong>Dati upsert</strong></p>
+<li><p><strong>Dati di tipo upsert</strong></p>
 <p>Le strutture non supportano l'upsert in modalità merge. Tuttavia, è possibile eseguire l'upsert in modalità override per aggiornare i dati nelle strutture. Per maggiori dettagli sulle differenze tra l'upsert in modalità merge e quello in modalità override, fate riferimento a <a href="/docs/it/upsert-entities.md#Overview">Upsert Entities</a>.</p></li>
-<li><p><strong>Filtraggio scalare</strong></p>
+<li><p><strong>Filtro scalare</strong></p>
 <p>È possibile utilizzare i <strong>filtri degli elementi</strong> e gli <strong>operatori della famiglia match</strong> per eseguire un filtraggio scalare su un sottocampo scalare in un campo StructArray. Per ulteriori informazioni, consultare <a href="/docs/it/array-of-structs.md#Scalar-filtering-in-a-StructArray-field">Filtraggio scalare in un campo StructArray</a>.</p></li>
 </ul>
 <h2 id="Add-a-StructArray" class="common-anchor-header">Aggiungere una matrice di strutture<button data-href="#Add-a-StructArray" class="anchor-icon" translate="no">
@@ -579,6 +579,7 @@ client.createCollection(requestCreate);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/create&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;description\&quot;: \&quot;A collection for storing book information with struct array chunks\&quot;,
@@ -694,6 +695,7 @@ row.add(<span class="hljs-string">&quot;chunks&quot;</span>, structArr);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/insert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -886,6 +888,7 @@ embeddingList1=<span class="hljs-string">&#x27;[[0.2,0.9,0.4,-0.3,0.2]]&#x27;</s
 embeddingList2=<span class="hljs-string">&#x27;[[-0.2,-0.2,0.5,0.6,0.9],[-0.4,0.3,0.5,0.8,0.2]]&#x27;</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>],
@@ -990,6 +993,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>, <span class="hljs-variable">$embeddingList2</span>],

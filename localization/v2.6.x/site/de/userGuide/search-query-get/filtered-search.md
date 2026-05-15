@@ -61,7 +61,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/filtered-search.png" alt="Filtered Search" class="doc-image" id="filtered-search" />
    </span> <span class="img-wrapper"> <span>Gefilterte Suche</span> </span></p>
-<p>Wie im obigen Diagramm dargestellt, enthält die Suchanfrage <code translate="no">chunk like &quot;%red%&quot;</code> als Filterbedingung, was bedeutet, dass Milvus die ANN-Suche in allen Entitäten durchführen soll, die das Wort <code translate="no">red</code> im Feld <code translate="no">chunk</code> enthalten. Konkret geht Milvus wie folgt vor:</p>
+<p>Wie im obigen Diagramm dargestellt, enthält die Suchanfrage <code translate="no">chunk like &quot;%red%&quot;</code> als Filterbedingung, was anzeigt, dass Milvus die ANN-Suche in allen Entitäten durchführen soll, die das Wort <code translate="no">red</code> im Feld <code translate="no">chunk</code> enthalten. Konkret geht Milvus wie folgt vor:</p>
 <ul>
 <li><p>Filterung der Entitäten, die mit den Filterbedingungen in der Suchanfrage übereinstimmen.</p></li>
 <li><p>Führt die ANN-Suche innerhalb der gefilterten Entitäten durch.</p></li>
@@ -120,7 +120,7 @@ summary: >-
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Wenn die Abfragevektoren bereits in der Zielsammlung vorhanden sind, können Sie <code translate="no">ids</code> verwenden, anstatt sie vor der Suche abzurufen. Einzelheiten finden Sie unter <a href="/docs/de/primary-key-search.md">Primärschlüsselsuche</a>.</p>
+<p>Wenn die Abfragevektoren bereits in der Zielsammlung vorhanden sind, können Sie <code translate="no">ids</code> verwenden, anstatt sie vor der Suche abzurufen. Einzelheiten finden Sie unter <a href="/docs/de/v2.6.x/primary-key-search.md">Primärschlüsselsuche</a>.</p>
 </div>
 <h3 id="Search-with-standard-filtering" class="common-anchor-header">Suche mit Standardfilterung<button data-href="#Search-with-standard-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -267,6 +267,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -301,7 +302,7 @@ curl --request POST \
     <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Weitere Informationen zu den Operatoren, die Sie beim Filtern von Metadaten verwenden können, finden Sie unter <a href="/docs/de/filtering">Filtern</a>.</p>
+<p>Weitere Informationen zu den Operatoren, die Sie beim Filtern von Metadaten verwenden können, finden Sie unter <a href="/docs/de/v2.6.x/filtering">Filtern</a>.</p>
 <h3 id="Search-with-iterative-filtering" class="common-anchor-header">Suche mit iterativer Filterung<button data-href="#Search-with-iterative-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -453,6 +454,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

@@ -60,7 +60,7 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لسهولة الاستخدام، يوفر Milvus ما مجموعه 9 امتيازات مدمجة على مستوى المجموعة وقاعدة البيانات والمثيل: COLL_RO، COLL_RW، COLL_RW، COLL_ADMIN، DB_RO، DB_RW، DB_Admin، Cluster_RO، Cluster_RW، Cluster_RW، Cluster_Admin.</p>
+    </button></h2><p>لسهولة الاستخدام، يوفر Milvus ما مجموعه 9 امتيازات مدمجة على مستوى المجموعة وقاعدة البيانات والمثيل: COLL_RO و COLL_RW و COLL_RW و COLL_ADMIN و DB_RO و DB_RW و DB_Admin و Cluster_RO و Cluster_RW و Cluster_Admin.</p>
 <div class="alert note">
 <p>لا توجد علاقة تعاقبية بين المستويات الثلاثة لمجموعات الامتيازات المضمنة. لا يؤدي تعيين مجموعة امتيازات على مستوى المثيل إلى تعيين الأذونات تلقائيًا لجميع قواعد البيانات والمجموعات ضمن هذا المثيل. يجب تعيين الامتيازات على مستوى قاعدة البيانات والمجموعات يدويًا.</p>
 </div>
@@ -398,7 +398,7 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>استرجاعRRBAC</p></td>
+     <td><p>استعادةRRBAC</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
@@ -464,7 +464,7 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>إنشاء مجموعة الامتيازات</p></td>
+     <td><p>إنشاء مجموعة امتيازات</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
@@ -547,6 +547,7 @@ client.createPrivilegeGroup(CreatePrivilegeGroupReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;
 }&#x27;</span>
@@ -598,6 +599,7 @@ client.addPrivilegesToGroup(AddPrivilegesToGroupReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/add_privileges_to_group&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;,
     &quot;privileges&quot;:[&quot;Query&quot;, &quot;Search&quot;]
@@ -648,6 +650,7 @@ client.removePrivilegesFromGroup(RemovePrivilegesFromGroupReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/remove_privileges_from_group&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;,
     &quot;privileges&quot;:[&quot;Search&quot;]
@@ -696,6 +699,7 @@ List&lt;PrivilegeGroup&gt; groups = resp.getPrivilegeGroups();
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/list&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>فيما يلي مثال على الإخراج.</p>
@@ -742,6 +746,7 @@ client.dropPrivilegeGroup(DropPrivilegeGroupReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/drop&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;
 }&#x27;</span>

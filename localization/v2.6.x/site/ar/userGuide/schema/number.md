@@ -59,7 +59,7 @@ summary: >-
 </table>
 <p>لتعريف حقل رقم، ما عليك سوى تعيين <code translate="no">datatype</code> إلى أحد أنواع البيانات الرقمية المتاحة. على سبيل المثال، <code translate="no">DataType.INT64</code> لحقل عدد صحيح أو <code translate="no">DataType.FLOAT</code> لحقل ذي فاصلة عائمة.</p>
 <div class="alert note">
-<p>يدعم ميلفوس القيم الفارغة والقيم الافتراضية لحقول الأرقام. لتمكين هذه الميزات، قم بتعيين <code translate="no">nullable</code> إلى <code translate="no">True</code> و <code translate="no">default_value</code> إلى قيمة رقمية. للحصول على التفاصيل، ارجع إلى <a href="/docs/ar/nullable-and-default.md">Nullable &amp; Default</a>.</p>
+<p>يدعم ميلفوس القيم الفارغة والقيم الافتراضية لحقول الأرقام. لتمكين هذه الميزات، قم بتعيين <code translate="no">nullable</code> إلى <code translate="no">True</code> و <code translate="no">default_value</code> إلى قيمة رقمية. للحصول على التفاصيل، ارجع إلى <a href="/docs/ar/v2.6.x/nullable-and-default.md">Nullable &amp; Default</a>.</p>
 </div>
 <h2 id="Add-number-field" class="common-anchor-header">إضافة حقل رقمي<button data-href="#Add-number-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -82,7 +82,7 @@ summary: >-
 <li><p><code translate="no">price</code>: يخزن البيانات العائمة، ويسمح بالقيم الفارغة، ولكن ليس له قيمة افتراضية.</p></li>
 </ul>
 <div class="alert note">
-<p>إذا قمت بتعيين <code translate="no">enable_dynamic_fields=True</code> عند تعريف المخطط، يسمح لك Milvus بإدراج الحقول العددية التي لم يتم تعريفها مسبقًا. ومع ذلك، قد يؤدي ذلك إلى زيادة تعقيد الاستعلامات والإدارة، مما قد يؤثر على الأداء. لمزيد من المعلومات، راجع <a href="/docs/ar/enable-dynamic-field.md">الحقل الديناميكي</a>.</p>
+<p>إذا قمت بتعيين <code translate="no">enable_dynamic_fields=True</code> عند تعريف المخطط، يسمح لك Milvus بإدراج الحقول العددية التي لم يتم تعريفها مسبقًا. ومع ذلك، قد يؤدي ذلك إلى زيادة تعقيد الاستعلامات والإدارة، مما قد يؤثر على الأداء. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.6.x/enable-dynamic-field.md">الحقل الديناميكي</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
@@ -264,7 +264,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>تساعد الفهرسة على تحسين أداء البحث والاستعلام. في ميلفوس، الفهرسة إلزامية للحقول المتجهة ولكنها اختيارية للحقول القياسية.</p>
-<p>ينشئ المثال التالي فهارس على الحقل المتجه <code translate="no">embedding</code> والحقل القياسي <code translate="no">age</code> ، وكلاهما يستخدم نوع الفهرس <code translate="no">AUTOINDEX</code>. باستخدام هذا النوع، يختار Milvus تلقائيًا الفهرس الأنسب بناءً على نوع البيانات. يمكنك أيضًا تخصيص نوع الفهرس والبارامترات لكل حقل. لمزيد من التفاصيل، راجع <a href="/docs/ar/index-explained.md">شرح الفهرس</a>.</p>
+<p>ينشئ المثال التالي فهارس على الحقل المتجه <code translate="no">embedding</code> والحقل القياسي <code translate="no">age</code> ، وكلاهما يستخدم نوع الفهرس <code translate="no">AUTOINDEX</code>. باستخدام هذا النوع، يختار Milvus تلقائيًا الفهرس الأنسب بناءً على نوع البيانات. يمكنك أيضًا تخصيص نوع الفهرس والبارامترات لكل حقل. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.6.x/index-explained.md">شرح الفهرس</a>.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
@@ -347,7 +347,7 @@ indexOption2 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بمجرد تعريف المخطط والفهارس، قم بإنشاء مجموعة تتضمن حقول الأرقام.</p>
+    </button></h2><p>بمجرد تحديد المخطط والفهارس، قم بإنشاء مجموعة تتضمن حقول الأرقام.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">نودجيس</a> <a href="#go">جو</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create Collection</span>
@@ -382,6 +382,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -405,7 +406,7 @@ client.createCollection(requestCreate);
       </svg>
     </button></h2><p>بعد إنشاء المجموعة، أدرج الكيانات التي تطابق المخطط.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">نودجيس</a> <a href="#go">جو</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample data</span>
 data = [
     {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>, <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>]},
@@ -481,6 +482,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;age&quot;: 25, &quot;price&quot;: 99.99, &quot;pk&quot;: 1, &quot;embedding&quot;: [0.1, 0.2, 0.3]},
@@ -566,6 +568,7 @@ fmt.Println(<span class="hljs-string">&quot;price&quot;</span>, queryResult.GetC
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;age &gt; 30&quot;,
@@ -576,7 +579,7 @@ fmt.Println(<span class="hljs-string">&quot;price&quot;</span>, queryResult.GetC
 <button class="copy-code-btn"></button></code></pre>
 <p>لاسترداد الكيانات التي يكون فيها <code translate="no">price</code> لاغية:</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا</a> <a href="#javascript">جافا NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price is null&#x27;</span>
 
 res = client.query(
@@ -646,6 +649,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;my_collection&quot;,
   &quot;filter&quot;: &quot;price is null&quot;,
@@ -720,6 +724,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;my_collection&quot;,
   &quot;filter&quot;: &quot;age == 18&quot;,
@@ -825,6 +830,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -837,4 +843,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:35,&quot;distance&quot;:-0.19054288,&quot;id&quot;:3,&quot;price&quot;:199.99},{&quot;age&quot;:30,&quot;distance&quot;:-0.20163085,&quot;id&quot;:2,&quot;price&quot;:149.5},{&quot;age&quot;:25,&quot;distance&quot;:-0.2364331,&quot;id&quot;:1,&quot;price&quot;:99.99}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>في هذا المثال، نحدد أولًا متجه استعلام ونضيف شرط تصفية <code translate="no">25 &lt;= age &lt;= 35</code> أثناء البحث. هذا يضمن ألا تكون نتائج البحث مشابهة لمتجه الاستعلام فحسب، بل أن تكون مطابقة للنطاق العمري المحدد. لمزيد من المعلومات، راجع <a href="/docs/ar/filtering">التصفية</a>.</p>
+<p>في هذا المثال، نحدد أولًا متجه استعلام ونضيف شرط تصفية <code translate="no">25 &lt;= age &lt;= 35</code> أثناء البحث. هذا يضمن ألا تكون نتائج البحث مشابهة لمتجه الاستعلام فحسب، بل أن تكون مطابقة للنطاق العمري المحدد. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.6.x/filtering">التصفية</a>.</p>

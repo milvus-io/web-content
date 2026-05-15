@@ -60,7 +60,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/filtered-search.png" alt="Filtered Search" class="doc-image" id="filtered-search" />
    </span> <span class="img-wrapper"> <span>البحث المصفى</span> </span></p>
-<p>كما هو موضح في الرسم البياني أعلاه، يحمل طلب البحث <code translate="no">chunk like &quot;%red%&quot;</code> كشرط تصفية، مما يشير إلى أن Milvus يجب أن يجري البحث في الشبكة النانوية الوطنية ضمن جميع الكيانات التي تحتوي على كلمة <code translate="no">red</code> في الحقل <code translate="no">chunk</code>. على وجه التحديد، يقوم ميلفوس بما يلي:</p>
+<p>كما هو موضح في الرسم البياني أعلاه، يحمل طلب البحث <code translate="no">chunk like &quot;%red%&quot;</code> كشرط تصفية، مما يشير إلى أن Milvus يجب أن يجري البحث في الشبكة النانوية الوطنية ضمن جميع الكيانات التي تحتوي على الكلمة <code translate="no">red</code> في الحقل <code translate="no">chunk</code>. على وجه التحديد، يقوم ميلفوس بما يلي:</p>
 <ul>
 <li><p>تصفية الكيانات التي تطابق شروط التصفية الواردة في طلب البحث.</p></li>
 <li><p>إجراء بحث ANN داخل الكيانات التي تمت تصفيتها.</p></li>
@@ -266,6 +266,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -452,6 +453,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

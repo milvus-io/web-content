@@ -40,9 +40,9 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>La recherche ANN et la recherche k-Nearest Neighbors (kNN) sont les méthodes habituelles dans les recherches de similarité vectorielle. Dans une recherche kNN, vous devez comparer tous les vecteurs d'un espace vectoriel avec le vecteur de la requête indiqué dans la demande de recherche avant de déterminer les vecteurs les plus similaires, ce qui prend beaucoup de temps et de ressources.</p>
-<p>Contrairement aux recherches kNN, un algorithme de recherche ANN demande un fichier d'<strong>index</strong> qui enregistre l'ordre trié des intégrations vectorielles. Lorsqu'une demande de recherche arrive, vous pouvez utiliser le fichier d'index comme référence pour localiser rapidement un sous-groupe contenant probablement les intégrations vectorielles les plus similaires au vecteur de la requête. Ensuite, vous pouvez utiliser le <strong>type de métrique</strong> spécifié pour mesurer la similarité entre le vecteur de la requête et ceux du sous-groupe, trier les membres du groupe sur la base de la similarité avec le vecteur de la requête et déterminer les <strong>K premiers</strong> membres du groupe.</p>
+<p>Contrairement aux recherches kNN, un algorithme de recherche ANN demande un fichier d'<strong>index</strong> qui enregistre l'ordre trié des intégrations vectorielles. Lorsqu'une demande de recherche arrive, vous pouvez utiliser le fichier d'index comme référence pour localiser rapidement un sous-groupe contenant probablement les intégrations vectorielles les plus similaires au vecteur de la requête. Ensuite, vous pouvez utiliser le <strong>type de métrique</strong> spécifié pour mesurer la similarité entre le vecteur de la requête et ceux du sous-groupe, trier les membres du groupe sur la base de la similarité avec le vecteur de la requête, et déterminer les <strong>K premiers</strong> membres du groupe.</p>
 <p>Les recherches ANN dépendent d'index préconstruits, et le débit de recherche, l'utilisation de la mémoire et l'exactitude de la recherche peuvent varier en fonction des types d'index que vous choisissez. Vous devez trouver un équilibre entre les performances et l'exactitude de la recherche.</p>
-<p>Pour réduire la courbe d'apprentissage, Milvus propose <strong>AUTOINDEX</strong>. Avec <strong>AUTOINDEX</strong>, Milvus peut analyser la distribution des données dans votre collection pendant la construction de l'index et définit les paramètres d'index les plus optimisés en fonction de l'analyse afin de trouver un équilibre entre les performances de recherche et l'exactitude.</p>
+<p>Pour réduire la courbe d'apprentissage, Milvus propose <strong>AUTOINDEX</strong>. Avec <strong>AUTOINDEX</strong>, Milvus peut analyser la distribution des données dans votre collection pendant la construction de l'index et définit les paramètres d'index les plus optimisés en fonction de l'analyse pour trouver un équilibre entre les performances de recherche et l'exactitude.</p>
 <p>Dans cette section, vous trouverez des informations détaillées sur les sujets suivants :</p>
 <ul>
 <li><p><a href="/docs/fr/single-vector-search.md#Single-Vector-Search">Recherche à vecteur unique</a></p></li>
@@ -223,6 +223,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -453,6 +454,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -537,6 +539,7 @@ curl --request POST \
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
@@ -673,6 +676,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -832,6 +836,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -879,7 +884,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Par défaut, Milvus ordonne les résultats de la recherche en fonction de leur score de similarité avec le vecteur de la requête. Si vous souhaitez que les entités renvoyées suivent un ordre de champs scalaires, ajoutez <code translate="no">order_by_fields</code> à la requête de recherche.</p>
+    </button></h2><p>Par défaut, Milvus classe les résultats de la recherche en fonction de leur score de similarité avec le vecteur de la requête. Si vous souhaitez que les entités renvoyées suivent un ordre de champs scalaires, ajoutez <code translate="no">order_by_fields</code> à la requête de recherche.</p>
 <p>Chaque élément de <code translate="no">order_by_fields</code> spécifie un champ scalaire et un sens de tri. Utilisez <code translate="no">&quot;asc&quot;</code> pour l'ordre croissant ou <code translate="no">&quot;desc&quot;</code> pour l'ordre décroissant. Si vous omettez <code translate="no">order</code>, Milvus trie le champ par ordre croissant.</p>
 <p>L'exemple suivant trie les résultats de la recherche par <code translate="no">price</code> du plus bas au plus haut. Incluez le champ de tri dans <code translate="no">output_fields</code> si vous souhaitez inspecter la valeur du champ dans la réponse.</p>
 <div class="multipleCode">
@@ -1052,6 +1057,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -1102,6 +1108,7 @@ curl --request POST \
 
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;quick_setup&quot;,
   &quot;annsField&quot;: &quot;vector&quot;,
@@ -1146,7 +1153,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <p>Une recherche ANN unique renvoie un maximum de 16 384 entités. Envisagez d'utiliser des itérateurs de recherche si vous avez besoin d'un plus grand nombre d'entités à renvoyer lors d'une recherche unique.</p>
 <p>Pour plus d'informations sur les itérateurs de recherche, voir <a href="/docs/fr/with-iterators.md">Itérateur de recherche</a>.</p></li>
 <li><p>Recherche en texte intégral</p>
-<p>La recherche en texte intégral est une fonctionnalité qui permet de récupérer des documents contenant des termes ou des phrases spécifiques dans des ensembles de données textuelles, puis de classer les résultats en fonction de leur pertinence. Cette fonction permet de surmonter les limites de la recherche sémantique, qui peut négliger des termes précis, et de s'assurer que vous recevez les résultats les plus précis et les plus pertinents en fonction du contexte. En outre, elle simplifie les recherches vectorielles en acceptant les entrées de texte brut, convertissant automatiquement vos données textuelles en encastrements épars sans qu'il soit nécessaire de générer manuellement des encastrements vectoriels.</p>
+<p>La recherche en texte intégral est une fonctionnalité qui permet de récupérer des documents contenant des termes ou des phrases spécifiques dans des ensembles de données textuelles, puis de classer les résultats en fonction de leur pertinence. Cette fonction permet de dépasser les limites de la recherche sémantique, qui peut négliger des termes précis, et de s'assurer que vous recevez les résultats les plus précis et les plus pertinents en fonction du contexte. En outre, elle simplifie les recherches vectorielles en acceptant les entrées de texte brut, convertissant automatiquement vos données textuelles en encastrements épars sans qu'il soit nécessaire de générer manuellement des encastrements vectoriels.</p>
 <p>Pour plus de détails sur la recherche en texte intégral, voir <a href="/docs/fr/full-text-search.md">Recherche en texte intégral</a>.</p></li>
 <li><p>Correspondance de texte</p>
 <p>La recherche par mot-clé dans Milvus permet d'extraire des documents avec précision sur la base de termes spécifiques. Cette fonction est principalement utilisée pour la recherche filtrée afin de satisfaire des conditions spécifiques et peut incorporer le filtrage scalaire pour affiner les résultats de la requête, permettant des recherches de similarité dans les vecteurs qui répondent aux critères scalaires.</p>
@@ -1159,5 +1166,5 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <li><p>Compaction de la mise en grappe</p>
 <p>Pour plus d'informations sur les compactions de clustering, voir <a href="/docs/fr/clustering-compaction.md">Compaction de clustering</a>.</p></li>
 <li><p>Utiliser le reranking</p>
-<p>Pour plus d'informations sur l'utilisation des classificateurs pour améliorer la pertinence des résultats de recherche, voir <a href="/docs/fr/decay-ranker-overview.md">Decay Ranker Overview</a> et <a href="/docs/fr/model-ranker-overview.md">Model Ranker Overview.</a></p></li>
+<p>Pour plus d'informations sur l'utilisation des classeurs afin d'améliorer la pertinence des résultats de recherche, reportez-vous aux sections <a href="/docs/fr/decay-ranker-overview.md">Decay Ranker Overview</a> et <a href="/docs/fr/model-ranker-overview.md">Model Ranker Overview.</a></p></li>
 </ul>

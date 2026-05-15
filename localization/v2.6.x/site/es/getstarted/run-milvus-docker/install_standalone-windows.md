@@ -135,7 +135,7 @@ $ curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/st
 $ bash standalone_embed.sh start​
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Inicie Milvus como un contenedor Docker.</p>
+<li><p>Inicie Milvus como contenedor Docker.</p>
 <pre><code translate="no" class="language-bash">$ bash standalone_embed.sh start​
 Wait <span class="hljs-keyword">for</span> Milvus Starting...​
 Start successfully.​
@@ -189,7 +189,7 @@ Delete successfully.​
 <li><p>Abra Docker Desktop en modo administrador haciendo clic con el botón derecho y seleccionando <strong>Ejecutar como administrador</strong>.</p></li>
 <li><p>Ejecute los siguientes comandos en PowerShell o Windows Command Prompt para descargar el archivo de configuración Docker Compose para Milvus Standalone e iniciar Milvus.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.15/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.16/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -230,7 +230,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Descargue el archivo de configuración de Milvus.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.15/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.16/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Inicie Milvus.</p>
@@ -280,7 +280,7 @@ Creating milvus-standalone ... done​
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/task-manager.png" alt="Virtualization in Task Manager" class="doc-image" id="virtualization-in-task-manager" />
    </span> <span class="img-wrapper"> <span>Virtualización en el Administrador de tareas</span> </span></p>
-<p>Si la virtualización está deshabilitada, puede que necesites comprobar la configuración de la BIOS del firmware de tu placa base. La forma de habilitar la virtualización en la configuración de la BIOS varía según el fabricante de la placa base. Para la placa base ASUS, por ejemplo, puedes consultar <a href="https://www.asus.com/support/faq/1043786/">este artículo</a> sobre cómo habilitar la virtualización.</p>
+<p>Si la virtualización está deshabilitada, puede que necesites comprobar la configuración de la BIOS del firmware de tu placa base. La forma de activar la virtualización en la configuración de la BIOS varía según el fabricante de la placa base. Para la placa base ASUS, por ejemplo, puedes consultar <a href="https://www.asus.com/support/faq/1043786/">este artículo</a> sobre cómo habilitar la virtualización.</p>
 <p>A continuación, es necesario reiniciar el equipo y habilitar Hyper-V. Para más detalles, consulta este <a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">artículo de Microsoft</a>.</p></li>
 <li><p>Compruebe si se ha iniciado el servicio Docker Desktop.</p>
 <p>Puede ejecutar el siguiente comando para iniciar el servicio Docker Desktop.</p>
@@ -380,27 +380,27 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
       </svg>
     </button></h2><p>Habiendo instalado Milvus en Docker, puede:</p>
 <ul>
-<li><p>Comprobar <a href="/docs/es/quickstart.md">Quickstart</a> para ver lo que Milvus puede hacer.</p></li>
+<li><p>Comprobar <a href="/docs/es/v2.6.x/quickstart.md">Quickstart</a> para ver lo que Milvus puede hacer.</p></li>
 <li><p>Aprender las operaciones básicas de Milvus:</p>
 <ul>
-<li><a href="/docs/es/manage_databases.md">Gestionar bases de datos</a></li>
-<li><a href="/docs/es/manage-collections.md">Gestionar colecciones</a></li>
-<li><a href="/docs/es/manage-partitions.md">Gestionar Particiones</a></li>
-<li><a href="/docs/es/insert-update-delete.md">Insertar, Subinsertar y Eliminar</a></li>
-<li><a href="/docs/es/single-vector-search.md">Búsqueda monovectorial</a></li>
-<li><a href="/docs/es/multi-vector-search.md">Búsqueda Híbrida</a></li>
+<li><a href="/docs/es/v2.6.x/manage_databases.md">Gestionar bases de datos</a></li>
+<li><a href="/docs/es/v2.6.x/manage-collections.md">Gestionar colecciones</a></li>
+<li><a href="/docs/es/v2.6.x/manage-partitions.md">Gestionar Particiones</a></li>
+<li><a href="/docs/es/v2.6.x/insert-update-delete.md">Insertar, Subinsertar y Eliminar</a></li>
+<li><a href="/docs/es/v2.6.x/single-vector-search.md">Búsqueda monovectorial</a></li>
+<li><a href="/docs/es/v2.6.x/multi-vector-search.md">Búsqueda Híbrida</a></li>
 </ul></li>
-<li><p><a href="/docs/es/upgrade_milvus_cluster-helm.md">Actualice Milvus utilizando Helm Chart</a>.</p></li>
-<li><p><a href="/docs/es/scaleout.md">Escale su cluster Milvus</a>.</p></li>
+<li><p><a href="/docs/es/v2.6.x/upgrade_milvus_cluster-helm.md">Actualice Milvus utilizando Helm Chart</a>.</p></li>
+<li><p><a href="/docs/es/v2.6.x/scaleout.md">Escale su cluster Milvus</a>.</p></li>
 <li><p>Despliegue su clúster Milvu en nubes:</p>
 <ul>
-<li><a href="/docs/es/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/es/gcp.md">Google Cloud</a></li>
-<li><a href="/docs/es/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/es/v2.6.x/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/es/v2.6.x/gcp.md">Google Cloud</a></li>
+<li><a href="/docs/es/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Explore Milvus <a href="/docs/es/milvus-webui.md">WebUI</a>, una interfaz web intuitiva para la observabilidad y gestión de Milvus.</p></li>
-<li><p>Explore Milvus <a href="/docs/es/milvus_backup_overview.md">Backup</a>, una herramienta de código abierto para las copias de seguridad de los datos de Milvus.</p></li>
-<li><p>Explore <a href="/docs/es/birdwatcher_overview.md">Birdwatcher</a>, una herramienta de código abierto para depurar Milvus y actualizaciones de configuración dinámicas.</p></li>
+<li><p>Explore Milvus <a href="/docs/es/v2.6.x/milvus-webui.md">WebUI</a>, una interfaz web intuitiva para la observabilidad y gestión de Milvus.</p></li>
+<li><p>Explore Milvus <a href="/docs/es/v2.6.x/milvus_backup_overview.md">Backup</a>, una herramienta de código abierto para las copias de seguridad de los datos de Milvus.</p></li>
+<li><p>Explore <a href="/docs/es/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, una herramienta de código abierto para depurar Milvus y actualizaciones de configuración dinámicas.</p></li>
 <li><p>Explore <a href="https://github.com/zilliztech/attu">Attu</a>, una herramienta GUI de código abierto para la gestión intuitiva de Milvus.</p></li>
-<li><p><a href="/docs/es/monitor.md">Supervise Milvus con Prometheus</a>.</p></li>
+<li><p><a href="/docs/es/v2.6.x/monitor.md">Supervise Milvus con Prometheus</a>.</p></li>
 </ul>

@@ -249,6 +249,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;product_catalog\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -256,7 +257,7 @@ curl --request POST \
 
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Sie können auch die Funktion "Dynamisches Feld" aktivieren, um nicht deklarierte Felder flexibel zu speichern, aber das ist für die Funktion von JSON-Feldern nicht erforderlich. Weitere Informationen finden Sie unter <a href="/docs/de/enable-dynamic-field.md">Dynamisches Feld</a>.</p>
+<p>Sie können auch die Funktion "Dynamisches Feld" aktivieren, um nicht deklarierte Felder flexibel zu speichern, aber das ist für die Funktion von JSON-Feldern nicht erforderlich. Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/enable-dynamic-field.md">Dynamisches Feld</a>.</p>
 </div>
 <h2 id="Insert-entities-with-JSON-data" class="common-anchor-header">Einfügen von Entitäten mit JSON-Daten<button data-href="#Insert-entities-with-JSON-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -423,6 +424,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/product_catalog/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;data\&quot;: <span class="hljs-variable">$entities</span>
 }&quot;</span>
@@ -449,7 +451,7 @@ curl --request POST \
 <li><p><strong>JSON flat index</strong> - indiziert ein ganzes JSON-Objekt (oder einen Teilbaum) mit automatischer Typisierung.</p></li>
 </ul>
 <div class="alert note">
-<p>Die Indizierung von JSON-Feldern ist <strong>optional</strong>. Sie können auch ohne Index nach JSON-Pfaden abfragen oder filtern, aber dies kann zu einer langsameren Leistung aufgrund der Brute-Force-Suche führen.</p>
+<p>Die Indizierung von JSON-Feldern ist <strong>optional</strong>. Sie können auch ohne Index nach JSON-Pfaden abfragen oder filtern, aber dies kann zu einer langsameren Leistung aufgrund einer Brute-Force-Suche führen.</p>
 </div>
 <h3 id="Choose-between-path-index-and-flat-index--Milvus-26x" class="common-anchor-header">Wählen Sie zwischen Pfadindex und flachem Index<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Choose-between-path-index-and-flat-index--Milvus-26x" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -532,7 +534,7 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
       </svg>
     </button></h3><p>Um einen JSON-Pfadindex zu erstellen, geben Sie an:</p>
 <ul>
-<li><p><strong>JSON path</strong> (<code translate="no">json_path</code>): Der Pfad zu dem Schlüssel oder dem verschachtelten Feld in Ihrem JSON-Objekt, das Sie indizieren möchten.</p>
+<li><p><strong>JSON path</strong> (<code translate="no">json_path</code>): Der Pfad zu dem Schlüssel oder dem verschachtelten Feld innerhalb Ihres JSON-Objekts, das Sie indizieren möchten.</p>
 <ul>
 <li><p>Beispiel:</p>
 <ul>
@@ -543,8 +545,8 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
 </ul></li>
 <li><p><strong>JSON-Cast-Typ</strong> (<code translate="no">json_cast_type</code>): Der Datentyp, den Milvus bei der Interpretation und Indizierung des Wertes am angegebenen Pfad verwenden soll.</p>
 <ul>
-<li><p>Dieser Typ muss mit dem tatsächlichen Datentyp des zu indizierenden Feldes übereinstimmen. Wenn Sie den Datentyp während der Indizierung in einen anderen konvertieren wollen, sollten Sie <a href="/docs/de/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">eine Cast-Funktion verwenden</a>.</p></li>
-<li><p>Eine vollständige Liste finden Sie <a href="/docs/de/use-json-fields.md#Supported-JSON-cast-types">unten</a>.</p></li>
+<li><p>Dieser Typ muss mit dem tatsächlichen Datentyp des zu indizierenden Feldes übereinstimmen. Wenn Sie den Datentyp während der Indizierung in einen anderen konvertieren wollen, sollten Sie <a href="/docs/de/v2.6.x/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">eine Cast-Funktion verwenden</a>.</p></li>
+<li><p>Eine vollständige Liste finden Sie <a href="/docs/de/v2.6.x/use-json-fields.md#Supported-JSON-cast-types">unten</a>.</p></li>
 </ul></li>
 </ul>
 <h4 id="Supported-JSON-cast-types" class="common-anchor-header">Unterstützte JSON-Cast-Typen</h4><p>Bei Cast-Typen wird die Groß- und Kleinschreibung nicht berücksichtigt. Die folgenden Typen werden unterstützt:</p>
@@ -586,7 +588,7 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
    </tr>
 </table>
 <div class="alert note">
-<p>Arrays sollten für eine optimale Indizierung Elemente desselben Typs enthalten. Weitere Informationen finden Sie unter <a href="/docs/de/array_data_type.md">Array-Feld</a>.</p>
+<p>Arrays sollten für eine optimale Indizierung Elemente desselben Typs enthalten. Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/array_data_type.md">Array-Feld</a>.</p>
 </div>
 <h4 id="Example-Create-JSON-path-indexes" class="common-anchor-header">Beispiel: JSON-Pfadindizes erstellen</h4><p>Unter Verwendung der <code translate="no">metadata</code> JSON-Struktur aus unserer Einführung, sind hier Beispiele, wie man Indizes auf verschiedenen JSON-Pfaden erstellen kann:</p>
 <div class="multipleCode">
@@ -805,7 +807,7 @@ metadata[&quot;supplier&quot;][&quot;country&quot;] = &quot;USA&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>Der erste Typ, der auf den Wert passt, wird für die Indizierung verwendet.</p>
 <p>Das bedeutet, dass der ermittelte Typ immer <strong>einer dieser vier</strong> ist.</p>
-<p>Die Typisierung wird <strong>für jedes Dokument</strong> durchgeführt, so dass ein und derselbe Pfad in verschiedenen Dokumenten unterschiedliche abgeleitete Typen haben kann.</p>
+<p>Die Typisierung wird <strong>pro Dokument</strong> durchgeführt, so dass ein und derselbe Pfad in verschiedenen Dokumenten unterschiedliche abgeleitete Typen haben kann.</p>
 <p>Nach der Typisierung werden die reduzierten Daten intern als Terme mit ihren abgeleiteten Typen dargestellt, zum Beispiel:</p>
 <pre><code translate="no" class="language-plaintext">(&quot;category&quot;, Text, &quot;electronics&quot;)
 (&quot;price&quot;, Double, 99.99)
@@ -899,6 +901,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;product_catalog\&quot;,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
@@ -949,7 +952,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <li><p>Sie haben einen Index für jedes Vektorfeld erstellt.</p></li>
 <li><p>Die Sammlung ist in den Speicher geladen.</p></li>
 </ul>
-<p>Eine vollständige Liste der unterstützten Operatoren und Ausdrücke finden Sie unter <a href="/docs/de/json-operators.md">JSON-Operatoren</a>.</p>
+<p>Eine vollständige Liste der unterstützten Operatoren und Ausdrücke finden Sie unter <a href="/docs/de/v2.6.x/json-operators.md">JSON-Operatoren</a>.</p>
 <h2 id="Pull-it-all-together" class="common-anchor-header">Alles zusammenfassen<button data-href="#Pull-it-all-together" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -969,11 +972,11 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <p>Um den Arbeitsablauf in einer realen Anwendung zu vervollständigen, müssen Sie auch Folgendes tun</p>
 <ul>
 <li><p><strong>Erstellen Sie einen Index für Ihre Vektorfelder</strong> (obligatorisch für jedes Vektorfeld in einer Sammlung)</p>
-<p>Siehe <a href="/docs/de/create-collection.md#Optional-Set-Index-Parameters">Indexparameter festlegen</a></p></li>
+<p>Siehe <a href="/docs/de/v2.6.x/create-collection.md#Optional-Set-Index-Parameters">Indexparameter festlegen</a></p></li>
 <li><p><strong>Laden Sie die Sammlung</strong></p>
-<p>Siehe <a href="/docs/de/load-and-release.md">Laden &amp; Freigeben</a></p></li>
+<p>Siehe <a href="/docs/de/v2.6.x/load-and-release.md">Laden &amp; Freigeben</a></p></li>
 <li><p><strong>Suchen oder Abfragen mit JSON-Pfadfiltern</strong></p>
-<p>Siehe <a href="/docs/de/filtered-search.md">Gefilterte Suche</a> und <a href="/docs/de/json-operators.md">JSON-Operatoren</a></p></li>
+<p>Siehe <a href="/docs/de/v2.6.x/filtered-search.md">Gefilterte Suche</a> und <a href="/docs/de/v2.6.x/json-operators.md">JSON-Operatoren</a></p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1010,7 +1013,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <li><p>Das<strong>dynamische Feld</strong> ist ein verstecktes JSON-Objekt (<code translate="no">$meta</code>), das automatisch jedes Feld speichert, das nicht im Schema definiert ist.</p></li>
 </ul>
 <p>Beide unterstützen verschachtelte Strukturen und JSON-Pfadindizierung, aber dynamische Felder sind besser für optionale oder sich entwickelnde Datenstrukturen geeignet.</p>
-<p>Weitere Informationen finden Sie unter <a href="/docs/de/enable-dynamic-field.md">Dynamisches Feld</a>.</p>
+<p>Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/enable-dynamic-field.md">Dynamisches Feld</a>.</p>
 <h3 id="Are-there-any-limitations-on-the-size-of-a-JSON-field" class="common-anchor-header">Gibt es irgendwelche Beschränkungen für die Größe eines JSON-Feldes?<button data-href="#Are-there-any-limitations-on-the-size-of-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1043,7 +1046,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
         ></path>
       </svg>
     </button></h3><p>Nein, JSON-Felder unterstützen keine Standardwerte. Sie können jedoch <code translate="no">nullable=True</code> festlegen, wenn Sie das Feld definieren, um leere Einträge zuzulassen.</p>
-<p>Weitere Informationen finden Sie unter <a href="/docs/de/nullable-and-default.md">Nullable &amp; Default</a>.</p>
+<p>Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/nullable-and-default.md">Nullable &amp; Default</a>.</p>
 <h3 id="Are-there-any-naming-conventions-for-JSON-field-keys" class="common-anchor-header">Gibt es Namenskonventionen für JSON-Feldschlüssel?<button data-href="#Are-there-any-naming-conventions-for-JSON-field-keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

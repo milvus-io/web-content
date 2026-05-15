@@ -40,7 +40,7 @@ title: Instalar Milvus Standalone con un paquete RPM/DEB
       </svg>
     </button></h2><ul>
 <li>Ya ha instalado libstdc++ 8.5.0 o una versión posterior.</li>
-<li><a href="/docs/es/prerequisite-docker.md">Compruebe los requisitos de hardware y software</a> antes de la instalación.</li>
+<li><a href="/docs/es/v2.6.x/prerequisite-docker.md">Compruebe los requisitos de hardware y software</a> antes de la instalación.</li>
 </ul>
 <h2 id="Download-the-RPMDEB-Package" class="common-anchor-header">Descarga del paquete RPM/DEB<button data-href="#Download-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -57,7 +57,7 @@ title: Instalar Milvus Standalone con un paquete RPM/DEB
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Puede descargar el paquete RPM/DEB según la arquitectura de su sistema desde la <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.15">página Milvus Releases</a>.</p>
+    </button></h2><p>Puede descargar el paquete RPM/DEB según la arquitectura de su sistema desde la <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.16">página Milvus Releases</a>.</p>
 <ul>
 <li>Para x86_64/amd64, descargue el paquete <strong>milvus_2.6.9-1_amd64.deb</strong> o <strong>milvus_2.6.9-1_amd64.rpm</strong>.</li>
 <li>Para ARM64, descargue el paquete <strong>milvus_2.6.9-1_arm64.deb</strong> o <strong>milvus_2.6.9-1_arm64.rpm</strong>.</li>
@@ -135,7 +135,7 @@ dpkg -l | grep milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Puede modificar las configuraciones de Milvus en el archivo <code translate="no">/etc/milvus/configs/milvus.yaml</code>. Por ejemplo, para cambiar de <code translate="no">proxy.healthCheckTimeout</code> a <code translate="no">1000</code> ms, puede buscar el parámetro de destino y modificarlo en consecuencia. Para conocer los elementos de configuración aplicables, consulte <a href="/docs/es/system_configuration.md">Configuración del sistema</a>.</p>
+    </button></h2><p>Puede modificar las configuraciones de Milvus en el archivo <code translate="no">/etc/milvus/configs/milvus.yaml</code>. Por ejemplo, para cambiar de <code translate="no">proxy.healthCheckTimeout</code> a <code translate="no">1000</code> ms, puede buscar el parámetro de destino y modificarlo en consecuencia. Para conocer los elementos de configuración aplicables, consulte <a href="/docs/es/v2.6.x/system_configuration.md">Configuración del sistema</a>.</p>
 <h2 id="Stop-Milvus-Standalone" class="common-anchor-header">Detener Milvus Standalone<button data-href="#Stop-Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -193,27 +193,27 @@ dpkg -l | grep milvus
       </svg>
     </button></h2><p>Una vez instalado Milvus Standalone, puede:</p>
 <ul>
-<li><p>Comprobar <a href="/docs/es/quickstart.md">el Inicio rápido</a> para ver qué puede hacer Milvus.</p></li>
+<li><p>Consultar <a href="/docs/es/v2.6.x/quickstart.md">el Inicio rápido</a> para ver qué puede hacer Milvus.</p></li>
 <li><p>Aprender las operaciones básicas de Milvus:</p>
 <ul>
-<li><a href="/docs/es/manage_databases.md">Gestionar bases de datos</a></li>
-<li><a href="/docs/es/manage-collections.md">Gestionar colecciones</a></li>
-<li><a href="/docs/es/manage-partitions.md">Gestionar Particiones</a></li>
-<li><a href="/docs/es/insert-update-delete.md">Insertar, Subinsertar y Eliminar</a></li>
-<li><a href="/docs/es/single-vector-search.md">Búsqueda monovectorial</a></li>
-<li><a href="/docs/es/multi-vector-search.md">Búsqueda Híbrida</a></li>
+<li><a href="/docs/es/v2.6.x/manage_databases.md">Gestionar bases de datos</a></li>
+<li><a href="/docs/es/v2.6.x/manage-collections.md">Gestionar colecciones</a></li>
+<li><a href="/docs/es/v2.6.x/manage-partitions.md">Gestionar Particiones</a></li>
+<li><a href="/docs/es/v2.6.x/insert-update-delete.md">Insertar, Subinsertar y Eliminar</a></li>
+<li><a href="/docs/es/v2.6.x/single-vector-search.md">Búsqueda monovectorial</a></li>
+<li><a href="/docs/es/v2.6.x/multi-vector-search.md">Búsqueda Híbrida</a></li>
 </ul></li>
-<li><p><a href="/docs/es/upgrade_milvus_cluster-helm.md">Actualice Milvus utilizando Helm Chart</a>.</p></li>
-<li><p><a href="/docs/es/scaleout.md">Escale su cluster Milvus</a>.</p></li>
+<li><p><a href="/docs/es/v2.6.x/upgrade_milvus_cluster-helm.md">Actualice Milvus utilizando Helm Chart</a>.</p></li>
+<li><p><a href="/docs/es/v2.6.x/scaleout.md">Escale su cluster Milvus</a>.</p></li>
 <li><p>Despliegue su clúster Milvu en nubes:</p>
 <ul>
-<li><a href="/docs/es/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/es/gcp.md">Google Cloud</a></li>
-<li><a href="/docs/es/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/es/v2.6.x/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/es/v2.6.x/gcp.md">Google Cloud</a></li>
+<li><a href="/docs/es/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Explore Milvus <a href="/docs/es/milvus-webui.md">WebUI</a>, una interfaz web intuitiva para la observabilidad y gestión de Milvus.</p></li>
-<li><p>Explore Milvus <a href="/docs/es/milvus_backup_overview.md">Backup</a>, una herramienta de código abierto para las copias de seguridad de los datos de Milvus.</p></li>
-<li><p>Explore <a href="/docs/es/birdwatcher_overview.md">Birdwatcher</a>, una herramienta de código abierto para depurar Milvus y actualizaciones de configuración dinámicas.</p></li>
+<li><p>Explore Milvus <a href="/docs/es/v2.6.x/milvus-webui.md">WebUI</a>, una interfaz web intuitiva para la observabilidad y gestión de Milvus.</p></li>
+<li><p>Explore Milvus <a href="/docs/es/v2.6.x/milvus_backup_overview.md">Backup</a>, una herramienta de código abierto para las copias de seguridad de los datos de Milvus.</p></li>
+<li><p>Explore <a href="/docs/es/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, una herramienta de código abierto para depurar Milvus y actualizaciones de configuración dinámicas.</p></li>
 <li><p>Explore <a href="https://github.com/zilliztech/attu">Attu</a>, una herramienta GUI de código abierto para la gestión intuitiva de Milvus.</p></li>
-<li><p><a href="/docs/es/monitor.md">Supervise Milvus con Prometheus</a>.</p></li>
+<li><p><a href="/docs/es/v2.6.x/monitor.md">Supervise Milvus con Prometheus</a>.</p></li>
 </ul>

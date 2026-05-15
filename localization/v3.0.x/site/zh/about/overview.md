@@ -191,7 +191,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>除了原始数据类型外，Milvus 还支持各种高级数据类型及其各自适用的距离度量。</p>
+    </button></h3><p>除了原始数据类型，Milvus 还支持各种高级数据类型及其各自适用的距离度量。</p>
 <ul>
 <li><a href="/docs/zh/sparse_vector.md">稀疏向量</a></li>
 <li><a href="/docs/zh/index-vector-fields.md">二进制向量</a></li>
@@ -217,11 +217,11 @@ summary: >-
       </svg>
     </button></h3><ul>
 <li><p><strong>高性能和高可用性</strong></p>
-<p>Milvus 采用<a href="/docs/zh/data_processing.md#Data-query">计算</a>与<a href="/docs/zh/data_processing.md#Data-insertion">存储</a>分离的<a href="/docs/zh/architecture_overview.md">分布式架构</a>。Milvus 可以横向扩展并适应不同的流量模式，通过独立增加读取繁重工作负载的查询节点和写入繁重工作负载的数据节点来实现最佳性能。K8s 上的无状态微服务允许从故障中<a href="/docs/zh/coordinator_ha.md#Coordinator-HA">快速恢复</a>，确保了高可用性。通过在多个查询节点上加载数据段，对<a href="/docs/zh/replica.md">复制</a>的支持进一步增强了容错能力和吞吐量。请参见性能比较<a href="https://zilliz.com/vector-database-benchmark-tool">基准</a>。</p></li>
+<p>Milvus 采用<a href="/docs/zh/data_processing.md#Data-query">计算</a>与<a href="/docs/zh/data_processing.md#Data-insertion">存储</a>分离的<a href="/docs/zh/architecture_overview.md">分布式架构</a>。Milvus 可以横向扩展并适应多样化的流量模式，通过独立增加读取繁重工作负载的查询节点和写入繁重工作负载的数据节点来实现最佳性能。K8s 上的无状态微服务允许从故障中<a href="/docs/zh/coordinator_ha.md#Coordinator-HA">快速恢复</a>，确保了高可用性。通过在多个查询节点上加载数据段，对<a href="/docs/zh/replica.md">复制</a>的支持进一步增强了容错能力和吞吐量。请参见性能比较<a href="https://zilliz.com/vector-database-benchmark-tool">基准</a>。</p></li>
 <li><p><strong>支持各种向量索引类型和硬件加速</strong></p>
-<p>Milvus 分离了系统和核心向量搜索引擎，使其能够支持针对不同场景优化的所有主要向量索引类型，包括 HNSW、IVF、FLAT（暴力）、SCANN 和 DiskANN，以及<a href="/docs/zh/index-explained.md">基于量化的</a>变化和<a href="/docs/zh/mmap.md">mmap</a>。Milvus 针对<a href="/docs/zh/boolean.md">元数据过滤</a>和<a href="/docs/zh/range-search.md">范围</a>搜索等高级功能对向量搜索进行了优化。此外，Milvus 还实现了硬件加速，以提高向量搜索性能，并支持 GPU 索引，如英伟达的<a href="/docs/zh/gpu-cagra.md">CAGRA</a>。</p></li>
+<p>Milvus 分离了系统和核心向量搜索引擎，使其能够支持针对不同场景优化的所有主要向量索引类型，包括 HNSW、IVF、FLAT（暴力）、SCANN 和 DiskANN，以及<a href="/docs/zh/index-explained.md">基于量化的</a>变化和<a href="/docs/zh/mmap.md">mmap</a>。Milvus 针对<a href="/docs/zh/boolean.md">元数据过滤</a>和<a href="/docs/zh/range-search.md">范围</a>搜索等高级功能对向量搜索进行了优化。此外，Milvus 还实现了硬件加速以提高向量搜索性能，并支持 GPU 索引，如英伟达的<a href="/docs/zh/gpu-cagra.md">CAGRA</a>。</p></li>
 <li><p><strong>灵活的多租户和热/冷存储</strong></p>
-<p>Milvus 通过在数据库、Collection、分区或分区 Key 层面进行隔离来支持<a href="/docs/zh/multi_tenancy.md#Multi-tenancy-strategies">多租户</a>。灵活的策略允许单个集群处理数百到数百万个租户，还能确保优化的搜索性能和灵活的访问控制。Milvus 通过冷/热存储提高了成本效益。经常访问的热数据可以存储在内存或固态硬盘中，以获得更高的性能，而访问量较少的冷数据则保存在速度较慢、成本效益较高的存储设备中。这种机制可以大大降低成本，同时保持关键任务的高性能。</p></li>
+<p>Milvus 通过在数据库、Collection、分区或分区 Key 层面进行隔离来支持<a href="/docs/zh/multi_tenancy.md#Multi-tenancy-strategies">多租户</a>。灵活的策略允许单个集群处理数百到数百万个租户，还能确保优化的搜索性能和灵活的访问控制。Milvus 通过冷/热存储提高了成本效益。频繁访问的热数据可以存储在内存或固态硬盘中，以获得更高的性能，而访问量较少的冷数据则保存在速度较慢、成本效益较高的存储设备中。这种机制可以大大降低成本，同时保持关键任务的高性能。</p></li>
 <li><p><strong>用于全文搜索和混合搜索的稀疏向量</strong></p>
 <p>除了通过密集向量进行语义搜索外，Milvus 还通过 BM25 以及 SPLADE 和 BGE-M3 等学习型稀疏嵌入原生支持<a href="/docs/zh/full-text-search.md">全文搜索</a>。用户可以将稀疏向量和密集向量存储在同一个 Collections 中，并定义函数对多个搜索请求的结果进行 Rerankers。查看<a href="/docs/zh/full_text_search_with_milvus.md">混合搜索（语义搜索+全文搜索）</a>示例。</p></li>
 <li><p><strong>数据安全和细粒度访问控制</strong></p>
@@ -267,7 +267,7 @@ summary: >-
 <li><p>Birdwatcher Birdwatcher 是 Milvus 的调试工具。使用它连接到 etcd，你可以检查 Milvus 系统的状态，或动态配置它。有关详情，请参阅<a href="/docs/zh/birdwatcher_overview.md">Birdwatcher</a>。</p></li>
 <li><p>Promethus 和 Grafana 集成 Promethus 是 Kubernetes 的开源系统监控和警报工具包。Grafana 是一个开源可视化堆栈，可以连接所有数据源。您可以使用 Promethus 和 Grafana 作为监控服务提供商，对 Milvus Distributed 的性能进行可视化监控。有关详情，请参阅<a href="/docs/zh/monitor.md">部署监控服务</a>。</p></li>
 <li><p>Milvus 备份 Milvus 备份是一个允许用户备份和恢复 Milvus 数据的工具。它同时提供 CLI 和 API，以适应不同的应用场景。详情请参阅<a href="/docs/zh/milvus_backup_overview.md">Milvus 备份</a>。</p></li>
-<li><p>Milvus Capture Data Change (CDC) Milvus-CDC 可以捕获和同步 Milvus 实例中的增量数据，并通过在源实例和目标实例之间的无缝传输，确保业务数据的可靠性，从而轻松实现增量备份和灾难恢复。详情请参阅<a href="/docs/zh/milvus-cdc-overview.md">Milvus CDC</a>。</p></li>
+<li><p>Milvus Capture Data Change (CDC) Milvus CDC 可以将数据变化从一个 Milvus 集群复制到另一个，用于主备灾难恢复。详情请参阅<a href="/docs/zh/milvus_cdc_overview.md">Milvus CDC</a>。</p></li>
 <li><p>Milvus 连接器 Milvus 为您规划了一套连接器，以便将 Milvus 与 Apache Spark 等第三方工具无缝集成。目前，您可以使用我们的 Spark 连接器将 Milvus 数据馈送到 Apache Spark 进行机器学习处理。有关详情，请参阅<a href="/docs/zh/integrate_with_spark.md">Spark-Milvus Connector</a>。</p></li>
 <li><p>向量传输服务（VTS） Milvus 为您提供了一套工具，用于在 Milvus 实例和一系列数据源（包括 Zilliz 集群、Elasticsearch、Postgres (PgVector) 和另一个 Milvus 实例）之间传输数据。有关详情，请参阅<a href="https://github.com/zilliztech/vts">VTS</a>。</p></li>
 </ul>

@@ -27,7 +27,7 @@ summary: >-
       </svg>
     </button></h1><p>На основе индексного файла, в котором хранится отсортированный порядок векторных вкраплений, поиск по методу приближенного ближайшего соседа (ANN) находит подгруппу векторных вкраплений на основе вектора запроса, содержащегося в полученном поисковом запросе, сравнивает вектор запроса с векторами в подгруппе и возвращает наиболее похожие результаты. С помощью ANN-поиска Milvus обеспечивает эффективный поиск. Эта страница поможет вам узнать, как проводить базовый ANN-поиск.</p>
 <div class="alert note">
-<p>Если вы динамически добавляете новые поля после создания коллекции, поиск, включающий эти поля, будет возвращать определенные значения по умолчанию или NULL для сущностей, которые не задали значения в явном виде. Подробнее см. в разделе <a href="/docs/ru/add-fields-to-an-existing-collection.md">Добавление полей в существующую коллекцию</a>.</p>
+<p>Если вы динамически добавляете новые поля после создания коллекции, поиск, включающий эти поля, будет возвращать определенные значения по умолчанию или NULL для сущностей, которые не задали значения в явном виде. Подробнее см. в разделе <a href="/docs/ru/v2.6.x/add-fields-to-an-existing-collection.md">Добавление полей в существующую коллекцию</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -50,14 +50,14 @@ summary: >-
 <p>Чтобы сократить время обучения, Milvus предоставляет <strong>AUTOINDEX</strong>. С помощью <strong>AUTOINDEX</strong> Milvus анализирует распределение данных в вашей коллекции во время создания индекса и устанавливает наиболее оптимизированные параметры индекса на основе анализа, чтобы найти баланс между производительностью и корректностью поиска.</p>
 <p>В этом разделе вы найдете подробную информацию по следующим темам:</p>
 <ul>
-<li><p><a href="/docs/ru/single-vector-search.md#Single-Vector-Search">Одновекторный поиск</a></p></li>
-<li><p><a href="/docs/ru/single-vector-search.md#Bulk-Vector-Search">Поиск по объемному вектору</a></p></li>
-<li><p><a href="/docs/ru/single-vector-search.md#ANN-Search-in-Partition">ANN-поиск в разделе</a></p></li>
-<li><p><a href="/docs/ru/single-vector-search.md#Use-Output-Fields">Использование полей вывода</a></p></li>
-<li><p><a href="/docs/ru/single-vector-search.md#Use-Limit-and-Offset">Использовать ограничение и смещение</a></p></li>
-<li><p><a href="/docs/ru/single-vector-search.md#Use-Level">Использовать уровень</a></p></li>
-<li><p><a href="/docs/ru/single-vector-search.md#Get-Recall-Rate">Получение коэффициента возврата</a></p></li>
-<li><p><a href="/docs/ru/single-vector-search.md#Enhancing-ANN-Search">Улучшение поиска с помощью ANN</a></p></li>
+<li><p><a href="/docs/ru/v2.6.x/single-vector-search.md#Single-Vector-Search">Одновекторный поиск</a></p></li>
+<li><p><a href="/docs/ru/v2.6.x/single-vector-search.md#Bulk-Vector-Search">Поиск по объемному вектору</a></p></li>
+<li><p><a href="/docs/ru/v2.6.x/single-vector-search.md#ANN-Search-in-Partition">ANN-поиск в разделе</a></p></li>
+<li><p><a href="/docs/ru/v2.6.x/single-vector-search.md#Use-Output-Fields">Использование полей вывода</a></p></li>
+<li><p><a href="/docs/ru/v2.6.x/single-vector-search.md#Use-Limit-and-Offset">Использовать ограничение и смещение</a></p></li>
+<li><p><a href="/docs/ru/v2.6.x/single-vector-search.md#Use-Level">Использовать уровень</a></p></li>
+<li><p><a href="/docs/ru/v2.6.x/single-vector-search.md#Get-Recall-Rate">Получение коэффициента возврата</a></p></li>
+<li><p><a href="/docs/ru/v2.6.x/single-vector-search.md#Enhancing-ANN-Search">Улучшение поиска с помощью ANN</a></p></li>
 </ul>
 <h2 id="Single-Vector-Search" class="common-anchor-header">Одновекторный поиск<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -228,6 +228,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -458,6 +459,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -666,6 +668,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -825,6 +828,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -873,7 +877,7 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>Вы можете заметить, что параметр <code translate="no">limit</code>, передаваемый в поисковых запросах, определяет количество сущностей, включаемых в результаты поиска. Этот параметр определяет максимальное количество сущностей, возвращаемых при одном поиске, и обычно называется <strong>top-K</strong>.</p>
-<p>Если вы хотите выполнять постраничные запросы, вы можете использовать цикл для отправки нескольких запросов на поиск, с параметрами <strong>Limit</strong> и <strong>Offset</strong>, передаваемыми в каждом запросе. В частности, вы можете установить параметр <strong>Limit</strong> на количество сущностей, которые вы хотите включить в результаты текущего запроса, а <strong>Offset</strong> - на общее количество сущностей, которые уже были возвращены.</p>
+<p>Если вы хотите выполнять постраничные запросы, вы можете использовать цикл для отправки нескольких запросов на поиск, при этом параметры <strong>Limit</strong> и <strong>Offset</strong> будут передаваться в каждом запросе. В частности, вы можете установить параметр <strong>Limit</strong> на количество сущностей, которые вы хотите включить в результаты текущего запроса, а <strong>Offset</strong> - на общее количество сущностей, которые уже были возвращены.</p>
 <p>В таблице ниже показано, как задать параметры <strong>Limit</strong> и <strong>Offset</strong> для постраничных запросов, возвращающих 100 сущностей за раз.</p>
 <table>
    <tr>
@@ -982,6 +986,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -1008,7 +1013,7 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>Если в вашей коллекции есть поле <code translate="no">TIMESTAMPTZ</code>, вы можете временно изменить часовой пояс базы данных или коллекции по умолчанию для одной операции, установив параметр <code translate="no">timezone</code> в вызове поиска. Это позволяет контролировать отображение и сравнение значений <code translate="no">TIMESTAMPTZ</code> во время выполнения операции.</p>
-<p>Значение <code translate="no">timezone</code> должно быть действительным <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">идентификатором часового пояса IANA</a> (например, <strong>Азия/Шанхай</strong>, <strong>Америка/Чикаго</strong> или <strong>UTC</strong>). Подробнее о том, как использовать поле <code translate="no">TIMESTAMPTZ</code>, см. в разделе <a href="/docs/ru/timestamptz-field.md">Поле TIMESTAMPTZ</a>.</p>
+<p>Значение <code translate="no">timezone</code> должно быть действительным <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">идентификатором часового пояса IANA</a> (например, <strong>Азия/Шанхай</strong>, <strong>Америка/Чикаго</strong> или <strong>UTC</strong>). Подробнее о том, как использовать поле <code translate="no">TIMESTAMPTZ</code>, см. в разделе <a href="/docs/ru/v2.6.x/timestamptz-field.md">Поле TIMESTAMPTZ</a>.</p>
 <p>В примере ниже показано, как временно установить часовой пояс для операции поиска:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -1048,32 +1053,32 @@ curl --request POST \
 <ul>
 <li><p>Фильтрованный поиск</p>
 <p>Вы можете включить условия фильтрации в поисковый запрос, чтобы Milvus выполнял фильтрацию метаданных перед проведением ANN-поиска, сокращая область поиска со всей коллекции до сущностей, соответствующих заданным условиям фильтрации.</p>
-<p>Дополнительные сведения о фильтрации метаданных и условиях фильтрации см. в разделах <a href="/docs/ru/filtered-search.md">"Фильтрованный поиск"</a>, <a href="/docs/ru/boolean.md">"Объяснение фильтрации"</a> и смежных темах.</p></li>
+<p>Дополнительные сведения о фильтрации метаданных и условиях фильтрации см. в разделах <a href="/docs/ru/v2.6.x/filtered-search.md">"Фильтрованный поиск"</a>, <a href="/docs/ru/v2.6.x/boolean.md">"Объяснение фильтрации"</a> и смежных темах.</p></li>
 <li><p>Поиск по диапазону</p>
-<p>Вы можете улучшить релевантность результатов поиска, ограничив расстояние или оценку возвращаемых сущностей определенным диапазоном. В Milvus поиск по диапазону предполагает рисование двух концентрических окружностей, в центре которых находится векторное вложение, наиболее похожее на вектор запроса. В поисковом запросе указывается радиус обеих окружностей, и Milvus возвращает все векторные вкрапления, которые попадают во внешнюю окружность, но не во внутреннюю.</p>
-<p>Подробнее о поиске по диапазону см. в разделе <a href="/docs/ru/range-search.md">Поиск по диапазону</a>.</p></li>
+<p>Вы можете улучшить релевантность результатов поиска, ограничив расстояние или оценку возвращаемых сущностей определенным диапазоном. В Milvus поиск по диапазону включает в себя рисование двух концентрических окружностей с векторной вставкой, наиболее похожей на вектор запроса, в качестве центра. В поисковом запросе указывается радиус обеих окружностей, и Milvus возвращает все векторные вкрапления, которые попадают во внешнюю окружность, но не во внутреннюю.</p>
+<p>Подробнее о поиске по диапазону см. в разделе <a href="/docs/ru/v2.6.x/range-search.md">Поиск по диапазону</a>.</p></li>
 <li><p>Группировочный поиск</p>
 <p>Если возвращаемые сущности имеют одинаковое значение в определенном поле, результаты поиска могут не отражать распределение всех векторных вкраплений в векторном пространстве. Чтобы разнообразить результаты поиска, воспользуйтесь группирующим поиском.</p>
-<p>Подробнее о группирующем поиске см. в разделе <a href="/docs/ru/grouping-search.md">Группирующий поиск</a>,</p></li>
+<p>Подробнее о группирующем поиске см. в разделе <a href="/docs/ru/v2.6.x/grouping-search.md">Группирующий поиск</a>,</p></li>
 <li><p>Гибридный поиск</p>
 <p>Коллекция может включать несколько векторных полей для сохранения векторных вкраплений, созданных с помощью различных моделей вкраплений. При этом можно использовать гибридный поиск для ранжирования результатов поиска по этим векторным полям, что повышает коэффициент запоминания.</p>
-<p>Подробнее о гибридном поиске см. в разделе <a href="/docs/ru/multi-vector-search.md">Гибридный поиск</a>.</p></li>
+<p>Подробнее о гибридном поиске см. в разделе <a href="/docs/ru/v2.6.x/multi-vector-search.md">Гибридный поиск</a>.</p></li>
 <li><p>Итератор поиска</p>
 <p>Один поиск ANN возвращает максимум 16 384 сущности. Если вам нужно вернуть больше сущностей за один поиск, используйте итераторы поиска.</p>
-<p>Подробнее об итераторах поиска см. в разделе <a href="/docs/ru/with-iterators.md">Итератор поиска</a>.</p></li>
+<p>Подробнее об итераторах поиска см. в разделе <a href="/docs/ru/v2.6.x/with-iterators.md">Итератор поиска</a>.</p></li>
 <li><p>Полнотекстовый поиск</p>
 <p>Полнотекстовый поиск - это функция поиска документов, содержащих определенные термины или фразы в текстовых наборах данных, с последующим ранжированием результатов на основе релевантности. Эта функция позволяет преодолеть ограничения семантического поиска, который может упускать из виду точные термины, обеспечивая получение наиболее точных и контекстуально релевантных результатов. Кроме того, она упрощает векторный поиск, принимая исходный текст, автоматически преобразуя текстовые данные в разреженные вкрапления без необходимости вручную генерировать векторные вкрапления.</p>
-<p>Подробнее о полнотекстовом поиске см. в разделе <a href="/docs/ru/full-text-search.md">Полнотекстовый поиск</a>.</p></li>
+<p>Подробнее о полнотекстовом поиске см. в разделе <a href="/docs/ru/v2.6.x/full-text-search.md">Полнотекстовый поиск</a>.</p></li>
 <li><p>Сопоставление текста</p>
 <p>Функция поиска по ключевым словам в Milvus позволяет точно находить документы по определенным терминам. Эта функция используется в основном для фильтрованного поиска по определенным условиям и может включать скалярную фильтрацию для уточнения результатов запроса, позволяя искать сходство в векторах, которые удовлетворяют скалярным критериям.</p>
-<p>Подробные сведения о подборе ключевых слов см. в разделе <a href="/docs/ru/keyword-match.md">Подбор ключевых слов</a>.</p></li>
+<p>Подробные сведения о подборе ключевых слов см. в разделе <a href="/docs/ru/v2.6.x/keyword-match.md">Подбор ключевых слов</a>.</p></li>
 <li><p>Использование ключа раздела</p>
 <p>Вовлечение нескольких скалярных полей в фильтрацию метаданных и использование довольно сложных условий фильтрации может повлиять на эффективность поиска. Если задать скалярное поле в качестве ключа раздела и использовать в поисковом запросе условие фильтрации, включающее ключ раздела, это поможет ограничить область поиска разделами, соответствующими указанным значениям ключа раздела.</p>
-<p>Подробнее о ключе раздела см. в разделе <a href="/docs/ru/use-partition-key.md">Использование ключа раздела</a>.</p></li>
+<p>Подробнее о ключе раздела см. в разделе <a href="/docs/ru/v2.6.x/use-partition-key.md">Использование ключа раздела</a>.</p></li>
 <li><p>Использовать mmap</p>
-<p>Подробнее о настройках mmap см. в разделе <a href="/docs/ru/mmap.md">Использовать mmap</a>.</p></li>
+<p>Подробнее о настройках mmap см. в разделе <a href="/docs/ru/v2.6.x/mmap.md">Использовать mmap</a>.</p></li>
 <li><p>Компактификация кластеризации</p>
-<p>Подробные сведения о кластерном уплотнении см. в разделе <a href="/docs/ru/clustering-compaction.md">Clustering Compaction</a>.</p></li>
+<p>Подробные сведения о кластерном уплотнении см. в разделе <a href="/docs/ru/v2.6.x/clustering-compaction.md">Clustering Compaction</a>.</p></li>
 <li><p>Использовать ранжирование</p>
-<p>Подробные сведения об использовании ранжирования для повышения релевантности результатов поиска см. в разделах <a href="/docs/ru/decay-ranker-overview.md">Обзор ранжирования по распаду</a> и <a href="/docs/ru/model-ranker-overview.md">Обзор ранжирования по модели</a>.</p></li>
+<p>Подробные сведения об использовании ранжирования для повышения релевантности результатов поиска см. в разделах <a href="/docs/ru/v2.6.x/decay-ranker-overview.md">Обзор ранжирования по распаду</a> и <a href="/docs/ru/v2.6.x/model-ranker-overview.md">Обзор ранжирования по модели</a>.</p></li>
 </ul>

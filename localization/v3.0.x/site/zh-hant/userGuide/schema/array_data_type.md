@@ -41,7 +41,7 @@ summary: ARRAY 欄位儲存相同資料類型元素的有序集合。以下是 A
       </svg>
     </button></h2><ul>
 <li><p><strong>預設值</strong>：ARRAY 欄位不支援預設值。但是，您可以將<code translate="no">nullable</code> 屬性設定為<code translate="no">True</code> ，以允許空值。詳情請參閱<a href="/docs/zh-hant/nullable-and-default.md">Nullable &amp; Default</a>。</p></li>
-<li><p><strong>資料類型：</strong>ARRAY 欄位中的所有元素必須共用相同的資料類型，此類型由<code translate="no">element_type</code> 參數定義。當<code translate="no">element_type</code> 設定為<code translate="no">VARCHAR</code> 時，必須同時指定陣列元素的<code translate="no">max_length</code> 。<code translate="no">element_type</code> 接受 Milvus 支援的任何標量資料類型，但<code translate="no">JSON</code> 除外。</p></li>
+<li><p><strong>資料類型：</strong>ARRAY 欄位中的所有元素必須共用相同的資料類型，該資料類型由<code translate="no">element_type</code> 參數定義。當<code translate="no">element_type</code> 設定為<code translate="no">VARCHAR</code> 時，必須同時指定陣列元素的<code translate="no">max_length</code> 。<code translate="no">element_type</code> 接受 Milvus 支援的任何標量資料類型，但<code translate="no">JSON</code> 除外。</p></li>
 <li><p><strong>陣列容量</strong>：ARRAY 欄位中元素的數量必須小於或等於陣列建立時所定義的最大容量，如<code translate="no">max_capacity</code> 所指定。該值應為<strong>1</strong>至<strong>4096 範圍</strong>內的整數。</p></li>
 <li><p><strong>字串處理</strong>：Array 欄位中的字串值會以原樣儲存，不會進行語意轉換或轉換。例如，<code translate="no">'a&quot;b'</code>,<code translate="no">&quot;a'b&quot;</code>,<code translate="no">'a\'b'</code>, 和<code translate="no">&quot;a\&quot;b&quot;</code> 會以輸入的方式儲存，而<code translate="no">'a'b'</code> 和<code translate="no">&quot;a&quot;b&quot;</code> 則視為無效值。</p></li>
 </ul>
@@ -382,6 +382,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -498,6 +499,7 @@ client.<span class="hljs-title function_">insert</span>({
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {
@@ -597,6 +599,7 @@ fmt.Println(<span class="hljs-string">&quot;ratings&quot;</span>, rs.GetColumn(<
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;tags IS NOT NULL&quot;,
@@ -674,6 +677,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;my_collection&quot;,
   &quot;filter&quot;: &quot;ratings[0] &gt; 4&quot;,
@@ -773,6 +777,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

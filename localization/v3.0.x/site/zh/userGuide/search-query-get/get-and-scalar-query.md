@@ -208,6 +208,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/get&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;id&quot;: [0, 1, 2],
@@ -318,6 +319,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;color like \&quot;red%\&quot;&quot;,
@@ -346,7 +348,7 @@ curl --request POST \
 <ul>
 <li><p><code translate="no">order_by</code> 必须与<code translate="no">limit</code> 一起使用。</p></li>
 <li><p>支持的字段类型<code translate="no">INT8</code>,<code translate="no">INT16</code>,<code translate="no">INT32</code>,<code translate="no">INT64</code>,<code translate="no">FLOAT</code>,<code translate="no">DOUBLE</code>, 和<code translate="no">VARCHAR</code> 。不支持按向量、<code translate="no">JSON</code> 或<code translate="no">ARRAY</code> 字段排序。</p></li>
-<li><p>按空值字段排序时，NULL 值将放在升序（NULLS LAST）的末尾和降序（NULLS FIRST）的开头。</p></li>
+<li><p>按空值字段排序时，NULL 值将放在升序的末尾（NULLS LAST）和降序的开头（NULLS FIRST）。</p></li>
 </ul>
 <h4 id="Basic-Sort" class="common-anchor-header">基本排序</h4><p>向<code translate="no">order_by</code> 参数传递<code translate="no">&quot;field_name:direction&quot;</code> 字符串列表，其中<code translate="no">direction</code> 是<code translate="no">asc</code> （升序）或<code translate="no">desc</code> （降序）。注意<code translate="no">asc</code> 和<code translate="no">desc</code> 区分大小写。</p>
 <div class="multipleCode">
@@ -786,6 +788,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/get&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -798,6 +801,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/get&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],

@@ -13,7 +13,6 @@ summary: >-
   fixo de dimensões, que varia entre algumas dezenas e várias centenas ou mesmo
   milhares, dependendo da aplicação e dos requisitos específicos.
 ---
-
 <h1 id="Dense-Vector" class="common-anchor-header">Vetor denso<button data-href="#Dense-Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -54,10 +53,10 @@ summary: >-
 <p>A imagem acima ilustra a representação de vectores densos num espaço 2D. Embora os vectores densos em aplicações do mundo real tenham frequentemente dimensões muito superiores, esta ilustração 2D transmite eficazmente vários conceitos-chave:</p>
 <ul>
 <li><p><strong>Representação multidimensional:</strong> Cada ponto representa um objeto concetual (como <strong>Milvus</strong>, <strong>base de dados vetorial</strong>, <strong>sistema de recuperação</strong>, etc.), sendo a sua posição determinada pelos valores das suas dimensões.</p></li>
-<li><p><strong>Relações semânticas:</strong> As distâncias entre pontos reflectem a semelhança semântica entre conceitos. Pontos mais próximos indicam conceitos que estão mais relacionados semanticamente.</p></li>
+<li><p><strong>Relações Semânticas:</strong> As distâncias entre os pontos reflectem a semelhança semântica entre os conceitos. Pontos mais próximos indicam conceitos que estão mais relacionados semanticamente.</p></li>
 <li><p><strong>Efeito de agrupamento:</strong> Os conceitos relacionados (como <strong>Milvus</strong>, <strong>base de dados vetorial</strong> e <strong>sistema de recuperação</strong>) são posicionados próximos uns dos outros no espaço, formando um agrupamento semântico.</p></li>
 </ul>
-<p>Abaixo está um exemplo de um vetor denso real que representa o texto <code translate="no">&quot;Milvus is an efficient vector database&quot;</code>:</p>
+<p>Segue-se um exemplo de um vetor denso real que representa o texto <code translate="no">&quot;Milvus is an efficient vector database&quot;</code>:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-number">-0.013052909</span><span class="hljs-punctuation">,</span>
     <span class="hljs-number">0.020387933</span><span class="hljs-punctuation">,</span>
@@ -71,15 +70,14 @@ summary: >-
 <span class="hljs-punctuation">]</span>
 
 <button class="copy-code-btn"></button></code></pre>
-
-<p>Os vectores densos podem ser gerados utilizando vários modelos <a href="https://en.wikipedia.org/wiki/Embedding">de incorporação</a>, tais como modelos CNN (como <a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNet</a>, <a href="https://pytorch.org/vision/stable/models/vgg.html">VGG</a>) para imagens e modelos de linguagem (como <a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a>, <a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vec</a>) para texto. Estes modelos transformam os dados em bruto em pontos num espaço de elevada dimensão, capturando as caraterísticas semânticas dos dados. Adicionalmente, Milvus oferece métodos convenientes para ajudar os utilizadores a gerar e processar vectores densos, como detalhado em Embeddings.</p>
-<p>Uma vez os dados vectorizados, podem ser armazenados no Milvus para gestão e recuperação de vectores. O diagrama abaixo mostra o processo básico.</p>
+<p>Os vectores densos podem ser gerados utilizando vários modelos <a href="https://en.wikipedia.org/wiki/Embedding">de incorporação</a>, como os modelos CNN (como <a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNet</a>, <a href="https://pytorch.org/vision/stable/models/vgg.html">VGG</a>) para imagens e modelos de linguagem (como <a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a>, <a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vec</a>) para texto. Estes modelos transformam os dados em bruto em pontos num espaço de elevada dimensão, capturando as caraterísticas semânticas dos dados. Adicionalmente, Milvus oferece métodos convenientes para ajudar os utilizadores a gerar e processar vectores densos, como detalhado em Embeddings.</p>
+<p>Uma vez vectorizados, os dados podem ser armazenados no Milvus para gestão e recuperação de vectores. O diagrama abaixo mostra o processo básico.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" />
    </span> <span class="img-wrapper"> <span>Utilizar o vetor denso</span> </span></p>
 <div class="alert note">
-<p>Para além dos vectores densos, Milvus também suporta vectores esparsos e vectores binários. Os vectores esparsos são adequados para correspondências precisas com base em termos específicos, como a pesquisa de palavras-chave e a correspondência de termos, enquanto os vectores binários são normalmente utilizados para tratar eficazmente dados binarizados, como a correspondência de padrões de imagem e determinadas aplicações de hashing. Para obter mais informações, consulte <a href="/docs/pt/binary-vector.md">Vetor binário</a> e <a href="/docs/pt/sparse_vector.md">Vetor esparso</a>.</p>
+<p>Para além dos vectores densos, Milvus também suporta vectores esparsos e vectores binários. Os vectores esparsos são adequados para correspondências precisas com base em termos específicos, como a pesquisa de palavras-chave e a correspondência de termos, enquanto os vectores binários são normalmente utilizados para tratar eficazmente dados binarizados, como a correspondência de padrões de imagem e determinadas aplicações de hashing. Para obter mais informações, consulte <a href="/docs/pt/v2.6.x/binary-vector.md">Vetor binário</a> e <a href="/docs/pt/v2.6.x/sparse_vector.md">Vetor esparso</a>.</p>
 </div>
 <h2 id="Use-dense-vectors" class="common-anchor-header">Usar vetores densos<button data-href="#Use-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -96,7 +94,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">Adicionar campo vetorial</h3><p>Para utilizar vectores densos no Milvus, comece por definir um campo vetorial para armazenar vectores densos ao criar uma coleção. Este processo inclui:</p>
+    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">Adicionar campo vetorial<button data-href="#Add-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para utilizar vectores densos no Milvus, comece por definir um campo vetorial para armazenar vectores densos ao criar uma coleção. Este processo inclui:</p>
 <ol>
 <li><p>Definir <code translate="no">datatype</code> para um tipo de dados de vetor denso suportado. Para conhecer os tipos de dados de vetor denso suportados, consulte Tipos de dados.</p></li>
 <li><p>Especificar as dimensões do vetor denso usando o parâmetro <code translate="no">dim</code>.</p></li>
@@ -109,14 +122,13 @@ summary: >-
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 
 schema = client.create_schema(
-auto_id=<span class="hljs-literal">True</span>,
-enable_dynamic_fields=<span class="hljs-literal">True</span>,
+    auto_id=<span class="hljs-literal">True</span>,
+    enable_dynamic_fields=<span class="hljs-literal">True</span>,
 )
 
 schema.add_field(field_name=<span class="hljs-string">&quot;pk&quot;</span>, datatype=DataType.VARCHAR, is_primary=<span class="hljs-literal">True</span>, max_length=<span class="hljs-number">100</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;dense_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">4</span>)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 
@@ -237,19 +249,33 @@ schema.WithField(entity.NewField().
      <td><p>Armazena vectores cujos elementos individuais em cada dimensão são números inteiros de 8 bits (int8), com cada elemento a variar entre -128 e 127. Projetado para modelos de aprendizado profundo quantizados (por exemplo, ResNet, EfficientNet), o INT8_VECTOR reduz o tamanho do modelo e acelera a inferência com perda mínima de precisão.<br><strong>Nota</strong>: Este tipo de vetor é suportado apenas para índices HNSW.</p></td>
    </tr>
 </table>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Definir parâmetros de índice para o campo de vetor</h3><p>Para acelerar as pesquisas semânticas, deve ser criado um índice para o campo vetorial. A indexação pode melhorar significativamente a eficiência da recuperação de dados vetoriais em grande escala.</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Definir parâmetros de índice para o campo de vetor<button data-href="#Set-index-params-for-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para acelerar as pesquisas semânticas, deve ser criado um índice para o campo vetorial. A indexação pode melhorar significativamente a eficiência da recuperação de dados vetoriais em grande escala.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
-field_name=<span class="hljs-string">&quot;dense_vector&quot;</span>,
-index_name=<span class="hljs-string">&quot;dense_vector_index&quot;</span>,
-index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-metric_type=<span class="hljs-string">&quot;IP&quot;</span>
+    field_name=<span class="hljs-string">&quot;dense_vector&quot;</span>,
+    index_name=<span class="hljs-string">&quot;dense_vector_index&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> java.util.*;
 
@@ -284,8 +310,23 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <button class="copy-code-btn"></button></code></pre>
 <p>No exemplo acima, um índice chamado <code translate="no">dense_vector_index</code> é criado para o campo <code translate="no">dense_vector</code> usando o tipo de índice <code translate="no">AUTOINDEX</code>. O <code translate="no">metric_type</code> é definido como <code translate="no">IP</code>, indicando que o produto interno será utilizado como a métrica de distância.</p>
 <p>Milvus fornece vários tipos de índices para uma melhor experiência de pesquisa vetorial. AUTOINDEX é um tipo de índice especial concebido para suavizar a curva de aprendizagem da pesquisa vetorial. Há muitos tipos de índices disponíveis para escolher. Para mais pormenores, consulte xxx.</p>
-<p>O Milvus suporta outros tipos de métricas. Para mais informações, consulte <a href="/docs/pt/metric.md">Tipos de métricas</a>.</p>
-<h3 id="Create-collection" class="common-anchor-header">Criar coleção</h3><p>Quando as definições do vetor denso e dos parâmetros do índice estiverem concluídas, pode criar uma coleção que contenha vectores densos. O exemplo abaixo usa o método <code translate="no">create_collection</code> para criar uma coleção chamada <code translate="no">my_collection</code>.</p>
+<p>O Milvus suporta outros tipos de métricas. Para mais informações, consulte <a href="/docs/pt/v2.6.x/metric.md">Tipos de métricas</a>.</p>
+<h3 id="Create-collection" class="common-anchor-header">Criar coleção<button data-href="#Create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Quando as definições do vetor denso e dos parâmetros do índice estiverem concluídas, pode criar uma coleção que contenha vectores densos. O exemplo abaixo usa o método <code translate="no">create_collection</code> para criar uma coleção chamada <code translate="no">my_collection</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -298,17 +339,16 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 
 <span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
-.uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
-.build());
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .build());
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-.collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-.collectionSchema(schema)
-.indexParams(indexes)
-.build();
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .collectionSchema(schema)
+        .indexParams(indexes)
+        .build();
 client.createCollection(requestCreate);
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
 <span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
@@ -334,13 +374,29 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">Inserir dados</h3><p>Depois de criar a coleção, use o método <code translate="no">insert</code> para adicionar dados contendo vetores densos. Certifique-se de que a dimensionalidade dos vectores densos que estão a ser inseridos corresponde ao valor <code translate="no">dim</code> definido ao adicionar o campo de vetor denso.</p>
+<h3 id="Insert-data" class="common-anchor-header">Inserir dados<button data-href="#Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Depois de criar a coleção, use o método <code translate="no">insert</code> para adicionar dados contendo vetores densos. Certifique-se de que a dimensionalidade dos vectores densos que estão a ser inseridos corresponde ao valor <code translate="no">dim</code> definido ao adicionar o campo de vetor denso.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
@@ -349,11 +405,10 @@ client.createCollection(requestCreate);
 ]
 
 client.insert(
-collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-data=data
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    data=data
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
 <span class="hljs-keyword">import</span> com.google.gson.JsonObject;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
@@ -394,6 +449,7 @@ client.<span class="hljs-title function_">insert</span>({
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;dense_vector&quot;: [0.1, 0.2, 0.3, 0.4]},
@@ -404,7 +460,22 @@ client.<span class="hljs-title function_">insert</span>({
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:2,&quot;insertIds&quot;:[&quot;453577185629572531&quot;,&quot;453577185629572532&quot;]}}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search" class="common-anchor-header">Realizar pesquisa de similaridade</h3><p>A pesquisa semântica baseada em vectores densos é uma das principais funcionalidades do Milvus, permitindo-lhe encontrar rapidamente os dados mais semelhantes a um vetor de consulta com base na distância entre vectores. Para realizar uma pesquisa por semelhança, prepare o vetor de consulta e os parâmetros de pesquisa e, em seguida, chame o método <code translate="no">search</code>.</p>
+<h3 id="Perform-similarity-search" class="common-anchor-header">Executar pesquisa de similaridade<button data-href="#Perform-similarity-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>A pesquisa semântica baseada em vectores densos é uma das principais funcionalidades do Milvus, permitindo-lhe encontrar rapidamente os dados mais semelhantes a um vetor de consulta com base na distância entre vectores. Para realizar uma pesquisa por semelhança, prepare o vetor de consulta e os parâmetros de pesquisa e, em seguida, chame o método <code translate="no">search</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {
@@ -414,12 +485,12 @@ client.<span class="hljs-title function_">insert</span>({
 query_vector = [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>]
 
 res = client.search(
-collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-data=[query_vector],
-anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
-search_params=search_params,
-limit=<span class="hljs-number">5</span>,
-output_fields=[<span class="hljs-string">&quot;pk&quot;</span>]
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    data=[query_vector],
+    anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
+    search_params=search_params,
+    limit=<span class="hljs-number">5</span>,
+    output_fields=[<span class="hljs-string">&quot;pk&quot;</span>]
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -427,7 +498,6 @@ output_fields=[<span class="hljs-string">&quot;pk&quot;</span>]
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: &#x27;453718927992172271&#x27;, &#x27;distance&#x27;: 0.7599999904632568, &#x27;entity&#x27;: {&#x27;pk&#x27;: &#x27;453718927992172271&#x27;}}, {&#x27;id&#x27;: &#x27;453718927992172270&#x27;, &#x27;distance&#x27;: 0.6299999952316284, &#x27;entity&#x27;: {&#x27;pk&#x27;: &#x27;453718927992172270&#x27;}}]&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
 
 Map&lt;String,Object&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
@@ -488,6 +558,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -503,4 +574,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.55,&quot;id&quot;:&quot;453577185629572532&quot;,&quot;pk&quot;:&quot;453577185629572532&quot;},{&quot;distance&quot;:0.42,&quot;id&quot;:&quot;453577185629572531&quot;,&quot;pk&quot;:&quot;453577185629572531&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para obter mais informações sobre os parâmetros de pesquisa de similaridade, consulte <a href="/docs/pt/single-vector-search.md">Pesquisa ANN básica</a>.</p>
+<p>Para obter mais informações sobre os parâmetros de pesquisa de similaridade, consulte <a href="/docs/pt/v2.6.x/single-vector-search.md">Pesquisa ANN básica</a>.</p>

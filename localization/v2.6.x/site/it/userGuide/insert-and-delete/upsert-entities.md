@@ -111,7 +111,7 @@ summary: >-
 <ul>
 <li><p>Se si esegue l'upsert con <code translate="no">partial_update</code> disabilitato, il comportamento predefinito è quello di <strong>sovrascrivere</strong>. Ciò significa che il valore del campo dinamico sarà sovrascritto da tutti i campi non definiti dallo schema inclusi nella richiesta e dai loro valori.</p>
 <p>Ad esempio, se i dati inclusi nella richiesta sono <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code>, le coppie chiave-valore nel campo dinamico dell'entità di destinazione saranno aggiornate a tale valore.</p></li>
-<li><p>Se si esegue l'upsert con <code translate="no">partial_update</code> abilitato, il comportamento predefinito è l'<strong>unione</strong>. Ciò significa che il valore del campo dinamico si fonderà con tutti i campi non definiti dallo schema inclusi nella richiesta e i loro valori.</p>
+<li><p>Se si esegue l'upsert con <code translate="no">partial_update</code> abilitato, il comportamento predefinito è l'<strong>unione</strong>. Ciò significa che il valore del campo dinamico verrà unito a tutti i campi non definiti dallo schema inclusi nella richiesta e ai loro valori.</p>
 <p>Ad esempio, se i dati inclusi nella richiesta sono <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>, le coppie chiave-valore nel campo dinamico dell'entità di destinazione diventeranno <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> dopo l'upsert.</p></li>
 </ul></li>
 <li><p><strong>Upsert di un campo JSON.</strong></p>
@@ -303,6 +303,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/upsert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;title&quot;: &quot;Artificial Intelligence in Real Life&quot;, &quot;issue&quot;: &quot;vol.12&quot;},
@@ -449,6 +450,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/upsert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 10, &quot;vector&quot;: [0.06998888224297328, 0.8582816610326578, -0.9657938677934292, 0.6527905683627726, -0.8668460657158576], &quot;title&quot;: &quot;Layour Design Reference&quot;, &quot;issue&quot;: &quot;vol.34&quot;},
@@ -591,6 +593,7 @@ _, err = client.Upsert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/upsert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,

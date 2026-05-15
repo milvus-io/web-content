@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus의 모든 컬렉션에는 각 엔티티를 고유하게 식별하는 기본 필드가 있어야 합니다. 이 필드를 통해 모든 엔티티를 모호함 없이 삽입, 업데이트, 쿼리 또는 삭제할 수 있습니다.</p>
+    </button></h1><p>Milvus의 모든 컬렉션에는 각 엔티티를 고유하게 식별하는 기본 필드가 있어야 합니다. 이 필드는 모든 엔티티를 모호함 없이 삽입, 업데이트, 쿼리 또는 삭제할 수 있도록 해줍니다.</p>
 <p>사용 사례에 따라 Milvus가 자동으로 ID를 생성(AutoID)하도록 하거나 직접 ID를 수동으로 할당할 수 있습니다.</p>
 <h2 id="What-is-a-primary-field" class="common-anchor-header">기본 필드란 무엇인가요?<button data-href="#What-is-a-primary-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -98,7 +98,7 @@ summary: >-
    </tr>
    <tr>
      <td><p>자동 ID</p></td>
-     <td><p>Milvus는 삽입되거나 가져온 엔티티에 대한 고유 식별자를 자동으로 생성합니다.</p></td>
+     <td><p>Milvus는 삽입하거나 가져온 엔티티에 대한 고유 식별자를 자동으로 생성합니다.</p></td>
      <td><p>ID를 수동으로 관리할 필요가 없는 대부분의 시나리오에 적합합니다.</p></td>
    </tr>
    <tr>
@@ -109,7 +109,7 @@ summary: >-
 </table>
 <div class="alert note">
 <ul>
-<li><p>어떤 모드를 선택해야 할지 잘 모르겠다면, 더 간단한 수집과 고유성 보장을 위해 <a href="/docs/ko/primary-field.md#Quickstart-Use-AutoID">자동 ID로 시작하세요</a>.</p></li>
+<li><p>어떤 모드를 선택해야 할지 잘 모르겠다면, 더 간단한 수집과 고유성 보장을 위해 <a href="/docs/ko/v2.6.x/primary-field.md#Quickstart-Use-AutoID">자동 ID로 시작하세요</a>.</p></li>
 <li><p>기본 키를 수동으로 설정하는 것이 유리한 경우가 아니라면 모든 경우에 <code translate="no">autoId</code> 을 사용하는 것이 좋습니다.</p></li>
 </ul>
 </div>
@@ -278,6 +278,7 @@ client.createCollection(requestCreate);
 
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/collections/create&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_autoid\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$SCHEMA</span>
@@ -362,6 +363,7 @@ System.out.printf(<span class="hljs-string">&quot;Generated IDs: %s\n&quot;</spa
 
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/entities/insert&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_autoid\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$INSERT_DATA</span>
@@ -536,6 +538,7 @@ client.createCollection(requestCreate);
 
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/collections/create&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_manual_ids\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$SCHEMA</span>
@@ -627,6 +630,7 @@ System.out.printf(<span class="hljs-string">&quot;Generated IDs: %s\n&quot;</spa
 <span class="hljs-comment"># 插入数据</span>
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/entities/insert&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_manual_ids\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$INSERT_DATA</span>
@@ -669,8 +673,8 @@ curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/
         ></path>
       </svg>
     </button></h3><p>데이터 마이그레이션 중에 기존 ID를 유지하려면 <code translate="no">alter_collection_properties</code> 호출을 통해 <code translate="no">allow_insert_auto_id</code> 속성을 활성화하세요. true로 설정하면 AutoID가 활성화되어 있어도 Milvus는 사용자가 제공한 ID를 허용합니다.</p>
-<p>구성에 대한 자세한 내용은 <a href="/docs/ko/modify-collection.md#Example-5-Enable-allowinsertautoid">컬렉션 수정을</a> 참조하세요.</p>
-<h3 id="Ensure-global-AutoID-uniqueness-across-clusters" class="common-anchor-header">클러스터 전체에서 글로벌 AutoID 고유성 보장하기<button data-href="#Ensure-global-AutoID-uniqueness-across-clusters" class="anchor-icon" translate="no">
+<p>구성에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/modify-collection.md#Example-5-Enable-allowinsertautoid">컬렉션 수정을</a> 참조하세요.</p>
+<h3 id="Ensure-global-AutoID-uniqueness-across-clusters" class="common-anchor-header">클러스터 전반에서 글로벌 AutoID 고유성 보장하기<button data-href="#Ensure-global-AutoID-uniqueness-across-clusters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -709,7 +713,7 @@ curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>AutoID가 내부적으로 고유 식별자를 생성하는 방법을 이해하면 <a href="/docs/ko/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">클러스터 ID를</a> 올바르게 <a href="/docs/ko/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">구성하고</a> ID 관련 문제를 해결하는 데 도움이 될 수 있습니다.</p>
+    </button></h2><p>AutoID가 내부적으로 고유 식별자를 생성하는 방법을 이해하면 <a href="/docs/ko/v2.6.x/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">클러스터 ID를</a> 올바르게 <a href="/docs/ko/v2.6.x/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">구성하고</a> ID 관련 문제를 해결하는 데 도움이 될 수 있습니다.</p>
 <p>AutoID는 구조화된 64비트 형식을 사용하여 고유성을 보장합니다:</p>
 <pre><code translate="no" class="language-plaintext">[sign_bit][cluster_id][physical_ts][logical_ts]
 <button class="copy-code-btn"></button></code></pre>

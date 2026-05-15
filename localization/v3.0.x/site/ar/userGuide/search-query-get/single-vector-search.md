@@ -223,6 +223,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -453,6 +454,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -537,6 +539,7 @@ curl --request POST \
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
@@ -673,6 +676,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -832,6 +836,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -942,7 +947,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>قد تلاحظ أن المعلمة <code translate="no">limit</code> التي يتم حملها في طلبات البحث تحدد عدد الكيانات التي سيتم تضمينها في نتائج البحث. وتحدد هذه المعلمة الحد الأقصى لعدد الكيانات المراد إرجاعها في بحث واحد، وعادةً ما يطلق عليها عادةً اسم <strong>top-K</strong>.</p>
+    </button></h2><p>قد تلاحظ أن المعلمة <code translate="no">limit</code> التي يتم حملها في طلبات البحث تحدد عدد الكيانات التي سيتم تضمينها في نتائج البحث. وتحدد هذه المعلمة الحد الأقصى لعدد الكيانات المراد إرجاعها في بحث واحد، وعادةً ما يُطلق عليها اسم <strong>top-K</strong>.</p>
 <p>إذا كنت ترغب في إجراء استعلامات مرقمة، يمكنك استخدام حلقة لإرسال طلبات بحث متعددة، مع معلمات <strong>الحد</strong> <strong>والإزاحة</strong> المنقولة في كل طلب استعلام. على وجه التحديد، يمكنك تعيين معلمة <strong>الحد</strong> إلى عدد الكيانات التي تريد تضمينها في نتائج الاستعلام الحالية، وتعيين <strong>الإزاحة</strong> إلى إجمالي عدد الكيانات التي تم إرجاعها بالفعل.</p>
 <p>يوضح الجدول أدناه كيفية تعيين معلمات <strong>الحد</strong> <strong>والإزاحة</strong> للاستعلامات المرقمة عند إرجاع 100 كيان في المرة الواحدة.</p>
 <table>
@@ -1052,6 +1057,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -1102,6 +1108,7 @@ curl --request POST \
 
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;quick_setup&quot;,
   &quot;annsField&quot;: &quot;vector&quot;,
@@ -1146,11 +1153,11 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <p>يُرجع بحث ANN واحد 16,384 كيانًا كحد أقصى. فكر في استخدام مكرر البحث إذا كنت بحاجة إلى إرجاع المزيد من الكيانات في بحث واحد.</p>
 <p>للحصول على تفاصيل حول مكرر البحث، راجع مكرر <a href="/docs/ar/with-iterators.md">البحث</a>.</p></li>
 <li><p>البحث بالنص الكامل</p>
-<p>البحث بالنص الكامل هي ميزة تسترجع المستندات التي تحتوي على مصطلحات أو عبارات محددة في مجموعات البيانات النصية، ثم تقوم بترتيب النتائج بناءً على مدى الصلة. تتغلب هذه الميزة على قيود البحث الدلالي التي قد تغفل المصطلحات الدقيقة، مما يضمن حصولك على النتائج الأكثر دقة وذات الصلة بالسياق. بالإضافة إلى ذلك، تعمل هذه الميزة على تبسيط عمليات البحث المتجهية من خلال قبول مدخلات النص الخام، وتحويل بياناتك النصية تلقائيًا إلى تضمينات متفرقة دون الحاجة إلى إنشاء تضمينات متجهة يدويًا.</p>
+<p>البحث بالنص الكامل هي ميزة تسترجع المستندات التي تحتوي على مصطلحات أو عبارات محددة في مجموعات البيانات النصية، ثم تقوم بترتيب النتائج بناءً على مدى الصلة. تتغلب هذه الميزة على قيود البحث الدلالي، التي قد تغفل المصطلحات الدقيقة، مما يضمن حصولك على النتائج الأكثر دقة وذات الصلة بالسياق. بالإضافة إلى ذلك، تعمل هذه الميزة على تبسيط عمليات البحث المتجهية من خلال قبول مدخلات النص الخام، وتحويل بياناتك النصية تلقائيًا إلى تضمينات متفرقة دون الحاجة إلى إنشاء تضمينات متجهة يدويًا.</p>
 <p>للحصول على تفاصيل حول البحث في النص الكامل، راجع <a href="/docs/ar/full-text-search.md">البحث في النص الكامل</a>.</p></li>
 <li><p>مطابقة النص</p>
 <p>تتيح مطابقة الكلمات الرئيسية في ميلفوس استرجاع المستندات بدقة بناءً على مصطلحات محددة. تُستخدم هذه الميزة في المقام الأول للبحث المصفى لاستيفاء شروط محددة ويمكنها دمج التصفية القياسية لتحسين نتائج الاستعلام، مما يسمح بالبحث عن التشابه داخل المتجهات التي تستوفي المعايير القياسية.</p>
-<p>للحصول على تفاصيل حول مطابقة الكلمات الرئيسية، راجع <a href="/docs/ar/keyword-match.md">مطابقة الكلمات الرئيسية</a>.</p></li>
+<p>للحصول على تفاصيل حول مطابقة الكلمات المفتاحية، راجع <a href="/docs/ar/keyword-match.md">مطابقة الكلمات المفتاحية</a>.</p></li>
 <li><p>استخدام مفتاح التقسيم</p>
 <p>قد يؤثر تضمين حقول قياسية متعددة في تصفية البيانات الوصفية واستخدام شرط تصفية معقد نوعًا ما على كفاءة البحث. بمجرد تعيين حقل قياسي كمفتاح التقسيم واستخدام شرط تصفية يتضمن مفتاح التقسيم في طلب البحث، يمكن أن يساعد في تقييد نطاق البحث داخل الأقسام المطابقة لقيم مفتاح التقسيم المحددة.</p>
 <p>للحصول على تفاصيل حول مفتاح القسم، راجع <a href="/docs/ar/use-partition-key.md">استخدام مفتاح القسم</a>.</p></li>

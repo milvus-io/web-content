@@ -43,7 +43,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ann-search.png" alt="Ann Search" class="doc-image" id="ann-search" />
    </span> <span class="img-wrapper"> <span>Recherche d'annuaires</span> </span></p>
-<p>Lorsqu'on effectue une recherche par approximation du plus proche voisin (ANN) sur une telle collection, les résultats de la recherche peuvent inclure plusieurs paragraphes du même document, ce qui risque de faire passer à côté d'autres documents, ce qui n'est pas forcément conforme au cas d'utilisation prévu.</p>
+<p>Lorsqu'une recherche par approximation du plus proche voisin (ANN) est effectuée sur une telle collection, les résultats de la recherche peuvent inclure plusieurs paragraphes du même document, ce qui peut entraîner l'oubli d'autres documents, ce qui peut ne pas correspondre au cas d'utilisation prévu.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/grouping-search.png" alt="Grouping Search" class="doc-image" id="grouping-search" />
@@ -214,6 +214,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -353,6 +354,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

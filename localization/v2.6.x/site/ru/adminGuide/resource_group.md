@@ -35,7 +35,7 @@ title: Управление группами ресурсов
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Группа ресурсов может содержать несколько или все узлы запросов в кластере Milvus. Вы решаете, как распределить узлы запросов между группами ресурсов, исходя из того, что для вас наиболее целесообразно. Например, в сценарии с несколькими коллекциями можно выделить соответствующее количество узлов запросов для каждой группы ресурсов и загрузить коллекции в разные группы ресурсов, чтобы операции внутри каждой коллекции были физически независимы от операций в других коллекциях.</p>
+    </button></h2><p>Группа ресурсов может содержать несколько или все узлы запросов в кластере Milvus. Вы решаете, как распределить узлы запросов между группами ресурсов, исходя из того, что для вас наиболее целесообразно. Например, в сценарии с несколькими коллекциями вы можете выделить соответствующее количество узлов запросов в каждую группу ресурсов и загрузить коллекции в разные группы ресурсов, чтобы операции в каждой коллекции были физически независимы от операций в других коллекциях.</p>
 <p>Обратите внимание, что экземпляр Milvus поддерживает ресурсную группу по умолчанию для хранения всех узлов запросов при запуске и называет ее <strong>__default_resource_group</strong>.</p>
 <p>Начиная с версии 2.4.1, Milvus предоставляет декларативный API групп ресурсов, в то время как старый API групп ресурсов был устаревшим. Новый декларативный API позволяет пользователям достичь идемпотентности, чтобы упростить вторичную разработку в облачных нативных средах.</p>
 <h2 id="Concepts-of-resource-group" class="common-anchor-header">Понятия группы ресурсов<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
@@ -90,7 +90,7 @@ title: Управление группами ресурсов
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Все примеры кода на этой странице приведены в версии PyMilvus 2.6.12. Перед их выполнением обновите свою установку PyMilvus.</p>
+<p>Все примеры кода на этой странице приведены в версии PyMilvus 2.6.13. Перед их выполнением обновите свою установку PyMilvus.</p>
 </div>
 <ol>
 <li><p>Создайте группу ресурсов.</p>
@@ -160,7 +160,7 @@ expected_num_nodes_in_rg = <span class="hljs-number">1</span>
 <span class="hljs-comment"># After a while, succeeded in moving 1 node(s) from __default_resource_group to rg.</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Загрузка коллекций и разделов в группу ресурсов.</p>
-<p>Когда в группе ресурсов есть узлы запросов, можно загрузить коллекции в эту группу ресурсов. В следующем фрагменте предполагается, что коллекция с именем <code translate="no">demo</code> уже существует.</p>
+<p>Как только в группе ресурсов появятся узлы запросов, можно загружать коллекции в эту группу ресурсов. В следующем фрагменте предполагается, что коллекция с именем <code translate="no">demo</code> уже существует.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection
 
 collection_name = <span class="hljs-string">&quot;demo&quot;</span>
@@ -173,7 +173,7 @@ milvus_client.load_collection(collection_name, replica_number=<span class="hljs-
 resource_groups = [<span class="hljs-string">&#x27;rg&#x27;</span>]
 milvus_client.load_collection(replica_number=<span class="hljs-number">2</span>, _resource_groups=resource_groups) 
 <button class="copy-code-btn"></button></code></pre>
-<p>Также можно просто загрузить раздел в группу ресурсов, а его реплики распределить между несколькими группами ресурсов. В следующем фрагменте предполагается, что коллекция с именем <code translate="no">Books</code> уже существует и в ней есть раздел с именем <code translate="no">Novels</code>.</p>
+<p>Также можно просто загрузить раздел в группу ресурсов и распределить его реплики между несколькими группами ресурсов. В следующем фрагменте предполагается, что коллекция с именем <code translate="no">Books</code> уже существует и в ней есть раздел с именем <code translate="no">Novels</code>.</p>
 <pre><code translate="no" class="language-python">collection = <span class="hljs-string">&quot;Books&quot;</span>
 partition = <span class="hljs-string">&quot;Novels&quot;</span>
 
@@ -183,7 +183,7 @@ milvus_client.load_partitions(collection, [partition], replica_number=<span clas
 <p>Обратите внимание, что <code translate="no">_resource_groups</code> - необязательный параметр, и если его не указывать, Milvus загрузит реплики на узлы запросов в группе ресурсов по умолчанию.</p>
 <p>Чтобы Milus загружал каждую реплику коллекции в отдельную группу ресурсов, убедитесь, что количество групп ресурсов равно количеству реплик.</p></li>
 <li><p>Передача реплик между группами ресурсов.</p>
-<p>Milvus использует <a href="/docs/ru/replica.md">реплики</a> для балансировки нагрузки между <a href="/docs/ru/glossary.md#Segment">сегментами</a>, распределенными по нескольким узлам запросов. Вы можете переместить определенные реплики коллекции из одной группы ресурсов в другую следующим образом:</p>
+<p>Milvus использует <a href="/docs/ru/v2.6.x/replica.md">реплики</a> для балансировки нагрузки между <a href="/docs/ru/v2.6.x/glossary.md#Segment">сегментами</a>, распределенными по нескольким узлам запросов. Вы можете переместить определенные реплики коллекции из одной группы ресурсов в другую следующим образом:</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 collection_name = <span class="hljs-string">&#x27;c&#x27;</span>
@@ -348,6 +348,6 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h1><p>Чтобы развернуть многопользовательский экземпляр Milvus, прочтите следующее:</p>
 <ul>
-<li><a href="/docs/ru/rbac.md">Включение RBAC</a></li>
-<li><a href="/docs/ru/users_and_roles.md">Пользователи и роли</a></li>
+<li><a href="/docs/ru/v2.6.x/rbac.md">Включение RBAC</a></li>
+<li><a href="/docs/ru/v2.6.x/users_and_roles.md">Пользователи и роли</a></li>
 </ul>

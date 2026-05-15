@@ -6,7 +6,7 @@ summary: >-
   in base a termini specifici. Questa funzione è utilizzata principalmente per
   la ricerca filtrata per soddisfare condizioni specifiche e può incorporare un
   filtro scalare per affinare i risultati della query, consentendo ricerche di
-  similarità all'interno di vettori che soddisfano criteri scalari.
+  somiglianza all'interno di vettori che soddisfano criteri scalari.
 ---
 <h1 id="Text-Match" class="common-anchor-header">Corrispondenza del testo<button data-href="#Text-Match" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -67,7 +67,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La corrispondenza testuale funziona sul tipo di campo <a href="/docs/it/string.md"><code translate="no">VARCHAR</code></a> che è essenzialmente il tipo di dati stringa di Milvus. Per abilitare la corrispondenza con il testo, impostare sia <code translate="no">enable_analyzer</code> che <code translate="no">enable_match</code> su <code translate="no">True</code> e configurare facoltativamente un <a href="/docs/it/analyzer-overview.md">analizzatore</a> per l'analisi del testo quando si definisce lo schema della raccolta.</p>
+    </button></h2><p>La corrispondenza testuale funziona sul tipo di campo <a href="/docs/it/string.md"><code translate="no">VARCHAR</code></a> che è essenzialmente il tipo di dati stringa di Milvus. Per abilitare la corrispondenza con il testo, impostare <code translate="no">enable_analyzer</code> e <code translate="no">enable_match</code> su <code translate="no">True</code> e poi configurare facoltativamente un <a href="/docs/it/analyzer-overview.md">analizzatore</a> per l'analisi del testo quando si definisce lo schema della raccolta.</p>
 <h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">Impostare <code translate="no">enable_analyzer</code> e <code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -83,7 +83,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Per abilitare la corrispondenza del testo per un campo specifico <code translate="no">VARCHAR</code>, impostare entrambi i parametri <code translate="no">enable_analyzer</code> e <code translate="no">enable_match</code> su <code translate="no">True</code> quando si definisce lo schema del campo. Ciò indica a Milvus di tokenizzare il testo e di creare un indice invertito per il campo specificato, consentendo corrispondenze di testo rapide ed efficienti.</p>
+    </button></h3><p>Per abilitare la corrispondenza del testo per uno specifico campo <code translate="no">VARCHAR</code>, impostare entrambi i parametri <code translate="no">enable_analyzer</code> e <code translate="no">enable_match</code> su <code translate="no">True</code> quando si definisce lo schema del campo. Ciò indica a Milvus di tokenizzare il testo e di creare un indice invertito per il campo specificato, consentendo corrispondenze di testo rapide ed efficienti.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -321,7 +321,7 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una volta abilitata la corrispondenza del testo per un campo VARCHAR nello schema della raccolta, è possibile eseguire corrispondenze di testo utilizzando l'espressione <code translate="no">TEXT_MATCH</code>.</p>
+    </button></h2><p>Una volta abilitata la corrispondenza del testo per un campo VARCHAR nello schema della raccolta, è possibile eseguire corrispondenze di testo usando l'espressione <code translate="no">TEXT_MATCH</code>.</p>
 <h3 id="TEXTMATCH-expression-syntax" class="common-anchor-header">Sintassi dell'espressione TEXT_MATCH<button data-href="#TEXTMATCH-expression-syntax" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -470,6 +470,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;annsField&quot;: &quot;embeddings&quot;,
@@ -549,6 +550,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$filter</span>&quot;</span><span class="hljs-string">&#x27;,

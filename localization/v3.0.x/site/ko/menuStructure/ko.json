@@ -2053,7 +2053,7 @@
       {
         "label": "조류 관찰자",
         "id": "birdwatcher",
-        "order": 2,
+        "order": 3,
         "children": [
           {
             "label": "개요",
@@ -2071,6 +2071,37 @@
             "label": "사용 가이드",
             "id": "birdwatcher_usage_guides.md",
             "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "밀버스 CDC",
+        "id": "milvus_cdc",
+        "order": 2,
+        "children": [
+          {
+            "label": "개요",
+            "id": "milvus_cdc_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "CDC 복제 설정",
+            "id": "set_up_cdc_replication.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "전환",
+            "id": "cdc_switchover.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "장애 조치",
+            "id": "cdc_failover.md",
+            "order": 3,
             "children": []
           }
         ]
@@ -2619,7 +2650,7 @@
             "children": []
           },
           {
-            "label": "12개의 랩",
+            "label": "12개의 실험실",
             "id": "video_search_with_twelvelabs_and_milvus.md",
             "order": 12,
             "children": []
@@ -2975,7 +3006,7 @@
             "children": []
           },
           {
-            "label": "Recommender System",
+            "label": "추천 시스템",
             "id": "recommendation_system.md",
             "order": 6,
             "children": []

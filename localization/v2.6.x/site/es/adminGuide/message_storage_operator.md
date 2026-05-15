@@ -59,7 +59,7 @@ summary: Aprenda a configurar el almacenamiento de mensajes con Milvus Operator.
 </ul></li>
 <li>El almacenamiento de mensajes no puede cambiarse mientras el sistema Milvus está en funcionamiento.</li>
 <li>Sólo se admite la versión 2.x o 3.x de Kafka.</li>
-<li><strong>Limitaciones</strong> de actualización: <strong>Limitaciones de la cola de mensajes</strong>: Al actualizar a Milvus v2.6.15, debe mantener su elección actual de cola de mensajes. No es posible cambiar entre diferentes sistemas de colas de mensajes durante la actualización. El soporte para el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</li>
+<li><strong>Limitaciones</strong> de actualización: <strong>Limitaciones de la cola de mensajes</strong>: Al actualizar a Milvus v2.6.16, debe mantener su elección actual de cola de mensajes. No es posible cambiar entre diferentes sistemas de colas de mensajes durante la actualización. El soporte para el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Configuración de RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -127,7 +127,7 @@ summary: Aprenda a configurar el almacenamiento de mensajes con Milvus Operator.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Woodpecker es un registro de escritura en cabeza (WAL) nativo de la nube diseñado para el almacenamiento de objetos. Ofrece un alto rendimiento, baja sobrecarga operativa y escalabilidad sin fisuras. Para obtener más información, consulte <a href="/docs/es/use-woodpecker.md">Uso de Woodpecker</a>.</p>
+    </button></h2><p>Woodpecker es un registro de escritura en cabeza (WAL) nativo de la nube diseñado para el almacenamiento de objetos. Ofrece un alto rendimiento, baja sobrecarga operativa y escalabilidad sin fisuras. Para obtener más información, consulte <a href="/docs/es/v2.6.x/use-woodpecker.md">Uso de Woodpecker</a>.</p>
 <h2 id="Configure-Pulsar" class="common-anchor-header">Configurar Pulsar<button data-href="#Configure-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -365,6 +365,6 @@ summary: Aprenda a configurar el almacenamiento de mensajes con Milvus Operator.
       </svg>
     </button></h2><p>Aprenda a configurar otras dependencias de Milvus con Milvus Operator:</p>
 <ul>
-<li><a href="/docs/es/object_storage_operator.md">Configure Object Storage con Milvus Operator</a></li>
-<li><a href="/docs/es/meta_storage_operator.md">Configure Meta Storage con Milvus Operator</a></li>
+<li><a href="/docs/es/v2.6.x/object_storage_operator.md">Configure Object Storage con Milvus Operator</a></li>
+<li><a href="/docs/es/v2.6.x/meta_storage_operator.md">Configure Meta Storage con Milvus Operator</a></li>
 </ul>

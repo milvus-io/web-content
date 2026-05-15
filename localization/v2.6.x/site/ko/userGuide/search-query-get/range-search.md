@@ -44,7 +44,7 @@ summary: >-
 <p>위 다이어그램은 범위 검색 요청에 두 개의 매개변수, 즉 <strong>반경과</strong> <strong>범위_필터가</strong> 포함됨을 보여줍니다. 범위 검색 요청을 받으면 Milvus는 다음을 수행합니다:</p>
 <ul>
 <li><p>지정된 메트릭 유형<strong>(COSINE</strong>)을 사용하여 쿼리 벡터와 가장 유사한 모든 벡터 임베딩을 찾습니다.</p></li>
-<li><p>쿼리 벡터와의 <strong>거리</strong> 또는 <strong>점수가</strong> <strong>radius</strong> 및 <strong>range_filter</strong> 매개변수로 지정된 범위 내에 속하는 벡터 임베딩을 필터링합니다.</p></li>
+<li><p>쿼리 벡터와의 <strong>거리</strong> 또는 <strong>점수가</strong> <strong>radius</strong> 및 <strong>range_filter</strong> 매개변수로 지정된 범위 내에 있는 벡터 임베딩을 필터링합니다.</p></li>
 <li><p>필터링된 엔티티 중에서 <strong>상위 K개의</strong> 엔티티를 반환합니다.</p></li>
 </ul>
 <p><strong>반경</strong> 및 <strong>범위_필터를</strong> 설정하는 방법은 검색의 메트릭 유형에 따라 다릅니다. 다음 표에는 서로 다른 메트릭 유형으로 이 두 매개변수를 설정하기 위한 요구사항이 나와 있습니다.</p>
@@ -231,6 +231,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -248,5 +249,5 @@ curl --request POST \
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>쿼리 벡터가 대상 컬렉션에 이미 존재하는 경우, 검색 전에 검색 벡터를 검색하는 대신 <code translate="no">ids</code> 을 사용하는 것을 고려하세요. 자세한 내용은 <a href="/docs/ko/primary-key-search.md">기본 키 검색을</a> 참조하세요.</p>
+<p>쿼리 벡터가 대상 컬렉션에 이미 존재하는 경우, 검색 전에 검색 벡터를 검색하는 대신 <code translate="no">ids</code> 을 사용하는 것을 고려하세요. 자세한 내용은 <a href="/docs/ko/v2.6.x/primary-key-search.md">기본 키 검색을</a> 참조하세요.</p>
 </div>

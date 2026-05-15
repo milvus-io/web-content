@@ -36,7 +36,7 @@ summary: Milvus 中的每个 Collections 都必须有一个主字段，以唯一
         ></path>
       </svg>
     </button></h2><p>主字段是 Collections 中每个实体的唯一键，类似于传统数据库中的主键。在插入、上载、删除和查询操作过程中，Milvus 使用主字段管理实体。</p>
-<p>关键要求</p>
+<p>主键要求</p>
 <ul>
 <li><p>每个 Collection 必须有<strong>一个</strong>主字段。</p></li>
 <li><p>主字段值不能为空。</p></li>
@@ -107,7 +107,7 @@ summary: Milvus 中的每个 Collections 都必须有一个主字段，以唯一
 </table>
 <div class="alert note">
 <ul>
-<li><p>如果您不确定选择哪种模式，请<a href="/docs/zh/primary-field.md#Quickstart-Use-AutoID">从自动 ID 开始</a>，这样可以简化输入并保证唯一性。</p></li>
+<li><p>如果不确定选择哪种模式，请<a href="/docs/zh/primary-field.md#Quickstart-Use-AutoID">从自动 ID 开始</a>，这样可以简化输入并保证唯一性。</p></li>
 <li><p>建议在所有情况下都使用<code translate="no">autoId</code> ，除非手动设置主键是有益的。</p></li>
 </ul>
 </div>
@@ -276,6 +276,7 @@ client.createCollection(requestCreate);
 
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/collections/create&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_autoid\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$SCHEMA</span>
@@ -360,6 +361,7 @@ System.out.printf(<span class="hljs-string">&quot;Generated IDs: %s\n&quot;</spa
 
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/entities/insert&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_autoid\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$INSERT_DATA</span>
@@ -534,6 +536,7 @@ client.createCollection(requestCreate);
 
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/collections/create&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_manual_ids\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$SCHEMA</span>
@@ -625,6 +628,7 @@ System.out.printf(<span class="hljs-string">&quot;Generated IDs: %s\n&quot;</spa
 <span class="hljs-comment"># 插入数据</span>
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/entities/insert&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_manual_ids\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$INSERT_DATA</span>

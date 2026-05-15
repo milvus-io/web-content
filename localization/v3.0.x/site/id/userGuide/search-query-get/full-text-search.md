@@ -53,7 +53,7 @@ summary: >-
 <li><p><strong>Analisis teks</strong>: Milvus menggunakan <a href="/docs/id/analyzer-overview.md">penganalisis</a> untuk memproses teks Anda menjadi istilah-istilah bermakna yang dapat diindeks dan dicari.</p></li>
 <li><p><strong>Pemrosesan fungsi BM25</strong>: Fungsi bawaan mengubah istilah-istilah ini menjadi representasi vektor jarang yang dioptimalkan untuk penilaian BM25.</p></li>
 <li><p><strong>Penyimpanan koleksi</strong>: Milvus menyimpan sematan jarang yang dihasilkan dalam koleksi untuk pengambilan dan pemeringkatan yang cepat.</p></li>
-<li><p><strong>Penilaian relevansi BM25</strong>: Pada saat pencarian, Milvus menerapkan fungsi penilaian BM25 untuk menghitung relevansi dokumen dan mengembalikan hasil peringkat yang paling sesuai dengan istilah kueri.</p></li>
+<li><p><strong>Penilaian relevansi BM25</strong>: Pada waktu pencarian, Milvus menerapkan fungsi penilaian BM25 untuk menghitung relevansi dokumen dan mengembalikan hasil peringkat yang paling sesuai dengan istilah kueri.</p></li>
 </ol>
 <p>
   
@@ -80,7 +80,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk mengaktifkan pencarian teks lengkap yang didukung BM25, Anda harus menyiapkan koleksi dengan bidang yang diperlukan, menetapkan fungsi BM25 untuk menghasilkan vektor jarang, mengonfigurasi indeks, lalu membuat koleksi.</p>
+    </button></h2><p>Untuk mengaktifkan pencarian teks lengkap yang didukung BM25, Anda harus menyiapkan koleksi dengan bidang yang diperlukan, menentukan fungsi BM25 untuk menghasilkan vektor jarang, mengonfigurasi indeks, lalu membuat koleksi.</p>
 <h3 id="Define-schema-fields" class="common-anchor-header">Menentukan bidang skema<button data-href="#Define-schema-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -520,6 +520,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -581,6 +582,7 @@ client.insert(InsertReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;text&quot;: &quot;information retrieval is a field of study.&quot;},
@@ -669,6 +671,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data-raw <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

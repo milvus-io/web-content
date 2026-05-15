@@ -52,7 +52,7 @@ summary: >-
 <li><p><a href="/docs/it/single-vector-search.md#Use-Limit-and-Offset">Utilizzo di limiti e offset</a></p></li>
 <li><p><a href="/docs/it/single-vector-search.md#Use-Level">Utilizzare il livello</a></p></li>
 <li><p><a href="/docs/it/single-vector-search.md#Get-Recall-Rate">Ottenere il tasso di richiamo</a></p></li>
-<li><p><a href="/docs/it/single-vector-search.md#Enhancing-ANN-Search">Migliorare la ricerca a RNA</a></p></li>
+<li><p><a href="/docs/it/single-vector-search.md#Enhancing-ANN-Search">Migliorare la ricerca RNA</a></p></li>
 </ul>
 <h2 id="Single-Vector-Search" class="common-anchor-header">Ricerca a vettore singolo<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -223,6 +223,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -453,6 +454,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -537,6 +539,7 @@ curl --request POST \
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
@@ -673,6 +676,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -832,6 +836,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -879,9 +884,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Per impostazione predefinita, Milvus ordina i risultati della ricerca in base al loro punteggio di somiglianza con il vettore della query. Se si desidera che le entità restituite seguano un ordine per campi scalari, aggiungere <code translate="no">order_by_fields</code> alla richiesta di ricerca.</p>
+    </button></h2><p>Per impostazione predefinita, Milvus ordina i risultati della ricerca in base al punteggio di somiglianza con il vettore della query. Se si desidera che le entità restituite seguano un ordine per campi scalari, aggiungere <code translate="no">order_by_fields</code> alla richiesta di ricerca.</p>
 <p>Ogni voce di <code translate="no">order_by_fields</code> specifica un campo scalare e una direzione di ordinamento. Utilizzare <code translate="no">&quot;asc&quot;</code> per l'ordine ascendente o <code translate="no">&quot;desc&quot;</code> per l'ordine discendente. Se si omette <code translate="no">order</code>, Milvus ordina il campo in ordine crescente.</p>
-<p>L'esempio seguente ordina i risultati della ricerca in base a <code translate="no">price</code>, dal più basso al più alto. Includere il campo di ordinamento in <code translate="no">output_fields</code> se si vuole controllare il valore del campo nella risposta.</p>
+<p>L'esempio seguente ordina i risultati della ricerca in base a <code translate="no">price</code> dal basso verso l'alto. Includere il campo di ordinamento in <code translate="no">output_fields</code> se si vuole controllare il valore del campo nella risposta.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
@@ -926,7 +931,7 @@ curl --request POST \
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Per le entità con gli stessi valori in tutti i campi order-by specificati, Milvus mantiene l'ordine originale del punteggio di similarità.</p>
+<p>Per le entità con gli stessi valori in tutti i campi order-by specificati, Milvus mantiene l'ordine originale del punteggio di somiglianza.</p>
 <h2 id="Use-Limit-and-Offset" class="common-anchor-header">Uso di Limite e Offset<button data-href="#Use-Limit-and-Offset" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1052,6 +1057,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -1102,6 +1108,7 @@ curl --request POST \
 
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;quick_setup&quot;,
   &quot;annsField&quot;: &quot;vector&quot;,
@@ -1131,7 +1138,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
     </button></h2><p>AUTOINDEX appiana notevolmente la curva di apprendimento delle ricerche ANN. Tuttavia, i risultati della ricerca potrebbero non essere sempre corretti man mano che il top-K aumenta. Riducendo la portata della ricerca, migliorando la pertinenza dei risultati e diversificando i risultati, Milvus elabora i seguenti miglioramenti della ricerca.</p>
 <ul>
 <li><p>Ricerca filtrata</p>
-<p>È possibile includere condizioni di filtraggio in una richiesta di ricerca, in modo che Milvus effettui un filtraggio dei metadati prima di effettuare ricerche sull'RNA, riducendo l'ambito di ricerca dall'intera raccolta alle sole entità che corrispondono alle condizioni di filtraggio specificate.</p>
+<p>È possibile includere condizioni di filtraggio in una richiesta di ricerca, in modo che Milvus esegua un filtraggio dei metadati prima di eseguire ricerche sull'RNA, riducendo l'ambito di ricerca dall'intera raccolta alle sole entità che corrispondono alle condizioni di filtraggio specificate.</p>
 <p>Per ulteriori informazioni sul filtraggio dei metadati e sulle condizioni di filtraggio, consultare <a href="/docs/it/filtered-search.md">Ricerca filtrata</a>, <a href="/docs/it/boolean.md">Filtraggio spiegato</a> e gli argomenti correlati.</p></li>
 <li><p>Ricerca per intervallo</p>
 <p>È possibile migliorare la pertinenza dei risultati della ricerca limitando la distanza o il punteggio delle entità restituite all'interno di un intervallo specifico. In Milvus, una ricerca per intervallo comporta il disegno di due cerchi concentrici con al centro l'incorporamento vettoriale più simile al vettore di interrogazione. La richiesta di ricerca specifica il raggio di entrambi i cerchi e Milvus restituisce tutte le incorporazioni vettoriali che rientrano nel cerchio esterno ma non in quello interno.</p>

@@ -62,7 +62,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><ul>
 <li><p><strong>データ型</strong></p>
-<p>コレクションを作成するとき、Array フィールドの要素のデータ型として Struct 型を使用できます。しかし、既存のコレクションにArray of Structsを追加することはできず、Milvusはコレクションフィールドのデータ型としてStruct型の使用をサポートしていません。</p>
+<p>コレクションを作成するとき、Array フィールドの要素のデータ型として Struct 型を使用できます。しかし、既存のコレクションにArray of Structsを追加することはできませんし、Milvusはコレクションフィールドのデータ型としてStruct型の使用をサポートしていません。</p>
 <p>ArrayフィールドのStructは同じスキーマを共有しており、Arrayフィールドの作成時に定義する必要があります。</p>
 <p>Struct スキーマには、以下の表に示すように、ベクトルフィールドとスカラーフィールドの両方が含まれます：</p>
 <p><table>
@@ -119,7 +119,7 @@ beta: Milvus 2.6.4+
 </table></p>
 <p>Array of Structs フィールドのスカラー・フィールドはインデックスをサポートしません。</p></li>
 <li><p><strong>アップサートデータ</strong></p>
-<p>構造体はマージ・モードでのアップサートをサポートしていません。ただし、オーバーライド・モードでアップサートを実行して Structs 内のデータを更新することはできます。マージ・モードでのアップサートとオーバーライド・モードでのアップサートの違いの詳細については、<a href="/docs/ja/upsert-entities.md#Overview">アップサート・エンティティを</a>参照してください。</p></li>
+<p>構造体はマージ・モードでのアップサートをサポートしていません。ただし、オーバーライド・モードでアップサートを実行して Structs 内のデータを更新することはできます。マージ・モードでのアップサートとオーバーライド・モードでのアップサートの違いの詳細については、<a href="/docs/ja/v2.6.x/upsert-entities.md#Overview">アップサート・エンティティを</a>参照してください。</p></li>
 <li><p><strong>スカラー・フィルタリング</strong></p>
 <p>検索やクエリ内のフィルタリング式では、Array of Structs や Struct 要素内のフィールドを使用できません。</p></li>
 </ul>
@@ -375,8 +375,8 @@ SCHEMA=<span class="hljs-string">&#x27;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクション内のベクトルフィールドと、要素Structで定義されたベクトルフィールドの両方を含む、すべてのベクトルフィールドに対してインデックスの設定が必須です。</p>
-<p>適用可能なインデックス・パラメータは、使用するインデックス・タイプによって異なります。適用可能なインデックス・パラメータの詳細については、<a href="/docs/ja/index-explained.md">Index Explained</a>や、選択したインデックス・タイプに固有のドキュメント・ページを参照してください。</p>
+    </button></h2><p>コレクション内のベクトルフィールドと要素Structで定義されたベクトルフィールドの両方を含む、すべてのベクトルフィールドに対してインデックス付けが必須です。</p>
+<p>適用可能なインデックス・パラメータは、使用するインデックス・タイプによって異なります。適用可能なインデックス・パラメータの詳細については、<a href="/docs/ja/v2.6.x/index-explained.md">Index Explained</a>や、選択したインデックス・タイプに固有のドキュメント・ページを参照してください。</p>
 <p>埋め込みリストにインデックスを付けるには、そのインデックスタイプを<code translate="no">AUTOINDEX</code> または<code translate="no">HNSW</code> に設定し、埋め込みリスト間の類似度を測定するMilvusのメトリックタイプとして<code translate="no">MAX_SIM_COSINE</code> を使用する必要があります。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -498,6 +498,7 @@ client.createCollection(requestCreate);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/create&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;description\&quot;: \&quot;A collection for storing book information with struct array chunks\&quot;,
@@ -613,6 +614,7 @@ row.add(<span class="hljs-string">&quot;chunks&quot;</span>, structArr);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/insert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -805,6 +807,7 @@ embeddingList1=<span class="hljs-string">&#x27;[[0.2,0.9,0.4,-0.3,0.2]]&#x27;</s
 embeddingList2=<span class="hljs-string">&#x27;[[-0.2,-0.2,0.5,0.6,0.9],[-0.4,0.3,0.5,0.8,0.2]]&#x27;</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>],
@@ -909,6 +912,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>, <span class="hljs-variable">$embeddingList2</span>],
@@ -1012,4 +1016,4 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ネイティブのArray of Structsデータ型の開発は、milvusの複雑なデータ構造を扱う能力の大きな進歩を意味します。その使用例をより理解し、この新機能を最大限に活用するために、<a href="/docs/ja/best-practices-for-array-of-structs.md">Array of Structsを使用したスキーマ設計を</a>読むことをお勧めします。</p>
+    </button></h2><p>ネイティブのArray of Structsデータ型の開発は、milvusの複雑なデータ構造を扱う能力の大きな進歩を意味します。その使用例をより理解し、この新機能を最大限に活用するために、<a href="/docs/ja/v2.6.x/best-practices-for-array-of-structs.md">Array of Structsを使用したスキーマ設計を</a>読むことをお勧めします。</p>

@@ -34,7 +34,7 @@ summary: upsert 操作为插入或更新 Collections 中的实体提供了一种
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>根据 upsert 请求中提供的主键是否存在于 Collections 中，您可以使用<code translate="no">upsert</code> 插入新实体或更新现有实体。如果找不到主键，则进行插入操作。否则，将执行更新操作。</p>
+    </button></h2><p>您可以使用<code translate="no">upsert</code> 插入新实体或更新现有实体，具体取决于 upsert 请求中提供的主键是否存在于 Collections 中。如果找不到主键，则进行插入操作。否则，将执行更新操作。</p>
 <p>在 Milvus 中，upsert 可在<strong>覆盖</strong>或<strong>合并</strong>模式下工作。</p>
 <h3 id="Upsert-in-override-mode" class="common-anchor-header">覆盖模式下的upsert<button data-href="#Upsert-in-override-mode" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -51,7 +51,7 @@ summary: upsert 操作为插入或更新 Collections 中的实体提供了一种
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>覆盖模式下的上载请求结合了插入和删除操作。当收到针对现有实体的<code translate="no">upsert</code> 请求时，Milvus 会插入请求有效载荷中携带的数据，并同时删除数据中指定原始主键的现有实体。</p>
+    </button></h3><p>覆盖模式下的上载请求结合了插入和删除操作。当收到一个针对现有实体的<code translate="no">upsert</code> 请求时，Milvus 会插入请求有效载荷中携带的数据，并同时删除数据中指定原始主键的现有实体。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" />
@@ -79,7 +79,7 @@ summary: upsert 操作为插入或更新 Collections 中的实体提供了一种
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-merge-mode.png" alt="Upsert In Merge Mode" class="doc-image" id="upsert-in-merge-mode" />
    </span> <span class="img-wrapper"> <span>合并模式下的upsert</span> </span></p>
 <p>要执行合并，请在<code translate="no">upsert</code> 请求中将<code translate="no">partial_update</code> 设置为<code translate="no">True</code> ，并将主键和需要更新的字段设置为新值。</p>
-<p>收到这样的请求后，Milvus 会执行强一致性查询以检索实体，根据请求中的数据更新字段值，插入修改后的数据，然后用请求中携带的原始主键删除现有实体。</p>
+<p>收到这样的请求后，Milvus 会执行强一致性查询以检索实体，根据请求中的数据更新字段值，插入修改后的数据，然后删除请求中带有原始主键的现有实体。</p>
 <h3 id="Upsert-behaviors-special-notes" class="common-anchor-header">向上插入行为：特别注意事项<button data-href="#Upsert-behaviors-special-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -98,7 +98,7 @@ summary: upsert 操作为插入或更新 Collections 中的实体提供了一种
     </button></h3><p>在使用合并功能之前，有几个特别注意事项需要考虑。以下情况假设你有一个 Collections，其中有两个标量字段，分别命名为<code translate="no">title</code> 和<code translate="no">issue</code> ，同时还有一个主键<code translate="no">id</code> 和一个向量字段<code translate="no">vector</code> 。</p>
 <ul>
 <li><p><strong>启用</strong> <code translate="no">nullable</code> <strong>的向上插入字段</strong> <strong>。</strong></p>
-<p>假设<code translate="no">issue</code> 字段可以为空。在插入这些字段时，请注意以下几点：</p>
+<p>假设<code translate="no">issue</code> 字段可以为空。在倒插这些字段时，请注意以下几点：</p>
 <ul>
 <li><p>如果在<code translate="no">upsert</code> 请求中省略<code translate="no">issue</code> 字段并禁用<code translate="no">partial_update</code> ，<code translate="no">issue</code> 字段将更新为<code translate="no">null</code> ，而不是保留其原始值。</p></li>
 <li><p>要保留<code translate="no">issue</code> 字段的原始值，要么启用<code translate="no">partial_update</code> 并省略<code translate="no">issue</code> 字段，要么在<code translate="no">upsert</code> 请求中包含<code translate="no">issue</code> 字段及其原始值。</p></li>
@@ -301,6 +301,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/upsert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;title&quot;: &quot;Artificial Intelligence in Real Life&quot;, &quot;issue&quot;: &quot;vol.12&quot;},
@@ -447,6 +448,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/upsert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 10, &quot;vector&quot;: [0.06998888224297328, 0.8582816610326578, -0.9657938677934292, 0.6527905683627726, -0.8668460657158576], &quot;title&quot;: &quot;Layour Design Reference&quot;, &quot;issue&quot;: &quot;vol.34&quot;},
@@ -589,6 +591,7 @@ _, err = client.Upsert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/upsert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,

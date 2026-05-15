@@ -53,7 +53,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Une demande d'insertion qui fonctionne en mode prioritaire combine une insertion et une suppression. Lorsqu'une demande <code translate="no">upsert</code> pour une entité existante est reçue, Milvus insère les données contenues dans la charge utile de la demande et supprime l'entité existante avec la clé primaire originale spécifiée dans les données en même temps.</p>
+    </button></h3><p>Une demande d'insertion qui fonctionne en mode prioritaire combine une insertion et une suppression. Lorsqu'une demande <code translate="no">upsert</code> pour une entité existante est reçue, Milvus insère les données contenues dans la charge utile de la demande et supprime l'entité existante avec la clé primaire d'origine spécifiée dans les données en même temps.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" />
@@ -303,6 +303,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/upsert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;title&quot;: &quot;Artificial Intelligence in Real Life&quot;, &quot;issue&quot;: &quot;vol.12&quot;},
@@ -449,6 +450,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/upsert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 10, &quot;vector&quot;: [0.06998888224297328, 0.8582816610326578, -0.9657938677934292, 0.6527905683627726, -0.8668460657158576], &quot;title&quot;: &quot;Layour Design Reference&quot;, &quot;issue&quot;: &quot;vol.34&quot;},
@@ -489,7 +491,7 @@ curl --request POST \
     </button></h2><p>L'exemple de code suivant montre comment effectuer un upsert d'entités avec des mises à jour partielles. Fournissez uniquement les champs nécessitant des mises à jour et leurs nouvelles valeurs, ainsi que le drapeau explicite de mise à jour partielle.</p>
 <p>Dans l'exemple suivant, le champ <code translate="no">issue</code> des entités spécifiées dans la requête d'upsert sera mis à jour avec les valeurs incluses dans la requête.</p>
 <div class="alert note">
-<p>Lorsque vous effectuez une upsert en mode fusion, assurez-vous que les entités concernées par la requête ont le même ensemble de champs. Supposons qu'il y ait deux entités ou plus à upster, comme le montre l'extrait de code suivant, il est important qu'elles comprennent des champs identiques pour éviter les erreurs et maintenir l'intégrité des données.</p>
+<p>Lorsque vous effectuez une upsert en mode fusion, assurez-vous que les entités concernées par la requête ont le même ensemble de champs. Supposons qu'il y ait deux entités ou plus à upster, comme le montre l'extrait de code suivant, il est important qu'elles incluent des champs identiques pour éviter les erreurs et maintenir l'intégrité des données.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -591,6 +593,7 @@ _, err = client.Upsert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/upsert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,

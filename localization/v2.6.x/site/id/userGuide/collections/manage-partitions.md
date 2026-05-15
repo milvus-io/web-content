@@ -42,7 +42,7 @@ summary: >-
 <p>Sebuah koleksi dapat memiliki maksimal 1.024 partisi.</p>
 <div class="alert note">
 <p>Fitur <strong>Kunci Partisi</strong> adalah pengoptimalan pencarian berdasarkan partisi dan memungkinkan Milvus mendistribusikan entitas ke dalam partisi yang berbeda berdasarkan nilai dalam bidang skalar tertentu. Fitur ini membantu mengimplementasikan multi-tenancy berorientasi partisi dan meningkatkan kinerja pencarian.</p>
-<p>Fitur ini tidak akan dibahas pada halaman ini. Untuk mengetahui lebih lanjut, lihat <a href="/docs/id/use-partition-key.md">Menggunakan Kunci Partisi</a>.</p>
+<p>Fitur ini tidak akan dibahas pada halaman ini. Untuk mengetahui lebih lanjut, lihat <a href="/docs/id/v2.6.x/use-partition-key.md">Menggunakan Kunci Partisi</a>.</p>
 </div>
 <h2 id="List-Partitions" class="common-anchor-header">Membuat Daftar Partisi<button data-href="#List-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -156,6 +156,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/partitions/list&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
@@ -265,6 +266,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/partitions/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;partitionName&quot;: &quot;partitionA&quot;
@@ -279,6 +281,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/partitions/list&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
@@ -361,6 +364,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/partitions/has&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;partitionName&quot;: &quot;partitionA&quot;
@@ -389,7 +393,22 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>Anda dapat memuat atau melepaskan satu atau beberapa partisi secara terpisah.</p>
-<h3 id="Load-Partitions" class="common-anchor-header">Memuat Partisi</h3><p>Anda dapat memuat partisi tertentu secara terpisah dalam sebuah koleksi. Perlu dicatat bahwa status pemuatan koleksi tetap tidak dimuat jika ada partisi yang tidak dimuat di dalam koleksi.</p>
+<h3 id="Load-Partitions" class="common-anchor-header">Memuat Partisi<button data-href="#Load-Partitions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Anda dapat memuat partisi tertentu secara terpisah dalam sebuah koleksi. Perlu dicatat bahwa status pemuatan koleksi tetap tidak dimuat jika ada partisi yang tidak dimuat di dalam koleksi.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.load_partitions(
@@ -473,6 +492,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/partitions/load&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;]
@@ -487,6 +507,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/get_load_state&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;]
@@ -501,7 +522,22 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Release-Partitions" class="common-anchor-header">Melepaskan Partisi</h3><p>Anda juga dapat melepaskan partisi tertentu.</p>
+<h3 id="Release-Partitions" class="common-anchor-header">Melepaskan Partisi<button data-href="#Release-Partitions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Anda juga dapat melepaskan partisi tertentu.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.release_partitions(
@@ -578,6 +614,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/partitions/release&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;]
@@ -592,6 +629,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/get_load_state&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;]
@@ -621,16 +659,46 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Insert-and-Delete-Entities" class="common-anchor-header">Menyisipkan dan Menghapus Entitas</h3><p>Anda dapat melakukan operasi penyisipan, peng-update-an, dan penghapusan dalam operasi tertentu. Untuk detailnya, lihat</p>
+    </button></h2><h3 id="Insert-and-Delete-Entities" class="common-anchor-header">Menyisipkan dan Menghapus Entitas<button data-href="#Insert-and-Delete-Entities" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Anda dapat melakukan operasi penyisipan, peng-update-an, dan penghapusan dalam operasi tertentu. Untuk detailnya, lihat</p>
 <ul>
-<li><p><a href="/docs/id/insert-update-delete.md#Insert-Entities-into-a-Partition">Menyisipkan Entitas ke dalam Partisi</a></p></li>
-<li><p><a href="/docs/id/upsert-entities.md#Upsert-Entities-in-a-Partition">Menambah Entitas ke dalam Partisi</a></p></li>
-<li><p><a href="/docs/id/delete-entities.md#Delete-Entities-from-Partitions">Menghapus Entitas dari Partisi</a></p></li>
+<li><p><a href="/docs/id/v2.6.x/insert-update-delete.md#Insert-Entities-into-a-Partition">Menyisipkan Entitas ke dalam Partisi</a></p></li>
+<li><p><a href="/docs/id/v2.6.x/upsert-entities.md#Upsert-Entities-in-a-Partition">Menambah Entitas ke dalam Partisi</a></p></li>
+<li><p><a href="/docs/id/v2.6.x/delete-entities.md#Delete-Entities-from-Partitions">Menghapus Entitas dari Partisi</a></p></li>
 </ul>
-<h3 id="Search-and-Query" class="common-anchor-header">Pencarian dan Kueri</h3><p>Anda dapat melakukan pencarian dan kueri di dalam partisi tertentu. Untuk detailnya, lihat</p>
+<h3 id="Search-and-Query" class="common-anchor-header">Pencarian dan Kueri<button data-href="#Search-and-Query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Anda dapat melakukan pencarian dan kueri di dalam partisi tertentu. Untuk detailnya, lihat</p>
 <ul>
-<li><p><a href="/docs/id/single-vector-search.md#ANN-Search-in-Partition">Melakukan Pencarian ANN dalam Partisi</a></p></li>
-<li><p><a href="/docs/id/get-and-scalar-query.md#Queries-in-Partitions">Melakukan Pemfilteran Metadata di dalam Partisi</a></p></li>
+<li><p><a href="/docs/id/v2.6.x/single-vector-search.md#ANN-Search-in-Partition">Melakukan Pencarian ANN dalam Partisi</a></p></li>
+<li><p><a href="/docs/id/v2.6.x/get-and-scalar-query.md#Queries-in-Partitions">Melakukan Pemfilteran Metadata di dalam Partisi</a></p></li>
 </ul>
 <h2 id="Drop-Partition" class="common-anchor-header">Menghapus Partisi<button data-href="#Drop-Partition" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -741,6 +809,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/partitions/release&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;]
@@ -755,6 +824,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/partitions/drop&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;partitionName&quot;: &quot;partitionA&quot;
@@ -769,6 +839,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/partitions/list&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>

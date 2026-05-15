@@ -22,7 +22,7 @@ summary: >-
     </button></h1><p>全文檢索是一種在文字資料集中擷取包含特定詞彙或短語的文件，然後根據相關性對結果進行排序的功能。此功能克服了語意搜尋可能會忽略精確詞彙的限制，確保您收到最精確且與上下文最相關的結果。此外，它還可以透過接受原始文字輸入來簡化向量搜尋，自動將您的文字資料轉換為稀疏嵌入，而不需要手動產生向量嵌入。</p>
 <p>使用 BM25 演算法進行相關性評分，此功能在檢索擴充生成 (RAG) 的情境中特別有價值，它會優先處理與特定搜尋詞彙密切相符的文件。</p>
 <div class="alert note">
-<p>透過整合全文檢索與以語意為基礎的密集向量檢索，您可以提高檢索結果的準確性與相關性。如需詳細資訊，請參閱<a href="/docs/zh-hant/multi-vector-search.md">混合搜尋</a>。</p>
+<p>透過整合全文檢索與以語意為基礎的密集向量檢索，您可以提高檢索結果的準確性與相關性。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/multi-vector-search.md">混合搜尋</a>。</p>
 </div>
 <h2 id="BM25-implementation" class="common-anchor-header">BM25 實作<button data-href="#BM25-implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -43,7 +43,7 @@ summary: >-
 <p>Milvus 的全文檢索遵循以下工作流程：</p>
 <ol>
 <li><p><strong>原始文字輸入</strong>：您插入文字文件或使用純文字提供查詢，不需要嵌入模型。</p></li>
-<li><p><strong>文字分析</strong>：Milvus 使用<a href="/docs/zh-hant/analyzer-overview.md">分析器</a>將您的文字處理成有意義的詞彙，以便進行索引和搜尋。</p></li>
+<li><p><strong>文字分析</strong>：Milvus 使用<a href="/docs/zh-hant/v2.6.x/analyzer-overview.md">分析器</a>將您的文字處理成有意義的詞彙，以便進行索引和搜尋。</p></li>
 <li><p><strong>BM25 函式處理</strong>：內建的函數可將這些詞彙轉換成 BM25 計分最佳化的稀疏向量表示。</p></li>
 <li><p><strong>集合儲存</strong>：Milvus 將產生的稀疏嵌入資料儲存在資料集中，以便進行快速檢索和排序。</p></li>
 <li><p><strong>BM25 相關性評分</strong>：在搜尋時，Milvus 應用 BM25 計分功能來計算文件相關性，並傳回最符合查詢字詞的排序結果。</p></li>
@@ -54,9 +54,9 @@ summary: >-
    </span> <span class="img-wrapper"> <span>全文檢索</span> </span></p>
 <p>要使用全文檢索，請遵循以下主要步驟：</p>
 <ol>
-<li><p><a href="/docs/zh-hant/full-text-search.md#Create-a-collection-for-BM25-full-text-search">建立一個集合</a>：設定所需欄位，並定義將原始文字轉換為稀疏嵌入的 BM25 函式。</p></li>
-<li><p><a href="/docs/zh-hant/full-text-search.md#Insert-text-data">插入資料</a>：將原始文字文件輸入到資料集中。</p></li>
-<li><p><a href="/docs/zh-hant/full-text-search.md#Perform-full-text-search">執行搜尋</a>：使用自然語言查詢文字來擷取根據 BM25 相關性排序的結果。</p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/full-text-search.md#Create-a-collection-for-BM25-full-text-search">建立一個集合</a>：設定所需欄位，並定義將原始文字轉換為稀疏嵌入的 BM25 函式。</p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/full-text-search.md#Insert-text-data">插入資料</a>：將原始文字文件輸入到資料集中。</p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/full-text-search.md#Perform-full-text-search">執行搜尋</a>：使用自然語言查詢文字來擷取根據 BM25 相關性排序的結果。</p></li>
 </ol>
 <h2 id="Create-a-collection-for-BM25-full-text-search" class="common-anchor-header">為 BM25 全文搜尋建立資料庫<button data-href="#Create-a-collection-for-BM25-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -92,7 +92,7 @@ summary: >-
     </button></h3><p>您的資料集模式必須包含至少三個必填欄位：</p>
 <ul>
 <li><p><strong>主要欄位</strong>：唯一識別集合中的每個實體。</p></li>
-<li><p><strong>文字欄位</strong>(<code translate="no">VARCHAR</code>)：儲存原始文字文件。必須設定<code translate="no">enable_analyzer=True</code> ，以便 Milvus 能夠為 BM25 相關性排序處理文字。預設情況下，Milvus 使用 <a href="/docs/zh-hant/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/zh-hant/standard-analyzer.md"> 分析器</a>進行文字分析。若要設定不同的分析器，請參閱<a href="/docs/zh-hant/analyzer-overview.md">分析器總覽</a>。</p></li>
+<li><p><strong>文字欄位</strong>(<code translate="no">VARCHAR</code>)：儲存原始文字文件。必須設定<code translate="no">enable_analyzer=True</code> ，以便 Milvus 能夠為 BM25 相關性排序處理文字。預設情況下，Milvus 使用 <a href="/docs/zh-hant/v2.6.x/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/zh-hant/v2.6.x/standard-analyzer.md"> 分析器</a>進行文字分析。若要設定不同的分析器，請參閱<a href="/docs/zh-hant/v2.6.x/analyzer-overview.md">分析器總覽</a>。</p></li>
 <li><p><strong>稀疏向量場</strong>(<code translate="no">SPARSE_FLOAT_VECTOR</code>)：儲存由 BM25 函式自動產生的稀疏嵌入。</p></li>
 </ul>
 <div class="multipleCode">
@@ -435,7 +435,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">index_type</code></p></td>
-     <td><p>要建立的索引類型。<code translate="no">AUTOINDEX</code> 允許 Milvus 自動最佳化索引設定。如果您需要對索引設定有更多控制，您可以從 Milvus 中各種可用於稀疏向量的索引類型中選擇。如需詳細資訊，請參閱<a href="/docs/zh-hant/index.md#Indexes-supported-in-Milvus">Milvus 支援的索引</a>。</p></td>
+     <td><p>要建立的索引類型。<code translate="no">AUTOINDEX</code> 允許 Milvus 自動最佳化索引設定。如果您需要對索引設定有更多控制，您可以從 Milvus 中各種可用於稀疏向量的索引類型中選擇。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/index.md#Indexes-supported-in-Milvus">Milvus 支援的索引</a>。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">metric_type</code></p></td>
@@ -513,6 +513,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -574,6 +575,7 @@ client.insert(InsertReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;text&quot;: &quot;information retrieval is a field of study.&quot;},
@@ -601,7 +603,7 @@ client.insert(InsertReq.builder()
       </svg>
     </button></h2><p>將資料插入資料庫後，您就可以使用原始文字查詢來執行全文檢索。Milvus 會自動將您的查詢轉換成稀疏向量，並使用 BM25 演算法將配對的搜尋結果排序，然後傳回 topK (<code translate="no">limit</code>) 結果。</p>
 <div class="alert note">
-<p>您可以透過設定文字高亮器來高亮搜尋結果中的匹配詞彙。詳情請參閱<a href="/docs/zh-hant/text-highlighter.md">文字高亮程式</a>。</p>
+<p>您可以透過設定文字高亮器來高亮搜尋結果中的匹配詞彙。詳情請參閱<a href="/docs/zh-hant/v2.6.x/text-highlighter.md">文字高亮程式</a>。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -662,6 +664,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data-raw <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -688,7 +691,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">params.drop_ratio_search</code></p></td>
-     <td><p>搜尋時要忽略的低重要性字詞比例。詳情請參閱<a href="/docs/zh-hant/sparse_vector.md">Sparse Vector</a>。</p></td>
+     <td><p>搜尋時要忽略的低重要性字詞比例。詳情請參閱<a href="/docs/zh-hant/v2.6.x/sparse_vector.md">Sparse Vector</a>。</p></td>
    </tr>
    <tr>
      <td></td>
@@ -704,7 +707,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">output_fields</code></p></td>
-     <td><p>搜尋結果中要回傳的欄位名稱清單。支援所有欄位<strong>，除了</strong>包含 BM25 產生的嵌入的<strong>稀疏向量欄位</strong>。常見的輸出欄位包括 primary key 欄位 (例如<code translate="no">id</code>) 和原始文字欄位 (例如<code translate="no">text</code>)。如需詳細資訊，請參閱<a href="/docs/zh-hant/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">常見問題</a>。</p></td>
+     <td><p>搜尋結果中要回傳的欄位名稱清單。支援所有欄位<strong>，除了</strong>包含 BM25 產生的嵌入的<strong>稀疏向量欄位</strong>。常見的輸出欄位包括 primary key 欄位 (例如<code translate="no">id</code>) 和原始文字欄位 (例如<code translate="no">text</code>)。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">常見問題</a>。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">limit</code></p></td>
@@ -744,7 +747,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     </button></h3><p>不可以，BM25 函式產生的稀疏向量無法直接在全文檢索中存取或輸出。以下是詳細資訊：</p>
 <ul>
 <li><p>BM25 函式會在內部產生稀疏向量，用於排序和檢索</p></li>
-<li><p>這些向量會儲存在稀疏字段中，但無法包含在<code translate="no">output_fields</code></p></li>
+<li><p>這些向量會儲存在稀疏欄位中，但不能包含在<code translate="no">output_fields</code></p></li>
 <li><p>您只能輸出原始文字欄位和元資料 (如<code translate="no">id</code>,<code translate="no">text</code>)</p></li>
 </ul>
 <p>範例：</p>
@@ -795,4 +798,4 @@ client.search(
 <li><p>使用手動稀疏向量操作取代全文檢索</p></li>
 <li><p>為自訂稀疏向量工作流程建立獨立的集合</p></li>
 </ul>
-<p>如需詳細資訊，請參閱<a href="/docs/zh-hant/sparse_vector.md">Sparse Vector</a>。</p>
+<p>如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/sparse_vector.md">Sparse Vector</a>。</p>

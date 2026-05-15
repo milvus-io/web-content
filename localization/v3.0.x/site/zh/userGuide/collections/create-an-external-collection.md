@@ -589,6 +589,7 @@ err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span 
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${PROJECT_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;dbName\&quot;: \&quot;my_database\&quot;,
     \&quot;collectionName\&quot;: \&quot;test_collection\&quot;,
@@ -704,6 +705,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${PROJECT_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;dbName\&quot;: \&quot;my_database\&quot;,
     \&quot;collectionName\&quot;: \&quot;test_collection\&quot;,
@@ -792,6 +794,7 @@ jobID := refreshResult.JobID
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${PROJECT_ENDPOINT}</span>/v2/vectordb/jobs/external_collection/refresh&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;dbName\&quot;: \&quot;my_database\&quot;,
     \&quot;collectionName\&quot;: \&quot;test_collection\&quot;,
@@ -805,7 +808,7 @@ jobID := refreshResult.JobID
 <li><p>刷新操作会扫描数据文件的元数据并生成相应的清单文件。通常需要 150-250 毫秒。</p></li>
 <li><p>清单文件记录了 Milvus 中的元数据与外部文件中的行之间的映射。</p></li>
 <li><p>如果源数据有更新，就需要再次手动调用刷新，使 Milvus 保持最新。</p></li>
-<li><p>如果刷新需要移除所有活动元数据而不插入任何内容，则会导致拒绝。</p></li>
+<li><p>如果刷新需要删除所有活动元数据，而不插入任何内容，则会导致拒绝。</p></li>
 </ul>
 </div>
 <h2 id="Follow-ups" class="common-anchor-header">后续操作<button data-href="#Follow-ups" class="anchor-icon" translate="no">

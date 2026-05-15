@@ -48,7 +48,7 @@ beta: Milvus 2.5.11+
       </svg>
     </button></h2><ul>
 <li><p>Diese Funktion funktioniert nur mit BM25-basiertem Text Retrieval und spärlichen Vektoren. Weitere Informationen finden Sie unter <a href="/docs/de/full-text-search.md">Volltextsuche</a>.</p></li>
-<li><p>Jedes Dokument in einer Sammlung kann nur einen Analyzer verwenden, der durch den Wert des Feldes für die Sprachkennung bestimmt wird.</p></li>
+<li><p>Jedes Dokument in einer Sammlung kann nur einen Analyzer verwenden, der durch den Wert des Sprachkennungsfeldes bestimmt wird.</p></li>
 <li><p>Die Leistung kann je nach der Komplexität Ihrer Analysatoren und der Größe Ihrer Textdaten variieren.</p></li>
 </ul>
 <h2 id="Overview" class="common-anchor-header">Übersicht<button data-href="#Overview" class="anchor-icon" translate="no">
@@ -82,7 +82,7 @@ beta: Milvus 2.5.11+
 <ul>
 <li><p>Definieren Sie ein Schema mit den wichtigsten Feldern:</p>
 <ul>
-<li><p><strong>primary_key</strong>: Eindeutiger Bezeichner des Dokuments.</p></li>
+<li><p><strong>primary_key</strong>: Eindeutiger Dokumentbezeichner.</p></li>
 <li><p><strong>text_feld</strong>: Speichert den ursprünglichen Textinhalt.</p></li>
 <li><p><strong>identifier_feld</strong>: Gibt an, welcher Analysator für jedes Dokument zu verwenden ist.</p></li>
 <li><p><strong>vektor_feld</strong>: Speichert spärliche Einbettungen, die von der BM25-Funktion erzeugt werden sollen.</p></li>
@@ -487,7 +487,7 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Definieren Sie eine BM25-Funktion, um spärliche Vektordarstellungen aus Ihren Rohtextdaten zu erzeugen:</p>
+    </button></h3><p>Definieren Sie eine BM25-Funktion, um spärliche Vektordarstellungen aus Ihren Textrohdaten zu erzeugen:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create the BM25 function</span>
@@ -563,7 +563,7 @@ schema.WithFunction(function.WithName(<span class="hljs-string">&quot;text_to_ve
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Um eine effiziente Suche zu ermöglichen, erstellen Sie einen Index für das Sparse-Vektor-Feld:</p>
+    </button></h3><p>Um eine effiziente Suche zu ermöglichen, erstellen Sie einen Index auf dem spärlichen Vektorfeld:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Configure index parameters</span>
@@ -676,6 +676,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;multilingual_documents\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -819,6 +820,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;multilingual_documents&quot;,
   &quot;data&quot;: [
@@ -849,7 +851,7 @@ curl --request POST \
 <li><p>Speichert sowohl den Originaltext als auch den erzeugten Sparse-Vektor</p></li>
 </ol>
 <div class="alert note">
-<p>Sie brauchen den Sparse-Vektor nicht direkt anzugeben; die BM25-Funktion erzeugt ihn automatisch auf der Grundlage Ihres Textes und des angegebenen Analysators.</p>
+<p>Sie brauchen den Sparse-Vektor nicht direkt anzugeben; die BM25-Funktion erzeugt ihn automatisch auf der Grundlage Ihres Textes und des angegebenen Analyzers.</p>
 </div>
 <h2 id="Step-4-Perform-search-operations" class="common-anchor-header">Schritt 4: Suchoperationen durchführen<button data-href="#Step-4-Perform-search-operations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -992,6 +994,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;multilingual_documents&quot;,
   &quot;data&quot;: [&quot;artificial intelligence&quot;],
@@ -1117,6 +1120,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;multilingual_documents&quot;,
   &quot;data&quot;: [&quot;人工智能&quot;],

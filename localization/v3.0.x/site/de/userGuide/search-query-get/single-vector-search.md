@@ -22,7 +22,7 @@ summary: >-
       </svg>
     </button></h1><p>Auf der Grundlage einer Indexdatei, in der die sortierte Reihenfolge der Vektoreinbettungen aufgezeichnet ist, findet die ANN-Suche (Approximate Nearest Neighbor) eine Untergruppe von Vektoreinbettungen auf der Grundlage des Abfragevektors in einer empfangenen Suchanfrage, vergleicht den Abfragevektor mit denen in der Untergruppe und liefert die ähnlichsten Ergebnisse. Mit der ANN-Suche bietet Milvus ein effizientes Sucherlebnis. Auf dieser Seite erfahren Sie, wie Sie grundlegende ANN-Suchen durchführen können.</p>
 <div class="alert note">
-<p>Wenn Sie neue Felder dynamisch hinzufügen, nachdem die Sammlung erstellt wurde, geben Suchen, die diese Felder einschließen, die definierten Standardwerte oder NULL für Entitäten zurück, die nicht explizit Werte festgelegt haben. Details finden Sie unter <a href="/docs/de/add-fields-to-an-existing-collection.md">Felder zu einer bestehenden Sammlung hinzufügen</a>.</p>
+<p>Wenn Sie neue Felder dynamisch hinzufügen, nachdem die Sammlung erstellt wurde, geben Suchen, die diese Felder einschließen, die definierten Standardwerte oder NULL für Entitäten zurück, die nicht explizit Werte festgelegt haben. Einzelheiten finden Sie unter <a href="/docs/de/add-fields-to-an-existing-collection.md">Felder zu einer bestehenden Sammlung hinzufügen</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Übersicht<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,10 +39,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die ANN- und die k-Nächste-Nachbarn-Suche (kNN) sind die üblichen Methoden bei Vektorähnlichkeitssuchen. Bei der kNN-Suche müssen Sie alle Vektoren in einem Vektorraum mit dem in der Suchanfrage enthaltenen Abfragevektor vergleichen, bevor Sie die ähnlichsten herausfinden können, was zeit- und ressourcenintensiv ist.</p>
+    </button></h2><p>Die ANN- und die k-Nächste-Nachbarn-Suche (kNN) sind die üblichen Methoden bei Vektorähnlichkeitssuchen. Bei der kNN-Suche müssen Sie alle Vektoren in einem Vektorraum mit dem Abfragevektor in der Suchanfrage vergleichen, bevor Sie die ähnlichsten herausfinden, was zeit- und ressourcenaufwändig ist.</p>
 <p>Im Gegensatz zur kNN-Suche wird bei einem ANN-Suchalgorithmus eine <strong>Indexdatei</strong> angefordert, die die sortierte Reihenfolge der Vektoreinbettungen aufzeichnet. Wenn eine Suchanfrage eingeht, können Sie die Indexdatei als Referenz verwenden, um schnell eine Untergruppe zu finden, die wahrscheinlich die Vektoreinbettungen enthält, die dem Abfragevektor am ähnlichsten sind. Dann können Sie den angegebenen <strong>metrischen Typ</strong> verwenden, um die Ähnlichkeit zwischen dem Abfragevektor und den Vektoren in der Untergruppe zu messen, die Gruppenmitglieder auf der Grundlage der Ähnlichkeit mit dem Abfragevektor zu sortieren und die <strong>Top-K-Gruppenmitglieder</strong> zu ermitteln.</p>
 <p>ANN-Suchen hängen von vorgefertigten Indizes ab, und der Suchdurchsatz, die Speichernutzung und die Korrektheit der Suche können je nach den gewählten Indextypen variieren. Sie müssen ein Gleichgewicht zwischen Suchleistung und Korrektheit finden.</p>
-<p>Um die Lernkurve zu reduzieren, bietet Milvus <strong>AUTOINDEX</strong>. Mit <strong>AUTOINDEX</strong> kann Milvus die Datenverteilung innerhalb Ihrer Sammlung analysieren, während der Index aufgebaut wird, und stellt auf der Grundlage der Analyse die optimalsten Indexparameter ein, um ein Gleichgewicht zwischen Suchleistung und Korrektheit herzustellen.</p>
+<p>Um die Lernkurve zu reduzieren, bietet Milvus <strong>AUTOINDEX</strong>. Mit <strong>AUTOINDEX</strong> kann Milvus die Datenverteilung innerhalb Ihrer Sammlung analysieren, während der Index aufgebaut wird, und stellt die optimalsten Indexparameter auf der Grundlage der Analyse ein, um ein Gleichgewicht zwischen Suchleistung und Korrektheit herzustellen.</p>
 <p>In diesem Abschnitt finden Sie detaillierte Informationen zu den folgenden Themen:</p>
 <ul>
 <li><p><a href="/docs/de/single-vector-search.md#Single-Vector-Search">Ein-Vektor-Suche</a></p></li>
@@ -223,6 +223,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -270,7 +271,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">COSINE</code></p></td>
-     <td><p>Ein größerer Wert deutet auf eine höhere Ähnlichkeit hin.</p></td>
+     <td><p>Ein größerer Wert weist auf eine höhere Ähnlichkeit hin.</p></td>
      <td><p>[-1, 1]</p></td>
    </tr>
    <tr>
@@ -453,6 +454,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -537,6 +539,7 @@ curl --request POST \
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
@@ -673,6 +676,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -832,6 +836,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -1052,6 +1057,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -1102,6 +1108,7 @@ curl --request POST \
 
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;quick_setup&quot;,
   &quot;annsField&quot;: &quot;vector&quot;,

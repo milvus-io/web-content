@@ -577,6 +577,7 @@ client.createCollection(requestCreate);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/create&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;description\&quot;: \&quot;A collection for storing book information with struct array chunks\&quot;,
@@ -692,6 +693,7 @@ row.add(<span class="hljs-string">&quot;chunks&quot;</span>, structArr);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/insert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -816,8 +818,8 @@ client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot
     </button></h2><p>コレクションやStructArrayのベクトルフィールドでベクトル検索を行うことができます。</p>
 <p>具体的には、検索リクエストの<code translate="no">anns_field</code> パラメータの値として、Struct 要素内の StructArray フィールド名と対象となるベクトルフィールド名を連結し、<code translate="no">EmbeddingList</code> を使用してクエリベクトルを整然と整理する必要があります。</p>
 <div class="alert note">
-<p>Milvusでは、StructArray内のエンベッディングリストに対する検索のクエリベクトルをよりきれいに整理するために、<code translate="no">EmbeddingList</code> 。各<code translate="no">EmbeddingList</code> は少なくともベクトル埋め込みを含み、返り値として topK エンティティの数を期待します。</p>
-<p>しかし、<code translate="no">EmbeddingList</code> は、<code translate="no">search_iterator()</code> リクエストはおろか、範囲検索やグループ化検索パラメーターのない<code translate="no">search()</code> リクエストでしか使用できない。</p>
+<p>Milvusでは、StructArray内のエンベッディングリストに対する検索のクエリベクトルをよりきれいに整理するために、<code translate="no">EmbeddingList</code> 。各<code translate="no">EmbeddingList</code> は少なくともベクトル埋め込みを含み、返り値として topK エンティティ数を期待します。</p>
+<p>しかし、<code translate="no">EmbeddingList</code> は、<code translate="no">search_iterator()</code> リクエストはおろか、範囲検索やグループ化検索パラメーターを持たない<code translate="no">search()</code> リクエストでのみ使用できる。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -884,6 +886,7 @@ embeddingList1=<span class="hljs-string">&#x27;[[0.2,0.9,0.4,-0.3,0.2]]&#x27;</s
 embeddingList2=<span class="hljs-string">&#x27;[[-0.2,-0.2,0.5,0.6,0.9],[-0.4,0.3,0.5,0.8,0.2]]&#x27;</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>],
@@ -988,6 +991,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>, <span class="hljs-variable">$embeddingList2</span>],
@@ -1144,7 +1148,7 @@ element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>) &amp;&amp; 
 <li><p><code translate="no">MATCH_MOST(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>
 <p>これは、<code translate="no">text</code> のサブフィールドに、"Red" で始まるチャンクを多くとも<code translate="no">k</code> 含む実体を返す。</p></li>
 <li><p><code translate="no">MATCH_EXACT(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>
-<p>これは、<code translate="no">text</code> サブフィールドに "Red" で始まるチャンクをちょうど<code translate="no">k</code> 個含むエンティティを返す。</p></li>
+<p><code translate="no">k</code> これは、<code translate="no">text</code> サブフィールドに "Red" で始まるチャンクを正確に含むエンティティを返す。</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">次のステップ<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"

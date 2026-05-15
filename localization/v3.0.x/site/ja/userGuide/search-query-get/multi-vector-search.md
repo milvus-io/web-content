@@ -19,15 +19,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>多くのアプリケーションにおいて、オブジェクトはタイトルや説明文などの豊富な情報セット、あるいはテキスト、画像、音声などの複数のモダリティで検索することができる。例えば、テキストと画像を含むツイートは、テキストか画像のどちらかが検索クエリのセマンティックにマッチすれば検索される。ハイブリッド検索は、これらの多様な分野にわたる検索を組み合わせることによって、検索体験を向上させる。Milvusは、複数のベクトルフィールドの検索を可能にし、複数の近似最近傍（ANN）検索を同時に行うことで、これをサポートしている。マルチベクトルハイブリッド検索は、テキストと画像の両方を検索したい場合、同じオブジェクトを記述する複数のテキストフィールドを検索したい場合、または検索品質を向上させるために密なベクトルと疎なベクトルを検索したい場合に特に便利です。</p>
+    </button></h1><p>多くのアプリケーションにおいて、オブジェクトはタイトルや説明文などの豊富な情報セット、あるいはテキスト、画像、音声などの複数のモダリティによって検索される。例えば、テキストと画像を含むツイートは、テキストか画像のどちらかが検索クエリのセマンティックにマッチすれば検索される。ハイブリッド検索は、これらの多様な分野にわたる検索を組み合わせることによって、検索体験を向上させる。Milvusは、複数のベクトルフィールドの検索を可能にし、複数の近似最近傍（ANN）検索を同時に行うことで、これをサポートしている。マルチベクトルハイブリッド検索は、テキストと画像の両方を検索したい場合、同じオブジェクトを記述する複数のテキストフィールドを検索したい場合、または検索品質を向上させるために密なベクトルと疎なベクトルを検索したい場合に特に便利です。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hybrid-search-workflow.png" alt="Hybrid Search Workflow" class="doc-image" id="hybrid-search-workflow" />
    </span> <span class="img-wrapper"> <span>ハイブリッド検索ワークフロー</span> </span></p>
 <p>マルチ・ベクトル・ハイブリッド検索は、さまざまな検索方法を統合したり、さまざまなモダリティからの埋め込みにまたがります：</p>
 <ul>
-<li><p><strong>スパース-デンス・ベクトル検索</strong>：<a href="/docs/ja/sparse_vector.md">スパース</a>-<a href="/docs/ja/dense-vector.md">デンス・ベクトル</a>検索：<a href="/docs/ja/dense-vector.md">デンス・ベクトルは</a>意味的関係を捉えるのに優れ、<a href="/docs/ja/sparse_vector.md">スパース・ベクトルは</a>正確なキーワード・マッチングに非常に効果的である。ハイブリッド検索は、これらのアプローチを組み合わせることで、広範な概念的理解と正確な用語の関連性の両方を提供し、検索結果を向上させる。それぞれの手法の長所を活用することで、ハイブリッド検索は個々の手法の限界を克服し、複雑なクエリに対してより良いパフォーマンスを提供します。ここでは、セマンティック検索とフルテキスト検索を組み合わせたハイブリッド検索について、より詳しく<a href="/docs/ja/full_text_search_with_milvus.md">説明</a>する。</p></li>
-<li><p><strong>マルチモーダルベクトル検索</strong>マルチモーダルベクトル検索は、テキスト、画像、音声など様々なデータタイプを横断的に検索できる強力な手法である。このアプローチの主な利点は、異なるモダリティをシームレスでまとまりのある検索体験に統一できることだ。例えば、製品検索では、ユーザーはテキストクエリを入力し、テキストと画像の両方で説明された製品を見つけるかもしれない。ハイブリッド検索手法によってこれらのモダリティを組み合わせることで、検索精度を高めたり、検索結果を充実させたりすることができます。</p></li>
+<li><p><strong>スパース-デンス・ベクトル検索</strong>：<a href="/docs/ja/sparse_vector.md">スパース</a>-<a href="/docs/ja/dense-vector.md">デンス・ベクトル</a>検索：<a href="/docs/ja/dense-vector.md">デンス・ベクトルは</a>意味的関係を捉えるのに優れ、<a href="/docs/ja/sparse_vector.md">スパース・ベクトルは</a>正確なキーワード・マッチングに非常に効果的である。ハイブリッド検索は、これらのアプローチを組み合わせることで、広範な概念的理解と正確な用語の関連性の両方を提供し、検索結果を向上させる。それぞれの手法の長所を活用することで、ハイブリッド検索は個々のアプローチの限界を克服し、複雑なクエリに対してより良いパフォーマンスを提供します。ここでは、セマンティック検索とフルテキスト検索を組み合わせたハイブリッド検索について、より詳しく<a href="/docs/ja/full_text_search_with_milvus.md">説明</a>する。</p></li>
+<li><p><strong>マルチモーダルベクトル検索</strong>マルチモーダルベクトル検索は、テキスト、画像、音声など様々なデータタイプを横断的に検索できる強力な手法である。このアプローチの主な利点は、異なるモダリティをシームレスでまとまりのある検索体験に統一できることだ。例えば、商品検索において、ユーザーはテキストクエリを入力し、テキストと画像の両方で説明された商品を見つけるかもしれない。ハイブリッド検索手法によってこれらのモダリティを組み合わせることで、検索精度を高めたり、検索結果を充実させたりすることができます。</p></li>
 </ul>
 <h2 id="Example" class="common-anchor-header">例<button data-href="#Example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -46,7 +46,7 @@ summary: >-
       </svg>
     </button></h2><p>各商品にテキストの説明と画像が含まれている、実際のユースケースを考えてみましょう。利用可能なデータに基づいて、3つのタイプの検索を行うことができます：</p>
 <ul>
-<li><p><strong>セマンティック・テキスト検索：</strong>これは、密なベクトルを使って商品のテキスト説明をクエリすることを含む。テキスト埋め込みは、<a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#A-Quick-Recap-of-BERT">BERTや</a> <a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.">Transformersなどの</a>モデルや<a href="https://zilliz.com/learn/guide-to-using-openai-text-embedding-models">OpenAIの</a>ようなサービスを使用して生成することができる。</p></li>
+<li><p><strong>セマンティック・テキスト検索：</strong>これは、密なベクトルを使って商品のテキスト説明をクエリすることを含む。テキスト埋め込みは、<a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#A-Quick-Recap-of-BERT">BERTや</a> <a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.">Transformersなどの</a>モデルや、<a href="https://zilliz.com/learn/guide-to-using-openai-text-embedding-models">OpenAIの</a>ようなサービスを使用して生成することができる。</p></li>
 <li><p><strong>全文検索</strong>：ここでは、疎なベクトルとのキーワードマッチを使用して、商品のテキスト説明をクエリする。<a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25の</a>ようなアルゴリズムや、<a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*1cde1oq*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#BGE-M3">BGE-M3や</a> <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*ov2die*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#SPLADE">SPLADEの</a>ようなスパース埋め込みモデルをこの目的に利用することができる。</p></li>
 <li><p><strong>マルチモーダル画像検索：</strong>この手法は、密なベクトルを持つテキストクエリを用いて画像に対してクエリを行う。画像埋め込みは<a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">CLIPの</a>ようなモデルで生成できます。</p></li>
 </ul>
@@ -339,7 +339,7 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>コレクション・スキーマを定義した後、次のステップは、ベクトル・インデックスを構成し、類似性メトリクスを指定することである。与えられた例では</p>
+    </button></h3><p>コレクション・スキーマを定義したら、次はベクトル・インデックスを設定し、類似度メトリクスを指定する。与えられた例では</p>
 <ul>
 <li><p><code translate="no">text_dense_index</code> <code translate="no">IP</code> メトリック・タイプを持つ タイプのインデックスが、テキスト密ベクトル・フィールド用に作成されます。<code translate="no">AUTOINDEX</code> </p></li>
 <li><p><code translate="no">text_sparse_index</code> <code translate="no">BM25</code> メトリック型を持つ 型のインデックスが、テキスト疎ベクトル・フィールドに使用されます。<code translate="no">SPARSE_INVERTED_INDEX</code></p></li>
@@ -510,6 +510,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -645,6 +646,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;text&quot;: &quot;Red cotton t-shirt with round neck&quot; , &quot;text_dense&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, ...], &quot;image_dense&quot;: [0.6366019600530924, -0.09323198122475052, ...]},
@@ -978,6 +980,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/hybrid_search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;search\&quot;: <span class="hljs-variable">${req}</span>,
@@ -991,7 +994,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>以下はその出力である：</p>
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;[&#x27;id: 1, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 2, distance: 0.006422005593776703, entity: {}&#x27;]&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>ハイブリッド検索に<code translate="no">limit=2</code> パラメータを指定すると、milvusは3つの検索から得られた6つの結果を再ランク付けします。最終的に、最も類似した上位2つの結果のみが返されます。</p>
+<p>ハイブリッド検索に<code translate="no">limit=2</code> パラメータを指定すると、milvusは3つの検索で得られた6つの結果を再ランク付けします。最終的に、最も類似した上位2つの結果のみが返されます。</p>
 <h2 id="Advanced-usage" class="common-anchor-header">高度な使用法<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -56,7 +56,7 @@ summary: >-
 <ol>
 <li><p><a href="/docs/zh-hant/full-text-search.md#Create-a-collection-for-BM25-full-text-search">建立一個集合</a>：設定所需欄位，並定義將原始文字轉換為稀疏嵌入的 BM25 函式。</p></li>
 <li><p><a href="/docs/zh-hant/full-text-search.md#Insert-text-data">插入資料</a>：將原始文字文件輸入到資料集中。</p></li>
-<li><p><a href="/docs/zh-hant/full-text-search.md#Perform-full-text-search">執行搜尋</a>：使用自然語言查詢文字，擷取根據 BM25 相關性排序的結果。</p></li>
+<li><p><a href="/docs/zh-hant/full-text-search.md#Perform-full-text-search">執行搜尋</a>：使用自然語言查詢文字來擷取根據 BM25 相關性排序的結果。</p></li>
 </ol>
 <h2 id="Create-a-collection-for-BM25-full-text-search" class="common-anchor-header">為 BM25 全文搜尋建立資料庫<button data-href="#Create-a-collection-for-BM25-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -243,7 +243,7 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>BM25 函式會將標記化的文字轉換成支援 BM25 計分的稀疏向量。</p>
+    </button></h3><p>BM25 函數會將標記化的文字轉換成支援 BM25 計分的稀疏向量。</p>
 <p>定義函數並將其加入您的模式：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -447,7 +447,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>用於建立和查詢索引的演算法。有效值：</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (預設）：使用 MaxScore 演算法的最佳化 Document-at-a-Time (DAAT) 查詢處理。MaxScore 透過跳過可能影響最小的詞彙和文件，為高<em>k</em>值或包含許多詞彙的查詢提供更好的效能。為了達到這個目的，MaxScore 會根據最大影響分數，將詞彙分為必要和非必要兩組，並將重點放在對 top-k 結果有貢獻的詞彙上。</p></li><li><p><code translate="no">"DAAT_WAND"</code>:使用 WAND 演算法優化 DAAT 查詢處理。WAND 利用最大影響分數跳過非競爭性文件，評估較少的命中文件，但每次命中的開銷較高。這使得 WAND 對於<em>k</em>值較小的查詢或較短的查詢更有效率，在這些情況下跳過是較可行的。</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>:Basic Term-at-a-Time (TAAT) 查詢處理。雖然與<code translate="no">DAAT_MAXSCORE</code> 和<code translate="no">DAAT_WAND</code> 相比較慢，但<code translate="no">TAAT_NAIVE</code> 提供了獨特的優勢。DAAT 演算法使用快取的最大影響分數，不論全域集合參數 (avgdl) 如何變更，這些分數都會保持靜態，而<code translate="no">TAAT_NAIVE</code> 則不同，它會動態適應這些變更。</p></li></ul></td>
+     <td><p>用於建立和查詢索引的演算法。有效值：</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (預設）：使用 MaxScore 演算法的最佳化 Document-at-a-Time (DAAT) 查詢處理。MaxScore 可跳過可能影響最小的詞彙和文件，為高<em>k</em>值或包含許多詞彙的查詢提供更好的效能。為了達到這個目的，MaxScore 會根據最大影響分數，將詞彙分為必要和非必要兩組，並將重點放在對 top-k 結果有貢獻的詞彙上。</p></li><li><p><code translate="no">"DAAT_WAND"</code>:使用 WAND 演算法優化 DAAT 查詢處理。WAND 利用最大影響分數跳過非競爭性文件，評估較少的命中文件，但每次命中的開銷較高。這使得 WAND 對於<em>k</em>值較小的查詢或較短的查詢更有效率，在這些情況下跳過是較可行的。</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>:Basic Term-at-a-Time (TAAT) 查詢處理。雖然與<code translate="no">DAAT_MAXSCORE</code> 和<code translate="no">DAAT_WAND</code> 相比較慢，但<code translate="no">TAAT_NAIVE</code> 提供了獨特的優勢。DAAT 演算法使用快取的最大影響分數，不論全域集合參數 (avgdl) 如何改變，這些分數都會保持靜態，而<code translate="no">TAAT_NAIVE</code> 則不同，它會動態適應這些變化。</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
@@ -513,6 +513,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -574,6 +575,7 @@ client.insert(InsertReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;text&quot;: &quot;information retrieval is a field of study.&quot;},
@@ -662,6 +664,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data-raw <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -744,7 +747,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     </button></h3><p>不可以，BM25 函式產生的稀疏向量無法直接在全文檢索中存取或輸出。以下是詳細資訊：</p>
 <ul>
 <li><p>BM25 函式會在內部產生稀疏向量，用於排序和檢索</p></li>
-<li><p>這些向量會儲存在稀疏字段中，但無法包含在<code translate="no">output_fields</code></p></li>
+<li><p>這些向量會儲存在稀疏欄位中，但不能包含在<code translate="no">output_fields</code></p></li>
 <li><p>您只能輸出原始文字欄位和元資料 (如<code translate="no">id</code>,<code translate="no">text</code>)</p></li>
 </ul>
 <p>範例：</p>

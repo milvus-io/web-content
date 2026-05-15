@@ -36,7 +36,7 @@ summary: 'Milvus는 별칭 관리 기능을 제공합니다. 이 페이지에서
         ></path>
       </svg>
     </button></h2><p>별칭 사용의 주요 이점은 클라이언트 애플리케이션을 특정 물리적 컬렉션 이름에서 분리할 수 있다는 것입니다.</p>
-<p><code translate="no">prod_data</code> 이라는 컬렉션을 쿼리하는 라이브 애플리케이션이 있다고 가정해 보겠습니다. 기초 데이터를 업데이트해야 할 때 서비스 중단 없이 업데이트를 수행할 수 있습니다. 워크플로는 다음과 같습니다:</p>
+<p><code translate="no">prod_data</code> 이라는 컬렉션을 쿼리하는 라이브 애플리케이션이 있다고 가정해 보겠습니다. 기초 데이터를 업데이트해야 할 때 서비스 중단 없이 업데이트를 수행할 수 있습니다. 워크플로우는 다음과 같습니다:</p>
 <ol>
 <li><strong>새 컬렉션을 만듭니다</strong>: 예를 들어 <code translate="no">prod_data_v2</code> 과 같은 새 컬렉션을 만듭니다.</li>
 <li><strong>데이터 준비</strong>: <code translate="no">prod_data_v2</code> 에서 새 데이터를 로드하고 색인합니다.</li>
@@ -188,6 +188,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/aliases/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;aliasName&quot;: &quot;bob&quot;,
     &quot;collectionName&quot;: &quot;my_collection_1&quot;
@@ -202,6 +203,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/aliases/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;aliasName&quot;: &quot;alice&quot;,
     &quot;collectionName&quot;: &quot;my_collection_1&quot;
@@ -289,6 +291,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/aliases/list&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 
 <span class="hljs-comment"># {</span>
@@ -386,6 +389,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/aliases/describe&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;aliasName&quot;: &quot;bob&quot;
 }&#x27;</span>
@@ -547,6 +551,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/aliases/alter&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;aliasName&quot;: &quot;alice&quot;,
     &quot;collectionName&quot;: &quot;my_collection_2&quot;
@@ -561,6 +566,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/aliases/describe&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;aliasName&quot;: &quot;alice&quot;
 }&#x27;</span>
@@ -578,6 +584,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/aliases/describe&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;aliasName&quot;: &quot;bob&quot;
 }&#x27;</span>
@@ -675,6 +682,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/aliases/drop&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;aliasName&quot;: &quot;bob&quot;
 }&#x27;</span>
@@ -688,6 +696,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/aliases/drop&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;aliasName&quot;: &quot;alice&quot;
 }&#x27;</span>

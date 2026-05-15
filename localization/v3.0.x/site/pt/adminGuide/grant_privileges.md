@@ -123,7 +123,7 @@ summary: >-
 </tr>
 <tr>
 <td rowspan="5"><p>Privilégios da base de dados</p></td>
-<td><p>ListDatabases</p></td>
+<td><p>Listar bases de dados</p></td>
 <td><p>Ver todas as bases de dados na instância atual</p></td>
 <td><p><a href="/docs/pt/manage_databases.md">Listar bases de dados</a></p></td>
 </tr>
@@ -284,7 +284,7 @@ summary: >-
 <tr>
 <td><p>Criar grupo de recursos</p></td>
 <td><p>Criar um grupo de recursos</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/create_resource_group.md">Criar Grupo de Recursos</a></p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/create_resource_group.md">CreateResourceGroup</a></p></td>
 </tr>
 <tr>
 <td><p>DropResourceGroup</p></td>
@@ -370,8 +370,8 @@ summary: >-
 </tr>
 <tr>
 <td><p>DropOwnership</p></td>
-<td><p>Eliminar uma palavra-passe de um utilizador ou uma função</p></td>
-<td><p><a href="/docs/pt/drop_users_roles.md">EliminarCredencial/ApagarFunção</a></p></td>
+<td><p>Eliminar a palavra-passe de um utilizador ou uma função</p></td>
+<td><p><a href="/docs/pt/drop_users_roles.md">ApagarCredencial/ApagarFunção</a></p></td>
 </tr>
 <tr>
 <td><p>Selecionar propriedade</p></td>
@@ -379,7 +379,7 @@ summary: >-
 <td><p><a href="/docs/pt/grant_roles.md">SelectRole/SelectGrant</a></p></td>
 </tr>
 <tr>
-<td><p>Gerir propriedade</p></td>
+<td><p>GerirPropriedade</p></td>
 <td><p>Gerir um utilizador ou uma função ou atribuir uma função a um utilizador</p></td>
 <td><p><a href="/docs/pt/privilege_group.md">OperateUserRole/OperatePrivilege/OperatePrivilegeV2</a></p></td>
 </tr>
@@ -533,6 +533,7 @@ err = client.GrantV2(ctx, milvusclient.NewGrantV2Option(<span class="hljs-string
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/grant_privilege_v2&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;,
     &quot;privilege&quot;: &quot;Search&quot;,
@@ -544,6 +545,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/grant_privilege_v2&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;,
     &quot;privilege&quot;: &quot;privilege_group_1&quot;,
@@ -555,6 +557,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/grant_privilege_v2&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;,
     &quot;privilege&quot;: &quot;ClusterReadOnly&quot;,
@@ -608,6 +611,7 @@ role, err := client.DescribeRole(ctx, milvusclient.NewDescribeRoleOption(<span c
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/describe&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;
 }&#x27;</span>
@@ -735,6 +739,7 @@ err = client.RevokePrivilegeV2(ctx, milvusclient.NewRevokePrivilegeV2Option(<spa
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/revoke_privilege_v2&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;,
     &quot;privilege&quot;: &quot;Search&quot;,
@@ -746,6 +751,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/revoke_privilege_v2&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;,
     &quot;privilege&quot;: &quot;Search&quot;,
@@ -757,6 +763,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/revoke_privilege_v2&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;,
     &quot;privilege&quot;: &quot;ClusterReadOnly&quot;,

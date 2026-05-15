@@ -68,7 +68,7 @@ summary: ARRAY 字段存储同一数据类型元素的有序集合。下面举�
 </ol>
 <p>下面介绍如何定义包含 ARRAY 字段的 Collections Schema：</p>
 <div class="alert note">
-<p>如果在定义模式时设置了<code translate="no">enable_dynamic_fields=True</code> ，Milvus 允许你插入事先未定义的标量字段。不过，这可能会增加查询和管理的复杂性，并可能影响性能。有关详细信息，请参阅<a href="/docs/zh/enable-dynamic-field.md">动态字段</a>。</p>
+<p>如果在定义模式时设置了<code translate="no">enable_dynamic_fields=True</code> ，Milvus 允许你插入事先未定义的标量字段。不过，这可能会增加查询和管理的复杂性，并可能影响性能。更多信息，请参阅<a href="/docs/zh/enable-dynamic-field.md">动态字段</a>。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -382,6 +382,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -498,6 +499,7 @@ client.<span class="hljs-title function_">insert</span>({
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {
@@ -597,6 +599,7 @@ fmt.Println(<span class="hljs-string">&quot;ratings&quot;</span>, rs.GetColumn(<
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;tags IS NOT NULL&quot;,
@@ -674,6 +677,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;my_collection&quot;,
   &quot;filter&quot;: &quot;ratings[0] &gt; 4&quot;,
@@ -773,6 +777,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -786,4 +791,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:-0.24793813,&quot;embedding&quot;:[0.12,0.34,0.56],&quot;id&quot;:1,&quot;ratings&quot;:{&quot;Data&quot;:{&quot;LongData&quot;:{&quot;data&quot;:[5,4,3]}}},&quot;tags&quot;:{&quot;Data&quot;:{&quot;StringData&quot;:{&quot;data&quot;:[&quot;pop&quot;,&quot;rock&quot;,&quot;classic&quot;]}}}}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>此外，Milvus 还支持高级数组过滤操作符，如<code translate="no">ARRAY_CONTAINS</code>,<code translate="no">ARRAY_CONTAINS_ALL</code>,<code translate="no">ARRAY_CONTAINS_ANY</code> 和<code translate="no">ARRAY_LENGTH</code> ，以进一步增强查询功能。更多详情，请参阅<a href="/docs/zh/array-operators.md">ARRAY 操作符</a>。</p>
+<p>此外，Milvus 还支持高级数组过滤操作符，如<code translate="no">ARRAY_CONTAINS</code>,<code translate="no">ARRAY_CONTAINS_ALL</code>,<code translate="no">ARRAY_CONTAINS_ANY</code> 和<code translate="no">ARRAY_LENGTH</code> ，以进一步增强查询功能。更多详情，请参阅<a href="/docs/zh/array-operators.md">ÂRAY 操作符</a>。</p>

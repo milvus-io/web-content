@@ -37,8 +37,8 @@ summary: Questa pagina mostra la procedura per importare i dati preparati.
       </svg>
     </button></h2><ul>
 <li><p>I dati sono già stati preparati e inseriti nel bucket Milvus.</p>
-<p>In caso contrario, si dovrebbe usare <strong>RemoteBulkWriter</strong> per preparare i dati e assicurarsi che i dati preparati siano già stati trasferiti al bucket Milvus sull'istanza MinIO avviata insieme all'istanza Milvus. Per maggiori dettagli, consultare la sezione <a href="/docs/it/prepare-source-data.md">Preparare i dati di origine</a>.</p></li>
-<li><p>È già stata creata una raccolta con lo schema utilizzato per preparare i dati. In caso contrario, consultare <a href="/docs/it/manage-collections.md">Gestione delle raccolte</a>.</p></li>
+<p>In caso contrario, si dovrebbe usare <strong>RemoteBulkWriter</strong> per preparare i dati e assicurarsi che i dati preparati siano già stati trasferiti al bucket Milvus sull'istanza MinIO avviata insieme all'istanza Milvus. Per maggiori dettagli, consultare la sezione <a href="/docs/it/v2.6.x/prepare-source-data.md">Preparare i dati di origine</a>.</p></li>
+<li><p>È già stata creata una raccolta con lo schema utilizzato per preparare i dati. In caso contrario, consultare <a href="/docs/it/v2.6.x/manage-collections.md">Gestione delle raccolte</a>.</p></li>
 </ul>
 <div class="language-python">
 <p>Il seguente frammento di codice crea una semplice raccolta con lo schema dato. Per ulteriori informazioni sui parametri, fare riferimento a <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> e <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> nel riferimento dell'SDK.</p>
@@ -110,6 +110,7 @@ job_id = resp.json()[<span class="hljs-string">&#x27;data&#x27;</span>][<span cl
 
 curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&quot; \
 --header &quot;Content-Type: application/json&quot; \
+--header &quot;Request-Timeout: 10&quot; \
 --data-raw &#x27;{
     &quot;files&quot;: [
         [
@@ -167,7 +168,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una volta ottenuto l'ID di un lavoro di importazione, è possibile verificare l'avanzamento dell'importazione come segue:</p>
+    </button></h2><p>Una volta ottenuto l'ID di un lavoro di importazione, è possibile controllare l'avanzamento dell'importazione come segue:</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
@@ -223,6 +224,7 @@ resp = get_import_progress(
 
 curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&quot; \
 --header &quot;Content-Type: application/json&quot; \
+--header &quot;Request-Timeout: 10&quot; \
 --data-raw &#x27;{
     &quot;jobId&quot;: &quot;449839014328146739&quot;
 }&#x27;
@@ -307,6 +309,7 @@ resp = list_import_jobs(
 
 curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot; \
 --header &quot;Content-Type: application/json&quot; \
+--header &quot;Request-Timeout: 10&quot; \
 --data-raw &#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;
 }&#x27;

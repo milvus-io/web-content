@@ -47,7 +47,7 @@ beta: Milvus 2.5.11+
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Cette fonctionnalité ne fonctionne qu'avec la recherche de texte basée sur BM25 et les vecteurs épars. Pour plus d'informations, voir <a href="/docs/fr/full-text-search.md">Recherche en texte intégral</a>.</p></li>
+<li><p>Cette fonctionnalité ne fonctionne qu'avec la recherche de texte basée sur BM25 et les vecteurs épars. Pour plus d'informations, voir <a href="/docs/fr/v2.6.x/full-text-search.md">Recherche en texte intégral</a>.</p></li>
 <li><p>Chaque document d'une même collection ne peut utiliser qu'un seul analyseur, déterminé par la valeur de son champ d'identification de la langue.</p></li>
 <li><p>Les performances peuvent varier en fonction de la complexité de vos analyseurs et de la taille de vos données textuelles.</p></li>
 </ul>
@@ -74,7 +74,7 @@ beta: Milvus 2.5.11+
 <ol>
 <li><p><strong>Configurer les analyseurs multilingues</strong>:</p>
 <ul>
-<li><p>Configurez plusieurs analyseurs spécifiques à une langue en utilisant le format : <code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_config&gt;</code>, où chaque <code translate="no">analyzer_config</code> suit la configuration standard de <code translate="no">analyzer_params</code> décrite dans la section <a href="/docs/fr/analyzer-overview.md#Analyzer-types">Vue d'ensemble des analyseurs</a>.</p></li>
+<li><p>Configurez plusieurs analyseurs spécifiques à une langue en utilisant le format : <code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_config&gt;</code>, où chaque <code translate="no">analyzer_config</code> suit la configuration standard de <code translate="no">analyzer_params</code> décrite dans la section <a href="/docs/fr/v2.6.x/analyzer-overview.md#Analyzer-types">Vue d'ensemble des analyseurs</a>.</p></li>
 <li><p>Définissez un champ d'identification spécial qui déterminera la sélection de l'analyseur pour chaque document.</p></li>
 <li><p>Configurez un analyseur <code translate="no">default</code> pour traiter les langues inconnues.</p></li>
 </ul></li>
@@ -212,7 +212,7 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
      <td><p>Oui</p></td>
      <td><p>Liste tous les analyseurs spécifiques à une langue que Milvus peut utiliser pour traiter le texte. Chaque analyseur dans <code translate="no">analyzers</code> suit le format suivant : <code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_params&gt;</code>.</p></td>
      <td><ul>
-<li>Définir chaque analyseur avec la syntaxe standard de <code translate="no">analyzer_params</code> (voir <a href="/docs/fr/analyzer-overview.md#Analyzer-types">Vue d'ensemble des analyseurs</a>).</li>
+<li>Définir chaque analyseur avec la syntaxe standard de <code translate="no">analyzer_params</code> (voir <a href="/docs/fr/v2.6.x/analyzer-overview.md#Analyzer-types">Vue d'ensemble des analyseurs</a>).</li>
 <li>Ajouter une entrée dont la clé est <code translate="no">default</code>; Milvus se rabat sur cet analyseur chaque fois que la valeur stockée dans <code translate="no">by_field</code> ne correspond à aucun autre nom d'analyseur.</li>
 </ul></td>
    </tr>
@@ -249,7 +249,22 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
         ></path>
       </svg>
     </button></h2><p>La création d'une collection prenant en charge plusieurs langues nécessite la configuration de champs et d'index spécifiques :</p>
-<h3 id="Add-fields" class="common-anchor-header">Ajouter des champs</h3><p>Dans cette étape, définissez le schéma de la collection avec quatre champs essentiels :</p>
+<h3 id="Add-fields" class="common-anchor-header">Ajouter des champs<button data-href="#Add-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Dans cette étape, définissez le schéma de la collection avec quatre champs essentiels :</p>
 <ul>
 <li><p><strong>Champ de clé primaire</strong> (<code translate="no">id</code>) : Un identifiant unique pour chaque entité de la collection. La définition de <code translate="no">auto_id=True</code> permet à Milvus de générer automatiquement ces identifiants.</p></li>
 <li><p><strong>Champ d'indicateur de langue</strong> (<code translate="no">language</code>) : Ce champ VARCHAR correspond au champ <code translate="no">by_field</code> spécifié dans votre <code translate="no">multi_analyzer_params</code>. Il stocke l'identifiant de langue pour chaque entité, ce qui indique à Milvus l'analyseur à utiliser.</p></li>
@@ -457,7 +472,22 @@ schema.WithField(entity.NewField().
   &quot;dataType&quot;: &quot;SparseFloatVector&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-BM25-function" class="common-anchor-header">Définir une fonction BM25</h3><p>Définir une fonction BM25 pour générer des représentations vectorielles éparses à partir de vos données textuelles brutes :</p>
+<h3 id="Define-BM25-function" class="common-anchor-header">Définir une fonction BM25<button data-href="#Define-BM25-function" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Définir une fonction BM25 pour générer des représentations vectorielles éparses à partir de vos données textuelles brutes :</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create the BM25 function</span>
@@ -517,8 +547,23 @@ schema.WithFunction(function.WithName(<span class="hljs-string">&quot;text_to_ve
   ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Cette fonction applique automatiquement l'analyseur approprié à chaque entrée de texte en fonction de son identifiant de langue. Pour plus d'informations sur la recherche de texte basée sur le BM25, reportez-vous à la section <a href="/docs/fr/full-text-search.md">Recherche de texte intégral</a>.</p>
-<h3 id="Configure-index-params" class="common-anchor-header">Configurer les paramètres de l'index</h3><p>Pour permettre une recherche efficace, créez un index sur le champ de vecteurs épars :</p>
+<p>Cette fonction applique automatiquement l'analyseur approprié à chaque entrée de texte en fonction de son identifiant de langue. Pour plus d'informations sur la recherche de texte basée sur le BM25, reportez-vous à la section <a href="/docs/fr/v2.6.x/full-text-search.md">Recherche de texte intégral</a>.</p>
+<h3 id="Configure-index-params" class="common-anchor-header">Configurer les paramètres de l'index<button data-href="#Configure-index-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pour permettre une recherche efficace, créez un index sur le champ de vecteurs épars :</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Configure index parameters</span>
@@ -558,7 +603,22 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>L'index améliore les performances de recherche en organisant les vecteurs épars pour des calculs de similarité BM25 efficaces.</p>
-<h3 id="Create-the-collection" class="common-anchor-header">Créer la collection</h3><p>Cette dernière étape de création rassemble toutes les configurations précédentes :</p>
+<h3 id="Create-the-collection" class="common-anchor-header">Créer la collection<button data-href="#Create-the-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Cette dernière étape de création rassemble toutes les configurations précédentes :</p>
 <ul>
 <li><p><code translate="no">collection_name=&quot;multilang_demo&quot;</code> nomme votre collection pour référence ultérieure.</p></li>
 <li><p><code translate="no">schema=schema</code> applique la structure et la fonction des champs que vous avez définies.</p></li>
@@ -616,6 +676,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;multilingual_documents\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -759,6 +820,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;multilingual_documents&quot;,
   &quot;data&quot;: [
@@ -806,11 +868,26 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Use-English-analyzer" class="common-anchor-header">Utiliser l'analyseur anglais</h3><p>Lors d'une recherche avec des analyseurs multilingues, <code translate="no">search_params</code> contient une configuration cruciale :</p>
+    </button></h2><h3 id="Use-English-analyzer" class="common-anchor-header">Utiliser l'analyseur anglais<button data-href="#Use-English-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Lors d'une recherche avec des analyseurs multilingues, <code translate="no">search_params</code> contient une configuration cruciale :</p>
 <ul>
 <li><p><code translate="no">metric_type=&quot;BM25&quot;</code> doit correspondre à la configuration de votre index.</p></li>
 <li><p><code translate="no">analyzer_name=&quot;english&quot;</code> spécifie l'analyseur à appliquer au texte de la requête. Cette configuration est indépendante des analyseurs utilisés pour les documents stockés.</p></li>
-<li><p><code translate="no">params={&quot;drop_ratio_search&quot;: &quot;0&quot;}</code> contrôle le comportement spécifique à la BM25 ; ici, il conserve tous les termes dans la recherche. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/sparse_vector.md">Vecteur épars</a>.</p></li>
+<li><p><code translate="no">params={&quot;drop_ratio_search&quot;: &quot;0&quot;}</code> contrôle le comportement spécifique à la BM25 ; ici, il conserve tous les termes dans la recherche. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/v2.6.x/sparse_vector.md">Vecteur épars</a>.</p></li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -917,6 +994,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;multilingual_documents&quot;,
   &quot;data&quot;: [&quot;artificial intelligence&quot;],
@@ -931,7 +1009,22 @@ curl --request POST \
   &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-Chinese-analyzer" class="common-anchor-header">Utiliser l'analyseur chinois</h3><p>Cet exemple montre comment basculer vers l'analyseur chinois (en utilisant son alias <code translate="no">&quot;cn&quot;</code>) pour un texte d'interrogation différent. Tous les autres paramètres restent les mêmes, mais le texte de la requête est désormais traité à l'aide de règles de symbolisation spécifiques au chinois.</p>
+<h3 id="Use-Chinese-analyzer" class="common-anchor-header">Utiliser l'analyseur chinois<button data-href="#Use-Chinese-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Cet exemple montre comment basculer vers l'analyseur chinois (en utilisant son alias <code translate="no">&quot;cn&quot;</code>) pour un texte d'interrogation différent. Tous les autres paramètres restent les mêmes, mais le texte de la requête est désormais traité à l'aide de règles de symbolisation spécifiques au chinois.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params[<span class="hljs-string">&quot;analyzer_name&quot;</span>] = <span class="hljs-string">&quot;cn&quot;</span>
@@ -1027,6 +1120,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;multilingual_documents&quot;,
   &quot;data&quot;: [&quot;人工智能&quot;],

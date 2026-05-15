@@ -5,8 +5,8 @@ summary: >-
   La función BM25 permite la búsqueda de texto completo transformando el texto
   bruto en vectores dispersos y puntuando los documentos en función de su
   relevancia léxica. Aplica la concordancia basada en términos y la ponderación
-  basada en frecuencias para permitir una recuperación eficaz de los documentos
-  de texto que más se aproximan a los términos de la consulta.
+  basada en frecuencias para facilitar la recuperación de documentos de texto
+  que coincidan con los términos de la consulta.
 ---
 <h1 id="BM25-Function" class="common-anchor-header">Función BM25<button data-href="#BM25-Function" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -23,7 +23,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>La <strong>función BM</strong> 25 permite la <a href="/docs/es/full-text-search.md">búsqueda de texto completo</a> transformando el texto bruto en <strong>vectores dispersos</strong> y puntuando los documentos en función de su relevancia léxica. Aplica la concordancia basada en términos y la ponderación en función de la frecuencia para apoyar la recuperación eficaz de documentos de texto que coinciden estrechamente con los términos de la consulta.</p>
+    </button></h1><p>La <strong>función BM</strong> 25 permite <a href="/docs/es/full-text-search.md">realizar búsquedas de texto completo</a> transformando el texto en bruto en <strong>vectores dispersos</strong> y puntuando los documentos en función de su relevancia léxica. Aplica la concordancia basada en términos y la ponderación en función de la frecuencia para apoyar la recuperación eficaz de documentos de texto que coinciden estrechamente con los términos de la consulta.</p>
 <p>Como función de texto local, la función BM25 se ejecuta dentro de Milvus y no requiere la inferencia de modelos ni integraciones externas. Proporciona un mecanismo de recuperación determinista y transparente para escenarios de búsqueda basados en texto.</p>
 <h2 id="How-BM25-works" class="common-anchor-header">Funcionamiento de BM25<button data-href="#How-BM25-works" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -40,7 +40,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>El algoritmo <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> es un algoritmo de puntuación de relevancia basado en términos ampliamente utilizado en la recuperación de texto completo. En Milvus, BM25 se implementa como una cadena de recuperación dispersa que convierte el texto en representaciones de términos ponderados y recupera los <em>K</em> documentos principales utilizando índices dispersos distribuidos.</p>
+    </button></h2><p>El algoritmo <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> es un algoritmo de puntuación de relevancia basado en términos ampliamente utilizado en la recuperación de texto completo. En Milvus, BM25 se implementa como una cadena de recuperación dispersa que convierte el texto en representaciones de términos ponderados y recupera los <em>K</em> documentos más importantes utilizando índices dispersos distribuidos.</p>
 <p>El flujo de trabajo global consta de dos rutas simétricas: la <strong>ingesta de documentos</strong> y <strong>el procesamiento del texto de consulta</strong>, que comparten la misma lógica de análisis de texto.</p>
 <h3 id="Document-ingestion-From-text-to-sparse-representation" class="common-anchor-header">Ingesta de documentos: Del texto a la representación dispersa<button data-href="#Document-ingestion-From-text-to-sparse-representation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -57,7 +57,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Cuando se inserta un documento, su texto bruto es procesado primero por un <strong><a href="/docs/es/analyzer-overview.md">analizador</a></strong>, que lo tokeniza en términos individuales.</p>
+    </button></h3><p>Cuando se inserta un documento, su texto bruto es procesado en primer lugar por un <strong><a href="/docs/es/analyzer-overview.md">analizador</a></strong>, que lo tokeniza en términos individuales.</p>
 <p>Por ejemplo, el documento</p>
 <pre><code translate="no" class="language-plaintext">&quot;We are loving Milvus!&quot;
 <button class="copy-code-btn"></button></code></pre>
@@ -142,7 +142,7 @@ summary: >-
 <pre><code translate="no" class="language-plaintext">document_score =
   sum of term_score over all matched query terms
 <button class="copy-code-btn"></button></code></pre>
-<p>Los documentos se clasifican según su puntuación final y se obtienen los K documentos con mayor puntuación.</p>
+<p>Los documentos se clasifican según su puntuación final y se devuelven los K documentos con mayor puntuación.</p>
 <h2 id="Before-you-start" class="common-anchor-header">Antes de empezar<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -163,7 +163,7 @@ summary: >-
 <li><p><strong>Un campo de texto para el contenido bruto</strong></p>
 <p>Su colección debe incluir un campo <code translate="no">VARCHAR</code> para almacenar el texto en bruto. Este campo es la fuente del texto que se procesará para la búsqueda de texto completo.</p></li>
 <li><p><strong>Un analizador para el campo de texto</strong></p>
-<p>El campo de texto debe tener un analizador activado. El analizador define cómo se tokeniza y normaliza el texto antes de que la función BM25 calcule la relevancia léxica.</p>
+<p>El campo de texto debe tener un analizador activado. El analizador define el modo en que el texto se tokeniza y normaliza antes de que la función BM25 calcule la relevancia léxica.</p>
 <p>Por defecto, Milvus proporciona un analizador integrado que tokeniza el texto basándose en los espacios en blanco y la puntuación. Si su aplicación requiere un comportamiento personalizado de tokenización o normalización, puede definir un analizador personalizado. Para más detalles, consulte <a href="/docs/es/choose-the-right-analyzer-for-your-use-case.md">Elegir el analizador adecuado para su caso de uso</a>.</p></li>
 <li><p><strong>Un vector disperso para la salida BM25</strong></p>
 <p>Su colección debe incluir un campo <code translate="no">SPARSE_FLOAT_VECTOR</code> para almacenar las representaciones dispersas generadas por la función BM25. Este campo se utiliza para la indexación y la recuperación durante la búsqueda de texto completo.</p></li>
@@ -496,6 +496,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -556,6 +557,7 @@ client.insert(InsertReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;text&quot;: &quot;information retrieval is a field of study.&quot;},
@@ -645,6 +647,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data-raw <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

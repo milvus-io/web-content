@@ -72,7 +72,7 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">VARCHAR</code></p></td>
-     <td><p>Tipo de cadeia de comprimento variável. Utilize este tipo quando os identificadores de entidade provêm de sistemas externos (por exemplo, códigos de produto ou IDs de utilizador). Requer a propriedade <code translate="no">max_length</code> para definir o número máximo de bytes permitido por valor.</p></td>
+     <td><p>Tipo de cadeia de caracteres de comprimento variável. Utilize este tipo quando os identificadores de entidade provêm de sistemas externos (por exemplo, códigos de produto ou IDs de utilizador). Requer a propriedade <code translate="no">max_length</code> para definir o número máximo de bytes permitido por valor.</p></td>
    </tr>
 </table>
 <h2 id="Choose-between-AutoID-and-Manual-IDs" class="common-anchor-header">Escolha entre AutoID e IDs manuais<button data-href="#Choose-between-AutoID-and-Manual-IDs" class="anchor-icon" translate="no">
@@ -279,12 +279,13 @@ client.createCollection(requestCreate);
 
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/collections/create&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_autoid\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$SCHEMA</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Insert-Data" class="common-anchor-header">Etapa 2: inserir dados<button data-href="#Step-2-Insert-Data" class="anchor-icon" translate="no">
+<h3 id="Step-2-Insert-Data" class="common-anchor-header">Etapa 2: Inserir dados<button data-href="#Step-2-Insert-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -363,6 +364,7 @@ System.out.printf(<span class="hljs-string">&quot;Generated IDs: %s\n&quot;</spa
 
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/entities/insert&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_autoid\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$INSERT_DATA</span>
@@ -537,6 +539,7 @@ client.createCollection(requestCreate);
 
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/collections/create&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_manual_ids\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$SCHEMA</span>
@@ -628,6 +631,7 @@ System.out.printf(<span class="hljs-string">&quot;Generated IDs: %s\n&quot;</spa
 <span class="hljs-comment"># 插入数据</span>
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/entities/insert&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_manual_ids\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$INSERT_DATA</span>

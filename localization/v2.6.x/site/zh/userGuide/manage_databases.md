@@ -18,7 +18,7 @@ summary: Milvus 在 Collections 的上方引入了一个数据库层，为管理
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 在集合之上引入了<strong>数据库</strong>层，为管理和组织数据提供了更有效的方式，同时支持多租户。</p>
+    </button></h1><p>Milvus 在集合之上引入了一个<strong>数据库</strong>层，为管理和组织数据提供了一种更有效的方式，同时支持多租户。</p>
 <h2 id="What-is-a-database" class="common-anchor-header">什么是数据库<button data-href="#What-is-a-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -110,6 +110,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database_1&quot;
 }&#x27;</span>
@@ -151,6 +152,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database_2&quot;,
     &quot;properties&quot;: {
@@ -222,6 +224,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/describe&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;default&quot;
 }&#x27;</span>
@@ -241,7 +244,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>每个数据库都有自己的属性，您可以在<a href="/docs/zh/manage_databases.md#Create-database">创建数据库</a>时设置数据库属性（如<a href="/docs/zh/manage_databases.md#Create-database">创建数据库</a>中所述），也可以更改和删除任何现有数据库的属性。</p>
+    </button></h2><p>每个数据库都有自己的属性，您可以在<a href="/docs/zh/v2.6.x/manage_databases.md#Create-database">创建数据库</a>时设置数据库属性（如<a href="/docs/zh/v2.6.x/manage_databases.md#Create-database">创建数据库</a>中所述），也可以更改和删除任何现有数据库的属性。</p>
 <p>下表列出了可能的数据库属性。</p>
 <table>
    <tr>
@@ -282,7 +285,7 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">timezone</code></p></td>
      <td><p>字符串</p></td>
-     <td><p>指定应用于数据库内时间敏感操作的默认时区，尤其是<code translate="no">TIMESTAMPTZ</code> 字段。除非设置了集合级时区，否则集合将继承数据库时区。查询级时区参数可暂时覆盖数据库和 Collections 的默认时区。其值必须是有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 时区标识符</a>（例如，<strong>亚洲/上海</strong>、<strong>美国/芝加哥</strong>或<strong>UTC</strong>）。有关如何使用<code translate="no">TIMESTAMPTZ</code> 字段的详细信息，请参阅<a href="/docs/zh/timestamptz-field.md">TIMESTAMPTZ 字段</a>。</p></td>
+     <td><p>指定应用于数据库内时间敏感操作的默认时区，尤其是<code translate="no">TIMESTAMPTZ</code> 字段。除非设置了集合级时区，否则集合将继承数据库时区。查询级时区参数可暂时覆盖数据库和 Collections 的默认时区。该值必须是有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 时区标识符</a>（例如，<strong>亚洲/上海</strong>、<strong>美国/芝加哥</strong>或<strong>UTC</strong>）。有关如何使用<code translate="no">TIMESTAMPTZ</code> 字段的详细信息，请参阅<a href="/docs/zh/v2.6.x/timestamptz-field.md">TIMESTAMPTZ 字段</a>。</p></td>
    </tr>
 </table>
 <h3 id="Alter-database-properties" class="common-anchor-header">更改数据库属性<button data-href="#Alter-database-properties" class="anchor-icon" translate="no">
@@ -333,6 +336,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/alter&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database&quot;,
     &quot;properties&quot;: {
@@ -387,6 +391,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/alter&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database&quot;,
     &quot;propertyKeys&quot;: [
@@ -480,6 +485,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/drop&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database&quot;
 }&#x27;</span>
@@ -514,7 +520,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus 使用基于角色的访问控制（RBAC）来管理权限。您可以创建具有特定权限的角色，并将其分配给用户，从而控制他们对不同数据库的访问。有关详细信息，请参阅<a href="/docs/zh/rbac.md">RBAC 文档</a>。</p>
+    </button></h3><p>Milvus 使用基于角色的访问控制（RBAC）来管理权限。您可以创建具有特定权限的角色，并将其分配给用户，从而控制他们对不同数据库的访问。有关详细信息，请参阅<a href="/docs/zh/v2.6.x/rbac.md">RBAC 文档</a>。</p>
 <h3 id="Are-there-any-quota-limitations-for-a-database" class="common-anchor-header">数据库有配额限制吗？<button data-href="#Are-there-any-quota-limitations-for-a-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -530,4 +536,4 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>是的，Milvus 允许您为数据库设置配额限制，如收藏的最大数量。有关限制的全面列表，请参阅<a href="/docs/zh/limitations.md">Milvus 限制文档</a>。</p>
+    </button></h3><p>是的，Milvus 允许您为数据库设置配额限制，如收藏的最大数量。有关限制的全面列表，请参阅<a href="/docs/zh/v2.6.x/limitations.md">Milvus 限制文档</a>。</p>

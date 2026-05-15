@@ -23,7 +23,7 @@ summary: >-
       </svg>
     </button></h1><p>Approximate Nearest Neighbor (ANN) 搜尋是以記錄向量內嵌排序順序的索引檔案為基礎，根據接收到的搜尋請求中的查詢向量，找出向量內嵌的子集，將查詢向量與子集中的向量進行比較，並返回最相似的結果。透過 ANN 搜尋，Milvus 提供了高效率的搜尋體驗。本頁可協助您學習如何進行基本的 ANN 搜尋。</p>
 <div class="alert note">
-<p>如果您在集合建立後動態新增欄位，包含這些欄位的搜尋將回傳定義的預設值，或對於沒有明確設定值的實體回傳 NULL。如需詳細資訊，請參閱<a href="/docs/zh-hant/add-fields-to-an-existing-collection.md">新增欄位到現有的集合</a>。</p>
+<p>如果您在集合建立後動態新增欄位，包含這些欄位的搜尋將回傳定義的預設值，或對於沒有明確設定值的實體回傳 NULL。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/add-fields-to-an-existing-collection.md">新增欄位到現有的集合</a>。</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">概觀<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -46,14 +46,14 @@ summary: >-
 <p>為了降低學習曲線，Milvus 提供<strong>AUTOINDEX</strong>。有了<strong>AUTOINDEX</strong>，Milvus 可以在建立索引的同時，分析您的資料集中的資料分佈，並根據分析結果設定最優化的索引參數，在搜尋效能和正確性之間取得平衡。</p>
 <p>在本節中，您可以找到以下主題的詳細資訊：</p>
 <ul>
-<li><p><a href="/docs/zh-hant/single-vector-search.md#Single-Vector-Search">單向量搜尋</a></p></li>
-<li><p><a href="/docs/zh-hant/single-vector-search.md#Bulk-Vector-Search">大量向量搜尋</a></p></li>
-<li><p><a href="/docs/zh-hant/single-vector-search.md#ANN-Search-in-Partition">分區 ANN 搜尋</a></p></li>
-<li><p><a href="/docs/zh-hant/single-vector-search.md#Use-Output-Fields">使用輸出欄位</a></p></li>
-<li><p><a href="/docs/zh-hant/single-vector-search.md#Use-Limit-and-Offset">使用限制和偏移</a></p></li>
-<li><p><a href="/docs/zh-hant/single-vector-search.md#Use-Level">使用層級</a></p></li>
-<li><p><a href="/docs/zh-hant/single-vector-search.md#Get-Recall-Rate">取得回復率</a></p></li>
-<li><p><a href="/docs/zh-hant/single-vector-search.md#Enhancing-ANN-Search">增強 ANN 搜尋</a></p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/single-vector-search.md#Single-Vector-Search">單向量搜尋</a></p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/single-vector-search.md#Bulk-Vector-Search">大量向量搜尋</a></p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/single-vector-search.md#ANN-Search-in-Partition">分區 ANN 搜尋</a></p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/single-vector-search.md#Use-Output-Fields">使用輸出欄位</a></p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/single-vector-search.md#Use-Limit-and-Offset">使用限制和偏移</a></p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/single-vector-search.md#Use-Level">使用層級</a></p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/single-vector-search.md#Get-Recall-Rate">取得回復率</a></p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/single-vector-search.md#Enhancing-ANN-Search">增強 ANN 搜尋</a></p></li>
 </ul>
 <h2 id="Single-Vector-Search" class="common-anchor-header">單向量搜尋<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -224,6 +224,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -251,7 +252,7 @@ curl --request POST \
 <span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus 依據搜尋結果與查詢向量的相似度分數以降序排列。相似性分數也稱為與查詢向量的距離，其值範圍會因使用的度量類型而異。</p>
+<p>Milvus 依據搜尋結果與查詢向量的相似度得分，以降序排列搜尋結果。相似性分數也稱為與查詢向量的距離，其值範圍會因使用的度量類型而異。</p>
 <p>下表列出了適用的度量類型和相對應的距離範圍。</p>
 <table>
    <tr>
@@ -454,6 +455,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -662,6 +664,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -821,6 +824,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -875,7 +879,7 @@ curl --request POST \
    <tr>
      <th><p>查詢</p></th>
      <th><p>每次查詢要返回的實體</p></th>
-     <th><p>已經返回的實體總數</p></th>
+     <th><p>已返回的實體總數</p></th>
    </tr>
    <tr>
      <td><p><strong>第 1 次查詢</strong></p></td>
@@ -978,6 +982,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -1004,7 +1009,7 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>如果您的資料集中有<code translate="no">TIMESTAMPTZ</code> 欄位，您可以在搜尋呼叫中設定<code translate="no">timezone</code> 參數，以暫時覆寫資料庫或資料集中單次操作的預設時區。這可以控制<code translate="no">TIMESTAMPTZ</code> 值在操作過程中的顯示和比較方式。</p>
-<p><code translate="no">timezone</code> 的值必須是有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 時區識別碼</a>（例如，<strong>亞洲/上海</strong>、<strong>美國/芝加哥</strong>或<strong>UTC</strong>）。有關如何使用<code translate="no">TIMESTAMPTZ</code> 欄位的詳細資訊，請參閱<a href="/docs/zh-hant/timestamptz-field.md">TIMESTAMPTZ 欄位</a>。</p>
+<p><code translate="no">timezone</code> 的值必須是有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 時區識別碼</a>（例如，<strong>亞洲/上海</strong>、<strong>美國/芝加哥</strong>或<strong>UTC</strong>）。有關如何使用<code translate="no">TIMESTAMPTZ</code> 欄位的詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/timestamptz-field.md">TIMESTAMPTZ 欄位</a>。</p>
 <p>以下範例說明如何為搜尋作業暫時設定時區：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -1044,32 +1049,32 @@ curl --request POST \
 <ul>
 <li><p>過濾搜尋</p>
 <p>您可以在搜尋請求中加入過濾條件，讓 Milvus 在進行 ANN 搜尋之前先進行元資料過濾，將搜尋範圍從整個集合縮小到只有符合指定過濾條件的實體。</p>
-<p>關於元資料篩選和篩選條件的更多資訊，請參考篩選<a href="/docs/zh-hant/filtered-search.md">搜尋</a>、<a href="/docs/zh-hant/boolean.md">篩選解釋</a>和相關主題。</p></li>
+<p>更多關於元資料篩選和篩選條件，請參考篩選<a href="/docs/zh-hant/v2.6.x/filtered-search.md">搜尋</a>、<a href="/docs/zh-hant/v2.6.x/boolean.md">篩選解釋</a>和相關主題。</p></li>
 <li><p>範圍搜尋</p>
 <p>您可以在特定範圍內限制返回實體的距離或分數，以改善搜尋結果的相關性。在 Milvus 中，範圍搜尋涉及以與查詢向量最相似的向量嵌入為中心，畫出兩個同心圓。搜尋請求指定兩個圓圈的半徑，Milvus 會傳回屬於外圈但不屬於內圈的所有向量嵌入。</p>
-<p>更多關於範圍搜尋，請參考<a href="/docs/zh-hant/range-search.md">範圍搜尋</a>。</p></li>
+<p>更多關於範圍搜尋，請參考<a href="/docs/zh-hant/v2.6.x/range-search.md">範圍搜尋</a>。</p></li>
 <li><p>群組搜尋</p>
 <p>如果返回的實體在特定欄位中持有相同的值，搜尋結果可能無法代表向量空間中所有向量內嵌的分佈。若要分散搜尋結果，請考慮使用群組搜尋。</p>
-<p>關於群組搜尋的更多資訊，請參閱<a href="/docs/zh-hant/grouping-search.md">群組搜尋</a>、</p></li>
+<p>關於群組搜尋的更多資訊，請參閱<a href="/docs/zh-hant/v2.6.x/grouping-search.md">群組搜尋</a>、</p></li>
 <li><p>混合搜尋</p>
 <p>一個集合可以包含多個向量場，以儲存使用不同嵌入模型產生的向量嵌入。如此一來，您就可以使用混合搜尋來重新排序這些向量欄位的搜尋結果，從而提高召回率。</p>
-<p>有關混合搜尋的詳細資訊，請參閱<a href="/docs/zh-hant/multi-vector-search.md">混合搜尋</a>。</p></li>
+<p>有關混合搜尋的詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/multi-vector-search.md">混合搜尋</a>。</p></li>
 <li><p>搜尋迭代器</p>
 <p>單一 ANN 搜尋最多會返回 16,384 個實體。如果您需要在單一搜尋中返回更多實體，請考慮使用搜尋迭接器。</p>
-<p>有關搜尋迭接器的詳細資訊，請參閱搜尋迭<a href="/docs/zh-hant/with-iterators.md">接器</a>。</p></li>
+<p>有關搜尋迭接器的詳細資訊，請參閱搜尋迭<a href="/docs/zh-hant/v2.6.x/with-iterators.md">接器</a>。</p></li>
 <li><p>全文本搜尋</p>
 <p>全文檢索是一種在文字資料集中擷取包含特定詞彙或短語的文件，然後根據相關性排列結果的功能。此功能克服了語意搜尋可能會忽略精確詞彙的限制，確保您收到最精確且與上下文最相關的結果。此外，它還可以透過接受原始文字輸入來簡化向量搜尋，自動將您的文字資料轉換為稀疏嵌入，而不需要手動產生向量嵌入。</p>
-<p>有關全文檢索的詳細資訊，請參閱全文<a href="/docs/zh-hant/full-text-search.md">檢索</a>。</p></li>
+<p>有關全文檢索的詳細資訊，請參閱全文<a href="/docs/zh-hant/v2.6.x/full-text-search.md">檢索</a>。</p></li>
 <li><p>文字匹配</p>
 <p>Milvus 中的關鍵字匹配功能可根據特定詞彙進行精確的文件檢索。此功能主要用於滿足特定條件的篩選搜尋，並可結合標量篩選來精細查詢結果，允許在符合標量條件的向量內進行相似性搜尋。</p>
-<p>有關關鍵字匹配的詳細資訊，請參閱<a href="/docs/zh-hant/keyword-match.md">關鍵字匹配</a>。</p></li>
+<p>有關關鍵字匹配的詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/keyword-match.md">關鍵字匹配</a>。</p></li>
 <li><p>使用分割鍵</p>
 <p>在元資料篩選中涉及多個標量欄位，並使用相當複雜的篩選條件，可能會影響搜尋效率。一旦將標量欄位設定為分割區金鑰，並在搜尋要求中使用涉及分割區金鑰的篩選條件，將有助於將搜尋範圍限制在與指定分割區金鑰值對應的分割區內。</p>
-<p>有關分割區金鑰的詳細資訊，請參閱<a href="/docs/zh-hant/use-partition-key.md">使用分割區金</a>鑰。</p></li>
+<p>有關分割區金鑰的詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/use-partition-key.md">使用分割區金</a>鑰。</p></li>
 <li><p>使用 mmap</p>
-<p>有關 mmap 設定的詳細資訊，請參閱<a href="/docs/zh-hant/mmap.md">使用 mmap</a>。</p></li>
+<p>有關 mmap 設定的詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/mmap.md">使用 mmap</a>。</p></li>
 <li><p>叢集壓縮</p>
-<p>有關群集壓縮的詳細資訊，請參閱<a href="/docs/zh-hant/clustering-compaction.md">群集</a>壓縮。</p></li>
+<p>有關群集壓縮的詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/clustering-compaction.md">群集</a>壓縮。</p></li>
 <li><p>使用排名器</p>
-<p>有關使用排名器增強搜尋結果相關性的詳細資訊，請參閱<a href="/docs/zh-hant/decay-ranker-overview.md">Decay Ranker Overview</a>和<a href="/docs/zh-hant/model-ranker-overview.md">Model Ranker Overview</a>。</p></li>
+<p>有關使用排名器增強搜尋結果相關性的詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/decay-ranker-overview.md">Decay Ranker Overview</a>和<a href="/docs/zh-hant/v2.6.x/model-ranker-overview.md">Model Ranker Overview</a>。</p></li>
 </ul>

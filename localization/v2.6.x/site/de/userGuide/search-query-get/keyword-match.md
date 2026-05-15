@@ -26,7 +26,7 @@ summary: >-
       </svg>
     </button></h1><p>Der Textabgleich in Milvus ermöglicht die präzise Suche nach Dokumenten auf der Grundlage bestimmter Begriffe. Diese Funktion wird in erster Linie für eine gefilterte Suche verwendet, um bestimmte Bedingungen zu erfüllen, und kann eine skalare Filterung zur Verfeinerung der Abfrageergebnisse beinhalten, die eine Ähnlichkeitssuche innerhalb von Vektoren ermöglicht, die skalare Kriterien erfüllen.</p>
 <div class="alert note">
-<p>Der Textabgleich konzentriert sich auf die Suche nach exakten Vorkommen der Abfragebegriffe, ohne die Relevanz der übereinstimmenden Dokumente zu bewerten. Wenn Sie die relevantesten Dokumente auf der Grundlage der semantischen Bedeutung und Wichtigkeit der Abfragebegriffe abrufen möchten, empfehlen wir Ihnen die <a href="/docs/de/full-text-search.md">Volltextsuche</a>.</p>
+<p>Der Textabgleich konzentriert sich auf die Suche nach exakten Vorkommen der Abfragebegriffe, ohne die Relevanz der übereinstimmenden Dokumente zu bewerten. Wenn Sie die relevantesten Dokumente auf der Grundlage der semantischen Bedeutung und Wichtigkeit der Abfragebegriffe abrufen möchten, empfehlen wir Ihnen die <a href="/docs/de/v2.6.x/full-text-search.md">Volltextsuche</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Überblick<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,8 +45,8 @@ summary: >-
       </svg>
     </button></h2><p>Milvus integriert <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>, um den zugrunde liegenden invertierten Index und die begriffsbasierte Textsuche zu betreiben. Für jeden Texteintrag indiziert Milvus diesen nach folgendem Verfahren:</p>
 <ol>
-<li><p><a href="/docs/de/analyzer-overview.md">Analyzer</a>: Der Analyzer verarbeitet den eingegebenen Text, indem er ihn in einzelne Wörter (Token) zerlegt und dann nach Bedarf Filter anwendet. So kann Milvus einen Index auf der Grundlage dieser Token erstellen.</p></li>
-<li><p><a href="/docs/de/index-explained.md">Indizierung</a>: Nach der Textanalyse erstellt Milvus einen invertierten Index, der jedes einzelne Token den Dokumenten zuordnet, die es enthalten.</p></li>
+<li><p><a href="/docs/de/v2.6.x/analyzer-overview.md">Analyzer</a>: Der Analyzer verarbeitet den eingegebenen Text, indem er ihn in einzelne Wörter (Token) zerlegt und dann je nach Bedarf Filter anwendet. So kann Milvus einen Index auf der Grundlage dieser Token erstellen.</p></li>
+<li><p><a href="/docs/de/v2.6.x/index-explained.md">Indizierung</a>: Nach der Textanalyse erstellt Milvus einen invertierten Index, der jedes einzelne Token den Dokumenten zuordnet, die es enthalten.</p></li>
 </ol>
 <p>Wenn ein Benutzer einen Textabgleich durchführt, wird der invertierte Index verwendet, um schnell alle Dokumente aufzufinden, die die Begriffe enthalten. Dies ist wesentlich schneller als das Durchsuchen jedes einzelnen Dokuments.</p>
 <p>
@@ -68,7 +68,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Der Textabgleich arbeitet mit dem <a href="/docs/de/string.md"><code translate="no">VARCHAR</code></a> Feldtyp, der im Wesentlichen der String-Datentyp in Milvus ist. Um den Textabgleich zu aktivieren, setzen Sie sowohl <code translate="no">enable_analyzer</code> als auch <code translate="no">enable_match</code> auf <code translate="no">True</code> und konfigurieren dann optional einen <a href="/docs/de/analyzer-overview.md">Analyzer</a> für die Textanalyse, wenn Sie Ihr Sammelschema definieren.</p>
+    </button></h2><p>Der Textabgleich arbeitet mit dem <a href="/docs/de/v2.6.x/string.md"><code translate="no">VARCHAR</code></a> Feldtyp, der im Wesentlichen der String-Datentyp in Milvus ist. Um den Textabgleich zu aktivieren, setzen Sie sowohl <code translate="no">enable_analyzer</code> als auch <code translate="no">enable_match</code> auf <code translate="no">True</code> und konfigurieren dann optional einen <a href="/docs/de/v2.6.x/analyzer-overview.md">Analyzer</a> für die Textanalyse, wenn Sie Ihr Sammelschema definieren.</p>
 <h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">Setzen Sie <code translate="no">enable_analyzer</code> und <code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -219,7 +219,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h3><p>Die Leistung und Genauigkeit des Schlüsselwortabgleichs hängt vom gewählten Analysator ab. Verschiedene Analysatoren sind auf verschiedene Sprachen und Textstrukturen zugeschnitten, so dass die Wahl des richtigen Analysators die Suchergebnisse für Ihren speziellen Anwendungsfall erheblich beeinflussen kann.</p>
-<p>Standardmäßig verwendet Milvus den Analysator <code translate="no">standard</code>, der Text auf der Grundlage von Leerzeichen und Interpunktion in Token umwandelt, Token entfernt, die länger als 40 Zeichen sind, und Text in Kleinbuchstaben umwandelt. Zur Anwendung dieser Standardeinstellung sind keine zusätzlichen Parameter erforderlich. Weitere Informationen finden Sie unter <a href="/docs/de/standard-analyzer.md">Standard</a>.</p>
+<p>Standardmäßig verwendet Milvus den Analysator <code translate="no">standard</code>, der Text auf der Grundlage von Leerzeichen und Interpunktion in Token umwandelt, Token entfernt, die länger als 40 Zeichen sind, und Text in Kleinbuchstaben umwandelt. Zur Anwendung dieser Standardeinstellung sind keine zusätzlichen Parameter erforderlich. Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/standard-analyzer.md">Standard</a>.</p>
 <p>In Fällen, in denen ein anderer Analyzer erforderlich ist, können Sie diesen mit dem Parameter <code translate="no">analyzer_params</code> konfigurieren. Zum Beispiel, um den <code translate="no">english</code> Analyzer für die Verarbeitung von englischem Text anzuwenden:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -306,7 +306,7 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus bietet auch verschiedene andere Analyzer, die für unterschiedliche Sprachen und Szenarien geeignet sind. Weitere Einzelheiten finden Sie unter <a href="/docs/de/analyzer-overview.md">Analyzer-Übersicht</a>.</p>
+<p>Milvus bietet auch verschiedene andere Analyzer, die für unterschiedliche Sprachen und Szenarien geeignet sind. Weitere Einzelheiten finden Sie unter <a href="/docs/de/v2.6.x/analyzer-overview.md">Analyzer-Übersicht</a>.</p>
 <h2 id="Use-text-match" class="common-anchor-header">Textabgleich verwenden<button data-href="#Use-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -405,7 +405,7 @@ schema.WithField(entity.NewField().
     </button></h3><p>Textabgleich kann in Kombination mit der Vektorähnlichkeitssuche verwendet werden, um den Suchbereich einzugrenzen und die Suchleistung zu verbessern. Durch das Filtern der Sammlung mit Textabgleich vor der Vektorähnlichkeitssuche können Sie die Anzahl der zu durchsuchenden Dokumente reduzieren, was zu schnelleren Abfragezeiten führt.</p>
 <p>In diesem Beispiel filtert der Ausdruck <code translate="no">filter</code> die Suchergebnisse so, dass nur Dokumente enthalten sind, die mit dem angegebenen Begriff <code translate="no">keyword1</code> oder <code translate="no">keyword2</code> übereinstimmen. Die Vektorähnlichkeitssuche wird dann auf dieser gefilterten Teilmenge von Dokumenten durchgeführt.</p>
 <div class="alert note">
-<p>Sie können die übereinstimmenden Begriffe in den Suchergebnissen hervorheben, indem Sie einen Text-Highlighter konfigurieren. Siehe <a href="/docs/de/text-highlighter.md">Text-Highlighter</a> für Details.</p>
+<p>Sie können die übereinstimmenden Begriffe in den Suchergebnissen hervorheben, indem Sie einen Text-Highlighter konfigurieren. Siehe <a href="/docs/de/v2.6.x/text-highlighter.md">Text-Highlighter</a> für Details.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -471,6 +471,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;annsField&quot;: &quot;embeddings&quot;,
@@ -550,6 +551,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$filter</span>&quot;</span><span class="hljs-string">&#x27;,

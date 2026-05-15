@@ -53,14 +53,14 @@ title: 밀버스 운영자로 밀버스 클러스터 설치하기
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="/docs/ko/prerequisite-helm.md#How-can-I-start-a-K8s-cluster-locally-for-test-purposes">K8s 클러스터를 생성합니다</a>.</p></li>
+<li><p><a href="/docs/ko/v2.6.x/prerequisite-helm.md#How-can-I-start-a-K8s-cluster-locally-for-test-purposes">K8s 클러스터를 생성합니다</a>.</p></li>
 <li><p><a href="https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/">StorageClass를</a> 설치합니다. 설치된 StorageClass는 아래와 같이 확인할 수 있습니다.</p>
 <pre><code translate="no" class="language-bash">$ kubectl get sc
 
 NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>설치 전 <a href="/docs/ko/prerequisite-helm.md">하드웨어 및 소프트웨어 요구 사항을</a> 확인합니다.</p></li>
+<li><p>설치 전 <a href="/docs/ko/v2.6.x/prerequisite-helm.md">하드웨어 및 소프트웨어 요구 사항을</a> 확인합니다.</p></li>
 <li><p>Milvus를 설치하기 전에 <a href="https://milvus.io/tools/sizing">Milvus 사이징 툴을</a> 사용하여 데이터 크기에 따라 하드웨어 요구 사항을 추정하는 것이 좋습니다. 이렇게 하면 Milvus 설치를 위한 최적의 성능과 리소스 할당을 보장하는 데 도움이 됩니다.</p></li>
 </ul>
 <div class="alert note">
@@ -91,7 +91,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
   --<span class="hljs-built_in">wait</span> --wait-for-jobs \
   https://github.com/zilliztech/milvus-operator/releases/download/v1.3.0/milvus-operator-1.3.0.tgz</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>설치 프로세스가 끝나면 다음과 유사한 출력이 표시됩니다.</p>
+<p>설치 프로세스가 끝나면 다음과 유사한 출력을 확인할 수 있습니다.</p>
 <pre><code translate="no" class="language-shell">NAME: milvus-operator
 LAST DEPLOYED: Thu Jul  7 13:18:40 2022
 NAMESPACE: milvus-operator
@@ -173,10 +173,10 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Milvus Operator 파드가 실행 중이면 다음과 같이 Milvus 클러스터를 배포할 수 있습니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>위의 명령은 메시지 큐로 <strong>Woodpecker</strong> (v2.6.15에 권장)와 스트리밍 노드를 포함한 모든 새로운 아키텍처 구성 요소를 사용하여 Milvus 클러스터를 배포합니다.</p>
+<p>위의 명령은 메시지 큐로 <strong>Woodpecker</strong> (v2.6.16에 권장)와 스트리밍 노드를 포함한 모든 새로운 아키텍처 구성 요소를 사용하여 Milvus 클러스터를 배포합니다.</p>
 <p><strong>이 배포의 아키텍처 주요 내용은 다음과 같습니다:</strong></p>
 <ul>
-<li><strong>메시지 큐</strong>: <a href="/docs/ko/use-woodpecker.md">Woodpecker 사용</a> (인프라 유지 관리 감소)</li>
+<li><strong>메시지 큐</strong>: <a href="/docs/ko/v2.6.x/use-woodpecker.md">Woodpecker 사용</a> (인프라 유지 관리 감소)</li>
 <li><strong>스트리밍 노드</strong>: 향상된 데이터 처리를 위해 사용 가능</li>
 <li><strong>믹스 코디네이터</strong>: 코디네이터 구성 요소를 통합하여 효율성 향상</li>
 </ul>
@@ -202,7 +202,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>다음 명령어를 실행하여 Milvus 클러스터 상태를 확인합니다.</p>
+    </button></h3><p>다음 명령을 실행하여 Milvus 클러스터 상태를 확인합니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get milvus my-release -o yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus 클러스터가 준비되면 위 명령의 출력은 다음과 비슷해야 합니다. <code translate="no">status.status</code> 필드가 <code translate="no">Unhealthy</code> 으로 유지되면 Milvus 클러스터가 아직 생성 중입니다.</p>
@@ -309,7 +309,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span> \
   --dry-run=client -o yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>해당 구성 항목은 <a href="/docs/ko/system_configuration.md">시스템 구성을</a> 참조하세요.</p></li>
+<p>해당 구성 항목은 <a href="/docs/ko/v2.6.x/system_configuration.md">시스템 구성을</a> 참조하세요.</p></li>
 <li><p>구성을 업데이트합니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl patch milvus my-release --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;merge&#x27;</span>\
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span></span> 
@@ -330,7 +330,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus는 브라우저를 통해 액세스할 수 있는 Milvus WebUI라는 기본 제공 GUI 도구와 함께 제공됩니다. Milvus Web UI는 간단하고 직관적인 인터페이스로 시스템 관찰성을 향상시킵니다. Milvus Web UI를 사용하여 Milvus의 구성 요소 및 종속성에 대한 통계 및 메트릭을 관찰하고, 데이터베이스 및 수집 세부 정보를 확인하고, 자세한 Milvus 구성을 나열할 수 있습니다. 밀버스 웹 UI에 대한 자세한 내용은 밀버스 <a href="/docs/ko/milvus-webui.md">웹 UI를</a> 참조하세요.</p>
+    </button></h2><p>Milvus는 브라우저를 통해 액세스할 수 있는 Milvus WebUI라는 기본 제공 GUI 도구와 함께 제공됩니다. Milvus Web UI는 간단하고 직관적인 인터페이스로 시스템 관찰성을 향상시킵니다. Milvus Web UI를 사용하여 Milvus의 구성 요소 및 종속성에 대한 통계 및 메트릭을 관찰하고, 데이터베이스 및 수집 세부 정보를 확인하고, 자세한 Milvus 구성을 나열할 수 있습니다. 밀버스 웹 UI에 대한 자세한 내용은 밀버스 <a href="/docs/ko/v2.6.x/milvus-webui.md">웹 UI를</a> 참조하세요.</p>
 <p>Milvus 웹 UI에 액세스할 수 있도록 하려면 프록시 포드를 로컬 포트로 포트 포워딩해야 합니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
@@ -401,27 +401,27 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>도커에 밀버스를 설치했다면, 이제 할 수 있다:</p>
 <ul>
-<li><p><a href="/docs/ko/quickstart.md">Hello Milvus를</a> 확인하여 Milvus가 무엇을 할 수 있는지 확인합니다.</p></li>
+<li><p><a href="/docs/ko/v2.6.x/quickstart.md">Hello Milvus를</a> 확인하여 Milvus가 무엇을 할 수 있는지 확인합니다.</p></li>
 <li><p>Milvus의 기본 작동에 대해 알아보세요:</p>
 <ul>
-<li><a href="/docs/ko/manage_databases.md">데이터베이스 관리</a></li>
-<li><a href="/docs/ko/manage-collections.md">컬렉션 관리</a></li>
-<li><a href="/docs/ko/manage-partitions.md">파티션 관리</a></li>
-<li><a href="/docs/ko/insert-update-delete.md">삽입, 위로 올리기 및 삭제</a></li>
-<li><a href="/docs/ko/single-vector-search.md">단일 벡터 검색</a></li>
-<li><a href="/docs/ko/multi-vector-search.md">하이브리드 검색</a></li>
+<li><a href="/docs/ko/v2.6.x/manage_databases.md">데이터베이스 관리</a></li>
+<li><a href="/docs/ko/v2.6.x/manage-collections.md">컬렉션 관리</a></li>
+<li><a href="/docs/ko/v2.6.x/manage-partitions.md">파티션 관리</a></li>
+<li><a href="/docs/ko/v2.6.x/insert-update-delete.md">삽입, 위로 올리기 및 삭제</a></li>
+<li><a href="/docs/ko/v2.6.x/single-vector-search.md">단일 벡터 검색</a></li>
+<li><a href="/docs/ko/v2.6.x/multi-vector-search.md">하이브리드 검색</a></li>
 </ul></li>
-<li><p><a href="/docs/ko/upgrade_milvus_cluster-helm.md">헬름 차트를 사용하여 Milvus 업그레이드</a>.</p></li>
-<li><p><a href="/docs/ko/scaleout.md">Milvus 클러스터 확장하기</a>.</p></li>
+<li><p><a href="/docs/ko/v2.6.x/upgrade_milvus_cluster-helm.md">헬름 차트를 사용하여 Milvus 업그레이드</a>.</p></li>
+<li><p><a href="/docs/ko/v2.6.x/scaleout.md">Milvus 클러스터 확장하기</a>.</p></li>
 <li><p>Milvu 클러스터를 클라우드에 배포하세요:</p>
 <ul>
-<li><a href="/docs/ko/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/ko/gcp.md">구글 클라우드</a></li>
-<li><a href="/docs/ko/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/ko/v2.6.x/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/ko/v2.6.x/gcp.md">구글 클라우드</a></li>
+<li><a href="/docs/ko/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Milvus 통합 가시성 및 관리를 위한 직관적인 웹 인터페이스인 Milvus <a href="/docs/ko/milvus-webui.md">WebUI를</a> 살펴보세요.</p></li>
-<li><p>Milvus 데이터 백업을 위한 오픈 소스 도구인 Milvus <a href="/docs/ko/milvus_backup_overview.md">Backup을</a> 살펴보세요.</p></li>
-<li><p>Milvus 디버깅 및 동적 구성 업데이트를 위한 오픈 소스 도구인 <a href="/docs/ko/birdwatcher_overview.md">Birdwatcher에</a> 대해 알아보세요.</p></li>
+<li><p>Milvus 통합 가시성 및 관리를 위한 직관적인 웹 인터페이스인 Milvus <a href="/docs/ko/v2.6.x/milvus-webui.md">WebUI를</a> 살펴보세요.</p></li>
+<li><p>Milvus 데이터 백업을 위한 오픈 소스 도구인 Milvus <a href="/docs/ko/v2.6.x/milvus_backup_overview.md">Backup을</a> 살펴보세요.</p></li>
+<li><p>Milvus 디버깅 및 동적 구성 업데이트를 위한 오픈 소스 도구인 <a href="/docs/ko/v2.6.x/birdwatcher_overview.md">Birdwatcher에</a> 대해 알아보세요.</p></li>
 <li><p>직관적인 Milvus 관리를 위한 오픈 소스 GUI 도구인 <a href="https://github.com/zilliztech/attu">Attu를</a> 살펴보세요.</p></li>
-<li><p><a href="/docs/ko/monitor.md">Prometheus로 Milvus 모니터링</a>.</p></li>
+<li><p><a href="/docs/ko/v2.6.x/monitor.md">Prometheus로 Milvus 모니터링</a>.</p></li>
 </ul>

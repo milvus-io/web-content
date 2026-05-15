@@ -39,7 +39,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A pesquisa ANN e a pesquisa k-Nearest Neighbors (kNN) são os métodos usuais em pesquisas de similaridade de vetor. Em uma pesquisa kNN, é necessário comparar todos os vetores em um espaço vetorial com o vetor de consulta carregado na solicitação de pesquisa antes de descobrir os mais semelhantes, o que consome tempo e recursos.</p>
+    </button></h2><p>A pesquisa ANN e a pesquisa k-Nearest Neighbors (kNN) são os métodos usuais em pesquisas de similaridade de vetores. Em uma pesquisa kNN, é necessário comparar todos os vetores em um espaço vetorial com o vetor de consulta carregado na solicitação de pesquisa antes de descobrir os mais semelhantes, o que consome tempo e recursos.</p>
 <p>Ao contrário das pesquisas kNN, um algoritmo de pesquisa ANN pede um ficheiro <strong>de índice</strong> que regista a ordem ordenada das incorporações vectoriais. Quando chega um pedido de pesquisa, pode utilizar o ficheiro de índice como referência para localizar rapidamente um subgrupo que provavelmente contém as incorporações vectoriais mais semelhantes ao vetor de consulta. Em seguida, pode utilizar o <strong>tipo de métrica</strong> especificado para medir a semelhança entre o vetor de consulta e os do subgrupo, ordenar os membros do grupo com base na semelhança com o vetor de consulta e descobrir os membros do grupo <strong>K de topo</strong>.</p>
 <p>As pesquisas ANN dependem de índices pré-construídos, e o rendimento da pesquisa, a utilização de memória e a correção da pesquisa podem variar com os tipos de índice escolhidos. É necessário equilibrar o desempenho e a correção da pesquisa.</p>
 <p>Para reduzir a curva de aprendizagem, Milvus fornece <strong>AUTOINDEX</strong>. Com o <strong>AUTOINDEX</strong>, o Milvus pode analisar a distribuição de dados dentro da sua coleção enquanto constrói o índice e define os parâmetros de índice mais optimizados com base na análise para atingir um equilíbrio entre o desempenho da pesquisa e a correção.</p>
@@ -223,6 +223,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -453,6 +454,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -537,6 +539,7 @@ curl --request POST \
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
@@ -673,6 +676,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -832,6 +836,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -903,7 +908,7 @@ curl --request POST \
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Você também pode classificar por vários campos escalares. Milvus aplica os campos na ordem que você especificar. No exemplo a seguir, Milvus classifica os resultados por <code translate="no">price</code> em ordem crescente. Para entidades com o mesmo <code translate="no">price</code>, Milvus ordena por <code translate="no">rating</code> em ordem decrescente.</p>
+<p>Você também pode classificar por vários campos escalares. Milvus aplica os campos na ordem que você especificar. No exemplo a seguir, Milvus classifica os resultados por <code translate="no">price</code> em ordem crescente. Para entidades com o mesmo <code translate="no">price</code>, Milvus classifica por <code translate="no">rating</code> em ordem decrescente.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
@@ -943,7 +948,7 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>Você pode notar que o parâmetro <code translate="no">limit</code> carregado nos pedidos de pesquisa determina o número de entidades a serem incluídas nos resultados da pesquisa. Este parâmetro especifica o número máximo de entidades a devolver numa única pesquisa, e é normalmente designado por <strong>top-K</strong>.</p>
-<p>Se desejar efetuar consultas paginadas, pode utilizar um ciclo para enviar vários pedidos de pesquisa, com os parâmetros <strong>Limite</strong> e <strong>Deslocamento</strong> transportados em cada pedido de consulta. Especificamente, pode definir o parâmetro <strong>Limite</strong> para o número de Entidades que pretende incluir nos resultados da consulta atual e definir o <strong>Deslocamento</strong> para o número total de Entidades que já foram devolvidas.</p>
+<p>Se pretender efetuar consultas paginadas, pode utilizar um ciclo para enviar vários pedidos de pesquisa, com os parâmetros <strong>Limite</strong> e <strong>Deslocamento</strong> transportados em cada pedido de consulta. Especificamente, pode definir o parâmetro <strong>Limite</strong> para o número de Entidades que pretende incluir nos resultados da consulta atual e definir o <strong>Deslocamento</strong> para o número total de Entidades que já foram devolvidas.</p>
 <p>A tabela abaixo descreve como definir os parâmetros <strong>Limite</strong> e <strong>Deslocamento</strong> para consultas paginadas ao retornar 100 Entidades de cada vez.</p>
 <table>
    <tr>
@@ -1052,6 +1057,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -1102,6 +1108,7 @@ curl --request POST \
 
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;quick_setup&quot;,
   &quot;annsField&quot;: &quot;vector&quot;,
@@ -1140,16 +1147,16 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <p>Se as entidades retornadas tiverem o mesmo valor em um campo específico, os resultados da pesquisa podem não representar a distribuição de todas as incorporações vetoriais no espaço vetorial. Para diversificar os resultados da pesquisa, considere o uso da pesquisa de agrupamento.</p>
 <p>Para saber mais sobre a pesquisa de agrupamento, consulte <a href="/docs/pt/grouping-search.md">Pesquisa de agrupamento</a>,</p></li>
 <li><p>Pesquisa híbrida</p>
-<p>Uma coleção pode incluir vários campos vectoriais para guardar as incorporações vectoriais geradas utilizando diferentes modelos de incorporação. Ao fazer isso, você pode usar uma pesquisa híbrida para ranquear novamente os resultados da pesquisa desses campos vetoriais, melhorando a taxa de recuperação.</p>
+<p>Uma coleção pode incluir vários campos vectoriais para guardar as incorporações vectoriais geradas utilizando diferentes modelos de incorporação. Ao fazer isso, é possível usar uma pesquisa híbrida para ranquear novamente os resultados da pesquisa desses campos vetoriais, melhorando a taxa de recuperação.</p>
 <p>Para saber mais sobre a pesquisa híbrida, consulte <a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a>.</p></li>
 <li><p>Iterador de pesquisa</p>
 <p>Uma única pesquisa ANN retorna um máximo de 16.384 entidades. Considere usar iteradores de pesquisa se precisar de mais entidades para retornar em uma única pesquisa.</p>
 <p>Para obter detalhes sobre iteradores de pesquisa, consulte <a href="/docs/pt/with-iterators.md">Iterador de pesquisa</a>.</p></li>
 <li><p>Pesquisa de texto completo</p>
 <p>A pesquisa de texto completo é um recurso que recupera documentos que contêm termos ou frases específicos em conjuntos de dados de texto e, em seguida, classifica os resultados com base na relevância. Esta funcionalidade ultrapassa as limitações da pesquisa semântica, que pode ignorar termos precisos, garantindo que recebe os resultados mais exactos e contextualmente relevantes. Além disso, simplifica as pesquisas vectoriais ao aceitar a entrada de texto em bruto, convertendo automaticamente os seus dados de texto em embeddings esparsos sem a necessidade de gerar manualmente embeddings vectoriais.</p>
-<p>Para obter detalhes sobre a pesquisa de texto integral, consulte <a href="/docs/pt/full-text-search.md">Pesquisa de texto integral</a>.</p></li>
+<p>Para obter detalhes sobre a pesquisa de texto completo, consulte <a href="/docs/pt/full-text-search.md">Pesquisa de texto completo</a>.</p></li>
 <li><p>Correspondência de texto</p>
-<p>A correspondência de palavras-chave no Milvus permite a recuperação precisa de documentos com base em termos específicos. Esta funcionalidade é utilizada principalmente para pesquisa filtrada para satisfazer condições específicas e pode incorporar filtragem escalar para refinar os resultados da consulta, permitindo pesquisas de semelhança dentro de vectores que satisfaçam critérios escalares.</p>
+<p>A correspondência de palavras-chave em Milvus permite a recuperação precisa de documentos com base em termos específicos. Esta funcionalidade é utilizada principalmente para pesquisa filtrada para satisfazer condições específicas e pode incorporar filtragem escalar para refinar os resultados da consulta, permitindo pesquisas de semelhança dentro de vectores que satisfaçam critérios escalares.</p>
 <p>Para obter detalhes sobre a correspondência de palavras-chave, consulte <a href="/docs/pt/keyword-match.md">Correspondência de palavras-chave</a>.</p></li>
 <li><p>Usar chave de partição</p>
 <p>O envolvimento de vários campos escalares na filtragem de metadados e a utilização de uma condição de filtragem bastante complicada pode afetar a eficiência da pesquisa. Depois de definir um campo escalar como chave de partição e utilizar uma condição de filtragem que envolva a chave de partição no pedido de pesquisa, pode ajudar a restringir o âmbito da pesquisa dentro das partições correspondentes aos valores de chave de partição especificados.</p>
@@ -1159,5 +1166,5 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <li><p>Compactação de clustering</p>
 <p>Para obter detalhes sobre compactações de clustering, consulte <a href="/docs/pt/clustering-compaction.md">Compactação de clustering</a>.</p></li>
 <li><p>Usar reranking</p>
-<p>Para obter detalhes sobre o uso de classificadores para aumentar a relevância dos resultados de pesquisa, consulte <a href="/docs/pt/decay-ranker-overview.md">Visão geral do classificador de decaimento</a> e <a href="/docs/pt/model-ranker-overview.md">Visão geral do classificador de modelo</a>.</p></li>
+<p>Para obter detalhes sobre o uso de classificadores para melhorar a relevância dos resultados de pesquisa, consulte <a href="/docs/pt/decay-ranker-overview.md">Visão geral do classificador de decaimento</a> e <a href="/docs/pt/model-ranker-overview.md">Visão geral do classificador de modelo</a>.</p></li>
 </ul>

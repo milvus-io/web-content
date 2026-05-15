@@ -2,7 +2,7 @@
 id: mmap.md
 title: mmapの使用
 summary: >-
-  メモリマッピング(Mmap)は、ディスク上の大容量ファイルへの直接メモリアクセスを可能にし、Milvusがインデックスとデータをメモリとハードディスクの両方に格納することを可能にします。このアプローチにより、アクセス頻度に基づいてデータ配置ポリシーを最適化し、検索性能に大きな影響を与えることなくコレクションのストレージ容量を拡張することができます。このページは、Milvusがどのようにmmapを使用し、高速で効率的なデータの保存と検索を可能にしているかを理解するのに役立ちます。
+  メモリマッピング(Mmap)は、ディスク上の大容量ファイルへの直接メモリアクセスを可能にし、Milvusがインデックスとデータをメモリとハードディスクの両方に格納することを可能にします。このアプローチにより、アクセス頻度に基づいてデータ配置ポリシーを最適化し、検索パフォーマンスに大きな影響を与えることなくコレクションのストレージ容量を拡張することができます。このページは、Milvusがどのようにmmapを使用し、高速で効率的なデータの保存と検索を可能にしているかを理解するのに役立ちます。
 ---
 <h1 id="Use-mmap" class="common-anchor-header">mmapの使用<button data-href="#Use-mmap" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,7 +19,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>メモリマッピング(Mmap)は、ディスク上の大きなファイルへの直接メモリアクセスを可能にし、Milvusがインデックスとデータをメモリとハードディスクの両方に格納することを可能にします。このアプローチにより、アクセス頻度に基づいてデータ配置ポリシーを最適化し、検索パフォーマンスに大きな影響を与えることなくコレクションのストレージ容量を拡張することができます。このページは、Milvusがどのようにmmapを使用し、高速で効率的なデータの保存と検索を可能にしているかを理解するのに役立ちます。</p>
+    </button></h1><p>メモリマッピング(Mmap)は、ディスク上の大容量ファイルへの直接メモリアクセスを可能にし、Milvusがインデックスとデータをメモリとハードディスクの両方に格納することを可能にします。このアプローチにより、アクセス頻度に基づいてデータ配置ポリシーを最適化し、検索パフォーマンスに大きな影響を与えることなくコレクションのストレージ容量を拡張することができます。このページは、Milvusがどのようにmmapを使用し、高速で効率的なデータの保存と検索を可能にしているかを理解するのに役立ちます。</p>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,7 +42,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Mmap図解</span> </span></p>
 <p>Milvusはメモリ集約型のデータベースシステムであり、利用可能なメモリサイズがコレクションの容量を決定します。大量のデータを含むフィールドをメモリにロードすることは、データサイズがメモリ容量を超える場合には不可能である。</p>
 <p>このような問題を解決するために、Milvusは、コレクション内のホットデータとコールドデータのロードのバランスをとるためのmmapを導入している。上の右図に示すように、Milvusは特定のフィールドの生データを完全にメモリにロードするのではなく、メモリマップするように設定することができる。こうすることで、メモリの問題を心配することなくフィールドに直接メモリアクセスすることができ、コレクションの容量を拡張することができます。</p>
-<p>左図と右図のデータ配置手順を比較すると、左図の方が右図よりもメモリ使用量がはるかに多いことがわかる。mmapを有効にすると、本来メモリにロードされるべきデータがハードディスクにオフロードされ、オペレーティング・システムのページ・キャッシュにキャッシュされるため、メモリ・フットプリントが削減される。ただし、キャッシュ・ヒットに失敗するとパフォーマンスが低下する可能性がある。詳細については、<a href="https://en.wikipedia.org/wiki/Mmap">この記事を</a>参照してください。</p>
+<p>左図と右図のデータ配置手順を比較すると、左図の方が右図よりもメモリ使用量がはるかに多いことがわかる。mmapを有効にすると、メモリにロードされるべきデータがハードディスクにオフロードされ、オペレーティング・システムのページ・キャッシュにキャッシュされるため、メモリ・フットプリントが削減される。ただし、キャッシュ・ヒットに失敗するとパフォーマンスが低下する可能性がある。詳細については、<a href="https://en.wikipedia.org/wiki/Mmap">この記事を</a>参照してください。</p>
 <p>Milvusでmmapを設定する場合、必ず守るべき原則があります：頻繁にアクセスされるデータとインデックスは常に完全にメモリにロードしておき、残りのフィールドでmmapを使用することです。</p>
 <h2 id="Use-mmap-in-Milvus" class="common-anchor-header">Milvusでmmapを使用する<button data-href="#Use-mmap-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -304,6 +304,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -313,6 +314,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/fields/alter_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;fieldName&quot;: &quot;doc_chunk&quot;,
@@ -325,7 +327,7 @@ curl --request POST \
 <div class="alert note">
 <p>大容量データを格納するフィールドに対してmmapを有効にすることを検討してください。スカラー・フィールドとベクトル・フィールドの両方がサポートされている。</p>
 </div>
-<p>次に、上記で作成したスキーマを使用してコレクションを作成します。Milvusはコレクションをロードするリクエストを受け取ると、<strong>doc_chunk</strong>フィールドの生データをメモリマップしてメモリに格納します。</p>
+<p>次に、上記で作成したスキーマを使用してコレクションを作成します。Milvusはコレクションのロード要求を受け取ると、<strong>doc_chunk</strong>フィールドの生データをメモリマップしてメモリに格納します。</p>
 <h3 id="Index-specific-mmap-settings" class="common-anchor-header">インデックス固有のmmap設定<button data-href="#Index-specific-mmap-settings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -342,7 +344,7 @@ curl --request POST \
         ></path>
       </svg>
     </button></h3><p>インデックス固有のmmapを設定するには、インデックスを追加する際にインデックスパラメータに<code translate="no">mmap.enable</code> プロパティを含める必要があります。このプロパティを<code translate="no">true</code> に設定することで、この特定のインデックスで mmap を有効にすることができます。</p>
-<p>次の例は、インデックスを追加するときにインデックス固有の mmap を設定する方法を示しています。</p>
+<p>以下の例は、インデックスを追加するときにインデックス固有の mmap を設定する方法を示しています。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add a varchar field</span>
@@ -415,6 +417,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;indexParams&quot;: [
@@ -432,6 +435,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/alter_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;indexName&quot;: &quot;doc_chunk&quot;,
@@ -460,7 +464,7 @@ curl --request POST \
         ></path>
       </svg>
     </button></h3><p>コレクション全体のmmap戦略を設定するには、コレクションを作成するリクエストに<code translate="no">mmap.enabled</code> プロパティを含める必要があります。このプロパティを<code translate="no">true</code> に設定すると、コレクションの mmap を有効にできます。</p>
-<p>以下の例では、<strong>my_collectionという</strong>名前のコレクションを作成するときにmmapを有効にする方法を示します。コレクションをロードするリクエストを受け取ると、milvusはすべてのフィールドの生データをメモリにメモリマップします。</p>
+<p>以下の例では、<strong>my_collection</strong>という名前のコレクションを作成するときに mmap を有効にする方法を示します。コレクションをロードするリクエストを受け取ると、milvusはすべてのフィールドの生データをメモリにメモリマップします。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Enable mmap when creating a collection</span>
@@ -489,6 +493,7 @@ client.createCollection(req);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -558,6 +563,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/release&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
@@ -566,6 +572,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;properties&quot;: {
@@ -577,6 +584,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/load&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>

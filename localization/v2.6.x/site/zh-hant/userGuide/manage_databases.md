@@ -110,6 +110,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database_1&quot;
 }&#x27;</span>
@@ -151,6 +152,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database_2&quot;,
     &quot;properties&quot;: {
@@ -222,6 +224,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/describe&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;default&quot;
 }&#x27;</span>
@@ -241,7 +244,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>每個資料庫都有自己的屬性，您可以在<a href="/docs/zh-hant/manage_databases.md#Create-database">建立資料</a>庫時設定資料庫的屬性，如建立資料庫所述，也可以更改和刪除任何現有資料庫的屬性。</p>
+    </button></h2><p>每個資料庫都有自己的屬性，您可以在<a href="/docs/zh-hant/v2.6.x/manage_databases.md#Create-database">建立資料</a>庫時設定資料庫的屬性，如建立資料庫所述，也可以更改和刪除任何現有資料庫的屬性。</p>
 <p>下表列出了可能的資料庫屬性。</p>
 <table>
    <tr>
@@ -282,7 +285,7 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">timezone</code></p></td>
      <td><p>字串</p></td>
-     <td><p>指定應用於資料庫內時間敏感作業的預設時區，尤其是<code translate="no">TIMESTAMPTZ</code> 欄位。除非設定了集合層級的時區，否則集合會繼承資料庫的時區。查詢層級的時區參數可以暫時覆寫資料庫和集合的預設時區。該值必須是有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 時區識別碼</a>（例如，<strong>亞洲/上海</strong>、<strong>美國/芝加哥</strong>或<strong>UTC</strong>）。有關如何使用<code translate="no">TIMESTAMPTZ</code> 欄位的詳細資訊，請參閱<a href="/docs/zh-hant/timestamptz-field.md">TIMESTAMPTZ 欄位</a>。</p></td>
+     <td><p>指定應用於資料庫內時間敏感作業的預設時區，尤其是<code translate="no">TIMESTAMPTZ</code> 欄位。除非設定了集合層級的時區，否則集合會繼承資料庫的時區。查詢層級的時區參數可以暫時覆寫資料庫和集合的預設時區。該值必須是有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 時區識別碼</a>（例如，<strong>亞洲/上海</strong>、<strong>美國/芝加哥</strong>或<strong>UTC</strong>）。有關如何使用<code translate="no">TIMESTAMPTZ</code> 欄位的詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/timestamptz-field.md">TIMESTAMPTZ 欄位</a>。</p></td>
    </tr>
 </table>
 <h3 id="Alter-database-properties" class="common-anchor-header">變更資料庫的屬性<button data-href="#Alter-database-properties" class="anchor-icon" translate="no">
@@ -333,6 +336,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/alter&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database&quot;,
     &quot;properties&quot;: {
@@ -387,6 +391,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/alter&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database&quot;,
     &quot;propertyKeys&quot;: [
@@ -433,7 +438,7 @@ curl --request POST \
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># This operation is unsupported because RESTful does not provide a persistent connection.</span>
 <span class="hljs-comment"># As a workaround, initiate the required request again with the target database.</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Drop-database" class="common-anchor-header">丟棄資料庫<button data-href="#Drop-database" class="anchor-icon" translate="no">
+<h2 id="Drop-database" class="common-anchor-header">刪除資料庫<button data-href="#Drop-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -480,6 +485,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/drop&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database&quot;
 }&#x27;</span>
@@ -514,7 +520,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus 使用基於角色的存取控制 (RBAC) 來管理權限。您可以創建具有特定權限的角色，並將其分配給用戶，從而控制他們對不同資料庫的訪問。如需詳細資訊，請參閱<a href="/docs/zh-hant/rbac.md">RBAC 文件</a>。</p>
+    </button></h3><p>Milvus 使用基於角色的存取控制 (RBAC) 來管理權限。您可以創建具有特定權限的角色，並將其分配給用戶，從而控制他們對不同資料庫的訪問。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/rbac.md">RBAC 文件</a>。</p>
 <h3 id="Are-there-any-quota-limitations-for-a-database" class="common-anchor-header">資料庫有配額限制嗎？<button data-href="#Are-there-any-quota-limitations-for-a-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -530,4 +536,4 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>是的，Milvus允許您為數據庫設置配額限制，例如最大收藏集數量。有關限制的全面列表，請參閱<a href="/docs/zh-hant/limitations.md">Milvus Limits 文檔</a>。</p>
+    </button></h3><p>是的，Milvus允許您為數據庫設置配額限制，例如最大收藏集數量。有關限制的全面列表，請參閱<a href="/docs/zh-hant/v2.6.x/limitations.md">Milvus Limits 文檔</a>。</p>

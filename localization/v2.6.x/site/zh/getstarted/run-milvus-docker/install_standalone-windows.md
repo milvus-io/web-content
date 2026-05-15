@@ -189,7 +189,7 @@ Delete successfully.​
 <li><p>在管理员模式下右击并选择<strong>以管理员身份运行</strong>，打开 Docker Desktop。</p></li>
 <li><p>在 PowerShell 或 Windows 命令提示符中运行以下命令，为 Milvus Standalone 下载 Docker Compose 配置文件并启动 Milvus。</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.15/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.16/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -200,7 +200,7 @@ Creating milvus-standalone ... done​
 </code></pre>
 <p>根据网络连接情况，下载用于安装 Milvus 的映像可能需要一段时间。名为<strong>milvus-</strong> <strong>standalone</strong>、<strong>milvus-minio</strong> 和<strong>milvus-etcd</strong>的容器启动后，你可以看到</p>
 <ul>
-<li><p><strong>milvus-etcd</strong>容器不会向主机暴露任何端口，并将其数据映射到当前文件夹中的<strong>volumes/etcd</strong>。</p></li>
+<li><p><strong>milvus-etcd</strong>容器不向主机暴露任何端口，并将其数据映射到当前文件夹中的<strong>volumes/etcd</strong>。</p></li>
 <li><p><strong>milvus-minio</strong>容器使用默认身份验证凭据在本地为端口<strong>9090</strong>和<strong>9091</strong>提供服务，并将其数据映射到当前文件夹中的<strong>volumes/minio</strong>。</p></li>
 <li><p><strong>milvus-standalone</strong>容器使用默认设置为本地<strong>19530</strong>端口提供服务，并将其数据映射到当前文件夹中的<strong>volumes/milvus</strong>。</p></li>
 </ul></li>
@@ -230,7 +230,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>下载 Milvus 配置文件。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.15/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.16/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>启动 Milvus。</p>
@@ -289,7 +289,7 @@ The Docker for Windows Service service is starting.​
 The Docker for Windows Service service was started successfully.​
 
 </code></pre></li>
-<li><p>检查 WSL 是否已正确安装。</p>
+<li><p>检查是否已正确安装 WSL。</p>
 <p>你可以运行以下命令来安装或更新 WSL 2 命令。</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --update​
 Checking for updates.​
@@ -380,27 +380,27 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
       </svg>
     </button></h2><p>在 Docker 中安装 Milvus 后，你可以</p>
 <ul>
-<li><p>查看<a href="/docs/zh/quickstart.md">Quickstart</a>，了解 Milvus 的功能。</p></li>
+<li><p>查看<a href="/docs/zh/v2.6.x/quickstart.md">Quickstart</a>，了解 Milvus 的功能。</p></li>
 <li><p>学习 Milvus 的基本操作：</p>
 <ul>
-<li><a href="/docs/zh/manage_databases.md">管理数据库</a></li>
-<li><a href="/docs/zh/manage-collections.md">管理 Collections</a></li>
-<li><a href="/docs/zh/manage-partitions.md">管理分区</a></li>
-<li><a href="/docs/zh/insert-update-delete.md">插入、倒置和删除</a></li>
-<li><a href="/docs/zh/single-vector-search.md">单向量搜索</a></li>
-<li><a href="/docs/zh/multi-vector-search.md">混合搜索</a></li>
+<li><a href="/docs/zh/v2.6.x/manage_databases.md">管理数据库</a></li>
+<li><a href="/docs/zh/v2.6.x/manage-collections.md">管理 Collections</a></li>
+<li><a href="/docs/zh/v2.6.x/manage-partitions.md">管理分区</a></li>
+<li><a href="/docs/zh/v2.6.x/insert-update-delete.md">插入、倒置和删除</a></li>
+<li><a href="/docs/zh/v2.6.x/single-vector-search.md">单向量搜索</a></li>
+<li><a href="/docs/zh/v2.6.x/multi-vector-search.md">混合搜索</a></li>
 </ul></li>
-<li><p><a href="/docs/zh/upgrade_milvus_cluster-helm.md">使用 Helm 图表升级 Milvus</a>。</p></li>
-<li><p><a href="/docs/zh/scaleout.md">扩展你的 Milvus 集群</a>。</p></li>
+<li><p><a href="/docs/zh/v2.6.x/upgrade_milvus_cluster-helm.md">使用 Helm 图表升级 Milvus</a>。</p></li>
+<li><p><a href="/docs/zh/v2.6.x/scaleout.md">扩展你的 Milvus 集群</a>。</p></li>
 <li><p>在云上部署你的 Milvu 集群：</p>
 <ul>
-<li><a href="/docs/zh/eks.md">亚马逊 EKS</a></li>
-<li><a href="/docs/zh/gcp.md">谷歌云</a></li>
-<li><a href="/docs/zh/azure.md">微软 Azure</a></li>
+<li><a href="/docs/zh/v2.6.x/eks.md">亚马逊 EKS</a></li>
+<li><a href="/docs/zh/v2.6.x/gcp.md">谷歌云</a></li>
+<li><a href="/docs/zh/v2.6.x/azure.md">微软 Azure</a></li>
 </ul></li>
-<li><p>探索<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>，一个用于 Milvus 可观察性和管理的直观 Web 界面。</p></li>
-<li><p>探索<a href="/docs/zh/milvus_backup_overview.md">Milvus 备份</a>，一个用于 Milvus 数据备份的开源工具。</p></li>
-<li><p>探索<a href="/docs/zh/birdwatcher_overview.md">Birdwatcher</a>，用于调试 Milvus 和动态配置更新的开源工具。</p></li>
+<li><p>探索<a href="/docs/zh/v2.6.x/milvus-webui.md">Milvus WebUI</a>，一个用于 Milvus 可观察性和管理的直观 Web 界面。</p></li>
+<li><p>探索<a href="/docs/zh/v2.6.x/milvus_backup_overview.md">Milvus 备份</a>，一个用于 Milvus 数据备份的开源工具。</p></li>
+<li><p>探索<a href="/docs/zh/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>，用于调试 Milvus 和动态配置更新的开源工具。</p></li>
 <li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>，一个用于直观管理 Milvus 的开源图形用户界面工具。</p></li>
-<li><p><a href="/docs/zh/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
+<li><p><a href="/docs/zh/v2.6.x/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
 </ul>

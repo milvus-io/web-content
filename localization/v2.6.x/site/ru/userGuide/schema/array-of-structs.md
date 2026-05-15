@@ -92,7 +92,7 @@ beta: Milvus 2.6.4+
 <td><p><code translate="no">BOOLEAN</code></p></td>
 </tr>
 </table></p>
-<p>Следите за тем, чтобы количество векторных полей как на уровне коллекции, так и в Structs не превышало 10.</p></li>
+<p>Следите за тем, чтобы количество векторных полей как на уровне коллекций, так и на уровне структур было не больше или равно 10.</p></li>
 <li><p><strong>Нуллируемые и значения по умолчанию</strong></p>
 <p>Поле Array of Structs не является нулевым и не принимает значения по умолчанию.</p></li>
 <li><p><strong>Функция</strong></p>
@@ -120,7 +120,7 @@ beta: Milvus 2.6.4+
 </table></p>
 <p>Скалярные поля в поле Array of Structs не поддерживают индексы.</p></li>
 <li><p><strong>Данные для апсерт</strong></p>
-<p>Структуры не поддерживают апсерт в режиме слияния. Однако вы можете выполнять апсерт в режиме переопределения для обновления данных в структурах. Подробнее о различиях между апсерт в режиме слияния и в режиме переопределения см. в разделе <a href="/docs/ru/upsert-entities.md#Overview">Апсерт сущностей</a>.</p></li>
+<p>Структуры не поддерживают апсерт в режиме слияния. Однако вы можете выполнять апсерт в режиме переопределения для обновления данных в структурах. Подробнее о различиях между апсерт в режиме слияния и в режиме переопределения см. в разделе <a href="/docs/ru/v2.6.x/upsert-entities.md#Overview">Апсерт сущностей</a>.</p></li>
 <li><p><strong>Скалярная фильтрация</strong></p>
 <p>Вы не можете использовать массив структур или какие-либо поля внутри его элемента Struct в выражениях фильтрации в поиске и запросах.</p></li>
 </ul>
@@ -377,7 +377,7 @@ SCHEMA=<span class="hljs-string">&#x27;{
         ></path>
       </svg>
     </button></h2><p>Индексация обязательна для всех векторных полей, включая как векторные поля в коллекции, так и поля, определенные в элементе Struct.</p>
-<p>Применимые параметры индекса зависят от используемого типа индекса. Для получения подробной информации о применимых параметрах индекса обратитесь к разделу <a href="/docs/ru/index-explained.md">"Объяснение индекса"</a> и страницам документации, относящимся к выбранному типу индекса.</p>
+<p>Применимые параметры индекса зависят от используемого типа индекса. Для получения подробной информации о применимых параметрах индекса обратитесь к разделу <a href="/docs/ru/v2.6.x/index-explained.md">"Объяснение индекса"</a> и страницам документации, относящимся к выбранному типу индекса.</p>
 <p>Чтобы проиндексировать список вложений, необходимо установить тип индекса <code translate="no">AUTOINDEX</code> или <code translate="no">HNSW</code>, а также использовать <code translate="no">MAX_SIM_COSINE</code> в качестве метрического типа для Milvus для измерения сходства между списками вложений.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -499,6 +499,7 @@ client.createCollection(requestCreate);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/create&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;description\&quot;: \&quot;A collection for storing book information with struct array chunks\&quot;,
@@ -614,6 +615,7 @@ row.add(<span class="hljs-string">&quot;chunks&quot;</span>, structArr);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/insert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -806,6 +808,7 @@ embeddingList1=<span class="hljs-string">&#x27;[[0.2,0.9,0.4,-0.3,0.2]]&#x27;</s
 embeddingList2=<span class="hljs-string">&#x27;[[-0.2,-0.2,0.5,0.6,0.9],[-0.4,0.3,0.5,0.8,0.2]]&#x27;</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>],
@@ -910,6 +913,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>, <span class="hljs-variable">$embeddingList2</span>],
@@ -1013,4 +1017,4 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Разработка собственного типа данных Array of Structs представляет собой значительный прогресс в возможностях Milvus по работе со сложными структурами данных. Чтобы лучше понять примеры использования и максимально использовать эту новую возможность, рекомендуем вам прочитать статью <a href="/docs/ru/best-practices-for-array-of-structs.md">"Проектирование схем с использованием массива структур</a>".</p>
+    </button></h2><p>Разработка собственного типа данных Array of Structs представляет собой значительный прогресс в возможностях Milvus по работе со сложными структурами данных. Чтобы лучше понять примеры использования и максимально использовать эту новую возможность, рекомендуем вам прочитать статью <a href="/docs/ru/v2.6.x/best-practices-for-array-of-structs.md">"Проектирование схем с использованием массива структур</a>".</p>

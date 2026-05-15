@@ -120,6 +120,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/rename&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;newCollectionName&quot;: &quot;my_new_collection&quot;
@@ -170,7 +171,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">mmap.enabled</code></p></td>
-     <td><p>Le mappage de la mémoire (Mmap) permet d'accéder directement à la mémoire des fichiers volumineux sur disque, ce qui permet à Milvus de stocker des index et des données à la fois dans la mémoire et sur les disques durs. Cette approche permet d'optimiser la politique de placement des données en fonction de la fréquence d'accès, en augmentant la capacité de stockage des collections sans affecter les performances de recherche.</p><p>Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/mmap.md">Utiliser mmap.</a></p></td>
+     <td><p>Le mappage de la mémoire (Mmap) permet d'accéder directement à la mémoire des fichiers volumineux sur disque, ce qui permet à Milvus de stocker des index et des données à la fois dans la mémoire et sur les disques durs. Cette approche permet d'optimiser la politique de placement des données en fonction de la fréquence d'accès, en augmentant la capacité de stockage des collections sans affecter les performances de recherche.</p><p>Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/mmap.md">Utiliser mmap</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">partitionkey.isolation</code></p></td>
@@ -244,6 +245,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;properties&quot;: {
@@ -333,6 +335,7 @@ client.alterCollectionProperties(alterCollectionReq);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;properties&quot;: {
@@ -388,6 +391,7 @@ client.alterCollectionProperties(alterCollectionReq);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
@@ -444,6 +448,7 @@ client.alterCollectionProperties(alterCollectionReq);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
@@ -500,6 +505,7 @@ client.alterCollectionProperties(alterCollectionReq);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
@@ -551,6 +557,7 @@ client.alterCollectionProperties(alterCollectionReq);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
@@ -604,6 +611,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/drop_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;propertyKeys&quot;: [

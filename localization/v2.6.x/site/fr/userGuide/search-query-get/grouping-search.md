@@ -43,7 +43,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Lorsque des entités dans les résultats de recherche partagent la même valeur dans un champ scalaire, cela indique qu'elles sont similaires dans un attribut particulier, ce qui peut avoir un impact négatif sur les résultats de la recherche.</p>
-<p>Supposons qu'une collection stocke plusieurs documents (désignés par <strong>docId)</strong>. Pour conserver autant d'informations sémantiques que possible lors de la conversion des documents en vecteurs, chaque document est divisé en paragraphes (ou <strong>morceaux</strong>) plus petits et plus faciles à gérer, puis stocké en tant qu'entités distinctes. Même si le document est divisé en sections plus petites, les utilisateurs sont souvent intéressés par l'identification des documents les plus pertinents pour leurs besoins.</p>
+<p>Supposons qu'une collection stocke plusieurs documents (désignés par <strong>docId)</strong>. Pour conserver autant d'informations sémantiques que possible lors de la conversion des documents en vecteurs, chaque document est divisé en paragraphes (ou <strong>morceaux</strong>) plus petits et gérables, et stocké en tant qu'entités distinctes. Même si le document est divisé en sections plus petites, les utilisateurs sont souvent intéressés par l'identification des documents les plus pertinents pour leurs besoins.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ann-search.png" alt="Ann Search" class="doc-image" id="ann-search" />
@@ -219,6 +219,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -358,6 +359,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -397,5 +399,5 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <li><p><strong>Nombre de groupes</strong>: Le paramètre <code translate="no">limit</code> contrôle le nombre de groupes à partir desquels les résultats de la recherche sont renvoyés, plutôt que le nombre spécifique d'entités dans chaque groupe. La définition d'une valeur appropriée pour <code translate="no">limit</code> permet de contrôler la diversité de la recherche et les performances des requêtes. La réduction de <code translate="no">limit</code> peut réduire les coûts de calcul si les données sont densément distribuées ou si les performances sont un problème.</p></li>
 <li><p><strong>Entités par groupe</strong>: Le paramètre <code translate="no">group_size</code> contrôle le nombre d'entités renvoyées par groupe. L'ajustement de <code translate="no">group_size</code> en fonction de votre cas d'utilisation peut augmenter la richesse des résultats de la recherche. Toutefois, si les données sont réparties de manière inégale, certains groupes peuvent renvoyer moins d'entités que celles spécifiées par <code translate="no">group_size</code>, en particulier dans les scénarios où les données sont limitées.</p></li>
 <li><p><strong>Taille de groupe stricte</strong>: Avec <code translate="no">strict_group_size=True</code>, le système tentera de renvoyer le nombre d'entités spécifié (<code translate="no">group_size</code>) pour chaque groupe, à moins qu'il n'y ait pas assez de données dans ce groupe. Ce paramètre garantit un nombre cohérent d'entités par groupe, mais peut entraîner une dégradation des performances en cas de distribution inégale des données ou de ressources limitées. Si un nombre strict d'entités n'est pas nécessaire, le paramètre <code translate="no">strict_group_size=False</code> peut améliorer la vitesse des requêtes.</p></li>
-<li><p>Si les vecteurs d'interrogation existent déjà dans la collection cible, envisagez d'utiliser <code translate="no">ids</code> au lieu de les récupérer avant les recherches. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/primary-key-search.md">Recherche par clé primaire</a>.</p></li>
+<li><p>Si les vecteurs d'interrogation existent déjà dans la collection cible, envisagez d'utiliser <code translate="no">ids</code> au lieu de les récupérer avant les recherches. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/v2.6.x/primary-key-search.md">Recherche par clé primaire</a>.</p></li>
 </ul>

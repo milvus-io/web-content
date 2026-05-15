@@ -13,7 +13,6 @@ summary: >-
   нескольких десятков до нескольких сотен или даже тысяч, в зависимости от
   конкретного приложения и требований.
 ---
-
 <h1 id="Dense-Vector" class="common-anchor-header">Плотный вектор<button data-href="#Dense-Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -29,8 +28,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Плотные векторы - это числовые представления данных, широко используемые в машинном обучении и анализе данных. Они состоят из массивов вещественных чисел, в которых большинство или все элементы ненулевые. По сравнению с разреженными векторами, плотные векторы содержат больше информации на одном и том же уровне размерности, поскольку каждое измерение содержит значимые значения. Такое представление может эффективно отражать сложные закономерности и взаимосвязи, облегчая анализ и обработку данных в высокоразмерных пространствах. Плотные векторы обычно имеют фиксированное число измерений, от нескольких десятков до нескольких сотен или даже тысяч, в зависимости от конкретного применения и требований.</p>
-<p>Плотные векторы в основном используются в сценариях, требующих понимания семантики данных, таких как семантический поиск и рекомендательные системы. В семантическом поиске плотные векторы помогают уловить глубинные связи между запросами и документами, повышая релевантность результатов поиска. В рекомендательных системах они помогают выявить сходство между пользователями и предметами, предлагая более персонализированные предложения.</p>
+    </button></h1><p>Плотные векторы - это числовые представления данных, широко используемые в машинном обучении и анализе данных. Они состоят из массивов вещественных чисел, в которых большинство или все элементы ненулевые. По сравнению с разреженными векторами, плотные векторы содержат больше информации на одном и том же уровне размерности, поскольку каждое измерение содержит значимые значения. Такое представление может эффективно отражать сложные закономерности и взаимосвязи, облегчая анализ и обработку данных в высокоразмерных пространствах. Плотные векторы обычно имеют фиксированное количество измерений, от нескольких десятков до нескольких сотен или даже тысяч, в зависимости от конкретного применения и требований.</p>
+<p>Плотные векторы в основном используются в сценариях, требующих понимания семантики данных, таких как семантический поиск и рекомендательные системы. В семантическом поиске плотные векторы помогают уловить глубинные связи между запросами и документами, повышая релевантность результатов поиска. В рекомендательных системах они помогают выявлять сходство между пользователями и предметами, предлагая более персонализированные предложения.</p>
 <h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -71,7 +70,6 @@ summary: >-
 <span class="hljs-punctuation">]</span>
 
 <button class="copy-code-btn"></button></code></pre>
-
 <p>Плотные векторы могут быть сгенерированы с помощью различных моделей <a href="https://en.wikipedia.org/wiki/Embedding">встраивания</a>, таких как CNN-модели (например, <a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNet</a>, <a href="https://pytorch.org/vision/stable/models/vgg.html">VGG</a>) для изображений и языковые модели (например, <a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a>, <a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vec</a>) для текста. Эти модели преобразуют исходные данные в точки в высокоразмерном пространстве, отражая семантические особенности данных. Кроме того, Milvus предлагает удобные методы, помогающие пользователям генерировать и обрабатывать плотные векторы, как подробно описано в разделе Embeddings.</p>
 <p>После того как данные векторизованы, их можно хранить в Milvus для управления и поиска векторов. На диаграмме ниже показан основной процесс.</p>
 <p>
@@ -79,7 +77,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" />
    </span> <span class="img-wrapper"> <span>Использование плотного вектора</span> </span></p>
 <div class="alert note">
-<p>Помимо плотных векторов, Milvus также поддерживает разреженные векторы и двоичные векторы. Разреженные векторы подходят для точного поиска по определенным терминам, например, для поиска по ключевым словам и сопоставления терминов, а двоичные векторы обычно используются для эффективной работы с бинаризованными данными, например, для сопоставления шаблонов изображений и некоторых приложений хеширования. Дополнительные сведения см. в разделах <a href="/docs/ru/binary-vector.md">"Двоичный вектор"</a> и <a href="/docs/ru/sparse_vector.md">"Разреженный вектор</a>".</p>
+<p>Помимо плотных векторов, Milvus также поддерживает разреженные векторы и двоичные векторы. Разреженные векторы подходят для точного поиска по определенным терминам, например, для поиска по ключевым словам и сопоставления терминов, а двоичные векторы обычно используются для эффективной работы с бинаризованными данными, например, для сопоставления шаблонов изображений и некоторых приложений хеширования. Дополнительные сведения см. в разделах <a href="/docs/ru/v2.6.x/binary-vector.md">"Двоичный вектор"</a> и <a href="/docs/ru/v2.6.x/sparse_vector.md">"Разреженный вектор</a>".</p>
 </div>
 <h2 id="Use-dense-vectors" class="common-anchor-header">Использование плотных векторов<button data-href="#Use-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -96,12 +94,27 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">Добавьте векторное поле</h3><p>Чтобы использовать плотные векторы в Milvus, сначала определите векторное поле для хранения плотных векторов при создании коллекции. Этот процесс включает в себя:</p>
+    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">Добавьте векторное поле<button data-href="#Add-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы использовать плотные векторы в Milvus, сначала определите векторное поле для хранения плотных векторов при создании коллекции. Этот процесс включает в себя:</p>
 <ol>
 <li><p>Установка <code translate="no">datatype</code> на поддерживаемый тип данных плотного вектора. Поддерживаемые типы данных плотных векторов см. в разделе Типы данных.</p></li>
 <li><p>Указание размеров плотного вектора с помощью параметра <code translate="no">dim</code>.</p></li>
 </ol>
-<p>В примере ниже мы добавляем векторное поле с именем <code translate="no">dense_vector</code> для хранения плотных векторов. Тип данных поля - <code translate="no">FLOAT_VECTOR</code>, размерность - <code translate="no">4</code>.</p>
+<p>В приведенном ниже примере мы добавляем векторное поле с именем <code translate="no">dense_vector</code> для хранения плотных векторов. Тип данных поля - <code translate="no">FLOAT_VECTOR</code>, размерность - <code translate="no">4</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -109,14 +122,13 @@ summary: >-
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 
 schema = client.create_schema(
-auto_id=<span class="hljs-literal">True</span>,
-enable_dynamic_fields=<span class="hljs-literal">True</span>,
+    auto_id=<span class="hljs-literal">True</span>,
+    enable_dynamic_fields=<span class="hljs-literal">True</span>,
 )
 
 schema.add_field(field_name=<span class="hljs-string">&quot;pk&quot;</span>, datatype=DataType.VARCHAR, is_primary=<span class="hljs-literal">True</span>, max_length=<span class="hljs-number">100</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;dense_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">4</span>)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 
@@ -226,7 +238,7 @@ schema.WithField(entity.NewField().
    </tr>
    <tr>
      <td><p><code translate="no">FLOAT16_VECTOR</code></p></td>
-     <td><p>Хранит 16-битные числа с плавающей точкой половинной точности, используемые для глубокого обучения и вычислений на GPU. Экономит место в памяти в сценариях, где точность не так важна, например на этапе запоминания с низкой точностью в рекомендательных системах.</p></td>
+     <td><p>Хранит 16-битные числа с плавающей точкой половинной точности, используемые для глубокого обучения и вычислений на GPU. Экономит место в памяти в сценариях, где точность не так важна, например, на этапе запоминания с низкой точностью в рекомендательных системах.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">BFLOAT16_VECTOR</code></p></td>
@@ -237,19 +249,33 @@ schema.WithField(entity.NewField().
      <td><p>Хранит векторы, отдельные элементы которых в каждом измерении являются 8-битными целыми числами (int8), причем каждый элемент находится в диапазоне от -128 до 127. Разработанный для квантованных моделей глубокого обучения (например, ResNet, EfficientNet), INT8_VECTOR уменьшает размер модели и ускоряет вывод с минимальной потерей точности.<br><strong>Примечание</strong>: Этот тип вектора поддерживается только для индексов HNSW.</p></td>
    </tr>
 </table>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Установка параметров индекса для векторного поля</h3><p>Чтобы ускорить семантический поиск, необходимо создать индекс для векторного поля. Индексирование может значительно повысить эффективность поиска по крупномасштабным векторным данным.</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Установка параметров индекса для векторного поля<button data-href="#Set-index-params-for-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы ускорить семантический поиск, необходимо создать индекс для векторного поля. Индексирование может значительно повысить эффективность поиска по крупномасштабным векторным данным.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
-field_name=<span class="hljs-string">&quot;dense_vector&quot;</span>,
-index_name=<span class="hljs-string">&quot;dense_vector_index&quot;</span>,
-index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-metric_type=<span class="hljs-string">&quot;IP&quot;</span>
+    field_name=<span class="hljs-string">&quot;dense_vector&quot;</span>,
+    index_name=<span class="hljs-string">&quot;dense_vector_index&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> java.util.*;
 
@@ -284,8 +310,23 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <button class="copy-code-btn"></button></code></pre>
 <p>В приведенном выше примере для поля <code translate="no">dense_vector</code> создается индекс с именем <code translate="no">dense_vector_index</code> с использованием типа индекса <code translate="no">AUTOINDEX</code>. Значение <code translate="no">metric_type</code> установлено в <code translate="no">IP</code>, что указывает на то, что в качестве метрики расстояния будет использоваться внутреннее произведение.</p>
 <p>Milvus предоставляет различные типы индексов для более удобного векторного поиска. AUTOINDEX - это специальный тип индекса, предназначенный для сглаживания кривой обучения векторному поиску. Существует множество типов индексов, из которых вы можете выбирать. Подробнее см. в разделе xxx.</p>
-<p>Milvus поддерживает другие типы метрик. Дополнительные сведения см. в разделе <a href="/docs/ru/metric.md">Типы метрик</a>.</p>
-<h3 id="Create-collection" class="common-anchor-header">Создание коллекции</h3><p>После того как настройки плотного вектора и параметров индекса завершены, можно создать коллекцию, содержащую плотные векторы. В примере ниже используется метод <code translate="no">create_collection</code> для создания коллекции с именем <code translate="no">my_collection</code>.</p>
+<p>Milvus поддерживает другие типы метрик. Дополнительные сведения см. в разделе <a href="/docs/ru/v2.6.x/metric.md">Типы метрик</a>.</p>
+<h3 id="Create-collection" class="common-anchor-header">Создание коллекции<button data-href="#Create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>После того как настройки плотного вектора и параметров индекса завершены, можно создать коллекцию, содержащую плотные векторы. В примере ниже используется метод <code translate="no">create_collection</code> для создания коллекции с именем <code translate="no">my_collection</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -298,17 +339,16 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 
 <span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
-.uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
-.build());
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .build());
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-.collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-.collectionSchema(schema)
-.indexParams(indexes)
-.build();
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .collectionSchema(schema)
+        .indexParams(indexes)
+        .build();
 client.createCollection(requestCreate);
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
 <span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
@@ -334,13 +374,29 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">Вставка данных</h3><p>После создания коллекции используйте метод <code translate="no">insert</code> для добавления данных, содержащих плотные векторы. Убедитесь, что размерность вставляемых плотных векторов соответствует значению <code translate="no">dim</code>, определенному при добавлении поля плотных векторов.</p>
+<h3 id="Insert-data" class="common-anchor-header">Вставка данных<button data-href="#Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>После создания коллекции используйте метод <code translate="no">insert</code> для добавления данных, содержащих плотные векторы. Убедитесь, что размерность вставляемых плотных векторов соответствует значению <code translate="no">dim</code>, определенному при добавлении поля плотных векторов.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
@@ -349,11 +405,10 @@ client.createCollection(requestCreate);
 ]
 
 client.insert(
-collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-data=data
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    data=data
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
 <span class="hljs-keyword">import</span> com.google.gson.JsonObject;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
@@ -394,6 +449,7 @@ client.<span class="hljs-title function_">insert</span>({
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;dense_vector&quot;: [0.1, 0.2, 0.3, 0.4]},
@@ -404,7 +460,22 @@ client.<span class="hljs-title function_">insert</span>({
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:2,&quot;insertIds&quot;:[&quot;453577185629572531&quot;,&quot;453577185629572532&quot;]}}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search" class="common-anchor-header">Выполнение поиска по сходству</h3><p>Семантический поиск на основе плотных векторов - одна из основных функций Milvus, позволяющая быстро находить данные, наиболее похожие на вектор запроса, на основе расстояния между векторами. Чтобы выполнить поиск по сходству, подготовьте вектор запроса и параметры поиска, а затем вызовите метод <code translate="no">search</code>.</p>
+<h3 id="Perform-similarity-search" class="common-anchor-header">Выполнение поиска по сходству<button data-href="#Perform-similarity-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Семантический поиск на основе плотных векторов - одна из основных функций Milvus, позволяющая быстро находить данные, наиболее похожие на вектор запроса, на основе расстояния между векторами. Чтобы выполнить поиск по сходству, подготовьте вектор запроса и параметры поиска, а затем вызовите метод <code translate="no">search</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {
@@ -414,12 +485,12 @@ client.<span class="hljs-title function_">insert</span>({
 query_vector = [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>]
 
 res = client.search(
-collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-data=[query_vector],
-anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
-search_params=search_params,
-limit=<span class="hljs-number">5</span>,
-output_fields=[<span class="hljs-string">&quot;pk&quot;</span>]
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    data=[query_vector],
+    anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
+    search_params=search_params,
+    limit=<span class="hljs-number">5</span>,
+    output_fields=[<span class="hljs-string">&quot;pk&quot;</span>]
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -427,7 +498,6 @@ output_fields=[<span class="hljs-string">&quot;pk&quot;</span>]
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: &#x27;453718927992172271&#x27;, &#x27;distance&#x27;: 0.7599999904632568, &#x27;entity&#x27;: {&#x27;pk&#x27;: &#x27;453718927992172271&#x27;}}, {&#x27;id&#x27;: &#x27;453718927992172270&#x27;, &#x27;distance&#x27;: 0.6299999952316284, &#x27;entity&#x27;: {&#x27;pk&#x27;: &#x27;453718927992172270&#x27;}}]&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
 
 Map&lt;String,Object&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
@@ -488,6 +558,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -503,4 +574,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.55,&quot;id&quot;:&quot;453577185629572532&quot;,&quot;pk&quot;:&quot;453577185629572532&quot;},{&quot;distance&quot;:0.42,&quot;id&quot;:&quot;453577185629572531&quot;,&quot;pk&quot;:&quot;453577185629572531&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Дополнительные сведения о параметрах поиска сходства см. в разделе <a href="/docs/ru/single-vector-search.md">Базовый поиск ANN</a>.</p>
+<p>Дополнительные сведения о параметрах поиска сходства см. в разделе <a href="/docs/ru/v2.6.x/single-vector-search.md">Базовый поиск ANN</a>.</p>

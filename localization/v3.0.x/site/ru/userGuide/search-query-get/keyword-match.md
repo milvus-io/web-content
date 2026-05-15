@@ -47,7 +47,7 @@ summary: >-
 <li><p><a href="/docs/ru/analyzer-overview.md">Анализатор</a>: Анализатор обрабатывает входной текст, разбивая его на отдельные слова, или лексемы, а затем применяя фильтры по мере необходимости. Это позволяет Milvus построить индекс на основе этих лексем.</p></li>
 <li><p><a href="/docs/ru/index-explained.md">Индексирование</a>: После анализа текста Milvus создает инвертированный индекс, который сопоставляет каждую уникальную лексему с содержащими ее документами.</p></li>
 </ol>
-<p>Когда пользователь выполняет поиск по тексту, инвертированный индекс используется для быстрого извлечения всех документов, содержащих эти термины. Это гораздо быстрее, чем сканирование каждого документа по отдельности.</p>
+<p>Когда пользователь выполняет поиск по тексту, инвертированный индекс используется для быстрого извлечения всех документов, содержащих эти термины. Это намного быстрее, чем сканирование каждого документа по отдельности.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/keyword-match.png" alt="Keyword Match" class="doc-image" id="keyword-match" />
@@ -470,6 +470,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;annsField&quot;: &quot;embeddings&quot;,
@@ -549,6 +550,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$filter</span>&quot;</span><span class="hljs-string">&#x27;,

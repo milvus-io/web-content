@@ -110,6 +110,7 @@ job_id = resp.json()[<span class="hljs-string">&#x27;data&#x27;</span>][<span cl
 
 curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&quot; \
 --header &quot;Content-Type: application/json&quot; \
+--header &quot;Request-Timeout: 10&quot; \
 --data-raw &#x27;{
     &quot;files&quot;: [
         [
@@ -167,7 +168,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>獲得匯入工作 ID 後，您可以檢查匯入進度，如下所示：</p>
+    </button></h2><p>得到匯入工作 ID 後，您可以檢查匯入進度，如下所示：</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
@@ -223,6 +224,7 @@ resp = get_import_progress(
 
 curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&quot; \
 --header &quot;Content-Type: application/json&quot; \
+--header &quot;Request-Timeout: 10&quot; \
 --data-raw &#x27;{
     &quot;jobId&quot;: &quot;449839014328146739&quot;
 }&#x27;
@@ -307,6 +309,7 @@ resp = list_import_jobs(
 
 curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot; \
 --header &quot;Content-Type: application/json&quot; \
+--header &quot;Request-Timeout: 10&quot; \
 --data-raw &#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;
 }&#x27;
@@ -343,7 +346,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
       </svg>
     </button></h2><ul>
 <li><p>每個匯入檔案大小不得超過<strong>16 GB</strong>。</p></li>
-<li><p>每個匯入請求的最大檔案數量不得超過<strong>1024</strong>。每個匯入要求每個檔案最多只能有 16GB * 1024 個檔案 = 16TB 的資料。</p></li>
+<li><p>每個匯入請求的最大檔案數不能超過<strong>1024</strong>。每個匯入要求每個檔案最多只能有 16GB * 1024 個檔案 = 16TB 的資料。</p></li>
 <li><p>並發匯入要求的最大數目限制為<strong>1024</strong>。</p></li>
 </ul>
 <ul>

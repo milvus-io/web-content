@@ -288,7 +288,7 @@ openssl req -new -key client.key\
      ├── server.key
      └── ca.pem
 </span><button class="copy-code-btn"></button></code></pre>
-<h4 id="Update-Docker-Compose-configuration" class="common-anchor-header">Mise à jour de la configuration de Docker Compose</h4><p>Modifiez le fichier <code translate="no">docker-compose.yaml</code> pour mapper les chemins d'accès aux fichiers de certificats à l'intérieur du conteneur comme indiqué ci-dessous :</p>
+<h4 id="Update-Docker-Compose-configuration" class="common-anchor-header">Mise à jour de la configuration de Docker Compose</h4><p>Modifiez le fichier <code translate="no">docker-compose.yaml</code> pour mapper les chemins d'accès aux fichiers de certificats à l'intérieur du conteneur, comme indiqué ci-dessous :</p>
 <pre><code translate="no" class="language-yaml">  <span class="hljs-attr">standalone:</span>
     <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
     <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:latest</span>
@@ -593,7 +593,9 @@ client = MilvusClient(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><pre><code translate="no" class="language-bash">curl --cacert path_to/ca.pem https://localhost:8080/v2/vectordb/collections/list
+    </button></h3><pre><code translate="no" class="language-bash">curl --cacert path_to/ca.pem \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+  https://localhost:8080/v2/vectordb/collections/list
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Two-way-TLS-connection" class="common-anchor-header">Connexion TLS bidirectionnelle<button data-href="#Two-way-TLS-connection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -610,5 +612,9 @@ client = MilvusClient(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><pre><code translate="no" class="language-bash">curl --cert path_to/client.pem --key path_to/client.key --cacert path_to/ca.pem https://localhost:8080/v2/vectordb/collections/list
+    </button></h3><pre><code translate="no" class="language-bash">curl --cert path_to/client.pem \
+  --key path_to/client.key \
+  --cacert path_to/ca.pem \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+  https://localhost:8080/v2/vectordb/collections/list
 <button class="copy-code-btn"></button></code></pre>

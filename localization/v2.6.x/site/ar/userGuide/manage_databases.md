@@ -112,6 +112,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database_1&quot;
 }&#x27;</span>
@@ -153,6 +154,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database_2&quot;,
     &quot;properties&quot;: {
@@ -175,7 +177,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكنك استخدام واجهة برمجة تطبيقات Milvus RESTful API أو حزم SDK لسرد جميع قواعد البيانات الموجودة وعرض تفاصيلها.</p>
+    </button></h2><p>يمكنك استخدام واجهة برمجة تطبيقات Milvus RESTful API أو SDKs لسرد جميع قواعد البيانات الموجودة وعرض تفاصيلها.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># List all existing databases</span>
@@ -224,6 +226,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/describe&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;default&quot;
 }&#x27;</span>
@@ -243,7 +246,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>كل قاعدة بيانات لها خصائصها الخاصة، يمكنك تعيين خصائص قاعدة البيانات عند إنشاء قاعدة البيانات كما هو موضح في <a href="/docs/ar/manage_databases.md#Create-database">إنشاء قاعدة بيانات</a> أو يمكنك تغيير وإسقاط خصائص أي قاعدة بيانات موجودة.</p>
+    </button></h2><p>كل قاعدة بيانات لها خصائصها الخاصة، يمكنك تعيين خصائص قاعدة البيانات عند إنشاء قاعدة البيانات كما هو موضح في <a href="/docs/ar/v2.6.x/manage_databases.md#Create-database">إنشاء قاعدة بيانات</a> أو يمكنك تغيير وإسقاط خصائص أي قاعدة بيانات موجودة.</p>
 <p>يسرد الجدول التالي خصائص قاعدة البيانات المحتملة.</p>
 <table>
    <tr>
@@ -284,7 +287,7 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">timezone</code></p></td>
      <td><p>سلسلة</p></td>
-     <td><p>تحديد المنطقة الزمنية الافتراضية المطبقة على العمليات الحساسة للوقت داخل قاعدة البيانات، خاصةً للحقول <code translate="no">TIMESTAMPTZ</code>. ترث المجموعات المنطقة الزمنية لقاعدة البيانات ما لم يتم تعيين منطقة زمنية على مستوى المجموعة. يمكن أن تتجاوز معلمة المنطقة الزمنية على مستوى الاستعلام مؤقتًا كلاً من المنطقة الزمنية الافتراضية لقاعدة البيانات والمجموعات. يجب أن تكون القيمة <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">معرّف منطقة زمنية</a> صالحة <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">ل IANA</a> (على سبيل المثال، <strong>آسيا/شنغهاي،</strong> <strong>أمريكا/شيكاغو،</strong> أو <strong>UTC</strong>). للحصول على تفاصيل حول كيفية استخدام حقل <code translate="no">TIMESTAMPTZ</code> ، راجع <a href="/docs/ar/timestamptz-field.md">حقل TIMESTAMPTZ</a>.</p></td>
+     <td><p>تحديد المنطقة الزمنية الافتراضية المطبقة على العمليات الحساسة للوقت داخل قاعدة البيانات، خاصةً للحقول <code translate="no">TIMESTAMPTZ</code>. ترث المجموعات المنطقة الزمنية لقاعدة البيانات ما لم يتم تعيين منطقة زمنية على مستوى المجموعة. يمكن أن تتجاوز معلمة المنطقة الزمنية على مستوى الاستعلام مؤقتًا كلاً من المنطقة الزمنية الافتراضية لقاعدة البيانات والمجموعات. يجب أن تكون القيمة <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">معرّف منطقة زمنية</a> صالحة <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">ل IANA</a> (على سبيل المثال، <strong>آسيا/شنغهاي،</strong> <strong>أمريكا/شيكاغو،</strong> أو <strong>UTC</strong>). للحصول على تفاصيل حول كيفية استخدام حقل <code translate="no">TIMESTAMPTZ</code> ، راجع <a href="/docs/ar/v2.6.x/timestamptz-field.md">حقل TIMESTAMPTZ</a>.</p></td>
    </tr>
 </table>
 <h3 id="Alter-database-properties" class="common-anchor-header">تغيير خصائص قاعدة البيانات<button data-href="#Alter-database-properties" class="anchor-icon" translate="no">
@@ -335,6 +338,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/alter&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database&quot;,
     &quot;properties&quot;: {
@@ -389,6 +393,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/alter&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database&quot;,
     &quot;propertyKeys&quot;: [
@@ -482,6 +487,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/drop&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database&quot;
 }&#x27;</span>
@@ -516,7 +522,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يستخدم Milvus التحكم في الوصول المستند إلى الدور (RBAC) لإدارة الأذونات. يمكنك إنشاء أدوار بامتيازات محددة وتعيينها للمستخدمين، وبالتالي التحكم في وصولهم إلى قواعد البيانات المختلفة. لمزيد من التفاصيل، راجع <a href="/docs/ar/rbac.md">وثائق RBAC</a>.</p>
+    </button></h3><p>يستخدم Milvus التحكم في الوصول المستند إلى الدور (RBAC) لإدارة الأذونات. يمكنك إنشاء أدوار بامتيازات محددة وتعيينها للمستخدمين، وبالتالي التحكم في وصولهم إلى قواعد البيانات المختلفة. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.6.x/rbac.md">وثائق RBAC</a>.</p>
 <h3 id="Are-there-any-quota-limitations-for-a-database" class="common-anchor-header">هل هناك أي قيود على الحصص لقاعدة البيانات؟<button data-href="#Are-there-any-quota-limitations-for-a-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -532,4 +538,4 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>نعم، يسمح لك Milvus بتعيين قيود الحصص لقاعدة البيانات، مثل الحد الأقصى لعدد المجموعات. للحصول على قائمة شاملة بالقيود، يرجى الرجوع إلى <a href="/docs/ar/limitations.md">وثائق حدود ميلفوس</a>.</p>
+    </button></h3><p>نعم، يسمح لك Milvus بتعيين قيود الحصص لقاعدة البيانات، مثل الحد الأقصى لعدد المجموعات. للحصول على قائمة شاملة بالقيود، يرجى الرجوع إلى <a href="/docs/ar/v2.6.x/limitations.md">وثائق حدود ميلفوس</a>.</p>

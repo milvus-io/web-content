@@ -48,7 +48,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/keyword-match.png" alt="Keyword Match" class="doc-image" id="keyword-match" />
    </span> <span class="img-wrapper"> <span>キーワードマッチ</span> </span></p>
-<h2 id="Enable-text-match" class="common-anchor-header">テキストマッチの有効化<button data-href="#Enable-text-match" class="anchor-icon" translate="no">
+<h2 id="Enable-text-match" class="common-anchor-header">テキストマッチを有効にする<button data-href="#Enable-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -198,7 +198,7 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">オプション：アナライザーの設定<button data-href="#Optional-Configure-an-analyzer" class="anchor-icon" translate="no">
+<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">オプション：アナライザの設定<button data-href="#Optional-Configure-an-analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -397,7 +397,7 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>テキスト・マッチをベクトル類似性検索と組み合わせて使うことで、検索範囲を狭め、検索パフォーマンスを向上させることができます。ベクトル類似検索の前にテキストマッチを使ってコレクションをフィルタリングすることで、検索が必要なドキュメントの数を減らすことができ、結果的にクエリー時間を短縮することができます。</p>
+    </button></h3><p>テキスト・マッチをベクトル類似検索と組み合わせて使うことで、検索範囲を狭め、検索パフォーマンスを向上させることができます。ベクトル類似検索の前にテキストマッチを使ってコレクションをフィルタリングすることで、検索が必要なドキュメントの数を減らすことができ、結果的にクエリー時間を短縮することができます。</p>
 <p>この例では、<code translate="no">filter</code> 式は、指定された用語<code translate="no">keyword1</code> または<code translate="no">keyword2</code> に一致する文書のみを含むように検索結果をフィルタリングします。次に、ベクトル類似性検索は、このフィルタリングされた文書のサブセットに対して実行されます。</p>
 <div class="alert note">
 <p>テキスト・ハイライターを設定すると、検索結果で一致した用語を強調表示することができます。詳細は<a href="/docs/ja/text-highlighter.md">テキスト・ハイライターを</a>参照。</p>
@@ -466,6 +466,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;annsField&quot;: &quot;embeddings&quot;,
@@ -545,6 +546,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$filter</span>&quot;</span><span class="hljs-string">&#x27;,

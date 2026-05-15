@@ -274,7 +274,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Im obigen Beispiel wird ein Index mit dem Namen <code translate="no">binary_vector_index</code> für das Feld <code translate="no">binary_vector</code> erstellt, wobei der Indextyp <code translate="no">AUTOINDEX</code> verwendet wird. <code translate="no">metric_type</code> ist auf <code translate="no">HAMMING</code> gesetzt, was anzeigt, dass die Hamming-Distanz für die Ähnlichkeitsmessung verwendet wird.</p>
-<p>Milvus bietet verschiedene Indexarten für eine bessere Vektorsuche. AUTOINDEX ist ein spezieller Indextyp, der entwickelt wurde, um die Lernkurve der Vektorsuche zu glätten. Sie können aus einer Vielzahl von Index-Typen wählen. Details finden Sie unter <a href="/docs/de/index-explained.md">Index erklärt</a>.</p>
+<p>Milvus bietet verschiedene Indexarten für eine bessere Vektorsuche. AUTOINDEX ist ein spezieller Indextyp, der entwickelt wurde, um die Lernkurve der Vektorsuche zu glätten. Sie können aus einer Vielzahl von Index-Typen wählen. Einzelheiten finden Sie unter <a href="/docs/de/index-explained.md">Index erklärt</a>.</p>
 <p>Außerdem unterstützt Milvus andere Ähnlichkeitsmetriken für binäre Vektoren. Weitere Informationen finden Sie unter <a href="/docs/de/metric.md">Metrik-Typen</a>.</p>
 <h3 id="Create-collection" class="common-anchor-header">Sammlung erstellen<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -338,6 +338,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -449,6 +450,7 @@ client.<span class="hljs-title function_">insert</span>({
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;data\&quot;: <span class="hljs-variable">$data</span>,
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;
@@ -561,6 +563,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$data</span>,

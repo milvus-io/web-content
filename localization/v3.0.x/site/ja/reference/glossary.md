@@ -192,7 +192,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>動的スキーマを使用すると、既存のスキーマを変更することなく、新しいフィールドを持つエンティティをコレクションに挿入できます。これは、コレクションの完全なスキーマを知らなくてもデータを挿入でき、まだ定義されていないフィールドを含めることができることを意味します。コレクションを作成するときにダイナミック・フィールドを有効にすることで、このスキーマ・フリー機能を有効にできます。詳細は、<a href="/docs/ja/enable-dynamic-field.md">Enable Dynamic Fieldを</a>参照してください。</p>
+    </button></h2><p>動的スキーマでは、既存のスキーマを変更することなく、新しいフィールドを持つエンティティをコレクションに挿入できます。これは、コレクションの完全なスキーマを知らなくてもデータを挿入でき、まだ定義されていないフィールドを含めることができることを意味します。コレクションを作成するときにダイナミック・フィールドを有効にすることで、このスキーマ・フリー機能を有効にできます。詳細は、<a href="/docs/ja/enable-dynamic-field.md">Enable Dynamic Fieldを</a>参照してください。</p>
 <h2 id="Embeddings" class="common-anchor-header">埋め込み<button data-href="#Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -407,7 +407,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>メモリ・マップされたファイルは、ファイルの内容を直接メモリにマッピングすることにより、効率的なデータ処理を可能にします。これは、メモリが限られており、全てのデータをロードすることが不可能な場合に特に有効です。このテクニックは、データ容量を増加させ、パフォーマンスをある程度維持することができます。しかし、データがメモリ容量を大幅に超える場合、検索やクエリの速度が大幅に低下する可能性があります。詳細については、<a href="https://milvus.io/docs/mmap.md">MMap-enabled Data Storageを</a>参照してください。</p>
+    </button></h2><p>メモリ・マップされたファイルは、ファイルの内容を直接メモリにマッピングすることで、効率的なデータ処理を可能にします。これは、メモリが限られており、全てのデータをロードすることが不可能な場合に特に有効です。このテクニックは、データ容量を増加させ、パフォーマンスをある程度維持することができます。しかし、データがメモリ容量を大幅に超える場合、検索やクエリの速度が大幅に低下する可能性があります。詳細については、<a href="https://milvus.io/docs/mmap.md">MMap-enabled Data Storageを</a>参照してください。</p>
 <h2 id="Milvus-Backup" class="common-anchor-header">Milvusバックアップ<button data-href="#Milvus-Backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -439,7 +439,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/milvus-cdc-overview.md">Milvus CDC</a>(Change data capture)は、Milvusインスタンスの増分データをキャプチャし、同期することができるユーザーフレンドリーなツールです。ソースインスタンスとターゲットインスタンス間でシームレスにデータを転送することで、ビジネスデータの信頼性を確保し、増分バックアップとディザスタリカバリを容易に行うことができます。</p>
+    </button></h2><p><a href="https://milvus.io/docs/milvus_cdc_overview.md">Milvus CDC</a>(change data capture)は、プライマリ・スタンバイのディザスタリカバリのために、あるMilvusクラスタから別のMilvusクラスタへデータの変更をレプリケートするために使用されるツールです。</p>
 <h2 id="Milvus-CLI" class="common-anchor-header">Milvus CLI<button data-href="#Milvus-CLI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -471,7 +471,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://github.com/zilliztech/milvus-migration/">Milvusマイグレーションは</a>、様々なデータソースからMilvus 2.xへのデータ移行を容易にするために設計されたオープンソースツールです。</p>
+    </button></h2><p><a href="https://github.com/zilliztech/milvus-migration/">Milvus Migrationは</a>、様々なデータソースからMilvus 2.xへのデータ移行を容易にするために設計されたオープンソースツールです。</p>
 <h2 id="Milvus-cluster" class="common-anchor-header">Milvusクラスタ<button data-href="#Milvus-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -519,7 +519,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusは2.4.0から1つのコレクションで複数のベクトルフィールドをサポートしています。詳細は<a href="/docs/ja/multi-vector-search.md">ハイブリッド検索を</a>ご参照ください。</p>
+    </button></h2><p>Milvusは2.4.0以降、1つのコレクションで複数のベクトルフィールドをサポートしています。詳細は<a href="/docs/ja/multi-vector-search.md">ハイブリッド検索を</a>ご参照ください。</p>
 <h2 id="Partition" class="common-anchor-header">パーティション<button data-href="#Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -761,7 +761,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>画像、ビデオ、オーディオ、自然言語などの非構造化データは、事前に定義されたモデルや構成方法に従わない情報です。このデータタイプは世界のデータの約80%を占めており、様々な人工知能（AI）やMLモデルを使用してベクトルに変換することができます。</p>
+    </button></h2><p>画像、ビデオ、オーディオ、自然言語などの非構造化データは、事前に定義されたモデルや構成方法に従わない情報です。このデータタイプは、世界のデータの約80％を占めており、様々な人工知能（AI）やMLモデルを使用してベクトルに変換することができます。</p>
 <h2 id="VChannel" class="common-anchor-header">Vチャネル<button data-href="#VChannel" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

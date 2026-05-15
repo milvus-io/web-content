@@ -22,7 +22,7 @@ title: Milvus Standalone mit RPM/DEB-Paket installieren
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Diese Seite veranschaulicht, wie Sie Milvus Standalone mit einem vorgefertigten RPM/DEB-Paket installieren können.</p>
+    </button></h1><p>Auf dieser Seite wird gezeigt, wie Milvus Standalone mit einem vorgefertigten RPM/DEB-Paket installiert werden kann.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Voraussetzungen<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +40,7 @@ title: Milvus Standalone mit RPM/DEB-Paket installieren
       </svg>
     </button></h2><ul>
 <li>Sie haben bereits libstdc++ 8.5.0 oder eine neuere Version installiert.</li>
-<li><a href="/docs/de/prerequisite-docker.md">Überprüfen Sie</a> vor der Installation<a href="/docs/de/prerequisite-docker.md">die Anforderungen an Hardware und Software</a>.</li>
+<li><a href="/docs/de/v2.6.x/prerequisite-docker.md">Überprüfen Sie</a> vor der Installation<a href="/docs/de/v2.6.x/prerequisite-docker.md">die Anforderungen an Hardware und Software</a>.</li>
 </ul>
 <h2 id="Download-the-RPMDEB-Package" class="common-anchor-header">Herunterladen des RPM/DEB-Pakets<button data-href="#Download-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -57,7 +57,7 @@ title: Milvus Standalone mit RPM/DEB-Paket installieren
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie können das RPM/DEB-Paket entsprechend Ihrer Systemarchitektur von der <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.15">Milvus Releases-Seite</a> herunterladen.</p>
+    </button></h2><p>Sie können das RPM/DEB-Paket entsprechend Ihrer Systemarchitektur von der <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.16">Milvus Releases-Seite</a> herunterladen.</p>
 <ul>
 <li>Für x86_64/amd64 laden Sie das Paket <strong>milvus_2.6.9-1_amd64.deb</strong> oder <strong>milvus_2.6.9-1_amd64.rpm</strong> herunter.</li>
 <li>Für ARM64 laden Sie bitte das Paket <strong>milvus_2.6.9-1_arm64.deb</strong> oder <strong>milvus_2.6.9-1_arm64.rpm</strong> herunter.</li>
@@ -135,7 +135,7 @@ dpkg -l | grep milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie können die Milvus-Konfigurationen in der Datei <code translate="no">/etc/milvus/configs/milvus.yaml</code> ändern. Um zum Beispiel <code translate="no">proxy.healthCheckTimeout</code> in <code translate="no">1000</code> ms zu ändern, können Sie nach dem Zielparameter suchen und ihn entsprechend ändern. Informationen zu den anwendbaren Konfigurationselementen finden Sie unter <a href="/docs/de/system_configuration.md">Systemkonfiguration</a>.</p>
+    </button></h2><p>Sie können die Milvus-Konfigurationen in der Datei <code translate="no">/etc/milvus/configs/milvus.yaml</code> ändern. Um zum Beispiel <code translate="no">proxy.healthCheckTimeout</code> in <code translate="no">1000</code> ms zu ändern, können Sie nach dem Zielparameter suchen und ihn entsprechend ändern. Informationen zu den anwendbaren Konfigurationselementen finden Sie unter <a href="/docs/de/v2.6.x/system_configuration.md">Systemkonfiguration</a>.</p>
 <h2 id="Stop-Milvus-Standalone" class="common-anchor-header">Beenden von Milvus Standalone<button data-href="#Stop-Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -193,27 +193,27 @@ dpkg -l | grep milvus
       </svg>
     </button></h2><p>Nachdem Sie Milvus Standalone installiert haben, können Sie:</p>
 <ul>
-<li><p>Im <a href="/docs/de/quickstart.md">Schnellstart</a> sehen, was Milvus alles kann.</p></li>
+<li><p>Im <a href="/docs/de/v2.6.x/quickstart.md">Schnellstart</a> sehen, was Milvus alles kann.</p></li>
 <li><p>Lernen Sie die Grundfunktionen von Milvus kennen:</p>
 <ul>
-<li><a href="/docs/de/manage_databases.md">Datenbanken verwalten</a></li>
-<li><a href="/docs/de/manage-collections.md">Sammlungen verwalten</a></li>
-<li><a href="/docs/de/manage-partitions.md">Partitionen verwalten</a></li>
-<li><a href="/docs/de/insert-update-delete.md">Einfügen, Upsert &amp; Löschen</a></li>
-<li><a href="/docs/de/single-vector-search.md">Ein-Vektor-Suche</a></li>
-<li><a href="/docs/de/multi-vector-search.md">Hybride Suche</a></li>
+<li><a href="/docs/de/v2.6.x/manage_databases.md">Datenbanken verwalten</a></li>
+<li><a href="/docs/de/v2.6.x/manage-collections.md">Sammlungen verwalten</a></li>
+<li><a href="/docs/de/v2.6.x/manage-partitions.md">Partitionen verwalten</a></li>
+<li><a href="/docs/de/v2.6.x/insert-update-delete.md">Einfügen, Upsert &amp; Löschen</a></li>
+<li><a href="/docs/de/v2.6.x/single-vector-search.md">Ein-Vektor-Suche</a></li>
+<li><a href="/docs/de/v2.6.x/multi-vector-search.md">Hybride Suche</a></li>
 </ul></li>
-<li><p><a href="/docs/de/upgrade_milvus_cluster-helm.md">Upgrade von Milvus mit Helm Chart</a>.</p></li>
-<li><p><a href="/docs/de/scaleout.md">Skalieren Sie Ihren Milvus-Cluster</a>.</p></li>
+<li><p><a href="/docs/de/v2.6.x/upgrade_milvus_cluster-helm.md">Upgrade von Milvus mit Helm Chart</a>.</p></li>
+<li><p><a href="/docs/de/v2.6.x/scaleout.md">Skalieren Sie Ihren Milvus-Cluster</a>.</p></li>
 <li><p>Verteilen Sie Ihren Milvus-Cluster auf Clouds:</p>
 <ul>
-<li><a href="/docs/de/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/de/gcp.md">Google Wolke</a></li>
-<li><a href="/docs/de/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/de/v2.6.x/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/de/v2.6.x/gcp.md">Google Wolke</a></li>
+<li><a href="/docs/de/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Entdecken Sie <a href="/docs/de/milvus-webui.md">Milvus WebUI</a>, eine intuitive Webschnittstelle für die Beobachtung und Verwaltung von Milvus.</p></li>
-<li><p>Erkunden Sie <a href="/docs/de/milvus_backup_overview.md">Milvus Backup</a>, ein Open-Source-Tool für Milvus-Datensicherungen.</p></li>
-<li><p><a href="/docs/de/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zur Fehlersuche in Milvus und zur dynamischen Konfigurationsaktualisierung.</p></li>
+<li><p>Entdecken Sie <a href="/docs/de/v2.6.x/milvus-webui.md">Milvus WebUI</a>, eine intuitive Webschnittstelle für die Beobachtung und Verwaltung von Milvus.</p></li>
+<li><p>Erkunden Sie <a href="/docs/de/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, ein Open-Source-Tool für Milvus-Datensicherungen.</p></li>
+<li><p><a href="/docs/de/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zur Fehlersuche in Milvus und zur dynamischen Konfigurationsaktualisierung.</p></li>
 <li><p>Entdecken Sie <a href="https://github.com/zilliztech/attu">Attu</a>, ein Open-Source-GUI-Tool für intuitives Milvus-Management.</p></li>
-<li><p><a href="/docs/de/monitor.md">Überwachen Sie Milvus mit Prometheus</a>.</p></li>
+<li><p><a href="/docs/de/v2.6.x/monitor.md">Überwachen Sie Milvus mit Prometheus</a>.</p></li>
 </ul>

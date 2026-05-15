@@ -42,7 +42,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>疎ベクトル表現</span> </span></p>
 <p>トークン化とスコアリングにより、文書は単語の袋（bag-of-words）ベクトルとして表現することができます。文書中に存在する単語だけがゼロでない値を持ち、スパースなベクトル表現となる。スパース・ベクトルは2つのアプローチで生成できる：</p>
 <ul>
-<li><p><a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a>(Term Frequency-Inverse Document Frequency)や<a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a>(Best Matching 25)などの<strong>伝統的な統計手法は</strong>、コーパス全体の頻度と重要度に基づいて単語に重みを割り当てます。これらの方法は、トークンを表す各次元のスコアとして単純な統計値を計算します。  MilvusはBM25メソッドによる<strong>全文検索を</strong>内蔵しており、テキストを自動的にスパースベクトルに変換するため、手作業による前処理が不要です。このアプローチは、精度と完全一致が重要なキーワードベースの検索に最適です。詳細は<a href="/docs/ja/full-text-search.md">全文検索を</a>ご参照ください。</p></li>
+<li><p><a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a>(Term Frequency-Inverse Document Frequency)や<a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a>(Best Matching 25)などの<strong>伝統的な統計手法は</strong>、コーパス全体の頻度と重要度に基づいて単語に重みを割り当てます。これらの方法は、トークンを表す各次元のスコアとして単純な統計値を計算します。  MilvusはBM25メソッドを組み込んだ<strong>全文検索を</strong>提供し、テキストを自動的にスパースベクトルに変換するため、手作業による前処理が不要になります。このアプローチは、精度と完全一致が重要なキーワードベースの検索に最適です。詳細は<a href="/docs/ja/full-text-search.md">全文検索を</a>ご参照ください。</p></li>
 <li><p><strong>ニューラル・スパース埋め込み</strong>モデルは、大規模なデータセットで学習することで、スパース表現を生成する学習済み手法である。通常、Transformerアーキテクチャを持つディープラーニングモデルであり、意味文脈に基づいて用語を拡張し、重み付けを行うことができる。Milvusは<a href="https://arxiv.org/abs/2109.10086">SPLADEの</a>ようなモデルから外部生成されたスパース埋め込みもサポートしています。詳細は<a href="/docs/ja/embeddings.md#Embedding-Overview">埋め込みを</a>参照。</include></p></li>
 </ul>
 <p>スパースベクターと元のテキストはMilvusに保存され、効率的に検索することができる。下図は全体的なプロセスの概要です。</p>
@@ -276,10 +276,10 @@ schema.WithField(entity.NewField().
 <ul>
 <li><p><code translate="no">pk</code>:このフィールドは、<code translate="no">VARCHAR</code> データ型を使ってプライマリ・キーを格納します。最大長は100バイトで自動生成されます。</p></li>
 <li><p><code translate="no">sparse_vector</code>:このフィールドは、<code translate="no">SPARSE_FLOAT_VECTOR</code> データ型を使ってスパース・ベクトルを格納する。</p></li>
-<li><p><code translate="no">text</code>:このフィールドには<code translate="no">VARCHAR</code> データ型を使用したテキスト文字列が格納される。</p></li>
+<li><p><code translate="no">text</code>:このフィールドには<code translate="no">VARCHAR</code> データ型を使用したテキスト文字列が格納され、最大長は 65535 バイトである。</p></li>
 </ul>
 <div class="alert note">
-<p>Milvusを有効にしたり、データ挿入時に指定されたテキスト・フィールドからスパース・ベクトル埋め込みを生成するには、関数を使用した追加のステップを踏む必要があります。詳細については、<a href="/docs/ja/full-text-search.md">全文検索を</a>参照してください。</p>
+<p>Milvusを有効にしたり、データ挿入時に指定されたテキスト・フィールドからスパース・ベクトルの埋め込みを生成するには、関数を使用した追加のステップを踏む必要があります。詳細については、<a href="/docs/ja/full-text-search.md">全文検索を</a>参照してください。</p>
 </div>
 <h2 id="Set-Index-Parameters" class="common-anchor-header">インデックスパラメータの設定<button data-href="#Set-Index-Parameters" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -415,6 +415,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -436,7 +437,7 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>自動生成されるフィールド（<code translate="no">auto_id</code> が有効な主キーなど）を除 き、コレクション作成中に定義されるすべてのフィールドのデータを提供する必要が あります。組み込みの BM25 関数を使用してスパース・ベクトルを自動生成している場合は、データを挿入するときにスパース・ベクトル・フィールドも省略する必要があります。</p>
+    </button></h2><p>自動生成されるフィールド（<code translate="no">auto_id</code> が有効なプライマリキーなど）を除 き、コレクション作成中に定義されるすべてのフィールドのデータを提供する必要が あります。組み込みの BM25 関数を使用してスパース・ベクトルを自動生成している場合は、データを挿入するときにスパース・ベクトル・フィールドも省略する必要があります。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
@@ -540,6 +541,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {
@@ -692,6 +694,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: $queryData,

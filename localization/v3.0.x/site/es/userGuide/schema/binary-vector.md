@@ -52,7 +52,7 @@ summary: >-
 <p>Los vectores binarios presentan las siguientes características</p>
 <ul>
 <li><p><strong>Almacenamiento eficiente:</strong> Cada dimensión requiere sólo 1 bit de almacenamiento, lo que reduce significativamente el espacio de almacenamiento.</p></li>
-<li><p><strong>Cálculo rápido:</strong> La similitud entre vectores puede calcularse rápidamente utilizando operaciones a nivel de bit como XOR.</p></li>
+<li><p><strong>Cálculo rápido:</strong> La similitud entre vectores puede calcularse rápidamente mediante operaciones a nivel de bit como XOR.</p></li>
 <li><p><strong>Longitud fija:</strong> La longitud del vector permanece constante independientemente de la longitud del texto original, lo que facilita la indexación y la recuperación.</p></li>
 <li><p><strong>Sencillo e intuitivo:</strong> Refleja directamente la presencia de palabras clave, lo que lo hace adecuado para determinadas tareas de recuperación especializadas.</p></li>
 </ul>
@@ -338,6 +338,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -449,6 +450,7 @@ client.<span class="hljs-title function_">insert</span>({
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;data\&quot;: <span class="hljs-variable">$data</span>,
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;
@@ -561,6 +563,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$data</span>,

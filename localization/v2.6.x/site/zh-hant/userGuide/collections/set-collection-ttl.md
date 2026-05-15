@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>一旦資料插入到集合中，預設會保留在集合中。然而，在某些情況下，您可能想要在某段時間後移除或清理資料。在這種情況下，您可以設定資料集的 Time-to-Live (TTL) 屬性，讓 Milvus 在 TTL 過後自動刪除資料。</p>
+    </button></h1><p>一旦資料插入到集合中，預設會保留在集合中。然而，在某些情況下，您可能想要在某段時間後移除或清理資料。在這種情況下，您可以設定資料集的 Time-to-Live (TTL) 屬性，讓 Milvus 在 TTL 過期後自動刪除資料。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,7 +36,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Time-to-Live (TTL) 通常用於資料庫中，當資料插入或修改後，只能維持有效或可存取一段時間。之後，資料就會自動移除。</p>
+    </button></h2><p>Time-to-Live (TTL) 通常用於資料庫中，在插入或修改資料後，資料只能維持有效或可存取一段時間。之後，資料就會自動移除。</p>
 <p>舉例來說，如果您每天擷取資料，但只需要保留 14 天的記錄，您可以設定 Milvus，將資料集的 TTL 設定為<strong>14 × 24 × 3600 = 1209600</strong>秒，以自動移除任何超過此期限的資料。這可確保只有最近 14 天的資料保留在資料集中。</p>
 <div class="alert note">
 <p>過期的實體不會出現在任何搜尋或查詢結果中。不過，它們可能會留在儲存中，直到隨後的資料壓縮為止，而資料壓縮應該在未來 24 小時內進行。</p>
@@ -62,10 +62,25 @@ summary: >-
       </svg>
     </button></h2><p>您可以在以下情況設定 TTL 屬性</p>
 <ul>
-<li><p><a href="/docs/zh-hant/set-collection-ttl.md#Set-TTL-when-creating-a-collection">建立一個集合。</a></p></li>
-<li><p><a href="/docs/zh-hant/set-collection-ttl.md#Set-TTL-for-an-existing-collection">更改現有集合的 TTL 屬性。</a></p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/set-collection-ttl.md#Set-TTL-when-creating-a-collection">建立一個集合。</a></p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/set-collection-ttl.md#Set-TTL-for-an-existing-collection">更改現有集合的 TTL 屬性。</a></p></li>
 </ul>
-<h3 id="Set-TTL-when-creating-a-collection" class="common-anchor-header">建立集合時設定 TTL</h3><p>以下程式碼片段示範如何在建立集合時設定 TTL 屬性。</p>
+<h3 id="Set-TTL-when-creating-a-collection" class="common-anchor-header">建立集合時設定 TTL<button data-href="#Set-TTL-when-creating-a-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下程式碼片段示範如何在建立集合時設定 TTL 屬性。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -119,13 +134,29 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-TTL-for-an-existing-collection" class="common-anchor-header">設定現有集合的 TTL</h3><p>以下程式碼片段示範如何在現有的集合中變更 TTL 屬性。</p>
+<h3 id="Set-TTL-for-an-existing-collection" class="common-anchor-header">設定現有集合的 TTL<button data-href="#Set-TTL-for-an-existing-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下程式碼片段示範如何在現有的集合中變更 TTL 屬性。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.alter_collection_properties(
@@ -161,6 +192,7 @@ client.alterCollection(alterCollectionReq);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;properties\&quot;: {
@@ -216,6 +248,7 @@ client.dropCollection(dropCollectionReq);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;&quot;</span>my_collection<span class="hljs-string">&quot;\&quot;,
     \&quot;properties\&quot;: {

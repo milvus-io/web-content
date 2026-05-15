@@ -79,7 +79,7 @@ summary: >-
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-in-merge-mode.png" alt="Upsert In Merge Mode" class="doc-image" id="upsert-in-merge-mode" />
-   </span> <span class="img-wrapper"> <span>Upsert en modo merge</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Upsert en modo fusión</span> </span></p>
 <p>Para realizar una fusión, establezca <code translate="no">partial_update</code> en <code translate="no">True</code> en la solicitud <code translate="no">upsert</code> junto con la clave primaria y los campos que desea actualizar con sus nuevos valores.</p>
 <p>Al recibir una solicitud de este tipo, Milvus realiza una consulta con coherencia fuerte para recuperar la entidad, actualiza los valores de los campos basándose en los datos de la solicitud, inserta los datos modificados y, a continuación, elimina la entidad existente con la clave primaria original que figura en la solicitud.</p>
 <h3 id="Upsert-behaviors-special-notes" class="common-anchor-header">Comportamientos Upsert: notas especiales<button data-href="#Upsert-behaviors-special-notes" class="anchor-icon" translate="no">
@@ -138,7 +138,7 @@ summary: >-
 <li><p>La solicitud <code translate="no">upsert</code> debe incluir siempre las claves primarias de las entidades de destino.</p></li>
 <li><p>La colección de destino debe estar cargada y disponible para consultas.</p></li>
 <li><p>Todos los campos especificados en la solicitud deben existir en el esquema de la colección de destino.</p></li>
-<li><p>Los valores de todos los campos especificados en la petición deben coincidir con los tipos de datos definidos en el esquema.</p></li>
+<li><p>Los valores de todos los campos especificados en la solicitud deben coincidir con los tipos de datos definidos en el esquema.</p></li>
 <li><p>Para cualquier campo derivado de otro mediante funciones, Milvus eliminará el campo derivado durante el upsert para permitir el recálculo.</p></li>
 </ul>
 <h2 id="Upsert-entities-in-a-collection" class="common-anchor-header">Subir entidades de una colección<button data-href="#Upsert-entities-in-a-collection" class="anchor-icon" translate="no">
@@ -303,6 +303,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/upsert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;title&quot;: &quot;Artificial Intelligence in Real Life&quot;, &quot;issue&quot;: &quot;vol.12&quot;},
@@ -449,6 +450,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/upsert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 10, &quot;vector&quot;: [0.06998888224297328, 0.8582816610326578, -0.9657938677934292, 0.6527905683627726, -0.8668460657158576], &quot;title&quot;: &quot;Layour Design Reference&quot;, &quot;issue&quot;: &quot;vol.34&quot;},
@@ -591,6 +593,7 @@ _, err = client.Upsert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/upsert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,

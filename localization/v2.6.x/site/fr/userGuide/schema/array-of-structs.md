@@ -118,9 +118,9 @@ beta: Milvus 2.6.4+
 <td><p><code translate="no">MAX_SIM_L2</code></p></td>
 </tr>
 </table></p>
-<p>Les champs scalaires dans le champ Tableau de structures ne prennent pas en charge les index.</p></li>
+<p>Les champs scalaires de la rubrique "Array of Structs" ne prennent pas en charge les index.</p></li>
 <li><p><strong>Données d'insertion</strong></p>
-<p>Les structs ne prennent pas en charge les insertions en mode fusion. Cependant, vous pouvez toujours effectuer des insertions en mode de remplacement pour mettre à jour les données dans les Structs. Pour plus d'informations sur les différences entre l'insertion en mode fusion et en mode remplacement, reportez-vous à la section <a href="/docs/fr/upsert-entities.md#Overview">Insertion d'entités</a>.</p></li>
+<p>Les structs ne prennent pas en charge les insertions en mode fusion. Cependant, vous pouvez toujours effectuer des insertions en mode de remplacement pour mettre à jour les données dans les Structs. Pour plus d'informations sur les différences entre l'insertion en mode fusion et en mode remplacement, reportez-vous à la section <a href="/docs/fr/v2.6.x/upsert-entities.md#Overview">Insertion d'entités</a>.</p></li>
 <li><p><strong>Filtrage scalaire</strong></p>
 <p>Vous ne pouvez pas utiliser un tableau de structures ni aucun champ de son élément Struct dans les expressions de filtrage des recherches et des requêtes.</p></li>
 </ul>
@@ -145,7 +145,7 @@ beta: Milvus 2.6.4+
 <li><p>Attribuez la valeur <code translate="no">DataType.STRUCT</code> à l'attribut <code translate="no">element_type</code> de la rubrique pour en faire un tableau de structures.</p></li>
 <li><p>Créez un schéma Struct et incluez les champs requis. Faites ensuite référence au schéma Struct dans l'attribut <code translate="no">struct_schema</code> du champ.</p></li>
 <li><p>Attribuez à l'attribut <code translate="no">max_capacity</code> du champ une valeur appropriée pour spécifier le nombre maximum de structures que chaque entité peut contenir dans ce champ.</p></li>
-<li><p><strong>(Facultatif</strong>) Vous pouvez définir <code translate="no">mmap.enabled</code> pour n'importe quel champ de l'élément Struct afin d'équilibrer les données chaudes et froides dans la structure.</p></li>
+<li><p><strong>(Facultatif</strong>) Vous pouvez définir <code translate="no">mmap.enabled</code> pour n'importe quel champ de l'élément Struct afin d'équilibrer les données chaudes et froides de la structure.</p></li>
 </ol>
 <p>Voici comment définir un schéma de collection comprenant un tableau de structures :</p>
 <div class="multipleCode">
@@ -377,7 +377,7 @@ SCHEMA=<span class="hljs-string">&#x27;{
         ></path>
       </svg>
     </button></h2><p>L'indexation est obligatoire pour tous les champs vectoriels, y compris les champs vectoriels de la collection et ceux définis dans l'élément Struct.</p>
-<p>Les paramètres d'index applicables varient en fonction du type d'index utilisé. Pour plus de détails sur les paramètres d'index applicables, reportez-vous à <a href="/docs/fr/index-explained.md">Index Explained</a> et aux pages de documentation spécifiques au type d'index sélectionné.</p>
+<p>Les paramètres d'index applicables varient en fonction du type d'index utilisé. Pour plus de détails sur les paramètres d'index applicables, reportez-vous à <a href="/docs/fr/v2.6.x/index-explained.md">Index Explained</a> et aux pages de documentation spécifiques au type d'index sélectionné.</p>
 <p>Pour indexer une liste d'intégration, vous devez définir son type d'index sur <code translate="no">AUTOINDEX</code> ou <code translate="no">HNSW</code>, et utiliser <code translate="no">MAX_SIM_COSINE</code> comme type métrique pour Milvus afin de mesurer les similitudes entre les listes d'intégration.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -499,6 +499,7 @@ client.createCollection(requestCreate);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/create&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;description\&quot;: \&quot;A collection for storing book information with struct array chunks\&quot;,
@@ -614,6 +615,7 @@ row.add(<span class="hljs-string">&quot;chunks&quot;</span>, structArr);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/insert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -806,6 +808,7 @@ embeddingList1=<span class="hljs-string">&#x27;[[0.2,0.9,0.4,-0.3,0.2]]&#x27;</s
 embeddingList2=<span class="hljs-string">&#x27;[[-0.2,-0.2,0.5,0.6,0.9],[-0.4,0.3,0.5,0.8,0.2]]&#x27;</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>],
@@ -910,6 +913,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>, <span class="hljs-variable">$embeddingList2</span>],
@@ -1013,4 +1017,4 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Le développement d'un type de données natif Array of Structs représente une avancée majeure dans la capacité de Milvus à traiter des structures de données complexes. Pour mieux comprendre les cas d'utilisation et maximiser cette nouvelle fonctionnalité, nous vous invitons à lire <a href="/docs/fr/best-practices-for-array-of-structs.md">Schema Design Using an Array of Structs (Conception de schémas à l'aide d'un tableau de structures)</a>.</p>
+    </button></h2><p>Le développement d'un type de données natif Array of Structs représente une avancée majeure dans la capacité de Milvus à traiter des structures de données complexes. Pour mieux comprendre les cas d'utilisation et maximiser cette nouvelle fonctionnalité, nous vous encourageons à lire <a href="/docs/fr/v2.6.x/best-practices-for-array-of-structs.md">Schema Design Using an Array of Structs (Conception de schémas à l'aide d'un tableau de structures)</a>.</p>

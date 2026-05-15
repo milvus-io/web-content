@@ -43,8 +43,8 @@ summary: '스키마, 삽입, 인덱스, 검색 및 필터 동작을 포함하여
     </button></h2><ul>
 <li><p>NULL 값을 허용하는 벡터 필드는 <code translate="no">IS NULL</code> 또는 <code translate="no">IS NOT NULL</code> 필터 표현식을 지원하지 않습니다. 벡터 필드 값이 NULL인지 여부에 따라 엔티티를 명시적으로 필터링할 수 없습니다.</p></li>
 <li><p><a href="/docs/ko/array-of-structs.md">구조체 배열</a> 필드는 NULL 값을 지원하지 않습니다. 구조체 배열 필드 또는 그 안에 중첩된 필드는 null 가능으로 표시할 수 없습니다.</p></li>
-<li><p>null 가능 속성은 필드를 생성할 때 정의되며 이후에는 수정할 수 없습니다. 기존 필드에 대해서는 무효화 가능성을 활성화 또는 비활성화할 수 없습니다.</p></li>
-<li><p>nullable로 표시된 필드는 파티션 키로 사용할 수 없습니다. 파티션 키 필드에는 항상 유효한 null이 아닌 값이 포함되어야 합니다. 자세한 내용은 <a href="/docs/ko/use-partition-key.md">파티션 키 사용을</a> 참조하세요.</p></li>
+<li><p>null 가능 속성은 필드가 생성될 때 정의되며 이후에는 수정할 수 없습니다. 기존 필드에 대해서는 무효화 가능성을 활성화 또는 비활성화할 수 없습니다.</p></li>
+<li><p>무효화 가능으로 표시된 필드는 파티션 키로 사용할 수 없습니다. 파티션 키 필드에는 항상 유효한 null이 아닌 값이 포함되어야 합니다. 자세한 내용은 <a href="/docs/ko/use-partition-key.md">파티션 키 사용을</a> 참조하세요.</p></li>
 </ul>
 <h2 id="What-is-a-nullable-field" class="common-anchor-header">Null 가능 필드란 무엇인가요?<button data-href="#What-is-a-nullable-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,7 +68,7 @@ summary: '스키마, 삽입, 인덱스, 검색 및 필터 동작을 포함하여
 <li>필드가 명시적으로 NULL로 설정된 경우(예: Python의 경우 <code translate="no">None</code> ).</li>
 </ul>
 <p>필드가 null 가능으로 정의되지 않은 경우(기본 동작), 모든 엔터티는 해당 필드에 유효한 값을 제공해야 합니다. 필드를 생략하거나 명시적으로 NULL 값을 할당하면 삽입 또는 가져오기 작업이 실패합니다.</p>
-<p>null 가능 속성은 컬렉션 스키마의 <strong>스칼라 및 벡터 필드</strong> 모두에 대해 지원됩니다. 그러나 구조체의 배열 필드는 null 가능 속성을 지원하지 않습니다.</p>
+<p>컬렉션 스키마의 <strong>스칼라 및 벡터 필드</strong> 모두에 대해 null 가능 속성이 지원됩니다. 그러나 구조체 배열 필드는 null 가능 속성을 지원하지 않습니다.</p>
 <div class="alert note">
 <p>무효화 가능성은 필드 값의 누락 여부를 결정하지만, 필드 누락 시 어떤 값이 사용되는지는 정의하지 않습니다.</p>
 <ul>
@@ -92,7 +92,7 @@ summary: '스키마, 삽입, 인덱스, 검색 및 필터 동작을 포함하여
         ></path>
       </svg>
     </button></h2><p>nullable 필드를 사용하려면 컬렉션 스키마를 정의할 때 nullable 속성을 활성화해야 합니다.</p>
-<p>이 예제에서 컬렉션 스키마는 <code translate="no">embedding</code> 라는 이름의 벡터 필드를 <code translate="no">nullable=True</code> 로 정의합니다. 이렇게 하면 컬렉션의 엔티티가 데이터 수집 중에 벡터 값을 생략하거나 명시적으로 NULL로 설정할 수 있습니다.</p>
+<p>이 예제에서 컬렉션 스키마는 <code translate="no">embedding</code> 라는 이름의 벡터 필드를 <code translate="no">nullable=True</code> 으로 정의합니다. 이렇게 하면 컬렉션의 엔티티가 데이터 수집 중에 벡터 값을 생략하거나 명시적으로 NULL로 설정할 수 있습니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -234,6 +234,7 @@ curl --request POST \
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: {
@@ -374,6 +375,7 @@ _, err := client.Insert(ctx, milvusclient.NewRowBasedInsertOption(<span class="h
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -495,6 +497,7 @@ _, err = client.LoadCollection(ctx, milvusclient.NewLoadCollectionOption(<span c
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;indexParams&quot;: [
@@ -510,6 +513,7 @@ curl --request POST \
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/load&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{&quot;collectionName&quot;: &quot;my_collection&quot;}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>이 시점에서는</p>
@@ -613,6 +617,7 @@ fmt.Println(resultSets)
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [[0.1, 0.2, 0.3, 0.4]],
@@ -644,7 +649,7 @@ fmt.Println(resultSets)
         ></path>
       </svg>
     </button></h2><p>이전 예제에서는 벡터 필드에 중점을 두었습니다. 이 섹션에서는 <strong>스칼라 필터 표현식에서</strong> NULL 값이 어떻게 작동하는지 설명합니다.</p>
-<p>스칼라 필드는 <code translate="no">nullable=True</code> 으로 정의할 수 있으며 벡터 필드와 동일한 수집 규칙을 따릅니다. 그러나 <strong>필터 표현식에서 NULL 스칼라 값은 항상 거짓으로 평가됩니다</strong>.</p>
+<p>스칼라 필드는 <code translate="no">nullable=True</code> 로 정의할 수 있으며 벡터 필드와 동일한 수집 규칙을 따릅니다. 그러나 <strong>필터 표현식에서 NULL 스칼라 값은 항상 거짓으로 평가됩니다</strong>.</p>
 <p>예를 들어, null 가능 스칼라 필드 <code translate="no">age</code> 가 주어지면 다음 필터는 연령이 18보다 큰 엔티티를 선택합니다:</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

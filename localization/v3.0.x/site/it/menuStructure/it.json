@@ -741,7 +741,7 @@
             "children": []
           },
           {
-            "label": "Indici vettoriali flottanti",
+            "label": "Indici vettoriali fluttuanti",
             "id": "floating-vector-indexes",
             "order": 1,
             "isMenu": true,
@@ -1373,7 +1373,7 @@
     ]
   },
   {
-    "label": "Data Import",
+    "label": "Importazione dei dati",
     "id": "data_import",
     "order": 5,
     "isMenu": true,
@@ -1484,7 +1484,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "On Premises",
+            "label": "In loco",
             "id": "on_premises",
             "order": 0,
             "isMenu": true,
@@ -1638,7 +1638,7 @@
             "children": []
           },
           {
-            "label": "QueryNode Using Local Disk",
+            "label": "QueryNode che usa il disco locale",
             "id": "configure-querynode-localdisk.md",
             "order": 5,
             "children": []
@@ -2053,7 +2053,7 @@
       {
         "label": "Birdwatcher",
         "id": "birdwatcher",
-        "order": 2,
+        "order": 3,
         "children": [
           {
             "label": "Panoramica",
@@ -2071,6 +2071,37 @@
             "label": "Guide all'uso",
             "id": "birdwatcher_usage_guides.md",
             "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "CDC Milvus",
+        "id": "milvus_cdc",
+        "order": 2,
+        "children": [
+          {
+            "label": "Panoramica",
+            "id": "milvus_cdc_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Impostazione della replica CDC",
+            "id": "set_up_cdc_replication.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Passaggio al digitale",
+            "id": "cdc_switchover.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Failover",
+            "id": "cdc_failover.md",
+            "order": 3,
             "children": []
           }
         ]
@@ -2934,7 +2965,7 @@
         "children": []
       },
       {
-        "label": "Ricerca a imbuto con matrioske embeddings",
+        "label": "Ricerca a imbuto con le matrici Matryoshka",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

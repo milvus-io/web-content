@@ -2,7 +2,7 @@
 id: tune_consistency.md
 title: 一貫性レベル
 summary: >-
-  分散ベクタデータベースとして、Milvusは各ノードまたはレプリカが読み書きの際に同じデータにアクセスできることを保証するために、複数の一貫性レベルを提供しています。現在サポートされている一貫性レベルには、Strong、Bounded、Eventually、Sessionがあり、Boundedはデフォルトの一貫性レベルです。
+  分散ベクトルデータベースとして、Milvusは各ノードまたはレプリカが読み書きの際に同じデータにアクセスできることを保証するために、複数の一貫性レベルを提供しています。現在サポートされている一貫性レベルには、Strong、Bounded、Eventually、Sessionがあり、Boundedはデフォルトで使用される一貫性レベルです。
 ---
 <h1 id="Consistency-Level" class="common-anchor-header">一貫性レベル<button data-href="#Consistency-Level" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -47,8 +47,8 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/service-time-and-guarantee-time.png" alt="Service Time And Guarantee Time" class="doc-image" id="service-time-and-guarantee-time" />
    </span> <span class="img-wrapper"> <span>サービス時間と保証時間</span> </span></p>
-<p>上図に示すように、GuaranteeTsがServiceTimeより小さい場合、指定された時点より前のすべてのデータがディスクに完全に書き込まれていることを意味し、QueryNodeは直ちに検索操作を実行することができる。GuaranteeTsがServiceTimeより大きい場合、QueryNodeはServiceTimeがGuaranteeTsを超えるまで待ってからSearchオペレーションを実行しなければならない。</p>
-<p>ユーザは、クエリの精度とクエリの待ち時間をトレードオフする必要があります。ユーザが高い一貫性を要求し、クエリのレイテンシに敏感でない場合、GuaranteeTsを可能な限り大きな値に設定することができます。ユーザが検索結果を迅速に受け取り、クエリの精度に寛容である場合、GuaranteeTsを小さな値に設定することができます。</p>
+<p>上図に示すように、GuaranteeTsがServiceTimeより小さい場合、指定された時点より前のすべてのデータがディスクに完全に書き込まれていることを意味し、QueryNodeは直ちにSearchオペレーションを実行することができる。GuaranteeTsがServiceTimeより大きい場合、QueryNodeはServiceTimeがGuaranteeTsを超えるまで待ってからSearchオペレーションを実行しなければならない。</p>
+<p>ユーザは、クエリの精度とクエリの待ち時間をトレードオフする必要があります。ユーザが高い一貫性を要求し、クエリのレイテンシに敏感でない場合、GuaranteeTsを可能な限り大きな値に設定することができます。ユーザが検索結果を迅速に受信することを望み、クエリの精度に寛容である場合、GuaranteeTsを小さな値に設定することができます。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/consistency-level-illustrated.png" alt="Consistency Level Illustrated" class="doc-image" id="consistency-level-illustrated" />
@@ -155,6 +155,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -213,6 +214,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -273,6 +275,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;color like \&quot;red_%\&quot;&quot;,

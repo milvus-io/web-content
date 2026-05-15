@@ -37,9 +37,9 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>تثبيت SDK الخاص بلغتك. للحصول على التفاصيل، راجع <a href="/docs/ar/install-pymilvus.md">Python SDK</a> أو <a href="/docs/ar/install-java.md">Java SDK</a> أو <a href="/docs/ar/install-go.md">Go SDK</a> أو <a href="/docs/ar/install-node.md">Nodejs SDK</a>.</p></li>
+<li><p>تثبيت SDK الخاص بلغتك. للحصول على التفاصيل، راجع <a href="/docs/ar/v2.6.x/install-pymilvus.md">Python SDK</a> أو <a href="/docs/ar/v2.6.x/install-java.md">Java SDK</a> أو <a href="/docs/ar/v2.6.x/install-go.md">Go SDK</a> أو <a href="/docs/ar/v2.6.x/install-node.md">Nodejs SDK</a>.</p></li>
 <li><p>عنوان خادم Milvus (افتراضي محلي: <code translate="no">http://localhost:19530</code> ، منفذ الوكيل <strong>19530</strong>).</p></li>
-<li><p>إذا <a href="/docs/ar/authenticate.md">تم تمكين المصادقة،</a> قدم إما رمزًا <strong>مميزًا</strong> أو <strong>اسم مستخدم + كلمة مرور</strong>. يمكن أن يكون الرمز المميز <code translate="no">username:password</code> (على سبيل المثال، <code translate="no">root:Milvus</code>). راجع <a href="/docs/ar/authenticate.md">مصادقة وصول المستخدم</a> <a href="/docs/ar/users_and_roles.md">وإنشاء المستخدمين والأدوار</a> للحصول على التفاصيل.</p></li>
+<li><p>إذا <a href="/docs/ar/v2.6.x/authenticate.md">تم تمكين المصادقة،</a> قدم إما رمزًا <strong>مميزًا</strong> أو <strong>اسم مستخدم + كلمة مرور</strong>. يمكن أن يكون الرمز المميز <code translate="no">username:password</code> (على سبيل المثال، <code translate="no">root:Milvus</code>). راجع <a href="/docs/ar/v2.6.x/authenticate.md">مصادقة وصول المستخدم</a> <a href="/docs/ar/v2.6.x/users_and_roles.md">وإنشاء المستخدمين والأدوار</a> للحصول على التفاصيل.</p></li>
 </ul>
 <h2 id="Connect-by-URI-authentication-disabled" class="common-anchor-header">الاتصال بواسطة URI (تم تعطيل المصادقة)<button data-href="#Connect-by-URI-authentication-disabled" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -90,6 +90,7 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connect-with-credentials-authentication-enabled" class="common-anchor-header">الاتصال باستخدام بيانات الاعتماد (تم تمكين المصادقة)<button data-href="#Connect-with-credentials-authentication-enabled" class="anchor-icon" translate="no">
@@ -157,10 +158,11 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>تنسيق الرمز المميز هو <code translate="no">&quot;&lt;username&gt;:&lt;password&gt;&quot;</code>. تشير المستندات صراحةً إلى <code translate="no">root:Milvus</code> كبيانات اعتماد افتراضية، ويغطي دليل <a href="/docs/ar/users_and_roles.md">إنشاء المستخدمين والأدوار</a> إدارة المستخدمين.</p>
+<p>تنسيق الرمز المميز هو <code translate="no">&quot;&lt;username&gt;:&lt;password&gt;&quot;</code>. تشير المستندات صراحةً إلى <code translate="no">root:Milvus</code> كبيانات اعتماد افتراضية، ويغطي دليل <a href="/docs/ar/v2.6.x/users_and_roles.md">إنشاء المستخدمين والأدوار</a> إدارة المستخدمين.</p>
 </div>
 <h2 id="Configure-a-timeout" class="common-anchor-header">تكوين مهلة<button data-href="#Configure-a-timeout" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -221,7 +223,7 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-    -H <span class="hljs-string">&quot;Request-Timeout: 5&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     --max-time 7 \
     -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -304,12 +306,13 @@ err = c.UseDatabase(ctx, milvusclient.NewUseDatabaseOption(<span class="hljs-str
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     -d <span class="hljs-string">&#x27;{
       &quot;dbName&quot;: &quot;analytics&quot;
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>راجع دليل <a href="/docs/ar/manage_databases.md">قواعد البيانات</a> لإنشاء قواعد البيانات وإدراجها ووصفها، ولمهام إدارة قواعد البيانات الأوسع نطاقًا.</p>
+<p>راجع دليل <a href="/docs/ar/v2.6.x/manage_databases.md">قواعد البيانات</a> لإنشاء قواعد البيانات وإدراجها ووصفها، ولمهام إدارة قواعد البيانات الأوسع نطاقًا.</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">ما التالي<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -327,7 +330,7 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="/docs/ar/create-collection.md">إنشاء مجموعة</a></p></li>
-<li><p><a href="/docs/ar/insert-update-delete.md">إدراج الكيانات</a></p></li>
-<li><p><a href="/docs/ar/single-vector-search.md">البحث المتجه الأساسي</a></p></li>
+<li><p><a href="/docs/ar/v2.6.x/create-collection.md">إنشاء مجموعة</a></p></li>
+<li><p><a href="/docs/ar/v2.6.x/insert-update-delete.md">إدراج الكيانات</a></p></li>
+<li><p><a href="/docs/ar/v2.6.x/single-vector-search.md">البحث المتجه الأساسي</a></p></li>
 </ul>

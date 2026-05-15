@@ -115,7 +115,7 @@ summary: >-
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>クエリ・ベクターがすでにターゲット・コレクションに存在する場合は、検索前にそれらを取得する代わりに、<code translate="no">ids</code> 。詳細については、<a href="/docs/ja/primary-key-search.md">プライマリキー検索を</a>参照してください。</p>
+<p>クエリ・ベクタがすでにターゲット・コレクションに存在する場合は、検索前にそれらを取得する代わりに、<code translate="no">ids</code> 。詳細については、<a href="/docs/ja/primary-key-search.md">プライマリキー検索を</a>参照してください。</p>
 </div>
 <h3 id="Search-with-standard-filtering" class="common-anchor-header">標準フィルタリングによる検索<button data-href="#Search-with-standard-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -262,6 +262,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -448,6 +449,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

@@ -39,8 +39,8 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p>Sie haben Ihre Daten bereits vorbereitet und in den Milvus-Bucket gelegt.</p>
-<p>Falls nicht, sollten Sie zuerst <strong>RemoteBulkWriter</strong> verwenden, um Ihre Daten vorzubereiten, und sicherstellen, dass die vorbereiteten Daten bereits in den Milvus-Bucket der MinIO-Instanz übertragen wurden, die zusammen mit Ihrer Milvus-Instanz gestartet wurde. Details hierzu finden Sie unter <a href="/docs/de/prepare-source-data.md">Quelldaten vorbereiten</a>.</p></li>
-<li><p>Sie haben bereits eine Sammlung mit dem Schema erstellt, das Sie zur Vorbereitung Ihrer Daten verwenden. Falls nicht, lesen Sie bitte den Abschnitt <a href="/docs/de/manage-collections.md">Verwalten von Sammlungen</a>.</p></li>
+<p>Falls nicht, sollten Sie zuerst <strong>RemoteBulkWriter</strong> verwenden, um Ihre Daten vorzubereiten, und sicherstellen, dass die vorbereiteten Daten bereits in den Milvus-Bucket der MinIO-Instanz übertragen wurden, die zusammen mit Ihrer Milvus-Instanz gestartet wurde. Details hierzu finden Sie unter <a href="/docs/de/v2.6.x/prepare-source-data.md">Quelldaten vorbereiten</a>.</p></li>
+<li><p>Sie haben bereits eine Sammlung mit dem Schema erstellt, das Sie zur Vorbereitung Ihrer Daten verwenden. Falls nicht, lesen Sie bitte den Abschnitt <a href="/docs/de/v2.6.x/manage-collections.md">Verwalten von Sammlungen</a>.</p></li>
 </ul>
 <div class="language-python">
 <p>Das folgende Code-Snippet erstellt eine einfache Sammlung mit dem angegebenen Schema. Weitere Informationen zu Parametern finden Sie unter <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> und <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> in der SDK-Referenz.</p>
@@ -112,6 +112,7 @@ job_id = resp.json()[<span class="hljs-string">&#x27;data&#x27;</span>][<span cl
 
 curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&quot; \
 --header &quot;Content-Type: application/json&quot; \
+--header &quot;Request-Timeout: 10&quot; \
 --data-raw &#x27;{
     &quot;files&quot;: [
         [
@@ -225,6 +226,7 @@ resp = get_import_progress(
 
 curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&quot; \
 --header &quot;Content-Type: application/json&quot; \
+--header &quot;Request-Timeout: 10&quot; \
 --data-raw &#x27;{
     &quot;jobId&quot;: &quot;449839014328146739&quot;
 }&#x27;
@@ -309,6 +311,7 @@ resp = list_import_jobs(
 
 curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot; \
 --header &quot;Content-Type: application/json&quot; \
+--header &quot;Request-Timeout: 10&quot; \
 --data-raw &#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;
 }&#x27;
@@ -366,7 +369,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bevor Sie Daten importieren, vergewissern Sie sich, dass Sie die Beschränkungen in Bezug auf die folgenden Milvus-Verhaltensweisen beachtet haben:</p>
+    </button></h2><p>Bevor Sie Daten importieren, vergewissern Sie sich, dass Sie die Beschränkungen in Bezug auf die folgenden Milvus-Verhaltensweisen zur Kenntnis genommen haben:</p>
 <ul>
 <li><p>Einschränkungen bezüglich des Ladeverhaltens:</p>
 <ul>
@@ -402,4 +405,4 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Wir empfehlen dringend, die Funktion für den Import mehrerer Dateien zu verwenden, mit der Sie mehrere Dateien in einer einzigen Anfrage hochladen können. Diese Methode vereinfacht nicht nur den Importprozess, sondern steigert auch die Importleistung erheblich. Indem Sie Ihre Uploads konsolidieren, können Sie den Zeitaufwand für die Datenverwaltung verringern und Ihren Arbeitsablauf effizienter gestalten.</p>
+    </button></h2><p>Wir empfehlen dringend die Verwendung der Funktion für den Import mehrerer Dateien, mit der Sie mehrere Dateien in einer einzigen Anfrage hochladen können. Diese Methode vereinfacht nicht nur den Importprozess, sondern steigert auch die Importleistung erheblich. Indem Sie Ihre Uploads konsolidieren, können Sie den Zeitaufwand für die Datenverwaltung verringern und Ihren Arbeitsablauf effizienter gestalten.</p>

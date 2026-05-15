@@ -51,7 +51,7 @@ summary: >-
 <p>A pesquisa de texto completo em Milvus segue o fluxo de trabalho abaixo:</p>
 <ol>
 <li><p><strong>Entrada de texto em bruto</strong>: Insere documentos de texto ou fornece uma consulta utilizando texto simples, sem necessidade de modelos de incorporação.</p></li>
-<li><p><strong>Análise de texto</strong>: Milvus usa um <a href="/docs/pt/analyzer-overview.md">analisador</a> para processar o texto em termos significativos que podem ser indexados e pesquisados.</p></li>
+<li><p><strong>Análise de texto</strong>: O Milvus utiliza um <a href="/docs/pt/analyzer-overview.md">analisador</a> para processar o texto em termos significativos que podem ser indexados e pesquisados.</p></li>
 <li><p><strong>Processamento da função BM25</strong>: Uma função incorporada transforma estes termos em representações vectoriais esparsas optimizadas para a pontuação BM25.</p></li>
 <li><p><strong>Armazenamento de colecções</strong>: Milvus armazena os embeddings esparsos resultantes numa coleção para uma rápida recuperação e classificação.</p></li>
 <li><p><strong>Pontuação de relevância BM25</strong>: No momento da pesquisa, o Milvus aplica a função de pontuação BM25 para calcular a relevância do documento e retornar os resultados classificados que melhor correspondem aos termos da consulta.</p></li>
@@ -455,7 +455,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>O algoritmo utilizado para construir e consultar o índice. Valores válidos:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (predefinição): Processamento optimizado de consultas Document-at-a-Time (DAAT) utilizando o algoritmo MaxScore. O MaxScore proporciona um melhor desempenho para valores <em>k</em> elevados ou consultas com muitos termos, ignorando termos e documentos que provavelmente terão um impacto mínimo. Consegue-o dividindo os termos em grupos essenciais e não essenciais com base nas suas pontuações máximas de impacto, concentrando-se nos termos que podem contribuir para os resultados do top-k.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Processamento optimizado de consultas DAAT utilizando o algoritmo WAND. O WAND avalia menos documentos atingidos, aproveitando as pontuações de impacto máximo para ignorar documentos não competitivos, mas tem uma sobrecarga mais elevada por hit. Isso faz com que o WAND seja mais eficiente para consultas com valores <em>k</em> pequenos ou consultas curtas, em que a omissão é mais viável.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Processamento de consultas Basic Term-at-a-Time (TAAT). Embora seja mais lento em comparação com <code translate="no">DAAT_MAXSCORE</code> e <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> oferece uma vantagem única. Ao contrário dos algoritmos DAAT, que utilizam pontuações de impacto máximo armazenadas em cache que permanecem estáticas independentemente das alterações ao parâmetro de coleção global (avgdl), o <code translate="no">TAAT_NAIVE</code> adapta-se dinamicamente a essas alterações.</p></li></ul></td>
+     <td><p>O algoritmo utilizado para construir e consultar o índice. Valores válidos:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (predefinição): Processamento optimizado de consultas Document-at-a-Time (DAAT) utilizando o algoritmo MaxScore. O MaxScore proporciona um melhor desempenho para valores <em>k</em> elevados ou consultas com muitos termos, ignorando termos e documentos que provavelmente terão um impacto mínimo. Consegue-o dividindo os termos em grupos essenciais e não essenciais com base nas suas pontuações máximas de impacto, concentrando-se nos termos que podem contribuir para os resultados do top-k.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Processamento optimizado de consultas DAAT utilizando o algoritmo WAND. O WAND avalia menos documentos atingidos, aproveitando as pontuações de impacto máximo para ignorar documentos não competitivos, mas tem uma sobrecarga mais elevada por hit. Isso torna o WAND mais eficiente para consultas com valores <em>k</em> pequenos ou consultas curtas, em que pular é mais viável.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Processamento de consultas Basic Term-at-a-Time (TAAT). Embora seja mais lento em comparação com <code translate="no">DAAT_MAXSCORE</code> e <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> oferece uma vantagem única. Ao contrário dos algoritmos DAAT, que utilizam pontuações de impacto máximo armazenadas em cache que permanecem estáticas independentemente das alterações ao parâmetro de coleção global (avgdl), o <code translate="no">TAAT_NAIVE</code> adapta-se dinamicamente a essas alterações.</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
@@ -521,6 +521,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -582,6 +583,7 @@ client.insert(InsertReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;text&quot;: &quot;information retrieval is a field of study.&quot;},
@@ -670,6 +672,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data-raw <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

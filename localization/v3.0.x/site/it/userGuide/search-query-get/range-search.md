@@ -38,7 +38,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Quando si esegue una richiesta di ricerca per intervallo, Milvus utilizza i vettori più simili al vettore della query dai risultati della ricerca RNA come centro, con il <strong>raggio</strong> specificato nella richiesta di ricerca come raggio del cerchio esterno e il <strong>range_filter</strong> come raggio del cerchio interno per disegnare due cerchi concentrici. Verranno restituiti tutti i vettori con punteggi di somiglianza che rientrano nell'area anulare formata da questi due cerchi concentrici. In questo caso, il <strong>range_filter</strong> può essere impostato a <strong>0</strong>, indicando che verranno restituite tutte le entità che rientrano nel punteggio di somiglianza (raggio) specificato.</p>
+    </button></h2><p>Quando si esegue una richiesta di ricerca per intervallo, Milvus utilizza i vettori più simili al vettore della query dai risultati della ricerca RNA come centro, con il <strong>raggio</strong> specificato nella richiesta di ricerca come raggio del cerchio esterno e il <strong>range_filter</strong> come raggio del cerchio interno per disegnare due cerchi concentrici. Verranno restituiti tutti i vettori con punteggi di somiglianza che rientrano nell'area anulare formata da questi due cerchi concentrici. In questo caso, <strong>range_filter</strong> può essere impostato a <strong>0</strong>, indicando che verranno restituite tutte le entità che rientrano nel punteggio di somiglianza (raggio) specificato.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/range-search.png" alt="Range Search" class="doc-image" id="range-search" />
@@ -79,7 +79,7 @@ summary: >-
    <tr>
      <td><p><code translate="no">HAMMING</code></p></td>
      <td><p>Una distanza di Hamming più piccola indica una maggiore somiglianza.</p></td>
-     <td><p>Per ignorare le incorporazioni vettoriali più simili, accertarsi che</p><p><code translate="no">range_filter</code> &lt;= distanza &lt; <code translate="no">radius</code></p></td>
+     <td><p>Per ignorare le incorporazioni vettoriali più simili, verificare che</p><p><code translate="no">range_filter</code> &lt;= distanza &lt; <code translate="no">radius</code></p></td>
    </tr>
 </table>
 <h2 id="Examples" class="common-anchor-header">Esempi<button data-href="#Examples" class="anchor-icon" translate="no">
@@ -233,6 +233,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -250,5 +251,5 @@ curl --request POST \
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Se i vettori di interrogazione esistono già nella collezione di destinazione, si può usare <code translate="no">ids</code> invece di recuperarli prima della ricerca. Per maggiori dettagli, consultare la sezione <a href="/docs/it/primary-key-search.md">Ricerca con chiave primaria</a>.</p>
+<p>Se i vettori di query esistono già nella collezione di destinazione, si può usare <code translate="no">ids</code> invece di recuperarli prima della ricerca. Per maggiori dettagli, consultare la sezione <a href="/docs/it/primary-key-search.md">Ricerca con chiave primaria</a>.</p>
 </div>

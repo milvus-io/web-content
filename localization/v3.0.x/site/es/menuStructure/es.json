@@ -1855,7 +1855,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Rastreo de Jaeger",
+                "label": "Seguimiento de Jaeger",
                 "id": "config_jaeger_tracing.md",
                 "order": 0,
                 "children": []
@@ -2053,7 +2053,7 @@
       {
         "label": "Observador de aves",
         "id": "birdwatcher",
-        "order": 2,
+        "order": 3,
         "children": [
           {
             "label": "Visión general",
@@ -2071,6 +2071,37 @@
             "label": "Guías de uso",
             "id": "birdwatcher_usage_guides.md",
             "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Milvus CDC",
+        "id": "milvus_cdc",
+        "order": 2,
+        "children": [
+          {
+            "label": "Visión general",
+            "id": "milvus_cdc_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Configurar la replicación CDC",
+            "id": "set_up_cdc_replication.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Conmutación",
+            "id": "cdc_switchover.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Conmutación por error",
+            "id": "cdc_failover.md",
+            "order": 3,
             "children": []
           }
         ]

@@ -1979,7 +1979,7 @@
       {
         "label": "Pengamat burung",
         "id": "birdwatcher",
-        "order": 2,
+        "order": 3,
         "children": [
           {
             "label": "Ikhtisar",
@@ -1997,6 +1997,37 @@
             "label": "Panduan Penggunaan",
             "id": "birdwatcher_usage_guides.md",
             "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Milvus CDC",
+        "id": "milvus_cdc",
+        "order": 2,
+        "children": [
+          {
+            "label": "Ikhtisar",
+            "id": "milvus_cdc_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Mengatur Replikasi CDC",
+            "id": "set_up_cdc_replication.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Peralihan",
+            "id": "cdc_switchover.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Failover",
+            "id": "cdc_failover.md",
+            "order": 3,
             "children": []
           }
         ]

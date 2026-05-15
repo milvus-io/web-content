@@ -349,7 +349,7 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Tras definir el esquema de la colección, el siguiente paso es configurar los índices vectoriales y especificar las métricas de similitud. En el ejemplo dado:</p>
+    </button></h3><p>Tras definir el esquema de la colección, el siguiente paso es configurar los índices vectoriales y especificar las métricas de similitud. En el ejemplo dado</p>
 <ul>
 <li><p><code translate="no">text_dense_index</code>: se crea un índice de tipo <code translate="no">AUTOINDEX</code> con tipo de métrica <code translate="no">IP</code> para el campo vectorial texto denso.</p></li>
 <li><p><code translate="no">text_sparse_index</code>se utiliza un índice del tipo<code translate="no">SPARSE_INVERTED_INDEX</code>con el tipo métrico <code translate="no">BM25</code> para el campo vectorial de texto disperso.</p></li>
@@ -520,6 +520,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -548,7 +549,7 @@ curl --request POST \
 <li><p><code translate="no">text_dense</code>una lista de 768 valores de coma flotante que representan la incrustación densa de la descripción del texto</p></li>
 <li><p><code translate="no">image_dense</code>una lista de 512 valores en coma flotante que representan la incrustación densa de la imagen del producto.</p></li>
 </ul>
-<p>Puede utilizar el mismo modelo o modelos diferentes para generar incrustaciones densas para cada campo. En este ejemplo, las dos incrustaciones densas tienen dimensiones diferentes, lo que sugiere que fueron generadas por modelos diferentes. Cuando defina cada búsqueda más adelante, asegúrese de utilizar el modelo correspondiente para generar la incrustación de consulta adecuada.</p>
+<p>Puede utilizar el mismo modelo o modelos diferentes para generar las incrustaciones densas de cada campo. En este ejemplo, las dos incrustaciones densas tienen dimensiones diferentes, lo que sugiere que fueron generadas por modelos diferentes. Cuando defina cada búsqueda más adelante, asegúrese de utilizar el modelo correspondiente para generar la incrustación de consulta adecuada.</p>
 <p>Dado que este ejemplo utiliza la función BM25 incorporada para generar incrustaciones dispersas a partir del campo de texto, no es necesario que proporcione vectores dispersos manualmente. Sin embargo, si opta por no utilizar BM25, deberá precalcular y proporcionar los vectores dispersos usted mismo.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -655,6 +656,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;text&quot;: &quot;Red cotton t-shirt with round neck&quot; , &quot;text_dense&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, ...], &quot;image_dense&quot;: [0.6366019600530924, -0.09323198122475052, ...]},
@@ -849,7 +851,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Para combinar y jerarquizar los conjuntos de resultados de búsqueda de RNA, es esencial seleccionar una estrategia de jerarquización adecuada. Milvus ofrece varios tipos de estrategias de reordenación. Para obtener más información sobre estos mecanismos de reordenación, consulte <a href="/docs/es/weighted-ranker.md">Weighted Ranker</a> o <a href="/docs/es/rrf-ranker.md">RRF Ranker</a>.</p>
+    </button></h3><p>Para fusionar y reordenar los conjuntos de resultados de búsqueda de RNA, es esencial seleccionar una estrategia de reordenación adecuada. Milvus ofrece varios tipos de estrategias de reordenación. Para más detalles sobre estos mecanismos de reordenación, consulte <a href="/docs/es/weighted-ranker.md">Weighted Ranker</a> o <a href="/docs/es/rrf-ranker.md">RRF Ranker</a>.</p>
 <p>En este ejemplo, dado que no hay un énfasis particular en consultas de búsqueda específicas, procederemos con la estrategia RRFRanker.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -988,6 +990,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/hybrid_search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;search\&quot;: <span class="hljs-variable">${req}</span>,
@@ -1001,7 +1004,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>A continuación se muestra el resultado:</p>
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;[&#x27;id: 1, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 2, distance: 0.006422005593776703, entity: {}&#x27;]&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>Con el parámetro <code translate="no">limit=2</code> especificado para la Búsqueda Híbrida, Milvus ordenará los seis resultados obtenidos de las tres búsquedas. Finalmente, devolverá sólo los dos resultados más similares.</p>
+<p>Con el parámetro <code translate="no">limit=2</code> especificado para la Búsqueda Híbrida, Milvus ordenará los seis resultados obtenidos de las tres búsquedas. Al final, sólo devolverá los dos resultados más similares.</p>
 <h2 id="Advanced-usage" class="common-anchor-header">Uso avanzado<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

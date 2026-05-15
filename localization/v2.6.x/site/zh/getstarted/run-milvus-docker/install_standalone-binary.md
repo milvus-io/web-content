@@ -38,7 +38,7 @@ title: 使用 RPM/DEB 软件包安装 Milvus 单机版
       </svg>
     </button></h2><ul>
 <li>已安装 libstdc++ 8.5.0 或更高版本。</li>
-<li>安装前<a href="/docs/zh/prerequisite-docker.md">请检查硬件和软件要求</a>。</li>
+<li>安装前<a href="/docs/zh/v2.6.x/prerequisite-docker.md">请检查硬件和软件要求</a>。</li>
 </ul>
 <h2 id="Download-the-RPMDEB-Package" class="common-anchor-header">下载 RPM/DEB 软件包<button data-href="#Download-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -55,7 +55,7 @@ title: 使用 RPM/DEB 软件包安装 Milvus 单机版
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>你可以从<a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.15">Milvus Releases 页面</a>根据你的系统架构下载 RPM/DEB 包。</p>
+    </button></h2><p>你可以从<a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.16">Milvus Releases 页面</a>根据你的系统架构下载 RPM/DEB 包。</p>
 <ul>
 <li>对于 x86_64/amd64，下载<strong>milvus_2.6.9-1_amd64.deb</strong>或<strong>milvus_2.6.9-1_amd64.rpm</strong>软件包。</li>
 <li>对于 ARM64，请下载<strong>milvus_2.6.9-1_arm64.deb</strong>或<strong>milvus_2.6.9-1_arm64.rpm 软件包</strong>。</li>
@@ -133,7 +133,7 @@ dpkg -l | grep milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>你可以修改<code translate="no">/etc/milvus/configs/milvus.yaml</code> 文件中的 Milvus 配置。例如，要将<code translate="no">proxy.healthCheckTimeout</code> 更改为<code translate="no">1000</code> ms，可以搜索目标参数并进行相应修改。有关适用的配置项目，请参阅<a href="/docs/zh/system_configuration.md">系统配置</a>。</p>
+    </button></h2><p>你可以修改<code translate="no">/etc/milvus/configs/milvus.yaml</code> 文件中的 Milvus 配置。例如，要将<code translate="no">proxy.healthCheckTimeout</code> 更改为<code translate="no">1000</code> ms，可以搜索目标参数并进行相应修改。有关适用的配置项目，请参阅<a href="/docs/zh/v2.6.x/system_configuration.md">系统配置</a>。</p>
 <h2 id="Stop-Milvus-Standalone" class="common-anchor-header">停止 Milvus Standalone<button data-href="#Stop-Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -191,27 +191,27 @@ dpkg -l | grep milvus
       </svg>
     </button></h2><p>安装 Milvus Standalone 后，你可以</p>
 <ul>
-<li><p>查看<a href="/docs/zh/quickstart.md">快速入门</a>，了解 Milvus 的功能。</p></li>
+<li><p>查看<a href="/docs/zh/v2.6.x/quickstart.md">快速入门</a>，了解 Milvus 的功能。</p></li>
 <li><p>学习 Milvus 的基本操作：</p>
 <ul>
-<li><a href="/docs/zh/manage_databases.md">管理数据库</a></li>
-<li><a href="/docs/zh/manage-collections.md">管理 Collections</a></li>
-<li><a href="/docs/zh/manage-partitions.md">管理分区</a></li>
-<li><a href="/docs/zh/insert-update-delete.md">插入、倒置和删除</a></li>
-<li><a href="/docs/zh/single-vector-search.md">单向量搜索</a></li>
-<li><a href="/docs/zh/multi-vector-search.md">混合搜索</a></li>
+<li><a href="/docs/zh/v2.6.x/manage_databases.md">管理数据库</a></li>
+<li><a href="/docs/zh/v2.6.x/manage-collections.md">管理 Collections</a></li>
+<li><a href="/docs/zh/v2.6.x/manage-partitions.md">管理分区</a></li>
+<li><a href="/docs/zh/v2.6.x/insert-update-delete.md">插入、倒置和删除</a></li>
+<li><a href="/docs/zh/v2.6.x/single-vector-search.md">单向量搜索</a></li>
+<li><a href="/docs/zh/v2.6.x/multi-vector-search.md">混合搜索</a></li>
 </ul></li>
-<li><p><a href="/docs/zh/upgrade_milvus_cluster-helm.md">使用 Helm 图表升级 Milvus</a>。</p></li>
-<li><p><a href="/docs/zh/scaleout.md">扩展你的 Milvus 集群</a>。</p></li>
+<li><p><a href="/docs/zh/v2.6.x/upgrade_milvus_cluster-helm.md">使用 Helm 图表升级 Milvus</a>。</p></li>
+<li><p><a href="/docs/zh/v2.6.x/scaleout.md">扩展你的 Milvus 集群</a>。</p></li>
 <li><p>在云上部署你的 Milvu 集群：</p>
 <ul>
-<li><a href="/docs/zh/eks.md">亚马逊 EKS</a></li>
-<li><a href="/docs/zh/gcp.md">谷歌云</a></li>
-<li><a href="/docs/zh/azure.md">微软 Azure</a></li>
+<li><a href="/docs/zh/v2.6.x/eks.md">亚马逊 EKS</a></li>
+<li><a href="/docs/zh/v2.6.x/gcp.md">谷歌云</a></li>
+<li><a href="/docs/zh/v2.6.x/azure.md">微软 Azure</a></li>
 </ul></li>
-<li><p>探索<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>，一个用于 Milvus 可观察性和管理的直观 Web 界面。</p></li>
-<li><p>探索<a href="/docs/zh/milvus_backup_overview.md">Milvus 备份</a>，一个用于 Milvus 数据备份的开源工具。</p></li>
-<li><p>探索<a href="/docs/zh/birdwatcher_overview.md">Birdwatcher</a>，用于调试 Milvus 和动态配置更新的开源工具。</p></li>
+<li><p>探索<a href="/docs/zh/v2.6.x/milvus-webui.md">Milvus WebUI</a>，一个用于 Milvus 可观察性和管理的直观 Web 界面。</p></li>
+<li><p>探索<a href="/docs/zh/v2.6.x/milvus_backup_overview.md">Milvus 备份</a>，一个用于 Milvus 数据备份的开源工具。</p></li>
+<li><p>探索<a href="/docs/zh/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>，用于调试 Milvus 和动态配置更新的开源工具。</p></li>
 <li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>，一个用于直观管理 Milvus 的开源图形用户界面工具。</p></li>
-<li><p><a href="/docs/zh/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
+<li><p><a href="/docs/zh/v2.6.x/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
 </ul>

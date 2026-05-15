@@ -4,7 +4,7 @@ title: Vektor Biner
 summary: >-
   Vektor biner adalah bentuk khusus representasi data yang mengubah vektor
   floating-point berdimensi tinggi tradisional menjadi vektor biner yang hanya
-  berisi 0 dan 1. Transformasi ini tidak hanya memampatkan ukuran vektor tetapi
+  berisi 0 dan 1. Transformasi ini tidak hanya memadatkan ukuran vektor tetapi
   juga mengurangi biaya penyimpanan dan komputasi dengan tetap mempertahankan
   informasi semantik. Ketika ketepatan untuk fitur yang tidak penting tidak
   diperlukan, vektor biner dapat secara efektif mempertahankan sebagian besar
@@ -337,6 +337,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -448,6 +449,7 @@ client.<span class="hljs-title function_">insert</span>({
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;data\&quot;: <span class="hljs-variable">$data</span>,
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;
@@ -560,6 +562,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$data</span>,

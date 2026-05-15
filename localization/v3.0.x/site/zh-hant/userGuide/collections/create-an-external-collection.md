@@ -37,7 +37,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在典型的人工智能資料管道中，使用者可能已經將資料以 Parquet 或其他格式儲存在他們的儲存系統中，例如 AWS S3。為了讓 Milvus 使用這些外部儲存的資料，使用者通常需要使用抽取-轉換-載入 (ETL) 管道將資料匯入 Milvus 自己的儲存系統。</p>
+    </button></h2><p>在典型的人工智能資料管道中，使用者可能已將資料以 Parquet 或其他格式儲存在他們的儲存系統中，例如 AWS S3。為了讓 Milvus 使用這些外部儲存的資料，使用者通常需要使用抽取-轉換-載入 (ETL) 管道將資料匯入 Milvus 自己的儲存系統。</p>
 <p>這種將您的資料帶到 Milvus 的工作流程會產生難以同步的冗餘資料，並增加工程維護的負擔，以確保資料的一致性。</p>
 <p>
   
@@ -313,7 +313,7 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>此選項適用於您的組織使用不同的 AWS 帳戶來管理 Milvus 叢集和存放目標資料檔案的儲存桶。</p>
+    </button></h3><p>當您的組織使用不同的 AWS 帳戶來管理 Milvus 叢集和存放目標資料檔案的儲存桶時，此選項適用。</p>
 <p>在這種情況下，水桶擁有者應該建立一個 IAM 角色，以</p>
 <ul>
 <li><p>附加<code translate="no">AmazonS3FullAccess</code> 或針對水桶存取的更精細政策。</p></li>
@@ -406,7 +406,7 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.role_arn</code></p></td>
-     <td><p>從儲存桶擁有者取得的 IAM 角色 ARN。</p></td>
+     <td><p>從水桶所有者取得的 IAM 角色 ARN。</p></td>
      <td><p><code translate="no">arn:aws:iam::306787000000:role/...</code></p></td>
    </tr>
    <tr>
@@ -589,6 +589,7 @@ err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span 
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${PROJECT_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;dbName\&quot;: \&quot;my_database\&quot;,
     \&quot;collectionName\&quot;: \&quot;test_collection\&quot;,
@@ -704,6 +705,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${PROJECT_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;dbName\&quot;: \&quot;my_database\&quot;,
     \&quot;collectionName\&quot;: \&quot;test_collection\&quot;,
@@ -792,6 +794,7 @@ jobID := refreshResult.JobID
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${PROJECT_ENDPOINT}</span>/v2/vectordb/jobs/external_collection/refresh&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;dbName\&quot;: \&quot;my_database\&quot;,
     \&quot;collectionName\&quot;: \&quot;test_collection\&quot;,
@@ -824,4 +827,4 @@ jobID := refreshResult.JobID
         ></path>
       </svg>
     </button></h2><p>一旦您刷新了外部資料集，您就可以載入和釋放資料集，並在外部資料集中執行相似性搜尋和查詢，就像在任何受管理的資料集中一樣，除了用於隨選運算的資料庫中的資料集必須附加到隨選叢集以進行搜尋和查詢。</p>
-<p>在進行搜尋、查詢、獲取和混合搜尋等 DQL 作業之前，您需要建立一個會話，以附加隨選群集的計算資源。</p>
+<p>在執行搜尋、查詢、獲取和混合搜尋等 DQL 作業之前，您需要建立一個會話，以附加隨選群集的計算資源。</p>

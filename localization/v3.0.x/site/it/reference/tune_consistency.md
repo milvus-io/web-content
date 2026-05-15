@@ -4,8 +4,8 @@ title: Livello di coerenza
 summary: >-
   Come database vettoriale distribuito, Milvus offre diversi livelli di coerenza
   per garantire che ogni nodo o replica possa accedere agli stessi dati durante
-  le operazioni di lettura e scrittura. Attualmente i livelli di consistenza
-  supportati sono Strong, Bounded, Eventually e Session, con Bounded come
+  le operazioni di lettura e scrittura. Attualmente, i livelli di consistenza
+  supportati sono Strong, Bounded, Eventually e Session, mentre Bounded è il
   livello di consistenza predefinito.
 ---
 <h1 id="Consistency-Level" class="common-anchor-header">Livello di coerenza<button data-href="#Consistency-Level" class="anchor-icon" translate="no">
@@ -40,7 +40,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvus è un sistema che separa l'archiviazione dal calcolo. In questo sistema, i <strong>DataNode</strong> sono responsabili della persistenza dei dati e li memorizzano in uno storage distribuito di oggetti, come MinIO/S3. I <strong>QueryNode</strong> gestiscono attività di calcolo come la ricerca. Queste attività comportano l'elaborazione di <strong>dati batch</strong> e di <strong>dati in streaming</strong>. In parole povere, i dati batch possono essere intesi come dati che sono già stati memorizzati nello storage a oggetti, mentre i dati in streaming si riferiscono a dati che non sono ancora stati memorizzati nello storage a oggetti. A causa della latenza di rete, i QueryNode spesso non dispongono dei dati di streaming più recenti. Senza ulteriori salvaguardie, l'esecuzione della ricerca direttamente sui dati in streaming può comportare la perdita di molti punti di dati non impegnati, compromettendo l'accuratezza dei risultati della ricerca.</p>
-<p>Milvus Commercial Edition è un sistema che separa l'archiviazione dal calcolo. In questo sistema, i DataNode sono responsabili della persistenza dei dati e li memorizzano in uno storage a oggetti distribuito, come MinIO/S3. I QueryNode gestiscono attività di calcolo come la ricerca. Queste attività comportano l'elaborazione di dati batch e di dati in streaming. In parole povere, i dati batch possono essere intesi come dati che sono già stati memorizzati nello storage a oggetti, mentre i dati in streaming si riferiscono a dati che non sono ancora stati memorizzati nello storage a oggetti. A causa della latenza di rete, i QueryNode spesso non dispongono dei dati di streaming più recenti. Senza ulteriori salvaguardie, l'esecuzione della ricerca direttamente sui dati in streaming può comportare la perdita di molti punti di dati non impegnati, compromettendo l'accuratezza dei risultati della ricerca.</p>
+<p>Milvus Commercial Edition è un sistema che separa l'archiviazione dal calcolo. In questo sistema, i DataNodes sono responsabili della persistenza dei dati e li memorizzano in uno storage a oggetti distribuito, come MinIO/S3. I QueryNode gestiscono attività di calcolo come la ricerca. Queste attività comportano l'elaborazione di dati batch e di dati in streaming. In parole povere, i dati batch possono essere intesi come dati che sono già stati memorizzati nello storage a oggetti, mentre i dati in streaming si riferiscono a dati che non sono ancora stati memorizzati nello storage a oggetti. A causa della latenza di rete, i QueryNode spesso non dispongono dei dati di streaming più recenti. Senza ulteriori salvaguardie, l'esecuzione della ricerca direttamente sui dati in streaming può comportare la perdita di molti punti di dati non impegnati, compromettendo l'accuratezza dei risultati della ricerca.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/batch-data-and-streaming-data.png" alt="Batch Data And Streaming Data" class="doc-image" id="batch-data-and-streaming-data" />
@@ -52,7 +52,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/service-time-and-guarantee-time.png" alt="Service Time And Guarantee Time" class="doc-image" id="service-time-and-guarantee-time" />
    </span> <span class="img-wrapper"> <span>Tempo di servizio e tempo di garanzia</span> </span></p>
 <p>Come mostrato nella figura precedente, se GuaranteeTs è inferiore a ServiceTime, significa che tutti i dati precedenti al momento specificato sono stati completamente scritti su disco, consentendo ai QueryNodes di eseguire immediatamente l'operazione di ricerca. Quando GuaranteeTs è maggiore di ServiceTime, i QueryNodes devono aspettare che ServiceTime superi GuaranteeTs prima di poter eseguire l'operazione di ricerca.</p>
-<p>Gli utenti devono trovare un compromesso tra l'accuratezza della query e la sua latenza. Se gli utenti hanno elevati requisiti di coerenza e non sono sensibili alla latenza delle query, possono impostare GuaranteeTs su un valore il più grande possibile; se gli utenti desiderano ricevere rapidamente i risultati della ricerca e sono più tolleranti nei confronti dell'accuratezza delle query, allora GuaranteeTs può essere impostato su un valore più piccolo.</p>
+<p>Gli utenti devono trovare un compromesso tra l'accuratezza della query e la sua latenza. Se gli utenti hanno elevati requisiti di coerenza e non sono sensibili alla latenza delle query, possono impostare GuaranteeTs su un valore il più grande possibile; se gli utenti desiderano ricevere rapidamente i risultati della ricerca e sono più tolleranti nei confronti dell'accuratezza delle query, allora GuaranteeTs può essere impostato su un valore inferiore.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/consistency-level-illustrated.png" alt="Consistency Level Illustrated" class="doc-image" id="consistency-level-illustrated" />
@@ -159,6 +159,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -217,6 +218,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -277,6 +279,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;color like \&quot;red_%\&quot;&quot;,

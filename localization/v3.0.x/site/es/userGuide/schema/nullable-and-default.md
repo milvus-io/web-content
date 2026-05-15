@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus admite campos anulables, que permiten que un valor de campo falte o se establezca explícitamente como NULL. La anulabilidad se define a nivel de esquema y se aplica de forma coherente en todas las operaciones de ingestión, indexación, búsqueda y consulta de datos.</p>
+    </button></h1><p>Milvus admite campos anulables, que permiten que un valor de campo falte o se establezca explícitamente como NULL. La anulabilidad se define a nivel de esquema y se aplica de forma coherente en todas las operaciones de ingesta, indexación, búsqueda y consulta de datos.</p>
 <p>Utilice campos anulables cuando:</p>
 <ul>
 <li>Los datos se ingieren desde sistemas externos que permiten valores omitidos.</li>
@@ -72,7 +72,7 @@ summary: >-
 <p>Si un campo no está definido como anulable (el comportamiento por defecto), cada entidad debe proporcionar un valor válido para ese campo. Si se omite el campo o se le asigna explícitamente un valor NULL, la operación de inserción o importación fallará.</p>
 <p>El atributo nullable se admite tanto para <strong>campos escalares como vectoriales</strong> en un esquema de colección. Sin embargo, los campos Array of Structs no admiten el atributo nullable.</p>
 <div class="alert note">
-<p>La anulabilidad determina si un valor de campo puede faltar; no define qué valor se utiliza cuando falta un campo.</p>
+<p>La anulabilidad determina si puede faltar el valor de un campo; no define qué valor se utiliza cuando falta un campo.</p>
 <ul>
 <li>Si se configura un campo anulable sin un valor por defecto, al omitir el campo se almacena un valor NULL.</li>
 <li>Si se configura un valor por defecto, Milvus puede almacenar el valor por defecto en su lugar. Para más detalles, consulte <a href="/docs/es/default-values.md">Valores por defecto</a>.</li>
@@ -236,6 +236,7 @@ curl --request POST \
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: {
@@ -376,6 +377,7 @@ _, err := client.Insert(ctx, milvusclient.NewRowBasedInsertOption(<span class="h
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -497,6 +499,7 @@ _, err = client.LoadCollection(ctx, milvusclient.NewLoadCollectionOption(<span c
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;indexParams&quot;: [
@@ -512,6 +515,7 @@ curl --request POST \
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/load&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{&quot;collectionName&quot;: &quot;my_collection&quot;}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>En este punto</p>
@@ -615,6 +619,7 @@ fmt.Println(resultSets)
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [[0.1, 0.2, 0.3, 0.4]],
@@ -707,7 +712,7 @@ fmt.Println(resultSets)
 <p><strong>Puntos clave:</strong></p>
 <ul>
 <li>Cuando un campo tiene un valor por defecto no NULL, ese valor se utiliza independientemente de si <code translate="no">nullable</code> está activado.</li>
-<li>Cuando <code translate="no">nullable=True</code> pero no se establece un valor por defecto, el campo almacena NULL.</li>
+<li>Cuando <code translate="no">nullable=True</code> pero no se establece ningún valor por defecto, el campo almacena NULL.</li>
 <li>Cuando <code translate="no">nullable=False</code> y no se establece ningún valor por defecto, la inserción falla con un error.</li>
 <li>Establecer un valor por defecto NULL en un campo no anulable no es válido y provoca un error.</li>
 </ul>

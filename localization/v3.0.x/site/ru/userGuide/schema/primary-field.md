@@ -38,7 +38,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Первичное поле выступает в качестве уникального ключа для каждой сущности в коллекции, подобно первичному ключу в традиционной базе данных. Milvus использует первичное поле для управления сущностями во время операций вставки, апсерт, удаления и запросов.</p>
+    </button></h2><p>Первичное поле действует как уникальный ключ для каждой сущности в коллекции, подобно первичному ключу в традиционной базе данных. Milvus использует первичное поле для управления сущностями во время операций вставки, апсерт, удаления и запросов.</p>
 <p>Ключевые требования:</p>
 <ul>
 <li><p>Каждая коллекция должна иметь <strong>ровно одно</strong> первичное поле.</p></li>
@@ -279,6 +279,7 @@ client.createCollection(requestCreate);
 
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/collections/create&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_autoid\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$SCHEMA</span>
@@ -363,6 +364,7 @@ System.out.printf(<span class="hljs-string">&quot;Generated IDs: %s\n&quot;</spa
 
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/entities/insert&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_autoid\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$INSERT_DATA</span>
@@ -537,6 +539,7 @@ client.createCollection(requestCreate);
 
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/collections/create&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_manual_ids\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$SCHEMA</span>
@@ -628,6 +631,7 @@ System.out.printf(<span class="hljs-string">&quot;Generated IDs: %s\n&quot;</spa
 <span class="hljs-comment"># 插入数据</span>
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/entities/insert&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_manual_ids\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$INSERT_DATA</span>
@@ -710,7 +714,7 @@ curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Понимание того, как AutoID генерирует уникальные идентификаторы, поможет вам правильно <a href="/docs/ru/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">настроить ID кластера</a> и устранить неполадки, связанные с ID.</p>
+    </button></h2><p>Понимание того, как AutoID генерирует внутренние уникальные идентификаторы, поможет вам правильно <a href="/docs/ru/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">настроить ID кластера</a> и устранить проблемы, связанные с ID.</p>
 <p>AutoID использует структурированный 64-битный формат, чтобы гарантировать уникальность:</p>
 <pre><code translate="no" class="language-plaintext">[sign_bit][cluster_id][physical_ts][logical_ts]
 <button class="copy-code-btn"></button></code></pre>

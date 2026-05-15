@@ -249,6 +249,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;product_catalog\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -423,6 +424,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/product_catalog/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;data\&quot;: <span class="hljs-variable">$entities</span>
 }&quot;</span>
@@ -507,7 +509,7 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
 <ul>
 <li><p>Si conoscono in anticipo i tasti di scelta rapida da interrogare.</p></li>
 <li><p>È necessario filtrare quando il lato sinistro è un array.</p></li>
-<li><p>Si vuole ridurre al minimo l'utilizzo del disco.</p></li>
+<li><p>Si vuole ridurre al minimo l'uso del disco.</p></li>
 </ul>
 <p><strong>Usare l'indice piatto JSON quando:</strong></p>
 <ul>
@@ -766,7 +768,7 @@ indexOpt3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;p
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li><p>Il parametro <code translate="no">json_cast_type</code> è obbligatorio e deve essere uguale al tipo di output della funzione di cast.</p></li>
+<li><p>Il parametro <code translate="no">json_cast_type</code> è obbligatorio e deve corrispondere al tipo di output della funzione di cast.</p></li>
 <li><p>Se la conversione fallisce (ad esempio, stringa non numerica), il valore viene saltato e non indicizzato.</p></li>
 </ul>
 </div>
@@ -899,6 +901,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;product_catalog\&quot;,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
@@ -1106,7 +1109,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <li><p><strong>Indicizzazione numerica</strong>:</p>
 <p>Se un indice viene creato con <code translate="no">json_cast_type=&quot;double&quot;</code>, solo le condizioni di filtro numeriche (ad esempio, <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">== 42</code>) sfrutteranno l'indice. Le condizioni non numeriche possono essere utilizzate per una scansione brutale.</p></li>
 <li><p><strong>Indicizzazione delle stringhe</strong>:</p>
-<p>Se un indice utilizza <code translate="no">json_cast_type=&quot;varchar&quot;</code>, solo le condizioni di filtro stringa trarranno vantaggio dall'indice; gli altri tipi possono essere sottoposti a una scansione brutale.</p></li>
+<p>Se un indice utilizza <code translate="no">json_cast_type=&quot;varchar&quot;</code>, solo le condizioni di filtro stringa trarranno vantaggio dall'indice; altri tipi possono essere sottoposti a una scansione brutale.</p></li>
 <li><p><strong>Indicizzazione booleana</strong>:</p>
 <p>L'indicizzazione booleana si comporta in modo simile all'indicizzazione delle stringhe, con l'utilizzo dell'indice solo quando la condizione corrisponde rigorosamente a vero o falso.</p></li>
 </ul>

@@ -349,7 +349,7 @@ schema.WithFunction(function)
    </tr>
 </table>
 <div class="alert note">
-<p>Если несколько полей <code translate="no">VARCHAR</code> требуют обработки BM25, определите <strong>одну функцию BM25 для каждого поля</strong>, с уникальным именем и выходным полем.</p>
+<p>Если несколько полей <code translate="no">VARCHAR</code> требуют обработки BM25, определите <strong>по одной функции BM25 для каждого поля</strong>, с уникальным именем и выходным полем.</p>
 </div>
 <h3 id="Configure-the-index" class="common-anchor-header">Настройка индекса<button data-href="#Configure-the-index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -454,7 +454,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>Алгоритм, используемый для построения и запроса индекса. Допустимые значения:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (по умолчанию): Оптимизированная обработка запросов Document-at-a-Time (DAAT) с использованием алгоритма MaxScore. MaxScore обеспечивает лучшую производительность при больших значениях <em>k</em> или запросах с большим количеством терминов, пропуская термины и документы, которые, вероятно, будут иметь минимальное влияние. Это достигается путем разделения терминов на существенные и несущественные группы на основе их максимальных оценок влияния, фокусируясь на терминах, которые могут внести вклад в результаты top-k.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Оптимизированная обработка запросов DAAT с помощью алгоритма WAND. WAND оценивает меньше документов, попавших в запрос, за счет использования максимальных баллов влияния для пропуска неконкурентных документов, но при этом имеет более высокие накладные расходы в расчете на одно попадание. Это делает WAND более эффективным для запросов с небольшими значениями <em>k</em> или коротких запросов, где пропуск документов более целесообразен.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Обработка запросов с использованием базового термина (TAAT). Хотя он медленнее, чем <code translate="no">DAAT_MAXSCORE</code> и <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> обладает уникальным преимуществом. В отличие от алгоритмов DAAT, использующих кэшированные оценки максимального влияния, которые остаются статичными независимо от изменений параметра глобальной коллекции (avgdl), <code translate="no">TAAT_NAIVE</code> динамически адаптируется к таким изменениям.</p></li></ul></td>
+     <td><p>Алгоритм, используемый для построения и запроса индекса. Допустимые значения:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (по умолчанию): Оптимизированная обработка запросов Document-at-a-Time (DAAT) с использованием алгоритма MaxScore. MaxScore обеспечивает лучшую производительность при больших значениях <em>k</em> или запросах с большим количеством терминов, пропуская термины и документы, которые, вероятно, будут иметь минимальное влияние. Это достигается путем разделения терминов на существенные и несущественные группы на основе их максимальных баллов влияния, фокусируясь на терминах, которые могут внести вклад в результаты top-k.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Оптимизированная обработка запросов DAAT с помощью алгоритма WAND. WAND оценивает меньше документов, попавших в запрос, за счет использования максимальных баллов влияния для пропуска неконкурентных документов, но при этом имеет более высокие накладные расходы в расчете на одно попадание. Это делает WAND более эффективным для запросов с небольшими значениями <em>k</em> или коротких запросов, где пропуск документов более целесообразен.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Обработка запросов с использованием базового термина (TAAT). Хотя он медленнее, чем <code translate="no">DAAT_MAXSCORE</code> и <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> обладает уникальным преимуществом. В отличие от алгоритмов DAAT, использующих кэшированные оценки максимального влияния, которые остаются статичными независимо от изменений параметра глобальной коллекции (avgdl), <code translate="no">TAAT_NAIVE</code> динамически адаптируется к таким изменениям.</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
@@ -520,6 +520,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -581,6 +582,7 @@ client.insert(InsertReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;text&quot;: &quot;information retrieval is a field of study.&quot;},
@@ -669,6 +671,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data-raw <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

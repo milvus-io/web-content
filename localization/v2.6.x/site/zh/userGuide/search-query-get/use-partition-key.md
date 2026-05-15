@@ -68,11 +68,26 @@ summary: >-
       </svg>
     </button></h2><p>要使用分区密钥，您需要</p>
 <ul>
-<li><p><a href="/docs/zh/use-partition-key.md#Set-Partition-Key">设置分区密钥</a>、</p></li>
-<li><p><a href="/docs/zh/use-partition-key.md#Set-Partition-Numbers">设置要创建的分区数量</a>（可选），以及</p></li>
-<li><p><a href="/docs/zh/use-partition-key.md#Create-Filtering-Condition">根据分区密钥创建过滤条件</a>。</p></li>
+<li><p><a href="/docs/zh/v2.6.x/use-partition-key.md#Set-Partition-Key">设置分区密钥</a>、</p></li>
+<li><p><a href="/docs/zh/v2.6.x/use-partition-key.md#Set-Partition-Numbers">设置要创建的分区数量</a>（可选），以及</p></li>
+<li><p><a href="/docs/zh/v2.6.x/use-partition-key.md#Create-Filtering-Condition">根据分区密钥创建过滤条件</a>。</p></li>
 </ul>
-<h3 id="Set-Partition-Key" class="common-anchor-header">设置分区密钥</h3><p>要将标量字段指定为分区密钥，需要在添加标量字段时将其<code translate="no">is_partition_key</code> 属性设置为<code translate="no">true</code> 。</p>
+<h3 id="Set-Partition-Key" class="common-anchor-header">设置分区密钥<button data-href="#Set-Partition-Key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要将标量字段指定为分区密钥，需要在添加标量字段时将其<code translate="no">is_partition_key</code> 属性设置为<code translate="no">true</code> 。</p>
 <div class="alert note">
 <p>将标量字段设置为 Partition Key 时，字段值不能为空或 null。</p>
 </div>
@@ -222,7 +237,22 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Partition-Numbers" class="common-anchor-header">设置分区编号</h3><p>当你指定一个 Collections 中的标量字段作为 Partition Key 时，Milvus 会自动在 Collections 中创建 16 个分区。在接收到一个实体时，Milvus 会根据这个实体的 Partition Key 值选择一个分区，并将实体存储在分区中，从而导致部分或全部分区持有不同 Partition Key 值的实体。</p>
+<h3 id="Set-Partition-Numbers" class="common-anchor-header">设置分区编号<button data-href="#Set-Partition-Numbers" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>当你指定一个 Collections 中的标量字段作为 Partition Key 时，Milvus 会自动在 Collections 中创建 16 个分区。接收到实体后，Milvus 会根据该实体的 Partition Key 值选择一个分区，并将实体存储到分区中，从而导致部分或全部分区持有不同 Partition Key 值的实体。</p>
 <p>您还可以确定与 Collections 一起创建的分区数量。只有将标量字段指定为 Partition Key 时，这种方法才有效。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -266,13 +296,29 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-Filtering-Condition" class="common-anchor-header">创建过滤条件</h3><p>在启用分区关键字功能的 Collections 中进行 ANN 搜索时，需要在搜索请求中包含涉及分区关键字的过滤表达式。在过滤表达式中，你可以将 Partition Key 的值限制在特定范围内，这样 Milvus 就会将搜索范围限制在相应的分区内。</p>
+<h3 id="Create-Filtering-Condition" class="common-anchor-header">创建过滤条件<button data-href="#Create-Filtering-Condition" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在启用分区关键字功能的 Collections 中进行 ANN 搜索时，需要在搜索请求中包含涉及分区关键字的过滤表达式。在过滤表达式中，你可以将 Partition Key 的值限制在特定范围内，这样 Milvus 就会将搜索范围限制在相应的分区内。</p>
 <p>在执行删除操作时，建议加入指定单一分区键的过滤表达式，以实现更高效的删除。这种方法将删除操作限制在特定分区内，减少了压缩过程中的写入放大，节省了用于压缩和索引的资源。</p>
 <p>下面的示例演示了基于 Partition Key 的过滤，它基于一个特定的 Partition Key 值和一组 Partition Key 值。</p>
 <div class="multipleCode">
@@ -335,7 +381,22 @@ filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;
 <div class="alert note">
 <p>目前，分区密钥隔离功能只适用于索引类型设置为 HNSW 的搜索。</p>
 </div>
-<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">启用分区密钥隔离功能</h3><p>以下代码示例演示了如何启用分区键隔离。</p>
+<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">启用分区密钥隔离功能<button data-href="#Enable-Partition-Key-Isolation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下代码示例演示了如何启用分区键隔离。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -382,10 +443,11 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>启用分区密钥隔离后，仍可按照<a href="/docs/zh/use-partition-key.md#Set-Partition-Numbers">设置分区编号</a>中的说明设置分区密钥和分区数量。请注意，基于 Partition Key 的过滤器应只包含特定的 Partition Key 值。</p>
+<p>启用分区密钥隔离后，仍可按照<a href="/docs/zh/v2.6.x/use-partition-key.md#Set-Partition-Numbers">设置分区编号</a>中的说明设置分区密钥和分区<a href="/docs/zh/v2.6.x/use-partition-key.md#Set-Partition-Numbers">编号</a>。请注意，基于 Partition Key 的过滤器应只包含特定的 Partition Key 值。</p>

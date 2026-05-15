@@ -237,7 +237,7 @@ schema.WithField(entity.NewField().
    </tr>
    <tr>
      <td><p><code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>存储向量，其每个维度的单个元素都是 8 位整数（int8），每个元素的范围为 -128 到 127。INT8_VECTOR 专为量化深度学习模型（如 ResNet、EfficientNet）而设计，可减少模型大小并加快推理速度，同时将精度损失降到最低。<br><strong>注意</strong>：此向量类型仅支持 HNSW 索引。</p></td>
+     <td><p>存储向量，其每个维度的单个元素均为 8 位整数（int8），每个元素的范围为 -128 至 127。INT8_VECTOR 专为量化深度学习模型（如 ResNet、EfficientNet）而设计，可减少模型大小并加快推理速度，同时将精度损失降到最低。<br><strong>注意</strong>：此向量类型仅支持 HNSW 索引。</p></td>
    </tr>
 </table>
 <h3 id="Set-index-params-for-vector-field" class="common-anchor-header">为向量字段设置索引参数<button data-href="#Set-index-params-for-vector-field" class="anchor-icon" translate="no">
@@ -365,6 +365,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -439,6 +440,7 @@ client.<span class="hljs-title function_">insert</span>({
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;dense_vector&quot;: [0.1, 0.2, 0.3, 0.4]},
@@ -547,6 +549,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

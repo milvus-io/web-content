@@ -63,7 +63,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvus는 글로벌, 필드, 인덱스, 컬렉션 수준에서 계층적 mmap 설정을 제공하며, 인덱스와 필드 수준은 컬렉션 수준보다, 컬렉션 수준은 글로벌 수준보다 우선합니다.</p>
-<h3 id="Global-mmap-settings" class="common-anchor-header">글로벌 맵 설정</h3><p>클러스터 수준 설정은 전역 설정이며 우선순위가 가장 낮습니다. Milvus는 <code translate="no">milvus.yaml</code> 에서 몇 가지 mmap 관련 설정을 제공합니다. 이러한 설정은 클러스터의 모든 컬렉션에 적용됩니다.</p>
+<h3 id="Global-mmap-settings" class="common-anchor-header">글로벌 맵 설정<button data-href="#Global-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>클러스터 수준 설정은 전역 설정이며 우선순위가 가장 낮습니다. Milvus는 <code translate="no">milvus.yaml</code> 에서 몇 가지 mmap 관련 설정을 제공합니다. 이러한 설정은 클러스터의 모든 컬렉션에 적용됩니다.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">queryNode:</span>
   <span class="hljs-attr">mmap:</span>
@@ -103,13 +118,28 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.mmapDirPath</code></p></td>
-     <td><p>메모리 매핑된 파일의 경로를 지정합니다. 지정하지 않으면 기본값이 적용됩니다. </p><p>기본값의 <code translate="no">localStorage.path</code> 자리 표시자는 Milvus 쿼리 노드의 하드 드라이브를 나타냅니다. 최적의 메모리 맵 이점을 위해 쿼리 노드에 고성능 하드 드라이브가 있는지 확인하세요.</p></td>
+     <td><p>메모리 매핑된 파일의 경로를 지정합니다. 지정하지 않으면 기본값이 적용됩니다. </p><p>기본값의 <code translate="no">localStorage.path</code> 자리 표시자는 Milvus 쿼리 노드의 하드 드라이브를 나타냅니다. 최적의 메모리 맵 이점을 얻으려면 쿼리 노드에 고성능 하드 드라이브가 있는지 확인하세요.</p></td>
      <td><p><code translate="no">{localStorage.path}/mmap</code></p></td>
    </tr>
 </table>
-<p>위의 설정을 밀버스 클러스터에 적용하려면 <a href="/docs/ko/configure-helm.md#Configure-Milvus-via-configuration-file">헬름으로 밀버스 구성하기</a> 및 <a href="/docs/ko/configure_operator.md">밀버스 오퍼레이터로 밀버스 구성하기의</a> 단계를 따르세요.</p>
+<p>위의 설정을 밀버스 클러스터에 적용하려면 <a href="/docs/ko/v2.6.x/configure-helm.md#Configure-Milvus-via-configuration-file">헬름으로 밀버스 구성하기</a> 및 <a href="/docs/ko/v2.6.x/configure_operator.md">밀버스 오퍼레이터로 밀버스 구성하기의</a> 단계를 따르세요.</p>
 <p>특정 사용 사례에 직면했을 때 글로벌 mmap 설정이 유연하지 않은 경우가 있습니다. 특정 컬렉션 또는 해당 인덱스에 대체 설정을 적용하려면 컬렉션, 필드 또는 인덱스에 특정한 mmap을 구성하는 것을 고려하세요. 컬렉션을 해제하고 로드해야만 mmap 설정 변경 사항이 적용됩니다.</p>
-<h3 id="Field-specific-mmap-settings" class="common-anchor-header">필드별 mmap 설정</h3><p>필드별 mmap을 구성하려면 필드를 추가할 때 <code translate="no">mmap_enabled</code> 매개 변수를 포함해야 합니다. 이 매개 변수를 <code translate="no">True</code> 으로 설정하여 이 특정 필드에서 mmap을 사용하도록 설정할 수 있습니다.</p>
+<h3 id="Field-specific-mmap-settings" class="common-anchor-header">필드별 mmap 설정<button data-href="#Field-specific-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>필드별 mmap을 구성하려면 필드를 추가할 때 <code translate="no">mmap_enabled</code> 매개 변수를 포함해야 합니다. 이 매개 변수를 <code translate="no">True</code> 으로 설정하여 이 특정 필드에서 mmap을 사용하도록 설정할 수 있습니다.</p>
 <p>다음 예는 필드를 추가할 때 필드별 mmap을 구성하는 방법을 보여줍니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -277,6 +307,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -286,6 +317,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/fields/alter_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;fieldName&quot;: &quot;doc_chunk&quot;,
@@ -299,7 +331,22 @@ curl --request POST \
 <p>대용량 데이터를 저장하는 필드에 mmap을 사용하도록 설정하는 것이 좋습니다. 스칼라 필드와 벡터 필드가 모두 지원됩니다.</p>
 </div>
 <p>그런 다음 위에서 생성한 스키마를 사용하여 컬렉션을 만들 수 있습니다. 컬렉션 로드 요청을 받으면 Milvus는 <strong>doc_chunk</strong> 필드의 원시 데이터를 메모리로 메모리 매핑합니다.</p>
-<h3 id="Index-specific-mmap-settings" class="common-anchor-header">인덱스별 메모리 맵 설정</h3><p>인덱스별 mmap을 구성하려면 인덱스를 추가할 때 인덱스 매개변수에 <code translate="no">mmap.enable</code> 속성을 포함해야 합니다. 속성을 <code translate="no">true</code> 으로 설정하여 이 특정 인덱스에서 mmap을 활성화할 수 있습니다.</p>
+<h3 id="Index-specific-mmap-settings" class="common-anchor-header">인덱스별 메모리 맵 설정<button data-href="#Index-specific-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>인덱스별 mmap을 구성하려면 인덱스를 추가할 때 인덱스 매개변수에 <code translate="no">mmap.enable</code> 속성을 포함해야 합니다. 속성을 <code translate="no">true</code> 으로 설정하여 이 특정 인덱스에서 mmap을 활성화할 수 있습니다.</p>
 <p>다음 예는 인덱스를 추가할 때 인덱스별 mmap을 구성하는 방법을 보여줍니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -373,6 +420,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;indexParams&quot;: [
@@ -390,6 +438,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/alter_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;indexName&quot;: &quot;doc_chunk&quot;,
@@ -402,7 +451,22 @@ curl --request POST \
 <p>이는 벡터 및 스칼라 필드 모두의 인덱스에 적용됩니다.</p>
 </div>
 <p>그런 다음 컬렉션에서 인덱스 매개변수를 참조할 수 있습니다. 컬렉션 로드 요청을 받으면 Milvus는 <strong>제목</strong> 필드의 인덱스를 메모리에 메모리 매핑합니다.</p>
-<h3 id="Collection-specific-mmap-settings" class="common-anchor-header">컬렉션별 MMAP 설정</h3><p>컬렉션 전체 mmap 전략을 구성하려면 컬렉션 생성 요청에 <code translate="no">mmap.enabled</code> 속성을 포함해야 합니다. 이 속성을 <code translate="no">true</code> 으로 설정하여 컬렉션에 대해 mmap을 사용하도록 설정할 수 있습니다.</p>
+<h3 id="Collection-specific-mmap-settings" class="common-anchor-header">컬렉션별 MMAP 설정<button data-href="#Collection-specific-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>컬렉션 전체 mmap 전략을 구성하려면 컬렉션 생성 요청에 <code translate="no">mmap.enabled</code> 속성을 포함해야 합니다. 이 속성을 <code translate="no">true</code> 으로 설정하여 컬렉션에 대해 mmap을 사용하도록 설정할 수 있습니다.</p>
 <p>다음 예는 <strong>my_collection이라는</strong> 이름의 컬렉션을 만들 때 mmap을 사용하도록 설정하는 방법을 보여줍니다. 컬렉션 로드 요청을 받으면 Milvus는 모든 필드의 원시 데이터를 메모리로 메모리 매핑합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -432,6 +496,7 @@ client.createCollection(req);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -501,6 +566,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/release&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
@@ -509,6 +575,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;properties&quot;: {
@@ -520,6 +587,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/load&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>

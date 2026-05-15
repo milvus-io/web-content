@@ -36,7 +36,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Flusso di lavoro della ricerca ibrida</span> </span></p>
 <p>La ricerca ibrida multivettoriale integra diversi metodi di ricerca o abbraccia embeddings di varie modalità:</p>
 <ul>
-<li><p><strong>Ricerca vettoriale sparsa e densa</strong>: I <a href="/docs/it/dense-vector.md">vettori densi</a> sono eccellenti per catturare le relazioni semantiche, mentre i <a href="/docs/it/sparse_vector.md">vettori sparsi</a> sono molto efficaci per una corrispondenza precisa delle parole chiave. La ricerca ibrida combina questi approcci per fornire sia un'ampia comprensione concettuale sia l'esatta pertinenza dei termini, migliorando così i risultati della ricerca. Sfruttando i punti di forza di ciascun metodo, la ricerca ibrida supera i limiti dei singoli approcci, offrendo migliori prestazioni per le query complesse. Ecco una <a href="/docs/it/full_text_search_with_milvus.md">guida</a> più dettagliata sul reperimento ibrido che combina la ricerca semantica con la ricerca full-text.</p></li>
+<li><p><strong>Ricerca vettoriale sparsa e densa</strong>: I <a href="/docs/it/v2.6.x/dense-vector.md">vettori densi</a> sono eccellenti per catturare le relazioni semantiche, mentre i <a href="/docs/it/v2.6.x/sparse_vector.md">vettori sparsi</a> sono molto efficaci per una corrispondenza precisa delle parole chiave. La ricerca ibrida combina questi approcci per fornire sia un'ampia comprensione concettuale sia l'esatta pertinenza dei termini, migliorando così i risultati della ricerca. Sfruttando i punti di forza di ciascun metodo, la ricerca ibrida supera i limiti dei singoli approcci, offrendo migliori prestazioni per le query complesse. Ecco una <a href="/docs/it/v2.6.x/full_text_search_with_milvus.md">guida</a> più dettagliata sul reperimento ibrido che combina la ricerca semantica con la ricerca full-text.</p></li>
 <li><p><strong>Ricerca vettoriale multimodale</strong>: La ricerca vettoriale multimodale è una tecnica potente che consente di effettuare ricerche su vari tipi di dati, tra cui testo, immagini, audio e altri. Il vantaggio principale di questo approccio è la capacità di unificare diverse modalità in un'esperienza di ricerca omogenea e coesa. Ad esempio, nella ricerca di prodotti, un utente potrebbe inserire una query testuale per trovare prodotti descritti sia con testo che con immagini. Combinando queste modalità attraverso un metodo di ricerca ibrido, è possibile migliorare l'accuratezza della ricerca o arricchire i risultati.</p></li>
 </ul>
 <h2 id="Example" class="common-anchor-header">Esempio<button data-href="#Example" class="anchor-icon" translate="no">
@@ -92,7 +92,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Per la ricerca ibrida multivettoriale, è necessario definire più campi vettoriali all'interno di uno schema di raccolta. Per i dettagli sui limiti del numero di campi vettoriali consentiti in una raccolta, vedere <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Limiti di Zilliz Cloud</a>.  Tuttavia, se necessario, è possibile regolare l'opzione <a href="/docs/it/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> per includere fino a 10 campi vettoriali in una raccolta, se necessario.</p>
+    </button></h3><p>Per la ricerca ibrida multivettoriale, è necessario definire più campi vettoriali all'interno di uno schema di raccolta. Per i dettagli sui limiti del numero di campi vettoriali consentiti in una collezione, vedere <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Limiti di Zilliz Cloud</a>.  Tuttavia, se necessario, è possibile regolare l'opzione <a href="/docs/it/v2.6.x/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> per includere fino a 10 campi vettoriali in una raccolta, se necessario.</p>
 <p>Questo esempio incorpora i seguenti campi nello schema:</p>
 <ul>
 <li><p><code translate="no">id</code>: Serve come chiave primaria per memorizzare gli ID del testo. Questo campo è di tipo dati <code translate="no">INT64</code>.</p></li>
@@ -101,7 +101,7 @@ summary: >-
 <li><p><code translate="no">text_sparse</code>: Utilizzato per memorizzare vettori radi dei testi. Questo campo è del tipo di dati <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 <li><p><code translate="no">image_dense</code>: Utilizzato per memorizzare vettori densi delle immagini dei prodotti. Questo campo è del tipo di dati <code translate="no">FLOAT_VETOR</code> con una dimensione di vettore di 512.</p></li>
 </ul>
-<p>Poiché si utilizzerà l'algoritmo integrato BM25 per eseguire una ricerca full-text sul campo di testo, è necessario aggiungere il Milvus <code translate="no">Function</code> allo schema. Per ulteriori dettagli, consultare la sezione <a href="/docs/it/full-text-search.md">Ricerca a tutto testo</a>.</p>
+<p>Poiché si utilizzerà l'algoritmo integrato BM25 per eseguire una ricerca full-text sul campo di testo, è necessario aggiungere il Milvus <code translate="no">Function</code> allo schema. Per ulteriori dettagli, consultare la sezione <a href="/docs/it/v2.6.x/full-text-search.md">Ricerca a tutto testo</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
@@ -353,9 +353,9 @@ schema.WithField(entity.NewField().
 <ul>
 <li><p><code translate="no">text_dense_index</code>: per il campo vettoriale denso di testo viene creato un indice di tipo <code translate="no">AUTOINDEX</code> con metrica <code translate="no">IP</code>.</p></li>
 <li><p><code translate="no">text_sparse_index</code>: un indice di tipo<code translate="no">SPARSE_INVERTED_INDEX</code>con metrica <code translate="no">BM25</code> viene utilizzato per il campo vettoriale di testo rado.</p></li>
-<li><p><code translate="no">image_dense_index</code>: per il campo vettoriale denso di immagini viene creato un indice di tipo <code translate="no">AUTOINDEX</code> con metrica <code translate="no">IP</code>.</p></li>
+<li><p><code translate="no">image_dense_index</code>: per il campo vettoriale denso dell'immagine viene creato un indice del tipo <code translate="no">AUTOINDEX</code> con il tipo metrico <code translate="no">IP</code>.</p></li>
 </ul>
-<p>È possibile scegliere altri tipi di indice, a seconda delle esigenze e dei tipi di dati. Per ulteriori informazioni sui tipi di indice supportati, consultare la documentazione sui <a href="/docs/it/index-vector-fields.md">tipi di indice disponibili</a>.</p>
+<p>È possibile scegliere altri tipi di indice, a seconda delle esigenze e dei tipi di dati. Per ulteriori informazioni sui tipi di indice supportati, consultare la documentazione sui <a href="/docs/it/v2.6.x/index-vector-fields.md">tipi di indice disponibili</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
@@ -520,6 +520,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -545,11 +546,11 @@ curl --request POST \
 <ul>
 <li><p><code translate="no">id</code>: un numero intero che rappresenta l'ID del prodotto</p></li>
 <li><p><code translate="no">text</code>: una stringa contenente la descrizione del prodotto</p></li>
-<li><p><code translate="no">text_dense</code>: un elenco di 768 valori in virgola mobile che rappresentano l'incorporazione densa della descrizione testuale</p></li>
+<li><p><code translate="no">text_dense</code>: un elenco di 768 valori in virgola mobile che rappresentano l'incorporazione densa della descrizione del testo</p></li>
 <li><p><code translate="no">image_dense</code>: un elenco di 512 valori in virgola mobile che rappresentano l'incorporazione densa dell'immagine del prodotto.</p></li>
 </ul>
 <p>Si possono usare gli stessi modelli o modelli diversi per generare le incorporazioni dense per ogni campo. In questo esempio, le due incorporazioni dense hanno dimensioni diverse, il che suggerisce che sono state generate da modelli diversi. Quando si definisce ogni ricerca in un secondo momento, assicurarsi di utilizzare il modello corrispondente per generare l'incorporamento appropriato della query.</p>
-<p>Poiché questo esempio utilizza la funzione incorporata BM25 per generare embedding sparsi dal campo di testo, non è necessario fornire manualmente vettori sparsi. Tuttavia, se si sceglie di non utilizzare BM25, è necessario precompilare e fornire autonomamente gli embedding sparsi.</p>
+<p>Poiché questo esempio utilizza la funzione BM25 integrata per generare embedding sparsi dal campo di testo, non è necessario fornire manualmente vettori sparsi. Tuttavia, se si sceglie di non utilizzare BM25, è necessario precompilare e fornire autonomamente gli embedding sparsi.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
@@ -655,6 +656,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;text&quot;: &quot;Red cotton t-shirt with round neck&quot; , &quot;text_dense&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, ...], &quot;image_dense&quot;: [0.6366019600530924, -0.09323198122475052, ...]},
@@ -695,7 +697,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
         ></path>
       </svg>
     </button></h3><p>La ricerca ibrida viene implementata creando più <code translate="no">AnnSearchRequest</code> nella funzione <code translate="no">hybrid_search()</code>, dove ogni <code translate="no">AnnSearchRequest</code> rappresenta una richiesta di ricerca ANN di base per uno specifico campo vettoriale. Pertanto, prima di effettuare una ricerca ibrida, è necessario creare un <code translate="no">AnnSearchRequest</code> per ogni campo vettoriale.</p>
-<p>Inoltre, configurando il parametro <code translate="no">expr</code> in un <code translate="no">AnnSearchRequest</code>, è possibile impostare le condizioni di filtraggio per la ricerca ibrida. Fare riferimento a <a href="/docs/it/filtered-search.md">Ricerca filtrata</a> e <a href="/docs/it/boolean.md">Filtraggio spiegati</a>.</p>
+<p>Inoltre, configurando il parametro <code translate="no">expr</code> in un <code translate="no">AnnSearchRequest</code>, è possibile impostare le condizioni di filtraggio per la ricerca ibrida. Fare riferimento a <a href="/docs/it/v2.6.x/filtered-search.md">Ricerca filtrata</a> e <a href="/docs/it/v2.6.x/boolean.md">Filtraggio spiegati</a>.</p>
 <div class="alert note">
 <p>Nella ricerca ibrida, ogni <code translate="no">AnnSearchRequest</code> supporta solo una query di dati.</p>
 </div>
@@ -849,7 +851,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Per unire e classificare gli insiemi di risultati di ricerca di RNA, è essenziale selezionare una strategia di reranking appropriata. Milvus offre diversi tipi di strategie di reranking. Per maggiori dettagli su questi meccanismi di reranking, consultare <a href="/docs/it/weighted-ranker.md">Weighted Ranker</a> o <a href="/docs/it/rrf-ranker.md">RRF Ranker</a>.</p>
+    </button></h3><p>Per unire e classificare gli insiemi di risultati di ricerca di RNA, è essenziale selezionare una strategia di reranking appropriata. Milvus offre diversi tipi di strategie di reranking. Per maggiori dettagli su questi meccanismi di reranking, consultare <a href="/docs/it/v2.6.x/weighted-ranker.md">Weighted Ranker</a> o <a href="/docs/it/v2.6.x/rrf-ranker.md">RRF Ranker</a>.</p>
 <p>In questo esempio, poiché non c'è un'enfasi particolare su specifiche query di ricerca, procederemo con la strategia RRFRanker.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -988,6 +990,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/hybrid_search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;search\&quot;: <span class="hljs-variable">${req}</span>,
@@ -1017,7 +1020,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Temporarily-set-a-timezone-for-a-hybrid-search" class="common-anchor-header">Impostazione temporanea di un fuso orario per una ricerca ibrida<button data-href="#Temporarily-set-a-timezone-for-a-hybrid-search" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Temporarily-set-a-timezone-for-a-hybrid-search" class="common-anchor-header">Impostare temporaneamente un fuso orario per una ricerca ibrida<button data-href="#Temporarily-set-a-timezone-for-a-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1033,7 +1036,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h3><p>Se la vostra collezione ha un campo <code translate="no">TIMESTAMPTZ</code>, potete temporaneamente sovrascrivere il fuso orario predefinito del database o della collezione per una singola operazione impostando il parametro <code translate="no">timezone</code> nella chiamata di ricerca ibrida. Questo parametro controlla il modo in cui i valori di <code translate="no">TIMESTAMPTZ</code> vengono visualizzati e confrontati durante l'operazione.</p>
-<p>Il valore di <code translate="no">timezone</code> deve essere un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identificatore di fuso orario IANA</a> valido (ad esempio, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> o <strong>UTC</strong>). Per informazioni dettagliate sull'utilizzo del campo <code translate="no">TIMESTAMPTZ</code>, consultare la sezione <a href="/docs/it/timestamptz-field.md">Campo TIMESTAMPTZ</a>.</p>
+<p>Il valore di <code translate="no">timezone</code> deve essere un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identificatore di fuso orario IANA</a> valido (ad esempio, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> o <strong>UTC</strong>). Per informazioni dettagliate sull'utilizzo del campo <code translate="no">TIMESTAMPTZ</code>, consultare la sezione <a href="/docs/it/v2.6.x/timestamptz-field.md">Campo TIMESTAMPTZ</a>.</p>
 <p>L'esempio seguente mostra come impostare temporaneamente un fuso orario per un'operazione di ricerca ibrida:</p>
 <pre><code translate="no" class="language-python">res = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,

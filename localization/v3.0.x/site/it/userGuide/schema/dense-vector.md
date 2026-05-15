@@ -29,7 +29,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>I vettori densi sono rappresentazioni di dati numerici ampiamente utilizzati nell'apprendimento automatico e nell'analisi dei dati. Sono costituiti da array di numeri reali, in cui la maggior parte o tutti gli elementi sono non nulli. Rispetto ai vettori sparsi, i vettori densi contengono più informazioni allo stesso livello dimensionale, poiché ogni dimensione contiene valori significativi. Questa rappresentazione può catturare efficacemente modelli e relazioni complesse, rendendo più facile l'analisi e l'elaborazione dei dati in spazi ad alta densità. I vettori densi hanno in genere un numero fisso di dimensioni, che varia da poche decine a diverse centinaia o addirittura migliaia, a seconda dell'applicazione e dei requisiti specifici.</p>
-<p>I vettori densi sono utilizzati principalmente in scenari che richiedono la comprensione della semantica dei dati, come la ricerca semantica e i sistemi di raccomandazione. Nella ricerca semantica, i vettori densi aiutano a catturare le connessioni sottostanti tra query e documenti, migliorando la rilevanza dei risultati della ricerca. Nei sistemi di raccomandazione, aiutano a identificare le somiglianze tra utenti e articoli, offrendo suggerimenti più personalizzati.</p>
+<p>I vettori densi sono utilizzati principalmente in scenari che richiedono la comprensione della semantica dei dati, come la ricerca semantica e i sistemi di raccomandazione. Nella ricerca semantica, i vettori densi aiutano a catturare le connessioni sottostanti tra query e documenti, migliorando la rilevanza dei risultati della ricerca. Nei sistemi di raccomandazione, aiutano a identificare le somiglianze tra utenti e oggetti, offrendo suggerimenti più personalizzati.</p>
 <h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -246,7 +246,7 @@ schema.WithField(entity.NewField().
    </tr>
    <tr>
      <td><p><code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>Memorizza vettori i cui singoli elementi in ogni dimensione sono numeri interi a 8 bit (int8), con ogni elemento compreso tra -128 e 127. Progettato per modelli di deep learning quantizzati (ad esempio, ResNet, EfficientNet), INT8_VECTOR riduce le dimensioni del modello e velocizza l'inferenza con una perdita minima di precisione.<br><strong>Nota</strong>: questo tipo di vettore è supportato solo per gli indici HNSW.</p></td>
+     <td><p>Memorizza vettori i cui singoli elementi in ciascuna dimensione sono numeri interi a 8 bit (int8), con ciascun elemento compreso tra -128 e 127. Progettato per modelli di deep learning quantizzati (ad esempio, ResNet, EfficientNet), INT8_VECTOR riduce le dimensioni del modello e velocizza l'inferenza con una perdita minima di precisione.<br><strong>Nota</strong>: questo tipo di vettore è supportato solo per gli indici HNSW.</p></td>
    </tr>
 </table>
 <h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Impostare i parametri dell'indice per il campo vettoriale<button data-href="#Set-index-params-for-vector-field" class="anchor-icon" translate="no">
@@ -374,6 +374,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -448,6 +449,7 @@ client.<span class="hljs-title function_">insert</span>({
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;dense_vector&quot;: [0.1, 0.2, 0.3, 0.4]},
@@ -556,6 +558,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

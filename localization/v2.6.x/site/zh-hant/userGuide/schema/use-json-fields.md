@@ -247,6 +247,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;product_catalog\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -254,7 +255,7 @@ curl --request POST \
 
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>您也可以啟用動態欄位功能，靈活地儲存未宣告的欄位，但 JSON 欄位的功能並不需要此功能。如需詳細資訊，請參閱<a href="/docs/zh-hant/enable-dynamic-field.md">動態欄位</a>。</p>
+<p>您也可以啟用動態欄位功能，靈活地儲存未宣告的欄位，但 JSON 欄位的功能並不需要此功能。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/enable-dynamic-field.md">動態欄位</a>。</p>
 </div>
 <h2 id="Insert-entities-with-JSON-data" class="common-anchor-header">插入具有 JSON 資料的實體<button data-href="#Insert-entities-with-JSON-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -421,6 +422,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/product_catalog/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;data\&quot;: <span class="hljs-variable">$entities</span>
 }&quot;</span>
@@ -541,8 +543,8 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
 </ul></li>
 <li><p><strong>JSON 轉換類型</strong>(<code translate="no">json_cast_type</code>)：Milvus 在指定路徑解釋和索引值時應該使用的資料類型。</p>
 <ul>
-<li><p>此類型必須與被索引欄位的實際資料類型相符。如果您想在編制索引時將資料類型轉換成其他類型，請考慮<a href="/docs/zh-hant/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">使用轉換函數</a>。</p></li>
-<li><p>如需完整清單，請參閱<a href="/docs/zh-hant/use-json-fields.md#Supported-JSON-cast-types">下文</a>。</p></li>
+<li><p>此類型必須與被索引欄位的實際資料類型相符。如果要在編制索引時將資料類型轉換為其他類型，請考慮<a href="/docs/zh-hant/v2.6.x/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">使用轉換函數</a>。</p></li>
+<li><p>如需完整清單，請參閱<a href="/docs/zh-hant/v2.6.x/use-json-fields.md#Supported-JSON-cast-types">下文</a>。</p></li>
 </ul></li>
 </ul>
 <h4 id="Supported-JSON-cast-types" class="common-anchor-header">支援的 JSON 轉換類型</h4><p>轉換類型不區分大小寫。支援下列類型：</p>
@@ -584,7 +586,7 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
    </tr>
 </table>
 <div class="alert note">
-<p>陣列應包含相同類型的元素，以獲得最佳索引。如需詳細資訊，請參閱<a href="/docs/zh-hant/array_data_type.md">陣列欄位</a>。</p>
+<p>陣列應包含相同類型的元素，以獲得最佳索引。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/array_data_type.md">陣列欄位</a>。</p>
 </div>
 <h4 id="Example-Create-JSON-path-indexes" class="common-anchor-header">範例：建立 JSON 路徑索引</h4><p>使用介紹中的<code translate="no">metadata</code> JSON 結構，以下是如何在不同 JSON 路徑上建立索引的範例：</p>
 <div class="multipleCode">
@@ -697,7 +699,7 @@ indexOpt2 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;p
 <table>
    <tr>
      <th><p>轉換函數</p></th>
-     <th><p>轉換自 → 轉換為</p></th>
+     <th><p>轉換自 → 至</p></th>
      <th><p>使用範例</p></th>
    </tr>
    <tr>
@@ -784,7 +786,7 @@ indexOpt3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;p
         ></path>
       </svg>
     </button></h3><p>對於 JSON<strong>扁平化索引</strong>，Milvus 會透過<em>扁平化</em>JSON 結構和自動推斷每個值的類型，來索引 JSON 物件路徑（包括巢狀物件）內的所有鍵值對（key-value pairs）。</p>
-<h4 id="How-flattening-and-type-inference-work" class="common-anchor-header">扁平化和類型推斷如何工作</h4><p>當您在物件路徑上建立一個 JSON 平面索引時，Milvus 會</p>
+<h4 id="How-flattening-and-type-inference-work" class="common-anchor-header">扁平化和類型推斷如何工作</h4><p>當您在物件路徑上建立一個 JSON 平面索引時，Milvus 會：</p>
 <ol>
 <li><p><strong>扁平化</strong>- 從指定的<code translate="no">json_path</code> 開始，以遞迴方式遍歷物件，並將巢狀的 key-value 對抽取為完全限定路徑。使用先前<code translate="no">metadata</code> 的範例：</p>
 <pre><code translate="no" class="language-json"><span class="hljs-attr">&quot;metadata&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -897,6 +899,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;product_catalog\&quot;,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
@@ -947,7 +950,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <li><p>您已在每個向量欄位上建立索引。</p></li>
 <li><p>集合已載入記憶體。</p></li>
 </ul>
-<p>如需支援的運算符和表達式的完整清單，請參閱<a href="/docs/zh-hant/json-operators.md">JSON 運算符</a>。</p>
+<p>如需支援的運算符和表達式的完整清單，請參閱<a href="/docs/zh-hant/v2.6.x/json-operators.md">JSON 運算符</a>。</p>
 <h2 id="Pull-it-all-together" class="common-anchor-header">將所有內容整合在一起<button data-href="#Pull-it-all-together" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -967,11 +970,11 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <p>若要在實際應用程式中完成工作流程，您還需要</p>
 <ul>
 <li><p><strong>在您的向量欄位上建立索引</strong>（集合中的每個向量欄位都必須<strong>建立索引）</strong></p>
-<p>請參閱<a href="/docs/zh-hant/create-collection.md#Optional-Set-Index-Parameters">設定索引參數</a></p></li>
+<p>請參閱<a href="/docs/zh-hant/v2.6.x/create-collection.md#Optional-Set-Index-Parameters">設定索引參數</a></p></li>
 <li><p><strong>載入集合</strong></p>
-<p>請參閱<a href="/docs/zh-hant/load-and-release.md">載入與釋出</a></p></li>
+<p>請參閱<a href="/docs/zh-hant/v2.6.x/load-and-release.md">載入與釋放</a></p></li>
 <li><p><strong>使用 JSON 路徑篩選器進行搜尋或查詢</strong></p>
-<p>請參閱<a href="/docs/zh-hant/filtered-search.md">篩選搜尋和</a> <a href="/docs/zh-hant/json-operators.md">JSON 運算符號</a></p></li>
+<p>請參閱<a href="/docs/zh-hant/v2.6.x/filtered-search.md">篩選搜尋和</a> <a href="/docs/zh-hant/v2.6.x/json-operators.md">JSON 運算符號</a></p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">常見問題<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1008,7 +1011,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <li><p><strong>動態欄位</strong>是隱藏的 JSON 物件 (<code translate="no">$meta</code>)，可自動儲存模式中未定義的任何欄位。</p></li>
 </ul>
 <p>兩者都支援巢狀結構和 JSON 路徑索引，但動態欄位更適合可選或演進的資料結構。</p>
-<p>詳情請參閱<a href="/docs/zh-hant/enable-dynamic-field.md">動態欄位</a>。</p>
+<p>詳情請參閱<a href="/docs/zh-hant/v2.6.x/enable-dynamic-field.md">動態欄位</a>。</p>
 <h3 id="Are-there-any-limitations-on-the-size-of-a-JSON-field" class="common-anchor-header">JSON 欄位的大小有任何限制嗎？<button data-href="#Are-there-any-limitations-on-the-size-of-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1040,8 +1043,8 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>不，JSON 欄位不支援預設值。但是，您可以在定義欄位時設定<code translate="no">nullable=True</code> ，以允許空項目。</p>
-<p>詳情請參閱<a href="/docs/zh-hant/nullable-and-default.md">Nullable &amp; Default</a>。</p>
+    </button></h3><p>不，JSON 欄位不支援預設值。但是，您可以在定義字段時設定<code translate="no">nullable=True</code> ，以允許空項目。</p>
+<p>詳情請參閱<a href="/docs/zh-hant/v2.6.x/nullable-and-default.md">Nullable &amp; Default</a>。</p>
 <h3 id="Are-there-any-naming-conventions-for-JSON-field-keys" class="common-anchor-header">JSON 欄位鍵有任何命名慣例嗎？<button data-href="#Are-there-any-naming-conventions-for-JSON-field-keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1059,7 +1062,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
       </svg>
     </button></h3><p>有，以確保與查詢和索引的相容性：</p>
 <ul>
-<li><p>在 JSON 鍵中只使用字母、數字和底線。</p></li>
+<li><p>在 JSON 鍵中只能使用字母、數字和底線。</p></li>
 <li><p>避免使用特殊字符、空格或點 (<code translate="no">.</code>,<code translate="no">/</code>, 等等)。</p></li>
 <li><p>不相容的鍵可能會在篩選表達式中造成解析問題。</p></li>
 </ul>

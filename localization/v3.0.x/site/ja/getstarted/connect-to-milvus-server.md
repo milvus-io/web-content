@@ -88,6 +88,7 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connect-with-credentials-authentication-enabled" class="common-anchor-header">認証情報で接続（認証有効）<button data-href="#Connect-with-credentials-authentication-enabled" class="anchor-icon" translate="no">
@@ -155,6 +156,7 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
@@ -219,14 +221,14 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-    -H <span class="hljs-string">&quot;Request-Timeout: 5&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     --max-time 7 \
     -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li><p>上記のSDKでは、このタイムアウトは接続を確立するときにのみ使用され、他のAPI操作のデフォルトのタイムアウトとしては機能しません。</p></li>
-<li><p>RESTful APIでは、<code translate="no">Request-Timeout</code> は秒単位のリクエストごとの期限である（Javaの<code translate="no">rpcDeadlineMs</code> やNode.jsの<code translate="no">timeout</code> とは異なり、ミリ秒単位である）ので、期限が必要なすべての呼び出しに含めること。</p></li>
+<li><p>上記のSDKの場合、このタイムアウトは接続を確立するときにのみ使用され、他のAPI操作のデフォルトのタイムアウトとしては機能しません。</p></li>
+<li><p>RESTful APIでは、<code translate="no">Request-Timeout</code> は秒単位のリクエストごとの期限である（Javaの<code translate="no">rpcDeadlineMs</code> やNode.jsの<code translate="no">timeout</code> とは異なり、ミリ秒単位である）ので、期限が必要なすべての呼び出しにこれを含めること。</p></li>
 </ul>
 </div>
 <h2 id="Connect-to-a-specific-database" class="common-anchor-header">特定のデータベースに接続する<button data-href="#Connect-to-a-specific-database" class="anchor-icon" translate="no">
@@ -302,6 +304,7 @@ err = c.UseDatabase(ctx, milvusclient.NewUseDatabaseOption(<span class="hljs-str
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     -d <span class="hljs-string">&#x27;{
       &quot;dbName&quot;: &quot;analytics&quot;
     }&#x27;</span>
@@ -309,7 +312,7 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
 <div class="alert note">
 <p>データベースの作成、一覧表示、説明、および広範なデータベース管理タスクについては、<a href="/docs/ja/manage_databases.md">データベース・</a>ガイドを参照してください。</p>
 </div>
-<h2 id="Whats-next" class="common-anchor-header">次に行うこと<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">次の作業<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

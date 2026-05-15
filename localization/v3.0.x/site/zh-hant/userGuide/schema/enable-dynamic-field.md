@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 允許您透過稱為<strong>動態欄位</strong>的特殊功能，插入結構靈活、不斷演化的實體。這個欄位是以一個隱藏的 JSON 欄位來實作的，它的名稱是<code translate="no">$meta</code> ，它會自動儲存資料中任何沒有在集合模式<strong>中明確定義的</strong>欄位。</p>
+    </button></h1><p>Milvus 允許您透過稱為<strong>動態欄位</strong>的特殊功能，插入結構靈活、不斷演化的實體。這個欄位是以一個名為<code translate="no">$meta</code> 的隱藏 JSON 欄位來實作的，它會自動儲存資料中<strong>未</strong>在集合模式<strong>中明確定義的</strong>任何欄位。</p>
 <h2 id="How-it-works" class="common-anchor-header">如何運作<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -261,6 +261,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -377,6 +378,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;data&quot;: [
     {
@@ -806,6 +808,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
@@ -956,6 +959,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;data\&quot;: [
@@ -1011,7 +1015,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="common-anchor-header">什麼時候應該在模式中明確定義欄位，而不是使用動態欄位鍵呢？<button data-href="#When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="anchor-icon" translate="no">
+    </button></h2><h3 id="When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="common-anchor-header">何時應該在模式中明確定義欄位，而不是使用動態欄位鍵呢？<button data-href="#When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1026,10 +1030,10 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在下列情況下，您應該在模式中明確定義字段，而不是使用動態字段鍵：</p>
+    </button></h3><p>在下列情況下，您應該在模式中明確定義欄位，而不是使用動態欄位鍵：</p>
 <ul>
 <li><p><strong>欄位經常包含在 output_fields 中</strong>：只有明確定義的欄位才能保證透過<code translate="no">output_fields</code> 有效地檢索。動態欄位鍵未針對高頻檢索進行最佳化，可能會產生效能開銷。</p></li>
-<li><p><strong>欄位被頻繁存取或篩選</strong>：雖然索引動態欄位鍵可以提供與固定模式欄位相似的篩選效能，但明確定義的欄位提供更清晰的結構和更好的可維護性。</p></li>
+<li><p><strong>欄位被頻繁存取或篩選</strong>：雖然索引動態欄位鍵可提供與固定模式欄位相似的篩選效能，但明確定義的欄位可提供更清晰的結構和更好的可維護性。</p></li>
 <li><p><strong>您需要完全控制欄位行為</strong>：明確欄位支援模式層級的約束、驗證和更清晰的類型，這對於管理資料完整性和一致性非常有用。</p></li>
 <li><p><strong>您想要避免索引不一致</strong>：動態欄位鍵中的資料較容易出現類型或結構不一致的情況。使用固定的模式有助於確保資料品質，尤其是當您打算使用索引或鑄造時。</p></li>
 </ul>
@@ -1069,7 +1073,7 @@ curl --request POST \
 <ul>
 <li><p><strong>不會回退到完整掃描</strong>：如果大多數的實體都成功建立索引，過濾查詢就會完全依賴索引。鑄造失敗的實體將被排除在結果集之外 - 即使它們在邏輯上符合篩選條件。</p></li>
 <li><p><strong>搜尋準確性風險</strong>：在資料品質不一致的大型資料集中 (尤其是動態欄位鍵)，此行為可能會導致意想不到的遺漏結果。在建立索引之前，確保一致且有效的資料格式是非常重要的。</p></li>
-<li><p><strong>謹慎使用轉換函數</strong>：如果您在編制索引期間使用<code translate="no">json_cast_function</code> 將字串轉換為數字，請確保字串值可以可靠地轉換。<code translate="no">json_cast_type</code> 與實際轉換類型不匹配會導致錯誤或跳過項目。</p></li>
+<li><p><strong>謹慎使用轉換函數</strong>：如果您在編制索引時使用<code translate="no">json_cast_function</code> 將字串轉換為數字，請確保字串值可以可靠地轉換。<code translate="no">json_cast_type</code> 與實際轉換類型不匹配會導致錯誤或跳過項目。</p></li>
 </ul>
 <h3 id="What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="common-anchor-header">如果我的查詢使用與索引轉換類型不同的資料類型，會發生什麼情況？<button data-href="#What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
       <svg translate="no"

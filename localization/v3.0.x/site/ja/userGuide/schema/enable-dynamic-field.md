@@ -38,7 +38,7 @@ summary: >-
     </button></h2><p>ダイナミックフィールドを有効にすると、milvusは各エンティティに<code translate="no">$meta</code> の隠しフィールドを追加します。このフィールドはJSON型で、JSON互換のデータ構造を格納でき、JSONパス構文を使用してインデックスを作成できます。</p>
 <p>データ挿入の際、スキーマで宣言されていないフィールドは、自動的にこのダイナミック・フィールド内にキーと値のペアとして格納されます。</p>
 <p>milvusは透過的に処理するため、<code translate="no">$meta</code> を手動で管理する必要はありません。</p>
-<p>例えば、コレクションスキーマで<code translate="no">id</code> と<code translate="no">vector</code> のみを定義し、以下のエンティティを挿入する場合：</p>
+<p>たとえば、コレクションスキーマで<code translate="no">id</code> と<code translate="no">vector</code> のみを定義し、以下のエンティティを挿入する場合：</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;vector&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.1</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.2</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.3</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
@@ -260,6 +260,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -376,6 +377,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;data&quot;: [
     {
@@ -805,6 +807,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
@@ -955,6 +958,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;data\&quot;: [
@@ -991,7 +995,7 @@ curl --request POST \
 <li><p><strong>ベクトル・フィールドにインデックスを作成します</strong>（各コレクションに必須）。</p>
 <p><a href="/docs/ja/create-collection.md#Optional-Set-Index-Parameters">Set Index Parametersを</a>参照。</p></li>
 <li><p><strong>コレクションをロードする。</strong></p>
-<p><a href="/docs/ja/load-and-release.md">Load &amp; Releaseを</a>参照。</p></li>
+<p><a href="/docs/ja/load-and-release.md">ロードと解放を</a>参照。</p></li>
 <li><p><strong>JSONパスフィルタを使用した検索またはクエリ</strong></p>
 <p><a href="/docs/ja/filtered-search.md">フィルタ検索と</a> <a href="/docs/ja/json-operators.md">JSON演算</a>子を参照してください。</p></li>
 </ul>
@@ -1028,7 +1032,7 @@ curl --request POST \
     </button></h3><p>以下のような場合、動的フィールド・キーを使用する代わりに、スキーマで明示的にフィールドを定義する必要があります：</p>
 <ul>
 <li><p><strong>フィールドが頻繁にoutput_fieldsに含まれる</strong>：明示的に定義されたフィールドだけが、<code translate="no">output_fields</code> によって効率的に検索できることが保証されています。動的フィールド・キーは高頻度の検索に最適化されておらず、パフォーマンス・オーバーヘッドが発生する可能性があります。</p></li>
-<li><p><strong>フィールドは頻繁にアクセスされるか、フィルタリングされる</strong>：動的フィールドキーのインデックスを作成することで、固定スキーマフィールドと同様のフィルタリングパフォーマンスを実現できますが、明示的に定義されたフィールドはより明確な構造と優れた保守性を提供します。</p></li>
+<li><p><strong>フィールドは頻繁にアクセスされるか、フィルタリングされる</strong>：動的フィールドキーのインデックスを作成することで、固定スキーマフィールドと同様のフィルタリングパフォーマンスを得ることができますが、明示的に定義されたフィールドはより明確な構造と優れた保守性を提供します。</p></li>
 <li><p><strong>フィールドの動作を完全に制御する必要がある</strong>：明示的フィールドは、スキーマレベルの制約、検証、より明確な型付けをサポートし、データの整合性と一貫性の管理に役立ちます。</p></li>
 <li><p><strong>インデックスの不整合を避けたい</strong>：動的なフィールドキーのデータは、型や構造に矛盾が生じやすくなります。固定スキーマを使用することで、特にインデックスやキャスティングを使用する予定がある場合、データの品質を確保することができます。</p></li>
 </ul>
@@ -1085,4 +1089,4 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>クエリがインデックスで使用されたものと<strong>異なるデータ型を</strong>使用してダイナミック・フィールド・キーを比較する場合（例えば、インデックスが<code translate="no">double</code> にキャストされたときに文字列比較でクエリを実行する場合）、システムは<strong>インデックスを使用せず</strong>、<em>可能であれば</em>フル・<em>スキャンのみに</em>フォールバックする可能性があります。最高のパフォーマンスと精度を得るためには、クエリタイプがインデックス作成時に使用された<code translate="no">json_cast_type</code> と一致するようにしてください。</p>
+    </button></h3><p>クエリがインデックスで使用されたものと<strong>異なるデータ型を</strong>使用して動的フィールド・キーを比較した場合（例えば、インデックスが<code translate="no">double</code> にキャストされたときに文字列比較でクエリを実行した場合）、システムは<strong>インデックスを使用せず</strong>、<em>可能であれば</em>フル・<em>スキャンのみに</em>フォールバックする可能性があります。最高のパフォーマンスと精度を得るためには、クエリタイプがインデックス作成時に使用された<code translate="no">json_cast_type</code> と一致するようにしてください。</p>

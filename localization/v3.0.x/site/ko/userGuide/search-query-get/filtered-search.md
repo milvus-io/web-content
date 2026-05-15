@@ -58,7 +58,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/filtered-search.png" alt="Filtered Search" class="doc-image" id="filtered-search" />
    </span> <span class="img-wrapper"> <span>필터링된 검색</span> </span></p>
-<p>위 다이어그램에서 볼 수 있듯이 검색 요청에 필터링 조건으로 <code translate="no">chunk like &quot;%red%&quot;</code> 이 포함되어 있으며, 이는 Milvus가 <code translate="no">chunk</code> 필드에 <code translate="no">red</code> 이라는 단어가 포함된 모든 엔티티 내에서 ANN 검색을 수행해야 함을 나타냅니다. 구체적으로 Milvus는 다음을 수행합니다:</p>
+<p>위 다이어그램에서 볼 수 있듯이 검색 요청에는 <code translate="no">chunk like &quot;%red%&quot;</code> 이 필터링 조건으로 포함되어 있으며, 이는 Milvus가 <code translate="no">chunk</code> 필드에 <code translate="no">red</code> 이라는 단어가 포함된 모든 엔티티 내에서 ANN 검색을 수행해야 함을 나타냅니다. 구체적으로 Milvus는 다음을 수행합니다:</p>
 <ul>
 <li><p>검색 요청에 포함된 필터링 조건과 일치하는 엔티티를 필터링합니다.</p></li>
 <li><p>필터링된 엔티티 내에서 ANN 검색을 수행합니다.</p></li>
@@ -264,6 +264,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -276,7 +277,7 @@ curl --request POST \
 }&#x27;</span>
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>검색 요청에 포함된 필터링 조건은 <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code> 입니다. 첫 번째 조건은 <code translate="no">color</code> 필드에 <code translate="no">red</code> 로 시작하는 값을 가진 엔티티를 요청하고, 다른 조건은 <code translate="no">likes</code> 필드에 <code translate="no">50</code> 보다 큰 값을 가진 엔티티를 요청하는 두 가지 조건을 포함하기 위해 및 연산자를 사용합니다. 이러한 요구 사항을 충족하는 엔티티는 두 개뿐입니다. top-K를 <code translate="no">3</code> 로 설정하면 Milvus는 이 두 엔티티와 쿼리 벡터 사이의 거리를 계산하여 검색 결과로 반환합니다.</p>
+<p>검색 요청에 포함된 필터링 조건은 <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code> 입니다. 첫 번째 조건은 <code translate="no">color</code> 필드에 <code translate="no">red</code> 로 시작하는 값을 가진 엔티티를 요청하고, 다른 조건은 <code translate="no">likes</code> 필드에 <code translate="no">50</code> 보다 큰 값을 가진 엔티티를 요청하는 두 가지 조건을 포함합니다. 이러한 요구 사항을 충족하는 엔티티는 두 개뿐입니다. top-K를 <code translate="no">3</code> 로 설정하면 Milvus는 이 두 엔티티와 쿼리 벡터 사이의 거리를 계산하여 검색 결과로 반환합니다.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>
         <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span> 
@@ -450,6 +451,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

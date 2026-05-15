@@ -43,8 +43,8 @@ summary: >-
    </span> <span class="img-wrapper"> <span>스파스 벡터 표현</span> </span></p>
 <p>토큰화 및 점수화를 통해 문서는 각 차원이 어휘의 특정 단어에 해당하는 단어 가방 벡터로 표현될 수 있습니다. 문서에 존재하는 단어만 0이 아닌 값을 가지므로 희소 벡터 표현이 생성됩니다. 스파스 벡터는 두 가지 접근 방식을 사용하여 생성할 수 있습니다:</p>
 <ul>
-<li><p><a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (용어 빈도 역 문서 빈도) 및 <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> (베스트 매칭 25)와 같은<strong>전통적인 통계 기법은</strong> 말뭉치 전체에서 단어의 빈도와 중요도에 따라 가중치를 할당합니다. 이러한 방법은 토큰을 나타내는 각 차원에 대한 점수로 간단한 통계를 계산합니다.  Milvus는 텍스트를 스파스 벡터로 자동 변환하여 수동 전처리가 필요 없는 BM25 방식의 <strong>전체 텍스트 검색을</strong> 기본으로 제공합니다. 이 방식은 정밀도와 정확한 일치가 중요한 키워드 기반 검색에 이상적입니다. 자세한 내용은 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p></li>
-<li><p><strong>신경 스파스 임베딩 모델은</strong> 대규모 데이터 세트에 대한 학습을 통해 스파스 표현을 생성하는 학습된 방법입니다. 일반적으로 트랜스포머 아키텍처를 사용하는 딥 러닝 모델로, 의미론적 컨텍스트에 따라 용어를 확장하고 가중치를 부여할 수 있습니다. Milvus는 <a href="https://arxiv.org/abs/2109.10086">SPLADE와</a> 같은 모델에서 외부에서 생성된 스파스 임베딩도 지원합니다. 자세한 내용은 <a href="/docs/ko/embeddings.md#Embedding-Overview">임베딩을</a> 참조하세요.</include></p></li>
+<li><p><a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (용어 빈도 역 문서 빈도) 및 <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> (베스트 매칭 25)와 같은<strong>전통적인 통계 기법은</strong> 말뭉치 전체에서 단어의 빈도와 중요도에 따라 가중치를 할당합니다. 이러한 방법은 토큰을 나타내는 각 차원에 대한 점수로 간단한 통계를 계산합니다.  Milvus는 텍스트를 스파스 벡터로 자동 변환하여 수동 전처리가 필요 없는 BM25 방식의 내장형 <strong>전체 텍스트 검색을</strong> 제공합니다. 이 방식은 정밀도와 정확한 일치가 중요한 키워드 기반 검색에 이상적입니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p></li>
+<li><p><strong>신경 스파스 임베딩 모델은</strong> 대규모 데이터 세트에 대한 학습을 통해 스파스 표현을 생성하는 학습된 방법입니다. 일반적으로 트랜스포머 아키텍처를 사용하는 딥 러닝 모델로, 의미론적 컨텍스트에 따라 용어를 확장하고 가중치를 부여할 수 있습니다. Milvus는 <a href="https://arxiv.org/abs/2109.10086">SPLADE와</a> 같은 모델에서 외부에서 생성된 스파스 임베딩도 지원합니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/embeddings.md#Embedding-Overview">임베딩을</a> 참조하세요.</include></p></li>
 </ul>
 <p>효율적인 검색을 위해 스파스 벡터와 원본 텍스트를 Milvus에 저장할 수 있습니다. 아래 다이어그램은 전체 프로세스를 간략하게 설명합니다.</p>
 <p>
@@ -52,7 +52,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
    </span> <span class="img-wrapper"> <span>스파스 벡터 워크플로</span> </span></p>
 <div class="alert note">
-<p>밀버스는 스파스 벡터 외에도 고밀도 벡터와 바이너리 벡터도 지원합니다. 고밀도 벡터는 심층적인 의미 관계를 캡처하는 데 이상적이며, 이진 벡터는 빠른 유사도 비교 및 콘텐츠 중복 제거와 같은 시나리오에 탁월합니다. 자세한 내용은 <a href="/docs/ko/dense-vector.md">고밀도 벡터</a> 및 <a href="/docs/ko/binary-vector.md">바이너리 벡터를</a> 참조하세요.</p>
+<p>밀버스는 스파스 벡터 외에도 고밀도 벡터와 바이너리 벡터도 지원합니다. 고밀도 벡터는 심층적인 의미 관계를 캡처하는 데 이상적이며, 이진 벡터는 빠른 유사도 비교 및 콘텐츠 중복 제거와 같은 시나리오에 탁월합니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/dense-vector.md">고밀도 벡터</a> 및 <a href="/docs/ko/v2.6.x/binary-vector.md">바이너리 벡터를</a> 참조하세요.</p>
 </div>
 <h2 id="Data-Formats" class="common-anchor-header">데이터 형식<button data-href="#Data-Formats" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -69,7 +69,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>다음 섹션에서는 SPLADE와 같은 학습된 스파스 임베딩 모델에서 벡터를 저장하는 방법을 설명합니다. 고밀도 벡터 기반 시맨틱 검색을 보완할 무언가를 찾고 계신다면, 간소화를 위해 SPLADE보다 BM25를 사용한 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 권장합니다. 품질 평가를 실행하고 SPLADE를 사용하기로 결정한 경우, <a href="/docs/ko/embeddings.md#Embedding-Overview">임베딩을</a> 통해 스파스 벡터를 생성하는 방법에 대한 도움말을 참조할 수 있습니다.</p>
+    </button></h2><p>다음 섹션에서는 SPLADE와 같은 학습된 스파스 임베딩 모델에서 벡터를 저장하는 방법을 설명합니다. 고밀도 벡터 기반 시맨틱 검색을 보완할 무언가를 찾고 계신다면, 간소화를 위해 SPLADE보다 BM25를 사용한 <a href="/docs/ko/v2.6.x/full-text-search.md">전체 텍스트 검색을</a> 권장합니다. 품질 평가를 실행하고 SPLADE를 사용하기로 결정한 경우, <a href="/docs/ko/v2.6.x/embeddings.md#Embedding-Overview">임베딩을</a> 통해 스파스 벡터를 생성하는 방법에 대한 내용을 참조할 수 있습니다.</p>
 <p>밀버스는 다음과 같은 형식의 스파스 벡터 입력을 지원합니다:</p>
 <ul>
 <li><p><strong>사전 목록( <code translate="no">{dimension_index: value, ...}</code> 형식)</strong></p>
@@ -280,7 +280,7 @@ schema.WithField(entity.NewField().
 <li><p><code translate="no">text</code>: 이 필드는 <code translate="no">VARCHAR</code> 데이터 유형을 사용하여 텍스트 문자열을 저장하며 최대 길이는 65535바이트입니다.</p></li>
 </ul>
 <div class="alert note">
-<p>데이터 삽입 중에 Milvus를 활성화하거나 지정된 텍스트 필드에서 스파스 벡터 임베딩을 생성하려면 함수와 관련된 추가 단계를 수행해야 합니다. 자세한 내용은 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p>
+<p>데이터 삽입 중에 Milvus를 활성화하거나 지정된 텍스트 필드에서 스파스 벡터 임베딩을 생성하려면 함수와 관련된 추가 단계를 수행해야 합니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p>
 </div>
 <h2 id="Set-Index-Parameters" class="common-anchor-header">인덱스 매개변수 설정<button data-href="#Set-Index-Parameters" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -297,7 +297,7 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>희소 벡터에 대한 인덱스를 생성하는 과정은 <a href="/docs/ko/dense-vector.md">고밀도 벡터의</a> 경우와 유사하지만 지정된 인덱스 유형(<code translate="no">index_type</code>), 거리 메트릭(<code translate="no">metric_type</code>) 및 인덱스 매개변수(<code translate="no">params</code>)에 차이가 있습니다.</p>
+    </button></h2><p>희소 벡터에 대한 인덱스를 생성하는 과정은 <a href="/docs/ko/v2.6.x/dense-vector.md">고밀도 벡터의</a> 경우와 유사하지만 지정된 인덱스 유형(<code translate="no">index_type</code>), 거리 메트릭(<code translate="no">metric_type</code>) 및 인덱스 매개변수(<code translate="no">params</code>)에 차이가 있습니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -357,9 +357,9 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <button class="copy-code-btn"></button></code></pre>
 <p>이 예에서는 <code translate="no">SPARSE_INVERTED_INDEX</code> 인덱스 유형과 <code translate="no">IP</code> 을 메트릭으로 사용합니다. 자세한 내용은 다음 리소스를 참조하세요:</p>
 <ul>
-<li><p><a href="/docs/ko/sparse-inverted-index.md">SPARSE_INVERTED_INDEX</a>: 인덱스 및 해당 매개변수 설명</p></li>
-<li><p><a href="/docs/ko/metric.md">메트릭 유형</a>: 다양한 필드 유형에 대해 지원되는 메트릭 유형</p></li>
-<li><p><a href="/docs/ko/full-text-search.md">전체 텍스트 검색</a>: 전체 텍스트 검색에 대한 자세한 자습서</p></li>
+<li><p><a href="/docs/ko/v2.6.x/sparse-inverted-index.md">SPARSE_INVERTED_INDEX</a>: 인덱스 및 해당 매개변수 설명</p></li>
+<li><p><a href="/docs/ko/v2.6.x/metric.md">메트릭 유형</a>: 다양한 필드 유형에 대해 지원되는 메트릭 유형</p></li>
+<li><p><a href="/docs/ko/v2.6.x/full-text-search.md">전체 텍스트 검색</a>: 전체 텍스트 검색에 대한 자세한 자습서</p></li>
 </ul>
 <h2 id="Create-Collection" class="common-anchor-header">컬렉션 만들기<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -376,7 +376,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>스파스 벡터 및 인덱스 설정이 완료되면 스파스 벡터를 포함하는 컬렉션을 만들 수 있습니다. 아래 예에서는 <a href="/docs/ko/create-collection.md"><code translate="no">create_collection</code></a> 메서드를 사용하여 <code translate="no">my_collection</code> 라는 이름의 컬렉션을 생성합니다.</p>
+    </button></h2><p>스파스 벡터 및 인덱스 설정이 완료되면 스파스 벡터를 포함하는 컬렉션을 만들 수 있습니다. 아래 예에서는 <a href="/docs/ko/v2.6.x/create-collection.md"><code translate="no">create_collection</code></a> 메서드를 사용하여 <code translate="no">my_collection</code> 라는 이름의 컬렉션을 생성합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -416,6 +416,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -541,6 +542,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {
@@ -693,6 +695,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: $queryData,
@@ -705,4 +708,4 @@ curl --request POST \
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.63,&quot;id&quot;:&quot;453577185629572535&quot;,&quot;pk&quot;:&quot;453577185629572535&quot;},{&quot;distance&quot;:0.1,&quot;id&quot;:&quot;453577185629572534&quot;,&quot;pk&quot;:&quot;453577185629572534&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>유사도 검색 매개변수에 대한 자세한 내용은 <a href="/docs/ko/single-vector-search.md">기본 벡터 검색을</a> 참조하세요.</p>
+<p>유사도 검색 매개변수에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/single-vector-search.md">기본 벡터 검색을</a> 참조하세요.</p>

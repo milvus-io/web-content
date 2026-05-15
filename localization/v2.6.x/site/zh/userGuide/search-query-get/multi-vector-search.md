@@ -27,7 +27,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>混合搜索工作流程</span> </span></p>
 <p>多向量混合搜索集成了不同的搜索方法或跨越了各种模态的 Embeddings：</p>
 <ul>
-<li><p><strong>稀疏-密集向量搜索</strong>：<a href="/docs/zh/dense-vector.md">密集向量</a>是捕捉语义关系的绝佳方法，而<a href="/docs/zh/sparse_vector.md">稀疏向量</a>则是精确匹配关键词的高效方法。混合搜索结合了这些方法，既能提供广泛的概念理解，又能提供精确的术语相关性，从而改善搜索结果。通过利用每种方法的优势，混合搜索克服了单独方法的局限性，为复杂查询提供了更好的性能。以下是结合语义搜索和全文搜索的混合检索的详细<a href="/docs/zh/full_text_search_with_milvus.md">指南</a>。</p></li>
+<li><p><strong>稀疏-密集向量搜索</strong>：<a href="/docs/zh/v2.6.x/dense-vector.md">密集向量</a>是捕捉语义关系的绝佳方法，而<a href="/docs/zh/v2.6.x/sparse_vector.md">稀疏向量</a>则是精确匹配关键词的高效方法。混合搜索结合了这些方法，既能提供广泛的概念理解，又能提供精确的术语相关性，从而改善搜索结果。通过利用每种方法的优势，混合搜索克服了单独方法的局限性，为复杂查询提供了更好的性能。以下是结合语义搜索和全文搜索的混合检索的详细<a href="/docs/zh/v2.6.x/full_text_search_with_milvus.md">指南</a>。</p></li>
 <li><p><strong>多模态向量搜索</strong>：多模态向量搜索是一种功能强大的技术，可以跨文本、图像、音频等各种数据类型进行搜索。这种方法的主要优势在于它能将不同的模式统一为一种无缝、连贯的搜索体验。例如，在产品搜索中，用户可能会输入一个文本查询来查找用文本和图像描述的产品。通过混合搜索方法将这些模式结合起来，可以提高搜索准确性或丰富搜索结果。</p></li>
 </ul>
 <h2 id="Example" class="common-anchor-header">示例<button data-href="#Example" class="anchor-icon" translate="no">
@@ -83,7 +83,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>对于多向量混合搜索，我们应该在一个 Collection 模式中定义多个向量字段。有关集合中允许的向量字段数量限制的详细信息，请参阅<a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Zilliz Cloud Limits</a>。  不过，如有必要，您可以调整 <a href="/docs/zh/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a>以根据需要在集合中最多包含 10 个向量字段。</p>
+    </button></h3><p>对于多向量混合搜索，我们应该在一个 Collection 模式中定义多个向量字段。有关集合中允许的向量字段数量限制的详细信息，请参阅<a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Zilliz Cloud Limits</a>。  不过，如有必要，您可以调整 <a href="/docs/zh/v2.6.x/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a>以根据需要在集合中最多包含 10 个向量字段。</p>
 <p>此示例将以下字段纳入 Schema 模式：</p>
 <ul>
 <li><p><code translate="no">id</code>:作为存储文本 ID 的主键。该字段的数据类型为<code translate="no">INT64</code> 。</p></li>
@@ -92,7 +92,7 @@ summary: >-
 <li><p><code translate="no">text_sparse</code>:用于存储文本的稀疏向量。该字段的数据类型为<code translate="no">SPARSE_FLOAT_VECTOR</code> 。</p></li>
 <li><p><code translate="no">image_dense</code>:用于存储产品图像的密集向量。该字段的数据类型为<code translate="no">FLOAT_VETOR</code> ，向量维数为 512。</p></li>
 </ul>
-<p>由于我们将使用内置的 BM25 算法对文本字段进行全文检索，因此有必要在 Schema 中添加 Milvus<code translate="no">Function</code> 。有关详细信息，请参阅<a href="/docs/zh/full-text-search.md">全文搜索</a>。</p>
+<p>由于我们将使用内置的 BM25 算法对文本字段进行全文检索，因此有必要在 Schema 中添加 Milvus<code translate="no">Function</code> 。有关详细信息，请参阅<a href="/docs/zh/v2.6.x/full-text-search.md">全文搜索</a>。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
@@ -346,7 +346,7 @@ schema.WithField(entity.NewField().
 <li><p><code translate="no">text_sparse_index</code>：为文本稀疏向量场创建了<code translate="no">SPARSE_INVERTED_INDEX</code>类型的索引，其度量类型为<code translate="no">BM25</code> 。</p></li>
 <li><p><code translate="no">image_dense_index</code>：为图像密集向量场创建了<code translate="no">AUTOINDEX</code> 类型的索引，其公制类型为<code translate="no">IP</code> 。</p></li>
 </ul>
-<p>您可以根据需要选择其他索引类型，以最适合您的需求和数据类型。有关支持的索引类型的详细信息，请参阅<a href="/docs/zh/index-vector-fields.md">可用索引类型</a>文档。</p>
+<p>您可以根据需要选择其他索引类型，以最适合您的需求和数据类型。有关支持的索引类型的详细信息，请参阅<a href="/docs/zh/v2.6.x/index-vector-fields.md">可用索引类型</a>文档。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
@@ -511,6 +511,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -536,7 +537,7 @@ curl --request POST \
 <ul>
 <li><p><code translate="no">id</code>代表产品 ID 的整数</p></li>
 <li><p><code translate="no">text</code>：包含产品描述的字符串</p></li>
-<li><p><code translate="no">text_dense</code>一个包含 768 个浮点数值的列表，表示文本描述的密集 Embeddings</p></li>
+<li><p><code translate="no">text_dense</code>：768 个浮点数值的列表，代表文本描述的密集 Embeddings</p></li>
 <li><p><code translate="no">image_dense</code>代表产品图片密集嵌入的 512 个浮点数值的列表</p></li>
 </ul>
 <p>您可以使用相同或不同的模型为每个字段生成密集嵌入。在本例中，两个高密度嵌入的维度不同，说明它们是由不同的模型生成的。以后定义每个查询时，请务必使用相应的模型生成相应的查询嵌入。</p>
@@ -646,6 +647,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;text&quot;: &quot;Red cotton t-shirt with round neck&quot; , &quot;text_dense&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, ...], &quot;image_dense&quot;: [0.6366019600530924, -0.09323198122475052, ...]},
@@ -686,7 +688,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
         ></path>
       </svg>
     </button></h3><p>混合搜索是通过在<code translate="no">hybrid_search()</code> 函数中创建多个<code translate="no">AnnSearchRequest</code> 来实现的，其中每个<code translate="no">AnnSearchRequest</code> 代表一个特定向量场的基本 ANN 搜索请求。因此，在进行混合搜索之前，有必要为每个向量场创建一个<code translate="no">AnnSearchRequest</code> 。</p>
-<p>此外，通过在<code translate="no">AnnSearchRequest</code> 中配置<code translate="no">expr</code> 参数，可以为混合搜索设置过滤条件。请参阅<a href="/docs/zh/filtered-search.md">过滤搜索</a>和<a href="/docs/zh/boolean.md">过滤说明</a>。</p>
+<p>此外，通过在<code translate="no">AnnSearchRequest</code> 中配置<code translate="no">expr</code> 参数，可以为混合搜索设置过滤条件。请参阅<a href="/docs/zh/v2.6.x/filtered-search.md">过滤搜索</a>和<a href="/docs/zh/v2.6.x/boolean.md">过滤说明</a>。</p>
 <div class="alert note">
 <p>在混合搜索中，每个<code translate="no">AnnSearchRequest</code> 只支持一个查询数据。</p>
 </div>
@@ -840,8 +842,8 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>要对 ANN 搜索结果集进行合并和重新排序，选择适当的重新排序策略至关重要。Milvus 提供多种重排策略。有关这些重排机制的更多详情，请参阅<a href="/docs/zh/weighted-ranker.md">加权排名器</a>或<a href="/docs/zh/rrf-ranker.md">RRF 排名器</a>。</p>
-<p>在本例中，由于没有特别强调特定的搜索查询，我们将使用 RRFRanker 策略。</p>
+    </button></h3><p>要对 ANN 搜索结果集进行合并和重新排序，选择适当的重新排序策略至关重要。Milvus 提供多种重排策略。有关这些重排机制的更多详情，请参阅<a href="/docs/zh/v2.6.x/weighted-ranker.md">加权排名器</a>或<a href="/docs/zh/v2.6.x/rrf-ranker.md">RRF 排名器</a>。</p>
+<p>在本例中，由于没有特别强调特定的搜索查询，我们将采用 RRFRanker 策略。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">ranker = Function(
@@ -979,6 +981,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/hybrid_search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;search\&quot;: <span class="hljs-variable">${req}</span>,
@@ -1024,7 +1027,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h3><p>如果您的 Collections 有<code translate="no">TIMESTAMPTZ</code> 字段，您可以通过在混合搜索调用中设置<code translate="no">timezone</code> 参数，为单次操作临时覆盖数据库或 Collections 的默认时区。这可以控制在操作过程中如何显示和比较<code translate="no">TIMESTAMPTZ</code> 值。</p>
-<p><code translate="no">timezone</code> 的值必须是有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 时区标识符</a>（例如，<strong>亚洲/上海</strong>、<strong>美国/芝加哥</strong>或<strong>UTC</strong>）。有关如何使用<code translate="no">TIMESTAMPTZ</code> 字段的详细信息，请参阅<a href="/docs/zh/timestamptz-field.md">TIMESTAMPTZ 字段</a>。</p>
+<p><code translate="no">timezone</code> 的值必须是有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 时区标识符</a>（例如，<strong>亚洲/上海</strong>、<strong>美国/芝加哥</strong>或<strong>UTC</strong>）。有关如何使用<code translate="no">TIMESTAMPTZ</code> 字段的详细信息，请参阅<a href="/docs/zh/v2.6.x/timestamptz-field.md">TIMESTAMPTZ 字段</a>。</p>
 <p>下面的示例展示了如何为混合搜索操作临时设置时区：</p>
 <pre><code translate="no" class="language-python">res = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,

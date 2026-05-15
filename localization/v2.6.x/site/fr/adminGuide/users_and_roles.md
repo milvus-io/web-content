@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus permet un contrôle d'accès précis grâce à la méthode RBAC. Vous pouvez commencer par créer des utilisateurs et des rôles, puis attribuer des privilèges ou des groupes de privilèges aux rôles, et enfin gérer le contrôle d'accès en accordant des rôles aux utilisateurs. Cette méthode garantit l'efficacité et la sécurité de la gestion des accès. Cette page présente la création d'utilisateurs et de rôles dans Milvus.</p>
+    </button></h1><p>Milvus permet un contrôle d'accès très fin grâce au système RBAC. Vous pouvez commencer par créer des utilisateurs et des rôles, puis attribuer des privilèges ou des groupes de privilèges aux rôles, et enfin gérer le contrôle d'accès en accordant des rôles aux utilisateurs. Cette méthode garantit l'efficacité et la sécurité de la gestion des accès. Cette page présente la création d'utilisateurs et de rôles dans Milvus.</p>
 <h2 id="User" class="common-anchor-header">Utilisateur<button data-href="#User" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +41,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Après l'initialisation d'une instance Milvus, un utilisateur racine est automatiquement généré pour l'authentification lors de la première connexion à Milvus. Le nom d'utilisateur de l'utilisateur racine est <code translate="no">root</code> et le mot de passe est <code translate="no">Milvus</code>. Le rôle par défaut de l'utilisateur racine est <code translate="no">admin</code>, qui a accès à toutes les ressources. Pour garantir la sécurité des données, veuillez conserver les informations d'identification de l'utilisateur racine afin d'éviter tout accès non autorisé.</p>
-<p>Pour les opérations quotidiennes, nous recommandons de créer des utilisateurs au lieu d'utiliser l'utilisateur racine.</p>
+<p>Pour les opérations quotidiennes, nous recommandons de créer des utilisateurs plutôt que d'utiliser l'utilisateur racine.</p>
 <h3 id="Create-a-user" class="common-anchor-header">Créer un utilisateur<button data-href="#Create-a-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -135,6 +135,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;userName&quot;: &quot;user_1&quot;,
     &quot;password&quot;: &quot;P@ssw0rd&quot;
@@ -198,6 +199,7 @@ client.updatePassword(updatePasswordReq);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/update_password&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;newPassword&quot;: &quot;P@ssw0rd!&quot;,
     &quot;userName&quot;: &quot;user_1&quot;,
@@ -240,6 +242,7 @@ client.list_users()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/list&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Voici un exemple de résultat. <code translate="no">root</code> est l'utilisateur par défaut généré automatiquement dans Milvus. <code translate="no">user_1</code> est le nouvel utilisateur qui vient d'être créé.</p>
@@ -308,6 +311,7 @@ client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;
 }&#x27;</span>
@@ -350,6 +354,7 @@ client.list_roles()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/list&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Voici un exemple de sortie. <code translate="no">admin</code> est le rôle par défaut dans Milvus. <code translate="no">role_a</code> est le nouveau rôle qui vient d'être créé.</p>

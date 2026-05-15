@@ -43,11 +43,11 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p><strong>Valores predefinidos</strong>: Os campos ARRAY não suportam valores predefinidos. No entanto, você pode definir o atributo <code translate="no">nullable</code> como <code translate="no">True</code> para permitir valores nulos. Para obter detalhes, consulte <a href="/docs/pt/nullable-and-default.md">Nullable &amp; Default</a>.</p></li>
-<li><p><strong>Tipo de dados:</strong> Todos os elementos de um campo ARRAY têm de partilhar o mesmo tipo de dados, que é definido pelo parâmetro <code translate="no">element_type</code>. Quando <code translate="no">element_type</code> é definido como <code translate="no">VARCHAR</code>, também tem de especificar <code translate="no">max_length</code> para os elementos da matriz. O parâmetro <code translate="no">element_type</code> aceita qualquer tipo de dados escalares suportado pelo Milvus, com exceção de <code translate="no">JSON</code>.</p></li>
+<li><p><strong>Tipo de dados:</strong> Todos os elementos de um campo ARRAY têm de partilhar o mesmo tipo de dados, que é definido pelo parâmetro <code translate="no">element_type</code>. Quando <code translate="no">element_type</code> é definido como <code translate="no">VARCHAR</code>, tem também de especificar <code translate="no">max_length</code> para os elementos da matriz. O parâmetro <code translate="no">element_type</code> aceita qualquer tipo de dados escalares suportado pelo Milvus, com exceção de <code translate="no">JSON</code>.</p></li>
 <li><p><strong>Capacidade da matriz</strong>: O número de elementos num campo ARRAY tem de ser inferior ou igual à capacidade máxima definida aquando da criação da matriz, tal como especificado em <code translate="no">max_capacity</code>. O valor deve ser um número inteiro dentro do intervalo de <strong>1</strong> a <strong>4096</strong>.</p></li>
 <li><p><strong>Tratamento de strings</strong>: Os valores de cadeia de caracteres nos campos de matriz são armazenados como estão, sem escape semântico ou conversão. Por exemplo, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> e <code translate="no">&quot;a\&quot;b&quot;</code> são armazenados como introduzidos, enquanto <code translate="no">'a'b'</code> e <code translate="no">&quot;a&quot;b&quot;</code> são considerados valores inválidos.</p></li>
 </ul>
-<h2 id="Add-ARRAY-field" class="common-anchor-header">Adicionar um campo ARRAY<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
+<h2 id="Add-ARRAY-field" class="common-anchor-header">Adicionar campo ARRAY<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -66,7 +66,7 @@ summary: >-
 <ol>
 <li><p>Definir <code translate="no">datatype</code> como o tipo de dados Array suportado, <code translate="no">ARRAY</code>.</p></li>
 <li><p>Utilizar o parâmetro <code translate="no">element_type</code> para especificar o tipo de dados dos elementos da matriz. Todos os elementos da mesma matriz devem ter o mesmo tipo de dados.</p></li>
-<li><p>Utilizando o parâmetro <code translate="no">max_capacity</code> para definir a capacidade máxima da matriz, ou seja, o número máximo de elementos que pode conter.</p></li>
+<li><p>Usando o parâmetro <code translate="no">max_capacity</code> para definir a capacidade máxima da matriz, ou seja, o número máximo de elementos que ela pode conter.</p></li>
 </ol>
 <p>Eis como definir um esquema de coleção que inclui campos ARRAY:</p>
 <div class="alert note">
@@ -384,6 +384,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -500,6 +501,7 @@ client.<span class="hljs-title function_">insert</span>({
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {
@@ -599,6 +601,7 @@ fmt.Println(<span class="hljs-string">&quot;ratings&quot;</span>, rs.GetColumn(<
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;tags IS NOT NULL&quot;,
@@ -676,6 +679,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;my_collection&quot;,
   &quot;filter&quot;: &quot;ratings[0] &gt; 4&quot;,
@@ -775,6 +779,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

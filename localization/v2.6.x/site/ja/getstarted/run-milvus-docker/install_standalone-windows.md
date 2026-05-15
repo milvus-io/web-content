@@ -189,7 +189,7 @@ Delete successfully.​
 <li><p>右クリックから管理<strong>者として実行を</strong>選択し、管理者モードでDocker Desktopを開きます。</p></li>
 <li><p>PowerShellまたはWindowsコマンドプロンプトで以下のコマンドを実行し、Milvus Standalone用のDocker Compose設定ファイルをダウンロードし、Milvusを起動します。</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.15/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.16/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -230,7 +230,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Milvusの設定ファイルをダウンロードします。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.15/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.16/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Milvusを起動します。</p>
@@ -297,7 +297,7 @@ The most recent version of Windows Subsystem for Linux is already installed.​
 
 </code></pre></li>
 <li><p>Docker Daemonが起動しているか確認します。</p>
-<p>Docker Desktopのインストールディレクトリに移動し、<code translate="no">.\DockerCli.exe -SwitchDaemon</code> 、Docker Daemonを起動します。</p>
+<p>Docker Desktopのインストールディレクトリに移動し、<code translate="no">.\DockerCli.exe -SwitchDaemon</code> 。</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;cd &quot;C:\Program Files\Docker\Docker&quot;​
 C:\Program Files\Docker\Docker&gt;.\DockerCli.exe -SwitchDaemon​
 Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.\pipe\dockerBackendApiServer: The system cannot find the file specified.​
@@ -380,27 +380,27 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
       </svg>
     </button></h2><p>DockerにMilvusをインストールしたら、次のことができます：</p>
 <ul>
-<li><p><a href="/docs/ja/quickstart.md">クイックスタートで</a>Milvusの機能を確認する。</p></li>
+<li><p><a href="/docs/ja/v2.6.x/quickstart.md">クイックスタートで</a>Milvusの機能を確認する。</p></li>
 <li><p>Milvusの基本操作を学ぶ：</p>
 <ul>
-<li><a href="/docs/ja/manage_databases.md">データベースの管理</a></li>
-<li><a href="/docs/ja/manage-collections.md">コレクションの管理</a></li>
-<li><a href="/docs/ja/manage-partitions.md">パーティションの管理</a></li>
-<li><a href="/docs/ja/insert-update-delete.md">挿入、アップサート、削除</a></li>
-<li><a href="/docs/ja/single-vector-search.md">単一ベクトル検索</a></li>
-<li><a href="/docs/ja/multi-vector-search.md">ハイブリッド検索</a></li>
+<li><a href="/docs/ja/v2.6.x/manage_databases.md">データベースの管理</a></li>
+<li><a href="/docs/ja/v2.6.x/manage-collections.md">コレクションの管理</a></li>
+<li><a href="/docs/ja/v2.6.x/manage-partitions.md">パーティションの管理</a></li>
+<li><a href="/docs/ja/v2.6.x/insert-update-delete.md">挿入、アップサート、削除</a></li>
+<li><a href="/docs/ja/v2.6.x/single-vector-search.md">単一ベクトル検索</a></li>
+<li><a href="/docs/ja/v2.6.x/multi-vector-search.md">ハイブリッド検索</a></li>
 </ul></li>
-<li><p><a href="/docs/ja/upgrade_milvus_cluster-helm.md">Helm Chartを使用したMilvusのアップグレード</a>。</p></li>
-<li><p><a href="/docs/ja/scaleout.md">Milvusクラスタをスケールする</a>。</p></li>
+<li><p><a href="/docs/ja/v2.6.x/upgrade_milvus_cluster-helm.md">Helm Chartを使用したMilvusのアップグレード</a>。</p></li>
+<li><p><a href="/docs/ja/v2.6.x/scaleout.md">Milvusクラスタをスケールする</a>。</p></li>
 <li><p>Milvuクラスタをクラウドにデプロイする：</p>
 <ul>
-<li><a href="/docs/ja/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/ja/gcp.md">Googleクラウド</a></li>
-<li><a href="/docs/ja/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/ja/v2.6.x/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/ja/v2.6.x/gcp.md">Googleクラウド</a></li>
+<li><a href="/docs/ja/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p><a href="/docs/ja/milvus-webui.md">Milvusの</a>観測と管理のための直感的なWebインターフェースである<a href="/docs/ja/milvus-webui.md">Milvus WebUIを</a>ご覧ください。</p></li>
-<li><p><a href="/docs/ja/milvus_backup_overview.md">Milvus</a>データバックアップのためのオープンソースツールである<a href="/docs/ja/milvus_backup_overview.md">Milvus Backupを</a>ご紹介します。</p></li>
-<li><p>Milvusのデバッグとダイナミックな設定更新のためのオープンソースツール、<a href="/docs/ja/birdwatcher_overview.md">Birdwatcherを</a>ご覧ください。</p></li>
+<li><p><a href="/docs/ja/v2.6.x/milvus-webui.md">Milvusの</a>観測と管理のための直感的なWebインターフェースである<a href="/docs/ja/v2.6.x/milvus-webui.md">Milvus WebUIを</a>ご覧ください。</p></li>
+<li><p><a href="/docs/ja/v2.6.x/milvus_backup_overview.md">Milvus</a>データバックアップのためのオープンソースツールである<a href="/docs/ja/v2.6.x/milvus_backup_overview.md">Milvus Backupを</a>ご紹介します。</p></li>
+<li><p>Milvusのデバッグとダイナミックな設定更新のためのオープンソースツール、<a href="/docs/ja/v2.6.x/birdwatcher_overview.md">Birdwatcherを</a>ご覧ください。</p></li>
 <li><p>Milvusを直感的に管理するオープンソースのGUIツール<a href="https://github.com/zilliztech/attu">Attuを</a>ご紹介します。</p></li>
-<li><p><a href="/docs/ja/monitor.md">PrometheusでMilvusを監視する</a>。</p></li>
+<li><p><a href="/docs/ja/v2.6.x/monitor.md">PrometheusでMilvusを監視する</a>。</p></li>
 </ul>

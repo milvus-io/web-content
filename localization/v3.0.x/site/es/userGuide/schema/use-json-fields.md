@@ -249,6 +249,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;product_catalog\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -423,6 +424,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/product_catalog/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;data\&quot;: <span class="hljs-variable">$entities</span>
 }&quot;</span>
@@ -859,7 +861,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Después de definir los parámetros del índice, puede aplicarlos a la colección utilizando <code translate="no">create_index()</code>:</p>
+    </button></h3><p>Una vez definidos los parámetros del índice, puede aplicarlos a la colección utilizando <code translate="no">create_index()</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_index(
@@ -899,6 +901,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;product_catalog\&quot;,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
@@ -949,7 +952,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <li><p>Has creado un índice en cada campo vectorial.</p></li>
 <li><p>La colección está cargada en memoria.</p></li>
 </ul>
-<p>Para obtener una lista completa de los operadores y expresiones compatibles, consulte <a href="/docs/es/json-operators.md">Operadores JSON</a>.</p>
+<p>Para ver la lista completa de operadores y expresiones compatibles, consulta <a href="/docs/es/json-operators.md">Operadores JSON</a>.</p>
 <h2 id="Pull-it-all-together" class="common-anchor-header">Juntarlo todo<button data-href="#Pull-it-all-together" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1159,7 +1162,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
         ></path>
       </svg>
     </button></h3><p>Los tipos incoherentes entre entidades pueden provocar <strong>una indexación parcial</strong>. Por ejemplo, si <code translate="no">metadata[&quot;price&quot;]</code> se almacena como número (<code translate="no">99.99</code>) y como cadena (<code translate="no">&quot;99.99&quot;</code>), y el índice se define con <code translate="no">json_cast_type=&quot;double&quot;</code>, sólo se indexarán los valores numéricos. Las entradas en forma de cadena se omitirán y no aparecerán en los resultados del filtro.</p>
-<h3 id="Can-I-use-filters-with-a-different-type-than-the-indexed-cast-type" class="common-anchor-header">¿Puedo utilizar filtros con un tipo diferente al tipo de molde indexado?<button data-href="#Can-I-use-filters-with-a-different-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
+<h3 id="Can-I-use-filters-with-a-different-type-than-the-indexed-cast-type" class="common-anchor-header">¿Puedo utilizar filtros con un tipo distinto del tipo de molde indexado?<button data-href="#Can-I-use-filters-with-a-different-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

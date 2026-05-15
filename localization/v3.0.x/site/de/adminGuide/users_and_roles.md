@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus erreicht eine feinkörnige Zugriffskontrolle durch RBAC. Sie können mit der Erstellung von Benutzern und Rollen beginnen, dann den Rollen Privilegien oder Privilegiengruppen zuweisen und schließlich die Zugriffskontrolle durch die Zuweisung von Rollen an Benutzer verwalten. Diese Methode gewährleistet die Effizienz und Sicherheit der Zugriffsverwaltung. Auf dieser Seite erfahren Sie, wie Sie Benutzer und Rollen in Milvus erstellen können.</p>
+    </button></h1><p>Milvus erreicht eine feinkörnige Zugriffskontrolle durch RBAC. Sie können mit der Erstellung von Benutzern und Rollen beginnen, dann den Rollen Privilegien oder Privilegiengruppen zuweisen und schließlich die Zugriffskontrolle durch die Zuweisung von Rollen an Benutzer verwalten. Diese Methode gewährleistet die Effizienz und Sicherheit der Zugriffsverwaltung. Auf dieser Seite wird beschrieben, wie man Benutzer und Rollen in Milvus erstellt.</p>
 <h2 id="User" class="common-anchor-header">Benutzer<button data-href="#User" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +40,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Nach der Initialisierung einer Milvus-Instanz wird automatisch ein Root-Benutzer für die Authentifizierung bei der ersten Verbindung zu Milvus erstellt. Der Benutzername des Root-Benutzers ist <code translate="no">root</code> und das Passwort lautet <code translate="no">Milvus</code>. Die Standardrolle des Root-Benutzers ist <code translate="no">admin</code>, der Zugriff auf alle Ressourcen hat. Um die Datensicherheit zu gewährleisten, bewahren Sie bitte die Anmeldedaten des Root-Benutzers sicher auf, um unbefugten Zugriff zu verhindern.</p>
+    </button></h2><p>Nach der Initialisierung einer Milvus-Instanz wird automatisch ein Root-Benutzer für die Authentifizierung bei der ersten Verbindung mit Milvus erstellt. Der Benutzername des Root-Benutzers ist <code translate="no">root</code> und das Passwort lautet <code translate="no">Milvus</code>. Die Standardrolle des Root-Benutzers ist <code translate="no">admin</code>, der Zugriff auf alle Ressourcen hat. Um die Datensicherheit zu gewährleisten, bewahren Sie bitte die Anmeldedaten des Root-Benutzers sicher auf, um unbefugten Zugriff zu verhindern.</p>
 <p>Für den täglichen Betrieb empfiehlt es sich, Benutzer anzulegen, anstatt den Root-Benutzer zu verwenden.</p>
 <h3 id="Create-a-user" class="common-anchor-header">Anlegen eines Benutzers<button data-href="#Create-a-user" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -135,6 +135,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;userName&quot;: &quot;user_1&quot;,
     &quot;password&quot;: &quot;P@ssw0rd&quot;
@@ -198,6 +199,7 @@ client.updatePassword(updatePasswordReq);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/update_password&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;newPassword&quot;: &quot;P@ssw0rd!&quot;,
     &quot;userName&quot;: &quot;user_1&quot;,
@@ -240,6 +242,7 @@ client.list_users()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/list&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Unten sehen Sie eine Beispielausgabe. <code translate="no">root</code> ist der Standardbenutzer, der automatisch in Milvus erstellt wird. <code translate="no">user_1</code> ist der neue Benutzer, der gerade erstellt wurde.</p>
@@ -308,6 +311,7 @@ client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;
 }&#x27;</span>
@@ -327,7 +331,7 @@ client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Nachdem Sie mehrere Rollen erstellt haben, können Sie alle vorhandenen Rollen auflisten und einsehen.</p>
+    </button></h3><p>Nachdem Sie mehrere Rollen erstellt haben, können Sie alle vorhandenen Rollen auflisten und ansehen.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -350,6 +354,7 @@ client.list_roles()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/list&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Unten sehen Sie eine Beispielausgabe. <code translate="no">admin</code> ist die Standardrolle in Milvus. <code translate="no">role_a</code> ist die neue Rolle, die gerade erstellt wurde.</p>

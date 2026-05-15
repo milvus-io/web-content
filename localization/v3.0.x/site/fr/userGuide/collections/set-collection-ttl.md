@@ -24,7 +24,7 @@ summary: >-
 <p>Il existe deux modes de TTL :</p>
 <ul>
 <li><p><strong>TTL au niveau de la collection</strong> - une fenêtre de rétention partagée par chaque entité, définie par la propriété <code translate="no">collection.ttl.seconds</code>.</p></li>
-<li><p><strong>TTL au niveau de l'entité</strong> - chaque entité a son propre délai d'expiration absolu dans un champ <code translate="no">TIMESTAMPTZ</code> dédié, marqué comme champ TTL par la propriété <code translate="no">ttl_field</code>.</p></li>
+<li><p><strong>TTL au niveau de l'entité</strong> - chaque entité porte son propre délai d'expiration absolu dans un champ <code translate="no">TIMESTAMPTZ</code> dédié, marqué comme champ TTL par le biais de la propriété <code translate="no">ttl_field</code>.</p></li>
 </ul>
 <div class="alert note">
 <p>Cette fonctionnalité ne s'applique qu'aux collections gérées.</p>
@@ -94,7 +94,7 @@ summary: >-
 <li><p><strong>Expiration en fonction de l'activité.</strong> Une entité représente un enregistrement qui n'est valable que jusqu'à un moment donné (fin d'une campagne, expiration d'une session).</p></li>
 </ul>
 <div class="alert note">
-<p>Les entités expirées n'apparaîtront pas dans les résultats des recherches ou des requêtes. Cependant, elles peuvent rester dans le stockage jusqu'au compactage des données suivant, qui devrait être effectué dans les 24 heures.</p>
+<p>Les entités expirées n'apparaîtront pas dans les résultats des recherches ou des requêtes. Toutefois, elles peuvent rester dans le stockage jusqu'au compactage des données, qui doit être effectué dans les 24 heures suivantes.</p>
 <p>Vous pouvez contrôler le moment du déclenchement du compactage des données en définissant l'élément de configuration <code translate="no">dataCoord.compaction.expiry.tolerance</code> dans votre fichier de configuration Milvus.</p>
 <p>Cet élément de configuration a pour valeur par défaut <code translate="no">-1</code>, ce qui indique que l'intervalle de compactage des données existant s'applique. Toutefois, lorsque vous modifiez sa valeur en un nombre entier positif, comme <code translate="no">12</code>, le compactage des données sera déclenché le nombre d'heures spécifié après l'expiration de toute entité.</p>
 </div>
@@ -282,6 +282,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -374,6 +375,7 @@ index_params.add_index(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;properties\&quot;: {
@@ -442,6 +444,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/drop_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;propertyKeys\&quot;: [
@@ -1195,7 +1198,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Actuellement, les données expirent en fonction de l'heure à laquelle elles ont été insérées ou réinsérées. Les données expirées ne seront pas affichées dans les résultats de recherche. Pour plus de détails, voir <a href="/docs/fr/set-collection-ttl.md#Dyq9dQUmwoAk9WxwEuEcSDkPnoc">Exemples.</a></p>
+    </button></h3><p>Actuellement, les données expirent en fonction du moment où elles ont été insérées ou réinsérées. Les données expirées ne seront pas affichées dans les résultats de recherche. Pour plus de détails, voir <a href="/docs/fr/set-collection-ttl.md#Dyq9dQUmwoAk9WxwEuEcSDkPnoc">Exemples.</a></p>
 <h3 id="When-will-the-expired-data-be-physically-deleted" class="common-anchor-header">Quand les données expirées seront-elles physiquement supprimées ?<button data-href="#When-will-the-expired-data-be-physically-deleted" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -42,7 +42,7 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
 <p>كما هو موضح في الشكل أعلاه، لنفترض أنك بحاجة إلى منح ثلاثة امتيازات مختلفة لدور ما.</p>
 <ul>
 <li><p>إذا كنت لا تستخدم مجموعة امتيازات، فأنت بحاجة إلى منح الامتيازات ثلاث مرات.</p></li>
-<li><p>أما إذا كنت تستخدم مجموعة امتيازات، فأنت تحتاج فقط إلى إنشاء مجموعة امتيازات وإضافة الامتيازات الثلاثة إلى مجموعة الامتيازات هذه ومنح مجموعة الامتيازات للدور أ.</p></li>
+<li><p>أما إذا كنت تستخدم مجموعة امتيازات، فأنت بحاجة فقط إلى إنشاء مجموعة امتيازات وإضافة الامتيازات الثلاثة إلى مجموعة الامتيازات هذه ومنح مجموعة الامتيازات للدور أ.</p></li>
 </ul>
 <p>باستخدام مجموعة امتيازات، يمكنك منح امتيازات متعددة بشكل مجمّع لدور ما.</p>
 <h2 id="Built-in-privilege-groups" class="common-anchor-header">مجموعات امتيازات مدمجة<button data-href="#Built-in-privilege-groups" class="anchor-icon" translate="no">
@@ -65,7 +65,22 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
 <p>لا توجد علاقة تعاقبية بين المستويات الثلاثة لمجموعات الامتيازات المضمنة. لا يؤدي تعيين مجموعة امتيازات على مستوى المثيل إلى تعيين الأذونات تلقائيًا لجميع قواعد البيانات والمجموعات ضمن هذا المثيل. يجب تعيين الامتيازات على مستوى قاعدة البيانات والمجموعات يدويًا.</p>
 </div>
 <p>توضح الجداول التالية الامتيازات المتضمنة في كل مجموعة امتيازات مضمنة.</p>
-<h3 id="Collection-level" class="common-anchor-header">مستوى المجموعة</h3><ul>
+<h3 id="Collection-level" class="common-anchor-header">مستوى المجموعة<button data-href="#Collection-level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><strong>CollectionReadOnly (COLL_RO)</strong>: يتضمن امتيازات لقراءة بيانات المجموعة</p></li>
 <li><p><strong>CollectionReadWrite (COLL_RW)</strong>: يتضمن امتيازات لقراءة بيانات المجموعة وكتابتها</p></li>
 <li><p><strong>CollectionAdmin (COLL_ADMIN</strong>): تتضمن امتيازات لقراءة بيانات المجموعة وكتابتها وإدارة المجموعات.</p></li>
@@ -241,7 +256,22 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
      <td><p>✔️</p></td>
    </tr>
 </table>
-<h3 id="Database-level" class="common-anchor-header">مستوى قاعدة البيانات</h3><ul>
+<h3 id="Database-level" class="common-anchor-header">مستوى قاعدة البيانات<button data-href="#Database-level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><strong>DatabaseReadOnly (DB_RO)</strong>: يتضمن امتيازات لقراءة بيانات قاعدة البيانات</p></li>
 <li><p><strong>DatabaseReadWrite (DB_RW)</strong>: يتضمن امتيازات لقراءة وكتابة بيانات قاعدة البيانات</p></li>
 <li><p><strong>DatabaseAdmin (DB_Admin)</strong>: يتضمن امتيازات لقراءة وكتابة بيانات قاعدة البيانات وإدارة قواعد البيانات.</p></li>
@@ -285,7 +315,22 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
      <td><p>✔️</p></td>
    </tr>
 </table>
-<h3 id="Cluster-level" class="common-anchor-header">مستوى المجموعة</h3><ul>
+<h3 id="Cluster-level" class="common-anchor-header">مستوى المجموعة<button data-href="#Cluster-level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><strong>ClusterReadOnly (Cluster_RO)</strong>: يتضمن امتيازات لقراءة بيانات المثيل</p></li>
 <li><p><strong>ClusterReadWrite (Cluster_RW)</strong>: يتضمن امتيازات لقراءة وكتابة بيانات المثيل</p></li>
 <li><p><strong>ClusterAdmin (Cluster_Admin)</strong>: يتضمن امتيازات لقراءة وكتابة بيانات المثيل وإدارة المثيلات.</p></li>
@@ -353,7 +398,7 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>استرجاعRRBAC</p></td>
+     <td><p>استعادةRRBAC</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
@@ -419,7 +464,7 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>إنشاء مجموعة امتيازات</p></td>
+     <td><p>إنشاء مجموعة الامتيازات</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
@@ -459,7 +504,22 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
         ></path>
       </svg>
     </button></h2><p>يمكنك إنشاء مجموعة امتيازات ثم إضافة امتيازات إلى مجموعة الامتيازات.</p>
-<h3 id="Create-a-privilege-group" class="common-anchor-header">إنشاء مجموعة امتيازات</h3><p>يوضح المثال التالي كيفية إنشاء مجموعة امتيازات باسم <code translate="no">privilege_group_1</code>.</p>
+<h3 id="Create-a-privilege-group" class="common-anchor-header">إنشاء مجموعة امتيازات<button data-href="#Create-a-privilege-group" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يوضح المثال التالي كيفية إنشاء مجموعة امتيازات باسم <code translate="no">privilege_group_1</code>.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#go">جو</a> <a href="#java">جافا</a> <a href="#javascript">NodeJS</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -487,11 +547,27 @@ client.createPrivilegeGroup(CreatePrivilegeGroupReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-privileges-to-a-privilege-group" class="common-anchor-header">إضافة امتيازات إلى مجموعة امتيازات</h3><p>يوضح المثال التالي كيفية إضافة الامتيازات <code translate="no">PrivilegeBackupRBAC</code> و <code translate="no">PrivilegeRestoreRBAC</code> إلى مجموعة الامتيازات <code translate="no">privilege_group_1</code> التي تم إنشاؤها للتو.</p>
+<h3 id="Add-privileges-to-a-privilege-group" class="common-anchor-header">إضافة امتيازات إلى مجموعة امتيازات<button data-href="#Add-privileges-to-a-privilege-group" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يوضح المثال التالي كيفية إضافة الامتيازات <code translate="no">PrivilegeBackupRBAC</code> و <code translate="no">PrivilegeRestoreRBAC</code> إلى مجموعة الامتيازات <code translate="no">privilege_group_1</code> التي تم إنشاؤها للتو.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -523,12 +599,28 @@ client.addPrivilegesToGroup(AddPrivilegesToGroupReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/add_privileges_to_group&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;,
     &quot;privileges&quot;:[&quot;Query&quot;, &quot;Search&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Remove-privileges-from-a-privilege-group" class="common-anchor-header">إزالة امتيازات من مجموعة امتيازات</h3><p>يوضح المثال التالي كيفية إزالة الامتياز <code translate="no">PrivilegeRestoreRBAC</code> من مجموعة الامتيازات <code translate="no">privilege_group_1</code>.</p>
+<h3 id="Remove-privileges-from-a-privilege-group" class="common-anchor-header">إزالة امتيازات من مجموعة امتيازات<button data-href="#Remove-privileges-from-a-privilege-group" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يوضح المثال التالي كيفية إزالة الامتياز <code translate="no">PrivilegeRestoreRBAC</code> من مجموعة الامتيازات <code translate="no">privilege_group_1</code>.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#go">جو</a> <a href="#java">جافا</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -558,12 +650,28 @@ client.removePrivilegesFromGroup(RemovePrivilegesFromGroupReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/remove_privileges_from_group&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;,
     &quot;privileges&quot;:[&quot;Search&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-privilege-groups" class="common-anchor-header">سرد مجموعات الامتيازات</h3><p>يوضح المثال التالي كيفية سرد جميع مجموعات الامتيازات الموجودة.</p>
+<h3 id="List-privilege-groups" class="common-anchor-header">سرد مجموعات الامتيازات<button data-href="#List-privilege-groups" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يوضح المثال التالي كيفية سرد جميع مجموعات الامتيازات الموجودة.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#go">جو</a> <a href="#java">جافا</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -591,12 +699,28 @@ List&lt;PrivilegeGroup&gt; groups = resp.getPrivilegeGroups();
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/list&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>فيما يلي مثال على الإخراج.</p>
 <pre><code translate="no" class="language-bash">PrivilegeGroupItem: &lt;privilege_group:privilege_group_1&gt;, &lt;privileges:(<span class="hljs-string">&#x27;Search&#x27;</span>, <span class="hljs-string">&#x27;Query&#x27;</span>)&gt;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Drop-a-privilege-group" class="common-anchor-header">إسقاط مجموعة امتيازات</h3><p>يوضح المثال التالي كيفية إسقاط مجموعة الامتيازات <code translate="no">privilege_group_1</code>.</p>
+<h3 id="Drop-a-privilege-group" class="common-anchor-header">إسقاط مجموعة امتيازات<button data-href="#Drop-a-privilege-group" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يوضح المثال التالي كيفية إسقاط مجموعة الامتيازات <code translate="no">privilege_group_1</code>.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#go">جو</a> <a href="#java">جافا</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -622,6 +746,7 @@ client.dropPrivilegeGroup(DropPrivilegeGroupReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/drop&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;
 }&#x27;</span>

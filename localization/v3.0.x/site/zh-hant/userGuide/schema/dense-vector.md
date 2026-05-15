@@ -19,7 +19,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>密集向量是廣泛用於機器學習和資料分析的數值資料表示。它們由實數陣列組成，其中大多數或所有元素都是非零的。相較於稀疏向量，密集向量在相同的維度層級包含更多的資訊，因為每個維度都持有有意義的數值。這種表示方式可以有效捕捉複雜的模式和關係，讓資料更容易在高維空間中分析和處理。密集向量通常有固定的維數，從幾十維到幾百維甚至上千維不等，視特定的應用程式和需求而定。</p>
+    </button></h1><p>密集向量是廣泛用於機器學習和資料分析的數值資料表示。它們由實數陣列組成，其中大多數或所有元素都是非零的。與稀疏向量相比，密集向量在相同的維度層級中包含更多的資訊，因為每個維度都持有有意義的值。這種表示方式可以有效捕捉複雜的模式和關係，讓資料更容易在高維空間中分析和處理。密集向量通常有固定的維數，從幾十到幾百甚至上千不等，這取決於特定的應用程式和需求。</p>
 <p>密集向量主要用於需要瞭解資料語意的情境，例如語意搜尋和推薦系統。在語意搜尋中，密集向量有助於捕捉查詢與文件之間的潛在關聯，從而改善搜尋結果的相關性。在推薦系統中，密集向量有助於識別使用者與項目之間的相似性，提供更個人化的建議。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -44,7 +44,7 @@ summary: >-
 <p>上圖說明密集向量在 2D 空間中的表示。雖然實際應用中的密集向量通常有更高的維度，但這個 2D 圖解有效地傳達了幾個關鍵概念：</p>
 <ul>
 <li><p><strong>多維表示：</strong>每個點代表一個概念物件 (如<strong>Milvus</strong>、<strong>向量資料庫</strong>、<strong>檢索系統</strong>等)，其位置由其維度值來決定。</p></li>
-<li><p><strong>語意關係：</strong>點與點之間的距離反映了概念之間的語義相似性。距離較近的點則表示語義關係較密切的概念。</p></li>
+<li><p><strong>語意關係：</strong>點與點之間的距離反映了概念之間的語義相似性。較近的點則表示語義關係較密切的概念。</p></li>
 <li><p><strong>聚類效應：</strong>相關的概念（例如<strong>Milvus</strong>、<strong>向量資料庫</strong>和<strong>檢索系統</strong>）在空間中的位置彼此接近，形成一個語意叢集。</p></li>
 </ul>
 <p>以下是表示文字<code translate="no">&quot;Milvus is an efficient vector database&quot;</code> 的真實密集向量範例：</p>
@@ -300,7 +300,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>在上面的範例中，使用<code translate="no">AUTOINDEX</code> 索引類型為<code translate="no">dense_vector</code> 欄位建立了一個名為<code translate="no">dense_vector_index</code> 的索引。<code translate="no">metric_type</code> 設定為<code translate="no">IP</code> ，表示將使用內積作為距離指標。</p>
-<p>Milvus 提供各種索引類型，以提供更好的向量搜尋體驗。AUTOINDEX 是一種特殊的索引類型，專為平滑向量搜尋的學習曲線而設計。有許多索引類型可供您選擇。詳情請參考 xxx。</p>
+<p>Milvus 提供多種索引類型，以提供更好的向量搜尋體驗。AUTOINDEX 是一種特殊的索引類型，專為平滑向量搜尋的學習曲線而設計。有許多索引類型可供您選擇。詳情請參考 xxx。</p>
 <p>Milvus 支援其他公制類型。如需詳細資訊，請參考<a href="/docs/zh-hant/metric.md">公制類型</a>。</p>
 <h3 id="Create-collection" class="common-anchor-header">建立集合<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -365,6 +365,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -439,6 +440,7 @@ client.<span class="hljs-title function_">insert</span>({
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;dense_vector&quot;: [0.1, 0.2, 0.3, 0.4]},
@@ -547,6 +549,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

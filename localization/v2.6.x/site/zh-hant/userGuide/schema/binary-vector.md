@@ -57,7 +57,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/use-binary-vector.png" alt="Use Binary Vector" class="doc-image" id="use-binary-vector" />
    </span> <span class="img-wrapper"> <span>使用二進位向量</span> </span></p>
 <div class="alert note">
-<p>雖然二進位向量在特定情境中表現優異，但其表達能力有其限制，難以捕捉複雜的語意關係。因此，在現實世界的情境中，二進位向量通常會與其他向量類型一起使用，以平衡效率與表達能力。如需詳細資訊，請參閱<a href="/docs/zh-hant/dense-vector.md">密集向量 (Dense Vector</a>) 和<a href="/docs/zh-hant/sparse_vector.md">稀疏向量 (Sparse Vector</a>)。</p>
+<p>雖然二進位向量在特定情境中表現優異，但其表達能力有其限制，難以捕捉複雜的語意關係。因此，在現實世界的情境中，二進位向量通常會與其他向量類型一起使用，以平衡效率與表達能力。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/dense-vector.md">密集向量 (Dense Vector</a>) 和<a href="/docs/zh-hant/v2.6.x/sparse_vector.md">稀疏向量 (Sparse Vector</a>)。</p>
 </div>
 <h2 id="Use-binary-vectors" class="common-anchor-header">使用二進位向量<button data-href="#Use-binary-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -74,7 +74,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">新增向量領域</h3><p>要在 Milvus 中使用二進位向量，首先在建立集合時定義一個向量欄位來儲存二進位向量。這個過程包括</p>
+    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">新增向量領域<button data-href="#Add-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要在 Milvus 中使用二進位向量，首先在建立集合時定義一個向量欄位來儲存二進位向量。這個過程包括</p>
 <ol>
 <li><p>設定<code translate="no">datatype</code> 為支援的二進位向量資料類型，即<code translate="no">BINARY_VECTOR</code> 。</p></li>
 <li><p>使用<code translate="no">dim</code> 參數指定向量的尺寸。請注意，<code translate="no">dim</code> 必須是 8 的倍數，因為二進位向量在插入時必須轉換成位元組。每 8 個布林值 (0 或 1) 將打包成 1 個位元組。例如，如果<code translate="no">dim=128</code> ，插入時需要一個 16 位元組的陣列。</p></li>
@@ -192,7 +207,22 @@ schema.WithField(entity.NewField().
 
 <button class="copy-code-btn"></button></code></pre>
 <p>在這個範例中，新增了一個向量欄位，名為<code translate="no">binary_vector</code> ，用來儲存二進位向量。這個欄位的資料類型是<code translate="no">BINARY_VECTOR</code> ，維數是 128。</p>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">為向量欄位設定索引參數</h3><p>為了加快搜尋速度，必須為二進位向量欄位建立索引。索引可以大幅提升大型向量資料的檢索效率。</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">為向量欄位設定索引參數<button data-href="#Set-index-params-for-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>為了加快搜尋速度，必須為二進位向量欄位建立索引。索引可以大幅提升大型向量資料的檢索效率。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -238,9 +268,24 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>在上面的範例中，使用<code translate="no">AUTOINDEX</code> 索引類型，為<code translate="no">binary_vector</code> 欄位建立一個名為<code translate="no">binary_vector_index</code> 的索引。<code translate="no">metric_type</code> 設為<code translate="no">HAMMING</code> ，表示使用漢明距離進行相似性測量。</p>
-<p>Milvus 提供多種索引類型，以提供更好的向量搜尋體驗。AUTOINDEX 是一種特殊的索引類型，專為平滑向量搜尋的學習曲線而設計。有很多索引類型可供您選擇。詳情請參閱<a href="/docs/zh-hant/index-explained.md">索引說明</a>。</p>
-<p>此外，Milvus 還支援二進位向量的其他相似度指標。如需詳細資訊，請參閱<a href="/docs/zh-hant/metric.md">度量類型</a>。</p>
-<h3 id="Create-collection" class="common-anchor-header">建立集合</h3><p>二進位向量和索引設定完成後，建立一個包含二進位向量的集合。以下範例使用<code translate="no">create_collection</code> 方法建立一個名為<code translate="no">my_collection</code> 的集合。</p>
+<p>Milvus 提供多種索引類型，以提供更好的向量搜尋體驗。AUTOINDEX 是一種特殊的索引類型，專為平滑向量搜尋的學習曲線而設計。有很多索引類型可供您選擇。詳情請參閱<a href="/docs/zh-hant/v2.6.x/index-explained.md">索引說明</a>。</p>
+<p>此外，Milvus 還支援二進位向量的其他相似度指標。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/metric.md">度量類型</a>。</p>
+<h3 id="Create-collection" class="common-anchor-header">建立集合<button data-href="#Create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>二進位向量和索引設定完成後，建立一個包含二進位向量的集合。以下範例使用<code translate="no">create_collection</code> 方法建立一個名為<code translate="no">my_collection</code> 的集合。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -287,13 +332,29 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">插入資料</h3><p>建立集合後，使用<code translate="no">insert</code> 方法加入包含二進位向量的資料。請注意，二進位向量應以位元組陣列的形式提供，其中每個位元組代表 8 個布林值。</p>
+<h3 id="Insert-data" class="common-anchor-header">插入資料<button data-href="#Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>建立集合後，使用<code translate="no">insert</code> 方法加入包含二進位向量的資料。請注意，二進位向量應以位元組陣列的形式提供，其中每個位元組代表 8 個布林值。</p>
 <p>例如，對於 128 位元的二進位向量，需要一個 16 位元組的陣列 (因為 128 位元 ÷ 8 位元/位元組 = 16 位元組)。以下是插入資料的範例程式碼：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -383,12 +444,28 @@ client.<span class="hljs-title function_">insert</span>({
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;data\&quot;: <span class="hljs-variable">$data</span>,
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search" class="common-anchor-header">執行相似性搜尋</h3><p>相似性搜尋是 Milvus 的核心功能之一，可讓您根據向量之間的距離，快速找到與查詢向量最相似的資料。若要使用二進位向量執行相似性搜尋，請準備查詢向量和搜尋參數，然後調用<code translate="no">search</code> 方法。</p>
+<h3 id="Perform-similarity-search" class="common-anchor-header">執行相似性搜尋<button data-href="#Perform-similarity-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>相似性搜尋是 Milvus 的核心功能之一，可讓您根據向量之間的距離，快速找到與查詢向量最相似的資料。若要使用二進位向量執行相似性搜尋，請準備查詢向量和搜尋參數，然後調用<code translate="no">search</code> 方法。</p>
 <p>在搜尋作業期間，二進位向量也必須以位元組陣列的形式提供。確保查詢向量的維度與定義<code translate="no">dim</code> 時指定的維度相符，且每 8 個布林值會轉換成 1 個位元組。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -480,6 +557,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$data</span>,
@@ -489,4 +567,4 @@ curl --request POST \
     \&quot;outputFields\&quot;: [\&quot;pk\&quot;]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有關相似性搜尋參數的詳細資訊，請參閱<a href="/docs/zh-hant/single-vector-search.md">基本 ANN 搜尋</a>。</p>
+<p>有關相似性搜尋參數的詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/single-vector-search.md">基本 ANN 搜尋</a>。</p>

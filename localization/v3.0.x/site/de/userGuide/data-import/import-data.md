@@ -112,6 +112,7 @@ job_id = resp.json()[<span class="hljs-string">&#x27;data&#x27;</span>][<span cl
 
 curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&quot; \
 --header &quot;Content-Type: application/json&quot; \
+--header &quot;Request-Timeout: 10&quot; \
 --data-raw &#x27;{
     &quot;files&quot;: [
         [
@@ -225,6 +226,7 @@ resp = get_import_progress(
 
 curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&quot; \
 --header &quot;Content-Type: application/json&quot; \
+--header &quot;Request-Timeout: 10&quot; \
 --data-raw &#x27;{
     &quot;jobId&quot;: &quot;449839014328146739&quot;
 }&#x27;
@@ -309,6 +311,7 @@ resp = list_import_jobs(
 
 curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot; \
 --header &quot;Content-Type: application/json&quot; \
+--header &quot;Request-Timeout: 10&quot; \
 --data-raw &#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;
 }&#x27;

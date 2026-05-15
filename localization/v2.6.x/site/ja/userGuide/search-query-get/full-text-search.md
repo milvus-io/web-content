@@ -22,7 +22,7 @@ summary: >-
     </button></h1><p>全文検索は、テキストデータセット内の特定の語句を含む文書を検索し、関連性に基づいて結果をランク付けする機能です。この機能は、正確な用語を見落とす可能性のあるセマンティック検索の制限を克服し、最も正確で文脈に関連した結果を確実に受け取れるようにします。さらに、生のテキスト入力を受け付けることでベクトル検索を簡素化し、ベクトル埋め込みを手動で生成することなく、テキストデータをスパース埋め込みに自動的に変換します。</p>
 <p>関連性のスコアリングにBM25アルゴリズムを使用するこの機能は、特定の検索用語に密接に一致する文書を優先的に検索する、検索拡張世代（RAG）シナリオで特に有用です。</p>
 <div class="alert note">
-<p>全文検索とセマンティックベースの密なベクトル検索を統合することで、検索結果の精度と関連性を高めることができます。詳しくは、<a href="/docs/ja/multi-vector-search.md">ハイブリッド検索を</a>ご参照ください。</p>
+<p>全文検索とセマンティックベースの密なベクトル検索を統合することで、検索結果の精度と関連性を高めることができます。詳しくは、<a href="/docs/ja/v2.6.x/multi-vector-search.md">ハイブリッド検索を</a>ご参照ください。</p>
 </div>
 <h2 id="BM25-implementation" class="common-anchor-header">BM25の実装<button data-href="#BM25-implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -43,7 +43,7 @@ summary: >-
 <p>Milvusの全文検索は以下のようなワークフローで行われます：</p>
 <ol>
 <li><p><strong>生のテキスト入力</strong>：テキスト文書を挿入するか、プレーンテキストを使用してクエリを提供します。</p></li>
-<li><p><strong>テキスト分析</strong>：Milvusは<a href="/docs/ja/analyzer-overview.md">アナライザーを</a>使用して、テキストをインデックス化および検索可能な意味のある用語に処理します。</p></li>
+<li><p><strong>テキスト分析</strong>：Milvusは<a href="/docs/ja/v2.6.x/analyzer-overview.md">アナライザーを</a>使用して、テキストをインデックス化および検索可能な意味のある用語に処理します。</p></li>
 <li><p><strong>BM25関数処理</strong>：組み込み関数が、これらの用語をBM25スコアリングに最適化されたスパースベクトル表現に変換します。</p></li>
 <li><p><strong>コレクションストア</strong>：Milvusは、検索とランキングを高速化するために、結果のスパース埋め込みをコレクションに保存します。</p></li>
 <li><p><strong>BM25関連性スコアリング</strong>：検索時に、MilvusはBM25スコアリング関数を適用して文書の関連性を計算し、クエリ用語に最もマッチするランク付けされた結果を返します。</p></li>
@@ -54,9 +54,9 @@ summary: >-
    </span> <span class="img-wrapper"> <span>全文検索</span> </span></p>
 <p>全文検索を使用するには、主に以下の手順に従ってください：</p>
 <ol>
-<li><p><a href="/docs/ja/full-text-search.md#Create-a-collection-for-BM25-full-text-search">コレクションを作成</a>します：必要なフィールドを設定し、生テキストをスパース埋め込みに変換する BM25 関数を定義します。</p></li>
-<li><p><a href="/docs/ja/full-text-search.md#Insert-text-data">データを挿入</a>します：生テキスト文書をコレクションに取り込む。</p></li>
-<li><p><a href="/docs/ja/full-text-search.md#Perform-full-text-search">検索を実行する</a>：自然言語のクエリテキストを使用して、BM25 の関連性に基づいてランク付けされた結果を取得します。</p></li>
+<li><p><a href="/docs/ja/v2.6.x/full-text-search.md#Create-a-collection-for-BM25-full-text-search">コレクションを作成</a>します：必要なフィールドを設定し、生テキストをスパース埋め込みに変換する BM25 関数を定義します。</p></li>
+<li><p><a href="/docs/ja/v2.6.x/full-text-search.md#Insert-text-data">データを挿入</a>します：生テキスト文書をコレクションに取り込む。</p></li>
+<li><p><a href="/docs/ja/v2.6.x/full-text-search.md#Perform-full-text-search">検索を実行する</a>：自然言語のクエリテキストを使用して、BM25 の関連性に基づいてランク付けされた結果を取得します。</p></li>
 </ol>
 <h2 id="Create-a-collection-for-BM25-full-text-search" class="common-anchor-header">BM25 全文検索用のコレクションの作成<button data-href="#Create-a-collection-for-BM25-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -92,7 +92,7 @@ summary: >-
     </button></h3><p>コレクションスキーマには、少なくとも3つの必須フィールドを含める必要があります：</p>
 <ul>
 <li><p><strong>プライマリ・フィールド</strong>：コレクション内の各エンティティを一意に識別する。</p></li>
-<li><p><strong>テキストフィールド</strong>(<code translate="no">VARCHAR</code>)：生のテキスト文書を格納する。Milvus が BM25 関連性ランキングのためにテキストを処理できるように、<code translate="no">enable_analyzer=True</code> を設定する必要があります。デフォルトでは、Milvusはテキスト分析にアナライザを使用します。 <a href="/docs/ja/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/ja/standard-analyzer.md"> アナライザを</a>使用します。別のアナライザを設定するには、<a href="/docs/ja/analyzer-overview.md">アナライザの概要を</a>参照してください。</p></li>
+<li><p><strong>テキストフィールド</strong>(<code translate="no">VARCHAR</code>)：生のテキスト文書を格納する。Milvus が BM25 関連性ランキングのためにテキストを処理できるように、<code translate="no">enable_analyzer=True</code> を設定する必要があります。デフォルトでは、Milvusはテキスト分析にアナライザを使用します。 <a href="/docs/ja/v2.6.x/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/ja/v2.6.x/standard-analyzer.md"> アナライザを</a>使用します。別のアナライザを設定するには、<a href="/docs/ja/v2.6.x/analyzer-overview.md">アナライザの概要を</a>参照してください。</p></li>
 <li><p><strong>スパースベクトルフィールド</strong>(<code translate="no">SPARSE_FLOAT_VECTOR</code>)：BM25関数によって自動的に生成されたスパース埋め込みを格納する。</p></li>
 </ul>
 <div class="multipleCode">
@@ -435,7 +435,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">index_type</code></p></td>
-     <td><p>作成するインデックスのタイプ<code translate="no">AUTOINDEX</code> Milvusは自動的にインデックス設定を最適化します。インデックス設定をより細かく制御する必要がある場合は、Milvusのスパースベクタで利用可能な様々なインデックスタイプから選択することができます。詳細は<a href="/docs/ja/index.md#Indexes-supported-in-Milvus">Milvusでサポートされるインデックスを</a>参照してください。</p></td>
+     <td><p>作成するインデックスのタイプ<code translate="no">AUTOINDEX</code> Milvusは自動的にインデックス設定を最適化します。インデックス設定をより細かく制御する必要がある場合は、Milvusのスパースベクタで利用可能な様々なインデックスタイプから選択することができます。詳細は<a href="/docs/ja/v2.6.x/index.md#Indexes-supported-in-Milvus">Milvusでサポートされるインデックスを</a>参照してください。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">metric_type</code></p></td>
@@ -447,7 +447,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>インデックスの構築とクエリに使用されるアルゴリズム。有効な値：</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (デフォルト)：MaxScore アルゴ リ ズ ム を使用 し た最適化 さ れた DAAT （Document-at-a-Time） ク エ リ 処理。MaxScoreは、高い<em>k</em>値や多くの用語を含むクエリに対して、影響が最小になりそうな用語や文書をスキップすることで、より優れたパフォーマンスを提供します。MaxScoreは、最大インパクトスコアに基づいて用語を必須グループと非必須グループに分割し、トップkの結果に貢献できる用語に焦点を当てることでこれを実現する。</p></li><li><p><code translate="no">"DAAT_WAND"</code>:WANDアルゴリズムを使用したDAATクエリ処理の最適化。WANDは非競合文書をスキップするために最大インパクトスコアを活用することで、より少ないヒット文書を評価する。このため、WANDは<em>k</em>値が小さいクエリや短いクエリではスキップがより効率的である。</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>:Basic Term-at-a-Time (TAAT)クエリー処理。<code translate="no">DAAT_MAXSCORE</code> 、<code translate="no">DAAT_WAND</code> と比較すると遅いが、<code translate="no">TAAT_NAIVE</code> にはユニークな利点がある。グローバルコレクションパラメータ（avgdl）の変更に関係なく静的なままキャッシュされた最大インパクトスコアを使用するDAATアルゴリズムとは異なり、<code translate="no">TAAT_NAIVE</code> 、そのような変更に動的に適応する。</p></li></ul></td>
+     <td><p>インデックスの構築とクエリに使用されるアルゴリズム。有効な値：</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (デフォルト)：MaxScore アルゴ リ ズ ム を使用 し た最適化 さ れた DAAT （Document-at-a-Time） ク エ リ 処理。MaxScoreは、高い<em>k</em>値や多くの用語を含むクエリに対して、影響が最小になりそうな用語やドキュメントをスキップすることで、より優れたパフォーマンスを提供します。MaxScoreは、最大インパクトスコアに基づいて用語を必須グループと非必須グループに分割し、トップkの結果に貢献できる用語に焦点を当てることでこれを実現する。</p></li><li><p><code translate="no">"DAAT_WAND"</code>:WANDアルゴリズムを使用したDAATクエリ処理の最適化。WANDは非競合文書をスキップするために最大インパクトスコアを活用することで、より少ないヒット文書を評価する。このため、WANDは<em>k</em>値が小さいクエリや短いクエリではスキップがより効率的である。</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>:Basic Term-at-a-Time (TAAT)クエリー処理。<code translate="no">DAAT_MAXSCORE</code> 、<code translate="no">DAAT_WAND</code> と比較すると遅いが、<code translate="no">TAAT_NAIVE</code> にはユニークな利点がある。グローバルコレクションパラメータ（avgdl）の変更に関係なく静的なままキャッシュされた最大インパクトスコアを使用するDAATアルゴリズムとは異なり、<code translate="no">TAAT_NAIVE</code> 、そのような変更に動的に適応する。</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
@@ -513,6 +513,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -574,6 +575,7 @@ client.insert(InsertReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;text&quot;: &quot;information retrieval is a field of study.&quot;},
@@ -601,7 +603,7 @@ client.insert(InsertReq.builder()
       </svg>
     </button></h2><p>データをコレクションに挿入したら、生テキストクエリを使用して全文検索を実行できます。Milvusは自動的にクエリをスパースベクトルに変換し、マッチした検索結果をBM25アルゴリズムを使ってランク付けし、トップK(<code translate="no">limit</code>)の結果を返します。</p>
 <div class="alert note">
-<p>テキスト・ハイライターを設定することで、検索結果でマッチした用語をハイライトすることができます。詳細は<a href="/docs/ja/text-highlighter.md">テキスト・ハイライターを</a>参照。</p>
+<p>テキスト・ハイライターを設定することで、検索結果でマッチした用語をハイライトすることができます。詳細は<a href="/docs/ja/v2.6.x/text-highlighter.md">テキスト・ハイライターを</a>参照。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -662,6 +664,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data-raw <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -688,7 +691,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">params.drop_ratio_search</code></p></td>
-     <td><p>検索時に無視する重要度の低い用語の割合。詳細は<a href="/docs/ja/sparse_vector.md">スパース・ベクターを</a>参照。</p></td>
+     <td><p>検索時に無視する重要度の低い用語の割合。詳細は<a href="/docs/ja/v2.6.x/sparse_vector.md">スパース・ベクターを</a>参照。</p></td>
    </tr>
    <tr>
      <td></td>
@@ -704,7 +707,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">output_fields</code></p></td>
-     <td><p>検索結果に返すフィールド名のリスト。BM25 が生成した埋め込みを含む<strong>スパース・ベクトル・フィールド以外の</strong>すべてのフィールドをサポートします。一般的な出力フィールドには、主キー・フィールド（例：<code translate="no">id</code> ）や元のテキスト・フィールド（例：<code translate="no">text</code> ）があります。詳細については、<a href="/docs/ja/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">FAQ</a> を参照してください。</p></td>
+     <td><p>検索結果に返すフィールド名のリスト。BM25 が生成した埋め込みを含む<strong>スパース・ベクトル・フィールド以外の</strong>すべてのフィールドをサポートします。一般的な出力フィールドには、主キー・フィールド（例：<code translate="no">id</code> ）や元のテキスト・フィールド（例：<code translate="no">text</code> ）があります。詳細については、<a href="/docs/ja/v2.6.x/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">FAQ</a> を参照してください。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">limit</code></p></td>
@@ -741,7 +744,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>いいえ。BM25関数で生成されたスパース・ベクトルは、全文検索で直接アクセスしたり出力したりすることはできません。詳細は以下の通りです：</p>
+    </button></h3><p>いいえ、BM25関数で生成されたスパース・ベクトルは、全文検索で直接アクセスしたり出力したりすることはできません。詳細は以下の通りです：</p>
 <ul>
 <li><p>BM25関数は、ランキングと検索のために内部でスパースベクトルを生成します。</p></li>
 <li><p>これらのベクトルはスパースフィールドに格納されますが、全文検索に含めることはできません。<code translate="no">output_fields</code></p></li>
@@ -795,4 +798,4 @@ client.search(
 <li><p>全文検索の代わりに手動でスパースベクトル操作を使用</p></li>
 <li><p>カスタムスパースベクトルワークフロー用に個別のコレクションを作成できます。</p></li>
 </ul>
-<p>詳細については、<a href="/docs/ja/sparse_vector.md">スパースベクトルを</a>参照してください。</p>
+<p>詳細については、<a href="/docs/ja/v2.6.x/sparse_vector.md">スパース・ベクターを</a>参照してください。</p>

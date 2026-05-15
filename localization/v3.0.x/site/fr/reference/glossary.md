@@ -337,7 +337,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/knowhere.md#Knowhere">Knowhere</a> est le moteur d'exécution vectoriel central de Milvus qui intègre plusieurs bibliothèques de recherche de similarité vectorielle, notamment Faiss, Hnswlib et Annoy. Knowhere est également conçu pour prendre en charge l'informatique hétérogène. Il contrôle sur quel matériel (CPU ou GPU) exécuter la construction de l'index et les requêtes de recherche. C'est ainsi que Knowhere tire son nom : savoir où exécuter les opérations.</p>
+    </button></h2><p><a href="https://milvus.io/docs/knowhere.md#Knowhere">Knowhere</a> est le moteur d'exécution vectorielle central de Milvus qui intègre plusieurs bibliothèques de recherche de similarités vectorielles, notamment Faiss, Hnswlib et Annoy. Knowhere est également conçu pour prendre en charge l'informatique hétérogène. Il contrôle sur quel matériel (CPU ou GPU) exécuter la construction de l'index et les requêtes de recherche. C'est ainsi que Knowhere tire son nom : savoir où exécuter les opérations.</p>
 <!-- ## Log broker
 <p>The <a href="https://milvus.io/docs/four_layers.md#Log-broker">log broker</a> is a publish-subscribe system that supports playback. It is responsible for streaming data persistence, execution of reliable asynchronous queries, event notification, and return of query results. It also ensures integrity of the incremental data when the worker nodes recover from system breakdown. --></p>
 <h2 id="Log-snapshot" class="common-anchor-header">Instantané de journal<button data-href="#Log-snapshot" class="anchor-icon" translate="no">
@@ -439,7 +439,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus<a href="https://milvus.io/docs/milvus-cdc-overview.md">CDC</a> (Change data capture) est un outil convivial qui permet de capturer et de synchroniser des données incrémentielles dans les instances Milvus. Il garantit la fiabilité des données commerciales en les transférant de manière transparente entre les instances source et cible, ce qui facilite la sauvegarde incrémentielle et la reprise après sinistre.</p>
+    </button></h2><p>Milvus<a href="https://milvus.io/docs/milvus_cdc_overview.md">CDC</a> (change data capture) est un outil utilisé pour répliquer les modifications de données d'un cluster Milvus à un autre pour la reprise après sinistre primaire et de secours.</p>
 <h2 id="Milvus-CLI" class="common-anchor-header">Milvus CLI<button data-href="#Milvus-CLI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -455,7 +455,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>L'<a href="https://milvus.io/docs/cli_overview.md">interface de ligne de commande</a> (CLI) de Milvus est un outil de ligne de commande qui prend en charge la connexion à la base de données, les opérations sur les données, ainsi que l'importation et l'exportation de données. Basé sur le <a href="https://github.com/milvus-io/pymilvus">SDK Milvus Python</a>, il permet l'exécution de commandes via un terminal à l'aide d'invites de ligne de commande interactives.</p>
+    </button></h2><p>L'<a href="https://milvus.io/docs/cli_overview.md">interface de ligne de commande</a> (CLI)<a href="https://milvus.io/docs/cli_overview.md">de Milvus</a> est un outil de ligne de commande qui prend en charge la connexion à la base de données, les opérations sur les données, ainsi que l'importation et l'exportation de données. Basé sur le <a href="https://github.com/milvus-io/pymilvus">SDK Milvus Python</a>, il permet l'exécution de commandes via un terminal à l'aide d'invites de ligne de commande interactives.</p>
 <h2 id="Milvus-Migration" class="common-anchor-header">Milvus Migration<button data-href="#Milvus-Migration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

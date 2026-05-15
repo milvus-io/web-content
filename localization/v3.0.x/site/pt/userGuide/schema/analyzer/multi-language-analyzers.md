@@ -28,7 +28,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Quando o Milvus realiza análise de texto, ele normalmente aplica um único analisador em todo o campo de texto de uma coleção. Se esse analisador for optimizado para o inglês, tem dificuldades em lidar com as regras de tokenização e stemming muito diferentes exigidas por outras línguas, como o chinês, o espanhol ou o francês, o que resulta numa taxa de recuperação mais baixa. Por exemplo, uma pesquisa para a palavra espanhola <em>"teléfono"</em> (que significa <em>"telefone")</em> faria tropeçar um analisador centrado no inglês: pode omitir o acento e não aplicar qualquer stemming específico do espanhol, fazendo com que os resultados relevantes sejam ignorados.</p>
+    </button></h1><p>Quando o Milvus realiza análise de texto, ele normalmente aplica um único analisador em todo o campo de texto de uma coleção. Se esse analisador estiver optimizado para o inglês, tem dificuldades em lidar com as regras de tokenização e stemming muito diferentes exigidas por outras línguas, como o chinês, o espanhol ou o francês, o que resulta numa taxa de recuperação mais baixa. Por exemplo, uma pesquisa para a palavra espanhola <em>"teléfono"</em> (que significa <em>"telefone")</em> faria tropeçar um analisador centrado no inglês: pode omitir o acento e não aplicar qualquer stemming específico do espanhol, fazendo com que os resultados relevantes sejam ignorados.</p>
 <p>Os analisadores multilingues resolvem este problema, permitindo-lhe configurar vários analisadores para um campo de texto numa única coleção. Desta forma, pode armazenar documentos multilingues num campo de texto, e o Milvus analisa o texto de acordo com as regras linguísticas adequadas a cada documento.</p>
 <h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -675,6 +675,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;multilingual_documents\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -818,6 +819,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;multilingual_documents&quot;,
   &quot;data&quot;: [
@@ -991,6 +993,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;multilingual_documents&quot;,
   &quot;data&quot;: [&quot;artificial intelligence&quot;],
@@ -1116,6 +1119,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;multilingual_documents&quot;,
   &quot;data&quot;: [&quot;人工智能&quot;],

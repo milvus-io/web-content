@@ -38,7 +38,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Una collezione è una tabella bidimensionale con colonne fisse e righe variabili. Ogni colonna rappresenta un campo e ogni riga rappresenta un'entità. Per implementare questa gestione strutturale dei dati è necessario uno schema. Ogni entità da inserire deve soddisfare i vincoli definiti nello schema.</p>
-<p>È possibile determinare ogni aspetto di una collezione, compreso il suo schema, i parametri dell'indice, il tipo di metrica e se caricarla o meno al momento della creazione, per garantire che la collezione soddisfi pienamente i propri requisiti.</p>
+<p>È possibile determinare ogni aspetto di una collezione, compresi lo schema, i parametri dell'indice, il tipo di metrica e se caricarla o meno al momento della creazione, per garantire che la collezione soddisfi pienamente i requisiti.</p>
 <p>Per creare una raccolta, è necessario</p>
 <ul>
 <li><p><a href="/docs/it/create-collection.md#Create-Schema">Creare lo schema</a></p></li>
@@ -400,6 +400,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_1\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -491,6 +492,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_2\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -500,6 +502,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/get_load_state&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_2\&quot;
 }&quot;</span>
@@ -583,6 +586,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_3\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -651,6 +655,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_5\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -722,6 +727,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_5\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -790,6 +796,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_6\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,

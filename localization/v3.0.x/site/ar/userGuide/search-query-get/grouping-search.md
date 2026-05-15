@@ -51,7 +51,7 @@ summary: >-
 <ul>
 <li><p>إجراء بحث ANN استنادًا إلى متجه الاستعلام المقدم للعثور على جميع الكيانات الأكثر تشابهًا مع الاستعلام.</p></li>
 <li><p>تجميع نتائج البحث حسب <code translate="no">group_by_field</code> المحدد، مثل <code translate="no">docId</code>.</p></li>
-<li><p>إرجاع أفضل النتائج لكل مجموعة، كما هو محدد بواسطة المعلمة <code translate="no">limit</code> ، مع الكيان الأكثر تشابهًا من كل مجموعة.</p></li>
+<li><p>إرجاع أعلى النتائج لكل مجموعة، كما هو محدد بواسطة المعلمة <code translate="no">limit</code> ، مع الكيان الأكثر تشابهًا من كل مجموعة.</p></li>
 </ul>
 <div class="alert note">
 <p>بشكل افتراضي، يقوم بحث التجميع بإرجاع كيان واحد فقط لكل مجموعة. إذا كنت ترغب في زيادة عدد النتائج المراد إرجاعها لكل مجموعة، يمكنك التحكم في ذلك باستخدام المعلمة <code translate="no">group_size</code> والمعلمة <code translate="no">strict_group_size</code>.</p>
@@ -86,7 +86,7 @@ summary: >-
 ]
 
 <button class="copy-code-btn"></button></code></pre>
-<p>في طلب البحث، قم بتعيين كل من <code translate="no">group_by_field</code> و <code translate="no">output_fields</code> إلى <code translate="no">docId</code>. سيقوم Milvus بتجميع النتائج حسب الحقل المحدد وإرجاع الكيان الأكثر تشابهًا من كل مجموعة، بما في ذلك قيمة <code translate="no">docId</code> لكل كيان تم إرجاعه.</p>
+<p>في طلب البحث، قم بتعيين كل من <code translate="no">group_by_field</code> و <code translate="no">output_fields</code> إلى <code translate="no">docId</code>. سيقوم ميلفوس بتجميع النتائج حسب الحقل المحدد وإرجاع الكيان الأكثر تشابهًا من كل مجموعة، بما في ذلك قيمة <code translate="no">docId</code> لكل كيان تم إرجاعه.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -213,6 +213,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -352,6 +353,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

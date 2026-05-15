@@ -23,11 +23,9 @@ summary: >-
       </svg>
     </button></h1><p>As entidades de uma coleção são registos de dados que partilham o mesmo conjunto de campos. Os valores de campo em cada registo de dados formam uma entidade. Esta página apresenta a forma de inserir entidades numa coleção.</p>
 <div class="alert note">
-<p>Se adicionar dinamicamente novos campos depois de a coleção ter sido criada e não especificar valores para esses campos ao inserir entidades, o Milvus preenche-os automaticamente com os valores predefinidos definidos ou com NULL se as predefinições não estiverem definidas. Para obter detalhes, consulte <a href="/docs/pt/add-fields-to-an-existing-collection.md">Adicionar campos a uma coleção existente</a>.</p>
-<div class="alert note">
 <ul>
-<li><p><strong>Campos adicionados após a criação da coleção</strong>: Se adicionar novos campos a uma coleção após a criação e não especificar valores durante a inserção, o Milvus preenche-os automaticamente com os valores predefinidos definidos ou NULL se não forem definidas predefinições. Para obter detalhes, consulte <a href="/docs/pt/add-fields-to-an-existing-collection.md">Adicionar campos a uma coleção existente</a>.</p></li>
-<li><p><strong>Tratamento de duplicatas</strong>: A operação padrão <code translate="no">insert</code> não verifica se há chaves primárias duplicadas. A inserção de dados com uma chave primária existente cria uma nova entidade com a mesma chave, levando à duplicação de dados e a possíveis problemas de aplicação. Para atualizar entidades existentes ou evitar duplicações, utilize a operação <strong><code translate="no">upsert</code></strong> em vez disso. Para obter mais informações, consulte <a href="/docs/pt/upsert-entities.md">Upsert Entities</a>.</p></li>
+<li><p><strong>Campos adicionados após a criação da coleção</strong>: Se adicionar novos campos a uma coleção após a criação e não especificar valores durante a inserção, o Milvus preenche-os automaticamente com valores predefinidos definidos ou NULL se não forem definidos valores predefinidos. Para obter detalhes, consulte <a href="/docs/pt/v2.6.x/add-fields-to-an-existing-collection.md">Adicionar campos a uma coleção existente</a>.</p></li>
+<li><p><strong>Tratamento de duplicatas</strong>: A operação padrão <code translate="no">insert</code> não verifica se há chaves primárias duplicadas. A inserção de dados com uma chave primária existente cria uma nova entidade com a mesma chave, levando à duplicação de dados e a possíveis problemas de aplicação. Para atualizar entidades existentes ou evitar duplicações, utilize a operação <strong><code translate="no">upsert</code></strong> em vez disso. Para obter mais informações, consulte <a href="/docs/pt/v2.6.x/upsert-entities.md">Upsert Entities</a>.</p></li>
 </ul>
 </div>
 <h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
@@ -63,7 +61,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Antes de inserir dados, é necessário organizar seus dados em uma lista de dicionários de acordo com o esquema, com cada dicionário representando uma entidade e contendo todos os campos definidos no esquema. Se a Coleção tiver o campo dinâmico ativado, cada dicionário pode também incluir campos que não estão definidos no Esquema.</p>
+    </button></h2><p>Antes de inserir dados, é necessário organizar seus dados em uma lista de dicionários de acordo com o esquema, com cada dicionário representando uma entidade e contendo todos os campos definidos no esquema. Se a coleção tiver o campo dinâmico ativado, cada dicionário pode também incluir campos que não estão definidos no esquema.</p>
 <p>Nesta secção, irá inserir entidades numa coleção criada da forma de configuração rápida. Uma coleção criada desta forma tem apenas dois campos, denominados <strong>id</strong> e <strong>vetor</strong>. Além disso, essa Collection tem o campo dinâmico habilitado, de modo que as Entidades no código de exemplo incluem um campo chamado <strong>cor</strong> que não está definido no Esquema.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -223,6 +221,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},
@@ -397,6 +396,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 10, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},

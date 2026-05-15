@@ -40,15 +40,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Um vetor esparso é um vetor especial de dimensão elevada em que a maioria dos elementos é zero e apenas algumas dimensões têm valores diferentes de zero. Como mostra o diagrama abaixo, os vectores densos são normalmente representados como matrizes contínuas em que cada posição tem um valor (por exemplo, <code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code>). Em contrapartida, os vectores esparsos armazenam apenas elementos não nulos e os respectivos índices da dimensão, frequentemente representados como pares chave-valor de <code translate="no">{ index: value}</code> (por exemplo, <code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code>).</p>
+    </button></h2><p>Um vetor esparso é um vetor especial de alta dimensão em que a maioria dos elementos é zero e apenas algumas dimensões têm valores diferentes de zero. Como mostra o diagrama abaixo, os vectores densos são normalmente representados como matrizes contínuas em que cada posição tem um valor (por exemplo, <code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code>). Em contrapartida, os vectores esparsos armazenam apenas elementos não nulos e os respectivos índices da dimensão, frequentemente representados como pares chave-valor de <code translate="no">{ index: value}</code> (por exemplo, <code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code>).</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-representation.png" alt="Sparse Vector Representation" class="doc-image" id="sparse-vector-representation" />
    </span> <span class="img-wrapper"> <span>Representação de vectores esparsos</span> </span></p>
 <p>Com a tokenização e a pontuação, os documentos podem ser representados como vectores de saco de palavras, em que cada dimensão corresponde a uma palavra específica do vocabulário. Apenas as palavras presentes no documento têm valores diferentes de zero, criando uma representação vetorial esparsa. Os vectores esparsos podem ser gerados através de duas abordagens:</p>
 <ul>
-<li><p><strong>As técnicas estatísticas tradicionais</strong>, como o <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (Term Frequency-Inverse Document Frequency) e o <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> (Best Matching 25), atribuem pesos às palavras com base na sua frequência e importância num corpus. Estes métodos calculam estatísticas simples como pontuações para cada dimensão, que representa um token.  O Milvus fornece uma <strong>pesquisa de texto completo</strong> integrada com o método BM25, que converte automaticamente o texto em vectores esparsos, eliminando a necessidade de pré-processamento manual. Esta abordagem é ideal para a pesquisa baseada em palavras-chave, onde a precisão e as correspondências exactas são importantes. Consulte <a href="/docs/pt/full-text-search.md">Pesquisa de texto completo</a> para obter mais informações.</p></li>
-<li><p><strong>Os modelos neurais de incorporação esparsa</strong> são métodos aprendidos para gerar representações esparsas através da formação em grandes conjuntos de dados. Normalmente, são modelos de aprendizagem profunda com arquitetura Transformer, capazes de expandir e ponderar termos com base no contexto semântico. O Milvus também suporta embeddings esparsos gerados externamente a partir de modelos como o <a href="https://arxiv.org/abs/2109.10086">SPLADE</a>. Para mais informações, consulte <a href="/docs/pt/embeddings.md#Embedding-Overview">Embeddings</a>.</include></p></li>
+<li><p><strong>As técnicas estatísticas tradicionais</strong>, como o <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (Term Frequency-Inverse Document Frequency) e o <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> (Best Matching 25), atribuem pesos às palavras com base na sua frequência e importância num corpus. Estes métodos calculam estatísticas simples como pontuações para cada dimensão, que representa um token.  O Milvus fornece uma <strong>pesquisa de texto completo</strong> integrada com o método BM25, que converte automaticamente o texto em vectores esparsos, eliminando a necessidade de pré-processamento manual. Esta abordagem é ideal para a pesquisa baseada em palavras-chave, onde a precisão e as correspondências exactas são importantes. Consulte <a href="/docs/pt/v2.6.x/full-text-search.md">Pesquisa de texto completo</a> para obter mais informações.</p></li>
+<li><p><strong>Os modelos neurais de incorporação esparsa</strong> são métodos aprendidos para gerar representações esparsas através da formação em grandes conjuntos de dados. Normalmente, são modelos de aprendizagem profunda com arquitetura Transformer, capazes de expandir e ponderar termos com base no contexto semântico. O Milvus também suporta embeddings esparsos gerados externamente a partir de modelos como o <a href="https://arxiv.org/abs/2109.10086">SPLADE</a>. Para mais informações, consulte <a href="/docs/pt/v2.6.x/embeddings.md#Embedding-Overview">Embeddings</a>.</include></p></li>
 </ul>
 <p>Os vectores esparsos e o texto original podem ser armazenados no Milvus para uma recuperação eficiente. O diagrama abaixo descreve o processo geral.</p>
 <p>
@@ -56,7 +56,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
    </span> <span class="img-wrapper"> <span>Fluxo de trabalho do vetor esparso</span> </span></p>
 <div class="alert note">
-<p>Para além dos vectores esparsos, Milvus também suporta vectores densos e vectores binários. Os vectores densos são ideais para capturar relações semânticas profundas, enquanto os vectores binários são excelentes em cenários como comparações rápidas de semelhanças e desduplicação de conteúdos. Para obter mais informações, consulte <a href="/docs/pt/dense-vector.md">Vetor denso</a> e <a href="/docs/pt/binary-vector.md">Vetor binário</a>.</p>
+<p>Para além dos vectores esparsos, Milvus também suporta vectores densos e vectores binários. Os vectores densos são ideais para capturar relações semânticas profundas, enquanto os vectores binários são excelentes em cenários como comparações rápidas de semelhanças e desduplicação de conteúdos. Para obter mais informações, consulte <a href="/docs/pt/v2.6.x/dense-vector.md">Vetor denso</a> e <a href="/docs/pt/v2.6.x/binary-vector.md">Vetor binário</a>.</p>
 </div>
 <h2 id="Data-Formats" class="common-anchor-header">Formatos de dados<button data-href="#Data-Formats" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -73,7 +73,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Nas secções seguintes, demonstramos como armazenar vectores de modelos de incorporação esparsos aprendidos, como o SPLADE. Se estiver à procura de algo para complementar a pesquisa semântica baseada em vetor denso, recomendamos a <a href="/docs/pt/full-text-search.md">Pesquisa de texto completo</a> com BM25 em vez de SPLADE por simplicidade. Se tiver efectuado uma avaliação da qualidade e se tiver decidido utilizar o SPLADE, pode consultar <a href="/docs/pt/embeddings.md#Embedding-Overview">Embeddings</a> para saber como gerar vectores esparsos com o SPLADE.</p>
+    </button></h2><p>Nas secções seguintes, demonstramos como armazenar vectores de modelos de incorporação esparsos aprendidos, como o SPLADE. Se estiver à procura de algo para complementar a pesquisa semântica baseada em vetor denso, recomendamos a <a href="/docs/pt/v2.6.x/full-text-search.md">Pesquisa de texto completo</a> com BM25 em vez de SPLADE por simplicidade. Se tiver efectuado uma avaliação da qualidade e se tiver decidido utilizar o SPLADE, pode consultar <a href="/docs/pt/v2.6.x/embeddings.md#Embedding-Overview">Embeddings</a> para saber como gerar vectores esparsos com o SPLADE.</p>
 <p>Milvus suporta a entrada de vectores esparsos com os seguintes formatos:</p>
 <ul>
 <li><p><strong>Lista de Dicionários (formatada como <code translate="no">{dimension_index: value, ...}</code>)</strong></p>
@@ -284,7 +284,7 @@ schema.WithField(entity.NewField().
 <li><p><code translate="no">text</code>: Este campo armazena cadeias de texto utilizando o tipo de dados <code translate="no">VARCHAR</code>, com um comprimento máximo de 65535 bytes.</p></li>
 </ul>
 <div class="alert note">
-<p>Para ativar o Milvus ou para gerar embeddings de vectores esparsos a partir de um campo de texto especificado durante a inserção de dados, deve ser dado um passo adicional envolvendo uma função. Para mais informações, consulte <a href="/docs/pt/full-text-search.md">Pesquisa de texto integral</a>.</p>
+<p>Para ativar o Milvus ou para gerar embeddings de vectores esparsos a partir de um campo de texto especificado durante a inserção de dados, deve ser dado um passo adicional envolvendo uma função. Para mais informações, consulte <a href="/docs/pt/v2.6.x/full-text-search.md">Pesquisa de texto integral</a>.</p>
 </div>
 <h2 id="Set-Index-Parameters" class="common-anchor-header">Definir parâmetros de índice<button data-href="#Set-Index-Parameters" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -301,7 +301,7 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O processo de criação de um índice para vectores esparsos é semelhante ao dos <a href="/docs/pt/dense-vector.md">vectores densos</a>, mas com diferenças no tipo de índice especificado (<code translate="no">index_type</code>), na métrica de distância (<code translate="no">metric_type</code>) e nos parâmetros de índice (<code translate="no">params</code>).</p>
+    </button></h2><p>O processo de criação de um índice para vectores esparsos é semelhante ao dos <a href="/docs/pt/v2.6.x/dense-vector.md">vectores densos</a>, mas com diferenças no tipo de índice especificado (<code translate="no">index_type</code>), na métrica de distância (<code translate="no">metric_type</code>) e nos parâmetros de índice (<code translate="no">params</code>).</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -361,9 +361,9 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <button class="copy-code-btn"></button></code></pre>
 <p>Este exemplo usa o tipo de índice <code translate="no">SPARSE_INVERTED_INDEX</code> com <code translate="no">IP</code> como a métrica. Para obter mais detalhes, consulte os seguintes recursos:</p>
 <ul>
-<li><p><a href="/docs/pt/sparse-inverted-index.md">SPARSE_INVERTED_INDEX</a>: índice explicado e seus parâmetros</p></li>
-<li><p><a href="/docs/pt/metric.md">Tipos de métrica</a>: Tipos de métrica suportados para diferentes tipos de campo</p></li>
-<li><p><a href="/docs/pt/full-text-search.md">Pesquisa de texto completo</a>: Um tutorial detalhado sobre pesquisa de texto completo</p></li>
+<li><p><a href="/docs/pt/v2.6.x/sparse-inverted-index.md">SPARSE_INVERTED_INDEX</a>: índice explicado e seus parâmetros</p></li>
+<li><p><a href="/docs/pt/v2.6.x/metric.md">Tipos de métrica</a>: Tipos de métrica suportados para diferentes tipos de campo</p></li>
+<li><p><a href="/docs/pt/v2.6.x/full-text-search.md">Pesquisa de texto completo</a>: Um tutorial detalhado sobre pesquisa de texto completo</p></li>
 </ul>
 <h2 id="Create-Collection" class="common-anchor-header">Criar coleção<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -380,7 +380,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Quando as definições do vetor esparso e do índice estiverem concluídas, pode criar uma coleção que contenha vectores esparsos. O exemplo abaixo usa o método <a href="/docs/pt/create-collection.md"><code translate="no">create_collection</code></a> para criar uma coleção chamada <code translate="no">my_collection</code>.</p>
+    </button></h2><p>Quando as definições do vetor esparso e do índice estiverem concluídas, pode criar uma coleção que contenha vectores esparsos. O exemplo abaixo usa o método <a href="/docs/pt/v2.6.x/create-collection.md"><code translate="no">create_collection</code></a> para criar uma coleção chamada <code translate="no">my_collection</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -420,6 +420,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -545,6 +546,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {
@@ -697,6 +699,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: $queryData,
@@ -709,4 +712,4 @@ curl --request POST \
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.63,&quot;id&quot;:&quot;453577185629572535&quot;,&quot;pk&quot;:&quot;453577185629572535&quot;},{&quot;distance&quot;:0.1,&quot;id&quot;:&quot;453577185629572534&quot;,&quot;pk&quot;:&quot;453577185629572534&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para obter mais informações sobre os parâmetros de pesquisa de similaridade, consulte <a href="/docs/pt/single-vector-search.md">Pesquisa básica de vetor</a>.</p>
+<p>Para obter mais informações sobre os parâmetros de pesquisa de similaridade, consulte <a href="/docs/pt/v2.6.x/single-vector-search.md">Pesquisa básica de vetor</a>.</p>

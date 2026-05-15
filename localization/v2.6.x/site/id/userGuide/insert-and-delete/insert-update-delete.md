@@ -23,11 +23,9 @@ summary: >-
       </svg>
     </button></h1><p>Entitas dalam koleksi adalah catatan data yang memiliki kumpulan field yang sama. Nilai-nilai field dalam setiap record data membentuk sebuah entitas. Halaman ini memperkenalkan cara menyisipkan entitas ke dalam koleksi.</p>
 <div class="alert note">
-<p>Jika Anda menambahkan field baru secara dinamis setelah koleksi dibuat, dan Anda tidak menentukan nilai untuk field-field ini ketika memasukkan entitas, Milvus akan secara otomatis mengisinya dengan nilai default yang telah ditentukan atau NULL jika nilai default tidak ditetapkan. Untuk detailnya, lihat Menambahkan <a href="/docs/id/add-fields-to-an-existing-collection.md">Field ke Koleksi yang Sudah Ada</a>.</p>
-<div class="alert note">
 <ul>
-<li><p><strong>Field yang ditambahkan setelah pembuatan koleksi</strong>: Jika Anda menambahkan field baru ke koleksi setelah pembuatan dan tidak menentukan nilai selama penyisipan, Milvus secara otomatis mengisinya dengan nilai default yang telah ditentukan atau NULL jika tidak ada nilai default yang ditetapkan. Untuk detailnya, lihat <a href="/docs/id/add-fields-to-an-existing-collection.md">Menambahkan Field ke Koleksi yang Sudah Ada</a>.</p></li>
-<li><p><strong>Penanganan duplikat</strong>: Operasi standar <code translate="no">insert</code> tidak memeriksa duplikat kunci utama. Memasukkan data dengan primary key yang sudah ada akan membuat entitas baru dengan kunci yang sama, sehingga menyebabkan duplikasi data dan potensi masalah aplikasi. Untuk memperbarui entitas yang sudah ada atau menghindari duplikasi, gunakan operasi <strong><code translate="no">upsert</code></strong> sebagai gantinya. Untuk informasi lebih lanjut, lihat <a href="/docs/id/upsert-entities.md">Memperbarui Entitas</a>.</p></li>
+<li><p><strong>Field ditambahkan setelah pembuatan koleksi</strong>: Jika Anda menambahkan field baru ke dalam koleksi setelah pembuatan dan tidak menentukan nilai selama penyisipan, Milvus secara otomatis mengisi field tersebut dengan nilai default yang telah ditentukan atau NULL jika tidak ada nilai default yang ditentukan. Untuk detailnya, lihat <a href="/docs/id/v2.6.x/add-fields-to-an-existing-collection.md">Menambahkan Field ke Koleksi yang Sudah Ada</a>.</p></li>
+<li><p><strong>Penanganan duplikat</strong>: Operasi standar <code translate="no">insert</code> tidak memeriksa duplikat kunci utama. Memasukkan data dengan primary key yang sudah ada akan membuat entitas baru dengan kunci yang sama, sehingga menyebabkan duplikasi data dan potensi masalah aplikasi. Untuk memperbarui entitas yang sudah ada atau menghindari duplikasi, gunakan operasi <strong><code translate="no">upsert</code></strong> sebagai gantinya. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/upsert-entities.md">Memperbarui Entitas</a>.</p></li>
 </ul>
 </div>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
@@ -223,6 +221,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},
@@ -397,6 +396,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 10, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},

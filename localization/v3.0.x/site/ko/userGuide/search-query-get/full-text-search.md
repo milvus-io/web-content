@@ -49,7 +49,7 @@ summary: >-
 <li><p><strong>텍스트 분석</strong>: Milvus는 <a href="/docs/ko/analyzer-overview.md">분석기를</a> 사용하여 텍스트를 색인 및 검색이 가능한 의미 있는 용어로 처리합니다.</p></li>
 <li><p><strong>BM25 함수 처리</strong>: 내장된 함수가 이러한 용어를 BM25 채점에 최적화된 희소 벡터 표현으로 변환합니다.</p></li>
 <li><p><strong>컬렉션 저장소</strong>: Milvus는 빠른 검색과 순위를 매길 수 있도록 결과 스파스 임베딩을 컬렉션에 저장합니다.</p></li>
-<li><p><strong>BM25 관련성 점수</strong>: 검색 시 Milvus는 BM25 스코어링 기능을 적용하여 문서 관련성을 계산하고 쿼리 용어와 가장 일치하는 순위가 매겨진 결과를 반환합니다.</p></li>
+<li><p><strong>BM25 관련성 점수</strong>: 검색 시 Milvus는 BM25 스코어링 기능을 적용하여 문서 관련성을 계산하고 쿼리 용어와 가장 일치하는 순위를 매긴 결과를 반환합니다.</p></li>
 </ol>
 <p>
   
@@ -516,6 +516,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -577,6 +578,7 @@ client.insert(InsertReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;text&quot;: &quot;information retrieval is a field of study.&quot;},
@@ -665,6 +667,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data-raw <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

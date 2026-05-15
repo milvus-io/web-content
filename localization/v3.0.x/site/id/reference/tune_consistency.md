@@ -40,7 +40,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvus adalah sebuah sistem yang memisahkan penyimpanan dan komputasi. Dalam sistem ini, <strong>DataNodes</strong> bertanggung jawab atas persistensi data dan pada akhirnya menyimpannya dalam penyimpanan objek terdistribusi seperti MinIO/S3. <strong>QueryNodes</strong> menangani tugas-tugas komputasi seperti Pencarian. Tugas-tugas ini melibatkan pemrosesan <strong>data batch</strong> dan <strong>data streaming</strong>. Sederhananya, data batch dapat dipahami sebagai data yang telah disimpan dalam penyimpanan objek sementara data streaming mengacu pada data yang belum disimpan dalam penyimpanan objek. Karena latensi jaringan, QueryNode sering kali tidak menyimpan data streaming terbaru. Tanpa perlindungan tambahan, melakukan Pencarian secara langsung pada data streaming dapat mengakibatkan hilangnya banyak titik data yang belum tersimpan, sehingga mempengaruhi akurasi hasil pencarian.</p>
-<p>Milvus Commercial Edition adalah sebuah sistem yang memisahkan penyimpanan dan komputasi. Dalam sistem ini, DataNodes bertanggung jawab atas persistensi data dan pada akhirnya menyimpannya dalam penyimpanan objek terdistribusi seperti MinIO/S3. QueryNodes menangani tugas-tugas komputasi seperti Pencarian. Tugas-tugas ini melibatkan pemrosesan data batch dan data streaming. Secara sederhana, data batch dapat dipahami sebagai data yang telah disimpan dalam penyimpanan objek, sedangkan data streaming mengacu pada data yang belum disimpan dalam penyimpanan objek. Karena latensi jaringan, QueryNode sering kali tidak menyimpan data streaming terbaru. Tanpa perlindungan tambahan, melakukan Pencarian secara langsung pada data streaming dapat mengakibatkan hilangnya banyak titik data yang belum tersimpan, sehingga mempengaruhi keakuratan hasil pencarian.</p>
+<p>Milvus Commercial Edition adalah sebuah sistem yang memisahkan penyimpanan dan komputasi. Dalam sistem ini, DataNodes bertanggung jawab atas persistensi data dan pada akhirnya menyimpannya dalam penyimpanan objek terdistribusi seperti MinIO/S3. QueryNodes menangani tugas-tugas komputasi seperti Pencarian. Tugas-tugas ini melibatkan pemrosesan data batch dan data streaming. Secara sederhana, data batch dapat dipahami sebagai data yang telah disimpan dalam penyimpanan objek, sedangkan data streaming mengacu pada data yang belum disimpan dalam penyimpanan objek. Karena latensi jaringan, QueryNode sering kali tidak menyimpan data streaming terbaru. Tanpa perlindungan tambahan, melakukan Pencarian secara langsung pada data streaming dapat mengakibatkan hilangnya banyak titik data yang belum tersimpan, sehingga mempengaruhi akurasi hasil pencarian.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/batch-data-and-streaming-data.png" alt="Batch Data And Streaming Data" class="doc-image" id="batch-data-and-streaming-data" />
@@ -63,12 +63,12 @@ summary: >-
 <p>Cap waktu terbaru digunakan sebagai GuaranteeTs, dan QueryNode harus menunggu hingga ServiceTime memenuhi GuaranteeTs sebelum mengeksekusi permintaan pencarian.</p></li>
 <li><p><strong>Akhirnya</strong></p>
 <p>GuaranteeTs disetel ke nilai yang sangat kecil, seperti 1, untuk menghindari pemeriksaan konsistensi sehingga QueryNode dapat segera mengeksekusi permintaan Pencarian pada semua data batch.</p></li>
-<li><p><strong>Keusangan Terbatas</strong></p>
+<li><p><strong>Keusangan yang Terikat (Bounded Staleness)</strong></p>
 <p>JaminanTs diatur ke titik waktu yang lebih awal dari stempel waktu terbaru untuk membuat QueryNode melakukan pencarian dengan toleransi kehilangan data tertentu.</p></li>
 <li><p><strong>Sesi</strong></p>
 <p>Titik waktu terakhir di mana klien memasukkan data digunakan sebagai JaminanTs sehingga QueryNodes dapat melakukan pencarian pada semua data yang dimasukkan oleh klien.</p></li>
 </ul>
-<p>Milvus menggunakan Bounded Staleness sebagai tingkat konsistensi default. Jika GuaranteeTs tidak ditentukan, maka ServiceTime terakhir digunakan sebagai GuaranteeTs.</p>
+<p>Milvus menggunakan Bounded Staleness sebagai tingkat konsistensi default. Jika GuaranteeTs tidak ditentukan, maka ServiceTime terakhir yang digunakan sebagai GuaranteeTs.</p>
 <h2 id="Set-Consistency-Level" class="common-anchor-header">Mengatur Tingkat Konsistensi<button data-href="#Set-Consistency-Level" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -159,6 +159,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -217,6 +218,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -277,6 +279,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;color like \&quot;red_%\&quot;&quot;,

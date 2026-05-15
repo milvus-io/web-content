@@ -46,7 +46,7 @@ summary: >-
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/grouping-search.png" alt="Grouping Search" class="doc-image" id="grouping-search" />
-   </span> <span class="img-wrapper"> <span>Pengelompokan Pencarian</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Mengelompokkan Pencarian</span> </span></p>
 <p>Untuk meningkatkan keragaman hasil pencarian, Anda dapat menambahkan parameter <code translate="no">group_by_field</code> dalam permintaan pencarian untuk mengaktifkan Pencarian Pengelompokan. Seperti yang ditunjukkan pada diagram, Anda dapat mengatur <code translate="no">group_by_field</code> ke <code translate="no">docId</code>. Setelah menerima permintaan ini, Milvus akan:</p>
 <ul>
 <li><p>Melakukan pencarian ANN berdasarkan vektor kueri yang disediakan untuk menemukan semua entitas yang paling mirip dengan kueri.</p></li>
@@ -213,6 +213,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -352,6 +353,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

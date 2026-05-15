@@ -109,7 +109,7 @@ summary: >-
 </table>
 <div class="alert note">
 <ul>
-<li><p>إذا لم تكن متأكدًا من الوضع الذي تختاره، <a href="/docs/ar/primary-field.md#Quickstart-Use-AutoID">فابدأ بالمعرّف التلقائي</a> لإدخال أبسط وتفرد مضمون.</p></li>
+<li><p>إذا لم تكن متأكدًا من الوضع الذي تختاره، <a href="/docs/ar/v2.6.x/primary-field.md#Quickstart-Use-AutoID">فابدأ بالمعرّف التلقائي</a> لإدخال أبسط وتفرد مضمون.</p></li>
 <li><p>ننصحك بالاعتماد على <code translate="no">autoId</code> في جميع الحالات ما لم يكن تعيين المفاتيح الأساسية يدويًا مفيدًا.</p></li>
 </ul>
 </div>
@@ -144,7 +144,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>قم بتمكين <code translate="no">auto_id=True</code> في تعريف الحقل الأساسي الخاص بك. سيتعامل Milvus مع إنشاء المعرف تلقائيًا.</p>
+    </button></h3><p>قم بتمكين <code translate="no">auto_id=True</code> في تعريف الحقل الأساسي الخاص بك. سيتعامل ميلفوس مع إنشاء المعرف تلقائيًا.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -278,6 +278,7 @@ client.createCollection(requestCreate);
 
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/collections/create&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_autoid\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$SCHEMA</span>
@@ -362,6 +363,7 @@ System.out.printf(<span class="hljs-string">&quot;Generated IDs: %s\n&quot;</spa
 
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/entities/insert&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_autoid\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$INSERT_DATA</span>
@@ -536,6 +538,7 @@ client.createCollection(requestCreate);
 
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/collections/create&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_manual_ids\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$SCHEMA</span>
@@ -627,6 +630,7 @@ System.out.printf(<span class="hljs-string">&quot;Generated IDs: %s\n&quot;</spa
 <span class="hljs-comment"># 插入数据</span>
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/entities/insert&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_manual_ids\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$INSERT_DATA</span>
@@ -636,7 +640,7 @@ curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/
 <ul>
 <li><p>تأكد من أن جميع المعرفات فريدة في جميع الكيانات</p></li>
 <li><p>قم بتضمين الحقل الأساسي في كل عملية إدراج/استيراد</p></li>
-<li><p>تعامل مع تعارضات المعرفات واكتشاف التكرار بنفسك</p></li>
+<li><p>التعامل مع تعارضات المعرفات واكتشاف التكرار بنفسك</p></li>
 </ul>
 <h2 id="Advanced-usage" class="common-anchor-header">الاستخدام المتقدم<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -653,7 +657,7 @@ curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Migrate-data-with-existing-AutoIDs" class="common-anchor-header">ترحيل البيانات باستخدام المعرفات التلقائية الموجودة<button data-href="#Migrate-data-with-existing-AutoIDs" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Migrate-data-with-existing-AutoIDs" class="common-anchor-header">ترحيل البيانات باستخدام المعرّفات التلقائية الموجودة<button data-href="#Migrate-data-with-existing-AutoIDs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -669,7 +673,7 @@ curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/
         ></path>
       </svg>
     </button></h3><p>للحفاظ على المعرفات الموجودة أثناء ترحيل البيانات، قم بتمكين الخاصية <code translate="no">allow_insert_auto_id</code> عن طريق إجراء الاستدعاء <code translate="no">alter_collection_properties</code>. عند التعيين على صواب، يقبل Milvus المعرفات المقدمة من المستخدم حتى إذا تم تمكين المعرف التلقائي.</p>
-<p>للحصول على تفاصيل التكوين، راجع <a href="/docs/ar/modify-collection.md#Example-5-Enable-allowinsertautoid">تعديل المجموعة</a>.</p>
+<p>للحصول على تفاصيل التكوين، راجع <a href="/docs/ar/v2.6.x/modify-collection.md#Example-5-Enable-allowinsertautoid">تعديل المجموعة</a>.</p>
 <h3 id="Ensure-global-AutoID-uniqueness-across-clusters" class="common-anchor-header">ضمان تفرد المعرف التلقائي العام عبر المجموعات<button data-href="#Ensure-global-AutoID-uniqueness-across-clusters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -709,7 +713,7 @@ curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكن أن يساعدك فهم كيفية قيام AutoID بإنشاء معرّفات فريدة داخليًا في <a href="/docs/ar/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">تكوين معرّفات المجموعات</a> بشكل صحيح واستكشاف المشكلات المتعلقة بالمعرّفات وإصلاحها.</p>
+    </button></h2><p>يمكن أن يساعدك فهم كيفية قيام AutoID بإنشاء معرّفات فريدة داخليًا في <a href="/docs/ar/v2.6.x/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">تكوين معرّفات المجموعات</a> بشكل صحيح واستكشاف المشكلات المتعلقة بالمعرّفات وإصلاحها.</p>
 <p>يستخدم المعرف التلقائي تنسيقًا منظمًا 64 بت لضمان التفرد:</p>
 <pre><code translate="no" class="language-plaintext">[sign_bit][cluster_id][physical_ts][logical_ts]
 <button class="copy-code-btn"></button></code></pre>

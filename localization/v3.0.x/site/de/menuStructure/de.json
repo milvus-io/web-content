@@ -1109,7 +1109,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Überblick über die Einbettungsfunktion",
+                "label": "Übersicht über die Einbettungsfunktion",
                 "id": "embedding-function-overview.md",
                 "order": 0,
                 "children": []
@@ -2005,7 +2005,7 @@
             "children": []
           },
           {
-            "label": "Commands",
+            "label": "Befehle",
             "id": "milvus_backup_cli.md",
             "order": 1,
             "children": []
@@ -2053,7 +2053,7 @@
       {
         "label": "Vogelbeobachter",
         "id": "birdwatcher",
-        "order": 2,
+        "order": 3,
         "children": [
           {
             "label": "Übersicht",
@@ -2071,6 +2071,37 @@
             "label": "Leitfäden für die Verwendung",
             "id": "birdwatcher_usage_guides.md",
             "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Milvus CDC",
+        "id": "milvus_cdc",
+        "order": 2,
+        "children": [
+          {
+            "label": "Übersicht",
+            "id": "milvus_cdc_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "CDC-Replikation einrichten",
+            "id": "set_up_cdc_replication.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Umschaltung",
+            "id": "cdc_switchover.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Ausfallsicherung",
+            "id": "cdc_failover.md",
+            "order": 3,
             "children": []
           }
         ]
@@ -2373,7 +2404,7 @@
                 "children": []
               },
               {
-                "label": "Milvus Async-API",
+                "label": "Milvus Async API",
                 "id": "llamaindex_milvus_async.md",
                 "order": 1,
                 "children": []

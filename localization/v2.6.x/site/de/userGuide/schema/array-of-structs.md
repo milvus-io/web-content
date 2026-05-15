@@ -120,7 +120,7 @@ beta: Milvus 2.6.4+
 </table></p>
 <p>Die skalaren Felder im Feld Array of Structs unterstützen keine Indizes.</p></li>
 <li><p><strong>Upsert-Daten</strong></p>
-<p>Structs unterstützen kein Upsert im Merge-Modus. Sie können jedoch Upserts im Überschreibungsmodus durchführen, um Daten in Structs zu aktualisieren. Einzelheiten zu den Unterschieden zwischen Upsert im Zusammenführungsmodus und im Überschreibungsmodus finden Sie unter <a href="/docs/de/upsert-entities.md#Overview">Upsert-Entitäten</a>.</p></li>
+<p>Structs unterstützen kein Upsert im Merge-Modus. Sie können jedoch Upserts im Überschreibungsmodus durchführen, um Daten in Structs zu aktualisieren. Einzelheiten zu den Unterschieden zwischen Upsert im Zusammenführungsmodus und im Überschreibungsmodus finden Sie unter <a href="/docs/de/v2.6.x/upsert-entities.md#Overview">Upsert-Entitäten</a>.</p></li>
 <li><p><strong>Skalare Filterung</strong></p>
 <p>Sie können ein Array von Structs oder Felder innerhalb seines Struct-Elements nicht in Filterausdrücken innerhalb von Suchen und Abfragen verwenden.</p></li>
 </ul>
@@ -145,7 +145,7 @@ beta: Milvus 2.6.4+
 <li><p>Setzen Sie das Attribut <code translate="no">element_type</code> des Felds auf <code translate="no">DataType.STRUCT</code>, um das Feld zu einem Array von Structs zu machen.</p></li>
 <li><p>Erstellen Sie ein Struct-Schema und fügen Sie die erforderlichen Felder ein. Dann referenzieren Sie das Struct-Schema im Attribut <code translate="no">struct_schema</code> des Feldes.</p></li>
 <li><p>Setzen Sie das Attribut <code translate="no">max_capacity</code> des Felds auf einen geeigneten Wert, um die maximale Anzahl von Structs anzugeben, die jede Entität in diesem Feld enthalten kann.</p></li>
-<li><p><strong>(Optional</strong>) Sie können <code translate="no">mmap.enabled</code> für jedes Feld innerhalb des Struct-Elements festlegen, um die heißen und kalten Daten in der Struktur auszugleichen.</p></li>
+<li><p><strong>(Optional</strong>) Sie können <code translate="no">mmap.enabled</code> für jedes Feld innerhalb des Struct-Elements einstellen, um die heißen und kalten Daten in der Struktur auszugleichen.</p></li>
 </ol>
 <p>So können Sie ein Sammelschema definieren, das ein Array von Structs enthält:</p>
 <div class="multipleCode">
@@ -377,7 +377,7 @@ SCHEMA=<span class="hljs-string">&#x27;{
         ></path>
       </svg>
     </button></h2><p>Die Indexierung ist für alle Vektorfelder obligatorisch, sowohl für die Vektorfelder in der Sammlung als auch für die im Element Struct definierten.</p>
-<p>Die anwendbaren Indexparameter variieren je nach verwendetem Indextyp. Einzelheiten zu den anwendbaren Indexparametern finden Sie unter <a href="/docs/de/index-explained.md">Index erklärt</a> und auf den Dokumentationsseiten, die für den von Ihnen gewählten Indextyp spezifisch sind.</p>
+<p>Die anwendbaren Indexparameter variieren je nach verwendetem Indextyp. Einzelheiten zu den anwendbaren Indexparametern finden Sie unter <a href="/docs/de/v2.6.x/index-explained.md">Index erklärt</a> und auf den Dokumentationsseiten, die für den von Ihnen gewählten Indextyp spezifisch sind.</p>
 <p>Um eine Einbettungsliste zu indizieren, müssen Sie ihren Indextyp auf <code translate="no">AUTOINDEX</code> oder <code translate="no">HNSW</code> setzen und <code translate="no">MAX_SIM_COSINE</code> als metrischen Typ für Milvus verwenden, um die Ähnlichkeiten zwischen Einbettungslisten zu messen.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -499,6 +499,7 @@ client.createCollection(requestCreate);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/create&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;description\&quot;: \&quot;A collection for storing book information with struct array chunks\&quot;,
@@ -614,6 +615,7 @@ row.add(<span class="hljs-string">&quot;chunks&quot;</span>, structArr);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/insert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -639,7 +641,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><details></p>
-<p><summary>Brauchen Sie mehr Daten?</summary></p>
+<p><summary>Benötigen Sie mehr Daten?</summary></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">import</span> random
 <span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">List</span>, <span class="hljs-type">Dict</span>, <span class="hljs-type">Any</span>
@@ -806,6 +808,7 @@ embeddingList1=<span class="hljs-string">&#x27;[[0.2,0.9,0.4,-0.3,0.2]]&#x27;</s
 embeddingList2=<span class="hljs-string">&#x27;[[-0.2,-0.2,0.5,0.6,0.9],[-0.4,0.3,0.5,0.8,0.2]]&#x27;</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>],
@@ -910,6 +913,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>, <span class="hljs-variable">$embeddingList2</span>],
@@ -1013,4 +1017,4 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die Entwicklung eines nativen Array of Structs-Datentyps stellt einen großen Fortschritt in der Fähigkeit von Milvus dar, komplexe Datenstrukturen zu verarbeiten. Um die Anwendungsfälle besser zu verstehen und diese neue Funktion optimal zu nutzen, sollten Sie <a href="/docs/de/best-practices-for-array-of-structs.md">Schema Design Using an Array of Structs</a> lesen.</p>
+    </button></h2><p>Die Entwicklung eines nativen Array of Structs-Datentyps stellt einen großen Fortschritt in der Fähigkeit von Milvus dar, komplexe Datenstrukturen zu verarbeiten. Um die Anwendungsfälle besser zu verstehen und diese neue Funktion optimal zu nutzen, sollten Sie <a href="/docs/de/v2.6.x/best-practices-for-array-of-structs.md">Schema Design Using an Array of Structs</a> lesen.</p>

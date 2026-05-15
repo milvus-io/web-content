@@ -90,6 +90,7 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connect-with-credentials-authentication-enabled" class="common-anchor-header">Connettersi con le credenziali (autenticazione abilitata)<button data-href="#Connect-with-credentials-authentication-enabled" class="anchor-icon" translate="no">
@@ -157,10 +158,11 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Il formato del token è <code translate="no">&quot;&lt;username&gt;:&lt;password&gt;&quot;</code>. I documenti indicano esplicitamente <code translate="no">root:Milvus</code> come credenziale predefinita e la guida <a href="/docs/it/users_and_roles.md">Creare utenti e ruoli</a> tratta la gestione degli utenti.</p>
+<p>Il formato del token è <code translate="no">&quot;&lt;username&gt;:&lt;password&gt;&quot;</code>. I documenti indicano esplicitamente <code translate="no">root:Milvus</code> come credenziale predefinita e la guida <a href="/docs/it/users_and_roles.md">Crea utenti e ruoli</a> tratta la gestione degli utenti.</p>
 </div>
 <h2 id="Configure-a-timeout" class="common-anchor-header">Configurare un timeout<button data-href="#Configure-a-timeout" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -221,7 +223,7 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-    -H <span class="hljs-string">&quot;Request-Timeout: 5&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     --max-time 7 \
     -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -304,6 +306,7 @@ err = c.UseDatabase(ctx, milvusclient.NewUseDatabaseOption(<span class="hljs-str
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     -d <span class="hljs-string">&#x27;{
       &quot;dbName&quot;: &quot;analytics&quot;
     }&#x27;</span>

@@ -7,7 +7,6 @@ summary: >-
   포함합니다. 이러한 표현은 복잡한 패턴과 관계를 효과적으로 포착할 수 있어 고차원 공간에서 데이터를 더 쉽게 분석하고 처리할 수 있습니다.
   고밀도 벡터는 일반적으로 특정 애플리케이션과 요구사항에 따라 수십 개에서 수백 개 또는 수천 개에 이르는 고정된 수의 차원을 갖습니다.
 ---
-
 <h1 id="Dense-Vector" class="common-anchor-header">고밀도 벡터<button data-href="#Dense-Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -24,7 +23,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>고밀도 벡터는 머신 러닝과 데이터 분석에 널리 사용되는 수치 데이터 표현입니다. 대부분의 요소 또는 모든 요소가 0이 아닌 실수로 구성된 배열로 구성됩니다. 스파스 벡터에 비해 고밀도 벡터는 각 차원이 의미 있는 값을 보유하기 때문에 동일한 차원 수준에서 더 많은 정보를 포함합니다. 이러한 표현은 복잡한 패턴과 관계를 효과적으로 포착할 수 있어 고차원 공간에서 데이터를 더 쉽게 분석하고 처리할 수 있습니다. 고밀도 벡터는 일반적으로 특정 애플리케이션과 요구 사항에 따라 수십 개에서 수백 개 또는 수천 개에 이르는 고정된 수의 차원을 갖습니다.</p>
-<p>고밀도 벡터는 주로 시맨틱 검색 및 추천 시스템과 같이 데이터의 의미를 이해해야 하는 시나리오에서 사용됩니다. 시맨틱 검색에서 고밀도 벡터는 쿼리와 문서 사이의 근본적인 연결을 포착하여 검색 결과의 관련성을 향상시키는 데 도움이 됩니다. 추천 시스템에서는 사용자와 항목 간의 유사성을 식별하여 보다 개인화된 제안을 제공하는 데 도움을 줍니다.</p>
+<p>고밀도 벡터는 주로 시맨틱 검색 및 추천 시스템과 같이 데이터의 의미를 이해해야 하는 시나리오에서 사용됩니다. 시맨틱 검색에서 고밀도 벡터는 쿼리와 문서 간의 기본 연결을 포착하여 검색 결과의 관련성을 향상시키는 데 도움이 됩니다. 추천 시스템에서는 사용자와 항목 간의 유사성을 식별하여 보다 개인화된 제안을 제공하는 데 도움을 줍니다.</p>
 <h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -65,7 +64,6 @@ summary: >-
 <span class="hljs-punctuation">]</span>
 
 <button class="copy-code-btn"></button></code></pre>
-
 <p>고밀도 벡터는 이미지용 CNN 모델(예: <a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNet</a>, <a href="https://pytorch.org/vision/stable/models/vgg.html">VGG</a>), 텍스트용 언어 모델(예: <a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a>, <a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vec</a>) 등 다양한 <a href="https://en.wikipedia.org/wiki/Embedding">임베딩</a> 모델을 사용하여 생성할 수 있습니다. 이러한 모델은 원시 데이터를 고차원 공간의 점으로 변환하여 데이터의 의미적 특징을 포착합니다. 또한 Milvus는 임베딩에 자세히 설명된 대로 사용자가 고밀도 벡터를 생성하고 처리할 수 있는 편리한 방법을 제공합니다.</p>
 <p>데이터가 벡터화되면 Milvus에 저장하여 관리 및 벡터 검색을 할 수 있습니다. 아래 다이어그램은 기본 프로세스를 보여줍니다.</p>
 <p>
@@ -73,7 +71,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" />
    </span> <span class="img-wrapper"> <span>고밀도 벡터 사용</span> </span></p>
 <div class="alert note">
-<p>밀도 벡터 외에도 Milvus는 스파스 벡터와 바이너리 벡터도 지원합니다. 스파스 벡터는 키워드 검색 및 용어 매칭과 같이 특정 용어에 기반한 정확한 매칭에 적합하며, 바이너리 벡터는 이미지 패턴 매칭 및 특정 해싱 애플리케이션과 같이 이진화된 데이터를 효율적으로 처리하는 데 일반적으로 사용됩니다. 자세한 내용은 <a href="/docs/ko/binary-vector.md">이진 벡터</a> 및 <a href="/docs/ko/sparse_vector.md">스파스 벡터를</a> 참조하세요.</p>
+<p>밀도 벡터 외에도 Milvus는 스파스 벡터와 바이너리 벡터도 지원합니다. 스파스 벡터는 키워드 검색 및 용어 매칭과 같이 특정 용어에 기반한 정확한 매칭에 적합하며, 바이너리 벡터는 이미지 패턴 매칭 및 특정 해싱 애플리케이션과 같이 이진화된 데이터를 효율적으로 처리하는 데 일반적으로 사용됩니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/binary-vector.md">이진 벡터</a> 및 <a href="/docs/ko/v2.6.x/sparse_vector.md">스파스 벡터를</a> 참조하세요.</p>
 </div>
 <h2 id="Use-dense-vectors" class="common-anchor-header">고밀도 벡터 사용<button data-href="#Use-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -90,7 +88,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">벡터 필드 추가</h3><p>밀버스에서 고밀도 벡터를 사용하려면 먼저 컬렉션을 만들 때 고밀도 벡터를 저장할 벡터 필드를 정의합니다. 이 과정에는 다음이 포함됩니다:</p>
+    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">벡터 필드 추가<button data-href="#Add-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>밀버스에서 고밀도 벡터를 사용하려면 먼저 컬렉션을 만들 때 고밀도 벡터를 저장할 벡터 필드를 정의합니다. 이 과정에는 다음이 포함됩니다:</p>
 <ol>
 <li><p><code translate="no">datatype</code> 을 지원되는 고밀도 벡터 데이터 유형으로 설정합니다. 지원되는 고밀도 벡터 데이터 유형은 데이터 유형을 참조하세요.</p></li>
 <li><p><code translate="no">dim</code> 매개변수를 사용하여 고밀도 벡터의 차원을 지정합니다.</p></li>
@@ -103,14 +116,13 @@ summary: >-
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 
 schema = client.create_schema(
-auto_id=<span class="hljs-literal">True</span>,
-enable_dynamic_fields=<span class="hljs-literal">True</span>,
+    auto_id=<span class="hljs-literal">True</span>,
+    enable_dynamic_fields=<span class="hljs-literal">True</span>,
 )
 
 schema.add_field(field_name=<span class="hljs-string">&quot;pk&quot;</span>, datatype=DataType.VARCHAR, is_primary=<span class="hljs-literal">True</span>, max_length=<span class="hljs-number">100</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;dense_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">4</span>)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 
@@ -231,19 +243,33 @@ schema.WithField(entity.NewField().
      <td><p>각 차원의 개별 요소가 8비트 정수(int8)이고 각 요소의 범위가 -128에서 127 사이인 벡터를 저장합니다. 양자화된 딥 러닝 모델(예: ResNet, EfficientNet)을 위해 설계된 INT8_VECTOR는 정밀도 손실을 최소화하면서 모델 크기를 줄이고 추론 속도를 높입니다.<br><strong>참고</strong>: 이 벡터 유형은 HNSW 인덱스에만 지원됩니다.</p></td>
    </tr>
 </table>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">벡터 필드에 대한 인덱스 매개변수 설정</h3><p>시맨틱 검색을 가속화하려면 벡터 필드에 대한 인덱스를 생성해야 합니다. 인덱싱은 대규모 벡터 데이터의 검색 효율성을 크게 향상시킬 수 있습니다.</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">벡터 필드에 대한 인덱스 매개변수 설정<button data-href="#Set-index-params-for-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>시맨틱 검색을 가속화하려면 벡터 필드에 대한 인덱스를 생성해야 합니다. 인덱싱은 대규모 벡터 데이터의 검색 효율성을 크게 향상시킬 수 있습니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
-field_name=<span class="hljs-string">&quot;dense_vector&quot;</span>,
-index_name=<span class="hljs-string">&quot;dense_vector_index&quot;</span>,
-index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-metric_type=<span class="hljs-string">&quot;IP&quot;</span>
+    field_name=<span class="hljs-string">&quot;dense_vector&quot;</span>,
+    index_name=<span class="hljs-string">&quot;dense_vector_index&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> java.util.*;
 
@@ -278,8 +304,23 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <button class="copy-code-btn"></button></code></pre>
 <p>위의 예에서는 <code translate="no">AUTOINDEX</code> 인덱스 유형을 사용하여 <code translate="no">dense_vector</code> 필드에 대해 <code translate="no">dense_vector_index</code> 라는 이름의 인덱스가 생성됩니다. <code translate="no">metric_type</code> 은 <code translate="no">IP</code> 으로 설정되어 내적 곱이 거리 메트릭으로 사용됨을 나타냅니다.</p>
 <p>Milvus는 더 나은 벡터 검색 환경을 위해 다양한 인덱스 유형을 제공합니다. 자동 인덱스는 벡터 검색의 학습 곡선을 원활하게 하기 위해 고안된 특수 인덱스 유형입니다. 다양한 인덱스 유형 중에서 선택할 수 있습니다. 자세한 내용은 xxx를 참조하세요.</p>
-<p>Milvus는 다른 메트릭 유형도 지원합니다. 자세한 내용은 <a href="/docs/ko/metric.md">메트릭 유형을</a> 참조하세요.</p>
-<h3 id="Create-collection" class="common-anchor-header">컬렉션 만들기</h3><p>밀도 벡터 및 인덱스 매개변수 설정이 완료되면 밀도 벡터를 포함하는 컬렉션을 만들 수 있습니다. 아래 예제에서는 <code translate="no">create_collection</code> 메서드를 사용하여 <code translate="no">my_collection</code> 이라는 이름의 컬렉션을 생성합니다.</p>
+<p>Milvus는 다른 메트릭 유형도 지원합니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/metric.md">메트릭 유형을</a> 참조하세요.</p>
+<h3 id="Create-collection" class="common-anchor-header">컬렉션 만들기<button data-href="#Create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>밀도 벡터 및 인덱스 매개변수 설정이 완료되면 밀도 벡터를 포함하는 컬렉션을 만들 수 있습니다. 아래 예제에서는 <code translate="no">create_collection</code> 메서드를 사용하여 <code translate="no">my_collection</code> 이라는 이름의 컬렉션을 생성합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -292,17 +333,16 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 
 <span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
-.uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
-.build());
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .build());
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-.collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-.collectionSchema(schema)
-.indexParams(indexes)
-.build();
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .collectionSchema(schema)
+        .indexParams(indexes)
+        .build();
 client.createCollection(requestCreate);
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
 <span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
@@ -328,13 +368,29 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">데이터 삽입</h3><p>컬렉션을 만든 후 <code translate="no">insert</code> 메서드를 사용하여 고밀도 벡터가 포함된 데이터를 추가합니다. 삽입되는 고밀도 벡터의 차원이 고밀도 벡터 필드를 추가할 때 정의한 <code translate="no">dim</code> 값과 일치하는지 확인합니다.</p>
+<h3 id="Insert-data" class="common-anchor-header">데이터 삽입<button data-href="#Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>컬렉션을 만든 후 <code translate="no">insert</code> 메서드를 사용하여 고밀도 벡터가 포함된 데이터를 추가합니다. 삽입되는 고밀도 벡터의 차원이 고밀도 벡터 필드를 추가할 때 정의한 <code translate="no">dim</code> 값과 일치하는지 확인합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
@@ -343,11 +399,10 @@ client.createCollection(requestCreate);
 ]
 
 client.insert(
-collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-data=data
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    data=data
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
 <span class="hljs-keyword">import</span> com.google.gson.JsonObject;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
@@ -388,6 +443,7 @@ client.<span class="hljs-title function_">insert</span>({
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;dense_vector&quot;: [0.1, 0.2, 0.3, 0.4]},
@@ -398,7 +454,22 @@ client.<span class="hljs-title function_">insert</span>({
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:2,&quot;insertIds&quot;:[&quot;453577185629572531&quot;,&quot;453577185629572532&quot;]}}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search" class="common-anchor-header">유사도 검색 수행</h3><p>밀도 벡터 기반의 시맨틱 검색은 밀버스의 핵심 기능 중 하나로, 벡터 사이의 거리를 기반으로 쿼리 벡터와 가장 유사한 데이터를 빠르게 찾을 수 있습니다. 유사도 검색을 수행하려면 쿼리 벡터와 검색 파라미터를 준비한 다음 <code translate="no">search</code> 메서드를 호출합니다.</p>
+<h3 id="Perform-similarity-search" class="common-anchor-header">유사도 검색 수행<button data-href="#Perform-similarity-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>밀도 벡터 기반의 시맨틱 검색은 밀버스의 핵심 기능 중 하나로, 벡터 사이의 거리를 기반으로 쿼리 벡터와 가장 유사한 데이터를 빠르게 찾을 수 있습니다. 유사도 검색을 수행하려면 쿼리 벡터와 검색 파라미터를 준비한 다음 <code translate="no">search</code> 메서드를 호출합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {
@@ -408,12 +479,12 @@ client.<span class="hljs-title function_">insert</span>({
 query_vector = [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>]
 
 res = client.search(
-collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-data=[query_vector],
-anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
-search_params=search_params,
-limit=<span class="hljs-number">5</span>,
-output_fields=[<span class="hljs-string">&quot;pk&quot;</span>]
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    data=[query_vector],
+    anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
+    search_params=search_params,
+    limit=<span class="hljs-number">5</span>,
+    output_fields=[<span class="hljs-string">&quot;pk&quot;</span>]
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -421,7 +492,6 @@ output_fields=[<span class="hljs-string">&quot;pk&quot;</span>]
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: &#x27;453718927992172271&#x27;, &#x27;distance&#x27;: 0.7599999904632568, &#x27;entity&#x27;: {&#x27;pk&#x27;: &#x27;453718927992172271&#x27;}}, {&#x27;id&#x27;: &#x27;453718927992172270&#x27;, &#x27;distance&#x27;: 0.6299999952316284, &#x27;entity&#x27;: {&#x27;pk&#x27;: &#x27;453718927992172270&#x27;}}]&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
 
 Map&lt;String,Object&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
@@ -482,6 +552,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -497,4 +568,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.55,&quot;id&quot;:&quot;453577185629572532&quot;,&quot;pk&quot;:&quot;453577185629572532&quot;},{&quot;distance&quot;:0.42,&quot;id&quot;:&quot;453577185629572531&quot;,&quot;pk&quot;:&quot;453577185629572531&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>유사도 검색 매개변수에 대한 자세한 내용은 <a href="/docs/ko/single-vector-search.md">기본 ANN 검색을</a> 참조하세요.</p>
+<p>유사도 검색 매개변수에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/single-vector-search.md">기본 ANN 검색을</a> 참조하세요.</p>

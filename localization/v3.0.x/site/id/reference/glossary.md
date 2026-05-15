@@ -225,7 +225,7 @@ title: Terminologi
         ></path>
       </svg>
     </button></h2><p>Entitas terdiri dari sekelompok bidang yang merepresentasikan objek dunia nyata. Setiap entitas di Milvus diwakili oleh sebuah kunci primer yang unik.</p>
-<p>Anda dapat menyesuaikan kunci utama. Jika anda tidak mengkonfigurasi secara manual, Milvus akan secara otomatis memberikan primary key ke entitas. Jika Anda memilih untuk menyesuaikan primary key, perhatikan bahwa Milvus tidak mendukung de-duplikasi primary key untuk saat ini. Oleh karena itu, bisa saja terdapat duplikat primary key dalam koleksi yang sama. Untuk informasi lebih lanjut, lihat <a href="/docs/id/insert-update-delete.md#Insert-entities">Menyisipkan Entitas</a>.</p>
+<p>Anda dapat menyesuaikan kunci utama. Jika anda tidak mengkonfigurasi secara manual, Milvus akan secara otomatis memberikan primary key ke entitas. Jika Anda memilih untuk menyesuaikan primary key, perlu diketahui bahwa Milvus tidak mendukung de-duplikasi primary key untuk saat ini. Oleh karena itu, bisa saja terdapat duplikat primary key dalam koleksi yang sama. Untuk informasi lebih lanjut, lihat <a href="/docs/id/insert-update-delete.md#Insert-entities">Menyisipkan Entitas</a>.</p>
 <h2 id="Field" class="common-anchor-header">Field<button data-href="#Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -439,7 +439,7 @@ title: Terminologi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/milvus-cdc-overview.md">Milvus CDC</a> (Change data capture) adalah alat yang mudah digunakan yang dapat menangkap dan menyinkronkan data tambahan dalam instance Milvus. Alat ini memastikan keandalan data bisnis dengan mentransfernya secara mulus antara instance sumber dan target, sehingga memudahkan pencadangan dan pemulihan bencana.</p>
+    </button></h2><p><a href="https://milvus.io/docs/milvus_cdc_overview.md">Milvus CDC</a> (change data capture) adalah alat yang digunakan untuk mereplikasi perubahan data dari satu cluster Milvus ke cluster lainnya untuk pemulihan bencana siaga utama.</p>
 <h2 id="Milvus-CLI" class="common-anchor-header">Milvus CLI<button data-href="#Milvus-CLI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -793,7 +793,7 @@ title: Terminologi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vektor penyematan adalah abstraksi fitur dari data yang tidak terstruktur, seperti email, data sensor IoT, foto Instagram, struktur protein, dan lainnya. Secara matematis, vektor penyematan adalah susunan angka floating-point atau biner. Teknik penyematan modern digunakan untuk mengubah data yang tidak terstruktur menjadi vektor penyematan. Milvus mendukung vektor padat dan vektor jarang sejak 2.4.0.</p>
+    </button></h2><p>Vektor penyematan adalah abstraksi fitur dari data yang tidak terstruktur, seperti email, data sensor IoT, foto Instagram, struktur protein, dan lainnya. Secara matematis, vektor penyematan adalah larik angka floating-point atau biner. Teknik penyematan modern digunakan untuk mengubah data yang tidak terstruktur menjadi vektor penyematan. Milvus mendukung vektor padat dan vektor jarang sejak 2.4.0.</p>
 <h2 id="WAL-Storage" class="common-anchor-header">Penyimpanan WAL<button data-href="#WAL-Storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

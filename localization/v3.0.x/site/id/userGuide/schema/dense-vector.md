@@ -70,7 +70,7 @@ summary: >-
 <span class="hljs-punctuation">]</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Vektor padat dapat dihasilkan dengan menggunakan berbagai model <a href="https://en.wikipedia.org/wiki/Embedding">penyematan</a>, seperti model CNN (seperti <a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNet</a>, <a href="https://pytorch.org/vision/stable/models/vgg.html">VGG</a>) untuk gambar dan model bahasa (seperti <a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a>, <a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vec</a>) untuk teks. Model-model ini mengubah data mentah menjadi titik-titik dalam ruang dimensi tinggi, menangkap fitur semantik dari data. Selain itu, Milvus menawarkan metode yang mudah digunakan untuk membantu pengguna menghasilkan dan memproses vektor yang padat, seperti yang dijelaskan dalam Embeddings.</p>
+<p>Vektor padat dapat dihasilkan dengan menggunakan berbagai model <a href="https://en.wikipedia.org/wiki/Embedding">penyematan</a>, seperti model CNN (seperti <a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNet</a>, <a href="https://pytorch.org/vision/stable/models/vgg.html">VGG</a>) untuk gambar dan model bahasa (seperti <a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a>, <a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vec</a>) untuk teks. Model-model ini mengubah data mentah menjadi titik-titik dalam ruang dimensi tinggi, menangkap fitur semantik data. Selain itu, Milvus menawarkan metode yang mudah digunakan untuk membantu pengguna menghasilkan dan memproses vektor yang padat, seperti yang dijelaskan dalam Embeddings.</p>
 <p>Setelah data menjadi vektor, data tersebut dapat disimpan di Milvus untuk pengelolaan dan pengambilan vektor. Diagram di bawah ini menunjukkan proses dasarnya.</p>
 <p>
   
@@ -374,6 +374,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -448,6 +449,7 @@ client.<span class="hljs-title function_">insert</span>({
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;dense_vector&quot;: [0.1, 0.2, 0.3, 0.4]},
@@ -556,6 +558,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

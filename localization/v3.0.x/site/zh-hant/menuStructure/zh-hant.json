@@ -328,7 +328,7 @@
             "children": []
           },
           {
-            "label": "檢視館藏",
+            "label": "檢視收藏集",
             "id": "view-collections.md",
             "order": 3,
             "children": []
@@ -1145,7 +1145,7 @@
                 "children": []
               },
               {
-                "label": "Voyage AI",
+                "label": "航程 AI",
                 "id": "voyage-ai.md",
                 "order": 6,
                 "children": []
@@ -1411,7 +1411,7 @@
         "order": 1,
         "children": [
           {
-            "label": "Milvus 的 AGENTS.md",
+            "label": "適用於 Milvus 的 AGENTS.md",
             "id": "agents_overview.md",
             "order": 0,
             "children": []
@@ -1614,7 +1614,7 @@
             "children": []
           },
           {
-            "label": "飛行中",
+            "label": "在飛行中",
             "id": "dynamic_config.md",
             "order": 1,
             "children": []
@@ -2053,7 +2053,7 @@
       {
         "label": "觀鳥者",
         "id": "birdwatcher",
-        "order": 2,
+        "order": 3,
         "children": [
           {
             "label": "概述",
@@ -2071,6 +2071,37 @@
             "label": "使用指南",
             "id": "birdwatcher_usage_guides.md",
             "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Milvus CDC",
+        "id": "milvus_cdc",
+        "order": 2,
+        "children": [
+          {
+            "label": "概述",
+            "id": "milvus_cdc_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "設定 CDC 複製",
+            "id": "set_up_cdc_replication.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "轉換",
+            "id": "cdc_switchover.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "故障移轉",
+            "id": "cdc_failover.md",
+            "order": 3,
             "children": []
           }
         ]

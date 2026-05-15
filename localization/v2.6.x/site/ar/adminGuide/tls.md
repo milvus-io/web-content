@@ -21,7 +21,7 @@ summary: تعرف على كيفية تمكين بروكسي TLS في Milvus.
     </button></h1><p>TLS (أمان طبقة النقل) هو بروتوكول تشفير لضمان أمان الاتصال. يستخدم وكيل Milvus بروكسي Milvus مصادقة TLS أحادية الاتجاه وثنائية الاتجاه.</p>
 <p>يصف هذا الموضوع كيفية تمكين TLS في وكيل Milvus لكل من gRPC وRESTful عمليات النقل.</p>
 <div class="alert note">
-<p>TLS ومصادقة المستخدم هما نهجان مختلفان للأمان. إذا قمت بتمكين كل من مصادقة المستخدم ومصادقة TLS في نظام Milvus الخاص بك، فستحتاج إلى توفير اسم مستخدم وكلمة مرور ومسارات ملفات الشهادات. للحصول على معلومات حول كيفية تمكين مصادقة المستخدم، راجع <a href="/docs/ar/authenticate.md">مصادقة وصول المستخدم</a>.</p>
+<p>TLS ومصادقة المستخدم هما نهجان مختلفان للأمان. إذا قمت بتمكين كل من مصادقة المستخدم ومصادقة TLS في نظام Milvus الخاص بك، فستحتاج إلى توفير اسم مستخدم وكلمة مرور ومسارات ملفات الشهادات. للحصول على معلومات حول كيفية تمكين مصادقة المستخدم، راجع <a href="/docs/ar/v2.6.x/authenticate.md">مصادقة وصول المستخدم</a>.</p>
 </div>
 <h2 id="Create-your-own-certificate" class="common-anchor-header">إنشاء الشهادة الخاصة بك<button data-href="#Create-your-own-certificate" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -38,13 +38,43 @@ summary: تعرف على كيفية تمكين بروكسي TLS في Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية</h3><p>تأكد من تثبيت OpenSSL. إذا لم تقم بتثبيته، قم <a href="https://github.com/openssl/openssl/blob/master/INSTALL.md">بإنشاء</a> OpenSSL <a href="https://github.com/openssl/openssl/blob/master/INSTALL.md">وتثبيته</a> أولاً.</p>
+    </button></h2><h3 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>تأكد من تثبيت OpenSSL. إذا لم تقم بتثبيته، قم <a href="https://github.com/openssl/openssl/blob/master/INSTALL.md">بإنشاء</a> OpenSSL <a href="https://github.com/openssl/openssl/blob/master/INSTALL.md">وتثبيته</a> أولاً.</p>
 <pre><code translate="no" class="language-shell">openssl version
 <button class="copy-code-btn"></button></code></pre>
 <p>إذا لم يكن OpenSSL غير مثبت. يمكن تثبيته باستخدام الأمر التالي في Ubuntu.</p>
 <pre><code translate="no" class="language-shell">sudo apt install openssl
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-files" class="common-anchor-header">إنشاء الملفات</h3><ol>
+<h3 id="Create-files" class="common-anchor-header">إنشاء الملفات<button data-href="#Create-files" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>قم بإنشاء الملف <code translate="no">gen.sh</code>.</li>
 </ol>
 <pre><code translate="no"><span class="hljs-built_in">mkdir</span> cert &amp;&amp; <span class="hljs-built_in">cd</span> cert
@@ -98,13 +128,43 @@ openssl req -new -key client.key\
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <p>تعتبر المتغيرات في الملف <code translate="no">gen.sh</code> ضرورية لعملية إنشاء ملف طلب توقيع الشهادة. المتغيرات الخمسة الأولى هي معلومات التوقيع الأساسية، بما في ذلك البلد والولاية والموقع والمنظمة ووحدة التنظيم. يجب توخي الحذر عند تكوين <code translate="no">CommonName</code> حيث سيتم التحقق منها أثناء الاتصال بين العميل والخادم.</p>
-<h3 id="Run-gensh-to-generate-certificate" class="common-anchor-header">تشغيل <code translate="no">gen.sh</code> لإنشاء شهادة</h3><p>قم بتشغيل الملف <code translate="no">gen.sh</code> لإنشاء الشهادة.</p>
+<h3 id="Run-gensh-to-generate-certificate" class="common-anchor-header">تشغيل <code translate="no">gen.sh</code> لإنشاء شهادة<button data-href="#Run-gensh-to-generate-certificate" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>قم بتشغيل الملف <code translate="no">gen.sh</code> لإنشاء الشهادة.</p>
 <pre><code translate="no"><span class="hljs-built_in">chmod</span> +x gen.sh
 ./gen.sh
 <button class="copy-code-btn"></button></code></pre>
 <p>سيتم إنشاء الملفات السبعة التالية: <code translate="no">ca.key</code> ، <code translate="no">ca.pem</code> ، <code translate="no">ca.srl</code> ، ، <code translate="no">server.key</code> ، <code translate="no">server.pem</code> ، <code translate="no">client.key</code> ، <code translate="no">client.pem</code>.</p>
 <p>تأكد من الاحتفاظ بالملفات <code translate="no">ca.key</code> ، <code translate="no">ca.pem</code> ، ، <code translate="no">ca.srl</code> آمنة من أجل تجديد شهاداتك لاحقًا. يتم استخدام الملفين <code translate="no">server.key</code> و <code translate="no">server.pem</code> من قبل الخادم، ويتم استخدام الملفين <code translate="no">client.key</code> و <code translate="no">client.pem</code> من قبل العميل.</p>
-<h3 id="Renew-certificates-optional" class="common-anchor-header">تجديد الشهادات (اختياري)</h3><p>إذا كنت ترغب في تجديد الشهادات في بعض الحالات، على سبيل المثال إذا كانت ستنتهي صلاحيتها قريباً، يمكنك استخدام البرنامج النصي التالي.</p>
+<h3 id="Renew-certificates-optional" class="common-anchor-header">تجديد الشهادات (اختياري)<button data-href="#Renew-certificates-optional" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>إذا كنت ترغب في تجديد الشهادات في بعض الحالات، على سبيل المثال إذا كانت ستنتهي صلاحيتها قريباً، يمكنك استخدام البرنامج النصي التالي.</p>
 <p>تحتاج إلى <code translate="no">ca.key</code> و <code translate="no">ca.pem</code> و <code translate="no">ca.srl</code> في دليل العمل الخاص بك.</p>
 <p><details><summary><code translate="no">renew.sh</code></summary></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/usr/bin/env sh</span>
@@ -163,7 +223,22 @@ openssl req -new -key client.key\
         ></path>
       </svg>
     </button></h2><p>يوضح هذا القسم خطوات تكوين خادم Milvus مع تشفير TLS.</p>
-<h3 id="Setup-for-Docker-Compose" class="common-anchor-header">الإعداد لـ Docker Compose</h3><h4 id="1-Modify-the-Milvus-server-configuration" class="common-anchor-header">1. تعديل تكوين خادم Milvus</h4><p>لتمكين TLS الخارجي، أضف التكوينات التالية في ملف <code translate="no">milvus.yaml</code>:</p>
+<h3 id="Setup-for-Docker-Compose" class="common-anchor-header">الإعداد لـ Docker Compose<button data-href="#Setup-for-Docker-Compose" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="1-Modify-the-Milvus-server-configuration" class="common-anchor-header">1. تعديل تكوين خادم Milvus</h4><p>لتمكين TLS الخارجي، أضف التكوينات التالية في ملف <code translate="no">milvus.yaml</code>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">http:</span>
     <span class="hljs-comment"># for now milvus do not support config restful on same port with grpc</span>
@@ -231,7 +306,22 @@ openssl req -new -key client.key\
 <h5 id="Deploy-Milvus-using-Docker-Compose" class="common-anchor-header">نشر ميلفوس باستخدام Docker Compose</h5><p>قم بتنفيذ الأمر التالي لنشر ميلفوس:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Setup-for-Milvus-Operator" class="common-anchor-header">إعداد مشغل Milvus</h3><p>ضع ملفات الشهادة في دليل العمل الخاص بك. يجب أن تبدو بنية الدليل هكذا:</p>
+<h3 id="Setup-for-Milvus-Operator" class="common-anchor-header">إعداد مشغل Milvus<button data-href="#Setup-for-Milvus-Operator" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>ضع ملفات الشهادة في دليل العمل الخاص بك. يجب أن تبدو بنية الدليل هكذا:</p>
 <pre><code translate="no">├── milvus.yaml (<span class="hljs-keyword">to</span> be created later)
 ├── server.pem
 ├── server.<span class="hljs-keyword">key</span>
@@ -271,7 +361,7 @@ openssl req -new -key client.key\
         <span class="hljs-attr">readOnly:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>لتمكين TLS الداخلي، أضف التكوينات التالية في الملف <code translate="no">milvus.yaml</code>:</p>
-<p>تذكر استبدال الحقل <code translate="no">internaltls.sni</code> بالاسم الشائع في شهاداتك.</p>
+<p>تذكر أن تستبدل الحقل <code translate="no">internaltls.sni</code> بالاسم الشائع في شهاداتك.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -306,7 +396,22 @@ openssl req -new -key client.key\
 <p>إنشاء ملف Milvus CR:</p>
 <pre><code translate="no" class="language-bash">kubectl create -f milvus.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="setup-for-Milvus-Helm" class="common-anchor-header">الإعداد لـ Milvus Helm</h3><p>ضع ملفات الشهادة في دليل العمل الخاص بك. يجب أن تبدو بنية الدليل هكذا:</p>
+<h3 id="setup-for-Milvus-Helm" class="common-anchor-header">الإعداد لـ Milvus Helm<button data-href="#setup-for-Milvus-Helm" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>ضع ملفات الشهادة في دليل العمل الخاص بك. يجب أن تبدو بنية الدليل هكذا:</p>
 <pre><code translate="no">├── values.yaml (<span class="hljs-keyword">to</span> be created later)
 ├── server.pem
 ├── server.<span class="hljs-keyword">key</span>
@@ -404,7 +509,22 @@ helm install my-release milvus/milvus -f values.yaml
         ></path>
       </svg>
     </button></h2><p>بالنسبة لتفاعلات SDK، استخدم الإعدادات التالية اعتماداً على وضع TLS.</p>
-<h3 id="One-way-TLS-connection" class="common-anchor-header">اتصال TLS أحادي الاتجاه</h3><p>قم بتوفير المسار إلى <code translate="no">server.pem</code> وتأكد من تطابق <code translate="no">server_name</code> مع <code translate="no">CommonName</code> الذي تم تكوينه في الشهادة.</p>
+<h3 id="One-way-TLS-connection" class="common-anchor-header">اتصال TLS أحادي الاتجاه<button data-href="#One-way-TLS-connection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>قم بتوفير المسار إلى <code translate="no">server.pem</code> وتأكد من تطابق <code translate="no">server_name</code> مع <code translate="no">CommonName</code> الذي تم تكوينه في الشهادة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -414,7 +534,22 @@ client = MilvusClient(
     server_name=<span class="hljs-string">&quot;localhost&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Two-way-TLS-connection" class="common-anchor-header">اتصال TLS ثنائي الاتجاه</h3><p>قم بتوفير المسارات إلى <code translate="no">client.pem</code> و <code translate="no">client.key</code> و <code translate="no">ca.pem</code> وتأكد من أن <code translate="no">server_name</code> يطابق <code translate="no">CommonName</code> المكوّن في الشهادة.</p>
+<h3 id="Two-way-TLS-connection" class="common-anchor-header">اتصال TLS ثنائي الاتجاه<button data-href="#Two-way-TLS-connection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>قم بتوفير المسارات إلى <code translate="no">client.pem</code> و <code translate="no">client.key</code> و <code translate="no">ca.pem</code> وتأكد من أن <code translate="no">server_name</code> يطابق <code translate="no">CommonName</code> المكوّن في الشهادة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -443,7 +578,43 @@ client = MilvusClient(
         ></path>
       </svg>
     </button></h2><p>بالنسبة لواجهات برمجة تطبيقات RESTful، يمكنك التحقق من TLS باستخدام الأمر <code translate="no">curl</code>.</p>
-<h3 id="One-way-TLS-connection" class="common-anchor-header">اتصال TLS أحادي الاتجاه</h3><pre><code translate="no" class="language-bash">curl --cacert path_to/ca.pem https://localhost:8080/v2/vectordb/collections/list
+<h3 id="One-way-TLS-connection" class="common-anchor-header">اتصال TLS أحادي الاتجاه<button data-href="#One-way-TLS-connection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-bash">curl --cacert path_to/ca.pem \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+  https://localhost:8080/v2/vectordb/collections/list
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Two-way-TLS-connection" class="common-anchor-header">اتصال TLS ثنائي الاتجاه</h3><pre><code translate="no" class="language-bash">curl --cert path_to/client.pem --key path_to/client.key --cacert path_to/ca.pem https://localhost:8080/v2/vectordb/collections/list
+<h3 id="Two-way-TLS-connection" class="common-anchor-header">اتصال TLS ثنائي الاتجاه<button data-href="#Two-way-TLS-connection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-bash">curl --cert path_to/client.pem \
+  --key path_to/client.key \
+  --cacert path_to/ca.pem \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+  https://localhost:8080/v2/vectordb/collections/list
 <button class="copy-code-btn"></button></code></pre>

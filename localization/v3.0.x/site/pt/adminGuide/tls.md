@@ -508,7 +508,7 @@ helm install my-release milvus/milvus -f values.yaml
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para interações SDK, utilize as seguintes configurações, dependendo do modo TLS.</p>
+    </button></h2><p>Para as interações SDK, utilize as seguintes configurações, consoante o modo TLS.</p>
 <h3 id="One-way-TLS-connection" class="common-anchor-header">Ligação TLS unidirecional<button data-href="#One-way-TLS-connection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -593,7 +593,9 @@ client = MilvusClient(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><pre><code translate="no" class="language-bash">curl --cacert path_to/ca.pem https://localhost:8080/v2/vectordb/collections/list
+    </button></h3><pre><code translate="no" class="language-bash">curl --cacert path_to/ca.pem \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+  https://localhost:8080/v2/vectordb/collections/list
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Two-way-TLS-connection" class="common-anchor-header">Ligação TLS bidirecional<button data-href="#Two-way-TLS-connection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -610,5 +612,9 @@ client = MilvusClient(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><pre><code translate="no" class="language-bash">curl --cert path_to/client.pem --key path_to/client.key --cacert path_to/ca.pem https://localhost:8080/v2/vectordb/collections/list
+    </button></h3><pre><code translate="no" class="language-bash">curl --cert path_to/client.pem \
+  --key path_to/client.key \
+  --cacert path_to/ca.pem \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+  https://localhost:8080/v2/vectordb/collections/list
 <button class="copy-code-btn"></button></code></pre>

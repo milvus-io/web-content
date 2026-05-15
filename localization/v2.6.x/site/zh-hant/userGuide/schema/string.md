@@ -25,7 +25,7 @@ summary: 在 Milvus 中，VARCHAR 是用來儲存字串資料的資料類型。
 <li><p>指定<code translate="no">max_length</code>, 定義<code translate="no">VARCHAR</code> 欄位可儲存的最大位元組數。<code translate="no">max_length</code> 的有效範圍是 1 到 65,535 。</p></li>
 </ul>
 <div class="alert note">
-<p>Milvus 支援<code translate="no">VARCHAR</code> 欄位的空值和預設值。若要啟用這些功能，請將<code translate="no">nullable</code> 設為<code translate="no">True</code> ，並將<code translate="no">default_value</code> 設為字串值。如需詳細資訊，請參閱<a href="/docs/zh-hant/nullable-and-default.md">Nullable &amp; Default</a>。</p>
+<p>Milvus 支援<code translate="no">VARCHAR</code> 欄位的空值和預設值。若要啟用這些功能，請將<code translate="no">nullable</code> 設為<code translate="no">True</code> ，並將<code translate="no">default_value</code> 設為字串值。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/nullable-and-default.md">Nullable &amp; Default</a>。</p>
 </div>
 <h2 id="Add-VARCHAR-field" class="common-anchor-header">新增 VARCHAR 欄位<button data-href="#Add-VARCHAR-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,10 +45,10 @@ summary: 在 Milvus 中，VARCHAR 是用來儲存字串資料的資料類型。
     </button></h2><p>要在 Milvus 中儲存字串資料，請在您的 collection schema 中定義<code translate="no">VARCHAR</code> 欄位。下面是一個定義有兩個<code translate="no">VARCHAR</code> 欄位的集合模式的範例：</p>
 <ul>
 <li><p><code translate="no">varchar_field1</code>：最多可儲存 100 位元組，允許空值，預設值為<code translate="no">&quot;Unknown&quot;</code> 。</p></li>
-<li><p><code translate="no">varchar_field2</code>：最多可儲存 200 位元組，允許空值，但沒有預設值。</p></li>
+<li><p><code translate="no">varchar_field2</code>: 最多儲存 200 位元組，允許空值，但沒有預設值。</p></li>
 </ul>
 <div class="alert note">
-<p>如果您在定義模式時設定<code translate="no">enable_dynamic_fields=True</code> ，Milvus 允許您插入未事先定義的標量欄位。但是，這可能會增加查詢和管理的複雜性，有可能影響效能。如需詳細資訊，請參閱<a href="/docs/zh-hant/enable-dynamic-field.md">動態欄位</a>。</p>
+<p>如果您在定義模式時設定<code translate="no">enable_dynamic_fields=True</code> ，Milvus 允許您插入未事先定義的標量欄位。但是，這可能會增加查詢和管理的複雜性，有可能影響效能。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/enable-dynamic-field.md">動態欄位</a>。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -247,9 +247,9 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>索引有助於改善搜尋與查詢效能。在 Milvus 中，對向量欄位必須建立索引，但對標量值欄位則是可選的。</p>
-<p>以下範例在向量欄位<code translate="no">embedding</code> 和標量欄位<code translate="no">varchar_field1</code> 上建立索引，兩者都使用<code translate="no">AUTOINDEX</code> 索引類型。使用這種類型，Milvus 會根據資料類型自動選擇最適合的索引。您也可以自訂每個欄位的索引類型和參數。詳情請參閱<a href="/docs/zh-hant/index-explained.md">索引說明</a>。</p>
+<p>以下範例在向量欄位<code translate="no">embedding</code> 和標量欄位<code translate="no">varchar_field1</code> 上建立索引，兩者都使用<code translate="no">AUTOINDEX</code> 索引類型。使用這種類型，Milvus 會根據資料類型自動選擇最適合的索引。您也可以自訂每個欄位的索引類型和參數。詳情請參閱<a href="/docs/zh-hant/v2.6.x/index-explained.md">索引說明</a>。</p>
 <div class="alert note">
-<p>您也可以建立<code translate="no">NGRAM</code> 索引，以加速<code translate="no">VARCHAR</code> 欄位上的<code translate="no">LIKE</code> 過濾。詳情請參閱<a href="/docs/zh-hant/ngram.md">NGRAM</a>。</p>
+<p>您也可以建立<code translate="no">NGRAM</code> 索引，以加速<code translate="no">VARCHAR</code> 欄位上的<code translate="no">LIKE</code> 過濾。詳情請參閱<a href="/docs/zh-hant/v2.6.x/ngram.md">NGRAM</a>。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -376,6 +376,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -494,6 +495,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;varchar_field1&quot;: &quot;Product A&quot;, &quot;varchar_field2&quot;: &quot;High quality product&quot;, &quot;pk&quot;: 1, &quot;embedding&quot;: [0.1, 0.2, 0.3]},
@@ -586,6 +588,7 @@ fmt.Println(<span class="hljs-string">&quot;varchar_field2&quot;</span>, queryRe
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;varchar_field1 == \&quot;Product A\&quot;&quot;,
@@ -655,6 +658,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;varchar_field2 is null&quot;,
@@ -722,6 +726,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;varchar_field1 == \&quot;Unknown\&quot;&quot;,
@@ -826,6 +831,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

@@ -234,6 +234,7 @@ curl --request POST \
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: {
@@ -246,7 +247,7 @@ curl --request POST \
 <button class="copy-code-btn"></button></code></pre>
 <p>在此模式中：</p>
 <ul>
-<li><code translate="no">embedding</code> 欄位明確地標記為 nullable。</li>
+<li><code translate="no">embedding</code> 欄位明確地標示為 nullable。</li>
 <li>實體可省略<code translate="no">embedding</code> 欄位，或在插入時為其指定 NULL 值。</li>
 <li>允許 NULL 值的決定是在集合建立時固定的。</li>
 </ul>
@@ -296,8 +297,8 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>一旦在集合模式中將欄位定義為 nullable，Milvus 就允許在資料擷取過程中，將欄位值遺失或明確設定為 NULL。</p>
-<p>以下範例將三個實體插入在<a href="#define-a-nullable-field-in-the-collection-schema">集合模式中定義可為空欄位</a>所建立的集合，展示這些不同的情況。</p>
+    </button></h2><p>一旦在集合模式中將欄位定義為 nullable，Milvus 允許在資料擷取過程中，欄位值會遺失或明確設定為 NULL。</p>
+<p>以下範例將三個實體插入在<a href="#define-a-nullable-field-in-the-collection-schema">集合模式中定義可為空欄位</a>所建立的集合中，展示這些不同的情況。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
@@ -374,6 +375,7 @@ _, err := client.Insert(ctx, milvusclient.NewRowBasedInsertOption(<span class="h
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -389,7 +391,7 @@ _, err := client.Insert(ctx, milvusclient.NewRowBasedInsertOption(<span class="h
 <li>Entity<strong>id = 2</strong>明確地指定一個 NULL 值給<code translate="no">embedding</code> 欄位。</li>
 <li>Entity<strong>id = 3</strong>完全省略了<code translate="no">embedding</code> 欄位；Milvus 將其儲存為 NULL。</li>
 </ul>
-<h2 id="Index-behavior-on-nullable-fields" class="common-anchor-header">可為空欄位的索引行為<button data-href="#Index-behavior-on-nullable-fields" class="anchor-icon" translate="no">
+<h2 id="Index-behavior-on-nullable-fields" class="common-anchor-header">可空欄位的索引行為<button data-href="#Index-behavior-on-nullable-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -495,6 +497,7 @@ _, err = client.LoadCollection(ctx, milvusclient.NewLoadCollectionOption(<span c
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;indexParams&quot;: [
@@ -510,6 +513,7 @@ curl --request POST \
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/load&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{&quot;collectionName&quot;: &quot;my_collection&quot;}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>此時</p>
@@ -613,6 +617,7 @@ fmt.Println(resultSets)
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [[0.1, 0.2, 0.3, 0.4]],
@@ -645,7 +650,7 @@ fmt.Println(resultSets)
       </svg>
     </button></h2><p>前面的範例著重於向量欄位。本節說明 NULL 值在<strong>標量篩選表達式</strong>中的表現。</p>
 <p>標量欄位可以使用<code translate="no">nullable=True</code> 定義，並遵循與向量欄位相同的擷取規則。不過，<strong>NULL 標量值在篩選表達式中總是求值為 false</strong>。</p>
-<p>例如，給定一個可為空的標量欄位<code translate="no">age</code> ，以下篩選器會選擇年齡大於 18 歲的實體：</p>
+<p>例如，給定一個可為空的標量欄位<code translate="no">age</code> ，以下的篩選器會選擇年齡大於 18 歲的實體：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">expr = <span class="hljs-string">&quot;age &gt; 18&quot;</span>
@@ -704,9 +709,9 @@ fmt.Println(resultSets)
 </table>
 <p><strong>主要啟示：</strong></p>
 <ul>
-<li>當欄位有非 NULL 預設值時，不論是否啟用<code translate="no">nullable</code> ，都會使用該值。</li>
+<li>當欄位具有非 NULL 預設值時，不論是否啟用<code translate="no">nullable</code> ，都會使用該值。</li>
 <li>當<code translate="no">nullable=True</code> 但未設定預設值時，欄位會儲存 NULL。</li>
-<li>當<code translate="no">nullable=False</code> 但未設定預設值時，插入會出錯失敗。</li>
+<li>當<code translate="no">nullable=False</code> 但未設定預設值時，插入失敗並產生錯誤。</li>
 <li>在非空欄位上設定 NULL 預設值是無效的，並會導致錯誤。</li>
 </ul>
 <p>有關預設值的完整範例和 API 使用，請參閱<a href="/docs/zh-hant/default-values.md">預設值</a>。</p>

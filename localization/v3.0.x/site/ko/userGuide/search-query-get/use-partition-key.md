@@ -297,6 +297,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -376,7 +377,7 @@ filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-key-isolation.png" alt="Partition Key Isolation" class="doc-image" id="partition-key-isolation" />
    </span> <span class="img-wrapper"> <span>파티션 키 격리</span> </span></p>
-<p>위 그림에서 볼 수 있듯이 Milvus는 파티션 키 값을 기준으로 엔티티를 그룹화하고 각 그룹에 대해 별도의 인덱스를 생성합니다. 검색 요청을 받으면 밀버스는 필터링 조건에 지정된 파티션 키 값을 기준으로 인덱스를 찾고 인덱스에 포함된 엔터티 내에서 검색 범위를 제한하여 검색 시 관련 없는 엔터티를 검색하지 않도록 하여 검색 성능을 크게 향상시킵니다.</p>
+<p>위 그림에서 볼 수 있듯이 Milvus는 파티션 키 값을 기준으로 엔티티를 그룹화하고 각 그룹에 대해 별도의 인덱스를 생성합니다. 검색 요청을 받으면 밀버스는 필터링 조건에 지정된 파티션 키 값을 기준으로 인덱스를 찾고 인덱스에 포함된 엔터티 내에서 검색 범위를 제한하여 검색 시 관련 없는 엔터티를 검색하는 것을 방지하고 검색 성능을 크게 향상시킵니다.</p>
 <p>파티션 키 격리를 활성화한 후에는 Milvus가 일치하는 인덱스에 포함된 엔티티 내에서 검색 범위를 제한할 수 있도록 파티션 키 기반 필터에 특정 값을 하나만 포함해야 합니다.</p>
 <div class="alert note">
 <p>현재 파티션 키 격리 기능은 인덱스 유형이 HNSW로 설정된 검색에만 적용됩니다.</p>
@@ -443,6 +444,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,

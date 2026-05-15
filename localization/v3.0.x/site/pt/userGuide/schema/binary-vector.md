@@ -26,7 +26,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Os vectores binários são uma forma especial de representação de dados que convertem os vectores tradicionais de vírgula flutuante de elevada dimensão em vectores binários que contêm apenas 0s e 1s. Esta transformação não só comprime o tamanho do vetor, como também reduz os custos de armazenamento e computacionais, mantendo a informação semântica. Quando a precisão para caraterísticas não críticas não é essencial, os vectores binários podem efetivamente manter a maior parte da integridade e utilidade dos vectores de vírgula flutuante originais.</p>
+    </button></h1><p>Os vectores binários são uma forma especial de representação de dados que convertem os vectores tradicionais de vírgula flutuante de elevada dimensão em vectores binários que contêm apenas 0s e 1s. Esta transformação não só comprime o tamanho do vetor como também reduz os custos de armazenamento e computacionais, mantendo a informação semântica. Quando a precisão para caraterísticas não críticas não é essencial, os vectores binários podem efetivamente manter a maior parte da integridade e utilidade dos vectores de vírgula flutuante originais.</p>
 <p>Os vectores binários têm uma vasta gama de aplicações, especialmente em situações em que a eficiência computacional e a otimização do armazenamento são cruciais. Em sistemas de IA de grande escala, como motores de pesquisa ou sistemas de recomendação, o processamento em tempo real de grandes quantidades de dados é fundamental. Ao reduzir o tamanho dos vectores, os vectores binários ajudam a diminuir a latência e os custos computacionais sem sacrificar significativamente a precisão. Além disso, os vectores binários são úteis em ambientes com recursos limitados, como dispositivos móveis e sistemas incorporados, onde a memória e a capacidade de processamento são limitadas. Através da utilização de vectores binários, podem ser implementadas funções de IA complexas nestes ambientes restritos, mantendo um elevado desempenho.</p>
 <h2 id="Overview" class="common-anchor-header">Descrição geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -274,8 +274,8 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>No exemplo acima, um índice chamado <code translate="no">binary_vector_index</code> é criado para o campo <code translate="no">binary_vector</code>, usando o tipo de índice <code translate="no">AUTOINDEX</code>. O <code translate="no">metric_type</code> é definido como <code translate="no">HAMMING</code>, indicando que a distância de Hamming é utilizada para a medição da semelhança.</p>
-<p>Milvus fornece vários tipos de índices para uma melhor experiência de pesquisa vetorial. AUTOINDEX é um tipo de índice especial concebido para suavizar a curva de aprendizagem da pesquisa vetorial. Há muitos tipos de índices disponíveis para escolher. Para mais pormenores, consulte <a href="/docs/pt/index-explained.md">Índice Explicado</a>.</p>
-<p>Adicionalmente, Milvus suporta outras métricas de similaridade para vectores binários. Para obter mais informações, consulte <a href="/docs/pt/metric.md">Tipos de métricas</a>.</p>
+<p>O Milvus fornece vários tipos de índices para uma melhor experiência de pesquisa vetorial. AUTOINDEX é um tipo de índice especial concebido para suavizar a curva de aprendizagem da pesquisa vetorial. Há muitos tipos de índices disponíveis para escolher. Para mais pormenores, consulte <a href="/docs/pt/index-explained.md">Índice Explicado</a>.</p>
+<p>Adicionalmente, o Milvus suporta outras métricas de similaridade para vectores binários. Para obter mais informações, consulte <a href="/docs/pt/metric.md">Tipos de métricas</a>.</p>
 <h3 id="Create-collection" class="common-anchor-header">Criar coleção<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -338,6 +338,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -449,6 +450,7 @@ client.<span class="hljs-title function_">insert</span>({
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;data\&quot;: <span class="hljs-variable">$data</span>,
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;
@@ -561,6 +563,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$data</span>,

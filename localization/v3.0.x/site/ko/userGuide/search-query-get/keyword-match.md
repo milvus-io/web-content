@@ -44,7 +44,7 @@ summary: >-
 <li><p><a href="/docs/ko/analyzer-overview.md">분석기</a>: 분석기는 입력 텍스트를 개별 단어 또는 토큰으로 토큰화한 다음 필요에 따라 필터를 적용하여 처리합니다. 이를 통해 Milvus는 이러한 토큰을 기반으로 인덱스를 구축할 수 있습니다.</p></li>
 <li><p><a href="/docs/ko/index-explained.md">인덱싱</a>: 텍스트 분석 후, Milvus는 각 고유 토큰을 해당 토큰이 포함된 문서에 매핑하는 역 인덱스를 생성합니다.</p></li>
 </ol>
-<p>사용자가 텍스트 일치를 수행할 때, 반전된 색인을 사용하여 해당 용어가 포함된 모든 문서를 빠르게 검색합니다. 이는 각 문서를 개별적으로 스캔하는 것보다 훨씬 빠릅니다.</p>
+<p>사용자가 텍스트 일치를 수행하면 반전된 색인을 사용하여 해당 용어가 포함된 모든 문서를 빠르게 검색합니다. 이는 각 문서를 개별적으로 스캔하는 것보다 훨씬 빠릅니다.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/keyword-match.png" alt="Keyword Match" class="doc-image" id="keyword-match" />
@@ -467,6 +467,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;annsField&quot;: &quot;embeddings&quot;,
@@ -546,6 +547,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$filter</span>&quot;</span><span class="hljs-string">&#x27;,

@@ -119,7 +119,7 @@ beta: Milvus 2.6.4+
 </table></p>
 <p>لا تدعم الحقول القياسية في حقل Array of Structs الفهارس.</p></li>
 <li><p><strong>بيانات Upsert</strong></p>
-<p>لا تدعم الهياكل عمليات إعادة إدراج في وضع الدمج. ومع ذلك، لا يزال بإمكانك إجراء عمليات الإدراج في وضع التجاوز لتحديث البيانات في الهياكل. للاطلاع على تفاصيل حول الاختلافات بين عمليات الإدراج في وضع الدمج ووضع التجاوز، راجع <a href="/docs/ar/upsert-entities.md#Overview">Upsert Entities</a>.</p></li>
+<p>لا تدعم الهياكل عمليات إعادة إدراج في وضع الدمج. ومع ذلك، لا يزال بإمكانك إجراء عمليات الإدراج في وضع التجاوز لتحديث البيانات في الهياكل. للاطلاع على تفاصيل حول الاختلافات بين عمليات الإدراج في وضع الدمج ووضع التجاوز، راجع <a href="/docs/ar/v2.6.x/upsert-entities.md#Overview">Upsert Entities</a>.</p></li>
 <li><p><strong>التصفية العددية</strong></p>
 <p>لا يمكنك استخدام مصفوفة من الهياكل أو أي حقول داخل عنصر الهيكل الخاص بها في تعابير التصفية داخل عمليات البحث والاستعلامات.</p></li>
 </ul>
@@ -148,7 +148,7 @@ beta: Milvus 2.6.4+
 </ol>
 <p>إليك كيفية تحديد مخطط مجموعة يتضمن مصفوفة من الهياكل:</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(
@@ -359,7 +359,7 @@ SCHEMA=<span class="hljs-string">&#x27;{
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>توضّح الأسطر المظللة في مثال الشيفرة أعلاه إجراء تضمين مصفوفة من الهياكل في مخطط مجموعة.</p>
+<p>توضّح الأسطر المظللة في مثال الشيفرة أعلاه الإجراء لتضمين مصفوفة من الهياكل في مخطط مجموعة.</p>
 <h2 id="Set-index-params" class="common-anchor-header">تعيين بارامترات الفهرس<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -376,7 +376,7 @@ SCHEMA=<span class="hljs-string">&#x27;{
         ></path>
       </svg>
     </button></h2><p>تكون الفهرسة إلزامية لجميع حقول المتجهات، بما في ذلك حقول المتجهات في المجموعة وتلك المحددة في بنية العنصر.</p>
-<p>تختلف معلمات الفهرس القابلة للتطبيق اعتمادًا على نوع الفهرس المستخدم. للحصول على تفاصيل حول معلمات الفهرس القابلة للتطبيق، راجع <a href="/docs/ar/index-explained.md">شرح الفهرس</a> وصفحات التوثيق الخاصة بنوع الفهرس المحدد.</p>
+<p>تختلف معلمات الفهرس القابلة للتطبيق اعتمادًا على نوع الفهرس المستخدم. للحصول على تفاصيل حول معلمات الفهرس القابلة للتطبيق، راجع <a href="/docs/ar/v2.6.x/index-explained.md">شرح الفهرس</a> وصفحات التوثيق الخاصة بنوع الفهرس المحدد.</p>
 <p>لفهرسة قائمة تضمين، تحتاج إلى تعيين نوع الفهرس الخاص بها إلى <code translate="no">AUTOINDEX</code> أو <code translate="no">HNSW</code> ، واستخدام <code translate="no">MAX_SIM_COSINE</code> كنوع مقياس لـ Milvus لقياس أوجه التشابه بين قوائم التضمين.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
@@ -498,6 +498,7 @@ client.createCollection(requestCreate);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/create&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;description\&quot;: \&quot;A collection for storing book information with struct array chunks\&quot;,
@@ -613,6 +614,7 @@ row.add(<span class="hljs-string">&quot;chunks&quot;</span>, structArr);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/insert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -737,7 +739,7 @@ client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot
     </button></h2><p>يمكنك إجراء عمليات بحث متجهية على حقول المتجهات في مجموعة وفي مصفوفة من الهياكل.</p>
 <p>على وجه التحديد، يجب عليك ربط اسم حقل صفيف الهياكل وحقول المتجهات المستهدفة داخل عناصر الهياكل كقيمة للمعلمة <code translate="no">anns_field</code> في طلب البحث، واستخدام <code translate="no">EmbeddingList</code> لتنظيم متجهات الاستعلام بشكل منظم.</p>
 <div class="alert note">
-<p>يوفر Milvus <code translate="no">EmbeddingList</code> لمساعدتك على تنظيم متجهات الاستعلام لعمليات البحث مقابل قائمة تضمين في مصفوفة من الهياكل بشكل أكثر دقة. يحتوي كل <code translate="no">EmbeddingList</code> على تضمين متجه على الأقل ويتوقع عددًا من الكيانات الأعلىK في المقابل.</p>
+<p>يوفر Milvus <code translate="no">EmbeddingList</code> لمساعدتك في تنظيم متجهات الاستعلام لعمليات البحث مقابل قائمة تضمين في مصفوفة من الهياكل بشكل أكثر دقة. يحتوي كل <code translate="no">EmbeddingList</code> على تضمين متجه على الأقل ويتوقع عددًا من الكيانات الأعلىK في المقابل.</p>
 <p>ومع ذلك، لا يمكن استخدام <code translate="no">EmbeddingList</code> إلا في طلبات <code translate="no">search()</code> دون البحث عن النطاق أو تجميع معلمات البحث، ناهيك عن طلبات <code translate="no">search_iterator()</code>.</p>
 </div>
 <div class="multipleCode">
@@ -805,6 +807,7 @@ embeddingList1=<span class="hljs-string">&#x27;[[0.2,0.9,0.4,-0.3,0.2]]&#x27;</s
 embeddingList2=<span class="hljs-string">&#x27;[[-0.2,-0.2,0.5,0.6,0.9],[-0.4,0.3,0.5,0.8,0.2]]&#x27;</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>],
@@ -909,6 +912,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>, <span class="hljs-variable">$embeddingList2</span>],
@@ -1012,4 +1016,4 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمثل تطوير صفيف أصلي من نوع بيانات Structs تقدمًا كبيرًا في قدرة ميلفوس على التعامل مع بنيات البيانات المعقدة. لفهم حالات الاستخدام بشكل أفضل وتعظيم هذه الميزة الجديدة، ننصحك بقراءة <a href="/docs/ar/best-practices-for-array-of-structs.md">تصميم المخطط باستخدام مصفوفة الهياكل</a>.</p>
+    </button></h2><p>يمثل تطوير صفيف أصلي من نوع بيانات Structs تقدمًا كبيرًا في قدرة ميلفوس على التعامل مع بنيات البيانات المعقدة. لفهم حالات الاستخدام بشكل أفضل وتعظيم هذه الميزة الجديدة، ننصحك بقراءة <a href="/docs/ar/v2.6.x/best-practices-for-array-of-structs.md">تصميم المخطط باستخدام مصفوفة الهياكل</a>.</p>

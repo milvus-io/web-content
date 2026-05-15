@@ -75,7 +75,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" />
    </span> <span class="img-wrapper"> <span>استخدام المتجهات الكثيفة</span> </span></p>
 <div class="alert note">
-<p>إلى جانب المتجهات الكثيفة، يدعم ميلفوس أيضًا المتجهات المتفرقة والمتجهات الثنائية. تُعد المتجهات المتفرقة مناسبة للمطابقات الدقيقة بناءً على مصطلحات محددة، مثل البحث عن الكلمات الرئيسية ومطابقة المصطلحات، بينما تُستخدم المتجهات الثنائية بشكل شائع للتعامل بكفاءة مع البيانات ثنائية الثنائية، مثل مطابقة أنماط الصور وبعض تطبيقات التجزئة. لمزيد من المعلومات، راجع المتجهات <a href="/docs/ar/binary-vector.md">الثنائية</a> والمتجهات <a href="/docs/ar/sparse_vector.md">المتفرقة</a>.</p>
+<p>إلى جانب المتجهات الكثيفة، يدعم ميلفوس أيضًا المتجهات المتفرقة والمتجهات الثنائية. تُعد المتجهات المتفرقة مناسبة للمطابقات الدقيقة بناءً على مصطلحات محددة، مثل البحث عن الكلمات الرئيسية ومطابقة المصطلحات، بينما تُستخدم المتجهات الثنائية بشكل شائع للتعامل بكفاءة مع البيانات ثنائية الثنائيات مثل مطابقة أنماط الصور وبعض تطبيقات التجزئة. لمزيد من المعلومات، راجع المتجهات <a href="/docs/ar/binary-vector.md">الثنائية</a> والمتجهات <a href="/docs/ar/sparse_vector.md">المتفرقة</a>.</p>
 </div>
 <h2 id="Use-dense-vectors" class="common-anchor-header">استخدام المتجهات الكثيفة<button data-href="#Use-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -372,6 +372,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -446,6 +447,7 @@ client.<span class="hljs-title function_">insert</span>({
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;dense_vector&quot;: [0.1, 0.2, 0.3, 0.4]},
@@ -471,7 +473,7 @@ client.<span class="hljs-title function_">insert</span>({
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يعد البحث الدلالي المستند إلى المتجهات الكثيفة إحدى الميزات الأساسية في ميلفوس، مما يتيح لك العثور بسرعة على البيانات الأكثر تشابهًا مع متجه الاستعلام بناءً على المسافة بين المتجهات. لإجراء بحث عن التشابه، قم بإعداد متجه الاستعلام ومعلمات البحث، ثم قم باستدعاء الطريقة <code translate="no">search</code>.</p>
+    </button></h3><p>يعد البحث الدلالي المستند إلى المتجهات الكثيفة إحدى الميزات الأساسية في ميلفوس، مما يسمح لك بالعثور بسرعة على البيانات الأكثر تشابهًا مع متجه الاستعلام بناءً على المسافة بين المتجهات. لإجراء بحث عن التشابه، قم بإعداد متجه الاستعلام ومعلمات البحث، ثم قم باستدعاء الطريقة <code translate="no">search</code>.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {
@@ -554,6 +556,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -569,4 +572,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.55,&quot;id&quot;:&quot;453577185629572532&quot;,&quot;pk&quot;:&quot;453577185629572532&quot;},{&quot;distance&quot;:0.42,&quot;id&quot;:&quot;453577185629572531&quot;,&quot;pk&quot;:&quot;453577185629572531&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>لمزيد من المعلومات حول معلمات البحث عن التشابه، راجع <a href="/docs/ar/single-vector-search.md">بحث التشابه الأساسي</a>.</p>
+<p>للمزيد من المعلومات حول معلمات البحث عن التشابه، راجع <a href="/docs/ar/single-vector-search.md">بحث التشابه الأساسي</a>.</p>

@@ -13,7 +13,6 @@ summary: >-
   tetap, mulai dari beberapa lusin hingga beberapa ratus atau bahkan ribuan,
   tergantung pada aplikasi dan persyaratan tertentu.
 ---
-
 <h1 id="Dense-Vector" class="common-anchor-header">Vektor Padat<button data-href="#Dense-Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,7 +45,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vektor padat biasanya direpresentasikan sebagai larik angka floating-point dengan panjang tetap, seperti <code translate="no">[0.2, 0.7, 0.1, 0.8, 0.3, ..., 0.5]</code>. Dimensi vektor ini biasanya berkisar antara ratusan hingga ribuan, seperti 128, 256, 768, atau 1024. Setiap dimensi menangkap fitur semantik tertentu dari suatu objek, sehingga dapat diterapkan ke berbagai skenario melalui perhitungan kemiripan.</p>
+    </button></h2><p>Vektor padat biasanya direpresentasikan sebagai larik angka floating-point dengan panjang tetap, seperti <code translate="no">[0.2, 0.7, 0.1, 0.8, 0.3, ..., 0.5]</code>. Dimensi vektor ini biasanya berkisar antara ratusan hingga ribuan, seperti 128, 256, 768, atau 1024. Setiap dimensi menangkap fitur semantik tertentu dari sebuah objek, sehingga dapat diterapkan ke berbagai skenario melalui perhitungan kemiripan.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/dense-vector.png" alt="Dense Vector" class="doc-image" id="dense-vector" />
@@ -71,15 +70,14 @@ summary: >-
 <span class="hljs-punctuation">]</span>
 
 <button class="copy-code-btn"></button></code></pre>
-
-<p>Vektor padat dapat dihasilkan dengan menggunakan berbagai model <a href="https://en.wikipedia.org/wiki/Embedding">penyematan</a>, seperti model CNN (seperti <a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNet</a>, <a href="https://pytorch.org/vision/stable/models/vgg.html">VGG</a>) untuk gambar dan model bahasa (seperti <a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a>, <a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vec</a>) untuk teks. Model-model ini mengubah data mentah menjadi titik-titik dalam ruang dimensi tinggi, menangkap fitur semantik data. Selain itu, Milvus menawarkan metode yang mudah digunakan untuk membantu pengguna menghasilkan dan memproses vektor yang padat, seperti yang dijelaskan dalam Embeddings.</p>
+<p>Vektor padat dapat dihasilkan dengan menggunakan berbagai model <a href="https://en.wikipedia.org/wiki/Embedding">penyematan</a>, seperti model CNN (seperti <a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNet</a>, <a href="https://pytorch.org/vision/stable/models/vgg.html">VGG</a>) untuk gambar dan model bahasa (seperti <a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a>, <a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vec</a>) untuk teks. Model-model ini mengubah data mentah menjadi titik-titik dalam ruang dimensi tinggi, menangkap fitur semantik dari data. Selain itu, Milvus menawarkan metode yang mudah digunakan untuk membantu pengguna menghasilkan dan memproses vektor yang padat, seperti yang dijelaskan dalam Embeddings.</p>
 <p>Setelah data menjadi vektor, data tersebut dapat disimpan di Milvus untuk pengelolaan dan pengambilan vektor. Diagram di bawah ini menunjukkan proses dasarnya.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" />
    </span> <span class="img-wrapper"> <span>Menggunakan Vektor Padat</span> </span></p>
 <div class="alert note">
-<p>Selain vektor padat, Milvus juga mendukung vektor jarang dan vektor biner. Vektor jarang cocok untuk pencocokan yang tepat berdasarkan istilah tertentu, seperti pencarian kata kunci dan pencocokan istilah, sedangkan vektor biner biasanya digunakan untuk menangani data binari secara efisien, seperti pencocokan pola gambar dan aplikasi hashing tertentu. Untuk informasi lebih lanjut, lihat <a href="/docs/id/binary-vector.md">Vektor Biner</a> dan <a href="/docs/id/sparse_vector.md">Vektor</a> <a href="/docs/id/binary-vector.md">Jarang</a>.</p>
+<p>Selain vektor padat, Milvus juga mendukung vektor jarang dan vektor biner. Vektor jarang cocok untuk pencocokan yang tepat berdasarkan istilah tertentu, seperti pencarian kata kunci dan pencocokan istilah, sedangkan vektor biner biasanya digunakan untuk menangani data binari secara efisien, seperti pencocokan pola gambar dan aplikasi hashing tertentu. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/binary-vector.md">Vektor Biner</a> dan <a href="/docs/id/v2.6.x/sparse_vector.md">Vektor</a> <a href="/docs/id/v2.6.x/binary-vector.md">Jarang</a>.</p>
 </div>
 <h2 id="Use-dense-vectors" class="common-anchor-header">Menggunakan vektor padat<button data-href="#Use-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -96,7 +94,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">Menambahkan bidang vektor</h3><p>Untuk menggunakan vektor padat di Milvus, pertama-tama tentukan bidang vektor untuk menyimpan vektor padat saat membuat koleksi. Proses ini meliputi:</p>
+    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">Menambahkan bidang vektor<button data-href="#Add-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk menggunakan vektor padat di Milvus, pertama-tama tentukan bidang vektor untuk menyimpan vektor padat saat membuat koleksi. Proses ini meliputi:</p>
 <ol>
 <li><p>Mengatur <code translate="no">datatype</code> ke tipe data vektor padat yang didukung. Untuk tipe data vektor padat yang didukung, lihat Tipe Data.</p></li>
 <li><p>Menentukan dimensi vektor padat menggunakan parameter <code translate="no">dim</code>.</p></li>
@@ -109,14 +122,13 @@ summary: >-
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 
 schema = client.create_schema(
-auto_id=<span class="hljs-literal">True</span>,
-enable_dynamic_fields=<span class="hljs-literal">True</span>,
+    auto_id=<span class="hljs-literal">True</span>,
+    enable_dynamic_fields=<span class="hljs-literal">True</span>,
 )
 
 schema.add_field(field_name=<span class="hljs-string">&quot;pk&quot;</span>, datatype=DataType.VARCHAR, is_primary=<span class="hljs-literal">True</span>, max_length=<span class="hljs-number">100</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;dense_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">4</span>)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 
@@ -226,7 +238,7 @@ schema.WithField(entity.NewField().
    </tr>
    <tr>
      <td><p><code translate="no">FLOAT16_VECTOR</code></p></td>
-     <td><p>Menyimpan angka floating-point setengah presisi 16-bit, digunakan untuk pembelajaran mendalam dan komputasi GPU. Menghemat ruang penyimpanan dalam skenario di mana presisi tidak terlalu penting, seperti pada fase penarikan kembali sistem rekomendasi dengan presisi rendah.</p></td>
+     <td><p>Menyimpan angka floating-point setengah presisi 16-bit, digunakan untuk pembelajaran mendalam dan komputasi GPU. Menghemat ruang penyimpanan dalam skenario di mana presisi tidak terlalu penting, seperti pada fase pemanggilan kembali dengan presisi rendah pada sistem rekomendasi.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">BFLOAT16_VECTOR</code></p></td>
@@ -237,19 +249,33 @@ schema.WithField(entity.NewField().
      <td><p>Menyimpan vektor yang masing-masing elemennya dalam setiap dimensi adalah bilangan bulat 8-bit (int8), dengan setiap elemen berkisar antara -128 hingga 127. Dirancang untuk model pembelajaran mendalam yang terkuantisasi (misalnya, ResNet, EfficientNet), INT8_VECTOR mengurangi ukuran model dan mempercepat kesimpulan dengan kehilangan presisi minimal.<br><strong>Catatan</strong>: Jenis vektor ini hanya didukung untuk indeks HNSW.</p></td>
    </tr>
 </table>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Mengatur parameter indeks untuk bidang vektor</h3><p>Untuk mempercepat pencarian semantik, indeks harus dibuat untuk bidang vektor. Pengindeksan dapat secara signifikan meningkatkan efisiensi pengambilan data vektor berskala besar.</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Mengatur parameter indeks untuk bidang vektor<button data-href="#Set-index-params-for-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk mempercepat pencarian semantik, indeks harus dibuat untuk bidang vektor. Pengindeksan dapat secara signifikan meningkatkan efisiensi pengambilan data vektor berskala besar.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
-field_name=<span class="hljs-string">&quot;dense_vector&quot;</span>,
-index_name=<span class="hljs-string">&quot;dense_vector_index&quot;</span>,
-index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-metric_type=<span class="hljs-string">&quot;IP&quot;</span>
+    field_name=<span class="hljs-string">&quot;dense_vector&quot;</span>,
+    index_name=<span class="hljs-string">&quot;dense_vector_index&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> java.util.*;
 
@@ -284,8 +310,23 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <button class="copy-code-btn"></button></code></pre>
 <p>Pada contoh di atas, sebuah indeks bernama <code translate="no">dense_vector_index</code> dibuat untuk bidang <code translate="no">dense_vector</code> menggunakan tipe indeks <code translate="no">AUTOINDEX</code>. <code translate="no">metric_type</code> disetel ke <code translate="no">IP</code>, yang menunjukkan bahwa inner product akan digunakan sebagai metrik jarak.</p>
 <p>Milvus menyediakan berbagai jenis indeks untuk pengalaman pencarian vektor yang lebih baik. AUTOINDEX adalah jenis indeks khusus yang dirancang untuk memperlancar kurva pembelajaran pencarian vektor. Ada banyak jenis indeks yang tersedia untuk Anda pilih. Untuk detailnya, lihat xxx.</p>
-<p>Milvus mendukung jenis metrik lainnya. Untuk informasi lebih lanjut, lihat <a href="/docs/id/metric.md">Jenis Metrik</a>.</p>
-<h3 id="Create-collection" class="common-anchor-header">Membuat koleksi</h3><p>Setelah pengaturan vektor padat dan param indeks selesai, Anda dapat membuat koleksi yang berisi vektor padat. Contoh di bawah ini menggunakan metode <code translate="no">create_collection</code> untuk membuat koleksi bernama <code translate="no">my_collection</code>.</p>
+<p>Milvus mendukung jenis metrik lainnya. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/metric.md">Jenis Metrik</a>.</p>
+<h3 id="Create-collection" class="common-anchor-header">Membuat koleksi<button data-href="#Create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Setelah pengaturan vektor padat dan param indeks selesai, Anda dapat membuat koleksi yang berisi vektor padat. Contoh di bawah ini menggunakan metode <code translate="no">create_collection</code> untuk membuat koleksi bernama <code translate="no">my_collection</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -298,17 +339,16 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 
 <span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
-.uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
-.build());
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .build());
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-.collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-.collectionSchema(schema)
-.indexParams(indexes)
-.build();
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .collectionSchema(schema)
+        .indexParams(indexes)
+        .build();
 client.createCollection(requestCreate);
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
 <span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
@@ -334,13 +374,29 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">Menyisipkan data</h3><p>Setelah membuat koleksi, gunakan metode <code translate="no">insert</code> untuk menambahkan data yang berisi vektor padat. Pastikan bahwa dimensi vektor padat yang dimasukkan sesuai dengan nilai <code translate="no">dim</code> yang ditentukan saat menambahkan bidang vektor padat.</p>
+<h3 id="Insert-data" class="common-anchor-header">Menyisipkan data<button data-href="#Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Setelah membuat koleksi, gunakan metode <code translate="no">insert</code> untuk menambahkan data yang berisi vektor padat. Pastikan bahwa dimensi vektor padat yang dimasukkan sesuai dengan nilai <code translate="no">dim</code> yang ditentukan saat menambahkan bidang vektor padat.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
@@ -349,11 +405,10 @@ client.createCollection(requestCreate);
 ]
 
 client.insert(
-collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-data=data
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    data=data
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
 <span class="hljs-keyword">import</span> com.google.gson.JsonObject;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
@@ -394,6 +449,7 @@ client.<span class="hljs-title function_">insert</span>({
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;dense_vector&quot;: [0.1, 0.2, 0.3, 0.4]},
@@ -404,7 +460,22 @@ client.<span class="hljs-title function_">insert</span>({
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:2,&quot;insertIds&quot;:[&quot;453577185629572531&quot;,&quot;453577185629572532&quot;]}}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search" class="common-anchor-header">Melakukan pencarian kesamaan</h3><p>Pencarian semantik berdasarkan vektor padat adalah salah satu fitur inti Milvus, yang memungkinkan Anda menemukan data yang paling mirip dengan vektor kueri dengan cepat berdasarkan jarak antar vektor. Untuk melakukan pencarian kemiripan, siapkan vektor kueri dan parameter pencarian, lalu panggil metode <code translate="no">search</code>.</p>
+<h3 id="Perform-similarity-search" class="common-anchor-header">Melakukan pencarian kesamaan<button data-href="#Perform-similarity-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pencarian semantik berdasarkan vektor padat adalah salah satu fitur inti Milvus, yang memungkinkan Anda menemukan data yang paling mirip dengan vektor kueri dengan cepat berdasarkan jarak antar vektor. Untuk melakukan pencarian kemiripan, siapkan vektor kueri dan parameter pencarian, lalu panggil metode <code translate="no">search</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {
@@ -414,12 +485,12 @@ client.<span class="hljs-title function_">insert</span>({
 query_vector = [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>]
 
 res = client.search(
-collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-data=[query_vector],
-anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
-search_params=search_params,
-limit=<span class="hljs-number">5</span>,
-output_fields=[<span class="hljs-string">&quot;pk&quot;</span>]
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    data=[query_vector],
+    anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
+    search_params=search_params,
+    limit=<span class="hljs-number">5</span>,
+    output_fields=[<span class="hljs-string">&quot;pk&quot;</span>]
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -427,7 +498,6 @@ output_fields=[<span class="hljs-string">&quot;pk&quot;</span>]
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: &#x27;453718927992172271&#x27;, &#x27;distance&#x27;: 0.7599999904632568, &#x27;entity&#x27;: {&#x27;pk&#x27;: &#x27;453718927992172271&#x27;}}, {&#x27;id&#x27;: &#x27;453718927992172270&#x27;, &#x27;distance&#x27;: 0.6299999952316284, &#x27;entity&#x27;: {&#x27;pk&#x27;: &#x27;453718927992172270&#x27;}}]&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
 
 Map&lt;String,Object&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
@@ -488,6 +558,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -503,4 +574,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.55,&quot;id&quot;:&quot;453577185629572532&quot;,&quot;pk&quot;:&quot;453577185629572532&quot;},{&quot;distance&quot;:0.42,&quot;id&quot;:&quot;453577185629572531&quot;,&quot;pk&quot;:&quot;453577185629572531&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk informasi lebih lanjut tentang parameter pencarian kemiripan, lihat <a href="/docs/id/single-vector-search.md">Pencarian ANN Dasar</a>.</p>
+<p>Untuk informasi lebih lanjut tentang parameter pencarian kemiripan, lihat <a href="/docs/id/v2.6.x/single-vector-search.md">Pencarian ANN Dasar</a>.</p>

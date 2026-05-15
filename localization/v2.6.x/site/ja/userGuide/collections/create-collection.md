@@ -2,7 +2,7 @@
 id: create-collection.md
 title: コレクションの作成
 summary: >-
-  スキーマ、インデックスパラメータ、メトリックタイプ、作成時にロードするかどうかを定義して、コレクションを作成できます。このページでは、コレクションをゼロから作成する方法を紹介します。
+  スキーマ、インデックスパラメータ、メトリックタイプ、作成時にロードするかどうかを定義してコレクションを作成できます。このページでは、コレクションをゼロから作成する方法を紹介します。
 ---
 <h1 id="Create-Collection" class="common-anchor-header">コレクションの作成<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,9 +39,9 @@ summary: >-
 <p>スキーマ、インデックス・パラメータ、メトリック・タイプ、作成時にロードするかどうかなど、コ レクションのあらゆる側面を決定して、コレクションが要件を完全に満たすようにすることができます。</p>
 <p>コレクションを作成するには</p>
 <ul>
-<li><p><a href="/docs/ja/create-collection.md#Create-Schema">スキーマの作成</a></p></li>
-<li><p><a href="/docs/ja/create-collection.md#Optional-Set-Index-Parameters">インデックスパラメータを設定する</a>（オプション）</p></li>
-<li><p><a href="/docs/ja/create-collection.md#Create-a-Collection">コレクションの作成</a></p></li>
+<li><p><a href="/docs/ja/v2.6.x/create-collection.md#Create-Schema">スキーマの作成</a></p></li>
+<li><p><a href="/docs/ja/v2.6.x/create-collection.md#Optional-Set-Index-Parameters">インデックスパラメータを設定する</a>（オプション）</p></li>
+<li><p><a href="/docs/ja/v2.6.x/create-collection.md#Create-a-Collection">コレクションの作成</a></p></li>
 </ul>
 <h2 id="Create-Schema" class="common-anchor-header">スキーマの作成<button data-href="#Create-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -58,10 +58,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>スキーマはコレクションのデータ構造を定義します。コレクションを作成するときは、要件に基づいてスキーマを設計する必要があります。詳細については、<a href="/docs/ja/schema.md">スキーマの</a>説明を参照してください。</p>
+    </button></h2><p>スキーマはコレクションのデータ構造を定義します。コレクションを作成するときは、要件に基づいてスキーマを設計する必要があります。詳細については、<a href="/docs/ja/v2.6.x/schema.md">スキーマの</a>説明を参照してください。</p>
 <p>以下のコード・スニペットは、enabled ダイナミック・フィールドと、<code translate="no">my_id</code> 、<code translate="no">my_vector</code> 、<code translate="no">my_varchar</code> という 3 つの必須フィールドを持つスキーマを作成します。</p>
 <div class="alert note">
-<p>任意のスカラー・フィールドにデフォルト値を設定し、それを NULL 可能にすることができます。詳細については、「<a href="/docs/ja/nullable-and-default.md">Nullable &amp; Default</a>」を参照してください。</p>
+<p>任意のスカラー・フィールドにデフォルト値を設定し、それを NULL 可能にすることができます。詳細については、「<a href="/docs/ja/v2.6.x/nullable-and-default.md">Nullable &amp; Default</a>」を参照してください。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -224,7 +224,7 @@ schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">
     </button></h2><p>特定のフィールドにインデックスを作成すると、そのフィールドに対する検索が高速化されます。インデックスは、コレクション内のエンティティの順序を記録します。以下のコードスニペットに示すように、<code translate="no">metric_type</code> と<code translate="no">index_type</code> を使って、Milvus がフィールドにインデックスを付ける適切な方法を選択し、ベクトル埋め込み間の類似性を測定することができます。</p>
 <p>Milvusでは、すべてのベクトルフィールドのインデックスタイプとして<code translate="no">AUTOINDEX</code> 、必要に応じてメトリックタイプとして<code translate="no">COSINE</code> 、<code translate="no">L2</code> 、<code translate="no">IP</code> のいずれかを使用することができます。</p>
 <p>上記のコード・スニペットで示したように、ベクトル・フィールドにはインデックス・タイプとメトリック・タイプの両方を設定し、スカラー・フィールドにはインデックス・タイプのみを設定する必要があります。ベクトル・フィールドにはインデックスが必須であり、フィルタリング条件で頻繁に使用されるスカラー・フィールドにはインデックスを作成することをお勧めします。</p>
-<p>詳細は、「<a href="/docs/ja/index-vector-fields.md">ベクトル・フィールドのインデックス</a>」と「<a href="/docs/ja/index-scalar-fields.md">スカラー・フィールドのインデックス</a>」を参照してください。</p>
+<p>詳細は、「<a href="/docs/ja/v2.6.x/index-vector-fields.md">ベクトル・フィールドのインデックス</a>」と「<a href="/docs/ja/v2.6.x/index-scalar-fields.md">スカラー・フィールドのインデックス</a>」を参照してください。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.3. Prepare index parameters</span>
@@ -398,6 +398,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_1\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -489,6 +490,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_2\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -498,6 +500,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/get_load_state&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_2\&quot;
 }&quot;</span>
@@ -518,7 +521,22 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>作成するコレクションにプロパティを設定して、サービスに適合させることができます。適用可能なプロパティは以下の通りです。</p>
-<h3 id="Set-Shard-Number" class="common-anchor-header">シャード番号の設定</h3><p>シャードはコレクションの水平スライスで、各シャードはデータ入力チャネルに対応します。デフォルトでは、すべてのコレクションに1つのシャードがあります。データ量とワークロードに合わせて、コレクションを作成するときにシャードの数を指定で きます。</p>
+<h3 id="Set-Shard-Number" class="common-anchor-header">シャード番号の設定<button data-href="#Set-Shard-Number" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>シャードはコレクションの水平スライスで、各シャードはデータ入力チャネルに対応します。デフォルトでは、すべてのコレクションに1つのシャードがあります。データ量とワークロードに合わせて、コレクションを作成するときにシャードの数を指定で きます。</p>
 <p>一般的なガイドラインとして、シャードの数を設定するときは以下を考慮してください：</p>
 <ul>
 <li><strong>データサイズ：</strong>一般的なプラクティスは、2億エンティティごとに1つのシャードを持つことです。総データ・サイズに基づいて見積もることもできます。たとえば、挿入する予定のデータ100GBごとにシャードを1つ追加します。</li>
@@ -566,13 +584,29 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_3\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Enable-mmap" class="common-anchor-header">mmapを有効にする</h3><p>Milvusはデフォルトですべてのコレクションでmmapを有効にし、Milvusがフィールドデータを完全にロードする代わりに、生のフィールドデータをメモリにマッピングすることを可能にします。これにより、メモリフットプリントが削減され、コレクション容量が増加します。mmapの詳細については、<a href="/docs/ja/mmap.md">Use mmapを</a>参照してください。</p>
+<h3 id="Enable-mmap" class="common-anchor-header">mmapを有効にする<button data-href="#Enable-mmap" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvusはデフォルトですべてのコレクションでmmapを有効にし、Milvusがフィールドデータを完全にロードする代わりに、生のフィールドデータをメモリにマッピングすることを可能にします。これにより、メモリフットプリントが削減され、コレクション容量が増加します。mmapの詳細については、<a href="/docs/ja/v2.6.x/mmap.md">Use mmapを</a>参照してください。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#plaintext">プレーンテキスト</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With mmap</span>
@@ -619,13 +653,29 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_5\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Collection-TTL" class="common-anchor-header">コレクションTTLの設定</h3><p>コレクション内のデータを特定の期間ドロップする必要がある場合は、TTL（Time-To-Live）を秒単位で設定することを検討してください。TTLがタイムアウトすると、Milvusはコレクション内のエンティティを削除します。削除は非同期で行われるため、削除が完了するまで検索やクエリが可能です。</p>
+<h3 id="Set-Collection-TTL" class="common-anchor-header">コレクションTTLの設定<button data-href="#Set-Collection-TTL" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>コレクション内のデータを特定の期間ドロップする必要がある場合、そのTTL（Time-To-Live）を秒単位で設定することを検討してください。TTLがタイムアウトすると、Milvusはコレクション内のエンティティを削除します。削除は非同期で行われるため、削除が完了するまで検索やクエリが可能です。</p>
 <p>以下のコードスニペットでは、TTLを1日（86400秒）に設定しています。TTLは最低でも数日に設定することをお勧めします。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -675,13 +725,29 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_5\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Consistency-Level" class="common-anchor-header">一貫性レベルの設定</h3><p>コレクションを作成する際に、コレクション内の検索とクエリの一貫性レベルを設定することができます。また、特定の検索やクエリ中にコレクションの一貫性レベルを変更することもできます。</p>
+<h3 id="Set-Consistency-Level" class="common-anchor-header">一貫性レベルの設定<button data-href="#Set-Consistency-Level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>コレクションを作成する際に、コレクション内の検索とクエリの一貫性レベルを設定することができます。また、特定の検索やクエリ中にコレクションの一貫性レベルを変更することもできます。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With consistency level</span>
@@ -728,12 +794,28 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_6\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>一貫性レベルの詳細については、<a href="/docs/ja/tune_consistency.md">一貫性レベルを</a>参照してください。</p>
-<h3 id="Enable-Dynamic-Field" class="common-anchor-header">ダイナミック・フィールドの有効化</h3><p>コレクション内の動的フィールドは、<strong>$metaという</strong>名前の予約済みJavaScript Object Notation（JSON）フィールドです。このフィールドを有効にすると、Milvusは各エンティティで保持されるすべての非スキーマ定義フィールドとその値をkey-valueペアとして予約フィールドに保存します。</p>
-<p>動的フィールドの使用方法の詳細については、<a href="/docs/ja/enable-dynamic-field.md">動的フィールドを</a>参照してください。</p>
+<p>一貫性レベルの詳細については、<a href="/docs/ja/v2.6.x/tune_consistency.md">一貫性レベルを</a>参照してください。</p>
+<h3 id="Enable-Dynamic-Field" class="common-anchor-header">ダイナミック・フィールドの有効化<button data-href="#Enable-Dynamic-Field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>コレクション内の動的フィールドは、<strong>$metaという</strong>名前の予約済みJavaScript Object Notation（JSON）フィールドです。このフィールドを有効にすると、Milvusは各エンティティで保持されるすべての非スキーマ定義フィールドとその値をkey-valueペアとして予約フィールドに保存します。</p>
+<p>動的フィールドの使用方法の詳細については、<a href="/docs/ja/v2.6.x/enable-dynamic-field.md">動的フィールドを</a>参照してください。</p>

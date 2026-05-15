@@ -116,7 +116,7 @@ summary: >-
 </ul></li>
 <li><p><strong>Menambah bidang JSON.</strong></p>
 <p>Misalkan koleksi contoh memiliki bidang JSON yang ditentukan skema bernama <code translate="no">extras</code>, dan pasangan nilai-kunci dalam bidang JSON entitas ini mirip dengan <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
-<p>Ketika Anda meng-upload field <code translate="no">extras</code> dari sebuah entitas dengan data JSON yang telah dimodifikasi, perhatikan bahwa field JSON tersebut diperlakukan sebagai satu kesatuan, dan Anda tidak dapat memperbarui setiap kunci secara selektif. Dengan kata lain, bidang JSON <strong>TIDAK</strong> mendukung upsert dalam mode <strong>penggabungan</strong>.</p></li>
+<p>Ketika Anda meng-upload field <code translate="no">extras</code> dari sebuah entitas dengan data JSON yang telah dimodifikasi, perhatikan bahwa field JSON tersebut diperlakukan secara keseluruhan, dan Anda tidak dapat memperbarui setiap kunci secara selektif. Dengan kata lain, bidang JSON <strong>TIDAK</strong> mendukung upsert dalam mode <strong>penggabungan</strong>.</p></li>
 </ul>
 <h3 id="Limits--Restrictions" class="common-anchor-header">Batasan &amp; Pembatasan<button data-href="#Limits--Restrictions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -303,6 +303,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/upsert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;title&quot;: &quot;Artificial Intelligence in Real Life&quot;, &quot;issue&quot;: &quot;vol.12&quot;},
@@ -449,6 +450,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/upsert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 10, &quot;vector&quot;: [0.06998888224297328, 0.8582816610326578, -0.9657938677934292, 0.6527905683627726, -0.8668460657158576], &quot;title&quot;: &quot;Layour Design Reference&quot;, &quot;issue&quot;: &quot;vol.34&quot;},
@@ -591,6 +593,7 @@ _, err = client.Upsert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/upsert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,

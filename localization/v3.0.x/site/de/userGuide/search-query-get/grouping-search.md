@@ -51,7 +51,7 @@ summary: >-
 <ul>
 <li><p>Eine ANN-Suche basierend auf dem angegebenen Suchvektor durchführen, um alle Entitäten zu finden, die der Suchanfrage am ähnlichsten sind.</p></li>
 <li><p>Die Suchergebnisse nach dem angegebenen <code translate="no">group_by_field</code> gruppieren, z. B. <code translate="no">docId</code>.</p></li>
-<li><p>Rückgabe der Top-Ergebnisse für jede Gruppe, wie durch den Parameter <code translate="no">limit</code> definiert, mit der ähnlichsten Entität aus jeder Gruppe.</p></li>
+<li><p>Rückgabe der Top-Ergebnisse für jede Gruppe, wie durch den <code translate="no">limit</code> Parameter definiert, mit der ähnlichsten Entität aus jeder Gruppe.</p></li>
 </ul>
 <div class="alert note">
 <p>Standardmäßig gibt die gruppierende Suche nur eine Entität pro Gruppe zurück. Wenn Sie die Anzahl der Ergebnisse, die pro Gruppe zurückgegeben werden sollen, erhöhen möchten, können Sie dies mit den Parametern <code translate="no">group_size</code> und <code translate="no">strict_group_size</code> steuern.</p>
@@ -213,6 +213,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -352,6 +353,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -431,7 +433,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
       </svg>
     </button></h2><ul>
 <li><p><strong>Indizierung</strong>: Diese Gruppierungsfunktion funktioniert nur für Sammlungen, die mit diesen Index-Typen indiziert sind: <strong>FLAT</strong>, <strong>IVF_FLAT</strong>, <strong>IVF_SQ8</strong>, <strong>HNSW</strong>, <strong>HNSW_PQ</strong>, <strong>HNSW_PRQ</strong>, <strong>HNSW_SQ</strong>, <strong>DISKANN</strong>, <strong>SPARSE_INVERTED_INDEX</strong>.</p></li>
-<li><p><strong>Anzahl der Gruppen</strong>: Der Parameter <code translate="no">limit</code> steuert die Anzahl der Gruppen, aus denen Suchergebnisse zurückgegeben werden, und nicht die spezifische Anzahl der Entitäten innerhalb jeder Gruppe. Die Einstellung eines geeigneten <code translate="no">limit</code> hilft bei der Kontrolle der Suchvielfalt und der Abfrageleistung. Eine Reduzierung von <code translate="no">limit</code> kann die Berechnungskosten senken, wenn die Daten dicht verteilt sind oder die Leistung ein Problem darstellt.</p></li>
+<li><p><strong>Anzahl der Gruppen</strong>: Der Parameter <code translate="no">limit</code> steuert die Anzahl der Gruppen, aus denen Suchergebnisse zurückgegeben werden, und nicht die spezifische Anzahl der Entitäten innerhalb jeder Gruppe. Die Einstellung eines geeigneten <code translate="no">limit</code> hilft bei der Kontrolle der Suchvielfalt und der Abfrageleistung. Eine Verringerung von <code translate="no">limit</code> kann die Berechnungskosten reduzieren, wenn die Daten dicht verteilt sind oder die Leistung ein Problem darstellt.</p></li>
 <li><p><strong>Entitäten pro Gruppe</strong>: Der Parameter <code translate="no">group_size</code> steuert die Anzahl der Entitäten, die pro Gruppe zurückgegeben werden. Die Anpassung von <code translate="no">group_size</code> auf der Grundlage Ihres Anwendungsfalls kann die Reichhaltigkeit der Suchergebnisse erhöhen. Wenn die Daten jedoch ungleichmäßig verteilt sind, kann es vorkommen, dass einige Gruppen weniger Entitäten zurückgeben, als durch <code translate="no">group_size</code> angegeben, insbesondere in Szenarien mit begrenzten Daten.</p></li>
 <li><p><strong>Strenge Gruppengröße</strong>: Bei <code translate="no">strict_group_size=True</code> versucht das System, die angegebene Anzahl von Entitäten (<code translate="no">group_size</code>) für jede Gruppe zurückzugeben, es sei denn, es sind nicht genügend Daten in dieser Gruppe vorhanden. Diese Einstellung gewährleistet konsistente Entity-Zahlen pro Gruppe, kann aber bei ungleichmäßiger Datenverteilung oder begrenzten Ressourcen zu Leistungseinbußen führen. Wenn strenge Entity-Zahlen nicht erforderlich sind, kann die Einstellung <code translate="no">strict_group_size=False</code> die Abfragegeschwindigkeit verbessern.</p></li>
 <li><p>Wenn die Abfragevektoren bereits in der Zielsammlung vorhanden sind, sollten Sie die Verwendung von <code translate="no">ids</code> in Betracht ziehen, anstatt sie vor der Suche abzurufen. Einzelheiten finden Sie unter <a href="/docs/de/primary-key-search.md">Primärschlüsselsuche</a>.</p></li>

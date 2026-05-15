@@ -26,7 +26,7 @@ summary: >-
       </svg>
     </button></h1><p>La concordancia de texto en Milvus permite una recuperación precisa de documentos basada en términos específicos. Esta función se utiliza principalmente para la búsqueda filtrada para satisfacer condiciones específicas y puede incorporar el filtrado escalar para refinar los resultados de la consulta, permitiendo búsquedas de similitud dentro de vectores que cumplen criterios escalares.</p>
 <div class="alert note">
-<p>La concordancia de texto se centra en la búsqueda de apariciones exactas de los términos de la consulta, sin puntuar la relevancia de los documentos coincidentes. Si desea recuperar los documentos más relevantes basándose en el significado semántico y la importancia de los términos de la consulta, le recomendamos que utilice <a href="/docs/es/full-text-search.md">la búsqueda de texto completo</a>.</p>
+<p>La concordancia de texto se centra en la búsqueda de apariciones exactas de los términos de la consulta, sin puntuar la relevancia de los documentos coincidentes. Si desea recuperar los documentos más relevantes basándose en el significado semántico y la importancia de los términos de la consulta, le recomendamos que utilice <a href="/docs/es/v2.6.x/full-text-search.md">la búsqueda de texto completo</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Visión general<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,8 +45,8 @@ summary: >-
       </svg>
     </button></h2><p>Milvus integra <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> para potenciar su índice invertido subyacente y la búsqueda de texto basada en términos. Para cada entrada de texto, Milvus lo indexa siguiendo el procedimiento:</p>
 <ol>
-<li><p><a href="/docs/es/analyzer-overview.md">Analizador</a>: El analizador procesa el texto de entrada convirtiéndolo en palabras individuales, o tokens, y aplicando los filtros necesarios. Esto permite a Milvus construir un índice basado en estos tokens.</p></li>
-<li><p><a href="/docs/es/index-explained.md">Indexación</a>: Tras el análisis del texto, Milvus crea un índice invertido que asigna cada token único a los documentos que lo contienen.</p></li>
+<li><p><a href="/docs/es/v2.6.x/analyzer-overview.md">Analizador</a>: El analizador procesa el texto de entrada convirtiéndolo en palabras individuales, o tokens, y aplicando los filtros necesarios. Esto permite a Milvus construir un índice basado en estos tokens.</p></li>
+<li><p><a href="/docs/es/v2.6.x/index-explained.md">Indexación</a>: Tras el análisis del texto, Milvus crea un índice invertido que asigna cada token único a los documentos que lo contienen.</p></li>
 </ol>
 <p>Cuando un usuario realiza una coincidencia de texto, el índice invertido se utiliza para recuperar rápidamente todos los documentos que contienen los términos. Esto es mucho más rápido que escanear cada documento individualmente.</p>
 <p>
@@ -68,7 +68,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La concordancia de texto funciona en el <a href="/docs/es/string.md"><code translate="no">VARCHAR</code></a> que es esencialmente el tipo de datos cadena en Milvus. Para habilitar la concordancia de texto, establezca <code translate="no">enable_analyzer</code> y <code translate="no">enable_match</code> en <code translate="no">True</code> y luego, opcionalmente, configure un <a href="/docs/es/analyzer-overview.md">analizador</a> para el análisis de texto al definir el esquema de su colección.</p>
+    </button></h2><p>La concordancia de texto funciona en el <a href="/docs/es/v2.6.x/string.md"><code translate="no">VARCHAR</code></a> que es esencialmente el tipo de datos de cadena en Milvus. Para habilitar la coincidencia de texto, establezca <code translate="no">enable_analyzer</code> y <code translate="no">enable_match</code> en <code translate="no">True</code> y luego, opcionalmente, configure un <a href="/docs/es/v2.6.x/analyzer-overview.md">analizador</a> para el análisis de texto cuando defina el esquema de su colección.</p>
 <h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">Establezca <code translate="no">enable_analyzer</code> y <code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -219,7 +219,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h3><p>El rendimiento y la precisión de la concordancia de palabras clave dependen del analizador seleccionado. Los diferentes analizadores están adaptados a varios lenguajes y estructuras de texto, por lo que elegir el correcto puede tener un impacto significativo en los resultados de búsqueda para su caso de uso específico.</p>
-<p>Por defecto, Milvus utiliza el analizador <code translate="no">standard</code>, que tokeniza el texto basándose en los espacios en blanco y la puntuación, elimina los tokens de más de 40 caracteres y convierte el texto a minúsculas. No se necesitan parámetros adicionales para aplicar esta configuración por defecto. Para más información, consulte <a href="/docs/es/standard-analyzer.md">Estándar</a>.</p>
+<p>Por defecto, Milvus utiliza el analizador <code translate="no">standard</code>, que tokeniza el texto basándose en los espacios en blanco y la puntuación, elimina los tokens de más de 40 caracteres y convierte el texto a minúsculas. No se necesitan parámetros adicionales para aplicar esta configuración por defecto. Para más información, consulte <a href="/docs/es/v2.6.x/standard-analyzer.md">Estándar</a>.</p>
 <p>En los casos en que se requiera un analizador diferente, puede configurarlo utilizando el parámetro <code translate="no">analyzer_params</code>. Por ejemplo, para aplicar el analizador <code translate="no">english</code> para procesar texto en inglés:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -306,7 +306,7 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus también proporciona otros analizadores adecuados para diferentes lenguajes y escenarios. Para más detalles, consulte <a href="/docs/es/analyzer-overview.md">Visión general de los analizadores</a>.</p>
+<p>Milvus también proporciona otros analizadores adecuados para diferentes lenguajes y escenarios. Para más detalles, consulte <a href="/docs/es/v2.6.x/analyzer-overview.md">Visión general de los analizadores</a>.</p>
 <h2 id="Use-text-match" class="common-anchor-header">Utilizar la concordancia de texto<button data-href="#Use-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -403,9 +403,9 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h3><p>La concordancia de texto puede utilizarse en combinación con la búsqueda por similitud vectorial para restringir el alcance de la búsqueda y mejorar su rendimiento. Al filtrar la colección utilizando la concordancia de texto antes de la búsqueda por similitud vectorial, puede reducir el número de documentos en los que es necesario buscar, lo que se traduce en tiempos de consulta más rápidos.</p>
-<p>En este ejemplo, la expresión <code translate="no">filter</code> filtra los resultados de la búsqueda para incluir sólo los documentos que coinciden con el término especificado <code translate="no">keyword1</code> o <code translate="no">keyword2</code>. La búsqueda por similitud vectorial se realiza entonces en este subconjunto filtrado de documentos.</p>
+<p>En este ejemplo, la expresión <code translate="no">filter</code> filtra los resultados de la búsqueda para incluir sólo los documentos que coinciden con el término especificado <code translate="no">keyword1</code> o <code translate="no">keyword2</code>. A continuación, la búsqueda por similitud vectorial se realiza en este subconjunto filtrado de documentos.</p>
 <div class="alert note">
-<p>Puede resaltar los términos coincidentes en los resultados de la búsqueda configurando un resaltador de texto. Consulte <a href="/docs/es/text-highlighter.md">Resaltador de texto</a> para obtener más información.</p>
+<p>Puede resaltar los términos coincidentes en los resultados de la búsqueda configurando un resaltador de texto. Consulte <a href="/docs/es/v2.6.x/text-highlighter.md">Resaltador de texto</a> para obtener más información.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -471,6 +471,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;annsField&quot;: &quot;embeddings&quot;,
@@ -550,6 +551,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$filter</span>&quot;</span><span class="hljs-string">&#x27;,

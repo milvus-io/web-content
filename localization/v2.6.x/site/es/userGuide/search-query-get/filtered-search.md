@@ -121,7 +121,7 @@ summary: >-
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Si los vectores de consulta ya existen en la colección de destino, considere la posibilidad de utilizar <code translate="no">ids</code> en lugar de recuperarlos antes de realizar la búsqueda. Para más detalles, consulte <a href="/docs/es/primary-key-search.md">Búsqueda con clave primaria</a>.</p>
+<p>Si los vectores de consulta ya existen en la colección de destino, considere la posibilidad de utilizar <code translate="no">ids</code> en lugar de recuperarlos antes de realizar la búsqueda. Para más detalles, consulte <a href="/docs/es/v2.6.x/primary-key-search.md">Búsqueda con clave primaria</a>.</p>
 </div>
 <h3 id="Search-with-standard-filtering" class="common-anchor-header">Búsqueda con filtrado estándar<button data-href="#Search-with-standard-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -268,6 +268,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -302,7 +303,7 @@ curl --request POST \
     <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para más información sobre los operadores que puede utilizar en el filtrado de metadatos, consulte <a href="/docs/es/filtering">Filtrado</a>.</p>
+<p>Para más información sobre los operadores que puede utilizar en el filtrado de metadatos, consulte <a href="/docs/es/v2.6.x/filtering">Filtrado</a>.</p>
 <h3 id="Search-with-iterative-filtering" class="common-anchor-header">Búsqueda con filtrado iterativo<button data-href="#Search-with-iterative-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -454,6 +455,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

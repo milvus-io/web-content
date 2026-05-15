@@ -18,7 +18,7 @@ summary: 配置 Collections 级或实体级 TTL 策略，使 Milvus 中的过期
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 可通过 "<strong>存活时间"（TTL）</strong>策略使实体自动过期。过期的实体会立即停止出现在查询和搜索结果中，并在下一个压缩周期（通常是 24 小时内）从存储中物理移除。</p>
+    </button></h1><p>Milvus 可通过 "<strong>存活时间"（TTL）</strong>策略自动使实体过期。过期的实体会立即停止出现在查询和搜索结果中，并在下一个压缩周期（通常是 24 小时内）从存储中物理移除。</p>
 <p>有两种 TTL 模式：</p>
 <ul>
 <li><p><strong>Collections 级 TTL</strong>- 每个实体共享一个保留窗口，通过<code translate="no">collection.ttl.seconds</code> 属性设置。</p></li>
@@ -44,9 +44,9 @@ summary: 配置 Collections 级或实体级 TTL 策略，使 Milvus 中的过期
       </svg>
     </button></h2><ul>
 <li><p>两种 TTL 模式是相互排斥的。一个 Collections 不能同时设置<code translate="no">collection.ttl.seconds</code> 和<code translate="no">ttl_field</code> 。要进行切换，请参阅<a href="/docs/zh/set-collection-ttl.md#Migrate-between-the-two-modes">在两种模式之间迁移</a>。</p></li>
-<li><p>Collection 级 TTL 对整个 Collections 应用一个窗口。如果单行需要不同的生命周期，请使用实体级 TTL。</p></li>
+<li><p>Collection 级 TTL 对整个 Collection 应用一个窗口。如果单行需要不同的生命周期，请使用实体级 TTL。</p></li>
 <li><p>实体级 TTL 的字段必须是<code translate="no">TIMESTAMPTZ</code> 。其他类型将被拒绝。</p></li>
-<li><p>每个 Collections 只有一个 TTL 字段。Schema 可以包含多个<code translate="no">TIMESTAMPTZ</code> 字段，但只有一个可以在<code translate="no">ttl_field</code> 中命名。</p></li>
+<li><p>每个 Collections 只有一个 TTL 字段。Schema 可以包含多个<code translate="no">TIMESTAMPTZ</code> 字段，但只有一个可以用<code translate="no">ttl_field</code> 命名。</p></li>
 <li><p>删除<code translate="no">ttl_field</code> 不会恢复已过期的实体。要恢复过期实体，请使用<code translate="no">NULL</code> 或未来过期时间戳重新插入。</p></li>
 </ul>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
@@ -169,7 +169,7 @@ summary: 配置 Collections 级或实体级 TTL 策略，使 Milvus 中的过期
         ></path>
       </svg>
     </button></h2><p>当集合中的每个实体都应遵循相同的保留窗口时，请使用集合级 TTL。</p>
-<h3 id="Enable-on-a-new-collection" class="common-anchor-header">在新的 Collections 上启用<button data-href="#Enable-on-a-new-collection" class="anchor-icon" translate="no">
+<h3 id="Enable-on-a-new-collection" class="common-anchor-header">在新 Collections 上启用<button data-href="#Enable-on-a-new-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -280,6 +280,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -372,6 +373,7 @@ index_params.add_index(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;properties\&quot;: {
@@ -440,6 +442,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/drop_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;propertyKeys\&quot;: [
@@ -796,7 +799,7 @@ List&lt;Float&gt; vector = <span class="hljs-keyword">new</span> <span class="hl
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>如果 Collections 已存在且未设置<code translate="no">collection.ttl.seconds</code> ，请使用<code translate="no">add_collection_field</code> 添加<code translate="no">TIMESTAMPTZ</code> 列，然后使用<code translate="no">alter_collection_properties</code> 将其标记为 TTL 字段。可选择向上插入历史行，以回填其过期时间戳--未回填的行将保留<code translate="no">NULL</code> ，永不过期。</p>
+    </button></h3><p>如果 Collections 已存在且未设置<code translate="no">collection.ttl.seconds</code> ，则使用<code translate="no">add_collection_field</code> 添加<code translate="no">TIMESTAMPTZ</code> 列，然后使用<code translate="no">alter_collection_properties</code> 将其标记为 TTL 字段。可选择向上插入历史行，以回填其过期时间戳--未回填的行将保留<code translate="no">NULL</code> ，永不过期。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
@@ -1098,7 +1101,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>未回填<code translate="no">expire_at</code> 的历史实体在该列中将有<code translate="no">NULL</code> ，这意味着它们永远不会过期。只回填应具有有限生命周期的行。</p>
+<p>不回填<code translate="no">expire_at</code> 的历史实体在该列中将有<code translate="no">NULL</code> ，这意味着它们永远不会过期。只回填应具有有限生命周期的行。</p>
 <h3 id="Switch-from-entity-level-to-collection-level-TTL" class="common-anchor-header">从实体级 TTL 切换到 Collections 级 TTL<button data-href="#Switch-from-entity-level-to-collection-level-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

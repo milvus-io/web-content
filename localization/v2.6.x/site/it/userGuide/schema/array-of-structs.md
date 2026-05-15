@@ -120,7 +120,7 @@ beta: Milvus 2.6.4+
 </table></p>
 <p>I campi scalari nel campo Array of Structs non supportano gli indici.</p></li>
 <li><p><strong>Dati di Upsert</strong></p>
-<p>Le strutture non supportano l'upsert in modalità unione. Tuttavia, è possibile eseguire l'upsert in modalità override per aggiornare i dati nelle strutture. Per maggiori dettagli sulle differenze tra l'upsert in modalità merge e quello in modalità override, fare riferimento a <a href="/docs/it/upsert-entities.md#Overview">Upsert Entities</a>.</p></li>
+<p>Le strutture non supportano l'upsert in modalità unione. Tuttavia, è possibile eseguire l'upsert in modalità override per aggiornare i dati nelle strutture. Per maggiori dettagli sulle differenze tra l'upsert in modalità merge e quello in modalità override, fare riferimento a <a href="/docs/it/v2.6.x/upsert-entities.md#Overview">Upsert Entities</a>.</p></li>
 <li><p><strong>Filtraggio scalare</strong></p>
 <p>Non è possibile utilizzare un Array di strutture o qualsiasi campo all'interno del suo elemento Struct in espressioni di filtraggio all'interno di ricerche e query.</p></li>
 </ul>
@@ -377,7 +377,7 @@ SCHEMA=<span class="hljs-string">&#x27;{
         ></path>
       </svg>
     </button></h2><p>L'indicizzazione è obbligatoria per tutti i campi vettoriali, compresi i campi vettoriali della collezione e quelli definiti nell'elemento Struct.</p>
-<p>I parametri di indice applicabili variano a seconda del tipo di indice in uso. Per informazioni dettagliate sui parametri di indice applicabili, consultare <a href="/docs/it/index-explained.md">Indice spiegato</a> e le pagine di documentazione specifiche del tipo di indice selezionato.</p>
+<p>I parametri di indice applicabili variano a seconda del tipo di indice in uso. Per informazioni dettagliate sui parametri di indice applicabili, consultare <a href="/docs/it/v2.6.x/index-explained.md">Indice spiegato</a> e le pagine di documentazione specifiche del tipo di indice selezionato.</p>
 <p>Per indicizzare un elenco di incorporazioni, è necessario impostare il suo tipo di indice su <code translate="no">AUTOINDEX</code> o <code translate="no">HNSW</code>, e usare <code translate="no">MAX_SIM_COSINE</code> come tipo di metrica per Milvus per misurare le somiglianze tra gli elenchi di incorporazioni.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -499,6 +499,7 @@ client.createCollection(requestCreate);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/create&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;description\&quot;: \&quot;A collection for storing book information with struct array chunks\&quot;,
@@ -614,6 +615,7 @@ row.add(<span class="hljs-string">&quot;chunks&quot;</span>, structArr);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/insert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -806,6 +808,7 @@ embeddingList1=<span class="hljs-string">&#x27;[[0.2,0.9,0.4,-0.3,0.2]]&#x27;</s
 embeddingList2=<span class="hljs-string">&#x27;[[-0.2,-0.2,0.5,0.6,0.9],[-0.4,0.3,0.5,0.8,0.2]]&#x27;</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>],
@@ -910,6 +913,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>, <span class="hljs-variable">$embeddingList2</span>],
@@ -1013,4 +1017,4 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Lo sviluppo di un tipo di dati nativo Array of Structs rappresenta un importante progresso nella capacità di Milvus di gestire strutture di dati complesse. Per comprendere meglio i casi d'uso e sfruttare al massimo questa nuova funzionalità, si consiglia di leggere <a href="/docs/it/best-practices-for-array-of-structs.md">Schema Design Using an Array of Structs</a>.</p>
+    </button></h2><p>Lo sviluppo di un tipo di dati nativo Array of Structs rappresenta un importante progresso nella capacità di Milvus di gestire strutture di dati complesse. Per comprendere meglio i casi d'uso e sfruttare al massimo questa nuova funzionalità, si consiglia di leggere <a href="/docs/it/v2.6.x/best-practices-for-array-of-structs.md">Schema Design Using an Array of Structs</a>.</p>

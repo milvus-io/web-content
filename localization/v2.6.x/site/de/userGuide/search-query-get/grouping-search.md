@@ -26,7 +26,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Eine Gruppierungssuche ermöglicht es Milvus, die Suchergebnisse nach den Werten in einem bestimmten Feld zu gruppieren, um Daten auf einer höheren Ebene zu aggregieren. Sie können zum Beispiel eine einfache ANN-Suche verwenden, um Bücher zu finden, die dem vorliegenden Buch ähnlich sind, aber Sie können eine Gruppierungssuche verwenden, um die Buchkategorien zu finden, die möglicherweise die in diesem Buch besprochenen Themen beinhalten. In diesem Thema wird beschrieben, wie Sie die Gruppierungssuche verwenden können, und es werden wichtige Überlegungen angestellt.</p>
+    </button></h1><p>Eine Gruppierungssuche ermöglicht es Milvus, die Suchergebnisse nach den Werten in einem bestimmten Feld zu gruppieren, um Daten auf einer höheren Ebene zu aggregieren. Sie können zum Beispiel eine einfache ANN-Suche verwenden, um Bücher zu finden, die dem vorliegenden Buch ähnlich sind, aber Sie können eine Gruppierungssuche verwenden, um die Buchkategorien zu finden, die die in diesem Buch besprochenen Themen beinhalten können. In diesem Thema wird beschrieben, wie Sie die Gruppierungssuche verwenden können, und es werden wichtige Überlegungen angestellt.</p>
 <h2 id="Overview" class="common-anchor-header">Übersicht<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,7 +43,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Wenn Entitäten in den Suchergebnissen denselben Wert in einem Skalarfeld haben, deutet dies darauf hin, dass sie sich in einem bestimmten Attribut ähnlich sind, was sich negativ auf die Suchergebnisse auswirken kann.</p>
-<p>Angenommen, eine Sammlung speichert mehrere Dokumente (bezeichnet durch <strong>docId</strong>). Um bei der Konvertierung von Dokumenten in Vektoren möglichst viele semantische Informationen zu erhalten, wird jedes Dokument in kleinere, handhabbare Abschnitte (oder <strong>Chunks</strong>) aufgeteilt und als separate Entitäten gespeichert. Auch wenn das Dokument in kleinere Abschnitte unterteilt ist, sind die Benutzer oft noch daran interessiert, die für ihre Bedürfnisse relevantesten Dokumente zu identifizieren.</p>
+<p>Angenommen, eine Sammlung speichert mehrere Dokumente (bezeichnet durch <strong>docId</strong>). Um bei der Konvertierung von Dokumenten in Vektoren möglichst viele semantische Informationen zu erhalten, wird jedes Dokument in kleinere, handhabbare Abschnitte (oder <strong>Chunks</strong>) aufgeteilt und als separate Entitäten gespeichert. Auch wenn das Dokument in kleinere Abschnitte unterteilt ist, sind die Benutzer oft daran interessiert, die für ihre Bedürfnisse relevantesten Dokumente zu identifizieren.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ann-search.png" alt="Ann Search" class="doc-image" id="ann-search" />
@@ -57,7 +57,7 @@ summary: >-
 <ul>
 <li><p>Eine ANN-Suche basierend auf dem angegebenen Suchvektor durchführen, um alle Entitäten zu finden, die der Suchanfrage am ähnlichsten sind.</p></li>
 <li><p>Die Suchergebnisse nach dem angegebenen <code translate="no">group_by_field</code> gruppieren, z. B. <code translate="no">docId</code>.</p></li>
-<li><p>Rückgabe der Top-Ergebnisse für jede Gruppe, wie durch den Parameter <code translate="no">limit</code> definiert, mit der ähnlichsten Entität aus jeder Gruppe.</p></li>
+<li><p>Rückgabe der Top-Ergebnisse für jede Gruppe, wie durch den <code translate="no">limit</code> Parameter definiert, mit der ähnlichsten Entität aus jeder Gruppe.</p></li>
 </ul>
 <div class="alert note">
 <p>Standardmäßig gibt die gruppierende Suche nur eine Entität pro Gruppe zurück. Wenn Sie die Anzahl der Ergebnisse, die pro Gruppe zurückgegeben werden sollen, erhöhen möchten, können Sie dies mit den Parametern <code translate="no">group_size</code> und <code translate="no">strict_group_size</code> steuern.</p>
@@ -219,6 +219,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -358,6 +359,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -394,8 +396,8 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
       </svg>
     </button></h2><ul>
 <li><p><strong>Indizierung</strong>: Diese Gruppierungsfunktion funktioniert nur für Sammlungen, die mit diesen Indextypen indiziert sind: <strong>FLAT</strong>, <strong>IVF_FLAT</strong>, <strong>IVF_SQ8</strong>, <strong>HNSW</strong>, <strong>HNSW_PQ</strong>, <strong>HNSW_PRQ</strong>, <strong>HNSW_SQ</strong>, <strong>DISKANN</strong>, <strong>SPARSE_INVERTED_INDEX</strong>.</p></li>
-<li><p><strong>Anzahl der Gruppen</strong>: Der Parameter <code translate="no">limit</code> steuert die Anzahl der Gruppen, aus denen Suchergebnisse zurückgegeben werden, und nicht die spezifische Anzahl der Entitäten innerhalb jeder Gruppe. Die Einstellung eines geeigneten <code translate="no">limit</code> hilft bei der Kontrolle der Suchvielfalt und der Abfrageleistung. Eine Reduzierung von <code translate="no">limit</code> kann die Berechnungskosten senken, wenn die Daten dicht verteilt sind oder die Leistung ein Problem darstellt.</p></li>
+<li><p><strong>Anzahl der Gruppen</strong>: Der Parameter <code translate="no">limit</code> steuert die Anzahl der Gruppen, aus denen Suchergebnisse zurückgegeben werden, und nicht die spezifische Anzahl der Entitäten innerhalb jeder Gruppe. Die Einstellung eines geeigneten <code translate="no">limit</code> hilft bei der Kontrolle der Suchvielfalt und der Abfrageleistung. Eine Verringerung von <code translate="no">limit</code> kann die Berechnungskosten reduzieren, wenn die Daten dicht verteilt sind oder die Leistung ein Problem darstellt.</p></li>
 <li><p><strong>Entitäten pro Gruppe</strong>: Der Parameter <code translate="no">group_size</code> steuert die Anzahl der Entitäten, die pro Gruppe zurückgegeben werden. Die Anpassung von <code translate="no">group_size</code> auf der Grundlage Ihres Anwendungsfalls kann die Reichhaltigkeit der Suchergebnisse erhöhen. Wenn die Daten jedoch ungleichmäßig verteilt sind, kann es vorkommen, dass einige Gruppen weniger Entitäten zurückgeben, als durch <code translate="no">group_size</code> angegeben, insbesondere in Szenarien mit begrenzten Daten.</p></li>
 <li><p><strong>Strenge Gruppengröße</strong>: Bei <code translate="no">strict_group_size=True</code> versucht das System, die angegebene Anzahl von Entitäten (<code translate="no">group_size</code>) für jede Gruppe zurückzugeben, es sei denn, es sind nicht genügend Daten in dieser Gruppe vorhanden. Diese Einstellung gewährleistet konsistente Entity-Zahlen pro Gruppe, kann aber bei ungleichmäßiger Datenverteilung oder begrenzten Ressourcen zu Leistungseinbußen führen. Wenn strenge Entity-Zahlen nicht erforderlich sind, kann die Einstellung <code translate="no">strict_group_size=False</code> die Abfragegeschwindigkeit verbessern.</p></li>
-<li><p>Wenn die Abfragevektoren bereits in der Zielsammlung vorhanden sind, sollten Sie die Verwendung von <code translate="no">ids</code> in Betracht ziehen, anstatt sie vor der Suche abzurufen. Einzelheiten finden Sie unter <a href="/docs/de/primary-key-search.md">Primärschlüsselsuche</a>.</p></li>
+<li><p>Wenn die Abfragevektoren bereits in der Zielsammlung vorhanden sind, sollten Sie die Verwendung von <code translate="no">ids</code> in Betracht ziehen, anstatt sie vor der Suche abzurufen. Einzelheiten finden Sie unter <a href="/docs/de/v2.6.x/primary-key-search.md">Primärschlüsselsuche</a>.</p></li>
 </ul>

@@ -4,7 +4,7 @@ title: 多向量混合搜尋
 summary: >-
   在許多應用程式中，可以透過豐富的資訊（例如標題和描述）或多種模式（例如文字、影像和音訊）來搜尋物件。例如，包含一段文字和一張圖片的
   tweet，如果文字或圖片符合搜尋查詢的語意，就會被搜尋。混合搜尋透過結合這些不同領域的搜尋來增強搜尋體驗。Milvus
-  支援此功能，允許在多向量領域進行搜尋，同時進行多個近似近鄰 (ANN)
+  支援這一功能，允許在多向量領域進行搜尋，同時進行多個近似近鄰 (ANN)
   搜尋。如果您想要同時搜尋文字與影像、描述同一物件的多個文字欄位，或是密集與稀疏向量，多向量混合搜尋對改善搜尋品質特別有用。
 ---
 <h1 id="Multi-Vector-Hybrid-Search" class="common-anchor-header">多向量混合搜尋<button data-href="#Multi-Vector-Hybrid-Search" class="anchor-icon" translate="no">
@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在許多應用程式中，可以透過豐富的資訊（例如標題和描述）或多種模式（例如文字、影像和音訊）來搜尋物件。例如，包含一段文字和一張圖片的 tweet，如果文字或圖片符合搜尋查詢的語意，就會被搜尋。混合搜尋透過結合這些不同領域的搜尋來增強搜尋體驗。Milvus 支援此功能，允許在多向量領域進行搜尋，同時進行多個近似近鄰 (ANN) 搜尋。如果您要同時搜尋文字和影像、描述同一物件的多個文字欄位，或密集和稀疏向量以改善搜尋品質，多向量混合搜尋就特別有用。</p>
+    </button></h1><p>在許多應用程式中，可以透過豐富的資訊（例如標題和描述）或多種模式（例如文字、影像和音訊）來搜尋物件。例如，包含一段文字和一張圖片的 tweet，如果文字或圖片符合搜尋查詢的語意，就會被搜尋。混合搜尋透過結合這些不同領域的搜尋來增強搜尋體驗。Milvus 支援這一功能，允許在多向量領域進行搜尋，同時進行多個近似近鄰 (ANN) 搜尋。如果您要同時搜尋文字和影像、描述同一物件的多個文字欄位，或密集和稀疏向量以改善搜尋品質，多向量混合搜尋就特別有用。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hybrid-search-workflow.png" alt="Hybrid Search Workflow" class="doc-image" id="hybrid-search-workflow" />
@@ -49,9 +49,9 @@ summary: >-
       </svg>
     </button></h2><p>讓我們考慮一個真實世界的使用案例，其中每個產品都包含文字說明和圖片。根據可用的資料，我們可以進行三種類型的搜尋：</p>
 <ul>
-<li><p><strong>語意文字搜尋：</strong>這包括使用密集向量來查詢產品的文字描述。可以使用<a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#A-Quick-Recap-of-BERT">BERT</a>和<a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.">Transformers</a>等模型或<a href="https://zilliz.com/learn/guide-to-using-openai-text-embedding-models">OpenAI</a> 等服務來產生文字內嵌。</p></li>
+<li><p><strong>語意文字搜尋：</strong>這包括使用密集向量來查詢產品的文字說明。可以使用<a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#A-Quick-Recap-of-BERT">BERT</a>和<a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.">Transformers</a>等模型或<a href="https://zilliz.com/learn/guide-to-using-openai-text-embedding-models">OpenAI</a> 等服務來產生文字內嵌。</p></li>
 <li><p><strong>全文檢索</strong>：在此，我們使用關鍵字匹配稀疏向量來查詢產品的文字描述。<a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25</a>等演算法或<a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*1cde1oq*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#BGE-M3">BGE-M3</a>或<a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*ov2die*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#SPLADE">SPLADE</a>等稀疏嵌入模型都可以用來達到此目的。</p></li>
-<li><p><strong>多模態影像搜尋：</strong>此方法使用密集向量的文字查詢來查詢影像。圖像嵌入可以使用<a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">CLIP</a> 等模型產生。</p></li>
+<li><p><strong>多模態影像搜尋：</strong>此方法使用具有密集向量的文字查詢來查詢影像。圖像嵌入可以使用<a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">CLIP</a> 等模型產生。</p></li>
 </ul>
 <p>本指南將引導您參考一個結合上述搜尋方法的多模態混合搜尋範例，給定產品的原始文字描述和圖像嵌入。我們將示範如何儲存多向量資料，並使用重排策略執行混合搜尋。</p>
 <h2 id="Create-a-collection-with-multiple-vector-fields" class="common-anchor-header">以多向量欄位建立集合<button data-href="#Create-a-collection-with-multiple-vector-fields" class="anchor-icon" translate="no">
@@ -85,7 +85,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>對於多向量混合搜尋，我們應該在一個集合模式中定義多個向量欄位。有關集合中允許的向量欄位數量限制的詳細資訊，請參閱<a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Zilliz Cloud Limits</a>。  不過，如有必要，您可以調整 <a href="/docs/zh-hant/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a>以根據需要在集合中包含最多 10 個向量欄位。</p>
+    </button></h3><p>對於多向量混合搜尋，我們應該在一個集合模式中定義多個向量欄位。有關集合中允許的向量欄位數量限制的詳細資訊，請參閱<a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Zilliz Cloud Limits</a>。  但是，如果有必要，您可以調整 <a href="/docs/zh-hant/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a>以根據需要在集合中包含最多 10 個向量欄位。</p>
 <p>本範例在模式中加入下列欄位：</p>
 <ul>
 <li><p><code translate="no">id</code>:作為儲存文字 ID 的主索引鍵。這個欄位的資料類型是<code translate="no">INT64</code> 。</p></li>
@@ -513,6 +513,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -648,6 +649,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;text&quot;: &quot;Red cotton t-shirt with round neck&quot; , &quot;text_dense&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, ...], &quot;image_dense&quot;: [0.6366019600530924, -0.09323198122475052, ...]},
@@ -981,6 +983,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/hybrid_search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;search\&quot;: <span class="hljs-variable">${req}</span>,

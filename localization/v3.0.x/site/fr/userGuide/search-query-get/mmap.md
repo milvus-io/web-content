@@ -2,14 +2,14 @@
 id: mmap.md
 title: Utiliser mmap
 summary: >-
-  Le mappage de la mémoire (Mmap) permet d'accéder directement à la mémoire des
+  Le mappage de la mémoire (Mmap) permet un accès direct de la mémoire aux
   fichiers volumineux sur disque, ce qui permet à Milvus de stocker des index et
   des données à la fois dans la mémoire et sur les disques durs. Cette approche
   permet d'optimiser la politique de placement des données en fonction de la
   fréquence d'accès, en augmentant la capacité de stockage des collections sans
   affecter de manière significative les performances de recherche. Cette page
   vous aide à comprendre comment Milvus utilise mmap pour permettre un stockage
-  et une récupération des données rapides et efficaces.
+  et une récupération rapides et efficaces des données.
 ---
 <h1 id="Use-mmap" class="common-anchor-header">Utiliser mmap<button data-href="#Use-mmap" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -26,7 +26,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Le mappage de la mémoire (Mmap) permet d'accéder directement à la mémoire des fichiers volumineux sur disque, ce qui permet à Milvus de stocker des index et des données à la fois dans la mémoire et sur les disques durs. Cette approche permet d'optimiser la politique de placement des données en fonction de la fréquence d'accès, en augmentant la capacité de stockage des collections sans affecter de manière significative les performances de recherche. Cette page vous aide à comprendre comment Milvus utilise mmap pour permettre un stockage et une récupération des données rapides et efficaces.</p>
+    </button></h1><p>Le mappage de la mémoire (Mmap) permet d'accéder directement à la mémoire des fichiers volumineux sur le disque, ce qui permet à Milvus de stocker des index et des données à la fois dans la mémoire et sur les disques durs. Cette approche permet d'optimiser la politique de placement des données en fonction de la fréquence d'accès, en augmentant la capacité de stockage des collections sans affecter de manière significative les performances de recherche. Cette page vous aide à comprendre comment Milvus utilise mmap pour permettre un stockage et une récupération des données rapides et efficaces.</p>
 <h2 id="Overview" class="common-anchor-header">Vue d'ensemble<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -47,9 +47,9 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/mmap-illustrated.png" alt="Mmap Illustrated" class="doc-image" id="mmap-illustrated" />
    </span> <span class="img-wrapper"> <span>Mmap illustré</span> </span></p>
-<p>Milvus est un système de base de données gourmand en mémoire et la taille de la mémoire disponible détermine la capacité d'une collection. Le chargement en mémoire des champs contenant un grand volume de données est impossible si la taille des données dépasse la capacité de la mémoire, ce qui est le cas habituel des applications pilotées par l'IA.</p>
+<p>Milvus est un système de base de données à forte intensité de mémoire et la taille de la mémoire disponible détermine la capacité d'une collection. Le chargement en mémoire des champs contenant un grand volume de données est impossible si la taille des données dépasse la capacité de la mémoire, ce qui est le cas habituel des applications pilotées par l'IA.</p>
 <p>Pour résoudre ces problèmes, Milvus introduit mmap pour équilibrer le chargement des données chaudes et froides dans les collections. Comme le montre la figure de droite ci-dessus, vous pouvez configurer Milvus pour qu'il mette en correspondance les données brutes de certains champs avec la mémoire au lieu de les charger entièrement dans la mémoire. De cette manière, vous pouvez accéder directement aux champs en mémoire sans vous soucier des problèmes de mémoire et étendre la capacité de la collection.</p>
-<p>En comparant les procédures de placement des données dans les figures de gauche et de droite, vous pouvez constater que l'utilisation de la mémoire est beaucoup plus importante dans la figure de gauche que dans celle de droite. Lorsque la fonction mmap est activée, les données qui auraient dû être chargées en mémoire sont transférées sur le disque dur et mises en cache dans la mémoire cache du système d'exploitation, ce qui réduit l'encombrement de la mémoire. Cependant, les échecs de mise en cache peuvent entraîner une dégradation des performances. Pour plus de détails, voir <a href="https://en.wikipedia.org/wiki/Mmap">cet article</a>.</p>
+<p>En comparant les procédures de placement des données dans les figures de gauche et de droite, vous pouvez constater que l'utilisation de la mémoire est beaucoup plus importante dans la figure de gauche que dans celle de droite. Lorsque la fonction mmap est activée, les données qui auraient dû être chargées en mémoire sont transférées sur le disque dur et mises en cache dans la mémoire cache du système d'exploitation, ce qui réduit l'encombrement de la mémoire. Toutefois, les échecs de mise en cache peuvent entraîner une dégradation des performances. Pour plus de détails, voir <a href="https://en.wikipedia.org/wiki/Mmap">cet article</a>.</p>
 <p>Lorsque vous configurez mmap sur Milvus, vous devez toujours respecter un principe : Toujours garder les données et les index fréquemment accédés entièrement chargés dans la mémoire et utiliser mmap pour les champs restants.</p>
 <h2 id="Use-mmap-in-Milvus" class="common-anchor-header">Utilisation de mmap dans Milvus<button data-href="#Use-mmap-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -311,6 +311,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -320,6 +321,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/fields/alter_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;fieldName&quot;: &quot;doc_chunk&quot;,
@@ -422,6 +424,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;indexParams&quot;: [
@@ -439,6 +442,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/alter_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;indexName&quot;: &quot;doc_chunk&quot;,
@@ -496,6 +500,7 @@ client.createCollection(req);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -565,6 +570,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/release&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
@@ -573,6 +579,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;properties&quot;: {
@@ -584,6 +591,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/load&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>

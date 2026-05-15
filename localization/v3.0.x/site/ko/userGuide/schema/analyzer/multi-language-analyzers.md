@@ -23,7 +23,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus는 텍스트 분석을 수행할 때 일반적으로 컬렉션의 전체 텍스트 필드에 단일 분석기를 적용합니다. 해당 분석기가 영어에 최적화된 경우 중국어, 스페인어 또는 프랑스어와 같은 다른 언어에서 요구하는 토큰화 및 어간 규칙이 매우 달라서 리콜률이 낮아질 수 있습니다. 예를 들어, 스페인어 단어 <em>"teléfono</em> "( <em>'전화'라는</em> 뜻)를 검색하면 영어 중심의 분석기가 악센트를 삭제하고 스페인어 전용 어간을 적용하지 않아 관련 결과를 간과할 수 있습니다.</p>
+    </button></h1><p>Milvus는 텍스트 분석을 수행할 때 일반적으로 컬렉션의 전체 텍스트 필드에 단일 분석기를 적용합니다. 해당 분석기가 영어에 최적화된 경우 중국어, 스페인어 또는 프랑스어와 같은 다른 언어에서 요구하는 매우 다른 토큰화 및 어간 규칙에 어려움을 겪게 되며, 그 결과 리콜률이 낮아지게 됩니다. 예를 들어, 스페인어 단어 <em>"teléfono</em> "( <em>'전화'라는</em> 뜻)를 검색하면 영어 중심의 분석기가 악센트를 삭제하고 스페인어 전용 어간을 적용하지 않아 관련 결과를 간과할 수 있습니다.</p>
 <p>다국어 분석기는 단일 컬렉션에서 텍스트 필드에 대해 여러 분석기를 구성할 수 있도록 함으로써 이 문제를 해결합니다. 이렇게 하면 텍스트 필드에 다국어 문서를 저장할 수 있으며, Milvus는 각 문서에 적합한 언어 규칙에 따라 텍스트를 분석합니다.</p>
 <h2 id="Limits" class="common-anchor-header">제한 사항<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -204,7 +204,7 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
    <tr>
      <td><p><code translate="no">analyzers</code></p></td>
      <td><p>Yes</p></td>
-     <td><p>Milvus에서 텍스트를 처리하는 데 사용할 수 있는 모든 언어별 분석기를 나열합니다. <code translate="no">analyzers</code> 의 각 분석기는 다음 형식을 따릅니다: <code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_params&gt;</code>.</p></td>
+     <td><p>Milvus가 텍스트 처리에 사용할 수 있는 모든 언어별 분석기를 나열합니다. <code translate="no">analyzers</code> 의 각 분석기는 다음 형식을 따릅니다: <code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_params&gt;</code>.</p></td>
      <td><ul>
 <li>표준 <code translate="no">analyzer_params</code> 구문을 사용하여 각 분석기를 정의하세요( <a href="/docs/ko/analyzer-overview.md#Analyzer-types">분석기 개요</a> 참조).</li>
 <li>키가 <code translate="no">default</code> 인 항목을 추가하면 <code translate="no">by_field</code> 에 저장된 값이 다른 분석기 이름과 일치하지 않을 때마다 Milvus가 이 분석기로 되돌아갑니다.</li>
@@ -217,7 +217,7 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
      <td><ul>
 <li><p>컬렉션에 정의된 <code translate="no">VARCHAR</code> 필드여야 합니다.</p></li>
 <li><p>모든 행의 값은 <code translate="no">analyzers</code> 에 나열된 분석기 이름(또는 별칭) 중 하나와 정확히 일치해야 합니다.</p></li>
-<li><p>행의 값이 누락되었거나 찾을 수 없는 경우 Milvus는 자동으로 <code translate="no">default</code> 분석기를 적용합니다.</p></li>
+<li><p>행의 값이 누락되거나 찾을 수 없는 경우 Milvus는 자동으로 <code translate="no">default</code> 분석기를 적용합니다.</p></li>
 </ul></td>
    </tr>
    <tr>
@@ -670,6 +670,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;multilingual_documents\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -813,6 +814,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;multilingual_documents&quot;,
   &quot;data&quot;: [
@@ -986,6 +988,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;multilingual_documents&quot;,
   &quot;data&quot;: [&quot;artificial intelligence&quot;],
@@ -1111,6 +1114,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;multilingual_documents&quot;,
   &quot;data&quot;: [&quot;人工智能&quot;],

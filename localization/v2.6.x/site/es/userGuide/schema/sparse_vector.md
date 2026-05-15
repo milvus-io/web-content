@@ -40,15 +40,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un vector disperso es un vector especial de alta dimensión en el que la mayoría de los elementos son cero y sólo unas pocas dimensiones tienen valores distintos de cero. Como se muestra en el diagrama siguiente, los vectores densos suelen representarse como matrices continuas en las que cada posición tiene un valor (por ejemplo, <code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code>). En cambio, los vectores dispersos sólo almacenan elementos distintos de cero y sus índices de dimensión, a menudo representados como pares clave-valor de <code translate="no">{ index: value}</code> (por ejemplo, <code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code>).</p>
+    </button></h2><p>Un vector disperso es un vector especial de alta dimensión en el que la mayoría de los elementos son cero y sólo unas pocas dimensiones tienen valores distintos de cero. Como se muestra en el diagrama siguiente, los vectores densos suelen representarse como matrices continuas en las que cada posición tiene un valor (por ejemplo, <code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code>). En cambio, los vectores dispersos sólo almacenan elementos distintos de cero y sus índices de la dimensión, a menudo representados como pares clave-valor de <code translate="no">{ index: value}</code> (por ejemplo, <code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code>).</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-representation.png" alt="Sparse Vector Representation" class="doc-image" id="sparse-vector-representation" />
    </span> <span class="img-wrapper"> <span>Representación de vectores dispersos</span> </span></p>
 <p>Con la tokenización y la puntuación, los documentos pueden representarse como vectores de bolsa de palabras, donde cada dimensión corresponde a una palabra específica del vocabulario. Sólo las palabras presentes en el documento tienen valores distintos de cero, lo que crea una representación vectorial dispersa. Los vectores dispersos pueden generarse mediante dos enfoques:</p>
 <ul>
-<li><p><strong>Las técnicas estadísticas tradicionales</strong>, como <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (Term Frequency-Inverse Document Frequency) y <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> (Best Matching 25), asignan pesos a las palabras en función de su frecuencia e importancia en un corpus. Estos métodos calculan estadísticas simples como puntuaciones para cada dimensión, que representa un token.  Milvus ofrece una <strong>búsqueda de texto completo</strong> integrada con el método BM25, que convierte automáticamente el texto en vectores dispersos, eliminando la necesidad de preprocesamiento manual. Este método es ideal para la búsqueda basada en palabras clave, donde la precisión y las coincidencias exactas son importantes. Para más información, consulte <a href="/docs/es/full-text-search.md">Búsqueda de texto completo</a>.</p></li>
-<li><p><strong>Los modelos neuronales de incrustación dispers</strong> a son métodos aprendidos para generar representaciones dispersas mediante el entrenamiento en grandes conjuntos de datos. Suelen ser modelos de aprendizaje profundo con arquitectura Transformer, capaces de expandir y ponderar términos basándose en el contexto semántico. Milvus también admite incrustaciones dispersas generadas externamente a partir de modelos como <a href="https://arxiv.org/abs/2109.10086">SPLADE</a>. Ver <a href="/docs/es/embeddings.md#Embedding-Overview">Embeddings</a> para más detalles.</include></p></li>
+<li><p><strong>Las técnicas estadísticas tradicionales</strong>, como <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (Term Frequency-Inverse Document Frequency) y <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> (Best Matching 25), asignan pesos a las palabras en función de su frecuencia e importancia en un corpus. Estos métodos calculan estadísticas simples como puntuaciones para cada dimensión, que representa un token.  Milvus ofrece una <strong>búsqueda de texto completo</strong> integrada con el método BM25, que convierte automáticamente el texto en vectores dispersos, eliminando la necesidad de preprocesamiento manual. Este método es ideal para la búsqueda basada en palabras clave, donde la precisión y las coincidencias exactas son importantes. Para más información, consulte <a href="/docs/es/v2.6.x/full-text-search.md">Búsqueda de texto completo</a>.</p></li>
+<li><p><strong>Los modelos neuronales de incrustación dispers</strong> a son métodos aprendidos para generar representaciones dispersas mediante el entrenamiento en grandes conjuntos de datos. Suelen ser modelos de aprendizaje profundo con arquitectura Transformer, capaces de expandir y ponderar términos basándose en el contexto semántico. Milvus también admite incrustaciones dispersas generadas externamente a partir de modelos como <a href="https://arxiv.org/abs/2109.10086">SPLADE</a>. Ver <a href="/docs/es/v2.6.x/embeddings.md#Embedding-Overview">Embeddings</a> para más detalles.</include></p></li>
 </ul>
 <p>Los vectores dispersos y el texto original pueden almacenarse en Milvus para una recuperación eficiente. El siguiente diagrama describe el proceso general.</p>
 <p>
@@ -56,7 +56,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
    </span> <span class="img-wrapper"> <span>Flujo de trabajo de vectores dispersos</span> </span></p>
 <div class="alert note">
-<p>Además de los vectores dispersos, Milvus también admite vectores densos y vectores binarios. Los vectores densos son ideales para capturar relaciones semánticas profundas, mientras que los vectores binarios sobresalen en escenarios como comparaciones rápidas de similitud y deduplicación de contenido. Para obtener más información, consulte <a href="/docs/es/dense-vector.md">Vectores densos</a> y <a href="/docs/es/binary-vector.md">vectores binarios</a>.</p>
+<p>Además de los vectores dispersos, Milvus también admite vectores densos y vectores binarios. Los vectores densos son ideales para capturar relaciones semánticas profundas, mientras que los vectores binarios sobresalen en escenarios como comparaciones rápidas de similitud y deduplicación de contenido. Para obtener más información, consulte <a href="/docs/es/v2.6.x/dense-vector.md">Vectores densos</a> y <a href="/docs/es/v2.6.x/binary-vector.md">vectores binarios</a>.</p>
 </div>
 <h2 id="Data-Formats" class="common-anchor-header">Formatos de datos<button data-href="#Data-Formats" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -73,7 +73,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>En las siguientes secciones, demostramos cómo almacenar vectores a partir de modelos de incrustación dispersa aprendidos como SPLADE. Si está buscando un complemento para la búsqueda semántica basada en vectores densos, le recomendamos <a href="/docs/es/full-text-search.md">la búsqueda de texto completo</a> con BM25 en lugar de SPLADE por su simplicidad. Si ha realizado una evaluación de calidad y se ha decidido a utilizar SPLADE, puede consultar <a href="/docs/es/embeddings.md#Embedding-Overview">Embeddings</a> para saber cómo generar vectores dispersos con SPLADE.</p>
+    </button></h2><p>En las siguientes secciones, demostramos cómo almacenar vectores a partir de modelos de incrustación dispersa aprendidos como SPLADE. Si está buscando un complemento para la búsqueda semántica basada en vectores densos, le recomendamos <a href="/docs/es/v2.6.x/full-text-search.md">la búsqueda de texto completo</a> con BM25 en lugar de SPLADE por simplicidad. Si ha realizado una evaluación de calidad y se ha decidido a utilizar SPLADE, puede consultar <a href="/docs/es/v2.6.x/embeddings.md#Embedding-Overview">Embeddings</a> para saber cómo generar vectores dispersos con SPLADE.</p>
 <p>Milvus soporta la entrada de vectores dispersos con los siguientes formatos:</p>
 <ul>
 <li><p><strong>Lista de diccionarios (formateada como <code translate="no">{dimension_index: value, ...}</code>)</strong></p>
@@ -284,7 +284,7 @@ schema.WithField(entity.NewField().
 <li><p><code translate="no">text</code>: Este campo almacena cadenas de texto utilizando el tipo de datos <code translate="no">VARCHAR</code>, con una longitud máxima de 65535 bytes.</p></li>
 </ul>
 <div class="alert note">
-<p>Para habilitar Milvus o generar incrustaciones de vectores dispersos a partir de un campo de texto especificado durante la inserción de datos, debe realizarse un paso adicional que implica una función. Para más información, consulte <a href="/docs/es/full-text-search.md">Búsqueda de texto completo</a>.</p>
+<p>Para habilitar Milvus o generar incrustaciones de vectores dispersos a partir de un campo de texto especificado durante la inserción de datos, se debe realizar un paso adicional que implica una función. Para más información, consulte <a href="/docs/es/v2.6.x/full-text-search.md">Búsqueda de texto completo</a>.</p>
 </div>
 <h2 id="Set-Index-Parameters" class="common-anchor-header">Establecer parámetros de índice<button data-href="#Set-Index-Parameters" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -301,7 +301,7 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>El proceso de creación de un índice para vectores dispersos es similar al de <a href="/docs/es/dense-vector.md">los vectores densos</a>, pero con diferencias en el tipo de índice especificado (<code translate="no">index_type</code>), la métrica de distancia (<code translate="no">metric_type</code>) y los parámetros del índice (<code translate="no">params</code>).</p>
+    </button></h2><p>El proceso de creación de un índice para vectores dispersos es similar al de <a href="/docs/es/v2.6.x/dense-vector.md">los vectores densos</a>, pero con diferencias en el tipo de índice especificado (<code translate="no">index_type</code>), la métrica de distancia (<code translate="no">metric_type</code>) y los parámetros del índice (<code translate="no">params</code>).</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -361,9 +361,9 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <button class="copy-code-btn"></button></code></pre>
 <p>Este ejemplo utiliza el tipo de índice <code translate="no">SPARSE_INVERTED_INDEX</code> con <code translate="no">IP</code> como métrica. Para más detalles, consulte los siguientes recursos:</p>
 <ul>
-<li><p><a href="/docs/es/sparse-inverted-index.md">SPARSE_INVERTED_INDEX</a>: Explicación del índice y sus parámetros</p></li>
-<li><p><a href="/docs/es/metric.md">Tipos de métrica</a>: Tipos de métrica admitidos para distintos tipos de campo</p></li>
-<li><p><a href="/docs/es/full-text-search.md">Búsqueda de texto completo</a>: Un tutorial detallado sobre la búsqueda de texto completo</p></li>
+<li><p><a href="/docs/es/v2.6.x/sparse-inverted-index.md">SPARSE_INVERTED_INDEX</a>: Explicación del índice y sus parámetros</p></li>
+<li><p><a href="/docs/es/v2.6.x/metric.md">Tipos de métrica</a>: Tipos de métrica admitidos para distintos tipos de campo</p></li>
+<li><p><a href="/docs/es/v2.6.x/full-text-search.md">Búsqueda de texto completo</a>: Un tutorial detallado sobre la búsqueda de texto completo</p></li>
 </ul>
 <h2 id="Create-Collection" class="common-anchor-header">Crear colección<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -380,7 +380,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una vez completados los ajustes de vectores dispersos e índices, puede crear una colección que contenga vectores dispersos. El siguiente ejemplo utiliza el método <a href="/docs/es/create-collection.md"><code translate="no">create_collection</code></a> para crear una colección llamada <code translate="no">my_collection</code>.</p>
+    </button></h2><p>Una vez completados los ajustes de vectores dispersos e índices, puede crear una colección que contenga vectores dispersos. El siguiente ejemplo utiliza el método <a href="/docs/es/v2.6.x/create-collection.md"><code translate="no">create_collection</code></a> para crear una colección llamada <code translate="no">my_collection</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -420,6 +420,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -545,6 +546,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {
@@ -697,6 +699,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: $queryData,
@@ -709,4 +712,4 @@ curl --request POST \
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.63,&quot;id&quot;:&quot;453577185629572535&quot;,&quot;pk&quot;:&quot;453577185629572535&quot;},{&quot;distance&quot;:0.1,&quot;id&quot;:&quot;453577185629572534&quot;,&quot;pk&quot;:&quot;453577185629572534&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para obtener más información sobre los parámetros de búsqueda de similitud, consulte <a href="/docs/es/single-vector-search.md">Búsqueda vectorial básica</a>.</p>
+<p>Para obtener más información sobre los parámetros de búsqueda de similitud, consulte <a href="/docs/es/v2.6.x/single-vector-search.md">Búsqueda vectorial básica</a>.</p>

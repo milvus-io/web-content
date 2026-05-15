@@ -23,7 +23,7 @@ summary: >-
       </svg>
     </button></h1><p>벡터 임베딩의 정렬된 순서를 기록한 인덱스 파일을 기반으로 하는 ANN(근사 최인접 이웃) 검색은 수신된 검색 요청에 포함된 쿼리 벡터를 기반으로 벡터 임베딩의 하위 집합을 찾아 쿼리 벡터와 하위 그룹에 있는 벡터를 비교하여 가장 유사한 결과를 반환합니다. 밀버스는 ANN 검색을 통해 효율적인 검색 환경을 제공합니다. 이 페이지에서는 기본적인 ANN 검색을 수행하는 방법을 학습할 수 있습니다.</p>
 <div class="alert note">
-<p>컬렉션이 생성된 후 새 필드를 동적으로 추가하는 경우, 이러한 필드를 포함하는 검색은 정의된 기본값을 반환하거나 명시적으로 값을 설정하지 않은 엔티티의 경우 NULL을 반환합니다. 자세한 내용은 <a href="/docs/ko/add-fields-to-an-existing-collection.md">기존 컬렉션에 필드 추가하기를</a> 참조하세요.</p>
+<p>컬렉션이 생성된 후 새 필드를 동적으로 추가하는 경우, 이러한 필드를 포함하는 검색은 정의된 기본값을 반환하거나 명시적으로 값을 설정하지 않은 엔티티의 경우 NULL을 반환합니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/add-fields-to-an-existing-collection.md">기존 컬렉션에 필드 추가하기를</a> 참조하세요.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -46,14 +46,14 @@ summary: >-
 <p>학습 곡선을 줄이기 위해 Milvus는 <strong>AUTOINDEX를</strong> 제공합니다. <strong>자동 인덱</strong>스는 인덱스를 구축하는 동안 컬렉션 내의 데이터 분포를 분석하고 분석 결과에 따라 가장 최적화된 인덱스 매개변수를 설정하여 검색 성능과 정확성 사이의 균형을 맞출 수 있습니다.</p>
 <p>이 섹션에서는 다음 항목에 대한 자세한 정보를 확인할 수 있습니다:</p>
 <ul>
-<li><p><a href="/docs/ko/single-vector-search.md#Single-Vector-Search">단일 벡터 검색</a></p></li>
-<li><p><a href="/docs/ko/single-vector-search.md#Bulk-Vector-Search">벌크 벡터 검색</a></p></li>
-<li><p><a href="/docs/ko/single-vector-search.md#ANN-Search-in-Partition">파티션에서의 ANN 검색</a></p></li>
-<li><p><a href="/docs/ko/single-vector-search.md#Use-Output-Fields">출력 필드 사용</a></p></li>
-<li><p><a href="/docs/ko/single-vector-search.md#Use-Limit-and-Offset">제한 및 오프셋 사용</a></p></li>
-<li><p><a href="/docs/ko/single-vector-search.md#Use-Level">레벨 사용</a></p></li>
-<li><p><a href="/docs/ko/single-vector-search.md#Get-Recall-Rate">리콜률 가져오기</a></p></li>
-<li><p><a href="/docs/ko/single-vector-search.md#Enhancing-ANN-Search">ANN 검색 향상</a></p></li>
+<li><p><a href="/docs/ko/v2.6.x/single-vector-search.md#Single-Vector-Search">단일 벡터 검색</a></p></li>
+<li><p><a href="/docs/ko/v2.6.x/single-vector-search.md#Bulk-Vector-Search">벌크 벡터 검색</a></p></li>
+<li><p><a href="/docs/ko/v2.6.x/single-vector-search.md#ANN-Search-in-Partition">파티션에서의 ANN 검색</a></p></li>
+<li><p><a href="/docs/ko/v2.6.x/single-vector-search.md#Use-Output-Fields">출력 필드 사용</a></p></li>
+<li><p><a href="/docs/ko/v2.6.x/single-vector-search.md#Use-Limit-and-Offset">제한 및 오프셋 사용</a></p></li>
+<li><p><a href="/docs/ko/v2.6.x/single-vector-search.md#Use-Level">레벨 사용</a></p></li>
+<li><p><a href="/docs/ko/v2.6.x/single-vector-search.md#Get-Recall-Rate">리콜률 가져오기</a></p></li>
+<li><p><a href="/docs/ko/v2.6.x/single-vector-search.md#Enhancing-ANN-Search">ANN 검색 향상</a></p></li>
 </ul>
 <h2 id="Single-Vector-Search" class="common-anchor-header">단일 벡터 검색<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -71,7 +71,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>ANN 검색에서 단일 벡터 검색은 하나의 쿼리 벡터만 포함하는 검색을 의미합니다. 미리 구축된 인덱스와 검색 요청에 포함된 메트릭 유형에 따라 Milvus는 쿼리 벡터와 가장 유사한 상위 K개의 벡터를 찾습니다.</p>
-<p>이 섹션에서는 단일 벡터 검색을 수행하는 방법을 알아봅니다. 검색 요청은 단일 쿼리 벡터를 전달하고 Milvus가 내적 곱(IP)을 사용하여 쿼리 벡터와 컬렉션의 벡터 간의 유사도를 계산하고 가장 유사한 세 개의 벡터를 반환하도록 요청합니다.</p>
+<p>이 섹션에서는 단일 벡터 검색을 수행하는 방법을 배웁니다. 검색 요청은 단일 쿼리 벡터를 전달하고 Milvus에게 내적 곱(IP)을 사용하여 쿼리 벡터와 컬렉션의 벡터 간의 유사도를 계산하고 가장 유사한 세 개의 벡터를 반환하도록 요청합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -224,6 +224,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -261,7 +262,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">L2</code></p></td>
-     <td><p>값이 작을수록 유사성이 높음을 나타냅니다.</p></td>
+     <td><p>값이 작을수록 유사도가 높음을 나타냅니다.</p></td>
      <td><p>[0, ∞)</p></td>
    </tr>
    <tr>
@@ -454,6 +455,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -662,6 +664,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -821,6 +824,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -978,6 +982,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -1004,7 +1009,7 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>컬렉션에 <code translate="no">TIMESTAMPTZ</code> 필드가 있는 경우 검색 호출에서 <code translate="no">timezone</code> 매개변수를 설정하여 단일 작업에 대해 데이터베이스 또는 컬렉션 기본 표준 시간대를 일시적으로 재정의할 수 있습니다. 이렇게 하면 작업 중에 <code translate="no">TIMESTAMPTZ</code> 값이 표시되고 비교되는 방식이 제어됩니다.</p>
-<p><code translate="no">timezone</code> 값은 유효한 <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 표준 시간대 식별자</a> (예: <strong>아시아/상하이</strong>, <strong>미국/시카고</strong> 또는 <strong>UTC</strong>)여야 합니다. <code translate="no">TIMESTAMPTZ</code> 필드 사용 방법에 대한 자세한 내용은 <a href="/docs/ko/timestamptz-field.md">TIMESTAMPTZ 필드를</a> 참조하세요.</p>
+<p><code translate="no">timezone</code> 값은 유효한 <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 표준 시간대 식별자</a> (예: <strong>아시아/상하이</strong>, <strong>미국/시카고</strong> 또는 <strong>UTC</strong>)여야 합니다. <code translate="no">TIMESTAMPTZ</code> 필드 사용 방법에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/timestamptz-field.md">TIMESTAMPTZ 필드를</a> 참조하세요.</p>
 <p>아래 예는 검색 작업을 위해 임시로 시간대를 설정하는 방법을 보여줍니다:</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -1040,36 +1045,36 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>자동 인덱스는 ANN 검색의 학습 곡선을 상당히 평탄화합니다. 그러나 상위-K가 증가할수록 검색 결과가 항상 정확하지 않을 수 있습니다. 검색 범위를 줄이고, 검색 결과 관련성을 개선하고, 검색 결과를 다양화함으로써 Milvus는 다음과 같은 검색 개선 작업을 수행합니다.</p>
+    </button></h2><p>자동 인덱스는 ANN 검색의 학습 곡선을 상당히 평탄화합니다. 그러나 상위-K가 증가함에 따라 검색 결과가 항상 정확하지 않을 수 있습니다. 검색 범위를 줄이고, 검색 결과 관련성을 개선하고, 검색 결과를 다양화함으로써 Milvus는 다음과 같은 검색 개선 작업을 수행합니다.</p>
 <ul>
 <li><p>필터링 검색</p>
 <p>검색 요청에 필터링 조건을 포함하면 Milvus가 ANN 검색을 수행하기 전에 메타데이터 필터링을 수행하여 검색 범위를 전체 컬렉션에서 지정된 필터링 조건과 일치하는 엔티티로만 축소할 수 있습니다.</p>
-<p>메타데이터 필터링 및 필터링 조건에 대한 자세한 내용은 <a href="/docs/ko/filtered-search.md">필터링된 검색</a>, <a href="/docs/ko/boolean.md">필터링 설명</a> 및 관련 항목을 참조하세요.</p></li>
+<p>메타데이터 필터링 및 필터링 조건에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/filtered-search.md">필터링된 검색</a>, <a href="/docs/ko/v2.6.x/boolean.md">필터링 설명</a> 및 관련 항목을 참조하세요.</p></li>
 <li><p>범위 검색</p>
-<p>특정 범위 내에서 반환되는 엔티티의 거리 또는 점수를 제한하여 검색 결과의 관련성을 높일 수 있습니다. Milvus에서 범위 검색은 쿼리 벡터와 가장 유사한 벡터가 포함된 벡터를 중심으로 두 개의 동심원을 그리는 방식으로 이루어집니다. 검색 요청은 두 원의 반지름을 지정하고 Milvus는 바깥쪽 원에 속하지만 안쪽 원에 속하지 않는 모든 벡터 임베딩을 반환합니다.</p>
-<p>범위 검색에 대한 자세한 내용은 <a href="/docs/ko/range-search.md">범위 검색을</a> 참조하세요.</p></li>
+<p>특정 범위 내에서 반환되는 엔티티의 거리 또는 점수를 제한하여 검색 결과의 관련성을 높일 수 있습니다. Milvus에서 범위 검색은 쿼리 벡터와 가장 유사한 벡터가 포함된 벡터를 중심으로 두 개의 동심원을 그리는 방식으로 이루어집니다. 검색 요청은 두 원의 반지름을 지정하며, Milvus는 바깥쪽 원에 속하지만 안쪽 원에 속하지 않는 모든 벡터 임베딩을 반환합니다.</p>
+<p>범위 검색에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/range-search.md">범위 검색을</a> 참조하세요.</p></li>
 <li><p>그룹 검색</p>
 <p>반환된 엔티티가 특정 필드에서 동일한 값을 갖는 경우 검색 결과가 벡터 공간에 있는 모든 벡터 임베딩의 분포를 나타내지 않을 수 있습니다. 검색 결과를 다양화하려면 그룹화 검색을 사용해 보세요.</p>
-<p>그룹화 검색에 대한 자세한 내용은 <a href="/docs/ko/grouping-search.md">그룹화 검색을</a> 참조하세요,</p></li>
+<p>그룹화 검색에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/grouping-search.md">그룹화 검색을</a> 참조하세요,</p></li>
 <li><p>하이브리드 검색</p>
 <p>컬렉션에는 여러 개의 벡터 필드를 포함하여 서로 다른 임베딩 모델을 사용하여 생성된 벡터 임베딩을 저장할 수 있습니다. 이렇게 하면 하이브리드 검색을 사용하여 이러한 벡터 필드에서 검색 결과의 순위를 재조정하여 재인용률을 높일 수 있습니다.</p>
-<p>하이브리드 검색에 대한 자세한 내용은 <a href="/docs/ko/multi-vector-search.md">하이브리드 검색을</a> 참조하세요.</p></li>
+<p>하이브리드 검색에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/multi-vector-search.md">하이브리드 검색을</a> 참조하세요.</p></li>
 <li><p>검색 이터레이터</p>
 <p>단일 ANN 검색은 최대 16,384개의 엔티티를 반환합니다. 한 번의 검색으로 더 많은 엔티티를 반환해야 하는 경우 검색 반복기를 사용하는 것이 좋습니다.</p>
-<p>검색 반복기에 대한 자세한 내용은 <a href="/docs/ko/with-iterators.md">검색 반복기를</a> 참조하세요.</p></li>
+<p>검색 반복기에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/with-iterators.md">검색 반복기를</a> 참조하세요.</p></li>
 <li><p>전체 텍스트 검색</p>
-<p>전체 텍스트 검색은 텍스트 데이터 세트에서 특정 용어나 구문이 포함된 문서를 검색한 다음 관련성에 따라 결과의 순위를 매기는 기능입니다. 이 기능은 정확한 용어를 간과할 수 있는 시맨틱 검색의 한계를 극복하여 가장 정확하고 문맥에 맞는 결과를 얻을 수 있도록 해줍니다. 또한, 원시 텍스트 입력을 받아 벡터 임베딩을 수동으로 생성할 필요 없이 텍스트 데이터를 스파스 임베딩으로 자동 변환함으로써 벡터 검색을 간소화합니다.</p>
-<p>전체 텍스트 검색에 대한 자세한 내용은 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p></li>
+<p>전체 텍스트 검색은 텍스트 데이터 세트에서 특정 용어나 구문이 포함된 문서를 검색한 다음 관련성에 따라 결과의 순위를 매기는 기능입니다. 이 기능은 정확한 용어를 간과할 수 있는 시맨틱 검색의 한계를 극복하여 가장 정확하고 문맥에 맞는 결과를 얻을 수 있도록 해줍니다. 또한, 원시 텍스트 입력을 받아 벡터 임베딩을 수동으로 생성할 필요 없이 텍스트 데이터를 스파스 임베딩으로 자동 변환하여 벡터 검색을 간소화합니다.</p>
+<p>전체 텍스트 검색에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p></li>
 <li><p>텍스트 검색</p>
 <p>Milvus의 키워드 검색은 특정 용어를 기반으로 정확한 문서 검색을 가능하게 합니다. 이 기능은 주로 특정 조건을 충족하는 필터링 검색에 사용되며, 스칼라 필터링을 통합하여 쿼리 결과를 구체화함으로써 스칼라 기준을 충족하는 벡터 내에서 유사성 검색을 할 수 있습니다.</p>
-<p>키워드 검색에 대한 자세한 내용은 <a href="/docs/ko/keyword-match.md">키워드 검색을</a> 참조하세요.</p></li>
+<p>키워드 검색에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/keyword-match.md">키워드 검색을</a> 참조하세요.</p></li>
 <li><p>파티션 키 사용</p>
 <p>메타데이터 필터링에 여러 개의 스칼라 필드를 포함시키고 다소 복잡한 필터링 조건을 사용하면 검색 효율성에 영향을 미칠 수 있습니다. 스칼라 필드를 파티션 키로 설정하고 검색 요청에 파티션 키와 관련된 필터링 조건을 사용하면 지정된 파티션 키 값에 해당하는 파티션 내에서 검색 범위를 제한하는 데 도움이 될 수 있습니다.</p>
-<p>파티션 키에 대한 자세한 내용은 <a href="/docs/ko/use-partition-key.md">파티션 키 사용을</a> 참조하세요.</p></li>
+<p>파티션 키에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/use-partition-key.md">파티션 키 사용을</a> 참조하세요.</p></li>
 <li><p>mmap 사용</p>
-<p>mmap 설정에 대한 자세한 내용은 <a href="/docs/ko/mmap.md">mmap 사용을</a> 참조하세요.</p></li>
+<p>mmap 설정에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/mmap.md">mmap 사용을</a> 참조하세요.</p></li>
 <li><p>클러스터링 압축</p>
-<p>클러스터링 압축에 대한 자세한 내용은 <a href="/docs/ko/clustering-compaction.md">클러스터링 압축</a>을 참조하세요.</p></li>
+<p>클러스터링 압축에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/clustering-compaction.md">클러스터링 압축</a>을 참조하세요.</p></li>
 <li><p>재랭킹 사용</p>
-<p>랭킹러를 사용하여 검색 결과 관련성을 높이는 방법에 대한 자세한 내용은 <a href="/docs/ko/decay-ranker-overview.md">감퇴 랭킹러 개요</a> 및 <a href="/docs/ko/model-ranker-overview.md">모델 랭킹러 개요를</a> 참조하세요.</p></li>
+<p>랭킹러를 사용하여 검색 결과 관련성을 높이는 방법에 대한 자세한 내용은 감점 <a href="/docs/ko/v2.6.x/decay-ranker-overview.md">랭킹러 개요</a> 및 <a href="/docs/ko/v2.6.x/model-ranker-overview.md">모델 랭킹러 개요를</a> 참조하세요.</p></li>
 </ul>

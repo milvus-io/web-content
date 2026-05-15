@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 允许您使用<code translate="no">JSON</code> 数据类型在单个字段中存储和索引结构化数据。这样就能实现具有嵌套属性的灵活 Schema，同时还能通过 JSON 索引进行高效过滤。</p>
+    </button></h1><p>Milvus 允许您使用<code translate="no">JSON</code> 数据类型在单个字段中存储和索引结构化数据。这使得 Schema 具有灵活的嵌套属性，同时还能通过 JSON 索引进行高效过滤。</p>
 <h2 id="What-is-a-JSON-field" class="common-anchor-header">什么是 JSON 字段？<button data-href="#What-is-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -247,6 +247,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;product_catalog\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -421,6 +422,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/product_catalog/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;data\&quot;: <span class="hljs-variable">$entities</span>
 }&quot;</span>
@@ -897,6 +899,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;product_catalog\&quot;,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
@@ -1007,7 +1010,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <li><p><strong>JSON 字段</strong>是 Schema 定义的。您必须在 Schema 中明确声明字段。</p></li>
 <li><p><strong>动态字段</strong>是一个隐藏的 JSON 对象 (<code translate="no">$meta</code>) ，可自动存储模式中未定义的任何字段。</p></li>
 </ul>
-<p>两者都支持嵌套结构和 JSON 路径索引，但动态字段更适合可选或不断演化的数据结构。</p>
+<p>两者都支持嵌套结构和 JSON 路径索引，但动态字段更适用于可选或不断演化的数据结构。</p>
 <p>详情请参阅<a href="/docs/zh/enable-dynamic-field.md">动态</a>字段。</p>
 <h3 id="Are-there-any-limitations-on-the-size-of-a-JSON-field" class="common-anchor-header">JSON 字段的大小有限制吗？<button data-href="#Are-there-any-limitations-on-the-size-of-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"

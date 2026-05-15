@@ -274,7 +274,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Dans l'exemple ci-dessus, un index nommé <code translate="no">binary_vector_index</code> est créé pour le champ <code translate="no">binary_vector</code>, en utilisant le type d'index <code translate="no">AUTOINDEX</code>. Le champ <code translate="no">metric_type</code> est défini sur <code translate="no">HAMMING</code>, ce qui indique que la distance de Hamming est utilisée pour mesurer la similarité.</p>
+<p>Dans l'exemple ci-dessus, un index nommé <code translate="no">binary_vector_index</code> est créé pour le champ <code translate="no">binary_vector</code>, en utilisant le type d'index <code translate="no">AUTOINDEX</code>. La valeur <code translate="no">metric_type</code> est définie sur <code translate="no">HAMMING</code>, ce qui indique que la distance de Hamming est utilisée pour mesurer la similarité.</p>
 <p>Milvus propose différents types d'index pour une meilleure expérience de la recherche vectorielle. AUTOINDEX est un type d'index spécial conçu pour faciliter l'apprentissage de la recherche vectorielle. Il existe de nombreux types d'index parmi lesquels vous pouvez choisir. Pour plus de détails, reportez-vous à <a href="/docs/fr/index-explained.md">Index Explained</a>.</p>
 <p>En outre, Milvus prend en charge d'autres mesures de similarité pour les vecteurs binaires. Pour plus d'informations, voir <a href="/docs/fr/metric.md">Types de métriques</a>.</p>
 <h3 id="Create-collection" class="common-anchor-header">Création d'une collection<button data-href="#Create-collection" class="anchor-icon" translate="no">
@@ -339,6 +339,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -450,6 +451,7 @@ client.<span class="hljs-title function_">insert</span>({
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;data\&quot;: <span class="hljs-variable">$data</span>,
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;
@@ -470,7 +472,7 @@ client.<span class="hljs-title function_">insert</span>({
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>La recherche de similarité est l'une des fonctions principales de Milvus, qui vous permet de trouver rapidement les données les plus similaires à un vecteur d'interrogation en fonction de la distance entre les vecteurs. Pour effectuer une recherche de similarité à l'aide de vecteurs binaires, préparez le vecteur d'interrogation et les paramètres de recherche, puis appelez la méthode <code translate="no">search</code>.</p>
+    </button></h3><p>La recherche de similarité est l'une des fonctions principales de Milvus. Elle vous permet de trouver rapidement les données les plus similaires à un vecteur d'interrogation en fonction de la distance entre les vecteurs. Pour effectuer une recherche de similarité à l'aide de vecteurs binaires, préparez le vecteur d'interrogation et les paramètres de recherche, puis appelez la méthode <code translate="no">search</code>.</p>
 <p>Lors des opérations de recherche, les vecteurs binaires doivent également être fournis sous la forme d'un tableau d'octets. Veillez à ce que la dimension du vecteur de requête corresponde à la dimension spécifiée lors de la définition de <code translate="no">dim</code> et à ce que toutes les 8 valeurs booléennes soient converties en 1 octet.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -562,6 +564,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$data</span>,

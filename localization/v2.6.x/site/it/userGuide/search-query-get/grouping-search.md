@@ -59,7 +59,7 @@ summary: >-
 <li><p>Restituisce i primi risultati per ogni gruppo, come definito dal parametro <code translate="no">limit</code>, con l'entità più simile di ogni gruppo.</p></li>
 </ul>
 <div class="alert note">
-<p>Per impostazione predefinita, la ricerca per gruppi restituisce solo un'entità per gruppo. Se si desidera aumentare il numero di risultati da restituire per gruppo, è possibile controllarlo con i parametri <code translate="no">group_size</code> e <code translate="no">strict_group_size</code>.</p>
+<p>Per impostazione predefinita, la ricerca per gruppi restituisce solo un'entità per gruppo. Se si desidera aumentare il numero di risultati da restituire per gruppo, è possibile controllare questo aspetto con i parametri <code translate="no">group_size</code> e <code translate="no">strict_group_size</code>.</p>
 </div>
 <h2 id="Perform-Grouping-Search" class="common-anchor-header">Esecuzione della ricerca per gruppi<button data-href="#Perform-Grouping-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -218,6 +218,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -357,6 +358,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -396,5 +398,5 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <li><p><strong>Numero di gruppi</strong>: Il parametro <code translate="no">limit</code> controlla il numero di gruppi da cui vengono restituiti i risultati della ricerca, piuttosto che il numero specifico di entità all'interno di ciascun gruppo. L'impostazione di un <code translate="no">limit</code> appropriato aiuta a controllare la diversità della ricerca e le prestazioni della query. Ridurre <code translate="no">limit</code> può ridurre i costi di calcolo se i dati sono distribuiti densamente o se le prestazioni sono un problema.</p></li>
 <li><p><strong>Entità per gruppo</strong>: Il parametro <code translate="no">group_size</code> controlla il numero di entità restituite per gruppo. La regolazione di <code translate="no">group_size</code> in base al caso d'uso può aumentare la ricchezza dei risultati della ricerca. Tuttavia, se i dati sono distribuiti in modo non uniforme, alcuni gruppi possono restituire un numero di entità inferiore a quello specificato da <code translate="no">group_size</code>, in particolare in scenari di dati limitati.</p></li>
 <li><p><strong>Dimensione rigida del gruppo</strong>: Quando si utilizza <code translate="no">strict_group_size=True</code>, il sistema cercherà di restituire il numero di entità specificato (<code translate="no">group_size</code>) per ogni gruppo, a meno che non ci siano abbastanza dati in quel gruppo. Questa impostazione garantisce un conteggio coerente delle entità per gruppo, ma può comportare un calo delle prestazioni in caso di distribuzione non uniforme dei dati o di risorse limitate. Se non è necessario un conteggio rigoroso delle entità, l'impostazione di <code translate="no">strict_group_size=False</code> può migliorare la velocità delle query.</p></li>
-<li><p>Se i vettori di query esistono già nell'insieme di destinazione, si può usare <code translate="no">ids</code> invece di recuperarli prima delle ricerche. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/primary-key-search.md">Ricerca con chiave primaria</a>.</p></li>
+<li><p>Se i vettori di query esistono già nell'insieme di destinazione, si può usare <code translate="no">ids</code> invece di recuperarli prima delle ricerche. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/v2.6.x/primary-key-search.md">Ricerca con chiave primaria</a>.</p></li>
 </ul>

@@ -128,7 +128,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Cardinal, sviluppato da Zilliz Cloud, è un algoritmo di ricerca vettoriale all'avanguardia che offre qualità e prestazioni di ricerca senza precedenti. Grazie al suo design innovativo e alle ampie ottimizzazioni, Cardinal supera Knowhere di diverse volte o di un ordine di grandezza, gestendo in modo adattivo diversi scenari di produzione, come ad esempio dimensioni K variabili, filtraggio elevato, diverse distribuzioni di dati e così via.</p>
+    </button></h2><p>Cardinal, sviluppato da Zilliz Cloud, è un algoritmo di ricerca vettoriale all'avanguardia che offre qualità e prestazioni di ricerca senza precedenti. Grazie al suo design innovativo e alle estese ottimizzazioni, Cardinal supera Knowhere di diverse volte o di un ordine di grandezza, gestendo in modo adattivo diversi scenari di produzione, come dimensioni K variabili, filtraggio elevato, diverse distribuzioni di dati e così via.</p>
 <h2 id="Channel" class="common-anchor-header">Il canale<button data-href="#Channel" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -208,7 +208,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus offre funzioni di incorporamento integrate che funzionano con i più diffusi fornitori di incorporazioni. Prima di creare una raccolta in Milvus, è possibile utilizzare queste funzioni per generare embeddings per i set di dati, semplificando il processo di preparazione dei dati e le ricerche vettoriali. Per creare embeddings in azione, si veda <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">Utilizzo del modello di PyMilvus per generare embeddings di testo</a>.</p>
+    </button></h2><p>Milvus offre funzioni di incorporamento integrate che funzionano con i più diffusi fornitori di incorporazioni. Prima di creare una raccolta in Milvus, è possibile utilizzare queste funzioni per generare embedding per i set di dati, semplificando il processo di preparazione dei dati e le ricerche vettoriali. Per creare embeddings in azione, si veda <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">Utilizzo del modello di PyMilvus per generare embeddings di testo</a>.</p>
 <h2 id="Entity" class="common-anchor-header">Entità<button data-href="#Entity" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -439,7 +439,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/milvus-cdc-overview.md">Milvus CDC</a> (Change data capture) è uno strumento di facile utilizzo che consente di acquisire e sincronizzare i dati incrementali nelle istanze Milvus. Garantisce l'affidabilità dei dati aziendali trasferendoli senza soluzione di continuità tra le istanze di origine e quelle di destinazione, consentendo un facile backup incrementale e il disaster recovery.</p>
+    </button></h2><p><a href="https://milvus.io/docs/milvus_cdc_overview.md">Milvus CDC</a> (change data capture) è uno strumento utilizzato per replicare le modifiche dei dati da un cluster Milvus a un altro per il disaster recovery primario-standby.</p>
 <h2 id="Milvus-CLI" class="common-anchor-header">Milvus CLI<button data-href="#Milvus-CLI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -471,7 +471,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://github.com/zilliztech/milvus-migration/">Milvus Migration</a> è uno strumento open source progettato per facilitare la migrazione dei dati da varie fonti di dati a Milvus 2.x.</p>
+    </button></h2><p><a href="https://github.com/zilliztech/milvus-migration/">Milvus Migration</a> è uno strumento open-source progettato per facilitare la migrazione dei dati da varie fonti di dati in Milvus 2.x.</p>
 <h2 id="Milvus-cluster" class="common-anchor-header">Cluster Milvus<button data-href="#Milvus-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -519,7 +519,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus supporta campi vettoriali multipli in un'unica collezione dalla versione 2.4.0. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/multi-vector-search.md">Ricerca ibrida</a>.</p>
+    </button></h2><p>Milvus supporta più campi vettoriali in una collezione dalla versione 2.4.0. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/multi-vector-search.md">Ricerca ibrida</a>.</p>
 <h2 id="Partition" class="common-anchor-header">Partizione<button data-href="#Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -535,7 +535,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una partizione è una divisione di una collezione. Milvus supporta la suddivisione dei dati della raccolta in più parti sullo storage fisico. Questo processo si chiama partizionamento e ogni partizione può contenere più segmenti. Per ulteriori informazioni, consultare <a href="https://milvus.io/docs/manage-partitions.md#Manage-Partitions">Gestione delle partizioni</a>.</p>
+    </button></h2><p>Una partizione è una divisione di una collezione. Milvus supporta la suddivisione dei dati di una raccolta in più parti sullo storage fisico. Questo processo si chiama partizionamento e ogni partizione può contenere più segmenti. Per ulteriori informazioni, consultare <a href="https://milvus.io/docs/manage-partitions.md#Manage-Partitions">Gestione delle partizioni</a>.</p>
 <h2 id="Partition-key" class="common-anchor-header">Chiave di partizione<button data-href="#Partition-key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

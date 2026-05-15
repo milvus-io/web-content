@@ -302,7 +302,7 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus 也提供其他各種適合不同語言和情境的分析器。如需詳細資訊，請參閱<a href="/docs/zh-hant/analyzer-overview.md">分析器總覽</a>。</p>
+<p>Milvus 也提供其他各種適合不同語言和情境的分析器。如需詳細資訊，請參閱<a href="/docs/zh-hant/analyzer-overview.md">分析器概述</a>。</p>
 <h2 id="Use-text-match" class="common-anchor-header">使用文字匹配<button data-href="#Use-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -467,6 +467,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;annsField&quot;: &quot;embeddings&quot;,
@@ -546,6 +547,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$filter</span>&quot;</span><span class="hljs-string">&#x27;,
@@ -573,7 +575,7 @@ curl --request POST \
 <li><p><code translate="no">filter</code> 表達式中的 Escape 規則：</p>
 <ul>
 <li><p>在表達式中以雙引號或單引號括住的字元會被解釋為字串常數。如果字串常數包含轉換字元，則必須使用轉換順序來表示轉換字元。例如，使用<code translate="no">\\</code> 表示<code translate="no">\</code> ，使用<code translate="no">\\t</code> 表示制表符<code translate="no">\t</code> ，使用<code translate="no">\\n</code> 表示換行符。</p></li>
-<li><p>如果字串常數由單引號括住，常數內的單引號應表示為<code translate="no">\\'</code> ，而雙引號可表示為<code translate="no">&quot;</code> 或<code translate="no">\\&quot;</code> 。 例如：<code translate="no">'It\\'s milvus'</code> 。</p></li>
+<li><p>如果字串常數由單引號括住，常數內的單引號應表示為<code translate="no">\\'</code> ，而雙引號可表示為<code translate="no">&quot;</code> 或<code translate="no">\\&quot;</code> 。 例：<code translate="no">'It\\'s milvus'</code> 。</p></li>
 <li><p>如果字串常數由雙引號括住，常數中的雙引號應表示為<code translate="no">\\&quot;</code> ，而單引號可表示為<code translate="no">'</code> 或<code translate="no">\\'</code> 。 例：<code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code> 。</p></li>
 </ul></li>
 </ul>

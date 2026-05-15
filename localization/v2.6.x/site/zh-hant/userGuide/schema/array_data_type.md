@@ -40,9 +40,9 @@ summary: ARRAY 欄位儲存相同資料類型元素的有序集合。以下是 A
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>預設值</strong>：ARRAY 欄位不支援預設值。但是，您可以將<code translate="no">nullable</code> 屬性設定為<code translate="no">True</code> ，以允許空值。詳情請參閱<a href="/docs/zh-hant/nullable-and-default.md">Nullable &amp; Default</a>。</p></li>
-<li><p><strong>資料類型：</strong>ARRAY 欄位中的所有元素必須共用相同的資料類型，該資料類型由<code translate="no">element_type</code> 參數定義。當<code translate="no">element_type</code> 設定為<code translate="no">VARCHAR</code> 時，必須同時指定陣列元素的<code translate="no">max_length</code> 。<code translate="no">element_type</code> 接受 Milvus 支援的任何標量資料類型，但<code translate="no">JSON</code> 除外。</p></li>
-<li><p><strong>陣列容量</strong>：ARRAY 欄位中的元素數量必須小於或等於陣列建立時所定義的最大容量，如<code translate="no">max_capacity</code> 所指定。該值應為<strong>1</strong>至<strong>4096 範圍</strong>內的整數。</p></li>
+<li><p><strong>預設值</strong>：ARRAY 欄位不支援預設值。但是，您可以將<code translate="no">nullable</code> 屬性設定為<code translate="no">True</code> ，以允許空值。詳情請參閱<a href="/docs/zh-hant/v2.6.x/nullable-and-default.md">Nullable &amp; Default</a>。</p></li>
+<li><p><strong>資料類型：</strong>ARRAY 欄位中的所有元素必須共用相同的資料類型，此類型由<code translate="no">element_type</code> 參數定義。當<code translate="no">element_type</code> 設定為<code translate="no">VARCHAR</code> 時，必須同時指定陣列元素的<code translate="no">max_length</code> 。<code translate="no">element_type</code> 接受 Milvus 支援的任何標量資料類型，但<code translate="no">JSON</code> 除外。</p></li>
+<li><p><strong>陣列容量</strong>：ARRAY 欄位中元素的數量必須小於或等於陣列建立時所定義的最大容量，如<code translate="no">max_capacity</code> 所指定。該值應為<strong>1</strong>至<strong>4096 範圍</strong>內的整數。</p></li>
 <li><p><strong>字串處理</strong>：Array 欄位中的字串值會以原樣儲存，不會進行語意轉換或轉換。例如，<code translate="no">'a&quot;b'</code>,<code translate="no">&quot;a'b&quot;</code>,<code translate="no">'a\'b'</code>, 和<code translate="no">&quot;a\&quot;b&quot;</code> 會以輸入的方式儲存，而<code translate="no">'a'b'</code> 和<code translate="no">&quot;a&quot;b&quot;</code> 則視為無效值。</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">新增 ARRAY 欄位<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
@@ -68,7 +68,7 @@ summary: ARRAY 欄位儲存相同資料類型元素的有序集合。以下是 A
 </ol>
 <p>以下是如何定義包含 ARRAY 欄位的集合模式：</p>
 <div class="alert note">
-<p>如果您在定義模式時設定<code translate="no">enable_dynamic_fields=True</code> ，Milvus 允許您插入事先未定義的標量欄位。但是，這可能會增加查詢和管理的複雜性，潛在地影響性能。如需詳細資訊，請參閱<a href="/docs/zh-hant/enable-dynamic-field.md">動態欄位</a>。</p>
+<p>如果在定義模式時設定<code translate="no">enable_dynamic_fields=True</code> ，Milvus 允許你插入事先沒有定義的標量欄位。但是，這可能會增加查詢和管理的複雜性，潛在地影響性能。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/enable-dynamic-field.md">動態欄位</a>。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -269,7 +269,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>索引有助於改善搜尋與查詢效能。在 Milvus 中，對向量欄位必須建立索引，但對標量值欄位則是可選的。</p>
-<p>以下範例在向量欄位<code translate="no">embedding</code> 和 ARRAY 欄位<code translate="no">tags</code> 上建立索引，兩者都使用<code translate="no">AUTOINDEX</code> 索引類型。使用這種類型，Milvus 會根據資料類型自動選擇最適合的索引。您也可以自訂每個欄位的索引類型和參數。詳情請參閱<a href="/docs/zh-hant/index-explained.md">Index Explained</a>。</p>
+<p>以下範例在向量欄位<code translate="no">embedding</code> 和 ARRAY 欄位<code translate="no">tags</code> 上建立索引，兩者都使用<code translate="no">AUTOINDEX</code> 索引類型。使用這種類型，Milvus 會根據資料類型自動選擇最適合的索引。您也可以自訂每個欄位的索引類型和參數。詳情請參閱<a href="/docs/zh-hant/v2.6.x/index-explained.md">Index Explained</a>。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
@@ -382,6 +382,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -498,6 +499,7 @@ client.<span class="hljs-title function_">insert</span>({
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {
@@ -597,6 +599,7 @@ fmt.Println(<span class="hljs-string">&quot;ratings&quot;</span>, rs.GetColumn(<
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;tags IS NOT NULL&quot;,
@@ -674,6 +677,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;my_collection&quot;,
   &quot;filter&quot;: &quot;ratings[0] &gt; 4&quot;,
@@ -773,6 +777,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -786,4 +791,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:-0.24793813,&quot;embedding&quot;:[0.12,0.34,0.56],&quot;id&quot;:1,&quot;ratings&quot;:{&quot;Data&quot;:{&quot;LongData&quot;:{&quot;data&quot;:[5,4,3]}}},&quot;tags&quot;:{&quot;Data&quot;:{&quot;StringData&quot;:{&quot;data&quot;:[&quot;pop&quot;,&quot;rock&quot;,&quot;classic&quot;]}}}}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>此外，Milvus 支援進階的 Array 過濾運算元，例如<code translate="no">ARRAY_CONTAINS</code>,<code translate="no">ARRAY_CONTAINS_ALL</code>,<code translate="no">ARRAY_CONTAINS_ANY</code>, 以及<code translate="no">ARRAY_LENGTH</code> ，以進一步增強查詢功能。如需詳細資訊，請參閱<a href="/docs/zh-hant/array-operators.md">ARRAY Operators</a>。</p>
+<p>此外，Milvus 支援進階的 Array 過濾運算元，例如<code translate="no">ARRAY_CONTAINS</code>,<code translate="no">ARRAY_CONTAINS_ALL</code>,<code translate="no">ARRAY_CONTAINS_ANY</code>, 以及<code translate="no">ARRAY_LENGTH</code> ，以進一步增強查詢功能。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/array-operators.md">ARRAY Operators</a>。</p>

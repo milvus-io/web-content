@@ -110,6 +110,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database_1&quot;
 }&#x27;</span>
@@ -151,6 +152,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database_2&quot;,
     &quot;properties&quot;: {
@@ -222,6 +224,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/describe&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;default&quot;
 }&#x27;</span>
@@ -241,7 +244,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>データベースの<a href="/docs/ja/manage_databases.md#Create-database">作成で</a>説明されているように、データベースを作成するときにデータベースのプロパティを設定したり、既存のデータベースのプロパティを変更および削除することができます。</p>
+    </button></h2><p>データベースの<a href="/docs/ja/v2.6.x/manage_databases.md#Create-database">作成で</a>説明されているように、データベースを作成するときにデータベースのプロパティを設定したり、既存のデータベースのプロパティを変更および削除したりすることができます。</p>
 <p>以下の表は、設定可能なデータベース・プロパティの一覧です。</p>
 <table>
    <tr>
@@ -282,7 +285,7 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">timezone</code></p></td>
      <td><p>文字列</p></td>
-     <td><p>データベース内の時間に敏感な操作、特に<code translate="no">TIMESTAMPTZ</code> フィールドに適用されるデフォルトのタイムゾーンを指定します。コレクション・レベルのタイムゾーンが設定されていない限り、コレクションはデータベースのタイムゾーンを継承します。クエリレベルのtimezoneパラメータは、データベースとコレクションの両方のデフォルトを一時的に上書きすることができます。値は有効な<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANAタイムゾーン識別子</a>でなければなりません（例えば、<strong>Asia/Shanghai</strong>、<strong>America/Chicago</strong>、または<strong>UTC</strong>）。<code translate="no">TIMESTAMPTZ</code> フィールドの使用方法の詳細は、<a href="/docs/ja/timestamptz-field.md">TIMESTAMPTZ フィールドを</a>参照してください。</p></td>
+     <td><p>データベース内の時間に敏感な操作、特に<code translate="no">TIMESTAMPTZ</code> フィールドに適用されるデフォルトのタイムゾーンを指定します。コレクション・レベルのタイムゾーンが設定されていない限り、コレクションはデータベースのタイムゾーンを継承します。クエリレベルのtimezoneパラメータは、データベースとコレクションの両方のデフォルトを一時的に上書きすることができます。値は有効な<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANAタイムゾーン識別子</a>でなければなりません（例えば、<strong>Asia/Shanghai</strong>、<strong>America/Chicago</strong>、または<strong>UTC</strong>）。<code translate="no">TIMESTAMPTZ</code> フィールドの使用方法の詳細は、<a href="/docs/ja/v2.6.x/timestamptz-field.md">TIMESTAMPTZ フィールドを</a>参照してください。</p></td>
    </tr>
 </table>
 <h3 id="Alter-database-properties" class="common-anchor-header">データベース・プロパティの変更<button data-href="#Alter-database-properties" class="anchor-icon" translate="no">
@@ -333,6 +336,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/alter&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database&quot;,
     &quot;properties&quot;: {
@@ -387,6 +391,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/alter&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database&quot;,
     &quot;propertyKeys&quot;: [
@@ -480,6 +485,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/drop&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database&quot;
 }&#x27;</span>
@@ -514,7 +520,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvusはロールベースアクセスコントロール(RBAC)を使用して権限を管理します。特定の権限を持つロールを作成し、ユーザに割り当てることで、異なるデータベースへのアクセスを制御することができます。詳細については、<a href="/docs/ja/rbac.md">RBAC のドキュメントを</a>参照してください。</p>
+    </button></h3><p>Milvusはロールベースアクセスコントロール(RBAC)を使用して権限を管理します。特定の権限を持つロールを作成し、ユーザに割り当てることで、異なるデータベースへのアクセスを制御することができます。詳細については、<a href="/docs/ja/v2.6.x/rbac.md">RBAC のドキュメントを</a>参照してください。</p>
 <h3 id="Are-there-any-quota-limitations-for-a-database" class="common-anchor-header">データベースのクォータ制限はありますか？<button data-href="#Are-there-any-quota-limitations-for-a-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -530,4 +536,4 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvusでは、最大コレクション数など、データベースのクォータ制限を設定することができます。制限の包括的なリストについては、<a href="/docs/ja/limitations.md">Milvus Limits ドキュメントを</a>参照してください。</p>
+    </button></h3><p>Milvusでは、最大コレクション数など、データベースのクォータ制限を設定することができます。制限の包括的なリストについては、<a href="/docs/ja/v2.6.x/limitations.md">Milvus Limits ドキュメントを</a>参照してください。</p>

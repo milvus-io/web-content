@@ -456,7 +456,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>L'algorithme utilisé pour construire et interroger l'index. Valeurs valides :</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (par défaut) : Traitement optimisé des requêtes Document-at-a-Time (DAAT) à l'aide de l'algorithme MaxScore. MaxScore offre de meilleures performances pour les valeurs <em>k</em> élevées ou les requêtes comportant de nombreux termes en ignorant les termes et les documents susceptibles d'avoir un impact minimal. Il y parvient en répartissant les termes en groupes essentiels et non essentiels sur la base de leurs scores d'impact maximum, en se concentrant sur les termes qui peuvent contribuer aux résultats les plus importants.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Traitement optimisé des requêtes DAAT à l'aide de l'algorithme WAND. WAND évalue moins de documents en exploitant les scores d'impact maximum pour ignorer les documents non compétitifs, mais ses frais généraux par hit sont plus élevés. L'algorithme WAND est donc plus efficace pour les requêtes avec des valeurs <em>k</em> faibles ou pour les requêtes courtes, pour lesquelles il est plus facile de sauter des documents.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Traitement des requêtes par terme de base à la fois (TAAT). Bien qu'il soit plus lent que <code translate="no">DAAT_MAXSCORE</code> et <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> offre un avantage unique. Contrairement aux algorithmes DAAT, qui utilisent des scores d'impact maximum mis en cache et qui restent statiques quelles que soient les modifications apportées au paramètre de collecte globale (avgdl), <code translate="no">TAAT_NAIVE</code> s'adapte dynamiquement à ces modifications.</p></li></ul></td>
+     <td><p>L'algorithme utilisé pour construire et interroger l'index. Valeurs valides :</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (par défaut) : Traitement optimisé des requêtes Document-at-a-Time (DAAT) à l'aide de l'algorithme MaxScore. MaxScore offre de meilleures performances pour les valeurs <em>k</em> élevées ou les requêtes comportant de nombreux termes en ignorant les termes et les documents susceptibles d'avoir un impact minimal. Il y parvient en répartissant les termes en groupes essentiels et non essentiels sur la base de leur score d'impact maximal, en se concentrant sur les termes qui peuvent contribuer aux résultats les plus importants.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Traitement optimisé des requêtes DAAT à l'aide de l'algorithme WAND. WAND évalue moins de documents en exploitant les scores d'impact maximum pour ignorer les documents non compétitifs, mais ses frais généraux par hit sont plus élevés. L'algorithme WAND est donc plus efficace pour les requêtes avec des valeurs <em>k</em> faibles ou pour les requêtes courtes, pour lesquelles il est plus facile de sauter des documents.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Traitement des requêtes par terme de base à la fois (TAAT). Bien qu'il soit plus lent que <code translate="no">DAAT_MAXSCORE</code> et <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> offre un avantage unique. Contrairement aux algorithmes DAAT, qui utilisent des scores d'impact maximum mis en cache et qui restent statiques quelles que soient les modifications apportées au paramètre de collecte globale (avgdl), <code translate="no">TAAT_NAIVE</code> s'adapte dynamiquement à ces modifications.</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
@@ -522,6 +522,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -583,6 +584,7 @@ client.insert(InsertReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;text&quot;: &quot;information retrieval is a field of study.&quot;},
@@ -671,6 +673,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data-raw <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

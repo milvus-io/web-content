@@ -5,7 +5,7 @@ related_key: Kubernetes
 summary: Scoprite come installare il cluster Milvus su Kubernetes.
 title: Installare il cluster Milvus con Helm
 ---
-<h1 id="Run-Milvus-in-Kubernetes-with-Helm" class="common-anchor-header">Avviare Milvus in Kubernetes con Helm<button data-href="#Run-Milvus-in-Kubernetes-with-Helm" class="anchor-icon" translate="no">
+<h1 id="Run-Milvus-in-Kubernetes-with-Helm" class="common-anchor-header">Eseguire Milvus in Kubernetes con Helm<button data-href="#Run-Milvus-in-Kubernetes-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -54,14 +54,14 @@ title: Installare il cluster Milvus con Helm
       </svg>
     </button></h2><ul>
 <li><p><a href="https://helm.sh/docs/intro/install/">Installare Helm CLI</a>.</p></li>
-<li><p><a href="/docs/it/prerequisite-helm.md#How-can-I-start-a-K8s-cluster-locally-for-test-purposes">Creare un cluster K8s</a>.</p></li>
+<li><p><a href="/docs/it/v2.6.x/prerequisite-helm.md#How-can-I-start-a-K8s-cluster-locally-for-test-purposes">Creare un cluster K8s</a>.</p></li>
 <li><p>Installare una <a href="https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/">StorageClass</a>. È possibile verificare la StorageClass installata come segue.</p>
 <pre><code translate="no" class="language-bash">$ kubectl get sc
 
 NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Verificare <a href="/docs/it/prerequisite-helm.md">i requisiti hardware e software</a> prima dell'installazione.</p></li>
+<li><p>Verificare <a href="/docs/it/v2.6.x/prerequisite-helm.md">i requisiti hardware e software</a> prima dell'installazione.</p></li>
 <li><p>Prima di installare Milvus, si consiglia di utilizzare <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> per stimare i requisiti hardware in base alle dimensioni dei dati. Questo aiuta a garantire prestazioni e allocazione delle risorse ottimali per l'installazione di Milvus.</p></li>
 </ul>
 <div class="alert note">
@@ -88,7 +88,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <div class="alert note">
 <p>Il repository di Milvus Helm Charts all'indirizzo <code translate="no">https://github.com/milvus-io/milvus-helm</code> è stato archiviato. Ora si utilizza il nuovo repository all'indirizzo <code translate="no">https://github.com/zilliztech/milvus-helm</code>. Il repository archiviato è ancora disponibile per i grafici fino alla versione 4.0.31, mentre per le versioni successive si utilizza il nuovo repository.</p>
 </div>
-<p>Quindi prelevare i grafici Milvus dal repository come segue:</p>
+<p>Quindi prelevare i grafici di Milvus dal repository come segue:</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>helm repo update
 <button class="copy-code-btn"></button></code></pre>
 <p>È sempre possibile eseguire questo comando per recuperare i grafici Milvus Helm più recenti.</p>
@@ -127,19 +127,19 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Avete bisogno di una distribuzione standalone?</strong></p>
 <p>Se preferite distribuire Milvus in modalità standalone (nodo singolo) per lo sviluppo o i test, utilizzate questo comando:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.15 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.16 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Nota</strong>: la modalità standalone utilizza Woodpecker come coda di messaggi predefinita e abilita il componente Streaming Node. Per i dettagli, fate riferimento alla <a href="/docs/it/architecture_overview.md">Panoramica dell'architettura</a> e all'<a href="/docs/it/use-woodpecker.md">uso di Woodpecker</a>.</p>
+<p><strong>Nota</strong>: la modalità standalone utilizza Woodpecker come coda di messaggi predefinita e abilita il componente Streaming Node. Per i dettagli, fate riferimento alla <a href="/docs/it/v2.6.x/architecture_overview.md">Panoramica dell'architettura</a> e all'<a href="/docs/it/v2.6.x/use-woodpecker.md">uso di Woodpecker</a>.</p>
 </div>
 <p><strong>Distribuire il cluster Milvus:</strong></p>
-<p>Il comando seguente distribuisce un cluster Milvus con impostazioni ottimizzate per la versione 2.6.15, utilizzando Woodpecker come coda di messaggi consigliata:</p>
+<p>Il comando seguente distribuisce un cluster Milvus con impostazioni ottimizzate per la versione 2.6.16, utilizzando Woodpecker come coda di messaggi consigliata:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.15 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.16 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -155,16 +155,16 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <div class="alert note">
 <p><strong>Modifiche all'architettura in Milvus 2.6.x:</strong></p>
 <ul>
-<li><strong>Coda dei messaggi</strong>: <strong>Woodpecker</strong> è ora consigliato (riduce la manutenzione dell'infrastruttura rispetto a Pulsar)</li>
+<li><strong>Coda dei messaggi</strong>: <strong>Woodpecker</strong> è ora raccomandato (riduce la manutenzione dell'infrastruttura rispetto a Pulsar)</li>
 <li><strong>Nuovo componente</strong>: Il <strong>nodo di streaming</strong> è stato introdotto e abilitato per impostazione predefinita.</li>
 <li><strong>Componenti fusi</strong>: <strong>Index Node</strong> e <strong>Data Node</strong> sono stati combinati in un unico <strong>Data Node</strong>.</li>
 </ul>
-<p>Per i dettagli completi sull'architettura, consultare la <a href="/docs/it/architecture_overview.md">Panoramica dell'architettura</a>.</p>
+<p>Per i dettagli completi sull'architettura, consultare la <a href="/docs/it/v2.6.x/architecture_overview.md">Panoramica dell'architettura</a>.</p>
 </div>
 <p><strong>Opzioni alternative per la coda dei messaggi:</strong></p>
 <p>Se si preferisce usare <strong>Pulsar</strong> (scelta tradizionale) invece di Woodpecker:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.15 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.16 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -204,7 +204,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
     </button></h3><p>Verificate che l'installazione sia andata a buon fine controllando lo stato dei pod:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Attendere che tutti i pod mostrino lo stato "Running".</strong> Con la configurazione v2.6.15, si dovrebbero vedere pod simili a:</p>
+<p><strong>Attendere che tutti i pod mostrino lo stato "Running".</strong> Con la configurazione v2.6.16, si dovrebbero vedere pod simili a:</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
@@ -231,7 +231,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li><strong>Componenti Milvus</strong>: <code translate="no">mixcoord</code>, <code translate="no">datanode</code>, <code translate="no">querynode</code>, <code translate="no">proxy</code>, <code translate="no">streaming-node</code></li>
 <li><strong>Dipendenze</strong>: <code translate="no">etcd</code> (metadati), <code translate="no">minio</code> (archiviazione degli oggetti), <code translate="no">pulsar</code> (coda di messaggi)</li>
 </ul>
-<p>È inoltre possibile accedere alla <strong>WebUI di Milvus</strong> all'indirizzo <code translate="no">http://127.0.0.1:9091/webui/</code> una volta impostato il port forwarding (vedere il passo successivo). Per i dettagli, consultare <a href="/docs/it/milvus-webui.md">Milvus WebUI</a>.</p>
+<p>È inoltre possibile accedere alla <strong>WebUI di Milvus</strong> all'indirizzo <code translate="no">http://127.0.0.1:9091/webui/</code> una volta impostato il port forwarding (vedere il passo successivo). Per i dettagli, consultare <a href="/docs/it/v2.6.x/milvus-webui.md">Milvus WebUI</a>.</p>
 <h3 id="3-Connect-to-Milvus" class="common-anchor-header">3. Connettersi a Milvus<button data-href="#3-Connect-to-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -294,7 +294,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
       http:
         enabled: true
 </span><button class="copy-code-btn"></button></code></pre>
-<p>Per le voci di configurazione applicabili, fare riferimento a <a href="/docs/it/system_configuration.md">Configurazione del sistema</a>.</p></li>
+<p>Per le voci di configurazione applicabili, fare riferimento a <a href="/docs/it/v2.6.x/system_configuration.md">Configurazione del sistema</a>.</p></li>
 <li><p>Applicare il file <code translate="no">values.yaml</code>.</p></li>
 </ol>
 <pre><code translate="no" class="language-shell">helm upgrade my-release zilliztech/milvus --namespace my-namespace -f values.yaml
@@ -320,7 +320,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus viene fornito con uno strumento GUI integrato, chiamato Milvus WebUI, a cui si può accedere tramite il browser. Milvus WebUI migliora l'osservabilità del sistema con un'interfaccia semplice e intuitiva. Con Milvus Web UI si possono osservare le statistiche e le metriche dei componenti e delle dipendenze di Milvus, controllare i dettagli del database e della raccolta ed elencare le configurazioni dettagliate di Milvus. Per maggiori informazioni su Milvus Web UI, vedere <a href="/docs/it/milvus-webui.md">Milvus WebUI</a>.</p>
+    </button></h2><p>Milvus viene fornito con uno strumento GUI integrato, chiamato Milvus WebUI, a cui si può accedere tramite il browser. Milvus WebUI migliora l'osservabilità del sistema con un'interfaccia semplice e intuitiva. Con Milvus Web UI si possono osservare le statistiche e le metriche dei componenti e delle dipendenze di Milvus, controllare i dettagli del database e della raccolta ed elencare le configurazioni dettagliate di Milvus. Per maggiori informazioni su Milvus Web UI, vedere <a href="/docs/it/v2.6.x/milvus-webui.md">Milvus WebUI</a>.</p>
 <p>Per abilitare l'accesso all'interfaccia web di Milvus, è necessario effettuare il port-forward del pod proxy su una porta locale.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
@@ -496,27 +496,27 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>Dopo aver installato Milvus in Docker, è possibile:</p>
 <ul>
-<li><p>Controllare <a href="/docs/it/quickstart.md">Hello Milvus</a> per vedere cosa può fare Milvus.</p></li>
+<li><p>Controllare <a href="/docs/it/v2.6.x/quickstart.md">Hello Milvus</a> per vedere cosa può fare Milvus.</p></li>
 <li><p>Imparare le operazioni di base di Milvus:</p>
 <ul>
-<li><a href="/docs/it/manage_databases.md">Gestire i database</a></li>
-<li><a href="/docs/it/manage-collections.md">Gestire le collezioni</a></li>
-<li><a href="/docs/it/manage-partitions.md">Gestire le partizioni</a></li>
-<li><a href="/docs/it/insert-update-delete.md">Inserire, inserire ed eliminare</a></li>
-<li><a href="/docs/it/single-vector-search.md">Ricerca a vettore singolo</a></li>
-<li><a href="/docs/it/multi-vector-search.md">Ricerca ibrida</a></li>
+<li><a href="/docs/it/v2.6.x/manage_databases.md">Gestire i database</a></li>
+<li><a href="/docs/it/v2.6.x/manage-collections.md">Gestire le collezioni</a></li>
+<li><a href="/docs/it/v2.6.x/manage-partitions.md">Gestire le partizioni</a></li>
+<li><a href="/docs/it/v2.6.x/insert-update-delete.md">Inserire, inserire ed eliminare</a></li>
+<li><a href="/docs/it/v2.6.x/single-vector-search.md">Ricerca a vettore singolo</a></li>
+<li><a href="/docs/it/v2.6.x/multi-vector-search.md">Ricerca ibrida</a></li>
 </ul></li>
-<li><p><a href="/docs/it/upgrade_milvus_cluster-helm.md">Aggiornare Milvus usando Helm Chart</a>.</p></li>
-<li><p><a href="/docs/it/scaleout.md">Scalare il cluster Milvus</a>.</p></li>
+<li><p><a href="/docs/it/v2.6.x/upgrade_milvus_cluster-helm.md">Aggiornare Milvus usando Helm Chart</a>.</p></li>
+<li><p><a href="/docs/it/v2.6.x/scaleout.md">Scalare il cluster Milvus</a>.</p></li>
 <li><p>Distribuire il cluster Milvus su cloud:</p>
 <ul>
-<li><a href="/docs/it/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/it/gcp.md">Google Cloud</a></li>
-<li><a href="/docs/it/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/it/v2.6.x/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/it/v2.6.x/gcp.md">Google Cloud</a></li>
+<li><a href="/docs/it/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Esplorate <a href="/docs/it/milvus-webui.md">Milvus WebUI</a>, un'interfaccia web intuitiva per l'osservabilità e la gestione di Milvus.</p></li>
-<li><p>Esplorate <a href="/docs/it/milvus_backup_overview.md">Milvus Backup</a>, uno strumento open-source per il backup dei dati Milvus.</p></li>
-<li><p>Esplorate <a href="/docs/it/birdwatcher_overview.md">Birdwatcher</a>, uno strumento open-source per il debug di Milvus e gli aggiornamenti dinamici della configurazione.</p></li>
+<li><p>Esplorate <a href="/docs/it/v2.6.x/milvus-webui.md">Milvus WebUI</a>, un'interfaccia web intuitiva per l'osservabilità e la gestione di Milvus.</p></li>
+<li><p>Esplorate <a href="/docs/it/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, uno strumento open-source per il backup dei dati Milvus.</p></li>
+<li><p>Esplorate <a href="/docs/it/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, uno strumento open-source per il debug di Milvus e gli aggiornamenti dinamici della configurazione.</p></li>
 <li><p>Esplorate <a href="https://github.com/zilliztech/attu">Attu</a>, uno strumento open-source per la gestione intuitiva di Milvus.</p></li>
-<li><p><a href="/docs/it/monitor.md">Monitorate Milvus con Prometheus</a>.</p></li>
+<li><p><a href="/docs/it/v2.6.x/monitor.md">Monitorate Milvus con Prometheus</a>.</p></li>
 </ul>

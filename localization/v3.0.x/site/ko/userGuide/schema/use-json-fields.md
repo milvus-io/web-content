@@ -3,7 +3,7 @@ id: use-json-fields.md
 title: JSON 필드
 summary: >-
   Milvus를 사용하면 JSON 데이터 유형을 사용하여 단일 필드 내에 구조화된 데이터를 저장하고 색인할 수 있습니다. 이를 통해 중첩
-  속성이 있는 유연한 스키마를 구현하는 동시에 JSON 인덱싱을 통해 효율적인 필터링을 할 수 있습니다.
+  속성이 있는 유연한 스키마를 구현하는 동시에 JSON 인덱싱을 통해 효율적인 필터링이 가능합니다.
 ---
 <h1 id="JSON-Field" class="common-anchor-header">JSON 필드<button data-href="#JSON-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -247,6 +247,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;product_catalog\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -421,6 +422,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/product_catalog/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;data\&quot;: <span class="hljs-variable">$entities</span>
 }&quot;</span>
@@ -804,7 +806,7 @@ metadata[&quot;supplier&quot;][&quot;country&quot;] = &quot;USA&quot;
 <p>값에 맞는 첫 번째 유형이 인덱싱에 사용됩니다.</p>
 <p>즉, 추론된 유형은 항상 <strong>이 네 가지 중 하나가</strong> 됩니다.</p>
 <p>유형 추론은 <strong>문서별로</strong> 수행되므로 동일한 경로가 문서마다 다른 유형으로 추론될 수 있습니다.</p>
-<p>유형 추론 후 평활화된 데이터는 내부적으로 예를 들어 추론된 유형을 가진 용어로 표현됩니다:</p>
+<p>유형 추론 후, 평활화된 데이터는 내부적으로 예를 들어 추론된 유형을 가진 용어로 표현됩니다:</p>
 <pre><code translate="no" class="language-plaintext">(&quot;category&quot;, Text, &quot;electronics&quot;)
 (&quot;price&quot;, Double, 99.99)
 (&quot;supplier.country&quot;, Text, &quot;USA&quot;)
@@ -897,6 +899,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;product_catalog\&quot;,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
@@ -917,7 +920,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>JSON 필드를 삽입하고 인덱싱한 후에는 JSON 경로 구문이 포함된 표준 필터 표현식을 사용하여 필터링할 수 있습니다.</p>
+    </button></h2><p>JSON 필드를 삽입하고 인덱싱한 후 JSON 경로 구문이 포함된 표준 필터 표현식을 사용하여 필터링할 수 있습니다.</p>
 <p>예를 들면 다음과 같습니다:</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

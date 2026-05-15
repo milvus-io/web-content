@@ -90,7 +90,7 @@ beta: Milvus 2.6.4+
 </tr>
 </table></p>
 <p>保持集合層級和 Structs 合併的向量欄位數量不超過或等於 10。</p></li>
-<li><p><strong>可空值與預設值</strong></p>
+<li><p><strong>可為空與預設值</strong></p>
 <p>Structs 陣列欄位不可為空，也不接受任何預設值。</p></li>
 <li><p><strong>函數</strong></p>
 <p>您不能使用函數從 Struct 中的標量欄位衍生出向量欄位。</p></li>
@@ -117,7 +117,7 @@ beta: Milvus 2.6.4+
 </table></p>
 <p>Array of Structs 欄位中的標量欄位不支援索引。</p></li>
 <li><p><strong>倒插資料</strong></p>
-<p>Structs 在合併模式下不支援 upsert。但是，您仍然可以在覆寫模式下執行 upserts 來更新 Structs 中的資料。有關在合併模式和覆寫模式下 upsert 的差異，請參閱<a href="/docs/zh-hant/upsert-entities.md#Overview">Upsert Entities</a>。</p></li>
+<p>Structs 在合併模式下不支援 upsert。但是，您仍然可以在覆寫模式下執行 upserts 來更新 Structs 中的資料。有關在合併模式和覆寫模式下 upsert 的差異，請參閱<a href="/docs/zh-hant/v2.6.x/upsert-entities.md#Overview">Upsert Entities</a>。</p></li>
 <li><p><strong>標量篩選</strong></p>
 <p>您不能在搜尋和查詢的過濾表達式中使用 Structs 陣列或其 Struct 元素中的任何欄位。</p></li>
 </ul>
@@ -374,7 +374,7 @@ SCHEMA=<span class="hljs-string">&#x27;{
         ></path>
       </svg>
     </button></h2><p>所有向量欄位都必須設定索引，包括集合中的向量欄位和元素 Struct 中定義的向量欄位。</p>
-<p>適用的索引參數會依據使用中的索引類型而有所不同。有關適用索引參數的詳細資訊，請參閱<a href="/docs/zh-hant/index-explained.md">Index Explained</a>以及特定於您所選索引類型的說明文件頁面。</p>
+<p>適用的索引參數會依據使用的索引類型而有所不同。有關適用索引參數的詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/index-explained.md">Index Explained</a>以及特定於您所選索引類型的說明文件頁面。</p>
 <p>若要為嵌入式清單建立索引，您需要將其索引類型設定為<code translate="no">AUTOINDEX</code> 或<code translate="no">HNSW</code> ，並使用<code translate="no">MAX_SIM_COSINE</code> 作為 Milvus 的度量類型，以衡量嵌入式清單之間的相似性。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -496,6 +496,7 @@ client.createCollection(requestCreate);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/create&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;description\&quot;: \&quot;A collection for storing book information with struct array chunks\&quot;,
@@ -611,6 +612,7 @@ row.add(<span class="hljs-string">&quot;chunks&quot;</span>, structArr);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/insert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -803,6 +805,7 @@ embeddingList1=<span class="hljs-string">&#x27;[[0.2,0.9,0.4,-0.3,0.2]]&#x27;</s
 embeddingList2=<span class="hljs-string">&#x27;[[-0.2,-0.2,0.5,0.6,0.9],[-0.4,0.3,0.5,0.8,0.2]]&#x27;</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>],
@@ -907,6 +910,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>, <span class="hljs-variable">$embeddingList2</span>],
@@ -1010,4 +1014,4 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>原生 Array of Structs 資料類型的開發，代表 Milvus 處理複雜資料結構能力的一大進步。為了更好地瞭解其使用案例並最大化這項新功能，我們鼓勵您閱讀「<a href="/docs/zh-hant/best-practices-for-array-of-structs.md">使用結構陣列的模式設計</a>」。</p>
+    </button></h2><p>原生 Array of Structs 資料類型的開發，代表 Milvus 處理複雜資料結構能力的一大進步。為了更好地瞭解其使用案例並最大化這項新功能，我們鼓勵您閱讀「<a href="/docs/zh-hant/v2.6.x/best-practices-for-array-of-structs.md">使用結構陣列的模式設計</a>」。</p>

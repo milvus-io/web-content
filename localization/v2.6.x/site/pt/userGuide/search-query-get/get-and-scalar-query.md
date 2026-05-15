@@ -23,7 +23,7 @@ summary: >-
       </svg>
     </button></h1><p>Para além das pesquisas ANN, o Milvus também suporta a filtragem de metadados através de consultas. Esta página apresenta como utilizar Query, Get e QueryIterators para efetuar a filtragem de metadados.</p>
 <div class="alert note">
-<p>Se adicionar dinamicamente novos campos após a criação da coleção, as consultas que incluem estes campos devolverão os valores predefinidos definidos ou NULL para entidades que não tenham definido valores explicitamente. Para obter detalhes, consulte <a href="/docs/pt/add-fields-to-an-existing-collection.md">Adicionar campos a uma coleção existente</a>.</p>
+<p>Se adicionar dinamicamente novos campos após a criação da coleção, as consultas que incluem estes campos devolverão os valores predefinidos definidos ou NULL para entidades que não tenham definido valores explicitamente. Para obter detalhes, consulte <a href="/docs/pt/v2.6.x/add-fields-to-an-existing-collection.md">Adicionar campos a uma coleção existente</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -211,6 +211,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/get&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;id&quot;: [0, 1, 2],
@@ -306,6 +307,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;color like \&quot;red%\&quot;&quot;,
@@ -584,6 +586,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/get&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -596,6 +599,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/get&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -622,7 +626,7 @@ curl --request POST \
       </svg>
     </button></h2><p>Para extrair um subconjunto representativo de dados da sua coleção para exploração de dados ou testes de desenvolvimento, use a expressão <code translate="no">RANDOM_SAMPLE(sampling_factor)</code>, em que <code translate="no">sampling_factor</code> é um valor flutuante entre 0 e 1 que representa a porcentagem de dados a serem amostrados.</p>
 <div class="alert note">
-<p>Para uso detalhado, exemplos avançados e práticas recomendadas, consulte <a href="/docs/pt/random-sampling.md">Amostragem aleatória</a>.</p>
+<p>Para uso detalhado, exemplos avançados e práticas recomendadas, consulte <a href="/docs/pt/v2.6.x/random-sampling.md">Amostragem aleatória</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -743,7 +747,7 @@ resultSet, err = client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs
         ></path>
       </svg>
     </button></h2><p>Se a sua coleção tiver um campo <code translate="no">TIMESTAMPTZ</code>, pode substituir temporariamente o fuso horário predefinido da base de dados ou da coleção para uma única operação, definindo o parâmetro <code translate="no">timezone</code> na chamada de consulta. Este parâmetro controla a forma como os valores de <code translate="no">TIMESTAMPTZ</code> são apresentados e comparados durante a operação.</p>
-<p>O valor de <code translate="no">timezone</code> deve ser um <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identificador de fuso horário IANA</a> válido (por exemplo, <strong>Ásia/Shanghai</strong>, <strong>América/Chicago</strong> ou <strong>UTC</strong>). Para mais informações sobre como utilizar um campo <code translate="no">TIMESTAMPTZ</code>, consulte <a href="/docs/pt/timestamptz-field.md">Campo TIMESTAMPTZ</a>.</p>
+<p>O valor de <code translate="no">timezone</code> deve ser um <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identificador de fuso horário IANA</a> válido (por exemplo, <strong>Ásia/Shanghai</strong>, <strong>América/Chicago</strong> ou <strong>UTC</strong>). Para mais informações sobre como utilizar um campo <code translate="no">TIMESTAMPTZ</code>, consulte <a href="/docs/pt/v2.6.x/timestamptz-field.md">Campo TIMESTAMPTZ</a>.</p>
 <p>O exemplo abaixo mostra como definir temporariamente um fuso horário para uma operação de consulta:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

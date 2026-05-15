@@ -54,14 +54,14 @@ title: 使用 Helm 安装 Milvus 群集
       </svg>
     </button></h2><ul>
 <li><p><a href="https://helm.sh/docs/intro/install/">安装 Helm CLI</a>。</p></li>
-<li><p><a href="/docs/zh/prerequisite-helm.md#How-can-I-start-a-K8s-cluster-locally-for-test-purposes">创建 K8s 集群</a>。</p></li>
+<li><p><a href="/docs/zh/v2.6.x/prerequisite-helm.md#How-can-I-start-a-K8s-cluster-locally-for-test-purposes">创建 K8s 集群</a>。</p></li>
 <li><p>安装<a href="https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/">StorageClass</a>。您可以按以下步骤检查已安装的 StorageClass。</p>
 <pre><code translate="no" class="language-bash">$ kubectl get sc
 
 NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>安装前检查<a href="/docs/zh/prerequisite-helm.md">硬件和软件要求</a>。</p></li>
+<li><p>安装前检查<a href="/docs/zh/v2.6.x/prerequisite-helm.md">硬件和软件要求</a>。</p></li>
 <li><p>安装 Milvus 之前，建议使用<a href="https://milvus.io/tools/sizing">Milvus 大小工具</a>，根据数据大小估算硬件需求。这有助于确保 Milvus 安装的最佳性能和资源分配。</p></li>
 </ul>
 <div class="alert note">
@@ -127,19 +127,19 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>需要独立部署？</strong></p>
 <p>如果你更喜欢以独立模式（单节点）部署 Milvus 以进行开发或测试，请使用此命令：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.15 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.16 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>注意</strong>：独立模式使用 Woodpecker 作为默认消息队列，并启用流节点组件。有关详情，请参阅<a href="/docs/zh/architecture_overview.md">架构概述</a>和<a href="/docs/zh/use-woodpecker.md">使用 Woodpecker</a>。</p>
+<p><strong>注意</strong>：独立模式使用 Woodpecker 作为默认消息队列，并启用流节点组件。有关详情，请参阅<a href="/docs/zh/v2.6.x/architecture_overview.md">架构概述</a>和<a href="/docs/zh/v2.6.x/use-woodpecker.md">使用 Woodpecker</a>。</p>
 </div>
 <p><strong>部署 Milvus 集群：</strong></p>
-<p>以下命令使用 Woodpecker 作为推荐的消息队列，以针对 v2.6.15 的优化设置部署 Milvus 群集：</p>
+<p>以下命令使用 Woodpecker 作为推荐的消息队列，以 v2.6.16 的优化设置部署 Milvus 群集：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.15 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.16 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -159,12 +159,12 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <li><strong>新组件</strong>：引入<strong>流节点</strong>并默认启用</li>
 <li><strong>合并组件</strong>：<strong>索引节点</strong>和<strong>数据节点</strong>合并为一个<strong>数据节点</strong></li>
 </ul>
-<p>有关完整架构的详细信息，请参阅<a href="/docs/zh/architecture_overview.md">架构概述</a>。</p>
+<p>有关完整架构的详细信息，请参阅<a href="/docs/zh/v2.6.x/architecture_overview.md">架构概述</a>。</p>
 </div>
 <p><strong>其他消息队列选项：</strong></p>
 <p>如果你更喜欢使用<strong>Pulsar</strong>（传统选择）而不是 Woodpecker：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.15 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.16 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -204,7 +204,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
     </button></h3><p>通过检查 pod 状态验证部署是否成功：</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>等待所有 pod 显示 "正在运行 "状态。</strong>在 v2.6.15 配置下，您应该能看到类似以下的 pod：</p>
+<p><strong>等待所有 pod 显示 "正在运行 "状态。</strong>在 v2.6.16 配置下，您应该能看到类似以下的 pod：</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
@@ -231,7 +231,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li><strong>Milvus 组件</strong>：<code translate="no">mixcoord</code>,<code translate="no">datanode</code>,<code translate="no">querynode</code>,<code translate="no">proxy</code> 、<code translate="no">streaming-node</code></li>
 <li><strong>依赖关系</strong>：<code translate="no">etcd</code> （元数据）、<code translate="no">minio</code> （对象存储）、<code translate="no">pulsar</code> （消息队列）</li>
 </ul>
-<p>端口转发设置完成后，还可以通过<code translate="no">http://127.0.0.1:9091/webui/</code> 访问<strong>Milvus WebUI</strong>（见下一步）。详情请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>。</p>
+<p>端口转发设置完成后，还可以通过<code translate="no">http://127.0.0.1:9091/webui/</code> 访问<strong>Milvus WebUI</strong>（见下一步）。详情请参阅<a href="/docs/zh/v2.6.x/milvus-webui.md">Milvus WebUI</a>。</p>
 <h3 id="3-Connect-to-Milvus" class="common-anchor-header">3.连接到 Milvus<button data-href="#3-Connect-to-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -294,7 +294,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
       http:
         enabled: true
 </span><button class="copy-code-btn"></button></code></pre>
-<p>有关适用的配置项，请参阅<a href="/docs/zh/system_configuration.md">系统配置</a>。</p></li>
+<p>有关适用的配置项，请参阅<a href="/docs/zh/v2.6.x/system_configuration.md">系统配置</a>。</p></li>
 <li><p>应用<code translate="no">values.yaml</code> 文件。</p></li>
 </ol>
 <pre><code translate="no" class="language-shell">helm upgrade my-release zilliztech/milvus --namespace my-namespace -f values.yaml
@@ -320,7 +320,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 随附一个名为 Milvus WebUI 的内置图形用户界面工具，可通过浏览器访问。Milvus Web UI 采用简单直观的界面，增强了系统的可观察性。你可以使用 Milvus Web UI 观察 Milvus 组件和依赖关系的统计和指标，检查数据库和 Collections 的详细信息，并列出详细的 Milvus 配置。有关 Milvus Web UI 的详细信息，请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>。</p>
+    </button></h2><p>Milvus 随附一个名为 Milvus WebUI 的内置图形用户界面工具，可通过浏览器访问。Milvus Web UI 采用简单直观的界面，增强了系统的可观察性。你可以使用 Milvus Web UI 观察 Milvus 组件和依赖关系的统计和指标，检查数据库和 Collections 的详细信息，并列出详细的 Milvus 配置。有关 Milvus Web UI 的详细信息，请参阅<a href="/docs/zh/v2.6.x/milvus-webui.md">Milvus WebUI</a>。</p>
 <p>要启用对 Milvus Web UI 的访问，需要将代理 pod 的端口转发到本地端口。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
@@ -382,7 +382,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>图像提取脚本是用 Python 开发的。您应在<code translate="no">requirement.txt</code> 文件中下载脚本及其依赖项。</p>
+    </button></h3><p>图像提取脚本是用 Python 开发的。您应在<code translate="no">requirement.txt</code> 文件中下载该脚本及其依赖项。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/offline/requirements.txt</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/offline/save_image.py</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -496,27 +496,27 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>在 Docker 中安装 Milvus 后，你可以</p>
 <ul>
-<li><p>查看<a href="/docs/zh/quickstart.md">Hello Milvus</a>，了解 Milvus 的功能。</p></li>
+<li><p>查看<a href="/docs/zh/v2.6.x/quickstart.md">Hello Milvus</a>，了解 Milvus 的功能。</p></li>
 <li><p>了解 Milvus 的基本操作：</p>
 <ul>
-<li><a href="/docs/zh/manage_databases.md">管理数据库</a></li>
-<li><a href="/docs/zh/manage-collections.md">管理 Collections</a></li>
-<li><a href="/docs/zh/manage-partitions.md">管理分区</a></li>
-<li><a href="/docs/zh/insert-update-delete.md">插入、倒置和删除</a></li>
-<li><a href="/docs/zh/single-vector-search.md">单向量搜索</a></li>
-<li><a href="/docs/zh/multi-vector-search.md">混合搜索</a></li>
+<li><a href="/docs/zh/v2.6.x/manage_databases.md">管理数据库</a></li>
+<li><a href="/docs/zh/v2.6.x/manage-collections.md">管理 Collections</a></li>
+<li><a href="/docs/zh/v2.6.x/manage-partitions.md">管理分区</a></li>
+<li><a href="/docs/zh/v2.6.x/insert-update-delete.md">插入、倒置和删除</a></li>
+<li><a href="/docs/zh/v2.6.x/single-vector-search.md">单向量搜索</a></li>
+<li><a href="/docs/zh/v2.6.x/multi-vector-search.md">混合搜索</a></li>
 </ul></li>
-<li><p><a href="/docs/zh/upgrade_milvus_cluster-helm.md">使用 Helm 图表升级 Milvus</a>。</p></li>
-<li><p><a href="/docs/zh/scaleout.md">扩展你的 Milvus 集群</a>。</p></li>
+<li><p><a href="/docs/zh/v2.6.x/upgrade_milvus_cluster-helm.md">使用 Helm 图表升级 Milvus</a>。</p></li>
+<li><p><a href="/docs/zh/v2.6.x/scaleout.md">扩展你的 Milvus 集群</a>。</p></li>
 <li><p>在云上部署你的 Milvus 集群：</p>
 <ul>
-<li><a href="/docs/zh/eks.md">亚马逊 EKS</a></li>
-<li><a href="/docs/zh/gcp.md">谷歌云</a></li>
-<li><a href="/docs/zh/azure.md">微软 Azure</a></li>
+<li><a href="/docs/zh/v2.6.x/eks.md">亚马逊 EKS</a></li>
+<li><a href="/docs/zh/v2.6.x/gcp.md">谷歌云</a></li>
+<li><a href="/docs/zh/v2.6.x/azure.md">微软 Azure</a></li>
 </ul></li>
-<li><p>探索<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>，一个用于 Milvus 可观察性和管理的直观 Web 界面。</p></li>
-<li><p>探索<a href="/docs/zh/milvus_backup_overview.md">Milvus 备份</a>，一个用于 Milvus 数据备份的开源工具。</p></li>
-<li><p>探索<a href="/docs/zh/birdwatcher_overview.md">Birdwatcher</a>，用于调试 Milvus 和动态配置更新的开源工具。</p></li>
+<li><p>探索<a href="/docs/zh/v2.6.x/milvus-webui.md">Milvus WebUI</a>，一个用于 Milvus 可观察性和管理的直观 Web 界面。</p></li>
+<li><p>探索<a href="/docs/zh/v2.6.x/milvus_backup_overview.md">Milvus 备份</a>，一个用于 Milvus 数据备份的开源工具。</p></li>
+<li><p>探索<a href="/docs/zh/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>，用于调试 Milvus 和动态配置更新的开源工具。</p></li>
 <li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>，一个用于直观管理 Milvus 的开源图形用户界面工具。</p></li>
-<li><p><a href="/docs/zh/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
+<li><p><a href="/docs/zh/v2.6.x/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
 </ul>

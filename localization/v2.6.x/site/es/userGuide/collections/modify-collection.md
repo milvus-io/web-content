@@ -36,7 +36,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Puedes renombrar una colección de la siguiente manera.</p>
+    </button></h2><p>Puede cambiar el nombre de una colección de la siguiente manera.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -120,6 +120,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/rename&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;newCollectionName&quot;: &quot;my_new_collection&quot;
@@ -163,19 +164,19 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">collection.ttl.seconds</code></p></td>
-     <td><p>Si los datos de una colección necesitan ser borrados después de un periodo específico, considere establecer su Tiempo de Vida (TTL) en segundos. Una vez que el TTL se agota, Milvus elimina todas las entidades de la colección. </p><p>El borrado es asíncrono, lo que indica que las búsquedas y consultas siguen siendo posibles antes de que se complete el borrado.</p><p>Para más detalles, consulte <a href="/docs/es/set-collection-ttl.md">Establecer TTL de la colección</a>.</p></td>
+     <td><p>Si los datos de una colección necesitan ser borrados después de un periodo específico, considere establecer su Tiempo de Vida (TTL) en segundos. Una vez que el TTL se agota, Milvus elimina todas las entidades de la colección. </p><p>El borrado es asíncrono, lo que indica que las búsquedas y consultas siguen siendo posibles antes de que se complete el borrado.</p><p>Para más detalles, consulte <a href="/docs/es/v2.6.x/set-collection-ttl.md">Establecer TTL de la colección</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mmap.enabled</code></p></td>
-     <td><p>El mapeo de memoria (Mmap) permite el acceso directo en memoria a grandes archivos en disco, permitiendo a Milvus almacenar índices y datos tanto en memoria como en discos duros. Este enfoque ayuda a optimizar la política de colocación de datos basada en la frecuencia de acceso, ampliando la capacidad de almacenamiento de las colecciones sin afectar al rendimiento de la búsqueda.</p><p>Para más detalles, consulte <a href="/docs/es/mmap.md">Utilizar mmap</a>.</p></td>
+     <td><p>El mapeo de memoria (Mmap) permite el acceso directo en memoria a grandes archivos en disco, permitiendo a Milvus almacenar índices y datos tanto en memoria como en discos duros. Este enfoque ayuda a optimizar la política de colocación de datos basada en la frecuencia de acceso, ampliando la capacidad de almacenamiento de las colecciones sin afectar al rendimiento de la búsqueda.</p><p>Para más detalles, consulte <a href="/docs/es/v2.6.x/mmap.md">Uso de mmap</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">partitionkey.isolation</code></p></td>
-     <td><p>Con el Aislamiento de Clave de Partición activado, Milvus agrupa las entidades basándose en el valor de la Clave de Partición y crea un índice separado para cada uno de estos grupos. Al recibir una petición de búsqueda, Milvus localiza el índice basado en el valor de la Clave de Partición especificado en la condición de filtrado y restringe el ámbito de búsqueda dentro de las entidades incluidas en el índice, evitando así escanear entidades irrelevantes durante la búsqueda y mejorando enormemente el rendimiento de la búsqueda.</p><p>Para obtener más información, consulte <a href="/docs/es/use-partition-key.md#Use-Partition-Key-Isolation">Utilizar aislamiento de clave de partición</a>.</p></td>
+     <td><p>Con el Aislamiento de Clave de Partición activado, Milvus agrupa las entidades basándose en el valor de la Clave de Partición y crea un índice separado para cada uno de estos grupos. Al recibir una petición de búsqueda, Milvus localiza el índice basado en el valor de la Clave de Partición especificado en la condición de filtrado y restringe el ámbito de búsqueda dentro de las entidades incluidas en el índice, evitando así escanear entidades irrelevantes durante la búsqueda y mejorando enormemente el rendimiento de la búsqueda.</p><p>Para obtener más información, consulte <a href="/docs/es/v2.6.x/use-partition-key.md#Use-Partition-Key-Isolation">Utilizar aislamiento de clave de partición</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dynamicfield.enabled</code></p></td>
-     <td><p>Habilita el campo dinámico para las colecciones que se crearon sin habilitarlo. Una vez habilitado, puede insertar entidades con campos no definidos en el esquema original. Para obtener más información, consulte <a href="/docs/es/enable-dynamic-field.md">Campo dinámico</a>.</p></td>
+     <td><p>Habilita el campo dinámico para las colecciones que se crearon sin habilitarlo. Una vez habilitado, puede insertar entidades con campos no definidos en el esquema original. Para obtener más información, consulte <a href="/docs/es/v2.6.x/enable-dynamic-field.md">Campo dinámico</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">allow_insert_auto_id</code></p></td>
@@ -183,7 +184,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">timezone</code></p></td>
-     <td><p>Especifica la zona horaria por defecto para esta colección cuando se manejan operaciones sensibles al tiempo, especialmente los campos <code translate="no">TIMESTAMPTZ</code>. Las marcas de tiempo se almacenan internamente en UTC, y Milvus convierte los valores para su visualización y comparación de acuerdo con esta configuración. Si se establece, la zona horaria de la colección anula la zona horaria predeterminada de la base de datos; el parámetro de zona horaria de una consulta puede anular temporalmente ambas. El valor debe ser un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identificador de zona horaria IANA</a> válido (por ejemplo, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> o <strong>UTC</strong>). Para obtener más información sobre cómo utilizar un campo <code translate="no">TIMESTAMPTZ</code>, consulte <a href="/docs/es/timestamptz-field.md">Campo TIMESTAMPTZ</a>.</p></td>
+     <td><p>Especifica la zona horaria por defecto para esta colección cuando se manejan operaciones sensibles al tiempo, especialmente los campos <code translate="no">TIMESTAMPTZ</code>. Las marcas de tiempo se almacenan internamente en UTC, y Milvus convierte los valores para su visualización y comparación de acuerdo con esta configuración. Si se establece, la zona horaria de la colección anula la zona horaria predeterminada de la base de datos; el parámetro de zona horaria de una consulta puede anular temporalmente ambas. El valor debe ser un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identificador de zona horaria IANA</a> válido (por ejemplo, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> o <strong>UTC</strong>). Para obtener más información sobre cómo utilizar un campo <code translate="no">TIMESTAMPTZ</code>, consulte <a href="/docs/es/v2.6.x/timestamptz-field.md">Campo TIMESTAMPTZ</a>.</p></td>
    </tr>
 </table>
 <h3 id="Example-1-Set-collection-TTL" class="common-anchor-header">Ejemplo 1: Establecer TTL de recogida<button data-href="#Example-1-Set-collection-TTL" class="anchor-icon" translate="no">
@@ -245,6 +246,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;test_collection&quot;,
     &quot;properties&quot;: {
@@ -303,6 +305,7 @@ client.alterCollection(alterCollectionReq);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;properties&quot;: {
@@ -361,6 +364,7 @@ client.alterCollection(alterCollectionReq);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
@@ -420,6 +424,7 @@ client.alterCollection(alterCollectionReq);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
@@ -479,6 +484,7 @@ client.alterCollection(alterCollectionReq);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
@@ -533,6 +539,7 @@ client.alterCollection(alterCollectionReq);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
@@ -586,6 +593,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/drop_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;propertyKeys&quot;: [

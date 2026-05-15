@@ -302,7 +302,7 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus 还提供适合不同语言和场景的其他各种分析器。更多详情，请参阅<a href="/docs/zh/analyzer-overview.md">分析器概述</a>。</p>
+<p>Milvus 还提供适合不同语言和场景的其他各种分析器。有关详细信息，请参阅<a href="/docs/zh/analyzer-overview.md">分析器概述</a>。</p>
 <h2 id="Use-text-match" class="common-anchor-header">使用文本匹配<button data-href="#Use-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -399,7 +399,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h3><p>文本匹配可与向量相似性搜索结合使用，以缩小搜索范围并提高搜索性能。通过在向量相似性搜索前使用文本匹配过滤 Collections，可以减少需要搜索的文档数量，从而加快查询速度。</p>
-<p>在这个示例中，<code translate="no">filter</code> 表达式过滤了搜索结果，使其只包含与指定术语<code translate="no">keyword1</code> 或<code translate="no">keyword2</code> 匹配的文档。然后对这个过滤后的文档子集执行向量相似性搜索。</p>
+<p>在本例中，<code translate="no">filter</code> 表达式过滤了搜索结果，使其只包含与指定术语<code translate="no">keyword1</code> 或<code translate="no">keyword2</code> 匹配的文档。然后在此过滤后的文档子集中执行向量相似性搜索。</p>
 <div class="alert note">
 <p>通过配置文本高亮显示器，可以在搜索结果中高亮显示匹配的术语。有关详情，请参阅<a href="/docs/zh/text-highlighter.md">文本高亮显示器</a>。</p>
 </div>
@@ -467,6 +467,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;annsField&quot;: &quot;embeddings&quot;,
@@ -546,6 +547,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$filter</span>&quot;</span><span class="hljs-string">&#x27;,

@@ -83,7 +83,7 @@ summary: 권한을 부여하는 프로세스를 간소화하려면 여러 권한
     </button></h3><ul>
 <li><p><strong>CollectionReadOnly(COLL_RO</strong>): 컬렉션 데이터를 읽을 수 있는 권한이 포함됩니다.</p></li>
 <li><p><strong>CollectionReadWrite(COLL_RW</strong>): 컬렉션 데이터를 읽고 쓸 수 있는 권한이 포함됩니다.</p></li>
-<li><p><strong>CollectionAdmin(COLL_ADMIN)</strong>: 컬렉션 데이터를 읽고 쓸 수 있는 권한과 컬렉션을 관리할 수 있는 권한이 포함됩니다.</p></li>
+<li><p><strong>CollectionAdmin(COLL_ADMIN)</strong>: 컬렉션 데이터를 읽고 쓸 수 있는 권한과 컬렉션을 관리할 수 있는 권한을 포함합니다.</p></li>
 </ul>
 <p>아래 표에는 컬렉션 수준에서 세 가지 기본 제공 권한 그룹에 포함된 특정 권한이 나열되어 있습니다:</p>
 <table>
@@ -519,7 +519,7 @@ summary: 권한을 부여하는 프로세스를 간소화하려면 여러 권한
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>다음 예는 <code translate="no">privilege_group_1</code> 라는 이름의 권한 그룹을 만드는 방법을 보여줍니다.</p>
+    </button></h3><p>다음 예는 <code translate="no">privilege_group_1</code> 라는 권한 그룹을 만드는 방법을 보여줍니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#go">Go</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -547,6 +547,7 @@ client.createPrivilegeGroup(CreatePrivilegeGroupReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;
 }&#x27;</span>
@@ -598,6 +599,7 @@ client.addPrivilegesToGroup(AddPrivilegesToGroupReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/add_privileges_to_group&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;,
     &quot;privileges&quot;:[&quot;Query&quot;, &quot;Search&quot;]
@@ -648,6 +650,7 @@ client.removePrivilegesFromGroup(RemovePrivilegesFromGroupReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/remove_privileges_from_group&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;,
     &quot;privileges&quot;:[&quot;Search&quot;]
@@ -696,6 +699,7 @@ List&lt;PrivilegeGroup&gt; groups = resp.getPrivilegeGroups();
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/list&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>아래는 출력 예시입니다.</p>
@@ -742,6 +746,7 @@ client.dropPrivilegeGroup(DropPrivilegeGroupReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/drop&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;
 }&#x27;</span>

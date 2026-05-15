@@ -210,6 +210,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/get&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;id&quot;: [0, 1, 2],
@@ -248,7 +249,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Per trovare le entità in base a condizioni di filtraggio personalizzate, utilizzare il metodo <strong>Query</strong>. I seguenti esempi di codice ipotizzano la presenza di tre campi denominati <code translate="no">id</code>, <code translate="no">vector</code>, e <code translate="no">color</code> e restituiscono il numero specificato di entità che possiedono un valore <code translate="no">color</code> a partire da <code translate="no">red</code>.</p>
+    </button></h3><p>Per trovare le entità in base a condizioni di filtraggio personalizzate, utilizzare il metodo <strong>Query</strong>. I seguenti esempi di codice ipotizzano la presenza di tre campi denominati <code translate="no">id</code>, <code translate="no">vector</code> e <code translate="no">color</code> e restituiscono il numero specificato di entità che possiedono un valore <code translate="no">color</code> a partire da <code translate="no">red</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -320,6 +321,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;color like \&quot;red%\&quot;&quot;,
@@ -348,7 +350,7 @@ curl --request POST \
 <ul>
 <li><p><code translate="no">order_by</code> deve essere usato insieme a <code translate="no">limit</code>.</p></li>
 <li><p>Tipi di campo supportati: <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, e <code translate="no">VARCHAR</code>. L'ordinamento per campi vettoriali, <code translate="no">JSON</code> o <code translate="no">ARRAY</code> non è supportato.</p></li>
-<li><p>Quando si ordina per un campo nullable, i valori NULL vengono posti alla fine per l'ordine ascendente (NULLS LAST) e all'inizio per l'ordine discendente (NULLS FIRST).</p></li>
+<li><p>Quando si ordina per un campo nullable, i valori NULL sono posti alla fine per l'ordine ascendente (NULLS LAST) e all'inizio per l'ordine discendente (NULLS FIRST).</p></li>
 </ul>
 <h4 id="Basic-Sort" class="common-anchor-header">Ordinamento di base</h4><p>Passare un elenco di stringhe <code translate="no">&quot;field_name:direction&quot;</code> al parametro <code translate="no">order_by</code>, dove <code translate="no">direction</code> è <code translate="no">asc</code> (ascendente) o <code translate="no">desc</code> (discendente). Si noti che <code translate="no">asc</code> e <code translate="no">desc</code> sono sensibili alle maiuscole e alle minuscole.</p>
 <div class="multipleCode">
@@ -377,7 +379,7 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Multi-field-Sort" class="common-anchor-header">Ordinamento a più campi</h4><p>È possibile ordinare per più campi contemporaneamente. I risultati vengono ordinati in base al primo campo dell'elenco. Quando due righe hanno lo stesso valore in quel campo, il secondo campo determina il loro ordine e così via.</p>
+<h4 id="Multi-field-Sort" class="common-anchor-header">Ordinamento a più campi</h4><p>È possibile ordinare per più campi contemporaneamente. I risultati sono ordinati in base al primo campo dell'elenco. Quando due righe hanno lo stesso valore in quel campo, il secondo campo determina il loro ordine e così via.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sort by rating descending, then by price ascending for ties</span>
@@ -788,6 +790,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/get&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -800,6 +803,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/get&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -824,7 +828,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Per estrarre un sottoinsieme rappresentativo di dati dall'insieme per l'esplorazione dei dati o per i test di sviluppo, utilizzare l'espressione <code translate="no">RANDOM_SAMPLE(sampling_factor)</code>, dove <code translate="no">sampling_factor</code> è un valore compreso tra 0 e 1 che rappresenta la percentuale di dati da campionare.</p>
+    </button></h2><p>Per estrarre un sottoinsieme rappresentativo di dati dall'insieme per l'esplorazione dei dati o per i test di sviluppo, si può usare l'espressione <code translate="no">RANDOM_SAMPLE(sampling_factor)</code>, dove <code translate="no">sampling_factor</code> è un valore compreso tra 0 e 1 che rappresenta la percentuale di dati da campionare.</p>
 <div class="alert note">
 <p>Per un utilizzo dettagliato, esempi avanzati e best practice, consultare <a href="/docs/it/random-sampling.md">Campionamento casuale</a>.</p>
 </div>

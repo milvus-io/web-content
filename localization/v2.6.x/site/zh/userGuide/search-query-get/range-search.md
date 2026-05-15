@@ -229,6 +229,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -246,5 +247,5 @@ curl --request POST \
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>如果查询向量已经存在于目标 Collections 中，请考虑使用<code translate="no">ids</code> 代替在搜索前检索它们。有关详情，请参阅<a href="/docs/zh/primary-key-search.md">主键搜索</a>。</p>
+<p>如果查询向量已经存在于目标 Collections 中，请考虑使用<code translate="no">ids</code> 代替在搜索前检索它们。有关详情，请参阅<a href="/docs/zh/v2.6.x/primary-key-search.md">主键搜索</a>。</p>
 </div>

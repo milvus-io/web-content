@@ -70,7 +70,7 @@ summary: >-
    <tr>
      <td><p><code translate="no">COSINE</code></p></td>
      <td><p>Une plus grande distance COSINE indique une plus grande similarité.</p></td>
-     <td><p>Pour ne pas tenir compte des vector embeddings les plus similaires, il faut s'assurer que</p><p><code translate="no">radius</code> &lt; distance &lt;= <code translate="no">range_filter</code></p></td>
+     <td><p>Pour ne pas tenir compte des enregistrements vectoriels les plus similaires, il faut s'assurer que</p><p><code translate="no">radius</code> &lt; distance &lt;= <code translate="no">range_filter</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">JACCARD</code></p></td>
@@ -234,6 +234,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -251,5 +252,5 @@ curl --request POST \
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Si les vecteurs d'interrogation existent déjà dans la collection cible, envisagez d'utiliser <code translate="no">ids</code> au lieu de les récupérer avant les recherches. Pour plus de détails, reportez-vous à la section <a href="/docs/fr/primary-key-search.md">Recherche par clé primaire</a>.</p>
+<p>Si les vecteurs d'interrogation existent déjà dans la collection cible, envisagez d'utiliser <code translate="no">ids</code> au lieu de les récupérer avant les recherches. Pour plus de détails, reportez-vous à la section <a href="/docs/fr/v2.6.x/primary-key-search.md">Recherche par clé primaire</a>.</p>
 </div>

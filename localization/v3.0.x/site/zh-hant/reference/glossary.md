@@ -96,7 +96,7 @@ title: 術語
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">Bulk Writer</a>是 Milvus SDK (例如 PyMilvus、Java SDK) 提供的資料處理工具，設計用來將原始資料集轉換成與 Milvus 相容的格式，以便有效率地匯入。</p>
+    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">Bulk Writer</a>是 Milvus SDK (例如 PyMilvus、Java SDK) 提供的資料處理工具，設計用來將原始資料集轉換成與 Milvus 相容的格式，以便有效率的匯入。</p>
 <h2 id="Bulk-Insert" class="common-anchor-header">大量插入<button data-href="#Bulk-Insert" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -208,7 +208,7 @@ title: 術語
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 提供內建嵌入功能，可與常用的嵌入提供者一起使用。在 Milvus 中建立資料集之前，您可以使用這些功能來為您的資料集產生嵌入，簡化準備資料和向量搜尋的流程。要以實際操作<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">來</a>建立嵌入，請參閱<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">使用 PyMilvus 的模型來產生文字嵌入</a>。</p>
+    </button></h2><p>Milvus 提供內建嵌入功能，可與常用的嵌入提供者一起使用。在 Milvus 中建立資料集之前，您可以使用這些功能為您的資料集製作內嵌，簡化準備資料和向量搜尋的程序。要以實際操作<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">來</a>建立嵌入，請參閱<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">使用 PyMilvus 的模型來產生文字嵌入</a>。</p>
 <h2 id="Entity" class="common-anchor-header">實體<button data-href="#Entity" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -439,7 +439,7 @@ title: 術語
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/milvus-cdc-overview.md">Milvus CDC</a>（變更資料擷取）是一個方便使用的工具，可以擷取和同步 Milvus 實體中的增量資料。它透過在源實體和目標實體之間無縫傳輸，確保業務資料的可靠性，讓增量備份和災難恢復變得簡單。</p>
+    </button></h2><p><a href="https://milvus.io/docs/milvus_cdc_overview.md">Milvus CDC</a>(變更資料擷取) 是一個工具，用來從一個 Milvus 叢集複製資料變更到另一個叢集，以進行主備災難恢復。</p>
 <h2 id="Milvus-CLI" class="common-anchor-header">Milvus CLI<button data-href="#Milvus-CLI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -551,7 +551,7 @@ title: 術語
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>欄位的分割區金鑰屬性可根據實體的分割區金鑰值，將實體分割成不同的分割區。這種分組方式可確保分享相同關鍵值的實體儲存在一起，這可讓系統在使用分區關鍵字段篩選的查詢過程中，繞過不相關的分區，從而加快搜尋作業。如需詳細資訊，請參閱<a href="https://milvus.io/docs/use-partition-key.md#Use-Partition-Key">使用分割區金鑰</a>。</p>
+    </button></h2><p>欄位的分割區金鑰屬性可根據實體的分割區金鑰值，將實體分割成不同的分割區。這種分組方式可確保分享相同關鍵值的實體儲存在一起，這可讓系統在使用分區關鍵欄位篩選的查詢過程中，繞過不相關的分區，從而加快搜尋作業。如需詳細資訊，請參閱<a href="https://milvus.io/docs/use-partition-key.md#Use-Partition-Key">使用分割區金鑰</a>。</p>
 <h2 id="PChannel" class="common-anchor-header">PC 通道<button data-href="#PChannel" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

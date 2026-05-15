@@ -38,7 +38,7 @@ title: RPM/DEB 패키지로 Milvus 스탠드얼론 설치하기
       </svg>
     </button></h2><ul>
 <li>libstdc++ 8.5.0 이상 버전을 이미 설치했습니다.</li>
-<li>설치하기 전에<a href="/docs/ko/prerequisite-docker.md">하드웨어 및 소프트웨어 요구 사항을 확인하세요</a>.</li>
+<li>설치하기 전에<a href="/docs/ko/v2.6.x/prerequisite-docker.md">하드웨어 및 소프트웨어 요구 사항을 확인하세요</a>.</li>
 </ul>
 <h2 id="Download-the-RPMDEB-Package" class="common-anchor-header">RPM/DEB 패키지 다운로드<button data-href="#Download-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -55,7 +55,7 @@ title: RPM/DEB 패키지로 Milvus 스탠드얼론 설치하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.15">Milvus 릴리스 페이지에서</a> 시스템 아키텍처에 따라 RPM/DEB 패키지를 다운로드할 수 있습니다.</p>
+    </button></h2><p><a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.16">Milvus 릴리스 페이지에서</a> 시스템 아키텍처에 따라 RPM/DEB 패키지를 다운로드할 수 있습니다.</p>
 <ul>
 <li>x86_64/amd64의 경우, <strong>milvus_2.6.9-1_amd64.deb</strong> 또는 <strong>milvus_2.6.9-1_amd64.rpm</strong> 패키지를 다운로드하세요.</li>
 <li>ARM64의 경우 <strong>milvus_2.6.9-1_arm64.deb</strong> 또는 <strong>milvus_2.6.9-1_arm64.rpm</strong> 패키지를 다운로드합니다.</li>
@@ -133,7 +133,7 @@ dpkg -l | grep milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">/etc/milvus/configs/milvus.yaml</code> 파일에서 Milvus 구성을 수정할 수 있습니다. 예를 들어 <code translate="no">proxy.healthCheckTimeout</code> 을 <code translate="no">1000</code> ms 로 변경하려면 대상 파라미터를 검색하여 적절히 수정하면 됩니다. 해당 구성 항목은 <a href="/docs/ko/system_configuration.md">시스템 구성을</a> 참조하세요.</p>
+    </button></h2><p><code translate="no">/etc/milvus/configs/milvus.yaml</code> 파일에서 Milvus 구성을 수정할 수 있습니다. 예를 들어 <code translate="no">proxy.healthCheckTimeout</code> 을 <code translate="no">1000</code> ms 로 변경하려면 대상 파라미터를 검색하여 적절히 수정하면 됩니다. 해당 구성 항목은 <a href="/docs/ko/v2.6.x/system_configuration.md">시스템 구성을</a> 참조하세요.</p>
 <h2 id="Stop-Milvus-Standalone" class="common-anchor-header">Milvus 독립 실행형 중지<button data-href="#Stop-Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -191,27 +191,27 @@ dpkg -l | grep milvus
       </svg>
     </button></h2><p>Milvus Standalone을 설치했다면 다음을 수행할 수 있습니다:</p>
 <ul>
-<li><p><a href="/docs/ko/quickstart.md">빠른 시작을</a> 확인하여 Milvus가 수행할 수 있는 작업을 확인합니다.</p></li>
+<li><p><a href="/docs/ko/v2.6.x/quickstart.md">빠른 시작을</a> 확인하여 Milvus가 수행할 수 있는 작업을 확인합니다.</p></li>
 <li><p>Milvus의 기본 작동에 대해 알아보세요:</p>
 <ul>
-<li><a href="/docs/ko/manage_databases.md">데이터베이스 관리</a></li>
-<li><a href="/docs/ko/manage-collections.md">컬렉션 관리</a></li>
-<li><a href="/docs/ko/manage-partitions.md">파티션 관리</a></li>
-<li><a href="/docs/ko/insert-update-delete.md">삽입, 위로 올리기 및 삭제</a></li>
-<li><a href="/docs/ko/single-vector-search.md">단일 벡터 검색</a></li>
-<li><a href="/docs/ko/multi-vector-search.md">하이브리드 검색</a></li>
+<li><a href="/docs/ko/v2.6.x/manage_databases.md">데이터베이스 관리</a></li>
+<li><a href="/docs/ko/v2.6.x/manage-collections.md">컬렉션 관리</a></li>
+<li><a href="/docs/ko/v2.6.x/manage-partitions.md">파티션 관리</a></li>
+<li><a href="/docs/ko/v2.6.x/insert-update-delete.md">삽입, 위로 올리기 및 삭제</a></li>
+<li><a href="/docs/ko/v2.6.x/single-vector-search.md">단일 벡터 검색</a></li>
+<li><a href="/docs/ko/v2.6.x/multi-vector-search.md">하이브리드 검색</a></li>
 </ul></li>
-<li><p><a href="/docs/ko/upgrade_milvus_cluster-helm.md">헬름 차트를 사용하여 Milvus 업그레이드</a>.</p></li>
-<li><p><a href="/docs/ko/scaleout.md">Milvus 클러스터 확장하기</a>.</p></li>
+<li><p><a href="/docs/ko/v2.6.x/upgrade_milvus_cluster-helm.md">헬름 차트를 사용하여 Milvus 업그레이드</a>.</p></li>
+<li><p><a href="/docs/ko/v2.6.x/scaleout.md">Milvus 클러스터 확장하기</a>.</p></li>
 <li><p>Milvu 클러스터를 클라우드에 배포하세요:</p>
 <ul>
-<li><a href="/docs/ko/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/ko/gcp.md">구글 클라우드</a></li>
-<li><a href="/docs/ko/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/ko/v2.6.x/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/ko/v2.6.x/gcp.md">구글 클라우드</a></li>
+<li><a href="/docs/ko/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Milvus 통합 가시성 및 관리를 위한 직관적인 웹 인터페이스인 Milvus <a href="/docs/ko/milvus-webui.md">WebUI를</a> 살펴보세요.</p></li>
-<li><p>Milvus 데이터 백업을 위한 오픈 소스 도구인 Milvus <a href="/docs/ko/milvus_backup_overview.md">Backup을</a> 살펴보세요.</p></li>
-<li><p>Milvus 디버깅 및 동적 구성 업데이트를 위한 오픈 소스 도구인 <a href="/docs/ko/birdwatcher_overview.md">Birdwatcher에</a> 대해 알아보세요.</p></li>
+<li><p>Milvus 통합 가시성 및 관리를 위한 직관적인 웹 인터페이스인 Milvus <a href="/docs/ko/v2.6.x/milvus-webui.md">WebUI를</a> 살펴보세요.</p></li>
+<li><p>Milvus 데이터 백업을 위한 오픈 소스 도구인 Milvus <a href="/docs/ko/v2.6.x/milvus_backup_overview.md">Backup을</a> 살펴보세요.</p></li>
+<li><p>Milvus 디버깅 및 동적 구성 업데이트를 위한 오픈 소스 도구인 <a href="/docs/ko/v2.6.x/birdwatcher_overview.md">Birdwatcher에</a> 대해 알아보세요.</p></li>
 <li><p>직관적인 Milvus 관리를 위한 오픈 소스 GUI 도구인 <a href="https://github.com/zilliztech/attu">Attu를</a> 살펴보세요.</p></li>
-<li><p><a href="/docs/ko/monitor.md">Prometheus로 Milvus 모니터링</a>.</p></li>
+<li><p><a href="/docs/ko/v2.6.x/monitor.md">Prometheus로 Milvus 모니터링</a>.</p></li>
 </ul>

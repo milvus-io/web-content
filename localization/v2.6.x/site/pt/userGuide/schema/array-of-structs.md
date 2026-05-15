@@ -120,7 +120,7 @@ beta: Milvus 2.6.4+
 </table></p>
 <p>Os campos escalares no campo Array of Structs não suportam índices.</p></li>
 <li><p><strong>Inserir dados</strong></p>
-<p>As structs não suportam upsert no modo de fusão. No entanto, ainda é possível realizar upserts no modo de substituição para atualizar dados em Structs. Para obter detalhes sobre as diferenças entre a inserção ascendente no modo de mesclagem e no modo de substituição, consulte <a href="/docs/pt/upsert-entities.md#Overview">Entidades de inserção</a> ascendente.</p></li>
+<p>As structs não suportam upsert no modo de fusão. No entanto, ainda é possível realizar upserts no modo de substituição para atualizar dados em Structs. Para obter detalhes sobre as diferenças entre a inserção ascendente no modo de mesclagem e no modo de substituição, consulte <a href="/docs/pt/v2.6.x/upsert-entities.md#Overview">Entidades de inserção</a> ascendente.</p></li>
 <li><p><strong>Filtragem escalar</strong></p>
 <p>Não pode utilizar uma Matriz de Estruturas ou quaisquer campos dentro do seu elemento Struct em expressões de filtragem em pesquisas e consultas.</p></li>
 </ul>
@@ -377,7 +377,7 @@ SCHEMA=<span class="hljs-string">&#x27;{
         ></path>
       </svg>
     </button></h2><p>A indexação é obrigatória para todos os campos de vetor, incluindo os campos de vetor na coleção e os definidos no elemento Struct.</p>
-<p>Os parâmetros de índice aplicáveis variam consoante o tipo de índice utilizado. Para obter detalhes sobre os parâmetros de índice aplicáveis, consulte <a href="/docs/pt/index-explained.md">Índice explicado</a> e as páginas de documentação específicas do tipo de índice selecionado.</p>
+<p>Os parâmetros de índice aplicáveis variam consoante o tipo de índice utilizado. Para obter detalhes sobre os parâmetros de índice aplicáveis, consulte <a href="/docs/pt/v2.6.x/index-explained.md">Índice explicado</a> e as páginas de documentação específicas do tipo de índice selecionado.</p>
 <p>Para indexar uma lista de incorporação, você precisa definir seu tipo de índice como <code translate="no">AUTOINDEX</code> ou <code translate="no">HNSW</code> e usar <code translate="no">MAX_SIM_COSINE</code> como o tipo de métrica para Milvus medir as semelhanças entre as listas de incorporação.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -499,6 +499,7 @@ client.createCollection(requestCreate);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/create&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;description\&quot;: \&quot;A collection for storing book information with struct array chunks\&quot;,
@@ -614,6 +615,7 @@ row.add(<span class="hljs-string">&quot;chunks&quot;</span>, structArr);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/insert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -720,7 +722,7 @@ data = [generate_record(i) <span class="hljs-keyword">for</span> i <span class="
 client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, data=data)
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<h2 id="Vector-search-against-an-Array-of-Structs-field" class="common-anchor-header">Pesquisa de vetor num campo Matriz de Structs<button data-href="#Vector-search-against-an-Array-of-Structs-field" class="anchor-icon" translate="no">
+<h2 id="Vector-search-against-an-Array-of-Structs-field" class="common-anchor-header">Pesquisa de vetor num campo de Matriz de Estruturas<button data-href="#Vector-search-against-an-Array-of-Structs-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -806,6 +808,7 @@ embeddingList1=<span class="hljs-string">&#x27;[[0.2,0.9,0.4,-0.3,0.2]]&#x27;</s
 embeddingList2=<span class="hljs-string">&#x27;[[-0.2,-0.2,0.5,0.6,0.9],[-0.4,0.3,0.5,0.8,0.2]]&#x27;</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>],
@@ -910,6 +913,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>, <span class="hljs-variable">$embeddingList2</span>],
@@ -1013,4 +1017,4 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O desenvolvimento de um tipo de dados nativo Array of Structs representa um grande avanço na capacidade do Milvus de lidar com estruturas de dados complexas. Para entender melhor seus casos de uso e maximizar esse novo recurso, recomendamos a leitura de <a href="/docs/pt/best-practices-for-array-of-structs.md">Schema Design Using an Array of Structs</a>.</p>
+    </button></h2><p>O desenvolvimento de um tipo de dados nativo Array of Structs representa um grande avanço na capacidade do Milvus de lidar com estruturas de dados complexas. Para entender melhor seus casos de uso e maximizar esse novo recurso, recomendamos a leitura de <a href="/docs/pt/v2.6.x/best-practices-for-array-of-structs.md">Schema Design Using an Array of Structs</a>.</p>

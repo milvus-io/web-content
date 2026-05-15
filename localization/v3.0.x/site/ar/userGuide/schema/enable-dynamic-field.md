@@ -262,6 +262,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -378,6 +379,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;data&quot;: [
     {
@@ -807,6 +809,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
@@ -957,6 +960,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;data\&quot;: [
@@ -1030,7 +1034,7 @@ curl --request POST \
     </button></h3><p>يجب عليك تعريف حقل بشكل صريح في المخطط بدلاً من استخدام مفتاح حقل ديناميكي عندما:</p>
 <ul>
 <li><p><strong>يتم تضمين الحقل بشكل متكرر في حقول_المخرجات</strong>: يتم ضمان إمكانية استرجاع الحقول المحددة صراحةً فقط بكفاءة من خلال <code translate="no">output_fields</code>. لا يتم تحسين مفاتيح الحقول الديناميكية للاسترجاع عالي التردد وقد تتكبد نفقات أداء زائدة.</p></li>
-<li><p><strong>يتم الوصول إلى الحقل أو تصفيته بشكل متكرر</strong>: في حين أن فهرسة مفتاح الحقل الديناميكي يمكن أن يوفر أداء تصفية مماثل لحقول المخطط الثابتة، فإن الحقول المحددة صراحةً توفر بنية أوضح وقابلية صيانة أفضل.</p></li>
+<li><p><strong>يتم الوصول إلى الحقل أو تصفيته بشكل متكرر</strong>: بينما يمكن أن توفر فهرسة مفتاح الحقل الديناميكي أداء تصفية مماثل لحقول المخطط الثابتة، فإن الحقول المحددة صراحةً توفر بنية أوضح وقابلية صيانة أفضل.</p></li>
 <li><p><strong>تحتاج إلى تحكم كامل في سلوك الحقل</strong>: تدعم الحقول الصريحة القيود على مستوى المخطط والتحقق من الصحة والكتابة بشكل أوضح، والتي يمكن أن تكون مفيدة لإدارة تكامل البيانات واتساقها.</p></li>
 <li><p><strong>تريد تجنب التناقضات في الفهرسة</strong>: تكون البيانات في مفاتيح الحقول الديناميكية أكثر عرضة لعدم الاتساق في النوع أو البنية. يساعد استخدام مخطط ثابت على ضمان جودة البيانات، خاصةً إذا كنت تخطط لاستخدام الفهرسة أو الصب.</p></li>
 </ul>

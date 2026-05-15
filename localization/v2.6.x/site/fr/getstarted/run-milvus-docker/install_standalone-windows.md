@@ -191,7 +191,7 @@ Delete successfully.​
 <li><p>Ouvrez Docker Desktop en mode administrateur en cliquant avec le bouton droit de la souris et en sélectionnant <strong>Exécuter en tant qu'administrateur</strong>.</p></li>
 <li><p>Exécuter les commandes suivantes dans PowerShell ou Windows Command Prompt pour télécharger le fichier de configuration Docker Compose pour Milvus Standalone et démarrer Milvus.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.15/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.16/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -232,7 +232,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Télécharger le fichier de configuration de Milvus.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.15/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.16/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Démarrer Milvus.</p>
@@ -277,7 +277,7 @@ Creating milvus-standalone ... done​
     </button></h3><p>Une fois que vous avez installé Docker Desktop dans Windows, vous pouvez rencontrer l'erreur <code translate="no">Docker Engine stopped</code> si votre ordinateur n'est pas configuré correctement. Dans ce cas, vous devrez peut-être effectuer les vérifications suivantes.</p>
 <ol>
 <li><p>Vérifiez si la virtualisation est activée.</p>
-<p>Vous pouvez vérifier si la virtualisation est activée en consultant l'onglet <strong>Performance</strong> du <strong>Gestionnaire des tâches</strong>.</p>
+<p>Vous pouvez vérifier si la virtualisation est activée en consultant l'onglet <strong>Performance</strong> dans le <strong>Gestionnaire des tâches</strong>.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/task-manager.png" alt="Virtualization in Task Manager" class="doc-image" id="virtualization-in-task-manager" />
@@ -365,7 +365,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" />
    </span> <span class="img-wrapper"> <span>Lister les fichiers de configuration de Milvus</span> </span></p>
 <p></p>
-<h2 id="Whats-next" class="common-anchor-header">Prochaines étapes<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">Prochaine étape<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -382,27 +382,27 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
       </svg>
     </button></h2><p>Après avoir installé Milvus dans Docker, vous pouvez :</p>
 <ul>
-<li><p>Consulter <a href="/docs/fr/quickstart.md">Quickstart</a> pour voir ce que Milvus peut faire.</p></li>
+<li><p>Consulter <a href="/docs/fr/v2.6.x/quickstart.md">Quickstart</a> pour voir ce que Milvus peut faire.</p></li>
 <li><p>Apprendre les opérations de base de Milvus :</p>
 <ul>
-<li><a href="/docs/fr/manage_databases.md">Gérer les bases de données</a></li>
-<li><a href="/docs/fr/manage-collections.md">Gérer les collections</a></li>
-<li><a href="/docs/fr/manage-partitions.md">Gérer les partitions</a></li>
-<li><a href="/docs/fr/insert-update-delete.md">Insérer, surinsérer et supprimer</a></li>
-<li><a href="/docs/fr/single-vector-search.md">Recherche à vecteur unique</a></li>
-<li><a href="/docs/fr/multi-vector-search.md">Recherche hybride</a></li>
+<li><a href="/docs/fr/v2.6.x/manage_databases.md">Gérer les bases de données</a></li>
+<li><a href="/docs/fr/v2.6.x/manage-collections.md">Gérer les collections</a></li>
+<li><a href="/docs/fr/v2.6.x/manage-partitions.md">Gérer les partitions</a></li>
+<li><a href="/docs/fr/v2.6.x/insert-update-delete.md">Insérer, surinsérer et supprimer</a></li>
+<li><a href="/docs/fr/v2.6.x/single-vector-search.md">Recherche à vecteur unique</a></li>
+<li><a href="/docs/fr/v2.6.x/multi-vector-search.md">Recherche hybride</a></li>
 </ul></li>
-<li><p><a href="/docs/fr/upgrade_milvus_cluster-helm.md">Mise à niveau de Milvus à l'aide de Helm Chart</a>.</p></li>
-<li><p><a href="/docs/fr/scaleout.md">Faire évoluer votre cluster Milvus</a>.</p></li>
+<li><p><a href="/docs/fr/v2.6.x/upgrade_milvus_cluster-helm.md">Mise à niveau de Milvus à l'aide de Helm Chart</a>.</p></li>
+<li><p><a href="/docs/fr/v2.6.x/scaleout.md">Faire évoluer votre cluster Milvus</a>.</p></li>
 <li><p>Déployer votre cluster Milvus sur des clouds :</p>
 <ul>
-<li><a href="/docs/fr/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/fr/gcp.md">Google Cloud</a></li>
-<li><a href="/docs/fr/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/fr/v2.6.x/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/fr/v2.6.x/gcp.md">Google Cloud</a></li>
+<li><a href="/docs/fr/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Découvrez <a href="/docs/fr/milvus-webui.md">Milvus WebUI</a>, une interface web intuitive pour l'observabilité et la gestion de Milvus.</p></li>
-<li><p>Découvrez <a href="/docs/fr/milvus_backup_overview.md">Milvus Backup</a>, un outil open-source pour les sauvegardes de données Milvus.</p></li>
-<li><p>Découvrez <a href="/docs/fr/birdwatcher_overview.md">Birdwatcher</a>, un outil open-source pour le débogage de Milvus et les mises à jour dynamiques de la configuration.</p></li>
+<li><p>Découvrez <a href="/docs/fr/v2.6.x/milvus-webui.md">Milvus WebUI</a>, une interface web intuitive pour l'observabilité et la gestion de Milvus.</p></li>
+<li><p>Découvrez <a href="/docs/fr/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, un outil open-source pour les sauvegardes de données Milvus.</p></li>
+<li><p>Découvrez <a href="/docs/fr/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, un outil open-source pour le débogage de Milvus et les mises à jour dynamiques de la configuration.</p></li>
 <li><p>Découvrez <a href="https://github.com/zilliztech/attu">Attu</a>, un outil GUI open-source pour la gestion intuitive de Milvus.</p></li>
-<li><p><a href="/docs/fr/monitor.md">Surveiller Milvus avec Prometheus</a>.</p></li>
+<li><p><a href="/docs/fr/v2.6.x/monitor.md">Surveiller Milvus avec Prometheus</a>.</p></li>
 </ul>

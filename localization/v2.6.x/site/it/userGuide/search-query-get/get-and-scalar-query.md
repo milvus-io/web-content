@@ -23,7 +23,7 @@ summary: >-
       </svg>
     </button></h1><p>Oltre alle ricerche in RNA, Milvus supporta anche il filtraggio dei metadati attraverso le query. Questa pagina illustra come utilizzare Query, Get e QueryIterator per eseguire il filtraggio dei metadati.</p>
 <div class="alert note">
-<p>Se si aggiungono dinamicamente nuovi campi dopo la creazione della collezione, le query che includono questi campi restituiranno i valori predefiniti definiti o NULL per le entità che non hanno impostato esplicitamente i valori. Per ulteriori informazioni, consultare <a href="/docs/it/add-fields-to-an-existing-collection.md">Aggiunta di campi a una raccolta esistente</a>.</p>
+<p>Se si aggiungono dinamicamente nuovi campi dopo la creazione della collezione, le query che includono questi campi restituiranno i valori predefiniti definiti o NULL per le entità che non hanno impostato esplicitamente i valori. Per ulteriori informazioni, consultare <a href="/docs/it/v2.6.x/add-fields-to-an-existing-collection.md">Aggiunta di campi a una raccolta esistente</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -211,6 +211,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/get&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;id&quot;: [0, 1, 2],
@@ -306,6 +307,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;color like \&quot;red%\&quot;&quot;,
@@ -584,6 +586,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/get&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -596,6 +599,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/get&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -622,7 +626,7 @@ curl --request POST \
       </svg>
     </button></h2><p>Per estrarre un sottoinsieme rappresentativo di dati dall'insieme per l'esplorazione dei dati o per i test di sviluppo, si può usare l'espressione <code translate="no">RANDOM_SAMPLE(sampling_factor)</code>, dove <code translate="no">sampling_factor</code> è un valore compreso tra 0 e 1 che rappresenta la percentuale di dati da campionare.</p>
 <div class="alert note">
-<p>Per un utilizzo dettagliato, esempi avanzati e best practice, consultare <a href="/docs/it/random-sampling.md">Campionamento casuale</a>.</p>
+<p>Per un utilizzo dettagliato, esempi avanzati e best practice, consultare <a href="/docs/it/v2.6.x/random-sampling.md">Campionamento casuale</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -743,7 +747,7 @@ resultSet, err = client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs
         ></path>
       </svg>
     </button></h2><p>Se la collezione ha un campo <code translate="no">TIMESTAMPTZ</code>, si può temporaneamente sovrascrivere il fuso orario predefinito del database o della collezione per una singola operazione, impostando il parametro <code translate="no">timezone</code> nella chiamata alla query. Questo parametro controlla il modo in cui i valori di <code translate="no">TIMESTAMPTZ</code> vengono visualizzati e confrontati durante l'operazione.</p>
-<p>Il valore di <code translate="no">timezone</code> deve essere un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identificatore di fuso orario IANA</a> valido (ad esempio, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> o <strong>UTC</strong>). Per informazioni dettagliate sull'utilizzo del campo <code translate="no">TIMESTAMPTZ</code>, consultare la sezione <a href="/docs/it/timestamptz-field.md">Campo TIMESTAMPTZ</a>.</p>
+<p>Il valore di <code translate="no">timezone</code> deve essere un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identificatore di fuso orario IANA</a> valido (ad esempio, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> o <strong>UTC</strong>). Per informazioni dettagliate sull'utilizzo del campo <code translate="no">TIMESTAMPTZ</code>, consultare la sezione <a href="/docs/it/v2.6.x/timestamptz-field.md">Campo TIMESTAMPTZ</a>.</p>
 <p>L'esempio seguente mostra come impostare temporaneamente un fuso orario per un'operazione di query:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

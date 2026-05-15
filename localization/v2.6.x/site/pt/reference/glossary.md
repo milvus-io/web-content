@@ -2,7 +2,6 @@
 id: glossary.md
 title: Terminologia
 ---
-
 <h1 id="Terminology" class="common-anchor-header">Terminologia<button data-href="#Terminology" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -81,7 +80,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="/docs/pt/birdwatcher_overview.md">O Birdwatcher</a> é uma ferramenta de depuração para o Milvus que se liga ao etcd, permitindo-lhe monitorizar o estado do servidor Milvus e fazer ajustes em tempo real. Também suporta backups de ficheiros etcd, ajudando os programadores na resolução de problemas.</p>
+    </button></h2><p><a href="/docs/pt/v2.6.x/birdwatcher_overview.md">O Birdwatcher</a> é uma ferramenta de depuração para o Milvus que se liga ao etcd, permitindo-lhe monitorizar o estado do servidor Milvus e fazer ajustes em tempo real. Também suporta backups de ficheiros etcd, ajudando os programadores na resolução de problemas.</p>
 <h2 id="Bulk-Writer" class="common-anchor-header">Gravador em massa<button data-href="#Bulk-Writer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -145,7 +144,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus utiliza dois tipos de canais, <a href="#pchannel">PChannel</a> e <a href="#vchannel">VChannel</a>, como parte da sua arquitetura de serviço de streaming. Cada PChannel corresponde a um fluxo WAL gerenciado pelo <a href="/docs/pt/woodpecker_architecture.md">Woodpecker</a>, enquanto cada VChannel corresponde a um fragmento em uma coleção. O serviço de streaming gerencia esses canais para garantir a consistência dos dados e a recuperação de falhas.</p>
+    </button></h2><p>Milvus utiliza dois tipos de canais, <a href="#pchannel">PChannel</a> e <a href="#vchannel">VChannel</a>, como parte da sua arquitetura de serviço de streaming. Cada PChannel corresponde a um fluxo WAL gerenciado pelo <a href="/docs/pt/v2.6.x/woodpecker_architecture.md">Woodpecker</a>, enquanto cada VChannel corresponde a um fragmento em uma coleção. O serviço de streaming gerencia esses canais para garantir a consistência dos dados e a recuperação de falhas.</p>
 <h2 id="Collection" class="common-anchor-header">Coleção<button data-href="#Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -161,7 +160,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Em Milvus, uma coleção é equivalente a uma tabela num sistema de gestão de bases de dados relacionais (RDBMS). As colecções são os principais objectos lógicos utilizados para armazenar e gerir entidades. Para mais informações, consulte <a href="/docs/pt/manage-collections.md">Gerir colecções</a>.</p>
+    </button></h2><p>Em Milvus, uma coleção é equivalente a uma tabela num sistema de gestão de base de dados relacional (RDBMS). As colecções são os principais objectos lógicos utilizados para armazenar e gerir entidades. Para mais informações, consulte <a href="/docs/pt/v2.6.x/manage-collections.md">Gerir colecções</a>.</p>
 <h2 id="Dependency" class="common-anchor-header">Dependência<button data-href="#Dependency" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -193,7 +192,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O esquema dinâmico permite-lhe inserir entidades com novos campos numa coleção sem modificar o esquema existente. Isto significa que pode inserir dados sem conhecer o esquema completo de uma coleção e pode incluir campos que ainda não estão definidos. É possível ativar esta capacidade sem esquema activando o campo dinâmico ao criar uma coleção. Para obter mais informações, consulte <a href="/docs/pt/enable-dynamic-field.md">Ativar campo dinâmico</a>.</p>
+    </button></h2><p>O esquema dinâmico permite-lhe inserir entidades com novos campos numa coleção sem modificar o esquema existente. Isto significa que pode inserir dados sem conhecer o esquema completo de uma coleção e pode incluir campos que ainda não estão definidos. É possível ativar esta capacidade sem esquema activando o campo dinâmico ao criar uma coleção. Para obter mais informações, consulte <a href="/docs/pt/v2.6.x/enable-dynamic-field.md">Ativar campo dinâmico</a>.</p>
 <h2 id="Embeddings" class="common-anchor-header">Embeddings<button data-href="#Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -226,7 +225,7 @@ title: Terminologia
         ></path>
       </svg>
     </button></h2><p>Uma entidade consiste num grupo de campos que representam objectos do mundo real. Cada entidade no Milvus é representada por uma chave primária única.</p>
-<p>É possível personalizar as chaves primárias. Se não for configurada manualmente, o Milvus atribui automaticamente a chave primária às entidades. Se optar por personalizar a chave primária, note que Milvus não suporta a desduplicação de chaves primárias por enquanto. Portanto, pode haver chaves primárias duplicadas na mesma coleção. Para obter mais informações, consulte <a href="/docs/pt/insert-update-delete.md#Insert-entities">Inserir entidades</a>.</p>
+<p>É possível personalizar as chaves primárias. Se não for configurada manualmente, o Milvus atribui automaticamente a chave primária às entidades. Se optar por personalizar a chave primária, note que Milvus não suporta a desduplicação de chaves primárias por enquanto. Portanto, pode haver chaves primárias duplicadas na mesma coleção. Para obter mais informações, consulte <a href="/docs/pt/v2.6.x/insert-update-delete.md#Insert-entities">Inserir entidades</a>.</p>
 <h2 id="Field" class="common-anchor-header">Campo<button data-href="#Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -274,7 +273,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A pesquisa filtrada aplica filtros escalares a pesquisas vectoriais, permitindo-lhe refinar os resultados da pesquisa com base em critérios específicos. Para obter mais informações, consulte <a href="/docs/pt/single-vector-search.md#Filtered-search">Pesquisa fil</a>trada.</p>
+    </button></h2><p>A pesquisa filtrada aplica filtros escalares a pesquisas vectoriais, permitindo-lhe refinar os resultados da pesquisa com base em critérios específicos. Para obter mais informações, consulte <a href="/docs/pt/v2.6.x/single-vector-search.md#Filtered-search">Pesquisa filtrada</a>.</p>
 <h2 id="Hybrid-search" class="common-anchor-header">Pesquisa híbrida<button data-href="#Hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -290,7 +289,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">A Pesquisa híbr</a> ida é uma API para pesquisa híbrida desde o Milvus 2.4.0. Pode pesquisar vários campos vectoriais e fundi-los. A pesquisa vetorial combinada com a filtragem de campos escalares é designada por "pesquisa filtrada". Para mais informações, consulte <a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a>.</p>
+    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">A Pesquisa híbr</a> ida é uma API para pesquisa híbrida desde o Milvus 2.4.0. Pode pesquisar vários campos vectoriais e fundi-los. A pesquisa vetorial combinada com a filtragem de campos escalares é designada por "pesquisa filtrada". Para mais informações, consulte <a href="/docs/pt/v2.6.x/multi-vector-search.md">Pesquisa híbrida</a>.</p>
 <h2 id="Index" class="common-anchor-header">Índice<button data-href="#Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -392,7 +391,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O MemoryBuffer é um modo de implantação leve do Woodpecker que armazena temporariamente as gravações de entrada na memória e as libera periodicamente para o armazenamento de objetos na nuvem. Esse modo é mais adequado para cargas de trabalho pesadas em lote em implantações de menor escala ou ambientes de produção que priorizam a simplicidade sobre o desempenho. Para obter mais informações, consulte <a href="/docs/pt/woodpecker_architecture.md">Arquitetura do Woodpecker</a>.</p>
+    </button></h2><p>O MemoryBuffer é um modo de implantação leve do Woodpecker que armazena temporariamente as gravações de entrada na memória e as libera periodicamente para o armazenamento de objetos na nuvem. Esse modo é mais adequado para cargas de trabalho pesadas em lote em implantações de menor escala ou ambientes de produção que priorizam a simplicidade sobre o desempenho. Para obter mais informações, consulte <a href="/docs/pt/v2.6.x/woodpecker_architecture.md">Arquitetura do Woodpecker</a>.</p>
 <h2 id="Mmap" class="common-anchor-header">Mmap<button data-href="#Mmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -440,7 +439,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/milvus-cdc-overview.md">Milvus CDC</a> (Change data capture) é uma ferramenta de fácil utilização que pode capturar e sincronizar dados incrementais em instâncias Milvus. Garante a fiabilidade dos dados empresariais, transferindo-os sem problemas entre as instâncias de origem e de destino, permitindo um backup incremental fácil e a recuperação de desastres.</p>
+    </button></h2><p><a href="https://milvus.io/docs/milvus_cdc_overview.md">O Mil</a> vus<a href="https://milvus.io/docs/milvus_cdc_overview.md">CDC</a> (change data capture) é uma ferramenta utilizada para replicar as alterações de dados de um cluster Milvus para outro para recuperação de desastres primary-standby.</p>
 <h2 id="Milvus-CLI" class="common-anchor-header">Milvus CLI<button data-href="#Milvus-CLI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -488,7 +487,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Na <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">implantação em cluster</a> do Milvus, os serviços são fornecidos por um grupo de nós para alcançar alta disponibilidade e fácil escalabilidade.</p>
+    </button></h2><p>Na <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">implementação em cluster</a> do Milvus, os serviços são fornecidos por um grupo de nós para obter uma elevada disponibilidade e uma escalabilidade fácil.</p>
 <h2 id="Milvus-standalone" class="common-anchor-header">Milvus autónomo<button data-href="#Milvus-standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -520,7 +519,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus suporta múltiplos campos vetoriais em uma coleção desde a versão 2.4.0. Para obter mais informações, consulte <a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a>.</p>
+    </button></h2><p>O Milvus suporta múltiplos campos vetoriais em uma coleção desde a versão 2.4.0. Para obter mais informações, consulte <a href="/docs/pt/v2.6.x/multi-vector-search.md">Pesquisa híbrida</a>.</p>
 <h2 id="Partition" class="common-anchor-header">Partição<button data-href="#Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -552,7 +551,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O atributo de chave de partição de um campo permite a segregação de entidades em partições distintas com base nos seus valores de chave de partição. Esse agrupamento garante que as entidades que compartilham o mesmo valor de chave sejam armazenadas juntas, o que pode acelerar as operações de pesquisa, permitindo que o sistema ignore partições irrelevantes durante as consultas filtradas pelo campo de chave de partição. Para obter mais informações, consulte <a href="https://milvus.io/docs/use-partition-key.md#Use-Partition-Key">Usar chave de partição</a>.</p>
+    </button></h2><p>O atributo chave de partição de um campo permite a segregação de entidades em partições distintas com base nos seus valores de chave de partição. Esse agrupamento garante que as entidades que compartilham o mesmo valor de chave sejam armazenadas juntas, o que pode acelerar as operações de pesquisa, permitindo que o sistema ignore partições irrelevantes durante as consultas filtradas pelo campo de chave de partição. Para obter mais informações, consulte <a href="https://milvus.io/docs/use-partition-key.md#Use-Partition-Key">Usar chave de partição</a>.</p>
 <h2 id="PChannel" class="common-anchor-header">PChannel<button data-href="#PChannel" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -568,7 +567,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>PChannel significa canal físico. Cada PChannel corresponde a um fluxo WAL gerenciado pelo Woodpecker. Por padrão, um grupo de PChannels será atribuído para armazenar logs que registram a inserção, exclusão e atualização de dados quando o cluster Milvus é iniciado. Para obter mais informações, consulte <a href="/docs/pt/streaming_service.md">Serviço de streaming</a>.</p>
+    </button></h2><p>PChannel significa canal físico. Cada PChannel corresponde a um fluxo WAL gerenciado pelo Woodpecker. Por padrão, um grupo de PChannels será atribuído para armazenar logs que registram a inserção, exclusão e atualização de dados quando o cluster Milvus é iniciado. Para obter mais informações, consulte <a href="/docs/pt/v2.6.x/streaming_service.md">Serviço de fluxo</a>.</p>
 <h2 id="PyMilvus" class="common-anchor-header">PyMilvus<button data-href="#PyMilvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -616,7 +615,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O QuorumBuffer é um modo de implantação do Woodpecker projetado para cargas de trabalho de leitura/gravação sensíveis à latência e de alta frequência que exigem capacidade de resposta em tempo real e forte tolerância a falhas. Ele funciona como um buffer de gravação de alta velocidade com três réplicas de gravações de quorum, garantindo forte consistência e alta disponibilidade. Para mais informações, consulte a <a href="/docs/pt/woodpecker_architecture.md">Arquitetura Woodpecker</a>.</p>
+    </button></h2><p>O QuorumBuffer é um modo de implantação do Woodpecker projetado para cargas de trabalho de leitura/gravação sensíveis à latência e de alta frequência que exigem capacidade de resposta em tempo real e forte tolerância a falhas. Ele funciona como um buffer de gravação de alta velocidade com três réplicas de gravações de quorum, garantindo forte consistência e alta disponibilidade. Para mais informações, consulte a <a href="/docs/pt/v2.6.x/woodpecker_architecture.md">Arquitetura Woodpecker</a>.</p>
 <h2 id="Range-search" class="common-anchor-header">Pesquisa de intervalo<button data-href="#Range-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -714,7 +713,7 @@ title: Terminologia
         ></path>
       </svg>
     </button></h2><p>O Milvus melhora o desempenho da gravação de dados ao distribuir operações de gravação em vários nós usando shards, que são organizados com base no hashing de chaves primárias. Isso aproveita os recursos de computação paralela do cluster.</p>
-<p><em>O particionamento funciona para reduzir a carga de leitura especificando um nome de partição, enquanto o sharding distribui a carga de escrita entre vários servidores.</em></p>
+<p><em>O particionamento funciona para reduzir a carga de leitura, especificando um nome de partição, enquanto o sharding distribui a carga de escrita entre vários servidores.</em></p>
 <h2 id="Sparse-vector" class="common-anchor-header">Vetor esparso<button data-href="#Sparse-vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -730,7 +729,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Os vectores esparsos representam palavras ou frases utilizando a incorporação de vectores em que a maioria dos elementos é zero, sendo que apenas um elemento diferente de zero indica a presença de uma palavra específica. Os modelos de vectores esparsos, como o SPLADEv2, superam os modelos densos na pesquisa de conhecimento fora do domínio, na consciencialização de palavras-chave e na interpretabilidade. Para obter mais informações, consulte <a href="https://milvus.io/docs/sparse_vector.md#Sparse-Vector">Vectores es</a>parsos.</p>
+    </button></h2><p>Os vectores esparsos representam palavras ou frases utilizando a incorporação de vectores em que a maioria dos elementos é zero, sendo que apenas um elemento diferente de zero indica a presença de uma palavra específica. Os modelos de vectores esparsos, como o SPLADEv2, superam os modelos densos na pesquisa de conhecimento fora do domínio, na consciencialização de palavras-chave e na interpretabilidade. Para mais informações, consulte <a href="https://milvus.io/docs/sparse_vector.md#Sparse-Vector">Vectores esparsos</a>.</p>
 <h2 id="Streaming-Service" class="common-anchor-header">Serviço de streaming<button data-href="#Streaming-Service" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -746,7 +745,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Serviço de Streaming é um conceito para o módulo do sistema de streaming interno do Milvus, construído em torno do Write-Ahead Log (WAL) para suportar várias funções relacionadas com o streaming. Estas incluem a ingestão/assinatura de dados de fluxo contínuo, a recuperação de falhas do estado do cluster, a conversão de dados de fluxo contínuo em dados históricos e consultas de dados crescentes. O serviço é composto pelos componentes Streaming Coordinator, Streaming Node Cluster e Streaming Client. Para obter mais informações, consulte <a href="/docs/pt/streaming_service.md">Serviço de streaming</a>.</p>
+    </button></h2><p>O Serviço de Streaming é um conceito para o módulo do sistema de streaming interno do Milvus, construído em torno do Write-Ahead Log (WAL) para suportar várias funções relacionadas com o streaming. Estas incluem a ingestão/assinatura de dados de fluxo contínuo, a recuperação de falhas do estado do cluster, a conversão de dados de fluxo contínuo em dados históricos e consultas de dados crescentes. O serviço é composto pelos componentes Streaming Coordinator, Streaming Node Cluster e Streaming Client. Para obter mais informações, consulte <a href="/docs/pt/v2.6.x/streaming_service.md">Serviço de streaming</a>.</p>
 <h2 id="Unstructured-data" class="common-anchor-header">Dados não estruturados<button data-href="#Unstructured-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -778,7 +777,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>VChannel significa canal virtual. Cada VChannel representa um fragmento numa coleção. A cada coleção será atribuído um grupo de VChannels para registar a inserção, eliminação e atualização de dados. Os VChannels estão logicamente separados, mas partilham fisicamente recursos através do serviço de streaming. Para obter mais informações, consulte <a href="/docs/pt/streaming_service.md">Serviço de streaming</a>.</p>
+    </button></h2><p>VChannel significa canal virtual. Cada VChannel representa um fragmento numa coleção. A cada coleção será atribuído um grupo de VChannels para registar a inserção, eliminação e atualização de dados. Os VChannels estão logicamente separados, mas partilham fisicamente recursos através do serviço de streaming. Para obter mais informações, consulte <a href="/docs/pt/v2.6.x/streaming_service.md">Serviço de streaming</a>.</p>
 <h2 id="Vector" class="common-anchor-header">Vetor<button data-href="#Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -810,7 +809,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O armazenamento Write-Ahead Log (WAL) é a base da durabilidade e consistência dos dados em sistemas distribuídos. Antes de qualquer alteração ser efectuada, é primeiro registada num log - assegurando que, no caso de uma falha, pode recuperar exatamente onde parou. O Milvus usa o Woodpecker como seu sistema de armazenamento WAL, que suporta os modos MemoryBuffer e QuorumBuffer. Para obter mais informações, consulte <a href="/docs/pt/woodpecker_architecture.md">Arquitetura do Woodpecker</a>.</p>
+    </button></h2><p>O armazenamento Write-Ahead Log (WAL) é a base da durabilidade e consistência dos dados em sistemas distribuídos. Antes de qualquer alteração ser efectuada, é primeiro registada num log - assegurando que, no caso de uma falha, pode recuperar exatamente onde parou. O Milvus usa o Woodpecker como seu sistema de armazenamento WAL, que suporta os modos MemoryBuffer e QuorumBuffer. Para obter mais informações, consulte <a href="/docs/pt/v2.6.x/woodpecker_architecture.md">Arquitetura do Woodpecker</a>.</p>
 <h2 id="Woodpecker" class="common-anchor-header">Woodpecker<button data-href="#Woodpecker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -826,7 +825,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Woodpecker é um sistema WAL nativo da nuvem no Milvus 2.6 que substitui o Kafka e o Pulsar. Com uma arquitetura de disco zero e dois modos de implantação (MemoryBuffer e QuorumBuffer), ele oferece alta taxa de transferência, baixa sobrecarga operacional e escalabilidade contínua no armazenamento de objetos. Para mais informações, consulte a <a href="/docs/pt/woodpecker_architecture.md">Arquitetura Woodpecker</a>.</p>
+    </button></h2><p>O Woodpecker é um sistema WAL nativo da nuvem no Milvus 2.6 que substitui o Kafka e o Pulsar. Com uma arquitetura de disco zero e dois modos de implantação (MemoryBuffer e QuorumBuffer), ele oferece alta taxa de transferência, baixa sobrecarga operacional e escalabilidade contínua no armazenamento de objetos. Para mais informações, consulte a <a href="/docs/pt/v2.6.x/woodpecker_architecture.md">Arquitetura Woodpecker</a>.</p>
 <h2 id="Zilliz-Cloud" class="common-anchor-header">Nuvem Zilliz<button data-href="#Zilliz-Cloud" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

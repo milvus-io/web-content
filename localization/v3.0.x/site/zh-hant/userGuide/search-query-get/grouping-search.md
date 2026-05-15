@@ -18,7 +18,7 @@ summary: 使用分組搜尋，依欄位值彙整 ANN 搜尋結果，減少重複
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>分組搜尋允許 Milvus 根據指定欄位的值來對搜尋結果進行分組，從而在更高層次聚合資料。例如，您可以使用基本的 ANN 搜尋來尋找與手邊的書籍相似的書籍，但您可以使用分組搜尋來尋找可能涉及該書籍所討論主題的書籍類別。本主題將說明如何使用群組搜尋以及主要注意事項。</p>
+    </button></h1><p>分組搜尋允許 Milvus 根據指定欄位的值對搜尋結果進行分組，以便在更高層次聚合資料。例如，您可以使用基本的 ANN 搜尋來尋找與手邊的書籍相似的書籍，但您可以使用分組搜尋來尋找可能涉及該書籍所討論主題的書籍類別。本主題將說明如何使用群組搜尋以及主要注意事項。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,7 +35,7 @@ summary: 使用分組搜尋，依欄位值彙整 ANN 搜尋結果，減少重複
         ></path>
       </svg>
     </button></h2><p>當搜尋結果中的實體在標量欄位中具有相同值時，這表示它們在特定屬性上相似，這可能會對搜尋結果造成負面影響。</p>
-<p>假設一個集合儲存了多個文件（以<strong>docId</strong> 表示）。在將文檔轉換為向量時，為了盡可能保留語意資訊，每個文檔都會被分割成較小的、可管理的段落 (<strong>或小塊</strong>)，並作為獨立的實體儲存。即使文件被分割成較小的段落，使用者通常仍有興趣辨識哪些文件與他們的需求最相關。</p>
+<p>假設一個集合儲存了多個文件（以<strong>docId</strong> 表示）。在將文件轉換為向量時，為了盡可能保留語義資訊，每份文件都會被分割成較小的、可管理的段落 (<strong>或小塊</strong>)，並儲存為獨立的實體。即使文件被分割成較小的段落，使用者通常仍有興趣辨識哪些文件與他們的需求最相關。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ann-search.png" alt="Ann Search" class="doc-image" id="ann-search" />
@@ -49,7 +49,7 @@ summary: 使用分組搜尋，依欄位值彙整 ANN 搜尋結果，減少重複
 <ul>
 <li><p>根據提供的查詢向量執行 ANN 搜尋，找出與查詢最相似的所有實體。</p></li>
 <li><p>根據指定的<code translate="no">group_by_field</code> 對搜尋結果進行分組，例如<code translate="no">docId</code> 。</p></li>
-<li><p>根據<code translate="no">limit</code> 參數的定義，傳回每個群組最頂端的結果，並從每個群組中找出最相似的實體。</p></li>
+<li><p>根據<code translate="no">limit</code> 參數的定義，傳回每個群組的頂端結果，並從每個群組中選取最相似的實體。</p></li>
 </ul>
 <div class="alert note">
 <p>預設情況下，「群組搜尋」只會回傳每個群組的一個實體。如果要增加每個群組返回的結果數量，可以使用<code translate="no">group_size</code> 和<code translate="no">strict_group_size</code> 參數來控制。</p>
@@ -84,7 +84,7 @@ summary: 使用分組搜尋，依欄位值彙整 ANN 搜尋結果，減少重複
 ]
 
 <button class="copy-code-btn"></button></code></pre>
-<p>在搜索請求中，將<code translate="no">group_by_field</code> 和<code translate="no">output_fields</code> 都設為<code translate="no">docId</code> 。Milvus 會根據指定的欄位將結果分組，並從每個組中傳回最相似的實體，包括每個傳回實體的<code translate="no">docId</code> 值。</p>
+<p>在搜索請求中，將<code translate="no">group_by_field</code> 和<code translate="no">output_fields</code> 都設為<code translate="no">docId</code> 。Milvus 會根據指定欄位將結果分組，並從每個組中返回最相似的實體，包括每個返回實體的<code translate="no">docId</code> 值。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -211,6 +211,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -350,6 +351,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -411,7 +413,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>在上面的請求中，<code translate="no">limit=20</code> 表示 Milvus 最多選擇 20 個群組，而不是 20 個實體。因為<code translate="no">group_size=3</code> ，平面結果清單總共可以包含多達 60 個實體。</p>
-<p>當您使用<code translate="no">order_by_fields</code> 與<code translate="no">group_by_field</code> 時，Milvus 會依每個群組最頂端實體的指定標量欄位值來排序群組。在每個群組中，實體仍依其與查詢向量的相似度得分排序。</p>
+<p>當您使用<code translate="no">order_by_fields</code> 與<code translate="no">group_by_field</code> 時，Milvus 會依據每個群組最頂端實體的指定標量值來排序群組。在每個群組中，實體仍依其與查詢向量的相似度得分排序。</p>
 <h2 id="Considerations" class="common-anchor-header">注意事項<button data-href="#Considerations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -431,6 +433,6 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <li><p><strong>索引</strong>：此分組功能僅適用於使用這些索引類型建立索引的集合：<strong>flat</strong>、<strong>ivf_flat</strong>、<strong>ivf_sq8</strong>、<strong>hnsw</strong>、<strong>hnsw_pq</strong>、<strong>hnsw_prq</strong>、<strong>hnsw_sq</strong>、<strong>diskann</strong>、<strong>sparse_inverted_index</strong>。</p></li>
 <li><p><strong>群組數</strong>：<code translate="no">limit</code> 參數控制返回搜尋結果的群組數目，而非每個群組內實體的特定數目。設定適當的<code translate="no">limit</code> 有助於控制搜尋多樣性和查詢效能。如果資料分佈密集或效能是考量因素，減少<code translate="no">limit</code> 可以降低計算成本。</p></li>
 <li><p><strong>每個群組的實體</strong>：<code translate="no">group_size</code> 參數控制每個群組返回的實體數量。根據您的使用情況調整<code translate="no">group_size</code> 可以增加搜尋結果的豐富性。但是，如果資料分佈不均勻，某些群組返回的實體可能少於<code translate="no">group_size</code> 指定的數目，尤其是在資料有限的情況下。</p></li>
-<li><p><strong>嚴格的群組大小</strong>：當<code translate="no">strict_group_size=True</code> 時，系統會嘗試為每個群組傳回指定數量的實體 (<code translate="no">group_size</code>)，除非該群組沒有足夠的資料。此設定可確保每個群組的實體數量一致，但在資料分佈不均或資源有限的情況下，可能會導致效能下降。如果不需要嚴格的實體數量，設定<code translate="no">strict_group_size=False</code> 可以提高查詢速度。</p></li>
+<li><p><strong>嚴格的群組大小</strong>：當<code translate="no">strict_group_size=True</code> 時，系統會嘗試為每個群組傳回指定數量的實體 (<code translate="no">group_size</code>)，除非該群組沒有足夠的資料。此設定可確保每個群組的實體數量一致，但在資料分布不均或資源有限的情況下，可能會導致效能下降。如果不需要嚴格的實體數量，設定<code translate="no">strict_group_size=False</code> 可以提高查詢速度。</p></li>
 <li><p>如果查詢向量已經存在於目標資料集中，請考慮使用<code translate="no">ids</code> ，而不是在搜尋前擷取它們。如需詳細資訊，請參閱<a href="/docs/zh-hant/primary-key-search.md">Primary-Key Search</a>。</p></li>
 </ul>

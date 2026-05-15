@@ -46,7 +46,7 @@ summary: >-
 <p>二進位向量有以下特點：</p>
 <ul>
 <li><p><strong>高效儲存：</strong>每個維度只需要 1 位元的儲存空間，大幅減少儲存空間。</p></li>
-<li><p><strong>快速計算：</strong>向量間的相似性可以使用位元運算（如 XOR）快速計算。</p></li>
+<li><p><strong>快速計算：</strong>向量之間的相似性可以使用位元運算（如 XOR）快速計算。</p></li>
 <li><p><strong>固定長度：</strong>不論原始文字的長度如何，向量的長度都保持不變，讓索引和檢索變得更容易。</p></li>
 <li><p><strong>簡單直覺：</strong>直接反映關鍵字的存在，適合某些專門的檢索任務。</p></li>
 </ul>
@@ -268,7 +268,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>在上面的範例中，使用<code translate="no">AUTOINDEX</code> 索引類型，為<code translate="no">binary_vector</code> 欄位建立一個名為<code translate="no">binary_vector_index</code> 的索引。<code translate="no">metric_type</code> 設為<code translate="no">HAMMING</code> ，表示使用漢明距離進行相似性測量。</p>
-<p>Milvus 提供多種索引類型，以提供更好的向量搜尋體驗。AUTOINDEX 是一種特殊的索引類型，專為平滑向量搜尋的學習曲線而設計。有很多索引類型可供您選擇。詳情請參閱<a href="/docs/zh-hant/index-explained.md">索引說明</a>。</p>
+<p>Milvus 提供多種索引類型，以提供更好的向量搜尋體驗。AUTOINDEX 是一種特殊的索引類型，專為平滑向量搜尋的學習曲線而設計。有很多索引類型可供您選擇。詳情請參考<a href="/docs/zh-hant/index-explained.md">Index Explained</a>。</p>
 <p>此外，Milvus 還支援二進位向量的其他相似度指標。如需詳細資訊，請參閱<a href="/docs/zh-hant/metric.md">度量類型</a>。</p>
 <h3 id="Create-collection" class="common-anchor-header">建立集合<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -332,6 +332,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -443,6 +444,7 @@ client.<span class="hljs-title function_">insert</span>({
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;data\&quot;: <span class="hljs-variable">$data</span>,
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;
@@ -555,6 +557,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$data</span>,

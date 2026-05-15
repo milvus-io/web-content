@@ -2,7 +2,7 @@
 id: tune_consistency.md
 title: 一致性等級
 summary: >-
-  作為分散式向量資料庫，Milvus 提供多種一致性層級，以確保每個節點或副本在讀寫作業期間，都能存取相同的資料。目前，支援的一致性層級包括
+  作為一個分散式向量資料庫，Milvus 提供多層次的一致性，以確保每個節點或副本在讀寫作業時能存取相同的資料。目前，支援的一致性層級包括
   Strong、Bounded、Eventually 和 Session，其中 Bounded 是預設使用的一致性層級。
 ---
 <h1 id="Consistency-Level" class="common-anchor-header">一致性等級<button data-href="#Consistency-Level" class="anchor-icon" translate="no">
@@ -36,8 +36,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 是一個將儲存和計算分開的系統。在這個系統中，<strong>資料節點 (DataNodes</strong>) 負責資料的持久化，並最終將資料儲存在分散式物件儲存空間 (例如 MinIO/S3)。<strong>QueryNodes</strong>負責處理搜尋等計算任務。這些任務涉及<strong>批次資料</strong>和<strong>串流資料</strong>的處理。簡單來說，批次資料可以理解為已經儲存於物件儲存空間的資料，而串流資料則是指尚未儲存於物件儲存空間的資料。由於網路延遲的關係，QueryNodes 通常無法保存最新的串流資料。如果沒有額外的保障措施，直接在串流資料上執行搜尋，可能會導致許多未承諾的資料點遺失，影響搜尋結果的準確性。</p>
-<p>Milvus 商業版是一個將儲存和計算分開的系統。在這個系統中，DataNodes 負責資料的持久化，並最終將資料儲存於分散式物件儲存空間，例如 MinIO/S3。QueryNodes 負責處理搜尋等計算任務。這些任務涉及批次資料和串流資料的處理。簡單來說，批次資料可理解為已儲存在物件儲存空間的資料，而串流資料則是指尚未儲存在物件儲存空間的資料。由於網路延遲的關係，QueryNodes 通常無法儲存最新的串流資料。如果沒有額外的保護措施，直接在串流資料上執行 Search 可能會導致遺失許多未承諾的資料點，影響搜尋結果的準確性。</p>
+    </button></h2><p>Milvus 是一個將儲存和計算分開的系統。在這個系統中，<strong>資料節點 (DataNodes</strong>) 負責資料的持久化，並最終將資料儲存在分散式物件儲存空間 (例如 MinIO/S3)。<strong>QueryNodes</strong>負責處理搜尋等計算任務。這些任務涉及<strong>批次資料</strong>和<strong>串流資料</strong>的處理。簡單來說，批次資料可理解為已儲存於物件儲存空間的資料，而串流資料則是指尚未儲存於物件儲存空間的資料。由於網路延遲的關係，QueryNodes 通常無法保存最新的串流資料。如果沒有額外的保障措施，直接在串流資料上執行搜尋，可能會導致許多未承諾的資料點遺失，影響搜尋結果的準確性。</p>
+<p>Milvus 商業版是一個將儲存和計算分離的系統。在這個系統中，DataNodes 負責資料的持久化，並最終將資料儲存於分散式物件儲存空間，例如 MinIO/S3。QueryNodes 負責處理搜尋等計算任務。這些任務涉及批次資料和串流資料的處理。簡單來說，批次資料可理解為已儲存在物件儲存空間的資料，而串流資料則是指尚未儲存在物件儲存空間的資料。由於網路延遲的關係，QueryNodes 通常無法儲存最新的串流資料。如果沒有額外的保護措施，直接在串流資料上執行 Search 可能會導致遺失許多未承諾的資料點，影響搜尋結果的準確性。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/batch-data-and-streaming-data.png" alt="Batch Data And Streaming Data" class="doc-image" id="batch-data-and-streaming-data" />
@@ -49,7 +49,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/service-time-and-guarantee-time.png" alt="Service Time And Guarantee Time" class="doc-image" id="service-time-and-guarantee-time" />
    </span> <span class="img-wrapper"> <span>服務時間與保證時間</span> </span></p>
 <p>如上圖所示，如果 GuaranteeTs 小於 ServiceTime，表示指定時間點之前的所有資料已完全寫入磁碟，允許 QueryNodes 立即執行 Search 作業。當 GuaranteeTs 大於 ServiceTime 時，QueryNodes 必須等到 ServiceTime 大於 GuaranteeTs 時，才能執行 Search 作業。</p>
-<p>使用者需要在查詢精確度與查詢延遲之間作出權衡。如果使用者對一致性要求很高，而且對查詢延遲不敏感，他們可以將 GuaranteeTs 設定為盡可能大的值；如果使用者希望快速收到搜尋結果，而且對查詢準確性的容忍度較高，那麼可以將 GuaranteeTs 設定為較小的值。</p>
+<p>使用者需要在查詢精確度與查詢延遲之間作出權衡。如果使用者對一致性要求很高，而且對查詢延遲不敏感，他們可以將 GuaranteeTs 設定為盡可能大的值；如果使用者希望快速收到搜尋結果，而且對查詢精確度的容忍度較高，那麼可以將 GuaranteeTs 設定為較小的值。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/consistency-level-illustrated.png" alt="Consistency Level Illustrated" class="doc-image" id="consistency-level-illustrated" />
@@ -63,7 +63,7 @@ summary: >-
 <li><p><strong>有限制的延遲</strong></p>
 <p>GuranteeTs 設定為早於最新時間戳記的時間點，使 QueryNodes 在執行搜尋時可容忍某些資料遺失。</p></li>
 <li><p><strong>會話</strong></p>
-<p>用戶端插入資料的最新時間點作為 GuaranteeTs，使 QueryNodes 能夠對用戶端插入的所有資料執行搜尋。</p></li>
+<p>用戶端插入資料的最新時間點作為 GuaranteeTs，使 QueryNodes 可以在用戶端插入的所有資料上執行搜尋。</p></li>
 </ul>
 <p>Milvus 使用 Bounded Staleness 作為預設的一致性等級。如果未指定 GuaranteeTs，則使用最新的 ServiceTime 作為 GuaranteeTs。</p>
 <h2 id="Set-Consistency-Level" class="common-anchor-header">設定一致性等級<button data-href="#Set-Consistency-Level" class="anchor-icon" translate="no">
@@ -156,6 +156,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -214,6 +215,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -274,6 +276,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;color like \&quot;red_%\&quot;&quot;,

@@ -248,6 +248,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;product_catalog\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -422,6 +423,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/product_catalog/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;data\&quot;: <span class="hljs-variable">$entities</span>
 }&quot;</span>
@@ -497,7 +499,7 @@ curl --request POST \
      <td><p>أعلى</p></td>
    </tr>
 </table>
-<p>¹ <em>المصفوفات كـ LHS</em> تعني أن الطرف الأيسر من تعبير المرشح هو مصفوفة JSON، على سبيل المثال:</p>
+<p>¹ <em>المصفوفات كـ LHS</em> يعني أن الطرف الأيسر من تعبير المرشح هو مصفوفة JSON، على سبيل المثال:</p>
 <pre><code translate="no" class="language-plaintext">metadata[&quot;tags&quot;] == [&quot;clearance&quot;, &quot;summer_sale&quot;]
 json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
 <button class="copy-code-btn"></button></code></pre>
@@ -587,7 +589,7 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
 <div class="alert note">
 <p>يجب أن تحتوي المصفوفات على عناصر من نفس النوع للفهرسة المثلى. لمزيد من المعلومات، راجع <a href="/docs/ar/array_data_type.md">حقل المصفوفات</a>.</p>
 </div>
-<h4 id="Example-Create-JSON-path-indexes" class="common-anchor-header">مثال: إنشاء فهارس مسار JSON</h4><p>باستخدام بنية <code translate="no">metadata</code> JSON من مقدمتنا، إليك أمثلة على كيفية إنشاء فهارس على مسارات JSON مختلفة:</p>
+<h4 id="Example-Create-JSON-path-indexes" class="common-anchor-header">مثال: إنشاء فهارس مسار JSON</h4><p>باستخدام بنية <code translate="no">metadata</code> JSON من مقدمتنا، إليك أمثلة على كيفية إنشاء فهارس على مسارات JSON المختلفة:</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Index the category field as a string</span>
@@ -799,7 +801,7 @@ indexOpt3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;p
 metadata[&quot;price&quot;] = 99.99
 metadata[&quot;supplier&quot;][&quot;country&quot;] = &quot;USA&quot;
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>استنتاج الأنواع تلقائيًا</strong> - لكل قيمة، يحدد Milvus نوعها بالترتيب التالي:</p>
+<li><p><strong>استنتاج الأنواع تلقائيًا</strong> - لكل قيمة، يحدد ميلفوس نوعها بالترتيب التالي:</p>
 <pre><code translate="no" class="language-plaintext">unsigned integer → signed integer → floating-point → string
 <button class="copy-code-btn"></button></code></pre>
 <p>يتم استخدام النوع الأول الذي يناسب القيمة للفهرسة.</p>
@@ -898,6 +900,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;product_catalog\&quot;,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>

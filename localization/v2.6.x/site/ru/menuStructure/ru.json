@@ -144,7 +144,7 @@
                 "children": []
               },
               {
-                "label": "Рулевая карта",
+                "label": "Рулевая диаграмма",
                 "id": "install_cluster-helm-gpu.md",
                 "order": 1,
                 "children": []
@@ -600,7 +600,7 @@
                     "children": []
                   },
                   {
-                    "label": "Остановите",
+                    "label": "Остановить",
                     "id": "stop-filter.md",
                     "order": 6,
                     "children": []
@@ -1422,7 +1422,7 @@
                 "children": []
               },
               {
-                "label": "С рулевым",
+                "label": "С рулем",
                 "id": "configure-helm.md",
                 "order": 1,
                 "children": []
@@ -1979,7 +1979,7 @@
       {
         "label": "Птицелов",
         "id": "birdwatcher",
-        "order": 2,
+        "order": 3,
         "children": [
           {
             "label": "Обзор",
@@ -1997,6 +1997,37 @@
             "label": "Руководства по использованию",
             "id": "birdwatcher_usage_guides.md",
             "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "ЦКЗ Милвус",
+        "id": "milvus_cdc",
+        "order": 2,
+        "children": [
+          {
+            "label": "Обзор",
+            "id": "milvus_cdc_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Настройка репликации CDC",
+            "id": "set_up_cdc_replication.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Переключение",
+            "id": "cdc_switchover.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Отказоустойчивость",
+            "id": "cdc_failover.md",
+            "order": 3,
             "children": []
           }
         ]

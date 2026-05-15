@@ -40,14 +40,14 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Time-to-Live (TTL) wird in Datenbanken häufig für Szenarien verwendet, in denen Daten nur für einen bestimmten Zeitraum nach dem Einfügen oder Ändern gültig oder zugänglich bleiben sollen. Danach können die Daten automatisch entfernt werden.</p>
-<p>Wenn Sie beispielsweise täglich Daten einspielen, aber nur 14 Tage lang Datensätze aufbewahren müssen, können Sie Milvus so konfigurieren, dass alle Daten, die älter sind als diese, automatisch entfernt werden, indem Sie die TTL der Sammlung auf <strong>14 × 24 × 3600 = 1209600</strong> Sekunden einstellen. Dadurch wird sichergestellt, dass nur die Daten der letzten 14 Tage in der Sammlung verbleiben.</p>
+<p>Wenn Sie beispielsweise täglich Daten einspeisen, die Datensätze aber nur 14 Tage lang aufbewahren müssen, können Sie Milvus so konfigurieren, dass alle Daten, die älter sind als dieser Zeitraum, automatisch entfernt werden, indem Sie die TTL der Sammlung auf <strong>14 × 24 × 3600 = 1209600</strong> Sekunden einstellen. Dadurch wird sichergestellt, dass nur die Daten der letzten 14 Tage in der Sammlung verbleiben.</p>
 <div class="alert note">
 <p>Abgelaufene Entitäten erscheinen nicht in den Such- oder Abfrageergebnissen. Sie können jedoch bis zur nächsten Datenverdichtung im Speicher verbleiben, die innerhalb der nächsten 24 Stunden durchgeführt werden sollte.</p>
 <p>Sie können steuern, wann die Datenverdichtung ausgelöst werden soll, indem Sie in Ihrer Milvus-Konfigurationsdatei den Konfigurationspunkt <code translate="no">dataCoord.compaction.expiry.tolerance</code> setzen.</p>
 <p>Der Standardwert für dieses Konfigurationselement ist <code translate="no">-1</code>, was bedeutet, dass das bestehende Datenverdichtungsintervall gilt. Wenn Sie den Wert jedoch auf eine positive ganze Zahl wie <code translate="no">12</code> ändern, wird die Datenverdichtung die angegebene Anzahl von Stunden nach Ablauf der Entitäten ausgelöst.</p>
 </div>
 <p>Die TTL-Eigenschaft in einer Milvus-Sammlung wird als ganze Zahl in Sekunden angegeben. Einmal festgelegt, werden alle Daten, die ihre TTL überschreiten, automatisch aus der Sammlung gelöscht.</p>
-<p>Da der Löschvorgang asynchron erfolgt, werden die Daten möglicherweise nicht genau dann aus den Suchergebnissen entfernt, wenn die angegebene TTL abgelaufen ist. Stattdessen kann es zu einer Verzögerung kommen, da die Entfernung von der Garbage Collection (GC) und den Verdichtungsprozessen abhängt, die in nicht-deterministischen Intervallen stattfinden.</p>
+<p>Da der Löschvorgang asynchron abläuft, werden die Daten möglicherweise nicht genau dann aus den Suchergebnissen entfernt, wenn die angegebene TTL verstrichen ist. Stattdessen kann es zu einer Verzögerung kommen, da die Entfernung von der Garbage Collection (GC) und den Verdichtungsprozessen abhängt, die in nicht-deterministischen Intervallen stattfinden.</p>
 <h2 id="Set-TTL" class="common-anchor-header">TTL setzen<button data-href="#Set-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -65,10 +65,25 @@ summary: >-
       </svg>
     </button></h2><p>Sie können die TTL-Eigenschaft festlegen, wenn Sie</p>
 <ul>
-<li><p><a href="/docs/de/set-collection-ttl.md#Set-TTL-when-creating-a-collection">eine Sammlung erstellen.</a></p></li>
-<li><p><a href="/docs/de/set-collection-ttl.md#Set-TTL-for-an-existing-collection">die TTL-Eigenschaft einer bestehenden Sammlung ändern.</a></p></li>
+<li><p><a href="/docs/de/v2.6.x/set-collection-ttl.md#Set-TTL-when-creating-a-collection">eine Sammlung erstellen.</a></p></li>
+<li><p><a href="/docs/de/v2.6.x/set-collection-ttl.md#Set-TTL-for-an-existing-collection">die TTL-Eigenschaft einer bestehenden Sammlung ändern.</a></p></li>
 </ul>
-<h3 id="Set-TTL-when-creating-a-collection" class="common-anchor-header">TTL bei der Erstellung einer Sammlung festlegen</h3><p>Das folgende Codeschnipsel zeigt, wie die TTL-Eigenschaft beim Erstellen einer Sammlung festgelegt wird.</p>
+<h3 id="Set-TTL-when-creating-a-collection" class="common-anchor-header">TTL bei der Erstellung einer Sammlung festlegen<button data-href="#Set-TTL-when-creating-a-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Das folgende Codeschnipsel zeigt, wie die TTL-Eigenschaft beim Erstellen einer Sammlung festgelegt wird.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -122,13 +137,29 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-TTL-for-an-existing-collection" class="common-anchor-header">TTL für eine bestehende Sammlung festlegen</h3><p>Der folgende Codeschnipsel demonstriert, wie die TTL-Eigenschaft in einer bestehenden Sammlung geändert werden kann.</p>
+<h3 id="Set-TTL-for-an-existing-collection" class="common-anchor-header">TTL für eine bestehende Sammlung festlegen<button data-href="#Set-TTL-for-an-existing-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Der folgende Codeschnipsel demonstriert, wie die TTL-Eigenschaft in einer bestehenden Sammlung geändert werden kann.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.alter_collection_properties(
@@ -164,6 +195,7 @@ client.alterCollection(alterCollectionReq);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;properties\&quot;: {
@@ -171,7 +203,7 @@ client.alterCollection(alterCollectionReq);
     }
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Drop-TTL-setting" class="common-anchor-header">TTL-Einstellung aufheben<button data-href="#Drop-TTL-setting" class="anchor-icon" translate="no">
+<h2 id="Drop-TTL-setting" class="common-anchor-header">TTL-Einstellung verwerfen<button data-href="#Drop-TTL-setting" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -219,6 +251,7 @@ client.dropCollection(dropCollectionReq);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;&quot;</span>my_collection<span class="hljs-string">&quot;\&quot;,
     \&quot;properties\&quot;: {

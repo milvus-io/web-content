@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Un campo Array of Structs, o un campo StructArray, en una entidad almacena un conjunto ordenado de elementos Struct. Cada Struct en el Array comparte el mismo esquema predefinido, que comprende múltiples vectores y campos escalares.</p>
+    </button></h1><p>Un campo Array of Structs, o un campo StructArray, en una entidad almacena un conjunto ordenado de elementos Struct. Cada Struct de la Matriz comparte el mismo esquema predefinido, compuesto por múltiples vectores y campos escalares.</p>
 <p>He aquí un ejemplo de entidad de una colección que contiene un campo StructArray.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     &#x27;id&#x27;<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
@@ -63,7 +63,7 @@ summary: >-
 <p>Para determinar rápidamente si el campo StructArray se adapta a sus escenarios de aplicación, considere si:</p>
 <ul>
 <li><p>Sus datos están en una estructura jerárquica, como un documento con muchos trozos anotados.</p></li>
-<li><p>El resultado de la búsqueda debe ser el documento y no los fragmentos, como en el ejemplo anterior.</p></li>
+<li><p>El resultado de la búsqueda debería ser el documento y no los fragmentos, como en el ejemplo anterior.</p></li>
 <li><p>Los resultados de la búsqueda contienen un gran número de entidades duplicadas, y usted tiene dificultades para recuperar los resultados finales utilizando técnicas como la agrupación, la deduplicación y la reordenación.</p></li>
 </ul>
 <p>Si sus respuestas a las preguntas anteriores son afirmativas, debe utilizar StructArray.</p>
@@ -121,7 +121,7 @@ summary: >-
   &lt;/div&gt;
 </code></pre>
 <p></Grid></p>
-<p>Mantenga el número de campos vectoriales, tanto a nivel de colección como en los Structs combinados, en un máximo de 10 o igual.</p></li>
+<p>Mantenga el número de campos vectoriales, tanto en el nivel de colección como en los Structs combinados, en un máximo de 10 o igual.</p></li>
 <li><p><strong>Valores nulos y por defecto</strong></p>
 <p>Un campo StructArray no es anulable y no acepta ningún valor por defecto.</p></li>
 <li><p><strong>Función</strong></p>
@@ -406,8 +406,8 @@ SCHEMA=<span class="hljs-string">&#x27;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La indexación es obligatoria para todos los campos vectoriales, incluidos tanto los campos vectoriales de la colección como los definidos en el elemento Struct.</p>
-<p>Los parámetros de índice aplicables varían según el tipo de índice. Para obtener más información sobre los parámetros de índice aplicables, consulte <a href="/docs/es/index-explained.md">Explicación de los índices</a> y la documentación del tipo de índice seleccionado.</p>
+    </button></h2><p>La indexación es obligatoria para todos los campos vectoriales, incluyendo tanto los campos vectoriales de la colección como los definidos en el elemento Struct.</p>
+<p>Los parámetros de índice aplicables varían según el tipo de índice. Para obtener más información sobre los parámetros de índice aplicables, consulte <a href="/docs/es/index-explained.md">Explicación del índice</a> y la documentación del tipo de índice seleccionado.</p>
 <h3 id="Index-an-embedding-list" class="common-anchor-header">Indexar una lista de incrustación<button data-href="#Index-an-embedding-list" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -423,7 +423,7 @@ SCHEMA=<span class="hljs-string">&#x27;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Para indexar una lista de incrustación, necesita establecer su tipo de índice a <code translate="no">AUTOINDEX</code> o cualquiera de los tipos de índice aplicables listados anteriormente, y utilizar un tipo de métrica listada para Milvus para medir las similitudes entre listas de incrustación.</p>
+    </button></h3><p>Para indexar una lista de incrustación, necesita establecer su tipo de índice a <code translate="no">AUTOINDEX</code> o cualquiera de los tipos de índice aplicables listados arriba, y utilizar un tipo de métrica listada para Milvus para medir las similitudes entre listas de incrustación.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create index parameters</span>
@@ -579,6 +579,7 @@ client.createCollection(requestCreate);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/create&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;description\&quot;: \&quot;A collection for storing book information with struct array chunks\&quot;,
@@ -694,6 +695,7 @@ row.add(<span class="hljs-string">&quot;chunks&quot;</span>, structArr);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/insert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -816,7 +818,7 @@ client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot
         ></path>
       </svg>
     </button></h2><p>Puedes realizar búsquedas vectoriales en los campos vectoriales de una colección y en un StructArray.</p>
-<p>En concreto, debe concatenar el nombre del campo StructArray y los de los campos vectoriales de destino dentro de los elementos Struct como valor para el parámetro <code translate="no">anns_field</code> en una petición de búsqueda, y utilizar <code translate="no">EmbeddingList</code> para organizar ordenadamente los vectores de consulta.</p>
+<p>Concretamente, debe concatenar el nombre del campo StructArray y los de los campos vectoriales de destino dentro de los elementos Struct como valor para el parámetro <code translate="no">anns_field</code> en una petición de búsqueda, y utilizar <code translate="no">EmbeddingList</code> para organizar ordenadamente los vectores de consulta.</p>
 <div class="alert note">
 <p>Milvus proporciona <code translate="no">EmbeddingList</code> para ayudarle a organizar de forma más ordenada los vectores de consulta para búsquedas en una lista de incrustación en un StructArray. Cada <code translate="no">EmbeddingList</code> contiene al menos un vector de incrustación y espera un número de entidades topK a cambio.</p>
 <p>Sin embargo, <code translate="no">EmbeddingList</code> sólo puede utilizarse en peticiones <code translate="no">search()</code> sin parámetros de búsqueda por rango o agrupación, y mucho menos en peticiones <code translate="no">search_iterator()</code>.</p>
@@ -886,6 +888,7 @@ embeddingList1=<span class="hljs-string">&#x27;[[0.2,0.9,0.4,-0.3,0.2]]&#x27;</s
 embeddingList2=<span class="hljs-string">&#x27;[[-0.2,-0.2,0.5,0.6,0.9],[-0.4,0.3,0.5,0.8,0.2]]&#x27;</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>],
@@ -990,6 +993,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>, <span class="hljs-variable">$embeddingList2</span>],
@@ -1113,7 +1117,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <pre><code translate="no" class="language-python">element_filter(chunks, $[text] LIKE <span class="hljs-string">&quot;Red%&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Puede utilizar casi todos los operadores de comparación, rango y aritméticos en el predicado, que se evalúa por elemento, y los operadores lógicos pueden utilizarse para combinar varias condiciones en el mismo elemento. Para obtener más información, consulte <a href="/docs/es/basic-operators.md">Operadores básicos</a>.</p>
-<p>Si hay varias expresiones de filtrado escalar en una búsqueda filtrada o en una solicitud de consulta, coloque la expresión de filtrado de elemento después de todas las expresiones de filtrado de nivel de entidad, como se muestra a continuación.</p>
+<p>Si hay varias expresiones de filtrado escalar en una búsqueda filtrada o en una petición de consulta, coloque la expresión de filtrado de elemento después de todas las expresiones de filtrado de nivel de entidad, como se muestra a continuación.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># correct</span>
 <span class="hljs-built_in">id</span> &gt; <span class="hljs-number">0</span> &amp;&amp; element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>)
 

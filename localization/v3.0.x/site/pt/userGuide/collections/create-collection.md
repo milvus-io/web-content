@@ -38,7 +38,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Uma coleção é uma tabela bidimensional com colunas fixas e linhas variantes. Cada coluna representa um campo e cada linha representa uma entidade. É necessário um esquema para implementar esta gestão estrutural de dados. Cada entidade a inserir tem de cumprir os condicionalismos definidos no esquema.</p>
-<p>Pode determinar todos os aspectos de uma coleção, incluindo o esquema, os parâmetros de índice, o tipo de métrica e se deve ser carregada aquando da criação, para garantir que a coleção satisfaz totalmente os seus requisitos.</p>
+<p>É possível determinar todos os aspectos de uma coleção, incluindo o esquema, os parâmetros de índice, o tipo de métrica e se deve ser carregada aquando da criação, para garantir que a coleção satisfaz plenamente os seus requisitos.</p>
 <p>Para criar uma coleção, é necessário</p>
 <ul>
 <li><p><a href="/docs/pt/create-collection.md#Create-Schema">Criar um esquema</a></p></li>
@@ -61,7 +61,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Um esquema define a estrutura de dados de uma coleção. Ao criar uma coleção, é necessário conceber o esquema com base nas suas necessidades. Para mais pormenores, consulte <a href="/docs/pt/schema.md">Esquema explicado</a>.</p>
-<p>Os seguintes snippets de código criam um esquema com o campo dinâmico ativado e três campos obrigatórios denominados <code translate="no">my_id</code>, <code translate="no">my_vector</code> e <code translate="no">my_varchar</code>.</p>
+<p>Os seguintes trechos de código criam um esquema com o campo dinâmico ativado e três campos obrigatórios denominados <code translate="no">my_id</code>, <code translate="no">my_vector</code> e <code translate="no">my_varchar</code>.</p>
 <div class="alert note">
 <p>Pode definir valores predefinidos para qualquer campo escalar e torná-lo anulável. Para obter detalhes, consulte <a href="/docs/pt/nullable-and-default.md">Nullable &amp; Default</a>.</p>
 </div>
@@ -225,7 +225,7 @@ schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">
       </svg>
     </button></h2><p>Criar um índice em um campo específico acelera a pesquisa em relação a esse campo. Um índice regista a ordem das entidades dentro de uma coleção. Como mostrado nos seguintes trechos de código, você pode usar <code translate="no">metric_type</code> e <code translate="no">index_type</code> para selecionar maneiras apropriadas para Milvus indexar um campo e medir semelhanças entre embeddings vetoriais.</p>
 <p>No Milvus, pode utilizar <code translate="no">AUTOINDEX</code> como o tipo de índice para todos os campos vectoriais e um de <code translate="no">COSINE</code>, <code translate="no">L2</code> e <code translate="no">IP</code> como o tipo de métrica com base nas suas necessidades.</p>
-<p>Como demonstrado no excerto de código acima, é necessário definir o tipo de índice e o tipo métrico para os campos vectoriais e apenas o tipo de índice para os campos escalares. Os índices são obrigatórios para campos vectoriais e é aconselhável criar índices em campos escalares frequentemente utilizados em condições de filtragem.</p>
+<p>Tal como demonstrado no fragmento de código acima, é necessário definir o tipo de índice e o tipo métrico para os campos vectoriais e apenas o tipo de índice para os campos escalares. Os índices são obrigatórios para campos vectoriais e é aconselhável criar índices em campos escalares frequentemente utilizados em condições de filtragem.</p>
 <p>Para obter detalhes, consulte <a href="/docs/pt/index-vector-fields.md">Indexar campos vetoriais</a> e <a href="/docs/pt/index-scalar-fields.md">Indexar campos escalares</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -400,6 +400,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_1\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -491,6 +492,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_2\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -500,6 +502,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/get_load_state&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_2\&quot;
 }&quot;</span>
@@ -535,7 +538,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Os fragmentos são fatias horizontais de uma coleção, e cada fragmento corresponde a um canal de entrada de dados. Por predefinição, cada coleção tem um fragmento. É possível especificar o número de fragmentos ao criar uma coleção para melhor se adequar ao volume de dados e à carga de trabalho.</p>
+    </button></h3><p>Os fragmentos são fatias horizontais de uma coleção, e cada fragmento corresponde a um canal de entrada de dados. Por predefinição, cada coleção tem um fragmento. Pode especificar o número de fragmentos ao criar uma coleção para melhor se adequar ao seu volume de dados e carga de trabalho.</p>
 <p>Como orientação geral, considere o seguinte ao definir o número de fragmentos:</p>
 <ul>
 <li><strong>Tamanho dos dados:</strong> Uma prática comum é ter um fragmento para cada 200 milhões de entidades. Também é possível estimar com base no tamanho total dos dados, por exemplo, adicionando um shard para cada 100 GB de dados que você planeja inserir.</li>
@@ -583,6 +586,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_3\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -651,6 +655,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_5\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -722,6 +727,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_5\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -790,6 +796,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_6\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,

@@ -73,7 +73,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>En las siguientes secciones, demostramos cómo almacenar vectores a partir de modelos de incrustación dispersa aprendidos como SPLADE. Si está buscando un complemento para la búsqueda semántica basada en vectores densos, le recomendamos <a href="/docs/es/full-text-search.md">la búsqueda de texto completo</a> con BM25 en lugar de SPLADE por su simplicidad. Si ha realizado una evaluación de calidad y se ha decidido a utilizar SPLADE, puede consultar <a href="/docs/es/embeddings.md#Embedding-Overview">Embeddings</a> para saber cómo generar vectores dispersos con SPLADE.</p>
+    </button></h2><p>En las siguientes secciones, demostramos cómo almacenar vectores a partir de modelos de incrustación dispersa aprendidos como SPLADE. Si está buscando un complemento para la búsqueda semántica basada en vectores densos, le recomendamos <a href="/docs/es/full-text-search.md">la búsqueda de texto completo</a> con BM25 en lugar de SPLADE por simplicidad. Si ha realizado una evaluación de calidad y se ha decidido a utilizar SPLADE, puede consultar <a href="/docs/es/embeddings.md#Embedding-Overview">Embeddings</a> para saber cómo generar vectores dispersos con SPLADE.</p>
 <p>Milvus soporta la entrada de vectores dispersos con los siguientes formatos:</p>
 <ul>
 <li><p><strong>Lista de diccionarios (formateada como <code translate="no">{dimension_index: value, ...}</code>)</strong></p>
@@ -284,7 +284,7 @@ schema.WithField(entity.NewField().
 <li><p><code translate="no">text</code>: Este campo almacena cadenas de texto utilizando el tipo de datos <code translate="no">VARCHAR</code>, con una longitud máxima de 65535 bytes.</p></li>
 </ul>
 <div class="alert note">
-<p>Para habilitar Milvus o generar incrustaciones de vectores dispersos a partir de un campo de texto especificado durante la inserción de datos, se debe realizar un paso adicional que implica una función. Para más información, consulte <a href="/docs/es/full-text-search.md">Búsqueda de texto completo</a>.</p>
+<p>Para habilitar Milvus o generar incrustaciones de vectores dispersos a partir de un campo de texto especificado durante la inserción de datos, debe realizarse un paso adicional que implica una función. Para más información, consulte <a href="/docs/es/full-text-search.md">Búsqueda de texto completo</a>.</p>
 </div>
 <h2 id="Set-Index-Parameters" class="common-anchor-header">Establecer parámetros de índice<button data-href="#Set-Index-Parameters" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -420,6 +420,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -545,6 +546,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {
@@ -697,6 +699,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: $queryData,

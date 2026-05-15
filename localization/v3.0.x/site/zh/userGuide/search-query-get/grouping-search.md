@@ -211,6 +211,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -350,6 +351,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -384,7 +386,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以将分组搜索与<code translate="no">order_by_fields</code> 结合起来，按标量字段对分组排序。当您希望各组的搜索结果各不相同，但又希望各组遵循与业务相关的顺序（如价格或评级）时，这种方法非常有用。</p>
+    </button></h2><p>您可以将分组搜索与<code translate="no">order_by_fields</code> 结合起来，按标量字段对分组排序。当您希望各组的结果各不相同，但又希望各组遵循与业务相关的顺序（如价格或评级）时，这种方法非常有用。</p>
 <p>下面的示例按<code translate="no">category</code> 对搜索结果进行分组，每个分组最多返回三个实体，并按<code translate="no">price</code> 从低到高对返回的分组进行排序。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -411,7 +413,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>在上面的请求中，<code translate="no">limit=20</code> 表示 Milvus 最多选择 20 个组，而不是 20 个实体。因为<code translate="no">group_size=3</code> ，平面结果列表总共最多可包含 60 个实体。</p>
-<p>当你使用<code translate="no">order_by_fields</code> 和<code translate="no">group_by_field</code> 时，Milvus 会根据每个组的顶层实体的指定标量字段值对组进行排序。在每个组内，实体仍按其与查询向量的相似度得分排序。</p>
+<p>当你使用<code translate="no">order_by_fields</code> 和<code translate="no">group_by_field</code> 时，Milvus 会按照每个组的顶级实体的指定标量字段值对组进行排序。在每个组内，实体仍按其与查询向量的相似度得分排序。</p>
 <h2 id="Considerations" class="common-anchor-header">注意事项<button data-href="#Considerations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -430,7 +432,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </button></h2><ul>
 <li><p><strong>索引</strong>：此分组功能仅适用于使用这些索引类型编制索引的 Collections：<strong>flat</strong>、<strong>ivf_flat</strong>、<strong>ivf_sq8</strong>、<strong>hnsw</strong>、<strong>hnsw_pq</strong>、<strong>hnsw_prq</strong>、<strong>hnsw_sq</strong>、<strong>diskann</strong>、<strong>sparse_inverted_index</strong>。</p></li>
 <li><p><strong>组数</strong>：<code translate="no">limit</code> 参数控制返回搜索结果的组的数量，而不是每个组内实体的具体数量。设置适当的<code translate="no">limit</code> 有助于控制搜索多样性和查询性能。如果数据分布密集或考虑性能问题，减少<code translate="no">limit</code> 可以降低计算成本。</p></li>
-<li><p><strong>每组实体</strong>：<code translate="no">group_size</code> 参数控制每个组返回的实体数量。根据使用情况调整<code translate="no">group_size</code> 可以增加搜索结果的丰富性。但是，如果数据分布不均匀，某些组返回的实体数量可能少于<code translate="no">group_size</code> 的指定数量，尤其是在数据有限的情况下。</p></li>
+<li><p><strong>每组实体</strong>：<code translate="no">group_size</code> 参数控制每个组返回的实体数量。根据使用情况调整<code translate="no">group_size</code> 可以增加搜索结果的丰富性。但是，如果数据分布不均，某些组返回的实体数量可能少于<code translate="no">group_size</code> 的指定数量，尤其是在数据有限的情况下。</p></li>
 <li><p><strong>严格的组大小</strong>：当<code translate="no">strict_group_size=True</code> 时，系统将尝试为每个组返回指定数量的实体 (<code translate="no">group_size</code>)，除非该组中没有足够的数据。此设置可确保每个组的实体数一致，但在数据分布不均或资源有限的情况下，可能会导致性能下降。如果不需要严格的实体计数，设置<code translate="no">strict_group_size=False</code> 可以提高查询速度。</p></li>
 <li><p>如果查询向量已经存在于目标 Collections 中，可以考虑使用<code translate="no">ids</code> ，而不是在搜索前检索。有关详情，请参阅<a href="/docs/zh/primary-key-search.md">主键搜索</a>。</p></li>
 </ul>

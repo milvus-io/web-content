@@ -4,9 +4,10 @@ title: قابل للإلغاء والافتراضي
 summary: >-
   يسمح لك Milvus بتعيين السمة القابلة للإلغاء والقيم الافتراضية للحقول القياسية،
   باستثناء الحقل الأساسي. بالنسبة للحقول التي تم وضع علامة nullable=صحيح، يمكنك
-  تخطي الحقل عند إدراج البيانات، أو تعيينه مباشرة إلى قيمة لاغية وسيتعامل النظام
-  معه على أنه لاغٍ دون التسبب في حدوث خطأ. عندما يكون للحقل قيمة افتراضية، سيقوم
-  النظام تلقائيًا بتطبيق هذه القيمة إذا لم يتم تحديد بيانات للحقل أثناء الإدراج.
+  تخطي الحقل عند إدراج البيانات، أو تعيينه مباشرة إلى قيمة فارغة، وسيتعامل
+  النظام معه على أنه فارغ دون التسبب في حدوث خطأ. عندما يكون للحقل قيمة
+  افتراضية، سيقوم النظام تلقائيًا بتطبيق هذه القيمة إذا لم يتم تحديد بيانات
+  للحقل أثناء الإدراج.
 ---
 <h1 id="Nullable--Default" class="common-anchor-header">قابل للإلغاء والافتراضي<button data-href="#Nullable--Default" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -23,8 +24,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يسمح لك Milvus بتعيين السمة <code translate="no">nullable</code> والقيم الافتراضية للحقول القياسية، باستثناء الحقل الأساسي. بالنسبة للحقول التي تم وضع علامة <code translate="no">nullable=True</code> ، يمكنك تخطي الحقل عند إدراج البيانات، أو تعيينه مباشرة إلى قيمة فارغة، وسيتعامل النظام معه على أنه لاغٍ دون التسبب في حدوث خطأ. عندما يكون للحقل قيمة افتراضية، سيقوم النظام تلقائيًا بتطبيق هذه القيمة إذا لم يتم تحديد بيانات للحقل أثناء الإدراج.</p>
-<p>تعمل القيمة الافتراضية والسمات القابلة للإلغاء على تبسيط عملية ترحيل البيانات من أنظمة قواعد البيانات الأخرى إلى ميلفوس من خلال السماح بمعالجة مجموعات البيانات ذات القيم الفارغة والحفاظ على إعدادات القيمة الافتراضية. عند إنشاء مجموعة، يمكنك أيضًا تمكين القيمة القابلة للإلغاء أو تعيين قيم افتراضية للحقول التي قد تكون القيم فيها غير مؤكدة.</p>
+    </button></h1><p>يسمح لك Milvus بتعيين السمة <code translate="no">nullable</code> والقيم الافتراضية للحقول القياسية، باستثناء الحقل الأساسي. بالنسبة للحقول التي تم وضع علامة <code translate="no">nullable=True</code> ، يمكنك تخطي الحقل عند إدراج البيانات، أو تعيينه مباشرة إلى قيمة فارغة، وسيتعامل النظام معه على أنه فارغ دون التسبب في حدوث خطأ. عندما يكون للحقل قيمة افتراضية، سيقوم النظام تلقائيًا بتطبيق هذه القيمة إذا لم يتم تحديد بيانات للحقل أثناء الإدراج.</p>
+<p>تعمل القيمة الافتراضية والسمات القابلة للإلغاء على تبسيط عملية ترحيل البيانات من أنظمة قواعد البيانات الأخرى إلى ميلفوس من خلال السماح بمعالجة مجموعات البيانات ذات القيم الفارغة والحفاظ على إعدادات القيمة الافتراضية. عند إنشاء مجموعة، يمكنك أيضًا تمكين القيم القابلة للإلغاء أو تعيين قيم افتراضية للحقول التي قد تكون القيم فيها غير مؤكدة.</p>
 <h2 id="Limits" class="common-anchor-header">الحدود<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,9 +45,9 @@ summary: >-
 <li><p>تدعم الحقول العددية فقط، باستثناء الحقل الأساسي، القيم الافتراضية والسمة القابلة للإلغاء.</p></li>
 <li><p>لا تدعم حقول JSON و Array القيم الافتراضية.</p></li>
 <li><p>يمكن تكوين القيم الافتراضية أو السمة القابلة للإلغاء فقط أثناء إنشاء المجموعة ولا يمكن تعديلها بعد ذلك.</p></li>
-<li><p>لا يمكن استخدام الحقول التي تم تمييزها على أنها قابلة للإلغاء كمفاتيح تقسيم. لمزيد من المعلومات حول مفاتيح التقسيم، راجع <a href="/docs/ar/use-partition-key.md">استخدام مفتاح التقسيم</a>.</p></li>
-<li><p>عند إنشاء فهرس على حقل قياسي مع تمكين السمة القابلة للإلغاء، سيتم استبعاد القيم الفارغة من الفهرس.</p></li>
-<li><p><strong>حقول JSON و ARRAY</strong>: عند استخدام المشغلين <code translate="no">IS NULL</code> أو <code translate="no">IS NOT NULL</code> للتصفية على حقول JSON أو ARRAY، يعمل هذان المشغلان على مستوى العمود، مما يشير إلى أنهما يقيمان فقط ما إذا كان كائن JSON أو المصفوفة بأكملها فارغة. على سبيل المثال، إذا كان أحد المفاتيح داخل كائن JSON فارغًا، فلن يتعرف عليه عامل التصفية <code translate="no">IS NULL</code>. لمزيد من المعلومات، راجع <a href="/docs/ar/basic-operators.md">المعاملات الأساسية</a>.</p></li>
+<li><p>لا يمكن استخدام الحقول التي تم تمييزها على أنها قابلة للإلغاء كمفاتيح تقسيم. لمزيد من المعلومات حول مفاتيح التقسيم، راجع <a href="/docs/ar/v2.6.x/use-partition-key.md">استخدام مفتاح التقسيم</a>.</p></li>
+<li><p>عند إنشاء فهرس على حقل قياسي مع تمكين السمة القابلة للفراغ، سيتم استبعاد القيم الفارغة من الفهرس.</p></li>
+<li><p><strong>حقول JSON و ARRAY</strong>: عند استخدام المشغلين <code translate="no">IS NULL</code> أو <code translate="no">IS NOT NULL</code> للتصفية على حقول JSON أو ARRAY، يعمل هذان المشغلان على مستوى العمود، مما يشير إلى أنهما يقيمان فقط ما إذا كان كائن JSON أو المصفوفة بأكملها فارغة. على سبيل المثال، إذا كان أحد المفاتيح داخل كائن JSON فارغًا، فلن يتعرف عليه عامل التصفية <code translate="no">IS NULL</code>. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.6.x/basic-operators.md">المعاملات الأساسية</a>.</p></li>
 </ul>
 <h2 id="Nullable-attribute" class="common-anchor-header">سمة لاغية<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -64,7 +65,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>تسمح لك السمة <code translate="no">nullable</code> بتخزين قيم فارغة في مجموعة، مما يوفر مرونة عند التعامل مع بيانات غير معروفة.</p>
-<h3 id="Set-the-nullable-attribute" class="common-anchor-header">تعيين السمة لاغية</h3><p>عند إنشاء مجموعة، استخدم <code translate="no">nullable=True</code> لتعريف الحقول القابلة للفراغ (الإعدادات الافتراضية إلى <code translate="no">False</code>). ينشئ المثال التالي مجموعة باسم <code translate="no">my_collection</code> ويضبط الحقل <code translate="no">age</code> على أنه قابل للإلغاء:</p>
+<h3 id="Set-the-nullable-attribute" class="common-anchor-header">تعيين السمة لاغية<button data-href="#Set-the-nullable-attribute" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>عند إنشاء مجموعة، استخدم <code translate="no">nullable=True</code> لتعريف الحقول القابلة للفراغ (الإعدادات الافتراضية إلى <code translate="no">False</code>). ينشئ المثال التالي مجموعة باسم <code translate="no">my_collection</code> ويضبط الحقل <code translate="no">age</code> على أنه قابل للإلغاء:</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -260,13 +276,29 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-entities" class="common-anchor-header">إدراج الكيانات</h3><p>عندما تقوم بإدراج بيانات في حقل قابل للإلغاء، قم بإدراج بيانات لاغية أو احذف هذا الحقل مباشرةً:</p>
+<h3 id="Insert-entities" class="common-anchor-header">إدراج الكيانات<button data-href="#Insert-entities" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>عندما تقوم بإدراج بيانات في حقل قابل للإلغاء، قم بإدراج بيانات لاغية أو احذف هذا الحقل مباشرةً:</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
@@ -328,6 +360,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 1, &quot;vector&quot;: [0.1, 0.2, 0.3, 0.4, 0.5], &quot;age&quot;: 30},
@@ -337,9 +370,24 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Search-and-query-with-null-values" class="common-anchor-header">البحث والاستعلام بقيم فارغة</h3><p>عند استخدام الطريقة <code translate="no">search</code> ، إذا كان الحقل يحتوي على قيم <code translate="no">null</code> ، ستُرجع نتيجة البحث الحقل على أنه فارغ:</p>
+<h3 id="Search-and-query-with-null-values" class="common-anchor-header">البحث والاستعلام بقيم فارغة<button data-href="#Search-and-query-with-null-values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>عند استخدام الطريقة <code translate="no">search</code> ، إذا كان الحقل يحتوي على قيم <code translate="no">null</code> ، ستُرجع نتيجة البحث الحقل على أنه فارغ:</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">نودجيس</a> <a href="#go">جو جو</a> <a href="#bash">cURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.128</span>]],
@@ -410,6 +458,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -477,6 +526,7 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;age &gt;= 0&quot;,
@@ -532,6 +582,7 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;expr&quot;: &quot;&quot;,
@@ -557,7 +608,22 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
         ></path>
       </svg>
     </button></h2><p>القيم الافتراضية هي قيم محددة مسبقًا للحقول العددية. إذا لم تقم بتوفير قيمة لحقل بقيم افتراضية أثناء الإدراج، يستخدم النظام تلقائيًا القيمة الافتراضية.</p>
-<h3 id="Set-default-values" class="common-anchor-header">تعيين القيم الافتراضية</h3><p>عند إنشاء مجموعة، استخدم المعلمة <code translate="no">default_value</code> لتحديد القيمة الافتراضية للحقل. يوضح المثال التالي كيفية تعيين القيمة الافتراضية <code translate="no">age</code> إلى <code translate="no">18</code> و <code translate="no">status</code> إلى <code translate="no">&quot;active&quot;</code>:</p>
+<h3 id="Set-default-values" class="common-anchor-header">تعيين القيم الافتراضية<button data-href="#Set-default-values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>عند إنشاء مجموعة، استخدم المعلمة <code translate="no">default_value</code> لتحديد القيمة الافتراضية للحقل. يوضح المثال التالي كيفية تعيين القيمة الافتراضية <code translate="no">age</code> إلى <code translate="no">18</code> و <code translate="no">status</code> إلى <code translate="no">&quot;active&quot;</code>:</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema = client.create_schema(
@@ -762,13 +828,29 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-entities" class="common-anchor-header">إدراج الكيانات</h3><p>عند إدراج البيانات، إذا حذفت الحقول ذات القيمة الافتراضية أو عيّنت قيمتها إلى لا شيء، يستخدم النظام القيمة الافتراضية:</p>
+<h3 id="Insert-entities" class="common-anchor-header">إدراج الكيانات<button data-href="#Insert-entities" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>عند إدراج البيانات، إذا حذفت الحقول ذات القيمة الافتراضية أو عيّنت قيمتها إلى لا شيء، يستخدم النظام القيمة الافتراضية:</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
@@ -836,6 +918,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 1, &quot;vector&quot;: [0.1, 0.2, 0.3, 0.4, 0.5], &quot;age&quot;: 30, &quot;status&quot;: &quot;premium&quot;},
@@ -847,9 +930,24 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>لمزيد من المعلومات حول كيفية تفعيل إعدادات القيمة الفارغة والافتراضية، راجع <a href="/docs/ar/nullable-and-default.md#Applicable-rules">القواعد القابلة للتطبيق</a>.</p>
+<p>لمزيد من المعلومات حول كيفية تفعيل إعدادات القيمة الفارغة والافتراضية، راجع <a href="/docs/ar/v2.6.x/nullable-and-default.md#Applicable-rules">القواعد القابلة للتطبيق</a>.</p>
 </div>
-<h3 id="Search-and-query-with-default-values" class="common-anchor-header">البحث والاستعلام بالقيم الافتراضية</h3><p>يتم التعامل مع الكيانات التي تحتوي على قيم افتراضية مثل أي كيانات أخرى أثناء عمليات البحث المتجه والتصفية القياسية. يمكنك تضمين القيم الافتراضية كجزء من عمليات <code translate="no">search</code> و <code translate="no">query</code> الخاصة بك.</p>
+<h3 id="Search-and-query-with-default-values" class="common-anchor-header">البحث والاستعلام بالقيم الافتراضية<button data-href="#Search-and-query-with-default-values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يتم التعامل مع الكيانات التي تحتوي على قيم افتراضية مثل أي كيانات أخرى أثناء عمليات البحث المتجه والتصفية القياسية. يمكنك تضمين القيم الافتراضية كجزء من عمليات <code translate="no">search</code> و <code translate="no">query</code> الخاصة بك.</p>
 <p>على سبيل المثال، في عملية <code translate="no">search</code> ، سيتم تضمين الكيانات التي تحتوي على <code translate="no">age</code> على القيمة الافتراضية <code translate="no">18</code> في النتائج:</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -929,6 +1027,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -1025,6 +1124,7 @@ fmt.Println(<span class="hljs-string">&quot;status: &quot;</span>, resultSet.Get
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;age == 18&quot;,
@@ -1037,6 +1137,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;status == \&quot;active\&quot;&quot;,
@@ -1060,7 +1161,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يلخّص الجدول التالي سلوك الأعمدة القابلة للإلغاء والقيم الافتراضية تحت مجموعات تكوين مختلفة. تحدد هذه القواعد كيفية تعامل Milvus مع البيانات عند محاولة إدراج قيم فارغة أو إذا لم يتم توفير قيم الحقل.</p>
+    </button></h2><p>يلخّص الجدول التالي سلوك الأعمدة القابلة للإلغاء والقيم الافتراضية ضمن مجموعات تكوين مختلفة. تحدد هذه القواعد كيفية تعامل Milvus مع البيانات عند محاولة إدراج قيم فارغة أو إذا لم يتم توفير قيم الحقل.</p>
 <table>
    <tr>
      <th><p>قابل للفراغ</p></th>

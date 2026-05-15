@@ -160,7 +160,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Em Milvus, uma coleção é equivalente a uma tabela num sistema de gestão de bases de dados relacionais (RDBMS). As colecções são os principais objectos lógicos utilizados para armazenar e gerir entidades. Para mais informações, consulte <a href="/docs/pt/manage-collections.md">Gerir colecções</a>.</p>
+    </button></h2><p>Em Milvus, uma coleção é equivalente a uma tabela num sistema de gestão de base de dados relacional (RDBMS). As colecções são os principais objectos lógicos utilizados para armazenar e gerir entidades. Para mais informações, consulte <a href="/docs/pt/manage-collections.md">Gerir colecções</a>.</p>
 <h2 id="Dependency" class="common-anchor-header">Dependência<button data-href="#Dependency" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -337,7 +337,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/knowhere.md#Knowhere">Knowhere</a> é o mecanismo de execução vetorial central do Milvus que incorpora várias bibliotecas de pesquisa de similaridade vetorial, incluindo Faiss, Hnswlib e Annoy. O Knowhere foi também concebido para suportar a computação heterogénea. Controla em que hardware (CPU ou GPU) executar a criação de índices e os pedidos de pesquisa. É assim que o Knowhere recebe o seu nome - saber onde executar as operações.</p>
+    </button></h2><p><a href="https://milvus.io/docs/knowhere.md#Knowhere">O Knowhere</a> é o mecanismo de execução vetorial principal do Milvus, que incorpora várias bibliotecas de pesquisa de similaridade vetorial, incluindo Faiss, Hnswlib e Annoy. O Knowhere foi também concebido para suportar a computação heterogénea. Controla em que hardware (CPU ou GPU) executar a criação de índices e os pedidos de pesquisa. É assim que o Knowhere recebe o seu nome - saber onde executar as operações.</p>
 <!-- ## Log broker
 <p>The <a href="https://milvus.io/docs/four_layers.md#Log-broker">log broker</a> is a publish-subscribe system that supports playback. It is responsible for streaming data persistence, execution of reliable asynchronous queries, event notification, and return of query results. It also ensures integrity of the incremental data when the worker nodes recover from system breakdown. --></p>
 <h2 id="Log-snapshot" class="common-anchor-header">Instantâneo de registo<button data-href="#Log-snapshot" class="anchor-icon" translate="no">
@@ -439,7 +439,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/milvus-cdc-overview.md">Milvus CDC</a> (Change data capture) é uma ferramenta de fácil utilização que pode capturar e sincronizar dados incrementais em instâncias Milvus. Garante a fiabilidade dos dados empresariais, transferindo-os sem problemas entre as instâncias de origem e de destino, permitindo um backup incremental fácil e a recuperação de desastres.</p>
+    </button></h2><p><a href="https://milvus.io/docs/milvus_cdc_overview.md">O Mil</a> vus<a href="https://milvus.io/docs/milvus_cdc_overview.md">CDC</a> (change data capture) é uma ferramenta utilizada para replicar as alterações de dados de um cluster Milvus para outro para recuperação de desastres primary-standby.</p>
 <h2 id="Milvus-CLI" class="common-anchor-header">Milvus CLI<button data-href="#Milvus-CLI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -583,7 +583,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O PyMilvus é um SDK Python do Milvus. O seu código-fonte é de fonte aberta e está alojado no <a href="https://github.com/milvus-io/pymilvus">GitHub</a>. Tem a flexibilidade de escolher o MilvusClient (nova versão do Python SDK) ou o módulo ORM original para falar com o Milvus.</p>
+    </button></h2><p>PyMilvus é um SDK Python do Milvus. O seu código-fonte é de fonte aberta e está alojado no <a href="https://github.com/milvus-io/pymilvus">GitHub</a>. Tem a flexibilidade de escolher o MilvusClient (nova versão do Python SDK) ou o módulo ORM original para falar com o Milvus.</p>
 <h2 id="Query" class="common-anchor-header">Consulta<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -615,7 +615,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O QuorumBuffer é um modo de implantação do Woodpecker projetado para cargas de trabalho de leitura/gravação sensíveis à latência e de alta frequência que exigem capacidade de resposta em tempo real e forte tolerância a falhas. Ele funciona como um buffer de gravação de alta velocidade com três réplicas de gravações de quorum, garantindo forte consistência e alta disponibilidade. Para obter mais informações, consulte a <a href="/docs/pt/woodpecker_architecture.md">Arquitetura Woodpecker</a>.</p>
+    </button></h2><p>O QuorumBuffer é um modo de implantação do Woodpecker projetado para cargas de trabalho de leitura/gravação sensíveis à latência e de alta frequência que exigem capacidade de resposta em tempo real e forte tolerância a falhas. Ele funciona como um buffer de gravação de alta velocidade com três réplicas de gravações de quorum, garantindo forte consistência e alta disponibilidade. Para mais informações, consulte a <a href="/docs/pt/woodpecker_architecture.md">Arquitetura Woodpecker</a>.</p>
 <h2 id="Range-search" class="common-anchor-header">Pesquisa de intervalo<button data-href="#Range-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -713,7 +713,7 @@ title: Terminologia
         ></path>
       </svg>
     </button></h2><p>O Milvus melhora o desempenho da gravação de dados ao distribuir operações de gravação em vários nós usando shards, que são organizados com base no hashing de chaves primárias. Isso aproveita os recursos de computação paralela do cluster.</p>
-<p><em>O particionamento funciona para reduzir a carga de leitura especificando um nome de partição, enquanto o sharding distribui a carga de escrita entre vários servidores.</em></p>
+<p><em>O particionamento funciona para reduzir a carga de leitura, especificando um nome de partição, enquanto o sharding distribui a carga de escrita entre vários servidores.</em></p>
 <h2 id="Sparse-vector" class="common-anchor-header">Vetor esparso<button data-href="#Sparse-vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -729,7 +729,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Os vectores esparsos representam palavras ou frases utilizando a incorporação de vectores em que a maioria dos elementos é zero, sendo que apenas um elemento diferente de zero indica a presença de uma palavra específica. Os modelos de vectores esparsos, como o SPLADEv2, superam os modelos densos na pesquisa de conhecimento fora do domínio, na consciencialização de palavras-chave e na interpretabilidade. Para mais informações, consulte <a href="https://milvus.io/docs/sparse_vector.md#Sparse-Vector">Vectores es</a>parsos.</p>
+    </button></h2><p>Os vectores esparsos representam palavras ou frases utilizando a incorporação de vectores em que a maioria dos elementos é zero, sendo que apenas um elemento diferente de zero indica a presença de uma palavra específica. Os modelos de vectores esparsos, como o SPLADEv2, superam os modelos densos na pesquisa de conhecimento fora do domínio, na consciencialização de palavras-chave e na interpretabilidade. Para mais informações, consulte <a href="https://milvus.io/docs/sparse_vector.md#Sparse-Vector">Vectores esparsos</a>.</p>
 <h2 id="Streaming-Service" class="common-anchor-header">Serviço de streaming<button data-href="#Streaming-Service" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

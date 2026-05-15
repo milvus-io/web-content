@@ -53,14 +53,14 @@ title: 使用 Milvus Operator 安裝 Milvus Cluster
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="/docs/zh-hant/prerequisite-helm.md#How-can-I-start-a-K8s-cluster-locally-for-test-purposes">建立 K8s 叢集</a>。</p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/prerequisite-helm.md#How-can-I-start-a-K8s-cluster-locally-for-test-purposes">建立 K8s 叢集</a>。</p></li>
 <li><p>安裝<a href="https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/">StorageClass</a>。您可以按以下步驟檢查已安裝的 StorageClass。</p>
 <pre><code translate="no" class="language-bash">$ kubectl get sc
 
 NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>安裝前檢查<a href="/docs/zh-hant/prerequisite-helm.md">軟硬體需求</a>。</p></li>
+<li><p>安裝前檢查<a href="/docs/zh-hant/v2.6.x/prerequisite-helm.md">軟硬體需求</a>。</p></li>
 <li><p>在安裝 Milvus 之前，建議使用<a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a>根據您的資料大小來估計硬體需求。這有助於確保 Milvus 安裝的最佳性能和資源分配。</p></li>
 </ul>
 <div class="alert note">
@@ -81,7 +81,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Operator 定義了<a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">Kubernetes</a> 自訂資源之上的 Milvus 叢集自訂資源。定義自訂資源後，您就可以宣告式的方式使用 K8s API，並管理 Milvus 部署堆疊，以確保其可擴充性及高可用性。</p>
+    </button></h2><p>Milvus Operator 定義了<a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">Kubernetes</a> 自訂資源之上的 Milvus 叢集自訂資源。定義了自訂資源後，您可以宣告式的方式使用 K8s API，並管理 Milvus 部署堆疊，以確保其可擴充性及高可用性。</p>
 <div class="filter">
  <a href="#helm">Helm</a> <a href="#kubectl">Kubectl</a></div>
 <div class="filter-helm">
@@ -173,10 +173,10 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>一旦 Milvus Operator pod 運行，您就可以按以下方式部署 Milvus 叢集。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上面的指令會部署一個以<strong>Woodpecker</strong>作為訊息佇列的 Milvus 叢集 (建議使用 v2.6.15)，以及包括 Streaming Node 在內的所有新架構元件。</p>
+<p>上面的指令會部署一個以<strong>Woodpecker</strong>作為訊息佇列（建議使用 v2.6.16）的 Milvus 叢集，以及包括 Streaming Node 在內的所有新架構元件。</p>
 <p><strong>此部署中的架構重點：</strong></p>
 <ul>
-<li><strong>訊息佇列</strong>：<a href="/docs/zh-hant/use-woodpecker.md">使用 Woodpecker</a>(減少基礎架構維護)</li>
+<li><strong>訊息佇列</strong>：<a href="/docs/zh-hant/v2.6.x/use-woodpecker.md">使用 Woodpecker</a>(減少基礎架構維護)</li>
 <li><strong>串流節點</strong>：啟用增強資料處理</li>
 <li><strong>混合協調器</strong>：整合協調器元件以提高效率</li>
 </ul>
@@ -281,7 +281,7 @@ my-release-minio-3                               1/1     Running   0          2m
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>您可以選擇在上述指令中使用<code translate="no">:19530</code> 而不是<code translate="no">27017:19530</code> ，讓<code translate="no">kubectl</code> 替您分配一個本機連接埠，這樣您就不必管理連接埠衝突。</p>
-<p>預設情況下，kubectl 的連接埠轉發只會監聽<code translate="no">localhost</code> 。如果您希望 Milvus 監聽選定或所有的 IP 位址，請使用<code translate="no">address</code> 。以下指令會讓 port-forward 聆聽主機上所有的 IP 位址。</p>
+<p>預設情況下，kubectl 的連接埠轉發只會在<code translate="no">localhost</code> 上監聽。如果您希望 Milvus 監聽選定或所有的 IP 位址，請使用<code translate="no">address</code> 。以下指令會讓 port-forward 聆聽主機上所有的 IP 位址。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
@@ -309,7 +309,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span> \
   --dry-run=client -o yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有關適用的組態項目，請參閱<a href="/docs/zh-hant/system_configuration.md">系統組態</a>。</p></li>
+<p>有關適用的組態項目，請參閱<a href="/docs/zh-hant/v2.6.x/system_configuration.md">系統組態</a>。</p></li>
 <li><p>更新配置。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl patch milvus my-release --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;merge&#x27;</span>\
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span></span> 
@@ -330,7 +330,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 隨附一個內建的 GUI 工具，稱為 Milvus WebUI，您可以透過瀏覽器存取。Milvus Web UI 以簡單直觀的介面增強系統的可觀察性。您可以使用 Milvus Web UI 觀察 Milvus 元件和相依性的統計和指標、檢查資料庫和收集的詳細資訊，以及列出 Milvus 的詳細配置。有關 Milvus Web UI 的詳細資訊，請參閱<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI</a>。</p>
+    </button></h2><p>Milvus 隨附一個內建的 GUI 工具，稱為 Milvus WebUI，您可以透過瀏覽器存取。Milvus Web UI 以簡單直觀的介面增強系統的可觀察性。您可以使用 Milvus Web UI 觀察 Milvus 元件和相依性的統計和指標、檢查資料庫和收集的詳細資訊，以及列出 Milvus 的詳細配置。有關 Milvus Web UI 的詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/milvus-webui.md">Milvus WebUI</a>。</p>
 <p>要啟用對 Milvus Web UI 的存取，您需要將代理 pod 的連接埠轉發到本機連接埠。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
@@ -357,7 +357,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <div class="alert note">
 <ul>
 <li>當您使用預設設定刪除 Milvus 叢集時，etcd、Pulsar 和 MinIO 等相依性不會被刪除。因此，下次安裝相同的 Milvus 叢集實例時，這些依賴將再次被使用。</li>
-<li>若要連同 Milvus 叢集一起刪除依賴項目和持久性磁碟區聲明 (PVC)，請參閱<a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">設定檔</a>。</li>
+<li>若要連同 Milvus 叢集一起刪除依賴項目和持久性磁碟區索賠 (PVC)，請參閱<a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">設定檔</a>。</li>
 </ul>
 </div>
 <h2 id="Uninstall-Milvus-Operator" class="common-anchor-header">解除安裝 Milvus 操作員<button data-href="#Uninstall-Milvus-Operator" class="anchor-icon" translate="no">
@@ -401,27 +401,27 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>在 Docker 中安裝 Milvus 後，您就可以：</p>
 <ul>
-<li><p>檢查<a href="/docs/zh-hant/quickstart.md">Hello Milvus</a>，看看 Milvus 能做什麼。</p></li>
+<li><p>檢查<a href="/docs/zh-hant/v2.6.x/quickstart.md">Hello Milvus</a>，看看 Milvus 能做什麼。</p></li>
 <li><p>學習 Milvus 的基本操作：</p>
 <ul>
-<li><a href="/docs/zh-hant/manage_databases.md">管理資料庫</a></li>
-<li><a href="/docs/zh-hant/manage-collections.md">管理資料集</a></li>
-<li><a href="/docs/zh-hant/manage-partitions.md">管理分割區</a></li>
-<li><a href="/docs/zh-hant/insert-update-delete.md">插入、倒置和刪除</a></li>
-<li><a href="/docs/zh-hant/single-vector-search.md">單向量搜尋</a></li>
-<li><a href="/docs/zh-hant/multi-vector-search.md">混合搜尋</a></li>
+<li><a href="/docs/zh-hant/v2.6.x/manage_databases.md">管理資料庫</a></li>
+<li><a href="/docs/zh-hant/v2.6.x/manage-collections.md">管理資料集</a></li>
+<li><a href="/docs/zh-hant/v2.6.x/manage-partitions.md">管理分割區</a></li>
+<li><a href="/docs/zh-hant/v2.6.x/insert-update-delete.md">插入、倒置和刪除</a></li>
+<li><a href="/docs/zh-hant/v2.6.x/single-vector-search.md">單向量搜尋</a></li>
+<li><a href="/docs/zh-hant/v2.6.x/multi-vector-search.md">混合搜尋</a></li>
 </ul></li>
-<li><p><a href="/docs/zh-hant/upgrade_milvus_cluster-helm.md">使用 Helm Chart 升級 Milvus</a>。</p></li>
-<li><p><a href="/docs/zh-hant/scaleout.md">擴充你的 Milvus 集群</a>。</p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/upgrade_milvus_cluster-helm.md">使用 Helm Chart 升級 Milvus</a>。</p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/scaleout.md">擴充你的 Milvus 集群</a>。</p></li>
 <li><p>在雲上部署您的 Milvu 集群：</p>
 <ul>
-<li><a href="/docs/zh-hant/eks.md">亞馬遜 EKS</a></li>
-<li><a href="/docs/zh-hant/gcp.md">谷歌雲</a></li>
-<li><a href="/docs/zh-hant/azure.md">微軟 Azure</a></li>
+<li><a href="/docs/zh-hant/v2.6.x/eks.md">亞馬遜 EKS</a></li>
+<li><a href="/docs/zh-hant/v2.6.x/gcp.md">谷歌雲</a></li>
+<li><a href="/docs/zh-hant/v2.6.x/azure.md">微軟 Azure</a></li>
 </ul></li>
-<li><p>探索<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI</a>，Milvus 可觀察與管理的直覺式網頁介面。</p></li>
-<li><p>探索<a href="/docs/zh-hant/milvus_backup_overview.md">Milvus 備份</a>，Milvus 資料備份的開放原始碼工具。</p></li>
-<li><p>探索<a href="/docs/zh-hant/birdwatcher_overview.md">Birdwatcher</a>，用於調試 Milvus 和動態組態更新的開放原始碼工具。</p></li>
+<li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus-webui.md">Milvus WebUI</a>，Milvus 可觀察與管理的直覺式網頁介面。</p></li>
+<li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus_backup_overview.md">Milvus 備份</a>，Milvus 資料備份的開放原始碼工具。</p></li>
+<li><p>探索<a href="/docs/zh-hant/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>，用於調試 Milvus 和動態組態更新的開放原始碼工具。</p></li>
 <li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>，一個開放源碼 GUI 工具，用於直觀的 Milvus 管理。</p></li>
-<li><p><a href="/docs/zh-hant/monitor.md">使用 Prometheus 監控 Milvus</a>。</p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/monitor.md">使用 Prometheus 監控 Milvus</a>。</p></li>
 </ul>

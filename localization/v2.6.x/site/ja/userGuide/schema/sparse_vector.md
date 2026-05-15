@@ -40,10 +40,10 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-representation.png" alt="Sparse Vector Representation" class="doc-image" id="sparse-vector-representation" />
    </span> <span class="img-wrapper"> <span>疎ベクトル表現</span> </span></p>
-<p>トークン化とスコアリングにより、ドキュメントはBag-of-Wordsベクトルとして表現することができます。文書中に存在する単語だけがゼロでない値を持ち、スパースなベクトル表現となる。スパース・ベクトルは2つのアプローチで生成できる：</p>
+<p>トークン化とスコアリングにより、文書は単語の袋（bag-of-words）ベクトルとして表現することができます。文書中に存在する単語だけがゼロでない値を持ち、スパースなベクトル表現となる。スパース・ベクトルは2つのアプローチで生成できる：</p>
 <ul>
-<li><p><a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a>(Term Frequency-Inverse Document Frequency)や<a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a>(Best Matching 25)などの<strong>伝統的な統計手法は</strong>、コーパス全体の頻度と重要度に基づいて単語に重みを割り当てます。これらの方法は、トークンを表す各次元のスコアとして単純な統計値を計算します。  MilvusはBM25メソッドを組み込んだ<strong>全文検索を</strong>提供し、テキストを自動的にスパースベクトルに変換するため、手作業による前処理が不要になります。このアプローチは、精度と完全一致が重要なキーワードベースの検索に最適です。詳細は<a href="/docs/ja/full-text-search.md">全文検索を</a>ご参照ください。</p></li>
-<li><p><strong>ニューラル・スパース埋め込み</strong>モデルは、大規模なデータセットで学習することで、スパース表現を生成する学習済み手法である。通常、Transformerアーキテクチャを持つディープラーニングモデルであり、意味文脈に基づいて用語を拡張し、重み付けを行うことができる。Milvusは<a href="https://arxiv.org/abs/2109.10086">SPLADEの</a>ようなモデルから外部生成されたスパース埋め込みもサポートしています。詳細は<a href="/docs/ja/embeddings.md#Embedding-Overview">埋め込みを</a>参照。</include></p></li>
+<li><p><a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a>(Term Frequency-Inverse Document Frequency)や<a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a>(Best Matching 25)などの<strong>伝統的な統計手法は</strong>、コーパス全体の頻度と重要度に基づいて単語に重みを割り当てます。これらの方法は、トークンを表す各次元のスコアとして単純な統計値を計算します。  MilvusはBM25メソッドによる<strong>全文検索を</strong>内蔵しており、テキストを自動的にスパースベクトルに変換するため、手作業による前処理が不要です。このアプローチは、精度と完全一致が重要なキーワードベースの検索に最適です。詳細は<a href="/docs/ja/v2.6.x/full-text-search.md">全文検索を</a>ご参照ください。</p></li>
+<li><p><strong>ニューラル・スパース埋め込み</strong>モデルは、大規模なデータセットで学習することで、スパース表現を生成する学習済み手法である。通常、Transformerアーキテクチャを持つディープラーニングモデルであり、意味文脈に基づいて用語を拡張し、重み付けを行うことができる。Milvusは<a href="https://arxiv.org/abs/2109.10086">SPLADEの</a>ようなモデルから外部生成されたスパース埋め込みもサポートしています。詳細は<a href="/docs/ja/v2.6.x/embeddings.md#Embedding-Overview">埋め込みを</a>参照。</include></p></li>
 </ul>
 <p>スパースベクターと元のテキストはMilvusに保存され、効率的に検索することができる。下図は全体的なプロセスの概要です。</p>
 <p>
@@ -51,7 +51,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
    </span> <span class="img-wrapper"> <span>スパースベクトルワークフロー</span> </span></p>
 <div class="alert note">
-<p>Milvusはスパースベクトルだけでなく、デンスベクトルやバイナリベクトルにも対応しています。密なベクトルは深い意味的関係を把握するのに理想的であり、バイナリベクトルは迅速な類似性比較やコンテンツの重複排除などのシナリオに優れています。詳細については、<a href="/docs/ja/dense-vector.md">密なベクトルと</a> <a href="/docs/ja/binary-vector.md">バイナリ・ベクトルを</a>参照してください。</p>
+<p>Milvusはスパースベクトルだけでなく、デンスベクトルやバイナリベクトルにも対応しています。密なベクトルは深い意味的関係を把握するのに理想的であり、バイナリベクトルは迅速な類似性比較やコンテンツの重複排除などのシナリオに優れています。詳細については、<a href="/docs/ja/v2.6.x/dense-vector.md">密なベクトルと</a> <a href="/docs/ja/v2.6.x/binary-vector.md">バイナリ・ベクトルを</a>参照してください。</p>
 </div>
 <h2 id="Data-Formats" class="common-anchor-header">データ形式<button data-href="#Data-Formats" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,7 +68,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下のセクションでは、SPLADEのような学習されたスパース埋め込みモデルからのベクトルを保存する方法を示します。密なベクトルベースのセマンティック検索を補完するものを探しているのであれば、SPLADEよりもBM25による<a href="/docs/ja/full-text-search.md">全文検索を</a>お勧めします。品質評価を行い、SPLADEを使用することを決めた場合、SPLADEでスパースベクトルを生成する方法については<a href="/docs/ja/embeddings.md#Embedding-Overview">Embeddingsを</a>参照してください。</p>
+    </button></h2><p>以下のセクションでは、SPLADEのような学習されたスパース埋め込みモデルからのベクトルを保存する方法を示します。密なベクトルベースのセマンティック検索を補完するものを探しているのであれば、SPLADEよりもBM25による<a href="/docs/ja/v2.6.x/full-text-search.md">全文検索を</a>お勧めします。品質評価を行い、SPLADEを使用することを決めた場合、SPLADEでスパースベクトルを生成する方法については<a href="/docs/ja/v2.6.x/embeddings.md#Embedding-Overview">Embeddingsを</a>参照してください。</p>
 <p>milvusは以下の形式のスパースベクトル入力をサポートしています：</p>
 <ul>
 <li><p><strong>辞書リスト (<code translate="no">{dimension_index: value, ...}</code> 形式)</strong></p>
@@ -107,7 +107,7 @@ sparse_vector = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクションを作成する前に、コレクションスキーマを指定する必要があります。コレクションスキーマは、フィールドと、オプションでテキストフィールドを対応するスパースベクトル表現に変換する関数を定義します。</p>
+    </button></h2><p>コレクションを作成する前に、コレクションスキーマを指定する必要があります。コレクションスキーマはフィールドを定義し、オプションでテキストフィールドを対応するスパースベクトル表現に変換する関数を定義します。</p>
 <h3 id="Add-fields" class="common-anchor-header">フィールドの追加<button data-href="#Add-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -279,7 +279,7 @@ schema.WithField(entity.NewField().
 <li><p><code translate="no">text</code>:このフィールドには<code translate="no">VARCHAR</code> データ型を使用したテキスト文字列が格納され、最大長は 65535 バイトである。</p></li>
 </ul>
 <div class="alert note">
-<p>Milvusを有効にしたり、データ挿入時に指定されたテキスト・フィールドからスパース・ベクトルの埋め込みを生成するには、関数を使用した追加のステップを踏む必要があります。詳細については、<a href="/docs/ja/full-text-search.md">全文検索を</a>参照してください。</p>
+<p>Milvusを有効にしたり、データ挿入時に指定されたテキスト・フィールドからスパース・ベクトル埋め込みを生成したりするには、関数を使用する追加のステップを踏む必要があります。詳細については、<a href="/docs/ja/v2.6.x/full-text-search.md">全文検索を</a>参照してください。</p>
 </div>
 <h2 id="Set-Index-Parameters" class="common-anchor-header">インデックスパラメータの設定<button data-href="#Set-Index-Parameters" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -296,7 +296,7 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>スパース・ベクトルのインデックスを作成するプロセスは、<a href="/docs/ja/dense-vector.md">密な</a>ベクトルのそれと似ていますが、指定するインデックス・タイプ(<code translate="no">index_type</code>)、距離メトリック(<code translate="no">metric_type</code>)、インデックス・パラメータ(<code translate="no">params</code>)に違いがあります。</p>
+    </button></h2><p>スパース・ベクトルのインデックスを作成するプロセスは、<a href="/docs/ja/v2.6.x/dense-vector.md">密な</a>ベクトルのそれと似ていますが、指定するインデックス・タイプ(<code translate="no">index_type</code>)、距離メトリック(<code translate="no">metric_type</code>)、インデックス・パラメータ(<code translate="no">params</code>)に違いがあります。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -356,9 +356,9 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <button class="copy-code-btn"></button></code></pre>
 <p>この例では、<code translate="no">IP</code> をメトリックとする<code translate="no">SPARSE_INVERTED_INDEX</code> インデックス・タイプを使用しています。詳細は以下のリソースを参照：</p>
 <ul>
-<li><p><a href="/docs/ja/sparse-inverted-index.md">SPARSE_INVERTED_INDEX</a>: インデックスとそのパラメータの説明。</p></li>
-<li><p><a href="/docs/ja/metric.md">メトリック・タイプ</a>：さまざまなフィールド・タイプでサポートされるメトリック・タイプ</p></li>
-<li><p><a href="/docs/ja/full-text-search.md">全文検索</a>：全文検索に関する詳細なチュートリアル</p></li>
+<li><p><a href="/docs/ja/v2.6.x/sparse-inverted-index.md">SPARSE_INVERTED_INDEX</a>: インデックスとそのパラメータの説明。</p></li>
+<li><p><a href="/docs/ja/v2.6.x/metric.md">メトリック・タイプ</a>：さまざまなフィールド・タイプでサポートされているメトリック・タイプ</p></li>
+<li><p><a href="/docs/ja/v2.6.x/full-text-search.md">全文検索</a>：全文検索に関する詳細なチュートリアル</p></li>
 </ul>
 <h2 id="Create-Collection" class="common-anchor-header">コレクションの作成<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -375,7 +375,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>スパース・ベクトルとインデックスの設定が完了したら、スパース・ベクトルを含むコレクションを作成できます。以下の例では <a href="/docs/ja/create-collection.md"><code translate="no">create_collection</code></a>メソッドを使用して、<code translate="no">my_collection</code> という名前のコレクションを作成します。</p>
+    </button></h2><p>スパース・ベクトルとインデックスの設定が完了したら、スパース・ベクトルを含むコレクションを作成できます。以下の例では <a href="/docs/ja/v2.6.x/create-collection.md"><code translate="no">create_collection</code></a>メソッドを使用して、<code translate="no">my_collection</code> という名前のコレクションを作成します。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -415,6 +415,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -540,6 +541,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {
@@ -692,6 +694,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: $queryData,
@@ -704,4 +707,4 @@ curl --request POST \
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.63,&quot;id&quot;:&quot;453577185629572535&quot;,&quot;pk&quot;:&quot;453577185629572535&quot;},{&quot;distance&quot;:0.1,&quot;id&quot;:&quot;453577185629572534&quot;,&quot;pk&quot;:&quot;453577185629572534&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>類似検索パラメーターの詳細については、「<a href="/docs/ja/single-vector-search.md">基本的なベクトル検索</a>」を参照。</p>
+<p>類似検索パラメーターの詳細については、「<a href="/docs/ja/v2.6.x/single-vector-search.md">基本的なベクトル検索</a>」を参照。</p>

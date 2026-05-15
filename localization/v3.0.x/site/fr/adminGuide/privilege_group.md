@@ -204,7 +204,7 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Insérer</p></td>
+     <td><p>Insert</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -274,7 +274,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><ul>
-<li><p><strong>DatabaseReadOnly (DB_RO)</strong>: inclut les privilèges de lecture des données de la base de données.</p></li>
+<li><p><strong>DatabaseReadOnly (DB_RO)</strong>: comprend les privilèges de lecture des données de la base de données.</p></li>
 <li><p><strong>DatabaseReadWrite (DB_RW)</strong>: comprend les privilèges de lecture et d'écriture des données de la base de données.</p></li>
 <li><p><strong>DatabaseAdmin (DB_Admin)</strong>: privilèges de lecture et d'écriture des données de la base et de gestion des bases de données.</p></li>
 </ul>
@@ -549,6 +549,7 @@ client.createPrivilegeGroup(CreatePrivilegeGroupReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;
 }&#x27;</span>
@@ -600,6 +601,7 @@ client.addPrivilegesToGroup(AddPrivilegesToGroupReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/add_privileges_to_group&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;,
     &quot;privileges&quot;:[&quot;Query&quot;, &quot;Search&quot;]
@@ -650,6 +652,7 @@ client.removePrivilegesFromGroup(RemovePrivilegesFromGroupReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/remove_privileges_from_group&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;,
     &quot;privileges&quot;:[&quot;Search&quot;]
@@ -698,6 +701,7 @@ List&lt;PrivilegeGroup&gt; groups = resp.getPrivilegeGroups();
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/list&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Voici un exemple de résultat.</p>
@@ -744,6 +748,7 @@ client.dropPrivilegeGroup(DropPrivilegeGroupReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/drop&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;
 }&#x27;</span>

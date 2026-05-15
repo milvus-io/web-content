@@ -223,6 +223,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -453,6 +454,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -537,6 +539,7 @@ curl --request POST \
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
@@ -673,6 +676,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -832,6 +836,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -1052,6 +1057,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -1102,6 +1108,7 @@ curl --request POST \
 
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;quick_setup&quot;,
   &quot;annsField&quot;: &quot;vector&quot;,
@@ -1137,7 +1144,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <p>Puede mejorar la relevancia de los resultados de búsqueda restringiendo la distancia o puntuación de las entidades devueltas dentro de un rango específico. En Milvus, una búsqueda por rango implica dibujar dos círculos concéntricos con el vector incrustado más similar al vector de consulta como centro. La petición de búsqueda especifica el radio de ambos círculos, y Milvus devuelve todas las incrustaciones vectoriales que caen dentro del círculo exterior pero no del círculo interior.</p>
 <p>Para más información sobre la búsqueda por rango, consulte <a href="/docs/es/range-search.md">Búsqueda por rango</a>.</p></li>
 <li><p>Búsqueda por agrupación</p>
-<p>Si las entidades devueltas tienen el mismo valor en un campo específico, los resultados de la búsqueda pueden no representar la distribución de todas las incrustaciones vectoriales en el espacio vectorial. Para diversificar los resultados de la búsqueda, considere la posibilidad de utilizar la búsqueda de agrupación.</p>
+<p>Si las entidades devueltas tienen el mismo valor en un campo específico, es posible que los resultados de la búsqueda no representen la distribución de todas las incrustaciones vectoriales en el espacio vectorial. Para diversificar los resultados de la búsqueda, considere la posibilidad de utilizar la búsqueda de agrupación.</p>
 <p>Para más información sobre la búsqueda agrupada, consulte <a href="/docs/es/grouping-search.md">Búsqueda agrupada</a>,</p></li>
 <li><p>Búsqueda híbrida</p>
 <p>Una colección puede incluir múltiples campos vectoriales para guardar las incrustaciones vectoriales generadas utilizando diferentes modelos de incrustación. De este modo, puede utilizar una búsqueda híbrida para volver a clasificar los resultados de búsqueda de estos campos vectoriales, mejorando el índice de recuperación.</p>
@@ -1152,7 +1159,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <p>La concordancia de palabras clave en Milvus permite una recuperación precisa de documentos basada en términos específicos. Esta función se utiliza principalmente para la búsqueda filtrada para satisfacer condiciones específicas y puede incorporar el filtrado escalar para refinar los resultados de la consulta, permitiendo búsquedas de similitud dentro de vectores que cumplen criterios escalares.</p>
 <p>Para obtener más información sobre la concordancia de palabras clave, consulte <a href="/docs/es/keyword-match.md">Concordancia de palabras clave</a>.</p></li>
 <li><p>Utilizar clave de partición</p>
-<p>Involucrar varios campos escalares en el filtrado de metadatos y utilizar una condición de filtrado bastante complicada puede afectar a la eficacia de la búsqueda. Una vez que se establece un campo escalar como clave de partición y se utiliza una condición de filtrado que implica la clave de partición en la petición de búsqueda, puede ayudar a restringir el ámbito de búsqueda dentro de las particiones correspondientes a los valores de clave de partición especificados.</p>
+<p>Involucrar varios campos escalares en el filtrado de metadatos y utilizar una condición de filtrado bastante complicada puede afectar a la eficacia de la búsqueda. Una vez establecido un campo escalar como clave de partición y utilizada una condición de filtrado que incluya la clave de partición en la petición de búsqueda, puede ayudar a restringir el ámbito de búsqueda dentro de las particiones correspondientes a los valores de clave de partición especificados.</p>
 <p>Para más detalles sobre la clave de partición, consulte <a href="/docs/es/use-partition-key.md">Utilizar clave de partición</a>.</p></li>
 <li><p>Utilizar mmap</p>
 <p>Para más información sobre la configuración mmap, consulte <a href="/docs/es/mmap.md">Utilizar mmap</a>.</p></li>

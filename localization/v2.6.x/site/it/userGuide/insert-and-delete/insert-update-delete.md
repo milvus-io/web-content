@@ -21,13 +21,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Le entità di una collezione sono record di dati che condividono lo stesso insieme di campi. I valori dei campi in ogni record di dati formano un'entità. Questa pagina illustra come inserire entità in una raccolta.</p>
-<div class="alert note">
-<p>Se si aggiungono dinamicamente nuovi campi dopo la creazione della collezione e non si specificano i valori per questi campi durante l'inserimento delle entità, Milvus li popola automaticamente con i valori predefiniti definiti o con NULL se i valori predefiniti non sono impostati. Per ulteriori informazioni, consultare <a href="/docs/it/add-fields-to-an-existing-collection.md">Aggiungi campi a una raccolta esistente</a>.</p>
+    </button></h1><p>Le entità di una raccolta sono record di dati che condividono lo stesso insieme di campi. I valori dei campi in ogni record di dati formano un'entità. Questa pagina spiega come inserire le entità in una raccolta.</p>
 <div class="alert note">
 <ul>
-<li><p><strong>Campi aggiunti dopo la creazione della collezione</strong>: Se si aggiungono nuovi campi a una raccolta dopo la creazione e non si specificano i valori durante l'inserimento, Milvus li popola automaticamente con i valori predefiniti definiti o con NULL se non sono stati impostati valori predefiniti. Per ulteriori informazioni, consultare <a href="/docs/it/add-fields-to-an-existing-collection.md">Aggiungi campi a una raccolta esistente</a>.</p></li>
-<li><p><strong>Gestione dei duplicati</strong>: L'operazione standard <code translate="no">insert</code> non controlla la presenza di chiavi primarie duplicate. L'inserimento di dati con una chiave primaria esistente crea una nuova entità con la stessa chiave, causando la duplicazione dei dati e potenziali problemi di applicazione. Per aggiornare le entità esistenti o evitare i duplicati, utilizzare l'operazione <strong><code translate="no">upsert</code></strong> invece di utilizzare l'operazione. Per ulteriori informazioni, consultare <a href="/docs/it/upsert-entities.md">Upsert Entities</a>.</p></li>
+<li><p><strong>Campi aggiunti dopo la creazione della raccolta</strong>: Se si aggiungono nuovi campi a una raccolta dopo la creazione e non si specificano i valori durante l'inserimento, Milvus li popola automaticamente con i valori predefiniti definiti o con NULL se non sono stati impostati valori predefiniti. Per ulteriori informazioni, consultare <a href="/docs/it/v2.6.x/add-fields-to-an-existing-collection.md">Aggiungi campi a una raccolta esistente</a>.</p></li>
+<li><p><strong>Gestione dei duplicati</strong>: L'operazione standard <code translate="no">insert</code> non controlla la presenza di chiavi primarie duplicate. L'inserimento di dati con una chiave primaria esistente crea una nuova entità con la stessa chiave, causando la duplicazione dei dati e potenziali problemi di applicazione. Per aggiornare le entità esistenti o evitare i duplicati, utilizzare l'operazione <strong><code translate="no">upsert</code></strong> invece di utilizzare l'operazione. Per ulteriori informazioni, consultare <a href="/docs/it/v2.6.x/upsert-entities.md">Upsert Entities</a>.</p></li>
 </ul>
 </div>
 <h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
@@ -223,6 +221,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},
@@ -397,6 +396,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 10, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},

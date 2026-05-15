@@ -21,7 +21,7 @@ summary: Pelajari cara mengaktifkan proksi TLS di Milvus.
     </button></h1><p>TLS (Transport Layer Security) adalah protokol enkripsi untuk memastikan keamanan komunikasi. Proksi Milvus menggunakan autentikasi TLS satu arah dan dua arah.</p>
 <p>Topik ini menjelaskan cara mengaktifkan TLS di proxy Milvus untuk lalu lintas gRPC dan RESTful.</p>
 <div class="alert note">
-<p>TLS dan autentikasi pengguna adalah dua pendekatan keamanan yang berbeda. Jika Anda telah mengaktifkan autentikasi pengguna dan TLS di sistem Milvus Anda, Anda harus menyediakan nama pengguna, kata sandi, dan jalur file sertifikat. Untuk informasi tentang cara mengaktifkan <a href="/docs/id/authenticate.md">autentikasi</a> pengguna, lihat <a href="/docs/id/authenticate.md">Mengautentikasi Akses Pengguna</a>.</p>
+<p>TLS dan autentikasi pengguna adalah dua pendekatan keamanan yang berbeda. Jika Anda telah mengaktifkan autentikasi pengguna dan TLS di sistem Milvus Anda, Anda harus menyediakan nama pengguna, kata sandi, dan jalur file sertifikat. Untuk informasi tentang cara mengaktifkan <a href="/docs/id/v2.6.x/authenticate.md">autentikasi</a> pengguna, lihat <a href="/docs/id/v2.6.x/authenticate.md">Mengautentikasi Akses Pengguna</a>.</p>
 </div>
 <h2 id="Create-your-own-certificate" class="common-anchor-header">Membuat sertifikat Anda sendiri<button data-href="#Create-your-own-certificate" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -38,13 +38,43 @@ summary: Pelajari cara mengaktifkan proksi TLS di Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Prerequisites" class="common-anchor-header">Prasyarat</h3><p>Pastikan OpenSSL telah terinstal. Jika Anda belum menginstalnya, <a href="https://github.com/openssl/openssl/blob/master/INSTALL.md">bangun dan instal</a> OpenSSL terlebih dahulu.</p>
+    </button></h2><h3 id="Prerequisites" class="common-anchor-header">Prasyarat<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pastikan OpenSSL telah terinstal. Jika Anda belum menginstalnya, <a href="https://github.com/openssl/openssl/blob/master/INSTALL.md">bangun dan instal</a> OpenSSL terlebih dahulu.</p>
 <pre><code translate="no" class="language-shell">openssl version
 <button class="copy-code-btn"></button></code></pre>
 <p>Jika OpenSSL tidak diinstal. Ini dapat diinstal dengan perintah berikut di Ubuntu.</p>
 <pre><code translate="no" class="language-shell">sudo apt install openssl
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-files" class="common-anchor-header">Membuat berkas</h3><ol>
+<h3 id="Create-files" class="common-anchor-header">Membuat berkas<button data-href="#Create-files" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>Buat berkas <code translate="no">gen.sh</code>.</li>
 </ol>
 <pre><code translate="no"><span class="hljs-built_in">mkdir</span> cert &amp;&amp; <span class="hljs-built_in">cd</span> cert
@@ -98,13 +128,43 @@ openssl req -new -key client.key\
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <p>Variabel-variabel dalam file <code translate="no">gen.sh</code> sangat penting untuk proses pembuatan file permintaan penandatanganan sertifikat. Lima variabel pertama adalah informasi penandatanganan dasar, termasuk negara, negara bagian, lokasi, organisasi, unit organisasi. Perhatian diperlukan saat mengonfigurasi <code translate="no">CommonName</code> karena akan diverifikasi selama komunikasi klien-server.</p>
-<h3 id="Run-gensh-to-generate-certificate" class="common-anchor-header">Jalankan <code translate="no">gen.sh</code> untuk menghasilkan sertifikat</h3><p>Jalankan file <code translate="no">gen.sh</code> untuk membuat sertifikat.</p>
+<h3 id="Run-gensh-to-generate-certificate" class="common-anchor-header">Jalankan <code translate="no">gen.sh</code> untuk menghasilkan sertifikat<button data-href="#Run-gensh-to-generate-certificate" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Jalankan file <code translate="no">gen.sh</code> untuk membuat sertifikat.</p>
 <pre><code translate="no"><span class="hljs-built_in">chmod</span> +x gen.sh
 ./gen.sh
 <button class="copy-code-btn"></button></code></pre>
 <p>Tujuh berkas berikut ini akan dibuat: <code translate="no">ca.key</code> <code translate="no">ca.pem</code> , <code translate="no">ca.srl</code>, <code translate="no">server.key</code>, <code translate="no">server.pem</code>, <code translate="no">client.key</code>, <code translate="no">client.pem</code>.</p>
 <p>Pastikan untuk menyimpan <code translate="no">ca.key</code>, <code translate="no">ca.pem</code>, <code translate="no">ca.srl</code> dengan aman untuk memperbarui sertifikat Anda nanti. File <code translate="no">server.key</code> dan <code translate="no">server.pem</code> digunakan oleh server, dan file <code translate="no">client.key</code> dan <code translate="no">client.pem</code> digunakan oleh klien.</p>
-<h3 id="Renew-certificates-optional" class="common-anchor-header">Memperbarui sertifikat (opsional)</h3><p>Jika Anda ingin memperbarui sertifikat dalam beberapa kasus, misalnya jika sertifikat akan segera kedaluwarsa. Anda dapat menggunakan skrip berikut.</p>
+<h3 id="Renew-certificates-optional" class="common-anchor-header">Memperbarui sertifikat (opsional)<button data-href="#Renew-certificates-optional" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Jika Anda ingin memperbarui sertifikat dalam beberapa kasus, misalnya jika sertifikat akan segera kedaluwarsa. Anda dapat menggunakan skrip berikut.</p>
 <p>Anda membutuhkan <code translate="no">ca.key</code>, <code translate="no">ca.pem</code>, <code translate="no">ca.srl</code> di direktori kerja Anda.</p>
 <p><details><summary><code translate="no">renew.sh</code></summary></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/usr/bin/env sh</span>
@@ -163,7 +223,22 @@ openssl req -new -key client.key\
         ></path>
       </svg>
     </button></h2><p>Bagian ini menguraikan langkah-langkah untuk mengonfigurasi server Milvus dengan enkripsi TLS.</p>
-<h3 id="Setup-for-Docker-Compose" class="common-anchor-header">Penyiapan untuk Docker Compose</h3><h4 id="1-Modify-the-Milvus-server-configuration" class="common-anchor-header">1. Memodifikasi konfigurasi server Milvus</h4><p>Untuk mengaktifkan TLS eksternal, tambahkan konfigurasi berikut dalam berkas <code translate="no">milvus.yaml</code>:</p>
+<h3 id="Setup-for-Docker-Compose" class="common-anchor-header">Penyiapan untuk Docker Compose<button data-href="#Setup-for-Docker-Compose" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="1-Modify-the-Milvus-server-configuration" class="common-anchor-header">1. Memodifikasi konfigurasi server Milvus</h4><p>Untuk mengaktifkan TLS eksternal, tambahkan konfigurasi berikut dalam berkas <code translate="no">milvus.yaml</code>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">http:</span>
     <span class="hljs-comment"># for now milvus do not support config restful on same port with grpc</span>
@@ -231,7 +306,22 @@ openssl req -new -key client.key\
 <h5 id="Deploy-Milvus-using-Docker-Compose" class="common-anchor-header">Menerapkan Milvus menggunakan Docker Compose</h5><p>Jalankan perintah berikut untuk men-deploy Milvus:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Setup-for-Milvus-Operator" class="common-anchor-header">Penyiapan untuk Operator Milvus</h3><p>Letakkan berkas sertifikat di dalam direktori kerja Anda. Struktur direktori akan terlihat seperti ini:</p>
+<h3 id="Setup-for-Milvus-Operator" class="common-anchor-header">Penyiapan untuk Operator Milvus<button data-href="#Setup-for-Milvus-Operator" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Letakkan berkas sertifikat di dalam direktori kerja Anda. Struktur direktori akan terlihat seperti ini:</p>
 <pre><code translate="no">├── milvus.yaml (<span class="hljs-keyword">to</span> be created later)
 ├── server.pem
 ├── server.<span class="hljs-keyword">key</span>
@@ -306,7 +396,22 @@ openssl req -new -key client.key\
 <p>membuat Milvus CR:</p>
 <pre><code translate="no" class="language-bash">kubectl create -f milvus.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="setup-for-Milvus-Helm" class="common-anchor-header">untuk Milvus Helm</h3><p>Letakkan file sertifikat di direktori kerja Anda. Struktur direktori akan terlihat seperti ini:</p>
+<h3 id="setup-for-Milvus-Helm" class="common-anchor-header">untuk Milvus Helm<button data-href="#setup-for-Milvus-Helm" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Letakkan file sertifikat di direktori kerja Anda. Struktur direktori akan terlihat seperti ini:</p>
 <pre><code translate="no">├── values.yaml (<span class="hljs-keyword">to</span> be created later)
 ├── server.pem
 ├── server.<span class="hljs-keyword">key</span>
@@ -342,7 +447,7 @@ openssl req -new -key client.key\
     <span class="hljs-attr">readOnly:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Untuk mengaktifkan TLS internal, tambahkan konfigurasi berikut ini pada berkas <code translate="no">values.yaml</code>:</p>
-<p>Ingatlah untuk mengganti bidang <code translate="no">internaltls.sni</code> dengan Nama Umum dalam sertifikat Anda.</p>
+<p>Ingatlah untuk mengganti bidang <code translate="no">internaltls.sni</code> dengan Nama Umum di sertifikat Anda.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
     common:
@@ -404,7 +509,22 @@ helm install my-release milvus/milvus -f values.yaml
         ></path>
       </svg>
     </button></h2><p>Untuk interaksi SDK, gunakan pengaturan berikut ini tergantung pada mode TLS.</p>
-<h3 id="One-way-TLS-connection" class="common-anchor-header">Koneksi TLS satu arah</h3><p>Sediakan jalur ke <code translate="no">server.pem</code> dan pastikan <code translate="no">server_name</code> cocok dengan <code translate="no">CommonName</code> yang dikonfigurasi dalam sertifikat.</p>
+<h3 id="One-way-TLS-connection" class="common-anchor-header">Koneksi TLS satu arah<button data-href="#One-way-TLS-connection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sediakan jalur ke <code translate="no">server.pem</code> dan pastikan <code translate="no">server_name</code> cocok dengan <code translate="no">CommonName</code> yang dikonfigurasi dalam sertifikat.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -414,7 +534,22 @@ client = MilvusClient(
     server_name=<span class="hljs-string">&quot;localhost&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Two-way-TLS-connection" class="common-anchor-header">Koneksi TLS dua arah</h3><p>Sediakan jalur ke <code translate="no">client.pem</code>, <code translate="no">client.key</code>, dan <code translate="no">ca.pem</code>, dan pastikan <code translate="no">server_name</code> cocok dengan <code translate="no">CommonName</code> yang dikonfigurasi dalam sertifikat.</p>
+<h3 id="Two-way-TLS-connection" class="common-anchor-header">Koneksi TLS dua arah<button data-href="#Two-way-TLS-connection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sediakan jalur ke <code translate="no">client.pem</code>, <code translate="no">client.key</code>, dan <code translate="no">ca.pem</code>, dan pastikan <code translate="no">server_name</code> cocok dengan <code translate="no">CommonName</code> yang dikonfigurasi dalam sertifikat.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -443,7 +578,43 @@ client = MilvusClient(
         ></path>
       </svg>
     </button></h2><p>Untuk API RESTful, Anda dapat memeriksa tls dengan menggunakan perintah <code translate="no">curl</code>.</p>
-<h3 id="One-way-TLS-connection" class="common-anchor-header">Koneksi TLS satu arah</h3><pre><code translate="no" class="language-bash">curl --cacert path_to/ca.pem https://localhost:8080/v2/vectordb/collections/list
+<h3 id="One-way-TLS-connection" class="common-anchor-header">Koneksi TLS satu arah<button data-href="#One-way-TLS-connection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-bash">curl --cacert path_to/ca.pem \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+  https://localhost:8080/v2/vectordb/collections/list
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Two-way-TLS-connection" class="common-anchor-header">Koneksi TLS dua arah</h3><pre><code translate="no" class="language-bash">curl --cert path_to/client.pem --key path_to/client.key --cacert path_to/ca.pem https://localhost:8080/v2/vectordb/collections/list
+<h3 id="Two-way-TLS-connection" class="common-anchor-header">Koneksi TLS dua arah<button data-href="#Two-way-TLS-connection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-bash">curl --cert path_to/client.pem \
+  --key path_to/client.key \
+  --cacert path_to/ca.pem \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+  https://localhost:8080/v2/vectordb/collections/list
 <button class="copy-code-btn"></button></code></pre>

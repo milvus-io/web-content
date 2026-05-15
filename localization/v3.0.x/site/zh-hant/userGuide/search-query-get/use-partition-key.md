@@ -3,7 +3,7 @@ id: use-partition-key.md
 title: 使用分區鑰匙
 summary: >-
   分區關鍵（Partition
-  Key）是一種基於分區的搜尋優化解決方案。透過指定特定的標量欄位為分區關鍵，並在搜尋過程中根據分區關鍵指定篩選條件，可將搜尋範圍縮小為數個分區，進而提高搜尋效率。本文將介紹如何使用分區關鍵及相關注意事項。
+  Key）是一種基於分區的搜尋優化解決方案。透過指定特定的標量欄位為分割區鍵，並在搜尋過程中根據分割區鍵指定篩選條件，可將搜尋範圍縮小為數個分割區，進而提高搜尋效率。本文將介紹如何使用分區關鍵及相關注意事項。
 ---
 <h1 id="Use-Partition-Key" class="common-anchor-header">使用分區鑰匙<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -36,7 +36,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Milvus 中，您可以使用分區來執行資料分隔，並透過限制搜尋範圍到特定的分區來改善搜尋效能。如果您選擇手動管理分區，您可以在一個集合中建立最多 1,024 個分區，並根據特定規則插入實體到這些分區中，這樣您就可以通過限制在特定數量的分區中進行搜索來縮窄搜索範圍。</p>
+    </button></h2><p>在 Milvus 中，您可以使用磁碟分割來實現資料分隔，並透過限制搜尋範圍到特定磁碟分割來改善搜尋效能。如果您選擇手動管理分區，您可以在一個集合中建立最多 1,024 個分區，並根據特定規則插入實體到這些分區中，這樣您就可以通過限制在特定數量的分區中進行搜索來縮窄搜索範圍。</p>
 <p>Milvus 引入了分區鑰匙，讓您在資料分隔中重複使用分區，以克服在集合中建立分區數量的限制。當建立一個資料集時，您可以使用一個標量欄位作為分割鍵。一旦集合就緒，Milvus 會在集合內建立指定數量的分區。當接收到插入的實體時，Milvus 會使用實體的 Partition Key 值計算雜湊值，根據雜湊值和集合的<code translate="no">partitions_num</code> 屬性執行 modulo 運算，以獲得目標分割 ID，並將實體儲存到目標分割中。</p>
 <p>
   
@@ -296,6 +296,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -442,6 +443,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,

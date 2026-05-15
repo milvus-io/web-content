@@ -113,6 +113,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database_1&quot;
 }&#x27;</span>
@@ -154,6 +155,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database_2&quot;,
     &quot;properties&quot;: {
@@ -225,6 +227,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/describe&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;default&quot;
 }&#x27;</span>
@@ -244,7 +247,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jede Datenbank hat ihre eigenen Eigenschaften. Sie können die Eigenschaften einer Datenbank festlegen, wenn Sie die Datenbank erstellen, wie in <a href="/docs/de/manage_databases.md#Create-database">Datenbank erstellen</a> beschrieben, oder Sie können die Eigenschaften einer vorhandenen Datenbank ändern und löschen.</p>
+    </button></h2><p>Jede Datenbank hat ihre eigenen Eigenschaften. Sie können die Eigenschaften einer Datenbank festlegen, wenn Sie die Datenbank erstellen, wie in <a href="/docs/de/v2.6.x/manage_databases.md#Create-database">Datenbank erstellen</a> beschrieben, oder Sie können die Eigenschaften einer bestehenden Datenbank ändern und löschen.</p>
 <p>In der folgenden Tabelle sind die möglichen Datenbankeigenschaften aufgeführt.</p>
 <table>
    <tr>
@@ -285,7 +288,7 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">timezone</code></p></td>
      <td><p>Zeichenfolge</p></td>
-     <td><p>Gibt die Standardzeitzone an, die für zeitabhängige Vorgänge in der Datenbank gilt, insbesondere für <code translate="no">TIMESTAMPTZ</code> Felder. Sammlungen erben die Zeitzone der Datenbank, es sei denn, eine Zeitzone auf Sammlungsebene ist festgelegt. Ein Zeitzonen-Parameter auf Abfrageebene kann vorübergehend sowohl die Datenbank- als auch die Sammlungsvorgaben außer Kraft setzen. Der Wert muss eine gültige <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA-Zeitzonenkennung</a> sein (z. B. <strong>Asien/Shanghai</strong>, <strong>Amerika/Chicago</strong> oder <strong>UTC</strong>). Einzelheiten zur Verwendung eines <code translate="no">TIMESTAMPTZ</code> Feldes finden Sie unter <a href="/docs/de/timestamptz-field.md">TIMESTAMPTZ Feld</a>.</p></td>
+     <td><p>Gibt die Standardzeitzone an, die für zeitabhängige Vorgänge in der Datenbank gilt, insbesondere für <code translate="no">TIMESTAMPTZ</code> Felder. Sammlungen erben die Zeitzone der Datenbank, es sei denn, eine Zeitzone auf Sammlungsebene ist festgelegt. Ein Zeitzonen-Parameter auf Abfrageebene kann vorübergehend sowohl die Datenbank- als auch die Sammlungsvorgaben außer Kraft setzen. Der Wert muss eine gültige <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA-Zeitzonenkennung</a> sein (z. B. <strong>Asien/Shanghai</strong>, <strong>Amerika/Chicago</strong> oder <strong>UTC</strong>). Einzelheiten zur Verwendung eines <code translate="no">TIMESTAMPTZ</code> Feldes finden Sie unter <a href="/docs/de/v2.6.x/timestamptz-field.md">TIMESTAMPTZ Feld</a>.</p></td>
    </tr>
 </table>
 <h3 id="Alter-database-properties" class="common-anchor-header">Ändern von Datenbankeigenschaften<button data-href="#Alter-database-properties" class="anchor-icon" translate="no">
@@ -336,6 +339,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/alter&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database&quot;,
     &quot;properties&quot;: {
@@ -390,6 +394,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/alter&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database&quot;,
     &quot;propertyKeys&quot;: [
@@ -483,6 +488,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/drop&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database&quot;
 }&#x27;</span>
@@ -517,7 +523,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus verwendet die rollenbasierte Zugriffskontrolle (RBAC) zur Verwaltung von Berechtigungen. Sie können Rollen mit spezifischen Privilegien erstellen und diese Benutzern zuweisen und so deren Zugriff auf verschiedene Datenbanken kontrollieren. Weitere Einzelheiten finden Sie in der <a href="/docs/de/rbac.md">RBAC-Dokumentation</a>.</p>
+    </button></h3><p>Milvus verwendet die rollenbasierte Zugriffskontrolle (RBAC) zur Verwaltung von Berechtigungen. Sie können Rollen mit spezifischen Privilegien erstellen und diese Benutzern zuweisen, um so deren Zugriff auf verschiedene Datenbanken zu kontrollieren. Weitere Einzelheiten finden Sie in der <a href="/docs/de/v2.6.x/rbac.md">RBAC-Dokumentation</a>.</p>
 <h3 id="Are-there-any-quota-limitations-for-a-database" class="common-anchor-header">Gibt es irgendwelche Quotenbeschränkungen für eine Datenbank?<button data-href="#Are-there-any-quota-limitations-for-a-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -533,4 +539,4 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Ja, Milvus ermöglicht es Ihnen, Quotenbeschränkungen für eine Datenbank festzulegen, z. B. die maximale Anzahl von Sammlungen. Eine umfassende Liste der Beschränkungen finden Sie in der <a href="/docs/de/limitations.md">Milvus-Limits-Dokumentation</a>.</p>
+    </button></h3><p>Ja, Milvus ermöglicht es Ihnen, Quotenbeschränkungen für eine Datenbank festzulegen, z. B. die maximale Anzahl von Sammlungen. Eine umfassende Liste der Beschränkungen finden Sie in der <a href="/docs/de/v2.6.x/limitations.md">Milvus-Limits-Dokumentation</a>.</p>

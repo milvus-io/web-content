@@ -1127,7 +1127,7 @@
                 "children": []
               },
               {
-                "label": "عناق الوجه TEI",
+                "label": "عناق الوجه المعانق TEI",
                 "id": "hugging-face-tei.md",
                 "order": 9,
                 "children": []
@@ -1979,7 +1979,7 @@
       {
         "label": "مراقب الطيور",
         "id": "birdwatcher",
-        "order": 2,
+        "order": 3,
         "children": [
           {
             "label": "لمحة عامة",
@@ -1997,6 +1997,37 @@
             "label": "أدلة الاستخدام",
             "id": "birdwatcher_usage_guides.md",
             "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "ميلفوس CDC",
+        "id": "milvus_cdc",
+        "order": 2,
+        "children": [
+          {
+            "label": "لمحة عامة",
+            "id": "milvus_cdc_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "إعداد النسخ المتماثل CDC",
+            "id": "set_up_cdc_replication.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "التحويل",
+            "id": "cdc_switchover.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "التجاوز الفاشل",
+            "id": "cdc_failover.md",
+            "order": 3,
             "children": []
           }
         ]

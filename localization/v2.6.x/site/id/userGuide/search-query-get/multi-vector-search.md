@@ -36,7 +36,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Alur Kerja Pencarian Hibrida</span> </span></p>
 <p>Pencarian hibrida multi-vektor mengintegrasikan berbagai metode pencarian atau menjangkau sematan dari berbagai modalitas:</p>
 <ul>
-<li><p><strong>Pencarian Vektor Jarang-Padat</strong>: <a href="/docs/id/dense-vector.md">Vektor Padat</a> sangat baik untuk menangkap hubungan semantik, sedangkan <a href="/docs/id/sparse_vector.md">Vektor</a> Jarang sangat efektif untuk pencocokan kata kunci yang tepat. Pencarian hibrida menggabungkan pendekatan ini untuk memberikan pemahaman konseptual yang luas dan relevansi istilah yang tepat, sehingga meningkatkan hasil pencarian. Dengan memanfaatkan kekuatan dari masing-masing metode, pencarian hybrid mengatasi keterbatasan pendekatan individual, menawarkan kinerja yang lebih baik untuk kueri yang kompleks. Berikut ini adalah <a href="/docs/id/full_text_search_with_milvus.md">panduan</a> lebih rinci tentang pencarian hibrida yang menggabungkan pencarian semantik dengan pencarian teks lengkap.</p></li>
+<li><p><strong>Pencarian Vektor Jarang-Padat</strong>: <a href="/docs/id/v2.6.x/dense-vector.md">Vektor Padat</a> sangat baik untuk menangkap hubungan semantik, sedangkan <a href="/docs/id/v2.6.x/sparse_vector.md">Vektor</a> Jarang sangat efektif untuk pencocokan kata kunci yang tepat. Pencarian hibrida menggabungkan pendekatan ini untuk memberikan pemahaman konseptual yang luas dan relevansi istilah yang tepat, sehingga meningkatkan hasil pencarian. Dengan memanfaatkan kekuatan dari masing-masing metode, pencarian hybrid mengatasi keterbatasan pendekatan individual, menawarkan kinerja yang lebih baik untuk kueri yang kompleks. Berikut ini adalah <a href="/docs/id/v2.6.x/full_text_search_with_milvus.md">panduan</a> lebih rinci tentang pencarian hibrida yang menggabungkan pencarian semantik dengan pencarian teks lengkap.</p></li>
 <li><p><strong>Pencarian Vektor Multimodal</strong>: Pencarian vektor multimodal adalah teknik canggih yang memungkinkan Anda untuk mencari di berbagai jenis data, termasuk teks, gambar, audio, dan lainnya. Keuntungan utama dari pendekatan ini adalah kemampuannya untuk menyatukan modalitas yang berbeda ke dalam pengalaman pencarian yang mulus dan kohesif. Misalnya, dalam pencarian produk, pengguna dapat memasukkan kueri teks untuk menemukan produk yang dideskripsikan dengan teks dan gambar. Dengan menggabungkan modalitas ini melalui metode pencarian hibrida, Anda dapat meningkatkan akurasi pencarian atau memperkaya hasil pencarian.</p></li>
 </ul>
 <h2 id="Example" class="common-anchor-header">Contoh<button data-href="#Example" class="anchor-icon" translate="no">
@@ -92,7 +92,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Untuk pencarian hibrida multi-vektor, kita harus menentukan beberapa bidang vektor dalam skema koleksi. Untuk detail tentang batasan jumlah bidang vektor yang diizinkan dalam koleksi, lihat <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Batas Zilliz Cloud</a>.  Namun, jika perlu, Anda dapat menyesuaikan parameter <a href="/docs/id/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> untuk menyertakan hingga 10 bidang vektor dalam koleksi sesuai kebutuhan.</p>
+    </button></h3><p>Untuk pencarian hibrida multi-vektor, kita harus menentukan beberapa bidang vektor dalam skema koleksi. Untuk detail tentang batasan jumlah bidang vektor yang diizinkan dalam koleksi, lihat <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Batas Zilliz Cloud</a>.  Namun, jika perlu, Anda dapat menyesuaikan parameter <a href="/docs/id/v2.6.x/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> untuk menyertakan hingga 10 bidang vektor dalam koleksi sesuai kebutuhan.</p>
 <p>Contoh ini memasukkan bidang berikut ke dalam skema:</p>
 <ul>
 <li><p><code translate="no">id</code>: Berfungsi sebagai kunci utama untuk menyimpan ID teks. Bidang ini bertipe data <code translate="no">INT64</code>.</p></li>
@@ -101,7 +101,7 @@ summary: >-
 <li><p><code translate="no">text_sparse</code>: Digunakan untuk menyimpan vektor jarang dari teks. Field ini bertipe data <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 <li><p><code translate="no">image_dense</code>: Digunakan untuk menyimpan vektor padat dari gambar produk. Bidang ini bertipe data <code translate="no">FLOAT_VETOR</code> dengan dimensi vektor 512.</p></li>
 </ul>
-<p>Karena kita akan menggunakan algoritma BM25 bawaan untuk melakukan pencarian teks lengkap pada bidang teks, maka perlu menambahkan Milvus <code translate="no">Function</code> ke skema. Untuk detail lebih lanjut, silakan merujuk ke <a href="/docs/id/full-text-search.md">Pencarian Teks Penuh</a>.</p>
+<p>Karena kita akan menggunakan algoritma BM25 bawaan untuk melakukan pencarian teks lengkap pada bidang teks, maka perlu menambahkan Milvus <code translate="no">Function</code> ke skema. Untuk detail lebih lanjut, silakan merujuk ke <a href="/docs/id/v2.6.x/full-text-search.md">Pencarian Teks Penuh</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
@@ -355,7 +355,7 @@ schema.WithField(entity.NewField().
 <li><p><code translate="no">text_sparse_index</code>: indeks bertipe<code translate="no">SPARSE_INVERTED_INDEX</code>dengan tipe metrik <code translate="no">BM25</code> digunakan untuk bidang vektor teks jarang.</p></li>
 <li><p><code translate="no">image_dense_index</code>indeks bertipe <code translate="no">AUTOINDEX</code> dengan tipe metrik <code translate="no">IP</code> dibuat untuk bidang vektor padat gambar.</p></li>
 </ul>
-<p>Anda dapat memilih jenis indeks lain yang diperlukan untuk menyesuaikan dengan kebutuhan dan jenis data Anda. Untuk informasi lebih lanjut tentang jenis indeks yang didukung, silakan lihat dokumentasi tentang <a href="/docs/id/index-vector-fields.md">jenis indeks yang tersedia</a>.</p>
+<p>Anda dapat memilih jenis indeks lain yang diperlukan untuk menyesuaikan dengan kebutuhan dan jenis data Anda. Untuk informasi lebih lanjut tentang jenis indeks yang didukung, silakan lihat dokumentasi tentang <a href="/docs/id/v2.6.x/index-vector-fields.md">jenis indeks yang tersedia</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
@@ -520,6 +520,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -655,6 +656,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;text&quot;: &quot;Red cotton t-shirt with round neck&quot; , &quot;text_dense&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, ...], &quot;image_dense&quot;: [0.6366019600530924, -0.09323198122475052, ...]},
@@ -695,7 +697,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
         ></path>
       </svg>
     </button></h3><p>Pencarian Hibrida diimplementasikan dengan membuat beberapa <code translate="no">AnnSearchRequest</code> dalam fungsi <code translate="no">hybrid_search()</code>, di mana setiap <code translate="no">AnnSearchRequest</code> mewakili permintaan pencarian ANN dasar untuk bidang vektor tertentu. Oleh karena itu, sebelum melakukan Pencarian Hibrida, perlu untuk membuat <code translate="no">AnnSearchRequest</code> untuk setiap bidang vektor.</p>
-<p>Selain itu, dengan mengonfigurasi parameter <code translate="no">expr</code> di <code translate="no">AnnSearchRequest</code>, Anda dapat mengatur kondisi pemfilteran untuk pencarian hybrid Anda. Silakan lihat <a href="/docs/id/filtered-search.md">Pencarian yang Difilter</a> dan <a href="/docs/id/boolean.md">Penjelasan Pemfilteran</a>.</p>
+<p>Selain itu, dengan mengonfigurasi parameter <code translate="no">expr</code> di <code translate="no">AnnSearchRequest</code>, Anda dapat mengatur kondisi pemfilteran untuk pencarian hybrid Anda. Silakan lihat <a href="/docs/id/v2.6.x/filtered-search.md">Pencarian yang Difilter</a> dan <a href="/docs/id/v2.6.x/boolean.md">Penjelasan Pemfilteran</a>.</p>
 <div class="alert note">
 <p>Dalam Pencarian Hibrid, setiap <code translate="no">AnnSearchRequest</code> hanya mendukung satu data kueri.</p>
 </div>
@@ -849,7 +851,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Untuk menggabungkan dan memberi peringkat ulang kumpulan hasil pencarian ANN, memilih strategi peringkat ulang yang sesuai sangatlah penting. Milvus menawarkan beberapa jenis strategi pemeringkatan ulang. Untuk detail lebih lanjut tentang mekanisme pemeringkatan ulang ini, silakan lihat Pemeringkat <a href="/docs/id/weighted-ranker.md">Tertimbang</a> atau Pemeringkat <a href="/docs/id/rrf-ranker.md">RRF</a>.</p>
+    </button></h3><p>Untuk menggabungkan dan memberi peringkat ulang kumpulan hasil pencarian ANN, memilih strategi peringkat ulang yang sesuai sangatlah penting. Milvus menawarkan beberapa jenis strategi pemeringkatan ulang. Untuk detail lebih lanjut tentang mekanisme pemeringkatan ulang ini, silakan lihat Pemeringkat <a href="/docs/id/v2.6.x/weighted-ranker.md">Tertimbang</a> atau Pemeringkat <a href="/docs/id/v2.6.x/rrf-ranker.md">RRF</a>.</p>
 <p>Dalam contoh ini, karena tidak ada penekanan khusus pada kueri penelusuran tertentu, kita akan melanjutkan dengan strategi RRFRanker.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -988,6 +990,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/hybrid_search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;search\&quot;: <span class="hljs-variable">${req}</span>,
@@ -1033,7 +1036,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h3><p>Jika koleksi Anda memiliki bidang <code translate="no">TIMESTAMPTZ</code>, Anda dapat mengganti sementara zona waktu default basis data atau koleksi untuk satu operasi dengan menetapkan parameter <code translate="no">timezone</code> dalam panggilan pencarian hibrida. Ini mengontrol bagaimana nilai <code translate="no">TIMESTAMPTZ</code> ditampilkan dan dibandingkan selama operasi.</p>
-<p>Nilai <code translate="no">timezone</code> harus berupa <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">pengenal zona waktu IANA</a> yang valid (misalnya, <strong>Asia/Shanghai</strong>, <strong>Amerika/Chicago</strong>, atau <strong>UTC</strong>). Untuk detail tentang cara menggunakan bidang <code translate="no">TIMESTAMPTZ</code>, lihat <a href="/docs/id/timestamptz-field.md">Bidang TIMESTAMPTZ</a>.</p>
+<p>Nilai <code translate="no">timezone</code> harus berupa <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">pengenal zona waktu IANA</a> yang valid (misalnya, <strong>Asia/Shanghai</strong>, <strong>Amerika/Chicago</strong>, atau <strong>UTC</strong>). Untuk detail tentang cara menggunakan bidang <code translate="no">TIMESTAMPTZ</code>, lihat <a href="/docs/id/v2.6.x/timestamptz-field.md">Bidang TIMESTAMPTZ</a>.</p>
 <p>Contoh di bawah ini menunjukkan cara menetapkan zona waktu sementara untuk operasi pencarian gabungan:</p>
 <pre><code translate="no" class="language-python">res = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,

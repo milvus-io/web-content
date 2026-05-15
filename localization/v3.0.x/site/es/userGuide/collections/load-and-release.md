@@ -174,6 +174,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/load&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
@@ -187,6 +188,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/get_load_state&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
@@ -217,9 +219,9 @@ curl --request POST \
       </svg>
     </button></h2><p>Milvus puede cargar sólo los campos implicados en las búsquedas y consultas, reduciendo el uso de memoria y mejorando el rendimiento de las búsquedas.</p>
 <div class="alert note">
-<p>La carga parcial de colecciones se encuentra actualmente en fase beta y no se recomienda su uso en producción.</p>
+<p>La carga parcial de colecciones está actualmente en fase beta y no se recomienda su uso en producción.</p>
 </div>
-<p>El siguiente fragmento de código asume que ha creado una colección llamada <strong>mi_colección</strong>, y que hay dos campos llamados <strong>mi_id</strong> y <strong>mi_vector</strong> en la colección.</p>
+<p>El siguiente fragmento de código asume que usted ha creado una colección llamada <strong>mi_colección</strong>, y hay dos campos llamados <strong>mi_id</strong> y <strong>mi_vector</strong> en la colección.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.load_collection(
@@ -293,7 +295,7 @@ fmt.Println(state)
 Not support yet
 <button class="copy-code-btn"></button></code></pre>
 <p>Si decides cargar campos específicos, conviene tener en cuenta que sólo los campos incluidos en <code translate="no">load_fields</code> pueden utilizarse como filtros y campos de salida en búsquedas y consultas. Siempre debe incluir los nombres del campo primario y al menos un campo vectorial en <code translate="no">load_fields</code>.</p>
-<p>También puede utilizar <code translate="no">skip_load_dynamic_field</code> para determinar si se debe cargar el campo dinámico. El campo dinámico es un campo JSON reservado denominado <strong>$meta</strong> y guarda todos los campos no definidos por el esquema y sus valores en pares clave-valor. Al cargar el campo dinámico, todas las claves de los campos se cargan y están disponibles para el filtrado y la salida. Si todas las claves del campo dinámico no participan en el filtrado y la salida de metadatos, establezca <code translate="no">skip_load_dynamic_field</code> en <code translate="no">True</code>.</p>
+<p>También puede utilizar <code translate="no">skip_load_dynamic_field</code> para determinar si se debe cargar el campo dinámico. El campo dinámico es un campo JSON reservado llamado <strong>$meta</strong> y guarda todos los campos no definidos por el esquema y sus valores en pares clave-valor. Al cargar el campo dinámico, todas las claves de los campos se cargan y están disponibles para el filtrado y la salida. Si todas las claves del campo dinámico no participan en el filtrado y la salida de metadatos, establezca <code translate="no">skip_load_dynamic_field</code> en <code translate="no">True</code>.</p>
 <p>Para cargar más campos después de la carga de la colección, primero debe liberar la colección para evitar posibles errores provocados por cambios en el índice.</p>
 <h2 id="Release-Collection" class="common-anchor-header">Liberación de la colección<button data-href="#Release-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -392,6 +394,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/release&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
@@ -405,6 +408,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/get_load_state&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>

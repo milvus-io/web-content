@@ -44,7 +44,7 @@ summary: >-
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/batch-data-and-streaming-data.png" alt="Batch Data And Streaming Data" class="doc-image" id="batch-data-and-streaming-data" />
-   </span> <span class="img-wrapper"> <span>Datos por lotes y datos en flujo</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Datos por lotes y transmisión de datos</span> </span></p>
 <p>Como se muestra en la figura anterior, los QueryNodes pueden recibir simultáneamente datos de flujo y datos por lotes tras recibir una solicitud de búsqueda. Sin embargo, debido a la latencia de la red, los datos de flujo obtenidos por los QueryNodes pueden estar incompletos.</p>
 <p>Para solucionar este problema, Milvus marca el tiempo de cada registro en la cola de datos e inserta continuamente marcas de tiempo de sincronización en la cola de datos. Cada vez que se recibe una marca de tiempo de sincronización (syncTs), QueryNodes la establece como la Hora de Servicio, lo que significa que QueryNodes puede ver todos los datos anteriores a esa Hora de Servicio. Basándose en el ServiceTime, Milvus puede proporcionar marcas de tiempo de garantía (GuaranteeTs) para satisfacer los diferentes requisitos de los usuarios en cuanto a consistencia y disponibilidad. Los usuarios pueden informar a los nodos de consulta de la necesidad de incluir datos anteriores a un momento determinado en el ámbito de la búsqueda especificando las GuaranteeT en sus solicitudes de búsqueda.</p>
 <p>
@@ -159,6 +159,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -217,6 +218,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -277,6 +279,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;color like \&quot;red_%\&quot;&quot;,

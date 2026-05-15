@@ -1902,7 +1902,7 @@
                 "children": []
               },
               {
-                "label": "Users, Privileges, and Roles",
+                "label": "Пользователи, привилегии и роли",
                 "id": "users_and_roles.md",
                 "order": 1,
                 "children": []
@@ -2053,7 +2053,7 @@
       {
         "label": "Птицелов",
         "id": "birdwatcher",
-        "order": 2,
+        "order": 3,
         "children": [
           {
             "label": "Обзор",
@@ -2071,6 +2071,37 @@
             "label": "Руководства по использованию",
             "id": "birdwatcher_usage_guides.md",
             "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "ЦКЗ Милвус",
+        "id": "milvus_cdc",
+        "order": 2,
+        "children": [
+          {
+            "label": "Обзор",
+            "id": "milvus_cdc_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Настройка репликации CDC",
+            "id": "set_up_cdc_replication.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Переключение",
+            "id": "cdc_switchover.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Отказоустойчивость",
+            "id": "cdc_failover.md",
+            "order": 3,
             "children": []
           }
         ]

@@ -436,7 +436,7 @@
                 "children": []
               },
               {
-                "label": "JSON 粉碎",
+                "label": "JSON 碎纸",
                 "id": "json-shredding.md",
                 "order": 2,
                 "children": []
@@ -1920,7 +1920,7 @@
         "children": []
       },
       {
-        "label": "Milvus 备份",
+        "label": "Milvus 后备电源",
         "id": "milvus_backup",
         "order": 1,
         "children": [
@@ -1949,7 +1949,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "在一个实例中进行备份和恢复",
+                "label": "在一个实例中进行备份和还原",
                 "id": "single-instance-backup-and-restore.md",
                 "order": 0,
                 "children": []
@@ -1979,7 +1979,7 @@
       {
         "label": "Birdwatcher",
         "id": "birdwatcher",
-        "order": 2,
+        "order": 3,
         "children": [
           {
             "label": "概述",
@@ -1997,6 +1997,37 @@
             "label": "使用指南",
             "id": "birdwatcher_usage_guides.md",
             "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Milvus CDC",
+        "id": "milvus_cdc",
+        "order": 2,
+        "children": [
+          {
+            "label": "概述",
+            "id": "milvus_cdc_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "设置 CDC 复制",
+            "id": "set_up_cdc_replication.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "切换",
+            "id": "cdc_switchover.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "故障切换",
+            "id": "cdc_failover.md",
+            "order": 3,
             "children": []
           }
         ]

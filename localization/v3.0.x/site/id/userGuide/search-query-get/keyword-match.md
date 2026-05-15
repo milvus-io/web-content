@@ -402,7 +402,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h3><p>Pencocokan teks dapat digunakan bersama dengan pencarian kemiripan vektor untuk mempersempit cakupan pencarian dan meningkatkan kinerja pencarian. Dengan memfilter koleksi menggunakan pencocokan teks sebelum pencarian kemiripan vektor, Anda dapat mengurangi jumlah dokumen yang perlu dicari, sehingga menghasilkan waktu kueri yang lebih cepat.</p>
-<p>Dalam contoh ini, ekspresi <code translate="no">filter</code> memfilter hasil pencarian untuk hanya menyertakan dokumen yang cocok dengan istilah yang ditentukan <code translate="no">keyword1</code> atau <code translate="no">keyword2</code>. Pencarian kemiripan vektor kemudian dilakukan pada subset dokumen yang telah difilter ini.</p>
+<p>Dalam contoh ini, ekspresi <code translate="no">filter</code> memfilter hasil pencarian untuk hanya menyertakan dokumen yang cocok dengan istilah yang ditentukan <code translate="no">keyword1</code> atau <code translate="no">keyword2</code>. Pencarian kemiripan vektor kemudian dilakukan pada subset dokumen yang difilter ini.</p>
 <div class="alert note">
 <p>Anda dapat menyorot istilah yang cocok di hasil pencarian dengan mengonfigurasi penyorot teks. Lihat Penyorot <a href="/docs/id/text-highlighter.md">Teks</a> untuk detailnya.</p>
 </div>
@@ -470,6 +470,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;annsField&quot;: &quot;embeddings&quot;,
@@ -549,6 +550,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$filter</span>&quot;</span><span class="hljs-string">&#x27;,

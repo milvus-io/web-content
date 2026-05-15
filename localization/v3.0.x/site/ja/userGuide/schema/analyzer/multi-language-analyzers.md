@@ -2,7 +2,7 @@
 id: multi-language-analyzers.md
 title: 多言語アナライザCompatible with Milvus 2.5.11+
 summary: >-
-  Milvusがテキスト分析を行う場合、通常、コレクション内のテキストフィールド全体に単一の分析器を適用します。その分析器が英語用に最適化されている場合、中国語、スペイン語、フランス語など、他の言語で必要とされる非常に異なるトークン化やステミングのルールと格闘することになり、その結果、想起率が低下します。たとえば、スペイン語の「teléfono」（「電話」を意味する）を検索すると、英語に特化したアナライザはつまずきます。
+  Milvusがテキスト分析を行う場合、通常、コレクション内のテキストフィールド全体に単一の分析器を適用します。その分析ツールが英語用に最適化されている場合、中国語、スペイン語、フランス語など、他の言語で必要とされる非常に異なるトークン化やステミングのルールと格闘することになり、結果として想起率が低下します。たとえば、スペイン語の「teléfono」（「電話」を意味する）を検索すると、英語に特化したアナライザはつまずきます。
   アクセントが削除され、スペイン語固有のステミングが適用されないため、関連する結果が見落とされる可能性があります。
 beta: Milvus 2.5.11+
 ---
@@ -21,7 +21,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvusがテキスト分析を行う場合、通常、コレクション内のテキストフィールド全体に単一のアナライザーを適用します。そのアナライザーが英語用に最適化されている場合、中国語、スペイン語、フランス語など、他の言語で必要とされる非常に異なるトークン化やステミングのルールと格闘することになり、結果として想起率が低下します。たとえば、スペイン語の<em>「teléfono」</em>（<em>「電話」の</em>意味）を検索する場合、英語に特化したアナライザでは、アクセント記号が削除され、スペイン語固有のステミングが適用されないため、関連する結果が見落とされてしまいます。</p>
+    </button></h1><p>Milvusがテキスト分析を行う場合、通常、コレクション内のテキストフィールド全体に単一のアナライザーを適用します。そのアナライザーが英語用に最適化されている場合、中国語、スペイン語、フランス語など、他の言語で必要とされる非常に異なるトークン化やステミングのルールと格闘することになり、結果として想起率が低くなります。たとえば、スペイン語の<em>「teléfono」</em>（<em>「電話」の</em>意味）を検索する場合、英語に特化したアナライザでは、アクセント記号が削除され、スペイン語固有のステミングが適用されないため、関連する結果が見落とされてしまいます。</p>
 <p>多言語アナライザは、テキストフィールドに対して複数のアナライザを単一のコレクションに設定できるようにすることで、この問題を解決します。このようにして、テキストフィールドに多言語のドキュメントを保存することができ、Milvusはドキュメントごとに適切な言語ルールに従ってテキストを分析します。</p>
 <h2 id="Limits" class="common-anchor-header">制限事項<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -86,7 +86,7 @@ beta: Milvus 2.5.11+
 <li><p>様々な言語のテキストを含む文書を追加し、各文書にはどの解析器を使用するかを指定する識別子値が含まれる。</p></li>
 <li><p>Milvusは識別子フィールドに基づいて適切な分析器を選択し、識別子が不明な文書は<code translate="no">default</code> 。</p></li>
 </ul></li>
-<li><p><strong>言語固有のアナライザを使用した検索</strong>：</p>
+<li><p><strong>言語固有のアナライザによる検索</strong>：</p>
 <ul>
 <li><p>Milvusは指定された解析器を使用してクエリを処理します。</p></li>
 <li><p>言語固有のルールに従ってトークン化が行われ、類似性に基づいてその言語に適した検索結果が返される。</p></li>
@@ -256,7 +256,7 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>このステップでは、4つの必須フィールドを持つコレクションスキーマを定義します：</p>
+    </button></h3><p>このステップでは、4つの必須フィールドでコレクションスキーマを定義します：</p>
 <ul>
 <li><p><strong>主キーフィールド</strong>(<code translate="no">id</code>)：コレクション内の各エンティティの一意な識別子。<code translate="no">auto_id=True</code> を設定すると、milvusがこれらのIDを自動的に生成します。</p></li>
 <li><p><strong>言語インジケータフィールド</strong>(<code translate="no">language</code>)：この VARCHAR フィールドは、<code translate="no">multi_analyzer_params</code> で指定された<code translate="no">by_field</code> に対応します。各エンティティの言語識別子が格納され、Milvusにどのアナライザを使用するかを伝えます。</p></li>
@@ -668,6 +668,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;multilingual_documents\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -811,6 +812,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;multilingual_documents&quot;,
   &quot;data&quot;: [
@@ -984,6 +986,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;multilingual_documents&quot;,
   &quot;data&quot;: [&quot;artificial intelligence&quot;],
@@ -998,7 +1001,7 @@ curl --request POST \
   &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-Chinese-analyzer" class="common-anchor-header">中国語アナライザを使う<button data-href="#Use-Chinese-analyzer" class="anchor-icon" translate="no">
+<h3 id="Use-Chinese-analyzer" class="common-anchor-header">中国語アナライザを使用する<button data-href="#Use-Chinese-analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1109,6 +1112,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;multilingual_documents&quot;,
   &quot;data&quot;: [&quot;人工智能&quot;],

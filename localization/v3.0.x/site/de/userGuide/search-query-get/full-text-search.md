@@ -4,12 +4,12 @@ title: Volltextsuche
 summary: >-
   Die Volltextsuche ist eine Funktion, die Dokumente mit bestimmten Begriffen
   oder Phrasen in Textdatensätzen abruft und die Ergebnisse dann nach Relevanz
-  einstuft. Diese Funktion überwindet die Einschränkungen der semantischen
-  Suche, bei der präzise Begriffe übersehen werden können, und stellt sicher,
-  dass Sie die genauesten und kontextrelevanten Ergebnisse erhalten. Darüber
-  hinaus vereinfacht es die Vektorsuche, indem es Rohtexteingaben akzeptiert und
-  Ihre Textdaten automatisch in spärliche Einbettungen konvertiert, ohne dass
-  Sie manuell Vektoreinbettungen erzeugen müssen.
+  einstuft. Diese Funktion überwindet die Beschränkungen der semantischen Suche,
+  bei der präzise Begriffe übersehen werden können, und stellt sicher, dass Sie
+  die genauesten und kontextuell relevanten Ergebnisse erhalten. Darüber hinaus
+  vereinfacht es die Vektorsuche, indem es Rohtexteingaben akzeptiert und Ihre
+  Textdaten automatisch in spärliche Einbettungen konvertiert, ohne dass Sie
+  manuell Vektoreinbettungen erzeugen müssen.
 ---
 <h1 id="Full-Text-Search" class="common-anchor-header">Volltextsuche<button data-href="#Full-Text-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -454,7 +454,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>Der Algorithmus, der für den Aufbau und die Abfrage des Indexes verwendet wird. Gültige Werte:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (Standard): Optimierte Document-at-a-Time (DAAT)-Abfrageverarbeitung unter Verwendung des MaxScore-Algorithmus. MaxScore bietet eine bessere Leistung für hohe <em>k-Werte</em> oder Abfragen mit vielen Begriffen, indem Begriffe und Dokumente übersprungen werden, die wahrscheinlich nur geringe Auswirkungen haben. Dies wird erreicht, indem Begriffe auf der Grundlage ihrer maximalen Trefferquote in wesentliche und nicht wesentliche Gruppen unterteilt werden, wobei der Schwerpunkt auf Begriffen liegt, die zu den Top-k-Ergebnissen beitragen können.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Optimierte Verarbeitung von DAAT-Anfragen mit dem WAND-Algorithmus. WAND wertet weniger Trefferdokumente aus, indem es die maximalen Impact-Scores nutzt, um nicht konkurrierende Dokumente zu überspringen, aber es hat einen höheren Overhead pro Treffer. Dadurch ist WAND effizienter für Abfragen mit kleinen <em>k-Werten</em> oder kurzen Abfragen, bei denen das Überspringen von Dokumenten praktikabler ist.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Basic Term-at-a-Time (TAAT) Abfrageverarbeitung. Obwohl er im Vergleich zu <code translate="no">DAAT_MAXSCORE</code> und <code translate="no">DAAT_WAND</code> langsamer ist, bietet <code translate="no">TAAT_NAIVE</code> einen einzigartigen Vorteil. Im Gegensatz zu DAAT-Algorithmen, die zwischengespeicherte Maximalwerte für die Auswirkung verwenden, die unabhängig von Änderungen des globalen Sammlungsparameters (avgdl) statisch bleiben, passt sich <code translate="no">TAAT_NAIVE</code> dynamisch an solche Änderungen an.</p></li></ul></td>
+     <td><p>Der Algorithmus, der für den Aufbau und die Abfrage des Indexes verwendet wird. Gültige Werte:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (Standard): Optimierte Document-at-a-Time (DAAT)-Abfrageverarbeitung unter Verwendung des MaxScore-Algorithmus. MaxScore bietet eine bessere Leistung für hohe <em>k-Werte</em> oder Abfragen mit vielen Begriffen, indem Begriffe und Dokumente übersprungen werden, die wahrscheinlich nur geringe Auswirkungen haben. Dies wird erreicht, indem Begriffe auf der Grundlage ihrer maximalen Trefferquote in wesentliche und nicht wesentliche Gruppen unterteilt werden, wobei der Schwerpunkt auf Begriffen liegt, die zu den Top-k-Ergebnissen beitragen können.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Optimierte Verarbeitung von DAAT-Anfragen mit dem WAND-Algorithmus. WAND wertet weniger Trefferdokumente aus, indem es die maximalen Impact-Scores nutzt, um nicht konkurrierende Dokumente zu überspringen, aber es hat einen höheren Overhead pro Treffer. Dadurch ist WAND effizienter für Abfragen mit kleinen <em>k-Werten</em> oder kurzen Abfragen, bei denen das Überspringen von Dokumenten praktikabler ist.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Basic Term-at-a-Time (TAAT) Abfrageverarbeitung. Obwohl er im Vergleich zu <code translate="no">DAAT_MAXSCORE</code> und <code translate="no">DAAT_WAND</code> langsamer ist, bietet <code translate="no">TAAT_NAIVE</code> einen einzigartigen Vorteil. Im Gegensatz zu DAAT-Algorithmen, die zwischengespeicherte Maximalwerte verwenden, die unabhängig von Änderungen des globalen Sammelparameters (avgdl) statisch bleiben, passt sich <code translate="no">TAAT_NAIVE</code> dynamisch an solche Änderungen an.</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
@@ -520,6 +520,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -581,6 +582,7 @@ client.insert(InsertReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;text&quot;: &quot;information retrieval is a field of study.&quot;},
@@ -669,6 +671,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data-raw <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

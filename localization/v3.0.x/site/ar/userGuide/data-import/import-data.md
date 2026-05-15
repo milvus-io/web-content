@@ -36,7 +36,7 @@ summary: توضح هذه الصفحة إجراء استيراد البيانات
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>أن تكون قد أعددت بياناتك بالفعل ووضعتها في دلو ملفوس.</p>
+<li><p>لقد قمت بالفعل بإعداد بياناتك ووضعها في دلو ملفوس.</p>
 <p>إذا لم يكن الأمر كذلك، يجب عليك استخدام <strong>RemoteBulkWriter</strong> لإعداد بياناتك أولاً، والتأكد من أن البيانات المعدة قد تم نقلها بالفعل إلى دلو Milvus على مثيل MinIO الذي تم تشغيله مع مثيل Milvus الخاص بك. للحصول على التفاصيل، راجع <a href="/docs/ar/prepare-source-data.md">إعداد بيانات المصدر</a>.</p></li>
 <li><p>لقد قمت بالفعل بإنشاء مجموعة مع المخطط الذي تستخدمه لإعداد بياناتك. إذا لم يكن كذلك، راجع <a href="/docs/ar/manage-collections.md">إدارة المجموعات</a>.</p></li>
 </ul>
@@ -110,6 +110,7 @@ job_id = resp.json()[<span class="hljs-string">&#x27;data&#x27;</span>][<span cl
 
 curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&quot; \
 --header &quot;Content-Type: application/json&quot; \
+--header &quot;Request-Timeout: 10&quot; \
 --data-raw &#x27;{
     &quot;files&quot;: [
         [
@@ -223,6 +224,7 @@ resp = get_import_progress(
 
 curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&quot; \
 --header &quot;Content-Type: application/json&quot; \
+--header &quot;Request-Timeout: 10&quot; \
 --data-raw &#x27;{
     &quot;jobId&quot;: &quot;449839014328146739&quot;
 }&#x27;
@@ -307,6 +309,7 @@ resp = list_import_jobs(
 
 curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot; \
 --header &quot;Content-Type: application/json&quot; \
+--header &quot;Request-Timeout: 10&quot; \
 --data-raw &#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;
 }&#x27;

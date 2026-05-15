@@ -117,6 +117,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/grant_role&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;,
     &quot;userName&quot;: &quot;user_1&quot;
@@ -165,11 +166,12 @@ client.describe_user(user_name=<span class="hljs-string">&quot;user_1&quot;</spa
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/describe&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;userName&quot;: &quot;user_1&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Nachfolgend finden Sie eine Beispielausgabe.</p>
+<p>Unten sehen Sie ein Beispiel für die Ausgabe.</p>
 <pre><code translate="no" class="language-bash">{<span class="hljs-string">&#x27;user_name&#x27;</span>: <span class="hljs-string">&#x27;user_1&#x27;</span>, <span class="hljs-string">&#x27;roles&#x27;</span>: <span class="hljs-string">&#x27;role_a&#x27;</span>}
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Revoke-a-role" class="common-anchor-header">Eine Rolle widerrufen<button data-href="#Revoke-a-role" class="anchor-icon" translate="no">
@@ -220,6 +222,7 @@ client.revokeRole(RevokeRoleReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/revoke_role&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;userName&quot;: &quot;user_1&quot;,
     &quot;roleName&quot;: &quot;role_a&quot;

@@ -67,11 +67,26 @@ summary: >-
       </svg>
     </button></h2><p>パーティション・キーを使用するには、以下の手順が必要です。</p>
 <ul>
-<li><p><a href="/docs/ja/use-partition-key.md#Set-Partition-Key">パーティション・キーを設定</a>します、</p></li>
-<li><p><a href="/docs/ja/use-partition-key.md#Set-Partition-Numbers">作成するパーティション数を設定します</a>（オプション）。</p></li>
-<li><p><a href="/docs/ja/use-partition-key.md#Create-Filtering-Condition">パーティション・キーに基づいたフィルタリング条件を作成する</a>。</p></li>
+<li><p><a href="/docs/ja/v2.6.x/use-partition-key.md#Set-Partition-Key">パーティション・キーを設定</a>します、</p></li>
+<li><p><a href="/docs/ja/v2.6.x/use-partition-key.md#Set-Partition-Numbers">作成するパーティション数を設定します</a>（オプション）。</p></li>
+<li><p><a href="/docs/ja/v2.6.x/use-partition-key.md#Create-Filtering-Condition">パーティション・キーに基づいたフィルタリング条件を作成する</a>。</p></li>
 </ul>
-<h3 id="Set-Partition-Key" class="common-anchor-header">パーティション・キーの設定</h3><p>スカラー・フィールドをパーティション・キーとして指定するには、スカラー・フィールドを追加するときに、その<code translate="no">is_partition_key</code> 属性を<code translate="no">true</code> に設定する必要があります。</p>
+<h3 id="Set-Partition-Key" class="common-anchor-header">パーティション・キーの設定<button data-href="#Set-Partition-Key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>スカラー・フィールドをパーティション・キーとして指定するには、スカラー・フィールドを追加するときに、その<code translate="no">is_partition_key</code> 属性を<code translate="no">true</code> に設定する必要があります。</p>
 <div class="alert note">
 <p>スカラー・フィールドをパーティション・キーに設定する場合、フィールドの値を空やNULLにすることはできません。</p>
 </div>
@@ -221,7 +236,22 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Partition-Numbers" class="common-anchor-header">パーティション番号の設定</h3><p>コレクション内のスカラーフィールドをパーティションキーに指定すると、Milvusは自動的にコレクション内に16のパーティションを作成します。Milvusはエンティティを受信すると、このエンティティのパーティションキー値に基づいてパーティションを選択し、そのパーティションにエンティティを格納します。</p>
+<h3 id="Set-Partition-Numbers" class="common-anchor-header">パーティション番号の設定<button data-href="#Set-Partition-Numbers" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>コレクション内のスカラーフィールドをパーティションキーに指定すると、Milvusは自動的にコレクション内に16のパーティションを作成します。Milvusはエンティティを受信すると、このエンティティのパーティションキー値に基づいてパーティションを選択し、そのパーティションにエンティティを格納します。</p>
 <p>また、コレクションと一緒に作成するパーティションの数を決定することもできます。これは、パーティション・キーとしてスカラー・フィールドを指定した場合のみ有効です。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -265,13 +295,29 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-Filtering-Condition" class="common-anchor-header">フィルタリング条件の作成</h3><p>パーティション・キー機能を有効にしたコレクションでANN検索を行う場合、検索リクエストにパーティション・キーを含むフィルタリング式を含める必要があります。フィルタリング式では、Milvusが対応するパーティション内で検索範囲を制限するように、特定の範囲内でパーティションキーの値を制限することができます。</p>
+<h3 id="Create-Filtering-Condition" class="common-anchor-header">フィルタリング条件の作成<button data-href="#Create-Filtering-Condition" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>パーティション・キー機能を有効にしたコレクションでANN検索を行う場合、検索リクエストにパーティション・キーを含むフィルタリング式を含める必要があります。フィルタリング式では、Milvusが対応するパーティション内で検索範囲を制限するように、特定の範囲内でパーティションキーの値を制限することができます。</p>
 <p>削除操作を実行する場合、より効率的な削除を実現するために、単一のパーティション・キーを指定するフィルタ式を含めることをお勧めします。このアプローチは、削除操作を特定のパーティションに限定し、コンパクション時の書き込み増幅を減らし、コンパクションとインデックス作成のリソースを節約します。</p>
 <p>以下の例は、特定のパーティション・キー値とパーティション・キー値のセットに基づくパーティション・キー・ベース・フィルタリングを示しています。</p>
 <div class="multipleCode">
@@ -334,7 +380,22 @@ filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;
 <div class="alert note">
 <p>現在、パーティションキー分離機能は、インデックスタイプが HNSW に設定された検索にのみ適用されます。</p>
 </div>
-<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">パーティション・キー分離の有効化</h3><p>以下のコード例は、パーティション・キー分離を有効にする方法を示しています。</p>
+<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">パーティション・キー分離の有効化<button data-href="#Enable-Partition-Key-Isolation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下のコード例は、パーティション・キー分離を有効にする方法を示しています。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -381,10 +442,11 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>パーティション・キー・アイソレーションを有効にした後も、<a href="/docs/ja/use-partition-key.md#Set-Partition-Numbers">パーティション・ナンバーの設定</a> で説明するように、パーティション・キーとパーティション数を設定することができます。パーティション・キー・ベース・フィルターには、特定のパーティション・キーの値だけを含める必要があることに注意してください。</p>
+<p>パーティション・キー・アイソレーションを有効にした後も、<a href="/docs/ja/v2.6.x/use-partition-key.md#Set-Partition-Numbers">パーティション・ナンバーの設定</a> で説明するように、パーティション・キーとパーティション数を設定することができます。パーティション・キー・ベース・フィルターには、特定のパーティション・キーの値だけを含める必要があることに注意してください。</p>

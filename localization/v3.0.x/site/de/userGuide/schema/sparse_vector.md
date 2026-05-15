@@ -48,7 +48,7 @@ summary: >-
 <p>Mit Tokenisierung und Scoring können Dokumente als Bag-of-Words-Vektoren dargestellt werden, wobei jede Dimension einem bestimmten Wort im Vokabular entspricht. Nur die im Dokument vorkommenden Wörter haben Werte ungleich Null, wodurch eine spärliche Vektordarstellung entsteht. Spärliche Vektoren können mit zwei Ansätzen erzeugt werden:</p>
 <ul>
 <li><p><strong>Traditionelle statistische Verfahren</strong> wie <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (Term Frequency-Inverse Document Frequency) und <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> (Best Matching 25) gewichten Wörter auf der Grundlage ihrer Häufigkeit und Bedeutung in einem Korpus. Diese Methoden berechnen einfache Statistiken als Scores für jede Dimension, die ein Token darstellt.  Milvus bietet eine integrierte <strong>Volltextsuche</strong> mit der BM25-Methode, die den Text automatisch in spärliche Vektoren umwandelt, wodurch eine manuelle Vorverarbeitung überflüssig wird. Dieser Ansatz ist ideal für die stichwortbasierte Suche, bei der Präzision und exakte Treffer wichtig sind. Weitere Informationen finden Sie unter <a href="/docs/de/full-text-search.md">Volltextsuche</a>.</p></li>
-<li><p><strong>Neuronale Sparse Embedding-Modelle</strong> sind erlernte Methoden zur Erzeugung spärlicher Repräsentationen durch Training auf großen Datensätzen. Dabei handelt es sich in der Regel um Deep-Learning-Modelle mit Transformer-Architektur, die in der Lage sind, Begriffe auf der Grundlage des semantischen Kontexts zu erweitern und zu gewichten. Milvus unterstützt auch extern generierte Sparse Embeddings von Modellen wie <a href="https://arxiv.org/abs/2109.10086">SPLADE</a>. Siehe <a href="/docs/de/embeddings.md#Embedding-Overview">Einbettungen</a> für weitere Details.</include></p></li>
+<li><p><strong>Neuronale Sparse Embedding-Modelle</strong> sind erlernte Methoden zur Erzeugung spärlicher Repräsentationen durch Training auf großen Datensätzen. Dabei handelt es sich in der Regel um Deep-Learning-Modelle mit Transformer-Architektur, die in der Lage sind, Begriffe auf der Grundlage des semantischen Kontexts zu erweitern und zu gewichten. Milvus unterstützt auch extern generierte Sparse Embeddings von Modellen wie <a href="https://arxiv.org/abs/2109.10086">SPLADE</a>. Siehe <a href="/docs/de/embeddings.md#Embedding-Overview">Einbettungen</a> für Details.</include></p></li>
 </ul>
 <p>Sparse-Vektoren und der Originaltext können in Milvus gespeichert werden, um sie effizient wiederzufinden. Das folgende Diagramm zeigt den Gesamtprozess.</p>
 <p>
@@ -420,6 +420,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -545,6 +546,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {
@@ -697,6 +699,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: $queryData,

@@ -27,7 +27,7 @@ summary: >-
 <li><p>Tentukan <code translate="no">max_length</code>, yang mendefinisikan jumlah maksimum byte yang dapat disimpan oleh field <code translate="no">VARCHAR</code>. Kisaran yang valid untuk <code translate="no">max_length</code> adalah dari 1 hingga 65.535.</p></li>
 </ul>
 <div class="alert note">
-<p>Milvus mendukung nilai nol dan nilai default untuk bidang <code translate="no">VARCHAR</code>. Untuk mengaktifkan fitur ini, setel <code translate="no">nullable</code> ke <code translate="no">True</code> dan <code translate="no">default_value</code> ke nilai string. Untuk detailnya, lihat <a href="/docs/id/nullable-and-default.md">Nullable &amp; Default</a>.</p>
+<p>Milvus mendukung nilai nol dan nilai default untuk bidang <code translate="no">VARCHAR</code>. Untuk mengaktifkan fitur ini, setel <code translate="no">nullable</code> ke <code translate="no">True</code> dan <code translate="no">default_value</code> ke nilai string. Untuk detailnya, lihat <a href="/docs/id/v2.6.x/nullable-and-default.md">Nullable &amp; Default</a>.</p>
 </div>
 <h2 id="Add-VARCHAR-field" class="common-anchor-header">Menambahkan bidang VARCHAR<button data-href="#Add-VARCHAR-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -50,7 +50,7 @@ summary: >-
 <li><p><code translate="no">varchar_field2</code>: menyimpan hingga 200 byte, mengizinkan nilai nol, tetapi tidak memiliki nilai default.</p></li>
 </ul>
 <div class="alert note">
-<p>Jika Anda menetapkan <code translate="no">enable_dynamic_fields=True</code> ketika mendefinisikan skema, Milvus mengizinkan Anda untuk menyisipkan bidang skalar yang tidak didefinisikan sebelumnya. Namun, hal ini dapat meningkatkan kompleksitas kueri dan manajemen, yang berpotensi mempengaruhi kinerja. Untuk informasi lebih lanjut, lihat <a href="/docs/id/enable-dynamic-field.md">Bidang Dinamis</a>.</p>
+<p>Jika Anda menetapkan <code translate="no">enable_dynamic_fields=True</code> ketika mendefinisikan skema, Milvus memungkinkan Anda untuk menyisipkan bidang skalar yang tidak didefinisikan sebelumnya. Namun, hal ini dapat meningkatkan kompleksitas kueri dan manajemen, yang berpotensi mempengaruhi kinerja. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/enable-dynamic-field.md">Bidang Dinamis</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -249,9 +249,9 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>Pengindeksan membantu meningkatkan kinerja pencarian dan kueri. Di Milvus, pengindeksan adalah wajib untuk bidang vektor, tetapi opsional untuk bidang skalar.</p>
-<p>Contoh berikut ini membuat indeks pada bidang vektor <code translate="no">embedding</code> dan bidang skalar <code translate="no">varchar_field1</code>, keduanya menggunakan tipe indeks <code translate="no">AUTOINDEX</code>. Dengan tipe ini, Milvus secara otomatis memilih indeks yang paling sesuai berdasarkan tipe data. Anda juga dapat menyesuaikan jenis indeks dan parameter untuk setiap field. Untuk detailnya, lihat <a href="/docs/id/index-explained.md">Penjelasan Indeks.</a></p>
+<p>Contoh berikut ini membuat indeks pada bidang vektor <code translate="no">embedding</code> dan bidang skalar <code translate="no">varchar_field1</code>, keduanya menggunakan tipe indeks <code translate="no">AUTOINDEX</code>. Dengan tipe ini, Milvus secara otomatis memilih indeks yang paling sesuai berdasarkan tipe data. Anda juga dapat menyesuaikan jenis indeks dan parameter untuk setiap field. Untuk detailnya, lihat <a href="/docs/id/v2.6.x/index-explained.md">Penjelasan Indeks.</a></p>
 <div class="alert note">
-<p>Anda juga dapat membuat indeks <code translate="no">NGRAM</code> untuk mempercepat pemfilteran <code translate="no">LIKE</code> pada bidang <code translate="no">VARCHAR</code>. Untuk detailnya, lihat <a href="/docs/id/ngram.md">NGRAM</a>.</p>
+<p>Anda juga dapat membuat indeks <code translate="no">NGRAM</code> untuk mempercepat pemfilteran <code translate="no">LIKE</code> pada bidang <code translate="no">VARCHAR</code>. Untuk detailnya, lihat <a href="/docs/id/v2.6.x/ngram.md">NGRAM</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -378,6 +378,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -496,6 +497,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;varchar_field1&quot;: &quot;Product A&quot;, &quot;varchar_field2&quot;: &quot;High quality product&quot;, &quot;pk&quot;: 1, &quot;embedding&quot;: [0.1, 0.2, 0.3]},
@@ -588,6 +590,7 @@ fmt.Println(<span class="hljs-string">&quot;varchar_field2&quot;</span>, queryRe
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;varchar_field1 == \&quot;Product A\&quot;&quot;,
@@ -657,6 +660,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;varchar_field2 is null&quot;,
@@ -724,6 +728,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;varchar_field1 == \&quot;Unknown\&quot;&quot;,
@@ -828,6 +833,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

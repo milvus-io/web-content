@@ -98,7 +98,7 @@ beta: Milvus 2.6.4+
 <p>함수를 사용하여 구조체 내의 스칼라 필드에서 벡터 필드를 파생할 수 없습니다.</p></li>
 <li><p><strong>인덱스 유형 및 메트릭 유형</strong></p>
 <p>컬렉션의 모든 벡터 필드는 색인화되어야 합니다. 구조체 배열 필드 내의 벡터 필드를 인덱싱하기 위해 Milvus는 임베딩 목록을 사용하여 각 구조체 요소의 벡터 임베딩을 구성하고 전체 임베딩 목록을 전체적으로 인덱싱합니다.</p>
-<p><code translate="no">AUTOINDEX</code> 또는 <code translate="no">HNSW</code> 을 인덱스 유형으로 사용하고 아래 나열된 메트릭 유형을 사용하여 구조체 배열 필드에 있는 임베딩 목록에 대한 인덱스를 만들 수 있습니다.</p>
+<p><code translate="no">AUTOINDEX</code> 또는 <code translate="no">HNSW</code> 을 인덱스 유형으로 사용하고 아래 나열된 메트릭 유형을 사용하여 구조체 배열 필드에 있는 임베딩 목록에 대한 인덱스를 작성할 수 있습니다.</p>
 <p><table>
 <tr>
 <th><p>인덱스 유형</p></th>
@@ -119,7 +119,7 @@ beta: Milvus 2.6.4+
 </table></p>
 <p>구조체 배열 필드의 스칼라 필드는 인덱스를 지원하지 않습니다.</p></li>
 <li><p><strong>데이터 업서트</strong></p>
-<p>구조체는 병합 모드에서 업서트를 지원하지 않습니다. 그러나 재정의 모드에서는 여전히 업서트를 수행하여 구조체의 데이터를 업데이트할 수 있습니다. 병합 모드와 재정의 모드에서 업서트의 차이점에 대한 자세한 내용은 <a href="/docs/ko/upsert-entities.md#Overview">엔터티 업서트를</a> 참조하세요.</p></li>
+<p>구조체는 병합 모드에서 업서트를 지원하지 않습니다. 그러나 재정의 모드에서는 여전히 업서트를 수행하여 구조체의 데이터를 업데이트할 수 있습니다. 병합 모드와 재정의 모드에서 업서트의 차이점에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/upsert-entities.md#Overview">엔터티 업서트를</a> 참조하세요.</p></li>
 <li><p><strong>스칼라 필터링</strong></p>
 <p>검색 및 쿼리 내의 필터링 표현식에는 구조체 배열 또는 구조체 요소 내의 필드를 사용할 수 없습니다.</p></li>
 </ul>
@@ -376,7 +376,7 @@ SCHEMA=<span class="hljs-string">&#x27;{
         ></path>
       </svg>
     </button></h2><p>컬렉션의 벡터 필드와 Struct 요소에 정의된 벡터 필드를 포함한 모든 벡터 필드에 대해 인덱싱은 필수입니다.</p>
-<p>적용 가능한 인덱스 매개변수는 사용 중인 인덱스 유형에 따라 다릅니다. 적용 가능한 인덱스 매개변수에 대한 자세한 내용은 <a href="/docs/ko/index-explained.md">인덱스 설명</a> 및 선택한 인덱스 유형에 해당하는 문서 페이지를 참조하세요.</p>
+<p>적용 가능한 인덱스 매개변수는 사용 중인 인덱스 유형에 따라 다릅니다. 적용 가능한 인덱스 매개변수에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/index-explained.md">인덱스 설명</a> 및 선택한 인덱스 유형에 해당하는 문서 페이지를 참조하세요.</p>
 <p>임베딩 목록을 색인하려면 해당 인덱스 유형을 <code translate="no">AUTOINDEX</code> 또는 <code translate="no">HNSW</code> 로 설정하고, 임베딩 목록 간의 유사성을 측정하기 위한 Milvus의 메트릭 유형으로 <code translate="no">MAX_SIM_COSINE</code> 을 사용해야 합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -498,6 +498,7 @@ client.createCollection(requestCreate);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/create&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;description\&quot;: \&quot;A collection for storing book information with struct array chunks\&quot;,
@@ -613,6 +614,7 @@ row.add(<span class="hljs-string">&quot;chunks&quot;</span>, structArr);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/insert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -805,6 +807,7 @@ embeddingList1=<span class="hljs-string">&#x27;[[0.2,0.9,0.4,-0.3,0.2]]&#x27;</s
 embeddingList2=<span class="hljs-string">&#x27;[[-0.2,-0.2,0.5,0.6,0.9],[-0.4,0.3,0.5,0.8,0.2]]&#x27;</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>],
@@ -909,6 +912,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>, <span class="hljs-variable">$embeddingList2</span>],
@@ -1012,4 +1016,4 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>기본 구조체 배열 데이터 타입의 개발은 복잡한 데이터 구조를 처리하는 Milvus의 기능이 크게 발전했음을 의미합니다. 사용 사례를 더 잘 이해하고 이 새로운 기능을 최대한 활용하려면 <a href="/docs/ko/best-practices-for-array-of-structs.md">구조체 배열을 사용한 스키마 설계를</a> 읽어보시기 바랍니다.</p>
+    </button></h2><p>기본 구조체 배열 데이터 타입의 개발은 복잡한 데이터 구조를 처리하는 Milvus의 기능이 크게 발전했음을 의미합니다. 사용 사례를 더 잘 이해하고 이 새로운 기능을 최대한 활용하려면 <a href="/docs/ko/v2.6.x/best-practices-for-array-of-structs.md">구조체 배열을 사용한 스키마 설계를</a> 읽어보시기 바랍니다.</p>

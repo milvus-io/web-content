@@ -84,7 +84,7 @@ beta: Milvus 2.5.11+
 </ul></li>
 <li><p><strong>插入具有語言識別碼的資料</strong>：</p>
 <ul>
-<li><p>新增包含各種語言文字的文件，其中每個文件包含一個識別值，指定要使用的分析器。</p></li>
+<li><p>新增包含各種語言文字的文件，其中每個文件都包含一個識別值，指定要使用的分析器。</p></li>
 <li><p>Milvus 會根據識別碼欄位選擇適當的分析器，而識別碼未知的文件則使用<code translate="no">default</code> 分析器。</p></li>
 </ul></li>
 <li><p><strong>使用特定語言分析器搜尋</strong>：</p>
@@ -613,7 +613,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
       </svg>
     </button></h3><p>最後的創建步驟會匯集您之前的所有配置：</p>
 <ul>
-<li><p><code translate="no">collection_name=&quot;multilang_demo&quot;</code> 命名您的資料集，以供未來參考。</p></li>
+<li><p><code translate="no">collection_name=&quot;multilang_demo&quot;</code> 為您的集合命名，以供未來參考。</p></li>
 <li><p><code translate="no">schema=schema</code> 套用您定義的欄位結構和功能。</p></li>
 <li><p><code translate="no">index_params=index_params</code> 實作索引策略以進行有效率的搜尋。</p></li>
 </ul>
@@ -669,6 +669,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;multilingual_documents\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -812,6 +813,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;multilingual_documents&quot;,
   &quot;data&quot;: [
@@ -985,6 +987,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;multilingual_documents&quot;,
   &quot;data&quot;: [&quot;artificial intelligence&quot;],
@@ -1110,6 +1113,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;multilingual_documents&quot;,
   &quot;data&quot;: [&quot;人工智能&quot;],

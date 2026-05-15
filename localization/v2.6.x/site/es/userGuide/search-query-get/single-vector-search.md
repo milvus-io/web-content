@@ -27,7 +27,7 @@ summary: >-
       </svg>
     </button></h1><p>Basándose en un archivo de índice que registra el orden de las incrustaciones vectoriales, la búsqueda por vecino más próximo aproximado (RNA) localiza un subconjunto de incrustaciones vectoriales basándose en el vector de consulta incluido en una solicitud de búsqueda recibida, compara el vector de consulta con los del subgrupo y devuelve los resultados más similares. Con la búsqueda ANN, Milvus proporciona una experiencia de búsqueda eficiente. Esta página le ayuda a aprender a realizar búsquedas RNA básicas.</p>
 <div class="alert note">
-<p>Si añade dinámicamente nuevos campos después de haber creado la colección, las búsquedas que incluyan estos campos devolverán los valores por defecto definidos o NULL para las entidades que no hayan establecido valores explícitamente. Para obtener más información, consulte <a href="/docs/es/add-fields-to-an-existing-collection.md">Añadir campos a una colección existente</a>.</p>
+<p>Si añade dinámicamente nuevos campos después de haber creado la colección, las búsquedas que incluyan estos campos devolverán los valores por defecto definidos o NULL para las entidades que no hayan establecido valores explícitamente. Para obtener más información, consulte <a href="/docs/es/v2.6.x/add-fields-to-an-existing-collection.md">Añadir campos a una colección existente</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Visión general<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -50,14 +50,14 @@ summary: >-
 <p>Para reducir la curva de aprendizaje, Milvus proporciona <strong>AUTOINDEX</strong>. Con <strong>AUTOINDEX</strong>, Milvus puede analizar la distribución de datos dentro de su colección mientras construye el índice y establece los parámetros de índice más optimizados basándose en el análisis para lograr un equilibrio entre el rendimiento de la búsqueda y la corrección.</p>
 <p>En esta sección, encontrará información detallada sobre los siguientes temas:</p>
 <ul>
-<li><p><a href="/docs/es/single-vector-search.md#Single-Vector-Search">Búsqueda monovectorial</a></p></li>
-<li><p><a href="/docs/es/single-vector-search.md#Bulk-Vector-Search">Búsqueda vectorial masiva</a></p></li>
-<li><p><a href="/docs/es/single-vector-search.md#ANN-Search-in-Partition">Búsqueda RNA en partición</a></p></li>
-<li><p><a href="/docs/es/single-vector-search.md#Use-Output-Fields">Utilizar campos de salida</a></p></li>
-<li><p><a href="/docs/es/single-vector-search.md#Use-Limit-and-Offset">Utilizar límite y offset</a></p></li>
-<li><p><a href="/docs/es/single-vector-search.md#Use-Level">Utilizar nivel</a></p></li>
-<li><p><a href="/docs/es/single-vector-search.md#Get-Recall-Rate">Obtener tasa de recuperación</a></p></li>
-<li><p><a href="/docs/es/single-vector-search.md#Enhancing-ANN-Search">Mejora de la búsqueda RNA</a></p></li>
+<li><p><a href="/docs/es/v2.6.x/single-vector-search.md#Single-Vector-Search">Búsqueda monovectorial</a></p></li>
+<li><p><a href="/docs/es/v2.6.x/single-vector-search.md#Bulk-Vector-Search">Búsqueda vectorial masiva</a></p></li>
+<li><p><a href="/docs/es/v2.6.x/single-vector-search.md#ANN-Search-in-Partition">Búsqueda RNA en partición</a></p></li>
+<li><p><a href="/docs/es/v2.6.x/single-vector-search.md#Use-Output-Fields">Utilizar campos de salida</a></p></li>
+<li><p><a href="/docs/es/v2.6.x/single-vector-search.md#Use-Limit-and-Offset">Utilizar límite y offset</a></p></li>
+<li><p><a href="/docs/es/v2.6.x/single-vector-search.md#Use-Level">Utilizar nivel</a></p></li>
+<li><p><a href="/docs/es/v2.6.x/single-vector-search.md#Get-Recall-Rate">Obtener tasa de recuperación</a></p></li>
+<li><p><a href="/docs/es/v2.6.x/single-vector-search.md#Enhancing-ANN-Search">Mejora de la búsqueda RNA</a></p></li>
 </ul>
 <h2 id="Single-Vector-Search" class="common-anchor-header">Búsqueda monovectorial<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -228,6 +228,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -458,6 +459,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -556,7 +558,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Supongamos que ha creado varias particiones en una colección y puede restringir el ámbito de búsqueda a un número específico de particiones. En ese caso, puede incluir los nombres de las particiones de destino en la petición de búsqueda para restringir el ámbito de la búsqueda dentro de las particiones especificadas. Reducir el número de particiones implicadas en la búsqueda mejora el rendimiento de la misma.</p>
+    </button></h2><p>Supongamos que ha creado varias particiones en una colección y puede restringir el ámbito de la búsqueda a un número específico de particiones. En ese caso, puede incluir los nombres de las particiones de destino en la petición de búsqueda para restringir el ámbito de la búsqueda dentro de las particiones especificadas. Reducir el número de particiones implicadas en la búsqueda mejora el rendimiento de la misma.</p>
 <p>El siguiente fragmento de código asume una partición llamada <strong>ParticiónA</strong> en tu colección.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -666,6 +668,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -825,6 +828,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -982,6 +986,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -1008,7 +1013,7 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>Si su colección tiene un campo <code translate="no">TIMESTAMPTZ</code>, puede anular temporalmente la zona horaria predeterminada de la base de datos o de la colección para una sola operación estableciendo el parámetro <code translate="no">timezone</code> en la llamada de búsqueda. Esto controla cómo se muestran y comparan los valores de <code translate="no">TIMESTAMPTZ</code> durante la operación.</p>
-<p>El valor de <code translate="no">timezone</code> debe ser un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identificador de zona horaria IANA</a> válido (por ejemplo, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> o <strong>UTC</strong>). Para obtener más información sobre cómo utilizar un campo <code translate="no">TIMESTAMPTZ</code>, consulte <a href="/docs/es/timestamptz-field.md">Campo TIMESTAMPTZ</a>.</p>
+<p>El valor de <code translate="no">timezone</code> debe ser un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identificador de zona horaria IANA</a> válido (por ejemplo, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> o <strong>UTC</strong>). Para obtener más información sobre cómo utilizar un campo <code translate="no">TIMESTAMPTZ</code>, consulte <a href="/docs/es/v2.6.x/timestamptz-field.md">Campo TIMESTAMPTZ</a>.</p>
 <p>El siguiente ejemplo muestra cómo establecer temporalmente una zona horaria para una operación de búsqueda:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -1048,32 +1053,32 @@ curl --request POST \
 <ul>
 <li><p>Búsqueda filtrada</p>
 <p>Puede incluir condiciones de filtrado en una solicitud de búsqueda para que Milvus realice un filtrado de metadatos antes de realizar búsquedas RNA, reduciendo el ámbito de búsqueda de toda la colección a sólo las entidades que coincidan con las condiciones de filtrado especificadas.</p>
-<p>Para obtener más información sobre el filtrado de metadatos y las condiciones de filtrado, consulte <a href="/docs/es/filtered-search.md">Búsqueda filtrada</a>, <a href="/docs/es/boolean.md">Explicación del filtrado</a> y temas relacionados.</p></li>
+<p>Para obtener más información sobre el filtrado de metadatos y las condiciones de filtrado, consulte <a href="/docs/es/v2.6.x/filtered-search.md">Búsqueda filtrada</a>, <a href="/docs/es/v2.6.x/boolean.md">Explicación del filtrado</a> y temas relacionados.</p></li>
 <li><p>Búsqueda por rangos</p>
 <p>Puede mejorar la relevancia de los resultados de búsqueda restringiendo la distancia o puntuación de las entidades devueltas dentro de un rango específico. En Milvus, una búsqueda por rango implica dibujar dos círculos concéntricos con el vector incrustado más similar al vector de consulta como centro. La petición de búsqueda especifica el radio de ambos círculos, y Milvus devuelve todas las incrustaciones vectoriales que caen dentro del círculo exterior pero no del círculo interior.</p>
-<p>Para más información sobre la búsqueda por rango, consulte <a href="/docs/es/range-search.md">Búsqueda por rango</a>.</p></li>
+<p>Para más información sobre la búsqueda por rango, consulte <a href="/docs/es/v2.6.x/range-search.md">Búsqueda por rango</a>.</p></li>
 <li><p>Búsqueda por agrupación</p>
 <p>Si las entidades devueltas tienen el mismo valor en un campo específico, los resultados de la búsqueda pueden no representar la distribución de todas las incrustaciones vectoriales en el espacio vectorial. Para diversificar los resultados de la búsqueda, considere la posibilidad de utilizar la búsqueda de agrupación.</p>
-<p>Para más información sobre la búsqueda agrupada, consulte <a href="/docs/es/grouping-search.md">Búsqueda agrupada</a>,</p></li>
+<p>Para más información sobre la búsqueda agrupada, consulte <a href="/docs/es/v2.6.x/grouping-search.md">Búsqueda agrupada</a>,</p></li>
 <li><p>Búsqueda híbrida</p>
 <p>Una colección puede incluir múltiples campos vectoriales para guardar las incrustaciones vectoriales generadas utilizando diferentes modelos de incrustación. De este modo, puede utilizar una búsqueda híbrida para volver a clasificar los resultados de búsqueda de estos campos vectoriales, mejorando el índice de recuperación.</p>
-<p>Para obtener más información sobre la búsqueda híbrida, consulte <a href="/docs/es/multi-vector-search.md">Búsqueda híbrida</a>.</p></li>
+<p>Para obtener más información sobre la búsqueda híbrida, consulte <a href="/docs/es/v2.6.x/multi-vector-search.md">Búsqueda híbrida</a>.</p></li>
 <li><p>Iterador de búsqueda</p>
 <p>Una única búsqueda RNA devuelve un máximo de 16.384 entidades. Considere el uso de iteradores de búsqueda si necesita devolver más entidades en una sola búsqueda.</p>
-<p>Para obtener más información sobre los iteradores de búsqueda, consulte <a href="/docs/es/with-iterators.md">Iterador de búsqueda</a>.</p></li>
+<p>Para obtener más información sobre los iteradores de búsqueda, consulte <a href="/docs/es/v2.6.x/with-iterators.md">Iterador de búsqueda</a>.</p></li>
 <li><p>Búsqueda de texto completo</p>
 <p>La búsqueda de texto completo es una función que recupera documentos que contienen términos o frases específicos en conjuntos de datos de texto y, a continuación, clasifica los resultados en función de su relevancia. Esta función supera las limitaciones de la búsqueda semántica, que puede pasar por alto términos precisos, garantizando que usted reciba los resultados más precisos y contextualmente relevantes. Además, simplifica las búsquedas vectoriales al aceptar la entrada de texto sin formato, convirtiendo automáticamente sus datos de texto en incrustaciones dispersas sin necesidad de generar manualmente incrustaciones vectoriales.</p>
-<p>Para obtener más información sobre la búsqueda de texto completo, consulte <a href="/docs/es/full-text-search.md">Búsqueda de texto completo</a>.</p></li>
+<p>Para obtener más información sobre la búsqueda de texto completo, consulte <a href="/docs/es/v2.6.x/full-text-search.md">Búsqueda de texto completo</a>.</p></li>
 <li><p>Coincidencia de texto</p>
 <p>La concordancia de palabras clave en Milvus permite una recuperación precisa de documentos basada en términos específicos. Esta función se utiliza principalmente para la búsqueda filtrada para satisfacer condiciones específicas y puede incorporar el filtrado escalar para refinar los resultados de la consulta, permitiendo búsquedas de similitud dentro de vectores que cumplen criterios escalares.</p>
-<p>Para obtener más información sobre la concordancia de palabras clave, consulte <a href="/docs/es/keyword-match.md">Concordancia de palabras clave</a>.</p></li>
+<p>Para obtener más información sobre la concordancia de palabras clave, consulte <a href="/docs/es/v2.6.x/keyword-match.md">Concordancia de palabras clave</a>.</p></li>
 <li><p>Utilizar clave de partición</p>
-<p>Involucrar varios campos escalares en el filtrado de metadatos y utilizar una condición de filtrado bastante complicada puede afectar a la eficacia de la búsqueda. Una vez establecido un campo escalar como clave de partición y utilizada una condición de filtrado que incluya la clave de partición en la petición de búsqueda, puede ayudar a restringir el ámbito de búsqueda dentro de las particiones correspondientes a los valores de clave de partición especificados.</p>
-<p>Para más detalles sobre la clave de partición, consulte <a href="/docs/es/use-partition-key.md">Utilizar clave de partición</a>.</p></li>
+<p>Involucrar varios campos escalares en el filtrado de metadatos y utilizar una condición de filtrado bastante complicada puede afectar a la eficacia de la búsqueda. Una vez que se establece un campo escalar como clave de partición y se utiliza una condición de filtrado que implica la clave de partición en la petición de búsqueda, puede ayudar a restringir el ámbito de búsqueda dentro de las particiones correspondientes a los valores de clave de partición especificados.</p>
+<p>Para más detalles sobre la clave de partición, consulte <a href="/docs/es/v2.6.x/use-partition-key.md">Utilizar clave de partición</a>.</p></li>
 <li><p>Utilizar mmap</p>
-<p>Para más información sobre la configuración mmap, consulte <a href="/docs/es/mmap.md">Utilizar mmap</a>.</p></li>
+<p>Para más información sobre la configuración mmap, consulte <a href="/docs/es/v2.6.x/mmap.md">Utilizar mmap</a>.</p></li>
 <li><p>Compactación en clúster</p>
-<p>Para obtener más información sobre la compactación de clústeres, consulte <a href="/docs/es/clustering-compaction.md">Compactación de cl</a>ústeres.</p></li>
+<p>Para obtener más información sobre la compactación de clústeres, consulte <a href="/docs/es/v2.6.x/clustering-compaction.md">Compactación de cl</a>ústeres.</p></li>
 <li><p>Utilizar reranking</p>
-<p>Para obtener más información sobre el uso de clasificadores para mejorar la relevancia de los resultados de búsqueda, consulte <a href="/docs/es/decay-ranker-overview.md">Decay Ranker Overview</a> y <a href="/docs/es/model-ranker-overview.md">Model Ranker Overview</a>.</p></li>
+<p>Para obtener más información sobre el uso de clasificadores para mejorar la relevancia de los resultados de búsqueda, consulte <a href="/docs/es/v2.6.x/decay-ranker-overview.md">Decay Ranker Overview</a> y <a href="/docs/es/v2.6.x/model-ranker-overview.md">Model Ranker Overview</a>.</p></li>
 </ul>

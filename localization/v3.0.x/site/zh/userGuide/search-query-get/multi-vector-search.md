@@ -2,7 +2,7 @@
 id: multi-vector-search.md
 title: 多向量混合搜索
 summary: >-
-  在许多应用中，可以通过标题和描述等丰富的信息集或文本、图像和音频等多种模式来搜索对象。例如，如果文本或图像符合搜索查询的语义，就可以搜索包含一段文本和一幅图像的推文。混合搜索将这些不同领域的搜索结合在一起，从而增强了搜索体验。Milvus
+  在许多应用中，可以通过标题和描述等丰富的信息集或文本、图像和音频等多种模式来搜索对象。例如，如果文本或图片与搜索查询的语义相符，就可以搜索包含一段文本和一张图片的推文。混合搜索将这些不同领域的搜索结合在一起，从而增强了搜索体验。Milvus
   允许在多个向量场上进行搜索，同时进行多个近似近邻（ANN）搜索，从而支持这种搜索。如果您想同时搜索文本和图像、描述同一对象的多个文本字段，或同时搜索密集向量和稀疏向量以提高搜索质量，多向量混合搜索就特别有用。
 ---
 <h1 id="Multi-Vector-Hybrid-Search" class="common-anchor-header">多向量混合搜索<button data-href="#Multi-Vector-Hybrid-Search" class="anchor-icon" translate="no">
@@ -474,7 +474,7 @@ indexOption3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>使用前两个步骤中配置的 Collection Schema 和索引创建名为<code translate="no">demo</code> 的 Collection。</p>
+    </button></h3><p>使用前两个步骤中配置的 Collections Schema 和索引创建名为<code translate="no">demo</code> 的 Collection。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -511,6 +511,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -536,7 +537,7 @@ curl --request POST \
 <ul>
 <li><p><code translate="no">id</code>代表产品 ID 的整数</p></li>
 <li><p><code translate="no">text</code>：包含产品描述的字符串</p></li>
-<li><p><code translate="no">text_dense</code>：768 个浮点数值的列表，代表文本描述的密集 Embeddings</p></li>
+<li><p><code translate="no">text_dense</code>：一个 768 个浮点数值的列表，代表文本描述的密集 Embeddings</p></li>
 <li><p><code translate="no">image_dense</code>代表产品图片密集嵌入的 512 个浮点数值的列表</p></li>
 </ul>
 <p>您可以使用相同或不同的模型为每个字段生成密集嵌入。在本例中，两个高密度嵌入的维度不同，说明它们是由不同的模型生成的。以后定义每个查询时，请务必使用相应的模型生成相应的查询嵌入。</p>
@@ -646,6 +647,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;text&quot;: &quot;Red cotton t-shirt with round neck&quot; , &quot;text_dense&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, ...], &quot;image_dense&quot;: [0.6366019600530924, -0.09323198122475052, ...]},
@@ -979,6 +981,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/hybrid_search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;search\&quot;: <span class="hljs-variable">${req}</span>,

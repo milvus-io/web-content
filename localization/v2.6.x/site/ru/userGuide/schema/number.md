@@ -60,7 +60,7 @@ summary: >-
 </table>
 <p>Чтобы объявить числовое поле, просто установите <code translate="no">datatype</code> в один из доступных числовых типов данных. Например, <code translate="no">DataType.INT64</code> для целочисленного поля или <code translate="no">DataType.FLOAT</code> для поля с плавающей точкой.</p>
 <div class="alert note">
-<p>Milvus поддерживает нулевые значения и значения по умолчанию для числовых полей. Чтобы включить эти функции, установите <code translate="no">nullable</code> на <code translate="no">True</code> и <code translate="no">default_value</code> на числовое значение. Подробнее см. в разделе <a href="/docs/ru/nullable-and-default.md">Нулевые значения и значения по умолчанию</a>.</p>
+<p>Milvus поддерживает нулевые значения и значения по умолчанию для числовых полей. Чтобы включить эти функции, установите <code translate="no">nullable</code> на <code translate="no">True</code> и <code translate="no">default_value</code> на числовое значение. Подробнее см. в разделе <a href="/docs/ru/v2.6.x/nullable-and-default.md">Нулевые значения и значения по умолчанию</a>.</p>
 </div>
 <h2 id="Add-number-field" class="common-anchor-header">Добавление числового поля<button data-href="#Add-number-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -83,7 +83,7 @@ summary: >-
 <li><p><code translate="no">price</code>: хранит данные о плавающих числах, допускает нулевые значения, но не имеет значения по умолчанию.</p></li>
 </ul>
 <div class="alert note">
-<p>Если при определении схемы задать <code translate="no">enable_dynamic_fields=True</code>, Milvus позволит вам вставлять скалярные поля, которые не были определены заранее. Однако это может повысить сложность запросов и управления, что потенциально может повлиять на производительность. Дополнительную информацию см. в разделе <a href="/docs/ru/enable-dynamic-field.md">Динамическое поле</a>.</p>
+<p>Если при определении схемы задать <code translate="no">enable_dynamic_fields=True</code>, Milvus позволит вам вставлять скалярные поля, которые не были определены заранее. Однако это может повысить сложность запросов и управления, что потенциально может повлиять на производительность. Дополнительную информацию см. в разделе <a href="/docs/ru/v2.6.x/enable-dynamic-field.md">Динамическое поле</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -265,7 +265,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>Индексирование помогает повысить производительность поиска и запросов. В Milvus индексирование является обязательным для векторных полей и необязательным для скалярных.</p>
-<p>В следующем примере создаются индексы для векторного поля <code translate="no">embedding</code> и скалярного поля <code translate="no">age</code>, оба с использованием типа индекса <code translate="no">AUTOINDEX</code>. При использовании этого типа Milvus автоматически выбирает наиболее подходящий индекс на основе типа данных. Вы также можете настроить тип индекса и параметры для каждого поля. Подробнее см. в разделе <a href="/docs/ru/index-explained.md">"Объяснение индекса</a>".</p>
+<p>В следующем примере создаются индексы для векторного поля <code translate="no">embedding</code> и скалярного поля <code translate="no">age</code>, оба с использованием типа индекса <code translate="no">AUTOINDEX</code>. При использовании этого типа Milvus автоматически выбирает наиболее подходящий индекс на основе типа данных. Вы также можете настроить тип индекса и параметры для каждого поля. Подробнее см. в разделе <a href="/docs/ru/v2.6.x/index-explained.md">"Объяснение индекса</a>".</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
@@ -383,6 +383,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -482,6 +483,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;age&quot;: 25, &quot;price&quot;: 99.99, &quot;pk&quot;: 1, &quot;embedding&quot;: [0.1, 0.2, 0.3]},
@@ -567,6 +569,7 @@ fmt.Println(<span class="hljs-string">&quot;price&quot;</span>, queryResult.GetC
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;age &gt; 30&quot;,
@@ -647,6 +650,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;my_collection&quot;,
   &quot;filter&quot;: &quot;price is null&quot;,
@@ -721,6 +725,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;my_collection&quot;,
   &quot;filter&quot;: &quot;age == 18&quot;,
@@ -742,7 +747,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Помимо базовой фильтрации по числовым полям, вы можете комбинировать векторный поиск по сходству с фильтрами по числовым полям. Например, в следующем коде показано, как добавить фильтр по полю чисел к векторному поиску:</p>
+    </button></h2><p>Помимо базовой фильтрации по числовым полям, вы можете комбинировать поиск по векторному подобию с фильтрами по числовым полям. Например, в следующем коде показано, как добавить фильтр по полю чисел к векторному поиску:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;25 &lt;= age &lt;= 35&quot;</span>
@@ -826,6 +831,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -838,4 +844,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:35,&quot;distance&quot;:-0.19054288,&quot;id&quot;:3,&quot;price&quot;:199.99},{&quot;age&quot;:30,&quot;distance&quot;:-0.20163085,&quot;id&quot;:2,&quot;price&quot;:149.5},{&quot;age&quot;:25,&quot;distance&quot;:-0.2364331,&quot;id&quot;:1,&quot;price&quot;:99.99}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>В этом примере мы сначала определяем вектор запроса и добавляем условие фильтра <code translate="no">25 &lt;= age &lt;= 35</code> во время поиска. Это гарантирует, что результаты поиска будут не только похожи на вектор запроса, но и будут соответствовать заданному возрастному диапазону. Дополнительные сведения см. в разделе <a href="/docs/ru/filtering">Фильтрация</a>.</p>
+<p>В этом примере мы сначала определяем вектор запроса и добавляем условие фильтра <code translate="no">25 &lt;= age &lt;= 35</code> во время поиска. Это гарантирует, что результаты поиска будут не только похожи на вектор запроса, но и будут соответствовать заданному возрастному диапазону. Дополнительные сведения см. в разделе <a href="/docs/ru/v2.6.x/filtering">Фильтрация</a>.</p>

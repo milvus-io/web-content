@@ -54,7 +54,7 @@ summary: >-
 <li><p>Restituisce i primi risultati per ogni gruppo, come definito dal parametro <code translate="no">limit</code>, con l'entità più simile di ogni gruppo.</p></li>
 </ul>
 <div class="alert note">
-<p>Per impostazione predefinita, la ricerca per gruppi restituisce solo un'entità per gruppo. Se si desidera aumentare il numero di risultati da restituire per gruppo, è possibile controllarlo con i parametri <code translate="no">group_size</code> e <code translate="no">strict_group_size</code>.</p>
+<p>Per impostazione predefinita, la ricerca per gruppi restituisce solo un'entità per gruppo. Se si desidera aumentare il numero di risultati da restituire per gruppo, è possibile controllare questo aspetto con i parametri <code translate="no">group_size</code> e <code translate="no">strict_group_size</code>.</p>
 </div>
 <h2 id="Perform-Grouping-Search" class="common-anchor-header">Esecuzione della ricerca per gruppi<button data-href="#Perform-Grouping-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -213,6 +213,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -352,6 +353,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

@@ -109,7 +109,7 @@ summary: >-
 <p>Angenommen, Sie haben den dynamischen Schlüssel in der Beispielsammlung aktiviert, und die Schlüssel-Wert-Paare im dynamischen Feld einer Entität sind ähnlich wie <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
 <p>Wenn Sie die Entität mit Schlüsseln wie <code translate="no">author</code>, <code translate="no">year</code> oder <code translate="no">tags</code> einfügen oder andere Schlüssel hinzufügen, beachten Sie Folgendes:</p>
 <ul>
-<li><p>Wenn Sie mit deaktiviertem <code translate="no">partial_update</code> einfügen, ist das Standardverhalten das <strong>Überschreiben</strong>. Das bedeutet, dass der Wert des dynamischen Feldes von allen nicht schema-definierten Feldern, die in der Anfrage enthalten sind, und ihren Werten überschrieben wird.</p>
+<li><p>Wenn Sie mit deaktiviertem <code translate="no">partial_update</code> einfügen, ist das Standardverhalten, dass das dynamische Feld <strong>überschrieben wird</strong>. Das bedeutet, dass der Wert des dynamischen Feldes von allen nicht schema-definierten Feldern, die in der Anfrage enthalten sind, und ihren Werten überschrieben wird.</p>
 <p>Wenn die in der Anfrage enthaltenen Daten beispielsweise <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code> sind, werden die Schlüssel-Wert-Paare im dynamischen Feld der Zielentität auf diesen Wert aktualisiert.</p></li>
 <li><p>Wenn Sie upsert mit <code translate="no">partial_update</code> aktivieren, ist das Standardverhalten das <strong>Zusammenführen</strong>. Das bedeutet, dass der Wert des dynamischen Feldes mit allen nicht schema-definierten Feldern, die in der Anfrage enthalten sind, und deren Werten zusammengeführt wird.</p>
 <p>Wenn die in der Anfrage enthaltenen Daten beispielsweise <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> sind, werden die Schlüssel-Wert-Paare im dynamischen Feld der Zielentität nach dem Upsert zu <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code>.</p></li>
@@ -303,6 +303,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/upsert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;title&quot;: &quot;Artificial Intelligence in Real Life&quot;, &quot;issue&quot;: &quot;vol.12&quot;},
@@ -449,6 +450,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/upsert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 10, &quot;vector&quot;: [0.06998888224297328, 0.8582816610326578, -0.9657938677934292, 0.6527905683627726, -0.8668460657158576], &quot;title&quot;: &quot;Layour Design Reference&quot;, &quot;issue&quot;: &quot;vol.34&quot;},
@@ -591,6 +593,7 @@ _, err = client.Upsert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/upsert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,

@@ -38,7 +38,7 @@ title: Milvus in Docker ausführen (Linux)
       </svg>
     </button></h2><ul>
 <li><a href="https://docs.docker.com/get-docker/">Installieren Sie Docker</a>.</li>
-<li><a href="/docs/de/prerequisite-docker.md">Überprüfen Sie</a> vor der Installation<a href="/docs/de/prerequisite-docker.md">die Anforderungen an Hardware und Software</a>.</li>
+<li><a href="/docs/de/v2.6.x/prerequisite-docker.md">Prüfen Sie</a> vor der Installation<a href="/docs/de/v2.6.x/prerequisite-docker.md">die Anforderungen an Hardware und Software</a>.</li>
 </ul>
 <h2 id="Install-Milvus-in-Docker" class="common-anchor-header">Installieren von Milvus in Docker<button data-href="#Install-Milvus-in-Docker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -63,10 +63,10 @@ title: Milvus in Docker ausführen (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Was ist neu in v2.6.15:</strong></p>
+<p><strong>Was ist neu in v2.6.16:</strong></p>
 <ul>
 <li><strong>Streaming Node</strong>: Verbesserte Datenverarbeitungsmöglichkeiten</li>
-<li><strong>Woodpecker MQ</strong>: Verbesserte Nachrichtenwarteschlange mit reduziertem Wartungsaufwand, siehe <a href="/docs/de/use-woodpecker.md">Woodpecker verwenden</a> für Details</li>
+<li><strong>Woodpecker MQ</strong>: Verbesserte Nachrichtenwarteschlange mit reduziertem Wartungsaufwand, siehe <a href="/docs/de/v2.6.x/use-woodpecker.md">Woodpecker verwenden</a> für Details</li>
 <li><strong>Optimierte Architektur</strong>: Konsolidierte Komponenten für bessere Leistung</li>
 </ul>
 <p>Laden Sie immer das neueste Skript herunter, um sicherzustellen, dass Sie die neuesten Konfigurationen und Architekturverbesserungen erhalten.</p>
@@ -80,7 +80,7 @@ title: Milvus in Docker ausführen (Linux)
 <li>Um die Standardkonfiguration von Milvus zu ändern, fügen Sie Ihre Einstellungen der Datei <strong>user.yaml</strong> im aktuellen Ordner hinzu und starten Sie den Dienst neu.</li>
 <li>Das Milvus-Datenvolumen wird im aktuellen Ordner auf <strong>volumes/milvus</strong> abgebildet.</li>
 </ul>
-<p>Sie können auf die Milvus-WebUI unter <code translate="no">http://127.0.0.1:9091/webui/</code> zugreifen, um mehr über Ihre Milvus-Instanz zu erfahren. Einzelheiten finden Sie unter <a href="/docs/de/milvus-webui.md">Milvus WebUI</a>.</p>
+<p>Sie können auf die Milvus-WebUI unter <code translate="no">http://127.0.0.1:9091/webui/</code> zugreifen, um mehr über Ihre Milvus-Instanz zu erfahren. Einzelheiten finden Sie unter <a href="/docs/de/v2.6.x/milvus-webui.md">Milvus WebUI</a>.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Optional) Milvus-Konfigurationen aktualisieren<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -106,7 +106,7 @@ EOF
 <p>Starten Sie dann den Dienst wie folgt neu:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh restart</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Die zutreffenden Konfigurationselemente finden Sie unter <a href="/docs/de/system_configuration.md">Systemkonfiguration</a>.</p>
+<p>Die zutreffenden Konfigurationselemente finden Sie unter <a href="/docs/de/v2.6.x/system_configuration.md">Systemkonfiguration</a>.</p>
 <h2 id="Upgrade-Milvus" class="common-anchor-header">Upgrade von Milvus<button data-href="#Upgrade-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -175,27 +175,27 @@ EOF
       </svg>
     </button></h2><p>Nachdem Sie Milvus in Docker installiert haben, können Sie:</p>
 <ul>
-<li><p><a href="/docs/de/quickstart.md">Quickstart</a> prüfen, um zu sehen, was Milvus tun kann.</p></li>
+<li><p><a href="/docs/de/v2.6.x/quickstart.md">Quickstart</a> prüfen, um zu sehen, was Milvus tun kann.</p></li>
 <li><p>Lernen Sie die grundlegenden Operationen von Milvus:</p>
 <ul>
-<li><a href="/docs/de/manage_databases.md">Verwalten von Datenbanken</a></li>
-<li><a href="/docs/de/manage-collections.md">Sammlungen verwalten</a></li>
-<li><a href="/docs/de/manage-partitions.md">Partitionen verwalten</a></li>
-<li><a href="/docs/de/insert-update-delete.md">Einfügen, Upsert &amp; Löschen</a></li>
-<li><a href="/docs/de/single-vector-search.md">Ein-Vektor-Suche</a></li>
-<li><a href="/docs/de/multi-vector-search.md">Hybride Suche</a></li>
+<li><a href="/docs/de/v2.6.x/manage_databases.md">Verwalten von Datenbanken</a></li>
+<li><a href="/docs/de/v2.6.x/manage-collections.md">Sammlungen verwalten</a></li>
+<li><a href="/docs/de/v2.6.x/manage-partitions.md">Partitionen verwalten</a></li>
+<li><a href="/docs/de/v2.6.x/insert-update-delete.md">Einfügen, Upsert &amp; Löschen</a></li>
+<li><a href="/docs/de/v2.6.x/single-vector-search.md">Ein-Vektor-Suche</a></li>
+<li><a href="/docs/de/v2.6.x/multi-vector-search.md">Hybride Suche</a></li>
 </ul></li>
-<li><p><a href="/docs/de/upgrade_milvus_cluster-helm.md">Upgrade von Milvus mit Helm Chart</a>.</p></li>
-<li><p><a href="/docs/de/scaleout.md">Skalieren Sie Ihren Milvus-Cluster</a>.</p></li>
+<li><p><a href="/docs/de/v2.6.x/upgrade_milvus_cluster-helm.md">Upgrade von Milvus mit Helm Chart</a>.</p></li>
+<li><p><a href="/docs/de/v2.6.x/scaleout.md">Skalieren Sie Ihren Milvus-Cluster</a>.</p></li>
 <li><p>Verteilen Sie Ihren Milvus-Cluster auf Clouds:</p>
 <ul>
-<li><a href="/docs/de/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/de/gcp.md">Google Wolke</a></li>
-<li><a href="/docs/de/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/de/v2.6.x/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/de/v2.6.x/gcp.md">Google Wolke</a></li>
+<li><a href="/docs/de/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Entdecken Sie <a href="/docs/de/milvus-webui.md">Milvus WebUI</a>, eine intuitive Webschnittstelle für die Beobachtung und Verwaltung von Milvus.</p></li>
-<li><p>Erkunden Sie <a href="/docs/de/milvus_backup_overview.md">Milvus Backup</a>, ein Open-Source-Tool für Milvus-Datensicherungen.</p></li>
-<li><p><a href="/docs/de/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zur Fehlersuche in Milvus und zur dynamischen Konfigurationsaktualisierung.</p></li>
+<li><p>Entdecken Sie <a href="/docs/de/v2.6.x/milvus-webui.md">Milvus WebUI</a>, eine intuitive Webschnittstelle für die Beobachtung und Verwaltung von Milvus.</p></li>
+<li><p>Erkunden Sie <a href="/docs/de/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, ein Open-Source-Tool für Milvus-Datensicherungen.</p></li>
+<li><p><a href="/docs/de/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zur Fehlersuche in Milvus und zur dynamischen Konfigurationsaktualisierung.</p></li>
 <li><p>Entdecken Sie <a href="https://github.com/zilliztech/attu">Attu</a>, ein Open-Source-GUI-Tool für intuitives Milvus-Management.</p></li>
-<li><p><a href="/docs/de/monitor.md">Überwachen Sie Milvus mit Prometheus</a>.</p></li>
+<li><p><a href="/docs/de/v2.6.x/monitor.md">Überwachen Sie Milvus mit Prometheus</a>.</p></li>
 </ul>

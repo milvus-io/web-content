@@ -23,10 +23,8 @@ summary: >-
       </svg>
     </button></h1><p>As entidades de uma coleção são registos de dados que partilham o mesmo conjunto de campos. Os valores de campo em cada registo de dados formam uma entidade. Esta página apresenta a forma de inserir entidades numa coleção.</p>
 <div class="alert note">
-<p>Se adicionar dinamicamente novos campos depois de a coleção ter sido criada e não especificar valores para esses campos ao inserir entidades, o Milvus preenche-os automaticamente com os valores predefinidos definidos ou com NULL se as predefinições não estiverem definidas. Para obter detalhes, consulte <a href="/docs/pt/add-fields-to-an-existing-collection.md">Adicionar campos a uma coleção existente</a>.</p>
-<div class="alert note">
 <ul>
-<li><p><strong>Campos adicionados após a criação da coleção</strong>: Se adicionar novos campos a uma coleção após a criação e não especificar valores durante a inserção, o Milvus preenche-os automaticamente com os valores predefinidos definidos ou NULL se não forem definidas predefinições. Para obter detalhes, consulte <a href="/docs/pt/add-fields-to-an-existing-collection.md">Adicionar campos a uma coleção existente</a>.</p></li>
+<li><p><strong>Campos adicionados após a criação da coleção</strong>: Se adicionar novos campos a uma coleção após a criação e não especificar valores durante a inserção, o Milvus preenche-os automaticamente com valores predefinidos definidos ou NULL se não forem definidos valores predefinidos. Para obter detalhes, consulte <a href="/docs/pt/add-fields-to-an-existing-collection.md">Adicionar campos a uma coleção existente</a>.</p></li>
 <li><p><strong>Tratamento de duplicatas</strong>: A operação padrão <code translate="no">insert</code> não verifica se há chaves primárias duplicadas. A inserção de dados com uma chave primária existente cria uma nova entidade com a mesma chave, levando à duplicação de dados e a possíveis problemas de aplicação. Para atualizar entidades existentes ou evitar duplicações, utilize a operação <strong><code translate="no">upsert</code></strong> em vez disso. Para obter mais informações, consulte <a href="/docs/pt/upsert-entities.md">Upsert Entities</a>.</p></li>
 </ul>
 </div>
@@ -223,6 +221,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},
@@ -397,6 +396,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 10, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},

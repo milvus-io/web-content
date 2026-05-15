@@ -264,6 +264,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -380,6 +381,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;data&quot;: [
     {
@@ -399,7 +401,7 @@ curl --request POST \
   &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Index-keys-in-the-dynamic-field--Milvus-2511+" class="common-anchor-header">Indexar claves en el campo dinámico<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Index-keys-in-the-dynamic-field--Milvus-2511+" class="anchor-icon" translate="no">
+<h2 id="Index-keys-in-the-dynamic-field--Milvus-2511+" class="common-anchor-header">Claves de índice en el campo dinámico<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Index-keys-in-the-dynamic-field--Milvus-2511+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -809,6 +811,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
@@ -959,6 +962,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;data\&quot;: [
@@ -1029,7 +1033,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Debe definir un campo explícitamente en el esquema en lugar de utilizar una clave de campo dinámica cuando:</p>
+    </button></h3><p>Debería definir un campo explícitamente en el esquema en lugar de utilizar una clave de campo dinámica cuando:</p>
 <ul>
 <li><p><strong>El campo se incluye con frecuencia en output_fields</strong>: Sólo se garantiza que los campos definidos explícitamente se puedan recuperar de forma eficiente a través de <code translate="no">output_fields</code>. Las claves de campo dinámicas no están optimizadas para recuperaciones de alta frecuencia y pueden provocar sobrecargas de rendimiento.</p></li>
 <li><p><strong>Se accede al campo o se filtra con frecuencia</strong>: Aunque la indexación de una clave de campo dinámica puede proporcionar un rendimiento de filtrado similar al de los campos de esquema fijos, los campos definidos explícitamente ofrecen una estructura más clara y una mejor capacidad de mantenimiento.</p></li>
@@ -1071,7 +1075,7 @@ curl --request POST \
 <p>Esto tiene algunas implicaciones importantes:</p>
 <ul>
 <li><p><strong>No hay vuelta atrás al escaneo completo</strong>: Si la mayoría de las entidades se indexan correctamente, las consultas de filtrado se basarán por completo en el índice. Las entidades con fallos en el reparto se excluirán del conjunto de resultados, incluso aunque coincidan lógicamente con la condición de filtrado.</p></li>
-<li><p><strong>Riesgo para la precisión de la búsqueda</strong>: En grandes conjuntos de datos donde la calidad de los datos es inconsistente (especialmente en claves de campo dinámicas), este comportamiento puede conducir a resultados inesperados. Es fundamental garantizar un formato de datos coherente y válido antes de la indexación.</p></li>
+<li><p><strong>Riesgo para la precisión de la búsqueda</strong>: En grandes conjuntos de datos en los que la calidad de los datos es inconsistente (especialmente en las claves de campo dinámicas), este comportamiento puede dar lugar a resultados perdidos inesperados. Es fundamental garantizar un formato de datos coherente y válido antes de la indexación.</p></li>
 <li><p><strong>Utilice las funciones de conversión con precaución</strong>: Si utiliza <code translate="no">json_cast_function</code> para convertir cadenas en números durante la indexación, asegúrese de que los valores de las cadenas son convertibles de forma fiable. Un desajuste entre <code translate="no">json_cast_type</code> y el tipo convertido real provocará errores o entradas omitidas.</p></li>
 </ul>
 <h3 id="What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="common-anchor-header">¿Qué ocurre si mi consulta utiliza un tipo de datos distinto del tipo de conversión indexado?<button data-href="#What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">

@@ -261,6 +261,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -377,6 +378,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;data&quot;: [
     {
@@ -806,6 +808,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
@@ -956,6 +959,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;data\&quot;: [
@@ -1068,7 +1072,7 @@ curl --request POST \
 <p>여기에는 몇 가지 중요한 의미가 있습니다:</p>
 <ul>
 <li><p><strong>전체 스캔에 대한 폴백이 없습니다</strong>: 대부분의 엔티티가 성공적으로 색인되면 필터링 쿼리는 전적으로 색인에 의존하게 됩니다. 캐스팅에 실패한 엔티티는 논리적으로 필터 조건과 일치하더라도 결과 세트에서 제외됩니다.</p></li>
-<li><p><strong>검색 정확도 위험</strong>: 데이터 품질이 일관되지 않은 대규모 데이터 세트(특히 동적 필드 키)에서는 이러한 동작으로 인해 예기치 않은 결과 누락이 발생할 수 있습니다. 인덱싱하기 전에 일관되고 유효한 데이터 형식을 보장하는 것이 중요합니다.</p></li>
+<li><p><strong>검색 정확도 위험</strong>: 데이터 품질이 일관되지 않은 대규모 데이터 세트(특히 동적 필드 키의 경우)에서는 이러한 동작으로 인해 예기치 않은 결과 누락이 발생할 수 있습니다. 인덱싱하기 전에 일관되고 유효한 데이터 형식을 보장하는 것이 중요합니다.</p></li>
 <li><p><strong>형변환 함수는 신중하게 사용하세요</strong>: 인덱싱 중에 <code translate="no">json_cast_function</code> 을 사용하여 문자열을 숫자로 변환하는 경우, 문자열 값이 안정적으로 변환 가능한지 확인하세요. <code translate="no">json_cast_type</code> 과 실제 변환된 유형이 일치하지 않으면 오류가 발생하거나 항목이 건너뛰게 됩니다.</p></li>
 </ul>
 <h3 id="What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="common-anchor-header">쿼리가 인덱싱된 형 변환 유형과 다른 데이터 유형을 사용하는 경우 어떻게 되나요?<button data-href="#What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">

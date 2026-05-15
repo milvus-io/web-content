@@ -53,7 +53,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Dichter Vektor</span> </span></p>
 <p>Das obige Bild zeigt die Darstellung von dichten Vektoren in einem 2D-Raum. Obwohl dichte Vektoren in realen Anwendungen oft viel höhere Dimensionen haben, vermittelt diese 2D-Darstellung effektiv mehrere Schlüsselkonzepte:</p>
 <ul>
-<li><p><strong>Mehrdimensionale Darstellung:</strong> Jeder Punkt repräsentiert ein konzeptuelles Objekt (wie <strong>Milvus</strong>, eine <strong>Vektordatenbank</strong>, ein <strong>Retrievalsystem</strong> usw.), wobei seine Position durch die Werte seiner Dimensionen bestimmt wird.</p></li>
+<li><p><strong>Mehrdimensionale Darstellung:</strong> Jeder Punkt repräsentiert ein konzeptionelles Objekt (wie <strong>Milvus</strong>, eine <strong>Vektordatenbank</strong>, ein <strong>Retrievalsystem</strong> usw.), wobei seine Position durch die Werte seiner Dimensionen bestimmt wird.</p></li>
 <li><p><strong>Semantische Beziehungen:</strong> Die Abstände zwischen den Punkten spiegeln die semantische Ähnlichkeit zwischen den Konzepten wider. Näher beieinander liegende Punkte weisen auf Konzepte hin, die semantisch enger miteinander verwandt sind.</p></li>
 <li><p><strong>Clustering-Effekt:</strong> Verwandte Konzepte (wie <strong>Milvus</strong>, <strong>Vektordatenbank</strong> und <strong>Retrievalsystem</strong>) liegen im Raum nahe beieinander und bilden einen semantischen Cluster.</p></li>
 </ul>
@@ -78,7 +78,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" />
    </span> <span class="img-wrapper"> <span>Dichter Vektor verwenden</span> </span></p>
 <div class="alert note">
-<p>Neben dichten Vektoren unterstützt Milvus auch spärliche Vektoren und binäre Vektoren. Dünne Vektoren eignen sich für präzise Übereinstimmungen auf der Grundlage spezifischer Begriffe, z. B. bei der Suche nach Schlüsselwörtern und dem Abgleich von Begriffen, während binäre Vektoren in der Regel für den effizienten Umgang mit binarisierten Daten verwendet werden, z. B. für den Abgleich von Bildmustern und bestimmte Hashing-Anwendungen. Weitere Informationen finden Sie unter <a href="/docs/de/binary-vector.md">Binäre Vektoren</a> und <a href="/docs/de/sparse_vector.md">dichte Vektoren</a>.</p>
+<p>Neben dichten Vektoren unterstützt Milvus auch spärliche Vektoren und binäre Vektoren. Dünne Vektoren eignen sich für präzise Übereinstimmungen auf der Grundlage spezifischer Begriffe, z. B. bei der Suche nach Schlüsselwörtern und dem Abgleich von Begriffen, während binäre Vektoren in der Regel für den effizienten Umgang mit binarisierten Daten verwendet werden, z. B. beim Abgleich von Bildmustern und bestimmten Hashing-Anwendungen. Weitere Informationen finden Sie unter <a href="/docs/de/binary-vector.md">Binäre Vektoren</a> und <a href="/docs/de/sparse_vector.md">dichte Vektoren</a>.</p>
 </div>
 <h2 id="Use-dense-vectors" class="common-anchor-header">Dichte Vektoren verwenden<button data-href="#Use-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -243,7 +243,7 @@ schema.WithField(entity.NewField().
    </tr>
    <tr>
      <td><p><code translate="no">BFLOAT16_VECTOR</code></p></td>
-     <td><p>Speichert 16-Bit-Gehirn-Fließkommazahlen (bfloat16), die denselben Exponentenbereich wie Float32 bieten, aber eine geringere Genauigkeit aufweisen. Geeignet für Szenarien, in denen große Mengen von Vektoren schnell verarbeitet werden müssen, z. B. bei der Suche nach Bildern in großem Maßstab.</p></td>
+     <td><p>Speichert 16-Bit-Gehirn-Fließkommazahlen (bfloat16), die den gleichen Exponentenbereich wie Float32 bieten, aber eine geringere Genauigkeit aufweisen. Geeignet für Szenarien, in denen große Mengen von Vektoren schnell verarbeitet werden müssen, z. B. bei der Suche nach Bildern in großem Maßstab.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">INT8_VECTOR</code></p></td>
@@ -375,6 +375,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -449,6 +450,7 @@ client.<span class="hljs-title function_">insert</span>({
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;dense_vector&quot;: [0.1, 0.2, 0.3, 0.4]},
@@ -557,6 +559,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

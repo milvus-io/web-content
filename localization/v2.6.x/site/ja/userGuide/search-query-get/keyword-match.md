@@ -21,7 +21,7 @@ summary: >-
       </svg>
     </button></h1><p>Milvusのテキストマッチは、特定の用語に基づいた正確な文書検索を可能にします。この機能は主に特定の条件を満たすためのフィルタリング検索に使用され、クエリ結果を絞り込むためにスカラーフィルタリングを組み込むことができ、スカラー条件を満たすベクトル内の類似検索を可能にします。</p>
 <div class="alert note">
-<p>テキストマッチは、マッチした文書の関連性をスコアリングすることなく、クエリー用語の正確な出現箇所を見つけることに重点を置いています。クエリー用語の意味や重要性に基づいて最も関連性の高い文書を検索したい場合は、<a href="/docs/ja/full-text-search.md">Full Text Searchを</a>使用することをお勧めします。</p>
+<p>テキストマッチは、マッチした文書の関連性をスコアリングすることなく、クエリー用語の正確な出現箇所を見つけることに重点を置いています。クエリー用語の意味や重要性に基づいて最も関連性の高い文書を検索したい場合は、<a href="/docs/ja/v2.6.x/full-text-search.md">Full Text Searchを</a>使用することをお勧めします。</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -40,15 +40,15 @@ summary: >-
       </svg>
     </button></h2><p>Milvusは<a href="https://github.com/quickwit-oss/tantivy">Tantivyを</a>統合し、転置インデックスと用語ベースのテキスト検索を実現しています。Milvusは各テキストエントリに対して、以下の手順でインデックスを作成します：</p>
 <ol>
-<li><p><a href="/docs/ja/analyzer-overview.md">アナライザー</a>：アナライザは、入力テキストを個々の単語（トークン）にトークン化し、必要に応じてフィルタを適用することで処理します。これにより、Milvusはこれらのトークンに基づいたインデックスを構築することができる。</p></li>
-<li><p><a href="/docs/ja/index-explained.md">インデックス作成</a>：テキスト解析後、Milvusは各トークンを含む文書に対応付ける転置インデックスを作成します。</p></li>
+<li><p><a href="/docs/ja/v2.6.x/analyzer-overview.md">アナライザー</a>：アナライザは、入力テキストを個々の単語（トークン）にトークン化し、必要に応じてフィルタを適用することで処理します。これにより、Milvusはこれらのトークンに基づいたインデックスを構築することができる。</p></li>
+<li><p><a href="/docs/ja/v2.6.x/index-explained.md">インデックス作成</a>：テキスト解析後、Milvusは各トークンを含む文書に対応付ける転置インデックスを作成します。</p></li>
 </ol>
 <p>ユーザがテキストマッチを実行すると、転置インデックスがその用語を含む全ての文書を素早く検索するために使用される。これは、各文書を個別にスキャンするよりもはるかに高速です。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/keyword-match.png" alt="Keyword Match" class="doc-image" id="keyword-match" />
    </span> <span class="img-wrapper"> <span>キーワードマッチ</span> </span></p>
-<h2 id="Enable-text-match" class="common-anchor-header">テキストマッチの有効化<button data-href="#Enable-text-match" class="anchor-icon" translate="no">
+<h2 id="Enable-text-match" class="common-anchor-header">テキストマッチを有効にする<button data-href="#Enable-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -63,7 +63,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>テキストマッチは <a href="/docs/ja/string.md"><code translate="no">VARCHAR</code></a>フィールドタイプで、これは基本的にmilvusの文字列データ型です。テキスト照合を有効にするには、<code translate="no">enable_analyzer</code> と<code translate="no">enable_match</code> の両方を<code translate="no">True</code> に設定し、コレクションスキーマを定義する際にオプションでテキスト分析用の<a href="/docs/ja/analyzer-overview.md">アナライザを</a>設定します。</p>
+    </button></h2><p>テキストマッチは <a href="/docs/ja/v2.6.x/string.md"><code translate="no">VARCHAR</code></a>フィールドタイプで、これは基本的にmilvusの文字列データ型です。テキスト照合を有効にするには、<code translate="no">enable_analyzer</code> と<code translate="no">enable_match</code> の両方を<code translate="no">True</code> に設定し、コレクションスキーマを定義する際にオプションでテキスト分析用の<a href="/docs/ja/v2.6.x/analyzer-overview.md">アナライザを</a>設定します。</p>
 <h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header"><code translate="no">enable_analyzer</code> と<code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -198,7 +198,7 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">オプション：アナライザーの設定<button data-href="#Optional-Configure-an-analyzer" class="anchor-icon" translate="no">
+<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">オプション：アナライザの設定<button data-href="#Optional-Configure-an-analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -214,7 +214,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h3><p>キーワード・マッチングのパフォーマンスと精度は、選択したアナライザに依存します。異なる分析器は様々な言語やテキスト構造に合わせて調整されているため、適切な分析器を選択することで、特定のユースケースの検索結果に大きな影響を与えることができます。</p>
-<p>デフォルトでは、Milvusは<code translate="no">standard</code> アナライザーを使用します。このアナライザーは、空白と句読点に基づいてテキストをトークン化し、40文字以上のトークンを削除し、テキストを小文字に変換します。このデフォルト設定を適用するために追加のパラメータは必要ありません。詳細については、「<a href="/docs/ja/standard-analyzer.md">標準</a>」を参照してください。</p>
+<p>デフォルトでは、Milvusは<code translate="no">standard</code> アナライザーを使用します。このアナライザーは、空白と句読点に基づいてテキストをトークン化し、40文字以上のトークンを削除し、テキストを小文字に変換します。このデフォルト設定を適用するために追加のパラメータは必要ありません。詳細については、「<a href="/docs/ja/v2.6.x/standard-analyzer.md">標準</a>」を参照してください。</p>
 <p>別のアナライザが必要な場合は、<code translate="no">analyzer_params</code> パラメータを使用してアナライザを設定できます。例えば、英語のテキストを処理するために<code translate="no">english</code> アナライザを適用する場合：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -301,7 +301,7 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvusは他にも様々な言語やシナリオに適したアナライザを提供しています。詳細については、<a href="/docs/ja/analyzer-overview.md">アナライザの概要を</a>参照してください。</p>
+<p>Milvusは他にも様々な言語やシナリオに適したアナライザを提供しています。詳細については、<a href="/docs/ja/v2.6.x/analyzer-overview.md">アナライザの概要を</a>参照してください。</p>
 <h2 id="Use-text-match" class="common-anchor-header">テキストマッチの使用<button data-href="#Use-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -397,10 +397,10 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>テキスト・マッチをベクトル類似性検索と組み合わせて使うことで、検索範囲を狭め、検索パフォーマンスを向上させることができます。ベクトル類似検索の前にテキストマッチを使ってコレクションをフィルタリングすることで、検索が必要なドキュメントの数を減らすことができ、結果的にクエリー時間を短縮することができます。</p>
+    </button></h3><p>テキスト・マッチをベクトル類似検索と組み合わせて使うことで、検索範囲を狭め、検索パフォーマンスを向上させることができます。ベクトル類似検索の前にテキストマッチを使ってコレクションをフィルタリングすることで、検索が必要なドキュメントの数を減らすことができ、結果的にクエリー時間を短縮することができます。</p>
 <p>この例では、<code translate="no">filter</code> 式は、指定された用語<code translate="no">keyword1</code> または<code translate="no">keyword2</code> に一致する文書のみを含むように検索結果をフィルタリングします。次に、ベクトル類似性検索は、このフィルタリングされた文書のサブセットに対して実行されます。</p>
 <div class="alert note">
-<p>テキスト・ハイライターを設定すると、検索結果で一致した用語を強調表示することができます。詳細は<a href="/docs/ja/text-highlighter.md">テキスト・ハイライターを</a>参照。</p>
+<p>テキスト・ハイライターを設定すると、検索結果で一致した用語を強調表示することができます。詳細は<a href="/docs/ja/v2.6.x/text-highlighter.md">テキスト・ハイライターを</a>参照。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -466,6 +466,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;annsField&quot;: &quot;embeddings&quot;,
@@ -545,6 +546,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$filter</span>&quot;</span><span class="hljs-string">&#x27;,

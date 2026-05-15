@@ -21,10 +21,8 @@ summary: >-
       </svg>
     </button></h1><p>コレクション内のエンティティは、同じフィールド・セットを共有するデータ・レコードです。すべてのデータレコードのフィールド値がエンティティを形成します。このページでは、コレクションにエンティティを挿入する方法を紹介します。</p>
 <div class="alert note">
-<p>コレクションが作成された後に新しいフィールドを動的に追加し、エンティティの挿入時にこれらのフィールドの値を指定しなかった場合、Milvusはそれらのフィールドに定義されたデフォルト値またはデフォルトが設定されていない場合はNULLを自動的に入力します。詳細は、"<a href="/docs/ja/add-fields-to-an-existing-collection.md">既存のコレクションへのフィールドの追加</a>" を参照してください。</p>
-<div class="alert note">
 <ul>
-<li><p><strong>コレクション作成後に追加されたフィールド</strong>：作成後にコレクションに新しいフィールドを追加し、挿入時に値を指定しない場合、Milvusは自動的に定義されたデフォルト値またはデフォルトが設定されていない場合はNULLを入力します。詳細については、<a href="/docs/ja/add-fields-to-an-existing-collection.md">既存のコレクションへのフィールドの追加を</a>参照してください。</p></li>
+<li><p><strong>コレクション作成後に追加されるフィールド</strong>コレクション作成後に新しいフィールドをコレクションに追加し、挿入時に値を指定しない場合、Milvusは自動的に定義されたデフォルト値またはデフォルトが設定されていない場合はNULLを入力します。詳細については、<a href="/docs/ja/add-fields-to-an-existing-collection.md">既存のコレクションへのフィールドの追加を</a>参照してください。</p></li>
 <li><p><strong>重複処理</strong>：標準の<code translate="no">insert</code> 操作では、主キーの重複をチェックしません。既存の主キーを持つデータを挿入すると、同じキーを持つ新しいエンティティが作成されるため、データが重複し、アプリケーションで問題が発生する可能性があります。既存のエンティティを更新したり、重複を回避するには、代わりに <strong><code translate="no">upsert</code></strong>操作を使用してください。詳細は、『<a href="/docs/ja/upsert-entities.md">Upsert Entities</a>』を参照してください。</p></li>
 </ul>
 </div>
@@ -221,6 +219,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},
@@ -395,6 +394,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 10, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},

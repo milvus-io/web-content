@@ -42,8 +42,8 @@ summary: >-
    </span> <span class="img-wrapper"> <span>稀疏向量表示法</span> </span></p>
 <p>通过标记化和评分，文档可以表示为词袋向量，其中每个维度对应词汇表中的一个特定单词。只有文档中出现的单词才有非零值，从而形成稀疏向量表示法。稀疏向量可通过两种方法生成：</p>
 <ul>
-<li><p><strong>传统的统计技术</strong>，如<a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a>（词频-反向文档频率）和<a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a>（最佳匹配 25），根据词在语料库中的频率和重要性为词分配权重。这些方法将简单的统计数据计算为每个维度的分数，而每个维度代表一个标记。  Milvus 利用 BM25 方法提供内置的<strong>全文搜索</strong>功能，可自动将文本转换为稀疏向量，无需人工预处理。这种方法非常适合基于关键字的搜索，在这种搜索中，精确度和精确匹配非常重要。更多信息，请参阅<a href="/docs/zh/full-text-search.md">全文搜索</a>。</p></li>
-<li><p><strong>神经稀疏嵌入模型</strong>是通过在大型数据集上训练生成稀疏表示的学习方法。它们通常是具有 Transformer 架构的深度学习模型，能够根据语义上下文对术语进行扩展和权衡。Milvus 还支持由<a href="https://arxiv.org/abs/2109.10086">SPLADE</a> 等模型外部生成的稀疏嵌入。详情请参阅<a href="/docs/zh/embeddings.md#Embedding-Overview">Embeddings</a>。</include></p></li>
+<li><p><strong>传统的统计技术</strong>，如<a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a>（词频-反向文档频率）和<a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a>（最佳匹配 25），根据词在语料库中的频率和重要性为词分配权重。这些方法将简单的统计数据计算为每个维度的分数，而每个维度代表一个标记。  Milvus 利用 BM25 方法提供内置的<strong>全文搜索</strong>功能，可自动将文本转换为稀疏向量，无需人工预处理。这种方法非常适合基于关键字的搜索，在这种搜索中，精确度和精确匹配非常重要。更多信息，请参阅<a href="/docs/zh/v2.6.x/full-text-search.md">全文搜索</a>。</p></li>
+<li><p><strong>神经稀疏嵌入模型</strong>是通过在大型数据集上训练生成稀疏表示的学习方法。它们通常是具有 Transformer 架构的深度学习模型，能够根据语义上下文对术语进行扩展和权衡。Milvus 还支持由<a href="https://arxiv.org/abs/2109.10086">SPLADE</a> 等模型外部生成的稀疏嵌入。详情请参阅<a href="/docs/zh/v2.6.x/embeddings.md#Embedding-Overview">Embeddings</a>。</include></p></li>
 </ul>
 <p>稀疏向量和原文可以存储在 Milvus 中，以便高效检索。下图概述了整个流程。</p>
 <p>
@@ -51,7 +51,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
    </span> <span class="img-wrapper"> <span>稀疏向量工作流程</span> </span></p>
 <div class="alert note">
-<p>除了稀疏向量，Milvus 还支持密集向量和二进制向量。密集向量是捕捉深层语义关系的理想选择，而二进制向量则在快速相似性比较和重复内容删除等场景中表现出色。更多信息，请参阅<a href="/docs/zh/dense-vector.md">密集向量</a>和<a href="/docs/zh/binary-vector.md">二进制向量</a>。</p>
+<p>除了稀疏向量，Milvus 还支持密集向量和二进制向量。密集向量是捕捉深层语义关系的理想选择，而二进制向量则在快速相似性比较和重复内容删除等场景中表现出色。更多信息，请参阅<a href="/docs/zh/v2.6.x/dense-vector.md">密集向量</a>和<a href="/docs/zh/v2.6.x/binary-vector.md">二进制向量</a>。</p>
 </div>
 <h2 id="Data-Formats" class="common-anchor-header">数据格式<button data-href="#Data-Formats" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,7 +68,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在下面的章节中，我们将演示如何从 SPLADE 等学习到的稀疏嵌入模型中存储向量。如果您正在寻找对基于密集向量的语义搜索进行补充的东西，我们推荐使用 BM25 进行<a href="/docs/zh/full-text-search.md">全文搜索</a>，而不是 SPLADE，因为这样做比较简单。如果你已经进行了质量评估，并决定使用 SPLADE，那么你可以参考<a href="/docs/zh/embeddings.md#Embedding-Overview">Embeddings</a>，了解如何使用 SPLADE 生成稀疏向量。</p>
+    </button></h2><p>在下面的章节中，我们将演示如何从 SPLADE 等学习到的稀疏嵌入模型中存储向量。如果您正在寻找对基于密集向量的语义搜索进行补充的东西，我们推荐使用 BM25 进行<a href="/docs/zh/v2.6.x/full-text-search.md">全文搜索</a>，而不是 SPLADE，因为这样做比较简单。如果你已经进行了质量评估，并决定使用 SPLADE，那么你可以参考<a href="/docs/zh/v2.6.x/embeddings.md#Embedding-Overview">Embeddings</a>，了解如何使用 SPLADE 生成稀疏向量。</p>
 <p>Milvus 支持以下格式的稀疏向量输入：</p>
 <ul>
 <li><p><strong>字典列表（格式为<code translate="no">{dimension_index: value, ...}</code>)</strong></p>
@@ -279,7 +279,7 @@ schema.WithField(entity.NewField().
 <li><p><code translate="no">text</code>:该字段使用<code translate="no">VARCHAR</code> 数据类型存储文本字符串，最大长度为 65535 字节。</p></li>
 </ul>
 <div class="alert note">
-<p>要启用 Milvus 或在数据插入过程中从指定文本字段生成稀疏向量 Embeddings，必须采取涉及函数的额外步骤。有关详细信息，请参阅<a href="/docs/zh/full-text-search.md">全文搜索</a>。</p>
+<p>要启用 Milvus 或在数据插入过程中从指定文本字段生成稀疏向量 Embeddings，必须采取涉及函数的额外步骤。有关详细信息，请参阅<a href="/docs/zh/v2.6.x/full-text-search.md">全文搜索</a>。</p>
 </div>
 <h2 id="Set-Index-Parameters" class="common-anchor-header">设置索引参数<button data-href="#Set-Index-Parameters" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -296,7 +296,7 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>为稀疏向量创建索引的过程与为<a href="/docs/zh/dense-vector.md">稠密向量</a>创建索引的过程类似，但在指定的索引类型 (<code translate="no">index_type</code>)、距离度量 (<code translate="no">metric_type</code>) 和索引参数 (<code translate="no">params</code>) 上有所不同。</p>
+    </button></h2><p>为稀疏向量创建索引的过程与为<a href="/docs/zh/v2.6.x/dense-vector.md">稠密向量</a>创建索引的过程类似，但在指定的索引类型 (<code translate="no">index_type</code>)、距离度量 (<code translate="no">metric_type</code>) 和索引参数 (<code translate="no">params</code>) 上有所不同。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -356,9 +356,9 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <button class="copy-code-btn"></button></code></pre>
 <p>本示例使用<code translate="no">SPARSE_INVERTED_INDEX</code> 索引类型和<code translate="no">IP</code> 作为度量。有关详细信息，请参阅以下资源：</p>
 <ul>
-<li><p><a href="/docs/zh/sparse-inverted-index.md">SPARSE_INVERTED_INDEX</a>: 已解释的索引及其参数</p></li>
-<li><p><a href="/docs/zh/metric.md">度量类型</a>：不同字段类型支持的度量类型</p></li>
-<li><p><a href="/docs/zh/full-text-search.md">全文搜索</a>：全文搜索的详细教程</p></li>
+<li><p><a href="/docs/zh/v2.6.x/sparse-inverted-index.md">SPARSE_INVERTED_INDEX</a>: 已解释的索引及其参数</p></li>
+<li><p><a href="/docs/zh/v2.6.x/metric.md">度量类型</a>：不同字段类型支持的度量类型</p></li>
+<li><p><a href="/docs/zh/v2.6.x/full-text-search.md">全文搜索</a>：全文搜索的详细教程</p></li>
 </ul>
 <h2 id="Create-Collection" class="common-anchor-header">创建 Collections<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -375,7 +375,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>完成稀疏向量和索引设置后，就可以创建包含稀疏向量的 Collections。下面的示例使用 <a href="/docs/zh/create-collection.md"><code translate="no">create_collection</code></a>方法创建一个名为<code translate="no">my_collection</code> 的 Collection。</p>
+    </button></h2><p>完成稀疏向量和索引设置后，就可以创建包含稀疏向量的 Collections。下面的示例使用 <a href="/docs/zh/v2.6.x/create-collection.md"><code translate="no">create_collection</code></a>方法创建一个名为<code translate="no">my_collection</code> 的 Collection。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -415,6 +415,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -540,6 +541,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {
@@ -692,6 +694,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: $queryData,
@@ -704,4 +707,4 @@ curl --request POST \
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.63,&quot;id&quot;:&quot;453577185629572535&quot;,&quot;pk&quot;:&quot;453577185629572535&quot;},{&quot;distance&quot;:0.1,&quot;id&quot;:&quot;453577185629572534&quot;,&quot;pk&quot;:&quot;453577185629572534&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有关相似性搜索参数的更多信息，请参阅<a href="/docs/zh/single-vector-search.md">基本向量搜索</a>。</p>
+<p>有关相似性搜索参数的更多信息，请参阅<a href="/docs/zh/v2.6.x/single-vector-search.md">基本向量搜索</a>。</p>

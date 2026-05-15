@@ -30,7 +30,7 @@ summary: >-
     </button></h1><p>La búsqueda de texto completo es una función que recupera documentos que contienen términos o frases específicos en conjuntos de datos de texto y, a continuación, clasifica los resultados en función de su relevancia. Esta función supera las limitaciones de la búsqueda semántica, que puede pasar por alto términos precisos, garantizando que usted reciba los resultados más exactos y contextualmente relevantes. Además, simplifica las búsquedas vectoriales al aceptar la entrada de texto sin formato, convirtiendo automáticamente los datos de texto en incrustaciones dispersas sin necesidad de generar manualmente incrustaciones vectoriales.</p>
 <p>Esta función, que utiliza el algoritmo BM25 para la puntuación de la relevancia, es especialmente valiosa en escenarios de generación de recuperación aumentada (RAG), donde da prioridad a los documentos que coinciden estrechamente con términos de búsqueda específicos.</p>
 <div class="alert note">
-<p>Al integrar la búsqueda de texto completo con la búsqueda de vectores densos basada en la semántica, puede mejorar la precisión y la relevancia de los resultados de búsqueda. Para más información, consulte <a href="/docs/es/multi-vector-search.md">Búsqueda híbrida</a>.</p>
+<p>Al integrar la búsqueda de texto completo con la búsqueda de vectores densos basada en la semántica, puede mejorar la precisión y la relevancia de los resultados de búsqueda. Para más información, consulte <a href="/docs/es/v2.6.x/multi-vector-search.md">Búsqueda híbrida</a>.</p>
 </div>
 <h2 id="BM25-implementation" class="common-anchor-header">Implementación de BM25<button data-href="#BM25-implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -51,7 +51,7 @@ summary: >-
 <p>La búsqueda de texto completo en Milvus sigue el siguiente flujo de trabajo:</p>
 <ol>
 <li><p><strong>Entrada de texto sin procesar</strong>: Usted inserta documentos de texto o proporciona una consulta utilizando texto sin formato, sin necesidad de modelos de incrustación.</p></li>
-<li><p><strong>Análisis del texto</strong>: Milvus utiliza un <a href="/docs/es/analyzer-overview.md">analizador</a> para procesar su texto en términos significativos que puedan ser indexados y buscados.</p></li>
+<li><p><strong>Análisis del texto</strong>: Milvus utiliza un <a href="/docs/es/v2.6.x/analyzer-overview.md">analizador</a> para procesar su texto en términos significativos que puedan ser indexados y buscados.</p></li>
 <li><p><strong>Procesamiento de funciones BM25</strong>: Una función integrada transforma estos términos en representaciones vectoriales dispersas optimizadas para la puntuación BM25.</p></li>
 <li><p><strong>Almacenamiento de colecciones</strong>: Milvus almacena las incrustaciones dispersas resultantes en una colección para una recuperación y clasificación rápidas.</p></li>
 <li><p><strong>Puntuación de relevancia BM25</strong>: En el momento de la búsqueda, Milvus aplica la función de puntuación BM25 para calcular la pertinencia de los documentos y devolver los resultados clasificados que mejor se ajusten a los términos de la consulta.</p></li>
@@ -62,9 +62,9 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Búsqueda de texto completo</span> </span></p>
 <p>Para utilizar la búsqueda de texto completo, siga estos pasos principales:</p>
 <ol>
-<li><p><a href="/docs/es/full-text-search.md#Create-a-collection-for-BM25-full-text-search">Cree una colección</a>: Configure los campos necesarios y defina una función BM25 que convierta el texto en bruto en incrustaciones dispersas.</p></li>
-<li><p><a href="/docs/es/full-text-search.md#Insert-text-data">Introduzca los datos</a>: Introduzca los documentos de texto en la colección.</p></li>
-<li><p><a href="/docs/es/full-text-search.md#Perform-full-text-search">Realizar búsquedas</a>: Utilice un texto de consulta en lenguaje natural para obtener resultados clasificados en función de la pertinencia de BM25.</p></li>
+<li><p><a href="/docs/es/v2.6.x/full-text-search.md#Create-a-collection-for-BM25-full-text-search">Cree una colección</a>: Configure los campos necesarios y defina una función BM25 que convierta el texto en bruto en incrustaciones dispersas.</p></li>
+<li><p><a href="/docs/es/v2.6.x/full-text-search.md#Insert-text-data">Introduzca los datos</a>: Introduzca los documentos de texto en la colección.</p></li>
+<li><p><a href="/docs/es/v2.6.x/full-text-search.md#Perform-full-text-search">Realizar búsquedas</a>: Utilice un texto de consulta en lenguaje natural para obtener resultados clasificados en función de la pertinencia de BM25.</p></li>
 </ol>
 <h2 id="Create-a-collection-for-BM25-full-text-search" class="common-anchor-header">Crear una colección para la búsqueda de texto completo BM25<button data-href="#Create-a-collection-for-BM25-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -100,7 +100,7 @@ summary: >-
     </button></h3><p>El esquema de su colección debe incluir al menos tres campos obligatorios:</p>
 <ul>
 <li><p><strong>Campo primario</strong>: Identifica de forma única cada entidad de la colección.</p></li>
-<li><p><strong>Campo de texto</strong> (<code translate="no">VARCHAR</code>): Almacena documentos de texto sin procesar. Debe configurar <code translate="no">enable_analyzer=True</code> para que Milvus pueda procesar el texto para la clasificación de relevancia BM25. Por defecto, Milvus utiliza el <a href="/docs/es/standard-analyzer.md"><code translate="no">standard</code></a> para el <a href="/docs/es/standard-analyzer.md"> análisis</a> de texto. Para configurar un analizador diferente, consulte <a href="/docs/es/analyzer-overview.md">Visión general del analizador</a>.</p></li>
+<li><p><strong>Campo de texto</strong> (<code translate="no">VARCHAR</code>): Almacena documentos de texto sin procesar. Debe configurar <code translate="no">enable_analyzer=True</code> para que Milvus pueda procesar el texto para la clasificación de relevancia BM25. Por defecto, Milvus utiliza el <a href="/docs/es/v2.6.x/standard-analyzer.md"><code translate="no">standard</code></a> para el <a href="/docs/es/v2.6.x/standard-analyzer.md"> análisis</a> de texto. Para configurar un analizador diferente, consulte <a href="/docs/es/v2.6.x/analyzer-overview.md">Visión general del analizador</a>.</p></li>
 <li><p><strong>Campo vectorial disperso</strong> (<code translate="no">SPARSE_FLOAT_VECTOR</code>): Almacena las incrustaciones dispersas generadas automáticamente por la función BM25.</p></li>
 </ul>
 <div class="multipleCode">
@@ -350,7 +350,7 @@ schema.WithFunction(function)
    </tr>
 </table>
 <div class="alert note">
-<p>Si varios campos <code translate="no">VARCHAR</code> requieren un tratamiento BM25, defina <strong>una función BM25 por campo</strong>, cada una con un nombre y un campo de salida únicos.</p>
+<p>Si varios campos <code translate="no">VARCHAR</code> requieren un tratamiento BM25, defina <strong>una función BM25 por campo</strong>, cada uno con un nombre y un campo de salida únicos.</p>
 </div>
 <h3 id="Configure-the-index" class="common-anchor-header">Configurar el índice<button data-href="#Configure-the-index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -443,7 +443,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">index_type</code></p></td>
-     <td><p>El tipo de índice a crear. <code translate="no">AUTOINDEX</code> permite a Milvus optimizar automáticamente la configuración del índice. Si necesita más control sobre la configuración del índice, puede elegir entre varios tipos de índice disponibles para vectores dispersos en Milvus. Para más información, consulte <a href="/docs/es/index.md#Indexes-supported-in-Milvus">Índices soportados en Milvus</a>.</p></td>
+     <td><p>El tipo de índice a crear. <code translate="no">AUTOINDEX</code> permite a Milvus optimizar automáticamente la configuración del índice. Si necesita más control sobre la configuración del índice, puede elegir entre varios tipos de índice disponibles para vectores dispersos en Milvus. Para más información, consulte <a href="/docs/es/v2.6.x/index.md#Indexes-supported-in-Milvus">Índices soportados en Milvus</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">metric_type</code></p></td>
@@ -455,7 +455,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>El algoritmo utilizado para construir y consultar el índice. Valores válidos:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (por defecto): Procesamiento optimizado de consultas Documento a la vez (DAAT) mediante el algoritmo MaxScore. MaxScore proporciona un mejor rendimiento para valores altos de <em>k</em> o consultas con muchos términos al omitir términos y documentos que probablemente tengan un impacto mínimo. Para ello, divide los términos en grupos esenciales y no esenciales en función de sus puntuaciones máximas de impacto, centrándose en los términos que pueden contribuir a los resultados k más importantes.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Procesamiento optimizado de consultas DAAT mediante el algoritmo WAND. WAND evalúa un menor número de documentos coincidentes aprovechando las puntuaciones de impacto máximo para omitir los documentos no competitivos, pero tiene una mayor sobrecarga por coincidencia. Esto hace que WAND sea más eficiente para consultas con valores de <em>k</em> pequeños o consultas cortas, en las que saltar es más factible.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Procesamiento de consultas básicas término a término (TAAT). Aunque es más lento que <code translate="no">DAAT_MAXSCORE</code> y <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> ofrece una ventaja única. A diferencia de los algoritmos DAAT, que utilizan puntuaciones de impacto máximo almacenadas en caché que permanecen estáticas independientemente de los cambios en el parámetro de recopilación global (avgdl), <code translate="no">TAAT_NAIVE</code> se adapta dinámicamente a dichos cambios.</p></li></ul></td>
+     <td><p>El algoritmo utilizado para construir y consultar el índice. Valores válidos:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (por defecto): Procesamiento optimizado de consultas Documento a la vez (DAAT) mediante el algoritmo MaxScore. MaxScore proporciona un mejor rendimiento para valores de <em>k</em> altos o consultas con muchos términos al omitir términos y documentos que probablemente tengan un impacto mínimo. Para ello, divide los términos en grupos esenciales y no esenciales en función de sus puntuaciones máximas de impacto, centrándose en los términos que pueden contribuir a los resultados k más importantes.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Procesamiento optimizado de consultas DAAT mediante el algoritmo WAND. WAND evalúa un menor número de documentos coincidentes aprovechando las puntuaciones de impacto máximo para omitir los documentos no competitivos, pero tiene una mayor sobrecarga por coincidencia. Esto hace que WAND sea más eficiente para consultas con valores de <em>k</em> pequeños o consultas cortas, en las que saltar es más factible.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Procesamiento de consultas básicas término a término (TAAT). Aunque es más lento que <code translate="no">DAAT_MAXSCORE</code> y <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> ofrece una ventaja única. A diferencia de los algoritmos DAAT, que utilizan puntuaciones de impacto máximo almacenadas en caché que permanecen estáticas independientemente de los cambios en el parámetro de recopilación global (avgdl), <code translate="no">TAAT_NAIVE</code> se adapta dinámicamente a dichos cambios.</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
@@ -521,6 +521,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -582,6 +583,7 @@ client.insert(InsertReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;text&quot;: &quot;information retrieval is a field of study.&quot;},
@@ -609,7 +611,7 @@ client.insert(InsertReq.builder()
       </svg>
     </button></h2><p>Una vez que haya insertado datos en su colección, puede realizar búsquedas de texto completo utilizando consultas de texto sin procesar. Milvus convierte automáticamente su consulta en un vector disperso y clasifica los resultados de búsqueda coincidentes utilizando el algoritmo BM25, y luego devuelve los resultados topK (<code translate="no">limit</code>).</p>
 <div class="alert note">
-<p>Puede resaltar los términos coincidentes en los resultados de la búsqueda configurando un resaltador de texto. Consulte <a href="/docs/es/text-highlighter.md">Resaltador de texto</a> para obtener más información.</p>
+<p>Puede resaltar los términos coincidentes en los resultados de búsqueda configurando un resaltador de texto. Consulte <a href="/docs/es/v2.6.x/text-highlighter.md">Resaltador de texto</a> para obtener más información.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -670,6 +672,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data-raw <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -696,7 +699,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">params.drop_ratio_search</code></p></td>
-     <td><p>Proporción de términos de baja importancia que se ignoran durante la búsqueda. Para más detalles, consulte <a href="/docs/es/sparse_vector.md">Vector disperso</a>.</p></td>
+     <td><p>Proporción de términos de baja importancia que se ignoran durante la búsqueda. Para más detalles, consulte <a href="/docs/es/v2.6.x/sparse_vector.md">Vector disperso</a>.</p></td>
    </tr>
    <tr>
      <td></td>
@@ -712,7 +715,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">output_fields</code></p></td>
-     <td><p>Lista de nombres de campos que se mostrarán en los resultados de la búsqueda. Admite todos los campos <strong>excepto el campo de vectores</strong> dispersos que contiene las incrustaciones generadas por BM25. Los campos de salida habituales son el campo de clave principal (por ejemplo, <code translate="no">id</code>) y el campo de texto original (por ejemplo, <code translate="no">text</code>). Para más información, consulte <a href="/docs/es/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">FAQ</a>.</p></td>
+     <td><p>Lista de nombres de campos que se mostrarán en los resultados de la búsqueda. Admite todos los campos <strong>excepto el campo de vectores</strong> dispersos que contiene las incrustaciones generadas por BM25. Los campos de salida habituales son el campo de clave principal (por ejemplo, <code translate="no">id</code>) y el campo de texto original (por ejemplo, <code translate="no">text</code>). Para más información, consulte <a href="/docs/es/v2.6.x/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">FAQ</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">limit</code></p></td>
@@ -803,4 +806,4 @@ client.search(
 <li><p>Utilice operaciones manuales de vectores dispersos en lugar de búsquedas de texto completo.</p></li>
 <li><p>Cree colecciones separadas para flujos de trabajo personalizados de vectores dispersos</p></li>
 </ul>
-<p>Para obtener más información, consulte <a href="/docs/es/sparse_vector.md">Vector disperso</a>.</p>
+<p>Para obtener más información, consulte <a href="/docs/es/v2.6.x/sparse_vector.md">Vector disperso</a>.</p>

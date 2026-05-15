@@ -23,7 +23,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus vous permet d'insérer des entités avec des structures flexibles et évolutives grâce à une fonctionnalité spéciale appelée <strong>champ dynamique</strong>. Ce champ est mis en œuvre sous la forme d'un champ JSON caché appelé <code translate="no">$meta</code>, qui stocke automatiquement tous les champs de vos données qui <strong>ne</strong> sont <strong>pas explicitement définis</strong> dans le schéma de la collection.</p>
+    </button></h1><p>Milvus vous permet d'insérer des entités avec des structures flexibles et évolutives grâce à une fonctionnalité spéciale appelée <strong>champ dynamique</strong>. Ce champ est mis en œuvre sous la forme d'un champ JSON caché nommé <code translate="no">$meta</code>, qui stocke automatiquement tous les champs de vos données qui <strong>ne</strong> sont <strong>pas explicitement définis</strong> dans le schéma de la collection.</p>
 <h2 id="How-it-works" class="common-anchor-header">Fonctionnement<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -87,7 +87,7 @@ summary: >-
 <ul>
 <li><p>Chaîne (<code translate="no">VARCHAR</code>)</p></li>
 <li><p>Entier (<code translate="no">INT8</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>)</p></li>
-<li><p>virgule flottante (<code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>)</p></li>
+<li><p>Virgule flottante (<code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>)</p></li>
 <li><p>Booléen (<code translate="no">BOOL</code>)</p></li>
 <li><p>Tableau de valeurs scalaires (<code translate="no">ARRAY</code>)</p></li>
 <li><p>Objets JSON (<code translate="no">JSON</code>)</p></li>
@@ -264,6 +264,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -380,6 +381,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;data&quot;: [
     {
@@ -809,6 +811,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
@@ -832,7 +835,7 @@ curl --request POST \
       </svg>
     </button></h2><p>Après avoir inséré des entités avec des clés de champ dynamiques, vous pouvez les filtrer à l'aide d'expressions de filtrage standard.</p>
 <ul>
-<li><p>Pour les clés non JSON (par exemple les chaînes, les nombres, les booléens), vous pouvez les référencer directement par le nom de la clé.</p></li>
+<li><p>Pour les clés non JSON (par exemple, les chaînes, les nombres, les booléens), vous pouvez les référencer directement par le nom de la clé.</p></li>
 <li><p>Pour les clés stockant des objets JSON, utilisez la syntaxe de chemin JSON pour accéder aux valeurs imbriquées.</p></li>
 </ul>
 <p>En se basant sur <a href="/docs/fr/enable-dynamic-field.md#Insert-entities-to-the-collection">l </a>'<a href="/docs/fr/enable-dynamic-field.md#Insert-entities-to-the-collection">exemple d'entité de</a> la section précédente, les expressions de filtrage valides sont les suivantes :</p>
@@ -959,6 +962,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;data\&quot;: [

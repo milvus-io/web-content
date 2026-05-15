@@ -109,7 +109,7 @@ summary: >-
    </tr>
 </table>
 <ul>
-<li><p><strong>Привилегия</strong>: Конкретная привилегия или <a href="/docs/ru/privilege_group.md">группа привилегий</a>, которые необходимо предоставить роли. В настоящее время Milvus предоставляет 56 типов привилегий, которые вы можете назначить. В таблице ниже перечислены привилегии в Milvus.</p>
+<li><p><strong>Привилегия</strong>: Конкретная привилегия или <a href="/docs/ru/v2.6.x/privilege_group.md">группа привилегий</a>, которые необходимо предоставить роли. В настоящее время Milvus предоставляет 56 типов привилегий, которые вы можете назначить. В таблице ниже перечислены привилегии в Milvus.</p>
 <p><div class="alert note"></p>
 <p>Колонка типа в таблице ниже является пользовательской для облегчения быстрого поиска привилегий и используется только в целях классификации. При назначении привилегий вам не нужно разбираться в типах. Вам просто нужно ввести соответствующие привилегии.</p>
 <p></div></p>
@@ -124,27 +124,27 @@ summary: >-
 <td rowspan="5"><p>Привилегии базы данных</p></td>
 <td><p>ListDatabases</p></td>
 <td><p>Просмотр всех баз данных в текущем экземпляре</p></td>
-<td><p><a href="/docs/ru/manage_databases.md">ListDatabases</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/manage_databases.md">ListDatabases</a></p></td>
 </tr>
 <tr>
 <td><p>DescribeDatabase</p></td>
 <td><p>Просмотр сведений о базе данных</p></td>
-<td><p><a href="/docs/ru/manage_databases.md">DescribeDatabase</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/manage_databases.md">DescribeDatabase</a></p></td>
 </tr>
 <tr>
 <td><p>CreateDatabase</p></td>
 <td><p>Создание базы данных</p></td>
-<td><p><a href="/docs/ru/manage_databases.md">CreateDatabase</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/manage_databases.md">CreateDatabase</a></p></td>
 </tr>
 <tr>
 <td><p>DropDatabase</p></td>
 <td><p>Сбросить базу данных</p></td>
-<td><p><a href="/docs/ru/manage_databases.md">DropDatabase</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/manage_databases.md">DropDatabase</a></p></td>
 </tr>
 <tr>
 <td><p>AlterDatabase</p></td>
 <td><p>Изменение свойств базы данных</p></td>
-<td><p><a href="/docs/ru/manage_databases.md">AlterDatabase</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/manage_databases.md">AlterDatabase</a></p></td>
 </tr>
 <tr>
 <td rowspan="18"><p>Привилегии коллекции</p></td>
@@ -165,7 +165,7 @@ summary: >-
 <tr>
 <td><p>ShowCollections</p></td>
 <td><p>Просмотр всех коллекций с привилегиями коллекционирования</p></td>
-<td><p><a href="/docs/ru/view-collections.md">ShowCollections</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/view-collections.md">ShowCollections</a></p></td>
 </tr>
 <tr>
 <td><p>ListAliases</p></td>
@@ -190,12 +190,12 @@ summary: >-
 <tr>
 <td><p>CreateCollection</p></td>
 <td><p>Создать коллекцию</p></td>
-<td><p><a href="/docs/ru/create-collection.md">CreateCollection</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/create-collection.md">CreateCollection</a></p></td>
 </tr>
 <tr>
 <td><p>DropCollection</p></td>
 <td><p>Сбросить коллекцию</p></td>
-<td><p><a href="/docs/ru/drop-collection.md">DropCollection</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/drop-collection.md">DropCollection</a></p></td>
 </tr>
 <tr>
 <td><p>Загрузить</p></td>
@@ -205,7 +205,7 @@ summary: >-
 <tr>
 <td><p>Освободить</p></td>
 <td><p>Освободить коллекцию</p></td>
-<td><p><a href="/docs/ru/load-and-release.md">ReleaseCollection</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/load-and-release.md">ReleaseCollection</a></p></td>
 </tr>
 <tr>
 <td><p>Промыть</p></td>
@@ -220,17 +220,17 @@ summary: >-
 <tr>
 <td><p>RenameCollection</p></td>
 <td><p>Переименование коллекции</p></td>
-<td><p><a href="/docs/ru/modify-collection.md">RenameCollection</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/modify-collection.md">RenameCollection</a></p></td>
 </tr>
 <tr>
 <td><p>CreateAlias</p></td>
 <td><p>Создание псевдонима для коллекции</p></td>
-<td><p><a href="/docs/ru/manage-aliases.md">CreateAlias</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/manage-aliases.md">CreateAlias</a></p></td>
 </tr>
 <tr>
 <td><p>DropAlias</p></td>
 <td><p>Удалить псевдоним коллекции</p></td>
-<td><p><a href="/docs/ru/manage-aliases.md">DropAlias</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/manage-aliases.md">DropAlias</a></p></td>
 </tr>
 <tr>
 <td><p>FlushAll</p></td>
@@ -241,44 +241,44 @@ summary: >-
 <td rowspan="4"><p>Привилегии разделов</p></td>
 <td><p>HasPartition</p></td>
 <td><p>Проверяет, существует ли раздел</p></td>
-<td><p><a href="/docs/ru/manage-partitions.md">HasPartition</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/manage-partitions.md">HasPartition</a></p></td>
 </tr>
 <tr>
 <td><p>ShowPartitions</p></td>
 <td><p>Просмотр всех разделов в коллекции</p></td>
-<td><p><a href="/docs/ru/manage-partitions.md">ShowPartitions</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/manage-partitions.md">ShowPartitions</a></p></td>
 </tr>
 <tr>
 <td><p>CreatePartition</p></td>
 <td><p>Создать раздел</p></td>
-<td><p><a href="/docs/ru/manage-partitions.md">CreatePartition</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/manage-partitions.md">CreatePartition</a></p></td>
 </tr>
 <tr>
 <td><p>DropPartition</p></td>
 <td><p>Сбросить раздел</p></td>
-<td><p><a href="/docs/ru/manage-partitions.md">DropPartition</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/manage-partitions.md">DropPartition</a></p></td>
 </tr>
 <tr>
 <td rowspan="3"><p>Привилегии индекса</p></td>
 <td><p>IndexDetail</p></td>
 <td><p>Просмотр подробной информации об индексе</p></td>
-<td><p><a href="/docs/ru/index-vector-fields.md">DescribeIndex/GetIndexState/GetIndexBuildProgress</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/index-vector-fields.md">DescribeIndex/GetIndexState/GetIndexBuildProgress</a></p></td>
 </tr>
 <tr>
 <td><p>CreateIndex</p></td>
 <td><p>Создать индекс</p></td>
-<td><p><a href="/docs/ru/index-vector-fields.md">CreateIndex</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/index-vector-fields.md">CreateIndex</a></p></td>
 </tr>
 <tr>
 <td><p>DropIndex</p></td>
 <td><p>Сбросить индекс</p></td>
-<td><p><a href="/docs/ru/index-vector-fields.md">DropIndex</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/index-vector-fields.md">DropIndex</a></p></td>
 </tr>
 <tr>
 <td rowspan="10"><p>Привилегии управления ресурсами</p></td>
 <td><p>LoadBalance</p></td>
 <td><p>Достижение баланса нагрузки</p></td>
-<td><p><a href="/docs/ru/resource_group.md">LoadBalance</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/resource_group.md">LoadBalance</a></p></td>
 </tr>
 <tr>
 <td><p>CreateResourceGroup</p></td>
@@ -288,32 +288,32 @@ summary: >-
 <tr>
 <td><p>DropResourceGroup</p></td>
 <td><p>Сбросить группу ресурсов</p></td>
-<td><p><a href="/docs/ru/resource_group.md">DropResourceGroup</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/resource_group.md">DropResourceGroup</a></p></td>
 </tr>
 <tr>
 <td><p>UpdateResourceGroups</p></td>
 <td><p>Обновление группы ресурсов</p></td>
-<td><p><a href="/docs/ru/resource_group.md">UpdateResourceGroups</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/resource_group.md">UpdateResourceGroups</a></p></td>
 </tr>
 <tr>
 <td><p>DescribeResourceGroup</p></td>
 <td><p>Просмотр подробной информации о группе ресурсов</p></td>
-<td><p><a href="/docs/ru/resource_group.md">DescribeResourceGroup</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/resource_group.md">DescribeResourceGroup</a></p></td>
 </tr>
 <tr>
 <td><p>ListResourceGroups</p></td>
 <td><p>Просмотр всех групп ресурсов текущего экземпляра</p></td>
-<td><p><a href="/docs/ru/resource_group.md">ListResourceGroups</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/resource_group.md">ListResourceGroups</a></p></td>
 </tr>
 <tr>
 <td><p>TransferNode</p></td>
 <td><p>Передача узлов между группами ресурсов</p></td>
-<td><p><a href="/docs/ru/resource_group.md">TransferNode</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/resource_group.md">TransferNode</a></p></td>
 </tr>
 <tr>
 <td><p>TransferReplica</p></td>
 <td><p>Передача реплик между группами ресурсов</p></td>
-<td><p><a href="/docs/ru/resource_group.md">TransferReplica</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/resource_group.md">TransferReplica</a></p></td>
 </tr>
 <tr>
 <td><p>BackupRBAC</p></td>
@@ -329,83 +329,83 @@ summary: >-
 <td rowspan="6"><p>Привилегии сущности</p></td>
 <td><p>Запрос</p></td>
 <td><p>Выполнить запрос</p></td>
-<td><p><a href="/docs/ru/get-and-scalar-query.md">Запрос</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/get-and-scalar-query.md">Запрос</a></p></td>
 </tr>
 <tr>
 <td><p>Поиск</p></td>
 <td><p>Провести поиск</p></td>
-<td><p><a href="/docs/ru/single-vector-search.md">Поиск</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/single-vector-search.md">Поиск</a></p></td>
 </tr>
 <tr>
 <td><p>Вставка</p></td>
 <td><p>Вставка сущностей</p></td>
-<td><p><a href="/docs/ru/insert-update-delete.md">Вставить</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/insert-update-delete.md">Вставить</a></p></td>
 </tr>
 <tr>
 <td><p>Удалить</p></td>
 <td><p>Удалить сущности</p></td>
-<td><p><a href="/docs/ru/delete-entities.md">Удалить</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/delete-entities.md">Удалить</a></p></td>
 </tr>
 <tr>
 <td><p>Upsert</p></td>
 <td><p>Upsert сущности</p></td>
-<td><p><a href="/docs/ru/upsert-entities.md">Upsert</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/upsert-entities.md">Upsert</a></p></td>
 </tr>
 <tr>
 <td><p>Импорт</p></td>
 <td><p>Массовая вставка или импорт сущностей</p></td>
-<td><p><a href="/docs/ru/import-data.md">BulkInsert/Import</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/import-data.md">BulkInsert/Import</a></p></td>
 </tr>
 <tr>
 <td rowspan="10"><p>Привилегии RBAC</p></td>
 <td><p>CreateOwnership</p></td>
 <td><p>Создание пользователя или роли</p></td>
-<td><p><a href="/docs/ru/users_and_roles.md">CreateUser/CreateRole</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/users_and_roles.md">CreateUser/CreateRole</a></p></td>
 </tr>
 <tr>
 <td><p>UpdateUser</p></td>
 <td><p>Обновление пароля пользователя</p></td>
-<td><p><a href="/docs/ru/users_and_roles.md">UpdateCredential</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/users_and_roles.md">UpdateCredential</a></p></td>
 </tr>
 <tr>
 <td><p>DropOwnership</p></td>
 <td><p>Сбросить пароль пользователя или роль</p></td>
-<td><p><a href="/docs/ru/drop_users_roles.md">DeleteCredential/DropRole</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/drop_users_roles.md">DeleteCredential/DropRole</a></p></td>
 </tr>
 <tr>
 <td><p>SelectOwnership</p></td>
 <td><p>Просмотр всех пользователей, которым предоставлена определенная роль</p></td>
-<td><p><a href="/docs/ru/grant_roles.md">SelectRole/SelectGrant</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/grant_roles.md">SelectRole/SelectGrant</a></p></td>
 </tr>
 <tr>
 <td><p>ManageOwnership</p></td>
 <td><p>Управление пользователем или ролью или предоставление роли пользователю</p></td>
-<td><p><a href="/docs/ru/privilege_group.md">OperateUserRole/OperatePrivilege/OperatePrivilegeV2</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/privilege_group.md">OperateUserRole/OperatePrivilege/OperatePrivilegeV2</a></p></td>
 </tr>
 <tr>
 <td><p>SelectUser</p></td>
 <td><p>Просмотр всех ролей, предоставленных пользователю</p></td>
-<td><p><a href="/docs/ru/grant_roles.md">SelectUser</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/grant_roles.md">SelectUser</a></p></td>
 </tr>
 <tr>
 <td><p>CreatePrivilegeGroup</p></td>
 <td><p>Создание группы привилегий</p></td>
-<td><p><a href="/docs/ru/privilege_group.md">CreatePrivilegeGroup</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/privilege_group.md">CreatePrivilegeGroup</a></p></td>
 </tr>
 <tr>
 <td><p>DropPrivilegeGroup</p></td>
 <td><p>Удалить группу привилегий</p></td>
-<td><p><a href="/docs/ru/privilege_group.md">DropPrivilegeGroup</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/privilege_group.md">DropPrivilegeGroup</a></p></td>
 </tr>
 <tr>
 <td><p>ListPrivilegeGroups</p></td>
 <td><p>Просмотр всех групп привилегий в текущем экземпляре</p></td>
-<td><p><a href="/docs/ru/privilege_group.md">ListPrivilegeGroups</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/privilege_group.md">ListPrivilegeGroups</a></p></td>
 </tr>
 <tr>
 <td><p>OperatePrivilegeGroup</p></td>
 <td><p>Добавление привилегий в группу привилегий или удаление привилегий из нее</p></td>
-<td><p><a href="/docs/ru/privilege_group.md">OperatePrivilegeGroup</a></p></td>
+<td><p><a href="/docs/ru/v2.6.x/privilege_group.md">OperatePrivilegeGroup</a></p></td>
 </tr>
 </table></p></li>
 </ul>
@@ -532,6 +532,7 @@ err = client.GrantV2(ctx, milvusclient.NewGrantV2Option(<span class="hljs-string
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/grant_privilege_v2&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;,
     &quot;privilege&quot;: &quot;Search&quot;,
@@ -543,6 +544,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/grant_privilege_v2&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;,
     &quot;privilege&quot;: &quot;privilege_group_1&quot;,
@@ -554,6 +556,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/grant_privilege_v2&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;,
     &quot;privilege&quot;: &quot;ClusterReadOnly&quot;,
@@ -607,6 +610,7 @@ role, err := client.DescribeRole(ctx, milvusclient.NewDescribeRoleOption(<span c
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/describe&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;
 }&#x27;</span>
@@ -734,6 +738,7 @@ err = client.RevokePrivilegeV2(ctx, milvusclient.NewRevokePrivilegeV2Option(<spa
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/revoke_privilege_v2&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;,
     &quot;privilege&quot;: &quot;Search&quot;,
@@ -745,6 +750,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/revoke_privilege_v2&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;,
     &quot;privilege&quot;: &quot;Search&quot;,
@@ -756,6 +762,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/revoke_privilege_v2&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;,
     &quot;privilege&quot;: &quot;ClusterReadOnly&quot;,

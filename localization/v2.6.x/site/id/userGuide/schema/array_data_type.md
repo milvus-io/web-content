@@ -42,7 +42,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Nilai Default</strong>: Bidang ARRAY tidak mendukung nilai default. Namun, Anda dapat mengatur atribut <code translate="no">nullable</code> ke <code translate="no">True</code> untuk mengizinkan nilai nol. Untuk detailnya, lihat <a href="/docs/id/nullable-and-default.md">Nullable &amp; Default</a>.</p></li>
+<li><p><strong>Nilai Default</strong>: Bidang ARRAY tidak mendukung nilai default. Namun, Anda dapat mengatur atribut <code translate="no">nullable</code> ke <code translate="no">True</code> untuk mengizinkan nilai nol. Untuk detailnya, lihat <a href="/docs/id/v2.6.x/nullable-and-default.md">Nullable &amp; Default</a>.</p></li>
 <li><p><strong>Tipe Data:</strong> Semua elemen dalam bidang ARRAY harus memiliki tipe data yang sama, yang ditentukan oleh parameter <code translate="no">element_type</code>. Bila <code translate="no">element_type</code> disetel ke <code translate="no">VARCHAR</code>, Anda juga harus menentukan <code translate="no">max_length</code> untuk elemen array. <code translate="no">element_type</code> menerima semua tipe data skalar yang didukung oleh Milvus, dengan pengecualian <code translate="no">JSON</code>.</p></li>
 <li><p><strong>Kapasitas Larik</strong>: Jumlah elemen dalam bidang ARRAY harus kurang dari atau sama dengan kapasitas maksimum yang ditentukan saat Array dibuat, seperti yang ditentukan oleh <code translate="no">max_capacity</code>. Nilai harus berupa bilangan bulat dalam kisaran <strong>1</strong> hingga <strong>4096</strong>.</p></li>
 <li><p><strong>Penanganan String</strong>: Nilai string dalam bidang Array disimpan apa adanya, tanpa pelarian atau konversi semantik. Misalnya, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code>, dan <code translate="no">&quot;a\&quot;b&quot;</code> disimpan seperti yang dimasukkan, sementara <code translate="no">'a'b'</code> dan <code translate="no">&quot;a&quot;b&quot;</code> dianggap sebagai nilai yang tidak valid.</p></li>
@@ -70,7 +70,7 @@ summary: >-
 </ol>
 <p>Berikut ini cara mendefinisikan skema koleksi yang menyertakan bidang ARRAY:</p>
 <div class="alert note">
-<p>Jika Anda menetapkan <code translate="no">enable_dynamic_fields=True</code> ketika mendefinisikan skema, Milvus mengizinkan Anda untuk menyisipkan bidang skalar yang tidak didefinisikan sebelumnya. Namun, hal ini dapat meningkatkan kompleksitas kueri dan manajemen, yang berpotensi memengaruhi kinerja. Untuk informasi lebih lanjut, lihat <a href="/docs/id/enable-dynamic-field.md">Bidang Dinamis</a>.</p>
+<p>Jika Anda menetapkan <code translate="no">enable_dynamic_fields=True</code> ketika mendefinisikan skema, Milvus mengizinkan Anda untuk menyisipkan bidang skalar yang tidak didefinisikan sebelumnya. Namun, hal ini dapat meningkatkan kompleksitas kueri dan manajemen, yang berpotensi memengaruhi kinerja. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/enable-dynamic-field.md">Bidang Dinamis</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -271,7 +271,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>Pengindeksan membantu meningkatkan kinerja pencarian dan kueri. Di Milvus, pengindeksan adalah wajib untuk bidang vektor, tetapi opsional untuk bidang skalar.</p>
-<p>Contoh berikut ini membuat indeks pada bidang vektor <code translate="no">embedding</code> dan bidang ARRAY <code translate="no">tags</code>, keduanya menggunakan tipe indeks <code translate="no">AUTOINDEX</code>. Dengan tipe ini, Milvus secara otomatis memilih indeks yang paling sesuai berdasarkan tipe datanya. Anda juga dapat menyesuaikan jenis indeks dan parameter untuk setiap field. Untuk detailnya, lihat <a href="/docs/id/index-explained.md">Penjelasan Indeks</a>.</p>
+<p>Contoh berikut ini membuat indeks pada bidang vektor <code translate="no">embedding</code> dan bidang ARRAY <code translate="no">tags</code>, keduanya menggunakan tipe indeks <code translate="no">AUTOINDEX</code>. Dengan tipe ini, Milvus secara otomatis memilih indeks yang paling sesuai berdasarkan tipe datanya. Anda juga dapat menyesuaikan jenis indeks dan parameter untuk setiap field. Untuk detailnya, lihat <a href="/docs/id/v2.6.x/index-explained.md">Penjelasan Indeks</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
@@ -384,6 +384,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -500,6 +501,7 @@ client.<span class="hljs-title function_">insert</span>({
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {
@@ -599,6 +601,7 @@ fmt.Println(<span class="hljs-string">&quot;ratings&quot;</span>, rs.GetColumn(<
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;tags IS NOT NULL&quot;,
@@ -676,6 +679,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;my_collection&quot;,
   &quot;filter&quot;: &quot;ratings[0] &gt; 4&quot;,
@@ -775,6 +779,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -788,4 +793,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:-0.24793813,&quot;embedding&quot;:[0.12,0.34,0.56],&quot;id&quot;:1,&quot;ratings&quot;:{&quot;Data&quot;:{&quot;LongData&quot;:{&quot;data&quot;:[5,4,3]}}},&quot;tags&quot;:{&quot;Data&quot;:{&quot;StringData&quot;:{&quot;data&quot;:[&quot;pop&quot;,&quot;rock&quot;,&quot;classic&quot;]}}}}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Selain itu, Milvus mendukung operator pemfilteran Array tingkat lanjut seperti <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, dan <code translate="no">ARRAY_LENGTH</code> untuk lebih meningkatkan kemampuan kueri. Untuk lebih jelasnya, lihat <a href="/docs/id/array-operators.md">Operator</a> Larik.</p>
+<p>Selain itu, Milvus mendukung operator pemfilteran Array tingkat lanjut seperti <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, dan <code translate="no">ARRAY_LENGTH</code> untuk lebih meningkatkan kemampuan kueri. Untuk lebih jelasnya, lihat <a href="/docs/id/v2.6.x/array-operators.md">Operator</a> Larik.</p>

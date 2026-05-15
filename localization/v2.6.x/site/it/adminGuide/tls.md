@@ -21,7 +21,7 @@ summary: Scoprite come attivare il proxy TLS in Milvus.
     </button></h1><p>TLS (Transport Layer Security) è un protocollo di crittografia che garantisce la sicurezza delle comunicazioni. Milvus proxy utilizza l'autenticazione TLS unidirezionale e bidirezionale.</p>
 <p>Questo argomento descrive come abilitare TLS in Milvus proxy per il traffico gRPC e RESTful.</p>
 <div class="alert note">
-<p>TLS e l'autenticazione utente sono due approcci di sicurezza distinti. Se avete abilitato sia l'autenticazione utente che il TLS nel vostro sistema Milvus, dovrete fornire un nome utente, una password e i percorsi dei file dei certificati. Per informazioni su come abilitare l'autenticazione dell'utente, fate riferimento a <a href="/docs/it/authenticate.md">Autenticare l'accesso dell'utente</a>.</p>
+<p>TLS e l'autenticazione utente sono due approcci di sicurezza distinti. Se avete abilitato sia l'autenticazione utente che il TLS nel vostro sistema Milvus, dovrete fornire un nome utente, una password e i percorsi dei file dei certificati. Per informazioni su come abilitare l'autenticazione dell'utente, fate riferimento a <a href="/docs/it/v2.6.x/authenticate.md">Autenticare l'accesso dell'utente</a>.</p>
 </div>
 <h2 id="Create-your-own-certificate" class="common-anchor-header">Creare il proprio certificato<button data-href="#Create-your-own-certificate" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -38,13 +38,43 @@ summary: Scoprite come attivare il proxy TLS in Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Prerequisites" class="common-anchor-header">Prerequisiti</h3><p>Assicurarsi che OpenSSL sia installato. Se non è stato installato, <a href="https://github.com/openssl/openssl/blob/master/INSTALL.md">creare e installare</a> prima OpenSSL.</p>
+    </button></h2><h3 id="Prerequisites" class="common-anchor-header">Prerequisiti<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Assicurarsi che OpenSSL sia installato. Se non è stato installato, <a href="https://github.com/openssl/openssl/blob/master/INSTALL.md">creare e installare</a> prima OpenSSL.</p>
 <pre><code translate="no" class="language-shell">openssl version
 <button class="copy-code-btn"></button></code></pre>
 <p>Se OpenSSL non è installato. Può essere installato con il seguente comando in Ubuntu.</p>
 <pre><code translate="no" class="language-shell">sudo apt install openssl
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-files" class="common-anchor-header">Creare i file</h3><ol>
+<h3 id="Create-files" class="common-anchor-header">Creare i file<button data-href="#Create-files" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>Creare il file <code translate="no">gen.sh</code>.</li>
 </ol>
 <pre><code translate="no"><span class="hljs-built_in">mkdir</span> cert &amp;&amp; <span class="hljs-built_in">cd</span> cert
@@ -53,7 +83,7 @@ summary: Scoprite come attivare il proxy TLS in Milvus.
 <ol start="2">
 <li>Copiare il seguente script nel file <code translate="no">gen.sh</code>.</li>
 </ol>
-<p>È necessario configurare il file <code translate="no">CommonName</code> nel file <code translate="no">gen.sh</code>. Il file <code translate="no">CommonName</code> si riferisce al nome del server che il client deve specificare durante la connessione.</p>
+<p>È necessario configurare il file <code translate="no">CommonName</code> nel file <code translate="no">gen.sh</code>. <code translate="no">CommonName</code> si riferisce al nome del server che il client deve specificare durante la connessione.</p>
 <p><details><summary><code translate="no">gen.sh</code></summary></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/usr/bin/env sh</span>
 <span class="hljs-meta prompt_"># </span><span class="language-bash">your variables</span>
@@ -98,13 +128,43 @@ openssl req -new -key client.key\
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <p>Le variabili del file <code translate="no">gen.sh</code> sono fondamentali per il processo di creazione di un file di richiesta di firma del certificato. Le prime cinque variabili sono le informazioni di base sulla firma, tra cui paese, stato, località, organizzazione, unità organizzativa. È necessario prestare attenzione quando si configura <code translate="no">CommonName</code>, poiché sarà verificato durante la comunicazione client-server.</p>
-<h3 id="Run-gensh-to-generate-certificate" class="common-anchor-header">Eseguire <code translate="no">gen.sh</code> per generare il certificato</h3><p>Eseguire il file <code translate="no">gen.sh</code> per creare il certificato.</p>
+<h3 id="Run-gensh-to-generate-certificate" class="common-anchor-header">Eseguire <code translate="no">gen.sh</code> per generare il certificato<button data-href="#Run-gensh-to-generate-certificate" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Eseguire il file <code translate="no">gen.sh</code> per creare il certificato.</p>
 <pre><code translate="no"><span class="hljs-built_in">chmod</span> +x gen.sh
 ./gen.sh
 <button class="copy-code-btn"></button></code></pre>
 <p>Verranno creati i seguenti sette file: <code translate="no">ca.key</code>, <code translate="no">ca.pem</code>, <code translate="no">ca.srl</code>, <code translate="no">server.key</code>, <code translate="no">server.pem</code>, <code translate="no">client.key</code>, <code translate="no">client.pem</code>.</p>
 <p>Assicurarsi di tenere al sicuro i file <code translate="no">ca.key</code>, <code translate="no">ca.pem</code>, <code translate="no">ca.srl</code> per poter rinnovare i certificati in seguito. I file <code translate="no">server.key</code> e <code translate="no">server.pem</code> sono utilizzati dal server, mentre i file <code translate="no">client.key</code> e <code translate="no">client.pem</code> sono utilizzati dal client.</p>
-<h3 id="Renew-certificates-optional" class="common-anchor-header">Rinnovo dei certificati (opzionale)</h3><p>Se si desidera rinnovare i certificati in alcuni casi, ad esempio se scadono presto, è possibile utilizzare il seguente script.</p>
+<h3 id="Renew-certificates-optional" class="common-anchor-header">Rinnovo dei certificati (opzionale)<button data-href="#Renew-certificates-optional" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Se si desidera rinnovare i certificati in alcuni casi, ad esempio se scadono presto, è possibile utilizzare il seguente script.</p>
 <p>È necessario avere <code translate="no">ca.key</code>, <code translate="no">ca.pem</code>, <code translate="no">ca.srl</code> nella propria directory di lavoro.</p>
 <p><details><summary><code translate="no">renew.sh</code></summary></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/usr/bin/env sh</span>
@@ -163,7 +223,22 @@ openssl req -new -key client.key\
         ></path>
       </svg>
     </button></h2><p>Questa sezione illustra i passaggi per configurare un server Milvus con crittografia TLS.</p>
-<h3 id="Setup-for-Docker-Compose" class="common-anchor-header">Configurazione per Docker Compose</h3><h4 id="1-Modify-the-Milvus-server-configuration" class="common-anchor-header">1. Modificare la configurazione del server Milvus</h4><p>Per abilitare TLS esterno, aggiungere le seguenti configurazioni nel file <code translate="no">milvus.yaml</code>:</p>
+<h3 id="Setup-for-Docker-Compose" class="common-anchor-header">Configurazione per Docker Compose<button data-href="#Setup-for-Docker-Compose" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="1-Modify-the-Milvus-server-configuration" class="common-anchor-header">1. Modificare la configurazione del server Milvus</h4><p>Per abilitare TLS esterno, aggiungere le seguenti configurazioni nel file <code translate="no">milvus.yaml</code>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">http:</span>
     <span class="hljs-comment"># for now milvus do not support config restful on same port with grpc</span>
@@ -228,10 +303,25 @@ openssl req -new -key client.key\
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/tls:/milvus/tls</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<h5 id="Deploy-Milvus-using-Docker-Compose" class="common-anchor-header">Distribuire Milvus con Docker Compose</h5><p>Eseguire il seguente comando per distribuire Milvus:</p>
+<h5 id="Deploy-Milvus-using-Docker-Compose" class="common-anchor-header">Distribuzione di Milvus con Docker Compose</h5><p>Eseguire il seguente comando per distribuire Milvus:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Setup-for-Milvus-Operator" class="common-anchor-header">Setup per Milvus Operator</h3><p>Mettere i file dei certificati nella propria directory di lavoro. La struttura della directory dovrebbe essere la seguente:</p>
+<h3 id="Setup-for-Milvus-Operator" class="common-anchor-header">Setup per Milvus Operator<button data-href="#Setup-for-Milvus-Operator" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Mettere i file dei certificati nella propria directory di lavoro. La struttura della directory dovrebbe essere la seguente:</p>
 <pre><code translate="no">├── milvus.yaml (<span class="hljs-keyword">to</span> be created later)
 ├── server.pem
 ├── server.<span class="hljs-keyword">key</span>
@@ -306,7 +396,22 @@ openssl req -new -key client.key\
 <p>creare il Milvus CR:</p>
 <pre><code translate="no" class="language-bash">kubectl create -f milvus.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="setup-for-Milvus-Helm" class="common-anchor-header">configurazione per Milvus Helm</h3><p>Mettete i file dei certificati nella vostra directory di lavoro. La struttura della directory dovrebbe essere la seguente:</p>
+<h3 id="setup-for-Milvus-Helm" class="common-anchor-header">configurazione per Milvus Helm<button data-href="#setup-for-Milvus-Helm" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Mettete i file dei certificati nella vostra directory di lavoro. La struttura della directory dovrebbe essere la seguente:</p>
 <pre><code translate="no">├── values.yaml (<span class="hljs-keyword">to</span> be created later)
 ├── server.pem
 ├── server.<span class="hljs-keyword">key</span>
@@ -404,7 +509,22 @@ helm install my-release milvus/milvus -f values.yaml
         ></path>
       </svg>
     </button></h2><p>Per le interazioni con l'SDK, utilizzare le seguenti impostazioni a seconda della modalità TLS.</p>
-<h3 id="One-way-TLS-connection" class="common-anchor-header">Connessione TLS unidirezionale</h3><p>Fornire il percorso di <code translate="no">server.pem</code> e assicurarsi che <code translate="no">server_name</code> corrisponda a <code translate="no">CommonName</code> configurato nel certificato.</p>
+<h3 id="One-way-TLS-connection" class="common-anchor-header">Connessione TLS unidirezionale<button data-href="#One-way-TLS-connection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Fornire il percorso di <code translate="no">server.pem</code> e assicurarsi che <code translate="no">server_name</code> corrisponda a <code translate="no">CommonName</code> configurato nel certificato.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -414,7 +534,22 @@ client = MilvusClient(
     server_name=<span class="hljs-string">&quot;localhost&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Two-way-TLS-connection" class="common-anchor-header">Connessione TLS bidirezionale</h3><p>Fornire i percorsi di <code translate="no">client.pem</code>, <code translate="no">client.key</code> e <code translate="no">ca.pem</code> e assicurarsi che <code translate="no">server_name</code> corrisponda a <code translate="no">CommonName</code> configurato nel certificato.</p>
+<h3 id="Two-way-TLS-connection" class="common-anchor-header">Connessione TLS bidirezionale<button data-href="#Two-way-TLS-connection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Fornire i percorsi di <code translate="no">client.pem</code>, <code translate="no">client.key</code> e <code translate="no">ca.pem</code> e assicurarsi che <code translate="no">server_name</code> corrisponda a <code translate="no">CommonName</code> configurato nel certificato.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -443,7 +578,43 @@ client = MilvusClient(
         ></path>
       </svg>
     </button></h2><p>Per le API RESTful, è possibile verificare il tls utilizzando il comando <code translate="no">curl</code>.</p>
-<h3 id="One-way-TLS-connection" class="common-anchor-header">Connessione TLS unidirezionale</h3><pre><code translate="no" class="language-bash">curl --cacert path_to/ca.pem https://localhost:8080/v2/vectordb/collections/list
+<h3 id="One-way-TLS-connection" class="common-anchor-header">Connessione TLS unidirezionale<button data-href="#One-way-TLS-connection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-bash">curl --cacert path_to/ca.pem \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+  https://localhost:8080/v2/vectordb/collections/list
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Two-way-TLS-connection" class="common-anchor-header">Connessione TLS bidirezionale</h3><pre><code translate="no" class="language-bash">curl --cert path_to/client.pem --key path_to/client.key --cacert path_to/ca.pem https://localhost:8080/v2/vectordb/collections/list
+<h3 id="Two-way-TLS-connection" class="common-anchor-header">Connessione TLS bidirezionale<button data-href="#Two-way-TLS-connection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-bash">curl --cert path_to/client.pem \
+  --key path_to/client.key \
+  --cacert path_to/ca.pem \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+  https://localhost:8080/v2/vectordb/collections/list
 <button class="copy-code-btn"></button></code></pre>

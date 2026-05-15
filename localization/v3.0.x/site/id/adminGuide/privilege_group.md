@@ -64,7 +64,7 @@ summary: >-
       </svg>
     </button></h2><p>Untuk kemudahan penggunaan, Milvus menyediakan total 9 hak istimewa bawaan di tingkat koleksi, basis data, dan instance: COLL_RO, COLL_RW, COLL_ADMIN, DB_RO, DB_RW, DB_Admin, Cluster_RO, Cluster_RW, dan Cluster_Admin.</p>
 <div class="alert note">
-<p>Tiga tingkat grup hak istimewa bawaan tidak memiliki hubungan berjenjang. Menetapkan grup hak istimewa pada tingkat instance tidak secara otomatis menetapkan izin untuk semua database dan koleksi di bawah instance tersebut. Hak istimewa di tingkat database dan koleksi perlu diatur secara manual.</p>
+<p>Tiga tingkat grup hak istimewa bawaan tidak memiliki hubungan berjenjang. Mengatur grup hak istimewa pada tingkat instance tidak secara otomatis mengatur izin untuk semua database dan koleksi di bawah instance tersebut. Hak istimewa di tingkat database dan koleksi perlu diatur secara manual.</p>
 </div>
 <p>Tabel berikut ini menjelaskan hak istimewa yang disertakan dalam setiap grup hak istimewa bawaan.</p>
 <h3 id="Collection-level" class="common-anchor-header">Tingkat koleksi<button data-href="#Collection-level" class="anchor-icon" translate="no">
@@ -87,7 +87,7 @@ summary: >-
 <li><p><strong>CollectionReadWrite (COLL_RW)</strong>: mencakup hak istimewa untuk membaca dan menulis data koleksi</p></li>
 <li><p><strong>CollectionAdmin (COLL_ADMIN)</strong>: mencakup hak istimewa untuk membaca dan menulis data koleksi dan mengelola koleksi.</p></li>
 </ul>
-<p>Tabel di bawah ini mencantumkan hak istimewa khusus yang termasuk dalam tiga kelompok hak istimewa bawaan di tingkat koleksi:</p>
+<p>Tabel di bawah ini mencantumkan hak istimewa khusus yang termasuk dalam tiga kelompok hak istimewa bawaan pada tingkat koleksi:</p>
 <table>
    <tr>
      <th><p><strong>Hak istimewa</strong></p></th>
@@ -549,6 +549,7 @@ client.createPrivilegeGroup(CreatePrivilegeGroupReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;
 }&#x27;</span>
@@ -600,6 +601,7 @@ client.addPrivilegesToGroup(AddPrivilegesToGroupReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/add_privileges_to_group&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;,
     &quot;privileges&quot;:[&quot;Query&quot;, &quot;Search&quot;]
@@ -650,6 +652,7 @@ client.removePrivilegesFromGroup(RemovePrivilegesFromGroupReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/remove_privileges_from_group&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;,
     &quot;privileges&quot;:[&quot;Search&quot;]
@@ -698,6 +701,7 @@ List&lt;PrivilegeGroup&gt; groups = resp.getPrivilegeGroups();
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/list&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Di bawah ini adalah contoh keluaran.</p>
@@ -744,6 +748,7 @@ client.dropPrivilegeGroup(DropPrivilegeGroupReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/drop&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;
 }&#x27;</span>

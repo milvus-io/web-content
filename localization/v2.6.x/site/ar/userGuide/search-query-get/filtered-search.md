@@ -119,7 +119,7 @@ summary: >-
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>إذا كانت متجهات الاستعلام موجودة بالفعل في المجموعة المستهدفة، ففكر في استخدام <code translate="no">ids</code> بدلاً من استرجاعها قبل البحث. لمزيد من التفاصيل، راجع <a href="/docs/ar/primary-key-search.md">بحث بالمفتاح الأساسي</a>.</p>
+<p>إذا كانت متجهات الاستعلام موجودة بالفعل في المجموعة المستهدفة، ففكر في استخدام <code translate="no">ids</code> بدلاً من استرجاعها قبل البحث. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.6.x/primary-key-search.md">بحث بالمفتاح الأساسي</a>.</p>
 </div>
 <h3 id="Search-with-standard-filtering" class="common-anchor-header">البحث باستخدام التصفية القياسية<button data-href="#Search-with-standard-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -266,6 +266,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -300,7 +301,7 @@ curl --request POST \
     <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>لمزيد من المعلومات حول العوامل التي يمكنك استخدامها في تصفية البيانات الوصفية، راجع <a href="/docs/ar/filtering">التصفية</a>.</p>
+<p>لمزيد من المعلومات حول العوامل التي يمكنك استخدامها في تصفية البيانات الوصفية، راجع <a href="/docs/ar/v2.6.x/filtering">التصفية</a>.</p>
 <h3 id="Search-with-iterative-filtering" class="common-anchor-header">البحث باستخدام التصفية التكرارية<button data-href="#Search-with-iterative-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -452,6 +453,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

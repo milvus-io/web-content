@@ -62,7 +62,7 @@ summary: >-
     </button></h2><p>Aplikasi AI modern, mulai dari pengemudian otonom hingga pengambilan multimodal, semakin bergantung pada data yang bersarang dan heterogen. Model data datar tradisional sulit untuk merepresentasikan hubungan yang kompleks seperti<strong>"satu dokumen dengan banyak potongan beranotasi</strong>" atau<strong>"satu adegan mengemudi dengan beberapa manuver yang diamati</strong>". Di sinilah tipe data StructArray di Milvus bersinar.</p>
 <p>Untuk menentukan dengan cepat apakah bidang StructArray sesuai dengan skenario aplikasi Anda, pertimbangkan apakah:</p>
 <ul>
-<li><p>Data Anda berada dalam struktur hirarkis, seperti satu dokumen dengan banyak bagian yang dianotasi.</p></li>
+<li><p>Data Anda berada dalam struktur hirarkis, seperti satu dokumen dengan banyak potongan beranotasi.</p></li>
 <li><p>Hasil pencarian harus berupa dokumen, bukan potongan-potongan, seperti pada contoh di atas.</p></li>
 <li><p>Hasil pencarian berisi entitas duplikat yang sangat banyak, dan Anda kesulitan untuk mendapatkan hasil akhir dengan menggunakan teknik seperti pengelompokan, deduplikasi, dan pengurutan ulang.</p></li>
 </ul>
@@ -579,6 +579,7 @@ client.createCollection(requestCreate);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/create&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;description\&quot;: \&quot;A collection for storing book information with struct array chunks\&quot;,
@@ -694,6 +695,7 @@ row.add(<span class="hljs-string">&quot;chunks&quot;</span>, structArr);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/insert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -886,6 +888,7 @@ embeddingList1=<span class="hljs-string">&#x27;[[0.2,0.9,0.4,-0.3,0.2]]&#x27;</s
 embeddingList2=<span class="hljs-string">&#x27;[[-0.2,-0.2,0.5,0.6,0.9],[-0.4,0.3,0.5,0.8,0.2]]&#x27;</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>],
@@ -990,6 +993,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>, <span class="hljs-variable">$embeddingList2</span>],
@@ -1142,7 +1146,7 @@ element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>) &amp;&amp; 
 <li><p><code translate="no">MATCH_ALL(chunks, $[text] LIKE &quot;Red%&quot;)</code></p>
 <p>Ini mengembalikan entitas yang sub-bidang teksnya di semua potongan dimulai dengan "Merah".</p></li>
 <li><p><code translate="no">MATCH_LEAST(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>
-<p>Ini mengembalikan entitas yang berisi setidaknya potongan <code translate="no">k</code> yang dimulai dengan "Red" di sub-bidang <code translate="no">text</code>.</p></li>
+<p>Ini mengembalikan entitas yang mengandung setidaknya potongan <code translate="no">k</code> yang dimulai dengan "Red" di sub-bidang <code translate="no">text</code>.</p></li>
 <li><p><code translate="no">MATCH_MOST(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>
 <p>Ini mengembalikan entitas yang berisi paling banyak potongan <code translate="no">k</code> yang dimulai dengan "Merah" di sub-bidang <code translate="no">text</code>.</p></li>
 <li><p><code translate="no">MATCH_EXACT(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>

@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يخزن حقل ARRAY مجموعة مرتبة من العناصر من نفس نوع البيانات. إليك مثال على كيفية تخزين حقول ARRAY للبيانات:</p>
+    </button></h1><p>يخزن حقل ARRAY مجموعة مرتبة من العناصر من نفس نوع البيانات. فيما يلي مثال على كيفية تخزين حقول ARRAY للبيانات:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;tags&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;pop&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;rock&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;classic&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;ratings&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">5</span><span class="hljs-punctuation">,</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span> <span class="hljs-number">3</span><span class="hljs-punctuation">]</span>
@@ -42,7 +42,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>القيم الافتراضية</strong>: لا تدعم حقول ARRAY القيم الافتراضية. ومع ذلك، يمكنك تعيين السمة <code translate="no">nullable</code> إلى <code translate="no">True</code> للسماح بالقيم الفارغة. لمزيد من التفاصيل، ارجع إلى <a href="/docs/ar/nullable-and-default.md">Nullable &amp; Default</a>.</p></li>
+<li><p><strong>القيم الافتراضية</strong>: لا تدعم حقول ARRAY القيم الافتراضية. ومع ذلك، يمكنك تعيين السمة <code translate="no">nullable</code> إلى <code translate="no">True</code> للسماح بالقيم الفارغة. لمزيد من التفاصيل، ارجع إلى <a href="/docs/ar/v2.6.x/nullable-and-default.md">Nullable &amp; Default</a>.</p></li>
 <li><p><strong>نوع البيانات:</strong> يجب أن تشترك جميع العناصر في حقل ARRAY في نفس نوع البيانات، والذي يتم تعريفه بواسطة المعلمة <code translate="no">element_type</code>. عندما يتم تعيين <code translate="no">element_type</code> على <code translate="no">VARCHAR</code> ، يجب أيضًا تحديد <code translate="no">max_length</code> لعناصر الصفيف. يقبل <code translate="no">element_type</code> أي نوع بيانات قياسي مدعوم من قبل ميلفوس، باستثناء <code translate="no">JSON</code>.</p></li>
 <li><p><strong>سعة المصفوفة</strong>: يجب أن يكون عدد العناصر في حقل ARRAY أقل من أو يساوي السعة القصوى المحددة عند إنشاء المصفوفة، كما هو محدد في <code translate="no">max_capacity</code>. يجب أن تكون القيمة عددًا صحيحًا ضمن النطاق من <strong>1</strong> إلى <strong>4096</strong>.</p></li>
 <li><p><strong>التعامل مع السلسلة</strong>: يتم تخزين قيم السلسلة في حقول المصفوفات كما هي، دون هروب دلالي أو تحويل. على سبيل المثال، يتم تخزين <code translate="no">'a&quot;b'</code> و <code translate="no">&quot;a'b&quot;</code> و <code translate="no">'a\'b'</code> و <code translate="no">&quot;a\&quot;b&quot;</code> كما تم إدخالها، بينما <code translate="no">'a'b'</code> و <code translate="no">&quot;a&quot;b&quot;</code> تعتبر قيمًا غير صالحة.</p></li>
@@ -70,7 +70,7 @@ summary: >-
 </ol>
 <p>إليك كيفية تعريف مخطط مجموعة يتضمن حقول ARRAY:</p>
 <div class="alert note">
-<p>إذا قمت بتعيين <code translate="no">enable_dynamic_fields=True</code> عند تعريف المخطط، يسمح لك Milvus بإدراج حقول قياسية لم يتم تعريفها مسبقًا. ومع ذلك، قد يؤدي ذلك إلى زيادة تعقيد الاستعلامات والإدارة، مما قد يؤثر على الأداء. لمزيد من المعلومات، راجع <a href="/docs/ar/enable-dynamic-field.md">الحقل الديناميكي</a>.</p>
+<p>إذا قمت بتعيين <code translate="no">enable_dynamic_fields=True</code> عند تعريف المخطط، يسمح لك Milvus بإدراج حقول قياسية لم يتم تعريفها مسبقًا. ومع ذلك، قد يؤدي ذلك إلى زيادة تعقيد الاستعلامات والإدارة، مما قد يؤثر على الأداء. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.6.x/enable-dynamic-field.md">الحقل الديناميكي</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">CURL</a></div>
@@ -271,7 +271,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>تساعد الفهرسة على تحسين أداء البحث والاستعلام. في ميلفوس، الفهرسة إلزامية للحقول المتجهة ولكنها اختيارية للحقول القياسية.</p>
-<p>ينشئ المثال التالي فهارس على الحقل المتجه <code translate="no">embedding</code> والحقل ARRAY <code translate="no">tags</code> ، وكلاهما يستخدم نوع الفهرس <code translate="no">AUTOINDEX</code>. باستخدام هذا النوع، يختار Milvus تلقائيًا الفهرس الأنسب بناءً على نوع البيانات. يمكنك أيضًا تخصيص نوع الفهرس والبارامترات لكل حقل. لمزيد من التفاصيل، راجع <a href="/docs/ar/index-explained.md">شرح الفهرس</a>.</p>
+<p>ينشئ المثال التالي فهارس على الحقل المتجه <code translate="no">embedding</code> والحقل ARRAY <code translate="no">tags</code> ، وكلاهما يستخدم نوع الفهرس <code translate="no">AUTOINDEX</code>. باستخدام هذا النوع، يختار Milvus تلقائيًا الفهرس الأنسب بناءً على نوع البيانات. يمكنك أيضًا تخصيص نوع الفهرس والبارامترات لكل حقل. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.6.x/index-explained.md">شرح الفهرس</a>.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
@@ -384,6 +384,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -500,6 +501,7 @@ client.<span class="hljs-title function_">insert</span>({
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {
@@ -599,6 +601,7 @@ fmt.Println(<span class="hljs-string">&quot;ratings&quot;</span>, rs.GetColumn(<
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;tags IS NOT NULL&quot;,
@@ -676,6 +679,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;my_collection&quot;,
   &quot;filter&quot;: &quot;ratings[0] &gt; 4&quot;,
@@ -775,6 +779,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -788,4 +793,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:-0.24793813,&quot;embedding&quot;:[0.12,0.34,0.56],&quot;id&quot;:1,&quot;ratings&quot;:{&quot;Data&quot;:{&quot;LongData&quot;:{&quot;data&quot;:[5,4,3]}}},&quot;tags&quot;:{&quot;Data&quot;:{&quot;StringData&quot;:{&quot;data&quot;:[&quot;pop&quot;,&quot;rock&quot;,&quot;classic&quot;]}}}}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>بالإضافة إلى ذلك، يدعم Milvus عوامل تصفية المصفوفات المتقدمة مثل <code translate="no">ARRAY_CONTAINS</code> و <code translate="no">ARRAY_CONTAINS_ALL</code> و <code translate="no">ARRAY_CONTAINS_ANY</code> و <code translate="no">ARRAY_LENGTH</code> لتعزيز قدرات الاستعلام بشكل أكبر. لمزيد من التفاصيل، راجع <a href="/docs/ar/array-operators.md">مشغلات ARRAY</a>.</p>
+<p>بالإضافة إلى ذلك، يدعم Milvus عوامل تصفية المصفوفات المتقدمة مثل <code translate="no">ARRAY_CONTAINS</code> و <code translate="no">ARRAY_CONTAINS_ALL</code> و <code translate="no">ARRAY_CONTAINS_ANY</code> و <code translate="no">ARRAY_LENGTH</code> لتعزيز قدرات الاستعلام بشكل أكبر. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.6.x/array-operators.md">مشغلات ARRAY</a>.</p>
