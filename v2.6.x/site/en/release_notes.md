@@ -31,6 +31,7 @@ We are excited to announce the release of Milvus v2.6.16! This release delivers 
 - Bumped Go SDK to v2.6.4 with full struct-array support (vector sub-fields, EmbeddingList search, schema validation), gRPC authority configuration, and preserved default gRPC dial options when custom DialOptions are provided ([#49443](https://github.com/milvus-io/milvus/pull/49443))
 - Upgraded lz4_flex to 0.11.6 in the Tantivy binding to remediate CVE-2026-32829 ([#49507](https://github.com/milvus-io/milvus/pull/49507))
 - Bypassed Knowhere search-pool scheduling for vector iterators to reduce per-Next overhead in iterator-heavy group-by search paths ([#49547](https://github.com/milvus-io/milvus/pull/49547))
+- Added a cuVS-backed GPU path for building DiskANN indexes in Knowhere ([#1617](https://github.com/zilliztech/knowhere/pull/1617))
 - Exposed Arrow IO thread pool capacity as a refreshable paramtable knob to relieve HIGH-pool stalls under heavy storage v2 read load ([#49554](https://github.com/milvus-io/milvus/pull/49554), [#49561](https://github.com/milvus-io/milvus/pull/49561))
 - Parallelized text match index loading on QueryNode to speed up segment load for collections with text indexes ([#49608](https://github.com/milvus-io/milvus/pull/49608))
 - Bumped milvus-storage to fix non-contiguous I/O issues when reading row groups ([#49613](https://github.com/milvus-io/milvus/pull/49613))
