@@ -2,12 +2,6 @@
 
 This operation deletes a volume.
 
-<div class="alert note">
-
-This method is available on Zilliz Cloud's control-plane Volume service. Create `VolumeManager` with `cloud_endpoint="https://api.cloud.zilliz.com"` and a Zilliz Cloud API key that has access to the target project.
-
-</div>
-
 ## Request Syntax
 
 ```python

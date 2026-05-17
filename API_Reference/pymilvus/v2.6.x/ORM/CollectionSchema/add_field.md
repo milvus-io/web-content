@@ -127,7 +127,7 @@ add_field(
 
 **RETURNS:**
 
-A **[CollectionSchema](https://zilliverse.feishu.cn/docx/SSiodq10FoH26hx2HlccfcAgnje)** object contains the fields that have been added to the schema.
+A **[CollectionSchema](../../MilvusClient/CollectionSchema/CollectionSchema.md)** object contains the fields that have been added to the schema.
 
 **EXCEPTIONS:**
 

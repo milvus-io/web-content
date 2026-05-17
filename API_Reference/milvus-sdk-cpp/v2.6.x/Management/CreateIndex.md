@@ -2,20 +2,7 @@
 
 This operation indexes on vector fields or scalar fields.
 
-```cpp
-Status CreateIndex(const CreateIndexRequest& request)
-```
-
 ## Request Syntax
-
-```cpp
-auto request = CreateIndexRequest()
-    .WithDatabaseName(db_name)
-    .WithCollectionName(collection_name)
-    .WithIndexes(indexes)
-    .WithSync(sync)
-    .WithTimeoutMs(timeout_ms);
-```
 
 **REQUEST METHODS:**
 
@@ -63,26 +50,3 @@ Check `status.IsOk()` to confirm success.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
-
-milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-auto status = client->Connect(connect_param);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-milvus::IndexDesc index_vector("vector_field_name", "vector_index_name", milvus::IndexType::HNSW,
-                               milvus::MetricType::L2);
-index_vector.AddExtraParam("M", "32");
-index_vector.AddExtraParam("efConstruction", "100");
-
-status = client->CreateIndex(milvus::CreateIndexRequest()
-                                 .WithCollectionName(collection_name)
-                                 .WithSync(true)
-                                 .AddIndex(std::move(index_vector)));
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-```

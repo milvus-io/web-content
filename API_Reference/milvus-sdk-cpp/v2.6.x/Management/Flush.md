@@ -2,18 +2,7 @@
 
 This operation flushes the streaming data and seals segments. It is recommended to call this operation after all the data has been inserted into a collection.
 
-```cpp
-Status Flush(const FlushRequest& request)
-```
-
 ## Request Syntax
-
-```cpp
-auto request = FlushRequest()
-    .WithDatabaseName(db_name)
-    .WithCollectionNames(names)
-    .WithWaitFlushedMs(ms);
-```
 
 **REQUEST METHODS:**
 
@@ -47,20 +36,3 @@ Check `status.IsOk()` to confirm success.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
-
-milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-auto status = client->Connect(connect_param);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-// call flush() here just to persist the data so that indexnode can build index on a new segment
-// Note: in practice, no need to call flush() manually since milvus automatically trigger flush actions
-status = client->Flush(milvus::FlushRequest().AddCollectionName(collection_name));
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-```
