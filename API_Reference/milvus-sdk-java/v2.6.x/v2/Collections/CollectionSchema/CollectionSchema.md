@@ -20,7 +20,7 @@ CreateCollectionReq.CollectionSchema.builder()
 
 - `fieldSchemaList(List<CreateCollectionReq.FieldSchema>)`
 
-    A list of **FieldSchema** objects that define the fields in the collection schema.
+    A list of **[FieldSchema](../FieldSchema.md)** objects that define the fields in the collection schema.
 
     <div class="alert note">
     
