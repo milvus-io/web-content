@@ -100,6 +100,18 @@
           "alt_texts": []
         }
       },
+      "java-v3.0.x": {
+        "base": "AOFDbSmwma9XrNsLa8KcQgt9ngc:tbl63oNrbGDCXorc",
+        "sourceType": "drive",
+        "language": "java",
+        "targets": {
+          "outputDir": "API_Reference/milvus-sdk-java/v3.0.x/v2",
+          "imageDir": "assets"
+        },
+        "images": {
+          "alt_texts": []
+        }
+      },
       "node-v2.4.x": {
         "base": "DVVobtXQMamuLqsQij5c29nVn3c:tblhllHqJLAmHwFs",
         "sourceType": "drive",
