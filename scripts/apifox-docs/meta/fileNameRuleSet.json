@@ -138,5 +138,25 @@
         "path": "-resource-groups",
         "name": "-",
         "match": "removeAndCapitalize"
+    },
+    {
+        "path": "-privilege-groups",
+        "name": "-",
+        "match": "removeAndCapitalize"
+    },
+    {
+        "path": "-privilege-group",
+        "name": "-",
+        "match": "removeAndCapitalize"
+    },
+    {
+        "path": "-to-group",
+        "name": "-",
+        "match": "removeAndCapitalize"
+    },
+    {
+        "path": "-from-group",
+        "name": "-",
+        "match": "removeAndCapitalize"
     }
 ]
