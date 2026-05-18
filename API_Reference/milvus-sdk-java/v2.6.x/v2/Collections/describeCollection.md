@@ -1,6 +1,6 @@
 # describeCollection()
 
-This operation lists detailed information about a specific collection.
+This operation lists detailed information about a specific collection. You can identify the collection by name or by collection ID.
 
 ```java
 public DescribeCollectionResp describeCollection(DescribeCollectionReq request)
@@ -12,6 +12,7 @@ public DescribeCollectionResp describeCollection(DescribeCollectionReq request)
 describeCollection(DescribeCollectionReq.builder()
     .databaseName(String databaseName)
     .collectionName(String collectionName)
+    .collectionId(Long collectionId)
     .build()
 )
 ```
@@ -28,11 +29,13 @@ describeCollection(DescribeCollectionReq.builder()
 
     Setting this to a non-existing collection results in **MilvusException**.
 
-**RETURN TYPE:**
+- `collectionId(Long collectionId)`
 
-*DescribeCollectionResp*
+    The numeric ID of the collection to describe. Use this when you need to identify the collection by ID instead of name.
 
 **RETURNS:**
+
+*DescribeCollectionResp*
 
 A **DescribeCollectionResp** object that contains detailed information about the specified collection.
 
@@ -78,7 +81,7 @@ A **DescribeCollectionResp** object that contains detailed information about the
 
     Whether Milvus automatically generates the primary key for the collection.
 
-- **collectionSchema** (*CreateCollectionReq.CollectionSchema*)
+- **[collectionSchema](CollectionSchema/CollectionSchema.md)** (*CreateCollectionReq.CollectionSchema*)
 
     The scheme of the collection.
 
@@ -100,34 +103,23 @@ A **DescribeCollectionResp** object that contains detailed information about the
 
 - **properties** (*Map<String, String>*) -
 
-    The properties of the current collection. 
+    The properties of the current collection.
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 
 ## Example
 
 ```java
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.collection.request.DescribeCollectionReq;
 import io.milvus.v2.service.collection.response.DescribeCollectionResp;
 
-// 1. Set up a client
-ConnectConfig connectConfig = ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
-        .build();
-        
-MilvusClientV2 client = new MilvusClientV2(connectConfig);
+DescribeCollectionReq request = DescribeCollectionReq.builder()
+    .collectionName("book_chunks")
+    .build();
 
-// 2. Get the collection detail
-DescribeCollectionReq describeCollectionReq = DescribeCollectionReq.builder()
-        .collectionName("test")
-        .build();
-DescribeCollectionResp describeCollectionResp = client.describeCollection(describeCollectionReq);
-
+DescribeCollectionResp response = client.describeCollection(request);
 ```

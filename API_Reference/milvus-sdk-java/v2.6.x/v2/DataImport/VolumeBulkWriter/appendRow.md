@@ -1,6 +1,6 @@
 # appendRow()
 
-This operation appends a row of data to the LocalBulkWriter buffer. The data will be written to a file when the buffer is full or when `commit()` is called.
+This operation appends a row of data to the VolumeBulkWriter buffer. The data will be written to a file when the buffer is full or when `commit()` is called.
 
 ```java
 public void appendRow(JsonObject rowData) throws IOException, InterruptedException
@@ -33,9 +33,10 @@ public void appendRow(JsonObject rowData) throws IOException, InterruptedExcepti
 ## Example
 
 ```java
-LocalBulkWriter writer = new LocalBulkWriter(config);
+VolumeBulkWriter writer = new VolumeBulkWriter(config);
 JsonObject row = new JsonObject();
 row.addProperty("id", 1L);
 row.add("vector", gson.toJsonTree(new float[]{0.1f, 0.2f, 0.3f}));
 writer.appendRow(row);
 ```
+
