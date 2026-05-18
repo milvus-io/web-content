@@ -55,6 +55,11 @@
         "match": "removeAndCapitalize"
     },
     {
+        "path": "-indexes",
+        "name": "-",
+        "match": "removeAndCapitalize"
+    },
+    {
         "path": "-index",
         "name": "-",
         "match": "removeAndCapitalize"

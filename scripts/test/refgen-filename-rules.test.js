@@ -28,3 +28,9 @@ test('normalizes collection v2 compaction and analyzer slugs for milvus output',
   assert.equal(refGen.get_slug('Get Compaction State', 'milvus'), 'Get Compaction State');
   assert.equal(refGen.get_slug('Run Analyzer', 'milvus'), 'Run Analyzer');
 });
+
+test('normalizes index list slug for milvus output', () => {
+  const refGen = createRefGen();
+
+  assert.equal(refGen.get_slug('List Indexes', 'milvus'), 'List');
+});
