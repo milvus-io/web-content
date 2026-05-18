@@ -8,6 +8,9 @@
   "tags": [
     {
       "name": "Extract, Load & Transform (V2)",
+      "x-include-target": [
+        "zilliz"
+      ],
       "x-i18n": {
         "zh-CN": {
           "name": "Extract, Load & Transform (V2)"

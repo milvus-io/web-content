@@ -120,6 +120,16 @@
         "match": "contains"
     },
     {
+        "path": "get-compaction-state",
+        "name": "Get Compaction State",
+        "match": "contains"
+    },
+    {
+        "path": "run-analyzer",
+        "name": "Run Analyzer",
+        "match": "contains"
+    },
+    {
         "path": "-database",
         "name": "-",
         "match": "removeAndCapitalize"
