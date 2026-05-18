@@ -37,8 +37,6 @@ describeCollection(DescribeCollectionReq.builder()
 
 *DescribeCollectionResp*
 
-A **DescribeCollectionResp** object that contains the collection schema and metadata.
-
 A **DescribeCollectionResp** object that contains detailed information about the specified collection.
 
 **PARAMETERS:**
@@ -105,7 +103,7 @@ A **DescribeCollectionResp** object that contains detailed information about the
 
 - **properties** (*Map<String, String>*) -
 
-    The properties of the current collection. 
+    The properties of the current collection.
 
 **EXCEPTIONS:**
 
