@@ -36,6 +36,72 @@ test('lark-docs entrypoint and translator import shared scripts/lib modules', ()
   assert.equal(tokenFetcherResolved, path.join(scriptsDir, 'lib', 'larkTokenFetcher.js'));
 });
 
+test('MilvusSdkDocsGen filters SDK sources by target', async () => {
+  const MilvusSdkDocsGen = require('../lib/milvusSdkDocsGen.js');
+  const gen = Object.create(MilvusSdkDocsGen.prototype);
+  gen.targets = 'milvus';
+  gen.records = [
+    {
+      record_id: 'root',
+      fields: {
+        Docs: { text: 'v2', link: 'https://zilliverse.feishu.cn/drive/folder/root' },
+        Slug: [{ text: 'v2' }],
+        Targets: ['Milvus', 'Zilliz'],
+        Type: 'VirtualNode',
+      },
+    },
+    {
+      record_id: 'collections',
+      fields: {
+        Docs: { text: 'Collections', link: 'https://zilliverse.feishu.cn/drive/folder/collections' },
+        Slug: [{ text: 'v2-Collections' }],
+        Targets: ['Milvus', 'Zilliz'],
+        Type: 'VirtualNode',
+        '父记录': [{ record_ids: ['root'] }],
+      },
+    },
+    {
+      record_id: 'createCollection',
+      fields: {
+        Docs: { text: 'createCollection()', link: 'https://zilliverse.feishu.cn/docx/createCollection' },
+        Slug: [{ text: 'v2-Collections-createCollection' }],
+        Targets: ['Milvus'],
+        Type: 'Function',
+        '父记录': [{ record_ids: ['collections'] }],
+      },
+    },
+    {
+      record_id: 'volume',
+      fields: {
+        Docs: { text: 'Volume', link: 'https://zilliverse.feishu.cn/drive/folder/volume' },
+        Slug: [{ text: 'v2-Volume' }],
+        Targets: ['Zilliz'],
+        Type: 'Module',
+        '父记录': [{ record_ids: ['root'] }],
+      },
+    },
+    {
+      record_id: 'listVolumes',
+      fields: {
+        Docs: { text: 'listVolumes()', link: 'https://zilliverse.feishu.cn/docx/listVolumes' },
+        Slug: [{ text: 'v2-Volume-listVolumes' }],
+        Targets: ['Zilliz'],
+        Type: 'Function',
+        '父记录': [{ record_ids: ['volume'] }],
+      },
+    },
+  ];
+
+  const sources = await gen.__list_sources();
+  const pageIds = sources.map(source => source.page_id).sort();
+
+  assert.deepEqual(pageIds, [
+    'v2',
+    'v2/Collections',
+    'v2/Collections/createCollection.md',
+  ]);
+});
+
 test('buildSyncPlan resolves milvus-docs default branch dynamically via fetch', async () => {
   const manifest = [
     {
