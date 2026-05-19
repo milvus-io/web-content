@@ -9,6 +9,16 @@ class MilvusSdkDocsGen extends MilvusDocsGen {
         this.forcedLanguage = language || null
     }
 
+    __record_matches_target(record) {
+        const targets = record.fields?.Targets
+        if (!Array.isArray(targets)) return false
+
+        const publishTarget = this.targets.toLowerCase()
+        return targets
+            .map(target => String(target).trim().toLowerCase())
+            .includes(publishTarget)
+    }
+
     /**
      * SDK bitable schema differs from guide bitable schema:
      *   field mapping:
@@ -36,6 +46,7 @@ class MilvusSdkDocsGen extends MilvusDocsGen {
         const rawMap = new Map()
         for (const record of this.records) {
             if (!record.fields.Docs) continue
+            if (!this.__record_matches_target(record)) continue
             const docField = record.fields.Docs
             rawMap.set(record.record_id, {
                 record_id: record.record_id,
