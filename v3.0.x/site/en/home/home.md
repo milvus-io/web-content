@@ -98,12 +98,12 @@ id: home.md
 
 ## What's new in docs
 
-_March 2026 - Milvus 2.6.x updates_
+_May 2026 - Milvus 3.0.x updates_
 
-- Added [Milvus for AI Agents](milvus_for_agents.md) section with prompt guides.
-- Added guidance on how to use [Gemini embedding function](google-gemini.md).
-- Added guidance on how to [search by primary keys](primary-key-search.md).
-- Added guidance on how to use [text highlighter](text-highlighter.md) in search results.
-- Added descriptions of [geometry field](geometry-field.md), [timestamptz field](timestamptz-field.md), [tiered storage](tiered-storage-overview.md), and [array of structs](array-of-structs.md).
+- Added Milvus 3.0.x highlights to the [Release Notes](release_notes.md), including External Collection, Snapshot, Storage V3, and lake ecosystem integrations.
+- Added guidance on how to [sort search results by scalar fields](single-vector-search.md#Sort-Search-Results-by-Scalar-Fields--Milvus-30x) and [aggregate query results](get-and-scalar-query.md#Aggregate-Query-Results--Milvus-30x).
+- Added guidance on how to use [nullable vector fields](nullable-and-default.md) and [entity-level TTL](set-collection-ttl.md#Set-entity-level-TTL--Milvus-30x).
+- Added guidance on how to use [MinHash Function](minhash-function.md) for server-side MinHash signatures.
+- Added guidance on how to [search with embedding lists](search-with-embedding-lists.md) and trigger [force merge compaction](force-merge.md).
 
 </div>
