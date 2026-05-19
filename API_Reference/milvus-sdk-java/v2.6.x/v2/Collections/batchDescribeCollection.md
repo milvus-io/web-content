@@ -12,6 +12,7 @@ public List<DescribeCollectionResp> batchDescribeCollection(BatchDescribeCollect
 batchDescribeCollection(BatchDescribeCollectionReq.builder()
     .databaseName(String databaseName)
     .collectionNames(List<String> collectionNames)
+    .collectionIds(List<Long> collectionIds)
     .build();
 )
 ```
@@ -25,6 +26,10 @@ batchDescribeCollection(BatchDescribeCollectionReq.builder()
 - `collectionNames(List<String> collectionNames)`
 
     The names of the target collections.
+
+- `collectionIds(List<Long> collectionIds)`
+
+    The numeric IDs of the collections to describe. Use this when you need to identify collections by ID instead of name.
 
 **RETURN TYPE:**
 
@@ -78,7 +83,7 @@ A **DescribeCollectionResp** object that contains detailed information about the
 
     Whether Milvus automatically generates the primary key for the collection.
 
-- **collectionSchema** (*CreateCollectionReq.CollectionSchema*)
+- **[collectionSchema](CollectionSchema/CollectionSchema.md)** (*CreateCollectionReq.CollectionSchema*)
 
     The scheme of the collection.
 
@@ -100,7 +105,7 @@ A **DescribeCollectionResp** object that contains detailed information about the
 
 - **properties** (*Map<String, String>*) -
 
-    The properties of the current collection. 
+    The properties of the current collection.
 
 **EXCEPTIONS:**
 
@@ -131,4 +136,3 @@ BatchDescribeCollectionReq describeCollectionReq = BatchDescribeCollectionReq.bu
 List<DescribeCollectionResp> batchResp = client.batchDescribeCollection(describeCollectionReq);
 
 ```
-

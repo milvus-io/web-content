@@ -23,6 +23,7 @@ ConnectConfig.builder()
     .serverPemPath(String serverPemPath)
     .serverName(String serverName)
     .proxyAddress(String proxyAddress)
+    .option(Map<String, String> option)
     .build()
 ```
 
@@ -105,6 +106,10 @@ ConnectConfig.builder()
 - `proxyAddress(String proxyAddress)` -
 
     HTTP proxy address for the gRPC connection. Default: `null`.
+
+- `option(Map<String, String> option)`
+
+    Optional key-value metadata sent to the server during connection initialization.
 
 ## Example
 
