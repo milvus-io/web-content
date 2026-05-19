@@ -41,6 +41,10 @@ Milvus Java SDK is an open-source project and its source code is hosted on [GitH
         <td>2.6.x</td>
         <td>2.6.20</td>
     </tr>
+    <tr>
+        <td>3.0.x</td>
+        <td>3.0.0</td>
+    </tr>
 </table>
 
 ## **Installation**
@@ -53,20 +57,20 @@ You can use **[Apache Maven](https://maven.apache.org/install.html)** or **[Grad
  <dependency>
      <groupId>io.milvus</groupId>
      <artifactId>milvus-sdk-java</artifactId>
-     <version>2.6.20</version>
+     <version>3.0.0</version>
  </dependency>
 ```
 
 - Gradle/Groovy
 
 ```plaintext
-implementation 'io.milvus:milvus-sdk-java:2.6.20'
+implementation 'io.milvus:milvus-sdk-java:3.0.0'
 ```
 
 - Gradle/Kotlin
 
 ```sql
-implementation("io.milvus:milvus-sdk-java:2.6.20")
+implementation("io.milvus:milvus-sdk-java:3.0.0")
 ```
 
 Since v2.5.2, Milvus Java SDK has been split into two packages: **milvus-sdk-java** and **milvus-sdk-java-bulkwriter**. If you do not need BulkWriter, ignore the **milvus-sdk-java-bulkwriter** package. To use BulkWriter, import the **milvus-sdk-java-bulkwriter** as follows:
@@ -75,22 +79,22 @@ Since v2.5.2, Milvus Java SDK has been split into two packages: **milvus-sdk-jav
  <dependency>
      <groupId>io.milvus</groupId>
      <artifactId>milvus-sdk-java-bulkwriter</artifactId>
-     <version>2.6.20</version>
+     <version>3.0.0</version>
  </dependency>
 ```
 
 - Gradle/Groovy
 
 ```plaintext
-implementation 'io.milvus:milvus-sdk-java-bulkwriter:2.6.20'
+implementation 'io.milvus:milvus-sdk-java-bulkwriter:3.0.0'
 ```
 
 - Gradle/Kotlin
 
 ```sql
-implementation("io.milvus:milvus-sdk-java-bulkwriter:2.6.20")
+implementation("io.milvus:milvus-sdk-java-bulkwriter:3.0.0")
 ```
 
 ## **Contributing**
 
-We are committed to building a collaborative, exuberant open-source community for Milvus. Therefore, contributions to Milvus Java SDK are welcome from everyone. Refer to [Contributing Guideline](https://github.com/milvus-io/milvus-sdk-java/blob/master/CONTRIBUTING.md) before making contributions to this project. You can [file an issue](https://github.com/milvus-io/milvus-sdk-java/issues/new) if you need any assistance or want to propose your ideas
+We are committed to building a collaborative, exuberant open-source community for Milvus. Therefore, contributions to Milvus Java SDK are welcome from everyone. Refer to [Contributing Guideline](https://github.com/milvus-io/milvus-sdk-java/blob/master/CONTRIBUTING.md) before making contributions to this project. You can [file an issue](https://github.com/milvus-io/milvus-sdk-java/issues/new) if you need any assistance or want to propose your ideas.
