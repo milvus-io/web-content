@@ -87,40 +87,10 @@ summary: >-
 <p>When you create a collection, you can use the Struct type as the data type for the elements in an Array field. However, you cannot add a StructArray to an existing collection, and Milvus does not support using the Struct type as the data type for a collection field.</p>
 <p>The Structs in an Array field share the same schema, which should be defined when you create the Array field.</p>
 <p>A Struct schema contains both vectors and scalar fields, as listed below:</p>
-<p><Grid columnSize="2" widthRatios="50,50"></p>
-<pre><code translate="no">  &lt;div&gt;
-
-      Applicable vector fields:
-
-      - `FLOAT_VECTOR`
-
-      - `FLOAT16_VECTOR`
-
-      - `BFLOAT16_VECTOR`
-
-      - `INT8_VECTOR`
-
-      - `BINARY_VECTOR`
-
-  &lt;/div&gt;
-
-  &lt;div&gt;
-
-      Applicable scalar fields:
-
-      - `VARCHAR`
-
-      - `INT8/16/32/64`
-
-      - `FLOAT`
-
-      - `DOUBLE`
-
-      - `BOOL`
-
-  &lt;/div&gt;
-</code></pre>
-<p></Grid></p>
+<ul>
+<li><p>Applicable vector data types: <code translate="no">FLOAT_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code>, <code translate="no">INT8_VECTOR</code>, and <code translate="no">BINARY_VECTOR</code>.</p></li>
+<li><p>Applicable scalar data types: <code translate="no">VARCHAR</code>, <code translate="no">INT8/16/32/64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, and <code translate="no">BOOL</code>.</p></li>
+</ul>
 <p>Keep the number of vector fields both at the collection level and in the Structs combined to be no greater than or equal to 10.</p></li>
 <li><p><strong>Nullable & default values</strong></p>
 <p>A StructArray field is not nullable and does not accept any default value.</p></li>
