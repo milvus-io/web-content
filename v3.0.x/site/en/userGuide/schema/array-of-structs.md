@@ -60,41 +60,9 @@ If your answers to the questions above are yes, you should use the StructArray.
 
     A Struct schema contains both vectors and scalar fields, as listed below:
 
-    <Grid columnSize="2" widthRatios="50,50">
+    - Applicable vector data types: `FLOAT_VECTOR`, `FLOAT16_VECTOR`, `BFLOAT16_VECTOR`, `INT8_VECTOR`, and `BINARY_VECTOR`.
 
-        <div>
-
-            Applicable vector fields:
-
-            - `FLOAT_VECTOR`
-
-            - `FLOAT16_VECTOR`
-
-            - `BFLOAT16_VECTOR`
-
-            - `INT8_VECTOR`
-
-            - `BINARY_VECTOR`
-
-        </div>
-
-        <div>
-
-            Applicable scalar fields:
-
-            - `VARCHAR`
-
-            - `INT8/16/32/64`
-
-            - `FLOAT`
-
-            - `DOUBLE`
-
-            - `BOOL`
-
-        </div>
-
-    </Grid>
+    - Applicable scalar data types: `VARCHAR`, `INT8/16/32/64`, `FLOAT`, `DOUBLE`, and `BOOL`.
 
     Keep the number of vector fields both at the collection level and in the Structs combined to be no greater than or equal to 10.
 
@@ -1192,4 +1160,3 @@ The match family operators work over a StructArray field too. Instead of simply 
 ## Next steps
 
 The development of a native StructArray data type represents a major advancement in Milvus's capability to handle complex data structures. To better understand its use cases and maximize this new feature, you are encouraged to read [Schema Design Using an Array of Structs](best-practices-for-array-of-structs.md).
-
