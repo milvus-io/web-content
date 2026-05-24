@@ -135,10 +135,6 @@ entity.NewField().
 
     Enables text matching for this field.
 
-- `WithStructSchema(schema *StructSchema)`
-
-    Sets the struct schema for struct-type fields.
-
 **METHODS:**
 
 - `GetDim() int64, error`

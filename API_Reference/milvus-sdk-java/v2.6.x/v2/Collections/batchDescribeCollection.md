@@ -105,7 +105,7 @@ A **DescribeCollectionResp** object that contains detailed information about the
 
 - **properties** (*Map<String, String>*) -
 
-    The properties of the current collection.
+    The properties of the current collection. 
 
 **EXCEPTIONS:**
 
@@ -136,3 +136,4 @@ BatchDescribeCollectionReq describeCollectionReq = BatchDescribeCollectionReq.bu
 List<DescribeCollectionResp> batchResp = client.batchDescribeCollection(describeCollectionReq);
 
 ```
+

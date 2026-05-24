@@ -1,118 +1,67 @@
 # list_volumes()
 
-This operation lists all volumes within a specific project in a paginated manner.
-
-<div class="alert note">
-
-This method is available on Zilliz Cloud's control-plane Volume service. Create `VolumeManager` with `cloud_endpoint="https://api.cloud.zilliz.com"` and a Zilliz Cloud API key that has access to the target project.
-
-</div>
+This function lists volumes under a project with pagination and optional filtering by volume type.
 
 ## Request Syntax
 
 ```python
-list_volumes(
+volume_manager.list_volumes(
     project_id: str,
-    current_page: int,
-    page_size: int
+    current_page: int = 1,
+    page_size: int = 10,
+    volume_type: str | None = None,
 )
 ```
 
-**PARAMETERS**
+**PARAMETERS:**
 
 - **project_id** (*str*) -
 
     **[REQUIRED]**
 
-    The ID of the project to which the volume to be created belongs.
+    Project ID to query.
 
 - **current_page** (*int*) -
 
-    The current page of the volume lists. When specified, only the volumes on the specified page will be returned.
-
-    This parameter is optional and its value defaults to `1`, indicating that the first page will be returned.
+    Page number to query.
 
 - **page_size** (*int*) -
 
-    The  page  size of the volume lists.  When specified, only the specified number of volumes will be returned.
+    Number of records returned per page.
 
-    This parameter is optional and its value defaults to `10`, indicating that a list of up to 10 volumes will be returned.
+- **volume_type** (*str*) -
 
-**RETURN TYPE**
+    Optional filter for volume type. Supported values are `MANAGED` and `EXTERNAL`.
 
-An object.
+**RETURN TYPE:**
+*requests.Response*
 
-**RETURNS**
+Returns a paginated volume list.
 
-An object with the following data structure:
+HTTP response containing volume list results.
 
-```python
-{
-    "count": 1,
-    "currentPage": 1,
-    "pageSize": 10,
-    "volumes": [
-        {
-            "volumeName": "my_volume"
-        }        
-    ]
-}
-```
+**EXCEPTIONS:**
 
-**PARAMETERS**
+- **MilvusException**
 
-- **count** (*int*) -
+    Raised when the list request fails.
 
-    The total number of volumes found.
-
-- **currentPage** (*int*) -
-
-    The current page.
-
-- **pageSize** (*int*) -
-
-    The maximum number of volumes per page.
-
-- **volumes** (*list*) -
-
-    A volume list.
-
-    - **volumeName** (*str*) -
-
-        The name of a volume.
-
-    - **type** (*str*) -
-
-        The type of a volume. Possible values are `EXTERNAL` and `MANAGED`.
-
-## Example
+## Examples
 
 ```python
-from pymilvus.bulk_writer.volume_manager import VolumeManager
+from pymilvus.bulk_writer import VolumeManager
 
 volume_manager = VolumeManager(
     cloud_endpoint="https://api.cloud.zilliz.com",
-    api_key="YOUR_API_KEY"
+    api_key="YOUR_API_KEY",
 )
 
-volume_list = volume_manager.list_volumes(
-    project_id="proj-xxxxxxxxxxxxxxxxxxxxxxx"
+resp = volume_manager.list_volumes(
+    project_id="proj-xxx",
+    current_page=1,
+    page_size=20,
+    volume_type="EXTERNAL",
 )
 
-print(f"\nlistVolumes results: \n", volume_list.json()['data'])
-
-# listVolumes results: 
-# 
-# {
-#     "count": 1,
-#     "currentPage": 1,
-#     "pageSize": 10,
-#     "volumes": [
-#         {
-#             "volumeName": "my_volume",
-#             "type": "MANAGED"
-#         }        
-#     ]
-# }
+print(resp.json())
 ```
-
