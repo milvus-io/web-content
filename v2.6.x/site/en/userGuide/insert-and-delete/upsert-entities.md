@@ -34,6 +34,8 @@ To perform a merge, set `partial_update` to `True` in the `upsert` request along
 
 Upon receiving such a request, Milvus performs a query with strong consistency to retrieve the entity, updates the field values based on the data in the request, inserts the modified data, and then deletes the existing entity with the original primary key carried in the request.
 
+For `ARRAY` fields, merge mode supports two operators: `ARRAY_APPEND` and `ARRAY_REMOVE`. These operators let you append elements to or remove matching elements from an existing `ARRAY` field without first querying the entity to retrieve its current value. For details, refer to [Upsert ARRAY fields with partial-update operators](upsert-entities.md#Upsert-ARRAY-fields-with-partial-update-operators).
+
 ### Upsert behaviors: special notes
 
 There are several special notes you should consider before using the merge feature. The following cases assume that you have a collection with two scalar fields named `title` and `issue`, along with a primary key `id` and a vector field called `vector`. 
@@ -65,6 +67,10 @@ There are several special notes you should consider before using the merge featu
     Suppose that the example collection has a schema-defined JSON field named `extras`, and the key-value pairs in this JSON field of an entity are similar to `{"author": "John", "year": 2020, "tags": ["fiction"]}`.
 
     When you upsert the `extras` field of an entity with modified JSON data, note that the JSON field is treated as a whole, and you cannot update individual keys selectively. In other words, the JSON field **DOES NOT** support upsert in **merge** mode.
+
+- **Upsert an** `ARRAY` **field.**
+
+    In merge mode, `ARRAY` fields support the `ARRAY_APPEND` and `ARRAY_REMOVE` partial-update operators. Use these operators when you want to add elements to, or remove matching elements from, an existing `ARRAY` field without replacing the entire array value.
 
 ### Limits & Restrictions
 
@@ -569,3 +575,374 @@ curl -X POST "http://localhost:19530/v2/vectordb/entities/upsert" \
 # }
 ```
 
+## Upsert ARRAY fields with partial-update operators | Milvus v2.6.17+
+
+Before partial-update operators were introduced, updating part of an `ARRAY` field required a client-side read-modify-write flow: query the existing array, change it in application code, and upsert the full replacement value. Partial-update operators let you send only the elements to append or remove, which reduces client-side logic and avoids the extra read before the upsert.
+
+Suppose the entity with primary key `1` already has `tags = ["new", "trial"]`. Without partial-update operators, adding `"premium"` to the array requires upserting the full replacement array:
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+client.upsert(
+    collection_name="users",
+    # highlight-start
+    data=[{"pk": 1, "tags": ["new", "trial", "premium"]}],
+    partial_update=True,
+    # highlight-end
+)
+```
+
+```java
+List<JsonObject> replacementData = Collections.singletonList(
+        gson.fromJson("{\"pk\": 1, \"tags\": [\"new\", \"trial\", \"premium\"]}", JsonObject.class)
+);
+
+client.upsert(UpsertReq.builder()
+        .collectionName("users")
+        // highlight-start
+        .partialUpdate(true)
+        .data(replacementData)
+        // highlight-end
+        .build());
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+
+With `ARRAY_APPEND`, send only the element to add:
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+from pymilvus import FieldOp
+
+client.upsert(
+    collection_name="users",
+    # highlight-start
+    data=[{"pk": 1, "tags": ["premium"]}],
+    field_ops={"tags": FieldOp.array_append()},
+    # highlight-end
+)
+```
+
+```java
+List<JsonObject> appendData = Collections.singletonList(
+        gson.fromJson("{\"pk\": 1, \"tags\": [\"premium\"]}", JsonObject.class)
+);
+
+UpsertReq.FieldPartialUpdateOp appendTags = UpsertReq.FieldPartialUpdateOp.builder()
+        .fieldName("tags")
+        .opType(UpsertReq.FieldPartialUpdateOp.OpType.ARRAY_APPEND)
+        .build();
+
+client.upsert(UpsertReq.builder()
+        .collectionName("users")
+        // highlight-start
+        .data(appendData)
+        .fieldOps(Collections.singletonList(appendTags))
+        // highlight-end
+        .build());
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+
+<div class="alert note">
+
+Attaching either operator to a field via `field_ops` implicitly enables partial-update semantics. Therefore, you do **not** need to pass `partial_update=True` alongside `field_ops`.
+
+</div>
+
+### Limits
+
+- The payload values must match the `element_type` of the target `ARRAY` field. For example, if the target field is `ARRAY<VARCHAR>`, the payload must contain string values.
+- `ARRAY_APPEND` and `ARRAY_REMOVE` support `ARRAY` fields whose `element_type` is `BOOL`, `INT8`, `INT16`, `INT32`, `INT64`, `FLOAT`, `DOUBLE`, or `VARCHAR`.
+- After an `ARRAY_APPEND` operation, the resulting array length must not exceed the field's `max_capacity`.
+- Concurrent upserts to the same entity are not atomic across requests. If two requests update the same `ARRAY` field at the same time, the later write can overwrite the earlier one. Use application-level coordination if you need to preserve all concurrent changes.
+
+### Example
+
+The following example uses a small `users` collection with a primary key `pk`, a `tags` field of type `ARRAY<VARCHAR>`, and an `embedding` vector field. It first inserts two entities with initial `tags` values, then uses `ARRAY_APPEND` and `ARRAY_REMOVE` to show how each operator changes the stored array.
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+from pymilvus import DataType, FieldOp, MilvusClient
+
+client = MilvusClient(
+    uri="http://localhost:19530",
+    token="root:Milvus"
+)
+
+# 1. Create a collection with an ARRAY<VARCHAR> field
+schema = client.create_schema(enable_dynamic_field=False)
+schema.add_field("pk", DataType.INT64, is_primary=True)
+schema.add_field("embedding", DataType.FLOAT_VECTOR, dim=5)
+schema.add_field(
+    "tags",
+    DataType.ARRAY,
+    element_type=DataType.VARCHAR,
+    max_capacity=8,
+    max_length=32,
+)
+
+index_params = client.prepare_index_params()
+index_params.add_index(
+    field_name="embedding",
+    index_type="AUTOINDEX",
+    metric_type="L2",
+)
+
+client.create_collection(
+    collection_name="users",
+    schema=schema,
+    index_params=index_params
+)
+
+# 2. Seed two entities
+client.insert(
+    collection_name="users",
+    data=[
+        {"pk": 1, "embedding": [0.1, 0.2, 0.3, 0.4, 0.5], "tags": ["new"]},
+        {"pk": 2, "embedding": [0.6, 0.7, 0.8, 0.9, 1.0], "tags": ["new", "trial"]},
+    ],
+)
+
+# 3. Append tags without reading the existing ARRAY values
+client.upsert(
+    collection_name="users",
+    # highlight-start
+    data=[
+        {"pk": 1, "tags": ["premium", "vip"]},
+        {"pk": 2, "tags": ["premium"]},
+    ],
+    field_ops={"tags": FieldOp.array_append()},
+    # highlight-end
+)
+
+res = client.query(
+    collection_name="users",
+    filter="pk in [1, 2]",
+    output_fields=["pk", "tags"],
+)
+print(res)
+
+# Example output:
+# data: [
+#   "{'pk': 1, 'tags': ['new', 'premium', 'vip']}",
+#   "{'pk': 2, 'tags': ['new', 'trial', 'premium']}"
+# ]
+
+# 4. Remove matching tags without replacing the full ARRAY field
+client.upsert(
+    collection_name="users",
+    # highlight-start
+    data=[
+        {"pk": 1, "tags": ["new"]},
+        {"pk": 2, "tags": ["trial"]},
+    ],
+    field_ops={"tags": FieldOp.array_remove()},
+    # highlight-end
+)
+
+res = client.query(
+    collection_name="users",
+    filter="pk in [1, 2]",
+    output_fields=["pk", "tags"],
+)
+print(res)
+
+# Example output:
+# data: [
+#   "{'pk': 1, 'tags': ['premium', 'vip']}",
+#   "{'pk': 2, 'tags': ['new', 'premium']}"
+# ]
+```
+
+```java
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.ConsistencyLevel;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.vector.request.InsertReq;
+import io.milvus.v2.service.vector.request.QueryReq;
+import io.milvus.v2.service.vector.request.UpsertReq;
+import io.milvus.v2.service.vector.response.QueryResp;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build());
+Gson gson = new Gson();
+
+// 1. Create a collection with an ARRAY<VARCHAR> field
+CreateCollectionReq.CollectionSchema schema = CreateCollectionReq.CollectionSchema.builder()
+        .enableDynamicField(false)
+        .build();
+
+schema.addField(AddFieldReq.builder()
+        .fieldName("pk")
+        .dataType(DataType.Int64)
+        .isPrimaryKey(true)
+        .build());
+schema.addField(AddFieldReq.builder()
+        .fieldName("embedding")
+        .dataType(DataType.FloatVector)
+        .dimension(5)
+        .build());
+schema.addField(AddFieldReq.builder()
+        .fieldName("tags")
+        .dataType(DataType.Array)
+        .elementType(DataType.VarChar)
+        .maxCapacity(8)
+        .maxLength(32)
+        .build());
+
+List<IndexParam> indexParams = Collections.singletonList(IndexParam.builder()
+        .fieldName("embedding")
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .metricType(IndexParam.MetricType.L2)
+        .build());
+
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("users")
+        .collectionSchema(schema)
+        .indexParams(indexParams)
+        .consistencyLevel(ConsistencyLevel.STRONG)
+        .build());
+
+// 2. Seed two entities
+List<JsonObject> data = Arrays.asList(
+        gson.fromJson("{\"pk\": 1, \"embedding\": [0.1, 0.2, 0.3, 0.4, 0.5], \"tags\": [\"new\"]}", JsonObject.class),
+        gson.fromJson("{\"pk\": 2, \"embedding\": [0.6, 0.7, 0.8, 0.9, 1.0], \"tags\": [\"new\", \"trial\"]}", JsonObject.class)
+);
+
+client.insert(InsertReq.builder()
+        .collectionName("users")
+        .data(data)
+        .build());
+
+// 3. Append tags without reading the existing ARRAY values
+List<JsonObject> appendData = Arrays.asList(
+        gson.fromJson("{\"pk\": 1, \"tags\": [\"premium\", \"vip\"]}", JsonObject.class),
+        gson.fromJson("{\"pk\": 2, \"tags\": [\"premium\"]}", JsonObject.class)
+);
+
+UpsertReq.FieldPartialUpdateOp appendTags = UpsertReq.FieldPartialUpdateOp.builder()
+        .fieldName("tags")
+        .opType(UpsertReq.FieldPartialUpdateOp.OpType.ARRAY_APPEND)
+        .build();
+
+client.upsert(UpsertReq.builder()
+        .collectionName("users")
+        // highlight-start
+        .data(appendData)
+        .fieldOps(Collections.singletonList(appendTags))
+        // highlight-end
+        .build());
+
+QueryResp res = client.query(QueryReq.builder()
+        .collectionName("users")
+        .filter("pk in [1, 2]")
+        .outputFields(Arrays.asList("pk", "tags"))
+        .consistencyLevel(ConsistencyLevel.STRONG)
+        .build());
+System.out.println(res);
+
+// Example output:
+// [
+//   {"pk": 1, "tags": ["new", "premium", "vip"]},
+//   {"pk": 2, "tags": ["new", "trial", "premium"]}
+// ]
+
+// 4. Remove matching tags without replacing the full ARRAY field
+List<JsonObject> removeData = Arrays.asList(
+        gson.fromJson("{\"pk\": 1, \"tags\": [\"new\"]}", JsonObject.class),
+        gson.fromJson("{\"pk\": 2, \"tags\": [\"trial\"]}", JsonObject.class)
+);
+
+UpsertReq.FieldPartialUpdateOp removeTags = UpsertReq.FieldPartialUpdateOp.builder()
+        .fieldName("tags")
+        .opType(UpsertReq.FieldPartialUpdateOp.OpType.ARRAY_REMOVE)
+        .build();
+
+client.upsert(UpsertReq.builder()
+        .collectionName("users")
+        // highlight-start
+        .data(removeData)
+        .fieldOps(Collections.singletonList(removeTags))
+        // highlight-end
+        .build());
+
+res = client.query(QueryReq.builder()
+        .collectionName("users")
+        .filter("pk in [1, 2]")
+        .outputFields(Arrays.asList("pk", "tags"))
+        .consistencyLevel(ConsistencyLevel.STRONG)
+        .build());
+System.out.println(res);
+
+// Example output:
+// [
+//   {"pk": 1, "tags": ["premium", "vip"]},
+//   {"pk": 2, "tags": ["new", "premium"]}
+// ]
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```

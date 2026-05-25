@@ -8,6 +8,30 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.6.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.6.17
+
+Release date: May 22, 2026
+
+| Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
+| -------------- | ------------------ | ------------------- | ---------------- | -------------- |
+| 2.6.17         | 2.6.14             | 2.6.14              | 2.6.20           | 2.6.4          |
+
+We are excited to announce the release of Milvus v2.6.17! This release introduces Array field partial update operators, improves load/search isolation, and resolves several stability and query routing issues.
+
+### Improvements
+
+- Added [`ARRAY_APPEND` and `ARRAY_REMOVE` partial update operators](upsert-entities.md#Upsert-ARRAY-fields-with-partial-update-operators) for Array fields, exposed through both gRPC and REST upsert APIs ([#49328](https://github.com/milvus-io/milvus/pull/49328), [#49724](https://github.com/milvus-io/milvus/pull/49724))
+- Improved load/search isolation by using separate C++ executor pools and converting SegmentLoad and ReopenSegment to async futures with proper context cancellation ([#49764](https://github.com/milvus-io/milvus/pull/49764))
+
+### Bug fixes
+
+- Fixed an issue where filter expression templates could not be used with string field predicates ([#49703](https://github.com/milvus-io/milvus/pull/49703))
+- Fixed an issue where stale segment distribution updates after delegator close could corrupt query routing ([#49727](https://github.com/milvus-io/milvus/pull/49727))
+- Fixed an issue where releasing a collection could leave stale replica state due to premature metadata cleanup in QueryCoord ([#49730](https://github.com/milvus-io/milvus/pull/49730))
+- Fixed an issue where transient shard errors caused replicas to be blacklisted, leading to unnecessary query failures and degraded availability ([#49740](https://github.com/milvus-io/milvus/pull/49740), [#49776](https://github.com/milvus-io/milvus/pull/49776))
+- Fixed missing GetReplicateConfiguration RPC forwarding in the proxy service ([#49810](https://github.com/milvus-io/milvus/pull/49810))
+- Fixed a potential use-after-free crash when closing the packed writer multiple times or during compaction cleanup paths ([#49816](https://github.com/milvus-io/milvus/pull/49816))
+
 ## v2.6.16
 
 Release date: May 14, 2026
