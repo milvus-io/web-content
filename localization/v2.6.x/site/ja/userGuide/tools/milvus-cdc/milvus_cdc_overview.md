@@ -20,10 +20,6 @@ title: Milvus CDC
       </svg>
     </button></h1><p>Milvus CDC (Change Data Capture)は、Milvusクラスタ間のデータ変更をレプリケートします。CDCを使用してMilvusのプライマリ-スタンバイディザスタリカバリトポロジを構築することができます。</p>
 <p>プライマリ-スタンバイ・トポロジでは、1つのクラスタがプライマリとして動作し、書き込みを受け付けます。1つまたは複数のスタンバイクラスタはプライマリからの変更を継続的に受信し、読み取りトラフィックに対応できます。プライマリクラスタが利用できなくなったり、メンテナンスが必要になったりした場合は、サービストラフィックをスタンバイクラスタに切り替えることができます。</p>
-<p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cdc-overview.png" alt="CDC workflow" class="doc-image" id="cdc-workflow" />
-   </span> <span class="img-wrapper"> <span>CDCワークフロー</span> </span></p>
 <h2 id="Architecture" class="common-anchor-header">アーキテクチャ<button data-href="#Architecture" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

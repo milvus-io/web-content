@@ -21,11 +21,7 @@ title: Milvus CDC
         ></path>
       </svg>
     </button></h1><p>Milvus CDC (Change Data Capture) mereplikasi perubahan data dari satu cluster Milvus ke cluster lainnya. Anda bisa menggunakan CDC untuk membangun topologi pemulihan bencana siaga-primer untuk Milvus.</p>
-<p>Dalam topologi primary-standby, satu cluster bertindak sebagai primary dan menerima penulisan. Satu atau lebih cluster siaga secara terus menerus menerima perubahan dari cluster utama dan dapat melayani lalu lintas baca. Ketika cluster utama tidak tersedia atau membutuhkan pemeliharaan, Anda dapat mengalihkan trafik layanan ke cluster siaga.</p>
-<p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cdc-overview.png" alt="CDC workflow" class="doc-image" id="cdc-workflow" />
-   </span> <span class="img-wrapper"> <span>Alur kerja CDC</span> </span></p>
+<p>Dalam topologi primary-standby, satu cluster bertindak sebagai primary dan menerima penulisan. Satu atau lebih cluster siaga secara terus menerus menerima perubahan dari cluster utama dan dapat melayani lalu lintas baca. Ketika cluster utama tidak tersedia atau membutuhkan pemeliharaan, Anda bisa mengalihkan lalu lintas layanan ke cluster siaga.</p>
 <h2 id="Architecture" class="common-anchor-header">Arsitektur<button data-href="#Architecture" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +37,7 @@ title: Milvus CDC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Topologi tipikal berisi:</p>
+    </button></h2><p>Topologi yang umum terdiri dari:</p>
 <ul>
 <li><strong>Cluster primer</strong>: Cluster sumber untuk replikasi. Klaster ini menerima pembacaan dan penulisan.</li>
 <li><strong>Klaster siaga</strong>: Sebuah cluster target untuk replikasi. Cluster ini menerima perubahan dari cluster primer dan hanya dapat dibaca saat masih dalam keadaan siaga.</li>
@@ -162,7 +158,7 @@ Primary cluster A  -- CDC replication --&gt;  Standby cluster B
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus CDC saat ini memiliki beberapa batasan berikut:</p>
+    </button></h2><p>Milvus CDC saat ini memiliki batasan sebagai berikut:</p>
 <ul>
 <li>Hanya mendukung topologi <strong>primer tunggal</strong>.</li>
 <li><strong>Tidak</strong> mendukung penulisan aktif-aktif atau multi-primer.</li>

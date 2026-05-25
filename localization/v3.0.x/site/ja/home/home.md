@@ -112,12 +112,12 @@ Milvusドキュメントへようこそ！</h1></p>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><em>2026年3月 - Milvus 2.6.xアップデート</em></p>
+    </button></h2><p><em>2026年5月 - Milvus 3.0.xアップデート</em></p>
 <ul>
-<li>プロンプトガイドを含む<a href="/docs/ja/milvus_for_agents.md">Milvus for AI Agents</a>セクションを追加。</li>
-<li><a href="/docs/ja/google-gemini.md">Geminiエンベッディング機能の</a>使用方法を追加。</li>
-<li><a href="/docs/ja/primary-key-search.md">主キーによる検索</a>方法のガイダンスを追加。</li>
-<li>検索結果の<a href="/docs/ja/text-highlighter.md">テキストハイライトの</a>使用方法に関するガイダンスを追加。</li>
-<li><a href="/docs/ja/geometry-field.md">geometryフィールド</a>、<a href="/docs/ja/timestamptz-field.md">timestamptzフィールド</a>、<a href="/docs/ja/tiered-storage-overview.md">階層型ストレージ</a>、<a href="/docs/ja/array-of-structs.md">構造体の配列についての</a>説明を追加。</li>
+<li><a href="/docs/ja/release_notes.md">リリースノートに</a>Milvus 3.0.xのハイライト（外部コレクション、スナップショット、ストレージV3、レイクエコシステムの統合など）を追加しました。</li>
+<li><a href="/docs/ja/single-vector-search.md#Sort-Search-Results-by-Scalar-Fields--Milvus-30x">スカラーフィールドによる検索結果の並べ替えおよび</a> <a href="/docs/ja/get-and-scalar-query.md#Aggregate-Query-Results--Milvus-30x">クエリ結果の集約</a>方法に関するガイダンスを追加しました。</li>
+<li><a href="/docs/ja/nullable-and-default.md">NULL可能なベクトル・フィールドと</a> <a href="/docs/ja/set-collection-ttl.md#Set-entity-level-TTL--Milvus-30x">エンティティ・レベルTTLの</a>使用方法に関するガイダンスを追加しました。</li>
+<li>サーバー側のMinHash署名に<a href="/docs/ja/minhash-function.md">MinHash関数を</a>使用する方法に関するガイダンスを追加しました。</li>
+<li><a href="/docs/ja/search-with-embedding-lists.md">埋め込みリストを使用した検索と</a> <a href="/docs/ja/force-merge.md">強制マージ圧縮の</a>トリガー方法に関するガイダンスを追加しました。</li>
 </ul>
 </div>

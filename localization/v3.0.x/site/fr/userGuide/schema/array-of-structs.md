@@ -86,43 +86,13 @@ summary: >-
 <li><p><strong>Types de données</strong></p>
 <p>Lorsque vous créez une collection, vous pouvez utiliser le type Struct comme type de données pour les éléments d'un champ Array. Toutefois, il n'est pas possible d'ajouter un StructArray à une collection existante et Milvus ne prend pas en charge l'utilisation du type Struct comme type de données pour un champ de collection.</p>
 <p>Les structures d'un champ Tableau partagent le même schéma, qui doit être défini lors de la création du champ Tableau.</p>
-<p>Un schéma de structure contient à la fois des vecteurs et des champs scalaires, comme indiqué ci-dessous :</p>
-<p><Grid columnSize="2" widthRatios="50,50"></p>
-<pre><code translate="no">  &lt;div&gt;
-
-      Applicable vector fields:
-
-      - `FLOAT_VECTOR`
-
-      - `FLOAT16_VECTOR`
-
-      - `BFLOAT16_VECTOR`
-
-      - `INT8_VECTOR`
-
-      - `BINARY_VECTOR`
-
-  &lt;/div&gt;
-
-  &lt;div&gt;
-
-      Applicable scalar fields:
-
-      - `VARCHAR`
-
-      - `INT8/16/32/64`
-
-      - `FLOAT`
-
-      - `DOUBLE`
-
-      - `BOOL`
-
-  &lt;/div&gt;
-</code></pre>
-<p></Grid></p>
+<p>Un schéma Struct contient à la fois des vecteurs et des champs scalaires, comme indiqué ci-dessous :</p>
+<ul>
+<li><p>Types de données vectorielles applicables : <code translate="no">FLOAT_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code>, <code translate="no">INT8_VECTOR</code>, et <code translate="no">BINARY_VECTOR</code>.</p></li>
+<li><p>Types de données scalaires applicables : <code translate="no">VARCHAR</code>, <code translate="no">INT8/16/32/64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, et <code translate="no">BOOL</code>.</p></li>
+</ul>
 <p>Le nombre de champs vectoriels au niveau de la collection et dans les structures combinées ne doit pas être supérieur ou égal à 10.</p></li>
-<li><p><strong>Valeurs nulles et par défaut</strong></p>
+<li><p><strong>Valeurs nulles et valeurs par défaut</strong></p>
 <p>Un champ StructArray n'est pas nullable et n'accepte pas de valeur par défaut.</p></li>
 <li><p><strong>Fonction</strong></p>
 <p>Vous ne pouvez pas utiliser de fonction pour dériver un champ vectoriel d'un champ scalaire dans une structure.</p></li>
@@ -152,7 +122,7 @@ summary: >-
 <li><p><strong>Données d'insertion</strong></p>
 <p>Les structures ne prennent pas en charge les insertions en mode fusion. Cependant, vous pouvez toujours effectuer des insertions en mode override pour mettre à jour les données dans les Structs. Pour plus d'informations sur les différences entre l'insertion en mode fusion et en mode remplacement, reportez-vous à <a href="/docs/fr/upsert-entities.md#Overview">Upsert Entities</a>.</p></li>
 <li><p><strong>Filtrage scalaire</strong></p>
-<p>Vous pouvez utiliser les <strong>filtres d'éléments</strong> et les <strong>opérateurs de la famille match</strong> pour effectuer un filtrage scalaire sur un sous-champ scalaire d'un champ StructArray. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/array-of-structs.md#Scalar-filtering-in-a-StructArray-field">Filtrage scalaire dans un champ StructArray</a>.</p></li>
+<p>Vous pouvez utiliser les <strong>filtres d'éléments</strong> et les <strong>opérateurs de la famille match</strong> pour effectuer un filtrage scalaire sur un sous-champ scalaire d'un champ StructArray. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/array-of-structs.md#Scalar-filtering-in-a-StructArray-field">Filtrage scalaire dans une zone StructArray</a>.</p></li>
 </ul>
 <h2 id="Add-a-StructArray" class="common-anchor-header">Ajouter un champ StructArray<button data-href="#Add-a-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -177,7 +147,7 @@ summary: >-
 <li><p>Attribuez à l'attribut <code translate="no">max_capacity</code> du champ une valeur appropriée pour spécifier le nombre maximum de structures que chaque entité peut contenir dans ce champ.</p></li>
 <li><p><strong>(Facultatif</strong>) Vous pouvez définir <code translate="no">mmap.enabled</code> pour n'importe quel champ de l'élément Struct afin d'équilibrer les données chaudes et froides dans la structure.</p></li>
 </ol>
-<p>Voici comment définir un schéma de collection qui inclut un champ StructArray :</p>
+<p>Voici comment définir un schéma de collection comprenant un champ StructArray :</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -817,7 +787,7 @@ client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vous pouvez effectuer des recherches vectorielles sur les champs vectoriels d'une collection et dans un StructArray.</p>
+    </button></h2><p>Vous pouvez effectuer des recherches vectorielles sur les champs vectoriels d'une collection et d'un StructArray.</p>
 <p>Plus précisément, vous devez concaténer le nom du champ StructArray et ceux des champs vectoriels cibles dans les éléments Struct en tant que valeur du paramètre <code translate="no">anns_field</code> dans une requête de recherche, et utiliser <code translate="no">EmbeddingList</code> pour organiser les vecteurs de requête de manière ordonnée.</p>
 <div class="alert note">
 <p>Milvus fournit <code translate="no">EmbeddingList</code> pour vous aider à organiser plus proprement les vecteurs de requête pour les recherches sur une liste d'incorporation dans un StructArray. Chaque site <code translate="no">EmbeddingList</code> contient au moins un vecteur d'intégration et attend en retour un certain nombre d'entités topK.</p>

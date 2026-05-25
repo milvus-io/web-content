@@ -19,11 +19,7 @@ title: Milvus CDC
         ></path>
       </svg>
     </button></h1><p>Milvus CDC(변경 데이터 캡처)는 Milvus 클러스터 간에 데이터 변경 사항을 복제합니다. CDC를 사용하여 Milvus의 기본-대기 재해 복구 토폴로지를 구축할 수 있습니다.</p>
-<p>기본-대기 토폴로지에서는 하나의 클러스터가 기본 역할을 하며 쓰기를 수락합니다. 하나 이상의 대기 클러스터는 기본 클러스터로부터 지속적으로 변경 사항을 수신하고 읽기 트래픽을 처리할 수 있습니다. 기본 클러스터를 사용할 수 없게 되거나 유지보수가 필요한 경우 서비스 트래픽을 대기 클러스터로 전환할 수 있습니다.</p>
-<p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cdc-overview.png" alt="CDC workflow" class="doc-image" id="cdc-workflow" />
-   </span> <span class="img-wrapper"> <span>CDC 워크플로</span> </span></p>
+<p>기본-대기 토폴로지에서는 하나의 클러스터가 기본 역할을 하며 쓰기를 수락합니다. 하나 이상의 대기 클러스터는 기본 클러스터로부터 지속적으로 변경 사항을 수신하고 읽기 트래픽을 처리할 수 있습니다. 기본 클러스터를 사용할 수 없게 되거나 유지보수가 필요한 경우, 서비스 트래픽을 대기 클러스터로 전환할 수 있습니다.</p>
 <h2 id="Architecture" class="common-anchor-header">아키텍처<button data-href="#Architecture" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +37,7 @@ title: Milvus CDC
       </svg>
     </button></h2><p>일반적인 토폴로지는 다음과 같습니다:</p>
 <ul>
-<li><strong>기본 클러스터</strong>: 복제를 위한 소스 클러스터. 읽기 및 쓰기를 허용합니다.</li>
+<li><strong>기본 클러스터</strong>: 복제를 위한 소스 클러스터입니다. 읽기 및 쓰기를 허용합니다.</li>
 <li><strong>대기 클러스터</strong>: 복제를 위한 대상 클러스터입니다. 주 클러스터로부터 변경 내용을 수신하며 대기 상태인 동안에는 읽기 전용입니다.</li>
 <li><strong>CDC 노드</strong>: 현재 기본 클러스터에서 대기 클러스터로 WAL 변경 사항을 전달하는 Milvus 구성 요소입니다. 전환 또는 장애 조치 후 기본 클러스터가 될 수 있는 각 클러스터에 CDC를 배포합니다.</li>
 <li><strong>복제 토폴로지</strong>: 클러스터-a -&gt; 클러스터-b와 같이 구성된 소스-대상 관계. 다음은 토폴로지에 대한 그림입니다. <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cdc-overview.png" alt="CDC workflow" class="doc-image" id="cdc-workflow" /><span>CDC 워크플로우</span> </span></li>
@@ -139,7 +135,7 @@ Primary cluster A  -- CDC replication --&gt;  Standby cluster B
         ></path>
       </svg>
     </button></h2><p>CDC 지연은 기본 클러스터에 기록되었지만 아직 대기 클러스터에 적용되지 않은 데이터의 양을 말합니다.</p>
-<p>CDC 지연은 두 복구 옵션 모두에 영향을 미칩니다:</p>
+<p>CDC 지연은 두 복구 옵션 모두에 영향을 줍니다:</p>
 <ul>
 <li>전환 중에는 일반적으로 CDC 지연이 낮을수록 작업이 더 빨리 완료됩니다.</li>
 <li>장애 조치 중에 CDC 지연은 원래 기본 클러스터를 사용할 수 없는 경우 손실될 수 있는 데이터 창을 나타냅니다.</li>

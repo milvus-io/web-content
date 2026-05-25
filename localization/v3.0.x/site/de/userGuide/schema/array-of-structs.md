@@ -87,42 +87,12 @@ summary: >-
 <p>Wenn Sie eine Sammlung erstellen, können Sie den Typ Struct als Datentyp für die Elemente in einem Array-Feld verwenden. Sie können jedoch kein StructArray zu einer bestehenden Sammlung hinzufügen, und Milvus unterstützt nicht die Verwendung des Struct-Typs als Datentyp für ein Sammlungsfeld.</p>
 <p>Die Structs in einem Array-Feld haben das gleiche Schema, das beim Erstellen des Array-Feldes definiert werden sollte.</p>
 <p>Ein Struct-Schema enthält sowohl Vektoren als auch skalare Felder, wie unten aufgeführt:</p>
-<p><Grid columnSize="2" widthRatios="50,50"></p>
-<pre><code translate="no">  &lt;div&gt;
-
-      Applicable vector fields:
-
-      - `FLOAT_VECTOR`
-
-      - `FLOAT16_VECTOR`
-
-      - `BFLOAT16_VECTOR`
-
-      - `INT8_VECTOR`
-
-      - `BINARY_VECTOR`
-
-  &lt;/div&gt;
-
-  &lt;div&gt;
-
-      Applicable scalar fields:
-
-      - `VARCHAR`
-
-      - `INT8/16/32/64`
-
-      - `FLOAT`
-
-      - `DOUBLE`
-
-      - `BOOL`
-
-  &lt;/div&gt;
-</code></pre>
-<p></Grid></p>
-<p>Die Anzahl der Vektorfelder sowohl auf der Sammlungsebene als auch in den Structs zusammen sollte nicht größer oder gleich 10 sein.</p></li>
-<li><p><strong>Nullbare und Standardwerte</strong></p>
+<ul>
+<li><p>Anwendbare Vektordatentypen: <code translate="no">FLOAT_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code>, <code translate="no">INT8_VECTOR</code> und <code translate="no">BINARY_VECTOR</code>.</p></li>
+<li><p>Anwendbare skalare Datentypen: <code translate="no">VARCHAR</code>, <code translate="no">INT8/16/32/64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, und <code translate="no">BOOL</code>.</p></li>
+</ul>
+<p>Halten Sie die Anzahl der Vektorfelder sowohl auf der Sammlungsebene als auch in den kombinierten Structs auf höchstens 10 begrenzt.</p></li>
+<li><p><strong>Nullable &amp; Standardwerte</strong></p>
 <p>Ein StructArray-Feld ist nicht löschbar und akzeptiert keinen Standardwert.</p></li>
 <li><p><strong>Funktion</strong></p>
 <p>Sie können keine Funktion verwenden, um ein Vektorfeld aus einem Skalarfeld innerhalb einer Struct abzuleiten.</p></li>
@@ -391,7 +361,7 @@ SCHEMA=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Die hervorgehobenen Zeilen im obigen Codebeispiel veranschaulichen, wie man ein StructArray in ein Auflistungsschema einfügt.</p>
-<h2 id="Set-index-params" class="common-anchor-header">Index-Parameter festlegen<button data-href="#Set-index-params" class="anchor-icon" translate="no">
+<h2 id="Set-index-params" class="common-anchor-header">Index-Parameter setzen<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

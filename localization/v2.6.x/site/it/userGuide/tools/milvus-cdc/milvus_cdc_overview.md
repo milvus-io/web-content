@@ -22,10 +22,6 @@ title: Milvus CDC
       </svg>
     </button></h1><p>Milvus CDC (Change Data Capture) replica le modifiche dei dati da un cluster Milvus a un altro. È possibile utilizzare CDC per creare una topologia di disaster recovery primaria-standby per Milvus.</p>
 <p>In una topologia primario-standby, un cluster agisce come primario e accetta le scritture. Uno o più cluster in standby ricevono continuamente le modifiche dal primario e possono servire il traffico di lettura. Quando il cluster primario diventa indisponibile o necessita di manutenzione, è possibile passare il traffico di servizio a un cluster standby.</p>
-<p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cdc-overview.png" alt="CDC workflow" class="doc-image" id="cdc-workflow" />
-   </span> <span class="img-wrapper"> <span>Flusso di lavoro CDC</span> </span></p>
 <h2 id="Architecture" class="common-anchor-header">Architettura<button data-href="#Architecture" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -216,7 +212,7 @@ Primary cluster A  -- CDC replication --&gt;  Standby cluster B
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>No. Milvus CDC è stato progettato per una topologia con una sola primaria. La scrittura su più cluster allo stesso tempo può causare la divisione del cervello e la divergenza dei dati.</p>
+    </button></h3><p>No. Milvus CDC è stato progettato per una topologia a priorità singola. La scrittura su più cluster contemporaneamente può causare la divisione del cervello e la divergenza dei dati.</p>
 <h3 id="Does-switchover-lose-data" class="common-anchor-header">Lo switchover fa perdere dati?<button data-href="#Does-switchover-lose-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

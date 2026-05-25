@@ -57,7 +57,7 @@ summary: StructArrayフィールドを使用して、ベクトルフィールド
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>自律走行からマルチモーダル検索に至るまで、現代のAIアプリケーションは、ネスト化された異種データにますます依存するようになっている。従来のフラットなデータモデルでは、<strong>「1つのドキュメントに多くの注釈が付けられたチャンク</strong>」や<strong>「1つの運転シーンに複数の観察された操作</strong>」のような複雑な関係を表現するのに苦労する。そこでMilvusのStructArrayデータ型が威力を発揮します。</p>
+    </button></h2><p>自律走行からマルチモーダル検索に至るまで、現代のAIアプリケーションは、ネスト化された異種データにますます依存するようになっている。従来のフラットなデータモデルでは、<strong>「1つのドキュメントに多くの注釈が付けられたチャンク</strong>」や<strong>「1つの運転シーンに複数の観察された操作</strong>」といった複雑な関係を表現するのに苦労する。そこでMilvusのStructArrayデータ型が威力を発揮します。</p>
 <p>StructArrayフィールドがアプリケーションのシナリオに適しているかどうかを素早く判断するには、以下の点を考慮してください：</p>
 <ul>
 <li><p>データが階層構造になっている（例えば、1つのドキュメントに多くの注釈が付いたチャンク）。</p></li>
@@ -84,44 +84,14 @@ summary: StructArrayフィールドを使用して、ベクトルフィールド
 <li><p><strong>データ型</strong></p>
 <p>コレクションを作成する際、Array フィールドの要素のデータ型として Struct 型を使用できます。しかし、既存のコレクションにStructArrayを追加することはできませんし、Milvusはコレクションフィールドのデータ型としてStruct型を使用することをサポートしていません。</p>
 <p>ArrayフィールドのStructは同じスキーマを共有しており、Arrayフィールドの作成時に定義する必要があります。</p>
-<p>Struct スキーマには、以下のようにベクトルフィールドとスカラーフィールドの両方が含まれます：</p>
-<p><Grid columnSize="2" widthRatios="50,50"></p>
-<pre><code translate="no">  &lt;div&gt;
-
-      Applicable vector fields:
-
-      - `FLOAT_VECTOR`
-
-      - `FLOAT16_VECTOR`
-
-      - `BFLOAT16_VECTOR`
-
-      - `INT8_VECTOR`
-
-      - `BINARY_VECTOR`
-
-  &lt;/div&gt;
-
-  &lt;div&gt;
-
-      Applicable scalar fields:
-
-      - `VARCHAR`
-
-      - `INT8/16/32/64`
-
-      - `FLOAT`
-
-      - `DOUBLE`
-
-      - `BOOL`
-
-  &lt;/div&gt;
-</code></pre>
-<p></Grid></p>
-<p>ベクトル・フィールドの数は、コレクション・レベルでも Structs でも 10 以下にしてください。</p></li>
+<p>Struct スキーマには、以下に示すようにベクトル・フィールドとスカラー・フィールドの両方が含まれます：</p>
+<ul>
+<li><p>適用可能なベクトル・データ型：<code translate="no">FLOAT_VECTOR</code> <code translate="no">FLOAT16_VECTOR</code> 、<code translate="no">BFLOAT16_VECTOR</code> 、<code translate="no">INT8_VECTOR</code> 、<code translate="no">BINARY_VECTOR</code> 。</p></li>
+<li><p>適用可能なスカラー・データ型：<code translate="no">VARCHAR</code> <code translate="no">INT8/16/32/64</code> 、<code translate="no">FLOAT</code> 、<code translate="no">DOUBLE</code> 、<code translate="no">BOOL</code> 。</p></li>
+</ul>
+<p>ベクトル・フィールドの数は、コレクション・レベルと Structs の両方を合わせて 10 以下にしてください。</p></li>
 <li><p><strong>Nullable とデフォルト値</strong></p>
-<p>StructArray フィールドは null 可能ではなく、デフォルト値も受け付けません。</p></li>
+<p>StructArrayフィールドはNULL可能ではなく、デフォルト値も受け付けません。</p></li>
 <li><p><strong>関数</strong></p>
 <p>Struct 内のスカラーフィールドからベクトルフィールドを導出するために関数を使用することはできません。</p></li>
 <li><p><strong>インデックス型とメトリック型</strong></p>
@@ -819,7 +789,7 @@ client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot
 <p>具体的には、検索リクエストの<code translate="no">anns_field</code> パラメータの値として、Struct 要素内の StructArray フィールド名と対象となるベクトルフィールド名を連結し、<code translate="no">EmbeddingList</code> を使用してクエリベクトルを整然と整理する必要があります。</p>
 <div class="alert note">
 <p>Milvusでは、StructArray内のエンベッディングリストに対する検索のクエリベクトルをよりきれいに整理するために、<code translate="no">EmbeddingList</code> 。各<code translate="no">EmbeddingList</code> は少なくともベクトル埋め込みを含み、返り値として topK エンティティ数を期待します。</p>
-<p>しかし、<code translate="no">EmbeddingList</code> は、<code translate="no">search_iterator()</code> リクエストはおろか、範囲検索やグループ化検索パラメーターを持たない<code translate="no">search()</code> リクエストでのみ使用できる。</p>
+<p>しかし、<code translate="no">EmbeddingList</code> は、<code translate="no">search_iterator()</code> リクエストはおろか、範囲検索やグループ化検索パラメーターのない<code translate="no">search()</code> リクエストでしか使用できない。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -1148,7 +1118,7 @@ element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>) &amp;&amp; 
 <li><p><code translate="no">MATCH_MOST(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>
 <p>これは、<code translate="no">text</code> のサブフィールドに、"Red" で始まるチャンクを多くとも<code translate="no">k</code> 含む実体を返す。</p></li>
 <li><p><code translate="no">MATCH_EXACT(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>
-<p><code translate="no">k</code> これは、<code translate="no">text</code> サブフィールドに "Red" で始まるチャンクを正確に含むエンティティを返す。</p></li>
+<p>これは、<code translate="no">text</code> サブフィールドに "Red" で始まるチャンクをちょうど<code translate="no">k</code> 個含むエンティティを返す。</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">次のステップ<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"

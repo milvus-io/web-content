@@ -62,7 +62,7 @@ summary: >-
     </button></h2><p>Aplikasi AI modern, mulai dari pengemudian otonom hingga pengambilan multimodal, semakin bergantung pada data yang bersarang dan heterogen. Model data datar tradisional sulit untuk merepresentasikan hubungan yang kompleks seperti<strong>"satu dokumen dengan banyak potongan beranotasi</strong>" atau<strong>"satu adegan mengemudi dengan beberapa manuver yang diamati</strong>". Di sinilah tipe data StructArray di Milvus bersinar.</p>
 <p>Untuk menentukan dengan cepat apakah bidang StructArray sesuai dengan skenario aplikasi Anda, pertimbangkan apakah:</p>
 <ul>
-<li><p>Data Anda berada dalam struktur hirarkis, seperti satu dokumen dengan banyak potongan beranotasi.</p></li>
+<li><p>Data Anda berada dalam struktur hirarkis, seperti satu dokumen dengan banyak bagian yang dianotasi.</p></li>
 <li><p>Hasil pencarian harus berupa dokumen, bukan potongan-potongan, seperti pada contoh di atas.</p></li>
 <li><p>Hasil pencarian berisi entitas duplikat yang sangat banyak, dan Anda kesulitan untuk mendapatkan hasil akhir dengan menggunakan teknik seperti pengelompokan, deduplikasi, dan pengurutan ulang.</p></li>
 </ul>
@@ -86,43 +86,13 @@ summary: >-
 <li><p><strong>Tipe data</strong></p>
 <p>Ketika Anda membuat koleksi, Anda dapat menggunakan tipe Struct sebagai tipe data untuk elemen-elemen di dalam bidang Array. Namun, Anda tidak dapat menambahkan StructArray ke koleksi yang sudah ada, dan Milvus tidak mendukung penggunaan tipe Struct sebagai tipe data untuk field koleksi.</p>
 <p>Struct dalam sebuah field Array memiliki skema yang sama, yang harus didefinisikan saat Anda membuat field Array.</p>
-<p>Skema Struct berisi bidang vektor dan skalar, seperti yang tercantum di bawah ini:</p>
-<p><Grid columnSize="2" widthRatios="50,50"></p>
-<pre><code translate="no">  &lt;div&gt;
-
-      Applicable vector fields:
-
-      - `FLOAT_VECTOR`
-
-      - `FLOAT16_VECTOR`
-
-      - `BFLOAT16_VECTOR`
-
-      - `INT8_VECTOR`
-
-      - `BINARY_VECTOR`
-
-  &lt;/div&gt;
-
-  &lt;div&gt;
-
-      Applicable scalar fields:
-
-      - `VARCHAR`
-
-      - `INT8/16/32/64`
-
-      - `FLOAT`
-
-      - `DOUBLE`
-
-      - `BOOL`
-
-  &lt;/div&gt;
-</code></pre>
-<p></Grid></p>
-<p>Jaga agar jumlah bidang vektor baik di tingkat koleksi maupun di dalam gabungan Struct tidak lebih dari atau sama dengan 10.</p></li>
-<li><p><strong>Nilai yang dapat dinolkan &amp; nilai default</strong></p>
+<p>Skema Struct berisi vektor dan bidang skalar, seperti yang tercantum di bawah ini:</p>
+<ul>
+<li><p>Tipe data vektor yang berlaku: <code translate="no">FLOAT_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code>, <code translate="no">INT8_VECTOR</code>, dan <code translate="no">BINARY_VECTOR</code>.</p></li>
+<li><p>Tipe data skalar yang berlaku: <code translate="no">VARCHAR</code>, <code translate="no">INT8/16/32/64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, dan <code translate="no">BOOL</code>.</p></li>
+</ul>
+<p>Jaga agar jumlah bidang vektor baik di tingkat koleksi maupun di Structs yang digabungkan tidak lebih besar atau sama dengan 10.</p></li>
+<li><p><strong>Nilai yang dapat dinihilkan &amp; nilai default</strong></p>
 <p>Bidang StructArray tidak dapat dinullkan dan tidak menerima nilai default apa pun.</p></li>
 <li><p><strong>Fungsi</strong></p>
 <p>Anda tidak dapat menggunakan fungsi untuk mendapatkan bidang vektor dari bidang skalar dalam sebuah Struct.</p></li>
@@ -1146,7 +1116,7 @@ element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>) &amp;&amp; 
 <li><p><code translate="no">MATCH_ALL(chunks, $[text] LIKE &quot;Red%&quot;)</code></p>
 <p>Ini mengembalikan entitas yang sub-bidang teksnya di semua potongan dimulai dengan "Merah".</p></li>
 <li><p><code translate="no">MATCH_LEAST(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>
-<p>Ini mengembalikan entitas yang mengandung setidaknya potongan <code translate="no">k</code> yang dimulai dengan "Red" di sub-bidang <code translate="no">text</code>.</p></li>
+<p>Ini mengembalikan entitas yang berisi setidaknya potongan <code translate="no">k</code> yang dimulai dengan "Red" di sub-bidang <code translate="no">text</code>.</p></li>
 <li><p><code translate="no">MATCH_MOST(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>
 <p>Ini mengembalikan entitas yang berisi paling banyak potongan <code translate="no">k</code> yang dimulai dengan "Merah" di sub-bidang <code translate="no">text</code>.</p></li>
 <li><p><code translate="no">MATCH_EXACT(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>

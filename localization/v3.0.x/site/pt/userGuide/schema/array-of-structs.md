@@ -84,44 +84,14 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p><strong>Tipos de dados</strong></p>
-<p>Quando cria uma coleção, pode utilizar o tipo Struct como tipo de dados para os elementos de um campo Array. No entanto, não é possível adicionar um StructArray a uma coleção existente e o Milvus não suporta a utilização do tipo Struct como tipo de dados para um campo de coleção.</p>
+<p>Quando cria uma coleção, pode utilizar o tipo Struct como o tipo de dados para os elementos de um campo Array. No entanto, não é possível adicionar um StructArray a uma coleção existente e o Milvus não suporta a utilização do tipo Struct como tipo de dados para um campo de coleção.</p>
 <p>Os Structs num campo Array partilham o mesmo esquema, que deve ser definido quando cria o campo Array.</p>
 <p>Um esquema Struct contém vectores e campos escalares, como indicado abaixo:</p>
-<p><Grid columnSize="2" widthRatios="50,50"></p>
-<pre><code translate="no">  &lt;div&gt;
-
-      Applicable vector fields:
-
-      - `FLOAT_VECTOR`
-
-      - `FLOAT16_VECTOR`
-
-      - `BFLOAT16_VECTOR`
-
-      - `INT8_VECTOR`
-
-      - `BINARY_VECTOR`
-
-  &lt;/div&gt;
-
-  &lt;div&gt;
-
-      Applicable scalar fields:
-
-      - `VARCHAR`
-
-      - `INT8/16/32/64`
-
-      - `FLOAT`
-
-      - `DOUBLE`
-
-      - `BOOL`
-
-  &lt;/div&gt;
-</code></pre>
-<p></Grid></p>
-<p>Mantenha o número de campos vectoriais, tanto ao nível da coleção como das Structs combinadas, não superior ou igual a 10.</p></li>
+<ul>
+<li><p>Tipos de dados vetoriais aplicáveis: <code translate="no">FLOAT_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code>, <code translate="no">INT8_VECTOR</code>, e <code translate="no">BINARY_VECTOR</code>.</p></li>
+<li><p>Tipos de dados escalares aplicáveis: <code translate="no">VARCHAR</code>, <code translate="no">INT8/16/32/64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, e <code translate="no">BOOL</code>.</p></li>
+</ul>
+<p>O número de campos vectoriais, tanto a nível da coleção como das Structs combinadas, não deve ser superior ou igual a 10.</p></li>
 <li><p><strong>Valores anuláveis e por defeito</strong></p>
 <p>Um campo StructArray não é anulável e não aceita qualquer valor por defeito.</p></li>
 <li><p><strong>Função</strong></p>
@@ -150,7 +120,7 @@ summary: >-
 <p>Isto aplica-se normalmente à aceleração do tipo intervalo ou ordem em valores numéricos, como <code translate="no">strctA[num_val]</code>. Para mais pormenores, consulte <a href="/docs/pt/stl-sort.md">STL_SORT</a>.</p></li>
 </ul></li>
 <li><p><strong>Dados upsert</strong></p>
-<p>As structs não suportam upsert no modo de fusão. No entanto, você ainda pode executar upserts no modo de substituição para atualizar dados em Structs. Para obter detalhes sobre as diferenças entre a inserção ascendente no modo de mesclagem e no modo de substituição, consulte <a href="/docs/pt/upsert-entities.md#Overview">Entidades de inserção</a> ascendente.</p></li>
+<p>As structs não suportam upsert no modo de fusão. No entanto, você ainda pode executar upserts no modo de substituição para atualizar dados em Structs. Para obter detalhes sobre as diferenças entre a inserção ascendente no modo de mesclagem e no modo de substituição, consulte <a href="/docs/pt/upsert-entities.md#Overview">Entidades de inserção ascendente</a>.</p></li>
 <li><p><strong>Filtragem escalar</strong></p>
 <p>Você pode usar <strong>filtros de elemento</strong> e <strong>operadores na família de correspondência</strong> para realizar a filtragem escalar em um subcampo escalar em um campo StructArray. Para obter detalhes, consulte <a href="/docs/pt/array-of-structs.md#Scalar-filtering-in-a-StructArray-field">Filtragem escalar em um campo StructArray</a>.</p></li>
 </ul>
@@ -423,7 +393,7 @@ SCHEMA=<span class="hljs-string">&#x27;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Para indexar uma lista de incorporação, você precisa definir seu tipo de índice para <code translate="no">AUTOINDEX</code> ou qualquer um dos tipos de índice aplicáveis listados acima e usar um tipo de métrica listado para Milvus para medir as semelhanças entre as listas de incorporação.</p>
+    </button></h3><p>Para indexar uma lista de incorporação, você precisa definir seu tipo de índice como <code translate="no">AUTOINDEX</code> ou qualquer um dos tipos de índice aplicáveis listados acima e usar um tipo de métrica listado para Milvus para medir as semelhanças entre as listas de incorporação.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create index parameters</span>
@@ -1146,7 +1116,7 @@ element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>) &amp;&amp; 
 <li><p><code translate="no">MATCH_ALL(chunks, $[text] LIKE &quot;Red%&quot;)</code></p>
 <p>Isto devolve entidades cujos subcampos de texto em todos os pedaços começam com "Red".</p></li>
 <li><p><code translate="no">MATCH_LEAST(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>
-<p>Isso retorna entidades que contêm pelo menos <code translate="no">k</code> pedaços que começam com "Red" no subcampo <code translate="no">text</code>.</p></li>
+<p>Isto devolve entidades que contêm pelo menos <code translate="no">k</code> pedaços que começam com "Red" no sub-campo <code translate="no">text</code>.</p></li>
 <li><p><code translate="no">MATCH_MOST(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>
 <p>Devolve entidades que contêm, no máximo, <code translate="no">k</code> pedaços que começam com "Red" no subcampo <code translate="no">text</code>.</p></li>
 <li><p><code translate="no">MATCH_EXACT(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>

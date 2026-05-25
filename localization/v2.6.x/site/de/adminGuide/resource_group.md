@@ -90,7 +90,7 @@ title: Verwalten von Ressourcengruppen
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Alle Codebeispiele auf dieser Seite sind in PyMilvus 2.6.13. Aktualisieren Sie Ihre PyMilvus-Installation, bevor Sie sie ausführen.</p>
+<p>Alle Codebeispiele auf dieser Seite sind in PyMilvus 2.6.14. Aktualisieren Sie Ihre PyMilvus-Installation, bevor Sie sie ausführen.</p>
 </div>
 <ol>
 <li><p>Erstellen Sie eine Ressourcengruppe.</p>
@@ -268,7 +268,7 @@ _PENDING_NODES_RESOURCE_GROUP=<span class="hljs-string">&quot;__pending_nodes&qu
 
 init_cluster(<span class="hljs-number">1</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Unter Verwendung des obigen Beispielcodes erstellen wir eine Ressourcengruppe namens <strong>__pending_nodes</strong>, um weitere QueryNodes aufzunehmen. Außerdem erstellen wir zwei benutzerspezifische Ressourcengruppen mit den Namen <strong>rg1</strong> und <strong>rg2</strong>. Außerdem stellen wir sicher, dass die andere Ressourcengruppe die Wiederherstellung fehlender oder redundanter QueryNodes aus <strong>__pending_nodes</strong> priorisiert.</p></li>
+<p>Unter Verwendung des obigen Beispielcodes erstellen wir eine Ressourcengruppe namens <strong>__pending_nodes</strong>, um weitere QueryNodes aufzunehmen. Außerdem erstellen wir zwei benutzerspezifische Ressourcengruppen mit den Namen <strong>rg1</strong> und <strong>rg2</strong>. Außerdem stellen wir sicher, dass die andere Ressourcengruppe der Wiederherstellung fehlender oder redundanter QueryNodes aus <strong>__pending_nodes</strong> Priorität einräumt.</p></li>
 <li><p>Skalierung des Clusters</p>
 <p>Angenommen, wir haben die folgende Skalierungsfunktion:</p>
 <pre><code translate="no" class="language-python">
@@ -276,7 +276,7 @@ init_cluster(<span class="hljs-number">1</span>)
     <span class="hljs-comment"># scale the querynode number in Milvus into node_num.</span>
     <span class="hljs-keyword">pass</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Wir können die API verwenden, um eine bestimmte Ressourcengruppe auf eine bestimmte Anzahl von Abfrageknoten zu skalieren, ohne andere Ressourcengruppen zu beeinträchtigen.</p>
+<p>Wir können die API verwenden, um eine bestimmte Ressourcengruppe auf eine bestimmte Anzahl von QueryNodes zu skalieren, ohne andere Ressourcengruppen zu beeinträchtigen.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># scale rg1 into 3 nodes, rg2 into 1 nodes</span>
 milvus_client.update_resource_groups({
     <span class="hljs-string">&quot;rg1&quot;</span>: ResourceGroupConfig(

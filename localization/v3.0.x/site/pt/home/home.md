@@ -10,7 +10,7 @@ Aqui aprenderá o que é o Milvus e como instalar, utilizar e implementar o Milv
 <div class="doc-home-promotion-wrapper">
   <div class="promotion-content">
     <h2 class="promotion-title">Experimente o Managed Milvus gratuitamente!</h2>
-    <p class="promotion-desc">Zilliz Cloud é livre de complicações, alimentado por Milvus e 10x mais rápido.</p>
+    <p class="promotion-desc">O Zilliz Cloud é livre de complicações, é alimentado por Milvus e é 10x mais rápido.</p>
   </div>
   <div class="cta-wrapper">
    <a class="cta-global" href="https://cloud.zilliz.com/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">Zilliz Cloud</a></div>
@@ -45,7 +45,7 @@ Aqui aprenderá o que é o Milvus e como instalar, utilizar e implementar o Milv
   
    <a href="/bootcamp"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/home_bootcamp.svg" alt="icon" />
    </a> <a href="/bootcamp"> <p class="link-btn">Bootcamp</p> </a><p>
-  Aprenda a construir aplicações de pesquisa de similaridade vetorial com Milvus.  </p>
+  Aprenda a criar aplicações de pesquisa de semelhanças vectoriais com o Milvus.  </p>
 </div>
 </div>
 <h2 id="Recommended-articles" class="common-anchor-header">Artigos recomendados<button data-href="#Recommended-articles" class="anchor-icon" translate="no">
@@ -112,12 +112,12 @@ Aqui aprenderá o que é o Milvus e como instalar, utilizar e implementar o Milv
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><em>março de 2026 - Actualizações do Milvus 2.6.x</em></p>
+    </button></h2><p><em>maio de 2026 - Atualizações do Milvus 3.0.x</em></p>
 <ul>
-<li>Adicionada a secção <a href="/docs/pt/milvus_for_agents.md">Milvus para Agentes de IA</a> com guias de instruções.</li>
-<li>Adicionada orientação sobre como usar <a href="/docs/pt/google-gemini.md">a função de incorporação Gemini</a>.</li>
-<li>Adicionada orientação sobre como <a href="/docs/pt/primary-key-search.md">pesquisar por chaves primárias</a>.</li>
-<li>Adicionada orientação sobre como usar <a href="/docs/pt/text-highlighter.md">o marcador de texto</a> nos resultados da pesquisa.</li>
-<li>Adicionadas descrições do <a href="/docs/pt/geometry-field.md">campo geometry</a>, do <a href="/docs/pt/timestamptz-field.md">campo timestamptz</a>, do <a href="/docs/pt/tiered-storage-overview.md">armazenamento em camadas</a> e da <a href="/docs/pt/array-of-structs.md">matriz de structs</a>.</li>
+<li>Adicionados os destaques do Milvus 3.0.x às <a href="/docs/pt/release_notes.md">Notas de versão</a>, incluindo a Coleção externa, o Instantâneo, o Storage V3 e as integrações do ecossistema do lago.</li>
+<li>Adicionada orientação sobre como <a href="/docs/pt/single-vector-search.md#Sort-Search-Results-by-Scalar-Fields--Milvus-30x">classificar resultados de pesquisa por campos escalares</a> e <a href="/docs/pt/get-and-scalar-query.md#Aggregate-Query-Results--Milvus-30x">agregar resultados de consulta</a>.</li>
+<li>Adicionada orientação sobre como usar <a href="/docs/pt/nullable-and-default.md">campos de vetor anuláveis</a> e <a href="/docs/pt/set-collection-ttl.md#Set-entity-level-TTL--Milvus-30x">TTL no nível da entidade</a>.</li>
+<li>Adicionadas orientações sobre como usar <a href="/docs/pt/minhash-function.md">a função MinHash</a> para assinaturas MinHash do lado do servidor.</li>
+<li>Adicionadas orientações sobre como <a href="/docs/pt/search-with-embedding-lists.md">pesquisar com listas de incorporação</a> e acionar <a href="/docs/pt/force-merge.md">a compactação de mesclagem forçada</a>.</li>
 </ul>
 </div>

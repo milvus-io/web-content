@@ -22,10 +22,6 @@ title: Milvus CDC
       </svg>
     </button></h1><p>Milvus CDC (Change Data Capture) réplique les modifications de données d'un cluster Milvus à un autre. Vous pouvez utiliser CDC pour construire une topologie de reprise après sinistre primaire-standby pour Milvus.</p>
 <p>Dans une topologie primaire-standby, un cluster agit en tant que primaire et accepte les écritures. Un ou plusieurs clusters en attente reçoivent en permanence les modifications du cluster principal et peuvent prendre en charge le trafic de lecture. Lorsque le cluster primaire devient indisponible ou nécessite une maintenance, vous pouvez basculer le trafic de service vers un cluster en attente.</p>
-<p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cdc-overview.png" alt="CDC workflow" class="doc-image" id="cdc-workflow" />
-   </span> <span class="img-wrapper"> <span>Flux de travail du CDC</span> </span></p>
 <h2 id="Architecture" class="common-anchor-header">L'architecture<button data-href="#Architecture" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,9 +37,9 @@ title: Milvus CDC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Une topologie typique contient</p>
+    </button></h2><p>Une topologie typique comprend</p>
 <ul>
-<li><strong>Un cluster primaire</strong>: Le cluster source pour la réplication. Il accepte les lectures et les écritures.</li>
+<li><strong>Cluster primaire</strong>: Le cluster source pour la réplication. Il accepte les lectures et les écritures.</li>
 <li><strong>Cluster de secours</strong>: Un cluster cible pour la réplication. Il reçoit les modifications du cluster primaire et est en lecture seule tant qu'il reste en attente.</li>
 <li><strong>Nœud CDC</strong>: Un composant Milvus qui transmet les modifications WAL du cluster primaire actuel aux clusters en attente. Déployer le CDC sur chaque cluster susceptible de devenir primaire après un basculement ou une défaillance.</li>
 <li><strong>Topologie de réplication</strong>: La relation source-cible configurée, telle que cluster-a -&gt; cluster-b. Voici une illustration de la topologie. <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cdc-overview.png" alt="CDC workflow" class="doc-image" id="cdc-workflow" /><span>Flux de travail CDC</span> </span></li>
@@ -121,7 +117,7 @@ Primary cluster A  -- CDC replication --&gt;  Standby cluster B
 </thead>
 <tbody>
 <tr><td><strong><a href="/docs/fr/v2.6.x/cdc_switchover.md">Basculement</a></strong></td><td>Le système primaire actuel est toujours joignable, ou vous effectuez une maintenance planifiée.</td><td>RPO = 0</td><td>Attente des données répliquées restantes avant le changement de rôle</td></tr>
-<tr><td><strong><a href="/docs/fr/v2.6.x/cdc_failover.md">Basculement</a></strong></td><td>Le serveur principal actuel est indisponible et ne peut pas être rétabli rapidement.</td><td>Possible</td><td>Promouvoir immédiatement l'état de veille pour que les écritures puissent reprendre.</td></tr>
+<tr><td><strong><a href="/docs/fr/v2.6.x/cdc_failover.md">Basculement</a></strong></td><td>Le serveur principal actuel est indisponible et ne peut pas être rétabli rapidement.</td><td>Possible</td><td>Promouvoir immédiatement le système de secours afin que les écritures puissent reprendre.</td></tr>
 </tbody>
 </table>
 <p>Utiliser le basculement chaque fois que le serveur principal actuel peut encore répondre. N'utilisez le basculement que si le rétablissement de la disponibilité est plus important que l'attente du serveur principal d'origine.</p>
@@ -146,7 +142,7 @@ Primary cluster A  -- CDC replication --&gt;  Standby cluster B
 <li>Lors du basculement, un délai CDC plus faible signifie généralement que l'opération se termine plus rapidement.</li>
 <li>Lors du basculement, le décalage du CDC représente la fenêtre de données qui risque d'être perdue si le cluster primaire d'origine n'est pas disponible.</li>
 </ul>
-<p>Vous devez surveiller en permanence le décalage du CDC et le maintenir à un niveau aussi bas que possible. La page <a href="/docs/fr/v2.6.x/set_up_cdc_replication.md">Configurer la réplication CDC</a> contient un exemple de PromQL pour estimer le décalage CDC.</p>
+<p>Vous devez surveiller en permanence le décalage du CDC et le maintenir à un niveau aussi bas que possible. La page <a href="/docs/fr/v2.6.x/set_up_cdc_replication.md">Configurer la réplication CDC</a> comprend un exemple de PromQL pour estimer le décalage CDC.</p>
 <h2 id="Limitations" class="common-anchor-header">Limitations<button data-href="#Limitations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -185,7 +181,7 @@ Primary cluster A  -- CDC replication --&gt;  Standby cluster B
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Can-a-standby-cluster-serve-queries" class="common-anchor-header">Un cluster en standby peut-il servir des requêtes ?<button data-href="#Can-a-standby-cluster-serve-queries" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Can-a-standby-cluster-serve-queries" class="common-anchor-header">Est-ce qu'un cluster en standby peut servir des requêtes ?<button data-href="#Can-a-standby-cluster-serve-queries" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -200,7 +196,7 @@ Primary cluster A  -- CDC replication --&gt;  Standby cluster B
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Oui. Un cluster en attente peut servir le trafic de lecture. Il ne peut pas accepter les écritures tant qu'il n'est pas devenu le cluster principal.</p>
+    </button></h3><p>Oui. Un cluster en attente peut servir le trafic de lecture. Il ne peut pas accepter d'écritures tant qu'il n'est pas devenu le cluster principal.</p>
 <h3 id="Does-Milvus-CDC-support-active-active-writes" class="common-anchor-header">Milvus CDC prend-il en charge les écritures actives-actives ?<button data-href="#Does-Milvus-CDC-support-active-active-writes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -264,4 +260,4 @@ Primary cluster A  -- CDC replication --&gt;  Standby cluster B
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>La perte potentielle de données est limitée par le décalage du CDC au moment où le serveur principal est devenu indisponible.</p>
+    </button></h3><p>La perte potentielle de données est limitée par le décalage du CDC au moment où le système primaire est devenu indisponible.</p>

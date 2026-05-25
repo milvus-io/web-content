@@ -112,12 +112,12 @@ id: home.md
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><em>2026 年 3 月 - Milvus 2.6.x 更新</em></p>
+    </button></h2><p><em>2026 年 5 月 - Milvus 3.0.x 更新</em></p>
 <ul>
-<li><a href="/docs/zh/milvus_for_agents.md">为人工智能 Agents</a>添加了<a href="/docs/zh/milvus_for_agents.md">Milvus</a>部分，其中包含提示指南。</li>
-<li>添加了如何使用<a href="/docs/zh/google-gemini.md">双子座嵌入功能</a>的指导。</li>
-<li>添加了如何<a href="/docs/zh/primary-key-search.md">通过主键搜索的</a>指导。</li>
-<li>添加了如何在搜索结果中使用<a href="/docs/zh/text-highlighter.md">文本高亮显示的</a>指导。</li>
-<li>已添加<a href="/docs/zh/geometry-field.md">几何字段</a>、<a href="/docs/zh/timestamptz-field.md">timestamptz 字段</a>、<a href="/docs/zh/tiered-storage-overview.md">分层存储</a>和<a href="/docs/zh/array-of-structs.md">结构数组的</a>说明。</li>
+<li>在<a href="/docs/zh/release_notes.md">发行说明</a>中添加了 Milvus 3.0.x 的亮点，包括外部 Collections、快照、存储 V3 和湖泊生态系统集成。</li>
+<li>已添加有关如何<a href="/docs/zh/single-vector-search.md#Sort-Search-Results-by-Scalar-Fields--Milvus-30x">按标量字段</a>和<a href="/docs/zh/get-and-scalar-query.md#Aggregate-Query-Results--Milvus-30x">聚合查询结果</a>对<a href="/docs/zh/single-vector-search.md#Sort-Search-Results-by-Scalar-Fields--Milvus-30x">搜索结果进行排序的</a>指导。</li>
+<li>已添加有关如何使用<a href="/docs/zh/nullable-and-default.md">可归零向量字段</a>和<a href="/docs/zh/set-collection-ttl.md#Set-entity-level-TTL--Milvus-30x">实体级 TTL 的</a>指导。</li>
+<li>已添加如何在服务器端<a href="/docs/zh/minhash-function.md">MinHash</a>签名中使用 MinHash<a href="/docs/zh/minhash-function.md">函数</a>的指导。</li>
+<li>添加了关于如何<a href="/docs/zh/search-with-embedding-lists.md">使用 Embeddings 列表搜索</a>和触发<a href="/docs/zh/force-merge.md">强制合并压缩的</a>指导。</li>
 </ul>
 </div>

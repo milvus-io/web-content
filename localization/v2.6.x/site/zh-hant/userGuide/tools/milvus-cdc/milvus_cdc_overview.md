@@ -19,11 +19,7 @@ title: Milvus CDC
         ></path>
       </svg>
     </button></h1><p>Milvus CDC（變更資料擷取）將資料變更從一個 Milvus 集群複製到另一個。您可以使用 CDC 為 Milvus 建立主備災難復原拓樸。</p>
-<p>在主備災難復原拓樸中，一個群集作為主群集並接受寫入。一個或多個備用群集持續接收主群集的變更，並可提供讀取流量。當主群組無法使用或需要維護時，您可以將服務流量切換到備用群組。</p>
-<p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cdc-overview.png" alt="CDC workflow" class="doc-image" id="cdc-workflow" />
-   </span> <span class="img-wrapper"> <span>CDC 工作流程</span> </span></p>
+<p>在主備災難復原拓樸中，一個群集作為主群集並接受寫入。一個或多個備用群集持續接收主群集的變更，並可提供讀取流量。當主叢集不可用或需要維護時，您可以將服務流量切換到備用叢集。</p>
 <h2 id="Architecture" class="common-anchor-header">架構<button data-href="#Architecture" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +37,7 @@ title: Milvus CDC
       </svg>
     </button></h2><p>典型的拓樸結構包含</p>
 <ul>
-<li><strong>主要群集</strong>：複製的源群集。它接受讀取和寫入。</li>
+<li><strong>主要群集</strong>：複製的來源群集。它接受讀取和寫入。</li>
 <li><strong>備用群集</strong>：複製的目標群集。它從主要群集接收變更，並在保持為備用時為唯讀。</li>
 <li><strong>CDC 節點</strong>：一個 Milvus 元件，可將 WAL 變更從目前的主要群集轉送至備用群集。在切換或故障移轉後可能成為主機的每個群集上部署 CDC。</li>
 <li><strong>複製拓樸</strong>：配置的來源到目標關係，例如群集-a -&gt; 群集-b。<span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cdc-overview.png" alt="CDC workflow" class="doc-image" id="cdc-workflow" /><span>CDC 工作流程</span> </span></li>

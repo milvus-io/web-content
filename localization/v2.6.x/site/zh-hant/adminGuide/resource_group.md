@@ -36,7 +36,7 @@ title: 管理資源群組
         ></path>
       </svg>
     </button></h2><p>一个资源组可以容纳 Milvus 集群中的几个或所有查询节点。您可以根据对您最有意义的方式来决定如何在资源组之间分配查询节点。例如，在多集合場景中，您可以為每個資源群組分配適當數量的查詢節點，並將集合載入不同的資源群組，以便每個集合中的作業與其他集合中的作業在物理上獨立。</p>
-<p>請注意，一個 Milvus 實例會維護一個預設的資源群組，在啟動時存放所有的查詢節點，並將它命名為<strong>__default_resource_group</strong> 。</p>
+<p>請注意，一個 Milvus 實例會維護一個預設的資源群組，以在啟動時存放所有查詢節點，並將其命名為<strong>__default_resource_group</strong> 。</p>
 <p>從版本 2.4.1 開始，Milvus 提供了宣告式的資源群組 API，而舊的資源群組 API 已經被廢棄。新的宣告式 API 能讓使用者達到idempotency，更容易在雲原生環境中進行二次開發。</p>
 <h2 id="Concepts-of-resource-group" class="common-anchor-header">資源群組的概念<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -90,7 +90,7 @@ title: 管理資源群組
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>本頁面的所有程式碼範例都在 PyMilvus 2.6.13 中。在執行它們之前，請先升級您的 PyMilvus 安裝。</p>
+<p>本頁面的所有程式碼範例都在 PyMilvus 2.6.14 中。在執行它們之前，請先升級您的 PyMilvus 安裝。</p>
 </div>
 <ol>
 <li><p>建立資源群組</p>

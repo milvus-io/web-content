@@ -5,7 +5,7 @@ id: home.md
 <p><h1 class="title">
 Milvus 문서에 오신 것을 환영합니다!</h1></p>
 <p><h2 class="sub-title">
-여기에서는 Milvus가 무엇인지, 비즈니스 요구 사항에 따라 애플리케이션을 구축하기 위해 Milvus를 설치, 사용 및 배포하는 방법에 대해 알아볼 수 있습니다.</h2></p>
+여기에서는 Milvus가 무엇인지, 비즈니스 요구에 따라 애플리케이션을 구축하기 위해 Milvus를 설치, 사용 및 배포하는 방법에 대해 알아보세요.</h2></p>
 </div>
 <div class="doc-home-promotion-wrapper">
   <div class="promotion-content">
@@ -112,12 +112,12 @@ Milvus 문서에 오신 것을 환영합니다!</h1></p>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><em>2026년 3월 - Milvus 2.6.x 업데이트</em></p>
+    </button></h2><p><em>2026년 5월 - Milvus 3.0.x 업데이트</em></p>
 <ul>
-<li><a href="/docs/ko/milvus_for_agents.md">AI 에이전트용 Milvus</a> 섹션에 프롬프트 가이드가 추가되었습니다.</li>
-<li><a href="/docs/ko/google-gemini.md">Gemini 임베딩 기능</a> 사용 방법에 대한 안내가 추가되었습니다.</li>
-<li><a href="/docs/ko/primary-key-search.md">기본 키로 검색하는</a> 방법에 대한 안내를 추가했습니다.</li>
-<li>검색 결과에서 <a href="/docs/ko/text-highlighter.md">텍스트 형광펜을</a> 사용하는 방법에 대한 안내를 추가했습니다.</li>
-<li><a href="/docs/ko/geometry-field.md">지오메트리 필드</a>, <a href="/docs/ko/timestamptz-field.md">타임스탬츠 필드</a>, <a href="/docs/ko/tiered-storage-overview.md">계층형 스토리지</a> 및 <a href="/docs/ko/array-of-structs.md">구조 배열에</a> 대한 설명을 추가했습니다.</li>
+<li><a href="/docs/ko/release_notes.md">릴리즈 노트에</a> 외부 컬렉션, 스냅샷, 저장소 V3, 레이크 에코시스템 통합을 포함한 Milvus 3.0.x의 주요 내용을 추가했습니다.</li>
+<li><a href="/docs/ko/single-vector-search.md#Sort-Search-Results-by-Scalar-Fields--Milvus-30x">스칼라 필드별로 검색 결과를 정렬하고</a> <a href="/docs/ko/get-and-scalar-query.md#Aggregate-Query-Results--Milvus-30x">쿼리 결과를 집계하는</a> 방법에 대한 안내가 추가되었습니다.</li>
+<li><a href="/docs/ko/nullable-and-default.md">널 가능 벡터 필드와</a> <a href="/docs/ko/set-collection-ttl.md#Set-entity-level-TTL--Milvus-30x">엔티티 수준 TTL을</a> 사용하는 방법에 대한 안내가 추가되었습니다.</li>
+<li>서버 측 MinHash 서명에 <a href="/docs/ko/minhash-function.md">MinHash 함수를</a> 사용하는 방법에 대한 안내를 추가했습니다.</li>
+<li><a href="/docs/ko/search-with-embedding-lists.md">임베딩 목록으로 검색하고</a> <a href="/docs/ko/force-merge.md">강제 병합 압축을</a> 트리거하는 방법에 대한 안내를 추가했습니다.</li>
 </ul>
 </div>

@@ -112,12 +112,12 @@ id: home.md
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><em>مارس 2026 - تحديثات Milvus 2.6.x مارس 2026</em></p>
+    </button></h2><p><em>2026 مايو 2026 - تحديثات الإصدار Milvus 3.0.x</em></p>
 <ul>
-<li>تمت إضافة قسم <a href="/docs/ar/milvus_for_agents.md">ميلفوس لوكلاء الذكاء الاصطناعي</a> مع إرشادات سريعة.</li>
-<li>تمت إضافة إرشادات حول كيفية استخدام <a href="/docs/ar/google-gemini.md">وظيفة تضمين الجوزاء</a>.</li>
-<li>تمت إضافة إرشادات حول كيفية <a href="/docs/ar/primary-key-search.md">البحث بالمفاتيح الأساسية</a>.</li>
-<li>تمت إضافة إرشادات حول كيفية استخدام <a href="/docs/ar/text-highlighter.md">أداة تمييز النص</a> في نتائج البحث.</li>
-<li>تمت إضافة أوصاف <a href="/docs/ar/geometry-field.md">الحقل الهندسي،</a> <a href="/docs/ar/timestamptz-field.md">وحقل timestamptz،</a> <a href="/docs/ar/tiered-storage-overview.md">والتخزين المتدرج،</a> <a href="/docs/ar/array-of-structs.md">وصفيف الهياكل</a>.</li>
+<li>تمت إضافة ميزات الإصدار Milvus 3.0.x إلى <a href="/docs/ar/release_notes.md">ملاحظات الإصدار،</a> بما في ذلك المجموعة الخارجية واللقطات والتخزين V3 وتكامل النظام البيئي للبحيرة.</li>
+<li>تمت إضافة إرشادات حول كيفية <a href="/docs/ar/single-vector-search.md#Sort-Search-Results-by-Scalar-Fields--Milvus-30x">فرز نتائج البحث حسب الحقول القياسية</a> <a href="/docs/ar/get-and-scalar-query.md#Aggregate-Query-Results--Milvus-30x">وتجميع نتائج الاستعلام</a>.</li>
+<li>تمت إضافة إرشادات حول كيفية استخدام <a href="/docs/ar/nullable-and-default.md">حقول المتجهات القابلة للإلغاء</a> وحقول <a href="/docs/ar/set-collection-ttl.md#Set-entity-level-TTL--Milvus-30x">TTL على مستوى الكيان</a>.</li>
+<li>تمت إضافة إرشادات حول كيفية استخدام <a href="/docs/ar/minhash-function.md">MinHash Function</a> لتوقيعات MinHash من جانب الخادم.</li>
+<li>تمت إضافة إرشادات حول كيفية <a href="/docs/ar/search-with-embedding-lists.md">البحث باستخدام قوائم التضمين</a> وتشغيل <a href="/docs/ar/force-merge.md">فرض ضغط الدمج</a>.</li>
 </ul>
 </div>

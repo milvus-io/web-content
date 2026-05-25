@@ -21,11 +21,7 @@ title: Milvus CDC
         ></path>
       </svg>
     </button></h1><p>O Milvus CDC (Change Data Capture) replica as alterações de dados de um cluster Milvus para outro. É possível usar o CDC para criar uma topologia de recuperação de desastres primária-em espera para o Milvus.</p>
-<p>Numa topologia primária-em espera, um cluster actua como primário e aceita gravações. Um ou mais clusters em espera recebem continuamente alterações do primário e podem servir o tráfego de leitura. Quando o cluster primário fica indisponível ou precisa de manutenção, pode mudar o tráfego de serviço para um cluster em espera.</p>
-<p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cdc-overview.png" alt="CDC workflow" class="doc-image" id="cdc-workflow" />
-   </span> <span class="img-wrapper"> <span>Fluxo de trabalho do CDC</span> </span></p>
+<p>Numa topologia primária-em espera, um cluster actua como primário e aceita gravações. Um ou mais clusters em espera recebem continuamente alterações do primário e podem servir o tráfego de leitura. Quando o cluster primário fica indisponível ou precisa de manutenção, é possível mudar o tráfego de serviço para um cluster em espera.</p>
 <h2 id="Architecture" class="common-anchor-header">Arquitetura<button data-href="#Architecture" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,9 +39,9 @@ title: Milvus CDC
       </svg>
     </button></h2><p>Uma topologia típica contém:</p>
 <ul>
-<li><strong>Cluster primário</strong>: O cluster de origem para replicação. Aceita leituras e gravações.</li>
+<li><strong>Cluster primário</strong>: O cluster de origem para replicação. Ele aceita leituras e gravações.</li>
 <li><strong>Cluster em espera</strong>: Um cluster de destino para replicação. Recebe alterações do primário e é apenas de leitura enquanto permanece em espera.</li>
-<li><strong>Nó CDC</strong>: Um componente Milvus que encaminha as alterações WAL do atual cluster primário para os clusters em espera. Implante o CDC em cada cluster que pode se tornar primário após a troca ou failover.</li>
+<li><strong>Nó CDC</strong>: Um componente Milvus que encaminha as alterações WAL do cluster primário atual para os clusters em espera. Implante o CDC em cada cluster que pode se tornar primário após a troca ou failover.</li>
 <li><strong>Topologia de replicação</strong>: A relação configurada entre origem e destino, como cluster-a -&gt; cluster-b. A seguir, uma ilustração da topologia. <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cdc-overview.png" alt="CDC workflow" class="doc-image" id="cdc-workflow" /><span>Fluxo de trabalho do CDC</span> </span></li>
 </ul>
 <h3 id="Supported-Topologies" class="common-anchor-header">Topologias suportadas<button data-href="#Supported-Topologies" class="anchor-icon" translate="no">
@@ -73,7 +69,7 @@ Primary cluster A  -- CDC replication --&gt;  Standby cluster B
 <pre><code translate="no" class="language-text">Primary cluster A  -- CDC replication --&gt;  Standby cluster B
                   \-- CDC replication --&gt;  Standby cluster C
 <button class="copy-code-btn"></button></code></pre>
-<p>O Milvus CDC não suporta implementações multi-primárias ou activas-activas, onde dois ou mais clusters aceitam tráfego de escrita ao mesmo tempo.</p>
+<p>O Milvus CDC não suporta implementações multi-primárias ou ativo-ativo, onde dois ou mais clusters aceitam tráfego de escrita ao mesmo tempo.</p>
 <h2 id="Primary-and-Standby-Behavior" class="common-anchor-header">Comportamento primário e em espera<button data-href="#Primary-and-Standby-Behavior" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

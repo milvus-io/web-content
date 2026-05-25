@@ -22,7 +22,7 @@ summary: Imparate a configurare l'archiviazione dei messaggi con Docker Compose 
     </button></h1><p>Milvus utilizza Pulsar o Kafka per la gestione dei log delle modifiche recenti, l'output dei log dei flussi e la fornitura di sottoscrizioni ai log. Pulsar è il sistema di archiviazione dei messaggi predefinito. Questo argomento illustra come configurare l'archiviazione dei messaggi con Docker Compose o Helm.</p>
 <p>È possibile configurare Pulsar con <a href="https://docs.docker.com/get-started/overview/">Docker Compose</a> o su K8s e configurare Kafka su K8s.</p>
 <div class="alert note">
-<p><strong>Limitazioni della coda di messaggi</strong>: Quando si effettua l'aggiornamento a Milvus v2.6.16, è necessario mantenere l'attuale scelta della coda di messaggi. Il passaggio da un sistema di code di messaggi all'altro durante l'aggiornamento non è supportato. Il supporto per il cambio di sistemi di code di messaggi sarà disponibile nelle versioni future.</p>
+<p><strong>Limitazioni della coda di messaggi</strong>: Quando si effettua l'aggiornamento a Milvus v2.6.17, è necessario mantenere l'attuale scelta della coda di messaggi. Il passaggio da un sistema di code di messaggi all'altro durante l'aggiornamento non è supportato. Il supporto per il cambio di sistemi di code di messaggi sarà disponibile nelle versioni future.</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Configurazione di Pulsar con Docker Compose<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -96,7 +96,7 @@ summary: Imparate a configurare l'archiviazione dei messaggi con Docker Compose 
         ></path>
       </svg>
     </button></h2><p>Per i cluster Milvus su K8, è possibile configurare Pulsar con lo stesso comando di avvio di Milvus. In alternativa, è possibile configurare Pulsar utilizzando il file <code translate="no">values.yml</code> nel percorso /charts/milvus nel repository <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> prima di avviare Milvus.</p>
-<p>Per i dettagli su come configurare Milvus usando Helm, fare riferimento a <a href="/docs/it/v2.6.x/configure-helm.md">Configurare Milvus con i grafici Helm</a>. Per i dettagli sulle voci di configurazione relative a Pulsar, fare riferimento a <a href="/docs/it/v2.6.x/configure_pulsar.md">Configurazioni relative a Pulsar</a>. |</p>
+<p>Per i dettagli su come configurare Milvus usando Helm, fare riferimento a <a href="/docs/it/v2.6.x/configure-helm.md">Configurare Milvus con i grafici Helm</a>. Per i dettagli sulle voci di configurazione relative a Pulsar, consultare <a href="/docs/it/v2.6.x/configure_pulsar.md">Configurazioni relative a Pulsar</a>. |</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">Uso del file YAML<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

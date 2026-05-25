@@ -112,12 +112,12 @@ Aquí aprenderá qué es Milvus y cómo instalar, utilizar y desplegar Milvus pa
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><em>Marzo 2026 - Actualizaciones de Milvus 2.6.x</em></p>
+    </button></h2><p><em>Mayo 2026 - Actualizaciones de Milvus 3.0.x</em></p>
 <ul>
-<li>Añadida la sección <a href="/docs/es/milvus_for_agents.md">Milvus para Agentes de Inteligencia Artificial</a> con guías de instrucciones.</li>
-<li>Se ha añadido una guía sobre cómo utilizar <a href="/docs/es/google-gemini.md">la función de incrustación Gemini</a>.</li>
-<li>Añadida guía sobre cómo <a href="/docs/es/primary-key-search.md">buscar por claves primarias</a>.</li>
-<li>Se ha añadido una guía sobre cómo utilizar <a href="/docs/es/text-highlighter.md">el resaltador de texto</a> en los resultados de búsqueda.</li>
-<li>Se han añadido descripciones de los <a href="/docs/es/geometry-field.md">campos geometry</a>, <a href="/docs/es/timestamptz-field.md">timestamptz</a>, <a href="/docs/es/tiered-storage-overview.md">tiered storage</a> y <a href="/docs/es/array-of-structs.md">array of structs</a>.</li>
+<li>Se han añadido los aspectos más destacados de Milvus 3.0.x a las <a href="/docs/es/release_notes.md">Notas de la versión</a>, incluidas las integraciones de External Collection, Snapshot, Storage V3 y lake ecosystem.</li>
+<li>Se ha añadido orientación sobre cómo <a href="/docs/es/single-vector-search.md#Sort-Search-Results-by-Scalar-Fields--Milvus-30x">ordenar los resultados de búsqueda por campos escalares</a> y <a href="/docs/es/get-and-scalar-query.md#Aggregate-Query-Results--Milvus-30x">resultados de consulta agregados</a>.</li>
+<li>Se ha añadido orientación sobre cómo utilizar <a href="/docs/es/nullable-and-default.md">campos vectoriales anulables</a> y <a href="/docs/es/set-collection-ttl.md#Set-entity-level-TTL--Milvus-30x">TTL a nivel de entidad</a>.</li>
+<li>Se ha añadido una guía sobre cómo utilizar <a href="/docs/es/minhash-function.md">la función MinHash</a> para las firmas MinHash del lado del servidor.</li>
+<li>Se ha añadido una guía sobre cómo <a href="/docs/es/search-with-embedding-lists.md">buscar con listas incrustadas</a> y activar <a href="/docs/es/force-merge.md">la compactación de fusión forzada</a>.</li>
 </ul>
 </div>

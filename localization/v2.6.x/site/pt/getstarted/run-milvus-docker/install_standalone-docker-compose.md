@@ -57,7 +57,7 @@ title: Executar o Milvus com o Docker Compose (Linux)
       </svg>
     </button></h2><p>O Milvus fornece um arquivo de configuração do Docker Compose no repositório do Milvus. Para instalar o Milvus usando o Docker Compose, basta executar</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.16/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,13 +67,13 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>O que há de novo na v2.6.16:</strong></p>
+<p><strong>O que há de novo na v2.6.17:</strong></p>
 <ul>
 <li><strong>Arquitetura aprimorada</strong>: Apresenta o novo nó de streaming e componentes otimizados</li>
 <li><strong>Dependências atualizadas</strong>: Inclui as versões mais recentes do MinIO e do etcd</li>
 <li><strong>Configuração aprimorada</strong>: Configurações otimizadas para melhor desempenho</li>
 </ul>
-<p>Sempre baixe a configuração mais recente do Docker Compose para garantir a compatibilidade com os recursos da v2.6.16.</p>
+<p>Sempre baixe a configuração mais recente do Docker Compose para garantir a compatibilidade com os recursos da v2.6.17.</p>
 <ul>
 <li><p>Se você não conseguiu executar o comando acima, verifique se o seu sistema tem o Docker Compose V1 instalado. Se este for o caso, é aconselhável migrar para o Docker Compose V2 devido às notas nesta <a href="https://docs.docker.com/compose/">página</a>.</p></li>
 <li><p>Se tiver algum problema ao puxar a imagem, contacte-nos em <a href="mailto:community@zilliz.com">community@zilliz.com</a> com detalhes sobre o problema e fornecer-lhe-emos o apoio necessário.</p></li>
@@ -81,7 +81,7 @@ Creating milvus-standalone ... done
 </div>
 <p>Depois de iniciar o Milvus,</p>
 <ul>
-<li>Os contentores com os nomes <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> e <strong>milvus-etcd</strong> estão activos.<ul>
+<li>Os contentores denominados <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> e <strong>milvus-etcd</strong> estão activos.<ul>
 <li>O contentor <strong>milvus-etcd</strong> não expõe quaisquer portas ao anfitrião e mapeia os seus dados para <strong>volumes/etcd</strong> na pasta atual.</li>
 <li>O contentor <strong>milvus-minio</strong> serve as portas <strong>9090</strong> e <strong>9091</strong> localmente com as credenciais de autenticação predefinidas e mapeia os seus dados para <strong>volumes/minio</strong> na pasta atual.</li>
 <li>O contentor <strong>milvus-standalone</strong> serve as portas <strong>19530</strong> localmente com as definições predefinidas e mapeia os seus dados para <strong>volumes/milvus</strong> na pasta atual.</li>
@@ -112,7 +112,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para atualizar a configuração do Milvus de acordo com as suas necessidades, tem de modificar o ficheiro <code translate="no">/milvus/configs/user.yaml</code> no contentor <code translate="no">milvus-standalone</code>.</p>
+    </button></h2><p>Para atualizar a configuração do Milvus de acordo com as suas necessidades, é necessário modificar o ficheiro <code translate="no">/milvus/configs/user.yaml</code> no contentor <code translate="no">milvus-standalone</code>.</p>
 <ol>
 <li><p>Aceda ao contentor <code translate="no">milvus-standalone</code>.</p>
 <pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash

@@ -22,10 +22,6 @@ title: Milvus CDC
       </svg>
     </button></h1><p>Milvus CDC (Change Data Capture) реплицирует изменения данных с одного кластера Milvus на другой. Вы можете использовать CDC для построения топологии аварийного восстановления Milvus по принципу "основной - резервный".</p>
 <p>В топологии primary-standby один кластер выступает в качестве основного и принимает записи. Один или несколько резервных кластеров постоянно получают изменения от основного и могут обслуживать трафик чтения. Когда основной кластер становится недоступным или нуждается в обслуживании, вы можете переключить трафик обслуживания на резервный кластер.</p>
-<p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cdc-overview.png" alt="CDC workflow" class="doc-image" id="cdc-workflow" />
-   </span> <span class="img-wrapper"> <span>Рабочий процесс CDC</span> </span></p>
 <h2 id="Architecture" class="common-anchor-header">Архитектура<button data-href="#Architecture" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,7 +39,7 @@ title: Milvus CDC
       </svg>
     </button></h2><p>Типичная топология содержит:</p>
 <ul>
-<li><strong>Основной кластер</strong>: Кластер-источник для репликации. Он принимает данные на чтение и запись.</li>
+<li><strong>Первичный кластер</strong>: Кластер-источник для репликации. Он принимает данные на чтение и запись.</li>
 <li><strong>Резервный кластер</strong>: Целевой кластер для репликации. Он получает изменения от основного и доступен только для чтения, пока остается резервным.</li>
 <li><strong>Узел CDC</strong>: Компонент Milvus, который пересылает изменения WAL с текущего основного на резервные кластеры. Разверните CDC на каждом кластере, который может стать основным после переключения или обхода отказа.</li>
 <li><strong>Топология репликации</strong>: Настроенная связь между источником и целью, например кластер-a -&gt; кластер-b. Ниже приведена иллюстрация топологии. <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cdc-overview.png" alt="CDC workflow" class="doc-image" id="cdc-workflow" /><span>Рабочий процесс CDC</span> </span>.</li>

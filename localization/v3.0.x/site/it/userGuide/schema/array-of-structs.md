@@ -87,40 +87,10 @@ summary: >-
 <p>Quando si crea una collezione, è possibile utilizzare il tipo Struct come tipo di dati per gli elementi di un campo Array. Tuttavia, non è possibile aggiungere uno StructArray a una collezione esistente e Milvus non supporta l'uso del tipo Struct come tipo di dati per un campo della collezione.</p>
 <p>Le strutture di un campo Array condividono lo stesso schema, che deve essere definito quando si crea il campo Array.</p>
 <p>Uno schema Struct contiene sia vettori che campi scalari, come elencato di seguito:</p>
-<p><Grid columnSize="2" widthRatios="50,50"></p>
-<pre><code translate="no">  &lt;div&gt;
-
-      Applicable vector fields:
-
-      - `FLOAT_VECTOR`
-
-      - `FLOAT16_VECTOR`
-
-      - `BFLOAT16_VECTOR`
-
-      - `INT8_VECTOR`
-
-      - `BINARY_VECTOR`
-
-  &lt;/div&gt;
-
-  &lt;div&gt;
-
-      Applicable scalar fields:
-
-      - `VARCHAR`
-
-      - `INT8/16/32/64`
-
-      - `FLOAT`
-
-      - `DOUBLE`
-
-      - `BOOL`
-
-  &lt;/div&gt;
-</code></pre>
-<p></Grid></p>
+<ul>
+<li><p>Tipi di dati vettoriali applicabili: <code translate="no">FLOAT_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code>, <code translate="no">INT8_VECTOR</code> e <code translate="no">BINARY_VECTOR</code>.</p></li>
+<li><p>Tipi di dati scalari applicabili: <code translate="no">VARCHAR</code>, <code translate="no">INT8/16/32/64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, e <code translate="no">BOOL</code>.</p></li>
+</ul>
 <p>Mantenere il numero di campi vettoriali sia a livello di collezione che nelle Strutture combinate non superiore o uguale a 10.</p></li>
 <li><p><strong>Valori nulli e predefiniti</strong></p>
 <p>Un campo StructArray non è nullable e non accetta alcun valore predefinito.</p></li>
@@ -145,7 +115,7 @@ summary: >-
 <p>I campi scalari del campo StructArray supportano i seguenti tipi di indice:</p>
 <ul>
 <li><p><code translate="no">INVERTED</code></p>
-<p>Questo di solito si applica a filtri di tipo stringa o categorico, come <code translate="no">structA[color]</code> o <code translate="no">structA[str_val]</code>. Per maggiori dettagli, fare riferimento a <a href="/docs/it/inverted.md">INVERTED</a>.</p></li>
+<p>Questo di solito si applica a filtri di tipo stringa o categorico, come <code translate="no">structA[color]</code> o <code translate="no">structA[str_val]</code>. Per i dettagli, fare riferimento a <a href="/docs/it/inverted.md">INVERTED</a>.</p></li>
 <li><p><code translate="no">STL_SORT</code></p>
 <p>Di solito si applica all'accelerazione di tipo range o order sui valori numerici, come <code translate="no">strctA[num_val]</code>. Per i dettagli, fare riferimento a <a href="/docs/it/stl-sort.md">STL_SORT</a>.</p></li>
 </ul></li>

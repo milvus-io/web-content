@@ -20,10 +20,6 @@ title: Milvus CDC
       </svg>
     </button></h1><p>Milvus CDC（变更数据捕获）可将数据变更从一个 Milvus 集群复制到另一个。您可以使用 CDC 为 Milvus 构建主备灾难恢复拓扑。</p>
 <p>在主备拓扑中，一个群集作为主群集并接受写入。一个或多个备用群集持续接收来自主群集的更改，并可提供读取流量。当主群集不可用或需要维护时，可将服务流量切换到备用群集。</p>
-<p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cdc-overview.png" alt="CDC workflow" class="doc-image" id="cdc-workflow" />
-   </span> <span class="img-wrapper"> <span>CDC 工作流程</span> </span></p>
 <h2 id="Architecture" class="common-anchor-header">架构<button data-href="#Architecture" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -118,7 +114,7 @@ Primary cluster A  -- CDC replication --&gt;  Standby cluster B
 <tr><th>操作符</th><th>在以下情况下使用</th><th>数据丢失</th><th>预期行为</th></tr>
 </thead>
 <tbody>
-<tr><td><strong><a href="/docs/zh/v2.6.x/cdc_switchover.md">切换</a></strong></td><td>当前主运行仍可到达，或正在进行计划维护</td><td>RPO = 0</td><td>角色转换前等待剩余的复制数据</td></tr>
+<tr><td><strong><a href="/docs/zh/v2.6.x/cdc_switchover.md">切换</a></strong></td><td>当前主设备仍可连接，或正在进行计划维护</td><td>RPO = 0</td><td>角色转换前等待剩余的复制数据</td></tr>
 <tr><td><strong><a href="/docs/zh/v2.6.x/cdc_failover.md">故障切换</a></strong></td><td>当前主服务器不可用，无法快速恢复</td><td>可能</td><td>立即升级备用，以便恢复写入</td></tr>
 </tbody>
 </table>

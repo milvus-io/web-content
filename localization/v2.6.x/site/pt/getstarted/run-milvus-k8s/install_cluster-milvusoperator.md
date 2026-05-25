@@ -36,7 +36,7 @@ title: Instalar o Milvus Cluster com o Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus Operator é uma solução que ajuda a implantar e gerenciar uma pilha de serviços Milvus completa para atingir os clusters Kubernetes (K8s). A pilha inclui todos os componentes do Milvus e dependências relevantes, como etcd, Pulsar e MinIO.</p>
+    </button></h2><p>O Milvus Operator é uma solução que ajuda a implantar e gerenciar uma pilha completa de serviços Milvus para atingir os clusters Kubernetes (K8s). A pilha inclui todos os componentes do Milvus e dependências relevantes, como etcd, Pulsar e MinIO.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -81,7 +81,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus Operator define recursos personalizados de um cluster Milvus em cima dos <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">Recursos Personalizados do Kubernetes</a>. Quando os recursos personalizados são definidos, pode utilizar as APIs K8s de uma forma declarativa e gerir a pilha de implementação do Milvus para garantir a sua escalabilidade e alta disponibilidade.</p>
+    </button></h2><p>O Milvus Operator define recursos personalizados de um cluster Milvus em cima dos <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">Recursos Personalizados do Kubernetes</a>. Quando os recursos personalizados são definidos, pode utilizar as APIs do K8s de forma declarativa e gerir a pilha de implementação do Milvus para garantir a sua escalabilidade e alta disponibilidade.</p>
 <div class="filter">
  <a href="#helm">Helm</a> <a href="#kubectl">Kubectl</a></div>
 <div class="filter-helm">
@@ -173,14 +173,14 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Depois que o pod do Milvus Operator estiver em execução, você poderá implantar um cluster do Milvus da seguinte maneira.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>O comando acima implementa um cluster Milvus com o <strong>Woodpecker</strong> como fila de mensagens (recomendado para a versão 2.6.16) e todos os novos componentes de arquitetura, incluindo o nó de fluxo contínuo.</p>
+<p>O comando acima implementa um cluster Milvus com o <strong>Woodpecker</strong> como fila de mensagens (recomendado para a versão 2.6.17) e todos os novos componentes de arquitetura, incluindo o nó de fluxo contínuo.</p>
 <p><strong>Destaques da arquitetura nesta implementação:</strong></p>
 <ul>
 <li><strong>Fila de mensagens</strong>: <a href="/docs/pt/v2.6.x/use-woodpecker.md">Usa o Woodpecker</a> (reduz a manutenção da infraestrutura)</li>
 <li><strong>Nó de streaming</strong>: Habilitado para processamento de dados aprimorado</li>
 <li><strong>Coordenador Mix</strong>: Componentes consolidados do coordenador para maior eficiência</li>
 </ul>
-<p>Para personalizar estas definições, recomendamos a utilização da <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> para ajustar as configurações com base no tamanho real dos dados e, em seguida, descarregar o ficheiro YAML correspondente. Para saber mais sobre os parâmetros de configuração, consulte a <a href="https://milvus.io/docs/system_configuration.md">Lista de verificação das configurações do sistema Milvus</a>.</p>
+<p>Para personalizar estas definições, recomendamos a utilização da <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> para ajustar as configurações com base no tamanho real dos seus dados e, em seguida, descarregar o ficheiro YAML correspondente. Para saber mais sobre os parâmetros de configuração, consulte a <a href="https://milvus.io/docs/system_configuration.md">Lista de verificação das configurações do sistema Milvus</a>.</p>
 <div class="alert note">
 <ul>
 <li>O nome da versão deve conter apenas letras, números e traços. Os pontos não são permitidos no nome da versão.</li>
@@ -304,7 +304,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
     </button></h2><p>Você pode visualizar e atualizar as configurações do seu cluster Milvus chamando o comando <code translate="no">patch</code> da seguinte forma:</p>
 <ol>
 <li><p>Execute o seguinte comando para visualizar as possíveis configurações.</p>
-<p>O comando a seguir assume que você deseja atualizar o parâmetro <code translate="no">spec.components.disableMetric</code> para <code translate="no">false</code> ms.</p>
+<p>O seguinte comando pressupõe que pretende atualizar o parâmetro <code translate="no">spec.components.disableMetric</code> para <code translate="no">false</code> ms.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl patch milvus my-release --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;merge&#x27;</span>\
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span> \
   --dry-run=client -o yaml</span>
@@ -315,7 +315,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span></span> 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h2 id="Access-Milvus-WebUI" class="common-anchor-header">Acessar a WebUI do Milvus<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
+<h2 id="Access-Milvus-WebUI" class="common-anchor-header">Acesso à WebUI do Milvus<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -356,7 +356,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>Quando você exclui o cluster do Milvus usando a configuração padrão, dependências como etcd, Pulsar e MinIO não são excluídas. Portanto, da próxima vez que instalar a mesma instância do cluster Milvus, essas dependências serão usadas novamente.</li>
+<li>Quando você exclui o cluster do Milvus usando a configuração padrão, as dependências como etcd, Pulsar e MinIO não são excluídas. Portanto, na próxima vez que instalar a mesma instância do cluster Milvus, essas dependências serão usadas novamente.</li>
 <li>Para eliminar as dependências e as reivindicações de volume persistente (PVCs) juntamente com o cluster Milvus, consulte o <a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">ficheiro de configuração</a>.</li>
 </ul>
 </div>

@@ -63,7 +63,7 @@ title: تشغيل Milvus في Docker (لينكس)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>ما الجديد في الإصدار 2.6.16:</strong></p>
+<p><strong>ما الجديد في الإصدار 2.6.17:</strong></p>
 <ul>
 <li><strong>عقدة التدفق</strong>: قدرات معالجة البيانات المحسّنة</li>
 <li><strong>نقار الخشب MQ</strong>: قائمة انتظار محسّنة للرسائل مع تقليل نفقات الصيانة، انظر <a href="/docs/ar/v2.6.x/use-woodpecker.md">استخدام نقار الخشب</a> للحصول على التفاصيل</li>
@@ -106,7 +106,7 @@ EOF
 <p>ثم أعد تشغيل الخدمة على النحو التالي:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh restart</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>للاطلاع على عناصر التكوين القابلة للتطبيق، راجع <a href="/docs/ar/v2.6.x/system_configuration.md">تكوين النظام</a>.</p>
+<p>للحصول على عناصر التكوين القابلة للتطبيق، راجع <a href="/docs/ar/v2.6.x/system_configuration.md">تكوين النظام</a>.</p>
 <h2 id="Upgrade-Milvus" class="common-anchor-header">ترقية ميلفوس<button data-href="#Upgrade-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

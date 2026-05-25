@@ -112,12 +112,12 @@ id: home.md
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><em>Март 2026 - Обновления Milvus 2.6.x</em></p>
+    </button></h2><p><em>Май 2026 - Обновления Milvus 3.0.x</em></p>
 <ul>
-<li>Добавлен раздел <a href="/docs/ru/milvus_for_agents.md">Milvus for AI Agents</a> с руководствами по использованию.</li>
-<li>Добавлено руководство по использованию <a href="/docs/ru/google-gemini.md">функции встраивания Gemini</a>.</li>
-<li>Добавлено руководство по <a href="/docs/ru/primary-key-search.md">поиску по первичным ключам</a>.</li>
-<li>Добавлено руководство по использованию <a href="/docs/ru/text-highlighter.md">подсветки текста</a> в результатах поиска.</li>
-<li>Добавлены описания <a href="/docs/ru/geometry-field.md">поля geometry</a>, <a href="/docs/ru/timestamptz-field.md">поля timestamptz</a>, <a href="/docs/ru/tiered-storage-overview.md">многоуровневого хранилища</a> и <a href="/docs/ru/array-of-structs.md">массива структур</a>.</li>
+<li>Добавлены основные <a href="/docs/ru/release_notes.md">сведения</a> о Milvus 3.0.x, включая внешние коллекции, моментальные снимки, хранилище V3 и интеграцию экосистемы озера.</li>
+<li>Добавлено руководство по <a href="/docs/ru/single-vector-search.md#Sort-Search-Results-by-Scalar-Fields--Milvus-30x">сортировке результатов поиска по скалярным полям</a> и <a href="/docs/ru/get-and-scalar-query.md#Aggregate-Query-Results--Milvus-30x">агрегированию результатов запросов</a>.</li>
+<li>Добавлено руководство по использованию <a href="/docs/ru/nullable-and-default.md">нулевых векторных полей</a> и <a href="/docs/ru/set-collection-ttl.md#Set-entity-level-TTL--Milvus-30x">TTL на уровне сущности</a>.</li>
+<li>Добавлено руководство по использованию <a href="/docs/ru/minhash-function.md">функции MinHash Function</a> для подписей MinHash на стороне сервера.</li>
+<li>Добавлено руководство по <a href="/docs/ru/search-with-embedding-lists.md">поиску с помощью вложенных списков</a> и <a href="/docs/ru/force-merge.md">принудительному уплотнению слияния</a>.</li>
 </ul>
 </div>

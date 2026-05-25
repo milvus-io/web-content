@@ -112,12 +112,12 @@ Di sini Anda akan mempelajari tentang apa itu Milvus, dan bagaimana cara mengins
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><em>Maret 2026 - Pembaruan Milvus 2.6.x</em></p>
+    </button></h2><p><em>Mei 2026 - Pembaruan Milvus 3.0.x</em></p>
 <ul>
-<li>Menambahkan bagian <a href="/docs/id/milvus_for_agents.md">Milvus untuk Agen AI</a> dengan panduan cepat.</li>
-<li>Menambahkan panduan tentang cara menggunakan <a href="/docs/id/google-gemini.md">fungsi penyematan Gemini</a>.</li>
-<li>Menambahkan panduan tentang cara <a href="/docs/id/primary-key-search.md">mencari dengan kunci utama</a>.</li>
-<li>Menambahkan panduan tentang cara menggunakan <a href="/docs/id/text-highlighter.md">penyorot teks</a> dalam hasil pencarian.</li>
-<li>Menambahkan deskripsi <a href="/docs/id/geometry-field.md">bidang geometri</a>, <a href="/docs/id/timestamptz-field.md">bidang timestamptz</a>, <a href="/docs/id/tiered-storage-overview.md">penyimpanan berjenjang</a>, dan <a href="/docs/id/array-of-structs.md">array struktur.</a></li>
+<li>Menambahkan sorotan Milvus 3.0.x ke <a href="/docs/id/release_notes.md">Catatan Rilis</a>, termasuk Koleksi Eksternal, Snapshot, Storage V3, dan integrasi ekosistem danau.</li>
+<li>Menambahkan panduan tentang cara <a href="/docs/id/single-vector-search.md#Sort-Search-Results-by-Scalar-Fields--Milvus-30x">mengurutkan hasil pencarian berdasarkan bidang skalar</a> dan <a href="/docs/id/get-and-scalar-query.md#Aggregate-Query-Results--Milvus-30x">hasil kueri agregat</a>.</li>
+<li>Menambahkan panduan tentang cara menggunakan <a href="/docs/id/nullable-and-default.md">bidang vektor</a> yang <a href="/docs/id/nullable-and-default.md">dapat dinolkan</a> dan <a href="/docs/id/set-collection-ttl.md#Set-entity-level-TTL--Milvus-30x">TTL tingkat entitas</a>.</li>
+<li>Menambahkan panduan tentang cara menggunakan <a href="/docs/id/minhash-function.md">Fungsi MinHash</a> untuk tanda tangan MinHash sisi server.</li>
+<li>Menambahkan panduan tentang cara <a href="/docs/id/search-with-embedding-lists.md">mencari dengan daftar penyematan</a> dan memicu <a href="/docs/id/force-merge.md">pemadatan penggabungan paksa</a>.</li>
 </ul>
 </div>

@@ -2,7 +2,7 @@
 id: milvus_cdc_overview.md
 summary: >-
   Milvus CDC replica los cambios de datos de un clúster Milvus a otro para la
-  recuperación de desastres primaria y en espera.
+  recuperación de desastres en espera primaria.
 title: Milvus CDC
 ---
 <h1 id="Milvus-CDC" class="common-anchor-header">Milvus CDC<button data-href="#Milvus-CDC" class="anchor-icon" translate="no">
@@ -22,10 +22,6 @@ title: Milvus CDC
       </svg>
     </button></h1><p>Milvus CDC (Change Data Capture) replica los cambios de datos de un cluster Milvus a otro. Puede utilizar CDC para construir una topología de recuperación de desastres primaria-standby para Milvus.</p>
 <p>En una topología primaria-standby, un cluster actúa como primario y acepta escrituras. Uno o más clusters en espera reciben continuamente cambios del primario y pueden servir tráfico de lectura. Cuando el clúster primario deja de estar disponible o necesita mantenimiento, puede cambiar el tráfico de servicio a un clúster en espera.</p>
-<p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cdc-overview.png" alt="CDC workflow" class="doc-image" id="cdc-workflow" />
-   </span> <span class="img-wrapper"> <span>Flujo de trabajo CDC</span> </span></p>
 <h2 id="Architecture" class="common-anchor-header">Arquitectura<button data-href="#Architecture" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -144,7 +140,7 @@ Primary cluster A  -- CDC replication --&gt;  Standby cluster B
 <p>El retraso de CDC afecta a ambas opciones de recuperación:</p>
 <ul>
 <li>Durante la conmutación, un CDC lag menor suele significar que la operación se completa más rápido.</li>
-<li>Durante la conmutación por error, el CDC lag representa la ventana de datos que puede perderse si el primario original no está disponible.</li>
+<li>Durante la conmutación por error, el retraso de CDC representa la ventana de datos que puede perderse si el primario original no está disponible.</li>
 </ul>
 <p>Debe monitorizar el retardo CDC continuamente y mantenerlo lo más bajo posible. La página <a href="/docs/es/v2.6.x/set_up_cdc_replication.md">Configurar Replicación CDC</a> incluye un ejemplo PromQL para estimar el retardo CDC.</p>
 <h2 id="Limitations" class="common-anchor-header">Limitaciones<button data-href="#Limitations" class="anchor-icon" translate="no">
@@ -185,7 +181,7 @@ Primary cluster A  -- CDC replication --&gt;  Standby cluster B
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Can-a-standby-cluster-serve-queries" class="common-anchor-header">¿Puede un cluster en espera servir consultas?<button data-href="#Can-a-standby-cluster-serve-queries" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Can-a-standby-cluster-serve-queries" class="common-anchor-header">¿Puede un clúster en espera servir consultas?<button data-href="#Can-a-standby-cluster-serve-queries" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -248,7 +244,7 @@ Primary cluster A  -- CDC replication --&gt;  Standby cluster B
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Es posible. Pueden perderse los datos escritos en el antiguo primario que aún no se hayan replicado en el servidor en espera.</p>
+    </button></h3><p>Es posible. Pueden perderse los datos escritos en el antiguo primario que aún no se hayan replicado en el repositorio.</p>
 <h3 id="How-much-data-can-be-lost-during-failover" class="common-anchor-header">¿Cuántos datos pueden perderse durante la conmutación por error?<button data-href="#How-much-data-can-be-lost-during-failover" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -135,7 +135,7 @@ $ curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/st
 $ bash standalone_embed.sh start​
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Inicie Milvus como contenedor Docker.</p>
+<li><p>Inicie Milvus como un contenedor Docker.</p>
 <pre><code translate="no" class="language-bash">$ bash standalone_embed.sh start​
 Wait <span class="hljs-keyword">for</span> Milvus Starting...​
 Start successfully.​
@@ -189,7 +189,7 @@ Delete successfully.​
 <li><p>Abra Docker Desktop en modo administrador haciendo clic con el botón derecho y seleccionando <strong>Ejecutar como administrador</strong>.</p></li>
 <li><p>Ejecute los siguientes comandos en PowerShell o Windows Command Prompt para descargar el archivo de configuración Docker Compose para Milvus Standalone e iniciar Milvus.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.16/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -201,7 +201,7 @@ Creating milvus-standalone ... done​
 <p>Dependiendo de su conexión de red, la descarga de imágenes para la instalación de Milvus puede tardar un poco. Una vez que los contenedores llamados <strong>milvus-standalone</strong>, <strong>milvus-minio</strong>, y <strong>milvus-etcd</strong> están arriba, puede ser testigo de que</p>
 <ul>
 <li><p>El contenedor <strong>milvus-etcd</strong> no expone ningún puerto al host y mapea sus datos a <strong>volúmenes/etcd</strong> en la carpeta actual.</p></li>
-<li><p>El contenedor <strong>milvus-minio</strong> sirve los puertos <strong>9090</strong> y <strong>9091</strong> localmente con las credenciales de autenticación por defecto y asigna sus datos a <strong>volumes/minio</strong> en la carpeta actual.</p></li>
+<li><p>El contenedor <strong>milvus-minio</strong> sirve los puertos <strong>9090</strong> y <strong>9091</strong> localmente con las credenciales de autenticación predeterminadas y asigna sus datos a <strong>volumes/minio</strong> en la carpeta actual.</p></li>
 <li><p>El contenedor <strong>milvus-standalone</strong> sirve los puertos <strong>19530</strong> localmente con la configuración por defecto y asigna sus datos a <strong>volumes/milvus</strong> en la carpeta actual.</p></li>
 </ul></li>
 </ol>
@@ -230,7 +230,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Descargue el archivo de configuración de Milvus.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.16/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Inicie Milvus.</p>
@@ -280,7 +280,7 @@ Creating milvus-standalone ... done​
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/task-manager.png" alt="Virtualization in Task Manager" class="doc-image" id="virtualization-in-task-manager" />
    </span> <span class="img-wrapper"> <span>Virtualización en el Administrador de tareas</span> </span></p>
-<p>Si la virtualización está deshabilitada, puede que necesites comprobar la configuración de la BIOS del firmware de tu placa base. La forma de activar la virtualización en la configuración de la BIOS varía según el fabricante de la placa base. Para la placa base ASUS, por ejemplo, puedes consultar <a href="https://www.asus.com/support/faq/1043786/">este artículo</a> sobre cómo habilitar la virtualización.</p>
+<p>Si la virtualización está deshabilitada, puede que necesites comprobar la configuración de la BIOS del firmware de tu placa base. La forma de habilitar la virtualización en la configuración de la BIOS varía según el fabricante de la placa base. Para la placa base ASUS, por ejemplo, puedes consultar <a href="https://www.asus.com/support/faq/1043786/">este artículo</a> sobre cómo habilitar la virtualización.</p>
 <p>A continuación, es necesario reiniciar el equipo y habilitar Hyper-V. Para más detalles, consulta este <a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">artículo de Microsoft</a>.</p></li>
 <li><p>Compruebe si se ha iniciado el servicio Docker Desktop.</p>
 <p>Puede ejecutar el siguiente comando para iniciar el servicio Docker Desktop.</p>

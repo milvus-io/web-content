@@ -19,6 +19,73 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.6.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v2617" class="common-anchor-header">v2.6.17<button data-href="#v2617" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release date: May 22, 2026</p>
+<table>
+<thead>
+<tr><th>Milvus Version</th><th>Python SDK Version</th><th>Node.js SDK Version</th><th>Java SDK Version</th><th>Go SDK Version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.6.17</td><td>2.6.14</td><td>2.6.14</td><td>2.6.20</td><td>2.6.4</td></tr>
+</tbody>
+</table>
+<p>We are excited to announce the release of Milvus v2.6.17! This release introduces Array field partial update operators, improves load/search isolation, and resolves several stability and query routing issues.</p>
+<h3 id="Improvements" class="common-anchor-header">Improvements<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Added <a href="/docs/ru/v2.6.x/upsert-entities.md#Upsert-ARRAY-fields-with-partial-update-operators"><code translate="no">ARRAY_APPEND</code> and <code translate="no">ARRAY_REMOVE</code> partial update operators</a> for Array fields, exposed through both gRPC and REST upsert APIs (<a href="https://github.com/milvus-io/milvus/pull/49328">#49328</a>, <a href="https://github.com/milvus-io/milvus/pull/49724">#49724</a>)</li>
+<li>Improved load/search isolation by using separate C++ executor pools and converting SegmentLoad and ReopenSegment to async futures with proper context cancellation (<a href="https://github.com/milvus-io/milvus/pull/49764">#49764</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Fixed an issue where filter expression templates could not be used with string field predicates (<a href="https://github.com/milvus-io/milvus/pull/49703">#49703</a>)</li>
+<li>Fixed an issue where stale segment distribution updates after delegator close could corrupt query routing (<a href="https://github.com/milvus-io/milvus/pull/49727">#49727</a>)</li>
+<li>Fixed an issue where releasing a collection could leave stale replica state due to premature metadata cleanup in QueryCoord (<a href="https://github.com/milvus-io/milvus/pull/49730">#49730</a>)</li>
+<li>Fixed an issue where transient shard errors caused replicas to be blacklisted, leading to unnecessary query failures and degraded availability (<a href="https://github.com/milvus-io/milvus/pull/49740">#49740</a>, <a href="https://github.com/milvus-io/milvus/pull/49776">#49776</a>)</li>
+<li>Fixed missing GetReplicateConfiguration RPC forwarding in the proxy service (<a href="https://github.com/milvus-io/milvus/pull/49810">#49810</a>)</li>
+<li>Fixed a potential use-after-free crash when closing the packed writer multiple times or during compaction cleanup paths (<a href="https://github.com/milvus-io/milvus/pull/49816">#49816</a>)</li>
+</ul>
 <h2 id="v2616" class="common-anchor-header">v2.6.16<button data-href="#v2616" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

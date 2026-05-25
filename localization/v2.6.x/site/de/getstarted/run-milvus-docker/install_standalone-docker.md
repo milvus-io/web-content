@@ -38,7 +38,7 @@ title: Milvus in Docker ausführen (Linux)
       </svg>
     </button></h2><ul>
 <li><a href="https://docs.docker.com/get-docker/">Installieren Sie Docker</a>.</li>
-<li><a href="/docs/de/v2.6.x/prerequisite-docker.md">Prüfen Sie</a> vor der Installation<a href="/docs/de/v2.6.x/prerequisite-docker.md">die Anforderungen an Hardware und Software</a>.</li>
+<li><a href="/docs/de/v2.6.x/prerequisite-docker.md">Überprüfen Sie</a> vor der Installation<a href="/docs/de/v2.6.x/prerequisite-docker.md">die Anforderungen an Hardware und Software</a>.</li>
 </ul>
 <h2 id="Install-Milvus-in-Docker" class="common-anchor-header">Installieren von Milvus in Docker<button data-href="#Install-Milvus-in-Docker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -63,7 +63,7 @@ title: Milvus in Docker ausführen (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Was ist neu in v2.6.16:</strong></p>
+<p><strong>Was ist neu in v2.6.17:</strong></p>
 <ul>
 <li><strong>Streaming Node</strong>: Verbesserte Datenverarbeitungsmöglichkeiten</li>
 <li><strong>Woodpecker MQ</strong>: Verbesserte Nachrichtenwarteschlange mit reduziertem Wartungsaufwand, siehe <a href="/docs/de/v2.6.x/use-woodpecker.md">Woodpecker verwenden</a> für Details</li>

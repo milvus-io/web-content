@@ -82,7 +82,8 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Upsert dalam Mode Penggabungan</span> </span></p>
 <p>Untuk melakukan penggabungan, setel <code translate="no">partial_update</code> ke <code translate="no">True</code> dalam permintaan <code translate="no">upsert</code> bersama dengan kunci utama dan bidang yang akan diperbarui dengan nilai barunya.</p>
 <p>Setelah menerima permintaan seperti itu, Milvus melakukan kueri dengan konsistensi yang kuat untuk mengambil entitas, memperbarui nilai bidang berdasarkan data dalam permintaan, menyisipkan data yang dimodifikasi, dan kemudian menghapus entitas yang ada dengan kunci utama asli yang dibawa dalam permintaan.</p>
-<h3 id="Upsert-behaviors-special-notes" class="common-anchor-header">Perilaku pengubahan: catatan khusus<button data-href="#Upsert-behaviors-special-notes" class="anchor-icon" translate="no">
+<p>Untuk bidang <code translate="no">ARRAY</code>, mode penggabungan mendukung dua operator: <code translate="no">ARRAY_APPEND</code> dan <code translate="no">ARRAY_REMOVE</code>. Operator ini memungkinkan Anda menambahkan elemen atau menghapus elemen yang cocok dari bidang <code translate="no">ARRAY</code> yang sudah ada tanpa terlebih dahulu meminta entitas untuk mengambil nilai saat ini. Untuk detailnya, lihat <a href="/docs/id/v2.6.x/upsert-entities.md#Upsert-ARRAY-fields-with-partial-update-operators">Bidang ARRAY Upsert dengan operator pembaruan parsial</a>.</p>
+<h3 id="Upsert-behaviors-special-notes" class="common-anchor-header">Perilaku Upsert: catatan khusus<button data-href="#Upsert-behaviors-special-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -97,7 +98,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Ada beberapa catatan khusus yang harus Anda pertimbangkan sebelum menggunakan fitur penggabungan. Kasus berikut ini mengasumsikan bahwa Anda memiliki koleksi dengan dua field skalar bernama <code translate="no">title</code> dan <code translate="no">issue</code>, bersama dengan kunci utama <code translate="no">id</code> dan field vektor bernama <code translate="no">vector</code>.</p>
+    </button></h3><p>Ada beberapa catatan khusus yang harus Anda pertimbangkan sebelum menggunakan fitur penggabungan. Kasus berikut ini mengasumsikan bahwa Anda memiliki koleksi dengan dua bidang skalar bernama <code translate="no">title</code> dan <code translate="no">issue</code>, bersama dengan kunci utama <code translate="no">id</code> dan bidang vektor bernama <code translate="no">vector</code>.</p>
 <ul>
 <li><p>Menggabungkan<strong>field dengan</strong> <code translate="no">nullable</code> <strong>yang diaktifkan</strong>.</p>
 <p>Misalkan field <code translate="no">issue</code> bisa saja bernilai nol. Ketika Anda meng-upsert field ini, perhatikan hal tersebut:</p>
@@ -116,7 +117,9 @@ summary: >-
 </ul></li>
 <li><p><strong>Menambah bidang JSON.</strong></p>
 <p>Misalkan koleksi contoh memiliki bidang JSON yang ditentukan skema bernama <code translate="no">extras</code>, dan pasangan nilai-kunci dalam bidang JSON entitas ini mirip dengan <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
-<p>Ketika Anda meng-upload field <code translate="no">extras</code> dari sebuah entitas dengan data JSON yang telah dimodifikasi, perhatikan bahwa field JSON tersebut diperlakukan secara keseluruhan, dan Anda tidak dapat memperbarui setiap kunci secara selektif. Dengan kata lain, bidang JSON <strong>TIDAK</strong> mendukung upsert dalam mode <strong>penggabungan</strong>.</p></li>
+<p>Ketika Anda meng-upload field <code translate="no">extras</code> dari sebuah entitas dengan data JSON yang telah dimodifikasi, perhatikan bahwa field JSON tersebut diperlakukan sebagai satu kesatuan, dan Anda tidak dapat memperbarui setiap kunci secara selektif. Dengan kata lain, bidang JSON <strong>TIDAK</strong> mendukung upsert dalam mode <strong>penggabungan</strong>.</p></li>
+<li><p><strong>Meng-upsert</strong> <strong>bidang</strong> <code translate="no">ARRAY</code> <strong>.</strong> </p>
+<p>Dalam mode penggabungan, bidang <code translate="no">ARRAY</code> mendukung operator pembaruan parsial <code translate="no">ARRAY_APPEND</code> dan <code translate="no">ARRAY_REMOVE</code>. Gunakan operator ini saat Anda ingin menambahkan elemen ke, atau menghapus elemen yang cocok dari, bidang <code translate="no">ARRAY</code> yang sudah ada tanpa mengganti seluruh nilai larik.</p></li>
 </ul>
 <h3 id="Limits--Restrictions" class="common-anchor-header">Batasan &amp; Pembatasan<button data-href="#Limits--Restrictions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -611,4 +614,345 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <span class="hljs-comment">#         ]</span>
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Upsert-ARRAY-fields-with-partial-update-operators--Milvus-v2617+" class="common-anchor-header">Menambah bidang ARRAY dengan operator pembaruan sebagian<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.17+</span><button data-href="#Upsert-ARRAY-fields-with-partial-update-operators--Milvus-v2617+" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Sebelum operator partial-update diperkenalkan, memperbarui sebagian dari bidang <code translate="no">ARRAY</code> memerlukan alur baca-modifikasi-tulis sisi klien: kueri larik yang ada, ubah dalam kode aplikasi, dan masukkan nilai pengganti secara penuh. Operator pembaruan parsial memungkinkan Anda mengirim hanya elemen yang akan ditambahkan atau dihapus, yang mengurangi logika sisi klien dan menghindari pembacaan ekstra sebelum upsert.</p>
+<p>Misalkan entitas dengan kunci utama <code translate="no">1</code> sudah memiliki <code translate="no">tags = [&quot;new&quot;, &quot;trial&quot;]</code>. Tanpa operator pembaruan parsial, menambahkan <code translate="no">&quot;premium&quot;</code> ke larik membutuhkan upserting larik pengganti secara penuh:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">client.upsert(
+    collection_name=<span class="hljs-string">&quot;users&quot;</span>,
+<span class="highlighted-comment-line">    data=[{<span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;new&quot;</span>, <span class="hljs-string">&quot;trial&quot;</span>, <span class="hljs-string">&quot;premium&quot;</span>]}],</span>
+<span class="highlighted-comment-line">    partial_update=<span class="hljs-literal">True</span>,</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">List&lt;JsonObject&gt; replacementData = Collections.singletonList(
+        gson.fromJson(<span class="hljs-string">&quot;{\&quot;pk\&quot;: 1, \&quot;tags\&quot;: [\&quot;new\&quot;, \&quot;trial\&quot;, \&quot;premium\&quot;]}&quot;</span>, JsonObject.class)
+);
+
+client.upsert(UpsertReq.builder()
+        .collectionName(<span class="hljs-string">&quot;users&quot;</span>)
+<span class="highlighted-comment-line">        .partialUpdate(<span class="hljs-literal">true</span>)</span>
+<span class="highlighted-comment-line">        .data(replacementData)</span>
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Dengan <code translate="no">ARRAY_APPEND</code>, kirimkan hanya elemen yang akan ditambahkan:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldOp
+
+client.upsert(
+    collection_name=<span class="hljs-string">&quot;users&quot;</span>,
+<span class="highlighted-comment-line">    data=[{<span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;premium&quot;</span>]}],</span>
+<span class="highlighted-comment-line">    field_ops={<span class="hljs-string">&quot;tags&quot;</span>: FieldOp.array_append()},</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">List&lt;JsonObject&gt; appendData = Collections.singletonList(
+        gson.fromJson(<span class="hljs-string">&quot;{\&quot;pk\&quot;: 1, \&quot;tags\&quot;: [\&quot;premium\&quot;]}&quot;</span>, JsonObject.class)
+);
+
+UpsertReq.<span class="hljs-type">FieldPartialUpdateOp</span> <span class="hljs-variable">appendTags</span> <span class="hljs-operator">=</span> UpsertReq.FieldPartialUpdateOp.builder()
+        .fieldName(<span class="hljs-string">&quot;tags&quot;</span>)
+        .opType(UpsertReq.FieldPartialUpdateOp.OpType.ARRAY_APPEND)
+        .build();
+
+client.upsert(UpsertReq.builder()
+        .collectionName(<span class="hljs-string">&quot;users&quot;</span>)
+<span class="highlighted-comment-line">        .data(appendData)</span>
+<span class="highlighted-comment-line">        .fieldOps(Collections.singletonList(appendTags))</span>
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>Melampirkan salah satu operator ke sebuah field melalui <code translate="no">field_ops</code> secara implisit memungkinkan semantik pembaruan parsial. Oleh karena itu, Anda <strong>tidak</strong> perlu mengoper <code translate="no">partial_update=True</code> bersama dengan <code translate="no">field_ops</code>.</p>
+</div>
+<h3 id="Limits" class="common-anchor-header">Batasan<button data-href="#Limits" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Nilai payload harus sama dengan <code translate="no">element_type</code> dari bidang <code translate="no">ARRAY</code> target. Misalnya, jika bidang target adalah <code translate="no">ARRAY&lt;VARCHAR&gt;</code>, payload harus berisi nilai string.</li>
+<li><code translate="no">ARRAY_APPEND</code> dan <code translate="no">ARRAY_REMOVE</code> mendukung bidang <code translate="no">ARRAY</code> yang <code translate="no">element_type</code> nya adalah <code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, atau <code translate="no">VARCHAR</code>.</li>
+<li>Setelah operasi <code translate="no">ARRAY_APPEND</code>, panjang larik yang dihasilkan tidak boleh melebihi panjang <code translate="no">max_capacity</code>.</li>
+<li>Upgrade bersamaan ke entitas yang sama tidak bersifat atomik di seluruh permintaan. Jika dua permintaan memperbarui bidang <code translate="no">ARRAY</code> yang sama pada waktu yang sama, penulisan yang lebih akhir dapat menimpa yang sebelumnya. Gunakan koordinasi tingkat aplikasi jika Anda perlu mempertahankan semua perubahan bersamaan.</li>
+</ul>
+<h3 id="Example" class="common-anchor-header">Contoh<button data-href="#Example" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Contoh berikut ini menggunakan koleksi kecil <code translate="no">users</code> dengan kunci utama <code translate="no">pk</code>, bidang <code translate="no">tags</code> bertipe <code translate="no">ARRAY&lt;VARCHAR&gt;</code>, dan bidang vektor <code translate="no">embedding</code>. Pertama-tama menyisipkan dua entitas dengan nilai awal <code translate="no">tags</code>, kemudian menggunakan <code translate="no">ARRAY_APPEND</code> dan <code translate="no">ARRAY_REMOVE</code> untuk menunjukkan bagaimana setiap operator mengubah larik yang tersimpan.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, FieldOp, MilvusClient
+
+client = MilvusClient(
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+)
+
+<span class="hljs-comment"># 1. Create a collection with an ARRAY&lt;VARCHAR&gt; field</span>
+schema = client.create_schema(enable_dynamic_field=<span class="hljs-literal">False</span>)
+schema.add_field(<span class="hljs-string">&quot;pk&quot;</span>, DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
+schema.add_field(<span class="hljs-string">&quot;embedding&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
+schema.add_field(
+    <span class="hljs-string">&quot;tags&quot;</span>,
+    DataType.ARRAY,
+    element_type=DataType.VARCHAR,
+    max_capacity=<span class="hljs-number">8</span>,
+    max_length=<span class="hljs-number">32</span>,
+)
+
+index_params = client.prepare_index_params()
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;embedding&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;L2&quot;</span>,
+)
+
+client.create_collection(
+    collection_name=<span class="hljs-string">&quot;users&quot;</span>,
+    schema=schema,
+    index_params=index_params
+)
+
+<span class="hljs-comment"># 2. Seed two entities</span>
+client.insert(
+    collection_name=<span class="hljs-string">&quot;users&quot;</span>,
+    data=[
+        {<span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>], <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;new&quot;</span>]},
+        {<span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">0.9</span>, <span class="hljs-number">1.0</span>], <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;new&quot;</span>, <span class="hljs-string">&quot;trial&quot;</span>]},
+    ],
+)
+
+<span class="hljs-comment"># 3. Append tags without reading the existing ARRAY values</span>
+client.upsert(
+    collection_name=<span class="hljs-string">&quot;users&quot;</span>,
+<span class="highlighted-comment-line">    data=[</span>
+<span class="highlighted-comment-line">        {<span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;premium&quot;</span>, <span class="hljs-string">&quot;vip&quot;</span>]},</span>
+<span class="highlighted-comment-line">        {<span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;premium&quot;</span>]},</span>
+<span class="highlighted-comment-line">    ],</span>
+<span class="highlighted-comment-line">    field_ops={<span class="hljs-string">&quot;tags&quot;</span>: FieldOp.array_append()},</span>
+)
+
+res = client.query(
+    collection_name=<span class="hljs-string">&quot;users&quot;</span>,
+    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;pk in [1, 2]&quot;</span>,
+    output_fields=[<span class="hljs-string">&quot;pk&quot;</span>, <span class="hljs-string">&quot;tags&quot;</span>],
+)
+<span class="hljs-built_in">print</span>(res)
+
+<span class="hljs-comment"># Example output:</span>
+<span class="hljs-comment"># data: [</span>
+<span class="hljs-comment">#   &quot;{&#x27;pk&#x27;: 1, &#x27;tags&#x27;: [&#x27;new&#x27;, &#x27;premium&#x27;, &#x27;vip&#x27;]}&quot;,</span>
+<span class="hljs-comment">#   &quot;{&#x27;pk&#x27;: 2, &#x27;tags&#x27;: [&#x27;new&#x27;, &#x27;trial&#x27;, &#x27;premium&#x27;]}&quot;</span>
+<span class="hljs-comment"># ]</span>
+
+<span class="hljs-comment"># 4. Remove matching tags without replacing the full ARRAY field</span>
+client.upsert(
+    collection_name=<span class="hljs-string">&quot;users&quot;</span>,
+<span class="highlighted-comment-line">    data=[</span>
+<span class="highlighted-comment-line">        {<span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;new&quot;</span>]},</span>
+<span class="highlighted-comment-line">        {<span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;trial&quot;</span>]},</span>
+<span class="highlighted-comment-line">    ],</span>
+<span class="highlighted-comment-line">    field_ops={<span class="hljs-string">&quot;tags&quot;</span>: FieldOp.array_remove()},</span>
+)
+
+res = client.query(
+    collection_name=<span class="hljs-string">&quot;users&quot;</span>,
+    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;pk in [1, 2]&quot;</span>,
+    output_fields=[<span class="hljs-string">&quot;pk&quot;</span>, <span class="hljs-string">&quot;tags&quot;</span>],
+)
+<span class="hljs-built_in">print</span>(res)
+
+<span class="hljs-comment"># Example output:</span>
+<span class="hljs-comment"># data: [</span>
+<span class="hljs-comment">#   &quot;{&#x27;pk&#x27;: 1, &#x27;tags&#x27;: [&#x27;premium&#x27;, &#x27;vip&#x27;]}&quot;,</span>
+<span class="hljs-comment">#   &quot;{&#x27;pk&#x27;: 2, &#x27;tags&#x27;: [&#x27;new&#x27;, &#x27;premium&#x27;]}&quot;</span>
+<span class="hljs-comment"># ]</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
+<span class="hljs-keyword">import</span> com.google.gson.JsonObject;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.ConsistencyLevel;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.UpsertReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.QueryResp;
+
+<span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.Collections;
+<span class="hljs-keyword">import</span> java.util.List;
+
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
+        .build());
+<span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
+
+<span class="hljs-comment">// 1. Create a collection with an ARRAY&lt;VARCHAR&gt; field</span>
+CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> CreateCollectionReq.CollectionSchema.builder()
+        .enableDynamicField(<span class="hljs-literal">false</span>)
+        .build();
+
+schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;pk&quot;</span>)
+        .dataType(DataType.Int64)
+        .isPrimaryKey(<span class="hljs-literal">true</span>)
+        .build());
+schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)
+        .dataType(DataType.FloatVector)
+        .dimension(<span class="hljs-number">5</span>)
+        .build());
+schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;tags&quot;</span>)
+        .dataType(DataType.Array)
+        .elementType(DataType.VarChar)
+        .maxCapacity(<span class="hljs-number">8</span>)
+        .maxLength(<span class="hljs-number">32</span>)
+        .build());
+
+List&lt;IndexParam&gt; indexParams = Collections.singletonList(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .metricType(IndexParam.MetricType.L2)
+        .build());
+
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;users&quot;</span>)
+        .collectionSchema(schema)
+        .indexParams(indexParams)
+        .consistencyLevel(ConsistencyLevel.STRONG)
+        .build());
+
+<span class="hljs-comment">// 2. Seed two entities</span>
+List&lt;JsonObject&gt; data = Arrays.asList(
+        gson.fromJson(<span class="hljs-string">&quot;{\&quot;pk\&quot;: 1, \&quot;embedding\&quot;: [0.1, 0.2, 0.3, 0.4, 0.5], \&quot;tags\&quot;: [\&quot;new\&quot;]}&quot;</span>, JsonObject.class),
+        gson.fromJson(<span class="hljs-string">&quot;{\&quot;pk\&quot;: 2, \&quot;embedding\&quot;: [0.6, 0.7, 0.8, 0.9, 1.0], \&quot;tags\&quot;: [\&quot;new\&quot;, \&quot;trial\&quot;]}&quot;</span>, JsonObject.class)
+);
+
+client.insert(InsertReq.builder()
+        .collectionName(<span class="hljs-string">&quot;users&quot;</span>)
+        .data(data)
+        .build());
+
+<span class="hljs-comment">// 3. Append tags without reading the existing ARRAY values</span>
+List&lt;JsonObject&gt; appendData = Arrays.asList(
+        gson.fromJson(<span class="hljs-string">&quot;{\&quot;pk\&quot;: 1, \&quot;tags\&quot;: [\&quot;premium\&quot;, \&quot;vip\&quot;]}&quot;</span>, JsonObject.class),
+        gson.fromJson(<span class="hljs-string">&quot;{\&quot;pk\&quot;: 2, \&quot;tags\&quot;: [\&quot;premium\&quot;]}&quot;</span>, JsonObject.class)
+);
+
+UpsertReq.<span class="hljs-type">FieldPartialUpdateOp</span> <span class="hljs-variable">appendTags</span> <span class="hljs-operator">=</span> UpsertReq.FieldPartialUpdateOp.builder()
+        .fieldName(<span class="hljs-string">&quot;tags&quot;</span>)
+        .opType(UpsertReq.FieldPartialUpdateOp.OpType.ARRAY_APPEND)
+        .build();
+
+client.upsert(UpsertReq.builder()
+        .collectionName(<span class="hljs-string">&quot;users&quot;</span>)
+<span class="highlighted-comment-line">        .data(appendData)</span>
+<span class="highlighted-comment-line">        .fieldOps(Collections.singletonList(appendTags))</span>
+        .build());
+
+<span class="hljs-type">QueryResp</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> client.query(QueryReq.builder()
+        .collectionName(<span class="hljs-string">&quot;users&quot;</span>)
+        .filter(<span class="hljs-string">&quot;pk in [1, 2]&quot;</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;pk&quot;</span>, <span class="hljs-string">&quot;tags&quot;</span>))
+        .consistencyLevel(ConsistencyLevel.STRONG)
+        .build());
+System.out.println(res);
+
+<span class="hljs-comment">// Example output:</span>
+<span class="hljs-comment">// [</span>
+<span class="hljs-comment">//   {&quot;pk&quot;: 1, &quot;tags&quot;: [&quot;new&quot;, &quot;premium&quot;, &quot;vip&quot;]},</span>
+<span class="hljs-comment">//   {&quot;pk&quot;: 2, &quot;tags&quot;: [&quot;new&quot;, &quot;trial&quot;, &quot;premium&quot;]}</span>
+<span class="hljs-comment">// ]</span>
+
+<span class="hljs-comment">// 4. Remove matching tags without replacing the full ARRAY field</span>
+List&lt;JsonObject&gt; removeData = Arrays.asList(
+        gson.fromJson(<span class="hljs-string">&quot;{\&quot;pk\&quot;: 1, \&quot;tags\&quot;: [\&quot;new\&quot;]}&quot;</span>, JsonObject.class),
+        gson.fromJson(<span class="hljs-string">&quot;{\&quot;pk\&quot;: 2, \&quot;tags\&quot;: [\&quot;trial\&quot;]}&quot;</span>, JsonObject.class)
+);
+
+UpsertReq.<span class="hljs-type">FieldPartialUpdateOp</span> <span class="hljs-variable">removeTags</span> <span class="hljs-operator">=</span> UpsertReq.FieldPartialUpdateOp.builder()
+        .fieldName(<span class="hljs-string">&quot;tags&quot;</span>)
+        .opType(UpsertReq.FieldPartialUpdateOp.OpType.ARRAY_REMOVE)
+        .build();
+
+client.upsert(UpsertReq.builder()
+        .collectionName(<span class="hljs-string">&quot;users&quot;</span>)
+<span class="highlighted-comment-line">        .data(removeData)</span>
+<span class="highlighted-comment-line">        .fieldOps(Collections.singletonList(removeTags))</span>
+        .build());
+
+res = client.query(QueryReq.builder()
+        .collectionName(<span class="hljs-string">&quot;users&quot;</span>)
+        .filter(<span class="hljs-string">&quot;pk in [1, 2]&quot;</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;pk&quot;</span>, <span class="hljs-string">&quot;tags&quot;</span>))
+        .consistencyLevel(ConsistencyLevel.STRONG)
+        .build());
+System.out.println(res);
+
+<span class="hljs-comment">// Example output:</span>
+<span class="hljs-comment">// [</span>
+<span class="hljs-comment">//   {&quot;pk&quot;: 1, &quot;tags&quot;: [&quot;premium&quot;, &quot;vip&quot;]},</span>
+<span class="hljs-comment">//   {&quot;pk&quot;: 2, &quot;tags&quot;: [&quot;new&quot;, &quot;premium&quot;]}</span>
+<span class="hljs-comment">// ]</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>

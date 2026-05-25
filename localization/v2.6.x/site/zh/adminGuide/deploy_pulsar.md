@@ -22,7 +22,7 @@ summary: 了解如何使用 Docker Compose 或 Helm 配置消息存储。
     </button></h1><p>Milvus 使用 Pulsar 或 Kafka 管理最近更改的日志、输出流日志并提供日志订阅。Pulsar 是默认的消息存储系统。本主题介绍如何使用 Docker Compose 或 Helm 配置消息存储。</p>
 <p>您可以使用<a href="https://docs.docker.com/get-started/overview/">Docker Compose</a>或在 K8s 上配置 Pulsar，并在 K8s 上配置 Kafka。</p>
 <div class="alert note">
-<p><strong>消息队列限制</strong>：升级到 Milvus v2.6.16 时，必须保持当前的消息队列选择。不支持在升级期间在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</p>
+<p><strong>消息队列限制</strong>：升级到 Milvus v2.6.17 时，必须保持当前的消息队列选择。不支持在升级期间在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">使用 Docker Compose 配置 Pulsar<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -275,7 +275,7 @@ summary: 了解如何使用 Docker Compose 或 Helm 配置消息存储。
     </button></h2><p>Milvus Standalone 使用 RocksMQ 作为默认消息存储。关于如何使用 Helm 配置 Milvus 的详细步骤，请参阅《<a href="/docs/zh/v2.6.x/configure-helm.md">使用 Helm 图表配置 Milvus》</a>。有关 RocksMQ 相关配置项的详情，请参阅<a href="/docs/zh/v2.6.x/configure_rocksmq.md">RocksMQ 相关配置</a>。</p>
 <ul>
 <li><p>如果你用 RocksMQ 启动 Milvus 并想更改其设置，你可以用以下 YAML 文件中更改后的设置运行<code translate="no">helm upgrade -f</code> 。</p></li>
-<li><p>如果你已经使用 Helm 独立安装了 Milvus Standalone，并使用了 RocksMQ 以外的消息存储空间，但想把它改回 RocksMQ，可以在刷新所有 Collections 并停止 Milvus 后，使用下面的 YAML 文件运行<code translate="no">helm upgrade -f</code> 。</p></li>
+<li><p>如果你使用 Helm 独立安装了 Milvus Standalone，并使用了 RocksMQ 以外的消息存储空间，但想把它改回 RocksMQ，可以在刷新所有 Collections 并停止 Milvus 后，使用下面的 YAML 文件运行<code translate="no">helm upgrade -f</code> 。</p></li>
 </ul>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+

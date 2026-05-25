@@ -22,10 +22,6 @@ title: Milvus CDC
       </svg>
     </button></h1><p>Milvus CDC (Change Data Capture) repliziert Datenänderungen von einem Milvus-Cluster zu einem anderen. Sie können CDC verwenden, um eine Primary-Standby-Disaster-Recovery-Topologie für Milvus aufzubauen.</p>
 <p>In einer Primary-Standby-Topologie fungiert ein Cluster als Primary und nimmt Schreibvorgänge entgegen. Ein oder mehrere Standby-Cluster erhalten kontinuierlich Änderungen vom primären Cluster und können den Leseverkehr bedienen. Wenn der primäre Cluster nicht mehr verfügbar ist oder gewartet werden muss, können Sie den Dienstverkehr auf einen Standby-Cluster umleiten.</p>
-<p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cdc-overview.png" alt="CDC workflow" class="doc-image" id="cdc-workflow" />
-   </span> <span class="img-wrapper"> <span>CDC-Arbeitsablauf</span> </span></p>
 <h2 id="Architecture" class="common-anchor-header">Architektur<button data-href="#Architecture" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -147,7 +143,7 @@ Primary cluster A  -- CDC replication --&gt;  Standby cluster B
 <li>Beim Failover stellt die CDC-Verzögerung das Datenfenster dar, das verloren gehen kann, wenn der ursprüngliche Primärcluster nicht verfügbar ist.</li>
 </ul>
 <p>Sie sollten die CDC-Verzögerung kontinuierlich überwachen und sie so gering wie möglich halten. Die Seite <a href="/docs/de/v2.6.x/set_up_cdc_replication.md">CDC-Replikation einrichten</a> enthält ein PromQL-Beispiel zur Abschätzung des CDC-Lags.</p>
-<h2 id="Limitations" class="common-anchor-header">Beschränkungen<button data-href="#Limitations" class="anchor-icon" translate="no">
+<h2 id="Limitations" class="common-anchor-header">Einschränkungen<button data-href="#Limitations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
