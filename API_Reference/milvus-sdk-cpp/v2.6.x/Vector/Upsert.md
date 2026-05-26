@@ -2,21 +2,7 @@
 
 This operation upserts entities into a collection. You can use either column-wise or row-wise data.
 
-```cpp
-Status Upsert(const UpsertRequest& request, UpsertResponse& response)
-```
-
 ## Request Syntax
-
-```cpp
-auto request = UpsertRequest()
-    .WithDatabaseName(db_name)
-    .WithCollectionName(collection_name)
-    .WithPartitionName(partition_name)
-    .WithColumnsData(columns_data)
-    .WithRowsData(rows_data)
-    .WithPartialUpdate(partial_update);
-```
 
 **REQUEST METHODS:**
 
@@ -66,43 +52,3 @@ Check `status.IsOk()` to confirm success.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
-
-milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-auto status = client->Connect(connect_param);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-// upsert some rows
-int64_t old_id_1 = ids[1];
-int64_t old_id_2 = ids[ids.size() - 1];
-milvus::EntityRows upsert_rows;
-std::vector<float> dummy_vector(dimension);
-for (auto d = 0; d < dimension; ++d) {
-    dummy_vector[d] = 0.88;
-}
-{
-    milvus::EntityRow row;
-    row[field_id] = old_id_1;
-    row[field_text] = "this row is updated from " + std::to_string(old_id_1);
-    row[field_vector] = dummy_vector;
-    upsert_rows.emplace_back(std::move(row));
-}
-{
-    milvus::EntityRow row;
-    row[field_id] = old_id_2;
-    row[field_text] = "this row is updated from " + std::to_string(old_id_2);
-    row[field_vector] = dummy_vector;
-    upsert_rows.emplace_back(std::move(row));
-}
-
-milvus::UpsertResponse resp_upsert;
-status = client->Upsert(
-    milvus::UpsertRequest().WithCollectionName(collection_name).WithRowsData(std::move(upsert_rows)), resp_upsert);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-```
