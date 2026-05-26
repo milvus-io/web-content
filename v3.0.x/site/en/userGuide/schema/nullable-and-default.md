@@ -92,14 +92,14 @@ import io.milvus.v2.common.DataType;
 import io.milvus.v2.service.collection.request.AddFieldReq;
 import io.milvus.v2.service.collection.request.CreateCollectionReq;
 
-import java.util.Collections;
-
 MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build());
 
-CreateCollectionReq.CollectionSchema schema = client.createSchema();
+CreateCollectionReq.CollectionSchema schema = CreateCollectionReq.CollectionSchema.builder()
+        .build();
+
 schema.addField(AddFieldReq.builder()
         .fieldName("id")
         .dataType(DataType.Int64)
@@ -109,15 +109,14 @@ schema.addField(AddFieldReq.builder()
         .fieldName("embedding")
         .dataType(DataType.FloatVector)
         .dimension(4)
+        // highlight-next-line
         .isNullable(true)
         .build());
 
-CreateCollectionReq requestCreate = CreateCollectionReq.builder()
+client.createCollection(CreateCollectionReq.builder()
         .collectionName("my_collection")
         .collectionSchema(schema)
-        .indexParams(Collections.emptyList())
-        .build();
-client.createCollection(requestCreate);
+        .build());
 ```
 
 ```javascript
@@ -255,6 +254,7 @@ schema.add_field(
 schema.addField(AddFieldReq.builder()
         .fieldName("age")
         .dataType(DataType.Int64)
+        // highlight-next-line
         .isNullable(true)
         .build());
 ```
@@ -316,22 +316,31 @@ client.insert(
 
 ```java
 import com.google.gson.Gson;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import io.milvus.v2.service.vector.request.InsertReq;
-import io.milvus.v2.service.vector.response.InsertResp;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-List<JsonObject> rows = new ArrayList<>();
 Gson gson = new Gson();
-rows.add(gson.fromJson("{\"id\": 1, \"embedding\": [0.1, 0.2, 0.3, 0.4]}", JsonObject.class));
-rows.add(gson.fromJson("{\"id\": 2, \"embedding\": null}", JsonObject.class));
-rows.add(gson.fromJson("{\"id\": 3}", JsonObject.class));
 
-InsertResp insertR = client.insert(InsertReq.builder()
+JsonObject row1 = new JsonObject();
+row1.addProperty("id", 1);
+row1.add("embedding", gson.toJsonTree(Arrays.asList(0.1f, 0.2f, 0.3f, 0.4f)));
+
+JsonObject row2 = new JsonObject();
+row2.addProperty("id", 2);
+row2.add("embedding", JsonNull.INSTANCE); // Explicitly set to NULL
+
+JsonObject row3 = new JsonObject();
+row3.addProperty("id", 3); // Field omitted; stored as NULL
+
+List<JsonObject> data = Arrays.asList(row1, row2, row3);
+
+client.insert(InsertReq.builder()
         .collectionName("my_collection")
-        .data(rows)
+        .data(data)
         .build());
 ```
 
@@ -434,26 +443,23 @@ import io.milvus.v2.common.IndexParam;
 import io.milvus.v2.service.collection.request.LoadCollectionReq;
 import io.milvus.v2.service.index.request.CreateIndexReq;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 
-List<IndexParam> indexes = new ArrayList<>();
-indexes.add(IndexParam.builder()
+IndexParam indexParam = IndexParam.builder()
         .fieldName("embedding")
-        .indexName("embedding_idx")
+        .indexName("embedding_index")
         .indexType(IndexParam.IndexType.AUTOINDEX)
         .metricType(IndexParam.MetricType.COSINE)
-        .build());
+        .build();
 
 client.createIndex(CreateIndexReq.builder()
         .collectionName("my_collection")
-        .indexParams(indexes)
+        .indexParams(Collections.singletonList(indexParam))
         .build());
 
-LoadCollectionReq loadReq = LoadCollectionReq.builder()
+client.loadCollection(LoadCollectionReq.builder()
         .collectionName("my_collection")
-        .build();
-client.loadCollection(loadReq);
+        .build());
 ```
 
 ```javascript
@@ -565,23 +571,18 @@ import io.milvus.v2.service.vector.request.SearchReq;
 import io.milvus.v2.service.vector.request.data.FloatVec;
 import io.milvus.v2.service.vector.response.SearchResp;
 
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
-Map<String, Object> searchParams = new HashMap<>();
-searchParams.put("metric_type", "COSINE");
-
-SearchResp resp = client.search(SearchReq.builder()
+SearchResp res = client.search(SearchReq.builder()
         .collectionName("my_collection")
+        .data(Collections.singletonList(new FloatVec(Arrays.asList(0.1f, 0.2f, 0.3f, 0.4f))))
         .annsField("embedding")
-        .data(Collections.singletonList(new FloatVec(new float[]{0.1f, 0.2f, 0.3f, 0.4f})))
-        .topK(3)
-        .searchParams(searchParams)
+        .limit(3)
         .outputFields(Collections.singletonList("embedding"))
         .build());
 
-System.out.println(resp.getSearchResults());
+System.out.println(res);
 ```
 
 ```javascript
@@ -665,7 +666,7 @@ expr = "age > 18"
 ```
 
 ```java
-String expr = "age > 18";
+String filter = "age > 18";
 ```
 
 ```javascript
@@ -698,7 +699,7 @@ expr = 'status == "active"'
 ```
 
 ```java
-String expr = "status == \"active\"";
+String filter = "status == \"active\"";
 ```
 
 ```javascript
