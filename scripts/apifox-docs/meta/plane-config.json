@@ -1,0 +1,26 @@
+{
+  "controlPlaneKeywords": {
+    "zilliz": [
+      "cloud",
+      "cluster",
+      "import",
+      "pipeline",
+      "backup",
+      "restore",
+      "invoices",
+      "usage",
+      "metrics",
+      "extract",
+      "volume",
+      "project",
+      "on-demand",
+      "region",
+      "migration",
+      "job",
+      "alert",
+      "etl",
+      "stage"
+    ],
+    "milvus": []
+  }
+}

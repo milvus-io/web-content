@@ -1,6 +1,16 @@
 {
   "apifox": {
-    "specifications": "scripts/apifox-docs/meta/openapi.json"
+    "specifications": "scripts/apifox-docs/meta/openapi",
+    "restful": {
+      "milvus-v3.0.x": {
+        "specifications": "scripts/apifox-docs/meta/openapi",
+        "lang": "en-US",
+        "target": "milvus",
+        "targets": {
+          "outputDir": "API_Reference_MDX/milvus-restful/v3.0.x"
+        }
+      }
+    }
   },
   "milvus": {
     "manuals": {
@@ -46,18 +56,6 @@
         "language": "python",
         "targets": {
           "outputDir": "API_Reference/pymilvus/v2.6.x",
-          "imageDir": "assets"
-        },
-        "images": {
-          "alt_texts": []
-        }
-      },
-      "pymilvus-v3.0.x": {
-        "base": "Hk05b5eI6aXXSSsd6j9cqwwMn5a:tblKV2Wj45qrmD0J",
-        "sourceType": "drive",
-        "language": "python",
-        "targets": {
-          "outputDir": "API_Reference/pymilvus/v3.0.x",
           "imageDir": "assets"
         },
         "images": {
@@ -142,18 +140,6 @@
         "language": "javascript",
         "targets": {
           "outputDir": "API_Reference/milvus-sdk-node/v2.6.x",
-          "imageDir": "assets"
-        },
-        "images": {
-          "alt_texts": []
-        }
-      },
-      "node-v3.0.x": {
-        "base": "LlrPbysPZau2dGsSVuicHmvCn0e:tblT65LG94H2vobA",
-        "sourceType": "drive",
-        "language": "javascript",
-        "targets": {
-          "outputDir": "API_Reference/milvus-sdk-node/v3.0.x",
           "imageDir": "assets"
         },
         "images": {

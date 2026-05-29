@@ -4,7 +4,7 @@ const path = require('node:path');
 const { execSync } = require('node:child_process');
 
 const manifest = require('./sync-shared-scripts.manifest');
-const { buildSyncPlan, fetchRemoteTree, runCheck, runApply } = require('./shared-sync/core');
+const { buildSyncPlan, fetchRemoteTree, readLocalSourceTree, runCheck, runApply } = require('./shared-sync/core');
 
 function resolveGithubToken() {
   if (process.env.GITHUB_TOKEN) {
@@ -44,8 +44,14 @@ function createFetch() {
     });
 }
 
-function createFetchRemoteTree(fetchImpl) {
-  return (entry) => fetchRemoteTree(entry, fetchImpl);
+function createFetchSourceTree(fetchImpl, repoRoot) {
+  return (entry) => {
+    if (entry.sourceType === 'local') {
+      return readLocalSourceTree(entry, repoRoot);
+    }
+
+    return fetchRemoteTree(entry, fetchImpl);
+  };
 }
 
 function printTotals(result) {
@@ -68,7 +74,7 @@ async function main() {
   const fetchImpl = createFetch();
 
   const plan = await buildSyncPlan({ manifest, repoRoot, fetchImpl });
-  const fetchRemoteTreeImpl = createFetchRemoteTree(fetchImpl);
+  const fetchRemoteTreeImpl = createFetchSourceTree(fetchImpl, repoRoot);
 
   const result = checkMode
     ? await runCheck({ plan, fetchRemoteTreeImpl })

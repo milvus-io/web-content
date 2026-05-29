@@ -5,15 +5,34 @@ const fsSync = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 
+const syncManifest = require('../sync-shared-scripts.manifest');
 const {
   buildSyncPlan,
   assertAllowedTarget,
+  readLocalSourceTree,
   diffTrees,
   runCheck,
   runApply,
 } = require('../shared-sync/core');
 
-test('lark-docs entrypoint and translator import shared scripts/lib modules', () => {
+test('sync manifest keeps scripts/lib ownership split between milvus and zdoc lark files', () => {
+  const milvusLib = syncManifest.find((entry) => entry.name === 'milvus-lib');
+  const zdocLib = syncManifest.find((entry) => entry.name === 'zdoc-lib-lark-files');
+
+  assert.equal(milvusLib.sourceType, 'local');
+  assert.equal(milvusLib.source, '../milvus-docs/scripts/lib');
+  assert.equal(milvusLib.target, 'scripts/lib');
+  assert.equal(milvusLib.include.some((pattern) => pattern.test('milvusDocsGen.js')), true);
+  assert.equal(milvusLib.include.some((pattern) => pattern.test('larkDocWriter.js')), false);
+
+  assert.equal(zdocLib.sourceType, 'local');
+  assert.equal(zdocLib.source, '../zdoc/plugins/lark-docs');
+  assert.equal(zdocLib.target, 'scripts/lib');
+  assert.equal(zdocLib.include.some((pattern) => pattern.test('larkDocWriter.js')), true);
+  assert.equal(zdocLib.include.some((pattern) => pattern.test('milvusDocsGen.js')), false);
+});
+
+test('lark-docs entrypoint imports shared generators and translator imports local lark token fetcher', () => {
   const scriptsDir = path.resolve(__dirname, '..');
   const larkDocsDir = path.join(scriptsDir, 'lark-docs');
 
@@ -25,15 +44,15 @@ test('lark-docs entrypoint and translator import shared scripts/lib modules', ()
 
   assert.match(entrypointSource, /require\('\.\.\/lib\/milvusDocsGen\.js'\)/);
   assert.match(entrypointSource, /require\('\.\.\/lib\/milvusSdkDocsGen\.js'\)/);
-  assert.match(translatorSource, /require\('\.\.\/lib\/larkTokenFetcher\.js'\)/);
+  assert.match(translatorSource, /require\('\.\/larkTokenFetcher\.js'\)/);
 
   const docsGenResolved = require.resolve('../lib/milvusDocsGen.js', { paths: [larkDocsDir] });
   const sdkDocsGenResolved = require.resolve('../lib/milvusSdkDocsGen.js', { paths: [larkDocsDir] });
-  const tokenFetcherResolved = require.resolve('../lib/larkTokenFetcher.js', { paths: [larkDocsDir] });
+  const tokenFetcherResolved = require.resolve('./larkTokenFetcher.js', { paths: [larkDocsDir] });
 
   assert.equal(docsGenResolved, path.join(scriptsDir, 'lib', 'milvusDocsGen.js'));
   assert.equal(sdkDocsGenResolved, path.join(scriptsDir, 'lib', 'milvusSdkDocsGen.js'));
-  assert.equal(tokenFetcherResolved, path.join(scriptsDir, 'lib', 'larkTokenFetcher.js'));
+  assert.equal(tokenFetcherResolved, path.join(larkDocsDir, 'larkTokenFetcher.js'));
 });
 
 test('buildSyncPlan resolves milvus-docs default branch dynamically via fetch', async () => {
@@ -67,11 +86,61 @@ test('buildSyncPlan resolves milvus-docs default branch dynamically via fetch', 
   assert.equal(plan[0].targetAbsPath, '/tmp/repo/scripts/lib');
 });
 
+test('buildSyncPlan keeps local lark sync entries local and resolves allowed target', async () => {
+  const manifest = [
+    {
+      name: 'zdoc-lark-docs-lark-files',
+      sourceType: 'local',
+      source: '../zdoc/plugins/lark-docs',
+      target: 'scripts/lark-docs',
+      include: [/^lark.*\.js$/],
+    },
+  ];
+
+  let fetchCalls = 0;
+  const plan = await buildSyncPlan({
+    manifest,
+    repoRoot: '/tmp/repo',
+    fetchImpl: async () => {
+      fetchCalls += 1;
+      throw new Error('fetch should not be called for local entries');
+    },
+  });
+
+  assert.equal(fetchCalls, 0);
+  assert.equal(plan.length, 1);
+  assert.equal(plan[0].ref, undefined);
+  assert.equal(plan[0].targetAbsPath, '/tmp/repo/scripts/lark-docs');
+});
+
 test('assertAllowedTarget rejects non-whitelisted target', () => {
   assert.throws(
     () => assertAllowedTarget('/tmp/repo/scripts/evil', '/tmp/repo'),
     /Target path is not allowed/
   );
+});
+
+test('readLocalSourceTree filters local source files by include patterns', async () => {
+  const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'shared-sync-'));
+  const repoRoot = path.join(tempDir, 'repo');
+  const sourceDir = path.join(tempDir, 'zdoc/plugins/lark-docs');
+  await fs.mkdir(sourceDir, { recursive: true });
+  await fs.writeFile(path.join(sourceDir, 'larkDocWriter.js'), 'writer\n', 'utf8');
+  await fs.writeFile(path.join(sourceDir, 'index.js'), 'index\n', 'utf8');
+  await fs.writeFile(path.join(sourceDir, 'regression.test.js'), 'test\n', 'utf8');
+
+  const tree = await readLocalSourceTree(
+    {
+      name: 'local-lark',
+      source: '../zdoc/plugins/lark-docs',
+      include: [/^lark.*\.js$/],
+    },
+    repoRoot
+  );
+
+  assert.deepEqual(tree, {
+    'larkDocWriter.js': 'writer\n',
+  });
 });
 
 test('diffTrees returns deterministic sorted added/changed/deleted', () => {
@@ -138,6 +207,41 @@ test('runCheck reports drift and exit code 1 when differences exist', async () =
     ]
   );
   assert.deepEqual(rows, ['DRIFT | sync-a | +1 ~1 -1', 'OK    | sync-b | +0 ~0 -0']);
+});
+
+test('runApply with include filter syncs matching files and preserves unrelated target files', async () => {
+  const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'shared-sync-'));
+  const target = path.join(tempDir, 'scripts/lark-docs');
+  await fs.mkdir(path.join(target, 'meta'), { recursive: true });
+  await fs.writeFile(path.join(target, 'larkDocWriter.js'), 'old-writer\n', 'utf8');
+  await fs.writeFile(path.join(target, 'larkStale.js'), 'remove-me\n', 'utf8');
+  await fs.writeFile(path.join(target, 'index.js'), 'keep-index\n', 'utf8');
+  await fs.writeFile(path.join(target, 'meta', 'pages.json'), '{}\n', 'utf8');
+
+  const result = await runApply({
+    plan: [
+      {
+        name: 'local-lark',
+        targetAbsPath: target,
+        include: [/^lark.*\.js$/],
+      },
+    ],
+    fetchRemoteTreeImpl: async () => ({
+      'larkDocWriter.js': 'new-writer\n',
+      'larkUtils.js': 'new-utils\n',
+    }),
+  });
+
+  assert.equal(result.exitCode, 0);
+  assert.deepEqual(result.rows[0].diff.changed, ['larkDocWriter.js']);
+  assert.deepEqual(result.rows[0].diff.added, ['larkUtils.js']);
+  assert.deepEqual(result.rows[0].diff.deleted, ['larkStale.js']);
+
+  assert.equal(await fs.readFile(path.join(target, 'larkDocWriter.js'), 'utf8'), 'new-writer\n');
+  assert.equal(await fs.readFile(path.join(target, 'larkUtils.js'), 'utf8'), 'new-utils\n');
+  await assert.rejects(fs.access(path.join(target, 'larkStale.js')));
+  assert.equal(await fs.readFile(path.join(target, 'index.js'), 'utf8'), 'keep-index\n');
+  assert.equal(await fs.readFile(path.join(target, 'meta', 'pages.json'), 'utf8'), '{}\n');
 });
 
 test('runApply writes remote tree and removes drifted local files', async () => {

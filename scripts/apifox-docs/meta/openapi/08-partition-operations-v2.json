@@ -1,0 +1,1330 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Restful API copy",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Partition Operations (V2)",
+      "x-i18n": {
+        "zh-CN": {
+          "name": "Partition (V2)"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/v2/vectordb/partitions/list": {
+      "post": {
+        "summary": "List Partitions",
+        "deprecated": false,
+        "description": "This operation lists all partitions<include target=\"milvus\"> in the database used in the current connection</include>.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看 Partition 列表",
+            "description": "该操作列出<include target=\"milvus\">当前连接中使用的数据库中的</include>所有 Partition。"
+          }
+        },
+        "tags": [
+          "Partition Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of the target database.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "目标数据库名称。"
+                      }
+                    }
+                  },
+                  "collectionName": {
+                    "type": "string",
+                    "description": "The name of the target collection to which the partition belongs.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "当前 Partition 所属的目标 Collection 名称。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "collectionName"
+                ]
+              },
+              "example": {
+                "collectionName": "quick_setup"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "A list of partition names.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Partition 名称列表。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer"
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "description": "A partition name.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "Partition 名称。"
+                              }
+                            }
+                          },
+                          "description": "A list of partition names",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "Partition 名称列表。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": [
+                        "_default"
+                      ]
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "summary": "failure",
+                      "value": {
+                        "code": 1800,
+                        "message": "User hasn't authenticated"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/partitions/create": {
+      "post": {
+        "summary": "Create Partition",
+        "deprecated": false,
+        "description": "This operation creates a partition in a collection.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "创建 Partition",
+            "description": "本接口用于在 Collection 中创建 Partition。"
+          }
+        },
+        "tags": [
+          "Partition Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of the database that to which the collection belongs .\nSetting this to a non-existing database results in an error.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "Collection 所属的数据库名称。设置为不存在的数据库将导致错误。"
+                      }
+                    }
+                  },
+                  "collectionName": {
+                    "type": "string",
+                    "description": "The name of the target collection.\nSetting this to a non-existing collection results in an error.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "目标 Collection 的名称。设置为不存在的 Collection 将导致错误。"
+                      }
+                    }
+                  },
+                  "partitionName": {
+                    "type": "string",
+                    "description": "The name of the target parition.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待创建 Partition 名称。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "partitionName",
+                  "collectionName"
+                ]
+              },
+              "example": {
+                "partitionName": "january",
+                "collectionName": "quick_setup"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns an empty object or an error message.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回一个空对象或一条错误消息。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Response payload which is an empty object.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷。为空对象。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/partitions/load": {
+      "post": {
+        "summary": "Load Partitions",
+        "deprecated": false,
+        "description": "This operation loads the data of the current partition into memory.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "加载 Partition",
+            "description": "本接口将指定 Partition 中的数据加载到内存。"
+          }
+        },
+        "tags": [
+          "Partition Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of the database that to which the collection belongs .\nSetting this to a non-existing database results in an error.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "Collection 所属的数据库名称。设置为不存在的数据库将导致错误。"
+                      }
+                    }
+                  },
+                  "collectionName": {
+                    "type": "string",
+                    "description": "The name of the target collection.\nSetting this to a non-existing collection results in an error.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "目标 Collection 的名称。设置为不存在的 Collection 将导致错误。"
+                      }
+                    }
+                  },
+                  "partitionNames": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "description": "A partition name.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "Partition 名称。"
+                        }
+                      }
+                    },
+                    "description": "The list of names of the target partitions.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "目标 Partition 名称列表。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "partitionNames",
+                  "collectionName"
+                ]
+              },
+              "example": {
+                "collectionName": "medium_articles",
+                "partitionNames": [
+                  "partition_1",
+                  "partition_2"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return an empty object or an error message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Response payload which is an empty object.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷。为空对象。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/partitions/release": {
+      "post": {
+        "summary": "Release Partitions",
+        "deprecated": false,
+        "description": "This operation releases the data of the current partition from memory.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "释放 Partition",
+            "description": "本接口从内存中释放指定 Partition 数据。"
+          }
+        },
+        "tags": [
+          "Partition Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of the database that to which the collection belongs .\nSetting this to a non-existing database results in an error.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "Collection 所属的数据库名称。设置为不存在的数据库将导致错误。"
+                      }
+                    }
+                  },
+                  "collectionName": {
+                    "type": "string",
+                    "description": "The name of the target collection.\nSetting this to a non-existing collection results in an error.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "目标 Collection 的名称。设置为不存在的 Collection 将导致错误。"
+                      }
+                    }
+                  },
+                  "partitionNames": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "description": "An partition name.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "Partition 名称。"
+                        }
+                      }
+                    },
+                    "description": "The list of names of the target partitions.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "目标 Partition 名称列表。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "partitionNames",
+                  "collectionName"
+                ]
+              },
+              "example": {
+                "partitionNames": [
+                  "_default",
+                  "january"
+                ],
+                "collectionName": "quick_setup"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns an empty object.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回空对象。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Response payload which is an empty object.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷。为空对象。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/partitions/has": {
+      "post": {
+        "summary": "Has Partition",
+        "deprecated": false,
+        "description": "This operation checks whether a partition exists.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看 Partition 是否存在",
+            "description": "本接口可检查指定的 Partition 是否存在。"
+          }
+        },
+        "tags": [
+          "Partition Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of an existing database.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "数据库名称。"
+                      }
+                    }
+                  },
+                  "collectionName": {
+                    "type": "string",
+                    "description": "The name of an existing collection.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "Collection 名称。"
+                      }
+                    }
+                  },
+                  "partitionName": {
+                    "type": "string",
+                    "description": "The name of the partition to test.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待检查的 Partition 名称。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "partitionName",
+                  "collectionName"
+                ]
+              },
+              "example": {
+                "partitionName": "january",
+                "collectionName": "test_collection"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "A boolean value indicating whether the specified partition exists.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回一个表示指定 Partition 是否存在的布尔值。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "object",
+                          "description": "Response payload which carries a boolean value.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载，携带表示指定 Partition 是否存在的布尔值。"
+                            }
+                          },
+                          "properties": {
+                            "has": {
+                              "type": "boolean",
+                              "description": "A boolean value indicates whether the specified partition exists.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "表示指定 Partition 是否存在的布尔值。"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "has": true
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/partitions/get_stats": {
+      "post": {
+        "summary": "Get Partition Statistics",
+        "deprecated": false,
+        "description": "This operations gets the number of entities in a partition.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看 Partition 统计信息",
+            "description": "本接口可以查看指定 Partition 中存放的 Entity 数量。"
+          }
+        },
+        "tags": [
+          "Partition Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of an existing database.",
+                    "default": "default",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "数据库名称。"
+                      }
+                    }
+                  },
+                  "collectionName": {
+                    "type": "string",
+                    "description": "The name of an existing collection.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "Collection 名称。"
+                      }
+                    }
+                  },
+                  "partitionName": {
+                    "type": "string",
+                    "description": "The name of the target partition of this operation. ",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待查看的 Partition 名称。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "partitionName",
+                  "collectionName"
+                ]
+              },
+              "example": {
+                "partitionName": "january",
+                "collectionName": "quick_setup"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the number of entities in the specified collection.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回指定 Partition 中存放的 Entity 数量。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "object",
+                          "description": "Statistics of the specified partition.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "指定 Partition 的统计信息。"
+                            }
+                          },
+                          "properties": {
+                            "rowCount": {
+                              "type": "integer",
+                              "description": "The number of entities.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "Entity 数量。"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "rowCount": 0
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/partitions/drop": {
+      "post": {
+        "summary": "Drop Partition",
+        "deprecated": false,
+        "description": "This operation drops the current partition. To successfully drop a partition, ensure that the partition is already released. You can use the [Release Partition](/reference/restful/release-partitions-v2) interface to release the partition.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "删除 Partition",
+            "description": "本接口可以删除指定 Partition. 在删除 Partition 前，请确保该 Partition 已经从内存中释放。你可以使用[释放 Partition](/reference/restful/release-partitions-v2) 接口释放该 Partition。"
+          }
+        },
+        "tags": [
+          "Partition Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of the database that to which the collection belongs .\nSetting this to a non-existing database results in an error.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "Collection 所属的数据库名称。设置为不存在的数据库将导致错误。"
+                      }
+                    }
+                  },
+                  "collectionName": {
+                    "type": "string",
+                    "description": "The name of the target collection.\nSetting this to a non-existing collection results in an error.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "目标 Collection 的名称。设置为不存在的 Collection 将导致错误。"
+                      }
+                    }
+                  },
+                  "partitionName": {
+                    "type": "string",
+                    "description": "The name of the target parition.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "目标 Partition 名称。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "partitionName",
+                  "collectionName"
+                ]
+              },
+              "example": {
+                "partitionName": "january",
+                "collectionName": "quick_setup"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "None",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Response payload which is an empty object.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷。为空对象。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "servers": []
+}

@@ -1,0 +1,2711 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Restful API copy",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Backup & Restore (V2)",
+      "x-include-target": [
+        "zilliz"
+      ],
+      "x-i18n": {
+        "zh-CN": {
+          "name": "Backup & Restore (V2)"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/v2/backups": {
+      "get": {
+        "summary": "List Backups",
+        "deprecated": false,
+        "description": "List all AVAILABLE or CREATING backups. Note that this API only applies to dedicated clusters.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看备份列表",
+            "description": "本接口可查看所有处于 AVAILABLE 或 CREATING 状态的备份记录。仅适用于 Dedicated 集群。"
+          }
+        },
+        "tags": [
+          "Backup & Restore (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "query",
+            "description": "The ID of the project to which the backup belongs.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "备份所属项目的 ID。"
+              }
+            }
+          },
+          {
+            "name": "clusterId",
+            "in": "query",
+            "description": "The ID of the cluster to which the backup belongs.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "备份所属集群的 ID。"
+              }
+            }
+          },
+          {
+            "name": "creationMethod",
+            "in": "query",
+            "description": "Whether the backup is created manually or automatically.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MANUAL",
+                "AUTO"
+              ]
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "备份的创建方式，是手动创建还是自动创建。"
+              }
+            }
+          },
+          {
+            "name": "backupType",
+            "in": "query",
+            "description": "The type of resources contained in the backup file.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "CLUSTER",
+                "COLLECTION"
+              ]
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "备份文件中包含的资源类型。"
+              }
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "The time at which Zilliz Cloud starts to make this backup.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Zilliz Cloud 开始创建该备份的时间。"
+              }
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "description": "The time at which Zilliz Cloud finishes making this backup.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Zilliz Cloud 完成该备份的时间。"
+              }
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The number of records to be displayed per page.",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "每页显示的记录数。"
+              }
+            }
+          },
+          {
+            "name": "currentPage",
+            "in": "query",
+            "description": "The page number to be displayed.",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "要显示的页码。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "description": "Response payload which is a list of backups.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载，为备份列表。"
+                            }
+                          },
+                          "properties": {
+                            "count": {
+                              "type": "integer",
+                              "description": "The total number of backups returned.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "返回的备份总数。"
+                                }
+                              }
+                            },
+                            "currentPage": {
+                              "type": "integer",
+                              "description": "The current page number.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "当前页码。"
+                                }
+                              }
+                            },
+                            "pageSize": {
+                              "type": "integer",
+                              "description": "The number of records per page.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "每页记录数。"
+                                }
+                              }
+                            },
+                            "backups": {
+                              "type": "array",
+                              "description": "A list of backups.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "备份列表。"
+                                }
+                              },
+                              "items": {
+                                "type": "object",
+                                "description": "Inforamtion about a backup in detail.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "备份的详细信息。"
+                                  }
+                                },
+                                "properties": {
+                                  "projectId": {
+                                    "type": "string",
+                                    "description": "The ID of the project that holds the backup.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "包含该备份的项目 ID。"
+                                      }
+                                    }
+                                  },
+                                  "backupId": {
+                                    "type": "string",
+                                    "description": "The ID of the backup.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "备份 ID。"
+                                      }
+                                    }
+                                  },
+                                  "backupName": {
+                                    "type": "string",
+                                    "description": "The name of the backup.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "备份名称。"
+                                      }
+                                    }
+                                  },
+                                  "backupType": {
+                                    "type": "string",
+                                    "description": "The type of resources contained in the backup.",
+                                    "enum": [
+                                      "CLUSTER",
+                                      "COLLECTION"
+                                    ],
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "备份中包含的资源类型。"
+                                      }
+                                    }
+                                  },
+                                  "creationMethod": {
+                                    "type": "string",
+                                    "description": "Whether the backup is created manually or automatically.",
+                                    "enum": [
+                                      "AUTO",
+                                      "MANUAL"
+                                    ],
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "备份的创建方式，是手动创建还是自动创建。"
+                                      }
+                                    }
+                                  },
+                                  "size": {
+                                    "type": "integer",
+                                    "description": "The size of the backup in bytes.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "备份的大小，单位为字节。"
+                                      }
+                                    }
+                                  },
+                                  "expireTime": {
+                                    "type": "string",
+                                    "description": "The time at which the backup will be automatically deleted.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "备份将被自动删除的时间。"
+                                      }
+                                    }
+                                  },
+                                  "clusterId": {
+                                    "type": "string",
+                                    "description": "The ID of the cluster whose data has been backed up.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "数据被备份的集群 ID。"
+                                      }
+                                    }
+                                  },
+                                  "clusterName": {
+                                    "type": "string",
+                                    "description": "The name of the cluster whose data has been backed up.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "数据被备份的集群名称。"
+                                      }
+                                    }
+                                  },
+                                  "createTime": {
+                                    "type": "string",
+                                    "description": "The time at which the cluster has been created.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "集群创建时间。"
+                                      }
+                                    }
+                                  },
+                                  "status": {
+                                    "type": "string",
+                                    "description": "The status of the backup.",
+                                    "enum": [
+                                      "AVAILABLE",
+                                      "CREATING"
+                                    ],
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "备份状态。"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "count": 1,
+                        "currentPage": 1,
+                        "pageSize": 10,
+                        "backups": [
+                          {
+                            "projectId": "proj-xxxxxxxxxxxxxxxxxxxx",
+                            "backupId": "backupx_xxxxxxxxxxxxxxxx",
+                            "backupName": "Dedicated-01_backup1",
+                            "backupType": "CLUSTER",
+                            "creationMethod": "AUTO",
+                            "size": 112,
+                            "expireTime": "2024-08-30T16:49:50Z",
+                            "clusterId": "inxx-xxxxxxxxxxxxxx",
+                            "clusterName": "Dedicated-01",
+                            "createTime": "2024-07-30T16:49:50Z",
+                            "status": "AVAILABLE"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/clusters/{CLUSTER_ID}/backups/{BACKUP_ID}": {
+      "get": {
+        "summary": "Describe Backup",
+        "deprecated": false,
+        "description": "List the information about the specified backup in detail. Note that this API only applies to dedicated clusters.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看备份详情",
+            "description": "本接口查看指定备份记录的详细信息。仅适用于 Dedicated 集群。"
+          }
+        },
+        "tags": [
+          "Backup & Restore (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          },
+          {
+            "name": "CLUSTER_ID",
+            "in": "path",
+            "description": "The ID of the cluster that needs to be backed up.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "需要备份的集群的 ID。"
+              }
+            },
+            "example": "inxx-xxxxxxxxxxxxxxx",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "BACKUP_ID",
+            "in": "path",
+            "description": "The ID of the backup in concern.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "需要导出的备份的 ID。"
+              }
+            },
+            "example": "backup-xxxxxxxxxxxxxxx",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "响应"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "description": "Response payload which is the information about the backup in detail.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载，为备份的详细信息。"
+                            }
+                          },
+                          "properties": {
+                            "clusterId": {
+                              "type": "string",
+                              "description": "The ID of the cluster that holds the backup.",
+                              "example": "inxx-xxxxxxxxxxxxxxx",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "包含该备份的集群 ID。"
+                                }
+                              }
+                            },
+                            "clusterName": {
+                              "type": "string",
+                              "description": "The name of the cluster that holds the backup.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "包含该备份的集群名称。"
+                                }
+                              }
+                            },
+                            "projectId": {
+                              "type": "string",
+                              "description": "The ID of the project that holds the backed-up cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "包含被备份集群的项目 ID。"
+                                }
+                              }
+                            },
+                            "backupId": {
+                              "type": "string",
+                              "description": "The ID of the backup.",
+                              "example": "Dedicated-01_backup3",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "备份 ID。"
+                                }
+                              }
+                            },
+                            "backupName": {
+                              "type": "string",
+                              "description": "The name of the backup.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "备份名称。"
+                                }
+                              }
+                            },
+                            "backupType": {
+                              "type": "string",
+                              "description": "The type of resources backed up.",
+                              "enum": [
+                                "CLUSTER",
+                                "COLLECTION"
+                              ],
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "备份的资源类型。"
+                                }
+                              }
+                            },
+                            "creationMethod": {
+                              "type": "string",
+                              "description": "Whether the backup was created manually or automatically.",
+                              "enum": [
+                                "MANUAL",
+                                "AUTO"
+                              ],
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "备份的创建方式，是手动创建还是自动创建。"
+                                }
+                              }
+                            },
+                            "status": {
+                              "type": "string",
+                              "description": "The current status of the backup.",
+                              "enum": [
+                                "CREATING",
+                                "AVAILABLE",
+                                "DELETED"
+                              ],
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "备份的当前状态。"
+                                }
+                              }
+                            },
+                            "size": {
+                              "type": "integer",
+                              "description": "The size of the backup in bytes.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "备份的大小，单位为字节。"
+                                }
+                              }
+                            },
+                            "regionId": {
+                              "type": "string",
+                              "description": "The ID of the cloud region where the backup is located. The region should be bound to the project to which the specified cluster belongs.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "备份所在的云区域 ID。该区域应与指定集群所属项目绑定。"
+                                }
+                              }
+                            },
+                            "expireTime": {
+                              "type": "string",
+                              "description": "The expiration time of the backup.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "备份的过期时间。"
+                                }
+                              }
+                            },
+                            "dbCollections": {
+                              "type": "array",
+                              "description": "A list of databases and its collections that are included in the backup.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "备份中包含的数据库及其集合列表。"
+                                }
+                              },
+                              "items": {
+                                "type": "object",
+                                "description": "A database and its collections that are included in the backup.",
+                                "properties": {
+                                  "dbName": {
+                                    "type": "string",
+                                    "description": "The name of the database.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "数据库名称。"
+                                      }
+                                    }
+                                  },
+                                  "collections": {
+                                    "type": "array",
+                                    "description": "The collections that are included in the backup.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "备份中包含的集合。"
+                                      }
+                                    },
+                                    "items": {
+                                      "type": "object",
+                                      "description": "The collection information.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "集合信息。"
+                                        }
+                                      },
+                                      "properties": {
+                                        "collectionName": {
+                                          "type": "string",
+                                          "description": "The name of the collection.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "集合名称。"
+                                            }
+                                          }
+                                        },
+                                        "description": {
+                                          "type": "string",
+                                          "description": "The description of the collection.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "集合描述。"
+                                            }
+                                          }
+                                        },
+                                        "status": {
+                                          "type": "string",
+                                          "description": "The loading status of the collection.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "集合的加载状态。"
+                                            }
+                                          },
+                                          "enum": [
+                                            "LOADED",
+                                            "UNLOADED"
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "createTime": {
+                              "type": "string",
+                              "description": "The time at which the backup was created."
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "en-US",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                        "clusterName": "Dedicated-01",
+                        "projectId": "proj-xxxxxxxxxxxxxxxxxxxx",
+                        "backupId": "backupx-xxxxxxxxxxxxxx",
+                        "backupName": "Dedicated-01_backup1",
+                        "backupType": "CLUSTER",
+                        "creationMethod": "MANUAL",
+                        "status": "AVAILABLE",
+                        "size": 112,
+                        "regionId": "aws-us-west-2",
+                        "expireTime": "2024-08-30T16:49:50Z",
+                        "collections": [
+                          {
+                            "collectionName": "medium_articles",
+                            "description": "Sample collection",
+                            "status": "LOADED"
+                          }
+                        ],
+                        "createTime": "2024-07-30T16:49:50Z"
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "zh-CN",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                        "clusterName": "Dedicated-01",
+                        "projectId": "proj-xxxxxxxxxxxxxxxxxxxx",
+                        "backupId": "backupx-xxxxxxxxxxxxxx",
+                        "backupName": "Dedicated-01_backup1",
+                        "backupType": "CLUSTER",
+                        "creationMethod": "MANUAL",
+                        "status": "AVAILABLE",
+                        "size": 112,
+                        "regionId": "ali-cn-hangzhou",
+                        "expireTime": "2024-08-30T16:49:50Z",
+                        "collections": [
+                          {
+                            "collectionName": "medium_articles",
+                            "description": "Sample collection",
+                            "status": "LOADED"
+                          }
+                        ],
+                        "createTime": "2024-07-30T16:49:50Z"
+                      }
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      },
+      "delete": {
+        "summary": "Delete Backup",
+        "deprecated": false,
+        "description": "Delete the specified backup of a cluster. Note that this API only applies to dedicated clusters.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "删除备份",
+            "description": "本接口删除指定备份记录。仅适用于 Dedicated 集群。"
+          }
+        },
+        "tags": [
+          "Backup & Restore (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          },
+          {
+            "name": "CLUSTER_ID",
+            "in": "path",
+            "description": "The ID of the cluster whose backup is to be deleted.",
+            "example": "inxx-xxxxxxxxxxxxxxx",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "备份所属集群的 ID。"
+              }
+            }
+          },
+          {
+            "name": "BACKUP_ID",
+            "in": "path",
+            "description": "The ID of the backup to be deleted.",
+            "example": "backupx_xxxxxxxxxxxxxxx",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "需要删除的备份 ID。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "description": "Response payload which is the information about the deleted backup.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载，为已删除备份的信息。"
+                            }
+                          },
+                          "properties": {
+                            "backupId": {
+                              "type": "string",
+                              "description": "The ID of the backup that has been deleted.",
+                              "example": "backupx_xxxxxxxxxxxxxxx",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "已删除备份的 ID。"
+                                }
+                              }
+                            },
+                            "backupName": {
+                              "type": "string",
+                              "description": "The name of the backup that has been deleted.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "已删除备份的名称。"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "backupId": "backupx-xxxxxxxxxxxxxx",
+                        "backupName": "Dedicated-01_backup1"
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/clusters/{CLUSTER_ID}/backups/{BACKUP_ID}/export": {
+      "post": {
+        "summary": "Export Backup Files",
+        "deprecated": false,
+        "description": "Export the backup files from a cluster to storage specified by an integration ID.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "导出备份文件",
+            "description": "本接口可将指定集群的备份文件导出到指定的存储中。"
+          }
+        },
+        "tags": [
+          "Backup & Restore (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          },
+          {
+            "name": "CLUSTER_ID",
+            "in": "path",
+            "description": "The ID of the cluster that needs to be backed up.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "需要备份的集群的 ID。"
+              }
+            },
+            "example": "inxx-xxxxxxxxxxxxxxx",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "BACKUP_ID",
+            "in": "path",
+            "description": "The ID of the backup in concern.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "需要导出的备份的 ID。"
+              }
+            },
+            "example": "backup-xxxxxxxxxxxxxxx",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "integrationId": {
+                    "type": "string",
+                    "description": "The ID of the integrated external storage that the backup files will be exported to. For how to integrate an AWS S3 block storage service into Zilliz Cloud, refer to the [documentation](https://docs.zilliz.com/docs/integrate-with-aws-s3). For how to obtain the integration ID, refer to the [documentation](https://docs.zilliz.com/docs/integrate-with-aws-s3#obtain-the-integration-id).",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "备份文件导出到的外部存储的 ID。关于如何配置对象存储，请参阅 [文档](https://docs.zilliz.com.cn/docs/integrate-with-storage-bucket)。关于如何获取外部存储桶的集成 ID，可以参考 [文档](https://docs.zilliz.com.cn/docs/integrate-with-storage-bucket#obtain-the-integration-id)。"
+                      }
+                    },
+                    "example": "integ-xxxxxxxxxxxxxxxxxxx"
+                  },
+                  "directory": {
+                    "type": "string",
+                    "description": "The directory in the specified external storage where the backup files will be exported to.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "备份文件导出到的外部存储的目录。"
+                      }
+                    },
+                    "example": "destdir/"
+                  }
+                }
+              },
+              "example": {
+                "integrationId": "integ-xxxxxxx",
+                "directory": "destdir/"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code."
+                        },
+                        "data": {
+                          "type": "object",
+                          "description": "Response payload which is the ID of the export job created to export the backup files.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载，为导出备份文件的任务 ID。"
+                            }
+                          },
+                          "properties": {
+                            "jobId": {
+                              "type": "string",
+                              "description": "The ID of the export job created to export the backup files.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "导出备份文件的任务 ID。"
+                                }
+                              },
+                              "example": "job_xxxxxxxxxxxxxxx"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "jobId": "job-0396450098cglufig6afm9"
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/clusters/{CLUSTER_ID}/backups/create": {
+      "post": {
+        "summary": "Create backup",
+        "deprecated": false,
+        "description": "Back up the specified cluster or collection. Note that this API only applies to dedicated clusters.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "创建备份",
+            "description": "本接口可为指定集群或 Collection 创建备份。仅适用于 Dedicated 集群。"
+          }
+        },
+        "tags": [
+          "Backup & Restore (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          },
+          {
+            "name": "CLUSTER_ID",
+            "in": "path",
+            "description": "The ID of the cluster that needs to be backed up.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "需要备份的集群的 ID。"
+              }
+            },
+            "example": "inxx-xxxxxxxxxxxxxxx",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "backupType": {
+                    "type": "string",
+                    "description": "The type of the resources to be backed up.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "需要备份的资源类型。"
+                      }
+                    },
+                    "enum": [
+                      "CLUSTER",
+                      "COLLECTION"
+                    ]
+                  },
+                  "dbCollections": {
+                    "type": "array",
+                    "description": "The collections that need to be backed up. This is mandatory when the `backupType` is set to `COLLECTION`. Note that all collections listed in this field must belong to the same database.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "需要备份的 Collection 列表。当 `backupType` 设置为 `COLLECTION` 时，该字段为必填项。注意，该字段中列出的所有 Collection 必须属于同一个数据库。"
+                      }
+                    },
+                    "items": {
+                      "type": "object",
+                      "description": "The collection information.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "Collection 信息。"
+                        }
+                      },
+                      "properties": {
+                        "dbName": {
+                          "type": "string",
+                          "description": "The name of the database containing the collections listed in the `collectionNames` field.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "包含 `collectionNames` 字段中列出的 Collection 的数据库名称。"
+                            }
+                          }
+                        },
+                        "collectionNames": {
+                          "type": "array",
+                          "description": "The names of the collections to be backed up.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "需要备份的 Collection 名称列表。"
+                            }
+                          },
+                          "items": {
+                            "type": "string",
+                            "description": "A collection name",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "Collection 名称"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "crossRegionCopies": {
+                    "type": "array",
+                    "description": "The list of cloud regions to which the backup will be copied. Note that Zilliz Cloud will create a backup in the same region as the cluster by default, so you only need to specify the regions where you want to copy the backup to. Each entry in the list results in one copy of the permanent backup being created in the specified region.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "备份将被复制到的云区域列表。注意，Zilliz Cloud 会默认在与集群相同的区域创建备份，因此您只需指定您希望备份复制到的其他区域。列表中的每条记录都会在指定区域创建一个永久保留的备份副本。"
+                      }
+                    },
+                    "items": {
+                      "type": "object",
+                      "description": "Information about the target cloud region to which the backup will be copied.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "目标云区域信息。"
+                        }
+                      },
+                      "properties": {
+                        "regionId": {
+                          "type": "string",
+                          "description": "The ID of the target cloud region to which the backup will be copied.",
+                          "example": "aws-us-west-2",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "目标云区域 ID，当前集群的备份将被复制到该区域。",
+                              "example": "ali-cn-hangzhou"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "backupType"
+                ]
+              },
+              "examples": {
+                "1": {
+                  "summary": "Backup Cluster",
+                  "x-target-response": "OPTION 1",
+                  "value": {
+                    "backupType": "CLUSTER"
+                  }
+                },
+                "2": {
+                  "summary": "Backup Collections",
+                  "x-target-response": "OPTION 2",
+                  "value": {
+                    "backupType": "COLLECTION",
+                    "dbCollections": [
+                      {
+                        "dbName": "my_database",
+                        "collectionNames": [
+                          "collection_1",
+                          "collection_2"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "3": {
+                  "summary": "Cross-Region Copies",
+                  "x-target-response": "OPTION 3",
+                  "x-target-lang": "en-US",
+                  "value": {
+                    "backupType": "COLLECTION",
+                    "dbCollections": [
+                      {
+                        "dbName": "my_database",
+                        "collectionNames": [
+                          "collection_1",
+                          "collection_2"
+                        ]
+                      }
+                    ],
+                    "crossRegionCopies": [
+                      {
+                        "regionId": "aws-us-west-2"
+                      },
+                      {
+                        "regionId": "aws-us-east-1"
+                      }
+                    ]
+                  }
+                },
+                "4": {
+                  "summary": "Cross-Region Copies",
+                  "x-target-response": "OPTION 3",
+                  "x-target-lang": "zh-CN",
+                  "value": {
+                    "backupType": "COLLECTION",
+                    "dbCollections": [
+                      {
+                        "dbName": "my_database",
+                        "collectionNames": [
+                          "collection_1",
+                          "collection_2"
+                        ]
+                      }
+                    ],
+                    "crossRegionCopies": [
+                      {
+                        "regionId": "ali-cn-hangzhou"
+                      },
+                      {
+                        "regionId": "ali-cn-shanghai"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code"
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "backupId": {
+                              "type": "string",
+                              "description": "The ID of the backup that has been created.",
+                              "example": "backupx_xxxxxxxxxxxxxxx"
+                            },
+                            "backupName": {
+                              "type": "string",
+                              "description": "The name of the backup that has been created."
+                            },
+                            "jobId": {
+                              "type": "string",
+                              "description": "The ID of the asynchronous job that has created this backup.",
+                              "example": "job-xxxxxxxxxxxxxxxxxxxx"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "backupId": "backupx_xxxxxxxxxxxxxxx",
+                        "backupName": "Dedicated_01",
+                        "jobId": "job-xxxxxxxxxxxxxxxxxxxxxx"
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/clusters/{CLUSTER_ID}/backups/policy": {
+      "get": {
+        "summary": "Get Backup Policy",
+        "deprecated": false,
+        "description": "List the backup policy of the specified cluster in detail. Note that this API only applies to dedicated clusters.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "获取备份策略",
+            "description": "本接口可获取指定集群的自动备份策略。仅适用于 Dedicated 集群。"
+          }
+        },
+        "tags": [
+          "Backup & Restore (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          },
+          {
+            "name": "CLUSTER_ID",
+            "in": "path",
+            "description": "The ID of the cluster whose backup is in concern.",
+            "example": "inxx-xxxxxxxxxxxxxxx",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "备份所属集群的 ID。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "响应"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "description": "Response payload which is the backup policy of the specified cluster.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载，为指定集群的备份策略。"
+                            }
+                          },
+                          "properties": {
+                            "clusterId": {
+                              "type": "string",
+                              "description": "The ID of the cluster whose backup policy is in concern.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "备份策略所属集群的 ID。"
+                                }
+                              }
+                            },
+                            "status": {
+                              "type": "string",
+                              "description": "The status of the backup policy.",
+                              "enum": [
+                                "ENABLED",
+                                "DISABLED"
+                              ],
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "备份策略的状态。"
+                                }
+                              }
+                            },
+                            "startTime": {
+                              "type": "string",
+                              "description": "The start time is a two hour duration for the backup policy to execute in the format of HH:mm-HH:mm UTC time. When the backup policy is disabled, the value is `null`.",
+                              "example": "02:00-04:00",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "备份策略执行的开始时间，为 UTC 时间，格式为 HH:mm-HH:mm。当备份策略被禁用时，该值为 `null`。"
+                                }
+                              }
+                            },
+                            "frequency": {
+                              "type": "string",
+                              "description": "The week days on which the backup is performed. The value is a comma-separated list of numbers from 1 to 7, where 1 represents Monday and 7 represents Sunday. When the backup policy is disabled, the value is `null`.",
+                              "example": "1,2,5",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "备份执行的星期几。该值为 1 到 7 之间的逗号分隔数字列表，其中 1 代表星期一，7 代表星期日。当备份策略被禁用时，该值为 `null`。"
+                                }
+                              }
+                            },
+                            "retentionDays": {
+                              "type": "integer",
+                              "description": "The number of days to retain the backup. When the backup policy is disabled, the value is `0`.",
+                              "minimum": 1,
+                              "maximum": 30,
+                              "example": 7,
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "备份保留的天数。当备份策略被禁用时，该值为 `0`。"
+                                }
+                              }
+                            },
+                            "crossRegionCopies": {
+                              "type": "array",
+                              "description": "The list of cross-region backup policies. Each entry in the list results in one copy of the permanent backup being created in the specified region.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "跨区域备份策略列表。列表中的每条记录都会在指定区域创建一个永久保留的备份副本。"
+                                }
+                              },
+                              "items": {
+                                "type": "object",
+                                "description": "Information about the cross-region backup policy.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "跨区域备份策略信息。"
+                                  }
+                                },
+                                "properties": {
+                                  "regionId": {
+                                    "type": "string",
+                                    "description": "The ID of the target cloud region to which the backup will be copied.",
+                                    "example": "aws-us-west-2",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "目标云区域 ID。",
+                                        "example": "ali-cn-hangzhou"
+                                      }
+                                    }
+                                  },
+                                  "retentionDays": {
+                                    "type": "integer",
+                                    "description": "The number of days to retain the cross-region backup.",
+                                    "minimum": 1,
+                                    "maximum": 30,
+                                    "example": 7,
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "跨区域备份保留的天数。"
+                                      }
+                                    }
+                                  },
+                                  "region": {
+                                    "type": "string",
+                                    "description": "The region code.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "区域代码。",
+                                        "example": "cn-hangzhou"
+                                      }
+                                    },
+                                    "example": "us-west-2"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "en-US",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                        "status": "ENABLED",
+                        "startTime": "02:00-04:00",
+                        "frequency": "1,2,3,5",
+                        "retentionDays": 7,
+                        "crossRegionCopies": [
+                          {
+                            "regionId": "aws-us-west-2",
+                            "retentionDays": 7,
+                            "region": "us-west-2"
+                          },
+                          {
+                            "regionId": "aws-us-east-1",
+                            "retentionDays": 7,
+                            "region": "us-east-1"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "zh-CN",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                        "status": "ENABLED",
+                        "startTime": "02:00-04:00",
+                        "frequency": "1,2,3,5",
+                        "retentionDays": 7,
+                        "crossRegionCopies": [
+                          {
+                            "regionId": "ali-cn-hangzhou",
+                            "retentionDays": 7,
+                            "region": "cn-hangzhou"
+                          },
+                          {
+                            "regionId": "ali-cn-shanghai",
+                            "retentionDays": 7,
+                            "region": "cn-shanghai"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      },
+      "post": {
+        "summary": "Set Backup Policy",
+        "deprecated": false,
+        "description": "Set up the backup policy for the specified cluster so that Zilliz Cloud automatically backs up your cluster at the specified interval. Note that this API only applies to dedicated clusters.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "创建备份策略",
+            "description": "本接口可为指定集群创建自动备份策略。仅适用于 Dedicated 集群。"
+          }
+        },
+        "tags": [
+          "Backup & Restore (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          },
+          {
+            "name": "CLUSTER_ID",
+            "in": "path",
+            "description": "The ID of the target cluster whose backup is in concern.",
+            "example": "inxx-xxxxxxxxxxxxxxx",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "备份所属集群的 ID。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "frequency": {
+                    "type": "string",
+                    "description": "The week days on which the backup is performed. The value is a comma-separated list of numbers from 1 to 7, where 1 represents Monday and 7 represents Sunday.",
+                    "example": "1,2,5",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "备份执行的星期几。该值为 1 到 7 之间的逗号分隔数字列表，其中 1 代表星期一，7 代表星期日。"
+                      }
+                    }
+                  },
+                  "startTime": {
+                    "type": "string",
+                    "description": "The start time is a two-hour duration for the backup policy to execute in the format of HH:mm-HH:mm UTC time.",
+                    "example": "02:00-04:00",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "备份策略执行的开始时间段，格式为 HH:mm-HH:mm，采用 UTC 时间。"
+                      }
+                    }
+                  },
+                  "retentionDays": {
+                    "type": "integer",
+                    "description": "The number of days to retain the backup.",
+                    "minimum": 1,
+                    "maximum": 30,
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "备份保留的天数。"
+                      }
+                    },
+                    "example": 7
+                  },
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "Whether automatic backup is enabled or not.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "是否启用自动备份。"
+                      }
+                    },
+                    "example": true
+                  },
+                  "crossRegionCopies": {
+                    "type": "array",
+                    "description": "The list of cross-region backup policies.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "跨区域备份策略列表。"
+                      }
+                    },
+                    "items": {
+                      "type": "object",
+                      "description": "Information about the cross-region backup policy.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "跨区域备份策略信息。"
+                        }
+                      },
+                      "properties": {
+                        "regionId": {
+                          "type": "string",
+                          "description": "The ID of the target cloud region to which the backup will be copied. The region should be bound the to project to which the specified cluster belongs.",
+                          "example": "aws-us-west-2",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "目标云区域 ID。该区域应与指定集群所属项目绑定。",
+                              "example": "ali-cn-hangzhou"
+                            }
+                          }
+                        },
+                        "retentionDays": {
+                          "type": "integer",
+                          "description": "The number of days to retain the cross-region backup.",
+                          "minimum": 1,
+                          "maximum": 30,
+                          "example": 7,
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "跨区域备份保留的天数。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "enabled"
+                ]
+              },
+              "examples": {
+                "1": {
+                  "summary": "enable auto backup",
+                  "value": {
+                    "frequency": "1,2,3,5",
+                    "startTime": "02:00-04:00",
+                    "retentionDays": 7,
+                    "enabled": true
+                  }
+                },
+                "2": {
+                  "summary": "disable auto backup",
+                  "value": {
+                    "enabled": false
+                  }
+                },
+                "3": {
+                  "summary": "cross-region policies",
+                  "x-target-lang": "en-US",
+                  "value": {
+                    "frequency": "1,2,3,5",
+                    "startTime": "02:00-04:00",
+                    "retentionDays": 7,
+                    "enabled": true,
+                    "crossRegionCopies": [
+                      {
+                        "regionId": "aws-us-west-2",
+                        "retentionDays": 7
+                      },
+                      {
+                        "regionId": "aws-us-east-1",
+                        "retentionDays": 7
+                      }
+                    ]
+                  }
+                },
+                "4": {
+                  "summary": "cross-region policies",
+                  "x-target-lang": "zh-CN",
+                  "value": {
+                    "frequency": "1,2,3,5",
+                    "startTime": "02:00-04:00",
+                    "retentionDays": 7,
+                    "enabled": true,
+                    "crossRegionCopies": [
+                      {
+                        "regionId": "ali-cn-hangzhou",
+                        "retentionDays": 7
+                      },
+                      {
+                        "regionId": "ali-cn-shanghai",
+                        "retentionDays": 7
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "clusterId": {
+                              "type": "string",
+                              "description": "The ID of the cluster whose backup policy is in concern.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "备份所属集群的 ID。"
+                                }
+                              }
+                            },
+                            "status": {
+                              "type": "string",
+                              "description": "The status of the backup policy.",
+                              "enum": [
+                                "ENABLED",
+                                "DISABLED"
+                              ],
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "备份策略的状态。"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                        "status": "ENABLED"
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/clusters/{CLUSTER_ID}/backups/{BACKUP_ID}/restoreCluster": {
+      "post": {
+        "summary": "Restore Cluster Backup",
+        "deprecated": false,
+        "description": "Restore cluster backup to a new dedicated cluster of the same CU type in the same cloud region. Note that this API only applies to dedicated clusters.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "恢复集群备份",
+            "description": "本接口可将指定备份记录恢复到同一云区域内相同 CU 类型的新集群中。仅适用于 Dedicated 集群。"
+          }
+        },
+        "tags": [
+          "Backup & Restore (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          },
+          {
+            "name": "CLUSTER_ID",
+            "in": "path",
+            "description": "The ID of the cluster that needs to be backed up.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "需要备份的集群的 ID。"
+              }
+            },
+            "example": "inxx-xxxxxxxxxxxxxxx",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "BACKUP_ID",
+            "in": "path",
+            "description": "The ID of the backup in concern.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "需要导出的备份的 ID。"
+              }
+            },
+            "example": "backup-xxxxxxxxxxxxxxx",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "projectId": {
+                    "type": "string",
+                    "description": "The ID of the project to which the restored cluster belongs. If the specified cluster in the path is not in the region bound to the project, the restoration will fail.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "恢复后的集群所属的项目 ID。如果路径中指定的集群不在绑定到该项目的区域内，恢复将失败。"
+                      }
+                    }
+                  },
+                  "clusterName": {
+                    "type": "string",
+                    "description": "The name of the restored cluster.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "恢复后的集群名称。"
+                      }
+                    }
+                  },
+                  "cuSize": {
+                    "type": "integer",
+                    "description": "The CU size allocated to the restored cluster.",
+                    "minimum": 1,
+                    "maximum": 1024,
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "恢复后的集群的 CU 大小。"
+                      }
+                    }
+                  },
+                  "collectionStatus": {
+                    "type": "string",
+                    "description": "The status of the collections in the restored cluster.",
+                    "enum": [
+                      "KEEP",
+                      "RELEASE"
+                    ],
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "恢复后的集群中 Collection 的状态。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "projectId",
+                  "clusterName",
+                  "cuSize",
+                  "collectionStatus"
+                ]
+              },
+              "example": {
+                "projectId": "proj-xxxxxxxxxxxxxxxxxxxx",
+                "clusterName": "Dedicated-12",
+                "cuSize": 2,
+                "collectionStatus": "KEEP"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "reponse",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "description": "Response payload which is the information of the restored cluster.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载，包含恢复后的集群信息。"
+                            }
+                          },
+                          "properties": {
+                            "clusterId": {
+                              "type": "string",
+                              "description": "The ID of the restored cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "恢复后的集群 ID。"
+                                }
+                              }
+                            },
+                            "username": {
+                              "type": "string",
+                              "description": "The username used to access the restored cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "用于访问恢复后集群的用户名。"
+                                }
+                              }
+                            },
+                            "password": {
+                              "type": "string",
+                              "description": "The password used to access the restored cluster. This is shown only once. You are advised to note down the password and save it in a secure place.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "用于访问恢复后集群的密码。该密码仅显示一次，建议您记录该密码并将其保存在安全的地方。"
+                                }
+                              }
+                            },
+                            "jobId": {
+                              "type": "string",
+                              "description": "The ID of the cluster restoration job created upon this request.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "本次请求创建的集群恢复任务的 ID。"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                        "username": "db_admin",
+                        "password": "xxxxxxxxx",
+                        "jobId": "job-xxxxxxxxxxxxxx"
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/clusters/{CLUSTER_ID}/backups/{BACKUP_ID}/restoreCollection": {
+      "post": {
+        "summary": "Restore Collection Backup",
+        "deprecated": false,
+        "description": "Restore collection backup to an existing cluster. Note that this API only applies to dedicated clusters.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "恢复 Collection 备份",
+            "description": "本接口可将指定 Collection 备份恢复到已存在的任一集群。仅适用于 Dedicated 集群。"
+          }
+        },
+        "tags": [
+          "Backup & Restore (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          },
+          {
+            "name": "CLUSTER_ID",
+            "in": "path",
+            "description": "The ID of the cluster whose collection backup is in concern.",
+            "example": "inxx-xxxxxxxxxxxxxxx",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Collection 备份所属集群的 ID。"
+              }
+            }
+          },
+          {
+            "name": "BACKUP_ID",
+            "in": "path",
+            "description": "The ID of the backup in concern.",
+            "example": "Dedicated-01_backup3",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "需要恢复的备份的 ID。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "destClusterId": {
+                    "type": "string",
+                    "description": "The ID of the cluster to which the restored collection belongs.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "恢复后的 Collection 所属集群的 ID。"
+                      }
+                    }
+                  },
+                  "dbCollections": {
+                    "type": "array",
+                    "description": "A list of collection groups.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "Collection 组列表。"
+                      }
+                    },
+                    "items": {
+                      "type": "object",
+                      "description": "A collection group.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "Collection 组。"
+                        }
+                      },
+                      "properties": {
+                        "dbName": {
+                          "type": "string",
+                          "description": "The name of the source database containing the collections listed in the `collectionNames` field.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "包含 `collectionNames` 字段中列出的 Collection 的源数据库名称。"
+                            }
+                          }
+                        },
+                        "destDbName": {
+                          "type": "string",
+                          "description": "The name of the destination database to which the specified collections will be restored.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "指定 Collection 将被恢复到的目标数据库名称。"
+                            }
+                          }
+                        },
+                        "collections": {
+                          "type": "array",
+                          "description": "Currently, Zilliz Cloud restores only one collection at a time. Therefore, include only one collection name in the list. If this is left unspecified, all collections in the backup will be restored to the target cluster unloaded.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "目前，Zilliz Cloud 一次仅恢复一个 Collection。因此，在列表中仅包含一个 Collection 名称。如果未指定此项，备份中的所有 Collection 将以未加载状态恢复到目标集群中。"
+                            }
+                          },
+                          "items": {
+                            "type": "object",
+                            "description": "A collection to restore.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "要恢复的 Collection。"
+                              }
+                            },
+                            "properties": {
+                              "collectionName": {
+                                "type": "string",
+                                "description": "The name of the source collection to restore.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "要恢复的源 Collection 的名称。"
+                                  }
+                                }
+                              },
+                              "destCollectionName": {
+                                "type": "string",
+                                "description": "The name of the destination collection.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "目标 Collection 的名称。"
+                                  }
+                                }
+                              },
+                              "destCollectionStatus": {
+                                "type": "string",
+                                "description": "The status of the destination collection.",
+                                "enum": [
+                                  "LOADED",
+                                  "UNLOADED"
+                                ],
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "目标 Collection 的状态。"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "destClusterId"
+                ]
+              },
+              "example": {
+                "destClusterId": "in01-xxxxxxxxxxxxxx",
+                "dbCollections": [
+                  {
+                    "collections": [
+                      {
+                        "collectionName": "medium_articles",
+                        "destCollectionName": "restore_medium_articles",
+                        "destCollectionStatus": "LOADED"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "description": "Response payload which is the ID of an asynchronous control-plane job.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载，包含异步控制平面任务的 ID。"
+                            }
+                          },
+                          "properties": {
+                            "jobId": {
+                              "type": "string",
+                              "description": "The ID of a collection restoration job created upon this request.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "本次请求创建的 Collection 恢复任务的 ID。"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "jobId": "job-xxxxxxxxxxxxxxxxxxxxxx"
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "servers": []
+}

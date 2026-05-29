@@ -1,0 +1,727 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Restful API copy",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Invoices (V2)",
+      "x-include-target": [
+        "zilliz"
+      ],
+      "x-i18n": {
+        "zh-CN": "Invoices (V2)"
+      }
+    }
+  ],
+  "paths": {
+    "/v2/invoices": {
+      "get": {
+        "summary": "List Invoices",
+        "deprecated": false,
+        "description": "Lists all invoices in the organization to which the current user belongs. The current user should be an organization owner or a billing admin.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看发票列表",
+            "description": "本接口列出当前用户所属组织的所有发票。当前用户须为组织所有者或计费管理员。"
+          }
+        },
+        "tags": [
+          "Invoices (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            },
+            "x-i18n-langs": [
+              "zh-CN"
+            ]
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The number of items to return in each page.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 10
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "每页返回的项目数量。"
+              }
+            },
+            "example": 10
+          },
+          {
+            "name": "currentPage",
+            "in": "query",
+            "description": "The page number to return.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "要返回的页码。"
+              }
+            },
+            "example": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of invoice records in the organization to which the current user belongs.",
+            "x-i18n": {
+              "description": "返回当前用户所属组织的所有发票记录列表。"
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "Returns a list of invoices.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回发票列表。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "count": {
+                                "type": "integer",
+                                "description": "The total number of invoices.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "发票总数。"
+                                  }
+                                }
+                              },
+                              "currentPage": {
+                                "type": "integer",
+                                "description": "The current page number.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "当前页码。"
+                                  }
+                                }
+                              },
+                              "pageSize": {
+                                "type": "integer",
+                                "description": "The number of records in each page.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "每页记录数。"
+                                  }
+                                }
+                              },
+                              "invoices": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string",
+                                      "description": "The ID of the invoice.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "发票 ID。"
+                                        }
+                                      }
+                                    },
+                                    "orgId": {
+                                      "type": "string",
+                                      "description": "The ID of the organization to which the invoice belongs.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "发票所属组织 ID。"
+                                        }
+                                      }
+                                    },
+                                    "periodStart": {
+                                      "type": "string",
+                                      "description": "The start time of the invoice period.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "发票帐期开始时间。"
+                                        }
+                                      }
+                                    },
+                                    "periodEnd": {
+                                      "type": "string",
+                                      "description": "The end time of the invoice period.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "发票帐期结束时间。"
+                                        }
+                                      }
+                                    },
+                                    "invoiceDate": {
+                                      "type": "string",
+                                      "description": "The date on which the invoice was issued.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "发票生成日期。"
+                                        }
+                                      }
+                                    },
+                                    "dueDate": {
+                                      "type": "string",
+                                      "description": "The due date of the invoice.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "发票逾期时间。"
+                                        }
+                                      }
+                                    },
+                                    "currency": {
+                                      "type": "string",
+                                      "description": "The currency of the invoice.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "发票币种。"
+                                        }
+                                      }
+                                    },
+                                    "status": {
+                                      "type": "string",
+                                      "description": "The status of the invoice.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "发票状态。"
+                                        }
+                                      },
+                                      "enum": [
+                                        "unbilled",
+                                        "unconfirmed",
+                                        "disputed",
+                                        "unpaid",
+                                        "overdue",
+                                        "paid",
+                                        "free"
+                                      ]
+                                    },
+                                    "usageAmount": {
+                                      "type": "number",
+                                      "description": "The total amount recorded in the invoice.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "发票记录的总金额。"
+                                        }
+                                      }
+                                    },
+                                    "creditsApplied": {
+                                      "type": "number",
+                                      "description": "The total credits applied to the invoice, which should be subtracted from the total amount.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "已应用的信用额度，应从总金额中减去。"
+                                        }
+                                      }
+                                    },
+                                    "alreadyBilledAmount": {
+                                      "type": "number",
+                                      "description": "The total amount that has already been billed.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "已开票金额。"
+                                        }
+                                      }
+                                    },
+                                    "subtotal": {
+                                      "type": "number",
+                                      "description": "The subtotal of the invoice, which is the total amount minus any credits applied.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "发票小计金额，即总金额减去已应用的信用额度。"
+                                        }
+                                      }
+                                    },
+                                    "tax": {
+                                      "type": "number",
+                                      "description": "The tax amount of the invoice.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "发票税额。"
+                                        }
+                                      }
+                                    },
+                                    "total": {
+                                      "type": "number",
+                                      "description": "The total amount of the invoice, which is the subtotal plus the tax.",
+                                      "x-i18n": {
+                                        "description": "发票含税金额，即小计金额加上税额。"
+                                      }
+                                    },
+                                    "advancePayAmount": {
+                                      "type": "number",
+                                      "description": "The advance payment amount of the organization to which the current user belongs, which can be used to pay for unpaid invoices.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "当前用户所属组织预存金额，可用于冲抵待付款。"
+                                        }
+                                      }
+                                    },
+                                    "amountDue": {
+                                      "type": "number",
+                                      "description": "The amount due for the invoice, which is the advance payment amount minus the total amount that has already been billed.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "发票应付金额，即预存金额减去含税金额。"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "error",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "count": 1,
+                        "currentPage": 1,
+                        "pageSize": 10,
+                        "invoices": [
+                          {
+                            "id": "inv-12312io23810o291",
+                            "orgId": "org-xxxxxx",
+                            "periodStart": "2024-01-01T00:00:00Z",
+                            "periodEnd": "2024-02-01T00:00:00Z",
+                            "invoiceDate": "2024-02-01T00:00:00Z",
+                            "dueDate": "2024-02-01T00:00:00Z",
+                            "currency": "USD",
+                            "status": "unpaid",
+                            "usageAmount": 52400,
+                            "creditsApplied": 12400,
+                            "alreadyBilledAmount": 0,
+                            "subtotal": 40000,
+                            "tax": 5000,
+                            "total": 45000,
+                            "advancePayAmount": 0,
+                            "amountDue": 45000
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/invoices/{INVOICE_ID}": {
+      "get": {
+        "summary": "Describe Invoice",
+        "deprecated": false,
+        "description": "Describes the specified invoice in the organization to which the current user belongs. The current user should be an organization owner or a billing admin.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看发票详情",
+            "description": "本接口描述当前用户所属组织的指定发票。当前用户须为组织所有者或计费管理员。"
+          }
+        },
+        "tags": [
+          "Invoices (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            },
+            "x-i18n-langs": [
+              "zh-CN"
+            ]
+          },
+          {
+            "name": "INVOICE_ID",
+            "in": "path",
+            "description": "The ID of the invoice to describe.",
+            "required": true,
+            "example": "inv-12312io23810o291",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "要描述的发票 ID。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the details of the specified invoice in the organization to which the current user belongs.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回当前用户所属组织的指定发票的详细信息。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "Returns the details of the specified invoice.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回指定发票的详细信息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "description": "The ID of the invoice.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "发票 ID。"
+                                }
+                              }
+                            },
+                            "orgId": {
+                              "type": "string",
+                              "description": "The ID of the organization to which the invoice belongs.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "发票所属组织 ID。"
+                                }
+                              }
+                            },
+                            "periodStart": {
+                              "type": "string",
+                              "description": "The start time of the invoice period.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "发票帐期开始时间。"
+                                }
+                              }
+                            },
+                            "periodEnd": {
+                              "type": "string",
+                              "description": "The end time of the invoice period.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "发票帐期结束时间。"
+                                }
+                              }
+                            },
+                            "invoiceDate": {
+                              "type": "string",
+                              "description": "The date on which the invoice was issued.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "发票生成日期。"
+                                }
+                              }
+                            },
+                            "dueDate": {
+                              "type": "string",
+                              "description": "The due date of the invoice.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "发票逾期时间。"
+                                }
+                              }
+                            },
+                            "currency": {
+                              "type": "string",
+                              "description": "The currency of the invoice.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "发票币种。"
+                                }
+                              }
+                            },
+                            "status": {
+                              "type": "string",
+                              "description": "The status of the invoice.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "发票状态。"
+                                }
+                              },
+                              "enum": [
+                                "unbilled",
+                                "unconfirmed",
+                                "disputed",
+                                "unpaid",
+                                "overdue",
+                                "paid",
+                                "free"
+                              ]
+                            },
+                            "usageAmount": {
+                              "type": "number",
+                              "description": "The total amount recorded in the invoice.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "发票记录的总金额。"
+                                }
+                              }
+                            },
+                            "creditsApplied": {
+                              "type": "number",
+                              "description": "The total credits applied to the invoice, which should be subtracted from the total amount.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "已应用的信用额度，应从总金额中减去。"
+                                }
+                              }
+                            },
+                            "alreadyBilledAmount": {
+                              "type": "number",
+                              "description": "The total amount that has already been billed.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "已开票金额。"
+                                }
+                              }
+                            },
+                            "subtotal": {
+                              "type": "number",
+                              "description": "The subtotal of the invoice, which is the total amount minus any credits applied.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "发票小计金额，即总金额减去已应用的信用额度。"
+                                }
+                              }
+                            },
+                            "tax": {
+                              "type": "number",
+                              "description": "The tax amount of the invoice.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "发票税额。"
+                                }
+                              }
+                            },
+                            "total": {
+                              "type": "number",
+                              "description": "The total amount of the invoice, which is the subtotal plus the tax.",
+                              "x-i18n": {
+                                "description": "发票含税金额，即小计金额加上税额。"
+                              }
+                            },
+                            "advancePayAmount": {
+                              "type": "number",
+                              "description": "The advance payment amount of the organization to which the current user belongs, which can be used to pay for unpaid invoices.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "当前用户所属组织预存金额，可用于冲抵待付款。"
+                                }
+                              }
+                            },
+                            "amountDue": {
+                              "type": "number",
+                              "description": "The amount due for the invoice, which is the advance payment amount minus the total amount that has already been billed.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "发票应付金额，即预存金额减去含税金额。"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "error",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "id": "inv-12312io23810o291",
+                        "orgId": "org-xxxxxx",
+                        "periodStart": "2024-01-01T00:00:00Z",
+                        "periodEnd": "2024-02-01T00:00:00Z",
+                        "invoiceDate": "2024-02-01T00:00:00Z",
+                        "dueDate": "2024-02-01T00:00:00Z",
+                        "currency": "USD",
+                        "status": "unpaid",
+                        "usageAmount": 52400,
+                        "creditsApplied": 12400,
+                        "alreadyBilledAmount": 0,
+                        "subtotal": 40000,
+                        "tax": 5000,
+                        "total": 45000,
+                        "advancePayAmount": 0,
+                        "amountDue": 45000
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "servers": []
+}

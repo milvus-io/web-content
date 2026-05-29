@@ -1,0 +1,2590 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Restful API copy",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Cluster Operations",
+      "x-include-target": [
+        "zilliz"
+      ],
+      "x-i18n": {
+        "zh-CN": {
+          "name": "Cluster"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/v1/clusters": {
+      "get": {
+        "summary": "List Clusters",
+        "deprecated": false,
+        "description": "Lists all clusters in the specified cloud region.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看集群列表",
+            "description": "本接口可列出指定云区域中的所有集群相关信息。"
+          }
+        },
+        "tags": [
+          "Cluster Operations"
+        ],
+        "parameters": [
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The number of records to return on each page.",
+            "required": false,
+            "example": 0,
+            "schema": {
+              "type": "integer"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "每次返回的记录数。"
+              }
+            }
+          },
+          {
+            "name": "currentPage",
+            "in": "query",
+            "description": "The current page number.",
+            "required": false,
+            "example": 0,
+            "schema": {
+              "type": "integer"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前页码。"
+              }
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            },
+            "x-i18n-langs": [
+              "zh-CN"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of your clusters.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回集群名称列表。"
+              }
+            },
+            "x-i18n-langs": [
+              "zh-CN"
+            ],
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns a list of clusters.",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "count": {
+                              "type": "integer",
+                              "description": "The total number of clusters returned.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "返回的集群总数。"
+                                }
+                              }
+                            },
+                            "currentPage": {
+                              "type": "integer",
+                              "description": "The current page in the results.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "当前页码。"
+                                }
+                              }
+                            },
+                            "pageSize": {
+                              "type": "integer",
+                              "description": "The number of clusters per page in the results.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "每页的集群数。"
+                                }
+                              }
+                            },
+                            "clusters": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "clusterId": {
+                                    "type": "string",
+                                    "description": "The ID of the cluster.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "集群的 ID。"
+                                      }
+                                    }
+                                  },
+                                  "clusterName": {
+                                    "type": "string",
+                                    "description": "The name of the cluster.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "集群的名称。"
+                                      }
+                                    }
+                                  },
+                                  "description": {
+                                    "type": "string",
+                                    "description": "An optional description about the cluster.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "集群的描述。"
+                                      }
+                                    }
+                                  },
+                                  "regionId": {
+                                    "type": "string",
+                                    "description": "The ID of the region where the cluster exists.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "集群的地域 ID。"
+                                      }
+                                    }
+                                  },
+                                  "clusterType": {
+                                    "type": "string",
+                                    "description": "The type of CU associated with the cluster.",
+                                    "enum": [
+                                      "Performance-optimized",
+                                      "Capacity-optimized",
+                                      "Tiered-storage"
+                                    ],
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "集群的 CU 类型。"
+                                      }
+                                    }
+                                  },
+                                  "plan": {
+                                    "type": "string",
+                                    "description": "The subscription plan associated with the cluster.",
+                                    "enum": [
+                                      "Standard",
+                                      "Enterprise",
+                                      "Serverless",
+                                      "Free"
+                                    ],
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "集群所属的订阅计划。",
+                                        "enum": [
+                                          "Standard",
+                                          "Enterprise",
+                                          "Serverless"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "cuSize": {
+                                    "type": "integer",
+                                    "description": "The size of the CU associated with the cluster.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "集群的 CU 大小。"
+                                      }
+                                    }
+                                  },
+                                  "status": {
+                                    "type": "string",
+                                    "description": "The current status of the cluster.",
+                                    "enum": [
+                                      "CREATING",
+                                      "RUNNING",
+                                      "DELETING",
+                                      "DELETED",
+                                      "STOPPING",
+                                      "RESUMING",
+                                      "MODIFYING",
+                                      "ABNORMAL",
+                                      "FREEZING",
+                                      "FROZEN"
+                                    ],
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "集群的状态。"
+                                      }
+                                    }
+                                  },
+                                  "connectAddress": {
+                                    "type": "string",
+                                    "description": "The public endpoint of the cluster. You can connect to the cluster using this endpoint from the public network.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "集群的公网地址。你可以从公网连接到集群。"
+                                      }
+                                    }
+                                  },
+                                  "privateLinkAddress": {
+                                    "type": "string",
+                                    "description": "The private endpoint of the cluster. You can set up a private link to allow your VPS in the same cloud region to access your cluster.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "集群的私网地址。你可以设置私有连接，使你的 VPS 同属于同一云区域的用户可以访问你的集群。"
+                                      }
+                                    }
+                                  },
+                                  "projectId": {
+                                    "type": "string",
+                                    "description": "The ID of the project where the cluster resides.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "集群所在项目的 ID。"
+                                      }
+                                    }
+                                  },
+                                  "createTime": {
+                                    "type": "string",
+                                    "description": "The time at which the cluster has been created.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "集群的创建时间。"
+                                      }
+                                    }
+                                  }
+                                },
+                                "description": "A cluster.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "集群相关信息。"
+                                  }
+                                }
+                              },
+                              "description": "An array of clusters in detail.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "集群详细信息。"
+                                }
+                              }
+                            }
+                          },
+                          "description": "Response payload, which is a list of clusters.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷，包含集群列表。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "en-US",
+                    "value": {
+                      "code": 200,
+                      "data": {
+                        "count": 2,
+                        "currentPage": 1,
+                        "pageSize": 10,
+                        "clusters": [
+                          {
+                            "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                            "clusterName": "Dedicated-02",
+                            "description": "",
+                            "regionId": "gcp-us-west1",
+                            "clusterType": "Performance-optimized",
+                            "plan": "Standard",
+                            "cuSize": 1,
+                            "status": "RUNNING",
+                            "connectAddress": "https://inxx-xxxxxxxxxxxxxxx.gcp-us-west1.vectordb.zillizcloud.com:19530",
+                            "privateLinkAddress": "",
+                            "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxx",
+                            "createTime": "2024-07-22T04:28:05Z"
+                          },
+                          {
+                            "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                            "clusterName": "Dedicated-01",
+                            "description": "",
+                            "regionId": "az-westus3",
+                            "clusterType": "Performance-optimized",
+                            "plan": "Standard",
+                            "cuSize": 1,
+                            "status": "RUNNING",
+                            "connectAddress": "https://inxx-xxxxxxxxxxxxxxx.az-westus3.vectordb.zillizcloud.com:19530",
+                            "privateLinkAddress": "",
+                            "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxx",
+                            "createTime": "2024-07-22T04:25:36Z"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "zh-CN",
+                    "value": {
+                      "code": 200,
+                      "data": {
+                        "count": 2,
+                        "currentPage": 1,
+                        "pageSize": 10,
+                        "clusters": [
+                          {
+                            "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                            "clusterName": "Dedicated-02",
+                            "description": "",
+                            "regionId": "ali-cn-hangzhou",
+                            "clusterType": "Performance-optimized",
+                            "plan": "Standard",
+                            "cuSize": 1,
+                            "status": "RUNNING",
+                            "connectAddress": "https://inxx-xxxxxxxxxxxxxxx.ali-cn-hangzhou.vectordb.zilliz.com.cn:19530",
+                            "privateLinkAddress": "",
+                            "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxx",
+                            "createTime": "2024-07-22T04:28:05Z"
+                          },
+                          {
+                            "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                            "clusterName": "Dedicated-01",
+                            "description": "",
+                            "regionId": "tc-ap-beijing",
+                            "clusterType": "Performance-optimized",
+                            "plan": "Standard",
+                            "cuSize": 1,
+                            "status": "RUNNING",
+                            "connectAddress": "https://inxx-xxxxxxxxxxxxxxx.tc-ap-beijing.vectordb.zilliz.com.cn:19530",
+                            "privateLinkAddress": "",
+                            "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxx",
+                            "createTime": "2024-07-22T04:25:36Z"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 80002,
+                      "message": "Token not found or unauthorized: The provided token does not exist in our records, or you do not have the necessary permissions to use this token. Please ensure you have the correct token."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v1/clusters/{CLUSTER_ID}/metrics/query": {
+      "post": {
+        "summary": "Query Metrics",
+        "deprecated": false,
+        "description": "Queries the metrics of a cluster.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看集群指标",
+            "description": "本接口查询指定集群的指标统计信息。"
+          }
+        },
+        "tags": [
+          "Cluster Operations"
+        ],
+        "parameters": [
+          {
+            "name": "CLUSTER_ID",
+            "in": "path",
+            "description": "The ID of the cluster.",
+            "required": true,
+            "example": "inxx-xxxxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "集群 ID。"
+              }
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "start": {
+                    "type": "string",
+                    "description": "The starting date and time for the metric reporting period, expressed in ISO 8601 timestamp format in UTC. Use this parameter when the `period` parameter is not set.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "开始时间，格式为 ISO 8601 时间戳格式（UTC）。当 `period` 参数未设置时，需要包含此参数。"
+                      }
+                    },
+                    "example": "2023-12-31T23:59:59Z"
+                  },
+                  "end": {
+                    "type": "string",
+                    "description": "The ending date and time for the metric reporting period, expressed in ISO 8601 timestamp format in UTC. Use this parameter when the `period` parameter is not set.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "结束时间，格式为 ISO 8601 时间戳格式（UTC）。当 `period` 参数未设置时，需要包含此参数。"
+                      }
+                    },
+                    "example": "2024-07-01T08:15:30Z"
+                  },
+                  "period": {
+                    "type": "string",
+                    "description": "The duration over which the metrics are reported, expressed in [ISO 8601 duration](https://datatracker.ietf.org/doc/html/rfc3339#page-12) format in UTC. Use this parameter when neither `start` nor `end` parameters are not set.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "指标报告期间的持续时间，格式为 [ISO 8601 持续时间](https://datatracker.ietf.org/doc/html/rfc3339#page-12)格式（UTC）。当 `start` 和 `end` 参数都未设置时，需要包含此参数。"
+                      }
+                    },
+                    "enum": [
+                      "P1D",
+                      "P1M"
+                    ]
+                  },
+                  "granularity": {
+                    "type": "string",
+                    "description": "The time interval at which the metrics are reported, expressed in ISO 8601 duration format in UTC. The minimum granularity is PT30S.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "系统向用户报告指标的时间间隔，格式为 ISO 8601 持续时间格式（UTC）。最小粒度为 PT30S。"
+                      }
+                    }
+                  },
+                  "metricQueries": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "The name of the metric to query. For details about available metrics, refer to [Metrics & Alerts Reference](/docs/metrics-alerts-reference#cluster-metrics).",
+                          "enum": [
+                            "CU_COMPUTATION",
+                            "CU_CAPACITY",
+                            "STORAGE_USE",
+                            "REQ_INSERT_COUNT",
+                            "REQ_BULK_INSERT_COUNT",
+                            "REQ_UPSERT_COUNT",
+                            "REQ_DELETE_COUNT",
+                            "REQ_SEARCH_COUNT",
+                            "REQ_QUERY_COUNT",
+                            "VECTOR_REQ_INSERT_COUNT",
+                            "VECTOR_REQ_BULK_INSERT_COUNT",
+                            "VECTOR_REQ_UPSERT_COUNT",
+                            "VECTOR_REQ_DELETE_COUNT",
+                            "VECTOR_REQ_SEARCH_COUNT",
+                            "REQ_INSERT_LATENCY_AVG",
+                            "REQ_INSERT_LATENCY_P99",
+                            "REQ_UPSERT_LATENCY_AVG",
+                            "REQ_UPSERT_LATENCY_P99",
+                            "REQ_DELETE_LATENCY_AVG",
+                            "REQ_DELETE_LATENCY_P99",
+                            "REQ_SEARCH_LATENCY_AVG",
+                            "REQ_SEARCH_LATENCY_P99",
+                            "REQ_QUERY_LATENCY_AVG",
+                            "REQ_QUERY_LATENCY_P99",
+                            "SLOW_QUERY_COUNT",
+                            "REQ_FAIL_RATE_INSERT",
+                            "REQ_FAIL_RATE_BULK_INSERT",
+                            "REQ_FAIL_RATE_UPSERT",
+                            "REQ_FAIL_RATE_DELETE",
+                            "REQ_FAIL_RATE_SEARCH",
+                            "REQ_FAIL_RATE_QUERY",
+                            "ENTITIES_LOADED",
+                            "ENTITIES_INDEXED",
+                            "ENTITIES_COUNT",
+                            "COLLECTIONS_COUNT",
+                            "CLUSTER_WRITE_CAPACITY",
+                            "UNLOADED_COLLECTIONS_COUNT",
+                            "FLUSH_COUNT"
+                          ],
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "待查询的指标名称。有关可用指标的详细信息，请参阅[指标与告警快速参考](/docs/metrics-alerts-reference#cluster-metrics)。"
+                            }
+                          }
+                        },
+                        "stat": {
+                          "type": "string",
+                          "description": "The statistical method to apply to the metric. **AVG** is the average value available for each metric, while **P99** is the 99th percentile value for latency-related metrics.",
+                          "enum": [
+                            "AVG",
+                            "P99"
+                          ],
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "用于对指标进行统计的方法。**AVG** 表示计算平均值，对所有指标都适用； **P99** 表示计算 99 百分位值，对时延相关指标适用。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "stat"
+                      ],
+                      "description": "The information about the metric.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "关于指标的信息。"
+                        }
+                      }
+                    },
+                    "description": "An array of MetricQuery objects.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "指标查询对象数组。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "granularity",
+                  "metricQueries",
+                  "start",
+                  "end",
+                  "period"
+                ],
+                "x-i18n-langs": [
+                  "zh-CN"
+                ]
+              },
+              "examples": {
+                "1": {
+                  "summary": "example",
+                  "value": {
+                    "start": "",
+                    "end": "",
+                    "period": "PT99H",
+                    "granularity": "PT5H",
+                    "metricQueries": [
+                      {
+                        "name": "CU_CAPACITY",
+                        "stat": "AVG"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the statistics on the queried metrics.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回指定指标的相关统计信息。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "results": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "name": {
+                                    "type": "string",
+                                    "description": "The name of the metric.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "指标名称。"
+                                      }
+                                    }
+                                  },
+                                  "stat": {
+                                    "type": "string",
+                                    "description": "The statistical function applied to the metric.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "用于计算指标的统计方法。"
+                                      }
+                                    }
+                                  },
+                                  "unit": {
+                                    "type": "string",
+                                    "description": "The unit of measurement for the metric (e.g., percent).",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "指标的计量单位，如百分比。"
+                                      }
+                                    }
+                                  },
+                                  "values": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "description": "A data point in detail.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "一个数据点的详细信息。"
+                                        }
+                                      },
+                                      "properties": {
+                                        "timestamp": {
+                                          "type": "string",
+                                          "description": "The timestamp for the data point in ISO 8601 format.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "数据点的时间戳，格式为 ISO 8601。"
+                                            }
+                                          }
+                                        },
+                                        "value": {
+                                          "type": "string",
+                                          "description": "The value of the metric at the given timestamp.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "指标在给定时间戳的值。"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "description": "An array of data points.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "一组数据点。"
+                                      }
+                                    }
+                                  }
+                                },
+                                "description": "Information about the metric.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "关于指标的信息。"
+                                  }
+                                }
+                              },
+                              "description": "An array of result objects.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "结果对象数组。"
+                                }
+                              }
+                            }
+                          },
+                          "description": "Response payload, which is an object containing information about the queried metric.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载，是一个包含查询指标信息的对象。"
+                            }
+                          }
+                        }
+                      },
+                      "description": "A success response."
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      },
+                      "description": "A failure response."
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 200,
+                      "data": {
+                        "results": [
+                          {
+                            "name": "CU_COMPUTATION",
+                            "stat": "AVG",
+                            "unit": "percent",
+                            "values": [
+                              {
+                                "timestamp": "2024-07-23T16:09:53Z",
+                                "value": "1.00"
+                              },
+                              {
+                                "timestamp": "2024-07-23T22:09:53Z",
+                                "value": "1.00"
+                              },
+                              {
+                                "timestamp": "2024-07-24T04:09:53Z",
+                                "value": "1.00"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v1/clusters/create": {
+      "post": {
+        "summary": "Create Cluster",
+        "deprecated": false,
+        "description": "Creates a new cluster.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "创建集群",
+            "description": "创建一个 Dedicated 集群。"
+          }
+        },
+        "tags": [
+          "Cluster Operations"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "plan": {
+                    "type": "string",
+                    "description": "The subscription plan of the cluster to be created.",
+                    "enum": [
+                      "Standard",
+                      "Enterprise"
+                    ],
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待创建集群所属的订阅计划。"
+                      }
+                    }
+                  },
+                  "clusterName": {
+                    "type": "string",
+                    "description": "The name of the cluster to create.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待创建集群名称。"
+                      }
+                    },
+                    "maxLength": 32
+                  },
+                  "cuSize": {
+                    "type": "integer",
+                    "description": "The size of CU used for the cluster.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "集群使用的 CU 大小。"
+                      }
+                    },
+                    "minimum": 1,
+                    "maximum": 256
+                  },
+                  "cuType": {
+                    "type": "string",
+                    "description": "The type of CU used for the cluster.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "集群使用的 CU 类型。"
+                      }
+                    },
+                    "enum": [
+                      "Performance-optimized",
+                      "Capacity-optimized"
+                    ]
+                  },
+                  "projectId": {
+                    "type": "string",
+                    "description": "The ID of the project where the cluster is to be created.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待创建集群所属项目 ID。"
+                      }
+                    },
+                    "example": "proj-xxxxxxxxxxxxxxxxxxxxxx"
+                  }
+                },
+                "x-i18n-langs": [
+                  "zh-CN"
+                ],
+                "required": [
+                  "cuSize",
+                  "clusterName",
+                  "projectId",
+                  "plan",
+                  "cuType"
+                ]
+              },
+              "example": {
+                "cuSize": 1,
+                "clusterName": "Cluster-02",
+                "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxx",
+                "plan": "Standard",
+                "cuType": "Performance-optimized"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns an object that contains the details of the created cluster.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回已创建的集群的详细信息。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response.",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "clusterId": {
+                              "type": "string",
+                              "description": "The ID of the cluster affected by this operation.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "受此操作影响的集群 ID。"
+                                }
+                              }
+                            },
+                            "username": {
+                              "type": "string",
+                              "description": "The name of the cluster user generated by default.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "访问此集群的默认用户名。此用户拥有此集群的管理权限。"
+                                }
+                              }
+                            },
+                            "password": {
+                              "type": "string",
+                              "description": "The password of the cluster user generated by default. It will not be displayed again, so note it down and securely store it.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "访问此集群的默认用户密码。此密码仅展示一次，请务必记录并安全保存。"
+                                }
+                              }
+                            },
+                            "prompt": {
+                              "type": "string",
+                              "description": "The statement indicating that this operation succeeds.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "表明此操作成功的声明信息。"
+                                }
+                              }
+                            }
+                          },
+                          "description": "Response payload which is an object containing information about the created dedicated cluster.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷，为一个包含 Dedicated 集群相关信息的对象。"
+                            }
+                          }
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 200,
+                      "data": {
+                        "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                        "username": "db_admin",
+                        "password": "xxxxxxxxxxxxxxxx",
+                        "prompt": "successfully submitted, cluster is being created. You can access data about the creation progress and status of your cluster by DescribeCluster API. Once the cluster status is RUNNING, you may access your vector database using the SDK with the admin account and the initial password you specified."
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v1/clusters/{CLUSTER_ID}": {
+      "get": {
+        "summary": "Describe Cluster",
+        "deprecated": false,
+        "description": "Describes a cluster in detail.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看集群详情",
+            "description": "本接口可查看指定 Cluster 的详细信息。"
+          }
+        },
+        "tags": [
+          "Cluster Operations"
+        ],
+        "parameters": [
+          {
+            "name": "CLUSTER_ID",
+            "in": "path",
+            "description": "The ID of the cluster.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "指定集群的 ID。"
+              }
+            },
+            "required": true,
+            "example": "inxx-xxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            },
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the details of the cluster.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回指定集群的详细信息。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response.",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "clusterId": {
+                              "type": "string",
+                              "description": "The ID of the cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "集群的 ID。"
+                                }
+                              }
+                            },
+                            "clusterName": {
+                              "type": "string",
+                              "description": "The name of the cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "集群的名称。"
+                                }
+                              }
+                            },
+                            "projectId": {
+                              "type": "string",
+                              "description": "The ID of the project where the cluster resides.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "集群所在项目的 ID。"
+                                }
+                              }
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "An optional description of the cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "集群的描述。"
+                                }
+                              }
+                            },
+                            "regionId": {
+                              "type": "string",
+                              "description": "The ID of the cloud region where the cluster exists.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "集群的地域 ID。"
+                                }
+                              }
+                            },
+                            "cuType": {
+                              "type": "string",
+                              "description": "The type of CU associated with the cluster.",
+                              "enum": [
+                                "Performance-optimized",
+                                "Capacity-optimized"
+                              ],
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "集群的 CU 类型。"
+                                }
+                              }
+                            },
+                            "plan": {
+                              "type": "string",
+                              "description": "The subscription plan of the cluster.",
+                              "enum": [
+                                "Standard",
+                                "Enterprise",
+                                "Serverless",
+                                "Free"
+                              ],
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "集群所属的订阅计划。",
+                                  "enum": [
+                                    "Standard",
+                                    "Enterprise",
+                                    "Serverless"
+                                  ]
+                                }
+                              }
+                            },
+                            "status": {
+                              "type": "string",
+                              "description": "The current status of the cluster.",
+                              "enum": [
+                                "CREATING",
+                                "RUNNING",
+                                "DELETING",
+                                "DELETED",
+                                "STOPPING",
+                                "RESUMING",
+                                "MODIFYING",
+                                "ABNORMAL",
+                                "FREEZING",
+                                "FROZEN"
+                              ],
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "集群的状态。"
+                                }
+                              }
+                            },
+                            "connectAddress": {
+                              "type": "string",
+                              "description": "The public endpoint of the cluster. You can connect to the cluster using this endpoint from the public network.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "集群的公网地址。你可以从公网连接到集群。"
+                                }
+                              }
+                            },
+                            "privateLinkAddress": {
+                              "type": "string",
+                              "description": "The private endpoint of the cluster. You can set up a private link to allow your VPS in the same cloud region to access your cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "集群的私网地址。你可以设置私有连接，使你的 VPS 同属于同一云区域的用户可以访问你的集群。"
+                                }
+                              }
+                            },
+                            "createTime": {
+                              "type": "string",
+                              "description": "The time at which the cluster has been created.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "集群的创建时间。"
+                                }
+                              }
+                            },
+                            "replica": {
+                              "type": "integer",
+                              "description": "The number of replicas used by the cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "集群的副本数量。"
+                                }
+                              }
+                            },
+                            "cuSize": {
+                              "type": "integer",
+                              "description": "The size of the CU used by the cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "集群的 CU 大小。"
+                                }
+                              }
+                            },
+                            "storageSize": {
+                              "type": "integer",
+                              "description": "The storage size of the cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "集群的存储大小。"
+                                }
+                              },
+                              "format": "sint64"
+                            },
+                            "snapshotNumber": {
+                              "type": "integer",
+                              "description": "The number of snapshofts created from the cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "集群创建的快照数量。"
+                                }
+                              }
+                            },
+                            "createProgress": {
+                              "type": "integer",
+                              "description": "The creation progress of the cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "集群创建进度。"
+                                }
+                              },
+                              "minimum": 0,
+                              "maximum": 100
+                            }
+                          },
+                          "description": "Response payload, which details the cluster.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷，包含集群详情。"
+                            }
+                          }
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failures",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "en-US",
+                    "value": {
+                      "code": 200,
+                      "data": {
+                        "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                        "clusterName": "Cluster-02",
+                        "description": "",
+                        "regionId": "gcp-us-west1",
+                        "clusterType": "Performance-optimized",
+                        "plan": "Standard",
+                        "cuSize": 1,
+                        "status": "RUNNING",
+                        "connectAddress": "https://inxx-xxxxxxxxxxxxxxx.gcp-us-west1.vectordb.zillizcloud.com:19530",
+                        "privateLinkAddress": "",
+                        "createTime": "2024-07-22T07:43:04Z",
+                        "storageSize": 0,
+                        "snapshotNumber": 0,
+                        "createProgress": 100,
+                        "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxx"
+                      }
+                    }
+                  },
+                  "2": {
+                    "x-target-response": "OPTION 2",
+                    "summary": "failure",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v1/clusters/{CLUSTER_ID}/drop": {
+      "delete": {
+        "summary": "Drop Cluster",
+        "deprecated": false,
+        "description": "Deletes a cluster. This operation moves your cluster to the recycle bin. All clusters in the recycle bin are pending permanent deletion in 30 days.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "删除集群",
+            "description": "本接口删除一个集群。该操作将集群移入回收站，30 天后将永久删除该集群。"
+          }
+        },
+        "tags": [
+          "Cluster Operations"
+        ],
+        "parameters": [
+          {
+            "name": "CLUSTER_ID",
+            "in": "path",
+            "description": "The ID of the cluster to drop.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "待删除集群 ID。"
+              }
+            },
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            },
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the ID of the deleted cluster.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回已删除集群的 ID。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response.",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "description": "Response payload which is an object containing the ID of the cluster.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷，包含已操作集群的 ID。"
+                            }
+                          },
+                          "type": "object",
+                          "properties": {
+                            "clusterId": {
+                              "type": "string",
+                              "description": "The ID of the cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "集群 ID。"
+                                }
+                              }
+                            },
+                            "prompt": {
+                              "type": "string",
+                              "description": "The statement indicating that the current operation succeeds.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "提示信息，表示当前操作成功。"
+                                }
+                              }
+                            }
+                          },
+                          "x-i18n-langs": [
+                            "zh-CN"
+                          ]
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 200,
+                      "data": {
+                        "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                        "prompt": "The cluster has been deleted. If you consider this action to be an error, you have the option to restore the deleted cluster from the recycle bin within a 30-day period. Kindly note, this recovery feature does not apply to free clusters."
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 80002,
+                      "message": "Token not found or unauthorized: The provided token does not exist in our records, or you do not have the necessary permissions to use this token. Please ensure you have the correct token."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v1/clusters/{CLUSTER_ID}/modify": {
+      "post": {
+        "summary": "Modify Cluster",
+        "deprecated": false,
+        "description": "Modify a dedicated cluster. You can increase or reduce the number of CUs allocated to the cluster.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "修改集群配置",
+            "description": "修改指定 Dedicated 集群的配置。您可以根据需要增加或减少分配给指定集群的 CUs 的数量。"
+          }
+        },
+        "tags": [
+          "Cluster Operations"
+        ],
+        "parameters": [
+          {
+            "name": "CLUSTER_ID",
+            "in": "path",
+            "description": "The ID of the cluster for which you want to modify the configuration.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "需要修改配置的集群 ID。"
+              }
+            },
+            "required": true,
+            "example": "{{CLUSTER_ID}}",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cuSize": {
+                    "type": "integer",
+                    "description": "The size of CU to be associated with your cluster after modification.<br/>For free and serverless clusters, the value is always `0`.<br/>For dedicated clusters in Standard plan, the value can be `1` to `32`, and possible values can be 1, 2, 4, 8, 12, 16, 20, 24, 28, 32.<br/>For dedicated clusters in Enterprise plan, the value can be `1` to `1,024`, and possible values can be 1, 2, 4, 8, 12, 16, 20, 24, 28, 32,...,64, 72, 80, 88,...,256, 272, 288, ...,1024.<br/>For details on the increment rules for the CU size, refer to the `Deployment` section in [Detailed Plan Comparison](https://docs.zilliz.com/docs/select-zilliz-cloud-service-plans#deployment).",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "集群修改后关联的 CU 大小。<br/>对于 Free 和 Serverless 集群，该值始终为 `0`。<br/>对于 Standard 计划的 Dedicated 集群，该值取值范围为 `1` 到 `32`，可能的值为1、2、4、8、12、16、20、24、28、32。<br/>对于 Enterprise 计划的 Dedicated 集群，该值取值范围为 `1` 到 `1024`，可能的值为1、2、4、8、12、16、20、24、28、32、...、64、72、80、88、...、256、272、288、...、1024。<br/>关于 CU 大小的增量规则，请参阅 [详细计划对比](https://docs.zilliz.com/docs/select-zilliz-cloud-service-plans#deployment) 中的 `Deployment` 部分。"
+                      }
+                    },
+                    "minimum": 1,
+                    "maximum": 1024
+                  }
+                },
+                "x-i18n-langs": [
+                  "zh-CN"
+                ],
+                "required": [
+                  "cuSize"
+                ]
+              },
+              "example": {
+                "cuSize": 2
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the ID of the affected cluster.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回受此操作影响的集群 ID。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response.",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "description": "Response payload which is an object containing the ID of the cluster.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷，包含已操作集群的 ID。"
+                            }
+                          },
+                          "type": "object",
+                          "properties": {
+                            "clusterId": {
+                              "type": "string",
+                              "description": "The ID of the cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "集群 ID。"
+                                }
+                              }
+                            },
+                            "prompt": {
+                              "type": "string",
+                              "description": "The statement indicating that the current operation succeeds.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "提示信息，表示当前操作成功。"
+                                }
+                              }
+                            }
+                          },
+                          "x-i18n-langs": [
+                            "zh-CN"
+                          ]
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 200,
+                      "data": {
+                        "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                        "prompt": "successfully submitted. Cluster is being upgraded, which is expected to take several minutes. You can access data about the creation progress and status of your cluster by DescribeCluster API. Once the cluster status is RUNNING, you may access your vector database using the SDK."
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 80002,
+                      "message": "Token not found or unauthorized: The provided token does not exist in our records, or you do not have the necessary permissions to use this token. Please ensure you have the correct token."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v1/clusters/{CLUSTER_ID}/resume": {
+      "post": {
+        "summary": "Resume Cluster",
+        "deprecated": false,
+        "description": "Resumes a suspended cluster.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "恢复集群",
+            "description": "本接口可以恢复处于暂停状态的集群。"
+          }
+        },
+        "tags": [
+          "Cluster Operations"
+        ],
+        "parameters": [
+          {
+            "name": "CLUSTER_ID",
+            "in": "path",
+            "description": "The ID of the cluster to resume.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "需要恢复的集群 ID。"
+              }
+            },
+            "required": true,
+            "example": "{{CLUSTER_ID}}",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            },
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the ID of the affected cluster.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回受此操作影响的集群 ID。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应"
+                        }
+                      },
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "description": "Response payload which is an object containing the ID of the cluster.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷，包含受此操作影响的集群 ID。"
+                            }
+                          },
+                          "type": "object",
+                          "properties": {
+                            "clusterId": {
+                              "type": "string",
+                              "description": "The ID of the cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "集群 ID。"
+                                }
+                              }
+                            },
+                            "prompt": {
+                              "type": "string",
+                              "description": "The statement indicating that the current operation succeeds.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "提示信息，表示当前操作成功。"
+                                }
+                              }
+                            }
+                          },
+                          "x-i18n-langs": [
+                            "zh-CN"
+                          ]
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 200,
+                      "data": {
+                        "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                        "prompt": "successfully Submitted. Cluster is being resumed, which is expected to takes several minutes. You can access data about the creation progress and status of your cluster by DescribeCluster API. Once the cluster status is RUNNING, you may access your vector database using the SDK."
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 80002,
+                      "message": "Token not found or unauthorized: The provided token does not exist in our records, or you do not have the necessary permissions to use this token. Please ensure you have the correct token."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v1/clusters/{CLUSTER_ID}/suspend": {
+      "post": {
+        "summary": "Suspend Cluster",
+        "deprecated": false,
+        "description": "Suspends a specified cluster. This operation will only stop the cluster and your data will remain intact.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "挂起集群",
+            "description": "本接口可以挂起指定的集群。挂起集群后，集群将停止运行，但不影响集群中存储的数据。"
+          }
+        },
+        "tags": [
+          "Cluster Operations"
+        ],
+        "parameters": [
+          {
+            "name": "CLUSTER_ID",
+            "in": "path",
+            "description": "The ID of the cluster to suspend.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "待挂起的集群 ID。"
+              }
+            },
+            "required": true,
+            "example": "{{CLUSTER_ID}}",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            },
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the ID of the affected cluster.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回受此操作影响的集群 ID。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response.",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "description": "Response payload which is an object containing the ID of the cluster.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷，包含已操作集群的 ID。"
+                            }
+                          },
+                          "type": "object",
+                          "properties": {
+                            "clusterId": {
+                              "type": "string",
+                              "description": "The ID of the cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "集群 ID。"
+                                }
+                              }
+                            },
+                            "prompt": {
+                              "type": "string",
+                              "description": "The statement indicating that the current operation succeeds.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "提示信息，表示当前操作成功。"
+                                }
+                              }
+                            }
+                          },
+                          "x-i18n-langs": [
+                            "zh-CN"
+                          ]
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 200,
+                      "data": {
+                        "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                        "prompt": "successfully Submitted. The cluster will not incur any computing costs when suspended. You will only be billed for the storage costs during this time."
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 80002,
+                      "message": "Token not found or unauthorized: The provided token does not exist in our records, or you do not have the necessary permissions to use this token. Please ensure you have the correct token."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v1/clusters/createServerless": {
+      "post": {
+        "summary": "Create Serverless Cluster",
+        "deprecated": false,
+        "description": "Creates a serverless cluster.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "创建 Serverless 集群",
+            "description": "本接口可以创建一个 Serverless 集群。"
+          }
+        },
+        "tags": [
+          "Cluster Operations"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            },
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "plan": {
+                    "type": "string",
+                    "description": "The subscription plan of the cluster to be created.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待创建集群的订阅计划。"
+                      }
+                    },
+                    "enum": [
+                      "Free",
+                      "Serverless"
+                    ]
+                  },
+                  "clusterName": {
+                    "type": "string",
+                    "description": "The name of the cluster to be created. It is a string of no more than 32 characters.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待创建集群名称。值为长度不超过32个字符的字符串。"
+                      }
+                    },
+                    "maxLength": 32
+                  },
+                  "projectId": {
+                    "type": "string",
+                    "description": "The ID of the project where the cluster is to be created.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待创建集群所属项目 ID。"
+                      }
+                    },
+                    "example": "proj-xxxxxxxxxxxxxxxxxxxxxx"
+                  }
+                },
+                "required": [
+                  "plan",
+                  "clusterName",
+                  "projectId"
+                ]
+              },
+              "example": {
+                "plan": "Free",
+                "clusterName": "free_01",
+                "projectId": "proj-xxxxxxxxxxxxxxxxxxxx"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "clusterId": {
+                              "type": "string",
+                              "description": "The ID of the cluster affected by this operation.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "受此操作影响的集群 ID。"
+                                }
+                              }
+                            },
+                            "username": {
+                              "type": "string",
+                              "description": "The name of the cluster user generated by default.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "访问此集群的默认用户名。此用户拥有此集群的管理权限。"
+                                }
+                              }
+                            },
+                            "password": {
+                              "type": "string",
+                              "description": "The password of the cluster user generated by default. It will not be displayed again, so note it down and securely store it.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "访问此集群的默认用户密码。此密码仅展示一次，请务必记录并安全保存。"
+                                }
+                              }
+                            },
+                            "prompt": {
+                              "type": "string",
+                              "description": "The statement indicating that this operation succeeds.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "表明此操作成功的声明信息。"
+                                }
+                              }
+                            }
+                          },
+                          "description": "Response payload which is an object containing information about the created serverless cluster.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷，为一个包含 Serverless 集群相关信息的对象。"
+                            }
+                          }
+                        }
+                      },
+                      "description": "Returns information about the created serverless cluster.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回已创建的 Serverless 集群相关信息。"
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      },
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 200,
+                      "data": {
+                        "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                        "username": "db_xxxxxxxxxxxxxxx",
+                        "password": "xxxxxxxxxxxxxxxxx",
+                        "prompt": "successfully submitted, cluster is being created. You can access data about the creation progress and status of your cluster by DescribeCluster API. Once the cluster status is RUNNING, you may access your vector database using the SDK with the admin account and the initial password you specified."
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 90155,
+                      "message": "Invalid serverless plan. The parameter value should be one of ['Free','Serverless']."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v1/projects": {
+      "get": {
+        "summary": "List Projects",
+        "deprecated": false,
+        "description": "Lists existing projects.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看项目列表",
+            "description": "本接口用于查看当前用户所属的所有项目。"
+          }
+        },
+        "tags": [
+          "Cluster Operations"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            },
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of projects.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回项目详情列表。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "createTimeMilli": {
+                                "type": "string",
+                                "description": "A numeric value representing the creation time of the project in milliseconds since the Unix epoch.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "一个数字值，代表项目创建的时间，单位为毫秒，起始时间为 1970 年 1 月 1 日 00:00:00 UTC。"
+                                  }
+                                }
+                              },
+                              "instanceCount": {
+                                "type": "integer",
+                                "description": "The number of clusters created in the project.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "项目中已创建的集群数量。"
+                                  }
+                                }
+                              },
+                              "projectId": {
+                                "type": "string",
+                                "description": "The ID of the project.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "项目的 ID。"
+                                  }
+                                }
+                              },
+                              "projectName": {
+                                "type": "string",
+                                "description": "The name of the project.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "项目的名称。"
+                                  }
+                                }
+                              }
+                            },
+                            "description": "A project.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "项目的相关信息。"
+                              }
+                            }
+                          },
+                          "description": "Response payload, which is a list of projects.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应返回项目列表。"
+                            }
+                          }
+                        }
+                      },
+                      "description": "Returns a list of projects."
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      },
+                      "description": "Returns an error message."
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 200,
+                      "data": [
+                        {
+                          "createTimeMilli": 1685006864000,
+                          "instanceCount": 0,
+                          "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxx",
+                          "projectName": "Default Project"
+                        }
+                      ]
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 80002,
+                      "message": "Token not found or unauthorized: The provided token does not exist in our records, or you do not have the necessary permissions to use this token. Please ensure you have the correct token."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "servers": []
+}

@@ -1,0 +1,1005 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Restful API copy",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Collection Operations",
+      "x-i18n": {
+        "zh-CN": {
+          "name": "Collection"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/v1/vector/collections": {
+      "get": {
+        "summary": "List Collections",
+        "deprecated": false,
+        "description": "Lists collections in a cluster.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看 Collection 列表",
+            "description": "列出集群中的 Collection 名称。"
+          }
+        },
+        "tags": [
+          "Collection Operations"
+        ],
+        "parameters": [
+          {
+            "name": "dbName",
+            "in": "query",
+            "description": "The name of the database",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "数据库名称。"
+              }
+            },
+            "required": false,
+            "example": "default",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of collections in the specified cluster.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "description": "A collection name.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "Collection 名称。"
+                              }
+                            }
+                          },
+                          "description": "Response payload which is a list of collection names.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷，为 Collection 名称列表。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 200,
+                      "data": [
+                        "custom_setup_not_indexed",
+                        "quick_setup",
+                        "custom_setup_indexed"
+                      ]
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v1/vector/collections/create": {
+      "post": {
+        "summary": "Create Collection",
+        "deprecated": false,
+        "description": "Creates a collection in a cluster.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "创建 Collection",
+            "description": "在集群中创建 Collection。"
+          }
+        },
+        "tags": [
+          "Collection Operations"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of the database. <include target=\"zilliz\">This parameter applies only to dedicated clusters.</include>",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "数据库名称。"
+                      }
+                    }
+                  },
+                  "collectionName": {
+                    "type": "string",
+                    "description": "The name of the collection to create.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "Collection 名称。"
+                      }
+                    }
+                  },
+                  "dimension": {
+                    "type": "integer",
+                    "description": "The number of dimensions for the vector field of the collection. ",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "Vector 字段的维度数。"
+                      }
+                    },
+                    "minimum": 1,
+                    "maximum": 32768
+                  },
+                  "metricType": {
+                    "type": "string",
+                    "description": "The distance metric used for the collection.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "用于 Collection 的距离度量方式。"
+                      }
+                    },
+                    "default": "COSINE",
+                    "enum": [
+                      "L2",
+                      "IP",
+                      "COSINE"
+                    ]
+                  },
+                  "primaryField": {
+                    "type": "string",
+                    "description": "The primary key field name.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "主键字段名称。"
+                      }
+                    },
+                    "default": "id"
+                  },
+                  "vectorField": {
+                    "type": "string",
+                    "description": "The vector field.",
+                    "default": "vector",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "向量字段名称。"
+                      }
+                    }
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The description of the collection",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "Collection 描述。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "collectionName",
+                  "dimension"
+                ]
+              },
+              "examples": {
+                "1": {
+                  "summary": "Option 1",
+                  "value": {
+                    "collectionName": "medium_articles",
+                    "dimension": 256,
+                    "metricType": "COSINE",
+                    "primaryField": "id",
+                    "vectorField": "vector"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns an empty object.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回空对象。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "description": "Response payload which is an empty object.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载，为空对象。"
+                            }
+                          },
+                          "properties": {}
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 200,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v1/vector/collections/describe": {
+      "get": {
+        "summary": "Describe Collection",
+        "deprecated": false,
+        "description": "Describes the details of a collection.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看 Collection 详情",
+            "description": "本接口用于查看 Collection 的详细信息。"
+          }
+        },
+        "tags": [
+          "Collection Operations"
+        ],
+        "parameters": [
+          {
+            "name": "collectionName",
+            "in": "query",
+            "description": "The name of the collection to describe.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Collection 名称。"
+              }
+            },
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dbName",
+            "in": "query",
+            "description": "The name of the database.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "数据库名称。"
+              }
+            },
+            "required": false,
+            "example": "default",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌。应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            },
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the specified collection in detail.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回指定 Collection 的详细信息。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "description": "Response payload which carries the collection details.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷，携带 Collection 详情。"
+                            }
+                          },
+                          "properties": {
+                            "collectionName": {
+                              "type": "string",
+                              "description": "The name of the collection.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "Collection 名称。"
+                                }
+                              }
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "An optional description of the collection.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "Collection 描述。"
+                                }
+                              }
+                            },
+                            "fields": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "description": "A field object",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "一个字段对象。"
+                                  }
+                                },
+                                "properties": {
+                                  "autoId": {
+                                    "type": "boolean",
+                                    "description": "Whether the primary key automatically increments. This field applies only when the current field is the primary key.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "主键是否自动增长。此参数仅在当前字段为主键时展示。"
+                                      }
+                                    }
+                                  },
+                                  "description": {
+                                    "type": "string",
+                                    "description": "An optional description of the field.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "当前字段描述。"
+                                      }
+                                    }
+                                  },
+                                  "name": {
+                                    "type": "string",
+                                    "description": "The name of the field.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "当前字段名称。"
+                                      }
+                                    }
+                                  },
+                                  "primaryKey": {
+                                    "type": "boolean",
+                                    "description": "Whether the field is a primary field.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "当前字段是否为主键。"
+                                      }
+                                    }
+                                  },
+                                  "type": {
+                                    "type": "string",
+                                    "description": "The data type of the values in this field.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "当前字段值的数据类型。"
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "description": "An field array",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "字段列表。"
+                                }
+                              }
+                            },
+                            "indexes": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "description": "An index object",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "一个索引对象。"
+                                  }
+                                },
+                                "properties": {
+                                  "fieldName": {
+                                    "type": "string",
+                                    "description": "The name of the indexed field.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "当前索引对应的字段名称。"
+                                      }
+                                    }
+                                  },
+                                  "indexName": {
+                                    "type": "string",
+                                    "description": "The name of the generated index files.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "当前索引名称。"
+                                      }
+                                    }
+                                  },
+                                  "metricType": {
+                                    "type": "string",
+                                    "description": "The metric type used to measure similarity between vectors",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "用于度量向量间相似度的度量类型。"
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "description": "An index array",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "索引列表。"
+                                }
+                              }
+                            },
+                            "load": {
+                              "type": "string",
+                              "description": "The load status of the collection.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "当前 Collection 的载入状态。"
+                                }
+                              },
+                              "enum": [
+                                "unload",
+                                "loading",
+                                "loaded"
+                              ]
+                            },
+                            "shardsNum": {
+                              "type": "integer",
+                              "description": "The number of shards in the collection.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "当前 Collection 的分片数量。"
+                                }
+                              },
+                              "x-include-target": [
+                                "milvus"
+                              ]
+                            },
+                            "enableDynamicField": {
+                              "type": "boolean",
+                              "description": "Whether the dynamic field feature is enabled for this collection.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "是否已启用保留的动态字段，用于存放 Schema 中未定义的字段。"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-include-target": [
+                      "milvus"
+                    ],
+                    "value": {
+                      "code": 200,
+                      "data": {
+                        "aliases": [],
+                        "autoId": false,
+                        "collectionID": 448707763883002000,
+                        "collectionName": "test_collection",
+                        "consistencyLevel": "Bounded",
+                        "description": "",
+                        "enableDynamicField": true,
+                        "fields": [
+                          {
+                            "autoId": false,
+                            "description": "",
+                            "id": 100,
+                            "name": "id",
+                            "partitionKey": false,
+                            "primaryKey": true,
+                            "type": "Int64"
+                          },
+                          {
+                            "autoId": false,
+                            "description": "",
+                            "id": 101,
+                            "name": "vector",
+                            "params": [
+                              {
+                                "key": "dim",
+                                "value": "5"
+                              }
+                            ],
+                            "partitionKey": false,
+                            "primaryKey": false,
+                            "type": "FloatVector"
+                          }
+                        ],
+                        "indexes": [
+                          {
+                            "fieldName": "vector",
+                            "indexName": "vector",
+                            "metricType": "COSINE"
+                          }
+                        ],
+                        "load": "LoadStateLoaded",
+                        "partitionsNum": 1,
+                        "properties": [],
+                        "shardsNum": 1
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-include-target": [
+                      "zilliz"
+                    ],
+                    "value": {
+                      "code": 200,
+                      "data": {
+                        "aliases": [],
+                        "autoId": false,
+                        "collectionID": 448707763883002000,
+                        "collectionName": "test_collection",
+                        "consistencyLevel": "Bounded",
+                        "description": "",
+                        "enableDynamicField": true,
+                        "fields": [
+                          {
+                            "autoId": false,
+                            "description": "",
+                            "id": 100,
+                            "name": "id",
+                            "partitionKey": false,
+                            "primaryKey": true,
+                            "type": "Int64"
+                          },
+                          {
+                            "autoId": false,
+                            "description": "",
+                            "id": 101,
+                            "name": "vector",
+                            "params": [
+                              {
+                                "key": "dim",
+                                "value": "5"
+                              }
+                            ],
+                            "partitionKey": false,
+                            "primaryKey": false,
+                            "type": "FloatVector"
+                          }
+                        ],
+                        "indexes": [
+                          {
+                            "fieldName": "vector",
+                            "indexName": "vector",
+                            "metricType": "COSINE"
+                          }
+                        ],
+                        "load": "LoadStateLoaded",
+                        "partitionsNum": 1,
+                        "properties": []
+                      }
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v1/vector/collections/drop": {
+      "post": {
+        "summary": "Drop Collection",
+        "deprecated": false,
+        "description": "Drops a collection. This operation erases your collection data. Exercise caution when performing this operation.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "删除 Collection",
+            "description": "本接口用于删除 Collection。删除 Collection 将会清空 Collection 中的所有数据。请谨慎操作。"
+          }
+        },
+        "tags": [
+          "Collection Operations"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌。应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            },
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of the database.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "数据库名称。"
+                      }
+                    }
+                  },
+                  "collectionName": {
+                    "type": "string",
+                    "description": "The name of the collection to delete.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待删除的 Collection 名称。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "collectionName"
+                ]
+              },
+              "example": {
+                "collectionName": "medium_articles"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns an empty object or an error message.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回一个空对象或一条错误消息。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "description": "Returns an empty object.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "返回一个空对象。"
+                            }
+                          },
+                          "properties": {}
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 200,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "servers": []
+}

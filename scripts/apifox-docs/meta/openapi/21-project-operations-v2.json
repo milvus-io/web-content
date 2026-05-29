@@ -1,0 +1,1232 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Restful API copy",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Project Operations (V2)",
+      "x-include-target": [
+        "zilliz"
+      ],
+      "x-i18n": {
+        "zh-CN": {
+          "name": "Project (V2)"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/v2/projects": {
+      "get": {
+        "summary": "List Projects",
+        "deprecated": false,
+        "description": "List all projects scoped to API-Key.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看项目列表",
+            "description": "本接口可列出当前 API Key 可访问的所有项目。"
+          }
+        },
+        "tags": [
+          "Project Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "Use `application/json`.",
+            "required": false,
+            "example": "application/json",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "使用 `application/json`。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return a list of projects in detail.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回项目详情列表。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "number",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "projectId": {
+                                "type": "string",
+                                "description": "ID of a project.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "项目 ID。"
+                                  }
+                                }
+                              },
+                              "regionIds": {
+                                "type": "array",
+                                "description": "Region IDs of a project.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "项目的地域 ID 列表。"
+                                  }
+                                },
+                                "items": {
+                                  "type": "string",
+                                  "description": "A region ID. You can use the [List regions](https://docs.zilliz.com/reference/restful/list-cloud-regions-v2) to list applicable region IDs.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "地域 ID。您可以使用 [查看云服务地域](https://docs.zilliz.com.cn/reference/restful/list-cloud-regions-v2) 来获取可用地域 ID。"
+                                    }
+                                  }
+                                }
+                              },
+                              "projectName": {
+                                "type": "string",
+                                "description": "Name of a project.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "项目名称。"
+                                  }
+                                }
+                              },
+                              "instanceCount": {
+                                "type": "string",
+                                "description": "Number of clusters in the projects.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "项目中集群数量。"
+                                  }
+                                }
+                              },
+                              "createTime": {
+                                "type": "string",
+                                "description": "Time at which the project is created.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "项目创建时间。"
+                                  }
+                                }
+                              },
+                              "plan": {
+                                "type": "string",
+                                "description": "The subscription plan of the current project. Possible values are `Standard`, `Enterprise`, or `BusinessCritical`.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "当前项目的订阅计划。当前仅支持 `Enterprise` 一种。"
+                                  }
+                                }
+                              },
+                              "orgType": {
+                                "type": "string",
+                                "description": "The type of the organization. Possible values are `SAAS` or `BYOC`.",
+                                "enum": [
+                                  "SAAS",
+                                  "BYOC"
+                                ],
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "组织类型。可选值为 `SAAS` 或 `BYOC`。"
+                                  }
+                                }
+                              }
+                            },
+                            "description": "List of projects in detail.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "项目详情列表。"
+                              }
+                            }
+                          },
+                          "description": "Response payload, which is a list of projects in detail.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载，是一个项目详情列表。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "en-US",
+                    "value": {
+                      "code": 0,
+                      "data": [
+                        {
+                          "projectName": "Default Project",
+                          "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxxx",
+                          "regionIds": ["aws-us-east-1"],
+                          "instanceCount": 2,
+                          "createTime": "2023-08-16T07:34:06Z",
+                          "plan": "Enterprise",
+                          "orgType": "SAAS"
+                        }
+                      ]
+                    }
+                  },
+                  "2": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "zh-CN",
+                    "value": {
+                      "code": 0,
+                      "data": [
+                        {
+                          "projectName": "Default Project",
+                          "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxxx",
+                          "regionIds": ["ali-cn-hangzhou"],
+                          "instanceCount": 2,
+                          "createTime": "2023-08-16T07:34:06Z",
+                          "plan": "Enterprise",
+                          "orgType": "SAAS"
+                        }
+                      ]
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      },
+      "post": {
+        "summary": "Create Project",
+        "deprecated": false,
+        "description": "This operation creates a new project with a specified name and subscription plan.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "创建项目",
+            "description": "本接口可创建新项目并指定名称和订阅计划。"
+          }
+        },
+        "tags": [
+          "Project Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "projectName": {
+                    "type": "string",
+                    "description": "The name of the project to create.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待创建项目的名称。"
+                      }
+                    }
+                  },
+                  "plan": {
+                    "type": "string",
+                    "description": "The subscription plan of the project. The possible values are `Standard`, `Enterprise`, and `BusinessCritical`.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "项目的订阅计划。当前仅支持 `Enterprise` 一种。"
+                      }
+                    },
+                    "default": "Standard"
+                  },
+                  "regionIds": {
+                    "type": "array",
+                    "description": "A list of region IDs to bind to the project. When the `plan` is `Enterprise`, only a single region is allowed. To bind multiple regions, the `BusinessCritical` plan is required. Note that the `BusinessCritical` plan may not be available in all environments.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "要绑定到项目的地域 ID 列表。当订阅计划为 `Enterprise` 时，仅允许指定单个地域。如需绑定多个地域，需要使用 `BusinessCritical` 订阅计划。请注意，`BusinessCritical` 订阅计划在某些环境中可能不可用。"
+                      }
+                    },
+                    "items": {
+                      "type": "string",
+                      "description": "A region ID. You can use the [List regions](https://docs.zilliz.com/reference/restful/list-cloud-regions-v2) to list applicable region IDs.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "地域 ID。您可以使用 [查看云服务地域](https://docs.zilliz.com.cn/reference/restful/list-cloud-regions-v2) 来获取可用地域 ID。"
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "projectName",
+                  "plan"
+                ]
+              },
+              "example": {
+                "projectName": "My Project",
+                "plan": "Enterprise",
+                "regionIds": ["aws-us-east-1"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "None",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "projectId": {
+                              "type": "string",
+                              "description": "ID of the created project."
+                            }
+                          },
+                          "description": "Response payload which contains the ID of the created project.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷，包含创建的项目 ID。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "projectId": "proj-x"
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/projects/{projectId}": {
+      "get": {
+        "summary": "Describe Project",
+        "deprecated": false,
+        "description": "This operation returns the details of a specified project.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看项目详情",
+            "description": "本接口可查看指定项目的详细信息。"
+          }
+        },
+        "tags": [
+          "Project Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The ID of the project to describe.",
+            "required": true,
+            "example": "proj-xx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "待查看项目的 ID。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return the details of a specified project.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回指定项目的详细信息。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "projectId": {
+                              "type": "string",
+                              "description": "ID of the project.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "项目 ID。"
+                                }
+                              }
+                            },
+                            "regionIds": {
+                              "type": "array",
+                              "description": "Region IDs of the project.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "项目的地域 ID 列表。"
+                                }
+                              },
+                              "items": {
+                                "type": "string",
+                                "description": "A region ID. You can use the [List regions](https://docs.zilliz.com/reference/restful/list-cloud-regions-v2) to list applicable region IDs.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "地域 ID。您可以使用 [查看云服务地域](https://docs.zilliz.com.cn/reference/restful/list-cloud-regions-v2) 来获取可用地域 ID。"
+                                  }
+                                }
+                              }
+                            },
+                            "projectName": {
+                              "type": "string",
+                              "description": "Name of the project.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "项目名称。"
+                                }
+                              }
+                            },
+                            "instanceCount": {
+                              "type": "integer",
+                              "description": "Number of clusters in the project.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "项目中集群数量。"
+                                }
+                              }
+                            },
+                            "createTime": {
+                              "type": "string",
+                              "description": "Time at which the project is created.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "项目创建时间。"
+                                }
+                              }
+                            },
+                            "plan": {
+                              "type": "string",
+                              "description": "The subscription plan of the current project. The possible values are `Standard`, `Enterprise`, or `BusinessCritical`.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "当前项目的订阅计划。当前仅支持 `Enterprise` 一种。"
+                                }
+                              }
+                            },
+                            "orgType": {
+                              "type": "string",
+                              "description": "The type of the organization. Possible values are `SAAS` or `BYOC`.",
+                              "enum": [
+                                "SAAS",
+                                "BYOC"
+                              ],
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "组织类型。可选值为 `SAAS` 或 `BYOC`。"
+                                }
+                              }
+                            }
+                          },
+                          "description": "Response payload which contains the details of the specified project.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷，包含指定项目的详细信息。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "projectId": "proj-x",
+                        "projectName": "My Project",
+                        "regionIds": ["aws-us-east-1"],
+                        "instanceCount": 2,
+                        "createTime": "2023-08-16T07:34:06Z",
+                        "plan": "Enterprise",
+                        "orgType": "SAAS"
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Project",
+        "deprecated": false,
+        "description": "This operation deletes a specified project.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "删除项目",
+            "description": "本接口可删除指定项目。"
+          }
+        },
+        "tags": [
+          "Project Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The ID of the project to delete.",
+            "required": true,
+            "example": "proj-xxxxxxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "待删除项目的 ID。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "None",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "string",
+                          "description": "A string 'ok' indicating the project is deleted successfully.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "一个字符串 'ok'，表示项目删除成功。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": "ok"
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/projects/{projectId}/plan": {
+      "patch": {
+        "summary": "Upgrade Project",
+        "deprecated": false,
+        "description": "This operation updates subscription plan of a specified project.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "升级项目",
+            "description": "本接口可更新指定项目的订阅计划。"
+          }
+        },
+        "x-include-langs": [
+          "en-US"
+        ],
+        "tags": [
+          "Project Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The ID of the project to upgrade.",
+            "required": true,
+            "example": "proj-xx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "待升级项目的 ID。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "plan": {
+                    "type": "string",
+                    "description": "The subscription plan to upgrade to. Possible values are `Standard`, `Enterprise`, or `BusinessCritical`.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "升级到的订阅计划。当前仅支持 `Enterprise` 一种。"
+                      }
+                    },
+                    "default": "Standard"
+                  }
+                },
+                "required": [
+                  "plan"
+                ]
+              },
+              "example": {
+                "plan": "Enterprise"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "None",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "type": "integer",
+                          "example": 0,
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "string",
+                          "description": "A string 'ok' indicating the project is upgraded successfully.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "一个字符串 'ok'，表示项目升级成功。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": "ok"
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/projects/{projectId}/regions": {
+      "post": {
+        "summary": "Add Project Region",
+        "deprecated": false,
+        "description": "This operation adds a new region to a specified project.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "添加项目地域",
+            "description": "本接口可为指定项目添加新的地域。"
+          }
+        },
+        "tags": [
+          "Project Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The ID of the project to add projects to.",
+            "required": true,
+            "example": "proj-xx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "待添加可用地域的项目的 ID。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "regionIds": {
+                    "type": "array",
+                    "description": "A region ID list.",
+                    "x-i18n": {
+                      "zh-CN": "地域 ID 列表。"
+                    },
+                    "items": {
+                      "type": "string",
+                      "description": "A region ID. You can use the [List regions](https://docs.zilliz.com/reference/restful/list-cloud-regions-v2) to list applicable region IDs.",
+                      "x-i18n": {
+                        "zh-CN": "地域 ID。您可以使用 [查看云服务地域](https://docs.zilliz.com.cn/reference/restful/list-cloud-regions-v2) 来获取可用地域 ID。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "regionIds"
+                ]
+              },
+              "examples": {
+                "1": {
+                  "summary": "example",
+                  "x-target-lang": "en-US",
+                  "value": {
+                    "regionIds": [
+                      "aws-us-west-2"
+                    ]
+                  }
+                },
+                "2": {
+                  "summary": "example",
+                  "x-target-lang": "zh-CN",
+                  "value": {
+                    "regionIds": [
+                      "ali-cn-hangzhou"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "None",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "type": "integer",
+                          "example": 0,
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "projectId": {
+                              "type": "string",
+                              "description": "ID of the current project.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "当前项目 ID。"
+                                }
+                              }
+                            },
+                            "regionIds": {
+                              "type": "array",
+                              "description": "Regions added to the project.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "此次添加到当前项目的地域 ID。"
+                                }
+                              }
+                            }
+                          },
+                          "description": "Response payload which contains the current project and the regions added to the project this time.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷，包含当前项目 ID 及此次添加到当前项目的地域 ID。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "projectId": "proj-x"
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "servers": []
+}
