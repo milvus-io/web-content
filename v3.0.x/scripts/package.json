@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "generate": "node index.js",
     "sync:shared-scripts": "node sync-shared-scripts.js",
     "check:shared-scripts": "node sync-shared-scripts.js --check",
     "test:shared-sync": "node --test test/sync-shared-scripts.test.js"
