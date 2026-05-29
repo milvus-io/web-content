@@ -2,10 +2,30 @@ const fs = require('node:fs');
 const node_path = require('node:path');
 const larkDocWriter = require('./larkDocWriter');
 const Utils = require('./larkUtils');
+const { add } = require('lodash');
 
 class larkDriveWriter extends larkDocWriter {
-    constructor(root_token, base_token, displayedSidebar, docSourceDir, imageDir, targets, skip_image_download=false, upload_to_s3=false, manual) {
-        super(root_token, base_token, displayedSidebar, docSourceDir, imageDir, targets, skip_image_download, upload_to_s3);
+    constructor(
+        root_token, 
+        base_token, 
+        displayedSidebar, 
+        docSourceDir, 
+        imageDir, 
+        targets, 
+        skip_image_download=false, 
+        upload_to_s3=false,
+        manual
+    ) {
+        super(
+            root_token, 
+            base_token, 
+            displayedSidebar, 
+            docSourceDir, 
+            imageDir, 
+            targets, 
+            skip_image_download, 
+            upload_to_s3
+        );
         this.manual = manual
         this.utils = new Utils();
     }
@@ -21,14 +41,15 @@ class larkDriveWriter extends larkDocWriter {
         const node = this.__fetch_doc_source('token', token)
 
         if (node.children) {
-            // const subfolders = []
             await forEachAsync(node.children, async (child, index) => {
-                var source = fs.readdirSync(this.docSourceDir).filter(file => file === `${child.token}.json`)
-                if (source.length > 0) {
-                    source = JSON.parse(fs.readFileSync(node_path.join(this.docSourceDir, source[0]), 'utf8'))
+                var source = fs.readdirSync(this.docSourceDir).find(file => file === `${child.token}.json`)
+                if (source) {
+                    source = JSON.parse(fs.readFileSync(node_path.join(this.docSourceDir, source), 'utf8'))
 
                     if (source.blocks) {
-                        const meta = await this.__is_to_publish(source.name, source.slug)
+                        // console.log(source.slug, '=> doc')
+                        const meta = await this.__is_to_publish(source.name, source.slug, source.token)
+                        // console.log(meta.publish)
                         if (meta['publish']) {
                             const token = source.token
                             const source_type = source.type
@@ -56,18 +77,12 @@ class larkDriveWriter extends larkDocWriter {
                                 lastModified: lastModified,
                                 deprecateSince: deprecateSince,
                             })
-
-                            // if (source.slug === "SentenceTransformerEmbeddingFunction-encode_documents") {
-                            //     console.log(current_path)
-    
-                            //     throw new Error("SentenceTransformerEmbeddingFunction-encode_documents is not supported yet")
-                            // }
                         }                           
                     }
 
                     if (source.children) {
-                        console.log(source.token)
-                        const meta = await this.__is_to_publish(source.name, source.slug)
+                        // console.log(source.slug, '=> folder')
+                        const meta = await this.__is_to_publish(source.name, source.slug, source.token)
                         if (meta['publish']) {
                             const token = source.token
                             const source_type = source.type
@@ -78,12 +93,12 @@ class larkDriveWriter extends larkDocWriter {
                             const lastModified = meta['lastModified'] ? meta['lastModified'] : 'false'
                             const deprecateSince = meta['deprecateSince'] ? meta['deprecateSince'] : 'false'
 
-                            if (!fs.existsSync(node_path.join(path, slug))) {
-                                fs.mkdirSync(node_path.join(path, slug), { recursive: true });
+                            if (!fs.existsSync(node_path.join(current_path, slug))) {
+                                fs.mkdirSync(node_path.join(current_path, slug), { recursive: true });
                             }
 
                             await this.write_doc({
-                                path: node_path.join(path, slug),
+                                path: node_path.join(current_path, slug),
                                 page_title: source.name,
                                 page_slug: slug,
                                 page_beta: tag,
@@ -100,7 +115,7 @@ class larkDriveWriter extends larkDocWriter {
                                 deprecateSince: deprecateSince,
                             })
 
-                            await this.write_docs(node_path.join(path, slug), token)
+                            await this.write_docs(node_path.join(current_path, slug), token)
                         }                     
                     }
                 }    
@@ -181,7 +196,7 @@ class larkDriveWriter extends larkDocWriter {
                     ? page_slug
                     : `${this.displayedSidebar.replace('Sidebar', '')}/${page_slug}`
 
-                console.log(keywords)
+                console.log(addedSince, lastModified, deprecateSince)
                 var {front_matter, imports, markdown} = await this.__write_page({
                     title: page_title,
                     suffix: this.__title_suffix(current_path),
@@ -197,7 +212,7 @@ class larkDriveWriter extends larkDocWriter {
                 })
 
                 front_matter = front_matter.split('\n')
-                front_matter.splice(1, 0, `displayed_sidebar: ${this.displayedSidebar}`)
+                // front_matter.splice(front_matter.length - 1, 0, `displayed_sidebar: ${this.displayedSidebar}`)
                 front_matter.splice(5, 0, `added_since: ${addedSince ? addedSince : 'FALSE'}`)
                 front_matter.splice(6, 0, `last_modified: ${lastModified ? lastModified : 'FALSE'}`)
                 front_matter.splice(7, 0, `deprecate_since: ${deprecateSince ? deprecateSince : 'FALSE'}`)

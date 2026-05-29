@@ -1,4 +1,5 @@
 const larkTokenFetcher = require('./larkTokenFetcher.js')
+const { removeTabsHallucinations, unescapeKnownJsxTags, normalizeCodeTagContent } = require('../mdx-parse/mdxPatcher')
 const Downloader = require('./larkImageDownloader.js')
 const slugify = require('slugify')
 const fs = require('node:fs')
@@ -11,6 +12,16 @@ const _ = require('lodash')
 // MDX compilation will be loaded dynamically as it's an ES module
 
 const IMAGE_BED_URL = process.env.IMAGE_BED_URL || 'https://zdoc-images.s3.us-west-2.amazonaws.com'
+
+// Known JSX block components that the MDX patcher must never escape.
+// Shared by __escape_non_html_tags (safeUppercaseTags seed) and __mdx_patches
+// (end-tag-mismatch guard). Keep in sync with mdxPatcher.js KNOWN_JSX_TAGS.
+const KNOWN_JSX_TAGS = new Set([
+    'Admonition', 'Tabs', 'TabItem', 'DocCard', 'DocCardList',
+    'Details', 'CodeBlock', 'ThemedImage', 'TOCInline', 'Highlight',
+    'Banner', 'Bars', 'Blocks', 'Cards', 'Grid', 'Hero', 'Procedures',
+    'RestSpecs', 'Stories', 'Supademo',
+]);
 
 class larkDocWriter {
     constructor(
@@ -38,6 +49,7 @@ class larkDocWriter {
         this.tokenFetcher = new larkTokenFetcher()
         this.downloader = new Downloader({}, imageDir)
         this.upload_to_s3 = upload_to_s3
+        this.api_compose_block_type_id = process.env.API_COMPOSE_BLOCK_TYPE_ID || 'blk_682093ba9580c002300d1ea7'
     }
 
     __fetch_doc_source (type, value, slug="") {
@@ -113,6 +125,7 @@ class larkDocWriter {
                             sidebar_label: labels,
                             keywords: keywords,
                             doc_card_list: true,
+                            page_tag: meta['tag'],
                         })
 
                         await this.write_docs(`${current_path}/${slug}`, token)
@@ -157,6 +170,7 @@ class larkDocWriter {
                                     sidebar_label: labels,
                                     keywords: keywords,
                                     doc_card_list: false,
+                                    page_tag: meta['tag'],
                                 })
                             }
                             break;
@@ -167,8 +181,8 @@ class larkDocWriter {
     }
 
     async write_doc ({
-        path,  
-        page_title, 
+        path,
+        page_title,
         page_slug,
         page_beta,
         notebook,
@@ -180,7 +194,8 @@ class larkDocWriter {
         sidebar_position,
         sidebar_label,
         keywords,
-        doc_card_list
+        doc_card_list,
+        page_tag
     }) {
         let obj;
         let blocks;
@@ -206,23 +221,41 @@ class larkDocWriter {
             this.blocks = page.children.map(child => {
                 return this.__retrieve_block_by_id(child)
             })
-            await this.__write_page({
-                title: page_title,
-                suffix: this.__title_suffix(path),
-                slug: page_slug,
-                beta: page_beta,
-                notebook: notebook,
-                addedSince: addedSince,
-                lastModified: lastModified,
-                deprecateSince: deprecateSince,
-                path: path, 
-                type: page_type,
-                token: page_token,
-                sidebar_position: sidebar_position,
-                sidebar_label: sidebar_label,
-                keywords: keywords,
-                doc_card_list: doc_card_list,
-            })
+
+            // Detect ApiCompose add-on block
+            const apiComposeBlock = this.__find_api_compose_block(this.blocks)
+            if (apiComposeBlock) {
+                await this.__write_api_page({
+                    title: page_title,
+                    slug: page_slug,
+                    beta: page_beta,
+                    path: path,
+                    type: page_type,
+                    token: page_token,
+                    sidebar_position: sidebar_position,
+                    sidebar_label: sidebar_label,
+                    keywords: keywords,
+                    apiComposeBlock: apiComposeBlock,
+                })
+            } else {
+                await this.__write_page({
+                    title: page_title,
+                    suffix: this.__title_suffix(path),
+                    slug: page_slug,
+                    beta: page_beta,
+                    notebook: notebook,
+                    addedSince: addedSince,
+                    lastModified: lastModified,
+                    deprecateSince: deprecateSince,
+                    path: path,
+                    type: page_type,
+                    token: page_token,
+                    sidebar_position: sidebar_position,
+                    sidebar_label: sidebar_label,
+                    keywords: keywords,
+                    doc_card_list: doc_card_list,
+                })
+            }
         }
     }
 
@@ -502,6 +535,11 @@ class larkDocWriter {
 
         let imports = this.__imports(tabs > 0)
 
+        // add sidebar_key attribute to doc frontmatter
+        front_matter = front_matter.split('\n')
+        front_matter.splice(3, 0, `sidebar_key: ${slug}`)
+        front_matter = front_matter.join('\n')
+
         if (doc_card_list) {
             markdown += "\n\nimport DocCardList from '@theme/DocCardList';\n\n<DocCardList />"
         }
@@ -548,6 +586,10 @@ class larkDocWriter {
             imports = imports + "\n\nimport Grid from '@site/src/components/Grid';"
         }
 
+        if (markdown.match(/\<Procedures/g)) {
+            imports = imports + "\n\nimport Procedures from '@site/src/components/Procedures';"
+        }
+
         if (path) {
             front_matter = front_matter.split('\n')
             front_matter.splice(5, 0, `added_since: ${addedSince ? addedSince : 'FALSE'}`)
@@ -565,17 +607,78 @@ class larkDocWriter {
         }
     }
 
+    __find_api_compose_block(blocks) {
+        for (const block of blocks) {
+            if (this.block_types[block['block_type']-1] === 'add_ons') {
+                if (block['add_ons'] && block['add_ons']['component_type_id'] === this.api_compose_block_type_id) {
+                    return block['add_ons']
+                }
+            }
+            // Recursively check children if any
+            if (block['children'] && block['children'].length > 0) {
+                const children = block['children'].map(child => this.__retrieve_block_by_id(child))
+                const found = this.__find_api_compose_block(children)
+                if (found) return found
+            }
+        }
+        return null
+    }
+
+    async __write_api_page({title, slug, beta, path, type, token, sidebar_position, sidebar_label, keywords, apiComposeBlock}) {
+        let recordData
+        try {
+            recordData = JSON.parse(apiComposeBlock['record'] || '{}')
+        } catch (e) {
+            console.error(`Failed to parse ApiCompose record for ${slug}: ${e.message}`)
+            return
+        }
+
+        const specs = recordData
+        const method = (specs.method || 'get').toLowerCase()
+        const endpoint = specs.endpoint || ''
+        const description = (specs.summary || title || '').replace(/"/g, '\\"')
+
+        const frontMatter = `---
+displayed_sidebar: restfulSidebar
+sidebar_position: ${sidebar_position || 1}
+slug: /restful/${slug}
+beta: ${beta ? 'TRUE' : 'FALSE'}
+title: "${title || specs.summary || 'API'} | RESTful"
+description: "${description} | RESTful"
+hide_table_of_contents: true
+sidebar_label: "${sidebar_label || title || specs.summary || 'API'}"
+sidebar_custom_props: { badges: ['${method}'] }
+${keywords ? 'keywords: \n  - ' + keywords.split(',').map(k => k.trim()).join('\n  - ') + '\n' : ''}---`
+
+        const specsJson = JSON.stringify(specs, null, 2)
+        const mdxBody = `# ${title || specs.summary || 'API'}
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="${this.targets}" lang="en-US" />
+
+export const specs = ${specsJson}
+export const endpoint = "${endpoint}"
+export const method = "${method}"`
+
+        const file_path = `${path}/${slug}.mdx`
+        fs.writeFileSync(file_path, frontMatter + '\n\n' + mdxBody)
+        console.log(`Generated API doc: ${file_path}`)
+    }
+
     __front_matters (title, suffix, slug, beta, notebook, type, token, sidebar_position=undefined, sidebar_label="", keywords="", displayed_sidebar=this.displayedSidebar, description="") {
         let hide_title = '';
         let hide_toc = '';
         
         if (keywords !== "") {
-            keywords = keywords + ',' + this.keyword_picker().join(',')
+            // keywords = keywords + ',' + this.keyword_picker().join(',')
             keywords = "keywords: \n  - " + keywords.split(',').map(item => item.trim()).join('\n  - ') + '\n'
         }
 
         if (displayed_sidebar === 'default') {
             displayed_sidebar = ''
+        } else if (displayed_sidebar === 'agentsSidebar' ) {
+            displayed_sidebar = `displayed_sidebar: ${displayed_sidebar}\n`
         } else {
             slug = `${displayed_sidebar.replace('Sidebar', '').trim()}/${slug}`
             displayed_sidebar = `displayed_sidebar: ${displayed_sidebar}\n`
@@ -662,7 +765,7 @@ class larkDocWriter {
             } else if (this.block_types[block['block_type']-1] === 'ordered') {
                 markdown.push(await this.__ordered(block, indent));
             } else if (this.block_types[block['block_type']-1] === 'code') {
-                markdown.push(await this.__code(block, indent, prev_block, next_block, blocks));
+                markdown.push(await this.__code(block['code'], indent, prev_block, next_block, blocks));
             } else if (this.block_types[block['block_type']-1] === 'quote_container') {
                 markdown.push(await this.__quote(block, indent));
             } else if (this.block_types[block['block_type']-1] === 'image') {
@@ -732,12 +835,8 @@ class larkDocWriter {
             result += content.slice(lastIndex, urlStart);
 
             if (!isInCodeBlock(urlStart)) {
-                // If the url contains <, [, or {, treat it as an example and encode it
-                if (/[<\[\{]/.test(match[0])) {
-                    result += match[0].replace('http', '<i>http</i>')
-                } else {
-                    result += match[0];
-                }
+                // Keep example URLs intact and let MDX patching handle escaping/safety.
+                result += match[0];
             } else {
                 // Inside code block, leave as is
                 result += match[0];
@@ -752,19 +851,170 @@ class larkDocWriter {
         return result;
     }
 
+    __escape_currency_dollars(content) {
+        // Replace currency $<digit> with &#36;<digit> outside fenced code blocks and
+        // inline code spans, to prevent remark-math/KaTeX from treating them as math
+        // delimiters (which causes unicodeTextInMathMode warnings and broken rendering).
+        const lines = content.split('\n');
+        let inCodeBlock = false;
+        const result = [];
+
+        for (let line of lines) {
+            const stripped = line.trim();
+            if (stripped.startsWith('```') || stripped.startsWith('~~~')) {
+                inCodeBlock = !inCodeBlock;
+            }
+
+            if (!inCodeBlock) {
+                // Split by inline code spans; odd-indexed segments are inside backticks
+                const parts = line.split(/(`+[^`]+`+)/);
+                line = parts.map((part, i) => {
+                    if (i % 2 === 0) {
+                        // Outside inline code — replace $<digit> with HTML entity
+                        return part.replace(/\$(?=\d)/g, '&#36;');
+                    }
+                    return part; // Inside inline code — leave unchanged
+                }).join('');
+            }
+
+            result.push(line);
+        }
+
+        return result.join('\n');
+    }
+
+    __escape_non_html_tags(content) {
+        // Escape any lowercase tag whose name is not a known HTML element or a content-filter
+        // tag used by this writer, outside fenced code blocks and inline code spans.
+        // Such tags are URL/API placeholder patterns (e.g. <bucket_name>, <region-code>,
+        // <container>, <blob>) that MDX would otherwise parse as JSX elements.
+        // Both opening and closing forms are escaped (e.g. </blob> → \</blob>).
+        // PascalCase JSX components (Tabs, TabItem, Admonition…) are never matched because
+        // the regex anchors on a leading lowercase letter.
+        // <include>/<exclude> filter tags are added so their orphaned closing forms are not
+        // accidentally escaped (they are removed by __filter_content before this runs anyway).
+        const KNOWN_TAGS = new Set([
+            // Standard HTML elements
+            'a', 'abbr', 'address', 'area', 'article', 'aside', 'audio',
+            'b', 'base', 'bdi', 'bdo', 'blockquote', 'br', 'button',
+            'canvas', 'caption', 'cite', 'code', 'col', 'colgroup',
+            'data', 'datalist', 'dd', 'del', 'details', 'dfn', 'dialog', 'div', 'dl', 'dt',
+            'em', 'embed',
+            'fieldset', 'figcaption', 'figure', 'footer', 'form',
+            'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'head', 'header', 'hr', 'html',
+            'i', 'iframe', 'img', 'input', 'ins',
+            'kbd',
+            'label', 'legend', 'li', 'link',
+            'main', 'map', 'mark', 'menu', 'meta', 'meter',
+            'nav', 'noscript',
+            'object', 'ol', 'optgroup', 'option', 'output',
+            'p', 'picture', 'pre', 'progress',
+            'q',
+            'rp', 'rt', 'ruby',
+            's', 'samp', 'script', 'section', 'select', 'slot', 'small', 'source', 'span',
+            'strong', 'style', 'sub', 'summary', 'sup',
+            'table', 'tbody', 'td', 'template', 'textarea', 'tfoot', 'th', 'thead',
+            'time', 'title', 'tr', 'track',
+            'u', 'ul',
+            'var', 'video',
+            'wbr',
+            // Content-filter tags used by this writer (processed before MDX patching)
+            'include', 'exclude',
+        ]);
+
+        // Structural pre-scan: build set of safe uppercase/PascalCase tag names.
+        // A tag is safe if it appears with a close tag, self-closing form, or attributes
+        // anywhere in the document. Combined with a KNOWN_JSX fallback whitelist as a
+        // safety net for legitimate components that may be orphaned in edge cases.
+        const safeUppercaseTags = new Set(KNOWN_JSX_TAGS);
+        const upperScanRegex = /[<]([A-Z][A-Za-z0-9]*)/g;
+        let upperMatch;
+        while ((upperMatch = upperScanRegex.exec(content)) !== null) {
+            const tn = upperMatch[1];
+            if (safeUppercaseTags.has(tn)) continue;
+            if (new RegExp(`<\\/${tn}>`).test(content) ||
+                new RegExp(`<${tn}\\s*\\/>`).test(content) ||
+                new RegExp(`<${tn}\\s+`).test(content)) {
+                safeUppercaseTags.add(tn);
+            }
+        }
+
+        const lines = content.split('\n');
+        let inCodeBlock = false;
+        const result = [];
+
+        for (let line of lines) {
+            const stripped = line.trim();
+            if (stripped.startsWith('```') || stripped.startsWith('~~~')) {
+                inCodeBlock = !inCodeBlock;
+            }
+
+            if (!inCodeBlock) {
+                // Split by inline code spans; odd-indexed segments are inside backticks
+                const parts = line.split(/(`+[^`]+`+)/);
+                line = parts.map((part, i) => {
+                    if (i % 2 === 0) {
+                        // Escape non-HTML lowercase placeholder tags (e.g. <bucket_name>, <region-code>).
+                        // Tags with attributes won't match because the regex only allows \s*\/?>
+                        part = part.replace(/(?<!\\)<\/?([a-z][a-z0-9]*(?:[_-][a-z0-9]+)*)\s*\/?>/g, (match, tagName) => {
+                            return KNOWN_TAGS.has(tagName) ? match : '\\' + match;
+                        });
+                        // Escape uppercase/PascalCase tags not identified as real JSX components.
+                        // Uses HTML entities so the angle brackets render correctly in the output.
+                        part = part.replace(/(?<!\\)<\/?([A-Z][A-Za-z0-9]*)\s*\/?>/g, (match, tagName) => {
+                            if (safeUppercaseTags.has(tagName)) return match;
+                            return match.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                        });
+                        // Escape dotted-name PascalCase tags (e.g. <CreateCollectionReq.FieldSchema>),
+                        // which are Java/C# type references that MDX misparses as JSX member expressions.
+                        // Backslash escaping does not suppress MDX JSX parsing for dotted names, so
+                        // always convert to HTML entities, stripping any preceding backslash first.
+                        part = part.replace(/\\?<\/?([A-Z][A-Za-z0-9]*(?:\.[A-Za-z][A-Za-z0-9]*)+)\s*\/?>/g, (match) => {
+                            return match.replace(/^\\/, '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                        });
+                        return part;
+                    }
+                    return part; // Inside inline code — leave unchanged
+                }).join('');
+            }
+
+            result.push(line);
+        }
+
+        return result.join('\n');
+    }
+
     async __mdx_patches(content) {
         try {
             // Import MDX compiler dynamically as it's an ES module
             const { compile } = await import('@mdx-js/mdx');
+            const remarkMath = (await import('remark-math')).default;
 
-            let patchedContent = content;
+            // Pre-process: fix translation/editor artefacts, then escape problem characters
+            let patchedContent = removeTabsHallucinations(content);
+            patchedContent = unescapeKnownJsxTags(patchedContent);
+            patchedContent = normalizeCodeTagContent(patchedContent);
+            patchedContent = this.__escape_currency_dollars(patchedContent);
+            patchedContent = this.__escape_non_html_tags(patchedContent);
             let maxIterations = 50; // Prevent infinite loops
             let iteration = 0;
+            const seenHashes = new Set();
 
             while (iteration < maxIterations) {
+                // Cycle detection: stop if we've visited this exact content state before
+                let h = 5381;
+                for (let i = 0; i < patchedContent.length; i++) {
+                    h = Math.imul(h, 33) ^ patchedContent.charCodeAt(i);
+                }
+                if (seenHashes.has(h)) {
+                    console.warn('Cycle detected in MDX patch loop, stopping to prevent infinite iteration');
+                    break;
+                }
+                seenHashes.add(h);
+
                 try {
                     // Try to compile the current content
-                    await compile(patchedContent, { development: false });
+                    await compile(patchedContent, { development: false, remarkPlugins: [remarkMath] });
                     console.log(`MDX compilation succeeded after ${iteration} fixes`);
                     return patchedContent; // If compilation succeeds, return the fixed content
                 } catch (error) {
@@ -792,62 +1042,144 @@ class larkDocWriter {
                                 }
                             }
                             break;
-                        case 'end-tag-mismatch':
-                            let tag = error.message.match(/<(?!\/)([A-Za-z][A-Za-z0-9:_-]*)\b[^>]*>/g)?.[0];
-                            let pos = error.message.match(/(\d+):(\d+)-(\d+):(\d+)/);
-                            if (tag && pos) {
-                                const start = { line: parseInt(pos[1]), column: parseInt(pos[2]) }
+                        case 'end-tag-mismatch': {
+                            // Error: "Unexpected closing tag `</Y>`, expected corresponding closing tag for `<X>` (line:col-line:col)"
+                            // The position refers to the OPENING tag <X>.
+                            // Strategy: replace the wrong closing tag </Y> with the correct </X>.
+                            // Exception: if <X> is a non-standard tag (contains _ or -) it is a URL/API
+                            // placeholder, not a real element. Replacing the closing tag causes an
+                            // oscillating loop; instead fall through to the fallback (escape opening tag).
+                            const wrongClose = error.message.match(/Unexpected closing tag `<\/([^>]+)>`/)?.[1];
+                            const expectedOpen = error.message.match(/closing tag for `<([A-Za-z][^>/ ]*)(?:\s[^>]*)?>?`/)?.[1];
+                            const posMatch = error.message.match(/(\d+):(\d+)-(\d+):(\d+)/);
+                            const isPlaceholder = expectedOpen && /[_-]/.test(expectedOpen);
 
-                                patchedContent = patchedContent.split('\n').map((line, index) => {
-                                    if (index === start.line - 1) {
-                                        line = line.slice(0, start.column - 1) + '\\' + line.slice(start.column - 1)
+                            if (!isPlaceholder && wrongClose && expectedOpen && wrongClose !== expectedOpen && posMatch) {
+                                const openLine = parseInt(posMatch[1]) - 1; // 0-indexed
+                                const wrongCloseTag = `</${wrongClose}>`;
+                                const correctCloseTag = `</${expectedOpen}>`;
+                                const lines = patchedContent.split('\n');
+
+                                for (let i = openLine; i < lines.length; i++) {
+                                    const idx = lines[i].indexOf(wrongCloseTag);
+                                    if (idx !== -1) {
+                                        lines[i] = lines[i].slice(0, idx) + correctCloseTag + lines[i].slice(idx + wrongCloseTag.length);
                                         madeChanges = true;
+                                        break;
                                     }
+                                }
 
-                                    return line
-                                }).join('\n')
-                            }
-                            
-                            break;
-                        case 'unexpected-closing-slash':
-                            // For this specific error "Unexpected closing slash `/` in tag, expected an open tag first"
-                            // it typically means there's a stray `</content>` tag or similar erroneous closing tag
-                            // Remove erroneous closing tags at the end of document
-                            const originalContent = patchedContent;
-                            patchedContent = patchedContent.replace(/<\/(?:content|[\w\d]+)>\s*$/, '');
-                            if (originalContent !== patchedContent) {
-                                madeChanges = true;
-                            } else {
-                                // If no match at end, look for the erroneous tag anywhere in the content
-                                // that might be causing the slash error
-                                patchedContent = patchedContent.replace(/<[/](\w+)>/g, (match, tagName) => {
-                                    // If this tag doesn't have a matching opening tag, remove it
-                                    const openingTagCount = (patchedContent.match(new RegExp(`<${tagName}(?:\\s|>|/>)`, 'g')) || []).length;
-                                    const closingTagCount = (patchedContent.match(new RegExp(`<\\/${tagName}>`, 'g')) || []).length;
-                                    
-                                    // If there are more closing tags than opening tags, this closing tag is erroneous
-                                    if (closingTagCount > openingTagCount) {
-                                        return ''; // Remove the erroneous closing tag
-                                    }
-                                    return match;
-                                });
-                                
-                                if (originalContent !== patchedContent) {
+                                if (madeChanges) {
+                                    patchedContent = lines.join('\n');
+                                }
+                            } else if (!wrongClose && expectedOpen && posMatch) {
+                                // Variant: "Expected a closing tag for `<X>` (line:col-line:col) before the end of `paragraph`"
+                                // Skip known JSX components — escaping their opening tag causes a
+                                // cascade: the orphaned </X> is then deleted by unexpected-closing-slash,
+                                // destroying the component structure. The real fix is inside the component
+                                // (e.g. unescaped braces) which the acorn handler will address.
+                                if (KNOWN_JSX_TAGS.has(expectedOpen)) {
+                                    break;
+                                }
+                                // The opening tag is not closed within its paragraph. Escape it with &lt; so it
+                                // renders as literal text instead of being treated as a JSX element.
+                                const openLine = parseInt(posMatch[1]) - 1; // 0-indexed
+                                const openCol = parseInt(posMatch[2]) - 1;  // 0-indexed
+                                const lines = patchedContent.split('\n');
+
+                                if (openLine < lines.length && lines[openLine][openCol] === '<') {
+                                    lines[openLine] = lines[openLine].slice(0, openCol) + '&lt;' + lines[openLine].slice(openCol + 1);
+                                    patchedContent = lines.join('\n');
                                     madeChanges = true;
                                 }
                             }
-                            break;
-                        case 'unexpected-character':
-                            if (error.message.includes('U+002C') || error.message.includes('U+002A')) {
-                                offset = error.place.offset;
-                                if (offset !== undefined && offset > 0 && offset < patchedContent.length) {
-                                    for (let i = offset-1; i >= 0; i--) {
-                                        if (patchedContent[i] === '<') {
-                                            patchedContent = patchedContent.slice(0, i) + '\\' + patchedContent.slice(i);
-                                            madeChanges = true;
 
-                                            break;
+                            break;
+                        }
+                        case 'unexpected-closing-slash': {
+                            // "Unexpected closing slash `/` in tag, expected an open tag first"
+                            // The error offset points to the `/` inside the orphaned closing tag.
+                            // Strategy: walk back to find `<`, forward to find `>`, then remove the entire tag.
+                            const slashOffset = error.place?.offset;
+
+                            if (slashOffset !== undefined) {
+                                let tagStart = slashOffset - 1;
+                                while (tagStart > 0 && patchedContent[tagStart] !== '<') tagStart--;
+                                let tagEnd = slashOffset;
+                                while (tagEnd < patchedContent.length && patchedContent[tagEnd] !== '>') tagEnd++;
+
+                                if (patchedContent[tagStart] === '<' && tagEnd < patchedContent.length) {
+                                    const before = patchedContent.slice(0, tagStart);
+                                    let after = patchedContent.slice(tagEnd + 1);
+                                    if (after.startsWith('\n')) after = after.slice(1);
+                                    patchedContent = before + after;
+                                    madeChanges = true;
+                                }
+                            }
+
+                            if (!madeChanges) {
+                                // Fallback: remove erroneous closing tags via regex
+                                const originalContent = patchedContent;
+                                patchedContent = patchedContent.replace(/<\/(?:content|[\w\d]+)>\s*$/, '');
+                                if (originalContent !== patchedContent) {
+                                    madeChanges = true;
+                                } else {
+                                    patchedContent = patchedContent.replace(/<[/](\w+)>/g, (match, tagName) => {
+                                        const openingTagCount = (patchedContent.match(new RegExp(`<${tagName}(?:\\s|>|/>)`, 'g')) || []).length;
+                                        const closingTagCount = (patchedContent.match(new RegExp(`<\\/${tagName}>`, 'g')) || []).length;
+                                        if (closingTagCount > openingTagCount) {
+                                            return '';
                                         }
+                                        return match;
+                                    });
+                                    if (originalContent !== patchedContent) {
+                                        madeChanges = true;
+                                    }
+                                }
+                            }
+                            break;
+                        }
+                        case 'unexpected-character':
+                            offset = error.place?.offset;
+
+                            if (
+                                (error.message.includes('U+003D') || /U\+003[0-9]/.test(error.message)) &&
+                                offset !== undefined && offset > 0
+                            ) {
+                                // `=` sign or a digit (0–9) unexpected — typically from `<=` or `<10` where
+                                // `<` was parsed as a JSX tag opener but the following char is not a valid name start.
+                                // Replace `<` with `&lt;` (not `\`) so the entity renders correctly in HTML.
+                                for (let i = offset - 1; i >= Math.max(0, offset - 10); i--) {
+                                    if (patchedContent[i] === '<') {
+                                        patchedContent = patchedContent.slice(0, i) + '&lt;' + patchedContent.slice(i + 1);
+                                        madeChanges = true;
+                                        break;
+                                    }
+                                }
+                            } else if (
+                                (error.message.includes('U+007C') || error.message.includes('U+0026')) &&
+                                offset !== undefined && offset > 0
+                            ) {
+                                // `|` (union types like `<number | string>`) or `&` (HTML entities like `&lt;`
+                                // inside angle brackets like `<SearchResults&lt;T&gt;>`) unexpected in JSX tag.
+                                // Walk backward to find `<` and replace with `&lt;`.
+                                for (let i = offset - 1; i >= Math.max(0, offset - 30); i--) {
+                                    if (patchedContent[i] === '<') {
+                                        patchedContent = patchedContent.slice(0, i) + '&lt;' + patchedContent.slice(i + 1);
+                                        madeChanges = true;
+                                        break;
+                                    }
+                                }
+                            } else if (
+                                (error.message.includes('U+002C') || error.message.includes('U+002A') || error.message.includes('U+3001')) &&
+                                offset !== undefined && offset > 0 && offset < patchedContent.length
+                            ) {
+                                // Comma, asterisk, or ideographic comma — escape the nearest preceding `<` with backslash
+                                for (let i = offset - 1; i >= 0; i--) {
+                                    if (patchedContent[i] === '<') {
+                                        patchedContent = patchedContent.slice(0, i) + '\\' + patchedContent.slice(i);
+                                        madeChanges = true;
+                                        break;
                                     }
                                 }
                             }
@@ -941,6 +1273,36 @@ class larkDocWriter {
         return ' '.repeat(indent) + '1. ' + content + '\n\n' + children;
     }
 
+    /**
+     * Convert showdown HTML to MDX-safe content for use inside JSX components.
+     * - Replaces <pre><code> blocks with markdown fenced code blocks
+     * - Escapes { and } outside <code> inline spans
+     */
+    __showdownToMdxSafe(html) {
+        // Escape { and } outside <code>...</code> and <pre>...</pre> spans first
+        // (before converting <pre><code> to fences, so code content is still protected)
+        const parts = html.split(/(<(?:code|pre)(?:\s[^>]*)?>[\s\S]*?<\/(?:code|pre)>)/g);
+        html = parts.map((part, i) => {
+            if (i % 2 === 0) {
+                return part.replace(/\{/g, '\\{').replace(/\}/g, '\\}');
+            }
+            return part;
+        }).join('');
+
+        // Convert <pre><code class="lang language-lang">...</code></pre> to fenced code blocks
+        html = html.replace(/<pre><code(?:\s+class="([^"]*)")?>([\s\S]*?)<\/code><\/pre>/g, (match, classAttr, code) => {
+            let lang = '';
+            if (classAttr) {
+                const langMatch = classAttr.match(/(?:^|\s)language-(\S+)/);
+                lang = langMatch ? langMatch[1] : (classAttr.split(/\s+/)[0] || '');
+            }
+            const decoded = code.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
+            return '\n```' + lang + '\n' + decoded.replace(/^\n|\n$/g, '') + '\n```\n';
+        });
+
+        return html;
+    }
+
     async __callout(block, indent) {
         let children = []
         if (block.children) {
@@ -969,14 +1331,15 @@ class larkDocWriter {
         }               
         
         const converter = new showdown.Converter()
-        const html = converter.makeHtml(children.slice(1).map(line => line.replace(/^\s*/g, '')).join('\n'))
+        let html = converter.makeHtml(children.slice(1).map(line => line.replace(/^\s*/g, '')).join('\n'))
+        html = this.__showdownToMdxSafe(html);
 
         const raw = ' '.repeat(indent) + type + '\n\n' + ' '.repeat(indent) + html.split('\n').join('\n' + ' '.repeat(indent)) + '\n\n' + ' '.repeat(indent) + '</Admonition>';
         return raw.replace(/(\s*\n){3,}/g, `\n${' '.repeat(indent)}\n`);
     }
 
     async __code(code, indent, prev, next, blocks) {
-        const valid_langs = ['Python', 'JavaScript', 'Java', 'Go', 'Bash']
+        const valid_langs = ['Python', 'JavaScript', 'Java', 'Go', 'C++', 'Bash', 'Shell']
         let lang = code.style.language ? this.code_langs[code['style']['language']] : 'plaintext'
         let elements = (await Promise.all(code['elements'].map( async x => {
             let content = await this.__text_run(x, code['elements'], true)
@@ -1034,7 +1397,7 @@ class larkDocWriter {
     }
 
     __code_block_split(elements, indent, lang, position, values=null) {
-        elements = elements.split('\n');
+        elements = elements.split('\n').map(line => line.replaceAll('`', '\\`'));
         var divider = elements.indexOf(elements.filter(x => x.match(/^[#\/]\/* ==*/))[0]);
         var tab_item_start = `${' '.repeat(indent)}<TabItem value='${lang.toLowerCase()}'>\n`;
         var tab_item_end = `${' '.repeat(indent)}</TabItem>`
@@ -1121,6 +1484,9 @@ class larkDocWriter {
                     case 'Bash':
                         label = 'cURL'
                         break;
+                    case 'Shell':
+                        label = 'Zilliz CLI'
+                        break;
                     default:
                         label = lang
                         break;
@@ -1154,11 +1520,12 @@ class larkDocWriter {
         res.splice(1, 0, "");
 
         const converter = new showdown.Converter()
-        const html = converter.makeHtml(res.slice(1).map(line => line.replace(/^\s*/g, '')).join('\n'))
+        let html = converter.makeHtml(res.slice(1).map(line => line.replace(/^\s*/g, '')).join('\n'))
+        html = this.__showdownToMdxSafe(html);
 
         const raw = ' '.repeat(indent) + type + '\n\n' + ' '.repeat(indent) + html.split('\n').join('\n' + ' '.repeat(indent)) + '\n\n' + ' '.repeat(indent) + '</Admonition>';
         return raw.replace(/(\s*\n){3,}/g, '\n\n');
-    }  
+    }
     
     async __image(image) {
         const root = this.upload_to_s3 ? IMAGE_BED_URL : `/${this.imageDir.replace(/^static\//g, '')}`
@@ -1170,19 +1537,14 @@ class larkDocWriter {
         }
 
         try {
-            const result = await this.downloader.__downloadImage(image.token)
-            const buffer = await result.buffer();
+            const { buffer } = await this.downloader.__downloadImage(image.token)
             if (this.upload_to_s3) {
                 await this.downloader.__uploadToS3(buffer, `${slug}.png`);
             } else {
-                result.body.pipe(fs.createWriteStream(`${this.downloader.target_path}/${slug}.png`));
+                fs.writeFileSync(`${this.downloader.target_path}/${slug}.png`, buffer);
             }
         } catch (error) {
-            console.log(error)
-            console.log("-------------- A retry is needed -----------------");
-            console.log("Sleeping for 5 seconds")
-            await new Promise(resolve => setTimeout(resolve, 5000));
-            this.__image(image)
+            console.error(`Image ${image.token} error [${error.constructor.name}]: ${error.message}`)
         }
 
         return `![${caption}](${root}/${slug}.png "${caption}")`;
@@ -1192,39 +1554,46 @@ class larkDocWriter {
         const root = this.upload_to_s3 ? IMAGE_BED_URL : `/${ this.imageDir.replace(/^static\//g, '')}`
 
         if (this.skip_image_download) {
-            return `![${board.token}](${root}/${board["token"]}.png)`;
+            return ' '.repeat(indent) + `![${board.token}](${root}/${board["token"]}.png)`;
         }
 
-        const result = await this.downloader.__downloadBoardPreview(board.token)
-        var buffers = [];
-        result.body.on('data', (chunk) => {
-            buffers.push(chunk);
-        });
-        result.body.on('end', async () => {
-            const buffer = Buffer.concat(buffers);
-            const trimmedBuffer = await this.__trim_white_borders(buffer);
-            if (this.upload_to_s3) {
-                await this.downloader.__uploadToS3(trimmedBuffer, `${board["token"]}.png`);
+        try {
+            const result = await this.downloader.__downloadBoardPreview(board.token)
+            if (!result.ok) {
+                console.error(`Board ${board.token} download failed: HTTP ${result.status} ${result.statusText}`)
             } else {
-                fs.writeFileSync(`${this.downloader.target_path}/${board["token"]}.png`, trimmedBuffer);
+                const buffer = await result.buffer()
+                console.log(`Board ${board.token} buffer size: ${buffer.length} bytes`)
+                const trimmedBuffer = await this.__trim_white_borders(buffer);
+                if (this.upload_to_s3) {
+                    await this.downloader.__uploadToS3(trimmedBuffer, `${board["token"]}.png`);
+                } else {
+                    fs.writeFileSync(`${this.downloader.target_path}/${board["token"]}.png`, trimmedBuffer);
+                }
             }
-        });           
+        } catch (error) {
+            console.error(`Board ${board.token} error [${error.constructor.name}]: ${error.message}`)
+        }
 
-        return `![${board.token}](${root}/${board["token"]}.png)`;
+        return ' '.repeat(indent) + `![${board.token}](${root}/${board["token"]}.png)`;
     }
 
     async __trim_white_borders(image) {
         const sharp = require('sharp');
 
+        const timeout = new Promise((_, reject) =>
+            setTimeout(() => reject(new Error('sharp toBuffer() timed out after 30s')), 30000)
+        );
+
         try {
-            // Let Sharp auto-detect background from top-left pixel (likely white)
+            console.log(`sharp trim: input ${image.length} bytes, magic ${image.slice(0,4).toString('hex')}`)
             const trimmedImage = await sharp(image)
                 .trim({
                   background: { r: 255, g: 255, b: 255 },
-                  threshold: 10                    
+                  threshold: 10
                 }).png()
 
-            // Add a 10-pixel white border around the trimmed image
+            console.log(`sharp trim: pipeline built, calling toBuffer()`)
             const borderedImage = trimmedImage.extend({
                 top: 20,
                 bottom: 20,
@@ -1233,7 +1602,8 @@ class larkDocWriter {
                 background: { r: 255, g: 255, b: 255 }
             });
 
-            const buffer = await borderedImage.toBuffer();
+            const buffer = await Promise.race([borderedImage.toBuffer(), timeout]);
+            console.log(`sharp trim: output ${buffer.length} bytes`)
             return buffer;
 
         } catch (error) {
@@ -1334,10 +1704,41 @@ class larkDocWriter {
                         .replace(/^\n/, '')
                         .replace(/<br\/>/g, '\n\n');
 
+                    // Escape solitary tildes to prevent MDX strikethrough parsing
+                    cell_text = cell_text.replace(/(?<!~)~(?!~)/g, '&#126;');
+
+                    // Protect Admonition JSX from showdown's <p> wrapping
+                    var admonitions = [];
+                    cell_text = cell_text.replace(
+                        /<Admonition[^>]*>[\s\S]*?<\/Admonition>/g,
+                        (match) => {
+                            admonitions.push(match);
+                            return `%%ADMONITION_${admonitions.length - 1}%%`;
+                        }
+                    );
+
+                    admonitions = admonitions.map(admonition => admonition.replace(/\n/g, ''));
+
                     cell_text = converter.makeHtml(cell_text)
                         .replace(/\n/g, '')
                         .replace(/&amp;/g, '&')
                         .replace(/\*/g, '&ast;');
+
+                    admonitions = admonitions.map(admonition => admonition.replace(/\n/g, ''));
+
+                    cell_text = converter.makeHtml(cell_text)
+                        .replace(/\n/g, '')
+                        .replace(/&amp;/g, '&')
+                        .replace(/\*/g, '&ast;');
+
+                    // Restore Admonition components (strip <p> wrapper showdown added)
+                    cell_text = cell_text.replace(
+                        /<p>%%ADMONITION_(\d+)%%<\/p>/g,
+                        (_, idx) => admonitions[parseInt(idx)]
+                    );
+
+                    // escape { and } for MDX
+                    cell_text = cell_text.replace(/\{/g, '\\{').replace(/\}/g, '\\}');
 
                     if (i === 0) {
                         html += ` ${' '.repeat(indent)}    <th${colspan}${rowspan}>${cell_text}</th>\n`;
@@ -1591,13 +1992,29 @@ class larkDocWriter {
             url = new URL(url);
             const token = url.pathname.split('/').pop();
             const header = url.hash.slice(1);
-            const key = url.pathname.split('/')[1] === 'wiki' ? 'origin_node_token' : ['token', 'obj_token']; // TODO
+            const isWikiUrl = url.pathname.split('/')[1] === 'wiki';
             var page;
 
-            try {
-                page = this.__fetch_doc_source(key, token);
-            } catch (error) {
-                page = null;
+            if (isWikiUrl) {
+                try {
+                    page = this.__fetch_doc_source('node_token', token);
+                } catch (error) {
+                    page = null;
+                }
+
+                if (!page) {
+                    try {
+                        page = this.__fetch_doc_source('origin_node_token', token);
+                    } catch (error) {
+                        page = null;
+                    }
+                }
+            } else {
+                try {
+                    page = this.__fetch_doc_source(['token', 'obj_token'], token);
+                } catch (error) {
+                    page = null;
+                }
             }
 
             if (page) {
@@ -1609,7 +2026,13 @@ class larkDocWriter {
                 let newUrl = `./${slug}`;
 
                 if (header) {
-                    const headerBlock = page['blocks']['items'].filter(x => x['block_id'] === header)[0];
+                    let headerBlock;
+
+                    try {
+                        headerBlock = page['blocks']['items'].filter(x => x['block_id'] === header)[0];
+                    } catch (error) {
+                        throw new Error(`Header block ${header} not found in page ${title}, and the page token is ${token}`);
+                    }
 
                     if (headerBlock) {
                         const blockType = this.block_types[headerBlock['block_type'] - 1];

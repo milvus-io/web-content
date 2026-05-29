@@ -5,7 +5,7 @@ const fetch = require('node-fetch')
 const Bottleneck = require('bottleneck')
 const process = require('node:process')
 const crypto = require('node:crypto')
-const { S3Client, PutObjectCommand, GetObjectCommand } = require('@aws-sdk/client-s3');
+const { S3Client, PutObjectCommand, HeadObjectCommand, PutObjectAclCommand } = require('@aws-sdk/client-s3');
 
 require('dotenv/config')
 
@@ -43,10 +43,14 @@ class larkImageDownloader {
         }
 
         try {
-            const getObjectCommand = new GetObjectCommand(get_params);
-            const response = await this.s3.send(getObjectCommand);
-            if (response.Metadata.hash === crypto.createHash('md5').update(buffer).digest('hex')) {
+            const headObjectCommand = new HeadObjectCommand(get_params);
+            console.log(`S3 HEAD: ${key}`)
+            const response = await this.s3.send(headObjectCommand);
+            if (response.Metadata?.hash === crypto.createHash('md5').update(buffer).digest('hex')) {
                 console.log(`Image already exists in S3: ${key}`);
+                const aclCommand = new PutObjectAclCommand({ Bucket: process.env.AWS_BUCKET, Key: key, ACL: 'public-read' });
+                await this.s3.send(aclCommand);
+                console.log(`Image ${key} ACL ensured public-read`);
                 return
             }
 
@@ -54,20 +58,32 @@ class larkImageDownloader {
             await this.s3.send(putObjectCommand);
             console.log(`Successfully uploaded image to ${key}`);
         } catch (err) {
-            if (err.Code === 'NoSuchKey') {
+            console.log(`S3 error for ${key}: name=${err.name} Code=${err.Code}`)
+            const isMissingObjectError = err.name === 'NoSuchKey'
+                || err.name === 'NotFound'
+                || err.Code === 'NoSuchKey'
+                || err.Code === 'NotFound'
+                || err.$metadata?.httpStatusCode === 404
+            if (isMissingObjectError) {
+                console.log(`S3 PUT (new): ${key}`)
                 const putObjectCommand = new PutObjectCommand(put_params);
-                await this.s3.send(putObjectCommand);
+                try {
+                    await this.s3.send(putObjectCommand);
+                    console.log(`Successfully uploaded image to ${key}`);
+                } catch (putErr) {
+                    console.error(`S3 PUT failed for ${key}: ${putErr.message}`);
+                }
             } else {
-                console.error("Error uploading image:", err);
+                console.error(`Error uploading image ${key}: ${err.message}`);
             }
         }
     }
 
-    async __downloadImage(image_token) {
+    async __downloadImage(image_token, retries=3) {
         console.log(`ImageToken: ${image_token}`)
         const fetcher = new tokenFetcher()
         await fetcher.fetchToken()
-        const token = await fetcher.token() 
+        const token = await fetcher.token()
 
         const req = {
             method: 'GET',
@@ -76,9 +92,20 @@ class larkImageDownloader {
             },
         }
 
-        let res = await fetch(`${process.env.FEISHU_HOST}/open-apis/drive/v1/medias/${image_token}/download`, req)
-
-        return res
+        for (let attempt = 1; attempt <= retries; attempt++) {
+            try {
+                const res = await fetch(`${process.env.FEISHU_HOST}/open-apis/drive/v1/medias/${image_token}/download`, req)
+                console.log(`ImageToken: ${image_token} HTTP ${res.status}`)
+                const buffer = await res.buffer()
+                console.log(`ImageToken: ${image_token} buffer size: ${buffer.length} bytes`)
+                return { buffer }
+            } catch (err) {
+                if (attempt === retries) throw err
+                const delay = attempt * 5000
+                console.log(`ImageToken ${image_token} download failed (attempt ${attempt}/${retries}), retrying in ${delay/1000}s: ${err.message}`)
+                await new Promise(resolve => setTimeout(resolve, delay))
+            }
+        }
     }
 
     async __downloadBoardPreview(board_token) {
@@ -95,6 +122,7 @@ class larkImageDownloader {
         }
 
         let res = await fetch(`${process.env.FEISHU_HOST}/open-apis/board/v1/whiteboards/${board_token}/download_as_image`, req)
+        console.log(`BoardToken: ${board_token} HTTP ${res.status} content-type: ${res.headers.get('content-type')}`)
 
         return res
     }
