@@ -72,7 +72,7 @@ summary: >-
 <p>Si un champ n'est pas défini comme nullable (comportement par défaut), chaque entité doit fournir une valeur valide pour ce champ. L'omission du champ ou l'attribution explicite d'une valeur NULL entraînera l'échec de l'opération d'insertion ou d'importation.</p>
 <p>L'attribut nullable est pris en charge pour les <strong>champs scalaires et vectoriels</strong> d'un schéma de collection. Cependant, les champs Array of Structs ne prennent pas en charge l'attribut nullable.</p>
 <div class="alert note">
-<p>L'attribut nullable détermine si la valeur d'un champ peut être manquante ; il ne définit pas la valeur utilisée lorsqu'un champ est manquant.</p>
+<p>L'attribut nullable détermine si une valeur de champ peut être manquante ; il ne définit pas la valeur utilisée lorsqu'un champ est manquant.</p>
 <ul>
 <li>Si un champ nullable est configuré sans valeur par défaut, l'omission du champ entraîne l'enregistrement d'une valeur NULL.</li>
 <li>Si une valeur par défaut est configurée, Milvus peut stocker la valeur par défaut à la place. Pour plus de détails, voir <a href="/docs/fr/default-values.md">Valeurs par défaut</a>.</li>
@@ -125,14 +125,14 @@ client.create_collection(
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
-<span class="hljs-keyword">import</span> java.util.Collections;
-
 <span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
         .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
         .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
         .build());
 
-CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> client.createSchema();
+CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> CreateCollectionReq.CollectionSchema.builder()
+        .build();
+
 schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;id&quot;</span>)
         .dataType(DataType.Int64)
@@ -142,15 +142,13 @@ schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)
         .dataType(DataType.FloatVector)
         .dimension(<span class="hljs-number">4</span>)
-        .isNullable(<span class="hljs-literal">true</span>)
+<span class="highlighted-wrapper-line">        .isNullable(<span class="hljs-literal">true</span>)</span>
         .build());
 
-<span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
+client.createCollection(CreateCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .collectionSchema(schema)
-        .indexParams(Collections.emptyList())
-        .build();
-client.createCollection(requestCreate);
+        .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
@@ -268,7 +266,7 @@ curl --request POST \
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;age&quot;</span>)
         .dataType(DataType.Int64)
-        .isNullable(<span class="hljs-literal">true</span>)
+<span class="highlighted-wrapper-line">        .isNullable(<span class="hljs-literal">true</span>)</span>
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Add to the fields array when calling createCollection:</span>
@@ -323,22 +321,31 @@ client.insert(
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
+<span class="hljs-keyword">import</span> com.google.gson.JsonNull;
 <span class="hljs-keyword">import</span> com.google.gson.JsonObject;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.InsertResp;
 
-<span class="hljs-keyword">import</span> java.util.ArrayList;
+<span class="hljs-keyword">import</span> java.util.Arrays;
 <span class="hljs-keyword">import</span> java.util.List;
 
-List&lt;JsonObject&gt; rows = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 <span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
-rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 1, \&quot;embedding\&quot;: [0.1, 0.2, 0.3, 0.4]}&quot;</span>, JsonObject.class));
-rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 2, \&quot;embedding\&quot;: null}&quot;</span>, JsonObject.class));
-rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 3}&quot;</span>, JsonObject.class));
 
-<span class="hljs-type">InsertResp</span> <span class="hljs-variable">insertR</span> <span class="hljs-operator">=</span> client.insert(InsertReq.builder()
+<span class="hljs-type">JsonObject</span> <span class="hljs-variable">row1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+row1.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">1</span>);
+row1.add(<span class="hljs-string">&quot;embedding&quot;</span>, gson.toJsonTree(Arrays.asList(<span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>)));
+
+<span class="hljs-type">JsonObject</span> <span class="hljs-variable">row2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+row2.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">2</span>);
+row2.add(<span class="hljs-string">&quot;embedding&quot;</span>, JsonNull.INSTANCE); <span class="hljs-comment">// Explicitly set to NULL</span>
+
+<span class="hljs-type">JsonObject</span> <span class="hljs-variable">row3</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+row3.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">3</span>); <span class="hljs-comment">// Field omitted; stored as NULL</span>
+
+List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
+
+client.insert(InsertReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .data(rows)
+        .data(data)
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> data = [
@@ -437,26 +444,23 @@ client.load_collection(collection_name=<span class="hljs-string">&quot;my_collec
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.LoadCollectionReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
 
-<span class="hljs-keyword">import</span> java.util.ArrayList;
-<span class="hljs-keyword">import</span> java.util.List;
+<span class="hljs-keyword">import</span> java.util.Collections;
 
-List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
-indexes.add(IndexParam.builder()
+<span class="hljs-type">IndexParam</span> <span class="hljs-variable">indexParam</span> <span class="hljs-operator">=</span> IndexParam.builder()
         .fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)
-        .indexName(<span class="hljs-string">&quot;embedding_idx&quot;</span>)
+        .indexName(<span class="hljs-string">&quot;embedding_index&quot;</span>)
         .indexType(IndexParam.IndexType.AUTOINDEX)
         .metricType(IndexParam.MetricType.COSINE)
-        .build());
+        .build();
 
 client.createIndex(CreateIndexReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .indexParams(indexes)
+        .indexParams(Collections.singletonList(indexParam))
         .build());
 
-<span class="hljs-type">LoadCollectionReq</span> <span class="hljs-variable">loadReq</span> <span class="hljs-operator">=</span> LoadCollectionReq.builder()
+client.loadCollection(LoadCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .build();
-client.loadCollection(loadReq);
+        .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createIndex</span>({
   <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -563,23 +567,18 @@ curl --request POST \
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
 
+<span class="hljs-keyword">import</span> java.util.Arrays;
 <span class="hljs-keyword">import</span> java.util.Collections;
-<span class="hljs-keyword">import</span> java.util.HashMap;
-<span class="hljs-keyword">import</span> java.util.Map;
 
-Map&lt;String, Object&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-searchParams.put(<span class="hljs-string">&quot;metric_type&quot;</span>, <span class="hljs-string">&quot;COSINE&quot;</span>);
-
-<span class="hljs-type">SearchResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(Arrays.asList(<span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>))))
         .annsField(<span class="hljs-string">&quot;embedding&quot;</span>)
-        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>})))
-        .topK(<span class="hljs-number">3</span>)
-        .searchParams(searchParams)
+        .limit(<span class="hljs-number">3</span>)
         .outputFields(Collections.singletonList(<span class="hljs-string">&quot;embedding&quot;</span>))
         .build());
 
-System.out.println(resp.getSearchResults());
+System.out.println(res);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
   <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -657,7 +656,7 @@ fmt.Println(resultSets)
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">expr = <span class="hljs-string">&quot;age &gt; 18&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">expr</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;age &gt; 18&quot;</span>;
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;age &gt; 18&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> expr = <span class="hljs-string">&quot;age &gt; 18&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
@@ -672,7 +671,7 @@ fmt.Println(resultSets)
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">expr = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">expr</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;status == \&quot;active\&quot;&quot;</span>;
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;status == \&quot;active\&quot;&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> expr = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>;
 <button class="copy-code-btn"></button></code></pre>
@@ -712,8 +711,8 @@ fmt.Println(resultSets)
 <p><strong>Principaux enseignements :</strong></p>
 <ul>
 <li>Lorsqu'un champ a une valeur par défaut non NULL, cette valeur est utilisée indépendamment de l'activation de <code translate="no">nullable</code>.</li>
-<li>Si <code translate="no">nullable=True</code> n'a pas de valeur par défaut, le champ stocke NULL.</li>
+<li>Si <code translate="no">nullable=True</code> n'a pas de valeur par défaut, le champ enregistre NULL.</li>
 <li>Si <code translate="no">nullable=False</code> n'a pas de valeur par défaut, l'insertion échoue avec une erreur.</li>
-<li>La définition d'une valeur par défaut NULL pour un champ non nul n'est pas valide et provoque une erreur.</li>
+<li>La définition d'une valeur par défaut NULL pour un champ non annulable n'est pas valable et provoque une erreur.</li>
 </ul>
 <p>Pour des exemples complets et l'utilisation de l'API pour les valeurs par défaut, voir <a href="/docs/fr/default-values.md">Valeurs par défaut</a>.</p>
