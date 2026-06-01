@@ -53,14 +53,15 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. List the indexes on the `varchar` field in the `test` collection
+// 2. List the indexes on the \`varchar\` field in the \`test\` collection
 ListIndexesReq listIndexesReq = ListIndexesReq.builder()
         .collectionName("test")
         .fieldName("varchar")
         .build();
-
+        
 List<String> indexes = client.listIndexes(ListIndexesReq);
 ```
+

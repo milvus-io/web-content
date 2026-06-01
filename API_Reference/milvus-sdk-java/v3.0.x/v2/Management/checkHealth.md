@@ -32,7 +32,7 @@ A **CheckHealthResp** object that contains detailed information about the curren
 
     Return the unhealthy reasons if the server is in an unhealthy state.
 
-- **quotaStates** (*List<String>*) -
+- **quotaStates** (*List<String>*) - 
 
     The names of unhealthy states. The following names could be in the list: "*ReadLimited*", "*WriteLimited*", "*DenyToRead*", "*DenyToWrite*", "*DenyToDDL*".
 
@@ -54,9 +54,10 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Check healthy
 CheckHealthResp healthyResp = client.checkHealth();
 ```
+

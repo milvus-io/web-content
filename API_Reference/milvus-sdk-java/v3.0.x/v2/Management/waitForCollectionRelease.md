@@ -52,7 +52,8 @@ waitForCollectionRelease(ReleaseCollectionReq.builder()
 ReleaseCollectionReq releaseCollectionReq = ReleaseCollectionReq.builder()
         .collectionName("test")
         .build();
-
+        
 client.releaseCollection(releaseCollectionReq);
 client.waitForCollectionRelease(releaseCollectionReq);
 ```
+

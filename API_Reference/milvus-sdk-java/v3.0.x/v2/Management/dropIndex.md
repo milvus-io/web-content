@@ -58,7 +58,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Drop index for the field "vector"
@@ -68,3 +68,4 @@ DropIndexReq dropIndexReq = DropIndexReq.builder()
         .build();
 client.dropIndex(dropIndexReq);
 ```
+

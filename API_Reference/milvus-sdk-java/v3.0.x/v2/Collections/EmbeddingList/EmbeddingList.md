@@ -36,7 +36,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 // 2. Initialize EmbeddingList
 EmbeddingList embeddingList1 = new EmbeddingList();
 embeddingList1.add(new FloatVec(vector1));
@@ -53,3 +53,4 @@ SearchResp searchResp = client.search(SearchReq.builder()
         .limit(10)
         .build());
 ```
+

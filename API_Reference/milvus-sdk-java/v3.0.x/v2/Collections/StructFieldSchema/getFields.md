@@ -28,3 +28,4 @@ The return value will be the fields of the Struct elements in an Array of Struct
 
 structFieldSchema.getFields();
 ```
+

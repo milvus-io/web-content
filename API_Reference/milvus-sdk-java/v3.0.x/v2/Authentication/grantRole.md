@@ -48,7 +48,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Grant role to a user
@@ -58,3 +58,4 @@ GrantRoleReq grantRoleReq = GrantRoleReq.builder()
         .build();
 client.grantRole(grantRoleReq);
 ```
+

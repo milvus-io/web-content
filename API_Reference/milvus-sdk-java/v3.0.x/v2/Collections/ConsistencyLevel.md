@@ -19,3 +19,4 @@ This is an enumeration that provides the following constants.
 - **EVENTUALLY**
 
     Sets the consistency level to **Eventually**, with a code value of 3.
+

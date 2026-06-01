@@ -20,7 +20,7 @@ SemanticHighlighter.builder()
     .highlightOnly(Boolean)
     .modelDeploymentID(String)
     .maxClientBatchSize(Integer)
-    .build();
+    .build(); 
 ```
 
 **BUILDER METHODS:**
@@ -96,8 +96,8 @@ SemanticHighlighter highlighter = SemanticHighlighter.builder()
     .preTags(preTags)
     .postTags(PostTags)
     .modelDeploymentID("your-model-deployment-id")
-    .build();
-
+    .build(); 
+    
 SearchResp searchR = client.search(SearchReq.builder()
     .collectionName("your_collection")
     .data(Collections.singletonList("test"))
@@ -155,8 +155,8 @@ SemanticHighlighter highlighter = SemanticHighlighter.builder()
     .postTags(PostTags)
     .threshold(0.8f)
     .modelDeploymentID("your-model-deployment-id")
-    .build();
-
+    .build(); 
+    
 SearchResp searchR = client.search(SearchReq.builder()
     .collectionName("your_collection")
     .data(Collections.singletonList("machine learning applications"))
@@ -166,3 +166,4 @@ SearchResp searchR = client.search(SearchReq.builder()
     .highlighter(highlighter)
     .build());
 ```
+

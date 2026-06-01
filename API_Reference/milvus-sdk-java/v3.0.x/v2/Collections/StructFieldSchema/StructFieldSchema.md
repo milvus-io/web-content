@@ -14,7 +14,7 @@ This class cannot be explicitly instantiated. You need to describe a collection 
 
 ## Example
 
-The following example illustrates how to create an Array of Structs field and add fields to its Struct elements.
+The following example illustrates how to create an Array of Structs field and add fields to its Struct elements. 
 
 ```java
 import io.milvus.v2.common.DataType;
@@ -23,7 +23,7 @@ import io.milvus.v2.service.collection.request.CreateCollectionReq;
 
 CreateCollectionReq.CollectionSchema collectionSchema = CreateCollectionReq.CollectionSchema.builder()
         .build();
-
+        
 collectionSchema.addField(AddFieldReq.builder()
         .fieldName(STRUCT_FIELD)
         .description("clips of a film")

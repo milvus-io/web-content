@@ -98,7 +98,7 @@ DecayRanker.builder()
     .offset(24)
     .decay(0.5)
     .build());
-
+    
 // Instead, you can use the Function class as well
 CreateCollectionReq.Function rr = CreateCollectionReq.Function.builder()
     .functionType(FunctionType.RERANK)

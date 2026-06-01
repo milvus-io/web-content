@@ -40,18 +40,18 @@ createResourceGroup(CreateResourceGroupReq.builder()
 
     - `withFrom(List<ResourceGroupTransfer> from)`
 
-        A list of **ResourceGroupTransfer** instances that defines the source resource groups for necessary transfers.
+        A list of **ResourceGroupTransfer** instances that defines the source resource groups for necessary transfers. 
 
     - `withTo(List<ResourceGroupTransfer> to)`
 
-        A list of **ResourceGroupTransfer** instances that defines the target resource groups for necessary transfers.
+        A list of **ResourceGroupTransfer** instances that defines the target resource groups for necessary transfers. 
 
     - `withNodeFilter(ResourceGroupNodeFilter nodeFilter)`
 
         A **ResourceGroupNodeFilter** is used to filter the query nodes with specified node labels.
 
         <div class="alert note">
-
+        
         You can set an environment variable for Milvus to label the query node during its startup. For example, to add the `QUERYNODE_LOCATION` label, you need to create an environment variable named after the label, prefixed by `MILVUS_SERVER_LABEL_`, and set the value for the label, as in `MILVUS_SERVER_LABEL_QUERYNODE_LOCATION=dc1`.
 
         </div>
@@ -79,7 +79,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Prepare resource group config
@@ -104,3 +104,4 @@ CreateResourceGroupReq createResourceGroupReq = CreateResourceGroupReq.builder()
     .build();
 client.createResourceGroup(createResourceGroupReq);
 ```
+

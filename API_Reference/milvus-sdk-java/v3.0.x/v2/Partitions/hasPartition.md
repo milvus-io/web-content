@@ -57,7 +57,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Check is partition "test_partition" exists in collection
@@ -67,3 +67,4 @@ HasPartitionReq hasPartitionReq = HasPartitionReq.builder()
         .build();
 Boolean res = client.hasPartition(hasPartitionReq);
 ```
+

@@ -21,7 +21,7 @@ bulkImport.getImportProgress(
 
     The endpoint of the connected Milvus instance.
 
-- **request** (*[BaseDescribeImportRequest](getImportProgress.md)*) -
+- **request** (*[BaseDescribeImportRequest](getImportProgress.md)*) -  
 
     A **BaseImportRequest** instance.
 
@@ -56,3 +56,4 @@ MilvusDescribeImportRequest.builder()
 ```java
 
 ```
+

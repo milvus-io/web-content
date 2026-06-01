@@ -1,6 +1,6 @@
 # listDatabases()
 
-This operation lists all the database names.
+This operation lists all the database names. 
 
 ```java
 public ListDatabasesResp listDatabases()
@@ -32,10 +32,11 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. List databases
 ListDatabasesResp listDatabasesResp = client.listDatabases();
 List<String> dbNames = listDatabasesResp.getDatabaseNames();
 ```
+

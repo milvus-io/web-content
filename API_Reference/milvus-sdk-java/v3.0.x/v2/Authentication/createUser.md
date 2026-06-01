@@ -48,7 +48,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Create a user
@@ -56,6 +56,7 @@ CreateUserReq createUserReq = CreateUserReq.builder()
         .userName("test")
         .password("Zilliz@2023")
         .build();
-
+        
 client.createUser(createUserReq);
 ```
+

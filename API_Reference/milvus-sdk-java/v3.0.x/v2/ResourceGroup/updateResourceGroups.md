@@ -46,7 +46,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Prepare resource group config
@@ -67,3 +67,4 @@ UpdateResourceGroupsReq updateResourceGroupsReq = UpdateResourceGroupsReq.builde
     .build();
 client.updateResourceGroups(updateResourceGroupsReq)
 ```
+

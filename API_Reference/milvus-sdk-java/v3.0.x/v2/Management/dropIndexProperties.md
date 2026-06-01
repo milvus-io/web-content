@@ -62,10 +62,10 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Drop the `mmap.enabled` property
+// 2. Drop the \`mmap.enabled\` property
 List<String> propertyKeys = new ArrayList<>()
 propertyKeys.add("mmap.enabled")
 
@@ -76,3 +76,4 @@ DropIndexPropertiesReq dropIndexPropertiesReq = DropIndexPropertiesReq.builder()
         .build();
 client.dropIndexProperties(dropIndexPropertiesReq)
 ```
+

@@ -37,7 +37,7 @@ getLoadState(GetLoadStateReq.builder()
 
 **RETURNS:**
 
-A Boolean value that indicates the status of the specified collection or partition.
+A Boolean value that indicates the status of the specified collection or partition. 
 
 <div class="alert note">
 
@@ -63,7 +63,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Get load state for collection "test"

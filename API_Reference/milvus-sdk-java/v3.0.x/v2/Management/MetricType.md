@@ -55,3 +55,4 @@ This is an enumeration that provides the following constants.
 - MAX_SIM_HAMMING
 
     Sets the metric type to **MAX_SIM_HAMMING**. This applies only to binary vectors in Struct elements.
+

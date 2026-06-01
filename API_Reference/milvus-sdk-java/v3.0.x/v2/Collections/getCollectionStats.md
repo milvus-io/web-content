@@ -59,7 +59,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Get collection stats
@@ -68,3 +68,4 @@ GetCollectionStatsReq getCollectionStatsReq = GetCollectionStatsReq.builder()
         .build();
 GetCollectionStatsResp getCollectionStatsResp = client.getCollectionStats(getCollectionStatsReq);
 ```
+

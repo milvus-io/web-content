@@ -80,7 +80,7 @@ CreateCollectionReq.Function ranker = CreateCollectionReq.Function.builder()
                  .param("weight", "0.5")
                  .param("random_score", "{\"seed\": 126, \"field\": \"id\"}")
                  .build();
-
+                 
 SearchResp searchReq = client.search(SearchReq.builder()
         .collectionName("my_collection")
         .data(Collections.singletonList(new FloatVec(new float[]{-0.619954f, 0.447943f, -0.174938f, -0.424803f, -0.864845f})))

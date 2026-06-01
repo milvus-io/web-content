@@ -61,10 +61,10 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Drop the `collection.ttl.seconds` property
+// 2. Drop the \`collection.ttl.seconds\` property
 List<String> propertyKeys = new ArrayList<>()
 propertyKeys.add("collection.ttl.seconds")
 
@@ -72,6 +72,7 @@ DropCollectionPropertiesReq dropCollectionPropertiesReq = DropCollectionProperti
         .collectionName("test")
         .propertyKeys(propertyKeys)
         .build();
-
+        
 client.dropCollectionProperties(dropCollectionPropertiesReq)
 ```
+

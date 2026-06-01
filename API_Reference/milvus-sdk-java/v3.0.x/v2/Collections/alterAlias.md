@@ -24,25 +24,25 @@ alterAlias(AlterAliasReq.builder()
     The alias of the collection. Note that the alias should exist beforehand.
 
     <div class="alert note">
-
-    A collection alias is an additional name for a collection. Collection aliases are useful when you want to switch your application to a new collection without any changes to your code.
-
+    
+    A collection alias is an additional name for a collection. Collection aliases are useful when you want to switch your application to a new collection without any changes to your code. 
+    
     In Milvus, a collection alias is a globally unique identifier. One alias can only be assigned to exactly one collection. Conversely, a collection can have multiple aliases.
-
+    
     Below is an example of reassigning the alias of one collection to another:
-
+    
     Suppose there are two collections: `collection_1` and `collection_2`. There is also a collection alias named `bob`, which was originally assigned to `collection_1`:
-
+    
     - `collection_1`'s alias = ["bob"]
-
+    
     - `collection_2`'s alias = []
-
+    
     After calling the `alterAlias` function with the parameters `collection_2` and `bob`:
-
+    
     - `collection_1`'s alias = []
-
+    
     - `collection_2`'s alias = ["bob"]
-
+    
     </div>
 
 - `databaseName(String databaseName)`
@@ -75,7 +75,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Alter the alias for collection "test"
@@ -85,3 +85,4 @@ AlterAliasReq alterAliasReq = AlterAliasReq.builder()
         .build();
 client.alterAlias(alterAliasReq);
 ```
+

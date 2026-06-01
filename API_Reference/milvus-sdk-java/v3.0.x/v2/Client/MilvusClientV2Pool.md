@@ -133,7 +133,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus") // replace this with your token
         .build();
-
+        
 PoolConfig poolConfig = PoolConfig.builder()
         .maxIdlePerKey(10) // max idle clients per key
         .maxTotalPerKey(20) // max total(idle + active) clients per key
@@ -151,3 +151,4 @@ try {
     pool.returnClient("client_name", client); // make sure the client is returned after use
 }
 ```
+

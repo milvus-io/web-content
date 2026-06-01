@@ -62,7 +62,7 @@ A **GetPersistentSegmentInfoResp** object that contains detailed information abo
 
         The compaction level of the current segment. Possible values are : "Legacy", "L0", "L1", "L2".
 
-    - **isSorted** (*Boolean*) -
+    - **isSorted** (*Boolean*) -   
 
         Whether the entities in the current segment are sorted.
 
@@ -85,7 +85,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Get segment info

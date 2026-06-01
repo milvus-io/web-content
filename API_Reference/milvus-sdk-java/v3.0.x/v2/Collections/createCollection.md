@@ -1,6 +1,6 @@
 # createCollection()
 
-This operation creates a collection either with default or customized settings.
+This operation creates a collection either with default or customized settings. 
 
 ```java
 public void createCollection(CreateCollectionReq request)
@@ -126,7 +126,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Create a collection with schema, when indexParams is specified, it will create index as well

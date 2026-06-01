@@ -62,10 +62,10 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Alter the `mmap.enabled` property
+// 2. Alter the \`mmap.enabled\` property
 Map<String, String> properties = new HashMap<>()
 properties.put("mmap.enabled", "true")
 
@@ -76,3 +76,4 @@ AlterIndexPropertiesReq alterIndexPropertiesReq = AlterIndexPropertiesReq.builde
         .build();
 client.alterIndexProperties(alterCollectionFieldReq)
 ```
+

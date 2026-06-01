@@ -48,7 +48,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Revoke a role from a user
@@ -58,3 +58,4 @@ RevokeRoleReq revokeRoleReq = RevokeRoleReq.builder()
         .build();
 client.revokeRole(revokeRoleReq);
 ```
+

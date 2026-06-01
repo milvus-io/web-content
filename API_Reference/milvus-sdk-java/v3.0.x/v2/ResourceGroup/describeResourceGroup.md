@@ -69,17 +69,17 @@ A **DescribeResourceGroupResp** object contains the following fields:
 
     - **from** (*List\<ResourceGroupTransfer>*) -
 
-        The source resource groups for necessary transfers.
+        The source resource groups for necessary transfers. 
 
     - **to** (*List\<ResourceGroupTransfer>*) -
 
-        The target resource groups for necessary transfers.
+        The target resource groups for necessary transfers. 
 
     - **nodeFilter** (*ResourceGroupNodeFilter*) -
 
         A filter used to filter the query nodes with specified node labels.
 
-- **nodes** (*List\<NodeInfo>*) -
+- **nodes** (*List\<NodeInfo>*) -  
 
     A list of nodes, each of which is a **NodeInfo** object.
 
@@ -91,7 +91,7 @@ A **DescribeResourceGroupResp** object contains the following fields:
 
         The address of the current query node.
 
-    - **hostname** (String) -
+    - **hostname** (String) -   
 
         The hostname of the current query node.
 
@@ -114,12 +114,13 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Describe the resource group
+// 2. Describe the resource group  
 DescribeResourceGroupReq describeResourceGroupReq = DescribeResourceGroupReq.builder()
     .groupName("rg1")
     .build();
 DescribeResourceGroupResp group = client.describeResourceGroup(describeResourceGroupReq);
 ```
+

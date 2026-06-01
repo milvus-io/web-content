@@ -48,7 +48,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. add privileges to group
@@ -59,6 +59,7 @@ AddPrivilegesToGroupReq addPrivilegesToGroupReq = AddPrivilegesToGroupReq.builde
         .groupName("read_only")
         .privileges(privileges)
         .build();
-
+        
 client.addPrivilegesToGroup(addPrivilegesToGroupReq);
 ```
+

@@ -26,7 +26,7 @@ dropCollectionFieldProperties(DropCollectionFieldPropertiesReq.builder()
 
 - `databaseName(String databaseName)`
 
-    The name of a database that has the collection mentioned above.
+    The name of a database that has the collection mentioned above. 
 
 - `fieldName(String fieldName)`
 
@@ -40,7 +40,7 @@ dropCollectionFieldProperties(DropCollectionFieldPropertiesReq.builder()
 
 *void*
 
-**RETURNS:**
+**RETURNS:** 
 
 None
 
@@ -56,7 +56,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Drop field's properties

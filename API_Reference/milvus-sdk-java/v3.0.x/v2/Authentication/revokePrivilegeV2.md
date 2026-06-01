@@ -58,7 +58,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Revoke privilege or privilege group
@@ -68,6 +68,7 @@ RevokePrivilegeReqV2 revokePrivilegeReqV2 = RevokePrivilegeReqV2.builder()
     .dbName("my_db")
     .collectionName("my_collection")
     .build()
-
+        
 client.revokePrivilegeV2(revokePrivilegeReqV2);
 ```
+

@@ -55,3 +55,4 @@ DropCollectionReq dropCollectionReq = DropCollectionReq.builder()
 client.dropCollection(dropCollectionReq);
 client.WaitForDropCollection(dropCollectionReq);
 ```
+

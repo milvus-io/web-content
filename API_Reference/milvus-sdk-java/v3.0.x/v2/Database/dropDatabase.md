@@ -1,6 +1,6 @@
 # dropDatabase()
 
-This operation drops a database with a name.
+This operation drops a database with a name. 
 
 ```java
 public void dropDatabase(DropDatabaseReq request)
@@ -43,7 +43,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Drop a database
@@ -52,3 +52,4 @@ DropDatabaseReq dropDatabaseReq = DropDatabaseReq.builder()
         .build();
 client.dropDatabase(dropDatabaseReq);
 ```
+

@@ -1,6 +1,6 @@
 # createDatabase()
 
-This operation creates a database with a name.
+This operation creates a database with a name. 
 
 ```java
 public void createDatabase(CreateDatabaseReq request)
@@ -49,7 +49,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Create a database
@@ -61,3 +61,4 @@ CreateDatabaseReq createDatabaseReq = CreateDatabaseReq.builder()
         .build();
 client.createDatabase(createDatabaseReq);
 ```
+

@@ -78,7 +78,7 @@ A **GetQuerySegmentInfoResp** object that contains detailed information about th
 
         A list of query node IDs.
 
-    - **isSorted** (*Boolean*) -
+    - **isSorted** (*Boolean*) -   
 
         Whether the entities in the current segment are sorted.
 
@@ -101,7 +101,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Get segment info
@@ -109,3 +109,4 @@ GetQuerySegmentInfoResp segInfoResp = client.getQuerySegmentInfo(GetQuerySegment
         .collectionName("test")
         .build());
 ```
+

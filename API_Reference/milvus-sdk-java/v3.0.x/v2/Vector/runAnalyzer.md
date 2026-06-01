@@ -60,7 +60,7 @@ runAnalyzer(RunAnalyzerReq.builder()
 
 *RunAnalyzerResp*
 
-A **RunAnalyzerResp** contains a list of **AnalyzerResult** objects, each of which is a list of **AnalyzerToken** objects.
+A **RunAnalyzerResp** contains a list of **AnalyzerResult** objects, each of which is a list of **AnalyzerToken** objects. 
 
 **EXCEPTIONS:**
 
@@ -81,7 +81,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Run analyzer

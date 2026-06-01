@@ -45,12 +45,13 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Drop a resource group
+// 2. Drop a resource group  
 DropResourceGroupReq dropResourceGroupReq = DropResourceGroupReq.builder()
     .groupName("rg1")
     .build();
 client.dropResourceGroup(dropResourceGroupReq);
 ```
+

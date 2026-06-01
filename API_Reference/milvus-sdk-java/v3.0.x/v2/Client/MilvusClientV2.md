@@ -62,7 +62,7 @@ ConnectConfig.builder()
 
 - `token(String token)`
 
-    A valid access token to access the specified Milvus instance.
+    A valid access token to access the specified Milvus instance. 
 
     This can be used as a recommended alternative to setting **user** and **password** separately.
 
@@ -94,7 +94,7 @@ ConnectConfig.builder()
 
 - `connectTimeoutMs(long connectTimeout)`
 
-    The timeout duration for this operation, in milliseconds.
+    The timeout duration for this operation, in milliseconds. 
 
     The value defaults to **10000**.
 
@@ -158,7 +158,7 @@ ConnectConfig.builder()
 
 - `.clientRequestId(ThreadLocal<String> clientRequestId)`
 
-    The ID of a client request. You can use this parameter to maintain a map of threads, with each thread mapping to a specific request ID.
+    The ID of a client request. You can use this parameter to maintain a map of threads, with each thread mapping to a specific request ID. 
 
     The request ID will be passed to the server, so that you can learn about which client calls this interface from the access logs.
 
@@ -198,6 +198,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus") // replace this with your token
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 ```
+

@@ -61,10 +61,10 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Alter the `collection.ttl.seconds` property
+// 2. Alter the \`collection.ttl.seconds\` property
 Map<String, String> properties = new HashMap<>()
 properties.put("collection.ttl.seconds", "86400")
 
@@ -74,3 +74,4 @@ AlterCollectionPropertiesReq alterCollectionFieldReq = AlterCollectionProperties
         .build();
 client.alterCollectionProperties(alterCollectionFieldReq)
 ```
+

@@ -49,7 +49,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Describe database
@@ -59,3 +59,4 @@ DescribeDatabaseResp descResp = client.describeDatabase(DescribeDatabaseReq.buil
 Map<String,String> propertiesResp = descResp.getProperties();
 System.out.println(propertiesResp.get(Constant.DATABASE_REPLICA_NUMBER));
 ```
+

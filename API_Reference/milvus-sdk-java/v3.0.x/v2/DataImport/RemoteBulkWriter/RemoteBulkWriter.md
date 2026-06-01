@@ -62,9 +62,9 @@ RemoteBulkWriterParam.newBuilder()
     The value defaults to **536,870,912** in bytes, which is **512 MB**.
 
     <div class="alert note">
-
+    
     The way BulkWriter segments your data varies with the target file type.
-
+    
     If the generated file exceeds the specified segment size, BulkWriter creates multiple files and names them in sequence numbers, each no larger than the segment size.
 
     </div>
@@ -206,7 +206,7 @@ private static List<List<String>> callRemoteWriter(CreateCollectionReq.Collectio
                 .withSecretKey(STORAGE_SECRET_KEY)
                 .withRegion(STORAGE_REGION)
                 .build();
-
+    
     RemoteBulkWriterParam bulkWriterParam = RemoteBulkWriterParam.newBuilder()
             .withCollectionSchema(collectionSchema)
             .withRemotePath("bulk_data")
@@ -215,7 +215,7 @@ private static List<List<String>> callRemoteWriter(CreateCollectionReq.Collectio
             .withConnectParam(connectParam)
             .withConfig("sep", "|") // only take effect for CSV file
             .build();
-
+    
     try (RemoteBulkWriter remoteBulkWriter = new RemoteBulkWriter(bulkWriterParam)) {
         for (JsonObject rowObject : data) {
             remoteBulkWriter.appendRow(rowObject);

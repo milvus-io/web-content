@@ -44,3 +44,4 @@ client.loadCollection(loadCollectionReq);
 // Wait for 10 seconds
 client.waitForLoadCollection("test", 10000)
 ```
+

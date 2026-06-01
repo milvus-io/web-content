@@ -38,7 +38,7 @@ grantPrivilege(GrantPrivilegeReq.builder()
 
 - `privilege(String privilege)`
 
-    The name of the privilege to assign.
+    The name of the privilege to assign. 
 
     For details, refer to the **Privilege name** column in the table on page [Users and Roles](https://milvus.io/docs/users_and_roles.md).
 
@@ -70,7 +70,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Grant privileges

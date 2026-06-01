@@ -78,7 +78,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Get entity with id 0
@@ -88,3 +88,4 @@ GetReq getReq = GetReq.builder()
         .build();
 GetResp getResp = client.get(getReq);
 ```
+

@@ -19,7 +19,7 @@ LexicalHighlighter.builder()
     .fragmentOffset(Integer)
     .fragmentSize(Integer)
     .numOfFragments(Integer)
-    .build();
+    .build(); 
 ```
 
 **BUILDER METHODS:**
@@ -32,13 +32,13 @@ LexicalHighlighter.builder()
     import io.milvus.v2.service.vector.request.highlighter.LexicalHighlighter;
     import java.util.ArrayList;
     import java.util.List;
-
+    
     LexicalHighter.HighlightQuery q = new LexicalHighlighter.HighlighterQuery(
         "<QueryType>",
         "<text field name>",
         "<terms to highlight>"
     )
-
+    
     List<LexicalHighter.HighlightQuery> queries = new ArrayList<>();
     queries.add(q);
     ```
@@ -101,8 +101,8 @@ LexicalHighlighter highlighter = LexicalHighlighter.builder()
     .highlightSearchText(true)
     .preTags(preTags)
     .postTags(PostTags)
-    .build();
-
+    .build(); 
+    
 SearchResp searchR = client.search(SearchReq.builder()
     .collectionName("your_collection")
     .data(Collections.singletonList("test"))
@@ -142,8 +142,8 @@ LexicalHighlighter highlighter = LexicalHighlighter.builder()
     .highlightQueries(Collections.singletonlist(q))
     .preTags(preTags)
     .postTags(PostTags)
-    .build();
-
+    .build(); 
+    
 SearchResp searchR = client.search(SearchReq.builder()
     .collectionName("your_collection")
     .data(Collections.singletonList("test"))

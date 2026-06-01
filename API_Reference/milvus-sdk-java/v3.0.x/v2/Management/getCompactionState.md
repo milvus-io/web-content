@@ -47,7 +47,7 @@ A **GetCompactionStateResp** instance, which comprises the following parameters:
 
     The ID of the timeout plan.
 
-- **completedPlanNo** (*Long*)
+- **completedPlanNo** (*Long*) 
 
     The ID of the completed plan.
 
@@ -66,7 +66,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Compact a collection

@@ -58,7 +58,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Grant privilege or privilege group
@@ -68,6 +68,7 @@ GrantPrivilegeReqV2 grantPrivilegeReqV2 = GrantPrivilegeReqV2.builder()
     .dbName("my_db")
     .collectionName("my_collection")
     .build()
-
+        
 client.grantPrivilegeV2(grantPrivilegeReqV2);
 ```
+

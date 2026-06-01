@@ -9,3 +9,4 @@ io.milvus.bulkwriter.BulkImport
 ## Constructor
 
 *None*
+

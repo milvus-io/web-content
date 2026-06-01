@@ -55,7 +55,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Drop partition "test_partition"
@@ -65,3 +65,4 @@ DropPartitionReq dropPartitionReq = DropPartitionReq.builder()
         .build();
 client.dropPartition(dropPartitionReq);
 ```
+

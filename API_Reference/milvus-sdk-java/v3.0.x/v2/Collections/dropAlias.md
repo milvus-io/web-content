@@ -1,6 +1,6 @@
 # dropAlias()
 
-This operation drops a specified collection alias.
+This operation drops a specified collection alias. 
 
 ```java
 public void dropAlias(DropAliasReq request)
@@ -24,7 +24,7 @@ dropAlias(DropAliasReq.builder()
 
 - `alias(String alias)`
 
-    The alias of a collection.
+    The alias of a collection. 
 
     Before this operation, ensure that the alias exists. Otherwise, exceptions will occur.
 
@@ -50,7 +50,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Drop alias "test_alias"
