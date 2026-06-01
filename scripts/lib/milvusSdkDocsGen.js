@@ -71,17 +71,19 @@ class MilvusSdkDocsGen extends MilvusDocsGen {
                 suffix += 1
             }
         }
+        const localNameFromSlug = (slug) => {
+            // Use lastIndexOf so slugs with a version prefix (e.g. "v2-Category-method")
+            // correctly extract just the trailing local name segment.
+            const hyphenIdx = slug.lastIndexOf('-')
+            return hyphenIdx === -1 ? slug : slug.slice(hyphenIdx + 1)
+        }
         const fileStem = (filePath) => filePath.replace(/\.md$/i, '')
         const resolve = (record_id) => {
             if (resolveCache.has(record_id)) return resolveCache.get(record_id)
             const rec = rawMap.get(record_id)
             if (!rec) return { pageId: '', dirPath: '' }
 
-            const slug = rec.slug
-            // Use lastIndexOf so slugs with a version prefix (e.g. "v2-Category-method")
-            // correctly extract just the trailing local name segment.
-            const hyphenIdx = slug.lastIndexOf('-')
-            const localName = hyphenIdx === -1 ? slug : slug.slice(hyphenIdx + 1)
+            const localName = localNameFromSlug(rec.slug)
             const type = rec.type
 
             let parentDir = ''
@@ -102,7 +104,15 @@ class MilvusSdkDocsGen extends MilvusDocsGen {
                 result = { pageId, dirPath: fileStem(pageId) }
             } else {
                 // VirtualNode, Module — folder only, no file written
-                const dirPath = allocateCaseInsensitivePath(parentDir, localName)
+                const classSibling = [...rawMap.values()].find(r =>
+                    r.record_id !== record_id &&
+                    r.parent === rec.parent &&
+                    r.type === 'Class' &&
+                    localNameFromSlug(r.slug).toLowerCase() === localName.toLowerCase()
+                )
+                const dirPath = classSibling
+                    ? resolve(classSibling.record_id).dirPath
+                    : allocateCaseInsensitivePath(parentDir, localName)
                 result = { pageId: dirPath, dirPath }
             }
 

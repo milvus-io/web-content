@@ -38,8 +38,12 @@ test('MilvusSdkDocsGen makes SDK page paths unique on case-insensitive file syst
   const gen = new MilvusSdkDocsGen();
   gen.records = [
     record('collections', 'v2-Collections', 'VirtualNode', 'Collections'),
-    record('create-schema-class', 'v2-Collections-CreateSchema', 'Class', 'CreateSchema', 'collections', 'token-upper'),
+    record('create-schema-upper', 'v2-Collections-CreateSchema', 'Function', 'CreateSchema', 'collections', 'token-upper'),
     record('create-schema-fn', 'v2-Collections-createSchema', 'Function', 'createSchema', 'collections', 'token-lower'),
+    record('struct-class', 'v2-Collections-StructFieldSchema', 'Class', 'StructFieldSchema', 'collections', 'token-struct-class'),
+    record('struct-get-name', 'v2-StructFieldSchema-getName', 'Function', 'getName', 'struct-class', 'token-struct-get-name'),
+    record('struct-virtual', 'v2-Collections-StructFieldSchema', 'VirtualNode', 'StructFieldSchema', 'collections', 'token-struct-virtual'),
+    record('struct-add-field', 'v2-StructFieldSchema-addField', 'Function', 'addField', 'struct-virtual', 'token-struct-add-field'),
     record('data-import', 'v2-DataImport', 'VirtualNode', 'DataImport'),
     record('bulk-import-class', 'v2-DataImport-BulkImport', 'Class', 'BulkImport', 'data-import', 'token-bulk-upper'),
     record('bulk-import-fn', 'v2-DataImport-BulkImport-bulkImport', 'Function', 'bulkImport', 'bulk-import-class', 'token-bulk-lower'),
@@ -50,10 +54,16 @@ test('MilvusSdkDocsGen makes SDK page paths unique on case-insensitive file syst
 
   assert.ok(pageIds.includes('Collections/CreateSchema.md'));
   assert.ok(pageIds.includes('Collections/createSchema-2.md'));
+  assert.ok(pageIds.includes('Collections/StructFieldSchema/StructFieldSchema.md'));
+  assert.ok(pageIds.includes('Collections/StructFieldSchema/getName.md'));
+  assert.ok(pageIds.includes('Collections/StructFieldSchema/addField.md'));
   assert.ok(pageIds.includes('DataImport/BulkImport/BulkImport.md'));
   assert.ok(pageIds.includes('DataImport/BulkImport/bulkImport-2.md'));
+  assert.ok(!pageIds.some((pageId) => pageId.includes('StructFieldSchema-2')));
 
-  const normalized = pageIds.map((pageId) => pageId.toLowerCase());
+  const normalized = pageIds
+    .filter((pageId) => pageId.endsWith('.md'))
+    .map((pageId) => pageId.toLowerCase());
   assert.equal(new Set(normalized).size, normalized.length);
 
   gen.current_page_id = 'Collections/CreateSchema.md';

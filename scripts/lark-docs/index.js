@@ -6,6 +6,7 @@ process.env.DOTENV_CONFIG_QUIET = process.env.DOTENV_CONFIG_QUIET || 'true'
 const { program } = require('commander')
 const MilvusDocsGen = require('../lib/milvusDocsGen.js')
 const MilvusSdkDocsGen = require('../lib/milvusSdkDocsGen.js')
+const LarkUtils = require('../lib/larkUtils.js')
 const fs = require('node:fs')
 
 program
@@ -82,6 +83,12 @@ program
             const result = await gen.write_doc(opts.doc)
             if (!result) process.exit(1)
             docs = [result]
+        }
+
+        if (opts.all && !opts.output) {
+            const utils = new LarkUtils()
+            if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true })
+            utils.pre_process_file_paths(outputDir)
         }
 
         // Write files
