@@ -65,7 +65,7 @@ Each `RerankResult` object contains:
 from pymilvus.model.reranker import JinaRerankFunction
 
 jina_rf = JinaRerankFunction(
-    model_name="jina-reranker-v1-base-en", # Defaults to `jina-reranker-v1-base-en`
+    model_name="jina-reranker-v1-base-en", # Defaults to \`jina-reranker-v1-base-en\`
     api_key="YOUR_JINAAI_API_KEY"
 )
 

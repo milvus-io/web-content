@@ -53,6 +53,25 @@ class MilvusSdkDocsGen extends MilvusDocsGen {
         // dir_path = the directory path this record contributes (used as parent for children).
         // page_id  = the file path to write (ends in .md) or folder path (no .md, skipped).
         const resolveCache = new Map()
+        const allocatedPaths = new Set()
+        const allocateCaseInsensitivePath = (parentDir, localName, ext='') => {
+            const baseDir = parentDir || ''
+            let suffix = 1
+
+            while (true) {
+                const name = suffix === 1 ? localName : `${localName}-${suffix}`
+                const candidate = baseDir ? `${baseDir}/${name}${ext}` : `${name}${ext}`
+                const key = candidate.toLowerCase()
+
+                if (!allocatedPaths.has(key)) {
+                    allocatedPaths.add(key)
+                    return candidate
+                }
+
+                suffix += 1
+            }
+        }
+        const fileStem = (filePath) => filePath.replace(/\.md$/i, '')
         const resolve = (record_id) => {
             if (resolveCache.has(record_id)) return resolveCache.get(record_id)
             const rec = rawMap.get(record_id)
@@ -70,20 +89,21 @@ class MilvusSdkDocsGen extends MilvusDocsGen {
                 parentDir = resolve(rec.parent).dirPath
             }
 
-            const basePath = parentDir ? `${parentDir}/${localName}` : localName
-
             const hasChildren = [...rawMap.values()].some(r => r.parent === record_id)
 
             let result
             if (type === 'Class' && hasChildren) {
                 // Has own overview file AND serves as a directory for its methods
-                result = { pageId: `${basePath}/${localName}.md`, dirPath: basePath }
+                const dirPath = allocateCaseInsensitivePath(parentDir, localName)
+                result = { pageId: allocateCaseInsensitivePath(dirPath, localName, '.md'), dirPath }
             } else if (type === 'Class' || type === 'Function' || type === 'Enum') {
                 // Leaf file only
-                result = { pageId: `${basePath}.md`, dirPath: basePath }
+                const pageId = allocateCaseInsensitivePath(parentDir, localName, '.md')
+                result = { pageId, dirPath: fileStem(pageId) }
             } else {
                 // VirtualNode, Module — folder only, no file written
-                result = { pageId: basePath, dirPath: basePath }
+                const dirPath = allocateCaseInsensitivePath(parentDir, localName)
+                result = { pageId: dirPath, dirPath }
             }
 
             resolveCache.set(record_id, result)

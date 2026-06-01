@@ -33,7 +33,7 @@ JinaRerankFunction(
 from pymilvus.model.reranker import JinaRerankFunction
 
 jina_rf = JinaRerankFunction(
-    model_name="jina-reranker-v2-base-multilingual", # Defaults to `jina-reranker-v2-base-multilingual`
+    model_name="jina-reranker-v2-base-multilingual", # Defaults to \`jina-reranker-v2-base-multilingual\`
     api_key="YOUR_JINAAI_API_KEY"
 )
 ```

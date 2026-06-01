@@ -99,7 +99,7 @@ read_only_privileges = [
   {"object_type": "Global", "object_name": "*", "privilege": "DescribeCollection"},
   # ShowCollections permission on all collections
   {"object_type": "Global", "object_name": "*", "privilege": "ShowCollections"},
-  # Search permission on the specified `quick_setup` collection
+  # Search permission on the specified \`quick_setup\` collection
   {"object_type": "Collection", "object_name": "quick_setup", "privilege": "Search"},
   # Query permission on all collections
   {"object_type": "Collection", "object_name": "*", "privilege": "Query"}

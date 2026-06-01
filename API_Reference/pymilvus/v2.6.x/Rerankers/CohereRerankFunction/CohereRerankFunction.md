@@ -34,7 +34,7 @@ from pymilvus.model.reranker import CohereRerankFunction
 
 # Define the rerank function
 cohere_rf = CohereRerankFunction(
-    model_name="rerank-english-v3.0",  # Specify the model name. Defaults to `rerank-english-v2.0`.
+    model_name="rerank-english-v3.0",  # Specify the model name. Defaults to \`rerank-english-v2.0\`.
     api_key=COHERE_API_KEY # Replace with your Cohere API key
 )
 ```

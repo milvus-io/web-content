@@ -1,6 +1,6 @@
 # construct_from_dict()
 
-This operation constructs a **[CollectionSchema](../../MilvusClient/CollectionSchema/CollectionSchema.md)** object from a dictionary representation.
+This operation constructs a **[CollectionSchema](https://zilliverse.feishu.cn/docx/U4Q8deNe2offXCx3OgIc9QJPnnh)** object from a dictionary representation.
 
 ## Request Syntax
 
@@ -18,11 +18,11 @@ construct_from_dict(
 
 **RETURN TYPE:**
 
-*[CollectionSchema](../../MilvusClient/CollectionSchema/CollectionSchema.md)*
+*[CollectionSchema](https://zilliverse.feishu.cn/docx/U4Q8deNe2offXCx3OgIc9QJPnnh)*
 
 **RETURNS:**
 
-A **[CollectionSchema](../../MilvusClient/CollectionSchema/CollectionSchema.md)** object.
+A **[CollectionSchema](https://zilliverse.feishu.cn/docx/U4Q8deNe2offXCx3OgIc9QJPnnh)** object.
 
 **EXCEPTIONS:**
 

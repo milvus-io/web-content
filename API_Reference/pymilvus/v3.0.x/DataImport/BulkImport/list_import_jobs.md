@@ -1,119 +1,97 @@
 # list_import_jobs()
 
-This operation lists all bulk-import jobs of a specific cluster.
+This function lists bulk import jobs with optional collection and pagination filters, including project/region filters for project databases.
 
-## Request syntax
+## Request Syntax
 
 ```python
 list_import_jobs(
     url: str,
-    collection_name: str
-) -> requests.Response
+    collection_name: str = "",
+    db_name: str = "",
+    cluster_id: str = "",
+    project_id: str = "",
+    region_id: str = "",
+    api_key: str = "",
+    page_size: int = 10,
+    current_page: int = 1,
+    
+    verify: bool | str = True,
+    cert: str | tuple | None = None,
+    **kwargs,
+)
 ```
 
 **PARAMETERS:**
 
-- **url** (*string*) -
+- **url** (*str*) -
 
     **[REQUIRED]**
 
-    The URI of your Milvus instance.
+    Server endpoint for bulk import APIs.
 
-- **collection_name** (*string*) -
+- **collection_name** (*str*) -
 
-    The name of a collection.
+    Optional collection filter.
+
+- **db_name** (*str*) -
+
+    Optional database filter.
+
+- **cluster_id** (*str*) -
+
+    Cloud cluster ID.
+
+- **api_key** (*str*) -
+
+    API key for cloud authentication.
+
+- **page_size** (*int*) -
+
+    Number of jobs returned per page.
+
+- **current_page** (*int*) -
+
+    Page number to query.
+
+- **verify** (*bool | str*) -
+
+    TLS verification setting.
+
+- **cert** (*str | tuple*) -
+
+    Client certificate path or `(cert, key)` tuple.
+
+- **project_id** (*str*) -
+
+    Additional HTTP request options.
 
 **RETURN TYPE:**
+*requests.Response*
 
-*dict*
+Returns the paginated list of import jobs.
 
-**RETURNS:**
-
-- Response syntax
-
-    ```python
-    # {
-    #     "code": 0,
-    #     "data": {
-    #         "records": [
-    #             {
-    #                 "collectionName": "quick_setup",
-    #                 "jobId": "453240863839750922",
-    #                 "progress": 100,
-    #                 "state": "Completed"
-    #             }
-    #         ]
-    #     }
-    # }
-    ```
-
-- Response structure
-
-    - **records** (*list*) -
-
-        The list of import jobs.
-
-        - **collectionName** (*string*) -
-
-            The name of the target collection of this bulk-import job.
-
-        - **jobId** (*string*) -
-
-            The ID of this bulk-import job.
-
-        - **progress** (*string*) - 
-
-            The progress of the job.
-
-        - **state** (*string*) -
-
-            The state of this bulk-import job. Possible values are as follows:
-
-            - **Pending**: The tasks are awaiting scheduling and execution;
-
-            - **Importing**: The tasks are currently being executed;
-
-            - **Completed**: The tasks have been successfully completed;
-
-            - **Failed**: The tasks encountered a failure.
+HTTP response containing paged import job summaries.
 
 **EXCEPTIONS:**
 
-None
+- **MilvusException**
+
+    Raised when listing jobs fails.
 
 ## Examples
 
 ```python
 from pymilvus.bulk_writer import list_import_jobs
-import json
 
-url = f"http://127.0.0.1:19530"
-
-# List bulk-insert jobs
 resp = list_import_jobs(
-    url=url,
-    collection_name="quick_setup",
+    url="http://localhost:19530",
+    api_key="username:password",
+    collection_name="book_catalog",
+    page_size=20,
+    current_page=1,
 )
 
-print(json.dumps(resp.json(), indent=4, sort_keys=True))
-# {
-#     "code": 0,
-#     "data": {
-#         "records": [
-#             {
-#                 "collectionName": "quick_setup",
-#                 "jobId": "453240863839750922",
-#                 "progress": 100,
-#                 "state": "Completed"
-#             }
-#         ]
-#     }
-# }
+print(resp.json())
 ```
-
-## Related methods
-
-- [bulk_import()](https://zilliverse.feishu.cn/docx/RFSCdiUYGouQrtx8c1RczPVvnmf)
-
-- [get_import_progress()](get_import_progress.md)
 

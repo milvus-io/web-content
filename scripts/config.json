@@ -62,6 +62,18 @@
           "alt_texts": []
         }
       },
+      "pymilvus-v3.0.x": {
+        "base": "Hk05b5eI6aXXSSsd6j9cqwwMn5a:tblKV2Wj45qrmD0J",
+        "sourceType": "drive",
+        "language": "python",
+        "targets": {
+          "outputDir": "API_Reference/pymilvus/v3.0.x",
+          "imageDir": "assets"
+        },
+        "images": {
+          "alt_texts": []
+        }
+      },
       "java-v2.4.x": {
         "base": "WqHJb3zimaxXjssk4Kic4GEDnte:tbl5bsj6PQ0uDIyn",
         "sourceType": "drive",

@@ -1,6 +1,14 @@
 # compact()
 
-This operation compacts the collection by merging small segments into larger ones. It is recommended to call this operation after inserting a large amount of data into a collection.
+- **kwargs** (*dict*) -
+
+    Optional request context parameters.
+
+- **ParamError**
+
+    Raised when `target_size` is not an integer or when `target_size_unit` is invalid.
+
+This operation starts a compaction job that merges small segments in a collection to improve storage layout and query efficiency.
 
 ## Request Syntax
 
@@ -12,7 +20,7 @@ compact(
     target_size: Optional[int] = None,
     target_size_unit: str = "mb",
     timeout: Optional[float] = None,
-    **kwargs
+    **kwargs,
 ) -> int
 ```
 
@@ -32,15 +40,15 @@ compact(
 
     Whether to perform an L0 compaction, which specifically handles L0 segments by merging delete operations into existing data segments. Defaults to **False**.
 
-- **target_size** *(Optional[int])* - 
+- **target_size** (*int*) -
 
     Target segment size after compaction. Must be a positive integer. The unit is specified by **target_size_unit** (default MB). If not provided, the server uses its default target size.
 
-- **target_size_unit** *(str)* -
+- **target_size_unit** (*str*) -
 
 Unit for target_size. Supported values: "b", "kb", "mb" (default), "gb", "tb", "pb". The value is converted to MB before being sent to the server.
 
-- **timeout** (*Optional[float]*) -
+- **timeout** (*float*) -
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
@@ -48,7 +56,7 @@ Unit for target_size. Supported values: "b", "kb", "mb" (default), "gb", "tb", "
 
 *int*
 
-**RETURNS:**
+Compaction job ID for follow-up status queries.
 
 A compaction job ID, which can be used to get the compaction status.
 
@@ -63,35 +71,13 @@ A compaction job ID, which can be used to get the compaction status.
 ```python
 from pymilvus import MilvusClient
 
-client = MilvusClient(
-    uri="http://localhost:19530",
-    token="root:Milvus"
-)
-
-# Standard compaction
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
 job_id = client.compact(
-    collection_name="my_collection"
+    collection_name="book_catalog",
+    is_clustering=True,
+    target_size=512,
+    target_size_unit="mb",
 )
 
-# Clustering compaction
-job_id = client.compact(
-    collection_name="my_collection",
-    is_clustering=True
-)
-
-# L0 compaction
-job_id = client.compact(
-    collection_name="my_collection",
-    is_l0=True
-)
-
-#Force merge compaction
-job_id = client.compact(
-    collection_name="target_collection",
-    target_size="2048 MB"  
-)
-
-# Check compaction status
-state = client.get_compaction_state(job_id)
-print(state)
+print(job_id)
 ```

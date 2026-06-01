@@ -27,4 +27,11 @@ module.exports = [
     target: 'scripts/lib',
     include: [/^lark.*\.js$/],
   },
+  {
+    name: 'zdoc-mdx-parse',
+    sourceType: 'local',
+    source: '../zdoc/plugins/mdx-parse',
+    target: 'scripts/mdx-parse',
+    include: [/^mdxPatcher\.js$/],
+  },
 ];

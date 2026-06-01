@@ -200,7 +200,6 @@ search_param_1 = {
     "data": [query_dense_vector],
     "anns_field": "dense",
     "param": {
-        "metric_type": "IP",
         "params": {"nprobe": 10}
     },
     "limit": 2
@@ -212,7 +211,6 @@ search_param_2 = {
     "data": [query_sparse_vector],
     "anns_field": "sparse",
     "param": {
-        "metric_type": "IP",
         "params": {}
     },
     "limit": 2

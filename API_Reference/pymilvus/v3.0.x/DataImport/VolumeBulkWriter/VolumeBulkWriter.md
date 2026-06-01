@@ -24,7 +24,7 @@ VolumeBulkWriter(
 
 **PARAMETERS:**
 
-- **schema** (*[CollectionSchema](../../MilvusClient/CollectionSchema/CollectionSchema.md)*) -
+- **schema** (*[CollectionSchema](https://zilliverse.feishu.cn/docx/U4Q8deNe2offXCx3OgIc9QJPnnh)*) -
 
     **[REQUIRED]**
 

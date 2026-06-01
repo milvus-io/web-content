@@ -53,12 +53,12 @@ client = MilvusClient(
 # 2. Create a collection
 client.create_collection(collection_name="test_collection", dimension=5)
 
-# 3. Check whether a collection named `test_collection` exists
+# 3. Check whether a collection named \`test_collection\` exists
 client.has_collection(collection_name="test_collection") 
 
 # True
 
-# 4. Check whether a collection named `test_collection_2` exists
+# 4. Check whether a collection named \`test_collection_2\` exists
 client.has_collection(collection_name="test_collection_2") 
 
 # False

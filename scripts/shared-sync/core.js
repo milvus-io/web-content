@@ -1,7 +1,7 @@
 const path = require('node:path');
 const fs = require('node:fs/promises');
 
-const ALLOWED_TARGETS = ['scripts/lib', 'scripts/apifox-docs', 'scripts/lark-docs'];
+const ALLOWED_TARGETS = ['scripts/lib', 'scripts/apifox-docs', 'scripts/lark-docs', 'scripts/mdx-parse'];
 
 function assertAllowedTarget(absTargetPath, repoRoot) {
   const allowedAbsTargets = ALLOWED_TARGETS.map((target) => path.resolve(repoRoot, target));

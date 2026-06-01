@@ -32,6 +32,25 @@ test('sync manifest keeps scripts/lib ownership split between milvus and zdoc la
   assert.equal(zdocLib.include.some((pattern) => pattern.test('milvusDocsGen.js')), false);
 });
 
+test('sync manifest includes the mdx patcher dependency used by larkDocWriter', async () => {
+  const entry = syncManifest.find((item) => item.name === 'zdoc-mdx-parse');
+
+  assert.equal(entry.sourceType, 'local');
+  assert.equal(entry.source, '../zdoc/plugins/mdx-parse');
+  assert.equal(entry.target, 'scripts/mdx-parse');
+  assert.equal(entry.include.some((pattern) => pattern.test('mdxPatcher.js')), true);
+
+  const plan = await buildSyncPlan({
+    manifest: [entry],
+    repoRoot: '/tmp/repo',
+    fetchImpl: async () => {
+      throw new Error('fetch should not be called for local entries');
+    },
+  });
+
+  assert.equal(plan[0].targetAbsPath, '/tmp/repo/scripts/mdx-parse');
+});
+
 test('lark-docs entrypoint imports shared generators and translator imports local lark token fetcher', () => {
   const scriptsDir = path.resolve(__dirname, '..');
   const larkDocsDir = path.join(scriptsDir, 'lark-docs');

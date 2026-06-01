@@ -148,7 +148,7 @@ except Exception:
     
 # Succeeded in creating resource group rg.
 
-# Describe the details of the created resource group `rg`
+# Describe the details of the created resource group \`rg\`
 
 info = utility.describe_resource_group(name='rg')
 

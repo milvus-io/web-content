@@ -1,14 +1,16 @@
 #!/usr/bin/env node
+const path = require('node:path')
+require('dotenv').config({ path: path.resolve(__dirname, '..', '..', '.env') })
+process.env.DOTENV_CONFIG_QUIET = process.env.DOTENV_CONFIG_QUIET || 'true'
+
 const { program } = require('commander')
 const MilvusDocsGen = require('../lib/milvusDocsGen.js')
 const MilvusSdkDocsGen = require('../lib/milvusSdkDocsGen.js')
 const fs = require('node:fs')
-const path = require('node:path')
-require('dotenv/config')
 
 program
     .name('fetch-milvus-docs')
-    .description('Fetch and generate Milvus guide docs from Feishu bitable')
+    .description('Fetch and generate Milvus guide and SDK docs from Feishu bitable')
     .requiredOption('-c, --config <config>', 'Path to config JSON')
     .requiredOption('-m, --manual <manual>', 'Name of the manual to publish')
     .option('-d, --doc <doc>', 'Title of the document or parent node')
