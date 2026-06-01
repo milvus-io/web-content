@@ -65,7 +65,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Drop the `mmap.enabled` property
+// 2. Drop the \`mmap.enabled\` property
 List<String> propertyKeys = new ArrayList<>()
 propertyKeys.add("mmap.enabled")
 

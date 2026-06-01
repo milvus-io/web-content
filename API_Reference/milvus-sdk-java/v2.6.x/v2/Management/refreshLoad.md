@@ -66,7 +66,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Refresh the load status of the collection `test`
+// 2. Refresh the load status of the collection \`test\`
 RefreshLoadReq refreshLoadReq = RefreshLoadReq.builder()
         .collectionName("test")
         .build();
