@@ -53,37 +53,16 @@ class MilvusSdkDocsGen extends MilvusDocsGen {
         // dir_path = the directory path this record contributes (used as parent for children).
         // page_id  = the file path to write (ends in .md) or folder path (no .md, skipped).
         const resolveCache = new Map()
-        const allocatedPaths = new Set()
-        const allocateCaseInsensitivePath = (parentDir, localName, ext='') => {
-            const baseDir = parentDir || ''
-            let suffix = 1
-
-            while (true) {
-                const name = suffix === 1 ? localName : `${localName}-${suffix}`
-                const candidate = baseDir ? `${baseDir}/${name}${ext}` : `${name}${ext}`
-                const key = candidate.toLowerCase()
-
-                if (!allocatedPaths.has(key)) {
-                    allocatedPaths.add(key)
-                    return candidate
-                }
-
-                suffix += 1
-            }
-        }
-        const localNameFromSlug = (slug) => {
-            // Use lastIndexOf so slugs with a version prefix (e.g. "v2-Category-method")
-            // correctly extract just the trailing local name segment.
-            const hyphenIdx = slug.lastIndexOf('-')
-            return hyphenIdx === -1 ? slug : slug.slice(hyphenIdx + 1)
-        }
-        const fileStem = (filePath) => filePath.replace(/\.md$/i, '')
         const resolve = (record_id) => {
             if (resolveCache.has(record_id)) return resolveCache.get(record_id)
             const rec = rawMap.get(record_id)
             if (!rec) return { pageId: '', dirPath: '' }
 
-            const localName = localNameFromSlug(rec.slug)
+            const slug = rec.slug
+            // Use lastIndexOf so slugs with a version prefix (e.g. "v2-Category-method")
+            // correctly extract just the trailing local name segment.
+            const hyphenIdx = slug.lastIndexOf('-')
+            const localName = hyphenIdx === -1 ? slug : slug.slice(hyphenIdx + 1)
             const type = rec.type
 
             let parentDir = ''
@@ -91,29 +70,20 @@ class MilvusSdkDocsGen extends MilvusDocsGen {
                 parentDir = resolve(rec.parent).dirPath
             }
 
+            const basePath = parentDir ? `${parentDir}/${localName}` : localName
+
             const hasChildren = [...rawMap.values()].some(r => r.parent === record_id)
 
             let result
             if (type === 'Class' && hasChildren) {
                 // Has own overview file AND serves as a directory for its methods
-                const dirPath = allocateCaseInsensitivePath(parentDir, localName)
-                result = { pageId: allocateCaseInsensitivePath(dirPath, localName, '.md'), dirPath }
+                result = { pageId: `${basePath}/${localName}.md`, dirPath: basePath }
             } else if (type === 'Class' || type === 'Function' || type === 'Enum') {
                 // Leaf file only
-                const pageId = allocateCaseInsensitivePath(parentDir, localName, '.md')
-                result = { pageId, dirPath: fileStem(pageId) }
+                result = { pageId: `${basePath}.md`, dirPath: basePath }
             } else {
                 // VirtualNode, Module — folder only, no file written
-                const classSibling = [...rawMap.values()].find(r =>
-                    r.record_id !== record_id &&
-                    r.parent === rec.parent &&
-                    r.type === 'Class' &&
-                    localNameFromSlug(r.slug).toLowerCase() === localName.toLowerCase()
-                )
-                const dirPath = classSibling
-                    ? resolve(classSibling.record_id).dirPath
-                    : allocateCaseInsensitivePath(parentDir, localName)
-                result = { pageId: dirPath, dirPath }
+                result = { pageId: basePath, dirPath: basePath }
             }
 
             resolveCache.set(record_id, result)
