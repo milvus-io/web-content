@@ -3702,10 +3702,10 @@
           },
           "dimension": {
             "type": "integer",
-            "description": "The number of dimensions a vector value should have.\nThis is required if **dtype** of this field is set to **DataType.FLOAT\\_VECTOR** or **DataType.Binary\\_VECTOR**.",
+            "description": "The number of dimensions a vector value should have.\nThis is required if **idType** of this field is set to **DataType.FLOAT\\_VECTOR** or **DataType.Binary\\_VECTOR**.",
             "x-i18n": {
               "zh-CN": {
-                "description": "向量值的维度数。\n若该字段的 **dtype** 为 **DataType.FLOAT\\_VECTOR** 或 **DataType.Binary\\_VECTOR**，则该字段为必填项。"
+                "description": "向量值的维度数。\n若该字段的 **idType** 为 **DataType.FLOAT\\_VECTOR** 或 **DataType.Binary\\_VECTOR**，则该字段为必填项。"
               }
             }
           },

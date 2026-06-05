@@ -118,6 +118,15 @@
                             }
                           }
                         },
+                        "indexType": {
+                          "type": "string",
+                          "description": "The type of the index to create",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "要创建的索引类型。"
+                            }
+                          }
+                        },
                         "params": {
                           "description": "The index type and related settings. For details, refer to [Vector Indexes](https://milvus.io/docs/index.md).",
                           "x-i18n": {
@@ -127,15 +136,6 @@
                           },
                           "type": "object",
                           "properties": {
-                            "index_type": {
-                              "type": "string",
-                              "description": "The type of the index to create",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "要创建的索引类型。"
-                                }
-                              }
-                            },
                             "M": {
                               "type": "integer",
                               "description": "The maximum degree of the node. This applies only when **index_type** is set to **HNSW**.",
@@ -163,22 +163,14 @@
                                 }
                               }
                             }
-                          },
-                          "x-i18n-langs": [
-                            "zh-CN"
-                          ],
-                          "required": [
-                            "index_type"
-                          ]
+                          }
                         }
                       },
-                      "x-i18n-langs": [
-                        "zh-CN"
-                      ],
                       "required": [
                         "metricType",
                         "fieldName",
-                        "indexName"
+                        "indexName",
+                        "indexType"
                       ]
                     },
                     "description": "The parameters that apply to the index-building process.",
@@ -198,15 +190,23 @@
                 ]
               },
               "example": {
-                "collectionName": "custom_setup_not_indexed",
+                "collectionName": "my_collection",
                 "indexParams": [
                   {
                     "metricType": "L2",
                     "fieldName": "my_vector",
                     "indexName": "my_vector",
-                    "indexConfig": {
-                      "index_type": "AUTOINDEX"
-                    }
+                    "indexType": "AUTOINDEX"
+                  },
+                  {
+                    "fieldName": "my_varchar",
+                    "indexName": "my_varchar",
+                    "indexType": "INVERTED"
+                  },
+                  {
+                    "fieldName": "my_int",
+                    "indexName": "my_int",
+                    "indexType": "STL_SORT"
                   }
                 ]
               }
@@ -432,15 +432,6 @@
                           },
                           "type": "object",
                           "properties": {
-                            "fieldName": {
-                              "type": "string",
-                              "description": "The name of the target field.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "目标字段的名称。"
-                                }
-                              }
-                            },
                             "indexName": {
                               "type": "string",
                               "description": "The name of the index.",
@@ -450,14 +441,14 @@
                                 }
                               }
                             },
-                            "indexState": {
-                              "description": "The status of the indexing progress.",
+                            "fieldName": {
+                              "type": "string",
+                              "description": "The name of the target field.",
                               "x-i18n": {
                                 "zh-CN": {
-                                  "description": "索引当前状态。"
+                                  "description": "目标字段的名称。"
                                 }
-                              },
-                              "type": "string"
+                              }
                             },
                             "indexType": {
                               "type": "string",
@@ -465,15 +456,6 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "当前索引的类型。"
-                                }
-                              }
-                            },
-                            "indexedRows": {
-                              "type": "integer",
-                              "description": "The total number of entities/rows that have been indexed.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "已索引的 Entity 总数或行数。"
                                 }
                               }
                             },
@@ -486,14 +468,37 @@
                                 }
                               }
                             },
-                            "pendingRows": {
-                              "type": "integer",
-                              "description": "The number of entities/rows that are waiting to be indexed.",
+                            "mmap.enabled": {
+                              "type": "string",
+                              "description": "Whether memory mapping is enabled for this index.",
                               "x-i18n": {
                                 "zh-CN": {
-                                  "description": "等待被索引的 Entity 总数或行数。"
+                                  "description": "是否为当前索引启用内存映射。"
                                 }
                               }
+                            },
+                            "indexoffsetcache.enabled": {
+                              "type": "string",
+                              "description": "Whether to cache the index offset in memory.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "是否将索引偏移量缓存在内存中。"
+                                }
+                              }
+                            },
+                            "warmup": {
+                              "type": "string",
+                              "description": "Whether to load the index into memory when the index is created or updated.<ul><li><b>sync</b>: Warm up before a segment is considered loaded</li><li><b>async</b>: Warm up in background after load</li><li><b>disable</b>: Do not proactively warm up; load on demand</li></ul>",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "在创建或更新索引时是否将索引加载到内存中。<ul><li><b>sync</b>: 在一个 segment 被认为已加载之前进行预热</li><li><b>async</b>: 在加载后后台进行预热</li><li><b>disable</b>: 不主动预热；按需加载</li></ul>"
+                                }
+                              },
+                              "enum": [
+                                "sync",
+                                "async",
+                                "disable"
+                              ]
                             },
                             "totalRows": {
                               "type": "integer",
@@ -504,12 +509,89 @@
                                 }
                               }
                             },
+                            "pendingRows": {
+                              "type": "integer",
+                              "description": "The number of entities/rows that are waiting to be indexed.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "等待被索引的 Entity 总数或行数。"
+                                }
+                              }
+                            },
+                            "indexedRows": {
+                              "type": "integer",
+                              "description": "The total number of entities/rows that have been indexed.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "已索引的 Entity 总数或行数。"
+                                }
+                              }
+                            },
+                            "indexState": {
+                              "description": "The status of the indexing progress.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "索引当前状态。"
+                                }
+                              },
+                              "type": "string"
+                            },
                             "failReason": {
                               "type": "string",
                               "description": "The reason for the failure to build indexes.",
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "构建索引失败的原因。"
+                                }
+                              }
+                            },
+                            "minIndexVersion": {
+                              "type": "string",
+                              "description": "The minimum version of the index.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "索引的最低版本。"
+                                }
+                              }
+                            },
+                            "maxIndexVersion": {
+                              "type": "string",
+                              "description": "The maximum version of the index.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "索引的最高版本。"
+                                }
+                              }
+                            },
+                            "indexParams": {
+                              "type": "array",
+                              "description": "The index parameters used to build the index in a list of key-value pairs.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "用于构建索引的索引参数，以键值对的形式列出。"
+                                }
+                              },
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "key": {
+                                    "type": "string",
+                                    "description": "The name of the index parameter.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "索引参数的名称。"
+                                      }
+                                    }
+                                  },
+                                  "value": {
+                                    "type": "string",
+                                    "description": "The value of the index parameter.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "索引参数的值。"
+                                      }
+                                    }
+                                  }
                                 }
                               }
                             }
@@ -562,24 +644,70 @@
                   "1": {
                     "summary": "success",
                     "x-target-response": "OPTION 1",
+                    "x-include-target": [
+                      "milvus"
+                    ],
                     "value": {
                       "code": 0,
                       "data": [
                         {
-                          "failReason": "",
-                          "fieldName": "vector",
-                          "indexName": "vector",
-                          "indexState": "Finished",
-                          "indexType": "",
-                          "indexedRows": 0,
+                          "indexName": "embedding_idx",
+                          "fieldName": "embedding",
+                          "indexType": "IVF_FLAT",
                           "metricType": "COSINE",
+                          "mmap.enabled": "false",
+                          "indexoffsetcache.enabled": "false",
+                          "warmup": "sync",
+                          "totalRows": 10000,
                           "pendingRows": 0,
-                          "totalRows": 0
+                          "indexedRows": 10000,
+                          "indexState": "Finished",
+                          "failReason": "",
+                          "minIndexVersion": 0,
+                          "maxIndexVersion": 0,
+                          "indexParams": [
+                            { "key": "index_type", "value": "IVF_FLAT" },
+                            { "key": "metric_type", "value": "L2" },
+                            { "key": "params", "value": "{\"nlist\":128}" }
+                          ]
                         }
                       ]
                     }
                   },
                   "2": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-include-target": [
+                      "zilliz"
+                    ],
+                    "value": {
+                      "code": 0,
+                      "data": [
+                        {
+                          "indexName": "embedding_idx",
+                          "fieldName": "embedding",
+                          "indexType": "AUTOINDEX",
+                          "metricType": "COSINE",
+                          "mmap.enabled": "false",
+                          "indexoffsetcache.enabled": "false",
+                          "warmup": "sync",
+                          "totalRows": 10000,
+                          "pendingRows": 0,
+                          "indexedRows": 10000,
+                          "indexState": "Finished",
+                          "failReason": "",
+                          "minIndexVersion": 0,
+                          "maxIndexVersion": 0,
+                          "indexParams": [
+                            { "key": "index_type", "value": "AUTOINDEX" },
+                            { "key": "metric_type", "value": "COSINE" },
+                            { "key": "params", "value": "{}" }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "3": {
                     "summary": "failure",
                     "x-target-response": "OPTION 2",
                     "value": {
@@ -655,6 +783,29 @@
                             "description": "是否为当前索引启用内存映射。"
                           }
                         }
+                      },
+                      "indexoffsetcache.enabled": {
+                        "type": "boolean",
+                        "description": "Whether to cache the index offset in memory.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "是否将索引偏移量缓存在内存中。"
+                          }
+                        }
+                      },
+                      "warmup": {
+                        "type": "boolean",
+                        "description": "Whether to warm up the index.<ul><li><b>sync</b>: Warm up before a segment is considered loaded</li><li><b>async</b>: Warm up in background after load</li><li><b>disable</b>: Do not proactively warm up; load on demand</li></ul>",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "是否预热索引。<ul><li><b>sync</b>: 在一个 segment 被认为已加载之前进行预热</li><li><b>async</b>: 在加载后后台进行预热</li><li><b>disable</b>: 不主动预热；按需加载</li></ul>"
+                          }
+                        },
+                        "enum": [
+                          "sync",
+                          "async",
+                          "disable"
+                        ]
                       }
                     }
                   }
@@ -851,7 +1002,9 @@
                         }
                       },
                       "enum": [
-                        "mmap.enabled"
+                        "mmap.enabled",
+                        "indexoffsetcache.enabled",
+                        "warmup"
                       ]
                     }
                   }

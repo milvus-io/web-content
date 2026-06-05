@@ -1663,11 +1663,11 @@
                                 }
                               },
                               "createTime": {
-                                "type": "integer",
-                                "description": "Timestamp at which the cluster is created.",
+                                "type": "string",
+                                "description": "Time at which the cluster is created in UTC ISO-8601 format.",
                                 "x-i18n": {
                                   "zh-CN": {
-                                    "description": "创建当前集群时的时间戳。"
+                                    "description": "集群创建时间，UTC ISO-8601 格式。"
                                   }
                                 }
                               },
@@ -1712,7 +1712,7 @@
                             "endpoint": "https://proj-xxxxxxxxxxxxxxx.aws-us-west-2.api.zillizcloud.com",
                             "privateLink": "",
                             "createdBy": "john.doe@zilliz.com",
-                            "createTime": 1745396115000,
+                            "createTime": "2024-04-21T10:15:15Z",
                             "autoSuspend": 60
                           },
                           {
@@ -1725,7 +1725,7 @@
                             "endpoint": "https://proj-xxxxxxxxxxxxxxx.aws-us-west-2.api.zillizcloud.com",
                             "privateLink": "",
                             "createdBy": "john.doe@zilliz.com",
-                            "createTime": 1745396116450,
+                            "createTime": "2024-04-21T10:15:16Z",
                             "autoSuspend": 60
                           }
                         ]
@@ -1750,7 +1750,7 @@
                             "endpoint": "https://proj-xxxxxxxxxxxxxxx.ali-cn-beijing.api.cloud.zilliz.com.cn",
                             "privateLink": "",
                             "createdBy": "john.doe@zilliz.com",
-                            "createTime": 1745396115000,
+                            "createTime": "2024-04-21T10:15:15Z",
                             "autoSuspend": 60
                           },
                           {
@@ -1763,7 +1763,7 @@
                             "endpoint": "https://proj-xxxxxxxxxxxxxxx.ali-cn-beijing.api.cloud.zilliz.com.cn",
                             "privateLink": "",
                             "createdBy": "john.doe@zilliz.com",
-                            "createTime": 1745396116450,
+                            "createTime": "2024-04-21T10:15:16Z",
                             "autoSuspend": 60
                           }
                         ]
@@ -2126,10 +2126,10 @@
                               }
                             },
                             "createTime": {
-                              "type": "integer",
-                              "description": "Timestamp at which the cluster is created.",
+                              "type": "string",
+                              "description": "Time at which the cluster is created in UTC ISO-8601 format.",
                               "x-i18n": {
-                                "zh-CN": "创建当前集群时的时间戳。"
+                                "zh-CN": "集群创建时间，UTC ISO-8601 格式。"
                               }
                             },
                             "autoSuspend": {
@@ -2161,7 +2161,7 @@
                         "endpoint": "https://proj-xxxxxxxxxxxxxxx.aws-us-west-2.api.zillizcloud.com",
                         "privateLink": "",
                         "createdBy": "john.doe@zilliz.com",
-                        "createTime": 1745396115000,
+                        "createTime": "2024-04-21T10:15:15Z",
                         "autoSuspend": 60
                       }
                     }
@@ -2181,7 +2181,7 @@
                         "endpoint": "https://proj-xxxxxxxxxxxxxxx.ali-cn-beijing.api.zilliz.com.cn",
                         "privateLink": "",
                         "createdBy": "john.doe@zilliz.com",
-                        "createTime": 1745396115000,
+                        "createTime": "2024-04-21T10:15:15Z",
                         "autoSuspend": 60
                       }
                     }
