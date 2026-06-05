@@ -493,7 +493,6 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 -d "{
     \"collectionName\": \"my_collection\",
     \"schema\": $schema,
@@ -637,7 +636,6 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 -d '{
     "data": [
         {"id": 0, "text": "Red cotton t-shirt with round neck" , "text_dense": [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, ...], "image_dense": [0.6366019600530924, -0.09323198122475052, ...]},
@@ -978,7 +976,6 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/hybrid_search" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 -d "{
     \"collectionName\": \"my_collection\",
     \"search\": ${req},

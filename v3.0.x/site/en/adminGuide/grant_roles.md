@@ -104,7 +104,6 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/users/grant_role" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 -d '{
     "roleName": "role_a",
     "userName": "user_1"
@@ -158,7 +157,6 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/users/describe" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 -d '{
     "userName": "user_1"
 }'
@@ -222,7 +220,6 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/users/revoke_role" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 -d '{
     "userName": "user_1",
     "roleName": "role_a"

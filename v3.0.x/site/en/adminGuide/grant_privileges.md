@@ -528,7 +528,6 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/roles/grant_privilege_v2" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 -d '{
     "roleName": "role_a",
     "privilege": "Search",
@@ -540,7 +539,6 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/roles/grant_privilege_v2" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 -d '{
     "roleName": "role_a",
     "privilege": "privilege_group_1",
@@ -552,7 +550,6 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/roles/grant_privilege_v2" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 -d '{
     "roleName": "role_a",
     "privilege": "ClusterReadOnly",
@@ -610,7 +607,6 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/roles/describe" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 -d '{
     "roleName": "role_a"
 }'
@@ -745,7 +741,6 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/roles/revoke_privilege_v2" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 -d '{
     "roleName": "role_a",
     "privilege": "Search",
@@ -757,7 +752,6 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/roles/revoke_privilege_v2" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 -d '{
     "roleName": "role_a",
     "privilege": "Search",
@@ -769,7 +763,6 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/roles/revoke_privilege_v2" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 -d '{
     "roleName": "role_a",
     "privilege": "ClusterReadOnly",

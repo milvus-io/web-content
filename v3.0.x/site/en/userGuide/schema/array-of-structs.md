@@ -60,9 +60,41 @@ If your answers to the questions above are yes, you should use the StructArray.
 
     A Struct schema contains both vectors and scalar fields, as listed below:
 
-    - Applicable vector data types: `FLOAT_VECTOR`, `FLOAT16_VECTOR`, `BFLOAT16_VECTOR`, `INT8_VECTOR`, and `BINARY_VECTOR`.
+    <Grid columnSize="2" widthRatios="50,50">
 
-    - Applicable scalar data types: `VARCHAR`, `INT8/16/32/64`, `FLOAT`, `DOUBLE`, and `BOOL`.
+        <div>
+
+            Applicable vector fields:
+
+            - `FLOAT_VECTOR`
+
+            - `FLOAT16_VECTOR`
+
+            - `BFLOAT16_VECTOR`
+
+            - `INT8_VECTOR`
+
+            - `BINARY_VECTOR`
+
+        </div>
+
+        <div>
+
+            Applicable scalar fields:
+
+            - `VARCHAR`
+
+            - `INT8/16/32/64`
+
+            - `FLOAT`
+
+            - `DOUBLE`
+
+            - `BOOL`
+
+        </div>
+
+    </Grid>
 
     Keep the number of vector fields both at the collection level and in the Structs combined to be no greater than or equal to 10.
 
@@ -556,7 +588,6 @@ await milvusClient.createCollection({
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/collections/create" \
   -H "Content-Type: application/json" \
-  -H "Request-Timeout: 10" \
   -d "{
     \"collectionName\": \"my_collection\",
     \"description\": \"A collection for storing book information with struct array chunks\",
@@ -676,7 +707,6 @@ await milvusClient.insert({
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/entities/insert" \
   -H "Content-Type: application/json" \
-  -H "Request-Timeout: 10" \
   -d '{
     "collectionName": "my_collection",
     "data": [
@@ -883,7 +913,6 @@ embeddingList1='[[0.2,0.9,0.4,-0.3,0.2]]'
 embeddingList2='[[-0.2,-0.2,0.5,0.6,0.9],[-0.4,0.3,0.5,0.8,0.2]]'
 curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
   -H "Content-Type: application/json" \
-  -H "Request-Timeout: 10" \
   -d "{
     \"collectionName\": \"my_collection\",
     \"data\": [$embeddingList1],
@@ -1012,7 +1041,6 @@ const results2 = await milvusClient.search({
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
   -H "Content-Type: application/json" \
-  -H "Request-Timeout: 10" \
   -d "{
     \"collectionName\": \"my_collection\",
     \"data\": [$embeddingList1, $embeddingList2],
@@ -1160,3 +1188,4 @@ The match family operators work over a StructArray field too. Instead of simply 
 ## Next steps
 
 The development of a native StructArray data type represents a major advancement in Milvus's capability to handle complex data structures. To better understand its use cases and maximize this new feature, you are encouraged to read [Schema Design Using an Array of Structs](best-practices-for-array-of-structs.md).
+

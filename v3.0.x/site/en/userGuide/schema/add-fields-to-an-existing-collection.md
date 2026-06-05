@@ -144,7 +144,6 @@ await client.addCollectionField({
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/collections/fields/add" \
   -H "Content-Type: application/json" \
-  -H "Request-Timeout: 10" \
   -H "Authorization: Bearer <token>" \
   -d '{
     "collectionName": "product_catalog",
@@ -266,7 +265,6 @@ await client.addCollectionField({
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/collections/fields/add" \
   -H "Content-Type: application/json" \
-  -H "Request-Timeout: 10" \
   -H "Authorization: Bearer <token>" \
   -d '{
     "collectionName": "product_catalog",
@@ -383,7 +381,6 @@ await client.addCollectionField({
 # ❌ This is NOT supported
 curl -X POST "http://localhost:19530/v2/vectordb/collections/fields/add" \
   -H "Content-Type: application/json" \
-  -H "Request-Timeout: 10" \
   -H "Authorization: Bearer <token>" \
   -d '{
     "collectionName": "existing_collection",
@@ -533,7 +530,6 @@ export COLLECTION_NAME="product_catalog"
 echo "Step 1: Insert initial data with dynamic fields..."
 curl -X POST "http://${MILVUS_HOST}/v2/vectordb/entities/insert" \
   -H "Content-Type: application/json" \
-  -H "Request-Timeout: 10" \
   -H "Authorization: Bearer ${AUTH_TOKEN}" \
   -d "{
     \"collectionName\": \"${COLLECTION_NAME}\",
@@ -548,7 +544,6 @@ curl -X POST "http://${MILVUS_HOST}/v2/vectordb/entities/insert" \
 echo -e "\n\nStep 2: Add static field with same name as dynamic field..."
 curl -X POST "http://${MILVUS_HOST}/v2/vectordb/collections/fields/add" \
   -H "Content-Type: application/json" \
-  -H "Request-Timeout: 10" \
   -H "Authorization: Bearer ${AUTH_TOKEN}" \
   -d "{
     \"collectionName\": \"${COLLECTION_NAME}\",
@@ -562,7 +557,6 @@ curl -X POST "http://${MILVUS_HOST}/v2/vectordb/collections/fields/add" \
 echo -e "\n\nStep 3: Insert new data after adding static field..."
 curl -X POST "http://${MILVUS_HOST}/v2/vectordb/entities/insert" \
   -H "Content-Type: application/json" \
-  -H "Request-Timeout: 10" \
   -H "Authorization: Bearer ${AUTH_TOKEN}" \
   -d "{
     \"collectionName\": \"${COLLECTION_NAME}\",
@@ -674,7 +668,6 @@ export COLLECTION_NAME="product_catalog"
 echo "Query 1: Static field only (dynamic field masked)..."
 curl -X POST "http://${MILVUS_HOST}/v2/vectordb/entities/query" \
   -H "Content-Type: application/json" \
-  -H "Request-Timeout: 10" \
   -H "Authorization: Bearer ${AUTH_TOKEN}" \
   -d "{
     \"collectionName\": \"${COLLECTION_NAME}\",
@@ -685,7 +678,6 @@ curl -X POST "http://${MILVUS_HOST}/v2/vectordb/entities/query" \
 echo -e "\n\nQuery 2: Both static and original dynamic values..."
 curl -X POST "http://${MILVUS_HOST}/v2/vectordb/entities/query" \
   -H "Content-Type: application/json" \
-  -H "Request-Timeout: 10" \
   -H "Authorization: Bearer ${AUTH_TOKEN}" \
   -d "{
     \"collectionName\": \"${COLLECTION_NAME}\",
@@ -696,7 +688,6 @@ curl -X POST "http://${MILVUS_HOST}/v2/vectordb/entities/query" \
 echo -e "\n\nQuery 3: New entity with static field value..."
 curl -X POST "http://${MILVUS_HOST}/v2/vectordb/entities/query" \
   -H "Content-Type: application/json" \
-  -H "Request-Timeout: 10" \
   -H "Authorization: Bearer ${AUTH_TOKEN}" \
   -d "{
     \"collectionName\": \"${COLLECTION_NAME}\",

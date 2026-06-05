@@ -10,6 +10,10 @@ Entities in a collection are data records that share the same set of fields. Fie
 
 <div class="alert note">
 
+If you dynamically add new fields after the collection has been created, and you do not specify values for these fields when inserting entities, Milvus automatically populates them with either their defined default values or NULL if defaults are not set. For details, refer to [Add Fields to an Existing Collection](add-fields-to-an-existing-collection.md).
+
+<div class="alert note">
+
 - **Fields added after collection creation**: If you add new fields to a collection after creation and don't specify values during insertion, Milvus automatically populates them with defined default values or NULL if no defaults are set. For details, refer to [Add Fields to an Existing Collection](add-fields-to-an-existing-collection.md).
 
 - **Duplicate handling**: The standard `insert` operation does not check for duplicate primary keys. Inserting data with an existing primary key creates a new entity with the same key, leading to data duplication and potential application issues. To update existing entities or avoid duplicates, use the **`upsert`** operation instead. For more information, refer to [Upsert Entities](upsert-entities.md).
@@ -203,7 +207,6 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 -d '{
     "data": [
         {"id": 0, "vector": [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], "color": "pink_8682"},
@@ -384,7 +387,6 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 -d '{
     "data": [
         {"id": 10, "vector": [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], "color": "pink_8682"},
@@ -421,3 +423,4 @@ curl --request POST \
 #     }
 # }
 ```
+

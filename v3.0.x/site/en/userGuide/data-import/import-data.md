@@ -90,7 +90,6 @@ export MILVUS_URI="localhost:19530"
 
 curl --request POST "http://${MILVUS_URI}/v2/vectordb/jobs/import/create" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 --data-raw '{
     "files": [
         [
@@ -212,7 +211,6 @@ export MILVUS_URI="localhost:19530"
 
 curl --request POST "http://${MILVUS_URI}/v2/vectordb/jobs/import/describe" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 --data-raw '{
     "jobId": "449839014328146739"
 }'
@@ -298,7 +296,6 @@ export MILVUS_URI="localhost:19530"
 
 curl --request POST "http://${MILVUS_URI}/v2/vectordb/jobs/import/list" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 --data-raw '{
     "collectionName": "quick_setup"
 }'

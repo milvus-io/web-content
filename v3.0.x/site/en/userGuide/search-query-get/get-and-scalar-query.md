@@ -1,12 +1,12 @@
 ---
 id: get-and-scalar-query.md
 title: "Query"
-summary: "Use Query, Get, and QueryIterator to retrieve entities, filter metadata, sort query results, and aggregate scalar values in Milvus."
+summary: "Use Query, Get, and QueryIterator to retrieve entities and filter metadata in Milvus."
 ---
 
 # Query
 
-In addition to ANN searches, Milvus also supports metadata filtering through queries. This page introduces how to use Query, Get, and QueryIterators to retrieve entities, filter metadata, sort query results, and aggregate scalar values.
+In addition to ANN searches, Milvus also supports metadata filtering through queries. This page introduces how to use Query, Get, and QueryIterators to perform metadata filtering.
 
 <div class="alert note">
 
@@ -57,7 +57,7 @@ A Collection can store various types of scalar fields. You can have Milvus filte
    </tr>
 </table>
 
-For more on metadata filtering, refer to [Boolean Expression Rules](basic-operators.md).
+For more on metadata filtering, refer to .
 
 ## Use Get
 
@@ -196,7 +196,6 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/get" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 -d '{
     "collectionName": "my_collection",
     "id": [0, 1, 2],
@@ -298,7 +297,6 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 -d '{
     "collectionName": "my_collection",
     "filter": "color like \"red%\"",
@@ -441,198 +439,6 @@ page2 = client.query(
     # highlight-next-line
     order_by=["price:asc"],
 )
-```
-
-```java
-// java
-```
-
-```go
-// go
-```
-
-```javascript
-// nodejs
-```
-
-```bash
-# restful
-```
-
-### Aggregate Query Results | Milvus 3.0.x
-
-You can group query results by one or more scalar fields and compute aggregations per group. The supported aggregation operators are `count`, `min`, `max`, `sum`, and `avg`.
-
-When using `group_by_fields`, note that:
-
-- Supported field types for `group_by_fields`: `INT8`, `INT16`, `INT32`, `INT64`, `VARCHAR`, and `TIMESTAMPTZ`. Grouping by `FLOAT`, `DOUBLE`, vector, `JSON`, or `ARRAY` fields returns an error.
-
-- `sum` and `avg` are numeric only. You can apply them to numeric fields, including `FLOAT` and `DOUBLE`, but applying them to a `VARCHAR` field returns an error.
-
-To enable aggregation, pass `group_by_fields` to `query()` and add aggregation expressions (`count(*)`, `count(<field>)`, `min(<field>)`, `max(<field>)`, `sum(<field>)`, `avg(<field>)`) to `output_fields`.
-
-The following example groups entities by the `color` field and returns the number of entities in each color group:
-
-<div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
-
-```python
-from pymilvus import MilvusClient
-
-client = MilvusClient(
-    uri="http://localhost:19530",
-    token="root:Milvus"
-)
-
-res = client.query(
-    collection_name="my_collection",
-    filter="",
-    # highlight-start
-    group_by_fields=["color"],
-    output_fields=["color", "count(*)"],
-    # highlight-end
-)
-
-# [{'color': 'red',    'count(*)': 10},
-#  {'color': 'orange', 'count(*)': 10},
-#  {'color': 'yellow', 'count(*)': 10},
-#  {'color': 'green',  'count(*)': 10},
-#  {'color': 'blue',   'count(*)': 10}]
-```
-
-```java
-// java
-```
-
-```go
-// go
-```
-
-```javascript
-// nodejs
-```
-
-```bash
-# restful
-```
-
-You can request several aggregation expressions in a single call. The following example groups by `color` and returns the entity count, average price, and maximum rating for each group:
-
-<div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
-
-```python
-res = client.query(
-    collection_name="my_collection",
-    filter="",
-    # highlight-start
-    group_by_fields=["color"],
-    output_fields=["color", "count(*)", "avg(price)", "max(rating)"],
-    # highlight-end
-)
-
-# [{'color': 'red',    'count(*)': 10, 'avg(price)': 65.22, 'max(rating)': 5},
-#  {'color': 'orange', 'count(*)': 10, 'avg(price)': 48.67, 'max(rating)': 5},
-#  {'color': 'yellow', 'count(*)': 10, 'avg(price)': 64.15, 'max(rating)': 3},
-#  {'color': 'green',  'count(*)': 10, 'avg(price)': 58.28, 'max(rating)': 5},
-#  {'color': 'blue',   'count(*)': 10, 'avg(price)': 50.20, 'max(rating)': 5}]
-```
-
-```java
-// java
-```
-
-```go
-// go
-```
-
-```javascript
-// nodejs
-```
-
-```bash
-# restful
-```
-
-Pass more than one field to `group_by_fields` to compute composite groups. The following example groups by `(color, rating)` and computes the price range in each group:
-
-<div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
-
-```python
-res = client.query(
-    collection_name="my_collection",
-    filter="",
-    # highlight-start
-    group_by_fields=["color", "rating"],
-    output_fields=["color", "rating", "min(price)", "max(price)"],
-    # highlight-end
-)
-
-# [{'color': 'red',    'rating': 5, 'min(price)': 34.51, 'max(price)': 70.90},
-#  {'color': 'orange', 'rating': 2, 'min(price)': 12.39, 'max(price)': 81.99},
-#  {'color': 'yellow', 'rating': 2, 'min(price)': 22.62, 'max(price)': 88.24},
-#  {'color': 'green',  'rating': 1, 'min(price)': 18.35, 'max(price)': 59.53},
-#  {'color': 'blue',   'rating': 4, 'min(price)': 21.23, 'max(price)': 82.45},
-#  ...]
-```
-
-```java
-// java
-```
-
-```go
-// go
-```
-
-```javascript
-// nodejs
-```
-
-```bash
-# restful
-```
-
-You can also combine `group_by_fields` with `limit` to cap how many groups come back. This is useful when a field has high cardinality and you only need a sample of groups:
-
-<div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
-
-```python
-res = client.query(
-    collection_name="my_collection",
-    filter="",
-    group_by_fields=["color"],
-    output_fields=["color", "avg(price)", "count(*)"],
-    # highlight-next-line
-    limit=5,
-)
-
-# [{'color': 'red',    'avg(price)': 65.22, 'count(*)': 10},
-#  {'color': 'orange', 'avg(price)': 48.67, 'count(*)': 10},
-#  {'color': 'yellow', 'avg(price)': 64.15, 'count(*)': 10},
-#  {'color': 'green',  'avg(price)': 58.28, 'count(*)': 10},
-#  {'color': 'blue',   'avg(price)': 50.20, 'count(*)': 10}]
 ```
 
 ```java
@@ -895,7 +701,6 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/get" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 -d '{
     "collectionName": "my_collection",
     "partitionNames": ["partitionA"],
@@ -908,7 +713,6 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/get" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 -d '{
     "collectionName": "my_collection",
     "partitionNames": ["partitionA"],

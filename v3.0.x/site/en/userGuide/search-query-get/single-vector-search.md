@@ -215,7 +215,6 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 -d '{
     "collectionName": "quick_setup",
     "data": [
@@ -453,7 +452,6 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 -d '{
     "collectionName": "quick_setup",
     "data": [
@@ -544,7 +542,6 @@ for hits in res:
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
   -H "Content-Type: application/json" \
-  -H "Request-Timeout: 10" \
   -H "Authorization: Bearer root:Milvus" \
   -d '{
     "collectionName": "quick_setup",
@@ -688,7 +685,6 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 -d '{
     "collectionName": "quick_setup",
     "partitionNames": ["partitionA"],
@@ -854,7 +850,6 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 -d '{
     "collectionName": "quick_setup",
     "data": [
@@ -1113,7 +1108,6 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 -d '{
     "collectionName": "quick_setup",
     "data": [
@@ -1171,7 +1165,6 @@ export QUERY_VECTOR='[0.1, 0.2, 0.3, 0.4]'
 
 curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
 -H "Content-Type: application/json" \
--H "Request-Timeout: 10" \
 -d '{
   "collectionName": "quick_setup",
   "annsField": "vector",

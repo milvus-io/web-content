@@ -1,14 +1,14 @@
 ---
 id: ngram.md
 title: "NGRAM"
-summary: "The NGRAM index in Milvus is built to accelerate LIKE queries on VARCHAR fields or specific JSON paths within JSON fields. Before building the index, Milvus splits text into short, overlapping substrings of a fixed length n, known as n-grams. For example, with n = 3, the word \"Milvus\" is split into 3-grams: \"Mil\", \"ilv\", \"lvu\", and \"vus\". These n-grams are then stored in an inverted index that maps each gram to the document IDs in which it appears. At query time, this index allows Milvus to quickly narrow the search to a small set of candidates, resulting in much faster query execution."
+summary: "The NGRAM index in Milvus accelerates LIKE queries and eligible regex filters on VARCHAR fields or specific JSON paths within JSON fields. Before building the index, Milvus splits text into short, overlapping substrings of a fixed length n, known as n-grams. At query time, Milvus uses these n-grams to narrow candidate entities before verifying the original filter condition."
 ---
 
 # NGRAM
 
-The `NGRAM` index in Milvus is built to accelerate `LIKE` queries on `VARCHAR` fields or specific JSON paths within `JSON` fields. Before building the index, Milvus splits text into short, overlapping substrings of a fixed length *n*, known as *n-grams*. For example, with *n = 3*, the word *"Milvus"* is split into 3-grams: *"Mil"*, *"ilv"*, *"lvu"*, and *"vus"*. These n-grams are then stored in an inverted index that maps each gram to the document IDs in which it appears. At query time, this index allows Milvus to quickly narrow the search to a small set of candidates, resulting in much faster query execution.
+The `NGRAM` index in Milvus accelerates `LIKE` queries and eligible regex filters on `VARCHAR` fields or specific JSON paths within `JSON` fields. Before building the index, Milvus splits text into short, overlapping substrings of a fixed length *n*, known as *n-grams*. For example, with *n = 3*, the word *"Milvus"* is split into 3-grams: *"Mil"*, *"ilv"*, *"lvu"*, and *"vus"*. These n-grams are then stored in an inverted index that maps each gram to the document IDs in which it appears. At query time, this index allows Milvus to quickly narrow the search to a small set of candidates before verifying the original filter condition.
 
-Use it when you need fast prefix, suffix, infix, or wildcard filtering such as:
+Use it when you need fast prefix, suffix, infix, wildcard, or eligible regex filtering such as:
 
 - `name LIKE "data%"`
 
@@ -16,9 +16,13 @@ Use it when you need fast prefix, suffix, infix, or wildcard filtering such as:
 
 - `path LIKE "%json"`
 
+- `message =~ "error.*timeout"`
+
+- `url =~ "/api/v[0-9]+/users"`
+
 <div class="alert note">
 
-For details on filter expression syntax, refer to [Basic Operators](basic-operators.md#Range-operators).
+For details on `LIKE` and regex filter expression syntax, refer to [Pattern Matching](pattern-matching.md).
 
 </div>
 
@@ -80,11 +84,11 @@ During data ingestion, Milvus builds the NGRAM index by performing two main step
 
 ### Phase 2: Accelerate queries
 
-When a `LIKE` filter is executed, Milvus uses the NGRAM index to accelerate the query in the following steps:
+When a `LIKE` filter or an eligible regex filter is executed, Milvus uses the NGRAM index to accelerate the query in the following steps:
 
 ![Accelerate Queries](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/accelerate-queries.png)
 
-1. **Extract the query term:** The contiguous substring without wildcards is extracted from the `LIKE` expression (e.g., `"%database%"` becomes `"database"`).
+1. **Extract the query term:** The contiguous substring without wildcards is extracted from the `LIKE` expression (e.g., `"%database%"` becomes `"database"`). For regex filters, Milvus extracts fixed literal substrings from the regex pattern when possible. For example, `message =~ "error.*timeout"` contains the literals `error` and `timeout`.
 
 1. **Decompose the query term:** The query term is decomposed into *n-grams* based on its length (`L`) and the `min_gram` and `max_gram` settings.
 
@@ -98,7 +102,7 @@ When a `LIKE` filter is executed, Milvus uses the NGRAM index to accelerate the 
 
 1. **Look for each gram & intersect**: Milvus looks up each of the query grams in the inverted index and then intersects the resulting document ID lists to find a small set of candidate documents. These candidates contain all the grams from the query.
 
-1. **Verify and return results:** The original `LIKE` filter is then applied as a final check on only the small candidate set to find the exact matches.
+1. **Verify and return results:** The original `LIKE` or regex filter is then applied as a final check on only the small candidate set to find the exact matches.
 
 ## Create an NGRAM index
 
@@ -231,7 +235,20 @@ Supported query types:
     filter = 'json_field["body"] LIKE "%database%"'
     ```
 
-For more information on filter expression syntax, refer to [Basic Operators](basic-operators.md).
+- **Regex filter**
+
+    ```python
+    # Match log messages that contain "error" followed later by "timeout"
+    filter = 'text =~ "error.*timeout"'
+    ```
+
+- **Regex filter on a JSON path**
+
+    ```python
+    filter = 'json_field["body"] =~ "error.*timeout"'
+    ```
+
+For more information on filter expression syntax, refer to [Pattern Matching](pattern-matching.md).
 
 ## Drop an index
 
@@ -251,6 +268,12 @@ client.drop_index(
 ## Usage notes
 
 - **Field types**: Supported on `VARCHAR` and `JSON` fields. For JSON, provide both `params.json_path` and `params.json_cast_type="varchar"`.
+
+- **Regex acceleration**: `NGRAM` accelerates regex filters only when Milvus can extract fixed literal substrings from the regex pattern. Patterns such as `[a-z]+` may fall back to scanning because they do not contain fixed literals.
+
+- **Case-insensitive regex**: Regex patterns with `(?i)` are supported, but they may skip `NGRAM` optimization because the index preserves original case.
+
+- **Verification step**: For regex filters, `NGRAM` produces candidates and Milvus verifies them with the full RE2 regex pattern, so index acceleration does not change match results.
 
 - **Unicode**: NGRAM decomposition is character-based and language-agnostic and includes whitespace and punctuation.
 
@@ -275,4 +298,3 @@ client.drop_index(
 - **Normalize consistently**
 
     Apply the same normalization to ingested text and query literals (e.g., lowercasing, trimming) if your use case needs it.
-

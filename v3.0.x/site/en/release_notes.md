@@ -16,7 +16,9 @@ Release date: May 9, 2026
 | -------------- | ------------------ | ------------------- |
 | 3.0-beta       | 3.0.0              | 3.0.0               |
 
-Milvus 3.0-beta extends the Milvus vector database with new integration into the open lake ecosystem: External Collection lets Milvus query external lake tables zero-copy, and Spark can read Milvus collections directly through Snapshot. The release also brings richer retrieval, more expressive schema, deeper text search customization, finer data and model lifecycle controls, and more operator-side controls. Milvus 3.0 is the core kernel of Zilliz Lakebase, powering its unified serving, discovery, and batch.
+Milvus v3.0-beta starts Milvus's shift from a vector database to a semantic-native lake engine. The Milvus kernel can now operate directly on data in open lake formats, and core Milvus capabilities have been extended across retrieval, schema, lifecycle, language, and operations.
+
+External Collection and Snapshot are the headline additions on the lake side. The same kernel also powers Zilliz Lakebase, a semantic-native data platform built on Milvus 3.0.
 
 ### Key Features
 
@@ -36,6 +38,12 @@ Snapshot creates a point-in-time, read-only view of a Collection by referencing 
 
 For more information, refer to [Snapshots](snapshots.md), [Manage Snapshots](manage-snapshots.md), and [Snapshot Use Cases](snapshot-use-cases.md).
 
+#### External Backfill
+
+Upgrading an embedding model, such as moving from v1 embeddings to v2 embeddings on an existing Collection, used to mean rebuilding from scratch. That forced either service downtime or dual-write logic on the application side.
+
+Milvus 3.0 supports the upgrade as a hot workflow. You can add a new vector field with `AddCollectionField`, use Snapshot to freeze a consistent starting point, run the embedding job offline against the Snapshot, and write the values back through normal ingestion paths. After the new field is indexed online, the application can switch over with no downtime.
+
 #### Query / Search Order By
 
 Search and Query now accept multi-field ordering, with the sort pushed down into the Milvus kernel and `ASC` / `DESC` settable per field. This closes a common production gap: Top-K by distance alone often does not match the business need when the most similar item is not the cheapest, the most recent, or the most popular.
@@ -43,12 +51,6 @@ Search and Query now accept multi-field ordering, with the sort pushed down into
 Applications no longer have to over-fetch results and re-sort on the client to express composite ranking.
 
 For more information, refer to [Sort Search Results by Scalar Fields](single-vector-search.md#Sort-Search-Results-by-Scalar-Fields--Milvus-30x) and [Sort Query Results](get-and-scalar-query.md#Sort-Query-Results--Milvus-30x).
-
-#### Query Aggregation
-
-Producing tenant-distribution stats, field-completeness counts, or version-rollout progress from a Milvus Collection used to require pulling matching entities back to the client and aggregating them there. Milvus 3.0 pushes SQL-style scalar aggregation into the kernel. A query call accepts `group_by_fields` and aggregation expressions in `output_fields`, including `count(*)`, `count(<field>)`, `sum(<field>)`, `avg(<field>)`, `min(<field>)`, and `max(<field>)`. Aggregation is evaluated server-side after filtering.
-
-For more information, refer to [Aggregate Query Results](get-and-scalar-query.md#Aggregate-Query-Results--Milvus-30x).
 
 #### Null Vector
 
@@ -97,11 +99,3 @@ Production workloads accumulate segment fragmentation over time, which causes qu
 Milvus 3.0 adds the ability to trigger segment compaction explicitly during off-peak windows, in both synchronous and asynchronous modes.
 
 For more information, refer to [Force Merge Compaction](force-merge.md).
-
-#### Storage V3
-
-Milvus 3.0 introduces Storage V3, a manifest-based columnar storage engine where data and metadata live on S3-compatible object storage. Each dataset version is captured as an immutable manifest snapshot, an Avro-encoded file that records which column groups, delta logs, and statistics comprise the dataset.
-
-Manifests are compact Avro files, and delta logs record entity-level deletes without rewriting data files. This keeps metadata overhead small as datasets grow. The manifest also decouples metadata tracking from the query path, allowing a Collection to manage more segments without degrading query performance.
-
-Because states are stored on object storage, the dataset is self-descriptive: any reader with access to the storage path can discover and interpret it without a central catalog. This property underpins External Collection, Snapshot, and future lake integrations.

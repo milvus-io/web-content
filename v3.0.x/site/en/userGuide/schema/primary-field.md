@@ -229,7 +229,6 @@ export SCHEMA='{
 
 curl -X POST 'http://localhost:19530/v2/vectordb/collections/create' \
 -H 'Content-Type: application/json' \
--H 'Request-Timeout: 10' \
 -d "{
     \"collectionName\": \"demo_autoid\",
     \"schema\": $SCHEMA
@@ -318,7 +317,6 @@ export INSERT_DATA='[
 
 curl -X POST 'http://localhost:19530/v2/vectordb/entities/insert' \
 -H 'Content-Type: application/json' \
--H 'Request-Timeout: 10' \
 -d "{
     \"collectionName\": \"demo_autoid\",
     \"data\": $INSERT_DATA
@@ -489,7 +487,6 @@ export SCHEMA='{
 
 curl -X POST 'http://localhost:19530/v2/vectordb/collections/create' \
 -H 'Content-Type: application/json' \
--H 'Request-Timeout: 10' \
 -d "{
     \"collectionName\": \"demo_manual_ids\",
     \"schema\": $SCHEMA
@@ -585,7 +582,6 @@ export INSERT_DATA='[
 # 插入数据
 curl -X POST 'http://localhost:19530/v2/vectordb/entities/insert' \
 -H 'Content-Type: application/json' \
--H 'Request-Timeout: 10' \
 -d "{
     \"collectionName\": \"demo_manual_ids\",
     \"data\": $INSERT_DATA

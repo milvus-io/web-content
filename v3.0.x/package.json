@@ -3,7 +3,6 @@
 	"version": "1.0.0",
 	"description": "Welcome to Milvus documentation!",
 	"scripts": {
-		"generate:docs": "npm --prefix scripts run generate --",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"author": "",

@@ -92,14 +92,14 @@ import io.milvus.v2.common.DataType;
 import io.milvus.v2.service.collection.request.AddFieldReq;
 import io.milvus.v2.service.collection.request.CreateCollectionReq;
 
+import java.util.Collections;
+
 MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build());
 
-CreateCollectionReq.CollectionSchema schema = CreateCollectionReq.CollectionSchema.builder()
-        .build();
-
+CreateCollectionReq.CollectionSchema schema = client.createSchema();
 schema.addField(AddFieldReq.builder()
         .fieldName("id")
         .dataType(DataType.Int64)
@@ -109,14 +109,15 @@ schema.addField(AddFieldReq.builder()
         .fieldName("embedding")
         .dataType(DataType.FloatVector)
         .dimension(4)
-        // highlight-next-line
         .isNullable(true)
         .build());
 
-client.createCollection(CreateCollectionReq.builder()
+CreateCollectionReq requestCreate = CreateCollectionReq.builder()
         .collectionName("my_collection")
         .collectionSchema(schema)
-        .build());
+        .indexParams(Collections.emptyList())
+        .build();
+client.createCollection(requestCreate);
 ```
 
 ```javascript
@@ -208,7 +209,6 @@ curl --request POST \
   --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
   --header "Authorization: Bearer ${TOKEN}" \
   --header "Content-Type: application/json" \
-  --header "Request-Timeout: 10" \
   -d "{
     \"collectionName\": \"my_collection\",
     \"schema\": {
@@ -254,7 +254,6 @@ schema.add_field(
 schema.addField(AddFieldReq.builder()
         .fieldName("age")
         .dataType(DataType.Int64)
-        // highlight-next-line
         .isNullable(true)
         .build());
 ```
@@ -316,31 +315,22 @@ client.insert(
 
 ```java
 import com.google.gson.Gson;
-import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import io.milvus.v2.service.vector.request.InsertReq;
+import io.milvus.v2.service.vector.response.InsertResp;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
+List<JsonObject> rows = new ArrayList<>();
 Gson gson = new Gson();
+rows.add(gson.fromJson("{\"id\": 1, \"embedding\": [0.1, 0.2, 0.3, 0.4]}", JsonObject.class));
+rows.add(gson.fromJson("{\"id\": 2, \"embedding\": null}", JsonObject.class));
+rows.add(gson.fromJson("{\"id\": 3}", JsonObject.class));
 
-JsonObject row1 = new JsonObject();
-row1.addProperty("id", 1);
-row1.add("embedding", gson.toJsonTree(Arrays.asList(0.1f, 0.2f, 0.3f, 0.4f)));
-
-JsonObject row2 = new JsonObject();
-row2.addProperty("id", 2);
-row2.add("embedding", JsonNull.INSTANCE); // Explicitly set to NULL
-
-JsonObject row3 = new JsonObject();
-row3.addProperty("id", 3); // Field omitted; stored as NULL
-
-List<JsonObject> data = Arrays.asList(row1, row2, row3);
-
-client.insert(InsertReq.builder()
+InsertResp insertR = client.insert(InsertReq.builder()
         .collectionName("my_collection")
-        .data(data)
+        .data(rows)
         .build());
 ```
 
@@ -385,7 +375,6 @@ curl --request POST \
   --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
   --header "Authorization: Bearer ${TOKEN}" \
   --header "Content-Type: application/json" \
-  --header "Request-Timeout: 10" \
   -d '{
     "collectionName": "my_collection",
     "data": [
@@ -443,23 +432,26 @@ import io.milvus.v2.common.IndexParam;
 import io.milvus.v2.service.collection.request.LoadCollectionReq;
 import io.milvus.v2.service.index.request.CreateIndexReq;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 
-IndexParam indexParam = IndexParam.builder()
+List<IndexParam> indexes = new ArrayList<>();
+indexes.add(IndexParam.builder()
         .fieldName("embedding")
-        .indexName("embedding_index")
+        .indexName("embedding_idx")
         .indexType(IndexParam.IndexType.AUTOINDEX)
         .metricType(IndexParam.MetricType.COSINE)
-        .build();
+        .build());
 
 client.createIndex(CreateIndexReq.builder()
         .collectionName("my_collection")
-        .indexParams(Collections.singletonList(indexParam))
+        .indexParams(indexes)
         .build());
 
-client.loadCollection(LoadCollectionReq.builder()
+LoadCollectionReq loadReq = LoadCollectionReq.builder()
         .collectionName("my_collection")
-        .build());
+        .build();
+client.loadCollection(loadReq);
 ```
 
 ```javascript
@@ -508,7 +500,6 @@ curl --request POST \
   --url "${CLUSTER_ENDPOINT}/v2/vectordb/indexes/create" \
   --header "Authorization: Bearer ${TOKEN}" \
   --header "Content-Type: application/json" \
-  --header "Request-Timeout: 10" \
   -d '{
     "collectionName": "my_collection",
     "indexParams": [
@@ -524,7 +515,6 @@ curl --request POST \
   --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/load" \
   --header "Authorization: Bearer ${TOKEN}" \
   --header "Content-Type: application/json" \
-  --header "Request-Timeout: 10" \
   -d '{"collectionName": "my_collection"}'
 ```
 
@@ -571,18 +561,23 @@ import io.milvus.v2.service.vector.request.SearchReq;
 import io.milvus.v2.service.vector.request.data.FloatVec;
 import io.milvus.v2.service.vector.response.SearchResp;
 
-import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
-SearchResp res = client.search(SearchReq.builder()
+Map<String, Object> searchParams = new HashMap<>();
+searchParams.put("metric_type", "COSINE");
+
+SearchResp resp = client.search(SearchReq.builder()
         .collectionName("my_collection")
-        .data(Collections.singletonList(new FloatVec(Arrays.asList(0.1f, 0.2f, 0.3f, 0.4f))))
         .annsField("embedding")
-        .limit(3)
+        .data(Collections.singletonList(new FloatVec(new float[]{0.1f, 0.2f, 0.3f, 0.4f})))
+        .topK(3)
+        .searchParams(searchParams)
         .outputFields(Collections.singletonList("embedding"))
         .build());
 
-System.out.println(res);
+System.out.println(resp.getSearchResults());
 ```
 
 ```javascript
@@ -628,7 +623,6 @@ curl --request POST \
   --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
   --header "Authorization: Bearer ${TOKEN}" \
   --header "Content-Type: application/json" \
-  --header "Request-Timeout: 10" \
   -d '{
     "collectionName": "my_collection",
     "data": [[0.1, 0.2, 0.3, 0.4]],
@@ -666,7 +660,7 @@ expr = "age > 18"
 ```
 
 ```java
-String filter = "age > 18";
+String expr = "age > 18";
 ```
 
 ```javascript
@@ -699,7 +693,7 @@ expr = 'status == "active"'
 ```
 
 ```java
-String filter = "status == \"active\"";
+String expr = "status == \"active\"";
 ```
 
 ```javascript

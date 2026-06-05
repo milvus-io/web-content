@@ -477,7 +477,6 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/privilege_groups/create" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 -d '{
     "privilegeGroupName":"privilege_group_1"
 }'
@@ -533,7 +532,6 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/privilege_groups/add_privileges_to_group" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 -d '{
     "privilegeGroupName":"privilege_group_1",
     "privileges":["Query", "Search"]
@@ -588,7 +586,6 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/privilege_groups/remove_privileges_from_group" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 -d '{
     "privilegeGroupName":"privilege_group_1",
     "privileges":["Search"]
@@ -641,7 +638,6 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/privilege_groups/list" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 -d '{}'
 ```
 
@@ -695,7 +691,6 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/privilege_groups/drop" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
 -d '{
     "privilegeGroupName":"privilege_group_1"
 }'
