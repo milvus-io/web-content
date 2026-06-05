@@ -21,7 +21,7 @@ title: Visão geral do CDC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus-CDC é uma ferramenta de fácil utilização que pode capturar e sincronizar dados incrementais em instâncias Milvus. Garante a fiabilidade dos dados empresariais, transferindo-os sem problemas entre as instâncias de origem e de destino, permitindo uma cópia de segurança incremental fácil e a recuperação de desastres.</p>
+    </button></h1><p>Milvus-CDC é uma ferramenta de fácil utilização que pode capturar e sincronizar dados incrementais em instâncias Milvus. Garante a fiabilidade dos dados empresariais ao transferi-los sem problemas entre as instâncias de origem e de destino, permitindo uma cópia de segurança incremental fácil e a recuperação de desastres.</p>
 <h2 id="Key-capabilities" class="common-anchor-header">Principais recursos<button data-href="#Key-capabilities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -66,7 +66,7 @@ title: Visão geral do CDC
 <p>No diagrama anterior,</p>
 <ul>
 <li><p><strong>Servidor HTTP</strong>: Trata os pedidos dos utilizadores, executa as tarefas e mantém os metadados. Serve de plano de controlo para a orquestração de tarefas no sistema Milvus-CDC.</p></li>
-<li><p><strong>Corelib</strong>: Responsável pela sincronização efectiva das tarefas. Inclui um componente de leitura que recupera informações do etcd e da fila de mensagens (MQ) do Milvus de origem, e um componente de escrita que traduz mensagens do MQ em parâmetros API para o sistema Milvus e envia esses pedidos para o Milvus de destino para completar o processo de sincronização.</p></li>
+<li><p><strong>Corelib</strong>: Responsável pela sincronização efectiva das tarefas. Inclui um componente de leitura que recupera informações do etcd e da fila de mensagens (MQ) do Milvus de origem, e um componente de escrita que traduz as mensagens do MQ em parâmetros API para o sistema Milvus e envia esses pedidos para o Milvus de destino para completar o processo de sincronização.</p></li>
 </ul>
 <h2 id="Workflow" class="common-anchor-header">Fluxo de trabalho<button data-href="#Workflow" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -86,7 +86,7 @@ title: Visão geral do CDC
     </button></h2><p>O fluxo de processamento de dados do Milvus-CDC envolve as seguintes etapas:</p>
 <ol>
 <li><p><strong>Criação de tarefas</strong>: Os utilizadores iniciam uma tarefa CDC através de pedidos HTTP.</p></li>
-<li><p><strong>Recuperação de metadados</strong>: O sistema vai buscar metadados específicos da coleção ao etcd do Milvus de origem, incluindo informações sobre o canal e o ponto de controlo da coleção.</p></li>
+<li><p><strong>Recuperação de metadados</strong>: O sistema obtém metadados específicos da coleção a partir do etcd do Milvus de origem, incluindo informações sobre o canal e o ponto de controlo da coleção.</p></li>
 <li><p><strong>Ligação MQ</strong>: Com os metadados à mão, o sistema liga-se ao MQ para começar a subscrever o fluxo de dados.</p></li>
 <li><p><strong>Processamento de dados</strong>: Os dados do MQ são lidos, analisados e passados adiante usando o Go SDK ou processados para replicar as operações realizadas no Milvus de origem.</p></li>
 </ol>

@@ -42,7 +42,7 @@ summary: >-
     </button></h2><p>Milvus supports several basic operators for filtering data:</p>
 <ul>
 <li><p><strong>Comparison Operators</strong>: <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;=</code>, and <code translate="no">&lt;=</code> allow filtering based on numeric or text fields.</p></li>
-<li><p><strong>Range Filters</strong>: <code translate="no">IN</code> and <code translate="no">LIKE</code> help match specific value ranges or sets.</p></li>
+<li><p><strong>Range and pattern filters</strong>: <code translate="no">IN</code>, <code translate="no">LIKE</code>, <code translate="no">=~</code>, and <code translate="no">!~</code> match values, wildcard patterns, or regex patterns. For details about string patterns, refer to <a href="/docs/pattern-matching.md">Pattern Matching</a>.</p></li>
 <li><p><strong>Arithmetic Operators</strong>: <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code>, <code translate="no">%</code>, and <code translate="no">**</code> are used for calculations involving numeric fields.</p></li>
 <li><p><strong>Logical Operators</strong>: <code translate="no">AND</code>, <code translate="no">OR</code>, and <code translate="no">NOT</code> combine multiple conditions into complex expressions.</p></li>
 <li><p><strong>IS NULL and IS NOT NULL Operators</strong>: The <code translate="no">IS NULL</code> and <code translate="no">IS NOT NULL</code> operators are used to filter fields based on whether they contain a null value (absence of data). For details, refer to <a href="/docs/basic-operators.md#IS-NULL-and-IS-NOT-NULL-Operators">Basic Operators</a>.</p></li>
@@ -65,6 +65,25 @@ summary: >-
     </button></h3><p>To find entities with primary colors (red, green, or blue) in a scalar field <code translate="no">color</code>, use the following filter expression:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<h3 id="Example-Filtering-by-Regex-Pattern" class="common-anchor-header">Example: Filtering by Regex Pattern<button data-href="#Example-Filtering-by-Regex-Pattern" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>To find entities whose <code translate="no">message</code> field contains an error code such as <code translate="no">E1001</code>, use the regex match operator <code translate="no">=~</code>:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;message =~ &quot;E[0-9]{4}&quot;&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Regex filters use substring matching. To require the entire field value to match the pattern, add <code translate="no">^</code> and <code translate="no">$</code> anchors. For details, refer to <a href="/docs/pattern-matching.md">Pattern Matching</a>.</p>
 <h3 id="Example-Filtering-JSON-Fields" class="common-anchor-header">Example: Filtering JSON Fields<button data-href="#Example-Filtering-JSON-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -232,6 +251,8 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
         ></path>
       </svg>
     </button></h3><p>Milvus provides specialized operators for precise text-based searches on VARCHAR fields:</p>
+<h4 id="Pattern-matching-operators" class="common-anchor-header">Pattern matching operators</h4><p>The <code translate="no">LIKE</code>, <code translate="no">=~</code>, and <code translate="no">!~</code> operators match string patterns on <code translate="no">VARCHAR</code> fields, JSON string paths, and specific <code translate="no">ARRAY&lt;VARCHAR&gt;</code> elements. Use <code translate="no">LIKE</code> for simple wildcard patterns. Use <code translate="no">=~</code> and <code translate="no">!~</code> for RE2 regular expressions.</p>
+<p>For details, refer to <a href="/docs/pattern-matching.md">Pattern Matching</a>.</p>
 <h4 id="TEXTMATCH-operator" class="common-anchor-header"><code translate="no">TEXT_MATCH</code> operator</h4><p>The <code translate="no">TEXT_MATCH</code> operator allows precise document retrieval based on specific query terms. It is particularly useful for filtered searches that combine scalar filters with vector similarity searches. Unlike semantic searches, Text Match focuses on exact term occurrences.</p>
 <p>Milvus uses Tantivy to support inverted indexing and term-based text search. The process involves:</p>
 <ol>

@@ -39,7 +39,7 @@ title: 部署 CDC 伺服器
 <ul>
 <li><p><strong>Milvus Instances</strong>：源 Milvus 和至少一個目標 Milvus 都應已部署並運作。</p>
 <ul>
-<li><p>源和目標 Milvus 版本都必須是 2.3.2 或更高，最好是 2.4.x。我們建議使用相同版本的源和目標 Milvus，以確保兼容性。</p></li>
+<li><p>源和目標 Milvus 版本都必須是 2.3.2 或更高，最好是 2.4.x。我們建議使用相同版本的源和目標 Milvus 以確保兼容性。</p></li>
 <li><p>將目標 Milvus 的<code translate="no">common.ttMsgEnabled</code> 設定為<code translate="no">false</code> 。</p></li>
 <li><p>使用不同的元和訊息儲存設定來設定來源和目標 Milvus，以防止衝突。例如，避免在多個 Milvus 實體中使用相同的 etcd 和 rootPath 設定，以及相同的 Pulsar 服務和<code translate="no">chanNamePrefix</code> 。</p></li>
 </ul></li>
@@ -101,7 +101,7 @@ title: 部署 CDC 伺服器
 <ul>
 <li><p><code translate="no">metaStoreConfig.storeType</code>:Milvus-CDC 的 metastore 類型。可能的值是<code translate="no">etcd</code> 或<code translate="no">mysql</code> 。</p></li>
 <li><p><code translate="no">metaStoreConfig.etcdEndpoints</code>:連線至 Milvus-CDC 的 etcd 位址。如果<code translate="no">storeType</code> 設為<code translate="no">etcd</code> 則必須。</p></li>
-<li><p><code translate="no">metaStoreConfig.mysqlSourceUrl</code>:Milvus-CDC 伺服器 MySQL 資料庫的連線位址。若<code translate="no">storeType</code> 設為<code translate="no">mysql</code> 則必須。</p></li>
+<li><p><code translate="no">metaStoreConfig.mysqlSourceUrl</code>:Milvus-CDC 伺服器 MySQL 資料庫的連線位址。如果<code translate="no">storeType</code> 設為<code translate="no">mysql</code> 則需要。</p></li>
 <li><p><code translate="no">metaStoreConfig.rootPath</code>:Milvus-CDC 元資料庫的根目錄。此設定可實現多租戶功能，允許多個 CDC 服務使用相同的 etcd 或 MySQL 實例，同時透過不同的根目錄實現隔離。</p></li>
 </ul>
 <p>配置範例：</p>

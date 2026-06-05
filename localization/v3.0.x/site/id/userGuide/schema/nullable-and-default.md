@@ -69,7 +69,7 @@ summary: >-
 <li>Field dihilangkan dari entitas input.</li>
 <li>Field secara eksplisit disetel ke NULL (misalnya, <code translate="no">None</code> di Python).</li>
 </ul>
-<p>Jika sebuah field tidak didefinisikan sebagai nullable (perilaku default), setiap entitas harus memberikan nilai yang valid untuk field tersebut. Menghilangkan field atau secara eksplisit memberikan nilai NULL akan menyebabkan operasi penyisipan atau impor gagal.</p>
+<p>Jika sebuah field tidak ditetapkan sebagai nullable (perilaku default), setiap entitas harus memberikan nilai yang valid untuk field tersebut. Menghilangkan field atau secara eksplisit memberikan nilai NULL akan menyebabkan operasi penyisipan atau impor gagal.</p>
 <p>Atribut nullable didukung untuk <strong>bidang skalar dan vektor</strong> dalam skema koleksi. Namun, bidang Array of Structs tidak mendukung atribut nullable.</p>
 <div class="alert note">
 <p>Nullability menentukan apakah nilai field bisa hilang; tidak menentukan nilai apa yang digunakan ketika field hilang.</p>
@@ -236,7 +236,6 @@ curl --request POST \
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: {
@@ -377,7 +376,6 @@ _, err := client.Insert(ctx, milvusclient.NewRowBasedInsertOption(<span class="h
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -499,7 +497,6 @@ _, err = client.LoadCollection(ctx, milvusclient.NewLoadCollectionOption(<span c
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;indexParams&quot;: [
@@ -515,13 +512,12 @@ curl --request POST \
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/load&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{&quot;collectionName&quot;: &quot;my_collection&quot;}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Pada titik ini:</p>
 <ul>
 <li>Entitas dengan nilai penyematan yang valid diindeks dan siap untuk dicari.</li>
-<li>Entitas yang penyematannya NULL tetap berada di dalam koleksi, tetapi tidak disertakan di dalam indeks vektor.</li>
+<li>Entitas yang sematannya NULL tetap berada di dalam koleksi, tetapi tidak disertakan di dalam indeks vektor.</li>
 </ul>
 <h2 id="Search-behavior-with-nullable-fields" class="common-anchor-header">Perilaku pencarian dengan bidang yang dapat dinullkan<button data-href="#Search-behavior-with-nullable-fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -619,7 +615,6 @@ fmt.Println(resultSets)
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [[0.1, 0.2, 0.3, 0.4]],

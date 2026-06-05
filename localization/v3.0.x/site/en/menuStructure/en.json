@@ -1003,39 +1003,45 @@
                 "children": []
               },
               {
+                "label": "Pattern Matching",
+                "id": "pattern-matching.md",
+                "order": 2,
+                "children": []
+              },
+              {
                 "label": "Filtering Templating",
                 "id": "filtering-templating.md",
-                "order": 2,
+                "order": 3,
                 "children": []
               },
               {
                 "label": "JSON Operators",
                 "id": "json-operators.md",
-                "order": 3,
+                "order": 4,
                 "children": []
               },
               {
                 "label": "Array Operators",
                 "id": "array-operators.md",
-                "order": 4,
+                "order": 5,
                 "children": []
               },
               {
                 "label": "StructArray Operators",
                 "id": "struct-array-operators.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "Random Sampling",
                 "id": "random-sampling.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               },
               {
                 "label": "Geometry Operators",
                 "id": "geometry-operators.md",
-                "order": 7,
+                "order": 8,
                 "children": []
               }
             ]
@@ -2053,7 +2059,7 @@
       {
         "label": "Birdwatcher",
         "id": "birdwatcher",
-        "order": 3,
+        "order": 2,
         "children": [
           {
             "label": "Overview",
@@ -2071,37 +2077,6 @@
             "label": "Usage Guides",
             "id": "birdwatcher_usage_guides.md",
             "order": 2,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "Milvus CDC",
-        "id": "milvus_cdc",
-        "order": 2,
-        "children": [
-          {
-            "label": "Overview",
-            "id": "milvus_cdc_overview.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Set Up CDC Replication",
-            "id": "set_up_cdc_replication.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Switchover",
-            "id": "cdc_switchover.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Failover",
-            "id": "cdc_failover.md",
-            "order": 3,
             "children": []
           }
         ]

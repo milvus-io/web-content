@@ -1299,7 +1299,7 @@
     "v3.0.x/site/en/reference/time_sync.md": "2026-04-28T06:54:43.033Z",
     "v3.0.x/site/en/reference/timestamp.md": "2026-04-28T06:55:01.292Z",
     "v3.0.x/site/en/reference/tune_consistency.md": "2026-05-15T10:01:56.047Z",
-    "v3.0.x/site/en/release_notes.md": "2026-05-11T11:36:55.701Z",
+    "v3.0.x/site/en/release_notes.md": "2026-06-05T02:33:24.204Z",
     "v3.0.x/site/en/rerankers/rerankers-bge.md": "2026-04-28T06:56:26.361Z",
     "v3.0.x/site/en/rerankers/rerankers-cohere.md": "2026-04-28T06:56:33.354Z",
     "v3.0.x/site/en/rerankers/rerankers-cross-encoder.md": "2026-04-28T06:56:40.276Z",
@@ -1416,7 +1416,7 @@
     "v3.0.x/site/en/userGuide/schema/binary-vector.md": "2026-05-15T10:08:56.669Z",
     "v3.0.x/site/en/userGuide/schema/dense-vector.md": "2026-05-15T10:09:18.777Z",
     "v3.0.x/site/en/userGuide/schema/enable-dynamic-field.md": "2026-05-15T10:09:48.726Z",
-    "v3.0.x/site/en/userGuide/schema/nullable-and-default.md": "2026-05-15T10:10:12.923Z",
+    "v3.0.x/site/en/userGuide/schema/nullable-and-default.md": "2026-06-05T02:33:45.698Z",
     "v3.0.x/site/en/userGuide/schema/number.md": "2026-05-15T10:10:32.518Z",
     "v3.0.x/site/en/userGuide/schema/primary-field.md": "2026-05-15T10:10:52.768Z",
     "v3.0.x/site/en/userGuide/schema/schema.md": "2026-04-28T07:34:30.703Z",
@@ -1457,10 +1457,10 @@
     "v3.0.x/site/en/userGuide/tools/milvus-backup/milvus_backup_api.md": "2026-04-28T07:50:24.450Z",
     "v3.0.x/site/en/userGuide/tools/milvus-backup/milvus_backup_cli.md": "2026-04-28T07:50:34.160Z",
     "v3.0.x/site/en/userGuide/tools/milvus-backup/milvus_backup_overview.md": "2026-04-28T07:50:42.266Z",
-    "v3.0.x/site/en/userGuide/tools/milvus-cdc/cdc-monitoring.md": "2026-04-28T07:50:48.696Z",
-    "v3.0.x/site/en/userGuide/tools/milvus-cdc/deploy-cdc-server.md": "2026-04-28T07:51:01.133Z",
-    "v3.0.x/site/en/userGuide/tools/milvus-cdc/manage-cdc-tasks.md": "2026-04-28T07:51:22.414Z",
-    "v3.0.x/site/en/userGuide/tools/milvus-cdc/milvus-cdc-overview.md": "2026-04-28T07:51:42.436Z",
+    "v3.0.x/site/en/userGuide/tools/milvus-cdc/cdc-monitoring.md": "2026-06-05T02:34:14.124Z",
+    "v3.0.x/site/en/userGuide/tools/milvus-cdc/deploy-cdc-server.md": "2026-06-05T02:34:28.027Z",
+    "v3.0.x/site/en/userGuide/tools/milvus-cdc/manage-cdc-tasks.md": "2026-06-05T02:34:40.724Z",
+    "v3.0.x/site/en/userGuide/tools/milvus-cdc/milvus-cdc-overview.md": "2026-06-05T02:34:52.211Z",
     "v3.0.x/site/en/userGuide/tools/milvus-webui.md": "2026-04-28T07:52:34.057Z",
     "v3.0.x/site/en/menuStructure/en.json": "2026-05-15T11:00:42.053Z",
     "v3.0.x/site/en/reference/architecture/streaming_service.md": "2026-04-28T06:42:55.227Z",
@@ -1547,6 +1547,7 @@
     "v3.0.x/site/en/userGuide/tools/milvus-cdc/cdc_failover.md": "2026-05-15T10:16:20.539Z",
     "v3.0.x/site/en/userGuide/tools/milvus-cdc/cdc_switchover.md": "2026-05-15T10:16:34.460Z",
     "v3.0.x/site/en/userGuide/tools/milvus-cdc/milvus_cdc_overview.md": "2026-05-15T10:16:49.590Z",
-    "v3.0.x/site/en/userGuide/tools/milvus-cdc/set_up_cdc_replication.md": "2026-05-15T10:17:07.716Z"
+    "v3.0.x/site/en/userGuide/tools/milvus-cdc/set_up_cdc_replication.md": "2026-05-15T10:17:07.716Z",
+    "v3.0.x/site/en/userGuide/search-query-get/boolean/pattern-matching.md": "2026-06-05T02:34:06.256Z"
   }
 }

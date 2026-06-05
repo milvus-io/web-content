@@ -2,8 +2,8 @@
 id: manage-cdc-tasks.md
 order: 3
 summary: >-
-  Une tâche de capture des changements de données (CDC) permet de synchroniser
-  les données d'une instance Milvus source vers une instance Milvus cible.
+  Une tâche de capture de changement de données (CDC) permet de synchroniser les
+  données d'une instance Milvus source vers une instance Milvus cible.
 title: Gestion des tâches CDC
 ---
 <h1 id="Manage-CDC-Tasks" class="common-anchor-header">Gestion des tâches CDC<button data-href="#Manage-CDC-Tasks" class="anchor-icon" translate="no">

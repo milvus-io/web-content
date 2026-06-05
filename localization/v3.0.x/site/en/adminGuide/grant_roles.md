@@ -120,7 +120,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/grant_role&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;,
     &quot;userName&quot;: &quot;user_1&quot;
@@ -174,7 +173,6 @@ client.describe_user(user_name=<span class="hljs-string">&quot;user_1&quot;</spa
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/describe&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;userName&quot;: &quot;user_1&quot;
 }&#x27;</span>
@@ -235,7 +233,6 @@ client.revokeRole(RevokeRoleReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/revoke_role&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;userName&quot;: &quot;user_1&quot;,
     &quot;roleName&quot;: &quot;role_a&quot;

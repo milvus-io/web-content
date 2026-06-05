@@ -86,7 +86,7 @@ title: CDC 概览
 <li><p><strong>创建任务</strong>：用户通过 HTTP 请求启动 CDC 任务。</p></li>
 <li><p><strong>元数据检索</strong>：系统从 Milvus 的 etcd 源获取特定于 Collections 的元数据，包括 Collections 的通道和检查点信息。</p></li>
 <li><p><strong>MQ 连接</strong>：有了元数据，系统就会连接到 MQ，开始订阅数据流。</p></li>
-<li><p><strong>数据处理</strong>：读取、解析来自 MQ 的数据，并使用 Go SDK 将其传递给其他系统，或进行处理以复制在源 Milvus 中执行的操作符。</p></li>
+<li><p><strong>数据处理</strong>：读取、解析来自 MQ 的数据，然后使用 Go SDK 将其传递给其他系统，或进行处理以复制在源 Milvus 中执行的操作符。</p></li>
 </ol>
 <p>
   

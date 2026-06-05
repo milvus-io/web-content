@@ -64,7 +64,7 @@ title: CDCの概要
 <p>先の図では</p>
 <ul>
 <li><p><strong>HTTPサーバ</strong>：ユーザーリクエストを処理し、タスクを実行し、メタデータを管理する。Milvus-CDCシステム内のタスクオーケストレーションのコントロールプレーンとして機能する。</p></li>
-<li><p><strong>Corelib</strong>：タスクの実際の同期を担当する。ソースMilvusのetcdおよびメッセージキュー(MQ)から情報を取得するリーダコンポーネントと、MQからのメッセージをMilvusシステム用のAPIパラメータに変換し、これらのリクエストをターゲットMilvusに送信して同期プロセスを完了させるライタコンポーネントが含まれる。</p></li>
+<li><p><strong>Corelib</strong>：タスクの実際の同期を担当する。ソースMilvusのetcdとメッセージキュー(MQ)から情報を取得するリーダコンポーネントと、MQからのメッセージをMilvusシステム用のAPIパラメータに変換し、これらのリクエストをターゲットMilvusに送信して同期プロセスを完了させるライタコンポーネントが含まれる。</p></li>
 </ul>
 <h2 id="Workflow" class="common-anchor-header">ワークフロー<button data-href="#Workflow" class="anchor-icon" translate="no">
       <svg translate="no"

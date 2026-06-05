@@ -101,7 +101,7 @@ title: Gestire le attività CDC
 }&#x27;</span> http://localhost:8444/cdc
 <button class="copy-code-btn"></button></code></pre>
 <p>Sostituire <strong>localhost</strong> con l'indirizzo IP del server Milvus di destinazione.</p>
-<p>Risposta attesa:</p>
+<p>Risposta prevista:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>

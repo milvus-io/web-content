@@ -42,7 +42,7 @@ title: Menyebarkan Server CDC
 <li><p><strong>Instance Milvus</strong>: Milvus sumber dan setidaknya satu Milvus target harus diterapkan dan beroperasi.</p>
 <ul>
 <li><p>Versi Milvus sumber dan target harus 2.3.2 atau lebih tinggi, sebaiknya 2.4.x. Kami menyarankan untuk menggunakan versi yang sama untuk Milvus sumber dan target untuk memastikan kompatibilitas.</p></li>
-<li><p>Atur konfigurasi <code translate="no">common.ttMsgEnabled</code> dari Milvus target ke <code translate="no">false</code>.</p></li>
+<li><p>Atur konfigurasi <code translate="no">common.ttMsgEnabled</code> pada Milvus target ke <code translate="no">false</code>.</p></li>
 <li><p>Konfigurasikan Milvus sumber dan target dengan pengaturan meta dan penyimpanan pesan yang berbeda untuk mencegah konflik. Sebagai contoh, hindari penggunaan konfigurasi etcd dan rootPath yang sama, serta layanan Pulsar dan <code translate="no">chanNamePrefix</code> yang sama di beberapa instans Milvus.</p></li>
 </ul></li>
 <li><p><strong>Metastore</strong>: Siapkan basis data etcd atau MySQL untuk metastore Milvus-CDC.</p></li>
@@ -122,14 +122,14 @@ title: Menyebarkan Server CDC
 <li><p><strong>Konfigurasi Milvus Sumber:</strong></p>
 <p>Tentukan detail koneksi Milvus sumber, termasuk etcd dan penyimpanan pesan, untuk membuat koneksi antara server Milvus-CDC dan Milvus sumber.</p>
 <ul>
-<li><p><code translate="no">sourceConfig.etcdAddress</code>: Alamat untuk menyambung ke etcd Milvus sumber. Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/docs/configure_etcd.md#etcd-related-Configurations">Konfigurasi terkait etcd</a>.</p></li>
+<li><p><code translate="no">sourceConfig.etcdAddress</code>: Alamat untuk menyambungkan ke etcd Milvus sumber. Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/docs/configure_etcd.md#etcd-related-Configurations">Konfigurasi terkait etcd</a>.</p></li>
 <li><p><code translate="no">sourceConfig.etcdRootPath</code>: Awalan root dari kunci di mana Milvus sumber menyimpan data dalam etcd. Nilainya dapat bervariasi berdasarkan metode penyebaran instans Milvus:</p>
 <ul>
 <li><p><strong>Helm</strong> atau <strong>Docker Compose</strong>: Defaultnya adalah <code translate="no">by-dev</code>.</p></li>
 <li><p><strong>Operator</strong>: Defaultnya adalah <code translate="no">&lt;release_name&gt;</code>.</p></li>
 </ul></li>
 <li><p><code translate="no">replicateChan</code>: nama saluran replikasi milvus, yaitu <code translate="no">{msgChannel.chanNamePrefix.cluster}/{msgChannel.chanNamePrefix.replicateMsg}</code> dalam berkas milvus.yaml</p></li>
-<li><p><code translate="no">sourceConfig.pulsar</code>: Konfigurasi pulsar untuk Milvus sumber. Jika Milvus sumber menggunakan Kafka untuk penyimpanan pesan, hapus semua konfigurasi yang berhubungan dengan Pulsar. Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/docs/configure_pulsar.md">Konfigurasi yang berhubungan dengan Pulsar</a>.</p></li>
+<li><p><code translate="no">sourceConfig.pulsar</code>: Konfigurasi pulsar untuk Milvus sumber. Jika Milvus sumber menggunakan Kafka untuk penyimpanan pesan, hapus semua konfigurasi yang berhubungan dengan Pulsar. Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/docs/configure_pulsar.md">Konfigurasi terkait Pulsar</a>.</p></li>
 <li><p><code translate="no">sourceConfig.kafka.address</code>: Alamat Kafka untuk Milvus sumber. Hapus konfigurasi ini jika Milvus sumber menggunakan Kafka untuk penyimpanan pesan.</p></li>
 </ul></li>
 </ul>

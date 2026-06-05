@@ -18,12 +18,12 @@ summary: 設定可空欄位和預設值，包括模式、插入、索引、搜�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 支援 nullable 欄位，允許欄位值遺失或明確設定為 NULL。可空欄位在模式層級定義，並一致地應用於資料擷取、索引、搜尋和查詢作業。</p>
+    </button></h1><p>Milvus 支援 nullable 欄位，允許欄位值遺失或明確設定為 NULL。Nullability 定義在模式層級，並一致地應用於資料擷取、索引、搜尋和查詢作業。</p>
 <p>在下列情況下使用可空欄位</p>
 <ul>
 <li>資料從允許缺失值的外部系統擷取。</li>
 <li>某些元資料是可選的，或只適用於部分資料集。</li>
-<li>向量嵌入以非同步方式產生，並在稍後插入。</li>
+<li>向量嵌入是以非同步方式產生，並在稍後插入。</li>
 </ul>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -234,7 +234,6 @@ curl --request POST \
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: {
@@ -375,7 +374,6 @@ _, err := client.Insert(ctx, milvusclient.NewRowBasedInsertOption(<span class="h
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -497,7 +495,6 @@ _, err = client.LoadCollection(ctx, milvusclient.NewLoadCollectionOption(<span c
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;indexParams&quot;: [
@@ -513,7 +510,6 @@ curl --request POST \
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/load&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{&quot;collectionName&quot;: &quot;my_collection&quot;}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>此時</p>
@@ -536,7 +532,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>當您在可空欄位執行搜尋作業時，Milvus 只會評估在搜尋中使用的欄位具有非空值的實體。向量欄位為 NULL 的實體會自動跳過。</p>
+    </button></h2><p>當您在可空欄位執行搜尋作業時，Milvus 只會評估搜尋中使用的欄位具有非空值的實體。向量欄位為 NULL 的實體會自動跳過。</p>
 <p>對於可為空的向量欄位，例如本範例中的<code translate="no">embedding</code> ：</p>
 <ul>
 <li>只有具有有效向量值的實體才會被評估和排序。</li>
@@ -617,7 +613,6 @@ fmt.Println(resultSets)
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [[0.1, 0.2, 0.3, 0.4]],
@@ -711,7 +706,7 @@ fmt.Println(resultSets)
 <ul>
 <li>當欄位具有非 NULL 預設值時，不論是否啟用<code translate="no">nullable</code> ，都會使用該值。</li>
 <li>當<code translate="no">nullable=True</code> 但未設定預設值時，欄位會儲存 NULL。</li>
-<li>當<code translate="no">nullable=False</code> 但未設定預設值時，插入失敗並產生錯誤。</li>
-<li>在非空欄位上設定 NULL 預設值是無效的，並會導致錯誤。</li>
+<li>當<code translate="no">nullable=False</code> 但未設定預設值時，插入會出錯失敗。</li>
+<li>在非空欄位上設定 NULL 預設值是無效的，並會造成錯誤。</li>
 </ul>
 <p>有關預設值的完整範例和 API 使用，請參閱<a href="/docs/zh-hant/default-values.md">預設值</a>。</p>

@@ -39,9 +39,9 @@ title: CDCサーバのデプロイ
 <ul>
 <li><p><strong>Milvusインスタンス</strong>：Milvusインスタンス：ソースMilvusと少なくとも1つのターゲットMilvusの両方がデプロイされ、稼動していること。</p>
 <ul>
-<li><p>ソースとターゲットのMilvusのバージョンは2.3.2以上、できれば2.4.xであることが望ましい。</p></li>
+<li><p>ソースとターゲットのMilvusのバージョンは2.3.2以上、できれば2.4.xであること。互換性を確保するため、ソースとターゲットのMilvusを同じバージョンにすることを推奨する。</p></li>
 <li><p>ターゲットMilvusの<code translate="no">common.ttMsgEnabled</code> の設定を<code translate="no">false</code> に設定する。</p></li>
-<li><p>ソースMilvusとターゲットMilvusのコンフリクトを防ぐため、メタとメッセージストレージを別々に設定する。例えば、複数のMilvusインスタンスで同じetcdおよびrootPath設定、同じPulsarサービスおよび<code translate="no">chanNamePrefix</code> 。</p></li>
+<li><p>ソースMilvusとターゲットMilvusのコンフリクトを防ぐため、メタとメッセージストレージを別々に設定する。例えば、複数のMilvusインスタンスで同じetcdおよびrootPath構成、同じPulsarサービスおよび<code translate="no">chanNamePrefix</code> 。</p></li>
 </ul></li>
 <li><p><strong>メタストア</strong>：Milvus-CDCメタストア用に、etcdまたはMySQLデータベースを用意してください。</p></li>
 </ul>

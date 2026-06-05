@@ -2,8 +2,8 @@
 id: nullable-and-default.md
 title: Campos anuláveis
 summary: >-
-  Configurar campos anuláveis e valores padrão, incluindo comportamento de
-  esquema, inserção, índice, pesquisa e filtro.
+  Configurar campos anuláveis e valores predefinidos, incluindo o comportamento
+  do esquema, inserção, índice, pesquisa e filtro.
 ---
 <h1 id="Nullable-Fields" class="common-anchor-header">Campos anuláveis<button data-href="#Nullable-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -23,7 +23,7 @@ summary: >-
     </button></h1><p>O Milvus suporta campos anuláveis, que permitem que um valor de campo esteja em falta ou seja explicitamente definido como NULL. A nulidade é definida ao nível do esquema e aplica-se de forma consistente nas operações de ingestão, indexação, pesquisa e consulta de dados.</p>
 <p>Utilize campos anuláveis quando:</p>
 <ul>
-<li>Os dados são ingeridos de sistemas externos que permitem valores ausentes.</li>
+<li>Os dados são ingeridos a partir de sistemas externos que permitem valores ausentes.</li>
 <li>Alguns metadados são opcionais ou só estão disponíveis para parte do conjunto de dados.</li>
 <li>As incorporações de vetor são geradas de forma assíncrona e inseridas posteriormente.</li>
 </ul>
@@ -236,7 +236,6 @@ curl --request POST \
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: {
@@ -377,7 +376,6 @@ _, err := client.Insert(ctx, milvusclient.NewRowBasedInsertOption(<span class="h
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -499,7 +497,6 @@ _, err = client.LoadCollection(ctx, milvusclient.NewLoadCollectionOption(<span c
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;indexParams&quot;: [
@@ -515,7 +512,6 @@ curl --request POST \
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/load&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{&quot;collectionName&quot;: &quot;my_collection&quot;}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Neste ponto:</p>
@@ -619,7 +615,6 @@ fmt.Println(resultSets)
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [[0.1, 0.2, 0.3, 0.4]],

@@ -109,7 +109,7 @@ summary: >-
     </button></h2><p>As demonstrated in the diagram below, an index type in Milvus consists of three core components, namely <strong>data structure</strong>, <strong>quantization</strong>, and <strong>refiner</strong>. Quantization and refiner are optional, but are widely used because of a significant gains-better-than-costs balance.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v3.0.x/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
     <span>Vector Index Anatomy</span>
   </span>
 </p>

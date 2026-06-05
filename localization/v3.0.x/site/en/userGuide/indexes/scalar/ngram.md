@@ -2,14 +2,11 @@
 id: ngram.md
 title: NGRAM
 summary: >-
-  The NGRAM index in Milvus is built to accelerate LIKE queries on VARCHAR
-  fields or specific JSON paths within JSON fields. Before building the index,
-  Milvus splits text into short, overlapping substrings of a fixed length n,
-  known as n-grams. For example, with n = 3, the word "Milvus" is split into
-  3-grams: "Mil", "ilv", "lvu", and "vus". These n-grams are then stored in an
-  inverted index that maps each gram to the document IDs in which it appears. At
-  query time, this index allows Milvus to quickly narrow the search to a small
-  set of candidates, resulting in much faster query execution.
+  The NGRAM index in Milvus accelerates LIKE queries and eligible regex filters
+  on VARCHAR fields or specific JSON paths within JSON fields. Before building
+  the index, Milvus splits text into short, overlapping substrings of a fixed
+  length n, known as n-grams. At query time, Milvus uses these n-grams to narrow
+  candidate entities before verifying the original filter condition.
 ---
 <h1 id="NGRAM" class="common-anchor-header">NGRAM<button data-href="#NGRAM" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -26,15 +23,17 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The <code translate="no">NGRAM</code> index in Milvus is built to accelerate <code translate="no">LIKE</code> queries on <code translate="no">VARCHAR</code> fields or specific JSON paths within <code translate="no">JSON</code> fields. Before building the index, Milvus splits text into short, overlapping substrings of a fixed length <em>n</em>, known as <em>n-grams</em>. For example, with <em>n = 3</em>, the word <em>“Milvus”</em> is split into 3-grams: <em>“Mil”</em>, <em>“ilv”</em>, <em>“lvu”</em>, and <em>“vus”</em>. These n-grams are then stored in an inverted index that maps each gram to the document IDs in which it appears. At query time, this index allows Milvus to quickly narrow the search to a small set of candidates, resulting in much faster query execution.</p>
-<p>Use it when you need fast prefix, suffix, infix, or wildcard filtering such as:</p>
+    </button></h1><p>The <code translate="no">NGRAM</code> index in Milvus accelerates <code translate="no">LIKE</code> queries and eligible regex filters on <code translate="no">VARCHAR</code> fields or specific JSON paths within <code translate="no">JSON</code> fields. Before building the index, Milvus splits text into short, overlapping substrings of a fixed length <em>n</em>, known as <em>n-grams</em>. For example, with <em>n = 3</em>, the word <em>“Milvus”</em> is split into 3-grams: <em>“Mil”</em>, <em>“ilv”</em>, <em>“lvu”</em>, and <em>“vus”</em>. These n-grams are then stored in an inverted index that maps each gram to the document IDs in which it appears. At query time, this index allows Milvus to quickly narrow the search to a small set of candidates before verifying the original filter condition.</p>
+<p>Use it when you need fast prefix, suffix, infix, wildcard, or eligible regex filtering such as:</p>
 <ul>
 <li><p><code translate="no">name LIKE &quot;data%&quot;</code></p></li>
 <li><p><code translate="no">title LIKE &quot;%vector%&quot;</code></p></li>
 <li><p><code translate="no">path LIKE &quot;%json&quot;</code></p></li>
+<li><p><code translate="no">message =~ &quot;error.*timeout&quot;</code></p></li>
+<li><p><code translate="no">url =~ &quot;/api/v[0-9]+/users&quot;</code></p></li>
 </ul>
 <div class="alert note">
-<p>For details on filter expression syntax, refer to <a href="/docs/basic-operators.md#Range-operators">Basic Operators</a>.</p>
+<p>For details on <code translate="no">LIKE</code> and regex filter expression syntax, refer to <a href="/docs/pattern-matching.md">Pattern Matching</a>.</p>
 </div>
 <h2 id="How-it-works" class="common-anchor-header">How it works<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -139,7 +138,7 @@ A wider `[min_gram, max_gram]` range creates more grams and larger mapping lists
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>When a <code translate="no">LIKE</code> filter is executed, Milvus uses the NGRAM index to accelerate the query in the following steps:</p>
+    </button></h3><p>When a <code translate="no">LIKE</code> filter or an eligible regex filter is executed, Milvus uses the NGRAM index to accelerate the query in the following steps:</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/accelerate-queries.png" alt="Accelerate Queries" class="doc-image" id="accelerate-queries" />
@@ -147,7 +146,7 @@ A wider `[min_gram, max_gram]` range creates more grams and larger mapping lists
   </span>
 </p>
 <ol>
-<li><p><strong>Extract the query term:</strong> The contiguous substring without wildcards is extracted from the <code translate="no">LIKE</code> expression (e.g., <code translate="no">&quot;%database%&quot;</code> becomes <code translate="no">&quot;database&quot;</code>).</p></li>
+<li><p><strong>Extract the query term:</strong> The contiguous substring without wildcards is extracted from the <code translate="no">LIKE</code> expression (e.g., <code translate="no">&quot;%database%&quot;</code> becomes <code translate="no">&quot;database&quot;</code>). For regex filters, Milvus extracts fixed literal substrings from the regex pattern when possible. For example, <code translate="no">message =~ &quot;error.*timeout&quot;</code> contains the literals <code translate="no">error</code> and <code translate="no">timeout</code>.</p></li>
 <li><p><strong>Decompose the query term:</strong> The query term is decomposed into <em>n-grams</em> based on its length (<code translate="no">L</code>) and the <code translate="no">min_gram</code> and <code translate="no">max_gram</code> settings.</p>
 <ul>
 <li><p>If <code translate="no">L &lt; min_gram</code>, the index cannot be used, and the query falls back to a full scan.</p></li>
@@ -156,7 +155,7 @@ A wider `[min_gram, max_gram]` range creates more grams and larger mapping lists
 </ul>
 <p>For example, if the <code translate="no">max_gram</code> is set to <code translate="no">3</code> and the query term is <code translate="no">&quot;database&quot;</code>, which has a length of <strong>8</strong>, it is decomposed into 3-gram substrings like <code translate="no">&quot;dat&quot;</code>, <code translate="no">&quot;ata&quot;</code>, <code translate="no">&quot;tab&quot;</code>, and so on.</p></li>
 <li><p><strong>Look for each gram & intersect</strong>: Milvus looks up each of the query grams in the inverted index and then intersects the resulting document ID lists to find a small set of candidate documents. These candidates contain all the grams from the query.</p></li>
-<li><p><strong>Verify and return results:</strong> The original <code translate="no">LIKE</code> filter is then applied as a final check on only the small candidate set to find the exact matches.</p></li>
+<li><p><strong>Verify and return results:</strong> The original <code translate="no">LIKE</code> or regex filter is then applied as a final check on only the small candidate set to find the exact matches.</p></li>
 </ol>
 <h2 id="Create-an-NGRAM-index" class="common-anchor-header">Create an NGRAM index<button data-href="#Create-an-NGRAM-index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -309,8 +308,15 @@ client.create_index(
 <li><p><strong>JSON path queries</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;json_field[&quot;body&quot;] LIKE &quot;%database%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre></li>
+<li><p><strong>Regex filter</strong></p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Match log messages that contain &quot;error&quot; followed later by &quot;timeout&quot;</span>
+<span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;text =~ &quot;error.*timeout&quot;&#x27;</span>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p><strong>Regex filter on a JSON path</strong></p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;json_field[&quot;body&quot;] =~ &quot;error.*timeout&quot;&#x27;</span>
+<button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<p>For more information on filter expression syntax, refer to <a href="/docs/basic-operators.md">Basic Operators</a>.</p>
+<p>For more information on filter expression syntax, refer to <a href="/docs/pattern-matching.md">Pattern Matching</a>.</p>
 <h2 id="Drop-an-index" class="common-anchor-header">Drop an index<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -351,6 +357,9 @@ client.create_index(
       </svg>
     </button></h2><ul>
 <li><p><strong>Field types</strong>: Supported on <code translate="no">VARCHAR</code> and <code translate="no">JSON</code> fields. For JSON, provide both <code translate="no">params.json_path</code> and <code translate="no">params.json_cast_type=&quot;varchar&quot;</code>.</p></li>
+<li><p><strong>Regex acceleration</strong>: <code translate="no">NGRAM</code> accelerates regex filters only when Milvus can extract fixed literal substrings from the regex pattern. Patterns such as <code translate="no">[a-z]+</code> may fall back to scanning because they do not contain fixed literals.</p></li>
+<li><p><strong>Case-insensitive regex</strong>: Regex patterns with <code translate="no">(?i)</code> are supported, but they may skip <code translate="no">NGRAM</code> optimization because the index preserves original case.</p></li>
+<li><p><strong>Verification step</strong>: For regex filters, <code translate="no">NGRAM</code> produces candidates and Milvus verifies them with the full RE2 regex pattern, so index acceleration does not change match results.</p></li>
 <li><p><strong>Unicode</strong>: NGRAM decomposition is character-based and language-agnostic and includes whitespace and punctuation.</p></li>
 <li><p><strong>Space–time trade-off</strong>: Wider gram ranges <code translate="no">[min_gram, max_gram]</code> produce more grams and larger indexes. If memory is tight, consider <code translate="no">mmap</code> mode for large posting lists. For more information, refer to <a href="https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb">Use mmap</a>.</p></li>
 <li><p><strong>Immutability</strong>: <code translate="no">min_gram</code> and <code translate="no">max_gram</code> cannot be changed in place—rebuild the index to adjust them.</p></li>

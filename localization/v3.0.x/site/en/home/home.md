@@ -122,12 +122,12 @@ Here you will learn about what Milvus is, and how to install, use, and deploy Mi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><em>May 2026 - Milvus 3.0.x updates</em></p>
+    </button></h2><p><em>March 2026 - Milvus 2.6.x updates</em></p>
 <ul>
-<li>Added Milvus 3.0.x highlights to the <a href="/docs/release_notes.md">Release Notes</a>, including External Collection, Snapshot, Storage V3, and lake ecosystem integrations.</li>
-<li>Added guidance on how to <a href="/docs/single-vector-search.md#Sort-Search-Results-by-Scalar-Fields--Milvus-30x">sort search results by scalar fields</a> and <a href="/docs/get-and-scalar-query.md#Aggregate-Query-Results--Milvus-30x">aggregate query results</a>.</li>
-<li>Added guidance on how to use <a href="/docs/nullable-and-default.md">nullable vector fields</a> and <a href="/docs/set-collection-ttl.md#Set-entity-level-TTL--Milvus-30x">entity-level TTL</a>.</li>
-<li>Added guidance on how to use <a href="/docs/minhash-function.md">MinHash Function</a> for server-side MinHash signatures.</li>
-<li>Added guidance on how to <a href="/docs/search-with-embedding-lists.md">search with embedding lists</a> and trigger <a href="/docs/force-merge.md">force merge compaction</a>.</li>
+<li>Added <a href="/docs/milvus_for_agents.md">Milvus for AI Agents</a> section with prompt guides.</li>
+<li>Added guidance on how to use <a href="/docs/google-gemini.md">Gemini embedding function</a>.</li>
+<li>Added guidance on how to <a href="/docs/primary-key-search.md">search by primary keys</a>.</li>
+<li>Added guidance on how to use <a href="/docs/text-highlighter.md">text highlighter</a> in search results.</li>
+<li>Added descriptions of <a href="/docs/geometry-field.md">geometry field</a>, <a href="/docs/timestamptz-field.md">timestamptz field</a>, <a href="/docs/tiered-storage-overview.md">tiered storage</a>, and <a href="/docs/array-of-structs.md">array of structs</a>.</li>
 </ul>
 </div>

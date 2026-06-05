@@ -104,7 +104,7 @@ title: Distribuzione del server CDC
 <li><p><code translate="no">metaStoreConfig.storeType</code>: Tipo di metastore per Milvus-CDC. I valori possibili sono <code translate="no">etcd</code> o <code translate="no">mysql</code>.</p></li>
 <li><p><code translate="no">metaStoreConfig.etcdEndpoints</code>: Indirizzo per la connessione all'etcd di Milvus-CDC. Richiesto se <code translate="no">storeType</code> è impostato su <code translate="no">etcd</code>.</p></li>
 <li><p><code translate="no">metaStoreConfig.mysqlSourceUrl</code>: Indirizzo di connessione del database MySQL per il server Milvus-CDC. Richiesto se <code translate="no">storeType</code> è impostato su <code translate="no">mysql</code>.</p></li>
-<li><p><code translate="no">metaStoreConfig.rootPath</code>: Percorso della radice del metastore Milvus-CDC. Questa configurazione consente la multi-tenancy, permettendo a più servizi CDC di utilizzare la stessa istanza etcd o MySQL, pur ottenendo l'isolamento attraverso percorsi radice diversi.</p></li>
+<li><p><code translate="no">metaStoreConfig.rootPath</code>: Percorso radice del metastore Milvus-CDC. Questa configurazione consente la multi-tenancy, permettendo a più servizi CDC di utilizzare la stessa istanza etcd o MySQL, pur ottenendo l'isolamento attraverso percorsi radice diversi.</p></li>
 </ul>
 <p>Esempio di configurazione:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># cdc meta data config</span>

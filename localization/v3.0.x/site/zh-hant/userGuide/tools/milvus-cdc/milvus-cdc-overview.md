@@ -1,7 +1,7 @@
 ---
 id: milvus-cdc-overview.md
 order: 1
-summary: Milvus-CDC 是一個易於使用的工具，可以在 Milvus 實體中擷取和同步增量資料。
+summary: Milvus-CDC 是一個易於使用的工具，可以擷取和同步 Milvus 實體中的增量資料。
 title: CDC 總覽
 ---
 <h1 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">

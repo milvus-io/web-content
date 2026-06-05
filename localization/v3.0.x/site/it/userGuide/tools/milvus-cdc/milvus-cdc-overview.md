@@ -39,7 +39,7 @@ title: Panoramica del CDC
       </svg>
     </button></h2><ul>
 <li><p><strong>Sincronizzazione sequenziale dei dati</strong>: Assicura l'integrità e la coerenza dei dati sincronizzando le modifiche dei dati in modo sequenziale tra le istanze Milvus.</p></li>
-<li><p><strong>Replica incrementale dei dati</strong>: Replica i dati incrementali, compresi gli inserimenti e le eliminazioni, da Milvus di origine a Milvus di destinazione, offrendo un'archiviazione persistente.</p></li>
+<li><p><strong>Replica incrementale dei dati</strong>: Replica i dati incrementali, compresi gli inserimenti e le cancellazioni, da Milvus di origine a Milvus di destinazione, offrendo un'archiviazione persistente.</p></li>
 <li><p><strong>Gestione delle attività CDC</strong>: Consente la gestione delle attività CDC tramite richieste OpenAPI, tra cui la creazione, l'interrogazione dello stato e l'eliminazione delle attività CDC.</p></li>
 </ul>
 <p>Inoltre, stiamo pianificando di espandere le nostre capacità per includere il supporto per l'integrazione con i sistemi di elaborazione dei flussi in futuro.</p>
@@ -111,7 +111,7 @@ title: Panoramica del CDC
       </svg>
     </button></h2><ul>
 <li><p><strong>Sincronizzazione incrementale dei dati</strong>: Attualmente, Milvus-CDC è progettato per sincronizzare solo dati incrementali. Se la vostra azienda necessita di un backup completo dei dati, <a href="https://milvus.io/community">contattateci</a> per assistenza.</p></li>
-<li><p><strong>Ambito di sincronizzazione</strong>: Attualmente, Milvus-CDC può sincronizzare i dati a livello di cluster. Stiamo lavorando per aggiungere il supporto per la sincronizzazione dei dati a livello di collezione nelle prossime versioni.</p></li>
+<li><p><strong>Ambito di sincronizzazione</strong>: Attualmente Milvus-CDC può sincronizzare i dati a livello di cluster. Stiamo lavorando per aggiungere il supporto per la sincronizzazione dei dati a livello di collezione nelle prossime versioni.</p></li>
 <li><p><strong>Richieste API supportate</strong>: Milvus-CDC supporta attualmente le seguenti richieste API. Nelle prossime versioni si prevede di estendere il supporto ad altre richieste:</p>
 <ul>
 <li><p>Creare/Abbandonare una raccolta</p></li>

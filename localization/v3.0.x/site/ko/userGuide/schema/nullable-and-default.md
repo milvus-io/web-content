@@ -46,7 +46,7 @@ summary: '스키마, 삽입, 인덱스, 검색 및 필터 동작을 포함하여
 <li><p>null 가능 속성은 필드가 생성될 때 정의되며 이후에는 수정할 수 없습니다. 기존 필드에 대해서는 무효화 가능성을 활성화 또는 비활성화할 수 없습니다.</p></li>
 <li><p>무효화 가능으로 표시된 필드는 파티션 키로 사용할 수 없습니다. 파티션 키 필드에는 항상 유효한 null이 아닌 값이 포함되어야 합니다. 자세한 내용은 <a href="/docs/ko/use-partition-key.md">파티션 키 사용을</a> 참조하세요.</p></li>
 </ul>
-<h2 id="What-is-a-nullable-field" class="common-anchor-header">Null 가능 필드란 무엇인가요?<button data-href="#What-is-a-nullable-field" class="anchor-icon" translate="no">
+<h2 id="What-is-a-nullable-field" class="common-anchor-header">무효화 가능한 필드란 무엇인가요?<button data-href="#What-is-a-nullable-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -234,7 +234,6 @@ curl --request POST \
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: {
@@ -375,7 +374,6 @@ _, err := client.Insert(ctx, milvusclient.NewRowBasedInsertOption(<span class="h
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -497,7 +495,6 @@ _, err = client.LoadCollection(ctx, milvusclient.NewLoadCollectionOption(<span c
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;indexParams&quot;: [
@@ -513,7 +510,6 @@ curl --request POST \
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/load&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{&quot;collectionName&quot;: &quot;my_collection&quot;}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>이 시점에서는</p>
@@ -617,7 +613,6 @@ fmt.Println(resultSets)
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [[0.1, 0.2, 0.3, 0.4]],

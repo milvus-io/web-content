@@ -556,7 +556,6 @@ client.createPrivilegeGroup(CreatePrivilegeGroupReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;
 }&#x27;</span>
@@ -613,7 +612,6 @@ client.addPrivilegesToGroup(AddPrivilegesToGroupReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/add_privileges_to_group&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;,
     &quot;privileges&quot;:[&quot;Query&quot;, &quot;Search&quot;]
@@ -669,7 +667,6 @@ client.removePrivilegesFromGroup(RemovePrivilegesFromGroupReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/remove_privileges_from_group&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;,
     &quot;privileges&quot;:[&quot;Search&quot;]
@@ -723,7 +720,6 @@ List&lt;PrivilegeGroup&gt; groups = resp.getPrivilegeGroups();
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/list&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Below is an example output.</p>
@@ -775,7 +771,6 @@ client.dropPrivilegeGroup(DropPrivilegeGroupReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/drop&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;
 }&#x27;</span>

@@ -127,7 +127,7 @@ title: نشر خادم CDC
 <li><p><strong>المشغل</strong>: افتراضي إلى <code translate="no">&lt;release_name&gt;</code>.</p></li>
 </ul></li>
 <li><p><code translate="no">replicateChan</code>:: اسم قناة النسخ المتماثل لـ milvus، وهو <code translate="no">{msgChannel.chanNamePrefix.cluster}/{msgChannel.chanNamePrefix.replicateMsg}</code> في ملف milvus.yaml</p></li>
-<li><p><code translate="no">sourceConfig.pulsar</code>: تكوينات النابض لمصدر Milvus Milvus. إذا كان المصدر Milvus Milvus يستخدم Kafka لتخزين الرسائل، فقم بإزالة جميع التكوينات المتعلقة بـ Pulsar. لمزيد من المعلومات، راجع <a href="https://milvus.io/docs/configure_pulsar.md">التكوينات المتعلقة</a> بـ <a href="https://milvus.io/docs/configure_pulsar.md">Pulsar</a>.</p></li>
+<li><p><code translate="no">sourceConfig.pulsar</code>: تكوينات النابض لمصدر Milvus Milvus. إذا كان المصدر Milvus المصدر يستخدم Kafka لتخزين الرسائل، فقم بإزالة جميع التكوينات المتعلقة بـ Pulsar. لمزيد من المعلومات، راجع <a href="https://milvus.io/docs/configure_pulsar.md">التكوينات المتعلقة</a> بـ <a href="https://milvus.io/docs/configure_pulsar.md">Pulsar</a>.</p></li>
 <li><p><code translate="no">sourceConfig.kafka.address</code>: عنوان كافكا للمصدر Milvus. قم بإلغاء هذا التكوين إذا كان المصدر Milvus يستخدم Kafka لتخزين الرسائل.</p></li>
 </ul></li>
 </ul>
