@@ -20,7 +20,7 @@ An upsert request that works in override mode combines an insert and a delete. W
 
 ![Upsert In Override Mode](../../../../assets/upsert-in-override-mode.png)
 
-If the target collection has `autoid` enabled on its primary field, Milvus will generate a new primary key for the data carried in the request payload before inserting it.
+If the target collection has `autoID` enabled on its primary field, the `upsert` request must still include the primary key of the target entity. Milvus uses the provided primary key to locate the entity to replace, and generates a new primary key for the data carried in the request payload before inserting it.
 
 For fields with `nullable` enabled, you can omit them in the `upsert` request if they do not require any updates.
 
@@ -76,7 +76,7 @@ There are several special notes you should consider before using the merge featu
 
 Based on the above content, there are several limits and restrictions to follow:
 
-- The `upsert` request must always include the primary keys of the target entities.
+- The `upsert` request must always include the primary keys of the target entities, even when `autoID` is enabled. For `autoID` collections, the primary keys in the request identify the existing entities to replace. Milvus generates new primary keys for the inserted replacement entities.
 
 - The target collection must be loaded and available for queries.
 
