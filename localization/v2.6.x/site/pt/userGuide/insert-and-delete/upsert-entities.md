@@ -36,7 +36,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>É possível utilizar <code translate="no">upsert</code> para inserir uma nova entidade ou atualizar uma entidade existente, dependendo se a chave primária fornecida no pedido de upsert existe na coleção. Se a chave primária não for encontrada, ocorre uma operação de inserção. Caso contrário, será efectuada uma operação de atualização.</p>
+    </button></h2><p>Pode utilizar <code translate="no">upsert</code> para inserir uma nova entidade ou atualizar uma entidade existente, dependendo se a chave primária fornecida no pedido de upsert existe na coleção. Se a chave primária não for encontrada, ocorre uma operação de inserção. Caso contrário, será efectuada uma operação de atualização.</p>
 <p>Um upsert no Milvus funciona em modo de <strong>substituição</strong> ou <strong>de fusão</strong>.</p>
 <h3 id="Upsert-in-override-mode" class="common-anchor-header">Upsert em modo de substituição<button data-href="#Upsert-in-override-mode" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -58,8 +58,8 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" />
    </span> <span class="img-wrapper"> <span>Upsert em modo de substituição</span> </span></p>
-<p>Se a coleção de destino tiver <code translate="no">autoid</code> ativado no seu campo primário, o Milvus irá gerar uma nova chave primária para os dados transportados na carga do pedido antes de os inserir.</p>
-<p>Para os campos com <code translate="no">nullable</code> ativado, pode omiti-los no pedido <code translate="no">upsert</code> se não necessitarem de actualizações.</p>
+<p>Se a coleção de destino tiver <code translate="no">autoID</code> ativado no seu campo primário, o pedido <code translate="no">upsert</code> deve ainda incluir a chave primária da entidade de destino. O Milvus usa a chave primária fornecida para localizar a entidade a ser substituída e gera uma nova chave primária para os dados carregados na carga do pedido antes de inseri-los.</p>
+<p>Para os campos com <code translate="no">nullable</code> ativado, pode omiti-los no pedido <code translate="no">upsert</code> se não necessitarem de quaisquer actualizações.</p>
 <h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">Upsert no modo de mesclagem<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -117,7 +117,7 @@ summary: >-
 </ul></li>
 <li><p><strong>Fazer upsert de um campo JSON.</strong></p>
 <p>Suponha que a coleção de exemplo tenha um campo JSON definido por esquema chamado <code translate="no">extras</code>, e os pares de valores chave nesse campo JSON de uma entidade sejam semelhantes a <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
-<p>Quando você insere o campo <code translate="no">extras</code> de uma entidade com dados JSON modificados, observe que o campo JSON é tratado como um todo e você não pode atualizar chaves individuais seletivamente. Em outras palavras, o campo JSON <strong>NÃO</strong> suporta a inserção ascendente no modo <strong>de mesclagem</strong>.</p></li>
+<p>Quando você insere o campo <code translate="no">extras</code> de uma entidade com dados JSON modificados, observe que o campo JSON é tratado como um todo e não é possível atualizar chaves individuais seletivamente. Em outras palavras, o campo JSON <strong>NÃO</strong> suporta a inserção ascendente no modo <strong>de mesclagem</strong>.</p></li>
 <li><p><strong>Fazer upsert de um</strong> <strong>campo</strong> <code translate="no">ARRAY</code> <strong>.</strong></p>
 <p>No modo de mesclagem, os campos <code translate="no">ARRAY</code> suportam os operadores de atualização parcial <code translate="no">ARRAY_APPEND</code> e <code translate="no">ARRAY_REMOVE</code>. Utilize estes operadores quando pretender adicionar elementos a, ou remover elementos correspondentes de, um campo <code translate="no">ARRAY</code> existente sem substituir todo o valor da matriz.</p></li>
 </ul>
@@ -138,9 +138,9 @@ summary: >-
       </svg>
     </button></h3><p>Com base no conteúdo acima, há vários limites e restrições a serem seguidos:</p>
 <ul>
-<li><p>A solicitação <code translate="no">upsert</code> deve sempre incluir as chaves primárias das entidades de destino.</p></li>
-<li><p>A coleção de destino deve ser carregada e estar disponível para consultas.</p></li>
-<li><p>Todos os campos especificados no pedido têm de existir no esquema da coleção de destino.</p></li>
+<li><p>O pedido <code translate="no">upsert</code> tem de incluir sempre as chaves primárias das entidades de destino, mesmo quando <code translate="no">autoID</code> está ativado. Para as colecções <code translate="no">autoID</code>, as chaves primárias do pedido identificam as entidades existentes a substituir. O Milvus gera novas chaves primárias para as entidades de substituição inseridas.</p></li>
+<li><p>A coleção de destino tem de ser carregada e estar disponível para consultas.</p></li>
+<li><p>Todos os campos especificados no pedido devem existir no esquema da coleção de destino.</p></li>
 <li><p>Os valores de todos os campos especificados no pedido devem corresponder aos tipos de dados definidos no esquema.</p></li>
 <li><p>Para qualquer campo derivado de outro usando funções, o Milvus removerá o campo derivado durante o upsert para permitir o recálculo.</p></li>
 </ul>
@@ -343,7 +343,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Você também pode inserir entidades em uma partição especificada. Os seguintes trechos de código assumem que você tem uma partição chamada <strong>PartitionA</strong> na sua coleção.</p>
+    </button></h2><p>Você também pode inserir entidades em uma partição especificada. Os trechos de código a seguir assumem que você tem uma partição chamada <strong>PartitionA</strong> em sua coleção.</p>
 <p>As três entidades, se existirem na partição, serão substituídas por aquelas incluídas na solicitação.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -709,7 +709,7 @@ client.upsert(UpsertReq.builder()
     </button></h3><ul>
 <li>Os valores do payload devem corresponder ao <code translate="no">element_type</code> do campo de destino <code translate="no">ARRAY</code>. Por exemplo, se o campo de destino for <code translate="no">ARRAY&lt;VARCHAR&gt;</code>, o payload deve conter valores de cadeia de caracteres.</li>
 <li><code translate="no">ARRAY_APPEND</code> e <code translate="no">ARRAY_REMOVE</code> suportam campos <code translate="no">ARRAY</code> cujo <code translate="no">element_type</code> é <code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, ou <code translate="no">VARCHAR</code>.</li>
-<li>Após uma operação <code translate="no">ARRAY_APPEND</code>, o comprimento da matriz resultante não pode exceder o campo <code translate="no">max_capacity</code>.</li>
+<li>Após uma operação <code translate="no">ARRAY_APPEND</code>, o comprimento da matriz resultante não pode exceder o <code translate="no">max_capacity</code> do campo.</li>
 <li>Os upserts simultâneos para a mesma entidade não são atómicos entre pedidos. Se dois pedidos actualizarem o mesmo campo <code translate="no">ARRAY</code> ao mesmo tempo, a última escrita pode substituir a anterior. Utilize a coordenação ao nível da aplicação se precisar de preservar todas as alterações simultâneas.</li>
 </ul>
 <h3 id="Example" class="common-anchor-header">Exemplo<button data-href="#Example" class="anchor-icon" translate="no">

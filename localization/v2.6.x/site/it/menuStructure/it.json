@@ -474,15 +474,21 @@
             "children": []
           },
           {
-            "label": "Nullabile e predefinito",
+            "label": "Campi nulli",
             "id": "nullable-and-default.md",
             "order": 13,
             "children": []
           },
           {
+            "label": "Valori predefiniti",
+            "id": "default-values.md",
+            "order": 14,
+            "children": []
+          },
+          {
             "label": "Analizzatore",
             "id": "analyzer",
-            "order": 14,
+            "order": 15,
             "children": [
               {
                 "label": "Panoramica dell'analizzatore",
@@ -997,15 +1003,21 @@
                 "children": []
               },
               {
+                "label": "Operatori di StructArray",
+                "id": "struct-array-operators.md",
+                "order": 5,
+                "children": []
+              },
+              {
                 "label": "Campionamento casuale",
                 "id": "random-sampling.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "Operatori della geometria",
                 "id": "geometry-operators.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               }
             ]
@@ -1195,7 +1207,7 @@
                     "children": []
                   },
                   {
-                    "label": "Tutorial: Implementare una classifica basata sul tempo in Milvus",
+                    "label": "Tutorial: Implementare la classificazione basata sul tempo in Milvus",
                     "id": "tutorial-implement-a-time-based-ranking-in-milvus.md",
                     "order": 4,
                     "children": []
@@ -2891,7 +2903,7 @@
         "children": []
       },
       {
-        "label": "Ricerca a imbuto con le matrici Matryoshka",
+        "label": "Ricerca a imbuto con matrioske embeddings",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

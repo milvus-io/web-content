@@ -474,15 +474,21 @@
             "children": []
           },
           {
-            "label": "Нулевые и по умолчанию",
+            "label": "Нулевые поля",
             "id": "nullable-and-default.md",
             "order": 13,
             "children": []
           },
           {
+            "label": "Значения по умолчанию",
+            "id": "default-values.md",
+            "order": 14,
+            "children": []
+          },
+          {
             "label": "Анализатор",
             "id": "analyzer",
-            "order": 14,
+            "order": 15,
             "children": [
               {
                 "label": "Обзор анализатора",
@@ -997,15 +1003,21 @@
                 "children": []
               },
               {
+                "label": "Операторы структурных массивов",
+                "id": "struct-array-operators.md",
+                "order": 5,
+                "children": []
+              },
+              {
                 "label": "Случайная выборка",
                 "id": "random-sampling.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "Геометрические операторы",
                 "id": "geometry-operators.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               }
             ]
@@ -1422,7 +1434,7 @@
                 "children": []
               },
               {
-                "label": "С рулем",
+                "label": "С рулевым",
                 "id": "configure-helm.md",
                 "order": 1,
                 "children": []

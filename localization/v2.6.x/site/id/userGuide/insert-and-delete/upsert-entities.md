@@ -58,8 +58,8 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" />
    </span> <span class="img-wrapper"> <span>Menyisipkan Dalam Mode Penggantian</span> </span></p>
-<p>Jika koleksi target memiliki <code translate="no">autoid</code> yang diaktifkan pada bidang utamanya, Milvus akan menghasilkan kunci utama baru untuk data yang dibawa dalam muatan permintaan sebelum menyisipkannya.</p>
-<p>Untuk field dengan <code translate="no">nullable</code> yang diaktifkan, Anda dapat menghilangkannya dalam permintaan <code translate="no">upsert</code> jika field tersebut tidak memerlukan pembaruan.</p>
+<p>Jika koleksi target memiliki <code translate="no">autoID</code> yang diaktifkan pada bidang utamanya, permintaan <code translate="no">upsert</code> harus tetap menyertakan kunci utama entitas target. Milvus menggunakan kunci utama yang disediakan untuk menemukan entitas yang akan diganti, dan menghasilkan kunci utama baru untuk data yang dibawa dalam muatan permintaan sebelum memasukkannya.</p>
+<p>Untuk bidang dengan <code translate="no">nullable</code> yang diaktifkan, Anda dapat menghilangkannya dalam permintaan <code translate="no">upsert</code> jika bidang tersebut tidak memerlukan pembaruan.</p>
 <h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">Menyisipkan dalam mode penggabungan<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -117,7 +117,7 @@ summary: >-
 </ul></li>
 <li><p><strong>Menambah bidang JSON.</strong></p>
 <p>Misalkan koleksi contoh memiliki bidang JSON yang ditentukan skema bernama <code translate="no">extras</code>, dan pasangan nilai-kunci dalam bidang JSON entitas ini mirip dengan <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
-<p>Ketika Anda meng-upload field <code translate="no">extras</code> dari sebuah entitas dengan data JSON yang telah dimodifikasi, perhatikan bahwa field JSON tersebut diperlakukan sebagai satu kesatuan, dan Anda tidak dapat memperbarui setiap kunci secara selektif. Dengan kata lain, bidang JSON <strong>TIDAK</strong> mendukung upsert dalam mode <strong>penggabungan</strong>.</p></li>
+<p>Ketika Anda meng-upload field <code translate="no">extras</code> dari sebuah entitas dengan data JSON yang telah dimodifikasi, perhatikan bahwa field JSON tersebut diperlakukan secara keseluruhan, dan Anda tidak dapat memperbarui setiap kunci secara selektif. Dengan kata lain, bidang JSON <strong>TIDAK</strong> mendukung upsert dalam mode <strong>penggabungan</strong>.</p></li>
 <li><p><strong>Meng-upsert</strong> <strong>bidang</strong> <code translate="no">ARRAY</code> <strong>.</strong> </p>
 <p>Dalam mode penggabungan, bidang <code translate="no">ARRAY</code> mendukung operator pembaruan parsial <code translate="no">ARRAY_APPEND</code> dan <code translate="no">ARRAY_REMOVE</code>. Gunakan operator ini saat Anda ingin menambahkan elemen ke, atau menghapus elemen yang cocok dari, bidang <code translate="no">ARRAY</code> yang sudah ada tanpa mengganti seluruh nilai larik.</p></li>
 </ul>
@@ -138,11 +138,11 @@ summary: >-
       </svg>
     </button></h3><p>Berdasarkan konten di atas, ada beberapa batasan dan larangan yang harus diikuti:</p>
 <ul>
-<li><p>Permintaan <code translate="no">upsert</code> harus selalu menyertakan kunci utama entitas target.</p></li>
+<li><p>Permintaan <code translate="no">upsert</code> harus selalu menyertakan kunci utama entitas target, bahkan ketika <code translate="no">autoID</code> diaktifkan. Untuk koleksi <code translate="no">autoID</code>, kunci utama dalam permintaan mengidentifikasi entitas yang ada untuk diganti. Milvus menghasilkan kunci primer baru untuk entitas pengganti yang dimasukkan.</p></li>
 <li><p>Koleksi target harus dimuat dan tersedia untuk kueri.</p></li>
 <li><p>Semua bidang yang ditentukan dalam permintaan harus ada dalam skema koleksi target.</p></li>
 <li><p>Nilai semua field yang ditentukan dalam permintaan harus sesuai dengan tipe data yang ditentukan dalam skema.</p></li>
-<li><p>Untuk setiap field yang berasal dari fungsi lain yang menggunakan fungsi, Milvus akan menghapus field turunan selama upsert untuk memungkinkan penghitungan ulang.</p></li>
+<li><p>Untuk setiap field yang diturunkan dari fungsi lain yang menggunakan fungsi, Milvus akan menghapus field turunan selama upsert untuk memungkinkan penghitungan ulang.</p></li>
 </ul>
 <h2 id="Upsert-entities-in-a-collection" class="common-anchor-header">Meng-upsert entitas-entitas dalam sebuah koleksi<button data-href="#Upsert-entities-in-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"

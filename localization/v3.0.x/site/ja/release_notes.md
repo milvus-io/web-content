@@ -43,7 +43,12 @@ title: リリースノート
 <tr><td>3.0ベータ</td><td>3.0.0</td><td>3.0.0</td></tr>
 </tbody>
 </table>
-<p>Milvus 3.0-betaは、Milvusベクトルデータベースを拡張し、オープンレイクのエコシステムに新たに統合しました：External Collectionにより、Milvusは外部レイクテーブルをゼロコピーでクエリでき、SparkはSnapshotを通してMilvusコレクションを直接読み込むことができます。このリリースはまた、よりリッチな検索、より表現力豊かなスキーマ、より深いテキスト検索のカスタマイズ、より細かいデータとモデルのライフサイクル制御、より多くのオペレータ側の制御をもたらします。Milvus 3.0は、Zilliz Lakebaseのコアカーネルであり、統合されたサービング、ディスカバリー、バッチを強力にサポートします。</p>
+<p>Milvus 3.0-betaは、Milvusベクトルデータベースを拡張し、オープンレイクのエコシステムに新たに統合しました：External Collectionにより、Milvusは外部レイクテーブルをゼロコピーでクエリでき、SparkはSnapshotを通してMilvusコレクションを直接読み込むことができます。このリリースはまた、よりリッチな検索、より表現力豊かなスキーマ、より深いテキスト検索のカスタマイズ、より細かいデータとモデルのライフサイクル制御、より多くのオペレータ側の制御をもたらします。Milvus 3.0はZilliz Lakebaseのコア・カーネルであり、統合されたサービング、ディスカバリー、バッチの機能を提供します。</p>
+<p>Milvus 3.0の詳細とコアメンテナとのAMAについてのウェビナーへの参加は下記をクリックしてください：</p>
+<p><a href="https://zilliz.com/event/whats-new-in-milvus-3-0-beta">
+  
+   <span class="img-wrapper"> <img translate="no" src="https://assets.zilliz.com/webinar_3_0_4746da7c2d.png" alt="Webinar 3.0 walkthrough" class="doc-image" id="webinar-3.0-walkthrough" />
+ </span>  <span class="img-wrapper"> <span>ウェビナー3.0ウォークスルー</span> </span></a></p>
 <h3 id="Key-Features" class="common-anchor-header">主な機能<button data-href="#Key-Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -59,7 +64,7 @@ title: リリースノート
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><h4 id="External-Collection" class="common-anchor-header">外部コレクション</h4><p>一般的なAIデータパイプラインでは、何テラバイトものエンベッディングとメタデータが、すでにParquet、Lance、Icebergテーブルとしてオブジェクトストレージ上に置かれています。そのデータをMilvusにコピーすると、ストレージコストが2倍になり、同期を保たなければならないETLパイプラインが追加され、データガバナンスが顧客から遠ざかります。</p>
+    </button></h3><h4 id="External-Collection" class="common-anchor-header">外部コレクション</h4><p>一般的なAIデータパイプラインでは、何テラバイトものエンベッディングとメタデータがすでにParquet、Lance、Icebergテーブルとしてオブジェクトストレージ上に置かれています。そのデータをMilvusにコピーすると、ストレージコストが2倍になり、同期を維持しなければならないETLパイプラインが追加され、データガバナンスが顧客から遠ざかります。</p>
 <p>外部コレクションはコピーを削除します。Milvusコレクションは、既に存在するファイルを参照することができ、Milvusはスキーマ、インデックス、クエリ実行のみを管理します。インクリメンタルリフレッシュにより、Collectionは基礎となるファイルと整合性を保ちます。財務やヘルスケアチームなど、データがレイクを離れることができない顧客は、そのデータに対してベクトル検索を実行することができます。1つのレイク常駐データセットを複数のMilvusインスタンスから同時に提供することも可能です。</p>
 <p>詳細については、<a href="/docs/ja/create-an-external-collection.md">外部コレクションの</a>作成を参照してください。</p>
 <h4 id="Snapshot" class="common-anchor-header">スナップショット</h4><p>サービングとバッチディスカバリは同時に同じコレクションを必要とすることがよくあります。A/Bモデル評価、大規模重複排除、バックフィル検証、およびバージョンロールバックはすべて、書き込みが行われている間、コレクションの安定したビューを必要とします。</p>

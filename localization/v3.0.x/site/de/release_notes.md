@@ -44,7 +44,12 @@ title: Hinweise zur Veröffentlichung
 </tbody>
 </table>
 <p>Milvus 3.0-beta erweitert die Vektordatenbank Milvus um eine neue Integration in das Open-Lake-Ökosystem: Mit External Collection kann Milvus externe Lake-Tabellen kopierfrei abfragen, und Spark kann Milvus-Sammlungen direkt über Snapshot lesen. Die neue Version bietet darüber hinaus eine umfangreichere Abfrage, ein aussagekräftigeres Schema, eine tiefere Anpassung der Textsuche, eine feinere Steuerung des Daten- und Modelllebenszyklus und mehr Steuerelemente auf der Bedienerseite. Milvus 3.0 ist der Kern von Zilliz Lakebase, der die einheitliche Bereitstellung, Erkennung und Stapelverarbeitung ermöglicht.</p>
-<h3 id="Key-Features" class="common-anchor-header">Hauptmerkmale<button data-href="#Key-Features" class="anchor-icon" translate="no">
+<p>Klicken Sie unten, um an unserem Webinar teilzunehmen und mehr Details über Milvus 3.0 und AMA mit den Kern-Maintainern zu erfahren:</p>
+<p><a href="https://zilliz.com/event/whats-new-in-milvus-3-0-beta">
+  
+   <span class="img-wrapper"> <img translate="no" src="https://assets.zilliz.com/webinar_3_0_4746da7c2d.png" alt="Webinar 3.0 walkthrough" class="doc-image" id="webinar-3.0-walkthrough" />
+ </span>  <span class="img-wrapper"> <span>Webinar 3.0-Durchgang</span> </span></a></p>
+<h3 id="Key-Features" class="common-anchor-header">Wesentliche Merkmale<button data-href="#Key-Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -59,7 +64,7 @@ title: Hinweise zur Veröffentlichung
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><h4 id="External-Collection" class="common-anchor-header">Externe Sammlung</h4><p>In typischen KI-Datenpipelines befinden sich bereits Terabytes an Einbettungen und Metadaten auf Objektspeicher als Parquet-, Lance- oder Iceberg-Tabellen. Das Kopieren dieser Daten in Milvus verdoppelt die Speicherkosten, fügt eine ETL-Pipeline hinzu, die synchron gehalten werden muss, und verlagert die Datenverwaltung weg vom Kunden.</p>
+    </button></h3><h4 id="External-Collection" class="common-anchor-header">Externe Sammlung</h4><p>In typischen KI-Datenpipelines befinden sich bereits Terabytes an Einbettungen und Metadaten als Parquet-, Lance- oder Iceberg-Tabellen auf dem Objektspeicher. Das Kopieren dieser Daten in Milvus verdoppelt die Speicherkosten, fügt eine ETL-Pipeline hinzu, die synchron gehalten werden muss, und verlagert die Datenverwaltung weg vom Kunden.</p>
 <p>Mit einer externen Sammlung entfällt diese Kopie. Eine Milvus-Collection kann auf Dateien verweisen, wo sie bereits vorhanden sind, und Milvus verwaltet nur das Schema, die Indizes und die Abfrageausführung. Durch eine inkrementelle Aktualisierung wird die Collection mit den zugrunde liegenden Dateien abgeglichen. Kunden, deren Daten den Lake nicht verlassen dürfen, wie Finanz- und Gesundheitsteams, können Vector Retrieval für diese Daten dort ausführen, wo sie sich befinden. Ein einzelner Datensatz im Lake kann auch von mehreren Milvus-Instanzen gleichzeitig bedient werden.</p>
 <p>Weitere Informationen finden Sie unter <a href="/docs/de/create-an-external-collection.md">Erstellen einer externen Sammlung</a>.</p>
 <h4 id="Snapshot" class="common-anchor-header">Schnappschuss</h4><p>Serving und Batch-Discovery benötigen oft dieselbe Sammlung zur gleichen Zeit. A/B-Modellevaluierung, groß angelegte Deduplizierung, Backfill-Validierung und Versions-Rollback benötigen alle eine stabile Ansicht der Collection, während noch Schreibvorgänge stattfinden.</p>

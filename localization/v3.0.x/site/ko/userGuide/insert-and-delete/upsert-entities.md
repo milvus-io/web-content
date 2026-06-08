@@ -56,7 +56,7 @@ summary: 업서트 작업은 컬렉션에 엔티티를 삽입하거나 업데이
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" />
    </span> <span class="img-wrapper"> <span>재정의 모드에서 업서트</span> </span></p>
-<p>대상 컬렉션의 기본 필드에 <code translate="no">autoid</code> 가 활성화된 경우, Milvus는 요청 페이로드에 포함된 데이터에 대한 새 기본 키를 생성한 후 이를 삽입합니다.</p>
+<p>대상 컬렉션의 기본 필드에 <code translate="no">autoID</code> 가 활성화된 경우 <code translate="no">upsert</code> 요청에는 여전히 대상 엔티티의 기본 키가 포함되어야 합니다. Milvus는 제공된 기본 키를 사용하여 대체할 엔티티를 찾고, 요청 페이로드에 포함된 데이터에 대한 새 기본 키를 생성한 후 삽입합니다.</p>
 <p><code translate="no">nullable</code> 가 활성화된 필드의 경우 업데이트가 필요하지 않은 경우 <code translate="no">upsert</code> 요청에서 생략할 수 있습니다.</p>
 <h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">병합 모드에서 업서트<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -133,11 +133,11 @@ summary: 업서트 작업은 컬렉션에 엔티티를 삽입하거나 업데이
       </svg>
     </button></h3><p>위의 내용을 바탕으로 몇 가지 제한 및 제한 사항을 준수해야 합니다:</p>
 <ul>
-<li><p><code translate="no">upsert</code> 요청에는 항상 대상 엔티티의 기본 키가 포함되어야 합니다.</p></li>
+<li><p><code translate="no">upsert</code> 요청에는 <code translate="no">autoID</code> 이 활성화된 경우에도 항상 대상 엔티티의 기본 키가 포함되어야 합니다. <code translate="no">autoID</code> 컬렉션의 경우, 요청의 기본 키는 대체할 기존 엔티티를 식별합니다. Milvus는 삽입된 대체 엔티티에 대한 새 기본 키를 생성합니다.</p></li>
 <li><p>대상 컬렉션이 로드되어 있고 쿼리에 사용할 수 있어야 합니다.</p></li>
 <li><p>요청에 지정된 모든 필드는 대상 컬렉션의 스키마에 존재해야 합니다.</p></li>
 <li><p>요청에 지정된 모든 필드의 값은 스키마에 정의된 데이터 유형과 일치해야 합니다.</p></li>
-<li><p>함수를 사용하여 다른 필드에서 파생된 필드의 경우, Milvus는 재계산을 위해 업서트 중에 파생된 필드를 제거합니다.</p></li>
+<li><p>함수를 사용하여 다른 필드에서 파생된 필드의 경우, Milvus는 재계산을 허용하기 위해 업서트 중에 파생된 필드를 제거합니다.</p></li>
 </ul>
 <h2 id="Upsert-entities-in-a-collection" class="common-anchor-header">컬렉션의 엔티티 업서트<button data-href="#Upsert-entities-in-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"

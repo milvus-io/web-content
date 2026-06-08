@@ -59,7 +59,7 @@ summary: Saiba como configurar o armazenamento de mensagens com o Milvus Operato
 </ul></li>
 <li>O armazenamento de mensagens não pode ser alterado enquanto o sistema Milvus estiver a funcionar.</li>
 <li>Apenas a versão 2.x ou 3.x do Kafka é suportada.</li>
-<li><strong>Limitações da atualização</strong>: <strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v2.6.17, é necessário manter a escolha atual da fila de mensagens. Não é possível alternar entre sistemas de filas de mensagens diferentes durante a atualização. O suporte à mudança de sistemas de filas de mensagens estará disponível em versões futuras.</li>
+<li><strong>Limitações da atualização</strong>: <strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v2.6.18, é necessário manter a escolha atual da fila de mensagens. Não é possível alternar entre sistemas de filas de mensagens diferentes durante a atualização. O suporte à mudança de sistemas de filas de mensagens estará disponível em versões futuras.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Configurar o RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -127,7 +127,7 @@ summary: Saiba como configurar o armazenamento de mensagens com o Milvus Operato
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Woodpecker é um Write-Ahead Log (WAL) nativo da nuvem concebido para armazenamento de objectos. Ele oferece alta taxa de transferência, baixa sobrecarga operacional e escalabilidade contínua. Para obter mais detalhes, consulte <a href="/docs/pt/v2.6.x/use-woodpecker.md">Usar o Woodpecker</a>.</p>
+    </button></h2><p>O Woodpecker é um Write-Ahead Log (WAL) nativo da nuvem, concebido para armazenamento de objectos. Ele oferece alta taxa de transferência, baixa sobrecarga operacional e escalabilidade contínua. Para obter mais detalhes, consulte <a href="/docs/pt/v2.6.x/use-woodpecker.md">Usar o Woodpecker</a>.</p>
 <h2 id="Configure-Pulsar" class="common-anchor-header">Configurar o Pulsar<button data-href="#Configure-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

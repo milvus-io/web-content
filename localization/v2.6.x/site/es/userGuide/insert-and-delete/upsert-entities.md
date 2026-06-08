@@ -58,7 +58,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" />
    </span> <span class="img-wrapper"> <span>Upsert en modo de anulación</span> </span></p>
-<p>Si la colección de destino tiene <code translate="no">autoid</code> habilitado en su campo primario, Milvus generará una nueva clave primaria para los datos transportados en la carga útil de la petición antes de insertarlos.</p>
+<p>Si la colección de destino tiene <code translate="no">autoID</code> habilitado en su campo primario, la solicitud <code translate="no">upsert</code> debe seguir incluyendo la clave primaria de la entidad de destino. Milvus utiliza la clave primaria proporcionada para localizar la entidad a sustituir, y genera una nueva clave primaria para los datos transportados en la carga útil de la petición antes de insertarla.</p>
 <p>Para los campos con <code translate="no">nullable</code> habilitado, puede omitirlos en la solicitud <code translate="no">upsert</code> si no requieren ninguna actualización.</p>
 <h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">Upsert en modo fusión<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -79,7 +79,7 @@ summary: >-
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-in-merge-mode.png" alt="Upsert In Merge Mode" class="doc-image" id="upsert-in-merge-mode" />
-   </span> <span class="img-wrapper"> <span>Upsert en modo merge</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Upsert en modo fusión</span> </span></p>
 <p>Para realizar una fusión, establezca <code translate="no">partial_update</code> en <code translate="no">True</code> en la solicitud <code translate="no">upsert</code> junto con la clave primaria y los campos que desea actualizar con sus nuevos valores.</p>
 <p>Al recibir una solicitud de este tipo, Milvus realiza una consulta con coherencia fuerte para recuperar la entidad, actualiza los valores de los campos basándose en los datos de la solicitud, inserta los datos modificados y, a continuación, elimina la entidad existente con la clave primaria original que figura en la solicitud.</p>
 <p>Para los campos <code translate="no">ARRAY</code>, el modo de fusión admite dos operadores: <code translate="no">ARRAY_APPEND</code> y <code translate="no">ARRAY_REMOVE</code>. Estos operadores permiten añadir o eliminar elementos coincidentes de un campo <code translate="no">ARRAY</code> existente sin tener que consultar primero la entidad para recuperar su valor actual. Para obtener más información, consulte <a href="/docs/es/v2.6.x/upsert-entities.md#Upsert-ARRAY-fields-with-partial-update-operators">Campos ARRAY Upsert con operadores de actualización parcial</a>.</p>
@@ -138,10 +138,10 @@ summary: >-
       </svg>
     </button></h3><p>Basándose en el contenido anterior, existen varios límites y restricciones a seguir:</p>
 <ul>
-<li><p>La solicitud <code translate="no">upsert</code> debe incluir siempre las claves primarias de las entidades de destino.</p></li>
+<li><p>La solicitud <code translate="no">upsert</code> debe incluir siempre las claves primarias de las entidades de destino, incluso cuando <code translate="no">autoID</code> esté activado. Para las colecciones <code translate="no">autoID</code>, las claves primarias en la solicitud identifican las entidades existentes a reemplazar. Milvus genera nuevas claves primarias para las entidades de sustitución insertadas.</p></li>
 <li><p>La colección de destino debe estar cargada y disponible para consultas.</p></li>
 <li><p>Todos los campos especificados en la solicitud deben existir en el esquema de la colección de destino.</p></li>
-<li><p>Los valores de todos los campos especificados en la petición deben coincidir con los tipos de datos definidos en el esquema.</p></li>
+<li><p>Los valores de todos los campos especificados en la solicitud deben coincidir con los tipos de datos definidos en el esquema.</p></li>
 <li><p>Para cualquier campo derivado de otro mediante funciones, Milvus eliminará el campo derivado durante el upsert para permitir el recálculo.</p></li>
 </ul>
 <h2 id="Upsert-entities-in-a-collection" class="common-anchor-header">Subir entidades de una colección<button data-href="#Upsert-entities-in-a-collection" class="anchor-icon" translate="no">
@@ -630,8 +630,8 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Antes de que se introdujeran los operadores de actualización parcial, la actualización de parte de un campo <code translate="no">ARRAY</code> requería un flujo de lectura-modificación-escritura del lado del cliente: consultar el array existente, cambiarlo en el código de la aplicación y volver a insertar el valor de sustitución completo. Los operadores de actualización parcial sólo permiten enviar los elementos que se deben añadir o eliminar, lo que reduce la lógica del cliente y evita la lectura adicional antes de la inserción.</p>
-<p>Supongamos que la entidad con clave primaria <code translate="no">1</code> ya tiene <code translate="no">tags = [&quot;new&quot;, &quot;trial&quot;]</code>. Sin operadores de actualización parcial, añadir <code translate="no">&quot;premium&quot;</code> al array requiere upserting del array de reemplazo completo:</p>
+    </button></h2><p>Antes de que se introdujeran los operadores de actualización parcial, la actualización de parte de un campo <code translate="no">ARRAY</code> requería un flujo de lectura-modificación-escritura del lado del cliente: consultar el array existente, cambiarlo en el código de la aplicación y volver a insertar el valor de sustitución completo. Los operadores de actualización parcial permiten enviar sólo los elementos que se van a añadir o eliminar, lo que reduce la lógica del cliente y evita la lectura adicional antes de la inserción.</p>
+<p>Supongamos que la entidad con clave primaria <code translate="no">1</code> ya tiene <code translate="no">tags = [&quot;new&quot;, &quot;trial&quot;]</code>. Sin operadores de actualización parcial, añadir <code translate="no">&quot;premium&quot;</code> al array requiere upserting el array de reemplazo completo:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.upsert(

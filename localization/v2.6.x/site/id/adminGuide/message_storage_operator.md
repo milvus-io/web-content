@@ -59,7 +59,7 @@ summary: Pelajari cara mengonfigurasi penyimpanan pesan dengan Milvus Operator.
 </ul></li>
 <li>Penyimpanan pesan tidak dapat diubah ketika sistem Milvus sedang berjalan.</li>
 <li>Hanya versi Kafka 2.x atau 3.x yang didukung.</li>
-<li><strong>Batasan peningkatan</strong>: <strong>Keterbatasan Antrian Pesan</strong>: Ketika mengupgrade ke Milvus v2.6.17, anda harus mempertahankan pilihan antrian pesan anda saat ini. Beralih antara sistem antrian pesan yang berbeda selama upgrade tidak didukung. Dukungan untuk mengubah sistem antrean pesan akan tersedia di versi mendatang.</li>
+<li><strong>Batasan peningkatan</strong>: <strong>Keterbatasan Antrian Pesan</strong>: Ketika mengupgrade ke Milvus v2.6.18, anda harus mempertahankan pilihan antrian pesan anda saat ini. Beralih antara sistem antrian pesan yang berbeda selama upgrade tidak didukung. Dukungan untuk mengubah sistem antrean pesan akan tersedia di versi mendatang.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Mengkonfigurasi RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -366,5 +366,5 @@ summary: Pelajari cara mengonfigurasi penyimpanan pesan dengan Milvus Operator.
     </button></h2><p>Pelajari cara mengonfigurasi dependensi Milvus lainnya dengan Milvus Operator:</p>
 <ul>
 <li><a href="/docs/id/v2.6.x/object_storage_operator.md">Mengonfigurasi Penyimpanan Objek dengan Milvus Operator</a></li>
-<li><a href="/docs/id/v2.6.x/meta_storage_operator.md">Mengkonfigurasi Meta Storage dengan Milvus Operator</a></li>
+<li><a href="/docs/id/v2.6.x/meta_storage_operator.md">Mengonfigurasi Meta Storage dengan Milvus Operator</a></li>
 </ul>

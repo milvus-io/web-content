@@ -58,7 +58,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" />
    </span> <span class="img-wrapper"> <span>Upsert in modalità Override</span> </span></p>
-<p>Se la collezione di destinazione ha <code translate="no">autoid</code> abilitato sul suo campo primario, Milvus genererà una nuova chiave primaria per i dati trasportati nel payload della richiesta prima di inserirli.</p>
+<p>Se la collezione di destinazione ha <code translate="no">autoID</code> abilitato sul suo campo primario, la richiesta <code translate="no">upsert</code> deve comunque includere la chiave primaria dell'entità di destinazione. Milvus utilizza la chiave primaria fornita per individuare l'entità da sostituire e genera una nuova chiave primaria per i dati trasportati nel payload della richiesta prima di inserirli.</p>
 <p>Per i campi con <code translate="no">nullable</code> abilitato, è possibile ometterli nella richiesta <code translate="no">upsert</code> se non richiedono aggiornamenti.</p>
 <h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">Upsert in modalità merge<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -138,9 +138,9 @@ summary: >-
       </svg>
     </button></h3><p>Sulla base del contenuto di cui sopra, ci sono diversi limiti e restrizioni da seguire:</p>
 <ul>
-<li><p>La richiesta <code translate="no">upsert</code> deve sempre includere le chiavi primarie delle entità di destinazione.</p></li>
-<li><p>L'insieme di destinazione deve essere caricato e disponibile per le query.</p></li>
-<li><p>Tutti i campi specificati nella richiesta devono esistere nello schema dell'insieme di destinazione.</p></li>
+<li><p>La richiesta <code translate="no">upsert</code> deve sempre includere le chiavi primarie delle entità di destinazione, anche quando <code translate="no">autoID</code> è abilitato. Per le raccolte <code translate="no">autoID</code>, le chiavi primarie della richiesta identificano le entità esistenti da sostituire. Milvus genera nuove chiavi primarie per le entità sostitutive inserite.</p></li>
+<li><p>La collezione di destinazione deve essere caricata e disponibile per le query.</p></li>
+<li><p>Tutti i campi specificati nella richiesta devono esistere nello schema della collezione di destinazione.</p></li>
 <li><p>I valori di tutti i campi specificati nella richiesta devono corrispondere ai tipi di dati definiti nello schema.</p></li>
 <li><p>Per qualsiasi campo derivato da un altro tramite funzioni, Milvus rimuoverà il campo derivato durante l'upsert per consentire il ricalcolo.</p></li>
 </ul>
@@ -494,7 +494,7 @@ curl --request POST \
     </button></h2><p>Il seguente esempio di codice mostra come effettuare l'upsert di entità con aggiornamenti parziali. Fornire solo i campi da aggiornare e i loro nuovi valori, insieme al flag di aggiornamento parziale esplicito.</p>
 <p>Nell'esempio seguente, il campo <code translate="no">issue</code> delle entità specificate nella richiesta di upsert verrà aggiornato con i valori inclusi nella richiesta.</p>
 <div class="alert note">
-<p>Quando si esegue un upsert in modalità merge, assicurarsi che le entità coinvolte nella richiesta abbiano lo stesso insieme di campi. Supponiamo che ci siano due o più entità da upserire, come mostrato nel seguente frammento di codice, è importante che includano campi identici per evitare errori e mantenere l'integrità dei dati.</p>
+<p>Quando si esegue un upsert in modalità unione, assicurarsi che le entità coinvolte nella richiesta abbiano lo stesso insieme di campi. Supponiamo che ci siano due o più entità da upserire, come mostrato nel seguente frammento di codice, è importante che includano campi identici per evitare errori e mantenere l'integrità dei dati.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -707,7 +707,7 @@ client.upsert(UpsertReq.builder()
         ></path>
       </svg>
     </button></h3><ul>
-<li>I valori del payload devono corrispondere a <code translate="no">element_type</code> del campo <code translate="no">ARRAY</code> di destinazione. Ad esempio, se il campo di destinazione è <code translate="no">ARRAY&lt;VARCHAR&gt;</code>, il payload deve contenere valori stringa.</li>
+<li>I valori del payload devono corrispondere a <code translate="no">element_type</code> del campo <code translate="no">ARRAY</code> di destinazione. Ad esempio, se il campo di destinazione è <code translate="no">ARRAY&lt;VARCHAR&gt;</code>, il payload deve contenere valori di stringa.</li>
 <li><code translate="no">ARRAY_APPEND</code> e <code translate="no">ARRAY_REMOVE</code> supportano i campi <code translate="no">ARRAY</code> il cui <code translate="no">element_type</code> è <code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, o <code translate="no">VARCHAR</code>.</li>
 <li>Dopo un'operazione <code translate="no">ARRAY_APPEND</code>, la lunghezza dell'array risultante non deve superare <code translate="no">max_capacity</code> il campo.</li>
 <li>Gli upsert concorrenti alla stessa entità non sono atomici tra le richieste. Se due richieste aggiornano lo stesso campo <code translate="no">ARRAY</code> contemporaneamente, la scrittura successiva può sovrascrivere quella precedente. Utilizzare la coordinazione a livello di applicazione se si desidera preservare tutte le modifiche concorrenti.</li>

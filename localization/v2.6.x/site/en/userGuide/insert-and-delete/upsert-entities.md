@@ -60,7 +60,7 @@ summary: >-
     <span>Upsert In Override Mode</span>
   </span>
 </p>
-<p>If the target collection has <code translate="no">autoid</code> enabled on its primary field, Milvus will generate a new primary key for the data carried in the request payload before inserting it.</p>
+<p>If the target collection has <code translate="no">autoID</code> enabled on its primary field, the <code translate="no">upsert</code> request must still include the primary key of the target entity. Milvus uses the provided primary key to locate the entity to replace, and generates a new primary key for the data carried in the request payload before inserting it.</p>
 <p>For fields with <code translate="no">nullable</code> enabled, you can omit them in the <code translate="no">upsert</code> request if they do not require any updates.</p>
 <h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">Upsert in merge mode<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -142,7 +142,7 @@ summary: >-
       </svg>
     </button></h3><p>Based on the above content, there are several limits and restrictions to follow:</p>
 <ul>
-<li><p>The <code translate="no">upsert</code> request must always include the primary keys of the target entities.</p></li>
+<li><p>The <code translate="no">upsert</code> request must always include the primary keys of the target entities, even when <code translate="no">autoID</code> is enabled. For <code translate="no">autoID</code> collections, the primary keys in the request identify the existing entities to replace. Milvus generates new primary keys for the inserted replacement entities.</p></li>
 <li><p>The target collection must be loaded and available for queries.</p></li>
 <li><p>All fields specified in the request must exist in the schema of the target collection.</p></li>
 <li><p>The values of all fields specified in the request must match the data types defined in the schema.</p></li>

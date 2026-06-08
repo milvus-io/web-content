@@ -19,6 +19,110 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.6.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v2618" class="common-anchor-header">v2.6.18<button data-href="#v2618" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release date: June 5, 2026</p>
+<table>
+<thead>
+<tr><th>Milvus Version</th><th>Python SDK Version</th><th>Node.js SDK Version</th><th>Java SDK Version</th><th>Go SDK Version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.6.18</td><td>2.6.15</td><td>2.6.17</td><td>2.6.20</td><td>2.6.18</td></tr>
+</tbody>
+</table>
+<p>We are excited to announce the release of Milvus v2.6.18! This release adds element-level search on Struct fields and nullable vector support, improves QueryNode and QueryCoord scheduling and stability under heavy load, and brings HTTP/2 to the Proxy REST server. It also fixes numerous correctness and stability issues across import, schema evolution, indexing, compaction, and metadata handling.</p>
+<h3 id="Features" class="common-anchor-header">Features<button data-href="#Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Nullable-vector" class="common-anchor-header">Nullable vector</h4><p>Vector fields can now be declared nullable, so you can insert entities whose embedding is missing or not yet generated without filling in a placeholder. NULL vectors take no extra storage and are skipped automatically during search. For more information, refer to <a href="/docs/de/v2.6.x/nullable-and-default.md">Nullable Fields</a>.</p>
+<h4 id="Element-level-search-on-Struct-fields" class="common-anchor-header">Element-level search on Struct fields</h4><p>You can now run vector search on Struct Array fields at the granularity of individual elements instead of the whole row, with each result reporting the matched element’s offset within the array. This lets a query retrieve the specific element that best matches rather than scoring the row as a whole. For more information, refer to <a href="/docs/de/v2.6.x/array-of-structs.md#Vector-search-in-a-StructArray-field">Vector search in a StructArray field</a>.</p>
+<h3 id="Improvements" class="common-anchor-header">Improvements<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Added support for importing Arrow FixedSizeList data from Parquet into non-nullable array and dense vector fields (<a href="https://github.com/milvus-io/milvus/pull/49870">#49870</a>)</li>
+<li>Improved QueryNode read-task scheduling and recovery behavior under heavy load with deadline-aware admission, cleanup, grouping, and metrics (<a href="https://github.com/milvus-io/milvus/pull/49900">#49900</a>, <a href="https://github.com/milvus-io/milvus/pull/49926">#49926</a>)</li>
+<li>Added HTTP/2 support for the proxy REST server, including h2c and ALPN-based TLS listeners (<a href="https://github.com/milvus-io/milvus/pull/49964">#49964</a>)</li>
+<li>Extended Arrow IO thread pool configuration to DataNode to improve compaction and import throughput (<a href="https://github.com/milvus-io/milvus/pull/50100">#50100</a>)</li>
+<li>Limited QueryNode delegator post-load concurrency to reduce CPU spikes during segment loading (<a href="https://github.com/milvus-io/milvus/pull/49769">#49769</a>)</li>
+<li>Optimized QueryCoord collection filtering in ChannelDistManager and reduced temporary allocations in distribution lookups (<a href="https://github.com/milvus-io/milvus/pull/49927">#49927</a>)</li>
+<li>Upgraded the Pulsar Go client to v0.19.0 and replaced pulsarctl admin usage with pulsaradmin (<a href="https://github.com/milvus-io/milvus/pull/49948">#49948</a>)</li>
+<li>Optimized ReplicaManager locking to reduce cross-collection contention in QueryCoord (<a href="https://github.com/milvus-io/milvus/pull/49950">#49950</a>, <a href="https://github.com/milvus-io/milvus/pull/49956">#49956</a>)</li>
+<li>Improved REST timeout handling to safely discard late handler writes after request timeouts (<a href="https://github.com/milvus-io/milvus/pull/50006">#50006</a>)</li>
+<li>Optimized garbage collection for dropped segment index files and metadata (<a href="https://github.com/milvus-io/milvus/pull/50172">#50172</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Fixed an issue where using unsupported field types as clustering keys could cause node panics (<a href="https://github.com/milvus-io/milvus/pull/48263">#48263</a>)</li>
+<li>Fixed an issue where the stored_index_files_size metric included inactive index files (<a href="https://github.com/milvus-io/milvus/pull/49380">#49380</a>)</li>
+<li>Fixed an issue where preempted writers could skip segment IDs by upgrading Woodpecker to v0.1.13-hotfix (<a href="https://github.com/milvus-io/milvus/pull/49670">#49670</a>)</li>
+<li>Fixed an issue where requery requests were not pinned to the preferred replica (<a href="https://github.com/milvus-io/milvus/pull/49830">#49830</a>)</li>
+<li>Fixed an issue where bulk imports could fail when file readers encountered a premature EOF (<a href="https://github.com/milvus-io/milvus/pull/49867">#49867</a>)</li>
+<li>Fixed an issue where partial updates could drop dynamic field data after schema evolution (<a href="https://github.com/milvus-io/milvus/pull/49913">#49913</a>)</li>
+<li>Fixed an issue where sealed segments could load incorrectly when non-nullable vector field data was missing (<a href="https://github.com/milvus-io/milvus/pull/49918">#49918</a>)</li>
+<li>Fixed an issue where schema reopen could leave stale indexing references and cause indexing failures or crashes (<a href="https://github.com/milvus-io/milvus/pull/49935">#49935</a>, <a href="https://github.com/milvus-io/milvus/pull/49937">#49937</a>)</li>
+<li>Fixed an issue where dropping a collection in streaming mode could follow an incorrect cleanup order (<a href="https://github.com/milvus-io/milvus/pull/49962">#49962</a>)</li>
+<li>Fixed an issue where BM25 sparse vector function outputs were incorrectly treated as loadable raw field data (<a href="https://github.com/milvus-io/milvus/pull/49975">#49975</a>)</li>
+<li>Fixed an issue where QueryCoord could build query targets from dropped channel checkpoints (<a href="https://github.com/milvus-io/milvus/pull/50026">#50026</a>)</li>
+<li>Fixed an issue where transient object storage failures could cause delta log writes in sync tasks to fail without retrying (<a href="https://github.com/milvus-io/milvus/pull/50030">#50030</a>)</li>
+<li>Fixed an issue where retried import tasks could leave stale row counts and cause sort compaction failures (<a href="https://github.com/milvus-io/milvus/pull/50070">#50070</a>)</li>
+<li>Fixed an issue where forced segment assignment could be incorrectly limited by the balance batch size (<a href="https://github.com/milvus-io/milvus/pull/50152">#50152</a>)</li>
+<li>Fixed an issue where target-size manual compaction could select ineligible segments (<a href="https://github.com/milvus-io/milvus/pull/50159">#50159</a>)</li>
+<li>Fixed an issue where replicated AlterLoadConfig operations could keep retrying after a channel was dropped and block metadata cleanup (<a href="https://github.com/milvus-io/milvus/pull/50162">#50162</a>)</li>
+<li>Fixed an issue where sliced indexes could load incorrect sidecar files and affect indexed query behavior (<a href="https://github.com/milvus-io/milvus/pull/50167">#50167</a>)</li>
+<li>Fixed an issue where ST_DWITHIN could panic when validating non-POINT WKT input (<a href="https://github.com/milvus-io/milvus/pull/50205">#50205</a>)</li>
+</ul>
 <h2 id="v2617" class="common-anchor-header">v2.6.17<button data-href="#v2617" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

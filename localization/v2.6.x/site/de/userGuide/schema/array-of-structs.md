@@ -1,13 +1,11 @@
 ---
 id: array-of-structs.md
-title: Array von StructsCompatible with Milvus 2.6.4+
+title: StructArray
 summary: >-
-  Ein Feld Array of Structs in einer Entität speichert eine geordnete Menge von
-  Struct-Elementen. Jede Struct im Array hat dasselbe vordefinierte Schema, das
-  mehrere Vektoren und skalare Felder umfasst.
-beta: Milvus 2.6.4+
+  Verwenden Sie StructArray-Felder, um geordnete Struct-Elemente mit einem
+  gemeinsamen Schema von Vektor- und Skalarfeldern zu speichern.
 ---
-<h1 id="Array-of-Structs" class="common-anchor-header">Array von Structs<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Array-of-Structs" class="anchor-icon" translate="no">
+<h1 id="StructArray" class="common-anchor-header">StructArray<button data-href="#StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,8 +20,8 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Ein Feld "Array of Structs" in einer Entität speichert eine geordnete Menge von Strukturelementen. Jede Struct im Array hat dasselbe vordefinierte Schema, das mehrere Vektoren und skalare Felder umfasst.</p>
-<p>Hier ist ein Beispiel für eine Entität aus einer Sammlung, die ein Array of Structs-Feld enthält.</p>
+    </button></h1><p>Ein Feld Array of Structs oder StructArray in einer Entität speichert eine geordnete Menge von Struct-Elementen. Jede Struct im Array hat dasselbe vordefinierte Schema, das mehrere Vektoren und skalare Felder umfasst.</p>
+<p>Hier ist ein Beispiel für eine Entität aus einer Sammlung, die ein StructArray-Feld enthält.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     &#x27;id&#x27;<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
     &#x27;title&#x27;<span class="hljs-punctuation">:</span> &#x27;Walden&#x27;<span class="hljs-punctuation">,</span>
@@ -45,7 +43,30 @@ beta: Milvus 2.6.4+
 <span class="highlighted-comment-line">    <span class="hljs-comment">// hightlight-end</span></span>
 <span class="highlighted-comment-line"><span class="hljs-punctuation">}</span></span>
 <span class="highlighted-comment-line"></span><button class="copy-code-btn"></button></code></pre>
-<p>Im obigen Beispiel ist das Feld <code translate="no">chunks</code> ein Array of Structs-Feld, und jedes Struct-Element enthält seine eigenen Felder, nämlich <code translate="no">text</code>, <code translate="no">text_vector</code> und <code translate="no">chapter</code>.</p>
+<p>In dem obigen Beispiel ist das Feld <code translate="no">chunks</code> ein StructArray-Feld, und jedes Struct-Element enthält seine eigenen Felder, nämlich <code translate="no">text</code>, <code translate="no">text_vector</code> und <code translate="no">chapter</code>.</p>
+<h2 id="When-to-use" class="common-anchor-header">Wann wird es verwendet?<button data-href="#When-to-use" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Moderne KI-Anwendungen, vom autonomen Fahren bis zur multimodalen Suche, stützen sich zunehmend auf verschachtelte, heterogene Daten. Herkömmliche flache Datenmodelle haben Schwierigkeiten, komplexe Beziehungen wie<strong>"ein Dokument mit vielen kommentierten Chunks</strong>" oder<strong>"eine Fahrszene mit mehreren beobachteten Manövern</strong>" darzustellen. Hier kommt der StructArray-Datentyp in Milvus ins Spiel.</p>
+<p>Um schnell festzustellen, ob das StructArray-Feld für Ihre Anwendungsszenarien geeignet ist, überlegen Sie, ob:</p>
+<ul>
+<li><p>Ihre Daten liegen in einer hierarchischen Struktur vor, z. B. ein Dokument mit vielen kommentierten Abschnitten (Chunks).</p></li>
+<li><p>Das Suchergebnis sollte das Dokument sein und nicht die Chunks, wie im obigen Beispiel.</p></li>
+<li><p>Die Suchergebnisse enthalten massenhaft doppelte Entitäten, und Sie haben Mühe, die endgültigen Ergebnisse mit Techniken wie Gruppierung, Deduplizierung und Reranking abzurufen.</p></li>
+</ul>
+<p>Wenn die Antworten auf die obigen Fragen "ja" lauten, sollten Sie StructArray verwenden.</p>
 <h2 id="Limits" class="common-anchor-header">Begrenzungen<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -63,43 +84,21 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><ul>
 <li><p><strong>Datentypen</strong></p>
-<p>Wenn Sie eine Sammlung erstellen, können Sie den Typ Struct als Datentyp für die Elemente in einem Array-Feld verwenden. Sie können jedoch kein Array von Structs zu einer bestehenden Sammlung hinzufügen, und Milvus unterstützt nicht die Verwendung des Typs Struct als Datentyp für ein Sammlungsfeld.</p>
+<p>Wenn Sie eine Sammlung erstellen, können Sie den Typ Struct als Datentyp für die Elemente in einem Array-Feld verwenden. Sie können jedoch kein StructArray zu einer bestehenden Sammlung hinzufügen, und Milvus unterstützt nicht die Verwendung des Struct-Typs als Datentyp für ein Sammlungsfeld.</p>
 <p>Die Structs in einem Array-Feld haben das gleiche Schema, das beim Erstellen des Array-Feldes definiert werden sollte.</p>
-<p>Ein Struct-Schema enthält sowohl Vektoren als auch skalare Felder, wie in der folgenden Tabelle aufgeführt:</p>
-<p><table>
-<tr>
-<th><p>Feldtyp</p></th>
-<th><p>Datentyp</p></th>
-</tr>
-<tr>
-<td><p>Vektor</p></td>
-<td><p><code translate="no">FLOAT_VECTOR</code></p></td>
-</tr>
-<tr>
-<td rowspan="5"><p>Skalar</p></td>
-<td><p><code translate="no">VARCHAR</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">INT8/16/32/64</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">FLOAT</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">DOUBLE</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">BOOLEAN</code></p></td>
-</tr>
-</table></p>
-<p>Die Anzahl der Vektorfelder sollte sowohl auf der Sammlungsebene als auch in den Structs zusammengenommen nicht größer oder gleich 10 sein.</p></li>
-<li><p><strong>Nullbar &amp; Standardwerte</strong></p>
-<p>Ein Array of Structs-Feld ist nicht löschbar und akzeptiert keinen Standardwert.</p></li>
+<p>Ein Struct-Schema enthält sowohl Vektoren als auch skalare Felder, wie unten aufgeführt:</p>
+<ul>
+<li><p>Anwendbare Vektordatentypen: <code translate="no">FLOAT_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code>, <code translate="no">INT8_VECTOR</code> und <code translate="no">BINARY_VECTOR</code>.</p></li>
+<li><p>Anwendbare skalare Datentypen: <code translate="no">VARCHAR</code>, <code translate="no">INT8/16/32/64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, und <code translate="no">BOOL</code>.</p></li>
+</ul>
+<p>Halten Sie die Anzahl der Vektorfelder sowohl auf der Sammlungsebene als auch in den kombinierten Structs auf höchstens 10 begrenzt.</p></li>
+<li><p><strong>Nullable &amp; Standardwerte</strong></p>
+<p>Ein StructArray-Feld ist nicht löschbar und akzeptiert keinen Standardwert.</p></li>
 <li><p><strong>Funktion</strong></p>
-<p>Sie können keine Funktion verwenden, um ein Vektorfeld aus einem Skalarfeld innerhalb einer Struktur abzuleiten.</p></li>
+<p>Sie können keine Funktion verwenden, um ein Vektorfeld aus einem Skalarfeld innerhalb einer Struct abzuleiten.</p></li>
 <li><p><strong>Index-Typ &amp; metrischer Typ</strong></p>
-<p>Alle Vektorfelder in einer Sammlung müssen indiziert sein. Um ein Vektorfeld innerhalb eines Array of Structs Feldes zu indizieren, verwendet Milvus eine Einbettungsliste, um die Vektoreinbettungen in jedem Struct-Element zu organisieren und indiziert die gesamte Einbettungsliste als Ganzes.</p>
-<p>Sie können <code translate="no">AUTOINDEX</code> oder <code translate="no">HNSW</code> als Indextyp und jeden unten aufgeführten metrischen Typ verwenden, um Indizes für die Einbettungslisten in einem Array of Structs Feld zu erstellen.</p>
+<p>Alle Vektorfelder in einer Sammlung müssen indiziert sein. Um ein Vektorfeld innerhalb eines StructArray-Feldes zu indizieren, verwendet Milvus eine Einbettungsliste, um die Vektoreinbettungen in jedem Struct-Element zu organisieren und indiziert die gesamte Einbettungsliste als Ganzes.</p>
+<p>Sie können <code translate="no">AUTOINDEX</code> oder <code translate="no">HNSW</code> als Indextyp und jeden unten aufgeführten metrischen Typ verwenden, um Indizes für die Einbettungslisten in einem StructArray-Feld zu erstellen.</p>
 <p><table>
 <tr>
 <th><p>Index-Typ</p></th>
@@ -107,24 +106,25 @@ beta: Milvus 2.6.4+
 <th><p>Bemerkungen</p></th>
 </tr>
 <tr>
-<td rowspan="3"><p><code translate="no">AUTOINDEX</code> (oder <code translate="no">HNSW</code>)</p></td>
-<td><p><code translate="no">MAX_SIM_COSINE</code></p></td>
-<td rowspan="3"><p>Für Einbettungslisten der folgenden Typen:</p><ul><li>FLOAT_VECTOR</li></ul></td>
-</tr>
-<tr>
-<td><p><code translate="no">MAX_SIM_IP</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">MAX_SIM_L2</code></p></td>
+<td rowspan="3"><ul><li><p><code translate="no">AUTOINDEX</code></p></li><li><p><code translate="no">HNSW</code></p></li><li><p><code translate="no">IVF_FLAT</code></p></li><li><p><code translate="no">DISKANN</code></p></li></ul></td>
+<td rowspan="3"><ul><li><p><code translate="no">MAX_SIM_COSINE</code></p></li><li><p><code translate="no">MAX_SIM_IP</code></p></li><li><p><code translate="no">MAX_SIM_L2</code></p></li></ul></td>
+<td rowspan="3"><p>Für Einbettungslisten der folgenden Typen:</p><ul><li><p><code translate="no">FLOAT_VECTOR</code></p></li><li><p><code translate="no">FLOAT16_VECTOR</code></p></li><li><p><code translate="no">BFLOAT16_VECTOR</code></p></li><li><p><code translate="no">INT8_VECTOR</code></p></li><li><p><code translate="no">BINARY_VECTOR</code></p></li></ul></td>
 </tr>
 </table></p>
-<p>Die skalaren Felder im Feld Array of Structs unterstützen keine Indizes.</p></li>
+<p>Für Details darüber, wie Milvus die Ähnlichkeit zwischen der Abfrage und einer Einbettungsliste berechnet, siehe <a href="/docs/de/v2.6.x/metric.md#Maximum-similarity">Maximale Ähnlichkeit</a>.</p>
+<p>Die skalaren Felder im Feld StructArray unterstützen die folgenden Indextypen:</p>
+<ul>
+<li><p><code translate="no">INVERTED</code></p>
+<p>Dies gilt in der Regel für string-ähnliche oder kategoriale Filter, wie <code translate="no">structA[color]</code> oder <code translate="no">structA[str_val]</code>. Für Details, siehe <a href="/docs/de/v2.6.x/inverted.md">INVERTED</a>.</p></li>
+<li><p><code translate="no">STL_SORT</code></p>
+<p>Dies gilt in der Regel für bereichs- oder ordnungsähnliche Beschleunigung auf numerische Werte, wie <code translate="no">strctA[num_val]</code>. Einzelheiten finden Sie unter <a href="/docs/de/v2.6.x/stl-sort.md">STL_SORT</a>.</p></li>
+</ul></li>
 <li><p><strong>Upsert-Daten</strong></p>
-<p>Structs unterstützen kein Upsert im Merge-Modus. Sie können jedoch Upserts im Überschreibungsmodus durchführen, um Daten in Structs zu aktualisieren. Einzelheiten zu den Unterschieden zwischen Upsert im Zusammenführungsmodus und im Überschreibungsmodus finden Sie unter <a href="/docs/de/v2.6.x/upsert-entities.md#Overview">Upsert-Entitäten</a>.</p></li>
+<p>Strukturen unterstützen kein Upsert im Merge-Modus. Sie können jedoch Upserts im Override-Modus durchführen, um Daten in Structs zu aktualisieren. Einzelheiten zu den Unterschieden zwischen Upsert im Merge-Modus und im Override-Modus finden Sie unter <a href="/docs/de/v2.6.x/upsert-entities.md#Overview">Upsert-Entitäten</a>.</p></li>
 <li><p><strong>Skalare Filterung</strong></p>
-<p>Sie können ein Array von Structs oder Felder innerhalb seines Struct-Elements nicht in Filterausdrücken innerhalb von Suchen und Abfragen verwenden.</p></li>
+<p>Sie können <strong>Elementfilter</strong> und <strong>Operatoren der Match-Familie</strong> verwenden, um eine skalare Filterung gegen ein skalares Unterfeld in einem StructArray-Feld durchzuführen. Details dazu finden Sie unter <a href="/docs/de/v2.6.x/array-of-structs.md#Scalar-filtering-in-a-StructArray-field">Skalare Filterung in einem StructArray-Feld</a>.</p></li>
 </ul>
-<h2 id="Add-Array-of-Structs" class="common-anchor-header">Array of Structs hinzufügen<button data-href="#Add-Array-of-Structs" class="anchor-icon" translate="no">
+<h2 id="Add-a-StructArray" class="common-anchor-header">Hinzufügen eines StructArray<button data-href="#Add-a-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -139,15 +139,15 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Um ein Array of Structs in Milvus zu verwenden, müssen Sie beim Erstellen einer Sammlung ein Array-Feld definieren und den Datentyp für seine Elemente auf Struct setzen. Der Prozess ist wie folgt:</p>
+    </button></h2><p>Um ein StructArray-Feld in Milvus hinzuzufügen, müssen Sie ein Array-Feld definieren, wenn Sie eine Sammlung erstellen, und den Datentyp für seine Elemente auf Struct setzen. Der Prozess ist wie folgt:</p>
 <ol>
-<li><p>Setzen Sie den Datentyp eines Feldes auf <code translate="no">DataType.ARRAY</code>, wenn Sie das Feld als Array-Feld zum Schema der Sammlung hinzufügen.</p></li>
-<li><p>Setzen Sie das Attribut <code translate="no">element_type</code> des Felds auf <code translate="no">DataType.STRUCT</code>, um das Feld zu einem Array von Structs zu machen.</p></li>
+<li><p>Setzen Sie den Datentyp eines Feldes auf <code translate="no">DataType.ARRAY</code>, wenn Sie das Feld als Array-Feld zum Sammlungsschema hinzufügen.</p></li>
+<li><p>Setzen Sie das Attribut <code translate="no">element_type</code> des Felds auf <code translate="no">DataType.STRUCT</code>, um das Feld zu einem Struct-Array zu machen.</p></li>
 <li><p>Erstellen Sie ein Struct-Schema und fügen Sie die erforderlichen Felder ein. Dann referenzieren Sie das Struct-Schema im Attribut <code translate="no">struct_schema</code> des Feldes.</p></li>
 <li><p>Setzen Sie das Attribut <code translate="no">max_capacity</code> des Felds auf einen geeigneten Wert, um die maximale Anzahl von Structs anzugeben, die jede Entität in diesem Feld enthalten kann.</p></li>
 <li><p><strong>(Optional</strong>) Sie können <code translate="no">mmap.enabled</code> für jedes Feld innerhalb des Struct-Elements einstellen, um die heißen und kalten Daten in der Struktur auszugleichen.</p></li>
 </ol>
-<p>So können Sie ein Sammelschema definieren, das ein Array von Structs enthält:</p>
+<p>So können Sie ein Sammelschema definieren, das ein StructArray-Feld enthält:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -360,8 +360,8 @@ SCHEMA=<span class="hljs-string">&#x27;{
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Die hervorgehobenen Zeilen im obigen Codebeispiel veranschaulichen das Verfahren zur Aufnahme eines Arrays von Structs in ein Auflistungsschema.</p>
-<h2 id="Set-index-params" class="common-anchor-header">Index-Parameter setzen<button data-href="#Set-index-params" class="anchor-icon" translate="no">
+<p>Die hervorgehobenen Zeilen im obigen Codebeispiel veranschaulichen, wie man ein StructArray in ein Auflistungsschema einfügt.</p>
+<h2 id="Set-index-params" class="common-anchor-header">Index-Parameter festlegen<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -377,8 +377,23 @@ SCHEMA=<span class="hljs-string">&#x27;{
         ></path>
       </svg>
     </button></h2><p>Die Indexierung ist für alle Vektorfelder obligatorisch, sowohl für die Vektorfelder in der Sammlung als auch für die im Element Struct definierten.</p>
-<p>Die anwendbaren Indexparameter variieren je nach verwendetem Indextyp. Einzelheiten zu den anwendbaren Indexparametern finden Sie unter <a href="/docs/de/v2.6.x/index-explained.md">Index erklärt</a> und auf den Dokumentationsseiten, die für den von Ihnen gewählten Indextyp spezifisch sind.</p>
-<p>Um eine Einbettungsliste zu indizieren, müssen Sie ihren Indextyp auf <code translate="no">AUTOINDEX</code> oder <code translate="no">HNSW</code> setzen und <code translate="no">MAX_SIM_COSINE</code> als metrischen Typ für Milvus verwenden, um die Ähnlichkeiten zwischen Einbettungslisten zu messen.</p>
+<p>Die anwendbaren Index Parameter variieren je nach Index Typ. Einzelheiten zu den anwendbaren Indexparametern finden Sie unter <a href="/docs/de/v2.6.x/index-explained.md">Index erklärt</a> und in der Dokumentation für den von Ihnen gewählten Indextyp.</p>
+<h3 id="Index-an-embedding-list" class="common-anchor-header">Indizieren einer Einbettungsliste<button data-href="#Index-an-embedding-list" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Um eine Einbettungsliste zu indizieren, müssen Sie ihren Indextyp auf <code translate="no">AUTOINDEX</code> oder einen der oben aufgelisteten anwendbaren Indextypen setzen und einen aufgelisteten metrischen Typ für Milvus verwenden, um die Ähnlichkeiten zwischen Einbettungslisten zu messen.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create index parameters</span>
@@ -448,6 +463,48 @@ INDEX_PARAMS=<span class="hljs-string">&#x27;[
   }
 ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<h3 id="Index-a-scalar-struct-sub-field" class="common-anchor-header">Indizieren eines skalaren Strukturteilfelds<button data-href="#Index-a-scalar-struct-sub-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Wenn Sie Indizes auf einem skalaren struct-Teilfeld erstellen, baut Milvus den Index tatsächlich auf der <strong>Elementebene</strong> und nicht auf der Zeilenebene auf, um die skalare Filterung zu beschleunigen.</p>
+<p>Der folgende Codeschnipsel erstellt einen Index für ein skalares struct-Unterfeld mit dem Namen <code translate="no">chunks[text]</code>.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">index_params.add_index(
+    field_name=<span class="hljs-string">&quot;chunks[text]&quot;</span>,
+    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">indexParams.add(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;chunks[text]&quot;</span>)
+        .indexType(IndexParam.IndexType.INVERTED)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">indexParams.<span class="hljs-title function_">push</span>({
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;chunks[text]&quot;</span>,
+    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;INVERTED&quot;</span>
+})
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">INDEX_PARAMS += <span class="hljs-string">&#x27;{
+    &quot;fieldName&quot;: &quot;chunks[text]&quot;,
+    &quot;indexName&quot;: &quot;chunks_text_vector_index&quot;,
+    &quot;indexType&quot;: &quot;INVERTED&quot;
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Create-a-collection" class="common-anchor-header">Erstellen Sie eine Sammlung<button data-href="#Create-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -463,7 +520,7 @@ INDEX_PARAMS=<span class="hljs-string">&#x27;[
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sobald das Schema und der Index fertig sind, können Sie eine Sammlung erstellen, die ein Feld Array of Structs enthält.</p>
+    </button></h2><p>Sobald das Schema und der Index fertig sind, können Sie eine Sammlung erstellen, die ein StructArray-Feld enthält.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -472,14 +529,7 @@ INDEX_PARAMS=<span class="hljs-string">&#x27;[
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
-<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
-
-<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
-        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
-        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
-        .build());
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
@@ -491,7 +541,7 @@ client.createCollection(requestCreate);
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">createCollection</span>({
-  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;books&quot;</span>,
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
   <span class="hljs-attr">fields</span>: schema,
   <span class="hljs-attr">indexes</span>: indexParams,
 });
@@ -522,7 +572,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Nachdem Sie die Sammlung erstellt haben, können Sie wie folgt Daten einfügen, die Arrays of Structs enthalten.</p>
+    </button></h2><p>Nachdem Sie die Sammlung erstellt haben, können Sie wie folgt Daten einfügen, die Arrays von Structs enthalten.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample data</span>
@@ -641,7 +691,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><details></p>
-<p><summary>Benötigen Sie mehr Daten?</summary></p>
+<p><summary>Brauchen Sie mehr Daten?</summary></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">import</span> random
 <span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">List</span>, <span class="hljs-type">Dict</span>, <span class="hljs-type">Any</span>
@@ -722,7 +772,7 @@ data = [generate_record(i) <span class="hljs-keyword">for</span> i <span class="
 client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, data=data)
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<h2 id="Vector-search-against-an-Array-of-Structs-field" class="common-anchor-header">Vektorsuche in einem Array of Structs-Feld<button data-href="#Vector-search-against-an-Array-of-Structs-field" class="anchor-icon" translate="no">
+<h2 id="Vector-search-in-a-StructArray-field" class="common-anchor-header">Vektorsuche in einem StructArray-Feld<button data-href="#Vector-search-in-a-StructArray-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -737,11 +787,11 @@ client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie können Vektorsuchen in den Vektorfeldern einer Sammlung und in einem Array of Structs durchführen.</p>
-<p>Insbesondere sollten Sie den Namen des Array of Structs-Feldes und die der Zielvektorfelder innerhalb der Struct-Elemente als Wert für den <code translate="no">anns_field</code> -Parameter in einer Suchanfrage verketten und <code translate="no">EmbeddingList</code> verwenden, um Abfragevektoren ordentlich zu organisieren.</p>
+    </button></h2><p>Sie können Vektorsuchen in den Vektorfeldern einer Sammlung und in einem StructArray durchführen.</p>
+<p>Konkret sollten Sie den Namen des StructArray-Feldes und die der Zielvektorfelder innerhalb von Struct-Elementen als Wert für den <code translate="no">anns_field</code> -Parameter in einer Suchanfrage verketten und <code translate="no">EmbeddingList</code> verwenden, um Abfragevektoren ordentlich zu organisieren.</p>
 <div class="alert note">
-<p>Milvus bietet <code translate="no">EmbeddingList</code>, um Ihnen zu helfen, Abfragevektoren für Suchen gegen eine Einbettungsliste in einem Array of Structs ordentlicher zu organisieren. Jede <code translate="no">EmbeddingList</code> enthält mindestens eine Vektoreinbettung und erwartet im Gegenzug eine Anzahl von topK Entitäten.</p>
-<p>Allerdings kann <code translate="no">EmbeddingList</code> nur in <code translate="no">search()</code> Anfragen ohne Bereichssuche oder gruppierende Suchparameter verwendet werden, geschweige denn in <code translate="no">search_iterator()</code> Anfragen.</p>
+<p>Milvus stellt <code translate="no">EmbeddingList</code> zur Verfügung, um Abfragevektoren für Suchen gegen eine Einbettungsliste in einem StructArray übersichtlicher zu organisieren. Jede <code translate="no">EmbeddingList</code> enthält mindestens eine Vektoreinbettung und erwartet im Gegenzug eine Anzahl von topK Entitäten.</p>
+<p>Allerdings kann <code translate="no">EmbeddingList</code> nur in <code translate="no">search()</code> Anfragen ohne Bereichssuche oder Gruppierungs-Suchparameter verwendet werden, geschweige denn in <code translate="no">search_iterator()</code> Anfragen.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -1001,7 +1051,77 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>Im obigen Codebeispiel ist <code translate="no">embeddingList1</code> eine Einbettungsliste mit einem Vektor, während <code translate="no">embeddingList2</code> zwei Vektoren enthält. Jeder löst eine separate Suchanfrage aus und erwartet eine Liste der K ähnlichsten Entitäten.</p>
+<p>Im obigen Codebeispiel ist <code translate="no">embeddingList1</code> eine Einbettungsliste mit einem Vektor, während <code translate="no">embeddingList2</code> zwei Vektoren enthält. Jeder dieser Vektoren löst eine separate Suchanfrage aus und erwartet eine Liste der K ähnlichsten Entitäten.</p>
+<h2 id="Scalar-filtering-in-a-StructArray-field" class="common-anchor-header">Skalare Filterung in einem StructArray-Feld<button data-href="#Scalar-filtering-in-a-StructArray-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Sie können <strong>Elementfilter</strong> und <strong>Operatoren der Match-Familie</strong> verwenden, um eine skalare Filterung gegen ein skalares Unterfeld in einem StructArray durchzuführen. Weitere Details und Beispiele zu den beiden obigen Operatortypen finden Sie unter <a href="/docs/de/v2.6.x/struct-array-operators.md">Array of Structs Operatoren</a>.</p>
+<h3 id="Element-filters" class="common-anchor-header">Element-Filter<button data-href="#Element-filters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Dies ist ein Filter auf Entitätsebene, der prüft, ob mindestens ein Element im StructArray-Feld einer Entität das Prädikat erfüllt. Zum Beispiel gibt der folgende Elementfilter Entitäten zurück, die mindestens einen Chunk enthalten, der mit "Red" im <code translate="no">text</code> Sub-Feld beginnt.</p>
+<pre><code translate="no" class="language-python">element_filter(chunks, $[text] LIKE <span class="hljs-string">&quot;Red%&quot;</span>)
+<button class="copy-code-btn"></button></code></pre>
+<p>Sie können fast alle Vergleichs-, Bereichs- und arithmetischen Operatoren in dem Prädikat verwenden, das pro Element ausgewertet wird, und die logischen Operatoren können verwendet werden, um mehrere Bedingungen für dasselbe Element zu kombinieren. Einzelheiten finden Sie unter <a href="/docs/de/v2.6.x/basic-operators.md">Grundlegende Operatoren</a>.</p>
+<p>Wenn mehrere skalare Filterausdrücke in einer gefilterten Suche oder einer Abfrage vorhanden sind, platzieren Sie den Elementfilterausdruck nach allen Filterausdrücken auf Entitätsebene, wie unten gezeigt.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># correct</span>
+<span class="hljs-built_in">id</span> &gt; <span class="hljs-number">0</span> &amp;&amp; element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>)
+
+<span class="hljs-comment"># incorrect, resulting errors</span>
+element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>) &amp;&amp; <span class="hljs-built_in">id</span> &gt; <span class="hljs-number">0</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Match-family-operators" class="common-anchor-header">Operatoren der Abgleichsfamilie<button data-href="#Match-family-operators" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Die Operatoren der Match-Familie funktionieren auch über ein StructArray-Feld. Anstatt einfach zu prüfen, ob ein Element vorhanden ist, können Sie bestimmen, wie viele Elemente (oder welcher Anteil) ein Elementprädikat erfüllen müssen.</p>
+<ul>
+<li><p><code translate="no">MATCH_ANY(chunks, $[text] LIKE &quot;Red%&quot;)</code></p>
+<p>Dies gibt Entitäten zurück, die mindestens einen Chunk enthalten, der im Unterfeld <code translate="no">text</code> mit "Red" beginnt; semantisch ist dies äquivalent zu <code translate="no">element_filter</code>.</p></li>
+<li><p><code translate="no">MATCH_ALL(chunks, $[text] LIKE &quot;Red%&quot;)</code></p>
+<p>Dies gibt Entitäten zurück, deren Textteilfelder in allen Chunks mit "Red" beginnen.</p></li>
+<li><p><code translate="no">MATCH_LEAST(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>
+<p>Dies gibt Entitäten zurück, die mindestens <code translate="no">k</code> Chunks enthalten, die mit "Red" im <code translate="no">text</code> Teilfeld beginnen.</p></li>
+<li><p><code translate="no">MATCH_MOST(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>
+<p>Dies gibt Entitäten zurück, die höchstens <code translate="no">k</code> Chunks enthalten, die mit "Red" im <code translate="no">text</code> Sub-Feld beginnen.</p></li>
+<li><p><code translate="no">MATCH_EXACT(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>
+<p>Dies gibt Entitäten zurück, die genau <code translate="no">k</code> chunks enthalten, die mit "Rot" im <code translate="no">text</code> Teilfeld beginnen.</p></li>
+</ul>
 <h2 id="Next-steps" class="common-anchor-header">Nächste Schritte<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1017,4 +1137,4 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die Entwicklung eines nativen Array of Structs-Datentyps stellt einen großen Fortschritt in der Fähigkeit von Milvus dar, komplexe Datenstrukturen zu verarbeiten. Um die Anwendungsfälle besser zu verstehen und diese neue Funktion optimal zu nutzen, sollten Sie <a href="/docs/de/v2.6.x/best-practices-for-array-of-structs.md">Schema Design Using an Array of Structs</a> lesen.</p>
+    </button></h2><p>Die Entwicklung eines nativen StructArray-Datentyps stellt einen großen Fortschritt in der Fähigkeit von Milvus dar, komplexe Datenstrukturen zu verarbeiten. Um die Anwendungsfälle besser zu verstehen und diese neue Funktion optimal zu nutzen, empfehlen wir Ihnen die Lektüre von <a href="/docs/de/v2.6.x/best-practices-for-array-of-structs.md">Schema Design Using an Array of Structs</a>.</p>

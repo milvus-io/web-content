@@ -18,7 +18,7 @@ title: Notes de mise à jour
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Découvrez les nouveautés de Milvus ! Cette page résume les nouvelles fonctionnalités, les améliorations, les problèmes connus et les corrections de bogues de chaque version. Nous vous conseillons de consulter régulièrement cette page pour prendre connaissance des mises à jour.</p>
+    </button></h1><p>Découvrez les nouveautés de Milvus ! Cette page résume les nouvelles fonctionnalités, les améliorations, les problèmes connus et les corrections de bogues de chaque version. Nous vous conseillons de consulter régulièrement cette page pour vous tenir au courant des mises à jour.</p>
 <h2 id="v30-beta" class="common-anchor-header">v3.0-beta<button data-href="#v30-beta" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,13 +37,18 @@ title: Notes de mise à jour
     </button></h2><p>Date de publication : 9 mai 2026</p>
 <table>
 <thead>
-<tr><th>Version Milvus</th><th>Version SDK Python</th><th>Version SDK Node.js</th></tr>
+<tr><th>Version de Milvus</th><th>Version SDK Python</th><th>Version SDK Node.js</th></tr>
 </thead>
 <tbody>
 <tr><td>3.0-beta</td><td>3.0.0</td><td>3.0.0</td></tr>
 </tbody>
 </table>
 <p>Milvus 3.0-beta étend la base de données vectorielle Milvus avec une nouvelle intégration dans l'écosystème open lake : External Collection permet à Milvus d'interroger des tables lacustres externes sans copie, et Spark peut lire les collections Milvus directement via Snapshot. La version apporte également une extraction plus riche, un schéma plus expressif, une personnalisation plus poussée de la recherche de texte, des contrôles plus fins du cycle de vie des données et des modèles, et davantage de contrôles côté opérateur. Milvus 3.0 est le noyau central de Zilliz Lakebase, alimentant son service unifié, sa découverte et son traitement par lots.</p>
+<p>Cliquez ci-dessous pour rejoindre notre webinaire afin d'obtenir plus de détails sur Milvus 3.0 et AMA avec les mainteneurs du noyau :</p>
+<p><a href="https://zilliz.com/event/whats-new-in-milvus-3-0-beta">
+  
+   <span class="img-wrapper"> <img translate="no" src="https://assets.zilliz.com/webinar_3_0_4746da7c2d.png" alt="Webinar 3.0 walkthrough" class="doc-image" id="webinar-3.0-walkthrough" />
+ </span>  <span class="img-wrapper"> <span>Webinar 3.0 walkthrough</span> </span></a></p>
 <h3 id="Key-Features" class="common-anchor-header">Caractéristiques principales<button data-href="#Key-Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -59,7 +64,7 @@ title: Notes de mise à jour
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><h4 id="External-Collection" class="common-anchor-header">Collecte externe</h4><p>Dans les pipelines de données d'IA typiques, des téraoctets d'embeddings et de métadonnées se trouvent déjà sur le stockage d'objets sous forme de tables Parquet, Lance ou Iceberg. La copie de ces données dans Milvus double le coût de stockage, ajoute un pipeline ETL qui doit être synchronisé et déplace la gouvernance des données hors du client.</p>
+    </button></h3><h4 id="External-Collection" class="common-anchor-header">Collecte externe</h4><p>Dans les pipelines de données d'IA typiques, des téraoctets d'embeddings et de métadonnées se trouvent déjà sur le stockage d'objets sous forme de tables Parquet, Lance ou Iceberg. La copie de ces données dans Milvus double le coût de stockage, ajoute un pipeline ETL qui doit être synchronisé et déplace la gouvernance des données du client.</p>
 <p>La collecte externe supprime la copie. Une collection Milvus peut référencer des fichiers là où ils se trouvent déjà, et Milvus ne gère que le schéma, les index et l'exécution des requêtes. Une actualisation incrémentielle permet de maintenir la collection alignée sur les fichiers sous-jacents. Les clients dont les données ne peuvent pas quitter le lac, tels que les équipes financières et de santé, peuvent exécuter une recherche vectorielle sur ces données là où elles se trouvent. Un ensemble de données unique résidant dans le lac peut également être servi à partir de plusieurs instances Milvus à la fois.</p>
 <p>Pour plus d'informations, voir <a href="/docs/fr/create-an-external-collection.md">Créer une collection externe</a>.</p>
 <h4 id="Snapshot" class="common-anchor-header">Instantané</h4><p>Le service et la découverte par lots ont souvent besoin de la même collection en même temps. L'évaluation de modèles A/B, la déduplication à grande échelle, la validation du backfill et le rollback de version ont tous besoin d'une vue stable de la collection pendant que les écritures sont encore en cours.</p>
@@ -72,7 +77,7 @@ title: Notes de mise à jour
 <p>Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/get-and-scalar-query.md#Aggregate-Query-Results--Milvus-30x">Agrégation des résultats de la requête</a>.</p>
 <h4 id="Null-Vector" class="common-anchor-header">Vecteur nul</h4><p>Les embeddings sont souvent produits de manière asynchrone, de sorte qu'une entité peut arriver avant son vecteur. Les données multimodales présentent également des lacunes naturelles, comme une vidéo sans légende ou un produit sans image. Les versions antérieures n'avaient pas de bonne réponse : les applications retardaient l'écriture jusqu'à ce que le vecteur soit prêt ou remplissaient un vecteur de remplacement, et les deux choix nuisaient à la qualité de la recherche.</p>
 <p>Milvus 3.0 prend en charge NULL dans les champs vectoriels des six types de vecteurs. La recherche ignore automatiquement les vecteurs NULL, la qualité de la recherche n'est pas affectée et les vecteurs NULL ne prennent effectivement pas de place. <code translate="no">AddField</code> s'étend également aux champs vectoriels dans le cadre de cette modification : avec <code translate="no">nullable=True</code>, une collection existante peut développer de nouveaux champs vectoriels en ligne sans avoir à être reconstruite.</p>
-<p>Pour plus d'informations, voir <a href="/docs/fr/nullable-and-default.md">Champs Nullables</a>.</p>
+<p>Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/nullable-and-default.md">Champs Nullables</a>.</p>
 <h4 id="Custom-Dictionary--Synonym-Dictionary" class="common-anchor-header">Dictionnaire personnalisé et dictionnaire des synonymes</h4><p>Les tokenizers prêts à l'emploi ne répondent pas toujours aux exigences de qualité de la recherche de production. Le chinois, les domaines verticaux tels que la médecine, le droit et la chimie, ainsi que les corpus multilingues peuvent bénéficier de manière substantielle de dictionnaires personnalisés et de tables de synonymes. Jusqu'à présent, ces ressources existaient principalement sous la forme de réécritures de requêtes côté application.</p>
 <p>Milvus 3.0 ajoute un mécanisme FileResource permettant d'enregistrer des dictionnaires de tokenizer, des listes de synonymes, des listes de mots vides et des règles de décompactage personnalisés. Une fois enregistrée, une ressource peut être référencée à partir de n'importe quel tokenizer ou filtre et prend effet sur BM25, les analyseurs et Text Match. Les dictionnaires et les synonymes peuvent désormais être versionnés et gérés de manière centralisée au lieu d'être dispersés dans le code de l'application.</p>
 <p>Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/manage-file-resources.md">Gérer les ressources de fichiers</a>.</p>

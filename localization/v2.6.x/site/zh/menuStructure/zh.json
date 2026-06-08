@@ -436,7 +436,7 @@
                 "children": []
               },
               {
-                "label": "JSON 碎纸",
+                "label": "JSON 粉碎",
                 "id": "json-shredding.md",
                 "order": 2,
                 "children": []
@@ -474,15 +474,21 @@
             "children": []
           },
           {
-            "label": "可归零和默认",
+            "label": "可归零字段",
             "id": "nullable-and-default.md",
             "order": 13,
             "children": []
           },
           {
+            "label": "默认值",
+            "id": "default-values.md",
+            "order": 14,
+            "children": []
+          },
+          {
             "label": "分析仪",
             "id": "analyzer",
-            "order": 14,
+            "order": 15,
             "children": [
               {
                 "label": "分析仪概述",
@@ -997,15 +1003,21 @@
                 "children": []
               },
               {
+                "label": "结构数组操作符",
+                "id": "struct-array-operators.md",
+                "order": 5,
+                "children": []
+              },
+              {
                 "label": "随机抽样",
                 "id": "random-sampling.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "几何操作符",
                 "id": "geometry-operators.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               }
             ]
@@ -1949,7 +1961,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "在一个实例中进行备份和还原",
+                "label": "在一个实例中进行备份和恢复",
                 "id": "single-instance-backup-and-restore.md",
                 "order": 0,
                 "children": []

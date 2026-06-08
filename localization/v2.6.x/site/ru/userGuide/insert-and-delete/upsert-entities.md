@@ -58,8 +58,8 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" />
    </span> <span class="img-wrapper"> <span>Upsert в режиме переопределения</span> </span></p>
-<p>Если для целевой коллекции включено <code translate="no">autoid</code> для ее первичного поля, Milvus сгенерирует новый первичный ключ для данных, содержащихся в полезной нагрузке запроса, перед их вставкой.</p>
-<p>Для полей с включенным <code translate="no">nullable</code> можно опустить их в запросе <code translate="no">upsert</code>, если они не требуют обновлений.</p>
+<p>Если у целевой коллекции включено <code translate="no">autoID</code> для ее первичного поля, запрос <code translate="no">upsert</code> все равно должен включать первичный ключ целевой сущности. Milvus использует предоставленный первичный ключ для поиска заменяемой сущности и генерирует новый первичный ключ для данных, содержащихся в полезной нагрузке запроса, перед их вставкой.</p>
+<p>Для полей с включенной опцией <code translate="no">nullable</code> их можно опустить в запросе <code translate="no">upsert</code>, если они не требуют обновлений.</p>
 <h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">Вставка в режиме слияния<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -138,7 +138,7 @@ summary: >-
       </svg>
     </button></h3><p>Исходя из приведенного выше содержания, существует несколько ограничений и запретов, которые необходимо соблюдать:</p>
 <ul>
-<li><p>Запрос <code translate="no">upsert</code> всегда должен включать первичные ключи целевых сущностей.</p></li>
+<li><p>Запрос <code translate="no">upsert</code> всегда должен включать первичные ключи целевых сущностей, даже если включен <code translate="no">autoID</code>. Для коллекций <code translate="no">autoID</code> первичные ключи в запросе определяют существующие сущности для замены. Milvus генерирует новые первичные ключи для вставленных заменяемых сущностей.</p></li>
 <li><p>Целевая коллекция должна быть загружена и доступна для запросов.</p></li>
 <li><p>Все поля, указанные в запросе, должны существовать в схеме целевой коллекции.</p></li>
 <li><p>Значения всех полей, указанных в запросе, должны соответствовать типам данных, определенным в схеме.</p></li>

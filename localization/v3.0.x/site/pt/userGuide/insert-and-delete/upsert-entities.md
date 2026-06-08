@@ -58,8 +58,8 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" />
    </span> <span class="img-wrapper"> <span>Upsert em modo de substituição</span> </span></p>
-<p>Se a coleção de destino tiver <code translate="no">autoid</code> ativado no seu campo primário, o Milvus irá gerar uma nova chave primária para os dados transportados na carga do pedido antes de os inserir.</p>
-<p>Para os campos com <code translate="no">nullable</code> ativado, pode omiti-los no pedido <code translate="no">upsert</code> se não necessitarem de qualquer atualização.</p>
+<p>Se a coleção de destino tiver <code translate="no">autoID</code> ativado no seu campo primário, o pedido <code translate="no">upsert</code> deve ainda incluir a chave primária da entidade de destino. O Milvus usa a chave primária fornecida para localizar a entidade a ser substituída e gera uma nova chave primária para os dados carregados na carga do pedido antes de inseri-los.</p>
+<p>Para os campos com <code translate="no">nullable</code> ativado, pode omiti-los no pedido <code translate="no">upsert</code> se não necessitarem de quaisquer actualizações.</p>
 <h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">Upsert no modo de mesclagem<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -135,9 +135,9 @@ summary: >-
       </svg>
     </button></h3><p>Com base no conteúdo acima, há vários limites e restrições a serem seguidos:</p>
 <ul>
-<li><p>O pedido <code translate="no">upsert</code> deve sempre incluir as chaves primárias das entidades de destino.</p></li>
+<li><p>O pedido <code translate="no">upsert</code> tem de incluir sempre as chaves primárias das entidades de destino, mesmo quando <code translate="no">autoID</code> está ativado. Para as colecções <code translate="no">autoID</code>, as chaves primárias do pedido identificam as entidades existentes a substituir. O Milvus gera novas chaves primárias para as entidades de substituição inseridas.</p></li>
 <li><p>A coleção de destino tem de ser carregada e estar disponível para consultas.</p></li>
-<li><p>Todos os campos especificados no pedido têm de existir no esquema da coleção de destino.</p></li>
+<li><p>Todos os campos especificados no pedido devem existir no esquema da coleção de destino.</p></li>
 <li><p>Os valores de todos os campos especificados no pedido devem corresponder aos tipos de dados definidos no esquema.</p></li>
 <li><p>Para qualquer campo derivado de outro usando funções, o Milvus removerá o campo derivado durante o upsert para permitir o recálculo.</p></li>
 </ul>

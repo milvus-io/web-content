@@ -58,8 +58,8 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" />
    </span> <span class="img-wrapper"> <span>Upsert в режиме переопределения</span> </span></p>
-<p>Если для целевой коллекции включено <code translate="no">autoid</code> для ее первичного поля, Milvus сгенерирует новый первичный ключ для данных, содержащихся в полезной нагрузке запроса, перед их вставкой.</p>
-<p>Для полей с включенным <code translate="no">nullable</code> можно опустить их в запросе <code translate="no">upsert</code>, если они не требуют обновлений.</p>
+<p>Если у целевой коллекции включено <code translate="no">autoID</code> для ее первичного поля, запрос <code translate="no">upsert</code> все равно должен включать первичный ключ целевой сущности. Milvus использует предоставленный первичный ключ для поиска заменяемой сущности и генерирует новый первичный ключ для данных, содержащихся в полезной нагрузке запроса, прежде чем вставить их.</p>
+<p>Для полей с включенной опцией <code translate="no">nullable</code> их можно опустить в запросе <code translate="no">upsert</code>, если они не требуют обновлений.</p>
 <h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">Вставка в режиме слияния<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -135,7 +135,7 @@ summary: >-
       </svg>
     </button></h3><p>Исходя из вышеизложенного, существует несколько ограничений и запретов, которые необходимо соблюдать:</p>
 <ul>
-<li><p>Запрос <code translate="no">upsert</code> всегда должен включать первичные ключи целевых сущностей.</p></li>
+<li><p>Запрос <code translate="no">upsert</code> всегда должен включать первичные ключи целевых сущностей, даже если включен <code translate="no">autoID</code>. Для коллекций <code translate="no">autoID</code> первичные ключи в запросе определяют существующие сущности для замены. Milvus генерирует новые первичные ключи для вставленных заменяемых сущностей.</p></li>
 <li><p>Целевая коллекция должна быть загружена и доступна для запросов.</p></li>
 <li><p>Все поля, указанные в запросе, должны существовать в схеме целевой коллекции.</p></li>
 <li><p>Значения всех полей, указанных в запросе, должны соответствовать типам данных, определенным в схеме.</p></li>
@@ -156,7 +156,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В этом разделе мы выполним апсерт сущностей в коллекцию с именем <code translate="no">my_collection</code>. В этой коллекции есть только два поля, названные <code translate="no">id</code>, <code translate="no">vector</code>, <code translate="no">title</code> и <code translate="no">issue</code>. Поле <code translate="no">id</code> является первичным полем, а поля <code translate="no">title</code> и <code translate="no">issue</code> - скалярными полями.</p>
+    </button></h2><p>В этом разделе мы выполним апсерт сущностей в коллекцию с именем <code translate="no">my_collection</code>. Эта коллекция имеет только два поля, названные <code translate="no">id</code>, <code translate="no">vector</code>, <code translate="no">title</code> и <code translate="no">issue</code>. Поле <code translate="no">id</code> является первичным полем, а поля <code translate="no">title</code> и <code translate="no">issue</code> - скалярными полями.</p>
 <p>Эти три сущности, если они существуют в коллекции, будут переопределены сущностями, включенными в запрос upsert.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

@@ -474,15 +474,21 @@
             "children": []
           },
           {
-            "label": "무효화 가능 및 기본값",
+            "label": "무효화 가능한 필드",
             "id": "nullable-and-default.md",
             "order": 13,
             "children": []
           },
           {
+            "label": "기본값",
+            "id": "default-values.md",
+            "order": 14,
+            "children": []
+          },
+          {
             "label": "분석기",
             "id": "analyzer",
-            "order": 14,
+            "order": 15,
             "children": [
               {
                 "label": "분석기 개요",
@@ -997,15 +1003,21 @@
                 "children": []
               },
               {
+                "label": "StructArray 연산자",
+                "id": "struct-array-operators.md",
+                "order": 5,
+                "children": []
+              },
+              {
                 "label": "무작위 샘플링",
                 "id": "random-sampling.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "지오메트리 연산자",
                 "id": "geometry-operators.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               }
             ]

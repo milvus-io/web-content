@@ -56,7 +56,7 @@ summary: 업서트 작업은 컬렉션에 엔티티를 삽입하거나 업데이
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" />
    </span> <span class="img-wrapper"> <span>재정의 모드에서 업서트</span> </span></p>
-<p>대상 컬렉션의 기본 필드에 <code translate="no">autoid</code> 가 활성화된 경우, Milvus는 요청 페이로드에 포함된 데이터에 대한 새 기본 키를 생성한 후 이를 삽입합니다.</p>
+<p>대상 컬렉션의 기본 필드에 <code translate="no">autoID</code> 가 활성화된 경우 <code translate="no">upsert</code> 요청에는 여전히 대상 엔티티의 기본 키가 포함되어야 합니다. Milvus는 제공된 기본 키를 사용하여 대체할 엔티티를 찾고, 요청 페이로드에 포함된 데이터에 대한 새 기본 키를 생성한 후 삽입합니다.</p>
 <p><code translate="no">nullable</code> 가 활성화된 필드의 경우 업데이트가 필요하지 않은 경우 <code translate="no">upsert</code> 요청에서 생략할 수 있습니다.</p>
 <h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">병합 모드에서 업서트<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -108,7 +108,7 @@ summary: 업서트 작업은 컬렉션에 엔티티를 삽입하거나 업데이
 <p>예제 컬렉션에서 동적 키를 활성화했고 엔티티의 동적 필드에 있는 키-값 쌍이 <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> 과 유사하다고 가정해 보겠습니다.</p>
 <p><code translate="no">author</code>, <code translate="no">year</code>, 또는 <code translate="no">tags</code> 와 같은 키로 엔티티를 삽입하거나 다른 키를 추가할 때 주의하세요:</p>
 <ul>
-<li><p><code translate="no">partial_update</code> 을 비활성화한 상태에서 업서트하는 경우 기본 동작은 <strong>재정의입니다</strong>. 즉, 동적 필드의 값은 요청에 포함된 모든 스키마 정의되지 않은 필드와 그 값에 의해 재정의됩니다.</p>
+<li><p><code translate="no">partial_update</code> 을 비활성화한 상태로 업서트하는 경우 기본 동작은 <strong>재정의입니다</strong>. 즉, 동적 필드의 값은 요청에 포함된 모든 스키마 정의되지 않은 필드와 그 값에 의해 재정의됩니다.</p>
 <p>예를 들어 요청에 포함된 데이터가 <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code> 인 경우 대상 엔티티의 동적 필드에 있는 키-값 쌍이 해당 값으로 업데이트됩니다.</p></li>
 <li><p><code translate="no">partial_update</code> 을 활성화한 상태로 업서트하면 기본 동작은 <strong>병합입니다</strong>. 즉, 동적 필드의 값은 요청에 포함된 모든 스키마 정의되지 않은 필드 및 해당 값과 병합됩니다.</p>
 <p>예를 들어 요청에 포함된 데이터가 <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> 인 경우 대상 엔티티의 동적 필드에 있는 키-값 쌍은 업서트 후 <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> 이 됩니다.</p></li>
@@ -136,7 +136,7 @@ summary: 업서트 작업은 컬렉션에 엔티티를 삽입하거나 업데이
       </svg>
     </button></h3><p>위의 내용을 바탕으로 몇 가지 제한 및 제한 사항을 준수해야 합니다:</p>
 <ul>
-<li><p><code translate="no">upsert</code> 요청에는 항상 대상 엔티티의 기본 키가 포함되어야 합니다.</p></li>
+<li><p><code translate="no">upsert</code> 요청에는 <code translate="no">autoID</code> 이 활성화된 경우에도 항상 대상 엔티티의 기본 키가 포함되어야 합니다. <code translate="no">autoID</code> 컬렉션의 경우, 요청의 기본 키는 대체할 기존 엔티티를 식별합니다. Milvus는 삽입된 대체 엔티티에 대한 새 기본 키를 생성합니다.</p></li>
 <li><p>대상 컬렉션이 로드되어 있고 쿼리에 사용할 수 있어야 합니다.</p></li>
 <li><p>요청에 지정된 모든 필드는 대상 컬렉션의 스키마에 존재해야 합니다.</p></li>
 <li><p>요청에 지정된 모든 필드의 값은 스키마에 정의된 데이터 유형과 일치해야 합니다.</p></li>

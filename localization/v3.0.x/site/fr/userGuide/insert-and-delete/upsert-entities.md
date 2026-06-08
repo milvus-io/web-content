@@ -36,7 +36,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vous pouvez utiliser <code translate="no">upsert</code> pour insérer une nouvelle entité ou mettre à jour une entité existante, selon que la clé primaire fournie dans la demande d'insertion existe ou non dans la collection. Si la clé primaire n'est pas trouvée, une opération d'insertion est effectuée. Dans le cas contraire, une opération de mise à jour est effectuée.</p>
+    </button></h2><p>Vous pouvez utiliser <code translate="no">upsert</code> pour insérer une nouvelle entité ou mettre à jour une entité existante, selon que la clé primaire fournie dans la requête upsert existe ou non dans la collection. Si la clé primaire n'est pas trouvée, une opération d'insertion est effectuée. Dans le cas contraire, une opération de mise à jour est effectuée.</p>
 <p>Dans Milvus, un upsert fonctionne en mode <strong>prioritaire</strong> ou en mode <strong>fusion</strong>.</p>
 <h3 id="Upsert-in-override-mode" class="common-anchor-header">Insertion en mode prioritaire<button data-href="#Upsert-in-override-mode" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -58,7 +58,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" />
    </span> <span class="img-wrapper"> <span>Insertion en mode prioritaire</span> </span></p>
-<p>Si la collection cible a activé <code translate="no">autoid</code> sur son champ primaire, Milvus génère une nouvelle clé primaire pour les données transportées dans la charge utile de la demande avant de les insérer.</p>
+<p>Si la collection cible a activé <code translate="no">autoID</code> sur son champ primaire, la demande <code translate="no">upsert</code> doit toujours inclure la clé primaire de l'entité cible. Milvus utilise la clé primaire fournie pour localiser l'entité à remplacer et génère une nouvelle clé primaire pour les données transportées dans la charge utile de la requête avant de l'insérer.</p>
 <p>Pour les champs dont l'option <code translate="no">nullable</code> est activée, vous pouvez les omettre dans la requête <code translate="no">upsert</code> s'ils ne nécessitent aucune mise à jour.</p>
 <h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">Insertion en mode fusion<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -135,9 +135,9 @@ summary: >-
       </svg>
     </button></h3><p>Sur la base du contenu ci-dessus, il existe plusieurs limites et restrictions à respecter :</p>
 <ul>
-<li><p>La requête <code translate="no">upsert</code> doit toujours inclure les clés primaires des entités cibles.</p></li>
+<li><p>La requête <code translate="no">upsert</code> doit toujours inclure les clés primaires des entités cibles, même lorsque <code translate="no">autoID</code> est activé. Pour les collections <code translate="no">autoID</code>, les clés primaires de la demande identifient les entités existantes à remplacer. Milvus génère de nouvelles clés primaires pour les entités de remplacement insérées.</p></li>
 <li><p>La collection cible doit être chargée et disponible pour les requêtes.</p></li>
-<li><p>Tous les champs spécifiés dans la demande doivent exister dans le schéma de la collection cible.</p></li>
+<li><p>Tous les champs spécifiés dans la requête doivent exister dans le schéma de la collection cible.</p></li>
 <li><p>Les valeurs de tous les champs spécifiés dans la requête doivent correspondre aux types de données définis dans le schéma.</p></li>
 <li><p>Pour tout champ dérivé d'un autre à l'aide de fonctions, Milvus supprime le champ dérivé pendant la conversion pour permettre un nouveau calcul.</p></li>
 </ul>

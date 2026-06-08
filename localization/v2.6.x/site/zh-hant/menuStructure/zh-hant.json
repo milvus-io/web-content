@@ -322,7 +322,7 @@
             "children": []
           },
           {
-            "label": "檢視館藏",
+            "label": "檢視收藏集",
             "id": "view-collections.md",
             "order": 3,
             "children": []
@@ -474,15 +474,21 @@
             "children": []
           },
           {
-            "label": "Nullable &amp; Default",
+            "label": "可歸零欄位",
             "id": "nullable-and-default.md",
             "order": 13,
             "children": []
           },
           {
+            "label": "預設值",
+            "id": "default-values.md",
+            "order": 14,
+            "children": []
+          },
+          {
             "label": "分析器",
             "id": "analyzer",
-            "order": 14,
+            "order": 15,
             "children": [
               {
                 "label": "分析儀總覽",
@@ -997,15 +1003,21 @@
                 "children": []
               },
               {
+                "label": "StructArray 運算符號",
+                "id": "struct-array-operators.md",
+                "order": 5,
+                "children": []
+              },
+              {
                 "label": "隨機抽樣",
                 "id": "random-sampling.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "幾何運算符號",
                 "id": "geometry-operators.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               }
             ]
@@ -1109,7 +1121,7 @@
                 "children": []
               },
               {
-                "label": "Voyage AI",
+                "label": "航程 AI",
                 "id": "voyage-ai.md",
                 "order": 6,
                 "children": []
@@ -2491,7 +2503,7 @@
         "order": 6,
         "children": [
           {
-            "label": "拉格舞曲",
+            "label": "拉格",
             "id": "integrate_with_ragas.md",
             "order": 0,
             "children": []
@@ -2613,7 +2625,7 @@
             "children": []
           },
           {
-            "label": "煙花",
+            "label": "煙火",
             "id": "build_RAG_with_milvus_and_fireworks.md",
             "order": 2,
             "children": []

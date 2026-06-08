@@ -34,7 +34,7 @@ summary: upsert 操作为插入或更新 Collections 中的实体提供了一种
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以使用<code translate="no">upsert</code> 插入新实体或更新现有实体，具体取决于 upsert 请求中提供的主键是否存在于 Collections 中。如果找不到主键，则进行插入操作。否则，将执行更新操作。</p>
+    </button></h2><p>根据 upsert 请求中提供的主键是否存在于 Collections 中，您可以使用<code translate="no">upsert</code> 插入新实体或更新现有实体。如果找不到主键，则进行插入操作。否则，将执行更新操作。</p>
 <p>在 Milvus 中，upsert 可在<strong>覆盖</strong>或<strong>合并</strong>模式下工作。</p>
 <h3 id="Upsert-in-override-mode" class="common-anchor-header">覆盖模式下的upsert<button data-href="#Upsert-in-override-mode" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -51,13 +51,13 @@ summary: upsert 操作为插入或更新 Collections 中的实体提供了一种
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>覆盖模式下的上载请求结合了插入和删除操作。当收到一个针对现有实体的<code translate="no">upsert</code> 请求时，Milvus 会插入请求有效载荷中携带的数据，并同时删除数据中指定原始主键的现有实体。</p>
+    </button></h3><p>覆盖模式下的上载请求结合了插入和删除操作。当收到针对现有实体的<code translate="no">upsert</code> 请求时，Milvus 会插入请求有效载荷中携带的数据，并同时删除数据中指定原始主键的现有实体。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" />
    </span> <span class="img-wrapper"> <span>覆盖模式下的上插入</span> </span></p>
-<p>如果目标 Collections 的主字段启用了<code translate="no">autoid</code> ，Milvus 将为请求有效载荷中携带的数据生成一个新的主键，然后再插入。</p>
-<p>对于启用了<code translate="no">nullable</code> 的字段，如果不需要更新，可以在<code translate="no">upsert</code> 请求中省略。</p>
+<p>如果目标 Collections 的主字段已启用<code translate="no">autoID</code> ，则<code translate="no">upsert</code> 请求仍必须包括目标实体的主键。Milvus 使用所提供的主键来定位要替换的实体，并在插入请求有效载荷中携带的数据前生成一个新的主键。</p>
+<p>对于已启用<code translate="no">nullable</code> 的字段，如果不需要更新，可以在<code translate="no">upsert</code> 请求中省略。</p>
 <h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">在合并模式下向上插入<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -96,7 +96,7 @@ summary: upsert 操作为插入或更新 Collections 中的实体提供了一种
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在使用合并功能之前，有几个特别注意事项需要考虑。以下情况假定您有一个 Collections，其中有两个标量字段，分别名为<code translate="no">title</code> 和<code translate="no">issue</code> ，以及一个主键<code translate="no">id</code> 和一个名为<code translate="no">vector</code> 的向量字段。</p>
+    </button></h3><p>在使用合并功能之前，有几个特别注意事项需要考虑。以下情况假定您有一个 Collections，其中有两个标量字段，分别名为<code translate="no">title</code> 和<code translate="no">issue</code> ，以及一个主键<code translate="no">id</code> 和一个向量字段<code translate="no">vector</code> 。</p>
 <ul>
 <li><p><strong>启用</strong> <code translate="no">nullable</code> <strong>的向上插入字段</strong> <strong>。</strong></p>
 <p>假设<code translate="no">issue</code> 字段可以为空。在倒插这些字段时，请注意以下几点：</p>
@@ -105,7 +105,7 @@ summary: upsert 操作为插入或更新 Collections 中的实体提供了一种
 <li><p>要保留<code translate="no">issue</code> 字段的原始值，要么启用<code translate="no">partial_update</code> 并省略<code translate="no">issue</code> 字段，要么在<code translate="no">upsert</code> 请求中包含<code translate="no">issue</code> 字段及其原始值。</p></li>
 </ul></li>
 <li><p><strong>在动态字段中倒插键</strong>。</p>
-<p>假设在示例 Collections 中启用了动态键，实体动态字段中的键值对类似于<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> 。</p>
+<p>假设在示例 Collections 中启用了动态键，实体动态字段中的键值对与<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> 类似。</p>
 <p>当你向上插入实体的键，如<code translate="no">author</code>,<code translate="no">year</code>, 或<code translate="no">tags</code> ，或添加其他键时，请注意：</p>
 <ul>
 <li><p>如果上载<code translate="no">partial_update</code> 时禁用，默认行为是<strong>覆盖</strong>。这意味着动态字段的值将被请求中包含的所有非 Schema 定义的字段及其值覆盖。</p>
@@ -136,7 +136,7 @@ summary: upsert 操作为插入或更新 Collections 中的实体提供了一种
       </svg>
     </button></h3><p>根据上述内容，有几个限制和约束需要遵循：</p>
 <ul>
-<li><p><code translate="no">upsert</code> 请求必须始终包含目标实体的主键。</p></li>
+<li><p><code translate="no">upsert</code> 请求必须始终包含目标实体的主键，即使启用了<code translate="no">autoID</code> 。对于<code translate="no">autoID</code> Collections，请求中的主键标识了要替换的现有实体。Milvus 会为插入的替换实体生成新的主键。</p></li>
 <li><p>目标 Collections 必须已加载并可供查询。</p></li>
 <li><p>请求中指定的所有字段必须存在于目标 Collections 的 Schema 中。</p></li>
 <li><p>请求中指定的所有字段的值必须与 Schema 中定义的数据类型相匹配。</p></li>
@@ -492,7 +492,7 @@ curl --request POST \
     </button></h2><p>下面的代码示例演示了如何通过部分更新来倒插实体。只提供需要更新的字段及其新值，以及显式部分更新标记。</p>
 <p>在下面的示例中，upsert 请求中指定的实体的<code translate="no">issue</code> 字段将更新为请求中包含的值。</p>
 <div class="alert note">
-<p>在合并模式下执行 upsert 时，请确保请求中涉及的实体具有相同的字段集。假设有两个或更多实体要进行upsert，如以下代码片段所示，它们必须包含相同的字段，以防止错误并保持数据的完整性。</p>
+<p>在合并模式下执行 upsert 时，请确保请求中涉及的实体具有相同的字段集。假设有两个或更多实体要进行upsert，如以下代码片段所示，它们必须包含相同的字段，以防止出现错误并保持数据完整性。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>

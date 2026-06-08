@@ -58,7 +58,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" />
    </span> <span class="img-wrapper"> <span>Upsert im Überschreibungsmodus</span> </span></p>
-<p>Wenn die Zielsammlung die Option <code translate="no">autoid</code> für ihr Primärfeld aktiviert hat, generiert Milvus einen neuen Primärschlüssel für die in der Nutzlast der Anforderung enthaltenen Daten, bevor es sie einfügt.</p>
+<p>Wenn die Zielsammlung <code translate="no">autoID</code> für ihr Primärfeld aktiviert hat, muss die <code translate="no">upsert</code> -Anfrage dennoch den Primärschlüssel der Zielentität enthalten. Milvus verwendet den bereitgestellten Primärschlüssel, um die zu ersetzende Entität zu finden, und generiert einen neuen Primärschlüssel für die in der Nutzlast der Anforderung enthaltenen Daten, bevor diese eingefügt werden.</p>
 <p>Bei Feldern, für die <code translate="no">nullable</code> aktiviert ist, können Sie sie in der Anforderung <code translate="no">upsert</code> auslassen, wenn sie keine Aktualisierungen erfordern.</p>
 <h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">Upsert im Zusammenführungsmodus<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -138,10 +138,10 @@ summary: >-
       </svg>
     </button></h3><p>Basierend auf dem obigen Inhalt gibt es einige Grenzen und Einschränkungen zu beachten:</p>
 <ul>
-<li><p>Die Anfrage <code translate="no">upsert</code> muss immer die Primärschlüssel der Zielentitäten enthalten.</p></li>
+<li><p>Die Anfrage <code translate="no">upsert</code> muss immer die Primärschlüssel der Zielentitäten enthalten, auch wenn <code translate="no">autoID</code> aktiviert ist. Bei <code translate="no">autoID</code> Sammlungen identifizieren die Primärschlüssel in der Anfrage die vorhandenen Entitäten, die ersetzt werden sollen. Milvus generiert neue Primärschlüssel für die eingefügten Ersatzentitäten.</p></li>
 <li><p>Die Zielsammlung muss geladen und für Abfragen verfügbar sein.</p></li>
 <li><p>Alle in der Anfrage angegebenen Felder müssen im Schema der Zielsammlung vorhanden sein.</p></li>
-<li><p>Die Werte aller in der Abfrage angegebenen Felder müssen mit den im Schema definierten Datentypen übereinstimmen.</p></li>
+<li><p>Die Werte aller in der Anfrage angegebenen Felder müssen mit den im Schema definierten Datentypen übereinstimmen.</p></li>
 <li><p>Für jedes Feld, das mit Hilfe von Funktionen von einem anderen abgeleitet wurde, entfernt Milvus das abgeleitete Feld während des Upsets, um eine Neuberechnung zu ermöglichen.</p></li>
 </ul>
 <h2 id="Upsert-entities-in-a-collection" class="common-anchor-header">Upsert von Entitäten in einer Sammlung<button data-href="#Upsert-entities-in-a-collection" class="anchor-icon" translate="no">
@@ -630,7 +630,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vor der Einführung von Teilaktualisierungsoperatoren erforderte die Aktualisierung eines Teils eines <code translate="no">ARRAY</code> -Feldes einen clientseitigen Lese-Änderungs-Schreibfluss: Abfrage des vorhandenen Arrays, Änderung im Anwendungscode und Upserting des vollständigen Ersatzwertes. Mit Operatoren für Teilaktualisierungen können Sie nur die Elemente senden, die angehängt oder entfernt werden sollen, was die clientseitige Logik reduziert und das zusätzliche Lesen vor dem Upsert vermeidet.</p>
+    </button></h2><p>Vor der Einführung von Teilaktualisierungsoperatoren erforderte die Aktualisierung eines Teils eines <code translate="no">ARRAY</code> -Feldes einen clientseitigen Lese-Änderungs-Schreibfluss: Abfrage des vorhandenen Arrays, Änderung im Anwendungscode und Upserting des vollständigen Ersatzwertes. Mit Operatoren für Teilaktualisierungen können Sie nur die Elemente senden, die angehängt oder entfernt werden sollen, wodurch die clientseitige Logik reduziert und das zusätzliche Lesen vor dem Upsert vermieden wird.</p>
 <p>Angenommen, die Entität mit dem Primärschlüssel <code translate="no">1</code> hat bereits <code translate="no">tags = [&quot;new&quot;, &quot;trial&quot;]</code>. Ohne Teilaktualisierungsoperatoren erfordert das Hinzufügen von <code translate="no">&quot;premium&quot;</code> zum Array das Upserting des gesamten Ersatzarrays:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

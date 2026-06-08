@@ -474,15 +474,21 @@
             "children": []
           },
           {
-            "label": "Nullable et par défaut",
+            "label": "Champs annulables",
             "id": "nullable-and-default.md",
             "order": 13,
             "children": []
           },
           {
+            "label": "Valeurs par défaut",
+            "id": "default-values.md",
+            "order": 14,
+            "children": []
+          },
+          {
             "label": "Analyseur",
             "id": "analyzer",
-            "order": 14,
+            "order": 15,
             "children": [
               {
                 "label": "Aperçu de l'analyseur",
@@ -997,15 +1003,21 @@
                 "children": []
               },
               {
+                "label": "Opérateurs StructArray",
+                "id": "struct-array-operators.md",
+                "order": 5,
+                "children": []
+              },
+              {
                 "label": "L'échantillonnage aléatoire",
                 "id": "random-sampling.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "Opérateurs de géométrie",
                 "id": "geometry-operators.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               }
             ]
@@ -1967,7 +1979,7 @@
                 "children": []
               },
               {
-                "label": "Migrer d'une instance à l'autre dans un environnement S3",
+                "label": "Migrer d'une instance à l'autre d'un environnement S3 à l'autre",
                 "id": "multi-storage-backup-and-restore.md",
                 "order": 3,
                 "children": []

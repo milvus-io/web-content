@@ -56,7 +56,7 @@ summary: توفر عملية upsert طريقة ملائمة لإدراج أو ت
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" />
    </span> <span class="img-wrapper"> <span>الإدراج في وضع التجاوز</span> </span></p>
-<p>إذا تم تمكين <code translate="no">autoid</code> في المجموعة المستهدفة على الحقل الأساسي الخاص بها، فسيقوم Milvus بإنشاء مفتاح أساسي جديد للبيانات المنقولة في حمولة الطلب قبل إدراجها.</p>
+<p>إذا كانت المجموعة المستهدفة قد تم تمكين <code translate="no">autoID</code> على الحقل الأساسي الخاص بها، يجب أن يظل طلب <code translate="no">upsert</code> يتضمن المفتاح الأساسي للكيان الهدف. يستخدم Milvus المفتاح الأساسي المقدم لتحديد موقع الكيان المراد استبداله، ويقوم بإنشاء مفتاح أساسي جديد للبيانات المنقولة في حمولة الطلب قبل إدراجه.</p>
 <p>بالنسبة للحقول التي تم تمكين <code translate="no">nullable</code> ، يمكنك حذفها في طلب <code translate="no">upsert</code> إذا كانت لا تتطلب أي تحديثات.</p>
 <h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">الإدراج في وضع الدمج<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -73,7 +73,7 @@ summary: توفر عملية upsert طريقة ملائمة لإدراج أو ت
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يمكنك أيضًا استخدام العلامة <code translate="no">partial_update</code> لجعل طلب الإضافة يعمل في وضع الدمج. يتيح لك ذلك تضمين الحقول التي تحتاج إلى تحديث فقط في حمولة الطلب.</p>
+    </button></h3><p>يمكنك أيضًا استخدام العلامة <code translate="no">partial_update</code> لجعل طلب الإضافة يعمل في وضع الدمج. يسمح لك هذا بتضمين الحقول التي تحتاج إلى تحديث فقط في حمولة الطلب.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-in-merge-mode.png" alt="Upsert In Merge Mode" class="doc-image" id="upsert-in-merge-mode" />
@@ -136,11 +136,11 @@ summary: توفر عملية upsert طريقة ملائمة لإدراج أو ت
       </svg>
     </button></h3><p>بناءً على المحتوى أعلاه، هناك العديد من الحدود والقيود التي يجب اتباعها:</p>
 <ul>
-<li><p>يجب أن يتضمن الطلب <code translate="no">upsert</code> دائمًا المفاتيح الأساسية للكيانات المستهدفة.</p></li>
-<li><p>يجب أن تكون المجموعة المستهدفة محملة ومتاحة للاستعلامات.</p></li>
+<li><p>يجب أن يتضمن الطلب <code translate="no">upsert</code> دائمًا المفاتيح الأساسية للكيانات المستهدفة، حتى عند تمكين <code translate="no">autoID</code>. بالنسبة للمجموعات <code translate="no">autoID</code> ، تحدد المفاتيح الأساسية في الطلب الكيانات الموجودة المراد استبدالها. يقوم Milvus بإنشاء مفاتيح أساسية جديدة للكيانات البديلة المدرجة.</p></li>
+<li><p>يجب تحميل المجموعة المستهدفة وإتاحتها للاستعلامات.</p></li>
 <li><p>يجب أن تكون جميع الحقول المحددة في الطلب موجودة في مخطط المجموعة المستهدفة.</p></li>
 <li><p>يجب أن تتطابق قيم جميع الحقول المحددة في الطلب مع أنواع البيانات المحددة في المخطط.</p></li>
-<li><p>بالنسبة لأي حقل مشتق من حقل آخر باستخدام الدوال، سيقوم ميلفوس بإزالة الحقل المشتق أثناء عملية إعادة الإدراج للسماح بإعادة الحساب.</p></li>
+<li><p>بالنسبة لأي حقل مشتق من حقل آخر باستخدام الدوال، سيقوم Milvus بإزالة الحقل المشتق أثناء عملية إعادة الإدراج للسماح بإعادة الحساب.</p></li>
 </ul>
 <h2 id="Upsert-entities-in-a-collection" class="common-anchor-header">إعادة إدراج الكيانات في مجموعة<button data-href="#Upsert-entities-in-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -705,7 +705,7 @@ client.upsert(UpsertReq.builder()
         ></path>
       </svg>
     </button></h3><ul>
-<li>يجب أن تتطابق قيم الحمولة مع <code translate="no">element_type</code> للحقل المستهدف <code translate="no">ARRAY</code>. على سبيل المثال، إذا كان الحقل الهدف هو <code translate="no">ARRAY&lt;VARCHAR&gt;</code> ، يجب أن تحتوي الحمولة على قيم سلسلة.</li>
+<li>يجب أن تتطابق قيم الحمولة مع <code translate="no">element_type</code> للحقل المستهدف <code translate="no">ARRAY</code>. على سبيل المثال، إذا كان الحقل الهدف هو <code translate="no">ARRAY&lt;VARCHAR&gt;</code> ، فيجب أن تحتوي الحمولة على قيم سلسلة.</li>
 <li><code translate="no">ARRAY_APPEND</code> و <code translate="no">ARRAY_REMOVE</code> تدعم حقول <code translate="no">ARRAY</code> التي <code translate="no">element_type</code> <code translate="no">BOOL</code> أو <code translate="no">INT8</code> أو <code translate="no">INT16</code> أو <code translate="no">INT32</code> أو <code translate="no">INT64</code> أو <code translate="no">FLOAT</code> أو <code translate="no">DOUBLE</code> أو <code translate="no">VARCHAR</code>.</li>
 <li>بعد إجراء عملية <code translate="no">ARRAY_APPEND</code> ، يجب ألا يتجاوز طول المصفوفة الناتجة طول الحقل <code translate="no">max_capacity</code>.</li>
 <li>عمليات الإدراج المتزامنة لنفس الكيان ليست ذرية عبر الطلبات. إذا قام طلبان بتحديث نفس الحقل <code translate="no">ARRAY</code> في نفس الوقت، يمكن للكتابة اللاحقة أن تحل محل السابقة. استخدم التنسيق على مستوى التطبيق إذا كنت بحاجة إلى الحفاظ على جميع التغييرات المتزامنة.</li>

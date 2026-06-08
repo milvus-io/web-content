@@ -474,15 +474,21 @@
             "children": []
           },
           {
-            "label": "無効とデフォルト",
+            "label": "ヌル可能フィールド",
             "id": "nullable-and-default.md",
             "order": 13,
             "children": []
           },
           {
+            "label": "デフォルト値",
+            "id": "default-values.md",
+            "order": 14,
+            "children": []
+          },
+          {
             "label": "アナライザー",
             "id": "analyzer",
-            "order": 14,
+            "order": 15,
             "children": [
               {
                 "label": "アナライザーの概要",
@@ -997,15 +1003,21 @@
                 "children": []
               },
               {
+                "label": "構造配列演算子",
+                "id": "struct-array-operators.md",
+                "order": 5,
+                "children": []
+              },
+              {
                 "label": "ランダム・サンプリング",
                 "id": "random-sampling.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "ジオメトリ演算子",
                 "id": "geometry-operators.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               }
             ]
@@ -1041,7 +1053,7 @@
             "children": []
           },
           {
-            "label": "Elasticsearchからmilvusへのクエリ",
+            "label": "Elasticsearchクエリからmilvusへ",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 13,
             "children": []
@@ -1891,7 +1903,7 @@
         "order": 14,
         "children": [
           {
-            "label": "Milvusクラスタースイッチ MQタイプ",
+            "label": "Milvus クラスタースイッチ MQ タイプ",
             "id": "switch_milvus_cluster_mq_type-operator.md",
             "order": 0,
             "children": []
@@ -2932,7 +2944,7 @@
             "children": []
           },
           {
-            "label": "推薦システム",
+            "label": "レコメンダー・システム",
             "id": "recommendation_system.md",
             "order": 6,
             "children": []

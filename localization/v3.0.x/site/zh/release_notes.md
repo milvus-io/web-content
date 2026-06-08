@@ -43,8 +43,13 @@ title: 版本说明
 <tr><td>3.0-beta</td><td>3.0.0</td><td>3.0.0</td></tr>
 </tbody>
 </table>
-<p>Milvus 3.0-beta 扩展了 Milvus 向量数据库，并与开放湖泊生态系统进行了新的整合：External Collection 可让 Milvus 零拷贝查询外部湖泊表，Spark 可通过 Snapshot 直接读取 Milvus Collections。该版本还带来了更丰富的检索、更具表现力的 Schema、更深入的文本搜索定制、更精细的数据和模型生命周期控制以及更多的操作符侧控制。Milvus 3.0 是 Zilliz Lakebase 的核心内核，为其统一服务、发现和批处理提供动力。</p>
-<h3 id="Key-Features" class="common-anchor-header">主要功能<button data-href="#Key-Features" class="anchor-icon" translate="no">
+<p>Milvus 3.0-beta 扩展了 Milvus 向量数据库，并与开放湖泊生态系统进行了新的整合：External Collection 可让 Milvus 零拷贝查询外部湖泊表，Spark 可通过 Snapshot 直接读取 Milvus Collections。该版本还带来了更丰富的检索、更具表现力的 Schema、更深入的文本搜索定制、更精细的数据和模型生命周期控制以及更多的操作符侧控制。Milvus 3.0是Zilliz Lakebase的核心内核，为其统一服务、发现和批处理提供动力。</p>
+<p>点击下面参加我们的网络研讨会，了解有关 Milvus 3.0 的更多详情，并与核心维护人员进行 AMA 交流：</p>
+<p><a href="https://zilliz.com/event/whats-new-in-milvus-3-0-beta">
+  
+   <span class="img-wrapper"> <img translate="no" src="https://assets.zilliz.com/webinar_3_0_4746da7c2d.png" alt="Webinar 3.0 walkthrough" class="doc-image" id="webinar-3.0-walkthrough" />
+ </span>  <span class="img-wrapper"> <span>网络研讨会 3.0 演练</span> </span></a></p>
+<h3 id="Key-Features" class="common-anchor-header">关键功能<button data-href="#Key-Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -71,8 +76,8 @@ title: 版本说明
 <h4 id="Query-Aggregation" class="common-anchor-header">查询聚合</h4><p>过去，从 Milvus Distributed Collection 生成租户分布统计、字段完整性计数或版本推出进度时，需要将匹配的实体拉回到客户端并在那里进行聚合。Milvus 3.0 将 SQL 风格的标量聚合引入了内核。查询调用接受<code translate="no">group_by_fields</code> 和<code translate="no">output_fields</code> 中的聚合表达式，包括<code translate="no">count(*)</code>,<code translate="no">count(&lt;field&gt;)</code>,<code translate="no">sum(&lt;field&gt;)</code>,<code translate="no">avg(&lt;field&gt;)</code>,<code translate="no">min(&lt;field&gt;)</code> 和<code translate="no">max(&lt;field&gt;)</code> 。聚合在过滤后在服务器端进行评估。</p>
 <p>更多信息，请参阅<a href="/docs/zh/get-and-scalar-query.md#Aggregate-Query-Results--Milvus-30x">聚合查询结果</a>。</p>
 <h4 id="Null-Vector" class="common-anchor-header">空向量</h4><p>Embeddings 通常是异步生成的，因此实体可能会在其向量生成之前到达。多模态数据也有天然的空白，例如没有字幕的视频或没有图片的产品。早期版本没有很好的解决办法：应用程序要么延迟写入，直到向量准备就绪，要么填入一个占位向量，而这两种选择都会损害检索质量。</p>
-<p>Milvus 3.0 支持所有六种向量类型的向量字段上的 NULL。搜索会自动跳过 NULL 向量，检索质量不受影响，而且 NULL 向量实际上不占用任何存储空间。在这一变更下，<code translate="no">AddField</code> 也扩展到了向量字段：通过<code translate="no">nullable=True</code> ，现有的 Collections 可以在线增长新的向量字段，而无需重建。</p>
-<p>更多信息，请参阅 "<a href="/docs/zh/nullable-and-default.md">可空字段</a>"。</p>
+<p>Milvus 3.0 支持所有六种向量类型的向量字段上的 NULL。搜索会自动跳过 NULL 向量，检索质量不受影响，而且 NULL 向量实际上不占用任何存储空间。在这一变化下，<code translate="no">AddField</code> 也扩展到了向量字段：通过<code translate="no">nullable=True</code> ，现有的 Collections 可以在线增长新的向量字段，而无需重建。</p>
+<p>有关详细信息，请参阅 "<a href="/docs/zh/nullable-and-default.md">可空字段</a>"。</p>
 <h4 id="Custom-Dictionary--Synonym-Dictionary" class="common-anchor-header">自定义字典和同义词字典</h4><p>开箱即用的标记化器并不总能满足生产搜索的质量要求。中文、垂直领域（如医学、法律和化学）以及多语言语料库可以从自定义词典和同义词表中获益匪浅。到目前为止，这些资源大多是应用方查询重写。</p>
 <p>Milvus 3.0 增加了一个 FileResource 机制，用于注册自定义标记符号字典、同义词表、停止词表和反编译规则。资源一旦注册，就可以从任何标记符或过滤器中引用，并在 BM25、分析器和文本匹配中生效。字典和同义词现在可以进行版本控制和集中管理，而不是分散在应用程序代码中。</p>
 <p>有关详细信息，请参阅<a href="/docs/zh/manage-file-resources.md">管理文件资源</a>。</p>

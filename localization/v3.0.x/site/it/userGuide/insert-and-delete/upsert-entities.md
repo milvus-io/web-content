@@ -58,7 +58,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" />
    </span> <span class="img-wrapper"> <span>Upsert in modalità Override</span> </span></p>
-<p>Se la collezione di destinazione ha <code translate="no">autoid</code> abilitato sul suo campo primario, Milvus genererà una nuova chiave primaria per i dati trasportati nel payload della richiesta prima di inserirli.</p>
+<p>Se la collezione di destinazione ha <code translate="no">autoID</code> abilitato sul suo campo primario, la richiesta <code translate="no">upsert</code> deve comunque includere la chiave primaria dell'entità di destinazione. Milvus utilizza la chiave primaria fornita per individuare l'entità da sostituire e genera una nuova chiave primaria per i dati trasportati nel payload della richiesta prima di inserirli.</p>
 <p>Per i campi con <code translate="no">nullable</code> abilitato, è possibile ometterli nella richiesta <code translate="no">upsert</code> se non richiedono aggiornamenti.</p>
 <h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">Upsert in modalità merge<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -135,9 +135,9 @@ summary: >-
       </svg>
     </button></h3><p>Sulla base del contenuto di cui sopra, ci sono diversi limiti e restrizioni da seguire:</p>
 <ul>
-<li><p>La richiesta <code translate="no">upsert</code> deve sempre includere le chiavi primarie delle entità di destinazione.</p></li>
-<li><p>L'insieme di destinazione deve essere caricato e disponibile per le query.</p></li>
-<li><p>Tutti i campi specificati nella richiesta devono esistere nello schema dell'insieme di destinazione.</p></li>
+<li><p>La richiesta <code translate="no">upsert</code> deve sempre includere le chiavi primarie delle entità di destinazione, anche quando <code translate="no">autoID</code> è abilitato. Per le raccolte <code translate="no">autoID</code>, le chiavi primarie della richiesta identificano le entità esistenti da sostituire. Milvus genera nuove chiavi primarie per le entità sostitutive inserite.</p></li>
+<li><p>La collezione di destinazione deve essere caricata e disponibile per le query.</p></li>
+<li><p>Tutti i campi specificati nella richiesta devono esistere nello schema della collezione di destinazione.</p></li>
 <li><p>I valori di tutti i campi specificati nella richiesta devono corrispondere ai tipi di dati definiti nello schema.</p></li>
 <li><p>Per qualsiasi campo derivato da un altro tramite funzioni, Milvus rimuoverà il campo derivato durante l'upsert per consentire il ricalcolo.</p></li>
 </ul>

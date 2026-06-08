@@ -474,15 +474,21 @@
             "children": []
           },
           {
-            "label": "قابل للإلغاء والافتراضي",
+            "label": "الحقول القابلة للإلغاء",
             "id": "nullable-and-default.md",
             "order": 13,
             "children": []
           },
           {
+            "label": "القيم الافتراضية",
+            "id": "default-values.md",
+            "order": 14,
+            "children": []
+          },
+          {
             "label": "المحلل",
             "id": "analyzer",
-            "order": 14,
+            "order": 15,
             "children": [
               {
                 "label": "نظرة عامة على المحلل",
@@ -997,15 +1003,21 @@
                 "children": []
               },
               {
+                "label": "مشغلات المصفوفات الهيكلية",
+                "id": "struct-array-operators.md",
+                "order": 5,
+                "children": []
+              },
+              {
                 "label": "أخذ العينات العشوائية",
                 "id": "random-sampling.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "مشغلات الهندسة",
                 "id": "geometry-operators.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               }
             ]
@@ -1127,7 +1139,7 @@
                 "children": []
               },
               {
-                "label": "عناق الوجه المعانق TEI",
+                "label": "عناق الوجه TEI",
                 "id": "hugging-face-tei.md",
                 "order": 9,
                 "children": []

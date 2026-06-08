@@ -474,15 +474,21 @@
             "children": []
           },
           {
-            "label": "Nullbar &amp; Standard",
+            "label": "Nullbare Felder",
             "id": "nullable-and-default.md",
             "order": 13,
             "children": []
           },
           {
+            "label": "Standardwerte",
+            "id": "default-values.md",
+            "order": 14,
+            "children": []
+          },
+          {
             "label": "Analyzer",
             "id": "analyzer",
-            "order": 14,
+            "order": 15,
             "children": [
               {
                 "label": "Analyzer Übersicht",
@@ -997,15 +1003,21 @@
                 "children": []
               },
               {
+                "label": "StructArray-Operatoren",
+                "id": "struct-array-operators.md",
+                "order": 5,
+                "children": []
+              },
+              {
                 "label": "Zufallsstichproben",
                 "id": "random-sampling.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "Geometrie-Operatoren",
                 "id": "geometry-operators.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               }
             ]

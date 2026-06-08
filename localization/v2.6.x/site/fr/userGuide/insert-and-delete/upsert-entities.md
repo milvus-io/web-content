@@ -58,7 +58,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" />
    </span> <span class="img-wrapper"> <span>Insertion en mode prioritaire</span> </span></p>
-<p>Si la collection cible a activé <code translate="no">autoid</code> sur son champ primaire, Milvus génère une nouvelle clé primaire pour les données transportées dans la charge utile de la demande avant de les insérer.</p>
+<p>Si la collection cible a activé <code translate="no">autoID</code> sur son champ primaire, la demande <code translate="no">upsert</code> doit toujours inclure la clé primaire de l'entité cible. Milvus utilise la clé primaire fournie pour localiser l'entité à remplacer et génère une nouvelle clé primaire pour les données transportées dans la charge utile de la requête avant de l'insérer.</p>
 <p>Pour les champs dont l'option <code translate="no">nullable</code> est activée, vous pouvez les omettre dans la requête <code translate="no">upsert</code> s'ils ne nécessitent aucune mise à jour.</p>
 <h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">Insertion en mode fusion<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -82,7 +82,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Upsert en mode fusion</span> </span></p>
 <p>Pour effectuer une fusion, définissez <code translate="no">partial_update</code> sur <code translate="no">True</code> dans la requête <code translate="no">upsert</code> avec la clé primaire et les champs à mettre à jour avec leurs nouvelles valeurs.</p>
 <p>Lors de la réception d'une telle demande, Milvus exécute une requête avec une cohérence forte pour récupérer l'entité, met à jour les valeurs des champs en fonction des données de la demande, insère les données modifiées, puis supprime l'entité existante avec la clé primaire d'origine transmise dans la demande.</p>
-<p>Pour les champs <code translate="no">ARRAY</code>, le mode de fusion prend en charge deux opérateurs : <code translate="no">ARRAY_APPEND</code> et <code translate="no">ARRAY_REMOVE</code>. Ces opérateurs vous permettent d'ajouter des éléments à un champ <code translate="no">ARRAY</code> existant ou de supprimer des éléments correspondants de ce champ sans avoir à interroger l'entité pour récupérer sa valeur actuelle. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/v2.6.x/upsert-entities.md#Upsert-ARRAY-fields-with-partial-update-operators">Insertion de champs ARRAY avec des opérateurs de mise à jour partielle</a>.</p>
+<p>Pour les champs <code translate="no">ARRAY</code>, le mode de fusion prend en charge deux opérateurs : <code translate="no">ARRAY_APPEND</code> et <code translate="no">ARRAY_REMOVE</code>. Ces opérateurs vous permettent d'ajouter des éléments à un champ <code translate="no">ARRAY</code> existant ou de supprimer des éléments correspondants de ce champ sans avoir à interroger l'entité pour récupérer sa valeur actuelle. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/v2.6.x/upsert-entities.md#Upsert-ARRAY-fields-with-partial-update-operators">Insérer des champs ARRAY avec des opérateurs de mise à jour partielle</a>.</p>
 <h3 id="Upsert-behaviors-special-notes" class="common-anchor-header">Comportements Upsert : remarques particulières<button data-href="#Upsert-behaviors-special-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -110,14 +110,14 @@ summary: >-
 <p>Supposons que vous ayez activé la clé dynamique dans la collection d'exemples et que les paires clé-valeur du champ dynamique d'une entité soient similaires à <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
 <p>Lorsque vous insérez l'entité avec des clés telles que <code translate="no">author</code>, <code translate="no">year</code>, ou <code translate="no">tags</code>, ou que vous ajoutez d'autres clés, notez ce qui suit :</p>
 <ul>
-<li><p>Si vous effectuez un upsert alors que <code translate="no">partial_update</code> est désactivé, le comportement par défaut est de <strong>passer outre</strong>. Cela signifie que la valeur du champ dynamique sera remplacée par tous les champs non définis par le schéma inclus dans la demande et par leurs valeurs.</p>
+<li><p>Si vous effectuez un upsert alors que <code translate="no">partial_update</code> est désactivé, le comportement par défaut est d'<strong>écraser l'entité</strong>. Cela signifie que la valeur du champ dynamique sera remplacée par tous les champs non définis par le schéma inclus dans la demande et par leurs valeurs.</p>
 <p>Par exemple, si les données incluses dans la requête sont <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code>, les paires clé-valeur du champ dynamique de l'entité cible seront mises à jour en conséquence.</p></li>
 <li><p>Si vous effectuez un upsert avec l'option <code translate="no">partial_update</code>, le comportement par défaut est la <strong>fusion</strong>. Cela signifie que la valeur du champ dynamique sera fusionnée avec tous les champs non définis par le schéma inclus dans la demande et leurs valeurs.</p>
 <p>Par exemple, si les données incluses dans la demande sont <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>, les paires clé-valeur du champ dynamique de l'entité cible deviendront <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> après l'insertion.</p></li>
 </ul></li>
 <li><p><strong>Insertion d'un champ JSON.</strong></p>
 <p>Supposons que la collection d'exemples possède un champ JSON défini par le schéma nommé <code translate="no">extras</code>, et que les paires clé-valeur de ce champ JSON d'une entité sont similaires à <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
-<p>Lorsque vous upservez le champ <code translate="no">extras</code> d'une entité avec des données JSON modifiées, notez que le champ JSON est traité comme un tout et que vous ne pouvez pas mettre à jour des clés individuelles de manière sélective. En d'autres termes, le champ JSON <strong>ne</strong> supporte <strong>pas</strong> l'insertion ascendante en mode <strong>fusion</strong>.</p></li>
+<p>Lorsque vous réinsérez le champ <code translate="no">extras</code> d'une entité avec des données JSON modifiées, notez que le champ JSON est traité comme un tout et que vous ne pouvez pas mettre à jour des clés individuelles de manière sélective. En d'autres termes, le champ JSON <strong>ne</strong> supporte <strong>pas</strong> l'insertion ascendante en mode <strong>fusion</strong>.</p></li>
 <li><p><strong>Insérer un</strong> <strong>champ</strong> <code translate="no">ARRAY</code> <strong>.</strong></p>
 <p>En mode fusion, les champs <code translate="no">ARRAY</code> prennent en charge les opérateurs de mise à jour partielle <code translate="no">ARRAY_APPEND</code> et <code translate="no">ARRAY_REMOVE</code>. Utilisez ces opérateurs lorsque vous souhaitez ajouter des éléments à un champ <code translate="no">ARRAY</code> existant ou supprimer des éléments correspondants de ce champ sans remplacer l'intégralité de la valeur du tableau.</p></li>
 </ul>
@@ -138,9 +138,9 @@ summary: >-
       </svg>
     </button></h3><p>Sur la base du contenu ci-dessus, il existe plusieurs limites et restrictions à respecter :</p>
 <ul>
-<li><p>La requête <code translate="no">upsert</code> doit toujours inclure les clés primaires des entités cibles.</p></li>
+<li><p>La requête <code translate="no">upsert</code> doit toujours inclure les clés primaires des entités cibles, même lorsque l'option <code translate="no">autoID</code> est activée. Pour les collections <code translate="no">autoID</code>, les clés primaires de la demande identifient les entités existantes à remplacer. Milvus génère de nouvelles clés primaires pour les entités de remplacement insérées.</p></li>
 <li><p>La collection cible doit être chargée et disponible pour les requêtes.</p></li>
-<li><p>Tous les champs spécifiés dans la demande doivent exister dans le schéma de la collection cible.</p></li>
+<li><p>Tous les champs spécifiés dans la requête doivent exister dans le schéma de la collection cible.</p></li>
 <li><p>Les valeurs de tous les champs spécifiés dans la requête doivent correspondre aux types de données définis dans le schéma.</p></li>
 <li><p>Pour tout champ dérivé d'un autre à l'aide de fonctions, Milvus supprime le champ dérivé pendant la conversion pour permettre un nouveau calcul.</p></li>
 </ul>
@@ -159,7 +159,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dans cette section, nous allons upsuper des entités dans une collection nommée <code translate="no">my_collection</code>. Cette collection ne comporte que deux champs, nommés <code translate="no">id</code>, <code translate="no">vector</code>, <code translate="no">title</code> et <code translate="no">issue</code>. Le champ <code translate="no">id</code> est le champ primaire, tandis que les champs <code translate="no">title</code> et <code translate="no">issue</code> sont des champs scalaires.</p>
+    </button></h2><p>Dans cette section, nous allons extraire des entités dans une collection nommée <code translate="no">my_collection</code>. Cette collection ne comporte que deux champs, nommés <code translate="no">id</code>, <code translate="no">vector</code>, <code translate="no">title</code> et <code translate="no">issue</code>. Le champ <code translate="no">id</code> est le champ primaire, tandis que les champs <code translate="no">title</code> et <code translate="no">issue</code> sont des champs scalaires.</p>
 <p>Les trois entités, si elles existent dans la collection, seront remplacées par celles incluses dans la demande d'insertion.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

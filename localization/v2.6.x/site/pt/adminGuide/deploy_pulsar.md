@@ -22,9 +22,9 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>O Milvus usa Pulsar ou Kafka para gerenciar logs de mudanças recentes, gerar logs de fluxo e fornecer assinaturas de log. O Pulsar é o sistema de armazenamento de mensagens padrão. Este tópico apresenta como configurar o armazenamento de mensagens com o Docker Compose ou Helm.</p>
-<p>Você pode configurar o Pulsar com o <a href="https://docs.docker.com/get-started/overview/">Docker Compose</a> ou no K8s e configurar o Kafka no K8s.</p>
+<p>É possível configurar o Pulsar com o <a href="https://docs.docker.com/get-started/overview/">Docker Compose</a> ou no K8s e configurar o Kafka no K8s.</p>
 <div class="alert note">
-<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v2.6.17, você deve manter sua escolha atual de fila de mensagens. Não é possível alternar entre diferentes sistemas de filas de mensagens durante a atualização. O suporte para alterar os sistemas de filas de mensagens estará disponível em versões futuras.</p>
+<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v2.6.18, você deve manter sua escolha atual de fila de mensagens. Não é possível alternar entre diferentes sistemas de filas de mensagens durante a atualização. O suporte para alterar os sistemas de filas de mensagens estará disponível em versões futuras.</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Configurar a Pulsar com o Docker Compose<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -277,7 +277,7 @@ summary: >-
     </button></h2><p>O Milvus standalone usa o RocksMQ como armazenamento de mensagens padrão. Para obter etapas detalhadas sobre como configurar o Milvus com o Helm, consulte <a href="/docs/pt/v2.6.x/configure-helm.md">Configurar o Milvus com gráficos do Helm</a>. Para obter detalhes sobre os itens de configuração relacionados ao RocksMQ, consulte <a href="/docs/pt/v2.6.x/configure_rocksmq.md">Configurações relacionadas ao RocksMQ</a>.</p>
 <ul>
 <li><p>Se você iniciar o Milvus com o RocksMQ e quiser alterar suas configurações, poderá executar <code translate="no">helm upgrade -f</code> com as configurações alteradas no seguinte arquivo YAML.</p></li>
-<li><p>Se tiver instalado o Milvus standalone usando o Helm com um armazenamento de mensagens diferente do RocksMQ e quiser alterá-lo de volta para o RocksMQ, execute <code translate="no">helm upgrade -f</code> com o seguinte arquivo YAML depois de ter liberado todas as coleções e parado o Milvus.</p></li>
+<li><p>Se você instalou o Milvus standalone usando o Helm com um armazenamento de mensagens diferente do RocksMQ e deseja alterá-lo de volta para o RocksMQ, execute <code translate="no">helm upgrade -f</code> com o seguinte arquivo YAML depois de ter liberado todas as coleções e parado o Milvus.</p></li>
 </ul>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+

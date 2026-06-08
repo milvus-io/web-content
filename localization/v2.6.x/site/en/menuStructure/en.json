@@ -474,15 +474,21 @@
             "children": []
           },
           {
-            "label": "Nullable & Default",
+            "label": "Nullable Fields",
             "id": "nullable-and-default.md",
             "order": 13,
             "children": []
           },
           {
+            "label": "Default Values",
+            "id": "default-values.md",
+            "order": 14,
+            "children": []
+          },
+          {
             "label": "Analyzer",
             "id": "analyzer",
-            "order": 14,
+            "order": 15,
             "children": [
               {
                 "label": "Analyzer Overview",
@@ -997,15 +1003,21 @@
                 "children": []
               },
               {
+                "label": "StructArray Operators",
+                "id": "struct-array-operators.md",
+                "order": 5,
+                "children": []
+              },
+              {
                 "label": "Random Sampling",
                 "id": "random-sampling.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "Geometry Operators",
                 "id": "geometry-operators.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               }
             ]

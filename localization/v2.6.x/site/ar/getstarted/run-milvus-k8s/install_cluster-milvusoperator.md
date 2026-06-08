@@ -173,7 +173,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>بمجرد تشغيل جراب مشغل Milvus، يمكنك نشر مجموعة Milvus على النحو التالي.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يقوم الأمر أعلاه بنشر مجموعة Milvus مع <strong>Woodpecker</strong> كقائمة انتظار للرسائل (موصى به للإصدار 2.6.17) وجميع المكونات المعمارية الجديدة بما في ذلك عقدة البث.</p>
+<p>يقوم الأمر أعلاه بنشر مجموعة Milvus مع <strong>Woodpecker</strong> كقائمة انتظار للرسائل (موصى به للإصدار 2.6.18) وجميع المكونات المعمارية الجديدة بما في ذلك عقدة البث.</p>
 <p><strong>أبرز الملامح المعمارية في هذا النشر:</strong></p>
 <ul>
 <li><strong>قائمة انتظار الرسائل</strong>: <a href="/docs/ar/v2.6.x/use-woodpecker.md">يستخدم Woodpecker</a> (يقلل من صيانة البنية التحتية)</li>
@@ -401,7 +401,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>بعد تثبيت Milvus في Docker، يمكنك:</p>
 <ul>
-<li><p>التحقق من <a href="/docs/ar/v2.6.x/quickstart.md">مرحباً ميل</a> فوس لمعرفة ما يمكن أن يفعله ميلفوس.</p></li>
+<li><p>التحقق من <a href="/docs/ar/v2.6.x/quickstart.md">Hello Milvus</a> لمعرفة ما يمكن أن يفعله ميلفوس.</p></li>
 <li><p>تعلم العمليات الأساسية لميلفوس:</p>
 <ul>
 <li><a href="/docs/ar/v2.6.x/manage_databases.md">إدارة قواعد البيانات</a></li>
@@ -423,5 +423,5 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li><p>استكشف Milvus <a href="/docs/ar/v2.6.x/milvus_backup_overview.md">Backup،</a> وهي أداة مفتوحة المصدر للنسخ الاحتياطية لبيانات Milvus.</p></li>
 <li><p>استكشف <a href="/docs/ar/v2.6.x/birdwatcher_overview.md">Birdwatcher،</a> وهي أداة مفتوحة المصدر لتصحيح أخطاء ميلفوس وتحديثات التكوين الديناميكية.</p></li>
 <li><p>استكشف <a href="https://github.com/zilliztech/attu">Attu،</a> وهي أداة مفتوحة المصدر لواجهة المستخدم الرسومية لإدارة Milvus بسهولة.</p></li>
-<li><p><a href="/docs/ar/v2.6.x/monitor.md">راقب ميلفوس باستخدام بروميثيوس</a>.</p></li>
+<li><p><a href="/docs/ar/v2.6.x/monitor.md">مراقبة ميلفوس باستخدام بروميثيوس</a>.</p></li>
 </ul>

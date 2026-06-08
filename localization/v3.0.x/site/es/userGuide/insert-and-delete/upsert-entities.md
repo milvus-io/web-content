@@ -58,7 +58,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" />
    </span> <span class="img-wrapper"> <span>Upsert en modo de anulación</span> </span></p>
-<p>Si la colección de destino tiene <code translate="no">autoid</code> habilitado en su campo primario, Milvus generará una nueva clave primaria para los datos transportados en la carga útil de la petición antes de insertarlos.</p>
+<p>Si la colección de destino tiene <code translate="no">autoID</code> habilitado en su campo primario, la solicitud <code translate="no">upsert</code> debe seguir incluyendo la clave primaria de la entidad de destino. Milvus utiliza la clave primaria proporcionada para localizar la entidad a sustituir, y genera una nueva clave primaria para los datos transportados en la carga útil de la petición antes de insertarla.</p>
 <p>Para los campos con <code translate="no">nullable</code> habilitado, puede omitirlos en la solicitud <code translate="no">upsert</code> si no requieren ninguna actualización.</p>
 <h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">Upsert en modo fusión<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -79,7 +79,7 @@ summary: >-
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-merge-mode.png" alt="Upsert In Merge Mode" class="doc-image" id="upsert-in-merge-mode" />
-   </span> <span class="img-wrapper"> <span>Upsert en modo merge</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Upsert en modo fusión</span> </span></p>
 <p>Para realizar una fusión, establezca <code translate="no">partial_update</code> en <code translate="no">True</code> en la solicitud <code translate="no">upsert</code> junto con la clave primaria y los campos que desea actualizar con sus nuevos valores.</p>
 <p>Al recibir una solicitud de este tipo, Milvus realiza una consulta con coherencia fuerte para recuperar la entidad, actualiza los valores de los campos basándose en los datos de la solicitud, inserta los datos modificados y, a continuación, elimina la entidad existente con la clave primaria original que figura en la solicitud.</p>
 <h3 id="Upsert-behaviors-special-notes" class="common-anchor-header">Comportamientos Upsert: notas especiales<button data-href="#Upsert-behaviors-special-notes" class="anchor-icon" translate="no">
@@ -135,10 +135,10 @@ summary: >-
       </svg>
     </button></h3><p>Basándonos en el contenido anterior, existen varios límites y restricciones a seguir:</p>
 <ul>
-<li><p>La solicitud <code translate="no">upsert</code> debe incluir siempre las claves primarias de las entidades de destino.</p></li>
+<li><p>La solicitud <code translate="no">upsert</code> debe incluir siempre las claves primarias de las entidades de destino, incluso cuando <code translate="no">autoID</code> esté activado. Para las colecciones <code translate="no">autoID</code>, las claves primarias en la solicitud identifican las entidades existentes a reemplazar. Milvus genera nuevas claves primarias para las entidades de sustitución insertadas.</p></li>
 <li><p>La colección de destino debe estar cargada y disponible para consultas.</p></li>
 <li><p>Todos los campos especificados en la solicitud deben existir en el esquema de la colección de destino.</p></li>
-<li><p>Los valores de todos los campos especificados en la petición deben coincidir con los tipos de datos definidos en el esquema.</p></li>
+<li><p>Los valores de todos los campos especificados en la solicitud deben coincidir con los tipos de datos definidos en el esquema.</p></li>
 <li><p>Para cualquier campo derivado de otro mediante funciones, Milvus eliminará el campo derivado durante el upsert para permitir el recálculo.</p></li>
 </ul>
 <h2 id="Upsert-entities-in-a-collection" class="common-anchor-header">Subir entidades de una colección<button data-href="#Upsert-entities-in-a-collection" class="anchor-icon" translate="no">
@@ -489,7 +489,7 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>El siguiente ejemplo de código demuestra cómo upsert entidades con actualizaciones parciales. Proporcione sólo los campos que necesitan actualizaciones y sus nuevos valores, junto con la bandera de actualización parcial explícita.</p>
-<p>En el siguiente ejemplo, el campo <code translate="no">issue</code> de las entidades especificadas en la solicitud upsert se actualizará con los valores incluidos en la solicitud.</p>
+<p>En el siguiente ejemplo, el campo <code translate="no">issue</code> de las entidades especificadas en la solicitud de upsert se actualizará con los valores incluidos en la solicitud.</p>
 <div class="alert note">
 <p>Al realizar una upsert en modo merge, asegúrese de que las entidades implicadas en la petición tienen el mismo conjunto de campos. Supongamos que hay dos o más entidades que se van a upsertar, como se muestra en el siguiente fragmento de código, es importante que incluyan campos idénticos para evitar errores y mantener la integridad de los datos.</p>
 </div>
