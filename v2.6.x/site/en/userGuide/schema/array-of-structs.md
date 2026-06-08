@@ -1,15 +1,14 @@
 ---
 id: array-of-structs.md
-title: "Array of Structs"
-summary: "An Array of Structs field in an entity stores an ordered set of Struct elements. Each Struct in the Array shares the same pre-defined schema, comprising multiple vectors and scalar fields."
-beta: Milvus 2.6.4+
+title: "StructArray"
+summary: "Use StructArray fields to store ordered Struct elements with a shared schema of vector and scalar fields."
 ---
 
-# Array of Structs
+# StructArray
 
-An Array of Structs field in an entity stores an ordered set of Struct elements. Each Struct in the Array shares the same pre-defined schema, comprising multiple vectors and scalar fields.
+An Array of Structs field, or a StructArray field, in an entity stores an ordered set of Struct elements. Each Struct in the Array shares the same pre-defined schema, comprising multiple vectors and scalar fields.
 
-Here's an example of an entity from a collection that contains an Array of Structs field.
+Here's an example of an entity from a collection that contains a StructArray field.
 
 ```json
 {
@@ -35,50 +34,41 @@ Here's an example of an entity from a collection that contains an Array of Struc
 }
 ```
 
-In the example above, the `chunks` field is an Array of Structs field, and each Struct element contains its own fields, namely `text`, `text_vector`, and `chapter`.
+In the example above, the `chunks` field is a StructArray field, and each Struct element contains its own fields, namely `text`, `text_vector`, and `chapter`.
+
+## When to use
+
+Modern AI applications, from autonomous driving to multimodal retrieval, increasingly rely on nested, heterogeneous data. Traditional flat data models struggle to represent complex relationships like "**one document with many annotated chunks**" or "**one driving scene with multiple observed maneuvers**". This is where the StructArray data type in Milvus shines.
+
+To quickly determine if the StructArray field suits your application scenarios, consider whether:
+
+- Your data is in a hierarchical structure, such as one document with many annotated chunks.
+
+- The search result should be the document, rather than the chunks, as in the above example.
+
+- The search results contain massive duplicate entities, and you struggle to retrieve the final results using techniques such as grouping, deduplication, and reranking.
+
+If your answers to the questions above are yes, you should use the StructArray.
 
 ## Limits
 
 - **Data types**
 
-    When you create a collection, you can use the Struct type as the data type for the elements in an Array field. However, you cannot add an Array of Structs to an existing collection, and Milvus does not support using the Struct type as the data type for a collection field.
+    When you create a collection, you can use the Struct type as the data type for the elements in an Array field. However, you cannot add a StructArray to an existing collection, and Milvus does not support using the Struct type as the data type for a collection field.
 
     The Structs in an Array field share the same schema, which should be defined when you create the Array field.
 
-    A Struct schema contains both vectors and scalar fields, as listed in the following table:
+    A Struct schema contains both vectors and scalar fields, as listed below:
 
-    <table>
-       <tr>
-         <th><p>Field Type</p></th>
-         <th><p>Data Type</p></th>
-       </tr>
-       <tr>
-         <td><p>Vector</p></td>
-         <td><p><code>FLOAT_VECTOR</code></p></td>
-       </tr>
-       <tr>
-         <td rowspan="5"><p>Scalar</p></td>
-         <td><p><code>VARCHAR</code></p></td>
-       </tr>
-       <tr>
-         <td><p><code>INT8/16/32/64</code></p></td>
-       </tr>
-       <tr>
-         <td><p><code>FLOAT</code></p></td>
-       </tr>
-       <tr>
-         <td><p><code>DOUBLE</code></p></td>
-       </tr>
-       <tr>
-         <td><p><code>BOOLEAN</code></p></td>
-       </tr>
-    </table>
+    - Applicable vector data types: `FLOAT_VECTOR`, `FLOAT16_VECTOR`, `BFLOAT16_VECTOR`, `INT8_VECTOR`, and `BINARY_VECTOR`.
+
+    - Applicable scalar data types: `VARCHAR`, `INT8/16/32/64`, `FLOAT`, `DOUBLE`, and `BOOL`.
 
     Keep the number of vector fields both at the collection level and in the Structs combined to be no greater than or equal to 10.
 
 - **Nullable & default values**
 
-    An Array of Structs field is not nullable and does not accept any default value.
+    A StructArray field is not nullable and does not accept any default value.
 
 - **Function**
 
@@ -86,9 +76,9 @@ In the example above, the `chunks` field is an Array of Structs field, and each 
 
 - **Index type & metric type**
 
-    All vector fields in a collection must be indexed. To index a vector field within an Array of Structs field, Milvus uses an embedding list to organize the vector embeddings in each Struct element and indexes the entire embedding list as a whole.
+    All vector fields in a collection must be indexed. To index a vector field within a StructArray field, Milvus uses an embedding list to organize the vector embeddings in each Struct element and indexes the entire embedding list as a whole.
 
-    You can use `AUTOINDEX` or `HNSW` as the index type and any metric type listed below to build indexes for the embedding lists in an Array of Structs field. 
+    You can use `AUTOINDEX` or `HNSW` as the index type and any metric type listed below to build indexes for the embedding lists in a StructArray field.
 
     <table>
        <tr>
@@ -97,19 +87,23 @@ In the example above, the `chunks` field is an Array of Structs field, and each 
          <th><p>Remarks</p></th>
        </tr>
        <tr>
-         <td rowspan="3"><p><code>AUTOINDEX</code> (or <code>HNSW</code>)</p></td>
-         <td><p><code>MAX_SIM_COSINE</code></p></td>
-         <td rowspan="3"><p>For embedding lists of the following types:</p><ul><li>FLOAT_VECTOR</li></ul></td>
-       </tr>
-       <tr>
-         <td><p><code>MAX_SIM_IP</code></p></td>
-       </tr>
-       <tr>
-         <td><p><code>MAX_SIM_L2</code></p></td>
+         <td rowspan="3"><ul><li><p><code>AUTOINDEX</code></p></li><li><p><code>HNSW</code></p></li><li><p><code>IVF_FLAT</code></p></li><li><p><code>DISKANN</code></p></li></ul></td>
+         <td rowspan="3"><ul><li><p><code>MAX_SIM_COSINE</code></p></li><li><p><code>MAX_SIM_IP</code></p></li><li><p><code>MAX_SIM_L2</code></p></li></ul></td>
+         <td rowspan="3"><p>For embedding lists of the following types:</p><ul><li><p><code>FLOAT_VECTOR</code></p></li><li><p><code>FLOAT16_VECTOR</code></p></li><li><p><code>BFLOAT16_VECTOR</code></p></li><li><p><code>INT8_VECTOR</code></p></li><li><p><code>BINARY_VECTOR</code></p></li></ul></td>
        </tr>
     </table>
 
-    The scalar fields in the Array of Structs field do not support indexes.
+    For details on how Milvus calculates the similarity between the query and an embedding list, refer to [Maximum Similarity](metric.md#Maximum-similarity).
+
+    The scalar fields in the StructArray field support the following index types:
+
+    - `INVERTED`
+
+        This usually applies to string-like or categorical filters, like `structA[color]` or `structA[str_val]`. For details, refer to [INVERTED](inverted.md).
+
+    - `STL_SORT`
+
+        This usually applies to range or order-style acceleration on numeric values, like `strctA[num_val]`. For details, refer to [STL_SORT](stl-sort.md).
 
 - **Upsert data**
 
@@ -117,15 +111,15 @@ In the example above, the `chunks` field is an Array of Structs field, and each 
 
 - **Scalar filtering**
 
-    You cannot use an Array of Structs or any fields within its Struct element in filtering expressions within searches and queries. 
+    You can use **element filters** and **operators in the match family** to conduct scalar filtering against a scalar sub-field in a StructArray field. For details, refer to [Scalar filtering in a StructArray field](array-of-structs.md#Scalar-filtering-in-a-StructArray-field).
 
-## Add Array of Structs
+## Add a StructArray
 
-To use an Array of Structs in Milvus, you need to define an array field when creating a collection, and set the data type for its elements to Struct. The process is as follows:
+To add a StructArray field in Milvus, you need to define an array field when creating a collection, and set the data type for its elements to Struct. The process is as follows:
 
 1. Set the data type of a field to `DataType.ARRAY` when adding the field as an Array field to the collection schema.
 
-1. Set the field's `element_type` attribute to `DataType.STRUCT` to make the field an Array of Structs.
+1. Set the field's `element_type` attribute to `DataType.STRUCT` to make the field a Struct Array.
 
 1. Create a Struct schema and include the required fields. Then, reference the Struct schema in the field's `struct_schema` attribute.
 
@@ -133,7 +127,7 @@ To use an Array of Structs in Milvus, you need to define an array field when cre
 
 1. (**Optional**) You can set `mmap.enabled` for any field within the Struct element to balance the hot and cold data in the Struct.
 
-Here's how you can define a collection schema that includes an Array of Structs:
+Here's how you can define a collection schema that includes a StructArray field:
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -367,15 +361,17 @@ SCHEMA='{
 }'
 ```
 
-The highlighted lines in the above code example illustrate the procedure to include an Array of Structs in a collection schema.
+The highlighted lines in the code example above illustrate how to include a StructArray in a collection schema.
 
 ## Set index params
 
 Indexing is mandatory for all vector fields, including both the vector fields in the collection and those defined in the element Struct.
 
-The applicable index parameters vary depending on the index type in use. For details on applicable index parameters, refer to [Index Explained](index-explained.md) and the documentation pages specific to your selected index type.
+The applicable index parameters vary by index type. For details on applicable index parameters, refer to [Index Explained](index-explained.md) and the documentation for your selected index type.
 
-To index an embedding list, you need to set its index type to `AUTOINDEX`  or `HNSW`, and use `MAX_SIM_COSINE` as the metric type for Milvus to measure the similarities between embedding lists.
+### Index an embedding list
+
+To index an embedding list, you need to set its index type to `AUTOINDEX`  or any of the applicable index types listed above, and use an listed metric type for Milvus to measure the similarities between embedding lists.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -466,9 +462,56 @@ INDEX_PARAMS='[
 ]'
 ```
 
+### Index a scalar struct sub-field
+
+When you create indexes on a scalar struct sub-field, Milvus actually builds the index at the **element level**, not at the row level, to accelerate scalar filtering.
+
+The following code snippet creates an index on a scalar struct sub-field named `chunks[text]`.
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+index_params.add_index(
+    field_name="chunks[text]",
+    index_type="INVERTED"
+)
+```
+
+```java
+indexParams.add(IndexParam.builder()
+        .fieldName("chunks[text]")
+        .indexType(IndexParam.IndexType.INVERTED)
+        .build());
+```
+
+```go
+// go
+```
+
+```javascript
+indexParams.push({
+    field_name: "chunks[text]",
+    index_type: "INVERTED"
+})
+```
+
+```bash
+INDEX_PARAMS += '{
+    "fieldName": "chunks[text]",
+    "indexName": "chunks_text_vector_index",
+    "indexType": "INVERTED"
+}'
+```
+
 ## Create a collection
 
-Once the schema and index are ready, you can create a collection that includes an Array of Structs field.
+Once the schema and index are ready, you can create a collection that includes a StructArray field.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -487,14 +530,7 @@ client.create_collection(
 ```
 
 ```java
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.collection.request.CreateCollectionReq;
-
-MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
-        .build());
 
 CreateCollectionReq requestCreate = CreateCollectionReq.builder()
         .collectionName("my_collection")
@@ -510,7 +546,7 @@ client.createCollection(requestCreate);
 
 ```javascript
 await milvusClient.createCollection({
-  collection_name: "books",
+  collection_name: "my_collection",
   fields: schema,
   indexes: indexParams,
 });
@@ -753,15 +789,15 @@ client.insert(collection_name="my_collection", data=data)
 
 </details>
 
-## Vector search against an Array of Structs field
+## Vector search in a StructArray field
 
-You can perform vector searches on the vector fields of a collection and in an Array of Structs. 
+You can perform vector searches on the vector fields of a collection and in a StructArray.
 
-Specifically, you should concatenate the name of the Array of Structs field and those of the target vector fields within Struct elements as the value for the `anns_field` parameter in a search request, and use `EmbeddingList` to organize query vectors neatly.
+Specifically, you should concatenate the name of the StructArray field and those of the target vector fields within Struct elements as the value for the `anns_field` parameter in a search request, and use `EmbeddingList` to organize query vectors neatly.
 
 <div class="alert note">
 
-Milvus provides `EmbeddingList` to help you organize query vectors for searches against an embedding list in an Array of Structs more neatly. Each `EmbeddingList` contains at least a vector embedding and expects a number of topK entities in return.
+Milvus provides `EmbeddingList` to help you organize query vectors for searches against an embedding list in a StructArray more neatly. Each `EmbeddingList` contains at least a vector embedding and expects a number of topK entities in return.
 
 However, `EmbeddingList` can be used only in `search()` requests without range search or grouping search parameters, let alone `search_iterator()` requests.
 
@@ -1073,7 +1109,54 @@ The output would be a list of the three most similar entities for each embedding
 
 In the above code example, `embeddingList1` is an embedding list of one vector, while `embeddingList2` contains two vectors. Each triggers a separate search request and expects a list of top-K similar entities.
 
+## Scalar filtering in a StructArray field
+
+You can use **element filters** and **operators in the match family** to conduct scalar filtering against a scalar sub-field in a StructArray. For more details and examples on the two operator types above, refer to [Array of Structs Operators](struct-array-operators.md).
+
+### Element filters
+
+This is an entity-level filter that checks whether at least one element in the StructArray field of an entity satisfies the predicate. For example, the following element filter returns entities that contain at least one chunk that starts with "Red" in the `text` sub-field.
+
+```python
+element_filter(chunks, $[text] LIKE "Red%")
+```
+
+You can use almost all comparison, range, and arithmetic operators in the predicate, which is evaluated per element, and the logical operators can be used to combine multiple conditions on the same element. For details, refer to [Basic Operators](basic-operators.md).
+
+If multiple scalar-filtering expressions are present in a filtered search or a query request, place the element filter expression after all entity-level filter expressions, as shown below.
+
+```python
+# correct
+id > 0 && element_filter(chunks, $[x] > 1)
+
+# incorrect, resulting errors
+element_filter(chunks, $[x] > 1) && id > 0
+```
+
+### Match family operators
+
+The match family operators work over a StructArray field too. Instead of simply checking whether an element exists, you can determine how many elements (or what proportion) must satisfy an element predicate.
+
+- `MATCH_ANY(chunks, $[text] LIKE "Red%")`
+
+    This returns entities that contain at least one chunk that starts with "Red" in the `text` sub-field; semantically, this is equivalent to `element_filter`.
+
+- `MATCH_ALL(chunks, $[text] LIKE "Red%")`
+
+    This returns entities whose text sub-fields in all chunks start with "Red".
+
+- `MATCH_LEAST(chunks, $[text] LIKE "Red%", k)`
+
+    This returns entities that contain at least `k` chunks that start with "Red" in the `text` sub-field.
+
+- `MATCH_MOST(chunks, $[text] LIKE "Red%", k)`
+
+    This returns entities that contain at most `k` chunks that start with "Red" in the `text` sub-field.
+
+- `MATCH_EXACT(chunks, $[text] LIKE "Red%", k)`
+
+    This returns entities that contain exactly `k` chunks that start with "Red" in the `text` sub-field.
+
 ## Next steps
 
-The development of a native Array of Structs data type represents a major advancement in Milvus's capability to handle complex data structures. To better understand its use cases and maximize this new feature, you are encouraged to read [Schema Design Using an Array of Structs](best-practices-for-array-of-structs.md).
-
+The development of a native StructArray data type represents a major advancement in Milvus's capability to handle complex data structures. To better understand its use cases and maximize this new feature, you are encouraged to read [Schema Design Using an Array of Structs](best-practices-for-array-of-structs.md).

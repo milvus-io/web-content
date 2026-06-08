@@ -8,6 +8,60 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.6.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.6.18
+
+Release date: June 5, 2026
+
+| Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
+| -------------- | ------------------ | ------------------- | ---------------- | -------------- |
+| 2.6.18         | 2.6.15             | 2.6.17              | 2.6.20           | 2.6.18         |
+
+We are excited to announce the release of Milvus v2.6.18! This release adds element-level search on Struct fields and nullable vector support, improves QueryNode and QueryCoord scheduling and stability under heavy load, and brings HTTP/2 to the Proxy REST server. It also fixes numerous correctness and stability issues across import, schema evolution, indexing, compaction, and metadata handling.
+
+### Features
+
+#### Nullable vector
+
+Vector fields can now be declared nullable, so you can insert entities whose embedding is missing or not yet generated without filling in a placeholder. NULL vectors take no extra storage and are skipped automatically during search. For more information, refer to [Nullable Fields](nullable-and-default.md).
+
+#### Element-level search on Struct fields
+
+You can now run vector search on Struct Array fields at the granularity of individual elements instead of the whole row, with each result reporting the matched element's offset within the array. This lets a query retrieve the specific element that best matches rather than scoring the row as a whole. For more information, refer to [Vector search in a StructArray field](array-of-structs.md#Vector-search-in-a-StructArray-field).
+
+### Improvements
+
+- Added support for importing Arrow FixedSizeList data from Parquet into non-nullable array and dense vector fields ([#49870](https://github.com/milvus-io/milvus/pull/49870))
+- Improved QueryNode read-task scheduling and recovery behavior under heavy load with deadline-aware admission, cleanup, grouping, and metrics ([#49900](https://github.com/milvus-io/milvus/pull/49900), [#49926](https://github.com/milvus-io/milvus/pull/49926))
+- Added HTTP/2 support for the proxy REST server, including h2c and ALPN-based TLS listeners ([#49964](https://github.com/milvus-io/milvus/pull/49964))
+- Extended Arrow IO thread pool configuration to DataNode to improve compaction and import throughput ([#50100](https://github.com/milvus-io/milvus/pull/50100))
+- Limited QueryNode delegator post-load concurrency to reduce CPU spikes during segment loading ([#49769](https://github.com/milvus-io/milvus/pull/49769))
+- Optimized QueryCoord collection filtering in ChannelDistManager and reduced temporary allocations in distribution lookups ([#49927](https://github.com/milvus-io/milvus/pull/49927))
+- Upgraded the Pulsar Go client to v0.19.0 and replaced pulsarctl admin usage with pulsaradmin ([#49948](https://github.com/milvus-io/milvus/pull/49948))
+- Optimized ReplicaManager locking to reduce cross-collection contention in QueryCoord ([#49950](https://github.com/milvus-io/milvus/pull/49950), [#49956](https://github.com/milvus-io/milvus/pull/49956))
+- Improved REST timeout handling to safely discard late handler writes after request timeouts ([#50006](https://github.com/milvus-io/milvus/pull/50006))
+- Optimized garbage collection for dropped segment index files and metadata ([#50172](https://github.com/milvus-io/milvus/pull/50172))
+
+### Bug fixes
+
+- Fixed an issue where using unsupported field types as clustering keys could cause node panics ([#48263](https://github.com/milvus-io/milvus/pull/48263))
+- Fixed an issue where the stored_index_files_size metric included inactive index files ([#49380](https://github.com/milvus-io/milvus/pull/49380))
+- Fixed an issue where preempted writers could skip segment IDs by upgrading Woodpecker to v0.1.13-hotfix ([#49670](https://github.com/milvus-io/milvus/pull/49670))
+- Fixed an issue where requery requests were not pinned to the preferred replica ([#49830](https://github.com/milvus-io/milvus/pull/49830))
+- Fixed an issue where bulk imports could fail when file readers encountered a premature EOF ([#49867](https://github.com/milvus-io/milvus/pull/49867))
+- Fixed an issue where partial updates could drop dynamic field data after schema evolution ([#49913](https://github.com/milvus-io/milvus/pull/49913))
+- Fixed an issue where sealed segments could load incorrectly when non-nullable vector field data was missing ([#49918](https://github.com/milvus-io/milvus/pull/49918))
+- Fixed an issue where schema reopen could leave stale indexing references and cause indexing failures or crashes ([#49935](https://github.com/milvus-io/milvus/pull/49935), [#49937](https://github.com/milvus-io/milvus/pull/49937))
+- Fixed an issue where dropping a collection in streaming mode could follow an incorrect cleanup order ([#49962](https://github.com/milvus-io/milvus/pull/49962))
+- Fixed an issue where BM25 sparse vector function outputs were incorrectly treated as loadable raw field data ([#49975](https://github.com/milvus-io/milvus/pull/49975))
+- Fixed an issue where QueryCoord could build query targets from dropped channel checkpoints ([#50026](https://github.com/milvus-io/milvus/pull/50026))
+- Fixed an issue where transient object storage failures could cause delta log writes in sync tasks to fail without retrying ([#50030](https://github.com/milvus-io/milvus/pull/50030))
+- Fixed an issue where retried import tasks could leave stale row counts and cause sort compaction failures ([#50070](https://github.com/milvus-io/milvus/pull/50070))
+- Fixed an issue where forced segment assignment could be incorrectly limited by the balance batch size ([#50152](https://github.com/milvus-io/milvus/pull/50152))
+- Fixed an issue where target-size manual compaction could select ineligible segments ([#50159](https://github.com/milvus-io/milvus/pull/50159))
+- Fixed an issue where replicated AlterLoadConfig operations could keep retrying after a channel was dropped and block metadata cleanup ([#50162](https://github.com/milvus-io/milvus/pull/50162))
+- Fixed an issue where sliced indexes could load incorrect sidecar files and affect indexed query behavior ([#50167](https://github.com/milvus-io/milvus/pull/50167))
+- Fixed an issue where ST_DWITHIN could panic when validating non-POINT WKT input ([#50205](https://github.com/milvus-io/milvus/pull/50205))
+
 ## v2.6.17
 
 Release date: May 22, 2026
