@@ -6,7 +6,7 @@ summary: Learn about companies that have adopted Milvus in production applicatio
 ---
 # Milvus Adopters
 
-Milvus stands as the leading vector database among enterprise users, boasting endorsements from prominent companies such as Nvidia, Roblox, AT&T, and more. Below is a list of enterprises that have successfully integrated Milvus into their applications.
+Milvus stands as the leading vector database among enterprise users, boasting endorsements from prominent companies such as Nvidia, Roblox, and more. Below is a list of enterprises that have successfully integrated Milvus into their applications.
 
 ![Milvus Adopters](https://assets.zilliz.com/20260610_143629_77f671dcda.png)
 
