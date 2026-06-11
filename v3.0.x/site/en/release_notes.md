@@ -18,9 +18,12 @@ Release date: May 9, 2026
 
 Milvus 3.0-beta extends the Milvus vector database with new integration into the open lake ecosystem: External Collection lets Milvus query external lake tables zero-copy, and Spark can read Milvus collections directly through Snapshot. The release also brings richer retrieval, more expressive schema, deeper text search customization, finer data and model lifecycle controls, and more operator-side controls. Milvus 3.0 is the core kernel of Zilliz Lakebase, powering its unified serving, discovery, and batch.
 
-Click below to join our webinar for more details about Milvus 3.0 and AMA with core maintainers: 
+Watch the video below to learn more about Milvus 3.0 and AMA with core maintainers: 
 
-[![Webinar 3.0 walkthrough](https://assets.zilliz.com/webinar_3_0_4746da7c2d.png)](https://zilliz.com/event/whats-new-in-milvus-3-0-beta)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/SAm4YfrO1ok?si=87HTPnuH_xJtZda0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+
 
 
 ### Key Features
