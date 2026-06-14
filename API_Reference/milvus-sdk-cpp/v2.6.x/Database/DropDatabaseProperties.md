@@ -2,17 +2,7 @@
 
 This operation drops a database's properties.
 
-```cpp
-Status DropDatabaseProperties(const DropDatabasePropertiesRequest& request)
-```
-
 ## Request Syntax
-
-```cpp
-auto request = DropDatabasePropertiesRequest()
-    .WithDatabaseName(db_name)
-    .WithPropertyKeys(keys);
-```
 
 **REQUEST METHODS:**
 
@@ -42,21 +32,3 @@ Check `status.IsOk()` to confirm success.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
-
-milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-auto status = client->Connect(connect_param);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-status = client->DropDatabaseProperties(
-    milvus::DropDatabasePropertiesRequest()
-        .WithDatabaseName("my_database")
-        .AddPropertyKey("key"));
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-```

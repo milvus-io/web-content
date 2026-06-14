@@ -2,26 +2,7 @@
 
 This operation creates a simple collection with a primary field and a vector field.
 
-```cpp
-Status CreateSimpleCollection(const CreateSimpleCollectionRequest& request)
-```
-
 ## Request Syntax
-
-```cpp
-auto request = CreateSimpleCollectionRequest()
-    .WithDatabaseName(db_name)
-    .WithCollectionName(collection_name)
-    .WithPrimaryFieldName(primary_field_name)
-    .WithPrimaryFieldType(primary_field_type)
-    .WithVectorFieldName(vector_field_name)
-    .WithDimension(dimension)
-    .WithConsistencyLevel(level)
-    .WithMetricType(metric_type)
-    .WithAutoID(auto_id)
-    .WithEnableDynamicField(enable_dynamic_field)
-    .WithMaxLength(max_length);
-```
 
 **REQUEST METHODS:**
 
@@ -83,22 +64,3 @@ Check `status.IsOk()` to confirm success.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
-
-milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-auto status = client->Connect(connect_param);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-status = client->CreateCollection(milvus::CreateSimpleCollectionRequest()
-                                      .WithCollectionName(collection_name)
-                                      .WithPrimaryFieldName(field_id)
-                                      .WithVectorFieldName(field_vector)
-                                      .WithDimension(dimension));
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-```

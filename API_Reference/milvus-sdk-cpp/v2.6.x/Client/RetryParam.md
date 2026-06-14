@@ -2,21 +2,7 @@
 
 This class holds the retry parameters passed to `MilvusClient::SetRetryParam()`. For retriable server errors such as rate-limit responses, the SDK will automatically re-issue the RPC call according to these parameters. Network errors and unrecoverable errors are not retried.
 
-```cpp
-RetryParam param;
-```
-
 ## Request Syntax
-
-```cpp
-RetryParam param;
-param.WithMaxRetryTimes(max_retry_times)
-     .WithMaxRetryTimeoutMs(max_retry_timeout_ms)
-     .WithInitialBackOffMs(initial_backoff_ms)
-     .WithMaxBackOffMs(max_backoff_ms)
-     .WithBackOffMultiplier(backoff_multiplier)
-     .WithRetryOnRateLimit(retry_on_ratelimit);
-```
 
 **REQUEST METHODS:**
 
@@ -46,20 +32,3 @@ param.WithMaxRetryTimes(max_retry_times)
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-#include <milvus/MilvusClientV2.h>
-using namespace milvus;
-
-auto client = MilvusClientV2::Create();
-client->Connect(ConnectParam("http://localhost:19530"));
-
-RetryParam retryParam;
-retryParam.WithMaxRetryTimes(10)
-          .WithInitialBackOffMs(100)
-          .WithMaxBackOffMs(5000)
-          .WithBackOffMultiplier(2)
-          .WithRetryOnRateLimit(true);
-
-client->SetRetryParam(retryParam);
-```
