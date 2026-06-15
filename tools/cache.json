@@ -619,7 +619,7 @@
   "v2.6.x": {
     "v2.6.x/site/en/about/comparison.md": "2025-06-12T06:03:49.458Z",
     "v2.6.x/site/en/about/limitations.md": "2025-08-04T08:52:15.902Z",
-    "v2.6.x/site/en/about/milvus_adopters.md": "2026-03-25T06:23:46.907Z",
+    "v2.6.x/site/en/about/milvus_adopters.md": "2026-06-15T14:33:13.128Z",
     "v2.6.x/site/en/about/overview.md": "2026-05-15T10:19:24.767Z",
     "v2.6.x/site/en/about/roadmap.md": "2026-04-27T07:09:06.419Z",
     "v2.6.x/site/en/adminGuide/allocate.md": "2026-03-25T06:23:54.946Z",
@@ -1082,7 +1082,7 @@
   "v3.0.x": {
     "v3.0.x/site/en/about/comparison.md": "2026-04-28T05:57:53.906Z",
     "v3.0.x/site/en/about/limitations.md": "2026-04-28T05:58:08.149Z",
-    "v3.0.x/site/en/about/milvus_adopters.md": "2026-04-28T05:58:13.617Z",
+    "v3.0.x/site/en/about/milvus_adopters.md": "2026-06-15T14:31:17.155Z",
     "v3.0.x/site/en/about/overview.md": "2026-05-15T09:58:49.246Z",
     "v3.0.x/site/en/about/roadmap.md": "2026-04-28T05:59:04.253Z",
     "v3.0.x/site/en/adminGuide/allocate.md": "2026-04-28T05:59:12.909Z",
@@ -1301,7 +1301,7 @@
     "v3.0.x/site/en/reference/time_sync.md": "2026-04-28T06:54:43.033Z",
     "v3.0.x/site/en/reference/timestamp.md": "2026-04-28T06:55:01.292Z",
     "v3.0.x/site/en/reference/tune_consistency.md": "2026-05-15T10:01:56.047Z",
-    "v3.0.x/site/en/release_notes.md": "2026-06-08T01:59:44.575Z",
+    "v3.0.x/site/en/release_notes.md": "2026-06-15T14:31:36.164Z",
     "v3.0.x/site/en/rerankers/rerankers-bge.md": "2026-04-28T06:56:26.361Z",
     "v3.0.x/site/en/rerankers/rerankers-cohere.md": "2026-04-28T06:56:33.354Z",
     "v3.0.x/site/en/rerankers/rerankers-cross-encoder.md": "2026-04-28T06:56:40.276Z",
