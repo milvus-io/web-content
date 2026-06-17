@@ -2,19 +2,6 @@
 
 This class holds the connection parameters passed to `MilvusClient::Connect()`. Use the constructor overloads for quick setup, then chain `With*()` methods to configure advanced settings such as TLS, keepalive, and timeouts.
 
-```cpp
-// Recommended: URI only (no authentication)
-explicit ConnectParam(const std::string& uri);
-
-// Recommended: URI + token
-ConnectParam(const std::string& uri, const std::string& token);
-
-// Deprecated: host/port constructors (replaced by URI-based constructors above)
-ConnectParam(std::string host, uint16_t port);
-ConnectParam(std::string host, uint16_t port, const std::string& token);
-ConnectParam(std::string host, uint16_t port, std::string username, std::string password);
-```
-
 **PARAMETERS:**
 
 - **uri** (*const std::string&*)
@@ -42,17 +29,6 @@ ConnectParam(std::string host, uint16_t port, std::string username, std::string 
     Sets the password for authentication.
 
 ## Request Syntax
-
-```cpp
-ConnectParam param(uri, token)
-    .WithConnectTimeout(connect_timeout_ms)
-    .WithKeepaliveTimeMs(keepalive_time_ms)
-    .WithKeepaliveTimeoutMs(keepalive_timeout_ms)
-    .WithKeepaliveWithoutCalls(keepalive_without_calls)
-    .WithRpcDeadlineMs(rpc_deadline_ms)
-    .WithTls()
-    .WithDbName(db_name);
-```
 
 **REQUEST METHODS:**
 
@@ -106,22 +82,3 @@ ConnectParam param(uri, token)
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-#include <milvus/MilvusClientV2.h>
-using namespace milvus;
-
-// Connect to a local Milvus instance
-ConnectParam param("http://localhost:19530");
-param.WithAuthorizations("root", "Milvus");
-
-// Connect to Zilliz Cloud
-// ConnectParam param("https://your-instance.zilliz.com", "your-api-key");
-
-auto client = MilvusClientV2::Create();
-auto status = client->Connect(param);
-if (!status.IsOk()) {
-    std::cerr << "Connect failed: " << status.Message() << std::endl;
-    return 1;
-}
-```

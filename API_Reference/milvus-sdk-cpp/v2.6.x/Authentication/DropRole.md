@@ -2,17 +2,7 @@
 
 This operation drops a role.
 
-```cpp
-Status DropRole(const DropRoleRequest& request)
-```
-
 ## Request Syntax
-
-```cpp
-auto request = DropRoleRequest()
-    .WithRoleName(name)
-    .WithForceDrop(force_drop);
-```
 
 **REQUEST METHODS:**
 
@@ -38,23 +28,3 @@ Check `status.IsOk()` to confirm success.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
-
-milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-auto status = client->Connect(connect_param);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-status = client->DropRole(
-    milvus::DropRoleRequest()
-        .WithRoleName(role_name)
-        .WithForceDrop(false)
-);
-
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-```
