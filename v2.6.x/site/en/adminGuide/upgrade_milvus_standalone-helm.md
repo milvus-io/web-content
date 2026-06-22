@@ -50,7 +50,7 @@ Since Milvus Helm chart version 4.2.21, we introduced pulsar-v3.x chart as depen
 
 ### Step 1: Upgrade Helm Chart
 
-First, upgrade your Milvus Helm chart to version 5.0.0:
+First, upgrade your Milvus Helm chart to version 5.0.22:
 
 ```bash
 helm repo add zilliztech https://zilliztech.github.io/milvus-helm
@@ -101,7 +101,7 @@ Once v2.5.16 is running successfully, upgrade to v2.6.18:
 helm upgrade my-release zilliztech/milvus \
   --set image.all.tag="v2.6.18" \
   --reset-then-reuse-values \
-  --version=5.0.0
+  --version=5.0.22
 ```
 
 ## Verify the upgrade
