@@ -45,7 +45,7 @@ This upgrade process ensures proper migration to the new architecture. For more 
 
 ### Step 1: Upgrade Milvus Operator
 
-First, upgrade your Milvus Operator to v1.3.0:
+First, upgrade your Milvus Operator to v1.3.7:
 
 ```bash
 helm repo add zilliztech-milvus-operator https://zilliztech.github.io/milvus-operator/
