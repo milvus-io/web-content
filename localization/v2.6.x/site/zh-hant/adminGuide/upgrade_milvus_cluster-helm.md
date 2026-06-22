@@ -4,11 +4,11 @@ label: Helm
 order: 1
 group: upgrade_milvus_cluster-operator.md
 related_key: upgrade Milvus Cluster
-summary: 學習如何使用 Helm Chart 升級 Milvus 集群。
-title: 使用 Helm Chart 升級 Milvus 集群
+summary: 瞭解如何使用 Helm Chart 升級 Milvus 叢集。
+title: 使用 Helm Chart 升級 Milvus 叢集
 ---
 <div class="tab-wrapper"><a href="/docs/zh-hant/v2.6.x/upgrade_milvus_cluster-operator.md" class=''>Milvus</a><a href="/docs/zh-hant/v2.6.x/upgrade_milvus_cluster-helm.md" class='active '>OperatorHelm</a></div>
-<h1 id="Upgrade-Milvus-Cluster-with-Helm-Chart" class="common-anchor-header">使用 Helm Chart 升級 Milvus 集群<button data-href="#Upgrade-Milvus-Cluster-with-Helm-Chart" class="anchor-icon" translate="no">
+<h1 id="Upgrade-Milvus-Cluster-with-Helm-Chart" class="common-anchor-header">使用 Helm Chart 升級 Milvus 叢集<button data-href="#Upgrade-Milvus-Cluster-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +23,8 @@ title: 使用 Helm Chart 升級 Milvus 集群
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本指南描述如何使用 Helm Chart 將您的 Milvus 叢集從 v2.5.x 升級到 v2.6.18。</p>
-<h2 id="Before-you-start" class="common-anchor-header">在您開始之前<button data-href="#Before-you-start" class="anchor-icon" translate="no">
+    </button></h1><p>本指南說明如何使用 Helm Chart 將您的 Milvus 叢集從 v2.5.x 升級至 v2.6.18。</p>
+<h2 id="Before-you-start" class="common-anchor-header">開始之前<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -54,13 +54,13 @@ title: 使用 Helm Chart 升級 Milvus 集群
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>從 Milvus 2.5.x 升級到 2.6.18 涉及重大的架構改變：</p>
+    </button></h3><p>從 Milvus 2.5.x 升級至 2.6.18 涉及重大的架構變更：</p>
 <ul>
-<li><strong>協調器整合</strong>：傳統獨立的協調器 (<code translate="no">dataCoord</code>,<code translate="no">queryCoord</code>,<code translate="no">indexCoord</code>) 已經合併為單一的協調器。<code translate="no">mixCoord</code></li>
-<li><strong>新元件</strong>：引進 Streaming Node 以增強資料處理能力</li>
-<li><strong>元件移除</strong>：<code translate="no">indexNode</code> 已移除並合併。</li>
+<li><strong>協調器整合</strong>：舊版獨立的協調器（<code translate="no">dataCoord</code> 、<code translate="no">queryCoord</code> 、<code translate="no">indexCoord</code> ）已整合為單一<code translate="no">mixCoord</code></li>
+<li><strong>新元件</strong>：導入串流節點（Streaming Node）以強化資料處理能力</li>
+<li><strong>元件移除</strong>：已移除並整合<code translate="no">indexNode</code> </li>
 </ul>
-<p>此升級程序可確保妥善遷移至新架構。關於架構改變的更多資訊，請參考<a href="/docs/zh-hant/v2.6.x/architecture_overview.md">Milvus 架構概述</a>。</p>
+<p>此升級流程可確保順利遷移至新架構。有關架構變更的更多資訊，請參閱《<a href="/docs/zh-hant/v2.6.x/architecture_overview.md">Milvus 架構概覽</a>》。</p>
 <h3 id="Requirements" class="common-anchor-header">系統需求<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,17 +80,18 @@ title: 使用 Helm Chart 升級 Milvus 集群
 <ul>
 <li>Helm 版本 &gt;= 3.14.0</li>
 <li>Kubernetes 版本 &gt;= 1.20.0</li>
-<li>透過 Helm 圖表部署 Milvus 叢集</li>
+<li>透過 Helm Chart 部署的 Milvus 叢集</li>
 </ul>
-<p><strong>相容性需求：</strong></p>
+<p><strong>相容性要求：</strong></p>
 <ul>
-<li>Milvus v2.6.0-rc1 與 v2.6.18<strong>不相容</strong>。不支援從候選版本直接升級。</li>
-<li>如果您目前正在執行 v2.6.0-rc1，並且需要保留您的資料，請參考<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">此社群指南</a>以取得遷移協助。</li>
-<li>在升級至 v2.6.18 之前，您<strong>必須先升級</strong>至 v2.5.16 或更新版本，並啟用<code translate="no">mixCoordinator</code> 。</li>
+<li>Milvus v2.6.0-rc1 與 v2.6.18<strong>不相容</strong>。不支援直接從候選版本（release candidates）進行升級。</li>
+<li>若您目前正在運行 v2.6.0-rc1 且需要保留資料，請參閱<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">此社群指南</a>以獲取遷移協助。</li>
+<li>在升級至 v2.6.18 之前，您<strong>必須先</strong>升級至 v2.5.16 或更新版本，並啟用<code translate="no">mixCoordinator</code> 。</li>
 </ul>
-<p><strong>訊息佇列限制</strong>：升級到Milvus v2.6.18時，您必須維持目前的訊息佇列選擇。升級期間不支援在不同的訊息佇列系統之間切換。在未來的版本中，將會支援轉換訊息佇列系統。</p>
+<p><strong>訊息佇列限制</strong>：升級至 Milvus v2.6.18 時，您必須維持當前的訊息佇列選擇。升級過程中不支援在不同的訊息佇列系統之間切換。未來版本將支援變更訊息佇列系統。</p>
 <div class="alert note">
-自 Milvus Helm 圖表版本 4.2.21 起，我們引入 pulsar-v3.x 圖表作為依賴。為了向下相容性，請升級您的 Helm 到 v3.14 或更高版本，並確保每次使用<code translate="no">helm upgrade</code> 時，加入<code translate="no">--reset-then-reuse-values</code> 選項。</div>
+自 Milvus Helm 圖表版本 4.2.21 起，我們已將 pulsar-v3.x 圖表納入依賴項。為確保向後相容性，請將您的 Helm 升級至 v3.14 或更高版本，並確保在每次使用 `<code translate="no">helm upgrade</code>` 時，務必添加 `<code translate="no">--reset-then-reuse-values</code> ` 選項。
+</div>
 <h2 id="Upgrade-process" class="common-anchor-header">升級流程<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -106,7 +107,7 @@ title: 使用 Helm Chart 升級 Milvus 集群
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Upgrade-Helm-Chart" class="common-anchor-header">步驟 1: 升級 Helm 圖表<button data-href="#Step-1-Upgrade-Helm-Chart" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Upgrade-Helm-Chart" class="common-anchor-header">步驟 1：升級 Helm Chart<button data-href="#Step-1-Upgrade-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -121,16 +122,17 @@ title: 使用 Helm Chart 升級 Milvus 集群
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>首先，將您的Milvus Helm圖表升級到5.0.0版本：</p>
+    </button></h3><p>首先，將您的 Milvus Helm Chart 升級至 5.0.22 版本：</p>
 <pre><code translate="no" class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm
 helm repo update zilliztech
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-位於<code translate="no">https://milvus-io.github.io/milvus-helm/</code> 的 Milvus Helm Charts repo 已經歸檔。使用新的 repo<code translate="no">https://zilliztech.github.io/milvus-helm/</code> ，以獲得 4.0.31 及更高版本的海圖。</div>
-<p>檢查 Helm 海圖版本與 Milvus 版本的相容性：</p>
+位於<code translate="no">https://milvus-io.github.io/milvus-helm/</code> 的 Milvus Helm Charts 儲存庫已歸檔。請使用新儲存庫<code translate="no">https://zilliztech.github.io/milvus-helm/</code> 取得 4.0.31 及後續版本的圖表。
+</div>
+<p>若要檢查 Helm Chart 版本與 Milvus 版本的相容性：</p>
 <pre><code translate="no" class="language-bash">helm search repo zilliztech/milvus --versions
 <button class="copy-code-btn"></button></code></pre>
-<p>本指南假設您安裝的是最新版本。如果您需要安裝特定版本，請相應指定<code translate="no">--version</code> 參數。</p>
+<p>本指南假設您正在安裝最新版本。若需安裝特定版本，請據此指定<code translate="no">--version</code> 參數。</p>
 <h3 id="Step-2-Upgrade-to-v2516-with-mixCoordinator" class="common-anchor-header">步驟 2：使用 mixCoordinator 升級至 v2.5.16<button data-href="#Step-2-Upgrade-to-v2516-with-mixCoordinator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -146,10 +148,10 @@ helm repo update zilliztech
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>檢查您的群集目前是否使用獨立的協調器：</p>
+    </button></h3><p>檢查您的叢集目前是否使用獨立的協調器：</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p>如果您看到獨立的協調器 pod (<code translate="no">datacoord</code>,<code translate="no">querycoord</code>,<code translate="no">indexcoord</code>) ，請升級到 v2.5.16 並啟用<code translate="no">mixCoordinator</code> ：</p>
+<p>若您看到獨立的協調器 Pod（<code translate="no">datacoord</code> 、<code translate="no">querycoord</code> 、<code translate="no">indexcoord</code> ），請升級至 v2.5.16 並啟用<code translate="no">mixCoordinator</code> ：</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.5.16&quot;</span> \
   --<span class="hljs-built_in">set</span> mixCoordinator.enabled=<span class="hljs-literal">true</span> \
@@ -161,7 +163,7 @@ helm repo update zilliztech
   --version=4.2.58
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert-note">
-<p>如果您的群集已經使用<code translate="no">mixCoordinator</code> ，只要升級映像即可：</p>
+<p>若您的叢集已使用<code translate="no">mixCoordinator</code> ，只需升級映像檔即可：</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.5.16&quot;</span> \
   --reset-then-reuse-values \
@@ -187,13 +189,13 @@ kubectl get pods
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>一旦 v2.5.16 在<code translate="no">mixCoordinator</code> 上成功運行，請升級至 v2.6.18：</p>
+    </button></h3><p>當 v2.5.16 已成功在<code translate="no">mixCoordinator</code> 上運行後，請升級至 v2.6.18：</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.6.18&quot;</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span> \
   --reset-then-reuse-values \
-  --version=5.0.0
+  --version=5.0.22
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-the-upgrade" class="common-anchor-header">驗證升級<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -210,11 +212,11 @@ kubectl get pods
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>確認您的群集正在執行新版本：</p>
+    </button></h2><p>確認您的叢集是否已運行新版本：</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check pod status</span>
 kubectl get pods
 
 <span class="hljs-comment"># Verify Helm release</span>
 helm list
 <button class="copy-code-btn"></button></code></pre>
-<p>如需其他支援，請參閱<a href="https://milvus.io/docs">Milvus 文件</a>或<a href="https://github.com/milvus-io/milvus/discussions">社群論壇</a>。</p>
+<p>如需進一步支援，請參閱<a href="https://milvus.io/docs">Milvus 文件</a>或<a href="https://github.com/milvus-io/milvus/discussions">社群論壇</a>。</p>
