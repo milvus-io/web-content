@@ -114,5 +114,5 @@ yarn add @zilliz/milvus2-sdk-node
 <li><a href="/docs/v2.6.x/single-vector-search.md">Single-Vector Search</a></li>
 <li><a href="/docs/v2.6.x/multi-vector-search.md">Hybrid Search</a></li>
 </ul></li>
-<li><p>Explore <a href="/api-reference/node/v2.4.x/About.md">Milvus Node.js API reference</a></p></li>
+<li><p>Explore <a href="/api-reference/node/v2.6.x/About.md">Milvus Node.js API reference</a></p></li>
 </ul>

@@ -106,5 +106,5 @@ It is recommended to install a PyMilvus version that matches the version of the 
 <li><a href="/docs/v2.6.x/single-vector-search.md">Single-Vector Search</a></li>
 <li><a href="/docs/v2.6.x/multi-vector-search.md">Hybrid Search</a></li>
 </ul></li>
-<li><p>Explore <a href="/api-reference/pymilvus/v2.4.x/About.md">PyMilvus API reference</a></p></li>
+<li><p>Explore <a href="/api-reference/pymilvus/v2.6.x/About.md">PyMilvus API reference</a></p></li>
 </ul>
