@@ -2,21 +2,7 @@
 
 This operation deletes entities by a filtering expression or an ID array.
 
-```cpp
-Status Delete(const DeleteRequest& request, DeleteResponse& response)
-```
-
 ## Request Syntax
-
-```cpp
-auto request = DeleteRequest()
-    .WithDatabaseName(db_name)
-    .WithCollectionName(collection_name)
-    .WithPartitionName(partition_name)
-    .WithFilter(filter)
-    .WithFilterTemplates(value)
-    .WithIDs(id_array);
-```
 
 **REQUEST METHODS:**
 
@@ -62,23 +48,3 @@ Check `status.IsOk()` to confirm success.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
-
-milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-auto status = client->Connect(connect_param);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-milvus::DeleteResponse resp_delete;
-status = client->Delete(milvus::DeleteRequest()
-                            .WithCollectionName(collection_name)
-                            .WithPartitionName(partition_name)
-                            .WithFilter(field_id + "== 5"),
-                        resp_delete);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-```
