@@ -676,7 +676,7 @@
             "children": []
           },
           {
-            "label": "Add Fields to an Existing Collection",
+            "label": "Alter Collection Schema",
             "id": "add-fields-to-an-existing-collection.md",
             "order": 17,
             "children": []

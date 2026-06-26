@@ -10,7 +10,7 @@ In addition to ANN searches, Milvus also supports metadata filtering through que
 
 <div class="alert note">
 
-If you dynamically add new fields after the collection has been created, queries that include these fields will return the defined default values or NULL for entities that have not explicitly set values. For details, refer to [Add Fields to an Existing Collection](add-fields-to-an-existing-collection.md).
+If you add new fields after the collection has been created, queries that include these fields return the defined default values or `NULL` for entities that have not explicitly set values. For details, refer to [Alter Collection Schema](add-fields-to-an-existing-collection.md).
 
 </div>
 

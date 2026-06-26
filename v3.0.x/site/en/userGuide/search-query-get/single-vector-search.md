@@ -10,7 +10,7 @@ Based on an index file recording the sorted order of vector embeddings, the Appr
 
 <div class="alert note">
 
-If you dynamically add new fields after the collection has been created, searches that include these fields will return the defined default values or NULL for entities that have not explicitly set values. For details, refer to [Add Fields to an Existing Collection](add-fields-to-an-existing-collection.md).
+If you add new fields after the collection has been created, searches that include these fields return the defined default values or `NULL` for entities that have not explicitly set values. For details, refer to [Alter Collection Schema](add-fields-to-an-existing-collection.md).
 
 </div>
 
@@ -1240,4 +1240,3 @@ AUTOINDEX considerably flattens the learning curve of ANN searches. However, the
 - Use reranking
 
     For details on using rankers to enhance search result relevance, refer to [Decay Ranker Overview](decay-ranker-overview.md) and [Model Ranker Overview](model-ranker-overview.md).
-
