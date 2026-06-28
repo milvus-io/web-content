@@ -2,44 +2,7 @@
 
 This operation issues a search on a collection based on the given parameters and returns results.
 
-```cpp
-Status Search(const SearchRequest& request, SearchResponse& response)
-```
-
 ## Request Syntax
-
-```cpp
-auto request = SearchRequest()
-    .WithDatabaseName(db_name)
-    .WithCollectionName(collection_name)
-    .WithPartitionNames(partition_names)
-    .WithOutputFields(output_field_names)
-    .WithConsistencyLevel(consistency_level)
-    .WithBinaryVectors(vectors)
-    .WithFloatVectors(vectors)
-    .WithSparseVectors(vectors)
-    .WithFloat16Vectors(vectors)
-    .WithBFloat16Vectors(vectors)
-    .WithEmbeddedTexts(texts)
-    .WithInt8Vectors(vectors)
-    .WithEmbeddingLists(emb_lists)
-    .WithMetricType(metric_type)
-    .WithExtraParams(std)
-    .WithLimit(limit)
-    .WithFilter(filter)
-    .WithAnnsField(ann_field)
-    .WithFilterTemplates(value)
-    .WithOffset(offset)
-    .WithRoundDecimal(round_decimal)
-    .WithIgnoreGrowing(ignore_growing)
-    .WithGroupByField(field_name)
-    .WithGroupSize(group_size)
-    .WithStrictGroupSize(strict_group_size)
-    .WithRadius(radius)
-    .WithRangeFilter(filter)
-    .WithRerank(ranker)
-    .WithTimezone(timezone);
-```
 
 **REQUEST METHODS:**
 
@@ -263,54 +226,3 @@ Check `status.IsOk()` to confirm success.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
-
-milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-auto status = client->Connect(connect_param);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-// generate two random query vectors
-std::mt19937 rng(std::random_device{}());
-std::uniform_real_distribution<float> dist(0.0f, 1.0f);
-std::vector<float> q1(dimension), q2(dimension);
-std::generate(q1.begin(), q1.end(), [&]() { return dist(rng); });
-std::generate(q2.begin(), q2.end(), [&]() { return dist(rng); });
-std::vector<std::vector<float>> query_vectors = {q1, q2};
-
-std::string filter_expr = field_age + " > 40";
-auto request =
-    milvus::SearchRequest()
-        .WithCollectionName(collection_name)
-        .AddPartitionName(partition_name)
-        .WithLimit(5)
-        .WithAnnsField(field_face)
-        .AddExtraParam(milvus::NPROBE, "10")
-        .AddOutputField(field_name)
-        .AddOutputField(field_age)
-        .WithFilter(filter_expr)
-        .WithFloatVectors(std::move(query_vectors))
-        // set to BOUNDED level to accept data inconsistency within a time window (default is 5 seconds)
-        .WithConsistencyLevel(milvus::ConsistencyLevel::BOUNDED);
-
-milvus::SearchResponse response;
-status = client->Search(request, response);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-for (auto& result : response.Results().Results()) {
-    std::cout << "Result of one target vector:" << std::endl;
-    milvus::EntityRows output_rows;
-    status = result.OutputRows(output_rows);
-    if (!status.IsOk()) {
-        std::cout << status.Message() << std::endl;
-    }
-    for (const auto& row : output_rows) {
-        std::cout << "\t" << row << std::endl;
-    }
-}
-```

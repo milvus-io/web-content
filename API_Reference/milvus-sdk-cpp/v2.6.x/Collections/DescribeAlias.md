@@ -2,17 +2,7 @@
 
 This operation returns the description of an alias.
 
-```cpp
-Status DescribeAlias(const DescribeAliasRequest& request, DescribeAliasResponse& response)
-```
-
 ## Request Syntax
-
-```cpp
-auto request = DescribeAliasRequest()
-    .WithDatabaseName(db_name)
-    .WithAlias(alias);
-```
 
 **REQUEST METHODS:**
 
@@ -38,24 +28,3 @@ Check `status.IsOk()` to confirm success.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
-
-milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-auto status = client->Connect(connect_param);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-milvus::DescribeAliasResponse response;
-status = client->DescribeAlias(
-    milvus::DescribeAliasRequest()
-        .WithAlias("my_alias"),
-    response);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-std::cout << "Alias: " << response.Alias()
-          << ", Collection: " << response.Collection() << std::endl;
-```

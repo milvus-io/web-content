@@ -19,7 +19,7 @@ add_field(
 
     The name of the field.
 
-- **[datatype](../Collections/DataType.md)** (*[DataType](../Collections/DataType.md)*) - 
+- **[datatype](https://zilliverse.feishu.cn/docx/MKrAdumLvohQfDxgpMwcEB8dnqb)** (*[DataType](https://zilliverse.feishu.cn/docx/MKrAdumLvohQfDxgpMwcEB8dnqb)*) - 
 
     **[REQUIRED]**
 

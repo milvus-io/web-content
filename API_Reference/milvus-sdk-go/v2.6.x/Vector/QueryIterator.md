@@ -1,6 +1,6 @@
 # QueryIterator()
 
-This operation creates an iterator for paginating through large query result sets.
+This operation creates a query iterator that retrieves matching entities from a collection in batches. Use this for large result sets that should not be loaded into memory all at once.
 
 ```go
 func (c *Client) QueryIterator(ctx context.Context, option QueryIteratorOption, callOptions ...grpc.CallOption) (QueryIterator, error)
@@ -9,105 +9,97 @@ func (c *Client) QueryIterator(ctx context.Context, option QueryIteratorOption, 
 ## Request Syntax
 
 ```go
-option := milvusclient.NewQueryIteratorOption(collectionName).
+client.QueryIterator(ctx, milvusclient.NewQueryIteratorOption(collectionName).
     WithBatchSize(batchSize).
-    WithPartitions(partitionNames).
+    WithPartitions(partitionNames...).
     WithFilter(expr).
-    WithOutputFields(fieldNames).
+    WithOutputFields(fieldNames...).
     WithConsistencyLevel(consistencyLevel).
-    WithIteratorLimit(limit)
-
-result, err := client.QueryIterator(ctx, option)
+    WithIteratorLimit(limit),
+)
 ```
-
-**PARAMETERS:**
-
-- **collectionName** (*string*)
-
-    The name of the target collection.
 
 **OPTION METHODS:**
 
-- `WithBatchSize(batchSize int)`
+- `NewQueryIteratorOption(collectionName string)` -
 
-    Sets the number of entities to fetch per iteration batch.
+    **[REQUIRED]**
 
-- `WithPartitions(partitionNames ...string)`
+    Creates a new query iterator option for the specified collection.
 
-    Limits the operation to the specified partitions.
+- `WithBatchSize(batchSize int)` -
 
-- `WithFilter(expr string)`
+    The number of entities to return per iteration batch. Default: `1000`.
 
-    Applies a boolean filter expression to narrow results.
+- `WithPartitions(partitionNames ...string)` -
 
-- `WithOutputFields(fieldNames ...string)`
+    The partitions to query. If not specified, all partitions are queried.
 
-    Specifies which fields to include in the returned results.
+- `WithFilter(expr string)` -
 
-- `WithConsistencyLevel(consistencyLevel [entity.ConsistencyLevel](../Collection/ConsistencyLevel.md))`
+    A boolean expression to filter entities. Only entities matching the expression are returned.
 
-    Sets the consistency level for the operation (Strong, Bounded, Session, or Eventually).
+- `WithOutputFields(fieldNames ...string)` -
 
-- `WithIteratorLimit(limit int64)`
+    The fields to include in the returned entities. If not specified, only the primary key field is returned.
 
-    WithIteratorLimit sets the limit of entries to iterate if limit < 0, then it will be set to Unlimited
+- `WithConsistencyLevel(consistencyLevel entity.ConsistencyLevel)` -
 
-**RETURN TYPE:**
+    The consistency level for the query. Default: `Bounded`.
 
-*[QueryIterator](QueryIterator.md), error*
+- `WithIteratorLimit(limit int64)` -
+
+    The maximum total number of entities to iterate over. A negative value means unlimited. Default: `Unlimited` (-1).
 
 **RETURNS:**
 
-A QueryIterator for paginating through query results. Returns an error if the operation fails.
+*QueryIterator, error*
+
+The QueryIterator interface provides paginated access to query results. Call `Next()` repeatedly until `io.EOF` is returned.
 
 **EXCEPTIONS:**
 
-- **error**
-
-    Check `err != nil` for failure details.
+- **error** - The specified collection does not exist, invalid parameters, or the server is unreachable.
 
 ## Example
 
 ```go
 import (
-	"context"
-	"fmt"
-	"io"
+    "context"
+    "fmt"
+    "io"
 
-	"github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v2/milvusclient"
 )
 
-ctx, cancel := context.WithCancel(context.Background())
-defer cancel()
+ctx := context.Background()
 
-milvusAddr := "127.0.0.1:19530"
-
-cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
-	Address: milvusAddr,
-})
+iter, err := client.QueryIterator(ctx,
+    milvusclient.NewQueryIteratorOption("my_collection").
+        WithBatchSize(500).
+        WithFilter("age > 18").
+        WithOutputFields("name", "age"),
+)
 if err != nil {
-	// handle error
-}
-
-defer cli.Close(ctx)
-
-iter, err := cli.QueryIterator(ctx, milvusclient.NewQueryIteratorOption("quick_setup").
-	WithFilter("color like "red%"").
-	WithOutputFields("id", "color"))
-if err != nil {
-	// handle error
+    log.Fatal(err)
 }
 
 for {
-	resultSet, err := iter.Next(ctx)
-	if err == io.EOF {
-		break
-	}
-	if err != nil {
-		// handle error
-	}
-	for i := 0; i < resultSet.Len(); i++ {
-		fmt.Println(resultSet.IDs)
-	}
+    rs, err := iter.Next(ctx)
+    if err == io.EOF {
+        break
+    }
+    if err != nil {
+        log.Fatal(err)
+    }
+    fmt.Printf("Got %d results\n", rs.Len())
 }
 ```
+
+## QueryIterator
+
+The QueryIterator interface returned by the `QueryIterator()` method. It has a single method:
+
+- `Next(ctx context.Context)` -
+
+    Returns the next batch of query results as a `ResultSet`. When all results have been consumed, returns `io.EOF` as the error.

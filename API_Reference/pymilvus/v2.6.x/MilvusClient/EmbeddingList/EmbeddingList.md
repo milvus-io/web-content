@@ -36,13 +36,13 @@ EmbeddingList(
 
     If provided, all specified vector embeddings must adhere to the dimensionality restriction.
 
-- **dtype** (*np.dtype, str, [DataType](../Collections/DataType.md)*) -  
+- **dtype** (*np.dtype, str, [DataType](https://zilliverse.feishu.cn/docx/MKrAdumLvohQfDxgpMwcEB8dnqb)*) -  
 
     - **np.dtype**, such as `np.float32`, `np.float16`, or `np.unit8`
 
     - **string**, such as `'float32'`, `'float16'`, or `'uint8'`
 
-    - **[DataType](../Collections/DataType.md)**, such as `DataType.FLOAT_VECTOR`, `DataType.FLOAT16_VECTOR`, `DataType.BFLOAT16_VECTOR`, `DataType.INT8_VECTOR`, or `DataType.BINARY_VECTOR`
+    - **[DataType](https://zilliverse.feishu.cn/docx/MKrAdumLvohQfDxgpMwcEB8dnqb)**, such as `DataType.FLOAT_VECTOR`, `DataType.FLOAT16_VECTOR`, `DataType.BFLOAT16_VECTOR`, `DataType.INT8_VECTOR`, or `DataType.BINARY_VECTOR`
 
 **RETURN TYPE:**
 

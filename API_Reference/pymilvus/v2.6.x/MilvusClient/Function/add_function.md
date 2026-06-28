@@ -12,7 +12,7 @@ add_function(
 
 **PARAMETERS:**
 
-- `function` (*[Function](Function.md)*)
+- `function` (*[Function](https://zilliverse.feishu.cn/docx/GaCYdVohYoHFhrx897zcmcNfn6e)*)
 
     **[REQUIRED]**
 
@@ -20,7 +20,7 @@ add_function(
 
 **RETURN TYPE:**
 
-*[CollectionSchema](../CollectionSchema/CollectionSchema.md)*
+*[CollectionSchema](https://zilliverse.feishu.cn/docx/SSiodq10FoH26hx2HlccfcAgnje)*
 
 **RETURNS:**
 

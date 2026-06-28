@@ -4,10 +4,6 @@ This page documents both `ResourceGroupDesc` and `NodeInfo`. `ResourceGroupDesc`
 
 ## ResourceGroupDesc
 
-```cpp
-const ResourceGroupDesc& desc = response.Desc();
-```
-
 **Methods:**
 
 - `const std::string& Name() const`
@@ -46,40 +42,5 @@ const ResourceGroupDesc& desc = response.Desc();
 
 `NodeInfo` is a plain struct that describes a single query node.
 
-```cpp
-struct NodeInfo {
-    NodeInfo(int64_t id, const std::string& address, const std::string& hostname);
-
-    int64_t     id_;        // Server-assigned node ID
-    std::string address_;   // Network address (host:port)
-    std::string hostname_;  // Hostname of the node
-};
-```
-
 ## Example
 
-```cpp
-#include <milvus/MilvusClientV2.h>
-using namespace milvus;
-
-auto client = MilvusClientV2::Create();
-client->Connect(ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
-
-DescribeResourceGroupResponse response;
-auto status = client->DescribeResourceGroup(
-    DescribeResourceGroupRequest().WithGroupName("gpu_group"),
-    response);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-const ResourceGroupDesc& desc = response.Desc();
-std::cout << "Name:      " << desc.Name() << "\n"
-          << "Capacity:  " << desc.Capacity() << "\n"
-          << "Available: " << desc.AvailableNodesNum() << "\n";
-
-for (const auto& node : desc.Nodes()) {
-    std::cout << "  Node id=" << node.id_
-              << " addr=" << node.address_ << "\n";
-}
-```

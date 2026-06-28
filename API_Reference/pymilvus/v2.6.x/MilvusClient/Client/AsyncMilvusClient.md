@@ -1,6 +1,6 @@
 # AsyncMilvusClient
 
-An **AsyncMilvusClient** instance represents an asynchronous Python client that connects to a specific Milvus instance. It provides the same parameter sets and behaviors as **[MilvusClient](MilvusClient.md)**, and the only difference lies in the way you call them.
+An **AsyncMilvusClient** instance represents an asynchronous Python client that connects to a specific Milvus instance. It provides the same parameter sets and behaviors as **[MilvusClient](https://zilliverse.feishu.cn/docx/SojTdgw1joOuA8xMzb5cMUFYnce)**, and the only difference lies in the way you call them.
 
 ```python
 pymilvus.AsyncMilvusClient
