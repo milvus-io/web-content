@@ -122,7 +122,7 @@ A dictionary that contains detailed information about the specified collection.
 
     - **type** (*int*) -
 
-        The type of the current field. For details, refer to [DataType](DataType.md).
+        The type of the current field. For details, refer to [DataType](https://zilliverse.feishu.cn/docx/MKrAdumLvohQfDxgpMwcEB8dnqb).
 
     - **params** (*dict*) -
 
@@ -148,7 +148,7 @@ A dictionary that contains detailed information about the specified collection.
 
         Whether the current field serves as the primary key of the collection.
 
-- **functions** (*list[[Function](../Function/Function.md)]*) -
+- **functions** (*list[[Function](https://zilliverse.feishu.cn/docx/GaCYdVohYoHFhrx897zcmcNfn6e)]*) -
 
     The functions that have been defined in the schema.
 

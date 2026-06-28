@@ -26,7 +26,7 @@ FieldSchema(
 
     Name of the field.
 
-- **dtype** (*[DataType](../../MilvusClient/Collections/DataType.md)*) -
+- **dtype** (*[DataType](https://zilliverse.feishu.cn/docx/MKrAdumLvohQfDxgpMwcEB8dnqb)*) -
 
     **[REQUIRED]**
 
@@ -52,7 +52,7 @@ FieldSchema(
 
         Setting this to **True** makes the current field the primary field.
 
-        As an alternative, you can set **primary_field** when creating a **[CollectionSchema](../../MilvusClient/CollectionSchema/CollectionSchema.md)** object.
+        As an alternative, you can set **primary_field** when creating a **[CollectionSchema](https://zilliverse.feishu.cn/docx/SSiodq10FoH26hx2HlccfcAgnje)** object.
 
     - **auto_id** (*bool*)
 
@@ -74,7 +74,7 @@ FieldSchema(
         
         This is particularly useful when implementing data separation based on a specific key, such as partition-oriented multi-tenancy.
         
-        As an alternative, you can set **partition_key_field** when creating a **[CollectionSchema](../../MilvusClient/CollectionSchema/CollectionSchema.md)** object.
+        As an alternative, you can set **partition_key_field** when creating a **[CollectionSchema](https://zilliverse.feishu.cn/docx/SSiodq10FoH26hx2HlccfcAgnje)** object.
 
         </div>
 

@@ -2,19 +2,7 @@
 
 Drop a field's properties.
 
-```cpp
-Status DropCollectionFieldProperties(const DropCollectionFieldPropertiesRequest& request)
-```
-
 ## Request Syntax
-
-```cpp
-auto request = DropCollectionFieldPropertiesRequest()
-    .WithDatabaseName(db_name)
-    .WithCollectionName(collection_name)
-    .WithFieldName(field_name)
-    .WithPropertyKeys(keys);
-```
 
 **REQUEST METHODS:**
 
@@ -52,22 +40,3 @@ Check `status.IsOk()` to confirm success.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
-
-milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-auto status = client->Connect(connect_param);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-status = client->DropCollectionFieldProperties(
-    milvus::DropCollectionFieldPropertiesRequest()
-        .WithCollectionName("my_collection")
-        .WithFieldName("my_field")
-        .AddPropertyKey("max_length"));
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-```

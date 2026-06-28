@@ -2,15 +2,6 @@
 
 This Enum represents the load state of a collection or partition returned by `GetLoadState()`. A collection or partition must be in the `LOAD_STATE_LOADED` state before search and query operations can be performed on it.
 
-```cpp
-enum class LoadState {
-    LOAD_STATE_NOT_EXIST = 0,
-    LOAD_STATE_NOT_LOAD  = 1,
-    LOAD_STATE_LOADING   = 2,
-    LOAD_STATE_LOADED    = 3,
-};
-```
-
 **VALUES:**
 
 - **LOAD_STATE_NOT_EXIST** (0) - The collection or partition does not exist.
@@ -23,31 +14,3 @@ enum class LoadState {
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-#include <milvus/MilvusClientV2.h>
-#include <milvus/types/LoadState.h>
-using namespace milvus;
-
-auto client = MilvusClientV2::Create();
-client->Connect(ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
-
-GetLoadStateResponse resp;
-auto status = client->GetLoadState(
-    GetLoadStateRequest().WithCollectionName("my_collection"), resp);
-
-switch (resp.State()) {
-    case LoadState::LOAD_STATE_LOADED:
-        std::cout << "Collection is ready for search." << std::endl;
-        break;
-    case LoadState::LOAD_STATE_LOADING:
-        std::cout << "Collection is still loading..." << std::endl;
-        break;
-    case LoadState::LOAD_STATE_NOT_LOAD:
-        std::cout << "Collection is not loaded. Call LoadCollection() first." << std::endl;
-        break;
-    case LoadState::LOAD_STATE_NOT_EXIST:
-        std::cout << "Collection does not exist." << std::endl;
-        break;
-}
-```

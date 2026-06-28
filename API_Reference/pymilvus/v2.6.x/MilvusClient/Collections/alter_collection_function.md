@@ -34,7 +34,7 @@ client.alter_collection_function(
 
     The name of the function to modify.
 
-- **[function](../Function/Function.md)** (*[Function](../Function/Function.md)*) -
+- **[function](https://zilliverse.feishu.cn/docx/GaCYdVohYoHFhrx897zcmcNfn6e)** (*[Function](https://zilliverse.feishu.cn/docx/GaCYdVohYoHFhrx897zcmcNfn6e)*) -
 
     **[REQUIRED]**
 

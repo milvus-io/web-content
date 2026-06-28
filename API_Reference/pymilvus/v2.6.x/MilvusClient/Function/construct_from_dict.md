@@ -18,7 +18,7 @@ construct_from_dict(
 
 **RETURN TYPE:**
 
-*[Function](Function.md)*
+*[Function](https://zilliverse.feishu.cn/docx/GaCYdVohYoHFhrx897zcmcNfn6e)*
 
 **RETURNS:**
 

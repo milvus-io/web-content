@@ -19,7 +19,7 @@ add_field(
 
     The name of the field.
 
-- **[datatype](../../MilvusClient/Collections/DataType.md)** (*[DataType](../../MilvusClient/Collections/DataType.md)*) - 
+- **[datatype](https://zilliverse.feishu.cn/docx/MKrAdumLvohQfDxgpMwcEB8dnqb)** (*[DataType](https://zilliverse.feishu.cn/docx/MKrAdumLvohQfDxgpMwcEB8dnqb)*) - 
 
     **[REQUIRED]**
 
@@ -127,7 +127,7 @@ add_field(
 
 **RETURNS:**
 
-A **[CollectionSchema](../../MilvusClient/CollectionSchema/CollectionSchema.md)** object contains the fields that have been added to the schema.
+A **[CollectionSchema](https://zilliverse.feishu.cn/docx/SSiodq10FoH26hx2HlccfcAgnje)** object contains the fields that have been added to the schema.
 
 **EXCEPTIONS:**
 
