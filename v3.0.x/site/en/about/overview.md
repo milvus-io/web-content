@@ -106,8 +106,8 @@ In addition to primitive data types, Milvus supports various advanced data types
 - [Binary Vectors](index-vector-fields.md)
 - [JSON Support](use-json-fields.md)
 - [Array Support](array_data_type.md)
+- [Geolocation](geometry-field.md)
 - Text (under development)
-- Geolocation (under development)
 
 ### Why Milvus?
 
