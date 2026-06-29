@@ -206,8 +206,8 @@ summary: >-
 <li><a href="/docs/index-vector-fields.md">Binary Vectors</a></li>
 <li><a href="/docs/use-json-fields.md">JSON Support</a></li>
 <li><a href="/docs/array_data_type.md">Array Support</a></li>
+<li><a href="/docs/geometry-field.md">Geolocation</a></li>
 <li>Text (under development)</li>
-<li>Geolocation (under development)</li>
 </ul>
 <h3 id="Why-Milvus" class="common-anchor-header">Why Milvus?<button data-href="#Why-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
