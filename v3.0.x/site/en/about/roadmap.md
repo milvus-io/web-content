@@ -7,170 +7,104 @@ summary: Milvus is an open-source vector database built to power AI applications
 
 # Milvus Roadmap
 
-## 🌌 Toward the Next-Gen Multimodal Database and Data Lake
+## 🌌 Toward the Next-Gen Multimodal Database and Vector Lakebase
 
-**Milvus Product Roadmap**  
+**Milvus Product Roadmap**
 
-Welcome to the Milvus Roadmap!  
+Welcome to the Milvus Roadmap!
 
-We are ushering Milvus into a new era — the next-generation multimodal database — spanning **structured to unstructured data**, **real-time retrieval to offline analytics**, and **single-cluster performance to a global data lake architecture**.  
+We are ushering Milvus into a new era — the next-generation multimodal database — **spanning structured to unstructured data, real-time retrieval to offline analytics, and single-cluster performance to a global** **Vector Lakebase architecture.**
 
-This roadmap outlines the core objectives for **Milvus v2.6 (in progress)**, **Milvus v3.0 (targeted for late 2026)**, and **Milvus v3.1 (long-term development)**, along with the evolution plan for **Vector Lake (data lake / Loon)**.
+This roadmap outlines the core objectives for **Milvus v3.0 (public beta)**, and **Milvus v3.1 (long-term development)**, along with the evolution plan for **Zilliz Vector Lakebase**.
 
-## 🧩 Milvus v2.6 (In Progress)
+## 🌠 Milvus v3.0 (Public Beta)
 
-**Timeline: Mid-2025 – End of 2025**  
+**Public Beta: May 2026**
 
-Focus: **Upgrading the data model**, **refactoring the streaming architecture**, **building hot/cold tiering capabilities**, and launching the **Vector Lake Prototype (v0.1)**.
+Focus: Building a **semantic-native query engine** with in-engine sorting, aggregation, and multi-vector retrieval, and the **lake-native foundation of Zilliz Vector Lakebase** so compute reaches data without migration.
 
-### 🎯 Key Highlights
-
-#### 🔹 **Data Model Upgrade**
-
-- Introduce a unified **Tensor / StructList** data type to support multi-vector embedding structures, enabling compatibility with *ColBERT*, *CoLQwen*, *video*, and *multimodal vectors*.
-
-- Add **Geo Data** support, including points, regions, and spatial indexing (based on *libspatial*), to expand use cases in LBS and GIS.
-
-- Support for **Timestamp with Timezone** data type.
-
-#### 🔹 **StreamNode Architecture Refactor**
-
-- Rewrite the streaming ingestion pipeline to optimize incremental writes and real-time computation.
-
-- Significantly improve concurrency performance and stability, laying the foundation for unified real-time and offline processing.
-
-- Introduce a new message queue engine: **Woodpecker**.
-
-#### 🔹 **Hot/Cold Tiering & Storage Architecture (StorageV2)**
-
-- Support dual storage formats: **Parquet** and **Vortex**, enhancing concurrency and memory efficiency.
-
-- Implement tiered storage with automatic hot/cold data separation and intelligent scheduling.
-
-#### 🔹 **Vector Lake Prototype (v0.1)**
-
-- Integrate with **Spark** / **DuckDB** / **DataFusion** via FFI, enabling offline schema evolution and KNN queries.
-
-- Provide multimodal data visualization and a Spark ETL demo, establishing the foundational data lake architecture.
-
-## 🌠 Milvus v3.0 (Targeted for Early 2026)
-
-**Timeline: Late 2025 – Early 2026**  
-
-Focus: Comprehensive enhancements to **search experience**, **schema flexibility**, and **unstructured data support**, along with the release of **Vector Lake (v0.2)**.
 
 ### 🎯 Key Highlights
 
-#### 🔹 **Search Experience Overhaul**
+#### 🔹 **Schema & Data Type Evolution**
 
-- Introduce **More Like This (MLT)** similarity search with support for searches with position or negative examples.
+-   Support ALTER COLLECTION ADD COLUMN and DROP COLUMN at runtime without rebuilding indexes or interrupting serving.
+-   Provide **two backfill paths** for new columns: external via Spark Connector, and internal with BM25 sparse vectors auto-generated at write time.
+-   Introduce **TEXT** as a first-class data type that stores original text alongside vectors with BM25 and text-match support.
 
-- Add semantic search capabilities such as **highlighting** and **boosting**.
+  
 
-- Support **custom dictionaries** and **synonym tables**, enabling lexical and semantic rule definitions at the Analyzer layer.
+#### 🔹 **Query** **Execution Overhaul**
 
-- Introduce **aggregation** capabilities for queries.
+-   Push **Order By** into the engine with per-segment sort and merge-sort across query nodes.
+-   Add SQL-style **query** **aggregation** (GROUP BY with COUNT, SUM, AVG, MIN, MAX) computed in the kernel.
+-   Introduce **search facets** over ANN results with per-bucket statistics and nested sub-facets server-side.
+-   Support **custom dictionaries** and synonym tables registered cluster-side for improved CJK and domain-specific recall.
 
-#### 🔹 **Multi-Tenancy & Resource Management**
+  
 
-- Enable multi-tenant deletion, statistics, and hot/cold tiering.
+#### 🔹 **Multi-Vector & Late-Interaction Support**
 
-- Improve resource isolation and scheduling strategies to support millions of tables in a single cluster.
+-   Introduce **StructList** to represent one entity as a single row with many vectors, with native late-interaction support (ColBERT, ColPali) via MAX_SIM.
+-   Support **element-level and entity-level search** on StructList fields, with configurable match policies for entity-level results.
+-   Add three **multi-vector retrieval strategies**: TokenANN (exhaustive), Muvera (projection-based, no training), and Lemur (learned compression).
 
-#### 🔹 **Schema & Primary Key Enhancements**
+  
 
-- Implement **Global Primary Key Deduplication (Global PK Dedup)** to guarantee data consistency and uniqueness.
+#### 🔹 **Retrieval & Index Overhaul**
 
-- Support **flexible schema management** (adding/dropping columns, backup fill).
+-   Overhaul the **sparse inverted index** with block compression, weight quantization, and a persisted format; introduce **SINDI** as the default sparse IP algorithm.
+-   Expand index coverage with the full **Faiss family** (SVS, Panorama, PQ, IVFPQ, ScaNN) and **MinHash DIDO** for near-duplicate detection.
+-   Support **nullable vector fields** for async embeddings and missing modalities, with auto-filtering at search time.
 
-- Allow **NULL values** in vector fields.
+  
 
-#### 🔹 **Expanded Unstructured Data Types (BLOB / Text)**
+#### 🔹 **Vector Lakebase Storage & Compute Architecture**
 
-- Introduce the **BLOB type**, which provides native storage and referencing for binary data such as files, images, and videos.
+-   Introduce **External Collection** to index and query data in S3 / GCS / Azure in place, with support for Lance, Parquet, Iceberg, and Vortex table formats.
+-   Add **Vortex**, an open columnar format, and **Loon (Storage V3)**, a mixed-format storage layer for efficient point reads from object storage.
+-   Support **point-in-time snapshots** with MVCC-style isolation for batch processing while serving continues to write.
+-   Integrate as a **Spark DataSource v2** for reading from and writing to Milvus directly in Spark / Databricks / EMR pipelines.
 
-- Introduce **TEXT type**, which provides enhanced full-text and content-based search capabilities.
-
-#### 🔹 **Enterprise-Grade Capabilities**
-
-- Support **Snapshot-based backup and recovery**.
-
-- Provide **end-to-end tracing** and **audit logging**.
-
-- Implement **Active-Standby High Availability (HA)** across multi-cluster deployments.
-
-#### 🔹 **Vector Lake (v0.2)**
-
-- Support **TEXT / BLOB storage** and **multi-version snapshot management**.
-
-- Integrate Spark for offline indexing, clustering, deduplication, and dimensionality reduction tasks.
-
-- Deliver **ChatPDF cold-query and offline benchmark demos**.
 
 ## 🪐 Milvus v3.1 (Long-Term Vision)
 
-**Timeline: Mid-2026**  
+**Timeline: Late 2026 and beyond**
 
-Focus: **User-defined functions (UDF)**, **distributed computing integration**, **scalar query optimization**, **dynamic sharding**, and the official release of **Vector Lake (v1.0)**.
+Focus: **Storage intelligence**, **write-path integrity**, **compute extensibility**, and **expanded** **Vector Lakebase** **interoperability**.
 
 ### 🎯 Key Highlights
 
-#### 🔹 **UDF & Distributed Computing Ecosystem**
+#### 🔹 **Storage & Write Path**
 
-- Support **User-Defined Functions (UDFs)**, allowing developers to inject custom logic into retrieval and computation workflows.
+-   Add **predicate pushdown** with page-index and bloom-filter pruning at the storage layer.
+-   Implement **primary-key dedup** on ingest to prevent duplicates at write time.
+    
 
-- Deep integration with **Ray Dataset / Daft** for distributed UDF execution and multimodal data processing.
+#### 🔹 **Compute & Elasticity**
 
-#### 🔹 **Scalar Query & Local Format Evolution**
+-   Support **User-Defined Functions (UDFs)** for running custom logic in the engine, on the data plane.
+-   Enable **shard splitting** to resplit shards as data grows, with custom sharding key support.
+    
 
-- Optimize filtering and aggregation performance for scalar fields.
+#### 🔹 **Spark &** **Vector Lakebase** **Expansion**
 
-- Enhance expression evaluation and index-accelerated execution.
+-   Expand the Spark connector with a richer library of **native batch operators**.
+-   Add **table format** capabilities including time-travel, schema evolution, and snapshot rollback.
+-   Expand Vector Lakebase interoperability with **CDC-fresh external indexes**, Apache Paimon support, and additional data formats.
 
-- Support **in-place updates** for local file formats.
-
-#### 🔹 **Advanced Search Capabilities**
-
-- Add the following features: **RankBy**, **OrderBy**, **Facet**, and **Fuzzy match** queries.
-
-- Enhance text retrieval with support for:  
-
-    - `match_phrase_prefix`
-
-    - `Completion Suggester`
-
-    - `Term Suggester`
-
-    - `Phrase Suggester`
-
-#### 🔹 **Dynamic Sharding & Scalability**
-
-- Enable **automatic shard splitting** and **load balancing** for seamless scaling.
-
-- Improve **global index building** and ensure **distributed search performance**.
-
-#### 🔹 **Vector Lake V1.0**
-
-- Deep integration with **Ray / Daft / PyTorch** to support distributed UDFs and Context Engineering use cases.
-
-- Provide **RAG (Retrieval-Augmented Generation) demos** **and import from Iceberg tables**.
 
 ## 🤝 Co-Building the Future of Milvus
 
-Milvus is an open-source project driven by a global community of developers.  
+Milvus is an open-source project driven by a global community of developers. We invite all community members to help shape the next-generation multimodal database:
 
-We warmly invite all community members to help shape the next-generation multimodal database:
-
-- 💬 **Share feedback**: Propose new features or optimization ideas
-
-- 🐛 **Report issues**: File bugs via GitHub Issues
-
-- 🔧 **Contribute code**: Submit PRs and help build core features  
-
-    - **Pull requests**: Contribute directly to our [codebase](https://github.com/milvus-io/milvus/pulls). Whether it's fixing bugs, adding features, or improving documentation, your contributions are welcome.
-
-    - **Development guide**: Check our [Contributor's Guide](https://github.com/milvus-io/milvus/blob/82915a9630ab0ff40d7891b97c367ede5726ff7c/CONTRIBUTING.md) for guidelines on code contributions.
-
-- ⭐ **Spread the word**: Share best practices and success stories
+-   💬 **Share feedback**: Propose new features or optimization ideas on [GitHub Discussions](https://github.com/milvus-io/milvus/discussions).
+-   🐛 **Report issues**: File bugs through [GitHub Issues](https://github.com/milvus-io/milvus/issues).
+-   🔧 **Contribute code**: Submit PRs and help build core features.
+    
+    -   **Pull requests**: Contribute directly to our [codebase](https://github.com/milvus-io/milvus/pulls). Whether you're fixing bugs, adding features, or improving documentation, your contributions are welcome.
+    -   **Development guide**: Check our [Contributor's Guide](https://github.com/milvus-io/milvus/blob/master/CONTRIBUTING.md) for guidelines on code contributions.
+-   🗣️ **Join the conversation**: Ask questions and meet maintainers on [Discord](https://milvus.io/discord), at [Milvus Office Hours](https://meetings.hubspot.com/chloe-williams1/milvus-meeting), or across [all community channels](https://milvus.io/community).
+-   ⭐ **Spread the word**: Share best practices and success stories, and follow Milvus on [X](https://twitter.com/milvusio), [LinkedIn](https://www.linkedin.com/company/the-milvus-project/), and [YouTube](https://www.youtube.com/c/MilvusVectorDatabase).
 
 👉 **GitHub:** [milvus-io/milvus](https://github.com/milvus-io/milvus)
