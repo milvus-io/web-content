@@ -35,7 +35,8 @@ minikube is required when running Kubernetes cluster locally. minikube requires 
 | -------- | ----------------------------- | ---- |
 | etcd     | 3.5.0                         |  See [additional disk requirements](#Additional-disk-requirements). |
 | MinIO    |  RELEASE.2024-12-18T13-15-44Z | |
-| Pulsar   | 2.8.2                         | |
+| Woodpecker | Bundled with Milvus (service mode: `v0.1.33`+) | Default message queue. For distributed deployments, Woodpecker can run as a dedicated **service**; pin its version with `--set woodpecker.image.tag`. Service mode is supported from Woodpecker `v0.1.33` onward. |
+| Pulsar   | 2.8.2                         | Optional — only if you switch the message queue to Pulsar; not installed by default. |
 
 ### Additional disk requirements
 
