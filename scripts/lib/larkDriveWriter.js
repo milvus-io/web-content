@@ -30,6 +30,54 @@ class larkDriveWriter extends larkDocWriter {
         this.utils = new Utils();
     }
 
+    __slug_value(slug) {
+        return slug instanceof Array ? slug[0]?.text || slug[0]?.[slug[0]?.type] : slug
+    }
+
+    __slug_contexts(parentSlug) {
+        const contexts = [parentSlug].filter(Boolean)
+        if (parentSlug && parentSlug.includes('-')) {
+            contexts.push(parentSlug.split('-').pop())
+        }
+        return contexts
+    }
+
+    __drive_source_candidates(token) {
+        return fs.readdirSync(this.docSourceDir)
+            .filter(file => file.endsWith('.json'))
+            .map(file => {
+                const source = JSON.parse(fs.readFileSync(node_path.join(this.docSourceDir, file), 'utf8'))
+                source.__source_file = file
+                return source
+            })
+            .filter(source => source.token === token)
+    }
+
+    __drive_source_for_child(child, parentSlug=null) {
+        const candidates = this.__drive_source_candidates(child.token)
+        if (candidates.length === 0) return null
+        if (candidates.length === 1) return candidates[0]
+
+        const contexts = this.__slug_contexts(parentSlug)
+        const contextual = candidates.filter(source => {
+            const slug = this.__slug_value(source.slug)
+            return contexts.some(context => slug === context || slug?.startsWith(`${context}-`))
+        })
+
+        if (contextual.length === 1) return contextual[0]
+
+        const exactFile = candidates.find(source => source.__source_file === `${child.token}.json`)
+        return exactFile || candidates[0]
+    }
+
+    __fetch_link_doc_source(token) {
+        const source = this.__drive_source_for_child({ token }, this.currentParentSlug)
+        if (!source) {
+            throw new Error(`Cannot find ${token} in ${this.docSourceDir}`)
+        }
+        return source
+    }
+
     async write_docs(path, token) {
         const forEachAsync = async (array, callback) => {
             for (let index = 0; index < array.length; index++) {
@@ -42,10 +90,8 @@ class larkDriveWriter extends larkDocWriter {
 
         if (node.children) {
             await forEachAsync(node.children, async (child, index) => {
-                var source = fs.readdirSync(this.docSourceDir).find(file => file === `${child.token}.json`)
+                var source = this.__drive_source_for_child(child, node.slug)
                 if (source) {
-                    source = JSON.parse(fs.readFileSync(node_path.join(this.docSourceDir, source), 'utf8'))
-
                     if (source.blocks) {
                         // console.log(source.slug, '=> doc')
                         const meta = await this.__is_to_publish(source.name, source.slug, source.token)
@@ -71,7 +117,7 @@ class larkDriveWriter extends larkDocWriter {
                                 notebook: 'false',
                                 sidebar_position: index+1,
                                 sidebar_label: meta['labels'],
-                                keywords: this.keyword_picker().concat('zilliz', 'zilliz cloud', 'cloud', source.name, this.manual),
+                                keywords: this.keyword_picker(`${source.slug}:${source.name}`).concat('zilliz', 'zilliz cloud', 'cloud', source.name, this.manual),
                                 doc_card_list: false,
                                 addedSince: addedSince,
                                 lastModified: lastModified,
@@ -108,7 +154,7 @@ class larkDriveWriter extends larkDocWriter {
                                 page_description: description,
                                 sidebar_position: index+1,
                                 sidebar_label: meta['labels'],
-                                keywords: this.keyword_picker().concat('zilliz', 'zilliz cloud', 'cloud', source.name, this.manual).join(','),
+                                keywords: this.keyword_picker(`${source.slug}:${source.name}`).concat('zilliz', 'zilliz cloud', 'cloud', source.name, this.manual).join(','),
                                 doc_card_list: true,
                                 addedSince: addedSince,
                                 lastModified: lastModified,
@@ -143,10 +189,11 @@ class larkDriveWriter extends larkDocWriter {
 
         let obj;
         var current_path = path
-        var keywords = this.keyword_picker().concat('zilliz', 'zilliz cloud', 'cloud', page_title, this.manual).join(',')
+        var keywords = this.keyword_picker(`${page_slug}:${page_title}`).concat('zilliz', 'zilliz cloud', 'cloud', page_title, this.manual).join(',')
+        this.currentParentSlug = node_path.basename(path)
 
         if (page_token) {
-            obj = this.__fetch_doc_source('token', page_token)
+            obj = this.__fetch_doc_source('token', page_token, page_slug)
             var page;
             if (obj.children) {
                 const pair = this.utils.locate_drive_source_pair(this.docSourceDir, page_token, page_slug)

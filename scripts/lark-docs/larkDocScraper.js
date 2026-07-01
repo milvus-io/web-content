@@ -224,16 +224,51 @@ class larkDocScraper {
 
         // fs.writeFileSync(`records.json`, JSON.stringify(this.records, null, 2))
 
-        const slugs = {}
+        const slugEntries = []
+        const recordsBySeqId = new Map(records.map(record => [record.fields['Seq. ID'], record]))
+        const recordsByRecordId = new Map(records.map(record => [record.record_id, record]))
         if (records.length > 0) {
             for (let record of records) {
                 if (record.fields.Slug) {
-                    slugs[record.fields.Docs.link.split('/').pop()] = { slug: record.fields.Slug, title: record.fields.Docs.text }
+                    const parentSeqId = record.fields.Parent?.[0]?.text || null
+                    const parentRecordId = record.fields['父记录']?.[0]?.record_ids?.[0] || record.fields.Parent?.[0]?.record_ids?.[0] || null
+                    const parentRecord = parentRecordId
+                        ? recordsByRecordId.get(parentRecordId)
+                        : parentSeqId
+                            ? recordsBySeqId.get(parentSeqId)
+                            : null
+                    slugEntries.push({
+                        key: record.fields.Docs.link.split('/').pop(),
+                        token: record.fields.Docs.link.split('/').pop(),
+                        slug: record.fields.Slug,
+                        title: record.fields.Docs.text,
+                        parent_token: parentRecord?.fields?.Docs?.link?.split('/').pop() || null,
+                        record_id: record.record_id,
+                        seq_id: record.fields['Seq. ID'],
+                    })
                 } else {
                     throw new Error(`Slug field not found for record ${record.fields['Seq. ID']}`)
                 }
             }
         }
+
+        const tokenCounts = new Map()
+        slugEntries.forEach(entry => {
+            tokenCounts.set(entry.token, (tokenCounts.get(entry.token) || 0) + 1)
+        })
+
+        const slugs = {}
+        slugEntries.forEach(entry => {
+            const key = tokenCounts.get(entry.token) > 1
+                ? `${entry.token}#${entry.record_id || entry.seq_id || Object.keys(slugs).length}`
+                : entry.token
+            slugs[key] = {
+                token: entry.token,
+                slug: entry.slug,
+                title: entry.title,
+                parent_token: entry.parent_token,
+            }
+        })
         
         const slugs_arr = this.__uniquify(Object.values(slugs).map(s => s.slug instanceof Array ? s.slug[0][s.slug[0].type] : s.slug))
         const slug_keys = Object.keys(slugs)
@@ -244,6 +279,10 @@ class larkDocScraper {
             } else {
                 slugs[s].slug = slugs_arr[i]
             }
+        })
+
+        slug_keys.forEach(s => {
+            slugs[s].parent_slug = slugs[s].parent_token ? this.__slug_value(slugs[slugs[s].parent_token]?.slug) : null
         })
 
         this.slugs = slugs
@@ -274,6 +313,15 @@ class larkDocScraper {
         return slug
     }
 
+    __slug_contexts(preferredSlugPrefix) {
+        const contexts = [preferredSlugPrefix].filter(Boolean)
+        if (preferredSlugPrefix && preferredSlugPrefix.includes('-')) {
+            contexts.push(preferredSlugPrefix.split('-').pop())
+        }
+
+        return contexts
+    }
+
     async __slugify(token, title=null, preferredSlugPrefix=null) {
         if (!this.slugs) {
             await this.__base(this.base)
@@ -282,15 +330,39 @@ class larkDocScraper {
         var slug = this.slugs[token]
          
         if (!slug && title != null) {
-            const records = Object.keys(this.slugs).filter(key => this.slugs[key].title == title)
+            const tokenRecords = Object.keys(this.slugs).filter(key => key === token || this.slugs[key].token === token)
+            const records = (tokenRecords.length > 0 ? tokenRecords : Object.keys(this.slugs))
+                .filter(key => this.slugs[key].title == title)
             if (records.length === 1) {
                 slug = this.slugs[records[0]] 
             } else if (records.length > 1) {
+                const exactSlugRecords = records.filter(key => this.__slug_value(this.slugs[key].slug) === title)
+                if (exactSlugRecords.length === 1) {
+                    slug = this.slugs[exactSlugRecords[0]]
+                }
+            }
+
+            if (!slug && records.length > 1) {
                 if (preferredSlugPrefix) {
-                    const contextualRecords = records.filter(key => {
-                        const value = this.__slug_value(this.slugs[key].slug)
-                        return value === preferredSlugPrefix || value.startsWith(`${preferredSlugPrefix}-`)
+                    const contexts = this.__slug_contexts(preferredSlugPrefix)
+                    let contextualRecords = records.filter(key => {
+                        const parentSlug = this.slugs[key].parent_slug
+                        return parentSlug && contexts.some(context => parentSlug === context)
                     })
+
+                    if (contextualRecords.length !== 1) {
+                        contextualRecords = records.filter(key => {
+                            const parentSlug = this.slugs[key].parent_slug
+                            return parentSlug && contexts.some(context => parentSlug.endsWith(`-${context}`))
+                        })
+                    }
+
+                    if (contextualRecords.length !== 1) {
+                        contextualRecords = records.filter(key => {
+                            const value = this.__slug_value(this.slugs[key].slug)
+                            return contexts.some(context => value === context || value.startsWith(`${context}-`))
+                        })
+                    }
 
                     if (contextualRecords.length === 1) {
                         slug = this.slugs[contextualRecords[0]]
@@ -487,7 +559,8 @@ class larkDocScraper {
                 return 0;
             })
             
-            this.docs.slug = await this.__slugify(this.docs.token, this.docs.name, preferredSlugPrefix)
+            const resolvedDocSlug = await this.__slugify(this.docs.token, this.docs.name, preferredSlugPrefix)
+            this.docs.slug = resolvedDocSlug || this.docs.slug
 
             if (jres.has_more) {
                 await this.__fetch_drive_children(folder_token, jres.data.next_page_token, recursive, preferredSlugPrefix)

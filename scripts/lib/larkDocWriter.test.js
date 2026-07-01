@@ -66,6 +66,14 @@ function testExampleHttpUrlsSkipsInlineCodeSpans() {
   assert.equal(result, markdown);
 }
 
+function testKeywordPickerUsesStableSeed() {
+  const writer = createWriter([]);
+  assert.deepEqual(
+    writer.keyword_picker('Authentication-create_user:create_user()'),
+    writer.keyword_picker('Authentication-create_user:create_user()')
+  );
+}
+
 async function testCalloutPreservesMarkdownBody() {
   const callout = {
     block_id: 'callout',
@@ -200,6 +208,7 @@ async function testListedDocsRetriesPrematureClose() {
 
 async function run() {
   testExampleHttpUrlsSkipsInlineCodeSpans();
+  testKeywordPickerUsesStableSeed();
   await testCalloutPreservesMarkdownBody();
   await testQuotePreservesMarkdownBody();
   await testListedDocsRetriesPrematureClose();
