@@ -3,10 +3,12 @@ id: install_standalone-windows.md
 label: Docker
 related_key: Docker
 summary: Learn how to install Milvus standalone with Docker Desktop for Windows.
-title: Run Milvus in Docker (Linux)
+title: Run Milvus in Docker (Windows)
 ---
 
 # Run Milvus in Docker (Windows)
+
+> By default, this deployment runs **Woodpecker** (local filesystem) as its message queue, so no external message-queue service is required. See [Woodpecker](woodpecker.md).
 
 This page demonstrates how to run Milvus on Windows using Docker Desktop for Windows.​
 
@@ -109,7 +111,7 @@ If you prefer to start Milvus using Linux commands and shell scripts on Windows,
     Stop successfully.​
     ​
     # Delete Milvus data​
-    $ bash standalone_embed.sh stop​
+    $ bash standalone_embed.sh delete​
     Delete Milvus container successfully.​
     Delete successfully.​
 
@@ -141,7 +143,7 @@ Once you have installed Docker Desktop on Microsoft Windows, you can access the 
 
     - The **milvus-etcd** container does not expose any ports to the host and maps its data to **volumes/etcd** in the current folder.​
 
-    - The **milvus-minio** container serves ports **9090** and **9091** locally with the default authentication credentials and maps its data to **volumes/minio** in the current folder.​
+    - The **milvus-minio** container serves ports **9000** and **9001** locally with the default authentication credentials and maps its data to **volumes/minio** in the current folder.​
 
     - The **milvus-standalone** container serves ports **19530** locally with the default settings and maps its data to **volumes/milvus** in the current folder.​
 

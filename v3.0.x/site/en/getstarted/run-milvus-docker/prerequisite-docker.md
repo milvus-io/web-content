@@ -32,7 +32,8 @@ The following dependencies will be obtained and configured automatically when Mi
 | -------- | ----------------------------- | ---- |
 | etcd     | 3.5.0                         |  See [additional disk requirements](#Additional-disk-requirements). |
 | MinIO    |  RELEASE.2024-12-18T13-15-44Z | |
-| Pulsar   | 2.8.2                         | |
+| Woodpecker | Bundled with Milvus | Default message queue (embedded); no separate service to install. |
+| Pulsar   | 2.8.2                         | Optional — only if you switch the message queue to Pulsar; not installed by default. |
 
 ### Additional disk requirements
 

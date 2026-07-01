@@ -33,7 +33,7 @@ $ bash standalone_embed.sh start
 
 **What's new in v3.0-beta:**
 - **Streaming Node**: Enhanced data processing capabilities
-- **Woodpecker MQ**: Improved message queue with reduced maintenance overhead, see [Use Woodpecker](use-woodpecker.md) for detail
+- **Woodpecker MQ (default)**: This Docker deployment runs Woodpecker as the message queue with the **local filesystem** as its WAL backend, so no external message-queue service is required. See [Woodpecker](woodpecker.md).
 - **Optimized Architecture**: Consolidated components for better performance
 
 Always download the latest script to ensure you get the most recent configurations and architecture improvements.
@@ -46,7 +46,7 @@ If you encounter any issues pulling the image, contact us at <a href="mailto:com
 
 After running the installation script:
 
-- A docker container named milvus has been started at port **19530**.
+- A docker container named milvus-standalone has been started at port **19530**.
 - An embed etcd is installed along with Milvus in the same container and serves at port **2379**. Its configuration file is mapped to **embedEtcd.yaml** in the current folder.
 - To change the default Milvus configuration, add your settings to the **user.yaml** file in the current folder and then restart the service.
 - The Milvus data volume is mapped to **volumes/milvus** in the current folder.
@@ -105,6 +105,14 @@ $ bash standalone_embed.sh stop
 # Delete Milvus data
 $ bash standalone_embed.sh delete
 ```
+
+## Optional dependencies
+
+By default this deployment runs **Woodpecker** (local-filesystem WAL) as the message queue and an **embedded etcd** for metadata — nothing else to install. To use a different message queue or connect external object storage / metadata, see:
+
+- Message queue: [Woodpecker](woodpecker.md) (default) · [Pulsar](mq_pulsar.md) · [Kafka](mq_kafka.md) · [RocksMQ](mq_rocksmq.md)
+- Object storage: [MinIO](deploy_s3.md) (default) · [AWS S3](deploy_s3.md) · [Azure Blob](abs.md) · [GCP Cloud Storage](gcs.md) · [Aliyun OSS](deploy_s3.md) · [Tencent COS](deploy_s3.md) · [Huawei OBS](deploy_s3.md) · [S3-compatible](deploy_s3.md)
+- Metadata: [etcd](deploy_etcd.md)
 
 ## What's next
 
