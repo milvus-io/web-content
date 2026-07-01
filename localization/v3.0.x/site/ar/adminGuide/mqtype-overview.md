@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يعتمد Milvus على قائمة انتظار الرسائل (سجل الكتابة المسبقة، WAL) لإدارة سجلات التغييرات الحديثة وسجلات تدفق المخرجات، وتوفير اشتراكات السجلات. في Milvus 3.x، يُعد <strong>Woodpecker</strong> قائمة انتظار الرسائل الافتراضية ولا يتطلب أي بنية تحتية منفصلة للمراسلة. ولا يزال كل من Pulsar وKafka وRocksMQ مدعومًا في سيناريوهات محددة.</p>
+    </button></h1><p>يعتمد Milvus على قائمة انتظار الرسائل (سجل الكتابة المسبقة، WAL) لإدارة سجلات التغييرات الحديثة وسجلات تدفق المخرجات، وتوفير اشتراكات السجلات. في Milvus 3.x، يُعد <strong>Woodpecker</strong> قائمة انتظار الرسائل الافتراضية ولا يتطلب بنية تحتية منفصلة للمراسلة. ويظل كل من Pulsar وKafka وRocksMQ مدعومًا في سيناريوهات محددة.</p>
 <h2 id="Supported-message-queues" class="common-anchor-header">قوائم انتظار الرسائل المدعومة<button data-href="#Supported-message-queues" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -70,7 +70,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>عمليات النشر الجديدة (Milvus 3.x):</strong> استخدم <strong>Woodpecker</strong> (الافتراضي). يعمل في الوضع المستقل بشكل مدمج؛ أما بالنسبة للنظام الموزع (العنقودي)، فإن الإعداد الافتراضي الموصى به هو <a href="/docs/ar/woodpecker.md#Deployment-modes">خدمة</a> مخصصة يتم نشرها باستخدام Helm، كما أن الوضع المدمج مدعوم أيضًا.</li>
+<li><strong>عمليات النشر الجديدة (Milvus 3.x):</strong> استخدم <strong>Woodpecker</strong> (الافتراضي). يعمل في الوضع المستقل بشكل مدمج؛ أما بالنسبة للنظام الموزع (العنقودي)، فإن الإعداد الافتراضي الموصى به هو <a href="/docs/ar/woodpecker.md#Deployment-modes">خدمة</a> مخصصة يتم نشرها باستخدام Helm، كما أن النشر المدمج مدعوم أيضًا.</li>
 <li><strong>مستخدمو Pulsar أو Kafka الحاليون:</strong> لا يزال كل من Pulsar و Kafka مدعومين بالكامل. احتفظ بهما، أو قم بالتبديل إلى Woodpecker.</li>
-<li><strong>RocksMQ:</strong> يعمل في الوضع المستقل فقط، وقد حل محله Woodpecker المدمج في Milvus 3.x.</li>
+<li><strong>RocksMQ:</strong> يعمل في الوضع المستقل فقط، وقد حلت محلّه خدمة Woodpecker المدمجة في Milvus 3.x.</li>
 </ul>

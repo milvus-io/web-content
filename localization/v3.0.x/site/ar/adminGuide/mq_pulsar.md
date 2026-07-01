@@ -17,7 +17,7 @@ title: بولسار
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يعد Apache Pulsar أحد الخلفيات الخاصة بقوائم انتظار الرسائل (WAL) التي يدعمها Milvus. في Milvus 3.x، يُعد <a href="/docs/ar/woodpecker.md">Woodpecker</a> قائمة انتظار الرسائل الافتراضية؛ ويظل Pulsar مدعومًا بالكامل للمستخدمين الذين يفضلونه. يُستخدم Pulsar بشكل أساسي مع Milvus Distributed (العنقود)؛ بينما تستخدم عمليات النشر المستقلة عادةً Woodpecker المدمج أو <a href="/docs/ar/mq_rocksmq.md">RocksMQ</a>.</p>
+    </button></h1><p>يعد Apache Pulsar أحد الخلفيات الخاصة بقوائم انتظار الرسائل (WAL) التي يدعمها Milvus. في Milvus 3.x، يُعد <a href="/docs/ar/woodpecker.md">Woodpecker</a> قائمة انتظار الرسائل الافتراضية؛ ويظل Pulsar مدعومًا بالكامل للمستخدمين الذين يفضلونه. يُستخدم Pulsar بشكل أساسي مع Milvus Distributed (المجموعة)؛ بينما تستخدم عمليات النشر المستقلة عادةً Woodpecker المدمج أو <a href="/docs/ar/mq_rocksmq.md">RocksMQ</a>.</p>
 <h2 id="Version-compatibility" class="common-anchor-header">توافق الإصدارات<button data-href="#Version-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -73,7 +73,7 @@ title: بولسار
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>لنشر مجموعة Milvus التي تستخدم Pulsar المضمّن (بدلاً من Woodpecker)، قم بتثبيت مخطط Helm مع تمكين Streaming Node:</p>
+    </button></h3><p>لنشر مجموعة Milvus التي تستخدم Pulsar المدمج (بدلاً من Woodpecker)، قم بتثبيت مخطط Helm مع تمكين Streaming Node:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0-beta \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">true</span> \
@@ -81,7 +81,7 @@ title: بولسار
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>في Kubernetes الإصدار 1.25 والإصدارات الأحدث، إذا واجهت مشكلات في واجهة برمجة تطبيقات (API) PodDisruptionBudget (PDB) من المخطط الفرعي المدمج لـ Pulsar، فقم بتعطيل سياسات PDB الخاصة بـ Pulsar:</p>
+<p>في Kubernetes الإصدار 1.25 والإصدارات الأحدث، إذا واجهت مشكلات في واجهة برمجة تطبيقات (API) PodDisruptionBudget من المخطط الفرعي المدمج لـ Pulsar، فقم بتعطيل سياسات PDB الخاصة بـ Pulsar:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> pulsar.bookkeeper.pdb.usePolicy=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsar.broker.pdb.usePolicy=<span class="hljs-literal">false</span> \
@@ -263,7 +263,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>الترقية من الإصدار 2.5.x إلى الإصدار 2.6.x:</strong> <strong>قيود قائمة انتظار الرسائل</strong>: عند الترقية إلى Milvus v3.0-beta، يجب الحفاظ على اختيارك الحالي لقائمة انتظار الرسائل. لا يتم دعم التبديل بين أنظمة قوائم انتظار الرسائل المختلفة أثناء الترقية. سيتوفر دعم تغيير أنظمة قوائم انتظار الرسائل في الإصدارات المستقبلية.
+<li><strong>الترقية من الإصدار 2.5.x إلى الإصدار 2.6.x:</strong> <strong>قيود قائمة انتظار الرسائل</strong>: عند الترقية إلى Milvus v3.0-beta، يجب الحفاظ على اختيارك الحالي لقائمة انتظار الرسائل. لا يتم دعم التبديل بين أنظمة قائمة انتظار الرسائل المختلفة أثناء الترقية. سيتوفر دعم تغيير أنظمة قائمة انتظار الرسائل في الإصدارات المستقبلية.
 إذا كنت تستخدم Pulsar وترغب في الاحتفاظ به، فلا تقم بتغيير قائمة انتظار الرسائل أثناء الترقية.</li>
 <li><strong>Pulsar v2 → v3:</strong> راجع <a href="/docs/ar/upgrade-pulsar-v3.md">ترقية Pulsar من الإصدار v2 إلى v3</a>؛ للاستمرار في استخدام الإصدار v2، راجع <a href="/docs/ar/use-pulsar-v2.md">الاستمرار في استخدام Pulsar v2</a>.</li>
 </ul>

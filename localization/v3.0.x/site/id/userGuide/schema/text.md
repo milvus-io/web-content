@@ -52,7 +52,7 @@ beta: Milvus 3.0.x
 <li>Sebuah bidang ` <code translate="no">TEXT</code> ` tidak dapat menjadi bidang utama. Bidang utama mendukung ` <code translate="no">INT64</code> ` dan ` <code translate="no">VARCHAR</code>`.</li>
 <li>Di Milvus 3.0.0, bidang <code translate="no">TEXT</code> tidak mendukung <code translate="no">PHRASE_MATCH</code>.</li>
 <li>Di Milvus 3.0.0, bidang " <code translate="no">TEXT</code> " tidak mendukung nilai default.</li>
-<li>Di Milvus 3.0.0, bidang <code translate="no">TEXT</code> tidak didukung dalam koleksi eksternal.</li>
+<li>Di Milvus 3.0.0, bidang <code translate="no">TEXT</code> tidak didukung di koleksi eksternal.</li>
 <li>Di Milvus 3.0.0, bidang <code translate="no">TEXT</code> tidak mendukung indeks skalar.</li>
 <li><code translate="no">TEXT</code> tidak dimaksudkan untuk penyaringan metadata biasa. Jika Anda perlu menyaring metadata string pendek dan nilai bidang sesuai dengan batas panjang ` <code translate="no">VARCHAR</code> `, gunakan ` <code translate="no">VARCHAR</code>`.</li>
 </ul>

@@ -2,7 +2,7 @@
 id: pattern-matching.md
 title: Musterabgleich
 summary: >-
-  Milvus unterstützt den Abgleich von Zeichenfolgenmustern mithilfe von
+  Milvus unterstützt den Abgleich von Zeichenfolgenmustern mit
   LIKE-Platzhaltermustern und RE2-regulären Ausdrücken. Verwenden Sie
   Musterfilter, um Präfixe, Suffixe, Teilzeichenfolgen, strukturierte Codes,
   E-Mail-Domänen, URL-Pfade und andere Zeichenfolgenmuster in VARCHAR-Feldern,
@@ -25,7 +25,7 @@ summary: >-
       </svg>
     </button></h1><p>In agentenbasierten Suchanwendungen ergänzen sich Vektorsuche und Musterabgleich im Grep-Stil häufig gegenseitig. Die Vektorsuche liefert semantisch relevante Entitäten, während der Musterabgleich diese Ergebnisse anhand exakter Zeichenfolgenstrukturen wie Fehlercodes, Protokollpräfixe, E-Mail-Domänen, URL-Pfade oder Identifikatoren eingrenzt.</p>
 <p>In Milvus können Sie diese Musterbeschränkungen in skalaren Filtern ausdrücken: mit „ <code translate="no">LIKE</code> “ für einfache Platzhalterabgleiche und mit „ <code translate="no">=~</code> “ oder „ <code translate="no">!~</code> “ für <a href="https://github.com/google/re2/wiki/syntax">RE2-reguläre</a> Ausdrücke. Sie können diese Filter mit „ <code translate="no">query</code> “, „ <code translate="no">search</code> “ oder der hybriden Suche kombinieren.</p>
-<p>Ausdrücke für den Musterabgleich werden im Parameter „ <code translate="no">filter</code> “ angegeben. Die folgende Abfrage findet beispielsweise Protokollmeldungen, die einen Fehlercode wie „ <code translate="no">E1001</code> “ enthalten:</p>
+<p>Ausdrücke für den Musterabgleich werden im Parameter „ <code translate="no">filter</code> “ angegeben. Die folgende Abfrage findet beispielsweise Protokollmeldungen, die einen Fehlercode wie <code translate="no">E1001</code> enthalten:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -36,7 +36,7 @@ res = client.query(
     output_fields=[<span class="hljs-string">&quot;message&quot;</span>, <span class="hljs-string">&quot;severity&quot;</span>],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Die Beispiele auf dieser Seite konzentrieren sich auf den Ausdruck, der dem Parameter „ <code translate="no">filter</code> “ zugewiesen ist. Sie können dieselbe Filterausdruckssyntax in Milvus-Operationen verwenden, die einen skalaren Filter akzeptieren, wie z. B. „ <code translate="no">query</code> “, „ <code translate="no">search</code> “ und die Hybrid-Suche.</p>
+<p>Die Beispiele auf dieser Seite konzentrieren sich auf den Ausdruck, der dem Parameter „ <code translate="no">filter</code> “ zugewiesen ist. Sie können dieselbe Syntax für Filterausdrücke in Milvus-Operationen verwenden, die einen skalaren Filter akzeptieren, wie z. B. „ <code translate="no">query</code> “, „ <code translate="no">search</code> “ und die Hybrid-Suche.</p>
 <h2 id="Supported-field-types" class="common-anchor-header">Unterstützte Feldtypen<button data-href="#Supported-field-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -89,7 +89,7 @@ res = client.query(
 <tr><td>Exakte Zeichenfolgenübereinstimmung</td><td><code translate="no">==</code></td><td><code translate="no">status == &quot;active&quot;</code></td><td>Exakte Übereinstimmung der Zeichenkette „ <code translate="no">active</code> “.</td></tr>
 <tr><td>Einfache Präfixübereinstimmung</td><td><code translate="no">LIKE</code></td><td><code translate="no">name LIKE &quot;Prod%&quot;</code></td><td>Findet Zeichenfolgen, die mit „ <code translate="no">Prod</code> “ beginnen.</td></tr>
 <tr><td>Einfache Suffixübereinstimmung</td><td><code translate="no">LIKE</code></td><td><code translate="no">filename LIKE &quot;%.json&quot;</code></td><td>Findet Zeichenfolgen, die mit „ <code translate="no">.json</code> “ enden.</td></tr>
-<tr><td>Einfacher „Enthält“-Abgleich</td><td><code translate="no">LIKE</code></td><td><code translate="no">description LIKE &quot;%vector database%&quot;</code></td><td>Erkennt Werte, die an beliebiger Stelle im String „ <code translate="no">vector database</code> “ enthalten.</td></tr>
+<tr><td>Einfache „Enthält“-Übereinstimmung</td><td><code translate="no">LIKE</code></td><td><code translate="no">description LIKE &quot;%vector database%&quot;</code></td><td>Erkennt Werte, die an beliebiger Stelle im String „ <code translate="no">vector database</code> “ enthalten.</td></tr>
 <tr><td>Suche nach einem strukturierten Code oder einem Muster mit fester Länge</td><td><code translate="no">=~</code></td><td><code translate="no">code =~ &quot;E[0-9]{4}&quot;</code></td><td>Erkennt Zeichenfolgen, die (unter Berücksichtigung der Groß-/Kleinschreibung) „ <code translate="no">E</code> “ gefolgt von vier Ziffern enthalten, z. B. „ <code translate="no">E1001</code> “.</td></tr>
 <tr><td>Musterabgleich ohne Berücksichtigung der Groß-/Kleinschreibung</td><td><code translate="no">=~</code> mit <code translate="no">(?i)</code></td><td><code translate="no">message =~ &quot;(?i)error&quot;</code></td><td>Erkennt „ <code translate="no">error</code> “, „ <code translate="no">ERROR</code> “ oder andere Varianten mit Groß- und Kleinschreibung.</td></tr>
 <tr><td>Werte ausschließen, die einem Regex-Muster entsprechen</td><td><code translate="no">!~</code></td><td><code translate="no">message !~ &quot;^DEBUG&quot;</code></td><td>Schließt Zeichenfolgen aus, die mit „ <code translate="no">DEBUG</code> “ beginnen.</td></tr>
@@ -164,7 +164,7 @@ res = client.query(
         ></path>
       </svg>
     </button></h3><p>Verwenden Sie „ <code translate="no">LIKE</code> “ für Präfix-, Suffix-, „enthält“- und Einzelzeichen-Übereinstimmungen an einer festen Position. „ <code translate="no">LIKE</code> “ unterstützt keine Zeichenklassen wie „ <code translate="no">[0-9]</code> “, keine Alternativen wie „ <code translate="no">error|failed</code> “, keine Wiederholungsanzahlen wie „ <code translate="no">{4}</code> “, keine Anker wie „ <code translate="no">^</code> “ oder „ <code translate="no">$</code> “ und keine Flags für die Groß-/Kleinschreibung wie „ <code translate="no">(?i)</code> “. Verwenden Sie für diese Muster reguläre Ausdrücke (Regex).</p>
-<p>Verwenden Sie „ <code translate="no">==</code> “ für die exakte Übereinstimmung des gesamten Strings. Verwenden Sie „ <code translate="no">LIKE</code> “ nur, wenn der Filter eine Wildcard-Übereinstimmung benötigt.</p>
+<p>Verwenden Sie „ <code translate="no">==</code> “ für die exakte Übereinstimmung der gesamten Zeichenfolge. Verwenden Sie „ <code translate="no">LIKE</code> “ nur, wenn der Filter Platzhalterabgleich benötigt.</p>
 <h2 id="Use-regex" class="common-anchor-header">Verwenden Sie reguläre Ausdrücke<button data-href="#Use-regex" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -264,7 +264,7 @@ res = client.query(
 </thead>
 <tbody>
 <tr><td><code translate="no">json_field[&quot;path&quot;] =~ &quot;pattern&quot;</code></td><td>Nein</td><td>Erkennt nur Zeichenfolgenwerte, die dem Regex-Muster entsprechen.</td></tr>
-<tr><td><code translate="no">json_field[&quot;path&quot;] !~ &quot;pattern&quot;</code></td><td>Ja</td><td>Gibt Entitäten zurück, bei denen der Pfad fehlt, null ist, kein String ist oder ein String ist, der nicht dem regulären Ausdruck entspricht.</td></tr>
+<tr><td><code translate="no">json_field[&quot;path&quot;] !~ &quot;pattern&quot;</code></td><td>Ja</td><td>Gibt Entitäten zurück, bei denen der Pfad fehlt, null ist, kein String ist oder ein String ist, der nicht dem Regex-Muster entspricht.</td></tr>
 </tbody>
 </table>
 <h2 id="Accelerate-pattern-matching-with-indexes" class="common-anchor-header">Beschleunigung des Musterabgleichs durch Indizes<button data-href="#Accelerate-pattern-matching-with-indexes" class="anchor-icon" translate="no">

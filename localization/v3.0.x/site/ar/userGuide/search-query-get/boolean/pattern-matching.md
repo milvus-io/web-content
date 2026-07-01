@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>في تطبيقات البحث التفاعلي، غالبًا ما يكمل كل من البحث المتجه ومطابقة الأنماط على غرار grep بعضهما البعض. يسترد البحث المتجه الكيانات ذات الصلة من الناحية الدلالية، بينما تضيق مطابقة الأنماط نطاق تلك النتائج من خلال هياكل سلاسل نصية دقيقة، مثل رموز الأخطاء، أو بادئات السجلات، أو نطاقات البريد الإلكتروني، أو مسارات عناوين URL، أو المعرفات.</p>
+    </button></h1><p>في تطبيقات البحث التفاعلي، غالبًا ما يكمل كل من البحث المتجه ومطابقة الأنماط على غرار grep بعضهما البعض. يسترد البحث المتجه الكيانات ذات الصلة من الناحية الدلالية، بينما تضيق مطابقة الأنماط نطاق تلك النتائج من خلال هياكل سلاسل نصية محددة، مثل رموز الأخطاء، أو بادئات السجلات، أو نطاقات البريد الإلكتروني، أو مسارات عناوين URL، أو المعرفات.</p>
 <p>في Milvus، يمكنك التعبير عن قيود الأنماط هذه في مرشحات قياسية باستخدام <code translate="no">LIKE</code> لمطابقة أحرف البدل البسيطة، و <code translate="no">=~</code> أو <code translate="no">!~</code> للتعبيرات العادية <a href="https://github.com/google/re2/wiki/syntax">RE2</a>. يمكنك دمج هذه المرشحات مع <code translate="no">query</code> أو <code translate="no">search</code> أو البحث الهجين.</p>
 <p>تُكتب تعبيرات مطابقة الأنماط في المعلمة <code translate="no">filter</code>. على سبيل المثال، يطابق الاستعلام التالي رسائل السجل التي تحتوي على رمز خطأ مثل <code translate="no">E1001</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -89,7 +89,7 @@ res = client.query(
 <tr><td>المطابقة البسيطة للبادئة</td><td><code translate="no">LIKE</code></td><td><code translate="no">name LIKE &quot;Prod%&quot;</code></td><td>تطابق السلاسل التي تبدأ بـ <code translate="no">Prod</code>.</td></tr>
 <tr><td>المطابقة البسيطة لللاحقة</td><td><code translate="no">LIKE</code></td><td><code translate="no">filename LIKE &quot;%.json&quot;</code></td><td>تطابق السلاسل التي تنتهي بـ <code translate="no">.json</code>.</td></tr>
 <tr><td>مطابقة بسيطة لـ "يحتوي على"</td><td><code translate="no">LIKE</code></td><td><code translate="no">description LIKE &quot;%vector database%&quot;</code></td><td>تطابق القيم التي تحتوي على <code translate="no">vector database</code> في أي مكان في السلسلة.</td></tr>
-<tr><td>مطابقة رمز منظم أو نمط ذي طول ثابت</td><td><code translate="no">=~</code></td><td><code translate="no">code =~ &quot;E[0-9]{4}&quot;</code></td><td>تطابق السلاسل التي تحتوي، مع مراعاة الأحرف الكبيرة والصغيرة، على <code translate="no">E</code> متبوعًا بأربعة أرقام، مثل <code translate="no">E1001</code>.</td></tr>
+<tr><td>مطابقة رمز منظم أو نمط ذي طول ثابت</td><td><code translate="no">=~</code></td><td><code translate="no">code =~ &quot;E[0-9]{4}&quot;</code></td><td>تطابق السلاسل التي تحتوي، مع مراعاة الأحرف الكبيرة والصغيرة، على <code translate="no">E</code> متبوعة بأربعة أرقام، مثل <code translate="no">E1001</code>.</td></tr>
 <tr><td>مطابقة الأنماط دون التمييز بين الأحرف الكبيرة والصغيرة</td><td><code translate="no">=~</code> مع <code translate="no">(?i)</code></td><td><code translate="no">message =~ &quot;(?i)error&quot;</code></td><td>تطابق <code translate="no">error</code> أو <code translate="no">ERROR</code> أو أي أشكال أخرى بأحرف كبيرة أو صغيرة.</td></tr>
 <tr><td>استبعاد القيم التي تتطابق مع نمط تعبير عادي</td><td><code translate="no">!~</code></td><td><code translate="no">message !~ &quot;^DEBUG&quot;</code></td><td>يستبعد السلاسل التي تبدأ بـ <code translate="no">DEBUG</code>.</td></tr>
 </tbody>
@@ -179,7 +179,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>استخدم مرشحات التعبيرات النمطية (regex) عندما يتطلب النمط ميزات التعبيرات النمطية مثل فئات الأحرف، والتكرار، والتناوب، والمراسي، أو المطابقة غير الحساسة لحالة الأحرف. يطبق Milvus تعبيرًا نمطيًا <a href="https://github.com/google/re2/wiki/syntax">من نوع RE2</a> على قيمة السلسلة.</p>
+    </button></h2><p>استخدم مرشحات التعبيرات النمطية (regex) عندما يتطلب النمط ميزات التعبيرات النمطية مثل فئات الأحرف، والتكرار، والتناوب، والمراسي، أو المطابقة غير الحساسة لحالة الأحرف. يطبق Milvus تعبيرًا نمطيًا <a href="https://github.com/google/re2/wiki/syntax">RE2</a> على قيمة السلسلة.</p>
 <p>يجب أن يكون الجانب الأيمن من <code translate="no">=~</code> أو <code translate="no">!~</code> عبارة عن سلسلة حرفية.</p>
 <table>
 <thead>

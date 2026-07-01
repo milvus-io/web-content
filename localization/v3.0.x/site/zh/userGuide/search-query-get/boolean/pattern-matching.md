@@ -279,7 +279,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 支持多种字符串字段索引类型，可与<code translate="no">LIKE</code> 以及针对<code translate="no">VARCHAR</code> 字段或 JSON 字符串路径的正则表达式过滤器配合使用，例如<code translate="no">NGRAM</code> 、<code translate="no">STL_SORT</code> 、<code translate="no">INVERTED</code> 和<code translate="no">BITMAP</code> 。模式匹配可在无索引的情况下进行，但使用索引可提升大型数据集的性能。</p>
+    </button></h2><p>Milvus 支持多种字符串字段索引类型，可与<code translate="no">LIKE</code> 以及针对<code translate="no">VARCHAR</code> 字段或 JSON 字符串路径的正则表达式过滤器配合使用，例如<code translate="no">NGRAM</code> 、<code translate="no">STL_SORT</code> 、<code translate="no">INVERTED</code> 和<code translate="no">BITMAP</code> 。模式匹配可在无索引的情况下运行，但使用索引可提升大型数据集的性能。</p>
 <p>索引的有效性取决于模式表达式、Milvus 能否提取固定的字面量子字符串，以及目标字段的基数和分布情况。前缀式模式（如<code translate="no">name LIKE &quot;Prod%&quot;</code> ）可能受益于与中缀或后缀模式（如<code translate="no">description LIKE &quot;%vector%&quot;</code> 或<code translate="no">filename LIKE &quot;%.json&quot;</code> ）不同的索引策略。</p>
 <p>请将下表作为参考起点，然后根据您自己的工作负载进行基准测试：</p>
 <table>
@@ -289,6 +289,6 @@ res = client.query(
 <tbody>
 <tr><td>包含固定的字面量子字符串，例如<code translate="no">message =~ &quot;error.*timeout&quot;</code> 或<code translate="no">message LIKE &quot;%database%&quot;</code></td><td><code translate="no">NGRAM</code></td><td>当 Milvus 能从模式中提取有意义的字面量子字符串时，此项会有所帮助。详情请参阅<a href="/docs/zh/ngram.md">NGRAM</a>。</td></tr>
 <tr><td>前缀、精确或等值类型的字符串过滤器，特别适用于基数较低至中等的字段</td><td><code translate="no">STL_SORT</code>、<code translate="no">INVERTED</code> 或<code translate="no">BITMAP</code></td><td>当字段包含重复值或过滤器接近精确匹配时，此方法可能更有效。详情请参阅<a href="/docs/zh/stl-sort.md">STL_SORT</a>、<a href="/docs/zh/inverted.md">INVERTED</a> 和<a href="/docs/zh/bitmap.md">BITMAP</a>。</td></tr>
-<tr><td>不包含固定字符的正则表达式模式，或以字符类、短令牌或通配符为主的模式</td><td>在依赖索引加速之前请先进行基准测试</td><td>这些模式可能提供的索引选择性有限，并可能退化为更广泛的扫描。</td></tr>
+<tr><td>不包含固定字符的正则表达式模式，或以字符类、短令牌或通配符为主的模式</td><td>在依赖索引加速之前请先进行基准测试</td><td>这些模式可能提供有限的索引选择性，并可能退化为更广泛的扫描。</td></tr>
 </tbody>
 </table>

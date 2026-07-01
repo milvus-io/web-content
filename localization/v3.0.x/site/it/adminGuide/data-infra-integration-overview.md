@@ -24,6 +24,6 @@ summary: >-
 <ul>
 <li><strong><a href="/docs/it/etcd.md">Metadati</a></strong> — Milvus memorizza i metadati (schemi delle raccolte, stato dei nodi, checkpoint di consumo) in etcd.</li>
 <li><strong><a href="/docs/it/object-storage.md">Archiviazione a oggetti</a></strong> — Milvus memorizza i file di indice e i log binari in MinIO, AWS S3 o in altri sistemi di archiviazione a oggetti cloud compatibili con S3.</li>
-<li><strong><a href="/docs/it/mqtype-overview.md">Coda dei messaggi</a></strong> — Milvus utilizza un log di scrittura anticipata (WAL): Woodpecker (impostazione predefinita), Pulsar, Kafka o RocksMQ.</li>
+<li><strong><a href="/docs/it/mqtype-overview.md">Coda di messaggi</a></strong> — Milvus utilizza un log di scrittura anticipata (WAL): Woodpecker (impostazione predefinita), Pulsar, Kafka o RocksMQ.</li>
 </ul>
 <p>Per impostazione predefinita, una nuova distribuzione di Milvus 3.x utilizza <strong>Woodpecker</strong> come coda di messaggi, <strong>etcd</strong> per i metadati e <strong>MinIO</strong> per l’archiviazione a oggetti — non è richiesta alcuna infrastruttura di messaggistica aggiuntiva.</p>

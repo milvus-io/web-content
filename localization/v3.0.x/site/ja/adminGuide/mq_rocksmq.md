@@ -36,7 +36,7 @@ title: RocksMQ
     </button></h2><ul>
 <li><strong>スタンドアロンのみ</strong>— Milvus Distributed（クラスタ）ではRocksMQはサポート<strong>されていません</strong>。<a href="/docs/ja/mqtype-overview.md#Supported-message-queues">メッセージキューのサポートマトリックス</a>を参照してください。</li>
 <li>RocksMQはMilvusに同梱されているため、別途インストールする必要はありません。</li>
-<li>以前のMilvusバージョンでは、これがスタンドアロンのデフォルトメッセージキューでしたが、Milvus 3.xでは組み込み型のWoodpeckerに置き換えられました。</li>
+<li>以前のMilvusバージョンでは、これがスタンドアロン環境のデフォルトのメッセージキューでしたが、Milvus 3.xでは組み込み型のWoodpeckerに置き換えられました。</li>
 </ul>
 <h2 id="Deploy-Milvus-Standalone-with-RocksMQ-using-Docker" class="common-anchor-header">Docker を使用して RocksMQ と共に Milvus Standalone をデプロイする<button data-href="#Deploy-Milvus-Standalone-with-RocksMQ-using-Docker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -150,8 +150,8 @@ bash standalone_embed.sh delete
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>2.5.x から 2.6.x へのアップグレード:</strong> <strong>メッセージキューの制限事項</strong>: Milvus v3.0-beta へアップグレードする際は、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステム間で切り替えることはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。
-2.6.x ではスタンドアロンのデフォルトが Woodpecker に変更されるため、RocksMQ を継続して使用したい場合は、<strong>アップグレード前に</strong> <code translate="no">user.yaml</code> 内で<code translate="no">mq.type: rocksmq</code> を固定してください。</li>
+<li><strong>2.5.x から 2.6.x へのアップグレード:</strong> <strong>メッセージキューの制限事項</strong>: Milvus v3.0-beta へアップグレードする際は、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステムへ切り替えることはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。
+2.6.x ではスタンドアロンのデフォルトが Woodpecker に変更されるため、RocksMQ を継続して使用したい場合は、<strong>アップグレード前に</strong> <code translate="no">user.yaml</code> 内の<code translate="no">mq.type: rocksmq</code> を固定してください。</li>
 <li>実行中のインスタンスのメッセージキューを変更するには、「RocksMQ から Woodpecker への切り替え」を参照してください。</li>
 </ul>
 <h2 id="Whats-next" class="common-anchor-header">今後の予定<button data-href="#Whats-next" class="anchor-icon" translate="no">

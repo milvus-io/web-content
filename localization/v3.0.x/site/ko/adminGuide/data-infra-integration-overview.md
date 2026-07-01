@@ -22,6 +22,6 @@ summary: 'Milvus가 연동하는 타사 인프라(메타데이터, 오브젝트 
 <ul>
 <li><strong><a href="/docs/ko/etcd.md">메타데이터</a></strong> — Milvus는 메타데이터(컬렉션 스키마, 노드 상태, 소비 체크포인트)를 etcd에 저장합니다.</li>
 <li><strong><a href="/docs/ko/object-storage.md">오브젝트 스토리지</a></strong> — Milvus는 인덱스 파일과 바이너리 로그를 MinIO, AWS S3 또는 기타 S3 호환/클라우드 오브젝트 스토리지에 저장합니다.</li>
-<li><strong><a href="/docs/ko/mqtype-overview.md">메시지 큐</a></strong> — Milvus는 WAL(Write-Ahead Log)을 사용합니다: Woodpecker(기본값), Pulsar, Kafka 또는 RocksMQ.</li>
+<li><strong><a href="/docs/ko/mqtype-overview.md">메시지 큐</a></strong> — Milvus는 WAL(Write-Ahead Log)을 사용하며, Woodpecker(기본값), Pulsar, Kafka 또는 RocksMQ를 지원합니다.</li>
 </ul>
 <p>기본적으로 새로 배포된 Milvus 3.x는 메시지 큐로 <strong>Woodpecker</strong>, 메타데이터 저장소로 <strong>etcd</strong>, 오브젝트 스토리지로 <strong>MinIO를</strong> 사용하여 실행되며, 별도의 메시징 인프라가 필요하지 않습니다.</p>

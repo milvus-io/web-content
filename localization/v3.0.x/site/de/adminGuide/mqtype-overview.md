@@ -3,8 +3,8 @@ id: mqtype-overview.md
 title: Übersicht über die Nachrichtenwarteschlange
 summary: >-
   Übersicht über die von Milvus unterstützten Optionen für die
-  Nachrichtenwarteschlange (mqType) und darüber, welche Option für eigenständige
-  bzw. verteilte Bereitstellungen verwendet werden sollte.
+  Nachrichtenwarteschlange (mqType) und darüber, welche Option bei
+  eigenständigen bzw. verteilten Bereitstellungen zu verwenden ist.
 ---
 <h1 id="Message-Queue-Overview" class="common-anchor-header">Übersicht über die Nachrichtenwarteschlange<button data-href="#Message-Queue-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -73,5 +73,5 @@ summary: >-
     </button></h2><ul>
 <li><strong>Neue Bereitstellungen (Milvus 3.x):</strong> Verwenden Sie <strong>Woodpecker</strong> (Standard). Im Standalone-Modus wird es eingebettet ausgeführt; für verteilte (Cluster-)Umgebungen ist der empfohlene Standard ein dedizierter, mit Helm bereitgestellter <a href="/docs/de/woodpecker.md#Deployment-modes">Dienst</a>, wobei auch die eingebettete Ausführung unterstützt wird.</li>
 <li><strong>Bestehende Pulsar- oder Kafka-Nutzer:</strong> Pulsar und Kafka werden weiterhin vollständig unterstützt. Behalten Sie diese bei oder wechseln Sie zu Woodpecker.</li>
-<li><strong>RocksMQ:</strong> nur im Standalone-Modus verfügbar und in Milvus 3.x durch den eingebetteten Woodpecker abgelöst.</li>
+<li><strong>RocksMQ:</strong> nur im Standalone-Modus und in Milvus 3.x durch den eingebetteten Woodpecker abgelöst.</li>
 </ul>

@@ -29,7 +29,7 @@ beta: Milvus 3.0.x
 <span class="highlighted-wrapper-line">    datatype=DataType.TEXT,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Une fois le champ défini, chaque entité peut inclure une valeur de type chaîne dans ce champ. Vous insérez les valeurs de type « <code translate="no">TEXT</code> » comme pour les autres champs scalaires et vous les récupérez dans les résultats de requêtes ou de recherches en listant le champ dans « <code translate="no">output_fields</code> ».</p>
+<p>Une fois le champ défini, chaque entité peut inclure une valeur de type chaîne dans ce champ. Vous insérez les valeurs de type « <code translate="no">TEXT</code> » comme pour les autres champs scalaires et vous les récupérez dans les résultats de requête ou de recherche en répertoriant le champ dans <code translate="no">output_fields</code>.</p>
 <div class="alert note">
 <p><code translate="no">TEXT</code> Les champs prennent en charge les valeurs nulles. Pour activer cette fonctionnalité, définissez <code translate="no">nullable</code> sur <code translate="no">True</code>. Pour plus de détails, reportez-vous à la section « <a href="/docs/fr/nullable-and-default.md">Champ pouvant prendre la valeur nulle</a> ».</p>
 </div>
@@ -71,7 +71,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">TEXT</code> et « <code translate="no">VARCHAR</code> » stockent tous deux des valeurs de chaîne de caractères, mais répondent à des besoins applicatifs différents. Utilisez « <code translate="no">VARCHAR</code> » pour des métadonnées courtes et bien délimitées qui identifient, classent ou filtrent des entités. Utilisez « <code translate="no">TEXT</code> » pour du contenu source plus long qui fournit à un LLM ou à un agent suffisamment de contexte pour lire, citer, résumer ou construire une invite.</p>
+    </button></h2><p><code translate="no">TEXT</code> et « <code translate="no">VARCHAR</code> » stockent tous deux des valeurs de chaîne de caractères, mais répondent à des besoins applicatifs différents. Utilisez « <code translate="no">VARCHAR</code> » pour des métadonnées courtes et délimitées qui identifient, classent ou filtrent des entités. Utilisez « <code translate="no">TEXT</code> » pour du contenu source plus long qui fournit à un LLM ou à un agent suffisamment de contexte pour lire, citer, résumer ou construire une invite.</p>
 <table>
 <thead>
 <tr><th>Aspect</th><th><code translate="no">VARCHAR</code></th><th><code translate="no">TEXT</code></th></tr>
@@ -79,7 +79,7 @@ beta: Milvus 3.0.x
 <tbody>
 <tr><td>Idéal pour</td><td>Métadonnées courtes utilisées pour identifier, catégoriser ou filtrer des entités, telles que <code translate="no">title</code>, <code translate="no">tag</code>, <code translate="no">category</code> ou <code translate="no">external_id</code>.</td><td>Contenu source plus long utilisé par les LLM ou les workflows d’agents, tels que <code translate="no">content</code>, <code translate="no">passage</code>, <code translate="no">article_body</code> ou <code translate="no">log_message</code>.</td></tr>
 <tr><td>Paramètre de longueur</td><td>Nécessite <code translate="no">max_length</code>, qui définit le nombre maximal d’octets que le champ peut stocker. La valeur maximale est de <code translate="no">65,535</code> octets. Si une valeur est susceptible de dépasser cette limite, utilisez <code translate="no">TEXT</code>.</td><td>Ne nécessite pas de paramètre « <code translate="no">max_length</code> » ; le schéma n’a donc pas besoin d’une limite d’octets fixe pour la valeur textuelle.</td></tr>
-<tr><td>Comportement de stockage</td><td>Chaque valeur est stockée dans la limite de taille configurée pour le champ ( <code translate="no">max_length</code>).</td><td>Utilise la sélection automatique du stockage pour les valeurs de texte plus volumineuses. Pour plus de détails, consultez la section « <a href="#how-milvus-stores-large-text-values">Comment Milvus stocke les valeurs TEXT volumineuses</a> ».</td></tr>
+<tr><td>Comportement de stockage</td><td>Chaque valeur est stockée dans la limite de stockage configurée pour le champ ( <code translate="no">max_length</code>).</td><td>Utilise la sélection automatique du stockage pour les valeurs de texte plus volumineuses. Pour plus de détails, consultez la section « <a href="#how-milvus-stores-large-text-values">Comment Milvus stocke les valeurs TEXT volumineuses</a> ».</td></tr>
 <tr><td>Prise en charge en tant que champ principal</td><td>Peut être utilisé comme champ principal.</td><td>Ne peut pas être utilisé comme champ principal.</td></tr>
 <tr><td>Filtrage</td><td>À utiliser pour les métadonnées sous forme de chaînes courtes devant apparaître dans des expressions de filtrage, telles que « <code translate="no">category == &quot;news&quot;</code> » ou « <code translate="no">tag in [&quot;ai&quot;, &quot;database&quot;]</code> ».</td><td>N'est pas destiné au filtrage régulier des métadonnées.</td></tr>
 </tbody>
@@ -266,9 +266,9 @@ client.load_collection(collection_name=COLLECTION_NAME)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Chaque résultat de recherche inclut le score BM25 et la valeur d’ <code translate="no">TEXT</code> originale.</p>
+    </button></h2><p>Chaque résultat de recherche comprend le score BM25 et la valeur d’ <code translate="no">TEXT</code> e d’origine.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> results[<span class="hljs-number">0</span>]:
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;id: <span class="hljs-subst">{hit[<span class="hljs-string">&#x27;id&#x27;</span>]}</span>, score: <span class="hljs-subst">{hit[<span class="hljs-string">&#x27;distance&#x27;</span>]}</span>&quot;</span>)
     <span class="hljs-built_in">print</span>(hit[<span class="hljs-string">&quot;entity&quot;</span>][<span class="hljs-string">&quot;content&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>Pour plus d’informations sur les fonctions BM25, les index de vecteurs creux et la syntaxe de requête pour la recherche en texte intégral, consultez la section <a href="/docs/fr/full-text-search.md">Recherche en texte intégral</a>.</p>
+<p>Pour plus d’informations sur les fonctions BM25, les index de vecteurs creux et la syntaxe de requête pour la recherche en texte intégral, reportez-vous à <a href="/docs/fr/full-text-search.md">la section Recherche en texte intégral</a>.</p>

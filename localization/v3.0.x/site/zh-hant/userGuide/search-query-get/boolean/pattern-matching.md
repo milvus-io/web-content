@@ -2,7 +2,7 @@
 id: pattern-matching.md
 title: 模式比對
 summary: >-
-  Milvus 支援使用 LIKE 萬用字元模式和 RE2 正規表達式進行字串模式比對。可運用模式篩選器，在 VARCHAR 欄位、JSON 字串路徑或
+  Milvus 支援使用 LIKE 通配符模式和 RE2 正規表達式進行字串模式比對。可透過模式篩選器，在 VARCHAR 欄位、JSON 字串路徑或
   ARRAY 元素中，比對前綴、後綴、子字串、結構化代碼、電子郵件網域、URL 路徑及其他字串模式。
 ---
 <h1 id="Pattern-Matching" class="common-anchor-header">模式比對<button data-href="#Pattern-Matching" class="anchor-icon" translate="no">
@@ -222,10 +222,10 @@ res = client.query(
 <p>若要匹配多個單字中的任一個，請使用<code translate="no">|</code> 進行選擇：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ &quot;error|failed|timeout&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>若要字面匹配正規表達式元字元，請在正規表達式模式中對其進行轉義。例如，若要匹配字面上的點（正規表達式中的 `<code translate="no">\.</code> `），請在 Python 篩選器字串中寫作 `<code translate="no">\\.</code> `：</p>
+<p>若要字面匹配正規表達式中的元字元，請在正規表達式模式中對其進行轉義。例如，若要匹配字面上的點（正規表達式中的 `<code translate="no">\.</code> `），請在 Python 篩選器字串中寫作 `<code translate="no">\\.</code> `：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;email =~ &quot;@gmail\\.com$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>注意：Milvus 的正規表達式篩選器遵循 RE2 語法。若正規表達式模式使用了 RE2 不支援的語法，或因其他原因而無效，Milvus 將拒絕該篩選器表達式。有關正規表達式元字元、旗標及匹配行為的詳細資訊，請參閱<a href="https://github.com/google/re2/wiki/syntax">RE2 語法參考</a>。</p>
+<p>注意：Milvus 的正規表達式篩選器遵循 RE2 語法。若正規表達式模式使用了 RE2 不支援的語法，或因其他原因而無效，Milvus 將拒絕該篩選器表達式。有關正規表達式元字元、標誌及匹配行為的詳細資訊，請參閱<a href="https://github.com/google/re2/wiki/syntax">RE2 語法參考</a>。</p>
 <h3 id="Matching-behavior" class="common-anchor-header">匹配行為<button data-href="#Matching-behavior" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -250,7 +250,7 @@ res = client.query(
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;code =~ &quot;^E[0-9]{4}$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>可為空的 VARCHAR 欄位</strong></p>
-<p>正規表達式篩選器不會匹配 null 值。這同時適用於<code translate="no">=~</code> 和<code translate="no">!~</code> 。若要排除某個正規表達式模式但保留 null 值，請明確加入<code translate="no">OR field IS NULL</code> ：</p>
+<p>正規表達式篩選器不會匹配 null 值。這同時適用於<code translate="no">=~</code> 和<code translate="no">!~</code> 。若要排除某個正規表達式模式但保留 null 值，請明確添加<code translate="no">OR field IS NULL</code> ：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot; OR message IS NULL&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>JSON 路徑</strong></p>

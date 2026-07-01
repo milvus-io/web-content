@@ -38,7 +38,7 @@ title: RocksMQ
 <li>RocksMQ 随 Milvus 一起发布，因此无需单独安装。</li>
 <li>它是早期 Milvus 版本中的默认独立模式消息队列，但在 Milvus 3.x 中已被内置的 Woodpecker 取代。</li>
 </ul>
-<h2 id="Deploy-Milvus-Standalone-with-RocksMQ-using-Docker" class="common-anchor-header">使用 Docker 部署带 RocksMQ 的 Milvus Standalone 版本<button data-href="#Deploy-Milvus-Standalone-with-RocksMQ-using-Docker" class="anchor-icon" translate="no">
+<h2 id="Deploy-Milvus-Standalone-with-RocksMQ-using-Docker" class="common-anchor-header">使用 Docker 部署基于 RocksMQ 的 Milvus Standalone<button data-href="#Deploy-Milvus-Standalone-with-RocksMQ-using-Docker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

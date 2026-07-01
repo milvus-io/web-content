@@ -688,10 +688,16 @@
             "children": []
           },
           {
+            "label": "Alter External Collection Schema",
+            "id": "alter-external-collection-schema.md",
+            "order": 18,
+            "children": []
+          },
+          {
             "label": "Best Practices",
             "id": "best-practices",
             "isMenu": true,
-            "order": 18,
+            "order": 19,
             "children": [
               {
                 "label": "Data Model Design for Search",

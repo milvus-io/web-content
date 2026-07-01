@@ -223,7 +223,7 @@ title: 卡夫卡
       </svg>
     </button></h2><ul>
 <li><strong>從 2.5.x 升級至 2.6.x：</strong> <strong>訊息佇列限制</strong>：升級至 Milvus v3.0-beta 時，您必須維持當前的訊息佇列選擇。升級過程中不支援在不同的訊息佇列系統之間切換。未來版本將支援變更訊息佇列系統。
-若您正在運行 Kafka 且希望保留該系統，請勿在升級過程中變更訊息佇列。</li>
+若您正在運行 Kafka 且希望繼續使用，請勿在升級過程中變更訊息佇列。</li>
 <li>僅支援<strong>Kafka 2.x 和 3.x</strong>版本。</li>
 <li>關於 SASL/SSL 連線，請參閱《<a href="/docs/zh-hant/connect_kafka_ssl.md">使用 SASL/SSL 連線至 Kafka</a>》。</li>
 </ul>

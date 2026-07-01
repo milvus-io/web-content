@@ -24,7 +24,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>En las aplicaciones de búsqueda agentiva, la búsqueda vectorial y la coincidencia de patrones al estilo «grep» suelen complementarse entre sí. La búsqueda vectorial recupera entidades que son semánticamente relevantes, mientras que la coincidencia de patrones filtra esos resultados según estructuras de cadenas exactas, como códigos de error, prefijos de registros, dominios de correo electrónico, rutas URL o identificadores.</p>
-<p>En Milvus, puedes expresar estas restricciones de patrones en filtros escalares con « <code translate="no">LIKE</code> » para una coincidencia sencilla con comodines, y « <code translate="no">=~</code> » o « <code translate="no">!~</code> » para expresiones regulares <a href="https://github.com/google/re2/wiki/syntax">RE2</a>. Puedes combinar estos filtros con « <code translate="no">query</code> », « <code translate="no">search</code> » o la búsqueda híbrida.</p>
+<p>En Milvus, puedes expresar estas restricciones de patrones en filtros escalares con « <code translate="no">LIKE</code> » para la coincidencia simple con comodines, y « <code translate="no">=~</code> » o « <code translate="no">!~</code> » para expresiones regulares <a href="https://github.com/google/re2/wiki/syntax">RE2</a>. Puedes combinar estos filtros con « <code translate="no">query</code> », « <code translate="no">search</code> » o la búsqueda híbrida.</p>
 <p>Las expresiones de coincidencia de patrones se escriben en el parámetro <code translate="no">filter</code>. Por ejemplo, la siguiente consulta busca mensajes de registro que contengan un código de error como <code translate="no">E1001</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -228,7 +228,7 @@ res = client.query(
 <p>Al buscar metacaracteres de expresiones regulares de forma literal, escápalos en el patrón de expresión regular. Por ejemplo, para buscar un punto literal (<code translate="no">\.</code> en una expresión regular), escribe <code translate="no">\\.</code> en una cadena de filtro de Python:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;email =~ &quot;@gmail\\.com$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Nota: Los filtros de expresiones regulares de Milvus siguen la sintaxis RE2. Si un patrón de expresión regular utiliza una sintaxis que RE2 no admite o que no es válida por cualquier otro motivo, Milvus rechaza la expresión del filtro. Para obtener más detalles sobre los metacaracteres de expresiones regulares, los indicadores y el comportamiento de coincidencia, consulta la referencia <a href="https://github.com/google/re2/wiki/syntax">de sintaxis RE2</a>.</p>
+<p>Nota: Los filtros de expresiones regulares de Milvus siguen la sintaxis RE2. Si un patrón de expresión regular utiliza una sintaxis que RE2 no admite o que es inválida por cualquier otro motivo, Milvus rechaza la expresión del filtro. Para obtener más detalles sobre los metacaracteres de expresiones regulares, los indicadores y el comportamiento de coincidencia, consulta la referencia <a href="https://github.com/google/re2/wiki/syntax">de sintaxis RE2</a>.</p>
 <h3 id="Matching-behavior" class="common-anchor-header">Comportamiento de coincidencia<button data-href="#Matching-behavior" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

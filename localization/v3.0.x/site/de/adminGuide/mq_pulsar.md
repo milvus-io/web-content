@@ -137,7 +137,7 @@ title: Pulsar
 <pre><code translate="no" class="language-bash">kubectl get pvc | grep my-release-pulsarv3
 kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Deploy-a-Milvus-cluster-with-Pulsar-using-Milvus-Operator" class="common-anchor-header">Stellen Sie einen Milvus-Cluster mit Pulsar mithilfe des Milvus-Operators bereit<button data-href="#Deploy-a-Milvus-cluster-with-Pulsar-using-Milvus-Operator" class="anchor-icon" translate="no">
+<h2 id="Deploy-a-Milvus-cluster-with-Pulsar-using-Milvus-Operator" class="common-anchor-header">Stellen Sie einen Milvus-Cluster mit Pulsar mithilfe des Milvus Operators bereit<button data-href="#Deploy-a-Milvus-cluster-with-Pulsar-using-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -1548,15 +1548,16 @@
     "v3.0.x/site/en/userGuide/tools/milvus-cdc/cdc_switchover.md": "2026-05-15T10:16:34.460Z",
     "v3.0.x/site/en/userGuide/tools/milvus-cdc/milvus_cdc_overview.md": "2026-05-15T10:16:49.590Z",
     "v3.0.x/site/en/userGuide/tools/milvus-cdc/set_up_cdc_replication.md": "2026-05-15T10:17:07.716Z",
-    "v3.0.x/site/en/userGuide/search-query-get/boolean/pattern-matching.md": "2026-07-01T03:47:31.589Z",
-    "v3.0.x/site/en/userGuide/schema/text.md": "2026-07-01T03:47:08.640Z",
-    "v3.0.x/site/en/adminGuide/etcd.md": "2026-07-01T03:45:21.458Z",
-    "v3.0.x/site/en/adminGuide/object-storage.md": "2026-07-01T03:46:23.953Z",
-    "v3.0.x/site/en/adminGuide/woodpecker.md": "2026-07-01T03:46:49.527Z",
-    "v3.0.x/site/en/adminGuide/data-infra-integration-overview.md": "2026-07-01T03:45:13.291Z",
-    "v3.0.x/site/en/adminGuide/mq_kafka.md": "2026-07-01T03:45:34.901Z",
-    "v3.0.x/site/en/adminGuide/mq_pulsar.md": "2026-07-01T03:45:48.068Z",
-    "v3.0.x/site/en/adminGuide/mq_rocksmq.md": "2026-07-01T03:46:00.676Z",
-    "v3.0.x/site/en/adminGuide/mqtype-overview.md": "2026-07-01T03:46:14.470Z"
+    "v3.0.x/site/en/userGuide/search-query-get/boolean/pattern-matching.md": "2026-07-01T04:08:34.986Z",
+    "v3.0.x/site/en/userGuide/schema/text.md": "2026-07-01T04:08:10.918Z",
+    "v3.0.x/site/en/adminGuide/etcd.md": "2026-07-01T04:06:00.010Z",
+    "v3.0.x/site/en/adminGuide/object-storage.md": "2026-07-01T04:07:08.245Z",
+    "v3.0.x/site/en/adminGuide/woodpecker.md": "2026-07-01T04:07:36.457Z",
+    "v3.0.x/site/en/adminGuide/data-infra-integration-overview.md": "2026-07-01T04:05:49.761Z",
+    "v3.0.x/site/en/adminGuide/mq_kafka.md": "2026-07-01T04:06:14.013Z",
+    "v3.0.x/site/en/adminGuide/mq_pulsar.md": "2026-07-01T04:06:28.606Z",
+    "v3.0.x/site/en/adminGuide/mq_rocksmq.md": "2026-07-01T04:06:41.932Z",
+    "v3.0.x/site/en/adminGuide/mqtype-overview.md": "2026-07-01T04:06:55.771Z",
+    "v3.0.x/site/en/userGuide/schema/alter-external-collection-schema.md": "2026-07-01T04:07:50.632Z"
   }
 }

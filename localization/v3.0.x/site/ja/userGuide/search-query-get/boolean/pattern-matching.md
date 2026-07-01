@@ -78,7 +78,7 @@ res = client.query(
         ></path>
       </svg>
     </button></h2><p>必要なパターンを表現する最も単純な演算子を選択してください。</p>
-<p>文字列の完全一致が必要な場合は、パターンマッチングの代わりに `<code translate="no">==</code> ` を使用することをお勧めします。`<code translate="no">LIKE</code> ` または `regex` は、フィルタがパターンに一致する必要がある場合にのみ使用してください。</p>
+<p>文字列の完全一致が必要な場合は、パターンマッチングの代わりに `<code translate="no">==</code> ` を使用することをお勧めします。`<code translate="no">LIKE</code> ` または正規表現は、フィルタがパターンに一致する必要がある場合にのみ使用してください。</p>
 <table>
 <thead>
 <tr><th>要件</th><th>推奨される演算子</th><th>例</th><th>説明</th></tr>
@@ -280,7 +280,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus は、文字列フィールドに対していくつかのインデックスタイプをサポートしており、これらは<code translate="no">VARCHAR</code> フィールドや JSON 文字列パスに対する<code translate="no">LIKE</code> および正規表現フィルターと組み合わせて使用できます。例としては、<code translate="no">NGRAM</code> 、<code translate="no">STL_SORT</code> 、<code translate="no">INVERTED</code> 、<code translate="no">BITMAP</code> などがあります。パターンマッチングはインデックスなしでも機能しますが、インデックスを使用することで、大規模なデータセットでのパフォーマンスを向上させることができます。</p>
+    </button></h2><p>Milvus は、文字列フィールドに対して、<code translate="no">LIKE</code> や、<code translate="no">VARCHAR</code> フィールドまたは JSON 文字列パスに対する正規表現フィルターと組み合わせて使用できる、いくつかのインデックスタイプをサポートしています。例としては、<code translate="no">NGRAM</code> 、<code translate="no">STL_SORT</code> 、<code translate="no">INVERTED</code> 、<code translate="no">BITMAP</code> などがあります。パターンマッチングはインデックスなしでも機能しますが、インデックスを使用することで、大規模なデータセットでのパフォーマンスを向上させることができます。</p>
 <p>インデックスの有効性は、パターン式、Milvusが固定のリテラル部分文字列を抽出できるかどうか、および対象フィールドのカーディナリティと分布によって異なります。<code translate="no">name LIKE &quot;Prod%&quot;</code> のようなプレフィックス形式のパターンは、<code translate="no">description LIKE &quot;%vector%&quot;</code> や<code translate="no">filename LIKE &quot;%.json&quot;</code> のようなインフィックスやサフィックス形式のパターンとは異なるインデックス戦略を採用することで、パフォーマンス向上が期待できる場合があります。</p>
 <p>以下の表を参考として、その後、実際のワークロードでベンチマークテストを行ってください：</p>
 <table>
