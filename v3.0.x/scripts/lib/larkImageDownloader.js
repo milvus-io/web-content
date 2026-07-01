@@ -6,6 +6,7 @@ const Bottleneck = require('bottleneck')
 const process = require('node:process')
 const crypto = require('node:crypto')
 const { S3Client, PutObjectCommand, HeadObjectCommand, PutObjectAclCommand } = require('@aws-sdk/client-s3');
+const { NodeHttpHandler } = require('@smithy/node-http-handler');
 
 require('dotenv/config')
 
@@ -19,10 +20,17 @@ class larkImageDownloader {
             maxConcurrent: 1,
             minTime: 52,
         });
+        console.log(`[s3] init — region=${process.env.AWS_REGION ?? '(unset)'} bucket=${process.env.AWS_BUCKET ?? '(unset)'} key_id=${process.env.AWS_ACCESS_KEY_ID ? 'set' : '(unset)'}`)
         this.s3 = new S3Client({
-            accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-            secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+            credentials: {
+                accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+                secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+            },
             region: process.env.AWS_REGION,
+            requestHandler: new NodeHttpHandler({
+                connectionTimeout: 15000,
+                socketTimeout: 60000,
+            }),
         })
     }    
 
@@ -43,88 +51,74 @@ class larkImageDownloader {
         }
 
         try {
+            console.log(`[s3] checking if ${key} exists`)
             const headObjectCommand = new HeadObjectCommand(get_params);
-            console.log(`S3 HEAD: ${key}`)
             const response = await this.s3.send(headObjectCommand);
+            console.log(`[s3] ${key} found in bucket, checking hash`)
             if (response.Metadata?.hash === crypto.createHash('md5').update(buffer).digest('hex')) {
-                console.log(`Image already exists in S3: ${key}`);
+                console.log(`[s3] ${key} unchanged, skipping upload`);
                 const aclCommand = new PutObjectAclCommand({ Bucket: process.env.AWS_BUCKET, Key: key, ACL: 'public-read' });
                 await this.s3.send(aclCommand);
-                console.log(`Image ${key} ACL ensured public-read`);
+                console.log(`[s3] ${key} ACL ensured public-read`);
                 return
             }
-
+            console.log(`[s3] ${key} hash changed, re-uploading`)
             const putObjectCommand = new PutObjectCommand(put_params);
             await this.s3.send(putObjectCommand);
-            console.log(`Successfully uploaded image to ${key}`);
+            console.log(`[s3] uploaded ${key}`);
         } catch (err) {
-            console.log(`S3 error for ${key}: name=${err.name} Code=${err.Code}`)
-            const isMissingObjectError = err.name === 'NoSuchKey'
-                || err.name === 'NotFound'
-                || err.Code === 'NoSuchKey'
-                || err.Code === 'NotFound'
-                || err.$metadata?.httpStatusCode === 404
-            if (isMissingObjectError) {
-                console.log(`S3 PUT (new): ${key}`)
+            if (err.$metadata?.httpStatusCode === 404 || err.name === 'NotFound' || err.name === 'NoSuchKey') {
+                console.log(`[s3] ${key} not found, uploading`)
                 const putObjectCommand = new PutObjectCommand(put_params);
-                try {
-                    await this.s3.send(putObjectCommand);
-                    console.log(`Successfully uploaded image to ${key}`);
-                } catch (putErr) {
-                    console.error(`S3 PUT failed for ${key}: ${putErr.message}`);
-                }
+                await this.s3.send(putObjectCommand);
+                console.log(`[s3] uploaded ${key}`)
             } else {
-                console.error(`Error uploading image ${key}: ${err.message}`);
+                console.error(`[s3] ERROR uploading ${key}:`, err.message ?? err);
+                throw err;
             }
         }
     }
 
-    async __downloadImage(image_token, retries=3) {
-        console.log(`ImageToken: ${image_token}`)
-        const fetcher = new tokenFetcher()
-        await fetcher.fetchToken()
-        const token = await fetcher.token()
+    async __downloadImage(image_token) {
+        return this.limiter.schedule(async () => {
+            console.log(`ImageToken: ${image_token}`)
+            const fetcher = new tokenFetcher()
+            await fetcher.fetchToken()
+            const token = await fetcher.token()
 
-        const req = {
-            method: 'GET',
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        }
-
-        for (let attempt = 1; attempt <= retries; attempt++) {
+            const controller = new AbortController()
+            const timeout = setTimeout(() => controller.abort(), 30000)
             try {
-                const res = await fetch(`${process.env.FEISHU_HOST}/open-apis/drive/v1/medias/${image_token}/download`, req)
-                console.log(`ImageToken: ${image_token} HTTP ${res.status}`)
-                const buffer = await res.buffer()
-                console.log(`ImageToken: ${image_token} buffer size: ${buffer.length} bytes`)
-                return { buffer }
-            } catch (err) {
-                if (attempt === retries) throw err
-                const delay = attempt * 5000
-                console.log(`ImageToken ${image_token} download failed (attempt ${attempt}/${retries}), retrying in ${delay/1000}s: ${err.message}`)
-                await new Promise(resolve => setTimeout(resolve, delay))
+                const res = await fetch(
+                    `${process.env.FEISHU_HOST}/open-apis/drive/v1/medias/${image_token}/download`,
+                    { method: 'GET', headers: { Authorization: `Bearer ${token}` }, signal: controller.signal }
+                )
+                return res
+            } finally {
+                clearTimeout(timeout)
             }
-        }
+        })
     }
 
     async __downloadBoardPreview(board_token) {
-        console.log(`BoardToken: ${board_token}`)
-        const fetcher = new tokenFetcher()
-        await fetcher.fetchToken()
-        const token = await fetcher.token() 
+        return this.limiter.schedule(async () => {
+            console.log(`BoardToken: ${board_token}`)
+            const fetcher = new tokenFetcher()
+            await fetcher.fetchToken()
+            const token = await fetcher.token()
 
-        const req = {
-            method: 'GET',
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        }
-
-        let res = await fetch(`${process.env.FEISHU_HOST}/open-apis/board/v1/whiteboards/${board_token}/download_as_image`, req)
-        console.log(`BoardToken: ${board_token} HTTP ${res.status} content-type: ${res.headers.get('content-type')}`)
-
-        return res
+            const controller = new AbortController()
+            const timeout = setTimeout(() => controller.abort(), 30000)
+            try {
+                const res = await fetch(
+                    `${process.env.FEISHU_HOST}/open-apis/board/v1/whiteboards/${board_token}/download_as_image`,
+                    { method: 'GET', headers: { Authorization: `Bearer ${token}` }, signal: controller.signal }
+                )
+                return res
+            } finally {
+                clearTimeout(timeout)
+            }
+        })
     }
 
     async __fetchCaption(key, node) {
@@ -173,6 +167,10 @@ class larkImageDownloader {
         }
 
         return res
+    }
+
+    destroy() {
+        this.s3.destroy()
     }
 
     async __wait(duration) {

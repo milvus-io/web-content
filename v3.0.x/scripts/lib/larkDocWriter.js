@@ -1,5 +1,17 @@
 const larkTokenFetcher = require('./larkTokenFetcher.js')
-const { removeTabsHallucinations, unescapeKnownJsxTags, normalizeCodeTagContent } = require('../mdx-parse/mdxPatcher')
+const {
+    removeTabsHallucinations,
+    unescapeKnownJsxTags,
+    escapeMathBraces,
+    escapeHtmlElementBraces,
+    normalizeNestedPlaintextFences,
+    normalizeCodeTagContent,
+    convertHtmlCommentsToMdx,
+    escapeNonHtmlTags,
+    createFenceTracker,
+    getFencedCodeRanges,
+    createFencedCodeBlock,
+} = require('../mdx-parse/mdxPatcher')
 const Downloader = require('./larkImageDownloader.js')
 const slugify = require('slugify')
 const fs = require('node:fs')
@@ -25,17 +37,22 @@ const KNOWN_JSX_TAGS = new Set([
 
 class larkDocWriter {
     constructor(
-        root_token, 
-        base_token, 
-        displayedSidebar, 
-        docSourceDir='plugins/lark-docs/meta/sources', 
-        imageDir='static/img', 
-        targets='zilliz.saas', 
+        root_token,
+        base_token,
+        displayedSidebar,
+        docSourceDir='plugins/lark-docs/meta/sources',
+        imageDir='static/img',
+        targets='zilliz.saas',
         skip_image_download=false,
-        upload_to_s3=false
+        upload_to_s3=false,
+        linkReplacementShimPath=null
     ) {
         this.root_token = root_token
-        this.base_token = base_token
+        const baseParts = base_token.split(':')
+        this.base_app_token = baseParts[0]
+        this.base_table_id = baseParts.length > 1 ? baseParts[1] : null
+        this.use_all_base_tables = this.base_table_id === '*'
+        this.base_tables = null
         this.displayedSidebar = displayedSidebar
         this.docSourceDir = docSourceDir
         this.page_blocks = []
@@ -49,7 +66,285 @@ class larkDocWriter {
         this.tokenFetcher = new larkTokenFetcher()
         this.downloader = new Downloader({}, imageDir)
         this.upload_to_s3 = upload_to_s3
-        this.api_compose_block_type_id = process.env.API_COMPOSE_BLOCK_TYPE_ID || 'blk_682093ba9580c002300d1ea7'
+        this.linkReplacementShimPath = linkReplacementShimPath
+        this.linkReplacementShim = this.__load_link_replacement_shim(linkReplacementShimPath)
+    }
+
+    destroy() {
+        this.downloader.destroy()
+    }
+
+    categorize_node(source) {
+        const RICH_TYPES = new Set([9, 11, 17, 22, 23, 27])
+        const allBlocks = (source.blocks?.items ?? []).filter(b => b.block_type !== 1)
+        if (allBlocks.length === 0) return 'meaningless'
+
+        // Apply include/exclude filtering at block level, mirroring __filter_content logic
+        const targetParts = (this.targets || '').split('.')
+        const contentBlocks = []
+        let skipDepth = 0
+        for (const block of allBlocks) {
+            const blockText = (block.text?.elements ?? []).map(e => e.text_run?.content ?? '').join('').trim()
+            const includeMatch = blockText.match(/^<include target="(.+?)">$/)
+            const excludeMatch = blockText.match(/^<exclude target="(.+?)">$/)
+            const closeMatch = blockText.match(/^<\/(include|exclude)>$/)
+            if (includeMatch) {
+                if (!targetParts.includes(includeMatch[1].trim())) skipDepth++
+                continue
+            }
+            if (excludeMatch) {
+                if (targetParts.includes(excludeMatch[1].trim())) skipDepth++
+                continue
+            }
+            if (closeMatch) {
+                if (skipDepth > 0) skipDepth--
+                continue
+            }
+            if (skipDepth === 0) contentBlocks.push(block)
+        }
+
+        if (contentBlocks.length === 0) return 'meaningless'
+        if (contentBlocks.some(b => RICH_TYPES.has(b.block_type))) return 'meaningful'
+        const wordCount = contentBlocks
+            .flatMap(b => b.text?.elements ?? [])
+            .map(e => e.text_run?.content ?? '')
+            .join(' ')
+            .split(/\s+/)
+            .filter(Boolean).length
+        const nonEmptyBlocks = contentBlocks.filter(b =>
+            b.text?.elements?.some(e => e.text_run?.content?.trim())
+        )
+        return (nonEmptyBlocks.length >= 2 || wordCount >= 60) ? 'meaningful' : 'meaningless'
+    }
+
+    async generate_sidebar(outputDir, contentRoot) {
+        this.sidebarOutputDir = outputDir
+        this.sidebarContentRoot = contentRoot
+        return this.__sidebar_items(outputDir, contentRoot, this.root_token)
+    }
+
+    __sidebar_key(type, currentPath, contentRoot, slug, fallback='') {
+        const rawSlug = slug || fallback || 'item'
+        const safeSlug = slugify(String(rawSlug), { lower: true, strict: true }) || 'item'
+        const keyPath = node_path.join(currentPath, safeSlug)
+            .replace(/\\/g, '/')
+            .replace(new RegExp(`^${contentRoot}/`), '')
+            .replace(/^\/+/, '')
+        return `${type}:${keyPath}`
+    }
+
+    __has_renderable_page(source) {
+        const page = source?.blocks?.items?.find(block => block.block_type === 1)
+        return !!(page?.children && page.children.length > 0)
+    }
+
+    async __sidebar_items(currentPath, contentRoot, token) {
+        let node
+        try { node = this.__fetch_doc_source('node_token', token) } catch (e) { return [] }
+        if (!node.has_child) return []
+
+        const children = (node.children || []).filter(c => c.obj_type !== 'bitable' && c != null)
+        const items = []
+
+        for (let i = 0; i < children.length; i++) {
+            const child = children[i]
+            let childSource = null
+            try { childSource = this.__fetch_doc_source('node_token', child.node_token, child.slug) } catch (e) {}
+
+            if (childSource?.base_nav_link) {
+                const meta = await this.__is_to_publish(child.title, child.slug, child.node_token)
+                if (!meta.publish) continue
+                const href = childSource.base_nav_link_href
+                if (!href) {
+                    console.warn(`[sidebar] Cannot resolve link target for "${child.title}" (${childSource.node_token})`)
+                    continue
+                }
+                items.push({
+                    type: 'link',
+                    href,
+                    label: meta.labels || child.title,
+                    key: this.__sidebar_key('link', currentPath, contentRoot, child.slug, child.title),
+                })
+                continue
+            }
+
+            if (childSource?.base_nav_ref) {
+                const meta = await this.__is_to_publish(child.title, child.slug, child.node_token)
+                if (!meta.publish) continue
+                const targetSource = this.__fetch_doc_source_by_any_token(childSource.base_nav_ref_target_token)
+                if (!targetSource) {
+                    console.warn(`[sidebar] Cannot resolve ref target for "${child.title}" (${childSource.node_token})`)
+                    continue
+                }
+                const targetMeta = await this.__is_to_publish(
+                    targetSource.title || targetSource.name,
+                    targetSource.slug,
+                    targetSource.node_token || targetSource.origin_node_token || targetSource.token,
+                )
+                if (!targetMeta.publish) continue
+                const refId = this.__doc_id_for_token(childSource.base_nav_ref_target_token, contentRoot)
+                if (!refId) {
+                    console.warn(`[sidebar] Cannot resolve ref target for "${child.title}" (${childSource.node_token})`)
+                    continue
+                }
+                items.push({
+                    type: 'ref',
+                    id: refId,
+                    label: meta.labels || child.title,
+                    key: this.__sidebar_key('ref', currentPath, contentRoot, child.slug, child.title),
+                })
+                continue
+            }
+
+            const meta = await this.__is_to_publish(child.title, child.slug, child.node_token)
+            if (!meta.publish) continue
+
+            const slug = child.slug
+            const label = meta.labels || child.title
+
+            if (child.has_child) {
+                const category = childSource ? this.categorize_node(childSource) : 'meaningful'
+                const childItems = await this.__sidebar_items(`${currentPath}/${slug}`, contentRoot, child.node_token)
+
+                if (category === 'meaningful') {
+                    const docId = node_path.join(currentPath, slug, slug)
+                        .replace(/\\/g, '/')
+                        .replace(new RegExp(`^${contentRoot}/`), '')
+                    items.push({
+                        type: 'category',
+                        label,
+                        key: this.__sidebar_key('category', currentPath, contentRoot, slug, label),
+                        link: { type: 'doc', id: docId },
+                        items: childItems,
+                    })
+                } else if (childItems.length > 0) {
+                    items.push({
+                        type: 'category',
+                        label,
+                        key: this.__sidebar_key('category', currentPath, contentRoot, slug, label),
+                        items: childItems,
+                    })
+                }
+            } else if (child.slug !== 'faqs') {
+                let childSource = null
+                try { childSource = this.__fetch_doc_source('node_token', child.node_token, child.slug) } catch (e) {}
+                if (childSource && !this.__has_renderable_page(childSource)) continue
+                const docId = node_path.join(currentPath, slug)
+                    .replace(/\\/g, '/')
+                    .replace(new RegExp(`^${contentRoot}/`), '')
+                items.push({
+                    type: 'doc',
+                    id: docId,
+                    label,
+                    key: this.__sidebar_key('doc', currentPath, contentRoot, slug, label),
+                })
+            }
+        }
+
+        return items
+    }
+
+    __base_source_is_publishable(source) {
+        const targetsField = source.base_targets
+        const status = this.__plain_value(source.base_status)
+        const isPublishable = ['Draft', 'Approved', 'Published', 'Publish', 'Reviewed'].includes(status)
+        if (!targetsField) return isPublishable
+
+        const targets = (targetsField instanceof Array ? targetsField : [targetsField])
+            .map(item => this.__plain_value(item)?.trim().toLowerCase())
+            .filter(Boolean)
+
+        return isPublishable && targets.includes(this.targets.toLowerCase())
+    }
+
+    __base_source_has_publish_constraints(source) {
+        const status = this.__plain_value(source.base_status)
+        const targetsField = source.base_targets
+        const targets = (targetsField instanceof Array ? targetsField : [targetsField])
+            .map(item => this.__plain_value(item)?.trim())
+            .filter(Boolean)
+
+        return !!status || targets.length > 0
+    }
+
+    __base_nav_source_is_publishable(source) {
+        if (!this.__base_source_has_publish_constraints(source)) return true
+        return this.__base_source_is_publishable(source)
+    }
+
+    __fetch_base_source_meta(title, slug, token=null) {
+        if (!slug || !fs.existsSync(this.docSourceDir)) return null
+        const files = fs.readdirSync(this.docSourceDir).filter(file => file.endsWith('.json'))
+        const sources = files.map(file => JSON.parse(fs.readFileSync(`${this.docSourceDir}/${file}`, 'utf8')))
+        if (token) {
+            const tokenMatch = sources.find(source =>
+                (source.base_record_id || source.base_nav_virtual) &&
+                (source.node_token === token || source.origin_node_token === token || source.token === token)
+            )
+            if (tokenMatch) return tokenMatch
+        }
+        for (const source of sources) {
+            if (
+                (source.base_record_id || source.base_nav_virtual) &&
+                source.slug === slug &&
+                (source.title === title || source.name === title)
+            ) {
+                return source
+            }
+        }
+        return null
+    }
+
+    __fetch_doc_source_by_any_token(token) {
+        const tokenKeys = ['node_token', 'origin_node_token', 'obj_token', 'token']
+        const files = fs.readdirSync(this.docSourceDir).filter(file => file.endsWith('.json'))
+        for (const file of files) {
+            const source = JSON.parse(fs.readFileSync(`${this.docSourceDir}/${file}`, {encoding: 'utf-8', flag: 'r'}))
+            if (tokenKeys.some(key => source[key] === token)) {
+                return source
+            }
+        }
+        return null
+    }
+
+    __has_base_publish_meta(source) {
+        return source && (
+            Object.prototype.hasOwnProperty.call(source, 'base_status') ||
+            Object.prototype.hasOwnProperty.call(source, 'base_targets')
+        )
+    }
+
+    __doc_id_for_token(token, contentRoot) {
+        if (!token) return null
+        const source = this.__fetch_doc_source_by_any_token(token)
+        if (!source) return null
+        if (source.base_nav_ref && source.base_nav_ref_target_token) {
+            return this.__doc_id_for_token(source.base_nav_ref_target_token, contentRoot)
+        }
+        if (!source.slug) return null
+
+        const segments = []
+        let current = source
+        const seen = new Set()
+        while (current && current.slug && !seen.has(current.node_token || current.origin_node_token || current.token)) {
+            seen.add(current.node_token || current.origin_node_token || current.token)
+            segments.unshift(current.slug)
+            const parentToken = current.parent_node_token
+            if (!parentToken || parentToken === this.root_token) break
+            try {
+                current = this.__fetch_doc_source('node_token', parentToken)
+            } catch (_) {
+                break
+            }
+        }
+
+        if (source.has_child && this.categorize_node(source) === 'meaningful') {
+            segments.push(source.slug)
+        }
+
+        return node_path.join(this.sidebarOutputDir || contentRoot, ...segments)
+            .replace(/\\/g, '/')
+            .replace(new RegExp(`^${contentRoot}/`), '')
     }
 
     __fetch_doc_source (type, value, slug="") {
@@ -78,6 +373,98 @@ class larkDocWriter {
         }
     }
 
+    __safe_url(value) {
+        try {
+            return new URL(value)
+        } catch (_) {
+            return null
+        }
+    }
+
+    __link_token(value) {
+        if (!value) return null
+        const url = this.__safe_url(value)
+        if (url) return url.pathname.split('/').filter(Boolean).pop()
+        return String(value).split('#')[0].trim() || null
+    }
+
+    __normalize_link_replacement_url(replacement) {
+        const replacementUrl = replacement.replacement_url || replacement.target_url || replacement.url || replacement.doc_link
+        if (replacementUrl) return replacementUrl
+        const token = replacement.replacement_token || replacement.target_token || replacement.doc_token
+        return token ? `https://zilliverse.feishu.cn/wiki/${token}` : null
+    }
+
+    __shim_replacement_is_approved(replacement) {
+        return replacement.approved === true ||
+            replacement.enabled === true ||
+            String(replacement.status || '').toLowerCase() === 'approved'
+    }
+
+    __load_link_replacement_shim(shimPath) {
+        const shim = { byToken: new Map(), byUrl: new Map() }
+        if (!shimPath) return shim
+        if (!fs.existsSync(shimPath)) {
+            console.warn(`[link-shim] Shim file not found: ${shimPath}`)
+            return shim
+        }
+
+        const data = JSON.parse(fs.readFileSync(shimPath, 'utf8'))
+        const replacements = Array.isArray(data)
+            ? data
+            : Array.isArray(data.replacements)
+                ? data.replacements
+                : Object.entries(data).map(([source, target]) => ({
+                    approved: true,
+                    source_token: this.__link_token(source),
+                    source_url: source.startsWith('http') ? source : null,
+                    replacement_url: target,
+                }))
+
+        let active = 0
+        for (const replacement of replacements) {
+            if (!this.__shim_replacement_is_approved(replacement)) continue
+            const replacementUrl = this.__normalize_link_replacement_url(replacement)
+            if (!replacementUrl) continue
+
+            const normalized = {
+                ...replacement,
+                replacement_url: replacementUrl,
+            }
+            const sourceToken = replacement.source_token ||
+                replacement.old_token ||
+                replacement.token ||
+                this.__link_token(replacement.source_url || replacement.source)
+            if (sourceToken) {
+                shim.byToken.set(sourceToken, normalized)
+                active++
+            }
+            if (replacement.source_url) {
+                shim.byUrl.set(String(replacement.source_url).split('#')[0], normalized)
+            }
+        }
+
+        console.log(`[link-shim] Loaded ${active} approved replacement(s) from ${shimPath}`)
+        return shim
+    }
+
+    __apply_link_replacement_shim(rawUrl) {
+        if (!this.linkReplacementShim || !rawUrl) return rawUrl
+        const original = this.__safe_url(rawUrl)
+        if (!original) return rawUrl
+
+        const replacement = this.linkReplacementShim.byToken.get(this.__link_token(rawUrl)) ||
+            this.linkReplacementShim.byUrl.get(`${original.origin}${original.pathname}`)
+        if (!replacement) return rawUrl
+
+        const replacementUrl = this.__safe_url(replacement.replacement_url)
+        if (!replacementUrl) return replacement.replacement_url
+        if (replacement.preserve_anchor === true && original.hash && !replacementUrl.hash) {
+            replacementUrl.hash = original.hash
+        }
+        return replacementUrl.toString()
+    }
+
     async write_docs(path, token) {
         const forEachAsync = async (array, callback) => {
             for (let index = 0; index < array.length; index++) {
@@ -92,7 +479,7 @@ class larkDocWriter {
             const children = node.children.filter(child => child.obj_type != 'bitable' && child != undefined)
             await forEachAsync(children, async (child, index) => {
                 if (child.has_child) {
-                    const meta = await this.__is_to_publish(child.title, child.slug) 
+                    const meta = await this.__is_to_publish(child.title, child.slug, child.node_token)
                     if (meta['publish']) {
                         const token = child.node_token
                         const type = child.node_type
@@ -104,34 +491,44 @@ class larkDocWriter {
                         const deprecateSince = meta['deprecateSince']
                         const labels = meta['labels']
                         const keywords = meta['keywords']
-                        console.log(`${current_path}/${slug}/${slug}.md`)
 
                         if (!fs.existsSync(`${current_path}/${slug}`)) {
                             fs.mkdirSync(`${current_path}/${slug}`)
                         }
 
-                        await this.write_doc({
-                            path: `${current_path}/${slug}`,
-                            page_title: child.title,
-                            page_slug: slug,
-                            page_beta: beta,
-                            notebook: notebook,
-                            addedSince: addedSince,
-                            lastModified: lastModified,
-                            deprecateSince: deprecateSince,
-                            page_type: type,
-                            page_token: child.node_token,
-                            sidebar_position: index+1,
-                            sidebar_label: labels,
-                            keywords: keywords,
-                            doc_card_list: true,
-                            page_tag: meta['tag'],
-                        })
+                        let childSource
+                        try { childSource = this.__fetch_doc_source('node_token', child.node_token) } catch (e) { childSource = null }
+                        const category = childSource ? this.categorize_node(childSource) : 'meaningful'
+
+                        if (category === 'meaningful') {
+                            console.log(`${current_path}/${slug}/${slug}.md`)
+                            await this.write_doc({
+                                path: `${current_path}/${slug}`,
+                                page_title: child.title,
+                                page_slug: slug,
+                                page_beta: beta,
+                                notebook: notebook,
+                                addedSince: addedSince,
+                                lastModified: lastModified,
+                                deprecateSince: deprecateSince,
+                                page_type: type,
+                                page_token: child.node_token,
+                                sidebar_position: index+1,
+                                sidebar_label: labels,
+                                keywords: keywords,
+                                doc_card_list: true,
+                            })
+                        } else {
+                            console.log(`${current_path}/${slug}/ [meaningless category — no index page generated]`)
+                        }
 
                         await this.write_docs(`${current_path}/${slug}`, token)
                     }
                 } else {
-                    const meta = await this.__is_to_publish(child.title, child.slug)
+                    if (child.base_nav_ref || child.base_nav_link) {
+                        return
+                    }
+                    const meta = await this.__is_to_publish(child.title, child.slug, child.node_token)
                     switch (child.slug) {
                         case 'faqs':
                             if (meta['publish']) {
@@ -170,7 +567,6 @@ class larkDocWriter {
                                     sidebar_label: labels,
                                     keywords: keywords,
                                     doc_card_list: false,
-                                    page_tag: meta['tag'],
                                 })
                             }
                             break;
@@ -180,9 +576,38 @@ class larkDocWriter {
         }
     }
 
+    /**
+     * Write a subtree starting from a specific node token.
+     * Computes the correct nested output path by walking up parent_node_token
+     * chains, then delegates to write_docs().
+     */
+    async write_subtree(outputDir, token) {
+        const node = this.__fetch_doc_source('node_token', token)
+        let relPath = ''
+        let current = node
+
+        while (current && current.parent_node_token && current.parent_node_token !== this.root_token) {
+            try {
+                const parent = this.__fetch_doc_source('node_token', current.parent_node_token)
+                relPath = parent.slug + '/' + relPath
+                current = parent
+            } catch {
+                // Parent not in cache — stop walking and write to the nearest known path
+                break
+            }
+        }
+
+        const targetPath = `${outputDir}/${relPath}`.replace(/\/+/g, '/')
+        if (!fs.existsSync(targetPath)) {
+            fs.mkdirSync(targetPath, { recursive: true })
+        }
+
+        await this.write_docs(targetPath, token)
+    }
+
     async write_doc ({
-        path,
-        page_title,
+        path,  
+        page_title, 
         page_slug,
         page_beta,
         notebook,
@@ -194,21 +619,25 @@ class larkDocWriter {
         sidebar_position,
         sidebar_label,
         keywords,
-        doc_card_list,
-        page_tag
+        doc_card_list
     }) {
         let obj;
         let blocks;
         if (page_token) {
             obj = this.__fetch_doc_source('node_token', page_token, page_slug)
             if (obj) {
-                blocks = obj.blocks.items
+                blocks = obj.blocks?.items
             }
         } else if (page_title) {
             obj = this.__fetch_doc_source('title', page_title, page_slug)
             if (obj) {
-                blocks = obj.blocks.items
+                blocks = obj.blocks?.items
             }
+        }
+
+        if (!blocks) {
+            console.warn(`[write_doc] Skipping ${page_slug || page_title}: source has no blocks`)
+            return
         }
 
         if (blocks) {
@@ -221,41 +650,23 @@ class larkDocWriter {
             this.blocks = page.children.map(child => {
                 return this.__retrieve_block_by_id(child)
             })
-
-            // Detect ApiCompose add-on block
-            const apiComposeBlock = this.__find_api_compose_block(this.blocks)
-            if (apiComposeBlock) {
-                await this.__write_api_page({
-                    title: page_title,
-                    slug: page_slug,
-                    beta: page_beta,
-                    path: path,
-                    type: page_type,
-                    token: page_token,
-                    sidebar_position: sidebar_position,
-                    sidebar_label: sidebar_label,
-                    keywords: keywords,
-                    apiComposeBlock: apiComposeBlock,
-                })
-            } else {
-                await this.__write_page({
-                    title: page_title,
-                    suffix: this.__title_suffix(path),
-                    slug: page_slug,
-                    beta: page_beta,
-                    notebook: notebook,
-                    addedSince: addedSince,
-                    lastModified: lastModified,
-                    deprecateSince: deprecateSince,
-                    path: path,
-                    type: page_type,
-                    token: page_token,
-                    sidebar_position: sidebar_position,
-                    sidebar_label: sidebar_label,
-                    keywords: keywords,
-                    doc_card_list: doc_card_list,
-                })
-            }
+            await this.__write_page({
+                title: page_title,
+                suffix: this.__title_suffix(path),
+                slug: page_slug,
+                beta: page_beta,
+                notebook: notebook,
+                addedSince: addedSince,
+                lastModified: lastModified,
+                deprecateSince: deprecateSince,
+                path: path, 
+                type: page_type,
+                token: page_token,
+                sidebar_position: sidebar_position,
+                sidebar_label: sidebar_label,
+                keywords: keywords,
+                doc_card_list: doc_card_list,
+            })
         }
     }
 
@@ -343,7 +754,8 @@ class larkDocWriter {
             const markdown = `${front_matter}\n\n# ${title}` + "\n\nimport DocCardList from '@theme/DocCardList';\n\n<DocCardList />"
             fs.writeFileSync(`${path}/${slug}.md`, markdown)
 
-            sub_pages.forEach((sub_page, index) => {
+            for (let index = 0; index < sub_pages.length; index++) {
+                let sub_page = sub_pages[index]
                 let title = sub_page[0].indexOf('{/') > 0 ? sub_page[0].split('{/')[0].split('## ')[1] : sub_page[0].replace(/^## /g, '').replace(/{#[\w-]+}/g, '').trim()
                 let short_description = sub_page.filter(line => line.length > 0)[1]
                 let slug = sub_page[0].indexOf('{/') > 0 ? /{\/([\w-]+)}/.exec(sub_page[0])[1] : slugify(title, {lower: true, strict: true})
@@ -365,45 +777,204 @@ class larkDocWriter {
                     return line
                 })
 
-                const markdown = `${front_matter}\n\n# ${title}\n\n${short_description}\n\n## Contents\n\n${links.join('\n')}\n\n## FAQs\n\n${sub_page.slice(1).join('\n')}`    
+                let markdown = `${front_matter}\n\n# ${title}\n\n${short_description}\n\n## Contents\n\n${links.join('\n')}\n\n## FAQs\n\n${sub_page.slice(1).join('\n')}`
+                markdown = await this.__mdx_patches(markdown)
                 fs.writeFileSync(`${path}/${slug}.md`, markdown)
-            })
+            }
         }
+    }
+
+    __plain_value(value) {
+        if (value === null || value === undefined) return null
+        if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') return String(value)
+        if (value instanceof Array) {
+            return value.map(item => this.__plain_value(item)).filter(Boolean).join(', ')
+        }
+        if (typeof value === 'object') {
+            if (value.text) return value.text
+            if (value.name) return value.name
+            if (value.link) return value.link
+            if (value.id) return value.id
+            const typedKey = value.type && value[value.type] ? value.type : null
+            if (typedKey) return this.__plain_value(value[typedKey])
+        }
+        return null
+    }
+
+    __doc_field(fields) {
+        return fields.Doc || fields.Docs
+    }
+
+    __doc_link(docField) {
+        if (!docField) return null
+        if (typeof docField === 'string') {
+            const markdownMatch = docField.match(/\[[^\]]+\]\(([^)]+)\)/)
+            return markdownMatch ? markdownMatch[1] : docField
+        }
+        if (docField.link) return docField.link
+        if (docField.url) return docField.url
+        if (docField instanceof Array) return this.__doc_link(docField[0])
+        return null
+    }
+
+    __doc_title(docField) {
+        if (!docField) return null
+        if (typeof docField === 'string') {
+            const markdownMatch = docField.match(/\[([^\]]+)\]\([^)]+\)/)
+            return markdownMatch ? markdownMatch[1] : docField
+        }
+        return docField.text || docField.name || this.__plain_value(docField)
+    }
+
+    async __base_tables(token) {
+        if (this.base_tables) return this.base_tables
+        if (this.base_table_id && !this.use_all_base_tables) {
+            this.base_tables = [{ table_id: this.base_table_id, name: this.base_table_id, index: 0 }]
+            return this.base_tables
+        }
+
+        const tables = []
+        let pageToken = null
+        do {
+            const pageTokenExpr = pageToken ? `&page_token=${pageToken}` : ''
+            const url = `${process.env.FEISHU_HOST}/open-apis/bitable/v1/apps/${this.base_app_token}/tables?page_size=100${pageTokenExpr}`
+            const jres = await (await fetch(url, {
+                method: "get",
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8',
+                    'Authorization': `Bearer ${token}`
+                }
+            })).json()
+            if (jres.code !== 0) {
+                throw new Error(`[base] Failed to list tables for ${this.base_app_token}: ${JSON.stringify(jres)}`)
+            }
+            const items = jres.data?.items || []
+            if (!Array.isArray(items)) {
+                throw new Error(`[base] Unexpected tables payload for ${this.base_app_token}: ${JSON.stringify(jres)}`)
+            }
+            tables.push(...items)
+            pageToken = jres.data?.has_more ? jres.data.page_token : null
+        } while (pageToken)
+
+        const selectedTables = this.use_all_base_tables ? tables : tables.slice(0, 1)
+        this.base_tables = selectedTables.map((table, index) => ({
+            ...table,
+            table_id: table.table_id || table.id,
+            name: table.name || table.table_name || table.table_id || table.id,
+            index,
+        }))
+        return this.base_tables
+    }
+
+    async __base_records(token, table) {
+        const records = []
+        let pageToken = null
+        do {
+            const pageTokenExpr = pageToken ? `&page_token=${pageToken}` : ''
+            const url = `${process.env.FEISHU_HOST}/open-apis/bitable/v1/apps/${this.base_app_token}/tables/${table.table_id}/records?page_size=500${pageTokenExpr}`
+            const jres = await (await fetch(url, {
+                method: "get",
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8',
+                    'Authorization': `Bearer ${token}`
+                }
+            })).json()
+            if (jres.code !== 0) {
+                throw new Error(`[base] Failed to list records for ${table.name || table.table_id}: ${JSON.stringify(jres)}`)
+            }
+            const items = jres.data?.items || []
+            if (!Array.isArray(items)) {
+                throw new Error(`[base] Unexpected records payload for ${table.name || table.table_id}: ${JSON.stringify(jres)}`)
+            }
+            records.push(...items)
+            pageToken = jres.data?.has_more ? jres.data.page_token : null
+        } while (pageToken)
+        return records
     }
 
     async __listed_docs() {
         const token = await this.tokenFetcher.token()
-        let url = `${process.env.FEISHU_HOST}/open-apis/bitable/v1/apps/${this.base_token}/tables`
-        const table_id = (await (await fetch(url, {
-            method: "get",
-            headers: {
-                'Content-Type': 'application/json; charset=utf-8',
-                'Authorization': `Bearer ${token}`
-            }
-        })).json()).data.items[0].table_id
-
-        url = `${process.env.FEISHU_HOST}/open-apis/bitable/v1/apps/${this.base_token}/tables/${table_id}/records?page_size=500`
-        this.records = (await (await fetch(url, {
-            method: "get",
-            headers: {
-                'Content-Type': 'application/json; charset=utf-8',
-                'Authorization': `Bearer ${token}`
-            }
-        })).json()).data.items
+        const tables = await this.__base_tables(token)
+        const records = []
+        for (const table of tables) {
+            records.push(...await this.__base_records(token, table))
+        }
+        this.records = records
     }
 
     async __is_to_publish (title, slug, token=null) {
+        if (slug && fs.existsSync(this.docSourceDir)) {
+            const baseSource = this.__fetch_base_source_meta(title, slug, token)
+            if (baseSource) {
+                if (baseSource.base_placement_type === 'section') {
+                    return {
+                        publish: !!baseSource.has_child,
+                        title: baseSource.title || title,
+                        slug,
+                        beta: null,
+                        labels: baseSource.title || title,
+                    }
+                }
+                if (baseSource.base_nav_ref) {
+                    return {
+                        publish: this.__base_nav_source_is_publishable(baseSource),
+                        title: baseSource.title || title,
+                        slug,
+                        beta: this.__plain_value(baseSource.base_beta) || null,
+                        labels: this.__plain_value(baseSource.base_labels) || baseSource.title || title,
+                    }
+                }
+                if (baseSource.base_nav_link) {
+                    return {
+                        publish: this.__base_nav_source_is_publishable(baseSource),
+                        title: baseSource.title || title,
+                        slug,
+                        beta: this.__plain_value(baseSource.base_beta) || null,
+                        labels: this.__plain_value(baseSource.base_labels) || baseSource.title || title,
+                    }
+                }
+                if (baseSource.base_nav_virtual) {
+                    return {
+                        publish: baseSource.base_placement_type
+                            ? (this.__base_nav_source_is_publishable(baseSource) && !!baseSource.has_child)
+                            : !!baseSource.has_child,
+                        title: baseSource.title || title,
+                        slug,
+                        beta: this.__plain_value(baseSource.base_beta) || null,
+                        labels: this.__plain_value(baseSource.base_labels) || baseSource.title || title,
+                    }
+                }
+                if (this.__has_base_publish_meta(baseSource)) {
+                    return {
+                        publish: this.__base_source_is_publishable(baseSource),
+                        title: baseSource.title || title,
+                        slug,
+                        beta: this.__plain_value(baseSource.base_beta) || null,
+                        labels: this.__plain_value(baseSource.base_labels) || baseSource.title || title,
+                    }
+                }
+            }
+        }
+
         if (!this.records) {
             await this.__listed_docs()
         }
 
         const result = this.records.filter(record => {
-            const record_slug = record["fields"]["Slug"] instanceof Array ? record["fields"]["Slug"][0].text : record["fields"]["Slug"]
+            const docField = this.__doc_field(record.fields)
+            if (!docField) return false
 
-            if (((record["fields"]["Docs"] && record["fields"]["Docs"]["text"] === title && record_slug == slug) || record["fields"]["Docs"]["link"].endsWith(token)) && record["fields"]["Targets"] && record["fields"]["Progress"] && (record["fields"]["Progress"] === "Draft" || record["fields"]["Progress"] === "Publish")) {
+            const record_slug = this.__plain_value(record["fields"]["Slug"])
+            const targetField = record.fields['Publish Targets'] || record.fields.Targets
 
-                const targets = record["fields"]["Targets"].map(item => item.trim().toLowerCase())
+            // Check publish eligibility via Status (new) or Progress (old)
+            const status = this.__plain_value(record.fields.Status || record.fields.Progress)
+            const isPublishable = ['Draft', 'Approved', 'Published', 'Publish', 'Reviewed'].includes(status)
 
+            const docLink = this.__doc_link(docField) || ''
+            const docTitle = this.__doc_title(docField)
+            if (((docTitle === title && record_slug == slug) || (token && docLink.endsWith(token))) && targetField && isPublishable) {
+                const targets = (targetField instanceof Array ? targetField : [targetField]).map(item => this.__plain_value(item)?.trim().toLowerCase())
                 if (targets.includes(this.targets.toLowerCase())) {
                     return record
                 }
@@ -411,26 +982,28 @@ class larkDocWriter {
         })
 
         if (result.length > 0) {
+            const fields = result[0].fields
+            const docField = this.__doc_field(fields)
             return {
                 publish: true,
-                title: result[0]["fields"]["Docs"].text,
-                slug: result[0]["fields"]["Slug"],
-                beta: result[0]["fields"]["Beta"],
-                notebook: result[0]["fields"]["Notebook"],
-                labels: result[0]["fields"]["Labels"],
-                keywords: result[0]["fields"]["Keywords"],
-                description: result[0]["fields"]["Description"],
-                tag: result[0]["fields"]["Tag"],
-                addSince: result[0]["fields"]["Added Since"],
-                lastModified: result[0]["fields"]["Last Modified At"],
-                deprecateSince: result[0]["fields"]["Deprecate Since"],
+                title: this.__doc_title(docField),
+                slug: fields.Slug,
+                beta: fields.Beta || null,
+                notebook: fields.Notebook || null,
+                labels: fields.Labels || null,
+                keywords: fields.Keywords || null,
+                description: fields.Description || null,
+                tag: fields.Tag || null,
+                addSince: fields['Added Since'] || null,
+                lastModified: fields['Last Modified At'] || null,
+                deprecateSince: fields['Deprecated Since'] || fields['Deprecate Since'] || null,
             }
         } else {
             return {
                 publish: false,
             }
         }
-        
+
     }
 
     __filter_content (markdown, targets) {
@@ -523,22 +1096,21 @@ class larkDocWriter {
         markdown = markdown.replace(/^[\||\s][\s|\||<br\/>]*\|\n/gm, '')
         markdown = markdown.replace(/\s*<tr>\n(\s*<td>(<br\/>)*<\/td>\n)*\s*<\/tr>/g, '')
         markdown = this.__example_http_urls(markdown)
-        markdown = await this.__mdx_patches(markdown)  
+        markdown = await this.__mdx_patches(markdown)
 
         const description = this.__extract_description(markdown)
 
-        let front_matter = this.__front_matters(title, suffix, slug, beta, notebook, type, token, sidebar_position, sidebar_label, keywords, this.displayedSidebar, description)
+        // Auto-detect release notes and assign them to the releases sidebar
+        const isReleaseNote = String(path || '').includes('release-notes') || String(slug || '').includes('release-notes')
+        const displayedSidebar = isReleaseNote ? 'releasesSidebar' : this.displayedSidebar
+
+        let front_matter = this.__front_matters(title, suffix, slug, beta, notebook, type, token, sidebar_position, sidebar_label, keywords, displayedSidebar, description)
 
         let tabs = markdown.split('\n').filter(line => {
             return line.trim().startsWith("<Tab")
         }).length
 
         let imports = this.__imports(tabs > 0)
-
-        // add sidebar_key attribute to doc frontmatter
-        front_matter = front_matter.split('\n')
-        front_matter.splice(3, 0, `sidebar_key: ${slug}`)
-        front_matter = front_matter.join('\n')
 
         if (doc_card_list) {
             markdown += "\n\nimport DocCardList from '@theme/DocCardList';\n\n<DocCardList />"
@@ -607,77 +1179,21 @@ class larkDocWriter {
         }
     }
 
-    __find_api_compose_block(blocks) {
-        for (const block of blocks) {
-            if (this.block_types[block['block_type']-1] === 'add_ons') {
-                if (block['add_ons'] && block['add_ons']['component_type_id'] === this.api_compose_block_type_id) {
-                    return block['add_ons']
-                }
-            }
-            // Recursively check children if any
-            if (block['children'] && block['children'].length > 0) {
-                const children = block['children'].map(child => this.__retrieve_block_by_id(child))
-                const found = this.__find_api_compose_block(children)
-                if (found) return found
-            }
-        }
-        return null
-    }
-
-    async __write_api_page({title, slug, beta, path, type, token, sidebar_position, sidebar_label, keywords, apiComposeBlock}) {
-        let recordData
-        try {
-            recordData = JSON.parse(apiComposeBlock['record'] || '{}')
-        } catch (e) {
-            console.error(`Failed to parse ApiCompose record for ${slug}: ${e.message}`)
-            return
-        }
-
-        const specs = recordData
-        const method = (specs.method || 'get').toLowerCase()
-        const endpoint = specs.endpoint || ''
-        const description = (specs.summary || title || '').replace(/"/g, '\\"')
-
-        const frontMatter = `---
-displayed_sidebar: restfulSidebar
-sidebar_position: ${sidebar_position || 1}
-slug: /restful/${slug}
-beta: ${beta ? 'TRUE' : 'FALSE'}
-title: "${title || specs.summary || 'API'} | RESTful"
-description: "${description} | RESTful"
-hide_table_of_contents: true
-sidebar_label: "${sidebar_label || title || specs.summary || 'API'}"
-sidebar_custom_props: { badges: ['${method}'] }
-${keywords ? 'keywords: \n  - ' + keywords.split(',').map(k => k.trim()).join('\n  - ') + '\n' : ''}---`
-
-        const specsJson = JSON.stringify(specs, null, 2)
-        const mdxBody = `# ${title || specs.summary || 'API'}
-
-import RestSpecs from '@site/src/components/RestSpecs';
-
-<RestSpecs specs={specs} endpoint={endpoint} method={method} target="${this.targets}" lang="en-US" />
-
-export const specs = ${specsJson}
-export const endpoint = "${endpoint}"
-export const method = "${method}"`
-
-        const file_path = `${path}/${slug}.mdx`
-        fs.writeFileSync(file_path, frontMatter + '\n\n' + mdxBody)
-        console.log(`Generated API doc: ${file_path}`)
-    }
-
     __front_matters (title, suffix, slug, beta, notebook, type, token, sidebar_position=undefined, sidebar_label="", keywords="", displayed_sidebar=this.displayedSidebar, description="") {
         let hide_title = '';
         let hide_toc = '';
-        
-        if (keywords !== "") {
+
+        if (keywords) {
             // keywords = keywords + ',' + this.keyword_picker().join(',')
             keywords = "keywords: \n  - " + keywords.split(',').map(item => item.trim()).join('\n  - ') + '\n'
+        } else {
+            keywords = ''
         }
 
         if (displayed_sidebar === 'default') {
-            displayed_sidebar = ''
-        } else if (displayed_sidebar === 'agentsSidebar' ) {
+            displayed_sidebar = `displayed_sidebar: ${displayed_sidebar}\n`
+        } else if (displayed_sidebar === 'releasesSidebar') {
+            // Release notes use a dedicated sidebar but keep their original slug
             displayed_sidebar = `displayed_sidebar: ${displayed_sidebar}\n`
         } else {
             slug = `${displayed_sidebar.replace('Sidebar', '').trim()}/${slug}`
@@ -685,7 +1201,7 @@ export const method = "${method}"`
         }
 
         if (description) {
-            description = description.trim().replace('\n', '|').replace(/\[(.*)\]\(.*\)/g, '$1').replace(':', '').replace(/\*+|_+/g, '').replace(/\"/g, "\\\"")
+            description = description.trim().replace('\n', '|').replace(/\[(.*)\]\(.*\)/g, '$1').replace(':', '').replace(/\*+|_+/g, '')
             description = description.replace(/<\/?[^>]+>/g, '').trim()
             if (description.length === 0) {
                 description = title
@@ -698,12 +1214,12 @@ export const method = "${method}"`
         }
 
         let front_matter = '---\n' + 
-        `title: "${title} | ${suffix}"` + '\n' +
+        `title: ${this.__yaml_string(`${title} | ${suffix}`)}` + '\n' +
         `slug: /${slug}` + '\n' +
-        `sidebar_label: "${sidebar_label !== "" ? sidebar_label : title}"` + '\n' +
+        `sidebar_label: ${this.__yaml_string(sidebar_label ? sidebar_label : title)}` + '\n' +
         `beta: ${beta ? beta : 'FALSE'}` + '\n' +
         `notebook: ${notebook ? notebook : 'FALSE'}` + '\n' +
-        `description: "${description} | ${suffix}"` + '\n' +
+        `description: ${this.__yaml_string(`${description} | ${suffix}`)}` + '\n' +
         `type: ${type}` + '\n' +
         `token: ${token}` + '\n' +
         `sidebar_position: ${sidebar_position}` + '\n' +
@@ -714,6 +1230,10 @@ export const method = "${method}"`
         '---'
 
         return front_matter
+    }
+
+    __yaml_string(value) {
+        return JSON.stringify(String(value ?? '').replace(/\r?\n/g, '|'))
     }
 
     __imports (cond=null) {
@@ -808,17 +1328,19 @@ export const method = "${method}"`
     }
 
     __example_http_urls(content) {
-        // Find all fenced code blocks and mark their ranges
-        const codeBlockRegex = /```[\s\S]*?```/g;
-        let codeBlocks = [];
-        let match;
-        while ((match = codeBlockRegex.exec(content)) !== null) {
-            codeBlocks.push({ start: match.index, end: match.index + match[0].length });
-        }
+        const codeBlocks = getFencedCodeRanges(content);
 
         // Helper to check if a position is inside any code block
         function isInCodeBlock(pos) {
             return codeBlocks.some(block => pos >= block.start && pos < block.end);
+        }
+
+        const codeSpanRegex = /`[^`\n]+`/g;
+        let match;
+        while ((match = codeSpanRegex.exec(content)) !== null) {
+            if (!isInCodeBlock(match.index)) {
+                codeBlocks.push({ start: match.index, end: match.index + match[0].length });
+            }
         }
 
         // Match URLs, including those containing <, >, [, ], {, }
@@ -856,16 +1378,13 @@ export const method = "${method}"`
         // inline code spans, to prevent remark-math/KaTeX from treating them as math
         // delimiters (which causes unicodeTextInMathMode warnings and broken rendering).
         const lines = content.split('\n');
-        let inCodeBlock = false;
+        const fence = createFenceTracker();
         const result = [];
 
         for (let line of lines) {
-            const stripped = line.trim();
-            if (stripped.startsWith('```') || stripped.startsWith('~~~')) {
-                inCodeBlock = !inCodeBlock;
-            }
+            fence.update(line);
 
-            if (!inCodeBlock) {
+            if (!fence.inCodeBlock) {
                 // Split by inline code spans; odd-indexed segments are inside backticks
                 const parts = line.split(/(`+[^`]+`+)/);
                 line = parts.map((part, i) => {
@@ -940,16 +1459,13 @@ export const method = "${method}"`
         }
 
         const lines = content.split('\n');
-        let inCodeBlock = false;
+        const fence = createFenceTracker();
         const result = [];
 
         for (let line of lines) {
-            const stripped = line.trim();
-            if (stripped.startsWith('```') || stripped.startsWith('~~~')) {
-                inCodeBlock = !inCodeBlock;
-            }
+            fence.update(line);
 
-            if (!inCodeBlock) {
+            if (!fence.inCodeBlock) {
                 // Split by inline code spans; odd-indexed segments are inside backticks
                 const parts = line.split(/(`+[^`]+`+)/);
                 line = parts.map((part, i) => {
@@ -957,7 +1473,8 @@ export const method = "${method}"`
                         // Escape non-HTML lowercase placeholder tags (e.g. <bucket_name>, <region-code>).
                         // Tags with attributes won't match because the regex only allows \s*\/?>
                         part = part.replace(/(?<!\\)<\/?([a-z][a-z0-9]*(?:[_-][a-z0-9]+)*)\s*\/?>/g, (match, tagName) => {
-                            return KNOWN_TAGS.has(tagName) ? match : '\\' + match;
+                            if (KNOWN_TAGS.has(tagName)) return match;
+                            return match.replace(/^\\/, '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
                         });
                         // Escape uppercase/PascalCase tags not identified as real JSX components.
                         // Uses HTML entities so the angle brackets render correctly in the output.
@@ -991,11 +1508,15 @@ export const method = "${method}"`
             const remarkMath = (await import('remark-math')).default;
 
             // Pre-process: fix translation/editor artefacts, then escape problem characters
-            let patchedContent = removeTabsHallucinations(content);
+            let patchedContent = normalizeNestedPlaintextFences(content);
+            patchedContent = removeTabsHallucinations(patchedContent);
             patchedContent = unescapeKnownJsxTags(patchedContent);
             patchedContent = normalizeCodeTagContent(patchedContent);
+            patchedContent = convertHtmlCommentsToMdx(patchedContent);
             patchedContent = this.__escape_currency_dollars(patchedContent);
-            patchedContent = this.__escape_non_html_tags(patchedContent);
+            patchedContent = escapeNonHtmlTags(patchedContent);
+            patchedContent = escapeMathBraces(patchedContent);
+            patchedContent = escapeHtmlElementBraces(patchedContent);
             let maxIterations = 50; // Prevent infinite loops
             let iteration = 0;
             const seenHashes = new Set();
@@ -1157,20 +1678,6 @@ export const method = "${method}"`
                                     }
                                 }
                             } else if (
-                                (error.message.includes('U+007C') || error.message.includes('U+0026')) &&
-                                offset !== undefined && offset > 0
-                            ) {
-                                // `|` (union types like `<number | string>`) or `&` (HTML entities like `&lt;`
-                                // inside angle brackets like `<SearchResults&lt;T&gt;>`) unexpected in JSX tag.
-                                // Walk backward to find `<` and replace with `&lt;`.
-                                for (let i = offset - 1; i >= Math.max(0, offset - 30); i--) {
-                                    if (patchedContent[i] === '<') {
-                                        patchedContent = patchedContent.slice(0, i) + '&lt;' + patchedContent.slice(i + 1);
-                                        madeChanges = true;
-                                        break;
-                                    }
-                                }
-                            } else if (
                                 (error.message.includes('U+002C') || error.message.includes('U+002A') || error.message.includes('U+3001')) &&
                                 offset !== undefined && offset > 0 && offset < patchedContent.length
                             ) {
@@ -1297,10 +1804,53 @@ export const method = "${method}"`
                 lang = langMatch ? langMatch[1] : (classAttr.split(/\s+/)[0] || '');
             }
             const decoded = code.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
-            return '\n```' + lang + '\n' + decoded.replace(/^\n|\n$/g, '') + '\n```\n';
+            return '\n' + createFencedCodeBlock(decoded, lang, 0);
         });
 
         return html;
+    }
+
+    __escapeJsxAttribute(value) {
+        return String(value ?? '')
+            .replace(/&/g, '&amp;')
+            .replace(/"/g, '&quot;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+    }
+
+    __normalizeAdmonitionBody(lines) {
+        let body = Array.isArray(lines) ? lines.join('\n') : String(lines ?? '')
+        let bodyLines = body.split('\n')
+
+        while (bodyLines.length && bodyLines[0].trim() === '') bodyLines.shift()
+        while (bodyLines.length && bodyLines[bodyLines.length - 1].trim() === '') bodyLines.pop()
+
+        const indents = bodyLines
+            .filter(line => line.trim() !== '')
+            .map(line => line.match(/^ */)[0].length)
+        const commonIndent = indents.length ? Math.min(...indents) : 0
+
+        if (commonIndent > 0) {
+            bodyLines = bodyLines.map(line => line.startsWith(' '.repeat(commonIndent)) ? line.slice(commonIndent) : line)
+        }
+
+        return bodyLines.join('\n')
+    }
+
+    __admonitionMarkdown({ type, icon, title, bodyLines, indent }) {
+        const pad = ' '.repeat(indent)
+        const body = this.__normalizeAdmonitionBody(bodyLines)
+        const bodyWithIndent = body ? body.split('\n').map(line => pad + line).join('\n') : ''
+        const titleAttr = this.__escapeJsxAttribute(title || 'Notes')
+        const iconAttr = this.__escapeJsxAttribute(icon)
+
+        return [
+            `${pad}<Admonition type="${type}" icon="${iconAttr}" title="${titleAttr}">`,
+            '',
+            bodyWithIndent,
+            '',
+            `${pad}</Admonition>`,
+        ].join('\n').replace(/(\s*\n){3,}/g, `\n${pad}\n`)
     }
 
     async __callout(block, indent) {
@@ -1316,26 +1866,32 @@ export const method = "${method}"`
         }
 
         let emoji = block['callout']['emoji_id']
-        let type;
+        let type = 'info'
+        let icon = '📘'
+        let title = children[0]?.trim() || 'Notes'
 
         switch (emoji) {
             case 'blue_book':
-                type = `<Admonition type="info" icon="📘" title="${children[0].trim()}">`
+                type = 'info'
+                icon = '📘'
                 break;
             case 'construction':
-                type = `<Admonition type="danger" icon="🚧" title="${children[0].trim()}">`
+                type = 'danger'
+                icon = '🚧'
                 break;
             default:
-                type = `<Admonition type="info" icon="📘" title="${children[0].trim()}">`
-                break; 
-        }               
+                type = 'info'
+                icon = '📘'
+                break;
+        }         
         
-        const converter = new showdown.Converter()
-        let html = converter.makeHtml(children.slice(1).map(line => line.replace(/^\s*/g, '')).join('\n'))
-        html = this.__showdownToMdxSafe(html);
-
-        const raw = ' '.repeat(indent) + type + '\n\n' + ' '.repeat(indent) + html.split('\n').join('\n' + ' '.repeat(indent)) + '\n\n' + ' '.repeat(indent) + '</Admonition>';
-        return raw.replace(/(\s*\n){3,}/g, `\n${' '.repeat(indent)}\n`);
+        return this.__admonitionMarkdown({
+            type,
+            icon,
+            title,
+            bodyLines: children.slice(1),
+            indent,
+        })
     }
 
     async __code(code, indent, prev, next, blocks) {
@@ -1347,7 +1903,7 @@ export const method = "${method}"`
             return content
         }))).join('') 
 
-        if (lang === 'C++') return; // to be removed once c++ is supported
+        // if (lang === 'C++') return; // to be removed once c++ is supported
 
         if (valid_langs.includes(lang)) {
             const prev_type = prev ? this.block_types[prev['block_type']-1] : null;
@@ -1362,7 +1918,6 @@ export const method = "${method}"`
             ) {
                 console.log('first block')
                 const values = this.__code_tabs(code, prev, next, blocks)
-                    .filter(tab => tab.value !== 'c++'); // to be removed once c++ is supported
 
                 return this.__code_block_split(elements, indent, lang, 'first', values);
             }
@@ -1397,15 +1952,16 @@ export const method = "${method}"`
     }
 
     __code_block_split(elements, indent, lang, position, values=null) {
-        elements = elements.split('\n').map(line => line.replaceAll('`', '\\`'));
+        elements = elements.split('\n');
         var divider = elements.indexOf(elements.filter(x => x.match(/^[#\/]\/* ==*/))[0]);
         var tab_item_start = `${' '.repeat(indent)}<TabItem value='${lang.toLowerCase()}'>\n`;
         var tab_item_end = `${' '.repeat(indent)}</TabItem>`
         var tabs_end = `${' '.repeat(indent)}</Tabs>`
         if (divider === -1) {
-            elements = `${' '.repeat(indent)}\`\`\`${lang.toLowerCase()}\n${' '.repeat(indent) + elements.join('\n' + ' '.repeat(indent))}\n${' '.repeat(indent)}\`\`\`\n`
+            elements = createFencedCodeBlock(elements.join('\n'), lang.toLowerCase(), indent)
             switch (position) {
                 case 'first':
+                    values = values && values.length > 0 ? values : [{ label: lang, value: lang.toLowerCase() }]
                     var tabs_start = `${' '.repeat(indent)}<Tabs groupId="code" defaultValue='${values[0].value}' values={${JSON.stringify(values)}}>`;
                     return [tabs_start, tab_item_start, elements, tab_item_end].join('\n');
                 case 'last':
@@ -1434,8 +1990,8 @@ export const method = "${method}"`
             var inner_tab_item_end = `${' '.repeat(indent)}</TabItem>`
             var inner_tabs_end = `${' '.repeat(indent)}</Tabs>`
             
-            half_1 = `${' '.repeat(indent)}\`\`\`${lang.toLowerCase()}\n${' '.repeat(indent) + half_1.slice(1).join('\n' + ' '.repeat(indent))}\n${' '.repeat(indent)}\`\`\`\n`
-            half_2 = `${' '.repeat(indent)}\`\`\`${lang.toLowerCase()}\n${' '.repeat(indent) + half_2.slice(3).join('\n' + ' '.repeat(indent))}\n${' '.repeat(indent)}\`\`\`\n`
+            half_1 = createFencedCodeBlock(half_1.slice(1).join('\n'), lang.toLowerCase(), indent)
+            half_2 = createFencedCodeBlock(half_2.slice(3).join('\n'), lang.toLowerCase(), indent)
 
             switch (position) {
                 case 'first':
@@ -1505,95 +2061,142 @@ export const method = "${method}"`
         });
         let res = (await this.__markdown(quotes, indent)).split('\n');
 
-        let type = 'info Notes';
+        let type = 'info';
+        let icon = '📘';
         let possible_titles = ['Notes', 'Note', '说明', 'ノート', 'Warning', 'Warn', '警告']
-        let title = possible_titles.find((x, i) => res[0].includes(x));
+        let title = possible_titles.find((x, i) => res[0].includes(x)) || 'Notes';
 
 
         if (title && ['Warning', 'Warn', '警告'].indexOf(title) == -1) {
-            type = `info 📘 ${title}`;
+            type = 'info';
+            icon = '📘';
         } else {
-            type = `caution 🚧 ${title}`;
+            type = 'caution';
+            icon = '🚧';
         }
 
-        type = `<Admonition type="${type.split(' ')[0]}" icon="${type.split(' ')[1]}" title="${type.split(' ')[2]}">`;
-        res.splice(1, 0, "");
-
-        const converter = new showdown.Converter()
-        let html = converter.makeHtml(res.slice(1).map(line => line.replace(/^\s*/g, '')).join('\n'))
-        html = this.__showdownToMdxSafe(html);
-
-        const raw = ' '.repeat(indent) + type + '\n\n' + ' '.repeat(indent) + html.split('\n').join('\n' + ' '.repeat(indent)) + '\n\n' + ' '.repeat(indent) + '</Admonition>';
-        return raw.replace(/(\s*\n){3,}/g, '\n\n');
+        return this.__admonitionMarkdown({
+            type,
+            icon,
+            title,
+            bodyLines: res.slice(1),
+            indent,
+        })
     }
-    
+
     async __image(image) {
         const root = this.upload_to_s3 ? IMAGE_BED_URL : `/${this.imageDir.replace(/^static\//g, '')}`
         const caption = image.caption?.content ? image.caption.content.trim() : image.token;
         const slug = slugify(caption, {lower: true, strict: true})
+        const imageUrl = this.__markdown_image_url(`${root}/${slug}.png`);
 
         if (this.skip_image_download) {
-            return `![${caption}](${root}/${slug}.png "${caption}")`;
+            return `![${caption}](${imageUrl} "${caption}")`;
         }
 
         try {
-            const { buffer } = await this.downloader.__downloadImage(image.token)
+            console.log(`[image] downloading ${image.token} → ${slug}.png`)
+            const result = await this.downloader.__downloadImage(image.token)
+            console.log(`[image] download response status: ${result.status} for ${image.token}`)
+            console.log(`[image] reading buffer for ${image.token}`)
+            const buffer = await result.buffer();
+            console.log(`[image] buffer ready (${buffer.length} bytes) for ${image.token}`)
             if (this.upload_to_s3) {
+                console.log(`[image] uploading ${slug}.png to S3`)
                 await this.downloader.__uploadToS3(buffer, `${slug}.png`);
+                console.log(`[image] S3 upload done for ${slug}.png`)
             } else {
-                fs.writeFileSync(`${this.downloader.target_path}/${slug}.png`, buffer);
+                result.body.pipe(fs.createWriteStream(`${this.downloader.target_path}/${slug}.png`));
+                console.log(`[image] written to disk: ${slug}.png`)
             }
         } catch (error) {
-            console.error(`Image ${image.token} error [${error.constructor.name}]: ${error.message}`)
+            console.error(`[image] ERROR for token ${image.token}:`, error.message ?? error)
+            console.log("-------------- A retry is needed -----------------");
+            console.log("Sleeping for 5 seconds")
+            await new Promise(resolve => setTimeout(resolve, 5000));
+            return await this.__image(image)
         }
 
-        return `![${caption}](${root}/${slug}.png "${caption}")`;
+        return `![${caption}](${imageUrl} "${caption}")`;
+    }
+
+    __markdown_image_url(url) {
+        const encodePath = path => path.split('/').map(part => {
+            if (part === '') {
+                return part;
+            }
+            try {
+                return encodeURIComponent(decodeURIComponent(part));
+            } catch (_error) {
+                return encodeURIComponent(part);
+            }
+        }).join('/');
+
+        try {
+            const parsed = new URL(url);
+            parsed.pathname = encodePath(parsed.pathname);
+            return parsed.toString();
+        } catch (_error) {
+            return encodePath(url);
+        }
+    }
+
+    __is_empty_table_cell(cell_text) {
+        return this.__filter_content(cell_text || '', this.targets)
+            .replace(/<br\/?>/g, '')
+            .replace(/&nbsp;/g, '')
+            .replace(/<[^>]*>/g, '')
+            .trim() === '';
     }
 
     async __board(board, indent) {
         const root = this.upload_to_s3 ? IMAGE_BED_URL : `/${ this.imageDir.replace(/^static\//g, '')}`
+        const boardUrl = this.__markdown_image_url(`${root}/${board["token"]}.png`);
 
         if (this.skip_image_download) {
-            return ' '.repeat(indent) + `![${board.token}](${root}/${board["token"]}.png)`;
+            return ' '.repeat(indent) + `![${board.token}](${boardUrl})`;
         }
 
-        try {
-            const result = await this.downloader.__downloadBoardPreview(board.token)
-            if (!result.ok) {
-                console.error(`Board ${board.token} download failed: HTTP ${result.status} ${result.statusText}`)
-            } else {
-                const buffer = await result.buffer()
-                console.log(`Board ${board.token} buffer size: ${buffer.length} bytes`)
-                const trimmedBuffer = await this.__trim_white_borders(buffer);
-                if (this.upload_to_s3) {
-                    await this.downloader.__uploadToS3(trimmedBuffer, `${board["token"]}.png`);
-                } else {
-                    fs.writeFileSync(`${this.downloader.target_path}/${board["token"]}.png`, trimmedBuffer);
-                }
-            }
-        } catch (error) {
-            console.error(`Board ${board.token} error [${error.constructor.name}]: ${error.message}`)
-        }
+        console.log(`[board] downloading preview for ${board.token}`)
+        const result = await this.downloader.__downloadBoardPreview(board.token)
+        console.log(`[board] download response status: ${result.status} for ${board.token}`)
+        await new Promise((resolve, reject) => {
+            const buffers = [];
+            result.body.on('data', (chunk) => buffers.push(chunk));
+            result.body.on('error', reject);
+            result.body.on('end', async () => {
+                try {
+                    const buffer = Buffer.concat(buffers);
+                    console.log(`[board] buffer ready (${buffer.length} bytes) for ${board.token}`)
+                    const trimmedBuffer = await this.__trim_white_borders(buffer);
+                    if (this.upload_to_s3) {
+                        console.log(`[board] uploading ${board.token}.png to S3`)
+                        await this.downloader.__uploadToS3(trimmedBuffer, `${board["token"]}.png`);
+                        console.log(`[board] S3 upload done for ${board.token}.png`)
+                    } else {
+                        fs.writeFileSync(`${this.downloader.target_path}/${board["token"]}.png`, trimmedBuffer);
+                        console.log(`[board] written to disk: ${board.token}.png`)
+                    }
+                    resolve()
+                } catch (err) { reject(err) }
+            });
+        });
 
-        return ' '.repeat(indent) + `![${board.token}](${root}/${board["token"]}.png)`;
+        return ' '.repeat(indent) + `![${board.token}](${boardUrl})`;
     }
 
     async __trim_white_borders(image) {
         const sharp = require('sharp');
 
-        const timeout = new Promise((_, reject) =>
-            setTimeout(() => reject(new Error('sharp toBuffer() timed out after 30s')), 30000)
-        );
-
         try {
-            console.log(`sharp trim: input ${image.length} bytes, magic ${image.slice(0,4).toString('hex')}`)
+            // Let Sharp auto-detect background from top-left pixel (likely white)
             const trimmedImage = await sharp(image)
                 .trim({
                   background: { r: 255, g: 255, b: 255 },
-                  threshold: 10
+                  threshold: 10                    
                 }).png()
 
-            console.log(`sharp trim: pipeline built, calling toBuffer()`)
+            // Add a 10-pixel white border around the trimmed image
             const borderedImage = trimmedImage.extend({
                 top: 20,
                 bottom: 20,
@@ -1602,8 +2205,7 @@ export const method = "${method}"`
                 background: { r: 255, g: 255, b: 255 }
             });
 
-            const buffer = await Promise.race([borderedImage.toBuffer(), timeout]);
-            console.log(`sharp trim: output ${buffer.length} bytes`)
+            const buffer = await borderedImage.toBuffer();
             return buffer;
 
         } catch (error) {
@@ -1617,7 +2219,7 @@ export const method = "${method}"`
         const iframe = block['iframe'];
         const existing_iframe = this.iframes.find(x => x.block_id === block_id)
         if (existing_iframe) {
-            return `![${existing_iframe.caption}](${root}/${existing_iframe.caption}.png "${existing_iframe.caption}")`;
+            return `![${existing_iframe.caption}](${this.__markdown_image_url(`${root}/${existing_iframe.caption}.png`)} "${existing_iframe.caption}")`;
         }
 
         if (iframe['component']['iframe_type'] !== 8) {
@@ -1631,7 +2233,7 @@ export const method = "${method}"`
                 block_id,
                 caption
             })
-            return `![${caption}](${root}/${caption}.png "${caption}")`;
+            return `![${caption}](${this.__markdown_image_url(`${root}/${caption}.png`)} "${caption}")`;
         } else {
             try {
                 const url = new URL(decodeURIComponent(iframe.component.url))
@@ -1651,7 +2253,7 @@ export const method = "${method}"`
                     })
                 }
 
-                return `![${caption}](${root}/${caption}.png "${caption}")`;
+                return `![${caption}](${this.__markdown_image_url(`${root}/${caption}.png`)} "${caption}")`;
             } catch (error) {
                 console.log(error)
                 console.log("-------------- A retry is needed -----------------");
@@ -1662,6 +2264,98 @@ export const method = "${method}"`
         }
     }
 
+    __tableMergeInfoHasMerges(mergeInfo) {
+        return Array.isArray(mergeInfo) && mergeInfo.some(merge => {
+            return !merge || merge.col_span > 1 || merge.row_span > 1
+        })
+    }
+
+    __sheetHasMerges(merges) {
+        return Array.isArray(merges) && merges.length > 0
+    }
+
+    __isMarkdownTableSafeCell(cell) {
+        const content = String(cell ?? '').trim()
+
+        if (!content) return true
+
+        return ![
+            /^```/m,
+            /^\s*[-*+]\s+/m,
+            /^\s*\d+\.\s+/m,
+            /<\/?(Admonition|Tabs|TabItem|table|tr|td|th|ul|ol|li|pre|div)\b/,
+        ].some(pattern => pattern.test(content))
+    }
+
+    __markdownTableCell(cell) {
+        return String(cell ?? '')
+            .trim()
+            .split(/\r?\n+/)
+            .map(line => line.trim())
+            .join('<br/>')
+            .replace(/^\n/, '')
+            .replace(/(?<!~)~(?!~)/g, '&#126;')
+            .replace(/\|/g, '\\|')
+    }
+
+    __markdownTable(rows, indent) {
+        if (!rows.length) return ''
+
+        const columnSize = Math.max(...rows.map(row => row.length))
+        const pad = ' '.repeat(indent)
+        const normalizedRows = rows.map(row => {
+            return Array.from({ length: columnSize }, (_, idx) => this.__markdownTableCell(row[idx]))
+        })
+        const header = normalizedRows[0]
+        const body = normalizedRows.slice(1)
+        const separator = Array.from({ length: columnSize }, () => '---')
+        const renderRow = row => `${pad}| ${row.join(' | ')} |`
+
+        return [
+            renderRow(header),
+            renderRow(separator),
+            ...body.map(renderRow),
+        ].join('\n') + '\n'
+    }
+
+    __htmlTableCellMarkdown(cell) {
+        return String(cell ?? '')
+            .trim()
+            .replace(/^\n/, '')
+            .replace(/<br\/>/g, '\n\n')
+            .replace(/(?<!~)~(?!~)/g, '&#126;')
+    }
+
+    __htmlTableCellContent(cell, converter) {
+        let cellText = this.__htmlTableCellMarkdown(cell)
+
+        // Protect Admonition JSX from showdown's <p> wrapping
+        var admonitions = [];
+        cellText = cellText.replace(
+            /<Admonition[^>]*>[\s\S]*?<\/Admonition>/g,
+            (match) => {
+                admonitions.push(match);
+                return `%%ADMONITION_${admonitions.length - 1}%%`;
+            }
+        );
+
+        admonitions = admonitions.map(admonition => admonition.replace(/\n/g, ''));
+
+        cellText = converter.makeHtml(cellText)
+            .replace(/\n/g, '')
+            .replace(/&amp;/g, '&')
+            .replace(/\*/g, '&ast;');
+
+        // Restore Admonition components (strip <p> wrapper showdown added)
+        cellText = cellText.replace(
+            /<p>%%ADMONITION_(\d+)%%<\/p>/g,
+            (_, idx) => admonitions[parseInt(idx)]
+        );
+
+        // escape { and } for MDX
+        return cellText.replace(/\{/g, '\\{').replace(/\}/g, '\\}');
+    }
+
     async __table(table, indent) {
         const converter = new showdown.Converter({ underline: true })
         const cells = table['cells'];
@@ -1670,12 +2364,50 @@ export const method = "${method}"`
         });
         const cell_texts = await Promise.all(cell_blocks.map(async (cell) => {
             let blocks = cell.map(block => this.__retrieve_block_by_id(block));
-            return (await this.__markdown(blocks, 1)).replace(/\n/g, '<br/>');
+            return this.__filter_content(await this.__markdown(blocks, 1), this.targets).trim();
         }));
 
         const row_size = table['property']['row_size'];
         const column_size = table['property']['column_size'];
-        var merge_info = table['property']['merge_info'];
+        var merge_info = Array.isArray(table['property']['merge_info'])
+            ? table['property']['merge_info']
+            : Array.from({ length: row_size * column_size }, () => ({ col_span: 1, row_span: 1 }));
+        const hasMerges = this.__tableMergeInfoHasMerges(merge_info);
+        const empty_columns = new Set();
+
+        for (var col = 0; col < column_size; col++) {
+            var is_empty_column = true;
+            for (var row = 0; row < row_size; row++) {
+                const cell_idx = row * column_size + col;
+                const merge = merge_info[cell_idx];
+                if (!merge || merge.col_span !== 1 || merge.row_span !== 1 || !this.__is_empty_table_cell(cell_texts[cell_idx])) {
+                    is_empty_column = false;
+                    break;
+                }
+            }
+            if (is_empty_column) {
+                empty_columns.add(col);
+            }
+        }
+
+        if (!hasMerges && cell_texts.every(cell => this.__isMarkdownTableSafeCell(cell))) {
+            const rows = [];
+            for (var rowIdx = 0; rowIdx < row_size; rowIdx++) {
+                const row = [];
+                for (var colIdx = 0; colIdx < column_size; colIdx++) {
+                    if (!empty_columns.has(colIdx)) {
+                        row.push(cell_texts[rowIdx * column_size + colIdx]);
+                    }
+                }
+                rows.push(row);
+            }
+
+            return this.__markdownTable(rows, indent);
+        }
+
+        cell_texts.forEach((cell, idx) => {
+            cell_texts[idx] = cell.replace(/\n/g, '<br/>');
+        })
         
         merge_info = merge_info.map((merge, idx) => {
             if (merge) {
@@ -1694,51 +2426,16 @@ export const method = "${method}"`
         for (var i = 0; i < row_size; i++) {
             html += ' '.repeat(indent) +'   <tr>\n';
             for (var j = 0; j < column_size; j++) {
+                if (empty_columns.has(j)) {
+                    continue;
+                }
                 const cell_idx = i * column_size + j;
                 const merge = merge_info[cell_idx];
 
                 if (merge) {
                     const colspan = merge.col_span > 1 ? ` colspan="${merge.col_span}"` : "";
                     const rowspan = merge.row_span > 1 ? ` rowspan="${merge.row_span}"` : "";
-                    let cell_text = this.__filter_content(cell_texts[cell_idx], this.targets).trim()
-                        .replace(/^\n/, '')
-                        .replace(/<br\/>/g, '\n\n');
-
-                    // Escape solitary tildes to prevent MDX strikethrough parsing
-                    cell_text = cell_text.replace(/(?<!~)~(?!~)/g, '&#126;');
-
-                    // Protect Admonition JSX from showdown's <p> wrapping
-                    var admonitions = [];
-                    cell_text = cell_text.replace(
-                        /<Admonition[^>]*>[\s\S]*?<\/Admonition>/g,
-                        (match) => {
-                            admonitions.push(match);
-                            return `%%ADMONITION_${admonitions.length - 1}%%`;
-                        }
-                    );
-
-                    admonitions = admonitions.map(admonition => admonition.replace(/\n/g, ''));
-
-                    cell_text = converter.makeHtml(cell_text)
-                        .replace(/\n/g, '')
-                        .replace(/&amp;/g, '&')
-                        .replace(/\*/g, '&ast;');
-
-                    admonitions = admonitions.map(admonition => admonition.replace(/\n/g, ''));
-
-                    cell_text = converter.makeHtml(cell_text)
-                        .replace(/\n/g, '')
-                        .replace(/&amp;/g, '&')
-                        .replace(/\*/g, '&ast;');
-
-                    // Restore Admonition components (strip <p> wrapper showdown added)
-                    cell_text = cell_text.replace(
-                        /<p>%%ADMONITION_(\d+)%%<\/p>/g,
-                        (_, idx) => admonitions[parseInt(idx)]
-                    );
-
-                    // escape { and } for MDX
-                    cell_text = cell_text.replace(/\{/g, '\\{').replace(/\}/g, '\\}');
+                    let cell_text = this.__htmlTableCellContent(cell_texts[cell_idx], converter);
 
                     if (i === 0) {
                         html += ` ${' '.repeat(indent)}    <th${colspan}${rowspan}>${cell_text}</th>\n`;
@@ -1758,11 +2455,26 @@ export const method = "${method}"`
         const converter = new showdown.Converter({ underline: true })
         const merges = sheet.meta?.data.sheet.merges;
         const values = sheet.values.data.valueRange.values;
+        const markdownRows = await Promise.all(values.map(async row => {
+            return Promise.all(row.map(async cell => {
+                if (cell && typeof cell === 'object') {
+                    return this.__sheet_cell(cell, { markdown: true })
+                }
+
+                return String(cell ?? '')
+            }))
+        }))
+
+        if (!this.__sheetHasMerges(merges) && markdownRows.every(row => row.every(cell => this.__isMarkdownTableSafeCell(cell)))) {
+            return this.__markdownTable(markdownRows, indent);
+        }
+
         var result = ' '.repeat(indent) + "<table>" + "\n";
 
-        values.forEach((row, ridx) => {
+        for (const [ridx, row] of values.entries()) {
             result += ' '.repeat(indent) + '    ' + "<tr>" + "\n";
-            row.forEach((cell, cidx) => {
+            for (const [cidx, rawCell] of row.entries()) {
+                let cell = rawCell
                 var colspan = "";
                 var rowspan = "";
                 if (merges) {
@@ -1777,8 +2489,8 @@ export const method = "${method}"`
                     cell = cell.replace(/\n/g, '<br/>')
                 }
 
-                if (typeof cell === 'object') {
-                    cell = this.__sheet_cell(cell)
+                if (cell && typeof cell === 'object') {
+                    cell = await this.__sheet_cell(cell)
                 } 
 
                 if (typeof cell === 'number') {
@@ -1792,26 +2504,33 @@ export const method = "${method}"`
                 } else {
                     result += `${' '.repeat(indent) + '    '.repeat(2)}<td${colspan ? " " + colspan : ""}${rowspan ? " " + rowspan : ""}>${converter.makeHtml(cell).replace(/\n/g, '')}</td>\n`
                 }
-            })
+            }
             result += ' '.repeat(indent) + '    ' + "</tr>" + "\n"
-        });
+        }
 
         result += ' '.repeat(indent) + "</table>" + "\n";
 
         return result.replace('"{', '"\\{');
     }    
 
-    __sheet_cell(cell) {
+    async __sheet_cell(cell, options={}) {
         if (cell instanceof Array) {
-            return cell.map(block => {
+            const blocks = await Promise.all(cell.map(async block => {
                 if (block['type'] === 'text') {
                     return block['text']
                 }
     
                 if (block['type'] === 'url') {
-                    return `<a href="${block['link']}">${block['text']}</a>`
+                    const link = await this.__convert_link(block['link'])
+                    const href = link || block['link']
+                    if (options.markdown) {
+                        return `[${String(block['text']).replace(/\]/g, '\\]')}](${href})`
+                    }
+
+                    return `<a href="${href}">${block['text']}</a>`
                 }
-            }).join('')
+            }))
+            return blocks.join('')
         } else {
             console.log(cell)
             return ''
@@ -1912,8 +2631,6 @@ export const method = "${method}"`
             }
 
             if ('link' in style) {
-                const url = await this.__convert_link(decodeURIComponent(style['link']['url']))
-
                 var prefix = [...content.matchAll(/(^\*\*|^\*|^~~)/g)]
                 var suffix = [...content.matchAll(/(\*\*$|\*$|~~$)/g)]
 
@@ -1929,7 +2646,12 @@ export const method = "${method}"`
                     suffix = ''
                 }
 
-                content = `${prefix}[${content.replace(prefix, '').replace(suffix, '')}](${url})${suffix}`;
+                const linkText = content.replace(prefix, '').replace(suffix, '')
+                const url = await this.__convert_link(decodeURIComponent(style['link']['url']), linkText)
+
+                if (url) {
+                    content = `${prefix}[${linkText}](${url})${suffix}`;
+                }
             }
         }
 
@@ -1977,7 +2699,7 @@ export const method = "${method}"`
 
     async __mention_doc(element) {
         let title = element['mention_doc']['title'];
-        let url = await this.__convert_link(decodeURIComponent(element['mention_doc']['url']));
+        let url = await this.__convert_link(decodeURIComponent(element['mention_doc']['url']), title);
         if (url) {
             return `[${title}](${url})`;
         } else {
@@ -1988,6 +2710,7 @@ export const method = "${method}"`
     }
 
     async __convert_link(url) {
+        url = this.__apply_link_replacement_shim(url)
         if (url.includes('zilliverse')) {
             url = new URL(url);
             const token = url.pathname.split('/').pop();
@@ -2011,7 +2734,9 @@ export const method = "${method}"`
                 }
             } else {
                 try {
-                    page = this.__fetch_doc_source(['token', 'obj_token'], token);
+                    page = typeof this.__fetch_link_doc_source === 'function'
+                        ? this.__fetch_link_doc_source(token)
+                        : this.__fetch_doc_source(['token', 'obj_token'], token);
                 } catch (error) {
                     page = null;
                 }
@@ -2026,13 +2751,7 @@ export const method = "${method}"`
                 let newUrl = `./${slug}`;
 
                 if (header) {
-                    let headerBlock;
-
-                    try {
-                        headerBlock = page['blocks']['items'].filter(x => x['block_id'] === header)[0];
-                    } catch (error) {
-                        throw new Error(`Header block ${header} not found in page ${title}, and the page token is ${token}`);
-                    }
+                    const headerBlock = page['blocks']['items'].filter(x => x['block_id'] === header)[0];
 
                     if (headerBlock) {
                         const blockType = this.block_types[headerBlock['block_type'] - 1];
@@ -2254,9 +2973,18 @@ export const method = "${method}"`
         ]
     }
 
-    keyword_picker() {
-        const keywords = fs.readFileSync(node_path.join('plugins', 'lark-docs', 'meta', 'keywords.txt'), 'utf8').trim().split('\n')
-        const seed = Math.floor(Math.random() * keywords.length)
+    keyword_picker(seedInput=null) {
+        const keywordFile = node_path.join('plugins', 'lark-docs', 'meta', 'keywords.txt')
+        const fallbackKeywords = ['Milvus', 'vector database', 'embedding', 'similarity search']
+        const keywords = fs.existsSync(keywordFile)
+            ? fs.readFileSync(keywordFile, 'utf8').trim().split('\n').filter(Boolean)
+            : fallbackKeywords
+        let seed = Math.floor(Math.random() * keywords.length)
+        if (seedInput != null) {
+            seed = String(seedInput).split('').reduce((hash, char) => {
+                return (hash * 31 + char.charCodeAt(0)) >>> 0
+            }, 0) % keywords.length
+        }
         return [keywords[seed], keywords[(seed+1)%keywords.length], keywords[(seed+2)%keywords.length], keywords[(seed+3)%keywords.length]]
     }
 }

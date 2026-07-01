@@ -30,6 +30,54 @@ class larkDriveWriter extends larkDocWriter {
         this.utils = new Utils();
     }
 
+    __slug_value(slug) {
+        return slug instanceof Array ? slug[0]?.text || slug[0]?.[slug[0]?.type] : slug
+    }
+
+    __slug_contexts(parentSlug) {
+        const contexts = [parentSlug].filter(Boolean)
+        if (parentSlug && parentSlug.includes('-')) {
+            contexts.push(parentSlug.split('-').pop())
+        }
+        return contexts
+    }
+
+    __drive_source_candidates(token) {
+        return fs.readdirSync(this.docSourceDir)
+            .filter(file => file.endsWith('.json'))
+            .map(file => {
+                const source = JSON.parse(fs.readFileSync(node_path.join(this.docSourceDir, file), 'utf8'))
+                source.__source_file = file
+                return source
+            })
+            .filter(source => source.token === token)
+    }
+
+    __drive_source_for_child(child, parentSlug=null) {
+        const candidates = this.__drive_source_candidates(child.token)
+        if (candidates.length === 0) return null
+        if (candidates.length === 1) return candidates[0]
+
+        const contexts = this.__slug_contexts(parentSlug)
+        const contextual = candidates.filter(source => {
+            const slug = this.__slug_value(source.slug)
+            return contexts.some(context => slug === context || slug?.startsWith(`${context}-`))
+        })
+
+        if (contextual.length === 1) return contextual[0]
+
+        const exactFile = candidates.find(source => source.__source_file === `${child.token}.json`)
+        return exactFile || candidates[0]
+    }
+
+    __fetch_link_doc_source(token) {
+        const source = this.__drive_source_for_child({ token }, this.currentParentSlug)
+        if (!source) {
+            throw new Error(`Cannot find ${token} in ${this.docSourceDir}`)
+        }
+        return source
+    }
+
     async write_docs(path, token) {
         const forEachAsync = async (array, callback) => {
             for (let index = 0; index < array.length; index++) {
@@ -42,10 +90,8 @@ class larkDriveWriter extends larkDocWriter {
 
         if (node.children) {
             await forEachAsync(node.children, async (child, index) => {
-                var source = fs.readdirSync(this.docSourceDir).find(file => file === `${child.token}.json`)
+                var source = this.__drive_source_for_child(child, node.slug)
                 if (source) {
-                    source = JSON.parse(fs.readFileSync(node_path.join(this.docSourceDir, source), 'utf8'))
-
                     if (source.blocks) {
                         // console.log(source.slug, '=> doc')
                         const meta = await this.__is_to_publish(source.name, source.slug, source.token)
@@ -71,7 +117,7 @@ class larkDriveWriter extends larkDocWriter {
                                 notebook: 'false',
                                 sidebar_position: index+1,
                                 sidebar_label: meta['labels'],
-                                keywords: this.keyword_picker().concat('zilliz', 'zilliz cloud', 'cloud', source.name, this.manual),
+                                keywords: this.keyword_picker(`${source.slug}:${source.name}`).concat('zilliz', 'zilliz cloud', 'cloud', source.name, this.manual),
                                 doc_card_list: false,
                                 addedSince: addedSince,
                                 lastModified: lastModified,
@@ -97,26 +143,32 @@ class larkDriveWriter extends larkDocWriter {
                                 fs.mkdirSync(node_path.join(current_path, slug), { recursive: true });
                             }
 
-                            await this.write_doc({
-                                path: node_path.join(current_path, slug),
-                                page_title: source.name,
-                                page_slug: slug,
-                                page_beta: tag,
-                                notebook: 'false',
-                                page_type: source_type,
-                                page_token: token,
-                                page_description: description,
-                                sidebar_position: index+1,
-                                sidebar_label: meta['labels'],
-                                keywords: this.keyword_picker().concat('zilliz', 'zilliz cloud', 'cloud', source.name, this.manual).join(','),
-                                doc_card_list: true,
-                                addedSince: addedSince,
-                                lastModified: lastModified,
-                                deprecateSince: deprecateSince,
-                            })
+                            const category = this.categorize_node(source)
+
+                            if (category === 'meaningful') {
+                                await this.write_doc({
+                                    path: node_path.join(current_path, slug),
+                                    page_title: source.name,
+                                    page_slug: slug,
+                                    page_beta: tag,
+                                    notebook: 'false',
+                                    page_type: source_type,
+                                    page_token: token,
+                                    page_description: description,
+                                    sidebar_position: index+1,
+                                    sidebar_label: meta['labels'],
+                                    keywords: this.keyword_picker(`${source.slug}:${source.name}`).concat('zilliz', 'zilliz cloud', 'cloud', source.name, this.manual).join(','),
+                                    doc_card_list: true,
+                                    addedSince: addedSince,
+                                    lastModified: lastModified,
+                                    deprecateSince: deprecateSince,
+                                })
+                            } else {
+                                console.log(`${node_path.join(current_path, slug)}/ [meaningless category — no index page generated]`)
+                            }
 
                             await this.write_docs(node_path.join(current_path, slug), token)
-                        }                     
+                        }
                     }
                 }    
             })
@@ -143,10 +195,11 @@ class larkDriveWriter extends larkDocWriter {
 
         let obj;
         var current_path = path
-        var keywords = this.keyword_picker().concat('zilliz', 'zilliz cloud', 'cloud', page_title, this.manual).join(',')
+        var keywords = this.keyword_picker(`${page_slug}:${page_title}`).concat('zilliz', 'zilliz cloud', 'cloud', page_title, this.manual).join(',')
+        this.currentParentSlug = node_path.basename(path)
 
         if (page_token) {
-            obj = this.__fetch_doc_source('token', page_token)
+            obj = this.__fetch_doc_source('token', page_token, page_slug)
             var page;
             if (obj.children) {
                 const pair = this.utils.locate_drive_source_pair(this.docSourceDir, page_token, page_slug)
@@ -192,9 +245,7 @@ class larkDriveWriter extends larkDocWriter {
                 })
 
                 current_path = node_path.join(current_path, page_slug + '.md')
-                const slug = this.displayedSidebar === 'goSidebar'
-                    ? page_slug
-                    : `${this.displayedSidebar.replace('Sidebar', '')}/${page_slug}`
+                const slug = `${this.displayedSidebar.replace('Sidebar', '')}/${page_slug}`
 
                 console.log(addedSince, lastModified, deprecateSince)
                 var {front_matter, imports, markdown} = await this.__write_page({
@@ -212,7 +263,7 @@ class larkDriveWriter extends larkDocWriter {
                 })
 
                 front_matter = front_matter.split('\n')
-                // front_matter.splice(front_matter.length - 1, 0, `displayed_sidebar: ${this.displayedSidebar}`)
+                front_matter.splice(front_matter.length - 1, 0, `displayed_sidbar: ${this.displayedSidebar}`)
                 front_matter.splice(5, 0, `added_since: ${addedSince ? addedSince : 'FALSE'}`)
                 front_matter.splice(6, 0, `last_modified: ${lastModified ? lastModified : 'FALSE'}`)
                 front_matter.splice(7, 0, `deprecate_since: ${deprecateSince ? deprecateSince : 'FALSE'}`)
@@ -221,6 +272,50 @@ class larkDriveWriter extends larkDocWriter {
                 fs.writeFileSync(current_path, front_matter + '\n\n' + imports + '\n\n' + markdown)
             }
         }
+    }
+
+    async __sidebar_items(currentPath, contentRoot, token) {
+        let node
+        try { node = this.__fetch_doc_source('token', token) } catch (e) { return [] }
+        if (!node.children) return []
+
+        const items = []
+
+        for (let i = 0; i < node.children.length; i++) {
+            const child = node.children[i]
+            const sourceFile = fs.readdirSync(this.docSourceDir).find(f => f === `${child.token}.json`)
+            if (!sourceFile) continue
+
+            const source = JSON.parse(fs.readFileSync(node_path.join(this.docSourceDir, sourceFile), 'utf8'))
+            const meta = await this.__is_to_publish(source.name, source.slug, source.token)
+            if (!meta.publish) continue
+
+            const slug = source.slug instanceof Array ? source.slug[0].text : source.slug
+            const label = meta.labels || source.name
+
+            if (source.blocks) {
+                // leaf doc
+                const docId = node_path.join(currentPath, slug)
+                    .replace(/\\/g, '/')
+                    .replace(new RegExp(`^${contentRoot}/`), '')
+                items.push({ type: 'doc', id: docId, label })
+            } else if (source.children) {
+                // folder/category
+                const category = this.categorize_node(source)
+                const childItems = await this.__sidebar_items(node_path.join(currentPath, slug), contentRoot, source.token)
+
+                if (category === 'meaningful') {
+                    const docId = node_path.join(currentPath, slug, slug)
+                        .replace(/\\/g, '/')
+                        .replace(new RegExp(`^${contentRoot}/`), '')
+                    items.push({ type: 'category', label, link: { type: 'doc', id: docId }, items: childItems })
+                } else {
+                    items.push({ type: 'category', label, items: childItems })
+                }
+            }
+        }
+
+        return items
     }
 }
 
