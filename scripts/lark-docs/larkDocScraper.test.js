@@ -1,5 +1,8 @@
 const assert = require('node:assert/strict');
 const Module = require('node:module');
+const fs = require('node:fs');
+const os = require('node:os');
+const path = require('node:path');
 
 async function testFeishuJsonFetchesAreThrottled() {
   const originalLoad = Module._load;
@@ -63,9 +66,137 @@ async function testSlugifyRejectsAmbiguousTitleFallback() {
   );
 }
 
+async function testSlugifyResolvesAmbiguousTitleWithParentContext() {
+  const larkDocScraper = require('./larkDocScraper');
+  const scraper = new larkDocScraper('', '', 'wiki', '/tmp');
+
+  scraper.slugs = {
+    WToudUwm4oVXeKxLg3jcj3IAnjh: {
+      slug: 'ORM-CollectionSchema',
+      title: 'CollectionSchema',
+    },
+    WVy8dc7Jaonoxqxk7Cvc72KSnvb: {
+      slug: 'MilvusClient-CollectionSchema',
+      title: 'CollectionSchema',
+    },
+  };
+
+  assert.equal(
+    await scraper.__slugify('CFK5fYjallg3eZdIWqfcdin8noc', 'CollectionSchema', 'MilvusClient'),
+    'MilvusClient-CollectionSchema'
+  );
+}
+
+async function testDriveFolderSlugifyUsesParentContext() {
+  const larkDocScraper = require('./larkDocScraper');
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'lark-doc-scraper-'));
+  const scraper = new larkDocScraper('', '', 'drive', tempDir);
+
+  scraper.docs = {
+    token: 'CFK5fYjallg3eZdIWqfcdin8noc',
+    name: 'CollectionSchema',
+  };
+  scraper.slugs = {
+    WToudUwm4oVXeKxLg3jcj3IAnjh: {
+      slug: 'ORM-CollectionSchema',
+      title: 'CollectionSchema',
+    },
+    WVy8dc7Jaonoxqxk7Cvc72KSnvb: {
+      slug: 'MilvusClient-CollectionSchema',
+      title: 'CollectionSchema',
+    },
+  };
+  scraper.__fetchFeishuJson = async () => ({
+    code: 0,
+    data: {
+      files: [],
+    },
+  });
+
+  await scraper.__fetch_drive_children('CFK5fYjallg3eZdIWqfcdin8noc', null, false, 'MilvusClient');
+
+  assert.equal(scraper.docs.slug, 'MilvusClient-CollectionSchema');
+}
+
+async function testDriveFolderRecursionKeepsSiblingParentContext() {
+  const larkDocScraper = require('./larkDocScraper');
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'lark-doc-scraper-'));
+  const scraper = new larkDocScraper('', '', 'drive', tempDir);
+
+  scraper.docs = {
+    token: 'root-token',
+    name: 'v2',
+  };
+  scraper.slugs = {
+    'root-token': { slug: 'v2', title: 'v2' },
+    'orm-folder-token': { slug: 'ORM', title: 'ORM' },
+    'client-folder-token': { slug: 'MilvusClient', title: 'MilvusClient' },
+    WToudUwm4oVXeKxLg3jcj3IAnjh: {
+      slug: 'ORM-CollectionSchema',
+      title: 'CollectionSchema',
+    },
+    WVy8dc7Jaonoxqxk7Cvc72KSnvb: {
+      slug: 'MilvusClient-CollectionSchema',
+      title: 'CollectionSchema',
+    },
+  };
+  scraper.__fetchFeishuJson = async (url) => {
+    if (url.includes('folder_token=root-token')) {
+      return {
+        code: 0,
+        data: {
+          files: [
+            { token: 'orm-folder-token', name: 'ORM', type: 'folder' },
+            { token: 'client-folder-token', name: 'MilvusClient', type: 'folder' },
+          ],
+        },
+      };
+    }
+
+    if (url.includes('folder_token=orm-folder-token')) {
+      return {
+        code: 0,
+        data: {
+          files: [],
+        },
+      };
+    }
+
+    if (url.includes('folder_token=client-folder-token')) {
+      return {
+        code: 0,
+        data: {
+          files: [
+            { token: 'CFK5fYjallg3eZdIWqfcdin8noc', name: 'CollectionSchema', type: 'folder' },
+          ],
+        },
+      };
+    }
+
+    if (url.includes('folder_token=CFK5fYjallg3eZdIWqfcdin8noc')) {
+      return {
+        code: 0,
+        data: {
+          files: [],
+        },
+      };
+    }
+
+    throw new Error(`Unexpected URL: ${url}`);
+  };
+
+  await scraper.__fetch_drive_children('root-token', null, true);
+
+  const collectionSchema = JSON.parse(fs.readFileSync(path.join(tempDir, 'CFK5fYjallg3eZdIWqfcdin8noc.json'), 'utf8'));
+  assert.equal(collectionSchema.slug, 'MilvusClient-CollectionSchema');
+}
+
 async function run() {
   await testFeishuJsonFetchesAreThrottled();
   await testSlugifyRejectsAmbiguousTitleFallback();
+  await testSlugifyResolvesAmbiguousTitleWithParentContext();
+  await testDriveFolderSlugifyUsesParentContext();
+  await testDriveFolderRecursionKeepsSiblingParentContext();
   console.log('lark-docs scraper tests passed');
 }
 
