@@ -151,3 +151,4 @@ kubectl delete milvus my-release
 ## What's next
 
 - [Woodpecker (default message queue)](woodpecker.md)
+- [Switch between Pulsar and Woodpecker](switch-pulsar-woodpecker.md)

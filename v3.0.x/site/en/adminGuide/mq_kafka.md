@@ -121,3 +121,4 @@ kubectl delete milvus my-release
 ## What's next
 
 - [Woodpecker (default message queue)](woodpecker.md)
+- [Switch between Kafka and Woodpecker](switch-kafka-woodpecker.md)
