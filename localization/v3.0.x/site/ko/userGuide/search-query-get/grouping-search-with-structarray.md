@@ -22,7 +22,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>이 페이지를 사용하여 StructArray 요소 수준 검색 결과를 상위 엔티티별로 그룹화할 수 있습니다. 여러 Struct 요소가 쿼리와 일치할 경우, 요소 수준 검색에서는 동일한 엔티티에서 여러 개의 검색 결과가 반환될 수 있습니다. 그룹화 기능을 사용하면 이러한 요소 검색 결과를 통합하여 각 상위 엔티티가 최대 한 번만 표시되도록 합니다.</p>
-<p>이 페이지에서는 <a href="/docs/ko/create-structarray-field.md">‘StructArray 필드 생성’의</a> <code translate="no">tech_articles</code> 컬렉션을 사용합니다. 이 컬렉션에는 <code translate="no">chunks</code> 라는 StructArray 필드가 있습니다. <code translate="no">chunks[emb]</code> 벡터 하위 필드는 일반 벡터 메트릭을 사용하여 요소 수준 검색에 대한 인덱싱이 되어 있습니다.</p>
+<p>이 페이지에서는 <a href="/docs/ko/create-structarray-field.md">‘StructArray 필드 생성’의</a> <code translate="no">tech_articles</code> 컬렉션을 사용합니다. 이 컬렉션에는 <code translate="no">chunks</code> 라는 StructArray 필드가 있습니다. <code translate="no">chunks[emb]</code> 벡터 하위 필드는 일반 벡터 메트릭을 사용하여 요소 수준 검색이 가능하도록 인덱싱되어 있습니다.</p>
 <h2 id="How-grouping-applies-to-StructArray" class="common-anchor-header">StructArray에 그룹화가 적용되는 방식<button data-href="#How-grouping-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -49,7 +49,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>그룹화되지 않은 요소 수준 검색에서 중복된 상위 엔티티가 너무 많이 반환될 경우 그룹화를 사용하십시오. 일치하는 모든 Struct 요소를 개별 검색 결과로 얻으려면, ` <code translate="no">group_by_field</code>`를 사용하지 않고 <a href="/docs/ko/basic-vector-search-with-structarray.md">StructArray와 함께 기본 벡터 검색을</a> 사용하십시오.</p>
+<p>그룹화되지 않은 요소 수준 검색에서 중복된 상위 엔티티가 너무 많이 반환될 경우 그룹화를 사용하십시오. 일치하는 모든 Struct 요소를 개별 히트로 반환하려면 ` <code translate="no">group_by_field</code>`를 사용하지 않고 <a href="/docs/ko/basic-vector-search-with-structarray.md">StructArray와 함께 기본 벡터 검색을</a> 사용하십시오.</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">시작하기 전에<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -129,7 +129,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>그룹화를 하지 않으면, 여러 청크가 쿼리와 일치하는 경우 동일한 <code translate="no">doc_id</code> 가 여러 번 나타날 수 있습니다. <code translate="no">group_by_field=&quot;doc_id&quot;</code> 를 사용하면 각 부모 엔티티가 최대 한 번만 나타납니다. 그룹화는 요소 수준 메타데이터를 보존하므로, API 또는 SDK가 이를 노출하는 경우 그룹화된 결과에도 선택한 Struct 요소 인덱스나 오프셋이 포함될 수 있습니다.</p>
+<p>그룹화를 하지 않으면, 여러 청크가 쿼리와 일치하는 경우 동일한 <code translate="no">doc_id</code> 가 여러 번 나타날 수 있습니다. <code translate="no">group_by_field=&quot;doc_id&quot;</code> 를 사용하면 각 부모 엔티티가 최대 한 번만 나타납니다. 그룹화는 요소 수준 메타데이터를 보존하므로, API 또는 SDK가 노출하는 경우 그룹화된 결과에도 선택한 Struct 요소 인덱스나 오프셋이 포함될 수 있습니다.</p>
 <h2 id="Add-scalar-filters" class="common-anchor-header">스칼라 필터 추가<button data-href="#Add-scalar-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -290,7 +290,7 @@ results = client.hybrid_search(
 <li><p>여러 필드를 기준으로 그룹화하는 경우. 요소 수준 StructArray 그룹화는 기본 키 그룹화만 지원합니다.</p></li>
 <li><p>그룹화된 결과가 일치하는 모든 Struct 요소를 나타낼 것이라고 기대하는 경우. 그룹화는 부모 엔티티당 최대 하나의 결과만 반환합니다.</p></li>
 <li><p>그룹화된 요소 수준 검색이 EmbeddingList 스타일의 <code translate="no">MAX_SIM*</code> 점수를 재계산한다고 가정하는 경우. 그룹화는 요소 수준의 일치 결과를 통합할 뿐, 점수 산정 모델을 변경하지 않습니다.</p></li>
-<li><p><code translate="no">group_by_field</code> 를 <code translate="no">radius</code> 또는 <code translate="no">range_filter</code> 와 결합하는 경우.</p></li>
+<li><p><code translate="no">group_by_field</code> 를 <code translate="no">radius</code> 또는 <code translate="no">range_filter</code> 와 결합합니다.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">다음 단계<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"

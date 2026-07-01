@@ -71,7 +71,7 @@ summary: >-
 <div class="alert note">
 <p>En una carga útil de inserción, « <code translate="no">chunks</code> » es un campo normal cuyo valor es una matriz de objetos Struct. Dentro de cada objeto, utiliza nombres de subcampos como « <code translate="no">text</code> » y « <code translate="no">emb</code> ». Utiliza la sintaxis de ruta, como « <code translate="no">chunks[text]</code> » o « <code translate="no">chunks[emb]</code> », solo después de la inserción, cuando crees índices, realices búsquedas, crees filtros o especifiques campos de salida.</p>
 </div>
-<h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">Comprender la estructura de la carga útil de inserción<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
+<h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">Comprender la estructura de la carga útil de la inserción<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -114,7 +114,7 @@ summary: >-
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">emb_list_vector</code> y <code translate="no">emb</code> son subcampos vectoriales independientes, ya que admiten modos de búsqueda diferentes. La búsqueda de EmbeddingList trata todos los vectores de un campo StructArray como una única lista de incrustaciones y devuelve resultados a nivel de entidad con métricas de <code translate="no">MAX_SIM*</code>. La búsqueda a nivel de elemento busca cada elemento Struct de forma independiente y puede devolver el desplazamiento del elemento coincidente. En este ejemplo, para simplificar, se almacenan los mismos valores vectoriales en ambos campos. En una aplicación de producción, puedes almacenar las mismas representaciones en ambos subcampos cuando ambos modos de búsqueda utilicen la misma representación de fragmentos, o bien almacenar representaciones diferentes cuando los dos modos de búsqueda utilicen representaciones distintas.</p>
+<p><code translate="no">emb_list_vector</code> y <code translate="no">emb</code> son subcampos vectoriales independientes, ya que admiten modos de búsqueda diferentes. La búsqueda de EmbeddingList trata todos los vectores de un campo StructArray como una única lista de incrustaciones y devuelve resultados a nivel de entidad con métricas de <code translate="no">MAX_SIM*</code>. La búsqueda a nivel de elemento busca cada elemento Struct de forma independiente y puede devolver el desplazamiento del elemento coincidente. En este ejemplo, para simplificar, se almacenan los mismos valores vectoriales en ambos campos. En una aplicación de producción, puedes almacenar las mismas representaciones en ambos subcampos cuando ambos modos de búsqueda utilicen la misma representación por fragmentos, o almacenar representaciones diferentes cuando los dos modos de búsqueda utilicen representaciones distintas.</p>
 <h2 id="Insert-rows" class="common-anchor-header">Insertar filas<button data-href="#Insert-rows" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -232,7 +232,7 @@ result = client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Si el campo ` <code translate="no">chunks</code> ` es nulo, una entidad puede establecer todo el campo ` <code translate="no">chunks</code> ` en nulo. En Python, utilice ` <code translate="no">None</code> ` para representar un valor nulo.</p>
+    </button></h2><p>Si el campo ` <code translate="no">chunks</code> ` es nulo, una entidad puede establecer todo el campo ` <code translate="no">chunks</code> ` como nulo. En Python, utilice ` <code translate="no">None</code> ` para representar un valor nulo.</p>
 <pre><code translate="no" class="language-python">client.insert(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
     data=[
@@ -331,7 +331,7 @@ Los campos StructArray nulos solo están disponibles en Milvus v3.0.x. Si añade
 <li><p>Utilizar rutas de campo como « <code translate="no">chunks[text]</code> » en las cargas útiles de inserción.</p></li>
 <li><p>Omitir subcampos obligatorios de un elemento Struct.</p></li>
 <li><p>Insertar vectores con una dimensión incorrecta.</p></li>
-<li><p>Insertar más elementos Struct de los que permite « <code translate="no">max_capacity</code> ».</p></li>
+<li><p>Insertar más elementos Struct de los que permite <code translate="no">max_capacity</code>.</p></li>
 <li><p>Establecer solo un subcampo como « <code translate="no">null</code> », mientras que otros subcampos del mismo valor de StructArray son válidos.</p></li>
 <li><p>Escribir vectores únicamente en ` <code translate="no">emb_list_vector</code> ` y, a continuación, intentar ejecutar una búsqueda a nivel de elemento en ` <code translate="no">chunks[emb]</code>`.</p></li>
 <li><p>Escribir vectores únicamente en « <code translate="no">emb</code> » y, a continuación, intentar realizar una búsqueda en «EmbeddingList» en « <code translate="no">chunks[emb_list_vector]</code> ».</p></li>

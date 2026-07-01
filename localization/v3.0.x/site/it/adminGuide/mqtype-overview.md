@@ -51,8 +51,8 @@ summary: >-
 <div class="alert note">
 <ul>
 <li><p>Ogni istanza di Milvus utilizza esattamente una coda di messaggi.</p></li>
-<li><p><strong>Limiti della coda dei messaggi</strong>: quando si esegue l’aggiornamento a Milvus v3.0-beta, è necessario mantenere la coda dei messaggi attualmente in uso. Il passaggio tra diversi sistemi di code dei messaggi durante l’aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code dei messaggi sarà disponibile nelle versioni future.</p></li>
-<li><p>Per modificare la coda dei messaggi di un'istanza in esecuzione, consultare la sezione "Cambiare il tipo di coda dei messaggi" (supportata a partire dalla v2.6.14).</p></li>
+<li><p><strong>Limiti della coda dei messaggi</strong>: quando si esegue l'aggiornamento a Milvus v3.0-beta, è necessario mantenere la coda dei messaggi attualmente in uso. Il passaggio tra diversi sistemi di code dei messaggi durante l'aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code dei messaggi sarà disponibile nelle versioni future.</p></li>
+<li><p>Per modificare la coda dei messaggi di un'istanza in esecuzione, consultare <a href="/docs/it/switch-mq-type.md">la sezione "Cambiare il tipo di coda dei messaggi"</a>. La funzione "Cambiare il tipo di coda dei messaggi" è disponibile in <strong>Milvus 3.0 e versioni successive</strong>: eseguire prima l'aggiornamento a Milvus 3.0 o versioni successive.</p></li>
 </ul>
 </div>
 <h2 id="Choosing-a-message-queue" class="common-anchor-header">Scelta di una coda di messaggi<button data-href="#Choosing-a-message-queue" class="anchor-icon" translate="no">
@@ -71,7 +71,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Nuove distribuzioni (Milvus 3.x):</strong> utilizzare <strong>Woodpecker</strong> (impostazione predefinita). La modalità standalone lo esegue in modo integrato; per la modalità distribuita (cluster), l’impostazione predefinita consigliata è un <a href="/docs/it/woodpecker.md#Deployment-modes">servizio</a> dedicato distribuito con Helm, ma è supportata anche l’esecuzione integrata.</li>
-<li><strong>Utenti esistenti di Pulsar o Kafka:</strong> Pulsar e Kafka continuano a essere pienamente supportati. È possibile mantenerli o passare a Woodpecker.</li>
-<li><strong>RocksMQ:</strong> solo in modalità standalone e sostituito da Woodpecker integrato in Milvus 3.x.</li>
+<li><strong>Nuove distribuzioni (Milvus 3.x):</strong> utilizzare <strong>Woodpecker</strong> (impostazione predefinita). La versione standalone lo esegue in modalità incorporata; per la versione distribuita (cluster), l’impostazione predefinita consigliata è un <a href="/docs/it/woodpecker.md#Deployment-modes">servizio</a> dedicato distribuito con Helm, ma è supportata anche la modalità incorporata.</li>
+<li><strong>Utenti esistenti di Pulsar o Kafka:</strong> Pulsar e Kafka continuano a essere pienamente supportati. È possibile mantenerli o <a href="/docs/it/switch-mq-type.md">passare a Woodpecker</a>.</li>
+<li><strong>RocksMQ:</strong> solo in modalità standalone, sostituito da Woodpecker integrato in Milvus 3.x.</li>
 </ul>

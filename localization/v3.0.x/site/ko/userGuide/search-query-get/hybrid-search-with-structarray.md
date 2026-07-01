@@ -192,7 +192,7 @@ results = client.hybrid_search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>두 <code translate="no">AnnSearchRequest</code> 객체 모두 <code translate="no">chunks</code> 아래의 벡터 하위 필드를 검색합니다. 동일한 0을 기준으로 한 오프셋은 동일한 Struct 요소를 가리키므로, 하이브리드 재순위 지정기는 요소 후보를 직접 순위 지정할 수 있습니다. 이 모드에서는 엔티티 수준 통합이 수행되지 않으므로 <code translate="no">element_scope</code> 을 설정하지 마십시오.</p>
+<p>두 <code translate="no">AnnSearchRequest</code> 객체 모두 <code translate="no">chunks</code> 하위의 벡터 하위 필드를 검색합니다. 동일한 0을 기준으로 한 오프셋은 동일한 Struct 요소를 가리키므로, 하이브리드 재순위 지정기는 요소 후보를 직접 순위 지정할 수 있습니다. 이 모드에서는 엔티티 수준 통합이 수행되지 않으므로 <code translate="no">element_scope</code> 을 설정하지 마십시오.</p>
 <h2 id="Collapse-element-level-hits-for-entity-level-hybrid-search" class="common-anchor-header">엔티티 수준 하이브리드 검색을 위한 요소 수준 일치 결과 통합<button data-href="#Collapse-element-level-hits-for-entity-level-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -248,7 +248,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>이 예제에서 ` <code translate="no">title_req</code> `는 엔티티 수준이므로 최종 하이브리드 결과도 엔티티 수준이 됩니다. ` <code translate="no">chunk_req</code> ` 요청은 먼저 ` <code translate="no">chunks[emb]</code>`에서 요소 히트를 반환한 다음, 동일한 엔티티에서 반환된 요소들을 합쳐 가장 높은 점수를 받은 3개의 요소 점수를 합산하여 축소합니다. 엔티티 수준 축소가 필요한데 ` <code translate="no">element_scope</code> `가 생략된 경우, 축소 전략은 기본적으로 ` <code translate="no">max</code>`로 설정됩니다.</p>
+<p>이 예제에서 ` <code translate="no">title_req</code> `는 엔티티 수준이므로, 최종 하이브리드 결과도 엔티티 수준이 됩니다. ` <code translate="no">chunk_req</code> ` 요청은 먼저 ` <code translate="no">chunks[emb]</code>`에서 요소 히트를 반환한 다음, 동일한 엔티티에서 반환된 요소들을 합쳐 가장 높은 점수를 받은 3개의 요소 점수를 합산하여 축소합니다. 엔티티 수준 축소가 필요한데 ` <code translate="no">element_scope</code> `가 생략된 경우, 축소 전략은 기본적으로 ` <code translate="no">max</code>`로 설정됩니다.</p>
 <h2 id="Choose-a-collapse-strategy" class="common-anchor-header">합치기 전략 선택<button data-href="#Choose-a-collapse-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -276,7 +276,7 @@ results = client.hybrid_search(
 <tr><td><code translate="no">topk_avg</code></td><td>엔티티에 대해 반환된 요소 점수 중 가장 높은 점수 <code translate="no">K</code> 의 평균을 구합니다.</td><td>필수 항목이며 양수여야 합니다.</td><td>지원되는 모든 정규 벡터 메트릭.</td></tr>
 </tbody>
 </table>
-<p>Collapse는 해당 StructArray 요소 수준 <code translate="no">AnnSearchRequest</code> 에 의해 반환된 요소 히트만 사용합니다. ANN 검색 후 엔티티의 모든 Struct 요소를 스캔하지는 않습니다. Collapse에 사용할 요소를 확보할 수 있도록 요청 <code translate="no">limit</code> 를 충분히 높게 설정하십시오.</p>
+<p>Collapse는 해당 StructArray 요소 수준 <code translate="no">AnnSearchRequest</code> 에서 반환된 요소 히트만 사용합니다. ANN 검색 후 엔티티의 모든 Struct 요소를 스캔하지는 않습니다. Collapse에 사용할 요소를 확보할 수 있도록 요청 <code translate="no">limit</code> 를 충분히 높게 설정하십시오.</p>
 <h2 id="Add-filters-range-search-and-grouping" class="common-anchor-header">필터, 범위 검색 및 그룹화 추가<button data-href="#Add-filters-range-search-and-grouping" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -340,7 +340,7 @@ results = client.hybrid_search(
 <li><p><code translate="no">sum</code> <code translate="no">topk_sum</code> 축소 전략은 또는 과 같은 양의 상관관계 지표를 필요로 합니다. 와 함께 사용해서는 안 됩니다. <code translate="no">IP</code> <code translate="no">COSINE</code> <code translate="no">L2</code></p></li>
 <li><p><code translate="no">topk_sum</code> 또한 <code translate="no">topk_avg</code> 는 양의 <code translate="no">topk</code> 값을 요구합니다. 다른 축소 전략에는 <code translate="no">topk</code> 가 포함되어서는 안 됩니다.</p></li>
 <li><p>EmbeddingList 수준 StructArray 요청은 범위 검색이나 그룹화를 지원하지 않습니다.</p></li>
-<li><p>하이브리드 그룹화는 동일한 StructArray 요소 수준의 하이브리드 검색에서만 지원되며, 기본 키에 의해서만 가능합니다.</p></li>
+<li><p>하이브리드 그룹화는 동일한 StructArray 요소 수준의 하이브리드 검색에 대해서만 지원되며, 기본 키에 의해서만 가능합니다.</p></li>
 <li><p>범위 검색과 그룹화를 함께 사용해서는 안 됩니다.</p></li>
 </ul>
 <h2 id="Common-mistakes" class="common-anchor-header">흔히 저지르는 실수<button data-href="#Common-mistakes" class="anchor-icon" translate="no">

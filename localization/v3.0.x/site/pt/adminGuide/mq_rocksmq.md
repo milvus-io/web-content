@@ -68,7 +68,7 @@ title: RocksMQ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Siga as instruções <a href="/docs/pt/install_standalone-docker.md">em «Executar o Milvus no Docker</a>». No Milvus 3.x, o padrão para a versão autónoma é o Woodpecker; por isso, altere explicitamente o tipo de fila de mensagens para RocksMQ. O script de inicialização cria um novo ficheiro « <code translate="no">user.yaml</code> » na <strong>primeira</strong> execução ( <code translate="no">start</code>), pelo que deve definir o tipo <strong>após</strong> essa primeira inicialização e, em seguida, executar « <code translate="no">restart</code> » para aplicar a alteração (o comando « <code translate="no">restart</code> » preserva o ficheiro « <code translate="no">user.yaml</code> »):</p>
+    </button></h3><p>Siga as instruções <a href="/docs/pt/install_standalone-docker.md">em «Executar o Milvus no Docker</a>». No Milvus 3.x, o padrão para a versão autónoma é o Woodpecker; por isso, altere explicitamente o tipo de fila de mensagens para RocksMQ. O script de inicialização cria um novo ficheiro « <code translate="no">user.yaml</code> » na <strong>primeira</strong> execução ( <code translate="no">start</code>); por isso, defina o tipo <strong>após</strong> essa primeira inicialização e, em seguida, execute « <code translate="no">restart</code> » para aplicar a alteração (o comando « <code translate="no">restart</code> » preserva o ficheiro « <code translate="no">user.yaml</code> »):</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> milvus-rocksmq &amp;&amp; <span class="hljs-built_in">cd</span> milvus-rocksmq
 curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
 
@@ -85,7 +85,7 @@ EOF
 bash standalone_embed.sh restart
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-A alteração de <code translate="no">mq.type</code> desta forma destina-se a uma instância <b>totalmente nova</b> (sem coleções ainda). Para alterar a fila de mensagens de uma instância que já contém dados, siga o procedimento de mudança.
+A alteração de <code translate="no">mq.type</code> desta forma destina-se a uma instância <b>totalmente nova</b> (sem coleções ainda). Para alterar a fila de mensagens de uma instância que já contém dados, siga o <a href="/docs/pt/switch-rocksmq-woodpecker.md">procedimento de mudança</a>.
 </div>
 <h3 id="Configure" class="common-anchor-header">Configurar<button data-href="#Configure" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -152,7 +152,7 @@ bash standalone_embed.sh delete
     </button></h2><ul>
 <li><strong>Atualização da versão 2.5.x para a 2.6.x:</strong> <strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v3.0-beta, deve manter a sua escolha atual de fila de mensagens. A mudança entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.
 Como a versão 2.6.x altera a predefinição da versão autónoma para o Woodpecker, defina <code translate="no">mq.type: rocksmq</code> no seu ficheiro <code translate="no">user.yaml</code> <strong>antes</strong> da atualização, caso pretenda manter o RocksMQ.</li>
-<li>Para alterar a fila de mensagens de uma instância em execução, consulte «Mudar do RocksMQ para o Woodpecker».</li>
+<li>Para alterar a fila de mensagens de uma instância em execução, consulte <a href="/docs/pt/switch-rocksmq-woodpecker.md">«Mudar do RocksMQ para o Woodpecker</a>».</li>
 </ul>
 <h2 id="Whats-next" class="common-anchor-header">Próximos passos<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -171,4 +171,5 @@ Como a versão 2.6.x altera a predefinição da versão autónoma para o Woodpec
       </svg>
     </button></h2><ul>
 <li><a href="/docs/pt/woodpecker.md">Woodpecker (fila de mensagens predefinida)</a></li>
+<li><a href="/docs/pt/switch-rocksmq-woodpecker.md">Mudar do RocksMQ para o Woodpecker</a></li>
 </ul>

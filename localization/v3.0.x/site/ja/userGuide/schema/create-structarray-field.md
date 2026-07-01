@@ -61,7 +61,7 @@ summary: >-
 <tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>スカラーフィルタリングや範囲の例で使用されるチャンクレベルのスコア。</td></tr>
 <tr><td><code translate="no">has_code</code></td><td><code translate="no">BOOL</code></td><td>チャンクにコードが含まれているかどうか。</td></tr>
 <tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td><code translate="no">MAX_SIM*</code> メトリックを使用した EmbeddingList 検索のためのベクトルサブフィールド。</td></tr>
-<tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>通常のベクトルメトリクスを使用した要素レベル検索用のベクトルサブフィールド。</td></tr>
+<tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>通常のベクトルメトリックを使用した要素レベルの検索のためのベクトルサブフィールド。</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -103,7 +103,7 @@ summary: >-
 <tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td>StructArray フィールドでは、ジオメトリのサブフィールドおよび GIS 関数はサポートされていません。</td></tr>
 <tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td>StructArray フィールドでは、Text サブフィールドはサポートされていません。</td></tr>
 <tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td>StructArray フィールドでは、Timestamptz サブフィールドおよび時間指定式はサポートされていません。</td></tr>
-<tr><td>StructArray フィールドでは、ネストされた<code translate="no">Array</code> 、<code translate="no">ArrayOfVector</code> 、<code translate="no">Struct</code> 、または<code translate="no">ArrayOfStruct</code></td><td>サポートされていません</td><td>StructArray フィールドには、ネストされた配列、ネストされたベクトル配列、ネストされた Struct フィールド、またはネストされた Array-of-Struct フィールドを含めることはできません。</td></tr>
+<tr><td>StructArray フィールドでは、<code translate="no">Array</code> 、<code translate="no">ArrayOfVector</code> 、<code translate="no">Struct</code> 、または<code translate="no">ArrayOfStruct</code></td><td>サポートされていません</td><td>StructArray フィールドには、ネストされた配列、ネストされたベクトル配列、ネストされた Struct フィールド、またはネストされた Array-of-Struct フィールドを含めることはできません。</td></tr>
 </tbody>
 </table>
 <p>バージョン固有のサポート、Null 許容の挙動、およびその他の制限については、「<a href="/docs/ja/structarray-limits.md">StructArray の制限</a>」を参照してください。</p>
@@ -378,7 +378,7 @@ client.add_collection_struct_field(
 <tr><td>1 つのベクトルサブフィールドには 1 つのインデックスがあります。</td><td>EmbeddingList 検索と要素レベルの検索の両方が必要な場合は、2 つの別々のベクトルサブフィールドを作成してください。</td></tr>
 <tr><td>既存の StructArray サブフィールドは固定されています。</td><td>StructArray フィールドを作成した後、その同じ StructArray フィールドにサブフィールドを追加することはできません。</td></tr>
 <tr><td>Struct 内での関数の使用はサポートされていません。</td><td>StructArray フィールド内のフィールドやサブフィールドに対して関数を定義しないでください。</td></tr>
-<tr><td>スカラーサブフィールドは、フィルタの要件に合致している必要があります。</td><td><code translate="no">section</code> 、<code translate="no">quality_score</code> 、<code translate="no">has_code</code> などのフィールドは、後でフィルタリング、グループ化、または出力する必要がある場合にのみ追加してください。</td></tr>
+<tr><td>スカラーサブフィールドは、フィルタの要件に合致している必要があります。</td><td><code translate="no">section</code> 、<code translate="no">quality_score</code> 、<code translate="no">has_code</code> などのフィールドは、後でフィルタリング、グループ化、または出力を行う必要がある場合にのみ追加してください。</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">よくある間違い<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
@@ -427,5 +427,5 @@ client.add_collection_struct_field(
 <li><p>StructArray フィールドにネストされたデータを挿入するには、「<a href="/docs/ja/insert-data-into-structarray-fields.md">StructArray フィールドへのデータの挿入</a>」を参照してください。</p></li>
 <li><p>ベクトルおよびスカラーインデックスを作成するには、「<a href="/docs/ja/index-structarray-fields.md">StructArray フィールドのインデックス付け</a>」を参照してください。</p></li>
 <li><p>StructArray のベクトルサブフィールドを検索するには、「StructArray を使用した基本的なベクトル検索」を参照してください。</p></li>
-<li><p>サポートされているデータ型、Null 許容の挙動、およびバージョン固有の制限事項を確認するには、「<a href="/docs/ja/structarray-limits.md">StructArray の制限事項</a>」を参照してください。</p></li>
+<li><p>サポートされているデータ型、null 許容の挙動、およびバージョン固有の制限事項を確認するには、「<a href="/docs/ja/structarray-limits.md">StructArray の制限事項</a>」を参照してください。</p></li>
 </ol>

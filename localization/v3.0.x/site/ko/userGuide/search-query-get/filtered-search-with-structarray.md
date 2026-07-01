@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 페이지를 사용하여 StructArray 필드에 대한 벡터 검색에 스칼라 필터링을 추가할 수 있습니다. StructArray 필터링에는 두 가지 수준이 있습니다. 행 수준 필터는 상위 엔티티를 선택하고, 요소 수준 필터는 요소 수준 벡터 검색에 참여할 Struct 요소를 제한합니다.</p>
+    </button></h1><p>이 페이지를 사용하여 StructArray 필드에 대한 벡터 검색에 스칼라 필터링을 추가할 수 있습니다. StructArray 필터링에는 두 가지 수준이 있습니다. 행 수준 필터는 상위 엔티티를 선택하고, 요소 수준 필터는 요소 수준 벡터 검색에 포함될 Struct 요소를 제한합니다.</p>
 <p>이 페이지에서는 <a href="/docs/ko/create-structarray-field.md">‘StructArray 필드 생성’의</a> <code translate="no">tech_articles</code> 컬렉션을 사용합니다. 이 컬렉션에는 <code translate="no">chunks</code> 라는 StructArray 필드가 있으며, <code translate="no">section</code>, <code translate="no">page</code>, <code translate="no">quality_score</code>, <code translate="no">has_code</code> 와 같은 스칼라 하위 필드와 검색용 벡터 하위 필드가 포함되어 있습니다.</p>
 <h2 id="Choose-a-filter-type" class="common-anchor-header">필터 유형 선택<button data-href="#Choose-a-filter-type" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -251,7 +251,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">filter</code> 인수는 최상위 엔티티 조건을 적용하는 반면, <code translate="no">chunk_req</code> 에 대한 <code translate="no">expr</code> 는 StructArray 요소 수준 벡터 요청에만 제약 조건을 적용합니다. 지원되는 하이브리드 검색 조합 및 버전별 제한 사항에 대해서는 <a href="/docs/ko/hybrid-search-with-structarray.md">‘StructArray를 사용한 하이브리드 검색’</a> 및 <a href="/docs/ko/structarray-limits.md">‘StructArray 제한 사항’을</a> 참조하십시오.</p>
+<p><code translate="no">filter</code> 인수는 최상위 엔티티 조건을 적용하는 반면, <code translate="no">chunk_req</code> 에 대한 <code translate="no">expr</code> 는 StructArray 요소 수준 벡터 요청에만 제약을 가합니다. 지원되는 하이브리드 검색 조합 및 버전별 제한 사항에 대해서는 <a href="/docs/ko/hybrid-search-with-structarray.md">‘StructArray를 사용한 하이브리드 검색’</a> 및 <a href="/docs/ko/structarray-limits.md">‘StructArray 제한 사항’을</a> 참조하십시오.</p>
 <h2 id="Predicate-support-summary" class="common-anchor-header">술어 지원 요약<button data-href="#Predicate-support-summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

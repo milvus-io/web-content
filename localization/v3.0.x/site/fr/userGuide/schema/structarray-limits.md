@@ -76,12 +76,12 @@ summary: >-
 <tr><th>Limite</th><th>Détails</th></tr>
 </thead>
 <tbody>
-<tr><td>Struct n'est pas un type de champ de niveau supérieur.</td><td>Créez un champ StructArray en tant qu <code translate="no">datatype=DataType.ARRAY</code>, avec <code translate="no">element_type=DataType.STRUCT</code> et <code translate="no">struct_schema</code>.</td></tr>
+<tr><td>Struct n'est pas un type de champ de niveau supérieur.</td><td>Créez un champ StructArray en tant qu <code translate="no">datatype=DataType.ARRAY</code>, avec une valeur par défaut ( <code translate="no">element_type=DataType.STRUCT</code> ) et une valeur par défaut par défaut ( <code translate="no">struct_schema</code>).</td></tr>
 <tr><td>Tous les éléments partagent un même schéma.</td><td>Chaque élément Struct d’un champ StructArray suit la même liste de sous-champs et les mêmes types de données de sous-champs.</td></tr>
 <tr><td><code translate="no">max_capacity</code> est obligatoire.</td><td>Le nombre d’éléments Struct dans une entité ne doit pas dépasser l’ <code translate="no">max_capacity</code> configurée pour le champ StructArray.</td></tr>
 <tr><td>Les sous-champs existants sont fixes.</td><td>Vous ne pouvez pas ajouter de nouveaux sous-champs à un champ StructArray existant. Pour modifier le schéma des sous-champs, supprimez le champ StructArray, puis ajoutez-le à nouveau avec le schéma mis à jour.</td></tr>
 <tr><td>Les StructArray imbriqués ne sont pas pris en charge.</td><td>Un champ StructArray ne peut pas contenir de sous-champs <code translate="no">Array</code>, <code translate="no">ArrayOfVector</code>, <code translate="no">Struct</code> ou <code translate="no">ArrayOfStruct</code> imbriqués.</td></tr>
-<tr><td>Les fonctions ne sont pas prises en charge à l’intérieur d’un StructArray.</td><td>Ne définissez pas de fonctions de champ pour les champs StructArray ou leurs sous-champs.</td></tr>
+<tr><td>Les fonctions ne sont pas prises en charge à l’intérieur d’un StructArray.</td><td>Ne définissez pas de fonctions de champ pour les champs StructArray ni pour leurs sous-champs.</td></tr>
 </tbody>
 </table>
 <p>Pour des exemples de création de schéma, voir <a href="/docs/fr/create-structarray-field.md">Créer un champ StructArray</a>.</p>
@@ -147,10 +147,10 @@ summary: >-
 <tbody>
 <tr><td>Champ StructArray pouvant prendre la valeur null</td><td>Pris en charge uniquement dans les versions incluant la prise en charge des StructArray pouvant contenir des valeurs nulles et des tableaux vectoriels pouvant contenir des valeurs nulles.</td></tr>
 <tr><td>Valeur nulle en Python</td><td>Utilisez ` <code translate="no">None</code> ` pour insérer une valeur StructArray nulle en Python. N'utilisez pas ` <code translate="no">Null</code> ` ni ` <code translate="no">null</code>`.</td></tr>
-<tr><td>Portée de la valeur nulle</td><td>La valeur nulle s'applique à l'ensemble du champ StructArray. Par exemple, <code translate="no">chunks=None</code> n'est valide que si <code translate="no">chunks</code> est de type « nullable ».</td></tr>
+<tr><td>Portée de la valeur nulle</td><td>La valeur nulle s'applique à l'ensemble du champ StructArray. Par exemple, <code translate="no">chunks=None</code> n'est valide que si <code translate="no">chunks</code> est nullable.</td></tr>
 <tr><td>Valeur StructArray partiellement nulle</td><td>Lorsqu’un champ StructArray contient une valeur de tableau valide, ne mélangez pas de sous-tableaux nuls avec des sous-tableaux valides au sein d’une même valeur.</td></tr>
 <tr><td>Ajout dynamique d’un champ StructArray</td><td>L'ajout d'un champ StructArray à une collection existante n'est pris en charge que dans les versions qui incluent la prise en charge des champs StructArray dynamiques.</td></tr>
-<tr><td>Exigence de nullabilité pour l’ajout dynamique</td><td>Un champ StructArray ajouté à une collection existante doit être nullable, car les entités existantes ne disposent d’aucune valeur pour ce nouveau champ.</td></tr>
+<tr><td>Exigence de nullabilité pour l’ajout dynamique</td><td>Un champ StructArray ajouté à une collection existante doit être nullable, car les entités existantes ne possèdent pas encore de valeur pour ce nouveau champ.</td></tr>
 <tr><td>Entités existantes après l’ajout dynamique</td><td>Les entités existantes renvoient la valeur « <code translate="no">null</code> » pour le champ StructArray ajouté, et ce pour tous ses sous-champs.</td></tr>
 </tbody>
 </table>
@@ -180,7 +180,7 @@ summary: >-
 <tr><td>Noms des sous-champs</td><td>À l’intérieur de chaque objet Struct, utilisez des noms de sous-champs tels que <code translate="no">text</code> et <code translate="no">emb</code>, et non des chemins d’accès tels que <code translate="no">chunks[text]</code>.</td></tr>
 <tr><td>Conformité au schéma</td><td>Chaque élément Struct doit respecter le schéma Struct.</td></tr>
 <tr><td>Capacité</td><td>Le nombre d’éléments Struct dans une entité ne doit pas dépasser <code translate="no">max_capacity</code>.</td></tr>
-<tr><td>Dimensions des vecteurs</td><td>Les valeurs vectorielles doivent correspondre à l’ <code translate="no">dim</code> configurée pour leurs sous-champs vectoriels.</td></tr>
+<tr><td>Dimensions des vecteurs</td><td>Les valeurs vectorielles doivent respecter l’ <code translate="no">dim</code> configurée pour leurs sous-champs vectoriels.</td></tr>
 <tr><td>Duplication en mode recherche</td><td>Si vous avez besoin à la fois de la recherche EmbeddingList et de la recherche au niveau des éléments, enregistrez les vecteurs dans deux sous-champs vectoriels distincts.</td></tr>
 </tbody>
 </table>
@@ -210,7 +210,7 @@ summary: >-
 </tbody>
 </table>
 <p>Utilisez des sous-champs vectoriels distincts lorsque les deux modes sont requis. Par exemple, utilisez <code translate="no">chunks[emb_list_vector]</code> pour la recherche EmbeddingList et <code translate="no">chunks[emb]</code> pour la recherche au niveau des éléments.</p>
-<p>Les sous-champs vectoriels StructArray comptent comme des sous-champs vectoriels lors de la conception de votre schéma de collection. Veillez à ce que le nombre total de champs vectoriels et de sous-champs vectoriels reste dans les limites de votre version cible et de votre niveau de service.</p>
+<p>Les sous-champs vectoriels StructArray sont considérés comme des sous-champs vectoriels lors de la conception de votre schéma de collection. Veillez à ce que le nombre total de champs vectoriels et de sous-champs vectoriels reste dans les limites de votre version cible et de votre niveau de service.</p>
 <p>Pour connaître la matrice des types d’index et des types de métriques pris en charge, consultez la section <a href="/docs/fr/index-structarray-fields.md">Champs StructArray d’index</a>.</p>
 <h2 id="Search-limits" class="common-anchor-header">Limites de recherche<button data-href="#Search-limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -234,7 +234,7 @@ summary: >-
 <tbody>
 <tr><td>Recherche EmbeddingList de base</td><td>Prise en charge sur les sous-champs vectoriels StructArray indexés à l'aide de métriques de type « <code translate="no">MAX_SIM*</code> ». Renvoie des résultats au niveau des entités.</td></tr>
 <tr><td>Recherche de base au niveau des éléments</td><td>Prise en charge sur les sous-champs vectoriels de StructArray indexés à l'aide de métriques vectorielles standard. Peut renvoyer les décalages des éléments correspondants.</td></tr>
-<tr><td>Recherche par plage</td><td>Prise en charge en fonction du mode de recherche et de la prise en charge des index/métriques de la version cible. Pour connaître le comportement de la recherche par plage hybride sur les requêtes StructArray au niveau des éléments, vérifiez votre version cible.</td></tr>
+<tr><td>Recherche par plage</td><td>Prise en charge en fonction du mode de recherche et de la prise en charge des index/métriques de la version cible. Pour connaître le comportement de la recherche par plage dans le cadre des requêtes StructArray au niveau des éléments, vérifiez votre version cible.</td></tr>
 <tr><td>Recherche par regroupement</td><td>La recherche par regroupement au niveau des éléments peut renvoyer des indices de position. Le comportement de la recherche hybride par regroupement pour les requêtes StructArray au niveau des éléments dépend de la version.</td></tr>
 <tr><td>Recherche hybride</td><td>Une requête de recherche hybride ne peut inclure des requêtes de sous-champs vectoriels StructArray que si la version cible prend en charge cette combinaison de recherche. Chaque requête suit toujours la famille de métriques du sous-champ vectoriel indexé.</td></tr>
 <tr><td>Sortie de décalage</td><td>Les décalages sont disponibles pour les résultats de recherche au niveau des éléments. La recherche EmbeddingList renvoie des résultats au niveau des entités et n’utilise pas les décalages d’éléments comme unité de résultat principale.</td></tr>
@@ -261,8 +261,8 @@ summary: >-
 <li><p>Utilisez « <code translate="no">$[subfield]</code> » uniquement au sein d’opérateurs StructArray.</p></li>
 <li><p>Utilisez des sous-champs scalaires pour les prédicats scalaires.</p></li>
 <li><p>N’utilisez pas de sous-champs vectoriels comme entrées de prédicats scalaires de type « <code translate="no">$[...]</code> ».</p></li>
-<li><p>La syntaxe JSON Path, les fonctions JSON, les fonctions de conteneurs de tableaux, les fonctions de correspondance de texte, les fonctions de géométrie/SIG et les expressions Timestamptz ne sont pas prises en charge pour les prédicats au niveau des éléments StructArray.</p></li>
-<li><p>Privilégiez les comparaisons booléennes explicites telles que ` <code translate="no">$[has_code] == true</code> ` plutôt que les expressions booléennes nues.</p></li>
+<li><p>La syntaxe JSON Path, les fonctions JSON, les fonctions de conteneur de tableaux, les fonctions de correspondance de texte, les fonctions de géométrie/SIG et les expressions Timestamptz ne sont pas prises en charge pour les prédicats au niveau des éléments StructArray.</p></li>
+<li><p>Privilégiez les comparaisons booléennes explicites telles que « <code translate="no">$[has_code] == true</code> » plutôt que les expressions booléennes nues.</p></li>
 </ul>
 <h2 id="Related-pages" class="common-anchor-header">Pages associées<button data-href="#Related-pages" class="anchor-icon" translate="no">
       <svg translate="no"

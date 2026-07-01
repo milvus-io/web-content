@@ -43,7 +43,7 @@ title: 脈衝星
 </tbody>
 </table>
 <p>自 Milvus 2.5 起，Milvus Helm 圖表和 Milvus Operator 預設會部署<strong>Pulsar v3</strong>；Pulsar v2 仍保持相容性。請參閱《<a href="/docs/zh-hant/upgrade-pulsar-v3.md">將 Pulsar 從 v2 升級至 v3</a>》及《<a href="/docs/zh-hant/use-pulsar-v2.md">繼續使用 Pulsar v2</a>》。</p>
-<h2 id="Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="common-anchor-header">使用 Helm 部署搭載 Pulsar 的 Milvus 叢集<button data-href="#Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="anchor-icon" translate="no">
+<h2 id="Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="common-anchor-header">使用 Helm 部署帶有 Pulsar 的 Milvus 叢集<button data-href="#Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -284,4 +284,5 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
       </svg>
     </button></h2><ul>
 <li><a href="/docs/zh-hant/woodpecker.md">Woodpecker（預設訊息佇列）</a></li>
+<li><a href="/docs/zh-hant/switch-pulsar-woodpecker.md">在 Pulsar 與 Woodpecker 之間切換</a></li>
 </ul>

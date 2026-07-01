@@ -95,7 +95,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在混合搜尋中，針對 StructArray 向量子欄位的 EmbeddingList 搜尋屬於實體層級。其運作方式類似實體層級的向量搜尋請求，且不會返回單一匹配的 Struct 元素偏移量。</p>
+    </button></h2><p>在混合搜尋中，針對 StructArray 向量子欄位的 EmbeddingList 搜尋屬於實體層級。其運作方式類似實體層級的向量搜尋請求，且不會回傳單一匹配的 Struct 元素偏移量。</p>
 <pre><code translate="no">from pymilvus import AnnSearchRequest, MilvusClient, RRFRanker
 from pymilvus.client.embedding_list import EmbeddingList
 
@@ -152,7 +152,7 @@ results = client.hybrid_search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>當所有 `<code translate="no">AnnSearchRequest</code> ` 物件皆針對同一 `StructArray` 欄位下的元素級向量子欄位時，混合搜尋可透過重新排序來保留元素級候選結果。這是唯一一種最終結果仍維持為元素級的 `StructArray` 混合模式。</p>
+    </button></h2><p>當所有 `<code translate="no">AnnSearchRequest</code> ` 物件皆針對同一 `StructArray` 欄位下的元素級向量子欄位時，混合搜尋可透過重新排序來保留元素級候選結果。這是唯一一種最終結果仍維持在元素級的 `StructArray` 混合模式。</p>
 <p>以下範例假設<code translate="no">chunks</code> 的 StructArray 欄位包含兩個元素級向量子欄位：<code translate="no">chunks[emb]</code> 與<code translate="no">chunks[code_emb]</code> ，且兩者均使用標準向量度量。</p>
 <pre><code translate="no">index_chunk_req = AnnSearchRequest(
     data=[query_vector],
@@ -247,7 +247,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>在此範例中，<code translate="no">title_req</code> 為實體層級，因此最終的混合結果亦為實體層級。<code translate="no">chunk_req</code> 請求會先從<code translate="no">chunks[emb]</code> 返回元素命中結果，接著透過將來自同一實體的返回元素中最佳的三個元素分數相加，來彙總這些元素。若在需要實體層級彙總時省略<code translate="no">element_scope</code> ，彙總策略將預設為<code translate="no">max</code> 。</p>
+<p>在此範例中，<code translate="no">title_req</code> 為實體層級，因此最終的混合結果亦為實體層級。<code translate="no">chunk_req</code> 請求會先從<code translate="no">chunks[emb]</code> 返回元素命中結果，接著透過將同一實體所返回元素中分數最高的 3 項相加，來彙總這些元素。若在需要實體層級彙總時省略<code translate="no">element_scope</code> ，彙總策略將預設為<code translate="no">max</code> 。</p>
 <h2 id="Choose-a-collapse-strategy" class="common-anchor-header">選擇彙總策略<button data-href="#Choose-a-collapse-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -271,7 +271,7 @@ results = client.hybrid_search(
 <tr><td><code translate="no">max</code></td><td>保留該實體所返回的最佳元素分數。</td><td>不允許。</td><td>任何受支援的常規向量指標。</td></tr>
 <tr><td><code translate="no">sum</code></td><td>將該實體所有回傳元素的分數相加。</td><td>不允許。</td><td>僅限正相關指標，例如<code translate="no">IP</code> 或<code translate="no">COSINE</code> 。</td></tr>
 <tr><td><code translate="no">avg</code></td><td>將該實體所有回傳元素的評分求平均值。</td><td>不允許。</td><td>任何受支援的常規向量指標。</td></tr>
-<tr><td><code translate="no">topk_sum</code></td><td>將該實體所返回的元素中最佳的<code translate="no">K</code> 分數相加。</td><td>此為必填項目，且數值必須為正數。</td><td>僅限正相關指標，例如<code translate="no">IP</code> 或<code translate="no">COSINE</code> 。</td></tr>
+<tr><td><code translate="no">topk_sum</code></td><td>將該實體所返回的最佳<code translate="no">K</code> 元素分數相加。</td><td>此為必填項目，且數值必須為正數。</td><td>僅限正相關指標，例如<code translate="no">IP</code> 或<code translate="no">COSINE</code> 。</td></tr>
 <tr><td><code translate="no">topk_avg</code></td><td>對該實體所返回的最佳<code translate="no">K</code> 元素分數求平均值。</td><td>此參數為必填且必須為正數。</td><td>任何受支援的常規向量指標。</td></tr>
 </tbody>
 </table>
@@ -291,7 +291,7 @@ results = client.hybrid_search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>當標量條件需套用至參與向量搜尋的相同 Struct 元素時，您可以將<code translate="no">element_filter</code> 附加至 StructArray 元素層級的<code translate="no">AnnSearchRequest</code> 。您亦可針對父實體條件，在<code translate="no">hybrid_search()</code> 上使用頂層的<code translate="no">filter</code> 。</p>
+    </button></h2><p>當標量條件需套用至參與向量搜尋的相同 Struct 元素時，可將<code translate="no">element_filter</code> 附加至 StructArray 元素層級的<code translate="no">AnnSearchRequest</code> 。您亦可針對父實體條件，在<code translate="no">hybrid_search()</code> 上使用頂層的<code translate="no">filter</code> 。</p>
 <p>StructArray 元素層級向量欄位在混合搜尋中支援範圍搜尋。請將<code translate="no">radius</code> 以及（若需）<code translate="no">range_filter</code> 新增至元素層級的<code translate="no">AnnSearchRequest</code> 中。EmbeddingList 層級的 StructArray 請求不支援範圍搜尋。</p>
 <p>僅當所有<code translate="no">AnnSearchRequest</code> 物件皆指向同一 StructArray 欄位下的元素層級向量欄位，且<code translate="no">group_by_field</code> 必須為主鍵時，才支援元素層級的混合分組。若請求混合了集合層級的向量欄位、不同的 StructArray 欄位，或 EmbeddingList 層級的請求，則不支援混合分組。請勿將範圍搜尋與分組結合使用。</p>
 <h2 id="Interpret-hybrid-results" class="common-anchor-header">解讀混合結果<button data-href="#Interpret-hybrid-results" class="anchor-icon" translate="no">
@@ -361,8 +361,8 @@ results = client.hybrid_search(
 <li><p>在同一 StructArray 元素層級的混合請求中加入<code translate="no">element_scope</code> 。該請求仍維持在元素層級，且不會執行實體層級的彙總。</p></li>
 <li><p>將 `<code translate="no">element_scope</code> ` 加入 `<code translate="no">chunks[emb_list_vector]</code>` 中。`EmbeddingList` 搜尋本身已是實體層級的。</p></li>
 <li><p>假設兩個 StructArray 欄位共享元素偏移量。<code translate="no">chunks</code> 中的偏移量<code translate="no">3</code> 與另一個 StructArray 欄位中的偏移量<code translate="no">3</code> 對應不同的元素，因此混合請求將轉為實體層級。</p></li>
-<li><p>若使用<code translate="no">topk_sum</code> 搭配<code translate="no">L2</code> 。若距離度量為負值，請使用<code translate="no">max</code> 、<code translate="no">avg</code> 或<code translate="no">topk_avg</code> 。</p></li>
-<li><p>預期實體層級的混合結果在摺疊後將包含所選的 Struct 元素偏移量。</p></li>
+<li><p>若使用<code translate="no">topk_sum</code> 搭配<code translate="no">L2</code> ，請使用<code translate="no">max</code> 、<code translate="no">avg</code> 或<code translate="no">topk_avg</code> 來處理負數距離度量值。</p></li>
+<li><p>預期實體層級的混合結果在摺疊後將包含所選 Struct 元素的偏移量。</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">後續步驟<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -383,6 +383,6 @@ results = client.hybrid_search(
 <li><p>若要了解兩種基本的 StructArray 向量搜尋模式，請參閱《<a href="/docs/zh-hant/basic-vector-search-with-structarray.md">使用 StructArray 進行基本向量搜尋</a>》。</p></li>
 <li><p>若要為混合搜尋新增標量篩選器，請參閱《<a href="/docs/zh-hant/filtered-search-with-structarray.md">使用 StructArray 進行篩選搜尋</a>》。</p></li>
 <li><p>若要在混合搜尋中使用分數或距離範圍，請參閱《<a href="/docs/zh-hant/range-search-with-structarray.md">使用 StructArray 進行範圍搜尋</a>》。</p></li>
-<li><p>若要依父實體將元素層級的混合搜尋結果分組，請參閱《<a href="/docs/zh-hant/grouping-search-with-structarray.md">使用 StructArray 進行分組搜尋</a>》。</p></li>
+<li><p>若要依父實體對元素層級的混合搜尋結果進行分組，請參閱《<a href="/docs/zh-hant/grouping-search-with-structarray.md">使用 StructArray 進行分組搜尋</a>》。</p></li>
 <li><p>若要查看 StructArray 的搜尋限制，請參閱《<a href="/docs/zh-hant/structarray-limits.md">StructArray 限制》</a>。</p></li>
 </ol>

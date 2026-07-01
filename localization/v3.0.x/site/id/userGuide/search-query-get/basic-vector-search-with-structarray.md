@@ -49,7 +49,7 @@ summary: >-
 <tr><td>Buat bidang StructArray, seperti <code translate="no">chunks</code>.</td><td><a href="/docs/id/create-structarray-field.md">Buat bidang StructArray</a></td></tr>
 <tr><td>Sisipkan entitas yang bidang ` <code translate="no">chunks</code> `-nya berisi objek Struct.</td><td><a href="/docs/id/insert-data-into-structarray-fields.md">Masukkan Data ke dalam Bidang StructArray</a></td></tr>
 <tr><td>Buat indeks ` <code translate="no">MAX_SIM*</code> ` pada ` <code translate="no">chunks[emb_list_vector]</code> ` untuk pencarian `EmbeddingList`.</td><td><a href="/docs/id/index-structarray-fields.md">Indeks Bidang StructArray</a></td></tr>
-<tr><td>Buat indeks metrik vektor reguler pada ` <code translate="no">chunks[emb]</code> ` untuk pencarian tingkat elemen.</td><td><a href="/docs/id/index-structarray-fields.md">Indeks Bidang StructArray</a></td></tr>
+<tr><td>Buat indeks metrik vektor reguler pada <code translate="no">chunks[emb]</code> untuk pencarian tingkat elemen.</td><td><a href="/docs/id/index-structarray-fields.md">Indeks Bidang StructArray</a></td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -78,7 +78,7 @@ summary: >-
 <tbody>
 <tr><td>Subbidang target</td><td><code translate="no">chunks[emb_list_vector]</code></td><td><code translate="no">chunks[emb]</code></td></tr>
 <tr><td>Data kueri</td><td>Daftar embedding yang berisi satu atau lebih vektor.</td><td>Vektor biasa.</td></tr>
-<tr><td>Keluarga metrik</td><td><code translate="no">MAX_SIM*</code>, seperti <code translate="no">MAX_SIM_COSINE</code>.</td><td>Metrik vektor reguler, seperti <code translate="no">COSINE</code>, <code translate="no">IP</code>, atau <code translate="no">L2</code>.</td></tr>
+<tr><td>Keluarga metrik</td><td><code translate="no">MAX_SIM*</code>, seperti <code translate="no">MAX_SIM_COSINE</code>.</td><td>Metrik vektor biasa, seperti <code translate="no">COSINE</code>, <code translate="no">IP</code>, atau <code translate="no">L2</code>.</td></tr>
 <tr><td>Apa yang diwakili oleh satu hasil pencocokan</td><td>Entitas yang cocok yang subbidang vektor StructArray-nya mirip dengan daftar embedding kueri.</td><td>Elemen Struct yang cocok di dalam bidang StructArray.</td></tr>
 <tr><td>Tingkat granularitas hasil</td><td>Tingkat entitas.</td><td>Tingkat elemen Struct.</td></tr>
 <tr><td>Offset</td><td>Tidak berlaku.</td><td>Mengidentifikasi posisi berbasis nol dari elemen Struct yang cocok saat dikembalikan.</td></tr>
@@ -221,7 +221,7 @@ results = client.search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Menggunak <code translate="no">chunks.emb</code> alih-alih sintaks jalur subbidang yang diperlukan, yaitu <code translate="no">chunks[emb]</code>.</p></li>
+<li><p>Menggunak <code translate="no">chunks.emb</code> alih-alih sintaks jalur subbidang yang diperlukan <code translate="no">chunks[emb]</code>.</p></li>
 <li><p>Menggunakan kueri EmbeddingList terhadap subbidang vektor yang diindeks dengan metrik vektor biasa.</p></li>
 <li><p>Menggunakan kueri vektor biasa terhadap subbidang vektor yang diindeks dengan metrik <code translate="no">MAX_SIM*</code>.</p></li>
 <li><p>Mengharapkan pencarian tingkat elemen <code translate="no">limit</code> mengembalikan sejumlah entitas induk yang unik. Pencarian ini mengembalikan hasil elemen.</p></li>

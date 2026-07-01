@@ -149,7 +149,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>In questo esempio, il predicato di primo livello ` <code translate="no">category == &quot;search&quot;</code> ` seleziona le entità candidate, mentre ` <code translate="no">element_filter</code> ` limita la ricerca vettoriale a livello di elemento ai blocchi in cui ` <code translate="no">section</code>`, ` <code translate="no">quality_score</code>` e ` <code translate="no">has_code</code> ` corrispondono tutti nello stesso elemento Struct.</p>
+<p>In questo esempio, il predicato di primo livello <code translate="no">category == &quot;search&quot;</code> seleziona le entità candidate, mentre <code translate="no">element_filter</code> limita la ricerca vettoriale a livello di elemento ai blocchi in cui <code translate="no">section</code>, <code translate="no">quality_score</code> e <code translate="no">has_code</code> corrispondono tutti nello stesso elemento Struct.</p>
 <div class="alert note">
 <p>Avviso</p>
 <p>Quando si combina un predicato di primo livello con <code translate="no">element_filter</code>, posizionare <code translate="no">element_filter</code> alla fine dell’espressione. Un’espressione di filtro può contenere un solo <code translate="no">element_filter</code> e non è possibile nidificare <code translate="no">element_filter</code> o <code translate="no">MATCH_*</code> all’interno di un altro operatore StructArray.</p>
@@ -253,7 +253,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>L’argomento ` <code translate="no">filter</code> ` applica la condizione a livello di entità di primo livello, mentre ` <code translate="no">expr</code> ` su ` <code translate="no">chunk_req</code> ` limita solo la richiesta vettoriale a livello di elemento di StructArray. Per le combinazioni di ricerca ibrida supportate e i limiti specifici per versione, consultare <a href="/docs/it/hybrid-search-with-structarray.md">Ricerca ibrida con StructArray</a> e <a href="/docs/it/structarray-limits.md">Limiti di StructArray</a>.</p>
+<p>L’argomento <code translate="no">filter</code> applica la condizione dell’entità di primo livello, mentre l’ <code translate="no">expr</code> e su <code translate="no">chunk_req</code> limita solo la richiesta vettoriale a livello di elemento di StructArray. Per le combinazioni di ricerca ibrida supportate e i limiti specifici per versione, consultare <a href="/docs/it/hybrid-search-with-structarray.md">Ricerca ibrida con StructArray</a> e <a href="/docs/it/structarray-limits.md">Limiti di StructArray</a>.</p>
 <h2 id="Predicate-support-summary" class="common-anchor-header">Riepilogo del supporto dei predicati<button data-href="#Predicate-support-summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -300,7 +300,7 @@ results = client.hybrid_search(
       </svg>
     </button></h2><ul>
 <li><p>Utilizzo di ` <code translate="no">$[subfield]</code> ` al di fuori di ` <code translate="no">element_filter</code> ` o ` <code translate="no">MATCH_*</code>`.</p></li>
-<li><p>Utilizzo di ` <code translate="no">chunks.section</code> ` al posto della sintassi dell’operatore `StructArray`, come ad esempio ` <code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code>`.</p></li>
+<li><p>Utilizzo di ` <code translate="no">chunks.section</code> ` al posto della sintassi degli operatori StructArray, come ad esempio ` <code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code>`.</p></li>
 <li><p>Utilizzo di <code translate="no">element_filter</code> quando è necessario solo un filtro a livello di riga. Utilizzare invece <code translate="no">MATCH_ANY</code> se è necessario solo selezionare entità.</p></li>
 <li><p>Aspettarsi che ` <code translate="no">MATCH_*</code> ` restituisca gli offset degli elementi. Questi operatori selezionano le entità e non identificano di per sé un singolo elemento corrispondente.</p></li>
 <li><p>Scrivere predicati booleani semplici come <code translate="no">$[has_code]</code>. Utilizzare confronti espliciti come <code translate="no">$[has_code] == true</code>.</p></li>

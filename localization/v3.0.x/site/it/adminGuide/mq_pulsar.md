@@ -42,7 +42,7 @@ title: Pulsar
 <tr><td>2.4.x e precedenti</td><td>Pulsar v2</td><td>Pulsar v2</td></tr>
 </tbody>
 </table>
-<p>A partire da Milvus 2.5, il chart Helm di Milvus e Milvus Operator distribuiscono <strong>Pulsar v3</strong> per impostazione predefinita; Pulsar v2 rimane compatibile. Vedi <a href="/docs/it/upgrade-pulsar-v3.md">Aggiornamento di Pulsar dalla v2 alla v3</a> e <a href="/docs/it/use-pulsar-v2.md">Continuare a utilizzare Pulsar v2</a>.</p>
+<p>A partire da Milvus 2.5, il chart Helm di Milvus e Milvus Operator distribuiscono <strong>Pulsar v3</strong> per impostazione predefinita; Pulsar v2 rimane compatibile. Vedi <a href="/docs/it/upgrade-pulsar-v3.md">Aggiornamento di Pulsar dalla versione v2 alla v3</a> e <a href="/docs/it/use-pulsar-v2.md">Continuare a utilizzare Pulsar v2</a>.</p>
 <h2 id="Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="common-anchor-header">Distribuzione di un cluster Milvus con Pulsar tramite Helm<button data-href="#Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -265,7 +265,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
     </button></h2><ul>
 <li><strong>Aggiornamento dalla versione 2.5.x alla 2.6.x:</strong> <strong>limitazioni relative alla coda dei messaggi</strong>: durante l'aggiornamento a Milvus v3.0-beta, è necessario mantenere la coda dei messaggi attualmente in uso. Il passaggio a sistemi di coda dei messaggi diversi durante l'aggiornamento non è supportato. Il supporto per la modifica dei sistemi di coda dei messaggi sarà disponibile nelle versioni future.
 Se si utilizza Pulsar e si desidera mantenerlo, non modificare la coda dei messaggi durante l’aggiornamento.</li>
-<li><strong>Pulsar v2 → v3:</strong> consultare <a href="/docs/it/upgrade-pulsar-v3.md">Aggiornamento di Pulsar dalla v2 alla v3</a>; per rimanere alla v2, consultare <a href="/docs/it/use-pulsar-v2.md">Continuare a utilizzare Pulsar v2</a>.</li>
+<li><strong>Pulsar v2 → v3:</strong> consultare <a href="/docs/it/upgrade-pulsar-v3.md">Aggiornamento di Pulsar dalla v2 alla v3</a>; per rimanere sulla v2, consultare <a href="/docs/it/use-pulsar-v2.md">Continuare a utilizzare Pulsar v2</a>.</li>
 </ul>
 <h2 id="Whats-next" class="common-anchor-header">Prossimi passi<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -284,4 +284,5 @@ Se si utilizza Pulsar e si desidera mantenerlo, non modificare la coda dei messa
       </svg>
     </button></h2><ul>
 <li><a href="/docs/it/woodpecker.md">Woodpecker (coda di messaggi predefinita)</a></li>
+<li><a href="/docs/it/switch-pulsar-woodpecker.md">Passaggio da Pulsar a Woodpecker</a></li>
 </ul>

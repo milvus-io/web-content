@@ -34,9 +34,9 @@ title: RocksMQ
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Только для автономной версии</strong> — RocksMQ <strong>не</strong> поддерживается в Milvus Distributed (кластер). См. <a href="/docs/ru/mqtype-overview.md#Supported-message-queues">таблицу поддержки очередей сообщений</a>.</li>
+<li><strong>Только для автономной версии</strong> — RocksMQ <strong>не</strong> поддерживается в Milvus Distributed (кластер). См. <a href="/docs/ru/mqtype-overview.md#Supported-message-queues">матрицу поддержки очередей сообщений</a>.</li>
 <li>RocksMQ поставляется в составе Milvus, поэтому отдельно устанавливать его не нужно.</li>
-<li>В более ранних версиях Milvus она являлась стандартной автономной очередью сообщений, а в Milvus 3.x её заменила встроенная Woodpecker.</li>
+<li>В более ранних версиях Milvus она являлась автономной очередью сообщений по умолчанию, а в Milvus 3.x её заменила встроенная Woodpecker.</li>
 </ul>
 <h2 id="Deploy-Milvus-Standalone-with-RocksMQ-using-Docker" class="common-anchor-header">Развертывание автономной версии Milvus с RocksMQ с помощью Docker<button data-href="#Deploy-Milvus-Standalone-with-RocksMQ-using-Docker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -85,7 +85,7 @@ EOF
 bash standalone_embed.sh restart
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-Переключение <code translate="no">mq.type</code> таким образом предназначено для <b>совершенно нового</b> экземпляра (в котором ещё нет коллекций). Чтобы изменить очередь сообщений экземпляра, в котором уже хранятся данные, вместо этого следуйте процедуре переключения.
+Переключение <code translate="no">mq.type</code> таким образом предназначено для <b>совершенно нового</b> экземпляра (в котором ещё нет коллекций). Чтобы изменить очередь сообщений экземпляра, в котором уже хранятся данные, вместо этого следуйте <a href="/docs/ru/switch-rocksmq-woodpecker.md">процедуре переключения</a>.
 </div>
 <h3 id="Configure" class="common-anchor-header">Настройка<button data-href="#Configure" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -150,9 +150,9 @@ bash standalone_embed.sh delete
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Обновление с версии 2.5.x до 2.6.x:</strong> <strong>Ограничения</strong>, связанные <strong>с очередями сообщений</strong>: при обновлении до Milvus v3.0-beta необходимо сохранить текущий выбор системы очередей сообщений. Переключение между различными системами очередей сообщений во время обновления не поддерживается. Поддержка смены системы очередей сообщений будет доступна в будущих версиях.
+<li><strong>Обновление с версии 2.5.x до 2.6.x:</strong> <strong>Ограничения</strong>, связанные <strong>с очередями сообщений</strong>: при обновлении до Milvus v3.0-beta необходимо сохранить текущий выбор системы очередей сообщений. Переключение между различными системами очередей сообщений во время обновления не поддерживается. Поддержка смены систем очередей сообщений будет доступна в будущих версиях.
 Поскольку в версии 2.6.x по умолчанию для автономного режима используется Woodpecker, <strong>перед</strong> обновлением зафиксируйте значение <code translate="no">mq.type: rocksmq</code> в файле <code translate="no">user.yaml</code>, если вы хотите сохранить RocksMQ.</li>
-<li>Чтобы изменить систему очередей сообщений для запущенного экземпляра, см. раздел «Переход с RocksMQ на Woodpecker».</li>
+<li>Чтобы изменить систему очередей сообщений для запущенного экземпляра, см. раздел <a href="/docs/ru/switch-rocksmq-woodpecker.md">«Переход с RocksMQ на Woodpecker</a>».</li>
 </ul>
 <h2 id="Whats-next" class="common-anchor-header">Что будет дальше<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -171,4 +171,5 @@ bash standalone_embed.sh delete
       </svg>
     </button></h2><ul>
 <li><a href="/docs/ru/woodpecker.md">Woodpecker (очередь сообщений по умолчанию)</a></li>
+<li><a href="/docs/ru/switch-rocksmq-woodpecker.md">Переход с RocksMQ на Woodpecker</a></li>
 </ul>

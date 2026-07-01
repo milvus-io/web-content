@@ -4,7 +4,7 @@ title: パターンマッチング
 summary: >-
   Milvus は、LIKE ワイルドカードパターンおよび RE2
   正規表現による文字列パターンマッチングをサポートしています。パターンフィルターを使用することで、VARCHAR フィールド、JSON 文字列パス、または
-  ARRAY 要素内の接頭辞、接尾辞、部分文字列、構造化コード、メールドメイン、URL パス、その他の文字列パターンに一致させることができます。
+  ARRAY 要素内の接頭辞、接尾辞、部分文字列、構造化コード、メールアドレスのドメイン、URL パス、その他の文字列パターンに一致させることができます。
 ---
 <h1 id="Pattern-Matching" class="common-anchor-header">パターンマッチング<button data-href="#Pattern-Matching" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -78,7 +78,7 @@ res = client.query(
         ></path>
       </svg>
     </button></h2><p>必要なパターンを表現する最も単純な演算子を選択してください。</p>
-<p>文字列の完全一致が必要な場合は、パターンマッチングの代わりに<code translate="no">==</code> を使用することをお勧めします。<code translate="no">LIKE</code> やregexは、フィルタがパターンに一致する必要がある場合にのみ使用してください。</p>
+<p>文字列の完全一致が必要な場合は、パターンマッチングの代わりに `<code translate="no">==</code> ` を使用することをお勧めします。`<code translate="no">LIKE</code> ` または正規表現は、フィルタがパターンに一致する必要がある場合にのみ使用してください。</p>
 <table>
 <thead>
 <tr><th>要件</th><th>推奨される演算子</th><th>例</th><th>説明</th></tr>
@@ -180,7 +180,7 @@ res = client.query(
       </svg>
     </button></h3><p><code translate="no">LIKE</code> パターンでは、<code translate="no">%</code> は 0 個以上の文字に一致し、<code translate="no">_</code> は正確に 1 文字に一致します。<code translate="no">%</code> 、<code translate="no">_</code> 、または<code translate="no">\</code> をリテラルとして一致させるには、バックスラッシュ (<code translate="no">\</code>) で文字をエスケープします：</p>
 <ul>
-<li><code translate="no">name LIKE r&quot;\%&quot;</code> は、リテラル値「<code translate="no">%</code> 」に一致します。</li>
+<li><code translate="no">name LIKE r&quot;\%&quot;</code> は、リテラル値 `<code translate="no">%</code>` に一致します。</li>
 <li><code translate="no">name LIKE r&quot;\_%&quot;</code> リテラル「<code translate="no">_</code> 」で始まる値に一致します。</li>
 <li><code translate="no">name LIKE r&quot;\\%&quot;</code> リテラルなバックスラッシュで始まる値に一致します。</li>
 </ul>
@@ -286,7 +286,7 @@ res = client.query(
         ></path>
       </svg>
     </button></h3><p><strong>部分文字列の一致</strong></p>
-<p>Milvus の正規表現マッチングでは、部分文字列のセマンティクスが使用されます。パターンはフィールド値全体と一致する必要はありません。たとえば、次のフィルターは<code translate="no">E1001</code> と<code translate="no">failed with E1001 after retry</code> の両方に一致します:</p>
+<p>Milvus の正規表現マッチングでは、部分文字列のセマンティクスが使用されます。パターンはフィールド値全体と一致する必要はありません。たとえば、次のフィルターは<code translate="no">E1001</code> と<code translate="no">failed with E1001 after retry</code> の両方に一致します：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ &quot;E[0-9]{4}&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>フィールド値全体に一致させるには、<code translate="no">^</code> および<code translate="no">$</code> というアンカーを使用します：</p>
@@ -333,6 +333,6 @@ res = client.query(
 <tbody>
 <tr><td><code translate="no">message =~ &quot;error.*timeout&quot;</code> のような固定のリテラル部分文字列を含む場合、または<code translate="no">message LIKE &quot;%database%&quot;</code></td><td><code translate="no">NGRAM</code></td><td>Milvusがパターンから意味のあるリテラル部分文字列を抽出できる場合に有効です。詳細については、<a href="/docs/ja/ngram.md">NGRAM</a>を参照してください。</td></tr>
 <tr><td>プレフィックス、完全一致、または等価のような文字列フィルター。特に、カーディナリティが低～中程度のフィールドで有効</td><td><code translate="no">STL_SORT</code>、<code translate="no">INVERTED</code> 、または<code translate="no">BITMAP</code></td><td>フィールドに重複する値がある場合や、フィルタが完全一致に近い場合に、より効果的である可能性があります。詳細については、<a href="/docs/ja/stl-sort.md">STL_SORT</a>、<a href="/docs/ja/inverted.md">INVERTED</a>、<a href="/docs/ja/bitmap.md">およびBITMAP</a>を参照してください。</td></tr>
-<tr><td>固定リテラルを含まない正規表現パターン、または文字クラス、短いトークン、ワイルドカードが主体となるパターン</td><td>インデックスによる高速化を頼りにする前にベンチマークを実施してください</td><td>これらのパターンは、インデックスによる選択性が限定的となり、より広範囲なスキャンに切り替わってしまう可能性があります。</td></tr>
+<tr><td>固定リテラルを含まない正規表現パターン、または文字クラス、短いトークン、ワイルドカードが主体となるパターン</td><td>インデックスによる高速化を頼りにする前にベンチマークを実行してください</td><td>これらのパターンは、インデックスによる選択性が限定的となり、より広範囲なスキャンに切り替わってしまう可能性があります。</td></tr>
 </tbody>
 </table>

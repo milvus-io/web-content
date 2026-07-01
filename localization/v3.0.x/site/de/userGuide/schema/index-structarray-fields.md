@@ -313,10 +313,10 @@ client.create_index(
 </thead>
 <tbody>
 <tr><td>Verwenden Sie die Pfadsyntax für Unterfeldindizes.</td><td>Indexieren Sie „ <code translate="no">chunks[emb]</code> “, nicht „ <code translate="no">emb</code> “ oder „ <code translate="no">chunks.emb</code> “.</td></tr>
-<tr><td>Ein Vektor-Unterfeld akzeptiert einen Index.</td><td>Verwenden Sie separate Vektor-Teilfelder, wenn Sie unterschiedliche Metrikfamilien benötigen.</td></tr>
+<tr><td>Ein Vektor-Unterfeld akzeptiert einen Index.</td><td>Verwenden Sie separate Vektor-Unterfelder, wenn Sie unterschiedliche Metrikfamilien benötigen.</td></tr>
 <tr><td>Verwenden Sie „ <code translate="no">MAX_SIM*</code> “-Metriken für die EmbeddingList-Suche.</td><td>Für Abfragen in der „EmbeddingList“ sind Daten aus einem Index erforderlich, der mit einer „ <code translate="no">MAX_SIM*</code> “-Metrik erstellt wurde.</td></tr>
 <tr><td>Verwenden Sie reguläre Vektormetriken für die Suche auf Elementebene.</td><td>Die Suche auf Elementebene verwendet reguläre Vektorabfragedaten und Metriken wie „ <code translate="no">COSINE</code> “, „ <code translate="no">IP</code> “ oder „ <code translate="no">L2</code> “.</td></tr>
-<tr><td>Indizieren Sie skalare Unterfelder, die in Filtern vorkommen.</td><td>Verwenden Sie skalare Indextypen, die von Ihrem Zielsystem unterstützt werden.</td></tr>
+<tr><td>Indizieren Sie skalare Unterfelder, die in Filtern vorkommen.</td><td>Verwenden Sie skalare Indextypen, die von Ihrem Ziel unterstützt werden.</td></tr>
 <tr><td>Beachten Sie die Beschränkungen für Vektorfelder.</td><td>Die Gesamtzahl der Vektorfelder und Vektor-Teilfelder ist begrenzt. Lesen Sie den Abschnitt „StructArray-Grenzwerte“, bevor Sie viele Vektor-Teilfelder hinzufügen.</td></tr>
 </tbody>
 </table>
@@ -361,5 +361,5 @@ client.create_index(
     </button></h2><ol>
 <li><p>Um eine „EmbeddingList“-Suche auf Entitätsebene oder eine Vektorsuche auf Elementebene durchzuführen, lesen Sie „Grundlegende Vektorsuche mit StructArray“.</p></li>
 <li><p>Informationen zum Filtern von skalaren StructArray-Unterfeldern während der Suche finden Sie unter „Gefilterte Suche mit StructArray“.</p></li>
-<li><p>Informationen zu Index- und Metrikbeschränkungen finden Sie unter <a href="/docs/de/structarray-limits.md">„StructArray-Beschränkungen</a>“.</p></li>
+<li><p>Informationen zu Index- und Metrikgrenzen finden Sie unter <a href="/docs/de/structarray-limits.md">„StructArray-Grenzwerte</a>“.</p></li>
 </ol>

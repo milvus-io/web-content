@@ -60,7 +60,7 @@ summary: >-
 <tbody>
 <tr><td><code translate="no">text</code></td><td><code translate="no">VARCHAR</code></td><td>Teks chunk.</td></tr>
 <tr><td><code translate="no">section</code></td><td><code translate="no">VARCHAR</code></td><td>Nama bagian, seperti <code translate="no">index</code>, <code translate="no">search</code>, atau <code translate="no">filter</code>.</td></tr>
-<tr><td><code translate="no">page</code></td><td><code translate="no">INT64</code></td><td>Nomor halaman atau posisi logis dari potongan tersebut.</td></tr>
+<tr><td><code translate="no">page</code></td><td><code translate="no">INT64</code></td><td>Nomor halaman atau posisi logis dari chunk tersebut.</td></tr>
 <tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>Skor tingkat potongan yang digunakan dalam penyaringan skalar dan contoh rentang.</td></tr>
 <tr><td><code translate="no">has_code</code></td><td><code translate="no">BOOL</code></td><td>Apakah potongan tersebut berisi kode.</td></tr>
 <tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Subbidang vektor untuk pencarian EmbeddingList dengan metrik <code translate="no">MAX_SIM*</code>.</td></tr>

@@ -85,7 +85,7 @@ EOF
 bash standalone_embed.sh restart
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-Switching <code translate="no">mq.type</code> this way is meant for a <b>brand-new</b> instance (no collections yet). To change the message queue of an instance that already holds data, follow the switch procedure instead.
+Switching <code translate="no">mq.type</code> this way is meant for a <b>brand-new</b> instance (no collections yet). To change the message queue of an instance that already holds data, follow the <a href="/docs/switch-rocksmq-woodpecker.md">switch procedure</a> instead.
 </div>
 <h3 id="Configure" class="common-anchor-header">Configure<button data-href="#Configure" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -152,7 +152,7 @@ bash standalone_embed.sh delete
     </button></h2><ul>
 <li><strong>Upgrading from 2.5.x to 2.6.x:</strong> <strong>Message Queue limitations</strong>: When upgrading to Milvus v3.0-beta, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
 Because 2.6.x changes the standalone default to Woodpecker, pin <code translate="no">mq.type: rocksmq</code> in your <code translate="no">user.yaml</code> <strong>before</strong> upgrading if you want to keep RocksMQ.</li>
-<li>To change the message queue of a running instance, see Switch from RocksMQ to Woodpecker.</li>
+<li>To change the message queue of a running instance, see <a href="/docs/switch-rocksmq-woodpecker.md">Switch from RocksMQ to Woodpecker</a>.</li>
 </ul>
 <h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -171,4 +171,5 @@ Because 2.6.x changes the standalone default to Woodpecker, pin <code translate=
       </svg>
     </button></h2><ul>
 <li><a href="/docs/woodpecker.md">Woodpecker (default message queue)</a></li>
+<li><a href="/docs/switch-rocksmq-woodpecker.md">Switch from RocksMQ to Woodpecker</a></li>
 </ul>

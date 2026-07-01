@@ -51,7 +51,7 @@ summary: >-
 <ul>
 <li><p>Each Milvus instance uses exactly one message queue.</p></li>
 <li><p><strong>Message Queue limitations</strong>: When upgrading to Milvus v3.0-beta, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.</p></li>
-<li><p>To change the message queue of a running instance, see Switch MQ Type (supported from v2.6.14).</p></li>
+<li><p>To change the message queue of a running instance, see <a href="/docs/switch-mq-type.md">Switch MQ Type</a>. The Switch MQ feature is available in <strong>Milvus 3.0 and later</strong> — upgrade to Milvus 3.0 or later first.</p></li>
 </ul>
 </div>
 <h2 id="Choosing-a-message-queue" class="common-anchor-header">Choosing a message queue<button data-href="#Choosing-a-message-queue" class="anchor-icon" translate="no">
@@ -71,6 +71,6 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><strong>New deployments (Milvus 3.x):</strong> use <strong>Woodpecker</strong> (the default). Standalone runs it embedded; for distributed (cluster), the recommended default is a dedicated <a href="/docs/woodpecker.md#Deployment-modes">service</a> deployed with Helm, and embedded is also supported.</li>
-<li><strong>Existing Pulsar or Kafka users:</strong> Pulsar and Kafka remain fully supported. Keep them, or switch to Woodpecker.</li>
+<li><strong>Existing Pulsar or Kafka users:</strong> Pulsar and Kafka remain fully supported. Keep them, or <a href="/docs/switch-mq-type.md">switch to Woodpecker</a>.</li>
 <li><strong>RocksMQ:</strong> standalone only, and superseded by embedded Woodpecker in Milvus 3.x.</li>
 </ul>

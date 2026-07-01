@@ -3,10 +3,10 @@ id: pattern-matching.md
 title: Coincidencia de patrones
 summary: >-
   Milvus admite la coincidencia de patrones de cadenas con patrones comodín LIKE
-  y expresiones regulares RE2. Utiliza filtros de patrones para buscar prefijos,
-  sufijos, subcadenas, códigos estructurados, dominios de correo electrónico,
-  rutas de URL y otros patrones de cadenas en campos VARCHAR, rutas de cadenas
-  JSON o elementos ARRAY.
+  y expresiones regulares RE2. Utiliza filtros de patrones para encontrar
+  coincidencias con prefijos, sufijos, subcadenas, códigos estructurados,
+  dominios de correo electrónico, rutas de URL y otros patrones de cadenas en
+  campos VARCHAR, rutas de cadenas JSON o elementos ARRAY.
 ---
 <h1 id="Pattern-Matching" class="common-anchor-header">Coincidencia de patrones<button data-href="#Pattern-Matching" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -80,7 +80,7 @@ res = client.query(
         ></path>
       </svg>
     </button></h2><p>Elige el operador más sencillo que exprese el patrón que necesitas.</p>
-<p>Si necesitas una coincidencia exacta de cadena, te recomendamos que utilices « <code translate="no">==</code> » en lugar de la coincidencia de patrones. Utiliza « <code translate="no">LIKE</code> » o «regex» solo cuando el filtro tenga que coincidir con un patrón.</p>
+<p>Si necesitas una coincidencia exacta de cadena, te recomendamos que utilices « <code translate="no">==</code> » en lugar de la coincidencia de patrones. Utiliza « <code translate="no">LIKE</code> » o «regex» solo cuando el filtro deba coincidir con un patrón.</p>
 <table>
 <thead>
 <tr><th>Requisito</th><th>Operador recomendado</th><th>Ejemplo</th><th>Descripción</th></tr>
@@ -89,9 +89,9 @@ res = client.query(
 <tr><td>Igualdad exacta de la cadena</td><td><code translate="no">==</code></td><td><code translate="no">status == &quot;active&quot;</code></td><td>Coincidencia exacta de la cadena « <code translate="no">active</code> ».</td></tr>
 <tr><td>Coincidencia simple de prefijo</td><td><code translate="no">LIKE</code></td><td><code translate="no">name LIKE &quot;Prod%&quot;</code></td><td>Coincide con las cadenas que empiezan por « <code translate="no">Prod</code> ».</td></tr>
 <tr><td>Coincidencia simple de sufijo</td><td><code translate="no">LIKE</code></td><td><code translate="no">filename LIKE &quot;%.json&quot;</code></td><td>Coincide con cadenas que terminan en « <code translate="no">.json</code> ».</td></tr>
-<tr><td>Coincidencia simple por contenido</td><td><code translate="no">LIKE</code></td><td><code translate="no">description LIKE &quot;%vector database%&quot;</code></td><td>Coincide con valores que contengan « <code translate="no">vector database</code> » en cualquier parte de la cadena.</td></tr>
+<tr><td>Coincidencia simple por contenido</td><td><code translate="no">LIKE</code></td><td><code translate="no">description LIKE &quot;%vector database%&quot;</code></td><td>Coincide con valores que contengan <code translate="no">vector database</code> en cualquier parte de la cadena.</td></tr>
 <tr><td>Coincidencia con un código estructurado o un patrón de longitud fija</td><td><code translate="no">=~</code></td><td><code translate="no">code =~ &quot;E[0-9]{4}&quot;</code></td><td>Coincide con cadenas que, distinguiendo entre mayúsculas y minúsculas, contengan « <code translate="no">E</code> » seguido de cuatro dígitos, como « <code translate="no">E1001</code> ».</td></tr>
-<tr><td>Coincidencia de patrones sin distinción entre mayúsculas y minúsculas</td><td><code translate="no">=~</code> con <code translate="no">(?i)</code></td><td><code translate="no">message =~ &quot;(?i)error&quot;</code></td><td>Coincide con « <code translate="no">error</code> », « <code translate="no">ERROR</code> » u otras variantes con mayúsculas y minúsculas.</td></tr>
+<tr><td>Coincidencia de patrones sin distinción entre mayúsculas y minúsculas</td><td><code translate="no">=~</code> con <code translate="no">(?i)</code></td><td><code translate="no">message =~ &quot;(?i)error&quot;</code></td><td>Coincide con « <code translate="no">error</code> », « <code translate="no">ERROR</code> » u otras variantes de mayúsculas y minúsculas.</td></tr>
 <tr><td>Excluir valores que coincidan con un patrón de expresión regular</td><td><code translate="no">!~</code></td><td><code translate="no">message !~ &quot;^DEBUG&quot;</code></td><td>Excluye las cadenas que empiezan por <code translate="no">DEBUG</code>.</td></tr>
 </tbody>
 </table>
@@ -148,7 +148,7 @@ res = client.query(
 <tr><td>Coincide con un carácter en una posición fija</td><td><code translate="no">AB_%</code></td><td><code translate="no">filter = 'code LIKE &quot;AB_%&quot;'</code></td></tr>
 </tbody>
 </table>
-<h3 id="LIKE-matching-behavior" class="common-anchor-header">Comportamiento de coincidencia «LIKE»<button data-href="#LIKE-matching-behavior" class="anchor-icon" translate="no">
+<h3 id="LIKE-matching-behavior" class="common-anchor-header">Comportamiento de coincidencia LIKE<button data-href="#LIKE-matching-behavior" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -228,12 +228,12 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Se recomienda el uso de literales de cadena sin formato para los patrones de expresiones regulares que contengan barras invertidas. En una cadena sin formato, escrita como <code translate="no">r&quot;...&quot;</code> o <code translate="no">r'...'</code>, las barras invertidas se pasan al motor de expresiones regulares tal cual. Esto evita el escape adicional que requieren los literales de cadena normales.</p>
+    </button></h3><p>Se recomienda el uso de literales de cadena sin escalar para los patrones de expresiones regulares que contengan barras invertidas. En una cadena sin escalar, escrita como <code translate="no">r&quot;...&quot;</code> o <code translate="no">r'...'</code>, las barras invertidas se pasan al motor de expresiones regulares tal cual. Esto evita el escape adicional que requieren los literales de cadena normales.</p>
 <p>Por ejemplo:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ r&quot;\d{4}-\d{2}-\d{2}&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Esto coincide con cadenas que contienen un valor similar a una fecha, como <code translate="no">2026-07-01</code>.</p>
-<p>Sin una cadena sin formato, los literales de cadena normales procesan las secuencias de escape antes de que se evalúe el patrón de expresión regular, por lo que patrones como <code translate="no">\d</code>, <code translate="no">\s</code> o los caracteres literales escapados pueden requerir barras invertidas adicionales.</p>
+<p>Sin una cadena sin formato, los literales de cadena normales procesan las secuencias de escape antes de que se evalúe el patrón de expresión regular, por lo que patrones como <code translate="no">\d</code>, <code translate="no">\s</code> o caracteres literales escapados pueden requerir barras invertidas adicionales.</p>
 <h3 id="Common-regex-patterns" class="common-anchor-header">Patrones de expresiones regulares comunes<button data-href="#Common-regex-patterns" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -271,7 +271,7 @@ res = client.query(
 <p>Al buscar metacaracteres de expresiones regulares de forma literal, escápalos en el patrón de expresión regular. Por ejemplo, para buscar un punto literal (<code translate="no">\.</code> en una expresión regular), escribe <code translate="no">\\.</code> en una cadena de filtro de Python:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;email =~ &quot;@gmail\\.com$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Nota: Los filtros de expresiones regulares de Milvus siguen la sintaxis RE2. Si un patrón de expresión regular utiliza una sintaxis que RE2 no admite o que no es válida por cualquier otro motivo, Milvus rechaza la expresión del filtro. Para obtener más detalles sobre los metacaracteres de expresiones regulares, los indicadores y el comportamiento de coincidencia, consulta la referencia <a href="https://github.com/google/re2/wiki/syntax">de sintaxis RE2</a>.</p>
+<p>Nota: Los filtros de expresiones regulares de Milvus siguen la sintaxis RE2. Si un patrón de expresión regular utiliza una sintaxis que RE2 no admite o que es inválida por cualquier otro motivo, Milvus rechaza la expresión del filtro. Para obtener más detalles sobre los metacaracteres de expresiones regulares, los indicadores y el comportamiento de coincidencia, consulta la referencia <a href="https://github.com/google/re2/wiki/syntax">de sintaxis RE2</a>.</p>
 <h3 id="Matching-behavior" class="common-anchor-header">Comportamiento de coincidencia<button data-href="#Matching-behavior" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

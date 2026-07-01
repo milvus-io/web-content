@@ -75,7 +75,7 @@ beta: Milvus 3.0.x
 <tr><th>側面</th><th><code translate="no">VARCHAR</code></th><th><code translate="no">TEXT</code></th></tr>
 </thead>
 <tbody>
-<tr><td>最適な用途</td><td>エンティティの識別、分類、フィルタリングに使用される短いメタデータ（例：<code translate="no">title</code> 、<code translate="no">tag</code> 、<code translate="no">category</code> 、<code translate="no">external_id</code> など）。</td><td><code translate="no">content</code> 、<code translate="no">passage</code> 、<code translate="no">article_body</code> 、<code translate="no">log_message</code> など、LLM やエージェントのワークフローで使用される、より長いソースコンテンツ。</td></tr>
+<tr><td>最適な用途</td><td>エンティティの識別、分類、フィルタリングに使用される短いメタデータ（例：<code translate="no">title</code> 、<code translate="no">tag</code> 、<code translate="no">category</code> 、<code translate="no">external_id</code> ）。</td><td><code translate="no">content</code> 、<code translate="no">passage</code> 、<code translate="no">article_body</code> 、<code translate="no">log_message</code> など、LLM やエージェントのワークフローで使用される、より長いソースコンテンツ。</td></tr>
 <tr><td>長さの設定</td><td><code translate="no">max_length</code> が必要です。これは、フィールドが格納できる最大バイト数を定義します。最大値は<code translate="no">65,535</code> バイトです。値がこの制限を超える可能性がある場合は、<code translate="no">TEXT</code> を使用してください。</td><td><code translate="no">max_length</code> は不要であるため、スキーマにテキスト値の固定バイト制限を指定する必要はありません。</td></tr>
 <tr><td>格納の動作</td><td>各値は、フィールドに設定された<code translate="no">max_length</code> 内に格納されます。</td><td>大きなテキスト値については、自動ストレージ選択が使用されます。詳細については、「<a href="#how-milvus-stores-large-text-values">Milvus による大きな TEXT 値の保存方法</a>」を参照してください。</td></tr>
 <tr><td>プライマリフィールドとしてのサポート</td><td>プライマリフィールドとして使用可能です。</td><td>プライマリフィールドとしては使用できません。</td></tr>
@@ -108,8 +108,8 @@ beta: Milvus 3.0.x
   
  </span></p>
 <ul>
-<li><strong>インライン保存</strong>：<code translate="no">TEXT</code> の値が<code translate="no">dataNode.text.inlineThreshold</code> より小さい場合、Milvusは元のテキスト値を<code translate="no">TEXT</code> フィールドのdataに直接保存します。</li>
-<li><strong>LOB ストレージ</strong>：<code translate="no">TEXT</code> の値が<code translate="no">dataNode.text.inlineThreshold</code> 以上の場合、Milvusはその値を大容量オブジェクトとして扱い、元のテキストをMinIOなどのオブジェクトストレージに別途保存します。<code translate="no">TEXT</code> フィールドのデータには、別途保存されたテキストへの内部参照が格納されます。クエリや検索結果で<code translate="no">TEXT</code> フィールドが要求されると、Milvusはこの参照を使用して元のテキストを取得し、返します。</li>
+<li><strong>インライン保存</strong>：<code translate="no">TEXT</code> の値が<code translate="no">dataNode.text.inlineThreshold</code> より小さい場合、Milvusは元のテキスト値を<code translate="no">TEXT</code> フィールドdataに直接保存します。</li>
+<li><strong>LOB ストレージ</strong>：<code translate="no">TEXT</code> の値が<code translate="no">dataNode.text.inlineThreshold</code> 以上の場合、Milvusはその値をLOB（大容量オブジェクト）として扱い、元のテキストをMinIOなどのオブジェクトストレージに別途保存します。<code translate="no">TEXT</code> フィールドのデータには、別途保存されたテキストへの内部参照が格納されます。クエリや検索結果で<code translate="no">TEXT</code> フィールドが要求されると、Milvusはこの参照を使用して元のテキストを取得し、返します。</li>
 </ul>
 <p>このストレージの選択は内部的なものです。Milvusがどのストレージパスを使用する場合でも、<code translate="no">TEXT</code> フィールドへの挿入、クエリ、検索は同じ方法で行います。しきい値や、関連するストレージ、コンパクション、ガベージコレクションの動作を調整するには、<a href="/docs/ja/configure_datanode.md">dataNode関連の設定</a> <a href="/docs/ja/configure_datacoord.md">およびdataCoord関連の設定</a>を参照してください。</p>
 <p>デプロイメントでオブジェクトストレージを使用している場合、<code translate="no">TEXT</code> の値が大きいと、<code translate="no">lobs/...</code> などのパス下にMilvusが管理するオブジェクトとして表示されることがあります。これらのオブジェクトは実装上の詳細であり、手動で移動、コピー、または削除してはなりません。 エンティティの削除、パーティションの削除、またはデータの圧縮を行った後、オブジェクトストレージの使用量が減少するのは、Milvusのガベージコレクションがセーフティウィンドウ経過後に参照されていない大容量オブジェクトデータを削除してからとなります。</p>

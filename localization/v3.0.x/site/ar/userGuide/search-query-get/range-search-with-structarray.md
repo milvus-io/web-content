@@ -1,13 +1,13 @@
 ---
 id: range-search-with-structarray.md
-title: البحث في النطاق باستخدام StructArray
+title: البحث في نطاق مع StructArray
 summary: >-
   استخدم هذه الصفحة لإجراء بحث النطاق على الحقول الفرعية المتجهة في StructArray.
   يُرجع بحث النطاق نتائج متجهة تقع درجاتها أو مسافاتها ضمن الحدود المحددة.
   بالنسبة لحقول StructArray، استخدم بحث النطاق مع البحث المتجه على مستوى
   العناصر، حيث يتم البحث في كل عنصر من عناصر Struct بشكل مستقل.
 ---
-<h1 id="Range-Search-with-StructArray" class="common-anchor-header">البحث في النطاق باستخدام StructArray<button data-href="#Range-Search-with-StructArray" class="anchor-icon" translate="no">
+<h1 id="Range-Search-with-StructArray" class="common-anchor-header">البحث في نطاق مع StructArray<button data-href="#Range-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>استخدم هذه الصفحة لإجراء بحث النطاق على الحقول الفرعية للمتجهات في StructArray. يُرجع بحث النطاق نتائج المتجهات التي تقع درجاتها أو مسافاتها ضمن حدود محددة. بالنسبة لحقول StructArray، استخدم بحث النطاق مع بحث المتجهات على مستوى العناصر، حيث يتم البحث في كل عنصر من عناصر Struct بشكل مستقل.</p>
+    </button></h1><p>استخدم هذه الصفحة لإجراء بحث النطاق على الحقول الفرعية للمتجه StructArray. يُرجع بحث النطاق نتائج المتجهات التي تقع درجاتها أو مسافاتها ضمن حدود محددة. بالنسبة لحقول StructArray، استخدم بحث النطاق مع بحث المتجهات على مستوى العناصر، حيث يتم البحث في كل عنصر من عناصر Struct بشكل مستقل.</p>
 <p>تستخدم هذه الصفحة المجموعة « <code translate="no">tech_articles</code> » من <a href="/docs/ar/create-structarray-field.md">«إنشاء حقل StructArray</a>». تحتوي المجموعة على حقل StructArray باسم « <code translate="no">chunks</code> ». يتم فهرسة الحقل الفرعي المتجه « <code translate="no">chunks[emb]</code> » للبحث على مستوى العناصر باستخدام مقياس متجه عادي مثل « <code translate="no">COSINE</code> » أو « <code translate="no">IP</code> » أو « <code translate="no">L2</code> ».</p>
 <h2 id="How-range-search-applies-to-StructArray" class="common-anchor-header">كيفية تطبيق البحث عن النطاق على StructArray<button data-href="#How-range-search-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -102,7 +102,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td><code translate="no">L2</code></td><td>لا. المسافة الأقصر هي الأفضل.</td><td><code translate="no">range_filter &lt;= distance &lt; radius</code></td></tr>
-<tr><td><code translate="no">IP</code>، <code translate="no">COSINE</code></td><td>نعم. كلما زادت النتيجة كان ذلك أفضل.</td><td><code translate="no">radius &lt; distance &lt;= range_filter</code></td></tr>
+<tr><td><code translate="no">IP</code>، <code translate="no">COSINE</code></td><td>نعم. كلما زادت النتيجة، كان ذلك أفضل.</td><td><code translate="no">radius &lt; distance &lt;= range_filter</code></td></tr>
 </tbody>
 </table>
 <p>عند تعيين " <code translate="no">radius</code> " فقط، يعرض البحث عن النطاق النتائج التي تستوفي الحد الخارجي للمقياس. اختر القيم وفقًا لمقياس الدرجة أو المسافة الخاص بعمليات التضمين الخاصة بك.</p>
@@ -304,7 +304,7 @@ results = client.hybrid_search(
       </svg>
     </button></h2><ul>
 <li><p>لا تستخدم استعلام " <code translate="no">EmbeddingList</code> " أو مقياس " <code translate="no">MAX_SIM*</code> " للبحث عن النطاق في الحقول الفرعية للمتجه StructArray. لا يدعم البحث على مستوى EmbeddingList البحث عن النطاق.</p></li>
-<li><p>لا تجمع بين البحث في النطاق والبحث المجمّع. إذا كنت بحاجة إلى نتيجة واحدة لكل كيان أبوي، فقم بتشغيل بحث على مستوى العناصر بدون معلمات النطاق واستخدم التجميع حيثما كان ذلك مدعومًا.</p></li>
+<li><p>لا تجمع بين البحث في النطاق والبحث المجمّع. إذا كنت بحاجة إلى نتيجة واحدة لكل كيان أبوي، فقم بتشغيل بحث على مستوى العنصر بدون معلمات النطاق واستخدم التجميع حيثما كان ذلك مدعومًا.</p></li>
 <li><p>يتم دعم البحث النطاقي المختلط لحقول المتجهات على مستوى العناصر في StructArray. ولا يتم دعمه لطلبات StructArray على مستوى EmbeddingList.</p></li>
 </ul>
 <h2 id="Common-mistakes" class="common-anchor-header">الأخطاء الشائعة<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
@@ -345,8 +345,8 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>لمعرفة وضعي البحث المتجهي الأساسيين في StructArray، اقرأ <a href="/docs/ar/basic-vector-search-with-structarray.md">البحث المتجهي الأساسي باستخدام StructArray</a>.</p></li>
+<li><p>لمعرفة وضعي البحث المتجهي الأساسيين لـ StructArray، اقرأ <a href="/docs/ar/basic-vector-search-with-structarray.md">البحث المتجهي الأساسي باستخدام StructArray</a>.</p></li>
 <li><p>لإضافة عوامل تصفية قياسية إلى البحث في النطاق، اقرأ <a href="/docs/ar/filtered-search-with-structarray.md">«البحث المُصفى باستخدام StructArray</a>».</p></li>
 <li><p>لإرجاع نتيجة واحدة على الأكثر لكل كيان أب حيثما كان ذلك مدعومًا، اقرأ " <a href="/docs/ar/grouping-search-with-structarray.md">البحث المجمّع باستخدام StructArray</a>".</p></li>
-<li><p>للتحقق من حدود البحث الخاصة بالإصدار، اقرأ " <a href="/docs/ar/structarray-limits.md">حدود StructArray</a>".</p></li>
+<li><p>للتحقق من حدود البحث الخاصة بكل إصدار، اقرأ " <a href="/docs/ar/structarray-limits.md">حدود StructArray</a>".</p></li>
 </ol>

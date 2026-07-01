@@ -35,7 +35,7 @@ title: 카프카
       </svg>
     </button></h2><ul>
 <li>Milvus는 <strong>Kafka 2.x 및 3.x만</strong> 지원합니다.</li>
-<li>Kafka는 Helm 또는 Milvus Operator를 통해 Milvus Distributed(클러스터)용으로 구성됩니다.</li>
+<li>Kafka는 Helm 또는 Milvus Operator를 통해 Milvus Distributed(클러스터)에 맞게 구성됩니다.</li>
 </ul>
 <h2 id="Deploy-a-Milvus-cluster-with-Kafka-using-Helm" class="common-anchor-header">Helm을 사용하여 Kafka와 함께 Milvus 클러스터 배포하기<button data-href="#Deploy-a-Milvus-cluster-with-Kafka-using-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -67,7 +67,7 @@ title: 카프카
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>외부 Kafka 서비스를 사용하려면, 번들된 Pulsar를 비활성화하고 <code translate="no">values.yaml</code> 오버라이드에서 <code translate="no">externalKafka</code> 를 활성화한 다음, 이를 사용하여 Milvus를 설치하십시오:</p>
+    </button></h3><p>외부 Kafka 서비스를 사용하려면, 번들된 Pulsar를 비활성화하고 ` <code translate="no">values.yaml</code> ` 오버라이드에서 ` <code translate="no">externalKafka</code> `를 활성화한 다음, 이를 사용하여 Milvus를 설치하십시오:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">pulsarv3:</span>
   <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span>
 <span class="hljs-attr">externalKafka:</span>
@@ -222,8 +222,8 @@ title: 카프카
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>2.5.x에서 2.6.x로 업그레이드:</strong> <strong>메시지 큐 제한 사항</strong>: Milvus v3.0-beta로 업그레이드할 때는 현재 사용 중인 메시지 큐를 그대로 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.
-Kafka를 실행 중이고 이를 계속 사용하려면, 업그레이드 중에 메시지 큐를 변경하지 마십시오.</li>
+<li><strong>2.5.x에서 2.6.x로 업그레이드:</strong> <strong>메시지 큐 제한 사항</strong>: Milvus v3.0-beta로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.
+Kafka를 실행 중이며 이를 계속 사용하려는 경우, 업그레이드 중에 메시지 큐를 변경하지 마십시오.</li>
 <li><strong>Kafka 2.x 및 3.x</strong> 만 지원됩니다.</li>
 <li>SASL/SSL 연결에 대해서는 <a href="/docs/ko/connect_kafka_ssl.md">‘SASL/SSL을 사용하여 Kafka에 연결하기’를</a> 참조하십시오.</li>
 </ul>
@@ -244,4 +244,5 @@ Kafka를 실행 중이고 이를 계속 사용하려면, 업그레이드 중에 
       </svg>
     </button></h2><ul>
 <li><a href="/docs/ko/woodpecker.md">Woodpecker(기본 메시지 큐)</a></li>
+<li><a href="/docs/ko/switch-kafka-woodpecker.md">Kafka와 Woodpecker 간 전환</a></li>
 </ul>

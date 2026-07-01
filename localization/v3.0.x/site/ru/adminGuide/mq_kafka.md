@@ -154,7 +154,7 @@ title: Кафка
         <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;kafkaBrokerAddr2:9092&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Настройки SASL поддерживаются в Milvus Operator версии 0.8.5 или более поздней.</p>
+<p>Настройки SASL поддерживаются в Milvus Operator версии 0.8.5 и выше.</p>
 </div>
 <h3 id="Internal-in-cluster-Kafka" class="common-anchor-header">Внутренний (внутрикластерный) Kafka<button data-href="#Internal-in-cluster-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -222,7 +222,7 @@ title: Кафка
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Обновление с версии 2.5.x до 2.6.x:</strong> <strong>Ограничения</strong>, связанные с <strong>очередью сообщений</strong>: при обновлении до Milvus v3.0-beta необходимо сохранить текущий выбор системы очереди сообщений. Переключение между различными системами очередей сообщений во время обновления не поддерживается. Поддержка смены систем очередей сообщений будет доступна в будущих версиях.
+<li><strong>Обновление с версии 2.5.x до 2.6.x:</strong> <strong>Ограничения</strong>, связанные с <strong>очередью сообщений</strong>: при обновлении до Milvus v3.0-beta необходимо сохранить текущий выбор системы очереди сообщений. Переключение между различными системами очередей сообщений во время обновления не поддерживается. Поддержка смены системы очереди сообщений будет доступна в будущих версиях.
 Если вы используете Kafka и хотите сохранить её, не меняйте систему очередей сообщений во время обновления.</li>
 <li>Поддерживаются только версии <strong>Kafka 2.x и 3.x</strong>.</li>
 <li>Информацию о подключении по протоколу SASL/SSL см. в разделе <a href="/docs/ru/connect_kafka_ssl.md">«Подключение к Kafka с помощью SASL/SSL</a>».</li>
@@ -244,4 +244,5 @@ title: Кафка
       </svg>
     </button></h2><ul>
 <li><a href="/docs/ru/woodpecker.md">Woodpecker (очередь сообщений по умолчанию)</a></li>
+<li><a href="/docs/ru/switch-kafka-woodpecker.md">Переключение между Kafka и Woodpecker</a></li>
 </ul>

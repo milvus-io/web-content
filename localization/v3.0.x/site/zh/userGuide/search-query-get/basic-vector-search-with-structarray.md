@@ -21,7 +21,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>使用本页面可在 StructArray 字段内的向量字段上执行向量搜索。StructArray 支持两种基本向量搜索模式：嵌入列表搜索（对存储在每个实体中的嵌入列表进行评分）和元素级搜索（独立搜索每个 Struct 元素）。</p>
-<p>本页面<a href="/docs/zh/create-structarray-field.md">使用“创建 StructArray 字段</a>”中的<code translate="no">tech_articles</code> Collection。该 Collection 包含一个名为<code translate="no">chunks</code><a href="/docs/zh/create-structarray-field.md">的</a> StructArray 字段。每个块包含文本、标量元数据、一个名为<code translate="no">emb_list_vector</code> 的向量字段（带有用于嵌入列表搜索的索引），以及一个名为<code translate="no">emb</code> 的向量字段（带有用于元素级搜索的索引）。</p>
+<p>本页面<a href="/docs/zh/create-structarray-field.md">使用“创建 StructArray 字段</a>”中的<code translate="no">tech_articles</code> Collection。该 Collection 包含一个名为<code translate="no">chunks</code> 的 StructArray 字段。每个块包含文本、标量元数据、一个名为<code translate="no">emb_list_vector</code> 的向量字段（带有用于嵌入列表搜索的索引），以及一个名为<code translate="no">emb</code> 的向量字段（带有用于元素级搜索的索引）。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">开始之前<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -199,7 +199,7 @@ results = client.search(
 <tr><td><code translate="no">distance</code> 或得分</td><td>查询Embeddings列表与存储的Embeddings列表之间的得分或距离。</td><td>查询向量与匹配的 Struct 元素向量之间的得分或距离。</td></tr>
 <tr><td><code translate="no">offset</code></td><td>不适用。</td><td>返回时匹配的 Struct 元素的从零开始的索引位置。</td></tr>
 <tr><td>重复的主键</td><td>由于结果是实体级别的，因此单个查询中不应出现这种情况。</td><td>可能出现，因为同一实体中的多个 Struct 元素可能会匹配。</td></tr>
-<tr><td>请求的 StructArray 输出字段</td><td>从匹配的实体中返回。</td><td>将根据目标 API 和 SDK 支持的元素级命中结构返回。</td></tr>
+<tr><td>请求的 StructArray 输出字段</td><td>从匹配的实体中返回。</td><td>将根据目标 API 和 SDK 支持的元素级命中结构进行返回。</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">常见错误<button data-href="#Common-mistakes" class="anchor-icon" translate="no">

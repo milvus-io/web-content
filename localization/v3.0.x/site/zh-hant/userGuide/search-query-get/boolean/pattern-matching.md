@@ -77,7 +77,7 @@ res = client.query(
         ></path>
       </svg>
     </button></h2><p>請選擇能最簡潔地表達所需模式的運算子。</p>
-<p>若需進行字串精確比對，建議您使用 `<code translate="no">==</code> ` 而非模式比對。僅當篩選條件需要比對特定模式時，才使用 `<code translate="no">LIKE</code> ` 或正規表達式。</p>
+<p>若需進行字串精確比對，建議您使用 `<code translate="no">==</code> ` 而非模式比對。僅當篩選條件需要比對特定模式時，才應使用 `<code translate="no">LIKE</code> ` 或正規表達式。</p>
 <table>
 <thead>
 <tr><th>要求</th><th>建議運算子</th><th>範例</th><th>說明</th></tr>
@@ -230,7 +230,7 @@ res = client.query(
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ r&quot;\d{4}-\d{2}-\d{2}&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>這會匹配包含類似日期的字串，例如<code translate="no">2026-07-01</code> 。</p>
-<p>若未使用原始字串，一般字串文字會在評估正規表達式模式之前先處理轉義序列，因此像<code translate="no">\d</code> 、<code translate="no">\s</code> 這樣的模式，或是包含轉義字元的字串，可能需要額外的反斜線。</p>
+<p>若未使用原始字串，一般字串文字會在評估正規表達式模式之前先處理轉義序列，因此像<code translate="no">\d</code> 、<code translate="no">\s</code> 這樣的模式，或是包含轉義字元字面值的字串，可能需要額外的反斜線。</p>
 <h3 id="Common-regex-patterns" class="common-anchor-header">常見的正規表達式模式<button data-href="#Common-regex-patterns" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -268,7 +268,7 @@ res = client.query(
 <p>若要字面匹配正規表達式中的元字元，請在正規表達式模式中對其進行轉義。例如，若要匹配字面上的點（正規表達式中的 `<code translate="no">\.</code> `），請在 Python 篩選器字串中寫作 `<code translate="no">\\.</code> `：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;email =~ &quot;@gmail\\.com$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>注意：Milvus 的正規表達式篩選器遵循 RE2 語法。若正規表達式模式使用了 RE2 不支援的語法，或因其他原因而無效，Milvus 將拒絕該篩選器表達式。有關正規表達式元字元、標誌及匹配行為的詳細資訊，請參閱<a href="https://github.com/google/re2/wiki/syntax">RE2 語法參考</a>。</p>
+<p>注意：Milvus 的正規表達式篩選器遵循 RE2 語法。若正規表達式模式使用了 RE2 不支援的語法，或因其他原因而無效，Milvus 將拒絕該篩選器表達式。有關正規表達式元字元、旗標及匹配行為的詳細資訊，請參閱<a href="https://github.com/google/re2/wiki/syntax">RE2 語法參考</a>。</p>
 <h3 id="Matching-behavior" class="common-anchor-header">匹配行為<button data-href="#Matching-behavior" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -331,7 +331,7 @@ res = client.query(
 </thead>
 <tbody>
 <tr><td>包含固定的字面值子字串，例如<code translate="no">message =~ &quot;error.*timeout&quot;</code> 或<code translate="no">message LIKE &quot;%database%&quot;</code></td><td><code translate="no">NGRAM</code></td><td>當 Milvus 能從模式中提取有意義的字面值子字串時，此設定會有所幫助。詳細資訊請參閱<a href="/docs/zh-hant/ngram.md">NGRAM</a>。</td></tr>
-<tr><td>前綴、精確或等值類型的字串篩選器，特別適用於基數較低至中等的欄位</td><td><code translate="no">STL_SORT</code>、<code translate="no">INVERTED</code> ，或<code translate="no">BITMAP</code></td><td>當欄位具有重複值，或篩選條件接近完全匹配時，此方法可能更為有效。詳情請參閱<a href="/docs/zh-hant/stl-sort.md">STL_SORT</a>、<a href="/docs/zh-hant/inverted.md">INVERTED</a> 及<a href="/docs/zh-hant/bitmap.md">BITMAP</a>。</td></tr>
+<tr><td>前綴、精確或等值類型的字串篩選器，特別適用於基數較低至中等的欄位</td><td><code translate="no">STL_SORT</code>、<code translate="no">INVERTED</code> ，或<code translate="no">BITMAP</code></td><td>當欄位具有重複值，或篩選條件接近完全匹配時，此方法可能更有效。詳情請參閱<a href="/docs/zh-hant/stl-sort.md">STL_SORT</a>、<a href="/docs/zh-hant/inverted.md">INVERTED</a> 及<a href="/docs/zh-hant/bitmap.md">BITMAP</a>。</td></tr>
 <tr><td>不含固定字面值的正規表達式模式，或以字元類別、短標記或萬用字元為主的模式</td><td>在依賴索引加速之前請先進行效能測試</td><td>這些模式可能提供有限的索引選擇性，並可能退而採用更廣泛的掃描。</td></tr>
 </tbody>
 </table>

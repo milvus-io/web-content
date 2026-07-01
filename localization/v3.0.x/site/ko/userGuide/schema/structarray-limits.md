@@ -98,7 +98,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>StructArray 하위 필드는 물리적 배열 스타일의 저장소에 매핑됩니다. 다음 표에는 지원되는 물리적 유형과 지원되지 않는 물리적 유형이 나열되어 있습니다.</p>
+    </button></h2><p>StructArray 하위 필드는 물리적 배열 스타일의 저장 공간에 매핑됩니다. 다음 표에는 지원되는 물리적 유형과 지원되지 않는 물리적 유형이 나열되어 있습니다.</p>
 <table>
 <thead>
 <tr><th>Struct 하위 필드의 물리적 유형</th><th>지원</th><th>참고</th></tr>
@@ -112,7 +112,7 @@ summary: >-
 <tr><td><code translate="no">ArrayOfVector</code></td><td>지원됨</td><td>서브 필드를 <code translate="no">DataType.FLOAT16_VECTOR</code> 로 정의하고 <code translate="no">dim</code> 를 설정하십시오.</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>지원됨</td><td>서브 필드를 <code translate="no">DataType.BFLOAT16_VECTOR</code> 로 정의하고 <code translate="no">dim</code> 를 설정하십시오.</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>지원됨</td><td>서브 필드를 <code translate="no">DataType.INT8_VECTOR</code> 로 정의하고 <code translate="no">dim</code> 를 설정하십시오.</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>지원됨</td><td>서브 필드를 <code translate="no">DataType.BINARY_VECTOR</code> 로 정의하고 <code translate="no">dim</code> 를 설정하십시오.</td></tr>
+<tr><td><code translate="no">ArrayOfVector</code></td><td>지원됨</td><td>서브필드를 <code translate="no">DataType.BINARY_VECTOR</code> 로 정의하고 <code translate="no">dim</code> 를 설정하십시오.</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>지원되지 않음</td><td>StructArray 필드에서는 스파스 벡터 하위 필드가 지원되지 않습니다.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>지원되지 않음</td><td><code translate="no">String</code> 대신 <code translate="no">VARCHAR</code> 을 사용하십시오.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>지원되지 않음</td><td>StructArray 필드에서는 JSON 하위 필드가 지원되지 않습니다.</td></tr>
@@ -149,7 +149,7 @@ summary: >-
 <tr><td>부분적으로 null인 StructArray 값</td><td>StructArray 필드에 유효한 배열 값이 포함된 경우, 동일한 값 내에서 null인 하위 필드 배열과 유효한 하위 필드 배열을 혼합하여 사용해서는 안 됩니다.</td></tr>
 <tr><td>StructArray 필드의 동적 추가</td><td>기존 컬렉션에 StructArray 필드를 추가하는 기능은 동적 StructArray 필드 지원이 포함된 버전에서만 지원됩니다.</td></tr>
 <tr><td>동적 추가에 대한 null 허용 요구 사항</td><td>기존 컬렉션에 추가된 StructArray 필드는 기존 엔티티에 새 필드의 값이 없으므로 null 허용 가능해야 합니다.</td></tr>
-<tr><td>동적 추가 후의 기존 엔티티</td><td>기존 엔티티는 추가된 StructArray 필드의 하위 필드 전체에 대해 ` <code translate="no">null</code> `를 반환합니다.</td></tr>
+<tr><td>동적 추가 후의 기존 엔티티</td><td>기존 엔티티는 추가된 StructArray 필드의 모든 하위 필드에 대해 ` <code translate="no">null</code> `를 반환합니다.</td></tr>
 </tbody>
 </table>
 <p>Milvus v3.0.x에서는 nullable StructArray 필드, nullable 벡터 배열 및 동적 StructArray 필드 추가 기능을 사용할 수 있습니다.</p>
@@ -230,10 +230,10 @@ summary: >-
 <tr><th>검색 동작</th><th>지원 및 제한 사항</th></tr>
 </thead>
 <tbody>
-<tr><td>기본 EmbeddingList 검색</td><td><code translate="no">MAX_SIM*</code> 메트릭으로 인덱싱된 StructArray 벡터 하위 필드에서 지원됩니다. 엔티티 수준 결과를 반환합니다.</td></tr>
+<tr><td>기본 EmbeddingList 검색</td><td><code translate="no">MAX_SIM*</code> 메트릭으로 인덱싱된 StructArray 벡터 하위 필드에서 지원됩니다. 엔티티 수준의 결과를 반환합니다.</td></tr>
 <tr><td>기본 요소 수준 검색</td><td>일반 벡터 메트릭으로 인덱싱된 StructArray 벡터 하위 필드에서 지원됩니다. 일치하는 요소의 오프셋을 반환할 수 있습니다.</td></tr>
-<tr><td>범위 검색</td><td>대상 버전의 검색 모드 및 인덱스/메트릭 지원 여부에 따라 지원됩니다. 요소 수준 StructArray 요청에 대한 하이브리드 범위 검색 동작은 대상 버전을 확인하십시오.</td></tr>
-<tr><td>그룹화 검색</td><td>요소 수준 그룹화 검색은 오프셋을 반환할 수 있습니다. 요소 수준 StructArray 요청에 대한 하이브리드 검색의 그룹화 동작은 버전에 따라 달라집니다.</td></tr>
+<tr><td>범위 검색</td><td>대상 버전의 검색 모드 및 인덱스/메트릭 지원 여부에 따라 지원됩니다. 요소 수준 StructArray 요청에 대한 하이브리드 범위 검색 동작 여부는 대상 버전을 확인하십시오.</td></tr>
+<tr><td>그룹화 검색</td><td>요소 수준 그룹화 검색은 오프셋을 반환할 수 있습니다. 요소 수준 StructArray 요청에 대한 하이브리드 검색의 그룹화 동작은 버전에 따라 다릅니다.</td></tr>
 <tr><td>하이브리드 검색</td><td>하이브리드 검색 요청은 대상 버전이 해당 검색 조합을 지원하는 경우에만 StructArray 벡터 하위 필드 요청을 포함할 수 있습니다. 각 요청은 여전히 인덱싱된 벡터 하위 필드의 메트릭 패밀리를 따릅니다.</td></tr>
 <tr><td>오프셋 출력</td><td>오프셋은 요소 수준 검색 결과에 사용할 수 있습니다. EmbeddingList 검색은 엔티티 수준 결과를 반환하며, 요소 오프셋을 주요 결과 단위로 사용하지 않습니다.</td></tr>
 </tbody>
@@ -253,13 +253,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>StructArray 스칼라 필터링은 ` <code translate="no">element_filter</code> ` 및 ` <code translate="no">MATCH_*</code> ` 계열과 같은 StructArray 연산자에 의해 처리됩니다. 자세한 술어 지원 매트릭스는 <a href="/docs/ko/struct-array-operators.md">StructArray 연산자</a> 문서에 수록되어 있습니다.</p>
+    </button></h2><p>StructArray 스칼라 필터링은 ` <code translate="no">element_filter</code> ` 및 ` <code translate="no">MATCH_*</code> ` 계열과 같은 StructArray 연산자에 의해 처리됩니다. 자세한 술어 지원 매트릭스는 <a href="/docs/ko/struct-array-operators.md">StructArray 연산자</a> 섹션에 설명되어 있습니다.</p>
 <p>개요:</p>
 <ul>
 <li><p><code translate="no">$[subfield]</code> 는 StructArray 연산자 내부에서만 사용하십시오.</p></li>
 <li><p>스칼라 술어에는 스칼라 하위 필드를 사용하십시오.</p></li>
 <li><p>벡터 하위 필드를 <code translate="no">$[...]</code> 스칼라 술어 입력으로 사용하지 마십시오.</p></li>
-<li><p>JSON 경로 구문, JSON 함수, 배열 컨테이너 함수, 텍스트 일치 함수, 기하/GIS 함수 및 Timestamptz 표현식은 StructArray 요소 수준 조건식에서 지원되지 않습니다.</p></li>
+<li><p>JSON 경로 구문, JSON 함수, 배열 컨테이너 함수, 텍스트 일치 함수, 기하학/GIS 함수 및 Timestamptz 표현식은 StructArray 요소 수준 조건식에서 지원되지 않습니다.</p></li>
 <li><p>단순 부울 표현식 대신 <code translate="no">$[has_code] == true</code> 와 같은 명시적인 부울 비교를 사용하는 것이 좋습니다.</p></li>
 </ul>
 <h2 id="Related-pages" class="common-anchor-header">관련 페이지<button data-href="#Related-pages" class="anchor-icon" translate="no">

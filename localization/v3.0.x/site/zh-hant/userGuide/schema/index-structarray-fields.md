@@ -51,7 +51,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>一個向量欄位或向量子欄位僅能建立一個索引。若您同時需要 EmbeddingList 搜尋與元素層級搜尋，請建立兩個獨立的向量子欄位，並分別為其建立索引。在此頁面中，<code translate="no">chunks[emb_list_vector]</code> 已建立索引以供 EmbeddingList 搜尋使用，而<code translate="no">chunks[emb]</code> 則已建立索引以供元素層級搜尋使用。</p>
+<p>一個向量欄位或向量子欄位僅接受一個索引。若您同時需要 EmbeddingList 搜尋與元素層級搜尋，請建立兩個獨立的向量子欄位，並分別為其建立索引。在此頁面中，<code translate="no">chunks[emb_list_vector]</code> 已建立索引以供 EmbeddingList 搜尋使用，而<code translate="no">chunks[emb]</code> 則已建立索引以供元素層級搜尋使用。</p>
 </div>
 <h2 id="Choose-indexes" class="common-anchor-header">選擇索引<button data-href="#Choose-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -138,7 +138,7 @@ client.create_index(
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>警告
-請勿在同一個向量子字段上建立「<code translate="no">MAX_SIM*</code> 」索引與一般向量度量索引。若需同時使用這兩種搜尋模式，請將向量寫入兩個獨立的向量子字段，並分別針對每個子字段建立一個索引。</p>
+請勿在同一個向量子字段上建立「<code translate="no">MAX_SIM*</code> 」索引與一般向量度量索引。若需同時使用這兩種搜尋模式，請將向量寫入兩個不同的向量子字段，並分別針對每個子字段建立一個索引。</p>
 </div>
 <h2 id="Create-scalar-indexes" class="common-anchor-header">建立標量索引<button data-href="#Create-scalar-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -335,7 +335,7 @@ client.create_index(
       </svg>
     </button></h2><ul>
 <li><p>在 `<code translate="no">chunks.emb</code> ` 上建立索引，而非在 `<code translate="no">chunks[emb]</code>` 上建立索引。</p></li>
-<li><p>僅建立<code translate="no">MAX_SIM*</code> 索引，隨後卻嘗試在同一子場上執行元素層級搜尋。</p></li>
+<li><p>僅建立<code translate="no">MAX_SIM*</code> 索引，然後嘗試在同一子場上執行元素層級搜尋。</p></li>
 <li><p>僅建立一般向量索引，隨後卻嘗試在同一子欄位上執行 EmbeddingList 搜尋。</p></li>
 <li><p>將同一個向量子欄位同時用於<code translate="no">MAX_SIM*</code> 和一般向量指標。</p></li>
 <li><p>遺漏針對使用頻率極高的 StructArray 篩選條件所建立的標量索引。</p></li>

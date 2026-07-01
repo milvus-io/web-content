@@ -7,7 +7,7 @@ summary: >-
   vetoriais cuja pontuação ou distância se situa dentro de um intervalo
   especificado. Para os campos StructArray, utilize a pesquisa por intervalo em
   conjunto com a pesquisa vetorial ao nível dos elementos, em que cada elemento
-  Struct é pesquisado de forma independente.
+  do Struct é pesquisado de forma independente.
 ---
 <h1 id="Range-Search-with-StructArray" class="common-anchor-header">Pesquisa por intervalo com StructArray<button data-href="#Range-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -123,7 +123,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O exemplo seguinte pesquisa blocos individuais cujos vetores de « <code translate="no">chunks[emb]</code> » sejam suficientemente semelhantes ao vetor de consulta. Cada resultado correspondente representa um elemento Struct correspondente.</p>
+    </button></h2><p>O exemplo seguinte pesquisa blocos individuais cujos vetores de « <code translate="no">chunks[emb]</code> » sejam suficientemente semelhantes ao vetor de consulta. Cada resultado representa um elemento Struct correspondente.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -163,7 +163,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>Neste exemplo, « <code translate="no">COSINE</code> » é uma métrica do tipo «similaridade», pelo que o intervalo de resultados é superior a <code translate="no">radius</code> e inferior ou igual a <code translate="no">range_filter</code>. O valor « <code translate="no">offset</code> » identifica o elemento «Struct» correspondente na matriz « <code translate="no">chunks</code> » quando devolvido.</p>
+<p>Neste exemplo, « <code translate="no">COSINE</code> » é uma métrica do tipo «similarity», pelo que o intervalo de resultados é superior a <code translate="no">radius</code> e inferior ou igual a <code translate="no">range_filter</code>. O valor « <code translate="no">offset</code> » identifica o elemento «Struct» correspondente na matriz « <code translate="no">chunks</code> » quando devolvido.</p>
 <h2 id="Add-scalar-filters" class="common-anchor-header">Adicionar filtros escalares<button data-href="#Add-scalar-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -262,7 +262,7 @@ results = client.hybrid_search(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Neste exemplo, apenas a sub-solicitação « <code translate="no">chunks[emb]</code> » utiliza parâmetros de pesquisa por intervalo. A solicitação StructArray continua a seguir a semântica ao nível do elemento: o limite do intervalo aplica-se aos resultados do elemento Struct antes de a pesquisa híbrida combinar e reclassificar os resultados.</p>
-<h2 id="Interpret-range-results" class="common-anchor-header">Interpretar resultados de intervalo<button data-href="#Interpret-range-results" class="anchor-icon" translate="no">
+<h2 id="Interpret-range-results" class="common-anchor-header">Interpretar os resultados do intervalo<button data-href="#Interpret-range-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -284,4 +284,5 @@ Se estiver a utilizar o Pulsar e pretender mantê-lo, não altere a fila de mens
       </svg>
     </button></h2><ul>
 <li><a href="/docs/pt/woodpecker.md">Woodpecker (fila de mensagens predefinida)</a></li>
+<li><a href="/docs/pt/switch-pulsar-woodpecker.md">Alternar entre o Pulsar e o Woodpecker</a></li>
 </ul>

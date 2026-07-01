@@ -146,7 +146,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>各Struct要素が個別にベクトル検索に参加する必要がある場合は、要素レベルの検索を使用します。クエリは通常のベクトルであり、対象となるベクトルサブフィールドには通常のベクトルメトリックによるインデックスが付けられている必要があります。</p>
+    </button></h2><p>各Struct要素が個別にベクトル検索の対象となる場合は、要素レベルの検索を使用します。クエリは通常のベクトルであり、対象となるベクトルサブフィールドには通常のベクトルメトリックによるインデックスが付けられている必要があります。</p>
 <pre><code translate="no" class="language-python">query_vector = [<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>]
 
 results = client.search(
@@ -195,10 +195,10 @@ results = client.search(
 </thead>
 <tbody>
 <tr><td><code translate="no">id</code></td><td>一致したエンティティの主キー。</td><td>一致した Struct 要素を含むエンティティの主キー。</td></tr>
-<tr><td><code translate="no">distance</code> またはスコア</td><td>クエリの埋め込みリストと保存された埋め込みリストとの間のスコアまたは距離。</td><td>クエリベクトルと一致した Struct 要素のベクトルとの間のスコアまたは距離。</td></tr>
+<tr><td><code translate="no">distance</code> またはスコア</td><td>クエリの埋め込みリストと保存済みの埋め込みリストとの間のスコアまたは距離。</td><td>クエリベクトルと一致した Struct 要素のベクトルとの間のスコアまたは距離。</td></tr>
 <tr><td><code translate="no">offset</code></td><td>該当なし。</td><td>返される際の一致した Struct 要素の 0 を基点とする位置。</td></tr>
 <tr><td>重複する主キー</td><td>結果はエンティティレベルであるため、単一のクエリでは発生しないことが予想されます。</td><td>同じエンティティ内の複数の Struct 要素が一致する可能性があるため、発生する可能性があります。</td></tr>
-<tr><td>要求された StructArray 出力フィールド</td><td>一致したエンティティから返されます。</td><td>ターゲット API および SDK がサポートする要素レベルのヒットシェープとともに返されます。</td></tr>
+<tr><td>要求された StructArray 出力フィールド</td><td>一致したエンティティから返されます。</td><td>ターゲット API および SDK がサポートする要素レベルのヒットシェイプで返されます。</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">よくある間違い<button data-href="#Common-mistakes" class="anchor-icon" translate="no">

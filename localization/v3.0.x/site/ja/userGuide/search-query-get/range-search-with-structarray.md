@@ -43,7 +43,7 @@ summary: >-
 <tbody>
 <tr><td>EmbeddingList 検索</td><td>サポートされていません。</td><td>該当なし。</td></tr>
 <tr><td>要素単位の検索</td><td><code translate="no">radius</code> および、必要に応じて<code translate="no">range_filter</code> を使用した通常のベクトルクエリを使用してください。</td><td>構造体要素レベル。</td></tr>
-<tr><td>ハイブリッド検索</td><td>StructArray リクエストが要素レベルのベクトルフィールドを対象とする場合にサポートされます。EmbeddingList レベルのリクエストでは、範囲検索はサポートされていません。</td><td>要素レベルのサブ検索、その後ハイブリッド再ランク付け。</td></tr>
+<tr><td>ハイブリッド検索</td><td>StructArray リクエストが要素レベルのベクトルフィールドを対象としている場合にサポートされます。EmbeddingList レベルのリクエストでは、範囲検索はサポートされていません。</td><td>要素レベルのサブ検索、その後ハイブリッド再ランク付けを行います。</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -72,7 +72,7 @@ summary: >-
 <tbody>
 <tr><td>StructArray フィールド</td><td>コレクションには、<code translate="no">chunks</code> などの StructArray フィールドが含まれています。</td></tr>
 <tr><td>要素レベルのベクトルサブフィールド</td><td>対象のベクトルサブフィールドは<code translate="no">chunks[emb]</code> であり、<code translate="no">chunks[emb_list_vector]</code> ではありません。</td></tr>
-<tr><td>インデックス指標</td><td>このベクトルサブフィールドは、<code translate="no">COSINE</code> 、<code translate="no">IP</code> 、または<code translate="no">L2</code> などの通常のベクトルメトリックでインデックス付けされています。</td></tr>
+<tr><td>インデックス指標</td><td>このベクトルサブフィールドは、<code translate="no">COSINE</code> 、<code translate="no">IP</code> 、または<code translate="no">L2</code> などの通常のベクトルメトリックでインデックス付けされます。</td></tr>
 <tr><td>クエリデータ</td><td>クエリは、<code translate="no">EmbeddingList</code> ではなく、通常のベクトルです。</td></tr>
 </tbody>
 </table>
@@ -256,7 +256,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>この例では、<code translate="no">chunks[emb]</code> サブリクエストのみが範囲検索パラメータを使用します。StructArray リクエストは依然として要素レベルのセマンティクスに従います。つまり、範囲の境界は、ハイブリッド検索が結果を結合して再ランク付けを行う前に、Struct 要素のヒットに対して適用されます。</p>
+<p>この例では、<code translate="no">chunks[emb]</code> サブリクエストのみが範囲検索パラメータを使用します。StructArray リクエストは依然として要素レベルのセマンティクスに従います。つまり、範囲の境界は、ハイブリッド検索が結果を結合して再ランク付けを行う前に、Struct 要素のヒットに適用されます。</p>
 <h2 id="Interpret-range-results" class="common-anchor-header">範囲検索結果の解釈<button data-href="#Interpret-range-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

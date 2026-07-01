@@ -24,7 +24,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Insira dados num campo StructArray quando cada entidade contiver uma lista ordenada de elementos estruturados. Na carga útil de inserção, um campo StructArray é representado como uma matriz de objetos. Cada objeto representa um elemento Struct e utiliza os nomes dos subcampos Struct definidos no esquema da coleção.</p>
-<p>Esta página utiliza a coleção « <code translate="no">tech_articles</code> » da secção <a href="/docs/pt/create-structarray-field.md">«Criar um campo StructArray</a>». Cada entidade é um artigo técnico e o campo « <code translate="no">chunks</code> » armazena partes do artigo como elementos Struct.</p>
+<p>Esta página utiliza a coleção « <code translate="no">tech_articles</code> » (Artigos técnicos) da secção <a href="/docs/pt/create-structarray-field.md">«Criar um campo StructArray</a>». Cada entidade é um artigo técnico e o campo « <code translate="no">chunks</code> » armazena partes do artigo como elementos Struct.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Antes de começar<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

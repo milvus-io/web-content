@@ -50,7 +50,7 @@ summary: >-
 </table>
 <div class="alert note">
 <p>警告</p>
-<p>仅在非同结构元素级混合搜索中，使用 `<code translate="no">element_scope</code> ` 来配置 StructArray 元素级<code translate="no">AnnSearchRequest</code> 对象的折叠。请勿将其用于 EmbeddingList 请求、Collection 级向量请求或同 StructArray 元素级混合搜索。</p>
+<p>仅在非同结构元素级混合搜索中，使用 `<code translate="no">element_scope</code> ` 来配置 StructArray 元素级 `<code translate="no">AnnSearchRequest</code> ` 对象的折叠。请勿将其用于 EmbeddingList 请求、Collection 级向量请求或同 StructArray 元素级混合搜索。</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">开始之前<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -152,7 +152,7 @@ results = client.hybrid_search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>当所有 `<code translate="no">AnnSearchRequest</code> ` 对象都针对同一 `StructArray` 字段下的元素级向量子字段时，混合搜索可通过重新排序保留元素级候选结果。这是唯一一种最终结果仍保持为元素级的 `StructArray` 混合模式。</p>
+    </button></h2><p>当所有 `<code translate="no">AnnSearchRequest</code> ` 对象均针对同一 `StructArray` 字段下的元素级向量子字段时，混合搜索可通过重新排序保留元素级候选结果。这是唯一一种最终结果仍保持为元素级的 `StructArray` 混合模式。</p>
 <p>以下示例假设<code translate="no">chunks</code> 的 StructArray 字段包含两个元素级向量子字段：<code translate="no">chunks[emb]</code> 和<code translate="no">chunks[code_emb]</code> ，且两者均使用常规向量度量。</p>
 <pre><code translate="no">index_chunk_req = AnnSearchRequest(
     data=[query_vector],
@@ -207,7 +207,7 @@ results = client.hybrid_search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>如果混合搜索将 StructArray 元素级别的<code translate="no">AnnSearchRequest</code> 与 Collection 级别的向量请求、EmbeddingList 请求，或位于不同 StructArray 字段下的元素级请求混合使用，则最终的候选范围为实体级别。在这种情况下，每个 StructArray 元素级别的<code translate="no">AnnSearchRequest</code> 都会在混合重新排序之前被折叠为实体级别的候选项。</p>
+    </button></h2><p>如果混合搜索将 StructArray 元素级别的<code translate="no">AnnSearchRequest</code> 与 Collection 级别的向量请求、EmbeddingList 请求，或位于不同 StructArray 字段下的元素级请求混合使用，则最终的候选范围为实体级别。在这种情况下，在进行混合重新排序之前，每个 StructArray 元素级别的<code translate="no">AnnSearchRequest</code> 都会被折叠为实体级别的候选项。</p>
 <p>当需要控制同一实体中多个匹配元素的折叠方式时，请在 StructArray 元素级<code translate="no">AnnSearchRequest</code> 的<code translate="no">params</code> 中使用<code translate="no">element_scope</code> 。</p>
 <pre><code translate="no">title_req = AnnSearchRequest(
     data=[query_vector],
@@ -314,7 +314,7 @@ results = client.hybrid_search(
 <tr><th>最终候选范围</th><th>结果键</th><th>偏移量行为</th><th>发生条件</th></tr>
 </thead>
 <tbody>
-<tr><td>实体级别</td><td>主键。</td><td>最终结果中不包含元素偏移量。</td><td>混合请求包含 Collection 级向量字段、EmbeddingList 请求，或位于不同 StructArray 字段下的元素级请求。</td></tr>
+<tr><td>实体级别</td><td>主键。</td><td>最终结果中不包含元素偏移量。</td><td>混合请求包含 Collection 级向量字段、EmbeddingList 请求，或不同 StructArray 字段下的元素级请求。</td></tr>
 <tr><td>元素级别</td><td>主键加上父级 StructArray 字段加上元素偏移量。</td><td>当 API 或 SDK 公开时，可返回所选元素的偏移量。</td><td>所有<code translate="no">AnnSearchRequest</code> 对象均为元素级，且位于同一个StructArray字段下。</td></tr>
 </tbody>
 </table>
@@ -361,7 +361,7 @@ results = client.hybrid_search(
 <li><p>在同一 StructArray 元素级混合请求中添加<code translate="no">element_scope</code> 。该请求仍为元素级，不会执行实体级折叠。</p></li>
 <li><p>将<code translate="no">element_scope</code> 添加到<code translate="no">chunks[emb_list_vector]</code> 中。EmbeddingList搜索已经是实体级别的。</p></li>
 <li><p>假设两个 StructArray 字段共享元素偏移量。<code translate="no">chunks</code> 中的偏移量<code translate="no">3</code> 与另一个 StructArray 字段中的偏移量<code translate="no">3</code> 对应的是不同的元素，因此该混合请求将变为实体级。</p></li>
-<li><p>使用<code translate="no">topk_sum</code> 时，请配合<code translate="no">L2</code> 一起使用。若距离度量为负值，请使用<code translate="no">max</code> 、<code translate="no">avg</code> 或<code translate="no">topk_avg</code> 。</p></li>
+<li><p>使用<code translate="no">topk_sum</code> 时，请配合<code translate="no">L2</code> 使用。若距离度量为负值，请使用<code translate="no">max</code> 、<code translate="no">avg</code> 或<code translate="no">topk_avg</code> 。</p></li>
 <li><p>预期实体级混合结果在折叠后将包含所选 Struct 元素的偏移量。</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">后续步骤<button data-href="#Next-steps" class="anchor-icon" translate="no">

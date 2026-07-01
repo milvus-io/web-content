@@ -2,7 +2,8 @@
 id: index-structarray-fields.md
 title: StructArray フィールドのインデックス作成
 summary: >-
-  ベクトル検索を実行したり、スカラーフィルタリングを高速化したりする前に、StructArrayのサブフィールドにインデックスを作成してください。StructArrayフィールドの場合、インデックスの対象となるのは、chunks[emb_list_vector]、chunks[emb]、chunks[section]などのサブフィールドパスです。
+  ベクトル検索を実行したり、スカラーフィルタリングを高速化したりする前に、StructArrayのサブフィールドにインデックスを作成してください。StructArrayフィールドの場合、インデックスの対象となるのは、chunks[emb_list_vector]、chunks[emb]、chunks[section]
+  などのサブフィールドパスです。
 ---
 <h1 id="Index-StructArray-Fields" class="common-anchor-header">StructArray フィールドのインデックス作成<button data-href="#Index-StructArray-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -96,7 +97,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>次の例では、2つのベクトルインデックスを作成します。1つ目のインデックスは、EmbeddingList検索用に<code translate="no">MAX_SIM*</code> メトリックを使用します。2つ目のインデックスは、要素レベルの検索用に通常のベクトルメトリックを使用します。</p>
+    </button></h2><p>次の例では、2つのベクトルインデックスを作成します。1つ目のインデックスは、EmbeddingList検索用に<code translate="no">MAX_SIM*</code> メトリックを使用します。2つ目のインデックスは、要素レベル検索用に通常のベクトルメトリックを使用します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -154,7 +155,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>フィルタで StructArray のスカラーサブフィールドを使用する場合は、それらに対してスカラーインデックスを作成してください。<code translate="no">structArray[subfield]</code> と同じパス構文を使用します。</p>
+    </button></h2><p>フィルタで StructArray のスカラーサブフィールドを使用する場合は、それらに対してスカラーインデックスを作成してください。<code translate="no">structArray[subfield]</code> パス構文と同じものを使用します。</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
@@ -309,8 +310,8 @@ client.create_index(
 <tr><th>ルール</th><th>説明</th></tr>
 </thead>
 <tbody>
-<tr><td>サブフィールドインデックスにはパス構文を使用してください。</td><td>インデックスは `<code translate="no">chunks[emb]</code>` とし、`<code translate="no">emb</code> ` や `<code translate="no">chunks.emb</code>` とはしないでください。</td></tr>
-<tr><td>1 つのベクトルサブフィールドには、1 つのインデックスしか指定できません。</td><td>異なるメトリックファミリーが必要な場合は、別々のベクトルサブフィールドを使用してください。</td></tr>
+<tr><td>サブフィールドインデックスにはパス構文を使用してください。</td><td>インデックスは `<code translate="no">chunks[emb]</code>` とし、`<code translate="no">emb</code> ` や `<code translate="no">chunks.emb</code>` は使用しないでください。</td></tr>
+<tr><td>1 つのベクトルサブフィールドには 1 つのインデックスしか指定できません。</td><td>異なるメトリックファミリーが必要な場合は、別々のベクトルサブフィールドを使用してください。</td></tr>
 <tr><td>EmbeddingList 検索には、<code translate="no">MAX_SIM*</code> メトリックを使用してください。</td><td>EmbeddingList クエリデータには、<code translate="no">MAX_SIM*</code> メトリックを使用して構築されたインデックスが必要です。</td></tr>
 <tr><td>要素レベルの検索には、通常のベクトルメトリクスを使用してください。</td><td>要素レベルの検索では、通常のベクトルクエリデータと、<code translate="no">COSINE</code> 、<code translate="no">IP</code> 、<code translate="no">L2</code> などのメトリックが使用されます。</td></tr>
 <tr><td>フィルタに現れるスカラーサブフィールドをインデックス化してください。</td><td>ターゲットでサポートされているスカラーインデックス型を使用してください。</td></tr>
@@ -336,7 +337,7 @@ client.create_index(
 <li><p><code translate="no">chunks[emb]</code> ではなく、<code translate="no">chunks.emb</code> にインデックスを作成してしまう。</p></li>
 <li><p><code translate="no">MAX_SIM*</code> インデックスのみを作成し、その同じサブフィールドに対して要素レベルの検索を実行しようとする。</p></li>
 <li><p>通常のベクトルインデックスのみを作成し、その後、同じサブフィールドで EmbeddingList 検索を実行しようとする。</p></li>
-<li><p><code translate="no">MAX_SIM*</code> メトリクスと通常のベクトルメトリクスの両方で、1 つのベクトルサブフィールドを再利用してしまう。</p></li>
+<li><p><code translate="no">MAX_SIM*</code> メトリクスと通常のベクトルメトリクスの両方で、1 つのベクトルサブフィールドを再利用すること。</p></li>
 <li><p>頻繁に使用される StructArray フィルターに対するスカラーインデックスの作成を忘れている。</p></li>
 <li><p>Structスキーマに存在しないStructArrayサブフィールドにインデックスを付与している。</p></li>
 </ul>
@@ -356,7 +357,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>エンティティレベルの EmbeddingList 検索または要素レベルのベクトル検索を実行するには、「StructArray を使用した基本的なベクトル検索」を参照してください。</p></li>
+<li><p>エンティティレベルの EmbeddingList 検索や要素レベルのベクトル検索を実行するには、「StructArray を使用した基本的なベクトル検索」を参照してください。</p></li>
 <li><p>検索時に StructArray のスカラーサブフィールドをフィルタリングするには、「StructArray を使用したフィルタ検索」を参照してください。</p></li>
 <li><p>インデックスおよびメトリックの制限を確認するには、「<a href="/docs/ja/structarray-limits.md">StructArray の制限</a>」を参照してください。</p></li>
 </ol>

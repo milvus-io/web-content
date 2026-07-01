@@ -154,7 +154,7 @@ results = client.search(
 <p>Avertissement</p>
 <p>Lorsque vous combinez un prédicat de niveau supérieur avec <code translate="no">element_filter</code>, placez <code translate="no">element_filter</code> à la fin de l’expression. Une expression de filtrage ne peut contenir qu’un seul <code translate="no">element_filter</code>, et vous ne pouvez pas imbriquer <code translate="no">element_filter</code> ou <code translate="no">MATCH_*</code> à l’intérieur d’un autre opérateur StructArray.</p>
 </div>
-<h2 id="Filter-entities-with-MATCH-operators" class="common-anchor-header">Filtrer des entités à l’aide d’opérateurs MATCH<button data-href="#Filter-entities-with-MATCH-operators" class="anchor-icon" translate="no">
+<h2 id="Filter-entities-with-MATCH-operators" class="common-anchor-header">Filtrer des entités à l’aide des opérateurs MATCH<button data-href="#Filter-entities-with-MATCH-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -203,7 +203,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Utilisez « <code translate="no">MATCH_ANY</code> » ici, car le résultat de la recherche EmbeddingList se situe au niveau de l’entité. Le filtre exige qu’au moins un segment de l’entité soit un segment « <code translate="no">&quot;index&quot;</code> » de haute qualité, mais le résultat de la recherche lui-même représente toujours l’entité parente.</p>
+<p>Utilisez « <code translate="no">MATCH_ANY</code> » ici car le résultat de recherche EmbeddingList est au niveau de l’entité. Le filtre exige qu’au moins un fragment de l’entité soit un fragment « <code translate="no">&quot;index&quot;</code> » de haute qualité, mais le résultat de recherche lui-même représente toujours l’entité parente.</p>
 <h2 id="Use-filters-in-hybrid-search" class="common-anchor-header">Utilisation des filtres dans la recherche hybride<button data-href="#Use-filters-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -219,7 +219,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">element_filter</code> Dans la recherche hybride, appliquez les filtres StructArray là où la condition doit s’appliquer. Un filtre de niveau supérieur peut être partagé par l’ensemble de la recherche hybride. Un filtre « » doit être associé à la requête de niveau élément StructArray qui nécessite des contraintes au niveau des éléments.</p>
+    </button></h2><p>Dans la recherche hybride, appliquez les filtres StructArray là où la condition doit s’appliquer. Un filtre de niveau supérieur peut être partagé par l’ensemble de la recherche hybride. Un filtre « <code translate="no">element_filter</code> » doit être associé à la requête de niveau élément StructArray qui nécessite des contraintes au niveau des éléments.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest, RRFRanker
 
 query_vector = [<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>]
@@ -325,5 +325,5 @@ results = client.hybrid_search(
 <li><p>Pour consulter la syntaxe complète des filtres StructArray, lisez la section <a href="/docs/fr/struct-array-operators.md">Opérateurs StructArray</a>.</p></li>
 <li><p>Pour effectuer d’abord des recherches vectorielles non filtrées, consultez la section « <a href="/docs/fr/basic-vector-search-with-structarray.md">Recherche vectorielle de base avec StructArray</a> ».</p></li>
 <li><p>Pour créer des index scalaires pour les filtres StructArray fréquemment utilisés, consultez la section « <a href="/docs/fr/index-structarray-fields.md">Indexer les champs StructArray</a> ».</p></li>
-<li><p>Pour connaître les limites de filtrage et de recherche spécifiques à chaque version, consultez la section « <a href="/docs/fr/structarray-limits.md">Limites de StructArray</a> ».</p></li>
+<li><p>Pour vérifier les limites de filtrage et de recherche spécifiques à chaque version, consultez la section « <a href="/docs/fr/structarray-limits.md">Limites de StructArray</a> ».</p></li>
 </ol>

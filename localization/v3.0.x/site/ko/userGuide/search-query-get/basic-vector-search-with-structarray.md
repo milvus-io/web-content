@@ -52,7 +52,7 @@ summary: >-
 </table>
 <div class="alert note">
 <p>경고</p>
-<p>벡터 필드 또는 벡터 하위 필드는 하나의 인덱스만 허용합니다. EmbeddingList 검색과 요소 수준 검색이 모두 필요한 경우, 두 개의 별도 벡터 하위 필드를 생성하십시오. 이 페이지에서는 <code translate="no">chunks[emb_list_vector]</code> 에 EmbeddingList 검색용 인덱스가 생성되고, <code translate="no">chunks[emb]</code> 에 요소 수준 검색용 인덱스가 생성됩니다.</p>
+<p>벡터 필드 또는 벡터 하위 필드는 하나의 인덱스만 허용합니다. EmbeddingList 검색과 요소 수준 검색이 모두 필요한 경우, 두 개의 별도 벡터 하위 필드를 생성하십시오. 이 페이지에서는 <code translate="no">chunks[emb_list_vector]</code> 에 대해 EmbeddingList 검색용 인덱스가 생성되고, <code translate="no">chunks[emb]</code> 에 대해 요소 수준 검색용 인덱스가 생성됩니다.</p>
 </div>
 <h2 id="Choose-a-search-mode" class="common-anchor-header">검색 모드 선택<button data-href="#Choose-a-search-mode" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -75,7 +75,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>대상 하위 필드</td><td><code translate="no">chunks[emb_list_vector]</code></td><td><code translate="no">chunks[emb]</code></td></tr>
-<tr><td>쿼리 데이터</td><td>하나 이상의 벡터를 포함하는 임베딩 목록.</td><td>일반 벡터.</td></tr>
+<tr><td>쿼리 데이터</td><td>하나 이상의 벡터를 포함하는 임베딩 리스트.</td><td>일반 벡터.</td></tr>
 <tr><td>메트릭 패밀리</td><td><code translate="no">MAX_SIM*</code>(예: <code translate="no">MAX_SIM_COSINE</code>).</td><td><code translate="no">COSINE</code>, <code translate="no">IP</code> 또는 <code translate="no">L2</code> 과 같은 일반 벡터 메트릭.</td></tr>
 <tr><td>하나의 검색 결과가 나타내는 것</td><td>StructArray 벡터 하위 필드가 쿼리 임베딩 목록과 유사한, 일치하는 엔티티.</td><td>StructArray 필드 내의 일치하는 Struct 요소.</td></tr>
 <tr><td>결과 세분화</td><td>엔티티 수준.</td><td>Struct 요소 수준.</td></tr>
@@ -148,7 +148,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>각 Struct 요소가 벡터 검색에 독립적으로 참여해야 할 때는 요소 수준 검색을 사용합니다. 쿼리는 일반 벡터이며, 대상 벡터 하위 필드는 일반 벡터 메트릭으로 인덱싱되어야 합니다.</p>
+    </button></h2><p>각 Struct 요소가 벡터 검색에 독립적으로 참여해야 할 때는 요소 수준 검색을 사용하십시오. 쿼리는 일반 벡터이며, 대상 벡터 하위 필드는 일반 벡터 메트릭으로 인덱싱되어야 합니다.</p>
 <pre><code translate="no" class="language-python">query_vector = [<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>]
 
 results = client.search(
@@ -196,10 +196,10 @@ results = client.search(
 <tr><th>결과 항목</th><th>EmbeddingList 검색</th><th>요소 수준 검색</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">id</code></td><td>일치한 엔티티의 기본 키.</td><td>일치하는 Struct 요소를 포함하는 엔티티의 기본 키.</td></tr>
+<tr><td><code translate="no">id</code></td><td>일치하는 엔티티의 기본 키.</td><td>일치하는 Struct 요소를 포함하는 엔티티의 기본 키.</td></tr>
 <tr><td><code translate="no">distance</code> 또는 점수</td><td>쿼리 임베딩 목록과 저장된 임베딩 목록 간의 점수 또는 거리.</td><td>쿼리 벡터와 일치하는 Struct 요소 벡터 간의 점수 또는 거리.</td></tr>
 <tr><td><code translate="no">offset</code></td><td>해당 사항 없음.</td><td>반환 시 일치하는 Struct 요소의 0을 기준으로 한 위치.</td></tr>
-<tr><td>반복되는 기본 키</td><td>결과는 엔티티 수준이므로 단일 쿼리의 경우 중복 기본 키가 발생하지 않을 것으로 예상됩니다.</td><td>동일한 엔티티 내의 여러 Struct 요소가 일치할 수 있으므로 가능합니다.</td></tr>
+<tr><td>반복되는 기본 키</td><td>결과는 엔티티 수준이므로 단일 쿼리의 경우 중복 기본 키가 발생하지 않을 것으로 예상됩니다.</td><td>동일한 엔티티 내의 여러 Struct 요소가 일치할 수 있으므로 발생할 수 있습니다.</td></tr>
 <tr><td>요청된 StructArray 출력 필드</td><td>일치하는 엔티티에서 반환됩니다.</td><td>대상 API 및 SDK에서 지원하는 요소 수준 히트 셰이프와 함께 반환됩니다.</td></tr>
 </tbody>
 </table>

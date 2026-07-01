@@ -95,7 +95,7 @@ summary: >-
 <tr><td><code translate="no">Array</code></td><td>Compatible</td><td>Defina el subcampo como « <code translate="no">DataType.INT8</code> », « <code translate="no">DataType.INT16</code> », « <code translate="no">DataType.INT32</code> » o « <code translate="no">DataType.INT64</code> ».</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Compatible</td><td>Defina el subcampo como <code translate="no">DataType.FLOAT</code> o <code translate="no">DataType.DOUBLE</code>.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Compatible</td><td>Defina el subcampo como <code translate="no">DataType.VARCHAR</code> y establezca <code translate="no">max_length</code>.</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>Compatible</td><td>Defina el subcampo como « <code translate="no">DataType.FLOAT_VECTOR</code> » y establezca « <code translate="no">dim</code> ».</td></tr>
+<tr><td><code translate="no">ArrayOfVector</code></td><td>Compatible</td><td>Defina el subcampo como <code translate="no">DataType.FLOAT_VECTOR</code> y establezca <code translate="no">dim</code>.</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Compatible</td><td>Defina el subcampo como « <code translate="no">DataType.FLOAT16_VECTOR</code> » y establezca « <code translate="no">dim</code> ».</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Compatible</td><td>Defina el subcampo como « <code translate="no">DataType.BFLOAT16_VECTOR</code> » y establezca « <code translate="no">dim</code> ».</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Compatible</td><td>Defina el subcampo como « <code translate="no">DataType.INT8_VECTOR</code> » y establezca « <code translate="no">dim</code> ».</td></tr>
@@ -125,7 +125,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para crear un campo StructArray, defina primero el esquema Struct que utiliza cada elemento. A continuación, añada un campo Array y establezca su tipo de elemento en Struct.</p>
+    </button></h2><p>Para crear un campo StructArray, defina primero el esquema Struct utilizado por cada elemento. A continuación, añada un campo Array y establezca su tipo de elemento en Struct.</p>
 <ol>
 <li><p>Crea el esquema de la colección.</p></li>
 <li><p>Añade campos a nivel de colección, como la clave principal y los campos a nivel de artículo.</p></li>
@@ -277,7 +277,7 @@ client.create_collection(
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Advertencia
-Los campos StructArray nulos solo están disponibles en Milvus v3.0.x. En el caso de un campo StructArray nulo, una entidad puede proporcionar un valor StructArray válido o establecer todo el campo como ` <code translate="no">null</code>`. Al insertar un valor StructArray válido, todos los subcampos deben ser nulos o tener valores válidos. La inserción de una entidad con algunos subcampos establecidos en nulo y otros en valores válidos da lugar a un error. Para más detalles, consulta <a href="/docs/es/structarray-limits.md">Límites de StructArray</a>.</p>
+Los campos StructArray nulos solo están disponibles en Milvus v3.0.x. En el caso de un campo StructArray nulo, una entidad puede proporcionar un valor StructArray válido o establecer todo el campo como ` <code translate="no">null</code>`. Al insertar un valor StructArray válido, todos los subcampos deben estar nulos o tener valores válidos. La inserción de una entidad con algunos subcampos establecidos en nulo y otros en valores válidos da lugar a un error. Para más detalles, consulta <a href="/docs/es/structarray-limits.md">Límites de StructArray</a>.</p>
 </div>
 <h2 id="Add-a-StructArray-field-to-an-existing-collection" class="common-anchor-header">Añadir un campo StructArray a una colección existente<button data-href="#Add-a-StructArray-field-to-an-existing-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -376,7 +376,7 @@ client.add_collection_struct_field(
 <tr><td>Struct se utiliza como tipo de elemento Array.</td><td>Crea un campo StructArray como un campo Array con ` <code translate="no">element_type=STRUCT</code>`. No crees Struct como un campo de colección de nivel superior.</td></tr>
 <tr><td>Todos los elementos comparten un mismo esquema.</td><td>Cada elemento «Struct» del mismo campo «StructArray» sigue el esquema «Struct» definido para ese campo.</td></tr>
 <tr><td><code translate="no">max_capacity</code> Es obligatorio.</td><td>Limita el número de elementos Struct que cada entidad puede almacenar en el campo StructArray.</td></tr>
-<tr><td>Solo se permiten los tipos de subcampos compatibles.</td><td>Utilice los tipos de subcampos escalares y vectoriales compatibles con StructArray. No defina subcampos JSON, Geometry, Text, Timestamptz, SparseFloatVector ni subcampos Struct / Array anidados.</td></tr>
+<tr><td>Solo se permiten los tipos de subcampos compatibles.</td><td>Utilice los tipos de subcampos escalares y vectoriales admitidos por StructArray. No defina subcampos JSON, Geometry, Text, Timestamptz, SparseFloatVector ni subcampos Struct / Array anidados.</td></tr>
 <tr><td>Los subcampos vectoriales necesitan índices antes de la búsqueda.</td><td>Cree índices en rutas como <code translate="no">chunks[emb_list_vector]</code> o <code translate="no">chunks[emb]</code> antes de ejecutar una búsqueda vectorial.</td></tr>
 <tr><td>Cada subcampo vectorial tiene un índice.</td><td>Si necesitas tanto la búsqueda en EmbeddingList como la búsqueda a nivel de elemento, crea dos subcampos vectoriales independientes.</td></tr>
 <tr><td>Los subcampos StructArray existentes son fijos.</td><td>Una vez creado un campo StructArray, no se pueden añadir más subcampos a ese mismo campo StructArray.</td></tr>

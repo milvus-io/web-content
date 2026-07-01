@@ -36,7 +36,7 @@ title: RocksMQ
     </button></h2><ul>
 <li><strong>Version autonome uniquement</strong> — RocksMQ <strong>n’</strong> est <strong>pas</strong> pris en charge dans Milvus Distributed (cluster). Consultez la <a href="/docs/fr/mqtype-overview.md#Supported-message-queues">matrice de prise en charge des files d’attente de messages</a>.</li>
 <li>RocksMQ est fourni avec Milvus ; il n’y a donc pas de version distincte à installer.</li>
-<li>Il s'agissait de la file d'attente de messages par défaut en mode autonome dans les versions antérieures de Milvus ; elle est remplacée par Woodpecker intégré dans Milvus 3.x.</li>
+<li>Il s'agissait de la file d'attente de messages par défaut en mode autonome dans les versions antérieures de Milvus, et il est remplacé par Woodpecker intégré dans Milvus 3.x.</li>
 </ul>
 <h2 id="Deploy-Milvus-Standalone-with-RocksMQ-using-Docker" class="common-anchor-header">Déployer Milvus Standalone avec RocksMQ à l’aide de Docker<button data-href="#Deploy-Milvus-Standalone-with-RocksMQ-using-Docker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,7 +68,7 @@ title: RocksMQ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Suivez les instructions de la section « <a href="/docs/fr/install_standalone-docker.md">Exécuter Milvus dans Docker</a> ». Dans Milvus 3.x, Woodpecker est la file d’attente par défaut en mode autonome ; vous devez donc explicitement basculer le type de file d’attente vers RocksMQ. Le script d’amorçage crée une nouvelle instance <code translate="no">user.yaml</code> lors du <strong>premier</strong> démarrage <code translate="no">start</code>; configurez donc le type <strong>après</strong> ce premier démarrage, puis exécutez <code translate="no">restart</code> pour appliquer la modification (la commande <code translate="no">restart</code> conserve l’instance <code translate="no">user.yaml</code>) :</p>
+    </button></h3><p>Suivez les instructions de la section « <a href="/docs/fr/install_standalone-docker.md">Exécuter Milvus dans Docker</a> ». Dans Milvus 3.x, Woodpecker est la file d’attente par défaut en mode autonome ; vous devez donc explicitement basculer le type de file d’attente vers RocksMQ. Le script d’amorçage crée une nouvelle instance <code translate="no">user.yaml</code> lors du <strong>premier</strong> démarrage <code translate="no">start</code>; configurez donc le type <strong>après</strong> ce premier démarrage, puis exécutez <code translate="no">restart</code> pour appliquer la modification (la commande <code translate="no">restart</code> conserve <code translate="no">user.yaml</code>) :</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> milvus-rocksmq &amp;&amp; <span class="hljs-built_in">cd</span> milvus-rocksmq
 curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
 
@@ -85,7 +85,7 @@ EOF
 bash standalone_embed.sh restart
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-La modification de l'<code translate="no">mq.type</code> ation de cette manière est destinée à une <b>toute nouvelle</b> instance (ne contenant encore aucune collection). Pour modifier la file d'attente de messages d'une instance contenant déjà des données, suivez plutôt la procédure de basculement.
+La modification de l'<code translate="no">mq.type</code> de cette manière est destinée à une <b>toute nouvelle</b> instance (ne contenant encore aucune collection). Pour modifier la file d'attente de messages d'une instance contenant déjà des données, suivez plutôt la <a href="/docs/fr/switch-rocksmq-woodpecker.md">procédure de basculement</a>.
 </div>
 <h3 id="Configure" class="common-anchor-header">Configuration<button data-href="#Configure" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -152,7 +152,7 @@ bash standalone_embed.sh delete
     </button></h2><ul>
 <li><strong>Mise à niveau de la version 2.5.x vers la version 2.6.x :</strong> <strong>limitations des files d’attente de messages</strong>: lors de la mise à niveau vers Milvus v3.0-beta, vous devez conserver votre choix actuel de file d’attente de messages. Le passage d’un système de file d’attente de messages à un autre pendant la mise à niveau n’est pas pris en charge. La prise en charge du changement de système de file d’attente de messages sera disponible dans les versions futures.
 La version 2.6.x définissant Woodpecker comme valeur par défaut pour le mode autonome, fixez la valeur « <code translate="no">mq.type: rocksmq</code> » dans votre fichier « <code translate="no">user.yaml</code> » <strong>avant</strong> la mise à niveau si vous souhaitez conserver RocksMQ.</li>
-<li>Pour modifier la file d’attente de messages d’une instance en cours d’exécution, consultez la section « Passer de RocksMQ à Woodpecker ».</li>
+<li>Pour modifier la file d’attente de messages d’une instance en cours d’exécution, consultez la section « <a href="/docs/fr/switch-rocksmq-woodpecker.md">Passer de RocksMQ à Woodpecker</a> ».</li>
 </ul>
 <h2 id="Whats-next" class="common-anchor-header">Prochaines étapes<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -171,4 +171,5 @@ La version 2.6.x définissant Woodpecker comme valeur par défaut pour le mode a
       </svg>
     </button></h2><ul>
 <li><a href="/docs/fr/woodpecker.md">Woodpecker (file d’attente de messages par défaut)</a></li>
+<li><a href="/docs/fr/switch-rocksmq-woodpecker.md">Passer de RocksMQ à Woodpecker</a></li>
 </ul>

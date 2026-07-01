@@ -48,13 +48,13 @@ summary: >-
 <tbody>
 <tr><td>Erstellen Sie ein StructArray-Feld, z. B. „ <code translate="no">chunks</code> “.</td><td><a href="/docs/de/create-structarray-field.md">Erstellen eines StructArray-Feldes</a></td></tr>
 <tr><td>Fügen Sie Entitäten ein, deren Feld „ <code translate="no">chunks</code> “ Struct-Objekte enthält.</td><td><a href="/docs/de/insert-data-into-structarray-fields.md">Daten in „StructArray“-Felder einfügen</a></td></tr>
-<tr><td>Erstellen Sie einen „ <code translate="no">MAX_SIM*</code> “-Index auf „ <code translate="no">chunks[emb_list_vector]</code> “ für die Suche in „EmbeddingList“.</td><td><a href="/docs/de/index-structarray-fields.md">StructArray-Felder indizieren</a></td></tr>
+<tr><td>Erstellen Sie einen „ <code translate="no">MAX_SIM*</code> “-Index unter „ <code translate="no">chunks[emb_list_vector]</code> “ für die Suche in der „EmbeddingList“.</td><td><a href="/docs/de/index-structarray-fields.md">StructArray-Felder indizieren</a></td></tr>
 <tr><td>Erstellen Sie einen regulären vektormetrischen Index auf „ <code translate="no">chunks[emb]</code> “ für die Suche auf Elementebene.</td><td><a href="/docs/de/index-structarray-fields.md">StructArray-Felder indizieren</a></td></tr>
 </tbody>
 </table>
 <div class="alert note">
 <p>Warnung</p>
-<p>Ein Vektorfeld oder Vektor-Teilfeld akzeptiert nur einen Index. Wenn Sie sowohl die „EmbeddingList“-Suche als auch die Suche auf Elementebene benötigen, erstellen Sie zwei separate Vektor-Teilfelder. Auf dieser Seite wird „ <code translate="no">chunks[emb_list_vector]</code> “ für die „EmbeddingList“-Suche indiziert und „ <code translate="no">chunks[emb]</code> “ für die Suche auf Elementebene.</p>
+<p>Ein Vektorfeld oder Vektor-Unterfeld akzeptiert nur einen Index. Wenn Sie sowohl die „EmbeddingList“-Suche als auch die Suche auf Elementebene benötigen, erstellen Sie zwei separate Vektor-Unterfelder. Auf dieser Seite wird „ <code translate="no">chunks[emb_list_vector]</code> “ für die „EmbeddingList“-Suche indiziert und „ <code translate="no">chunks[emb]</code> “ für die Suche auf Elementebene.</p>
 </div>
 <h2 id="Choose-a-search-mode" class="common-anchor-header">Wählen Sie einen Suchmodus<button data-href="#Choose-a-search-mode" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -78,7 +78,7 @@ summary: >-
 <tbody>
 <tr><td>Ziel-Unterfeld</td><td><code translate="no">chunks[emb_list_vector]</code></td><td><code translate="no">chunks[emb]</code></td></tr>
 <tr><td>Abfragedaten</td><td>Eine Einbettungsliste, die einen oder mehrere Vektoren enthält.</td><td>Ein regulärer Vektor.</td></tr>
-<tr><td>Metrikfamilie</td><td><code translate="no">MAX_SIM*</code>, wie z. B. <code translate="no">MAX_SIM_COSINE</code>.</td><td>Reguläre Vektormetriken, wie z. B. <code translate="no">COSINE</code>, <code translate="no">IP</code> oder <code translate="no">L2</code>.</td></tr>
+<tr><td>Metrikfamilie</td><td><code translate="no">MAX_SIM*</code>, wie z. B. <code translate="no">MAX_SIM_COSINE</code>.</td><td>Reguläre Vektormetriken, wie z. B. „ <code translate="no">COSINE</code> “, „ <code translate="no">IP</code> “ oder „ <code translate="no">L2</code> “.</td></tr>
 <tr><td>Was ein Treffer darstellt</td><td>Eine übereinstimmende Entität, deren StructArray-Vektor-Unterfeld der Einbettungsliste der Abfrage ähnelt.</td><td>Ein übereinstimmendes Struct-Element innerhalb des StructArray-Feldes.</td></tr>
 <tr><td>Granularität der Ergebnisse</td><td>Entitäts-Ebene.</td><td>Struct-Element-Ebene.</td></tr>
 <tr><td>Offset</td><td>Nicht zutreffend.</td><td>Gibt die Position des übereinstimmenden Struct-Elements bei der Rückgabe, beginnend bei Null, an.</td></tr>
@@ -131,9 +131,9 @@ results = client.search(
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
         <span class="hljs-built_in">print</span>(hit[<span class="hljs-string">&quot;id&quot;</span>], hit[<span class="hljs-string">&quot;distance&quot;</span>], hit[<span class="hljs-string">&quot;entity&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>In diesem Suchmodus steuert „ <code translate="no">limit</code> “, wie viele Entitäten für jede Abfrage zurückgegeben werden. Die Ausgabe kann StructArray-Unterfelder enthalten, aber der Treffer selbst repräsentiert die übereinstimmende übergeordnete Entität und nicht ein bestimmtes Struct-Element.</p>
+<p>In diesem Suchmodus steuert „ <code translate="no">limit</code> “, wie viele Entitäten für jede Abfrage zurückgegeben werden. Die Ausgabe kann StructArray-Unterfelder enthalten, aber der Treffer selbst steht für die übereinstimmende übergeordnete Entität und nicht für ein bestimmtes Struct-Element.</p>
 <div class="alert note">
-<p>Eine vollständige Anleitung im Stil von ColBERT oder ColPali finden Sie unter <a href="/docs/de/search-with-embedding-lists.md">„Suche mit Einbettungslisten</a>“. Diese Seite behandelt lediglich das grundlegende Suchverhalten von StructArray.</p>
+<p>Eine vollständige Anleitung im Stil von ColBERT oder ColPali finden Sie unter <a href="/docs/de/search-with-embedding-lists.md">„Suche mit Embedding-Listen</a>“. Diese Seite behandelt lediglich das grundlegende Suchverhalten von StructArray.</p>
 </div>
 <h2 id="Run-element-level-search" class="common-anchor-header">Suche auf Elementebene durchführen<button data-href="#Run-element-level-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -177,7 +177,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>Bei der Suche auf Elementebene stellt jeder Treffer ein übereinstimmendes „Struct“-Element dar. Der Wert „ <code translate="no">offset</code> “ ist die nullbasierte Position dieses Elements im „StructArray“-Feld. Dieselbe Entität kann mehrmals vorkommen, wenn mehr als ein „Struct“-Element mit der Abfrage übereinstimmt. Der Wert „ <code translate="no">limit</code> “ bezieht sich auf Elementtreffer, nicht auf eindeutige übergeordnete Entitäten.</p>
+<p>Bei der Suche auf Elementebene steht jeder Treffer für ein übereinstimmendes „Struct“-Element. Der Wert „ <code translate="no">offset</code> “ ist die nullbasierte Position dieses Elements im „StructArray“-Feld. Dieselbe Entität kann mehrmals vorkommen, wenn mehr als ein „Struct“-Element mit der Abfrage übereinstimmt. Der Wert „ <code translate="no">limit</code> “ bezieht sich auf Elementtreffer, nicht auf eindeutige übergeordnete Entitäten.</p>
 <h2 id="Interpret-results" class="common-anchor-header">Ergebnisse interpretieren<button data-href="#Interpret-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

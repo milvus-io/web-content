@@ -3,9 +3,10 @@ id: create-structarray-field.md
 title: Créer un champ StructArray
 summary: >-
   Créez un champ StructArray lorsqu'une entité doit contenir une liste ordonnée
-  d'éléments structurés. Un champ StructArray est un champ Array dont le type
-  d'élément est Struct. Chaque élément Struct respecte le même schéma et peut
-  contenir des sous-champs scalaires, des sous-champs vectoriels, ou les deux.
+  d'éléments structurés. Un champ StructArray est un champ de type tableau dont
+  le type d'élément est Struct. Chaque élément Struct respecte le même schéma et
+  peut contenir des sous-champs scalaires, des sous-champs vectoriels, ou les
+  deux.
 ---
 <h1 id="Create-a-StructArray-Field" class="common-anchor-header">Créer un champ StructArray<button data-href="#Create-a-StructArray-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -63,7 +64,7 @@ summary: >-
 <tr><td><code translate="no">page</code></td><td><code translate="no">INT64</code></td><td>Numéro de page ou position logique du bloc.</td></tr>
 <tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>Score au niveau du bloc utilisé dans le filtrage scalaire et les exemples de plage.</td></tr>
 <tr><td><code translate="no">has_code</code></td><td><code translate="no">BOOL</code></td><td>Indique si le segment contient du code.</td></tr>
-<tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Sous-champ vectoriel pour la recherche dans EmbeddingList avec les métriques de <code translate="no">MAX_SIM*</code>.</td></tr>
+<tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Sous-champ vectoriel pour la recherche dans EmbeddingList avec les métriques de l'<code translate="no">MAX_SIM*</code>.</td></tr>
 <tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Sous-champ vectoriel pour la recherche au niveau des éléments avec des métriques vectorielles classiques.</td></tr>
 </tbody>
 </table>
@@ -97,7 +98,7 @@ summary: >-
 <tr><td><code translate="no">Array</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme suit : <code translate="no">DataType.VARCHAR</code> et définissez <code translate="no">max_length</code>.</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Pris en charge</td><td>Définissez le sous-champ comme <code translate="no">DataType.FLOAT_VECTOR</code> et définissez <code translate="no">dim</code>.</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme « <code translate="no">DataType.FLOAT16_VECTOR</code> » et configurez « <code translate="no">dim</code> ».</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme « <code translate="no">DataType.BFLOAT16_VECTOR</code> » et définissez « <code translate="no">dim</code> ».</td></tr>
+<tr><td><code translate="no">ArrayOfVector</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme « <code translate="no">DataType.BFLOAT16_VECTOR</code> » et configurez « <code translate="no">dim</code> ».</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme « <code translate="no">DataType.INT8_VECTOR</code> » et définissez « <code translate="no">dim</code> ».</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme « <code translate="no">DataType.BINARY_VECTOR</code> » et configurez « <code translate="no">dim</code> ».</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Non pris en charge</td><td>Les sous-champs de vecteurs clairsemés ne sont pas pris en charge dans les champs StructArray.</td></tr>
@@ -246,7 +247,7 @@ client.create_collection(
 <tr><td><code translate="no">chunks[text]</code></td><td>Le sous-champ « <code translate="no">text</code> » à l’intérieur de chaque élément Struct.</td><td>Champ de sortie ou filtrage scalaire.</td></tr>
 <tr><td><code translate="no">chunks[section]</code></td><td>L'étiquette de section pour chaque bloc.</td><td>Filtrage scalaire.</td></tr>
 <tr><td><code translate="no">chunks[quality_score]</code></td><td>Le score de qualité au niveau du bloc.</td><td>Filtrage scalaire ou indice scalaire.</td></tr>
-<tr><td><code translate="no">chunks[emb_list_vector]</code></td><td>Le sous-champ vectoriel utilisé comme liste d’intégration.</td><td>Recherche dans EmbeddingList à l'aide de l'<code translate="no">MAX_SIM*</code>.</td></tr>
+<tr><td><code translate="no">chunks[emb_list_vector]</code></td><td>Le sous-champ vectoriel utilisé comme liste d’intégration.</td><td>Recherche dans EmbeddingList avec l'<code translate="no">MAX_SIM*</code>.</td></tr>
 <tr><td><code translate="no">chunks[emb]</code></td><td>Le sous-champ vectoriel utilisé indépendamment par chaque élément Struct.</td><td>Recherche vectorielle au niveau des éléments.</td></tr>
 </tbody>
 </table>
@@ -339,7 +340,7 @@ client.add_collection_struct_field(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Une fois le champ StructArray ajouté, les entités existantes renvoient la valeur « <code translate="no">null</code> » pour le nouveau champ, pour l’ensemble de ses sous-champs.</p>
-<p>Une fois qu’un champ StructArray a été créé, vous ne pouvez plus y ajouter de nouveaux sous-champs. Si vous avez besoin d’attributs d’élément supplémentaires ultérieurement, appelez ` <code translate="no">drop_collection_field()</code> ` pour supprimer le champ StructArray, puis ajoutez un nouveau champ StructArray avec le schéma Struct mis à jour.</p>
+<p>Une fois qu’un champ StructArray a été créé, vous ne pouvez plus ajouter de nouveaux sous-champs à ce champ StructArray existant. Si vous avez besoin d’attributs d’élément supplémentaires ultérieurement, appelez ` <code translate="no">drop_collection_field()</code> ` pour supprimer le champ StructArray, puis ajoutez un nouveau champ StructArray avec le schéma Struct mis à jour.</p>
 <pre><code translate="no" class="language-python">client.drop_collection_field(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
     field_name=<span class="hljs-string">&quot;chunks&quot;</span>,

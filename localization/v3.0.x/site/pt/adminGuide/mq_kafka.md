@@ -244,4 +244,5 @@ Se estiver a utilizar o Kafka e pretender mantê-lo, não altere a fila de mensa
       </svg>
     </button></h2><ul>
 <li><a href="/docs/pt/woodpecker.md">Woodpecker (fila de mensagens predefinida)</a></li>
+<li><a href="/docs/pt/switch-kafka-woodpecker.md">Alternar entre o Kafka e o Woodpecker</a></li>
 </ul>

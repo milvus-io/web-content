@@ -244,4 +244,5 @@ Jika Anda menjalankan Kafka dan ingin tetap menggunakannya, jangan ubah antrian 
       </svg>
     </button></h2><ul>
 <li><a href="/docs/id/woodpecker.md">Woodpecker (antrian pesan default)</a></li>
+<li><a href="/docs/id/switch-kafka-woodpecker.md">Beralih antara Kafka dan Woodpecker</a></li>
 </ul>

@@ -244,4 +244,5 @@ Si utiliza Kafka y desea seguir utilizándolo, no cambie la cola de mensajes dur
       </svg>
     </button></h2><ul>
 <li><a href="/docs/es/woodpecker.md">Woodpecker (cola de mensajes predeterminada)</a></li>
+<li><a href="/docs/es/switch-kafka-woodpecker.md">Cambiar entre Kafka y Woodpecker</a></li>
 </ul>

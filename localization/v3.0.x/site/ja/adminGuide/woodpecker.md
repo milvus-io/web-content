@@ -122,7 +122,7 @@ summary: >-
 </ul></li>
 <li><code translate="no">woodpecker.client</code>
 <ul>
-<li>クライアント側でのセグメントの追加・ローリング・監査の動作を制御し、スループットとエンドツーエンドのレイテンシのバランスを調整します。</li>
+<li>クライアント側でのセグメントの追加・ローリング・監査の挙動を制御し、スループットとエンドツーエンドのレイテンシのバランスを調整します。</li>
 </ul></li>
 <li><code translate="no">woodpecker.logstore</code>
 <ul>
@@ -131,7 +131,7 @@ summary: >-
 <li><code translate="no">woodpecker.storage</code>
 <ul>
 <li><strong>type</strong>: MinIO/S3互換のオブジェクトストレージ（MinIO/S3/GCS/OSSなど）の場合は<code translate="no">minio</code> 、ローカル/共有ファイルシステムの場合は<code translate="no">local</code> 。</li>
-<li><strong>rootPath</strong>: ストレージバックエンドのルートパス（<code translate="no">local</code> で有効。<code translate="no">minio</code> では、パスはバケット/プレフィックスによって決定されます）。</li>
+<li><strong>rootPath</strong>: ストレージバックエンドのルートパス（<code translate="no">local</code> で有効。<code translate="no">minio</code> では、パスはバケット/プレフィックスによって指定されます）。</li>
 </ul></li>
 </ul>
 <h2 id="Deployment-modes" class="common-anchor-header">デプロイモード<button data-href="#Deployment-modes" class="anchor-icon" translate="no">
@@ -181,7 +181,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下のマトリックスは、Woodpeckerが<code translate="no">storage.type=minio</code> で構成された場合の、オブジェクトストレージバックエンドの現在確認されている互換性をまとめたものです。<a href="https://github.com/zilliztech/woodpecker/discussions/150">この情報はGitHubディスカッション#150に基づいています</a>。</p>
+    </button></h2><p>以下のマトリックスは、Woodpeckerが<code translate="no">storage.type=minio</code> で構成された場合の、現在確認されているオブジェクトストレージバックエンドの互換性をまとめたものです。<a href="https://github.com/zilliztech/woodpecker/discussions/150">この情報はGitHubディスカッション#150に基づいています</a>。</p>
 <table>
 <thead>
 <tr><th>プロバイダー／サービス</th><th>ステータス</th><th>備考</th></tr>
@@ -316,7 +316,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
 bash standalone_embed.sh start
 <button class="copy-code-btn"></button></code></pre>
-<p>Woodpeckerを調整するには、初回起動後に生成された<code translate="no">user.yaml</code> を編集し、<code translate="no">bash standalone_embed.sh restart</code> を実行して変更を適用してください（<code translate="no">start</code> を再実行すると<code translate="no">user.yaml</code> が再生成されるため、編集内容は<code translate="no">restart</code> で適用してください）：</p>
+<p>Woodpeckerを調整するには、初回起動後に生成された<code translate="no">user.yaml</code> を編集し、<code translate="no">bash standalone_embed.sh restart</code> を実行して変更を適用してください（<code translate="no">start</code> を実行すると<code translate="no">user.yaml</code> が再生成されるため、編集内容は<code translate="no">restart</code> で適用してください）：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml</span>
 <span class="hljs-attr">woodpecker:</span>
   <span class="hljs-attr">logstore:</span>
@@ -381,7 +381,7 @@ docker restart milvus-standalone
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>これにより、Woodpeckerは専用のStatefulSet（<code translate="no">my-release-milvus-woodpecker</code> 、デフォルトで4つのレプリカ）としてデプロイされ、ヘッドレスサービスによってフロントエンドが構成されます。ポート<code translate="no">18080</code> （サービス）、<code translate="no">17946</code> （ゴシップ）、<code translate="no">9091</code> （メトリクス）でゴシップクラスタリングが行われ、ストレージバックエンドにはMinIOが使用されます。 このサービスには<strong>3ノード</strong>のクォーラムが必要です。デフォルトの<strong>レプリカ数4は</strong>、1ノードの障害を許容しつつクォーラムを維持するため、<code translate="no">woodpecker.replicaCount</code> を3未満に設定しないでください。このクラスターには、別途<code translate="no">woodpecker</code> のポッドセットが含まれます：</p>
+<p>これにより、Woodpeckerは専用のStatefulSet（<code translate="no">my-release-milvus-woodpecker</code> 、デフォルトで4つのレプリカ）としてデプロイされ、ヘッドレスサービスによってフロントエンドが構成されます。ポート<code translate="no">18080</code> （サービス）、<code translate="no">17946</code> （ゴシップ）、<code translate="no">9091</code> （メトリクス）上でゴシップクラスタリングが行われ、ストレージバックエンドにはMinIOが使用されます。 このサービスには<strong>3ノード</strong>のクォーラムが必要です。デフォルトの<strong>レプリカ数4は</strong>、1ノードの障害を許容しつつクォーラムを維持するため、<code translate="no">woodpecker.replicaCount</code> を3未満に設定しないでください。このクラスタには、別途<code translate="no">woodpecker</code> のポッドセットが含まれます：</p>
 <pre><code translate="no"><span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">0</span>
 <span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">1</span>
 <span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">2</span>
@@ -390,7 +390,7 @@ docker restart milvus-standalone
 <div class="alert note">
 <p>Woodpeckerの<code translate="no">service</code> モードは、<strong>分散型／クラスタ展開</strong>専用です。スタンドアロン展開では、Woodpeckerが組み込みモードで実行されます（<code translate="no">minio</code> または<code translate="no">local</code> ）。Milvus Operatorは、現時点ではWoodpeckerのサービスモードをサポートしていません。</p>
 </div>
-<h2 id="Throughput-tuning-tips" class="common-anchor-header">スループットのチューニングに関するヒント<button data-href="#Throughput-tuning-tips" class="anchor-icon" translate="no">
+<h2 id="Throughput-tuning-tips" class="common-anchor-header">スループット調整のヒント<button data-href="#Throughput-tuning-tips" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -405,7 +405,7 @@ docker restart milvus-standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Woodpeckerのスループットとレイテンシの特性は、<strong>組み込み</strong>モードと<strong>サービス</strong>モード（Milvus 3.0の新機能）で異なります。以下のガイダンスはモードごとに分類されています。</p>
+    </button></h2><p>Woodpeckerのスループットおよびレイテンシのプロファイルは、<strong>組み込み</strong>モードと<strong>サービス</strong>モード（Milvus 3.0の機能）で異なります。以下のガイダンスはモードごとに分類されています。</p>
 <h3 id="Embedded-mode" class="common-anchor-header">組み込みモード<button data-href="#Embedded-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -455,7 +455,7 @@ docker restart milvus-standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>サービスモードでは、オブジェクトストレージをバックエンドとする WAL の高い書き込みスループットを維持しつつ、低レイテンシを実現します（<a href="#Latency">「レイテンシ」</a>を参照）。 上記のストレージ側およびクライアント側のチューニングは引き続き適用されます。さらに、Woodpeckerは独自のサービスとして実行されるため、レプリカ（<code translate="no">woodpecker.replicaCount</code> 、デフォルトは4）を追加することで書き込み容量を水平方向にスケールでき、書き込みは1-RTTクォーラムレプリケーションと、ブローカーによる転送を回避するトポロジー認識型読み取りの恩恵を受けます。</p>
+    </button></h3><p>サービスモードでは、オブジェクトストレージをバックエンドとする WAL の高い書き込みスループットを維持しつつ、低レイテンシを実現します（<a href="#Latency">「レイテンシ」</a>を参照）。 上記のストレージ側およびクライアント側のチューニングは引き続き適用されます。さらに、Woodpeckerは独自のサービスとして実行されるため、レプリカ（<code translate="no">woodpecker.replicaCount</code> 、デフォルトは4）を追加することで書き込み容量を水平方向に拡張でき、書き込みは1-RTTクォーラムレプリケーションと、ブローカーによる転送を回避するトポロジー認識型読み取りの恩恵を受けます。</p>
 <p><strong>バッチ挿入のデモ</strong>— 以下のコマンドを使用して書き込みスループットを測定してください：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">import</span> random
@@ -529,7 +529,7 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Woodpeckerは、スループット、コスト、レイテンシのトレードオフを考慮してオブジェクトストレージ向けに設計されたクラウドネイティブなWALです。軽量な組み込みモードでは、コストとスループットの最適化を優先します。これは、ほとんどのシナリオにおいて、個々の書き込みリクエストに対して低レイテンシが求められるのではなく、データが一定の時間内に書き込まれることだけが求められるためです。 そのため、Woodpeckerはバッチ書き込みを採用しており、ローカルファイルシステムストレージバックエンドではデフォルトの間隔が10ms、MinIOのようなストレージバックエンドでは200msに設定されています。書き込み処理が遅い場合、最大レイテンシは間隔時間とフラッシュ時間の合計となります。</p>
+    </button></h3><p>Woodpeckerは、スループット、コスト、レイテンシのトレードオフを考慮してオブジェクトストレージ向けに設計されたクラウドネイティブなWALです。軽量な組み込みモードでは、コストとスループットの最適化を優先します。これは、ほとんどのシナリオにおいて、個々の書き込みリクエストに対して低レイテンシを要求するのではなく、データが一定の時間内に書き込まれることのみが求められるためです。 そのため、Woodpeckerはバッチ書き込みを採用しており、ローカルファイルシステムストレージバックエンドではデフォルトの間隔が10ms、MinIOのようなストレージバックエンドでは200msに設定されています。書き込み処理が遅い場合、最大レイテンシは間隔時間とフラッシュ時間の合計に等しくなります。</p>
 <p>なお、バッチ挿入は時間間隔だけでなく、デフォルトで2MBに設定されているバッチサイズによってもトリガーされる点に注意してください。</p>
 <h3 id="Service-mode-Milvus-30+" class="common-anchor-header">サービスモード (Milvus 3.0 以降)<button data-href="#Service-mode-Milvus-30+" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -546,12 +546,12 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>サービスモードでは、コストを低く抑えつつ、<strong>ミリ秒レベルの書き込みレイテンシ</strong>（従来の3レプリカ構成のローカルディスクWALと同等）を実現します。一般的な3レプリカのAZ横断展開において、書き込みレイテンシはミリ秒単位の範囲に収まります。これは以下の仕組みによって実現されます：</p>
+    </button></h3><p>サービスモードでは、コストを低く抑えつつ、<strong>ミリ秒レベルの書き込みレイテンシ</strong>（従来の3レプリカ構成のローカルディスクWALと同等）を実現します。一般的な3レプリカのAZ横断展開において、書き込みレイテンシはミリ秒単位に収まります。これは以下の仕組みによって達成されます。</p>
 <ul>
-<li><strong>1 RTT クォーラム書き込み</strong>— クライアント主導型レプリケーションでは、1回のラウンドトリップ（RTT）以内にクォーラム書き込みを完了します。これにより、AZを跨ぐトラフィックは2つのレプリカ分のデータ量に固定されます（これに対し、ブローカー／リーダーベースのレプリケーションでは、通常、約1/3分の追加のAZを跨ぐトラフィックが発生します）。</li>
+<li><strong>1 RTT クォーラム書き込み</strong>— クライアント主導型レプリケーションでは、1回のラウンドトリップ（RTT）以内にクォーラム書き込みを完了します。これにより、AZをまたぐトラフィックは2つのレプリカ分のデータ量に固定されます（これに対し、ブローカー／リーダーベースのレプリケーションでは、通常、約1/3分の追加のAZ間トラフィックが発生します）。</li>
 <li><strong>トポロジーを意識したシングルホップ読み取り</strong>— 各読み取りはブローカーを経由せずに最寄りのレプリカに直接行われるため、ブローカーベースのシステムに見られるランダムなAZ間読み取り（AZ間読み取りトラフィックの約2/3）を回避します。</li>
 <li><strong>セグメントのローリング後の即時オブジェクトストレージへのアップロード</strong>— 各セグメントはそのライフサイクル全体を追跡し、ローリングされるとすぐにオブジェクトストレージにアップロードされるため、レイテンシを犠牲にすることなく、ローカルディスクの占有容量とストレージコストを低く抑えることができる。</li>
-<li><strong>ノード間での継続的なレプリケーションなし</strong>— ログは共有ストレージとして機能するオブジェクトストレージに永続化されるため、フェイルオーバー時には生存しているレプリカのみを再アップロードします（ノード全体のコピーは行われません）。これにより、スケーリングがノード間レプリケーションの帯域幅に制限されることがなく、大規模なノード交換でもレプリケーションストームが発生しません。</li>
+<li><strong>ノード間での継続的なレプリケーションなし</strong>— ログは共有ストレージとして機能するオブジェクトストレージに永続化されるため、フェイルオーバー時には生存しているレプリカのみを再アップロードします（ノード全体のコピーは行われません）。これにより、スケーリングがノード間レプリケーションの帯域幅に制限されることがなく、大規模なノード置換によってレプリケーションストームが発生することもありません。</li>
 </ul>
 <p>AZをまたぐ展開において、サービスモードは、ブローカーベースのログシステムと比較して、AZ間ネットワーク<strong>トラフィックの書き込みを</strong>約<strong>1/3</strong>、<strong>読み取りを</strong>約<strong>2/3</strong>削減します。詳細な設計およびコスト分析については、<a href="/docs/ja/woodpecker_architecture.md">「Woodpeckerアーキテクチャ」を</a>参照してください。</p>
 <p>アーキテクチャ、デプロイメントモード（MemoryBuffer / QuorumBuffer）、およびパフォーマンスの詳細については、「<a href="/docs/ja/woodpecker_architecture.md">Woodpecker Architecture</a>」を参照してください。</p>

@@ -39,20 +39,20 @@ summary: >-
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Antrian pesan</th><th style="text-align:center">Milvus Standalone</th><th style="text-align:center">Milvus Distributed (kluster)</th><th>Standar pada</th><th>Catatan</th></tr>
+<tr><th>Antrian pesan</th><th style="text-align:center">Milvus Standalone</th><th style="text-align:center">Milvus Distributed (kluster)</th><th>Standar di</th><th>Catatan</th></tr>
 </thead>
 <tbody>
 <tr><td><a href="/docs/id/woodpecker.md">Woodpecker</a></td><td style="text-align:center">✔️ (terintegrasi)</td><td style="text-align:center">✔️ (terintegrasi atau layanan)</td><td><strong>Milvus 3.x</strong> (kedua mode)</td><td>Standar dan direkomendasikan. WAL berbasis cloud pada penyimpanan objek; tidak memerlukan layanan eksternal.</td></tr>
 <tr><td><a href="/docs/id/mq_pulsar.md">Pulsar</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td>≤ 2.5.x (pengaturan default kluster)</td><td>Didukung, eksternal atau terintegrasi.</td></tr>
 <tr><td><a href="/docs/id/mq_kafka.md">Kafka</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td>—</td><td>Didukung. Hanya Kafka 2.x atau 3.x.</td></tr>
-<tr><td><a href="/docs/id/mq_rocksmq.md">RocksMQ</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✖️</td><td>≤ 2.5.x (standalone default)</td><td>Didukung <strong>hanya</strong> untuk <strong>standalone</strong>.</td></tr>
+<tr><td><a href="/docs/id/mq_rocksmq.md">RocksMQ</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✖️</td><td>≤ 2.5.x (pengaturan default standalone)</td><td>Didukung <strong>hanya</strong> untuk <strong>standalone</strong>.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
 <ul>
 <li><p>Setiap instance Milvus menggunakan tepat satu antrian pesan.</p></li>
 <li><p><strong>Batasan Antrian Pesan</strong>: Saat melakukan upgrade ke Milvus v3.0-beta, Anda harus mempertahankan pilihan antrian pesan yang saat ini digunakan. Pergantian antara sistem antrian pesan yang berbeda selama proses upgrade tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia pada versi mendatang.</p></li>
-<li><p>Untuk mengubah antrian pesan pada instance yang sedang berjalan, lihat Mengganti Jenis MQ (didukung mulai v2.6.14).</p></li>
+<li><p>Untuk mengubah antrian pesan pada instance yang sedang berjalan, lihat <a href="/docs/id/switch-mq-type.md">Switch MQ Type</a>. Fitur Switch MQ tersedia di <strong>Milvus 3.0 dan versi selanjutnya</strong> — lakukan pembaruan ke Milvus 3.0 atau versi selanjutnya terlebih dahulu.</p></li>
 </ul>
 </div>
 <h2 id="Choosing-a-message-queue" class="common-anchor-header">Memilih antrian pesan<button data-href="#Choosing-a-message-queue" class="anchor-icon" translate="no">
@@ -71,7 +71,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Penerapan baru (Milvus 3.x):</strong> gunakan <strong>Woodpecker</strong> (default). Mode mandiri menjalankannya secara tertanam; untuk mode terdistribusi (kluster), default yang direkomendasikan adalah <a href="/docs/id/woodpecker.md#Deployment-modes">layanan</a> khusus yang diterapkan dengan Helm, dan mode tertanam juga didukung.</li>
-<li><strong>Pengguna Pulsar atau Kafka yang sudah ada:</strong> Pulsar dan Kafka tetap didukung sepenuhnya. Pertahankan keduanya, atau beralihlah ke Woodpecker.</li>
+<li><strong>Penerapan baru (Milvus 3.x):</strong> gunakan <strong>Woodpecker</strong> (default). Standalone menjalankannya secara tertanam; untuk terdistribusi (cluster), default yang direkomendasikan adalah <a href="/docs/id/woodpecker.md#Deployment-modes">layanan</a> khusus yang diterapkan dengan Helm, dan tertanam juga didukung.</li>
+<li><strong>Pengguna Pulsar atau Kafka yang sudah ada:</strong> Pulsar dan Kafka tetap didukung sepenuhnya. Pertahankan keduanya, atau <a href="/docs/id/switch-mq-type.md">beralihlah ke Woodpecker</a>.</li>
 <li><strong>RocksMQ:</strong> hanya tersedia dalam mode standalone, dan telah digantikan oleh Woodpecker yang tertanam di Milvus 3.x.</li>
 </ul>

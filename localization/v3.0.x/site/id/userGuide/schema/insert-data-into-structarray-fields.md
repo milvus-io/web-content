@@ -307,9 +307,9 @@ Bidang StructArray yang dapat bernilai null hanya tersedia di Milvus v3.0.x. Jik
 <tr><td>Gunakan nama subbidang di dalam setiap elemen Struct.</td><td>Masukkan ` <code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> ` di dalam ` <code translate="no">chunks</code>`, bukan ` <code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code>`.</td></tr>
 <tr><td>Sesuaikan dengan skema Struct.</td><td>Setiap elemen Struct harus menggunakan subfield yang didefinisikan dalam skema Struct.</td></tr>
 <tr><td>Sesuaikan dimensi vektor.</td><td>Nilai vektor harus sesuai dengan <code translate="no">dim</code> yang dikonfigurasi untuk subfield vektornya.</td></tr>
-<tr><td>Patuhi <code translate="no">max_capacity</code>.</td><td>Jumlah elemen Struct dalam satu entitas tidak boleh melebihi <code translate="no">max_capacity</code> bidang StructArray.</td></tr>
+<tr><td>Patuhi batasan ukuran ( <code translate="no">max_capacity</code>).</td><td>Jumlah elemen Struct dalam satu entitas tidak boleh melebihi <code translate="no">max_capacity</code> bidang StructArray.</td></tr>
 <tr><td>Gunakan subbidang vektor terpisah untuk mode pencarian yang berbeda.</td><td>Jika pencarian EmbeddingList dan pencarian tingkat elemen diperlukan, tulis nilai vektor ke kedua subbidang vektor tersebut.</td></tr>
-<tr><td>Gunakan <code translate="no">null</code> hanya jika bidang tersebut dapat bernilai null.</td><td>Bidang StructArray yang tidak boleh bernilai null memerlukan nilai StructArray yang valid.</td></tr>
+<tr><td>Gunakan <code translate="no">null</code> hanya jika bidang tersebut dapat bernilai null.</td><td>Bidang StructArray yang tidak dapat bernilai null memerlukan nilai StructArray yang valid.</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">Kesalahan umum<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
@@ -329,7 +329,7 @@ Bidang StructArray yang dapat bernilai null hanya tersedia di Milvus v3.0.x. Jik
       </svg>
     </button></h2><ul>
 <li><p>Menggunakan jalur bidang seperti <code translate="no">chunks[text]</code> dalam muatan penyisipan.</p></li>
-<li><p>Mengabaikan subfield yang wajib dari elemen Struct.</p></li>
+<li><p>Mengabaikan subbidang yang wajib dari elemen Struct.</p></li>
 <li><p>Menyisipkan vektor dengan dimensi yang salah.</p></li>
 <li><p>Menyisipkan elemen Struct lebih banyak daripada yang diizinkan oleh <code translate="no">max_capacity</code>.</p></li>
 <li><p>Hanya menetapkan satu subfield ke <code translate="no">null</code> sementara subfield lain dalam nilai StructArray yang sama valid.</p></li>

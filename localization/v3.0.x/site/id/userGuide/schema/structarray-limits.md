@@ -3,7 +3,7 @@ id: structarray-limits.md
 title: Batasan StructArray
 summary: >-
   Dukungan StructArray mencakup definisi skema, data yang dimasukkan,
-  pengindeksan, mode pencarian, dan filter khusus StructArray. Gunakan halaman
+  pengindeksan, mode pencarian, serta filter khusus StructArray. Gunakan halaman
   ini sebagai panduan batasan sebelum Anda mengandalkan perilaku StructArray
   dalam lingkungan produksi.
 ---
@@ -52,7 +52,7 @@ summary: >-
 <tr><td>Bentuk penyisipan</td><td>Sisipkan bidang StructArray sebagai array objek. Jangan gunakan sintaks jalur di dalam muatan penyisipan.</td></tr>
 <tr><td>Indeks vektor</td><td>Bidang vektor atau subbidang vektor hanya menerima satu indeks. Gunakan subbidang vektor terpisah untuk pencarian EmbeddingList dan pencarian tingkat elemen.</td></tr>
 <tr><td>Fungsi</td><td>Fungsi bidang tidak didukung untuk bidang atau subbidang di dalam bidang StructArray.</td></tr>
-<tr><td>Bidang yang dapat bernilai null</td><td>Bidang StructArray yang dapat bernilai null bergantung pada versi. Jika didukung, nilai null berlaku untuk seluruh bidang StructArray, bukan untuk elemen Struct individu secara terpisah.</td></tr>
+<tr><td>Bidang yang dapat bernilai null</td><td>Bidang StructArray yang dapat bernilai null bergantung pada versi. Jika didukung, nilai null berlaku untuk seluruh bidang StructArray, bukan untuk setiap elemen Struct secara terpisah.</td></tr>
 <tr><td>Menambahkan bidang secara dinamis</td><td>Penambahan bidang StructArray ke koleksi yang sudah ada bergantung pada versi dan mengharuskan bidang yang ditambahkan bersifat nullable.</td></tr>
 </tbody>
 </table>
@@ -155,7 +155,7 @@ summary: >-
 </tbody>
 </table>
 <p>Di Milvus v3.0.x, bidang StructArray yang dapat bernilai null, array vektor yang dapat bernilai null, dan penambahan bidang StructArray dinamis tersedia.</p>
-<p>Untuk contoh penyisipan dengan bidang StructArray yang dapat bernilai null, lihat <a href="/docs/id/insert-data-into-structarray-fields.md">Menyisipkan Data ke Bidang StructArray</a>.</p>
+<p>Untuk contoh penyisipan dengan bidang StructArray yang dapat bernilai null, lihat <a href="/docs/id/insert-data-into-structarray-fields.md">Menyisipkan Data ke dalam Bidang StructArray</a>.</p>
 <h2 id="Insert-limits" class="common-anchor-header">Batas penyisipan<button data-href="#Insert-limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -181,7 +181,7 @@ summary: >-
 <tr><td>Penyelarasan skema</td><td>Setiap elemen Struct harus sesuai dengan skema Struct.</td></tr>
 <tr><td>Kapasitas</td><td>Jumlah elemen Struct dalam satu entitas tidak boleh melebihi <code translate="no">max_capacity</code>.</td></tr>
 <tr><td>Dimensi vektor</td><td>Nilai vektor harus sesuai dengan <code translate="no">dim</code> yang dikonfigurasi untuk subbidang vektornya.</td></tr>
-<tr><td>Duplikasi dalam mode pencarian</td><td>Jika Anda memerlukan pencarian EmbeddingList dan pencarian tingkat elemen, tuliskan vektor ke dua subbidang vektor yang terpisah.</td></tr>
+<tr><td>Duplikasi dalam mode pencarian</td><td>Jika Anda memerlukan pencarian EmbeddingList dan pencarian tingkat elemen, tulis vektor ke dua subbidang vektor yang terpisah.</td></tr>
 </tbody>
 </table>
 <h2 id="Index-and-metric-limits" class="common-anchor-header">Batas indeks dan metrik<button data-href="#Index-and-metric-limits" class="anchor-icon" translate="no">
@@ -262,7 +262,7 @@ summary: >-
 <li><p>Gunakan subbidang skalar untuk predikat skalar.</p></li>
 <li><p>Jangan gunakan subbidang vektor sebagai masukan predikat skalar ` <code translate="no">$[...]</code> `.</p></li>
 <li><p>Sintaks JSON path, fungsi JSON, fungsi wadah array, fungsi pencocokan teks, fungsi Geometri/GIS, dan ekspresi Timestamptz tidak didukung untuk predikat tingkat elemen StructArray.</p></li>
-<li><p>Lebih disarankan menggunakan perbandingan boolean eksplisit seperti ` <code translate="no">$[has_code] == true</code> ` daripada ekspresi boolean mentah.</p></li>
+<li><p>Lebih disarankan menggunakan perbandingan boolean eksplisit seperti ` <code translate="no">$[has_code] == true</code> ` daripada ekspresi boolean biasa.</p></li>
 </ul>
 <h2 id="Related-pages" class="common-anchor-header">Halaman terkait<button data-href="#Related-pages" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -282,6 +282,6 @@ summary: >-
     </button></h2><ol>
 <li><p>Untuk membuat bidang StructArray, baca <a href="/docs/id/create-structarray-field.md">Membuat Bidang StructArray</a>.</p></li>
 <li><p>Untuk menyisipkan data, baca " <a href="/docs/id/insert-data-into-structarray-fields.md">Menyisipkan Data ke dalam Bidang StructArray</a>".</p></li>
-<li><p>Untuk membuat indeks vektor dan skalar, baca " <a href="/docs/id/index-structarray-fields.md">Mengindeks Bidang StructArray</a>".</p></li>
+<li><p>Untuk membuat indeks vektor dan skalar, baca " <a href="/docs/id/index-structarray-fields.md">Indeks Bidang StructArray</a>".</p></li>
 <li><p>Untuk meninjau sintaks filter StructArray, baca " <a href="/docs/id/struct-array-operators.md">Operator StructArray</a>".</p></li>
 </ol>

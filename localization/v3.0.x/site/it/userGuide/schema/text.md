@@ -3,7 +3,7 @@ id: text.md
 title: Campo di testoCompatible with Milvus 3.0.x
 summary: >-
   TEXT è un tipo di campo scalare utilizzato per memorizzare il testo dei
-  documenti, brani e altri contenuti testuali di lunga durata in Milvus.
+  documenti, brani e altri contenuti testuali di grandi dimensioni in Milvus.
 beta: Milvus 3.0.x
 ---
 <h1 id="Text-Field" class="common-anchor-header">Campo di testo<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Text-Field" class="anchor-icon" translate="no">
@@ -81,7 +81,7 @@ beta: Milvus 3.0.x
 <tr><td>Impostazione della lunghezza</td><td>Richiede <code translate="no">max_length</code>, che definisce il numero massimo di byte che il campo può memorizzare. Il valore massimo è <code translate="no">65,535</code> byte. Se un valore potrebbe superare questo limite, utilizzare <code translate="no">TEXT</code>.</td><td>Non richiede <code translate="no">max_length</code>, pertanto lo schema non necessita di un limite fisso in byte per il valore del testo.</td></tr>
 <tr><td>Comportamento di archiviazione</td><td>Memorizza ogni valore all’interno dell’ <code translate="no">max_length</code> configurato per il campo.</td><td>Utilizza la selezione automatica dello spazio di archiviazione per i valori di testo più grandi. Per i dettagli, consultare <a href="#how-milvus-stores-large-text-values">Come Milvus archivia i valori TEXT di grandi dimensioni</a>.</td></tr>
 <tr><td>Supporto come campo primario</td><td>Può essere utilizzato come campo primario.</td><td>Non può essere utilizzato come campo primario.</td></tr>
-<tr><td>Filtraggio</td><td>Da utilizzare per metadati costituiti da stringhe brevi che devono comparire nelle espressioni di filtro, come <code translate="no">category == &quot;news&quot;</code> o <code translate="no">tag in [&quot;ai&quot;, &quot;database&quot;]</code>.</td><td>Non è destinato al normale filtraggio dei metadati.</td></tr>
+<tr><td>Filtraggio</td><td>Da utilizzare per metadati costituiti da stringhe brevi che devono comparire nelle espressioni di filtro, come <code translate="no">category == &quot;news&quot;</code> o <code translate="no">tag in [&quot;ai&quot;, &quot;database&quot;]</code>.</td><td>Non è destinato al filtraggio regolare dei metadati.</td></tr>
 </tbody>
 </table>
 <p>Per ulteriori dettagli sui campi di tipo " <code translate="no">VARCHAR</code> ", consultare la sezione " <a href="/docs/it/string.md">Campo VarChar</a>".</p>
@@ -110,11 +110,11 @@ beta: Milvus 3.0.x
   
  </span></p>
 <ul>
-<li><strong>Archiviazione in linea</strong>: se il valore di ` <code translate="no">TEXT</code> ` è inferiore a ` <code translate="no">dataNode.text.inlineThreshold</code>`, Milvus memorizza il valore del testo originale direttamente nei dati del campo ` <code translate="no">TEXT</code> `.</li>
+<li><strong>Archiviazione in linea</strong>: se il valore di ` <code translate="no">TEXT</code> ` è inferiore a ` <code translate="no">dataNode.text.inlineThreshold</code>`, Milvus memorizza il valore di testo originale direttamente nei dati del campo ` <code translate="no">TEXT</code> `.</li>
 <li><strong>Archiviazione LOB</strong>: se un valore di ` <code translate="no">TEXT</code> ` è maggiore o uguale a ` <code translate="no">dataNode.text.inlineThreshold</code>`, Milvus tratta il valore come un oggetto di grandi dimensioni e archivia il testo originale separatamente in un sistema di archiviazione oggetti, come MinIO. Il campo ` <code translate="no">TEXT</code> ` memorizza un riferimento interno al testo archiviato separatamente. Quando il campo ` <code translate="no">TEXT</code> ` viene richiesto nei risultati di una query o di una ricerca, Milvus utilizza il riferimento per recuperare e restituire il testo originale.</li>
 </ul>
 <p>Questa scelta di archiviazione è interna. L’inserimento, l’interrogazione e la ricerca nel campo ` <code translate="no">TEXT</code> ` avvengono allo stesso modo, indipendentemente dal percorso di archiviazione utilizzato da Milvus. Per ottimizzare la soglia o il comportamento relativo all’archiviazione, alla compattazione e alla garbage collection, consultare <a href="/docs/it/configure_datanode.md">le configurazioni relative a `dataNode`</a> e <a href="/docs/it/configure_datacoord.md">quelle relative a `dataCoord`</a>.</p>
-<p>Se la propria distribuzione utilizza l’archiviazione a oggetti, valori di ` <code translate="no">TEXT</code> ` di grandi dimensioni potrebbero apparire come oggetti gestiti da Milvus in percorsi quali <code translate="no">lobs/...</code>. Questi oggetti sono dettagli di implementazione e non devono essere spostati, copiati o eliminati manualmente. Dopo aver eliminato entità, rimosso partizioni o compattato i dati, l’utilizzo dello storage a oggetti potrebbe diminuire solo dopo che la garbage collection di Milvus avrà rimosso i dati di oggetti di grandi dimensioni non più referenziati, una volta trascorso il periodo di sicurezza.</p>
+<p>Se la propria distribuzione utilizza l’archiviazione a oggetti, valori di ` <code translate="no">TEXT</code> ` di grandi dimensioni potrebbero apparire come oggetti gestiti da Milvus in percorsi quali <code translate="no">lobs/...</code>. Questi oggetti sono dettagli di implementazione e non devono essere spostati, copiati o eliminati manualmente. Dopo aver eliminato entità, rimosso partizioni o compattato i dati, l’utilizzo dello storage a oggetti potrebbe diminuire solo dopo che la garbage collection di Milvus avrà rimosso i dati di oggetti di grandi dimensioni non più referenziati, al termine della relativa finestra di sicurezza.</p>
 <p></details></p>
 <p>Un uso comune di <code translate="no">TEXT</code> è la ricerca full-text con BM25. In questo modello, il campo <code translate="no">TEXT</code> memorizza il contenuto originale della fonte, mentre BM25 analizza il testo e genera vettori sparsi per classificare le corrispondenze basate sulle parole chiave. I risultati della ricerca possono quindi restituire il valore <code translate="no">TEXT</code> corrispondente come contesto per i flussi di lavoro LLM o degli agenti. L’esempio seguente mostra come utilizzare un campo <code translate="no">TEXT</code> come campo di input per BM25. Per ulteriori informazioni sui concetti e sulle opzioni di query della ricerca full-text, consultare <a href="/docs/it/full-text-search.md">Ricerca full-text</a>.</p>
 <h2 id="Step-1-Create-a-collection-with-a-TEXT-field" class="common-anchor-header">Passaggio 1: Creare una raccolta con un campo TEXT<button data-href="#Step-1-Create-a-collection-with-a-TEXT-field" class="anchor-icon" translate="no">
@@ -133,7 +133,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><p>L’esempio seguente crea una raccolta con un campo <code translate="no">TEXT</code> per il contenuto di origine e un campo vettore sparso per i vettori sparsi generati da BM25. La funzione BM25 converte il testo tokenizzato da <code translate="no">content</code> in vettori sparsi memorizzati in <code translate="no">sparse</code>.</p>
-<p>Per la ricerca full-text con BM25, il campo di input « <code translate="no">TEXT</code> » deve essere impostato su <code translate="no">enable_analyzer=True</code>.</p>
+<p>Per la ricerca full-text con BM25, il campo di input ` <code translate="no">TEXT</code> ` deve essere impostato su ` <code translate="no">enable_analyzer=True</code>`.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, Function, FunctionType, MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)

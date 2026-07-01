@@ -45,7 +45,7 @@ summary: >-
 <tr><th>Chemin d’accès au sous-champ</th><th>Type</th><th>Objectif de l’index</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">chunks[emb_list_vector]</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Recherche dans EmbeddingList à l’aide des métriques d’ <code translate="no">MAX_SIM*</code>.</td></tr>
+<tr><td><code translate="no">chunks[emb_list_vector]</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Recherche dans EmbeddingList à l’aide des métriques « <code translate="no">MAX_SIM*</code> ».</td></tr>
 <tr><td><code translate="no">chunks[emb]</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Recherche au niveau des éléments avec des métriques vectorielles classiques.</td></tr>
 <tr><td><code translate="no">chunks[section]</code></td><td><code translate="no">VARCHAR</code></td><td>Filtrage catégoriel.</td></tr>
 <tr><td><code translate="no">chunks[quality_score]</code></td><td><code translate="no">FLOAT</code></td><td>Filtrage numérique et prédicats de type « plage ».</td></tr>
@@ -53,7 +53,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Un champ vectoriel ou un sous-champ vectoriel n’accepte qu’un seul index. Si vous avez besoin à la fois d’une recherche EmbeddingList et d’une recherche au niveau des éléments, créez deux sous-champs vectoriels distincts et indexez-les séparément. Sur cette page, <code translate="no">chunks[emb_list_vector]</code> est indexé pour la recherche EmbeddingList, et <code translate="no">chunks[emb]</code> est indexé pour la recherche au niveau des éléments.</p>
+<p>Un champ vectoriel ou un sous-champ vectoriel n’accepte qu’un seul index. Si vous avez besoin à la fois de la recherche EmbeddingList et de la recherche au niveau des éléments, créez deux sous-champs vectoriels distincts et indexez-les séparément. Sur cette page, <code translate="no">chunks[emb_list_vector]</code> est indexé pour la recherche EmbeddingList, et <code translate="no">chunks[emb]</code> est indexé pour la recherche au niveau des éléments.</p>
 </div>
 <h2 id="Choose-indexes" class="common-anchor-header">Choisissez les index<button data-href="#Choose-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -337,7 +337,7 @@ client.create_index(
       </svg>
     </button></h2><ul>
 <li><p>Créer un index sur <code translate="no">chunks.emb</code> au lieu de <code translate="no">chunks[emb]</code>.</p></li>
-<li><p>Créer uniquement un index <code translate="no">MAX_SIM*</code>, puis tenter d’effectuer une recherche au niveau des éléments sur ce même sous-champ.</p></li>
+<li><p>Créer uniquement un index <code translate="no">MAX_SIM*</code>, puis tenter d'effectuer une recherche au niveau des éléments sur ce même sous-champ.</p></li>
 <li><p>Créer uniquement un index vectoriel standard, puis tenter d’effectuer une recherche EmbeddingList sur ce même sous-champ.</p></li>
 <li><p>Réutiliser un sous-champ vectoriel à la fois pour les métriques « <code translate="no">MAX_SIM*</code> » et les métriques vectorielles classiques.</p></li>
 <li><p>Oublier les index scalaires pour les filtres StructArray très utilisés.</p></li>

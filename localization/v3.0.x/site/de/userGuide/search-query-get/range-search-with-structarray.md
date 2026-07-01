@@ -4,8 +4,8 @@ title: Bereichssuche mit StructArray
 summary: >-
   Auf dieser Seite können Sie eine Bereichssuche für Vektor-Unterfelder von
   StructArray durchführen. Die Bereichssuche liefert Vektor-Treffer, deren Wert
-  oder Abstand innerhalb eines festgelegten Bereichs liegt. Bei
-  StructArray-Feldern sollten Sie die Bereichssuche in Verbindung mit der
+  oder Abstand innerhalb eines festgelegten Bereichs liegt. Für
+  StructArray-Felder sollten Sie die Bereichssuche in Verbindung mit der
   Vektorsuche auf Elementebene verwenden, bei der jedes Struct-Element
   unabhängig durchsucht wird.
 ---
@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Verwenden Sie diese Seite, um eine Bereichssuche in den Vektor-Unterfeldern eines StructArray durchzuführen. Die Bereichssuche liefert Vektor-Treffer, deren Score oder Abstand innerhalb eines festgelegten Bereichs liegt. Bei StructArray-Feldern verwenden Sie die Bereichssuche in Verbindung mit der Vektorsuche auf Elementebene, bei der jedes Struct-Element unabhängig durchsucht wird.</p>
+    </button></h1><p>Verwenden Sie diese Seite, um eine Bereichssuche in den Vektor-Unterfeldern eines StructArray durchzuführen. Die Bereichssuche liefert Vektor-Treffer, deren Score oder Abstand innerhalb eines festgelegten Bereichs liegt. Verwenden Sie für StructArray-Felder die Bereichssuche in Verbindung mit der Vektorsuche auf Elementebene, bei der jedes Struct-Element unabhängig durchsucht wird.</p>
 <p>Diese Seite verwendet die Sammlung „ <code translate="no">tech_articles</code> “ aus dem Abschnitt <a href="/docs/de/create-structarray-field.md">„Erstellen eines StructArray-Feldes</a>“. Die Sammlung enthält ein StructArray-Feld namens „ <code translate="no">chunks</code> “. Das Vektor-Unterfeld „ <code translate="no">chunks[emb]</code> “ ist für die Suche auf Elementebene mit einer regulären Vektormetrik wie „ <code translate="no">COSINE</code> “, „ <code translate="no">IP</code> “ oder „ <code translate="no">L2</code> “ indiziert.</p>
 <h2 id="How-range-search-applies-to-StructArray" class="common-anchor-header">Anwendung der Bereichssuche auf StructArray<button data-href="#How-range-search-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -76,8 +76,8 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>StructArray-Feld</td><td>Die Sammlung enthält ein StructArray-Feld, z. B. „ <code translate="no">chunks</code> “.</td></tr>
-<tr><td>Vektor-Unterfeld auf Elementebene</td><td>Das Ziel-Vektor-Unterfeld lautet „ <code translate="no">chunks[emb]</code> “, nicht „ <code translate="no">chunks[emb_list_vector]</code> “.</td></tr>
-<tr><td>Indexmetrik</td><td>Das Vektor-Unterfeld wird mit einer regulären Vektormetrik indiziert, wie z. B. <code translate="no">COSINE</code>, <code translate="no">IP</code> oder <code translate="no">L2</code>.</td></tr>
+<tr><td>Vektor-Unterfeld auf Elementebene</td><td>Das Ziel-Vektor-Unterfeld ist „ <code translate="no">chunks[emb]</code> “, nicht „ <code translate="no">chunks[emb_list_vector]</code> “.</td></tr>
+<tr><td>Indexmetrik</td><td>Das Vektor-Unterfeld wird mit einer regulären Vektormetrik indiziert, z. B. <code translate="no">COSINE</code>, <code translate="no">IP</code> oder <code translate="no">L2</code>.</td></tr>
 <tr><td>Abfragedaten</td><td>Die Abfrage ist ein regulärer Vektor, kein „ <code translate="no">EmbeddingList</code> “.</td></tr>
 </tbody>
 </table>
@@ -107,7 +107,7 @@ summary: >-
 <tr><td><code translate="no">IP</code>, <code translate="no">COSINE</code></td><td>Ja. Ein höherer Score ist besser.</td><td><code translate="no">radius &lt; distance &lt;= range_filter</code></td></tr>
 </tbody>
 </table>
-<p>Wenn nur „ <code translate="no">radius</code> “ festgelegt ist, liefert die Bereichssuche Treffer, die die äußere Grenze der Metrik erfüllen. Wählen Sie Werte entsprechend der Wert- oder Abstandsskala Ihrer Einbettungen aus.</p>
+<p>Wenn nur „ <code translate="no">radius</code> “ festgelegt ist, liefert die Bereichssuche Treffer, die die äußere Grenze der Metrik erfüllen. Wählen Sie Werte entsprechend der Werteskala oder der Abstandsskala Ihrer Einbettungen aus.</p>
 <h2 id="Run-element-level-range-search" class="common-anchor-header">Bereichssuche auf Elementebene durchführen<button data-href="#Run-element-level-range-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -261,7 +261,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In diesem Beispiel verwendet nur die Unteranfrage „ <code translate="no">chunks[emb]</code> “ Parameter für die Bereichssuche. Die StructArray-Anfrage folgt weiterhin der Semantik auf Elementebene: Die Bereichsgrenzen gelten für Struct-Element-Treffer, bevor die hybride Suche die Ergebnisse kombiniert und neu ordnet.</p>
+<p>In diesem Beispiel verwendet nur die Unteranfrage „ <code translate="no">chunks[emb]</code> “ Parameter für die Bereichssuche. Die StructArray-Anfrage folgt weiterhin der Semantik auf Elementebene: Die Bereichsgrenzen gelten für Treffer auf Struct-Ebene, bevor die hybride Suche die Ergebnisse kombiniert und neu bewertet.</p>
 <h2 id="Interpret-range-results" class="common-anchor-header">Bereichsergebnisse interpretieren<button data-href="#Interpret-range-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

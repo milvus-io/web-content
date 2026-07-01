@@ -244,4 +244,5 @@ title: كافكا
       </svg>
     </button></h2><ul>
 <li><a href="/docs/ar/woodpecker.md">Woodpecker (قائمة انتظار الرسائل الافتراضية)</a></li>
+<li><a href="/docs/ar/switch-kafka-woodpecker.md">التبديل بين Kafka و Woodpecker</a></li>
 </ul>

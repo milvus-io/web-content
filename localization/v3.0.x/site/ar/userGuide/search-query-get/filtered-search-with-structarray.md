@@ -45,7 +45,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>التصفية حسب حقل قياسي من المستوى الأعلى، مثل <code translate="no">category</code>.</td><td>تعبير تصفية عادي.</td><td>يختار الكيانات الأصلية قبل البحث أو أثناءه.</td></tr>
-<tr><td>تقييد البحث المتجهي على مستوى العنصر ليقتصر على عناصر Struct التي تتطابق مع الشروط القياسية.</td><td><code translate="no">element_filter</code>.</td><td>يبحث فقط عن عناصر Struct المطابقة ويمكنه إرجاع إزاحات العناصر المطابقة.</td></tr>
+<tr><td>تقييد البحث المتجهي على مستوى العنصر ليقتصر على عناصر Struct التي تتطابق مع الشروط القياسية.</td><td><code translate="no">element_filter</code>.</td><td>يبحث فقط في عناصر Struct المطابقة ويمكنه إرجاع إزاحات العناصر المطابقة.</td></tr>
 <tr><td>تحديد الكيانات بناءً على ما إذا كانت أي عناصر من نوع Struct أو جميعها أو عدد محدد منها تتطابق مع المسند.</td><td><code translate="no">MATCH_ANY</code>، <code translate="no">MATCH_ALL</code> ، <code translate="no">MATCH_LEAST</code> ، <code translate="no">MATCH_MOST</code> ، أو <code translate="no">MATCH_EXACT</code>.</td><td>التصفية على مستوى الصف. لا تُرجع هذه العوامل إزاحات بحد ذاتها.</td></tr>
 </tbody>
 </table>
@@ -95,7 +95,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>يختار التصفية أعلاه الكيانات التي يكون حقل المستوى الأعلى الخاص بها ( <code translate="no">category</code> ) هو <code translate="no">&quot;search&quot;</code> فقط. ولا يحدد عنصر Struct واحدًا مطابقًا.</p>
+<p>يختار التصفية أعلاه فقط الكيانات التي يكون حقل المستوى الأعلى الخاص بـ <code translate="no">category</code> فيها هو <code translate="no">&quot;search&quot;</code>. ولا يحدد عنصر Struct واحدًا مطابقًا.</p>
 <h2 id="Filter-element-level-vector-search" class="common-anchor-header">تصفية البحث المتجهي على مستوى العنصر<button data-href="#Filter-element-level-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -168,7 +168,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>استخدم مشغلات « <code translate="no">MATCH_*</code> » عندما يتعين على التصفية تحديد ما إذا كانت الكيانات الأصلية مؤهلة بناءً على عناصر Struct الخاصة بها. هذه المشغلات هي عوامل تصفية على مستوى الصف: فهي تحدد الكيانات، لكنها لا تُرجع إزاحات العناصر من تلقاء نفسها.</p>
+    </button></h2><p>استخدم مشغلات « <code translate="no">MATCH_*</code> » عندما يتعين على التصفية تحديد ما إذا كانت الكيانات الأصلية مؤهلة بناءً على عناصر Struct الخاصة بها. هذه المشغلات هي عوامل تصفية على مستوى الصف: فهي تحدد الكيانات، لكنها لا تُرجع إزاحات العناصر بحد ذاتها.</p>
 <table>
 <thead>
 <tr><th>المشغل</th><th>استخدمه عندما</th><th>مثال</th></tr>
@@ -178,7 +178,7 @@ results = client.search(
 <tr><td><code translate="no">MATCH_ALL</code></td><td>يجب أن تستوفي جميع عناصر Struct الشرط.</td><td><code translate="no">MATCH_ALL(chunks, $[quality_score] &gt; 0.5)</code></td></tr>
 <tr><td><code translate="no">MATCH_LEAST</code></td><td>يجب أن تستوفي عناصر Struct التي لا يقل عددها عن <code translate="no">N</code> الشرط.</td><td><code translate="no">MATCH_LEAST(chunks, $[has_code] == true, threshold=2)</code></td></tr>
 <tr><td><code translate="no">MATCH_MOST</code></td><td>يجب أن تستوفي عناصر Struct التي لا يتجاوز عددها <code translate="no">N</code> الشرط.</td><td><code translate="no">MATCH_MOST(chunks, $[section] == &quot;appendix&quot;, threshold=1)</code></td></tr>
-<tr><td><code translate="no">MATCH_EXACT</code></td><td>يجب أن تستوفي عناصر Struct التي يبلغ عددها <code translate="no">N</code> بالضبط الشرط.</td><td><code translate="no">MATCH_EXACT(chunks, $[section] == &quot;summary&quot;, threshold=1)</code></td></tr>
+<tr><td><code translate="no">MATCH_EXACT</code></td><td>يجب أن تستوفي عناصر Struct التي يبلغ عددها بالضبط <code translate="no">N</code> الشرط.</td><td><code translate="no">MATCH_EXACT(chunks, $[section] == &quot;summary&quot;, threshold=1)</code></td></tr>
 </tbody>
 </table>
 <pre><code translate="no" class="language-python">filter_expr = (
@@ -203,7 +203,7 @@ results = client.search(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>استخدم " <code translate="no">MATCH_ANY</code> " هنا لأن نتيجة البحث في EmbeddingList تكون على مستوى الكيان. يتطلب المرشح أن تكون هناك قطعة واحدة على الأقل في الكيان من نوع " <code translate="no">&quot;index&quot;</code> " ذات جودة عالية، لكن نتيجة البحث نفسها لا تزال تمثل الكيان الأصلي.</p>
-<h2 id="Use-filters-in-hybrid-search" class="common-anchor-header">استخدم المرشحات في البحث الهجين<button data-href="#Use-filters-in-hybrid-search" class="anchor-icon" translate="no">
+<h2 id="Use-filters-in-hybrid-search" class="common-anchor-header">استخدم المرشحات في البحث المختلط<button data-href="#Use-filters-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -281,7 +281,7 @@ results = client.hybrid_search(
 <tr><td>الحقول الفرعية للمتجهات</td><td>غير مدعومة كمدخلات للمسندات القياسية في <code translate="no">$[...]</code>. استخدم الحقول الفرعية للمتجهات من خلال البحث المتجهي بدلاً من ذلك.</td></tr>
 </tbody>
 </table>
-<p>بالنسبة للحالات غير المدعومة مثل مسارات JSON، ووظائف حاويات المصفوفات، ووظائف مطابقة النص، والمسلّطات ذات القيمة null على <code translate="no">$[...]</code> ، ووظائف Geometry، وتعبيرات Timestamptz، واستدعاءات الوظائف العامة، راجع <a href="/docs/ar/struct-array-operators.md">StructArray Operators</a>.</p>
+<p>بالنسبة للحالات غير المدعومة مثل مسارات JSON، ووظائف حاويات المصفوفات، ووظائف مطابقة النص، والشرط القيم الصفرية في <code translate="no">$[...]</code> ، ووظائف Geometry، وتعبيرات Timestamptz، واستدعاءات الوظائف العامة، راجع <a href="/docs/ar/struct-array-operators.md">StructArray Operators</a>.</p>
 <h2 id="Common-mistakes" class="common-anchor-header">الأخطاء الشائعة<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

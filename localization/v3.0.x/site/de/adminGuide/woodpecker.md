@@ -244,7 +244,7 @@ summary: >-
 <pre><code translate="no" class="language-bash">kubectl get pods
 kubectl get milvus my-release -o yaml | grep -A2 status
 <button class="copy-code-btn"></button></code></pre>
-<p>Sobald alles bereit ist, sollten Sie Pods sehen, die in etwa so aussehen:</p>
+<p>Sobald alles bereit ist, sollten Sie Pods sehen, die in etwa wie folgt aussehen:</p>
 <pre><code translate="no">NAME                                               READY   STATUS    RESTARTS   AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                  <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>          <span class="hljs-number">17</span>m
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                  <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>          <span class="hljs-number">17</span>m
@@ -318,7 +318,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
 bash standalone_embed.sh start
 <button class="copy-code-btn"></button></code></pre>
-<p>Um Woodpecker anzupassen, bearbeiten Sie nach dem ersten Start die generierte Datei „ <code translate="no">user.yaml</code> “ und führen Sie „ <code translate="no">bash standalone_embed.sh restart</code> “ aus, um die Änderungen zu übernehmen (ein neuer „ <code translate="no">start</code> “ generiert „ <code translate="no">user.yaml</code> “ neu, wenden Sie die Änderungen daher mit „ <code translate="no">restart</code> “ an):</p>
+<p>Um Woodpecker anzupassen, bearbeiten Sie nach dem ersten Start die generierte Datei „ <code translate="no">user.yaml</code> “ und führen Sie „ <code translate="no">bash standalone_embed.sh restart</code> “ aus, um die Änderungen zu übernehmen (ein neuer „ <code translate="no">start</code> “ generiert „ <code translate="no">user.yaml</code> “ neu, daher müssen Sie die Änderungen mit „ <code translate="no">restart</code> “ übernehmen):</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml</span>
 <span class="hljs-attr">woodpecker:</span>
   <span class="hljs-attr">logstore:</span>
@@ -390,7 +390,7 @@ docker restart milvus-standalone
 <span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">3</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Der „ <code translate="no">service</code> “-Modus von Woodpecker ist ausschließlich für <strong>verteilte/Cluster-Bereitstellungen</strong> vorgesehen – bei eigenständigen Bereitstellungen wird Woodpecker eingebettet ausgeführt (<code translate="no">minio</code> oder <code translate="no">local</code>). Der Milvus Operator unterstützt den Woodpecker-Service-Modus noch nicht.</p>
+<p>Der „ <code translate="no">service</code> “-Modus von Woodpecker ist ausschließlich für <strong>verteilte/Cluster-</strong> Bereitstellungen vorgesehen – bei eigenständigen Bereitstellungen wird Woodpecker eingebettet ausgeführt (<code translate="no">minio</code> oder <code translate="no">local</code>). Der Milvus Operator unterstützt den „ “-Modus von Woodpecker noch nicht.</p>
 </div>
 <h2 id="Throughput-tuning-tips" class="common-anchor-header">Tipps zur Durchsatzoptimierung<button data-href="#Throughput-tuning-tips" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -457,7 +457,7 @@ docker restart milvus-standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Der Dienstmodus bewahrt den hohen Schreibdurchsatz eines auf Objektspeicher basierenden WAL bei und bietet gleichzeitig eine geringe Latenz (siehe <a href="#Latency">Latenz</a>). Die oben genannten Optimierungen auf Speicher- und Client-Seite gelten weiterhin; da Woodpecker zudem als eigener Dienst läuft, skalieren Sie die Schreibkapazität horizontal durch Hinzufügen von Replikaten (<code translate="no">woodpecker.replicaCount</code>, Standardwert 4), und Schreibvorgänge profitieren von einer One-RTT-Quorum-Replikation sowie topologiebewussten Lesevorgängen, die eine Weiterleitung durch den Broker vermeiden.</p>
+    </button></h3><p>Der Dienstmodus bewahrt den hohen Schreibdurchsatz eines auf Objektspeicher basierenden WAL bei und bietet gleichzeitig eine geringe Latenz (siehe <a href="#Latency">Latenz</a>). Die oben genannten Optimierungen auf Speicher- und Client-Seite gelten weiterhin; da Woodpecker zudem als eigener Dienst läuft, skalieren Sie die Schreibkapazität horizontal durch Hinzufügen von Replikaten (<code translate="no">woodpecker.replicaCount</code>, Standardwert 4), und Schreibvorgänge profitieren von einer One-RTT-Quorum-Replikation sowie topologiebewussten Lesevorgängen, die die Weiterleitung durch den Broker vermeiden.</p>
 <p><strong>Demo zur Batch-Einfügung</strong> – verwenden Sie Folgendes, um den Schreibdurchsatz zu messen:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">import</span> random
@@ -551,10 +551,10 @@ batch_count = <span class="hljs-number">2000</span>
     </button></h3><p>Der Service-Modus bietet <strong>eine Schreiblatenz im Millisekundenbereich</strong> – in derselben Größenordnung wie ein herkömmliches WAL mit drei Replikaten auf lokalen Festplatten – bei gleichzeitig geringen Kosten. In einer typischen Bereitstellung mit drei Replikaten über mehrere AZs hinweg bleibt die Schreiblatenz im Millisekundenbereich. Dies wird erreicht durch:</p>
 <ul>
 <li><strong>Quorum-Schreibvorgänge mit einer RTT</strong> – die clientgesteuerte Replikation schließt einen Quorum-Schreibvorgang innerhalb einer einzigen Round-Trip-Zeit ab, wobei der AZ-übergreifende Datenverkehr auf das Datenvolumen von zwei Replikaten begrenzt ist (im Gegensatz zu dem zusätzlichen AZ-übergreifenden Datenverkehr von etwa einem Drittel, der für Broker-/Leader-basierte Replikation typisch ist).</li>
-<li><strong>Topologiebewusste Single-Hop-Lesevorgänge</strong> – Jeder Lesevorgang erfolgt direkt an die nächstgelegene Replik, anstatt über einen Broker weitergeleitet zu werden, wodurch die zufälligen Lesevorgänge über AZ-Grenzen hinweg (≈2/3 des Leseverkehrs über AZ-Grenzen hinweg) von Broker-basierten Systemen vermieden werden.</li>
+<li><strong>Topologiebewusste Single-Hop-Lesevorgänge</strong> – Jeder Lesevorgang erfolgt direkt an die nächstgelegene Replik, anstatt über einen Broker weitergeleitet zu werden, wodurch die zufälligen AZ-übergreifenden Lesevorgänge (≈2/3 des AZ-übergreifenden Lesedatenverkehrs) von Broker-basierten Systemen vermieden werden.</li>
 <li><strong>Sofortiges Hochladen in den Objektspeicher nach Segment-Rollover</strong> – jedes Segment verfolgt seinen gesamten Lebenszyklus und wird sofort nach dem Rollover in den Objektspeicher hochgeladen, wodurch der Speicherbedarf auf der lokalen Festplatte und die Speicherkosten gering gehalten werden, ohne dass dies zu Lasten der Latenz geht.</li>
-<li><strong>Keine kontinuierliche Replikation von Knoten zu Knoten</strong> – Protokolle werden im Objektspeicher als gemeinsamer Speicher persistent gespeichert, sodass bei einem Failover nur die überlebenden Replikate erneut hochgeladen werden (keine Kopie des gesamten Knotens); die Skalierung ist nicht an die Bandbreite der Replikation zwischen den Knoten gebunden, und der groß angelegte Austausch von Knoten verursacht keine Replikationsstürme.</li>
+<li><strong>Keine kontinuierliche Replikation von Knoten zu Knoten</strong> – Protokolle werden im Objektspeicher als gemeinsamer Speicher persistent gespeichert, sodass beim Failover nur die überlebenden Replikate erneut hochgeladen werden (keine Kopie des gesamten Knotens); die Skalierung ist nicht durch die Bandbreite der Replikation zwischen den Knoten begrenzt, und der groß angelegte Austausch von Knoten verursacht keine Replikationsstürme.</li>
 </ul>
-<p>Bei bereichsübergreifenden Bereitstellungen spart der Servicemodus im Vergleich zu brokerbasierten Protokollsystemen zudem etwa <strong>1/3 des Schreib-</strong> und <strong>2/3 des Lese-Netzwerkverkehrs</strong> zwischen den Verfügbarkeitszonen ein. Die vollständige Entwurfs- und Kostenanalyse finden Sie unter <a href="/docs/de/woodpecker_architecture.md">„Woodpecker-Architektur</a>“.</p>
+<p>Bei bereichsübergreifenden Bereitstellungen spart der Servicemodus im Vergleich zu brokerbasierten Protokollsystemen zudem etwa <strong>1/3 des Schreib-</strong> und <strong>2/3 des Lese-Netzwerkverkehrs</strong> zwischen den Verfügbarkeitszonen ein. Die vollständige Design- und Kostenanalyse finden Sie unter <a href="/docs/de/woodpecker_architecture.md">„Woodpecker-Architektur</a>“.</p>
 <p>Einzelheiten zur Architektur, zu den Bereitstellungsmodi (MemoryBuffer / QuorumBuffer) und zur Leistung finden Sie unter <a href="/docs/de/woodpecker_architecture.md">„Woodpecker-Architektur</a>“.</p>
 <p>Weitere Informationen zu den Parametern finden Sie im Woodpecker <a href="https://github.com/zilliztech/woodpecker">-GitHub-Repository</a>.</p>

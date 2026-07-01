@@ -48,7 +48,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>如果您只需要最近的 Struct 元素，请先使用<a href="/docs/zh/basic-vector-search-with-structarray.md">StructArray 进行基本向量搜索</a>。当结果必须满足分数或距离边界（而非仅满足前 K 名排名）时，请使用范围搜索。</p>
+<p>如果您只需要最近的 Struct 元素，请从<a href="/docs/zh/basic-vector-search-with-structarray.md">使用 StructArray 的基本向量搜索</a>开始。当结果必须满足分数或距离边界（而非仅满足前 K 名排名）时，请使用范围搜索。</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">开始之前<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -72,7 +72,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>StructArray 字段</td><td>Collection 包含一个 StructArray 字段，例如<code translate="no">chunks</code> 。</td></tr>
-<tr><td>元素级向量子字段</td><td>目标量子向量是<code translate="no">chunks[emb]</code> ，而不是<code translate="no">chunks[emb_list_vector]</code> 。</td></tr>
+<tr><td>元素级向量量子字段</td><td>目标量子向量是<code translate="no">chunks[emb]</code> ，而不是<code translate="no">chunks[emb_list_vector]</code> 。</td></tr>
 <tr><td>索引度量</td><td>该向量子场采用常规向量度量进行索引，例如<code translate="no">COSINE</code> 、<code translate="no">IP</code> 或<code translate="no">L2</code> 。</td></tr>
 <tr><td>查询数据</td><td>查询对象是一个常规向量，而非<code translate="no">EmbeddingList</code> 。</td></tr>
 </tbody>
@@ -324,7 +324,7 @@ results = client.hybrid_search(
 <li><p>对<code translate="no">chunks[emb_list_vector]</code> 执行范围搜索，而该指标专用于EmbeddingList搜索。</p></li>
 <li><p>在元素级范围搜索中使用<code translate="no">MAX_SIM_COSINE</code> ，而非常规指标（如<code translate="no">COSINE</code> ）。</p></li>
 <li><p>使用<code translate="no">EmbeddingList</code> 查询代替常规向量查询。</p></li>
-<li><p>期望范围搜索结果按父实体唯一。范围搜索会返回匹配的 Struct 元素命中结果。</p></li>
+<li><p>期望范围搜索结果按父实体唯一。范围搜索会返回匹配的 Struct 元素命中项。</p></li>
 <li><p>使用 `<code translate="no">chunks.emb</code> ` 代替必需的子字段路径语法 `<code translate="no">chunks[emb]</code>`。</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">后续步骤<button data-href="#Next-steps" class="anchor-icon" translate="no">

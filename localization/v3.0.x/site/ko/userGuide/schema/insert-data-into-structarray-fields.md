@@ -230,7 +230,7 @@ result = client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">chunks</code> 필드가 nullable인 경우, 엔티티는 전체 <code translate="no">chunks</code> 필드를 null로 설정할 수 있습니다. Python에서는 <code translate="no">None</code> 을 사용하여 null 값을 표현합니다.</p>
+    </button></h2><p><code translate="no">chunks</code> 필드가 nullable인 경우, 엔티티는 전체 <code translate="no">chunks</code> 필드를 null로 설정할 수 있습니다. Python에서는 ` <code translate="no">None</code> `을 사용하여 null 값을 표현합니다.</p>
 <pre><code translate="no" class="language-python">client.insert(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
     data=[
@@ -244,10 +244,10 @@ result = client.insert(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Nullable StructArray 필드에 유효한 StructArray 값이 포함된 경우, 해당 값의 모든 하위 필드는 null이거나 유효한 값을 가져야 합니다. 일부 하위 필드는 null로, 다른 하위 필드는 유효한 값으로 설정된 엔티티를 삽입하면 오류가 발생합니다.</p>
+<p>Nullable StructArray 필드에 유효한 StructArray 값이 포함된 경우, 해당 값의 모든 하위 필드는 null이거나 유효한 값을 가져야 합니다. 일부 하위 필드는 null로, 다른 필드는 유효한 값으로 설정된 엔티티를 삽입하면 오류가 발생합니다.</p>
 <div class="alert note">
 <p>경고
-nullable StructArray 필드는 Milvus v3.0.x에서만 사용할 수 있습니다. 기존 컬렉션에 StructArray 필드를 동적으로 추가하는 경우, 추가된 필드는 nullable이어야 하며, 기존 엔티티는 새 필드의 모든 하위 필드에 대해 ` <code translate="no">null</code> `를 반환해야 합니다.</p>
+Nullable StructArray 필드는 Milvus v3.0.x에서만 사용할 수 있습니다. 기존 컬렉션에 StructArray 필드를 동적으로 추가하는 경우, 추가된 필드는 nullable이어야 하며, 기존 엔티티는 새 필드의 모든 하위 필드에 대해 ` <code translate="no">null</code> `를 반환해야 합니다.</p>
 </div>
 <h2 id="Validate-inserted-data" class="common-anchor-header">삽입된 데이터 유효성 검사<button data-href="#Validate-inserted-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -301,7 +301,7 @@ nullable StructArray 필드는 Milvus v3.0.x에서만 사용할 수 있습니다
 <tr><th>규칙</th><th>설명</th></tr>
 </thead>
 <tbody>
-<tr><td>StructArray 필드에는 객체 배열을 사용하십시오.</td><td><code translate="no">chunks</code> 의 값은 리스트이며, 리스트의 각 항목은 Struct 요소입니다.</td></tr>
+<tr><td>StructArray 필드에는 객체 배열을 사용하십시오.</td><td><code translate="no">chunks</code> 의 값은 목록이며, 목록의 각 항목은 Struct 요소입니다.</td></tr>
 <tr><td>각 Struct 요소 내부에서 하위 필드 이름을 사용하십시오.</td><td><code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> 는 <code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code> 가 아닌 <code translate="no">chunks</code> 안에 삽입하십시오.</td></tr>
 <tr><td>Struct 스키마와 일치시켜야 합니다.</td><td>각 Struct 요소는 Struct 스키마에 정의된 하위 필드를 사용해야 합니다.</td></tr>
 <tr><td>벡터 차원을 일치시켜야 합니다.</td><td>벡터 값은 해당 벡터 하위 필드에 대해 구성된 <code translate="no">dim</code> 와 일치해야 합니다.</td></tr>
@@ -329,8 +329,8 @@ nullable StructArray 필드는 Milvus v3.0.x에서만 사용할 수 있습니다
 <li><p>삽입 페이로드에서 <code translate="no">chunks[text]</code> 와 같은 필드 경로를 사용하는 경우.</p></li>
 <li><p>Struct 요소에서 필수 하위 필드를 생략하는 경우.</p></li>
 <li><p>차원이 잘못된 벡터를 삽입하는 경우.</p></li>
-<li><p><code translate="no">max_capacity</code> 에서 허용하는 것보다 많은 Struct 요소를 삽입하는 경우.</p></li>
-<li><p>동일한 StructArray 값 내의 다른 하위 필드는 유효한데, 하나의 하위 필드만 <code translate="no">null</code> 로 설정하는 경우.</p></li>
+<li><p><code translate="no">max_capacity</code> 에서 허용하는 것보다 더 많은 Struct 요소를 삽입하는 경우.</p></li>
+<li><p>동일한 StructArray 값 내의 다른 하위 필드는 유효한데도, 하나의 하위 필드만 <code translate="no">null</code> 로 설정하는 경우.</p></li>
 <li><p>벡터를 <code translate="no">emb_list_vector</code> 에만 기록한 후, <code translate="no">chunks[emb]</code> 에서 요소 수준 검색을 실행하려고 시도하는 경우.</p></li>
 <li><p><code translate="no">emb</code> 에만 벡터를 기록한 후, <code translate="no">chunks[emb_list_vector]</code> 에서 EmbeddingList 검색을 실행하려는 경우.</p></li>
 </ul>

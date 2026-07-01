@@ -5,7 +5,7 @@ summary: >-
   O suporte ao StructArray abrange a definição do esquema, os dados de inserção,
   a indexação, os modos de pesquisa e os filtros específicos do StructArray.
   Utilize esta página como referência sobre os limites antes de contar com o
-  comportamento do StructArray em ambiente de produção.
+  comportamento do StructArray em produção.
 ---
 <h1 id="StructArray-Limits" class="common-anchor-header">Limites do StructArray<button data-href="#StructArray-Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -48,12 +48,12 @@ summary: >-
 <tr><td>Esquema do subcampo</td><td>Todos os elementos Struct no mesmo campo StructArray partilham um esquema Struct predefinido.</td></tr>
 <tr><td>A capacidade</td><td><code translate="no">max_capacity</code> é obrigatório e limita o número de elementos Struct que uma entidade pode armazenar no campo StructArray.</td></tr>
 <tr><td>Alterações no subcampo</td><td>Após a criação de um campo StructArray, não é possível adicionar subcampos a esse campo StructArray já existente.</td></tr>
-<tr><td>Caminho do subcampo</td><td>Utilize percursos do tipo « <code translate="no">structArray[subfield]</code> », como <code translate="no">chunks[emb]</code>, para índices, alvos de pesquisa, campos de saída e filtros. Não utilize <code translate="no">chunks.emb</code>.</td></tr>
+<tr><td>Caminho do subcampo</td><td>Utilize percursos do tipo <code translate="no">structArray[subfield]</code>, como <code translate="no">chunks[emb]</code>, para índices, alvos de pesquisa, campos de saída e filtros. Não utilize <code translate="no">chunks.emb</code>.</td></tr>
 <tr><td>Inserir forma</td><td>Inserir um campo StructArray como uma matriz de objetos. Não utilize sintaxe de caminho dentro de cargas de inserção.</td></tr>
 <tr><td>Índices vetoriais</td><td>Um campo vetorial ou subcampo vetorial aceita apenas um índice. Utilize subcampos vetoriais separados para a pesquisa EmbeddingList e a pesquisa ao nível do elemento.</td></tr>
 <tr><td>Funções</td><td>As funções de campo não são suportadas para campos ou subcampos dentro de um campo StructArray.</td></tr>
 <tr><td>Campos nulos</td><td>Os campos StructArray nulos estão sujeitos a restrições de versão. Quando suportados, o valor nulo aplica-se a todo o campo StructArray, e não a um elemento Struct individual de forma independente.</td></tr>
-<tr><td>Adicionar campo dinâmico</td><td>A adição de um campo StructArray a uma coleção existente depende da versão e requer que o campo adicionado seja nulo.</td></tr>
+<tr><td>Adicionar campo dinâmico</td><td>A adição de um campo StructArray a uma coleção existente está sujeita a restrições de versão e requer que o campo adicionado seja nulo.</td></tr>
 </tbody>
 </table>
 <h2 id="Schema-limits" class="common-anchor-header">Limites do esquema<button data-href="#Schema-limits" class="anchor-icon" translate="no">
@@ -81,7 +81,7 @@ summary: >-
 <tr><td><code translate="no">max_capacity</code> é obrigatório.</td><td>O número de elementos Struct numa entidade não deve exceder o <code translate="no">max_capacity</code> configurado para o campo StructArray.</td></tr>
 <tr><td>Os subcampos existentes são fixos.</td><td>Não é possível adicionar novos subcampos a um campo StructArray existente. Para alterar o esquema dos subcampos, elimine o campo StructArray e adicione-o novamente com o esquema atualizado.</td></tr>
 <tr><td>O StructArray aninhado não é suportado.</td><td>Um campo StructArray não pode conter subcampos aninhados do tipo <code translate="no">Array</code>, <code translate="no">ArrayOfVector</code>, <code translate="no">Struct</code> ou <code translate="no">ArrayOfStruct</code>.</td></tr>
-<tr><td>As funções não são suportadas dentro de StructArray.</td><td>Não defina funções de campo para campos StructArray nem para os seus subcampos.</td></tr>
+<tr><td>As funções não são suportadas no interior de StructArray.</td><td>Não defina funções de campo para campos StructArray nem para os seus subcampos.</td></tr>
 </tbody>
 </table>
 <p>Para exemplos de criação de esquemas, consulte <a href="/docs/pt/create-structarray-field.md">Criar um campo StructArray</a>.</p>
@@ -145,10 +145,10 @@ summary: >-
 <tr><th>Capacidade</th><th>Limite</th></tr>
 </thead>
 <tbody>
-<tr><td>Campo StructArray nulo</td><td>Suportado apenas em versões que incluem suporte a StructArray nulo e a matrizes vetoriais nulas.</td></tr>
-<tr><td>Valor nulo em Python</td><td>Utilize ` <code translate="no">None</code> ` para inserir um valor `StructArray` nulo em Python. Não utilize ` <code translate="no">Null</code> ` nem ` <code translate="no">null</code>`.</td></tr>
+<tr><td>Campo StructArray nulo</td><td>Suportado apenas em versões que incluam suporte a StructArray nulo e a matrizes vetoriais nulas.</td></tr>
+<tr><td>Valor nulo em Python</td><td>Utilize ` <code translate="no">None</code> ` para inserir um valor nulo de StructArray em Python. Não utilize ` <code translate="no">Null</code> ` nem ` <code translate="no">null</code>`.</td></tr>
 <tr><td>Âmbito do valor nulo</td><td>O valor nulo aplica-se a todo o campo StructArray. Por exemplo, ` <code translate="no">chunks=None</code> ` só é válido quando ` <code translate="no">chunks</code> ` é nulo.</td></tr>
-<tr><td>Valor StructArray parcialmente nulo</td><td>Quando um campo StructArray contém um valor de matriz válido, não misture matrizes de subcampos nulos com matrizes de subcampos válidos no mesmo valor.</td></tr>
+<tr><td>Valor StructArray parcialmente nulo</td><td>Quando um campo StructArray contém um valor de matriz válido, não misture matrizes de subcampos nulas com matrizes de subcampos válidas no mesmo valor.</td></tr>
 <tr><td>Adicionar dinamicamente um campo StructArray</td><td>A adição de um campo StructArray a uma coleção existente só é suportada em versões que incluam suporte a campos StructArray dinâmicos.</td></tr>
 <tr><td>Requisito de nulo para adição dinâmica</td><td>Um campo StructArray adicionado a uma coleção existente deve ser nulo, uma vez que as entidades existentes não têm qualquer valor para o novo campo.</td></tr>
 <tr><td>Entidades existentes após a adição dinâmica</td><td>As entidades existentes devolvem « <code translate="no">null</code> » para o campo StructArray adicionado em todos os seus subcampos.</td></tr>
@@ -180,7 +180,7 @@ summary: >-
 <tr><td>Nomes dos subcampos</td><td>Dentro de cada objeto Struct, utilize nomes de subcampos como <code translate="no">text</code> e <code translate="no">emb</code>, e não caminhos como <code translate="no">chunks[text]</code>.</td></tr>
 <tr><td>Alinhamento com o esquema</td><td>Cada elemento Struct deve corresponder ao esquema Struct.</td></tr>
 <tr><td>Capacidade</td><td>O número de elementos Struct numa entidade não deve exceder <code translate="no">max_capacity</code>.</td></tr>
-<tr><td>Dimensões do vetor</td><td>Os valores do vetor devem corresponder ao <code translate="no">dim</code> configurado para os seus subcampos vetoriais.</td></tr>
+<tr><td>Dimensões do vetor</td><td>Os valores do vetor devem corresponder ao <code translate="no">dim</code> configurado para os seus subcampos de vetor.</td></tr>
 <tr><td>Duplicação no modo de pesquisa</td><td>Se necessitar tanto da pesquisa EmbeddingList como da pesquisa ao nível do elemento, escreva os vetores em dois subcampos de vetor separados.</td></tr>
 </tbody>
 </table>

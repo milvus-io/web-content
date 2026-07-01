@@ -52,7 +52,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Если вам нужны только ближайшие элементы Struct, начните с <a href="/docs/ru/basic-vector-search-with-structarray.md">базового векторного поиска с StructArray</a>. Используйте поиск по диапазону, когда результат должен удовлетворять границе оценки или расстояния, а не только ранжированию top-K.</p>
+<p>Если вам нужны только ближайшие элементы Struct, начните с <a href="/docs/ru/basic-vector-search-with-structarray.md">базового векторного поиска с StructArray</a>. Используйте поиск по диапазону, если результат должен удовлетворять ограничению по оценке или расстоянию, а не только ранжированию по топ-K.</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">Прежде чем начать<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -123,7 +123,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В следующем примере выполняется поиск отдельных фрагментов, векторы « <code translate="no">chunks[emb]</code> » которых достаточно схожи с вектором запроса. Каждый найденный результат представляет собой совпадающий элемент Struct.</p>
+    </button></h2><p>В следующем примере выполняется поиск отдельных фрагментов, векторы <code translate="no">chunks[emb]</code> которых достаточно схожи с вектором запроса. Каждый найденный результат представляет собой совпадающий элемент Struct.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -163,7 +163,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>В данном примере <code translate="no">COSINE</code> представляет собой метрику типа «похожесть», поэтому диапазон результатов больше <code translate="no">radius</code> и меньше или равен <code translate="no">range_filter</code>. Значение <code translate="no">offset</code> при возвращении идентифицирует совпадающий элемент Struct в массиве <code translate="no">chunks</code>.</p>
+<p>В данном примере <code translate="no">COSINE</code> представляет собой метрику типа «похожесть», поэтому диапазон результатов больше <code translate="no">radius</code> и меньше или равен <code translate="no">range_filter</code>. Значение <code translate="no">offset</code> при возвращении идентифицирует совпавший элемент Struct в массиве <code translate="no">chunks</code>.</p>
 <h2 id="Add-scalar-filters" class="common-anchor-header">Добавление скалярных фильтров<button data-href="#Add-scalar-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -209,7 +209,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Предикат верхнего уровня выбирает сущности-кандидаты. Предикат ` <code translate="no">element_filter</code> ` ограничивает векторный поиск по диапазону только соответствующими элементами Struct. Дополнительные примеры фильтрации см. в разделе <a href="/docs/ru/filtered-search-with-structarray.md">«Фильтрованный поиск с использованием StructArray</a>».</p>
+<p>Предикат верхнего уровня выбирает сущности-кандидаты. Предикат ` <code translate="no">element_filter</code> ` ограничивает векторный поиск по диапазону только соответствующими элементами Struct. Дополнительные примеры фильтрации см. в разделе <a href="/docs/ru/filtered-search-with-structarray.md">«Фильтрованный поиск с StructArray</a>».</p>
 <h2 id="Use-range-search-in-hybrid-search" class="common-anchor-header">Использование поиска по диапазону в гибридном поиске<button data-href="#Use-range-search-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -306,8 +306,8 @@ results = client.hybrid_search(
       </svg>
     </button></h2><ul>
 <li><p>Не используйте запрос « <code translate="no">EmbeddingList</code> » или метрику « <code translate="no">MAX_SIM*</code> » для поиска по диапазону в подполях вектора StructArray. Поиск на уровне EmbeddingList не поддерживает поиск по диапазону.</p></li>
-<li><p>Не сочетайте поиск по диапазону с поиском по группировке. Если вам требуется по одному результату на каждую родительскую сущность, запустите поиск на уровне элементов без параметров диапазона и используйте группировку там, где она поддерживается.</p></li>
-<li><p>Гибридный поиск по диапазону поддерживается для векторных полей на уровне элементов StructArray. Он не поддерживается для запросов StructArray на уровне EmbeddingList.</p></li>
+<li><p>Не сочетайте поиск по диапазону с поиском по группировке. Если вам требуется по одному результату на родительскую сущность, запустите поиск на уровне элементов без параметров диапазона и используйте группировку там, где она поддерживается.</p></li>
+<li><p>Гибридный поиск по диапазону поддерживается для векторных полей StructArray на уровне элементов. Он не поддерживается для запросов StructArray на уровне EmbeddingList.</p></li>
 </ul>
 <h2 id="Common-mistakes" class="common-anchor-header">Распространенные ошибки<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -350,5 +350,5 @@ results = client.hybrid_search(
 <li><p>Чтобы узнать о двух основных режимах векторного поиска StructArray, прочтите раздел <a href="/docs/ru/basic-vector-search-with-structarray.md">«Базовый векторный поиск с StructArray</a>».</p></li>
 <li><p>Чтобы добавить скалярные фильтры к поиску по диапазону, ознакомьтесь со статьёй <a href="/docs/ru/filtered-search-with-structarray.md">«Фильтрованный поиск с StructArray</a>».</p></li>
 <li><p>Чтобы возвращать не более одного результата на родительский объект там, где это поддерживается, ознакомьтесь со статьёй <a href="/docs/ru/grouping-search-with-structarray.md">«Групповой поиск с StructArray</a>».</p></li>
-<li><p>Чтобы ознакомиться с ограничениями поиска для конкретных версий, прочтите раздел <a href="/docs/ru/structarray-limits.md">«Ограничения StructArray</a>».</p></li>
+<li><p>Чтобы ознакомиться с ограничениями поиска для конкретных версий, ознакомьтесь с разделом <a href="/docs/ru/structarray-limits.md">«Ограничения StructArray</a>».</p></li>
 </ol>

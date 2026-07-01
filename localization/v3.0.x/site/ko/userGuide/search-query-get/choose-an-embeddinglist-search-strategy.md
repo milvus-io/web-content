@@ -2,10 +2,10 @@
 id: choose-an-embeddinglist-search-strategy.md
 title: EmbeddingList 검색 전략 선택
 summary: >-
-  EmbeddingList 검색 전략은 Milvus가 EmbeddingList 검색을 위한 근사 후보 인덱스를 어떻게 구축할지 결정합니다.
+  EmbeddingList 검색 전략은 Milvus가 EmbeddingList 검색을 위해 근사 후보 인덱스를 어떻게 구축할지 결정합니다.
   기본 전략은 tokenann입니다. 임베딩 목록이 크거나, TokenANN의 계산 비용이 너무 높거나, 학습된/압축된 행 수준 표현이 더
   적합할 경우 muvera 또는 lemur로 전환할 수 있습니다. emb_list_rerank가 활성화된 경우, 최종 결과는 여전히
-  MaxSim 재순위 지정 과정을 통해 산출됩니다.
+  MaxSim 재순위를 통해 산출됩니다.
 ---
 <h1 id="Choose-an-EmbeddingList-Search-Strategy" class="common-anchor-header">EmbeddingList 검색 전략 선택<button data-href="#Choose-an-EmbeddingList-Search-Strategy" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -91,7 +91,7 @@ summary: >-
       </svg>
     </button></h2><p><code translate="no">tokenann</code> 임베딩 목록의 모든 벡터를 색인화합니다. 검색 시 각 쿼리 벡터는 ANN 검색을 수행하고, 일치하는 벡터는 해당 행으로 다시 집계되며, 결과로 나온 행 후보들은 MaxSim을 통해 재순위가 매겨집니다.</p>
 <div class="alert note">
-<p><strong>품질이 최우선인 경우 TokenANN을 사용하십시오.</strong> 1단계 인덱스에서 모든 벡터를 사용할 수 있도록 유지하기 때문에<strong>,</strong> 이는 원래 MaxSim 계산에 가장 근접한 근사치입니다.</p>
+<p><strong>품질이 최우선인 경우 TokenANN을 사용하십시오.</strong> 1단계 인덱스에서 모든 벡터를 사용할 수 있도록 유지하기 때문에<strong>,</strong> 이는 원래의 MaxSim 계산에 가장 근접한 근사치입니다.</p>
 </div>
 <ul>
 <li><p><strong>적합한 경우:</strong> 짧은 텍스트 청크, 벡터 수가 적거나 중간 정도인 행, 토큰 수준에서 의미적 구분이 뚜렷한 경우, 품질에 민감한 기준선.</p></li>
@@ -143,7 +143,7 @@ summary: >-
 </div>
 <ul>
 <li><p><strong>적합한 용도:</strong> 시각적 문서 검색, 다중 모달 패치 임베딩, 판별력이 낮은 임베딩 공간, TokenANN을 적용하기 어려운 대규모 임베딩 목록.</p></li>
-<li><p><strong>적합하지 않은 경우:</strong> 자주 변경되는 코퍼스, 문서 길이가 극도로 편중된 고분별도 임베딩, 훈련 비용이 용납될 수 없는 워크로드.</p></li>
+<li><p><strong>적합하지 않은 경우:</strong> 자주 변경되는 코퍼스, 문서 길이가 극도로 편중된 고분화 임베딩, 훈련 비용이 용납될 수 없는 워크로드.</p></li>
 <li><p><strong>주요 매개변수:</strong><code translate="no">lemur_hidden_dim</code>, <code translate="no">lemur_num_train_samples</code>, <code translate="no">lemur_num_epochs</code>, <code translate="no">lemur_batch_size</code>, <code translate="no">lemur_learning_rate</code>, <code translate="no">lemur_seed</code>, <code translate="no">lemur_num_layers</code>.</p></li>
 </ul>
 <hr>
@@ -178,16 +178,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>다음 표에는 전략별 구성 항목이 나열되어 있습니다. Milvus에서는 일반적으로 인덱스를 생성할 때 <code translate="no">params</code> 맵을 통해 빌드 시 구성 항목을 전달합니다. 서버 측 기본값이 필요한 경우, Milvus 구성 파일의 <code translate="no">knowhere</code> 섹션에서 정의해야 합니다.</p>
+    </button></h2><p>다음 표에는 전략별 구성 항목이 나열되어 있습니다. Milvus에서는 인덱스를 생성할 때 빌드 시점의 항목이 일반적으로 <code translate="no">params</code> 맵을 통해 전달됩니다. 서버 측 기본값이 필요한 경우, Milvus 구성 파일의 <code translate="no">knowhere</code> 섹션에서 정의해야 합니다.</p>
 <table>
 <thead>
 <tr><th>전략</th><th>구성 항목</th><th>단계</th><th>기본값</th><th>변경 시점</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">tokenann</code></td><td><code translate="no">emb_list_strategy=&quot;tokenann&quot;</code></td><td>인덱스 구축</td><td><code translate="no">tokenann</code></td><td>기본 요소 벡터 인덱싱 동작을 원하거나 DiskANN을 사용할 때 명시적으로 사용합니다.</td></tr>
+<tr><td><code translate="no">tokenann</code></td><td><code translate="no">emb_list_strategy=&quot;tokenann&quot;</code></td><td>인덱스 구축</td><td><code translate="no">tokenann</code></td><td>기본 요소 벡터 인덱싱 동작을 원하거나 DiskANN을 사용하는 경우 명시적으로 사용하십시오.</td></tr>
 <tr><td><code translate="no">muvera</code></td><td><code translate="no">emb_list_strategy=&quot;muvera&quot;</code></td><td>인덱스 구축</td><td><code translate="no">tokenann</code></td><td>훈련 없이 행 단위로 인코딩된 검색을 원할 때 사용합니다.</td></tr>
 <tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_num_projections</code></td><td>인덱스 구축</td><td><code translate="no">4</code></td><td>SimHash 투영 횟수를 제어합니다. 값이 높을수록 더 많은 버킷이 생성되어 인코딩 품질이 향상될 수 있지만, 인코딩 차원은 증가합니다.</td></tr>
-<tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_num_repeats</code></td><td>인덱스 구축</td><td><code translate="no">7</code></td><td>독립적인 FDE 인코딩이 몇 개나 연결될지 제어합니다. 값이 높을수록 견고성은 향상될 수 있지만, 인덱스/검색 비용은 증가합니다.</td></tr>
+<tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_num_repeats</code></td><td>인덱스 구축</td><td><code translate="no">7</code></td><td>독립적인 FDE 인코딩이 몇 개나 연결될지 제어합니다. 값이 높을수록 견고성은 향상될 수 있지만, 인덱스/검색 비용이 증가합니다.</td></tr>
 <tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_seed</code></td><td>인덱스 구축</td><td><code translate="no">42</code></td><td>특히 테스트 및 벤치마크 비교 시 재현 가능한 무작위 투영을 위해 설정합니다.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">emb_list_strategy=&quot;lemur&quot;</code></td><td>인덱스 구축</td><td><code translate="no">tokenann</code></td><td>학습된 행 수준 압축이 고정 무작위 투영보다 더 나은 성능을 보일 것으로 예상될 때 사용합니다.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_hidden_dim</code></td><td>인덱스 구축</td><td><code translate="no">256</code></td><td>압축된 표현의 크기를 제어합니다. 용량을 늘리려면 값을 높이고, 메모리 사용량을 줄이고 검색 속도를 높이려면 값을 낮춥니다.</td></tr>
@@ -319,7 +319,7 @@ index_params.add_index(
 </tbody>
 </table>
 <div class="alert note">
-<p><strong>호환성 참고 사항:</strong> MUVERA 및 LEMUR는 현재 Knowhere에서 fp32 데이터를 지원합니다. DiskANN은 TokenANN 전략에서만 EmbeddingList를 지원합니다. fp32가 아닌 벡터 유형이나 DiskANN을 사용하는 경우, 기본값을 변경하기 전에 전략 지원 여부를 확인하십시오.</p>
+<p><strong>호환성 참고 사항:</strong> MUVERA와 LEMUR는 현재 Knowhere에서 fp32 데이터를 지원합니다. DiskANN은 TokenANN 전략에서만 EmbeddingList를 지원합니다. fp32가 아닌 벡터 유형이나 DiskANN을 사용하는 경우, 기본값을 변경하기 전에 전략 지원 여부를 확인하십시오.</p>
 </div>
 <hr>
 <h2 id="How-to-Choose-a-Strategy" class="common-anchor-header">전략 선택 방법<button data-href="#How-to-Choose-a-Strategy" class="anchor-icon" translate="no">
@@ -344,15 +344,15 @@ index_params.add_index(
 </thead>
 <tbody>
 <tr><td>고품질 베이스라인이 필요합니까?</td><td>비용을 최적화하기 전에 최상의 실용적 근사치를 측정하고자 하는 경우입니다.</td><td><code translate="no">tokenann</code></td></tr>
-<tr><td>벡터 개수가 적은 행인가요, 아니면 중간 정도인가요?</td><td>각 행에 토큰, 패치 또는 클립 벡터의 수가 적은가요?</td><td><code translate="no">tokenann</code></td></tr>
+<tr><td>벡터 개수가 적은 행인가요, 아니면 중간 정도인가요?</td><td>각 행에 토큰, 패치 또는 클립 벡터의 수가 적습니까?</td><td><code translate="no">tokenann</code></td></tr>
 <tr><td>TokenANN이 너무 크거나 너무 느린가요?</td><td>인덱스 크기나 1단계 검색 지연 시간이 병목 현상입니다.</td><td><code translate="no">muvera</code></td></tr>
-<tr><td>훈련 없이 압축을 원하십니까?</td><td>더 간단한 운영 모델과 재현 가능한 인코딩이 필요합니다.</td><td><code translate="no">muvera</code></td></tr>
+<tr><td>훈련 없이 압축을 원하십니까?</td><td>더 단순한 운영 모델과 재현 가능한 인코딩이 필요합니다.</td><td><code translate="no">muvera</code></td></tr>
 <tr><td>임베딩 공간의 판별력이 낮은가요?</td><td>토큰 수준 ANN 후보들은 노이즈가 많고, 랜덤 프로젝션은 신호를 충분히 보존하지 못합니다.</td><td><code translate="no">lemur</code></td></tr>
 <tr><td>워크로드가 시각적인가요, 아니면 다중 모달인가요?</td><td>행에는 많은 패치 벡터가 포함되어 있으며, TokenANN은 계산 비용이 너무 높습니다.</td><td><code translate="no">lemur</code> 또는 <code translate="no">muvera</code></td></tr>
-<tr><td>문서 길이에 큰 편차가 있습니까?</td><td>일부 행에는 다른 행보다 훨씬 더 많은 벡터가 포함되어 있습니다.</td><td><code translate="no">muvera</code> 부터 시작하고, <code translate="no">lemur</code> 를 신중하게 검증하십시오.</td></tr>
+<tr><td>문서 길이가 매우 불균형한가요?</td><td>일부 행에는 다른 행보다 훨씬 더 많은 벡터가 포함되어 있습니다.</td><td><code translate="no">muvera</code> 부터 시작하고, <code translate="no">lemur</code> 를 신중하게 검증하십시오.</td></tr>
 </tbody>
 </table>
-<h2 id="Suggested-Evaluation-Workflow" class="common-anchor-header">권장 평가 워크플로우<button data-href="#Suggested-Evaluation-Workflow" class="anchor-icon" translate="no">
+<h2 id="Suggested-Evaluation-Workflow" class="common-anchor-header">권장 평가 워크플로<button data-href="#Suggested-Evaluation-Workflow" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -376,7 +376,7 @@ index_params.add_index(
 </ol>
 <table>
 <thead>
-<tr><th>### 품질 우선: ` <code translate="no">tokenann</code>`부터 시작하십시오. 이를 MaxSim 근사 품질의 기준선으로 사용하십시오.</th><th>### 균형형: 훈련 파이프라인을 추가하지 않고 비용을 낮춰야 할 때는 <code translate="no">muvera</code> 를 시도해 보세요.</th><th>### 압축: 학습된 행 단위 압축이 고정 무작위 투영보다 우수한 성능을 보일 것으로 예상될 때 <code translate="no">lemur</code> 를 사용해 보세요.</th></tr>
+<tr><th>### 품질 우선: ` <code translate="no">tokenann</code>`부터 시작하십시오. 이를 MaxSim 근사 품질의 기준선으로 사용하십시오.</th><th>### 균형형: 훈련 파이프라인을 추가하지 않고 비용을 낮춰야 할 때는 <code translate="no">muvera</code> 을 시도해 보세요.</th><th>### 압축: 학습된 행 단위 압축이 고정 무작위 투영보다 우수한 성능을 보일 것으로 예상될 때 <code translate="no">lemur</code> 를 사용해 보세요.</th></tr>
 </thead>
 <tbody>
 </tbody>

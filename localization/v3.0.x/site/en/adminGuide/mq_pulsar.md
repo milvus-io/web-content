@@ -284,4 +284,5 @@ If you run Pulsar and want to keep it, do not change the message queue during th
       </svg>
     </button></h2><ul>
 <li><a href="/docs/woodpecker.md">Woodpecker (default message queue)</a></li>
+<li><a href="/docs/switch-pulsar-woodpecker.md">Switch between Pulsar and Woodpecker</a></li>
 </ul>

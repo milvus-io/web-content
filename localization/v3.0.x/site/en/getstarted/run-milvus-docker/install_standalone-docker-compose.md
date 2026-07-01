@@ -172,7 +172,7 @@ EOF
 <span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">rocksmq</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To switch the message queue <em>after</em> upgrading, see the Switch MQ Type guide.</p>
+<p>To switch the message queue <em>after</em> upgrading, see <a href="/docs/switch-mq-type.md">Switch MQ Type</a>.</p>
 <h2 id="Optional-dependencies" class="common-anchor-header">Optional dependencies<button data-href="#Optional-dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

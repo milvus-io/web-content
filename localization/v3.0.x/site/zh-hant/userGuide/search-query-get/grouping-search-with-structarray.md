@@ -3,7 +3,7 @@ id: grouping-search-with-structarray.md
 title: 使用 StructArray 進行分組搜尋
 summary: >-
   請使用此頁面，將 StructArray 的元素層級搜尋結果依父實體進行分組。當多個 Struct
-  元素符合查詢條件時，元素層級搜尋可能會從同一實體中返回多個搜尋結果。透過分組功能，這些元素搜尋結果將被合併，使每個父實體最多只出現一次。
+  元素符合查詢條件時，元素層級搜尋可能會從同一實體中返回多個搜尋結果。透過分組功能，這些元素搜尋結果將被合併，因此每個父實體最多只會出現一次。
 ---
 <h1 id="Grouping-Search-with-StructArray" class="common-anchor-header">使用 StructArray 進行分組搜尋<button data-href="#Grouping-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>請使用此頁面，根據父實體對 StructArray 的元素層級搜尋結果進行分組。當多個 Struct 元素符合查詢條件時，元素層級搜尋可能會從同一實體中返回多個搜尋結果。分組功能會將這些元素搜尋結果合併，確保每個父實體至多只出現一次。</p>
+    </button></h1><p>請使用此頁面，根據父實體對 StructArray 的元素層級搜尋結果進行分組。當多個 Struct 元素符合查詢條件時，元素層級搜尋可能會從同一實體中返回多個搜尋結果。分組功能會將這些元素搜尋結果合併，使每個父實體最多只出現一次。</p>
 <p>本頁面使用來自「<a href="/docs/zh-hant/create-structarray-field.md">建立 StructArray 欄位</a>」中的<code translate="no">tech_articles</code> 集合。該集合包含一個名為<code translate="no">chunks</code> 的 StructArray 欄位。其中<code translate="no">chunks[emb]</code> 向量子欄位已針對元素層級搜尋進行索引，並採用標準向量度量標準。</p>
 <h2 id="How-grouping-applies-to-StructArray" class="common-anchor-header">分組機制如何套用至 StructArray<button data-href="#How-grouping-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -48,7 +48,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>當未分組的元素層級搜尋會返回過多重複的父實體時，請使用分組功能。若您希望將每個符合條件的 Struct 元素視為獨立的搜尋結果，請使用不帶 `<code translate="no">group_by_field</code>`<a href="/docs/zh-hant/basic-vector-search-with-structarray.md">的 StructArray 基本向量搜尋</a>。</p>
+<p>當未分組的元素層級搜尋會返回過多重複的父實體時，請使用分組功能。若您希望將每個符合條件的 Struct 元素視為獨立的搜尋結果，請使用「<a href="/docs/zh-hant/basic-vector-search-with-structarray.md">基本向量搜尋」並搭配 StructArray</a>，且不使用 `<code translate="no">group_by_field</code>`。</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">開始之前<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -185,7 +185,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>與 StructArray 結合的混合分組是一項元素層級功能。僅當所有子搜尋皆針對同一 StructArray 欄位下的元素層級向量欄位時，才支援此功能。請勿在分組的 StructArray 混合搜尋中使用 EmbeddingList 層級的請求。</p>
+    </button></h2><p>與 StructArray 結合的混合分組是一項元素層級功能。僅當所有子搜尋皆針對同一 StructArray 欄位下的元素層級向量欄位時，此功能才受支援。請勿在分組的 StructArray 混合搜尋中使用 EmbeddingList 層級的請求。</p>
 <p>以下範例假設<code translate="no">chunks</code> 的 StructArray 欄位具有兩個元素層級向量子欄位：<code translate="no">chunks[emb]</code> 與<code translate="no">chunks[code_emb]</code> ，且兩者皆使用標準向量度量進行索引。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest, RRFRanker
 
@@ -261,7 +261,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>分組搜尋僅適用於元素層級的 StructArray 向量搜尋。EmbeddingList 搜尋及 EmbeddingList 層級的混合搜尋不支援「group-by」。</p></li>
+<li><p>分組搜尋僅適用於元素層級的 StructArray 向量搜尋。EmbeddingList 搜尋及 EmbeddingList 層級的混合搜尋不支援「按...分組」。</p></li>
 <li><p>請將主鍵用作 `<code translate="no">group_by_field</code>`。StructArray 元素層級的分組並非針對任意標量欄位的通用分組操作。</p></li>
 <li><p>請勿將分組搜尋與範圍搜尋結合使用。</p></li>
 <li><p>請勿在分組搜尋中使用<code translate="no">EmbeddingList</code> 查詢或<code translate="no">MAX_SIM*</code> 指標。</p></li>
@@ -284,7 +284,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>將分組功能用於 `<code translate="no">chunks[emb_list_vector]</code>`，該字段原本是為 `EmbeddingList` 搜尋設計的。</p></li>
+<li><p>將分組功能用於<code translate="no">chunks[emb_list_vector]</code> ，該功能原本是針對 EmbeddingList 搜尋設計的。</p></li>
 <li><p>根據非主鍵的標量欄位進行分組。</p></li>
 <li><p>根據多個欄位進行分組。元素層級的 StructArray 分組僅支援主鍵分組。</p></li>
 <li><p>預期分組結果會代表每個匹配的 Struct 元素。分組每項父實體最多只會返回一個結果。</p></li>
@@ -310,5 +310,5 @@ results = client.hybrid_search(
 <li><p>若要先了解未分組的元素層級搜尋，請閱讀《<a href="/docs/zh-hant/basic-vector-search-with-structarray.md">使用 StructArray 進行基本向量搜尋</a>》。</p></li>
 <li><p>若要為分組搜尋新增標量篩選條件，請參閱《<a href="/docs/zh-hant/filtered-search-with-structarray.md">使用 StructArray 進行篩選搜尋</a>》。</p></li>
 <li><p>若要使用分數或距離邊界來取代分組，請參閱《<a href="/docs/zh-hant/range-search-with-structarray.md">使用 StructArray 進行範圍搜尋</a>》。</p></li>
-<li><p>若要查看 StructArray 的搜尋限制，請閱讀《<a href="/docs/zh-hant/structarray-limits.md">StructArray 限制</a>》。</p></li>
+<li><p>若要查看 StructArray 的搜尋限制，請閱讀《<a href="/docs/zh-hant/structarray-limits.md">StructArray 限制》</a>。</p></li>
 </ol>

@@ -109,7 +109,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>當標量條件必須套用至參與元素層級向量搜尋的同一 Struct 元素時，請使用 `<code translate="no">element_filter(structArrayField, predicate)</code> `。在謂詞內部，請使用 `<code translate="no">$[subfield]</code> ` 來指稱當前 Struct 元素的標量子欄位。</p>
+    </button></h2><p>當標量條件必須套用至參與元素層級向量搜尋的同一 Struct 元素時，請使用 `<code translate="no">element_filter(structArrayField, predicate)</code> `。在謂詞內部，請使用 `<code translate="no">$[subfield]</code> ` 來引用當前 Struct 元素的標量子欄位。</p>
 <pre><code translate="no" class="language-python">query_vector = [<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>]
 
 filter_expr = (
@@ -146,7 +146,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>在此範例中，頂層謂詞<code translate="no">category == &quot;search&quot;</code> 會選取候選實體，而<code translate="no">element_filter</code> 則將元素層級向量搜尋限制在同時滿足<code translate="no">section</code> 、<code translate="no">quality_score</code> 及<code translate="no">has_code</code> 的區塊內，且這些條件皆須在同一個 Struct 元素中匹配。</p>
+<p>在此範例中，頂層謂詞<code translate="no">category == &quot;search&quot;</code> 用於篩選候選實體，而<code translate="no">element_filter</code> 則將元素層級向量搜尋限制在同時滿足<code translate="no">section</code> 、<code translate="no">quality_score</code> 及<code translate="no">has_code</code> 的區塊內，且這些條件均須在同一個 Struct 元素中匹配。</p>
 <div class="alert note">
 <p>警告</p>
 <p>當您將頂層謂詞與<code translate="no">element_filter</code> 結合使用時，請將<code translate="no">element_filter</code> 置於表達式的末尾。一個篩選表達式中僅能包含一個<code translate="no">element_filter</code> ，且不得將<code translate="no">element_filter</code> 或<code translate="no">MATCH_*</code> 嵌套在另一個 StructArray 運算子之中。</p>
@@ -166,7 +166,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>當篩選條件需根據父實體的 Struct 元素來判定其是否符合資格時，請使用<code translate="no">MATCH_*</code> 運算子。這些運算子屬於列級篩選：它們會選取實體，但本身不會回傳元素偏移量。</p>
+    </button></h2><p>當篩選條件需根據父實體的 Struct 元素來判定其是否符合資格時，請使用<code translate="no">MATCH_*</code> 運算子。這些運算子屬於行級篩選：它們會選取實體，但本身不會回傳元素偏移量。</p>
 <table>
 <thead>
 <tr><th>運算子</th><th>適用於</th><th>範例</th></tr>

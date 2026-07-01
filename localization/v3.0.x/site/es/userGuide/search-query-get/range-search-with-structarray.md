@@ -48,7 +48,7 @@ summary: >-
 <tbody>
 <tr><td>Búsqueda en EmbeddingList</td><td>No compatible.</td><td>No aplicable.</td></tr>
 <tr><td>Búsqueda a nivel de elemento</td><td>Utiliza una consulta vectorial normal con ` <code translate="no">radius</code> ` y, opcionalmente, ` <code translate="no">range_filter</code>`.</td><td>Nivel de elemento de estructura.</td></tr>
-<tr><td>Búsqueda híbrida</td><td>Compatible cuando la solicitud de StructArray se dirige a un campo vectorial a nivel de elemento. Las solicitudes a nivel de EmbeddingList no admiten la búsqueda por rango.</td><td>Subbúsqueda a nivel de elemento, seguida de una reclasificación híbrida.</td></tr>
+<tr><td>Búsqueda híbrida</td><td>Compatible cuando la solicitud de StructArray se dirige a un campo vectorial a nivel de elemento. Las solicitudes a nivel de EmbeddingList no admiten la búsqueda por rango.</td><td>Subbúsqueda a nivel de elemento, seguida de una reordenación híbrida.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -107,7 +107,7 @@ summary: >-
 <tr><td><code translate="no">IP</code>, <code translate="no">COSINE</code></td><td>Sí. Cuanto mayor sea la puntuación, mejor.</td><td><code translate="no">radius &lt; distance &lt;= range_filter</code></td></tr>
 </tbody>
 </table>
-<p>Cuando solo se establece « <code translate="no">radius</code> », la búsqueda de rango devuelve resultados que cumplen el límite exterior de la métrica. Elige los valores según la escala de puntuación o distancia de tus incrustaciones.</p>
+<p>Cuando solo se establece « <code translate="no">radius</code> », la búsqueda por rango devuelve resultados que cumplen el límite exterior de la métrica. Elige los valores según la escala de puntuación o distancia de tus incrustaciones.</p>
 <h2 id="Run-element-level-range-search" class="common-anchor-header">Realizar una búsqueda por rango a nivel de elemento<button data-href="#Run-element-level-range-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -261,7 +261,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>En este ejemplo, solo la sub-solicitud « <code translate="no">chunks[emb]</code> » utiliza parámetros de búsqueda por rango. La solicitud de StructArray sigue respetando la semántica a nivel de elemento: el límite del rango se aplica a los resultados del elemento Struct antes de que la búsqueda híbrida combine y vuelva a clasificar los resultados.</p>
+<p>En este ejemplo, solo la subpetición « <code translate="no">chunks[emb]</code> » utiliza parámetros de búsqueda por rango. La petición de StructArray sigue respetando la semántica a nivel de elemento: el límite del rango se aplica a los resultados del elemento Struct antes de que la búsqueda híbrida combine y vuelva a clasificar los resultados.</p>
 <h2 id="Interpret-range-results" class="common-anchor-header">Interpretar los resultados del rango<button data-href="#Interpret-range-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -325,7 +325,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Realizar una búsqueda por rango en ` <code translate="no">chunks[emb_list_vector]</code>`, que está pensada para la búsqueda a nivel de `EmbeddingList`.</p></li>
+<li><p>Realizar una búsqueda por rango en ` <code translate="no">chunks[emb_list_vector]</code>`, que está pensada para la búsqueda en `EmbeddingList`.</p></li>
 <li><p>Utilizar ` <code translate="no">MAX_SIM_COSINE</code> ` en lugar de una métrica habitual, como ` <code translate="no">COSINE</code> `, para la búsqueda por rango a nivel de elemento.</p></li>
 <li><p>Utilizar una consulta de « <code translate="no">EmbeddingList</code> » en lugar de una consulta vectorial normal.</p></li>
 <li><p>Esperar que los resultados de la búsqueda por rango sean únicos por entidad principal. La búsqueda por rango devuelve resultados que coinciden con elementos de Struct.</p></li>

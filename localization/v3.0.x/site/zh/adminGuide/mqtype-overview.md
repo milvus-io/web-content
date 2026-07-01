@@ -40,7 +40,7 @@ summary: 概述 Milvus 支持的消息队列（mqType）选项，以及在独立
 </thead>
 <tbody>
 <tr><td><a href="/docs/zh/woodpecker.md">Woodpecker</a></td><td style="text-align:center">✔️（嵌入式）</td><td style="text-align:center">✔️（嵌入式或服务模式）</td><td><strong>Milvus 3.x</strong>（两种模式）</td><td>默认且推荐。基于对象存储的云原生WAL；无需外部服务。</td></tr>
-<tr><td><a href="/docs/zh/mq_pulsar.md">Pulsar</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td>≤ 2.5.x（集群默认）</td><td>受支持，可选外部服务或捆绑方案。</td></tr>
+<tr><td><a href="/docs/zh/mq_pulsar.md">Pulsar</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td>≤ 2.5.x（集群默认）</td><td>受支持，可选外部服务或捆绑提供。</td></tr>
 <tr><td><a href="/docs/zh/mq_kafka.md">Kafka</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td>—</td><td>受支持。仅支持 Kafka 2.x 或 3.x。</td></tr>
 <tr><td><a href="/docs/zh/mq_rocksmq.md">RocksMQ</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✖️</td><td>≤ 2.5.x（独立模式默认）</td><td><strong>仅</strong>支持<strong>独立</strong>模式。</td></tr>
 </tbody>
@@ -48,8 +48,8 @@ summary: 概述 Milvus 支持的消息队列（mqType）选项，以及在独立
 <div class="alert note">
 <ul>
 <li><p>每个 Milvus 实例仅使用一个消息队列。</p></li>
-<li><p><strong>消息队列限制</strong>：升级至 Milvus v3.0-beta 时，必须保留当前选择的消息队列。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</p></li>
-<li><p>若要更改正在运行的实例的消息队列，请参阅“切换消息队列类型”（自 v2.6.14 起支持）。</p></li>
+<li><p><strong>消息队列限制</strong>：升级至 Milvus v3.0-beta 时，必须保留当前的消息队列选择。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</p></li>
+<li><p>若要更改正在运行的实例的消息队列，请参阅<a href="/docs/zh/switch-mq-type.md">“切换消息队列类型”</a>。“切换消息队列”功能仅在<strong>Milvus 3.0 及更高版本中</strong>提供——请先升级至 Milvus 3.0 或更高版本。</p></li>
 </ul>
 </div>
 <h2 id="Choosing-a-message-queue" class="common-anchor-header">选择消息队列<button data-href="#Choosing-a-message-queue" class="anchor-icon" translate="no">
@@ -69,6 +69,6 @@ summary: 概述 Milvus 支持的消息队列（mqType）选项，以及在独立
       </svg>
     </button></h2><ul>
 <li><strong>新部署（Milvus 3.x）：</strong>请使用<strong>Woodpecker</strong>（默认）。独立部署采用嵌入式运行；对于分布式（集群）部署，推荐的默认方案是通过 Helm 部署的专用<a href="/docs/zh/woodpecker.md#Deployment-modes">服务</a>，同时也支持嵌入式运行。</li>
-<li><strong>现有 Pulsar 或 Kafka 用户：</strong>Pulsar 和 Kafka 仍受全面支持。您可以继续使用它们，或切换至 Woodpecker。</li>
-<li><strong>RocksMQ：</strong>仅支持独立部署，并在 Milvus 3.x 中已被嵌入式 Woodpecker 取代。</li>
+<li><strong>现有 Pulsar 或 Kafka 用户：</strong>Pulsar 和 Kafka 仍受全面支持。您可以继续使用它们，或<a href="/docs/zh/switch-mq-type.md">切换至 Woodpecker</a>。</li>
+<li><strong>RocksMQ：</strong>仅支持独立部署，且已被 Milvus 3.x 中的嵌入式 Woodpecker 取代。</li>
 </ul>

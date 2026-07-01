@@ -47,7 +47,7 @@ summary: >-
 <tbody>
 <tr><td>Pencarian EmbeddingList</td><td>Tidak didukung.</td><td>Tidak berlaku.</td></tr>
 <tr><td>Pencarian tingkat elemen</td><td>Gunakan kueri vektor biasa dengan ` <code translate="no">radius</code> ` dan, secara opsional, ` <code translate="no">range_filter</code>`.</td><td>Tingkat elemen struktur.</td></tr>
-<tr><td>Pencarian hibrida</td><td>Didukung jika permintaan StructArray menargetkan bidang vektor tingkat elemen. Permintaan tingkat EmbeddingList tidak mendukung pencarian rentang.</td><td>Pencarian sub-tingkat elemen, kemudian penentuan peringkat ulang hibrida.</td></tr>
+<tr><td>Pencarian hibrida</td><td>Didukung jika permintaan StructArray menargetkan bidang vektor tingkat elemen. Permintaan tingkat EmbeddingList tidak mendukung pencarian rentang.</td><td>Pencarian sub-tingkat elemen, kemudian pemeringkatan ulang hibrida.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -304,7 +304,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Jangan gunakan kueri " <code translate="no">EmbeddingList</code> " atau metrik " <code translate="no">MAX_SIM*</code> " untuk pencarian rentang pada subbidang vektor StructArray. Pencarian tingkat EmbeddingList tidak mendukung pencarian rentang.</p></li>
+<li><p>Jangan gunakan kueri ` <code translate="no">EmbeddingList</code> ` atau metrik ` <code translate="no">MAX_SIM*</code> ` untuk pencarian rentang pada subbidang vektor StructArray. Pencarian tingkat EmbeddingList tidak mendukung pencarian rentang.</p></li>
 <li><p>Jangan menggabungkan pencarian rentang dengan pencarian pengelompokan. Jika Anda memerlukan satu hasil per entitas induk, jalankan pencarian tingkat elemen tanpa parameter rentang dan gunakan pengelompokan jika didukung.</p></li>
 <li><p>Pencarian rentang hibrida didukung untuk bidang vektor tingkat elemen StructArray. Fitur ini tidak didukung untuk permintaan StructArray tingkat EmbeddingList.</p></li>
 </ul>

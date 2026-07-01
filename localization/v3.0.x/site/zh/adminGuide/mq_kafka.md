@@ -244,4 +244,5 @@ title: 卡夫卡
       </svg>
     </button></h2><ul>
 <li><a href="/docs/zh/woodpecker.md">Woodpecker（默认消息队列）</a></li>
+<li><a href="/docs/zh/switch-kafka-woodpecker.md">在 Kafka 和 Woodpecker 之间切换</a></li>
 </ul>

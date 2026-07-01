@@ -21,7 +21,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>使用本页面可按父实体对 StructArray 元素级搜索结果进行分组。当多个 Struct 元素匹配查询条件时，元素级搜索可能会返回来自同一实体的多个匹配结果。分组功能会将这些元素级匹配结果合并，确保每个父实体最多只出现一次。</p>
-<p>本页面<a href="/docs/zh/create-structarray-field.md">使用“创建 StructArray 字段</a>”中的<code translate="no">tech_articles</code> Collection。该 Collection 包含一个名为<code translate="no">chunks</code> 的 StructArray 字段。其<code translate="no">chunks[emb]</code> 向量子字段已针对元素级搜索进行了索引，并采用常规向量度量标准。</p>
+<p>本页面<a href="/docs/zh/create-structarray-field.md">使用“创建 StructArray 字段</a>”中的<code translate="no">tech_articles</code> Collection。该 Collection 包含一个名为<code translate="no">chunks</code> 的StructArray字段。其<code translate="no">chunks[emb]</code> 向量已通过常规向量度量标准进行索引，以支持元素级搜索。</p>
 <h2 id="How-grouping-applies-to-StructArray" class="common-anchor-header">分组在 StructArray 中的应用<button data-href="#How-grouping-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -169,7 +169,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>顶级谓词用于筛选候选实体。<code translate="no">element_filter</code> 谓词将元素级向量搜索限制在匹配的Struct元素范围内。随后，分组操作会根据主键合并匹配的元素命中结果。</p>
+<p>顶级谓词用于筛选候选实体。<code translate="no">element_filter</code> 谓词将元素级向量搜索限制在匹配的Struct元素范围内。随后，分组操作会根据主键将匹配的元素命中结果进行合并。</p>
 <h2 id="Use-grouping-in-hybrid-search" class="common-anchor-header">在混合搜索中使用分组<button data-href="#Use-grouping-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -217,7 +217,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>在此示例中，两个子请求均针对同一 StructArray 字段（<code translate="no">chunks</code> ）下的元素级向量字段。如果混合了普通向量字段、不同的 StructArray 字段或 EmbeddingList 级请求，则混合搜索不支持元素级分组。</p>
+<p>在此示例中，两个子请求均针对同一 StructArray 字段（<code translate="no">chunks</code> ）下的元素级向量字段。如果混合了普通向量字段、不同的 StructArray 字段或 EmbeddingList 级请求，混合搜索将不支持元素级分组。</p>
 <h2 id="Interpret-grouped-results" class="common-anchor-header">解析分组结果<button data-href="#Interpret-grouped-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -288,7 +288,7 @@ results = client.hybrid_search(
 <li><p>按非主键标量字段进行分组。</p></li>
 <li><p>按多个字段进行分组。元素级 StructArray 分组仅支持主键分组。</p></li>
 <li><p>期望分组结果能代表每个匹配的 Struct 元素。分组每个父实体最多返回一个结果。</p></li>
-<li><p>假设按元素级别分组的搜索会重新计算 EmbeddingList 风格的<code translate="no">MAX_SIM*</code> 得分。分组会合并元素级别的匹配结果；它不会改变评分模型。</p></li>
+<li><p>假设按元素级别分组的搜索会重新计算 EmbeddingList 风格的<code translate="no">MAX_SIM*</code> 得分。分组操作会合并元素级别的匹配结果，但不会改变评分模型。</p></li>
 <li><p>将<code translate="no">group_by_field</code> 与<code translate="no">radius</code> 或<code translate="no">range_filter</code> 结合使用。</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">下一步<button data-href="#Next-steps" class="anchor-icon" translate="no">

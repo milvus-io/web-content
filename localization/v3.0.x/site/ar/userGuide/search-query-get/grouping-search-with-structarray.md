@@ -50,7 +50,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>استخدم التجميع عندما يُرجع البحث على مستوى العنصر غير المجمّع عددًا كبيرًا جدًّا من الكيانات الأصلية المكررة. إذا كنت تريد أن يُعامل كل عنصر Struct مطابق على أنه نتيجة فردية، فاستخدم " <a href="/docs/ar/basic-vector-search-with-structarray.md">البحث المتجه الأساسي" مع StructArray</a> بدون <code translate="no">group_by_field</code>.</p>
+<p>استخدم التجميع عندما يعرض البحث على مستوى العنصر غير المجمّع عددًا كبيرًا جدًّا من الكيانات الأصلية المكررة. إذا كنت تريد أن يُعامل كل عنصر Struct مطابق على أنه نتيجة فردية، فاستخدم <a href="/docs/ar/basic-vector-search-with-structarray.md">"البحث المتجه الأساسي" مع StructArray</a> بدون <code translate="no">group_by_field</code>.</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">قبل البدء<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -146,7 +146,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكنك الجمع بين البحث المجمّع وتصفية StructArray القياسية. استخدم <code translate="no">element_filter</code> عندما يجب أن يقيد الشرط القياسي عناصر Struct التي تشارك في البحث المتجه على مستوى العنصر.</p>
+    </button></h2><p>يمكنك الجمع بين البحث المجمّع وتصفية StructArray القياسية. استخدم <code translate="no">element_filter</code> عندما يجب أن يقيد الشرط القياسي عناصر Struct التي تشارك في البحث المتجهي على مستوى العنصر.</p>
 <pre><code translate="no" class="language-python">filter_expr = (
     <span class="hljs-string">&#x27;category == &quot;search&quot; &amp;&amp; &#x27;</span>
     <span class="hljs-string">&#x27;element_filter(chunks, &#x27;</span>
@@ -187,7 +187,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يُعد التجميع الهجين باستخدام StructArray ميزة على مستوى العنصر. ولا يتم دعمه إلا عندما تستهدف جميع عمليات البحث الفرعية حقول متجهات على مستوى العنصر ضمن حقل StructArray نفسه. لا تستخدم طلبات على مستوى EmbeddingList في البحث الهجين المجمّع باستخدام StructArray.</p>
+    </button></h2><p>يُعد التجميع الهجين باستخدام StructArray ميزة على مستوى العنصر. ولا يتم دعمه إلا عندما تستهدف جميع عمليات البحث الفرعية حقول متجهات على مستوى العنصر ضمن حقل StructArray نفسه. لا تستخدم الطلبات على مستوى EmbeddingList في البحث الهجين المجمّع باستخدام StructArray.</p>
 <p>يفترض المثال التالي أن حقل StructArray <code translate="no">chunks</code> يحتوي على حقلين فرعيين متجهين على مستوى العنصر، وهما <code translate="no">chunks[emb]</code> و <code translate="no">chunks[code_emb]</code> ، وكلاهما مفهرس بمقاييس متجهة عادية.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest, RRFRanker
 
@@ -264,8 +264,8 @@ results = client.hybrid_search(
       </svg>
     </button></h2><ul>
 <li><p>لا ينطبق البحث بالتجميع إلا على البحث في متجه StructArray على مستوى العنصر. لا يدعم البحث في EmbeddingList والبحث الهجين على مستوى EmbeddingList التجميع.</p></li>
-<li><p>استخدم المفتاح الأساسي على النحو التالي: <code translate="no">group_by_field</code>. لا يُعد التجميع على مستوى عناصر StructArray عملية تجميع عامة الغرض عبر حقول عددية تعسفية.</p></li>
-<li><p>لا تقم بدمج البحث التجميعي مع البحث النطاقي.</p></li>
+<li><p>استخدم المفتاح الأساسي كـ <code translate="no">group_by_field</code>. لا يُعد التجميع على مستوى عناصر StructArray عملية تجميع عامة الغرض عبر حقول قياسية عشوائية.</p></li>
+<li><p>لا تقم بدمج البحث المجمّع مع البحث النطاقي.</p></li>
 <li><p>لا تستخدم استعلام <code translate="no">EmbeddingList</code> أو مقياس <code translate="no">MAX_SIM*</code> للبحث المجمّع.</p></li>
 <li><p>يتم دعم التجميع الهجين فقط عندما تستهدف جميع عمليات البحث الفرعية حقول متجهة على مستوى العنصر ضمن نفس حقل StructArray.</p></li>
 <li><p>لا يتم دعم التجميع الهجين عندما يخلط البحث الهجين بين حقل متجه عادي، أو حقل StructArray مختلف، أو طلب على مستوى EmbeddingList.</p></li>

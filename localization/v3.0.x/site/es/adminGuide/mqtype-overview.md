@@ -52,7 +52,7 @@ summary: >-
 <ul>
 <li><p>Cada instancia de Milvus utiliza exactamente una cola de mensajes.</p></li>
 <li><p><strong>Limitaciones de la cola de mensajes</strong>: al actualizar a Milvus v3.0-beta, debes mantener tu elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</p></li>
-<li><p>Para cambiar la cola de mensajes de una instancia en ejecución, consulta «Cambiar el tipo de cola de mensajes» (compatible a partir de la v2.6.14).</p></li>
+<li><p>Para cambiar la cola de mensajes de una instancia en ejecución, consulta <a href="/docs/es/switch-mq-type.md">«Cambiar tipo de cola de mensajes</a>». La función «Cambiar tipo de cola de mensajes» está disponible en <strong>Milvus 3.0 y versiones posteriores</strong>; actualiza primero a Milvus 3.0 o una versión posterior.</p></li>
 </ul>
 </div>
 <h2 id="Choosing-a-message-queue" class="common-anchor-header">Elección de una cola de mensajes<button data-href="#Choosing-a-message-queue" class="anchor-icon" translate="no">
@@ -71,7 +71,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Nuevas implementaciones (Milvus 3.x):</strong> utilice <strong>Woodpecker</strong> (el valor predeterminado). En el modo autónomo se ejecuta de forma integrada; para el modo distribuido (clúster), el valor predeterminado recomendado es un <a href="/docs/es/woodpecker.md#Deployment-modes">servicio</a> dedicado implementado con Helm, aunque también se admite la ejecución integrada.</li>
-<li><strong>Usuarios actuales de Pulsar o Kafka:</strong> Pulsar y Kafka siguen siendo totalmente compatibles. Mantén estos sistemas o cambia a Woodpecker.</li>
+<li><strong>Nuevas implementaciones (Milvus 3.x):</strong> utilice <strong>Woodpecker</strong> (la opción predeterminada). La versión independiente lo ejecuta de forma integrada; para la versión distribuida (clúster), la opción predeterminada recomendada es un <a href="/docs/es/woodpecker.md#Deployment-modes">servicio</a> dedicado implementado con Helm, aunque también se admite la ejecución integrada.</li>
+<li><strong>Usuarios actuales de Pulsar o Kafka:</strong> Pulsar y Kafka siguen siendo totalmente compatibles. Mantén estos servicios o <a href="/docs/es/switch-mq-type.md">cambia a Woodpecker</a>.</li>
 <li><strong>RocksMQ:</strong> solo en modo autónomo, y sustituido por Woodpecker integrado en Milvus 3.x.</li>
 </ul>

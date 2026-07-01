@@ -244,4 +244,5 @@ If you run Kafka and want to keep it, do not change the message queue during the
       </svg>
     </button></h2><ul>
 <li><a href="/docs/woodpecker.md">Woodpecker (default message queue)</a></li>
+<li><a href="/docs/switch-kafka-woodpecker.md">Switch between Kafka and Woodpecker</a></li>
 </ul>

@@ -25,7 +25,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Utilizzare questa pagina per eseguire una ricerca per intervallo sui sottocampi vettoriali di StructArray. La ricerca per intervallo restituisce i risultati vettoriali il cui punteggio o distanza rientra in un intervallo specificato. Per i campi StructArray, utilizzare la ricerca per intervallo con la ricerca vettoriale a livello di elemento, in cui ogni elemento Struct viene cercato in modo indipendente.</p>
-<p>Questa pagina utilizza la raccolta « <code translate="no">tech_articles</code> » ( <a href="/docs/it/create-structarray-field.md">Creazione di un campo StructArray</a>) tratta da <a href="/docs/it/create-structarray-field.md">«Create a StructArray Field»</a>(Creazione di un campo StructArray). La raccolta presenta un campo StructArray denominato « <code translate="no">chunks</code> ». Il sottocampo vettoriale « <code translate="no">chunks[emb]</code> » è indicizzato per la ricerca a livello di elemento con una metrica vettoriale regolare, come « <code translate="no">COSINE</code> », « <code translate="no">IP</code> » o « <code translate="no">L2</code> ».</p>
+<p>Questa pagina utilizza la raccolta " <code translate="no">tech_articles</code> " ( <a href="/docs/it/create-structarray-field.md">Creazione di un campo StructArray</a>) tratta da <a href="/docs/it/create-structarray-field.md">"Creare un campo StructArray</a>". La raccolta presenta un campo StructArray denominato " <code translate="no">chunks</code>". Il sottocampo vettoriale " <code translate="no">chunks[emb]</code> " è indicizzato per la ricerca a livello di elemento con una metrica vettoriale regolare, come " <code translate="no">COSINE</code>", " <code translate="no">IP</code>" o " <code translate="no">L2</code>".</p>
 <h2 id="How-range-search-applies-to-StructArray" class="common-anchor-header">Come si applica la ricerca per intervallo a StructArray<button data-href="#How-range-search-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -47,7 +47,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>Ricerca EmbeddingList</td><td>Non supportata.</td><td>Non applicabile.</td></tr>
-<tr><td>Ricerca a livello di elemento</td><td>Utilizzare una query vettoriale standard con <code translate="no">radius</code> e, facoltativamente, <code translate="no">range_filter</code>.</td><td>Livello degli elementi della struttura.</td></tr>
+<tr><td>Ricerca a livello di elemento</td><td>Utilizzare una query vettoriale regolare con <code translate="no">radius</code> e, facoltativamente, <code translate="no">range_filter</code>.</td><td>Livello degli elementi della struttura.</td></tr>
 <tr><td>Ricerca ibrida</td><td>Supportata quando la richiesta StructArray ha come obiettivo un campo vettoriale a livello di elemento. Le richieste a livello di EmbeddingList non supportano la ricerca per intervallo.</td><td>Ricerca secondaria a livello di elemento, seguita da un nuovo ordinamento ibrido.</td></tr>
 </tbody>
 </table>
@@ -81,7 +81,7 @@ summary: >-
 <tr><td>Dati della query</td><td>La query è un vettore regolare, non un <code translate="no">EmbeddingList</code>.</td></tr>
 </tbody>
 </table>
-<p>Per la configurazione dell’indice, consultare la sezione <a href="/docs/it/index-structarray-fields.md">Campi StructArray dell’indice</a>.</p>
+<p>Per la configurazione dell’indice, consultare <a href="/docs/it/index-structarray-fields.md">Campi StructArray dell’indice</a>.</p>
 <h2 id="Use-radius-and-rangefilter" class="common-anchor-header">Utilizzare radius e range_filter<button data-href="#Use-radius-and-rangefilter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -123,7 +123,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>L'esempio seguente cerca singoli blocchi i cui vettori di <code translate="no">chunks[emb]</code> siano sufficientemente simili al vettore di query. Ogni risultato trovato rappresenta un elemento Struct corrispondente.</p>
+    </button></h2><p>L'esempio seguente cerca singoli chunk i cui vettori di <code translate="no">chunks[emb]</code> siano sufficientemente simili al vettore di query. Ogni risultato trovato rappresenta un elemento Struct corrispondente.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -163,7 +163,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>In questo esempio, <code translate="no">COSINE</code> è una metrica di tipo "similarity", quindi l'intervallo dei risultati è maggiore di <code translate="no">radius</code> e minore o uguale a <code translate="no">range_filter</code>. Il valore <code translate="no">offset</code> identifica l'elemento Struct corrispondente nell'array <code translate="no">chunks</code> al momento della restituzione.</p>
+<p>In questo esempio, <code translate="no">COSINE</code> è una metrica di tipo "similarity", quindi l'intervallo dei risultati è maggiore di <code translate="no">radius</code> e minore o uguale a <code translate="no">range_filter</code>. Il valore <code translate="no">offset</code> identifica l'elemento Struct corrispondente nell'array <code translate="no">chunks</code> quando viene restituito.</p>
 <h2 id="Add-scalar-filters" class="common-anchor-header">Aggiungere filtri scalari<button data-href="#Add-scalar-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -350,5 +350,5 @@ results = client.hybrid_search(
 <li><p>Per conoscere le due modalità di ricerca vettoriale di base con StructArray, leggere <a href="/docs/it/basic-vector-search-with-structarray.md">Ricerca vettoriale di base con StructArray</a>.</p></li>
 <li><p>Per aggiungere filtri scalari alla ricerca per intervallo, consultare <a href="/docs/it/filtered-search-with-structarray.md">Ricerca filtrata con StructArray</a>.</p></li>
 <li><p>Per restituire al massimo un risultato per entità padre, ove supportato, leggere <a href="/docs/it/grouping-search-with-structarray.md">Ricerca raggruppata con StructArray</a>.</p></li>
-<li><p>Per verificare i limiti di ricerca specifici per versione, consultare <a href="/docs/it/structarray-limits.md">Limiti di StructArray</a>.</p></li>
+<li><p>Per verificare i limiti di ricerca specifici per versione, leggere <a href="/docs/it/structarray-limits.md">Limiti di StructArray</a>.</p></li>
 </ol>

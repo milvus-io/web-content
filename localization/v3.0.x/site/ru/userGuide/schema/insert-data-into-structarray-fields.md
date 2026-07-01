@@ -69,7 +69,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>В полезной нагрузке вставки поле « <code translate="no">chunks</code> » является обычным полем, значение которого представляет собой массив объектов Struct. Внутри каждого объекта используйте имена подполей, такие как « <code translate="no">text</code> » и « <code translate="no">emb</code> ». Используйте синтаксис пути, например « <code translate="no">chunks[text]</code> » или « <code translate="no">chunks[emb]</code> », только после вставки при создании индексов, выполнении поиска, построении фильтров или указании полей вывода.</p>
+<p>В полезной нагрузке вставки поле « <code translate="no">chunks</code> » является обычным полем, значение которого представляет собой массив объектов Struct. Внутри каждого объекта используйте имена подполей, такие как « <code translate="no">text</code> » и « <code translate="no">emb</code> ». Используйте синтаксис путей, например « <code translate="no">chunks[text]</code> » или « <code translate="no">chunks[emb]</code> », только после вставки при создании индексов, выполнении поиска, построении фильтров или указании полей вывода.</p>
 </div>
 <h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">Понимание структуры данных вставки<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -114,7 +114,7 @@ summary: >-
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">emb_list_vector</code> и <code translate="no">emb</code> являются отдельными подполями векторного типа, поскольку поддерживают разные режимы поиска. Поиск по EmbeddingList рассматривает все векторы в поле StructArray как один список вложений и возвращает результаты на уровне сущностей с метриками <code translate="no">MAX_SIM*</code>. Поиск на уровне элементов выполняет поиск по каждому элементу Struct независимо и может возвращать смещение найденного элемента. В этом примере для простоты в обоих полях хранятся одинаковые векторные значения. В производственном приложении можно хранить одинаковые вложения в обоих подполях, если оба режима поиска используют одно и то же вложение блоков, или хранить разные вложения, если эти два режима поиска используют разные представления.</p>
+<p><code translate="no">emb_list_vector</code> и <code translate="no">emb</code> являются отдельными подполями векторного типа, поскольку поддерживают разные режимы поиска. Поиск по EmbeddingList рассматривает все векторы в поле StructArray как один список вложений и возвращает результаты на уровне сущностей с метриками <code translate="no">MAX_SIM*</code>. Поиск на уровне элементов выполняет поиск по каждому элементу Struct независимо и может возвращать смещение найденного элемента. В данном примере для простоты в обоих полях хранятся одинаковые векторные значения. В производственном приложении можно хранить одинаковые вложения в обоих подполях, если оба режима поиска используют одно и то же вложение блоков, или хранить разные вложения, если эти два режима поиска используют разные представления.</p>
 <h2 id="Insert-rows" class="common-anchor-header">Вставка строк<button data-href="#Insert-rows" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -303,13 +303,13 @@ result = client.insert(
 <tr><th>Правило</th><th>Пояснение</th></tr>
 </thead>
 <tbody>
-<tr><td>Используйте массив объектов для поля StructArray.</td><td>Значение <code translate="no">chunks</code> представляет собой список, и каждый элемент в этом списке является элементом Struct.</td></tr>
+<tr><td>Используйте массив объектов для поля StructArray.</td><td>Значение <code translate="no">chunks</code> представляет собой список, и каждый элемент в списке является элементом Struct.</td></tr>
 <tr><td>Используйте имена подполей внутри каждого элемента Struct.</td><td>Вставьте ` <code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> ` внутрь ` <code translate="no">chunks</code>`, а не в ` <code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code>`.</td></tr>
 <tr><td>Соблюдайте схему Struct.</td><td>Каждый элемент Struct должен использовать подполя, определенные в схеме Struct.</td></tr>
 <tr><td>Размеры векторов должны совпадать.</td><td>Значения векторов должны соответствовать параметрам « <code translate="no">dim</code> », настроенным для их подполей вектора.</td></tr>
 <tr><td>Соблюдайте ограничения на размеры ( <code translate="no">max_capacity</code>).</td><td>Количество элементов Struct в одной сущности не должно превышать значение параметра « <code translate="no">max_capacity</code> » поля StructArray.</td></tr>
 <tr><td>Используйте отдельные векторные подполя для отдельных режимов поиска.</td><td>Если требуется как поиск по EmbeddingList, так и поиск на уровне элементов, записывайте значения вектора в оба подполя вектора.</td></tr>
-<tr><td>Используйте <code translate="no">null</code> только в том случае, если поле допускает значение null.</td><td>Поля StructArray, не допускающие нулевых значений, требуют действительных значений StructArray.</td></tr>
+<tr><td>Используйте <code translate="no">null</code> только в том случае, если поле допускает нулевые значения.</td><td>Поля StructArray, не допускающие нулевых значений, требуют действительных значений StructArray.</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">Распространенные ошибки<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
@@ -333,8 +333,8 @@ result = client.insert(
 <li><p>Вставка векторов с неправильным размером.</p></li>
 <li><p>Вставка большего количества элементов Struct, чем допускает <code translate="no">max_capacity</code>.</p></li>
 <li><p>Установка значения <code translate="no">null</code> только для одного подполя, в то время как другие подполя в том же значении StructArray являются допустимыми.</p></li>
-<li><p>Запись векторов только в поле « <code translate="no">emb_list_vector</code> », а затем попытка выполнить поиск на уровне элементов в поле « <code translate="no">chunks[emb]</code> ».</p></li>
-<li><p>Запись векторов только в поле « <code translate="no">emb</code> », а затем попытка выполнить поиск по EmbeddingList в поле « <code translate="no">chunks[emb_list_vector]</code> ».</p></li>
+<li><p>Запись векторов только в ` <code translate="no">emb_list_vector</code> `, а затем попытка запуска поиска на уровне элементов в ` <code translate="no">chunks[emb]</code>`.</p></li>
+<li><p>Запись векторов только в поле ` <code translate="no">emb</code> `, а затем попытка выполнить поиск по списку вложений (EmbeddingList) в поле ` <code translate="no">chunks[emb_list_vector]</code>`.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Следующие шаги<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"

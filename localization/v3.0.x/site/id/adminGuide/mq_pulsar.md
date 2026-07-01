@@ -42,7 +42,7 @@ title: Pulsar
 <tr><td>2.4.x dan versi sebelumnya</td><td>Pulsar v2</td><td>Pulsar v2</td></tr>
 </tbody>
 </table>
-<p>Sejak Milvus 2.5, chart Helm Milvus dan Milvus Operator secara default mengimplementasikan <strong>Pulsar v3</strong>; Pulsar v2 tetap kompatibel. Lihat <a href="/docs/id/upgrade-pulsar-v3.md">Memutakhirkan Pulsar dari v2 ke v3</a> dan <a href="/docs/id/use-pulsar-v2.md">Tetap Menggunakan Pulsar v2</a>.</p>
+<p>Sejak Milvus 2.5, chart Helm Milvus dan Milvus Operator secara default menginstal <strong>Pulsar v3</strong>; Pulsar v2 tetap kompatibel. Lihat <a href="/docs/id/upgrade-pulsar-v3.md">Memutakhirkan Pulsar dari v2 ke v3</a> dan <a href="/docs/id/use-pulsar-v2.md">Tetap Menggunakan Pulsar v2</a>.</p>
 <h2 id="Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="common-anchor-header">Menerapkan klaster Milvus dengan Pulsar menggunakan Helm<button data-href="#Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -103,7 +103,7 @@ title: Pulsar
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Untuk menghubungkan Milvus ke layanan Pulsar <strong>eksternal</strong>, nonaktifkan Pulsar yang disertakan dan aktifkan opsi " <code translate="no">externalPulsar</code> " dalam pengaturan override ` <code translate="no">values.yaml</code> `:</p>
+    </button></h3><p>Untuk menghubungkan Milvus ke layanan Pulsar <strong>eksternal</strong>, nonaktifkan Pulsar yang disertakan dan aktifkan opsi " <code translate="no">externalPulsar</code> " dalam pengaturan override di ` <code translate="no">values.yaml</code> `:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">pulsarv3:</span>
   <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span>
 <span class="hljs-attr">externalPulsar:</span>
@@ -183,7 +183,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Internal-in-cluster-Pulsar" class="common-anchor-header">Pulsar Internal (dalam kluster)<button data-href="#Internal-in-cluster-Pulsar" class="anchor-icon" translate="no">
+<h3 id="Internal-in-cluster-Pulsar" class="common-anchor-header">Pulsar Internal (di dalam kluster)<button data-href="#Internal-in-cluster-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -284,4 +284,5 @@ Jika Anda menjalankan Pulsar dan ingin tetap menggunakannya, jangan ubah antrian
       </svg>
     </button></h2><ul>
 <li><a href="/docs/id/woodpecker.md">Woodpecker (antrian pesan default)</a></li>
+<li><a href="/docs/id/switch-pulsar-woodpecker.md">Beralih antara Pulsar dan Woodpecker</a></li>
 </ul>

@@ -2,7 +2,7 @@
 id: grouping-search-with-structarray.md
 title: StructArray を使用した検索結果のグループ化
 summary: >-
-  このページを使用すると、StructArrayの要素レベルの検索結果を親エンティティごとにグループ化できます。要素レベルの検索では、複数のStruct要素がクエリに一致する場合、同じエンティティから複数の検索結果が返されることがあります。グループ化を行うと、これらの要素の検索結果がまとめられるため、各親エンティティは最大1回だけ表示されます。
+  このページを使用すると、StructArrayの要素レベルの検索結果を親エンティティごとにグループ化できます。要素レベルの検索では、複数のStruct要素がクエリに一致する場合、同じエンティティから複数の検索結果が返されることがあります。グループ化を行うと、これらの要素の検索結果がまとめられ、各親エンティティが最大1回だけ表示されるようになります。
 ---
 <h1 id="Grouping-Search-with-StructArray" class="common-anchor-header">StructArray を使用した検索結果のグループ化<button data-href="#Grouping-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -264,7 +264,7 @@ results = client.hybrid_search(
 <li><p>主キーを `<code translate="no">group_by_field</code>` として使用してください。StructArray の要素レベルのグループ化は、任意のスカラーフィールドに対する汎用的なグループ化ではありません。</p></li>
 <li><p>グループ化検索を範囲検索と組み合わせないでください。</p></li>
 <li><p>グループ化検索には、<code translate="no">EmbeddingList</code> クエリや<code translate="no">MAX_SIM*</code> メトリックを使用しないでください。</p></li>
-<li><p>ハイブリッドグループ化は、すべてのサブ検索が、同じ StructArray フィールドの下にある要素レベルのベクトルフィールドを対象としている場合にのみサポートされます。</p></li>
+<li><p>ハイブリッドグループ化は、すべてのサブ検索が同じ StructArray フィールドの下にある要素レベルのベクトルフィールドを対象としている場合にのみサポートされます。</p></li>
 <li><p>ハイブリッド検索で、通常のベクトルフィールド、別の StructArray フィールド、または EmbeddingList レベルのリクエストが混在している場合、ハイブリッドグループ化はサポートされません。</p></li>
 </ul>
 <h2 id="Common-mistakes" class="common-anchor-header">よくある間違い<button data-href="#Common-mistakes" class="anchor-icon" translate="no">

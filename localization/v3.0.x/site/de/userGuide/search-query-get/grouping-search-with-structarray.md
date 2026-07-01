@@ -47,8 +47,8 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>„EmbeddingList“-Suche</td><td>Nicht unterstützt.</td><td>Nicht zutreffend.</td></tr>
-<tr><td>Suche auf Elementebene</td><td>Wird durch Gruppierung nach dem Primärschlüssel unterstützt.</td><td>Liefert höchstens ein Ergebnis pro übergeordneter Entität. Metadaten auf Elementebene bleiben erhalten, sodass der Index oder Offset des ausgewählten Elements zurückgegeben werden kann, wenn dieser über die API oder das SDK verfügbar gemacht wird.</td></tr>
-<tr><td>Hybride Suche</td><td>Wird nur unterstützt, wenn alle Teilsuchen auf Vektorfelder auf Elementebene unter demselben StructArray-Feld abzielen.</td><td>Teilsuchen auf Elementebene werden vor der Verarbeitung des Endergebnisses nach Primärschlüssel gruppiert.</td></tr>
+<tr><td>Suche auf Elementebene</td><td>Wird durch Gruppierung nach dem Primärschlüssel unterstützt.</td><td>Liefert höchstens ein Ergebnis pro übergeordneter Entität. Metadaten auf Elementebene bleiben erhalten, sodass der Index oder Offset des ausgewählten Elements zurückgegeben werden kann, wenn dieser über die API oder das SDK bereitgestellt wird.</td></tr>
+<tr><td>Hybride Suche</td><td>Wird nur unterstützt, wenn alle Teilsuchen auf Vektorfelder auf Elementebene unter demselben StructArray-Feld abzielen.</td><td>Teilsuchen auf Elementebene werden vor der endgültigen Ergebnisverarbeitung nach Primärschlüssel gruppiert.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -81,7 +81,7 @@ summary: >-
 <tr><td>Keine Bereichsparameter</td><td>Kombinieren Sie die Gruppierungssuche nicht mit Bereichssuchparametern wie <code translate="no">radius</code> oder <code translate="no">range_filter</code>.</td></tr>
 </tbody>
 </table>
-<p>Informationen zur Indexeinrichtung finden Sie unter <a href="/docs/de/index-structarray-fields.md">„Index StructArray-Felder</a>“.</p>
+<p>Informationen zur Indexkonfiguration finden Sie unter <a href="/docs/de/index-structarray-fields.md">„Index StructArray-Felder</a>“.</p>
 <h2 id="Run-grouped-element-level-search" class="common-anchor-header">Gruppierte Suche auf Elementebene ausführen<button data-href="#Run-grouped-element-level-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

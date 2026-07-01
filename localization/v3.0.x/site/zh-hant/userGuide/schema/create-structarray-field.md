@@ -59,7 +59,7 @@ summary: >-
 <tr><td><code translate="no">text</code></td><td><code translate="no">VARCHAR</code></td><td>區塊文字。</td></tr>
 <tr><td><code translate="no">section</code></td><td><code translate="no">VARCHAR</code></td><td>區段名稱，例如<code translate="no">index</code> 、<code translate="no">search</code> 或<code translate="no">filter</code> 。</td></tr>
 <tr><td><code translate="no">page</code></td><td><code translate="no">INT64</code></td><td>該區塊的頁碼或邏輯位置。</td></tr>
-<tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>用於標量篩選和範圍範例中的區塊層級分數。</td></tr>
+<tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>用於標量篩選和範圍範例中的區塊級分數。</td></tr>
 <tr><td><code translate="no">has_code</code></td><td><code translate="no">BOOL</code></td><td>該片段是否包含程式碼。</td></tr>
 <tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>用於搭配<code translate="no">MAX_SIM*</code> 指標進行 EmbeddingList 搜尋的向量子欄位。</td></tr>
 <tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>用於搭配常規向量指標進行元素層級搜尋的向量子欄位。</td></tr>
@@ -83,7 +83,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>StructArray 欄位會為每個 Struct 子欄位儲存一個陣列值。定義 Struct 模式時，請從受支援的標量與向量家族中選擇子欄位類型。</p>
+    </button></h2><p>StructArray 欄位會為每個 Struct 子欄位儲存一個陣列值。定義 Struct 模式時，請從受支援的標量與向量類別中選擇子欄位類型。</p>
 <table>
 <thead>
 <tr><th>Struct 子欄位的實體類型</th><th>支援</th><th>備註</th></tr>
@@ -127,7 +127,7 @@ summary: >-
 <ol>
 <li><p>建立集合架構。</p></li>
 <li><p>新增集合層級的欄位，例如主鍵和文章層級的欄位。</p></li>
-<li><p>為儲存於 StructArray 欄位內的元素建立 Struct 架構。</p></li>
+<li><p>為儲存於 StructArray 欄位內的元素建立 Struct 模式。</p></li>
 <li><p>在 Struct 模式中新增標量與向量子欄位。</p></li>
 <li><p>新增一個陣列欄位，並將其<code translate="no">element_type=DataType.STRUCT</code> 設為 Struct 模式。</p></li>
 <li><p>將 `<code translate="no">struct_schema</code> ` 設定為 `Struct` 模式。</p></li>
@@ -235,7 +235,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>建立 StructArray 欄位後，請使用<code translate="no">structArray[subfield]</code> 路徑語法來引用其子欄位。在建立索引、搜尋向量子欄位、輸出子欄位或建立標量篩選器時，請使用此語法。</p>
+    </button></h2><p>建立 StructArray 欄位後，請使用<code translate="no">structArray[subfield]</code> 路徑語法來參照其子欄位。在建立索引、搜尋向量子欄位、輸出子欄位或建立標量篩選器時，請使用此語法。</p>
 <table>
 <thead>
 <tr><th>路徑</th><th>含義</th><th>常見用法</th></tr>
@@ -243,7 +243,7 @@ client.create_collection(
 <tbody>
 <tr><td><code translate="no">chunks[text]</code></td><td><code translate="no">text</code> 子欄位位於每個 Struct 元素內部。</td><td>輸出欄位或標量篩選。</td></tr>
 <tr><td><code translate="no">chunks[section]</code></td><td>每個區塊的區段標籤。</td><td>標量濾波。</td></tr>
-<tr><td><code translate="no">chunks[quality_score]</code></td><td>區塊層級的品質分數。</td><td>標量過濾或標量索引。</td></tr>
+<tr><td><code translate="no">chunks[quality_score]</code></td><td>區塊層級的品質分數。</td><td>標量篩選或標量索引。</td></tr>
 <tr><td><code translate="no">chunks[emb_list_vector]</code></td><td>用作嵌入清單的向量子欄位。</td><td>使用 `<code translate="no">MAX_SIM*</code>` 進行 `EmbeddingList` 搜尋。</td></tr>
 <tr><td><code translate="no">chunks[emb]</code></td><td>每個 Struct 元素獨立使用的向量子欄位。</td><td>元素層級的向量搜尋。</td></tr>
 </tbody>
@@ -337,7 +337,7 @@ client.add_collection_struct_field(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>新增 StructArray 欄位後，現有實體針對該新欄位的所有子欄位，皆會傳回 `<code translate="no">null</code> `。</p>
-<p>StructArray 欄位建立後，您無法向該現有 StructArray 欄位新增子欄位。若日後需要額外的元素屬性，請呼叫 `<code translate="no">drop_collection_field()</code> ` 來刪除該 StructArray 欄位，然後使用更新的 Struct 架構新增一個新的 StructArray 欄位。</p>
+<p>StructArray 欄位建立後，您無法向該現有 StructArray 欄位新增子欄位。若日後需要額外的元素屬性，請呼叫 `<code translate="no">drop_collection_field()</code> ` 來刪除該 StructArray 欄位，然後使用更新後的 Struct 架構新增一個新的 StructArray 欄位。</p>
 <pre><code translate="no" class="language-python">client.drop_collection_field(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
     field_name=<span class="hljs-string">&quot;chunks&quot;</span>,
@@ -373,7 +373,7 @@ client.add_collection_struct_field(
 <tbody>
 <tr><td>Struct 用作 Array 元素類型。</td><td>請使用<code translate="no">element_type=STRUCT</code> 建立 StructArray 欄位作為 Array 欄位。請勿將 Struct 建立為頂層集合欄位。</td></tr>
 <tr><td>所有元素共用一個架構。</td><td>同一 StructArray 欄位中的每個 Struct 元素均遵循為該欄位所定義的 Struct 架構。</td></tr>
-<tr><td><code translate="no">max_capacity</code> 是必填的。</td><td>此欄位會限制每個實體可在 StructArray 欄位中儲存的 Struct 元素數量。</td></tr>
+<tr><td><code translate="no">max_capacity</code> 此欄位為必填。</td><td>此欄位會限制每個實體可在 StructArray 欄位中儲存的 Struct 元素數量。</td></tr>
 <tr><td>僅允許使用受支援的子欄位類型。</td><td>請使用 StructArray 支援的標量和向量子欄位類型。請勿定義 JSON、Geometry、Text、Timestamptz、SparseFloatVector 或嵌套的 Struct / Array 子欄位。</td></tr>
 <tr><td>向量子欄位在搜尋前需要建立索引。</td><td>在執行向量搜尋之前，請先針對路徑（例如<code translate="no">chunks[emb_list_vector]</code> 或<code translate="no">chunks[emb]</code> ）建立索引。</td></tr>
 <tr><td>每個向量子欄位僅對應一個索引。</td><td>若需同時進行 EmbeddingList 搜尋與元素層級搜尋，請建立兩個獨立的向量子欄位。</td></tr>

@@ -47,7 +47,7 @@ summary: >-
 <tbody>
 <tr><td>Filtern nach einem Skalarfeld der obersten Ebene, z. B. <code translate="no">category</code>.</td><td>Regulärer Filterausdruck.</td><td>Wählt übergeordnete Entitäten vor oder während der Suche aus.</td></tr>
 <tr><td>Beschränkt die Vektorsuche auf Elementebene auf Struct-Elemente, die den skalaren Bedingungen entsprechen.</td><td><code translate="no">element_filter</code>.</td><td>Durchsucht nur übereinstimmende Struct-Elemente und kann Offsets der übereinstimmenden Elemente zurückgeben.</td></tr>
-<tr><td>Wählt Entitäten danach aus, ob ein, alle oder eine bestimmte Anzahl von Struct-Elementen einem Prädikat entsprechen.</td><td><code translate="no">MATCH_ANY</code>, <code translate="no">MATCH_ALL</code>, <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> oder <code translate="no">MATCH_EXACT</code>.</td><td>Filterung auf Zeilenebene. Diese Operatoren geben selbst keine Offsets zurück.</td></tr>
+<tr><td>Wählt Entitäten danach aus, ob einige, alle oder eine bestimmte Anzahl von Struct-Elementen einem Prädikat entsprechen.</td><td><code translate="no">MATCH_ANY</code>, <code translate="no">MATCH_ALL</code>, <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> oder <code translate="no">MATCH_EXACT</code>.</td><td>Filterung auf Zeilenebene. Diese Operatoren geben selbst keine Offsets zurück.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -282,7 +282,7 @@ results = client.hybrid_search(
 <tr><td>Vektor-Teilfelder</td><td>Werden nicht als skalare Prädikate für „ <code translate="no">$[...]</code> “ unterstützt. Verwenden Sie stattdessen Vektor-Teilfelder über die Vektorsuche.</td></tr>
 </tbody>
 </table>
-<p>Für nicht unterstützte Fälle wie JSON-Pfade, Array-Container-Funktionen, Textabgleichsfunktionen, Null-Prädikate auf ` <code translate="no">$[...]</code>`, Geometrie-Funktionen, `Timestamptz`-Ausdrücke und generische Funktionsaufrufe siehe <a href="/docs/de/struct-array-operators.md">„StructArray-Operatoren</a>“.</p>
+<p>Für nicht unterstützte Fälle wie JSON-Pfade, Array-Container-Funktionen, Textvergleichsfunktionen, Null-Prädikate auf ` <code translate="no">$[...]</code>`, Geometrie-Funktionen, `Timestamptz`-Ausdrücke und generische Funktionsaufrufe siehe <a href="/docs/de/struct-array-operators.md">„StructArray-Operatoren</a>“.</p>
 <h2 id="Common-mistakes" class="common-anchor-header">Häufige Fehler<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

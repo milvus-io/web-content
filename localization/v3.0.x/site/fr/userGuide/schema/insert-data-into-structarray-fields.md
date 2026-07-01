@@ -64,7 +64,7 @@ summary: >-
 <tr><td><code translate="no">page</code></td><td><code translate="no">INT64</code></td><td>Numéro de page ou position logique.</td></tr>
 <tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>Note au niveau du bloc.</td></tr>
 <tr><td><code translate="no">has_code</code></td><td><code translate="no">BOOL</code></td><td>Indique si le bloc contient du code.</td></tr>
-<tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Vecteur généré pour la recherche EmbeddingList.</td></tr>
+<tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Vecteur écrit pour la recherche EmbeddingList.</td></tr>
 <tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Vecteur créé pour la recherche au niveau des éléments.</td></tr>
 </tbody>
 </table>
@@ -114,7 +114,7 @@ summary: >-
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">emb_list_vector</code> et <code translate="no">emb</code> sont des sous-champs vectoriels distincts, car ils prennent en charge des modes de recherche différents. La recherche EmbeddingList traite tous les vecteurs d’un champ StructArray comme une seule liste d’embeddings et renvoie des résultats au niveau de l’entité avec des métriques de type « <code translate="no">MAX_SIM*</code> ». La recherche au niveau des éléments explore chaque élément Struct indépendamment et peut renvoyer l’offset de l’élément correspondant. Dans cet exemple, par souci de simplicité, les mêmes valeurs vectorielles sont stockées dans les deux champs. Dans une application de production, vous pouvez stocker les mêmes représentations dans les deux sous-champs lorsque les deux modes de recherche utilisent la même représentation par blocs, ou stocker des représentations différentes lorsque les deux modes de recherche utilisent des représentations différentes.</p>
+<p><code translate="no">emb_list_vector</code> et <code translate="no">emb</code> sont des sous-champs vectoriels distincts, car ils prennent en charge des modes de recherche différents. La recherche EmbeddingList traite tous les vecteurs d’un champ StructArray comme une seule liste d’embeddings et renvoie des résultats au niveau de l’entité avec des métriques de type « <code translate="no">MAX_SIM*</code> ». La recherche au niveau des éléments explore chaque élément Struct indépendamment et peut renvoyer l’offset de l’élément correspondant. Dans cet exemple, pour plus de simplicité, les mêmes valeurs vectorielles sont stockées dans les deux champs. Dans une application de production, vous pouvez stocker les mêmes représentations dans les deux sous-champs lorsque les deux modes de recherche utilisent la même représentation par bloc, ou stocker des représentations différentes lorsque les deux modes de recherche utilisent des représentations différentes.</p>
 <h2 id="Insert-rows" class="common-anchor-header">Insérer des lignes<button data-href="#Insert-rows" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -246,7 +246,7 @@ result = client.insert(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Lorsqu’un champ StructArray pouvant prendre la valeur null contient une valeur StructArray valide, tous les sous-champs de cette valeur doivent soit être nuls, soit avoir des valeurs valides. L’insertion d’une entité dont certains sous-champs sont définis sur null et d’autres sur des valeurs valides entraîne une erreur.</p>
+<p>Lorsqu’un champ StructArray pouvant prendre la valeur null contient une valeur StructArray valide, tous les sous-champs de cette valeur doivent être soit nuls, soit avoir des valeurs valides. L’insertion d’une entité dont certains sous-champs sont définis sur null et d’autres sur des valeurs valides entraîne une erreur.</p>
 <div class="alert note">
 <p>Avertissement
 Les champs StructArray pouvant prendre la valeur null ne sont disponibles que dans Milvus v3.0.x. Si vous ajoutez dynamiquement un champ StructArray à une collection existante, le champ ajouté doit pouvoir prendre la valeur null, et les entités existantes doivent renvoyer « <code translate="no">null</code> » pour le nouveau champ sur l’ensemble de ses sous-champs.</p>
@@ -304,7 +304,7 @@ Les champs StructArray pouvant prendre la valeur null ne sont disponibles que da
 </thead>
 <tbody>
 <tr><td>Utilisez un tableau d’objets pour un champ StructArray.</td><td>La valeur de <code translate="no">chunks</code> est une liste, et chaque élément de cette liste est un élément Struct.</td></tr>
-<tr><td>Utilisez des noms de sous-champs à l'intérieur de chaque élément Struct.</td><td>Insérez « <code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> » à l'intérieur de « <code translate="no">chunks</code> », et non dans « <code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code> ».</td></tr>
+<tr><td>Utilisez des noms de sous-champs à l'intérieur de chaque élément Struct.</td><td>Insérez « <code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> » dans « <code translate="no">chunks</code> », et non dans « <code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code> ».</td></tr>
 <tr><td>Respectez le schéma de la structure.</td><td>Chaque élément Struct doit utiliser les sous-champs définis dans le schéma Struct.</td></tr>
 <tr><td>Respectez les dimensions des vecteurs.</td><td>Les valeurs des vecteurs doivent correspondre aux « <code translate="no">dim</code> » configurées pour leurs sous-champs vectoriels.</td></tr>
 <tr><td>Respecter l’ <code translate="no">max_capacity</code>.</td><td>Le nombre d’éléments Struct dans une entité ne doit pas dépasser l’ <code translate="no">max_capacity</code> du champ StructArray.</td></tr>
@@ -328,7 +328,7 @@ Les champs StructArray pouvant prendre la valeur null ne sont disponibles que da
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Utilisation de chemins de champ tels que « <code translate="no">chunks[text]</code> » dans les charges utiles d’insertion.</p></li>
+<li><p>Utilisation de chemins d’accès aux champs tels que « <code translate="no">chunks[text]</code> » dans les charges utiles d’insertion.</p></li>
 <li><p>Omission de sous-champs obligatoires dans un élément Struct.</p></li>
 <li><p>Insérer des vecteurs dont la dimension est incorrecte.</p></li>
 <li><p>Insérer plus d’éléments Struct que ne le permet <code translate="no">max_capacity</code>.</p></li>

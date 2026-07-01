@@ -2056,15 +2056,27 @@
         "order": 14,
         "children": [
           {
-            "label": "Milvus Cluster switch MQ Type",
-            "id": "switch_milvus_cluster_mq_type-operator.md",
+            "label": "Overview",
+            "id": "switch-mq-type.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "Milvus Standalone switch MQ type",
-            "id": "switch_milvus_standalone_mq_type-operator.md",
+            "label": "RocksMQ ↔ Woodpecker",
+            "id": "switch-rocksmq-woodpecker.md",
             "order": 1,
+            "children": []
+          },
+          {
+            "label": "Pulsar ↔ Woodpecker",
+            "id": "switch-pulsar-woodpecker.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Kafka ↔ Woodpecker",
+            "id": "switch-kafka-woodpecker.md",
+            "order": 3,
             "children": []
           }
         ]

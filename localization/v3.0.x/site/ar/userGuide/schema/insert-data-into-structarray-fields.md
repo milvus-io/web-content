@@ -3,7 +3,7 @@ id: insert-data-into-structarray-fields.md
 title: إدراج البيانات في حقول StructArray
 summary: >-
   أدخل البيانات في حقل StructArray عندما تحتوي كل كيان على قائمة مرتبة من
-  العناصر المنظمة. في حمولة الإدراج، يُمثَّل حقل StructArray كمصفوفة من
+  العناصر المنظمة. في حمولة الإدخال، يُمثَّل حقل StructArray كمصفوفة من
   الكائنات. ويمثل كل كائن عنصرًا واحدًا من عناصر Struct ويستخدم أسماء الحقول
   الفرعية لـ Struct المُعرَّفة في مخطط المجموعة.
 ---
@@ -68,7 +68,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>في حمولة الإدراج، يُعد « <code translate="no">chunks</code> » حقلًا عاديًا تكون قيمته عبارة عن مصفوفة من كائنات Struct. داخل كل كائن، استخدم أسماء الحقول الفرعية مثل « <code translate="no">text</code> » و« <code translate="no">emb</code> ». استخدم صيغة المسار، مثل « <code translate="no">chunks[text]</code> » أو « <code translate="no">chunks[emb]</code> »، فقط بعد الإدراج عند إنشاء الفهارس أو إجراء عمليات البحث أو إنشاء المرشحات أو تحديد حقول الإخراج.</p>
+<p>في حمولة الإدراج، يُعد « <code translate="no">chunks</code> » حقلًا عاديًا تكون قيمته عبارة عن مصفوفة من كائنات Struct. داخل كل كائن، استخدم أسماء الحقول الفرعية مثل « <code translate="no">text</code> » و« <code translate="no">emb</code> ». استخدم صيغة المسار، مثل « <code translate="no">chunks[text]</code> » أو « <code translate="no">chunks[emb]</code> »، فقط بعد الإدراج عند إنشاء الفهارس أو إجراء عمليات البحث أو إنشاء عوامل التصفية أو تحديد حقول الإخراج.</p>
 </div>
 <h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">فهم شكل حمولة الإدراج<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -85,7 +85,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تعد قيمة « <code translate="no">chunks</code> » مصفوفة من عناصر Struct. كل عنصر هو كائن تكون مفاتيحه أسماء حقول فرعية.</p>
+    </button></h2><p>تعد قيمة <code translate="no">chunks</code> مصفوفة من عناصر Struct. كل عنصر هو كائن تكون مفاتيحه أسماء حقول فرعية.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;doc_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;StructArray indexing patterns&quot;</span><span class="hljs-punctuation">,</span>
@@ -231,7 +231,7 @@ result = client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>إذا كان حقل ` <code translate="no">chunks</code> ` قابلاً للقيمة الفارغة، فيمكن للكيان تعيين حقل ` <code translate="no">chunks</code> ` بأكمله إلى القيمة الفارغة. في لغة Python، استخدم ` <code translate="no">None</code> ` لتمثيل القيمة الفارغة.</p>
+    </button></h2><p>إذا كان حقل ` <code translate="no">chunks</code> ` قابلاً للقيمة `null`، فيمكن للكيان تعيين حقل ` <code translate="no">chunks</code> ` بأكمله إلى `null`. في لغة Python، استخدم ` <code translate="no">None</code> ` لتمثيل قيمة `null`.</p>
 <pre><code translate="no" class="language-python">client.insert(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
     data=[
@@ -248,7 +248,7 @@ result = client.insert(
 <p>عندما يحتوي حقل StructArray القابل للقيمة الفارغة على قيمة StructArray صالحة، يجب أن تكون جميع الحقول الفرعية في تلك القيمة إما فارغة أو ذات قيم صالحة. يؤدي إدراج كيان مع تعيين بعض الحقول الفرعية على القيمة الفارغة وتعيين أخرى على قيم صالحة إلى حدوث خطأ.</p>
 <div class="alert note">
 <p>تحذير
-حقول StructArray القابلة للتعيين بقيمة null متاحة فقط في Milvus v3.0.x. إذا قمت بإضافة حقل StructArray ديناميكيًا إلى مجموعة موجودة، فيجب أن يكون الحقل المضاف قابلاً للتعيين بقيمة null، وتقوم الكيانات الموجودة بإرجاع قيمة " <code translate="no">null</code> " للحقل الجديد عبر جميع حقوله الفرعية.</p>
+حقول StructArray القابلة للتعيين بقيمة null متاحة فقط في Milvus v3.0.x. إذا قمت بإضافة حقل StructArray ديناميكيًا إلى مجموعة موجودة، فيجب أن يكون الحقل المضاف قابلاً للتعيين بقيمة null، وتُرجع الكيانات الموجودة قيمة " <code translate="no">null</code> " للحقل الجديد عبر جميع حقوله الفرعية.</p>
 </div>
 <h2 id="Validate-inserted-data" class="common-anchor-header">التحقق من صحة البيانات المُدرجة<button data-href="#Validate-inserted-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -303,10 +303,10 @@ result = client.insert(
 </thead>
 <tbody>
 <tr><td>استخدم مصفوفة من الكائنات لحقل StructArray.</td><td>قيمة <code translate="no">chunks</code> هي قائمة، وكل عنصر في القائمة هو عنصر Struct.</td></tr>
-<tr><td>استخدم أسماء الحقول الفرعية داخل كل عنصر من عناصر Struct.</td><td>أدخل " <code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> " داخل " <code translate="no">chunks</code>"، وليس " <code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code>".</td></tr>
-<tr><td>تأكد من مطابقة مخطط Struct.</td><td>يجب أن يستخدم كل عنصر Struct الحقول الفرعية المحددة في مخطط Struct.</td></tr>
-<tr><td>تطابق أبعاد المتجه.</td><td>يجب أن تتطابق قيم المتجهات مع <code translate="no">dim</code> المُعدة لحقولها الفرعية المتجهة.</td></tr>
-<tr><td>يجب مراعاة " <code translate="no">max_capacity</code>".</td><td>يجب ألا يتجاوز عدد عناصر Struct في كيان واحد القيم المحددة مسبقًا ( <code translate="no">max_capacity</code> ) لحقل StructArray.</td></tr>
+<tr><td>استخدم أسماء الحقول الفرعية داخل كل عنصر Struct.</td><td>أدخل <code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> داخل <code translate="no">chunks</code> ، وليس <code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code>.</td></tr>
+<tr><td>تأكد من مطابقة مخطط Struct.</td><td>يجب أن يستخدم كل عنصر من عناصر Struct الحقول الفرعية المحددة في مخطط Struct.</td></tr>
+<tr><td>تطابق أبعاد المتجهات.</td><td>يجب أن تتطابق قيم المتجهات مع <code translate="no">dim</code> المُعدة لحقولها الفرعية المتجهة.</td></tr>
+<tr><td>يجب مراعاة " <code translate="no">max_capacity</code>".</td><td>يجب ألا يتجاوز عدد عناصر Struct في كيان واحد الحد الأقصى المسمى ( <code translate="no">max_capacity</code> ) لحقل StructArray.</td></tr>
 <tr><td>استخدم حقول فرعية متجهة منفصلة لأوضاع البحث المنفصلة.</td><td>إذا كان كل من البحث في EmbeddingList والبحث على مستوى العنصر مطلوبين، فاكتب قيم المتجهات في كل من الحقول الفرعية للمتجهات.</td></tr>
 <tr><td>استخدم <code translate="no">null</code> فقط عندما يكون الحقل قابلاً للقيمة الفارغة.</td><td>تتطلب حقول StructArray غير القابلة للقيمة الفارغة قيم StructArray صالحة.</td></tr>
 </tbody>

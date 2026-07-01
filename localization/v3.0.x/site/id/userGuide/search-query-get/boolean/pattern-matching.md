@@ -58,7 +58,7 @@ res = client.query(
 </thead>
 <tbody>
 <tr><td><code translate="no">VARCHAR</code> bidang</td><td>Ya</td><td>Ya</td><td>Target umum untuk pencocokan pola pada bidang string.</td></tr>
-<tr><td><code translate="no">JSON</code> jalur dengan tipe konversi <code translate="no">VARCHAR</code> </td><td>Ya</td><td>Ya</td><td>Nilai jalur JSON harus berupa string agar pencocokan berhasil. Jika Anda membuat indeks pada jalur JSON untuk percepatan, atur <code translate="no">json_cast_type=&quot;varchar&quot;</code>.</td></tr>
+<tr><td><code translate="no">JSON</code> jalur dengan tipe konversi <code translate="no">VARCHAR</code> </td><td>Ya</td><td>Ya</td><td>Nilai jalur JSON harus berupa string agar pencocokan berhasil. Jika Anda membuat indeks pada jalur JSON untuk percepatan, atur ` <code translate="no">json_cast_type=&quot;varchar&quot;</code>`.</td></tr>
 <tr><td><code translate="no">ARRAY&lt;VARCHAR&gt;</code> elemen</td><td>Ya</td><td>Ya</td><td>Cocokkan elemen tertentu berdasarkan indeks, seperti <code translate="no">tags[0]</code>. Pencocokan pola <strong>tidak</strong> memindai semua elemen; pencocokan hanya berlaku untuk elemen pada indeks yang ditentukan.</td></tr>
 <tr><td>Numerik, Boolean, vektor, <code translate="no">TEXT</code>, atau target non-<code translate="no">VARCHAR</code> lainnya</td><td>Tidak</td><td>Tidak</td><td>Pencocokan pola hanya tersedia untuk nilai <code translate="no">VARCHAR</code>, jalur JSON yang diterjemahkan menjadi string, atau elemen <code translate="no">ARRAY&lt;VARCHAR&gt;</code> yang diindeks.</td></tr>
 </tbody>
@@ -110,7 +110,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Operator <code translate="no">LIKE</code> digunakan untuk pencocokan wildcard sederhana pada nilai string. Operator ini hanya mendukung wildcard berikut:</p>
+    </button></h2><p>Operator <code translate="no">LIKE</code> digunakan untuk pencocokan karakter pengganti sederhana pada nilai string. Operator ini hanya mendukung karakter pengganti berikut:</p>
 <table>
 <thead>
 <tr><th>Karakter pengganti</th><th>Deskripsi</th></tr>
@@ -179,7 +179,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Dalam pola ` <code translate="no">LIKE</code> `, ` <code translate="no">%</code> ` mencocokkan nol atau lebih karakter, sedangkan ` <code translate="no">_</code> ` mencocokkan tepat satu karakter. Untuk mencocokkan ` <code translate="no">%</code>`, ` <code translate="no">_</code>`, atau ` <code translate="no">\</code> ` secara literal, lakukan escaping pada karakter tersebut dengan tanda backslash (<code translate="no">\</code>):</p>
+    </button></h3><p>Dalam pola <code translate="no">LIKE</code>, <code translate="no">%</code> cocok dengan nol atau lebih karakter, dan <code translate="no">_</code> cocok dengan tepat satu karakter. Untuk mencocokkan <code translate="no">%</code>, <code translate="no">_</code>, atau <code translate="no">\</code> secara literal, lakukan escaping pada karakter tersebut dengan tanda backslash (<code translate="no">\</code>):</p>
 <ul>
 <li><code translate="no">name LIKE r&quot;\%&quot;</code> cocok dengan nilai literal <code translate="no">%</code>.</li>
 <li><code translate="no">name LIKE r&quot;\_%&quot;</code> cocok dengan nilai yang dimulai dengan karakter literal <code translate="no">_</code>.</li>

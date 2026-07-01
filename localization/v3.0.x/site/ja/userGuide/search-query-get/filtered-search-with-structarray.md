@@ -173,7 +173,7 @@ results = client.search(
 <tr><th>演算子</th><th>次のような場合に使用します</th><th>例</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">MATCH_ANY</code></td><td>少なくとも1つのStruct要素が述語を満たす必要があります。</td><td><code translate="no">MATCH_ANY(chunks, $[section] == &quot;index&quot;)</code></td></tr>
+<tr><td><code translate="no">MATCH_ANY</code></td><td>少なくとも1つのStruct要素が述語を満たしている必要があります。</td><td><code translate="no">MATCH_ANY(chunks, $[section] == &quot;index&quot;)</code></td></tr>
 <tr><td><code translate="no">MATCH_ALL</code></td><td>すべての Struct 要素が述語を満たす必要があります。</td><td><code translate="no">MATCH_ALL(chunks, $[quality_score] &gt; 0.5)</code></td></tr>
 <tr><td><code translate="no">MATCH_LEAST</code></td><td>少なくとも<code translate="no">N</code> 個のStruct要素が述語を満たす必要があります。</td><td><code translate="no">MATCH_LEAST(chunks, $[has_code] == true, threshold=2)</code></td></tr>
 <tr><td><code translate="no">MATCH_MOST</code></td><td><code translate="no">N</code> 個以下のStruct要素が述語を満たす必要があります。</td><td><code translate="no">MATCH_MOST(chunks, $[section] == &quot;appendix&quot;, threshold=1)</code></td></tr>
@@ -201,7 +201,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>EmbeddingListの検索結果はエンティティレベルであるため、ここでは<code translate="no">MATCH_ANY</code> を使用します。このフィルターでは、エンティティ内の少なくとも1つのチャンクが、高品質な<code translate="no">&quot;index&quot;</code> チャンクであることが求められますが、検索結果自体は依然として親エンティティを表しています。</p>
+<p>EmbeddingList の検索結果はエンティティレベルであるため、ここでは `<code translate="no">MATCH_ANY</code> ` を使用します。このフィルターでは、エンティティ内の少なくとも 1 つのチャンクが、高品質な `<code translate="no">&quot;index&quot;</code> ` チャンクである必要がありますが、検索結果自体は依然として親エンティティを表しています。</p>
 <h2 id="Use-filters-in-hybrid-search" class="common-anchor-header">ハイブリッド検索でのフィルターの使用<button data-href="#Use-filters-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -251,7 +251,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">filter</code> 引数はトップレベルのエンティティ条件を適用しますが、<code translate="no">chunk_req</code> 上の<code translate="no">expr</code> は、StructArrayの要素レベルのベクトルリクエストのみを制限します。サポートされているハイブリッド検索の組み合わせおよびバージョン固有の制限については、<a href="/docs/ja/hybrid-search-with-structarray.md">「StructArrayを使用したハイブリッド検索</a>」および<a href="/docs/ja/structarray-limits.md">「StructArrayの制限</a>」を参照してください。</p>
+<p><code translate="no">filter</code> 引数はトップレベルのエンティティ条件を適用しますが、<code translate="no">chunk_req</code> の<code translate="no">expr</code> は、StructArrayの要素レベルのベクトルリクエストのみを制限します。サポートされているハイブリッド検索の組み合わせおよびバージョン固有の制限については、<a href="/docs/ja/hybrid-search-with-structarray.md">「StructArrayを使用したハイブリッド検索」</a>および<a href="/docs/ja/structarray-limits.md">「StructArrayの制限</a>」を参照してください。</p>
 <h2 id="Predicate-support-summary" class="common-anchor-header">述語のサポート概要<button data-href="#Predicate-support-summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -302,7 +302,7 @@ results = client.hybrid_search(
 <li><p>行レベルのフィルタリングのみが必要な場合に `<code translate="no">element_filter</code> ` を使用すること。エンティティを選択するだけなら、代わりに `<code translate="no">MATCH_ANY</code> ` を使用してください。</p></li>
 <li><p><code translate="no">MATCH_*</code> が要素のオフセットを返すことを期待しないこと。これらの演算子はエンティティを選択するものであり、それ自体では一致した要素を特定するものではありません。</p></li>
 <li><p><code translate="no">$[has_code]</code> のような単純なブール述語を記述すること。<code translate="no">$[has_code] == true</code> のような明示的な比較を使用してください。</p></li>
-<li><p>同じフィルタ式内で、<code translate="no">element_filter</code> をトップレベルの述語の前に配置すること。</p></li>
+<li><p>同じフィルタ式内で、<code translate="no">element_filter</code> を最上位の述語の前に配置すること。</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">次のステップ<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -320,7 +320,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>StructArray フィルタ構文の全容を確認するには、「<a href="/docs/ja/struct-array-operators.md">StructArray 演算子</a>」を参照してください。</p></li>
+<li><p>StructArray フィルタの構文全体を確認するには、「<a href="/docs/ja/struct-array-operators.md">StructArray 演算子</a>」を参照してください。</p></li>
 <li><p>まず、フィルタリングを行わないベクトル検索を実行するには、「<a href="/docs/ja/basic-vector-search-with-structarray.md">StructArray を使用した基本的なベクトル検索</a>」を参照してください。</p></li>
 <li><p>頻繁に使用する StructArray フィルタ用のスカラーインデックスを作成するには、「<a href="/docs/ja/index-structarray-fields.md">StructArray フィールドのインデックス作成</a>」を参照してください。</p></li>
 <li><p>バージョンごとのフィルタおよび検索の制限を確認するには、「<a href="/docs/ja/structarray-limits.md">StructArrayの制限</a>」を参照してください。</p></li>

@@ -69,9 +69,9 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>In einer Einfüge-Nutzlast ist „ <code translate="no">chunks</code> “ ein reguläres Feld, dessen Wert ein Array von Struct-Objekten ist. Verwenden Sie innerhalb jedes Objekts Unterfeldnamen wie „ <code translate="no">text</code> “ und „ <code translate="no">emb</code> “. Verwenden Sie die Pfadsyntax, wie z. B. „ <code translate="no">chunks[text]</code> “ oder „ <code translate="no">chunks[emb]</code> “, erst nach dem Einfügen, wenn Sie Indizes erstellen, Suchvorgänge ausführen, Filter erstellen oder Ausgabefelder angeben.</p>
+<p>In einer Einfüge-Nutzlast ist „ <code translate="no">chunks</code> “ ein reguläres Feld, dessen Wert ein Array aus Struct-Objekten ist. Verwenden Sie innerhalb jedes Objekts Unterfeldnamen wie „ <code translate="no">text</code> “ und „ <code translate="no">emb</code> “. Verwenden Sie die Pfadsyntax, wie z. B. „ <code translate="no">chunks[text]</code> “ oder „ <code translate="no">chunks[emb]</code> “, erst nach dem Einfügen, wenn Sie Indizes erstellen, Suchvorgänge ausführen, Filter erstellen oder Ausgabefelder angeben.</p>
 </div>
-<h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">Die Struktur der Einfüge-Nutzdaten verstehen<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
+<h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">Die Struktur der Einfügungs-Nutzdaten verstehen<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -303,7 +303,7 @@ Nullfähige StructArray-Felder sind nur in Milvus v3.0.x verfügbar. Wenn Sie ei
 <tr><th>Regel</th><th>Erläuterung</th></tr>
 </thead>
 <tbody>
-<tr><td>Verwenden Sie für ein StructArray-Feld ein Array von Objekten.</td><td>Der Wert von <code translate="no">chunks</code> ist eine Liste, und jedes Element in der Liste ist ein Struct-Element.</td></tr>
+<tr><td>Verwenden Sie für ein StructArray-Feld ein Array von Objekten.</td><td>Der Wert von „ <code translate="no">chunks</code> “ ist eine Liste, und jedes Element in der Liste ist ein Struct-Element.</td></tr>
 <tr><td>Verwenden Sie Unterfeldnamen innerhalb jedes Struct-Elements.</td><td>Fügen Sie „ <code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> “ innerhalb von „ <code translate="no">chunks</code> “ ein, nicht innerhalb von „ <code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code> “.</td></tr>
 <tr><td>Halten Sie sich an das Struct-Schema.</td><td>Jedes Struct-Element muss die im Struct-Schema definierten Unterfelder verwenden.</td></tr>
 <tr><td>Die Vektordimensionen müssen übereinstimmen.</td><td>Die Vektorwerte müssen mit den für ihre Vektor-Unterfelder konfigurierten „ <code translate="no">dim</code> “ übereinstimmen.</td></tr>

@@ -119,7 +119,7 @@ summary: >-
 <tr><td><code translate="no">ArrayOfVector</code></td><td>No compatible</td><td>Los subcampos de vectores dispersos no son compatibles con los campos StructArray.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>No compatible</td><td>Utilice « <code translate="no">VARCHAR</code> », no « <code translate="no">String</code> ».</td></tr>
 <tr><td><code translate="no">Array</code></td><td>No compatible</td><td>Los subcampos JSON no son compatibles con los campos StructArray.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>No compatible</td><td>Los subcampos de geometría y las funciones GIS no son compatibles con los campos StructArray.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>No compatible</td><td>Los subcampos de geometría y las funciones SIG no son compatibles con los campos StructArray.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>No compatible</td><td>Los subcampos de texto no son compatibles con los campos StructArray.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>No compatible</td><td>Los subcampos «timestamptz» y las expresiones específicas de tiempo no son compatibles con los campos StructArray.</td></tr>
 <tr><td><code translate="no">Array</code>, <code translate="no">ArrayOfVector</code>, <code translate="no">Struct</code> o <code translate="no">ArrayOfStruct</code></td><td>No compatible</td><td>Los campos StructArray no admiten subcampos anidados de tipo matriz, matriz vectorial, Struct o matriz de Struct.</td></tr>
@@ -236,7 +236,7 @@ summary: >-
 <tr><td>Búsqueda básica en EmbeddingList</td><td>Compatible con subcampos vectoriales de StructArray indexados con métric <code translate="no">MAX_SIM*</code>. Devuelve resultados a nivel de entidad.</td></tr>
 <tr><td>Búsqueda básica a nivel de elemento</td><td>Compatible con subcampos vectoriales de StructArray indexados con métricas vectoriales regulares. Puede devolver las coordenadas de los elementos coincidentes.</td></tr>
 <tr><td>Búsqueda por rango</td><td>Compatible según el modo de búsqueda y la compatibilidad con índices y métricas de la versión de destino. Para conocer el comportamiento del rango de búsqueda híbrida en solicitudes de StructArray a nivel de elemento, consulta tu versión de destino.</td></tr>
-<tr><td>Búsqueda por agrupación</td><td>La búsqueda agrupada a nivel de elemento puede devolver posiciones. El comportamiento de la búsqueda híbrida con agrupación para solicitudes de StructArray a nivel de elemento depende de la versión.</td></tr>
+<tr><td>Búsqueda por agrupación</td><td>La búsqueda agrupada a nivel de elemento puede devolver posiciones. El comportamiento de la búsqueda híbrida con agrupación para las solicitudes de StructArray a nivel de elemento depende de la versión.</td></tr>
 <tr><td>Búsqueda híbrida</td><td>Una solicitud de búsqueda híbrida solo puede incluir solicitudes de subcampos vectoriales de StructArray cuando la versión de destino admita esa combinación de búsqueda. Cada solicitud sigue la familia de métricas del subcampo vectorial indexado.</td></tr>
 <tr><td>Salida de desplazamiento</td><td>El desplazamiento está disponible para los resultados de búsqueda a nivel de elemento. La búsqueda en EmbeddingList devuelve resultados a nivel de entidad y no utiliza los desplazamientos de elementos como unidad principal de resultado.</td></tr>
 </tbody>
@@ -261,7 +261,7 @@ summary: >-
 <ul>
 <li><p>Utilice « <code translate="no">$[subfield]</code> » únicamente dentro de operadores de StructArray.</p></li>
 <li><p>Utilice subcampos escalares para los predicados escalares.</p></li>
-<li><p>No utilices subcampos vectoriales como entradas de predicados escalares de « <code translate="no">$[...]</code> ».</p></li>
+<li><p>No utilice subcampos vectoriales como entradas de predicados escalares de « <code translate="no">$[...]</code> ».</p></li>
 <li><p>La sintaxis de ruta JSON, las funciones JSON, las funciones de contenedores de matrices, las funciones de coincidencia de texto, las funciones de geometría/SIG y las expresiones Timestamptz no son compatibles con los predicados a nivel de elemento de StructArray.</p></li>
 <li><p>Es preferible utilizar comparaciones booleanas explícitas, como « <code translate="no">$[has_code] == true</code> », en lugar de expresiones booleanas simples.</p></li>
 </ul>

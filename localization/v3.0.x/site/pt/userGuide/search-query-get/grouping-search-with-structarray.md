@@ -245,7 +245,7 @@ results = client.hybrid_search(
 <tr><td><code translate="no">distance</code> ou pontuação</td><td>Pontuação ou distância do elemento Struct selecionado para essa entidade pai.</td></tr>
 <tr><td><code translate="no">offset</code></td><td>Posição, com início em zero, do elemento Struct selecionado quando devolvido.</td></tr>
 <tr><td>Chaves primárias repetidas</td><td>Não esperadas ao agrupar pela chave primária.</td></tr>
-<tr><td><code translate="no">limit</code></td><td>Aplica-se aos resultados agrupados da entidade pai.</td></tr>
+<tr><td><code translate="no">limit</code></td><td>Aplica-se a resultados agrupados da entidade pai.</td></tr>
 </tbody>
 </table>
 <h2 id="Limitations" class="common-anchor-header">Limitações<button data-href="#Limitations" class="anchor-icon" translate="no">
@@ -311,7 +311,7 @@ results = client.hybrid_search(
       </svg>
     </button></h2><ol>
 <li><p>Para aprender primeiro a pesquisa ao nível do elemento sem agrupamento, leia <a href="/docs/pt/basic-vector-search-with-structarray.md">«Pesquisa vetorial básica com StructArray</a>».</p></li>
-<li><p>Para adicionar filtros escalares à pesquisa agrupada, leia <a href="/docs/pt/filtered-search-with-structarray.md">«Pesquisa filtrada com StructArray</a>».</p></li>
+<li><p>Para adicionar filtros escalares à pesquisa agrupada, leia <a href="/docs/pt/filtered-search-with-structarray.md">«Pesquisa Filtrada com StructArray</a>».</p></li>
 <li><p>Para utilizar limites de pontuação ou distância em vez de agrupamento, leia <a href="/docs/pt/range-search-with-structarray.md">«Pesquisa por intervalo com StructArray</a>».</p></li>
 <li><p>Para verificar os limites de pesquisa do StructArray, leia <a href="/docs/pt/structarray-limits.md">«Limites do StructArray</a>».</p></li>
 </ol>

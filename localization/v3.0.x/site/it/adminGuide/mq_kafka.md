@@ -244,4 +244,5 @@ Se si utilizza Kafka e si desidera mantenerlo, non modificare la coda dei messag
       </svg>
     </button></h2><ul>
 <li><a href="/docs/it/woodpecker.md">Woodpecker (coda di messaggi predefinita)</a></li>
+<li><a href="/docs/it/switch-kafka-woodpecker.md">Passare da Kafka a Woodpecker</a></li>
 </ul>
