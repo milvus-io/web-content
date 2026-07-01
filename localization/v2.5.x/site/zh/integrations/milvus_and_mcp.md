@@ -99,8 +99,8 @@ title: MCP + Milvus：连接人工智能与向量数据库
       </svg>
     </button></h2><p>此 MCP 服务器可与各种支持模型上下文协议的 AI 应用程序配合使用，例如</p>
 <ul>
-<li><strong>克劳德桌面</strong>：Anthropic 的克劳德桌面应用程序</li>
-<li><strong>光标</strong>：人工智能代码编辑器，其 Composer 功能支持 MCP</li>
+<li><strong>Claude Desktop</strong>：Anthropic 的Claude Desktop应用程序</li>
+<li><strong>Cursor</strong>：人工智能代码编辑器，其 Composer 功能支持 MCP</li>
 <li><strong>其他自定义 MCP 客户端</strong>任何执行 MCP 客户端规范的应用程序</li>
 </ul>
 <h2 id="Using-MCP-with-Claude-Desktop" class="common-anchor-header">将 MCP 与 Claude Desktop 结合使用<button data-href="#Using-MCP-with-Claude-Desktop" class="anchor-icon" translate="no">
@@ -210,7 +210,7 @@ title: MCP + Milvus：连接人工智能与向量数据库
         ></path>
       </svg>
     </button></h2><p>确保 MCP 服务器设置正确：</p>
-<h3 id="For-Cursor" class="common-anchor-header">对于光标</h3><ol>
+<h3 id="For-Cursor" class="common-anchor-header">对于 Cursor</h3><ol>
 <li>转到<code translate="no">Cursor Settings</code> →<code translate="no">Features</code> →<code translate="no">MCP</code> 。</li>
 <li>确认<code translate="no">&quot;Milvus&quot;</code> 出现在 MCP 服务器列表中。</li>
 <li>检查是否列出了 Milvus 工具（如<code translate="no">milvus_list_collections</code>,<code translate="no">milvus_vector_search</code> ）。</li>
@@ -314,7 +314,7 @@ title: MCP + Milvus：连接人工智能与向量数据库
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Using-Claude-Desktop" class="common-anchor-header">使用克劳德桌面</h3><h4 id="Example-1-Listing-Collections" class="common-anchor-header">示例 1：列出 Collection</h4><pre><code translate="no">What are the collections <span class="hljs-selector-tag">I</span> have in my Milvus DB?
+    </button></h2><h3 id="Using-Claude-Desktop" class="common-anchor-header">使用Claude Desktop</h3><h4 id="Example-1-Listing-Collections" class="common-anchor-header">示例 1：列出 Collection</h4><pre><code translate="no">What are the collections <span class="hljs-selector-tag">I</span> have in my Milvus DB?
 <button class="copy-code-btn"></button></code></pre>
 <p>Claude 将使用 MCP 在我们的 Milvus DB 上检查这些信息。</p>
 <pre><code translate="no">I<span class="hljs-comment">&#x27;ll check what collections are available in your Milvus database.</span>
@@ -333,7 +333,7 @@ Here are the collections <span class="hljs-keyword">in</span> your Milvus databa
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Example-2-Searching-for-Documents" class="common-anchor-header">示例 2：搜索文件</h4><pre><code translate="no">Find documents in <span class="hljs-keyword">my</span> text_collection that mention <span class="hljs-string">&quot;machine learning&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>克劳德将使用 Milvus 的全文搜索功能查找相关文档：</p>
+<p>Claude 将使用 Milvus 的全文搜索功能查找相关文档：</p>
 <pre><code translate="no">I<span class="hljs-comment">&#x27;ll search for documents about machine learning in your text_collection.</span>
 
 &gt; View result <span class="hljs-keyword">from</span> milvus-<span class="hljs-keyword">text</span>-search <span class="hljs-keyword">from</span> milvus (local)
@@ -341,7 +341,7 @@ Here are the collections <span class="hljs-keyword">in</span> your Milvus databa
 Here are the documents I found that mention machine learning:
 [Results will appear here based <span class="hljs-keyword">on</span> your actual data]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Using-Cursor" class="common-anchor-header">使用光标</h3><h4 id="Example-Creating-a-Collection" class="common-anchor-header">示例：创建 Collections</h4><p>在 Cursor 的 Composer 中，你可以询问：</p>
+<h3 id="Using-Cursor" class="common-anchor-header">使用 Cursor</h3><h4 id="Example-Creating-a-Collection" class="common-anchor-header">示例：创建 Collections</h4><p>在 Cursor 的 Composer 中，你可以询问：</p>
 <pre><code translate="no">Create a <span class="hljs-keyword">new</span> collection called <span class="hljs-string">&#x27;articles&#x27;</span> <span class="hljs-function"><span class="hljs-keyword">in</span> Milvus <span class="hljs-keyword">with</span> fields <span class="hljs-keyword">for</span> <span class="hljs-title">title</span> (<span class="hljs-params"><span class="hljs-built_in">string</span></span>), <span class="hljs-title">content</span> (<span class="hljs-params"><span class="hljs-built_in">string</span></span>), <span class="hljs-keyword">and</span> a vector <span class="hljs-title">field</span> (<span class="hljs-params"><span class="hljs-number">128</span> dimensions</span>)
 </span><button class="copy-code-btn"></button></code></pre>
 <p>Cursor 将使用 MCP 服务器执行此操作：</p>
@@ -382,7 +382,7 @@ Collection <span class="hljs-comment">&#x27;articles&#x27; has been created succ
 <li>检查你的 Milvus 实例是否需要身份验证</li>
 <li>确保您有正确的权限来执行您尝试执行的操作符</li>
 </ol>
-<h4 id="Tool-Not-Found" class="common-anchor-header">找不到工具</h4><p>如果 MCP 工具没有出现在克劳德桌面或光标中：</p>
+<h4 id="Tool-Not-Found" class="common-anchor-header">找不到工具</h4><p>如果 MCP 工具没有出现在Claude Desktop 或 Cursor 中：</p>
 <ol>
 <li>重新启动应用程序</li>
 <li>检查服务器日志是否有任何错误</li>
