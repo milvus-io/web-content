@@ -1073,6 +1073,60 @@ summary: Learn how to configure dataCoord for Milvus.
 </table>
 
 
+## `dataCoord.gc.lob.enabled`
+
+<table id="dataCoord.gc.lob.enabled">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Whether to enable garbage collection for unreferenced LOB files created for TEXT field values.      </td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataCoord.gc.lob.safetyWindow`
+
+<table id="dataCoord.gc.lob.safetyWindow">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        The minimum age, in seconds, that an unreferenced TEXT LOB file must reach before garbage collection can delete it.      </td>
+      <td>3600</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataCoord.gc.lob.checkInterval`
+
+<table id="dataCoord.gc.lob.checkInterval">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        The interval, in seconds, at which Milvus scans storage for unreferenced LOB files created for TEXT field values.      </td>
+      <td>1800</td>
+    </tr>
+  </tbody>
+</table>
+
+
 ## `dataCoord.brokerTimeout`
 
 <table id="dataCoord.brokerTimeout">
@@ -1467,5 +1521,3 @@ summary: Learn how to configure dataCoord for Milvus.
     </tr>
   </tbody>
 </table>
-
-
