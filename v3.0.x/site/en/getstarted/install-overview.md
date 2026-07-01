@@ -16,11 +16,11 @@ To integrate Milvus Lite into your applications, run `pip install pymilvus` to i
 
 ## Milvus Standalone
 
-Milvus Standalone is a single-machine server deployment. All components of Milvus Standalone are packed into a single [Docker image](https://milvus.io/docs/install_standalone-docker.md), making deployment convenient. If you have a production workload but prefer not to use Kubernetes, running Milvus Standalone on a single machine with sufficient memory is a good option.
+Milvus Standalone is a single-machine server deployment. All components of Milvus Standalone are packed into a single [Docker image](https://milvus.io/docs/install_standalone-docker.md), making deployment convenient. If you have a production workload but prefer not to use Kubernetes, running Milvus Standalone on a single machine with sufficient memory is a good option. By default, Milvus Standalone runs **Woodpecker** (embedded) as its message queue, so there's no separate messaging service to operate.
 
 ## Milvus Distributed
 
-Milvus Distributed can be deployed on [Kubernetes](https://milvus.io/docs/install_cluster-milvusoperator.md) clusters. This deployment features a cloud-native architecture, where ingestion load and search queries are separately handled by isolated nodes, allowing redundancy for critical components. It offers the highest scalability and availability, as well as the flexibility in customizing the allocated resources in each component. Milvus Distributed is the top choice for enterprise users running large-scale vector search systems in production.
+Milvus Distributed can be deployed on [Kubernetes](https://milvus.io/docs/install_cluster-milvusoperator.md) clusters. This deployment features a cloud-native architecture, where ingestion load and search queries are separately handled by isolated nodes, allowing redundancy for critical components. It offers the highest scalability and availability, as well as the flexibility in customizing the allocated resources in each component. Milvus Distributed is the top choice for enterprise users running large-scale vector search systems in production. By default, Milvus Distributed runs **Woodpecker** as its message queue, deployed as a dedicated service alongside Milvus.
 
 ## Choose the Right Deployment for Your Use Case
 
@@ -48,6 +48,8 @@ The choice of Milvus deployment mode depends on your project's stage and scale. 
 - **Milvus Standalone** is suitable for medium-sized datasets, scaling up to 100 million vectors.
 - **Milvus Distributed** is designed for large-scale deployments, capable of handling datasets from 100 million up to tens of billions of vectors.
 
+Regardless of the deployment mode, every Milvus instance relies on a message queue, object storage, and a metadata store — by default **Woodpecker**, **MinIO**, and **etcd**. To learn about these dependencies, tune them, or connect external services, see [Data Infrastructure & Integration](data-infra-integration-overview.md).
+
 ![Select deployment option for your use case](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/select-deployment-option.png)
 
 ## Comparison on functionalities
@@ -60,4 +62,5 @@ The choice of Milvus deployment mode depends on your project's stage and scale. 
 | CRUD operations          | ✔️                                                                                                                                    | ✔️                                                                                                                                    | ✔️                                                                                                                                    |
 | Advanced data management | N/A                                                                                                                                   | Access Control<br/>Partition<br/>Partition Key                                                                                        | Access Control<br/>Partition<br/>Partition Key<br/>Physical Resource Grouping                                                         |
 | Consistency Levels       | Strong                                                                                                                                | Strong<br/>Bounded Staleness<br/>Session<br/>Eventual                                                                                 | Strong<br/>Bounded Staleness<br/>Session<br/>Eventual                                                                                 |
+| Message queue            | N/A                                                                                                                                   | Woodpecker (embedded)                                                                                                                 | Woodpecker (service)                                                                                                                 |
 
