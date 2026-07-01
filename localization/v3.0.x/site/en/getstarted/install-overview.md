@@ -56,7 +56,7 @@ title: Overview of Milvus Deployment Options
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Standalone is a single-machine server deployment. All components of Milvus Standalone are packed into a single <a href="https://milvus.io/docs/install_standalone-docker.md">Docker image</a>, making deployment convenient. If you have a production workload but prefer not to use Kubernetes, running Milvus Standalone on a single machine with sufficient memory is a good option.</p>
+    </button></h2><p>Milvus Standalone is a single-machine server deployment. All components of Milvus Standalone are packed into a single <a href="https://milvus.io/docs/install_standalone-docker.md">Docker image</a>, making deployment convenient. If you have a production workload but prefer not to use Kubernetes, running Milvus Standalone on a single machine with sufficient memory is a good option. By default, Milvus Standalone runs <strong>Woodpecker</strong> (embedded) as its message queue, so there’s no separate messaging service to operate.</p>
 <h2 id="Milvus-Distributed" class="common-anchor-header">Milvus Distributed<button data-href="#Milvus-Distributed" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -72,7 +72,7 @@ title: Overview of Milvus Deployment Options
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Distributed can be deployed on <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> clusters. This deployment features a cloud-native architecture, where ingestion load and search queries are separately handled by isolated nodes, allowing redundancy for critical components. It offers the highest scalability and availability, as well as the flexibility in customizing the allocated resources in each component. Milvus Distributed is the top choice for enterprise users running large-scale vector search systems in production.</p>
+    </button></h2><p>Milvus Distributed can be deployed on <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> clusters. This deployment features a cloud-native architecture, where ingestion load and search queries are separately handled by isolated nodes, allowing redundancy for critical components. It offers the highest scalability and availability, as well as the flexibility in customizing the allocated resources in each component. Milvus Distributed is the top choice for enterprise users running large-scale vector search systems in production. By default, Milvus Distributed runs <strong>Woodpecker</strong> as its message queue, deployed as a dedicated service alongside Milvus.</p>
 <h2 id="Choose-the-Right-Deployment-for-Your-Use-Case" class="common-anchor-header">Choose the Right Deployment for Your Use Case<button data-href="#Choose-the-Right-Deployment-for-Your-Use-Case" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -105,6 +105,7 @@ title: Overview of Milvus Deployment Options
 <li><strong>Milvus Standalone</strong> is suitable for medium-sized datasets, scaling up to 100 million vectors.</li>
 <li><strong>Milvus Distributed</strong> is designed for large-scale deployments, capable of handling datasets from 100 million up to tens of billions of vectors.</li>
 </ul>
+<p>Regardless of the deployment mode, every Milvus instance relies on a message queue, object storage, and a metadata store — by default <strong>Woodpecker</strong>, <strong>MinIO</strong>, and <strong>etcd</strong>. To learn about these dependencies, tune them, or connect external services, see <a href="/docs/data-infra-integration-overview.md">Data Infrastructure & Integration</a>.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/select-deployment-option.png" alt="Select deployment option for your use case" class="doc-image" id="select-deployment-option-for-your-use-case" />
@@ -137,5 +138,6 @@ title: Overview of Milvus Deployment Options
 <tr><td>CRUD operations</td><td>✔️</td><td>✔️</td><td>✔️</td></tr>
 <tr><td>Advanced data management</td><td>N/A</td><td>Access Control<br/>Partition<br/>Partition Key</td><td>Access Control<br/>Partition<br/>Partition Key<br/>Physical Resource Grouping</td></tr>
 <tr><td>Consistency Levels</td><td>Strong</td><td>Strong<br/>Bounded Staleness<br/>Session<br/>Eventual</td><td>Strong<br/>Bounded Staleness<br/>Session<br/>Eventual</td></tr>
+<tr><td>Message queue</td><td>N/A</td><td>Woodpecker (embedded)</td><td>Woodpecker (service)</td></tr>
 </tbody>
 </table>
