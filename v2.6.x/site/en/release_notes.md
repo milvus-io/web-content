@@ -8,6 +8,46 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.6.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.6.19
+
+Release date: July 1, 2026
+
+| Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
+| -------------- | ------------------ | ------------------- | ---------------- | -------------- |
+| 2.6.19         | 2.6.16             | 2.6.17              | 2.6.22           | 2.6.19         |
+
+We are excited to announce the release of Milvus v2.6.19! This release improves text indexing, JSON handling, GPU runtime compatibility, RBAC metadata, and search result serialization. It also fixes correctness and stability issues across WAL recovery, scalar expressions, nullable fields, ArrayOfVector, group-by search, and DataCoord GC.
+
+### Improvements
+
+- Added configurable concurrency for function runner text tokenization ([#50115](https://github.com/milvus-io/milvus/pull/50115))
+- Improved mix compaction by building text indexes inline to avoid slow QueryNode fallback index creation ([#50160](https://github.com/milvus-io/milvus/pull/50160))
+- Upgraded GPU Docker images to CUDA 12.9.1 for Ubuntu 22.04 builds and runtime ([#50250](https://github.com/milvus-io/milvus/pull/50250))
+- Added a configuration option for maximum array capacity ([#50265](https://github.com/milvus-io/milvus/pull/50265))
+- Improved S3 PutObject compatibility with OpenSSL FIPS mode by forcing CRC32C checksums ([#50360](https://github.com/milvus-io/milvus/pull/50360), [#50477](https://github.com/milvus-io/milvus/pull/50477))
+- Added RBAC role description support across clients, APIs, and role metadata ([#50526](https://github.com/milvus-io/milvus/pull/50526), [#50535](https://github.com/milvus-io/milvus/pull/50535))
+- Improved error handling by standardizing on merr with system and input error classification across Milvus ([#50545](https://github.com/milvus-io/milvus/pull/50545))
+- Optimized null predicate evaluation for sealed chunked fields ([#50586](https://github.com/milvus-io/milvus/pull/50586))
+- Improved JSON field handling by enabling JSON shredding by default ([#50706](https://github.com/milvus-io/milvus/pull/50706))
+- Reduced search result serialization overhead by adding an optional zero-copy path for passing search results ([#50713](https://github.com/milvus-io/milvus/pull/50713), [#50756](https://github.com/milvus-io/milvus/pull/50756))
+
+### Bug fixes
+
+- Fixed an issue where RBAC grantee identifiers could collide due to truncated ID hashes ([#50236](https://github.com/milvus-io/milvus/pull/50236))
+- Fixed an issue where Kafka and RMQ WAL recovery could fail to restore checkpoints with negative sentinel message IDs ([#50242](https://github.com/milvus-io/milvus/pull/50242))
+- Fixed an issue where scalar-index-backed expression queries could return incorrect results due to cursor misalignment ([#50266](https://github.com/milvus-io/milvus/pull/50266))
+- Fixed an issue where CPU-adapted GPU CAGRA indexes could still require GPU resources during loading ([#50385](https://github.com/milvus-io/milvus/pull/50385))
+- Fixed an issue where ST_WITHIN queries on nullable GEOMETRY fields could crash standalone during concurrent schema evolution ([#50437](https://github.com/milvus-io/milvus/pull/50437))
+- Fixed an issue where AlterCollection could reject requests due to unchanged collection descriptions ([#50502](https://github.com/milvus-io/milvus/pull/50502), [#50539](https://github.com/milvus-io/milvus/pull/50539))
+- Fixed an issue where describe_user could return empty ghost role names after repeated grant and revoke operations ([#50544](https://github.com/milvus-io/milvus/pull/50544))
+- Fixed an issue where DataCoord garbage collection could incorrectly delete text stats files that already stored full paths ([#50599](https://github.com/milvus-io/milvus/pull/50599), [#50629](https://github.com/milvus-io/milvus/pull/50629))
+- Fixed an issue where invalid StructArray vector dimensions or element counts could be accepted ([#50601](https://github.com/milvus-io/milvus/pull/50601))
+- Fixed an issue where group-by search could return duplicate or mismatched group values when results had tied scores ([#50621](https://github.com/milvus-io/milvus/pull/50621))
+- Fixed an issue where queries using nullable fields could return incorrect results after expression rewriting ([#50627](https://github.com/milvus-io/milvus/pull/50627))
+- Fixed an issue where importing ArrayOfVector float64 data from Parquet could fail or parse vector values incorrectly ([#50635](https://github.com/milvus-io/milvus/pull/50635))
+- Fixed an issue where highlighted search results could become misaligned for nullable or empty string fields ([#50637](https://github.com/milvus-io/milvus/pull/50637))
+- Fixed an issue where ArrayOfVector EmbList indexes could be built with insufficient rows or vectors ([#50727](https://github.com/milvus-io/milvus/pull/50727), [#50765](https://github.com/milvus-io/milvus/pull/50765))
+
 ## v2.6.18
 
 Release date: June 5, 2026
