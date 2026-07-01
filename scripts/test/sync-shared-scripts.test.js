@@ -29,6 +29,7 @@ test('sync manifest keeps scripts/lib ownership split between milvus and zdoc la
   assert.equal(zdocLib.source, '../zdoc/plugins/lark-docs');
   assert.equal(zdocLib.target, 'scripts/lib');
   assert.equal(zdocLib.include.some((pattern) => pattern.test('larkDocWriter.js')), true);
+  assert.equal(zdocLib.include.some((pattern) => pattern.test('feishuFetch.js')), true);
   assert.equal(zdocLib.include.some((pattern) => pattern.test('milvusDocsGen.js')), false);
 });
 
@@ -51,27 +52,32 @@ test('sync manifest includes the mdx patcher dependency used by larkDocWriter', 
   assert.equal(plan[0].targetAbsPath, '/tmp/repo/scripts/mdx-parse');
 });
 
-test('lark-docs entrypoint imports shared generators and translator imports local lark token fetcher', () => {
+test('lark-docs entrypoint imports shared generators and writer imports local lark token fetcher', () => {
   const scriptsDir = path.resolve(__dirname, '..');
   const larkDocsDir = path.join(scriptsDir, 'lark-docs');
 
   const entrypointPath = path.join(larkDocsDir, 'index.js');
-  const translatorPath = path.join(larkDocsDir, 'larkTranslator.js');
+  const writerPath = path.join(larkDocsDir, 'larkDocWriter.js');
+  const tokenFetcherPath = path.join(larkDocsDir, 'larkTokenFetcher.js');
 
   const entrypointSource = fsSync.readFileSync(entrypointPath, 'utf8');
-  const translatorSource = fsSync.readFileSync(translatorPath, 'utf8');
+  const writerSource = fsSync.readFileSync(writerPath, 'utf8');
+  const tokenFetcherSource = fsSync.readFileSync(tokenFetcherPath, 'utf8');
 
   assert.match(entrypointSource, /require\('\.\.\/lib\/milvusDocsGen\.js'\)/);
   assert.match(entrypointSource, /require\('\.\.\/lib\/milvusSdkDocsGen\.js'\)/);
-  assert.match(translatorSource, /require\('\.\/larkTokenFetcher\.js'\)/);
+  assert.match(writerSource, /require\('\.\/larkTokenFetcher\.js'\)/);
+  assert.match(tokenFetcherSource, /require\('\.\/feishuFetch\.js'\)/);
 
   const docsGenResolved = require.resolve('../lib/milvusDocsGen.js', { paths: [larkDocsDir] });
   const sdkDocsGenResolved = require.resolve('../lib/milvusSdkDocsGen.js', { paths: [larkDocsDir] });
   const tokenFetcherResolved = require.resolve('./larkTokenFetcher.js', { paths: [larkDocsDir] });
+  const feishuFetchResolved = require.resolve('./feishuFetch.js', { paths: [larkDocsDir] });
 
   assert.equal(docsGenResolved, path.join(scriptsDir, 'lib', 'milvusDocsGen.js'));
   assert.equal(sdkDocsGenResolved, path.join(scriptsDir, 'lib', 'milvusSdkDocsGen.js'));
   assert.equal(tokenFetcherResolved, path.join(larkDocsDir, 'larkTokenFetcher.js'));
+  assert.equal(feishuFetchResolved, path.join(larkDocsDir, 'feishuFetch.js'));
 });
 
 test('buildSyncPlan resolves milvus-docs default branch dynamically via fetch', async () => {

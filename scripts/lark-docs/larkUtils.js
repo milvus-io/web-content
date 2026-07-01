@@ -212,7 +212,7 @@ class larkUtils {
         }
     }
 
-    fetch_fallback_sources(docSourceDir, fallbackSourceDir, sourceType) {
+    fetch_fallback_sources(docSourceDir, fallbackSourceDir, sourceType, rootToken) {
         const TITLE = sourceType === 'drive' ? 'name' : 'title'
         const TOKEN = sourceType === 'drive' ? 'token' : 'node_token'
         const PARENT = sourceType === 'drive' ? 'parent_token' : 'parent_node_token'
@@ -249,27 +249,36 @@ class larkUtils {
         })
 
         var sourceRoot, fallbackRoot
+        const hasNoParent = source => source?.[PARENT] === undefined || source?.[PARENT] === null || source?.[PARENT] === ''
 
         if (sourceType === 'drive') {
-            sourceRoot = sources.find(source => !source?.type)
+            sourceRoot = rootToken ? sources.find(source => source[TOKEN] === rootToken) : sources.find(source => !source?.type)
             // find the fallback root by name
-            fallbackRoot = fallbackSources.find(fallback => !fallback.type && fallbackSourceDir.split('/').includes(fallback[TITLE]))
+            fallbackRoot = fallbackSources.find(fallback => fallback.children && hasNoParent(fallback))
+                || fallbackSources.find(fallback => !fallback.type && fallbackSourceDir.split('/').includes(fallback[TITLE]))
         } else if (sourceType === 'wiki') {
-            sourceRoot = sources.find(source => !source?.slug)
+            sourceRoot = rootToken ? sources.find(source => source[TOKEN] === rootToken) : sources.find(source => !source?.slug)
             fallbackRoot = fallbackSources.find(fallback => !fallback.slug && fallbackSourceDir.split('/').includes(fallback[TITLE]))
         } else {
             throw new Error(`Unknown source type: ${sourceType}`)
         }
 
         if (sourceRoot?.children?.length > 0 && fallbackRoot?.children?.length > 0) {
+            const fallbackSourcesByToken = new Map(fallbackSources.map(source => [source[TOKEN], source]))
 
             fallbackRoot.children.forEach(child => {
                 var pair = sourceRoot.children.find(s => s[TITLE] === child[TITLE])
+                var fallbackChildSource = fallbackSourcesByToken.get(child[TOKEN])
 
                 if (!pair) {
                     child[PARENT] = sourceRoot[TOKEN]
+                    if (fallbackChildSource) {
+                        fallbackChildSource[PARENT] = sourceRoot[TOKEN]
+                    }
                     sourceRoot.children.push(child)
                     // fallbackSources.find(fb => fb.token === child.token).parent_token = sourceRoot.token
+                } else if (fallbackChildSource && fallbackChildSource[TOKEN] === pair[TOKEN]) {
+                    fallbackChildSource[PARENT] = sourceRoot[TOKEN]
                 }
             })
 
@@ -277,6 +286,7 @@ class larkUtils {
         }
 
         var replaces = []
+        var replacesByToken = new Map()
 
         fallbackSources.forEach(fallback => {            
             // folder
@@ -294,6 +304,7 @@ class larkUtils {
                                 from: child[TOKEN],
                                 to: pair[TOKEN]
                             })
+                            replacesByToken.set(child[TOKEN], pair[TOKEN])
                             
                             child[PARENT] = pair[PARENT]
                             child.url = pair.url
@@ -314,13 +325,18 @@ class larkUtils {
 
             // docx
             if (fallback?.type === 'docx' || !fallback?.children) {
-                var source = sources.find(source => source?.slug === fallback?.slug && (source?.type === 'docx' || !source?.children))
+                const expectedParent = replacesByToken.get(fallback[PARENT]) || fallback[PARENT]
+                var source = sources.find(source => source?.slug === fallback?.slug && source[PARENT] === expectedParent && (source?.type === 'docx' || !source?.children))
                 if (source) {
                     fallback[TOKEN] = source[TOKEN]
                     fallback[PARENT] = source[PARENT]
                     fallback.url = source.url
                     fallback.blocks = source.blocks
                 }
+            }
+
+            if (sourceRoot?.children?.find(child => child[TOKEN] === fallback[TOKEN])) {
+                fallback[PARENT] = sourceRoot[TOKEN]
             }
         })
 

@@ -48,6 +48,8 @@ add_field(
 
         - **DataType.VARCHAR**,
 
+        - **DataType.TEXT**
+
     - Composite fields: Choose from a variety of options, including 
 
         - **DataType.JSON**
@@ -74,7 +76,7 @@ add_field(
 
     The maximum byte length for strings allowed to be inserted. Note that multibyte characters (e.g., Unicode characters) may occupy more than one byte each, so ensure the byte length of inserted strings does not exceed the specified limit. Value range: [1, 65,535].
 
-    This is mandatory for a **DataType.VARCHAR** field.
+    This is mandatory for a DataType.VARCHAR field. Omit this parameter for a DataType.TEXT field.
 
 - **element_type** (*str*) -
 
@@ -122,6 +124,16 @@ add_field(
 
     Whether Milvus maps the field data into memory instead of fully loading it. For details settings, refer to MMap-enabled Data Storage.
 
+- **warmup** (*str*) -
+
+    The warmup strategy for this field's raw data in Tiered Storage mode. This setting overrides collection-level and cluster-level warmup defaults. Possible values:
+
+    - **sync**: Preload field data before the segment becomes queryable. Use for frequently accessed fields where first-query latency is critical.
+
+    - **disable**: Skip preloading; data is fetched on demand at first access. Use for large or infrequently accessed fields to reduce load time.
+
+    For details, refer to [Warm Up](https://milvus.io/docs/warm-up.md).
+
 - **nullable** (*bool*) -
 
     A Boolean parameter that specifies whether the field can accept null values. Valid values:
@@ -138,7 +150,7 @@ add_field(
 
 - **analyzer_params** (*dict*) -
 
-    Configures the analyzer for text processing, specifically for `DataType.VARCHAR` fields. This parameter configures tokenizer and filter settings, particularly for text fields used in [keyword matching](https://milvus.io/docs/keyword-match.md) or [full text search](https://milvus.io/docs/full-text-search.md). Depending on the type of analyzer, it can be configured in either of the following methods:
+    Configures the analyzer for text processing, specifically for `DataType.VARCHAR` or `DataType.TEXT` fields. This parameter configures tokenizer and filter settings, particularly for text fields used in keyword matching or full text search. Depending on the type of analyzer, it can be configured in either of the following methods:
 
     - Built-in analyzer
 
@@ -193,7 +205,7 @@ add_field(
 
 - **enable_analyzer** (*bool*) -
 
-    Whether to enable text analysis for the specified `VARCHAR` field. When set to `True`, it instructs Milvus to use a text analyzer, which tokenizes and filters the text content of the field.
+    Whether to enable text analysis for the specified VARCHAR or TEXT field. When set to True, it instructs Milvus to use a text analyzer, which tokenizes and filters the text content of the field.
 
     This does not apply to external collections.
 
@@ -248,6 +260,13 @@ schema.add_field(
 schema.add_field(
     field_name="scalar_01",
     datatype=DataType.INT32
+)
+
+# Add a TEXT field for long source content
+schema.add_field(
+    field_name="content",
+    datatype=DataType.TEXT,
+    enable_analyzer=True
 )
 
 # {

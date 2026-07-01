@@ -290,6 +290,41 @@
                                   "Serverless",
                                   "Dedicated"
                                 ]
+                              },
+                              "globalClusterMeta": {
+                                "type": "object",
+                                "description": "Metadata of the global cluster to which the cluster belongs. If the cluster does not belong to any global cluster, this field is null.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "集群所属全球集群的元信息。如果集群不属于任何全球集群，则该字段为 null。"
+                                  }
+                                },
+                                "properties": {
+                                  "globalClusterId": {
+                                    "type": "string",
+                                    "description": "ID of the global cluster.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "全球集群 ID。"
+                                      }
+                                    },
+                                    "example": "glo-xxxxxxxxxxxxxxx"
+                                  },
+                                  "role": {
+                                    "type": "string",
+                                    "description": "Role of the cluster in the global cluster.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "集群在全球集群中的角色。"
+                                      }
+                                    },
+                                    "example": "PRIMARY",
+                                    "enum": [
+                                      "PRIMARY",
+                                      "SECONDARY"
+                                    ]
+                                  }
+                                }
                               }
                             },
                             "description": "List of clusters in detail.",
@@ -345,7 +380,7 @@
                 },
                 "examples": {
                   "1": {
-                    "summary": "success",
+                    "summary": "common cluster",
                     "x-target-response": "OPTION 1",
                     "x-target-lang": "en-US",
                     "value": {
@@ -375,7 +410,41 @@
                     }
                   },
                   "2": {
-                    "summary": "success",
+                    "summary": "global cluster",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "en-US",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "count": 1,
+                        "currentPage": 1,
+                        "pageSize": 10,
+                        "clusters": [
+                          {
+                            "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                            "clusterName": "dedicated-3",
+                            "description": "",
+                            "regionId": "aws-us-west-2",
+                            "plan": "Enterprise",
+                            "cuType": "Performance-optimized",
+                            "cuSize": 1,
+                            "status": "RUNNING",
+                            "connectAddress": "https://inxx-xxxxxxxxxxxxxxx.aws-us-west-2.vectordb.zillizcloud.com:19530",
+                            "privateLinkAddress": "",
+                            "createTime": "2024-06-30T16:49:50Z",
+                            "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxx",
+                            "deploymentOption": "Dedicated",
+                            "globalClusterMeta": {
+                              "globalClusterId": "glo-xxxxxxxxxxxxxxx",
+                              "role": "PRIMARY"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "3": {
+                    "summary": "普通集群",
                     "x-target-response": "OPTION 1",
                     "x-target-lang": "zh-CN",
                     "value": {
@@ -404,7 +473,41 @@
                       }
                     }
                   },
-                  "3": {
+                  "4": {
+                    "summary": "全球集群",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "zh-CN",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "count": 1,
+                        "currentPage": 1,
+                        "pageSize": 10,
+                        "clusters": [
+                          {
+                            "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                            "clusterName": "dedicated-3",
+                            "description": "",
+                            "regionId": "ali-cn-hangzhou",
+                            "plan": "Enterprise",
+                            "cuType": "Performance-optimized",
+                            "cuSize": 1,
+                            "status": "RUNNING",
+                            "connectAddress": "https://inxx-xxxxxxxxxxxxxxx.ali-cn-hangzhou.vectordb.zilliz.com.cn:19530",
+                            "privateLinkAddress": "",
+                            "createTime": "2024-06-30T16:49:50Z",
+                            "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxx",
+                            "deploymentOption": "Dedicated",
+                            "globalClusterMeta": {
+                              "globalClusterId": "glo-xxxxxxxxxxxxxxx",
+                              "role": "PRIMARY"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "5": {
                     "summary": "failure",
                     "x-target-response": "OPTION 2",
                     "value": {
@@ -478,6 +581,17 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "待创建集群名称。"
+                      }
+                    }
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Description of the cluster.",
+                    "example": "Production vector search cluster",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "集群描述。",
+                        "example": "Production vector search cluster"
                       }
                     }
                   },
@@ -583,7 +697,8 @@
                     "regionId": "ali-cn-beijing",
                     "plan": "Standard",
                     "cuType": "Performance-optimized",
-                    "cuSize": 1
+                    "cuSize": 1,
+                    "description": "用于向量搜索工作负载的集群描述。"
                   }
                 },
                 "2": {
@@ -595,7 +710,8 @@
                     "regionId": "aws-us-west-2",
                     "plan": "Standard",
                     "cuType": "Performance-optimized",
-                    "cuSize": 1
+                    "cuSize": 1,
+                    "description": "A cluster for vector search workloads."
                   }
                 }
               }
@@ -802,6 +918,17 @@
                       }
                     }
                   },
+                  "description": {
+                    "type": "string",
+                    "description": "Description of the cluster.",
+                    "example": "Production vector search cluster",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "集群描述。",
+                        "example": "Production vector search cluster"
+                      }
+                    }
+                  },
                   "projectId": {
                     "type": "string",
                     "description": "ID of the project to which the cluster belongs.",
@@ -826,7 +953,8 @@
                   "value": {
                     "clusterName": "Free-01",
                     "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxx",
-                    "regionId": "gcp-us-west1"
+                    "regionId": "gcp-us-west1",
+                    "description": "A cluster for vector search workloads."
                   }
                 },
                 "2": {
@@ -835,7 +963,8 @@
                   "value": {
                     "clusterName": "Free-01",
                     "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxx",
-                    "regionId": "ali-cn-hangzhou"
+                    "regionId": "ali-cn-hangzhou",
+                    "description": "用于向量搜索工作负载的集群描述。"
                   }
                 }
               }
@@ -1047,6 +1176,17 @@
                       "zh-CN": "待创建集群名称。"
                     }
                   },
+                  "description": {
+                    "type": "string",
+                    "description": "Description of the on-demand cluster.",
+                    "example": "Ad hoc analytics query cluster",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "按需集群描述。",
+                        "example": "Ad hoc analytics query cluster"
+                      }
+                    }
+                  },
                   "autoSuspend": {
                     "type": "integer",
                     "description": "Auto-suspend idle window. The cluster will be automatically suspended if there is no request within the specified period. The value should be an integer representing the number of seconds. For example, `300` means 5 minutes.",
@@ -1071,7 +1211,8 @@
                     "regionId": "aws-us-west-2",
                     "clusterName": "my-on-demand",
                     "cuSize": 8,
-                    "autoSuspend": 60
+                    "autoSuspend": 60,
+                    "description": "A cluster for vector search workloads."
                   }
                 },
                 "2": {
@@ -1082,7 +1223,8 @@
                     "regionId": "ali-cn-beijing",
                     "clusterName": "my-on-demand",
                     "cuSize": 8,
-                    "autoSuspend": 60
+                    "autoSuspend": 60,
+                    "description": "用于向量搜索工作负载的集群描述。"
                   }
                 }
               }
@@ -1281,6 +1423,17 @@
                       }
                     }
                   },
+                  "description": {
+                    "type": "string",
+                    "description": "Description of the cluster.",
+                    "example": "Production vector search cluster",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "集群描述。",
+                        "example": "Production vector search cluster"
+                      }
+                    }
+                  },
                   "projectId": {
                     "type": "string",
                     "description": "ID of the project to which the cluster belongs.",
@@ -1305,7 +1458,8 @@
                   "value": {
                     "clusterName": "Serverless-05",
                     "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxxx",
-                    "regionId": "gcp-us-west1"
+                    "regionId": "gcp-us-west1",
+                    "description": "A cluster for vector search workloads."
                   }
                 },
                 "2": {
@@ -1314,7 +1468,8 @@
                   "value": {
                     "clusterName": "Serverless-05",
                     "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxxx",
-                    "regionId": "ali-cn-hangzhou"
+                    "regionId": "ali-cn-hangzhou",
+                    "description": "用于向量搜索工作负载的集群描述。"
                   }
                 }
               }
@@ -1598,6 +1753,15 @@
                                   }
                                 }
                               },
+                              "description": {
+                                "type": "string",
+                                "description": "Description of the on-demand cluster.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "按需集群描述。"
+                                  }
+                                }
+                              },
                               "regionId": {
                                 "type": "string",
                                 "description": "Cloud region where the cluster is located.",
@@ -1713,7 +1877,8 @@
                             "privateLink": "",
                             "createdBy": "john.doe@zilliz.com",
                             "createTime": "2024-04-21T10:15:15Z",
-                            "autoSuspend": 60
+                            "autoSuspend": 60,
+                            "description": "An on-demand cluster for vector search workloads."
                           },
                           {
                             "projectId": "proj-xxxxxxxxxxxxxxx",
@@ -1726,7 +1891,8 @@
                             "privateLink": "",
                             "createdBy": "john.doe@zilliz.com",
                             "createTime": "2024-04-21T10:15:16Z",
-                            "autoSuspend": 60
+                            "autoSuspend": 60,
+                            "description": "An on-demand cluster for vector search workloads."
                           }
                         ]
                       }
@@ -1751,7 +1917,8 @@
                             "privateLink": "",
                             "createdBy": "john.doe@zilliz.com",
                             "createTime": "2024-04-21T10:15:15Z",
-                            "autoSuspend": 60
+                            "autoSuspend": 60,
+                            "description": "用于按需向量搜索工作负载的集群描述。"
                           },
                           {
                             "projectId": "proj-xxxxxxxxxxxxxxx",
@@ -1764,7 +1931,8 @@
                             "privateLink": "",
                             "createdBy": "john.doe@zilliz.com",
                             "createTime": "2024-04-21T10:15:16Z",
-                            "autoSuspend": 60
+                            "autoSuspend": 60,
+                            "description": "用于按需向量搜索工作负载的集群描述。"
                           }
                         ]
                       }
@@ -2050,11 +2218,11 @@
                           "type": "object",
                           "properties": {
                             "projectId": {
-                                "type": "string",
-                                "description": "ID of the project.",
-                                "x-i18n": {
-                                    "zh-CN": "项目 ID。"
-                                }
+                              "type": "string",
+                              "description": "ID of the project.",
+                              "x-i18n": {
+                                "zh-CN": "项目 ID。"
+                              }
                             },
                             "clusterId": {
                               "type": "string",
@@ -2069,6 +2237,15 @@
                               "description": "Name of the cluster.",
                               "x-i18n": {
                                 "zh-CN": "集群名称。"
+                              }
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "Description of the on-demand cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "按需集群描述。"
+                                }
                               }
                             },
                             "regionId": {
@@ -2191,6 +2368,454 @@
                     "value": {
                       "code": 21119,
                       "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update On-Demand Cluster Info",
+        "deprecated": false,
+        "description": "Update the name or description of an on-demand cluster in the current project.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "更新按需集群信息",
+            "description": "更新当前项目中一个按需集群的名称或描述。"
+          }
+        },
+        "tags": [
+          "Cluster Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "CLUSTER_ID",
+            "in": "path",
+            "description": "The ID of the on-demand cluster to update.",
+            "required": true,
+            "example": "inxx-xxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前操作的目标集群 ID。"
+              }
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          },
+          {
+            "name": "OrgId",
+            "in": "header",
+            "description": "The organization ID of the cluster.",
+            "required": true,
+            "example": "org-xxxxxxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "集群所属的组织 ID。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "clusterName": {
+                    "type": "string",
+                    "description": "The new name of the cluster. The value cannot be an empty string.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "集群的新名称。值不能为空字符串。"
+                      }
+                    }
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The new description of the cluster. The value can be an empty string.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "集群的新描述。值可以为空字符串。"
+                      }
+                    }
+                  }
+                },
+                "description": "Request payload for updating an on-demand cluster.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "更新按需集群的请求负载。"
+                  }
+                }
+              },
+              "examples": {
+                "1": {
+                  "summary": "Name and description",
+                  "value": {
+                    "clusterName": "New Cluster Name",
+                    "description": "This is the new description of the cluster."
+                  }
+                },
+                "2": {
+                  "summary": "Name only",
+                  "value": {
+                    "clusterName": "New Cluster Name"
+                  }
+                },
+                "3": {
+                  "summary": "Description only",
+                  "value": {
+                    "description": ""
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the ID of the modified cluster.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code."
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "clusterId": {
+                              "type": "string",
+                              "description": "ID of the cluster that has been modified."
+                            },
+                            "prompt": {
+                              "type": "string",
+                              "description": "Prompt message returned."
+                            }
+                          },
+                          "description": "Response payload."
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                        "prompt": "successfully submitted. Cluster is being upgraded, which is expected to take several minutes. You can access data about the creation progress and status of your cluster by DescribeCluster API. Once the cluster status is RUNNING, you may access your vector database using the SDK."
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/clusters/onDemandClusters/{CLUSTER_ID}/modify": {
+      "post": {
+        "summary": "Modify On-Demand Cluster",
+        "deprecated": false,
+        "description": "Modify the settings of an on-demand cluster. You can update the auto-suspend idle window, cluster name, description, or any combination of these settings.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "修改按需集群",
+            "description": "修改按需集群的设置。你可以更新自动挂起空闲时间、集群名称、描述，或同时更新这些设置。"
+          }
+        },
+        "tags": [
+          "Cluster Operations (V2)"
+        ],
+        "x-beta": "PUBLIC",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          },
+          {
+            "name": "CLUSTER_ID",
+            "in": "path",
+            "description": "The ID of the on-demand cluster to modify.",
+            "required": true,
+            "example": "inxx-xxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "待修改按需集群的 ID。"
+              }
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "Use `application/json`.",
+            "required": false,
+            "example": "application/json",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "使用 `application/json`。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "autoSuspend": {
+                    "type": "string",
+                    "description": "Auto-suspend idle window. The value must use the `<number><s|m|h>` format, such as `60s`, `5m`, or `1h`, and must be at least 60 seconds.",
+                    "pattern": "^\\d+[smh]$",
+                    "example": "5m",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "自动挂起空闲时间。该值必须使用 `<number><s|m|h>` 格式，例如 `60s`、`5m` 或 `1h`，且至少为 60 秒。",
+                        "example": "5m"
+                      }
+                    }
+                  },
+                  "clusterName": {
+                    "type": "string",
+                    "description": "The new name of the on-demand cluster. The name can contain letters, digits, spaces, underscores, hyphens, or Chinese characters.",
+                    "minLength": 1,
+                    "maxLength": 64,
+                    "example": "My On-Demand Cluster",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "按需集群的新名称。名称可以包含字母、数字、空格、下划线、连字符或中文字符。",
+                        "example": "我的按需集群"
+                      }
+                    }
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The new description of the on-demand cluster. The description must be shorter than 255 characters.",
+                    "maxLength": 255,
+                    "example": "Query cluster for production search workloads.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "按需集群的新描述。描述必须少于 255 个字符。",
+                        "example": "用于生产搜索工作负载的 Query Cluster。"
+                      }
+                    }
+                  }
+                },
+                "description": "Request payload for modifying an on-demand cluster. Specify at least one of `autoSuspend`, `clusterName`, or `description`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "修改按需集群的请求负载。请至少指定 `autoSuspend`、`clusterName` 或 `description` 中的一个。"
+                  }
+                }
+              },
+              "examples": {
+                "1": {
+                  "summary": "Modify settings",
+                  "x-target-lang": "en-US",
+                  "value": {
+                    "autoSuspend": "5m",
+                    "clusterName": "My On-Demand Cluster",
+                    "description": "Query cluster for production search workloads."
+                  }
+                },
+                "2": {
+                  "summary": "修改设置",
+                  "x-target-lang": "zh-CN",
+                  "value": {
+                    "autoSuspend": "5m",
+                    "clusterName": "我的按需集群",
+                    "description": "用于生产搜索工作负载的 Query Cluster。"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns a success response.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回成功响应。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "string",
+                          "description": "A string 'success' indicating the on-demand cluster has been modified.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "字符串 'success'，表示按需集群已修改。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-lang": "en-US",
+                    "value": {
+                      "code": 0,
+                      "data": "success"
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-lang": "en-US",
+                    "value": {
+                      "code": 1801,
+                      "message": "At least one of autoSuspend, clusterName or description must be specified."
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "x-target-lang": "zh-CN",
+                    "value": {
+                      "code": 1801,
+                      "message": "必须指定 autoSuspend、clusterName 或 description 中的至少一个。"
                     }
                   }
                 }
@@ -2630,6 +3255,39 @@
                                   }
                                 }
                               }
+                            },
+                            "globalClusterMeta": {
+                              "type": "object",
+                              "description": "Metadata of the global cluster if the current cluster belongs to a global cluster. Otherwise, this field is null.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "如果当前集群属于全球集群，则返回全球集群的元信息。否则，此字段为 null。"
+                                }
+                              },
+                              "properties": {
+                                "globalClusterId": {
+                                  "type": "string",
+                                  "description": "ID of the global cluster.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "全球集群 ID。"
+                                    }
+                                  }
+                                },
+                                "role": {
+                                  "type": "string",
+                                  "description": "Role of the cluster in the global cluster. Possible values are `PRIMARY` and `SECONDARY`.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "当前集群在全球集群中的角色。可能的值有 `PRIMARY` 和 `SECONDARY`。"
+                                    }
+                                  },
+                                  "enum": [
+                                    "PRIMARY",
+                                    "SECONDARY"
+                                  ]
+                                }
+                              }
                             }
                           },
                           "description": "Response payload.",
@@ -2757,6 +3415,37 @@
                     }
                   },
                   "4": {
+                    "summary": "global",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "en-US",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "clusterId": "in01-108240180a4faf8",
+                        "clusterName": "dedicated-test",
+                        "projectId": "proj-b44a39b0c51cf21791a841",
+                        "description": "",
+                        "regionId": "aws-us-west-2",
+                        "cuType": "Performance-optimized",
+                        "plan": "Enterprise",
+                        "status": "RUNNING",
+                        "connectAddress": "https://in01-108240180a4faf8.aws-us-west-2.vectordb.zillizcloud.com:19539",
+                        "privateLinkAddress": "",
+                        "createTime": "2024-06-30T16:34:09Z",
+                        "replica": 1,
+                        "cuSize": 2,
+                        "storageSize": 0,
+                        "snapshotNumber": 0,
+                        "createProgress": 100,
+                        "deploymentOption": "Dedicated",
+                        "globalClusterMeta": {
+                          "globalClusterId": "glo-xxxxxxxxxxxxxxx",
+                          "role": "PRIMARY"
+                        }
+                      }
+                    }
+                  },
+                  "5": {
                     "summary": "failure",
                     "x-target-response": "OPTION 2",
                     "value": {
@@ -2764,7 +3453,7 @@
                       "message": "The apikey is illegal."
                     }
                   },
-                  "5": {
+                  "6": {
                     "summary": "dedicated",
                     "x-target-response": "OPTION 1",
                     "x-target-lang": "zh-CN",
@@ -2786,11 +3475,12 @@
                         "cuSize": 2,
                         "storageSize": 0,
                         "snapshotNumber": 0,
-                        "createProgress": 100
+                        "createProgress": 100,
+                        "deploymentOption": "Dedicated"
                       }
                     }
                   },
-                  "6": {
+                  "7": {
                     "summary": "serverless",
                     "x-target-response": "OPTION 1",
                     "x-target-lang": "zh-CN",
@@ -2816,7 +3506,7 @@
                       }
                     }
                   },
-                  "7": {
+                  "8": {
                     "summary": "free",
                     "x-target-response": "OPTION 1",
                     "x-target-lang": "zh-CN",
@@ -2840,6 +3530,246 @@
                         "snapshotNumber": 0,
                         "createProgress": 100
                       }
+                    }
+                  },
+                  "9": {
+                    "summary": "global",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "zh-CN",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "clusterId": "in01-108240180a4faf8",
+                        "clusterName": "dedicated-test",
+                        "projectId": "proj-b44a39b0c51cf21791a841",
+                        "description": "",
+                        "regionId": "ali-cn-hangzhou",
+                        "cuType": "Performance-optimized",
+                        "plan": "Standard",
+                        "status": "RUNNING",
+                        "connectAddress": "https://in01-108240180a4faf8.ali-cn-hangzhou.vectordb.zilliz.com.cn:19539",
+                        "privateLinkAddress": "",
+                        "createTime": "2024-06-30T16:34:09Z",
+                        "replica": 1,
+                        "cuSize": 2,
+                        "storageSize": 0,
+                        "snapshotNumber": 0,
+                        "createProgress": 100,
+                        "deploymentOption": "Dedicated",
+                        "globalClusterMeta": {
+                          "globalClusterId": "glo-xxxxxxxxxxxxxxx",
+                          "role": "PRIMARY"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      },
+      "patch": {
+        "summary": "Update Dedicated Cluster Info",
+        "deprecated": false,
+        "description": "Update the name or description of a dedicated cluster in the current project.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "更新 Dedicated 集群信息",
+            "description": "更新当前项目中一个 Dedicated 集群的名称或描述。"
+          }
+        },
+        "tags": [
+          "Cluster Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "CLUSTER_ID",
+            "in": "path",
+            "description": "The ID of the dedicated cluster to update.",
+            "required": true,
+            "example": "inxx-xxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前操作的目标集群 ID。"
+              }
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          },
+          {
+            "name": "OrgId",
+            "in": "header",
+            "description": "The organization ID of the cluster.",
+            "required": true,
+            "example": "org-xxxxxxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "集群所属的组织 ID。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "clusterName": {
+                    "type": "string",
+                    "description": "The new name of the cluster. The value cannot be an empty string.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "集群的新名称。值不能为空字符串。"
+                      }
+                    }
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The new description of the cluster. The value can be an empty string.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "集群的新描述。值可以为空字符串。"
+                      }
+                    }
+                  }
+                },
+                "description": "Request payload for updating a dedicated cluster.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "更新 Dedicated 集群的请求负载。"
+                  }
+                }
+              },
+              "examples": {
+                "1": {
+                  "summary": "Name and description",
+                  "value": {
+                    "clusterName": "New Cluster Name",
+                    "description": "This is the new description of the cluster."
+                  }
+                },
+                "2": {
+                  "summary": "Name only",
+                  "value": {
+                    "clusterName": "New Cluster Name"
+                  }
+                },
+                "3": {
+                  "summary": "Description only",
+                  "value": {
+                    "description": ""
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the ID of the modified cluster.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code."
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "clusterId": {
+                              "type": "string",
+                              "description": "ID of the cluster that has been modified."
+                            },
+                            "prompt": {
+                              "type": "string",
+                              "description": "Prompt message returned."
+                            }
+                          },
+                          "description": "Response payload."
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                        "prompt": "successfully submitted. Cluster is being upgraded, which is expected to take several minutes. You can access data about the creation progress and status of your cluster by DescribeCluster API. Once the cluster status is RUNNING, you may access your vector database using the SDK."
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
                     }
                   }
                 }
@@ -3430,11 +4360,11 @@
       "post": {
         "summary": "Modify Cluster Replica",
         "deprecated": false,
-        "description": "This operation sets the number of replicas for the specified cluster. ",
+        "description": "This operation sets the number of replicas for the specified cluster. For Global clusters, each member cluster can have different number of replicas, and this operation only modifies the replica number of the specified cluster.",
         "x-i18n": {
           "zh-CN": {
             "summary": "修改集群副本数量",
-            "description": "本接口可以设置指定集群的副本数量。"
+            "description": "本接口可以设置指定集群的副本数量。对于全球集群，每个成员集群可以有不同的副本数量，本接口仅修改指定集群的副本数量。"
           }
         },
         "tags": [
@@ -3499,8 +4429,39 @@
                   "replica"
                 ]
               },
-              "example": {
-                "replica": 2
+              "examples": {
+                "1": {
+                  "summary": "Manual Scaling",
+                  "value": {
+                    "replica": 2
+                  }
+                },
+                "2": {
+                  "summary": "Dynamic Scaling",
+                  "value": {
+                    "autoscaling": {
+                      "replica": {
+                        "min": 1,
+                        "max": 2
+                      }
+                    }
+                  }
+                },
+                "3": {
+                  "summary": "Scheduled Scaling",
+                  "value": {
+                    "autoscaling": {
+                      "replica": {
+                        "schedules": [
+                          {
+                            "cron": "10 0 0 0 0 ?",
+                            "target": 2
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
               }
             }
           }

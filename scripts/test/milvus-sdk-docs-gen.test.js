@@ -17,6 +17,7 @@ Module._load = function loadWithMdxPatcherStub(request, parent, isMain) {
 };
 
 const MilvusSdkDocsGen = require('../lib/milvusSdkDocsGen');
+const MilvusDocsGen = require('../lib/milvusDocsGen');
 
 function record(recordId, slug, type, title, parent = null, token = recordId) {
   return {
@@ -71,6 +72,90 @@ test('MilvusSdkDocsGen makes SDK page paths unique on case-insensitive file syst
     await gen.__convert_link('https://example.feishu.cn/docx/token-lower'),
     'createSchema-2.md'
   );
+});
+
+test('MilvusSdkDocsGen normalizes Feishu docx tokens before resolving links', async () => {
+  const gen = new MilvusSdkDocsGen();
+  gen.records = [
+    record('utility', 'v2-utility', 'VirtualNode', 'utility'),
+    record(
+      'create-user',
+      'v2-utility-create_user',
+      'Function',
+      'create_user',
+      'utility',
+      'N44ndTSrgoEBx7xCID5cXRS7n1c?from=from_parent_docs'
+    ),
+    record('delete-user', 'v2-utility-delete_user', 'Function', 'delete_user', 'utility'),
+  ];
+
+  const sources = await gen.__list_sources();
+  const createUser = sources.find((source) => source.title === 'create_user');
+  assert.equal(createUser.page_token, 'N44ndTSrgoEBx7xCID5cXRS7n1c');
+
+  gen.current_page_id = 'utility/delete_user.md';
+  assert.equal(
+    await gen.__convert_link('https://zilliverse.feishu.cn/docx/N44ndTSrgoEBx7xCID5cXRS7n1c'),
+    'create_user.md'
+  );
+});
+
+test('MilvusSdkDocsGen resolves stale Feishu docx links by label within the current SDK section', async () => {
+  const gen = new MilvusSdkDocsGen();
+  gen.records = [
+    record('orm', 'v2-ORM', 'VirtualNode', 'ORM'),
+    record('orm-utility', 'v2-ORM-utility', 'Module', 'utility', 'orm'),
+    record('orm-create-user', 'v2-utility-create_user', 'Function', 'create_user()', 'orm-utility', 'current-orm-create-user'),
+    record('orm-delete-user', 'v2-utility-delete_user', 'Function', 'delete_user()', 'orm-utility', 'current-orm-delete-user'),
+    record('client', 'v2-MilvusClient', 'VirtualNode', 'MilvusClient'),
+    record('client-auth', 'v2-MilvusClient-Authentication', 'Module', 'Authentication', 'client'),
+    record('client-create-user', 'v2-Authentication-create_user', 'Function', 'create_user()', 'client-auth', 'current-client-create-user'),
+    record('client-collection-schema', 'v2-MilvusClient-CollectionSchema', 'Class', 'CollectionSchema', 'client', 'current-client-collection-schema'),
+    record('client-collection-schema-method', 'v2-CollectionSchema-construct_from_dict', 'Function', 'construct_from_dict', 'client-collection-schema', 'current-client-collection-schema-method'),
+    record('client-collections', 'v2-MilvusClient-Collections', 'Module', 'Collections', 'client'),
+    record('client-datatype', 'v2-Collections-DataType', 'Enum', 'DataType', 'client-collections', 'current-datatype'),
+    record('orm-collection-schema', 'v2-ORM-CollectionSchema', 'Class', 'CollectionSchema', 'orm', 'current-orm-collection-schema'),
+    record('orm-collection-schema-method', 'v2-CollectionSchema-construct_from_dict', 'Function', 'construct_from_dict', 'orm-collection-schema', 'current-orm-collection-schema-method'),
+  ];
+  await gen.__list_sources();
+
+  gen.current_page_id = 'ORM/utility/delete_user.md';
+  assert.equal(
+    await gen.__convert_link('https://zilliverse.feishu.cn/docx/stale-create-user-token', 'create_user()'),
+    'create_user.md'
+  );
+
+  gen.current_page_id = 'MilvusClient/StructFieldSchema/add_field.md';
+  assert.equal(
+    await gen.__convert_link('https://zilliverse.feishu.cn/docx/stale-datatype-token', 'datatype'),
+    '../Collections/DataType.md'
+  );
+
+  gen.current_page_id = 'DataImport/VolumeBulkWriter/VolumeBulkWriter.md';
+  assert.equal(
+    await gen.__convert_link('https://zilliverse.feishu.cn/docx/stale-schema-token', 'CollectionSchema'),
+    '../../MilvusClient/CollectionSchema/CollectionSchema.md'
+  );
+});
+
+test('MilvusDocsGen skips unavailable reference_synced source documents', async () => {
+  const gen = new MilvusDocsGen();
+  gen.__fetch_doc_blocks = async () => null;
+
+  const blocks = [
+    {
+      block_id: 'reference-block',
+      parent_id: 'parent-block',
+      block_type: 50,
+      reference_synced: {
+        source_document_id: 'okCAzpdAw3wo4ZqrxhjTLcEGBBn1S',
+        source_block_id: 'SM7ld0ZsEoYLqaxVMZxcSH82n9f',
+      },
+    },
+  ];
+
+  const result = await gen.__get_reference_syncd_blocks(blocks);
+  assert.equal(result, blocks);
 });
 
 test('package scripts expose an npm command for every SDK manual', () => {

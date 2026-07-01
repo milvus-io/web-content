@@ -1,8 +1,8 @@
 # create_role()
 
-This operation creates a custom role.
+This operation creates a role for role-based access control.
 
-## Request syntax
+## Request Syntax
 
 ```python
 create_role(
@@ -19,19 +19,15 @@ create_role(
 
     The name of the role to create.
 
-- **timeout** (*float* | *None*)  
+- **timeout** (*float*) -
 
-    The timeout duration for this operation. 
-
-    Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
+    The timeout duration for this operation.
 
 **RETURN TYPE:**
 
-*NoneType*
+*None*
 
-**RETURNS:**
-
-None
+This operation returns no value.
 
 **EXCEPTIONS:**
 
@@ -39,22 +35,12 @@ None
 
     This exception will be raised when any error occurs during this operation.
 
-- **BaseException**
+- **ParamError**
 
-    This exception will be raised when this operation fails.
+    This exception will be raised when a parameter value is invalid.
 
-## Example
+## Examples
 
 ```python
-from pymilvus import MilvusClient
-
-# 1. Create a milvus client
-client = MilvusClient(
-    uri="http://localhost:19530",
-    token="root:Milvus"
-)
-
-# 2. Create a role
-client.create_role(role_name="read_only")
+client.create_role(role_name="analytics_reader")
 ```
-

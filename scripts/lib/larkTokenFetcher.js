@@ -1,5 +1,5 @@
-const fetch = require('node-fetch')
 const process = require('node:process')
+const { fetchFeishuJsonWithRetry } = require('./feishuFetch.js')
 require('dotenv').config()
 
 const APP_ID = process.env.APP_ID
@@ -20,15 +20,14 @@ class larkTokenFetcher {
             body: JSON.stringify({
                 "app_id": APP_ID,
                 "app_secret": APP_SECRET
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            })
         }
 
-        let res = await fetch(`${FEISHU_HOST}/open-apis/auth/v3/tenant_access_token/internal/`, req)
-
-        res = await res.json()
+        let res = await fetchFeishuJsonWithRetry(
+            `${FEISHU_HOST}/open-apis/auth/v3/tenant_access_token/internal/`,
+            req,
+            'fetch tenant access token'
+        )
 
         if (res.code == 0) {
             this.tenantAccessToken = res.tenant_access_token

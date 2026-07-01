@@ -1,5 +1,7 @@
 # hybridSearch()
 
+# hybridSearch()
+
 This operation performs multi-vector search on a collection and returns search results after reranking.
 
 ```java
@@ -30,59 +32,59 @@ hybridSearch(HybridSearchReq.builder()
 
 **BUILDER METHODS:**
 
-- `databaseName(String databaseName)` -
+- `databaseName(String databaseName)`
 
     The name of the database. Defaults to the current database if not specified.
 
-- `collectionName(String collectionName)` -
+- `collectionName(String collectionName)`
 
     The name of the target collection.
 
-- `partitionNames(List<String> partitionNames)` -
+- `partitionNames(List<String> partitionNames)`
 
     A list of partition names to target.
 
-- `searchRequests(List<AnnSearchReq> searchRequests)` -
+- `searchRequests(List<AnnSearchReq> searchRequests)`
 
     A list of AnnSearchReq objects for hybrid search.
 
-- `topK(int topK)` -
+- `topK(int topK)`
 
     The number of top results to return.
 
-- `limit(long limit)` -
+- `limit(long limit)`
 
     The maximum number of results to return.
 
-- `outFields(List<String> outFields)` -
+- `outFields(List<String> outFields)`
 
     A list of field names to include in the output.
 
-- `offset(long offset)` -
+- `offset(long offset)`
 
     The number of results to skip before returning.
 
-- `roundDecimal(int roundDecimal)` -
+- `roundDecimal(int roundDecimal)`
 
     The number of decimal places for distance/score rounding.
 
-- `consistencyLevel(ConsistencyLevel consistencyLevel)` -
+- `consistencyLevel(ConsistencyLevel consistencyLevel)`
 
     The consistency level for the operation.
 
-- `groupByFieldName(String groupByFieldName)` -
+- `groupByFieldName(String groupByFieldName)`
 
     The field name to group search results by.
 
-- `groupSize(Integer groupSize)` -
+- `groupSize(Integer groupSize)`
 
     The number of results to return per group.
 
-- `strictGroupSize(Boolean strictGroupSize)` -
+- `strictGroupSize(Boolean strictGroupSize)`
 
     Whether to strictly enforce the group size.
 
-- `functionScore(FunctionScore functionScore)` -
+- `functionScore(FunctionScore functionScore)`
 
     A FunctionScore object for custom scoring.
 

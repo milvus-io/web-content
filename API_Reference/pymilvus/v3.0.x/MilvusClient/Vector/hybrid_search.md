@@ -42,7 +42,7 @@ hybrid_search(
 
         - **anns_field** (*str*): The vector field to use in the request.
 
-        - **param** (*dict*): A dictionary of search parameters for the request. For details, refer to the settings in [search()](https://zilliverse.feishu.cn/docx/N6afdOON2o3U0YxMAt7cMiBqnXg).
+        - **param** (*dict*): A dictionary of search parameters for the request. For details, refer to the settings in [search()](search.md).
 
         - **limit** (*int*): The maximum number of results to return in the request. When performing a hybrid search with multiple ANN search requests, the top results defined by **limit** from each request will be combined and re-ranked before returning the final search results.
 

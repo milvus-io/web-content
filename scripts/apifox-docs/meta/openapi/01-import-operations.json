@@ -34,7 +34,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "description": "The authentication token should be an API key with appropriate privileges.",
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
@@ -42,7 +42,7 @@
             },
             "x-i18n": {
               "zh-CN": {
-                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
               }
             }
           }
@@ -289,7 +289,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "description": "The authentication token should be an API key with appropriate privileges.",
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
@@ -297,7 +297,7 @@
             },
             "x-i18n": {
               "zh-CN": {
-                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
               }
             }
           }
@@ -551,7 +551,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "description": "The authentication token should be an API key with appropriate privileges.",
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
@@ -559,7 +559,7 @@
             },
             "x-i18n": {
               "zh-CN": {
-                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
               }
             }
           }

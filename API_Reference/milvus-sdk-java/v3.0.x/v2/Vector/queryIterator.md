@@ -1,5 +1,7 @@
 # queryIterator()
 
+# queryIterator()
+
 This method returns a query iterator to iterate data.
 
 ```java
@@ -29,55 +31,55 @@ queryIterator(QueryIteratorReq.builder()
 
 **BUILDER METHODS:**
 
-- `databaseName(String databaseName)` -
+- `databaseName(String databaseName)`
 
     The name of the database. Defaults to the current database if not specified.
 
-- `collectionName(String collectionName)` -
+- `collectionName(String collectionName)`
 
     The name of the target collection.
 
-- `partitionNames(List<String> partitionNames)` -
+- `partitionNames(List<String> partitionNames)`
 
     A list of partition names to target.
 
-- `outputFields(List<String> outputFields)` -
+- `outputFields(List<String> outputFields)`
 
     A list of field names to include in the output.
 
-- `expr(String expr)` -
+- `expr(String expr)`
 
     A boolean expression to filter results.
 
-- `consistencyLevel(ConsistencyLevel consistencyLevel)` -
+- `consistencyLevel(ConsistencyLevel consistencyLevel)`
 
     The consistency level for the operation.
 
-- `offset(long offset)` -
+- `offset(long offset)`
 
     The number of results to skip before returning.
 
-- `limit(long limit)` -
+- `limit(long limit)`
 
     The maximum number of results to return.
 
-- `ignoreGrowing(boolean ignoreGrowing)` -
+- `ignoreGrowing(boolean ignoreGrowing)`
 
     Whether to ignore growing segments during the operation.
 
-- `timezone(String timezone)` -
+- `timezone(String timezone)`
 
     The timezone string for time-related filters.
 
-- `batchSize(long batchSize)` -
+- `batchSize(long batchSize)`
 
     The batch size for iterator operations.
 
-- `reduceStopForBest(boolean reduceStopForBest)` -
+- `reduceStopForBest(boolean reduceStopForBest)`
 
     Whether to stop iteration when the best result is found.
 
-- `filterTemplateValues(Map<String, Object> filterTemplateValues)` -
+- `filterTemplateValues(Map<String, Object> filterTemplateValues)`
 
     A map of template variable values for parameterized filters.
 

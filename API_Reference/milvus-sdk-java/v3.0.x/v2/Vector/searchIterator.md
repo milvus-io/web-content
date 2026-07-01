@@ -1,5 +1,7 @@
 # searchIterator()
 
+# searchIterator()
+
 This method returns a search iterator to iterate search results.
 
 ```java
@@ -31,63 +33,63 @@ searchIterator(SearchIteratorReq.builder()
 
 **BUILDER METHODS:**
 
-- `databaseName(String databaseName)` -
+- `databaseName(String databaseName)`
 
     The name of the database. Defaults to the current database if not specified.
 
-- `collectionName(String collectionName)` -
+- `collectionName(String collectionName)`
 
     The name of the target collection.
 
-- `partitionNames(List<String> partitionNames)` -
+- `partitionNames(List<String> partitionNames)`
 
     A list of partition names to target.
 
-- `vectorFieldName(String vectorFieldName)` -
+- `vectorFieldName(String vectorFieldName)`
 
     The name of the vector field.
 
-- `topK(int topK)` -
+- `topK(int topK)`
 
     The number of top results to return.
 
-- `limit(long limit)` -
+- `limit(long limit)`
 
     The maximum number of results to return.
 
-- `expr(String expr)` -
+- `expr(String expr)`
 
     A boolean expression to filter results.
 
-- `outputFields(List<String> outputFields)` -
+- `outputFields(List<String> outputFields)`
 
     A list of field names to include in the output.
 
-- `vectors(List<BaseVector> vectors)` -
+- `vectors(List<BaseVector> vectors)`
 
     A list of vectors to search with.
 
-- `roundDecimal(int roundDecimal)` -
+- `roundDecimal(int roundDecimal)`
 
     The number of decimal places for distance/score rounding.
 
-- `params(String params)` -
+- `params(String params)`
 
     Additional search parameters as a JSON string.
 
-- `consistencyLevel(ConsistencyLevel consistencyLevel)` -
+- `consistencyLevel(ConsistencyLevel consistencyLevel)`
 
     The consistency level for the operation.
 
-- `ignoreGrowing(boolean ignoreGrowing)` -
+- `ignoreGrowing(boolean ignoreGrowing)`
 
     Whether to ignore growing segments during the operation.
 
-- `groupByFieldName(String groupByFieldName)` -
+- `groupByFieldName(String groupByFieldName)`
 
     The field name to group search results by.
 
-- `batchSize(long batchSize)` -
+- `batchSize(long batchSize)`
 
     The batch size for iterator operations.
 

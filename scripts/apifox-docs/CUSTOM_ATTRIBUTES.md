@@ -351,6 +351,11 @@ Provides custom descriptions for tag groups and supports Milvus name overrides.
 | `description` | Custom description text used in the group MDX page. |
 | `milvus.name` | Overrides the folder name when `target === 'milvus'`. |
 
+The group slug is also used for plane routing. `refGen.getPlane()` checks
+`meta/plane-config.json`; for the Zilliz target, any slug containing one of
+`controlPlaneKeywords.zilliz` is generated under `control-plane`, otherwise it
+is generated under `data-plane`.
+
 ### 3.2 `meta/positions.json`
 
 Overrides sidebar positions for tags and endpoints.

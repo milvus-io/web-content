@@ -2,7 +2,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
-const { loadSpecifications } = require('./specLoader');
+const { loadSpecifications, resolveRefs } = require('./specLoader');
 
 function writeSpec(dir, file, headerDescription) {
     fs.writeFileSync(path.join(dir, file), JSON.stringify({
@@ -127,9 +127,40 @@ function testPreResolutionLeavesCrossFileRefsForMergedResolutionWithoutWarning()
     });
 }
 
+function testResolveRefsPreservesSiblingMetadataOnRefWrapper() {
+    const spec = {
+        components: {
+            schemas: {
+                StorageRequest: {
+                    type: 'object',
+                    properties: {
+                        bucketName: { type: 'string' },
+                    },
+                },
+            },
+        },
+    };
+
+    const resolved = resolveRefs({
+        'x-tab-label': 'AWS S3',
+        'x-target-lang': 'en-US',
+        $ref: '#/components/schemas/StorageRequest',
+    }, spec);
+
+    assert.deepEqual(resolved, {
+        type: 'object',
+        properties: {
+            bucketName: { type: 'string' },
+        },
+        'x-tab-label': 'AWS S3',
+        'x-target-lang': 'en-US',
+    });
+}
+
 function run() {
     testPathRefsResolveAgainstTheirSourceFileBeforeMerge();
     testPreResolutionLeavesCrossFileRefsForMergedResolutionWithoutWarning();
+    testResolveRefsPreservesSiblingMetadataOnRefWrapper();
     console.log('apifox spec loader tests passed');
 }
 

@@ -1,3 +1,5 @@
+const LARK_DOCS_INCLUDE = [/^(?:lark.*|feishuFetch)\.js$/];
+
 module.exports = [
   {
     name: 'milvus-lib',
@@ -18,14 +20,14 @@ module.exports = [
     sourceType: 'local',
     source: '../zdoc/plugins/lark-docs',
     target: 'scripts/lark-docs',
-    include: [/^lark.*\.js$/],
+    include: LARK_DOCS_INCLUDE,
   },
   {
     name: 'zdoc-lib-lark-files',
     sourceType: 'local',
     source: '../zdoc/plugins/lark-docs',
     target: 'scripts/lib',
-    include: [/^lark.*\.js$/],
+    include: LARK_DOCS_INCLUDE,
   },
   {
     name: 'zdoc-mdx-parse',

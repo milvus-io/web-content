@@ -36,6 +36,10 @@ This is an enumeration that provides the following constants.
 
     Sets the data type to **Varchar**.
 
+- TEXT
+
+    Sets the data type to **TEXT**. Use this scalar type to store long text content such as documents, passages, tickets, or logs. Unlike **VARCHAR**, TEXT does not require `max_length`.
+
 - ARRAY
 
     Sets the data type to **Array**.

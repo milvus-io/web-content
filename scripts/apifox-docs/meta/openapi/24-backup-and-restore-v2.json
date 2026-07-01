@@ -353,6 +353,28 @@
                                         "description": "备份状态。"
                                       }
                                     }
+                                  },
+                                  "restoreNewInstancePolicies": {
+                                    "type": "array",
+                                    "description": "The policies for restoring a new cluster from the backup. This field is only applicable to backups of the type CLUSTER.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "从备份恢复新集群的策略。仅适用于 CLUSTER 类型的备份。"
+                                      }
+                                    },
+                                    "items": {
+                                      "type": "string",
+                                      "description": "The policy for restoring a new cluster from the backup. Possible values are: <ul><li><b>LATEST</b>: Restores the cluster to the latest compatible GA Milvus version available.</li><li><b>ORIGINAL</b>: Restores the cluster to its original compatible Milvus version.</li></ul>",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "从备份恢复新集群的策略。可能的值包括：<ul><li><b>LATEST</b>：恢复集群到最新的兼容 GA Milvus 版本。</li><li><b>ORIGINAL</b>：恢复集群到其原始的兼容 Milvus 版本。</li></ul>"
+                                        }
+                                      },
+                                      "enum": [
+                                        "LATEST",
+                                        "ORIGINAL"
+                                      ]
+                                    }
                                   }
                                 }
                               }
@@ -418,7 +440,11 @@
                             "clusterId": "inxx-xxxxxxxxxxxxxx",
                             "clusterName": "Dedicated-01",
                             "createTime": "2024-07-30T16:49:50Z",
-                            "status": "AVAILABLE"
+                            "status": "AVAILABLE",
+                            "restoreNewInstancePolicies": [
+                              "LATEST",
+                              "ORIGINAL"
+                            ]
                           }
                         ]
                       }
@@ -727,6 +753,28 @@
                             "createTime": {
                               "type": "string",
                               "description": "The time at which the backup was created."
+                            },
+                            "restoreNewInstancePolicies": {
+                              "type": "array",
+                              "description": "The policies for restoring a new cluster from the backup. This field is only applicable to backups of the type CLUSTER.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "从备份恢复新集群的策略。仅适用于 CLUSTER 类型的备份。"
+                                }
+                              },
+                              "items": {
+                                "type": "string",
+                                "description": "The policy for restoring a new cluster from the backup. Possible values are: <ul><li><b>LATEST</b>: Restores the cluster to the latest compatible GA Milvus version available.</li><li><b>ORIGINAL</b>: Restores the cluster to its original compatible Milvus version.</li></ul>",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "从备份恢复新集群的策略。可能的值包括：<ul><li><b>LATEST</b>：恢复集群到最新的兼容 GA Milvus 版本。</li><li><b>ORIGINAL</b>：恢复集群到其原始的兼容 Milvus 版本。</li></ul>"
+                                  }
+                                },
+                                "enum": [
+                                  "LATEST",
+                                  "ORIGINAL"
+                                ]
+                              }
                             }
                           }
                         }
@@ -793,7 +841,11 @@
                             "status": "LOADED"
                           }
                         ],
-                        "createTime": "2024-07-30T16:49:50Z"
+                        "createTime": "2024-07-30T16:49:50Z",
+                        "restoreNewInstancePolicies": [
+                          "LATEST",
+                          "ORIGINAL"
+                        ]
                       }
                     }
                   },
@@ -2255,6 +2307,19 @@
                         "description": "恢复后的集群中 Collection 的状态。"
                       }
                     }
+                  },
+                  "restoreVersionPolicy": {
+                    "type": "string",
+                    "description": "The policy to select the Milvus version for the restored cluster. Possible values are: <ul><li><b>LATEST</b>: Restores the cluster to the latest compatible GA Milvus version available.</li><li><b>ORIGINAL</b>: Restores the cluster to its original compatible Milvus version.</li></ul>",
+                    "enum": [
+                      "LATEST",
+                      "ORIGINAL"
+                    ],
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "恢复后的集群的 Milvus 版本选择策略。可能的值包括：<ul><li><b>LATEST</b>：将集群恢复到最新的兼容 GA Milvus 版本。</li><li><b>ORIGINAL</b>：将集群恢复到原始的兼容 Milvus 版本。</li></ul>"
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -2268,7 +2333,8 @@
                 "projectId": "proj-xxxxxxxxxxxxxxxxxxxx",
                 "clusterName": "Dedicated-12",
                 "cuSize": 2,
-                "collectionStatus": "KEEP"
+                "collectionStatus": "KEEP",
+                "restoreVersionPolicy": "LATEST"
               }
             }
           }

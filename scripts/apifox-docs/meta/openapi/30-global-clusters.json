@@ -1,0 +1,2793 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Global Clusters (V2)",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Global Clusters (V2)",
+      "x-include-target": [
+        "zilliz"
+      ],
+      "x-i18n": {
+        "zh-CN": {
+          "name": "全球集群 (V2)"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/v2/globalClusters/availableRegions": {
+      "get": {
+        "summary": "List Available Global Cluster Regions",
+        "description": "Returns region groups that can be used together in a Global Cluster. Use this API before creating a Global Cluster or adding secondary clusters.",
+        "tags": [
+          "Global Clusters (V2)"
+        ],
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "列出可用全球集群地域",
+            "description": "返回可在同一个全球集群中配合使用的地域组。创建全球集群或添加从集群前可调用此接口。"
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns available Global Cluster region groups.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回可用全球集群地域组。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "regionGroups": {
+                          "type": "array",
+                          "description": "Region groups where member regions can communicate with each other for Global Cluster usage. An empty array means no available region combination is currently exposed for the organization.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "可用于全球集群且成员地域之间可互通的地域组。空数组表示当前组织没有可用的地域组合。"
+                            }
+                          },
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "example": "aws-us-west-2"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "example": 400
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          },
+                          "example": "Invalid request parameters."
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "en-US",
+                    "value": {
+                      "regionGroups": [
+                        [
+                          "aws-us-west-2",
+                          "aws-us-east-1"
+                        ],
+                        [
+                          "aws-eu-central-1",
+                          "aws-eu-west-1"
+                        ]
+                      ]
+                    }
+                  },
+                  "2": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "zh-CN",
+                    "value": {
+                      "regionGroups": [
+                        [
+                          "ali-cn-hangzhou",
+                          "ali-cn-beijing"
+                        ],
+                        [
+                          "ali-cn-shanghai",
+                          "ali-cn-shenzhen"
+                        ]
+                      ]
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 400,
+                      "message": "Invalid request parameters."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/globalClusters": {
+      "get": {
+        "summary": "List Global Clusters",
+        "description": "List all global clusters in the account.",
+        "tags": [
+          "Global Clusters (V2)"
+        ],
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "列出全球集群",
+            "description": "列出账户中的所有全球集群。"
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The number of records to include in each response.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "每次返回的记录数。"
+              }
+            },
+            "required": false,
+            "example": 10,
+            "schema": {
+              "type": "integer",
+              "default": 10,
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "currentPage",
+            "in": "query",
+            "description": "The current page number.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前页码。"
+              }
+            },
+            "required": false,
+            "example": 1,
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "minimum": 1
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of global clusters.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "全球集群列表。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "count": {
+                          "type": "integer",
+                          "description": "Total number of global clusters.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "全球集群总数。"
+                            }
+                          }
+                        },
+                        "currentPage": {
+                          "type": "integer",
+                          "description": "Current page number.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "当前页码。"
+                            }
+                          }
+                        },
+                        "pageSize": {
+                          "type": "integer",
+                          "description": "Number of records per page.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "每页记录数。"
+                            }
+                          }
+                        },
+                        "globalClusters": {
+                          "type": "array",
+                          "description": "List of global clusters.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "全球集群列表。"
+                            }
+                          },
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "globalClusterId": {
+                                "type": "string",
+                                "description": "ID of a global cluster.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "全球集群 ID。"
+                                  }
+                                },
+                                "example": "glo-xxxxxxxxxxxxxxx"
+                              },
+                              "globalClusterName": {
+                                "type": "string",
+                                "description": "Name of a global cluster.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "全球集群名称。"
+                                  }
+                                },
+                                "example": "my-global-cluster"
+                              },
+                              "projectId": {
+                                "type": "string",
+                                "description": "ID of the project that the global cluster belongs to.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "全球集群所属项目 ID。"
+                                  }
+                                },
+                                "example": "proj-xxxxxxxxxxxxxxx"
+                              },
+                              "regionIds": {
+                                "type": "array",
+                                "description": "List of region IDs where the global cluster is deployed.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "全球集群部署的区域 ID 列表。"
+                                  }
+                                },
+                                "items": {
+                                  "type": "string",
+                                  "description": "A region ID.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "区域 ID。"
+                                    }
+                                  }
+                                }
+                              },
+                              "cuType": {
+                                "type": "string",
+                                "description": "Compute unit (CU) type of the global cluster. Members of a global cluster share the same CU type.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "全球集群的计算单元类型（CU）。"
+                                  }
+                                },
+                                "example": "Performance-optimized",
+                                "enum": [
+                                  "Performance-optimized",
+                                  "Capacity-optimized",
+                                  "Tiered-storage"
+                                ]
+                              },
+                              "cuSize": {
+                                "type": "integer",
+                                "description": "Compute unit (CU) size of the global cluster. Members of a global cluster share the same CU size.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "全球集群的计算单元大小（CU）。"
+                                  }
+                                },
+                                "example": 4
+                              },
+                              "connectAddress": {
+                                "type": "string",
+                                "description": "Connection address of the global cluster.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "全球集群的连接地址。"
+                                  }
+                                }
+                              },
+                              "createTime": {
+                                "type": "string",
+                                "format": "date-time",
+                                "description": "Creation time of the global cluster.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "全球集群的创建时间。"
+                                  }
+                                },
+                                "example": "2026-06-01T12:00:00Z"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "en-US",
+                    "value": {
+                      "count": 1,
+                      "currentPage": 1,
+                      "pageSize": 10,
+                      "globalClusters": [
+                        {
+                          "globalClusterId": "glo-xxxxxxxxxxxxxxx",
+                          "globalClusterName": "my-global-cluster",
+                          "projectId": "proj-xxxxxxxxxxxxxxx",
+                          "regionIds": [
+                            "aws-us-west-2",
+                            "aws-eu-west-1"
+                          ],
+                          "cuType": "Performance-optimized",
+                          "cuSize": 4,
+                          "connectAddress": "https://glo-xxxxxxxx.global-cluster.vectordb.zillizcloud.com",
+                          "createTime": "2026-06-01T12:00:00Z"
+                        }
+                      ]
+                    }
+                  },
+                  "2": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "zh-CN",
+                    "value": {
+                      "count": 1,
+                      "currentPage": 1,
+                      "pageSize": 10,
+                      "globalClusters": [
+                        {
+                          "globalClusterId": "glo-xxxxxxxxxxxxxxx",
+                          "globalClusterName": "my-global-cluster",
+                          "projectId": "proj-xxxxxxxxxxxxxxx",
+                          "regionIds": [
+                            "ali-cn-hangzhou",
+                            "ali-cn-beijing"
+                          ],
+                          "cuType": "Performance-optimized",
+                          "cuSize": 4,
+                          "connectAddress": "https://glo-xxxxxxxx.global-cluster.vectordb.cloud.zilliz.com.cn",
+                          "createTime": "2026-06-01T12:00:00Z"
+                        }
+                      ]
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 400,
+                      "message": "Invalid request parameters."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/globalClusters/create": {
+      "post": {
+        "summary": "Create Global Cluster",
+        "description": "This operation creates a global cluster. A global cluster consists of multiple member clusters deployed in different regions. The member clusters in a global cluster share the same CU type and CU size. You can create global clusters to provide disaster recovery and low latency access across regions.",
+        "tags": [
+          "Global Clusters (V2)"
+        ],
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "创建全球集群",
+            "description": "本接口创建一个全球集群。全球集群由部署在不同区域的多个成员集群组成。全球集群中的成员集群共享相同的计算单元类型和计算单元大小。您可以创建全球集群以提供跨区域的灾难恢复和低延迟访问。"
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Parameters for creating a global cluster.",
+          "x-i18n": {
+            "zh-CN": {
+              "description": "创建全球集群的参数。"
+            }
+          },
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "globalClusterName": {
+                    "type": "string",
+                    "description": "Name of the global cluster.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "全球集群名称。"
+                      }
+                    },
+                    "example": "my-global-cluster"
+                  },
+                  "projectId": {
+                    "type": "string",
+                    "description": "ID of the project that the global cluster belongs to.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "全球集群所属项目 ID。"
+                      }
+                    },
+                    "example": "proj-xxxxxxxxxxxxxxx"
+                  },
+                  "cuType": {
+                    "type": "string",
+                    "description": "Compute unit (CU) type of the global cluster. Members of a global cluster share the same CU type.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "全球集群的计算单元类型（CU）。"
+                      }
+                    },
+                    "example": "Performance-optimized",
+                    "enum": [
+                      "Performance-optimized",
+                      "Capacity-optimized",
+                      "Tiered-storage"
+                    ]
+                  },
+                  "cuSize": {
+                    "type": "integer",
+                    "description": "Compute unit (CU) size of the global cluster. Members of a global cluster share the same CU size. <br/>For members in a global cluster, the value can be `1` to `1,024`, and possible values can be 1, 2, 4, 8, 12, 16, 20, 24, 28, 32,...,64, 72, 80, 88,...,256, 272, 288, ...,1024.<br/>For details on the increment rules for the CU size, refer to the `Deployment` section in [Detailed Plan Comparison](https://docs.zilliz.com/docs/select-zilliz-cloud-service-plans#deployment).",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "全球集群的计算单元大小（CU）。<br/>对于全球集群中的成员集群，该值取值范围为 `1` 到 `1024`，可能的值为1、2、4、8、12、16、20、24、28、32、...、64、72、80、88、...、256、272、288、...、1024。<br/>关于 CU 大小的增量规则，请参阅 [详细计划对比](https://docs.zilliz.com/docs/select-zilliz-cloud-service-plans#deployment) 中的 `Deployment` 部分。"
+                      }
+                    },
+                    "example": 4
+                  },
+                  "primaryCluster": {
+                    "type": "object",
+                    "description": "Parameters for the primary cluster of the global cluster.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "全球集群的主集群参数。"
+                      }
+                    },
+                    "properties": {
+                      "clusterName": {
+                        "type": "string",
+                        "description": "Name of the primary cluster.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "主集群名称。"
+                          }
+                        },
+                        "example": "my-primary-cluster"
+                      },
+                      "regionId": {
+                        "type": "string",
+                        "description": "Region ID where the primary cluster is deployed. The region must be one of the applicable regions in the specified project.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "主集群部署的区域 ID。该区域必须是指定项目中适用的区域之一。"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "clusterName",
+                      "regionId"
+                    ]
+                  },
+                  "secondaryClusters": {
+                    "type": "array",
+                    "description": "Parameters for the secondary clusters of the global cluster. You can specify one or more secondary clusters.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "全球集群的从集群参数。您可以指定一个或多个从集群。"
+                      }
+                    },
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "clusterName": {
+                          "type": "string",
+                          "description": "Name of a secondary cluster.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "从集群名称。"
+                            }
+                          },
+                          "example": "my-secondary-cluster-1"
+                        },
+                        "regionId": {
+                          "type": "string",
+                          "description": "Region ID where the secondary cluster is deployed. The region must be one of the applicable regions in the specified project, and must be different from the region where the primary cluster is deployed.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "从集群部署的区域 ID。该区域必须是指定项目中适用的区域之一，并且必须与主集群部署的区域不同。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "clusterName",
+                        "regionId"
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "globalClusterName",
+                  "projectId",
+                  "cuType",
+                  "cuSize",
+                  "primaryCluster",
+                  "secondaryClusters"
+                ]
+              },
+              "examples": {
+                "1": {
+                  "summary": "example",
+                  "x-target-response": "OPTION 1",
+                  "x-target-lang": "en-US",
+                  "value": {
+                    "globalClusterName": "my-global-cluster",
+                    "projectId": "proj-xxxxxxxxxxxxxxx",
+                    "cuType": "Performance-optimized",
+                    "cuSize": 4,
+                    "primaryCluster": {
+                      "clusterName": "my-primary-cluster",
+                      "regionId": "aws-us-west-2"
+                    },
+                    "secondaryClusters": [
+                      {
+                        "clusterName": "my-secondary-cluster-1",
+                        "regionId": "aws-eu-west-1"
+                      },
+                      {
+                        "clusterName": "my-secondary-cluster-2",
+                        "regionId": "aws-ap-southeast-1"
+                      }
+                    ]
+                  }
+                },
+                "2": {
+                  "summary": "example",
+                  "x-target-response": "OPTION 1",
+                  "x-target-lang": "zh-CN",
+                  "value": {
+                    "globalClusterName": "my-global-cluster",
+                    "projectId": "proj-xxxxxxxxxxxxxxx",
+                    "cuType": "Performance-optimized",
+                    "cuSize": 4,
+                    "primaryCluster": {
+                      "clusterName": "my-primary-cluster",
+                      "regionId": "ali-cn-hangzhou"
+                    },
+                    "secondaryClusters": [
+                      {
+                        "clusterName": "my-secondary-cluster-1",
+                        "regionId": "ali-cn-beijing"
+                      },
+                      {
+                        "clusterName": "my-secondary-cluster-2",
+                        "regionId": "ali-cn-shanghai"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns information about the created global cluster.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回创建的全球集群的信息。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "globalClusterId": {
+                          "type": "string",
+                          "description": "ID of the created global cluster.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "创建的全球集群 ID。"
+                            }
+                          },
+                          "example": "glo-xxxxxxxxxxxxxxx"
+                        },
+                        "username": {
+                          "type": "string",
+                          "description": "Username for accessing the global cluster.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "访问全球集群的用户名。"
+                            }
+                          },
+                          "example": "admin"
+                        },
+                        "password": {
+                          "type": "string",
+                          "description": "Password for accessing the global cluster.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "访问全球集群的密码。"
+                            }
+                          },
+                          "example": "Passw0rd!"
+                        },
+                        "jobId": {
+                          "type": "string",
+                          "description": "ID of the job for creating the global cluster. You can use this ID to query the progress of the creation job.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "创建全球集群的任务 ID。您可以使用此 ID 查询创建任务的进度。"
+                            }
+                          },
+                          "example": "job-xxxxxxxxxxxxxxx"
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "globalClusterId": "glo-xxxxxxxxxxxxxxx",
+                      "username": "db_admin",
+                      "password": "Passw0rd!",
+                      "jobId": "job-xxxxxxxxxxxxxxx"
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 400,
+                      "message": "Invalid request parameters."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/globalClusters/{globalClusterId}": {
+      "get": {
+        "summary": "Describe Global Cluster",
+        "description": "Returns base topology and connection information for a Global Cluster. Replication lag is intentionally excluded from this endpoint.",
+        "tags": [
+          "Global Clusters (V2)"
+        ],
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看全球集群",
+            "description": "返回全球集群的基础拓扑和连接信息。本接口不返回复制延迟。"
+          }
+        },
+        "parameters": [
+          {
+            "name": "globalClusterId",
+            "in": "path",
+            "description": "ID of the Global Cluster to describe.",
+            "required": true,
+            "example": "glo-xxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "要查看的全球集群 ID。"
+              }
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns information about the Global Cluster.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回全球集群信息。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "globalClusterId": {
+                          "type": "string",
+                          "description": "Global Cluster ID.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "全球集群 ID。"
+                            }
+                          },
+                          "example": "glo-xxxxxxxxxxxxxxx"
+                        },
+                        "globalClusterName": {
+                          "type": "string",
+                          "description": "Global Cluster display name.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "全球集群显示名称。"
+                            }
+                          },
+                          "example": "my-global-cluster"
+                        },
+                        "projectId": {
+                          "type": "string",
+                          "description": "Project ID.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "项目 ID。"
+                            }
+                          },
+                          "example": "proj-xxxxxxxxxxxxxxx"
+                        },
+                        "regionIds": {
+                          "type": "array",
+                          "description": "Region IDs of member clusters. Values keep member order and are not deduplicated.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "成员集群的区域 ID。取值保留成员顺序且不会去重。"
+                            }
+                          },
+                          "items": {
+                            "type": "string",
+                            "example": "aws-us-west-2"
+                          }
+                        },
+                        "cuType": {
+                          "type": "string",
+                          "description": "CU type shared by member clusters.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "成员集群共享的 CU 类型。"
+                            }
+                          },
+                          "enum": [
+                            "Performance-optimized",
+                            "Capacity-optimized",
+                            "Tiered-storage"
+                          ],
+                          "example": "Performance-optimized"
+                        },
+                        "cuSize": {
+                          "type": "integer",
+                          "description": "CU size shared by member clusters.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "成员集群共享的 CU 大小。"
+                            }
+                          },
+                          "example": 4
+                        },
+                        "connectAddress": {
+                          "type": "string",
+                          "description": "Global endpoint address.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "全球端点地址。"
+                            }
+                          },
+                          "example": "https://glo-xxxxxxxx.global-cluster.vectordb.zillizcloud.com"
+                        },
+                        "createTime": {
+                          "type": "string",
+                          "description": "Creation time in ISO 8601 format.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "ISO 8601 格式的创建时间。"
+                            }
+                          },
+                          "format": "date-time",
+                          "example": "2026-06-04T10:00:00Z"
+                        },
+                        "clusters": {
+                          "type": "array",
+                          "description": "Member clusters in the Global Cluster.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "全球集群中的成员集群。"
+                            }
+                          },
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "clusterId": {
+                                "type": "string",
+                                "description": "Member cluster ID.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "成员集群 ID。"
+                                  }
+                                },
+                                "example": "in01-xxxxxxxxxxxxxxx"
+                              },
+                              "clusterName": {
+                                "type": "string",
+                                "description": "Member cluster name.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "成员集群名称。"
+                                  }
+                                },
+                                "example": "primary-cluster"
+                              },
+                              "regionId": {
+                                "type": "string",
+                                "description": "Region ID where the member cluster is deployed.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "成员集群部署的区域 ID。"
+                                  }
+                                },
+                                "example": "aws-us-west-2"
+                              },
+                              "role": {
+                                "type": "string",
+                                "description": "Member role.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "成员角色。"
+                                  }
+                                },
+                                "enum": [
+                                  "PRIMARY",
+                                  "SECONDARY"
+                                ],
+                                "example": "PRIMARY"
+                              },
+                              "status": {
+                                "type": "string",
+                                "description": "Member cluster status.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "成员集群状态。"
+                                  }
+                                },
+                                "example": "RUNNING"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "x-tab-label": "success"
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "example": 400
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          },
+                          "example": "Invalid request parameters."
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "en-US",
+                    "value": {
+                      "globalClusterId": "glo-xxxxxxxxxxxxxxx",
+                      "globalClusterName": "my-global-cluster",
+                      "projectId": "proj-xxxxxxxxxxxxxxx",
+                      "regionIds": [
+                        "aws-us-west-2",
+                        "aws-eu-west-1"
+                      ],
+                      "cuType": "Performance-optimized",
+                      "cuSize": 4,
+                      "connectAddress": "https://glo-xxxxxxxx.global-cluster.vectordb.zillizcloud.com",
+                      "createTime": "2026-06-04T10:00:00Z",
+                      "clusters": [
+                        {
+                          "clusterId": "in01-primary",
+                          "clusterName": "primary-cluster",
+                          "regionId": "aws-us-west-2",
+                          "role": "PRIMARY",
+                          "status": "RUNNING"
+                        },
+                        {
+                          "clusterId": "in01-secondary",
+                          "clusterName": "secondary-cluster-eu",
+                          "regionId": "aws-eu-west-1",
+                          "role": "SECONDARY",
+                          "status": "RUNNING"
+                        }
+                      ]
+                    }
+                  },
+                  "2": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "zh-CN",
+                    "value": {
+                      "globalClusterId": "glo-xxxxxxxxxxxxxxx",
+                      "globalClusterName": "my-global-cluster",
+                      "projectId": "proj-xxxxxxxxxxxxxxx",
+                      "regionIds": [
+                        "ali-cn-hangzhou",
+                        "ali-cn-beijing"
+                      ],
+                      "cuType": "Performance-optimized",
+                      "cuSize": 4,
+                      "connectAddress": "https://glo-xxxxxxxx.global-cluster.vectordb.cloud.zilliz.com.cn",
+                      "createTime": "2026-06-04T10:00:00Z",
+                      "clusters": [
+                        {
+                          "clusterId": "in01-primary",
+                          "clusterName": "primary-cluster",
+                          "regionId": "ali-cn-hangzhou",
+                          "role": "PRIMARY",
+                          "status": "RUNNING"
+                        },
+                        {
+                          "clusterId": "in01-secondary",
+                          "clusterName": "secondary-cluster",
+                          "regionId": "ali-cn-beijing",
+                          "role": "SECONDARY",
+                          "status": "RUNNING"
+                        }
+                      ]
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 400,
+                      "message": "Invalid request parameters."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/globalClusters/{globalClusterId}/replicationLag": {
+      "get": {
+        "summary": "Get Global Cluster Replication Lag",
+        "description": "Returns replication lag from the primary cluster to each secondary cluster.",
+        "tags": [
+          "Global Clusters (V2)"
+        ],
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "获取全球集群复制延迟",
+            "description": "返回主集群到各个从集群的复制延迟。"
+          }
+        },
+        "parameters": [
+          {
+            "name": "globalClusterId",
+            "in": "path",
+            "description": "ID of the Global Cluster.",
+            "required": true,
+            "example": "glo-xxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "全球集群 ID。"
+              }
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns replication lag information.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回复制延迟信息。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "globalClusterId": {
+                          "type": "string",
+                          "description": "Global Cluster ID.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "全球集群 ID。"
+                            }
+                          },
+                          "example": "glo-xxxxxxxxxxxxxxx"
+                        },
+                        "primaryClusterId": {
+                          "type": "string",
+                          "description": "Primary cluster ID.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "主集群 ID。"
+                            }
+                          },
+                          "example": "in01-primary"
+                        },
+                        "primaryRegionId": {
+                          "type": "string",
+                          "description": "Primary cluster region ID.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "主集群区域 ID。"
+                            }
+                          },
+                          "example": "aws-us-west-2"
+                        },
+                        "lags": {
+                          "type": "array",
+                          "description": "Replication lag from the primary cluster to each secondary cluster.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "主集群到各个从集群的复制延迟。"
+                            }
+                          },
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "secondaryClusterId": {
+                                "type": "string",
+                                "description": "Secondary cluster ID.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "从集群 ID。"
+                                  }
+                                },
+                                "example": "in01-secondary-eu"
+                              },
+                              "secondaryRegionId": {
+                                "type": "string",
+                                "description": "Secondary cluster region ID.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "从集群区域 ID。"
+                                  }
+                                },
+                                "example": "aws-eu-west-1"
+                              },
+                              "lagMs": {
+                                "type": "integer",
+                                "description": "Replication lag in milliseconds.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "复制延迟，单位为毫秒。"
+                                  }
+                                },
+                                "example": 120
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "example": 400
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          },
+                          "example": "Invalid request parameters."
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "globalClusterId": "glo-xxxxxxxxxxxxxxx",
+                      "primaryClusterId": "in01-primary",
+                      "primaryRegionId": "aws-us-west-2",
+                      "lags": [
+                        {
+                          "secondaryClusterId": "in01-secondary-eu",
+                          "secondaryRegionId": "aws-eu-west-1",
+                          "lagMs": 120
+                        }
+                      ]
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 400,
+                      "message": "Invalid request parameters."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/globalClusters/{globalClusterId}/secondaryClusters": {
+      "post": {
+        "summary": "Add Secondary Clusters",
+        "description": "Adds one or more secondary clusters. New secondary clusters use the existing Global Cluster CU specification.",
+        "tags": [
+          "Global Clusters (V2)"
+        ],
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "添加从集群",
+            "description": "添加一个或多个从集群。新增从集群使用现有全球集群的 CU 规格。"
+          }
+        },
+        "parameters": [
+          {
+            "name": "globalClusterId",
+            "in": "path",
+            "description": "ID of the Global Cluster.",
+            "required": true,
+            "example": "glo-xxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "全球集群 ID。"
+              }
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Parameters for adding secondary clusters.",
+          "x-i18n": {
+            "zh-CN": {
+              "description": "添加从集群的参数。"
+            }
+          },
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "secondaryClusters": {
+                    "type": "array",
+                    "description": "Secondary clusters to add.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "要添加的从集群。"
+                      }
+                    },
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "clusterName": {
+                          "type": "string",
+                          "description": "Secondary cluster display name.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "从集群显示名称。"
+                            }
+                          },
+                          "example": "secondary-cluster-ap"
+                        },
+                        "regionId": {
+                          "type": "string",
+                          "description": "Secondary cluster region ID.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "从集群区域 ID。"
+                            }
+                          },
+                          "example": "aws-ap-southeast-1"
+                        }
+                      },
+                      "required": [
+                        "clusterName",
+                        "regionId"
+                      ]
+                    },
+                    "minItems": 1
+                  }
+                },
+                "required": [
+                  "secondaryClusters"
+                ]
+              },
+              "examples": {
+                "1": {
+                  "summary": "example",
+                  "x-target-response": "OPTION 1",
+                  "value": {
+                    "secondaryClusters": [
+                      {
+                        "clusterName": "secondary-cluster-ap",
+                        "regionId": "aws-ap-southeast-1"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the add-secondary-cluster job.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回添加从集群任务。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "jobId": {
+                          "type": "string",
+                          "description": "Job ID for the asynchronous operation.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "异步操作的任务 ID。"
+                            }
+                          },
+                          "example": "job-xxxxxxxxxxxxxxx"
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "example": 400
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          },
+                          "example": "Invalid request parameters."
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "jobId": "job-xxxxxxxxxxxxxxx"
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 400,
+                      "message": "Invalid request parameters."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/globalClusters/{globalClusterId}/clusters/{clusterId}": {
+      "delete": {
+        "summary": "Delete Global Member Cluster",
+        "description": "Deletes a member cluster from a Global Cluster. A secondary member cluster can be deleted directly. The primary member cluster can be deleted only after all secondary member clusters in the same Global Cluster have been deleted.",
+        "tags": [
+          "Global Clusters (V2)"
+        ],
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "删除全球集群成员集群",
+            "description": "从全球集群中删除成员集群。从集群可直接删除；主集群只有在同一全球集群中的所有从集群均已删除后才能删除。"
+          }
+        },
+        "parameters": [
+          {
+            "name": "globalClusterId",
+            "in": "path",
+            "description": "ID of the Global Cluster.",
+            "required": true,
+            "example": "glo-xxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "全球集群 ID。"
+              }
+            }
+          },
+          {
+            "name": "clusterId",
+            "in": "path",
+            "description": "Member cluster ID to delete. It can be either a primary or secondary member cluster ID.",
+            "required": true,
+            "example": "in01-xxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "要删除的成员集群 ID，可以是主集群或从集群 ID。"
+              }
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns information about the deleted member cluster.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回已删除成员集群的信息。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "globalClusterId": {
+                          "type": "string",
+                          "description": "Global Cluster ID.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "全球集群 ID。"
+                            }
+                          },
+                          "example": "glo-xxxxxxxxxxxxxxx"
+                        },
+                        "clusterId": {
+                          "type": "string",
+                          "description": "Deleted member cluster ID.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "已删除成员集群 ID。"
+                            }
+                          },
+                          "example": "in01-xxxxxxxxxxxxxxx"
+                        },
+                        "prompt": {
+                          "type": "string",
+                          "description": "Deletion prompt shown to users.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "展示给用户的删除提示。"
+                            }
+                          },
+                          "example": "The cluster has been deleted. If you consider this action to be an error, you have the option to restore the deleted cluster from the recycle bin within a 30-day period. Kindly note, this recovery feature does not apply to free clusters."
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "example": 400
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          },
+                          "example": "Invalid request parameters."
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "globalClusterId": "glo-xxxxxxxxxxxxxxx",
+                      "clusterId": "in01-xxxxxxxxxxxxxxx",
+                      "prompt": "The cluster has been deleted. If you consider this action to be an error, you have the option to restore the deleted cluster from the recycle bin within a 30-day period. Kindly note, this recovery feature does not apply to free clusters."
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 400,
+                      "message": "Invalid request parameters."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/globalClusters/{globalClusterId}/switchover": {
+      "post": {
+        "summary": "Switchover Global Cluster",
+        "description": "Performs a planned switch from the current primary cluster to a specified secondary cluster.",
+        "tags": [
+          "Global Clusters (V2)"
+        ],
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "切换全球集群",
+            "description": "执行计划内切换，将当前主集群切换到指定从集群。"
+          }
+        },
+        "parameters": [
+          {
+            "name": "globalClusterId",
+            "in": "path",
+            "description": "ID of the Global Cluster.",
+            "required": true,
+            "example": "glo-xxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "全球集群 ID。"
+              }
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Parameters for switching over a Global Cluster.",
+          "x-i18n": {
+            "zh-CN": {
+              "description": "切换全球集群的参数。"
+            }
+          },
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "newPrimaryClusterId": {
+                    "type": "string",
+                    "description": "ID of the secondary cluster to promote as the new primary cluster.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "要提升为新主集群的从集群 ID。"
+                      }
+                    },
+                    "example": "in01-secondary"
+                  }
+                },
+                "required": [
+                  "newPrimaryClusterId"
+                ]
+              },
+              "examples": {
+                "1": {
+                  "summary": "example",
+                  "x-target-response": "OPTION 1",
+                  "value": {
+                    "newPrimaryClusterId": "in01-secondary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the switchover job.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回切换任务。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "globalClusterId": {
+                          "type": "string",
+                          "description": "Global Cluster ID.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "全球集群 ID。"
+                            }
+                          },
+                          "example": "glo-xxxxxxxxxxxxxxx"
+                        },
+                        "oldPrimaryClusterId": {
+                          "type": "string",
+                          "description": "Previous primary cluster ID.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "原主集群 ID。"
+                            }
+                          },
+                          "example": "in01-primary"
+                        },
+                        "newPrimaryClusterId": {
+                          "type": "string",
+                          "description": "New primary cluster ID.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "新主集群 ID。"
+                            }
+                          },
+                          "example": "in01-secondary"
+                        },
+                        "jobId": {
+                          "type": "string",
+                          "description": "Job ID for the asynchronous operation.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "异步操作的任务 ID。"
+                            }
+                          },
+                          "example": "job-xxxxxxxxxxxxxxx"
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "example": 400
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          },
+                          "example": "Invalid request parameters."
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "globalClusterId": "glo-xxxxxxxxxxxxxxx",
+                      "oldPrimaryClusterId": "in01-primary",
+                      "newPrimaryClusterId": "in01-secondary",
+                      "jobId": "job-xxxxxxxxxxxxxxx"
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 400,
+                      "message": "Invalid request parameters."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/globalClusters/{globalClusterId}/failover": {
+      "post": {
+        "summary": "Failover Global Cluster",
+        "description": "Force-promotes a specified secondary cluster as the new primary cluster.",
+        "tags": [
+          "Global Clusters (V2)"
+        ],
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "故障转移全球集群",
+            "description": "强制提升指定从集群为新的主集群。"
+          }
+        },
+        "parameters": [
+          {
+            "name": "globalClusterId",
+            "in": "path",
+            "description": "ID of the Global Cluster.",
+            "required": true,
+            "example": "glo-xxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "全球集群 ID。"
+              }
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Parameters for failing over a Global Cluster.",
+          "x-i18n": {
+            "zh-CN": {
+              "description": "故障转移全球集群的参数。"
+            }
+          },
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "newPrimaryClusterId": {
+                    "type": "string",
+                    "description": "ID of the secondary cluster to promote as the new primary cluster.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "要提升为新主集群的从集群 ID。"
+                      }
+                    },
+                    "example": "in01-secondary"
+                  }
+                },
+                "required": [
+                  "newPrimaryClusterId"
+                ]
+              },
+              "examples": {
+                "1": {
+                  "summary": "example",
+                  "x-target-response": "OPTION 1",
+                  "value": {
+                    "newPrimaryClusterId": "in01-secondary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the failover job.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回故障转移任务。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "globalClusterId": {
+                          "type": "string",
+                          "description": "Global Cluster ID.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "全球集群 ID。"
+                            }
+                          },
+                          "example": "glo-xxxxxxxxxxxxxxx"
+                        },
+                        "oldPrimaryClusterId": {
+                          "type": "string",
+                          "description": "Previous primary cluster ID.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "原主集群 ID。"
+                            }
+                          },
+                          "example": "in01-primary"
+                        },
+                        "newPrimaryClusterId": {
+                          "type": "string",
+                          "description": "New primary cluster ID.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "新主集群 ID。"
+                            }
+                          },
+                          "example": "in01-secondary"
+                        },
+                        "jobId": {
+                          "type": "string",
+                          "description": "Job ID for the asynchronous operation.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "异步操作的任务 ID。"
+                            }
+                          },
+                          "example": "job-xxxxxxxxxxxxxxx"
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "example": 400
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          },
+                          "example": "Invalid request parameters."
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "globalClusterId": "glo-xxxxxxxxxxxxxxx",
+                      "oldPrimaryClusterId": "in01-primary",
+                      "newPrimaryClusterId": "in01-secondary",
+                      "jobId": "job-xxxxxxxxxxxxxxx"
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 400,
+                      "message": "Invalid request parameters."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/globalClusters/{globalClusterId}/modifyCU": {
+      "post": {
+        "summary": "Modify Global Cluster CU",
+        "description": "Modifies CU size or CU autoscaling policy at Global Cluster level. CU settings apply to all member clusters.",
+        "tags": [
+          "Global Clusters (V2)"
+        ],
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "修改全球集群 CU",
+            "description": "在全球集群级别修改 CU 大小或 CU 自动扩缩容策略。CU 设置会应用于所有成员集群。"
+          }
+        },
+        "parameters": [
+          {
+            "name": "globalClusterId",
+            "in": "path",
+            "description": "ID of the Global Cluster.",
+            "required": true,
+            "example": "glo-xxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "全球集群 ID。"
+              }
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Parameters for modifying Global Cluster CU settings.",
+          "x-i18n": {
+            "zh-CN": {
+              "description": "修改全球集群 CU 设置的参数。"
+            }
+          },
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cuSize": {
+                    "type": "integer",
+                    "description": "Target CU size. Mutually exclusive with autoscaling.cu.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "目标 CU 大小。与 autoscaling.cu 互斥。"
+                      }
+                    },
+                    "example": 8
+                  },
+                  "autoscaling": {
+                    "type": "object",
+                    "description": "Autoscaling policy for the Global Cluster.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "全球集群自动扩缩容策略。"
+                      }
+                    },
+                    "properties": {
+                      "cu": {
+                        "type": "object",
+                        "description": "CU autoscaling policy. Configure either min and max for dynamic scaling, or schedules for scheduled scaling.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "CU 自动扩缩容策略。可配置 min 和 max 进行动态扩缩容，或配置 schedules 进行定时扩缩容。"
+                          }
+                        },
+                        "properties": {
+                          "min": {
+                            "type": "integer",
+                            "description": "Minimum CU for dynamic scaling. Must be set together with max.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "动态扩缩容的最小 CU，必须与 max 同时设置。"
+                              }
+                            },
+                            "example": 4
+                          },
+                          "max": {
+                            "type": "integer",
+                            "description": "Maximum CU for dynamic scaling. Must be set together with min.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "动态扩缩容的最大 CU，必须与 min 同时设置。"
+                              }
+                            },
+                            "example": 16
+                          },
+                          "schedules": {
+                            "type": "array",
+                            "description": "Scheduled scaling rules.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "定时扩缩容规则。"
+                              }
+                            },
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "cron": {
+                                  "type": "string",
+                                  "description": "Cron expression for scheduled scaling.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "定时扩缩容的 Cron 表达式。"
+                                    }
+                                  },
+                                  "example": "0 9 * * 1-4"
+                                },
+                                "target": {
+                                  "type": "integer",
+                                  "description": "Target CU size for the schedule.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "该定时规则的目标 CU 大小。"
+                                    }
+                                  },
+                                  "example": 8
+                                }
+                              },
+                              "required": [
+                                "cron",
+                                "target"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "1": {
+                  "summary": "Manual scaling",
+                  "x-target-response": "OPTION 1",
+                  "value": {
+                    "cuSize": 8
+                  }
+                },
+                "2": {
+                  "summary": "Autoscaling",
+                  "x-target-response": "OPTION 1",
+                  "value": {
+                    "autoscaling": {
+                      "cu": {
+                        "min": 4,
+                        "max": 16
+                      }
+                    }
+                  }
+                },
+                "3": {
+                  "summary": "Scheduled scaling",
+                  "x-target-response": "OPTION 1",
+                  "value": {
+                    "autoscaling": {
+                      "cu": {
+                        "schedules": [
+                          {
+                            "cron": "0 9 * * 1-4",
+                            "target": 8,
+                            "timezone": "UTC"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the CU modification job.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回 CU 修改任务。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "jobId": {
+                          "type": "string",
+                          "description": "Job ID for the asynchronous operation.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "异步操作的任务 ID。"
+                            }
+                          },
+                          "example": "job-xxxxxxxxxxxxxxx"
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "example": 400
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          },
+                          "example": "Invalid request parameters."
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "jobId": "job-xxxxxxxxxxxxxxx"
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 400,
+                      "message": "Invalid request parameters."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/globalClusters/{globalClusterId}/removeGlobalEndpoint": {
+      "post": {
+        "summary": "Remove Global Endpoint",
+        "description": "Disbands the Global Cluster endpoint after all secondary clusters have been removed. The remaining primary cluster continues as a regular dedicated cluster.",
+        "tags": [
+          "Global Clusters (V2)"
+        ],
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "移除全球端点",
+            "description": "在所有从集群均已删除后解散全球集群端点。剩余主集群会继续作为普通 Dedicated 集群运行。"
+          }
+        },
+        "parameters": [
+          {
+            "name": "globalClusterId",
+            "in": "path",
+            "description": "ID of the Global Cluster.",
+            "required": true,
+            "example": "glo-xxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "全球集群 ID。"
+              }
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns information about the removed Global Cluster endpoint.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回已移除全球集群端点的信息。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "oldGlobalClusterId": {
+                          "type": "string",
+                          "description": "ID of the removed Global Cluster endpoint.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "已移除全球集群端点的 ID。"
+                            }
+                          },
+                          "example": "glo-xxxxxxxxxxxxxxx"
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "example": 400
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          },
+                          "example": "Invalid request parameters."
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "oldGlobalClusterId": "glo-xxxxxxxxxxxxxxx"
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 400,
+                      "message": "Invalid request parameters."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/globalClusters/convert": {
+      "post": {
+        "summary": "Convert Cluster to Global Cluster",
+        "description": "Converts an existing dedicated cluster into the primary member of a new Global Cluster, and creates one or more secondary member clusters.",
+        "tags": [
+          "Global Clusters (V2)"
+        ],
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "转换集群为全球集群",
+            "description": "将现有 Dedicated 集群转换为新全球集群的主成员，并创建一个或多个从成员集群。"
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Parameters for converting a dedicated cluster to a Global Cluster.",
+          "x-i18n": {
+            "zh-CN": {
+              "description": "将 Dedicated 集群转换为全球集群的参数。"
+            }
+          },
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "clusterId": {
+                    "type": "string",
+                    "description": "Existing dedicated cluster ID to convert into the primary Global Cluster member.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "要转换为全球集群主成员的现有 Dedicated 集群 ID。"
+                      }
+                    },
+                    "example": "in01-xxxxxxxxxxxxxxx"
+                  },
+                  "globalClusterName": {
+                    "type": "string",
+                    "description": "New Global Cluster display name.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "新全球集群显示名称。"
+                      }
+                    },
+                    "example": "my-global-cluster"
+                  },
+                  "secondaryClusters": {
+                    "type": "array",
+                    "description": "Secondary clusters to create as Global Cluster members. At least one item is required.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "要创建为全球集群成员的从集群，至少需要一个。"
+                      }
+                    },
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "clusterName": {
+                          "type": "string",
+                          "description": "Secondary cluster display name.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "从集群显示名称。"
+                            }
+                          },
+                          "example": "secondary-cluster-ap"
+                        },
+                        "regionId": {
+                          "type": "string",
+                          "description": "Secondary cluster region ID.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "从集群区域 ID。"
+                            }
+                          },
+                          "example": "aws-ap-southeast-1"
+                        }
+                      },
+                      "required": [
+                        "clusterName",
+                        "regionId"
+                      ]
+                    },
+                    "minItems": 1
+                  }
+                },
+                "required": [
+                  "clusterId",
+                  "globalClusterName",
+                  "secondaryClusters"
+                ]
+              },
+              "examples": {
+                "1": {
+                  "summary": "example",
+                  "x-target-response": "OPTION 1",
+                  "x-target-lang": "en-US",
+                  "value": {
+                    "clusterId": "in01-xxxxxxxxxxxxxxx",
+                    "globalClusterName": "my-global-cluster",
+                    "secondaryClusters": [
+                      {
+                        "clusterName": "secondary-cluster-us-east",
+                        "regionId": "aws-us-east-1"
+                      }
+                    ]
+                  }
+                },
+                "2": {
+                  "summary": "example",
+                  "x-target-response": "OPTION 1",
+                  "x-target-lang": "zh-CN",
+                  "value": {
+                    "clusterId": "in01-xxxxxxxxxxxxxxx",
+                    "globalClusterName": "my-global-cluster",
+                    "secondaryClusters": [
+                      {
+                        "clusterName": "secondary-cluster",
+                        "regionId": "ali-cn-hangzhou"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the conversion job.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回转换任务。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "globalClusterId": {
+                          "type": "string",
+                          "description": "New Global Cluster ID.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "新的全球集群 ID。"
+                            }
+                          },
+                          "example": "glo-xxxxxxxxxxxxxxx"
+                        },
+                        "jobId": {
+                          "type": "string",
+                          "description": "Job ID for the asynchronous conversion operation.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "异步转换操作的任务 ID。"
+                            }
+                          },
+                          "example": "job-xxxxxxxxxxxxxxx"
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "example": 400
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          },
+                          "example": "Invalid request parameters."
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "globalClusterId": "glo-xxxxxxxxxxxxxxx",
+                      "jobId": "job-xxxxxxxxxxxxxxx"
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 400,
+                      "message": "Invalid request parameters."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

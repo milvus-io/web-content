@@ -34,9 +34,11 @@ Function(
 
     The type of embedding function to use. Possible values:
 
-    - `FunctionType.BM25`: Generates sparse vectors based on the BM25 ranking algorithm from a `VARCHAR` field.
+    - FunctionType.BM25: Generates sparse vectors based on the BM25 ranking algorithm from a VARCHAR or TEXT field.
 
-    - `FunctionType.TEXTEMBEDDING`: Generates dense vectors that capture semantic meaning from a `VARCHAR` field.
+    - FunctionType.TEXTEMBEDDING: Generates dense vectors that capture semantic meaning from a VARCHAR or TEXT field.
+
+    - `FunctionType.MINHASH`: Generates binary vectors that approximate [Jaccard similarity](https://en.wikipedia.org/wiki/Jaccard_index) between documents.
 
 - `FunctionType.RERANK`: Applies reranking strategies to the search results.
 
@@ -44,7 +46,7 @@ Function(
 
     **[REQUIRED]**
 
-    The name of the field containing the raw data that requires conversion to a vector representation. This parameter accepts only one field name.
+    The name of the VARCHAR or TEXT field containing the raw data that requires conversion to a vector representation. For FunctionType.BM25 and FunctionType.TEXTEMBEDDING, this parameter accepts only one field name.
 
 - `output_field_names` (*Union[str, List[str]]*) -
 

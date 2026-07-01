@@ -13,23 +13,28 @@ compact(CompactReq.builder()
     .databaseName(String databaseName)
     .collectionName(String collectionName)
     .isClustering(Boolean isClustering)
+    .isL0(Boolean isL0)
     .build()
 );
 ```
 
 **BUILDER METHODS:**
 
-- `databaseName(String databaseName)` -
+- `databaseName(String databaseName)`
 
     The name of the database. Defaults to the current database if not specified.
 
-- `collectionName(String collectionName)` -
+- `collectionName(String collectionName)`
 
     The name of the target collection.
 
-- `isClustering(Boolean isClustering)` -
+- `isClustering(Boolean isClustering)`
 
     Whether to perform clustering compaction. Defaults to `Boolean.FALSE`.
+
+- `isL0(Boolean isL0)`
+
+    Whether to request L0 compaction. Defaults to `Boolean.FALSE` and is independent from clustering compaction.
 
 **RETURNS:**
 

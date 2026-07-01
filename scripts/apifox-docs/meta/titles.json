@@ -20,5 +20,17 @@
     "合并数据": "merge-data",
     "创建 Stage": "create-stage",
     "删除 Stage": "delete-stage",
-    "查看 Stage 列表": "list-stages"
+    "查看 Stage 列表": "list-stages",
+    "列出全球集群": "list-global-clusters",
+    "创建全球集群": "create-global-cluster",
+    "查看全球集群": "describe-global-cluster",
+    "获取全球集群复制延迟": "get-global-cluster-replication-lag",
+    "添加从集群": "add-secondary-clusters",
+    "删除全球集群成员集群": "delete-global-member-cluster",
+    "切换全球集群": "switchover-global-cluster",
+    "故障转移全球集群": "failover-global-cluster",
+    "修改全球集群 CU": "modify-global-cluster-cu",
+    "移除全球端点": "remove-global-endpoint",
+    "列出可用全球集群地域": "list-available-global-cluster-regions",
+    "转换集群为全球集群": "convert-cluster-to-global-cluster"
 }

@@ -1,0 +1,2162 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Storage Integration Operations (V2)",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Storage Integration Operations (V2)",
+      "x-include-target": [
+        "zilliz"
+      ],
+      "x-i18n": {
+        "zh-CN": {
+          "name": "Storage Integration Operations (V2)"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/v2/storageIntegrations": {
+      "get": {
+        "summary": "List Storage Integrations",
+        "deprecated": false,
+        "description": "This operation lists bucket storage integrations in a project. It returns public storage integration statuses only.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "列出 Storage Integration",
+            "description": "本接口用于列出指定项目中的对象存储集成，仅返回可公开展示的集成状态。"
+          }
+        },
+        "tags": [
+          "Storage Integration Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "query",
+            "description": "The ID of the project.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "proj-xxxxxxxxxxxxxxxxxxxxxx",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "项目 ID。"
+              }
+            }
+          },
+          {
+            "name": "currentPage",
+            "in": "query",
+            "description": "The current page number.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "minimum": 1
+            },
+            "example": 1,
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前页码。"
+              }
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The number of records to include in each response.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10,
+              "minimum": 1,
+              "maximum": 100
+            },
+            "example": 10,
+            "x-i18n": {
+              "zh-CN": {
+                "description": "每次返回的记录数。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the list of storage integrations.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回 Storage Integration 列表。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "example": 0
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/ListStorageIntegrationsData",
+                          "description": "Returns the list of storage integrations.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "返回 Storage Integration 列表。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        }
+                      },
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "example": 1800
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误信息。"
+                            }
+                          },
+                          "example": "User hasn't authenticated"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "Success",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "storageIntegrations": [
+                          {
+                            "integrationId": "integ-xxxxxxxxxxxxxxxxxxx",
+                            "name": "analytics-s3",
+                            "status": "ACTIVE",
+                            "message": "",
+                            "regionId": "aws-us-west-2",
+                            "bucketName": "my-bucket"
+                          }
+                        ],
+                        "count": 1,
+                        "currentPage": 1,
+                        "pageSize": 10
+                      }
+                    },
+                    "x-target-lang": "en-US"
+                  },
+                  "2": {
+                    "summary": "Alibaba Cloud OSS",
+                    "x-target-lang": "zh-CN",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "storageIntegrations": [
+                          {
+                            "integrationId": "integ-xxxxxxxxxxxxxxxxxxx",
+                            "name": "analytics-oss",
+                            "status": "ACTIVE",
+                            "message": "",
+                            "regionId": "ali-cn-hangzhou",
+                            "bucketName": "my-oss-bucket"
+                          }
+                        ],
+                        "count": 1,
+                        "currentPage": 1,
+                        "pageSize": 10
+                      }
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Storage Integration",
+        "deprecated": false,
+        "description": "This operation creates a bucket storage integration after validating that the supplied credential can access the target bucket or container.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "创建 Storage Integration",
+            "description": "本接口用于创建对象存储集成。创建前，系统会校验提供的凭证是否可以访问目标 bucket 或容器。"
+          }
+        },
+        "tags": [
+          "Storage Integration Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "x-tab-label": "AWS S3",
+                    "$ref": "#/components/schemas/CreateStorageIntegrationRequestAWS"
+                  },
+                  {
+                    "x-tab-label": "GCP GCS",
+                    "x-target-lang": "en-US",
+                    "$ref": "#/components/schemas/CreateStorageIntegrationRequestGCP"
+                  },
+                  {
+                    "x-tab-label": "Azure Blob",
+                    "x-target-lang": "en-US",
+                    "$ref": "#/components/schemas/CreateStorageIntegrationRequestAzure"
+                  },
+                  {
+                    "x-tab-label": "Alibaba Cloud OSS",
+                    "x-target-lang": "zh-CN",
+                    "$ref": "#/components/schemas/CreateStorageIntegrationRequestAWS"
+                  }
+                ]
+              },
+              "examples": {
+                "1": {
+                  "x-tab-label": "AWS S3",
+                  "x-target-request": "OPTION 1",
+                  "value": {
+                    "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxx",
+                    "name": "analytics-s3",
+                    "description": "S3 bucket for external tables",
+                    "regionId": "aws-us-west-2",
+                    "bucketName": "my-bucket",
+                    "externalCred": {
+                      "roleArn": "arn:aws:iam::123456789012:role/zilliz-bucket-role",
+                      "externalId": "zilliz-external-AbCdEf12345678"
+                    }
+                  },
+                  "x-target-lang": "en-US"
+                },
+                "2": {
+                  "summary": "GCP GCS",
+                  "x-target-request": "OPTION 2",
+                  "value": {
+                    "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxx",
+                    "name": "analytics-gcs",
+                    "regionId": "gcp-us-west1",
+                    "bucketName": "my-gcs-bucket",
+                    "externalCred": {
+                      "gcpProjectId": "my-gcp-project",
+                      "serviceAccountEmail": "bucket-access@my-gcp-project.iam.gserviceaccount.com"
+                    }
+                  },
+                  "x-target-lang": "en-US"
+                },
+                "3": {
+                  "summary": "Azure Blob",
+                  "x-target-request": "OPTION 3",
+                  "value": {
+                    "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxx",
+                    "name": "analytics-azure",
+                    "regionId": "az-westus3",
+                    "bucketName": "my-container",
+                    "externalCred": {
+                      "accountName": "mystorageaccount",
+                      "clientId": "00000000-0000-0000-0000-000000000000",
+                      "tenantId": "11111111-1111-1111-1111-111111111111"
+                    }
+                  },
+                  "x-target-lang": "en-US"
+                },
+                "4": {
+                  "x-tab-label": "Amazon S3",
+                  "x-target-request": "OPTION 1",
+                  "value": {
+                    "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxx",
+                    "name": "analytics-s3",
+                    "description": "S3 bucket for external tables",
+                    "regionId": "aws-cn-northwest-1",
+                    "bucketName": "my-bucket",
+                    "externalCred": {
+                      "roleArn": "arn:aws:iam::123456789012:role/zilliz-bucket-role",
+                      "externalId": "zilliz-external-AbCdEf12345678"
+                    }
+                  },
+                  "x-target-lang": "zh-CN"
+                },
+                "5": {
+                  "summary": "Alibaba Cloud OSS",
+                  "x-target-request": "OPTION 4",
+                  "value": {
+                    "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxx",
+                    "name": "analytics-oss",
+                    "regionId": "ali-cn-hangzhou",
+                    "bucketName": "my-oss-bucket",
+                    "externalCred": {
+                      "roleArn": "acs:ram::1234567890123456:role/zilliz-bucket-role",
+                      "externalId": "zilliz-external-AbCdEf12345678"
+                    }
+                  },
+                  "x-target-lang": "zh-CN"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the created storage integration.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回创建的 Storage Integration。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "example": 0
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/StorageIntegrationMutationData",
+                          "description": "Returns the created storage integration.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "返回创建的 Storage Integration。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        }
+                      },
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "example": 1800
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误信息。"
+                            }
+                          },
+                          "example": "User hasn't authenticated"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "Success",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "integrationId": "integ-xxxxxxxxxxxxxxxxxxx",
+                        "name": "analytics-s3"
+                      }
+                    },
+                    "x-target-lang": "en-US"
+                  },
+                  "2": {
+                    "summary": "Success",
+                    "x-target-lang": "zh-CN",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "integrationId": "integ-xxxxxxxxxxxxxxxxxxx",
+                        "name": "analytics-oss"
+                      }
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/storageIntegrations/{integrationId}": {
+      "get": {
+        "summary": "Describe Storage Integration",
+        "deprecated": false,
+        "description": "This operation gets details of a bucket storage integration. The project scope is resolved from the integration ID.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看 Storage Integration",
+            "description": "本接口用于查看对象存储集成详情。系统会根据集成 ID 解析所属项目。"
+          }
+        },
+        "tags": [
+          "Storage Integration Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          },
+          {
+            "name": "integrationId",
+            "in": "path",
+            "description": "The ID of the storage integration.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "integ-xxxxxxxxxxxxxxxxxxx",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Storage Integration ID。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the storage integration details.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回 Storage Integration 详情。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "example": 0
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/StorageIntegrationDetail",
+                          "description": "Returns the storage integration details.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "返回 Storage Integration 详情。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        }
+                      },
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "example": 1800
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误信息。"
+                            }
+                          },
+                          "example": "User hasn't authenticated"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "Success",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "integrationId": "integ-xxxxxxxxxxxxxxxxxxx",
+                        "name": "analytics-s3",
+                        "description": "S3 bucket for external tables",
+                        "status": "ACTIVE",
+                        "message": "",
+                        "regionId": "aws-us-west-2",
+                        "bucketName": "my-bucket",
+                        "externalCred": {
+                          "roleArn": "arn:aws:iam::123456789012:role/zilliz-bucket-role",
+                          "externalId": "zilliz-external-AbCdEf12345678"
+                        },
+                        "createTime": "2024-07-30T16:49:50Z"
+                      }
+                    },
+                    "x-target-lang": "en-US"
+                  },
+                  "2": {
+                    "summary": "Alibaba Cloud OSS",
+                    "x-target-lang": "zh-CN",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "integrationId": "integ-xxxxxxxxxxxxxxxxxxx",
+                        "name": "analytics-oss",
+                        "description": "OSS bucket for external tables",
+                        "status": "ACTIVE",
+                        "message": "",
+                        "regionId": "ali-cn-hangzhou",
+                        "bucketName": "my-oss-bucket",
+                        "externalCred": {
+                          "roleArn": "acs:ram::1234567890123456:role/zilliz-bucket-role",
+                          "externalId": "zilliz-external-AbCdEf12345678"
+                        },
+                        "createTime": "2024-07-30T16:49:50Z"
+                      }
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Storage Integration",
+        "deprecated": false,
+        "description": "This operation deletes a bucket storage integration. The project scope is resolved from the integration ID.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "删除 Storage Integration",
+            "description": "本接口用于删除对象存储集成。系统会根据集成 ID 解析所属项目。"
+          }
+        },
+        "tags": [
+          "Storage Integration Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          },
+          {
+            "name": "integrationId",
+            "in": "path",
+            "description": "The ID of the storage integration.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "integ-xxxxxxxxxxxxxxxxxxx",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Storage Integration ID。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the deleted storage integration.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回删除的 Storage Integration。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "example": 0
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/StorageIntegrationMutationData",
+                          "description": "Returns the deleted storage integration.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "返回删除的 Storage Integration。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        }
+                      },
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "example": 1800
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误信息。"
+                            }
+                          },
+                          "example": "User hasn't authenticated"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "Success",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "integrationId": "integ-xxxxxxxxxxxxxxxxxxx",
+                        "name": "analytics-s3"
+                      }
+                    },
+                    "x-target-lang": "en-US"
+                  },
+                  "2": {
+                    "summary": "Alibaba Cloud OSS",
+                    "x-target-lang": "zh-CN",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "integrationId": "integ-xxxxxxxxxxxxxxxxxxx",
+                        "name": "analytics-oss"
+                      }
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/storageIntegrations/validate": {
+      "post": {
+        "summary": "Validate Storage Integration",
+        "deprecated": false,
+        "description": "This operation validates whether the supplied storage credential can access the target bucket or container without creating an integration record.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "校验 Storage Integration",
+            "description": "本接口用于校验提供的存储凭证是否可以访问目标 bucket 或容器，不会创建集成记录。"
+          }
+        },
+        "tags": [
+          "Storage Integration Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidateStorageIntegrationRequest"
+              },
+              "examples": {
+                "1": {
+                  "summary": "AWS S3",
+                  "value": {
+                    "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxx",
+                    "regionId": "aws-us-west-2",
+                    "bucketName": "my-bucket",
+                    "externalCred": {
+                      "roleArn": "arn:aws:iam::123456789012:role/zilliz-bucket-role",
+                      "externalId": "zilliz-external-AbCdEf12345678"
+                    }
+                  },
+                  "x-target-lang": "en-US"
+                },
+                "2": {
+                  "summary": "Alibaba Cloud OSS",
+                  "x-target-lang": "zh-CN",
+                  "value": {
+                    "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxx",
+                    "regionId": "ali-cn-hangzhou",
+                    "bucketName": "my-oss-bucket",
+                    "externalCred": {
+                      "roleArn": "acs:ram::1234567890123456:role/zilliz-bucket-role",
+                      "externalId": "zilliz-external-AbCdEf12345678"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the validation result.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回校验结果。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "example": 0
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/ValidateStorageIntegrationData",
+                          "description": "Returns the validation result.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "返回校验结果。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        }
+                      },
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "example": 1800
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误信息。"
+                            }
+                          },
+                          "example": "User hasn't authenticated"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "Success",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "success": true,
+                        "message": ""
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "Validation failure",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "success": false,
+                        "message": "try assume role failed"
+                      }
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/storageIntegrations/authorizationMaterials": {
+      "post": {
+        "summary": "Generate Storage Integration Authorization Materials",
+        "deprecated": false,
+        "description": "This operation generates provider-specific authorization materials that are required before creating or validating a storage integration.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "生成 Storage Integration 授权材料",
+            "description": "本接口用于生成创建或校验 Storage Integration 前所需的云厂商授权材料。"
+          }
+        },
+        "tags": [
+          "Storage Integration Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateStorageIntegrationAuthorizationMaterialsRequest"
+              },
+              "examples": {
+                "1": {
+                  "summary": "AWS S3",
+                  "value": {
+                    "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxx",
+                    "regionId": "aws-us-west-2",
+                    "bucketName": "my-bucket"
+                  },
+                  "x-target-lang": "en-US"
+                },
+                "2": {
+                  "summary": "GCP GCS",
+                  "value": {
+                    "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxx",
+                    "regionId": "gcp-us-central1",
+                    "bucketName": "my-gcs-bucket"
+                  },
+                  "x-target-lang": "en-US"
+                },
+                "3": {
+                  "summary": "Azure Blob",
+                  "value": {
+                    "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxx",
+                    "regionId": "azure-eastus",
+                    "bucketName": "my-blob-container"
+                  },
+                  "x-target-lang": "en-US"
+                },
+                "4": {
+                  "summary": "Amazon S3",
+                  "value": {
+                    "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxx",
+                    "regionId": "aws-cn-northwest-1",
+                    "bucketName": "my-bucket"
+                  },
+                  "x-target-lang": "zh-CN"
+                },
+                "5": {
+                  "summary": "Alibaba Cloud OSS",
+                  "x-target-lang": "zh-CN",
+                  "value": {
+                    "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxx",
+                    "regionId": "ali-cn-hangzhou",
+                    "bucketName": "my-oss-bucket"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns provider-specific authorization materials.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回云厂商相关的授权材料。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "AWS S3",
+                      "description": "A success response for AWS S3.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "AWS S3 成功响应。"
+                        }
+                      },
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "example": 0
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/AwsS3AuthorizationMaterialsData",
+                          "description": "Returns the AWS S3 authorization materials.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "返回 AWS S3 授权材料。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "GCP GCS",
+                      "x-target-lang": "en-US",
+                      "description": "A success response for GCP GCS.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "GCP GCS 成功响应。"
+                        }
+                      },
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "example": 0
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/GcpGcsAuthorizationMaterialsData",
+                          "description": "Returns the GCP GCS authorization materials.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "返回 GCP GCS 授权材料。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "Azure Blob",
+                      "x-target-lang": "en-US",
+                      "description": "A success response for Azure Blob.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "Azure Blob 成功响应。"
+                        }
+                      },
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "example": 0
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/AzureBlobAuthorizationMaterialsData",
+                          "description": "Returns the Azure Blob authorization materials.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "返回 Azure Blob 授权材料。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "Alibaba Cloud OSS",
+                      "x-target-lang": "zh-CN",
+                      "description": "A success response for Alibaba Cloud OSS.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "Alibaba Cloud OSS 成功响应。"
+                        }
+                      },
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "example": 0
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/AlibabaCloudOssAuthorizationMaterialsData",
+                          "description": "Returns the Alibaba Cloud OSS authorization materials.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "返回 Alibaba Cloud OSS 授权材料。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        }
+                      },
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "example": 1800
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误信息。"
+                            }
+                          },
+                          "example": "User hasn't authenticated"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "AWS S3",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "readonly": "{...}",
+                        "readwrite": "{...}",
+                        "iamPolicy": "{...}",
+                        "trustPolicy": "{...}",
+                        "zillizAccount": "306787409409",
+                        "externalId": "zilliz-external-AbCdEf12345678"
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "GCP GCS",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "permission": [
+                          "storage.objects.get",
+                          "storage.objects.create",
+                          "storage.objects.list",
+                          "storage.buckets.get"
+                        ],
+                        "googleCloudServiceAccount": "zilliz-xxxx@vdc-dev-test.iam.gserviceaccount.com"
+                      }
+                    },
+                    "x-target-lang": "en-US"
+                  },
+                  "3": {
+                    "summary": "Azure Blob",
+                    "x-target-response": "OPTION 3",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "credential": {
+                          "clusterIssuerUrl": "https://issuer.example.com/",
+                          "namespace": "milvus-tool",
+                          "serviceAccountName": "milvus-bucket"
+                        }
+                      }
+                    },
+                    "x-target-lang": "en-US"
+                  },
+                  "4": {
+                    "summary": "Alibaba Cloud OSS",
+                    "x-target-lang": "zh-CN",
+                    "x-target-response": "OPTION 4",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "readonly": "{...}",
+                        "readwrite": "{...}",
+                        "ramPolicy": "{...}",
+                        "trustPolicy": "{...}",
+                        "zillizAccount": "acs:ram::1234567890123456:root",
+                        "externalId": "zilliz-external-AbCdEf12345678"
+                      }
+                    }
+                  },
+                  "5": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 5",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ExternalCred": {
+        "type": "object",
+        "description": "Provider-specific credential fields for the storage integration. Only fields relevant to the target cloud are required.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "Storage Integration 的云厂商凭证字段。仅目标云厂商相关字段为必需。"
+          }
+        },
+        "properties": {
+          "roleArn": {
+            "type": "string",
+            "description": "The AWS IAM role ARN or Alibaba Cloud RAM role ARN.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "AWS IAM 角色 ARN 或阿里云 RAM 角色 ARN。"
+              }
+            }
+          },
+          "externalId": {
+            "type": "string",
+            "description": "The external ID for AWS or Alibaba Cloud role assumption.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "AWS 或阿里云角色扮演使用的 external ID。"
+              }
+            }
+          },
+          "accountName": {
+            "type": "string",
+            "description": "The Azure storage account name.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Azure 存储账号名称。"
+              }
+            }
+          },
+          "clientId": {
+            "type": "string",
+            "description": "The Azure federated identity client ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Azure 联合身份客户端 ID。"
+              }
+            }
+          },
+          "tenantId": {
+            "type": "string",
+            "description": "The Azure tenant ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Azure 租户 ID。"
+              }
+            }
+          },
+          "gcpProjectId": {
+            "type": "string",
+            "description": "The customer GCP project ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "用户侧 GCP 项目 ID。"
+              }
+            }
+          },
+          "serviceAccountEmail": {
+            "type": "string",
+            "description": "The customer-created GCP service account email that grants bucket access.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "用户创建的 GCP 服务账号邮箱，用于授予 bucket 访问权限。"
+              }
+            }
+          }
+        }
+      },
+      "CreateStorageIntegrationRequestAWS": {
+        "type": "object",
+        "required": [
+          "projectId",
+          "name",
+          "regionId",
+          "bucketName"
+        ],
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "description": "The ID of the project.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "项目 ID。"
+              }
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the storage integration.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Storage Integration 名称。"
+              }
+            }
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of the storage integration.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Storage Integration 描述。"
+              }
+            }
+          },
+          "regionId": {
+            "type": "string",
+            "description": "The ID of the region. The server uses this field to derive the cloud provider.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "地域 ID。服务器会根据该字段推断云厂商。"
+              }
+            }
+          },
+          "bucketName": {
+            "type": "string",
+            "description": "The bucket, container, or storage name. For Azure Blob Storage, this is the container name.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Bucket、容器或存储名称。对于 Azure Blob Storage，该字段表示容器名称。"
+              }
+            }
+          },
+          "externalCred": {
+            "description": "Provider-specific credential fields.",
+            "type": "object",
+            "properties": {
+              "roleArn": {
+                "type": "string",
+                "description": "The AWS IAM role ARN.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "AWS IAM 角色 ARN。"
+                  }
+                }
+              },
+              "externalId": {
+                "type": "string",
+                "description": "The external ID for AWS role assumption.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "AWS 角色扮演使用的 external ID。"
+                  }
+                }
+              }
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "云厂商相关的凭证字段。"
+              }
+            }
+          }
+        }
+      },
+      "CreateStorageIntegrationRequestGCP": {
+        "type": "object",
+        "required": [
+          "projectId",
+          "name",
+          "regionId",
+          "bucketName"
+        ],
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "description": "The ID of the project.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "项目 ID。"
+              }
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the storage integration.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Storage Integration 名称。"
+              }
+            }
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of the storage integration.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Storage Integration 描述。"
+              }
+            }
+          },
+          "regionId": {
+            "type": "string",
+            "description": "The ID of the region. The server uses this field to derive the cloud provider.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "地域 ID。服务器会根据该字段推断云厂商。"
+              }
+            }
+          },
+          "bucketName": {
+            "type": "string",
+            "description": "The bucket, container, or storage name. For Azure Blob Storage, this is the container name.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Bucket、容器或存储名称。对于 Azure Blob Storage，该字段表示容器名称。"
+              }
+            }
+          },
+          "externalCred": {
+            "description": "Provider-specific credential fields.",
+            "type": "object",
+            "properties": {
+              "gcpProjectId": {
+                "type": "string",
+                "description": "The customer GCP project ID.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用户侧 GCP 项目 ID。"
+                  }
+                }
+              },
+              "serviceAccountEmail": {
+                "type": "string",
+                "description": "The customer-created GCP service account email that grants bucket access.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用户创建的 GCP 服务账号邮箱，用于授予 bucket 访问权限。"
+                  }
+                }
+              }
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "云厂商相关的凭证字段。"
+              }
+            }
+          }
+        }
+      },
+      "CreateStorageIntegrationRequestAzure": {
+        "type": "object",
+        "required": [
+          "projectId",
+          "name",
+          "regionId",
+          "bucketName"
+        ],
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "description": "The ID of the project.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "项目 ID。"
+              }
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the storage integration.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Storage Integration 名称。"
+              }
+            }
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of the storage integration.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Storage Integration 描述。"
+              }
+            }
+          },
+          "regionId": {
+            "type": "string",
+            "description": "The ID of the region. The server uses this field to derive the cloud provider.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "地域 ID。服务器会根据该字段推断云厂商。"
+              }
+            }
+          },
+          "bucketName": {
+            "type": "string",
+            "description": "The bucket, container, or storage name. For Azure Blob Storage, this is the container name.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Bucket、容器或存储名称。对于 Azure Blob Storage，该字段表示容器名称。"
+              }
+            }
+          },
+          "externalCred": {
+            "description": "Provider-specific credential fields.",
+            "type": "object",
+            "properties": {
+              "accountName": {
+                "type": "string",
+                "description": "The Azure storage account name.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "Azure 存储账号名称。"
+                  }
+                }
+              },
+              "clientId": {
+                "type": "string",
+                "description": "The Azure federated identity client ID.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "Azure 联合身份客户端 ID。"
+                  }
+                }
+              },
+              "tenantId": {
+                "type": "string",
+                "description": "The Azure federated identity tenant ID.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "Azure 联合身份租户 ID。"
+                  }
+                }
+              }
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "云厂商相关的凭证字段。"
+              }
+            }
+          }
+        }
+      },
+      "ValidateStorageIntegrationRequest": {
+        "type": "object",
+        "required": [
+          "projectId",
+          "regionId",
+          "bucketName"
+        ],
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "description": "The ID of the project.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "项目 ID。"
+              }
+            }
+          },
+          "regionId": {
+            "type": "string",
+            "description": "The ID of the region. The server uses this field to derive the cloud provider.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "地域 ID。服务器会根据该字段推断云厂商。"
+              }
+            }
+          },
+          "bucketName": {
+            "type": "string",
+            "description": "The bucket, container, or storage name to validate.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "需要校验的 bucket、容器或存储名称。"
+              }
+            }
+          },
+          "externalCred": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ExternalCred"
+              }
+            ],
+            "description": "Provider-specific credential fields.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "云厂商相关的凭证字段。"
+              }
+            }
+          }
+        }
+      },
+      "GenerateStorageIntegrationAuthorizationMaterialsRequest": {
+        "type": "object",
+        "required": [
+          "projectId",
+          "regionId",
+          "bucketName"
+        ],
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "description": "The ID of the project.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "项目 ID。"
+              }
+            }
+          },
+          "regionId": {
+            "type": "string",
+            "description": "The ID of the region. The server uses this field to derive the cloud provider.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "地域 ID。服务器会根据该字段推断云厂商。"
+              }
+            }
+          },
+          "bucketName": {
+            "type": "string",
+            "description": "The bucket, container, or storage name used to generate policies or credentials.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "用于生成策略或凭证的 bucket、容器或存储名称。"
+              }
+            }
+          }
+        }
+      },
+      "StorageIntegrationSummary": {
+        "type": "object",
+        "properties": {
+          "integrationId": {
+            "type": "string",
+            "description": "The ID of the storage integration.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Storage Integration ID。"
+              }
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the storage integration.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Storage Integration 名称。"
+              }
+            }
+          },
+          "status": {
+            "type": "string",
+            "description": "The public status of the storage integration.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Storage Integration 的公开状态。"
+              }
+            },
+            "enum": [
+              "ACTIVE",
+              "ERROR"
+            ]
+          },
+          "message": {
+            "type": "string",
+            "description": "The status message. This field is empty when there is no message.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "状态信息。没有状态信息时为空字符串。"
+              }
+            }
+          },
+          "regionId": {
+            "type": "string",
+            "description": "The ID of the region.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "地域 ID。"
+              }
+            }
+          },
+          "bucketName": {
+            "type": "string",
+            "description": "The bucket, container, or storage name.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Bucket、容器或存储名称。"
+              }
+            }
+          }
+        }
+      },
+      "ListStorageIntegrationsData": {
+        "type": "object",
+        "properties": {
+          "storageIntegrations": {
+            "type": "array",
+            "description": "The current page of storage integration summaries.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前页的 Storage Integration 概览。"
+              }
+            },
+            "items": {
+              "$ref": "#/components/schemas/StorageIntegrationSummary"
+            }
+          },
+          "count": {
+            "type": "integer",
+            "description": "The total number of visible storage integrations after filtering.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "过滤后的可见 Storage Integration 总数。"
+              }
+            }
+          },
+          "currentPage": {
+            "type": "integer",
+            "description": "The current page number.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前页码。"
+              }
+            }
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "The page size.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "每页数量。"
+              }
+            }
+          }
+        }
+      },
+      "StorageIntegrationDetail": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/StorageIntegrationSummary"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "description": "A description of the storage integration.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "Storage Integration 描述。"
+                  }
+                }
+              },
+              "externalCred": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ExternalCred"
+                  }
+                ],
+                "description": "Provider-specific credential fields stored for this integration. Fields with null values are omitted.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "该集成保存的云厂商凭证字段。值为 null 的字段会被省略。"
+                  }
+                }
+              },
+              "createTime": {
+                "type": "string",
+                "description": "The creation time in UTC ISO 8601 format.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "UTC ISO 8601 格式的创建时间。"
+                  }
+                },
+                "format": "date-time"
+              }
+            }
+          }
+        ]
+      },
+      "StorageIntegrationMutationData": {
+        "type": "object",
+        "properties": {
+          "integrationId": {
+            "type": "string",
+            "description": "The ID of the storage integration.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Storage Integration ID。"
+              }
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the storage integration.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Storage Integration 名称。"
+              }
+            }
+          }
+        }
+      },
+      "ValidateStorageIntegrationData": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Whether the credential can access the target storage.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "凭证是否可以访问目标存储。"
+              }
+            }
+          },
+          "message": {
+            "type": "string",
+            "description": "The failure reason when validation fails. This field is empty when validation succeeds.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "校验失败时的原因。校验成功时为空字符串。"
+              }
+            }
+          }
+        }
+      },
+      "AwsS3AuthorizationMaterialsData": {
+        "type": "object",
+        "properties": {
+          "readonly": {
+            "type": "string",
+            "description": "The read-only AWS S3 policy. Possible values are `s3:GetObject`, `s3:ListBucket`, and `s3:GetBucketLocation`.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "只读 AWS S3 策略。可能的值为 `s3:GetObject`、`s3:ListBucket` 和 `s3:GetBucketLocation`。"
+              }
+            }
+          },
+          "readwrite": {
+            "type": "string",
+            "description": "The read-write AWS S3 policy. Possible values are `s3:GetObject`, `s3:ListBucket`, `s3:GetBucketLocation`, and `s3:PutObject`.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "读写 AWS S3 策略。可能的值为 `s3:GetObject`、`s3:ListBucket`、`s3:GetBucketLocation` 和 `s3:PutObject`。"
+              }
+            }
+          },
+          "iamPolicy": {
+            "type": "string",
+            "description": "The AWS IAM policy used by the create workflow. Possible values are `s3:GetObject`, `s3:ListBucket`, `s3:GetBucketLocation`, and `s3:PutObject`.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "创建流程使用的 AWS IAM 策略。可能的值为 `s3:GetObject`、`s3:ListBucket`、`s3:GetBucketLocation` 和 `s3:PutObject`。"
+              }
+            }
+          },
+          "trustPolicy": {
+            "type": "string",
+            "description": "The provider trust policy.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "云厂商信任策略。"
+              }
+            }
+          },
+          "zillizAccount": {
+            "type": "string",
+            "description": "The Zilliz cloud account or RAM principal to authorize.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "需要授权的 Zilliz 云账号或 RAM 主体。"
+              }
+            }
+          },
+          "externalId": {
+            "type": "string",
+            "description": "The generated external ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "生成的 external ID。"
+              }
+            }
+          }
+        }
+      },
+      "GcpGcsAuthorizationMaterialsData": {
+        "type": "object",
+        "properties": {
+          "permission": {
+            "type": "array",
+            "description": "The GCP bucket permissions to grant.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "需要授予的 GCP bucket 权限。"
+              }
+            },
+            "items": {
+              "type": "string"
+            }
+          },
+          "googleCloudServiceAccount": {
+            "type": "string",
+            "description": "The Zilliz-managed Google Cloud service account email.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Zilliz 托管的 Google Cloud 服务账号邮箱。"
+              }
+            }
+          }
+        }
+      },
+      "AzureBlobAuthorizationMaterialsData": {
+        "type": "object",
+        "properties": {
+          "credential": {
+            "type": "object",
+            "description": "Azure authorization credential information.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Azure 授权凭证信息。"
+              }
+            },
+            "properties": {
+              "clusterIssuerUrl": {
+                "type": "string",
+                "description": "The cluster issuer URL for Azure federated identity.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "Azure 联合身份使用的集群 issuer URL。"
+                  }
+                }
+              },
+              "namespace": {
+                "type": "string",
+                "description": "The Kubernetes namespace used by the Zilliz service account.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "Zilliz 服务账号所在的 Kubernetes 命名空间。"
+                  }
+                }
+              },
+              "serviceAccountName": {
+                "type": "string",
+                "description": "The Zilliz service account name.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "Zilliz 服务账号名称。"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "AlibabaCloudOssAuthorizationMaterialsData": {
+        "type": "object",
+        "properties": {
+          "readonly": {
+            "type": "string",
+            "description": "The Alibaba Cloud OSS policy. Possible values are `oss:GetObject`, `oss:ListObjects`, `oss:GetBucketLocation`, and `oss:HeadBucket`.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "只读阿里云 OSS 策略。可能的值为 `oss:GetObject`、`oss:ListObjects`、`oss:GetBucketLocation` 和 `oss:HeadBucket`。"
+              }
+            }
+          },
+          "readwrite": {
+            "type": "string",
+            "description": "The read-write Alibaba Cloud OSS policy. Possible values are `oss:GetObject`, `oss:ListObjects`, `oss:GetBucketLocation`, `oss.HeadBucket`, and `oss:PutObject`.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "读写阿里云 OSS 策略。可能的值为 `oss:GetObject`、`oss:ListObjects`、`oss:GetBucketLocation`、`oss:HeadBucket` 和 `oss:PutObject`。"
+              }
+            }
+          },
+          "ramPolicy": {
+            "type": "string",
+            "description": "The Alibaba Cloud RAM policy used by the create workflow. Possible values are `oss:GetObject`, `oss:ListObjects`, `oss:GetBucketLocation`, `oss.HeadBucket`, and `oss:PutObject`.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "创建流程使用的阿里云 RAM 策略。可能的值为 `oss:GetObject`、`oss:ListObjects`、`oss:GetBucketLocation`、`oss:HeadBucket` 和 `oss:PutObject`。"
+              }
+            }
+          },
+          "trustPolicy": {
+            "type": "string",
+            "description": "The provider trust policy.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "云厂商信任策略。"
+              }
+            }
+          },
+          "zillizAccount": {
+            "type": "string",
+            "description": "The Zilliz cloud account or RAM principal to authorize.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "需要授权的 Zilliz 云账号或 RAM 主体。"
+              }
+            }
+          },
+          "externalId": {
+            "type": "string",
+            "description": "The generated external ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "生成的 external ID。"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

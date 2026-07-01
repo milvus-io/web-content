@@ -51,11 +51,11 @@ A **GetResp** object representing one or more queried entities.
 
 **PARAMETERS:**
 
-- **getResults** (*List\<QueryResp.QueryResult\>*)
+- **getResults** (*List\\\\<QueryResp.QueryResult\\\\>*)
 
     A list of **QueryResp.QueryResult** objects.
 
-- **fields** (*Map\<String,Object\>*)
+- **fields** (*Map\\\\<String,Object\\\\>*)
 
     A map that contains key-value pairs of field names and their values.
 
@@ -88,4 +88,3 @@ GetReq getReq = GetReq.builder()
         .build();
 GetResp getResp = client.get(getReq);
 ```
-

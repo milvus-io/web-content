@@ -166,6 +166,15 @@ function normalizeCodeTagContent(content) {
     });
 }
 
+function escapeBackslashedAngleText(part) {
+    // Markdown-style escapes such as List\<QueryResp.QueryResult\> can still be
+    // parsed as MDX JSX by Docusaurus. Convert Java/C# type-looking spans to
+    // entities before MDX sees them.
+    return part.replace(/\\<([^<>\n`]*?(?:[.,]|[A-Z][A-Za-z0-9]*\.)[^<>\n`]*?)\\>/g, (_match, inner) => {
+        return `&lt;${inner}&gt;`;
+    });
+}
+
 function findUnnormalizedCodeTags(content) {
     const findings = [];
 
@@ -269,6 +278,7 @@ function escapeNonHtmlTags(content) {
             const parts = line.split(/(`+[^`]+`+)/);
             line = parts.map((part, i) => {
                 if (i % 2 === 0) {
+                    part = escapeBackslashedAngleText(part);
                     // Escape non-HTML lowercase placeholder tags (e.g. <bucket_name>, <region-code>).
                     // Tags with attributes won't match because the regex only allows \s*\/?>
                     part = part.replace(/(?<!\\)<\/?([a-z][a-z0-9]*(?:[_-][a-z0-9]+)*)\s*\/?>/g, (match, tagName) => {
@@ -546,5 +556,6 @@ module.exports = {
     removeTabsHallucinations,
     unescapeKnownJsxTags,
     normalizeCodeTagContent,
+    escapeNonHtmlTags,
     findUnnormalizedCodeTags,
 };

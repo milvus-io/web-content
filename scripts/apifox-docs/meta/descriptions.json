@@ -153,5 +153,17 @@
     {
         "name": "on-demand-compute-v2",
         "description": "This set of APIs provides a way to manage on-demand compute for projects."
+    },
+    {
+        "name": "global-clusters-v2",
+        "description": "This set of APIs provides a way to manage Global Clusters in Zilliz Cloud."
+    },
+    {
+        "name": "storage-integration-operations-v2",
+        "description": "This set of APIs provides a way to manage storage integrations."
+    },
+    {
+        "name": "spark-job-v2",
+        "description": "This set of APIs provides a way to create, list, describe, validate, and cancel Spark batch jobs in Zilliz Cloud."
     }
 ]

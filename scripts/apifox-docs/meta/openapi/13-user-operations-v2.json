@@ -73,6 +73,15 @@
                     "minLength": 8,
                     "maxLength": 64,
                     "format": "password"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The description of the user.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "用户描述。"
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -85,7 +94,8 @@
                   "summary": "example",
                   "value": {
                     "userName": "myUser",
-                    "password": "P@ssw0rd"
+                    "password": "P@ssw0rd",
+                    "description": "Read-only analyst account."
                   }
                 }
               }
@@ -297,6 +307,15 @@
                               "description": "响应载荷，为已分配给当前用户的角色名称列表。"
                             }
                           }
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The description of the user.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "用户描述。"
+                            }
+                          }
                         }
                       },
                       "description": "A success response.",
@@ -352,7 +371,8 @@
                       "code": 0,
                       "data": [
                         "db_admin"
-                      ]
+                      ],
+                      "description": "Read-only analyst account."
                     }
                   },
                   "2": {
@@ -365,7 +385,8 @@
                       "code": 0,
                       "data": [
                         "public"
-                      ]
+                      ],
+                      "description": "Read-only analyst account."
                     }
                   },
                   "3": {
@@ -729,13 +750,13 @@
     },
     "/v2/vectordb/users/update_password": {
       "post": {
-        "summary": "Update User Password",
+        "summary": "Update User",
         "deprecated": false,
-        "description": "This operation updates the password for a specific user.",
+        "description": "This operation updates the password or description of a specified user.",
         "x-i18n": {
           "zh-CN": {
-            "summary": "更新用户密码",
-            "description": "本操作可更新指定用户密码。"
+            "summary": "更新用户",
+            "description": "本操作可更新指定用户的密码或描述。"
           }
         },
         "tags": [
@@ -775,10 +796,10 @@
                   },
                   "password": {
                     "type": "string",
-                    "description": "The corresponding password to the user. \nThe password must be a string of 8 to 64 characters and must include at least three of the following character types: uppercase letters, lowercase letters, numbers, and special characters.",
+                    "description": "The current password of the user. Provide this field together with `newPassword` when changing the password.",
                     "x-i18n": {
                       "zh-CN": {
-                        "description": "用户对应的密码。\n密码长度为 8 至 64 个字符，须包含大写字母、小写字母、数字和特殊字符。"
+                        "description": "用户当前密码。修改密码时，需与 `newPassword` 一起提供。"
                       }
                     },
                     "minLength": 8,
@@ -787,21 +808,28 @@
                   },
                   "newPassword": {
                     "type": "string",
-                    "description": "The new password for the user. \nThe password must be a string of 8 to 64 characters and must include at least three of the following character types: uppercase letters, lowercase letters, numbers, and special characters.",
+                    "description": "The new password for the user. Provide this field together with `password` when changing the password.",
                     "x-i18n": {
                       "zh-CN": {
-                        "description": "用户的新密码。\n密码长度为 8 至 64 个字符，须包含大写字母、小写字母、数字和特殊字符。"
+                        "description": "用户的新密码。修改密码时，需与 `password` 一起提供。"
                       }
                     },
                     "format": "password",
                     "minLength": 8,
                     "maxLength": 64
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The new description of the user. The value can be an empty string.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "用户的新描述。该值可以为空字符串。"
+                      }
+                    }
                   }
                 },
                 "required": [
-                  "userName",
-                  "password",
-                  "newPassword"
+                  "userName"
                 ],
                 "x-i18n-langs": [
                   "zh-CN"
@@ -811,6 +839,23 @@
                 "newPassword": "P@ssw0rd!",
                 "userName": "myUser",
                 "password": "P@ssw0rd*"
+              },
+              "examples": {
+                "1": {
+                  "summary": "Update password",
+                  "value": {
+                    "userName": "myUser",
+                    "password": "P@ssw0rd*",
+                    "newPassword": "P@ssw0rd!"
+                  }
+                },
+                "2": {
+                  "summary": "Update description",
+                  "value": {
+                    "userName": "myUser",
+                    "description": "Read-only analyst account."
+                  }
+                }
               }
             }
           }

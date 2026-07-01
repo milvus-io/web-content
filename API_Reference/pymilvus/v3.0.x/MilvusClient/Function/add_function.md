@@ -20,7 +20,7 @@ add_function(
 
 **RETURN TYPE:**
 
-*[CollectionSchema](https://zilliverse.feishu.cn/docx/U4Q8deNe2offXCx3OgIc9QJPnnh)*
+*[CollectionSchema](../CollectionSchema/CollectionSchema.md)*
 
 **RETURNS:**
 

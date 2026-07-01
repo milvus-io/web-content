@@ -43,7 +43,22 @@ function resolveRefs(obj, spec, visited = new Set(), depth = 0, options = {}) {
                 }
             }
 
-            return resolveRefs(resolved, spec, new Set(), depth + 1, options)
+            const resolvedRef = resolveRefs(resolved, spec, new Set(), depth + 1, options)
+            const siblingEntries = Object.entries(obj).filter(([key]) => key !== '$ref')
+
+            if (siblingEntries.length === 0 || !resolvedRef || typeof resolvedRef !== 'object' || Array.isArray(resolvedRef)) {
+                return resolvedRef
+            }
+
+            const resolvedSiblings = {}
+            for (const [key, value] of siblingEntries) {
+                resolvedSiblings[key] = resolveRefs(value, spec, visited, depth, options)
+            }
+
+            return {
+                ...resolvedRef,
+                ...resolvedSiblings,
+            }
         }
         return obj
     }

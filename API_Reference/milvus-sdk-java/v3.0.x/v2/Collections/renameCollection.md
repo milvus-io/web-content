@@ -1,5 +1,7 @@
 # renameCollection()
 
+# renameCollection()
+
 This operation renames an existing collection.
 
 ```java
@@ -13,6 +15,7 @@ renameCollection(RenameCollectionReq.builder()
     .databaseName(String databaseName)
     .collectionName(String collectionName)
     .newCollectionName(String newCollectionName)
+    .targetDbName(String targetDbName)
     .build()
 );
 ```
@@ -30,6 +33,10 @@ renameCollection(RenameCollectionReq.builder()
 - `newCollectionName(String newCollectionName)` -
 
     The new name for the collection.
+
+- `targetDbName(String targetDbName)` -
+
+    The name of the target database. Set this when the renamed collection should be moved into another database.
 
 **RETURNS:**
 

@@ -17,9 +17,12 @@
       "region",
       "migration",
       "job",
+      "spark",
       "alert",
       "etl",
-      "stage"
+      "stage",
+      "storage-integration",
+      "storageIntegrations"
     ],
     "milvus": []
   }

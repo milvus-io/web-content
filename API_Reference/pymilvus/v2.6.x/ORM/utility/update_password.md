@@ -1,60 +1,57 @@
 # update_password()
 
-This operation updates the password for a specific user.
+This operation updates a user password and can also update the user description.
 
 ## Request Syntax
 
 ```python
 update_password(
-    user: str,
+    user_name: str,
     old_password: str,
     new_password: str,
-    using: str,
-    timeout: float | None
-)
+    reset_connection: Optional[bool] = False,
+    timeout: Optional[float] = None,
+    description: Optional[str] = None
+) -> None
 ```
 
 **PARAMETERS:**
 
-- **user** (*str*) - 
+- **user_name** (*str*) -
 
     **[REQUIRED]**
 
-    The specific user whose password is to be reset.
+    The name of the user whose password or description is to be updated.
 
-- **old_password** (*str*) - 
-
-    **[REQUIRED]**
-
-    The original password for the specified user.
-
-    Setting this to an incorrect password results in a **MilvusException**.
-
-- **new_password** (*str*) - 
+- **old_password** (*str*) -
 
     **[REQUIRED]**
 
-    The new password for the specified user. 
+    The current password of the user. Provide this together with `new_password` when changing the password.
 
-    The password must be a string of 8 to 64 characters and must include at least three of the following character types: uppercase letters, lowercase letters, numbers, and special characters.
+- **new_password** (*str*) -
 
-- **using** (*string*) - 
+    **[REQUIRED]**
 
-    The alias of the employed connection.
+    The new password for the user. Provide this together with `old_password` when changing the password.
 
-    The default value is **default**, indicating that this operation employs the default connection.
+- **reset_connection** (*bool*) -
 
-- **timeout** (*float* | *None*)  
+    Whether to reset the client connection with the new password after the password is updated.
 
-    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
+- **timeout** (*float*) -
+
+    The timeout duration for this operation.
+
+- **description** (*str*) -
+
+    An optional new description for the user.
 
 **RETURN TYPE:**
 
-*NoneType*
+*None*
 
-**RETURNS:**
-
-None
+This operation returns no value.
 
 **EXCEPTIONS:**
 
@@ -62,43 +59,18 @@ None
 
     This exception will be raised when any error occurs during this operation.
 
+- **ParamError**
+
+    This exception will be raised when a parameter value is invalid.
+
 ## Examples
 
 ```python
-from pymilvus import connections, utility
-
-# Connection to localhost:19530
-connections.connect()
-
-# Create a user
-user = utility.create_user(user="admin", password="123456")
-
-# Update the password for the user.
-update_password(
-    user="admin",
-    old_password="123456",
-    new_password="123456Abc*",
-    using="default"
+client.update_password(
+    user_name="analyst_user",
+    old_password="P@ssw0rd!",
+    new_password="N3wP@ssw0rd!",
+    reset_connection=True,
+    description="Read-only analyst account",
 )
 ```
-
-## Related operations
-
-The following operations are related to `update_password()`
-
-- [Role](../Role/Role.md)
-
-- [create_user()](create_user.md)
-
-- [delete_user()](delete_user.md)
-
-- [list_roles()](list_roles.md)
-
-- [list_user()](list_user.md)
-
-- [list_users()](list_users.md)
-
-- [list_usernames()](list_usernames.md)
-
-- [reset_password()](reset_password.md)
-

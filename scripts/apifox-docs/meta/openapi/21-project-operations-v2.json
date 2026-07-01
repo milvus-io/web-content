@@ -131,6 +131,15 @@
                                   }
                                 }
                               },
+                              "description": {
+                                "type": "string",
+                                "description": "Description of the project.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "项目描述。"
+                                  }
+                                }
+                              },
                               "instanceCount": {
                                 "type": "string",
                                 "description": "Number of clusters in the projects.",
@@ -234,11 +243,14 @@
                         {
                           "projectName": "Default Project",
                           "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxxx",
-                          "regionIds": ["aws-us-east-1"],
+                          "regionIds": [
+                            "aws-us-east-1"
+                          ],
                           "instanceCount": 2,
                           "createTime": "2023-08-16T07:34:06Z",
                           "plan": "Enterprise",
-                          "orgType": "SAAS"
+                          "orgType": "SAAS",
+                          "description": "A project for organizing clusters and resources."
                         }
                       ]
                     }
@@ -253,11 +265,14 @@
                         {
                           "projectName": "Default Project",
                           "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxxx",
-                          "regionIds": ["ali-cn-hangzhou"],
+                          "regionIds": [
+                            "ali-cn-hangzhou"
+                          ],
                           "instanceCount": 2,
                           "createTime": "2023-08-16T07:34:06Z",
                           "plan": "Enterprise",
-                          "orgType": "SAAS"
+                          "orgType": "SAAS",
+                          "description": "用于组织集群和资源的项目描述。"
                         }
                       ]
                     }
@@ -294,7 +309,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "description": "The authentication token should be an API key with appropriate privileges",
+            "description": "The authentication token should be an API key with appropriate privileges.",
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
@@ -319,6 +334,17 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "待创建项目的名称。"
+                      }
+                    }
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The description of the project.",
+                    "example": "Production search workloads",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "项目描述。",
+                        "example": "Production search workloads"
                       }
                     }
                   },
@@ -359,7 +385,10 @@
               "example": {
                 "projectName": "My Project",
                 "plan": "Enterprise",
-                "regionIds": ["aws-us-east-1"]
+                "regionIds": [
+                  "aws-us-east-1"
+                ],
+                "description": "A project for organizing clusters and resources."
               }
             }
           }
@@ -473,6 +502,203 @@
       }
     },
     "/v2/projects/{projectId}": {
+      "patch": {
+        "summary": "Update Project",
+        "deprecated": false,
+        "description": "This operation updates the name and description of a specified project.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "更新项目",
+            "description": "本接口可更新指定项目的名称和描述。"
+          }
+        },
+        "tags": [
+          "Project Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The ID of the project to update.",
+            "required": true,
+            "example": "proj-xxxxxxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "待更新项目的 ID。"
+              }
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          },
+          {
+            "name": "OrgId",
+            "in": "header",
+            "description": "The organization ID of the project.",
+            "required": true,
+            "example": "org-xxxxxxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "项目所属的组织 ID。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "projectName": {
+                    "type": "string",
+                    "description": "The new name of the project. The value cannot be an empty string",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "项目的新名称。值不能为空字符串。"
+                      }
+                    }
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The new description of the project. The value can be an empty string.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "项目的新描述。值可以为空字符串。"
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "1": {
+                  "summary": "Name and Description",
+                  "value": {
+                    "projectName": "New Project Name",
+                    "description": "This is a new description of the project."
+                  }
+                },
+                "2": {
+                  "summary": "Name only",
+                  "value": {
+                    "projectName": "New Project Name"
+                  }
+                },
+                "3": {
+                  "summary": "Description only",
+                  "value": {
+                    "description": "This is a new description of the project."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "None",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "type": "integer",
+                          "example": 0,
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "string",
+                          "description": "A string 'ok' indicating the project is updated successfully.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "一个字符串 'ok'，表示项目更新成功。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": "ok"
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      },
       "get": {
         "summary": "Describe Project",
         "deprecated": false,
@@ -490,7 +716,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "description": "The authentication token should be an API key with appropriate privileges.",
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
@@ -498,7 +724,7 @@
             },
             "x-i18n": {
               "zh-CN": {
-                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
               }
             }
           },
@@ -589,6 +815,15 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "项目名称。"
+                                }
+                              }
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "Description of the project.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "项目描述。"
                                 }
                               }
                             },
@@ -686,11 +921,14 @@
                       "data": {
                         "projectId": "proj-x",
                         "projectName": "My Project",
-                        "regionIds": ["aws-us-east-1"],
+                        "regionIds": [
+                          "aws-us-east-1"
+                        ],
                         "instanceCount": 2,
                         "createTime": "2023-08-16T07:34:06Z",
                         "plan": "Enterprise",
-                        "orgType": "SAAS"
+                        "orgType": "SAAS",
+                        "description": "A project for organizing clusters and resources."
                       }
                     }
                   },

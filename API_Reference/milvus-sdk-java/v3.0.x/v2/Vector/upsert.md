@@ -1,5 +1,7 @@
 # upsert()
 
+# upsert()
+
 This operation inserts new rows into a collection or updates existing rows when their primary keys already exist. You can also use partial updates and field-level operations to update selected fields.
 
 ```java
@@ -22,29 +24,39 @@ upsert(UpsertReq.builder()
 
 **BUILDER METHODS:**
 
-- `data(List<JsonObject> data)` -
+- `data(List<JsonObject> data)`
 
     A list of data rows to insert/upsert as JSON objects.
 
-- `databaseName(String databaseName)` -
+- `databaseName(String databaseName)`
 
     The name of the database. Defaults to the current database if not specified.
 
-- `collectionName(String collectionName)` -
+- `collectionName(String collectionName)`
 
     The name of the target collection.
 
-- `partitionName(String partitionName)` -
+- `partitionName(String partitionName)`
 
     The name of the target partition.
 
-- `partialUpdate(boolean partialUpdate)` -
+- `partialUpdate(boolean partialUpdate)`
 
     Whether to enable partial field updates during upsert. Set this to `true` when you want to update only the primary key and the fields provided in each row. If you use `ARRAY_APPEND` or `ARRAY_REMOVE` in `fieldOps`, the SDK sends the request with partial update semantics automatically.
 
-- `fieldOps(List<UpsertReq.FieldPartialUpdateOp> fieldOps)` -
+- `fieldOps(List<UpsertReq.FieldPartialUpdateOp> fieldOps)`
 
     Controls how fields in `data` are applied during a partial upsert. For most fields, omit this parameter or use the default `REPLACE` operation to replace the field value carried in the request. For `ARRAY` fields, use `ARRAY_APPEND` to append the request payload to the existing array, or `ARRAY_REMOVE` to remove all existing elements that match the request payload, without first reading and rewriting the full array. Each `FieldPartialUpdateOp` targets one `fieldName`. The value in `data` for that field must match the array `element_type`; after `ARRAY_APPEND`, the final array must not exceed the field `max_capacity`.
+
+**FieldPartialUpdateOp BUILDER METHODS:**
+
+- `fieldName(String fieldName)`
+
+    The field affected by the partial update operation.
+
+- `opType(UpsertReq.FieldPartialUpdateOp.OpType opType)`
+
+    The operation to apply. Valid values are `REPLACE`, `ARRAY_APPEND`, and `ARRAY_REMOVE`. Non-`REPLACE` operations imply partial-update semantics.
 
 **RETURNS:**
 
