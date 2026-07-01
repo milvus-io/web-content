@@ -1,11 +1,11 @@
 ---
 id: upsert-entities.md
-title: Вставка сущностей
+title: Операция «Upsert» с сущностями
 summary: >-
-  Операция upsert предоставляет удобный способ вставки или обновления сущностей
-  в коллекции.
+  Операция upsert предоставляет удобный способ вставки или обновления объектов в
+  коллекции.
 ---
-<h1 id="Upsert-Entities" class="common-anchor-header">Вставка сущностей<button data-href="#Upsert-Entities" class="anchor-icon" translate="no">
+<h1 id="Upsert-Entities" class="common-anchor-header">Операция «Upsert» с сущностями<button data-href="#Upsert-Entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Операция <code translate="no">upsert</code> предоставляет удобный способ вставки или обновления сущностей в коллекции.</p>
+    </button></h1><p>Операция « <code translate="no">upsert</code> » предоставляет удобный способ вставки или обновления сущностей в коллекции.</p>
 <h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,9 +36,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>С помощью <code translate="no">upsert</code> можно вставить новую сущность или обновить существующую, в зависимости от того, существует ли в коллекции первичный ключ, указанный в запросе upsert. Если первичный ключ не найден, выполняется операция вставки. В противном случае будет выполнена операция обновления.</p>
-<p>Апсерт в Milvus работает либо в режиме <strong>переопределения</strong>, либо в режиме <strong>слияния</strong>.</p>
-<h3 id="Upsert-in-override-mode" class="common-anchor-header">Апсерт в режиме переопределения<button data-href="#Upsert-in-override-mode" class="anchor-icon" translate="no">
+    </button></h2><p>Операцию « <code translate="no">upsert</code> » можно использовать как для вставки нового объекта, так и для обновления существующего, в зависимости от того, существует ли в коллекции первичный ключ, указанный в запросе «upsert». Если первичный ключ не найден, выполняется операция вставки. В противном случае выполняется операция обновления.</p>
+<p>Операция upsert в Milvus работает в режиме <strong>перезаписи</strong> или <strong>слияния</strong>.</p>
+<h3 id="Upsert-in-override-mode" class="common-anchor-header">Операция «upsert» в режиме перезаписи<button data-href="#Upsert-in-override-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -53,36 +53,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Запрос upsert, работающий в режиме переопределения, сочетает вставку и удаление. Когда поступает запрос <code translate="no">upsert</code> для существующей сущности, Milvus вставляет данные, содержащиеся в полезной нагрузке запроса, и одновременно удаляет существующую сущность с исходным первичным ключом, указанным в данных.</p>
-<p>
+    </button></h3><p>Запрос «upsert», работающий в режиме перезаписи, сочетает в себе операции вставки и удаления. При получении запроса « <code translate="no">upsert</code> » для существующего объекта Milvus вставляет данные, содержащиеся в полезной нагрузке запроса, и одновременно удаляет существующий объект с исходным первичным ключом, указанным в данных.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" />
-   </span> <span class="img-wrapper"> <span>Upsert в режиме переопределения</span> </span></p>
-<p>Если для целевой коллекции включено <code translate="no">autoid</code> для ее первичного поля, Milvus сгенерирует новый первичный ключ для данных, содержащихся в полезной нагрузке запроса, перед их вставкой.</p>
-<p>Для полей с включенным <code translate="no">nullable</code> можно опустить их в запросе <code translate="no">upsert</code>, если они не требуют обновлений.</p>
-<h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">Вставка в режиме слияния<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>Вы также можете использовать флаг <code translate="no">partial_update</code>, чтобы заставить запрос upsert работать в режиме слияния. Это позволит вам включить в полезную нагрузку запроса только те поля, которые требуют обновления.</p>
-<p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" /> 
+   <span>Upsert в режиме перезаписи</span>
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-merge-mode.png" alt="Upsert In Merge Mode" class="doc-image" id="upsert-in-merge-mode" />
-   </span> <span class="img-wrapper"> <span>Upsert в режиме слияния</span> </span></p>
-<p>Чтобы выполнить слияние, установите флаг <code translate="no">partial_update</code> на <code translate="no">True</code> в запросе <code translate="no">upsert</code> вместе с первичным ключом и полями, которые нужно обновить с их новыми значениями.</p>
-<p>Получив такой запрос, Milvus выполняет запрос с сильной согласованностью для получения сущности, обновляет значения полей на основе данных в запросе, вставляет измененные данные, а затем удаляет существующую сущность с исходным первичным ключом, указанным в запросе.</p>
-<h3 id="Upsert-behaviors-special-notes" class="common-anchor-header">Поведение при апсерте: особые указания<button data-href="#Upsert-behaviors-special-notes" class="anchor-icon" translate="no">
+ </span></p>
+<p>Если в целевой коллекции для основного поля включена функция « <code translate="no">autoid</code> », Milvus сгенерирует новый первичный ключ для данных, содержащихся в полезной нагрузке запроса, перед их вставкой.</p>
+<p>Поля, для которых включена функция « <code translate="no">nullable</code> », можно опустить в запросе « <code translate="no">upsert</code> », если они не требуют обновления.</p>
+<h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">Upsert в режиме слияния<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -97,28 +77,52 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Перед использованием функции слияния следует учесть несколько особых замечаний. В следующих случаях предполагается, что у вас есть коллекция с двумя скалярными полями <code translate="no">title</code> и <code translate="no">issue</code>, с первичным ключом <code translate="no">id</code> и векторным полем <code translate="no">vector</code>.</p>
+    </button></h3><p>Вы также можете использовать флаг <code translate="no">partial_update</code>, чтобы запрос upsert работал в режиме слияния. Это позволяет включать в тело запроса только те поля, которые требуют обновления.</p>
+<p><span class="img-wrapper">
+  
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-merge-mode.png" alt="Upsert In Merge Mode" class="doc-image" id="upsert-in-merge-mode" /> 
+   <span>Upsert в режиме слияния</span>
+  
+ </span></p>
+<p>Чтобы выполнить слияние, в запросе <code translate="no">upsert</code> установите флаг <code translate="no">partial_update</code> в значение <code translate="no">True</code> вместе с первичным ключом и полями для обновления с указанием их новых значений.</p>
+<p>При получении такого запроса Milvus выполняет запрос с жесткой согласованностью для извлечения сущности, обновляет значения полей на основе данных в запросе, вставляет измененные данные, а затем удаляет существующую сущность с исходным первичным ключом, указанным в запросе.</p>
+<h3 id="Upsert-behaviors-special-notes" class="common-anchor-header">Поведение при операции «upsert»: особые замечания<button data-href="#Upsert-behaviors-special-notes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Прежде чем использовать функцию слияния, следует учесть несколько особых моментов. В следующих примерах предполагается, что у вас есть коллекция с двумя скалярными полями с именами <code translate="no">title</code> и <code translate="no">issue</code>, а также первичным ключом <code translate="no">id</code> и векторным полем с именем <code translate="no">vector</code>.</p>
 <ul>
-<li><p><strong>Верхние поля с</strong> <strong>включенной функцией</strong> <code translate="no">nullable</code> <strong>.</strong></p>
-<p>Предположим, что поле <code translate="no">issue</code> может быть нулевым. При апсерте этих полей обратите внимание на это:</p>
+<li><p><strong>Обработка полей с</strong> <strong>включенной функцией</strong> « <code translate="no">nullable</code> <strong>».</strong></p>
+<p>Предположим, что поле <code translate="no">issue</code> может принимать значение null. При выполнении операции upsert для этих полей обратите внимание на следующее:</p>
 <ul>
-<li><p>Если вы опустите поле <code translate="no">issue</code> в запросе <code translate="no">upsert</code> и отключите <code translate="no">partial_update</code>, поле <code translate="no">issue</code> будет обновлено до <code translate="no">null</code> вместо того, чтобы сохранить свое первоначальное значение.</p></li>
-<li><p>Чтобы сохранить исходное значение поля <code translate="no">issue</code>, нужно либо включить <code translate="no">partial_update</code> и опустить поле <code translate="no">issue</code>, либо включить поле <code translate="no">issue</code> с его исходным значением в запрос <code translate="no">upsert</code>.</p></li>
+<li><p>Если вы опустите поле <code translate="no">issue</code> в запросе <code translate="no">upsert</code> и отключите <code translate="no">partial_update</code>, поле <code translate="no">issue</code> будет обновлено до значения <code translate="no">null</code> вместо сохранения его исходного значения.</p></li>
+<li><p>Чтобы сохранить исходное значение поля <code translate="no">issue</code>, необходимо либо включить параметр <code translate="no">partial_update</code> и опустить поле <code translate="no">issue</code>, либо включить поле <code translate="no">issue</code> с его исходным значением в запрос <code translate="no">upsert</code>.</p></li>
 </ul></li>
-<li><p><strong>Перенос ключей в динамическое поле</strong>.</p>
-<p>Предположим, что вы включили динамический ключ в коллекции примера, и пары ключ-значение в динамическом поле сущности похожи на <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
-<p>При апсерте сущности с ключами, такими как <code translate="no">author</code>, <code translate="no">year</code>, или <code translate="no">tags</code>, или при добавлении других ключей, обратите внимание на это:</p>
+<li><p><strong>Ключи для операции «Upsert» в динамическом поле</strong>.</p>
+<p>Предположим, что вы включили динамический ключ в коллекции из примера, а пары «ключ-значение» в динамическом поле сущности выглядят примерно так: <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
+<p>При выполнении операции upsert для сущности с ключами, такими как <code translate="no">author</code>, <code translate="no">year</code> или <code translate="no">tags</code>, либо при добавлении других ключей, обратите внимание на следующее:</p>
 <ul>
-<li><p>Если вы выполняете апсерт с отключенным <code translate="no">partial_update</code>, поведение по умолчанию - <strong>переопределение</strong>. Это означает, что значение динамического поля будет переопределено всеми не определенными схемой полями, включенными в запрос, и их значениями.</p>
-<p>Например, если данные, включенные в запрос, имеют значение <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code>, то пары ключ-значение в динамическом поле целевой сущности будут обновлены до этого значения.</p></li>
-<li><p>Если вы выполняете апсерт с включенным <code translate="no">partial_update</code>, то по умолчанию будет выполняться <strong>слияние</strong>. Это означает, что значение динамического поля будет объединено со всеми не определенными схемой полями, включенными в запрос, и их значениями.</p>
-<p>Например, если данные, включенные в запрос, имеют значение <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>, то пары ключ-значение в динамическом поле целевой сущности после апсерт станут <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code>.</p></li>
+<li><p>Если вы выполняете операцию upsert при отключенном параметре « <code translate="no">partial_update</code> », по умолчанию происходит <strong>перезапись</strong>. Это означает, что значение динамического поля будет перезаписано всеми полями, не определёнными в схеме, включёнными в запрос, и их значениями.</p>
+<p>Например, если данные, включённые в запрос, имеют вид <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code>, пары «ключ-значение» в динамическом поле целевой сущности будут обновлены в соответствии с ними.</p></li>
+<li><p>Если вы выполняете операцию upsert с включенным параметром ` <code translate="no">partial_update</code> `, по умолчанию происходит <strong>слияние</strong>. Это означает, что значение динамического поля будет объединено со всеми полями, не определёнными в схеме, включёнными в запрос, и их значениями.</p>
+<p>Например, если данные, включённые в запрос, имеют вид <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>, то после операции upsert пары «ключ-значение» в динамическом поле целевого объекта примут вид <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code>.</p></li>
 </ul></li>
-<li><p><strong>Апсертирование поля JSON.</strong></p>
-<p>Предположим, что в коллекции примеров есть определенное схемой поле JSON с именем <code translate="no">extras</code>, а пары ключ-значение в этом поле JSON сущности похожи на <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
-<p>При апселлинге поля <code translate="no">extras</code> сущности с измененными JSON-данными обратите внимание, что JSON-поле рассматривается как единое целое, и вы не можете обновлять отдельные ключи выборочно. Другими словами, поле JSON <strong>НЕ</strong> поддерживает upsert в режиме <strong>слияния</strong>.</p></li>
+<li><p><strong>Операция upsert для поля JSON.</strong></p>
+<p>Предположим, что в примере коллекция имеет определённое схемой поле JSON с именем <code translate="no">extras</code>, а пары «ключ-значение» в этом поле JSON сущности выглядят примерно так: <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
+<p>При операции «upsert» для поля <code translate="no">extras</code> сущности с измененными данными JSON обратите внимание, что поле JSON рассматривается как единое целое, и вы не можете выборочно обновлять отдельные ключи. Другими словами, поле JSON <strong>НЕ</strong> поддерживает операцию «upsert» в режиме <strong>слияния</strong>.</p></li>
 </ul>
-<h3 id="Limits--Restrictions" class="common-anchor-header">Пределы и ограничения<button data-href="#Limits--Restrictions" class="anchor-icon" translate="no">
+<h3 id="Limits--Restrictions" class="common-anchor-header">Ограничения и запреты<button data-href="#Limits--Restrictions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -133,15 +137,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Исходя из вышеизложенного, существует несколько ограничений и запретов, которые необходимо соблюдать:</p>
+    </button></h3><p>Исходя из вышеизложенного, необходимо соблюдать следующие ограничения и ограничения:</p>
 <ul>
-<li><p>Запрос <code translate="no">upsert</code> всегда должен включать первичные ключи целевых сущностей.</p></li>
+<li><p>Запрос <code translate="no">upsert</code> всегда должен содержать первичные ключи целевых сущностей.</p></li>
 <li><p>Целевая коллекция должна быть загружена и доступна для запросов.</p></li>
-<li><p>Все поля, указанные в запросе, должны существовать в схеме целевой коллекции.</p></li>
-<li><p>Значения всех полей, указанных в запросе, должны соответствовать типам данных, определенным в схеме.</p></li>
-<li><p>Для любого поля, полученного из другого с помощью функций, Milvus удалит производное поле во время апсерта, чтобы обеспечить возможность пересчета.</p></li>
+<li><p>Все поля, указанные в запросе, должны присутствовать в схеме целевой коллекции.</p></li>
+<li><p>Значения всех полей, указанных в запросе, должны соответствовать типам данных, определённым в схеме.</p></li>
+<li><p>Для любого поля, полученного из другого с помощью функций, Milvus удалит производственное поле во время операции upsert, чтобы обеспечить возможность пересчёта.</p></li>
 </ul>
-<h2 id="Upsert-entities-in-a-collection" class="common-anchor-header">Апсертирование сущностей в коллекции<button data-href="#Upsert-entities-in-a-collection" class="anchor-icon" translate="no">
+<h2 id="Upsert-entities-in-a-collection" class="common-anchor-header">Осуществление операции upsert сущностей в коллекции<button data-href="#Upsert-entities-in-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -156,10 +160,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В этом разделе мы выполним апсерт сущностей в коллекцию с именем <code translate="no">my_collection</code>. В этой коллекции есть только два поля, названные <code translate="no">id</code>, <code translate="no">vector</code>, <code translate="no">title</code> и <code translate="no">issue</code>. Поле <code translate="no">id</code> является первичным полем, а поля <code translate="no">title</code> и <code translate="no">issue</code> - скалярными полями.</p>
-<p>Эти три сущности, если они существуют в коллекции, будут переопределены сущностями, включенными в запрос upsert.</p>
+    </button></h2><p>В этом разделе мы будем выполнять операцию upsert сущностей в коллекцию с именем <code translate="no">my_collection</code>. Эта коллекция имеет только два поля: <code translate="no">id</code>, <code translate="no">vector</code>, <code translate="no">title</code> и <code translate="no">issue</code>. Поле <code translate="no">id</code> является первичным полем, а поля <code translate="no">title</code> и <code translate="no">issue</code> — скалярными.</p>
+<p>Эти три сущности, если они присутствуют в коллекции, будут перезаписаны теми, которые включены в запрос upsert.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -303,7 +312,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/upsert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;title&quot;: &quot;Artificial Intelligence in Real Life&quot;, &quot;issue&quot;: &quot;vol.12&quot;},
@@ -325,7 +333,7 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Upsert-entities-in-a-partition" class="common-anchor-header">Апсертирование сущностей в раздел<button data-href="#Upsert-entities-in-a-partition" class="anchor-icon" translate="no">
+<h2 id="Upsert-entities-in-a-partition" class="common-anchor-header">Upsert сущностей в раздел<button data-href="#Upsert-entities-in-a-partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -340,10 +348,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Вы также можете вставить сущности в указанный раздел. В следующих фрагментах кода предполагается, что в вашей коллекции есть раздел с именем <strong>PartitionA</strong>.</p>
-<p>Три сущности, если они существуют в разделе, будут заменены сущностями, включенными в запрос.</p>
+    </button></h2><p>Вы также можете выполнить операцию upsert для сущностей в указанном разделе. В приведенных ниже фрагментах кода предполагается, что в вашей коллекции имеется раздел с именем <strong>PartitionA</strong>.</p>
+<p>Если эти три сущности уже существуют в разделе, они будут перезаписаны сущностями, включёнными в запрос.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data=[
     {
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">10</span>, 
@@ -450,7 +463,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/upsert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 10, &quot;vector&quot;: [0.06998888224297328, 0.8582816610326578, -0.9657938677934292, 0.6527905683627726, -0.8668460657158576], &quot;title&quot;: &quot;Layour Design Reference&quot;, &quot;issue&quot;: &quot;vol.34&quot;},
@@ -473,7 +485,7 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Upsert-entities-in-merge-mode--Milvus-v262+" class="common-anchor-header">Перенос сущностей в режиме слияния<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-entities-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
+<h2 id="Upsert-entities-in-merge-mode--Milvus-v262+" class="common-anchor-header">Обработка сущностей в режиме слияния<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-entities-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -488,13 +500,18 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Следующий пример кода демонстрирует, как выполнить апсерт сущностей с частичным обновлением. Укажите только поля, нуждающиеся в обновлении, и их новые значения, а также явный флаг частичного обновления.</p>
-<p>В следующем примере поле <code translate="no">issue</code> сущностей, указанных в запросе upsert, будет обновлено до значений, включенных в запрос.</p>
+    </button></h2><p>В следующем примере кода показано, как выполнять операцию «upsert» с частичным обновлением. Укажите только те поля, которые требуют обновления, и их новые значения, а также явно задайте флаг частичного обновления.</p>
+<p>В приведенном ниже примере поле « <code translate="no">issue</code> » сущностей, указанных в запросе на обновление или добавление, будет обновлено до значений, включенных в запрос.</p>
 <div class="alert note">
-<p>При выполнении upsert в режиме слияния убедитесь, что сущности, участвующие в запросе, имеют одинаковый набор полей. Предположим, есть две или более сущностей, которые нужно вставить, как показано в следующем фрагменте кода, важно, чтобы они содержали одинаковые поля для предотвращения ошибок и поддержания целостности данных.</p>
+<p>При выполнении операции «upsert» в режиме слияния убедитесь, что сущности, участвующие в запросе, имеют одинаковый набор полей. Предположим, что необходимо выполнить операцию «upsert» для двух или более сущностей, как показано в следующем фрагменте кода; важно, чтобы они содержали одинаковые поля, чтобы предотвратить ошибки и сохранить целостность данных.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data=[
     {
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
@@ -593,7 +610,6 @@ _, err = client.Upsert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/upsert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,

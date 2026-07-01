@@ -1,16 +1,16 @@
 ---
 id: nullable-and-default.md
-title: Nulável e por defeito
+title: Nullável e valor por defeito
 summary: >-
-  O Milvus permite-lhe definir o atributo nullable e os valores por defeito para
-  os campos escalares, exceto o campo primário. Para os campos marcados como
-  nullable=True, pode ignorar o campo quando insere dados, ou defini-lo
-  diretamente como um valor nulo, e o sistema tratá-lo-á como nulo sem causar um
-  erro. Quando um campo tem um valor por defeito, o sistema aplica
+  O Milvus permite definir o atributo «nullable» e valores por defeito para
+  campos escalares, com exceção do campo primário. Para os campos marcados como
+  `nullable=True`, pode ignorar o campo ao inserir dados ou definir-lhe
+  diretamente um valor nulo, e o sistema tratá-lo-á como nulo sem causar um
+  erro. Quando um campo tem um valor por predefinição, o sistema aplicará
   automaticamente esse valor se não forem especificados dados para o campo
   durante a inserção.
 ---
-<h1 id="Nullable--Default" class="common-anchor-header">Nulável e por defeito<button data-href="#Nullable--Default" class="anchor-icon" translate="no">
+<h1 id="Nullable--Default" class="common-anchor-header">Nullável e valor por defeito<button data-href="#Nullable--Default" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -25,8 +25,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>O Milvus permite-lhe definir o atributo <code translate="no">nullable</code> e os valores por defeito para os campos escalares, exceto para o campo primário. Para os campos marcados como <code translate="no">nullable=True</code>, pode ignorar o campo ao inserir dados ou defini-lo diretamente como um valor nulo, e o sistema tratá-lo-á como nulo sem causar um erro. Quando um campo tem um valor por defeito, o sistema aplica automaticamente esse valor se não forem especificados dados para o campo durante a inserção.</p>
-<p>Os atributos default value e nullable simplificam a migração de dados de outros sistemas de base de dados para o Milvus, permitindo o tratamento de conjuntos de dados com valores nulos e preservando as definições de valores default. Ao criar uma coleção, pode também ativar a opção nullable ou definir valores por defeito para campos onde os valores podem ser incertos.</p>
+    </button></h1><p>O Milvus permite definir o atributo « <code translate="no">nullable</code> » e valores por defeito para campos escalares, exceto o campo primário. Para campos marcados como « <code translate="no">nullable=True</code> », pode ignorar o campo ao inserir dados ou defini-lo diretamente como nulo, e o sistema tratá-lo-á como nulo sem causar um erro. Quando um campo tem um valor por defeito, o sistema aplicará automaticamente esse valor se não forem especificados dados para o campo durante a inserção.</p>
+<p>O valor por defeito e os atributos «nullable» simplificam a migração de dados de outros sistemas de bases de dados para o Milvus, permitindo o tratamento de conjuntos de dados com valores nulos e preservando as definições de valores por defeito. Ao criar uma coleção, também pode ativar a opção «nullable» ou definir valores por defeito para campos cujos valores possam ser incertos.</p>
 <h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,14 +43,14 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Apenas os campos escalares, excluindo o campo primário, suportam valores predefinidos e o atributo nullable.</p></li>
-<li><p>Os campos JSON e Matriz não suportam valores padrão.</p></li>
-<li><p>Os valores predefinidos ou o atributo nullable só podem ser configurados durante a criação da coleção e não podem ser modificados posteriormente.</p></li>
-<li><p>Os campos marcados como anuláveis não podem ser utilizados como chaves de partição. Para obter mais informações sobre chaves de partição, consulte <a href="/docs/pt/v2.6.x/use-partition-key.md">Usar chave de partição</a>.</p></li>
-<li><p>Ao criar um índice em um campo escalar com o atributo anulável ativado, os valores nulos serão excluídos do índice.</p></li>
-<li><p><strong>Campos JSON e ARRAY</strong>: Ao utilizar os operadores <code translate="no">IS NULL</code> ou <code translate="no">IS NOT NULL</code> para filtrar campos JSON ou ARRAY, estes operadores funcionam ao nível da coluna, o que indica que apenas avaliam se todo o objeto ou matriz JSON é nulo. Por exemplo, se uma chave dentro de um objeto JSON for nula, não será reconhecida pelo filtro <code translate="no">IS NULL</code>. Para obter mais informações, consulte <a href="/docs/pt/v2.6.x/basic-operators.md">Operadores básicos</a>.</p></li>
+<li><p>Apenas os campos escalares, excluindo o campo primário, suportam valores predefinidos e o atributo «nullable».</p></li>
+<li><p>Os campos JSON e Array não suportam valores por defeito.</p></li>
+<li><p>Os valores por defeito ou o atributo «nullable» só podem ser configurados durante a criação da coleção e não podem ser modificados posteriormente.</p></li>
+<li><p>Os campos marcados como «nullable» não podem ser utilizados como chaves de partição. Para mais informações sobre chaves de partição, consulte <a href="/docs/pt/v2.6.x/use-partition-key.md">«Utilizar chave de partição</a>».</p></li>
+<li><p>Ao criar um índice num campo escalar com o atributo «nullable» ativado, os valores nulos serão excluídos do índice.</p></li>
+<li><p><strong>Campos JSON e ARRAY</strong>: Ao utilizar os operadores « <code translate="no">IS NULL</code> » ou « <code translate="no">IS NOT NULL</code> » para filtrar campos JSON ou ARRAY, estes operadores funcionam ao nível da coluna, o que significa que apenas avaliam se todo o objeto JSON ou matriz é nulo. Por exemplo, se uma chave dentro de um objeto JSON for nula, não será reconhecida pelo filtro « <code translate="no">IS NULL</code> ». Para mais informações, consulte <a href="/docs/pt/v2.6.x/basic-operators.md">«Operadores básicos</a>».</p></li>
 </ul>
-<h2 id="Nullable-attribute" class="common-anchor-header">Atributo Nullable<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
+<h2 id="Nullable-attribute" class="common-anchor-header">Atributo «Nullable»<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -65,8 +65,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O atributo <code translate="no">nullable</code> permite-lhe armazenar valores nulos numa coleção, proporcionando flexibilidade no tratamento de dados desconhecidos.</p>
-<h3 id="Set-the-nullable-attribute" class="common-anchor-header">Definir o atributo nullable<button data-href="#Set-the-nullable-attribute" class="anchor-icon" translate="no">
+    </button></h2><p>O atributo « <code translate="no">nullable</code> » permite-lhe armazenar valores nulos numa coleção, proporcionando flexibilidade ao lidar com dados desconhecidos.</p>
+<h3 id="Set-the-nullable-attribute" class="common-anchor-header">Definir o atributo «nullable»<button data-href="#Set-the-nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -81,9 +81,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Ao criar uma coleção, utilize <code translate="no">nullable=True</code> para definir campos anuláveis (a predefinição é <code translate="no">False</code>). O exemplo a seguir cria uma coleção chamada <code translate="no">my_collection</code> e define o campo <code translate="no">age</code> como anulável:</p>
+    </button></h3><p>Ao criar uma coleção, utilize <code translate="no">nullable=True</code> para definir campos nulos (o valor predefinido é <code translate="no">False</code>). O exemplo seguinte cria uma coleção denominada <code translate="no">my_collection</code> e define o campo <code translate="no">age</code> como nulo:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>)
@@ -299,9 +304,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Quando inserir dados num campo anulável, insira null ou omita diretamente este campo:</p>
+    </button></h3><p>Ao inserir dados num campo nulo, insira «null» ou omita diretamente esse campo:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data = [
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>], <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">30</span>},
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>], <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-literal">None</span>},
@@ -386,9 +396,14 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Ao usar o método <code translate="no">search</code>, se um campo contiver valores <code translate="no">null</code>, o resultado da pesquisa retornará o campo como nulo:</p>
+    </button></h3><p>Ao utilizar o método ` <code translate="no">search</code> `, se um campo contiver valor <code translate="no">null</code>, o resultado da pesquisa irá devolver o campo como `null`:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.128</span>]],
@@ -472,9 +487,14 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">#{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;distance&quot;:0.16000001,&quot;id&quot;:1},{&quot;age&quot;:null,&quot;distance&quot;:0.28999996,&quot;id&quot;:2}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Quando se utiliza o método <code translate="no">query</code> para filtragem escalar, os resultados da filtragem para valores nulos são todos falsos, indicando que não serão selecionados.</p>
+<p>Quando utiliza o método ` <code translate="no">query</code> ` para filtragem escalar, os resultados da filtragem para valores `null` são todos `false`, indicando que não serão selecionados.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Reviewing previously inserted data:</span>
 <span class="hljs-comment"># {&quot;id&quot;: 1, &quot;vector&quot;: [0.1, 0.2, ..., 0.128], &quot;age&quot;: 30}</span>
 <span class="hljs-comment"># {&quot;id&quot;: 2, &quot;vector&quot;: [0.2, 0.3, ..., 0.129], &quot;age&quot;: None}</span>
@@ -536,12 +556,17 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;id&quot;:1}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para retornar entidades com <code translate="no">null</code> valores, consulte sem qualquer condição de filtragem escalar da seguinte forma:</p>
+<p>Para devolver entidades com valores « <code translate="no">null</code> », efetue a consulta sem qualquer condição de filtragem escalar, da seguinte forma:</p>
 <div class="alert note">
-<p>O método <code translate="no">query</code>, quando usado sem nenhuma condição de filtragem, recupera todas as entidades na coleção, incluindo aquelas com valores nulos. Para restringir o número de entidades retornadas, o parâmetro <code translate="no">limit</code> deve ser especificado.</p>
+<p>O método « <code translate="no">query</code> », quando utilizado sem quaisquer condições de filtragem, recupera todas as entidades da coleção, incluindo aquelas com valores nulos. Para restringir o número de entidades devolvidas, é necessário especificar o parâmetro « <code translate="no">limit</code> ».</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">null_results = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,     <span class="hljs-comment"># Query without any filtering condition</span>
@@ -608,7 +633,7 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Os valores padrão são valores predefinidos atribuídos a campos escalares. Se não fornecer um valor para um campo com uma predefinição durante a inserção, o sistema utiliza automaticamente o valor predefinido.</p>
+    </button></h2><p>Os valores por defeito são valores predefinidos atribuídos a campos escalares. Se não fornecer um valor para um campo com um valor por defeito durante a inserção, o sistema utiliza automaticamente o valor por defeito.</p>
 <h3 id="Set-default-values" class="common-anchor-header">Definir valores por defeito<button data-href="#Set-default-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -624,9 +649,14 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Ao criar uma coleção, utilize o parâmetro <code translate="no">default_value</code> para definir o valor predefinido para um campo. O exemplo a seguir mostra como definir o valor padrão de <code translate="no">age</code> para <code translate="no">18</code> e <code translate="no">status</code> para <code translate="no">&quot;active&quot;</code>:</p>
+    </button></h3><p>Ao criar uma coleção, utilize o parâmetro ` <code translate="no">default_value</code> ` para definir o valor por defeito de um campo. O exemplo seguinte mostra como definir o valor por defeito de ` <code translate="no">age</code> ` para ` <code translate="no">18</code> ` e de ` <code translate="no">status</code> ` para ` <code translate="no">&quot;active&quot;</code>`:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">schema = client.create_schema(
     auto_id=<span class="hljs-literal">False</span>,
     enable_dynamic_schema=<span class="hljs-literal">True</span>,
@@ -853,7 +883,12 @@ curl --request POST \
       </svg>
     </button></h3><p>Ao inserir dados, se omitir campos com um valor predefinido ou definir o seu valor como nulo, o sistema utiliza o valor predefinido:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data = [
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, ..., <span class="hljs-number">0.128</span>], <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">30</span>, <span class="hljs-string">&quot;status&quot;</span>: <span class="hljs-string">&quot;premium&quot;</span>},
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, ..., <span class="hljs-number">0.129</span>]},  <span class="hljs-comment"># `age` and `status` use default values</span>
@@ -931,9 +966,9 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Para obter mais informações sobre como as configurações de valor nulo e padrão entram em vigor, consulte <a href="/docs/pt/v2.6.x/nullable-and-default.md#Applicable-rules">Regras aplicáveis</a>.</p>
+<p>Para mais informações sobre como as definições de valores nulos e predefinidos entram em vigor, consulte <a href="/docs/pt/v2.6.x/nullable-and-default.md#Applicable-rules">Regras aplicáveis</a>.</p>
 </div>
-<h3 id="Search-and-query-with-default-values" class="common-anchor-header">Pesquisa e consulta com valores padrão<button data-href="#Search-and-query-with-default-values" class="anchor-icon" translate="no">
+<h3 id="Search-and-query-with-default-values" class="common-anchor-header">Pesquisar e consultar com valores predefinidos<button data-href="#Search-and-query-with-default-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -948,10 +983,15 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>As entidades que contêm valores padrão são tratadas da mesma forma que quaisquer outras entidades durante pesquisas vetoriais e filtragem escalar. Você pode incluir valores padrão como parte de suas operações <code translate="no">search</code> e <code translate="no">query</code>.</p>
-<p>Por exemplo, em uma operação <code translate="no">search</code>, as entidades com <code translate="no">age</code> definidas para o valor padrão de <code translate="no">18</code> serão incluídas nos resultados:</p>
+    </button></h3><p>As entidades que contêm valores predefinidos são tratadas da mesma forma que quaisquer outras entidades durante pesquisas vetoriais e filtragem escalar. Pode incluir valores predefinidos como parte das suas operações « <code translate="no">search</code> » e « <code translate="no">query</code> ».</p>
+<p>Por exemplo, numa operação « <code translate="no">search</code> », as entidades com « <code translate="no">age</code> » definido para o valor por predefinição « <code translate="no">18</code> » serão incluídas nos resultados:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.5</span>]],
@@ -1042,9 +1082,14 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:18,&quot;distance&quot;:0.050000004,&quot;id&quot;:2,&quot;status&quot;:&quot;active&quot;},{&quot;age&quot;:18,&quot;distance&quot;:0.45000002,&quot;id&quot;:4,&quot;status&quot;:&quot;inactive&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Em uma operação <code translate="no">query</code>, você pode corresponder ou filtrar diretamente por valores padrão:</p>
+<p>Numa operação « <code translate="no">query</code> », pode corresponder ou filtrar diretamente pelos valores por predefinição:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query all entities where `age` equals the default value (18)</span>
 default_age_results = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -1162,12 +1207,12 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A tabela a seguir resume o comportamento de colunas anuláveis e valores padrão sob diferentes combinações de configuração. Essas regras determinam como o Milvus trata os dados ao tentar inserir valores nulos ou se os valores de campo não são fornecidos.</p>
+    </button></h2><p>A tabela seguinte resume o comportamento das colunas que podem conter valores nulos e dos valores por predefinição em diferentes combinações de configuração. Estas regras determinam a forma como o Milvus trata os dados ao tentar inserir valores nulos ou caso os valores dos campos não sejam fornecidos.</p>
 <table>
    <tr>
-     <th><p>Nulável</p></th>
-     <th><p>Valor por defeito</p></th>
-     <th><p>Tipo de valor por defeito</p></th>
+     <th><p>Nullável</p></th>
+     <th><p>Valor predefinido</p></th>
+     <th><p>Tipo do valor por defeito</p></th>
      <th><p>Entrada do utilizador</p></th>
      <th><p>Resultado</p></th>
      <th><p>Exemplo</p></th>
@@ -1175,10 +1220,10 @@ curl --request POST \
    <tr>
      <td><p>✅</p></td>
      <td><p>✅</p></td>
-     <td><p>Não-nulo</p></td>
+     <td><p>Não nulo</p></td>
      <td><p>Nenhum/nulo</p></td>
-     <td><p>Utiliza o valor por defeito</p></td>
-     <td><p>Campo: <code translate="no">age</code> Valor por defeito: <code translate="no">18</code></p><p>Entrada do utilizador: nulo</p><p>Resultado: armazenado como <code translate="no">18</code></p></td>
+     <td><p>Utiliza o valor predefinido</p></td>
+     <td><p>Campo: <code translate="no">age</code> Valor predefinido: <code translate="no">18</code></p><p>Entrada do utilizador: nulo</p><p>Resultado: armazenado como <code translate="no">18</code></p></td>
    </tr>
    <tr>
      <td><p>✅</p></td>
@@ -1186,30 +1231,30 @@ curl --request POST \
      <td><p>-</p></td>
      <td><p>Nenhum/nulo</p></td>
      <td><p>Armazenado como nulo</p></td>
-     <td><p>Campo: <code translate="no">middle_name</code> Valor por defeito: -</p><p>Entrada do utilizador: nulo</p><p>Resultado: armazenado como nulo</p></td>
+     <td><p>Campo: <code translate="no">middle_name</code> Valor predefinido: -</p><p>Entrada do utilizador: nulo</p><p>Resultado: armazenado como nulo</p></td>
    </tr>
    <tr>
      <td><p>❌</p></td>
      <td><p>✅</p></td>
-     <td><p>Não-nulo</p></td>
+     <td><p>Não nulo</p></td>
      <td><p>Nenhum/nulo</p></td>
      <td><p>Utiliza o valor predefinido</p></td>
-     <td><p>Campo: <code translate="no">status</code> Valor por defeito: <code translate="no">"active"</code></p><p>Entrada do utilizador: nulo</p><p>Resultado: armazenado como <code translate="no">"active"</code></p></td>
+     <td><p>Campo: <code translate="no">status</code> Valor predefinido: <code translate="no">"active"</code></p><p>Entrada do utilizador: nulo</p><p>Resultado: armazenado como <code translate="no">"active"</code></p></td>
    </tr>
    <tr>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>-</p></td>
      <td><p>Nenhum/nulo</p></td>
-     <td><p>Lança um erro</p></td>
-     <td><p>Campo: <code translate="no">email</code> Valor por defeito: -</p><p>Entrada do utilizador: nulo</p><p>Resultado: Operação rejeitada, o sistema lança um erro</p></td>
+     <td><p>Gera um erro</p></td>
+     <td><p>Campo: <code translate="no">email</code> Valor predefinido: -</p><p>Entrada do utilizador: nulo</p><p>Resultado: Operação rejeitada, o sistema gera um erro</p></td>
    </tr>
    <tr>
      <td><p>❌</p></td>
      <td><p>✅</p></td>
      <td><p>Nulo</p></td>
      <td><p>Nenhum/nulo</p></td>
-     <td><p>Dá origem a um erro</p></td>
-     <td><p>Campo: <code translate="no">username</code> Valor por defeito: nulo</p><p>Entrada do utilizador: nulo</p><p>Resultado: Operação rejeitada, o sistema lança um erro</p></td>
+     <td><p>Gera um erro</p></td>
+     <td><p>Campo: <code translate="no">username</code> Valor predefinido: nulo</p><p>Entrada do utilizador: nulo</p><p>Resultado: Operação rejeitada, o sistema gera um erro</p></td>
    </tr>
 </table>

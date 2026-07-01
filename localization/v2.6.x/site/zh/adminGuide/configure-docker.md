@@ -20,9 +20,10 @@ title: 使用 Docker Compose 配置 Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本主题介绍如何使用 Docker Compose 配置 Milvus 组件及其第三方依赖项。</p>
+    </button></h1><p>本节介绍如何使用 Docker Compose 配置 Milvus 组件及其第三方依赖项。</p>
 <div class="alert note">
-在当前版本中，所有参数只有在 Milvus 重新启动后才会生效。</div>
+在当前版本中，所有参数仅在 Milvus 重启后才会生效。
+</div>
 <h2 id="Download-a-configuration-file" class="common-anchor-header">下载配置文件<button data-href="#Download-a-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +39,7 @@ title: 使用 Docker Compose 配置 Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>直接或使用以下命令<a href="https://raw.githubusercontent.com/milvus-io/milvus/v2.6.17/configs/milvus.yaml">下载</a> <code translate="no">milvus.yaml</code> 。</p>
+    </button></h2><p>可直接<a href="https://raw.githubusercontent.com/milvus-io/milvus/v2.6.17/configs/milvus.yaml">下载</a> <code translate="no">milvus.yaml</code> ，或使用以下命令<a href="https://raw.githubusercontent.com/milvus-io/milvus/v2.6.17/configs/milvus.yaml">进行下载</a>。</p>
 <pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/v2.6.17/configs/milvus.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Modify-the-configuration-file" class="common-anchor-header">修改配置文件<button data-href="#Modify-the-configuration-file" class="anchor-icon" translate="no">
@@ -56,11 +57,12 @@ title: 使用 Docker Compose 配置 Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>通过调整<code translate="no">milvus.yaml</code> 中的相应参数，配置你的 Milvus 实例，以适应你的应用场景。</p>
-<p>有关各参数的详细信息，请查看以下链接。</p>
-<p>排序方式</p>
+    </button></h2><p>通过调整<code translate="no">milvus.yaml</code> 中的相应参数，根据您的应用场景配置Milvus实例。</p>
+<p>有关各参数的更多信息，请查阅以下链接。</p>
+<p>按以下类别排序：</p>
 <div class="filter">
-<a href="#component">组件或依赖项</a> <a href="#purpose">配置目的</a></div>
+<a href="#component">组件或依赖项</a> <a href="#purpose">配置目的</a>
+</div>
 <div class="filter-component table-wrapper">
 <table id="component">
 <thead>
@@ -75,7 +77,7 @@ title: 使用 Docker Compose 配置 Milvus
         <ul>
             <li><a href="/docs/zh/v2.6.x/configure_etcd.md">etcd</a></li>
             <li><a href="/docs/zh/v2.6.x/configure_minio.md">MinIO 或 S3</a></li>
-            <li><a href="/docs/zh/v2.6.x/configure_pulsar.md">脉冲星</a></li>
+            <li><a href="/docs/zh/v2.6.x/configure_pulsar.md">Pulsar</a></li>
             <li><a href="/docs/zh/v2.6.x/configure_rocksmq.md">RocksMQ</a></li>
         </ul>
     </td>
@@ -86,20 +88,20 @@ title: 使用 Docker Compose 配置 Milvus
             <li><a href="/docs/zh/v2.6.x/configure_querycoord.md">Query coord</a></li>
             <li><a href="/docs/zh/v2.6.x/configure_querynode.md">查询节点</a></li>
             <li><a href="/docs/zh/v2.6.x/configure_indexnode.md">索引节点</a></li>
-            <li><a href="/docs/zh/v2.6.x/configure_datacoord.md">数据坐标</a></li>
+            <li><a href="/docs/zh/v2.6.x/configure_datacoord.md">Data coord</a></li>
             <li><a href="/docs/zh/v2.6.x/configure_datanode.md">数据节点</a></li>
             <li><a href="/docs/zh/v2.6.x/configure_localstorage.md">本地存储</a></li>
             <li><a href="/docs/zh/v2.6.x/configure_log.md">日志</a></li>
-            <li><a href="/docs/zh/v2.6.x/configure_msgchannel.md">信息通道</a></li>
+            <li><a href="/docs/zh/v2.6.x/configure_msgchannel.md">消息通道</a></li>
             <li><a href="/docs/zh/v2.6.x/configure_common.md">通用</a></li>
-            <li><a href="/docs/zh/v2.6.x/configure_gpu.md">图形处理器</a></li>
+            <li><a href="/docs/zh/v2.6.x/configure_gpu.md">GPU</a></li>
             <li><a href="/docs/zh/v2.6.x/configure_grpc.md">GRPC</a></li>
             <li><a href="/docs/zh/v2.6.x/configure_indexcoord.md">索引坐标</a></li>
-            <li><a href="/docs/zh/v2.6.x/configure_metastore.md">元存储</a></li>
+            <li><a href="/docs/zh/v2.6.x/configure_metastore.md">元数据存储库</a></li>
             <li><a href="/docs/zh/v2.6.x/configure_mq.md">消息队列</a></li>
             <li><a href="/docs/zh/v2.6.x/configure_tikv.md">Tikv</a></li>
             <li><a href="/docs/zh/v2.6.x/configure_trace.md">跟踪</a></li>
-            <li><a href="/docs/zh/v2.6.x/configure_quotaandlimits.md">配额和限制</a></li>
+            <li><a href="/docs/zh/v2.6.x/configure_quotaandlimits.md">配额与限制</a></li>
         </ul>
     </td>
   </tr>
@@ -110,13 +112,13 @@ title: 使用 Docker Compose 配置 Milvus
 <table id="purpose">
 <thead>
   <tr>
-    <th>用途</th>
+    <th>目的</th>
     <th>参数</th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td>性能调整</td>
+    <td>性能调优</td>
     <td>
         <ul>
             <li><a href="/docs/zh/v2.6.x/configure_querynode.md#queryNodegracefulTime"><code translate="no">queryNode.gracefulTime</code></a></li>
@@ -131,7 +133,7 @@ title: 使用 Docker Compose 配置 Milvus
     </td>
   </tr>
   <tr>
-    <td>数据和元</td>
+    <td>数据和元数据</td>
     <td>
         <ul>
             <li><a href="/docs/zh/v2.6.x/configure_common.md#commonretentionDuration"><code translate="no">common.retentionDuration</code></a></li>
@@ -155,7 +157,7 @@ title: 使用 Docker Compose 配置 Milvus
     </td>
   </tr>
   <tr>
-    <td>配额和限制</td>
+    <td>配额与限制</td>
     <td>
         <ul>
             <li><a href="/docs/zh/v2.6.x/configure_quotaandlimits.md#quotaAndLimitsddlenabled"><code translate="no">quotaAndLimits.ddl.enabled</code></a></li>
@@ -210,8 +212,8 @@ title: 使用 Docker Compose 配置 Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>下载 Milvus<a href="https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus-standalone-docker-compose.yml">Standalone</a> 的安装文件，并将其保存为<code translate="no">docker-compose.yml</code> 。</p>
-<p>也可以直接运行以下命令。</p>
+    </button></h2><p>下载 Milvus<a href="https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus-standalone-docker-compose.yml">Standalone</a> 安装文件，并将其保存为<code translate="no">docker-compose.yml</code> 。</p>
+<p>您也可以直接运行以下命令。</p>
 <pre><code translate="no"><span class="hljs-meta prompt_"># </span><span class="language-bash">For Milvus standalone</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -230,8 +232,8 @@ title: 使用 Docker Compose 配置 Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在<code translate="no">docker-compose.yml</code> 中，在每个<code translate="no">milvus-standalone</code> 下添加<code translate="no">volumes</code> 部分。</p>
-<p>将<code translate="no">milvus.yaml</code> 文件的本地路径映射到所有<code translate="no">volumes</code> 部分下配置文件<code translate="no">/milvus/configs/milvus.yaml</code> 的相应 docker 容器路径上。</p>
+    </button></h2><p>在<code translate="no">docker-compose.yml</code> 中，在每个<code translate="no">milvus-standalone</code> 下方添加一个<code translate="no">volumes</code> 部分。</p>
+<p>将本地路径映射到您的<code translate="no">milvus.yaml</code> 文件，并将其映射到所有<code translate="no">volumes</code> 部分下的配置文件<code translate="no">/milvus/configs/milvus.yaml</code> 的相应 Docker 容器路径上。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
   <span class="hljs-attr">standalone:</span>
     <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
@@ -252,7 +254,8 @@ title: 使用 Docker Compose 配置 Milvus
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-数据会根据<code translate="no">docker-compose.yml</code> 中的默认配置存储在<code translate="no">/volumes</code> 文件夹中。要更改存储数据的文件夹，请编辑<code translate="no">docker-compose.yml</code> 或运行<code translate="no">$ export DOCKER_VOLUME_DIRECTORY=</code> 。</div>
+数据将根据<code translate="no">docker-compose.yml</code> 中的默认配置存储在<code translate="no">/volumes</code> 文件夹中。若要更改数据存储文件夹，请编辑<code translate="no">docker-compose.yml</code> 或运行<code translate="no">$ export DOCKER_VOLUME_DIRECTORY=</code> 。
+</div>
 <h2 id="Start-Milvus" class="common-anchor-header">启动 Milvus<button data-href="#Start-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -268,7 +271,7 @@ title: 使用 Docker Compose 配置 Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>修改完配置文件和安装文件后，就可以启动 Milvus 了。</p>
+    </button></h2><p>完成对配置文件和安装文件的修改后，即可启动 Milvus。</p>
 <pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
@@ -287,9 +290,10 @@ title: 使用 Docker Compose 配置 Milvus
         ></path>
       </svg>
     </button></h2><ul>
-<li>了解如何使用 Docker Compose 或 Helm 管理以下 Milvus 依赖项：<ul>
+<li>了解如何使用 Docker Compose 或 Helm 管理以下 Milvus 依赖项：
+<ul>
 <li><a href="/docs/zh/v2.6.x/deploy_s3.md">使用 Docker Compose 或 Helm 配置对象存储</a></li>
-<li><a href="/docs/zh/v2.6.x/deploy_etcd.md">使用 Docker Compose 或 Helm 配置元存储</a></li>
+<li><a href="/docs/zh/v2.6.x/deploy_etcd.md">使用 Docker Compose 或 Helm 配置元数据存储</a></li>
 <li><a href="/docs/zh/v2.6.x/deploy_pulsar.md">使用 Docker Compose 或 Helm 配置消息存储</a></li>
 </ul></li>
 </ul>

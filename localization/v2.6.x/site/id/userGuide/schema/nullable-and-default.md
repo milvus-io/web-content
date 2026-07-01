@@ -1,16 +1,17 @@
 ---
 id: nullable-and-default.md
-title: Dapat dinolkan & Default
+title: Nullable & Default
 summary: >-
-  Milvus memungkinkan Anda untuk mengatur atribut nullable dan nilai default
-  untuk bidang skalar, kecuali bidang utama. Untuk field yang ditandai sebagai
-  nullable=True, Anda dapat melewatkan field tersebut ketika memasukkan data,
-  atau mengaturnya secara langsung ke nilai nol, dan sistem akan
-  memperlakukannya sebagai nol tanpa menyebabkan kesalahan. Ketika sebuah field
-  memiliki nilai default, sistem akan secara otomatis menerapkan nilai ini jika
-  tidak ada data yang ditentukan untuk field tersebut selama penyisipan.
+  Milvus memungkinkan Anda untuk menetapkan atribut `nullable` dan nilai default
+  untuk kolom skalar, kecuali kolom utama. Untuk bidang yang ditandai sebagai
+  `nullable=True`, Anda dapat melewatkan bidang tersebut saat memasukkan data,
+  atau langsung menetapkan nilainya ke nilai `null`, dan sistem akan
+  menganggapnya sebagai `null` tanpa menimbulkan kesalahan. Jika suatu bidang
+  memiliki nilai default, sistem akan secara otomatis menerapkan nilai tersebut
+  jika tidak ada data yang ditentukan untuk bidang tersebut saat proses
+  penyisipan.
 ---
-<h1 id="Nullable--Default" class="common-anchor-header">Dapat dinolkan &amp; Default<button data-href="#Nullable--Default" class="anchor-icon" translate="no">
+<h1 id="Nullable--Default" class="common-anchor-header">Nullable &amp; Default<button data-href="#Nullable--Default" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -25,9 +26,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus memungkinkan Anda untuk mengatur atribut <code translate="no">nullable</code> dan nilai default untuk field skalar, kecuali field utama. Untuk field yang ditandai sebagai <code translate="no">nullable=True</code>, Anda dapat melewatkan field tersebut ketika memasukkan data, atau mengaturnya secara langsung ke nilai nol, dan sistem akan memperlakukannya sebagai nilai nol tanpa menyebabkan kesalahan. Ketika sebuah field memiliki nilai default, sistem akan secara otomatis menerapkan nilai ini jika tidak ada data yang ditentukan untuk field tersebut selama penyisipan.</p>
-<p>Nilai default dan atribut yang dapat dinolkan menyederhanakan migrasi data dari sistem basis data lain ke Milvus dengan mengizinkan penanganan kumpulan data dengan nilai nol dan mempertahankan pengaturan nilai default. Ketika membuat koleksi, Anda juga dapat mengaktifkan nullable atau mengatur nilai default untuk field yang nilainya tidak pasti.</p>
-<h2 id="Limits" class="common-anchor-header">Batas<button data-href="#Limits" class="anchor-icon" translate="no">
+    </button></h1><p>Milvus memungkinkan Anda untuk menetapkan atribut " <code translate="no">nullable</code> " dan nilai default untuk bidang skalar, kecuali bidang utama. Untuk bidang yang ditandai sebagai " <code translate="no">nullable=True</code>", Anda dapat melewati bidang tersebut saat memasukkan data, atau langsung mengaturnya ke nilai null, dan sistem akan menganggapnya sebagai null tanpa menimbulkan kesalahan. Jika suatu bidang memiliki nilai default, sistem akan secara otomatis menerapkan nilai tersebut jika tidak ada data yang ditentukan untuk bidang tersebut saat proses penyisipan.</p>
+<p>Nilai default dan atribut `nullable` mempermudah migrasi data dari sistem basis data lain ke Milvus dengan memungkinkan penanganan kumpulan data yang mengandung nilai `null` serta mempertahankan pengaturan nilai default. Saat membuat koleksi, Anda juga dapat mengaktifkan atribut `nullable` atau menetapkan nilai default untuk bidang-bidang di mana nilainya mungkin tidak pasti.</p>
+<h2 id="Limits" class="common-anchor-header">Batasan<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,14 +44,14 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Hanya bidang skalar, tidak termasuk bidang utama, yang mendukung nilai default dan atribut nullable.</p></li>
-<li><p>Bidang JSON dan Array tidak mendukung nilai default.</p></li>
-<li><p>Nilai default atau atribut nullable hanya dapat dikonfigurasi selama pembuatan koleksi dan tidak dapat dimodifikasi setelahnya.</p></li>
-<li><p>Bidang yang ditandai sebagai nullable tidak dapat digunakan sebagai kunci partisi. Untuk informasi lebih lanjut tentang kunci partisi, lihat <a href="/docs/id/v2.6.x/use-partition-key.md">Menggunakan Kunci Partisi</a>.</p></li>
-<li><p>Saat membuat indeks pada bidang skalar dengan atribut nullable diaktifkan, nilai nol akan dikecualikan dari indeks.</p></li>
-<li><p><strong>Bidang JSON dan ARRAY</strong>: Saat menggunakan operator <code translate="no">IS NULL</code> atau <code translate="no">IS NOT NULL</code> untuk memfilter bidang JSON atau ARRAY, operator ini bekerja pada tingkat kolom, yang mengindikasikan bahwa operator ini hanya mengevaluasi apakah seluruh objek JSON atau array bernilai nol. Misalnya, jika sebuah kunci di dalam objek JSON bernilai null, maka kunci tersebut tidak akan dikenali oleh filter <code translate="no">IS NULL</code>. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/basic-operators.md">Operator Dasar</a>.</p></li>
+<li><p>Hanya bidang skalar, kecuali bidang utama, yang mendukung nilai default dan atribut nullable.</p></li>
+<li><p>Kolom JSON dan Array tidak mendukung nilai default.</p></li>
+<li><p>Nilai default atau atribut nullable hanya dapat dikonfigurasi saat pembuatan koleksi dan tidak dapat diubah setelahnya.</p></li>
+<li><p>Kolom yang ditandai sebagai nullable tidak dapat digunakan sebagai kunci partisi. Untuk informasi lebih lanjut tentang kunci partisi, lihat <a href="/docs/id/v2.6.x/use-partition-key.md">Gunakan Kunci Partisi</a>.</p></li>
+<li><p>Saat membuat indeks pada bidang skalar dengan atribut "nullable" diaktifkan, nilai null akan dikecualikan dari indeks.</p></li>
+<li><p><strong>Kolom JSON dan ARRAY</strong>: Saat menggunakan operator ` <code translate="no">IS NULL</code> ` atau ` <code translate="no">IS NOT NULL</code> ` untuk menyaring kolom JSON atau ARRAY, operator-operator ini bekerja pada tingkat kolom, yang berarti mereka hanya mengevaluasi apakah objek JSON atau array secara keseluruhan bernilai null. Misalnya, jika sebuah kunci di dalam objek JSON bernilai null, hal tersebut tidak akan dikenali oleh filter ` <code translate="no">IS NULL</code> `. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/basic-operators.md">"Basic Operators</a>".</p></li>
 </ul>
-<h2 id="Nullable-attribute" class="common-anchor-header">Atribut yang dapat dinihilkan<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
+<h2 id="Nullable-attribute" class="common-anchor-header">Atribut nullable<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -65,8 +66,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Atribut <code translate="no">nullable</code> memungkinkan Anda menyimpan nilai null dalam koleksi, sehingga memberikan fleksibilitas saat menangani data yang tidak diketahui.</p>
-<h3 id="Set-the-nullable-attribute" class="common-anchor-header">Mengatur atribut yang dapat dinolkan<button data-href="#Set-the-nullable-attribute" class="anchor-icon" translate="no">
+    </button></h2><p>Atribut " <code translate="no">nullable</code> " memungkinkan Anda menyimpan nilai null dalam koleksi, sehingga memberikan fleksibilitas saat menangani data yang tidak diketahui.</p>
+<h3 id="Set-the-nullable-attribute" class="common-anchor-header">Menetapkan atribut nullable<button data-href="#Set-the-nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -81,9 +82,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Saat membuat koleksi, gunakan <code translate="no">nullable=True</code> untuk menentukan bidang yang dapat dinullkan (defaultnya adalah <code translate="no">False</code>). Contoh berikut ini membuat koleksi bernama <code translate="no">my_collection</code> dan menetapkan field <code translate="no">age</code> sebagai nullable:</p>
+    </button></h3><p>Saat membuat koleksi, gunakan ` <code translate="no">nullable=True</code> ` untuk mendefinisikan bidang yang dapat bernilai `null` (secara default, ` <code translate="no">False</code>`). Contoh berikut membuat koleksi bernama ` <code translate="no">my_collection</code> ` dan menetapkan bidang ` <code translate="no">age</code> ` sebagai bidang yang dapat bernilai `null`:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>)
@@ -299,9 +305,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Ketika Anda menyisipkan data ke dalam bidang yang dapat dinullkan, sisipkan null atau hilangkan bidang ini secara langsung:</p>
+    </button></h3><p>Saat Anda menyisipkan data ke dalam bidang yang dapat bernilai null, sisipkan nilai null atau lewati bidang ini secara langsung:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data = [
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>], <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">30</span>},
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>], <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-literal">None</span>},
@@ -386,9 +397,14 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Saat menggunakan metode <code translate="no">search</code>, jika sebuah bidang berisi nilai <code translate="no">null</code>, hasil pencarian akan mengembalikan bidang tersebut sebagai null:</p>
+    </button></h3><p>Saat menggunakan metode ` <code translate="no">search</code> `, jika suatu bidang berisi nil <code translate="no">null</code>, hasil pencarian akan mengembalikan bidang tersebut sebagai `null`:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.128</span>]],
@@ -472,9 +488,14 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">#{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;distance&quot;:0.16000001,&quot;id&quot;:1},{&quot;age&quot;:null,&quot;distance&quot;:0.28999996,&quot;id&quot;:2}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Ketika Anda menggunakan metode <code translate="no">query</code> untuk pemfilteran skalar, hasil pemfilteran untuk nilai null akan bernilai salah, yang mengindikasikan bahwa nilai tersebut tidak akan dipilih.</p>
+<p>Saat Anda menggunakan metode ` <code translate="no">query</code> ` untuk penyaringan skalar, hasil penyaringan untuk nilai `null` semuanya bernilai `false`, yang menunjukkan bahwa nilai-nilai tersebut tidak akan dipilih.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Reviewing previously inserted data:</span>
 <span class="hljs-comment"># {&quot;id&quot;: 1, &quot;vector&quot;: [0.1, 0.2, ..., 0.128], &quot;age&quot;: 30}</span>
 <span class="hljs-comment"># {&quot;id&quot;: 2, &quot;vector&quot;: [0.2, 0.3, ..., 0.129], &quot;age&quot;: None}</span>
@@ -536,12 +557,17 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;id&quot;:1}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk mengembalikan entitas dengan nilai <code translate="no">null</code>, kueri tanpa kondisi pemfilteran skalar sebagai berikut:</p>
+<p>Untuk mengembalikan entitas dengan nilai ` <code translate="no">null</code> `, lakukan kueri tanpa kondisi penyaringan skalar apa pun sebagai berikut:</p>
 <div class="alert note">
-<p>Metode <code translate="no">query</code>, ketika digunakan tanpa kondisi pemfilteran apa pun, akan mengambil semua entitas dalam koleksi, termasuk entitas dengan nilai nol. Untuk membatasi jumlah entitas yang dikembalikan, parameter <code translate="no">limit</code> harus ditentukan.</p>
+<p>Metode ` <code translate="no">query</code> `, ketika digunakan tanpa kondisi penyaringan apa pun, akan mengambil semua entitas dalam koleksi, termasuk yang memiliki nilai `null`. Untuk membatasi jumlah entitas yang dikembalikan, parameter ` <code translate="no">limit</code> ` harus ditentukan.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">null_results = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,     <span class="hljs-comment"># Query without any filtering condition</span>
@@ -608,8 +634,8 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Nilai default adalah nilai yang telah ditetapkan sebelumnya yang ditetapkan ke bidang skalar. Jika Anda tidak memberikan nilai untuk sebuah bidang dengan nilai default saat penyisipan, sistem akan secara otomatis menggunakan nilai default.</p>
-<h3 id="Set-default-values" class="common-anchor-header">Mengatur nilai default<button data-href="#Set-default-values" class="anchor-icon" translate="no">
+    </button></h2><p>Nilai default adalah nilai yang telah ditetapkan sebelumnya untuk bidang skalar. Jika Anda tidak memberikan nilai untuk bidang dengan nilai default saat penyisipan, sistem secara otomatis menggunakan nilai default tersebut.</p>
+<h3 id="Set-default-values" class="common-anchor-header">Menetapkan nilai default<button data-href="#Set-default-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -624,9 +650,14 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Saat membuat koleksi, gunakan parameter <code translate="no">default_value</code> untuk menentukan nilai default untuk suatu bidang. Contoh berikut ini menunjukkan cara menetapkan nilai default dari <code translate="no">age</code> menjadi <code translate="no">18</code> dan <code translate="no">status</code> menjadi <code translate="no">&quot;active&quot;</code>:</p>
+    </button></h3><p>Saat membuat koleksi, gunakan parameter ` <code translate="no">default_value</code> ` untuk menentukan nilai default suatu bidang. Contoh berikut menunjukkan cara menetapkan nilai default ` <code translate="no">age</code> ` menjadi ` <code translate="no">18</code> ` dan ` <code translate="no">status</code> ` menjadi ` <code translate="no">&quot;active&quot;</code>`:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">schema = client.create_schema(
     auto_id=<span class="hljs-literal">False</span>,
     enable_dynamic_schema=<span class="hljs-literal">True</span>,
@@ -851,9 +882,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Saat menyisipkan data, jika Anda menghilangkan bidang dengan nilai default atau menyetel nilainya menjadi nol, sistem akan menggunakan nilai default:</p>
+    </button></h3><p>Saat menyisipkan data, jika Anda mengabaikan bidang dengan nilai default atau menetapkan nilainya ke null, sistem akan menggunakan nilai default:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data = [
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, ..., <span class="hljs-number">0.128</span>], <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">30</span>, <span class="hljs-string">&quot;status&quot;</span>: <span class="hljs-string">&quot;premium&quot;</span>},
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, ..., <span class="hljs-number">0.129</span>]},  <span class="hljs-comment"># `age` and `status` use default values</span>
@@ -931,7 +967,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Untuk informasi lebih lanjut tentang bagaimana pengaturan nilai nol dan nilai default berlaku, lihat <a href="/docs/id/v2.6.x/nullable-and-default.md#Applicable-rules">Aturan yang berlaku</a>.</p>
+<p>Untuk informasi lebih lanjut tentang bagaimana pengaturan nilai nullable dan nilai default berlaku, lihat <a href="/docs/id/v2.6.x/nullable-and-default.md#Applicable-rules">Aturan yang berlaku</a>.</p>
 </div>
 <h3 id="Search-and-query-with-default-values" class="common-anchor-header">Pencarian dan kueri dengan nilai default<button data-href="#Search-and-query-with-default-values" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -948,10 +984,15 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Entitas yang berisi nilai default diperlakukan sama seperti entitas lain selama pencarian vektor dan pemfilteran skalar. Anda dapat menyertakan nilai default sebagai bagian dari operasi <code translate="no">search</code> dan <code translate="no">query</code>.</p>
-<p>Sebagai contoh, dalam operasi <code translate="no">search</code>, entitas dengan <code translate="no">age</code> yang disetel ke nilai default <code translate="no">18</code> akan disertakan dalam hasil:</p>
+    </button></h3><p>Entitas yang mengandung nilai default diperlakukan sama seperti entitas lainnya selama pencarian vektor dan penyaringan skalar. Anda dapat menyertakan nilai default sebagai bagian dari operasi ` <code translate="no">search</code> ` dan ` <code translate="no">query</code> `.</p>
+<p>Misalnya, dalam operasi ` <code translate="no">search</code> `, entitas dengan ` <code translate="no">age</code> ` yang ditetapkan ke nilai default ` <code translate="no">18</code> ` akan disertakan dalam hasil:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.5</span>]],
@@ -1042,9 +1083,14 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:18,&quot;distance&quot;:0.050000004,&quot;id&quot;:2,&quot;status&quot;:&quot;active&quot;},{&quot;age&quot;:18,&quot;distance&quot;:0.45000002,&quot;id&quot;:4,&quot;status&quot;:&quot;inactive&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Dalam operasi <code translate="no">query</code>, Anda dapat mencocokkan atau memfilter dengan nilai default secara langsung:</p>
+<p>Dalam operasi ` <code translate="no">query</code> `, Anda dapat mencocokkan atau menyaring berdasarkan nilai default secara langsung:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query all entities where `age` equals the default value (18)</span>
 default_age_results = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -1162,10 +1208,10 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Tabel berikut ini merangkum perilaku kolom yang dapat dinolkan dan nilai default di bawah kombinasi konfigurasi yang berbeda. Aturan-aturan ini menentukan bagaimana Milvus menangani data ketika mencoba menyisipkan nilai null atau jika nilai kolom tidak disediakan.</p>
+    </button></h2><p>Tabel berikut merangkum perilaku kolom yang dapat bernilai null dan nilai default di bawah berbagai kombinasi konfigurasi. Aturan-aturan ini menentukan cara Milvus menangani data saat mencoba menyisipkan nilai null atau jika nilai bidang tidak disediakan.</p>
 <table>
    <tr>
-     <th><p>Nullable</p></th>
+     <th><p>Dapat bernilai null</p></th>
      <th><p>Nilai Default</p></th>
      <th><p>Jenis Nilai Default</p></th>
      <th><p>Masukan Pengguna</p></th>
@@ -1175,10 +1221,10 @@ curl --request POST \
    <tr>
      <td><p>✅</p></td>
      <td><p>✅</p></td>
-     <td><p>Tidak ada/null</p></td>
+     <td><p>Bukan null</p></td>
      <td><p>Tidak ada/null</p></td>
      <td><p>Menggunakan nilai default</p></td>
-     <td><p>Bidang: <code translate="no">age</code> Nilai default: <code translate="no">18</code></p><p>Masukan pengguna: null</p><p>Hasil: disimpan sebagai <code translate="no">18</code></p></td>
+     <td><p>Kolom: <code translate="no">age</code> Nilai default: <code translate="no">18</code></p><p>Masukan pengguna: null</p><p>Hasil: disimpan sebagai <code translate="no">18</code></p></td>
    </tr>
    <tr>
      <td><p>✅</p></td>
@@ -1186,30 +1232,30 @@ curl --request POST \
      <td><p>-</p></td>
      <td><p>Tidak ada/null</p></td>
      <td><p>Disimpan sebagai null</p></td>
-     <td><p>Bidang: <code translate="no">middle_name</code> Nilai default: -</p><p>Masukan pengguna: null</p><p>Hasil: disimpan sebagai null</p></td>
+     <td><p>Kolom: <code translate="no">middle_name</code> Nilai default: -</p><p>Masukan pengguna: null</p><p>Hasil: disimpan sebagai null</p></td>
    </tr>
    <tr>
      <td><p>❌</p></td>
      <td><p>✅</p></td>
-     <td><p>Bukan nol</p></td>
+     <td><p>Bukan null</p></td>
      <td><p>Tidak ada/null</p></td>
      <td><p>Menggunakan nilai default</p></td>
-     <td><p>Bidang: <code translate="no">status</code> Nilai default: <code translate="no">"active"</code></p><p>Masukan pengguna: null</p><p>Hasil: disimpan sebagai <code translate="no">"active"</code></p></td>
+     <td><p>Kolom: <code translate="no">status</code> Nilai default: <code translate="no">"active"</code></p><p>Masukan pengguna: null</p><p>Hasil: disimpan sebagai <code translate="no">"active"</code></p></td>
    </tr>
    <tr>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>-</p></td>
      <td><p>Tidak ada/null</p></td>
-     <td><p>Melemparkan kesalahan</p></td>
-     <td><p>Bidang: <code translate="no">email</code> Nilai default: -</p><p>Masukan pengguna: null</p><p>Hasil: Operasi ditolak, sistem melemparkan kesalahan</p></td>
+     <td><p>Menimbulkan kesalahan</p></td>
+     <td><p>Kolom: <code translate="no">email</code> Nilai default: -</p><p>Masukan pengguna: null</p><p>Hasil: Operasi ditolak, sistem memunculkan kesalahan</p></td>
    </tr>
    <tr>
      <td><p>❌</p></td>
      <td><p>✅</p></td>
      <td><p>Null</p></td>
      <td><p>Tidak ada/null</p></td>
-     <td><p>Melemparkan kesalahan</p></td>
-     <td><p>Bidang: <code translate="no">username</code> Nilai default: null</p><p>Masukan pengguna: null</p><p>Hasil: Operasi ditolak, sistem melemparkan kesalahan</p></td>
+     <td><p>Menampilkan pesan kesalahan</p></td>
+     <td><p>Kolom: <code translate="no">username</code> Nilai default: null</p><p>Masukan pengguna: null</p><p>Hasil: Operasi ditolak, sistem menampilkan pesan kesalahan</p></td>
    </tr>
 </table>

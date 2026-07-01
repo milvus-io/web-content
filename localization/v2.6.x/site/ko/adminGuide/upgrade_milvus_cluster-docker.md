@@ -1,10 +1,10 @@
 ---
 id: upgrade_milvus_cluster-docker.md
-summary: Docker Compose로 Milvus 클러스터를 업그레이드하는 방법을 알아보세요.
-title: 도커 컴포즈로 밀버스 클러스터 업그레이드하기
+summary: Docker Compose를 사용하여 Milvus 클러스터를 업그레이드하는 방법을 알아보세요.
+title: Docker Compose를 사용하여 Milvus 클러스터 업그레이드하기
 ---
-<div class="tab-wrapper"><a href="/docs/ko/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>밀버스</a><a href="/docs/ko/v2.6.x/upgrade_milvus_cluster-operator.md" class=''>오퍼레이터밀버스 오퍼레이터밀버스</a><a href="/docs/ko/v2.6.x/configure-helm.md" class=''>오퍼레이터헬름도커</a><a href="/docs/ko/v2.6.x/upgrade_milvus_standalone-helm.md" class=''>컴포즈헬름도커</a><a href="/docs/ko/v2.6.x/upgrade_milvus_cluster-helm.md" class=''>컴포즈헬름</a></div>
-<h1 id="Upgrade-Milvus-Cluster-with-Docker-Compose" class="common-anchor-header">도커 컴포즈로 밀버스 클러스터 업그레이드하기<button data-href="#Upgrade-Milvus-Cluster-with-Docker-Compose" class="anchor-icon" translate="no">
+<div class="tab-wrapper"><a href="/docs/ko/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/ko/v2.6.x/upgrade_milvus_cluster-operator.md" class=''>OperatorMilvus</a><a href="/docs/ko/v2.6.x/configure_operator.md" class=''>OperatorMilvus</a><a href="/docs/ko/v2.6.x/configure-docker.md" class=''>OperatorHelmDocker</a><a href="/docs/ko/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>ComposeHelmDocker</a><a href="/docs/ko/v2.6.x/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>
+<h1 id="Upgrade-Milvus-Cluster-with-Docker-Compose" class="common-anchor-header">Docker Compose를 사용하여 Milvus 클러스터 업그레이드하기<button data-href="#Upgrade-Milvus-Cluster-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,10 +19,10 @@ title: 도커 컴포즈로 밀버스 클러스터 업그레이드하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 항목은 도커 컴포즈를 사용하여 Milvus를 업그레이드하는 방법을 설명합니다.</p>
-<p>일반적인 경우, <a href="#Upgrade-Milvus-by-changing-its-image">이미지를 변경하여 Milvus를 업그레이드할</a> 수 있습니다. 그러나 v2.1.x에서 v2.6.17로 업그레이드하기 전에 <a href="#Migrate-the-metadata">메타데이터를 마이그레이션해야</a> 합니다.</p>
+    </button></h1><p>이 항목에서는 Docker Compose를 사용하여 Milvus를 업그레이드하는 방법을 설명합니다.</p>
+<p>일반적인 경우, <a href="#Upgrade-Milvus-by-changing-its-image">이미지를 변경하여 Milvus를 업그레이드할</a> 수 있습니다. 그러나 v2.1.x에서 v2.6.17로 업그레이드하기 전에는 <a href="#Migrate-the-metadata">메타데이터를 마이그레이션해야</a> 합니다.</p>
 <div class="alert note">
-<p><strong>메시지 큐 제한</strong>: Milvus v2.6.17로 업그레이드할 때 현재 선택한 메시지 큐를 유지해야 합니다. 업그레이드 중에 다른 메시지 큐 시스템 간에 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</p>
+<p><strong>메시지 큐 제한 사항</strong>: Milvus v2.6.17로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</p>
 </div>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">이미지를 변경하여 Milvus 업그레이드하기<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,10 +39,10 @@ title: 도커 컴포즈로 밀버스 클러스터 업그레이드하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>일반적인 경우 다음과 같이 Milvus를 업그레이드할 수 있습니다:</p>
+    </button></h2><p>일반적인 경우, 다음과 같이 Milvus를 업그레이드할 수 있습니다:</p>
 <ol>
 <li><p><code translate="no">docker-compose.yaml</code> 에서 Milvus 이미지 태그를 변경합니다.</p>
-<p>프록시, 모든 코디네이터 및 모든 작업자 노드의 이미지 태그를 변경해야 한다는 점에 유의하세요.</p>
+<p>프록시, 모든 코디네이터 및 모든 워커 노드의 이미지 태그를 변경해야 합니다.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">rootcoord:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-rootcoord</span>
@@ -76,7 +76,7 @@ title: 도커 컴포즈로 밀버스 클러스터 업그레이드하기
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-datanode</span>
   <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.17</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>다음 명령을 실행하여 업그레이드를 수행합니다.</p>
+<li><p>다음 명령어를 실행하여 업그레이드를 수행하십시오.</p>
 <pre><code translate="no" class="language-shell">docker compose down
 docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
@@ -97,10 +97,10 @@ docker compose up -d
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>모든 Milvus 컴포넌트를 중지합니다.</p>
+<li><p>모든 Milvus 구성 요소를 중지합니다.</p>
 <pre><code translate="no">docker stop <span class="hljs-tag">&lt;<span class="hljs-name">milvus-component-docker-container-name</span>&gt;</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>메타 마이그레이션을 위해 구성 파일 <code translate="no">migrate.yaml</code> 을 준비합니다.</p>
+<li><p>메타 마이그레이션을 위해 <code translate="no">migrate.yaml</code> 구성 파일을 준비하십시오.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># migration.yaml</span>
 <span class="hljs-attr">cmd:</span>
   <span class="hljs-comment"># Option: run/backup/rollback</span>
@@ -124,7 +124,7 @@ docker compose up -d
 <span class="hljs-comment"># and you put migration.yaml in the same directory with docker-compose.yaml.</span>
 docker run --<span class="hljs-built_in">rm</span> -it --network milvus -v $(<span class="hljs-built_in">pwd</span>)/migration.yaml:/milvus/configs/migration.yaml milvus/meta-migration:v2.2.0 /milvus/bin/meta-migration -config=/milvus/configs/migration.yaml
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>새 Milvus 이미지로 Milvus 컴포넌트를 다시 시작합니다.</p>
+<li><p>새로운 Milvus 이미지를 사용하여 Milvus 구성 요소를 다시 시작하십시오.</p>
 <pre><code translate="no">Update the milvus <span class="hljs-selector-tag">image</span> tag in the docker-compose<span class="hljs-selector-class">.yaml</span>
 docker compose down
 docker compose up -d
@@ -146,10 +146,12 @@ docker compose up -d
         ></path>
       </svg>
     </button></h2><ul>
-<li>다음 방법을 알아보세요:<ul>
+<li>다음과 같은 방법도 알아보시기 바랍니다:
+<ul>
 <li><a href="/docs/ko/v2.6.x/scaleout.md">Milvus 클러스터 확장하기</a></li>
 </ul></li>
-<li>클라우드에 클러스터를 배포할 준비가 되었다면:<ul>
+<li>클라우드로 클러스터를 배포할 준비가 되었다면:
+<ul>
 <li><a href="/docs/ko/v2.6.x/eks.md">Terraform을 사용하여 Amazon EKS에 Milvus를 배포하는</a> 방법 알아보기</li>
 <li><a href="/docs/ko/v2.6.x/gcp.md">Kubernetes를 사용하여 GCP에 Milvus 클러스터를 배포하는</a> 방법 알아보기</li>
 <li><a href="/docs/ko/v2.6.x/azure.md">Kubernetes를 사용하여 Microsoft Azure에 Milvus를 배포하는</a> 방법 알아보기</li>

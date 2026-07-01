@@ -2,8 +2,7 @@
 id: array-of-structs.md
 title: 構造体の配列Compatible with Milvus 2.6.4+
 summary: >-
-  エンティティ内のArray of Structsフィールドは、Struct要素の順序付きセットを格納します。Array 内の各 Struct
-  は、複数のベクターとスカラー・フィールドで構成される、事前に定義された同じスキーマを共有します。
+  エンティティ内の「Structの配列」フィールドには、順序付けられたStruct要素の集合が格納されます。この配列に含まれる各Structは、複数のベクトルフィールドとスカラーフィールドで構成される、同じ事前定義済みのスキーマを共有しています。
 beta: Milvus 2.6.4+
 ---
 <h1 id="Array-of-Structs" class="common-anchor-header">構造体の配列<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Array-of-Structs" class="anchor-icon" translate="no">
@@ -21,8 +20,8 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>エンティティ内のArray of Structsフィールドは、Struct要素の順序付きセットを格納します。Array内の各Structは、複数のベクトルとスカラーフィールドで構成される、定義済みの同じスキーマを共有します。</p>
-<p>以下は、Array of Structs フィールドを含むコレクションのエンティティの例です。</p>
+    </button></h1><p>エンティティ内の「構造体の配列」フィールドには、順序付けられた構造体要素の集合が格納されます。この配列に含まれる各構造体は、複数のベクトルフィールドとスカラーフィールドで構成される、同じ事前定義されたスキーマを共有しています。</p>
+<p>以下に、「構造体の配列」フィールドを含むコレクション内のエンティティの例を示します。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     &#x27;id&#x27;<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
     &#x27;title&#x27;<span class="hljs-punctuation">:</span> &#x27;Walden&#x27;<span class="hljs-punctuation">,</span>
@@ -44,8 +43,8 @@ beta: Milvus 2.6.4+
 <span class="highlighted-comment-line">    <span class="hljs-comment">// hightlight-end</span></span>
 <span class="highlighted-comment-line"><span class="hljs-punctuation">}</span></span>
 <span class="highlighted-comment-line"></span><button class="copy-code-btn"></button></code></pre>
-<p>上記の例では、<code translate="no">chunks</code> フィールドが Array of Structs フィールドであり、各 Struct 要素はそれ自身のフィールド、すなわち<code translate="no">text</code> 、<code translate="no">text_vector</code> 、<code translate="no">chapter</code> を含んでいます。</p>
-<h2 id="Limits" class="common-anchor-header">制限<button data-href="#Limits" class="anchor-icon" translate="no">
+<p>上記の例では、「<code translate="no">chunks</code> 」フィールドが構造体の配列フィールドであり、各構造体要素には、<code translate="no">text</code> 、<code translate="no">text_vector</code> 、<code translate="no">chapter</code> という独自のフィールドが含まれています。</p>
+<h2 id="Limits" class="common-anchor-header">制限事項<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -62,16 +61,16 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><ul>
 <li><p><strong>データ型</strong></p>
-<p>コレクションを作成するとき、Array フィールドの要素のデータ型として Struct 型を使用できます。しかし、既存のコレクションにArray of Structsを追加することはできませんし、Milvusはコレクションフィールドのデータ型としてStruct型の使用をサポートしていません。</p>
-<p>ArrayフィールドのStructは同じスキーマを共有しており、Arrayフィールドの作成時に定義する必要があります。</p>
-<p>Struct スキーマには、以下の表に示すように、ベクトルフィールドとスカラーフィールドの両方が含まれます：</p>
+<p>コレクションを作成する際、配列フィールドの要素のデータ型として Struct 型を使用できます。ただし、既存のコレクションに Struct の配列を追加することはできず、Milvus ではコレクションフィールドのデータ型として Struct 型を使用することはサポートされていません。</p>
+<p>Arrayフィールド内のStructは同じスキーマを共有し、このスキーマはArrayフィールドの作成時に定義する必要があります。</p>
+<p>Struct スキーマには、次の表に示すように、ベクトルフィールドとスカラーフィールドの両方が含まれます。</p>
 <p><table>
 <tr>
-<th><p>フィールド・タイプ</p></th>
+<th><p>フィールド型</p></th>
 <th><p>データ型</p></th>
 </tr>
 <tr>
-<td><p>ベクター</p></td>
+<td><p>ベクトル</p></td>
 <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
 </tr>
 <tr>
@@ -91,24 +90,24 @@ beta: Milvus 2.6.4+
 <td><p><code translate="no">BOOLEAN</code></p></td>
 </tr>
 </table></p>
-<p>ベクトル・フィールドの数は、コレクション・レベルでも Structs でも 10 以下にしてください。</p></li>
-<li><p><strong>ヌル値とデフォルト値</strong></p>
-<p>Array of Structs フィールドは nullable ではなく、デフォルト値も受け付けません。</p></li>
+<p>コレクションレベルおよび構造体（Struct）内のベクトルフィールドの合計数を、10以下に抑えてください。</p></li>
+<li><p><strong>Null 許容およびデフォルト値</strong></p>
+<p>「構造体の配列」フィールドは null 許容ではなく、デフォルト値も受け付けません。</p></li>
 <li><p><strong>関数</strong></p>
-<p>Struct 内のスカラー・フィールドからベクトル・フィールドを導出するために関数を使用することはできません。</p></li>
+<p>Struct 内のスカラーフィールドからベクトルフィールドを導出するために関数を使用することはできません。</p></li>
 <li><p><strong>インデックス型とメトリック型</strong></p>
-<p>コレクション内のすべてのベクトル・フィールドにはインデックスを付ける必要があります。MilvusはArray of Structsフィールド内のベクトルフィールドにインデックスを付けるために、エンベッディングリストを使用して各Struct要素内のベクトルエンベッディングを整理し、エンベッディングリスト全体にインデックスを付けます。</p>
-<p>インデックスタイプとして<code translate="no">AUTOINDEX</code> または<code translate="no">HNSW</code> を使用し、Array of Structs フィールド内のエンベッディングリストのインデックスを作成するために以下に示すメトリックタイプを使用することができます。</p>
+<p>コレクション内のすべてのベクトルフィールドにはインデックスを付ける必要があります。「Array of Structs」フィールド内のベクトルフィールドにインデックスを付ける際、Milvus は埋め込みリストを使用して各 Struct 要素内のベクトル埋め込みを整理し、埋め込みリスト全体にインデックスを付けます。</p>
+<p><code translate="no">AUTOINDEX</code> または<code translate="no">HNSW</code> をインデックス型として使用し、以下に挙げる任意のメトリック型を使用して、Array of Structsフィールド内の埋め込みリストのインデックスを構築できます。</p>
 <p><table>
 <tr>
-<th><p>インデックスタイプ</p></th>
-<th><p>メトリック型</p></th>
+<th><p>インデックス型</p></th>
+<th><p>メトリックタイプ</p></th>
 <th><p>備考</p></th>
 </tr>
 <tr>
-<td rowspan="3"><p><code translate="no">AUTOINDEX</code> (または<code translate="no">HNSW</code> ）</p></td>
+<td rowspan="3"><p><code translate="no">AUTOINDEX</code> （または<code translate="no">HNSW</code> ）</p></td>
 <td><p><code translate="no">MAX_SIM_COSINE</code></p></td>
-<td rowspan="3"><p>以下の型の埋め込みリスト</p><ul><li>FLOAT_VECTOR</li></ul></td>
+<td rowspan="3"><p>以下のタイプの埋め込みリスト用:</p><ul><li>FLOAT_VECTOR</li></ul></td>
 </tr>
 <tr>
 <td><p><code translate="no">MAX_SIM_IP</code></p></td>
@@ -117,13 +116,13 @@ beta: Milvus 2.6.4+
 <td><p><code translate="no">MAX_SIM_L2</code></p></td>
 </tr>
 </table></p>
-<p>Array of Structs フィールドのスカラー・フィールドはインデックスをサポートしません。</p></li>
-<li><p><strong>アップサートデータ</strong></p>
-<p>構造体はマージ・モードでのアップサートをサポートしていません。ただし、オーバーライド・モードでアップサートを実行して Structs 内のデータを更新することはできます。マージ・モードでのアップサートとオーバーライド・モードでのアップサートの違いの詳細については、<a href="/docs/ja/v2.6.x/upsert-entities.md#Overview">アップサート・エンティティを</a>参照してください。</p></li>
-<li><p><strong>スカラー・フィルタリング</strong></p>
-<p>検索やクエリ内のフィルタリング式では、Array of Structs や Struct 要素内のフィールドを使用できません。</p></li>
+<p>「構造体の配列」フィールド内のスカラーフィールドは、インデックスをサポートしていません。</p></li>
+<li><p><strong>データのアップサート</strong></p>
+<p>構造体（Structs）は、マージモードでのアップサートをサポートしていません。ただし、オーバーライドモードではアップサートを実行して、構造体内のデータを更新することができます。マージモードとオーバーライドモードでのアップサートの違いの詳細については、<a href="/docs/ja/v2.6.x/upsert-entities.md#Overview">「エンティティのアップサート」</a>を参照してください。</p></li>
+<li><p><strong>スカラーフィルタリング</strong></p>
+<p>検索やクエリ内のフィルタリング式では、「構造体の配列」や、その「構造体」要素内のフィールドを使用することはできません。</p></li>
 </ul>
-<h2 id="Add-Array-of-Structs" class="common-anchor-header">構造体配列の追加<button data-href="#Add-Array-of-Structs" class="anchor-icon" translate="no">
+<h2 id="Add-Array-of-Structs" class="common-anchor-header">「Array of Structs」の追加<button data-href="#Add-Array-of-Structs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -138,17 +137,22 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>MilvusでArray of Structsを使用するには、コレクション作成時に配列フィールドを定義し、その要素のデータ型をStructに設定する必要があります。手順は以下の通りです：</p>
+    </button></h2><p>Milvus で構造体の配列を使用するには、コレクションの作成時に配列フィールドを定義し、その要素のデータ型を Struct に設定する必要があります。手順は次のとおりです。</p>
 <ol>
-<li><p>コレクションスキーマにArrayフィールドとしてフィールドを追加する際に、フィールドのデータ型を<code translate="no">DataType.ARRAY</code> 。</p></li>
-<li><p>フィールドの<code translate="no">element_type</code> 属性を<code translate="no">DataType.STRUCT</code> に設定して、フィールドを Struct の Array にします。</p></li>
-<li><p>Struct スキーマを作成し、必須フィールドを含めます。次に、フィールドの<code translate="no">struct_schema</code> 属性で Struct スキーマを参照します。</p></li>
-<li><p>フィールドの<code translate="no">max_capacity</code> 属性を適切な値に設定し、各エンティティがこのフィールドに含めることができる Struct の最大数を指定します。</p></li>
-<li><p><strong>(オプション</strong>）Struct 要素内の任意のフィールドに<code translate="no">mmap.enabled</code> を設定して、Struct 内のホットデータとコールドデータのバランスを取ることができます。</p></li>
+<li><p>コレクションスキーマにフィールドを配列フィールドとして追加する際、そのフィールドのデータ型を<code translate="no">DataType.ARRAY</code> に設定します。</p></li>
+<li><p>フィールドの<code translate="no">element_type</code> 属性を<code translate="no">DataType.STRUCT</code> に設定し、そのフィールドをStructの配列にします。</p></li>
+<li><p>Structスキーマを作成し、必要なフィールドを含めます。次に、そのフィールドの<code translate="no">struct_schema</code> 属性でStructスキーマを参照します。</p></li>
+<li><p>フィールドの `<code translate="no">max_capacity</code> ` 属性を適切な値に設定し、各エンティティがこのフィールドに含めることができる Struct の最大数を指定します。</p></li>
+<li><p>（<strong>オプション</strong>）Struct要素内の任意のフィールドに対して<code translate="no">mmap.enabled</code> を設定し、Struct内のホットデータとコールドデータのバランスを調整することができます。</p></li>
 </ol>
-<p>以下は、Struct の Array を含むコレクションスキーマを定義する方法です：</p>
+<p>Structの配列を含むコレクションスキーマを定義する方法は次のとおりです。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(
@@ -359,8 +363,8 @@ SCHEMA=<span class="hljs-string">&#x27;{
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上記のコード例のハイライト行は、コレクションスキーマにArray of Structsを含める手順を示しています。</p>
-<h2 id="Set-index-params" class="common-anchor-header">インデックスパラメタの設定<button data-href="#Set-index-params" class="anchor-icon" translate="no">
+<p>上記のコード例で強調表示されている行は、コレクションスキーマにStructの配列を含める手順を示しています。</p>
+<h2 id="Set-index-params" class="common-anchor-header">インデックスパラメータの設定<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -375,11 +379,16 @@ SCHEMA=<span class="hljs-string">&#x27;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクション内のベクトルフィールドと要素Structで定義されたベクトルフィールドの両方を含む、すべてのベクトルフィールドに対してインデックス付けが必須です。</p>
-<p>適用可能なインデックス・パラメータは、使用するインデックス・タイプによって異なります。適用可能なインデックス・パラメータの詳細については、<a href="/docs/ja/v2.6.x/index-explained.md">Index Explained</a>や、選択したインデックス・タイプに固有のドキュメント・ページを参照してください。</p>
-<p>埋め込みリストにインデックスを付けるには、そのインデックスタイプを<code translate="no">AUTOINDEX</code> または<code translate="no">HNSW</code> に設定し、埋め込みリスト間の類似度を測定するMilvusのメトリックタイプとして<code translate="no">MAX_SIM_COSINE</code> を使用する必要があります。</p>
+    </button></h2><p>インデックス設定は、コレクション内のベクトルフィールドおよび Struct 要素で定義されたベクトルフィールドを含め、すべてのベクトルフィールドに対して必須です。</p>
+<p>適用可能なインデックスパラメータは、使用しているインデックスタイプによって異なります。適用可能なインデックスパラメータの詳細については、「<a href="/docs/ja/v2.6.x/index-explained.md">インデックスの解説</a>」および選択したインデックスタイプ固有のドキュメントページを参照してください。</p>
+<p>埋め込みリストをインデックス登録するには、そのインデックス型を `<code translate="no">AUTOINDEX</code> ` または `<code translate="no">HNSW</code>` に設定し、Milvusが埋め込みリスト間の類似度を測定するためのメトリック型として `<code translate="no">MAX_SIM_COSINE</code> ` を使用する必要があります。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -462,9 +471,14 @@ INDEX_PARAMS=<span class="hljs-string">&#x27;[
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>スキーマとインデックスの準備ができたら、Array of Structs フィールドを含むコレクションを作成できます。</p>
+    </button></h2><p>スキーマとインデックスの準備が整ったら、`Array of Structs` フィールドを含むコレクションを作成できます。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -521,9 +535,14 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクションを作成したら、以下のようにArray of Structsを含むデータを挿入します。</p>
+    </button></h2><p>コレクションを作成した後、次のように「Structの配列」を含むデータを挿入できます。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample data</span>
 data = {
     <span class="hljs-string">&#x27;title&#x27;</span>: <span class="hljs-string">&#x27;Walden&#x27;</span>,
@@ -721,7 +740,7 @@ data = [generate_record(i) <span class="hljs-keyword">for</span> i <span class="
 client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, data=data)
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<h2 id="Vector-search-against-an-Array-of-Structs-field" class="common-anchor-header">Array of Structsフィールドに対するベクトル検索<button data-href="#Vector-search-against-an-Array-of-Structs-field" class="anchor-icon" translate="no">
+<h2 id="Vector-search-against-an-Array-of-Structs-field" class="common-anchor-header">構造体の配列フィールドに対するベクトル検索<button data-href="#Vector-search-against-an-Array-of-Structs-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -736,14 +755,19 @@ client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクションとArray of Structsのベクトルフィールドに対してベクトル検索を行うことができます。</p>
-<p>具体的には、検索リクエストの<code translate="no">anns_field</code> パラメータの値として、Array of Structs フィールドの名前と Struct 要素内の対象ベクトルフィールドの名前を連結し、<code translate="no">EmbeddingList</code> を使用してクエリベクトルを整然と整理する必要があります。</p>
+    </button></h2><p>コレクションのベクトルフィールドや「構造体の配列」に対してベクトル検索を実行できます。</p>
+<p>具体的には、検索リクエストの<code translate="no">anns_field</code> パラメータの値として、Struct要素内の「構造体の配列」フィールド名と対象のベクトルフィールド名を連結し、<code translate="no">EmbeddingList</code> を使用してクエリベクトルを整理します。</p>
 <div class="alert note">
-<p>Milvusは、Array of Structs内のエンベッディングリストに対する検索のクエリベクトルをよりきれいに整理するために、<code translate="no">EmbeddingList</code> 。各<code translate="no">EmbeddingList</code> は、少なくともベクトル埋め込みを含み、topKエンティティの数を返します。</p>
-<p>しかし、<code translate="no">EmbeddingList</code> は、<code translate="no">search_iterator()</code> リクエストはおろか、範囲検索やグループ化検索パラメーターのない<code translate="no">search()</code> リクエストでしか使えない。</p>
+<p>Milvusは、Structの配列内の埋め込みリストに対する検索において、クエリベクトルをより整理して扱うことができるよう、<code translate="no">EmbeddingList</code> を提供しています。各<code translate="no">EmbeddingList</code> には少なくとも1つのベクトル埋め込みが含まれており、返り値としてtopK個のエンティティを期待します。</p>
+<p>ただし、<code translate="no">EmbeddingList</code> は、範囲検索やグループ化検索パラメータを含まない<code translate="no">search()</code> リクエストでのみ使用可能であり、<code translate="no">search_iterator()</code> リクエストでは使用できません。</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.client.embedding_list <span class="hljs-keyword">import</span> EmbeddingList
 
 <span class="hljs-comment"># each query embedding list triggers a single search</span>
@@ -817,8 +841,8 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
     \&quot;outputFields\&quot;: [\&quot;chunks[text]\&quot;]
   }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上記の検索リクエストでは、<code translate="no">chunks[text_vector]</code> を使用して Struct 要素の<code translate="no">text_vector</code> フィールドを参照している。この構文を使用して、<code translate="no">anns_field</code> と<code translate="no">output_fields</code> パラメータを設定できます。</p>
-<p>出力は、最も類似した3つのエンティティのリストになる。</p>
+<p>上記の検索リクエストでは、<code translate="no">chunks[text_vector]</code> を使用して Struct 要素内の<code translate="no">text_vector</code> フィールドを参照しています。この構文を使用して、<code translate="no">anns_field</code> および<code translate="no">output_fields</code> パラメータを設定できます。</p>
+<p>出力結果には、最も類似度の高い3つのエンティティのリストが表示されます。</p>
 <p><details></p>
 <p><summary>出力</summary></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># [</span>
@@ -863,9 +887,14 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>また、<code translate="no">data</code> パラメータに複数のエンベッディングリストを含めることで、それぞれのエンベッディングリストの検索結果を取得することができます。</p>
+<p>また、<code translate="no">data</code> パラメータに複数の埋め込みリストを含めることで、それぞれの埋め込みリストに対する検索結果を取得することもできます。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># a search with multiple embedding lists</span>
 results = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -922,7 +951,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
     \&quot;outputFields\&quot;: [\&quot;chunks[text]\&quot;]
   }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は、各埋め込みリストについて、最も類似した3つのエンティティのリストとなる。</p>
+<p>出力は、各埋め込みリストについて、最も類似度の高い 3 つのエンティティのリストとなります。</p>
 <p><details></p>
 <p><summary>出力</summary></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># [</span>
@@ -1000,8 +1029,8 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>上記のコード例では、<code translate="no">embeddingList1</code> は1つのベクトルの埋め込みリストで、<code translate="no">embeddingList2</code> は2つのベクトルを含んでいます。それぞれが別々の検索リクエストをトリガーし、上位K個の類似エンティティのリストを期待する。</p>
-<h2 id="Next-steps" class="common-anchor-header">次のステップ<button data-href="#Next-steps" class="anchor-icon" translate="no">
+<p>上記のコード例では、<code translate="no">embeddingList1</code> は1つのベクトルからなる埋め込みリストであるのに対し、<code translate="no">embeddingList2</code> には2つのベクトルが含まれています。それぞれが個別の検索リクエストをトリガーし、類似度の高いエンティティのトップK件のリストが返されます。</p>
+<h2 id="Next-steps" class="common-anchor-header">今後の展開<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1016,4 +1045,4 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ネイティブのArray of Structsデータ型の開発は、milvusの複雑なデータ構造を扱う能力の大きな進歩を意味します。その使用例をより理解し、この新機能を最大限に活用するために、<a href="/docs/ja/v2.6.x/best-practices-for-array-of-structs.md">Array of Structsを使用したスキーマ設計を</a>読むことをお勧めします。</p>
+    </button></h2><p>ネイティブの「Array of Structs」データ型の実装は、複雑なデータ構造を扱うMilvusの機能において大きな進歩を意味します。そのユースケースをより深く理解し、この新機能を最大限に活用するために、<a href="/docs/ja/v2.6.x/best-practices-for-array-of-structs.md">「Array of Structs を使用したスキーマ設計</a>」をお読みになることをお勧めします。</p>

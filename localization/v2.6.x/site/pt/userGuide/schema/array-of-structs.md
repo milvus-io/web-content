@@ -2,9 +2,9 @@
 id: array-of-structs.md
 title: Matriz de estruturasCompatible with Milvus 2.6.4+
 summary: >-
-  Um campo Array of Structs numa entidade armazena um conjunto ordenado de
+  Um campo «Array of Structs» numa entidade armazena um conjunto ordenado de
   elementos Struct. Cada Struct no Array partilha o mesmo esquema predefinido,
-  compreendendo vários vectores e campos escalares.
+  composto por vários vetores e campos escalares.
 beta: Milvus 2.6.4+
 ---
 <h1 id="Array-of-Structs" class="common-anchor-header">Matriz de estruturas<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Array-of-Structs" class="anchor-icon" translate="no">
@@ -22,8 +22,8 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Um campo Matriz de Estruturas numa entidade armazena um conjunto ordenado de elementos Struct. Cada Struct no Array partilha o mesmo esquema pré-definido, compreendendo múltiplos vectores e campos escalares.</p>
-<p>Aqui está um exemplo de uma entidade de uma coleção que contém um campo Array of Structs.</p>
+    </button></h1><p>Um campo «Matriz de estruturas» numa entidade armazena um conjunto ordenado de elementos de estrutura. Cada estrutura na matriz partilha o mesmo esquema predefinido, composto por vários vetores e campos escalares.</p>
+<p>Eis um exemplo de uma entidade de uma coleção que contém um campo «Array of Structs».</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     &#x27;id&#x27;<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
     &#x27;title&#x27;<span class="hljs-punctuation">:</span> &#x27;Walden&#x27;<span class="hljs-punctuation">,</span>
@@ -45,7 +45,7 @@ beta: Milvus 2.6.4+
 <span class="highlighted-comment-line">    <span class="hljs-comment">// hightlight-end</span></span>
 <span class="highlighted-comment-line"><span class="hljs-punctuation">}</span></span>
 <span class="highlighted-comment-line"></span><button class="copy-code-btn"></button></code></pre>
-<p>No exemplo acima, o campo <code translate="no">chunks</code> é um campo Array of Structs, e cada elemento Struct contém os seus próprios campos, nomeadamente <code translate="no">text</code>, <code translate="no">text_vector</code> e <code translate="no">chapter</code>.</p>
+<p>No exemplo acima, o campo « <code translate="no">chunks</code> » é um campo «Array of Structs», e cada elemento «Struct» contém os seus próprios campos, nomeadamente « <code translate="no">text</code> », « <code translate="no">text_vector</code> » e « <code translate="no">chapter</code> ».</p>
 <h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -63,9 +63,9 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><ul>
 <li><p><strong>Tipos de dados</strong></p>
-<p>Quando cria uma coleção, pode utilizar o tipo Struct como o tipo de dados para os elementos de um campo Matriz. No entanto, não é possível adicionar um Array de Structs a uma coleção existente e o Milvus não suporta a utilização do tipo Struct como tipo de dados para um campo de coleção.</p>
-<p>Os Structs num campo Array partilham o mesmo esquema, que deve ser definido quando cria o campo Array.</p>
-<p>Um esquema Struct contém vectores e campos escalares, como indicado na tabela seguinte:</p>
+<p>Ao criar uma coleção, pode utilizar o tipo «Struct» como tipo de dados para os elementos num campo «Array». No entanto, não é possível adicionar um «Array of Structs» a uma coleção existente, e o Milvus não suporta a utilização do tipo «Struct» como tipo de dados para um campo de coleção.</p>
+<p>As Structs num campo Array partilham o mesmo esquema, que deve ser definido ao criar o campo Array.</p>
+<p>Um esquema Struct contém tanto vetores como campos escalares, conforme indicado na tabela seguinte:</p>
 <p><table>
 <tr>
 <th><p>Tipo de campo</p></th>
@@ -92,14 +92,14 @@ beta: Milvus 2.6.4+
 <td><p><code translate="no">BOOLEAN</code></p></td>
 </tr>
 </table></p>
-<p>O número de campos vectoriais, tanto a nível da coleção como das Structs combinadas, não deve ser superior ou igual a 10.</p></li>
-<li><p><strong>Valores anuláveis e por defeito</strong></p>
-<p>Um campo de uma matriz de estruturas não é anulável e não aceita qualquer valor predefinido.</p></li>
+<p>Certifique-se de que o número de campos vetoriais, tanto ao nível da coleção como nas estruturas combinadas, não seja superior ou igual a 10.</p></li>
+<li><p><strong>Valores nulos e valores por defeito</strong></p>
+<p>Um campo «Array of Structs» não é nulo e não aceita qualquer valor por defeito.</p></li>
 <li><p><strong>Função</strong></p>
-<p>Não é possível utilizar uma função para derivar um campo vetorial de um campo escalar dentro de um Struct.</p></li>
-<li><p><strong>Tipo de índice e tipo métrico</strong></p>
-<p>Todos os campos vectoriais de uma coleção devem ser indexados. Para indexar um campo vetorial dentro de um campo de uma Array of Structs, Milvus utiliza uma lista de incorporação para organizar as incorporações vectoriais em cada elemento Struct e indexa toda a lista de incorporação como um todo.</p>
-<p>É possível utilizar <code translate="no">AUTOINDEX</code> ou <code translate="no">HNSW</code> como tipo de índice e qualquer tipo de métrica listada abaixo para criar índices para as listas de incorporação num campo Array of Structs.</p>
+<p>Não é possível utilizar uma função para derivar um campo vetorial a partir de um campo escalar dentro de uma Struct.</p></li>
+<li><p><strong>Tipo de índice e tipo de métrica</strong></p>
+<p>Todos os campos vetoriais numa coleção têm de ser indexados. Para indexar um campo vetorial dentro de um campo «Array of Structs», o Milvus utiliza uma lista de incorporações para organizar as incorporações vetoriais em cada elemento da estrutura e indexa a lista de incorporações na sua totalidade.</p>
+<p>Pode utilizar « <code translate="no">AUTOINDEX</code> » ou « <code translate="no">HNSW</code> » como tipo de índice e qualquer tipo de métrica listado abaixo para criar índices para as listas de incorporação num campo «Array of Structs».</p>
 <p><table>
 <tr>
 <th><p>Tipo de índice</p></th>
@@ -107,7 +107,7 @@ beta: Milvus 2.6.4+
 <th><p>Observações</p></th>
 </tr>
 <tr>
-<td rowspan="3"><p><code translate="no">AUTOINDEX</code> (ou <code translate="no">HNSW</code>)</p></td>
+<td rowspan="3"><p><code translate="no">AUTOINDEX</code> (ou « <code translate="no">HNSW</code> »)</p></td>
 <td><p><code translate="no">MAX_SIM_COSINE</code></p></td>
 <td rowspan="3"><p>Para listas de incorporação dos seguintes tipos:</p><ul><li>FLOAT_VECTOR</li></ul></td>
 </tr>
@@ -118,13 +118,13 @@ beta: Milvus 2.6.4+
 <td><p><code translate="no">MAX_SIM_L2</code></p></td>
 </tr>
 </table></p>
-<p>Os campos escalares no campo Array of Structs não suportam índices.</p></li>
-<li><p><strong>Inserir dados</strong></p>
-<p>As structs não suportam upsert no modo de fusão. No entanto, ainda é possível realizar upserts no modo de substituição para atualizar dados em Structs. Para obter detalhes sobre as diferenças entre a inserção ascendente no modo de mesclagem e no modo de substituição, consulte <a href="/docs/pt/v2.6.x/upsert-entities.md#Overview">Entidades de inserção</a> ascendente.</p></li>
+<p>Os campos escalares no campo «Array of Structs» não suportam índices.</p></li>
+<li><p><strong>Dados de upsert</strong></p>
+<p>As estruturas não suportam a operação «upsert» no modo de fusão. No entanto, ainda é possível realizar «upserts» no modo de substituição para atualizar dados nas estruturas. Para obter detalhes sobre as diferenças entre o «upsert» no modo de fusão e no modo de substituição, consulte <a href="/docs/pt/v2.6.x/upsert-entities.md#Overview">«Entidades de upsert</a>».</p></li>
 <li><p><strong>Filtragem escalar</strong></p>
-<p>Não pode utilizar uma Matriz de Estruturas ou quaisquer campos dentro do seu elemento Struct em expressões de filtragem em pesquisas e consultas.</p></li>
+<p>Não é possível utilizar um «Array of Structs» nem quaisquer campos dentro do seu elemento «Struct» em expressões de filtragem em pesquisas e consultas.</p></li>
 </ul>
-<h2 id="Add-Array-of-Structs" class="common-anchor-header">Adicionar matriz de estruturas<button data-href="#Add-Array-of-Structs" class="anchor-icon" translate="no">
+<h2 id="Add-Array-of-Structs" class="common-anchor-header">Adicionar «Array of Structs»<button data-href="#Add-Array-of-Structs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -139,17 +139,22 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para utilizar uma Array of Structs no Milvus, é necessário definir um campo de array ao criar uma coleção e definir o tipo de dados dos seus elementos como Struct. O processo é o seguinte:</p>
+    </button></h2><p>Para utilizar uma matriz de estruturas no Milvus, é necessário definir um campo de matriz ao criar uma coleção e definir o tipo de dados dos seus elementos como «Struct». O processo é o seguinte:</p>
 <ol>
-<li><p>Defina o tipo de dados de um campo para <code translate="no">DataType.ARRAY</code> ao adicionar o campo como um campo Array ao esquema da coleção.</p></li>
-<li><p>Defina o atributo <code translate="no">element_type</code> do campo como <code translate="no">DataType.STRUCT</code> para tornar o campo uma Matriz de Structs.</p></li>
-<li><p>Crie um esquema Struct e inclua os campos necessários. Em seguida, faça referência ao esquema Struct no atributo <code translate="no">struct_schema</code> do campo.</p></li>
-<li><p>Defina o atributo <code translate="no">max_capacity</code> do campo com um valor adequado para especificar o número máximo de Estruturas que cada entidade pode conter neste campo.</p></li>
-<li><p><strong>(Opcional</strong>) Pode definir <code translate="no">mmap.enabled</code> para qualquer campo dentro do elemento Struct para equilibrar os dados quentes e frios no Struct.</p></li>
+<li><p>Defina o tipo de dados de um campo como « <code translate="no">DataType.ARRAY</code> » ao adicionar o campo como um campo de matriz ao esquema da coleção.</p></li>
+<li><p>Defina o atributo « <code translate="no">element_type</code> » do campo como « <code translate="no">DataType.STRUCT</code> » para tornar o campo uma matriz de Structs.</p></li>
+<li><p>Crie um esquema Struct e inclua os campos necessários. Em seguida, faça referência ao esquema Struct no atributo « <code translate="no">struct_schema</code> » do campo.</p></li>
+<li><p>Defina o atributo « <code translate="no">max_capacity</code> » do campo com um valor adequado para especificar o número máximo de «Structs» que cada entidade pode conter neste campo.</p></li>
+<li><p>(<strong>Opcional</strong>) Pode definir ` <code translate="no">mmap.enabled</code> ` para qualquer campo dentro do elemento `Struct` para equilibrar os dados ativos e inativos na estrutura.</p></li>
 </ol>
-<p>Veja como você pode definir um esquema de coleção que inclui uma Matriz de Structs:</p>
+<p>Veja como pode definir um esquema de coleção que inclua um «Array» de «Structs»:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(
@@ -360,7 +365,7 @@ SCHEMA=<span class="hljs-string">&#x27;{
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>As linhas destacadas no exemplo de código acima ilustram o procedimento para incluir uma Matriz de Structs em um esquema de coleção.</p>
+<p>As linhas destacadas no exemplo de código acima ilustram o procedimento para incluir um Array de Structs num esquema de coleção.</p>
 <h2 id="Set-index-params" class="common-anchor-header">Definir parâmetros de índice<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -376,11 +381,16 @@ SCHEMA=<span class="hljs-string">&#x27;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A indexação é obrigatória para todos os campos de vetor, incluindo os campos de vetor na coleção e os definidos no elemento Struct.</p>
-<p>Os parâmetros de índice aplicáveis variam consoante o tipo de índice utilizado. Para obter detalhes sobre os parâmetros de índice aplicáveis, consulte <a href="/docs/pt/v2.6.x/index-explained.md">Índice explicado</a> e as páginas de documentação específicas do tipo de índice selecionado.</p>
-<p>Para indexar uma lista de incorporação, você precisa definir seu tipo de índice como <code translate="no">AUTOINDEX</code> ou <code translate="no">HNSW</code> e usar <code translate="no">MAX_SIM_COSINE</code> como o tipo de métrica para Milvus medir as semelhanças entre as listas de incorporação.</p>
+    </button></h2><p>A indexação é obrigatória para todos os campos vetoriais, incluindo tanto os campos vetoriais da coleção como aqueles definidos no elemento Struct.</p>
+<p>Os parâmetros de índice aplicáveis variam consoante o tipo de índice utilizado. Para obter detalhes sobre os parâmetros de índice aplicáveis, consulte <a href="/docs/pt/v2.6.x/index-explained.md">«Explicação do Índice»</a> e as páginas de documentação específicas do tipo de índice selecionado.</p>
+<p>Para indexar uma lista de incorporações, é necessário definir o seu tipo de índice como « <code translate="no">AUTOINDEX</code> » ou « <code translate="no">HNSW</code> » e utilizar « <code translate="no">MAX_SIM_COSINE</code> » como tipo de métrica para que o Milvus avalie as semelhanças entre as listas de incorporações.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -463,9 +473,14 @@ INDEX_PARAMS=<span class="hljs-string">&#x27;[
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Quando o esquema e o índice estiverem prontos, você pode criar uma coleção que inclua um campo Array of Structs.</p>
+    </button></h2><p>Assim que o esquema e o índice estiverem prontos, pode criar uma coleção que inclua um campo «Array of Structs».</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -522,9 +537,14 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de criar a coleção, pode inserir dados que incluam Matrizes de Structs da seguinte forma.</p>
+    </button></h2><p>Após criar a coleção, pode inserir dados que incluam «Arrays of Structs» da seguinte forma.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample data</span>
 data = {
     <span class="hljs-string">&#x27;title&#x27;</span>: <span class="hljs-string">&#x27;Walden&#x27;</span>,
@@ -722,7 +742,7 @@ data = [generate_record(i) <span class="hljs-keyword">for</span> i <span class="
 client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, data=data)
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<h2 id="Vector-search-against-an-Array-of-Structs-field" class="common-anchor-header">Pesquisa de vetor num campo de Matriz de Estruturas<button data-href="#Vector-search-against-an-Array-of-Structs-field" class="anchor-icon" translate="no">
+<h2 id="Vector-search-against-an-Array-of-Structs-field" class="common-anchor-header">Pesquisa vetorial num campo «Array of Structs»<button data-href="#Vector-search-against-an-Array-of-Structs-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -737,14 +757,19 @@ client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>É possível realizar pesquisas vetoriais nos campos vetoriais de uma coleção e em uma Matriz de Structs.</p>
-<p>Especificamente, deve concatenar o nome do campo Array of Structs e os dos campos vectoriais alvo dentro dos elementos Struct como o valor do parâmetro <code translate="no">anns_field</code> num pedido de pesquisa, e utilizar <code translate="no">EmbeddingList</code> para organizar os vectores de consulta de forma organizada.</p>
+    </button></h2><p>Pode realizar pesquisas vetoriais nos campos vetoriais de uma coleção e num «Array of Structs».</p>
+<p>Mais especificamente, deve concatenar o nome do campo «Array of Structs» e os nomes dos campos vetoriais de destino dentro de elementos «Struct» como valor para o parâmetro « <code translate="no">anns_field</code> » numa solicitação de pesquisa, e utilizar « <code translate="no">EmbeddingList</code> » para organizar os vetores de consulta de forma mais organizada.</p>
 <div class="alert note">
-<p>O Milvus fornece <code translate="no">EmbeddingList</code> para o ajudar a organizar melhor os vectores de consulta para pesquisas numa lista de incorporação numa matriz de Structs. Cada <code translate="no">EmbeddingList</code> contém pelo menos um vetor de incorporação e espera um número de entidades topK em troca.</p>
-<p>No entanto, <code translate="no">EmbeddingList</code> só pode ser usado em pedidos <code translate="no">search()</code> sem pesquisa de intervalo ou parâmetros de pesquisa de agrupamento, muito menos em pedidos <code translate="no">search_iterator()</code>.</p>
+<p>O Milvus disponibiliza o ` <code translate="no">EmbeddingList</code> ` para o ajudar a organizar os vetores de consulta de forma mais ordenada nas pesquisas relativas a uma lista de incorporações num `Array of Structs`. Cada ` <code translate="no">EmbeddingList</code> ` contém, pelo menos, uma incorporação vetorial e espera receber um número de entidades `topK` em resposta.</p>
+<p>No entanto, o ` <code translate="no">EmbeddingList</code> ` só pode ser utilizado em pedidos ` <code translate="no">search()</code> ` sem parâmetros de pesquisa por intervalo ou por agrupamento, muito menos em pedidos ` <code translate="no">search_iterator()</code> `.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.client.embedding_list <span class="hljs-keyword">import</span> EmbeddingList
 
 <span class="hljs-comment"># each query embedding list triggers a single search</span>
@@ -818,10 +843,10 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
     \&quot;outputFields\&quot;: [\&quot;chunks[text]\&quot;]
   }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>O pedido de pesquisa acima usa <code translate="no">chunks[text_vector]</code> para se referir ao campo <code translate="no">text_vector</code> em elementos Struct. Você pode usar essa sintaxe para definir os parâmetros <code translate="no">anns_field</code> e <code translate="no">output_fields</code>.</p>
-<p>A saída seria uma lista das três entidades mais semelhantes.</p>
+<p>A solicitação de pesquisa acima utiliza <code translate="no">chunks[text_vector]</code> para se referir ao campo <code translate="no">text_vector</code> nos elementos Struct. Pode utilizar esta sintaxe para definir os parâmetros <code translate="no">anns_field</code> e <code translate="no">output_fields</code>.</p>
+<p>O resultado seria uma lista das três entidades mais semelhantes.</p>
 <p><details></p>
-<p><summary>Saída</summary></p>
+<p><summary>Resultado</summary></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># [</span>
 <span class="hljs-comment">#     [</span>
 <span class="hljs-comment">#         {</span>
@@ -864,9 +889,14 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>Você também pode incluir várias listas de incorporação no parâmetro <code translate="no">data</code> para recuperar resultados de pesquisa para cada uma dessas listas de incorporação.</p>
+<p>Também é possível incluir várias listas de embeddings no parâmetro <code translate="no">data</code> para obter resultados de pesquisa para cada uma dessas listas de embeddings.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># a search with multiple embedding lists</span>
 results = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -923,9 +953,9 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
     \&quot;outputFields\&quot;: [\&quot;chunks[text]\&quot;]
   }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>A saída seria uma lista das três entidades mais semelhantes para cada lista de incorporação.</p>
+<p>O resultado seria uma lista das três entidades mais semelhantes para cada lista de embeddings.</p>
 <p><details></p>
-<p><summary>Saída</summary></p>
+<p><summary>Resultado</summary></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># [</span>
 <span class="hljs-comment">#   [</span>
 <span class="hljs-comment">#     {</span>
@@ -1001,7 +1031,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>No exemplo de código acima, <code translate="no">embeddingList1</code> é uma lista de incorporação de um vetor, enquanto <code translate="no">embeddingList2</code> contém dois vetores. Cada um aciona uma solicitação de pesquisa separada e espera uma lista das principais K entidades semelhantes.</p>
+<p>No exemplo de código acima, ` <code translate="no">embeddingList1</code> ` é uma lista de incorporação com um vetor, enquanto ` <code translate="no">embeddingList2</code> ` contém dois vetores. Cada uma delas desencadeia um pedido de pesquisa separado e espera receber uma lista das K entidades mais semelhantes.</p>
 <h2 id="Next-steps" class="common-anchor-header">Próximos passos<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1017,4 +1047,4 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O desenvolvimento de um tipo de dados nativo Array of Structs representa um grande avanço na capacidade do Milvus de lidar com estruturas de dados complexas. Para entender melhor seus casos de uso e maximizar esse novo recurso, recomendamos a leitura de <a href="/docs/pt/v2.6.x/best-practices-for-array-of-structs.md">Schema Design Using an Array of Structs</a>.</p>
+    </button></h2><p>O desenvolvimento de um tipo de dados nativo «Array of Structs» representa um grande avanço na capacidade do Milvus para lidar com estruturas de dados complexas. Para compreender melhor os seus casos de utilização e tirar o máximo partido desta nova funcionalidade, recomendamos a leitura <a href="/docs/pt/v2.6.x/best-practices-for-array-of-structs.md">do artigo «Schema Design Using an Array of Structs</a>».</p>

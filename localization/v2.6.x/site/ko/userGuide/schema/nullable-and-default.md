@@ -1,12 +1,13 @@
 ---
 id: nullable-and-default.md
-title: Null 가능 및 기본값
+title: Nullable 및 기본값
 summary: >-
-  Milvus에서는 기본 필드를 제외한 스칼라 필드에 대해 null 가능 속성과 기본값을 설정할 수 있습니다. nullable=True로
-  표시된 필드의 경우 데이터를 삽입할 때 해당 필드를 건너뛰거나 직접 null 값으로 설정하면 시스템에서 오류 발생 없이 해당 필드를
-  null로 처리합니다. 필드에 기본값이 있는 경우 삽입 중에 필드에 데이터가 지정되지 않으면 시스템에서 자동으로 이 값을 적용합니다.
+  Milvus에서는 기본 필드를 제외한 스칼라 필드에 대해 nullable 속성과 기본값을 설정할 수 있습니다. nullable=True로
+  표시된 필드의 경우, 데이터를 삽입할 때 해당 필드를 생략하거나 직접 null 값으로 설정할 수 있으며, 시스템은 오류를 발생시키지 않고
+  이를 null로 처리합니다. 필드에 기본값이 설정되어 있는 경우, 삽입 시 해당 필드에 데이터가 지정되지 않으면 시스템이 자동으로 이 값을
+  적용합니다.
 ---
-<h1 id="Nullable--Default" class="common-anchor-header">Null 가능 및 기본값<button data-href="#Nullable--Default" class="anchor-icon" translate="no">
+<h1 id="Nullable--Default" class="common-anchor-header">Nullable 및 기본값<button data-href="#Nullable--Default" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,9 +22,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus에서는 기본 필드를 제외한 스칼라 필드에 대해 <code translate="no">nullable</code> 속성 및 기본값을 설정할 수 있습니다. <code translate="no">nullable=True</code> 로 표시된 필드의 경우 데이터를 삽입할 때 해당 필드를 건너뛰거나 직접 null 값으로 설정하면 시스템에서 오류 없이 해당 필드를 null로 처리합니다. 필드에 기본값이 있는 경우 데이터를 삽입하는 동안 필드에 지정된 데이터가 없으면 시스템에서 자동으로 이 값을 적용합니다.</p>
-<p>기본값 및 널 가능 속성은 널 값으로 데이터 세트를 처리하고 기본값 설정을 유지함으로써 다른 데이터베이스 시스템에서 Milvus로 데이터 마이그레이션을 간소화합니다. 컬렉션을 만들 때 값이 불확실한 필드에 대해 널러블을 활성화하거나 기본값을 설정할 수도 있습니다.</p>
-<h2 id="Limits" class="common-anchor-header">제한<button data-href="#Limits" class="anchor-icon" translate="no">
+    </button></h1><p>Milvus에서는 기본 필드를 제외한 스칼라 필드에 대해 ` <code translate="no">nullable</code> ` 속성과 기본값을 설정할 수 있습니다. <code translate="no">nullable=True</code> 로 표시된 필드의 경우, 데이터를 삽입할 때 해당 필드를 생략하거나 직접 null 값으로 설정할 수 있으며, 시스템은 오류를 발생시키지 않고 이를 null로 처리합니다. 필드에 기본값이 설정되어 있는 경우, 삽입 시 해당 필드에 데이터가 지정되지 않으면 시스템이 자동으로 이 값을 적용합니다.</p>
+<p>기본값 및 nullable 속성은 null 값이 포함된 데이터 세트를 처리하고 기본값 설정을 유지할 수 있게 함으로써, 다른 데이터베이스 시스템에서 Milvus로 데이터를 마이그레이션하는 과정을 간소화합니다. 컬렉션을 생성할 때, 값이 불확실할 수 있는 필드에 대해 nullable을 활성화하거나 기본값을 설정할 수도 있습니다.</p>
+<h2 id="Limits" class="common-anchor-header">제한 사항<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,14 +40,14 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>기본 필드를 제외한 스칼라 필드만 기본값 및 null 가능 속성을 지원합니다.</p></li>
+<li><p>기본 필드를 제외한 스칼라 필드만 기본값과 nullable 속성을 지원합니다.</p></li>
 <li><p>JSON 및 배열 필드는 기본값을 지원하지 않습니다.</p></li>
-<li><p>기본값 또는 null 가능 속성은 컬렉션 생성 중에만 구성할 수 있으며 이후에는 수정할 수 없습니다.</p></li>
-<li><p>nullable로 표시된 필드는 파티션 키로 사용할 수 없습니다. 파티션 키에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/use-partition-key.md">파티션 키 사용을</a> 참조하세요.</p></li>
-<li><p>nullable 속성이 활성화된 스칼라 필드에 인덱스를 생성할 때 null 값은 인덱스에서 제외됩니다.</p></li>
-<li><p><strong>JSON 및 배열 필드</strong>: <code translate="no">IS NULL</code> 또는 <code translate="no">IS NOT NULL</code> 연산자를 사용하여 JSON 또는 ARRAY 필드를 필터링하는 경우, 이러한 연산자는 열 수준에서 작동하므로 전체 JSON 객체 또는 배열이 null인지 여부만 평가합니다. 예를 들어 JSON 객체 내부의 키가 null인 경우 <code translate="no">IS NULL</code> 필터에서는 해당 키가 인식되지 않습니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/basic-operators.md">기본 연산자를</a> 참조하세요.</p></li>
+<li><p>기본값이나 nullable 속성은 컬렉션 생성 시에만 구성할 수 있으며, 이후에는 수정할 수 없습니다.</p></li>
+<li><p>nullable로 표시된 필드는 파티션 키로 사용할 수 없습니다. 파티션 키에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/use-partition-key.md">파티션 키 사용을</a> 참조하십시오.</p></li>
+<li><p>nullable 속성이 활성화된 스칼라 필드에 인덱스를 생성할 경우, null 값은 인덱스에서 제외됩니다.</p></li>
+<li><p><strong>JSON 및 ARRAY 필드</strong>: <code translate="no">IS NULL</code> 또는 <code translate="no">IS NOT NULL</code> 연산자를 사용하여 JSON 또는 ARRAY 필드를 필터링할 경우, 이러한 연산자는 열 수준에서 작동하므로 전체 JSON 객체 또는 배열이 null인지 여부만 평가합니다. 예를 들어, JSON 객체 내부의 키가 null인 경우, <code translate="no">IS NULL</code> 필터에서는 이를 인식하지 못합니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/basic-operators.md">기본 연산자를</a> 참조하십시오.</p></li>
 </ul>
-<h2 id="Nullable-attribute" class="common-anchor-header">Null 가능 속성<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
+<h2 id="Nullable-attribute" class="common-anchor-header">Nullable 속성<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,8 +62,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">nullable</code> 속성을 사용하면 컬렉션에 null 값을 저장할 수 있어 알 수 없는 데이터를 처리할 때 유연성을 제공합니다.</p>
-<h3 id="Set-the-nullable-attribute" class="common-anchor-header">null 가능 속성 설정하기<button data-href="#Set-the-nullable-attribute" class="anchor-icon" translate="no">
+    </button></h2><p><code translate="no">nullable</code> 속성을 사용하면 컬렉션에 null 값을 저장할 수 있어, 알 수 없는 데이터를 처리할 때 유연성을 제공합니다.</p>
+<h3 id="Set-the-nullable-attribute" class="common-anchor-header">nullable 속성 설정<button data-href="#Set-the-nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -77,9 +78,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>컬렉션을 만들 때 <code translate="no">nullable=True</code> 을 사용하여 null 가능 필드를 정의합니다(기본값은 <code translate="no">False</code>). 다음 예제에서는 <code translate="no">my_collection</code> 라는 이름의 컬렉션을 만들고 <code translate="no">age</code> 필드를 nullable로 설정합니다:</p>
+    </button></h3><p>컬렉션을 생성할 때 ` <code translate="no">nullable=True</code> `을 사용하여 nullable 필드를 정의할 수 있습니다(기본값은 ` <code translate="no">False</code>`입니다). 다음 예제는 ` <code translate="no">my_collection</code> `이라는 컬렉션을 생성하고 ` <code translate="no">age</code> ` 필드를 nullable로 설정합니다.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>)
@@ -295,9 +301,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>null 가능 필드에 데이터를 삽입할 때는 null을 삽입하거나 이 필드를 직접 생략합니다:</p>
+    </button></h3><p>Null 허용 필드에 데이터를 삽입할 때는 null을 삽입하거나 해당 필드를 직접 생략하십시오:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data = [
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>], <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">30</span>},
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>], <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-literal">None</span>},
@@ -367,7 +378,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Search-and-query-with-null-values" class="common-anchor-header">널 값으로 검색 및 쿼리<button data-href="#Search-and-query-with-null-values" class="anchor-icon" translate="no">
+<h3 id="Search-and-query-with-null-values" class="common-anchor-header">Null 값을 사용한 검색 및 쿼리<button data-href="#Search-and-query-with-null-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -382,9 +393,14 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">search</code> 메서드를 사용할 때 필드에 <code translate="no">null</code> 값이 포함된 경우 검색 결과는 해당 필드를 null로 반환합니다:</p>
+    </button></h3><p><code translate="no">search</code> 메서드를 사용할 때, 필드에 ` <code translate="no">null</code> ` 값이 포함되어 있으면 검색 결과에서 해당 필드는 null로 반환됩니다:</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.128</span>]],
@@ -468,9 +484,14 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">#{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;distance&quot;:0.16000001,&quot;id&quot;:1},{&quot;age&quot;:null,&quot;distance&quot;:0.28999996,&quot;id&quot;:2}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">query</code> 메서드를 스칼라 필터링에 사용하는 경우, null 값에 대한 필터링 결과는 모두 거짓이며, 선택되지 않음을 나타냅니다.</p>
+<p><code translate="no">query</code> 메서드를 사용하여 스칼라 필터링을 수행할 때, null 값에 대한 필터링 결과는 모두 false로 처리되며, 이는 해당 값이 선택되지 않음을 의미합니다.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Reviewing previously inserted data:</span>
 <span class="hljs-comment"># {&quot;id&quot;: 1, &quot;vector&quot;: [0.1, 0.2, ..., 0.128], &quot;age&quot;: 30}</span>
 <span class="hljs-comment"># {&quot;id&quot;: 2, &quot;vector&quot;: [0.2, 0.3, ..., 0.129], &quot;age&quot;: None}</span>
@@ -532,12 +553,17 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;id&quot;:1}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">null</code> 값을 가진 엔티티를 반환하려면 다음과 같이 스칼라 필터링 조건 없이 쿼리합니다:</p>
+<p><code translate="no">null</code> 값을 가진 엔티티를 반환하려면 다음과 같이 스칼라 필터링 조건 없이 쿼리를 실행하십시오:</p>
 <div class="alert note">
-<p><code translate="no">query</code> 메서드는 필터링 조건 없이 사용하면 null 값을 가진 엔티티를 포함하여 컬렉션의 모든 엔티티를 검색합니다. 반환되는 엔티티의 수를 제한하려면 <code translate="no">limit</code> 매개 변수를 지정해야 합니다.</p>
+<p><code translate="no">query</code> 메서드를 필터링 조건 없이 사용하면 null 값을 가진 엔티티를 포함하여 컬렉션의 모든 엔티티가 반환됩니다. 반환되는 엔티티의 수를 제한하려면 <code translate="no">limit</code> 매개변수를 지정해야 합니다.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">null_results = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,     <span class="hljs-comment"># Query without any filtering condition</span>
@@ -604,7 +630,7 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>기본값은 스칼라 필드에 할당된 사전 설정 값입니다. 삽입 중에 기본값이 있는 필드에 값을 제공하지 않으면 시스템에서 자동으로 기본값을 사용합니다.</p>
+    </button></h2><p>기본값은 스칼라 필드에 미리 설정된 값입니다. 삽입 시 기본값이 지정된 필드에 값을 제공하지 않으면 시스템이 자동으로 기본값을 사용합니다.</p>
 <h3 id="Set-default-values" class="common-anchor-header">기본값 설정<button data-href="#Set-default-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -620,9 +646,14 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>컬렉션을 만들 때 <code translate="no">default_value</code> 매개변수를 사용하여 필드의 기본값을 정의할 수 있습니다. 다음 예는 <code translate="no">age</code> 의 기본값을 <code translate="no">18</code> 으로, <code translate="no">status</code> 을 <code translate="no">&quot;active&quot;</code> 으로 설정하는 방법을 보여줍니다:</p>
+    </button></h3><p>컬렉션을 생성할 때 ` <code translate="no">default_value</code> ` 매개변수를 사용하여 필드의 기본값을 정의합니다. 다음 예제는 ` <code translate="no">age</code> `의 기본값을 ` <code translate="no">18</code> `로, ` <code translate="no">status</code> `의 기본값을 ` <code translate="no">&quot;active&quot;</code>`로 설정하는 방법을 보여줍니다:</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">schema = client.create_schema(
     auto_id=<span class="hljs-literal">False</span>,
     enable_dynamic_schema=<span class="hljs-literal">True</span>,
@@ -847,9 +878,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>데이터를 삽입할 때 기본값이 있는 필드를 생략하거나 해당 값을 null로 설정하면 시스템에서 기본값을 사용합니다:</p>
+    </button></h3><p>데이터를 삽입할 때, 기본값이 있는 필드를 생략하거나 해당 값을 null로 설정하면 시스템은 기본값을 사용합니다:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data = [
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, ..., <span class="hljs-number">0.128</span>], <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">30</span>, <span class="hljs-string">&quot;status&quot;</span>: <span class="hljs-string">&quot;premium&quot;</span>},
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, ..., <span class="hljs-number">0.129</span>]},  <span class="hljs-comment"># `age` and `status` use default values</span>
@@ -927,9 +963,9 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>무효화 가능 및 기본값 설정이 적용되는 방식에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/nullable-and-default.md#Applicable-rules">적용 가능한 규칙을</a> 참조하세요.</p>
+<p>null 허용 여부 및 기본값 설정이 어떻게 적용되는지에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/nullable-and-default.md#Applicable-rules">‘적용 규칙’을</a> 참조하십시오.</p>
 </div>
-<h3 id="Search-and-query-with-default-values" class="common-anchor-header">기본값으로 검색 및 쿼리하기<button data-href="#Search-and-query-with-default-values" class="anchor-icon" translate="no">
+<h3 id="Search-and-query-with-default-values" class="common-anchor-header">기본값을 사용한 검색 및 쿼리<button data-href="#Search-and-query-with-default-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -944,10 +980,15 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>기본값이 포함된 엔티티는 벡터 검색 및 스칼라 필터링 중에 다른 엔티티와 동일하게 취급됩니다. <code translate="no">search</code> 및 <code translate="no">query</code> 작업의 일부로 기본값을 포함할 수 있습니다.</p>
-<p>예를 들어 <code translate="no">search</code> 작업에서 <code translate="no">age</code> 이 기본값 <code translate="no">18</code> 으로 설정된 엔티티는 결과에 포함됩니다:</p>
+    </button></h3><p>기본값이 포함된 엔티티는 벡터 검색 및 스칼라 필터링 시 다른 엔티티와 동일하게 처리됩니다. ` <code translate="no">search</code> ` 및 ` <code translate="no">query</code> ` 연산의 일부로 기본값을 포함할 수 있습니다.</p>
+<p>예를 들어, ` <code translate="no">search</code> ` 연산에서 ` <code translate="no">age</code> `가 기본값인 ` <code translate="no">18</code> `로 설정된 엔티티는 결과에 포함됩니다.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.5</span>]],
@@ -1038,9 +1079,14 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:18,&quot;distance&quot;:0.050000004,&quot;id&quot;:2,&quot;status&quot;:&quot;active&quot;},{&quot;age&quot;:18,&quot;distance&quot;:0.45000002,&quot;id&quot;:4,&quot;status&quot;:&quot;inactive&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">query</code> 작업에서는 기본값을 직접 일치시키거나 필터링할 수 있습니다:</p>
+<p><code translate="no">query</code> 작업에서는 기본값을 기준으로 직접 일치시키거나 필터링할 수 있습니다:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query all entities where `age` equals the default value (18)</span>
 default_age_results = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -1158,23 +1204,23 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>다음 표에는 다양한 구성 조합에서 null 가능한 열과 기본값의 동작이 요약되어 있습니다. 이러한 규칙은 null 값을 삽입하려고 시도하거나 필드 값이 제공되지 않은 경우 Milvus가 데이터를 처리하는 방식을 결정합니다.</p>
+    </button></h2><p>다음 표는 다양한 구성 조합에서 null 허용 열과 기본값의 동작을 요약한 것입니다. 이러한 규칙은 null 값을 삽입하려고 할 때나 필드 값이 제공되지 않은 경우 Milvus가 데이터를 어떻게 처리하는지를 결정합니다.</p>
 <table>
    <tr>
-     <th><p>Null 가능</p></th>
+     <th><p>Null 허용 여부</p></th>
      <th><p>기본값</p></th>
      <th><p>기본값 유형</p></th>
      <th><p>사용자 입력</p></th>
      <th><p>결과</p></th>
-     <th><p>예제</p></th>
+     <th><p>예시</p></th>
    </tr>
    <tr>
      <td><p>✅</p></td>
      <td><p>✅</p></td>
-     <td><p>비-null</p></td>
+     <td><p>null 아님</p></td>
      <td><p>없음/null</p></td>
-     <td><p>기본값을 사용합니다.</p></td>
-     <td><p>필드: <code translate="no">age</code> 기본값을 사용합니다: <code translate="no">18</code></p><p>사용자 입력: null</p><p>결과: 다음과 같이 저장 <code translate="no">18</code></p></td>
+     <td><p>기본값 사용</p></td>
+     <td><p>필드: <code translate="no">age</code> 기본값: <code translate="no">18</code></p><p>사용자 입력: null</p><p>결과: 다음과 같이 저장됨 <code translate="no">18</code></p></td>
    </tr>
    <tr>
      <td><p>✅</p></td>
@@ -1182,30 +1228,30 @@ curl --request POST \
      <td><p>-</p></td>
      <td><p>없음/null</p></td>
      <td><p>null로 저장됨</p></td>
-     <td><p>필드: <code translate="no">middle_name</code> 기본값: -</p><p>사용자 입력: null</p><p>결과: null로 저장</p></td>
+     <td><p>필드: <code translate="no">middle_name</code> 기본값: -</p><p>사용자 입력: null</p><p>결과: null로 저장됨</p></td>
    </tr>
    <tr>
      <td><p>❌</p></td>
      <td><p>✅</p></td>
-     <td><p>비-null</p></td>
+     <td><p>null 아님</p></td>
      <td><p>없음/null</p></td>
      <td><p>기본값 사용</p></td>
-     <td><p>필드: <code translate="no">status</code> 기본값을 사용합니다: <code translate="no">"active"</code></p><p>사용자 입력: null</p><p>결과: 다음과 같이 저장 <code translate="no">"active"</code></p></td>
+     <td><p>필드: <code translate="no">status</code> 기본값: <code translate="no">"active"</code></p><p>사용자 입력: null</p><p>결과: 다음과 같이 저장됨 <code translate="no">"active"</code></p></td>
    </tr>
    <tr>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>-</p></td>
      <td><p>없음/null</p></td>
-     <td><p>오류를 발생시킵니다.</p></td>
+     <td><p>오류 발생</p></td>
      <td><p>필드: <code translate="no">email</code> 기본값: -</p><p>사용자 입력: null</p><p>결과: 작업 거부, 시스템에서 오류 발생</p></td>
    </tr>
    <tr>
      <td><p>❌</p></td>
      <td><p>✅</p></td>
-     <td><p>Null</p></td>
-     <td><p>없음/무효</p></td>
-     <td><p>오류를 던짐</p></td>
-     <td><p>필드: <code translate="no">username</code> 기본값: null</p><p>사용자 입력: null</p><p>결과: 작업 거부, 시스템에서 오류 발생</p></td>
+     <td><p>null</p></td>
+     <td><p>없음/null</p></td>
+     <td><p>오류 발생</p></td>
+     <td><p>필드: <code translate="no">username</code> 기본값: null</p><p>사용자 입력: null</p><p>결과: 작업 거부, 시스템에서 오류를 발생시킵니다</p></td>
    </tr>
 </table>

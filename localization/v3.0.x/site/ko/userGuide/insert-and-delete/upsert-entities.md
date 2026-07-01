@@ -1,9 +1,9 @@
 ---
 id: upsert-entities.md
-title: 엔티티 삽입
-summary: 업서트 작업은 컬렉션에 엔티티를 삽입하거나 업데이트하는 편리한 방법을 제공합니다.
+title: 엔티티 삽입/업데이트
+summary: 업서트(upsert) 연산은 컬렉션에 엔티티를 삽입하거나 업데이트할 수 있는 편리한 방법을 제공합니다.
 ---
-<h1 id="Upsert-Entities" class="common-anchor-header">엔티티 삽입<button data-href="#Upsert-Entities" class="anchor-icon" translate="no">
+<h1 id="Upsert-Entities" class="common-anchor-header">엔티티 삽입/업데이트<button data-href="#Upsert-Entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,9 +34,9 @@ summary: 업서트 작업은 컬렉션에 엔티티를 삽입하거나 업데이
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">upsert</code> 을 사용하여 업서트 요청에 제공된 기본 키가 컬렉션에 존재하는지 여부에 따라 새 엔터티를 삽입하거나 기존 엔터티를 업데이트할 수 있습니다. 기본 키를 찾을 수 없는 경우 삽입 작업이 수행됩니다. 그렇지 않으면 업데이트 작업이 수행됩니다.</p>
-<p>Milvus의 업서트는 <strong>오버라이드</strong> 또는 <strong>병합</strong> 모드에서 작동합니다.</p>
-<h3 id="Upsert-in-override-mode" class="common-anchor-header">재정의 모드에서 업서트<button data-href="#Upsert-in-override-mode" class="anchor-icon" translate="no">
+    </button></h2><p><code translate="no">upsert</code> 을 사용하면 업서트 요청에 제공된 기본 키가 컬렉션에 존재하는지 여부에 따라 새 엔티티를 삽입하거나 기존 엔티티를 업데이트할 수 있습니다. 기본 키가 발견되지 않으면 삽입 작업이 수행됩니다. 그렇지 않은 경우 업데이트 작업이 수행됩니다.</p>
+<p>Milvus의 업서트(upsert)는 <strong>오버라이드</strong> ( <strong>override</strong> ) 모드 또는 <strong>병합(merge</strong> ) 모드로 작동합니다.</p>
+<h3 id="Upsert-in-override-mode" class="common-anchor-header">오버라이드 모드의 업서트<button data-href="#Upsert-in-override-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -51,36 +51,16 @@ summary: 업서트 작업은 컬렉션에 엔티티를 삽입하거나 업데이
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>재정의 모드에서 작동하는 업서트 요청은 삽입과 삭제를 결합합니다. 기존 엔티티에 대한 <code translate="no">upsert</code> 요청이 수신되면 Milvus는 요청 페이로드에 포함된 데이터를 삽입하고 동시에 데이터에 지정된 원래 기본 키로 기존 엔티티를 삭제합니다.</p>
-<p>
+    </button></h3><p>오버라이드 모드로 작동하는 업서트 요청은 삽입과 삭제를 결합한 것입니다. 기존 엔티티에 대한 <code translate="no">upsert</code> 요청이 수신되면, Milvus는 요청 페이로드에 포함된 데이터를 삽입하고 동시에 데이터에 지정된 원래 기본 키를 가진 기존 엔티티를 삭제합니다.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" />
-   </span> <span class="img-wrapper"> <span>재정의 모드에서 업서트</span> </span></p>
-<p>대상 컬렉션의 기본 필드에 <code translate="no">autoid</code> 가 활성화된 경우, Milvus는 요청 페이로드에 포함된 데이터에 대한 새 기본 키를 생성한 후 이를 삽입합니다.</p>
-<p><code translate="no">nullable</code> 가 활성화된 필드의 경우 업데이트가 필요하지 않은 경우 <code translate="no">upsert</code> 요청에서 생략할 수 있습니다.</p>
-<h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">병합 모드에서 업서트<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p><code translate="no">partial_update</code> 플래그를 사용하여 병합 모드에서 업서트 요청을 작동시킬 수도 있습니다. 이렇게 하면 요청 페이로드에 업데이트가 필요한 필드만 포함할 수 있습니다.</p>
-<p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" /> 
+   <span>오버라이드 모드의 업서트</span>
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-merge-mode.png" alt="Upsert In Merge Mode" class="doc-image" id="upsert-in-merge-mode" />
-   </span> <span class="img-wrapper"> <span>병합 모드에서 업서트</span> </span></p>
-<p>병합을 수행하려면 기본 키 및 새 값으로 업데이트할 필드와 함께 <code translate="no">upsert</code> 요청에서 <code translate="no">partial_update</code> 을 <code translate="no">True</code> 으로 설정합니다.</p>
-<p>이러한 요청을 받으면 Milvus는 강력한 일관성을 가진 쿼리를 수행하여 엔티티를 검색하고, 요청의 데이터를 기반으로 필드 값을 업데이트하고, 수정된 데이터를 삽입한 다음 요청에 포함된 원래 기본 키로 기존 엔티티를 삭제합니다.</p>
-<h3 id="Upsert-behaviors-special-notes" class="common-anchor-header">업서트 동작: 특별 참고 사항<button data-href="#Upsert-behaviors-special-notes" class="anchor-icon" translate="no">
+ </span></p>
+<p>대상 컬렉션의 기본 필드에 <code translate="no">autoid</code> 가 활성화된 경우, Milvus는 요청 페이로드에 포함된 데이터를 삽입하기 전에 해당 데이터에 대한 새로운 기본 키를 생성합니다.</p>
+<p><code translate="no">nullable</code> 가 활성화된 필드의 경우, 업데이트가 필요하지 않으면 <code translate="no">upsert</code> 요청에서 해당 필드를 생략할 수 있습니다.</p>
+<h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">병합 모드의 업서트<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -95,28 +75,52 @@ summary: 업서트 작업은 컬렉션에 엔티티를 삽입하거나 업데이
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>병합 기능을 사용하기 전에 고려해야 할 몇 가지 특별한 주의 사항이 있습니다. 다음 사례에서는 <code translate="no">title</code> 및 <code translate="no">issue</code> 이라는 두 개의 스칼라 필드와 <code translate="no">id</code> 이라는 기본 키 및 <code translate="no">vector</code> 이라는 벡터 필드가 있는 컬렉션이 있다고 가정합니다.</p>
+    </button></h3><p><code translate="no">partial_update</code> 플래그를 사용하여 업서트 요청을 병합 모드로 처리할 수도 있습니다. 이를 통해 요청 페이로드에 업데이트가 필요한 필드만 포함할 수 있습니다.</p>
+<p><span class="img-wrapper">
+  
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-merge-mode.png" alt="Upsert In Merge Mode" class="doc-image" id="upsert-in-merge-mode" /> 
+   <span>병합 모드의 업서트</span>
+  
+ </span></p>
+<p>병합을 수행하려면 <code translate="no">upsert</code> 요청에서 <code translate="no">partial_update</code> 을 <code translate="no">True</code> 로 설정하고, 기본 키와 업데이트할 필드 및 해당 새 값을 함께 지정하십시오.</p>
+<p>이러한 요청을 수신하면 Milvus는 강력한 일관성(strong consistency)을 적용하여 쿼리를 실행해 엔티티를 검색하고, 요청에 포함된 데이터를 기반으로 필드 값을 업데이트한 후, 수정된 데이터를 삽입하고, 마지막으로 요청에 포함된 원래의 기본 키를 가진 기존 엔티티를 삭제합니다.</p>
+<h3 id="Upsert-behaviors-special-notes" class="common-anchor-header">업서트 동작: 특별 유의사항<button data-href="#Upsert-behaviors-special-notes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>병합 기능을 사용하기 전에 고려해야 할 몇 가지 특별 사항이 있습니다. 다음 사례는 <code translate="no">title</code> 및 <code translate="no">issue</code> 라는 두 개의 스칼라 필드와 <code translate="no">id</code> 라는 기본 키, 그리고 <code translate="no">vector</code> 라는 벡터 필드를 가진 컬렉션이 있다고 가정합니다.</p>
 <ul>
-<li><p><code translate="no">nullable</code> 이 활성화된<strong>필드를 업서트합니다</strong> <strong>.</strong></p>
-<p><code translate="no">issue</code> 필드는 null일 수 있다고 가정합니다. 이러한 필드를 업서트할 때 주의하세요:</p>
+<li><p><code translate="no">nullable</code> 가 <strong>활성화된</strong><strong>필드에 대한 업서트</strong> <strong>.</strong></p>
+<p><code translate="no">issue</code> 필드가 null일 수 있다고 가정해 봅시다. 이러한 필드를 업서트할 때 다음 사항에 유의하십시오:</p>
 <ul>
-<li><p><code translate="no">upsert</code> 요청에서 <code translate="no">issue</code> 필드를 생략하고 <code translate="no">partial_update</code> 를 비활성화하면 <code translate="no">issue</code> 필드가 원래 값을 유지하는 대신 <code translate="no">null</code> 로 업데이트됩니다.</p></li>
-<li><p><code translate="no">issue</code> 필드의 원래 값을 유지하려면 <code translate="no">partial_update</code> 을 활성화하고 <code translate="no">issue</code> 필드를 생략하거나 <code translate="no">issue</code> 필드를 원래 값과 함께 <code translate="no">upsert</code> 요청에 포함시켜야 합니다.</p></li>
+<li><p><code translate="no">upsert</code> 요청에서 <code translate="no">issue</code> 필드를 생략하고 <code translate="no">partial_update</code> 를 비활성화하면, <code translate="no">issue</code> 필드는 원래 값을 유지하는 대신 <code translate="no">null</code> 로 업데이트됩니다.</p></li>
+<li><p><code translate="no">issue</code> 필드의 원래 값을 유지하려면, <code translate="no">partial_update</code> 을 활성화하고 <code translate="no">issue</code> 필드를 생략하거나, <code translate="no">upsert</code> 요청에 <code translate="no">issue</code> 필드를 원래 값 그대로 포함시켜야 합니다.</p></li>
 </ul></li>
-<li><p><strong>동적 필드에서 키 업서트</strong>.</p>
-<p>예제 컬렉션에서 동적 키를 활성화했고 엔티티의 동적 필드에 있는 키-값 쌍이 <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> 과 유사하다고 가정해 보겠습니다.</p>
-<p><code translate="no">author</code>, <code translate="no">year</code>, 또는 <code translate="no">tags</code> 와 같은 키로 엔티티를 삽입하거나 다른 키를 추가할 때 주의하세요:</p>
+<li><p><strong>동적 필드의 Upsert 키</strong>.</p>
+<p>예제 컬렉션에서 동적 키를 활성화했고, 엔티티의 동적 필드에 있는 키-값 쌍이 <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> 와 유사하다고 가정해 보겠습니다.</p>
+<p><code translate="no">author</code>, <code translate="no">year</code>, <code translate="no">tags</code> 와 같은 키로 엔티티를 업서트하거나 다른 키를 추가할 때 다음 사항에 유의하십시오.</p>
 <ul>
-<li><p><code translate="no">partial_update</code> 을 비활성화한 상태에서 업서트하는 경우 기본 동작은 <strong>재정의입니다</strong>. 즉, 동적 필드의 값은 요청에 포함된 모든 스키마 정의되지 않은 필드와 그 값에 의해 재정의됩니다.</p>
-<p>예를 들어 요청에 포함된 데이터가 <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code> 인 경우 대상 엔티티의 동적 필드에 있는 키-값 쌍이 해당 값으로 업데이트됩니다.</p></li>
-<li><p><code translate="no">partial_update</code> 을 활성화한 상태로 업서트하면 기본 동작은 <strong>병합입니다</strong>. 즉, 동적 필드의 값은 요청에 포함된 모든 스키마 정의되지 않은 필드 및 해당 값과 병합됩니다.</p>
-<p>예를 들어 요청에 포함된 데이터가 <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> 인 경우 대상 엔티티의 동적 필드에 있는 키-값 쌍은 업서트 후 <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> 이 됩니다.</p></li>
+<li><p><code translate="no">partial_update</code> 가 비활성화된 상태에서 업서트(upsert)를 수행하면, 기본 동작은 <strong>덮어쓰기입니다</strong>. 즉, 동적 필드의 값은 요청에 포함된 스키마에 정의되지 않은 모든 필드와 해당 값으로 덮어쓰게 됩니다.</p>
+<p>예를 들어, 요청에 포함된 데이터가 <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code> 인 경우, 대상 엔티티의 동적 필드에 있는 키-값 쌍이 해당 값으로 업데이트됩니다.</p></li>
+<li><p><code translate="no">partial_update</code> 가 활성화된 상태에서 upsert를 수행하면 기본 동작은 <strong>병합입니다</strong>. 즉, 동적 필드의 값이 요청에 포함된 스키마에 정의되지 않은 모든 필드 및 해당 값과 병합됩니다.</p>
+<p>예를 들어, 요청에 포함된 데이터가 <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> 인 경우, 업서트 후 대상 엔티티의 동적 필드에 있는 키-값 쌍은 <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> 로 변경됩니다.</p></li>
 </ul></li>
 <li><p><strong>JSON 필드 업서트.</strong></p>
-<p>예제 컬렉션에 <code translate="no">extras</code> 이라는 스키마 정의 JSON 필드가 있고 엔티티의 이 JSON 필드에 있는 키-값 쌍이 <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> 과 유사하다고 가정해 보겠습니다.</p>
-<p>엔티티의 <code translate="no">extras</code> 필드에 수정된 JSON 데이터를 삽입할 때 JSON 필드는 전체로 취급되며 개별 키를 선택적으로 업데이트할 수 없다는 점에 유의하세요. 즉, JSON 필드는 <strong>병합</strong> 모드에서 업서트를 지원하지 <strong>않습니다</strong>.</p></li>
+<p>예제 컬렉션에 <code translate="no">extras</code> 라는 스키마 정의 JSON 필드가 있고, 엔티티의 이 JSON 필드에 포함된 키-값 쌍이 <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> 와 유사하다고 가정해 보겠습니다.</p>
+<p>수정된 JSON 데이터로 엔티티의 <code translate="no">extras</code> 필드를 업서트할 때, JSON 필드는 전체로 처리되므로 개별 키를 선택적으로 업데이트할 수 없다는 점에 유의하십시오. 즉, JSON 필드는 <strong>병합</strong> 모드에서 업서트를 <strong>지원하지 않습니다</strong>.</p></li>
 </ul>
-<h3 id="Limits--Restrictions" class="common-anchor-header">제한 및 제한 사항<button data-href="#Limits--Restrictions" class="anchor-icon" translate="no">
+<h3 id="Limits--Restrictions" class="common-anchor-header">제한 사항 및 제약 조건<button data-href="#Limits--Restrictions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -131,15 +135,15 @@ summary: 업서트 작업은 컬렉션에 엔티티를 삽입하거나 업데이
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>위의 내용을 바탕으로 몇 가지 제한 및 제한 사항을 준수해야 합니다:</p>
+    </button></h3><p>위 내용을 바탕으로 준수해야 할 몇 가지 제한 사항이 있습니다:</p>
 <ul>
 <li><p><code translate="no">upsert</code> 요청에는 항상 대상 엔티티의 기본 키가 포함되어야 합니다.</p></li>
-<li><p>대상 컬렉션이 로드되어 있고 쿼리에 사용할 수 있어야 합니다.</p></li>
+<li><p>대상 컬렉션은 로드되어 있어야 하며 쿼리할 수 있어야 합니다.</p></li>
 <li><p>요청에 지정된 모든 필드는 대상 컬렉션의 스키마에 존재해야 합니다.</p></li>
 <li><p>요청에 지정된 모든 필드의 값은 스키마에 정의된 데이터 유형과 일치해야 합니다.</p></li>
-<li><p>함수를 사용하여 다른 필드에서 파생된 필드의 경우, Milvus는 재계산을 위해 업서트 중에 파생된 필드를 제거합니다.</p></li>
+<li><p>함수를 사용하여 다른 필드에서 파생된 필드의 경우, Milvus는 재계산을 허용하기 위해 업서트(upsert) 과정에서 해당 파생 필드를 제거합니다.</p></li>
 </ul>
-<h2 id="Upsert-entities-in-a-collection" class="common-anchor-header">컬렉션의 엔티티 업서트<button data-href="#Upsert-entities-in-a-collection" class="anchor-icon" translate="no">
+<h2 id="Upsert-entities-in-a-collection" class="common-anchor-header">컬렉션에 엔티티 업서트하기<button data-href="#Upsert-entities-in-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -154,10 +158,15 @@ summary: 업서트 작업은 컬렉션에 엔티티를 삽입하거나 업데이
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이 섹션에서는 <code translate="no">my_collection</code> 이라는 컬렉션에 엔티티를 삽입하겠습니다. 이 컬렉션에는 <code translate="no">id</code>, <code translate="no">vector</code>, <code translate="no">title</code>, <code translate="no">issue</code> 이라는 두 개의 필드만 있습니다. <code translate="no">id</code> 필드는 기본 필드이고 <code translate="no">title</code> 및 <code translate="no">issue</code> 필드는 스칼라 필드입니다.</p>
-<p>컬렉션에 존재하는 경우 세 개의 엔티티는 업서트 요청에 포함된 엔티티에 의해 재정의됩니다.</p>
+    </button></h2><p>이 섹션에서는 <code translate="no">my_collection</code> 라는 컬렉션에 엔티티를 업서트할 것입니다. 이 컬렉션에는 <code translate="no">id</code>, <code translate="no">vector</code>, <code translate="no">title</code>, <code translate="no">issue</code> 라는 네 개의 필드만 있습니다. <code translate="no">id</code> 필드는 기본 필드이며, <code translate="no">title</code> 및 <code translate="no">issue</code> 필드는 스칼라 필드입니다.</p>
+<p>컬렉션에 이 세 개 엔티티가 존재하는 경우, 업서트(upsert) 요청에 포함된 엔티티로 덮어쓰게 됩니다.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -301,7 +310,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/upsert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;title&quot;: &quot;Artificial Intelligence in Real Life&quot;, &quot;issue&quot;: &quot;vol.12&quot;},
@@ -323,7 +331,7 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Upsert-entities-in-a-partition" class="common-anchor-header">파티션의 엔티티 업서트<button data-href="#Upsert-entities-in-a-partition" class="anchor-icon" translate="no">
+<h2 id="Upsert-entities-in-a-partition" class="common-anchor-header">파티션에 엔티티 업서트<button data-href="#Upsert-entities-in-a-partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -338,10 +346,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>지정된 파티션에 엔티티를 업서트할 수도 있습니다. 다음 코드 조각은 컬렉션에 <strong>PartitionA라는</strong> 파티션이 있다고 가정합니다.</p>
-<p>파티션에 존재하는 경우 세 개의 엔티티가 요청에 포함된 엔티티로 재정의됩니다.</p>
+    </button></h2><p>지정된 파티션에 엔티티를 업서트할 수도 있습니다. 다음 코드 예제는 컬렉션에 <strong>PartitionA라는</strong> 파티션이 있다고 가정합니다.</p>
+<p>해당 파티션에 세 개의 엔티티가 이미 존재하는 경우, 요청에 포함된 엔티티로 덮어쓰게 됩니다.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data=[
     {
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">10</span>, 
@@ -448,7 +461,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/upsert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 10, &quot;vector&quot;: [0.06998888224297328, 0.8582816610326578, -0.9657938677934292, 0.6527905683627726, -0.8668460657158576], &quot;title&quot;: &quot;Layour Design Reference&quot;, &quot;issue&quot;: &quot;vol.34&quot;},
@@ -486,13 +498,18 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>다음 코드 예제는 부분 업데이트가 있는 엔티티를 업서트하는 방법을 보여줍니다. 업데이트가 필요한 필드와 새 값만 명시적인 부분 업데이트 플래그와 함께 제공하세요.</p>
-<p>다음 예제에서는 업서트 요청에 지정된 엔티티의 <code translate="no">issue</code> 필드가 요청에 포함된 값으로 업데이트됩니다.</p>
+    </button></h2><p>다음 코드 예제는 부분 업데이트를 통해 엔티티를 업서트하는 방법을 보여줍니다. 업데이트가 필요한 필드와 해당 새 값만 명시적인 부분 업데이트 플래그와 함께 제공하면 됩니다.</p>
+<p>다음 예제에서는 업서트 요청에 지정된 엔티티의 ` <code translate="no">issue</code> ` 필드가 요청에 포함된 값으로 업데이트됩니다.</p>
 <div class="alert note">
-<p>병합 모드에서 업서트를 수행할 때는 요청에 포함된 엔티티의 필드 집합이 동일한지 확인하세요. 다음 코드 조각과 같이 업서트할 엔티티가 두 개 이상 있다고 가정할 때 오류를 방지하고 데이터 무결성을 유지하려면 동일한 필드를 포함하는 것이 중요합니다.</p>
+<p>병합 모드에서 업서트를 수행할 때는 요청에 포함된 엔티티들이 동일한 필드 집합을 갖도록 해야 합니다. 다음 코드 스니펫에 표시된 것처럼 업서트할 엔티티가 두 개 이상인 경우, 오류를 방지하고 데이터 무결성을 유지하기 위해 이들 엔티티가 동일한 필드를 포함하도록 하는 것이 중요합니다.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data=[
     {
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
@@ -591,7 +608,6 @@ _, err = client.Upsert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/upsert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,

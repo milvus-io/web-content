@@ -1,11 +1,11 @@
 ---
 id: upsert-entities.md
-title: Upsert Entitäten
+title: Entitäten einfügen oder aktualisieren
 summary: >-
-  Die Upsert-Operation bietet eine bequeme Möglichkeit zum Einfügen oder
-  Aktualisieren von Entitäten in einer Sammlung.
+  Die Upsert-Operation bietet eine bequeme Möglichkeit, Entitäten in eine
+  Sammlung einzufügen oder zu aktualisieren.
 ---
-<h1 id="Upsert-Entities" class="common-anchor-header">Upsert Entitäten<button data-href="#Upsert-Entities" class="anchor-icon" translate="no">
+<h1 id="Upsert-Entities" class="common-anchor-header">Entitäten einfügen oder aktualisieren<button data-href="#Upsert-Entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Die Operation <code translate="no">upsert</code> bietet eine bequeme Möglichkeit zum Einfügen oder Aktualisieren von Entitäten in einer Sammlung.</p>
-<h2 id="Overview" class="common-anchor-header">Überblick<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Die Operation „ <code translate="no">upsert</code> “ bietet eine bequeme Möglichkeit, Entitäten in eine Sammlung einzufügen oder zu aktualisieren.</p>
+<h2 id="Overview" class="common-anchor-header">Übersicht<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,9 +36,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie können <code translate="no">upsert</code> verwenden, um entweder eine neue Entität einzufügen oder eine vorhandene zu aktualisieren, je nachdem, ob der in der Upsert-Anforderung angegebene Primärschlüssel in der Sammlung vorhanden ist. Wenn der Primärschlüssel nicht gefunden wird, wird ein Einfügevorgang durchgeführt. Andernfalls wird ein Aktualisierungsvorgang durchgeführt.</p>
-<p>Ein Upsert in Milvus funktioniert entweder im <strong>Override-</strong> oder im <strong>Merge-Modus</strong>.</p>
-<h3 id="Upsert-in-override-mode" class="common-anchor-header">Upsert im Überschreibungsmodus<button data-href="#Upsert-in-override-mode" class="anchor-icon" translate="no">
+    </button></h2><p>Mit „ <code translate="no">upsert</code> “ können Sie entweder eine neue Entität einfügen oder eine bestehende aktualisieren, je nachdem, ob der in der „Upsert“-Anfrage angegebene Primärschlüssel in der Sammlung vorhanden ist. Wird der Primärschlüssel nicht gefunden, erfolgt ein Einfügevorgang. Andernfalls wird ein Aktualisierungsvorgang durchgeführt.</p>
+<p>Ein „Upsert“ in Milvus funktioniert entweder im <strong>Überschreib-</strong> oder im <strong>Zusammenführungsmodus</strong>.</p>
+<h3 id="Upsert-in-override-mode" class="common-anchor-header">„Upsert“ im „Override“-Modus<button data-href="#Upsert-in-override-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -53,37 +53,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Eine Upsert-Anfrage, die im Override-Modus arbeitet, kombiniert einen Einfüge- und einen Löschvorgang. Wenn eine <code translate="no">upsert</code> Anfrage für eine bestehende Entität empfangen wird, fügt Milvus die in der Nutzlast der Anfrage enthaltenen Daten ein und löscht gleichzeitig die bestehende Entität mit dem in den Daten angegebenen ursprünglichen Primärschlüssel.</p>
-<p>
+    </button></h3><p>Eine „ <code translate="no">upsert</code> “-Anfrage im „Override“-Modus kombiniert einen Einfügevorgang mit einem Löschvorgang. Wenn eine „ “-Anfrage für eine vorhandene Entität eingeht, fügt Milvus die in der Anfrage-Nutzlast enthaltenen Daten ein und löscht gleichzeitig die vorhandene Entität mit dem in den Daten angegebenen ursprünglichen Primärschlüssel.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" />
-   </span> <span class="img-wrapper"> <span>Upsert im Überschreibungsmodus</span> </span></p>
-<p>Wenn die Zielsammlung die Option <code translate="no">autoid</code> für ihr Primärfeld aktiviert hat, generiert Milvus einen neuen Primärschlüssel für die in der Nutzlast der Anforderung enthaltenen Daten, bevor es sie einfügt.</p>
-<p>Bei Feldern, für die <code translate="no">nullable</code> aktiviert ist, können Sie sie in der Anforderung <code translate="no">upsert</code> auslassen, wenn sie keine Aktualisierungen erfordern.</p>
-<h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">Upsert im Zusammenführungsmodus<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>Sie können auch das Kennzeichen <code translate="no">partial_update</code> verwenden, um eine Upsert-Anfrage im Merge-Modus zu bearbeiten. Dadurch können Sie nur die Felder in die Nutzlast der Anforderung aufnehmen, die aktualisiert werden müssen.</p>
-<p>
+   <img translate="no" src="/docs/v2.6.x/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" /> 
+   <span>Upsert im „Override“-Modus</span>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-in-merge-mode.png" alt="Upsert In Merge Mode" class="doc-image" id="upsert-in-merge-mode" />
-   </span> <span class="img-wrapper"> <span>Upsert im Zusammenführungsmodus</span> </span></p>
-<p>Um eine Zusammenführung durchzuführen, setzen Sie <code translate="no">partial_update</code> auf <code translate="no">True</code> in der Anforderung <code translate="no">upsert</code> zusammen mit dem Primärschlüssel und den Feldern, die mit ihren neuen Werten aktualisiert werden sollen.</p>
-<p>Beim Empfang einer solchen Anfrage führt Milvus eine Abfrage mit starker Konsistenz durch, um die Entität abzurufen, aktualisiert die Feldwerte auf der Grundlage der Daten in der Anfrage, fügt die geänderten Daten ein und löscht dann die vorhandene Entität mit dem ursprünglichen Primärschlüssel in der Anfrage.</p>
-<p>Für <code translate="no">ARRAY</code> Felder unterstützt der Zusammenführungsmodus zwei Operatoren: <code translate="no">ARRAY_APPEND</code> und <code translate="no">ARRAY_REMOVE</code>. Mit diesen Operatoren können Sie Elemente an ein bestehendes <code translate="no">ARRAY</code> Feld anhängen oder passende Elemente daraus entfernen, ohne zuerst die Entität abzufragen, um ihren aktuellen Wert abzurufen. Einzelheiten finden Sie unter <a href="/docs/de/v2.6.x/upsert-entities.md#Upsert-ARRAY-fields-with-partial-update-operators">Upsert ARRAY-Felder mit Teilaktualisierungsoperatoren</a>.</p>
-<h3 id="Upsert-behaviors-special-notes" class="common-anchor-header">Upsert-Verhalten: besondere Hinweise<button data-href="#Upsert-behaviors-special-notes" class="anchor-icon" translate="no">
+ </span></p>
+<p>Wenn für das Primärfeld der Zielsammlung „ <code translate="no">autoid</code> “ aktiviert ist, generiert Milvus vor dem Einfügen einen neuen Primärschlüssel für die in der Anforderungsnutzlast enthaltenen Daten.</p>
+<p>Felder, für die „ <code translate="no">nullable</code> “ aktiviert ist, können Sie in der „ <code translate="no">upsert</code> “-Anfrage weglassen, sofern sie keine Aktualisierungen erfordern.</p>
+<h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">Upsert im Merge-Modus<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -98,30 +77,55 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Es gibt einige besondere Hinweise, die Sie beachten sollten, bevor Sie die Zusammenführungsfunktion verwenden. In den folgenden Fällen wird davon ausgegangen, dass Sie eine Sammlung mit zwei skalaren Feldern namens <code translate="no">title</code> und <code translate="no">issue</code> sowie einem Primärschlüssel <code translate="no">id</code> und einem Vektorfeld namens <code translate="no">vector</code> haben.</p>
+    </button></h3><p>Sie können das Flag „ <code translate="no">partial_update</code> “ auch verwenden, um eine Upsert-Anfrage im Merge-Modus auszuführen. Auf diese Weise können Sie nur die Felder, die aktualisiert werden müssen, in die Anfrage-Nutzlast aufnehmen.</p>
+<p><span class="img-wrapper">
+  
+   <img translate="no" src="/docs/v2.6.x/assets/upsert-in-merge-mode.png" alt="Upsert In Merge Mode" class="doc-image" id="upsert-in-merge-mode" /> 
+   <span>Upsert im Merge-Modus</span>
+  
+ </span></p>
+<p>Um einen Merge durchzuführen, setzen Sie „ <code translate="no">partial_update</code> “ in der Anfrage „ <code translate="no">upsert</code> “ auf „ <code translate="no">True</code> “ – zusammen mit dem Primärschlüssel und den zu aktualisierenden Feldern sowie deren neuen Werten.</p>
+<p>Nach Erhalt einer solchen Anfrage führt Milvus eine Abfrage mit starker Konsistenz durch, um die Entität abzurufen, aktualisiert die Feldwerte basierend auf den Daten in der Anfrage, fügt die geänderten Daten ein und löscht anschließend die vorhandene Entität mit dem in der Anfrage enthaltenen ursprünglichen Primärschlüssel.</p>
+<p>Für „ <code translate="no">ARRAY</code> “-Felder unterstützt der Merge-Modus zwei Operatoren: „ <code translate="no">ARRAY_APPEND</code> “ und „ <code translate="no">ARRAY_REMOVE</code> “. Mit diesen Operatoren können Sie Elemente an ein bestehendes „ <code translate="no">ARRAY</code> “-Feld anhängen oder übereinstimmende Elemente daraus entfernen, ohne zuvor die Entität abfragen zu müssen, um deren aktuellen Wert abzurufen. Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/upsert-entities.md#Upsert-ARRAY-fields-with-partial-update-operators">„Upsert von ARRAY-Feldern mit Partial-Update-Operatoren</a>“.</p>
+<h3 id="Upsert-behaviors-special-notes" class="common-anchor-header">Upsert-Verhalten: Besondere Hinweise<button data-href="#Upsert-behaviors-special-notes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Es gibt einige besondere Hinweise, die Sie vor der Verwendung der Merge-Funktion beachten sollten. Die folgenden Fälle gehen davon aus, dass Sie über eine Sammlung mit zwei Skalarfeldern namens „ <code translate="no">title</code> “ und „ <code translate="no">issue</code> “ sowie einem Primärschlüssel „ <code translate="no">id</code> “ und einem Vektorfeld namens „ <code translate="no">vector</code> “ verfügen.</p>
 <ul>
-<li><p><strong>Upsert-Felder mit</strong> <code translate="no">nullable</code> <strong>aktiviert.</strong></p>
-<p>Nehmen Sie an, dass das Feld <code translate="no">issue</code> Null sein kann. Wenn Sie diese Felder einfügen, beachten Sie das:</p>
+<li><p><strong>Upsert von Feldern bei</strong> <strong>aktiviertem</strong> „ <code translate="no">nullable</code> <strong>“.</strong></p>
+<p>Angenommen, das Feld „ <code translate="no">issue</code> “ darf null sein. Beachten Sie beim Upsert dieser Felder Folgendes:</p>
 <ul>
-<li><p>Wenn Sie das Feld <code translate="no">issue</code> in der Anforderung <code translate="no">upsert</code> auslassen und <code translate="no">partial_update</code> deaktivieren, wird das Feld <code translate="no">issue</code> auf <code translate="no">null</code> aktualisiert, anstatt seinen ursprünglichen Wert beizubehalten.</p></li>
-<li><p>Um den ursprünglichen Wert des Feldes <code translate="no">issue</code> beizubehalten, müssen Sie entweder <code translate="no">partial_update</code> aktivieren und das Feld <code translate="no">issue</code> auslassen oder das Feld <code translate="no">issue</code> mit seinem ursprünglichen Wert in die Anforderung <code translate="no">upsert</code> aufnehmen.</p></li>
+<li><p>Wenn Sie das Feld „ <code translate="no">issue</code> “ in der Anfrage „ <code translate="no">upsert</code> “ weglassen und „ <code translate="no">partial_update</code> “ deaktivieren, wird das Feld „ <code translate="no">issue</code> “ auf „ <code translate="no">null</code> “ aktualisiert, anstatt seinen ursprünglichen Wert beizubehalten.</p></li>
+<li><p>Um den ursprünglichen Wert des Felds „ <code translate="no">issue</code> “ beizubehalten, müssen Sie entweder „ <code translate="no">partial_update</code> “ aktivieren und das Feld „ <code translate="no">issue</code> “ weglassen oder das Feld „ <code translate="no">issue</code> “ mit seinem ursprünglichen Wert in die Anfrage „ <code translate="no">upsert</code> “ aufnehmen.</p></li>
 </ul></li>
 <li><p><strong>Upsert-Schlüssel im dynamischen Feld</strong>.</p>
-<p>Angenommen, Sie haben den dynamischen Schlüssel in der Beispielsammlung aktiviert, und die Schlüssel-Wert-Paare im dynamischen Feld einer Entität sind ähnlich wie <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
-<p>Wenn Sie die Entität mit Schlüsseln wie <code translate="no">author</code>, <code translate="no">year</code> oder <code translate="no">tags</code> einfügen oder andere Schlüssel hinzufügen, beachten Sie Folgendes:</p>
+<p>Angenommen, Sie haben den dynamischen Schlüssel in der Beispielsammlung aktiviert, und die Schlüssel-Wert-Paare im dynamischen Feld einer Entität sehen ähnlich aus wie <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
+<p>Wenn Sie die Entität mit Schlüsseln wie <code translate="no">author</code>, <code translate="no">year</code> oder <code translate="no">tags</code> aktualisieren oder einfügen oder andere Schlüssel hinzufügen, beachten Sie Folgendes:</p>
 <ul>
-<li><p>Wenn Sie mit deaktiviertem <code translate="no">partial_update</code> einfügen, ist das Standardverhalten, dass das dynamische Feld <strong>überschrieben wird</strong>. Das bedeutet, dass der Wert des dynamischen Feldes von allen nicht schema-definierten Feldern, die in der Anfrage enthalten sind, und ihren Werten überschrieben wird.</p>
-<p>Wenn die in der Anfrage enthaltenen Daten beispielsweise <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code> sind, werden die Schlüssel-Wert-Paare im dynamischen Feld der Zielentität auf diesen Wert aktualisiert.</p></li>
-<li><p>Wenn Sie upsert mit <code translate="no">partial_update</code> aktivieren, ist das Standardverhalten das <strong>Zusammenführen</strong>. Das bedeutet, dass der Wert des dynamischen Feldes mit allen nicht schema-definierten Feldern, die in der Anfrage enthalten sind, und deren Werten zusammengeführt wird.</p>
-<p>Wenn die in der Anfrage enthaltenen Daten beispielsweise <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> sind, werden die Schlüssel-Wert-Paare im dynamischen Feld der Zielentität nach dem Upsert zu <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code>.</p></li>
+<li><p>Wenn Sie einen „Upsert“ durchführen, während „ <code translate="no">partial_update</code> “ deaktiviert ist, ist das Standardverhalten das <strong>Überschreiben</strong>. Das bedeutet, dass der Wert des dynamischen Feldes durch alle in der Anfrage enthaltenen, nicht im Schema definierten Felder und deren Werte überschrieben wird.</p>
+<p>Wenn die in der Anfrage enthaltenen Daten beispielsweise „ <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code> “ lauten, werden die Schlüssel-Wert-Paare im dynamischen Feld der Zielentität entsprechend aktualisiert.</p></li>
+<li><p>Wenn Sie einen „Upsert“ mit aktivierter Option „ <code translate="no">partial_update</code> “ durchführen, ist das Standardverhalten das <strong>Zusammenführen</strong>. Das bedeutet, dass der Wert des dynamischen Feldes mit allen in der Anfrage enthaltenen, nicht im Schema definierten Feldern und deren Werten zusammengeführt wird.</p>
+<p>Wenn die in der Anfrage enthaltenen Daten beispielsweise <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> lauten, werden die Schlüssel-Wert-Paare im dynamischen Feld der Zielentität nach dem „Upsert“ zu <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code>.</p></li>
 </ul></li>
 <li><p><strong>Upsert eines JSON-Feldes.</strong></p>
-<p>Angenommen, die Beispielsammlung hat ein schema-definiertes JSON-Feld mit dem Namen <code translate="no">extras</code> und die Schlüssel-Wert-Paare in diesem JSON-Feld einer Entität sind ähnlich wie <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
-<p>Wenn Sie das Feld <code translate="no">extras</code> einer Entität mit geänderten JSON-Daten einfügen, beachten Sie, dass das JSON-Feld als Ganzes behandelt wird und Sie nicht einzelne Schlüssel selektiv aktualisieren können. Mit anderen Worten, das JSON-Feld unterstützt <strong>NICHT</strong> das Upserting im <strong>Merge-Modus</strong>.</p></li>
-<li><p><strong>Upsert eines</strong> <code translate="no">ARRAY</code> <strong>Feldes.</strong></p>
-<p>Im Zusammenführungsmodus unterstützen <code translate="no">ARRAY</code> Felder die Operatoren <code translate="no">ARRAY_APPEND</code> und <code translate="no">ARRAY_REMOVE</code> für partielle Aktualisierungen. Verwenden Sie diese Operatoren, wenn Sie Elemente zu einem bestehenden <code translate="no">ARRAY</code> Feld hinzufügen oder passende Elemente daraus entfernen möchten, ohne den gesamten Array-Wert zu ersetzen.</p></li>
+<p>Angenommen, die Beispielsammlung verfügt über ein schemadefiniertes JSON-Feld namens „ <code translate="no">extras</code> “, und die Schlüssel-Wert-Paare in diesem JSON-Feld einer Entität ähneln „ <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> “.</p>
+<p>Wenn Sie das Feld „ <code translate="no">extras</code> “ einer Entität mit geänderten JSON-Daten per „Upsert“ aktualisieren, beachten Sie, dass das JSON-Feld als Ganzes behandelt wird und Sie einzelne Schlüssel nicht selektiv aktualisieren können. Mit anderen Worten: Das JSON-Feld <strong>unterstützt KEIN</strong> „Upsert“ im <strong>Merge-Modus</strong>.</p></li>
+<li><p>„ <code translate="no">ARRAY</code> <strong>“-Feld</strong><strong>aktualisieren</strong> <strong>.</strong></p>
+<p>Im Merge-Modus unterstützen „ <code translate="no">ARRAY</code> “-Felder die Operatoren für partielle Aktualisierungen „ <code translate="no">ARRAY_APPEND</code> “ und „ <code translate="no">ARRAY_REMOVE</code> “. Verwenden Sie diese Operatoren, wenn Sie Elemente zu einem bestehenden „ <code translate="no">ARRAY</code> “-Feld hinzufügen oder übereinstimmende Elemente daraus entfernen möchten, ohne den gesamten Array-Wert zu ersetzen.</p></li>
 </ul>
-<h3 id="Limits--Restrictions" class="common-anchor-header">Grenzen und Beschränkungen<button data-href="#Limits--Restrictions" class="anchor-icon" translate="no">
+<h3 id="Limits--Restrictions" class="common-anchor-header">Grenzen und Einschränkungen<button data-href="#Limits--Restrictions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -136,15 +140,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Basierend auf dem obigen Inhalt gibt es einige Grenzen und Einschränkungen zu beachten:</p>
+    </button></h3><p>Aufgrund der oben genannten Informationen sind folgende Einschränkungen und Beschränkungen zu beachten:</p>
 <ul>
-<li><p>Die Anfrage <code translate="no">upsert</code> muss immer die Primärschlüssel der Zielentitäten enthalten.</p></li>
+<li><p>Die Anfrage „ <code translate="no">upsert</code> “ muss immer die Primärschlüssel der Zielentitäten enthalten.</p></li>
 <li><p>Die Zielsammlung muss geladen und für Abfragen verfügbar sein.</p></li>
 <li><p>Alle in der Anfrage angegebenen Felder müssen im Schema der Zielsammlung vorhanden sein.</p></li>
-<li><p>Die Werte aller in der Abfrage angegebenen Felder müssen mit den im Schema definierten Datentypen übereinstimmen.</p></li>
-<li><p>Für jedes Feld, das mit Hilfe von Funktionen von einem anderen abgeleitet wurde, entfernt Milvus das abgeleitete Feld während des Upsets, um eine Neuberechnung zu ermöglichen.</p></li>
+<li><p>Die Werte aller in der Anfrage angegebenen Felder müssen mit den im Schema definierten Datentypen übereinstimmen.</p></li>
+<li><p>Bei Feldern, die mithilfe von Funktionen aus anderen Feldern abgeleitet wurden, entfernt Milvus das abgeleitete Feld während des Upserts, um eine Neuberechnung zu ermöglichen.</p></li>
 </ul>
-<h2 id="Upsert-entities-in-a-collection" class="common-anchor-header">Upsert von Entitäten in einer Sammlung<button data-href="#Upsert-entities-in-a-collection" class="anchor-icon" translate="no">
+<h2 id="Upsert-entities-in-a-collection" class="common-anchor-header">Entitäten in einer Sammlung per „Upsert“ einfügen<button data-href="#Upsert-entities-in-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -159,10 +163,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In diesem Abschnitt werden wir Entitäten in eine Sammlung namens <code translate="no">my_collection</code> einfügen. Diese Sammlung hat nur zwei Felder, die <code translate="no">id</code>, <code translate="no">vector</code>, <code translate="no">title</code> und <code translate="no">issue</code> heißen. Das Feld <code translate="no">id</code> ist das Primärfeld, während die Felder <code translate="no">title</code> und <code translate="no">issue</code> Skalarfelder sind.</p>
-<p>Die drei Entitäten werden, wenn sie in der Sammlung vorhanden sind, durch die in der Upsert-Anfrage enthaltenen überschrieben.</p>
+    </button></h2><p>In diesem Abschnitt führen wir ein „Upsert“ von Entitäten in eine Sammlung namens „ <code translate="no">my_collection</code> “ durch. Diese Sammlung enthält nur zwei Felder mit den Namen „ <code translate="no">id</code> “, „ <code translate="no">vector</code> “, „ <code translate="no">title</code> “ und „ <code translate="no">issue</code> “. Das Feld „ <code translate="no">id</code> “ ist das Primärfeld, während die Felder „ <code translate="no">title</code> “ und „ <code translate="no">issue</code> “ Skalarfelder sind.</p>
+<p>Sofern die drei Entitäten in der Sammlung vorhanden sind, werden sie durch die in der „Upsert“-Anfrage enthaltenen Entitäten überschrieben.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -328,7 +337,7 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Upsert-entities-in-a-partition" class="common-anchor-header">Upsert Entitäten in einer Partition<button data-href="#Upsert-entities-in-a-partition" class="anchor-icon" translate="no">
+<h2 id="Upsert-entities-in-a-partition" class="common-anchor-header">Entitäten in einer Partition „upsert“<button data-href="#Upsert-entities-in-a-partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -343,10 +352,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie können auch Entitäten in eine bestimmte Partition einfügen. Die folgenden Codeschnipsel gehen davon aus, dass Sie eine Partition namens <strong>PartitionA</strong> in Ihrer Sammlung haben.</p>
-<p>Die drei Entitäten, falls in der Partition vorhanden, werden durch die in der Anfrage enthaltenen überschrieben.</p>
+    </button></h2><p>Sie können Entitäten auch in eine bestimmte Partition „upsert“-en. Die folgenden Codeausschnitte gehen davon aus, dass Sie in Ihrer Sammlung eine Partition namens <strong>„PartitionA“</strong> haben.</p>
+<p>Die drei Entitäten werden, sofern sie in der Partition vorhanden sind, durch die in der Anfrage enthaltenen Entitäten überschrieben.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data=[
     {
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">10</span>, 
@@ -476,7 +490,7 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Upsert-entities-in-merge-mode--Milvus-v262+" class="common-anchor-header">Upsert Entitäten im Merge-Modus<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-entities-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
+<h2 id="Upsert-entities-in-merge-mode--Milvus-v262+" class="common-anchor-header">Entitäten im Merge-Modus einfügen oder aktualisieren<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-entities-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -491,13 +505,18 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Das folgende Codebeispiel zeigt, wie man Entitäten mit teilweisen Aktualisierungen einfügt. Geben Sie nur die zu aktualisierenden Felder und ihre neuen Werte an, zusammen mit dem expliziten Flag für partielle Aktualisierung.</p>
-<p>Im folgenden Beispiel wird das Feld <code translate="no">issue</code> der Entitäten, die in der Upsert-Anforderung angegeben sind, auf die in der Anforderung enthaltenen Werte aktualisiert.</p>
+    </button></h2><p>Das folgende Codebeispiel veranschaulicht, wie Entitäten mit partiellen Aktualisierungen „Upsert“ durchgeführt werden. Geben Sie nur die Felder an, die aktualisiert werden sollen, sowie deren neue Werte, zusammen mit dem expliziten Flag für partielle Aktualisierungen.</p>
+<p>Im folgenden Beispiel wird das Feld „ <code translate="no">issue</code> “ der in der Upsert-Anfrage angegebenen Entitäten auf die in der Anfrage enthaltenen Werte aktualisiert.</p>
 <div class="alert note">
-<p>Wenn Sie ein Upsert im Merge-Modus durchführen, stellen Sie sicher, dass die an der Anforderung beteiligten Entitäten den gleichen Satz von Feldern haben. Angenommen, es gibt zwei oder mehr Entitäten, die upserted werden sollen, wie im folgenden Codeschnipsel gezeigt, ist es wichtig, dass sie identische Felder enthalten, um Fehler zu vermeiden und die Datenintegrität zu wahren.</p>
+<p>Achten Sie bei der Durchführung eines „Upsert“ im Merge-Modus darauf, dass die in der Anfrage beteiligten Entitäten denselben Satz an Feldern aufweisen. Angenommen, es sollen zwei oder mehr Entitäten per „Upsert“ aktualisiert werden, wie im folgenden Codeausschnitt gezeigt, ist es wichtig, dass diese identische Felder enthalten, um Fehler zu vermeiden und die Datenintegrität zu gewährleisten.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data=[
     {
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
@@ -615,7 +634,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Upsert-ARRAY-fields-with-partial-update-operators--Milvus-v2617+" class="common-anchor-header">ARRAY-Felder mit partiellen Aktualisierungsoperatoren einfügen<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.17+</span><button data-href="#Upsert-ARRAY-fields-with-partial-update-operators--Milvus-v2617+" class="anchor-icon" translate="no">
+<h2 id="Upsert-ARRAY-fields-with-partial-update-operators--Milvus-v2617+" class="common-anchor-header">Upsert von ARRAY-Feldern mit Operatoren für Teilaktualisierungen<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.17+</span><button data-href="#Upsert-ARRAY-fields-with-partial-update-operators--Milvus-v2617+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -630,10 +649,15 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vor der Einführung von Teilaktualisierungsoperatoren erforderte die Aktualisierung eines Teils eines <code translate="no">ARRAY</code> -Feldes einen clientseitigen Lese-Änderungs-Schreibfluss: Abfrage des vorhandenen Arrays, Änderung im Anwendungscode und Upserting des vollständigen Ersatzwertes. Mit Operatoren für Teilaktualisierungen können Sie nur die Elemente senden, die angehängt oder entfernt werden sollen, was die clientseitige Logik reduziert und das zusätzliche Lesen vor dem Upsert vermeidet.</p>
-<p>Angenommen, die Entität mit dem Primärschlüssel <code translate="no">1</code> hat bereits <code translate="no">tags = [&quot;new&quot;, &quot;trial&quot;]</code>. Ohne Teilaktualisierungsoperatoren erfordert das Hinzufügen von <code translate="no">&quot;premium&quot;</code> zum Array das Upserting des gesamten Ersatzarrays:</p>
+    </button></h2><p>Vor der Einführung von Operatoren für Teilaktualisierungen erforderte die Aktualisierung eines Teils eines „ <code translate="no">ARRAY</code> “-Feldes einen clientseitigen „Read-Modify-Write“-Ablauf: Abfrage des bestehenden Arrays, Änderung im Anwendungscode und „Upsert“ des vollständigen Ersatzwertes. Mit Operatoren für partielle Aktualisierungen können Sie nur die Elemente senden, die angehängt oder entfernt werden sollen. Dies reduziert die clientseitige Logik und vermeidet den zusätzlichen Lesevorgang vor dem „Upsert“.</p>
+<p>Angenommen, die Entität mit dem Primärschlüssel ` <code translate="no">1</code> ` enthält bereits ` <code translate="no">tags = [&quot;new&quot;, &quot;trial&quot;]</code>`. Ohne Operatoren für partielle Aktualisierungen erfordert das Hinzufügen von ` <code translate="no">&quot;premium&quot;</code> ` zum Array das Upsert des gesamten Ersatz-Arrays:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.upsert(
     collection_name=<span class="hljs-string">&quot;users&quot;</span>,
 <span class="highlighted-comment-line">    data=[{<span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;new&quot;</span>, <span class="hljs-string">&quot;trial&quot;</span>, <span class="hljs-string">&quot;premium&quot;</span>]}],</span>
@@ -656,9 +680,14 @@ client.upsert(UpsertReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Mit <code translate="no">ARRAY_APPEND</code> senden Sie nur das hinzuzufügende Element:</p>
+<p>Bei „ <code translate="no">ARRAY_APPEND</code> “ wird nur das hinzuzufügende Element gesendet:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldOp
 
 client.upsert(
@@ -689,9 +718,9 @@ client.upsert(UpsertReq.builder()
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Wenn Sie einen der beiden Operatoren über <code translate="no">field_ops</code> an ein Feld anhängen, wird implizit die Semantik der teilweisen Aktualisierung aktiviert. Daher müssen Sie <code translate="no">partial_update=True</code> <strong>nicht</strong> zusammen mit <code translate="no">field_ops</code> übergeben.</p>
+<p>Das Anhängen eines der beiden Operatoren an ein Feld über ` <code translate="no">field_ops</code> ` aktiviert implizit die Semantik der Teilaktualisierung. Daher müssen Sie neben ` <code translate="no">field_ops</code>` <strong>nicht</strong> zusätzlich ` <code translate="no">partial_update=True</code> ` übergeben.</p>
 </div>
-<h3 id="Limits" class="common-anchor-header">Grenzwerte<button data-href="#Limits" class="anchor-icon" translate="no">
+<h3 id="Limits" class="common-anchor-header">Einschränkungen<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -707,10 +736,10 @@ client.upsert(UpsertReq.builder()
         ></path>
       </svg>
     </button></h3><ul>
-<li>Die Werte der Nutzlast müssen mit dem <code translate="no">element_type</code> des Zielfeldes <code translate="no">ARRAY</code> übereinstimmen. Wenn das Zielfeld z. B. <code translate="no">ARRAY&lt;VARCHAR&gt;</code> ist, muss die Nutzlast Zeichenkettenwerte enthalten.</li>
-<li><code translate="no">ARRAY_APPEND</code> und <code translate="no">ARRAY_REMOVE</code> unterstützen <code translate="no">ARRAY</code> Felder, deren <code translate="no">element_type</code> <code translate="no">BOOL</code> , <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, oder <code translate="no">VARCHAR</code> ist.</li>
-<li>Nach einer <code translate="no">ARRAY_APPEND</code> Operation darf die resultierende Array-Länge die <code translate="no">max_capacity</code> des Feldes nicht überschreiten.</li>
-<li>Gleichzeitige Upserts auf dieselbe Entität sind nicht atomar über Anfragen hinweg. Wenn zwei Anfragen das gleiche <code translate="no">ARRAY</code> Feld zur gleichen Zeit aktualisieren, kann die spätere Schreiboperation die frühere überschreiben. Verwenden Sie die Koordination auf Anwendungsebene, wenn Sie alle gleichzeitigen Änderungen beibehalten wollen.</li>
+<li>Die Werte der Nutzdaten müssen mit dem <code translate="no">element_type</code> des Zielfelds „ <code translate="no">ARRAY</code> “ übereinstimmen. Wenn das Zielfeld beispielsweise „ <code translate="no">ARRAY&lt;VARCHAR&gt;</code> “ lautet, müssen die Nutzdaten Zeichenfolgenwerte enthalten.</li>
+<li><code translate="no">ARRAY_APPEND</code> und „ <code translate="no">ARRAY_REMOVE</code> “ unterstützen „ <code translate="no">ARRAY</code> “-Felder, deren „ <code translate="no">element_type</code> “ „ <code translate="no">BOOL</code> “, „ <code translate="no">INT8</code> “, „ <code translate="no">INT16</code> “, „ <code translate="no">INT32</code> “, „ <code translate="no">INT64</code> “, „ <code translate="no">FLOAT</code> “, „ <code translate="no">DOUBLE</code> “ oder „ <code translate="no">VARCHAR</code> “ lautet.</li>
+<li>Nach einem „ <code translate="no">ARRAY_APPEND</code> “-Vorgang darf die Länge des resultierenden Arrays die „ <code translate="no">max_capacity</code> “ des Feldes nicht überschreiten.</li>
+<li>Parallele Upserts an dieselbe Entität sind nicht über Anfragen hinweg atomar. Wenn zwei Anfragen gleichzeitig dasselbe Feld „ <code translate="no">ARRAY</code> “ aktualisieren, kann der spätere Schreibvorgang den früheren überschreiben. Verwenden Sie eine Koordination auf Anwendungsebene, wenn Sie alle parallelen Änderungen beibehalten müssen.</li>
 </ul>
 <h3 id="Example" class="common-anchor-header">Beispiel<button data-href="#Example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -727,9 +756,14 @@ client.upsert(UpsertReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Das folgende Beispiel verwendet eine kleine <code translate="no">users</code> -Sammlung mit einem Primärschlüssel <code translate="no">pk</code>, einem <code translate="no">tags</code> -Feld vom Typ <code translate="no">ARRAY&lt;VARCHAR&gt;</code> und einem <code translate="no">embedding</code> -Vektorfeld. Es fügt zunächst zwei Entitäten mit anfänglichen <code translate="no">tags</code> Werten ein und verwendet dann <code translate="no">ARRAY_APPEND</code> und <code translate="no">ARRAY_REMOVE</code>, um zu zeigen, wie jeder Operator das gespeicherte Array ändert.</p>
+    </button></h3><p>Das folgende Beispiel verwendet eine kleine „ <code translate="no">users</code> “-Sammlung mit einem Primärschlüssel „ <code translate="no">pk</code> “, einem Feld „ <code translate="no">tags</code> “ vom Typ „ <code translate="no">ARRAY&lt;VARCHAR&gt;</code> “ und einem Vektorfeld „ <code translate="no">embedding</code> “. Zunächst werden zwei Entitäten mit den Anfangswerten „ <code translate="no">tags</code> “ eingefügt, anschließend wird mithilfe von „ <code translate="no">ARRAY_APPEND</code> “ und „ <code translate="no">ARRAY_REMOVE</code> “ gezeigt, wie jeder Operator das gespeicherte Array verändert.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, FieldOp, MilvusClient
 
 client = MilvusClient(

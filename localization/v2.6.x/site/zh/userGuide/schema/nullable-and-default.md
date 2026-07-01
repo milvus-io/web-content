@@ -1,11 +1,11 @@
 ---
 id: nullable-and-default.md
-title: 可归零和默认值
+title: 可为空与默认值
 summary: >-
-  Milvus 允许你为标量字段（主字段除外）设置可空属性和默认值。对于标记为 nullable=True
-  的字段，你可以在插入数据时跳过该字段，或直接将其设置为空值，系统会将其视为空值而不会导致错误。当字段有默认值时，如果在插入过程中没有为该字段指定数据，系统将自动应用该值。
+  Milvus 允许您为标量字段（主字段除外）设置可为空属性及默认值。 对于标记为 `nullable=True`
+  的字段，在插入数据时可以跳过该字段，或直接将其设置为空值，系统会将其视为空值且不会引发错误。当字段具有默认值时，如果在插入过程中未为该字段指定数据，系统将自动应用该默认值。
 ---
-<h1 id="Nullable--Default" class="common-anchor-header">可归零和默认值<button data-href="#Nullable--Default" class="anchor-icon" translate="no">
+<h1 id="Nullable--Default" class="common-anchor-header">可为空与默认值<button data-href="#Nullable--Default" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 允许你为标量字段（主字段除外）设置<code translate="no">nullable</code> 属性和默认值。对于标记为<code translate="no">nullable=True</code> 的字段，您可以在插入数据时跳过该字段，或直接将其设置为空值，系统会将其视为空值而不会导致错误。当字段具有默认值时，如果在插入过程中没有为该字段指定数据，系统将自动应用该值。</p>
-<p>默认值和可归零属性允许处理带有空值的数据集并保留默认值设置，从而简化了从其他数据库系统到 Milvus 的数据迁移。在创建 Collections 时，也可以启用可归零属性或为可能存在不确定值的字段设置默认值。</p>
+    </button></h1><p>Milvus 允许您为标量字段（主字段除外）设置 `<code translate="no">nullable</code> ` 属性及默认值。 对于标记为“<code translate="no">nullable=True</code> ”的字段，在插入数据时可以跳过该字段，或直接将其设置为空值，系统会将其视为空值且不会引发错误。当字段具有默认值时，如果在插入过程中未为该字段指定数据，系统将自动应用该默认值。</p>
+<p>默认值和可为空属性通过允许处理包含空值的数据集并保留默认值设置，从而简化了从其他数据库系统向 Milvus 的数据迁移。在创建 Collection 时，您还可以为值可能不确定的字段启用可为空属性或设置默认值。</p>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,14 +38,14 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>只有标量字段（主字段除外）支持默认值和 nullable 属性。</p></li>
+<li><p>仅标量字段（主字段除外）支持默认值和可为空属性。</p></li>
 <li><p>JSON 和数组字段不支持默认值。</p></li>
-<li><p>默认值或 nullable 属性只能在创建 Collections 时配置，之后不能修改。</p></li>
-<li><p>标记为 nullable 的字段不能用作分区键。有关分区键的更多信息，请参阅<a href="/docs/zh/v2.6.x/use-partition-key.md">使用分区键</a>。</p></li>
-<li><p>在启用 nullable 属性的标量字段上创建索引时，索引将排除空值。</p></li>
-<li><p><strong>JSON 和 ARRAY 字段</strong>：当使用<code translate="no">IS NULL</code> 或<code translate="no">IS NOT NULL</code> 操作符对 JSON 或 ARRAY 字段进行筛选时，这些操作符在列级别工作，这表明它们只评估整个 JSON 对象或数组是否为空。例如，如果 JSON 对象中的某个键为空，<code translate="no">IS NULL</code> 过滤器将无法识别该键。有关详细信息，请参阅<a href="/docs/zh/v2.6.x/basic-operators.md">基本操作符</a>。</p></li>
+<li><p>默认值或可空属性只能在创建Collection时配置，之后无法修改。</p></li>
+<li><p>标记为可为空的字段不能用作分区键。有关Partition Key的更多信息，请参阅<a href="/docs/zh/v2.6.x/use-partition-key.md">“使用Partition Key”</a>。</p></li>
+<li><p>在启用了可为空属性的标量字段上创建索引时，空值将被排除在索引之外。</p></li>
+<li><p><strong>JSON 和 ARRAY 字段</strong>：当使用 `<code translate="no">IS NULL</code> ` 或 `<code translate="no">IS NOT NULL</code> ` 操作符对 JSON 或 ARRAY 字段进行过滤时，这些操作符在列级别起作用，这意味着它们仅评估整个 JSON 对象或数组是否为空。例如，如果 JSON 对象中的某个键为空，则 `<code translate="no">IS NULL</code> ` 过滤器将无法识别该情况。有关更多信息，请参阅<a href="/docs/zh/v2.6.x/basic-operators.md">《基本操作符》</a>。</p></li>
 </ul>
-<h2 id="Nullable-attribute" class="common-anchor-header">Nullable 属性<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
+<h2 id="Nullable-attribute" class="common-anchor-header">可为空属性<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,8 +60,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>通过<code translate="no">nullable</code> 属性，可以在 Collections 中存储空值，从而在处理未知数据时提供灵活性。</p>
-<h3 id="Set-the-nullable-attribute" class="common-anchor-header">设置 nullable 属性<button data-href="#Set-the-nullable-attribute" class="anchor-icon" translate="no">
+    </button></h2><p><code translate="no">nullable</code> 属性允许您在Collection中存储null值，从而在处理未知数据时提供更大的灵活性。</p>
+<h3 id="Set-the-nullable-attribute" class="common-anchor-header">设置可空属性<button data-href="#Set-the-nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -76,9 +76,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>创建 Collections 时，使用<code translate="no">nullable=True</code> 定义可归零字段（默认为<code translate="no">False</code> ）。下面的示例创建了一个名为<code translate="no">my_collection</code> 的 Collection，并将<code translate="no">age</code> 字段设置为可归零：</p>
+    </button></h3><p>创建 Collection 时，请使用 `<code translate="no">nullable=True</code> ` 来定义可为空字段（默认值为 `<code translate="no">False</code>`）。以下示例创建了一个名为 `<code translate="no">my_collection</code> ` 的 Collection，并将 `<code translate="no">age</code> ` 字段设置为可为空：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>)
@@ -294,9 +299,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在可空字段中插入数据时，插入空值或直接省略该字段：</p>
+    </button></h3><p>向可为空字段插入数据时，请插入 null 或直接省略该字段：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data = [
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>], <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">30</span>},
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>], <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-literal">None</span>},
@@ -366,7 +376,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Search-and-query-with-null-values" class="common-anchor-header">使用空值搜索和查询<button data-href="#Search-and-query-with-null-values" class="anchor-icon" translate="no">
+<h3 id="Search-and-query-with-null-values" class="common-anchor-header">使用空值进行搜索和查询<button data-href="#Search-and-query-with-null-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -381,9 +391,14 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>使用<code translate="no">search</code> 方法时，如果字段包含<code translate="no">null</code> 值，则搜索结果将以空值返回该字段：</p>
+    </button></h3><p>使用<code translate="no">search</code> 方法时，如果某个字段包含<code translate="no">null</code> 值，搜索结果将返回该字段为null：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.128</span>]],
@@ -467,9 +482,14 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">#{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;distance&quot;:0.16000001,&quot;id&quot;:1},{&quot;age&quot;:null,&quot;distance&quot;:0.28999996,&quot;id&quot;:2}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>当您使用<code translate="no">query</code> 方法进行标量过滤时，空值的过滤结果都是 false，表示不会选择它们。</p>
+<p>当您使用<code translate="no">query</code> 方法进行标量过滤时，null值的过滤结果均为false，表示这些值不会被选中。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Reviewing previously inserted data:</span>
 <span class="hljs-comment"># {&quot;id&quot;: 1, &quot;vector&quot;: [0.1, 0.2, ..., 0.128], &quot;age&quot;: 30}</span>
 <span class="hljs-comment"># {&quot;id&quot;: 2, &quot;vector&quot;: [0.2, 0.3, ..., 0.129], &quot;age&quot;: None}</span>
@@ -531,12 +551,17 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;id&quot;:1}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>要返回具有<code translate="no">null</code> 值的实体，可在不使用任何标量过滤条件的情况下进行如下查询：</p>
+<p>若要返回<code translate="no">null</code> 字段值为null的实体，请如下所示不使用任何标量筛选条件进行查询：</p>
 <div class="alert note">
-<p><code translate="no">query</code> 方法在不带任何过滤条件的情况下使用时，会检索 Collections 中的所有实体，包括具有空值的实体。要限制返回实体的数量，必须指定<code translate="no">limit</code> 参数。</p>
+<p>当<code translate="no">query</code> 方法在没有过滤条件的情况下使用时，会检索Collection中的所有实体，包括具有null值的实体。若要限制返回的实体数量，必须指定<code translate="no">limit</code> 参数。</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">null_results = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,     <span class="hljs-comment"># Query without any filtering condition</span>
@@ -603,7 +628,7 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>默认值是分配给标量字段的预设值。如果在插入时没有为有默认值的字段提供值，系统会自动使用默认值。</p>
+    </button></h2><p>默认值是分配给标量字段的预设值。如果在插入时未为具有默认值的字段提供具体值，系统将自动使用默认值。</p>
 <h3 id="Set-default-values" class="common-anchor-header">设置默认值<button data-href="#Set-default-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -619,9 +644,14 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>创建 Collections 时，使用<code translate="no">default_value</code> 参数定义字段的默认值。下面的示例显示了如何将<code translate="no">age</code> 的默认值设置为<code translate="no">18</code> ，将<code translate="no">status</code> 的默认值设置为<code translate="no">&quot;active&quot;</code> ：</p>
+    </button></h3><p>创建Collection时，请使用<code translate="no">default_value</code> 参数为字段定义默认值。以下示例演示了如何将<code translate="no">age</code> 的默认值设置为<code translate="no">18</code> ，并将<code translate="no">status</code> 的默认值设置为<code translate="no">&quot;active&quot;</code> ：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">schema = client.create_schema(
     auto_id=<span class="hljs-literal">False</span>,
     enable_dynamic_schema=<span class="hljs-literal">True</span>,
@@ -846,9 +876,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>插入数据时，如果省略有默认值的字段或将其值设为空，系统就会使用默认值：</p>
+    </button></h3><p>插入数据时，如果省略具有默认值的字段或将其值设置为 null，系统将使用默认值：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data = [
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, ..., <span class="hljs-number">0.128</span>], <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">30</span>, <span class="hljs-string">&quot;status&quot;</span>: <span class="hljs-string">&quot;premium&quot;</span>},
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, ..., <span class="hljs-number">0.129</span>]},  <span class="hljs-comment"># `age` and `status` use default values</span>
@@ -926,7 +961,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>有关可空值和默认值设置如何生效的更多信息，请参阅<a href="/docs/zh/v2.6.x/nullable-and-default.md#Applicable-rules">适用规则</a>。</p>
+<p>有关可为空字段和默认值设置如何生效的更多信息，请参阅<a href="/docs/zh/v2.6.x/nullable-and-default.md#Applicable-rules">“适用规则”</a>。</p>
 </div>
 <h3 id="Search-and-query-with-default-values" class="common-anchor-header">使用默认值进行搜索和查询<button data-href="#Search-and-query-with-default-values" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -943,10 +978,15 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在向量搜索和标量过滤过程中，包含默认值的实体与其他实体的处理方式相同。您可以将默认值作为<code translate="no">search</code> 和<code translate="no">query</code> 操作符的一部分。</p>
-<p>例如，在<code translate="no">search</code> 操作符中，将<code translate="no">age</code> 设置为默认值<code translate="no">18</code> 的实体将包含在结果中：</p>
+    </button></h3><p>在向量搜索和标量过滤过程中，包含默认值的实体与其他实体一样被处理。您可以将默认值作为<code translate="no">search</code> 和<code translate="no">query</code> 操作的一部分。</p>
+<p>例如，在<code translate="no">search</code> 操作中，<code translate="no">age</code> 字段设置为默认值<code translate="no">18</code> 的实体将被包含在结果中：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.5</span>]],
@@ -1037,9 +1077,14 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:18,&quot;distance&quot;:0.050000004,&quot;id&quot;:2,&quot;status&quot;:&quot;active&quot;},{&quot;age&quot;:18,&quot;distance&quot;:0.45000002,&quot;id&quot;:4,&quot;status&quot;:&quot;inactive&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在<code translate="no">query</code> 操作符中，可以直接通过默认值进行匹配或过滤：</p>
+<p>在“<code translate="no">query</code> ”操作中，您可以直接根据默认值进行匹配或筛选：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query all entities where `age` equals the default value (18)</span>
 default_age_results = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -1157,10 +1202,10 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>下表总结了可空列和默认值在不同配置组合下的行为。这些规则决定了 Milvus 在尝试插入空值或未提供字段值时如何处理数据。</p>
+    </button></h2><p>下表总结了在不同配置组合下，可为空列和默认值的行为。这些规则决定了当尝试插入空值或未提供字段值时，Milvus 如何处理数据。</p>
 <table>
    <tr>
-     <th><p>可归零</p></th>
+     <th><p>可为空</p></th>
      <th><p>默认值</p></th>
      <th><p>默认值类型</p></th>
      <th><p>用户输入</p></th>
@@ -1173,38 +1218,38 @@ curl --request POST \
      <td><p>非空</p></td>
      <td><p>无/空</p></td>
      <td><p>使用默认值</p></td>
-     <td><p>字段： <code translate="no">age</code> 默认值：<code translate="no">18</code></p><p>用户输入：空</p><p>结果：存储为<code translate="no">18</code></p></td>
+     <td><p>字段：<code translate="no">age</code> 默认值：<code translate="no">18</code></p><p>用户输入：null</p><p>结果：存储为<code translate="no">18</code></p></td>
    </tr>
    <tr>
      <td><p>✅</p></td>
      <td><p>❌</p></td>
      <td><p>-</p></td>
-     <td><p>无/空</p></td>
-     <td><p>存储为空</p></td>
-     <td><p>字段： <code translate="no">middle_name</code> 默认值： -</p><p>用户输入：空</p><p>结果：存储为空</p></td>
+     <td><p>无/null</p></td>
+     <td><p>存储为 null</p></td>
+     <td><p>字段：<code translate="no">middle_name</code> 默认值：-</p><p>用户输入：null</p><p>结果：存储为 null</p></td>
    </tr>
    <tr>
      <td><p>❌</p></td>
      <td><p>✅</p></td>
      <td><p>非空</p></td>
-     <td><p>无/空</p></td>
+     <td><p>无/null</p></td>
      <td><p>使用默认值</p></td>
-     <td><p>字段： <code translate="no">status</code> 默认值：<code translate="no">"active"</code></p><p>用户输入：空</p><p>结果：存储为<code translate="no">"active"</code></p></td>
+     <td><p>字段：<code translate="no">status</code> 默认值：<code translate="no">"active"</code></p><p>用户输入：null</p><p>结果：存储为<code translate="no">"active"</code></p></td>
    </tr>
    <tr>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>-</p></td>
-     <td><p>无/空</p></td>
+     <td><p>无/null</p></td>
      <td><p>抛出错误</p></td>
-     <td><p>字段： <code translate="no">email</code> 默认值：-</p><p>用户输入：空</p><p>结果：操作被拒绝，系统提示错误</p></td>
+     <td><p>字段：<code translate="no">email</code> 默认值：-</p><p>用户输入：null</p><p>结果：操作被拒绝，系统抛出错误</p></td>
    </tr>
    <tr>
      <td><p>❌</p></td>
      <td><p>✅</p></td>
-     <td><p>空</p></td>
-     <td><p>无/空</p></td>
+     <td><p>Null</p></td>
+     <td><p>无/null</p></td>
      <td><p>抛出错误</p></td>
-     <td><p>字段： <code translate="no">username</code> 默认值：空</p><p>用户输入：空</p><p>结果：操作符被拒绝，系统提示错误</p></td>
+     <td><p>字段：<code translate="no">username</code> 默认值：null</p><p>用户输入：null</p><p>结果：操作被拒绝，系统抛出错误</p></td>
    </tr>
 </table>

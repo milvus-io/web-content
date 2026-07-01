@@ -1,6 +1,6 @@
 ---
 id: release_notes.md
-summary: Milvus Versionshinweise
+summary: Milvus-Versionshinweise
 title: Release Notes
 ---
 <h1 id="Release-Notes" class="common-anchor-header">Release Notes<button data-href="#Release-Notes" class="anchor-icon" translate="no">

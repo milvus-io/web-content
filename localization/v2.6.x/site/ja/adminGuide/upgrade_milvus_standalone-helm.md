@@ -4,11 +4,11 @@ label: Helm
 order: 1
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
-summary: MilvusスタンドアロンをHelm Chartでアップグレードする方法をご紹介します。
-title: HelmチャートによるMilvusスタンドアロンのアップグレード
+summary: Helm Chart を使用して Milvus スタンドアロンをアップグレードする方法について学びましょう。
+title: Helmチャートを使用したMilvusスタンドアロンのアップグレード
 ---
-<div class="tab-wrapper"><a href="/docs/ja/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/ja/v2.6.x/upgrade_milvus_standalone-helm.md" class='active '>OperatorHelmDocker</a><a href="/docs/ja/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>コンポーザー</a></div>
-<h1 id="Upgrade-Milvus-Standalone-with-Helm-Chart" class="common-anchor-header">HelmチャートによるMilvusスタンドアロンのアップグレード<button data-href="#Upgrade-Milvus-Standalone-with-Helm-Chart" class="anchor-icon" translate="no">
+<div class="tab-wrapper"><a href="/docs/ja/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/ja/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>Operator</a>、Helm、Docker<a href="/docs/ja/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>Compose</a></div>
+<h1 id="Upgrade-Milvus-Standalone-with-Helm-Chart" class="common-anchor-header">Helmチャートを使用したMilvusスタンドアロンのアップグレード<button data-href="#Upgrade-Milvus-Standalone-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +23,8 @@ title: HelmチャートによるMilvusスタンドアロンのアップグレー
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>このガイドでは、Helm Chartを使用してMilvusスタンドアロン配備をv2.5.xからv2.6.17にアップグレードする方法について説明します。</p>
-<h2 id="Before-you-start" class="common-anchor-header">始める前に<button data-href="#Before-you-start" class="anchor-icon" translate="no">
+    </button></h1><p>このガイドでは、Helmチャートを使用してMilvusスタンドアロン環境をv2.5.xからv2.6.17にアップグレードする方法について説明します。</p>
+<h2 id="Before-you-start" class="common-anchor-header">開始する前に<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -54,13 +54,13 @@ title: HelmチャートによるMilvusスタンドアロンのアップグレー
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus 2.5.xから2.6.17へのアップグレードには、アーキテクチャ上の大きな変更が含まれます：</p>
+    </button></h3><p>Milvus 2.5.x から 2.6.17 へのアップグレードには、以下の重要なアーキテクチャの変更が含まれます：</p>
 <ul>
-<li><strong>コーディネーターの統合</strong>：従来の別々のコーディネーター(<code translate="no">dataCoord</code>,<code translate="no">queryCoord</code>,<code translate="no">indexCoord</code>)は、1つに統合されました。<code translate="no">mixCoord</code></li>
-<li><strong>新しいコンポーネント</strong>データ処理強化のためのストリーミング・ノードの導入</li>
-<li><strong>コンポーネントの削除</strong>：<code translate="no">indexNode</code> を削除、統合</li>
+<li><strong>コーディネーターの統合</strong>：従来別々に存在していたコーディネーター（<code translate="no">dataCoord</code> 、<code translate="no">queryCoord</code> 、<code translate="no">indexCoord</code> ）が、単一の<code translate="no">mixCoord</code></li>
+<li><strong>新コンポーネント</strong>：データ処理機能を強化するためのストリーミングノードの導入</li>
+<li><strong>コンポーネントの削除</strong>：<code translate="no">indexNode</code> が削除され、統合されました</li>
 </ul>
-<p>このアップグレードプロセスにより、新アーキテクチャへの適切な移行が保証される。アーキテクチャ変更の詳細については、<a href="/docs/ja/v2.6.x/architecture_overview.md">Milvusアーキテクチャ概要を</a>ご参照ください。</p>
+<p>このアップグレードプロセスにより、新しいアーキテクチャへの適切な移行が保証されます。アーキテクチャの変更に関する詳細については、『<a href="/docs/ja/v2.6.x/architecture_overview.md">Milvus アーキテクチャ概要</a>』を参照してください。</p>
 <h3 id="Requirements" class="common-anchor-header">要件<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -76,21 +76,22 @@ title: HelmチャートによるMilvusスタンドアロンのアップグレー
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><strong>システム要件</strong></p>
+    </button></h3><p><strong>システム要件：</strong></p>
 <ul>
-<li>Helmバージョン &gt;= 3.14.0</li>
-<li>Kubernetesバージョン &gt;= 1.20.0</li>
+<li>Helm バージョン &gt;= 3.14.0</li>
+<li>Kubernetes バージョン &gt;= 1.20.0</li>
 <li>Helmチャート経由でデプロイされたMilvusスタンドアロン</li>
 </ul>
-<p><strong>互換性の要件</strong></p>
+<p><strong>互換性に関する要件:</strong></p>
 <ul>
-<li>Milvus v2.6.0-rc1はv2.6.17と<strong>互換性がありません</strong>。リリース候補からの直接アップグレードはサポートされていません。</li>
-<li>現在v2.6.0-rc1を使用しており、データを保持する必要がある場合は、<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">このコミュニティガイドを</a>参照して移行を支援してください。</li>
-<li>v2.6.17にアップグレードする前に、v2.5.16以降にアップグレードする<strong>必要があります</strong>。</li>
+<li>Milvus v2.6.0-rc1 は v2.6.17<strong>と互換性がありません</strong>。リリース候補版からの直接アップグレードはサポートされていません。</li>
+<li>現在 v2.6.0-rc1 を実行しており、データを保持する必要がある場合は、移行の支援について<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">こちらのコミュニティガイド</a>を参照してください。</li>
+<li>v2.6.17 にアップグレードする前に、v2.5.16 以降にアップグレード<strong>する必要があります</strong>。</li>
 </ul>
-<p><strong>メッセージキューの制限</strong>Milvus v2.6.17にアップグレードする場合、現在選択しているメッセージキューを維持する必要があります。アップグレード中に異なるメッセージキューシステムを切り替えることはサポートされていません。メッセージキューシステムの変更は将来のバージョンでサポートされる予定です。</p>
+<p><strong>メッセージキューの制限事項</strong>:Milvus v2.6.17 へのアップグレード時には、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステムへの切り替えはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。</p>
 <div class="alert note">
-Milvus Helmチャート・バージョン4.2.21以降、依存関係としてpulsar-v3.xチャートを導入しました。後方互換性のため、Helmをv3.14またはそれ以降のバージョンにアップグレードし、<code translate="no">helm upgrade</code> を使用する際は必ず<code translate="no">--reset-then-reuse-values</code> オプションを追加してください。</div>
+Milvus Helmチャートバージョン4.2.21以降、依存関係としてpulsar-v3.xチャートを導入しました。下位互換性を確保するため、Helmをv3.14以降のバージョンにアップグレードし、<code translate="no">helm upgrade</code> を使用する際は必ず<code translate="no">--reset-then-reuse-values</code> オプションを追加してください。
+</div>
 <h2 id="Upgrade-process" class="common-anchor-header">アップグレード手順<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -125,13 +126,13 @@ Milvus Helmチャート・バージョン4.2.21以降、依存関係としてpul
 <pre><code translate="no" class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm
 helm repo update zilliztech
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note">
-Milvus Helm Chartsレポ（<code translate="no">https://milvus-io.github.io/milvus-helm/</code> ）はアーカイブされました。チャートバージョン4.0.31以降には新しいレポ<code translate="no">https://zilliztech.github.io/milvus-helm/</code> 。</div>
-<p>HelmチャートバージョンとMilvusバージョンの互換性を確認する：</p>
+<div class="alert note"><code translate="no">https://milvus-io.github.io/milvus-helm/</code> にある Milvus Helm Charts リポジトリはアーカイブされました。チャートバージョン 4.0.31 以降については、新しいリポジトリ<code translate="no">https://zilliztech.github.io/milvus-helm/</code> をご利用ください。
+</div>
+<p>HelmチャートのバージョンとMilvusのバージョンの互換性を確認するには：</p>
 <pre><code translate="no" class="language-bash">helm search repo zilliztech/milvus --versions
 <button class="copy-code-btn"></button></code></pre>
-<p>本ガイドは最新版をインストールしていることを前提としています。特定のバージョンをインストールする必要がある場合は、<code translate="no">--version</code> パラメータを適宜指定してください。</p>
-<h3 id="Step-2-Upgrade-to-v2516" class="common-anchor-header">ステップ2: v2.5.16へのアップグレード<button data-href="#Step-2-Upgrade-to-v2516" class="anchor-icon" translate="no">
+<p>このガイドでは、最新バージョンをインストールすることを前提としています。特定のバージョンをインストールする必要がある場合は、<code translate="no">--version</code> パラメータを適宜指定してください。</p>
+<h3 id="Step-2-Upgrade-to-v2516" class="common-anchor-header">ステップ 2: v2.5.16 へのアップグレード<button data-href="#Step-2-Upgrade-to-v2516" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -147,19 +148,19 @@ Milvus Helm Chartsレポ（<code translate="no">https://milvus-io.github.io/milv
         ></path>
       </svg>
     </button></h3><div class="alert-note">
-<p>スタンドアロンで既にv2.5.16以上を実行している場合は、この手順をスキップしてください。</p>
+<p>スタンドアロン環境がすでに v2.5.16 以降を実行している場合は、この手順をスキップしてください。</p>
 </div>
-<p>Milvusスタンドアロンをv2.5.16にアップグレードします：</p>
+<p>Milvusスタンドアロンをv2.5.16にアップグレードします:</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.5.16&quot;</span> \
   --reset-then-reuse-values \
   --version=4.2.58
 <button class="copy-code-btn"></button></code></pre>
-<p>アップグレードが完了するまで待ちます：</p>
+<p>アップグレードが完了するまで待ちます:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Upgrade-to-v2617" class="common-anchor-header">ステップ3: v2.6.17へのアップグレード<button data-href="#Step-3-Upgrade-to-v2617" class="anchor-icon" translate="no">
+<h3 id="Step-3-Upgrade-to-v2617" class="common-anchor-header">ステップ 3: v2.6.17 へのアップグレード<button data-href="#Step-3-Upgrade-to-v2617" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -174,7 +175,7 @@ kubectl get pods
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>v2.5.16が正常に実行されたら、v2.6.17にアップグレードします：</p>
+    </button></h3><p>v2.5.16が正常に動作したら、v2.6.17にアップグレードします：</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.6.17&quot;</span> \
   --reset-then-reuse-values \
@@ -195,8 +196,8 @@ kubectl get pods
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>スタンドアロンで新しいバージョンが動作していることを確認します：</p>
+    </button></h2><p>スタンドアロン環境が新しいバージョンで実行されていることを確認してください:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check pod status</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p>その他のサポートについては、<a href="https://milvus.io/docs">Milvusのドキュメント</a>または<a href="https://github.com/milvus-io/milvus/discussions">コミュニティフォーラムを</a>参照してください。</p>
+<p>さらにサポートが必要な場合は、<a href="https://milvus.io/docs">Milvusのドキュメント</a>または<a href="https://github.com/milvus-io/milvus/discussions">コミュニティフォーラム</a>をご参照ください。</p>

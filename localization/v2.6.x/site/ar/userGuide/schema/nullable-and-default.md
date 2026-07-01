@@ -1,15 +1,15 @@
 ---
 id: nullable-and-default.md
-title: قابل للإلغاء والافتراضي
+title: القيم القابلة للإلغاء والقيم الافتراضية
 summary: >-
-  يسمح لك Milvus بتعيين السمة القابلة للإلغاء والقيم الافتراضية للحقول القياسية،
-  باستثناء الحقل الأساسي. بالنسبة للحقول التي تم وضع علامة nullable=صحيح، يمكنك
-  تخطي الحقل عند إدراج البيانات، أو تعيينه مباشرة إلى قيمة فارغة، وسيتعامل
-  النظام معه على أنه فارغ دون التسبب في حدوث خطأ. عندما يكون للحقل قيمة
-  افتراضية، سيقوم النظام تلقائيًا بتطبيق هذه القيمة إذا لم يتم تحديد بيانات
-  للحقل أثناء الإدراج.
+  يتيح لك Milvus تعيين السمة «nullable» والقيم الافتراضية للحقول القياسية،
+  باستثناء الحقل الأساسي. بالنسبة للحقول التي تم وضع علامة nullable=True عليها،
+  يمكنك تخطي الحقل عند إدراج البيانات، أو تعيينه مباشرةً إلى قيمة فارغة،
+  وسيتعامل النظام معه على أنه فارغ دون التسبب في حدوث خطأ. وعندما يكون للحقل
+  قيمة افتراضية، سيقوم النظام تلقائيًا بتطبيق هذه القيمة إذا لم يتم تحديد أي
+  بيانات للحقل أثناء الإدراج.
 ---
-<h1 id="Nullable--Default" class="common-anchor-header">قابل للإلغاء والافتراضي<button data-href="#Nullable--Default" class="anchor-icon" translate="no">
+<h1 id="Nullable--Default" class="common-anchor-header">القيم القابلة للإلغاء والقيم الافتراضية<button data-href="#Nullable--Default" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,9 +24,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يسمح لك Milvus بتعيين السمة <code translate="no">nullable</code> والقيم الافتراضية للحقول القياسية، باستثناء الحقل الأساسي. بالنسبة للحقول التي تم وضع علامة <code translate="no">nullable=True</code> ، يمكنك تخطي الحقل عند إدراج البيانات، أو تعيينه مباشرة إلى قيمة فارغة، وسيتعامل النظام معه على أنه فارغ دون التسبب في حدوث خطأ. عندما يكون للحقل قيمة افتراضية، سيقوم النظام تلقائيًا بتطبيق هذه القيمة إذا لم يتم تحديد بيانات للحقل أثناء الإدراج.</p>
-<p>تعمل القيمة الافتراضية والسمات القابلة للإلغاء على تبسيط عملية ترحيل البيانات من أنظمة قواعد البيانات الأخرى إلى ميلفوس من خلال السماح بمعالجة مجموعات البيانات ذات القيم الفارغة والحفاظ على إعدادات القيمة الافتراضية. عند إنشاء مجموعة، يمكنك أيضًا تمكين القيم القابلة للإلغاء أو تعيين قيم افتراضية للحقول التي قد تكون القيم فيها غير مؤكدة.</p>
-<h2 id="Limits" class="common-anchor-header">الحدود<button data-href="#Limits" class="anchor-icon" translate="no">
+    </button></h1><p>يتيح لك Milvus تعيين السمة " <code translate="no">nullable</code> " والقيم الافتراضية للحقول العددية، باستثناء الحقل الأساسي. بالنسبة للحقول التي تم وضع علامة " <code translate="no">nullable=True</code>" عليها، يمكنك تخطي الحقل عند إدخال البيانات، أو تعيينه مباشرةً إلى قيمة فارغة، وسيتعامل النظام معه على أنه فارغ دون التسبب في أي خطأ. عندما يكون للحقل قيمة افتراضية، سيقوم النظام تلقائيًا بتطبيق هذه القيمة إذا لم يتم تحديد أي بيانات للحقل أثناء الإدخال.</p>
+<p>تعمل القيمة الافتراضية وسمات "nullable" على تبسيط عملية ترحيل البيانات من أنظمة قواعد البيانات الأخرى إلى Milvus من خلال السماح بمعالجة مجموعات البيانات التي تحتوي على قيم "null" والحفاظ على إعدادات القيم الافتراضية. عند إنشاء مجموعة، يمكنك أيضًا تمكين "nullable" أو تعيين قيم افتراضية للحقول التي قد تكون قيمها غير مؤكدة.</p>
+<h2 id="Limits" class="common-anchor-header">القيود<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,14 +42,14 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>تدعم الحقول العددية فقط، باستثناء الحقل الأساسي، القيم الافتراضية والسمة القابلة للإلغاء.</p></li>
+<li><p>تدعم القيم الافتراضية وسمة «nullable» الحقول العددية فقط، باستثناء الحقل الأساسي.</p></li>
 <li><p>لا تدعم حقول JSON و Array القيم الافتراضية.</p></li>
-<li><p>يمكن تكوين القيم الافتراضية أو السمة القابلة للإلغاء فقط أثناء إنشاء المجموعة ولا يمكن تعديلها بعد ذلك.</p></li>
-<li><p>لا يمكن استخدام الحقول التي تم تمييزها على أنها قابلة للإلغاء كمفاتيح تقسيم. لمزيد من المعلومات حول مفاتيح التقسيم، راجع <a href="/docs/ar/v2.6.x/use-partition-key.md">استخدام مفتاح التقسيم</a>.</p></li>
-<li><p>عند إنشاء فهرس على حقل قياسي مع تمكين السمة القابلة للفراغ، سيتم استبعاد القيم الفارغة من الفهرس.</p></li>
-<li><p><strong>حقول JSON و ARRAY</strong>: عند استخدام المشغلين <code translate="no">IS NULL</code> أو <code translate="no">IS NOT NULL</code> للتصفية على حقول JSON أو ARRAY، يعمل هذان المشغلان على مستوى العمود، مما يشير إلى أنهما يقيمان فقط ما إذا كان كائن JSON أو المصفوفة بأكملها فارغة. على سبيل المثال، إذا كان أحد المفاتيح داخل كائن JSON فارغًا، فلن يتعرف عليه عامل التصفية <code translate="no">IS NULL</code>. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.6.x/basic-operators.md">المعاملات الأساسية</a>.</p></li>
+<li><p>لا يمكن تكوين القيم الافتراضية أو السمة القابلة للفراغ إلا أثناء إنشاء المجموعة ولا يمكن تعديلها بعد ذلك.</p></li>
+<li><p>لا يمكن استخدام الحقول التي تم وضع علامة "nullable" عليها كمفاتيح تقسيم. لمزيد من المعلومات حول مفاتيح التقسيم، راجع <a href="/docs/ar/v2.6.x/use-partition-key.md">استخدام مفتاح التقسيم</a>.</p></li>
+<li><p>عند إنشاء فهرس لحقل عددي مع تمكين السمة "nullable"، سيتم استبعاد القيم الفارغة من الفهرس.</p></li>
+<li><p><strong>حقول JSON وARRAY</strong>: عند استخدام عوامل التشغيل <code translate="no">IS NULL</code> أو <code translate="no">IS NOT NULL</code> لتصفية حقول JSON أو ARRAY، تعمل هذه العوامل على مستوى العمود، مما يشير إلى أنها تقيّم فقط ما إذا كان كائن JSON أو المصفوفة بأكملها فارغة. على سبيل المثال، إذا كان أحد المفاتيح داخل كائن JSON فارغًا، فلن يتعرف عليه عامل التصفية <code translate="no">IS NULL</code>. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.6.x/basic-operators.md">العوامل الأساسية</a>.</p></li>
 </ul>
-<h2 id="Nullable-attribute" class="common-anchor-header">سمة لاغية<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
+<h2 id="Nullable-attribute" class="common-anchor-header">السمة Nullable<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -64,8 +64,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تسمح لك السمة <code translate="no">nullable</code> بتخزين قيم فارغة في مجموعة، مما يوفر مرونة عند التعامل مع بيانات غير معروفة.</p>
-<h3 id="Set-the-nullable-attribute" class="common-anchor-header">تعيين السمة لاغية<button data-href="#Set-the-nullable-attribute" class="anchor-icon" translate="no">
+    </button></h2><p>تتيح لك السمة " <code translate="no">nullable</code> " تخزين القيم الفارغة في مجموعة، مما يوفر مرونة عند التعامل مع البيانات غير المعروفة.</p>
+<h3 id="Set-the-nullable-attribute" class="common-anchor-header">تعيين السمة nullable<button data-href="#Set-the-nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -80,9 +80,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>عند إنشاء مجموعة، استخدم <code translate="no">nullable=True</code> لتعريف الحقول القابلة للفراغ (الإعدادات الافتراضية إلى <code translate="no">False</code>). ينشئ المثال التالي مجموعة باسم <code translate="no">my_collection</code> ويضبط الحقل <code translate="no">age</code> على أنه قابل للإلغاء:</p>
+    </button></h3><p>عند إنشاء مجموعة، استخدم <code translate="no">nullable=True</code> لتعريف الحقول القابلة للقيمة null (القيمة الافتراضية هي <code translate="no">False</code>). ينشئ المثال التالي مجموعة باسم <code translate="no">my_collection</code> ويُعيّن الحقل <code translate="no">age</code> على أنه قابل للقيمة null:</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>)
@@ -298,9 +303,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>عندما تقوم بإدراج بيانات في حقل قابل للإلغاء، قم بإدراج بيانات لاغية أو احذف هذا الحقل مباشرةً:</p>
+    </button></h3><p>عند إدراج البيانات في حقل قابل للقيمة الفارغة، أدخل القيمة الفارغة أو تجاهل هذا الحقل مباشرةً:</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data = [
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>], <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">30</span>},
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>], <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-literal">None</span>},
@@ -370,7 +380,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Search-and-query-with-null-values" class="common-anchor-header">البحث والاستعلام بقيم فارغة<button data-href="#Search-and-query-with-null-values" class="anchor-icon" translate="no">
+<h3 id="Search-and-query-with-null-values" class="common-anchor-header">البحث والاستعلام باستخدام القيم الفارغة<button data-href="#Search-and-query-with-null-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -385,9 +395,14 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>عند استخدام الطريقة <code translate="no">search</code> ، إذا كان الحقل يحتوي على قيم <code translate="no">null</code> ، ستُرجع نتيجة البحث الحقل على أنه فارغ:</p>
+    </button></h3><p>عند استخدام طريقة <code translate="no">search</code> ، إذا كان الحقل يحتوي على قيم " <code translate="no">null</code> "، فستُرجع نتيجة البحث الحقل بقيمة null:</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.128</span>]],
@@ -471,9 +486,14 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">#{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;distance&quot;:0.16000001,&quot;id&quot;:1},{&quot;age&quot;:null,&quot;distance&quot;:0.28999996,&quot;id&quot;:2}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>عند استخدام الأسلوب <code translate="no">query</code> للتصفية العددية، تكون نتائج التصفية للقيم الفارغة كلها خاطئة، مما يشير إلى أنه لن يتم تحديدها.</p>
+<p>عند استخدام طريقة ` <code translate="no">query</code> ` للتصفية القيمية، تكون نتائج التصفية للقيم `null` كلها `false`، مما يشير إلى أنها لن يتم اختيارها.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Reviewing previously inserted data:</span>
 <span class="hljs-comment"># {&quot;id&quot;: 1, &quot;vector&quot;: [0.1, 0.2, ..., 0.128], &quot;age&quot;: 30}</span>
 <span class="hljs-comment"># {&quot;id&quot;: 2, &quot;vector&quot;: [0.2, 0.3, ..., 0.129], &quot;age&quot;: None}</span>
@@ -535,12 +555,17 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;id&quot;:1}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>لإرجاع كيانات بقيم <code translate="no">null</code> ، قم بالاستعلام بدون أي شرط تصفية عددية على النحو التالي:</p>
+<p>لإرجاع الكيانات ذات القيم " <code translate="no">null</code> "، قم بإجراء الاستعلام دون أي شرط تصفية قياسي كما يلي:</p>
 <div class="alert note">
-<p>يقوم الأسلوب <code translate="no">query</code> ، عند استخدامه بدون أي شروط تصفية، باسترجاع جميع الكيانات في المجموعة، بما في ذلك الكيانات ذات القيم الفارغة. لتقييد عدد الكيانات التي تم إرجاعها، يجب تحديد المعلمة <code translate="no">limit</code>.</p>
+<p>تسترد طريقة ` <code translate="no">query</code> `، عند استخدامها دون أي شروط تصفية، جميع الكيانات الموجودة في المجموعة، بما في ذلك تلك التي تحتوي على قيم فارغة. لتقييد عدد الكيانات التي يتم إرجاعها، يجب تحديد المعلمة ` <code translate="no">limit</code> `.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">null_results = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,     <span class="hljs-comment"># Query without any filtering condition</span>
@@ -607,7 +632,7 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>القيم الافتراضية هي قيم محددة مسبقًا للحقول العددية. إذا لم تقم بتوفير قيمة لحقل بقيم افتراضية أثناء الإدراج، يستخدم النظام تلقائيًا القيمة الافتراضية.</p>
+    </button></h2><p>القيم الافتراضية هي قيم محددة مسبقًا تُعيَّن للحقول العددية. إذا لم تحدد قيمة لحقل له قيمة افتراضية أثناء الإدراج، فسيستخدم النظام القيمة الافتراضية تلقائيًا.</p>
 <h3 id="Set-default-values" class="common-anchor-header">تعيين القيم الافتراضية<button data-href="#Set-default-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -623,9 +648,14 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>عند إنشاء مجموعة، استخدم المعلمة <code translate="no">default_value</code> لتحديد القيمة الافتراضية للحقل. يوضح المثال التالي كيفية تعيين القيمة الافتراضية <code translate="no">age</code> إلى <code translate="no">18</code> و <code translate="no">status</code> إلى <code translate="no">&quot;active&quot;</code>:</p>
+    </button></h3><p>عند إنشاء مجموعة، استخدم المعلمة <code translate="no">default_value</code> لتعريف القيمة الافتراضية لحقل ما. يوضح المثال التالي كيفية تعيين القيمة الافتراضية لـ <code translate="no">age</code> إلى <code translate="no">18</code> و <code translate="no">status</code> إلى <code translate="no">&quot;active&quot;</code>:</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">schema = client.create_schema(
     auto_id=<span class="hljs-literal">False</span>,
     enable_dynamic_schema=<span class="hljs-literal">True</span>,
@@ -850,9 +880,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>عند إدراج البيانات، إذا حذفت الحقول ذات القيمة الافتراضية أو عيّنت قيمتها إلى لا شيء، يستخدم النظام القيمة الافتراضية:</p>
+    </button></h3><p>عند إدراج البيانات، إذا حذفت الحقول التي لها قيمة افتراضية أو قمت بتعيين قيمتها إلى null، فسيستخدم النظام القيمة الافتراضية:</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data = [
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, ..., <span class="hljs-number">0.128</span>], <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">30</span>, <span class="hljs-string">&quot;status&quot;</span>: <span class="hljs-string">&quot;premium&quot;</span>},
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, ..., <span class="hljs-number">0.129</span>]},  <span class="hljs-comment"># `age` and `status` use default values</span>
@@ -930,9 +965,9 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>لمزيد من المعلومات حول كيفية تفعيل إعدادات القيمة الفارغة والافتراضية، راجع <a href="/docs/ar/v2.6.x/nullable-and-default.md#Applicable-rules">القواعد القابلة للتطبيق</a>.</p>
+<p>لمزيد من المعلومات حول كيفية تفعيل إعدادات القيم القابلة للفراغ والقيم الافتراضية، راجع <a href="/docs/ar/v2.6.x/nullable-and-default.md#Applicable-rules">القواعد المطبقة</a>.</p>
 </div>
-<h3 id="Search-and-query-with-default-values" class="common-anchor-header">البحث والاستعلام بالقيم الافتراضية<button data-href="#Search-and-query-with-default-values" class="anchor-icon" translate="no">
+<h3 id="Search-and-query-with-default-values" class="common-anchor-header">البحث والاستعلام باستخدام القيم الافتراضية<button data-href="#Search-and-query-with-default-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -947,10 +982,15 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يتم التعامل مع الكيانات التي تحتوي على قيم افتراضية مثل أي كيانات أخرى أثناء عمليات البحث المتجه والتصفية القياسية. يمكنك تضمين القيم الافتراضية كجزء من عمليات <code translate="no">search</code> و <code translate="no">query</code> الخاصة بك.</p>
-<p>على سبيل المثال، في عملية <code translate="no">search</code> ، سيتم تضمين الكيانات التي تحتوي على <code translate="no">age</code> على القيمة الافتراضية <code translate="no">18</code> في النتائج:</p>
+    </button></h3><p>يتم التعامل مع الكيانات التي تحتوي على قيم افتراضية بنفس الطريقة التي يتم التعامل بها مع أي كيانات أخرى أثناء عمليات البحث المتجهية والتصفية القياسية. يمكنك تضمين القيم الافتراضية كجزء من عمليات " <code translate="no">search</code> " و" <code translate="no">query</code> ".</p>
+<p>على سبيل المثال، في عملية " <code translate="no">search</code> "، سيتم تضمين الكيانات التي تم تعيين " <code translate="no">age</code> " لها على القيمة الافتراضية " <code translate="no">18</code> " في النتائج:</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.5</span>]],
@@ -1041,9 +1081,14 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:18,&quot;distance&quot;:0.050000004,&quot;id&quot;:2,&quot;status&quot;:&quot;active&quot;},{&quot;age&quot;:18,&quot;distance&quot;:0.45000002,&quot;id&quot;:4,&quot;status&quot;:&quot;inactive&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>في عملية <code translate="no">query</code> ، يمكنك المطابقة أو التصفية حسب القيم الافتراضية مباشرةً:</p>
+<p>في عملية " <code translate="no">query</code> "، يمكنك المطابقة أو التصفية حسب القيم الافتراضية مباشرةً:</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query all entities where `age` equals the default value (18)</span>
 default_age_results = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -1161,54 +1206,54 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يلخّص الجدول التالي سلوك الأعمدة القابلة للإلغاء والقيم الافتراضية ضمن مجموعات تكوين مختلفة. تحدد هذه القواعد كيفية تعامل Milvus مع البيانات عند محاولة إدراج قيم فارغة أو إذا لم يتم توفير قيم الحقل.</p>
+    </button></h2><p>يلخص الجدول التالي سلوك الأعمدة القابلة للقيمة الفارغة والقيم الافتراضية في ظل تركيبات التكوين المختلفة. تحدد هذه القواعد كيفية تعامل Milvus مع البيانات عند محاولة إدراج قيم فارغة أو في حالة عدم توفير قيم الحقول.</p>
 <table>
    <tr>
-     <th><p>قابل للفراغ</p></th>
+     <th><p>قابلة للفراغ</p></th>
      <th><p>القيمة الافتراضية</p></th>
      <th><p>نوع القيمة الافتراضية</p></th>
-     <th><p>إدخال المستخدم</p></th>
+     <th><p>مدخلات المستخدم</p></th>
      <th><p>النتيجة</p></th>
      <th><p>مثال</p></th>
    </tr>
    <tr>
      <td><p>✅</p></td>
      <td><p>✅</p></td>
-     <td><p>غير فارغة</p></td>
-     <td><p>لا شيء/لاغية</p></td>
+     <td><p>غير فارغ</p></td>
+     <td><p>لا شيء/فارغ</p></td>
      <td><p>يستخدم القيمة الافتراضية</p></td>
-     <td><p>الحقل: <code translate="no">age</code> القيمة الافتراضية: <code translate="no">18</code></p><p>إدخال المستخدم: فارغة</p><p>النتيجة: يتم تخزينها كـ <code translate="no">18</code></p></td>
+     <td><p>الحقل: <code translate="no">age</code> القيمة الافتراضية: <code translate="no">18</code></p><p>مدخلات المستخدم: فارغ</p><p>النتيجة: يتم تخزينها على النحو التالي <code translate="no">18</code></p></td>
    </tr>
    <tr>
      <td><p>✅</p></td>
      <td><p>❌</p></td>
      <td><p>-</p></td>
-     <td><p>لا شيء / فارغ</p></td>
-     <td><p>مخزنة على أنها لاغية</p></td>
-     <td><p>الحقل: <code translate="no">middle_name</code> القيمة الافتراضية: -</p><p>إدخال المستخدم: فارغ</p><p>النتيجة: مخزنة كقيمة لاغية</p></td>
+     <td><p>لا شيء/فارغ</p></td>
+     <td><p>يتم تخزينه كـ null</p></td>
+     <td><p>الحقل: <code translate="no">middle_name</code> القيمة الافتراضية: -</p><p>مدخلات المستخدم: null</p><p>النتيجة: يتم تخزينه كـ null</p></td>
    </tr>
    <tr>
      <td><p>❌</p></td>
      <td><p>✅</p></td>
-     <td><p>غير فارغة</p></td>
-     <td><p>لا شيء/لاغية</p></td>
+     <td><p>غير فارغ</p></td>
+     <td><p>لا شيء/null</p></td>
      <td><p>يستخدم القيمة الافتراضية</p></td>
-     <td><p>الحقل: <code translate="no">status</code> القيمة الافتراضية: <code translate="no">"active"</code></p><p>إدخال المستخدم: فارغة</p><p>النتيجة: مخزنة كـ <code translate="no">"active"</code></p></td>
+     <td><p>الحقل: <code translate="no">status</code> القيمة الافتراضية: <code translate="no">"active"</code></p><p>مدخلات المستخدم: فارغ</p><p>النتيجة: يتم تخزينها على النحو التالي <code translate="no">"active"</code></p></td>
    </tr>
    <tr>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>-</p></td>
-     <td><p>لا شيء / فارغ</p></td>
-     <td><p>يلقي خطأ</p></td>
-     <td><p>الحقل: <code translate="no">email</code> القيمة الافتراضية: -</p><p>إدخال المستخدم: فارغ</p><p>النتيجة: العملية مرفوضة، يقوم النظام بإلقاء خطأ</p></td>
+     <td><p>لا شيء/فارغ</p></td>
+     <td><p>يُحدث خطأ</p></td>
+     <td><p>الحقل: <code translate="no">email</code> القيمة الافتراضية: -</p><p>مدخلات المستخدم: null</p><p>النتيجة: تم رفض العملية، النظام يطلق خطأً</p></td>
    </tr>
    <tr>
      <td><p>❌</p></td>
      <td><p>✅</p></td>
-     <td><p>فارغة</p></td>
-     <td><p>لا شيء / لاغية</p></td>
-     <td><p>يلقي خطأ</p></td>
-     <td><p>الحقل: <code translate="no">username</code> القيمة الافتراضية: فارغ</p><p>إدخال المستخدم: فارغ</p><p>النتيجة: العملية مرفوضة، يقوم النظام بإلقاء خطأ</p></td>
+     <td><p>Null</p></td>
+     <td><p>لا شيء/فارغ</p></td>
+     <td><p>يُظهر خطأً</p></td>
+     <td><p>الحقل: <code translate="no">username</code> القيمة الافتراضية: null</p><p>مدخلات المستخدم: null</p><p>النتيجة: تم رفض العملية، ويقوم النظام بإصدار خطأ</p></td>
    </tr>
 </table>

@@ -1,7 +1,7 @@
 ---
 id: resource_group.md
 related_key: Manage Resource Groups
-summary: 學習如何管理資源群組。
+summary: 瞭解如何管理資源群組。
 title: 管理資源群組
 ---
 <h1 id="Manage-Resource-Groups" class="common-anchor-header">管理資源群組<button data-href="#Manage-Resource-Groups" class="anchor-icon" translate="no">
@@ -19,8 +19,8 @@ title: 管理資源群組
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在 Milvus 中，您可以使用資源群組，將某些查詢節點與其他節點實體隔離。本指南將教您如何建立和管理自訂資源群組，以及在資源群組之間轉移節點。</p>
-<h2 id="What-is-a-resource-group" class="common-anchor-header">什麼是資源群組<button data-href="#What-is-a-resource-group" class="anchor-icon" translate="no">
+    </button></h1><p>在 Milvus 中，您可以透過資源群組將某些查詢節點與其他節點進行物理隔離。本指南將引導您了解如何建立和管理自訂資源群組，以及如何在資源群組之間移轉節點。</p>
+<h2 id="What-is-a-resource-group" class="common-anchor-header">何謂資源群組<button data-href="#What-is-a-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,9 +35,9 @@ title: 管理資源群組
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>一个资源组可以容纳 Milvus 集群中的几个或所有查询节点。您可以根据对您最有意义的方式来决定如何在资源组之间分配查询节点。例如，在多集合場景中，您可以為每個資源群組分配適當數量的查詢節點，並將集合載入不同的資源群組，以便每個集合中的作業與其他集合中的作業在物理上獨立。</p>
-<p>請注意，一個 Milvus 實例會維護一個預設的資源群組，以在啟動時存放所有查詢節點，並將其命名為<strong>__default_resource_group</strong> 。</p>
-<p>從版本 2.4.1 開始，Milvus 提供了宣告式的資源群組 API，而舊的資源群組 API 已經被廢棄。新的宣告式 API 能讓使用者達到idempotency，更容易在雲原生環境中進行二次開發。</p>
+    </button></h2><p>一個資源群組可以包含 Milvus 叢集中的部分或所有查詢節點。 您可以根據自身需求，決定如何將查詢節點分配至各資源群組。例如，在多集合的場景中，您可以將適當數量的查詢節點分配至每個資源群組，並將集合載入至不同的資源群組，使每個集合內的操作在物理上獨立於其他集合的操作。</p>
+<p>請注意，Milvus 實例在啟動時會維護一個預設資源群組來容納所有查詢節點，並將其命名為<strong>__default_resource_group</strong>。</p>
+<p>自 2.4.1 版本起，Milvus 提供宣告式資源群組 API，而舊版資源群組 API 已宣告為過時。新的宣告式 API 讓使用者能夠實現冪等性，並更輕鬆地在雲原生環境中進行次級開發。</p>
 <h2 id="Concepts-of-resource-group" class="common-anchor-header">資源群組的概念<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,7 +53,7 @@ title: 管理資源群組
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>資源群組由資源群組 config 描述：</p>
+    </button></h2><p>資源群組由資源群組配置來定義：</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;requests&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;nodeNum&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;limits&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;nodeNum&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
@@ -62,19 +62,19 @@ title: 管理資源群組
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><strong>requests 屬性</strong>指定資源群組必須符合的條件。</li>
+<li><strong>requests</strong>屬性指定資源群組必須滿足的條件。</li>
 <li><strong>limits</strong>屬性指定資源群組的最大限制。</li>
-<li><strong>transfer_from</strong>和<strong>transfer_to 屬性</strong>分別描述資源群組最好從哪些資源群組取得資源，以及將資源轉移到哪些資源群組。</li>
+<li>`<strong>transfer_from</strong>` 和<strong>`transfer_to</strong>` 屬性分別描述該資源群組應優先從哪些資源群組獲取資源，以及應將資源轉移至哪些資源群組。</li>
 </ul>
-<p>一旦資源群組的組態改變，Milvus 會根據新的組態儘可能調整目前的查詢節點資源，確保所有資源群組最終都符合下列條件：</p>
+<p>一旦資源群組的配置發生變更，Milvus 將根據新配置盡可能調整當前的查詢節點資源，以確保所有資源群組最終皆符合以下條件：</p>
 <p><code translate="no">.requests.nodeNum &lt; nodeNumOfResourceGroup &lt; .limits.nodeNum.</code></p>
-<p>下列情況除外：</p>
+<p>但以下情況除外：</p>
 <ul>
-<li>當 Milvus 集群中的 QueryNodes 數量不足時，即<code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code> ，總會有資源群組沒有足夠的 QueryNodes。</li>
-<li>當 Milvus 叢集中的 QueryNodes 數量過多時，即<code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code> ，多餘的 QueryNodes 總會先被放置在<strong>__default_resource_group</strong>中。</li>
+<li>當 Milvus 叢集中的 QueryNodes 數量不足時，即<code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code> ，總會存在資源群組因 QueryNodes 數量不足而無法滿足需求。</li>
+<li>當 Milvus 叢集中的查詢節點數量過多時，即<code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code> ，多餘的查詢節點將始終優先分配至<strong>__default_resource_group</strong>。</li>
 </ul>
-<p>當然，如果群集中的 QueryNodes 數量發生變化，Milvus 會不斷嘗試調整以滿足最終條件。因此，您可以先套用資源群組組態變更，然後再執行 QueryNode 擴充。</p>
-<h2 id="Use-declarative-api-to-manage-resource-group" class="common-anchor-header">使用宣告式 api 管理資源群組<button data-href="#Use-declarative-api-to-manage-resource-group" class="anchor-icon" translate="no">
+<p>當然，若叢集中的 QueryNodes 數量發生變化，Milvus 會持續嘗試進行調整以符合最終條件。因此，您可以先套用資源群組的配置變更，然後再執行 QueryNode 的擴展。</p>
+<h2 id="Use-declarative-api-to-manage-resource-group" class="common-anchor-header">使用宣告式 API 管理資源群組<button data-href="#Use-declarative-api-to-manage-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -90,11 +90,11 @@ title: 管理資源群組
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>本頁面的所有程式碼範例都在 PyMilvus 2.6.14 中。在執行它們之前，請先升級您的 PyMilvus 安裝。</p>
+<p>本頁所有程式碼範例均基於 PyMilvus 2.6.14。執行前請先升級您的 PyMilvus 安裝版本。</p>
 </div>
 <ol>
-<li><p>建立資源群組</p>
-<p>要建立一個資源群組，請在連線到 Milvus 實例後執行下列步驟。以下片段假設<code translate="no">default</code> 是您 Milvus 連線的別名。</p>
+<li><p>建立資源群組。</p>
+<p>要建立資源群組，請在連線至 Milvus 實例後執行以下指令。以下程式碼片段假設<code translate="no">default</code> 是您的 Milvus 連線別名。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pymilvus
 
 <span class="hljs-comment"># A resource group name should be a string of 1 to 255 characters, starting with a letter or an underscore (_) and containing only numbers, letters, and underscores (_).</span>
@@ -112,15 +112,15 @@ node_num = <span class="hljs-number">0</span>
     <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Failed to create the resource group.&quot;</span>)
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>列出資源群組。</p>
-<p>建立資源群組後，您可以在資源群組清單中看到它。</p>
-<p>要查看 Milvus 实例中的资源组列表，请执行以下操作：</p>
+<p>建立資源群組後，您即可在資源群組清單中看到該群組。</p>
+<p>若要檢視 Milvus 實例中的資源群組清單，請依下列步驟操作：</p>
 <pre><code translate="no" class="language-python">rgs = milvus_client.list_resource_groups()
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Resource group list: <span class="hljs-subst">{rgs}</span>&quot;</span>)
 
 <span class="hljs-comment"># Resource group list: [&#x27;__default_resource_group&#x27;, &#x27;rg&#x27;]</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>描述資源群組。</p>
-<p>您可以讓 Milvus 以下列方式描述資源群組：</p>
+<p>您可以透過以下方式讓 Milvus 描述特定資源群組：</p>
 <pre><code translate="no" class="language-python">info = milvus_client.describe_resource_group(name)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Resource group description: <span class="hljs-subst">{info}</span>&quot;</span>)
 
@@ -135,8 +135,9 @@ node_num = <span class="hljs-number">0</span>
 <span class="hljs-comment">#   &lt;config:{}&gt;,            // resource group config</span>
 <span class="hljs-comment">#   &lt;nodes:[]&gt;              // node detail info</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>在資源群組之間轉移節點。</p>
-<p>您可能會注意到所描述的資源群組還沒有任何查詢節點。從預設資源群組移動一些節點到您建立的資源群組，如下所示： 假設目前群組的<strong>__default_resource_group</strong>中有 1 個 QueryNodes，而我們想要移動一個節點到建立的<strong>rg</strong>。<code translate="no">update_resource_groups</code> 確保多重組態變更的原子性，因此 Milvus 看不到任何中間狀態。</p>
+<li><p>在資源群組之間移轉節點。</p>
+<p>您可能會注意到，該資源群組目前尚未包含任何查詢節點。請依照以下步驟，將部分節點從預設資源群組移至您所建立的資源群組：
+假設叢集的<strong>__default_resource_group</strong>中目前有 1 個 QueryNode，且我們希望將其中一個節點移至已建立的<strong>資源群組中</strong>。<code translate="no">update_resource_groups</code> 可確保多項配置變更的原子性，因此 Milvus 不會看到任何中間狀態。</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 expected_num_nodes_in_default = <span class="hljs-number">0</span>
@@ -159,8 +160,8 @@ expected_num_nodes_in_rg = <span class="hljs-number">1</span>
 
 <span class="hljs-comment"># After a while, succeeded in moving 1 node(s) from __default_resource_group to rg.</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>將集合和分割載入資源群組。</p>
-<p>一旦資源群組中有查詢節點，您就可以載入集合到這個資源群組。以下片段假定已經存在一個名為<code translate="no">demo</code> 的集合。</p>
+<li><p>將集合與分區載入至資源群組。</p>
+<p>一旦資源群組中存在查詢節點，即可將集合載入至該資源群組。以下程式碼片段假設已存在名為<code translate="no">demo</code> 的集合。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection
 
 collection_name = <span class="hljs-string">&quot;demo&quot;</span>
@@ -173,17 +174,17 @@ milvus_client.load_collection(collection_name, replica_number=<span class="hljs-
 resource_groups = [<span class="hljs-string">&#x27;rg&#x27;</span>]
 milvus_client.load_collection(replica_number=<span class="hljs-number">2</span>, _resource_groups=resource_groups) 
 <button class="copy-code-btn"></button></code></pre>
-<p>此外，您也可以直接將分割載入資源群組，並將其複本分佈在多個資源群組中。以下假設一個名為<code translate="no">Books</code> 的集合已經存在，而且它有一個名為<code translate="no">Novels</code> 的分割區。</p>
+<p>此外，您也可以僅將一個分區載入至資源群組，並讓其副本分散於多個資源群組中。以下範例假設已存在名為<code translate="no">Books</code> 的集合，且該集合包含一個名為<code translate="no">Novels</code> 的分區。</p>
 <pre><code translate="no" class="language-python">collection = <span class="hljs-string">&quot;Books&quot;</span>
 partition = <span class="hljs-string">&quot;Novels&quot;</span>
 
 <span class="hljs-comment"># Use the load method of a collection to load one of its partition</span>
 milvus_client.load_partitions(collection, [partition], replica_number=<span class="hljs-number">2</span>, _resource_groups=resource_groups)
 <button class="copy-code-btn"></button></code></pre>
-<p>請注意，<code translate="no">_resource_groups</code> 是一個可選參數，不指定它會讓 Milvus 將複製本載入預設資源群組中的查詢節點。</p>
-<p>若要 Milus 在單獨的資源群組中載入集合的每個複製本，請確保資源群組的數量等於複製本的數量。</p></li>
-<li><p>在資源群組之間轉移副本。</p>
-<p>Milvus 使用<a href="/docs/zh-hant/v2.6.x/replica.md">副本</a>实现分布在多个查询节点上的<a href="/docs/zh-hant/v2.6.x/glossary.md#Segment">段</a>之间的负载平衡。您可以按以下方式將資料集中的某些複製品從一個資源群組移到另一個資源群組：</p>
+<p>請注意，<code translate="no">_resource_groups</code> 為可選參數；若未指定，Milvus 會將副本載入至預設資源群組中的查詢節點。</p>
+<p>若要讓 Milvus 將集合的每個副本載入至不同的資源群組中，請確保資源群組的數量等於副本的數量。</p></li>
+<li><p>在資源群組之間傳輸副本。</p>
+<p>Milvus 透過<a href="/docs/zh-hant/v2.6.x/replica.md">副本</a>在分佈於多個查詢節點<a href="/docs/zh-hant/v2.6.x/glossary.md#Segment">的區段</a>之間實現負載平衡。您可以依照以下步驟，將集合的特定副本從一個資源群組移至另一個資源群組：</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 collection_name = <span class="hljs-string">&#x27;c&#x27;</span>
@@ -198,7 +199,7 @@ num_replicas = <span class="hljs-number">1</span>
 <span class="hljs-comment"># Succeeded in moving 1 replica(s) of c from __default_resource_group to rg.</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>刪除資源群組。</p>
-<p>您可以隨時刪除沒有查詢節點的資源群組 (<code translate="no">limits.node_num = 0</code>)。在本指南中，資源群組<code translate="no">rg</code> 現在有一個查詢節點。您需要先將資源群組<code translate="no">limits.node_num</code> 的配置變更為零。</p>
+<p>您可以隨時刪除未包含任何查詢節點的資源群組（<code translate="no">limits.node_num = 0</code> ）。在本指南中，資源群組<code translate="no">rg</code> 目前包含一個查詢節點。您需要先將該資源群組的配置<code translate="no">limits.node_num</code> 修改為零。</p>
 <pre><code translate="no" class="language-python">resource_group = <span class="hljs-string">&quot;rg
 try:
     milvus_client.update_resource_groups({
@@ -213,8 +214,8 @@ except Exception:
     print(f&quot;</span>Something went wrong <span class="hljs-keyword">while</span> dropping {resource_group}.<span class="hljs-string">&quot;)
 </span><button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<p>如需詳細資訊，請參閱<a href="https://github.com/milvus-io/pymilvus/blob/v2.4.3/examples/resource_group_declarative_api.py">pymilvus 中的相關範例</a>。</p>
-<h2 id="A-good-practice-to-manage-cluster-scaling" class="common-anchor-header">管理集群擴充的好方法<button data-href="#A-good-practice-to-manage-cluster-scaling" class="anchor-icon" translate="no">
+<p>如需更多詳細資訊，請參閱<a href="https://github.com/milvus-io/pymilvus/blob/v2.4.3/examples/resource_group_declarative_api.py">pymilvus 中的相關範例</a></p>
+<h2 id="A-good-practice-to-manage-cluster-scaling" class="common-anchor-header">管理叢集擴展的良好實務<button data-href="#A-good-practice-to-manage-cluster-scaling" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -229,10 +230,12 @@ except Exception:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>目前，在雲原生環境中，Milvus 無法獨立進行擴充。但是，通過使用<strong>Declarative Resource Group API</strong>與容器協調，Milvus 可以輕鬆實現 QueryNodes 的資源隔離和管理。 以下是在雲環境中管理 QueryNodes 的良好實踐：</p>
+    </button></h2><p>目前，Milvus 無法在雲原生環境中獨立進行擴展與縮減。然而，透過結合使用<strong>宣告式資源群組 API</strong>與容器調度，Milvus 能夠輕鬆實現對 QueryNodes 的資源隔離與管理。
+以下是在雲端環境中管理 QueryNodes 的最佳實務：</p>
 <ol>
-<li><p>預設情況下，Milvus 會建立一個<strong>__default_resource_group</strong> 。此資源群組無法刪除，同時也是所有集合的預設載入資源群組，多餘的 QueryNodes 總是會被指派給它。因此，我們可以建立一個待定資源群組，來存放未使用的 QueryNode 資源，防止 QueryNode 資源被<strong>__default_resource_group</strong> 所佔用。</p>
-<p>此外，如果我們嚴格執行約束<code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code> ，就可以精確地控制群集中 QueryNode 的分配。讓我們假設目前叢集中只有一個 QueryNode，並初始化叢集。 以下是一個設定範例：</p>
+<li><p>預設情況下，Milvus 會建立一個<strong>__default_resource_group</strong>。此資源群組無法被刪除，同時也作為所有集合的預設載入資源群組，且冗餘的 QueryNodes 總是會被指派至該群組。 因此，我們可以建立一個「待處理」資源群組來存放閒置的 QueryNode 資源，防止這些資源被<strong>__default_resource_group</strong> 佔用。</p>
+<p>此外，若嚴格執行<code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code> 的限制條件，即可精確控制叢集內 QueryNodes 的分配。假設叢集中目前僅有一台 QueryNode，並初始化該叢集。
+以下為設定範例：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.client.types <span class="hljs-keyword">import</span> ResourceGroupConfig
 
 _PENDING_NODES_RESOURCE_GROUP=<span class="hljs-string">&quot;__pending_nodes&quot;</span>
@@ -268,15 +271,15 @@ _PENDING_NODES_RESOURCE_GROUP=<span class="hljs-string">&quot;__pending_nodes&qu
 
 init_cluster(<span class="hljs-number">1</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>使用上面的範例程式碼，我們建立一個名為<strong>__pending_nodes</strong>的資源群組，以存放額外的 QueryNodes。我們也建立兩個使用者特定的資源群組，分別命名為<strong>rg1</strong>和<strong>rg2</strong>。此外，我們確保另一個資源群組優先從<strong>__pending_nodes</strong> 恢復遺失或多餘的 QueryNodes。</p></li>
-<li><p>叢集縮放</p>
-<p>假設我們有以下的縮放功能：</p>
+<p>利用上述範例程式碼，我們建立了一個名為<strong>__pending_nodes 的</strong>資源群組，用以存放額外的 QueryNode。我們還建立兩個名為<strong>rg1</strong>和<strong>rg2</strong> 的使用者專用資源群組。此外，我們確保其他資源群組會優先從<strong>__pending_nodes</strong> 中恢復缺失或冗餘的 QueryNode。</p></li>
+<li><p>叢集水平擴展</p>
+<p>假設我們有以下擴展函式：</p>
 <pre><code translate="no" class="language-python">
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">scale_to</span>(<span class="hljs-params">node_num: <span class="hljs-built_in">int</span></span>):
     <span class="hljs-comment"># scale the querynode number in Milvus into node_num.</span>
     <span class="hljs-keyword">pass</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>我們可以使用 API 將特定資源群組的 QueryNodes 擴充到指定的數量，而不影響任何其他資源群組。</p>
+<p>我們可以透過 API 將特定資源群組擴展至指定數量的 QueryNodes，且不會影響其他資源群組。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># scale rg1 into 3 nodes, rg2 into 1 nodes</span>
 milvus_client.update_resource_groups({
     <span class="hljs-string">&quot;rg1&quot;</span>: ResourceGroupConfig(
@@ -295,8 +298,8 @@ milvus_client.update_resource_groups({
 scale_to(<span class="hljs-number">5</span>)
 <span class="hljs-comment"># rg1 has 3 nodes, rg2 has 1 node, __default_resource_group has 1 node.</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>群集縮放</p>
-<p>同樣地，我們可以建立 Scaling-in 規則，優先從<strong>__pending_nodes</strong>資源群組中選擇 QueryNodes。此資訊可透過<code translate="no">describe_resource_group</code> API 取得。達到擴充到指定資源群組的目標。</p>
+<li><p>叢集縮減</p>
+<p>同樣地，我們可以建立縮減規則，優先從<strong>__pending_nodes</strong>資源群組中選取查詢節點。此資訊可透過<code translate="no">describe_resource_group</code> API 取得，藉此達成縮減指定資源群組的目標。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># scale rg1 from 3 nodes into 2 nodes</span>
 milvus_client.update_resource_groups({
     <span class="hljs-string">&quot;rg1&quot;</span>: ResourceGroupConfig(
@@ -312,7 +315,7 @@ scale_to(<span class="hljs-number">4</span>)
 <span class="hljs-comment"># scale the node in __pending_nodes</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h2 id="How-resource-groups-interacts-with-multiple-replicas" class="common-anchor-header">資源群組如何與多個複製品互動<button data-href="#How-resource-groups-interacts-with-multiple-replicas" class="anchor-icon" translate="no">
+<h2 id="How-resource-groups-interacts-with-multiple-replicas" class="common-anchor-header">資源群組與多個複本的互動方式<button data-href="#How-resource-groups-interacts-with-multiple-replicas" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -328,8 +331,8 @@ scale_to(<span class="hljs-number">4</span>)
         ></path>
       </svg>
     </button></h2><ul>
-<li>單一集合的複製本與資源群組有 N 對 N 的關係。</li>
-<li>當單一集合的多個複製本載入一個資源群組時，該資源群組的 QueryNodes 會平均分配給各個複製本，確保每個複製本的 QueryNodes 數目差異不超過 1。</li>
+<li>單一集合的副本與資源群組之間具有 N 對 N 的關係。</li>
+<li>當單一集合的多個副本被載入至同一個資源群組時，該資源群組的 QueryNodes 會均勻分佈於各副本之間，確保每個副本擁有的 QueryNodes 數量差異不超過 1。</li>
 </ul>
 <h1 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -346,7 +349,7 @@ scale_to(<span class="hljs-number">4</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>要部署多租户 Milvus 实例，请阅读以下内容：</p>
+    </button></h1><p>若要部署多租戶 Milvus 實例，請參閱以下內容：</p>
 <ul>
 <li><a href="/docs/zh-hant/v2.6.x/rbac.md">啟用 RBAC</a></li>
 <li><a href="/docs/zh-hant/v2.6.x/users_and_roles.md">使用者與角色</a></li>

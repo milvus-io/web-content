@@ -1,7 +1,7 @@
 ---
 id: array-of-structs.md
 title: 结构体数组Compatible with Milvus 2.6.4+
-summary: 实体中的 "结构数组 "字段存储了一组有序的结构元素。数组中的每个 Struct 都共享相同的预定义 Schema，由多个向量和标量字段组成。
+summary: 实体中的“结构体数组”字段用于存储一组按顺序排列的结构体元素。数组中的每个结构体都遵循相同的预定义Schema，由多个向量和标量字段组成。
 beta: Milvus 2.6.4+
 ---
 <h1 id="Array-of-Structs" class="common-anchor-header">结构体数组<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Array-of-Structs" class="anchor-icon" translate="no">
@@ -19,8 +19,8 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>实体中的 "结构数组 "字段存储了一组有序的结构元素。数组中的每个 Struct 都共享相同的预定义 Schema，由多个向量和标量字段组成。</p>
-<p>下面是一个包含 Array of Structs 字段的 Collections 实体示例。</p>
+    </button></h1><p>实体中的“结构体数组”字段用于存储一组有序的结构体元素。数组中的每个结构体都遵循相同的预定义Schema，包含多个向量和标量字段。</p>
+<p>以下是一个包含“结构体数组”字段的Collection中实体的示例。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     &#x27;id&#x27;<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
     &#x27;title&#x27;<span class="hljs-punctuation">:</span> &#x27;Walden&#x27;<span class="hljs-punctuation">,</span>
@@ -42,7 +42,7 @@ beta: Milvus 2.6.4+
 <span class="highlighted-comment-line">    <span class="hljs-comment">// hightlight-end</span></span>
 <span class="highlighted-comment-line"><span class="hljs-punctuation">}</span></span>
 <span class="highlighted-comment-line"></span><button class="copy-code-btn"></button></code></pre>
-<p>在上面的示例中，<code translate="no">chunks</code> 字段是一个数组结构体字段，每个结构体元素都包含自己的字段，即<code translate="no">text</code> 、<code translate="no">text_vector</code> 和<code translate="no">chapter</code> 。</p>
+<p>在上例中，<code translate="no">chunks</code> 字段即为“结构体数组”字段，每个结构体元素都包含其自身的字段，即<code translate="no">text</code> 、<code translate="no">text_vector</code> 和<code translate="no">chapter</code> 。</p>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -60,9 +60,9 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><ul>
 <li><p><strong>数据类型</strong></p>
-<p>创建 Collections 时，可以使用 Struct 类型作为 Array 字段中元素的数据类型。但是，您不能将 Struct 数组添加到现有的 Collections 中，而且 Milvus 不支持使用 Struct 类型作为 Collections 字段的数据类型。</p>
-<p>数组字段中的 Struct 共享相同的 Schema，这应该在创建数组字段时定义。</p>
-<p>Struct 模式包含向量和标量字段，如下表所示：</p>
+<p>创建 Collection 时，您可以将 Struct 类型用作数组字段中元素的数据类型。但是，您无法将“结构数组”添加到现有 Collection 中，而且 Milvus 不支持将 Struct 类型用作 Collection 字段的数据类型。</p>
+<p>数组字段中的 Struct 共享相同的 Schema，该 Schema 应在创建数组字段时定义。</p>
+<p>Struct Schema 包含向量和标量字段，如下表所示：</p>
 <p><table>
 <tr>
 <th><p>字段类型</p></th>
@@ -89,14 +89,14 @@ beta: Milvus 2.6.4+
 <td><p><code translate="no">BOOLEAN</code></p></td>
 </tr>
 </table></p>
-<p>无论是在 Collections 层面还是在 Structs 组合中，向量字段的数量都不得大于或等于 10。</p></li>
-<li><p><strong>可归零和默认值</strong></p>
-<p>数组结构体字段不可为空，也不接受任何默认值。</p></li>
+<p>请确保 Collection 级别和结构体中的向量字段总数不超过 10 个。</p></li>
+<li><p><strong>可为空与默认值</strong></p>
+<p>“结构体数组”字段不可为空，也不接受任何默认值。</p></li>
 <li><p><strong>函数</strong></p>
-<p>不能使用函数从 Struct 中的标量字段派生出向量字段。</p></li>
-<li><p><strong>索引类型和度量类型</strong></p>
-<p>必须为 Collections 中的所有向量场建立索引。要对 Structs 数组中的向量场进行索引，Milvus 使用嵌入列表来组织每个 Struct 元素中的向量嵌入，并对整个嵌入列表作为一个整体进行索引。</p>
-<p>你可以使用<code translate="no">AUTOINDEX</code> 或<code translate="no">HNSW</code> 作为索引类型，并使用下面列出的任何度量类型来为一个 Array of Structs 字段中的嵌入列表建立索引。</p>
+<p>您不能使用函数从结构体内的标量字段派生向量字段。</p></li>
+<li><p><strong>索引类型与度量类型</strong></p>
+<p>Collection中的所有向量字段都必须被索引。要对“结构体数组”字段中的向量字段进行索引，Milvus 会使用嵌入列表来组织每个结构体元素中的向量嵌入，并将整个嵌入列表作为一个整体进行索引。</p>
+<p>您可以使用<code translate="no">AUTOINDEX</code> 或<code translate="no">HNSW</code> 作为索引类型，并使用以下列出的任何度量类型，为“结构体数组”字段中的嵌入列表构建索引。</p>
 <p><table>
 <tr>
 <th><p>索引类型</p></th>
@@ -104,7 +104,7 @@ beta: Milvus 2.6.4+
 <th><p>备注</p></th>
 </tr>
 <tr>
-<td rowspan="3"><p><code translate="no">AUTOINDEX</code> (或<code translate="no">HNSW</code>)</p></td>
+<td rowspan="3"><p><code translate="no">AUTOINDEX</code> （或<code translate="no">HNSW</code> ）</p></td>
 <td><p><code translate="no">MAX_SIM_COSINE</code></p></td>
 <td rowspan="3"><p>适用于以下类型的嵌入列表：</p><ul><li>FLOAT_VECTOR</li></ul></td>
 </tr>
@@ -115,11 +115,11 @@ beta: Milvus 2.6.4+
 <td><p><code translate="no">MAX_SIM_L2</code></p></td>
 </tr>
 </table></p>
-<p>结构数组字段中的标量字段不支持索引。</p></li>
-<li><p><strong>倒插数据</strong></p>
-<p>结构体在合并模式下不支持向上插入。但是，您仍然可以在覆盖模式下执行上插入操作，以更新 Structs 中的数据。有关合并模式下的<a href="/docs/zh/v2.6.x/upsert-entities.md#Overview">upsert</a> 和覆盖模式下的<a href="/docs/zh/v2.6.x/upsert-entities.md#Overview">upsert</a> 之间差异的详细信息，请参阅 "<a href="/docs/zh/v2.6.x/upsert-entities.md#Overview">upsert 实体</a>"。</p></li>
+<p>“结构体数组”字段中的标量字段不支持索引。</p></li>
+<li><p><strong>Upsert 数据</strong></p>
+<p>结构体在合并模式下不支持 upsert 操作。不过，您仍可在覆盖模式下执行 upsert 操作以更新结构体中的数据。有关合并模式和覆盖模式下 upsert 操作差异的详细信息，请参阅《<a href="/docs/zh/v2.6.x/upsert-entities.md#Overview">实体 upsert</a>》。</p></li>
 <li><p><strong>标量过滤</strong></p>
-<p>在搜索和查询的过滤表达式中，不能使用结构体数组或其结构体元素中的任何字段。</p></li>
+<p>在搜索和查询的过滤表达式中，您无法使用“结构数组”或其“结构”元素内的任何字段。</p></li>
 </ul>
 <h2 id="Add-Array-of-Structs" class="common-anchor-header">添加结构数组<button data-href="#Add-Array-of-Structs" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -136,17 +136,22 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要在 Milvus 中使用结构数组，需要在创建 Collections 时定义一个数组字段，并将其元素的数据类型设置为 Struct。具体过程如下</p>
+    </button></h2><p>要在 Milvus 中使用结构数组，您需要在创建 Collection 时定义一个数组字段，并将该字段元素的数据类型设置为 Struct。具体步骤如下：</p>
 <ol>
-<li><p>将字段作为数组字段添加到 Collections Schema 时，将字段的数据类型设置为<code translate="no">DataType.ARRAY</code> 。</p></li>
-<li><p>将字段的<code translate="no">element_type</code> 属性设置为<code translate="no">DataType.STRUCT</code> ，使字段成为结构数组。</p></li>
-<li><p>创建一个 Struct 模式并包含所需字段。然后，在字段的<code translate="no">struct_schema</code> 属性中引用 Struct 模式。</p></li>
-<li><p>将字段的<code translate="no">max_capacity</code> 属性设置为适当的值，以指定每个实体在该字段中可包含的最大 Struct 数量。</p></li>
-<li><p><strong>(可选</strong>）可以为 Struct 元素中的任何字段设置<code translate="no">mmap.enabled</code> ，以平衡 Struct 中的冷热数据。</p></li>
+<li><p>在将字段作为数组字段添加到Collection Schema时，将其数据类型设置为<code translate="no">DataType.ARRAY</code> 。</p></li>
+<li><p>将字段的<code translate="no">element_type</code> 属性设置为<code translate="no">DataType.STRUCT</code> ，以使该字段成为Struct数组。</p></li>
+<li><p>创建一个结构体（Struct）Schema，并包含所需字段。然后，在字段的<code translate="no">struct_schema</code> 属性中引用该结构体Schema。</p></li>
+<li><p>将字段的<code translate="no">max_capacity</code> 属性设置为适当值，以指定每个实体在此字段中可包含的Struct最大数量。</p></li>
+<li><p>（<strong>可选</strong>）您可以为 Struct 元素内的任何字段设置 `<code translate="no">mmap.enabled</code> `，以平衡 Struct 中的热数据和冷数据。</p></li>
 </ol>
-<p>下面是如何定义包含 Struct 数组的 Collections 模式：</p>
+<p>以下是定义包含 Struct 数组的 Collection Schema 的方法：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(
@@ -357,7 +362,7 @@ SCHEMA=<span class="hljs-string">&#x27;{
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上述代码示例中高亮显示的几行说明了在 Collections 模式中包含 Struct 数组的过程。</p>
+<p>上述代码示例中突出显示的行演示了在 Collection Schema 中包含 Struct 数组的步骤。</p>
 <h2 id="Set-index-params" class="common-anchor-header">设置索引参数<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -373,11 +378,16 @@ SCHEMA=<span class="hljs-string">&#x27;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>所有向量字段都必须设置索引，包括 Collections 中的向量字段和元素 Struct 中定义的向量字段。</p>
-<p>适用的索引参数因使用的索引类型而异。有关适用索引参数的详细信息，请参阅<a href="/docs/zh/v2.6.x/index-explained.md">Index Explained</a>和所选索引类型的特定文档页面。</p>
-<p>要为嵌入列表建立索引，需要将其索引类型设为<code translate="no">AUTOINDEX</code> 或<code translate="no">HNSW</code> ，并使用<code translate="no">MAX_SIM_COSINE</code> 作为 Milvus 的度量类型，以衡量嵌入列表之间的相似性。</p>
+    </button></h2><p>所有向量字段都必须进行索引，包括 Collection 中的向量字段以及在 Struct 元素中定义的向量字段。</p>
+<p>适用的索引参数因所使用的索引类型而异。有关适用索引参数的详细信息，请参阅<a href="/docs/zh/v2.6.x/index-explained.md">《索引详解》</a>以及您所选索引类型的特定文档页面。</p>
+<p>要对嵌入列表进行索引，您需要将其索引类型设置为<code translate="no">AUTOINDEX</code> 或<code translate="no">HNSW</code> ，并使用<code translate="no">MAX_SIM_COSINE</code> 作为度量类型，以便 Milvus 测量嵌入列表之间的相似度。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -445,7 +455,7 @@ INDEX_PARAMS=<span class="hljs-string">&#x27;[
   }
 ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-a-collection" class="common-anchor-header">创建 Collections<button data-href="#Create-a-collection" class="anchor-icon" translate="no">
+<h2 id="Create-a-collection" class="common-anchor-header">创建Collection<button data-href="#Create-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -460,9 +470,14 @@ INDEX_PARAMS=<span class="hljs-string">&#x27;[
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Schema 和索引准备就绪后，就可以创建一个包含 Array of Structs 字段的 Collection。</p>
+    </button></h2><p>准备好 Schema 和索引后，您可以创建一个包含“Structs 数组”字段的 Collection。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -519,9 +534,14 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>创建 Collections 后，您可以按如下方式插入包含 Structs 数组的数据。</p>
+    </button></h2><p>创建Collection后，您可以按以下方式插入包含结构体数组的数据。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample data</span>
 data = {
     <span class="hljs-string">&#x27;title&#x27;</span>: <span class="hljs-string">&#x27;Walden&#x27;</span>,
@@ -719,7 +739,7 @@ data = [generate_record(i) <span class="hljs-keyword">for</span> i <span class="
 client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, data=data)
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<h2 id="Vector-search-against-an-Array-of-Structs-field" class="common-anchor-header">针对 Structs 数组字段进行向量搜索<button data-href="#Vector-search-against-an-Array-of-Structs-field" class="anchor-icon" translate="no">
+<h2 id="Vector-search-against-an-Array-of-Structs-field" class="common-anchor-header">针对结构体数组字段进行向量搜索<button data-href="#Vector-search-against-an-Array-of-Structs-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -734,14 +754,19 @@ client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以对 Collections 和 Array of Structs 中的向量字段执行向量搜索。</p>
-<p>具体来说，你应该将 Array of Structs 字段的名称和 Struct 元素中目标向量字段的名称串联起来，作为搜索请求中<code translate="no">anns_field</code> 参数的值，并使用<code translate="no">EmbeddingList</code> 来整齐地组织查询向量。</p>
+    </button></h2><p>您可以在Collection的向量字段以及“结构体数组”中执行向量搜索。</p>
+<p>具体来说，您应将结构体数组字段的名称与目标向量字段的名称在结构体元素内进行拼接，作为搜索请求中<code translate="no">anns_field</code> 参数的值，并使用<code translate="no">EmbeddingList</code> 来整齐地组织查询向量。</p>
 <div class="alert note">
-<p>Milvus 提供的<code translate="no">EmbeddingList</code> 可以帮助你更整齐地组织针对 Structs 数组中的 Embeddings 列表进行搜索的查询向量。每个<code translate="no">EmbeddingList</code> 至少包含一个向量嵌入，并期望返回若干 topK 实体。</p>
-<p>不过，<code translate="no">EmbeddingList</code> 只能用于没有范围搜索或分组搜索参数的<code translate="no">search()</code> 请求，更不用说<code translate="no">search_iterator()</code> 请求了。</p>
+<p>Milvus 提供了 `<code translate="no">EmbeddingList</code> ` 方法，可帮助您更整洁地组织针对结构体数组中嵌入列表的查询向量。每个 `<code translate="no">EmbeddingList</code> ` 请求至少包含一个向量嵌入，并期望返回若干个 topK 实体。</p>
+<p>但是，<code translate="no">EmbeddingList</code> 仅可在不包含范围搜索或分组搜索参数的<code translate="no">search()</code> 请求中使用，更不用说<code translate="no">search_iterator()</code> 请求了。</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.client.embedding_list <span class="hljs-keyword">import</span> EmbeddingList
 
 <span class="hljs-comment"># each query embedding list triggers a single search</span>
@@ -816,7 +841,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
   }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>上述搜索请求使用<code translate="no">chunks[text_vector]</code> 来引用 Struct 元素中的<code translate="no">text_vector</code> 字段。您可以使用此语法设置<code translate="no">anns_field</code> 和<code translate="no">output_fields</code> 参数。</p>
-<p>输出将是三个最相似实体的列表。</p>
+<p>输出结果将是一份包含最相似的三个实体的列表。</p>
 <p><details></p>
 <p><summary>输出</summary></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># [</span>
@@ -861,9 +886,14 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>您还可以在<code translate="no">data</code> 参数中包含多个嵌入列表，以检索每个嵌入列表的搜索结果。</p>
+<p>您还可以在 `<code translate="no">data</code> ` 参数中包含多个嵌入列表，以分别检索这些嵌入列表的搜索结果。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># a search with multiple embedding lists</span>
 results = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -920,7 +950,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
     \&quot;outputFields\&quot;: [\&quot;chunks[text]\&quot;]
   }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>输出将是每个嵌入列表中三个最相似实体的列表。</p>
+<p>输出结果将是每个Embeddings列表中相似度最高的三个实体的列表。</p>
 <p><details></p>
 <p><summary>输出</summary></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># [</span>
@@ -998,8 +1028,8 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>在上述代码示例中，<code translate="no">embeddingList1</code> 是一个向量的嵌入列表，而<code translate="no">embeddingList2</code> 包含两个向量。每个嵌入列表都会触发一个单独的搜索请求，并期望得到前 K 个相似实体的列表。</p>
-<h2 id="Next-steps" class="common-anchor-header">下一步工作<button data-href="#Next-steps" class="anchor-icon" translate="no">
+<p>在上面的代码示例中，<code translate="no">embeddingList1</code> 是一个包含一个向量的 Embeddings 列表，而<code translate="no">embeddingList2</code> 包含两个向量。每个列表都会触发一个独立的搜索请求，并返回一个包含前 K 个最相似实体的列表。</p>
+<h2 id="Next-steps" class="common-anchor-header">后续步骤<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1014,4 +1044,4 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>本地结构数组数据类型的开发代表着 Milvus 处理复杂数据结构能力的重大进步。为了更好地了解其使用案例并最大限度地利用这一新功能，我们建议您阅读《<a href="/docs/zh/v2.6.x/best-practices-for-array-of-structs.md">使用结构数组的 Schema 设计</a>》。</p>
+    </button></h2><p>原生“结构数组”（Array of Structs）数据类型的开发，标志着 Milvus 在处理复杂数据结构方面的能力取得了重大进步。为了更好地理解其用例并充分利用这一新功能，建议您阅读<a href="/docs/zh/v2.6.x/best-practices-for-array-of-structs.md">《使用结构数组进行Schema设计》</a>。</p>

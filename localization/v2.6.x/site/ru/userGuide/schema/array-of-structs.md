@@ -2,9 +2,9 @@
 id: array-of-structs.md
 title: Массив структурCompatible with Milvus 2.6.4+
 summary: >-
-  Поле Array of Structs в сущности хранит упорядоченный набор элементов Struct.
-  Каждая структура в массиве имеет одну и ту же предопределенную схему,
-  состоящую из нескольких векторов и скалярных полей.
+  Поле «Массив структур» в сущности хранит упорядоченный набор элементов типа
+  «Структура». Каждая структура в массиве имеет одинаковую заранее определённую
+  схему, состоящую из нескольких векторных и скалярных полей.
 beta: Milvus 2.6.4+
 ---
 <h1 id="Array-of-Structs" class="common-anchor-header">Массив структур<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Array-of-Structs" class="anchor-icon" translate="no">
@@ -22,8 +22,8 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Поле Array of Structs в сущности хранит упорядоченный набор элементов Struct. Каждая структура в массиве имеет одну и ту же предопределенную схему, состоящую из нескольких векторов и скалярных полей.</p>
-<p>Вот пример сущности из коллекции, содержащей поле Array of Structs.</p>
+    </button></h1><p>Поле «Массив структур» в сущности хранит упорядоченный набор элементов структуры. Каждая структура в массиве имеет одинаковую заранее определенную схему, состоящую из нескольких векторных и скалярных полей.</p>
+<p>Ниже приведен пример сущности из коллекции, содержащей поле «Массив структур».</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     &#x27;id&#x27;<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
     &#x27;title&#x27;<span class="hljs-punctuation">:</span> &#x27;Walden&#x27;<span class="hljs-punctuation">,</span>
@@ -45,7 +45,7 @@ beta: Milvus 2.6.4+
 <span class="highlighted-comment-line">    <span class="hljs-comment">// hightlight-end</span></span>
 <span class="highlighted-comment-line"><span class="hljs-punctuation">}</span></span>
 <span class="highlighted-comment-line"></span><button class="copy-code-btn"></button></code></pre>
-<p>В приведенном примере поле <code translate="no">chunks</code> является полем Array of Structs, и каждый элемент Struct содержит свои поля, а именно <code translate="no">text</code>, <code translate="no">text_vector</code> и <code translate="no">chapter</code>.</p>
+<p>В приведенном выше примере поле « <code translate="no">chunks</code> » представляет собой поле «Массив структур», и каждый элемент структуры содержит свои собственные поля: « <code translate="no">text</code> », « <code translate="no">text_vector</code> » и « <code translate="no">chapter</code> ».</p>
 <h2 id="Limits" class="common-anchor-header">Ограничения<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -63,9 +63,9 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><ul>
 <li><p><strong>Типы данных</strong></p>
-<p>При создании коллекции вы можете использовать тип Struct в качестве типа данных для элементов поля Array. Однако вы не можете добавить массив структур в существующую коллекцию, и Milvus не поддерживает использование типа Struct в качестве типа данных для поля коллекции.</p>
-<p>Структуры в поле Array имеют одну и ту же схему, которая должна быть определена при создании поля Array.</p>
-<p>Схема Struct содержит как векторы, так и скалярные поля, как указано в следующей таблице:</p>
+<p>При создании коллекции в качестве типа данных для элементов поля «Массив» можно использовать тип Struct. Однако нельзя добавить «Массив структур» в существующую коллекцию, и Milvus не поддерживает использование типа Struct в качестве типа данных для поля коллекции.</p>
+<p>Структуры в поле «Массив» имеют одну и ту же схему, которую следует определить при создании поля «Массив».</p>
+<p>Схема Struct содержит как векторные, так и скалярные поля, перечисленные в следующей таблице:</p>
 <p><table>
 <tr>
 <th><p>Тип поля</p></th>
@@ -92,24 +92,24 @@ beta: Milvus 2.6.4+
 <td><p><code translate="no">BOOLEAN</code></p></td>
 </tr>
 </table></p>
-<p>Следите за тем, чтобы количество векторных полей как на уровне коллекций, так и на уровне структур было не больше или равно 10.</p></li>
-<li><p><strong>Нуллируемые и значения по умолчанию</strong></p>
-<p>Поле Array of Structs не является нулевым и не принимает значения по умолчанию.</p></li>
+<p>Общее количество векторных полей как на уровне коллекции, так и в структурах в совокупности не должно превышать 10.</p></li>
+<li><p><strong>Значения, допускающие null, и значения по умолчанию</strong></p>
+<p>Поле «Массив структур» не допускает нулевых значений и не принимает никаких значений по умолчанию.</p></li>
 <li><p><strong>Функция</strong></p>
-<p>Вы не можете использовать функцию для получения векторного поля из скалярного поля внутри структуры.</p></li>
+<p>Нельзя использовать функцию для вывода векторного поля из скалярного поля внутри структуры.</p></li>
 <li><p><strong>Тип индекса и тип метрики</strong></p>
-<p>Все векторные поля в коллекции должны быть проиндексированы. Чтобы проиндексировать векторное поле в поле массива структур, Milvus использует список вкраплений для организации векторных вкраплений в каждом элементе структуры и индексирует весь список вкраплений в целом.</p>
-<p>Вы можете использовать <code translate="no">AUTOINDEX</code> или <code translate="no">HNSW</code> в качестве типа индекса и любой метрический тип, перечисленный ниже, чтобы построить индексы для списков вкраплений в поле Array of Structs.</p>
+<p>Все векторные поля в коллекции должны быть индексированы. Для индексирования векторного поля в поле «Массив структур» Milvus использует список вложений для организации векторных вложений в каждом элементе структуры и индексирует весь список вложений целиком.</p>
+<p>В качестве типа индекса можно использовать « <code translate="no">AUTOINDEX</code> » или « <code translate="no">HNSW</code> », а для построения индексов списков вложений в поле «Array of Structs» — любой из перечисленных ниже типов метрик.</p>
 <p><table>
 <tr>
 <th><p>Тип индекса</p></th>
-<th><p>Метрический тип</p></th>
+<th><p>Тип метрики</p></th>
 <th><p>Примечания</p></th>
 </tr>
 <tr>
 <td rowspan="3"><p><code translate="no">AUTOINDEX</code> (или <code translate="no">HNSW</code>)</p></td>
 <td><p><code translate="no">MAX_SIM_COSINE</code></p></td>
-<td rowspan="3"><p>Для списков встраивания следующих типов:</p><ul><li>FLOAT_VECTOR</li></ul></td>
+<td rowspan="3"><p>Для списков вложений следующих типов:</p><ul><li>FLOAT_VECTOR</li></ul></td>
 </tr>
 <tr>
 <td><p><code translate="no">MAX_SIM_IP</code></p></td>
@@ -118,11 +118,11 @@ beta: Milvus 2.6.4+
 <td><p><code translate="no">MAX_SIM_L2</code></p></td>
 </tr>
 </table></p>
-<p>Скалярные поля в поле Array of Structs не поддерживают индексы.</p></li>
-<li><p><strong>Данные для апсерт</strong></p>
-<p>Структуры не поддерживают апсерт в режиме слияния. Однако вы можете выполнять апсерт в режиме переопределения для обновления данных в структурах. Подробнее о различиях между апсерт в режиме слияния и в режиме переопределения см. в разделе <a href="/docs/ru/v2.6.x/upsert-entities.md#Overview">Апсерт сущностей</a>.</p></li>
+<p>Скалярные поля в поле «Массив структур» не поддерживают индексы.</p></li>
+<li><p><strong>Операция «upsert»</strong></p>
+<p>Структуры не поддерживают операцию «upsert» в режиме слияния. Однако вы по-прежнему можете выполнять операции «upsert» в режиме перезаписи для обновления данных в структурах. Подробнее о различиях между операцией «upsert» в режиме слияния и режиме перезаписи см. в разделе <a href="/docs/ru/v2.6.x/upsert-entities.md#Overview">«Upsert Entities</a>».</p></li>
 <li><p><strong>Скалярная фильтрация</strong></p>
-<p>Вы не можете использовать массив структур или какие-либо поля внутри его элемента Struct в выражениях фильтрации в поиске и запросах.</p></li>
+<p>Нельзя использовать «Массив структур» или любые поля в его элементе «Структура» в выражениях фильтрации при поиске и в запросах.</p></li>
 </ul>
 <h2 id="Add-Array-of-Structs" class="common-anchor-header">Добавление массива структур<button data-href="#Add-Array-of-Structs" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -139,17 +139,22 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Чтобы использовать массив структур в Milvus, вам нужно определить поле массива при создании коллекции и установить тип данных для его элементов на Struct. Процесс выглядит следующим образом:</p>
+    </button></h2><p>Чтобы использовать массив структур в Milvus, необходимо определить поле массива при создании коллекции и установить тип данных для его элементов как «Struct». Процесс выглядит следующим образом:</p>
 <ol>
-<li><p>Установите тип данных поля <code translate="no">DataType.ARRAY</code> при добавлении поля как поля массива в схему коллекции.</p></li>
-<li><p>Установите для атрибута <code translate="no">element_type</code> поля значение <code translate="no">DataType.STRUCT</code>, чтобы сделать поле массивом структур.</p></li>
-<li><p>Создайте схему Struct и включите в нее необходимые поля. Затем сделайте ссылку на схему Struct в атрибуте поля <code translate="no">struct_schema</code>.</p></li>
-<li><p>Установите для атрибута <code translate="no">max_capacity</code> поля соответствующее значение, чтобы указать максимальное количество структур, которые каждая сущность может содержать в этом поле.</p></li>
-<li><p><strong>(Необязательно</strong>) Вы можете установить <code translate="no">mmap.enabled</code> для любого поля в элементе Struct, чтобы сбалансировать горячие и холодные данные в Struct.</p></li>
+<li><p>Установите тип данных поля в значение « <code translate="no">DataType.ARRAY</code> » при добавлении поля в качестве массива полей в схему коллекции.</p></li>
+<li><p>Установите для атрибута « <code translate="no">element_type</code> » поля значение « <code translate="no">DataType.STRUCT</code> », чтобы сделать поле массивом структур.</p></li>
+<li><p>Создайте схему структуры (Struct) и включите в неё необходимые поля. Затем укажите ссылку на эту схему в атрибуте ` <code translate="no">struct_schema</code> ` поля.</p></li>
+<li><p>Установите для атрибута <code translate="no">max_capacity</code> поля соответствующее значение, чтобы указать максимальное количество структур (Struct), которые каждая сущность может содержать в этом поле.</p></li>
+<li><p>(<strong>Необязательно</strong>) Вы можете задать параметр ` <code translate="no">mmap.enabled</code> ` для любого поля внутри элемента `Struct`, чтобы сбалансировать «горячие» и «холодные» данные в структуре.</p></li>
 </ol>
 <p>Вот как можно определить схему коллекции, включающую массив структур:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(
@@ -361,7 +366,7 @@ SCHEMA=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Выделенные строки в приведенном выше примере кода иллюстрируют процедуру включения массива структур в схему коллекции.</p>
-<h2 id="Set-index-params" class="common-anchor-header">Установка индексных параметров<button data-href="#Set-index-params" class="anchor-icon" translate="no">
+<h2 id="Set-index-params" class="common-anchor-header">Установка параметров индекса<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -376,11 +381,16 @@ SCHEMA=<span class="hljs-string">&#x27;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Индексация обязательна для всех векторных полей, включая как векторные поля в коллекции, так и поля, определенные в элементе Struct.</p>
-<p>Применимые параметры индекса зависят от используемого типа индекса. Для получения подробной информации о применимых параметрах индекса обратитесь к разделу <a href="/docs/ru/v2.6.x/index-explained.md">"Объяснение индекса"</a> и страницам документации, относящимся к выбранному типу индекса.</p>
-<p>Чтобы проиндексировать список вложений, необходимо установить тип индекса <code translate="no">AUTOINDEX</code> или <code translate="no">HNSW</code>, а также использовать <code translate="no">MAX_SIM_COSINE</code> в качестве метрического типа для Milvus для измерения сходства между списками вложений.</p>
+    </button></h2><p>Индексирование является обязательным для всех векторных полей, включая как векторные поля в коллекции, так и те, которые определены в элементе Struct.</p>
+<p>Применимые параметры индекса зависят от используемого типа индекса. Подробную информацию о применимых параметрах индекса см. в <a href="/docs/ru/v2.6.x/index-explained.md">разделе «Объяснение индекса»</a> и на страницах документации, посвященных выбранному типу индекса.</p>
+<p>Чтобы проиндексировать список вложений, необходимо установить его тип индекса на « <code translate="no">AUTOINDEX</code> » или « <code translate="no">HNSW</code> » и использовать « <code translate="no">MAX_SIM_COSINE</code> » в качестве типа метрики, чтобы Milvus мог измерять сходство между списками вложений.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -463,9 +473,14 @@ INDEX_PARAMS=<span class="hljs-string">&#x27;[
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>После того как схема и индекс готовы, можно создать коллекцию, включающую поле Array of Structs.</p>
+    </button></h2><p>Как только схема и индекс будут готовы, вы сможете создать коллекцию, включающую поле «Массив структур» (Array of Structs).</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -522,9 +537,14 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>После создания коллекции вы можете вставить данные, включающие Arrays of Structs, следующим образом.</p>
+    </button></h2><p>После создания коллекции вы можете ввести данные, содержащие массивы структур, следующим образом.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample data</span>
 data = {
     <span class="hljs-string">&#x27;title&#x27;</span>: <span class="hljs-string">&#x27;Walden&#x27;</span>,
@@ -641,7 +661,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><details></p>
-<p><summary>Нужно больше данных?</summary></p>
+<p><summary>Нужны дополнительные данные?</summary></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">import</span> random
 <span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">List</span>, <span class="hljs-type">Dict</span>, <span class="hljs-type">Any</span>
@@ -722,7 +742,7 @@ data = [generate_record(i) <span class="hljs-keyword">for</span> i <span class="
 client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, data=data)
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<h2 id="Vector-search-against-an-Array-of-Structs-field" class="common-anchor-header">Векторный поиск по полю Array of Structs<button data-href="#Vector-search-against-an-Array-of-Structs-field" class="anchor-icon" translate="no">
+<h2 id="Vector-search-against-an-Array-of-Structs-field" class="common-anchor-header">Векторный поиск по полю «Массив структур»<button data-href="#Vector-search-against-an-Array-of-Structs-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -738,13 +758,18 @@ client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot
         ></path>
       </svg>
     </button></h2><p>Вы можете выполнять векторный поиск по векторным полям коллекции и в массиве структур.</p>
-<p>В частности, вам следует объединить имя поля Array of Structs и имена целевых векторных полей в элементах Struct в качестве значения параметра <code translate="no">anns_field</code> в поисковом запросе и использовать <code translate="no">EmbeddingList</code> для аккуратной организации векторов запроса.</p>
+<p>В частности, вам следует объединить имя поля «массив структур» и имена целевых векторных полей в элементах Struct в качестве значения для параметра <code translate="no">anns_field</code> в запросе на поиск, а также использовать <code translate="no">EmbeddingList</code> для упорядоченной организации векторов запросов.</p>
 <div class="alert note">
-<p>Milvus предоставляет <code translate="no">EmbeddingList</code>, чтобы помочь вам более аккуратно организовать векторы запросов для поиска по списку встраивания в Array of Structs. Каждый <code translate="no">EmbeddingList</code> содержит по меньшей мере векторное вложение и ожидает в ответ некоторое количество сущностей topK.</p>
-<p>Однако <code translate="no">EmbeddingList</code> можно использовать только в запросах <code translate="no">search()</code> без параметров поиска по диапазону или группировки, не говоря уже о запросах <code translate="no">search_iterator()</code>.</p>
+<p>Milvus предоставляет функцию « <code translate="no">EmbeddingList</code> », чтобы помочь вам более упорядоченно организовывать векторы запросов для поиска по списку вложений в массиве структур. Каждый запрос « <code translate="no">EmbeddingList</code> » содержит как минимум одно векторное вложение и ожидает в ответ количество объектов topK.</p>
+<p>Однако функцию <code translate="no">EmbeddingList</code> можно использовать только в запросах типа <code translate="no">search()</code> без параметров диапазонного поиска или группировки, не говоря уже о запросах типа <code translate="no">search_iterator()</code>.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.client.embedding_list <span class="hljs-keyword">import</span> EmbeddingList
 
 <span class="hljs-comment"># each query embedding list triggers a single search</span>
@@ -818,10 +843,10 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
     \&quot;outputFields\&quot;: [\&quot;chunks[text]\&quot;]
   }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>В приведенном выше поисковом запросе используется <code translate="no">chunks[text_vector]</code> для ссылки на поле <code translate="no">text_vector</code> в элементах Struct. Вы можете использовать этот синтаксис для задания параметров <code translate="no">anns_field</code> и <code translate="no">output_fields</code>.</p>
-<p>В результате будет получен список из трех наиболее похожих сущностей.</p>
+<p>В приведённом выше поисковом запросе используется <code translate="no">chunks[text_vector]</code> для ссылки на поле <code translate="no">text_vector</code> в элементах Struct. Вы можете использовать этот синтаксис для настройки параметров <code translate="no">anns_field</code> и <code translate="no">output_fields</code>.</p>
+<p>В результате будет выведен список из трёх наиболее похожих сущностей.</p>
 <p><details></p>
-<p><summary>Выход</summary></p>
+<p><summary>Результат</summary></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># [</span>
 <span class="hljs-comment">#     [</span>
 <span class="hljs-comment">#         {</span>
@@ -864,9 +889,14 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>В параметр <code translate="no">data</code> можно также включить несколько списков встраивания, чтобы получить результаты поиска для каждого из этих списков встраивания.</p>
+<p>Вы также можете включить несколько списков вложений в параметр <code translate="no">data</code>, чтобы получить результаты поиска для каждого из этих списков вложений.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># a search with multiple embedding lists</span>
 results = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -923,9 +953,9 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
     \&quot;outputFields\&quot;: [\&quot;chunks[text]\&quot;]
   }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>В результате будет получен список из трех наиболее похожих сущностей для каждого списка встраивания.</p>
+<p>Результатом будет список из трёх наиболее похожих сущностей для каждого списка вложений.</p>
 <p><details></p>
-<p><summary>Вывод</summary></p>
+<p><summary>Результат</summary></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># [</span>
 <span class="hljs-comment">#   [</span>
 <span class="hljs-comment">#     {</span>
@@ -1001,7 +1031,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>В приведенном выше примере кода <code translate="no">embeddingList1</code> - это список встраивания, состоящий из одного вектора, а <code translate="no">embeddingList2</code> содержит два вектора. Каждый из них запускает отдельный поисковый запрос и ожидает список топ-K похожих сущностей.</p>
+<p>В приведённом выше примере кода ` <code translate="no">embeddingList1</code> ` представляет собой список вложений, состоящий из одного вектора, а ` <code translate="no">embeddingList2</code> ` — из двух векторов. Каждый из них запускает отдельный поисковый запрос и возвращает список K наиболее похожих сущностей.</p>
 <h2 id="Next-steps" class="common-anchor-header">Следующие шаги<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1017,4 +1047,4 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Разработка собственного типа данных Array of Structs представляет собой значительный прогресс в возможностях Milvus по работе со сложными структурами данных. Чтобы лучше понять примеры использования и максимально использовать эту новую возможность, рекомендуем вам прочитать статью <a href="/docs/ru/v2.6.x/best-practices-for-array-of-structs.md">"Проектирование схем с использованием массива структур</a>".</p>
+    </button></h2><p>Разработка нативного типа данных «Массив структур» (Array of Structs) представляет собой значительный шаг вперёд в возможностях Milvus по обработке сложных структур данных. Чтобы лучше понять сценарии его использования и максимально эффективно использовать эту новую функцию, рекомендуем ознакомиться со <a href="/docs/ru/v2.6.x/best-practices-for-array-of-structs.md">статьёй «Проектирование схем с использованием массива структур» (Schema Design Using an Array of Structs</a>).</p>

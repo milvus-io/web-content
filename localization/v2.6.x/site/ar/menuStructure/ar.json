@@ -1,36 +1,36 @@
 [
   {
-    "label": "نبذة عن ميلفوس",
+    "label": "نبذة عن Milvus",
     "id": "about",
     "isMenu": true,
     "order": 0,
     "children": [
       {
-        "label": "ما هو ميلفوس",
+        "label": "ما هو Milvus؟",
         "id": "overview.md",
         "order": 0,
         "children": []
       },
       {
-        "label": "متبنو ميلفوس",
+        "label": "مستخدمو Milvus",
         "id": "milvus_adopters.md",
         "order": 1,
         "children": []
       },
       {
-        "label": "خريطة طريق ميلفوس",
+        "label": "خريطة طريق Milvus",
         "id": "roadmap.md",
         "order": 2,
         "children": []
       },
       {
-        "label": "الإصدارات",
+        "label": "البيانات الصحفية",
         "id": "release_notes.md",
         "order": 3,
         "children": []
       },
       {
-        "label": "المقارنة",
+        "label": "مقارنة",
         "id": "comparison.md",
         "order": 5,
         "children": []
@@ -38,37 +38,37 @@
     ]
   },
   {
-    "label": "ابدأ الآن",
+    "label": "ابدأ",
     "id": "getstarted",
     "isMenu": true,
     "order": 1,
     "children": [
       {
-        "label": "البداية سريعة",
+        "label": "البدء السريع",
         "id": "quickstart.md",
         "order": 0,
         "children": []
       },
       {
-        "label": "تثبيت ميلفوس",
+        "label": "تثبيت Milvus",
         "id": "install_milvus",
         "order": 1,
         "isMenu": true,
         "children": [
           {
-            "label": "لمحة عامة",
+            "label": "نظرة عامة",
             "id": "install-overview.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "تشغيل ميلفوس لايت",
+            "label": "تشغيل Milvus Lite",
             "id": "milvus_lite.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "تشغيل ميلفوس ستاندالون",
+            "label": "تشغيل Milvus في الوضع المستقل",
             "id": "run_milvus_docker",
             "order": 2,
             "isMenu": true,
@@ -86,19 +86,19 @@
                 "children": []
               },
               {
-                "label": "دوكر (لينكس)",
+                "label": "Docker (لينكس)",
                 "id": "install_standalone-docker.md",
                 "order": 2,
                 "children": []
               },
               {
-                "label": "تكوين Docker Compose (لينكس)",
+                "label": "Docker Compose (لينكس)",
                 "id": "install_standalone-docker-compose.md",
                 "order": 3,
                 "children": []
               },
               {
-                "label": "سطح المكتب Docker Desktop (ويندوز)",
+                "label": "Docker Desktop (ويندوز)",
                 "id": "install_standalone-windows.md",
                 "order": 4,
                 "children": []
@@ -106,7 +106,7 @@
             ]
           },
           {
-            "label": "تشغيل ميلفوس الموزعة",
+            "label": "تشغيل Milvus الموزع",
             "id": "run_milvus_k8s",
             "order": 3,
             "isMenu": true,
@@ -118,13 +118,13 @@
                 "children": []
               },
               {
-                "label": "مشغل ميلفوس",
+                "label": "مشغل Milvus",
                 "id": "install_cluster-milvusoperator.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "مخطط الدفة",
+                "label": "خريطة هيلم",
                 "id": "install_cluster-helm.md",
                 "order": 2,
                 "children": []
@@ -132,7 +132,7 @@
             ]
           },
           {
-            "label": "تشغيل Milvus مع وحدة معالجة الرسومات",
+            "label": "تشغيل Milvus باستخدام وحدة معالجة الرسومات (GPU)",
             "id": "run_milvus_gpu",
             "order": 4,
             "isMenu": true,
@@ -144,13 +144,13 @@
                 "children": []
               },
               {
-                "label": "مخطط الدفة",
+                "label": "خريطة هيلم",
                 "id": "install_cluster-helm-gpu.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "تركيب Docker Compose",
+                "label": "Docker Compose",
                 "id": "install_standalone-docker-compose-gpu.md",
                 "order": 2,
                 "children": []
@@ -160,30 +160,30 @@
         ]
       },
       {
-        "label": "تثبيت SDKs",
+        "label": "تثبيت حزم SDK",
         "id": "install_sdks",
         "order": 2,
         "children": [
           {
-            "label": "باي ميلفوس",
+            "label": "PyMilvus",
             "id": "install-pymilvus.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "جافا SDK",
+            "label": "مجموعة أدوات تطوير تطبيقات جافا (Java SDK)",
             "id": "install-java.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "اذهب إلى SDK",
+            "label": "Go SDK",
             "id": "install-go.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "مجموعة تطوير البرمجيات SDK لـ Node.js",
+            "label": "حزمة تطوير التطبيقات (SDK) لـ Node.js",
             "id": "install-node.md",
             "order": 3,
             "children": []
@@ -191,7 +191,7 @@
         ]
       },
       {
-        "label": "الاتصال بخادم ميلفوس",
+        "label": "الاتصال بخادم Milvus",
         "id": "connect-to-milvus-server.md",
         "order": 3,
         "children": []
@@ -205,13 +205,13 @@
     "order": 2,
     "children": [
       {
-        "label": "الهندسة المعمارية",
+        "label": "العمارة",
         "id": "architecture",
         "order": 0,
         "isMenu": true,
         "children": [
           {
-            "label": "لمحة عامة",
+            "label": "نظرة عامة",
             "id": "architecture_overview.md",
             "order": 0,
             "children": []
@@ -223,7 +223,7 @@
             "children": []
           },
           {
-            "label": "خدمة البث",
+            "label": "خدمة البث المباشر",
             "id": "streaming_service.md",
             "order": 2,
             "children": []
@@ -241,7 +241,7 @@
             "children": []
           },
           {
-            "label": "تعرف في أي مكان",
+            "label": "نوهير",
             "id": "knowhere.md",
             "order": 5,
             "children": []
@@ -249,13 +249,13 @@
         ]
       },
       {
-        "label": "بيتسيت",
+        "label": "Bitset",
         "id": "bitset.md",
         "order": 1,
         "children": []
       },
       {
-        "label": "الإيجارات المتعددة",
+        "label": "التشغيل متعدد المستأجرين",
         "id": "multi_tenancy.md",
         "order": 3,
         "children": []
@@ -273,13 +273,13 @@
         "children": []
       },
       {
-        "label": "الأنواع المترية",
+        "label": "أنواع الوحدات المترية",
         "id": "metric.md",
         "order": 7,
         "children": []
       },
       {
-        "label": "النسخ المتماثل داخل الذاكرة",
+        "label": "نسخة متماثلة في الذاكرة",
         "id": "replica.md",
         "order": 8,
         "children": []
@@ -310,7 +310,7 @@
         "order": 1,
         "children": [
           {
-            "label": "شرح المجموعة",
+            "label": "شرح عملية التحصيل",
             "id": "manage-collections.md",
             "order": 0,
             "children": []
@@ -334,13 +334,13 @@
             "children": []
           },
           {
-            "label": "التحميل والتحرير",
+            "label": "التحميل والتفريغ",
             "id": "load-and-release.md",
             "order": 5,
             "children": []
           },
           {
-            "label": "تعيين مجموعة المجموعة TTL",
+            "label": "تعيين مدة الصلاحية (TTL) للمجموعة",
             "id": "set-collection-ttl.md",
             "order": 6,
             "children": []
@@ -364,7 +364,7 @@
             "children": []
           },
           {
-            "label": "مجموعة القطرات",
+            "label": "خدمة التسليم عند الاستلام",
             "id": "drop-collection.md",
             "order": 10,
             "children": []
@@ -383,7 +383,7 @@
             "children": []
           },
           {
-            "label": "الحقل الأساسي والمعرف التلقائي",
+            "label": "الحقل الأساسي و«AutoID»",
             "id": "primary-field.md",
             "order": 1,
             "children": []
@@ -395,25 +395,25 @@
             "children": []
           },
           {
-            "label": "متجه ثنائي",
+            "label": "المتجه الثنائي",
             "id": "binary-vector.md",
             "order": 3,
             "children": []
           },
           {
-            "label": "متجه متناثر",
+            "label": "المتجه المتفرق",
             "id": "sparse_vector.md",
             "order": 4,
             "children": []
           },
           {
-            "label": "حقل الأوتار",
+            "label": "حقل السلسلة",
             "id": "string.md",
             "order": 5,
             "children": []
           },
           {
-            "label": "حقل الأرقام",
+            "label": "حقل الرقم",
             "id": "number.md",
             "order": 6,
             "children": []
@@ -424,7 +424,7 @@
             "order": 7,
             "children": [
               {
-                "label": "نظرة عامة على حقل JSON",
+                "label": "نظرة عامة على حقول JSON",
                 "id": "json-field-overview.md",
                 "order": 0,
                 "children": []
@@ -436,7 +436,7 @@
                 "children": []
               },
               {
-                "label": "تمزيق JSON",
+                "label": "تفكيك JSON",
                 "id": "json-shredding.md",
                 "order": 2,
                 "children": []
@@ -450,31 +450,31 @@
             "children": []
           },
           {
-            "label": "مجموعة من الهياكل",
+            "label": "مصفوفة من الهياكل",
             "id": "array-of-structs.md",
             "order": 9,
             "children": []
           },
           {
-            "label": "المجال الهندسي",
+            "label": "مجال الهندسة",
             "id": "geometry-field.md",
             "order": 10,
             "children": []
           },
           {
-            "label": "حقل تيمستامبتز",
+            "label": "حقل «TIMESTAMPTZ»",
             "id": "timestamptz-field.md",
             "order": 11,
             "children": []
           },
           {
-            "label": "المجال الديناميكي",
+            "label": "الحقل الديناميكي",
             "id": "enable-dynamic-field.md",
             "order": 12,
             "children": []
           },
           {
-            "label": "قابل للإلغاء والافتراضي",
+            "label": "القيم القابلة للإلغاء والقيم الافتراضية",
             "id": "nullable-and-default.md",
             "order": 13,
             "children": []
@@ -485,13 +485,13 @@
             "order": 14,
             "children": [
               {
-                "label": "نظرة عامة على المحلل",
+                "label": "نظرة عامة على جهاز التحليل",
                 "id": "analyzer-overview.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "أجهزة تحليل مدمجة",
+                "label": "أجهزة التحليل المدمجة",
                 "id": "built-in-analyzers",
                 "order": 1,
                 "children": [
@@ -502,13 +502,13 @@
                     "children": []
                   },
                   {
-                    "label": "اللغة الإنجليزية",
+                    "label": "الإنجليزية",
                     "id": "english-analyzer.md",
                     "order": 1,
                     "children": []
                   },
                   {
-                    "label": "صيني",
+                    "label": "الصينية",
                     "id": "chinese-analyzer.md",
                     "order": 2,
                     "children": []
@@ -516,7 +516,7 @@
                 ]
               },
               {
-                "label": "التوكنات",
+                "label": "أدوات التقطيع",
                 "id": "tokenizers",
                 "order": 2,
                 "children": [
@@ -527,7 +527,7 @@
                     "children": []
                   },
                   {
-                    "label": "وايت سبيس",
+                    "label": "مسافة بيضاء",
                     "id": "whitespace-tokenizer.md",
                     "order": 1,
                     "children": []
@@ -551,7 +551,7 @@
                     "children": []
                   },
                   {
-                    "label": "معرّف اللغة",
+                    "label": "مُعرِّف اللغة",
                     "id": "language-identifier.md",
                     "order": 5,
                     "children": []
@@ -559,12 +559,12 @@
                 ]
               },
               {
-                "label": "الفلاتر",
+                "label": "المرشحات",
                 "id": "filters",
                 "order": 3,
                 "children": [
                   {
-                    "label": "الأحرف الصغيرة",
+                    "label": "أحرف صغيرة",
                     "id": "lowercase-filter.md",
                     "order": 0,
                     "children": []
@@ -576,19 +576,19 @@
                     "children": []
                   },
                   {
-                    "label": "ألفانوم فقط",
+                    "label": "أبجدي-رقمي فقط",
                     "id": "alphanumonly-filter.md",
                     "order": 2,
                     "children": []
                   },
                   {
-                    "label": "جنالفانوم فقط",
+                    "label": "Cnalphanumonly",
                     "id": "cnalphanumonly-filter.md",
                     "order": 3,
                     "children": []
                   },
                   {
-                    "label": "سنشارونلي",
+                    "label": "Cncharonly",
                     "id": "cncharonly-filter.md",
                     "order": 4,
                     "children": []
@@ -606,25 +606,25 @@
                     "children": []
                   },
                   {
-                    "label": "مُفكِّك العظام",
+                    "label": "جهاز تفكيك المركبات",
                     "id": "decompounder-filter.md",
                     "order": 7,
                     "children": []
                   },
                   {
-                    "label": "ستيمير",
+                    "label": "ستيمر",
                     "id": "stemmer-filter.md",
                     "order": 8,
                     "children": []
                   },
                   {
-                    "label": "إزالة الترقيم",
+                    "label": "إزالة النقطة",
                     "id": "removepunct-filter.md",
                     "order": 9,
                     "children": []
                   },
                   {
-                    "label": "ريجكس",
+                    "label": "Regex",
                     "id": "regex-filter.md",
                     "order": 10,
                     "children": []
@@ -632,13 +632,13 @@
                 ]
               },
               {
-                "label": "محللون متعددو اللغات",
+                "label": "أدوات التحليل متعددة اللغات",
                 "id": "multi-language-analyzers.md",
                 "order": 4,
                 "children": []
               },
               {
-                "label": "اختر المحلل المناسب لحالة الاستخدام الخاصة بك",
+                "label": "اختر جهاز التحليل المناسب لحالتك الاستخدامية",
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
@@ -646,7 +646,7 @@
             ]
           },
           {
-            "label": "تغيير حقل التجميع",
+            "label": "تعديل حقل المجموعة",
             "id": "alter-collection-field.md",
             "order": 15,
             "children": []
@@ -664,13 +664,13 @@
             "order": 17,
             "children": [
               {
-                "label": "تصميم نموذج البيانات للبحث",
+                "label": "تصميم نموذج البيانات لعملية البحث",
                 "id": "schema-hands-on.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "تصميم نموذج البيانات مع مصفوفة من الهياكل",
+                "label": "تصميم نموذج البيانات باستخدام مصفوفة من الهياكل",
                 "id": "best-practices-for-array-of-structs.md",
                 "order": 1,
                 "children": []
@@ -691,7 +691,7 @@
             "children": []
           },
           {
-            "label": "كيانات Upsert",
+            "label": "الكيانات التي يتم إدراجها أو تحديثها",
             "id": "upsert-entities.md",
             "order": 1,
             "children": []
@@ -723,7 +723,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "مسطحة",
+                "label": "شقة",
                 "id": "flat.md",
                 "order": 0,
                 "children": []
@@ -777,13 +777,13 @@
                 "children": []
               },
               {
-                "label": "ديسكان",
+                "label": "DISKANN",
                 "id": "diskann.md",
                 "order": 9,
                 "children": []
               },
               {
-                "label": "قناة SCANN",
+                "label": "SCANN",
                 "id": "scann.md",
                 "order": 10,
                 "children": []
@@ -829,7 +829,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "الفهرس_المقلوب_المتفرق",
+                "label": "SPARSE_INVERTED_INDEX",
                 "id": "sparse-inverted-index.md",
                 "order": 0,
                 "children": []
@@ -837,13 +837,13 @@
             ]
           },
           {
-            "label": "الفهارس العددية",
+            "label": "الفهارس القياسية",
             "id": "scalar-indexes",
             "order": 4,
             "isMenu": true,
             "children": [
               {
-                "label": "BITMAP",
+                "label": "صورة نقطية",
                 "id": "bitmap.md",
                 "order": 0,
                 "children": []
@@ -875,12 +875,12 @@
             ]
           },
           {
-            "label": "الفهارس الممكّنة لوحدة معالجة الرسومات",
+            "label": "الفهارس المدعومة بوحدة معالجة الرسومات (GPU)",
             "id": "gpu-enabled-indexes",
             "order": 5,
             "children": [
               {
-                "label": "نظرة عامة على مؤشر وحدة معالجة الرسومات",
+                "label": "نظرة عامة على مؤشر GPU",
                 "id": "gpu-index-overview.md",
                 "order": 0,
                 "children": []
@@ -904,7 +904,7 @@
                 "children": []
               },
               {
-                "label": "gpu_brute_force",
+                "label": "GPU_BRUTE_FORCE",
                 "id": "gpu-brute-force.md",
                 "order": 4,
                 "children": []
@@ -920,13 +920,13 @@
         "isMenu": true,
         "children": [
           {
-            "label": "بحث ANN الأساسي",
+            "label": "البحث الأساسي باستخدام الشبكات العصبية الاصطناعية",
             "id": "single-vector-search.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "بحث مصفى",
+            "label": "البحث المُصفى",
             "id": "filtered-search.md",
             "order": 1,
             "children": []
@@ -938,19 +938,19 @@
             "children": []
           },
           {
-            "label": "تجميع البحث عن المجموعات",
+            "label": "البحث حسب المجموعات",
             "id": "grouping-search.md",
             "order": 3,
             "children": []
           },
           {
-            "label": "البحث عن المفتاح الأساسي",
+            "label": "البحث باستخدام المفتاح الأساسي",
             "id": "primary-key-search.md",
             "order": 4,
             "children": []
           },
           {
-            "label": "البحث الهجين",
+            "label": "البحث المختلط",
             "id": "multi-vector-search.md",
             "order": 5,
             "children": []
@@ -967,25 +967,25 @@
             "order": 7,
             "children": [
               {
-                "label": "شرح التصفية",
+                "label": "شرح عملية التصفية",
                 "id": "boolean.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "المشغلون الأساسيون",
+                "label": "العمليات الحسابية الأساسية",
                 "id": "basic-operators.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "تصفية القوالب النمذجة",
+                "label": "تصفية القوالب",
                 "id": "filtering-templating.md",
                 "order": 2,
                 "children": []
               },
               {
-                "label": "مشغلات JSON",
+                "label": "عوامل JSON",
                 "id": "json-operators.md",
                 "order": 3,
                 "children": []
@@ -997,13 +997,13 @@
                 "children": []
               },
               {
-                "label": "أخذ العينات العشوائية",
+                "label": "الأخذ العشوائي للعينات",
                 "id": "random-sampling.md",
                 "order": 5,
                 "children": []
               },
               {
-                "label": "مشغلات الهندسة",
+                "label": "مُشغِّلات الهندسة",
                 "id": "geometry-operators.md",
                 "order": 6,
                 "children": []
@@ -1011,13 +1011,13 @@
             ]
           },
           {
-            "label": "البحث في النص الكامل",
+            "label": "البحث عن النص الكامل",
             "id": "full-text-search.md",
             "order": 8,
             "children": []
           },
           {
-            "label": "تطابق النص",
+            "label": "مطابقة النص",
             "id": "keyword-match.md",
             "order": 9,
             "children": []
@@ -1029,7 +1029,7 @@
             "children": []
           },
           {
-            "label": "تطابق العبارات",
+            "label": "المطابقة العبارة",
             "id": "phrase-match.md",
             "order": 11,
             "children": []
@@ -1041,19 +1041,19 @@
             "children": []
           },
           {
-            "label": "استعلامات البحث المرن إلى ميلفوس",
+            "label": "استعلامات Elasticsearch الموجهة إلى Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 13,
             "children": []
           },
           {
-            "label": "مكرر البحث",
+            "label": "مكررات البحث",
             "id": "with-iterators.md",
             "order": 14,
             "children": []
           },
           {
-            "label": "استخدام مفتاح التقسيم",
+            "label": "استخدام مفتاح القسم",
             "id": "use-partition-key.md",
             "order": 15,
             "children": []
@@ -1061,7 +1061,7 @@
         ]
       },
       {
-        "label": "التضمين وإعادة التصنيف",
+        "label": "التضمينات وإعادة الترتيب",
         "id": "embeddings-reranking",
         "order": 6,
         "isMenu": true,
@@ -1091,49 +1091,49 @@
                 "children": []
               },
               {
-                "label": "داش سكوب",
+                "label": "DashScope",
                 "id": "dashscope.md",
                 "order": 3,
                 "children": []
               },
               {
-                "label": "حجر الأساس",
+                "label": "الصخور الأساسية",
                 "id": "bedrock.md",
                 "order": 4,
                 "children": []
               },
               {
-                "label": "فيرتكس للذكاء الاصطناعي",
+                "label": "فيرتكس إيه آي",
                 "id": "vertex-ai.md",
                 "order": 5,
                 "children": []
               },
               {
-                "label": "رحلة بالذكاء الاصطناعي",
+                "label": "Voyage AI",
                 "id": "voyage-ai.md",
                 "order": 6,
                 "children": []
               },
               {
-                "label": "كوهير",
+                "label": "Cohere",
                 "id": "cohere.md",
                 "order": 7,
                 "children": []
               },
               {
-                "label": "سيليكون فلو",
+                "label": "SiliconFLow",
                 "id": "siliconflow.md",
                 "order": 8,
                 "children": []
               },
               {
-                "label": "عناق الوجه المعانق TEI",
+                "label": "Hugging Face TEI",
                 "id": "hugging-face-tei.md",
                 "order": 9,
                 "children": []
               },
               {
-                "label": "جوجل الجوزاء",
+                "label": "جوجل جيميني",
                 "id": "google-gemini.md",
                 "order": 10,
                 "children": []
@@ -1141,37 +1141,37 @@
             ]
           },
           {
-            "label": "وظيفة إعادة التصنيف",
+            "label": "وظيفة إعادة الترتيب",
             "id": "reranking",
             "order": 1,
             "isMenu": true,
             "children": [
               {
-                "label": "مصنف مرجح",
+                "label": "مُصنِّف مرجح",
                 "id": "weighted-ranker.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "مصنف RRF",
+                "label": "مُصنِّف RRF",
                 "id": "rrf-ranker.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "مُعزِّز الرتبة",
+                "label": "Boost Ranker",
                 "id": "boost-ranker.md",
                 "order": 2,
                 "children": []
               },
               {
-                "label": "مصنف الاضمحلال",
+                "label": "تصنيف التآكل",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
                 "children": [
                   {
-                    "label": "نظرة عامة على مصنف الاضمحلال",
+                    "label": "نظرة عامة على «Decay Ranker»",
                     "id": "decay-ranker-overview.md",
                     "order": 0,
                     "children": []
@@ -1183,7 +1183,7 @@
                     "children": []
                   },
                   {
-                    "label": "التضاؤل الأسي",
+                    "label": "الانحلال الأسي",
                     "id": "exponential-decay.md",
                     "order": 2,
                     "children": []
@@ -1195,7 +1195,7 @@
                     "children": []
                   },
                   {
-                    "label": "برنامج تعليمي: تنفيذ الترتيب المستند إلى الوقت في ميلفوس",
+                    "label": "دليل تعليمي: تطبيق الترتيب حسب الوقت في Milvus",
                     "id": "tutorial-implement-a-time-based-ranking-in-milvus.md",
                     "order": 4,
                     "children": []
@@ -1203,13 +1203,13 @@
                 ]
               },
               {
-                "label": "مصنف الطراز",
+                "label": "تصنيف النماذج",
                 "id": "model-ranker",
                 "order": 4,
                 "isMenu": true,
                 "children": [
                   {
-                    "label": "نظرة عامة على مصنف النماذج",
+                    "label": "نظرة عامة على «Model Ranker»",
                     "id": "model-ranker-overview.md",
                     "order": 0,
                     "children": []
@@ -1221,25 +1221,25 @@
                     "children": []
                   },
                   {
-                    "label": "مصنف TEI",
+                    "label": "مُصنِّف TEI",
                     "id": "tei-ranker.md",
                     "order": 2,
                     "children": []
                   },
                   {
-                    "label": "كوهير رانكر",
+                    "label": "Cohere Ranker",
                     "id": "cohere-ranker.md",
                     "order": 3,
                     "children": []
                   },
                   {
-                    "label": "مُصنِّف الذكاء الاصطناعي للرحلات",
+                    "label": "مُصنِّف Voyage AI",
                     "id": "voyage-ai-ranker.md",
                     "order": 4,
                     "children": []
                   },
                   {
-                    "label": "مصنف تدفق السيليكون",
+                    "label": "برنامج SiliconFlow Ranker",
                     "id": "siliconflow-ranker.md",
                     "order": 5,
                     "children": []
@@ -1263,7 +1263,7 @@
             "children": []
           },
           {
-            "label": "ضغط التكتلات",
+            "label": "التجميع والضغط",
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []
@@ -1305,7 +1305,7 @@
     "isMenu": true,
     "children": [
       {
-        "label": "إعداد بيانات المصدر",
+        "label": "تحضير البيانات المصدرية",
         "id": "prepare-source-data.md",
         "order": 0,
         "children": []
@@ -1325,13 +1325,13 @@
     "isMenu": true,
     "children": [
       {
-        "label": "ميلفوس لوكلاء الذكاء الاصطناعي",
+        "label": "Milvus لوكلاء الذكاء الاصطناعي",
         "id": "milvus_for_agents.md",
         "order": 0,
         "children": []
       },
       {
-        "label": "موجهات الذكاء الاصطناعي",
+        "label": "مطالبات الذكاء الاصطناعي",
         "id": "ai_prompts",
         "isMenu": true,
         "order": 1,
@@ -1343,7 +1343,7 @@
             "children": []
           },
           {
-            "label": "بايثون SDK",
+            "label": "حزمة تطوير التطبيقات (SDK) لـ Python",
             "id": "python_sdk.md",
             "order": 1,
             "children": []
@@ -1361,7 +1361,7 @@
             "children": []
           },
           {
-            "label": "اختيار الفهرس",
+            "label": "اختيار المؤشر",
             "id": "index_selection.md",
             "order": 4,
             "children": []
@@ -1382,14 +1382,14 @@
         "children": []
       },
       {
-        "label": "خادم Milvus MCP Server",
+        "label": "خادم Milvus MCP",
         "id": "mcp_server_milvus",
         "order": 3,
         "externalLink": "https://github.com/zilliztech/mcp-server-milvus",
         "children": []
       },
       {
-        "label": "خادم MCP لرمز كلود كلود",
+        "label": "خادم MCP لـ Claude Code",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -1410,25 +1410,25 @@
         "isMenu": true,
         "children": [
           {
-            "label": "في أماكن العمل",
+            "label": "داخل المقر",
             "id": "on_premises",
             "order": 0,
             "isMenu": true,
             "children": [
               {
-                "label": "مع Docker",
+                "label": "باستخدام Docker",
                 "id": "configure-docker.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "مع هيلم",
+                "label": "باستخدام Helm",
                 "id": "configure-helm.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "مع مشغل ميلفوس",
+                "label": "مع Milvus Operator",
                 "id": "configure_operator.md",
                 "order": 2,
                 "children": []
@@ -1442,7 +1442,7 @@
             ]
           },
           {
-            "label": "على السحب",
+            "label": "على السحاب",
             "id": "on_cloud",
             "order": 1,
             "isMenu": true,
@@ -1472,7 +1472,7 @@
                 "children": []
               },
               {
-                "label": "موازنة التحميل من الطبقة 7",
+                "label": "توزيع الحمل على مستوى الطبقة السابعة",
                 "id": "layer-7-lb",
                 "order": 5,
                 "isMenu": true,
@@ -1490,7 +1490,7 @@
                     "children": []
                   },
                   {
-                    "label": "أزور",
+                    "label": "Azure",
                     "id": "ingress.md",
                     "order": 3,
                     "children": []
@@ -1516,7 +1516,7 @@
                     "children": []
                   },
                   {
-                    "label": "أزور",
+                    "label": "Azure",
                     "id": "abs.md",
                     "order": 3,
                     "children": []
@@ -1528,7 +1528,7 @@
         ]
       },
       {
-        "label": "التكوين",
+        "label": "الإعدادات",
         "id": "configuration",
         "order": 1,
         "isMenu": true,
@@ -1540,31 +1540,31 @@
             "children": []
           },
           {
-            "label": "على الطاير",
+            "label": "أثناء العمل",
             "id": "dynamic_config.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "الحد من عدد مرات التحصيل",
+            "label": "تحديد عدد عمليات التجميع",
             "id": "limit_collection_counts.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "تكوين ذاكرة التخزين المؤقت للقطع المقطوعة",
+            "label": "تكوين ذاكرة التخزين المؤقتة للكتل",
             "id": "chunk_cache.md",
             "order": 3,
             "children": []
           },
           {
-            "label": "المنسق هـ أ",
+            "label": "منسق HA",
             "id": "coordinator_ha.md",
             "order": 4,
             "children": []
           },
           {
-            "label": "عقدة الاستعلام باستخدام القرص المحلي",
+            "label": "QueryNode باستخدام القرص المحلي",
             "id": "configure-querynode-localdisk.md",
             "order": 5,
             "children": []
@@ -1578,7 +1578,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "مع Docker أو Helm",
+            "label": "باستخدام Docker أو Helm",
             "id": "docker_helm_dependencies",
             "order": 0,
             "isMenu": true,
@@ -1590,7 +1590,7 @@
                 "children": []
               },
               {
-                "label": "تخزين ميتا",
+                "label": "ميتا ستوريج",
                 "id": "deploy_etcd.md",
                 "order": 1,
                 "children": []
@@ -1604,7 +1604,7 @@
             ]
           },
           {
-            "label": "مع مشغل ميلفوس",
+            "label": "مع Milvus Operator",
             "id": "milvus_operator_dependencies",
             "order": 1,
             "isMenu": true,
@@ -1616,7 +1616,7 @@
                 "children": []
               },
               {
-                "label": "تخزين ميتا",
+                "label": "مخزن ميتا",
                 "id": "meta_storage_operator.md",
                 "order": 1,
                 "children": []
@@ -1630,7 +1630,7 @@
             ]
           },
           {
-            "label": "استخدم بولسار مع ميلفوس",
+            "label": "استخدم Pulsar مع Milvus",
             "id": "pulsar_dependencies",
             "order": 2,
             "isMenu": true,
@@ -1642,7 +1642,7 @@
                 "children": []
               },
               {
-                "label": "متابعة استخدام Pulsar v2",
+                "label": "استمر في استخدام Pulsar v2",
                 "id": "use-pulsar-v2.md",
                 "order": 1,
                 "children": []
@@ -1664,19 +1664,19 @@
             "children": []
           },
           {
-            "label": "مقياس مستقل بذاته",
+            "label": "مقياس مستقل",
             "id": "scale-standalone.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "مقياس مع HPA",
+            "label": "التوسع باستخدام HPA",
             "id": "hpa.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "تبعيات المقياس",
+            "label": "التبعيات المتعلقة بالحجم",
             "id": "scale-dependencies.md",
             "order": 3,
             "children": []
@@ -1689,13 +1689,13 @@
         "order": 7,
         "children": [
           {
-            "label": "ترقية مجموعة ميلفوس العنقودية",
+            "label": "ترقية مجموعة Milvus",
             "id": "upgrade_milvus_cluster-operator.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "ترقية ميلفوس ستاندالون",
+            "label": "ترقية إصدار Milvus المستقل",
             "id": "upgrade_milvus_standalone-operator.md",
             "order": 1,
             "children": []
@@ -1709,13 +1709,13 @@
         "isMenu": true,
         "children": [
           {
-            "label": "الرصد",
+            "label": "المراقبة",
             "id": "monitoring",
             "order": 0,
             "isMenu": true,
             "children": [
               {
-                "label": "الهندسة المعمارية",
+                "label": "العمارة",
                 "id": "monitor_overview.md",
                 "order": 0,
                 "children": []
@@ -1733,7 +1733,7 @@
                 "children": []
               },
               {
-                "label": "لوحة قياس ميلفوس ميتركس",
+                "label": "لوحة معلومات Milvus Metrics",
                 "id": "metrics_dashboard.md",
                 "order": 3,
                 "children": []
@@ -1741,7 +1741,7 @@
             ]
           },
           {
-            "label": "تنبيهات",
+            "label": "التنبيهات",
             "id": "alerts",
             "order": 1,
             "isMenu": true,
@@ -1761,7 +1761,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "تكوين جرافانا لوكي",
+                "label": "تكوين Grafana Loki",
                 "id": "configure_grafana_loki.md",
                 "order": 0,
                 "children": []
@@ -1775,7 +1775,7 @@
             ]
           },
           {
-            "label": "التتبع",
+            "label": "تتبع",
             "id": "trace",
             "order": 3,
             "isMenu": true,
@@ -1822,19 +1822,19 @@
             "isMenu": true,
             "children": [
               {
-                "label": "نظرة عامة على نظام التحكم في العمليات المصرفية القائمة على النتائج",
+                "label": "نظرة عامة على نموذج RBAC",
                 "id": "rbac.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "المستخدمون والامتيازات والأدوار",
+                "label": "المستخدمون، والامتيازات، والأدوار",
                 "id": "users_and_roles.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "مجموعة الامتيازات",
+                "label": "مجموعة بريفيليج",
                 "id": "privilege_group.md",
                 "order": 2,
                 "children": []
@@ -1846,13 +1846,13 @@
                 "children": []
               },
               {
-                "label": "أدوار المنحة",
+                "label": "أدوار المنح",
                 "id": "grant_roles.md",
                 "order": 4,
                 "children": []
               },
               {
-                "label": "إسقاط المستخدمين والأدوار",
+                "label": "حذف المستخدمين والأدوار",
                 "id": "drop_users_roles.md",
                 "order": 5,
                 "children": []
@@ -1866,7 +1866,7 @@
             "children": []
           },
           {
-            "label": "الاتصال بكافكا باستخدام SASL/SSL",
+            "label": "الاتصال بـ Kafka باستخدام SASL/SSL",
             "id": "connect_kafka_ssl.md",
             "order": 3,
             "children": []
@@ -1874,7 +1874,7 @@
         ]
       },
       {
-        "label": "ميلفوس ويب يويو (Milvus WebUI)",
+        "label": "Milvus WebUI",
         "id": "milvus-webui.md",
         "order": "12",
         "children": []
@@ -1886,18 +1886,18 @@
         "children": []
       },
       {
-        "label": "تبديل نوع MQ",
+        "label": "تغيير نوع MQ",
         "id": "switch_milvus_mq_type",
         "order": 14,
         "children": [
           {
-            "label": "مفتاح تبديل مجموعة ميلفوس العنقودية MQ النوع",
+            "label": "محول Milvus Cluster من النوع MQ",
             "id": "switch_milvus_cluster_mq_type-operator.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "مفتاح ميلفوس المستقل من نوع MQ",
+            "label": "محول Milvus المستقل من طراز MQ",
             "id": "switch_milvus_standalone_mq_type-operator.md",
             "order": 1,
             "children": []
@@ -1913,19 +1913,19 @@
     "order": 6,
     "children": [
       {
-        "label": "أتو (واجهة المستخدم الرسومية لميلفوس)",
+        "label": "أتو (واجهة المستخدم الرسومية لـ Milvus)",
         "id": "milvus_attu",
         "order": 0,
         "externalLink": "https://github.com/zilliztech/attu",
         "children": []
       },
       {
-        "label": "النسخ الاحتياطي ميلفوس",
+        "label": "Milvus Backup",
         "id": "milvus_backup",
         "order": 1,
         "children": [
           {
-            "label": "لمحة عامة",
+            "label": "نظرة عامة",
             "id": "milvus_backup_overview.md",
             "order": 0,
             "children": []
@@ -1937,7 +1937,7 @@
             "children": []
           },
           {
-            "label": "واجهة برمجة تطبيقات RESTful API",
+            "label": "واجهة برمجة التطبيقات (API) القائمة على نمط REST",
             "id": "milvus_backup_api.md",
             "order": 2,
             "children": []
@@ -1955,13 +1955,13 @@
                 "children": []
               },
               {
-                "label": "الترحيل بين المثيلات في دلو واحد",
+                "label": "الترحيل بين المثيلات داخل دلو واحد",
                 "id": "shared-bucket-backup-and-restore.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "الترحيل بين المثيلات عبر الدلاء",
+                "label": "الترحيل بين المثيلات عبر المجموعات",
                 "id": "cross-bucket-backup-and-restore.md",
                 "order": 2,
                 "children": []
@@ -1982,7 +1982,7 @@
         "order": 3,
         "children": [
           {
-            "label": "لمحة عامة",
+            "label": "نظرة عامة",
             "id": "birdwatcher_overview.md",
             "order": 0,
             "children": []
@@ -2007,13 +2007,13 @@
         "order": 2,
         "children": [
           {
-            "label": "لمحة عامة",
+            "label": "نظرة عامة",
             "id": "milvus_cdc_overview.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "إعداد النسخ المتماثل CDC",
+            "label": "إعداد النسخ المتماثل لـ CDC",
             "id": "set_up_cdc_replication.md",
             "order": 1,
             "children": []
@@ -2025,7 +2025,7 @@
             "children": []
           },
           {
-            "label": "التجاوز الفاشل",
+            "label": "التحويل التلقائي",
             "id": "cdc_failover.md",
             "order": 3,
             "children": []
@@ -2033,13 +2033,13 @@
         ]
       },
       {
-        "label": "ميلفوس CLI",
+        "label": "Milvus CLI",
         "id": "cli",
         "order": 4,
         "isMenu": true,
         "children": [
           {
-            "label": "لمحة عامة",
+            "label": "نظرة عامة",
             "id": "cli_overview.md",
             "order": 0,
             "children": []
@@ -2059,7 +2059,7 @@
         ]
       },
       {
-        "label": "موصلات ميلفوس",
+        "label": "موصلات Milvus",
         "id": "milvus_connectors",
         "order": 5,
         "isMenu": true,
@@ -2073,21 +2073,21 @@
         ]
       },
       {
-        "label": "ميلفوس VTS",
+        "label": "Milvus VTS",
         "id": "milvus_vts",
         "order": 6,
         "externalLink": "https://github.com/zilliztech/vts",
         "children": []
       },
       {
-        "label": "أداة التحجيم ميلفوس",
+        "label": "أداة تحديد مقاس Milvus",
         "id": "sizing",
         "order": 7,
         "externalLink": "https://milvus.io/tools/sizing/",
         "children": []
       },
       {
-        "label": "عميل باورشيل ميلفوس",
+        "label": "عميل Milvus لـ PowerShell",
         "id": "milvus_powershell",
         "order": 8,
         "externalLink": "https://github.com/rrg92/ps-milvus/blob/main/docs/integrate_powershell.md",
@@ -2113,7 +2113,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "لمحة عامة",
+                "label": "نظرة عامة",
                 "id": "embeddings.md",
                 "order": 0,
                 "children": []
@@ -2149,13 +2149,13 @@
                 "children": []
               },
               {
-                "label": "جينا للذكاء الاصطناعي",
+                "label": "جينا أي آي",
                 "id": "embed-with-jina.md",
                 "order": 7,
                 "children": []
               },
               {
-                "label": "كوهير",
+                "label": "Cohere",
                 "id": "embed-with-cohere.md",
                 "order": 8,
                 "children": []
@@ -2167,13 +2167,13 @@
                 "children": []
               },
               {
-                "label": "ميسترال للذكاء الاصطناعي",
+                "label": "ميسترال أي آي",
                 "id": "embed-with-mistral-ai.md",
                 "order": 10,
                 "children": []
               },
               {
-                "label": "نوميكس",
+                "label": "نوميك",
                 "id": "embed-with-nomic.md",
                 "order": 11,
                 "children": []
@@ -2185,7 +2185,7 @@
                 "children": []
               },
               {
-                "label": "موديل2فيك",
+                "label": "Model2Vec",
                 "id": "embed-with-model2vec.md",
                 "order": 13,
                 "children": []
@@ -2199,13 +2199,13 @@
             ]
           },
           {
-            "label": "معيدو التصنيف",
+            "label": "أجهزة إعادة الترتيب",
             "id": "rerankers",
             "order": 1,
             "isMenu": true,
             "children": [
               {
-                "label": "لمحة عامة",
+                "label": "نظرة عامة",
                 "id": "rerankers-overview.md",
                 "order": 0,
                 "children": []
@@ -2217,13 +2217,13 @@
                 "children": []
               },
               {
-                "label": "كوهير",
+                "label": "Cohere",
                 "id": "rerankers-cohere.md",
                 "order": 2,
                 "children": []
               },
               {
-                "label": "التشفير المتقاطع",
+                "label": "مشفر متقاطع",
                 "id": "rerankers-cross-encoder.md",
                 "order": 3,
                 "children": []
@@ -2235,7 +2235,7 @@
                 "children": []
               },
               {
-                "label": "جينا للذكاء الاصطناعي",
+                "label": "جينا أي آي",
                 "id": "rerankers-jina.md",
                 "order": 5,
                 "children": []
@@ -2253,13 +2253,13 @@
     ]
   },
   {
-    "label": "عمليات الدمج",
+    "label": "عمليات التكامل",
     "id": "integrations",
     "isMenu": true,
     "order": 8,
     "children": [
       {
-        "label": "لمحة عامة",
+        "label": "نظرة عامة",
         "id": "integrations_overview.md",
         "order": 0,
         "children": []
@@ -2270,7 +2270,7 @@
         "order": 3,
         "children": [
           {
-            "label": "لانجتشين",
+            "label": "LangChain",
             "id": "langchain",
             "order": 0,
             "children": [
@@ -2293,19 +2293,19 @@
                 "children": []
               },
               {
-                "label": "البحث الهجين",
+                "label": "البحث المختلط",
                 "id": "milvus_hybrid_search_retriever.md",
                 "order": 4,
                 "children": []
               },
               {
-                "label": "البحث في النص الكامل",
+                "label": "البحث عن النص الكامل",
                 "id": "full_text_search_with_langchain.md",
                 "order": 5,
                 "children": []
               },
               {
-                "label": "بحث غير متزامن",
+                "label": "البحث غير المتزامن",
                 "id": "langchain_milvus_async.md",
                 "order": 6,
                 "children": []
@@ -2319,7 +2319,7 @@
             ]
           },
           {
-            "label": "لاما إندكس",
+            "label": "LlamaIndex",
             "id": "llamaindex",
             "order": 1,
             "children": [
@@ -2330,19 +2330,19 @@
                 "children": []
               },
               {
-                "label": "واجهة برمجة تطبيقات Milvus Async API",
+                "label": "واجهة برمجة تطبيقات Milvus Async",
                 "id": "llamaindex_milvus_async.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "البحث في النص الكامل",
+                "label": "البحث عن النص الكامل",
                 "id": "llamaindex_milvus_full_text_search.md",
                 "order": 2,
                 "children": []
               },
               {
-                "label": "البحث الهجين",
+                "label": "البحث المختلط",
                 "id": "llamaindex_milvus_hybrid_search.md",
                 "order": 3,
                 "children": []
@@ -2368,7 +2368,7 @@
             "children": []
           },
           {
-            "label": "هاي ستاك",
+            "label": "HayStack",
             "id": "haystack",
             "order": 4,
             "children": [
@@ -2379,7 +2379,7 @@
                 "children": []
               },
               {
-                "label": "البحث في النص الكامل",
+                "label": "البحث عن النص الكامل",
                 "id": "full_text_search_with_milvus_and_haystack.md",
                 "order": 1,
                 "children": []
@@ -2387,19 +2387,19 @@
             ]
           },
           {
-            "label": "كوتيمون",
+            "label": "كوتايمون",
             "id": "kotaemon_with_milvus.md",
             "order": 5,
             "children": []
           },
           {
-            "label": "ديفي",
+            "label": "Dify",
             "id": "dify_with_milvus.md",
             "order": 6,
             "children": []
           },
           {
-            "label": "لانجفلو",
+            "label": "لانغفلو",
             "id": "rag_with_langflow.md",
             "order": 7,
             "children": []
@@ -2411,31 +2411,31 @@
             "children": []
           },
           {
-            "label": "برايفتGPT",
+            "label": "PrivateGPT",
             "id": "use_milvus_in_private_gpt.md",
             "order": 10,
             "children": []
           },
           {
-            "label": "ديناميك",
+            "label": "Dynamiq",
             "id": "milvus_rag_with_dynamiq.md",
             "order": 11,
             "children": []
           },
           {
-            "label": "كومة اللاما",
+            "label": "مجموعة Llama",
             "id": "llama_stack_with_milvus.md",
             "order": 12,
             "children": []
           },
           {
-            "label": "ن8 ن",
+            "label": "n8n",
             "id": "milvus_and_n8n.md",
             "order": 13,
             "children": []
           },
           {
-            "label": "أي شيءLLLM",
+            "label": "AnythingLLM",
             "id": "use_milvus_in_anythingllm.md",
             "order": 14,
             "children": []
@@ -2448,7 +2448,7 @@
         "order": 4,
         "children": [
           {
-            "label": "ميمغبت",
+            "label": "MemGPT",
             "id": "integrate_with_memgpt.md",
             "order": 0,
             "children": []
@@ -2460,13 +2460,13 @@
             "children": []
           },
           {
-            "label": "ميم0",
+            "label": "Mem0",
             "id": "quickstart_mem0_with_milvus.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "أجنو",
+            "label": "أغنو",
             "id": "integrate_with_agno.md",
             "order": 3,
             "children": []
@@ -2486,42 +2486,42 @@
         ]
       },
       {
-        "label": "التقييم والملاحظة",
+        "label": "التقييم والقابلية للمراقبة",
         "id": "evaluation-observability",
         "order": 6,
         "children": [
           {
-            "label": "راجاس",
+            "label": "الراغات",
             "id": "integrate_with_ragas.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "لانجفيوز",
+            "label": "LangFuse",
             "id": "integrate_with_langfuse.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "واحد وخمسون",
+            "label": "خمسون وواحد",
             "id": "integrate_with_voxel51.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "أريز فيونيكس",
+            "label": "أريز فينيكس",
             "id": "evaluation_with_phoenix.md",
             "order": 3,
             "children": []
           },
           {
-            "label": "ديب إيفال",
+            "label": "DeepEval",
             "id": "evaluation_with_deepeval.md",
             "order": 4,
             "children": []
           },
           {
-            "label": "أيمون",
+            "label": "AIMon",
             "id": "AIMon_milvus_integration.md",
             "order": 5,
             "children": []
@@ -2540,19 +2540,19 @@
             "children": []
           },
           {
-            "label": "كوهير",
+            "label": "Cohere",
             "id": "integrate_with_cohere.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "عناق الوجه",
+            "label": "HuggingFace",
             "id": "integrate_with_hugging-face.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "باي تورتش",
+            "label": "PyTorch",
             "id": "integrate_with_pytorch.md",
             "order": 3,
             "children": []
@@ -2570,25 +2570,25 @@
             "children": []
           },
           {
-            "label": "جينا للذكاء الاصطناعي",
+            "label": "جينا أي آي",
             "id": "integrate_with_jina.md",
             "order": 11,
             "children": []
           },
           {
-            "label": "اثنا عشر مختبراً",
+            "label": "تويلف لابس",
             "id": "video_search_with_twelvelabs_and_milvus.md",
             "order": 12,
             "children": []
           },
           {
-            "label": "بينتو مل",
+            "label": "BentoML",
             "id": "integrate_with_bentoml.md",
             "order": 5,
             "children": []
           },
           {
-            "label": "تضمينأي شيء",
+            "label": "EmbedAnything",
             "id": "build_RAG_with_milvus_and_embedAnything.md",
             "order": 15,
             "children": []
@@ -2596,7 +2596,7 @@
         ]
       },
       {
-        "label": "الماجستير في القانون",
+        "label": "نماذج اللغة الكبيرة (LLMs)",
         "id": "integrate-llms",
         "order": 2,
         "children": [
@@ -2607,7 +2607,7 @@
             "children": []
           },
           {
-            "label": "ميسترال للذكاء الاصطناعي",
+            "label": "ميسترال AI",
             "id": "llama_agents_metadata.md",
             "order": 1,
             "children": []
@@ -2619,13 +2619,13 @@
             "children": []
           },
           {
-            "label": "سيليكون فلو",
+            "label": "SiliconFlow",
             "id": "build_RAG_with_milvus_and_siliconflow.md",
             "order": 4,
             "children": []
           },
           {
-            "label": "سامبا نوفا",
+            "label": "سامبانوفا",
             "id": "use_milvus_with_sambanova.md",
             "order": 5,
             "children": []
@@ -2643,7 +2643,7 @@
             "children": []
           },
           {
-            "label": "ديبسيك",
+            "label": "DeepSeek",
             "id": "build_RAG_with_milvus_and_deepseek.md",
             "order": 8,
             "children": []
@@ -2656,7 +2656,7 @@
         "order": 5,
         "children": [
           {
-            "label": "لماذا كيف",
+            "label": "لماذا وكيف",
             "id": "integrate_with_whyhow.md",
             "order": 0,
             "children": []
@@ -2693,7 +2693,7 @@
         "order": 7,
         "children": [
           {
-            "label": "أيربايت",
+            "label": "Airbyte",
             "id": "integrate_with_airbyte.md",
             "order": 0,
             "children": []
@@ -2705,7 +2705,7 @@
             "children": []
           },
           {
-            "label": "أبيفي",
+            "label": "Apify",
             "id": "apify_milvus_rag.md",
             "order": 2,
             "children": []
@@ -2717,13 +2717,13 @@
             "children": []
           },
           {
-            "label": "قناع PII Masker",
+            "label": "أداة إخفاء المعلومات الشخصية",
             "id": "RAG_with_pii_and_milvus.md",
             "order": 4,
             "children": []
           },
           {
-            "label": "الزحف الناري",
+            "label": "فايركراول",
             "id": "build_RAG_with_milvus_and_firecrawl.md",
             "order": 5,
             "children": []
@@ -2747,19 +2747,19 @@
             "children": []
           },
           {
-            "label": "وليمة",
+            "label": "العيد",
             "id": "build_RAG_with_milvus_and_feast.md",
             "order": 9,
             "children": []
           },
           {
-            "label": "ميسترال OCR",
+            "label": "Mistral OCR",
             "id": "mistral_ocr_with_milvus.md",
             "order": 10,
             "children": []
           },
           {
-            "label": "دوكلينج",
+            "label": "Docling",
             "id": "build_RAG_with_milvus_and_docling.md",
             "order": 11,
             "children": []
@@ -2771,7 +2771,7 @@
             "children": []
           },
           {
-            "label": "لانجإكستراكتكت",
+            "label": "LangExtract",
             "id": "langextract_milvus_demo.md",
             "order": 13,
             "children": []
@@ -2806,19 +2806,19 @@
     ]
   },
   {
-    "label": "البرامج التعليمية",
+    "label": "الدروس التعليمية",
     "id": "tutorials",
     "isMenu": true,
     "order": 7,
     "children": [
       {
-        "label": "لمحة عامة",
+        "label": "نظرة عامة",
         "id": "tutorials-overview.md",
         "order": 0,
         "children": []
       },
       {
-        "label": "بناء RAG مع ميلفوس",
+        "label": "إنشاء RAG باستخدام Milvus",
         "id": "build-rag-with-milvus.md",
         "order": 1,
         "children": []
@@ -2830,31 +2830,31 @@
         "children": []
       },
       {
-        "label": "البحث عن النص الكامل مع ميلفوس",
+        "label": "البحث عن النص الكامل باستخدام Milvus",
         "id": "full_text_search_with_milvus.md",
         "order": 3,
         "children": []
       },
       {
-        "label": "البحث الهجين مع ميلفوس",
+        "label": "البحث الهجين باستخدام Milvus",
         "id": "hybrid_search_with_milvus.md",
         "order": 4,
         "children": []
       },
       {
-        "label": "البحث عن الصور مع ميلفوس",
+        "label": "البحث عن الصور باستخدام Milvus",
         "id": "image_similarity_search.md",
         "order": 5,
         "children": []
       },
       {
-        "label": "الوسائط المتعددة RAG",
+        "label": "RAG متعدد الوسائط",
         "id": "multimodal_rag_with_milvus.md",
         "order": 6,
         "children": []
       },
       {
-        "label": "الرسم البياني RAG مع ميلفوس",
+        "label": "رسم بياني لـ RAG باستخدام Milvus",
         "id": "graph_rag_with_milvus.md",
         "order": 7,
         "children": []
@@ -2866,13 +2866,13 @@
         "children": []
       },
       {
-        "label": "تجميع HDBSCAN",
+        "label": "التجميع في HDBSCAN",
         "id": "hdbscan_clustering_with_milvus.md",
         "order": 9,
         "children": []
       },
       {
-        "label": "استخدام كولبرت وكولبالي مع ميلفوس",
+        "label": "استخدم ColBERT وColPali مع Milvus",
         "id": "search-with-embedding-lists",
         "order": 10,
         "externalLink": "https://milvus.io/docs/search-with-embedding-lists.md",
@@ -2885,19 +2885,19 @@
         "children": []
       },
       {
-        "label": "توصية فيلم",
+        "label": "توصية بفيلم",
         "id": "movie_recommendation_with_milvus.md",
         "order": 12,
         "children": []
       },
       {
-        "label": "البحث القمعي باستخدام تضمينات ماتريوشكا",
+        "label": "البحث القمعي باستخدام تمثيلات «ماتريوشكا»",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []
       },
       {
-        "label": "البدء السريع مع أتو",
+        "label": "البدء السريع مع Attu",
         "id": "quickstart_with_attu.md",
         "order": 14,
         "children": []
@@ -2909,13 +2909,13 @@
         "children": []
       },
       {
-        "label": "البحث بتحويل النص إلى صورة مع ميلفوس",
+        "label": "البحث عن الصور باستخدام النص مع Milvus",
         "id": "text_image_search.md",
         "order": 16,
         "children": []
       },
       {
-        "label": "توليد تعبيرات مرشح استعلامات ميلفوس مع نماذج اللغة الكبيرة",
+        "label": "إنشاء تعبيرات تصفية استعلامات Milvus باستخدام نماذج لغوية ضخمة",
         "id": "generating_milvus_query_filter_expressions.md",
         "order": 17,
         "children": []
@@ -2932,37 +2932,37 @@
             "children": []
           },
           {
-            "label": "نظام التوصية",
+            "label": "نظام التوصيات",
             "id": "recommendation_system.md",
             "order": 6,
             "children": []
           },
           {
-            "label": "البحث عن تشابه الفيديو",
+            "label": "البحث عن مقاطع الفيديو المتشابهة",
             "id": "video_similarity_search.md",
             "order": 7,
             "children": []
           },
           {
-            "label": "البحث عن تشابه الصوت",
+            "label": "البحث عن التشابه الصوتي",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []
           },
           {
-            "label": "تصنيف تسلسل الحمض النووي",
+            "label": "تصنيف تسلسلات الحمض النووي",
             "id": "dna_sequence_classification.md",
             "order": 9,
             "children": []
           },
           {
-            "label": "محرك البحث عن النص",
+            "label": "محرك بحث النصوص",
             "id": "text_search_engine.md",
             "order": 10,
             "children": []
           },
           {
-            "label": "نظام إلغاء تكرار الصور",
+            "label": "نظام إزالة التكرار من الصور",
             "id": "image_deduplication_system.md",
             "order": 12,
             "children": []
@@ -2990,7 +2990,7 @@
         "children": []
       },
       {
-        "label": "الأسئلة الشائعة التشغيلية",
+        "label": "الأسئلة الشائعة المتعلقة بالعمليات",
         "id": "operational_faq.md",
         "order": 2,
         "children": []
