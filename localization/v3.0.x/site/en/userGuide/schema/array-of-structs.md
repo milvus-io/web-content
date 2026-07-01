@@ -84,7 +84,7 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p><strong>Data types</strong></p>
-<p>When you create a collection, you can use the Struct type as the data type for the elements in an Array field. However, you cannot add a StructArray to an existing collection, and Milvus does not support using the Struct type as the data type for a collection field.</p>
+<p>When you create a collection, you can use the Struct type as the data type for the elements in an Array field. Starting from Milvus 3.0.0, you can also add a StructArray field to an existing collection with <code translate="no">add_collection_struct_field()</code>. For details, refer to <a href="/docs/add-fields-to-an-existing-collection.md#add-structarray-fields--milvus-300">Alter Collection Schema</a>. Milvus does not support using the Struct type as the data type for a collection field.</p>
 <p>The Structs in an Array field share the same schema, which should be defined when you create the Array field.</p>
 <p>A Struct schema contains both vectors and scalar fields, as listed below:</p>
 <p><Grid columnSize="2" widthRatios="50,50"></p>
