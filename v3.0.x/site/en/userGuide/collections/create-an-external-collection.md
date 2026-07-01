@@ -393,21 +393,21 @@ Once the schema is ready, you can add fields as follows:
 schema.add_field(
     field_name="product_id",
     datatype=DataType.INT64,
-    # highlight-next
+    # highlight-next-line
     external_field="id" # field name in the external data file
 )
 schema.add_field(
     field_name="product_name",
     datatype=DataType.VARCHAR,
     max_length=512,
-    # highlight-next
+    # highlight-next-line
     external_field="name"
 )
 schema.add_field(
     field_name="embedding",
     datatype=DataType.FLOAT_VECTOR,
     dim=768,
-    # highlight-next
+    # highlight-next-line
     external_field="vector"
 )
 ```
@@ -561,7 +561,7 @@ curl --request POST \
 
 ## Step 4: Create indexes
 
-You can create indexes for external collection columns as you do in managed collections.
+You can create indexes for external collection fields as you do in managed collections.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -785,8 +785,10 @@ The refresh operation is asynchronous, so you need to set up an iteration to mon
 
 </div>
 
-## Follow-ups
+## Next steps
 
 Once you have refreshed the external collection, you can load and release the collection and perform similarity searches and queries in the external collection as you would in any managed collection, except that collections in a database for on-demand computing must be attached to an on-demand cluster for searches and queries.
 
 Before conducting DQL operations, such as search, query, get, and hybrid search, you need to create a session to attach the compute resources of an on-demand cluster.
+
+If the external data source later contains another field that you want to expose in Milvus, add a field to the external collection schema and refresh the external collection again. For details, refer to [Alter External Collection Schema](alter-external-collection-schema.md).
