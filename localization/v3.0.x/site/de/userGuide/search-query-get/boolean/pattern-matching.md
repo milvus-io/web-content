@@ -2,7 +2,7 @@
 id: pattern-matching.md
 title: Musterabgleich
 summary: >-
-  Milvus unterstützt den Abgleich von Zeichenfolgenmustern mit
+  Milvus unterstützt den Abgleich von Zeichenfolgenmustern mithilfe von
   LIKE-Platzhaltermustern und RE2-regulären Ausdrücken. Verwenden Sie
   Musterfilter, um Präfixe, Suffixe, Teilzeichenfolgen, strukturierte Codes,
   E-Mail-Domänen, URL-Pfade und andere Zeichenfolgenmuster in VARCHAR-Feldern,
@@ -36,7 +36,7 @@ res = client.query(
     output_fields=[<span class="hljs-string">&quot;message&quot;</span>, <span class="hljs-string">&quot;severity&quot;</span>],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Die Beispiele auf dieser Seite konzentrieren sich auf den Ausdruck, der dem Parameter „ <code translate="no">filter</code> “ zugewiesen ist. Sie können dieselbe Syntax für Filterausdrücke in Milvus-Operationen verwenden, die einen skalaren Filter akzeptieren, wie z. B. „ <code translate="no">query</code> “, „ <code translate="no">search</code> “ und die Hybrid-Suche.</p>
+<p>Die Beispiele auf dieser Seite konzentrieren sich auf den Ausdruck, der dem Parameter „ <code translate="no">filter</code> “ zugewiesen ist. Sie können dieselbe Filterausdruckssyntax in Milvus-Operationen verwenden, die einen skalaren Filter akzeptieren, wie z. B. „ <code translate="no">query</code> “, „ <code translate="no">search</code> “ und die Hybrid-Suche.</p>
 <h2 id="Supported-field-types" class="common-anchor-header">Unterstützte Feldtypen<button data-href="#Supported-field-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -164,8 +164,8 @@ res = client.query(
         ></path>
       </svg>
     </button></h3><p>Verwenden Sie „ <code translate="no">LIKE</code> “ für Präfix-, Suffix-, „enthält“- und Einzelzeichen-Übereinstimmungen an einer festen Position. „ <code translate="no">LIKE</code> “ unterstützt keine Zeichenklassen wie „ <code translate="no">[0-9]</code> “, keine Alternativen wie „ <code translate="no">error|failed</code> “, keine Wiederholungsanzahlen wie „ <code translate="no">{4}</code> “, keine Anker wie „ <code translate="no">^</code> “ oder „ <code translate="no">$</code> “ und keine Flags für die Groß-/Kleinschreibung wie „ <code translate="no">(?i)</code> “. Verwenden Sie für diese Muster reguläre Ausdrücke (Regex).</p>
-<p>Verwenden Sie „ <code translate="no">==</code> “ für die exakte Übereinstimmung der gesamten Zeichenfolge. Verwenden Sie „ <code translate="no">LIKE</code> “ nur, wenn der Filter Platzhalterabgleich benötigt.</p>
-<h2 id="Use-regex" class="common-anchor-header">Verwenden Sie reguläre Ausdrücke<button data-href="#Use-regex" class="anchor-icon" translate="no">
+<p>Verwenden Sie „ <code translate="no">==</code> “ für die exakte Übereinstimmung des gesamten Strings. Verwenden Sie „ <code translate="no">LIKE</code> “ nur, wenn der Filter eine Übereinstimmung mit Platzhaltern erfordert.</p>
+<h3 id="Escaping-wildcards-in-a-LIKE-pattern" class="common-anchor-header">Escapen von Platzhaltern in einem LIKE-Muster<button data-href="#Escaping-wildcards-in-a-LIKE-pattern" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -180,8 +180,30 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Verwenden Sie Regex-Filter, wenn das Muster Funktionen regulärer Ausdrücke wie Zeichenklassen, Wiederholungen, Alternativen, Anker oder groß-/kleinschreibungsunabhängige Übereinstimmungen erfordert. Milvus wendet einen <a href="https://github.com/google/re2/wiki/syntax">RE2-regulären</a> Ausdruck auf einen Zeichenfolgenwert an.</p>
-<p>Die rechte Seite von „ <code translate="no">=~</code> “ oder „ <code translate="no">!~</code> “ muss ein Zeichenfolgenliteral sein.</p>
+    </button></h3><p>In „ <code translate="no">LIKE</code> “-Mustern entspricht „ <code translate="no">%</code> “ null oder mehr Zeichen und „ <code translate="no">_</code> “ genau einem Zeichen. Um „ <code translate="no">%</code> “, „ <code translate="no">_</code> “ oder „ <code translate="no">\</code> “ wörtlich abzugleichen, müssen die Zeichen mit einem Backslash (<code translate="no">\</code>) maskiert werden:</p>
+<ul>
+<li><code translate="no">name LIKE r&quot;\%&quot;</code> entspricht dem literalen Wert „ <code translate="no">%</code> “.</li>
+<li><code translate="no">name LIKE r&quot;\_%&quot;</code> passt auf Werte, die mit dem Literal „ <code translate="no">_</code> “ beginnen.</li>
+<li><code translate="no">name LIKE r&quot;\\%&quot;</code> passt auf Werte, die mit einem literalen Backslash beginnen.</li>
+</ul>
+<p>Raw-String-Literale, geschrieben als <code translate="no">r&quot;...&quot;</code> oder <code translate="no">r'...'</code>, behalten Backslashes in Milvus-Filterausdrücken unverändert bei. Sie werden für „ <code translate="no">LIKE</code> “ und Regex-Muster empfohlen, die Backslashes enthalten. Ohne einen Raw-String verarbeiten gewöhnliche String-Literale weiterhin Escape-Sequenzen, bevor das Muster ausgewertet wird, sodass möglicherweise mehr Backslashes erforderlich sind.</p>
+<h2 id="Use-regex--Milvus-30x" class="common-anchor-header">Verwenden Sie Regex<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Use-regex--Milvus-30x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Verwenden Sie Regex-Filter, wenn das Muster Funktionen regulärer Ausdrücke wie Zeichenklassen, Wiederholungen, Alternativen, Anker oder groß-/kleinschreibungsunabhängige Übereinstimmungen erfordert. Milvus wendet einen <a href="https://github.com/google/re2/wiki/syntax">RE2-regulären</a> Ausdruck auf einen String-Wert an.</p>
+<p>Die rechte Seite von „ <code translate="no">=~</code> “ oder „ <code translate="no">!~</code> “ muss ein String-Literal sein.</p>
 <table>
 <thead>
 <tr><th>Operator</th><th>Bedeutung</th><th>Beispiel</th></tr>
@@ -191,7 +213,7 @@ res = client.query(
 <tr><td><code translate="no">!~</code></td><td>Schließt Werte aus, die dem Regex-Muster entsprechen.</td><td><code translate="no">filter = 'message !~ &quot;^DEBUG&quot;'</code></td></tr>
 </tbody>
 </table>
-<h3 id="Common-regex-patterns" class="common-anchor-header">Gängige Regex-Muster<button data-href="#Common-regex-patterns" class="anchor-icon" translate="no">
+<h3 id="Use-raw-string-literals" class="common-anchor-header">Verwenden Sie Raw-String-Literale<button data-href="#Use-raw-string-literals" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -206,7 +228,28 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Die folgenden Beispiele verwenden gängige RE2-Syntax in Milvus-Filterausdrücken. Die vollständige Regex-Syntax finden Sie in der <a href="https://github.com/google/re2/wiki/syntax">RE2-Syntaxreferenz</a>.</p>
+    </button></h3><p>Raw-String-Literale werden für Regex-Muster empfohlen, die Backslashes enthalten. In einem Raw-String, der als „ <code translate="no">r&quot;...&quot;</code> “ oder „ <code translate="no">r'...'</code> “ geschrieben wird, werden Backslashes unverändert an die Regex-Engine übergeben. Dadurch entfällt die zusätzliche Escape-Behandlung, die bei gewöhnlichen String-Literalen erforderlich ist.</p>
+<p>Beispiel:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ r&quot;\d{4}-\d{2}-\d{2}&quot;&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Dies passt auf Zeichenfolgen, die einen datumsähnlichen Wert enthalten, wie z. B. <code translate="no">2026-07-01</code>.</p>
+<p>Ohne eine Raw-Zeichenkette verarbeiten gewöhnliche Zeichenfolgenliterale Escape-Sequenzen, bevor das Regex-Muster ausgewertet wird, sodass Muster wie <code translate="no">\d</code>, <code translate="no">\s</code> oder escaped Literalzeichen möglicherweise zusätzliche Backslashes erfordern.</p>
+<h3 id="Common-regex-patterns" class="common-anchor-header">Gängige reguläre Ausdrücke<button data-href="#Common-regex-patterns" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Die folgenden Beispiele verwenden gängige RE2-Syntax in Milvus-Filterausdrücken. Die vollständige Syntax für reguläre Ausdrücke finden Sie in der <a href="https://github.com/google/re2/wiki/syntax">RE2-Syntaxreferenz</a>.</p>
 <table>
 <thead>
 <tr><th>Anforderung</th><th>Muster</th><th>Filterbeispiel</th></tr>
@@ -264,7 +307,7 @@ res = client.query(
 </thead>
 <tbody>
 <tr><td><code translate="no">json_field[&quot;path&quot;] =~ &quot;pattern&quot;</code></td><td>Nein</td><td>Erkennt nur Zeichenfolgenwerte, die dem Regex-Muster entsprechen.</td></tr>
-<tr><td><code translate="no">json_field[&quot;path&quot;] !~ &quot;pattern&quot;</code></td><td>Ja</td><td>Gibt Entitäten zurück, bei denen der Pfad fehlt, null ist, kein String ist oder ein String ist, der nicht dem Regex-Muster entspricht.</td></tr>
+<tr><td><code translate="no">json_field[&quot;path&quot;] !~ &quot;pattern&quot;</code></td><td>Ja</td><td>Gibt Entitäten zurück, bei denen der Pfad fehlt, null ist, kein String ist oder ein String ist, der nicht mit dem Regex-Muster übereinstimmt.</td></tr>
 </tbody>
 </table>
 <h2 id="Accelerate-pattern-matching-with-indexes" class="common-anchor-header">Beschleunigung des Musterabgleichs durch Indizes<button data-href="#Accelerate-pattern-matching-with-indexes" class="anchor-icon" translate="no">

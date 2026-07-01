@@ -17,7 +17,7 @@ title: Pulsar
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Apache Pulsar è uno dei backend per la coda di messaggi (WAL) supportati da Milvus. In Milvus 3.x, <a href="/docs/it/woodpecker.md">Woodpecker</a> è la coda di messaggi predefinita; Pulsar rimane pienamente supportato per gli utenti che lo preferiscono. Pulsar viene utilizzato principalmente con Milvus Distributed (cluster); le distribuzioni standalone utilizzano in genere Woodpecker integrato o <a href="/docs/it/mq_rocksmq.md">RocksMQ</a>.</p>
+    </button></h1><p>Apache Pulsar è uno dei backend per la coda di messaggi (WAL) supportati da Milvus. In Milvus 3.x, <a href="/docs/it/woodpecker.md">Woodpecker</a> è la coda di messaggi predefinita; Pulsar rimane pienamente supportato per gli utenti che lo preferiscono. Pulsar viene utilizzato principalmente con Milvus Distributed (cluster); le distribuzioni standalone utilizzano in genere Woodpecker incorporato o <a href="/docs/it/mq_rocksmq.md">RocksMQ</a>.</p>
 <h2 id="Version-compatibility" class="common-anchor-header">Compatibilità tra versioni<button data-href="#Version-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,7 +42,7 @@ title: Pulsar
 <tr><td>2.4.x e precedenti</td><td>Pulsar v2</td><td>Pulsar v2</td></tr>
 </tbody>
 </table>
-<p>A partire da Milvus 2.5, il chart Helm di Milvus e Milvus Operator distribuiscono <strong>Pulsar v3</strong> per impostazione predefinita; Pulsar v2 rimane compatibile. Vedere <a href="/docs/it/upgrade-pulsar-v3.md">Aggiornamento di Pulsar dalla versione v2 alla v3</a> e <a href="/docs/it/use-pulsar-v2.md">Continuare a utilizzare Pulsar v2</a>.</p>
+<p>A partire da Milvus 2.5, il chart Helm di Milvus e Milvus Operator distribuiscono <strong>Pulsar v3</strong> per impostazione predefinita; Pulsar v2 rimane compatibile. Vedi <a href="/docs/it/upgrade-pulsar-v3.md">Aggiornamento di Pulsar dalla v2 alla v3</a> e <a href="/docs/it/use-pulsar-v2.md">Continuare a utilizzare Pulsar v2</a>.</p>
 <h2 id="Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="common-anchor-header">Distribuzione di un cluster Milvus con Pulsar tramite Helm<button data-href="#Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -81,7 +81,7 @@ title: Pulsar
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Su Kubernetes v1.25 e versioni successive, se si riscontrano problemi con l’API PodDisruptionBudget (PDB) derivanti dal sub-chart di Pulsar integrato, disabilitare le policy PDB di Pulsar:</p>
+<p>Su Kubernetes v1.25 e versioni successive, se si riscontrano problemi con l’API PodDisruptionBudget (PDB) derivanti dal sottografico Pulsar integrato, disabilitare le politiche PDB di Pulsar:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> pulsar.bookkeeper.pdb.usePolicy=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsar.broker.pdb.usePolicy=<span class="hljs-literal">false</span> \
@@ -265,7 +265,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
     </button></h2><ul>
 <li><strong>Aggiornamento dalla versione 2.5.x alla 2.6.x:</strong> <strong>limitazioni relative alla coda dei messaggi</strong>: durante l'aggiornamento a Milvus v3.0-beta, è necessario mantenere la coda dei messaggi attualmente in uso. Il passaggio a sistemi di coda dei messaggi diversi durante l'aggiornamento non è supportato. Il supporto per la modifica dei sistemi di coda dei messaggi sarà disponibile nelle versioni future.
 Se si utilizza Pulsar e si desidera mantenerlo, non modificare la coda dei messaggi durante l’aggiornamento.</li>
-<li><strong>Pulsar v2 → v3:</strong> consultare <a href="/docs/it/upgrade-pulsar-v3.md">Aggiornamento di Pulsar dalla v2 alla v3</a>; per rimanere sulla v2, consultare <a href="/docs/it/use-pulsar-v2.md">Continuare a utilizzare Pulsar v2</a>.</li>
+<li><strong>Pulsar v2 → v3:</strong> consultare <a href="/docs/it/upgrade-pulsar-v3.md">Aggiornamento di Pulsar dalla v2 alla v3</a>; per rimanere alla v2, consultare <a href="/docs/it/use-pulsar-v2.md">Continuare a utilizzare Pulsar v2</a>.</li>
 </ul>
 <h2 id="Whats-next" class="common-anchor-header">Prossimi passi<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

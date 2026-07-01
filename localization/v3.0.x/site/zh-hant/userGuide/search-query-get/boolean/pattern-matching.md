@@ -77,7 +77,7 @@ res = client.query(
         ></path>
       </svg>
     </button></h2><p>請選擇能最簡潔地表達所需模式的運算子。</p>
-<p>若需進行字串精確比對，建議您使用 `<code translate="no">==</code> ` 而非模式比對。僅當篩選條件需要比對特定模式時，才應使用 `<code translate="no">LIKE</code> ` 或正規表達式。</p>
+<p>若需進行字串精確比對，建議您使用 `<code translate="no">==</code> ` 而非模式比對。僅當篩選條件需要比對特定模式時，才使用 `<code translate="no">LIKE</code> ` 或正規表達式。</p>
 <table>
 <thead>
 <tr><th>要求</th><th>建議運算子</th><th>範例</th><th>說明</th></tr>
@@ -160,9 +160,9 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>請使用<code translate="no">LIKE</code> 進行前綴、後綴、包含以及固定位置單一字元比對。<code translate="no">LIKE</code> 不支援字元類別（例如<code translate="no">[0-9]</code> ）、選擇關係（例如<code translate="no">error|failed</code> ）、重複次數（例如<code translate="no">{4}</code> ）、錨點（例如<code translate="no">^</code> 或<code translate="no">$</code> ），亦不支援不區分大小寫標誌（例如<code translate="no">(?i)</code> ）。若需使用此類模式，請改用正規表達式。</p>
+    </button></h3><p>請使用<code translate="no">LIKE</code> 進行前綴、後綴、包含以及固定位置單一字元比對。<code translate="no">LIKE</code> 不支援字元類別（例如<code translate="no">[0-9]</code> ）、選擇關係（例如<code translate="no">error|failed</code> ）、重複次數（例如<code translate="no">{4}</code> ）、錨點（例如<code translate="no">^</code> 或<code translate="no">$</code> ），亦不支援不區分大小寫的標誌（例如<code translate="no">(?i)</code> ）。若需使用這些模式，請改用正規表達式。</p>
 <p>若需進行完全字串相等比對，請使用<code translate="no">==</code> 。僅當篩選條件需要通配符匹配時，才使用<code translate="no">LIKE</code> 。</p>
-<h2 id="Use-regex" class="common-anchor-header">使用正規表達式<button data-href="#Use-regex" class="anchor-icon" translate="no">
+<h3 id="Escaping-wildcards-in-a-LIKE-pattern" class="common-anchor-header">在 LIKE 模式中對通配符進行轉義<button data-href="#Escaping-wildcards-in-a-LIKE-pattern" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -177,17 +177,60 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>當模式需要正則表達式功能（例如字元類別、重複、選擇、錨點或不區分大小寫的匹配）時，請使用正則表達式篩選器。Milvus 會將<a href="https://github.com/google/re2/wiki/syntax">RE2</a>正則表達式套用至字串值。</p>
-<p><code translate="no">=~</code> 或<code translate="no">!~</code> 的右側必須為字串字面值。</p>
+    </button></h3><p>在<code translate="no">LIKE</code> 模式中，<code translate="no">%</code> 匹配零個或多個字元，而<code translate="no">_</code> 則匹配精確一個字元。若要字面匹配<code translate="no">%</code> 、<code translate="no">_</code> 或<code translate="no">\</code> ，請使用反斜線 (<code translate="no">\</code>) 對字元進行轉義：</p>
+<ul>
+<li><code translate="no">name LIKE r&quot;\%&quot;</code> 會匹配字面值<code translate="no">%</code> 。</li>
+<li><code translate="no">name LIKE r&quot;\_%&quot;</code> 匹配以字面值<code translate="no">_</code> 開頭的值。</li>
+<li><code translate="no">name LIKE r&quot;\\%&quot;</code> 匹配以字面值反斜線開頭的值。</li>
+</ul>
+<p>原始字串字面值（寫法為<code translate="no">r&quot;...&quot;</code> 或<code translate="no">r'...'</code> ）會在 Milvus 篩選器表達式中保留反斜線的原始形式。建議在<code translate="no">LIKE</code> 以及包含反斜線的正規表達式中使用此格式。若未使用原始字串，一般字串字面值在評估模式前仍會處理轉義序列，因此可能需要更多反斜線。</p>
+<h2 id="Use-regex--Milvus-30x" class="common-anchor-header">使用正規表達式<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Use-regex--Milvus-30x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>當模式需要正則表達式功能（例如字元類別、重複、選擇、錨點或不區分大小寫的匹配）時，請使用正則表達式篩選器。Milvus 會對字串值套用<a href="https://github.com/google/re2/wiki/syntax">RE2</a>正則表達式。</p>
+<p><code translate="no">=~</code> 或<code translate="no">!~</code> 的右側必須為字串文字。</p>
 <table>
 <thead>
 <tr><th>運算子</th><th>含義</th><th>範例</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">=~</code></td><td>匹配符合正規表達式模式的值。</td><td><code translate="no">filter = 'message =~ &quot;E[0-9]{4}&quot;'</code></td></tr>
-<tr><td><code translate="no">!~</code></td><td>排除符合該正規表達式模式的值。</td><td><code translate="no">filter = 'message !~ &quot;^DEBUG&quot;'</code></td></tr>
+<tr><td><code translate="no">!~</code></td><td>排除符合正規表達式模式的值。</td><td><code translate="no">filter = 'message !~ &quot;^DEBUG&quot;'</code></td></tr>
 </tbody>
 </table>
+<h3 id="Use-raw-string-literals" class="common-anchor-header">使用原始字串文字<button data-href="#Use-raw-string-literals" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>對於包含反斜線的正規表達式模式，建議使用原始字串文字。在原始字串中（寫法為<code translate="no">r&quot;...&quot;</code> 或<code translate="no">r'...'</code> ），反斜線會原樣傳遞給正規表達式引擎。這可避免一般字串文字所需的額外轉義。</p>
+<p>例如：</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ r&quot;\d{4}-\d{2}-\d{2}&quot;&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>這會匹配包含類似日期的字串，例如<code translate="no">2026-07-01</code> 。</p>
+<p>若未使用原始字串，一般字串文字會在評估正規表達式模式之前先處理轉義序列，因此像<code translate="no">\d</code> 、<code translate="no">\s</code> 這樣的模式，或是包含轉義字元的字串，可能需要額外的反斜線。</p>
 <h3 id="Common-regex-patterns" class="common-anchor-header">常見的正規表達式模式<button data-href="#Common-regex-patterns" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -203,7 +246,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>以下範例在 Milvus 篩選表達式中使用常見的 RE2 語法。如需完整的正規表達式語法，請參閱<a href="https://github.com/google/re2/wiki/syntax">RE2 語法</a>參考。</p>
+    </button></h3><p>以下範例在 Milvus 篩選器表達式中使用常見的 RE2 語法。如需完整的正規表達式語法，請參閱<a href="https://github.com/google/re2/wiki/syntax">RE2 語法</a>參考。</p>
 <table>
 <thead>
 <tr><th>需求</th><th>模式</th><th>篩選範例</th></tr>
@@ -250,7 +293,7 @@ res = client.query(
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;code =~ &quot;^E[0-9]{4}$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>可為空的 VARCHAR 欄位</strong></p>
-<p>正規表達式篩選器不會匹配 null 值。這同時適用於<code translate="no">=~</code> 和<code translate="no">!~</code> 。若要排除某個正規表達式模式但保留 null 值，請明確添加<code translate="no">OR field IS NULL</code> ：</p>
+<p>正規表達式篩選器不會匹配 null 值。這同時適用於<code translate="no">=~</code> 和<code translate="no">!~</code> 。若要排除某個正規表達式模式但保留 null 值，請明確加入<code translate="no">OR field IS NULL</code> ：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot; OR message IS NULL&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>JSON 路徑</strong></p>

@@ -81,7 +81,7 @@ title: 脉冲星
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在 Kubernetes v1.25 及更高版本中，若因捆绑的 Pulsar 子图引发 PodDisruptionBudget（PDB）API 问题，请禁用 Pulsar 的 PDB 策略：</p>
+<p>在 Kubernetes v1.25 及更高版本中，若因捆绑的 Pulsar 子图引发 PodDisruptionBudget API 问题，请禁用 Pulsar 的 PDB 策略：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> pulsar.bookkeeper.pdb.usePolicy=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsar.broker.pdb.usePolicy=<span class="hljs-literal">false</span> \
@@ -133,7 +133,7 @@ title: 脉冲星
       </svg>
     </button></h3><pre><code translate="no" class="language-bash">helm uninstall my-release
 <button class="copy-code-btn"></button></code></pre>
-<p>若您使用了内置的 Pulsar 并希望清除其持久化数据，请删除 Pulsar PVC（名为<code translate="no">my-release-pulsarv3-*</code> ）：</p>
+<p>若您使用了内置的 Pulsar 并希望清除其持久化数据，请删除 Pulsar PVC（名称为<code translate="no">my-release-pulsarv3-*</code> ）：</p>
 <pre><code translate="no" class="language-bash">kubectl get pvc | grep my-release-pulsarv3
 kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <button class="copy-code-btn"></button></code></pre>

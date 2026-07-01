@@ -54,4 +54,4 @@ title: etcd
   --<span class="hljs-built_in">set</span> etcd.image.repository=milvusdb/etcd \
   --<span class="hljs-built_in">set</span> etcd.image.tag=3.5.25-r1
 <button class="copy-code-btn"></button></code></pre>
-<p>若使用外部 etcd，或需了解 Docker Compose / Helm / Milvus Operator 的詳細配置，請參閱<a href="/docs/zh-hant/deploy_etcd.md">《使用 Docker Compose 或 Helm 配置元資料儲存</a>》以及<a href="/docs/zh-hant/meta_storage_operator.md">《使用 Milvus Operator 配置元資料儲存</a>》。</p>
+<p>若使用外部 etcd，或需了解 Docker Compose / Helm / Milvus Operator 的詳細配置，請參閱<a href="/docs/zh-hant/deploy_etcd.md">《使用 Docker Compose 或 Helm 配置元資料儲存》</a>及<a href="/docs/zh-hant/meta_storage_operator.md">《使用 Milvus Operator 配置元資料儲存</a>》。</p>

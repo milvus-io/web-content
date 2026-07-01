@@ -3,8 +3,8 @@ id: mqtype-overview.md
 title: Gambaran Umum Antrian Pesan
 summary: >-
   Gambaran umum mengenai opsi antrian pesan (mqType) yang didukung oleh Milvus,
-  serta opsi mana yang sebaiknya digunakan untuk penerapan mandiri (standalone)
-  dan penerapan terdistribusi.
+  serta opsi mana yang sebaiknya digunakan untuk penerapan standalone dan
+  terdistribusi.
 ---
 <h1 id="Message-Queue-Overview" class="common-anchor-header">Gambaran Umum Antrian Pesan<button data-href="#Message-Queue-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,7 +39,7 @@ summary: >-
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Antrian pesan</th><th style="text-align:center">Milvus Standalone</th><th style="text-align:center">Milvus Distributed (kluster)</th><th>Standar di</th><th>Catatan</th></tr>
+<tr><th>Antrian pesan</th><th style="text-align:center">Milvus Standalone</th><th style="text-align:center">Milvus Distributed (kluster)</th><th>Standar pada</th><th>Catatan</th></tr>
 </thead>
 <tbody>
 <tr><td><a href="/docs/id/woodpecker.md">Woodpecker</a></td><td style="text-align:center">✔️ (terintegrasi)</td><td style="text-align:center">✔️ (terintegrasi atau layanan)</td><td><strong>Milvus 3.x</strong> (kedua mode)</td><td>Standar dan direkomendasikan. WAL berbasis cloud pada penyimpanan objek; tidak memerlukan layanan eksternal.</td></tr>

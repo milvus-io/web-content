@@ -77,7 +77,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>다음은 Woodpecker의 전체 구성 블록입니다( <code translate="no">milvus.yaml</code> 파일을 편집하거나 <code translate="no">user.yaml</code> 에서 재정의하십시오):</p>
+    </button></h2><p>다음은 전체 Woodpecker 구성 블록입니다( <code translate="no">milvus.yaml</code> 파일을 편집하거나 <code translate="no">user.yaml</code> 에서 재정의하십시오):</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Related configuration of woodpecker, used to manage Milvus logs of recent mutation operations, output streaming log, and provide embedded log sequential read and write.</span>
 <span class="hljs-attr">woodpecker:</span>
   <span class="hljs-attr">meta:</span>
@@ -427,12 +427,12 @@ docker restart milvus-standalone
 <li>스토리지 측면
 <ul>
 <li><strong>오브젝트 스토리지(MinIO/S3 호환)</strong>: 동시 처리량과 오브젝트 크기를 늘리십시오(매우 작은 오브젝트는 피하십시오). 네트워크 및 버킷 대역폭 제한을 주의 깊게 확인하십시오. SSD에 구축된 단일 MinIO 노드는 로컬에서 대개 100 MB/s 정도로 제한되는 반면, 단일 EC2에서 S3로의 전송은 GB/s 수준에 도달할 수 있습니다.</li>
-<li><strong>로컬/공유 파일 시스템(로컬)</strong>: NVMe 또는 고속 디스크를 우선적으로 사용하십시오. 파일 시스템이 소량 쓰기 작업과 fsync 지연 시간을 잘 처리할 수 있도록 하십시오.</li>
+<li><strong>로컬/공유 파일 시스템(로컬)</strong>: NVMe/고속 디스크를 우선적으로 사용하십시오. 파일 시스템이 소량 쓰기 및 fsync 지연 시간을 잘 처리하는지 확인하십시오.</li>
 </ul></li>
 <li>Woodpecker 조정 매개변수
 <ul>
 <li><code translate="no">logstore.segmentSyncPolicy.maxFlushSize</code> 및 <code translate="no">maxFlushThreads</code> 값을 높여 더 큰 플러시 크기와 더 높은 병렬 처리를 구현하십시오.</li>
-<li>매체 특성에 따라 <code translate="no">maxInterval</code> 을 조정하십시오(집계 기간을 늘려 처리량을 확보하는 대신 지연 시간을 감수).</li>
+<li>매체 특성에 따라 <code translate="no">maxInterval</code> 을 조정하십시오(집계 기간을 늘려 지연 시간을 대가로 처리량을 확보).</li>
 <li>오브젝트 스토리지의 경우, 세그먼트 전환을 줄이기 위해 <code translate="no">segmentRollingPolicy.maxSize</code> 값을 늘리는 것을 고려하십시오.</li>
 </ul></li>
 <li>클라이언트/애플리케이션 측
@@ -530,7 +530,7 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Woodpecker는 처리량, 비용, 지연 시간 간의 절충점을 고려하여 오브젝트 스토리지를 위해 설계된 클라우드 네이티브 WAL입니다. 경량 임베디드 모드는 비용 및 처리량 최적화를 우선시하는데, 이는 대부분의 시나리오에서 개별 쓰기 요청에 대한 낮은 지연 시간을 요구하기보다는 특정 시간 내에 데이터가 기록되기만 하면 되기 때문입니다. 따라서 Woodpecker는 일괄 쓰기를 채택하며, 로컬 파일 시스템 스토리지 백엔드의 경우 기본 간격은 10ms이고, MinIO와 유사한 스토리지 백엔드의 경우 200ms입니다. 쓰기 작업 속도가 느릴 때 최대 지연 시간은 간격 시간에 플러시 시간을 더한 값과 같습니다.</p>
+    </button></h3><p>Woodpecker는 처리량, 비용, 지연 시간 간의 절충점을 고려하여 오브젝트 스토리지를 위해 설계된 클라우드 네이티브 WAL입니다. 경량 임베디드 모드는 비용 및 처리량 최적화를 우선시하는데, 대부분의 시나리오에서는 개별 쓰기 요청에 대한 낮은 지연 시간을 요구하기보다는 데이터가 특정 시간 내에 쓰여지기만 하면 되기 때문입니다. 따라서 Woodpecker는 일괄 쓰기를 채택하며, 로컬 파일 시스템 스토리지 백엔드의 경우 기본 간격은 10ms이고, MinIO와 유사한 스토리지 백엔드의 경우 200ms입니다. 쓰기 작업 속도가 느릴 때 최대 지연 시간은 간격 시간에 플러시 시간을 더한 값과 같습니다.</p>
 <p>배치 삽입은 시간 간격뿐만 아니라 배치 크기(기본값 2MB)에 의해서도 트리거된다는 점에 유의하십시오.</p>
 <h3 id="Service-mode-Milvus-30+" class="common-anchor-header">서비스 모드 (Milvus 3.0+)<button data-href="#Service-mode-Milvus-30+" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -547,9 +547,9 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>서비스 모드는 비용을 낮게 유지하면서도 <strong>밀리초 수준의 쓰기 지연 시간을</strong> 제공합니다(이는 기존의 3개 복제본을 사용하는 로컬 디스크 WAL과 비슷한 수준입니다). 일반적인 3개 복제본, AZ 간 배포 환경에서 쓰기 지연 시간은 밀리초 범위를 유지합니다. 이는 다음을 통해 달성됩니다:</p>
+    </button></h3><p>서비스 모드는 비용을 낮게 유지하면서도 <strong>밀리초 수준의 쓰기 지연 시간을</strong> 제공합니다. 이는 기존의 3개 복제본을 사용하는 로컬 디스크 WAL과 비슷한 수준입니다. 일반적인 3개 복제본, AZ 간 배포 환경에서 쓰기 지연 시간은 밀리초 범위를 유지합니다. 이는 다음을 통해 달성됩니다.</p>
 <ul>
-<li><strong>단일 RTT 쿼럼 쓰기</strong> — 클라이언트 주도형 복제는 단일 왕복(RTT) 내에 쿼럼 쓰기를 완료하며, AZ 간 트래픽은 2개의 복제본에 해당하는 데이터량으로 고정됩니다(브로커/리더 기반 복제에서 일반적으로 발생하는 추가적인 약 1/3의 AZ 간 트래픽과 대비).</li>
+<li><strong>단일 RTT 쿼럼 쓰기</strong> — 클라이언트 주도형 복제는 단일 왕복(RTT) 내에 쿼럼 쓰기를 완료하며, AZ 간 트래픽은 2개의 레플리카에 해당하는 데이터량으로 고정됩니다(브로커/리더 기반 복제에서 일반적으로 발생하는 추가적인 약 1/3의 AZ 간 트래픽과 대비).</li>
 <li><strong>토폴로지를 고려한 단일 홉 읽기</strong> — 각 읽기 요청은 브로커를 통해 전달되는 대신 가장 가까운 복제본으로 직접 전송되므로, 브로커 기반 시스템에서 발생하는 무작위 AZ 간 읽기(AZ 간 읽기 트래픽의 약 2/3)를 피할 수 있습니다.</li>
 <li><strong>세그먼트 롤링 후 즉시 오브젝트 스토리지 업로드</strong> — 각 세그먼트는 전체 수명 주기를 추적하며, 롤링되는 즉시 오브젝트 스토리지에 업로드되어 지연 시간을 희생하지 않으면서 로컬 디스크 사용량과 스토리지 비용을 낮게 유지합니다.</li>
 <li><strong>지속적인 노드 간 복제 없음</strong> — 로그가 공유 스토리지 역할을 하는 오브젝트 스토리지에 영구 저장되므로, 장애 조치 시 생존한 복제본만 재업로드되며(전체 노드 복사 없음), 확장성이 노드 간 복제 대역폭에 제한받지 않고, 대규모 노드 교체 시에도 복제 폭주가 발생하지 않습니다.</li>

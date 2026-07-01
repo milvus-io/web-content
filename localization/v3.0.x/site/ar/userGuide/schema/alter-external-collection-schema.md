@@ -92,7 +92,7 @@ client.add_collection_field(
 <span class="highlighted-wrapper-line">    external_field=<span class="hljs-string">&quot;score&quot;</span>,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>في هذا المثال، يُعد « <code translate="no">score</code> » اسم الحقل في Milvus، ويقوم « <code translate="no">external_field=&quot;score&quot;</code> » بربطه بحقل « <code translate="no">score</code> » في مصدر البيانات الخارجي. قم بتعيين « <code translate="no">nullable=True</code> » لأن الحقل يُضاف بعد إنشاء المجموعة بالفعل.</p>
+<p>في هذا المثال، يُعد « <code translate="no">score</code> » اسم الحقل في Milvus، ويقوم « <code translate="no">external_field=&quot;score&quot;</code> » بربطه بحقل « <code translate="no">score</code> » في مصدر البيانات الخارجي. قم بتعيين « <code translate="no">nullable=True</code> » لأن الحقل تمت إضافته بعد إنشاء المجموعة بالفعل.</p>
 <h3 id="Add-a-vector-field" class="common-anchor-header">إضافة حقل متجه<button data-href="#Add-a-vector-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

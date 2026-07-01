@@ -81,7 +81,7 @@ title: Pulsar
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>En Kubernetes v1.25 y versiones posteriores, si se producen problemas con la API de PodDisruptionBudget (PDB) debido al sub-chart de Pulsar incluido, desactive las políticas de PDB de Pulsar:</p>
+<p>En Kubernetes v1.25 y versiones posteriores, si se producen problemas con la API de PodDisruptionBudget (PDB) debido al subgráfico de Pulsar incluido, desactive las políticas de PDB de Pulsar:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> pulsar.bookkeeper.pdb.usePolicy=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsar.broker.pdb.usePolicy=<span class="hljs-literal">false</span> \

@@ -462,10 +462,41 @@
             "children": []
           },
           {
-            "label": "Array of Structs",
-            "id": "array-of-structs.md",
+            "label": "StructArray",
+            "id": "structarray",
             "order": 10,
-            "children": []
+            "children": [
+              {
+                "label": "StructArray Overview",
+                "id": "array-of-structs.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Create a StructArray Field",
+                "id": "create-structarray-field.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Insert Data into StructArray Fields",
+                "id": "insert-data-into-structarray-fields.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Index StructArray Fields",
+                "id": "index-structarray-fields.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "StructArray Limits",
+                "id": "structarray-limits.md",
+                "order": 4,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Geometry Field",
@@ -1083,10 +1114,53 @@
             "children": []
           },
           {
-            "label": "Search with Embedding Lists",
-            "id": "search-with-embedding-lists.md",
+            "label": "Search with StructArray",
+            "id": "search-with-structarray",
             "order": 12,
-            "children": []
+            "children": [
+              {
+                "label": "Basic Vector Search with StructArray",
+                "id": "basic-vector-search-with-structarray.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Filtered Search with StructArray",
+                "id": "filtered-search-with-structarray.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Range Search with StructArray",
+                "id": "range-search-with-structarray.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Grouping Search with StructArray",
+                "id": "grouping-search-with-structarray.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "Hybrid Search with StructArray",
+                "id": "hybrid-search-with-structarray.md",
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "Search with EmbeddingLists: ColBERT and ColPali",
+                "id": "search-with-embedding-lists.md",
+                "order": 5,
+                "children": []
+              },
+              {
+                "label": "Choose an EmbeddingList Search Strategy",
+                "id": "choose-an-embeddinglist-search-strategy.md",
+                "order": 6,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Elasticsearch Queries to Milvus",

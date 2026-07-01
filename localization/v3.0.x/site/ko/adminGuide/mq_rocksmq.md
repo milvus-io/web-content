@@ -17,7 +17,7 @@ title: RocksMQ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>RocksMQ는 Milvus에 번들로 제공되는 임베디드 메시지 큐(WAL)로, <strong>Milvus Standalone에서만</strong> 사용할 수 있습니다. 이전 버전의 Milvus에서는 기본 독립 실행형 메시지 큐로 사용되었으나, Milvus 3.x에서는 Milvus Standalone이 기본적으로 임베디드 <a href="/docs/ko/woodpecker.md">Woodpecker를</a> 사용합니다.</p>
+    </button></h1><p>RocksMQ는 Milvus에 번들로 제공되는 임베디드 메시지 큐(WAL)로, <strong>Milvus Standalone에서만</strong> 사용할 수 있습니다. 이전 버전의 Milvus에서는 기본 독립형 메시지 큐로 사용되었으나, Milvus 3.x에서는 Milvus Standalone이 기본적으로 임베디드 <a href="/docs/ko/woodpecker.md">Woodpecker를</a> 사용합니다.</p>
 <h2 id="Version-compatibility" class="common-anchor-header">버전 호환성<button data-href="#Version-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

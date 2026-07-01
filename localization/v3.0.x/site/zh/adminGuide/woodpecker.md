@@ -19,7 +19,7 @@ summary: 了解 Woodpecker 如何作为 Milvus 中的默认消息队列（WAL）
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Woodpecker 是 Milvus 3.x 中的<strong>默认消息队列（预写日志，WAL）</strong>。它是一款专为对象存储设计的云原生 WAL，具有高吞吐量、低操作开销和无缝可扩展性等特点。有关架构和基准测试的详细信息，请参阅<a href="/docs/zh/woodpecker_architecture.md">Woodpecker</a>。</p>
+    </button></h1><p>Woodpecker 是 Milvus 3.x 中的<strong>默认消息队列（预写日志，WAL）</strong>。它是一款专为对象存储设计的云原生 WAL，具有高吞吐量、低运维开销和无缝可扩展性等特点。有关架构和基准测试的详细信息，请参阅<a href="/docs/zh/woodpecker_architecture.md">Woodpecker</a>。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -201,7 +201,7 @@ summary: 了解 Woodpecker 如何作为 Milvus 中的默认消息队列（WAL）
 <ul>
 <li>兼容性取决于原生 SDK 的支持情况或对 S3 条件写入语义的支持情况。</li>
 <li>若您为 Woodpecker 自建 MinIO 实例，请使用<code translate="no">RELEASE.2024-12-18T13-15-44Z</code> 或更高版本。</li>
-<li>此对照表反映了<a href="https://github.com/zilliztech/woodpecker/discussions/150">当前的讨论情况</a>，随着后端支持的进一步验证，内容可能会有所调整。</li>
+<li>此对照表反映了<a href="https://github.com/zilliztech/woodpecker/discussions/150">当前的讨论情况</a>，随着后端支持的进一步验证，内容可能会发生变化。</li>
 </ul>
 <h2 id="Deployment-guides" class="common-anchor-header">部署指南<button data-href="#Deployment-guides" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -294,7 +294,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>部署完成后，请按照文档说明进行端口转发并建立连接。若需调整 Woodpecker 参数，请参考<a href="#Configuration">“配置</a>”部分中的设置说明。</p>
+<p>部署完成后，请按照文档说明进行端口转发并建立连接。如需调整 Woodpecker 参数，请参考<a href="#Configuration">“配置</a>”部分中的设置说明。</p>
 <h3 id="Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="common-anchor-header">在 Docker 中的 Milvus Standalone 部署中启用 Woodpecker（storage=local）<button data-href="#Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -455,7 +455,7 @@ docker restart milvus-standalone
         ></path>
       </svg>
     </button></h3><p>服务模式在保持基于对象存储的 WAL 高写入吞吐量的同时，还增加了低延迟（参见<a href="#Latency">“延迟”</a>）。 上述存储端和客户端的调优方法仍然适用；此外，由于 Woodpecker 作为独立服务运行，您可以通过增加副本（<code translate="no">woodpecker.replicaCount</code> ，默认 4 个）来水平扩展写入容量，且写入操作可受益于单 RTT 定额复制以及避免经纪人转发的拓扑感知读取。</p>
-<p><strong>批量插入演示</strong>——使用以下代码测量写入吞吐量：</p>
+<p><strong>批量插入演示</strong>— 使用以下代码测量写入吞吐量：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">import</span> random
 <span class="hljs-keyword">import</span> time
@@ -529,7 +529,7 @@ batch_count = <span class="hljs-number">2000</span>
         ></path>
       </svg>
     </button></h3><p>Woodpecker 是一款专为对象存储设计的云原生 WAL，在吞吐量、成本和延迟之间实现了权衡。轻量级的嵌入式模式优先考虑成本和吞吐量的优化，因为大多数场景仅要求数据在一定时间内写入，而非对单个写入请求要求低延迟。 因此，Woodpecker 采用批量写入机制，其中本地文件系统存储后端的默认间隔为 10 毫秒，而 MinIO 类存储后端的默认间隔为 200 毫秒。在写入速度较慢的情况下，最大延迟等于间隔时间加上刷新时间之和。</p>
-<p>请注意，批量插入不仅由时间间隔触发，还受批量大小影响，其默认值为 2MB。</p>
+<p>请注意，批量插入不仅由时间间隔触发，还由批量大小触发，其默认值为 2MB。</p>
 <h3 id="Service-mode-Milvus-30+" class="common-anchor-header">服务模式（Milvus 3.0+）<button data-href="#Service-mode-Milvus-30+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -545,12 +545,12 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>服务模式在保持低成本的同时，实现了<strong>毫秒级写入延迟</strong>——与传统的三副本本地磁盘 WAL 处于同一量级。在典型的三副本跨可用区部署中，写入延迟始终保持在毫秒范围内。其实现方式如下：</p>
+    </button></h3><p>服务模式在保持低成本的同时，实现了<strong>毫秒级写入延迟</strong>——与传统的三副本本地磁盘 WAL 处于同一量级。在典型的三副本跨可用区部署中，写入延迟始终保持在毫秒范围内。其实现方式包括：</p>
 <ul>
-<li><strong>单 RTT 法定数写入</strong>——客户端驱动的复制可在单次往返内完成法定数写入，跨可用区流量固定为两个副本的数据量（相比之下，基于代理/领导者的复制通常会产生额外的约 1/3 跨可用区流量）。</li>
+<li><strong>单 RTT 法定多数写入</strong>——客户端驱动的复制可在单次往返内完成法定多数写入，跨可用区流量固定为两个副本的数据量（相比之下，基于代理/领导者的复制通常会产生额外的约 1/3 跨可用区流量）。</li>
 <li><strong>拓扑感知单跳读取</strong>——每次读取都直接发送到最近的副本，而不是通过代理转发，从而避免了基于代理系统中随机的跨可用区读取（约占跨可用区读取流量的 2/3）。</li>
 <li><strong>分段滚动后立即上传至对象存储</strong>——每个分段都会追踪其完整生命周期，并在滚动后立即上传至对象存储，从而在不牺牲延迟性能的前提下，保持本地磁盘占用空间和存储成本处于较低水平。</li>
-<li><strong>无持续的节点间复制</strong>——日志持久化到充当共享存储的对象存储中，因此故障转移时仅需重新上传幸存的副本（无需复制整个节点），扩展不再受限于节点间复制带宽，且大规模节点替换不会引发复制风暴。</li>
+<li><strong>无持续的节点间复制</strong>——日志持久化到充当共享存储的对象存储中，因此故障转移时仅需重新上传幸存的副本（无需复制整个节点），扩展不受节点间复制带宽的限制，且大规模节点替换不会引发复制风暴。</li>
 </ul>
 <p>在跨可用区（AZ）部署中，与基于代理的日志系统相比，服务模式还可节省约<strong>1/3 的跨可用区写入</strong>网络流量和<strong>2/3 的</strong>跨可用区<strong>读取</strong>网络流量。有关完整的设计和成本分析，请参阅《<a href="/docs/zh/woodpecker_architecture.md">Woodpecker 架构</a>》。</p>
 <p>有关架构、部署模式（MemoryBuffer / QuorumBuffer）和性能的详细信息，请参阅《<a href="/docs/zh/woodpecker_architecture.md">Woodpecker 架构</a>》。</p>

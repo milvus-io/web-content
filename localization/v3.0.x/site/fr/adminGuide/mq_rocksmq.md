@@ -36,7 +36,7 @@ title: RocksMQ
     </button></h2><ul>
 <li><strong>Version autonome uniquement</strong> — RocksMQ <strong>n’</strong> est <strong>pas</strong> pris en charge dans Milvus Distributed (cluster). Consultez la <a href="/docs/fr/mqtype-overview.md#Supported-message-queues">matrice de prise en charge des files d’attente de messages</a>.</li>
 <li>RocksMQ est fourni avec Milvus ; il n’y a donc pas de version distincte à installer.</li>
-<li>Il s'agissait de la file d'attente de messages par défaut en mode autonome dans les versions antérieures de Milvus, et il est remplacé par Woodpecker intégré dans Milvus 3.x.</li>
+<li>Il s'agissait de la file d'attente de messages par défaut en mode autonome dans les versions antérieures de Milvus ; elle est remplacée par Woodpecker intégré dans Milvus 3.x.</li>
 </ul>
 <h2 id="Deploy-Milvus-Standalone-with-RocksMQ-using-Docker" class="common-anchor-header">Déployer Milvus Standalone avec RocksMQ à l’aide de Docker<button data-href="#Deploy-Milvus-Standalone-with-RocksMQ-using-Docker" class="anchor-icon" translate="no">
       <svg translate="no"

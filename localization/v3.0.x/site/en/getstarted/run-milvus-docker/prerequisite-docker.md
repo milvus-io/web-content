@@ -80,7 +80,8 @@ title: Requirements for Installing Milvus Standalone
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td>See <a href="#Additional-disk-requirements">additional disk requirements</a>.</td></tr>
 <tr><td>MinIO</td><td>RELEASE.2024-12-18T13-15-44Z</td><td></td></tr>
-<tr><td>Pulsar</td><td>2.8.2</td><td></td></tr>
+<tr><td>Woodpecker</td><td>Bundled with Milvus</td><td>Default message queue (embedded); no separate service to install.</td></tr>
+<tr><td>Pulsar</td><td>2.8.2</td><td>Optional — only if you switch the message queue to Pulsar; not installed by default.</td></tr>
 </tbody>
 </table>
 <h3 id="Additional-disk-requirements" class="common-anchor-header">Additional disk requirements<button data-href="#Additional-disk-requirements" class="anchor-icon" translate="no">

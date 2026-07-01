@@ -66,7 +66,7 @@ title: Run Milvus in Docker (Linux)
 <p><strong>What’s new in v3.0-beta:</strong></p>
 <ul>
 <li><strong>Streaming Node</strong>: Enhanced data processing capabilities</li>
-<li><strong>Woodpecker MQ</strong>: Improved message queue with reduced maintenance overhead, see <a href="/docs/use-woodpecker.md">Use Woodpecker</a> for detail</li>
+<li><strong>Woodpecker MQ (default)</strong>: This Docker deployment runs Woodpecker as the message queue with the <strong>local filesystem</strong> as its WAL backend, so no external message-queue service is required. See <a href="/docs/woodpecker.md">Woodpecker</a>.</li>
 <li><strong>Optimized Architecture</strong>: Consolidated components for better performance</li>
 </ul>
 <p>Always download the latest script to ensure you get the most recent configurations and architecture improvements.</p>
@@ -75,7 +75,7 @@ title: Run Milvus in Docker (Linux)
 </div>
 <p>After running the installation script:</p>
 <ul>
-<li>A docker container named milvus has been started at port <strong>19530</strong>.</li>
+<li>A docker container named milvus-standalone has been started at port <strong>19530</strong>.</li>
 <li>An embed etcd is installed along with Milvus in the same container and serves at port <strong>2379</strong>. Its configuration file is mapped to <strong>embedEtcd.yaml</strong> in the current folder.</li>
 <li>To change the default Milvus configuration, add your settings to the <strong>user.yaml</strong> file in the current folder and then restart the service.</li>
 <li>The Milvus data volume is mapped to <strong>volumes/milvus</strong> in the current folder.</li>
@@ -158,6 +158,27 @@ EOF
 # </span><span class="language-bash">Delete Milvus data</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh delete</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Optional-dependencies" class="common-anchor-header">Optional dependencies<button data-href="#Optional-dependencies" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>By default this deployment runs <strong>Woodpecker</strong> (local-filesystem WAL) as the message queue and an <strong>embedded etcd</strong> for metadata — nothing else to install. To use a different message queue or connect external object storage / metadata, see:</p>
+<ul>
+<li>Message queue: <a href="/docs/woodpecker.md">Woodpecker</a> (default) · <a href="/docs/mq_pulsar.md">Pulsar</a> · <a href="/docs/mq_kafka.md">Kafka</a> · <a href="/docs/mq_rocksmq.md">RocksMQ</a></li>
+<li>Object storage: <a href="/docs/deploy_s3.md">MinIO</a> (default) · <a href="/docs/deploy_s3.md">AWS S3</a> · <a href="/docs/abs.md">Azure Blob</a> · <a href="/docs/gcs.md">GCP Cloud Storage</a> · <a href="/docs/deploy_s3.md">Aliyun OSS</a> · <a href="/docs/deploy_s3.md">Tencent COS</a> · <a href="/docs/deploy_s3.md">Huawei OBS</a> · <a href="/docs/deploy_s3.md">S3-compatible</a></li>
+<li>Metadata: <a href="/docs/deploy_etcd.md">etcd</a></li>
+</ul>
 <h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -42,7 +42,7 @@ title: Пульсар
 <tr><td>2.4.x и более ранние версии</td><td>Pulsar v2</td><td>Pulsar v2</td></tr>
 </tbody>
 </table>
-<p>Начиная с Milvus 2.5, диаграмма Helm для Milvus и Milvus Operator по умолчанию развертывают <strong>Pulsar v3</strong>; Pulsar v2 остается совместимым. См. разделы <a href="/docs/ru/upgrade-pulsar-v3.md">«Обновление Pulsar с версии v2 до v3</a> » и <a href="/docs/ru/use-pulsar-v2.md">«Продолжение использования Pulsar v2</a>».</p>
+<p>Начиная с Milvus 2.5, диаграмма Helm для Milvus и Milvus Operator по умолчанию развертывают <strong>Pulsar v3</strong>; Pulsar v2 по-прежнему остается совместимым. См. разделы <a href="/docs/ru/upgrade-pulsar-v3.md">«Обновление Pulsar с версии v2 до v3</a> » и <a href="/docs/ru/use-pulsar-v2.md">«Продолжение использования Pulsar v2</a>».</p>
 <h2 id="Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="common-anchor-header">Развертывание кластера Milvus с Pulsar с помощью Helm<button data-href="#Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

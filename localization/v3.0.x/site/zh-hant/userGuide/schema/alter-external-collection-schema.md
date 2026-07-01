@@ -74,7 +74,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>若要在查詢結果中返回該欄位或在篩選條件中使用該欄位，請使用 `<code translate="no">add_collection_field()</code> ` 來新增標量欄位。以下範例新增了一個名為 `<code translate="no">score</code> ` 的欄位，該欄位映射至外部資料來源中的 `<code translate="no">score</code> ` 欄位。</p>
+    </button></h3><p>若要在查詢結果中回傳該欄位，或於篩選條件中使用該欄位，請使用 `<code translate="no">add_collection_field()</code> ` 來新增標量欄位。以下範例新增了一個名為 `<code translate="no">score</code> ` 的欄位，該欄位映射至外部資料來源中的 `<code translate="no">score</code> ` 欄位。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient
 
 client = MilvusClient(
@@ -90,7 +90,7 @@ client.add_collection_field(
 <span class="highlighted-wrapper-line">    external_field=<span class="hljs-string">&quot;score&quot;</span>,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>在此範例中，<code translate="no">score</code> 是 Milvus 欄位名稱，而<code translate="no">external_field=&quot;score&quot;</code> 將其映射至外部資料來源中的<code translate="no">score</code> 欄位。由於是在集合建立完成後才新增此欄位，因此需設定<code translate="no">nullable=True</code> 。</p>
+<p>在此範例中，<code translate="no">score</code> 是 Milvus 欄位名稱，而<code translate="no">external_field=&quot;score&quot;</code> 將其映射至外部資料來源中的<code translate="no">score</code> 欄位。由於是在集合建立完成後才新增此欄位，因此請設定<code translate="no">nullable=True</code> 。</p>
 <h3 id="Add-a-vector-field" class="common-anchor-header">新增向量欄位<button data-href="#Add-a-vector-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

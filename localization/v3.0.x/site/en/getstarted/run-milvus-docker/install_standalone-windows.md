@@ -3,7 +3,7 @@ id: install_standalone-windows.md
 label: Docker
 related_key: Docker
 summary: Learn how to install Milvus standalone with Docker Desktop for Windows.
-title: Run Milvus in Docker (Linux)
+title: Run Milvus in Docker (Windows)
 ---
 <h1 id="Run-Milvus-in-Docker-Windows" class="common-anchor-header">Run Milvus in Docker (Windows)<button data-href="#Run-Milvus-in-Docker-Windows" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,10 @@ title: Run Milvus in Docker (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This page demonstrates how to run Milvus on Windows using Docker Desktop for Windows.​</p>
+    </button></h1><blockquote>
+<p>By default, this deployment runs <strong>Woodpecker</strong> (local filesystem) as its message queue, so no external message-queue service is required. See <a href="/docs/woodpecker.md">Woodpecker</a>.</p>
+</blockquote>
+<p>This page demonstrates how to run Milvus on Windows using Docker Desktop for Windows.​</p>
 <h2 id="Prerequisites​" class="common-anchor-header">Prerequisites​<button data-href="#Prerequisites​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -148,7 +151,7 @@ $ bash standalone_embed.sh stop​
 Stop successfully.​
 ​
 <span class="hljs-comment"># Delete Milvus data​</span>
-$ bash standalone_embed.sh stop​
+$ bash standalone_embed.sh delete​
 Delete Milvus container successfully.​
 Delete successfully.​
 
@@ -201,7 +204,7 @@ Creating milvus-standalone ... done​
 <p>Depending on your network connection, downloading images for the Milvus installation may take a while. Once the containers named <strong>milvus-standalone</strong>, <strong>milvus-minio</strong>, and <strong>milvus-etcd</strong> are up, you can witness that ​</p>
 <ul>
 <li><p>The <strong>milvus-etcd</strong> container does not expose any ports to the host and maps its data to <strong>volumes/etcd</strong> in the current folder.​</p></li>
-<li><p>The <strong>milvus-minio</strong> container serves ports <strong>9090</strong> and <strong>9091</strong> locally with the default authentication credentials and maps its data to <strong>volumes/minio</strong> in the current folder.​</p></li>
+<li><p>The <strong>milvus-minio</strong> container serves ports <strong>9000</strong> and <strong>9001</strong> locally with the default authentication credentials and maps its data to <strong>volumes/minio</strong> in the current folder.​</p></li>
 <li><p>The <strong>milvus-standalone</strong> container serves ports <strong>19530</strong> locally with the default settings and maps its data to <strong>volumes/milvus</strong> in the current folder.​</p></li>
 </ul></li>
 </ol>

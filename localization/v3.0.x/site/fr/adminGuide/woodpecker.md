@@ -165,8 +165,8 @@ summary: >-
 <p>Remarques :</p>
 <ul>
 <li>Avec <code translate="no">minio</code>, Woodpecker partage le même stockage d’objets que Milvus (MinIO/S3/GCS/OSS, etc.).</li>
-<li>Avec le mode « <code translate="no">local</code> », un disque local à nœud unique ne convient qu’au mode « Standalone ». Si tous les pods peuvent accéder à un système de fichiers partagé (par exemple, NFS), le mode « Cluster » peut également utiliser le mode « <code translate="no">local</code> ».</li>
-<li><strong><code translate="no">service</code> Ce mode exécute Woodpecker en tant que service distinct et évolutif de manière indépendante, et n’est disponible que pour les déploiements distribués/en cluster.</strong> Les déploiements autonomes utilisent les modes intégrés (<code translate="no">minio</code> ou <code translate="no">local</code>).</li>
+<li>Avec le mode « <code translate="no">local</code> », un disque local à nœud unique ne convient qu’au mode Standalone. Si tous les pods peuvent accéder à un système de fichiers partagé (par exemple, NFS), le mode Cluster peut également utiliser le mode « <code translate="no">local</code> ».</li>
+<li><strong><code translate="no">service</code> Ce mode exécute Woodpecker en tant que service distinct et évolutif de manière indépendante ; il n’est disponible que pour les déploiements distribués/en cluster.</strong> Les déploiements autonomes utilisent les modes intégrés (<code translate="no">minio</code> ou <code translate="no">local</code>).</li>
 </ul>
 <h2 id="Object-storage-compatibility-for-storagetypeminio" class="common-anchor-header">Compatibilité avec le stockage objet pour <code translate="no">storage.type=minio</code><button data-href="#Object-storage-compatibility-for-storagetypeminio" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -278,7 +278,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Commencez par ajouter et mettre à jour le Helm Chart Milvus comme décrit dans la section <a href="/docs/fr/install_cluster-helm.md">Exécuter Milvus sur Kubernetes avec Helm</a>.</p>
+    </button></h3><p>Commencez par ajouter et mettre à jour le Helm Chart Milvus comme décrit dans la section « <a href="/docs/fr/install_cluster-helm.md">Exécuter Milvus sur Kubernetes avec Helm</a> ».</p>
 <p>Déployez ensuite à l’aide de l’un des exemples suivants :</p>
 <p>– Déploiement en cluster (paramètres recommandés avec Woodpecker et Streaming Node activés) :</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
@@ -375,7 +375,7 @@ docker restart milvus-standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><strong>Le mode service</strong> de Woodpecker est une fonctionnalité <strong>de Milvus 3.0</strong>. Pour les déploiements distribués/en cluster, vous pouvez exécuter Woodpecker en tant que <strong>service dédié</strong> (pods séparés) plutôt que de l’intégrer au nœud de streaming en configurant <code translate="no">streaming.woodpecker.embedded=false</code>:</p>
+    </button></h3><p><strong>Le mode service</strong> de Woodpecker est une fonctionnalité <strong>de Milvus 3.0</strong>. Pour les déploiements distribués/en cluster, vous pouvez exécuter Woodpecker en tant que <strong>service dédié</strong> (pods séparés) plutôt qu’intégré au nœud de streaming en configurant <code translate="no">streaming.woodpecker.embedded=false</code>:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0-beta \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
@@ -439,7 +439,7 @@ docker restart milvus-standalone
 <li>Côté client/application
 <ul>
 <li>Utilisez des tailles de lots plus importantes et un plus grand nombre d’écriteurs/clients simultanés.</li>
-<li>Contrôlez le moment de l’actualisation/de la création d’index (regroupez les lots avant de déclencher l’opération) pour éviter les petites écritures fréquentes.</li>
+<li>Contrôlez le moment de l’actualisation/de la construction de l’index (regroupez les lots avant de déclencher l’opération) pour éviter les petites écritures fréquentes.</li>
 </ul></li>
 </ul>
 <h3 id="Service-mode-Milvus-30+" class="common-anchor-header">Mode Service (Milvus 3.0+)<button data-href="#Service-mode-Milvus-30+" class="anchor-icon" translate="no">
@@ -553,7 +553,7 @@ batch_count = <span class="hljs-number">2000</span>
 <li><strong>Des écritures à quorum en un seul RTT</strong> — la réplication pilotée par le client effectue une écriture à quorum en un seul aller-retour, le trafic inter-AZ étant limité à l’équivalent de deux répliques (contre environ un tiers de trafic inter-AZ supplémentaire, typique de la réplication basée sur un courtier ou un leader).</li>
 <li><strong>Lectures en un seul saut tenant compte de la topologie</strong> — chaque lecture est dirigée directement vers la réplique la plus proche au lieu d’être acheminée via un courtier, ce qui évite les lectures aléatoires entre zones (environ les deux tiers du trafic de lecture inter-zones) propres aux systèmes basés sur un courtier.</li>
 <li><strong>Téléchargement immédiat vers le stockage objet après le roulement d’un segment</strong> — chaque segment suit l’intégralité de son cycle de vie et est téléchargé vers le stockage objet dès son roulement, ce qui permet de maintenir un encombrement minimal sur le disque local et de réduire les coûts de stockage sans compromettre la latence.</li>
-<li><strong>Pas de réplication continue de nœud à nœud</strong> — les journaux sont conservés dans le stockage objet qui fait office de stockage partagé ; ainsi, en cas de basculement, seules les répliques survivantes sont réuploadées (pas de copie complète du nœud), la scalabilité n’est pas limitée par la bande passante de réplication inter-nœuds, et le remplacement de nœuds à grande échelle ne provoque pas de « tempêtes de réplication ».</li>
+<li><strong>Pas de réplication continue de nœud à nœud</strong> — les journaux sont conservés dans le stockage objet qui fait office de stockage partagé ; ainsi, en cas de basculement, seules les répliques survivantes sont réimportées (pas de copie intégrale du nœud), la scalabilité n’est pas limitée par la bande passante de réplication inter-nœuds, et le remplacement de nœuds à grande échelle ne provoque pas de « tempêtes de réplication ».</li>
 </ul>
 <p>Dans les déploiements inter-zones de disponibilité (AZ), le mode service permet également d’économiser environ <strong>un tiers du</strong> trafic réseau inter-AZ <strong>en</strong> <strong>écriture</strong> et <strong>deux tiers en lecture</strong> par rapport aux systèmes de journaux basés sur un courtier. Pour une analyse complète de la conception et des coûts, consultez <a href="/docs/fr/woodpecker_architecture.md">l’architecture Woodpecker</a>.</p>
 <p>Pour plus de détails sur l’architecture, les modes de déploiement (MemoryBuffer / QuorumBuffer) et les performances, consultez <a href="/docs/fr/woodpecker_architecture.md">l’architecture Woodpecker</a>.</p>

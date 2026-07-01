@@ -81,7 +81,7 @@ title: 펄서
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Kubernetes v1.25 이상에서 번들된 Pulsar 하위 차트로 인해 PodDisruptionBudget(PDB) API 문제가 발생하는 경우, Pulsar PDB 정책을 비활성화하십시오:</p>
+<p>Kubernetes v1.25 이상에서 번들된 Pulsar 서브 차트로 인해 PodDisruptionBudget(PDB) API 문제가 발생하는 경우, Pulsar PDB 정책을 비활성화하십시오:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> pulsar.bookkeeper.pdb.usePolicy=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsar.broker.pdb.usePolicy=<span class="hljs-literal">false</span> \

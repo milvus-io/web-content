@@ -36,7 +36,7 @@ title: RocksMQ
     </button></h2><ul>
 <li><strong>Nur Standalone</strong> – RocksMQ wird in Milvus Distributed (Cluster) <strong>nicht</strong> unterstützt. Siehe die <a href="/docs/de/mqtype-overview.md#Supported-message-queues">Unterstützungsmatrix für Nachrichtenwarteschlangen</a>.</li>
 <li>RocksMQ wird mit Milvus ausgeliefert, es muss also keine separate Version installiert werden.</li>
-<li>In früheren Milvus-Versionen war es die Standard-Standalone-Nachrichtenwarteschlange; in Milvus 3.x wird es durch den eingebetteten Woodpecker ersetzt.</li>
+<li>In früheren Milvus-Versionen war es die Standard-Standalone-Nachrichtenwarteschlange; in Milvus 3.x wird es durch das eingebettete Woodpecker abgelöst.</li>
 </ul>
 <h2 id="Deploy-Milvus-Standalone-with-RocksMQ-using-Docker" class="common-anchor-header">Milvus Standalone mit RocksMQ über Docker bereitstellen<button data-href="#Deploy-Milvus-Standalone-with-RocksMQ-using-Docker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -151,7 +151,7 @@ bash standalone_embed.sh delete
       </svg>
     </button></h2><ul>
 <li><strong>Upgrade von 2.5.x auf 2.6.x:</strong> <strong>Einschränkungen bei der Nachrichtenwarteschlange</strong>: Beim Upgrade auf Milvus v3.0-beta müssen Sie Ihre aktuelle Auswahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.
-Da in 2.6.x die Standalone-Standardeinstellung auf „Woodpecker“ geändert wird, müssen Sie <strong>vor</strong> dem Upgrade in Ihrer Datei „ <code translate="no">user.yaml</code> “ den Eintrag „ <code translate="no">mq.type: rocksmq</code> “ festlegen, wenn Sie „RocksMQ“ beibehalten möchten.</li>
+Da in 2.6.x die Standard-Standalone-Einstellung auf „Woodpecker“ geändert wird, müssen Sie <strong>vor</strong> dem Upgrade „ <code translate="no">mq.type: rocksmq</code> “ in Ihrer Datei „ <code translate="no">user.yaml</code> “ festlegen, wenn Sie „RocksMQ“ beibehalten möchten.</li>
 <li>Informationen zum Ändern der Nachrichtenwarteschlange einer laufenden Instanz finden Sie unter „Wechsel von RocksMQ zu Woodpecker“.</li>
 </ul>
 <h2 id="Whats-next" class="common-anchor-header">Was kommt als Nächstes<button data-href="#Whats-next" class="anchor-icon" translate="no">

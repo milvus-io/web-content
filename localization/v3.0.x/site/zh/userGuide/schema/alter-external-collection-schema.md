@@ -1,7 +1,7 @@
 ---
 id: alter-external-collection-schema.md
 title: 修改外部Collection SchemaCompatible with Milvus 3.0.x
-summary: 了解如何在现有外部Collection中，从外部数据源中暴露一个额外字段。
+summary: 了解如何在现有外部Collection中，从外部数据源中暴露一个额外的字段。
 beta: Milvus 3.0.x
 ---
 <h1 id="Alter-External-Collection-Schema" class="common-anchor-header">修改外部Collection Schema<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Alter-External-Collection-Schema" class="anchor-icon" translate="no">
@@ -37,7 +37,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>外部 Collection 目前支持在创建后添加字段。其他 Schema 更改（例如删除字段、重命名字段、更改字段数据类型、更改向量维度或重新映射<code translate="no">external_field</code> ）均不支持。</p></li>
+<li><p>外部Collection目前支持在创建后添加字段。其他Schema更改（例如删除字段、重命名字段、更改字段数据类型、更改向量维度或重新映射<code translate="no">external_field</code> ）均不支持。</p></li>
 <li><p>您只能添加在外部数据源中已存在的字段。此操作将现有的外部字段映射到 Milvus 字段，不会在外部数据源中创建新字段，也不会回填源数据。</p></li>
 <li><p>不支持向现有外部 Collection 添加<code translate="no">SPARSE_FLOAT_VECTOR</code> 字段。</p></li>
 <li><p>不支持将 StructArray 字段添加到现有外部 Collection 中。如果您的外部 Collection 需要 StructArray 字段，请在创建 Collection 时在 Schema 中定义该字段。</p></li>
@@ -153,7 +153,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>修改外部 Collection 模式后，请刷新外部 Collection，以便 Milvus 更新外部 Collection 元数据，并使模式变更在查询、搜索和过滤结果中生效。</p>
+    </button></h2><p>修改外部 Collection Schema 后，请刷新外部 Collection，以便 Milvus 更新外部 Collection 元数据，并使 Schema 变更在查询、搜索和过滤结果中生效。</p>
 <pre><code translate="no" class="language-python">client.refresh_external_collection(
     collection_name=<span class="hljs-string">&quot;product_embeddings&quot;</span>
 )

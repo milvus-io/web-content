@@ -20,7 +20,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h1><p>在 AI 搜索应用中，向量搜索可帮助您查找语义相似的实体，但应用通常还需要每个匹配结果背后的原始源文本。大型语言模型（LLM）或 Agents 可以利用该文本作为上下文，用于阅读、引用、摘要，或将结果纳入提示词中。</p>
-<p>Milvus 提供了<code translate="no">TEXT</code> 标量字段类型，用于将长源文本直接与实体一同存储。典型值包括段落、长文档、文章正文、工单和日志。与<code translate="no">VARCHAR</code> 不同，后者要求设置固定的<code translate="no">max_length</code> ，而<code translate="no">TEXT</code> 则无需在 Collection Schema 中设置最大字节长度。</p>
+<p>Milvus 提供了<code translate="no">TEXT</code> 标量字段类型，用于将长源文本直接与实体关联存储。典型值包括段落、长文档、文章正文、工单和日志。与<code translate="no">VARCHAR</code> 不同，后者要求设置固定的<code translate="no">max_length</code> ，而<code translate="no">TEXT</code> 则无需在 Collection Schema 中设置最大字节长度。</p>
 <p>要定义一个<code translate="no">TEXT</code> 字段，请将<code translate="no">datatype</code> 设置为<code translate="no">DataType.TEXT</code> 。</p>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;content&quot;</span>,
@@ -50,7 +50,7 @@ beta: Milvus 3.0.x
 <li><code translate="no">TEXT</code> 字段不能作为主字段。主字段支持<code translate="no">INT64</code> 和<code translate="no">VARCHAR</code> 。</li>
 <li>在 Milvus 3.0.0 中，<code translate="no">TEXT</code> 字段不支持<code translate="no">PHRASE_MATCH</code> 。</li>
 <li>在 Milvus 3.0.0 中，<code translate="no">TEXT</code> 字段不支持 。</li>
-<li>在 Milvus 3.0.0 中，外部 Collection 不支持<code translate="no">TEXT</code> 字段。</li>
+<li>在 Milvus 3.0.0 中，外部 Collections 不支持<code translate="no">TEXT</code> 字段。</li>
 <li>在 Milvus 3.0.0 中，<code translate="no">TEXT</code> 字段不支持标量索引。</li>
 <li><code translate="no">TEXT</code> 不适用于常规元数据过滤。如果您需要根据短字符串元数据进行过滤，且字段值符合<code translate="no">VARCHAR</code> 的长度限制，请使用<code translate="no">VARCHAR</code> 。</li>
 </ul>
@@ -69,7 +69,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">TEXT</code> 和<code translate="no">VARCHAR</code> 均用于存储字符串值，但它们支持不同的应用需求。请使用<code translate="no">VARCHAR</code> 处理用于识别、分类或过滤实体的短且有长度的元数据。请使用<code translate="no">TEXT</code> 处理较长的源内容，以便为大型语言模型（LLM）或 Agents 提供足够的上下文，用于阅读、引用、摘要或构建提示词。</p>
+    </button></h2><p><code translate="no">TEXT</code> 和<code translate="no">VARCHAR</code> 均用于存储字符串值，但它们支持不同的应用需求。请使用<code translate="no">VARCHAR</code> 处理用于识别、分类或过滤实体的短小且长度受限的元数据。请使用<code translate="no">TEXT</code> 处理较长的源内容，以便为大型语言模型（LLM）或 Agents 提供足够的上下文，用于阅读、引用、摘要或构建提示词。</p>
 <table>
 <thead>
 <tr><th>方面</th><th><code translate="no">VARCHAR</code></th><th><code translate="no">TEXT</code></th></tr>
@@ -100,7 +100,7 @@ beta: Milvus 3.0.x
       </svg>
     </button></h2><p><details></p>
 <p><summary>展开以了解其工作原理</summary></p>
-<p>当您插入一个实体时，您为<code translate="no">TEXT</code> 字段提供的字符串即为<code translate="no">TEXT</code> 值。Milvus 会将该值的大小与<a href="/docs/zh/configure_datanode.md#dataNodetextinlineThreshold">dataNode.text.inlineThreshold</a>（默认值为<code translate="no">65,536</code> 字节）进行比较，然后选择两种内部存储路径中的一种。</p>
+<p>当您插入一个实体时，您为<code translate="no">TEXT</code> 字段提供的字符串即为<code translate="no">TEXT</code> 值。Milvus 会将该值的大小与<a href="/docs/zh/configure_datanode.md#dataNodetextinlineThreshold">dataNode.text.inlineThreshold</a> 进行比较（默认值为<code translate="no">65,536</code> 字节），然后从两种内部存储路径中选择一种。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v3.0.x/assets/text-large-storage-flow.png" alt="Large text storage" class="doc-image" id="large-text-storage" /> 
@@ -109,10 +109,10 @@ beta: Milvus 3.0.x
  </span></p>
 <ul>
 <li><strong>内联存储</strong>：如果<code translate="no">TEXT</code> 值小于<code translate="no">dataNode.text.inlineThreshold</code> ，Milvus 会将原始文本值直接存储在<code translate="no">TEXT</code> 字段 data 中。</li>
-<li><strong>LOB 存储</strong>：如果 `<code translate="no">TEXT</code> ` 的值大于或等于 `<code translate="no">dataNode.text.inlineThreshold</code>`，Milvus 会将该值视为大对象，并将原始文本单独存储在对象存储（如 MinIO）中。`<code translate="no">TEXT</code> ` 字段数据中存储的是指向该单独存储文本的内部引用。当在查询或搜索结果中请求 `<code translate="no">TEXT</code> ` 字段时，Milvus 会使用该引用检索并返回原始文本。</li>
+<li><strong>LOB 存储</strong>：如果 `<code translate="no">TEXT</code> ` 的值大于或等于 `<code translate="no">dataNode.text.inlineThreshold</code>`，Milvus 将该值视为大对象，并将原始文本单独存储在对象存储（如 MinIO）中。`<code translate="no">TEXT</code> ` 字段数据中存储的是指向该单独存储文本的内部引用。当在查询或搜索结果中请求 `<code translate="no">TEXT</code> ` 字段时，Milvus 会使用该引用检索并返回原始文本。</li>
 </ul>
-<p>此存储选择属于内部机制。无论 Milvus 使用何种存储路径，您对<code translate="no">TEXT</code> 字段的插入、查询和搜索操作方式均保持一致。若需调整阈值或相关存储、压缩及垃圾回收行为，请参阅与<a href="/docs/zh/configure_datanode.md">dataNode 相关的配置和</a> <a href="/docs/zh/configure_datacoord.md">与 dataCoord 相关的配置</a>。</p>
-<p>如果您的部署使用对象存储，较大的<code translate="no">TEXT</code> 值可能会以 Milvus 管理的对象形式出现在诸如<code translate="no">lobs/...</code> 之类的路径下。这些对象属于实现细节，不应手动移动、复制或删除。 在删除实体、删除分区或压缩数据后，只有当 Milvus 垃圾回收在安全窗口期结束后移除了未被引用的巨型对象数据，对象存储的使用量才会减少。</p>
+<p>此存储选择属于内部机制。无论 Milvus 使用何种存储路径，您对<code translate="no">TEXT</code> 字段的插入、查询和搜索操作方式均保持一致。若需调整阈值或相关存储、压缩及垃圾回收行为，请参阅与<a href="/docs/zh/configure_datanode.md">dataNode 相关的配置</a>和<a href="/docs/zh/configure_datacoord.md">与 dataCoord 相关的配置</a>。</p>
+<p>如果您的部署使用对象存储，较大的<code translate="no">TEXT</code> 值可能会以 Milvus 管理的对象形式出现在诸如<code translate="no">lobs/...</code> 之类的路径下。这些对象属于实现细节，不应手动移动、复制或删除。 在删除实体、删除分区或压缩数据后，只有在 Milvus 垃圾回收机制于安全窗口期结束后移除未被引用的巨型对象数据，对象存储的使用量才会减少。</p>
 <p></details></p>
 <p><code translate="no">TEXT</code> 的常见用途是配合 BM25 进行全文搜索。在此模式下，<code translate="no">TEXT</code> 字段存储原始源内容，BM25 分析文本并生成稀疏向量，用于对基于关键词的匹配结果进行排序。搜索结果随后可返回匹配的<code translate="no">TEXT</code> 值，作为 LLM 或 Agents 工作流的上下文。 以下示例演示了如何将<code translate="no">TEXT</code> 字段用作BM25的输入字段。如需了解全文搜索的概念和查询选项，请参阅《<a href="/docs/zh/full-text-search.md">全文搜索</a>》。</p>
 <h2 id="Step-1-Create-a-collection-with-a-TEXT-field" class="common-anchor-header">步骤 1：创建包含 TEXT 字段的 Collection<button data-href="#Step-1-Create-a-collection-with-a-TEXT-field" class="anchor-icon" translate="no">
@@ -206,7 +206,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>将文本直接插入<code translate="no">TEXT</code> 字段。请勿为<code translate="no">sparse</code> 字段提供值。Milvus会通过将BM25函数应用于<code translate="no">content</code> ，在内部生成稀疏向量。</p>
+    </button></h2><p>将文本直接插入到<code translate="no">TEXT</code> 字段中。请勿为<code translate="no">sparse</code> 字段提供值。Milvus会通过将BM25函数应用于<code translate="no">content</code> ，在内部生成稀疏向量。</p>
 <pre><code translate="no" class="language-python">data = [
     {
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,

@@ -116,7 +116,7 @@ title: Pulsar
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Uninstall" class="common-anchor-header">Deinstallation<button data-href="#Uninstall" class="anchor-icon" translate="no">
+<h3 id="Uninstall" class="common-anchor-header">Deinstallieren<button data-href="#Uninstall" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

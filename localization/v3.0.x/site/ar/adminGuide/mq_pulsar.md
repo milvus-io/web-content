@@ -73,7 +73,7 @@ title: بولسار
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>لنشر مجموعة Milvus التي تستخدم Pulsar المدمج (بدلاً من Woodpecker)، قم بتثبيت مخطط Helm مع تمكين Streaming Node:</p>
+    </button></h3><p>لنشر مجموعة Milvus التي تستخدم Pulsar المضمّن (بدلاً من Woodpecker)، قم بتثبيت مخطط Helm مع تمكين Streaming Node:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0-beta \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">true</span> \
@@ -81,7 +81,7 @@ title: بولسار
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>في Kubernetes الإصدار 1.25 والإصدارات الأحدث، إذا واجهت مشكلات في واجهة برمجة تطبيقات (API) PodDisruptionBudget من المخطط الفرعي المدمج لـ Pulsar، فقم بتعطيل سياسات PDB الخاصة بـ Pulsar:</p>
+<p>في Kubernetes الإصدار 1.25 والإصدارات الأحدث، إذا واجهت مشكلات في واجهة برمجة تطبيقات (API) PodDisruptionBudget (PDB) من المخطط الفرعي المدمج لـ Pulsar، فقم بتعطيل سياسات PDB الخاصة بـ Pulsar:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> pulsar.bookkeeper.pdb.usePolicy=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsar.broker.pdb.usePolicy=<span class="hljs-literal">false</span> \
@@ -133,7 +133,7 @@ title: بولسار
       </svg>
     </button></h3><pre><code translate="no" class="language-bash">helm uninstall my-release
 <button class="copy-code-btn"></button></code></pre>
-<p>إذا كنت قد استخدمت Pulsar المضمن وترغب في إزالة بياناته الدائمة، فاحذف PVCs الخاصة بـ Pulsar (المسماة <code translate="no">my-release-pulsarv3-*</code>):</p>
+<p>إذا كنت قد استخدمت Pulsar المضمن وترغب في إزالة بياناته الدائمة، فاحذف PVCs الخاصة بـ Pulsar (المسمى <code translate="no">my-release-pulsarv3-*</code>):</p>
 <pre><code translate="no" class="language-bash">kubectl get pvc | grep my-release-pulsarv3
 kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <button class="copy-code-btn"></button></code></pre>

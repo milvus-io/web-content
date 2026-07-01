@@ -4,7 +4,7 @@ title: パターンマッチング
 summary: >-
   Milvus は、LIKE ワイルドカードパターンおよび RE2
   正規表現による文字列パターンマッチングをサポートしています。パターンフィルターを使用することで、VARCHAR フィールド、JSON 文字列パス、または
-  ARRAY 要素内の接頭辞、接尾辞、部分文字列、構造化コード、メールアドレスのドメイン、URL パス、その他の文字列パターンに一致させることができます。
+  ARRAY 要素内の接頭辞、接尾辞、部分文字列、構造化コード、メールドメイン、URL パス、その他の文字列パターンに一致させることができます。
 ---
 <h1 id="Pattern-Matching" class="common-anchor-header">パターンマッチング<button data-href="#Pattern-Matching" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -78,7 +78,7 @@ res = client.query(
         ></path>
       </svg>
     </button></h2><p>必要なパターンを表現する最も単純な演算子を選択してください。</p>
-<p>文字列の完全一致が必要な場合は、パターンマッチングの代わりに `<code translate="no">==</code> ` を使用することをお勧めします。`<code translate="no">LIKE</code> ` または正規表現は、フィルタがパターンに一致する必要がある場合にのみ使用してください。</p>
+<p>文字列の完全一致が必要な場合は、パターンマッチングの代わりに<code translate="no">==</code> を使用することをお勧めします。<code translate="no">LIKE</code> やregexは、フィルタがパターンに一致する必要がある場合にのみ使用してください。</p>
 <table>
 <thead>
 <tr><th>要件</th><th>推奨される演算子</th><th>例</th><th>説明</th></tr>
@@ -161,9 +161,9 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>接頭辞、接尾辞、部分文字列の包含、および固定位置の単一文字の一致には、<code translate="no">LIKE</code> を使用してください。<code translate="no">LIKE</code> では、<code translate="no">[0-9]</code> などの文字クラス、<code translate="no">error|failed</code> などの選択、<code translate="no">{4}</code> などの繰り返し回数、<code translate="no">^</code> や<code translate="no">$</code> などのアンカー、<code translate="no">(?i)</code> などの大文字小文字を区別しないフラグはサポートされていません。これらのパターンには正規表現（regex）を使用してください。</p>
-<p>文字列全体が完全に一致する場合は、<code translate="no">==</code> を使用してください。ワイルドカードマッチングが必要な場合にのみ、<code translate="no">LIKE</code> を使用してください。</p>
-<h2 id="Use-regex" class="common-anchor-header">正規表現の使用<button data-href="#Use-regex" class="anchor-icon" translate="no">
+    </button></h3><p>接頭辞、接尾辞、部分文字列の包含、および固定位置の単一文字の一致には、<code translate="no">LIKE</code> を使用してください。<code translate="no">LIKE</code> は、<code translate="no">[0-9]</code> のような文字クラス、<code translate="no">error|failed</code> のような選択、<code translate="no">{4}</code> のような繰り返し回数、<code translate="no">^</code> や<code translate="no">$</code> のようなアンカー、<code translate="no">(?i)</code> のような大文字小文字を区別しないフラグをサポートしていません。これらのパターンには正規表現（regex）を使用してください。</p>
+<p>文字列全体が完全に一致する場合は、<code translate="no">==</code> を使用してください。<code translate="no">LIKE</code> は、フィルタでワイルドカードマッチングが必要な場合にのみ使用してください。</p>
+<h3 id="Escaping-wildcards-in-a-LIKE-pattern" class="common-anchor-header">LIKE パターンにおけるワイルドカードのエスケープ<button data-href="#Escaping-wildcards-in-a-LIKE-pattern" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -178,7 +178,29 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>パターンに、文字クラス、反復、選択、アンカー、大文字小文字を区別しないマッチングなどの正規表現機能が必要な場合は、正規表現フィルターを使用してください。Milvus は、文字列値に対して<a href="https://github.com/google/re2/wiki/syntax">RE2</a>正規表現を適用します。</p>
+    </button></h3><p><code translate="no">LIKE</code> パターンでは、<code translate="no">%</code> は 0 個以上の文字に一致し、<code translate="no">_</code> は正確に 1 文字に一致します。<code translate="no">%</code> 、<code translate="no">_</code> 、または<code translate="no">\</code> をリテラルとして一致させるには、バックスラッシュ (<code translate="no">\</code>) で文字をエスケープします：</p>
+<ul>
+<li><code translate="no">name LIKE r&quot;\%&quot;</code> は、リテラル値「<code translate="no">%</code> 」に一致します。</li>
+<li><code translate="no">name LIKE r&quot;\_%&quot;</code> リテラル「<code translate="no">_</code> 」で始まる値に一致します。</li>
+<li><code translate="no">name LIKE r&quot;\\%&quot;</code> リテラルなバックスラッシュで始まる値に一致します。</li>
+</ul>
+<p><code translate="no">r&quot;...&quot;</code> や<code translate="no">r'...'</code> のように記述される生文字列リテラルは、Milvus のフィルター式においてバックスラッシュをそのまま保持します。これらは、<code translate="no">LIKE</code> や、バックスラッシュを含む正規表現パターンに推奨されます。生文字列を使用しない場合、通常の文字列リテラルはパターンが評価される前にエスケープシーケンスを処理するため、より多くのバックスラッシュが必要になる可能性があります。</p>
+<h2 id="Use-regex--Milvus-30x" class="common-anchor-header">正規表現の使用<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Use-regex--Milvus-30x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>パターンに文字クラス、反復、選択、アンカー、大文字小文字を区別しない一致などの正規表現機能が必要な場合は、正規表現フィルターを使用してください。Milvusは、文字列値に対して<a href="https://github.com/google/re2/wiki/syntax">RE2</a>正規表現を適用します。</p>
 <p><code translate="no">=~</code> または<code translate="no">!~</code> の右辺は、文字列リテラルでなければなりません。</p>
 <table>
 <thead>
@@ -189,6 +211,27 @@ res = client.query(
 <tr><td><code translate="no">!~</code></td><td>正規表現パターンに一致する値を除外します。</td><td><code translate="no">filter = 'message !~ &quot;^DEBUG&quot;'</code></td></tr>
 </tbody>
 </table>
+<h3 id="Use-raw-string-literals" class="common-anchor-header">生の文字列リテラルを使用する<button data-href="#Use-raw-string-literals" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>バックスラッシュを含む正規表現パターンには、生の文字列リテラルを使用することを推奨します。<code translate="no">r&quot;...&quot;</code> や<code translate="no">r'...'</code> のように記述された生の文字列では、バックスラッシュがそのまま正規表現エンジンに渡されます。これにより、通常の文字列リテラルで必要となる余分なエスケープ処理を回避できます。</p>
+<p>例：</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ r&quot;\d{4}-\d{2}-\d{2}&quot;&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>これは、<code translate="no">2026-07-01</code> のような日付形式の値を含む文字列に一致します。</p>
+<p>生の文字列を使用しない場合、通常の文字列リテラルでは正規表現パターンが評価される前にエスケープシーケンスが処理されるため、<code translate="no">\d</code> や<code translate="no">\s</code> といったパターン、あるいはエスケープされたリテラル文字には、追加のバックスラッシュが必要になる場合があります。</p>
 <h3 id="Common-regex-patterns" class="common-anchor-header">一般的な正規表現パターン<button data-href="#Common-regex-patterns" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -204,7 +247,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>以下の例では、Milvusのフィルター式で一般的に使用されるRE2構文を使用しています。正規表現の完全な構文については、<a href="https://github.com/google/re2/wiki/syntax">RE2構文</a>リファレンスを参照してください。</p>
+    </button></h3><p>以下の例では、Milvus のフィルター式で一般的に使用される RE2 構文を使用しています。正規表現の完全な構文については、<a href="https://github.com/google/re2/wiki/syntax">RE2 構文</a>リファレンスを参照してください。</p>
 <table>
 <thead>
 <tr><th>要件</th><th>パターン</th><th>フィルタの例</th></tr>
@@ -243,7 +286,7 @@ res = client.query(
         ></path>
       </svg>
     </button></h3><p><strong>部分文字列の一致</strong></p>
-<p>Milvus の正規表現マッチングでは、部分文字列のセマンティクスが使用されます。パターンはフィールド値全体と一致する必要はありません。たとえば、次のフィルターは<code translate="no">E1001</code> と<code translate="no">failed with E1001 after retry</code> の両方に一致します：</p>
+<p>Milvus の正規表現マッチングでは、部分文字列のセマンティクスが使用されます。パターンはフィールド値全体と一致する必要はありません。たとえば、次のフィルターは<code translate="no">E1001</code> と<code translate="no">failed with E1001 after retry</code> の両方に一致します:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ &quot;E[0-9]{4}&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>フィールド値全体に一致させるには、<code translate="no">^</code> および<code translate="no">$</code> というアンカーを使用します：</p>
@@ -289,7 +332,7 @@ res = client.query(
 </thead>
 <tbody>
 <tr><td><code translate="no">message =~ &quot;error.*timeout&quot;</code> のような固定のリテラル部分文字列を含む場合、または<code translate="no">message LIKE &quot;%database%&quot;</code></td><td><code translate="no">NGRAM</code></td><td>Milvusがパターンから意味のあるリテラル部分文字列を抽出できる場合に有効です。詳細については、<a href="/docs/ja/ngram.md">NGRAM</a>を参照してください。</td></tr>
-<tr><td>プレフィックス、完全一致、または等価のような文字列フィルター。特に、カーディナリティが低～中程度のフィールドで有効</td><td><code translate="no">STL_SORT</code>、<code translate="no">INVERTED</code> 、または<code translate="no">BITMAP</code></td><td>フィールドに重複する値がある場合や、フィルタが完全一致に近い場合に、より効果的である可能性があります。詳細については、<a href="/docs/ja/stl-sort.md">STL_SORT</a>、<a href="/docs/ja/inverted.md">INVERTED</a>、および<a href="/docs/ja/bitmap.md">BITMAP</a> を参照してください。</td></tr>
-<tr><td>固定リテラルを含まない正規表現パターン、または文字クラス、短いトークン、ワイルドカードが主体となるパターン</td><td>インデックスによる高速化を頼りにする前にベンチマークを実行してください</td><td>これらのパターンは、インデックスによる選択性が限定的となり、より広範囲なスキャンに切り替わってしまう可能性があります。</td></tr>
+<tr><td>プレフィックス、完全一致、または等価のような文字列フィルター。特に、カーディナリティが低～中程度のフィールドで有効</td><td><code translate="no">STL_SORT</code>、<code translate="no">INVERTED</code> 、または<code translate="no">BITMAP</code></td><td>フィールドに重複する値がある場合や、フィルタが完全一致に近い場合に、より効果的である可能性があります。詳細については、<a href="/docs/ja/stl-sort.md">STL_SORT</a>、<a href="/docs/ja/inverted.md">INVERTED</a>、<a href="/docs/ja/bitmap.md">およびBITMAP</a>を参照してください。</td></tr>
+<tr><td>固定リテラルを含まない正規表現パターン、または文字クラス、短いトークン、ワイルドカードが主体となるパターン</td><td>インデックスによる高速化を頼りにする前にベンチマークを実施してください</td><td>これらのパターンは、インデックスによる選択性が限定的となり、より広範囲なスキャンに切り替わってしまう可能性があります。</td></tr>
 </tbody>
 </table>
