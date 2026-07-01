@@ -82,7 +82,17 @@ Use `LIKE` for prefix, suffix, contains, and fixed-position single-character mat
 
 Use `==` for exact full-string equality. Use `LIKE` only when the filter needs wildcard matching.
 
-## Use regex
+### Escaping wildcards in a LIKE pattern
+
+In `LIKE` patterns, `%` matches zero or more characters and `_` matches exactly one character. To match `%`, `_`, or `\` literally, escape the character with a backslash (`\`):
+
+- `name LIKE r"\%"` matches the literal value `%`.
+- `name LIKE r"\_%"` matches values that start with a literal `_`.
+- `name LIKE r"\\%"` matches values that start with a literal backslash.
+
+Raw string literals, written as `r"..."` or `r'...'`, keep backslashes verbatim in Milvus filter expressions. They are recommended for `LIKE` and regex patterns that contain backslashes. Without a raw string, ordinary string literals still process escape sequences before the pattern is evaluated, so more backslashes may be required.
+
+## Use regex | Milvus 3.0.x
 
 Use regex filters when the pattern requires regular expression features such as character classes, repetition, alternation, anchors, or case-insensitive matching. Milvus applies an [RE2](https://github.com/google/re2/wiki/syntax) regular expression to a string value.
 
@@ -92,6 +102,20 @@ The right side of `=~` or `!~` must be a string literal.
 | --- | --- | --- |
 | `=~` | Matches values that satisfy the regex pattern. | `filter = 'message =~ "E[0-9]{4}"'` |
 | `!~` | Excludes values that satisfy the regex pattern. | `filter = 'message !~ "^DEBUG"'` |
+
+### Use raw string literals
+
+Raw string literals are recommended for regex patterns that contain backslashes. In a raw string, written as `r"..."` or `r'...'`, backslashes are passed to the regex engine verbatim. This avoids the extra escaping required by ordinary string literals.
+
+For example:
+
+```python
+filter = 'message =~ r"\d{4}-\d{2}-\d{2}"'
+```
+
+This matches strings that contain a date-like value such as `2026-07-01`.
+
+Without a raw string, ordinary string literals process escape sequences before the regex pattern is evaluated, so patterns such as `\d`, `\s`, or escaped literal characters may require additional backslashes.
 
 ### Common regex patterns
 
