@@ -56,7 +56,7 @@ title: Helmチャートを使用したMilvusクラスタのアップグレード
       </svg>
     </button></h3><p>Milvus 2.5.x から 2.6.17 へのアップグレードには、以下の重要なアーキテクチャの変更が含まれます：</p>
 <ul>
-<li><strong>コーディネーターの統合</strong>：従来の別々のコーディネーター（<code translate="no">dataCoord</code> 、<code translate="no">queryCoord</code> 、<code translate="no">indexCoord</code> ）が、単一の<code translate="no">mixCoord</code></li>
+<li><strong>コーディネーターの統合</strong>：従来の別々のコーディネーター（<code translate="no">dataCoord</code> 、<code translate="no">queryCoord</code> 、<code translate="no">indexCoord</code> ）が単一の<code translate="no">mixCoord</code></li>
 <li><strong>新コンポーネント</strong>：データ処理機能を強化するためのストリーミングノードの導入</li>
 <li><strong>コンポーネントの削除</strong>：<code translate="no">indexNode</code> が削除され、統合されました</li>
 </ul>
@@ -88,7 +88,7 @@ title: Helmチャートを使用したMilvusクラスタのアップグレード
 <li>現在 v2.6.0-rc1 を実行しており、データを保持する必要がある場合は、移行の参考として<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">こちらのコミュニティガイド</a>を参照してください。</li>
 <li>v2.6.17 にアップグレードする前に、<code translate="no">mixCoordinator</code> を有効にした状態で v2.5.16 以降にアップグレード<strong>する必要があります</strong>。</li>
 </ul>
-<p><strong>メッセージキューの制限事項</strong>: Milvus v2.6.17 へのアップグレード時には、現在のメッセージキューの設定を維持する必要があります。アップグレード中に異なるメッセージキューシステムへ切り替えることはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。</p>
+<p><strong>メッセージキューの制限事項</strong>: Milvus v2.6.17 へのアップグレード時には、現在のメッセージキューの設定を維持する必要があります。アップグレード中に異なるメッセージキューシステムへの切り替えはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。</p>
 <div class="alert note">
 Milvus Helmチャートバージョン4.2.21以降、依存関係としてpulsar-v3.xチャートを導入しました。下位互換性を確保するため、Helmをv3.14以降のバージョンにアップグレードし、<code translate="no">helm upgrade</code> を使用する際は必ず<code translate="no">--reset-then-reuse-values</code> オプションを追加してください。
 </div>

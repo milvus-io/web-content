@@ -127,7 +127,7 @@ title: 使用 Helm Chart 升級 Milvus 獨立部署
 helm repo update zilliztech
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-位於<code translate="no">https://milvus-io.github.io/milvus-helm/</code> 的 Milvus Helm Charts 儲存庫已歸檔。請使用新儲存庫<code translate="no">https://zilliztech.github.io/milvus-helm/</code> 來取得 4.0.31 及後續版本的圖表。
+位於<code translate="no">https://milvus-io.github.io/milvus-helm/</code> 的 Milvus Helm Charts 儲存庫已歸檔。請使用新儲存庫<code translate="no">https://zilliztech.github.io/milvus-helm/</code> 取得 4.0.31 及後續版本的圖表。
 </div>
 <p>若要檢查 Helm Chart 版本與 Milvus 版本的相容性：</p>
 <pre><code translate="no" class="language-bash">helm search repo zilliztech/milvus --versions

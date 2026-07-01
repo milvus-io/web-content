@@ -179,7 +179,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 <p><strong>Основные особенности архитектуры в данном развертывании:</strong></p>
 <ul>
 <li><strong>Очередь сообщений</strong>: <a href="/docs/ru/v2.6.x/use-woodpecker.md">используется Woodpecker</a> (упрощает обслуживание инфраструктуры)</li>
-<li><strong>Узел потоковой обработки (Streaming Node</strong>): включён для усовершенствованной обработки данных</li>
+<li><strong>Узел потоковой обработки (Streaming Node</strong>): включен для расширенной обработки данных</li>
 <li><strong>Координатор Mix</strong>: объединенные компоненты координатора для повышения эффективности</li>
 </ul>
 <p>Для настройки этих параметров мы рекомендуем воспользоваться инструментом <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a>, чтобы скорректировать конфигурацию с учётом фактического объёма ваших данных, а затем загрузить соответствующий файл YAML. Подробнее о параметрах конфигурации см. в документе <a href="https://milvus.io/docs/system_configuration.md">«Контрольный список системных настроек Milvus</a>».</p>
@@ -278,12 +278,12 @@ my-release-minio-3                               1/1     Running   0          2m
 <div class="alert note">
 <p>Если вы развернули Milvus в автономном режиме, измените имя пода с <code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> на <code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code>.</p>
 </div>
-<p>Затем выполните следующую команду, чтобы перенаправить локальный порт на порт, на котором работает Milvus.</p>
+<p>Затем выполните следующую команду, чтобы перенаправить локальный порт на порт, по которому работает Milvus.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward service/my-release-milvus 27017:19530</span>
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>По желанию вы можете использовать <code translate="no">:19530</code> вместо <code translate="no">27017:19530</code> в приведённой выше команде, чтобы <code translate="no">kubectl</code> автоматически выделил вам локальный порт, и вам не пришлось бы решать проблемы с конфликтами портов.</p>
-<p>По умолчанию перенаправление портов с помощью kubectl осуществляется только на <code translate="no">localhost</code>. Используйте флаг <code translate="no">address</code>, если хотите, чтобы Milvus прослушивал выбранные или все IP-адреса. Следующая команда настраивает перенаправление портов на прослушивание всех IP-адресов хост-машины.</p>
+<p>По умолчанию перенаправление портов с помощью `kubectl` осуществляется только на <code translate="no">localhost</code>. Используйте флаг <code translate="no">address</code>, если хотите, чтобы Milvus прослушивал выбранные или все IP-адреса. Следующая команда настраивает перенаправление портов на прослушивание всех IP-адресов хост-машины.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
@@ -303,7 +303,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Вы можете просмотреть и обновить конфигурации вашего кластера Milvus, выполнив команду <code translate="no">patch</code> следующим образом:</p>
+    </button></h2><p>Вы можете просмотреть и обновить конфигурации вашего кластера Milvus, выполнив команду ` <code translate="no">patch</code> ` следующим образом:</p>
 <ol>
 <li><p>Выполните следующую команду, чтобы просмотреть предполагаемые настройки.</p>
 <p>Ниже предполагается, что вы хотите обновить параметр ` <code translate="no">spec.components.disableMetric</code> ` на значение ` <code translate="no">false</code> ` мс.</p>
@@ -358,7 +358,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>При удалении кластера Milvus с использованием конфигурации по умолчанию такие зависимости, как etcd, Pulsar и MinIO, не удаляются. Поэтому при следующей установке того же экземпляра кластера Milvus эти зависимости будут использоваться снова.</li>
+<li>При удалении кластера Milvus с использованием конфигурации по умолчанию такие зависимости, как etcd, Pulsar и MinIO, не удаляются. Поэтому при следующей установке того же экземпляра кластера Milvus эти зависимости будут использованы повторно.</li>
 <li>Чтобы удалить зависимости и заявки на постоянные тома (PVC) вместе с кластером Milvus, см. <a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">файл конфигурации</a>.</li>
 </ul>
 </div>

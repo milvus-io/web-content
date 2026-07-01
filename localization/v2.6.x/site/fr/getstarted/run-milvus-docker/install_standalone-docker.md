@@ -78,7 +78,7 @@ title: Exécuter Milvus dans Docker (Linux)
 <li>Un conteneur Docker nommé « milvus » a été lancé sur le port <strong>19530</strong>.</li>
 <li>Un embed etcd est installé avec Milvus dans le même conteneur et est accessible sur le port <strong>2379</strong>. Son fichier de configuration correspond au <strong>fichier embedEtcd.yaml</strong> situé dans le dossier actuel.</li>
 <li>Pour modifier la configuration par défaut de Milvus, ajoutez vos paramètres au fichier <strong>user.yaml</strong> situé dans le dossier actuel, puis redémarrez le service.</li>
-<li>Le volume de données Milvus est mappé vers le répertoire ` <strong>volumes/milvus</strong> ` du dossier actuel.</li>
+<li>Le volume de données Milvus est mappé vers le répertoire <strong>volumes/milvus</strong> du dossier actuel.</li>
 </ul>
 <p>Vous pouvez accéder à l’interface Web de Milvus à l’adresse <code translate="no">http://127.0.0.1:9091/webui/</code> pour en savoir plus sur votre instance Milvus. Pour plus de détails, consultez la documentation relative à <a href="/docs/fr/v2.6.x/milvus-webui.md">l’interface Web de Milvus</a>.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Facultatif) Mise à jour des configurations de Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
@@ -195,7 +195,7 @@ EOF
 </ul></li>
 <li><p>Découvrez <a href="/docs/fr/v2.6.x/milvus-webui.md">Milvus WebUI</a>, une interface web intuitive pour la surveillance et la gestion de Milvus.</p></li>
 <li><p>Découvrez <a href="/docs/fr/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, un outil open source dédié aux sauvegardes de données Milvus.</p></li>
-<li><p>Découvrez <a href="/docs/fr/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, un outil open source permettant le débogage de Milvus et la mise à jour dynamique des configurations.</p></li>
+<li><p>Découvrez <a href="/docs/fr/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, un outil open source permettant le débogage de Milvus et les mises à jour dynamiques de la configuration.</p></li>
 <li><p>Découvrez <a href="https://github.com/zilliztech/attu">Attu</a>, un outil GUI open source permettant une gestion intuitive de Milvus.</p></li>
 <li><p><a href="/docs/fr/v2.6.x/monitor.md">Surveillez Milvus avec Prometheus</a>.</p></li>
 </ul>

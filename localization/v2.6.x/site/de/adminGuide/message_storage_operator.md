@@ -55,7 +55,7 @@ summary: >-
 </table>
 <p>Es gibt außerdem weitere Einschränkungen bei der Festlegung des Nachrichtenspeichers:</p>
 <ul>
-<li>Pro Milvus-Instanz wird nur ein Nachrichtenspeicher unterstützt. Es besteht jedoch weiterhin Abwärtskompatibilität mit mehreren für eine Instanz festgelegten Nachrichtenspeichern. Die Priorität ist wie folgt:
+<li>Pro Milvus-Instanz wird nur ein Nachrichtenspeicher unterstützt. Wir bieten jedoch weiterhin Abwärtskompatibilität mit mehreren für eine Instanz festgelegten Nachrichtenspeichern. Die Priorität ist wie folgt:
 <ul>
 <li>Standalone-Modus: RocksMQ (Standard) &gt; Pulsar &gt; Kafka</li>
 <li>Cluster-Modus: Pulsar (Standard) &gt; Kafka</li>
@@ -163,7 +163,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">external</code> Weist auf die Verwendung eines externen Pulsar-Dienstes hin.
+    </button></h3><p><code translate="no">external</code> Gibt die Verwendung eines externen Pulsar-Dienstes an.
 Zu den Feldern zur Konfiguration eines externen Pulsar-Dienstes gehören:</p>
 <ul>
 <li><code translate="no">external</code>:  Ein Wert unter „ <code translate="no">true</code> “ gibt an, dass Milvus einen externen Pulsar-Dienst nutzt.</li>
@@ -244,7 +244,7 @@ Zu den Feldern zur Konfiguration eines externen Pulsar-Dienstes gehören:</p>
   <span class="hljs-attr">config:</span> {}            
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">In diesem Beispiel werden die Anzahl der Replikate jeder Pulsar-Komponente, die Rechenressourcen von Pulsar BookKeeper sowie weitere Konfigurationen festgelegt.</div>
-<div class="alert note">Die vollständigen Konfigurationselemente zur Einrichtung eines internen Pulsar-Dienstes finden Sie in <a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">der Datei „values.yaml</a>“. Fügen Sie Konfigurationselemente nach Bedarf unter „ <code translate="no">pulsar.inCluster.values</code> “ hinzu, wie im vorangegangenen Beispiel gezeigt.</div>
+<div class="alert note">Die vollständigen Konfigurationselemente zur Einrichtung eines internen Pulsar-Dienstes finden Sie in <a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">der Datei „values.yaml</a>“. Fügen Sie die Konfigurationselemente nach Bedarf unter „ <code translate="no">pulsar.inCluster.values</code> “ hinzu, wie im vorangehenden Beispiel gezeigt.</div>
 <p>Angenommen, die Konfigurationsdatei heißt „ <code translate="no">milvuscluster.yaml</code> “, führen Sie den folgenden Befehl aus, um die Konfiguration zu übernehmen.</p>
 <pre><code translate="no" class="language-Shell">kubectl apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>

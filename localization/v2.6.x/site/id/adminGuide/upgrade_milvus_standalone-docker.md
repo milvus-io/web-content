@@ -83,11 +83,11 @@ title: Memperbarui Milvus Standalone dengan Docker Compose
 </ul>
 <p><strong>Persyaratan kompatibilitas:</strong></p>
 <ul>
-<li>Milvus v2.6.0-rc1 <strong>tidak kompatibel</strong> dengan v2.6.17. Pembaruan langsung dari kandidat rilis tidak didukung.</li>
+<li>Milvus v2.6.0-rc1 <strong>tidak kompatibel</strong> dengan v2.6.17. Peningkatan langsung dari kandidat rilis tidak didukung.</li>
 <li>Jika Anda saat ini menjalankan v2.6.0-rc1 dan perlu mempertahankan data Anda, silakan merujuk ke <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">panduan komunitas ini</a> untuk bantuan migrasi.</li>
 <li>Anda <strong>harus</strong> melakukan upgrade ke v2.5.16 atau yang lebih baru sebelum melakukan upgrade ke v2.6.17.</li>
 </ul>
-<p><strong>Batasan Antrian Pesan</strong>: Saat melakukan peningkatan ke Milvus v2.6.17, Anda harus mempertahankan pilihan antrian pesan Anda saat ini. Beralih antara sistem antrian pesan yang berbeda selama proses peningkatan tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia di versi mendatang.</p>
+<p><strong>Batasan Antrian Pesan</strong>: Saat melakukan pembaruan ke Milvus v2.6.17, Anda harus mempertahankan pilihan antrian pesan saat ini. Pergantian antara sistem antrian pesan yang berbeda selama proses pembaruan tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia pada versi mendatang.</p>
 <div class="alter note">
 <p>Karena pertimbangan keamanan, Milvus memperbarui MinIO-nya ke RELEASE.2024-12-18T13-15-44Z bersamaan dengan rilis v2.6.17.</p>
 </div>

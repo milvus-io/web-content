@@ -138,7 +138,7 @@ Creating milvus-standalone ... done
 <ul>
 <li>Der Container <strong>„milvus-etcd“</strong> stellt keine Ports für den Host bereit und ordnet seine Daten dem Verzeichnis <strong>„volumes/etcd“</strong> im aktuellen Ordner zu.</li>
 <li>Der Container <strong>„milvus-minio“</strong> stellt lokal die Ports <strong>9090</strong> und <strong>9091</strong> mit den Standard-Anmeldedaten bereit und ordnet seine Daten dem Verzeichnis <strong>„volumes/minio“</strong> im aktuellen Ordner zu.</li>
-<li>Der Container <strong>„milvus-standalone“</strong> stellt lokal die Ports <strong>19530</strong> mit den Standardeinstellungen bereit und ordnet seine Daten dem Verzeichnis <strong>„volumes/milvus“</strong> im aktuellen Ordner zu.</li>
+<li>Der Container <strong>„milvus-standalone“</strong> stellt lokal die Ports <strong>19530</strong> mit den Standardeinstellungen bereit und speichert seine Daten im Verzeichnis <strong>„volumes/milvus“</strong> im aktuellen Ordner.</li>
 </ul></li>
 </ul>
 <p>Mit dem folgenden Befehl können Sie überprüfen, ob die Container aktiv sind:</p>
@@ -189,7 +189,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <li><p>Verwenden Sie den folgenden Befehl, um die Datei „ <code translate="no">milvus.yaml</code> “ aus dem Milvus-Container auf Ihren lokalen Rechner zu kopieren. Ersetzen Sie „ <code translate="no">&lt;milvus_container_id&gt;</code> “ durch die tatsächliche ID Ihres Milvus-Containers.</p>
 <pre><code translate="no" class="language-shell">docker cp &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Öffnen Sie die kopierte Datei „ <code translate="no">milvus.yaml</code> “ mit Ihrem bevorzugten Texteditor. Beispielsweise mit vim:</p>
+<li><p>Öffnen Sie die kopierte Datei „ <code translate="no">milvus.yaml</code> “ mit Ihrem bevorzugten Texteditor. Beispielsweise mit „vim“:</p>
 <pre><code translate="no" class="language-shell">vim milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Bearbeiten Sie die Einstellungen „ <code translate="no">initMemSize</code> “ und „ <code translate="no">maxMemSize</code> “ nach Bedarf und speichern Sie Ihre Änderungen:</p>

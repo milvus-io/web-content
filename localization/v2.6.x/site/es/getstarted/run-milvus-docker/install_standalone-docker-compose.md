@@ -73,7 +73,7 @@ Creating milvus-standalone ... done
 <li><strong>Dependencias actualizadas</strong>: incluye las últimas versiones de MinIO y etcd</li>
 <li><strong>Configuración mejorada</strong>: ajustes optimizados para un mejor rendimiento</li>
 </ul>
-<p>Descarga siempre la configuración más reciente de Docker Compose para garantizar la compatibilidad con las características de la v2.6.17.</p>
+<p>Descarga siempre la configuración más reciente de Docker Compose para garantizar la compatibilidad con las funciones de la v2.6.17.</p>
 <ul>
 <li><p>Si no has podido ejecutar el comando anterior, comprueba si tu sistema tiene instalada la versión 1 de Docker Compose. Si es así, te recomendamos que migres a la versión 2 de Docker Compose, tal y como se indica en <a href="https://docs.docker.com/compose/">esta página</a>.</p></li>
 <li><p>Si tienes algún problema al descargar la imagen, ponte en contacto con nosotros en <a href="mailto:community@zilliz.com">community@zilliz.com</a> con los detalles del problema y te proporcionaremos la asistencia necesaria.</p></li>

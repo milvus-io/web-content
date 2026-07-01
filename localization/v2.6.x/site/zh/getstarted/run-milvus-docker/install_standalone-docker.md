@@ -76,7 +76,7 @@ title: 在 Docker 中运行 Milvus（Linux）
 <p>运行安装脚本后：</p>
 <ul>
 <li>一个名为 milvus 的 Docker 容器已在端口<strong>19530</strong> 上启动。</li>
-<li>一个嵌入式 etcd 已随 Milvus 一起安装在同一容器中，并监听<strong>2379</strong> 端口。其配置文件映射到当前文件夹中的<strong>embedEtcd.yaml</strong>。</li>
+<li>一个嵌入式 etcd 已随 Milvus 一起安装在同一容器中，并在<strong>2379</strong> 端口提供服务。其配置文件映射到当前文件夹中的<strong>embedEtcd.yaml</strong>。</li>
 <li>若要修改 Milvus 的默认配置，请在当前文件夹中的<strong>user.yaml</strong>文件中添加您的设置，然后重启服务。</li>
 <li>Milvus 数据卷已映射到当前文件夹中的<strong>volumes/milvus</strong>。</li>
 </ul>

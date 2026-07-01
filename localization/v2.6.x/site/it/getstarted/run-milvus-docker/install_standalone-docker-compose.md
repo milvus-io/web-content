@@ -85,7 +85,7 @@ Creating milvus-standalone ... done
 <ul>
 <li>Il container <strong>milvus-etcd</strong> non espone alcuna porta all’host e mappa i propri dati su <strong>volumes/etcd</strong> nella cartella corrente.</li>
 <li>Il container <strong>milvus-minio</strong> serve localmente le porte <strong>9090</strong> e <strong>9091</strong> con le credenziali di autenticazione predefinite e mappa i propri dati nella cartella <strong>volumes/minio</strong> nella directory corrente.</li>
-<li>Il container <strong>milvus-standalone</strong> serve localmente le porte <strong>19530</strong> con le impostazioni predefinite e mappa i propri dati nella cartella <strong>volumes/milvus</strong> nella directory corrente.</li>
+<li>Il container <strong>milvus-standalone</strong> serve localmente le porte <strong>19530</strong> con le impostazioni predefinite e mappa i propri dati nella <strong>cartella volumes/milvus</strong> all’interno della directory corrente.</li>
 </ul></li>
 </ul>
 <p>È possibile verificare se i container sono attivi e in esecuzione utilizzando il seguente comando:</p>

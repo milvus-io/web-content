@@ -63,7 +63,7 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Überprüfen Sie vor der Installation <a href="/docs/de/v2.6.x/prerequisite-helm.md">die Hardware- und Softwareanforderungen</a>.</p></li>
-<li><p>Vor der Installation von Milvus wird empfohlen, das <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> zu verwenden, um die Hardwareanforderungen auf der Grundlage Ihrer Datenmenge abzuschätzen. Dies trägt dazu bei, eine optimale Leistung und Ressourcenzuweisung für Ihre Milvus-Installation sicherzustellen.</p></li>
+<li><p>Vor der Installation von Milvus wird empfohlen, das <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> zu verwenden, um die Hardwareanforderungen basierend auf Ihrer Datenmenge abzuschätzen. Dies trägt dazu bei, eine optimale Leistung und Ressourcenzuweisung für Ihre Milvus-Installation sicherzustellen.</p></li>
 </ul>
 <div class="alert note">
 <p>Sollten beim Abrufen des Images Probleme auftreten, kontaktieren Sie uns bitte unter <a href="mailto:community@zilliz.com">community@zilliz.com</a> mit Details zum Problem, und wir werden Ihnen die erforderliche Unterstützung zukommen lassen.</p>
@@ -289,7 +289,7 @@ Forwarding from 127.0.0.1:27017 -&gt; 19530
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
-<p>Nun können Sie über den weitergeleiteten Port eine Verbindung zu Milvus herstellen.</p>
+<p>Nun kannst du über den weitergeleiteten Port eine Verbindung zu Milvus herstellen.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Optional) Milvus-Konfigurationen aktualisieren<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -405,7 +405,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>Nachdem Sie Milvus in Docker installiert haben, können Sie:</p>
 <ul>
-<li><p>Schauen Sie sich <a href="/docs/de/v2.6.x/quickstart.md">„Hello Milvus</a> “ an, um zu sehen, was Milvus alles kann.</p></li>
+<li><p>Schauen Sie sich <a href="/docs/de/v2.6.x/quickstart.md">„Hello Milvus“</a> an, um zu sehen, was Milvus leisten kann.</p></li>
 <li><p>Lernen Sie die grundlegenden Funktionen von Milvus kennen:</p>
 <ul>
 <li><a href="/docs/de/v2.6.x/manage_databases.md">Datenbanken verwalten</a></li>

@@ -135,7 +135,7 @@ service/milvus-operator-controller-manager-metrics-service created
 service/milvus-operator-webhook-service created
 deployment.apps/milvus-operator-controller-manager created
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus OperatorのPodが実行中かどうかは、次のように確認できます:</p>
+<p>Milvus OperatorのPodが実行中かどうかは、次のように確認できます：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods -n milvus-operator</span>
 
 NAME                               READY   STATUS    RESTARTS   AGE
@@ -175,7 +175,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Milvus OperatorのPodが実行されている状態になったら、次のようにMilvusクラスタをデプロイできます。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上記のコマンドは、メッセージキューとして<strong>Woodpecker</strong>（v2.6.17で推奨）を使用し、Streaming Nodeを含むすべての新しいアーキテクチャコンポーネントを備えたMilvusクラスターをデプロイします。</p>
+<p>上記のコマンドは、メッセージキューとして<strong>Woodpecker</strong>（v2.6.17で推奨）を使用し、Streaming Nodeを含むすべての新しいアーキテクチャコンポーネントを備えたMilvusクラスタをデプロイします。</p>
 <p><strong>このデプロイにおけるアーキテクチャの主な特徴:</strong></p>
 <ul>
 <li><strong>メッセージキュー</strong>：<a href="/docs/ja/v2.6.x/use-woodpecker.md">Woodpecker を使用</a>（インフラのメンテナンス負担を軽減）</li>
@@ -186,7 +186,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 <div class="alert note">
 <ul>
 <li>リリース名には、英字、数字、ハイフンのみを含めることができます。リリース名にドットを使用することはできません。</li>
-<li>また、すべてのコンポーネントが単一のポッド内に収まるスタンドアロンモードで Milvus インスタンスをデプロイすることも可能です。その場合は、上記のコマンド内の設定ファイルの URL を次のように変更してください。<code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
+<li>また、すべてのコンポーネントが単一のポッド内に収まるスタンドアロンモードでMilvusインスタンスをデプロイすることも可能です。その場合は、上記のコマンド内の設定ファイルのURLを次のように変更してください。<code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
 </ul>
 </div>
 <h3 id="2-Check-Milvus-cluster-status" class="common-anchor-header">2. Milvusクラスタの状態を確認する<button data-href="#2-Check-Milvus-cluster-status" class="anchor-icon" translate="no">
@@ -207,7 +207,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>以下のコマンドを実行して、Milvusクラスタの状態を確認します</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get milvus my-release -o yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvusクラスタの準備が整うと、上記のコマンドの出力は以下のようになります。<code translate="no">status.status</code> フィールドが<code translate="no">Unhealthy</code> のままである場合、Milvusクラスタはまだ作成中です。</p>
+<p>Milvusクラスタの準備が整うと、上記のコマンドの出力は以下のようになります。<code translate="no">status.status</code> フィールドが「<code translate="no">Unhealthy</code> 」のままである場合、Milvusクラスタはまだ作成中です。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -287,7 +287,7 @@ Forwarding from 127.0.0.1:27017 -&gt; 19530
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
-<p>これで、転送されたポートを使用して Milvus に接続できるようになります。</p>
+<p>これで、転送されたポートを使用してMilvusに接続できるようになります。</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(オプション) Milvus の設定を更新する<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -305,7 +305,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
       </svg>
     </button></h2><p>次のように `<code translate="no">patch</code> ` コマンドを実行することで、Milvus クラスタの設定を確認および更新できます。</p>
 <ol>
-<li><p>以下のコマンドを実行して、変更後の設定内容をプレビューします。</p>
+<li><p>以下のコマンドを実行すると、変更後の設定内容をプレビューできます。</p>
 <p>以下では、<code translate="no">spec.components.disableMetric</code> パラメータを<code translate="no">false</code> msに更新する場合を想定しています。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl patch milvus my-release --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;merge&#x27;</span>\
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span> \

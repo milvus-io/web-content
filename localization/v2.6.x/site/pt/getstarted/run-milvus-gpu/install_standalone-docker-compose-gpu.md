@@ -130,11 +130,11 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Se não conseguir executar o comando acima, verifique se o seu sistema tem o Docker Compose V1 instalado. Se for esse o caso, recomenda-se que migre para o Docker Compose V2, devido às notas apresentadas <a href="https://docs.docker.com/compose/">nesta página</a>.</p>
+<p>Se não conseguir executar o comando acima, verifique se o seu sistema tem o Docker Compose V1 instalado. Se for esse o caso, recomenda-se que migre para o Docker Compose V2, devido às notas <a href="https://docs.docker.com/compose/">nesta página</a>.</p>
 </div>
 <p>Após iniciar o Milvus,</p>
 <ul>
-<li>os contentores denominados <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> e <strong>milvus-etcd</strong> estão em funcionamento.
+<li>os contentores denominados <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> e <strong>milvus-etcd</strong> estão ativos.
 <ul>
 <li>O contentor <strong>milvus-etcd</strong> não expõe quaisquer portas ao anfitrião e mapeia os seus dados para <strong>volumes/etcd</strong> na pasta atual.</li>
 <li>O contentor <strong>milvus-minio</strong> disponibiliza as portas <strong>9090</strong> e <strong>9091</strong> localmente com as credenciais de autenticação predefinidas e mapeia os seus dados para <strong>volumes/minio</strong> na pasta atual.</li>
@@ -150,7 +150,7 @@ milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 23
 milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-<p>Também pode aceder à interface Web do Milvus em <code translate="no">http://127.0.0.1:9091/webui/</code> para saber mais sobre a sua instância do Milvus. Para mais detalhes, consulte a <a href="/docs/pt/v2.6.x/milvus-webui.md">interface Web do Milvus</a>.</p>
+<p>Também pode aceder à interface web do Milvus em <code translate="no">http://127.0.0.1:9091/webui/</code> para saber mais sobre a sua instância do Milvus. Para mais detalhes, consulte a <a href="/docs/pt/v2.6.x/milvus-webui.md">interface web do Milvus</a>.</p>
 <p>Se tiver atribuído vários dispositivos GPU ao Milvus no ficheiro docker-compose.yml, pode especificar qual o dispositivo GPU que está visível ou disponível para utilização.</p>
 <p>Tornar o dispositivo GPU <code translate="no">0</code> visível para o Milvus:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">CUDA_VISIBLE_DEVICES=0 ./milvus run standalone</span>

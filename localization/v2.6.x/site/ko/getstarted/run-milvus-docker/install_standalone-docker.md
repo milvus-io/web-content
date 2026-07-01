@@ -76,7 +76,7 @@ title: Docker에서 Milvus 실행하기 (Linux)
 <p>설치 스크립트 실행 후:</p>
 <ul>
 <li>port <strong>19530</strong>에서 milvus라는 이름의 Docker 컨테이너가 시작되었습니다.</li>
-<li>Milvus와 함께 동일한 컨테이너 내에 임베디드 etcd가 설치되어 있으며, 포트 <strong>2379</strong>에서 서비스를 제공합니다. 해당 구성 파일은 현재 폴더의 <strong>embedEtcd.yaml에</strong> 매핑되어 있습니다.</li>
+<li>Milvus와 함께 동일한 컨테이너 내에 임베디드 etcd가 설치되어 있으며, 포트 <strong>2379</strong>에서 서비스를 제공합니다. 해당 구성 파일은 현재 폴더의 <strong>embedEtcd.yaml</strong> 에 매핑되어 있습니다.</li>
 <li>기본 Milvus 구성을 변경하려면 현재 폴더에 있는 <strong>user.yaml</strong> 파일에 설정을 추가한 후 서비스를 다시 시작하십시오.</li>
 <li>Milvus 데이터 볼륨은 현재 폴더의 <strong>volumes/milvus</strong> 에 매핑되어 있습니다.</li>
 </ul>
@@ -96,7 +96,7 @@ title: Docker에서 Milvus 실행하기 (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>현재 폴더에 있는 <strong>user.yaml</strong> 파일에서 Milvus 구성을 수정할 수 있습니다. 예를 들어, <code translate="no">proxy.healthCheckTimeout</code> 을 <code translate="no">1000</code> ms로 변경하려면 파일을 다음과 같이 수정하면 됩니다.</p>
+    </button></h2><p>현재 폴더에 있는 <strong>user.yaml</strong> 파일에서 Milvus 구성을 수정할 수 있습니다. 예를 들어, <code translate="no">proxy.healthCheckTimeout</code> 을 <code translate="no">1000</code> ms로 변경하려면 파일을 다음과 같이 수정하면 됩니다:</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:

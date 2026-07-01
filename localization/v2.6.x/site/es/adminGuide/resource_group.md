@@ -233,7 +233,7 @@ except Exception:
     </button></h2><p>Actualmente, Milvus no puede escalar de forma independiente (aumentar o reducir) en entornos nativos de la nube. Sin embargo, al utilizar la <strong>API de grupos de recursos declarativos</strong> junto con la orquestación de contenedores, Milvus puede lograr fácilmente el aislamiento y la gestión de recursos para los QueryNodes.
 A continuación se presenta una buena práctica para gestionar los QueryNodes en un entorno de nube:</p>
 <ol>
-<li><p>Por defecto, Milvus crea un <strong>__default_resource_group</strong>. Este grupo de recursos no se puede eliminar y, además, sirve como grupo de recursos de carga predeterminado para todas las colecciones; los QueryNodes redundantes siempre se le asignan. Por lo tanto, podemos crear un grupo de recursos «pendiente» para albergar los recursos de QueryNode que no se estén utilizando, evitando así que el grupo <strong> de recursos __default_resource_group</strong> los ocupe.</p>
+<li><p>Por defecto, Milvus crea un <strong>__default_resource_group</strong>. Este grupo de recursos no se puede eliminar y, además, sirve como grupo de recursos de carga predeterminado para todas las colecciones; los QueryNodes redundantes siempre se le asignan a él. Por lo tanto, podemos crear un grupo de recursos «pendiente» para albergar los recursos de QueryNode que no se estén utilizando, evitando así que el grupo <strong> de recursos __default_resource_group</strong> los ocupe.</p>
 <p>Además, si aplicamos estrictamente la restricción <code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code>, podemos controlar con precisión la asignación de QueryNodes en el clúster. Supongamos que actualmente solo hay un QueryNode en el clúster e inicialicemos el clúster.
 A continuación se muestra un ejemplo de configuración:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.client.types <span class="hljs-keyword">import</span> ResourceGroupConfig
@@ -299,7 +299,7 @@ scale_to(<span class="hljs-number">5</span>)
 <span class="hljs-comment"># rg1 has 3 nodes, rg2 has 1 node, __default_resource_group has 1 node.</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Reducción del clúster</p>
-<p>Del mismo modo, podemos establecer reglas de reducción de escala que den prioridad a la selección de QueryNodes del grupo de recursos <strong>__pending_nodes</strong>. Esta información se puede obtener a través de la API <code translate="no">describe_resource_group</code>. De este modo, se logra el objetivo de reducir la escala del grupo de recursos especificado.</p>
+<p>Del mismo modo, podemos establecer reglas de reducción de escala que den prioridad a la selección de QueryNodes del grupo de recursos <strong>__pending_nodes</strong>. Esta información se puede obtener a través de la API <code translate="no">describe_resource_group</code>. De este modo, se logra el objetivo de reducir la escala de un grupo de recursos específico.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># scale rg1 from 3 nodes into 2 nodes</span>
 milvus_client.update_resource_groups({
     <span class="hljs-string">&quot;rg1&quot;</span>: ResourceGroupConfig(

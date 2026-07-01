@@ -75,7 +75,7 @@ beta: Milvus 3.0.x
 <tr><th>측면</th><th><code translate="no">VARCHAR</code></th><th><code translate="no">TEXT</code></th></tr>
 </thead>
 <tbody>
-<tr><td>가장 적합한 용도</td><td><code translate="no">title</code>, <code translate="no">tag</code>, <code translate="no">category</code>, <code translate="no">external_id</code> 와 같이 엔티티를 식별, 분류 또는 필터링하는 데 사용되는 짧은 메타데이터.</td><td><code translate="no">content</code>, <code translate="no">passage</code>, <code translate="no">article_body</code>, <code translate="no">log_message</code> 등과 같이 LLM 또는 에이전트 워크플로우에서 사용되는 긴 소스 콘텐츠.</td></tr>
+<tr><td>가장 적합한 용도</td><td><code translate="no">title</code>, <code translate="no">tag</code>, <code translate="no">category</code>, <code translate="no">external_id</code> 와 같이 엔티티를 식별, 분류 또는 필터링하는 데 사용되는 짧은 메타데이터.</td><td><code translate="no">content</code>, <code translate="no">passage</code>, <code translate="no">article_body</code> 또는 <code translate="no">log_message</code> 과 같이 LLM 또는 에이전트 워크플로우에서 사용되는 긴 소스 콘텐츠.</td></tr>
 <tr><td>길이 설정</td><td><code translate="no">max_length</code> 가 필요하며, 이는 필드가 저장할 수 있는 최대 바이트 수를 정의합니다. 최대 값은 <code translate="no">65,535</code> 바이트입니다. 값이 이 한도를 초과할 수 있는 경우 <code translate="no">TEXT</code> 를 사용하십시오.</td><td><code translate="no">max_length</code> 가 필요하지 않으므로, 스키마에 텍스트 값에 대한 고정된 바이트 제한을 지정할 필요가 없습니다.</td></tr>
 <tr><td>저장 동작</td><td>각 값은 필드에 구성된 <code translate="no">max_length</code> 내에서 저장됩니다.</td><td>크기가 큰 텍스트 값의 경우 자동 저장소 선택 기능을 사용합니다. 자세한 내용은 <a href="#how-milvus-stores-large-text-values">Milvus가 대용량 TEXT 값을 저장하는 방법을</a> 참조하십시오.</td></tr>
 <tr><td>주 필드 지원</td><td>주 필드로 사용할 수 있습니다.</td><td>주 필드로 사용할 수 없습니다.</td></tr>
@@ -240,7 +240,7 @@ client.load_collection(collection_name=COLLECTION_NAME)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>원본 쿼리 텍스트를 검색 데이터로 사용하여 스파스 벡터 필드에 대해 검색합니다. Milvus는 쿼리 텍스트를 스파스 벡터로 변환하고, BM25를 사용하여 일치 항목을 순위 매긴 후, 요청된 <code translate="no">TEXT</code> 필드를 <code translate="no">output_fields</code> 에 반환합니다.</p>
+    </button></h2><p>원본 쿼리 텍스트를 검색 데이터로 사용하여 스파스 벡터 필드에 대해 검색합니다. Milvus는 쿼리 텍스트를 스파스 벡터로 변환하고, BM25를 통해 일치 항목을 순위 매긴 후, 요청된 <code translate="no">TEXT</code> 필드를 <code translate="no">output_fields</code> 에 반환합니다.</p>
 <pre><code translate="no" class="language-python">results = client.search(
     collection_name=COLLECTION_NAME,
 <span class="highlighted-comment-line">    data=[<span class="hljs-string">&quot;how does Milvus store source text for retrieval&quot;</span>],</span>

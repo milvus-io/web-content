@@ -76,7 +76,7 @@ title: DockerでMilvusを実行する（Linux）
 <p>インストールスクリプトの実行後：</p>
 <ul>
 <li>「milvus」という名前の Docker コンテナがポート<strong>19530</strong> で起動しました。</li>
-<li>Milvus と同じコンテナ内に embed etcd がインストールされており、ポート<strong>2379</strong> で動作しています。その設定ファイルは、現在のフォルダ内の<strong>embedEtcd.yaml</strong>にマッピングされています。</li>
+<li>Milvus と同じコンテナ内に embed etcd がインストールされており、ポート<strong>2379</strong> でサービスを提供しています。その設定ファイルは、現在のフォルダ内の<strong>embedEtcd.yaml</strong>にマッピングされています。</li>
 <li>Milvusのデフォルト設定を変更するには、現在のフォルダ内の<strong>user.yamlファイル</strong>に設定を追加し、サービスを再起動してください。</li>
 <li>Milvusのデータボリュームは、現在のフォルダ内の<strong>volumes/milvus</strong>にマッピングされています。</li>
 </ul>

@@ -24,7 +24,7 @@ summary: >-
     </button></h1><p>O Milvus utiliza o Pulsar ou o Kafka para gerir registos de alterações recentes, gerar registos de fluxo e disponibilizar subscrições de registos. O Pulsar é o sistema de armazenamento de mensagens predefinido. Este tópico apresenta como configurar o armazenamento de mensagens com o Docker Compose ou o Helm.</p>
 <p>Pode configurar o Pulsar com <a href="https://docs.docker.com/get-started/overview/">o Docker Compose</a> ou no K8s e configurar o Kafka no K8s.</p>
 <div class="alert note">
-<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v2.6.17, deve manter a sua escolha atual de fila de mensagens. A alternância entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.</p>
+<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v2.6.17, deve manter a sua escolha atual de fila de mensagens. A mudança entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Configurar o Pulsar com o Docker Compose<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"

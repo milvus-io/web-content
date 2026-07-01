@@ -106,7 +106,7 @@ title: Meningkatkan Versi Kluster Milvus dengan Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Upgrade-Milvus-Operator" class="common-anchor-header">Langkah 1: Memutakhirkan Milvus Operator<button data-href="#Step-1-Upgrade-Milvus-Operator" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Upgrade-Milvus-Operator" class="common-anchor-header">Langkah 1: Memperbarui Milvus Operator<button data-href="#Step-1-Upgrade-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -169,7 +169,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="23-Upgrade-to-v2617" class="common-anchor-header">2.3 Tingkatkan ke v2.6.17</h4><p>Setelah v2.5.16 berjalan dengan lancar dengan fitur " <code translate="no">mixCoord</code>", lakukan pembaruan ke v2.6.17:</p>
+<h4 id="23-Upgrade-to-v2617" class="common-anchor-header">2.3 Tingkatkan ke v2.6.17</h4><p>Setelah v2.5.16 berjalan dengan lancar dan fitur " <code translate="no">mixCoord</code>" diaktifkan, lakukan pembaruan ke v2.6.17:</p>
 <p>Perbarui berkas konfigurasi Anda (<code translate="no">milvusupgrade.yaml</code> dalam contoh ini):</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>

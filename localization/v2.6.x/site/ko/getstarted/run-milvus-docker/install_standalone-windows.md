@@ -89,7 +89,7 @@ To change the default Milvus configuration, edit user.yaml and restart the servi
 <p>설치 스크립트 실행 후:​</p>
 <ul>
 <li><p><strong>milvus-standalone이라는</strong> 이름의 Docker 컨테이너가 포트 <strong>19530</strong>에서 시작되었습니다.​</p></li>
-<li><p>Milvus와 함께 동일한 컨테이너 내에 임베디드 etcd가 설치되어 있으며, 포트 <strong>2379</strong>에서 서비스를 제공합니다. 해당 구성 파일은 현재 폴더의 <strong>embedEtcd.yaml</strong> 에 매핑되어 있습니다.​</p></li>
+<li><p>Milvus와 함께 동일한 컨테이너 내에 임베디드 etcd가 설치되었으며, 포트 <strong>2379</strong>에서 서비스를 제공합니다. 해당 구성 파일은 현재 폴더의 <strong>embedEtcd.yaml</strong> 에 매핑되어 있습니다.​</p></li>
 <li><p>Milvus 데이터 볼륨은 현재 폴더의 <strong>volumes/milvus</strong> 에 매핑됩니다.​</p></li>
 </ul>
 <p>다음 명령어를 사용하여 Milvus 컨테이너와 저장된 데이터를 관리할 수 있습니다.​</p>
@@ -306,7 +306,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 
 </code></pre></li>
 <li><p>Docker Desktop을 <strong>관리자</strong> 모드로 실행했는지 확인하십시오.</p>
-<p>Docker Desktop을 관리자 모드로 실행했는지 확인하십시오. 이를 위해 <strong>Docker Desktop을</strong> 마우스 오른쪽 버튼으로 클릭하고 <strong>‘관리자 권한으로 실행’을</strong> 선택하십시오.</p>
+<p>Docker Desktop을 관리자 모드로 실행했는지 확인하십시오. 이를 위해 <strong>Docker Desktop을</strong> 마우스 오른쪽 버튼으로 클릭하고 <strong>‘관리자 권한으로 실행’을</strong> 선택하십시오.​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/docker-desktop.png" alt="Start Docker Desktop as Administrator" class="doc-image" id="start-docker-desktop-as-administrator" /> 
@@ -329,7 +329,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>WSL 2에서 Milvus를 실행하는 동안 WSL 관련 문제가 발생한 경우, 다음과 같이 Docker Desktop이 WSL 2 기반 엔진을 사용하도록 구성되어 있는지 확인해야 할 수 있습니다:​</p>
+    </button></h3><p>WSL 2에서 Milvus를 실행하는 동안 WSL 관련 문제가 발생한 경우, 다음과 같이 Docker Desktop이 WSL 2 기반 엔진을 사용하도록 설정되어 있는지 확인해야 할 수 있습니다:​</p>
 <ol>
 <li><p><strong>설정</strong> &gt; <strong>일반에서</strong> “WSL 2 기반 엔진 사용”이 선택되어 있는지 확인하십시오. ​</p>
 <p><span class="img-wrapper">
@@ -364,7 +364,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
     </button></h3><p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" /> 
-   <span>Milvus 시작 시 표시되는 ‘Read config failed’ 오류 메시지</span>
+   <span>Milvus 시작 시 발생하는 ‘Read config failed’ 오류 메시지</span>
   
  </span></p>
 <p>Milvus 시작 시 “Read config failed”라는 오류가 표시될 경우, Milvus 컨테이너에 마운트된 볼륨이 올바른지 확인해야 합니다. 볼륨이 컨테이너에 올바르게 마운트된 경우, <code translate="no">docker exec</code> 명령어를 사용하여 컨테이너로 진입한 후 다음과 같이 <strong>/milvus/configs</strong> 폴더의 내용을 확인할 수 있습니다:​</p>

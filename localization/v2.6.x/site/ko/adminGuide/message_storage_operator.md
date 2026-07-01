@@ -25,7 +25,7 @@ summary: Milvus Operator를 사용하여 메시지 저장소를 구성하는 방
 <p>Milvus Operator를 사용하여 Milvus 클러스터를 시작하려면 구성 파일을 지정해야 합니다.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-string">kubectl</span> <span class="hljs-string">apply</span> <span class="hljs-string">-f</span> <span class="hljs-string">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>타사 종속성을 구성하려면 <code translate="no">milvus_cluster_default.yaml</code> 에 있는 코드 템플릿만 편집하면 됩니다. 다음 섹션에서는 오브젝트 스토리지, etcd 및 Pulsar를 각각 구성하는 방법을 소개합니다.</p>
+<p>타사 종속성을 구성하려면 <code translate="no">milvus_cluster_default.yaml</code> 에 있는 코드 템플릿만 편집하면 됩니다. 다음 섹션에서는 오브젝트 스토리지, etcd 및 Pulsar를 각각 구성하는 방법을 설명합니다.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">시작하기 전에<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -128,7 +128,7 @@ summary: Milvus Operator를 사용하여 메시지 저장소를 구성하는 방
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Woodpecker는 오브젝트 스토리지를 위해 설계된 클라우드 네이티브 WAL(Write-Ahead Log)입니다. 높은 처리량, 낮은 운영 오버헤드, 원활한 확장성을 제공합니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/use-woodpecker.md">Woodpecker 사용을</a> 참조하십시오.</p>
+    </button></h2><p>Woodpecker는 오브젝트 스토리지를 위해 설계된 클라우드 네이티브 WAL(Write-Ahead Log)입니다. 높은 처리량, 낮은 운영 오버헤드 및 원활한 확장성을 제공합니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/use-woodpecker.md">Woodpecker 사용을</a> 참조하십시오.</p>
 <h2 id="Configure-Pulsar" class="common-anchor-header">Pulsar 구성<button data-href="#Configure-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -242,7 +242,7 @@ summary: Milvus Operator를 사용하여 메시지 저장소를 구성하는 방
   <span class="hljs-attr">config:</span> {}            
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">이 예제에서는 Pulsar의 각 구성 요소에 대한 복제본 수, Pulsar BookKeeper의 컴퓨팅 리소스 및 기타 구성을 지정합니다.</div>
-<div class="alert note"><a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">values.yaml</a>에서 내부 Pulsar 서비스를 구성하기 위한 전체 구성 항목을 확인하십시오. 앞의 예제와 같이 <code translate="no">pulsar.inCluster.values</code> 아래에 필요에 따라 구성 항목을 추가하십시오.</div>
+<div class="alert note"><a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">values.yaml</a>에서 내부 Pulsar 서비스를 구성하는 전체 구성 항목을 확인하십시오. 앞의 예제와 같이 <code translate="no">pulsar.inCluster.values</code> 아래에 필요에 따라 구성 항목을 추가하십시오.</div>
 <p>구성 파일의 이름이 <code translate="no">milvuscluster.yaml</code> 라고 가정하고, 다음 명령을 실행하여 구성을 적용합니다.</p>
 <pre><code translate="no" class="language-Shell">kubectl apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -261,7 +261,7 @@ summary: Milvus Operator를 사용하여 메시지 저장소를 구성하는 방
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pulsar는 Milvus 클러스터의 기본 메시지 저장소입니다. Kafka를 사용하려면 선택적 필드인 <code translate="no">msgStreamType</code> 을 추가하여 Kafka를 구성하십시오.</p>
+    </button></h2><p>Pulsar는 Milvus 클러스터의 기본 메시지 저장소입니다. Kafka를 사용하려면 선택적 필드인 <code translate="no">msgStreamType</code> 를 추가하여 Kafka를 구성하십시오.</p>
 <p><code translate="no">kafka</code> <code translate="no">external</code> 및 을 지원합니다. <code translate="no">inCluster</code></p>
 <h3 id="External-Kafka" class="common-anchor-header">외부 Kafka<button data-href="#External-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -279,7 +279,7 @@ summary: Milvus Operator를 사용하여 메시지 저장소를 구성하는 방
         ></path>
       </svg>
     </button></h3><p><code translate="no">external</code> 는 외부 Kafka 서비스를 사용함을 나타냅니다.</p>
-<p>외부 Kafka 서비스를 구성하는 데 사용되는 필드는 다음과 같습니다.</p>
+<p>외부 Kafka 서비스를 구성하는 데 사용되는 필드는 다음과 같습니다:</p>
 <ul>
 <li><code translate="no">external</code>: <code translate="no">true</code> 값은 Milvus가 외부 Kafka 서비스를 사용함을 나타냅니다.</li>
 <li><code translate="no">brokerList</code>: 메시지를 전송할 브로커 목록입니다.</li>
@@ -346,7 +346,7 @@ summary: Milvus Operator를 사용하여 메시지 저장소를 구성하는 방
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<p>내부 Kafka 서비스를 구성하는 데 필요한 전체 구성 항목은 <a href="https://artifacthub.io/packages/helm/bitnami/kafka">여기에서</a> 확인할 수 있습니다. 필요에 따라 <code translate="no">kafka.inCluster.values</code> 아래에 구성 항목을 추가하십시오.</p>
+<p>내부 Kafka 서비스를 구성하는 데 필요한 전체 구성 항목은 <a href="https://artifacthub.io/packages/helm/bitnami/kafka">여기에서</a> 확인할 수 있습니다. 필요에 따라 ` <code translate="no">kafka.inCluster.values</code>` 아래에 구성 항목을 추가하십시오.</p>
 <p>구성 파일 이름이 <code translate="no">milvuscluster.yaml</code> 라고 가정할 때, 다음 명령을 실행하여 구성을 적용하십시오.</p>
 <pre><code translate="no"><span class="hljs-attribute">kubectl</span> apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>

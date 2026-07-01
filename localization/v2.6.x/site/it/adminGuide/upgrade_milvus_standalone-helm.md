@@ -161,7 +161,7 @@ Il repository dei chart Helm di Milvus all’indirizzo <code translate="no">http
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Upgrade-to-v2617" class="common-anchor-header">Passaggio 3: aggiornamento alla versione v2.6.17<button data-href="#Step-3-Upgrade-to-v2617" class="anchor-icon" translate="no">
+<h3 id="Step-3-Upgrade-to-v2617" class="common-anchor-header">Passaggio 3: Aggiornamento alla versione v2.6.17<button data-href="#Step-3-Upgrade-to-v2617" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

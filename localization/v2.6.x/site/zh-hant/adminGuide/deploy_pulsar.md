@@ -79,7 +79,7 @@ summary: 瞭解如何使用 Docker Compose 或 Helm 來設定訊息儲存。
     </button></h3><p>執行以下指令以啟動採用 Pulsar 設定的 Milvus。</p>
 <pre><code translate="no"><span class="hljs-attribute">docker</span> compose up
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note">設定僅在 Milvus 啟動後才會生效。更多資訊請參閱「<a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">啟動 Milvus</a>」。</div>
+<div class="alert note">設定僅在 Milvus 啟動後才會生效。詳情請參閱「<a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">啟動 Milvus</a>」。</div>
 <h2 id="Configure-Pulsar-with-Helm" class="common-anchor-header">使用 Helm 配置 Pulsar<button data-href="#Configure-Pulsar-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -277,7 +277,7 @@ summary: 瞭解如何使用 Docker Compose 或 Helm 來設定訊息儲存。
     </button></h2><p>Milvus 獨立部署版預設使用 RocksMQ 作為訊息儲存系統。有關如何透過 Helm 配置 Milvus 的詳細步驟，請參閱《<a href="/docs/zh-hant/v2.6.x/configure-helm.md">使用 Helm Charts 配置 Milvus</a>》。有關 RocksMQ 相關配置項目的詳細資訊，請參閱《<a href="/docs/zh-hant/v2.6.x/configure_rocksmq.md">RocksMQ 相關配置</a>》。</p>
 <ul>
 <li><p>若您已使用 RocksMQ 啟動 Milvus 並希望變更其設定，可執行 `<code translate="no">helm upgrade -f</code> ` 並在以下 YAML 檔案中載入已變更的設定。</p></li>
-<li><p>若您曾透過 Helm 以獨立模式安裝 Milvus，且當時使用的訊息儲存庫並非 RocksMQ，現在想改回 RocksMQ，請先清空所有集合並停止 Milvus，然後使用以下 YAML 檔案執行 `<code translate="no">helm upgrade -f</code> ` 指令。</p></li>
+<li><p>若您曾透過 Helm 以獨立模式安裝 Milvus，且當時使用的訊息儲存庫並非 RocksMQ，現在想改回 RocksMQ，請先清空所有集合並停止 Milvus，然後執行<code translate="no">helm upgrade -f</code> 並使用以下 YAML 檔案。</p></li>
 </ul>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+

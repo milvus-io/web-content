@@ -66,17 +66,17 @@ title: Milvus in Docker ausführen (Linux)
 <p><strong>Neuerungen in Version 2.6.17:</strong></p>
 <ul>
 <li><strong>Streaming-Knoten</strong>: Erweiterte Datenverarbeitungsfunktionen</li>
-<li><strong>Woodpecker MQ</strong>: Verbesserte Nachrichtenwarteschlange mit reduziertem Wartungsaufwand; siehe <a href="/docs/de/v2.6.x/use-woodpecker.md">„Woodpecker verwenden“</a> für Details</li>
+<li><strong>Woodpecker MQ</strong>: Verbesserte Nachrichtenwarteschlange mit reduziertem Wartungsaufwand; weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/use-woodpecker.md">„Woodpecker verwenden“</a> </li>
 <li><strong>Optimierte Architektur</strong>: Konsolidierte Komponenten für bessere Leistung</li>
 </ul>
 <p>Laden Sie immer das neueste Skript herunter, um sicherzustellen, dass Sie die aktuellsten Konfigurationen und Architekturverbesserungen erhalten.</p>
 <p>Wenn Sie <a href="https://milvus.io/docs/milvus_backup_overview.md">„Backup“</a> im Standalone-Betriebsmodus nutzen möchten, wird die Bereitstellung mit <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a> empfohlen.</p>
-<p>Sollten beim Abrufen des Images Probleme auftreten, kontaktieren Sie uns bitte unter <a href="mailto:community@zilliz.com">community@zilliz.com</a> mit detaillierten Angaben zum Problem, und wir werden Ihnen die erforderliche Unterstützung zukommen lassen.</p>
+<p>Sollten beim Abrufen des Images Probleme auftreten, kontaktieren Sie uns bitte unter <a href="mailto:community@zilliz.com">community@zilliz.com</a> mit Details zum Problem, und wir werden Ihnen die erforderliche Unterstützung zukommen lassen.</p>
 </div>
 <p>Nach Ausführung des Installationsskripts:</p>
 <ul>
 <li>Ein Docker-Container namens „milvus“ wurde am Port <strong>19530</strong> gestartet.</li>
-<li>Zusammen mit Milvus ist im selben Container ein „embed etcd“ installiert, das auf Port <strong>2379</strong> läuft. Seine Konfigurationsdatei ist auf <strong>„embedEtcd.yaml“</strong> im aktuellen Ordner abgebildet.</li>
+<li>Zusammen mit Milvus ist im selben Container ein „embed etcd“ installiert, das auf Port <strong>2379</strong> läuft. Seine Konfigurationsdatei ist auf <strong>„embedEtcd.yaml“</strong> im aktuellen Ordner verweist.</li>
 <li>Um die Standardkonfiguration von Milvus zu ändern, fügen Sie Ihre Einstellungen zur Datei <strong>„user.yaml“</strong> im aktuellen Ordner hinzu und starten Sie den Dienst anschließend neu.</li>
 <li>Das Milvus-Datenvolume ist dem Verzeichnis <strong>„volumes/milvus“</strong> im aktuellen Ordner zugeordnet.</li>
 </ul>

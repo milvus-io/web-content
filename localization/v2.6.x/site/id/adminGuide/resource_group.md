@@ -234,7 +234,7 @@ except Exception:
 Berikut adalah praktik terbaik untuk mengelola QueryNodes di lingkungan cloud:</p>
 <ol>
 <li><p>Secara default, Milvus membuat <strong>__default_resource_group</strong>. Grup sumber daya ini tidak dapat dihapus dan juga berfungsi sebagai grup sumber daya pemuatan default untuk semua koleksi, serta QueryNodes redundan selalu ditugaskan ke dalamnya. Oleh karena itu, kita dapat membuat grup sumber daya "pending" untuk menampung sumber daya QueryNode yang tidak digunakan, sehingga mencegah sumber daya QueryNode tersebut diduduki oleh <strong>__default_resource_group</strong>.</p>
-<p>Selain itu, jika kita menerapkan batasan <code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code> secara ketat, kita dapat mengontrol penugasan QueryNodes di dalam kluster dengan tepat. Mari kita asumsikan saat ini hanya ada satu QueryNode di dalam kluster dan kita inisialisasi kluster tersebut.
+<p>Selain itu, jika kita menerapkan batasan <code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code> secara ketat, kita dapat mengontrol penugasan QueryNodes di dalam kluster dengan tepat. Mari kita asumsikan saat ini hanya ada satu QueryNode di dalam kluster dan inisialisasi kluster tersebut.
 Berikut adalah contoh pengaturan:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.client.types <span class="hljs-keyword">import</span> ResourceGroupConfig
 
@@ -299,7 +299,7 @@ scale_to(<span class="hljs-number">5</span>)
 <span class="hljs-comment"># rg1 has 3 nodes, rg2 has 1 node, __default_resource_group has 1 node.</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Penyusutan skala kluster</p>
-<p>Demikian pula, kita dapat menetapkan aturan penyusutan yang memprioritaskan pemilihan QueryNodes dari grup sumber daya <strong>__pending_nodes</strong>. Informasi ini dapat diperoleh melalui API <code translate="no">describe_resource_group</code>. Mencapai tujuan penyusutan grup sumber daya yang ditentukan.</p>
+<p>Demikian pula, kita dapat menetapkan aturan penyusutan yang memprioritaskan pemilihan QueryNodes dari grup sumber daya <strong>`__pending_nodes`</strong>. Informasi ini dapat diperoleh melalui API ` <code translate="no">describe_resource_group</code> `. Mencapai tujuan penyusutan grup sumber daya yang ditentukan.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># scale rg1 from 3 nodes into 2 nodes</span>
 milvus_client.update_resource_groups({
     <span class="hljs-string">&quot;rg1&quot;</span>: ResourceGroupConfig(

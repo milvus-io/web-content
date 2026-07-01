@@ -91,7 +91,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p>Quindi, recuperare i chart Milvus dal repository come segue:</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>helm repo update
 <button class="copy-code-btn"></button></code></pre>
-<p>È sempre possibile eseguire questo comando per scaricare le chart Helm di Milvus più recenti.</p>
+<p>È sempre possibile eseguire questo comando per scaricare i chart Helm Milvus più recenti.</p>
 <h2 id="Online-install" class="common-anchor-header">Installazione online<button data-href="#Online-install" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -122,7 +122,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Una volta installato il chart Helm, è possibile avviare Milvus su Kubernetes. Questa sezione guida l’utente attraverso la distribuzione di un cluster Milvus.</p>
+    </button></h3><p>Una volta installato il chart Helm, è possibile avviare Milvus su Kubernetes. Questa sezione illustra come distribuire un cluster Milvus.</p>
 <div class="alert note" id="standalone-deployment-note">
 <p><strong>Preferisci invece una distribuzione standalone?</strong></p>
 <p>Se preferisci distribuire Milvus in modalità standalone (singolo nodo) per lo sviluppo o il test, utilizza questo comando:</p>
@@ -231,7 +231,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <p><strong>Componenti chiave da verificare:</strong></p>
 <ul>
 <li><strong>Componenti Milvus</strong>: <code translate="no">mixcoord</code>, <code translate="no">datanode</code>, <code translate="no">querynode</code>, <code translate="no">proxy</code>, <code translate="no">streaming-node</code></li>
-<li><strong>Dipendenze</strong>: <code translate="no">etcd</code> (metadati), <code translate="no">minio</code> (archiviazione oggetti), <code translate="no">pulsar</code> (coda dei messaggi)</li>
+<li><strong>Dipendenze</strong>: <code translate="no">etcd</code> (metadati), <code translate="no">minio</code> (object storage), <code translate="no">pulsar</code> (coda di messaggi)</li>
 </ul>
 <p>È inoltre possibile accedere <strong>all’interfaccia web di Milvus</strong> all’indirizzo <code translate="no">http://127.0.0.1:9091/webui/</code> una volta configurato il reindirizzamento delle porte (vedere il passaggio successivo). Per ulteriori dettagli, consultare la documentazione relativa <a href="/docs/it/v2.6.x/milvus-webui.md">all’interfaccia web di Milvus</a>.</p>
 <h3 id="3-Connect-to-Milvus" class="common-anchor-header">3. Connettersi a Milvus<button data-href="#3-Connect-to-Milvus" class="anchor-icon" translate="no">
@@ -272,7 +272,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 </ul>
 </div>
 <p><strong>Tenere aperto questo terminale</strong> durante l’utilizzo di Milvus. Ora è possibile connettersi a Milvus utilizzando qualsiasi SDK Milvus all’indirizzo <code translate="no">localhost:27017</code>.</p>
-<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Facoltativo) Aggiornare le configurazioni di Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
+<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Facoltativo) Aggiornamento delle configurazioni di Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -297,7 +297,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
       http:
         enabled: true
 </span><button class="copy-code-btn"></button></code></pre>
-<p>Per le voci di configurazione applicabili, fare riferimento a <a href="/docs/it/v2.6.x/system_configuration.md">Configurazione di sistema</a>.</p></li>
+<p>Per le voci di configurazione applicabili, fare riferimento alla sezione <a href="/docs/it/v2.6.x/system_configuration.md">Configurazione di sistema</a>.</p></li>
 <li><p>Applicare il file ` <code translate="no">values.yaml</code> `.</p></li>
 </ol>
 <pre><code translate="no" class="language-shell">helm upgrade my-release zilliztech/milvus --namespace my-namespace -f values.yaml
@@ -323,7 +323,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus include uno strumento GUI integrato denominato Milvus WebUI, a cui è possibile accedere tramite il browser. Milvus WebUI migliora l’osservabilità del sistema grazie a un’interfaccia semplice e intuitiva. È possibile utilizzare Milvus WebUI per monitorare le statistiche e le metriche dei componenti e delle dipendenze di Milvus, verificare i dettagli relativi al database e alle raccolte ed elencare le configurazioni dettagliate di Milvus. Per ulteriori dettagli su Milvus WebUI, consultare <a href="/docs/it/v2.6.x/milvus-webui.md">Milvus WebUI</a></p>
+    </button></h2><p>Milvus include uno strumento GUI integrato denominato Milvus WebUI, accessibile tramite il browser. Milvus WebUI migliora l’osservabilità del sistema grazie a un’interfaccia semplice e intuitiva. È possibile utilizzare Milvus WebUI per monitorare le statistiche e le metriche dei componenti e delle dipendenze di Milvus, verificare i dettagli relativi al database e alle raccolte ed elencare le configurazioni dettagliate di Milvus. Per ulteriori dettagli su Milvus WebUI, consultare <a href="/docs/it/v2.6.x/milvus-webui.md">Milvus WebUI</a></p>
 <p>Per abilitare l’accesso a Milvus WebUI, è necessario effettuare il port forwarding del pod proxy su una porta locale.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
@@ -444,7 +444,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f milvus_manifest.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>A questo punto, è possibile seguire i passaggi <a href="#2-Check-Milvus-cluster-status">2</a> e <a href="#3-Forward-a-local-port-to-Milvus">3</a> della procedura di installazione online per verificare lo stato del cluster e reindirizzare una porta locale a Milvus.</p>
+<p>A questo punto, è possibile seguire i passaggi <a href="#2-Check-Milvus-cluster-status">2</a> e <a href="#3-Forward-a-local-port-to-Milvus">3</a> della procedura di installazione online per verificare lo stato del cluster e inoltrare una porta locale a Milvus.</p>
 <h2 id="Upgrade-running-Milvus-cluster" class="common-anchor-header">Aggiornamento del cluster Milvus in esecuzione<button data-href="#Upgrade-running-Milvus-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

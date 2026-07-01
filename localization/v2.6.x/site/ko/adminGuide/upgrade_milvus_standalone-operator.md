@@ -60,7 +60,7 @@ title: Milvus Operator를 사용하여 Milvus 독립형 버전 업그레이드
 <li><strong>새로운 구성 요소</strong>: 향상된 데이터 처리를 위한 스트리밍 노드 도입</li>
 <li><strong>구성 요소 제거</strong>: <code translate="no">indexNode</code> 이 제거되고 통합되었습니다</li>
 </ul>
-<p>이 업그레이드 프로세스는 새로운 아키텍처로의 원활한 마이그레이션을 보장합니다. 아키텍처 변경에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/architecture_overview.md">Milvus 아키텍처 개요를</a> 참조하십시오.</p>
+<p>이 업그레이드 프로세스는 새로운 아키텍처로의 원활한 마이그레이션을 보장합니다. 아키텍처 변경 사항에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/architecture_overview.md">Milvus 아키텍처 개요를</a> 참조하십시오.</p>
 <h3 id="Requirements" class="common-anchor-header">요구 사항<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -143,7 +143,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
         ></path>
       </svg>
     </button></h3><h4 id="21-Upgrade-to-v2516" class="common-anchor-header">2.1 v2.5.16으로 업그레이드</h4><div class="alert-note">
-<p>스탠드얼론 배포 환경이 이미 v2.5.16 이상으로 실행 중이라면 이 단계를 건너뛰십시오.</p>
+<p>스탠드얼론 배포 환경이 이미 v2.5.16 이상을 실행 중이라면 이 단계를 건너뛰십시오.</p>
 </div>
 <p>v2.5.16으로 업그레이드하기 위해 구성 파일 <code translate="no">milvusupgrade.yaml</code> 을 생성하십시오:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
@@ -193,4 +193,4 @@ kubectl get pods
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check pod status</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p>추가 지원이 필요하면 <a href="https://milvus.io/docs">Milvus 문서</a> 나 <a href="https://github.com/milvus-io/milvus/discussions">커뮤니티 포럼</a>을 참조하십시오.</p>
+<p>추가 지원이 필요하면 <a href="https://milvus.io/docs">Milvus 문서</a> 나 <a href="https://github.com/milvus-io/milvus/discussions">커뮤니티 포럼을</a> 참조하십시오.</p>

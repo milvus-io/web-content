@@ -88,9 +88,9 @@ title: Helm 차트를 사용하여 Milvus 독립형 버전 업그레이드
 <li>현재 v2.6.0-rc1을 실행 중이며 데이터를 보존해야 하는 경우, 마이그레이션 지원을 위해 <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">이 커뮤니티 가이드를</a> 참조하십시오.</li>
 <li>v2.6.17로 업그레이드하기 전에 <strong>반드시</strong> v2.5.16 이상으로 먼저 업그레이드해야 <strong>합니다</strong>.</li>
 </ul>
-<p><strong>메시지 큐 제한 사항</strong>: Milvus v2.6.17로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경 기능은 향후 버전에서 제공될 예정입니다.</p>
+<p><strong>메시지 큐 제한 사항</strong>: Milvus v2.6.17로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</p>
 <div class="alert note">
-Milvus Helm 차트 버전 4.2.21부터 pulsar-v3.x 차트를 종속성으로 도입했습니다. 하위 호환성을 위해 Helm을 v3.14 이상 버전으로 업그레이드하고, ` <code translate="no">helm upgrade</code>`을 사용할 때마다 ` <code translate="no">--reset-then-reuse-values</code> ` 옵션을 반드시 추가해 주십시오.
+Milvus Helm 차트 버전 4.2.21부터 pulsar-v3.x 차트를 종속성으로 도입했습니다. 하위 호환성을 위해 Helm을 v3.14 이상 버전으로 업그레이드하고, ` <code translate="no">helm upgrade</code>`를 사용할 때마다 ` <code translate="no">--reset-then-reuse-values</code> ` 옵션을 반드시 추가해 주십시오.
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">업그레이드 절차<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -200,4 +200,4 @@ kubectl get pods
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check pod status</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p>추가 지원이 필요하면 <a href="https://milvus.io/docs">Milvus 문서</a> 나 <a href="https://github.com/milvus-io/milvus/discussions">커뮤니티 포럼을</a> 참조하십시오.</p>
+<p>추가 지원이 필요하면 <a href="https://milvus.io/docs">Milvus 문서</a> 나 <a href="https://github.com/milvus-io/milvus/discussions">커뮤니티 포럼</a>을 참조하십시오.</p>

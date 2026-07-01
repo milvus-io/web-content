@@ -134,14 +134,14 @@ Creating milvus-standalone ... done
 </div>
 <p>Milvus 启动后，</p>
 <ul>
-<li>名为<strong>milvus-standalone</strong>、<strong>milvus-minio</strong> 和<strong>milvus-etcd</strong>的容器已启动。
+<li>名为<strong>Milvus Standalone</strong>、<strong>milvus-minio</strong> 和<strong>milvus-etcd</strong>的容器已启动。
 <ul>
 <li><strong>milvus-etcd</strong>容器未向主机暴露任何端口，并将数据映射到当前文件夹中的<strong>volumes/etcd</strong>。</li>
 <li><strong>milvus-minio</strong>容器在本地监听<strong>9090</strong>和<strong>9091</strong>端口，使用默认身份验证凭据，并将数据映射到当前文件夹中的<strong>volumes/minio</strong>。</li>
 <li><strong>Milvus Standalone</strong>容器使用默认设置在本地提供<strong>19530</strong>端口服务，并将数据映射到当前目录下的<strong>volumes/milvus</strong>卷中。</li>
 </ul></li>
 </ul>
-<p>您可以使用以下命令检查容器是否已启动并正在运行：</p>
+<p>您可以使用以下命令检查容器是否已启动并运行：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose ps</span>
 
       Name                     Command                  State                            Ports

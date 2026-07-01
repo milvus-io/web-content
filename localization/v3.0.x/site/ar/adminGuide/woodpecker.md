@@ -39,7 +39,7 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li>في Milvus 3.x، يُعد Woodpecker سجل الكتابة المسبق/قائمة انتظار الرسائل <strong>الافتراضية،</strong> حيث يوفر عمليات كتابة مرتبة واستعادة البيانات بصفته خدمة التسجيل. ولا يلزم وجود خدمة خارجية لقائمة انتظار الرسائل (مثل Pulsar أو Kafka).</li>
-<li>يمكن تشغيل Woodpecker <strong>مدمجًا</strong> في عقدة Milvus/البث (افتراضيًا)، أو <strong>كخدمة مخصصة</strong> مع وحدات pod الخاصة بها (الموزعة/العنقودية فقط).</li>
+<li>يمكن تشغيل Woodpecker <strong>مدمجًا</strong> في عقدة Milvus/البث (افتراضيًا)، أو <strong>كخدمة مخصصة</strong> مع وحدات pod الخاصة بها (في النظم الموزعة/المجموعات فقط).</li>
 <li>وهي تدعم ثلاثة أوضاع لـ « <code translate="no">storage.type</code> »: تخزين الكائنات (<code translate="no">minio</code> ، الوضع الافتراضي)، ونظام الملفات المحلي (<code translate="no">local</code>)، و <code translate="no">service</code> المخصص. راجع <a href="#Deployment-modes">أوضاع النشر</a>.</li>
 </ul>
 <h2 id="Quick-start" class="common-anchor-header">البداية السريعة<button data-href="#Quick-start" class="anchor-icon" translate="no">
@@ -114,7 +114,7 @@ summary: >-
     <span class="hljs-attr">type:</span> <span class="hljs-string">minio</span> <span class="hljs-comment"># The Type of the storage provider. Valid values: [minio, local]</span>
     <span class="hljs-attr">rootPath:</span> <span class="hljs-string">/var/lib/milvus/woodpecker</span> <span class="hljs-comment"># The root path of the storage provider.</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>ملاحظات مهمة:</p>
+<p>ملاحظات أساسية:</p>
 <ul>
 <li><code translate="no">woodpecker.meta</code>
 <ul>
@@ -382,7 +382,7 @@ docker restart milvus-standalone
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يؤدي هذا إلى نشر Woodpecker كمجموعة StatefulSet مخصصة (<code translate="no">my-release-milvus-woodpecker</code> ، 4 نسخ متماثلة افتراضيًا) مدعومة بخدمة بدون واجهة مستخدم، ومجمعة عبر بروتوكول gossip على المنافذ <code translate="no">18080</code> (الخدمة)، و <code translate="no">17946</code> (gossip)، و <code translate="no">9091</code> (المقاييس)، مع استخدام MinIO كخلفية تخزين لها. تحتاج الخدمة إلى نصاب قانوني مكون من <strong>3</strong> عقد؛ ويحافظ الإعداد الافتراضي المكون من <strong>4</strong> نسخ متماثلة على النصاب القانوني مع تحمل فشل عقدة واحدة، لذا لا تقم بتعيين <code translate="no">woodpecker.replicaCount</code> على أقل من 3. ثم تتضمن المجموعة مجموعة بودات <code translate="no">woodpecker</code> منفصلة:</p>
+<p>يؤدي هذا إلى نشر Woodpecker كمجموعة StatefulSet مخصصة (<code translate="no">my-release-milvus-woodpecker</code> ، 4 نسخ متماثلة افتراضيًا) مدعومة بخدمة بدون واجهة مستخدم، ومجمعة عبر بروتوكول gossip على المنافذ <code translate="no">18080</code> (الخدمة)، و <code translate="no">17946</code> (gossip)، و <code translate="no">9091</code> (المقاييس)، مع استخدام MinIO كخلفية تخزين لها. تحتاج الخدمة إلى نصاب قانوني مكون من <strong>3</strong> عقد؛ ويحافظ الإعداد الافتراضي المكون من <strong>4</strong> نسخ متماثلة على النصاب القانوني مع تحمل تعطل عقدة واحدة، لذا لا تضبط <code translate="no">woodpecker.replicaCount</code> على أقل من 3. ثم تتضمن المجموعة مجموعة بودات <code translate="no">woodpecker</code> منفصلة:</p>
 <pre><code translate="no"><span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">0</span>
 <span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">1</span>
 <span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">2</span>
@@ -406,7 +406,7 @@ docker restart milvus-standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يختلف ملف أداء Woodpecker ووقت الاستجابة بين الوضع <strong>المدمج</strong> ووضع <strong>الخدمة</strong> (إحدى ميزات Milvus 3.0). تم تنظيم الإرشادات أدناه حسب الوضع.</p>
+    </button></h2><p>يختلف ملف أداء Woodpecker ووقت الاستجابة بين الوضع <strong>المدمج</strong> ووضع <strong>الخدمة</strong> (ميزة في Milvus 3.0). تم تنظيم الإرشادات أدناه حسب الوضع.</p>
 <h3 id="Embedded-mode" class="common-anchor-header">الوضع المدمج<button data-href="#Embedded-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -422,7 +422,7 @@ docker restart milvus-standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>استنادًا إلى المعايير المرجعية والحدود الخلفية في <a href="/docs/ar/woodpecker_architecture.md">Woodpecker</a>، قم بتحسين معدل نقل البيانات للكتابة من البداية إلى النهاية من الجوانب التالية:</p>
+    </button></h3><p>استنادًا إلى المعايير المرجعية وحدود الخلفية في <a href="/docs/ar/woodpecker_architecture.md">Woodpecker</a>، قم بتحسين معدل نقل البيانات للكتابة من البداية إلى النهاية من الجوانب التالية:</p>
 <ul>
 <li>جانب التخزين
 <ul>
@@ -456,7 +456,7 @@ docker restart milvus-standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يحافظ وضع الخدمة على معدل نقل الكتابة العالي لـ WAL المدعوم بتخزين الكائنات مع إضافة زمن انتقال منخفض (انظر <a href="#Latency">زمن الانتقال</a>). لا تزال عمليات الضبط المذكورة أعلاه من جانب التخزين وجانب العميل سارية؛ بالإضافة إلى ذلك، نظرًا لأن Woodpecker يعمل كخدمة مستقلة، يمكنك توسيع سعة الكتابة أفقيًا عن طريق إضافة نسخ متماثلة (<code translate="no">woodpecker.replicaCount</code> ، الافتراضي 4)، وتستفيد عمليات الكتابة من النسخ المتماثل بنظام النصاب القانوني ذي RTT واحد وعمليات القراءة التي تراعي الطوبولوجيا والتي تتجنب إعادة التوجيه عبر الوسيط.</p>
+    </button></h3><p>يحافظ وضع الخدمة على معدل نقل الكتابة العالي لـ WAL المدعوم بتخزين الكائنات مع إضافة زمن انتقال منخفض (انظر <a href="#Latency">زمن الانتقال</a>). لا تزال عمليات الضبط المذكورة أعلاه من جانب التخزين وجانب العميل سارية؛ بالإضافة إلى ذلك، نظرًا لأن Woodpecker يعمل كخدمة مستقلة، يمكنك توسيع سعة الكتابة أفقيًا عن طريق إضافة نسخ متماثلة (<code translate="no">woodpecker.replicaCount</code> ، الافتراضي 4)، وتستفيد عمليات الكتابة من النسخ المتماثل بنظام النصاب القانوني ذي RTT واحد وعمليات القراءة التي تراعي الطوبولوجيا والتي تتجنب إعادة التوجيه بواسطة الوسيط.</p>
 <p><strong>عرض توضيحي للإدراج الدفعي</strong> — استخدم ما يلي لقياس معدل نقل البيانات للكتابة:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">import</span> random
@@ -547,12 +547,12 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يوفر وضع الخدمة <strong>زمن انتقال للكتابة بمستوى الميلي ثانية</strong> — من نفس مرتبة WAL التقليدي ذي النسخ الثلاث على القرص المحلي — مع الحفاظ على التكلفة منخفضة. في النشر النموذجي ذي النسخ الثلاث عبر مناطق التوافر (AZ)، يظل زمن انتقال الكتابة في نطاق الميلي ثانية. ويحقق ذلك من خلال:</p>
+    </button></h3><p>يوفر وضع الخدمة <strong>زمن انتقال للكتابة بمستوى الميلي ثانية</strong> — من نفس مرتبة WAL التقليدي ذي النسخ الثلاث على القرص المحلي — مع الحفاظ على التكلفة منخفضة. في النشر النموذجي ذي النسخ الثلاث عبر مناطق التوفر (AZ)، يظل زمن انتقال الكتابة في نطاق الميلي ثانية. ويحقق ذلك من خلال:</p>
 <ul>
-<li><strong>عمليات الكتابة ذات النصاب القانوني</strong> في جولة واحدة<strong>(One-RTT)</strong> — حيث يكمل النسخ المتماثل الذي يحركه العميل عملية كتابة النصاب القانوني خلال جولة واحدة، مع تثبيت حركة المرور عبر المناطق (AZ) عند حجم بيانات نسختين متماثلتين (مقابل حركة المرور الإضافية عبر المناطق التي تبلغ حوالي 1/3، وهي النسبة النموذجية في النسخ المتماثل القائم على الوسيط/القائد).</li>
+<li><strong>عمليات الكتابة ذات النصاب القانوني</strong> في<strong>جولة واحدة (One-RTT)</strong> — حيث يكمل النسخ المتماثل الذي يحركه العميل عملية كتابة النصاب القانوني خلال جولة واحدة، مع تثبيت حركة المرور عبر المناطق (AZ) عند حجم بيانات نسختين متماثلتين (مقارنةً بحركة المرور الإضافية عبر المناطق التي تبلغ حوالي 1/3، وهي النسبة النموذجية في النسخ المتماثل القائم على الوسيط/القائد).</li>
 <li><strong>عمليات قراءة أحادية القفزة تراعي التوبولوجيا</strong> — تذهب كل عملية قراءة مباشرةً إلى النسخة المتماثلة الأقرب بدلاً من إعادة توجيهها عبر وسيط، مما يتجنب عمليات القراءة العشوائية عبر المناطق (حوالي ثلثي حركة مرور القراءة عبر المناطق) في الأنظمة القائمة على الوسيط.</li>
 <li><strong>التحميل الفوري إلى تخزين الكائنات بعد تدوير المقطع</strong> — يتتبع كل مقطع دورة حياته الكاملة ويتم تحميله إلى تخزين الكائنات فور تدويره، مما يحافظ على انخفاض الحجم الذي يشغله على القرص المحلي وتكلفة التخزين دون المساومة على زمن الوصول.</li>
-<li><strong>لا يوجد تكرار مستمر من عقدة إلى أخرى</strong> — يتم الاحتفاظ بالسجلات في تخزين الكائنات الذي يعمل كوحدة تخزين مشتركة، لذا فإن التحويل التلقائي في حالة الفشل يعيد تحميل النسخ المتماثلة الباقية فقط (بدون نسخ العقدة بأكملها)، ولا يكون التوسع مقيدًا بنطاق ترددي التكرار بين العقد، كما أن استبدال العقد على نطاق واسع لا يتسبب في حدوث «عواصف تكرار».</li>
+<li><strong>لا يوجد تكرار مستمر من عقدة إلى أخرى</strong> — يتم الاحتفاظ بالسجلات في تخزين الكائنات الذي يعمل كوحدة تخزين مشتركة، لذا فإن التحويل التلقائي في حالة الفشل يعيد تحميل النسخ المتبقية فقط (بدون نسخ العقدة بأكملها)، ولا يكون التوسع مقيدًا بنطاق ترددي التكرار بين العقد، كما أن استبدال العقد على نطاق واسع لا يتسبب في حدوث «عواصف تكرار».</li>
 </ul>
 <p>في عمليات النشر عبر مناطق التوافر (AZ)، يوفر وضع الخدمة أيضًا ما يقارب <strong>ثلث حركة مرور الكتابة</strong> <strong>وثلثي حركة مرور القراءة</strong> عبر شبكات مناطق التوافر مقارنةً بأنظمة السجلات القائمة على الوسيط. للاطلاع على التصميم الكامل وتحليل التكلفة، راجع <a href="/docs/ar/woodpecker_architecture.md">بنية Woodpecker</a>.</p>
 <p>للحصول على تفاصيل حول البنية وأوضاع النشر (MemoryBuffer / QuorumBuffer) والأداء، راجع <a href="/docs/ar/woodpecker_architecture.md">«بنية Woodpecker</a>».</p>

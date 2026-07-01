@@ -200,7 +200,7 @@ Creating milvus-minio ... done​
 Creating milvus-standalone ... done​
 
 </code></pre>
-<p>اعتمادًا على اتصالك بالشبكة، قد يستغرق تنزيل الصور الخاصة بتثبيت Milvus بعض الوقت. بمجرد تشغيل الحاويات المسماة <strong>milvus-standalone</strong> و <strong>milvus-minio</strong> و <strong>milvus-etcd</strong> ، ستلاحظ أن ​</p>
+<p>اعتمادًا على اتصالك بالشبكة، قد يستغرق تنزيل الصور الخاصة بتثبيت Milvus بعض الوقت. بمجرد تشغيل الحاويات المسماة <strong>milvus-standalone</strong> و <strong>milvus-minio</strong> و <strong>milvus-etcd،</strong> ستلاحظ أن​</p>
 <ul>
 <li><p>أن حاوية <strong>milvus-etcd</strong> لا تكشف أي منافذ للمضيف وتقوم بتعيين بياناتها إلى <strong>volumes/etcd</strong> في المجلد الحالي.</p></li>
 <li><p>تقدم حاوية <strong>milvus-minio</strong> المنافذ <strong>9090</strong> <strong>و9091</strong> محليًّا باستخدام بيانات اعتماد المصادقة الافتراضية وتقوم بتعيين بياناتها إلى <strong>volumes/minio</strong> في المجلد الحالي.</p></li>
@@ -284,7 +284,7 @@ Creating milvus-standalone ... done​
    <span>المحاكاة الافتراضية في «مدير المهام»</span>
   
  </span></p>
-<p>إذا كانت المحاكاة الافتراضية معطلة، فقد تحتاج إلى التحقق من إعدادات BIOS الخاصة ببرنامج اللوحة الأم. تختلف طريقة تمكين المحاكاة الافتراضية في إعدادات BIOS باختلاف الشركات المصنعة للوحات الأم. بالنسبة للوحة الأم من ASUS، على سبيل المثال، يمكنك الرجوع إلى <a href="https://www.asus.com/support/faq/1043786/">هذه المقالة</a> حول تمكين المحاكاة الافتراضية.​</p>
+<p>إذا كانت المحاكاة الافتراضية معطلة، فقد تحتاج إلى التحقق من إعدادات BIOS الخاصة ببرنامج اللوحة الأم. تختلف طريقة تمكين المحاكاة الافتراضية في إعدادات BIOS باختلاف الشركات المصنعة للوحات الأم. بالنسبة للوحات الأم من ASUS، على سبيل المثال، يمكنك الرجوع إلى <a href="https://www.asus.com/support/faq/1043786/">هذه المقالة</a> حول تمكين المحاكاة الافتراضية.​</p>
 <p>بعد ذلك، ستحتاج إلى إعادة تشغيل جهاز الكمبيوتر الخاص بك وتمكين Hyper-V. لمزيد من التفاصيل، راجع هذه <a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">المقالة</a> من <a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">Microsoft</a>.​</p></li>
 <li><p>تحقق مما إذا كانت خدمة Docker Desktop قد بدأت أم لا.​</p>
 <p>يمكنك تشغيل الأمر التالي لبدء تشغيل خدمة Docker Desktop.​</p>

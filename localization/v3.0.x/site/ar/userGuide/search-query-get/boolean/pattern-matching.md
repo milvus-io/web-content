@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>في تطبيقات البحث التفاعلي، غالبًا ما يكمل كل من البحث المتجه ومطابقة الأنماط على غرار grep بعضهما البعض. يسترد البحث المتجه الكيانات ذات الصلة من الناحية الدلالية، بينما تضيق مطابقة الأنماط نطاق تلك النتائج بناءً على هياكل سلاسل نصية محددة، مثل رموز الأخطاء، أو بادئات السجلات، أو نطاقات البريد الإلكتروني، أو مسارات عناوين URL، أو المعرفات.</p>
+    </button></h1><p>في تطبيقات البحث التفاعلي، غالبًا ما يكمل كل من البحث المتجه ومطابقة الأنماط على غرار grep بعضهما البعض. يسترد البحث المتجه الكيانات ذات الصلة من الناحية الدلالية، بينما تضيق مطابقة الأنماط نطاق تلك النتائج من خلال هياكل سلاسل نصية دقيقة، مثل رموز الأخطاء، أو بادئات السجلات، أو نطاقات البريد الإلكتروني، أو مسارات عناوين URL، أو المعرفات.</p>
 <p>في Milvus، يمكنك التعبير عن قيود الأنماط هذه في مرشحات قياسية باستخدام <code translate="no">LIKE</code> لمطابقة أحرف البدل البسيطة، و <code translate="no">=~</code> أو <code translate="no">!~</code> للتعبيرات العادية <a href="https://github.com/google/re2/wiki/syntax">RE2</a>. يمكنك دمج هذه المرشحات مع <code translate="no">query</code> أو <code translate="no">search</code> أو البحث الهجين.</p>
 <p>تُكتب تعبيرات مطابقة الأنماط في المعلمة <code translate="no">filter</code>. على سبيل المثال، يطابق الاستعلام التالي رسائل السجل التي تحتوي على رمز خطأ مثل <code translate="no">E1001</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -58,7 +58,7 @@ res = client.query(
 </thead>
 <tbody>
 <tr><td><code translate="no">VARCHAR</code> الحقل</td><td>نعم</td><td>نعم</td><td>الهدف النموذجي لمطابقة الأنماط في حقول السلسلة.</td></tr>
-<tr><td><code translate="no">JSON</code> مسار مع نوع تحويل <code translate="no">VARCHAR</code> </td><td>نعم</td><td>نعم</td><td>يجب أن تكون قيمة مسار JSON سلسلة نصية للحصول على مطابقات إيجابية. إذا قمت بإنشاء فهرس على مسار JSON من أجل التسريع، فاضبط <code translate="no">json_cast_type=&quot;varchar&quot;</code>.</td></tr>
+<tr><td><code translate="no">JSON</code> مسار مع نوع تحويل <code translate="no">VARCHAR</code> </td><td>نعم</td><td>نعم</td><td>يجب أن تكون قيمة مسار JSON سلسلة نصية للحصول على مطابقات إيجابية. إذا قمت بإنشاء فهرس على مسار JSON من أجل التسريع، فقم بتعيين <code translate="no">json_cast_type=&quot;varchar&quot;</code>.</td></tr>
 <tr><td><code translate="no">ARRAY&lt;VARCHAR&gt;</code> العنصر</td><td>نعم</td><td>نعم</td><td>مطابقة عنصر معين حسب الفهرس، مثل <code translate="no">tags[0]</code>. <strong>لا</strong> تقوم مطابقة الأنماط بمسح جميع العناصر؛ بل تنطبق فقط على العنصر الموجود في الفهرس المحدد.</td></tr>
 <tr><td>أهداف رقمية، أو منطقية، أو متجهة، أو <code translate="no">TEXT</code> ، أو أهداف أخرى غير<code translate="no">VARCHAR</code> </td><td>لا</td><td>لا</td><td>مطابقة الأنماط متاحة فقط لقيم <code translate="no">VARCHAR</code> ، أو مسارات JSON التي تُحل إلى سلاسل، أو عناصر <code translate="no">ARRAY&lt;VARCHAR&gt;</code> المفهرسة.</td></tr>
 </tbody>
@@ -282,7 +282,7 @@ res = client.query(
         ></path>
       </svg>
     </button></h2><p>يدعم Milvus عدة أنواع من الفهارس في الحقول النصية التي يمكن استخدامها مع " <code translate="no">LIKE</code> " وفلاتر التعبيرات العادية في الحقول " <code translate="no">VARCHAR</code> " أو مسارات سلاسل JSON، مثل <code translate="no">NGRAM</code> و <code translate="no">STL_SORT</code> و <code translate="no">INVERTED</code> و <code translate="no">BITMAP</code>. يمكن أن تعمل مطابقة الأنماط بدون فهرس، لكن الفهرس يمكن أن يحسن الأداء في مجموعات البيانات الكبيرة.</p>
-<p>تعتمد فعالية الفهرس على تعبير النمط، وما إذا كان بإمكان Milvus استخراج سلاسل فرعية حرفية ثابتة، بالإضافة إلى عدد العناصر وتوزيع الحقل المستهدف. قد تستفيد الأنماط ذات البادئة، مثل <code translate="no">name LIKE &quot;Prod%&quot;</code> ، من استراتيجيات فهرسة مختلفة عن الأنماط ذات الوسيطة أو اللاحقة، مثل <code translate="no">description LIKE &quot;%vector%&quot;</code> أو <code translate="no">filename LIKE &quot;%.json&quot;</code>.</p>
+<p>تعتمد فعالية الفهرس على تعبير النمط، وما إذا كان بإمكان Milvus استخراج سلاسل فرعية حرفية ثابتة، بالإضافة إلى عدد العناصر وتوزيعها في الحقل المستهدف. قد تستفيد الأنماط ذات البادئة، مثل <code translate="no">name LIKE &quot;Prod%&quot;</code> ، من استراتيجيات فهرسة مختلفة عن الأنماط ذات الوسيطة أو اللاحقة، مثل <code translate="no">description LIKE &quot;%vector%&quot;</code> أو <code translate="no">filename LIKE &quot;%.json&quot;</code>.</p>
 <p>استخدم الجدول التالي كنقطة انطلاق، ثم قم بإجراء مقارنة مع حمل العمل الخاص بك:</p>
 <table>
 <thead>

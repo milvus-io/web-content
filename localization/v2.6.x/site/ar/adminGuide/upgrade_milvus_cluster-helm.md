@@ -85,12 +85,12 @@ title: ترقية مجموعة Milvus باستخدام Helm Chart
 <p><strong>متطلبات التوافق:</strong></p>
 <ul>
 <li>Milvus v2.6.0-rc1 <strong>غير متوافق</strong> مع الإصدار v2.6.17. لا يتم دعم الترقيات المباشرة من الإصدارات التجريبية.</li>
-<li>إذا كنت تستخدم الإصدار v2.6.0-rc1 حاليًا وتحتاج إلى الحفاظ على بياناتك، فيرجى الرجوع إلى <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">دليل المجتمع هذا</a> للحصول على المساعدة في عملية الترحيل.</li>
+<li>إذا كنت تستخدم الإصدار v2.6.0-rc1 حاليًا وتحتاج إلى الاحتفاظ ببياناتك، فيرجى الرجوع إلى <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">دليل المجتمع هذا</a> للحصول على المساعدة في عملية الترحيل.</li>
 <li><strong>يجب</strong> عليك الترقية إلى الإصدار v2.5.16 أو أحدث مع تمكين ميزة " <code translate="no">mixCoordinator</code> " قبل الترقية إلى الإصدار v2.6.17.</li>
 </ul>
 <p><strong>قيود قائمة انتظار الرسائل</strong>: عند الترقية إلى Milvus v2.6.17، يجب الحفاظ على اختيارك الحالي لقائمة انتظار الرسائل. لا يتم دعم التبديل بين أنظمة قوائم انتظار الرسائل المختلفة أثناء الترقية. سيتوفر دعم تغيير أنظمة قوائم انتظار الرسائل في الإصدارات المستقبلية.</p>
 <div class="alert note">
-بدءًا من الإصدار 4.2.21 من مخطط Helm الخاص بـ Milvus، أدخلنا مخطط pulsar-v3.x كعنصر تابع. من أجل التوافق مع الإصدارات السابقة، يرجى ترقية Helm إلى الإصدار v3.14 أو أحدث، وتأكد من إضافة خيار <code translate="no">--reset-then-reuse-values</code> كلما استخدمت <code translate="no">helm upgrade</code>.
+بدءًا من الإصدار 4.2.21 من مخطط Helm الخاص بـ Milvus، أدخلنا مخطط pulsar-v3.x كعنصر تابع. من أجل التوافق مع الإصدارات السابقة، يرجى ترقية Helm إلى الإصدار v3.14 أو أحدث، وتأكد من إضافة الخيار <code translate="no">--reset-then-reuse-values</code> كلما استخدمت <code translate="no">helm upgrade</code>.
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">عملية الترقية<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -127,7 +127,7 @@ title: ترقية مجموعة Milvus باستخدام Helm Chart
 helm repo update zilliztech
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-تم أرشفة مستودع مخططات Helm الخاصة بـ Milvus الموجود على <code translate="no">https://milvus-io.github.io/milvus-helm/</code>. استخدم المستودع الجديد <code translate="no">https://zilliztech.github.io/milvus-helm/</code> لإصدارات المخطط 4.0.31 والإصدارات الأحدث.
+تم أرشفة مستودع مخططات Helm الخاصة بـ Milvus الموجود على <code translate="no">https://milvus-io.github.io/milvus-helm/</code>. استخدم المستودع الجديد <code translate="no">https://zilliztech.github.io/milvus-helm/</code> لإصدارات المخططات 4.0.31 والإصدارات الأحدث.
 </div>
 <p>للتحقق من توافق إصدار مخطط Helm مع إصدارات Milvus:</p>
 <pre><code translate="no" class="language-bash">helm search repo zilliztech/milvus --versions

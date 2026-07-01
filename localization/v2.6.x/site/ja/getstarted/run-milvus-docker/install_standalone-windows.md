@@ -2,7 +2,7 @@
 id: install_standalone-windows.md
 label: Docker
 related_key: Docker
-summary: Windows 版 Docker Desktop を使用して Milvus スタンドアロンをインストールする方法をご覧ください。
+summary: Windows 版 Docker Desktop を使用して Milvus スタンドアロンをインストールする方法について学びましょう。
 title: DockerでMilvusを実行する（Linux）
 ---
 <h1 id="Run-Milvus-in-Docker-Windows" class="common-anchor-header">Docker で Milvus を実行する（Windows）<button data-href="#Run-Milvus-in-Docker-Windows" class="anchor-icon" translate="no">
@@ -56,7 +56,7 @@ title: DockerでMilvusを実行する（Linux）
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus には、Docker コンテナとしてインストールするためのインストールスクリプトが用意されています。Microsoft Windows に Docker Desktop をインストールしたら、<strong>管理者モード</strong>の PowerShell または Windows コマンドプロンプト、および WSL 2 から Docker CLI にアクセスできます。​</p>
+    </button></h2><p>Milvus には、Docker コンテナとしてインストールするためのインストールスクリプトが用意されています。Microsoft Windows に Docker Desktop をインストールしたら、<strong>管理者</strong>モードの PowerShell または Windows コマンドプロンプト、および WSL 2 から Docker CLI にアクセスできます。​</p>
 <h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">PowerShell または Windows コマンドプロンプトから​<button data-href="#From-PowerShell-or-Windows-Command-Prompt​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -119,7 +119,7 @@ Delete successfully. # Data has been removed.​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Windows上でLinuxコマンドやシェルスクリプトを使用してMilvusを起動する場合は、WSL 2がすでにインストールされていることを確認してください。WSL 2のインストール方法の詳細については、<a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">Microsoftのこの記事を</a>参照してください。​</p>
+    </button></h3><p>Windows上でLinuxコマンドやシェルスクリプトを使用してMilvusを起動する場合は、WSL 2コマンドがすでにインストールされていることを確認してください。WSL 2コマンドのインストール方法の詳細については、<a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">こちらのMicrosoftの記事を</a>参照してください。​</p>
 <ol>
 <li><p>WSL 2 を起動します。​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --install​
@@ -285,7 +285,7 @@ Creating milvus-standalone ... done​
 <p>仮想化が無効になっている場合は、マザーボードのファームウェアのBIOS設定を確認する必要があるかもしれません。BIOS設定で仮想化を有効にする方法は、マザーボードのメーカーによって異なります。例えば、ASUSのマザーボードの場合は、仮想化を有効にする方法について、<a href="https://www.asus.com/support/faq/1043786/">こちらの記事を</a>参照してください。​</p>
 <p>その後、コンピュータを再起動して Hyper-V を有効にする必要があります。詳細については、<a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">Microsoft のこの記事を</a>参照してください。​</p></li>
 <li><p>Docker Desktop サービスが起動しているか確認してください。</p>
-<p>次のコマンドを実行して、Docker Desktop サービスを起動できます。</p>
+<p>次のコマンドを実行して、Docker Desktop サービスを起動できます。​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;net start com.docker.service​
 The Docker for Windows Service service is starting.​
 The Docker for Windows Service service was started successfully.​
@@ -412,7 +412,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 </ul></li>
 <li><p>Milvusの可観測性と管理のための直感的なWebインターフェース「<a href="/docs/ja/v2.6.x/milvus-webui.md">Milvus WebUI</a>」をご覧ください。</p></li>
 <li><p>Milvusデータのバックアップを行うオープンソースツール「<a href="/docs/ja/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>」をご覧ください。</p></li>
-<li><p>Milvusのデバッグや動的な設定更新を行うためのオープンソースツール「<a href="/docs/ja/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>」をご覧ください。</p></li>
+<li><p>Milvusのデバッグや動的な構成更新を行うためのオープンソースツール「<a href="/docs/ja/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>」をご覧ください。</p></li>
 <li><p>Milvusを直感的に管理できるオープンソースのGUIツール「<a href="https://github.com/zilliztech/attu">Attu</a>」をご覧ください。</p></li>
 <li><p><a href="/docs/ja/v2.6.x/monitor.md">Prometheus を使用して Milvus を監視しましょう</a>。</p></li>
 </ul>

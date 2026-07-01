@@ -134,7 +134,7 @@ Creating milvus-standalone ... done
 </div>
 <p>Milvusの起動後、</p>
 <ul>
-<li><strong>milvus-standalone</strong>、<strong>milvus-minio</strong>、および<strong>milvus-etcd</strong>という名前のコンテナが起動します。
+<li><strong>「milvus-standalone</strong>」、「<strong>milvus-minio</strong>」、「<strong>milvus-etcd</strong>」という名前のコンテナが起動します。
 <ul>
 <li><strong>milvus-etcd</strong>コンテナはホストに対してポートを公開しておらず、そのデータは現在のフォルダ内の<strong>volumes/etcd</strong>にマッピングされます。</li>
 <li><strong>milvus-minio</strong>コンテナは、デフォルトの認証情報を使用してローカルでポート<strong>9090</strong>および<strong>9091</strong>を提供し、そのデータを現在のフォルダ内の<strong>volumes/minio</strong>にマッピングします。</li>
@@ -226,7 +226,7 @@ docker start &lt;milvus_container_id&gt;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DockerにMilvusをインストールしたら、次のことができます:</p>
+    </button></h2><p>DockerにMilvusをインストールしたら、以下の操作が可能です:</p>
 <ul>
 <li><p><a href="/docs/ja/v2.6.x/quickstart.md">クイックスタートを</a>参照して、Milvusの機能を確認してください。</p></li>
 <li><p><a href="/docs/ja/v2.6.x/milvus-webui.md">Milvus WebUI</a>を確認して、Milvusインスタンスについてさらに詳しく学びましょう。</p></li>

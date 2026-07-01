@@ -85,7 +85,7 @@ Creating milvus-standalone ... done
 <ul>
 <li><strong>milvus-etcd</strong>容器未向主机暴露任何端口，并将数据映射到当前文件夹中的<strong>volumes/etcd</strong>。</li>
 <li><strong>milvus-minio</strong>容器使用默认身份验证凭据在本地监听<strong>9090</strong>和<strong>9091</strong>端口，并将数据映射到当前文件夹中的<strong>volumes/minio</strong>目录。</li>
-<li><strong>Milvus Standalone</strong>容器使用默认设置在本地提供<strong>19530</strong>端口服务，并将数据映射到当前目录下的<strong>volumes/milvus</strong>卷中。</li>
+<li><strong>Milvus Standalone</strong>容器使用默认设置在本地提供<strong>19530</strong>端口服务，并将数据映射到当前文件夹中的<strong>volumes/milvus</strong>目录。</li>
 </ul></li>
 </ul>
 <p>您可以使用以下命令检查容器是否已启动并运行：</p>

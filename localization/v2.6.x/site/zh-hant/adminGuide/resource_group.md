@@ -35,7 +35,7 @@ title: 管理資源群組
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>一個資源群組可以包含 Milvus 叢集中的部分或所有查詢節點。 您可以根據自身需求，決定如何將查詢節點分配至各資源群組。例如，在多集合的場景中，您可以將適當數量的查詢節點分配至每個資源群組，並將集合載入至不同的資源群組，使每個集合內的操作在物理上獨立於其他集合的操作。</p>
+    </button></h2><p>一個資源群組可以包含 Milvus 叢集中的部分或所有查詢節點。 您可以根據自身需求，決定如何將查詢節點分配至各資源群組。例如，在多集合的場景中，您可以將適當數量的查詢節點分配給每個資源群組，並將集合載入至不同的資源群組，使每個集合內的操作在物理上獨立於其他集合的操作。</p>
 <p>請注意，Milvus 實例在啟動時會維護一個預設資源群組來容納所有查詢節點，並將其命名為<strong>__default_resource_group</strong>。</p>
 <p>自 2.4.1 版本起，Milvus 提供宣告式資源群組 API，而舊版資源群組 API 已宣告為過時。新的宣告式 API 讓使用者能夠實現冪等性，並更輕鬆地在雲原生環境中進行次級開發。</p>
 <h2 id="Concepts-of-resource-group" class="common-anchor-header">資源群組的概念<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
@@ -66,11 +66,11 @@ title: 管理資源群組
 <li><strong>limits</strong>屬性指定資源群組的最大限制。</li>
 <li>`<strong>transfer_from</strong>` 和<strong>`transfer_to</strong>` 屬性分別描述該資源群組應優先從哪些資源群組獲取資源，以及應將資源轉移至哪些資源群組。</li>
 </ul>
-<p>一旦資源群組的配置發生變更，Milvus 將根據新配置盡可能調整當前的查詢節點資源，以確保所有資源群組最終皆符合以下條件：</p>
+<p>一旦資源群組的配置發生變更，Milvus 將根據新配置盡可能調整當前的查詢節點資源，以確保所有資源群組最終均符合以下條件：</p>
 <p><code translate="no">.requests.nodeNum &lt; nodeNumOfResourceGroup &lt; .limits.nodeNum.</code></p>
 <p>但以下情況除外：</p>
 <ul>
-<li>當 Milvus 叢集中的 QueryNodes 數量不足時，即<code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code> ，總會存在資源群組因 QueryNodes 數量不足而無法滿足需求。</li>
+<li>當 Milvus 叢集中的 QueryNodes 數量不足時，即<code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code> ，總會存在某些資源群組的 QueryNodes 數量不足。</li>
 <li>當 Milvus 叢集中的查詢節點數量過多時，即<code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code> ，多餘的查詢節點將始終優先分配至<strong>__default_resource_group</strong>。</li>
 </ul>
 <p>當然，若叢集中的 QueryNodes 數量發生變化，Milvus 會持續嘗試進行調整以符合最終條件。因此，您可以先套用資源群組的配置變更，然後再執行 QueryNode 的擴展。</p>
@@ -199,7 +199,7 @@ num_replicas = <span class="hljs-number">1</span>
 <span class="hljs-comment"># Succeeded in moving 1 replica(s) of c from __default_resource_group to rg.</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>刪除資源群組。</p>
-<p>您可以隨時刪除未包含任何查詢節點的資源群組（<code translate="no">limits.node_num = 0</code> ）。在本指南中，資源群組<code translate="no">rg</code> 目前包含一個查詢節點。您需要先將該資源群組的配置<code translate="no">limits.node_num</code> 修改為零。</p>
+<p>您可以隨時刪除不包含任何查詢節點的資源群組（<code translate="no">limits.node_num = 0</code> ）。在本指南中，資源群組<code translate="no">rg</code> 目前包含一個查詢節點。您需要先將該資源群組的配置<code translate="no">limits.node_num</code> 修改為零。</p>
 <pre><code translate="no" class="language-python">resource_group = <span class="hljs-string">&quot;rg
 try:
     milvus_client.update_resource_groups({
@@ -230,11 +230,11 @@ except Exception:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>目前，Milvus 無法在雲原生環境中獨立進行擴展與縮減。然而，透過結合使用<strong>宣告式資源群組 API</strong>與容器調度，Milvus 能夠輕鬆實現對 QueryNodes 的資源隔離與管理。
+    </button></h2><p>目前，Milvus 無法在雲原生環境中獨立進行擴展與縮減。然而，透過結合使用<strong>宣告式資源群組 API</strong>與容器調度，Milvus 能夠輕鬆實現 QueryNodes 的資源隔離與管理。
 以下是在雲端環境中管理 QueryNodes 的最佳實務：</p>
 <ol>
 <li><p>預設情況下，Milvus 會建立一個<strong>__default_resource_group</strong>。此資源群組無法被刪除，同時也作為所有集合的預設載入資源群組，且冗餘的 QueryNodes 總是會被指派至該群組。 因此，我們可以建立一個「待處理」資源群組來存放閒置的 QueryNode 資源，防止這些資源被<strong>__default_resource_group</strong> 佔用。</p>
-<p>此外，若嚴格執行<code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code> 的限制條件，即可精確控制叢集內 QueryNodes 的分配。假設叢集中目前僅有一台 QueryNode，並初始化該叢集。
+<p>此外，若嚴格執行<code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code> 的限制條件，我們便能精確控制叢集內 QueryNodes 的分配。假設叢集中目前僅有一個 QueryNode，並初始化該叢集。
 以下為設定範例：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.client.types <span class="hljs-keyword">import</span> ResourceGroupConfig
 
@@ -271,7 +271,7 @@ _PENDING_NODES_RESOURCE_GROUP=<span class="hljs-string">&quot;__pending_nodes&qu
 
 init_cluster(<span class="hljs-number">1</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>利用上述範例程式碼，我們建立了一個名為<strong>__pending_nodes 的</strong>資源群組，用以存放額外的 QueryNode。我們還建立兩個名為<strong>rg1</strong>和<strong>rg2</strong> 的使用者專用資源群組。此外，我們確保其他資源群組會優先從<strong>__pending_nodes</strong> 中恢復缺失或冗餘的 QueryNode。</p></li>
+<p>利用上述範例程式碼，我們建立了一個名為<strong>__pending_nodes 的</strong>資源群組，用以存放額外的 QueryNode。我們也建立兩個名為<strong>rg1</strong>和<strong>rg2</strong> 的使用者專用資源群組。此外，我們確保其他資源群組會優先從<strong>__pending_nodes</strong> 中恢復缺失或冗餘的 QueryNode。</p></li>
 <li><p>叢集水平擴展</p>
 <p>假設我們有以下擴展函式：</p>
 <pre><code translate="no" class="language-python">
@@ -279,7 +279,7 @@ init_cluster(<span class="hljs-number">1</span>)
     <span class="hljs-comment"># scale the querynode number in Milvus into node_num.</span>
     <span class="hljs-keyword">pass</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>我們可以透過 API 將特定資源群組擴展至指定數量的 QueryNodes，且不會影響其他資源群組。</p>
+<p>我們可以透過 API 將特定資源群組擴展至指定數量的 QueryNodes，而不會影響其他任何資源群組。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># scale rg1 into 3 nodes, rg2 into 1 nodes</span>
 milvus_client.update_resource_groups({
     <span class="hljs-string">&quot;rg1&quot;</span>: ResourceGroupConfig(
@@ -331,7 +331,7 @@ scale_to(<span class="hljs-number">4</span>)
         ></path>
       </svg>
     </button></h2><ul>
-<li>單一集合的副本與資源群組之間具有 N 對 N 的關係。</li>
+<li>單一集合的副本與資源群組之間存在 N 對 N 的關係。</li>
 <li>當單一集合的多個副本被載入至同一個資源群組時，該資源群組的 QueryNodes 會均勻分佈於各副本之間，確保每個副本擁有的 QueryNodes 數量差異不超過 1。</li>
 </ul>
 <h1 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">

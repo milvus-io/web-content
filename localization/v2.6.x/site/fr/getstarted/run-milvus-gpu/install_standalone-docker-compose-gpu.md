@@ -134,9 +134,9 @@ Creating milvus-standalone ... done
 </div>
 <p>Une fois Milvus démarré,</p>
 <ul>
-<li>les conteneurs nommés <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> et <strong>milvus-etcd</strong> sont en cours d’exécution.
+<li>les conteneurs nommés <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> et <strong>milvus-etcd</strong> sont en cours d'exécution.
 <ul>
-<li>Le conteneur <strong>milvus-etcd</strong> n’expose aucun port vers l’hôte et mappe ses données vers <strong>le répertoire volumes/etcd</strong> du dossier actuel.</li>
+<li>Le conteneur <strong>milvus-etcd</strong> n’expose aucun port vers l’hôte et mappe ses données vers <strong>le</strong> répertoire <strong>volumes/etcd</strong> du dossier actuel.</li>
 <li>Le conteneur <strong>milvus-minio</strong> expose localement les ports <strong>9090</strong> et <strong>9091</strong> avec les identifiants d’authentification par défaut et mappe ses données vers le répertoire <strong>volumes/minio</strong> du dossier actuel.</li>
 <li>Le conteneur <strong>milvus-standalone</strong> expose localement les ports <strong>19530</strong> avec les paramètres par défaut et stocke ses données dans <strong>le ré</strong> pertoire <strong>volumes/milvus</strong> du dossier actuel.</li>
 </ul></li>

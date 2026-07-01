@@ -35,7 +35,7 @@ title: Gerir grupos de recursos
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Um grupo de recursos pode conter vários ou todos os nós de consulta de um cluster do Milvus. É o utilizador que decide como deseja distribuir os nós de consulta pelos grupos de recursos, com base no que for mais adequado para si. Por exemplo, num cenário com várias coleções, pode atribuir um número adequado de nós de consulta a cada grupo de recursos e carregar as coleções em grupos de recursos diferentes, de modo a que as operações dentro de cada coleção sejam fisicamente independentes das de outras coleções.</p>
+    </button></h2><p>Um grupo de recursos pode conter vários ou todos os nós de consulta de um cluster do Milvus. É o utilizador que decide como deseja distribuir os nós de consulta pelos grupos de recursos, com base no que fizer mais sentido para si. Por exemplo, num cenário com várias coleções, pode atribuir um número adequado de nós de consulta a cada grupo de recursos e carregar as coleções em grupos de recursos diferentes, de modo a que as operações dentro de cada coleção sejam fisicamente independentes das de outras coleções.</p>
 <p>Note que uma instância do Milvus mantém um grupo de recursos predefinido para conter todos os nós de consulta no arranque e denomina-o <strong>__default_resource_group</strong>.</p>
 <p>A partir da versão 2.4.1, o Milvus disponibiliza uma API declarativa para grupos de recursos, tendo a antiga API de grupos de recursos sido descontinuada. A nova API declarativa permite aos utilizadores alcançar idempotência, facilitando o desenvolvimento secundário em ambientes nativos da nuvem.</p>
 <h2 id="Concepts-of-resource-group" class="common-anchor-header">Conceitos de grupo de recursos<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
@@ -70,7 +70,7 @@ title: Gerir grupos de recursos
 <p><code translate="no">.requests.nodeNum &lt; nodeNumOfResourceGroup &lt; .limits.nodeNum.</code></p>
 <p>Exceto nos seguintes casos:</p>
 <ul>
-<li>Quando o número de QueryNodes no cluster Milvus for insuficiente, ou seja, <code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code>, haverá sempre grupos de recursos sem QueryNodes suficientes.</li>
+<li>Quando o número de QueryNodes no cluster do Milvus for insuficiente, ou seja, <code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code>, haverá sempre grupos de recursos sem QueryNodes suficientes.</li>
 <li>Quando o número de QueryNodes no cluster do Milvus for excessivo, ou seja, <code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code>, os QueryNodes redundantes serão sempre colocados primeiro no <strong>__default_resource_group</strong>.</li>
 </ul>
 <p>É claro que, se o número de QueryNodes no cluster se alterar, o Milvus tentará continuamente ajustar-se para cumprir as condições finais. Por conseguinte, pode primeiro aplicar as alterações à configuração do grupo de recursos e, em seguida, efetuar o dimensionamento dos QueryNodes.</p>
@@ -231,7 +231,7 @@ except Exception:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Atualmente, o Milvus não consegue escalar para cima ou para baixo de forma independente em ambientes nativos da nuvem. No entanto, ao utilizar a <strong>API de Grupos de Recursos Declarativos</strong> em conjunto com a orquestração de contentores, o Milvus consegue facilmente alcançar o isolamento e a gestão de recursos para os QueryNodes.
+    </button></h2><p>Atualmente, o Milvus não consegue escalar para mais ou para menos de forma independente em ambientes nativos da nuvem. No entanto, ao utilizar a <strong>API de Grupos de Recursos Declarativos</strong> em conjunto com a orquestração de contentores, o Milvus consegue facilmente alcançar o isolamento e a gestão de recursos para os QueryNodes.
 Eis uma boa prática para gerir os QueryNodes num ambiente de nuvem:</p>
 <ol>
 <li><p>Por predefinição, o Milvus cria um <strong>__default_resource_group</strong>. Este grupo de recursos não pode ser eliminado e serve também como grupo de recursos de carregamento predefinido para todas as coleções, sendo-lhe sempre atribuídos QueryNodes redundantes. Por conseguinte, podemos criar um grupo de recursos pendente para alojar recursos de QueryNode não utilizados, impedindo que esses recursos sejam ocupados pelo <strong>__default_resource_group</strong>.</p>

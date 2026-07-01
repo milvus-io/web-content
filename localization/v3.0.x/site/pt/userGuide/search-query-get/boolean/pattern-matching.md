@@ -5,8 +5,8 @@ summary: >-
   O Milvus suporta a correspondência de padrões de cadeias de caracteres com
   padrões curinga LIKE e expressões regulares RE2. Utilize filtros de padrões
   para corresponder prefixos, sufixos, subcadeias, códigos estruturados,
-  domínios de e-mail, caminhos de URL e outros padrões de cadeias de caracteres
-  em campos VARCHAR, caminhos de cadeias de caracteres JSON ou elementos ARRAY.
+  domínios de e-mail, percursos de URL e outros padrões de cadeias de caracteres
+  em campos VARCHAR, percursos de cadeias de caracteres JSON ou elementos ARRAY.
 ---
 <h1 id="Pattern-Matching" class="common-anchor-header">Correspondência de padrões<button data-href="#Pattern-Matching" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -292,6 +292,6 @@ res = client.query(
 <tbody>
 <tr><td>Contém subcadeias literais fixas, como <code translate="no">message =~ &quot;error.*timeout&quot;</code> ou <code translate="no">message LIKE &quot;%database%&quot;</code></td><td><code translate="no">NGRAM</code></td><td>É útil quando o Milvus consegue extrair subcadeias literais significativas do padrão. Para mais detalhes, consulte <a href="/docs/pt/ngram.md">NGRAM</a>.</td></tr>
 <tr><td>Filtros de cadeias de caracteres do tipo prefixo, exato ou de igualdade, especialmente em campos com cardinalidade baixa a moderada</td><td><code translate="no">STL_SORT</code>, <code translate="no">INVERTED</code> ou <code translate="no">BITMAP</code></td><td>Podem ser mais eficazes quando o campo contém valores repetidos ou quando o filtro se aproxima de uma correspondência exata. Para mais detalhes, consulte <a href="/docs/pt/stl-sort.md">STL_SORT</a>, <a href="/docs/pt/inverted.md">INVERTED</a> e <a href="/docs/pt/bitmap.md">BITMAP</a>.</td></tr>
-<tr><td>Padrões Regex sem literais fixos, ou padrões dominados por classes de caracteres, tokens curtos ou caracteres curinga</td><td>Faça testes de desempenho antes de confiar na aceleração por índice</td><td>Estes padrões podem proporcionar uma seletividade de índice limitada e podem recorrer a varreduras mais abrangentes.</td></tr>
+<tr><td>Padrões Regex sem literais fixos, ou padrões dominados por classes de caracteres, tokens curtos ou curingas</td><td>Faça testes de desempenho antes de confiar na aceleração por índice</td><td>Estes padrões podem proporcionar uma seletividade de índice limitada e podem recorrer a varreduras mais abrangentes.</td></tr>
 </tbody>
 </table>

@@ -76,8 +76,8 @@ title: Menjalankan Milvus di Docker (Linux)
 <p>Setelah menjalankan skrip instalasi:</p>
 <ul>
 <li>Sebuah kontainer Docker bernama milvus telah dimulai di port <strong>19530</strong>.</li>
-<li>Embed etcd telah diinstal bersama Milvus di kontainer yang sama dan beroperasi di port <strong>2379</strong>. Berkas konfigurasinya dipetakan ke <strong>`embedEtcd.yaml</strong> ` di folder saat ini.</li>
-<li>Untuk mengubah konfigurasi default Milvus, tambahkan pengaturan Anda ke berkas <strong>user.yaml</strong> di folder saat ini, lalu mulai ulang layanan.</li>
+<li>Embed etcd telah diinstal bersama Milvus di kontainer yang sama dan berjalan di port <strong>2379</strong>. Berkas konfigurasinya dipetakan ke <strong>`embedEtcd.yaml</strong> ` di folder saat ini.</li>
+<li>Untuk mengubah konfigurasi Milvus default, tambahkan pengaturan Anda ke berkas <strong>user.yaml</strong> di folder saat ini, lalu mulai ulang layanan.</li>
 <li>Volume data Milvus dipetakan ke ` <strong>volumes/milvus</strong> ` di folder saat ini.</li>
 </ul>
 <p>Anda dapat mengakses Milvus WebUI di <code translate="no">http://127.0.0.1:9091/webui/</code> untuk mempelajari lebih lanjut tentang instance Milvus Anda. Untuk detailnya, lihat <a href="/docs/id/v2.6.x/milvus-webui.md">Milvus WebUI</a>.</p>
@@ -180,7 +180,7 @@ EOF
 <ul>
 <li><a href="/docs/id/v2.6.x/manage_databases.md">Mengelola Basis Data</a></li>
 <li><a href="/docs/id/v2.6.x/manage-collections.md">Mengelola Koleksi</a></li>
-<li><a href="/docs/id/v2.6.x/manage-partitions.md">Mengelola partisi</a></li>
+<li><a href="/docs/id/v2.6.x/manage-partitions.md">Mengelola Partisi</a></li>
 <li><a href="/docs/id/v2.6.x/insert-update-delete.md">Sisipkan, Upsert, &amp; Hapus</a></li>
 <li><a href="/docs/id/v2.6.x/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
 <li><a href="/docs/id/v2.6.x/multi-vector-search.md">Pencarian Hibrida</a></li>
@@ -195,7 +195,7 @@ EOF
 </ul></li>
 <li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus-webui.md">Milvus WebUI</a>, antarmuka web yang intuitif untuk pemantauan dan pengelolaan Milvus.</p></li>
 <li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, alat sumber terbuka untuk pencadangan data Milvus.</p></li>
-<li><p>Jelajahi <a href="/docs/id/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk debugging Milvus dan pembaruan konfigurasi dinamis.</p></li>
+<li><p>Jelajahi <a href="/docs/id/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk mendebug Milvus dan pembaruan konfigurasi dinamis.</p></li>
 <li><p>Jelajahi <a href="https://github.com/zilliztech/attu">Attu</a>, alat GUI sumber terbuka untuk pengelolaan Milvus yang intuitif.</p></li>
 <li><p><a href="/docs/id/v2.6.x/monitor.md">Pantau Milvus dengan Prometheus</a>.</p></li>
 </ul>

@@ -130,7 +130,7 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Se non si riesce a eseguire il comando sopra indicato, verificare che sul sistema sia installato Docker Compose V1. In tal caso, si consiglia di migrare a Docker Compose V2 in base alle indicazioni riportate in <a href="https://docs.docker.com/compose/">questa pagina</a>.</p>
+<p>Se non si riesce a eseguire il comando sopra indicato, verificare che sul sistema sia installato Docker Compose V1. In tal caso, si consiglia di migrare a Docker Compose V2 in base alle note riportate in <a href="https://docs.docker.com/compose/">questa pagina</a>.</p>
 </div>
 <p>Dopo l'avvio di Milvus,</p>
 <ul>

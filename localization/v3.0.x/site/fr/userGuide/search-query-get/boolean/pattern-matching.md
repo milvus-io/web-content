@@ -5,9 +5,9 @@ summary: >-
   Milvus prend en charge la correspondance de chaînes de caractères à l'aide de
   caractères génériques LIKE et d'expressions régulières RE2. Utilisez des
   filtres de correspondance pour rechercher des préfixes, des suffixes, des
-  sous-chaînes, des codes structurés, des domaines d'e-mail, des chemins d'URL
-  et d'autres motifs de chaînes dans les champs VARCHAR, les chemins de chaînes
-  JSON ou les éléments ARRAY.
+  sous-chaînes, des codes structurés, des domaines de messagerie, des chemins
+  d'accès URL et d'autres motifs de chaînes dans les champs VARCHAR, les chemins
+  de chaînes JSON ou les éléments ARRAY.
 ---
 <h1 id="Pattern-Matching" class="common-anchor-header">Correspondance de motifs<button data-href="#Pattern-Matching" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -62,7 +62,7 @@ res = client.query(
 <tr><td><code translate="no">VARCHAR</code> champ</td><td>Oui</td><td>Oui</td><td>Cible typique pour la correspondance de motifs sur les champs de chaîne de caractères.</td></tr>
 <tr><td><code translate="no">JSON</code> chemin avec type de conversion « <code translate="no">VARCHAR</code> »</td><td>Oui</td><td>Oui</td><td>La valeur du chemin JSON doit être une chaîne de caractères pour que les correspondances soient positives. Si vous créez un index sur le chemin JSON à des fins d’accélération, définissez <code translate="no">json_cast_type=&quot;varchar&quot;</code>.</td></tr>
 <tr><td><code translate="no">ARRAY&lt;VARCHAR&gt;</code> élément</td><td>Oui</td><td>Oui</td><td>Correspond à un élément spécifique par index, tel que <code translate="no">tags[0]</code>. La correspondance de motif <strong>ne</strong> parcourt <strong>pas</strong> tous les éléments ; elle s’applique uniquement à l’élément situé à l’index spécifié.</td></tr>
-<tr><td>Cibles numériques, booléennes, vectorielles, de type « <code translate="no">TEXT</code> » ou autres cibles non «<code translate="no">VARCHAR</code> »</td><td>Non</td><td>Non</td><td>La correspondance de motif n’est disponible que pour les valeurs de type « <code translate="no">VARCHAR</code> », les chemins JSON se résolvant en chaînes de caractères ou les éléments indexés de type « <code translate="no">ARRAY&lt;VARCHAR&gt;</code> ».</td></tr>
+<tr><td>Cibles numériques, booléennes, vectorielles, de type « <code translate="no">TEXT</code> » ou autres cibles non «<code translate="no">VARCHAR</code> »</td><td>Non</td><td>Non</td><td>La correspondance de motif n’est disponible que pour les valeurs de type « <code translate="no">VARCHAR</code> », les chemins JSON qui se résolvent en chaînes de caractères ou les éléments indexés de type « <code translate="no">ARRAY&lt;VARCHAR&gt;</code> ».</td></tr>
 </tbody>
 </table>
 <h2 id="Choose-LIKE-or-regex" class="common-anchor-header">Choisissez LIKE ou une expression régulière<button data-href="#Choose-LIKE-or-regex" class="anchor-icon" translate="no">
@@ -81,7 +81,7 @@ res = client.query(
         ></path>
       </svg>
     </button></h2><p>Choisissez l’opérateur le plus simple qui exprime le motif dont vous avez besoin.</p>
-<p>Si vous avez besoin d’une correspondance exacte de chaîne de caractères, nous vous recommandons d’utiliser « <code translate="no">==</code> » plutôt que la correspondance de motif. N’utilisez « <code translate="no">LIKE</code> » ou « regex » que lorsque le filtre doit correspondre à un motif.</p>
+<p>Si vous avez besoin d’une correspondance exacte de chaîne de caractères, nous vous recommandons d’utiliser « <code translate="no">==</code> » plutôt que la correspondance de motifs. N’utilisez « <code translate="no">LIKE</code> » ou « regex » que lorsque le filtre doit correspondre à un motif.</p>
 <table>
 <thead>
 <tr><th>Exigence</th><th>Opérateur recommandé</th><th>Exemple</th><th>Description</th></tr>
@@ -96,7 +96,7 @@ res = client.query(
 <tr><td>Exclure les valeurs correspondant à un motif d’expression régulière</td><td><code translate="no">!~</code></td><td><code translate="no">message !~ &quot;^DEBUG&quot;</code></td><td>Exclut les chaînes commençant par <code translate="no">DEBUG</code>.</td></tr>
 </tbody>
 </table>
-<p>Utilisez « <code translate="no">LIKE</code> » pour une correspondance simple avec des caractères génériques. Utilisez une expression régulière lorsque le motif nécessite des classes de caractères, des répétitions, des alternatives telles que « <code translate="no">error|failed</code> », des ancrages ou une correspondance sans distinction de casse.</p>
+<p>Utilisez « <code translate="no">LIKE</code> » pour une correspondance simple avec des caractères génériques. Utilisez une expression régulière lorsque le motif nécessite des classes de caractères, des répétitions, des alternatives telles que « <code translate="no">error|failed</code> », des ancrages ou une correspondance sans distinction de majuscules/minuscules.</p>
 <h2 id="Use-LIKE" class="common-anchor-header">Utiliser LIKE<button data-href="#Use-LIKE" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -181,7 +181,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilisez des filtres d’expressions régulières lorsque le motif nécessite des fonctionnalités d’expressions régulières telles que les classes de caractères, la répétition, l’alternance, les ancres ou la correspondance insensible à la casse. Milvus applique une expression régulière <a href="https://github.com/google/re2/wiki/syntax">RE2</a> à une valeur de chaîne.</p>
+    </button></h2><p>Utilisez des filtres d’expressions régulières lorsque le motif nécessite des fonctionnalités d’expressions régulières telles que les classes de caractères, la répétition, l’alternance, les ancres ou la correspondance sans distinction de casse. Milvus applique une expression régulière <a href="https://github.com/google/re2/wiki/syntax">RE2</a> à une valeur de chaîne.</p>
 <p>Le côté droit de « <code translate="no">=~</code> » ou « <code translate="no">!~</code> » doit être une chaîne littérale.</p>
 <table>
 <thead>
@@ -246,7 +246,7 @@ res = client.query(
         ></path>
       </svg>
     </button></h3><p><strong>Correspondance de sous-chaînes</strong></p>
-<p>La correspondance d’expressions régulières Milvus utilise la sémantique des sous-chaînes. Le motif n’a pas besoin de correspondre à la valeur entière du champ. Par exemple, le filtre suivant correspond à la fois à <code translate="no">E1001</code> et à <code translate="no">failed with E1001 after retry</code>:</p>
+<p>La correspondance d’expressions régulières de Milvus utilise la sémantique des sous-chaînes. Le motif n’a pas besoin de correspondre à la valeur entière du champ. Par exemple, le filtre suivant correspond à la fois à <code translate="no">E1001</code> et à <code translate="no">failed with E1001 after retry</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ &quot;E[0-9]{4}&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Pour faire correspondre la valeur complète du champ, utilisez les ancrages <code translate="no">^</code> et <code translate="no">$</code>:</p>
@@ -265,7 +265,7 @@ res = client.query(
 </thead>
 <tbody>
 <tr><td><code translate="no">json_field[&quot;path&quot;] =~ &quot;pattern&quot;</code></td><td>Non</td><td>Ne correspond qu’aux valeurs de type chaîne de caractères qui satisfont au motif d’expression régulière.</td></tr>
-<tr><td><code translate="no">json_field[&quot;path&quot;] !~ &quot;pattern&quot;</code></td><td>Oui</td><td>Renvoie les entités dont le chemin est manquant, nul, non de type chaîne de caractères ou une chaîne de caractères qui ne correspond pas au modèle d'expression régulière.</td></tr>
+<tr><td><code translate="no">json_field[&quot;path&quot;] !~ &quot;pattern&quot;</code></td><td>Oui</td><td>Renvoie les entités dont le chemin est manquant, nul, non de type chaîne de caractères ou une chaîne de caractères qui ne correspond pas au motif d'expression régulière.</td></tr>
 </tbody>
 </table>
 <h2 id="Accelerate-pattern-matching-with-indexes" class="common-anchor-header">Accélérer la correspondance de motifs grâce aux index<button data-href="#Accelerate-pattern-matching-with-indexes" class="anchor-icon" translate="no">
@@ -284,7 +284,7 @@ res = client.query(
         ></path>
       </svg>
     </button></h2><p>Milvus prend en charge plusieurs types d’index sur les champs de type chaîne de caractères, qui peuvent être utilisés conjointement avec des filtres « <code translate="no">LIKE</code> » et des filtres d’expressions régulières sur les champs « <code translate="no">VARCHAR</code> » ou les chemins d’accès sous forme de chaînes JSON, tels que <code translate="no">NGRAM</code>, <code translate="no">STL_SORT</code>, <code translate="no">INVERTED</code> et <code translate="no">BITMAP</code>. La correspondance de motifs peut fonctionner sans index, mais un index peut améliorer les performances sur des ensembles de données volumineux.</p>
-<p>L'efficacité de l'index dépend de l'expression du motif, de la capacité de Milvus à extraire des sous-chaînes littérales fixes, ainsi que de la cardinalité et de la distribution du champ cible. Les motifs de type préfixe, tels que <code translate="no">name LIKE &quot;Prod%&quot;</code>, peuvent bénéficier de stratégies d'indexation différentes de celles des motifs de type infixe ou suffixe, tels que <code translate="no">description LIKE &quot;%vector%&quot;</code> ou <code translate="no">filename LIKE &quot;%.json&quot;</code>.</p>
+<p>L'efficacité de l'index dépend de l'expression du motif, de la capacité de Milvus à extraire des sous-chaînes littérales fixes, ainsi que de la cardinalité et de la distribution du champ cible. Les motifs de type préfixe, tels que <code translate="no">name LIKE &quot;Prod%&quot;</code>, peuvent bénéficier de stratégies d'indexation différentes de celles utilisées pour les motifs de type infixe ou suffixe, tels que <code translate="no">description LIKE &quot;%vector%&quot;</code> ou <code translate="no">filename LIKE &quot;%.json&quot;</code>.</p>
 <p>Utilisez le tableau suivant comme point de départ, puis effectuez des tests de performance avec votre propre charge de travail :</p>
 <table>
 <thead>

@@ -293,7 +293,7 @@ I dati vengono memorizzati nella cartella <code translate="no">/volumes</code> i
 <li>Scopri come gestire le seguenti dipendenze di Milvus con Docker Compose o Helm:
 <ul>
 <li><a href="/docs/it/v2.6.x/deploy_s3.md">Configurare l’Object Storage con Docker Compose o Helm</a></li>
-<li><a href="/docs/it/v2.6.x/deploy_etcd.md">Configurare l'archivio dei metadati con Docker Compose o Helm</a></li>
+<li><a href="/docs/it/v2.6.x/deploy_etcd.md">Configurare l'archiviazione dei metadati con Docker Compose o Helm</a></li>
 <li><a href="/docs/it/v2.6.x/deploy_pulsar.md">Configurare l'archiviazione dei messaggi con Docker Compose o Helm</a></li>
 </ul></li>
 </ul>

@@ -88,7 +88,7 @@ title: Mise à niveau du cluster Milvus avec Milvus Operator
 <ul>
 <li>Milvus v2.6.0-rc1 <strong>n'</strong> est <strong>pas compatible</strong> avec la version v2.6.17. Les mises à niveau directes à partir de versions candidates ne sont pas prises en charge.</li>
 <li>Si vous utilisez actuellement la version v2.6.0-rc1 et que vous souhaitez conserver vos données, veuillez consulter <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">ce guide de la communauté</a> pour obtenir de l'aide concernant la migration.</li>
-<li>Vous <strong>devez</strong> effectuer une mise à niveau vers la version v2.5.16 ou ultérieure avec l'option « <code translate="no">mixCoord</code> » activée avant de passer à la version v2.6.17.</li>
+<li>Vous <strong>devez</strong> effectuer une mise à niveau vers la version v2.5.16 ou une version ultérieure avec l'option « <code translate="no">mixCoord</code> » activée avant de passer à la version v2.6.17.</li>
 </ul>
 <p><strong>Limitations relatives aux files d’attente de messages</strong>: lors de la mise à niveau vers Milvus v2.6.17, vous devez conserver votre choix actuel de file d’attente de messages. Le passage d’un système de file d’attente de messages à un autre pendant la mise à niveau n’est pas pris en charge. La prise en charge du changement de système de file d’attente de messages sera disponible dans les versions futures.</p>
 <h2 id="Upgrade-process" class="common-anchor-header">Processus de mise à niveau<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
@@ -147,9 +147,9 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
     </button></h3><h4 id="21-Check-current-coordinator-configuration" class="common-anchor-header">2.1 Vérification de la configuration actuelle du coordinateur</h4><p>Vérifiez si votre cluster utilise déjà <code translate="no">mixCoord</code>:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p>Si vous voyez à la place des pods de coordinateur distincts (<code translate="no">datacoord</code>, <code translate="no">querycoord</code>, <code translate="no">indexcoord</code>), vous devez activer <code translate="no">mixCoord</code> à l'étape suivante.</p>
+<p>Si vous voyez à la place des pods de coordinateur distincts (<code translate="no">datacoord</code>, <code translate="no">querycoord</code>, <code translate="no">indexcoord</code>), vous devez activer <code translate="no">mixCoord</code> à l’étape suivante.</p>
 <h4 id="22-Upgrade-to-v2516-with-mixCoord" class="common-anchor-header">2.2 Mise à niveau vers la version 2.5.16 avec mixCoord</h4><div class="alert-note">
-<p>Ignorez cette étape si votre cluster fonctionne déjà sous la version v2.5.16 ou supérieure avec l’option « <code translate="no">mixCoord</code> » activée.</p>
+<p>Ignorez cette étape si votre cluster exécute déjà la version v2.5.16 ou une version ultérieure avec l’option « <code translate="no">mixCoord</code> » activée.</p>
 </div>
 <p>Créez un fichier de configuration <code translate="no">milvusupgrade.yaml</code> pour activer <code translate="no">mixCoord</code> et effectuer la mise à niveau vers la version 2.5.16 :</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>

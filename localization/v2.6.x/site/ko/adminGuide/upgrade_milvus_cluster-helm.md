@@ -60,7 +60,7 @@ title: Helm 차트를 사용하여 Milvus 클러스터 업그레이드하기
 <li><strong>새로운 구성 요소</strong>: 향상된 데이터 처리를 위한 스트리밍 노드 도입</li>
 <li><strong>구성 요소 제거</strong>: <code translate="no">indexNode</code> 이 제거되고 통합되었습니다</li>
 </ul>
-<p>이 업그레이드 프로세스는 새로운 아키텍처로의 원활한 마이그레이션을 보장합니다. 아키텍처 변경 사항에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/architecture_overview.md">Milvus 아키텍처 개요를</a> 참조하십시오.</p>
+<p>이 업그레이드 프로세스는 새로운 아키텍처로의 원활한 마이그레이션을 보장합니다. 아키텍처 변경에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/architecture_overview.md">Milvus 아키텍처 개요를</a> 참조하십시오.</p>
 <h3 id="Requirements" class="common-anchor-header">요구 사항<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

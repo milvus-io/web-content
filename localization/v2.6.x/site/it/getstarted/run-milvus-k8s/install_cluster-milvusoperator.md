@@ -188,7 +188,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 <div class="alert note">
 <ul>
 <li>Il nome della versione deve contenere solo lettere, numeri e trattini. I punti non sono consentiti nel nome della versione.</li>
-<li>È inoltre possibile distribuire un'istanza di Milvus in modalità standalone, in cui tutti i suoi componenti sono contenuti in un unico pod. Per farlo, modificare l’URL del file di configurazione nel comando sopra riportato in <code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
+<li>È inoltre possibile distribuire un'istanza di Milvus in modalità standalone, in cui tutti i suoi componenti sono contenuti in un unico pod. A tal fine, modificare l’URL del file di configurazione nel comando sopra riportato in <code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
 </ul>
 </div>
 <h3 id="2-Check-Milvus-cluster-status" class="common-anchor-header">2. Verifica dello stato del cluster Milvus<button data-href="#2-Check-Milvus-cluster-status" class="anchor-icon" translate="no">
@@ -284,8 +284,8 @@ my-release-minio-3                               1/1     Running   0          2m
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward service/my-release-milvus 27017:19530</span>
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
-<p>Facoltativamente, è possibile utilizzare <code translate="no">:19530</code> al posto di <code translate="no">27017:19530</code> nel comando sopra riportato per consentire a <code translate="no">kubectl</code> di allocare automaticamente una porta locale, in modo da evitare di dover gestire eventuali conflitti di porta.</p>
-<p>Per impostazione predefinita, il reindirizzamento delle porte di kubectl ascolta solo su <code translate="no">localhost</code>. Utilizza il flag <code translate="no">address</code> se desideri che Milvus ascolti sull'indirizzo IP selezionato o su tutti gli indirizzi IP. Il comando seguente fa sì che il reindirizzamento delle porte ascolti su tutti gli indirizzi IP della macchina host.</p>
+<p>Facoltativamente, è possibile utilizzare <code translate="no">:19530</code> al posto di <code translate="no">27017:19530</code> nel comando sopra riportato per consentire a <code translate="no">kubectl</code> di allocare automaticamente una porta locale, evitando così di dover gestire eventuali conflitti di porta.</p>
+<p>Per impostazione predefinita, il reindirizzamento delle porte di kubectl ascolta solo su <code translate="no">localhost</code>. Utilizza il flag <code translate="no">address</code> se desideri che Milvus ascolti sull'indirizzo IP selezionato o su tutti gli indirizzi IP. Il comando seguente imposta il reindirizzamento delle porte in modo che ascolti su tutti gli indirizzi IP della macchina host.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
@@ -416,7 +416,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li><a href="/docs/it/v2.6.x/multi-vector-search.md">Ricerca ibrida</a></li>
 </ul></li>
 <li><p><a href="/docs/it/v2.6.x/upgrade_milvus_cluster-helm.md">Aggiornamento di Milvus tramite Helm Chart</a>.</p></li>
-<li><p><a href="/docs/it/v2.6.x/scaleout.md">Scalare il proprio cluster Milvus</a>.</p></li>
+<li><p><a href="/docs/it/v2.6.x/scaleout.md">Scalare il cluster Milvus</a>.</p></li>
 <li><p>Distribuisci il tuo cluster Milvus su cloud:</p>
 <ul>
 <li><a href="/docs/it/v2.6.x/eks.md">Amazon EKS</a></li>

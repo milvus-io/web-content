@@ -180,7 +180,7 @@ EOF
 <li><a href="/docs/ko/v2.6.x/multi-vector-search.md">하이브리드 검색</a></li>
 </ul></li>
 <li><p><a href="/docs/ko/v2.6.x/upgrade_milvus_cluster-helm.md">Helm 차트를 사용하여 Milvus 업그레이드하기</a>.</p></li>
-<li><p><a href="/docs/ko/v2.6.x/scaleout.md">Milvus 클러스터 확장</a>.</p></li>
+<li><p><a href="/docs/ko/v2.6.x/scaleout.md">Milvus 클러스터 확장</a></p></li>
 <li><p>클라우드에 Milvus 클러스터 배포:</p>
 <ul>
 <li><a href="/docs/ko/v2.6.x/eks.md">Amazon EKS</a></li>

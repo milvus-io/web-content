@@ -55,7 +55,7 @@ summary: Saiba como configurar o armazenamento de mensagens com o Milvus Operato
 <ul>
 <li>É suportado apenas um armazenamento de mensagens por instância do Milvus. No entanto, mantemos a compatibilidade retroativa com a configuração de vários armazenamentos de mensagens para uma única instância. A prioridade é a seguinte:
 <ul>
-<li>modo autónomo:  RocksMQ (predefinição) &gt; Pulsar &gt; Kafka</li>
+<li>modo autónomo: RocksMQ (predefinição) &gt; Pulsar &gt; Kafka</li>
 <li>modo de cluster: Pulsar (padrão) &gt; Kafka</li>
 </ul></li>
 <li>O armazenamento de mensagens não pode ser alterado enquanto o sistema Milvus estiver em execução.</li>

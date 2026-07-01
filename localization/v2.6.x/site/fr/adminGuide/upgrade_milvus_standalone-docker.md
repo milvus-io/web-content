@@ -175,7 +175,7 @@ docker compose up -d
 docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h2 id="Verify-the-upgrade" class="common-anchor-header">Vérifiez la mise à niveau<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
+<h2 id="Verify-the-upgrade" class="common-anchor-header">Vérifiez la mise à jour<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

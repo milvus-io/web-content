@@ -78,7 +78,7 @@ title: 使用 Milvus Operator 升级 Milvus Standalone
       </svg>
     </button></h3><p><strong>系统要求：</strong></p>
 <ul>
-<li>通过 Milvus Operator 部署了 Milvus Standalone 版的 Kubernetes 集群</li>
+<li>通过 Milvus Operator 部署了 Milvus Standalone 的 Kubernetes 集群</li>
 <li><code translate="no">kubectl</code> 并已配置为可访问您的集群</li>
 <li>已安装 Helm 3.x</li>
 </ul>

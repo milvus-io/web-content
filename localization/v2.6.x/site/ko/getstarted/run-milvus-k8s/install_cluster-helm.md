@@ -363,7 +363,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
     </button></h3><p>다음 명령어를 실행하여 Milvus 매니페스트를 가져옵니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm template my-release zilliztech/milvus &gt; milvus_manifest.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>위의 명령어는 Milvus 클러스터용 차트 템플릿을 생성하고, 그 결과를 <code translate="no">milvus_manifest.yaml</code> 라는 매니페스트 파일에 저장합니다. 이 매니페스트를 사용하면 Milvus 클러스터의 구성 요소와 종속성을 별도의 파드에 포함하여 설치할 수 있습니다.</p>
+<p>위의 명령어는 Milvus 클러스터용 차트 템플릿을 생성하고, 그 결과를 <code translate="no">milvus_manifest.yaml</code> 라는 매니페스트 파일에 저장합니다. 이 매니페스트를 사용하면 Milvus 클러스터의 구성 요소와 종속성을 별도의 파드에 설치할 수 있습니다.</p>
 <div class="alert note">
 <ul>
 <li>모든 Milvus 구성 요소가 단일 파드에 포함되는 독립 실행 모드(standalone mode)로 Milvus 인스턴스를 설치하려면, 대신 ` <code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false zilliztech/milvus &gt; milvus_manifest.yaml</code> `을 실행하여 독립 실행 모드의 Milvus 인스턴스에 대한 차트 템플릿을 생성해야 합니다.</li>
@@ -460,7 +460,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>실행 중인 Milvus 클러스터를 최신 버전으로 업그레이드하려면 다음 명령어를 실행하십시오:</p>
+    </button></h2><p>실행 중인 Milvus 클러스터를 최신 버전으로 업그레이드하려면 다음 명령을 실행하십시오:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm repo update</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release zilliztech/milvus --reset-then-reuse-values</span>
 <button class="copy-code-btn"></button></code></pre>

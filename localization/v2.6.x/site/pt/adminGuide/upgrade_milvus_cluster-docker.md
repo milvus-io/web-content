@@ -150,7 +150,7 @@ docker compose up -d
 <ul>
 <li><a href="/docs/pt/v2.6.x/scaleout.md">Escalar um cluster do Milvus</a></li>
 </ul></li>
-<li>Se estiver pronto para implementar o seu cluster nas nuvens:
+<li>Se estiver pronto para implementar o seu cluster em nuvens:
 <ul>
 <li>Saiba como <a href="/docs/pt/v2.6.x/eks.md">implementar o Milvus no Amazon EKS com o Terraform</a></li>
 <li>Aprenda a <a href="/docs/pt/v2.6.x/gcp.md">implementar um cluster Milvus no GCP com o Kubernetes</a></li>

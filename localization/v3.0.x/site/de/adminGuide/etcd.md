@@ -54,4 +54,4 @@ title: etcd
   --<span class="hljs-built_in">set</span> etcd.image.repository=milvusdb/etcd \
   --<span class="hljs-built_in">set</span> etcd.image.tag=3.5.25-r1
 <button class="copy-code-btn"></button></code></pre>
-<p>Informationen zu externem etcd sowie zur detaillierten Konfiguration von Docker Compose, Helm und Milvus Operator finden Sie unter <a href="/docs/de/deploy_etcd.md">„Meta-Speicher mit Docker Compose oder Helm konfigurieren</a> “ und <a href="/docs/de/meta_storage_operator.md">„Meta-Speicher mit Milvus Operator konfigurieren</a>“.</p>
+<p>Informationen zu externem etcd sowie zur detaillierten Konfiguration von Docker Compose, Helm und dem Milvus Operator finden Sie unter <a href="/docs/de/deploy_etcd.md">„Meta-Speicher mit Docker Compose oder Helm konfigurieren</a> “ und <a href="/docs/de/meta_storage_operator.md">„Meta-Speicher mit dem Milvus Operator konfigurieren</a>“.</p>

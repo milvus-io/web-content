@@ -61,7 +61,7 @@ summary: >-
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">woodpecker</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Nota: A mudança d <code translate="no">mq.type</code> e num cluster em execução é uma operação de atualização. Siga cuidadosamente o procedimento de atualização e valide num cluster novo antes de efetuar a mudança na produção.</p>
+<p>Nota: A mudança d <code translate="no">mq.type</code> e num cluster em execução é uma operação de atualização. Siga cuidadosamente o procedimento de atualização e valide num cluster novo antes de efetuar a mudança no ambiente de produção.</p>
 <h2 id="Configuration" class="common-anchor-header">Configuração<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -382,7 +382,7 @@ docker restart milvus-standalone
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Isto implementa o Woodpecker como um StatefulSet dedicado (<code translate="no">my-release-milvus-woodpecker</code>, 4 réplicas por predefinição) liderado por um serviço sem interface gráfica, agrupado por gossip nas portas <code translate="no">18080</code> (serviço), <code translate="no">17946</code> (gossip) e <code translate="no">9091</code> (métricas), com o MinIO como backend de armazenamento. O serviço necessita de um quórum de <strong>3</strong> nós; o valor predefinido de <strong>4</strong> réplicas mantém o quórum ao mesmo tempo que tolera a falha de um único nó, pelo que não se deve definir « <code translate="no">woodpecker.replicaCount</code> » para um valor inferior a 3. O cluster inclui então um conjunto separado de pods « <code translate="no">woodpecker</code> »:</p>
+<p>Isto implementa o Woodpecker como um StatefulSet dedicado (<code translate="no">my-release-milvus-woodpecker</code>, 4 réplicas por predefinição) liderado por um serviço sem interface gráfica, agrupado em cluster por gossip nas portas <code translate="no">18080</code> (serviço), <code translate="no">17946</code> (gossip) e <code translate="no">9091</code> (métricas), com o MinIO como backend de armazenamento. O serviço necessita de um quórum de <strong>3</strong> nós; o valor predefinido de <strong>4</strong> réplicas mantém o quórum ao mesmo tempo que tolera a falha de um único nó, pelo que não se deve definir <code translate="no">woodpecker.replicaCount</code> para um valor inferior a 3. O cluster inclui então um conjunto separado de pods <code translate="no">woodpecker</code>:</p>
 <pre><code translate="no"><span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">0</span>
 <span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">1</span>
 <span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">2</span>
@@ -547,7 +547,7 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>O modo de serviço proporciona <strong>uma latência de gravação da ordem dos milissegundos</strong> — comparável à de um WAL tradicional em disco local com três réplicas —, mantendo simultaneamente os custos baixos. Numa implementação típica com três réplicas e entre zonas de disponibilidade (AZ), a latência de gravação mantém-se na ordem dos milissegundos. Isto é conseguido através de:</p>
+    </button></h3><p>O modo de serviço proporciona <strong>uma latência de gravação da ordem dos milissegundos</strong> — comparável à de um WAL tradicional em disco local com três réplicas —, mantendo os custos baixos. Numa implementação típica com três réplicas e entre zonas de disponibilidade (AZ), a latência de gravação mantém-se na ordem dos milissegundos. Isto é conseguido através de:</p>
 <ul>
 <li><strong>Gravações de quórum em um RTT</strong> — a replicação orientada pelo cliente conclui uma gravação de quórum num único round trip, com o tráfego entre zonas fixado no equivalente a dois réplicas de dados (em comparação com o tráfego extra entre zonas de cerca de 1/3, típico da replicação baseada em broker/líder).</li>
 <li><strong>Leituras de salto único sensíveis à topologia</strong> — cada leitura vai diretamente para a réplica mais próxima, em vez de ser encaminhada através de um broker, evitando as leituras aleatórias entre zonas (≈2/3 do tráfego de leitura entre zonas) dos sistemas baseados em broker.</li>

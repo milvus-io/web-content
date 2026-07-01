@@ -237,7 +237,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
   <span class="hljs-attr">status:</span> <span class="hljs-string">Healthy</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus Operator 会先创建 Milvus 的依赖项（如 etcd、Pulsar 和 MinIO），然后创建 Milvus 组件（如代理、协调器和节点）。</p>
-<p>一旦您的 Milvus 集群准备就绪，Milvus 集群中所有 Pod 的状态应与以下内容类似。</p>
+<p>一旦您的 Milvus 集群准备就绪，Milvus 集群中所有 Pod 的状态应类似于以下内容。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods</span>
 
 NAME                                             READY   STATUS    RESTARTS   AGE

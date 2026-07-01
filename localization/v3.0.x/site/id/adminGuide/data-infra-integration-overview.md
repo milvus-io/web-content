@@ -1,0 +1,29 @@
+---
+id: data-infra-integration-overview.md
+title: Infrastruktur dan Integrasi Data
+summary: >-
+  Gambaran umum mengenai infrastruktur pihak ketiga yang terintegrasi dengan
+  Milvus — metadata, penyimpanan objek, dan antrian pesan.
+---
+<h1 id="Data-Infrastructure--Integration" class="common-anchor-header">Infrastruktur dan Integrasi Data<button data-href="#Data-Infrastructure--Integration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h1><p>Milvus dibangun di atas infrastruktur data terbuka untuk dependensi intinya. Bab ini membahas komponen-komponen yang dapat Anda tambahkan dan konfigurasikan:</p>
+<ul>
+<li><strong><a href="/docs/id/etcd.md">Metadata</a></strong> — Milvus menyimpan metadata (skema koleksi, status node, titik pemeriksaan konsumsi) di etcd.</li>
+<li><strong><a href="/docs/id/object-storage.md">Penyimpanan Objek</a></strong> — Milvus menyimpan berkas indeks dan log biner di MinIO, AWS S3, atau penyimpanan objek cloud lain yang kompatibel dengan S3.</li>
+<li><strong><a href="/docs/id/mqtype-overview.md">Antrian Pesan</a></strong> — Milvus menggunakan log penulisan di muka (WAL): Woodpecker (default), Pulsar, Kafka, atau RocksMQ.</li>
+</ul>
+<p>Secara default, deployment Milvus 3.x baru berjalan dengan <strong>Woodpecker</strong> sebagai antrian pesan, <strong>etcd</strong> untuk metadata, dan <strong>MinIO</strong> untuk penyimpanan objek — tidak diperlukan infrastruktur pesan tambahan.</p>

@@ -37,7 +37,7 @@ title: إدارة مجموعات الموارد
       </svg>
     </button></h2><p>يمكن لمجموعة الموارد أن تحتوي على عدد من عقد الاستعلام أو جميعها في مجموعة Milvus. أنت من يقرر كيفية توزيع عقد الاستعلام بين مجموعات الموارد بناءً على ما يناسبك بشكل أفضل. على سبيل المثال، في سيناريو متعدد المجموعات، يمكنك تخصيص عدد مناسب من عقد الاستعلام لكل مجموعة موارد وتحميل المجموعات في مجموعات موارد مختلفة، بحيث تكون العمليات داخل كل مجموعة مستقلة فعليًا عن تلك الموجودة في المجموعات الأخرى.</p>
 <p>لاحظ أن مثيل Milvus يحتفظ بمجموعة موارد افتراضية لتضم جميع عقد الاستعلام عند بدء التشغيل ويطلق عليها اسم <strong>__default_resource_group</strong>.</p>
-<p>بدءًا من الإصدار 2.4.1، يوفر Milvus واجهة برمجة تطبيقات (API) تعريفية لمجموعات الموارد، في حين تم إهمال واجهة برمجة التطبيقات القديمة لمجموعات الموارد. تتيح واجهة برمجة التطبيقات التعريفية الجديدة للمستخدمين تحقيق خاصية الإيدمبوتنس، مما يسهل إجراء التطوير الثانوي في البيئات السحابية الأصلية.</p>
+<p>بدءًا من الإصدار 2.4.1، يوفر Milvus واجهة برمجة تطبيقات (API) تعريفية لمجموعات الموارد، في حين تم إهمال واجهة برمجة التطبيقات القديمة لمجموعات الموارد. تتيح واجهة برمجة التطبيقات التعريفية الجديدة للمستخدمين تحقيق خاصية التبعية (idempotency)، مما يسهل إجراء التطوير الثانوي في البيئات السحابية الأصلية.</p>
 <h2 id="Concepts-of-resource-group" class="common-anchor-header">مفاهيم مجموعة الموارد<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -66,11 +66,11 @@ title: إدارة مجموعات الموارد
 <li>تحدد السمة <strong>limits</strong> الحدود القصوى لمجموعة الموارد.</li>
 <li>تصف السمتان <strong>transfer_from</strong> و <strong>transfer_to</strong> مجموعات الموارد التي يُفضل أن تحصل منها مجموعة الموارد على الموارد، ومجموعات الموارد التي يجب أن تنقل إليها الموارد، على التوالي.</li>
 </ul>
-<p>بمجرد تغيير تكوين مجموعة الموارد، سيقوم Milvus بتعديل موارد عقدة الاستعلام الحالية قدر الإمكان وفقًا للتكوين الجديد، مما يضمن أن جميع مجموعات الموارد ستستوفي في النهاية الشرط التالي:</p>
+<p>بمجرد تغيير تكوين مجموعة الموارد، سيقوم Milvus بتعديل موارد عقدة الاستعلام الحالية قدر الإمكان وفقًا للتكوين الجديد، مما يضمن أن جميع مجموعات الموارد تستوفي في النهاية الشرط التالي:</p>
 <p><code translate="no">.requests.nodeNum &lt; nodeNumOfResourceGroup &lt; .limits.nodeNum.</code></p>
 <p>باستثناء الحالات التالية:</p>
 <ul>
-<li>عندما يكون عدد عقد الاستعلام (QueryNodes) في مجموعة Milvus غير كافٍ، أي عندما يكون عدد عقد الاستعلام ( <code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code>)، فستكون هناك دائمًا مجموعات موارد تفتقر إلى عدد كافٍ من عقد الاستعلام.</li>
+<li>عندما يكون عدد عقد الاستعلام (QueryNodes) في مجموعة Milvus غير كافٍ، أي <code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code> ، ستكون هناك دائمًا مجموعات موارد تفتقر إلى عدد كافٍ من عقد الاستعلام.</li>
 <li>عندما يكون عدد عقد الاستعلام (QueryNodes) في مجموعة Milvus زائدًا، أي <code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code> ، فسيتم دائمًا وضع عقد الاستعلام الزائدة في <strong>__default_resource_group</strong> أولاً.</li>
 </ul>
 <p>وبالطبع، إذا تغير عدد عقد الاستعلام (QueryNodes) في المجموعة، فسيحاول Milvus باستمرار التكيف لتلبية الشروط النهائية. لذلك، يمكنك أولاً تطبيق تغييرات تكوين مجموعة الموارد ثم إجراء توسيع نطاق عقد الاستعلام (QueryNode).</p>
@@ -216,7 +216,7 @@ except Exception:
 </span><button class="copy-code-btn"></button></code></pre></li>
 </ol>
 <p>لمزيد من التفاصيل، يرجى الرجوع إلى <a href="https://github.com/milvus-io/pymilvus/blob/v2.4.3/examples/resource_group_declarative_api.py">الأمثلة ذات الصلة في pymilvus</a></p>
-<h2 id="A-good-practice-to-manage-cluster-scaling" class="common-anchor-header">ممارسة جيدة لإدارة توسيع نطاق المجموعة<button data-href="#A-good-practice-to-manage-cluster-scaling" class="anchor-icon" translate="no">
+<h2 id="A-good-practice-to-manage-cluster-scaling" class="common-anchor-header">ممارسة جيدة لإدارة توسيع نطاق الكتلة<button data-href="#A-good-practice-to-manage-cluster-scaling" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -235,7 +235,7 @@ except Exception:
 فيما يلي ممارسة جيدة لإدارة عقد الاستعلام (QueryNodes) في بيئة سحابية:</p>
 <ol>
 <li><p>بشكل افتراضي، يقوم Milvus بإنشاء <strong>__default_resource_group</strong>. لا يمكن حذف مجموعة الموارد هذه، كما أنها تعمل كمجموعة الموارد الافتراضية للتحميل لجميع المجموعات، ويتم دائمًا تخصيص عقد الاستعلام الزائدة لها. لذلك، يمكننا إنشاء مجموعة موارد معلقة لاحتواء موارد «QueryNode» غير المستخدمة، مما يمنع احتلال موارد «QueryNode» من قبل مجموعة <strong> الموارد __default_resource_group</strong>.</p>
-<p>بالإضافة إلى ذلك، إذا طبقنا القيد <code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code> بصرامة، يمكننا التحكم بدقة في تخصيص عقدات الاستعلام (QueryNodes) في المجموعة. لنفترض أن هناك حاليًا عقدة استعلام واحدة فقط في المجموعة، ثم نقوم بتهيئة المجموعة.
+<p>بالإضافة إلى ذلك، إذا قمنا بفرض القيد <code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code> بصرامة، يمكننا التحكم بدقة في تخصيص عقد الاستعلام (QueryNodes) في المجموعة. لنفترض أن هناك حاليًا عقدة استعلام واحدة فقط في المجموعة، ثم نقوم بتهيئة المجموعة.
 فيما يلي مثال على الإعداد:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.client.types <span class="hljs-keyword">import</span> ResourceGroupConfig
 
@@ -333,7 +333,7 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h2><ul>
 <li>ترتبط النسخ المتماثلة لمجموعة واحدة ومجموعات الموارد بعلاقة N-to-N.</li>
-<li>عند تحميل نسخ متماثلة متعددة لمجموعة واحدة في مجموعة موارد واحدة، يتم توزيع عقد الاستعلام (QueryNodes) الخاصة بتلك المجموعة بالتساوي بين النسخ المتماثلة، مما يضمن ألا يتجاوز الفرق في عدد عقد الاستعلام لكل نسخة متماثلة 1.</li>
+<li>عند تحميل نسخ متماثلة متعددة لمجموعة واحدة في مجموعة موارد واحدة، يتم توزيع عقد الاستعلام (QueryNodes) لتلك المجموعة بالتساوي بين النسخ المتماثلة، مما يضمن ألا يتجاوز الفرق في عدد عقد الاستعلام لكل نسخة متماثلة 1.</li>
 </ul>
 <h1 id="Whats-next" class="common-anchor-header">الخطوة التالية<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

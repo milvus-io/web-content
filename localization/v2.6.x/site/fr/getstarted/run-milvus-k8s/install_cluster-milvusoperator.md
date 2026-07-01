@@ -184,7 +184,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 <li><strong>Nœud de streaming</strong>: activé pour un traitement amélioré des données</li>
 <li><strong>Coordinateur Mix</strong>: composants de coordination consolidés pour une efficacité accrue</li>
 </ul>
-<p>Pour personnaliser ces paramètres, nous vous recommandons d’utiliser <a href="https://milvus.io/tools/sizing">l’outil de dimensionnement Milvus</a> afin d’ajuster les configurations en fonction de la taille réelle de vos données, puis de télécharger le fichier YAML correspondant. Pour en savoir plus sur les paramètres de configuration, consultez <a href="https://milvus.io/docs/system_configuration.md">la liste de contrôle des configurations système Milvus</a>.</p>
+<p>Pour personnaliser ces paramètres, nous vous recommandons d’utiliser <a href="https://milvus.io/tools/sizing">l’outil de dimensionnement Milvus</a> afin d’ajuster les configurations en fonction de la taille réelle de vos données, puis de télécharger le fichier YAML correspondant. Pour en savoir plus sur les paramètres de configuration, consultez <a href="https://milvus.io/docs/system_configuration.md">la liste de contrôle des configurations système de Milvus</a>.</p>
 <div class="alert note">
 <ul>
 <li>Le nom de la version ne doit contenir que des lettres, des chiffres et des tirets. Les points ne sont pas autorisés dans le nom de la version.</li>
@@ -308,7 +308,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
     </button></h2><p>Vous pouvez afficher et mettre à jour les configurations de votre cluster Milvus en exécutant la commande ` <code translate="no">patch</code> ` comme suit :</p>
 <ol>
 <li><p>Exécutez la commande suivante pour prévisualiser les configurations proposées.</p>
-<p>L'exemple suivant part du principe que vous souhaitez mettre à jour le paramètre ` <code translate="no">spec.components.disableMetric</code> ` pour le définir sur <code translate="no">false</code> ms.</p>
+<p>L'exemple suivant part du principe que vous souhaitez mettre à jour le paramètre ` <code translate="no">spec.components.disableMetric</code> ` pour le définir à <code translate="no">false</code> ms.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl patch milvus my-release --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;merge&#x27;</span>\
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span> \
   --dry-run=client -o yaml</span>
@@ -425,7 +425,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 </ul></li>
 <li><p>Découvrez <a href="/docs/fr/v2.6.x/milvus-webui.md">Milvus WebUI</a>, une interface web intuitive pour la surveillance et la gestion de Milvus.</p></li>
 <li><p>Découvrez <a href="/docs/fr/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, un outil open source dédié aux sauvegardes de données Milvus.</p></li>
-<li><p>Découvrez <a href="/docs/fr/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, un outil open source permettant le débogage de Milvus et la mise à jour dynamique des configurations.</p></li>
+<li><p>Découvrez <a href="/docs/fr/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, un outil open source permettant le débogage de Milvus et les mises à jour dynamiques de la configuration.</p></li>
 <li><p>Découvrez <a href="https://github.com/zilliztech/attu">Attu</a>, un outil GUI open source permettant une gestion intuitive de Milvus.</p></li>
 <li><p><a href="/docs/fr/v2.6.x/monitor.md">Surveillez Milvus avec Prometheus</a>.</p></li>
 </ul>

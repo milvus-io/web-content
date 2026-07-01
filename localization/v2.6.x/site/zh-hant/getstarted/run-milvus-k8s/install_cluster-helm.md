@@ -62,7 +62,7 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>安裝前請<a href="/docs/zh-hant/v2.6.x/prerequisite-helm.md">先確認硬體與軟體需求</a>。</p></li>
-<li><p>在安裝 Milvus 之前，建議使用<a href="https://milvus.io/tools/sizing">Milvus 規格規劃工具，</a>根據您的資料量估算硬體需求。這有助於確保您的 Milvus 安裝能獲得最佳效能與資源分配。</p></li>
+<li><p>在安裝 Milvus 之前，建議使用<a href="https://milvus.io/tools/sizing">Milvus 規格評估工具，</a>根據您的資料量估算硬體需求。這有助於確保您的 Milvus 安裝能獲得最佳效能與資源分配。</p></li>
 </ul>
 <div class="alert note">
 <p>若在拉取映像檔時遇到任何問題，請透過<a href="mailto:community@zilliz.com">community@zilliz.com</a>聯絡我們，並提供問題詳情，我們將為您提供必要的支援。</p>
@@ -258,7 +258,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>連線詳細資訊：</strong></p>
 <ul>
-<li><strong>本地端連線</strong>：<code translate="no">localhost:27017</code></li>
+<li><strong>本地端連接</strong>：<code translate="no">localhost:27017</code></li>
 <li><strong>Milvus 預設埠</strong>：<code translate="no">19530</code></li>
 </ul>
 <div class="alert note">
@@ -323,7 +323,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 內建名為 Milvus WebUI 的圖形化使用者介面工具，您可透過瀏覽器存取。Milvus WebUI 透過簡單直覺的介面，提升系統的可觀察性。您可以使用 Milvus WebUI 觀察 Milvus 各元件及依賴項的統計資料與指標、檢查資料庫與收集項的詳細資訊，並列出詳細的 Milvus 配置。 有關 Milvus WebUI 的詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/milvus-webui.md">Milvus WebUI</a></p>
+    </button></h2><p>Milvus 內建名為 Milvus WebUI 的圖形化使用者介面工具，您可透過瀏覽器存取。Milvus WebUI 透過簡單直覺的介面，提升系統的可觀察性。您可以使用 Milvus WebUI 觀察 Milvus 各元件與依賴項的統計資料和指標、檢查資料庫與收集項的詳細資訊，並列出詳細的 Milvus 設定。 有關 Milvus WebUI 的詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/milvus-webui.md">Milvus WebUI</a></p>
 <p>若要啟用對 Milvus WebUI 的存取，您需要將代理 pod 進行端口轉發至本機端口。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
@@ -367,7 +367,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <div class="alert note">
 <ul>
 <li>若要以獨立模式安裝 Milvus 實例（即所有 Milvus 元件均包含於單一 Pod 中），則應執行<code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false zilliztech/milvus &gt; milvus_manifest.yaml</code> ，以渲染獨立模式下 Milvus 實例的圖表範本。</li>
-<li>若要變更 Milvus 設定，請下載 <a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml"><code translate="no">value.yaml</code></a> 範本，在其中填入您所需的設定，並使用<code translate="no">helm template -f values.yaml my-release zilliztech/milvus &gt; milvus_manifest.yaml</code> 據此渲染 manifests 檔案。</li>
+<li>若要變更 Milvus 設定，請下載 <a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml"><code translate="no">value.yaml</code></a> 範本，在其中填入您所需的設定，並使用<code translate="no">helm template -f values.yaml my-release zilliztech/milvus &gt; milvus_manifest.yaml</code> 據此渲染對應的清單。</li>
 </ul>
 </div>
 <h3 id="2-Download-image-pulling-script" class="common-anchor-header">2. 下載映像拉取腳本<button data-href="#2-Download-image-pulling-script" class="anchor-icon" translate="no">
@@ -444,7 +444,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f milvus_manifest.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>至此，您可以依照線上安裝指南的步驟<a href="#2-Check-Milvus-cluster-status">2</a>和<a href="#3-Forward-a-local-port-to-Milvus">3，</a>檢查叢集狀態並將本機埠轉發至 Milvus。</p>
+<p>至此，您可以依照線上安裝指南的步驟<a href="#2-Check-Milvus-cluster-status">2</a>和<a href="#3-Forward-a-local-port-to-Milvus">3，</a>檢查叢集狀態並將本地埠口轉發至 Milvus。</p>
 <h2 id="Upgrade-running-Milvus-cluster" class="common-anchor-header">升級正在運行的 Milvus 叢集<button data-href="#Upgrade-running-Milvus-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -517,7 +517,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li><a href="/docs/zh-hant/v2.6.x/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/zh-hant/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus-webui.md">Milvus WebUI</a>，這是專為 Milvus 可觀察性與管理設計的直覺式網頁介面。</p></li>
+<li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus-webui.md">Milvus WebUI</a>，這是專為 Milvus 可觀察性與管理而設計的直觀網頁介面。</p></li>
 <li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>，這是一款用於 Milvus 資料備份的開源工具。</p></li>
 <li><p>探索<a href="/docs/zh-hant/v2.6.x/birdwatcher_overview.md">Birdwatcher，這</a>是一款用於 Milvus 除錯與動態配置更新的開源工具。</p></li>
 <li><p>探索<a href="https://github.com/zilliztech/attu">Attu，這</a>是一款用於直觀管理 Milvus 的開源圖形化介面工具。</p></li>

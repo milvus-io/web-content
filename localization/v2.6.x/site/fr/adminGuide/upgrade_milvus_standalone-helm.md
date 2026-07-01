@@ -62,7 +62,7 @@ title: Mise à niveau de Milvus en mode autonome à l'aide d'un Helm Chart
 <li><strong>Nouveaux composants</strong>: introduction du nœud de streaming pour un traitement amélioré des données</li>
 <li><strong>Suppression de composants</strong>: <code translate="no">indexNode</code> a été supprimé et consolidé</li>
 </ul>
-<p>Ce processus de mise à niveau garantit une migration correcte vers la nouvelle architecture. Pour plus d’informations sur les modifications apportées à l’architecture, consultez <a href="/docs/fr/v2.6.x/architecture_overview.md">la présentation de l’architecture de Milvus</a>.</p>
+<p>Ce processus de mise à niveau garantit une migration correcte vers la nouvelle architecture. Pour plus d’informations sur les changements d’architecture, consultez <a href="/docs/fr/v2.6.x/architecture_overview.md">la présentation de l’architecture de Milvus</a>.</p>
 <h3 id="Requirements" class="common-anchor-header">Configuration requise<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

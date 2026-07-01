@@ -88,7 +88,7 @@ title: Atualizar o Milvus Standalone com o Milvus Operator
 <li>Se estiver atualmente a utilizar a v2.6.0-rc1 e precisar de preservar os seus dados, consulte <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">este guia da comunidade</a> para obter assistência na migração.</li>
 <li><strong>Deve</strong> atualizar para a v2.5.16 ou posterior antes de atualizar para a v2.6.17.</li>
 </ul>
-<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v2.6.17, deve manter a sua escolha atual de fila de mensagens. A mudança entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à mudança de sistemas de filas de mensagens estará disponível em versões futuras.</p>
+<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v2.6.17, deve manter a sua escolha atual de fila de mensagens. A mudança entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.</p>
 <h2 id="Upgrade-process" class="common-anchor-header">Processo de atualização<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

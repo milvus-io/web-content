@@ -19,7 +19,7 @@ summary: Pelajari cara mengonfigurasi penyimpanan pesan menggunakan Milvus Opera
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus menggunakan RocksMQ, Pulsar, atau Kafka untuk mengelola log perubahan terbaru, menghasilkan log aliran, dan menyediakan langganan log. Topik ini menjelaskan cara mengonfigurasi dependensi penyimpanan pesan saat Anda menginstal Milvus dengan Milvus Operator. Untuk detail lebih lanjut, lihat " <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">Mengonfigurasi Penyimpanan Pesan dengan Milvus Operator</a> " di repositori Milvus Operator.</p>
+    </button></h1><p>Milvus menggunakan RocksMQ, Pulsar, atau Kafka untuk mengelola log perubahan terbaru, menghasilkan log aliran, dan menyediakan langganan log. Topik ini menjelaskan cara mengonfigurasi dependensi penyimpanan pesan saat Anda menginstal Milvus dengan Milvus Operator. Untuk detail lebih lanjut, lihat " <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">Konfigurasi Penyimpanan Pesan dengan Milvus Operator</a> " di repositori Milvus Operator.</p>
 <p>Topik ini mengasumsikan bahwa Anda telah menerapkan Milvus Operator.</p>
 <div class="alert note">Lihat <a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">Deploy Milvus Operator</a> untuk informasi lebih lanjut. </div>
 <p>Anda perlu menentukan berkas konfigurasi untuk menggunakan Milvus Operator guna memulai kluster Milvus.</p>
@@ -105,7 +105,7 @@ summary: Pelajari cara mengonfigurasi penyimpanan pesan menggunakan Milvus Opera
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
 <h5 id="Key-configuration-options" class="common-anchor-header">Opsi konfigurasi utama:</h5><ul>
-<li><code translate="no">msgStreamType</code>: rocksmq: Secara eksplisit menetapkan RocksMQ sebagai antrian pesan</li>
+<li><code translate="no">msgStreamType</code>: rocksmq: Menetapkan RocksMQ secara eksplisit sebagai antrian pesan</li>
 <li><code translate="no">persistence.enabled</code>: Mengaktifkan penyimpanan persisten untuk data RocksMQ</li>
 <li><code translate="no">persistence.pvcDeletion</code>: Jika bernilai true, PVC akan dihapus saat instance Milvus dihapus</li>
 <li><code translate="no">persistentVolumeClaim.spec</code>: Spesifikasi PVC Kubernetes standar</li>
@@ -162,7 +162,7 @@ summary: Pelajari cara mengonfigurasi penyimpanan pesan menggunakan Milvus Opera
         ></path>
       </svg>
     </button></h3><p><code translate="no">external</code> menandakan penggunaan layanan Pulsar eksternal.
-Kolom yang digunakan untuk mengonfigurasi layanan Pulsar eksternal meliputi:</p>
+Bidang yang digunakan untuk mengonfigurasi layanan Pulsar eksternal meliputi:</p>
 <ul>
 <li><code translate="no">external</code>:  Nilai " <code translate="no">true</code> " menunjukkan bahwa Milvus menggunakan layanan Pulsar eksternal.</li>
 <li><code translate="no">endpoints</code>: Titik akhir (endpoint) Pulsar.</li>

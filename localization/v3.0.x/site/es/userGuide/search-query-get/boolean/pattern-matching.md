@@ -80,7 +80,7 @@ res = client.query(
         ></path>
       </svg>
     </button></h2><p>Elige el operador más sencillo que exprese el patrón que necesitas.</p>
-<p>Si necesitas una coincidencia exacta de cadena, te recomendamos que utilices « <code translate="no">==</code> » en lugar de la coincidencia de patrones. Utiliza « <code translate="no">LIKE</code> » o «regex» solo cuando el filtro deba coincidir con un patrón.</p>
+<p>Si necesitas una coincidencia exacta de cadena, te recomendamos que utilices « <code translate="no">==</code> » en lugar de la coincidencia de patrones. Utiliza « <code translate="no">LIKE</code> » o «regex» solo cuando el filtro tenga que coincidir con un patrón.</p>
 <table>
 <thead>
 <tr><th>Requisito</th><th>Operador recomendado</th><th>Ejemplo</th><th>Descripción</th></tr>
@@ -92,7 +92,7 @@ res = client.query(
 <tr><td>Coincidencia simple por contenido</td><td><code translate="no">LIKE</code></td><td><code translate="no">description LIKE &quot;%vector database%&quot;</code></td><td>Coincide con valores que contengan « <code translate="no">vector database</code> » en cualquier parte de la cadena.</td></tr>
 <tr><td>Coincidencia con un código estructurado o un patrón de longitud fija</td><td><code translate="no">=~</code></td><td><code translate="no">code =~ &quot;E[0-9]{4}&quot;</code></td><td>Coincide con cadenas que, distinguiendo entre mayúsculas y minúsculas, contengan « <code translate="no">E</code> » seguido de cuatro dígitos, como « <code translate="no">E1001</code> ».</td></tr>
 <tr><td>Coincidencia de patrones sin distinción entre mayúsculas y minúsculas</td><td><code translate="no">=~</code> con <code translate="no">(?i)</code></td><td><code translate="no">message =~ &quot;(?i)error&quot;</code></td><td>Coincide con « <code translate="no">error</code> », « <code translate="no">ERROR</code> » u otras variantes de mayúsculas y minúsculas.</td></tr>
-<tr><td>Excluir valores que coincidan con un patrón de expresión regular</td><td><code translate="no">!~</code></td><td><code translate="no">message !~ &quot;^DEBUG&quot;</code></td><td>Excluye las cadenas que comienzan por <code translate="no">DEBUG</code>.</td></tr>
+<tr><td>Excluir valores que coincidan con un patrón de expresión regular</td><td><code translate="no">!~</code></td><td><code translate="no">message !~ &quot;^DEBUG&quot;</code></td><td>Excluye las cadenas que empiezan por <code translate="no">DEBUG</code>.</td></tr>
 </tbody>
 </table>
 <p>Utiliza « <code translate="no">LIKE</code> » para una coincidencia sencilla con comodines. Utiliza expresiones regulares cuando el patrón requiera clases de caracteres, repeticiones, alternativas como « <code translate="no">error|failed</code> », anclajes o coincidencias que no distingan entre mayúsculas y minúsculas.</p>
@@ -163,7 +163,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Utiliza « <code translate="no">LIKE</code> » para coincidencias de prefijo, sufijo, contenido y un solo carácter en una posición fija. « <code translate="no">LIKE</code> » no admite clases de caracteres como « <code translate="no">[0-9]</code> », alternancias como « <code translate="no">error|failed</code> », recuentos de repeticiones como « <code translate="no">{4}</code> », anclajes como « <code translate="no">^</code> » o « <code translate="no">$</code> », ni indicadores de no distinción entre mayúsculas y minúsculas como « <code translate="no">(?i)</code> ». Utiliza expresiones regulares para esos patrones.</p>
+    </button></h3><p>Utiliza « <code translate="no">LIKE</code> » para coincidencias de prefijo, sufijo, contenido y un solo carácter en una posición fija. « <code translate="no">LIKE</code> » no admite clases de caracteres como « <code translate="no">[0-9]</code> », alternancias como « <code translate="no">error|failed</code> », recuentos de repeticiones como « <code translate="no">{4}</code> », anclajes como « <code translate="no">^</code> » o « <code translate="no">$</code> », ni indicadores de no distinguir mayúsculas y minúsculas como « <code translate="no">(?i)</code> ». Utiliza expresiones regulares (regex) para esos patrones.</p>
 <p>Utiliza « <code translate="no">==</code> » para la igualdad exacta de una cadena completa. Utiliza « <code translate="no">LIKE</code> » solo cuando el filtro necesite una coincidencia con comodines.</p>
 <h2 id="Use-regex" class="common-anchor-header">Utiliza expresiones regulares<button data-href="#Use-regex" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -228,7 +228,7 @@ res = client.query(
 <p>Al buscar metacaracteres de expresiones regulares de forma literal, escápalos en el patrón de expresión regular. Por ejemplo, para buscar un punto literal (<code translate="no">\.</code> en una expresión regular), escribe <code translate="no">\\.</code> en una cadena de filtro de Python:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;email =~ &quot;@gmail\\.com$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Nota: Los filtros de expresiones regulares de Milvus siguen la sintaxis RE2. Si un patrón de expresión regular utiliza una sintaxis que RE2 no admite o que es inválida por cualquier otro motivo, Milvus rechaza la expresión del filtro. Para obtener más detalles sobre los metacaracteres de expresiones regulares, los indicadores y el comportamiento de coincidencia, consulta la referencia <a href="https://github.com/google/re2/wiki/syntax">de sintaxis RE2</a>.</p>
+<p>Nota: Los filtros de expresiones regulares de Milvus siguen la sintaxis RE2. Si un patrón de expresión regular utiliza una sintaxis que RE2 no admite o que no es válida por cualquier otro motivo, Milvus rechaza la expresión del filtro. Para obtener más detalles sobre los metacaracteres de expresiones regulares, los indicadores y el comportamiento de coincidencia, consulta la referencia <a href="https://github.com/google/re2/wiki/syntax">de sintaxis RE2</a>.</p>
 <h3 id="Matching-behavior" class="common-anchor-header">Comportamiento de coincidencia<button data-href="#Matching-behavior" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

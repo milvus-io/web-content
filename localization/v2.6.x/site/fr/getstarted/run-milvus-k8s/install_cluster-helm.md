@@ -20,7 +20,7 @@ title: Installer Milvus Cluster avec Helm
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Cette page explique comment démarrer une instance Milvus dans Kubernetes à l'aide <a href="https://github.com/zilliztech/milvus-helm">des charts Helm de Milvus</a>.</p>
+    </button></h1><p>Cette page explique comment démarrer une instance Milvus dans Kubernetes à l'aide <a href="https://github.com/zilliztech/milvus-helm">des charts Helm Milvus</a>.</p>
 <h2 id="Overview" class="common-anchor-header">Présentation<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -86,7 +86,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <pre><code translate="no" class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Le référentiel Helm Charts de Milvus à l’adresse <code translate="no">https://github.com/milvus-io/milvus-helm</code> a été archivé. Nous utilisons désormais le nouveau référentiel à l’adresse <code translate="no">https://github.com/zilliztech/milvus-helm</code>. Le référentiel archivé est toujours disponible pour les charts jusqu’à la version 4.0.31, mais utilisez le nouveau référentiel pour les versions ultérieures.</p>
+<p>Le référentiel des Helm Charts de Milvus à l’adresse <code translate="no">https://github.com/milvus-io/milvus-helm</code> a été archivé. Nous utilisons désormais le nouveau référentiel à l’adresse <code translate="no">https://github.com/zilliztech/milvus-helm</code>. Le référentiel archivé est toujours disponible pour les charts jusqu’à la version 4.0.31, mais utilisez le nouveau référentiel pour les versions ultérieures.</p>
 </div>
 <p>Récupérez ensuite les Helm Charts Milvus depuis le dépôt comme suit :</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>helm repo update

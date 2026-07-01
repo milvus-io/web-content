@@ -53,8 +53,8 @@ beta: Milvus 3.0.x
 <li>In Milvus 3.0.0 unterstützen „ <code translate="no">TEXT</code> “-Felder „ <code translate="no">PHRASE_MATCH</code> “ nicht.</li>
 <li>In Milvus 3.0.0 unterstützen „ <code translate="no">TEXT</code> “-Felder keine Standardwerte.</li>
 <li>In Milvus 3.0.0 werden „ <code translate="no">TEXT</code> “-Felder in externen Sammlungen nicht unterstützt.</li>
-<li>In Milvus 3.0.0 unterstützen „ <code translate="no">TEXT</code> “-Felder keine skalaren Indizes.</li>
-<li><code translate="no">TEXT</code> ist nicht für die reguläre Metadatenfilterung vorgesehen. Wenn Sie nach Metadaten mit kurzen Zeichenfolgen filtern müssen und der Feldwert innerhalb der Längenbeschränkung von „ <code translate="no">VARCHAR</code> “ liegt, verwenden Sie „ <code translate="no">VARCHAR</code> “.</li>
+<li>In Milvus 3.0.0 unterstützen „ <code translate="no">TEXT</code> “-Felder keine Skalarindizes.</li>
+<li><code translate="no">TEXT</code> ist nicht für die reguläre Metadatenfilterung vorgesehen. Wenn Sie nach Metadaten in Form kurzer Zeichenfolgen filtern müssen und der Feldwert innerhalb der Längenbeschränkung von „ <code translate="no">VARCHAR</code> “ liegt, verwenden Sie „ <code translate="no">VARCHAR</code> “.</li>
 </ul>
 <h2 id="Choose-TEXT-or-VARCHAR" class="common-anchor-header">Wählen Sie TEXT oder VARCHAR<button data-href="#Choose-TEXT-or-VARCHAR" class="anchor-icon" translate="no">
       <svg translate="no"

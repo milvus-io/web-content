@@ -35,7 +35,7 @@ title: 管理资源组
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>一个资源组可以包含 Milvus 集群中的部分或全部查询节点。 您可以根据自身需求，灵活决定如何在资源组之间分配查询节点。例如，在多集合场景中，您可以将适当数量的查询节点分配给每个资源组，并将Collection加载到不同的资源组中，从而使每个Collection内的操作在物理上与其他Collection中的操作相互独立。</p>
+    </button></h2><p>一个资源组可以包含 Milvus 集群中的部分或全部查询节点。 您可以根据自身需求，灵活决定如何在资源组之间分配查询节点。例如，在多集合场景中，您可以将适当数量的查询节点分配给每个资源组，并将Collections加载到不同的资源组中，从而使每个集合内的操作在物理上与其他其他集合的操作相互独立。</p>
 <p>请注意，Milvus 实例在启动时会维护一个默认资源组来容纳所有查询节点，并将其命名为<strong>__default_resource_group</strong>。</p>
 <p>从 2.4.1 版本开始，Milvus 提供了声明式资源组 API，而旧版资源组 API 已被废弃。新的声明式 API 使用户能够实现幂等性，从而更轻松地在云原生环境中进行二次开发。</p>
 <h2 id="Concepts-of-resource-group" class="common-anchor-header">资源组的概念<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
@@ -182,7 +182,7 @@ partition = <span class="hljs-string">&quot;Novels&quot;</span>
 milvus_client.load_partitions(collection, [partition], replica_number=<span class="hljs-number">2</span>, _resource_groups=resource_groups)
 <button class="copy-code-btn"></button></code></pre>
 <p>请注意，<code translate="no">_resource_groups</code> 是可选参数，若未指定，Milvus 会将副本加载到默认资源组中的查询节点上。</p>
-<p>若要让 Milvus 将 Collection 的每个副本加载到不同的资源组中，请确保资源组的数量与副本的数量相等。</p></li>
+<p>若要让 Milvus 将 Collection 的每个副本加载到不同的资源组中，请确保资源组的数量等于副本的数量。</p></li>
 <li><p>在资源组之间转移副本。</p>
 <p>Milvus 利用<a href="/docs/zh/v2.6.x/replica.md">副本</a>在分布于多个查询节点<a href="/docs/zh/v2.6.x/glossary.md#Segment">的分段之间</a>实现负载均衡。您可以按照以下步骤将 Collection 的某些副本从一个资源组移动到另一个资源组：</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
@@ -332,7 +332,7 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h2><ul>
 <li>单个 Collection 的副本与资源组之间存在 N 对 N 的关系。</li>
-<li>当单个 Collection 的多个副本被加载到同一个资源组中时，该资源组的查询节点会在各副本之间均匀分布，确保每个副本拥有的查询节点数量差异不超过 1。</li>
+<li>当单个Collection的多个副本被加载到同一个资源组中时，该资源组的查询节点会在各副本之间均匀分布，确保每个副本拥有的查询节点数量差异不超过 1。</li>
 </ul>
 <h1 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

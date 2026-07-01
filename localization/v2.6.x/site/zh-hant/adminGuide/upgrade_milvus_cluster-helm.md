@@ -88,7 +88,7 @@ title: 使用 Helm Chart 升級 Milvus 叢集
 <li>若您目前正在運行 v2.6.0-rc1 且需要保留資料，請參閱<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">此社群指南</a>以獲取遷移協助。</li>
 <li>在升級至 v2.6.17 之前，您<strong>必須先</strong>升級至 v2.5.16 或更新版本，並啟用<code translate="no">mixCoordinator</code> 功能。</li>
 </ul>
-<p><strong>訊息佇列限制</strong>：升級至 Milvus v2.6.17 時，您必須維持當前的訊息佇列選項。升級過程中不支援在不同的訊息佇列系統之間切換。未來版本將支援變更訊息佇列系統。</p>
+<p><strong>訊息佇列限制</strong>：升級至 Milvus v2.6.17 時，您必須維持當前的訊息佇列選擇。升級過程中不支援在不同的訊息佇列系統之間切換。未來版本將支援變更訊息佇列系統。</p>
 <div class="alert note">
 自 Milvus Helm 圖表版本 4.2.21 起，我們已將 pulsar-v3.x 圖表納入依賴項。為確保向後相容性，請將您的 Helm 升級至 v3.14 或更新版本，並務必在每次使用 `<code translate="no">helm upgrade</code>` 時加入 `<code translate="no">--reset-then-reuse-values</code> ` 選項。
 </div>

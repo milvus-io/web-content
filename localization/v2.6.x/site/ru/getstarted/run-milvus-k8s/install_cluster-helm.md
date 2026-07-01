@@ -271,7 +271,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li><strong>Автономное развертывание</strong>: при использовании автономного режима имя службы остаётся прежним</li>
 </ul>
 </div>
-<p><strong>Оставьте этот терминал открытым</strong> во время работы с Milvus. Теперь вы можете подключиться к Milvus с помощью любого SDK Milvus по адресу <code translate="no">localhost:27017</code>.</p>
+<p><strong>Оставьте этот терминал открытым</strong> во время использования Milvus. Теперь вы можете подключиться к Milvus с помощью любого SDK Milvus по адресу <code translate="no">localhost:27017</code>.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Необязательно) Обновление конфигураций Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -363,10 +363,10 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
     </button></h3><p>Выполните следующую команду, чтобы получить манифест Milvus.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm template my-release zilliztech/milvus &gt; milvus_manifest.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Вышеуказанная команда генерирует шаблоны диаграмм для кластера Milvus и сохраняет результат в файл манифеста с именем <code translate="no">milvus_manifest.yaml</code>. Используя этот манифест, вы можете установить кластер Milvus, при этом его компоненты и зависимости будут размещены в отдельных подах.</p>
+<p>Вышеуказанная команда генерирует шаблоны диаграмм для кластера Milvus и сохраняет результат в файл манифеста с именем <code translate="no">milvus_manifest.yaml</code>. Используя этот манифест, вы можете установить кластер Milvus с его компонентами и зависимостями в отдельных подах.</p>
 <div class="alert note">
 <ul>
-<li>Чтобы установить экземпляр Milvus в автономном режиме, при котором все компоненты Milvus находятся в одном поде, вам следует вместо этого выполнить команду ` <code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false zilliztech/milvus &gt; milvus_manifest.yaml</code> `, чтобы сгенерировать шаблоны чартов для экземпляра Milvus в автономном режиме.</li>
+<li>Чтобы установить экземпляр Milvus в автономном режиме, при котором все компоненты Milvus находятся в одном поде, вам следует вместо этого выполнить команду ` <code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false zilliztech/milvus &gt; milvus_manifest.yaml</code> `, чтобы сгенерировать шаблоны диаграмм для экземпляра Milvus в автономном режиме.</li>
 <li>Чтобы изменить настройки Milvus, загрузите <a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml"><code translate="no">value.yaml</code></a> шаблон, внесите в него нужные настройки и используйте команду <code translate="no">helm template -f values.yaml my-release zilliztech/milvus &gt; milvus_manifest.yaml</code> для соответствующего формирования манифеста.</li>
 </ul>
 </div>

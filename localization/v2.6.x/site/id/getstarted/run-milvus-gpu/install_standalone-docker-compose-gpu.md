@@ -2,7 +2,7 @@
 id: install_standalone-docker-compose-gpu.md
 label: Standalone (Docker Compose)
 related_key: Kubernetes
-summary: Pelajari cara menginstal klaster Milvus di Kubernetes.
+summary: Pelajari cara menginstal kluster Milvus di Kubernetes.
 title: Menjalankan Milvus dengan Dukungan GPU Menggunakan Docker Compose
 ---
 <h1 id="Run-Milvus-with-GPU-Support-Using-Docker-Compose" class="common-anchor-header">Menjalankan Milvus dengan Dukungan GPU Menggunakan Docker Compose<button data-href="#Run-Milvus-with-GPU-Support-Using-Docker-Compose" class="anchor-icon" translate="no">
@@ -138,7 +138,7 @@ Creating milvus-standalone ... done
 <ul>
 <li>Kontainer <strong>milvus-etcd</strong> tidak mengekspos port apa pun ke host dan memetakan datanya ke <strong>volumes/etcd</strong> di folder saat ini.</li>
 <li>Kontainer <strong>milvus-minio</strong> melayani port <strong>9090</strong> dan <strong>9091</strong> secara lokal dengan kredensial otentikasi default dan memetakan datanya ke <strong>volumes/minio</strong> di folder saat ini.</li>
-<li>Kontainer <strong>milvus-standalone</strong> melayani port <strong>19530</strong> secara lokal dengan pengaturan default dan memetakan datanya ke <strong>direktori volumes/milvus</strong> di folder saat ini.</li>
+<li>Kontainer <strong>milvus-standalone</strong> melayani port <strong>19530</strong> secara lokal dengan pengaturan default dan memetakan datanya ke <strong>volumes/milvus</strong> di folder saat ini.</li>
 </ul></li>
 </ul>
 <p>Anda dapat memeriksa apakah kontainer-kontainer tersebut aktif dan berjalan menggunakan perintah berikut:</p>

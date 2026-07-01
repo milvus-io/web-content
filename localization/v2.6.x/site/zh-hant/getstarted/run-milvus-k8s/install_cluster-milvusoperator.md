@@ -207,7 +207,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>執行以下指令以檢查 Milvus 叢集狀態</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get milvus my-release -o yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>當您的 Milvus 叢集準備就緒時，上述指令的輸出應類似如下所示。若「<code translate="no">status.status</code> 」欄位仍顯示為<code translate="no">Unhealthy</code> ，表示您的 Milvus 叢集仍在建立中。</p>
+<p>當您的 Milvus 叢集準備就緒時，上述命令的輸出應類似於以下內容。若「<code translate="no">status.status</code> 」欄位仍顯示為<code translate="no">Unhealthy</code> ，表示您的 Milvus 叢集仍在建立中。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -283,7 +283,7 @@ my-release-minio-3                               1/1     Running   0          2m
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>若需，您可在上述指令中使用<code translate="no">:19530</code> 取代<code translate="no">27017:19530</code> ，讓<code translate="no">kubectl</code> 為您自動分配一個本地端埠，如此便無需自行處理埠號衝突問題。</p>
-<p>預設情況下，kubectl 的端口轉發僅監聽<code translate="no">localhost</code> 。若要讓 Milvus 監聽選定的或所有 IP 位址，請使用<code translate="no">address</code> 標誌。以下指令會讓端口轉發監聽主機上的所有 IP 位址。</p>
+<p>預設情況下，kubectl 的端口轉發僅監聽<code translate="no">localhost</code> 。若要讓 Milvus 監聽選定的或所有 IP 位址，請使用<code translate="no">address</code> 旗標。以下指令會讓端口轉發監聽主機上的所有 IP 位址。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
@@ -332,7 +332,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 內建名為 Milvus WebUI 的圖形化使用者介面 (GUI) 工具，您可透過瀏覽器存取。Milvus WebUI 透過簡單直覺的介面，提升系統的可觀察性。您可以使用 Milvus WebUI 觀察 Milvus 各元件及其依賴項的統計資料與指標、檢查資料庫與收集項的詳細資訊，並列出詳細的 Milvus 設定。 有關 Milvus WebUI 的詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/milvus-webui.md">Milvus WebUI</a></p>
+    </button></h2><p>Milvus 內建名為 Milvus WebUI 的圖形化使用者介面 (GUI) 工具，您可透過瀏覽器存取。Milvus WebUI 透過簡單直觀的介面，提升系統的可觀察性。您可以使用 Milvus WebUI 觀察 Milvus 各元件及其依賴項的統計資料與指標、檢查資料庫與收集項的詳細資訊，並列出詳細的 Milvus 設定。 有關 Milvus WebUI 的詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/milvus-webui.md">Milvus WebUI</a></p>
 <p>若要啟用對 Milvus WebUI 的存取，您需要將代理 pod 進行端口轉發至本機端口。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091

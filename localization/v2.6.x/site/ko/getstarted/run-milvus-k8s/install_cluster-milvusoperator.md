@@ -185,7 +185,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 <p>이러한 설정을 사용자 정의하려면 <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool을</a> 사용하여 실제 데이터 크기에 따라 구성을 조정한 후, 해당 YAML 파일을 다운로드하는 것을 권장합니다. 구성 매개변수에 대한 자세한 내용은 <a href="https://milvus.io/docs/system_configuration.md">Milvus 시스템 구성 체크리스트를</a> 참조하십시오.</p>
 <div class="alert note">
 <ul>
-<li>릴리스 이름에는 영문자, 숫자 및 대시만 포함되어야 합니다. 릴리스 이름에는 점(.)을 사용할 수 없습니다.</li>
+<li>릴리스 이름에는 영문자, 숫자 및 하이픈만 포함되어야 합니다. 릴리스 이름에 점은 사용할 수 없습니다.</li>
 <li>모든 구성 요소가 단일 포드 내에 포함되는 독립 실행 모드(standalone mode)로 Milvus 인스턴스를 배포할 수도 있습니다. 이를 위해서는 위 명령어의 구성 파일 URL을 다음과 같이 변경하십시오. <code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
 </ul>
 </div>
@@ -283,7 +283,7 @@ my-release-minio-3                               1/1     Running   0          2m
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>선택적으로, 위 명령어에서 <code translate="no">27017:19530</code> 대신 <code translate="no">:19530</code> 을 사용하여 <code translate="no">kubectl</code> 가 로컬 포트를 자동으로 할당하도록 할 수 있습니다. 이렇게 하면 포트 충돌을 직접 관리할 필요가 없습니다.</p>
-<p>기본적으로 kubectl의 포트 포워딩은 <code translate="no">localhost</code> 에서만 수신 대기합니다. Milvus가 선택한 IP 주소나 모든 IP 주소에서 수신 대기하도록 하려면 <code translate="no">address</code> 플래그를 사용하십시오. 다음 명령어는 포트 포워딩이 호스트 머신의 모든 IP 주소에서 수신 대기하도록 설정합니다.</p>
+<p>기본적으로 kubectl의 포트 포워딩은 <code translate="no">localhost</code> 에서만 수신 대기합니다. Milvus가 선택한 IP 주소 또는 모든 IP 주소에서 수신 대기하도록 하려면 <code translate="no">address</code> 플래그를 사용하십시오. 다음 명령어는 포트 포워딩이 호스트 머신의 모든 IP 주소에서 수신 대기하도록 설정합니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
@@ -332,7 +332,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus에는 브라우저를 통해 액세스할 수 있는 Milvus WebUI라는 내장 GUI 도구가 함께 제공됩니다. Milvus WebUI는 간단하고 직관적인 인터페이스를 통해 시스템 가시성을 향상시킵니다. Milvus WebUI를 사용하여 Milvus의 구성 요소 및 종속성에 대한 통계와 메트릭을 관찰하고, 데이터베이스 및 컬렉션 세부 정보를 확인하며, 자세한 Milvus 구성을 나열할 수 있습니다. Milvus Web UI에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/milvus-webui.md">Milvus WebUI를</a> 참조하십시오.</p>
+    </button></h2><p>Milvus에는 브라우저를 통해 액세스할 수 있는 Milvus WebUI라는 내장 GUI 도구가 함께 제공됩니다. Milvus WebUI는 간단하고 직관적인 인터페이스를 통해 시스템 가시성을 향상시킵니다. Milvus WebUI를 사용하여 Milvus의 구성 요소 및 종속성에 대한 통계와 메트릭을 관찰하고, 데이터베이스 및 컬렉션 세부 정보를 확인하며, Milvus의 상세 구성을 나열할 수 있습니다. Milvus Web UI에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/milvus-webui.md">Milvus WebUI를</a> 참조하십시오.</p>
 <p>Milvus WebUI에 액세스하려면 프록시 포드를 로컬 포트로 포트 포워딩해야 합니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091

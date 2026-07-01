@@ -35,7 +35,7 @@ title: التخزين الكائني
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>المزود / الخدمة</th><th style="text-align:center">مدعوم كوحدة تخزين كائنات Milvus</th></tr>
+<tr><th>المزود / الخدمة</th><th style="text-align:center">مدعوم كوحدة تخزين الكائنات في Milvus</th></tr>
 </thead>
 <tbody>
 <tr><td>MinIO</td><td style="text-align:center">✔️ (الافتراضي لعمليات النشر ذاتية الاستضافة)</td></tr>

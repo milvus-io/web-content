@@ -48,7 +48,7 @@ title: Stockage d'objets
 <tr><td>Autres solutions de stockage compatibles S3</td><td style="text-align:center">✔️</td></tr>
 </tbody>
 </table>
-<p>Pour plus de détails sur la configuration, consultez les sections « <a href="/docs/fr/deploy_s3.md">Configurer le stockage d’objets avec Docker Compose ou Helm</a> » et « <a href="/docs/fr/object_storage_operator.md">Configurer le stockage d’objets avec Milvus Operator</a> ».</p>
+<p>Pour plus de détails sur la configuration, consultez les sections « <a href="/docs/fr/deploy_s3.md">Configurer le stockage d'objets avec Docker Compose ou Helm</a> » et « <a href="/docs/fr/object_storage_operator.md">Configurer le stockage d'objets avec Milvus Operator</a> ».</p>
 <h2 id="Additional-requirements-when-using-embedded-Woodpecker" class="common-anchor-header">Exigences supplémentaires lors de l’utilisation de Woodpecker intégré<button data-href="#Additional-requirements-when-using-embedded-Woodpecker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

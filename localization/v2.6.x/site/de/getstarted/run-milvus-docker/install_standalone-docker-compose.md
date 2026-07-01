@@ -87,7 +87,7 @@ Creating milvus-standalone ... done
 <ul>
 <li>Der Container <strong>„milvus-etcd“</strong> stellt keine Ports für den Host bereit und ordnet seine Daten dem Verzeichnis <strong>„volumes/etcd“</strong> im aktuellen Ordner zu.</li>
 <li>Der Container <strong>„milvus-minio“</strong> stellt lokal die Ports <strong>9090</strong> und <strong>9091</strong> mit den Standard-Anmeldedaten bereit und ordnet seine Daten dem Verzeichnis <strong>„volumes/minio“</strong> im aktuellen Ordner zu.</li>
-<li>Der Container <strong>„milvus-standalone“</strong> bedient lokal die Ports <strong>19530</strong> mit den Standardeinstellungen und speichert seine Daten im Verzeichnis <strong>„volumes/milvus“</strong> im aktuellen Ordner.</li>
+<li>Der Container <strong>„milvus-standalone“</strong> stellt lokal die Ports <strong>19530</strong> mit den Standardeinstellungen bereit und ordnet seine Daten dem Verzeichnis <strong>„volumes/milvus“</strong> im aktuellen Ordner zu.</li>
 </ul></li>
 </ul>
 <p>Mit dem folgenden Befehl können Sie überprüfen, ob die Container aktiv sind:</p>
@@ -191,7 +191,7 @@ EOF
 </ul></li>
 <li><p>Entdecken Sie <a href="/docs/de/v2.6.x/milvus-webui.md">Milvus WebUI</a>, eine intuitive Weboberfläche für die Überwachung und Verwaltung von Milvus.</p></li>
 <li><p>Entdecken Sie <a href="/docs/de/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, ein Open-Source-Tool für Milvus-Datensicherungen.</p></li>
-<li><p>Entdecken Sie <a href="/docs/de/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zur Fehlerbehebung bei Milvus und für dynamische Konfigurationsaktualisierungen.</p></li>
+<li><p>Entdecken Sie <a href="/docs/de/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zur Fehlerbehebung in Milvus und für dynamische Konfigurationsaktualisierungen.</p></li>
 <li><p>Entdecken Sie <a href="https://github.com/zilliztech/attu">Attu</a>, ein Open-Source-GUI-Tool für die intuitive Verwaltung von Milvus.</p></li>
 <li><p><a href="/docs/de/v2.6.x/monitor.md">Überwachen Sie Milvus mit Prometheus</a>.</p></li>
 </ul>

@@ -4,7 +4,7 @@ label: Helm
 order: 1
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
-summary: تعرف على كيفية ترقية الإصدار المستقل من Milvus باستخدام Helm Chart.
+summary: تعرف على كيفية ترقية الإصدار المستقل من Milvus باستخدام مخطط Helm.
 title: ترقية Milvus Standalone باستخدام Helm Chart
 ---
 <div class="tab-wrapper"><a href="/docs/ar/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/ar/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>OperatorHelmDocker Compose</a></div>
@@ -90,7 +90,7 @@ title: ترقية Milvus Standalone باستخدام Helm Chart
 </ul>
 <p><strong>قيود قائمة انتظار الرسائل</strong>: عند الترقية إلى Milvus v2.6.17، يجب الحفاظ على اختيارك الحالي لقائمة انتظار الرسائل. لا يتم دعم التبديل بين أنظمة قوائم انتظار الرسائل المختلفة أثناء الترقية. سيتوفر دعم تغيير أنظمة قوائم انتظار الرسائل في الإصدارات المستقبلية.</p>
 <div class="alert note">
-بدءًا من الإصدار 4.2.21 من مخطط Helm الخاص بـ Milvus، أدخلنا مخطط pulsar-v3.x كعنصر تابع. من أجل التوافق مع الإصدارات السابقة، يرجى ترقية Helm إلى الإصدار v3.14 أو أحدث، وتأكد من إضافة الخيار <code translate="no">--reset-then-reuse-values</code> كلما استخدمت <code translate="no">helm upgrade</code>.
+بدءًا من الإصدار 4.2.21 من مخطط Helm الخاص بـ Milvus، أدخلنا مخطط pulsar-v3.x كاعتماد. من أجل التوافق مع الإصدارات السابقة، يرجى ترقية Helm إلى الإصدار v3.14 أو أحدث، وتأكد من إضافة الخيار <code translate="no">--reset-then-reuse-values</code> كلما استخدمت <code translate="no">helm upgrade</code>.
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">عملية الترقية<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"

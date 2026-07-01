@@ -1490,6 +1490,12 @@
     "order": 9,
     "children": [
       {
+        "label": "Overview",
+        "id": "data-infra-integration-overview.md",
+        "order": 0,
+        "children": []
+      },
+      {
         "label": "Metadata",
         "id": "metadata",
         "isMenu": true,
@@ -1516,9 +1522,33 @@
         "order": 4,
         "children": [
           {
+            "label": "Overview",
+            "id": "mqtype-overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
             "label": "Woodpecker",
             "id": "woodpecker.md",
             "order": 1,
+            "children": []
+          },
+          {
+            "label": "Pulsar",
+            "id": "mq_pulsar.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Kafka",
+            "id": "mq_kafka.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "RocksMQ",
+            "id": "mq_rocksmq.md",
+            "order": 4,
             "children": []
           }
         ]

@@ -119,7 +119,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Добавьте дополнительные настройки, чтобы переопределить настройки по умолчанию.
-В приведенном ниже описании предполагается, что вам необходимо переопределить настройки по умолчанию в файле <code translate="no">proxy.healthCheckTimeout</code>. Информацию о соответствующих элементах конфигурации см. в разделе <a href="/docs/ru/v2.6.x/system_configuration.md">«Конфигурация системы</a>».</p>
+Ниже предполагается, что вам необходимо переопределить настройки по умолчанию в файле ` <code translate="no">proxy.healthCheckTimeout</code>`. Информацию о соответствующих элементах конфигурации см. в разделе <a href="/docs/ru/v2.6.x/system_configuration.md">«Конфигурация системы</a>».</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; /milvus/configs/user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:

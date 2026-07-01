@@ -381,7 +381,7 @@ docker restart milvus-standalone
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>これにより、Woodpeckerは専用のStatefulSet（<code translate="no">my-release-milvus-woodpecker</code> 、デフォルトで4つのレプリカ）としてデプロイされ、ヘッドレスサービスによってフロントエンドが構成されます。ポート<code translate="no">18080</code> （サービス）、<code translate="no">17946</code> （ゴシップ）、<code translate="no">9091</code> （メトリクス）でゴシップクラスタリングが行われ、ストレージバックエンドにはMinIOが使用されます。 このサービスには<strong>3ノード</strong>のクォーラムが必要です。デフォルトの<strong>レプリカ数4は</strong>、1ノードの障害を許容しつつクォーラムを維持するため、<code translate="no">woodpecker.replicaCount</code> を3未満に設定しないでください。このクラスタには、別途<code translate="no">woodpecker</code> のポッドセットが含まれます：</p>
+<p>これにより、Woodpeckerは専用のStatefulSet（<code translate="no">my-release-milvus-woodpecker</code> 、デフォルトで4つのレプリカ）としてデプロイされ、ヘッドレスサービスによってフロントエンドが構成されます。ポート<code translate="no">18080</code> （サービス）、<code translate="no">17946</code> （ゴシップ）、<code translate="no">9091</code> （メトリクス）でゴシップクラスタリングが行われ、ストレージバックエンドにはMinIOが使用されます。 このサービスには<strong>3ノード</strong>のクォーラムが必要です。デフォルトの<strong>レプリカ数4は</strong>、1ノードの障害を許容しつつクォーラムを維持するため、<code translate="no">woodpecker.replicaCount</code> を3未満に設定しないでください。このクラスターには、別途<code translate="no">woodpecker</code> のポッドセットが含まれます：</p>
 <pre><code translate="no"><span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">0</span>
 <span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">1</span>
 <span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">2</span>
@@ -405,7 +405,7 @@ docker restart milvus-standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Woodpeckerのスループットおよびレイテンシのプロファイルは、<strong>組み込み</strong>モードと<strong>サービス</strong>モード（Milvus 3.0の機能）で異なります。以下のガイダンスはモードごとに整理されています。</p>
+    </button></h2><p>Woodpeckerのスループットとレイテンシの特性は、<strong>組み込み</strong>モードと<strong>サービス</strong>モード（Milvus 3.0の新機能）で異なります。以下のガイダンスはモードごとに分類されています。</p>
 <h3 id="Embedded-mode" class="common-anchor-header">組み込みモード<button data-href="#Embedded-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -425,7 +425,7 @@ docker restart milvus-standalone
 <ul>
 <li>ストレージ側
 <ul>
-<li><strong>オブジェクトストレージ（MinIO／S3互換）</strong>：同時実行数とオブジェクトサイズを増やします（極小のオブジェクトは避けてください）。ネットワークおよびバケットの帯域幅制限に注意してください。SSD上の単一のMinIOノードでは、ローカルで100 MB/s程度が上限となることが多いですが、単一のEC2からS3への転送ではGB/sに達することがあります。</li>
+<li><strong>オブジェクトストレージ（MinIO／S3互換）</strong>：同時実行数とオブジェクトサイズを増やします（極小のオブジェクトは避けてください）。ネットワークおよびバケットの帯域幅制限に注意してください。SSD上の単一のMinIOノードでは、ローカルで100 MB/s程度が上限となる場合が多いですが、単一のEC2からS3への転送ではGB/sに達することがあります。</li>
 <li><strong>ローカル／共有ファイルシステム（ローカル）</strong>：NVMeや高速ディスクを優先する。ファイルシステムが小規模な書き込みやfsyncのレイテンシに適切に対応していることを確認する。</li>
 </ul></li>
 <li>Woodpeckerの調整パラメータ
@@ -437,7 +437,7 @@ docker restart milvus-standalone
 <li>クライアント／アプリケーション側
 <ul>
 <li>バッチサイズを大きくし、同時書き込みを行うライター/クライアントの数を増やしてください。</li>
-<li>頻繁な小規模な書き込みを避けるため、リフレッシュ／インデックス構築のタイミング（トリガー前にバッチをまとめる）を制御してください。</li>
+<li>頻繁な小規模な書き込みを避けるため、リフレッシュやインデックス構築のタイミング（トリガー前にバッチをまとめる）を制御してください。</li>
 </ul></li>
 </ul>
 <h3 id="Service-mode-Milvus-30+" class="common-anchor-header">サービスモード（Milvus 3.0 以降）<button data-href="#Service-mode-Milvus-30+" class="anchor-icon" translate="no">
@@ -549,10 +549,10 @@ batch_count = <span class="hljs-number">2000</span>
     </button></h3><p>サービスモードでは、コストを低く抑えつつ、<strong>ミリ秒レベルの書き込みレイテンシ</strong>（従来の3レプリカ構成のローカルディスクWALと同等）を実現します。一般的な3レプリカのAZ横断展開において、書き込みレイテンシはミリ秒単位に収まります。これは以下の仕組みによって達成されます：</p>
 <ul>
 <li><strong>1 RTT クォーラム書き込み</strong>— クライアント主導型レプリケーションでは、1回のラウンドトリップ（RTT）以内にクォーラム書き込みを完了します。これにより、AZをまたぐトラフィックは2つのレプリカ分のデータ量に固定されます（これに対し、ブローカー／リーダーベースのレプリケーションでは、通常、約1/3分の追加のAZ間トラフィックが発生します）。</li>
-<li><strong>トポロジーを意識したシングルホップ読み取り</strong>— 各読み取りはブローカーを経由せずに最寄りのレプリカに直接行われるため、ブローカーベースのシステムに見られるランダムなAZ間読み取り（AZ間読み取りトラフィックの約2/3）を回避します。</li>
+<li><strong>トポロジーを意識したシングルホップ読み取り</strong>— 各読み取りはブローカーを経由せずに最も近いレプリカに直接行われるため、ブローカーベースのシステムに見られるランダムなAZ間読み取り（AZ間読み取りトラフィックの約2/3）を回避します。</li>
 <li><strong>セグメントのローリング後の即時オブジェクトストレージへのアップロード</strong>— 各セグメントはそのライフサイクル全体を追跡し、ローリングされるとすぐにオブジェクトストレージにアップロードされるため、レイテンシを犠牲にすることなく、ローカルディスクの占有容量とストレージコストを低く抑えることができる。</li>
 <li><strong>ノード間での継続的なレプリケーションなし</strong>— ログは共有ストレージとして機能するオブジェクトストレージに永続化されるため、フェイルオーバー時には生存しているレプリカのみを再アップロードします（ノード全体のコピーは行われません）。これにより、スケーリングがノード間レプリケーションの帯域幅に制限されることがなく、大規模なノード交換でもレプリケーションストームが発生しません。</li>
 </ul>
-<p>AZをまたぐ展開において、サービスモードでは、ブローカーベースのログシステムと比較して、AZ間ネットワーク<strong>トラフィックの書き込みを</strong>約<strong>1/3</strong>、<strong>読み取りを</strong>約<strong>2/3</strong>削減できます。詳細な設計およびコスト分析については、<a href="/docs/ja/woodpecker_architecture.md">「Woodpeckerアーキテクチャ」を</a>参照してください。</p>
+<p>AZをまたぐ展開において、サービスモードは、ブローカーベースのログシステムと比較して、AZ間ネットワーク<strong>トラフィックの書き込みを</strong>約<strong>1/3</strong>、<strong>読み取りを</strong>約<strong>2/3</strong>削減します。詳細な設計およびコスト分析については、<a href="/docs/ja/woodpecker_architecture.md">「Woodpeckerアーキテクチャ」を</a>参照してください。</p>
 <p>アーキテクチャ、デプロイメントモード（MemoryBuffer / QuorumBuffer）、およびパフォーマンスの詳細については、「<a href="/docs/ja/woodpecker_architecture.md">Woodpecker Architecture</a>」を参照してください。</p>
 <p>パラメータの詳細については、Woodpecker<a href="https://github.com/zilliztech/woodpecker">のGitHubリポジトリ</a>を参照してください。</p>

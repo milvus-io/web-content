@@ -84,11 +84,11 @@ title: 使用 Milvus Operator 升級 Milvus 獨立部署
 </ul>
 <p><strong>相容性要求：</strong></p>
 <ul>
-<li>Milvus v2.6.0-rc1 與 v2.6.17<strong>不相容</strong>。不支援直接從候選版本升級。</li>
+<li>Milvus v2.6.0-rc1 與 v2.6.17<strong>不相容</strong>。不支援直接從候選版本進行升級。</li>
 <li>若您目前正在運行 v2.6.0-rc1 且需要保留資料，請參閱<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">此社群指南</a>以獲取遷移協助。</li>
 <li>在升級至 v2.6.17 之前，您<strong>必須先</strong>升級至 v2.5.16 或更新版本。</li>
 </ul>
-<p><strong>訊息佇列限制</strong>：升級至 Milvus v2.6.17 時，您必須維持當前的訊息佇列設定。升級過程中不支援在不同的訊息佇列系統之間切換。未來版本將支援變更訊息佇列系統。</p>
+<p><strong>訊息佇列限制</strong>：升級至 Milvus v2.6.17 時，您必須維持當前的訊息佇列選項。升級過程中不支援在不同的訊息佇列系統之間切換。未來版本將支援變更訊息佇列系統。</p>
 <h2 id="Upgrade-process" class="common-anchor-header">升級流程<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

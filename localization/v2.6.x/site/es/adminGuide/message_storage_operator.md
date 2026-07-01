@@ -19,7 +19,7 @@ summary: Descubre cómo configurar el almacenamiento de mensajes con Milvus Oper
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus utiliza RocksMQ, Pulsar o Kafka para gestionar los registros de cambios recientes, generar registros de flujo y proporcionar suscripciones a registros. En este tema se explica cómo configurar las dependencias de almacenamiento de mensajes al instalar Milvus con Milvus Operator. Para obtener más detalles, consulta <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">«Configurar el almacenamiento de mensajes con Milvus Operator»</a> en el repositorio de Milvus Operator.</p>
+    </button></h1><p>Milvus utiliza RocksMQ, Pulsar o Kafka para gestionar los registros de cambios recientes, generar registros de flujo y proporcionar suscripciones a registros. En este tema se explica cómo configurar las dependencias de almacenamiento de mensajes al instalar Milvus con Milvus Operator. Para obtener más información, consulta <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">«Configurar el almacenamiento de mensajes con Milvus Operator</a> » en el repositorio de Milvus Operator.</p>
 <p>En este tema se da por hecho que ya ha implementado Milvus Operator.</p>
 <div class="alert note">Consulte <a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">«Implementar Milvus Operator</a> » para obtener más información. </div>
 <p>Debe especificar un archivo de configuración para utilizar Milvus Operator e iniciar un clúster de Milvus.</p>
@@ -202,7 +202,7 @@ Los campos utilizados para configurar un servicio Pulsar externo incluyen:</p>
         ></path>
       </svg>
     </button></h3><p><code translate="no">inCluster</code> indica que, al iniciarse un clúster de Milvus, se inicia automáticamente un servicio de Pulsar en el clúster.</p>
-<h4 id="Example" class="common-anchor-header">Ejemplo</h4><p>El siguiente ejemplo muestra cómo configurar un servicio Pulsar interno.</p>
+<h4 id="Example" class="common-anchor-header">Ejemplo</h4><p>El siguiente ejemplo configura un servicio Pulsar interno.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -242,7 +242,7 @@ Los campos utilizados para configurar un servicio Pulsar externo incluyen:</p>
   <span class="hljs-attr">config:</span> {}            
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">Este ejemplo especifica el número de réplicas de cada componente de Pulsar, los recursos de computación de Pulsar BookKeeper y otras configuraciones.</div>
-<div class="alert note">Consulta los elementos de configuración completos para configurar un servicio Pulsar interno en <a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">el archivo values.yaml</a>. Añade los elementos de configuración que necesites en la sección « <code translate="no">pulsar.inCluster.values</code> », tal y como se muestra en el ejemplo anterior.</div>
+<div class="alert note">Consulta los elementos de configuración completos para configurar un servicio Pulsar interno en <a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">el archivo values.yaml</a>. Añade los elementos de configuración necesarios en la sección « <code translate="no">pulsar.inCluster.values</code> », tal y como se muestra en el ejemplo anterior.</div>
 <p>Suponiendo que el archivo de configuración se llama « <code translate="no">milvuscluster.yaml</code> », ejecute el siguiente comando para aplicar la configuración.</p>
 <pre><code translate="no" class="language-Shell">kubectl apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -279,7 +279,7 @@ Los campos utilizados para configurar un servicio Pulsar externo incluyen:</p>
         ></path>
       </svg>
     </button></h3><p><code translate="no">external</code> indica que se utiliza un servicio de Kafka externo.</p>
-<p>Los campos utilizados para configurar un servicio de Kafka externo son los siguientes:</p>
+<p>Los campos utilizados para configurar un servicio externo de Kafka son los siguientes:</p>
 <ul>
 <li><code translate="no">external</code>: Un valor « <code translate="no">true</code> » indica que Milvus utiliza un servicio de Kafka externo.</li>
 <li><code translate="no">brokerList</code>: La lista de brokers a los que enviar los mensajes.</li>

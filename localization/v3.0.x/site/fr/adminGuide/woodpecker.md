@@ -39,7 +39,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li>Dans Milvus 3.x, Woodpecker est le WAL/la file d’attente de messages <strong>par défaut</strong>, assurant les écritures ordonnées et la récupération en tant que service de journalisation. Aucun service de file d’attente de messages externe (tel que Pulsar ou Kafka) n’est requis.</li>
+<li>Dans Milvus 3.x, Woodpecker est le WAL/la file d’attente de messages <strong>par défaut</strong>, assurant les écritures ordonnées et la récupération en tant que service de journalisation. Aucun service externe de file d’attente de messages (tel que Pulsar ou Kafka) n’est requis.</li>
 <li>Woodpecker peut fonctionner <strong>de manière intégrée</strong> au nœud Milvus/streaming (par défaut), ou en tant que <strong>service dédié</strong> avec ses propres pods (distribution/cluster uniquement).</li>
 <li>Il prend en charge trois modes d’ <code translate="no">storage.type</code>: le stockage d’objets (<code translate="no">minio</code>, par défaut), le système de fichiers local (<code translate="no">local</code>) et le service dédié <code translate="no">service</code>. Voir <a href="#Deployment-modes">Modes de déploiement</a>.</li>
 </ul>
@@ -119,7 +119,7 @@ summary: >-
 <ul>
 <li><code translate="no">woodpecker.meta</code>
 <ul>
-<li><strong>type</strong>: Actuellement, seul <code translate="no">etcd</code> est pris en charge. Réutilisez le même etcd que Milvus pour stocker les métadonnées légères.</li>
+<li><strong>type</strong>: Actuellement, seul <code translate="no">etcd</code> est pris en charge. Réutilisez le même etcd que Milvus pour stocker des métadonnées légères.</li>
 <li><strong>prefix</strong>: le préfixe des clés pour les métadonnées. Par défaut : <code translate="no">woodpecker</code>.</li>
 </ul></li>
 <li><code translate="no">woodpecker.client</code>
@@ -128,7 +128,7 @@ summary: >-
 </ul></li>
 <li><code translate="no">woodpecker.logstore</code>
 <ul>
-<li>Contrôle les politiques de synchronisation, de vidage, de compactage et de lecture des segments de journal. Il s'agit des principaux paramètres permettant d'ajuster le débit et la latence.</li>
+<li>Contrôle les politiques de synchronisation, de vidage, de compactage et de lecture des segments de journal. Il s’agit des principaux paramètres permettant d’ajuster le débit et la latence.</li>
 </ul></li>
 <li><code translate="no">woodpecker.storage</code>
 <ul>
@@ -202,7 +202,7 @@ summary: >-
 </table>
 <p>Remarques :</p>
 <ul>
-<li>La compatibilité dépend de la prise en charge native par le SDK ou de la prise en charge de la sémantique d'écriture conditionnelle S3.</li>
+<li>La compatibilité dépend de la prise en charge native du SDK ou de la prise en charge de la sémantique d'écriture conditionnelle S3.</li>
 <li>Si vous hébergez vous-même MinIO pour Woodpecker, utilisez la version <code translate="no">RELEASE.2024-12-18T13-15-44Z</code> ou une version ultérieure.</li>
 <li>Ce tableau reflète <a href="https://github.com/zilliztech/woodpecker/discussions/150">l'état actuel des discussions</a> et est susceptible d'évoluer à mesure que la prise en charge du backend sera validée.</li>
 </ul>
@@ -427,12 +427,12 @@ docker restart milvus-standalone
 <ul>
 <li>Côté stockage
 <ul>
-<li><strong>Stockage objet (compatible MinIO/S3)</strong>: augmentez le nombre de requêtes simultanées et la taille des objets (évitez les objets trop petits). Surveillez les limites de bande passante du réseau et des compartiments. Un nœud MinIO unique sur SSD est souvent plafonné à environ 100 Mo/s en local ; une connexion EC2 vers S3 peut atteindre plusieurs Go/s.</li>
+<li><strong>Stockage objet (compatible MinIO/S3)</strong>: augmentez le nombre de requêtes simultanées et la taille des objets (évitez les objets trop petits). Surveillez les limites de bande passante du réseau et des compartiments. Un seul nœud MinIO sur SSD est souvent plafonné à environ 100 Mo/s en local ; une seule connexion EC2 vers S3 peut atteindre plusieurs Go/s.</li>
 <li><strong>Systèmes de fichiers locaux/partagés (locaux)</strong>: privilégiez les disques NVMe ou rapides. Assurez-vous que le système de fichiers gère correctement les petites écritures et la latence de fsync.</li>
 </ul></li>
 <li>Paramètres de Woodpecker
 <ul>
-<li>Augmentez les paramètres « <code translate="no">logstore.segmentSyncPolicy.maxFlushSize</code> » et « <code translate="no">maxFlushThreads</code> » pour obtenir des vidages plus importants et un parallélisme plus élevé.</li>
+<li>Augmentez les paramètres « <code translate="no">logstore.segmentSyncPolicy.maxFlushSize</code> » et « <code translate="no">maxFlushThreads</code> » pour obtenir des vidages plus volumineux et un parallélisme plus élevé.</li>
 <li>Ajustez l’ <code translate="no">maxInterval</code> en fonction des caractéristiques du support (sacrifier la latence au profit du débit avec une agrégation plus longue).</li>
 <li>Pour le stockage objet, envisagez d’augmenter la valeur de <code translate="no">segmentRollingPolicy.maxSize</code> afin de réduire les changements de segment.</li>
 </ul></li>
@@ -457,7 +457,7 @@ docker restart milvus-standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Le mode service conserve le débit d’écriture élevé d’un WAL s’appuyant sur un stockage objet tout en offrant une faible latence (voir <a href="#Latency">Latence</a>). Les réglages côté stockage et côté client mentionnés ci-dessus restent valables ; de plus, comme Woodpecker s’exécute en tant que service indépendant, vous pouvez faire évoluer horizontalement la capacité d’écriture en ajoutant des répliques (<code translate="no">woodpecker.replicaCount</code>, 4 par défaut), et les écritures bénéficient d’une réplication à quorum en un RTT ainsi que de lectures tenant compte de la topologie qui évitent le transfert par le courtier.</p>
+    </button></h3><p>Le mode service conserve le débit d’écriture élevé d’un WAL s’appuyant sur un stockage objet tout en offrant une faible latence (voir <a href="#Latency">Latence</a>). Les réglages côté stockage et côté client mentionnés ci-dessus restent d’application ; de plus, comme Woodpecker s’exécute en tant que service indépendant, vous pouvez faire évoluer horizontalement la capacité d’écriture en ajoutant des répliques (<code translate="no">woodpecker.replicaCount</code>, 4 par défaut), et les écritures bénéficient d’une réplication à quorum en un seul RTT ainsi que de lectures tenant compte de la topologie qui évitent le transfert par le courtier.</p>
 <p><strong>Démonstration d’insertion par lots</strong> — utilisez ce qui suit pour mesurer le débit d’écriture :</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">import</span> random
@@ -548,11 +548,11 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Le mode Service offre <strong>une latence d’écriture de l’ordre de la milliseconde</strong> — comparable à celle d’un WAL traditionnel à trois répliques sur disque local — tout en maintenant des coûts bas. Dans un déploiement type à trois répliques et inter-zones de disponibilité (AZ), la latence d’écriture reste de l’ordre de la milliseconde. Ce résultat est obtenu grâce à :</p>
+    </button></h3><p>Le mode Service offre <strong>une latence d’écriture de l’ordre de la milliseconde</strong> — comparable à celle d’un WAL traditionnel à trois répliques sur disque local — tout en maintenant des coûts bas. Dans un déploiement typique à trois répliques et inter-zones de disponibilité (AZ), la latence d’écriture reste de l’ordre de la milliseconde. Ce résultat est obtenu grâce à :</p>
 <ul>
-<li><strong>Des écritures à quorum en un seul RTT</strong> — la réplication pilotée par le client effectue une écriture à quorum en un seul aller-retour, le trafic inter-AZ étant limité à l’équivalent de deux répliques (contre environ un tiers de trafic inter-AZ supplémentaire, typique de la réplication basée sur un courtier ou un leader).</li>
+<li><strong>Des écritures à quorum en un seul RTT</strong> — la réplication pilotée par le client effectue une écriture à quorum en un seul aller-retour, le trafic inter-AZ étant limité à l’équivalent des données de deux répliques (contre environ un tiers de trafic inter-AZ supplémentaire, typique de la réplication basée sur un courtier ou un leader).</li>
 <li><strong>Lectures en un seul saut tenant compte de la topologie</strong> — chaque lecture est dirigée directement vers la réplique la plus proche au lieu d’être acheminée via un courtier, ce qui évite les lectures aléatoires entre zones (environ les deux tiers du trafic de lecture inter-zones) propres aux systèmes basés sur un courtier.</li>
-<li><strong>Téléversement immédiat vers le stockage objet après le roulement d’un segment</strong> — chaque segment suit l’intégralité de son cycle de vie et est téléversé vers le stockage objet dès son roulement, ce qui permet de maintenir un encombrement minimal sur le disque local et de réduire les coûts de stockage sans compromettre la latence.</li>
+<li><strong>Téléchargement immédiat vers le stockage objet après le roulement d’un segment</strong> — chaque segment suit l’intégralité de son cycle de vie et est téléchargé vers le stockage objet dès son roulement, ce qui permet de maintenir un encombrement minimal sur le disque local et de réduire les coûts de stockage sans compromettre la latence.</li>
 <li><strong>Pas de réplication continue de nœud à nœud</strong> — les journaux sont conservés dans le stockage objet qui fait office de stockage partagé ; ainsi, en cas de basculement, seules les répliques survivantes sont réimportées (pas de copie complète du nœud), la scalabilité n’est pas limitée par la bande passante de réplication inter-nœuds, et le remplacement de nœuds à grande échelle ne provoque pas de « tempêtes de réplication ».</li>
 </ul>
 <p>Dans les déploiements inter-zones de disponibilité (AZ), le mode service permet également d’économiser environ <strong>un tiers du</strong> trafic réseau inter-AZ <strong>en</strong> <strong>écriture</strong> et <strong>deux tiers en lecture</strong> par rapport aux systèmes de journaux basés sur un courtier. Pour une analyse complète de la conception et des coûts, consultez <a href="/docs/fr/woodpecker_architecture.md">l’architecture Woodpecker</a>.</p>

@@ -83,7 +83,7 @@ Creating milvus-standalone ... done
 <ul>
 <li><strong>「milvus-standalone</strong>」、「<strong>milvus-minio</strong>」、「<strong>milvus-etcd</strong>」という名前のコンテナが起動します。
 <ul>
-<li><strong>milvus-etcd</strong>コンテナはホストに対してポートを公開しておらず、そのデータは現在のフォルダ内の<strong>volumes/etcd</strong>にマッピングされます。</li>
+<li><strong>milvus-etcd</strong>コンテナはホストに対してポートを公開せず、そのデータを現在のフォルダ内の<strong>volumes/etcd</strong>にマッピングします。</li>
 <li><strong>milvus-minio</strong>コンテナは、デフォルトの認証情報を使用してローカルでポート<strong>9090</strong>および<strong>9091</strong>を提供し、そのデータを現在のフォルダ内の<strong>volumes/minio</strong>にマッピングします。</li>
 <li><strong>milvus-standalone</strong>コンテナは、デフォルト設定でローカルのポート<strong>19530</strong>を提供し、そのデータを現在のフォルダ内の<strong>volumes/milvus</strong>にマッピングします。</li>
 </ul></li>

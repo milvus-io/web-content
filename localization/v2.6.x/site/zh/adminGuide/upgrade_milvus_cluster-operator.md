@@ -4,7 +4,7 @@ label: Milvus Operator
 order: 0
 group: upgrade_milvus_cluster-operator.md
 related_key: upgrade Milvus Cluster
-summary: 了解如何使用 Milvus Operator 升级 Milvus 集群。
+summary: 了解如何使用 Milvus Operator 对 Milvus 集群进行升级。
 title: 使用 Milvus Operator 升级 Milvus 集群
 ---
 <div class="tab-wrapper"><a href="/docs/zh/v2.6.x/upgrade_milvus_cluster-operator.md" class='active '>Milvus</a><a href="/docs/zh/v2.6.x/upgrade_milvus_cluster-helm.md" class=''>OperatorHelm</a></div>
@@ -88,7 +88,7 @@ title: 使用 Milvus Operator 升级 Milvus 集群
 <li>如果您当前正在运行 v2.6.0-rc1 且需要保留数据，请参阅<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">此社区指南</a>以获取迁移帮助。</li>
 <li>在升级至 v2.6.17 之前，您<strong>必须先</strong>升级至 v2.5.16 或更高版本，并启用<code translate="no">mixCoord</code> 。</li>
 </ul>
-<p><strong>消息队列限制</strong>：在升级至 Milvus v2.6.17 时，您必须保留当前的消息队列选择。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</p>
+<p><strong>消息队列限制</strong>：升级至 Milvus v2.6.17 时，您必须保留当前的消息队列选择。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</p>
 <h2 id="Upgrade-process" class="common-anchor-header">升级流程<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

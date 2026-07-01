@@ -60,7 +60,7 @@ title: Mise à niveau du cluster Milvus à l'aide d'un Helm Chart
 <li><strong>Nouveaux composants</strong>: introduction du nœud de streaming pour un traitement amélioré des données</li>
 <li><strong>Suppression de composants</strong>: <code translate="no">indexNode</code> a été supprimé et consolidé</li>
 </ul>
-<p>Ce processus de mise à niveau garantit une migration correcte vers la nouvelle architecture. Pour plus d’informations sur les changements d’architecture, consultez <a href="/docs/fr/v2.6.x/architecture_overview.md">la présentation de l’architecture de Milvus</a>.</p>
+<p>Ce processus de mise à niveau garantit une migration correcte vers la nouvelle architecture. Pour plus d’informations sur les modifications apportées à l’architecture, consultez <a href="/docs/fr/v2.6.x/architecture_overview.md">la présentation de l’architecture de Milvus</a>.</p>
 <h3 id="Requirements" class="common-anchor-header">Configuration requise<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -151,7 +151,7 @@ Le dépôt des charts Helm de Milvus à l’adresse <code translate="no">https:/
     </button></h3><p>Vérifiez si votre cluster utilise actuellement des coordinateurs distincts :</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p>Si vous constatez la présence de pods de coordinateurs distincts (<code translate="no">datacoord</code>, <code translate="no">querycoord</code>, <code translate="no">indexcoord</code>), effectuez la mise à niveau vers la v2.5.16 et activez <code translate="no">mixCoordinator</code>:</p>
+<p>Si vous voyez des pods de coordinateurs distincts (<code translate="no">datacoord</code>, <code translate="no">querycoord</code>, <code translate="no">indexcoord</code>), effectuez la mise à niveau vers la v2.5.16 et activez <code translate="no">mixCoordinator</code>:</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.5.16&quot;</span> \
   --<span class="hljs-built_in">set</span> mixCoordinator.enabled=<span class="hljs-literal">true</span> \

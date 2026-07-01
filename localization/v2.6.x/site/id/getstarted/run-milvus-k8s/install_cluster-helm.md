@@ -2,7 +2,7 @@
 id: install_cluster-helm.md
 label: Helm
 related_key: Kubernetes
-summary: Pelajari cara menginstal kluster Milvus di Kubernetes.
+summary: Pelajari cara menginstal klaster Milvus di Kubernetes.
 title: Menginstal Milvus Cluster dengan Helm
 ---
 <h1 id="Run-Milvus-in-Kubernetes-with-Helm" class="common-anchor-header">Menjalankan Milvus di Kubernetes dengan Helm<button data-href="#Run-Milvus-in-Kubernetes-with-Helm" class="anchor-icon" translate="no">
@@ -20,7 +20,7 @@ title: Menginstal Milvus Cluster dengan Helm
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Halaman ini menjelaskan cara menjalankan instance Milvus di Kubernetes menggunakan <a href="https://github.com/zilliztech/milvus-helm">Helm charts Milvus</a>.</p>
+    </button></h1><p>Halaman ini menjelaskan cara menjalankan instance Milvus di Kubernetes menggunakan <a href="https://github.com/zilliztech/milvus-helm">chart Helm Milvus</a>.</p>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,7 +36,7 @@ title: Menginstal Milvus Cluster dengan Helm
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Helm menggunakan format pengemasan yang disebut chart. Chart adalah kumpulan berkas yang mendeskripsikan sekumpulan sumber daya Kubernetes yang saling terkait. Milvus menyediakan serangkaian chart untuk membantu Anda mengimplementasikan dependensi dan komponen Milvus.</p>
+    </button></h2><p>Helm menggunakan format pengemasan yang disebut chart. Chart adalah kumpulan berkas yang mendeskripsikan sekumpulan sumber daya Kubernetes yang saling terkait. Milvus menyediakan serangkaian chart untuk membantu Anda melakukan deployment terhadap dependensi dan komponen Milvus.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Persyaratan<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -323,7 +323,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus dilengkapi dengan alat GUI bawaan bernama Milvus WebUI yang dapat Anda akses melalui browser. Milvus WebUI meningkatkan kemampuan pemantauan sistem dengan antarmuka yang sederhana dan intuitif. Anda dapat menggunakan Milvus WebUI untuk memantau statistik dan metrik komponen serta ketergantungan Milvus, memeriksa detail database dan koleksi, serta menampilkan daftar konfigurasi Milvus secara terperinci. Untuk detail mengenai Milvus WebUI, lihat <a href="/docs/id/v2.6.x/milvus-webui.md">Milvus WebUI</a></p>
+    </button></h2><p>Milvus dilengkapi dengan alat antarmuka pengguna grafis (GUI) bawaan bernama Milvus WebUI yang dapat Anda akses melalui browser Anda. Milvus WebUI meningkatkan kemampuan pemantauan sistem dengan antarmuka yang sederhana dan intuitif. Anda dapat menggunakan Milvus WebUI untuk memantau statistik dan metrik komponen serta ketergantungan Milvus, memeriksa detail database dan koleksi, serta menampilkan daftar konfigurasi Milvus secara terperinci. Untuk detail mengenai Milvus WebUI, lihat <a href="/docs/id/v2.6.x/milvus-webui.md">Milvus WebUI</a></p>
 <p>Untuk mengaktifkan akses ke Milvus WebUI, Anda perlu melakukan port forwarding pod proxy ke port lokal.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
@@ -367,7 +367,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <div class="alert note">
 <ul>
 <li>Untuk menginstal instance Milvus dalam mode mandiri di mana semua komponen Milvus terdapat dalam satu pod, Anda harus menjalankan perintah ` <code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false zilliztech/milvus &gt; milvus_manifest.yaml</code> ` sebagai gantinya untuk menghasilkan templat chart untuk instance Milvus dalam mode mandiri.</li>
-<li>Untuk mengubah konfigurasi Milvus, unduh <a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml"><code translate="no">value.yaml</code></a> templat tersebut, masukkan pengaturan yang Anda inginkan ke dalamnya, lalu gunakan <code translate="no">helm template -f values.yaml my-release zilliztech/milvus &gt; milvus_manifest.yaml</code> untuk merender manifest sesuai dengan pengaturan tersebut.</li>
+<li>Untuk mengubah konfigurasi Milvus, unduh <a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml"><code translate="no">value.yaml</code></a> templat, masukkan pengaturan yang Anda inginkan ke dalamnya, dan gunakan <code translate="no">helm template -f values.yaml my-release zilliztech/milvus &gt; milvus_manifest.yaml</code> untuk merender manifest sesuai dengan pengaturan tersebut.</li>
 </ul>
 </div>
 <h3 id="2-Download-image-pulling-script" class="common-anchor-header">2. Unduh skrip pengunduhan gambar<button data-href="#2-Download-image-pulling-script" class="anchor-icon" translate="no">
@@ -517,7 +517,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li><a href="/docs/id/v2.6.x/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/id/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus-webui.md">Milvus WebUI</a>, antarmuka web intuitif untuk pemantauan dan pengelolaan Milvus.</p></li>
+<li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus-webui.md">Milvus WebUI</a>, antarmuka web yang intuitif untuk pemantauan dan pengelolaan Milvus.</p></li>
 <li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, alat sumber terbuka untuk pencadangan data Milvus.</p></li>
 <li><p>Jelajahi <a href="/docs/id/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk debugging Milvus dan pembaruan konfigurasi dinamis.</p></li>
 <li><p>Jelajahi <a href="https://github.com/zilliztech/attu">Attu</a>, alat GUI sumber terbuka untuk pengelolaan Milvus yang intuitif.</p></li>

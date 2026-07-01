@@ -151,7 +151,7 @@ milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
 <p>Вы также можете перейти в веб-интерфейс Milvus по адресу <code translate="no">http://127.0.0.1:9091/webui/</code>, чтобы узнать больше о вашем экземпляре Milvus. Подробности см. в разделе <a href="/docs/ru/v2.6.x/milvus-webui.md">«Веб-интерфейс Milvus</a>».</p>
-<p>Если в файле docker-compose.yml вы назначили Milvus несколько графических процессоров (GPU), вы можете указать, какой из них будет видимым или доступным для использования.</p>
+<p>Если в файле docker-compose.yml вы назначили Milvus несколько графических процессоров, вы можете указать, какой из них будет видимым или доступным для использования.</p>
 <p>Сделать устройство GPU <code translate="no">0</code> видимым для Milvus:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">CUDA_VISIBLE_DEVICES=0 ./milvus run standalone</span>
 <button class="copy-code-btn"></button></code></pre>

@@ -369,7 +369,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span>Pesan kesalahan “Read config failed” saat Milvus dimulai</span>
   
  </span></p>
-<p>Untuk mengatasi kesalahan yang muncul saat Milvus dimulai yang berbunyi “Read config failed,” Anda perlu memeriksa apakah volume yang dipasang ke dalam kontainer Milvus sudah benar. Jika volume sudah dipasang dengan benar ke dalam kontainer, Anda dapat menggunakan perintah <code translate="no">docker exec</code> untuk masuk ke dalam kontainer dan menampilkan daftar folder <strong>/milvus/configs</strong> sebagai berikut:​</p>
+<p>Untuk mengatasi kesalahan yang muncul saat Milvus dimulai yang berbunyi “Read config failed,” Anda perlu memeriksa apakah volume yang dipasang ke dalam kontainer Milvus sudah benar. Jika volume sudah dipasang dengan benar ke dalam kontainer, Anda dapat menggunakan perintah ` <code translate="no">docker exec</code> ` untuk masuk ke dalam kontainer dan menampilkan daftar folder <strong>`/milvus/configs</strong> ` sebagai berikut:​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" /> 

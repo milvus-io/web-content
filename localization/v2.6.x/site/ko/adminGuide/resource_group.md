@@ -19,7 +19,7 @@ title: 리소스 그룹 관리
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus에서는 리소스 그룹을 사용하여 특정 쿼리 노드를 다른 노드들과 물리적으로 분리할 수 있습니다. 이 가이드에서는 사용자 정의 리소스 그룹을 생성 및 관리하는 방법과 그룹 간에 노드를 이동하는 방법을 단계별로 안내합니다.</p>
+    </button></h1><p>Milvus에서는 리소스 그룹을 사용하여 특정 쿼리 노드를 다른 노드들과 물리적으로 분리할 수 있습니다. 이 가이드에서는 사용자 지정 리소스 그룹을 생성 및 관리하는 방법과 그룹 간에 노드를 이동하는 방법을 단계별로 안내합니다.</p>
 <h2 id="What-is-a-resource-group" class="common-anchor-header">리소스 그룹이란?<button data-href="#What-is-a-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,7 +35,7 @@ title: 리소스 그룹 관리
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>리소스 그룹은 Milvus 클러스터 내의 여러 쿼리 노드 또는 모든 쿼리 노드를 포함할 수 있습니다. 사용자에게 가장 적합한 방식에 따라 리소스 그룹 간에 쿼리 노드를 어떻게 할당할지 결정할 수 있습니다. 예를 들어, 다중 컬렉션 환경에서는 각 리소스 그룹에 적절한 수의 쿼리 노드를 할당하고 컬렉션을 서로 다른 리소스 그룹에 로드함으로써, 각 컬렉션 내의 작업이 다른 컬렉션의 작업과 물리적으로 독립적으로 처리되도록 할 수 있습니다.</p>
+    </button></h2><p>리소스 그룹은 Milvus 클러스터 내의 여러 쿼리 노드 또는 모든 쿼리 노드를 포함할 수 있습니다. 사용자에게 가장 적합한 방식에 따라 리소스 그룹 간에 쿼리 노드를 어떻게 할당할지 결정할 수 있습니다. 예를 들어, 다중 컬렉션 환경에서는 각 리소스 그룹에 적절한 수의 쿼리 노드를 할당하고 컬렉션을 서로 다른 리소스 그룹에 로드함으로써, 각 컬렉션 내의 작업이 다른 컬렉션의 작업과 물리적으로 독립적으로 수행되도록 할 수 있습니다.</p>
 <p>Milvus 인스턴스는 시작 시 모든 쿼리 노드를 포함하는 기본 리소스 그룹을 유지하며, 이를 <strong>__default_resource_group으로</strong> 명명합니다.</p>
 <p>버전 2.4.1부터 Milvus는 선언형 리소스 그룹 API를 제공하며, 기존 리소스 그룹 API는 더 이상 사용되지 않습니다. 새로운 선언형 API를 통해 사용자는 항등성을 확보할 수 있어 클라우드 네이티브 환경에서 2차 개발을 보다 쉽게 수행할 수 있습니다.</p>
 <h2 id="Concepts-of-resource-group" class="common-anchor-header">리소스 그룹의 개념<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
@@ -70,8 +70,8 @@ title: 리소스 그룹 관리
 <p><code translate="no">.requests.nodeNum &lt; nodeNumOfResourceGroup &lt; .limits.nodeNum.</code></p>
 <p>단, 다음의 경우는 예외입니다:</p>
 <ul>
-<li>Milvus 클러스터의 쿼리 노드(QueryNodes) 수가 부족할 경우, 즉 <code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code> 인 경우, 항상 쿼리 노드가 충분하지 않은 리소스 그룹이 존재하게 됩니다.</li>
-<li>Milvus 클러스터의 쿼리 노드 수가 과도한 경우(즉, <code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code>), 중복된 쿼리 노드는 항상 <strong>__default_resource_group에</strong> 우선 배치됩니다.</li>
+<li>Milvus 클러스터의 쿼리 노드(QueryNodes) 수가 부족할 경우, 즉 <code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code> 인 경우, 항상 충분한 쿼리 노드를 확보하지 못한 리소스 그룹이 존재하게 됩니다.</li>
+<li>Milvus 클러스터의 쿼리 노드 수가 과도한 경우( <code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code>), 중복된 쿼리 노드는 항상 <strong>__default_resource_group에</strong> 우선 배치됩니다.</li>
 </ul>
 <p>물론 클러스터 내 쿼리 노드(QueryNodes)의 수가 변경되면, Milvus는 최종 조건을 충족하도록 지속적으로 조정을 시도합니다. 따라서 먼저 리소스 그룹 구성 변경 사항을 적용한 다음 쿼리 노드(QueryNodes) 스케일링을 수행할 수 있습니다.</p>
 <h2 id="Use-declarative-api-to-manage-resource-group" class="common-anchor-header">선언형 API를 사용하여 리소스 그룹 관리<button data-href="#Use-declarative-api-to-manage-resource-group" class="anchor-icon" translate="no">
@@ -136,7 +136,7 @@ node_num = <span class="hljs-number">0</span>
 <span class="hljs-comment">#   &lt;nodes:[]&gt;              // node detail info</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>리소스 그룹 간에 노드를 이동합니다.</p>
-<p>설명된 리소스 그룹에는 아직 쿼리 노드가 하나도 없다는 것을 알 수 있습니다. 다음과 같이 기본 리소스 그룹에서 생성한 리소스 그룹으로 일부 노드를 이동하십시오:
+<p>설명된 리소스 그룹에는 아직 쿼리 노드가 하나도 없다는 것을 알 수 있습니다. 다음과 같이 기본 리소스 그룹에서 생성한 리소스 그룹으로 일부 노드를 이동합니다:
 클러스터의 <strong>__default_resource_group에</strong> 현재 1개의 QueryNode가 있으며, 생성한 <strong>rg로</strong> 노드 하나를 이동한다고 가정합니다.<code translate="no">update_resource_groups</code> 는 여러 구성 변경에 대한 원자성을 보장하므로, Milvus에서는 중간 상태가 표시되지 않습니다.</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
@@ -161,7 +161,7 @@ expected_num_nodes_in_rg = <span class="hljs-number">1</span>
 <span class="hljs-comment"># After a while, succeeded in moving 1 node(s) from __default_resource_group to rg.</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>리소스 그룹에 컬렉션과 파티션을 로드합니다.</p>
-<p>리소스 그룹에 쿼리 노드가 포함되면, 이 리소스 그룹에 컬렉션을 로드할 수 있습니다. 다음 코드 조각은 <code translate="no">demo</code> 라는 이름의 컬렉션이 이미 존재한다고 가정합니다.</p>
+<p>리소스 그룹에 쿼리 노드가 생기면, 이 리소스 그룹에 컬렉션을 로드할 수 있습니다. 다음 코드 조각은 <code translate="no">demo</code> 라는 이름의 컬렉션이 이미 존재한다고 가정합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection
 
 collection_name = <span class="hljs-string">&quot;demo&quot;</span>
@@ -174,7 +174,7 @@ milvus_client.load_collection(collection_name, replica_number=<span class="hljs-
 resource_groups = [<span class="hljs-string">&#x27;rg&#x27;</span>]
 milvus_client.load_collection(replica_number=<span class="hljs-number">2</span>, _resource_groups=resource_groups) 
 <button class="copy-code-btn"></button></code></pre>
-<p>또한, 리소스 그룹에 파티션 하나만 로드하고 그 복제본을 여러 리소스 그룹에 분산시킬 수도 있습니다. 다음 예제는 <code translate="no">Books</code> 라는 이름의 컬렉션이 이미 존재하며, 이 컬렉션에 <code translate="no">Novels</code> 라는 이름의 파티션이 있다고 가정합니다.</p>
+<p>또한, 리소스 그룹에 파티션 하나만 로드하고 그 복제본을 여러 리소스 그룹에 분산시킬 수도 있습니다. 다음 예제는 <code translate="no">Books</code> 라는 이름의 컬렉션이 이미 존재하며, 이 컬렉션에 <code translate="no">Novels</code> 라는 파티션이 있다고 가정합니다.</p>
 <pre><code translate="no" class="language-python">collection = <span class="hljs-string">&quot;Books&quot;</span>
 partition = <span class="hljs-string">&quot;Novels&quot;</span>
 
@@ -332,7 +332,7 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h2><ul>
 <li>단일 컬렉션의 복제본과 리소스 그룹은 N대 N 관계를 가집니다.</li>
-<li>단일 컬렉션의 여러 레플리카가 하나의 리소스 그룹에 로드되면, 해당 리소스 그룹의 쿼리 노드는 레플리카들 사이에 균등하게 분산되어 각 레플리카가 보유한 쿼리 노드 수의 차이가 1을 초과하지 않도록 보장합니다.</li>
+<li>단일 컬렉션의 여러 복제본이 하나의 리소스 그룹에 로드되면, 해당 리소스 그룹의 쿼리 노드는 복제본들 사이에 균등하게 분산되어 각 복제본이 보유한 쿼리 노드 수의 차이가 1을 초과하지 않도록 보장합니다.</li>
 </ul>
 <h1 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

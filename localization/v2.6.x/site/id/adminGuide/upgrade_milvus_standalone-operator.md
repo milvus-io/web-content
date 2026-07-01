@@ -127,7 +127,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
 <p>Verifikasi peningkatan operator:</p>
 <pre><code translate="no" class="language-bash">kubectl -n milvus-operator get pods
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Upgrade-your-Milvus-standalone" class="common-anchor-header">Langkah 2: Perbarui Milvus standalone Anda<button data-href="#Step-2-Upgrade-your-Milvus-standalone" class="anchor-icon" translate="no">
+<h3 id="Step-2-Upgrade-your-Milvus-standalone" class="common-anchor-header">Langkah 2: Memutakhirkan Milvus standalone<button data-href="#Step-2-Upgrade-your-Milvus-standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -143,7 +143,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
         ></path>
       </svg>
     </button></h3><h4 id="21-Upgrade-to-v2516" class="common-anchor-header">2.1 Perbarui ke v2.5.16</h4><div class="alert-note">
-<p>Lewati langkah ini jika deployment standalone Anda sudah menjalankan v2.5.16 atau yang lebih baru.</p>
+<p>Lewati langkah ini jika Milvus standalone Anda sudah menjalankan v2.5.16 atau yang lebih baru.</p>
 </div>
 <p>Buat berkas konfigurasi ` <code translate="no">milvusupgrade.yaml</code> ` untuk memperbarui ke v2.5.16:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>

@@ -213,7 +213,7 @@ En la versión actual, todos los parámetros solo surten efecto tras reiniciar M
         ></path>
       </svg>
     </button></h2><p>Descarga el archivo de instalación de Milvus <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus-standalone-docker-compose.yml">independiente</a> y guárdalo como « <code translate="no">docker-compose.yml</code> ».</p>
-<p>También puede simplemente ejecutar el siguiente comando.</p>
+<p>También puede ejecutar simplemente el siguiente comando.</p>
 <pre><code translate="no"><span class="hljs-meta prompt_"># </span><span class="language-bash">For Milvus standalone</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>

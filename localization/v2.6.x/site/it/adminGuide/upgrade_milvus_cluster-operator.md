@@ -88,7 +88,7 @@ title: Aggiornamento del cluster Milvus con Milvus Operator
 <li>Se attualmente si utilizza la versione v2.6.0-rc1 e si desidera conservare i propri dati, si prega di consultare <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">questa guida della community</a> per assistenza nella migrazione.</li>
 <li><strong>È necessario</strong> eseguire l'aggiornamento alla versione v2.5.16 o successive con l'opzione " <code translate="no">mixCoord</code> " abilitata prima di passare alla versione v2.6.17.</li>
 </ul>
-<p><strong>Limitazioni relative alle code dei messaggi</strong>: durante l’aggiornamento a Milvus v2.6.17, è necessario mantenere la scelta attuale della coda dei messaggi. Il passaggio da un sistema di code dei messaggi a un altro durante l’aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code dei messaggi sarà disponibile nelle versioni future.</p>
+<p><strong>Limitazioni relative alle code dei messaggi</strong>: durante l’aggiornamento a Milvus v2.6.17, è necessario mantenere l’attuale scelta della coda dei messaggi. Il passaggio da un sistema di code dei messaggi a un altro durante l’aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code dei messaggi sarà disponibile nelle versioni future.</p>
 <h2 id="Upgrade-process" class="common-anchor-header">Procedura di aggiornamento<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

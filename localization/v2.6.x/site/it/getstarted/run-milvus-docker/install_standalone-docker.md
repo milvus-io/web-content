@@ -55,7 +55,7 @@ title: Eseguire Milvus in Docker (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus fornisce uno script di installazione per installarlo come container Docker. Lo script è disponibile nel <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">repository di Milvus</a>. Per installare Milvus in Docker, basta eseguire</p>
+    </button></h2><p>Milvus fornisce uno script di installazione per installarlo come container Docker. Lo script è disponibile nel <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">repository di Milvus</a>. Per installare Milvus in Docker, è sufficiente eseguire</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the installation script</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh</span>
 <span class="hljs-meta prompt_">
@@ -77,7 +77,7 @@ title: Eseguire Milvus in Docker (Linux)
 <ul>
 <li>È stato avviato un container Docker denominato milvus sulla porta <strong>19530</strong>.</li>
 <li>Insieme a Milvus, nello stesso container è installato un etcd integrato, che opera sulla porta <strong>2379</strong>. Il suo file di configurazione è mappato su <strong>embedEtcd.yaml</strong> nella cartella corrente.</li>
-<li>Per modificare la configurazione predefinita di Milvus, aggiungi le tue impostazioni al file <strong>user.yaml</strong> nella cartella corrente, quindi riavvia il servizio.</li>
+<li>Per modificare la configurazione predefinita di Milvus, aggiungete le vostre impostazioni al file <strong>user.yaml</strong> nella cartella corrente e quindi riavviate il servizio.</li>
 <li>Il volume dati di Milvus è mappato su <strong>volumes/milvus</strong> nella cartella corrente.</li>
 </ul>
 <p>È possibile accedere all’interfaccia Web di Milvus all’indirizzo <code translate="no">http://127.0.0.1:9091/webui/</code> per ulteriori informazioni sull’istanza di Milvus in uso. Per i dettagli, consultare la documentazione relativa <a href="/docs/it/v2.6.x/milvus-webui.md">all’interfaccia Web di Milvus</a>.</p>
@@ -106,7 +106,7 @@ EOF
 <p>Quindi riavviare il servizio come segue:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh restart</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Per le voci di configurazione applicabili, consultare <a href="/docs/it/v2.6.x/system_configuration.md">Configurazione di sistema</a>.</p>
+<p>Per le voci di configurazione applicabili, fare riferimento alla sezione <a href="/docs/it/v2.6.x/system_configuration.md">Configurazione di sistema</a>.</p>
 <h2 id="Upgrade-Milvus" class="common-anchor-header">Aggiornamento di Milvus<button data-href="#Upgrade-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -175,7 +175,7 @@ EOF
       </svg>
     </button></h2><p>Dopo aver installato Milvus in Docker, è possibile:</p>
 <ul>
-<li><p>Consultare <a href="/docs/it/v2.6.x/quickstart.md">la Guida rapida</a> per scoprire le funzionalità di Milvus.</p></li>
+<li><p>Consultare <a href="/docs/it/v2.6.x/quickstart.md">la Guida rapida</a> per scoprire cosa può fare Milvus.</p></li>
 <li><p>Imparare le operazioni di base di Milvus:</p>
 <ul>
 <li><a href="/docs/it/v2.6.x/manage_databases.md">Gestire i database</a></li>

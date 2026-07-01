@@ -64,14 +64,14 @@ title: Gérer les groupes de ressources
 <ul>
 <li>L’attribut ` <strong>requests</strong> ` spécifie les conditions qu’un groupe de ressources doit remplir.</li>
 <li>L’attribut ` <strong>limits</strong> ` spécifie les limites maximales d’un groupe de ressources.</li>
-<li>Les attributs <strong>`transfer_from</strong> ` et <strong>`transfer_to</strong> ` décrivent respectivement à partir de quels groupes de ressources un groupe de ressources doit de préférence acquérir des ressources et vers quels groupes de ressources il doit transférer des ressources.</li>
+<li>Les attributs <strong>`transfer_from</strong> ` et <strong>`transfer_to`</strong> décrivent respectivement les groupes de ressources auprès desquels un groupe de ressources doit de préférence acquérir des ressources et vers lesquels il doit transférer des ressources.</li>
 </ul>
-<p>Dès que la configuration d’un groupe de ressources change, Milvus ajuste autant que possible les ressources actuelles des nœuds de requête en fonction de la nouvelle configuration, en veillant à ce que tous les groupes de ressources finissent par remplir la condition suivante :</p>
+<p>Dès que la configuration d’un groupe de ressources change, Milvus ajuste autant que possible les ressources actuelles des nœuds de requête en fonction de la nouvelle configuration, en veillant à ce que tous les groupes de ressources finissent par satisfaire la condition suivante :</p>
 <p><code translate="no">.requests.nodeNum &lt; nodeNumOfResourceGroup &lt; .limits.nodeNum.</code></p>
 <p>Sauf dans les cas suivants :</p>
 <ul>
 <li>Lorsque le nombre de nœuds de requête (QueryNodes) dans le cluster Milvus est insuffisant, c’est-à-dire lorsque <code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code>, il y aura toujours des groupes de ressources ne disposant pas d’un nombre suffisant de nœuds de requête.</li>
-<li>Lorsque le nombre de nœuds de requête dans le cluster Milvus est excessif, c’est-à-dire <code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code>, les nœuds de requête redondants seront toujours placés en premier dans le <strong> groupe de ressources __default_resource_group</strong>.</li>
+<li>Lorsque le nombre de nœuds de requête dans le cluster Milvus est excessif, c’est-à-dire <code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code>, les nœuds de requête redondants seront toujours placés en priorité dans le <strong> groupe de ressources __default_resource_group</strong>.</li>
 </ul>
 <p>Bien entendu, si le nombre de QueryNodes dans le cluster change, Milvus tentera en permanence de s’adapter pour respecter les conditions finales. Par conséquent, vous pouvez d’abord appliquer les modifications de configuration des groupes de ressources, puis procéder à la mise à l’échelle des QueryNodes.</p>
 <h2 id="Use-declarative-api-to-manage-resource-group" class="common-anchor-header">Utilisation de l’API déclarative pour gérer les groupes de ressources<button data-href="#Use-declarative-api-to-manage-resource-group" class="anchor-icon" translate="no">
@@ -231,7 +231,7 @@ except Exception:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Actuellement, Milvus ne peut pas s’adapter de manière autonome (augmentation ou réduction) dans les environnements cloud natifs. Cependant, en utilisant <strong>l’API déclarative des groupes de ressources</strong> en conjonction avec l’orchestration des conteneurs, Milvus peut facilement assurer l’isolation et la gestion des ressources pour les QueryNodes.
+    </button></h2><p>Actuellement, Milvus ne peut pas s’adapter de manière autonome (augmentation ou réduction) dans les environnements cloud natifs. Cependant, en utilisant <strong>l’API déclarative des groupes de ressources</strong> en conjonction avec l’orchestration de conteneurs, Milvus peut facilement assurer l’isolation et la gestion des ressources pour les QueryNodes.
 Voici une bonne pratique pour gérer les QueryNodes dans un environnement cloud :</p>
 <ol>
 <li><p>Par défaut, Milvus crée un <strong>__default_resource_group</strong>. Ce groupe de ressources ne peut pas être supprimé et sert également de groupe de ressources de chargement par défaut pour toutes les collections ; les QueryNodes redondants y sont toujours affectés. Par conséquent, nous pouvons créer un groupe de ressources en attente pour accueillir les ressources QueryNode inutilisées, empêchant ainsi le groupe de ressources <strong>__default_resource_group</strong> de les occuper.</p>
@@ -333,7 +333,7 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h2><ul>
 <li>Les répliques d’une même collection et les groupes de ressources entretiennent une relation N-à-N.</li>
-<li>Lorsque plusieurs répliques d’une même collection sont chargées dans un même groupe de ressources, les nœuds de requête (QueryNodes) de ce groupe sont répartis de manière uniforme entre les répliques, ce qui garantit que la différence entre le nombre de nœuds de requête de chaque réplique ne dépasse pas 1.</li>
+<li>Lorsque plusieurs répliques d’une même collection sont chargées dans un même groupe de ressources, les nœuds de requête de ce groupe sont répartis de manière uniforme entre les répliques, ce qui garantit que la différence entre le nombre de nœuds de requête de chaque réplique ne dépasse pas 1.</li>
 </ul>
 <h1 id="Whats-next" class="common-anchor-header">Prochaines étapes<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

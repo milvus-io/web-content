@@ -40,7 +40,7 @@ title: Объектное хранилище
 <tbody>
 <tr><td>MinIO</td><td style="text-align:center">✔️ (по умолчанию для самохостинговых развертываний)</td></tr>
 <tr><td>AWS S3</td><td style="text-align:center">✔️</td></tr>
-<tr><td>Хранилище Azure Blob</td><td style="text-align:center">✔️</td></tr>
+<tr><td>Хранилище Blob в Azure</td><td style="text-align:center">✔️</td></tr>
 <tr><td>Google Cloud Storage (GCS)</td><td style="text-align:center">✔️</td></tr>
 <tr><td>Aliyun OSS</td><td style="text-align:center">✔️</td></tr>
 <tr><td>Tencent COS</td><td style="text-align:center">✔️</td></tr>

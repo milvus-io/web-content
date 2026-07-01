@@ -278,8 +278,8 @@ summary: >-
       </svg>
     </button></h2><p>Milvus im Standalone-Modus verwendet RocksMQ als Standard-Nachrichtenspeicher. Ausführliche Anweisungen zur Konfiguration von Milvus mit Helm finden Sie unter <a href="/docs/de/v2.6.x/configure-helm.md">„Milvus mit Helm-Charts konfigurieren</a>“. Einzelheiten zu den RocksMQ-bezogenen Konfigurationselementen finden Sie unter <a href="/docs/de/v2.6.x/configure_rocksmq.md">„RocksMQ-bezogene Konfigurationen</a>“.</p>
 <ul>
-<li><p>Wenn Sie Milvus mit RocksMQ gestartet haben und dessen Einstellungen ändern möchten, können Sie den Befehl „ <code translate="no">helm upgrade -f</code> “ mit den geänderten Einstellungen in der folgenden YAML-Datei ausführen.</p></li>
-<li><p>Wenn Sie Milvus als Standalone-Instanz mit Helm und einem anderen Nachrichtenspeicher als RocksMQ installiert haben und wieder zu RocksMQ zurückwechseln möchten, führen Sie den Befehl „ <code translate="no">helm upgrade -f</code> “ mit der folgenden YAML-Datei aus, nachdem Sie alle Sammlungen geleert und Milvus angehalten haben.</p></li>
+<li><p>Wenn Sie Milvus mit RocksMQ gestartet haben und dessen Einstellungen ändern möchten, können Sie „ <code translate="no">helm upgrade -f</code> “ mit den geänderten Einstellungen in der folgenden YAML-Datei ausführen.</p></li>
+<li><p>Wenn Sie Milvus als Standalone-Instanz mit Helm und einem anderen Nachrichtenspeicher als RocksMQ installiert haben und wieder auf RocksMQ umstellen möchten, führen Sie den Befehl „ <code translate="no">helm upgrade -f</code> “ mit der folgenden YAML-Datei aus, nachdem Sie alle Sammlungen geleert und Milvus angehalten haben.</p></li>
 </ul>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+

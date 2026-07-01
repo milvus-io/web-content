@@ -191,7 +191,7 @@ dpkg -l | grep milvus
       </svg>
     </button></h2><p>Milvus Standalone のインストールが完了したら、以下の操作が可能です:</p>
 <ul>
-<li><p><a href="/docs/ja/v2.6.x/quickstart.md">「クイックスタート</a>」を参照して、Milvusの機能を確認してください。</p></li>
+<li><p><a href="/docs/ja/v2.6.x/quickstart.md">「クイックスタート」を</a>参照して、Milvusの機能を確認してください。</p></li>
 <li><p>Milvusの基本的な操作方法を学びましょう：</p>
 <ul>
 <li><a href="/docs/ja/v2.6.x/manage_databases.md">データベースの管理</a></li>

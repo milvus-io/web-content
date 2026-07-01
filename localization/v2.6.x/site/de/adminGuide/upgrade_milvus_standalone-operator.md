@@ -126,7 +126,7 @@ title: Aktualisieren von Milvus Standalone mit Milvus Operator
 helm repo update zilliztech-milvus-operator
 helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvus-operator
 <button class="copy-code-btn"></button></code></pre>
-<p>Überprüfen Sie das Upgrade des Operators:</p>
+<p>Überprüfen Sie das Operator-Upgrade:</p>
 <pre><code translate="no" class="language-bash">kubectl -n milvus-operator get pods
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-2-Upgrade-your-Milvus-standalone" class="common-anchor-header">Schritt 2: Aktualisieren Sie Ihre Milvus-Standalone-Installation<button data-href="#Step-2-Upgrade-your-Milvus-standalone" class="anchor-icon" translate="no">

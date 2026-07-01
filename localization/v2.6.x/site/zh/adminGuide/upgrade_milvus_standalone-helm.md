@@ -56,7 +56,7 @@ title: 使用 Helm 图表升级 Milvus Standalone
       </svg>
     </button></h3><p>从 Milvus 2.5.x 升级到 2.6.17 涉及重大的架构变更：</p>
 <ul>
-<li><strong>协调器整合</strong>：旧版独立的协调器（<code translate="no">dataCoord</code> 、<code translate="no">queryCoord</code> 、<code translate="no">indexCoord</code> ）已整合为单一<code translate="no">mixCoord</code></li>
+<li><strong>协调器整合</strong>：旧版中独立的协调器（<code translate="no">dataCoord</code> 、<code translate="no">queryCoord</code> 、<code translate="no">indexCoord</code> ）已整合为单一<code translate="no">mixCoord</code></li>
 <li><strong>新组件</strong>：引入流式处理节点（Streaming Node）以增强数据处理能力</li>
 <li><strong>组件移除</strong>：已移除并整合<code translate="no">indexNode</code> </li>
 </ul>

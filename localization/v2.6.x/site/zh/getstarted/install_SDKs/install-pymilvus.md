@@ -21,7 +21,7 @@ title: 安装 Milvus Python SDK
         ></path>
       </svg>
     </button></h1><p>本主题介绍了如何安装 Milvus 的 Python SDK（pymilvus）。</p>
-<p>Milvus 的当前版本支持 Python、Node.js、GO 和 Java 语言的 SDK。</p>
+<p>Milvus 的当前版本支持 Python、Node.js、Go 和 Java 语言的 SDK。</p>
 <h2 id="Requirements" class="common-anchor-header">系统要求<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

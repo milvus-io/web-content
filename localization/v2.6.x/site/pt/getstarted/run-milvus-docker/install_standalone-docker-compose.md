@@ -187,7 +187,7 @@ EOF
 <li><a href="/docs/pt/v2.6.x/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/pt/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Explore <a href="/docs/pt/v2.6.x/milvus-webui.md">o Milvus WebUI</a>, uma interface web intuitiva para a observabilidade e gestão do Milvus.</p></li>
+<li><p>Explore <a href="/docs/pt/v2.6.x/milvus-webui.md">o Milvus WebUI</a>, uma interface web intuitiva para a monitorização e gestão do Milvus.</p></li>
 <li><p>Explore <a href="/docs/pt/v2.6.x/milvus_backup_overview.md">o Milvus Backup</a>, uma ferramenta de código aberto para cópias de segurança dos dados do Milvus.</p></li>
 <li><p>Explore <a href="/docs/pt/v2.6.x/birdwatcher_overview.md">o Birdwatcher</a>, uma ferramenta de código aberto para depuração do Milvus e atualizações dinâmicas de configuração.</p></li>
 <li><p>Explore <a href="https://github.com/zilliztech/attu">o Attu</a>, uma ferramenta GUI de código aberto para a gestão intuitiva do Milvus.</p></li>

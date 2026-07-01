@@ -163,7 +163,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
 <p>구성을 적용합니다:</p>
 <pre><code translate="no" class="language-bash">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --<span class="hljs-built_in">type</span> merge
 <button class="copy-code-btn"></button></code></pre>
-<p>완료될 때까지 기다리십시오:</p>
+<p>완료될 때까지 기다립니다:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>

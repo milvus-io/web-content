@@ -198,7 +198,7 @@ Creating milvus-minio ... done​
 Creating milvus-standalone ... done​
 
 </code></pre>
-<p>根据您的网络连接情况，下载 Milvus 安装所需的镜像可能需要一段时间。一旦名为<strong>milvus-standalone</strong>、<strong>milvus-minio</strong> 和<strong>milvus-etcd</strong>的容器启动，您将看到 ​</p>
+<p>根据您的网络连接情况，下载 Milvus 安装所需的镜像可能需要一段时间。一旦名为<strong>Milvus Standalone</strong>、<strong>milvus-minio</strong> 和<strong>milvus-etcd</strong>的容器启动，您会发现 ​</p>
 <ul>
 <li><p><strong>milvus-etcd</strong>容器不会向主机暴露任何端口，并将数据映射到当前文件夹中的<strong>volumes/etcd</strong>目录中。​</p></li>
 <li><p><strong>milvus-minio</strong>容器在本地监听<strong>9090</strong>和<strong>9091</strong>端口，使用默认身份验证凭据，并将数据映射到当前文件夹中的<strong>volumes/minio</strong>目录。​</p></li>
@@ -283,7 +283,7 @@ Creating milvus-standalone ... done​
   
  </span></p>
 <p>如果虚拟化功能处于禁用状态，您可能需要检查主板固件的 BIOS 设置。在 BIOS 设置中启用虚拟化的方法因主板厂商而异。以华硕（ASUS）主板<a href="https://www.asus.com/support/faq/1043786/">为例，您可以参考这篇</a>关于启用虚拟化的<a href="https://www.asus.com/support/faq/1043786/">文章</a>。​</p>
-<p>随后，您需要重启计算机并启用 Hyper-V。有关详细信息，请参阅<a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">这篇微软文章</a>。​</p></li>
+<p>随后，您需要重启计算机并启用 Hyper-V。详情请参阅<a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">这篇微软文章</a>。​</p></li>
 <li><p>检查 Docker Desktop 服务是否已启动。​</p>
 <p>您可以运行以下命令来启动 Docker Desktop 服务。</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;net start com.docker.service​
@@ -329,7 +329,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>如果您在 WSL 2 上运行 Milvus 时遇到与 WSL 相关的问题，可能需要按照以下步骤检查是否已将 Docker Desktop 配置为使用基于 WSL 2 的引擎：​</p>
+    </button></h3><p>如果您在 WSL 2 上运行 Milvus 时遇到了与 WSL 相关的问题，可能需要按照以下步骤检查是否已将 Docker Desktop 配置为使用基于 WSL 2 的引擎：​</p>
 <ol>
 <li><p>请确保在<strong>“设置”</strong>&gt;<strong>“常规”中</strong>勾选了“使用基于 WSL 2 的引擎”。​</p>
 <p><span class="img-wrapper">

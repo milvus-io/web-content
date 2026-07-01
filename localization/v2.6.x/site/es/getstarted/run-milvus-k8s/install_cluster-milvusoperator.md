@@ -285,7 +285,7 @@ my-release-minio-3                               1/1     Running   0          2m
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>Si lo prefieres, puedes utilizar <code translate="no">:19530</code> en lugar de <code translate="no">27017:19530</code> en el comando anterior para que <code translate="no">kubectl</code> te asigne un puerto local y así no tengas que gestionar conflictos de puertos.</p>
-<p>Por defecto, el reenvío de puertos de kubectl solo escucha en <code translate="no">localhost</code>. Utiliza el indicador <code translate="no">address</code> si quieres que Milvus escuche en la dirección IP seleccionada o en todas ellas. El siguiente comando hace que el reenvío de puertos escuche en todas las direcciones IP de la máquina host.</p>
+<p>Por defecto, el reenvío de puertos de kubectl solo escucha en <code translate="no">localhost</code>. Utiliza el indicador <code translate="no">address</code> si quieres que Milvus escuche en la dirección IP seleccionada o en todas las direcciones IP. El siguiente comando hace que el reenvío de puertos escuche en todas las direcciones IP de la máquina host.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
@@ -319,7 +319,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span></span> 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h2 id="Access-Milvus-WebUI" class="common-anchor-header">Acceder a la interfaz web de Milvus<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
+<h2 id="Access-Milvus-WebUI" class="common-anchor-header">Acceda a la interfaz web de Milvus<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -360,7 +360,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>Al eliminar el clúster de Milvus con la configuración predeterminada, no se eliminan las dependencias como etcd, Pulsar y MinIO. Por lo tanto, la próxima vez que instales la misma instancia del clúster de Milvus, estas dependencias se volverán a utilizar.</li>
+<li>Al eliminar el clúster de Milvus con la configuración predeterminada, no se eliminan las dependencias como etcd, Pulsar y MinIO. Por lo tanto, la próxima vez que instale la misma instancia del clúster de Milvus, estas dependencias se volverán a utilizar.</li>
 <li>Para eliminar las dependencias y las reclamaciones de volumen persistente (PVC) junto con el clúster de Milvus, consulta <a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">el archivo de configuración</a>.</li>
 </ul>
 </div>

@@ -39,7 +39,7 @@ title: Menginstal Milvus Python SDK
       </svg>
     </button></h2><ul>
 <li>Diperlukan Python 3.7 atau yang lebih baru.</li>
-<li>Google Protobuf harus sudah terinstal. Anda dapat menginstalnya dengan perintah ` <code translate="no">pip3 install protobuf==3.20.0</code>`.</li>
+<li>Google Protobuf harus sudah terpasang. Anda dapat menginstalnya dengan perintah ` <code translate="no">pip3 install protobuf==3.20.0</code>`.</li>
 <li>grpcio-tools harus sudah terinstal. Anda dapat menginstalnya dengan perintah ` <code translate="no">pip3 install grpcio-tools</code>`.</li>
 </ul>
 <h2 id="Install-PyMilvus-via-pip" class="common-anchor-header">Instal PyMilvus melalui pip<button data-href="#Install-PyMilvus-via-pip" class="anchor-icon" translate="no">

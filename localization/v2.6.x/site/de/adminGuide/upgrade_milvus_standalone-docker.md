@@ -89,7 +89,7 @@ title: Upgrade von Milvus Standalone mit Docker Compose
 <li>Wenn Sie derzeit v2.6.0-rc1 verwenden und Ihre Daten erhalten möchten, finden Sie in <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">diesem Community-Leitfaden</a> Hilfe zur Migration.</li>
 <li>Sie <strong>müssen</strong> zunächst auf Version 2.5.16 oder höher aktualisieren, bevor Sie ein Upgrade auf Version 2.6.17 durchführen können.</li>
 </ul>
-<p><strong>Einschränkungen bei der Nachrichtenwarteschlange</strong>: Beim Upgrade auf Milvus v2.6.17 müssen Sie Ihre aktuelle Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</p>
+<p><strong>Einschränkungen bei der Nachrichtenwarteschlange</strong>: Beim Upgrade auf Milvus v2.6.17 müssen Sie Ihre derzeitige Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</p>
 <div class="alter note">
 <p>Aus Sicherheitsgründen aktualisiert Milvus mit der Veröffentlichung von v2.6.17 sein MinIO auf RELEASE.2024-12-18T13-15-44Z.</p>
 </div>
@@ -124,7 +124,7 @@ title: Upgrade von Milvus Standalone mit Docker Compose
         ></path>
       </svg>
     </button></h3><div class="alert note">
-<p>Überspringen Sie diesen Schritt, wenn Ihre Standalone-Bereitstellung bereits mit v2.5.16 oder höher läuft.</p>
+<p>Überspringen Sie diesen Schritt, wenn Ihre eigenständige Bereitstellung bereits mit v2.5.16 oder höher läuft.</p>
 </div>
 <ol>
 <li><p>Bearbeiten Sie Ihre vorhandene Datei „ <code translate="no">docker-compose.yaml</code> “ und aktualisieren Sie das Milvus-Image-Tag auf v2.5.16:</p>

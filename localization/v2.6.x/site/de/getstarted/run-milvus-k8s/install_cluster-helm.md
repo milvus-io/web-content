@@ -86,7 +86,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <pre><code translate="no" class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Das Milvus-Helm-Charts-Repository unter <code translate="no">https://github.com/milvus-io/milvus-helm</code> wurde archiviert. Wir verwenden nun das neue Repository unter <code translate="no">https://github.com/zilliztech/milvus-helm</code>. Das archivierte Repository ist weiterhin für Charts bis zur Version 4.0.31 verfügbar, für spätere Versionen sollten Sie jedoch das neue Repository verwenden.</p>
+<p>Das Milvus-Helm-Charts-Repository unter <code translate="no">https://github.com/milvus-io/milvus-helm</code> wurde archiviert. Wir verwenden nun das neue Repository unter <code translate="no">https://github.com/zilliztech/milvus-helm</code>. Das archivierte Repository ist weiterhin für Charts bis zur Version 4.0.31 verfügbar, für spätere Releases sollten Sie jedoch das neue Repository verwenden.</p>
 </div>
 <p>Laden Sie anschließend die Milvus-Charts wie folgt aus dem Repository herunter:</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>helm repo update
@@ -134,7 +134,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Hinweis</strong>: Im Standalone-Modus wird Woodpecker standardmäßig als Nachrichtenwarteschlange verwendet und die Komponente „Streaming Node“ aktiviert. Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/architecture_overview.md">„Architekturübersicht</a> “ und <a href="/docs/de/v2.6.x/use-woodpecker.md">„Verwendung von Woodpecker</a>“.</p>
+<p><strong>Hinweis</strong>: Im Standalone-Modus wird Woodpecker standardmäßig als Nachrichtenwarteschlange verwendet und die Komponente „Streaming Node“ aktiviert. Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/architecture_overview.md">„Architekturübersicht</a> “ und <a href="/docs/de/v2.6.x/use-woodpecker.md">„Woodpecker verwenden</a>“.</p>
 </div>
 <p><strong>Milvus-Cluster bereitstellen:</strong></p>
 <p>Der folgende Befehl stellt einen Milvus-Cluster mit optimierten Einstellungen für v2.6.17 bereit und verwendet dabei Woodpecker als empfohlene Nachrichtenwarteschlange:</p>
@@ -264,7 +264,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <div class="alert note">
 <p><strong>Optionen für die Portweiterleitung:</strong></p>
 <ul>
-<li><strong>Lokalen Port automatisch zuweisen</strong>: Verwenden Sie „ <code translate="no">:19530</code> “ anstelle von „ <code translate="no">27017:19530</code> “, damit kubectl einen verfügbaren Port auswählt</li>
+<li><strong>Lokalen Port automatisch zuweisen</strong>: Verwenden Sie <code translate="no">:19530</code> anstelle von <code translate="no">27017:19530</code>, damit kubectl einen verfügbaren Port auswählt</li>
 <li><strong>Auf allen Schnittstellen lauschen</strong>: Fügen Sie <code translate="no">--address 0.0.0.0</code> hinzu, um Verbindungen von anderen Rechnern zuzulassen:
 <pre><code translate="no" class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530
 <button class="copy-code-btn"></button></code></pre></li>

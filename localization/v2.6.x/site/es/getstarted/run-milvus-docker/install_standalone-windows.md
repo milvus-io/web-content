@@ -301,7 +301,7 @@ The most recent version of Windows Subsystem for Linux is already installed.​
 
 </code></pre></li>
 <li><p>Comprueba si se ha iniciado el daemon de Docker.</p>
-<p>Debes ir al directorio de instalación de Docker Desktop y ejecutar « <code translate="no">.\DockerCli.exe -SwitchDaemon</code> » para iniciar el daemon de Docker.</p>
+<p>Debe ir al directorio de instalación de Docker Desktop y ejecutar « <code translate="no">.\DockerCli.exe -SwitchDaemon</code> » para iniciar el daemon de Docker.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;cd &quot;C:\Program Files\Docker\Docker&quot;​
 C:\Program Files\Docker\Docker&gt;.\DockerCli.exe -SwitchDaemon​
 Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.\pipe\dockerBackendApiServer: The system cannot find the file specified.​
@@ -348,7 +348,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
   
  </span></p></li>
 </ol>
-<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">¿Cómo puedo solucionar los errores relacionados con el volumen que aparecen durante el inicio de Milvus y que indican « <code translate="no">Read config failed</code> »?​<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
+<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">¿Cómo puedo solucionar los errores relacionados con el volumen que aparecen al iniciar Milvus y que dicen « <code translate="no">Read config failed</code> »?​<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -369,7 +369,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span>Mensaje de error «Read config failed» al iniciar Milvus</span>
   
  </span></p>
-<p>Para solucionar el error que aparece al iniciar Milvus y que dice «Read config failed», debes comprobar si el volumen montado en el contenedor de Milvus es el correcto. Si el volumen está montado correctamente en el contenedor, puedes utilizar el comando <code translate="no">docker exec</code> para acceder al contenedor y listar el contenido de la carpeta <strong>/milvus/configs</strong> de la siguiente manera:​</p>
+<p>Para solucionar el error que aparece al iniciar Milvus y que dice «Read config failed», debes comprobar si el volumen montado en el contenedor de Milvus es el correcto. Si el volumen está correctamente montado en el contenedor, puedes utilizar el comando <code translate="no">docker exec</code> para acceder al contenedor y listar el contenido de la carpeta <strong>/milvus/configs</strong> de la siguiente manera:​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" /> 
@@ -414,7 +414,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 </ul></li>
 <li><p>Descubre <a href="/docs/es/v2.6.x/milvus-webui.md">Milvus WebUI</a>, una interfaz web intuitiva para la observabilidad y la gestión de Milvus.</p></li>
 <li><p>Descubre <a href="/docs/es/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, una herramienta de código abierto para realizar copias de seguridad de los datos de Milvus.</p></li>
-<li><p>Descubre <a href="/docs/es/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, una herramienta de código abierto para la depuración de Milvus y las actualizaciones dinámicas de configuración.</p></li>
+<li><p>Descubre <a href="/docs/es/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, una herramienta de código abierto para la depuración de Milvus y las actualizaciones dinámicas de la configuración.</p></li>
 <li><p>Descubre <a href="https://github.com/zilliztech/attu">Attu</a>, una herramienta GUI de código abierto para la gestión intuitiva de Milvus.</p></li>
 <li><p><a href="/docs/es/v2.6.x/monitor.md">Supervisa Milvus con Prometheus</a>.</p></li>
 </ul>

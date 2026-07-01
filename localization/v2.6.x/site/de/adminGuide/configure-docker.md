@@ -294,6 +294,6 @@ Die Daten werden gemäß der Standardkonfiguration in <code translate="no">docke
 <ul>
 <li><a href="/docs/de/v2.6.x/deploy_s3.md">Objektspeicher mit Docker Compose oder Helm konfigurieren</a></li>
 <li><a href="/docs/de/v2.6.x/deploy_etcd.md">Meta-Speicher mit Docker Compose oder Helm konfigurieren</a></li>
-<li><a href="/docs/de/v2.6.x/deploy_pulsar.md">Konfigurieren Sie den Nachrichtenspeicher mit Docker Compose oder Helm</a></li>
+<li><a href="/docs/de/v2.6.x/deploy_pulsar.md">Konfigurieren des Nachrichtenspeichers mit Docker Compose oder Helm</a></li>
 </ul></li>
 </ul>

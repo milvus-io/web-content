@@ -62,7 +62,7 @@ title: Milvus Standalone mit RPM-/DEB-Paket installieren
 <li>Für x86_64/amd64 laden Sie das Paket <strong>„milvus_2.6.9-1_amd64.deb“</strong> oder <strong>„milvus_2.6.9-1_amd64.rpm“</strong> herunter.</li>
 <li>Für ARM64 laden Sie das Paket <strong>„milvus_2.6.9-1_arm64.deb“</strong> oder <strong>„milvus_2.6.9-1_arm64.rpm“</strong> herunter.</li>
 </ul>
-<p>Der folgende Befehl setzt voraus, dass Sie Milvus Standalone auf einem x86_64/amd64-Rechner ausführen.</p>
+<p>Der folgende Befehl geht davon aus, dass Sie Milvus Standalone auf einem x86_64/amd64-Rechner ausführen werden.</p>
 <pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.9/milvus_2.6.9-1_amd64.rpm -O milvus_2.6.9-1_amd64.rpm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-the-RPMDEB-Package" class="common-anchor-header">Installieren Sie das RPM-/DEB-Paket<button data-href="#Install-the-RPMDEB-Package" class="anchor-icon" translate="no">

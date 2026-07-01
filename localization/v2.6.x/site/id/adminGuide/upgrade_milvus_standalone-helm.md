@@ -88,7 +88,7 @@ title: Memperbarui Milvus Standalone dengan Helm Chart
 <li>Jika Anda saat ini menjalankan v2.6.0-rc1 dan perlu mempertahankan data Anda, silakan merujuk ke <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">panduan komunitas ini</a> untuk bantuan migrasi.</li>
 <li>Anda <strong>harus</strong> melakukan upgrade ke v2.5.16 atau yang lebih baru sebelum melakukan upgrade ke v2.6.17.</li>
 </ul>
-<p><strong>Batasan antrian pesan</strong>: Saat melakukan pembaruan ke Milvus v2.6.17, Anda harus mempertahankan pilihan antrian pesan saat ini. Pergantian antara sistem antrian pesan yang berbeda selama proses pembaruan tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia pada versi mendatang.</p>
+<p><strong>Batasan antrian pesan</strong>: Saat melakukan peningkatan ke Milvus v2.6.17, Anda harus mempertahankan pilihan antrian pesan saat ini. Pergantian antara sistem antrian pesan yang berbeda selama proses peningkatan tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia pada versi mendatang.</p>
 <div class="alert note">
 Sejak versi 4.2.21 dari chart Helm Milvus, kami memperkenalkan chart pulsar-v3.x sebagai dependensi. Untuk kompatibilitas mundur, silakan perbarui Helm Anda ke v3.14 atau versi yang lebih baru, dan pastikan untuk menambahkan opsi ` <code translate="no">--reset-then-reuse-values</code> ` setiap kali Anda menggunakan ` <code translate="no">helm upgrade</code>`.
 </div>
