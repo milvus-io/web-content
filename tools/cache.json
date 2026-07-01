@@ -838,7 +838,7 @@
     "v2.6.x/site/en/reference/time_sync.md": "2025-06-12T06:10:52.330Z",
     "v2.6.x/site/en/reference/timestamp.md": "2026-04-27T07:21:58.871Z",
     "v2.6.x/site/en/reference/tune_consistency.md": "2026-05-15T10:26:50.817Z",
-    "v2.6.x/site/en/release_notes.md": "2026-07-01T02:12:05.451Z",
+    "v2.6.x/site/en/release_notes.md": "2026-07-01T03:11:21.852Z",
     "v2.6.x/site/en/rerankers/rerankers-bge.md": "2025-06-12T06:11:00.623Z",
     "v2.6.x/site/en/rerankers/rerankers-cohere.md": "2025-06-12T06:11:01.646Z",
     "v2.6.x/site/en/rerankers/rerankers-cross-encoder.md": "2025-06-12T06:11:02.530Z",
@@ -1548,7 +1548,10 @@
     "v3.0.x/site/en/userGuide/tools/milvus-cdc/cdc_switchover.md": "2026-05-15T10:16:34.460Z",
     "v3.0.x/site/en/userGuide/tools/milvus-cdc/milvus_cdc_overview.md": "2026-05-15T10:16:49.590Z",
     "v3.0.x/site/en/userGuide/tools/milvus-cdc/set_up_cdc_replication.md": "2026-05-15T10:17:07.716Z",
-    "v3.0.x/site/en/userGuide/search-query-get/boolean/pattern-matching.md": "2026-07-01T02:03:53.407Z",
-    "v3.0.x/site/en/userGuide/schema/text.md": "2026-07-01T02:03:28.084Z"
+    "v3.0.x/site/en/userGuide/search-query-get/boolean/pattern-matching.md": "2026-07-01T03:07:54.000Z",
+    "v3.0.x/site/en/userGuide/schema/text.md": "2026-07-01T03:07:29.452Z",
+    "v3.0.x/site/en/adminGuide/etcd.md": "2026-07-01T03:06:24.682Z",
+    "v3.0.x/site/en/adminGuide/object-storage.md": "2026-07-01T03:06:36.997Z",
+    "v3.0.x/site/en/adminGuide/woodpecker.md": "2026-07-01T03:07:08.866Z"
   }
 }

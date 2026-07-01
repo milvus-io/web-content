@@ -22,14 +22,14 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h1><p>In KI-Suchanwendungen hilft Ihnen die Vektorsuche dabei, semantisch ähnliche Entitäten zu finden, doch oft benötigt die Anwendung auch den ursprünglichen Quelltext hinter jedem Treffer. Ein LLM oder Agent kann diesen Text als Kontext nutzen, um das Ergebnis zu lesen, zu zitieren, zusammenzufassen oder in eine Eingabeaufforderung einzubinden.</p>
-<p>Milvus bietet den skalaren Feldtyp „ <code translate="no">TEXT</code> “ zum direkten Speichern langer Quelltexte zusammen mit Entitäten. Typische Werte sind Textpassagen, lange Dokumente, Artikeltexte, Tickets und Protokolle. Im Gegensatz zu „ <code translate="no">VARCHAR</code> “, das eine feste „ <code translate="no">max_length</code> “ erfordert, müssen Sie bei „ <code translate="no">TEXT</code> “ keine maximale Byte-Länge im Sammlungsschema festlegen.</p>
+<p>Milvus bietet den skalaren Feldtyp „ <code translate="no">TEXT</code> “ zum direkten Speichern langer Quelltexte zusammen mit Entitäten an. Typische Werte sind Textpassagen, lange Dokumente, Artikeltexte, Tickets und Protokolle. Im Gegensatz zu „ <code translate="no">VARCHAR</code> “, das eine feste „ <code translate="no">max_length</code> “ erfordert, müssen Sie bei „ <code translate="no">TEXT</code> “ keine maximale Byte-Länge im Sammlungsschema festlegen.</p>
 <p>Um ein Feld vom Typ „ <code translate="no">TEXT</code> “ zu definieren, setzen Sie „ <code translate="no">datatype</code> “ auf „ <code translate="no">DataType.TEXT</code> “.</p>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;content&quot;</span>,
 <span class="highlighted-wrapper-line">    datatype=DataType.TEXT,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Nachdem das Feld definiert wurde, kann jede Entität einen Zeichenfolgenwert in diesem Feld enthalten. Sie fügen „ <code translate="no">TEXT</code> “-Werte wie andere skalare Felder ein und geben sie in Abfrage- oder Suchergebnissen zurück, indem Sie das Feld in „ <code translate="no">output_fields</code> “ auflisten.</p>
+<p>Nachdem das Feld definiert wurde, kann jede Entität einen Zeichenfolgenwert in diesem Feld enthalten. Sie fügen „ <code translate="no">TEXT</code> “-Werte wie andere Skalarfelder ein und geben sie in Abfrage- oder Suchergebnissen zurück, indem Sie das Feld in „ <code translate="no">output_fields</code> “ auflisten.</p>
 <div class="alert note">
 <p><code translate="no">TEXT</code> Felder unterstützen Nullwerte. Um diese Funktion zu aktivieren, setzen Sie „ <code translate="no">nullable</code> “ auf „ <code translate="no">True</code> “. Weitere Informationen finden Sie unter <a href="/docs/de/nullable-and-default.md">„Nullfähiges Feld</a>“.</p>
 </div>
@@ -53,7 +53,7 @@ beta: Milvus 3.0.x
 <li>In Milvus 3.0.0 unterstützen „ <code translate="no">TEXT</code> “-Felder „ <code translate="no">PHRASE_MATCH</code> “ nicht.</li>
 <li>In Milvus 3.0.0 unterstützen „ <code translate="no">TEXT</code> “-Felder keine Standardwerte.</li>
 <li>In Milvus 3.0.0 werden „ <code translate="no">TEXT</code> “-Felder in externen Sammlungen nicht unterstützt.</li>
-<li>In Milvus 3.0.0 unterstützen „ <code translate="no">TEXT</code> “-Felder keine Skalarindizes.</li>
+<li>In Milvus 3.0.0 unterstützen „ <code translate="no">TEXT</code> “-Felder keine skalaren Indizes.</li>
 <li><code translate="no">TEXT</code> ist nicht für die reguläre Metadatenfilterung vorgesehen. Wenn Sie nach Metadaten mit kurzen Zeichenfolgen filtern müssen und der Feldwert innerhalb der Längenbeschränkung von „ <code translate="no">VARCHAR</code> “ liegt, verwenden Sie „ <code translate="no">VARCHAR</code> “.</li>
 </ul>
 <h2 id="Choose-TEXT-or-VARCHAR" class="common-anchor-header">Wählen Sie TEXT oder VARCHAR<button data-href="#Choose-TEXT-or-VARCHAR" class="anchor-icon" translate="no">
@@ -242,7 +242,7 @@ client.load_collection(collection_name=COLLECTION_NAME)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Verwenden Sie den Rohtext der Abfrage als Suchdaten und führen Sie die Suche im Feld „sparse vector“ durch. Milvus wandelt den Abfragetext in einen spärlichen Vektor um, ordnet die Treffer mit BM25 nach und gibt das angeforderte Feld „ <code translate="no">TEXT</code> “ in „ <code translate="no">output_fields</code> “ zurück.</p>
+    </button></h2><p>Verwenden Sie den Rohtext der Abfrage als Suchdaten und führen Sie die Suche im Feld „sparse vector“ durch. Milvus wandelt den Abfragetext in einen spärlichen Vektor um, ordnet die Treffer mit BM25 nach und gibt das angeforderte Feld „ <code translate="no">TEXT</code> “ im Feld „ <code translate="no">output_fields</code> “ zurück.</p>
 <pre><code translate="no" class="language-python">results = client.search(
     collection_name=COLLECTION_NAME,
 <span class="highlighted-comment-line">    data=[<span class="hljs-string">&quot;how does Milvus store source text for retrieval&quot;</span>],</span>

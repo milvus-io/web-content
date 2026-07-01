@@ -118,7 +118,7 @@ res = client.query(
 </thead>
 <tbody>
 <tr><td><code translate="no">%</code></td><td>Übereinstimmung mit null oder mehr Zeichen.</td></tr>
-<tr><td><code translate="no">_</code></td><td>Entspricht genau einem Zeichen.</td></tr>
+<tr><td><code translate="no">_</code></td><td>Stimmt mit genau einem Zeichen überein.</td></tr>
 </tbody>
 </table>
 <h3 id="Common-LIKE-patterns" class="common-anchor-header">Gängige LIKE-Muster<button data-href="#Common-LIKE-patterns" class="anchor-icon" translate="no">
@@ -180,7 +180,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Verwenden Sie Regex-Filter, wenn das Muster Funktionen regulärer Ausdrücke wie Zeichenklassen, Wiederholungen, Alternativen, Anker oder den Abgleich ohne Berücksichtigung der Groß-/Kleinschreibung erfordert. Milvus wendet einen <a href="https://github.com/google/re2/wiki/syntax">RE2-regulären</a> Ausdruck auf einen Zeichenfolgenwert an.</p>
+    </button></h2><p>Verwenden Sie Regex-Filter, wenn das Muster Funktionen regulärer Ausdrücke wie Zeichenklassen, Wiederholungen, Alternativen, Anker oder groß-/kleinschreibungsunabhängige Übereinstimmungen erfordert. Milvus wendet einen <a href="https://github.com/google/re2/wiki/syntax">RE2-regulären</a> Ausdruck auf einen Zeichenfolgenwert an.</p>
 <p>Die rechte Seite von „ <code translate="no">=~</code> “ oder „ <code translate="no">!~</code> “ muss ein Zeichenfolgenliteral sein.</p>
 <table>
 <thead>
@@ -264,7 +264,7 @@ res = client.query(
 </thead>
 <tbody>
 <tr><td><code translate="no">json_field[&quot;path&quot;] =~ &quot;pattern&quot;</code></td><td>Nein</td><td>Erkennt nur Zeichenfolgenwerte, die dem Regex-Muster entsprechen.</td></tr>
-<tr><td><code translate="no">json_field[&quot;path&quot;] !~ &quot;pattern&quot;</code></td><td>Ja</td><td>Gibt Entitäten zurück, bei denen der Pfad fehlt, null ist, kein String ist oder ein String ist, der nicht dem Regex-Muster entspricht.</td></tr>
+<tr><td><code translate="no">json_field[&quot;path&quot;] !~ &quot;pattern&quot;</code></td><td>Ja</td><td>Gibt Entitäten zurück, bei denen der Pfad fehlt, null ist, kein String ist oder ein String ist, der nicht dem regulären Ausdruck entspricht.</td></tr>
 </tbody>
 </table>
 <h2 id="Accelerate-pattern-matching-with-indexes" class="common-anchor-header">Beschleunigung des Musterabgleichs durch Indizes<button data-href="#Accelerate-pattern-matching-with-indexes" class="anchor-icon" translate="no">
@@ -291,7 +291,7 @@ res = client.query(
 </thead>
 <tbody>
 <tr><td>Enthält feste Literal-Teilstrings, wie z. B. <code translate="no">message =~ &quot;error.*timeout&quot;</code> oder <code translate="no">message LIKE &quot;%database%&quot;</code></td><td><code translate="no">NGRAM</code></td><td>Hilfreich, wenn Milvus aussagekräftige Literal-Teilstrings aus dem Muster extrahieren kann. Weitere Informationen finden Sie unter <a href="/docs/de/ngram.md">NGRAM</a>.</td></tr>
-<tr><td>Präfix-, exakte oder gleichheitsähnliche Zeichenfolgenfilter, insbesondere bei Feldern mit geringer bis mittlerer Kardinalität</td><td><code translate="no">STL_SORT</code>, „ <code translate="no">INVERTED</code> “ oder <code translate="no">BITMAP</code></td><td>Können effektiver sein, wenn das Feld wiederholte Werte enthält oder wenn der Filter nahe an einer exakten Übereinstimmung liegt. Weitere Informationen finden Sie unter <a href="/docs/de/stl-sort.md">STL_SORT</a>, <a href="/docs/de/inverted.md">INVERTED</a> und <a href="/docs/de/bitmap.md">BITMAP</a>.</td></tr>
+<tr><td>Präfix-, exakte oder gleichheitsähnliche Zeichenfolgenfilter, insbesondere bei Feldern mit geringer bis mittlerer Kardinalität</td><td><code translate="no">STL_SORT</code>, „ <code translate="no">INVERTED</code> “ oder <code translate="no">BITMAP</code></td><td>Können effektiver sein, wenn das Feld wiederholte Werte enthält oder wenn der Filter nahezu exakt passt. Weitere Informationen finden Sie unter <a href="/docs/de/stl-sort.md">STL_SORT</a>, <a href="/docs/de/inverted.md">INVERTED</a> und <a href="/docs/de/bitmap.md">BITMAP</a>.</td></tr>
 <tr><td>Regex-Muster ohne feste Literale oder Muster, die von Zeichenklassen, kurzen Tokens oder Platzhaltern dominiert werden</td><td>Führen Sie einen Benchmark durch, bevor Sie sich auf die Indexbeschleunigung verlassen</td><td>Diese Muster bieten möglicherweise nur eine begrenzte Indexselektivität und können auf umfassendere Scans zurückgreifen.</td></tr>
 </tbody>
 </table>

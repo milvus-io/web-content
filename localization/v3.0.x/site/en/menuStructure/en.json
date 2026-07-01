@@ -1484,10 +1484,52 @@
     ]
   },
   {
+    "label": "Data Infrastructure & Integration",
+    "id": "data_infra_integration",
+    "isMenu": true,
+    "order": 9,
+    "children": [
+      {
+        "label": "Metadata",
+        "id": "metadata",
+        "isMenu": true,
+        "order": 1,
+        "children": [
+          {
+            "label": "etcd",
+            "id": "etcd.md",
+            "order": 0,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Object Storage",
+        "id": "object-storage.md",
+        "order": 2,
+        "children": []
+      },
+      {
+        "label": "Message Queue (mqType)",
+        "id": "mqtype",
+        "isMenu": true,
+        "order": 4,
+        "children": [
+          {
+            "label": "Woodpecker",
+            "id": "woodpecker.md",
+            "order": 1,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
     "label": "Administration Guide",
     "id": "admin_guide",
     "isMenu": true,
-    "order": 9,
+    "order": 10,
     "children": [
       {
         "label": "Deployment",
@@ -3030,7 +3072,7 @@
     "label": "FAQs",
     "id": "faq",
     "isMenu": true,
-    "order": 9,
+    "order": 11,
     "children": [
       {
         "label": "Performance FAQs",

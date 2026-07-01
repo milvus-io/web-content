@@ -160,7 +160,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>請使用<code translate="no">LIKE</code> 進行前綴、後綴、包含以及固定位置單一字元比對。<code translate="no">LIKE</code> 不支援字元類別（例如<code translate="no">[0-9]</code> ）、選擇關係（例如<code translate="no">error|failed</code> ）、重複次數（例如<code translate="no">{4}</code> ）、錨點（例如<code translate="no">^</code> 或<code translate="no">$</code> ），亦不支援不區分大小寫標誌（例如<code translate="no">(?i)</code> ）。若需使用此類模式，請改用正規表達式。</p>
+    </button></h3><p>請使用<code translate="no">LIKE</code> 進行前綴、後綴、包含以及固定位置單一字元比對。<code translate="no">LIKE</code> 不支援字元類別（例如<code translate="no">[0-9]</code> ）、選擇關係（例如<code translate="no">error|failed</code> ）、重複次數（例如<code translate="no">{4}</code> ）、錨點（例如<code translate="no">^</code> 或<code translate="no">$</code> ），亦不支援不區分大小寫標誌（例如<code translate="no">(?i)</code> ）。若需使用這些模式，請改用正規表達式。</p>
 <p>若需進行完全字串相等比對，請使用<code translate="no">==</code> 。僅當篩選條件需要通配符匹配時，才使用<code translate="no">LIKE</code> 。</p>
 <h2 id="Use-regex" class="common-anchor-header">使用正規表達式<button data-href="#Use-regex" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -222,7 +222,7 @@ res = client.query(
 <p>若要匹配多個單字中的任一個，請使用<code translate="no">|</code> 進行選擇：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ &quot;error|failed|timeout&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>若要字面匹配正規表達式元字元，請在正規表達式模式中對其進行轉義。例如，若要匹配字面上的點（正規表達式中的 `<code translate="no">\.</code> `），請在 Python 篩選器字串中寫作 `<code translate="no">\\.</code> `：</p>
+<p>若要字面匹配正規表達式中的元字元，請在正規表達式模式中對其進行轉義。例如，若要匹配字面上的點（正規表達式中的 `<code translate="no">\.</code> `），請在 Python 篩選器字串中寫作 `<code translate="no">\\.</code> `：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;email =~ &quot;@gmail\\.com$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>注意：Milvus 的正規表達式篩選器遵循 RE2 語法。若正規表達式模式使用了 RE2 不支援的語法，或因其他原因而無效，Milvus 將拒絕該篩選器表達式。有關正規表達式元字元、標誌及匹配行為的詳細資訊，請參閱<a href="https://github.com/google/re2/wiki/syntax">RE2 語法參考</a>。</p>
@@ -289,6 +289,6 @@ res = client.query(
 <tbody>
 <tr><td>包含固定的字面值子字串，例如<code translate="no">message =~ &quot;error.*timeout&quot;</code> 或<code translate="no">message LIKE &quot;%database%&quot;</code></td><td><code translate="no">NGRAM</code></td><td>當 Milvus 能從模式中提取有意義的字面值子字串時，此設定會有所幫助。詳細資訊請參閱<a href="/docs/zh-hant/ngram.md">NGRAM</a>。</td></tr>
 <tr><td>前綴、精確或等值類型的字串篩選器，特別適用於基數較低至中等的欄位</td><td><code translate="no">STL_SORT</code>、<code translate="no">INVERTED</code> ，或<code translate="no">BITMAP</code></td><td>當欄位具有重複值，或篩選條件接近完全匹配時，此方法可能更為有效。詳情請參閱<a href="/docs/zh-hant/stl-sort.md">STL_SORT</a>、<a href="/docs/zh-hant/inverted.md">INVERTED</a> 及<a href="/docs/zh-hant/bitmap.md">BITMAP</a>。</td></tr>
-<tr><td>不含固定字面值的正則表達式模式，或以字元類別、短標記或萬用字元為主的模式</td><td>在依賴索引加速之前請先進行效能測試</td><td>這些模式可能提供有限的索引選擇性，並可能退而採用更廣泛的掃描。</td></tr>
+<tr><td>不含固定字面值的正規表達式模式，或以字元類別、短標記或萬用字元為主的模式</td><td>在依賴索引加速之前請先進行效能測試</td><td>這些模式可能提供有限的索引選擇性，並可能退而採用更廣泛的掃描。</td></tr>
 </tbody>
 </table>

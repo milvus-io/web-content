@@ -5,8 +5,8 @@ summary: >-
   O Milvus suporta a correspondência de padrões de cadeias de caracteres com
   padrões curinga LIKE e expressões regulares RE2. Utilize filtros de padrões
   para corresponder prefixos, sufixos, subcadeias, códigos estruturados,
-  domínios de e-mail, percursos de URL e outros padrões de cadeias de caracteres
-  em campos VARCHAR, percursos de cadeias de caracteres JSON ou elementos ARRAY.
+  domínios de e-mail, caminhos de URL e outros padrões de cadeias de caracteres
+  em campos VARCHAR, caminhos de cadeias de caracteres JSON ou elementos ARRAY.
 ---
 <h1 id="Pattern-Matching" class="common-anchor-header">Correspondência de padrões<button data-href="#Pattern-Matching" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -24,7 +24,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Em aplicações de pesquisa agênica, a pesquisa vetorial e a correspondência de padrões do tipo grep complementam-se frequentemente. A pesquisa vetorial recupera entidades semanticamente relevantes, enquanto a correspondência de padrões restringe esses resultados com base em estruturas exatas de cadeias de caracteres, tais como códigos de erro, prefixos de registos, domínios de e-mail, percursos de URL ou identificadores.</p>
-<p>No Milvus, é possível expressar estas restrições de padrões em filtros escalares com « <code translate="no">LIKE</code> » para correspondência simples com caracteres curinga e « <code translate="no">=~</code> » ou « <code translate="no">!~</code> » para expressões regulares <a href="https://github.com/google/re2/wiki/syntax">RE2</a>. É possível combinar estes filtros com « <code translate="no">query</code> », « <code translate="no">search</code> » ou a pesquisa híbrida.</p>
+<p>No Milvus, é possível expressar estas restrições de padrão em filtros escalares com « <code translate="no">LIKE</code> » para correspondência simples com caracteres curinga e « <code translate="no">=~</code> » ou « <code translate="no">!~</code> » para expressões regulares <a href="https://github.com/google/re2/wiki/syntax">RE2</a>. É possível combinar estes filtros com « <code translate="no">query</code> », « <code translate="no">search</code> » ou a pesquisa híbrida.</p>
 <p>As expressões de correspondência de padrões são escritas no parâmetro <code translate="no">filter</code>. Por exemplo, a consulta seguinte corresponde a mensagens de registo que contenham um código de erro como <code translate="no">E1001</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -111,7 +111,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O operador <code translate="no">LIKE</code> destina-se à correspondência simples com caracteres curinga em valores de cadeia de caracteres. Apenas suporta os seguintes caracteres curinga:</p>
+    </button></h2><p>O operador <code translate="no">LIKE</code> destina-se à correspondência simples com caracteres curinga em valores de cadeia de caracteres. Suporta apenas os seguintes caracteres curinga:</p>
 <table>
 <thead>
 <tr><th>Caractere curinga</th><th>Descrição</th></tr>
@@ -164,7 +164,7 @@ res = client.query(
         ></path>
       </svg>
     </button></h3><p>Utilize « <code translate="no">LIKE</code> » para correspondências de prefixo, sufixo, «contém» e de um único carácter numa posição fixa. « <code translate="no">LIKE</code> » não suporta classes de caracteres como « <code translate="no">[0-9]</code> », alternâncias como « <code translate="no">error|failed</code> », contagens de repetições como « <code translate="no">{4}</code> », âncoras como « <code translate="no">^</code> » ou « <code translate="no">$</code> », nem sinalizadores de insensibilidade a maiúsculas e minúsculas como « <code translate="no">(?i)</code> ». Utilize expressões regulares (regex) para esses padrões.</p>
-<p>Utilize <code translate="no">==</code> para igualdade exata de cadeias completas. Utilize <code translate="no">LIKE</code> apenas quando o filtro necessitar de correspondência com caracteres curinga.</p>
+<p>Utilize <code translate="no">==</code> para igualdade exata de cadeias de caracteres completas. Utilize <code translate="no">LIKE</code> apenas quando o filtro necessitar de correspondência com caracteres curinga.</p>
 <h2 id="Use-regex" class="common-anchor-header">Utilize expressões regulares<button data-href="#Use-regex" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -292,6 +292,6 @@ res = client.query(
 <tbody>
 <tr><td>Contém subcadeias literais fixas, como <code translate="no">message =~ &quot;error.*timeout&quot;</code> ou <code translate="no">message LIKE &quot;%database%&quot;</code></td><td><code translate="no">NGRAM</code></td><td>É útil quando o Milvus consegue extrair subcadeias literais significativas do padrão. Para mais detalhes, consulte <a href="/docs/pt/ngram.md">NGRAM</a>.</td></tr>
 <tr><td>Filtros de cadeias de caracteres do tipo prefixo, exato ou de igualdade, especialmente em campos com cardinalidade baixa a moderada</td><td><code translate="no">STL_SORT</code>, <code translate="no">INVERTED</code> ou <code translate="no">BITMAP</code></td><td>Podem ser mais eficazes quando o campo contém valores repetidos ou quando o filtro se aproxima de uma correspondência exata. Para mais detalhes, consulte <a href="/docs/pt/stl-sort.md">STL_SORT</a>, <a href="/docs/pt/inverted.md">INVERTED</a> e <a href="/docs/pt/bitmap.md">BITMAP</a>.</td></tr>
-<tr><td>Padrões Regex sem literais fixos, ou padrões dominados por classes de caracteres, tokens curtos ou curingas</td><td>Faça testes de desempenho antes de confiar na aceleração por índice</td><td>Estes padrões podem proporcionar uma seletividade de índice limitada e podem recorrer a varreduras mais abrangentes.</td></tr>
+<tr><td>Padrões Regex sem literais fixos, ou padrões dominados por classes de caracteres, tokens curtos ou caracteres curinga</td><td>Faça testes de desempenho antes de confiar na aceleração por índice</td><td>Estes padrões podem proporcionar uma seletividade de índice limitada e podem recorrer a varreduras mais abrangentes.</td></tr>
 </tbody>
 </table>

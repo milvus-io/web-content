@@ -79,7 +79,7 @@ res = client.query(
         ></path>
       </svg>
     </button></h2><p>Pilih operator paling sederhana yang dapat mengekspresikan pola yang Anda butuhkan.</p>
-<p>Jika Anda memerlukan pencocokan string yang tepat, kami menyarankan Anda menggunakan <code translate="no">==</code> alih-alih pencocokan pola. Gunakan <code translate="no">LIKE</code> atau regex hanya jika filter perlu mencocokkan suatu pola.</p>
+<p>Jika Anda memerlukan pencocokan string yang tepat, kami menyarankan Anda menggunakan ` <code translate="no">==</code> ` alih-alih pencocokan pola. Gunakan ` <code translate="no">LIKE</code> ` atau regex hanya jika filter perlu mencocokkan suatu pola.</p>
 <table>
 <thead>
 <tr><th>Persyaratan</th><th>Operator yang direkomendasikan</th><th>Contoh</th><th>Deskripsi</th></tr>
@@ -179,7 +179,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Gunakan filter regex ketika pola memerlukan fitur ekspresi reguler seperti kelas karakter, pengulangan, alternatif, jangkar, atau pencocokan yang tidak membedakan huruf besar-kecil. Milvus menerapkan ekspresi reguler <a href="https://github.com/google/re2/wiki/syntax">RE2</a> ke nilai string.</p>
+    </button></h2><p>Gunakan filter regex jika pola tersebut memerlukan fitur ekspresi reguler seperti kelas karakter, pengulangan, alternatif, jangkar, atau pencocokan yang tidak membedakan huruf besar-kecil. Milvus menerapkan ekspresi reguler <a href="https://github.com/google/re2/wiki/syntax">RE2</a> ke nilai string.</p>
 <p>Sisi kanan dari <code translate="no">=~</code> atau <code translate="no">!~</code> harus berupa literal string.</p>
 <table>
 <thead>
@@ -252,11 +252,11 @@ res = client.query(
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;code =~ &quot;^E[0-9]{4}$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Kolom VARCHAR yang dapat bernilai null</strong></p>
-<p>Filter regex tidak cocok dengan nilai null. Hal ini berlaku untuk <code translate="no">=~</code> dan <code translate="no">!~</code>. Jika Anda ingin mengecualikan pola regex tetapi tetap mempertahankan nilai null, tambahkan <code translate="no">OR field IS NULL</code> secara eksplisit:</p>
+<p>Filter regex tidak cocok dengan nilai null. Hal ini berlaku untuk <code translate="no">=~</code> dan <code translate="no">!~</code>. Jika Anda ingin mengecualikan pola regex tetapi tetap mempertahankan nilai null, tambahkan secara eksplisit <code translate="no">OR field IS NULL</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot; OR message IS NULL&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Jalur JSON</strong></p>
-<p>Untuk jalur JSON, filter regex berperilaku berbeda ketika jalurnya hilang, bernilai null, atau menghasilkan nilai non-string:</p>
+<p>Untuk jalur JSON, filter regex berperilaku berbeda ketika jalurnya hilang, null, atau menghasilkan nilai non-string:</p>
 <table>
 <thead>
 <tr><th>Filter</th><th>Menyertakan nilai yang hilang/null/bukan string?</th><th>Catatan</th></tr>
@@ -282,7 +282,7 @@ res = client.query(
         ></path>
       </svg>
     </button></h2><p>Milvus mendukung beberapa jenis indeks pada bidang string yang dapat digunakan bersama dengan filter " <code translate="no">LIKE</code> " dan filter regex pada bidang " <code translate="no">VARCHAR</code> " atau jalur string JSON, seperti <code translate="no">NGRAM</code>, <code translate="no">STL_SORT</code>, <code translate="no">INVERTED</code>, dan <code translate="no">BITMAP</code>. Pencocokan pola dapat berfungsi tanpa indeks, tetapi indeks dapat meningkatkan kinerja pada dataset besar.</p>
-<p>Efektivitas indeks bergantung pada ekspresi pola, apakah Milvus dapat mengekstrak substring literal tetap, serta kardinalitas dan distribusi bidang target. Pola bergaya awalan seperti <code translate="no">name LIKE &quot;Prod%&quot;</code> mungkin lebih diuntungkan oleh strategi indeks yang berbeda dibandingkan pola infiks atau sufiks seperti <code translate="no">description LIKE &quot;%vector%&quot;</code> atau <code translate="no">filename LIKE &quot;%.json&quot;</code>.</p>
+<p>Efektivitas indeks bergantung pada ekspresi pola, apakah Milvus dapat mengekstrak substring literal tetap, serta kardinalitas dan distribusi bidang target. Pola bergaya awalan seperti <code translate="no">name LIKE &quot;Prod%&quot;</code> mungkin memerlukan strategi indeks yang berbeda dibandingkan pola infiks atau sufiks seperti <code translate="no">description LIKE &quot;%vector%&quot;</code> atau <code translate="no">filename LIKE &quot;%.json&quot;</code>.</p>
 <p>Gunakan tabel berikut sebagai titik awal, lalu lakukan pengujian kinerja dengan beban kerja Anda sendiri:</p>
 <table>
 <thead>
@@ -291,6 +291,6 @@ res = client.query(
 <tbody>
 <tr><td>Mengandung substring literal tetap, seperti <code translate="no">message =~ &quot;error.*timeout&quot;</code> atau <code translate="no">message LIKE &quot;%database%&quot;</code></td><td><code translate="no">NGRAM</code></td><td>Berguna ketika Milvus dapat mengekstrak substring literal yang bermakna dari pola tersebut. Untuk detailnya, lihat <a href="/docs/id/ngram.md">NGRAM</a>.</td></tr>
 <tr><td>Filter string awalan, tepat, atau mirip kesetaraan, terutama pada bidang dengan kardinalitas rendah hingga sedang</td><td><code translate="no">STL_SORT</code>, <code translate="no">INVERTED</code>, atau <code translate="no">BITMAP</code></td><td>Mungkin lebih efektif jika bidang memiliki nilai yang berulang atau jika filter mendekati pencocokan eksak. Untuk detailnya, lihat <a href="/docs/id/stl-sort.md">STL_SORT</a>, <a href="/docs/id/inverted.md">INVERTED</a>, dan <a href="/docs/id/bitmap.md">BITMAP</a>.</td></tr>
-<tr><td>Pola regex tanpa literal tetap, atau pola yang didominasi oleh kelas karakter, token pendek, atau karakter pengganti</td><td>Lakukan pengujian kinerja sebelum mengandalkan percepatan indeks</td><td>Pola-pola ini mungkin memberikan selektivitas indeks yang terbatas dan dapat beralih ke pemindaian yang lebih luas.</td></tr>
+<tr><td>Pola regex tanpa literal tetap, atau pola yang didominasi oleh kelas karakter, token pendek, atau karakter pengganti</td><td>Lakukan pengujian kinerja sebelum mengandalkan akselerasi indeks</td><td>Pola-pola ini mungkin memberikan selektivitas indeks yang terbatas dan dapat beralih ke pemindaian yang lebih luas.</td></tr>
 </tbody>
 </table>

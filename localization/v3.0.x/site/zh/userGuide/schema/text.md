@@ -76,7 +76,7 @@ beta: Milvus 3.0.x
 </thead>
 <tbody>
 <tr><td>最适合</td><td>用于识别、分类或筛选实体的简短元数据，例如<code translate="no">title</code> 、<code translate="no">tag</code> 、<code translate="no">category</code> 或<code translate="no">external_id</code> 。</td><td>用于 LLM 或 Agents 工作流的较长源内容，例如<code translate="no">content</code> 、<code translate="no">passage</code> 、<code translate="no">article_body</code> 或<code translate="no">log_message</code> 。</td></tr>
-<tr><td>长度设置</td><td>需要<code translate="no">max_length</code> ，该字段定义了该字段可存储的最大字节数。最大值为<code translate="no">65,535</code> 字节。如果值可能超过此限制，请使用<code translate="no">TEXT</code> 。</td><td>不要求<code translate="no">max_length</code> ，因此Schema无需为文本值设定固定的字节限制。</td></tr>
+<tr><td>长度设置</td><td>需要<code translate="no">max_length</code> ，该字段定义了该字段可存储的最大字节数。最大值为<code translate="no">65,535</code> 字节。如果值可能超过此限制，请使用<code translate="no">TEXT</code> 。</td><td>不要求<code translate="no">max_length</code> ，因此Schema中无需为文本值设定固定的字节限制。</td></tr>
 <tr><td>存储行为</td><td>将每个值存储在字段配置的<code translate="no">max_length</code> 内。</td><td>对于较大的文本值，将使用自动存储选择机制。有关详细信息，请参阅《<a href="#how-milvus-stores-large-text-values">Milvus 如何存储大型 TEXT 值</a>》。</td></tr>
 <tr><td>主字段支持</td><td>可作为主字段使用。</td><td>不能用作主字段。</td></tr>
 <tr><td>过滤</td><td>适用于需要出现在过滤表达式中的短字符串元数据，例如<code translate="no">category == &quot;news&quot;</code> 或<code translate="no">tag in [&quot;ai&quot;, &quot;database&quot;]</code> 。</td><td>不适用于常规元数据过滤。</td></tr>
@@ -100,7 +100,7 @@ beta: Milvus 3.0.x
       </svg>
     </button></h2><p><details></p>
 <p><summary>展开以了解其工作原理</summary></p>
-<p>当您插入一个实体时，您为<code translate="no">TEXT</code> 字段提供的字符串即为<code translate="no">TEXT</code> 值。Milvus 会将该值的大小与<a href="/docs/zh/configure_datanode.md#dataNodetextinlineThreshold">dataNode.text.inlineThreshold</a>（默认值为<code translate="no">65,536</code> 字节）进行比较，然后选择两种内部存储路径之一。</p>
+<p>当您插入一个实体时，您为<code translate="no">TEXT</code> 字段提供的字符串即为<code translate="no">TEXT</code> 值。Milvus 会将该值的大小与<a href="/docs/zh/configure_datanode.md#dataNodetextinlineThreshold">dataNode.text.inlineThreshold</a>（默认值为<code translate="no">65,536</code> 字节）进行比较，然后选择两种内部存储路径中的一种。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v3.0.x/assets/text-large-storage-flow.png" alt="Large text storage" class="doc-image" id="large-text-storage" /> 
@@ -109,12 +109,12 @@ beta: Milvus 3.0.x
  </span></p>
 <ul>
 <li><strong>内联存储</strong>：如果<code translate="no">TEXT</code> 值小于<code translate="no">dataNode.text.inlineThreshold</code> ，Milvus 会将原始文本值直接存储在<code translate="no">TEXT</code> 字段 data 中。</li>
-<li><strong>LOB 存储</strong>：如果 `<code translate="no">TEXT</code> ` 的值大于或等于 `<code translate="no">dataNode.text.inlineThreshold</code>`，Milvus 将该值视为大对象，并将原始文本单独存储在对象存储（如 MinIO）中。`<code translate="no">TEXT</code> ` 字段数据中存储指向该单独存储文本的内部引用。当在查询或搜索结果中请求 `<code translate="no">TEXT</code> ` 字段时，Milvus 会使用该引用检索并返回原始文本。</li>
+<li><strong>LOB 存储</strong>：如果 `<code translate="no">TEXT</code> ` 的值大于或等于 `<code translate="no">dataNode.text.inlineThreshold</code>`，Milvus 会将该值视为大对象，并将原始文本单独存储在对象存储（如 MinIO）中。`<code translate="no">TEXT</code> ` 字段数据中存储的是指向该单独存储文本的内部引用。当在查询或搜索结果中请求 `<code translate="no">TEXT</code> ` 字段时，Milvus 会使用该引用检索并返回原始文本。</li>
 </ul>
-<p>此存储选择属于内部机制。无论 Milvus 使用何种存储路径，您对<code translate="no">TEXT</code> 字段的插入、查询和搜索操作方式均保持一致。若需调整阈值或相关存储、压缩及垃圾回收行为，请参阅与<a href="/docs/zh/configure_datanode.md">dataNode 相关的配置</a>和<a href="/docs/zh/configure_datacoord.md">与 dataCoord 相关的配置</a>。</p>
+<p>此存储选择属于内部机制。无论 Milvus 使用何种存储路径，您对<code translate="no">TEXT</code> 字段的插入、查询和搜索操作方式均保持一致。若需调整阈值或相关存储、压缩及垃圾回收行为，请参阅与<a href="/docs/zh/configure_datanode.md">dataNode 相关的配置和</a> <a href="/docs/zh/configure_datacoord.md">与 dataCoord 相关的配置</a>。</p>
 <p>如果您的部署使用对象存储，较大的<code translate="no">TEXT</code> 值可能会以 Milvus 管理的对象形式出现在诸如<code translate="no">lobs/...</code> 之类的路径下。这些对象属于实现细节，不应手动移动、复制或删除。 在删除实体、删除分区或压缩数据后，只有当 Milvus 垃圾回收在安全窗口期结束后移除了未被引用的巨型对象数据，对象存储的使用量才会减少。</p>
 <p></details></p>
-<p><code translate="no">TEXT</code> 的常见用途是配合 BM25 进行全文搜索。在此模式下，<code translate="no">TEXT</code> 字段存储原始源内容，BM25 分析文本并生成稀疏向量，用于对基于关键词的匹配结果进行排序。搜索结果随后可返回匹配的<code translate="no">TEXT</code> 值，作为 LLM 或 Agents 工作流的上下文。 以下示例演示了如何将<code translate="no">TEXT</code> 字段用作BM25的输入字段。如需了解全文搜索的概念和查询选项，请参阅《<a href="/docs/zh/full-text-search.md">全文搜索</a>》。</p>
+<p><code translate="no">TEXT</code> 的常见用途是配合 BM25 进行全文搜索。在此模式下，<code translate="no">TEXT</code> 字段存储原始源内容，BM25 分析文本并生成稀疏向量，用于对基于关键词的匹配结果进行排序。搜索结果随后可返回匹配的<code translate="no">TEXT</code> 值，作为 LLM 或 Agents 工作流的上下文。 以下示例演示了如何将<code translate="no">TEXT</code> 字段用作BM25的输入字段。如需了解全文搜索的概念和查询选项，请参阅《<a href="/docs/zh/full-text-search.md">全文搜索》</a>。</p>
 <h2 id="Step-1-Create-a-collection-with-a-TEXT-field" class="common-anchor-header">步骤 1：创建包含 TEXT 字段的 Collection<button data-href="#Step-1-Create-a-collection-with-a-TEXT-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
