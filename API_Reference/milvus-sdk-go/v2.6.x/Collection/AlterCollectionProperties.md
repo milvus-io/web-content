@@ -17,7 +17,7 @@ err := client.AlterCollectionProperties(ctx, option)
 
 **PARAMETERS:**
 
-- **collection** (*string*)
+- **[collection](Collection.md)** (*string*)
 
     The collection.
 
