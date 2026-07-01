@@ -7,7 +7,7 @@ summary: Learn how to configure message storage with Milvus Operator.
 
 # Configure Message Storage with Milvus Operator
 
-Milvus uses RocksMQ, Pulsar or Kafka for managing logs of recent changes, outputting stream logs, and providing log subscriptions. This topic introduces how to configure message storage dependencies when you install Milvus with Milvus Operator. For more details, refer to [Configure Message Storage with Milvus Operator](https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md) in the Milvus Operator repository.
+In Milvus 3.x, Woodpecker is the default message queue (see [Woodpecker](woodpecker.md)). With Milvus Operator, you can also configure RocksMQ, Pulsar, or Kafka for managing logs of recent changes, outputting stream logs, and providing log subscriptions. This topic introduces how to configure message storage dependencies when you install Milvus with Milvus Operator. For more details, refer to [Configure Message Storage with Milvus Operator](https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md) in the Milvus Operator repository.
 
 This topic assumes that you have deployed Milvus Operator.
 
@@ -31,15 +31,15 @@ The table below shows whether RocksMQ, Pulsar, Kafka, and Woodpecker are support
 
 There are also other limitations for specifying the message storage:
 - Only one message storage for one Milvus instance is supported. However we still have backward compatibility with multiple message storages set for one instance. The priority is as follows:
-  - standalone mode:  RocksMQ (default) > Pulsar > Kafka
-  - cluster mode: Pulsar (default) > Kafka
+  - standalone mode: Woodpecker (default) > RocksMQ > Pulsar > Kafka
+  - cluster mode: Woodpecker (default) > Pulsar > Kafka
 - The message storage cannot be changed while the Milvus system is running. 
 - Only Kafka 2.x or 3.x verison is supported.
 - **Upgrade limitations**: **Message Queue limitations**: When upgrading to Milvus v3.0-beta, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
 
 
 ## Configure RocksMQ
-RocksMQ is the default message storage in Milvus standalone. 
+RocksMQ was the default message storage in Milvus standalone up to 2.5.x (superseded by Woodpecker from 2.6.x). 
 
 <div class="alert note">
 
@@ -86,7 +86,7 @@ spec:
 
 ## Configure Woodpecker
 
-Woodpecker is a cloud-native Write-Ahead Log (WAL) designed for object storage. It offers high throughput, low operational overhead, and seamless scalability. For more details, see [Use Woodpecker](use-woodpecker.md).
+Woodpecker is a cloud-native Write-Ahead Log (WAL) designed for object storage. It offers high throughput, low operational overhead, and seamless scalability. For more details, see [Woodpecker](woodpecker.md).
 
 ## Configure Pulsar
 
@@ -186,7 +186,7 @@ kubectl apply -f milvuscluster.yaml
 
 ## Configure Kafka
 
-Pulsar is the default message storage in a Milvus cluster. If you want to use Kafka, add the optional field `msgStreamType` to configure Kafka.
+Pulsar was the default message storage in a Milvus cluster up to 2.5.x (superseded by Woodpecker from 2.6.x). If you want to use Kafka, add the optional field `msgStreamType` to configure Kafka.
 
 `kafka` supports `external` and `inCluster`.
 

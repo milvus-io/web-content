@@ -7,7 +7,7 @@ summary: Learn how to configure message storage with Docker Compose or Helm.
 
 # Configure Message Storage with Docker Compose or Helm
 
-Milvus uses Pulsar or Kafka for managing logs of recent changes, outputting stream logs, and providing log subscriptions. Pulsar is the default message storage system. This topic introduces how to configure message storage with Docker Compose or Helm.
+Milvus uses a message queue for managing logs of recent changes, outputting stream logs, and providing log subscriptions. Starting from Milvus 3.0.x, Woodpecker is the default recommended message queue; this topic introduces how to configure Pulsar or Kafka with Docker Compose or Helm.
 
 You can configure Pulsar with [Docker Compose](https://docs.docker.com/get-started/overview/) or on K8s and configure Kafka on K8s.
 
@@ -76,7 +76,7 @@ helm install <your_release_name> milvus/milvus -f values.yaml
 
 For Milvus clusters on K8s, you can configure Woodpecker in the same command that starts Milvus. Alternatively, you can configure Woodpecker using the <code>values.yml</code> file on the /charts/milvus path in the [milvus-helm](https://github.com/milvus-io/milvus-helm) repository before you start Milvus. 
 
-For details on how to configure Milvus using Helm, refer to [Configure Milvus with Helm Charts](configure-helm.md). For details on Woodpecker-related configuration items, refer to [woodpecker-related configurations](use-woodpecker.md).
+For details on how to configure Milvus using Helm, refer to [Configure Milvus with Helm Charts](configure-helm.md). For details on Woodpecker-related configuration items, refer to [woodpecker-related configurations](woodpecker.md).
                                     |
 ### Using the YAML file
 
@@ -105,7 +105,7 @@ extraConfigFiles:
           maxIntervalForLocalStorage: 10ms # Maximum interval between two sync operations local storage backend, default is 10 milliseconds.
           maxBytes: 256M # Maximum size of write buffer in bytes.
           maxEntries: 10000 # Maximum entries number of write buffer.
-          maxFlushRetries: 5 # Maximum size of write buffer in bytes.
+          maxFlushRetries: 5 # Maximum number of flush retries.
           retryInterval: 1000ms # Maximum interval between two retries. default is 1000 milliseconds.
           maxFlushSize: 2M # Maximum size of a fragment in bytes to flush.
           maxFlushThreads: 32 # Maximum number of threads to flush data
@@ -157,7 +157,7 @@ helm install <your_release_name> milvus/milvus -f values.yaml
 
 ## Configure RocksMQ with Helm
 
-Milvus standalone uses RocksMQ as the default message storage. For detailed steps on how to configure Milvus with Helm, refer to [Configure Milvus with Helm Charts](configure-helm.md). For details on RocksMQ-related configuration items, refer to [RocksMQ-related configurations](configure_rocksmq.md).
+RocksMQ was the default message storage in Milvus standalone up to 2.5.x; from 2.6.x the default is Woodpecker. For detailed steps on how to configure Milvus with Helm, refer to [Configure Milvus with Helm Charts](configure-helm.md). For details on RocksMQ-related configuration items, refer to [RocksMQ-related configurations](configure_rocksmq.md).
 
 - If you start Milvus with RocksMQ and want to change its settings, you can run `helm upgrade -f ` with the changed settings in the following YAML file. 
 

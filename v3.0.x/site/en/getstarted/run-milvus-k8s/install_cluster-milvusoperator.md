@@ -12,7 +12,7 @@ This page illustrates how to start a Milvus instance in Kubernetes using [Milvus
 
 ## Overview
 
-Milvus Operator is a solution that helps you deploy and manage a full Milvus service stack to target Kubernetes (K8s) clusters. The stack includes all Milvus components and relevant dependencies like etcd, Pulsar, and MinIO. 
+Milvus Operator is a solution that helps you deploy and manage a full Milvus service stack to target Kubernetes (K8s) clusters. The stack includes all Milvus components and relevant dependencies like etcd and MinIO, with Woodpecker as the built-in message queue. 
 
 ## Prerequisites
 
@@ -136,7 +136,7 @@ $ kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/
 The command above deploys a Milvus cluster with **Woodpecker** as the message queue (recommended for v3.0-beta) and all new architectural components including the Streaming Node. 
 
 **Architecture highlights in this deployment:**
-- **Message Queue**: [Uses Woodpecker](use-woodpecker.md) (reduces infrastructure maintenance)
+- **Message Queue**: [Uses Woodpecker](woodpecker.md) (reduces infrastructure maintenance)
 - **Streaming Node**: Enabled for enhanced data processing
 - **Mix Coordinator**: Consolidated coordinator components for improved efficiency
 
@@ -171,11 +171,6 @@ status:
     status: "True"
     type: StorageReady
   - lastTransitionTime: "xxxx-xx-xxTxx:xx:xxZ"
-    message: Pulsar is ready
-    reason: PulsarReady
-    status: "True"
-    type: PulsarReady
-  - lastTransitionTime: "xxxx-xx-xxTxx:xx:xxZ"
     message: Etcd endpoints is healthy
     reason: EtcdReady
     status: "True"
@@ -189,7 +184,7 @@ status:
   status: Healthy
 ```
 
-Milvus Operator creates Milvus dependencies, such as etcd, Pulsar, and MinIO, and then Milvus components, such as proxy, coordinators, and nodes.
+Milvus Operator creates Milvus dependencies, such as etcd and MinIO, and then Milvus components, such as proxy, coordinators, and nodes.
 
 Once your Milvus cluster is ready, the status of all pods in the Milvus cluster should be similar to the following.
 
@@ -293,7 +288,7 @@ $ kubectl delete milvus my-release
 
 <div class="alert note">
 
-- When you delete the Milvus cluster using the default configuration, dependencies like etcd, Pulsar, and MinIO are not deleted. Therefore, next time when you install the same Milvus cluster instance, these dependencies will be used again.
+- When you delete the Milvus cluster using the default configuration, dependencies like etcd and MinIO are not deleted. Therefore, next time when you install the same Milvus cluster instance, these dependencies will be used again.
 - To delete the dependencies and persistent volume claims (PVCs) along with the Milvus cluster, see [configuration file](https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml).
 
 </div>
@@ -316,6 +311,14 @@ $ helm -n milvus-operator uninstall milvus-operator
 ```shell
 $ kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v1.3.0/deploy/manifests/deployment.yaml
 ```
+
+## Optional dependencies
+
+This deployment uses **Woodpecker** as the message queue, **etcd** for metadata, and **MinIO** for object storage, all provisioned by Milvus Operator. To use a different backend with the Operator, see:
+
+- Message queue: [Woodpecker](woodpecker.md) (default) · [Pulsar](message_storage_operator.md#Configure-Pulsar) · [Kafka](message_storage_operator.md#Configure-Kafka) · [RocksMQ](message_storage_operator.md#Configure-RocksMQ)
+- Object storage: [Configure object storage with Milvus Operator](object_storage_operator.md)
+- Metadata: [Configure etcd with Milvus Operator](meta_storage_operator.md)
 
 ## What's next
 
