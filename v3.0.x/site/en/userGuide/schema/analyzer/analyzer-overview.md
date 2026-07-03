@@ -326,6 +326,8 @@ Filters in a custom analyzer can be either **built-in** or **custom**, depending
 
     - `cncharonly`: Removes tokens that contain any non-Chinese characters. For details, refer to [Cncharonly](cncharonly-filter.md).
 
+    - `pinyin`: Adds Pinyin token forms for Chinese tokens, enabling Pinyin-based matching for Chinese text. For details, refer to [Pinyin](pinyin-filter.md).
+
     **Example of using a built-in filter:**
 
     <div class="multipleCode">
@@ -945,4 +947,3 @@ After configuring an analyzer, you can integrate with text retrieval features pr
 - [Text Match](keyword-match.md)
 
 - [Phrase Match](phrase-match.md)
-

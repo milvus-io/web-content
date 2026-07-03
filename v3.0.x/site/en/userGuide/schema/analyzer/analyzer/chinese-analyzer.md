@@ -18,6 +18,12 @@ The `chinese` analyzer consists of:
 
 The functionality of the `chinese` analyzer is equivalent to the following custom analyzer configuration:
 
+<div class="alert note">
+
+The built-in `chinese` analyzer does not emit Pinyin tokens. To match Chinese text with Pinyin query terms, use a custom analyzer with the `jieba` tokenizer and the [`pinyin`](pinyin-filter.md) filter.
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -233,4 +239,3 @@ if err != nil {
 ```python
 Chinese analyzer output: ['Milvus', '是', '一个', '高性', '性能', '高性能', '可', '扩展', '的', '向量', '数据', '据库', '数据库']
 ```
-

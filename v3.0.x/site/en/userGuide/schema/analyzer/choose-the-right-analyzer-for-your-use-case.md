@@ -67,6 +67,13 @@ The following table summarizes common problems caused by improper analyzer selec
      <td><p><a href="english-analyzer.md"><code>english</code></a> analyzer</p></td>
      <td><p>Use a language-specific analyzer, such as <a href="chinese-analyzer.md"><code>chinese</code></a>.</p></td>
    </tr>
+   <tr>
+     <td><p>Input method mismatch</p></td>
+     <td><p>Users type Pinyin, but the indexed text uses Chinese characters.</p></td>
+     <td><p>Chinese text: <code>"足球"</code>; query text: <code>"zuqiu"</code></p></td>
+     <td><p>Analyzer that emits only Chinese-character tokens</p></td>
+     <td><p>Use a custom analyzer with the <a href="jieba-tokenizer.md"><code>jieba</code></a> tokenizer and <a href="pinyin-filter.md"><code>pinyin</code></a> filter.</p></td>
+   </tr>
 </table>
 
 ## First question: Do you need to choose an analyzer?
@@ -442,6 +449,12 @@ These filters handle specific language characteristics:
      <td><p>Keeps only Chinese characters</p></td>
      <td><ul><li><p>Input: <code>["Hello", "世界", "123"]</code></p></li><li><p>Output: <code>[[], ['世界'], []]</code></p></li></ul></td>
    </tr>
+   <tr>
+     <td><p><a href="pinyin-filter.md"><code>pinyin</code></a></p></td>
+     <td><p>Chinese</p></td>
+     <td><p>Emits Pinyin token forms for Chinese tokens</p></td>
+     <td><ul><li><p>Input: <code>["中文"]</code></p></li><li><p>Output: <code>[['中文', 'zhong', 'wen']]</code></p></li></ul></td>
+   </tr>
 </table>
 
 ### Step 3: Combine and implement
@@ -574,6 +587,15 @@ analyzer_params = {
 For Simplified Chinese, `cnalphanumonly` removes all tokens except Chinese characters, alphanumeric text, and digits. This prevents punctuation from affecting search quality.
 
 </div>
+
+If users may search Chinese text by typing Pinyin, use a custom analyzer with the `jieba` tokenizer and the [`pinyin`](pinyin-filter.md) filter instead of the built-in `chinese` analyzer.
+
+```python
+analyzer_params = {
+    "tokenizer": "jieba",
+    "filter": ["pinyin"]
+}
+```
 
 ### Japanese content
 
