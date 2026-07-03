@@ -101,7 +101,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>Schritt 1: Überprüfen Sie, ob die Milvus-Instanz läuft.</strong></p>
-<p><strong>Schritt 2: Konfigurieren Sie die Zielverbindung zu Pulsar und starten Sie Milvus neu.</strong> Für den Wechsel muss Milvus die Pulsar-Verbindung bereits kennen. Tragen Sie diese daher über <code translate="no">extraConfigFiles</code> in die Datei „ <code translate="no">user.yaml</code> “ ein und wenden Sie die Änderung mit „ <code translate="no">helm upgrade</code> “ an (wodurch die Pods neu gestartet werden). „ <code translate="no">streaming.enabled=true</code> “ ist für die Switch-MQ-Funktion erforderlich.</p>
+<p><strong>Schritt 2: Konfigurieren Sie die Zielverbindung zu Pulsar und starten Sie Milvus neu.</strong> Für den Wechsel muss Milvus die Pulsar-Verbindung bereits kennen. Tragen Sie diese daher über <code translate="no">extraConfigFiles</code> in „ <code translate="no">user.yaml</code> “ ein und wenden Sie die Änderung mit „ <code translate="no">helm upgrade</code> “ an (wodurch die Pods neu gestartet werden). „ <code translate="no">streaming.enabled=true</code> “ ist für die Switch-MQ-Funktion erforderlich.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -130,7 +130,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <p><strong>Schritt 4: Überprüfen Sie, ob der Wechsel abgeschlossen ist.</strong></p>
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
-<p>Bei einem erfolgreichen Wechsel wird „ <code translate="no">[mqTypeValue=pulsar]</code> “ protokolliert.</p>
+<p>Bei einem erfolgreichen Wechsel wird Folgendes protokolliert: „ <code translate="no">[mqTypeValue=pulsar]</code> “.</p>
 <p><strong>Schritt 5: (Optional) Woodpecker-Daten bereinigen.</strong> Löschen Sie die Woodpecker-Daten auf MinIO/S3 (unter „ <code translate="no">&lt;rootPath&gt;/wp/...</code> “, typischerweise „ <code translate="no">files/wp/...</code> “) sowie die Woodpecker-Metadaten in etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). Wenn Sie später wieder zu Woodpecker zurückwechseln möchten, bereinigen Sie diese Dateien zunächst.</p>
 <h2 id="With-Milvus-Operator" class="common-anchor-header">Mit dem Milvus Operator<button data-href="#With-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -211,7 +211,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>Schritt 1: Überprüfen Sie, ob die Milvus-Instanz läuft.</strong></p>
-<p><strong>Schritt 2: Konfigurieren Sie die Pulsar-Zielverbindung und starten Sie Milvus neu.</strong> Tragen Sie die Pulsar-Verbindung unter „ <code translate="no">spec.config</code> “ ein (der Operator wandelt „ <code translate="no">spec.config</code> “ in „ <code translate="no">user.yaml</code> “ um) und legen Sie den MQ-Typ fest; durch das Anwenden des CR werden die Pods mit der neuen Konfiguration neu gestartet.</p>
+<p><strong>Schritt 2: Konfigurieren Sie die Verbindung zur Ziel-Pulsar-Instanz und starten Sie Milvus neu.</strong> Tragen Sie die Pulsar-Verbindung unter „ <code translate="no">spec.config</code> “ ein (der Operator wandelt „ <code translate="no">spec.config</code> “ in „ <code translate="no">user.yaml</code> “ um) und legen Sie den MQ-Typ fest; durch das Anwenden des CR werden die Pods mit der neuen Konfiguration neu gestartet.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># change_configmap.yaml</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>

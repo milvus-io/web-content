@@ -129,7 +129,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>그룹화를 하지 않으면, 여러 청크가 쿼리와 일치하는 경우 동일한 <code translate="no">doc_id</code> 가 여러 번 나타날 수 있습니다. <code translate="no">group_by_field=&quot;doc_id&quot;</code> 를 사용하면 각 부모 엔티티가 최대 한 번만 나타납니다. 그룹화는 요소 수준 메타데이터를 보존하므로, API 또는 SDK가 노출하는 경우 그룹화된 결과에도 선택한 Struct 요소 인덱스나 오프셋이 포함될 수 있습니다.</p>
+<p>그룹화를 하지 않으면, 여러 청크가 쿼리와 일치하는 경우 동일한 <code translate="no">doc_id</code> 가 여러 번 나타날 수 있습니다. <code translate="no">group_by_field=&quot;doc_id&quot;</code> 를 사용하면 각 부모 엔티티가 최대 한 번만 나타납니다. 그룹화는 요소 수준 메타데이터를 보존하므로, API 또는 SDK가 이를 노출하는 경우 그룹화된 결과에도 선택한 Struct 요소 인덱스나 오프셋이 포함될 수 있습니다.</p>
 <h2 id="Add-scalar-filters" class="common-anchor-header">스칼라 필터 추가<button data-href="#Add-scalar-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -218,7 +218,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>이 예제에서 두 하위 요청은 모두 동일한 StructArray 필드( <code translate="no">chunks</code>) 아래의 요소 수준 벡터 필드를 대상으로 합니다. 하이브리드 검색은 일반 벡터 필드, 서로 다른 StructArray 필드 또는 EmbeddingList 수준 요청이 혼합된 경우 요소 수준 그룹화를 지원하지 않습니다.</p>
+<p>이 예제에서 두 하위 요청 모두 동일한 StructArray 필드( <code translate="no">chunks</code>) 아래의 요소 수준 벡터 필드를 대상으로 합니다. 하이브리드 검색은 일반 벡터 필드, 서로 다른 StructArray 필드 또는 EmbeddingList 수준 요청이 혼합된 경우 요소 수준 그룹화를 지원하지 않습니다.</p>
 <h2 id="Interpret-grouped-results" class="common-anchor-header">그룹화된 결과 해석<button data-href="#Interpret-grouped-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -290,7 +290,7 @@ results = client.hybrid_search(
 <li><p>여러 필드를 기준으로 그룹화하는 경우. 요소 수준 StructArray 그룹화는 기본 키 그룹화만 지원합니다.</p></li>
 <li><p>그룹화된 결과가 일치하는 모든 Struct 요소를 나타낼 것이라고 기대하는 경우. 그룹화는 부모 엔티티당 최대 하나의 결과만 반환합니다.</p></li>
 <li><p>그룹화된 요소 수준 검색이 EmbeddingList 스타일의 <code translate="no">MAX_SIM*</code> 점수를 재계산한다고 가정하는 경우. 그룹화는 요소 수준의 일치 결과를 통합할 뿐, 점수 산정 모델을 변경하지 않습니다.</p></li>
-<li><p><code translate="no">group_by_field</code> 를 <code translate="no">radius</code> 또는 <code translate="no">range_filter</code> 와 결합합니다.</p></li>
+<li><p><code translate="no">group_by_field</code> 를 <code translate="no">radius</code> 또는 <code translate="no">range_filter</code> 와 결합하는 경우.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">다음 단계<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -308,8 +308,8 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>먼저 그룹화되지 않은 요소 수준 검색에 대해 알아보려면 <a href="/docs/ko/basic-vector-search-with-structarray.md">‘StructArray를 사용한 기본 벡터 검색’을</a> 참조하십시오.</p></li>
-<li><p>그룹화된 검색에 스칼라 필터를 추가하려면 <a href="/docs/ko/filtered-search-with-structarray.md">‘StructArray를 사용한 필터링 검색’을</a> 참조하십시오.</p></li>
+<li><p>먼저 그룹화되지 않은 요소 수준 검색을 배우려면 <a href="/docs/ko/basic-vector-search-with-structarray.md">‘StructArray를 사용한 기본 벡터 검색’을</a> 읽어보세요.</p></li>
+<li><p>그룹화된 검색에 스칼라 필터를 추가하려면 <a href="/docs/ko/filtered-search-with-structarray.md">‘StructArray를 사용한 필터링 검색’을</a> 읽어보세요.</p></li>
 <li><p>그룹화 대신 점수 또는 거리 경계를 사용하려면 <a href="/docs/ko/range-search-with-structarray.md">StructArray를 사용한 범위 검색을</a> 읽어보세요.</p></li>
 <li><p>StructArray 검색 제한 사항을 확인하려면 <a href="/docs/ko/structarray-limits.md">‘StructArray 제한 사항’을</a> 읽어보세요.</p></li>
 </ol>

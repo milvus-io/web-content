@@ -19,7 +19,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>このページでは、StructArrayのベクトルサブフィールドに対して範囲検索を実行します。範囲検索では、スコアまたは距離が指定された範囲内に収まるベクトルヒットが返されます。StructArrayフィールドの場合、要素レベルのベクトル検索と組み合わせて範囲検索を使用します。この場合、各Struct要素が個別に検索されます。</p>
+    </button></h1><p>このページでは、StructArrayのベクトルサブフィールドに対して範囲検索を実行できます。範囲検索では、スコアまたは距離が指定された範囲内に収まるベクトルヒットが返されます。StructArrayフィールドの場合、要素レベルのベクトル検索と組み合わせて範囲検索を使用します。この場合、各Struct要素が個別に検索されます。</p>
 <p>このページでは、「<a href="/docs/ja/create-structarray-field.md">StructArrayフィールドの作成</a>」の<code translate="no">tech_articles</code> コレクションを使用しています。このコレクションには、<code translate="no">chunks</code> という名前のStructArrayフィールドがあります。<code translate="no">chunks[emb]</code> ベクトルサブフィールドは、<code translate="no">COSINE</code> 、<code translate="no">IP</code> 、<code translate="no">L2</code> などの通常のベクトルメトリックを使用して、要素レベルの検索が行えるようインデックス化されています。</p>
 <h2 id="How-range-search-applies-to-StructArray" class="common-anchor-header">StructArray に対する範囲検索の適用方法<button data-href="#How-range-search-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"

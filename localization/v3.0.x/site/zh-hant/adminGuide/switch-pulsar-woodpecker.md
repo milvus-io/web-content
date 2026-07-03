@@ -81,7 +81,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <button class="copy-code-btn"></button></code></pre>
 <p>若<strong>為外部</strong>Pulsar，請清理外部 Pulsar 實例中的 Milvus 主題。Milvus 主題格式為<code translate="no">&lt;cluster_prefix&gt;-dml_&lt;seqNo&gt;_&lt;TimeTick&gt;&lt;Version&gt;</code> （例如：<code translate="no">by-dev-rootcoord-dml_10_464633776992639586v0</code> ）。</p>
 <div class="alert note">
-<p>若您計劃日後切換回 Pulsar，請先清理資料／主題以避免衝突。由於 Helm 圖表的限制，目前無法切換回<strong>內建的</strong>Pulsar 實例。</p>
+<p>若您計劃日後切換回 Pulsar，請先清理資料/主題以避免衝突。由於 Helm 圖表的限制，目前無法切換回<strong>內建的</strong>Pulsar 實例。</p>
 </div>
 <h3 id="Switch-from-Woodpecker-to-Pulsar-Helm" class="common-anchor-header">從 Woodpecker 切換至 Pulsar（Helm）<button data-href="#Switch-from-Woodpecker-to-Pulsar-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -99,7 +99,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>步驟 1：確認 Milvus 實例正在運行。</strong></p>
-<p><strong>步驟 2：配置目標 Pulsar 連線並重新啟動 Milvus。</strong>此切換操作需要 Milvus 已知曉 Pulsar 連線設定，因此請透過<code translate="no">extraConfigFiles</code> 將設定寫入<code translate="no">user.yaml</code> ，並使用<code translate="no">helm upgrade</code> 套用（此操作會滾動更新 Pod）。<code translate="no">streaming.enabled=true</code> 是「切換 MQ」功能所需的設定。</p>
+<p><strong>步驟 2：配置目標 Pulsar 連線並重新啟動 Milvus。</strong>此切換操作需要 Milvus 已知曉 Pulsar 連線設定，因此請透過<code translate="no">extraConfigFiles</code> 將其寫入<code translate="no">user.yaml</code> ，並使用<code translate="no">helm upgrade</code> 套用（此操作會滾動更新 Pod）。<code translate="no">streaming.enabled=true</code> 是「切換 MQ」功能所需的設定。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+

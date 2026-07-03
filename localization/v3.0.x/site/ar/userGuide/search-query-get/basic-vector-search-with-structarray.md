@@ -23,7 +23,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>استخدم هذه الصفحة لإجراء بحث متجهي على الحقول الفرعية المتجهة داخل حقل StructArray. يدعم StructArray وضعين أساسيين للبحث المتجهي: البحث في قائمة التضمين (EmbeddingList)، الذي يقوم بتقييم قائمة التضمين المخزنة في كل كيان، والبحث على مستوى العناصر، الذي يبحث في كل عنصر من عناصر Struct بشكل مستقل.</p>
-<p>تستخدم هذه الصفحة مجموعة « <code translate="no">tech_articles</code> » من <a href="/docs/ar/create-structarray-field.md">«إنشاء حقل StructArray</a>». تحتوي المجموعة على حقل StructArray باسم « <code translate="no">chunks</code> ». يحتوي كل جزء على نص وبيانات وصفية قياسية وحقل فرعي متجه باسم « <code translate="no">emb_list_vector</code> » مع فهرس للبحث في قائمة التضمين، وحقل فرعي متجه باسم « <code translate="no">emb</code> » مع فهرس للبحث على مستوى العنصر.</p>
+<p>تستخدم هذه الصفحة مجموعة « <code translate="no">tech_articles</code> » من <a href="/docs/ar/create-structarray-field.md">«إنشاء حقل StructArray</a>». تحتوي المجموعة على حقل StructArray باسم « <code translate="no">chunks</code> ». يحتوي كل جزء على نص وبيانات وصفية قياسية وحقل فرعي متجه باسم « <code translate="no">emb_list_vector</code> » مع فهرس للبحث في قائمة التضمين، وحقل فرعي متجه باسم « <code translate="no">emb</code> » مع فهرس للبحث على مستوى العناصر.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">قبل البدء<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -78,10 +78,10 @@ summary: >-
 <tr><td>الحقل الفرعي المستهدف</td><td><code translate="no">chunks[emb_list_vector]</code></td><td><code translate="no">chunks[emb]</code></td></tr>
 <tr><td>بيانات الاستعلام</td><td>قائمة تضمين تحتوي على متجه واحد أو أكثر.</td><td>متجه عادي.</td></tr>
 <tr><td>عائلة المقاييس</td><td><code translate="no">MAX_SIM*</code>، مثل <code translate="no">MAX_SIM_COSINE</code>.</td><td>مقاييس متجهات عادية، مثل <code translate="no">COSINE</code> أو <code translate="no">IP</code> أو <code translate="no">L2</code>.</td></tr>
-<tr><td>ما يمثله كل نتيجة</td><td>كيان مطابق يكون حقل StructArray الفرعي الخاص به مشابهًا لقائمة تضمين الاستعلام.</td><td>عنصر Struct متطابق داخل حقل StructArray.</td></tr>
+<tr><td>ما يمثله كل نتيجة</td><td>كيان مطابق يكون حقل فرعي متجه StructArray الخاص به مشابهًا لقائمة تضمين الاستعلام.</td><td>عنصر Struct مطابق داخل حقل StructArray.</td></tr>
 <tr><td>تفصيل النتائج</td><td>مستوى الكيان.</td><td>مستوى عنصر Struct.</td></tr>
 <tr><td>الإزاحة</td><td>غير قابل للتطبيق.</td><td>يحدد الموضع الذي يبدأ من الصفر لعنصر Struct المطابق عند إرجاعه.</td></tr>
-<tr><td>الاستخدام النموذجي</td><td>ColBERT و ColPali وأنماط الاسترجاع الأخرى ذات التفاعل المتأخر.</td><td>الاسترجاع على مستوى المقطع، أو مستوى الفقرة، أو مستوى المقتطف، أو مستوى الرقعة، أو مستوى الحقيقة.</td></tr>
+<tr><td>الاستخدام النموذجي</td><td>ColBERT وColPali وأنماط الاسترجاع الأخرى ذات التفاعل المتأخر.</td><td>الاسترجاع على مستوى المقطع، أو مستوى الفقرة، أو مستوى المقتطف، أو مستوى الرقعة، أو مستوى الحقيقة.</td></tr>
 </tbody>
 </table>
 <h2 id="Run-EmbeddingList-search" class="common-anchor-header">تشغيل بحث EmbeddingList<button data-href="#Run-EmbeddingList-search" class="anchor-icon" translate="no">
@@ -130,7 +130,7 @@ results = client.search(
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
         <span class="hljs-built_in">print</span>(hit[<span class="hljs-string">&quot;id&quot;</span>], hit[<span class="hljs-string">&quot;distance&quot;</span>], hit[<span class="hljs-string">&quot;entity&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>في وضع البحث هذا، يتحكم مقياس « <code translate="no">limit</code> » في عدد الكيانات التي يتم إرجاعها لكل استعلام. يمكن أن تتضمن النتيجة حقول فرعية لـ StructArray، لكن النتيجة نفسها تمثل الكيان الأصلي المطابق بدلاً من عنصر Struct واحد محدد.</p>
+<p>في وضع البحث هذا، يتحكم مقياس « <code translate="no">limit</code> » في عدد الكيانات التي يتم إرجاعها لكل استعلام. يمكن أن تتضمن النتيجة حقول فرعية لـ StructArray، لكن النتيجة نفسها تمثل الكيان الأصلي المتطابق بدلاً من عنصر Struct واحد محدد.</p>
 <div class="alert note">
 <p>للحصول على شرح تفصيلي كامل على غرار ColBERT أو ColPali، راجع <a href="/docs/ar/search-with-embedding-lists.md">«البحث باستخدام قوائم التضمين</a>». تغطي هذه الصفحة فقط سلوك البحث الأساسي في StructArray.</p>
 </div>
@@ -200,7 +200,7 @@ results = client.search(
 <tr><td><code translate="no">id</code></td><td>المفتاح الأساسي للكيان المطابق.</td><td>المفتاح الأساسي للكيان الذي يحتوي على عنصر Struct المطابق.</td></tr>
 <tr><td><code translate="no">distance</code> أو النتيجة</td><td>النتيجة أو المسافة بين قائمة التضمين الخاصة بالاستعلام وقائمة التضمين المخزنة.</td><td>النتيجة أو المسافة بين متجه الاستعلام ومتجه عنصر Struct المطابق.</td></tr>
 <tr><td><code translate="no">offset</code></td><td>غير قابل للتطبيق.</td><td>الموضع الذي يبدأ من الصفر لعنصر Struct المطابق عند إرجاعه.</td></tr>
-<tr><td>المفاتيح الأساسية المتكررة</td><td>غير متوقع في الاستعلام الفردي لأن النتائج تكون على مستوى الكيان.</td><td>ممكن، لأن عناصر Struct متعددة في نفس الكيان يمكن أن تتطابق.</td></tr>
+<tr><td>المفاتيح الأساسية المتكررة</td><td>غير متوقع في الاستعلام الفردي لأن النتائج تكون على مستوى الكيان.</td><td>ممكن، لأن عناصر Struct المتعددة في نفس الكيان يمكن أن تتطابق.</td></tr>
 <tr><td>حقول الإخراج المطلوبة لـ StructArray</td><td>يتم إرجاعها من الكيان المطابق.</td><td>يتم إرجاعها مع شكل النتائج على مستوى العنصر الذي تدعمه واجهة برمجة التطبيقات (API) ومجموعة أدوات تطوير البرامج (SDK) المستهدفة.</td></tr>
 </tbody>
 </table>

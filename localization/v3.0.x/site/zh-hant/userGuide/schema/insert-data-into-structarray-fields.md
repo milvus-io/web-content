@@ -111,7 +111,7 @@ summary: >-
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">emb_list_vector</code> 和<code translate="no">emb</code> 是獨立的向量子欄位，因為它們支援不同的搜尋模式。EmbeddingList 搜尋會將 StructArray 欄位中的所有向量視為一個嵌入清單，並返回包含<code translate="no">MAX_SIM*</code> 指標的實體層級結果。元素層級搜尋則會獨立搜尋每個 Struct 元素，並可返回匹配元素的偏移量。為簡化說明，此範例在兩個欄位中儲存相同的向量值。 在生產環境的應用程式中，當兩種搜尋模式使用相同的區塊嵌入時，可將相同的嵌入向量儲存於兩個子欄位中；若兩種搜尋模式使用不同的表示法，則可儲存不同的嵌入向量。</p>
+<p><code translate="no">emb_list_vector</code> 和<code translate="no">emb</code> 是獨立的向量子欄位，因為它們支援不同的搜尋模式。EmbeddingList 搜尋會將 StructArray 欄位中的所有向量視為一個嵌入清單，並返回帶有<code translate="no">MAX_SIM*</code> 指標的實體層級結果。元素層級搜尋則會獨立搜尋每個 Struct 元素，並可返回匹配元素的偏移量。為簡化說明，此範例在兩個欄位中儲存相同的向量值。 在生產環境的應用程式中，當兩種搜尋模式使用相同的區塊嵌入時，可將相同的嵌入向量儲存於兩個子欄位中；若兩種搜尋模式使用不同的表示方式，則可儲存不同的嵌入向量。</p>
 <h2 id="Insert-rows" class="common-anchor-header">插入資料列<button data-href="#Insert-rows" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -127,7 +127,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>請使用 `<code translate="no">client.insert()</code> ` 來插入包含 StructArray 值的資料列。</p>
+    </button></h2><p>請使用 `<code translate="no">client.insert()</code> ` 來插入包含 `StructArray` 值的資料列。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -214,7 +214,7 @@ result = client.insert(
 
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-into-nullable-StructArray-fields" class="common-anchor-header">插入至可為空的 StructArray 欄位<button data-href="#Insert-into-nullable-StructArray-fields" class="anchor-icon" translate="no">
+<h2 id="Insert-into-nullable-StructArray-fields" class="common-anchor-header">插入可為空的 StructArray 欄位<button data-href="#Insert-into-nullable-StructArray-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -302,11 +302,11 @@ result = client.insert(
 <tbody>
 <tr><td>請對 StructArray 欄位使用物件陣列。</td><td><code translate="no">chunks</code> 的值是一個清單，而清單中的每個項目皆為一個 Struct 元素。</td></tr>
 <tr><td>在每個 Struct 元素內使用子欄位名稱。</td><td>請將 `<code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> ` 插入 `<code translate="no">chunks</code>` 中，而非 `<code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code>`。</td></tr>
-<tr><td>請符合 Struct 模式的規範。</td><td>每個 Struct 元素必須使用 Struct 模式中定義的子欄位。</td></tr>
+<tr><td>請符合 Struct 模式規範。</td><td>每個 Struct 元素必須使用 Struct 模式中定義的子欄位。</td></tr>
 <tr><td>向量維數必須與結構體模式相符。</td><td>向量值必須與其向量子欄位所設定的<code translate="no">dim</code> 相符。</td></tr>
 <tr><td>須遵守<code translate="no">max_capacity</code> 。</td><td>一個實體中的 Struct 元素數量不得超過 StructArray 欄位的<code translate="no">max_capacity</code> 。</td></tr>
 <tr><td>針對不同的搜尋模式，請使用獨立的向量子欄位。</td><td>如果同時需要 EmbeddingList 搜尋和元素層級搜尋，請將向量值寫入兩個向量子欄位中。</td></tr>
-<tr><td>僅當欄位為可為空時，才使用<code translate="no">null</code> 。</td><td>不可為空的 StructArray 欄位需要有效的 StructArray 值。</td></tr>
+<tr><td>僅當欄位可為 null 時，才使用<code translate="no">null</code> 。</td><td>不可為空的 StructArray 欄位需要有效的 StructArray 值。</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">常見錯誤<button data-href="#Common-mistakes" class="anchor-icon" translate="no">

@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>O suporte ao StructArray abrange a definição do esquema, a inserção de cargas úteis, a indexação, os modos de pesquisa e os filtros específicos do StructArray. Utilize esta página como referência de limites antes de confiar no comportamento do StructArray em produção.</p>
+    </button></h1><p>O suporte ao StructArray abrange a definição do esquema, a inserção de cargas úteis, a indexação, os modos de pesquisa e os filtros específicos do StructArray. Utilize esta página como referência de limites antes de contar com o comportamento do StructArray em produção.</p>
 <p>A maioria dos limites do StructArray provém de uma de três fontes: o modelo de esquema do StructArray, o modo de pesquisa que escolher para os subcampos vetoriais e a versão do Milvus em que a sua coleção é executada.</p>
 <h2 id="Limits-at-a-glance" class="common-anchor-header">Visão geral dos limites<button data-href="#Limits-at-a-glance" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -53,7 +53,7 @@ summary: >-
 <tr><td>Índices vetoriais</td><td>Um campo vetorial ou subcampo vetorial aceita apenas um índice. Utilize subcampos vetoriais separados para a pesquisa EmbeddingList e a pesquisa ao nível do elemento.</td></tr>
 <tr><td>Funções</td><td>As funções de campo não são suportadas para campos ou subcampos dentro de um campo StructArray.</td></tr>
 <tr><td>Campos nulos</td><td>Os campos StructArray nulos estão sujeitos a restrições de versão. Quando suportados, o valor nulo aplica-se a todo o campo StructArray, e não a um elemento Struct individual de forma independente.</td></tr>
-<tr><td>Adicionar campo dinâmico</td><td>A adição de um campo StructArray a uma coleção existente está sujeita a restrições de versão e requer que o campo adicionado seja nulo.</td></tr>
+<tr><td>Adicionar campo dinâmico</td><td>A adição de um campo StructArray a uma coleção existente depende da versão e requer que o campo adicionado seja nulo.</td></tr>
 </tbody>
 </table>
 <h2 id="Schema-limits" class="common-anchor-header">Limites do esquema<button data-href="#Schema-limits" class="anchor-icon" translate="no">
@@ -146,9 +146,9 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>Campo StructArray nulo</td><td>Suportado apenas em versões que incluam suporte a StructArray nulo e a matrizes vetoriais nulas.</td></tr>
-<tr><td>Valor nulo em Python</td><td>Utilize ` <code translate="no">None</code> ` para inserir um valor nulo de StructArray em Python. Não utilize ` <code translate="no">Null</code> ` nem ` <code translate="no">null</code>`.</td></tr>
+<tr><td>Valor nulo em Python</td><td>Utilize ` <code translate="no">None</code> ` para inserir um valor `StructArray` nulo em Python. Não utilize ` <code translate="no">Null</code> ` nem ` <code translate="no">null</code>`.</td></tr>
 <tr><td>Âmbito do valor nulo</td><td>O valor nulo aplica-se a todo o campo StructArray. Por exemplo, ` <code translate="no">chunks=None</code> ` só é válido quando ` <code translate="no">chunks</code> ` é nulo.</td></tr>
-<tr><td>Valor StructArray parcialmente nulo</td><td>Quando um campo StructArray contém um valor de matriz válido, não misture matrizes de subcampos nulas com matrizes de subcampos válidas no mesmo valor.</td></tr>
+<tr><td>Valor StructArray parcialmente nulo</td><td>Quando um campo StructArray contém um valor de matriz válido, não misture matrizes de subcampos nulos com matrizes de subcampos válidos no mesmo valor.</td></tr>
 <tr><td>Adicionar dinamicamente um campo StructArray</td><td>A adição de um campo StructArray a uma coleção existente só é suportada em versões que incluam suporte a campos StructArray dinâmicos.</td></tr>
 <tr><td>Requisito de nulo para adição dinâmica</td><td>Um campo StructArray adicionado a uma coleção existente deve ser nulo, uma vez que as entidades existentes não têm qualquer valor para o novo campo.</td></tr>
 <tr><td>Entidades existentes após a adição dinâmica</td><td>As entidades existentes devolvem « <code translate="no">null</code> » para o campo StructArray adicionado em todos os seus subcampos.</td></tr>
@@ -282,6 +282,6 @@ summary: >-
     </button></h2><ol>
 <li><p>Para criar um campo StructArray, consulte <a href="/docs/pt/create-structarray-field.md">Criar um campo StructArray</a>.</p></li>
 <li><p>Para inserir dados, consulte <a href="/docs/pt/insert-data-into-structarray-fields.md">Inserir dados em campos StructArray</a>.</p></li>
-<li><p>Para criar índices vetoriais e escalares, leia <a href="/docs/pt/index-structarray-fields.md">«Indexar campos StructArray</a>».</p></li>
+<li><p>Para criar índices vetoriais e escalares, consulte <a href="/docs/pt/index-structarray-fields.md">«Indexar campos StructArray</a>».</p></li>
 <li><p>Para rever a sintaxe do filtro StructArray, leia <a href="/docs/pt/struct-array-operators.md">«Operadores StructArray</a>».</p></li>
 </ol>

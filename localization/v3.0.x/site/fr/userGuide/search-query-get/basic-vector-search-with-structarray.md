@@ -46,7 +46,7 @@ summary: >-
 <tr><th>Prérequis</th><th>Où les préparer</th></tr>
 </thead>
 <tbody>
-<tr><td>Créez un champ StructArray, tel que <code translate="no">chunks</code>.</td><td><a href="/docs/fr/create-structarray-field.md">Créer un champ StructArray</a></td></tr>
+<tr><td>Créez un champ StructArray, tel que « <code translate="no">chunks</code> ».</td><td><a href="/docs/fr/create-structarray-field.md">Créer un champ StructArray</a></td></tr>
 <tr><td>Insérez des entités dont le champ « <code translate="no">chunks</code> » contient des objets Struct.</td><td><a href="/docs/fr/insert-data-into-structarray-fields.md">Insérer des données dans les champs StructArray</a></td></tr>
 <tr><td>Créez un index « <code translate="no">MAX_SIM*</code> » sur « <code translate="no">chunks[emb_list_vector]</code> » pour la recherche dans EmbeddingList.</td><td><a href="/docs/fr/index-structarray-fields.md">Indexer les champs StructArray</a></td></tr>
 <tr><td>Créer un index métrique vectoriel standard sur « <code translate="no">chunks[emb]</code> » pour la recherche au niveau des éléments.</td><td><a href="/docs/fr/index-structarray-fields.md">Indexer les champs StructArray</a></td></tr>

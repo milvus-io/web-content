@@ -106,7 +106,7 @@ summary: >-
 <tr><td><code translate="no">Array</code></td><td>Não suportado</td><td>Os subcampos de geometria e as funções GIS não são suportados nos campos StructArray.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Não suportado</td><td>Os subcampos de texto não são suportados nos campos StructArray.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Não suportado</td><td>Os subcampos «Timestamptz» e as expressões específicas de hora não são suportados nos campos StructArray.</td></tr>
-<tr><td><code translate="no">Array</code>, <code translate="no">ArrayOfVector</code>, <code translate="no">Struct</code> ou <code translate="no">ArrayOfStruct</code></td><td>Não suportado</td><td>Um campo StructArray não pode conter matrizes aninhadas, matrizes de vetores aninhadas, campos Struct aninhados ou campos Array-of-Struct aninhados.</td></tr>
+<tr><td><code translate="no">Array</code>, <code translate="no">ArrayOfVector</code>, <code translate="no">Struct</code> ou <code translate="no">ArrayOfStruct</code></td><td>Não suportado</td><td>Um campo StructArray não pode conter matrizes aninhadas, matrizes vetoriais aninhadas, campos Struct aninhados ou campos Array-of-Struct aninhados.</td></tr>
 </tbody>
 </table>
 <p>Para obter informações sobre suporte específico por versão, comportamento de valores nulos e outros limites, consulte <a href="/docs/pt/structarray-limits.md">Limites do StructArray</a>.</p>
@@ -339,7 +339,7 @@ client.add_collection_struct_field(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Após a adição do campo StructArray, as entidades existentes devolvem ` <code translate="no">null</code> ` para o novo campo em todos os seus subcampos.</p>
-<p>Após a criação de um campo StructArray, não é possível adicionar novos subcampos a esse campo StructArray existente. Se, posteriormente, necessitar de atributos de elemento adicionais, chame ` <code translate="no">drop_collection_field()</code> ` para eliminar o campo StructArray e, em seguida, adicione um novo campo StructArray com o esquema Struct atualizado.</p>
+<p>Após a criação de um campo StructArray, não é possível adicionar novos subcampos a esse campo StructArray existente. Se, posteriormente, necessitar de atributos de elemento adicionais, chame <code translate="no">drop_collection_field()</code> para eliminar o campo StructArray e, em seguida, adicione um novo campo StructArray com o esquema Struct atualizado.</p>
 <pre><code translate="no" class="language-python">client.drop_collection_field(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
     field_name=<span class="hljs-string">&quot;chunks&quot;</span>,

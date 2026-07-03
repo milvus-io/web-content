@@ -3,7 +3,7 @@ id: structarray-limits.md
 title: StructArray の制限事項
 summary: >-
   StructArray のサポート範囲には、スキーマ定義、挿入ペイロード、インデックス作成、検索モード、および StructArray
-  独自のフィルターが含まれます。本番環境で StructArray の動作を利用する前に、このページを制限事項のリファレンスとしてご活用ください。
+  専用のフィルターが含まれます。本番環境で StructArray の動作を利用する前に、このページを制限事項のリファレンスとしてご活用ください。
 ---
 <h1 id="StructArray-Limits" class="common-anchor-header">StructArray の制限事項<button data-href="#StructArray-Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,10 +45,10 @@ summary: >-
 <tr><td>スキーマの形状</td><td>Struct は、Array フィールドの要素型としてのみ使用できます。Struct は、最上位のコレクションフィールドとしてはサポートされていません。</td></tr>
 <tr><td>サブフィールドのスキーマ</td><td>同じ StructArray フィールド内のすべての Struct 要素は、1 つの事前定義された Struct スキーマを共有します。</td></tr>
 <tr><td>容量</td><td><code translate="no">max_capacity</code> は必須であり、1つのエンティティが StructArray フィールドに格納できる Struct 要素の数を制限します。</td></tr>
-<tr><td>サブフィールドの変更</td><td>StructArray フィールドが作成された後、その既存の StructArray フィールドにサブフィールドを追加することはできません。</td></tr>
+<tr><td>サブフィールドの変更</td><td>StructArray フィールドの作成後は、その既存の StructArray フィールドにサブフィールドを追加することはできません。</td></tr>
 <tr><td>サブフィールドのパス</td><td>インデックス、検索対象、出力フィールド、およびフィルタには、<code translate="no">chunks[emb]</code> などの<code translate="no">structArray[subfield]</code> パスを使用してください。<code translate="no">chunks.emb</code> は使用しないでください。</td></tr>
 <tr><td>シェイプの挿入</td><td>StructArrayフィールドをオブジェクトの配列として挿入します。挿入ペイロード内ではパス構文を使用しないでください。</td></tr>
-<tr><td>ベクトルインデックス</td><td>ベクトルフィールドまたはベクトルサブフィールドは、1つのインデックスのみを受け付けます。EmbeddingList検索と要素レベル検索には、それぞれ別のベクトルサブフィールドを使用してください。</td></tr>
+<tr><td>ベクトルインデックス</td><td>ベクトルフィールドまたはベクトルサブフィールドは、1つのインデックスのみを受け付けます。EmbeddingList検索と要素レベル検索には、それぞれ個別のベクトルサブフィールドを使用してください。</td></tr>
 <tr><td>関数</td><td>StructArrayフィールド内のフィールドまたはサブフィールドでは、フィールド関数はサポートされていません。</td></tr>
 <tr><td>Null 許容フィールド</td><td>Null 許容の StructArray フィールドはバージョンに依存します。サポートされている場合、null は個々の Struct 要素ごとに独立して適用されるのではなく、StructArray フィールド全体に適用されます。</td></tr>
 <tr><td>動的なフィールドの追加</td><td>既存のコレクションへの StructArray フィールドの追加はバージョン制限があり、追加するフィールドは null 許容である必要があります。</td></tr>
@@ -109,7 +109,7 @@ summary: >-
 <tr><td><code translate="no">Array</code></td><td>サポート対象</td><td>サブフィールドを<code translate="no">DataType.FLOAT</code> または<code translate="no">DataType.DOUBLE</code> として定義します。</td></tr>
 <tr><td><code translate="no">Array</code></td><td>サポート対象サブフィールドを xml-ph-0000@deepl.internal または xml-ph-0001@deepl.internal として定義します。</td><td>サブフィールドを<code translate="no">DataType.VARCHAR</code> として定義し、<code translate="no">max_length</code> を設定します。</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>サポート対象</td><td>サブフィールドを<code translate="no">DataType.FLOAT_VECTOR</code> として定義し、<code translate="no">dim</code> を設定します。サポート対象</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>サポート対象</td><td>サブフィールドを「<code translate="no">DataType.FLOAT16_VECTOR</code> 」として定義し、「<code translate="no">dim</code> 」に設定します。</td></tr>
+<tr><td><code translate="no">ArrayOfVector</code></td><td>サポート対象</td><td>サブフィールドを「<code translate="no">DataType.FLOAT16_VECTOR</code> 」として定義し、<code translate="no">dim</code> を設定します。</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>サポート対象</td><td>サブフィールドを「<code translate="no">DataType.BFLOAT16_VECTOR</code> 」として定義し、「<code translate="no">dim</code> 」に設定します。</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>サポート対象</td><td>サブフィールドを「<code translate="no">DataType.INT8_VECTOR</code> 」として定義し、「<code translate="no">dim</code> 」に設定します。</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>サポート対象</td><td>サブフィールドを「<code translate="no">DataType.BINARY_VECTOR</code> 」として定義し、「<code translate="no">dim</code> 」に設定します。</td></tr>
@@ -147,9 +147,9 @@ summary: >-
 <tr><td>Python における null 値</td><td>PythonでStructArrayのnull値を挿入するには、<code translate="no">None</code> を使用してください。<code translate="no">Null</code> や<code translate="no">null</code> は使用しないでください。</td></tr>
 <tr><td>Nullの適用範囲</td><td>NullはStructArrayフィールド全体に適用されます。たとえば、<code translate="no">chunks=None</code> は、<code translate="no">chunks</code> がNull可能である場合にのみ有効です。</td></tr>
 <tr><td>部分的にNullなStructArrayの値</td><td>StructArrayフィールドに有効な配列値が含まれている場合、同じ値内でnullのサブフィールド配列と有効なサブフィールド配列を混在させてはなりません。</td></tr>
-<tr><td>StructArray フィールドの動的追加</td><td>既存のコレクションへの StructArray フィールドの動的追加は、動的な StructArray フィールドのサポートを含むバージョンでのみサポートされています。</td></tr>
+<tr><td>StructArray フィールドの動的追加</td><td>既存のコレクションへの StructArray フィールドの動的追加は、動的な StructArray フィールドのサポートが含まれるバージョンでのみサポートされています。</td></tr>
 <tr><td>動的追加における null 許容要件</td><td>既存のコレクションに StructArray フィールドを追加する場合、既存エンティティには新しいフィールドの値がないため、そのフィールドは null 許容でなければなりません。</td></tr>
-<tr><td>動的追加後の既存のエンティティ</td><td>既存のエンティティは、追加された StructArray フィールドの各サブフィールドについて、<code translate="no">null</code> を返します。</td></tr>
+<tr><td>動的追加後の既存のエンティティ</td><td>既存のエンティティは、追加されたStructArrayフィールドについて、そのサブフィールド全体で<code translate="no">null</code> を返します。</td></tr>
 </tbody>
 </table>
 <p>Milvus v3.0.x では、Null 許容の StructArray フィールド、Null 許容のベクトル配列、および動的な StructArray フィールドの追加が利用可能です。</p>
@@ -233,8 +233,8 @@ summary: >-
 <tr><td>基本的な EmbeddingList 検索</td><td><code translate="no">MAX_SIM*</code> メトリックでインデックス付けされた StructArray ベクトルサブフィールドでサポートされています。エンティティレベルの結果を返します。</td></tr>
 <tr><td>基本的な要素レベル検索</td><td>通常のベクトルメトリクスでインデックス付けされたStructArrayベクトルサブフィールドでサポートされています。一致した要素のオフセットを返すことができます。</td></tr>
 <tr><td>範囲検索</td><td>検索モードおよびターゲットバージョンのインデックス／メトリックのサポート状況に応じて利用可能です。要素レベルのStructArrayリクエストにおけるハイブリッド検索範囲の動作については、ターゲットバージョンを確認してください。</td></tr>
-<tr><td>グループ化検索</td><td>要素レベルのグループ化検索では、オフセットを返すことができます。要素レベルの StructArray リクエストにおけるハイブリッド検索のグループ化動作は、バージョンによって異なります。</td></tr>
-<tr><td>ハイブリッド検索</td><td>ハイブリッド検索リクエストには、対象バージョンがその検索の組み合わせをサポートしている場合にのみ、StructArray ベクトルサブフィールドのリクエストを含めることができます。各リクエストは、引き続きインデックス化されたベクトルサブフィールドのメトリックファミリーに従います。</td></tr>
+<tr><td>グループ化検索</td><td>要素レベルのグループ化検索では、オフセットを返すことができます。要素レベルの StructArray リクエストにおけるハイブリッド検索のグループ化動作は、バージョンに依存します。</td></tr>
+<tr><td>ハイブリッド検索</td><td>ハイブリッド検索リクエストには、対象バージョンがその検索の組み合わせをサポートしている場合にのみ、StructArrayベクトルサブフィールドのリクエストを含めることができます。各リクエストは、引き続きインデックス化されたベクトルサブフィールドのメトリックファミリーに従います。</td></tr>
 <tr><td>オフセット出力</td><td>オフセットは、要素レベルの検索結果で利用可能です。EmbeddingList検索はエンティティレベルの結果を返し、主要な結果単位として要素オフセットを使用しません。</td></tr>
 </tbody>
 </table>

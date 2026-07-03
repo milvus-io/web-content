@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>当每个实体包含一个有序的结构化元素列表时，可将数据插入到 StructArray 字段中。在插入有效载荷中，StructArray 字段表示为一个对象数组。每个对象代表一个 Struct 元素，并使用 Collection 模式中定义的 Struct 子字段名称。</p>
+    </button></h1><p>当每个实体包含一个有序的结构化元素列表时，可将数据插入到 StructArray 字段中。在插入负载中，StructArray 字段表示为一个对象数组。每个对象代表一个 Struct 元素，并使用 Collection 模式中定义的 Struct 子字段名称。</p>
 <p>本页使用《<a href="/docs/zh/create-structarray-field.md">创建 StructArray 字段</a>》中的<code translate="no">tech_articles</code> Collection。每个实体都是一篇技术文章，而<code translate="no">chunks</code> 字段将文章片段作为 Struct 元素进行存储。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">开始之前<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,7 +68,7 @@ summary: >-
 <div class="alert note">
 <p>在插入型有效载荷中，<code translate="no">chunks</code> 是一个常规字段，其值为一个 Struct 对象数组。在每个对象内部，请使用诸如<code translate="no">text</code> 和<code translate="no">emb</code> 之类的子字段名称。仅在插入完成后创建索引、运行搜索、构建过滤器或指定输出字段时，才使用路径语法，例如<code translate="no">chunks[text]</code> 或<code translate="no">chunks[emb]</code> 。</p>
 </div>
-<h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">了解插入有效载荷的结构<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
+<h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">了解插入有效负载的结构<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -325,7 +325,7 @@ result = client.insert(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>在插入有效负载中使用诸如<code translate="no">chunks[text]</code> 之类的字段路径。</p></li>
+<li><p>在插入有效载荷中使用诸如<code translate="no">chunks[text]</code> 之类的字段路径。</p></li>
 <li><p>从 Struct 元素中省略了必需的子字段。</p></li>
 <li><p>插入维度错误的向量。</p></li>
 <li><p>插入的 Struct 元素数量超过<code translate="no">max_capacity</code> 允许的数量。</p></li>

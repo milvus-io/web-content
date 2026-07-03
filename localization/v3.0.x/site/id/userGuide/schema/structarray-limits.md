@@ -3,7 +3,7 @@ id: structarray-limits.md
 title: Batasan StructArray
 summary: >-
   Dukungan StructArray mencakup definisi skema, data yang dimasukkan,
-  pengindeksan, mode pencarian, serta filter khusus StructArray. Gunakan halaman
+  pengindeksan, mode pencarian, dan filter khusus StructArray. Gunakan halaman
   ini sebagai panduan batasan sebelum Anda mengandalkan perilaku StructArray
   dalam lingkungan produksi.
 ---
@@ -52,7 +52,7 @@ summary: >-
 <tr><td>Bentuk penyisipan</td><td>Sisipkan bidang StructArray sebagai array objek. Jangan gunakan sintaks jalur di dalam muatan penyisipan.</td></tr>
 <tr><td>Indeks vektor</td><td>Bidang vektor atau subbidang vektor hanya menerima satu indeks. Gunakan subbidang vektor terpisah untuk pencarian EmbeddingList dan pencarian tingkat elemen.</td></tr>
 <tr><td>Fungsi</td><td>Fungsi bidang tidak didukung untuk bidang atau subbidang di dalam bidang StructArray.</td></tr>
-<tr><td>Bidang yang dapat bernilai null</td><td>Bidang StructArray yang dapat bernilai null bergantung pada versi. Jika didukung, nilai null berlaku untuk seluruh bidang StructArray, bukan untuk setiap elemen Struct secara terpisah.</td></tr>
+<tr><td>Bidang yang dapat bernilai null</td><td>Bidang StructArray yang dapat bernilai null bergantung pada versi. Jika didukung, nilai null berlaku untuk seluruh bidang StructArray, bukan untuk elemen Struct individu secara terpisah.</td></tr>
 <tr><td>Menambahkan bidang secara dinamis</td><td>Penambahan bidang StructArray ke koleksi yang sudah ada bergantung pada versi dan mengharuskan bidang yang ditambahkan bersifat nullable.</td></tr>
 </tbody>
 </table>
@@ -109,7 +109,7 @@ summary: >-
 <tr><td><code translate="no">Array</code></td><td>Didukung</td><td>Tentukan subbidang sebagai ` <code translate="no">DataType.BOOL</code>`.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Didukung</td><td>Tentukan subbidang sebagai <code translate="no">DataType.INT8</code>, <code translate="no">DataType.INT16</code>, <code translate="no">DataType.INT32</code>, atau <code translate="no">DataType.INT64</code>.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Didukung</td><td>Tentukan subbidang sebagai <code translate="no">DataType.FLOAT</code> atau <code translate="no">DataType.DOUBLE</code>.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Didukung</td><td>Tentukan subbidang sebagai <code translate="no">DataType.VARCHAR</code> dan atur <code translate="no">max_length</code>.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Didukung</td><td>Tentukan subbidang sebagai <code translate="no">DataType.VARCHAR</code> dan tetapkan <code translate="no">max_length</code>.</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Didukung</td><td>Tentukan subbidang sebagai <code translate="no">DataType.FLOAT_VECTOR</code> dan tetapkan <code translate="no">dim</code>.</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Didukung</td><td>Tentukan subbidang sebagai <code translate="no">DataType.FLOAT16_VECTOR</code> dan atur <code translate="no">dim</code>.</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Didukung</td><td>Tentukan subbidang sebagai <code translate="no">DataType.BFLOAT16_VECTOR</code> dan atur <code translate="no">dim</code>.</td></tr>
@@ -146,7 +146,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>Bidang StructArray yang dapat bernilai null</td><td>Hanya didukung pada versi yang menyertakan dukungan StructArray nullable dan array vektor nullable.</td></tr>
-<tr><td>Nilai null dalam Python</td><td>Gunakan ` <code translate="no">None</code> ` untuk menyisipkan nilai StructArray null di Python. Jangan gunakan ` <code translate="no">Null</code> ` atau ` <code translate="no">null</code>`.</td></tr>
+<tr><td>Nilai null di Python</td><td>Gunakan ` <code translate="no">None</code> ` untuk menyisipkan nilai StructArray null di Python. Jangan gunakan ` <code translate="no">Null</code> ` atau ` <code translate="no">null</code>`.</td></tr>
 <tr><td>Cakupan nilai null</td><td>Null berlaku untuk seluruh bidang StructArray. Misalnya, <code translate="no">chunks=None</code> hanya valid jika <code translate="no">chunks</code> dapat bernilai null.</td></tr>
 <tr><td>Nilai StructArray yang sebagian null</td><td>Jika bidang StructArray berisi nilai array yang valid, jangan mencampurkan array subbidang null dengan array subbidang yang valid dalam nilai yang sama.</td></tr>
 <tr><td>Penambahan dinamis bidang StructArray</td><td>Penambahan bidang StructArray ke koleksi yang sudah ada hanya didukung pada versi yang menyertakan dukungan bidang StructArray dinamis.</td></tr>
@@ -262,7 +262,7 @@ summary: >-
 <li><p>Gunakan subbidang skalar untuk predikat skalar.</p></li>
 <li><p>Jangan gunakan subbidang vektor sebagai masukan predikat skalar ` <code translate="no">$[...]</code> `.</p></li>
 <li><p>Sintaks JSON path, fungsi JSON, fungsi wadah array, fungsi pencocokan teks, fungsi Geometri/GIS, dan ekspresi Timestamptz tidak didukung untuk predikat tingkat elemen StructArray.</p></li>
-<li><p>Lebih disarankan menggunakan perbandingan boolean eksplisit seperti ` <code translate="no">$[has_code] == true</code> ` daripada ekspresi boolean biasa.</p></li>
+<li><p>Lebih disarankan menggunakan perbandingan boolean eksplisit seperti ` <code translate="no">$[has_code] == true</code> ` daripada ekspresi boolean mentah.</p></li>
 </ul>
 <h2 id="Related-pages" class="common-anchor-header">Halaman terkait<button data-href="#Related-pages" class="anchor-icon" translate="no">
       <svg translate="no"

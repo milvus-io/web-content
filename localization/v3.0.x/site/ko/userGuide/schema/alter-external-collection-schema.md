@@ -74,7 +74,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>쿼리 결과에 필드를 반환하거나 필터에서 사용하려면 <code translate="no">add_collection_field()</code> 을 사용하여 스칼라 필드를 추가하십시오. 다음 예제는 외부 데이터 소스의 <code translate="no">score</code> 필드에 매핑되는 <code translate="no">score</code> 필드를 추가합니다.</p>
+    </button></h3><p>쿼리 결과에 필드를 반환하거나 필터에서 사용하려면 <code translate="no">add_collection_field()</code> 을 사용하여 스칼라 필드를 추가하십시오. 다음 예제에서는 외부 데이터 소스의 <code translate="no">score</code> 필드에 매핑되는 <code translate="no">score</code> 필드를 추가합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient
 
 client = MilvusClient(
@@ -107,7 +107,7 @@ client.add_collection_field(
         ></path>
       </svg>
     </button></h3><p>외부 데이터 소스에 이미 벡터 값이 포함되어 있는 경우 벡터 필드를 추가할 수도 있습니다. 외부 데이터 소스의 벡터 필드와 일치하도록 벡터 <code translate="no">data_type</code> 및 <code translate="no">dim</code> 을 설정하십시오.</p>
-<p>다음 예제에서는 <code translate="no">image_embedding_v2</code> 라는 이름의 밀집 벡터 필드를 추가합니다.</p>
+<p>다음 예제는 <code translate="no">image_embedding_v2</code> 라는 이름의 밀집 벡터 필드를 추가합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient
 
 client = MilvusClient(

@@ -90,7 +90,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p><strong>Étape 1 : Vérifiez que l’instance Milvus est en cours d’exécution.</strong></p>
-<p><strong>Étape 2 : Configurez la connexion Kafka cible et redémarrez Milvus.</strong> Le passage à Kafka nécessite que Milvus connaisse déjà la connexion Kafka ; vous devez donc l’enregistrer dans ` <code translate="no">user.yaml</code> ` via ` <code translate="no">extraConfigFiles</code> `, puis appliquer les modifications avec ` <code translate="no">helm upgrade</code> ` (ce qui redémarre les pods). ` <code translate="no">streaming.enabled=true</code> ` est requis pour la fonctionnalité Switch MQ. Pour plus de détails sur SASL/SSL, consultez la section « <a href="/docs/fr/connect_kafka_ssl.md">Se connecter à Kafka avec SASL/SSL</a> ».</p>
+<p><strong>Étape 2 : Configurez la connexion Kafka cible et redémarrez Milvus.</strong> Le passage à Kafka nécessite que Milvus connaisse déjà la connexion Kafka ; vous devez donc l’enregistrer dans ` <code translate="no">user.yaml</code> ` via ` <code translate="no">extraConfigFiles</code> `, puis appliquer les modifications avec ` <code translate="no">helm upgrade</code> ` (ce qui redémarre les pods). Le protocole <code translate="no">streaming.enabled=true</code> est requis pour la fonctionnalité Switch MQ. Pour plus de détails sur SASL/SSL, consultez la section « <a href="/docs/fr/connect_kafka_ssl.md">Se connecter à Kafka avec SASL/SSL</a> ».</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -111,7 +111,7 @@ summary: >-
 <p>Attendez que tous les pods soient prêts, puis vérifiez que la configuration d’accès à Kafka a bien été intégrée à la configuration de Milvus.</p>
 <p><strong>Étape 3 : Exécutez la migration vers MQ.</strong></p>
 <div class="alert note">
-<p>Assurez-vous que l’instance Kafka cible ne contient pas de sujets Milvus issus d’une configuration précédente. S’il s’agit de votre première migration vers Kafka, ignorez cette remarque ; sinon, supprimez d’abord les sujets Milvus résiduels portant les mêmes noms.</p>
+<p>Assurez-vous que le serveur Kafka cible ne contient pas de sujets Milvus issus d’une configuration précédente. S’il s’agit de votre première migration vers Kafka, ignorez cette remarque ; sinon, supprimez d’abord les sujets Milvus résiduels portant les mêmes noms.</p>
 </div>
 <pre><code translate="no" class="language-shell">kubectl port-forward --address 0.0.0.0 service/my-release-milvus-mixcoord 29091:9091
 <button class="copy-code-btn"></button></code></pre>
@@ -166,7 +166,7 @@ summary: >-
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>Une migration réussie génère l'entrée suivante dans le journal : <code translate="no">[mqTypeValue=woodpecker]</code>.</p>
-<p><strong>Étape 4 : Mettez à jour le type de MQ dans l’Operator.</strong> Mettez à jour la configuration gérée par l’Operator afin que celui-ci ne revienne pas sur la migration. Créez <code translate="no">change_configmap.yaml</code>:</p>
+<p><strong>Étape 4 : Mettez à jour le type de MQ dans l’Operator.</strong> Mettez à jour la configuration gérée par l’Operator afin que celui-ci ne revienne pas en arrière. Créez <code translate="no">change_configmap.yaml</code>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

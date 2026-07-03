@@ -3,7 +3,7 @@ id: index-structarray-fields.md
 title: Indexar campos de StructArray
 summary: >-
   Crea índices en los subcampos de StructArray antes de ejecutar una búsqueda
-  vectorial o acelerar un filtrado escalar. En el caso de un campo StructArray,
+  vectorial o acelerar el filtrado escalar. En el caso de un campo StructArray,
   el objetivo del índice es una ruta de subcampo, como chunks[emb_list_vector],
   chunks[emb] o chunks[section].
 ---
@@ -80,7 +80,7 @@ summary: >-
 <tr><td>Búsqueda vectorial a nivel de elemento</td><td><code translate="no">chunks[emb]</code></td><td>Una familia de métricas vectoriales habituales, como <code translate="no">COSINE</code>, <code translate="no">IP</code> o <code translate="no">L2</code>.</td></tr>
 <tr><td>Filtrar por cadena o categoría</td><td><code translate="no">chunks[section]</code></td><td>Un índice escalar compatible con su destino.</td></tr>
 <tr><td>Filtrar por rango numérico</td><td><code translate="no">chunks[quality_score]</code>, <code translate="no">chunks[page]</code></td><td>Un índice escalar compatible con su destino.</td></tr>
-<tr><td>Filtrar por valor booleano</td><td><code translate="no">chunks[has_code]</code></td><td>Un índice escalar compatible con tu destino.</td></tr>
+<tr><td>Filtrar por valor booleano</td><td><code translate="no">chunks[has_code]</code></td><td>Un índice escalar compatible con su destino.</td></tr>
 </tbody>
 </table>
 <p>La búsqueda en EmbeddingList trata los vectores de un subcampo vectorial de StructArray como una lista de incrustación y devuelve resultados a nivel de entidad. La búsqueda a nivel de elemento busca en cada elemento de Struct de forma independiente y puede devolver el desplazamiento del elemento coincidente.</p>
@@ -338,7 +338,7 @@ client.create_index(
     </button></h2><ul>
 <li><p>Crear un índice en « <code translate="no">chunks.emb</code> » en lugar de en « <code translate="no">chunks[emb]</code> ».</p></li>
 <li><p>Crear únicamente un índice de tipo « <code translate="no">MAX_SIM*</code> » y, a continuación, intentar realizar una búsqueda a nivel de elemento en el mismo subcampo.</p></li>
-<li><p>Crear únicamente un índice vectorial normal y, a continuación, intentar realizar una búsqueda de EmbeddingList en el mismo subcampo.</p></li>
+<li><p>Crear únicamente un índice vectorial normal y, a continuación, intentar realizar una búsqueda EmbeddingList en el mismo subcampo.</p></li>
 <li><p>Reutilizar un subcampo vectorial tanto para métricas de « <code translate="no">MAX_SIM*</code> » como para métricas vectoriales normales.</p></li>
 <li><p>Olvidar los índices escalares para los filtros StructArray más utilizados.</p></li>
 <li><p>Indexar un subcampo de StructArray que no existe en el esquema de Struct.</p></li>

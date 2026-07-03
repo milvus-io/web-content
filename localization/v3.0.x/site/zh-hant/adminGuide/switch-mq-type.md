@@ -59,7 +59,7 @@ summary: 在不造成服務中斷的情況下，將現有 Milvus 部署的訊息
     </button></h2><p>本指南僅涵蓋<strong>在 Woodpecker 與其他訊息佇列之間</strong>切換的情況。Pulsar 與 Kafka 之間的直接切換不在本指南範圍內。</p>
 <ul>
 <li><a href="/docs/zh-hant/switch-rocksmq-woodpecker.md">在 RocksMQ 與 Woodpecker 之間切換</a>— Milvus 獨立部署 (Docker Compose)</li>
-<li><a href="/docs/zh-hant/switch-pulsar-woodpecker.md">在 Pulsar 與 Woodpecker 之間切換</a>— Milvus 叢集（Helm / Milvus Operator）</li>
+<li><a href="/docs/zh-hant/switch-pulsar-woodpecker.md">在 Pulsar 與 Woodpecker 之間切換</a>— Milvus 叢集 (Helm / Milvus Operator)</li>
 <li><a href="/docs/zh-hant/switch-kafka-woodpecker.md">在 Kafka 與 Woodpecker 之間切換</a>— Milvus 叢集（Helm / Milvus Operator）</li>
 </ul>
 <h2 id="General-workflow" class="common-anchor-header">一般工作流程<button data-href="#General-workflow" class="anchor-icon" translate="no">

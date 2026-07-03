@@ -251,7 +251,7 @@ summary: >-
 <tbody>
 <tr><td>RocksMQ</td><td>Woodpecker (MinIO/local)</td><td><strong>Compatível</strong></td><td></td></tr>
 <tr><td>Woodpecker (MinIO/local)</td><td>RocksMQ</td><td><strong>Compatível</strong></td><td></td></tr>
-<tr><td>Woodpecker MinIO</td><td>Woodpecker local</td><td><strong>Não suportado</strong></td><td>A alternância entre os modos de armazenamento do Woodpecker requer um tratamento adicional de metadados, o que ainda não é suportado.</td></tr>
+<tr><td>Woodpecker MinIO</td><td>Woodpecker local</td><td><strong>Não suportado</strong></td><td>A alternância entre os modos de armazenamento do Woodpecker requer o tratamento de metadados adicionais, o que ainda não é suportado.</td></tr>
 <tr><td>Woodpecker local</td><td>Woodpecker MinIO</td><td><strong>Não suportado</strong></td><td>Tal como acima.</td></tr>
 <tr><td>RocksMQ / Woodpecker</td><td>Pulsar / Kafka externos</td><td><strong>Suportado, mas não recomendado</strong></td><td>Mantenha as instâncias autónomas o mais simples possível.</td></tr>
 </tbody>

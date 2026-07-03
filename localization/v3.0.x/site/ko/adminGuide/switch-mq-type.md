@@ -41,7 +41,7 @@ summary: 가동 중단 없이 기존 Milvus 배포 환경의 메시지 큐를 Wo
 <li><strong>MQ 전환 기능은 Milvus 3.0 이상 버전에서 사용할 수 있습니다.</strong> 이 기능을 사용하기 전에 Milvus 인스턴스를 Milvus 3.0 이상으로 업그레이드하십시오. 이전 버전에서는 이 기능을 사용할 수 없습니다.</li>
 <li>인스턴스가 정상적으로 실행 중이어야 합니다.</li>
 </ul>
-<h2 id="Scope" class="common-anchor-header">적용 범위<button data-href="#Scope" class="anchor-icon" translate="no">
+<h2 id="Scope" class="common-anchor-header">범위<button data-href="#Scope" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

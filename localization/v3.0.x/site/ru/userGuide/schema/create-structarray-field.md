@@ -110,7 +110,7 @@ summary: >-
 <tr><td>Вложенные <code translate="no">Array</code>, <code translate="no">ArrayOfVector</code>, <code translate="no">Struct</code> или <code translate="no">ArrayOfStruct</code></td><td>Не поддерживается</td><td>Поле StructArray не может содержать вложенные массивы, вложенные векторные массивы, вложенные поля Struct или вложенные поля Array-of-Struct.</td></tr>
 </tbody>
 </table>
-<p>Информацию о поддержке в конкретных версиях, поведении при наличии значений null и других ограничениях см. в разделе <a href="/docs/ru/structarray-limits.md">«Ограничения StructArray</a>».</p>
+<p>Информацию о поддержке в конкретных версиях, поведении при наличии значения null и других ограничениях см. в разделе <a href="/docs/ru/structarray-limits.md">«Ограничения StructArray</a>».</p>
 <h2 id="Create-a-collection-with-a-StructArray-field" class="common-anchor-header">Создание коллекции с полем StructArray<button data-href="#Create-a-collection-with-a-StructArray-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -278,7 +278,7 @@ client.create_collection(
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Предупреждение
-Поля StructArray, допускающие значение null, доступны только в Milvus v3.0.x. Для поля StructArray, допускающего значение null, сущность может предоставлять допустимое значение StructArray или устанавливать для всего поля значение <code translate="no">null</code>. При вставке допустимого значения StructArray все подполя должны либо быть равны null, либо иметь допустимые значения. Вставка сущности, в которой некоторые подполя установлены в null, а другие — в допустимые значения, приводит к ошибке. Подробности см. в разделе <a href="/docs/ru/structarray-limits.md">«Ограничения StructArray</a>».</p>
+Поля StructArray, допускающие значение null, доступны только в Milvus v3.0.x. Для поля StructArray, допускающего значение null, сущность может предоставлять допустимое значение StructArray или устанавливать для всего поля значение <code translate="no">null</code>. При вставке допустимого значения StructArray все подполя должны либо быть равны null, либо иметь допустимые значения. Вставка сущности, в которой некоторые подполя имеют значение null, а другие — допустимые значения, приводит к ошибке. Подробности см. в разделе <a href="/docs/ru/structarray-limits.md">«Ограничения StructArray</a>».</p>
 </div>
 <h2 id="Add-a-StructArray-field-to-an-existing-collection" class="common-anchor-header">Добавление поля StructArray в существующую коллекцию<button data-href="#Add-a-StructArray-field-to-an-existing-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -340,7 +340,7 @@ client.add_collection_struct_field(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>После добавления поля StructArray существующие сущности возвращают значение ` <code translate="no">null</code> ` для нового поля по всем его подполям.</p>
-<p>После создания поля StructArray вы не сможете добавлять новые подполя к этому существующему полю StructArray. Если позже вам понадобятся дополнительные атрибуты элементов, вызовите метод ` <code translate="no">drop_collection_field()</code> `, чтобы удалить поле StructArray, а затем добавьте новое поле StructArray с обновленной схемой Struct.</p>
+<p>После создания поля StructArray вы не сможете добавлять новые подполя к этому существующему полю StructArray. Если позже вам понадобятся дополнительные атрибуты элементов, вызовите метод <code translate="no">drop_collection_field()</code>, чтобы удалить поле StructArray, а затем добавьте новое поле StructArray с обновленной схемой Struct.</p>
 <pre><code translate="no" class="language-python">client.drop_collection_field(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
     field_name=<span class="hljs-string">&quot;chunks&quot;</span>,
@@ -403,14 +403,14 @@ client.add_collection_struct_field(
     </button></h2><ul>
 <li><p>Создание <code translate="no">DataType.STRUCT</code> в качестве поля коллекции верхнего уровня вместо использования его в качестве типа элемента поля Array.</p></li>
 <li><p>Забывание установить « <code translate="no">max_capacity</code> » для поля «StructArray».</p></li>
-<li><p>Определение неподдерживаемых типов подполей, таких как JSON, Geometry, Text, Timestamptz, SparseFloatVector, вложенный массив (Array), вложенная структура (Struct) или массив структур (Array-of-Struct).</p></li>
+<li><p>Определение неподдерживаемых типов подполей, таких как JSON, Geometry, Text, Timestamptz, SparseFloatVector, вложенный массив, вложенная структура или массив структур.</p></li>
 <li><p>Использование <code translate="no">String</code> в качестве типа подполя. Используйте <code translate="no">VARCHAR</code> и установите <code translate="no">max_length</code>.</p></li>
 <li><p>Использование одного векторного подполя как для поиска по EmbeddingList, так и для поиска на уровне элементов.</p></li>
 <li><p>Добавление только векторных подполей и игнорирование скалярных подполей, необходимых для фильтрации, таких как <code translate="no">section</code>, <code translate="no">quality_score</code> или <code translate="no">has_code</code>.</p></li>
 <li><p>Рассматривать векторные подполя как входные данные для скалярных предикатов <code translate="no">$[...]</code>. Использовать векторные подполя для векторного поиска, а скалярные подполя — для скалярных предикатов.</p></li>
-<li><p>Предположение о том, что в существующее поле StructArray можно добавлять новые подполя после создания этого поля.</p></li>
+<li><p>Предположение о том, что в существующее поле StructArray можно добавлять новые подполя после его создания.</p></li>
 <li><p>Использование <code translate="no">chunks.emb</code> или <code translate="no">chunks.emb_list_vector</code> вместо обязательного синтаксиса пути <code translate="no">chunks[emb]</code> или <code translate="no">chunks[emb_list_vector]</code>.</p></li>
-<li><p>Рассмотрение поведения StructArray, допускающего нулевые значения, как доступного в каждой целевой версии.</p></li>
+<li><p>Рассмотрение поведения StructArray с возможностью принятия значения null как доступного в каждой целевой версии.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Следующие шаги<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"

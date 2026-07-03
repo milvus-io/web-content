@@ -23,7 +23,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Buat indeks pada subbidang StructArray sebelum menjalankan pencarian vektor atau mempercepat penyaringan skalar. Untuk bidang StructArray, target indeks adalah jalur subbidang, seperti <code translate="no">chunks[emb_list_vector]</code>, <code translate="no">chunks[emb]</code>, atau <code translate="no">chunks[section]</code>.</p>
-<p>Halaman ini menggunakan koleksi <code translate="no">tech_articles</code> dari <a href="/docs/id/create-structarray-field.md">Buat Bidang StructArray</a>. Bidang StructArray <code translate="no">chunks</code> berisi subbidang skalar untuk penyaringan dan subbidang vektor untuk pencarian.</p>
+<p>Halaman ini menggunakan koleksi ` <code translate="no">tech_articles</code> ` dari <a href="/docs/id/create-structarray-field.md">"Membuat Bidang StructArray</a>". Bidang StructArray ` <code translate="no">chunks</code> ` berisi subbidang skalar untuk penyaringan dan subbidang vektor untuk pencarian.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Sebelum Anda mulai<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,7 +53,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Sebuah bidang vektor atau subbidang vektor hanya menerima satu indeks. Jika Anda memerlukan pencarian EmbeddingList dan pencarian tingkat elemen, buat dua subbidang vektor terpisah dan indekskan masing-masing secara terpisah. Pada halaman ini, <code translate="no">chunks[emb_list_vector]</code> diindeks untuk pencarian EmbeddingList, dan <code translate="no">chunks[emb]</code> diindeks untuk pencarian tingkat elemen.</p>
+<p>Sebuah bidang vektor atau subbidang vektor hanya menerima satu indeks. Jika Anda memerlukan baik pencarian EmbeddingList maupun pencarian tingkat elemen, buatlah dua subbidang vektor terpisah dan indekskan masing-masing secara terpisah. Pada halaman ini, <code translate="no">chunks[emb_list_vector]</code> diindeks untuk pencarian EmbeddingList, dan <code translate="no">chunks[emb]</code> diindeks untuk pencarian tingkat elemen.</p>
 </div>
 <h2 id="Choose-indexes" class="common-anchor-header">Pilih indeks<button data-href="#Choose-indexes" class="anchor-icon" translate="no">
       <svg translate="no"

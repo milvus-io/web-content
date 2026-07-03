@@ -47,7 +47,7 @@ summary: >-
 <tbody>
 <tr><td>Фильтрация по скалярному полю верхнего уровня, например <code translate="no">category</code>.</td><td>Обычное выражение фильтра.</td><td>Выбирает родительские сущности до или во время поиска.</td></tr>
 <tr><td>Ограничивает векторный поиск на уровне элементов элементами Struct, соответствующими скалярным условиям.</td><td><code translate="no">element_filter</code>.</td><td>Выполняет поиск только среди соответствующих элементов Struct и может возвращать смещения найденных элементов.</td></tr>
-<tr><td>Выбор сущностей в зависимости от того, соответствуют ли предкату какие-либо, все или определённое количество элементов Struct.</td><td><code translate="no">MATCH_ANY</code>, <code translate="no">MATCH_ALL</code>, <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> или <code translate="no">MATCH_EXACT</code>.</td><td>Фильтрация на уровне строк. Сами по себе эти операторы не возвращают смещения.</td></tr>
+<tr><td>Выбор сущностей в зависимости от того, соответствуют ли предкату какие-либо, все или определённое количество элементов Struct.</td><td><code translate="no">MATCH_ANY</code>, <code translate="no">MATCH_ALL</code>, <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> или <code translate="no">MATCH_EXACT</code>.</td><td>Фильтрация на уровне строк. Эти операторы сами по себе не возвращают смещения.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -96,7 +96,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Приведенный выше фильтр выбирает только сущности, у которых поле верхнего уровня <code translate="no">category</code> имеет значение <code translate="no">&quot;search&quot;</code>. Он не выделяет один конкретный соответствующий элемент Struct.</p>
+<p>Приведенный выше фильтр выбирает только сущности, у которых поле верхнего уровня <code translate="no">category</code> имеет значение <code translate="no">&quot;search&quot;</code>. Он не выделяет один конкретный элемент Struct, соответствующий условию.</p>
 <h2 id="Filter-element-level-vector-search" class="common-anchor-header">Фильтрация векторного поиска на уровне элементов<button data-href="#Filter-element-level-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -152,7 +152,7 @@ results = client.search(
 <p>В данном примере предикат верхнего уровня <code translate="no">category == &quot;search&quot;</code> выбирает кандидатов, а <code translate="no">element_filter</code> ограничивает векторный поиск на уровне элементов фрагментами, в которых <code translate="no">section</code>, <code translate="no">quality_score</code> и <code translate="no">has_code</code> совпадают в одном и том же элементе Struct.</p>
 <div class="alert note">
 <p>Предупреждение</p>
-<p>При объединении предиката верхнего уровня с оператором <code translate="no">element_filter</code> помещайте оператор <code translate="no">element_filter</code> в конец выражения. Выражение фильтра может содержать только один оператор <code translate="no">element_filter</code>, и нельзя вкладывать операторы <code translate="no">element_filter</code> или <code translate="no">MATCH_*</code> внутрь другого оператора StructArray.</p>
+<p>При объединении предиката верхнего уровня с оператором <code translate="no">element_filter</code> необходимо размещать оператор <code translate="no">element_filter</code> в конце выражения. Выражение фильтрации может содержать только один оператор <code translate="no">element_filter</code>, а операторы <code translate="no">element_filter</code> или <code translate="no">MATCH_*</code> нельзя вкладывать внутрь другого оператора StructArray.</p>
 </div>
 <h2 id="Filter-entities-with-MATCH-operators" class="common-anchor-header">Фильтрация сущностей с помощью операторов MATCH<button data-href="#Filter-entities-with-MATCH-operators" class="anchor-icon" translate="no">
       <svg translate="no"

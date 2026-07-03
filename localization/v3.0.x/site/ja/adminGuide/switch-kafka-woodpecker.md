@@ -58,7 +58,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p><strong>ステップ 1: Milvus インスタンスが実行中であることを確認します。</strong>テストコレクションの作成、データの挿入、クエリの実行などを行い、Milvus クラスタが正常に動作していることを確認してください。</p>
-<p><strong>ステップ 2: MQ の切り替えを実行します。</strong>MixCoord 管理インターフェースを公開し、switch API を呼び出します。</p>
+<p><strong>ステップ 2: MQ の切り替えを実行します。</strong>MixCoord 管理インターフェースを公開し、switch API を呼び出します:</p>
 <pre><code translate="no" class="language-shell">kubectl port-forward --address 0.0.0.0 service/my-release-milvus-mixcoord 29091:9091
 <button class="copy-code-btn"></button></code></pre>
 <p>別のターミナルで：</p>
@@ -90,7 +90,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p><strong>ステップ 1: Milvus インスタンスが実行中であることを確認します。</strong></p>
-<p><strong>ステップ 2: 対象の Kafka 接続を設定し、Milvus を再起動します。</strong>この切り替えには、Milvus が Kafka 接続情報を既に認識している必要があるため、<code translate="no">extraConfigFiles</code> を使用して<code translate="no">user.yaml</code> に書き込み、<code translate="no">helm upgrade</code> で適用します（これによりポッドが再起動されます）。Switch MQ 機能には、<code translate="no">streaming.enabled=true</code> が必要です。SASL/SSL の詳細については、<a href="/docs/ja/connect_kafka_ssl.md">「SASL/SSL を使用した Kafka への接続」を</a>参照してください。</p>
+<p><strong>ステップ 2: 対象の Kafka 接続を設定し、Milvus を再起動します。</strong>切り替えを行うには、Milvus がすでに Kafka 接続を認識している必要があるため、<code translate="no">extraConfigFiles</code> を使用して<code translate="no">user.yaml</code> に書き込み、<code translate="no">helm upgrade</code> で適用します（これによりポッドが再起動されます）。Switch MQ 機能には、<code translate="no">streaming.enabled=true</code> が必要です。SASL/SSL の詳細については、<a href="/docs/ja/connect_kafka_ssl.md">「SASL/SSL を使用した Kafka への接続」を</a>参照してください。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -108,7 +108,7 @@ summary: >-
   --set streaming.enabled=true \
   -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>すべてのポッドの準備が整うまで待機し、Kafkaへのアクセス設定がMilvusの設定に反映されていることを確認してください。</p>
+<p>すべてのポッドの準備が整うまで待機し、Kafka へのアクセス設定が Milvus の設定に反映されていることを確認してください。</p>
 <p><strong>ステップ 3: MQ 切り替えを実行します。</strong></p>
 <div class="alert note">
 <p>対象のKafkaに、以前の設定からのMilvusトピックが含まれていないことを確認してください。今回がKafkaへの初めての切り替えである場合は、この注意事項をスキップしてください。そうでない場合は、まず同じ名前の残存するMilvusトピックをクリーンアップしてください。</p>
@@ -196,7 +196,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p><strong>ステップ 1: Milvus インスタンスが実行中であることを確認します。</strong></p>
-<p><strong>ステップ 2: 対象の Kafka 接続を設定し、Milvus を再起動します。</strong>Kafka 接続<strong>を</strong>`<code translate="no">spec.config</code> ` に配置し（Operator は `<code translate="no">spec.config</code> ` を `<code translate="no">user.yaml</code>` に変換します）、MQ タイプを設定します。CR を適用すると、ポッドが新しい構成で再起動されます。SASL/SSL の詳細については、<a href="/docs/ja/connect_kafka_ssl.md">「SASL/SSL を使用した Kafka への接続」を</a>参照してください。</p>
+<p><strong>ステップ 2: 対象の Kafka 接続を設定し、Milvus を再起動します。</strong>Kafka 接続<strong>を</strong>`<code translate="no">spec.config</code> ` に配置し（Operator は `<code translate="no">spec.config</code> ` を `<code translate="no">user.yaml</code>` に変換します）、MQ タイプを設定します。CR を適用すると、ポッドが新しい設定で再起動されます。SASL/SSL の詳細については、<a href="/docs/ja/connect_kafka_ssl.md">「SASL/SSL を使用した Kafka への接続」を</a>参照してください。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># change_configmap.yaml</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -218,7 +218,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">kubectl patch -f change_configmap.yaml --patch-file change_configmap.yaml --type merge
 <button class="copy-code-btn"></button></code></pre>
-<p>すべてのポッドの準備が整うまで待機し、Kafka へのアクセス設定が Milvus の設定に反映されていることを確認してください。</p>
+<p>すべてのポッドの準備が完了するまで待機し、Kafka へのアクセス設定が Milvus の設定に反映されていることを確認してください。</p>
 <p><strong>ステップ 3: MQ 切り替えを実行します。</strong></p>
 <div class="alert note">
 <p>対象のKafkaに、以前の設定からのMilvusトピックが含まれていないことを確認してください。今回がKafkaへの初めての切り替えである場合は、この注意事項をスキップしてください。そうでない場合は、まず同じ名前の残存するMilvusトピックをクリーンアップしてください。</p>

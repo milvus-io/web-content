@@ -22,7 +22,7 @@ summary: >-
       </svg>
     </button></h1><p>En esta página se describe cómo cambiar la cola de mensajes (MQ) de un <strong>clúster de Milvus</strong> entre <strong>Kafka</strong> (integrado o externo) y <strong>Woodpecker</strong> (backend MinIO), en ambas direcciones. Para conocer el flujo de trabajo general y los requisitos previos, consulta <a href="/docs/es/switch-mq-type.md">Cambiar el tipo de MQ</a>.</p>
 <div class="alert note">
-<p><strong>Requisito previo:</strong> la función «Cambiar MQ» está disponible en <strong>Milvus 3.0 y versiones posteriores</strong>. Actualiza tu instancia de Milvus a la versión 3.0 o posterior antes de comenzar; esta función no está disponible en versiones anteriores.</p>
+<p><strong>Requisito previo:</strong> la función «Cambiar MQ» está disponible en <strong>Milvus 3.0 y versiones posteriores</strong>. Actualiza tu instancia de Milvus a la versión 3.0 o posterior antes de empezar; esta función no está disponible en versiones anteriores.</p>
 </div>
 <div class="alert warning">
 <p>Cambiar la cola de mensajes es una <strong>operación de alto riesgo</strong>. Elige la sección que se ajuste <strong>a tu</strong> método de implementación <strong>—Con Helm</strong> o <strong>Con Milvus Operator</strong> — y síguela de principio a fin. No mezcles comandos de Helm y de Operator.</p>
@@ -90,7 +90,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p><strong>Paso 1: Comprueba que la instancia de Milvus esté en ejecución.</strong></p>
-<p><strong>Paso 2: Configura la conexión a Kafka de destino y reinicia Milvus.</strong> Para realizar el cambio, es necesario que Milvus ya conozca la conexión a Kafka, así que introdúcela en <code translate="no">user.yaml</code> mediante <code translate="no">extraConfigFiles</code> y aplícala con <code translate="no">helm upgrade</code> (lo que reinicia los pods). Se requiere <code translate="no">streaming.enabled=true</code> para la función Switch MQ. Para obtener detalles sobre SASL/SSL, consulta <a href="/docs/es/connect_kafka_ssl.md">«Conectarse a Kafka con SASL/SSL</a>».</p>
+<p><strong>Paso 2: Configura la conexión de destino a Kafka y reinicia Milvus.</strong> Para realizar el cambio, es necesario que Milvus ya conozca la conexión a Kafka, así que introdúcela en <code translate="no">user.yaml</code> mediante <code translate="no">extraConfigFiles</code> y aplícala con <code translate="no">helm upgrade</code> (lo que reinicia los pods). Se requiere <code translate="no">streaming.enabled=true</code> para la función Switch MQ. Para obtener detalles sobre SASL/SSL, consulta <a href="/docs/es/connect_kafka_ssl.md">«Conectarse a Kafka con SASL/SSL</a>».</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+

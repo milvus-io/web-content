@@ -109,7 +109,7 @@ beta: Milvus 3.0.x
  </span></p>
 <ul>
 <li><strong>内联存储</strong>：如果<code translate="no">TEXT</code> 值小于<code translate="no">dataNode.text.inlineThreshold</code> ，Milvus 会将原始文本值直接存储在<code translate="no">TEXT</code> 字段 data 中。</li>
-<li><strong>LOB 存储</strong>：如果 `<code translate="no">TEXT</code> ` 的值大于或等于 `<code translate="no">dataNode.text.inlineThreshold</code>`，Milvus 会将该值视为大对象，并将原始文本单独存储在对象存储（如 MinIO）中。`<code translate="no">TEXT</code> ` 字段数据中存储的是指向该单独存储文本的内部引用。当在查询或搜索结果中请求 `<code translate="no">TEXT</code> ` 字段时，Milvus 会使用该引用检索并返回原始文本。</li>
+<li><strong>LOB 存储</strong>：如果 `<code translate="no">TEXT</code> ` 的值大于或等于 `<code translate="no">dataNode.text.inlineThreshold</code>`，Milvus 将该值视为大对象，并将原始文本单独存储在对象存储（如 MinIO）中。`<code translate="no">TEXT</code> ` 字段数据中存储的是指向该单独存储文本的内部引用。当在查询或搜索结果中请求 `<code translate="no">TEXT</code> ` 字段时，Milvus 会使用该引用检索并返回原始文本。</li>
 </ul>
 <p>此存储选择属于内部机制。无论 Milvus 使用何种存储路径，您对<code translate="no">TEXT</code> 字段的插入、查询和搜索操作方式均保持一致。若需调整阈值或相关存储、压缩及垃圾回收行为，请参阅与<a href="/docs/zh/configure_datanode.md">dataNode 相关的配置和</a> <a href="/docs/zh/configure_datacoord.md">与 dataCoord 相关的配置</a>。</p>
 <p>如果您的部署使用对象存储，较大的<code translate="no">TEXT</code> 值可能会以 Milvus 管理的对象形式出现在诸如<code translate="no">lobs/...</code> 之类的路径下。这些对象属于实现细节，不应手动移动、复制或删除。 在删除实体、删除分区或压缩数据后，只有当 Milvus 垃圾回收在安全窗口期结束后移除了未被引用的巨型对象数据，对象存储的使用量才会减少。</p>
@@ -240,7 +240,7 @@ client.load_collection(collection_name=COLLECTION_NAME)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>使用原始查询文本作为搜索数据，并对稀疏向量字段进行搜索。Milvus会将查询文本转换为稀疏向量，使用BM25算法对匹配结果进行排序，并将请求的<code translate="no">TEXT</code> 字段结果返回至<code translate="no">output_fields</code> 字段中。</p>
+    </button></h2><p>使用原始查询文本作为搜索数据，并对稀疏向量字段进行搜索。Milvus会将查询文本转换为稀疏向量，使用BM25对匹配结果进行排序，并将请求的<code translate="no">TEXT</code> 字段结果返回至<code translate="no">output_fields</code> 字段中。</p>
 <pre><code translate="no" class="language-python">results = client.search(
     collection_name=COLLECTION_NAME,
 <span class="highlighted-comment-line">    data=[<span class="hljs-string">&quot;how does Milvus store source text for retrieval&quot;</span>],</span>

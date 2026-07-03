@@ -46,7 +46,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td><code translate="no">chunks[emb_list_vector]</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Pesquisa na EmbeddingList com métricas de <code translate="no">MAX_SIM*</code>.</td></tr>
-<tr><td><code translate="no">chunks[emb]</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Pesquisa ao nível do elemento com métricas vetoriais normais.</td></tr>
+<tr><td><code translate="no">chunks[emb]</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Pesquisa ao nível do elemento com métricas vetoriais regulares.</td></tr>
 <tr><td><code translate="no">chunks[section]</code></td><td><code translate="no">VARCHAR</code></td><td>Filtragem categórica.</td></tr>
 <tr><td><code translate="no">chunks[quality_score]</code></td><td><code translate="no">FLOAT</code></td><td>Filtragem numérica e predicados do tipo intervalo.</td></tr>
 <tr><td><code translate="no">chunks[has_code]</code></td><td><code translate="no">BOOL</code></td><td>Filtragem booleana.</td></tr>
@@ -83,7 +83,7 @@ summary: >-
 <tr><td>Filtrar por valor booleano</td><td><code translate="no">chunks[has_code]</code></td><td>Um índice escalar suportado pelo seu destino.</td></tr>
 </tbody>
 </table>
-<p>A pesquisa EmbeddingList trata os vetores num subcampo vetorial do StructArray como uma lista de incorporação e devolve resultados ao nível da entidade. A pesquisa ao nível do elemento pesquisa cada elemento do Struct de forma independente e pode devolver o deslocamento do elemento correspondente.</p>
+<p>A pesquisa EmbeddingList trata os vetores num subcampo vetorial de StructArray como uma lista de incorporação e devolve resultados ao nível da entidade. A pesquisa ao nível do elemento pesquisa cada elemento Struct de forma independente e pode devolver o deslocamento do elemento correspondente.</p>
 <h2 id="Create-vector-indexes" class="common-anchor-header">Criar índices vetoriais<button data-href="#Create-vector-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -140,7 +140,7 @@ client.create_index(
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Aviso
-Não crie um índice « <code translate="no">MAX_SIM*</code> » e um índice com métrica vetorial normal no mesmo subcampo vetorial. Se forem necessários ambos os modos de pesquisa, grave os vetores em dois subcampos vetoriais separados e crie um índice em cada subcampo.</p>
+Não crie um índice de métrica de vectores « <code translate="no">MAX_SIM*</code> » e um índice de métrica de vectores normal no mesmo subcampo de vectores. Se forem necessários ambos os modos de pesquisa, escreva os vectores em dois subcampos de vectores separados e crie um índice em cada subcampo.</p>
 </div>
 <h2 id="Create-scalar-indexes" class="common-anchor-header">Criar índices escalares<button data-href="#Create-scalar-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -315,7 +315,7 @@ client.create_index(
 <tr><td>Utilize a sintaxe de caminho para índices de subcampos.</td><td><code translate="no">chunks[emb]</code> e o índice como ` `, e não como ` <code translate="no">emb</code> ` ou ` <code translate="no">chunks.emb</code>`.</td></tr>
 <tr><td>Um subcampo vetorial aceita um único índice.</td><td>Utilize subcampos vetoriais separados se necessitar de famílias de métricas diferentes.</td></tr>
 <tr><td>Utilize métricas do tipo « <code translate="no">MAX_SIM*</code> » para a pesquisa no EmbeddingList.</td><td>Os dados de consulta da EmbeddingList requerem um índice criado com uma métrica do tipo « <code translate="no">MAX_SIM*</code> ».</td></tr>
-<tr><td>Utilize métricas vetoriais normais para a pesquisa ao nível do elemento.</td><td>A pesquisa ao nível do elemento utiliza dados de consulta vetoriais normais e métricas como « <code translate="no">COSINE</code> », « <code translate="no">IP</code> » ou « <code translate="no">L2</code> ».</td></tr>
+<tr><td>Utilize métricas vetoriais normais para a pesquisa ao nível do elemento.</td><td>A pesquisa ao nível do elemento utiliza dados de consulta vetoriais regulares e métricas como « <code translate="no">COSINE</code> », « <code translate="no">IP</code> » ou « <code translate="no">L2</code> ».</td></tr>
 <tr><td>Indexe os subcampos escalares que aparecem nos filtros.</td><td>Utilize tipos de índice escalar suportados pelo seu destino.</td></tr>
 <tr><td>Tenha em conta os limites dos campos vetoriais.</td><td>O número total de campos vetoriais e subcampos vetoriais é limitado. Consulte «Limites do StructArray» antes de adicionar muitos subcampos vetoriais.</td></tr>
 </tbody>

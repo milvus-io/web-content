@@ -29,7 +29,7 @@ beta: Milvus 3.0.x
 <span class="highlighted-wrapper-line">    datatype=DataType.TEXT,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Depois de definido o campo, cada entidade pode incluir um valor de cadeia nesse campo. Os valores de « <code translate="no">TEXT</code> » são inseridos tal como noutros campos escalares e devolvidos a partir de resultados de consulta ou pesquisa, listando o campo em « <code translate="no">output_fields</code> ».</p>
+<p>Depois de definido o campo, cada entidade pode incluir um valor de cadeia nesse campo. Os valores de « <code translate="no">TEXT</code> » são inseridos tal como noutros campos escalares e são devolvidos nos resultados de consultas ou pesquisas, listando o campo em « <code translate="no">output_fields</code> ».</p>
 <div class="alert note">
 <p><code translate="no">TEXT</code> Os campos suportam valores nulos. Para ativar esta funcionalidade, defina <code translate="no">nullable</code> como <code translate="no">True</code>. Para mais detalhes, consulte <a href="/docs/pt/nullable-and-default.md">«Campo nulo</a>».</p>
 </div>
@@ -79,9 +79,9 @@ beta: Milvus 3.0.x
 <tbody>
 <tr><td>Ideal para</td><td>Metadados curtos utilizados para identificar, categorizar ou filtrar entidades, tais como <code translate="no">title</code>, <code translate="no">tag</code>, <code translate="no">category</code> ou <code translate="no">external_id</code>.</td><td>Conteúdo de origem mais extenso utilizado por fluxos de trabalho de LLM ou de agentes, como <code translate="no">content</code>, <code translate="no">passage</code>, <code translate="no">article_body</code> ou <code translate="no">log_message</code>.</td></tr>
 <tr><td>Definição de comprimento</td><td>Requer <code translate="no">max_length</code>, que define o número máximo de bytes que o campo pode armazenar. O valor máximo é <code translate="no">65,535</code> bytes. Se um valor puder exceder este limite, utilize <code translate="no">TEXT</code>.</td><td>Não requer <code translate="no">max_length</code>, pelo que o esquema não necessita de um limite fixo de bytes para o valor de texto.</td></tr>
-<tr><td>Comportamento de armazenamento</td><td>Armazena cada valor dentro do ` <code translate="no">max_length</code>` configurado para o campo.</td><td>Utiliza a seleção automática de armazenamento para valores de texto maiores. Para mais detalhes, consulte <a href="#how-milvus-stores-large-text-values">Como o Milvus armazena valores TEXT de grande dimensão</a>.</td></tr>
+<tr><td>Comportamento de armazenamento</td><td>Armazena cada valor dentro do ` <code translate="no">max_length</code>` configurado para o campo.</td><td>Utiliza a seleção automática de armazenamento para valores de texto maiores. Para mais detalhes, consulte <a href="#how-milvus-stores-large-text-values">Como o Milvus armazena valores TEXT grandes</a>.</td></tr>
 <tr><td>Suporte a campos primários</td><td>Pode ser utilizado como campo primário.</td><td>Não pode ser utilizado como campo primário.</td></tr>
-<tr><td>Filtragem</td><td>Utilizar para metadados de cadeias curtas que precisam de aparecer em expressões de filtragem, tais como <code translate="no">category == &quot;news&quot;</code> ou <code translate="no">tag in [&quot;ai&quot;, &quot;database&quot;]</code>.</td><td>Não se destina à filtragem regular de metadados.</td></tr>
+<tr><td>Filtragem</td><td>Utilizar para metadados de cadeias curtas que precisam de aparecer em expressões de filtro, tais como <code translate="no">category == &quot;news&quot;</code> ou <code translate="no">tag in [&quot;ai&quot;, &quot;database&quot;]</code>.</td><td>Não se destina à filtragem regular de metadados.</td></tr>
 </tbody>
 </table>
 <p>Para obter detalhes sobre os campos « <code translate="no">VARCHAR</code> », consulte <a href="/docs/pt/string.md">o campo VarChar</a>.</p>
@@ -133,7 +133,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><p>O exemplo seguinte cria uma coleção com um campo « <code translate="no">TEXT</code> » para o conteúdo de origem e um campo de vetores esparsos para os vetores esparsos gerados pelo BM25. A função BM25 converte o texto tokenizado de « <code translate="no">content</code> » em vetores esparsos armazenados em « <code translate="no">sparse</code> ».</p>
-<p>Para a pesquisa de texto completo com BM25, o campo de entrada « <code translate="no">TEXT</code> » deve estar definido como <code translate="no">enable_analyzer=True</code>.</p>
+<p>Para a pesquisa de texto completo com BM25, o campo de entrada « <code translate="no">TEXT</code> » deve estar definido como « <code translate="no">enable_analyzer=True</code> ».</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, Function, FunctionType, MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)

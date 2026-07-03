@@ -4,8 +4,8 @@ title: StructArray-Felder indizieren
 summary: >-
   Erstellen Sie Indizes für StructArray-Unterfelder, bevor Sie eine Vektorsuche
   durchführen oder die skalare Filterung beschleunigen. Bei einem
-  StructArray-Feld ist das Indexziel ein Unterfeldpfad, beispielsweise
-  `chunks[emb_list_vector]`, `chunks[emb]` oder `chunks[section]`.
+  StructArray-Feld ist das Indexziel ein Unterfeldpfad, z. B.
+  chunks[emb_list_vector], chunks[emb] oder chunks[section].
 ---
 <h1 id="Index-StructArray-Fields" class="common-anchor-header">StructArray-Felder indizieren<button data-href="#Index-StructArray-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -251,7 +251,7 @@ client.create_index(
     </button></h3><p>Die Suche auf Elementebene verwendet reguläre Vektormetriken. Sie durchsucht jedes Struct-Element unabhängig und kann den Offset des übereinstimmenden Elements zurückgeben.</p>
 <table>
 <thead>
-<tr><th>Datentyp des Vektor-Teilfelds</th><th>Indextyp</th><th>Metriktyp</th></tr>
+<tr><th>Datentyp des Vektor-Unterfelds</th><th>Indextyp</th><th>Metriktyp</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">FLOAT_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code></td><td><code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_FLAT_CC</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">IVF_SQ_CC</code>, <code translate="no">IVF_PQ</code>, <code translate="no">SCANN</code>, <code translate="no">IVF_RABITQ</code>, <code translate="no">IVF_RABITQ_FASTSCAN</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code>, <code translate="no">DISKANN</code></td><td><code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">COSINE</code></td></tr>
@@ -313,7 +313,7 @@ client.create_index(
 </thead>
 <tbody>
 <tr><td>Verwenden Sie die Pfadsyntax für Unterfeldindizes.</td><td>Indexieren Sie „ <code translate="no">chunks[emb]</code> “, nicht „ <code translate="no">emb</code> “ oder „ <code translate="no">chunks.emb</code> “.</td></tr>
-<tr><td>Ein Vektor-Unterfeld akzeptiert einen Index.</td><td>Verwenden Sie separate Vektor-Unterfelder, wenn Sie unterschiedliche Metrikfamilien benötigen.</td></tr>
+<tr><td>Ein Vektor-Unterfeld akzeptiert einen Index.</td><td>Verwenden Sie separate Vektor-Teilfelder, wenn Sie unterschiedliche Metrikfamilien benötigen.</td></tr>
 <tr><td>Verwenden Sie „ <code translate="no">MAX_SIM*</code> “-Metriken für die EmbeddingList-Suche.</td><td>Für Abfragen in der „EmbeddingList“ sind Daten aus einem Index erforderlich, der mit einer „ <code translate="no">MAX_SIM*</code> “-Metrik erstellt wurde.</td></tr>
 <tr><td>Verwenden Sie reguläre Vektormetriken für die Suche auf Elementebene.</td><td>Die Suche auf Elementebene verwendet reguläre Vektorabfragedaten und Metriken wie „ <code translate="no">COSINE</code> “, „ <code translate="no">IP</code> “ oder „ <code translate="no">L2</code> “.</td></tr>
 <tr><td>Indizieren Sie skalare Unterfelder, die in Filtern vorkommen.</td><td>Verwenden Sie skalare Indextypen, die von Ihrem Ziel unterstützt werden.</td></tr>

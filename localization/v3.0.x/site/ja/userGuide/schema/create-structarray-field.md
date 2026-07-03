@@ -20,7 +20,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>1つのエンティティに、構造化された要素の順序付きリストを含める必要がある場合は、StructArrayフィールドを作成します。StructArrayフィールドは、要素型がStructであるArrayフィールドです。各Struct要素は同じスキーマに従い、スカラーサブフィールド、ベクトルサブフィールド、またはその両方を含むことができます。</p>
-<p>このページでは、Structスキーマを定義し、それをStructArrayフィールドとして追加し、後の検索やフィルタリングに備えてサブフィールドを選択する方法、およびデータの挿入やインデックス作成の前に適用されるスキーマのルールを理解する方法について説明します。</p>
+<p>このページでは、Structスキーマを定義し、それをStructArrayフィールドとして追加し、後の検索やフィルタリングに備えてサブフィールドを選択する方法、およびデータの挿入やインデックス作成の前に適用されるスキーマ規則について解説します。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">開始する前に<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,7 +61,7 @@ summary: >-
 <tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>スカラーフィルタリングや範囲の例で使用されるチャンクレベルのスコア。</td></tr>
 <tr><td><code translate="no">has_code</code></td><td><code translate="no">BOOL</code></td><td>チャンクにコードが含まれているかどうか。</td></tr>
 <tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td><code translate="no">MAX_SIM*</code> メトリックを使用した EmbeddingList 検索のためのベクトルサブフィールド。</td></tr>
-<tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>通常のベクトルメトリックを使用した要素レベルの検索のためのベクトルサブフィールド。</td></tr>
+<tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>通常のベクトルメトリクスを使用した要素レベル検索用のベクトルサブフィールド。</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -103,7 +103,7 @@ summary: >-
 <tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td>StructArray フィールドでは、ジオメトリのサブフィールドおよび GIS 関数はサポートされていません。</td></tr>
 <tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td>StructArray フィールドでは、Text サブフィールドはサポートされていません。</td></tr>
 <tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td>StructArray フィールドでは、Timestamptz サブフィールドおよび時間指定式はサポートされていません。</td></tr>
-<tr><td>StructArray フィールドでは、<code translate="no">Array</code> 、<code translate="no">ArrayOfVector</code> 、<code translate="no">Struct</code> 、または<code translate="no">ArrayOfStruct</code></td><td>サポートされていません</td><td>StructArray フィールドには、ネストされた配列、ネストされたベクトル配列、ネストされた Struct フィールド、またはネストされた Array-of-Struct フィールドを含めることはできません。</td></tr>
+<tr><td>StructArray フィールドでは、ネストされた<code translate="no">Array</code> 、<code translate="no">ArrayOfVector</code> 、<code translate="no">Struct</code> 、または<code translate="no">ArrayOfStruct</code></td><td>サポートされていません</td><td>StructArray フィールドには、ネストされた配列、ネストされたベクトル配列、ネストされた Struct フィールド、またはネストされた Array-of-Struct フィールドを含めることはできません。</td></tr>
 </tbody>
 </table>
 <p>バージョン固有のサポート、Null 許容の挙動、およびその他の制限については、「<a href="/docs/ja/structarray-limits.md">StructArray の制限</a>」を参照してください。</p>
@@ -427,5 +427,5 @@ client.add_collection_struct_field(
 <li><p>StructArray フィールドにネストされたデータを挿入するには、「<a href="/docs/ja/insert-data-into-structarray-fields.md">StructArray フィールドへのデータの挿入</a>」を参照してください。</p></li>
 <li><p>ベクトルおよびスカラーインデックスを作成するには、「<a href="/docs/ja/index-structarray-fields.md">StructArray フィールドのインデックス付け</a>」を参照してください。</p></li>
 <li><p>StructArray のベクトルサブフィールドを検索するには、「StructArray を使用した基本的なベクトル検索」を参照してください。</p></li>
-<li><p>サポートされているデータ型、null 許容の挙動、およびバージョン固有の制限事項を確認するには、「<a href="/docs/ja/structarray-limits.md">StructArray の制限事項</a>」を参照してください。</p></li>
+<li><p>サポートされているデータ型、Null 許容の挙動、およびバージョン固有の制限事項を確認するには、「<a href="/docs/ja/structarray-limits.md">StructArray の制限事項</a>」を参照してください。</p></li>
 </ol>

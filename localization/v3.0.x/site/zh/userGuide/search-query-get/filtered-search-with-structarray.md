@@ -3,7 +3,7 @@ id: filtered-search-with-structarray.md
 title: 使用 StructArray 进行过滤搜索
 summary: >-
   使用此页面可在 StructArray 字段的向量搜索中添加标量过滤。StructArray
-  过滤分为两个层次：行级过滤器用于选择父实体，而元素级过滤器则用于限制哪些 Struct 元素参与元素级的向量搜索。
+  过滤分为两个层次：行级过滤器用于选择父实体，而元素级过滤器则用于限定哪些 Struct 元素参与元素级的向量搜索。
 ---
 <h1 id="Filtered-Search-with-StructArray" class="common-anchor-header">使用 StructArray 进行过滤搜索<button data-href="#Filtered-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -146,7 +146,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>在此示例中，顶级谓词<code translate="no">category == &quot;search&quot;</code> 用于选择候选实体，而<code translate="no">element_filter</code> 将元素级向量搜索限制在满足以下条件的块中：<code translate="no">section</code> 、<code translate="no">quality_score</code> 和<code translate="no">has_code</code> 在同一个 Struct 元素中均匹配。</p>
+<p>在此示例中，顶级谓词<code translate="no">category == &quot;search&quot;</code> 用于筛选候选实体，而<code translate="no">element_filter</code> 将元素级向量搜索限制在满足以下条件的片段中：<code translate="no">section</code> 、<code translate="no">quality_score</code> 和<code translate="no">has_code</code> 在同一个 Struct 元素中均匹配。</p>
 <div class="alert note">
 <p>警告</p>
 <p>当将顶级谓词与<code translate="no">element_filter</code> 结合使用时，请将<code translate="no">element_filter</code> 置于表达式的末尾。一个过滤表达式中只能包含一个<code translate="no">element_filter</code> ，且不能将<code translate="no">element_filter</code> 或<code translate="no">MATCH_*</code> 嵌套在另一个StructArray操作符内部。</p>
@@ -200,7 +200,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>此处使用<code translate="no">MATCH_ANY</code> ，因为EmbeddingList的搜索结果是实体级别的。该过滤器要求该实体中至少有一个片段是高质量的<code translate="no">&quot;index&quot;</code> 片段，但搜索结果本身仍代表父实体。</p>
+<p>此处使用<code translate="no">MATCH_ANY</code> ，因为EmbeddingList的搜索结果是实体级别的。该过滤器要求实体中至少有一个片段是高质量的<code translate="no">&quot;index&quot;</code> 片段，但搜索结果本身仍代表父实体。</p>
 <h2 id="Use-filters-in-hybrid-search" class="common-anchor-header">在混合搜索中使用过滤器<button data-href="#Use-filters-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -279,7 +279,7 @@ results = client.hybrid_search(
 <tr><td>向量子场</td><td>不支持作为<code translate="no">$[...]</code> 标量谓词的输入。请改用向量搜索来处理向量子字段。</td></tr>
 </tbody>
 </table>
-<p>对于不支持的情况（例如 JSON 路径、数组容器函数、文本匹配函数、针对<code translate="no">$[...]</code> 的 null 谓词、几何函数、Timestamptz 表达式以及泛型函数调用），请参阅<a href="/docs/zh/struct-array-operators.md">StructArray 操作符</a>。</p>
+<p>对于不支持的情况，例如 JSON 路径、数组容器函数、文本匹配函数、针对<code translate="no">$[...]</code> 的 null 谓词、几何函数、Timestamptz 表达式以及泛型函数调用，请参阅<a href="/docs/zh/struct-array-operators.md">StructArray 操作符</a>。</p>
 <h2 id="Common-mistakes" class="common-anchor-header">常见错误<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

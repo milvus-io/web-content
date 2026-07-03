@@ -303,7 +303,7 @@ result = client.insert(
 <tr><th>Правило</th><th>Пояснение</th></tr>
 </thead>
 <tbody>
-<tr><td>Используйте массив объектов для поля StructArray.</td><td>Значение <code translate="no">chunks</code> представляет собой список, и каждый элемент в списке является элементом Struct.</td></tr>
+<tr><td>Используйте массив объектов для поля StructArray.</td><td>Значение <code translate="no">chunks</code> представляет собой список, и каждый элемент в этом списке является элементом Struct.</td></tr>
 <tr><td>Используйте имена подполей внутри каждого элемента Struct.</td><td>Вставьте ` <code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> ` внутрь ` <code translate="no">chunks</code>`, а не в ` <code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code>`.</td></tr>
 <tr><td>Соблюдайте схему Struct.</td><td>Каждый элемент Struct должен использовать подполя, определенные в схеме Struct.</td></tr>
 <tr><td>Размеры векторов должны совпадать.</td><td>Значения векторов должны соответствовать параметрам « <code translate="no">dim</code> », настроенным для их подполей вектора.</td></tr>
@@ -334,7 +334,7 @@ result = client.insert(
 <li><p>Вставка большего количества элементов Struct, чем допускает <code translate="no">max_capacity</code>.</p></li>
 <li><p>Установка значения <code translate="no">null</code> только для одного подполя, в то время как другие подполя в том же значении StructArray являются допустимыми.</p></li>
 <li><p>Запись векторов только в ` <code translate="no">emb_list_vector</code> `, а затем попытка запуска поиска на уровне элементов в ` <code translate="no">chunks[emb]</code>`.</p></li>
-<li><p>Запись векторов только в поле ` <code translate="no">emb</code> `, а затем попытка выполнить поиск по списку вложений (EmbeddingList) в поле ` <code translate="no">chunks[emb_list_vector]</code>`.</p></li>
+<li><p>Запись векторов только в поле « <code translate="no">emb</code> », а затем попытка выполнить поиск по EmbeddingList в поле « <code translate="no">chunks[emb_list_vector]</code> ».</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Следующие шаги<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"

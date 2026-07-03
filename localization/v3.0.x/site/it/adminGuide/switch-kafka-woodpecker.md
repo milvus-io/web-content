@@ -90,7 +90,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p><strong>Passaggio 1: Verificare che l’istanza di Milvus sia in esecuzione.</strong></p>
-<p><strong>Passaggio 2: configurare la connessione a Kafka di destinazione e riavviare Milvus.</strong> Il passaggio richiede che Milvus conosca già la connessione a Kafka, quindi inserirla in <code translate="no">user.yaml</code> tramite <code translate="no">extraConfigFiles</code> e applicare con <code translate="no">helm upgrade</code> (che riavvia i pod). <code translate="no">streaming.enabled=true</code> è necessario per la funzionalità Switch MQ. Per i dettagli su SASL/SSL, consultare <a href="/docs/it/connect_kafka_ssl.md">Connettersi a Kafka con SASL/SSL</a>.</p>
+<p><strong>Passaggio 2: configurare la connessione a Kafka di destinazione e riavviare Milvus.</strong> Il passaggio richiede che Milvus conosca già la connessione a Kafka, quindi inserirla in <code translate="no">user.yaml</code> tramite <code translate="no">extraConfigFiles</code> e applicare con <code translate="no">helm upgrade</code> (che esegue il rollover dei pod). <code translate="no">streaming.enabled=true</code> è necessario per la funzionalità Switch MQ. Per i dettagli su SASL/SSL, consultare <a href="/docs/it/connect_kafka_ssl.md">Connettersi a Kafka con SASL/SSL</a>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+

@@ -154,7 +154,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><p>모든 <code translate="no">AnnSearchRequest</code> 객체가 동일한 StructArray 필드 하위의 요소 수준 벡터 하위 필드를 대상으로 하는 경우, 하이브리드 검색은 재순위를 통해 요소 수준 후보를 유지할 수 있습니다. 이는 최종 결과가 요소 수준으로 유지되는 유일한 StructArray 하이브리드 모드입니다.</p>
-<p>다음 예제는 <code translate="no">chunks</code> StructArray 필드에 <code translate="no">chunks[emb]</code> 및 <code translate="no">chunks[code_emb]</code> 라는 두 개의 요소 수준 벡터 하위 필드가 있으며, 둘 다 일반 벡터 메트릭을 사용한다고 가정합니다.</p>
+<p>다음 예제는 <code translate="no">chunks</code> StructArray 필드에 <code translate="no">chunks[emb]</code> 와 <code translate="no">chunks[code_emb]</code> 라는 두 개의 요소 수준 벡터 하위 필드가 있으며, 둘 다 일반 벡터 메트릭을 사용한다고 가정합니다.</p>
 <pre><code translate="no">index_chunk_req = AnnSearchRequest(
     data=[query_vector],
     anns_field=<span class="hljs-string">&quot;chunks[emb]&quot;</span>,
@@ -192,7 +192,7 @@ results = client.hybrid_search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>두 <code translate="no">AnnSearchRequest</code> 객체 모두 <code translate="no">chunks</code> 하위의 벡터 하위 필드를 검색합니다. 동일한 0을 기준으로 한 오프셋은 동일한 Struct 요소를 가리키므로, 하이브리드 재순위 지정기는 요소 후보를 직접 순위 지정할 수 있습니다. 이 모드에서는 엔티티 수준 통합이 수행되지 않으므로 <code translate="no">element_scope</code> 을 설정하지 마십시오.</p>
+<p>두 <code translate="no">AnnSearchRequest</code> 객체 모두 <code translate="no">chunks</code> 하위의 벡터 하위 필드를 검색합니다. 동일한 0을 기준으로 하는 오프셋은 동일한 Struct 요소를 가리키므로, 하이브리드 재순위 지정기는 요소 후보를 직접 순위 지정할 수 있습니다. 이 모드에서는 엔티티 수준 병합이 수행되지 않으므로 <code translate="no">element_scope</code> 을 설정하지 마십시오.</p>
 <h2 id="Collapse-element-level-hits-for-entity-level-hybrid-search" class="common-anchor-header">엔티티 수준 하이브리드 검색을 위한 요소 수준 일치 결과 통합<button data-href="#Collapse-element-level-hits-for-entity-level-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -248,7 +248,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>이 예제에서 ` <code translate="no">title_req</code> `는 엔티티 수준이므로, 최종 하이브리드 결과도 엔티티 수준이 됩니다. ` <code translate="no">chunk_req</code> ` 요청은 먼저 ` <code translate="no">chunks[emb]</code>`에서 요소 히트를 반환한 다음, 동일한 엔티티에서 반환된 요소들을 합쳐 가장 높은 점수를 받은 3개의 요소 점수를 합산하여 축소합니다. 엔티티 수준 축소가 필요한데 ` <code translate="no">element_scope</code> `가 생략된 경우, 축소 전략은 기본적으로 ` <code translate="no">max</code>`로 설정됩니다.</p>
+<p>이 예제에서 ` <code translate="no">title_req</code> `는 엔티티 수준이므로 최종 하이브리드 결과도 엔티티 수준이 됩니다. ` <code translate="no">chunk_req</code> ` 요청은 먼저 ` <code translate="no">chunks[emb]</code>`에서 요소 히트를 반환한 다음, 동일한 엔티티에서 반환된 요소들을 합산하여 점수가 가장 높은 3개의 요소 점수를 합산함으로써 축소합니다. 엔티티 수준 축소가 필요한데 ` <code translate="no">element_scope</code> `가 생략된 경우, 축소 전략은 기본적으로 ` <code translate="no">max</code>`로 설정됩니다.</p>
 <h2 id="Choose-a-collapse-strategy" class="common-anchor-header">합치기 전략 선택<button data-href="#Choose-a-collapse-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -272,11 +272,11 @@ results = client.hybrid_search(
 <tr><td><code translate="no">max</code></td><td>엔티티에 대해 반환된 요소 중 가장 높은 점수를 유지합니다.</td><td>허용되지 않음.</td><td>지원되는 모든 정규 벡터 메트릭.</td></tr>
 <tr><td><code translate="no">sum</code></td><td>엔티티에 대해 반환된 모든 요소 점수를 합산합니다.</td><td>허용되지 않음.</td><td><code translate="no">IP</code> 이나 <code translate="no">COSINE</code> 과 같이 양의 상관관계를 갖는 메트릭만 허용됩니다.</td></tr>
 <tr><td><code translate="no">avg</code></td><td>엔티티에 대해 반환된 모든 요소 점수의 평균을 구합니다.</td><td>허용되지 않습니다.</td><td>지원되는 모든 정규 벡터 메트릭.</td></tr>
-<tr><td><code translate="no">topk_sum</code></td><td>엔티티에 대해 반환된 요소 점수 중 가장 높은 <code translate="no">K</code> 점수의 합계를 구합니다.</td><td>필수이며, 양수여야 합니다.</td><td><code translate="no">IP</code> 이나 <code translate="no">COSINE</code> 과 같이 양의 상관 관계가 있는 메트릭만 사용할 수 있습니다.</td></tr>
+<tr><td><code translate="no">topk_sum</code></td><td>엔티티에 대해 반환된 요소 점수 중 가장 높은 <code translate="no">K</code> 점수들을 합산합니다.</td><td>필수이며, 양수여야 합니다.</td><td><code translate="no">IP</code> 이나 <code translate="no">COSINE</code> 과 같이 양의 상관관계를 갖는 메트릭만 사용할 수 있습니다.</td></tr>
 <tr><td><code translate="no">topk_avg</code></td><td>엔티티에 대해 반환된 요소 점수 중 가장 높은 점수 <code translate="no">K</code> 의 평균을 구합니다.</td><td>필수 항목이며 양수여야 합니다.</td><td>지원되는 모든 정규 벡터 메트릭.</td></tr>
 </tbody>
 </table>
-<p>Collapse는 해당 StructArray 요소 수준 <code translate="no">AnnSearchRequest</code> 에서 반환된 요소 히트만 사용합니다. ANN 검색 후 엔티티의 모든 Struct 요소를 스캔하지는 않습니다. Collapse에 사용할 요소를 확보할 수 있도록 요청 <code translate="no">limit</code> 를 충분히 높게 설정하십시오.</p>
+<p>Collapse는 해당 StructArray 요소 수준 <code translate="no">AnnSearchRequest</code> 에 의해 반환된 요소 히트만 사용합니다. ANN 검색 후 엔티티의 모든 Struct 요소를 스캔하지는 않습니다. Collapse에 사용할 요소를 확보할 수 있도록 요청 <code translate="no">limit</code> 를 충분히 높게 설정하십시오.</p>
 <h2 id="Add-filters-range-search-and-grouping" class="common-anchor-header">필터, 범위 검색 및 그룹화 추가<button data-href="#Add-filters-range-search-and-grouping" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -338,7 +338,7 @@ results = client.hybrid_search(
 <li><p><code translate="no">element_scope</code> 는 하이브리드 검색에서 엔티티 수준 후보로 축소되어야 하는 StructArray 요소 수준 <code translate="no">AnnSearchRequest</code> 객체에 대해서만 사용하십시오.</p></li>
 <li><p>EmbeddingList 요청, 컬렉션 수준 벡터 요청 또는 동일한 StructArray 요소 수준의 하이브리드 검색에는 <code translate="no">element_scope</code> 를 사용하지 마십시오.</p></li>
 <li><p><code translate="no">sum</code> <code translate="no">topk_sum</code> 축소 전략은 또는 과 같은 양의 상관관계 지표를 필요로 합니다. 와 함께 사용해서는 안 됩니다. <code translate="no">IP</code> <code translate="no">COSINE</code> <code translate="no">L2</code></p></li>
-<li><p><code translate="no">topk_sum</code> 또한 <code translate="no">topk_avg</code> 는 양의 <code translate="no">topk</code> 값을 요구합니다. 다른 축소 전략에는 <code translate="no">topk</code> 가 포함되어서는 안 됩니다.</p></li>
+<li><p><code translate="no">topk_sum</code> 또한 <code translate="no">topk_avg</code> 는 양의 <code translate="no">topk</code> 값을 요구합니다. 다른 축소 전략에는 <code translate="no">topk</code> 를 포함해서는 안 됩니다.</p></li>
 <li><p>EmbeddingList 수준 StructArray 요청은 범위 검색이나 그룹화를 지원하지 않습니다.</p></li>
 <li><p>하이브리드 그룹화는 동일한 StructArray 요소 수준의 하이브리드 검색에 대해서만 지원되며, 기본 키에 의해서만 가능합니다.</p></li>
 <li><p>범위 검색과 그룹화를 함께 사용해서는 안 됩니다.</p></li>
@@ -359,7 +359,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>동일 StructArray 요소 수준 하이브리드 요청에 <code translate="no">element_scope</code> 를 추가하는 경우. 해당 요청은 요소 수준으로 유지되며 엔티티 수준 축소(collapse)를 수행하지 않습니다.</p></li>
+<li><p>동일 StructArray 요소 수준 하이브리드 요청에 <code translate="no">element_scope</code> 를 추가하는 경우. 해당 요청은 요소 수준으로 유지되며 엔티티 수준 접기는 수행되지 않습니다.</p></li>
 <li><p><code translate="no">chunks[emb_list_vector]</code> 에 <code translate="no">element_scope</code> 를 추가하는 경우. EmbeddingList 검색은 이미 엔티티 수준입니다.</p></li>
 <li><p>두 개의 StructArray 필드가 요소 오프셋을 공유한다고 가정하는 경우. <code translate="no">chunks</code> 의 오프셋 <code translate="no">3</code> 과 다른 StructArray 필드의 오프셋 <code translate="no">3</code> 은 서로 다른 요소이므로, 하이브리드 요청은 엔티티 수준이 됩니다.</p></li>
 <li><p><code translate="no">topk_sum</code> 을 <code translate="no">L2</code> 과 함께 사용합니다. 음수 거리 메트릭의 경우 <code translate="no">max</code>, <code translate="no">avg</code> 또는 <code translate="no">topk_avg</code> 을 사용하십시오.</p></li>

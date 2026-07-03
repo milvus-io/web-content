@@ -131,7 +131,7 @@ results = client.search(
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
         <span class="hljs-built_in">print</span>(hit[<span class="hljs-string">&quot;id&quot;</span>], hit[<span class="hljs-string">&quot;distance&quot;</span>], hit[<span class="hljs-string">&quot;entity&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>En este modo de búsqueda, « <code translate="no">limit</code> » controla cuántas entidades se devuelven para cada consulta. El resultado puede incluir subcampos de StructArray, pero la coincidencia en sí representa la entidad principal con la que coincide, en lugar de un elemento Struct específico.</p>
+<p>En este modo de búsqueda, « <code translate="no">limit</code> » controla cuántas entidades se devuelven para cada consulta. El resultado puede incluir subcampos de StructArray, pero la coincidencia en sí misma representa la entidad principal con la que coincide, en lugar de un elemento Struct específico.</p>
 <div class="alert note">
 <p>Para obtener una guía completa al estilo de ColBERT o ColPali, consulta <a href="/docs/es/search-with-embedding-lists.md">«Búsqueda con listas de incrustación</a>». Esta página solo aborda el comportamiento básico de la búsqueda en StructArray.</p>
 </div>
@@ -177,7 +177,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>En la búsqueda a nivel de elemento, cada resultado representa un elemento Struct coincidente. El valor « <code translate="no">offset</code> » es la posición, contada a partir de cero, de ese elemento en el campo StructArray. La misma entidad puede aparecer más de una vez si hay más de un elemento Struct que coincide con la consulta. El valor « <code translate="no">limit</code> » se aplica a los resultados de elementos, no a entidades principales únicas.</p>
+<p>En la búsqueda a nivel de elemento, cada resultado representa un elemento Struct coincidente. El valor « <code translate="no">offset</code> » es la posición, contada a partir de cero, de ese elemento en el campo StructArray. La misma entidad puede aparecer más de una vez si hay más de un elemento Struct que coincide con la consulta. El valor « <code translate="no">limit</code> » se aplica a los resultados de los elementos, no a entidades principales únicas.</p>
 <h2 id="Interpret-results" class="common-anchor-header">Interpretación de los resultados<button data-href="#Interpret-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -225,7 +225,7 @@ results = client.search(
 <li><p>Utilizar una consulta EmbeddingList en un subcampo vectorial indexado con una métrica vectorial normal.</p></li>
 <li><p>Utilizar una consulta vectorial normal contra un subcampo vectorial indexado con una métrica de « <code translate="no">MAX_SIM*</code> ».</p></li>
 <li><p>Esperar que la búsqueda a nivel de elemento <code translate="no">limit</code> devuelva ese número de entidades padre únicas. Devuelve coincidencias de elementos.</p></li>
-<li><p>Esperar que la búsqueda EmbeddingList devuelva un desplazamiento de elemento específico. Devuelve coincidencias a nivel de entidad.</p></li>
+<li><p>Esperar que la búsqueda «EmbeddingList» devuelva un desplazamiento de elemento específico. Devuelve coincidencias a nivel de entidad.</p></li>
 <li><p>Reutilizar un mismo subcampo vectorial para ambos modos de búsqueda. Utilizar subcampos vectoriales independientes, ya que cada subcampo vectorial solo admite un índice.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Próximos pasos<button data-href="#Next-steps" class="anchor-icon" translate="no">

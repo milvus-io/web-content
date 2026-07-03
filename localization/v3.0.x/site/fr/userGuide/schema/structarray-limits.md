@@ -110,7 +110,7 @@ summary: >-
 <tr><td><code translate="no">Array</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme suit : <code translate="no">DataType.INT8</code>, <code translate="no">DataType.INT16</code>, <code translate="no">DataType.INT32</code> ou <code translate="no">DataType.INT64</code>.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme suit : <code translate="no">DataType.FLOAT</code> ou <code translate="no">DataType.DOUBLE</code>.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme suit : <code translate="no">DataType.VARCHAR</code> et définissez <code translate="no">max_length</code>.</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>Pris en charge</td><td>Définissez le sous-champ comme <code translate="no">DataType.FLOAT_VECTOR</code> et définissez <code translate="no">dim</code>.</td></tr>
+<tr><td><code translate="no">ArrayOfVector</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme <code translate="no">DataType.FLOAT_VECTOR</code> et définissez <code translate="no">dim</code>.</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme « <code translate="no">DataType.FLOAT16_VECTOR</code> » et définissez « <code translate="no">dim</code> ».</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme « <code translate="no">DataType.BFLOAT16_VECTOR</code> » et définissez « <code translate="no">dim</code> ».</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme « <code translate="no">DataType.INT8_VECTOR</code> » et définissez « <code translate="no">dim</code> ».</td></tr>
@@ -151,7 +151,7 @@ summary: >-
 <tr><td>Valeur StructArray partiellement nulle</td><td>Lorsqu’un champ StructArray contient une valeur de tableau valide, ne mélangez pas de sous-tableaux nuls avec des sous-tableaux valides au sein d’une même valeur.</td></tr>
 <tr><td>Ajout dynamique d’un champ StructArray</td><td>L'ajout d'un champ StructArray à une collection existante n'est pris en charge que dans les versions qui incluent la prise en charge des champs StructArray dynamiques.</td></tr>
 <tr><td>Exigence de nullabilité pour l’ajout dynamique</td><td>Un champ StructArray ajouté à une collection existante doit être nullable, car les entités existantes ne possèdent pas encore de valeur pour ce nouveau champ.</td></tr>
-<tr><td>Entités existantes après l’ajout dynamique</td><td>Les entités existantes renvoient la valeur « <code translate="no">null</code> » pour le champ StructArray ajouté, et ce pour tous ses sous-champs.</td></tr>
+<tr><td>Entités existantes après l'ajout dynamique</td><td>Les entités existantes renvoient la valeur « <code translate="no">null</code> » pour le champ StructArray ajouté, et ce pour tous ses sous-champs.</td></tr>
 </tbody>
 </table>
 <p>Dans Milvus v3.0.x, les champs StructArray pouvant prendre la valeur null, les tableaux vectoriels pouvant prendre la valeur null et l’ajout dynamique de champs StructArray sont disponibles.</p>
@@ -180,7 +180,7 @@ summary: >-
 <tr><td>Noms des sous-champs</td><td>À l’intérieur de chaque objet Struct, utilisez des noms de sous-champs tels que <code translate="no">text</code> et <code translate="no">emb</code>, et non des chemins d’accès tels que <code translate="no">chunks[text]</code>.</td></tr>
 <tr><td>Conformité au schéma</td><td>Chaque élément Struct doit respecter le schéma Struct.</td></tr>
 <tr><td>Capacité</td><td>Le nombre d’éléments Struct dans une entité ne doit pas dépasser <code translate="no">max_capacity</code>.</td></tr>
-<tr><td>Dimensions des vecteurs</td><td>Les valeurs vectorielles doivent respecter l’ <code translate="no">dim</code> configurée pour leurs sous-champs vectoriels.</td></tr>
+<tr><td>Dimensions des vecteurs</td><td>Les valeurs vectorielles doivent correspondre à l’ <code translate="no">dim</code> configurée pour leurs sous-champs vectoriels.</td></tr>
 <tr><td>Duplication en mode recherche</td><td>Si vous avez besoin à la fois de la recherche EmbeddingList et de la recherche au niveau des éléments, enregistrez les vecteurs dans deux sous-champs vectoriels distincts.</td></tr>
 </tbody>
 </table>
@@ -210,7 +210,7 @@ summary: >-
 </tbody>
 </table>
 <p>Utilisez des sous-champs vectoriels distincts lorsque les deux modes sont requis. Par exemple, utilisez <code translate="no">chunks[emb_list_vector]</code> pour la recherche EmbeddingList et <code translate="no">chunks[emb]</code> pour la recherche au niveau des éléments.</p>
-<p>Les sous-champs vectoriels StructArray sont considérés comme des sous-champs vectoriels lors de la conception de votre schéma de collection. Veillez à ce que le nombre total de champs vectoriels et de sous-champs vectoriels reste dans les limites de votre version cible et de votre niveau de service.</p>
+<p>Les sous-champs vectoriels StructArray comptent comme des sous-champs vectoriels lorsque vous planifiez le schéma de votre collection. Veillez à ce que le nombre total de champs vectoriels et de sous-champs vectoriels reste dans les limites de votre version cible et de votre niveau de service.</p>
 <p>Pour connaître la matrice des types d’index et des types de métriques pris en charge, consultez la section <a href="/docs/fr/index-structarray-fields.md">Champs StructArray d’index</a>.</p>
 <h2 id="Search-limits" class="common-anchor-header">Limites de recherche<button data-href="#Search-limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -258,11 +258,11 @@ summary: >-
     </button></h2><p>Le filtrage scalaire de StructArray est géré par les opérateurs StructArray, tels que « <code translate="no">element_filter</code> » et la famille « <code translate="no">MATCH_*</code> ». La matrice détaillée de prise en charge des prédicats se trouve dans la section « <a href="/docs/fr/struct-array-operators.md">Opérateurs StructArray</a> ».</p>
 <p>En résumé :</p>
 <ul>
-<li><p>Utilisez « <code translate="no">$[subfield]</code> » uniquement au sein d’opérateurs StructArray.</p></li>
+<li><p>Utilisez « <code translate="no">$[subfield]</code> » uniquement au sein des opérateurs StructArray.</p></li>
 <li><p>Utilisez des sous-champs scalaires pour les prédicats scalaires.</p></li>
 <li><p>N’utilisez pas de sous-champs vectoriels comme entrées de prédicats scalaires de type « <code translate="no">$[...]</code> ».</p></li>
 <li><p>La syntaxe JSON Path, les fonctions JSON, les fonctions de conteneur de tableaux, les fonctions de correspondance de texte, les fonctions de géométrie/SIG et les expressions Timestamptz ne sont pas prises en charge pour les prédicats au niveau des éléments StructArray.</p></li>
-<li><p>Privilégiez les comparaisons booléennes explicites telles que « <code translate="no">$[has_code] == true</code> » plutôt que les expressions booléennes nues.</p></li>
+<li><p>Privilégiez les comparaisons booléennes explicites telles que ` <code translate="no">$[has_code] == true</code> ` plutôt que les expressions booléennes nues.</p></li>
 </ul>
 <h2 id="Related-pages" class="common-anchor-header">Pages associées<button data-href="#Related-pages" class="anchor-icon" translate="no">
       <svg translate="no"

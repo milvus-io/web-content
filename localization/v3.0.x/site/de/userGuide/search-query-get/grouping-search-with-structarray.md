@@ -48,7 +48,7 @@ summary: >-
 <tbody>
 <tr><td>„EmbeddingList“-Suche</td><td>Nicht unterstützt.</td><td>Nicht zutreffend.</td></tr>
 <tr><td>Suche auf Elementebene</td><td>Wird durch Gruppierung nach dem Primärschlüssel unterstützt.</td><td>Liefert höchstens ein Ergebnis pro übergeordneter Entität. Metadaten auf Elementebene bleiben erhalten, sodass der Index oder Offset des ausgewählten Elements zurückgegeben werden kann, wenn dieser über die API oder das SDK bereitgestellt wird.</td></tr>
-<tr><td>Hybride Suche</td><td>Wird nur unterstützt, wenn alle Teilsuchen auf Vektorfelder auf Elementebene unter demselben StructArray-Feld abzielen.</td><td>Teilsuchen auf Elementebene werden vor der endgültigen Ergebnisverarbeitung nach Primärschlüssel gruppiert.</td></tr>
+<tr><td>Hybride Suche</td><td>Wird nur unterstützt, wenn alle Teilsuchen auf Vektorfelder auf Elementebene unter demselben StructArray-Feld abzielen.</td><td>Teilsuchen auf Elementebene werden vor der Verarbeitung des Endergebnisses nach Primärschlüssel gruppiert.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -81,7 +81,7 @@ summary: >-
 <tr><td>Keine Bereichsparameter</td><td>Kombinieren Sie die Gruppierungssuche nicht mit Bereichssuchparametern wie <code translate="no">radius</code> oder <code translate="no">range_filter</code>.</td></tr>
 </tbody>
 </table>
-<p>Informationen zur Indexkonfiguration finden Sie unter <a href="/docs/de/index-structarray-fields.md">„Index StructArray-Felder</a>“.</p>
+<p>Informationen zur Indexeinrichtung finden Sie unter <a href="/docs/de/index-structarray-fields.md">„Index StructArray-Felder</a>“.</p>
 <h2 id="Run-grouped-element-level-search" class="common-anchor-header">Gruppierte Suche auf Elementebene ausführen<button data-href="#Run-grouped-element-level-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -173,7 +173,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Das Prädikat auf oberster Ebene wählt Kandidatenentitäten aus. Das Prädikat „ <code translate="no">element_filter</code> “ beschränkt die Vektorsuche auf Elementebene auf übereinstimmende Struct-Elemente. Die Gruppierung fasst dann die übereinstimmenden Elementtreffer anhand des Primärschlüssels zusammen.</p>
+<p>Das Prädikat der obersten Ebene wählt Kandidatenentitäten aus. Das Prädikat „ <code translate="no">element_filter</code> “ beschränkt die Vektorsuche auf Elementebene auf übereinstimmende Struct-Elemente. Die Gruppierung fasst dann die übereinstimmenden Elementtreffer anhand des Primärschlüssels zusammen.</p>
 <h2 id="Use-grouping-in-hybrid-search" class="common-anchor-header">Verwenden Sie die Gruppierung bei der hybriden Suche<button data-href="#Use-grouping-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -189,7 +189,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die hybride Gruppierung mit StructArray ist eine Funktion auf Elementebene. Sie wird nur unterstützt, wenn alle Teilsuchen auf Vektorfelder auf Elementebene unter demselben StructArray-Feld abzielen. Verwenden Sie keine Abfragen auf EmbeddingList-Ebene in einer gruppierten StructArray-Hybridsuche.</p>
+    </button></h2><p>Die hybride Gruppierung mit StructArray ist eine Funktion auf Elementebene. Sie wird nur unterstützt, wenn alle Teilsuchen auf Vektorfelder auf Elementebene unter demselben StructArray-Feld abzielen. Verwenden Sie keine Anfragen auf EmbeddingList-Ebene in einer gruppierten StructArray-Hybridsuche.</p>
 <p>Das folgende Beispiel geht davon aus, dass das StructArray-Feld „ <code translate="no">chunks</code> “ zwei Vektor-Unterfelder auf Elementebene enthält, „ <code translate="no">chunks[emb]</code> “ und „ <code translate="no">chunks[code_emb]</code> “, und dass beide mit regulären Vektormetriken indiziert sind.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest, RRFRanker
 
@@ -270,7 +270,7 @@ results = client.hybrid_search(
 <li><p>Kombinieren Sie die Gruppierungssuche nicht mit der Bereichssuche.</p></li>
 <li><p>Verwenden Sie für die Gruppierungssuche keine „ <code translate="no">EmbeddingList</code> “-Abfrage oder eine „ <code translate="no">MAX_SIM*</code> “-Metrik.</p></li>
 <li><p>Hybride Gruppierung wird nur unterstützt, wenn alle Teilsuchen auf Vektorfelder auf Elementebene unter demselben StructArray-Feld abzielen.</p></li>
-<li><p>Die hybride Gruppierung wird nicht unterstützt, wenn die hybride Suche ein normales Vektorfeld, ein anderes StructArray-Feld oder eine Abfrage auf EmbeddingList-Ebene einbezieht.</p></li>
+<li><p>Die hybride Gruppierung wird nicht unterstützt, wenn die hybride Suche ein normales Vektorfeld, ein anderes StructArray-Feld oder eine Anforderung auf EmbeddingList-Ebene einbezieht.</p></li>
 </ul>
 <h2 id="Common-mistakes" class="common-anchor-header">Häufige Fehler<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -43,7 +43,7 @@ summary: >-
 <tr><td><a href="/docs/ja/woodpecker.md">Woodpecker</a></td><td style="text-align:center">✔️ (組み込み)</td><td style="text-align:center">✔️ (組み込みまたはサービス)</td><td><strong>Milvus 3.x</strong>（両モード）</td><td>デフォルトかつ推奨。オブジェクトストレージ上のクラウドネイティブWAL。外部サービスは不要。</td></tr>
 <tr><td><a href="/docs/ja/mq_pulsar.md">Pulsar</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td>≤ 2.5.x（クラスタのデフォルト）</td><td>サポート対象（外部またはバンドル版）。</td></tr>
 <tr><td><a href="/docs/ja/mq_kafka.md">Kafka</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td>—</td><td>対応。Kafka 2.x または 3.x のみ。</td></tr>
-<tr><td><a href="/docs/ja/mq_rocksmq.md">RocksMQ</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✖️</td><td>≤ 2.5.x（スタンドアロンのデフォルト）</td><td><strong>スタンドアロン版でのみ</strong>サポートされています。</td></tr>
+<tr><td><a href="/docs/ja/mq_rocksmq.md">RocksMQ</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✖️</td><td>≤ 2.5.x（スタンドアロンのデフォルト）</td><td><strong>スタンドアロンのみ</strong>対応。</td></tr>
 </tbody>
 </table>
 <div class="alert note">

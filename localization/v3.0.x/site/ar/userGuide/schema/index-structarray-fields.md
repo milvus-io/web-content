@@ -53,7 +53,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>لا يقبل الحقل المتجه أو الحقل الفرعي المتجه سوى فهرس واحد. إذا كنت بحاجة إلى كل من البحث في EmbeddingList والبحث على مستوى العنصر، فأنشئ حقلين فرعيين متجهين منفصلين وقم بفهرستهما بشكل منفصل. في هذه الصفحة، يتم فهرسة <code translate="no">chunks[emb_list_vector]</code> للبحث في EmbeddingList، ويتم فهرسة <code translate="no">chunks[emb]</code> للبحث على مستوى العنصر.</p>
+<p>لا يقبل الحقل المتجه أو الحقل الفرعي المتجه سوى فهرس واحد. إذا كنت بحاجة إلى كل من البحث في EmbeddingList والبحث على مستوى العناصر، فأنشئ حقلين فرعيين متجهين منفصلين وقم بفهرستهما بشكل منفصل. في هذه الصفحة، يتم فهرسة <code translate="no">chunks[emb_list_vector]</code> للبحث في EmbeddingList، ويتم فهرسة <code translate="no">chunks[emb]</code> للبحث على مستوى العناصر.</p>
 </div>
 <h2 id="Choose-indexes" class="common-anchor-header">اختر الفهارس<button data-href="#Choose-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -99,7 +99,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يُنشئ المثال التالي فهرسين متجهين. يستخدم الفهرس الأول مقياس " <code translate="no">MAX_SIM*</code> " للبحث في قائمة التضمين (EmbeddingList). ويستخدم الفهرس الثاني مقياس متجه عادي للبحث على مستوى العنصر.</p>
+    </button></h2><p>يُنشئ المثال التالي فهرسين متجهين. يستخدم الفهرس الأول مقياس " <code translate="no">MAX_SIM*</code> " للبحث في قائمة التضمين (EmbeddingList). ويستخدم الفهرس الثاني مقياسًا متجهًا عاديًا للبحث على مستوى العنصر.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -205,7 +205,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>استخدم الجداول التالية لاختيار نوع الفهرس ونوع المقياس لحقل فرعي متجهي من StructArray. ابدأ من الهدف، ثم اختر عائلة المقاييس حسب وضع البحث.</p>
+    </button></h2><p>استخدم الجداول التالية لاختيار نوع الفهرس ونوع المقياس لحقل فرعي متجه من StructArray. ابدأ من الهدف، ثم اختر عائلة المقاييس حسب وضع البحث.</p>
 <p>اختر نوع فهرس Milvus ونوع المقياس من جداول التوافق التالية.</p>
 <h3 id="EmbeddingList-search" class="common-anchor-header">البحث في EmbeddingList<button data-href="#EmbeddingList-search" class="anchor-icon" translate="no">
       <svg translate="no"

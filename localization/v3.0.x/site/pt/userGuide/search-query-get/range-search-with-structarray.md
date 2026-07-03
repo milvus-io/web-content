@@ -7,7 +7,7 @@ summary: >-
   vetoriais cuja pontuação ou distância se situa dentro de um intervalo
   especificado. Para os campos StructArray, utilize a pesquisa por intervalo em
   conjunto com a pesquisa vetorial ao nível dos elementos, em que cada elemento
-  do Struct é pesquisado de forma independente.
+  Struct é pesquisado de forma independente.
 ---
 <h1 id="Range-Search-with-StructArray" class="common-anchor-header">Pesquisa por intervalo com StructArray<button data-href="#Range-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -163,7 +163,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>Neste exemplo, « <code translate="no">COSINE</code> » é uma métrica do tipo «similarity», pelo que o intervalo de resultados é superior a <code translate="no">radius</code> e inferior ou igual a <code translate="no">range_filter</code>. O valor « <code translate="no">offset</code> » identifica o elemento «Struct» correspondente na matriz « <code translate="no">chunks</code> » quando devolvido.</p>
+<p>Neste exemplo, « <code translate="no">COSINE</code> » é uma métrica do tipo «similaridade», pelo que o intervalo de resultados é superior a <code translate="no">radius</code> e inferior ou igual a <code translate="no">range_filter</code>. O valor « <code translate="no">offset</code> » identifica o elemento «Struct» correspondente na matriz « <code translate="no">chunks</code> » quando devolvido.</p>
 <h2 id="Add-scalar-filters" class="common-anchor-header">Adicionar filtros escalares<button data-href="#Add-scalar-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -262,7 +262,7 @@ results = client.hybrid_search(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Neste exemplo, apenas a sub-solicitação « <code translate="no">chunks[emb]</code> » utiliza parâmetros de pesquisa por intervalo. A solicitação StructArray continua a seguir a semântica ao nível do elemento: o limite do intervalo aplica-se aos resultados do elemento Struct antes de a pesquisa híbrida combinar e reclassificar os resultados.</p>
-<h2 id="Interpret-range-results" class="common-anchor-header">Interpretar os resultados do intervalo<button data-href="#Interpret-range-results" class="anchor-icon" translate="no">
+<h2 id="Interpret-range-results" class="common-anchor-header">Interpretar resultados de intervalo<button data-href="#Interpret-range-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

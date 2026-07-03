@@ -24,6 +24,6 @@ summary: >-
 <ul>
 <li><strong><a href="/docs/pt/etcd.md">Metadados</a></strong> — O Milvus armazena metadados (esquemas de coleções, estado dos nós, pontos de verificação de consumo) no etcd.</li>
 <li><strong><a href="/docs/pt/object-storage.md">Armazenamento de objetos</a></strong> — O Milvus armazena ficheiros de índice e registos binários no MinIO, AWS S3 ou noutro armazenamento de objetos na nuvem compatível com S3.</li>
-<li><strong><a href="/docs/pt/mqtype-overview.md">Fila de mensagens</a></strong> — O Milvus utiliza um registo de gravação antecipada (WAL): Woodpecker (predefinição), Pulsar, Kafka ou RocksMQ.</li>
+<li><strong><a href="/docs/pt/mqtype-overview.md">Fila de mensagens</a></strong> — O Milvus utiliza um registo de gravação antecipada (WAL): Woodpecker (padrão), Pulsar, Kafka ou RocksMQ.</li>
 </ul>
 <p>Por predefinição, uma nova implementação do Milvus 3.x funciona com <strong>o Woodpecker</strong> como fila de mensagens, <strong>o etcd</strong> para metadados e <strong>o MinIO</strong> para armazenamento de objetos — não é necessária qualquer infraestrutura de mensagens adicional.</p>

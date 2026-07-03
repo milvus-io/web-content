@@ -24,7 +24,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Insira dados num campo StructArray quando cada entidade contiver uma lista ordenada de elementos estruturados. Na carga útil de inserção, um campo StructArray é representado como uma matriz de objetos. Cada objeto representa um elemento Struct e utiliza os nomes dos subcampos Struct definidos no esquema da coleção.</p>
-<p>Esta página utiliza a coleção « <code translate="no">tech_articles</code> » (Artigos técnicos) da secção <a href="/docs/pt/create-structarray-field.md">«Criar um campo StructArray</a>». Cada entidade é um artigo técnico e o campo « <code translate="no">chunks</code> » armazena partes do artigo como elementos Struct.</p>
+<p>Esta página utiliza a coleção « <code translate="no">tech_articles</code> » da secção <a href="/docs/pt/create-structarray-field.md">«Criar um campo StructArray</a>». Cada entidade é um artigo técnico e o campo « <code translate="no">chunks</code> » armazena partes do artigo como elementos Struct.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Antes de começar<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -282,7 +282,7 @@ Os campos StructArray nulos estão disponíveis apenas no Milvus v3.0.x. Se adic
 <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> rows:
     <span class="hljs-built_in">print</span>(row)
 <button class="copy-code-btn"></button></code></pre>
-<p>Utilize caminhos de campos StructArray, tais como <code translate="no">chunks[text]</code>, apenas quando consultar, pesquisar, filtrar ou criar índices. As cargas de inserção devem continuar a utilizar objetos aninhados em <code translate="no">chunks</code>.</p>
+<p>Utilize caminhos de campos StructArray, tais como <code translate="no">chunks[text]</code>, apenas quando consultar, pesquisar, filtrar ou criar índices. As cargas de dados de inserção devem continuar a utilizar objetos aninhados em <code translate="no">chunks</code>.</p>
 <h2 id="Insert-rules" class="common-anchor-header">Regras de inserção<button data-href="#Insert-rules" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -306,7 +306,7 @@ Os campos StructArray nulos estão disponíveis apenas no Milvus v3.0.x. Se adic
 <tr><td>Utilize uma matriz de objetos para um campo StructArray.</td><td>O valor de <code translate="no">chunks</code> é uma lista, e cada item da lista é um elemento Struct.</td></tr>
 <tr><td>Utilize nomes de subcampos dentro de cada elemento Struct.</td><td>Insira « <code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> » dentro de « <code translate="no">chunks</code> », e não em « <code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code> ».</td></tr>
 <tr><td>Respeite o esquema da Struct.</td><td>Cada elemento Struct deve utilizar os subcampos definidos no esquema Struct.</td></tr>
-<tr><td>Respeite as dimensões do vetor.</td><td>Os valores dos vetores devem corresponder aos « <code translate="no">dim</code> » configurados para os seus subcampos vetoriais.</td></tr>
+<tr><td>Respeite as dimensões do vetor.</td><td>Os valores dos vetores devem corresponder aos « <code translate="no">dim</code> » configurados para os seus subcampos de vetor.</td></tr>
 <tr><td>Respeitar o <code translate="no">max_capacity</code>.</td><td>O número de elementos Struct numa entidade não deve exceder o <code translate="no">max_capacity</code> do campo StructArray.</td></tr>
 <tr><td>Utilize subcampos vetoriais separados para modos de pesquisa distintos.</td><td>Se forem necessárias tanto a pesquisa EmbeddingList como a pesquisa ao nível do elemento, escreva os valores do vetor em ambos os subcampos do vetor.</td></tr>
 <tr><td>Utilize o parâmetro « <code translate="no">null</code> » apenas quando o campo for nulo.</td><td>Os campos StructArray não nulos exigem valores StructArray válidos.</td></tr>

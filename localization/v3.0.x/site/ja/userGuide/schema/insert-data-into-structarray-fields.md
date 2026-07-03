@@ -19,7 +19,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>各エンティティが順序付き構造化要素のリストを含む場合、StructArrayフィールドにデータを挿入します。挿入ペイロードでは、StructArrayフィールドはオブジェクトの配列として表現されます。各オブジェクトは1つのStruct要素を表し、コレクションスキーマで定義されたStructサブフィールド名を使用します。</p>
+    </button></h1><p>各エンティティが順序付き構造化要素のリストを含む場合、StructArrayフィールドにデータを挿入します。挿入ペイロードにおいて、StructArrayフィールドはオブジェクトの配列として表現されます。各オブジェクトは1つのStruct要素を表し、コレクションスキーマで定義されたStructサブフィールド名を使用します。</p>
 <p>このページでは、「<a href="/docs/ja/create-structarray-field.md">StructArrayフィールドの作成</a>」の<code translate="no">tech_articles</code> コレクションを使用しています。各エンティティは技術記事であり、<code translate="no">chunks</code> フィールドには、記事のチャンクがStruct要素として格納されています。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">開始する前に<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -65,7 +65,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>挿入ペイロードでは、<code translate="no">chunks</code> は、値が Struct オブジェクトの配列である通常のフィールドです。各オブジェクト内では、<code translate="no">text</code> や<code translate="no">emb</code> などのサブフィールド名を使用します。<code translate="no">chunks[text]</code> や<code translate="no">chunks[emb]</code> などのパス構文は、挿入後のインデックスの作成、検索の実行、フィルタの構築、または出力フィールドの指定時にのみ使用してください。</p>
+<p>挿入ペイロードでは、<code translate="no">chunks</code> は、値が Struct オブジェクトの配列である通常のフィールドです。各オブジェクト内では、<code translate="no">text</code> や<code translate="no">emb</code> などのサブフィールド名を使用してください。<code translate="no">chunks[text]</code> や<code translate="no">chunks[emb]</code> などのパス構文は、挿入後のインデックスの作成、検索の実行、フィルタの構築、または出力フィールドの指定時にのみ使用してください。</p>
 </div>
 <h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">挿入ペイロードの形状を理解する<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -110,7 +110,7 @@ summary: >-
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">emb_list_vector</code> および<code translate="no">emb</code> は、サポートする検索モードが異なるため、別々のベクトルサブフィールドとなります。EmbeddingList 検索では、StructArray フィールド内のすべてのベクトルを 1 つの埋め込みリストとして扱い、<code translate="no">MAX_SIM*</code> メトリクスを使用したエンティティレベルの結果を返します。要素レベル検索では、各 Struct 要素を個別に検索し、一致した要素のオフセットを返すことができます。この例では、簡略化のため、両方のフィールドに同じベクトル値を格納しています。 本番環境のアプリケーションでは、両方の検索モードで同じチャンク埋め込みを使用する場合は、両方のサブフィールドに同じ埋め込みを格納し、2つの検索モードで異なる表現を使用する場合は、異なる埋め込みを格納することができます。</p>
+<p><code translate="no">emb_list_vector</code> および<code translate="no">emb</code> は、サポートする検索モードが異なるため、別々のベクトルサブフィールドとなります。EmbeddingList 検索では、StructArray フィールド内のすべてのベクトルが 1 つの埋め込みリストとして扱われ、<code translate="no">MAX_SIM*</code> メトリクスを用いたエンティティレベルの結果が返されます。要素レベル検索では、各 Struct 要素が個別に検索され、一致した要素のオフセットが返される場合があります。この例では、簡略化のため、両方のフィールドに同じベクトル値を格納しています。 本番環境のアプリケーションでは、両方の検索モードで同じチャンク埋め込みを使用する場合は、両方のサブフィールドに同じ埋め込みを格納し、2つの検索モードで異なる表現を使用する場合は、異なる埋め込みを格納することができます。</p>
 <h2 id="Insert-rows" class="common-anchor-header">行の挿入<button data-href="#Insert-rows" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

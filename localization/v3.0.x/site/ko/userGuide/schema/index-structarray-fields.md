@@ -82,7 +82,7 @@ summary: >-
 <tr><td>부울 값으로 필터링</td><td><code translate="no">chunks[has_code]</code></td><td>대상에서 지원하는 스칼라 인덱스입니다.</td></tr>
 </tbody>
 </table>
-<p>EmbeddingList 검색은 StructArray 벡터 하위 필드의 벡터들을 임베딩 목록으로 취급하여 엔티티 수준의 결과를 반환합니다. 요소 수준 검색은 각 Struct 요소를 독립적으로 검색하며, 일치하는 요소의 오프셋을 반환할 수 있습니다.</p>
+<p>EmbeddingList 검색은 StructArray 벡터 하위 필드의 벡터들을 임베딩 목록으로 처리하여 엔티티 수준의 결과를 반환합니다. 요소 수준 검색은 각 Struct 요소를 독립적으로 검색하며, 일치하는 요소의 오프셋을 반환할 수 있습니다.</p>
 <h2 id="Create-vector-indexes" class="common-anchor-header">벡터 인덱스 생성<button data-href="#Create-vector-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -156,7 +156,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>필터에서 StructArray 스칼라 하위 필드를 사용할 때는 해당 필드에 대한 스칼라 인덱스를 생성하십시오. <code translate="no">structArray[subfield]</code> 경로 구문을 동일하게 사용하십시오.</p>
+    </button></h2><p>필터에서 StructArray 스칼라 서브필드를 사용할 때는 해당 서브필드에 대한 스칼라 인덱스를 생성하십시오. <code translate="no">structArray[subfield]</code> 경로 구문과 동일한 구문을 사용하십시오.</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
@@ -188,7 +188,7 @@ client.create_index(
     index_params=index_params,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>스칼라 인덱스는 선택 사항이지만, ` <code translate="no">element_filter(chunks, $[quality_score] &gt; 0.9)</code> `이나 ` <code translate="no">MATCH_ANY(chunks, $[section] == &quot;index&quot;)</code>`과 같이 필터에 StructArray 스칼라 서브필드가 자주 등장하는 경우 유용합니다.</p>
+<p>스칼라 인덱스는 선택 사항이지만, ` <code translate="no">element_filter(chunks, $[quality_score] &gt; 0.9)</code> `이나 ` <code translate="no">MATCH_ANY(chunks, $[section] == &quot;index&quot;)</code>`과 같이 필터에 StructArray 스칼라 하위 필드가 자주 등장하는 경우 유용합니다.</p>
 <h2 id="Index-metric-compatibility" class="common-anchor-header">인덱스 메트릭 호환성<button data-href="#Index-metric-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -250,7 +250,7 @@ client.create_index(
     </button></h3><p>요소 수준 검색은 일반적인 벡터 메트릭을 사용합니다. 각 Struct 요소를 독립적으로 검색하며, 일치하는 요소의 오프셋을 반환할 수 있습니다.</p>
 <table>
 <thead>
-<tr><th>벡터 서브필드 데이터 유형</th><th>인덱스 유형</th><th>메트릭 유형</th></tr>
+<tr><th>벡터 하위 필드 데이터 유형</th><th>인덱스 유형</th><th>메트릭 유형</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">FLOAT_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code></td><td><code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_FLAT_CC</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">IVF_SQ_CC</code>, <code translate="no">IVF_PQ</code>, <code translate="no">SCANN</code>, <code translate="no">IVF_RABITQ</code>, <code translate="no">IVF_RABITQ_FASTSCAN</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code>, <code translate="no">DISKANN</code></td><td><code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">COSINE</code></td></tr>
@@ -315,7 +315,7 @@ client.create_index(
 <tr><td>하나의 벡터 하위 필드에는 하나의 인덱스만 사용할 수 있습니다.</td><td>서로 다른 메트릭 계열이 필요한 경우 별도의 벡터 서브필드를 사용하십시오.</td></tr>
 <tr><td>EmbeddingList 검색에는 <code translate="no">MAX_SIM*</code> 메트릭을 사용하십시오.</td><td>EmbeddingList 쿼리 데이터에는 <code translate="no">MAX_SIM*</code> 메트릭으로 구축된 인덱스가 필요합니다.</td></tr>
 <tr><td>요소 수준 검색에는 일반 벡터 메트릭을 사용하십시오.</td><td>요소 수준 검색은 일반 벡터 쿼리 데이터와 <code translate="no">COSINE</code>, <code translate="no">IP</code> 또는 <code translate="no">L2</code> 와 같은 메트릭을 사용합니다.</td></tr>
-<tr><td>필터에 나타나는 스칼라 하위 필드는 인덱싱하십시오.</td><td>대상에서 지원하는 스칼라 인덱스 유형을 사용하십시오.</td></tr>
+<tr><td>필터에 나타나는 스칼라 하위 필드를 인덱싱하십시오.</td><td>대상에서 지원하는 스칼라 인덱스 유형을 사용하십시오.</td></tr>
 <tr><td>벡터 필드 제한 사항을 염두에 두십시오.</td><td>벡터 필드와 벡터 하위 필드의 총 개수에는 제한이 있습니다. 벡터 하위 필드를 많이 추가하기 전에 StructArray 제한 사항을 참조하십시오.</td></tr>
 </tbody>
 </table>

@@ -150,7 +150,7 @@ bash standalone_embed.sh delete
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Peningkatan dari 2.5.x ke 2.6.x:</strong> <strong>Batasan Antrian Pesan</strong>: Saat meningkatkan ke Milvus v3.0-beta, Anda harus mempertahankan pilihan antrian pesan saat ini. Pergantian antara sistem antrian pesan yang berbeda selama proses peningkatan tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia pada versi mendatang.
+<li><strong>Peningkatan dari 2.5.x ke 2.6.x:</strong> <strong>Batasan Antrian Pesan</strong>: Saat meningkatkan ke Milvus v3.0-beta, Anda harus mempertahankan pilihan antrian pesan saat ini. Beralih antara sistem antrian pesan yang berbeda selama proses peningkatan tidak didukung. Dukungan untuk mengubah sistem antrian pesan akan tersedia di versi mendatang.
 Karena versi 2.6.x mengubah pengaturan default standalone menjadi Woodpecker, tetapkan <code translate="no">mq.type: rocksmq</code> di berkas <code translate="no">user.yaml</code> Anda <strong>sebelum</strong> melakukan pembaruan jika Anda ingin tetap menggunakan RocksMQ.</li>
 <li>Untuk mengubah antrian pesan pada instance yang sedang berjalan, lihat <a href="/docs/id/switch-rocksmq-woodpecker.md">Beralih dari RocksMQ ke Woodpecker</a>.</li>
 </ul>

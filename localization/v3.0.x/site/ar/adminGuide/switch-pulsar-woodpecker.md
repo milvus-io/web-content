@@ -58,7 +58,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p><strong>الخطوة 1: تحقق من تشغيل مثيل Milvus.</strong> تأكد من أن مجموعة Milvus تعمل بشكل صحيح — على سبيل المثال، عن طريق إنشاء مجموعة اختبارية، وإدخال البيانات، وتشغيل استعلام.</p>
-<p><strong>الخطوة 2: تنفيذ عملية التبديل بين قوائم انتظار الرسائل.</strong> اعرض واجهة إدارة MixCoord، ثم استدعِ واجهة برمجة التطبيقات (API) الخاصة بالتبديل:</p>
+<p><strong>الخطوة 2: تنفيذ عملية التبديل إلى MQ.</strong> اعرض واجهة إدارة MixCoord، ثم استدعِ واجهة برمجة التطبيقات (API) الخاصة بالتبديل:</p>
 <pre><code translate="no" class="language-shell">kubectl port-forward --address 0.0.0.0 service/my-release-milvus-mixcoord 29091:9091
 <button class="copy-code-btn"></button></code></pre>
 <p>في محطة طرفية أخرى:</p>
@@ -70,7 +70,7 @@ summary: >-
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>يُسجل التبديل الناجح الرسالة التالية: <code translate="no">[mqTypeValue=woodpecker]</code>.</p>
-<p><strong>الخطوة 4: (اختياري) إيقاف Pulsar وتنظيفه.</strong> بالنسبة لـ Pulsar <strong>المدمج،</strong> قم بتعطيل Pulsar وتمكين Woodpecker، ثم احذف PVCs الخاصة بـ Pulsar:</p>
+<p><strong>الخطوة 4: (اختياري) إيقاف Pulsar وتنظيف النظام.</strong> بالنسبة لـ Pulsar <strong>المدمج،</strong> قم بتعطيل Pulsar وتمكين Woodpecker، ثم احذف PVCs الخاصة بـ Pulsar:</p>
 <pre><code translate="no" class="language-shell">helm upgrade my-release zilliztech/milvus \
   --set image.all.tag=v3.0-beta \
   --set pulsarv3.enabled=false \
@@ -101,7 +101,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>الخطوة 1: تحقق من أن مثيل Milvus قيد التشغيل.</strong></p>
-<p><strong>الخطوة 2: قم بتكوين اتصال Pulsar المستهدف وأعد تشغيل Milvus.</strong> يتطلب التبديل أن يكون Milvus على دراية مسبقة باتصال Pulsar، لذا قم بكتابته في <code translate="no">user.yaml</code> عبر <code translate="no">extraConfigFiles</code> وقم بتطبيقه باستخدام <code translate="no">helm upgrade</code> (الذي يقوم بتدوير البودات). يُعد <code translate="no">streaming.enabled=true</code> ضروريًا لميزة Switch MQ.</p>
+<p><strong>الخطوة 2: قم بتكوين اتصال Pulsar المستهدف وأعد تشغيل Milvus.</strong> يتطلب التبديل أن يكون Milvus على دراية مسبقة باتصال Pulsar، لذا قم بكتابته في <code translate="no">user.yaml</code> عبر <code translate="no">extraConfigFiles</code> وقم بتطبيقه باستخدام <code translate="no">helm upgrade</code> (الذي يقوم بتدوير البودات). يعد <code translate="no">streaming.enabled=true</code> مطلوبًا لميزة Switch MQ.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -173,7 +173,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>يتم تسجيل التبديل الناجح في <code translate="no">[mqTypeValue=woodpecker]</code>.</p>
-<p><strong>الخطوة 4: قم بتحديث نوع MQ في Operator.</strong> قم بتحديث التكوين الذي يديره<strong>Operator</strong> حتى لا يقوم Operator بإلغاء عملية التبديل. قم بإنشاء <code translate="no">change_configmap.yaml</code>:</p>
+<p><strong>الخطوة 4: تحديث نوع MQ في Operator.</strong> قم بتحديث التكوين الذي يديره<strong>Operator</strong> حتى لا يقوم Operator بإلغاء عملية التبديل. قم بإنشاء <code translate="no">change_configmap.yaml</code>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -186,7 +186,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">kubectl patch -f change_configmap.yaml --patch-file change_configmap.yaml --type merge
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>الخطوة 5: (اختياري) إيقاف Pulsar وتنظيف النظام.</strong> بالنسبة لـ Pulsar <strong>المدمج،</strong> قم بإلغاء تثبيت إصدار Pulsar وحذف PVCs الخاصة به:</p>
+<p><strong>الخطوة 5: (اختياري) أوقف Pulsar وقم بالتنظيف.</strong> بالنسبة لـ Pulsar <strong>المدمج،</strong> قم بإلغاء تثبيت إصدار Pulsar وحذف PVCs الخاصة به:</p>
 <pre><code translate="no" class="language-shell">helm uninstall my-release-pulsar
 kubectl get pvc | grep my-release-pulsar
 kubectl delete pvc &lt;pulsar-pvc-name&gt; ...

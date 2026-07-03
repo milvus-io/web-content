@@ -20,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>使用本页面可按父实体对 StructArray 元素级搜索结果进行分组。当多个 Struct 元素匹配查询条件时，元素级搜索可能会返回来自同一实体的多个匹配结果。分组功能会将这些元素级匹配结果合并，确保每个父实体最多只出现一次。</p>
-<p>本页面<a href="/docs/zh/create-structarray-field.md">使用“创建 StructArray 字段</a>”中的<code translate="no">tech_articles</code> Collection。该 Collection 包含一个名为<code translate="no">chunks</code> 的StructArray字段。其<code translate="no">chunks[emb]</code> 向量已通过常规向量度量标准进行索引，以支持元素级搜索。</p>
+    </button></h1><p>使用本页面可按父实体对 StructArray 的元素级搜索结果进行分组。当多个 Struct 元素匹配查询条件时，元素级搜索可能会返回来自同一实体的多个匹配结果。分组功能会将这些元素级匹配结果合并，确保每个父实体最多只出现一次。</p>
+<p>本页面<a href="/docs/zh/create-structarray-field.md">使用“创建 StructArray 字段</a>”中的<code translate="no">tech_articles</code> Collection。该 Collection 包含一个名为<code translate="no">chunks</code> 的 StructArray 字段。其中<code translate="no">chunks[emb]</code> 向量已通过常规向量度量标准进行索引，以支持元素级搜索。</p>
 <h2 id="How-grouping-applies-to-StructArray" class="common-anchor-header">分组在 StructArray 中的应用<button data-href="#How-grouping-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -169,7 +169,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>顶级谓词用于筛选候选实体。<code translate="no">element_filter</code> 谓词将元素级向量搜索限制在匹配的Struct元素范围内。随后，分组操作会根据主键将匹配的元素命中结果进行合并。</p>
+<p>顶级谓词用于筛选候选实体。<code translate="no">element_filter</code> 谓词将元素级向量搜索限制在匹配的Struct元素上。随后，分组操作会根据主键合并匹配的元素命中结果。</p>
 <h2 id="Use-grouping-in-hybrid-search" class="common-anchor-header">在混合搜索中使用分组<button data-href="#Use-grouping-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -217,7 +217,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>在此示例中，两个子请求均针对同一 StructArray 字段（<code translate="no">chunks</code> ）下的元素级向量字段。如果混合了普通向量字段、不同的 StructArray 字段或 EmbeddingList 级请求，混合搜索将不支持元素级分组。</p>
+<p>在此示例中，两个子请求均针对同一 StructArray 字段（<code translate="no">chunks</code> ）下的元素级向量字段。如果混合了普通向量字段、不同的 StructArray 字段或 EmbeddingList 级请求，则混合搜索不支持元素级分组。</p>
 <h2 id="Interpret-grouped-results" class="common-anchor-header">解析分组结果<button data-href="#Interpret-grouped-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -307,7 +307,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>若要先了解未分组的元素级搜索，请阅读《<a href="/docs/zh/basic-vector-search-with-structarray.md">使用 StructArray 进行基础向量搜索</a>》。</p></li>
+<li><p>若要先了解未分组的元素级搜索，请阅读《<a href="/docs/zh/basic-vector-search-with-structarray.md">使用 StructArray 进行基本向量搜索</a>》。</p></li>
 <li><p>若要为分组搜索添加标量过滤器，请阅读《<a href="/docs/zh/filtered-search-with-structarray.md">使用 StructArray 进行过滤搜索</a>》。</p></li>
 <li><p>若要使用得分或距离边界代替分组，请阅读《<a href="/docs/zh/range-search-with-structarray.md">使用 StructArray 进行范围搜索</a>》。</p></li>
 <li><p>要查看 StructArray 的搜索限制，请阅读《<a href="/docs/zh/structarray-limits.md">StructArray 限制</a>》。</p></li>

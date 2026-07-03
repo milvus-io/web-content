@@ -47,7 +47,7 @@ summary: >-
 <tbody>
 <tr><td>Filtern nach einem Skalarfeld der obersten Ebene, z. B. <code translate="no">category</code>.</td><td>Regulärer Filterausdruck.</td><td>Wählt übergeordnete Entitäten vor oder während der Suche aus.</td></tr>
 <tr><td>Beschränkt die Vektorsuche auf Elementebene auf Struct-Elemente, die den skalaren Bedingungen entsprechen.</td><td><code translate="no">element_filter</code>.</td><td>Durchsucht nur übereinstimmende Struct-Elemente und kann Offsets der übereinstimmenden Elemente zurückgeben.</td></tr>
-<tr><td>Wählt Entitäten danach aus, ob einige, alle oder eine bestimmte Anzahl von Struct-Elementen einem Prädikat entsprechen.</td><td><code translate="no">MATCH_ANY</code>, <code translate="no">MATCH_ALL</code>, <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> oder <code translate="no">MATCH_EXACT</code>.</td><td>Filterung auf Zeilenebene. Diese Operatoren geben selbst keine Offsets zurück.</td></tr>
+<tr><td>Wählt Entitäten danach aus, ob ein, alle oder eine bestimmte Anzahl von Struct-Elementen einem Prädikat entsprechen.</td><td><code translate="no">MATCH_ANY</code>, <code translate="no">MATCH_ALL</code>, <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> oder <code translate="no">MATCH_EXACT</code>.</td><td>Filterung auf Zeilenebene. Diese Operatoren geben selbst keine Offsets zurück.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -300,9 +300,9 @@ results = client.hybrid_search(
       </svg>
     </button></h2><ul>
 <li><p>Verwendung von „ <code translate="no">$[subfield]</code> “ außerhalb von „ <code translate="no">element_filter</code> “ oder „ <code translate="no">MATCH_*</code> “.</p></li>
-<li><p>Verwendung von „ <code translate="no">chunks.section</code> “ anstelle der StructArray-Operatorsyntax wie z. B. „ <code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code> “.</p></li>
+<li><p>Verwendung von „ <code translate="no">chunks.section</code> “ anstelle der StructArray-Operatorsyntax wie beispielsweise „ <code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code> “.</p></li>
 <li><p>Verwendung von „ <code translate="no">element_filter</code> “, wenn nur eine Filterung auf Zeilenebene erforderlich ist. Verwenden Sie stattdessen „ <code translate="no">MATCH_ANY</code> “, wenn Sie lediglich Entitäten auswählen müssen.</p></li>
-<li><p>Die Erwartung, dass ` <code translate="no">MATCH_*</code> ` Element-Offsets zurückgibt. Diese Operatoren wählen Entitäten aus und identifizieren selbst kein einzelnes übereinstimmendes Element.</p></li>
+<li><p>Die Erwartung, dass „ <code translate="no">MATCH_*</code> “ Element-Offsets zurückgibt. Diese Operatoren wählen Entitäten aus und identifizieren selbst kein einzelnes übereinstimmendes Element.</p></li>
 <li><p>Das Schreiben von einfachen booleschen Prädikaten wie „ <code translate="no">$[has_code]</code> “. Verwenden Sie explizite Vergleiche wie „ <code translate="no">$[has_code] == true</code> “.</p></li>
 <li><p>„ <code translate="no">element_filter</code> “ vor einem Prädikat der obersten Ebene im selben Filterausdruck platzieren.</p></li>
 </ul>

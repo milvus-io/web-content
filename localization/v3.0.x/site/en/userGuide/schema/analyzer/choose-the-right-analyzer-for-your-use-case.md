@@ -99,6 +99,13 @@ summary: Notes
      <td><p><a href="/docs/english-analyzer.md"><code translate="no">english</code></a> analyzer</p></td>
      <td><p>Use a language-specific analyzer, such as <a href="/docs/chinese-analyzer.md"><code translate="no">chinese</code></a>.</p></td>
    </tr>
+   <tr>
+     <td><p>Input method mismatch</p></td>
+     <td><p>Users type Pinyin, but the indexed text uses Chinese characters.</p></td>
+     <td><p>Chinese text: <code translate="no">"足球"</code>; query text: <code translate="no">"zuqiu"</code></p></td>
+     <td><p>Analyzer that emits only Chinese-character tokens</p></td>
+     <td><p>Use a custom analyzer with the <a href="/docs/jieba-tokenizer.md"><code translate="no">jieba</code></a> tokenizer and <a href="/docs/pinyin-filter.md"><code translate="no">pinyin</code></a> filter.</p></td>
+   </tr>
 </table>
 <h2 id="First-question-Do-you-need-to-choose-an-analyzer" class="common-anchor-header">First question: Do you need to choose an analyzer?<button data-href="#First-question-Do-you-need-to-choose-an-analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -530,6 +537,12 @@ schema.add_field(
      <td><p>Keeps only Chinese characters</p></td>
      <td><ul><li><p>Input: <code translate="no">["Hello", "世界", "123"]</code></p></li><li><p>Output: <code translate="no">[[], ['世界'], []]</code></p></li></ul></td>
    </tr>
+   <tr>
+     <td><p><a href="/docs/pinyin-filter.md"><code translate="no">pinyin</code></a></p></td>
+     <td><p>Chinese</p></td>
+     <td><p>Emits Pinyin token forms for Chinese tokens</p></td>
+     <td><ul><li><p>Input: <code translate="no">["中文"]</code></p></li><li><p>Output: <code translate="no">[['中文', 'zhong', 'wen']]</code></p></li></ul></td>
+   </tr>
 </table>
 <h3 id="Step-3-Combine-and-implement" class="common-anchor-header">Step 3: Combine and implement<button data-href="#Step-3-Combine-and-implement" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -714,6 +727,12 @@ analyzer_params = {
 <div class="alert note">
 <p>For Simplified Chinese, <code translate="no">cnalphanumonly</code> removes all tokens except Chinese characters, alphanumeric text, and digits. This prevents punctuation from affecting search quality.</p>
 </div>
+<p>If users may search Chinese text by typing Pinyin, use a custom analyzer with the <code translate="no">jieba</code> tokenizer and the <a href="/docs/pinyin-filter.md"><code translate="no">pinyin</code></a> filter instead of the built-in <code translate="no">chinese</code> analyzer.</p>
+<pre><code translate="no" class="language-python">analyzer_params = {
+    <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;pinyin&quot;</span>]
+}
+<button class="copy-code-btn"></button></code></pre>
 <h3 id="Japanese-content" class="common-anchor-header">Japanese content<button data-href="#Japanese-content" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

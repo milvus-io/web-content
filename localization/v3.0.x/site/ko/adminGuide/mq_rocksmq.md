@@ -35,7 +35,7 @@ title: RocksMQ
       </svg>
     </button></h2><ul>
 <li><strong>스탠드얼론 전용</strong> — Milvus Distributed(클러스터)에서는 RocksMQ가 지원 <strong>되지 않습니다</strong>. <a href="/docs/ko/mqtype-overview.md#Supported-message-queues">메시지 큐 지원 매트릭스를</a> 참조하십시오.</li>
-<li>RocksMQ는 Milvus에 포함되어 제공되므로 별도로 설치할 버전이 없습니다.</li>
+<li>RocksMQ는 Milvus에 포함되어 제공되므로 별도로 설치할 버전은 없습니다.</li>
 <li>이전 Milvus 버전에서는 기본 독립형 메시지 큐로 사용되었으나, Milvus 3.x에서는 내장형 Woodpecker로 대체되었습니다.</li>
 </ul>
 <h2 id="Deploy-Milvus-Standalone-with-RocksMQ-using-Docker" class="common-anchor-header">Docker를 사용하여 RocksMQ와 함께 Milvus Standalone 배포하기<button data-href="#Deploy-Milvus-Standalone-with-RocksMQ-using-Docker" class="anchor-icon" translate="no">
@@ -150,7 +150,7 @@ bash standalone_embed.sh delete
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>2.5.x에서 2.6.x로 업그레이드:</strong> <strong>메시지 큐 제한 사항</strong>: Milvus v3.0-beta로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경 기능은 향후 버전에서 제공될 예정입니다.
+<li><strong>2.5.x에서 2.6.x로 업그레이드:</strong> <strong>메시지 큐 제한 사항</strong>: Milvus v3.0-beta로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.
 2.6.x 버전에서는 독립 실행형 모드의 기본값이 Woodpecker로 변경되므로, RocksMQ를 계속 사용하려면 업그레이드 <strong>전에</strong> <code translate="no">user.yaml</code> 파일에서 <code translate="no">mq.type: rocksmq</code> 를 고정(pin)해야 합니다.</li>
 <li>실행 중인 인스턴스의 메시지 큐를 변경하려면 <a href="/docs/ko/switch-rocksmq-woodpecker.md">'RocksMQ에서 Woodpecker로 전환'을</a> 참조하십시오.</li>
 </ul>

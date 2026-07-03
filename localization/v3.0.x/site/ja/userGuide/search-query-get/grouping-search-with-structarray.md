@@ -2,7 +2,7 @@
 id: grouping-search-with-structarray.md
 title: StructArray を使用した検索結果のグループ化
 summary: >-
-  このページを使用すると、StructArrayの要素レベルの検索結果を親エンティティごとにグループ化できます。要素レベルの検索では、複数のStruct要素がクエリに一致する場合、同じエンティティから複数の検索結果が返されることがあります。グループ化を行うと、これらの要素の検索結果がまとめられ、各親エンティティが最大1回だけ表示されるようになります。
+  このページを使用すると、StructArrayの要素レベルの検索結果を親エンティティごとにグループ化できます。要素レベルの検索では、複数のStruct要素がクエリに一致する場合、同じエンティティから複数の検索結果が返されることがあります。グループ化を行うと、これらの要素の検索結果がまとめられるため、各親エンティティは最大1回だけ表示されます。
 ---
 <h1 id="Grouping-Search-with-StructArray" class="common-anchor-header">StructArray を使用した検索結果のグループ化<button data-href="#Grouping-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -43,7 +43,7 @@ summary: >-
 <tbody>
 <tr><td>EmbeddingList検索</td><td>サポートされていません。</td><td>該当なし。</td></tr>
 <tr><td>要素レベルの検索</td><td>主キーによるグループ化によりサポートされます。</td><td>親エンティティごとに最大 1 件の結果が返されます。要素レベルのメタデータは保持されるため、API または SDK によって公開される場合、選択された要素のインデックスまたはオフセットが返されます。</td></tr>
-<tr><td>ハイブリッド検索</td><td>すべてのサブ検索が、同じ StructArray フィールドの下にある要素レベルのベクトルフィールドを対象としている場合にのみサポートされます。</td><td>要素レベルのサブ検索は、最終的な結果処理の前に主キーでグループ化されます。</td></tr>
+<tr><td>ハイブリッド検索</td><td>すべてのサブ検索が、同じ StructArray フィールドの下にある要素レベルのベクトルフィールドを対象としている場合にのみサポートされます。</td><td>要素レベルのサブ検索は、最終的な結果処理の前に主キーごとにグループ化されます。</td></tr>
 </tbody>
 </table>
 <div class="alert note">

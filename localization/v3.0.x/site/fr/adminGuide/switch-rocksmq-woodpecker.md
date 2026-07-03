@@ -185,7 +185,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><div class="alert note">
-<p>Assurez-vous que l’instance ne contient aucune donnée RocksMQ résiduelle provenant d’une exécution précédente. S’il s’agit de votre premier passage à RocksMQ, ignorez cette remarque ; sinon, nettoyez d’abord les métadonnées et les données RocksMQ associées.</p>
+<p>Assurez-vous que l’instance ne contient aucune donnée RocksMQ résiduelle issue d’une exécution précédente. S’il s’agit de votre premier passage à RocksMQ, ignorez cette remarque ; sinon, nettoyez d’abord les métadonnées et les données RocksMQ associées.</p>
 </div>
 <pre><code translate="no" class="language-shell">curl -X POST http://&lt;mixcoord_addr&gt;:&lt;mixcoord_port&gt;/management/wal/alter \
   -H &quot;Content-Type: application/json&quot; \
@@ -226,9 +226,9 @@ summary: >-
       </svg>
     </button></h3><ul>
 <li><strong>Métadonnées (etcd) :</strong> le préfixe de la clé Woodpecker est généralement <code translate="no">woodpecker/...</code>. Affichez-la à l'aide de la commande <code translate="no">etcdctl get woodpecker --prefix</code>, puis supprimez-la.</li>
-<li><strong>Données de stockage :</strong> en <strong>mode MinIO</strong>, supprimez les données de journalisation situées sous <code translate="no">&lt;rootPath&gt;/wp/...</code> (généralement <code translate="no">files/wp/...</code>) dans le compartiment ; en <strong>mode local</strong>, les données se trouvent sur le disque local à l’emplacement <code translate="no">volumes/milvus/data/wp/...</code>.</li>
+<li><strong>Données de stockage :</strong> en <strong>mode MinIO</strong>, supprimez les données de journalisation situées sous <code translate="no">&lt;rootPath&gt;/wp/...</code> (généralement <code translate="no">files/wp/...</code>) dans le bucket ; en <strong>mode local</strong>, les données se trouvent sur le disque local à l’emplacement <code translate="no">volumes/milvus/data/wp/...</code>.</li>
 </ul>
-<p>Si vous prévoyez de revenir à Woodpecker ultérieurement, nettoyez d'abord ces fichiers pour éviter tout conflit.</p>
+<p>Si vous prévoyez de revenir à Woodpecker ultérieurement, nettoyez d’abord ces fichiers pour éviter tout conflit.</p>
 <h2 id="Supported-scenarios" class="common-anchor-header">Scénarios pris en charge<button data-href="#Supported-scenarios" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

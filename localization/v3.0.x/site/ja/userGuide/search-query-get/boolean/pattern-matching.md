@@ -77,8 +77,8 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>必要なパターンを表現する最も単純な演算子を選択してください。</p>
-<p>文字列の完全一致が必要な場合は、パターンマッチングの代わりに `<code translate="no">==</code> ` を使用することをお勧めします。`<code translate="no">LIKE</code> ` または正規表現は、フィルタがパターンに一致する必要がある場合にのみ使用してください。</p>
+    </button></h2><p>必要なパターンを表現できる最も単純な演算子を選択してください。</p>
+<p>文字列の完全一致が必要な場合は、パターンマッチングの代わりに<code translate="no">==</code> を使用することをお勧めします。<code translate="no">LIKE</code> やregexは、フィルタがパターンに一致する必要がある場合にのみ使用してください。</p>
 <table>
 <thead>
 <tr><th>要件</th><th>推奨される演算子</th><th>例</th><th>説明</th></tr>
@@ -161,7 +161,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>接頭辞、接尾辞、部分文字列の包含、および固定位置の単一文字の一致には、<code translate="no">LIKE</code> を使用してください。<code translate="no">LIKE</code> は、<code translate="no">[0-9]</code> のような文字クラス、<code translate="no">error|failed</code> のような選択、<code translate="no">{4}</code> のような繰り返し回数、<code translate="no">^</code> や<code translate="no">$</code> のようなアンカー、<code translate="no">(?i)</code> のような大文字小文字を区別しないフラグをサポートしていません。これらのパターンには正規表現（regex）を使用してください。</p>
+    </button></h3><p>接頭辞、接尾辞、部分文字列の包含、および固定位置の単一文字の一致には、<code translate="no">LIKE</code> を使用してください。<code translate="no">LIKE</code> では、<code translate="no">[0-9]</code> のような文字クラス、<code translate="no">error|failed</code> のような選択、<code translate="no">{4}</code> のような繰り返し回数、<code translate="no">^</code> や<code translate="no">$</code> のようなアンカー、<code translate="no">(?i)</code> のような大文字小文字を区別しないフラグはサポートされていません。これらのパターンには正規表現（regex）を使用してください。</p>
 <p>文字列全体が完全に一致する場合は、<code translate="no">==</code> を使用してください。<code translate="no">LIKE</code> は、フィルタでワイルドカードマッチングが必要な場合にのみ使用してください。</p>
 <h3 id="Escaping-wildcards-in-a-LIKE-pattern" class="common-anchor-header">LIKE パターンにおけるワイルドカードのエスケープ<button data-href="#Escaping-wildcards-in-a-LIKE-pattern" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -226,7 +226,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>バックスラッシュを含む正規表現パターンには、生の文字列リテラルを使用することを推奨します。<code translate="no">r&quot;...&quot;</code> や<code translate="no">r'...'</code> のように記述された生の文字列では、バックスラッシュがそのまま正規表現エンジンに渡されます。これにより、通常の文字列リテラルで必要となる余分なエスケープ処理を回避できます。</p>
+    </button></h3><p>バックスラッシュを含む正規表現パターンには、生の文字列リテラルを使用することを推奨します。<code translate="no">r&quot;...&quot;</code> や<code translate="no">r'...'</code> のように記述された生の文字列では、バックスラッシュがそのまま正規表現エンジンに渡されます。これにより、通常の文字列リテラルで必要となる余分なエスケープ処理が不要になります。</p>
 <p>例：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ r&quot;\d{4}-\d{2}-\d{2}&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -333,6 +333,6 @@ res = client.query(
 <tbody>
 <tr><td><code translate="no">message =~ &quot;error.*timeout&quot;</code> のような固定のリテラル部分文字列を含む場合、または<code translate="no">message LIKE &quot;%database%&quot;</code></td><td><code translate="no">NGRAM</code></td><td>Milvusがパターンから意味のあるリテラル部分文字列を抽出できる場合に有効です。詳細については、<a href="/docs/ja/ngram.md">NGRAM</a>を参照してください。</td></tr>
 <tr><td>プレフィックス、完全一致、または等価のような文字列フィルター。特に、カーディナリティが低～中程度のフィールドで有効</td><td><code translate="no">STL_SORT</code>、<code translate="no">INVERTED</code> 、または<code translate="no">BITMAP</code></td><td>フィールドに重複する値がある場合や、フィルタが完全一致に近い場合に、より効果的である可能性があります。詳細については、<a href="/docs/ja/stl-sort.md">STL_SORT</a>、<a href="/docs/ja/inverted.md">INVERTED</a>、<a href="/docs/ja/bitmap.md">およびBITMAP</a>を参照してください。</td></tr>
-<tr><td>固定リテラルを含まない正規表現パターン、または文字クラス、短いトークン、ワイルドカードが主体となるパターン</td><td>インデックスによる高速化を頼りにする前にベンチマークを実行してください</td><td>これらのパターンは、インデックスによる選択性が限定的となり、より広範囲なスキャンに切り替わってしまう可能性があります。</td></tr>
+<tr><td>固定リテラルを含まない正規表現パターン、または文字クラス、短いトークン、ワイルドカードが主体となるパターン</td><td>インデックスによる高速化を頼りにする前にベンチマークを実施してください</td><td>これらのパターンは、インデックスによる選択性が限定的となり、より広範囲なスキャンに切り替わってしまう可能性があります。</td></tr>
 </tbody>
 </table>

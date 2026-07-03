@@ -302,7 +302,7 @@ results = client.hybrid_search(
 <li><p>Utilizar ` <code translate="no">$[subfield]</code> ` fora de ` <code translate="no">element_filter</code> ` ou ` <code translate="no">MATCH_*</code>`.</p></li>
 <li><p>Utilizar ` <code translate="no">chunks.section</code> ` em vez da sintaxe do operador `StructArray`, como ` <code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code>`.</p></li>
 <li><p>Utilizar ` <code translate="no">element_filter</code> ` quando apenas é necessária uma filtragem ao nível da linha. Utilize ` <code translate="no">MATCH_ANY</code> ` em vez disso, se apenas precisar de selecionar entidades.</p></li>
-<li><p>Esperar que ` <code translate="no">MATCH_*</code> ` devolva índices de elementos. Estes operadores selecionam entidades e não identificam, por si só, um elemento correspondente.</p></li>
+<li><p>Esperar que ` <code translate="no">MATCH_*</code> ` devolva deslocamentos de elementos. Estes operadores selecionam entidades e não identificam, por si só, um elemento correspondente.</p></li>
 <li><p>Escrever predicados booleanos simples, como <code translate="no">$[has_code]</code>. Utilize comparações explícitas, como <code translate="no">$[has_code] == true</code>.</p></li>
 <li><p>Colocar « <code translate="no">element_filter</code> » antes de um predicado de nível superior na mesma expressão de filtro.</p></li>
 </ul>

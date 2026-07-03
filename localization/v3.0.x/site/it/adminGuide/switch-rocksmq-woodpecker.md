@@ -24,7 +24,7 @@ summary: >-
 <div class="alert note">
 <ul>
 <li><strong>Prerequisito:</strong> la funzionalità "Cambio di MQ" è disponibile in <strong>Milvus 3.0 e versioni successive</strong>. Aggiornare l’istanza di Milvus a Milvus 3.0 o versioni successive prima di iniziare: la funzionalità non è disponibile nelle versioni precedenti.</li>
-<li>Il cambio di MQ richiede una distribuzione Docker <strong>Compose</strong> (che abilita una fonte di configurazione etcd). La distribuzione Docker a container singolo non supporta il cambio.</li>
+<li>Il cambio di MQ richiede una distribuzione Docker <strong>Compose</strong> (che abilita una sorgente di configurazione etcd). La distribuzione Docker a container singolo non supporta il cambio.</li>
 </ul>
 </div>
 <h2 id="Switch-from-RocksMQ-to-Woodpecker" class="common-anchor-header">Passaggio da RocksMQ a Woodpecker<button data-href="#Switch-from-RocksMQ-to-Woodpecker" class="anchor-icon" translate="no">

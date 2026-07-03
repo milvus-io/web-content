@@ -63,7 +63,7 @@ summary: >-
 <tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>스칼라 필터링 및 범위 예제에서 사용되는 청크 수준 점수.</td></tr>
 <tr><td><code translate="no">has_code</code></td><td><code translate="no">BOOL</code></td><td>청크에 코드가 포함되어 있는지 여부.</td></tr>
 <tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td><code translate="no">MAX_SIM*</code> 메트릭을 사용한 EmbeddingList 검색을 위한 벡터 하위 필드.</td></tr>
-<tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>일반 벡터 메트릭을 사용하는 요소 수준 검색을 위한 벡터 하위 필드입니다.</td></tr>
+<tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>일반 벡터 메트릭을 사용하는 요소 수준 검색을 위한 벡터 하위 필드.</td></tr>
 </tbody>
 </table>
 <div class="alert note">

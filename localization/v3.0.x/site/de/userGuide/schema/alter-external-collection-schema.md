@@ -40,7 +40,7 @@ beta: Milvus 3.0.x
       </svg>
     </button></h2><ul>
 <li><p>Externe Sammlungen unterstützen derzeit das Hinzufügen von Feldern nach ihrer Erstellung. Andere Schemaänderungen, wie das Löschen von Feldern, das Umbenennen von Feldern, das Ändern von Felddatentypen, das Ändern von Vektordimensionen oder das Neuzuordnen von „ <code translate="no">external_field</code> “, werden nicht unterstützt.</p></li>
-<li><p>Sie können nur ein Feld hinzufügen, das bereits in der externen Datenquelle vorhanden ist. Dieser Vorgang ordnet ein bestehendes externes Feld einem Milvus-Feld zu. Es wird weder ein neues Feld in der externen Datenquelle erstellt noch werden Quelldaten nachträglich eingefügt.</p></li>
+<li><p>Sie können nur ein Feld hinzufügen, das bereits in der externen Datenquelle vorhanden ist. Dieser Vorgang ordnet ein bestehendes externes Feld einem Milvus-Feld zu. Es wird dabei kein neues Feld in der externen Datenquelle erstellt und es erfolgt keine Rückfüllung der Quelldaten.</p></li>
 <li><p>Das Hinzufügen von „ <code translate="no">SPARSE_FLOAT_VECTOR</code> “-Feldern zu einer bestehenden externen Sammlung wird nicht unterstützt.</p></li>
 <li><p>Das Hinzufügen von „StructArray“-Feldern zu einer bestehenden externen Sammlung wird nicht unterstützt. Wenn Ihre externe Sammlung ein „StructArray“-Feld benötigt, definieren Sie dieses beim Erstellen der Sammlung im Sammlungsschema.</p></li>
 </ul>
@@ -92,7 +92,7 @@ client.add_collection_field(
 <span class="highlighted-wrapper-line">    external_field=<span class="hljs-string">&quot;score&quot;</span>,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In diesem Beispiel lautet „ <code translate="no">score</code> “ der Milvus-Feldname, und „ <code translate="no">external_field=&quot;score&quot;</code> “ ordnet ihm das Feld „ <code translate="no">score</code> “ in der externen Datenquelle zu. Legen Sie „ <code translate="no">nullable=True</code> “ fest, da das Feld hinzugefügt wird, nachdem die Sammlung bereits erstellt wurde.</p>
+<p>In diesem Beispiel lautet „ <code translate="no">score</code> “ der Milvus-Feldname, und „ <code translate="no">external_field=&quot;score&quot;</code> “ ordnet es dem Feld „ <code translate="no">score</code> “ in der externen Datenquelle zu. Legen Sie „ <code translate="no">nullable=True</code> “ fest, da das Feld hinzugefügt wird, nachdem die Sammlung bereits erstellt wurde.</p>
 <h3 id="Add-a-vector-field" class="common-anchor-header">Ein Vektorfeld hinzufügen<button data-href="#Add-a-vector-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

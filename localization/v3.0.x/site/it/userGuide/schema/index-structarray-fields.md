@@ -222,7 +222,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>La ricerca EmbeddingList utilizza metriche di tipo <code translate="no">MAX_SIM*</code>. Tratta i vettori presenti in un sottocampo vettoriale StructArray come una lista di embedding e restituisce risultati a livello di entità.</p>
+    </button></h3><p>La ricerca EmbeddingList utilizza metriche di tipo <code translate="no">MAX_SIM*</code>. Considera i vettori presenti in un sottocampo vettoriale StructArray come un elenco di embedding e restituisce risultati a livello di entità.</p>
 <table>
 <thead>
 <tr><th>Tipo di dati del sottocampo vettoriale</th><th>Tipo di indice</th><th>Tipo di metrica</th></tr>
@@ -339,7 +339,7 @@ client.create_index(
 <li><p>Creare un indice su <code translate="no">chunks.emb</code> invece che su <code translate="no">chunks[emb]</code>.</p></li>
 <li><p>Creare solo un indice <code translate="no">MAX_SIM*</code> e poi tentare di eseguire una ricerca a livello di elemento sullo stesso sottocampo.</p></li>
 <li><p>Creare solo un indice vettoriale regolare e poi tentare di eseguire una ricerca EmbeddingList sullo stesso sottocampo.</p></li>
-<li><p>Riutilizzare un sottocampo vettoriale sia per le metriche di tipo " <code translate="no">MAX_SIM*</code> " che per quelle vettoriali standard.</p></li>
+<li><p>Riutilizzare un sottocampo vettoriale sia per le metriche <code translate="no">MAX_SIM*</code> che per quelle vettoriali regolari.</p></li>
 <li><p>Tralasciare gli indici scalari per i filtri StructArray utilizzati intensamente.</p></li>
 <li><p>Indicizzazione di un sottocampo StructArray che non esiste nello schema Struct.</p></li>
 </ul>

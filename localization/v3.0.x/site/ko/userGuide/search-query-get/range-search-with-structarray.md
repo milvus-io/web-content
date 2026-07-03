@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 페이지를 사용하여 StructArray 벡터 하위 필드에 대해 범위 검색을 실행할 수 있습니다. 범위 검색은 점수 또는 거리가 지정된 범위 내에 속하는 벡터 일치 결과를 반환합니다. StructArray 필드의 경우, 각 Struct 요소를 독립적으로 검색하는 요소 수준 벡터 검색과 함께 범위 검색을 사용하십시오.</p>
+    </button></h1><p>이 페이지를 사용하여 StructArray 벡터 하위 필드에 대해 범위 검색을 실행할 수 있습니다. 범위 검색은 점수나 거리가 지정된 범위 내에 속하는 벡터 일치 결과를 반환합니다. StructArray 필드의 경우, 각 Struct 요소를 독립적으로 검색하는 요소 수준 벡터 검색과 함께 범위 검색을 사용하십시오.</p>
 <p>이 페이지에서는 <a href="/docs/ko/create-structarray-field.md">‘StructArray 필드 생성’의</a> <code translate="no">tech_articles</code> 컬렉션을 사용합니다. 이 컬렉션에는 <code translate="no">chunks</code> 라는 StructArray 필드가 있습니다. <code translate="no">chunks[emb]</code> 벡터 하위 필드는 <code translate="no">COSINE</code>, <code translate="no">IP</code> 또는 <code translate="no">L2</code> 와 같은 일반 벡터 메트릭을 사용하여 요소 수준 검색이 가능하도록 인덱싱되어 있습니다.</p>
 <h2 id="How-range-search-applies-to-StructArray" class="common-anchor-header">StructArray에 범위 검색이 적용되는 방식<button data-href="#How-range-search-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -222,7 +222,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>StructArray 요소 수준 벡터 필드는 하이브리드 검색에서 범위 검색을 지원합니다. StructArray 요소 수준 벡터 필드를 대상으로 하는 <code translate="no">AnnSearchRequest</code> 에 ` <code translate="no">radius</code> ` 및 선택적으로 ` <code translate="no">range_filter</code> `를 추가하십시오.</p>
+    </button></h2><p>StructArray 요소 수준 벡터 필드는 하이브리드 검색에서 범위 검색을 지원합니다. StructArray 요소 수준 벡터 필드를 대상으로 하는 <code translate="no">AnnSearchRequest</code> 에 ` <code translate="no">radius</code> `를 추가하고, 선택적으로 ` <code translate="no">range_filter</code> `를 추가하십시오.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest, RRFRanker
 
 title_req = AnnSearchRequest(
@@ -345,7 +345,7 @@ results = client.hybrid_search(
       </svg>
     </button></h2><ol>
 <li><p>두 가지 기본 StructArray 벡터 검색 모드를 알아보려면 <a href="/docs/ko/basic-vector-search-with-structarray.md">‘StructArray를 사용한 기본 벡터 검색’을</a> 참조하십시오.</p></li>
-<li><p>범위 검색에 스칼라 필터를 추가하려면 <a href="/docs/ko/filtered-search-with-structarray.md">‘StructArray를 사용한 필터링 검색’을</a> 참조하십시오.</p></li>
+<li><p>범위 검색에 스칼라 필터를 추가하려면 <a href="/docs/ko/filtered-search-with-structarray.md">'StructArray를 사용한 필터링 검색'을</a> 참조하십시오.</p></li>
 <li><p>지원되는 경우 상위 엔티티당 최대 하나의 결과만 반환하려면 <a href="/docs/ko/grouping-search-with-structarray.md">StructArray를 사용한 그룹화 검색을</a> 참조하십시오.</p></li>
 <li><p>버전별 검색 제한 사항을 확인하려면 <a href="/docs/ko/structarray-limits.md">StructArray 제한 사항을</a> 참조하십시오.</p></li>
 </ol>

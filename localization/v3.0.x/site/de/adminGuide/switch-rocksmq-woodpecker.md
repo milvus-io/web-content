@@ -209,7 +209,7 @@ summary: >-
       </svg>
     </button></h3><pre><code translate="no" class="language-shell">docker logs milvus-standalone | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
-<p>Bei einer erfolgreichen Umstellung wird folgende Meldung protokolliert: „ <code translate="no">[mqTypeValue=rocksmq]</code> “.</p>
+<p>Bei einer erfolgreichen Umstellung wird Folgendes protokolliert: „ <code translate="no">[mqTypeValue=rocksmq]</code> “.</p>
 <h3 id="Step-4-Optional-Clean-up-Woodpecker-data" class="common-anchor-header">Schritt 4: (Optional) Woodpecker-Daten bereinigen<button data-href="#Step-4-Optional-Clean-up-Woodpecker-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -229,7 +229,7 @@ summary: >-
 <li><strong>Metadaten (etcd):</strong> Das Schlüsselpräfix für Woodpecker lautet in der Regel <code translate="no">woodpecker/...</code>. Rufen Sie es mit dem Befehl <code translate="no">etcdctl get woodpecker --prefix</code> ab und löschen Sie es anschließend.</li>
 <li><strong>Speicherdaten:</strong> Im <strong>MinIO-Modus</strong> löschen Sie die Protokolldaten unter <code translate="no">&lt;rootPath&gt;/wp/...</code> (in der Regel <code translate="no">files/wp/...</code>) im Bucket; im <strong>lokalen Modus</strong> befinden sich die Daten auf der lokalen Festplatte unter <code translate="no">volumes/milvus/data/wp/...</code>.</li>
 </ul>
-<p>Wenn Sie später wieder zu Woodpecker wechseln möchten, löschen Sie diese Dateien zunächst, um Konflikte zu vermeiden.</p>
+<p>Wenn Sie später wieder zu Woodpecker zurückwechseln möchten, löschen Sie diese Dateien zunächst, um Konflikte zu vermeiden.</p>
 <h2 id="Supported-scenarios" class="common-anchor-header">Unterstützte Szenarien<button data-href="#Supported-scenarios" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

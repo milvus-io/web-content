@@ -1,12 +1,12 @@
 ---
 id: switch-mq-type.md
-title: Changer de type de file d'attente de messages (MQ)
+title: Changer de type de file d'attente de messages
 summary: >-
   Basculer la file d'attente de messages d'un déploiement Milvus existant de
   Woodpecker vers une autre file d'attente de messages sans interruption de
   service.
 ---
-<h1 id="Switch-MQ-Type" class="common-anchor-header">Changer de type de file d'attente de messages (MQ)<button data-href="#Switch-MQ-Type" class="anchor-icon" translate="no">
+<h1 id="Switch-MQ-Type" class="common-anchor-header">Changer de type de file d'attente de messages<button data-href="#Switch-MQ-Type" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,7 +41,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>La fonctionnalité « Changer de file d’attente de messages » est disponible dans Milvus 3.0 et les versions ultérieures.</strong> Mettez à jour votre instance Milvus vers la version 3.0 ou une version ultérieure avant de l’utiliser — cette fonctionnalité n’est pas disponible dans les versions antérieures.</li>
+<li><strong>La fonctionnalité « Changer de file d’attente de messages » est disponible à partir de Milvus 3.0.</strong> Mettez à jour votre instance Milvus vers la version 3.0 ou une version<strong>ultérieure</strong> avant de l’utiliser — cette fonctionnalité n’est pas disponible sur les versions antérieures.</li>
 <li>L’instance fonctionne correctement.</li>
 </ul>
 <h2 id="Scope" class="common-anchor-header">Portée<button data-href="#Scope" class="anchor-icon" translate="no">
@@ -83,7 +83,7 @@ summary: >-
     </button></h2><ol>
 <li>Assurez-vous que l’instance Milvus fonctionne correctement.</li>
 <li>Vérifiez le type de MQ source et le type de MQ cible.</li>
-<li>Intégrez les paramètres d’accès du MQ cible dans la configuration de Milvus <strong>sans</strong> modifier la valeur de l’ <code translate="no">mqType</code>.</li>
+<li>Intégrez les paramètres d’accès de la file d’attente cible dans la configuration de Milvus <strong>sans</strong> modifier la valeur de l’ <code translate="no">mqType</code>.</li>
 <li>Déclenchez la bascule en appelant l’API WAL alter sur MixCoord.</li>
 <li>Surveillez les journaux pour vérifier que la bascule s’est bien effectuée.</li>
 </ol>

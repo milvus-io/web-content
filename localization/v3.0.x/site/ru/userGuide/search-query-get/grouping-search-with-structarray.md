@@ -132,7 +132,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>Без группировки один и тот же <code translate="no">doc_id</code> может появиться несколько раз, если запросу соответствуют несколько фрагментов. При использовании <code translate="no">group_by_field=&quot;doc_id&quot;</code> каждая родительская сущность появляется не более одного раза. Группировка сохраняет метаданные на уровне элементов, поэтому сгруппированный результат по-прежнему может включать выбранный индекс или смещение элемента Struct, если API или SDK его предоставляют.</p>
+<p>Без группировки один и тот же <code translate="no">doc_id</code> может появиться несколько раз, если запросу соответствуют несколько фрагментов. При использовании <code translate="no">group_by_field=&quot;doc_id&quot;</code> каждая родительская сущность появляется не более одного раза. Группировка сохраняет метаданные на уровне элементов, поэтому сгруппированный результат по-прежнему может включать выбранный индекс или смещение элемента Struct, если API или SDK предоставляют эту информацию.</p>
 <h2 id="Add-scalar-filters" class="common-anchor-header">Добавление скалярных фильтров<button data-href="#Add-scalar-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -268,7 +268,7 @@ results = client.hybrid_search(
 <li><p>Поиск с группировкой применяется только к векторному поиску StructArray на уровне элементов. Поиск EmbeddingList и гибридный поиск на уровне EmbeddingList не поддерживают группировку.</p></li>
 <li><p>Используйте первичный ключ в виде <code translate="no">group_by_field</code>. Группировка на уровне элементов StructArray не является универсальной группировкой по произвольным скалярным полям.</p></li>
 <li><p>Не сочетайте поиск с группировкой с поиском по диапазону.</p></li>
-<li><p>Не используйте запрос « <code translate="no">EmbeddingList</code> » или метрику « <code translate="no">MAX_SIM*</code> » для группового поиска.</p></li>
+<li><p>Не используйте запрос « <code translate="no">EmbeddingList</code> » или метрику « <code translate="no">MAX_SIM*</code> » для группированного поиска.</p></li>
 <li><p>Гибридная группировка поддерживается только в том случае, если все подзапросы нацелены на векторные поля на уровне элементов в рамках одного и того же поля StructArray.</p></li>
 <li><p>Гибридная группировка не поддерживается, если гибридный поиск сочетает обычное векторное поле, другое поле StructArray или запрос на уровне EmbeddingList.</p></li>
 </ul>
@@ -311,7 +311,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>Чтобы сначала изучить поиск на уровне элементов без группировки, ознакомьтесь со статьёй <a href="/docs/ru/basic-vector-search-with-structarray.md">«Базовый векторный поиск с использованием StructArray</a>».</p></li>
+<li><p>Чтобы сначала изучить поиск на уровне элементов без группировки, прочтите раздел <a href="/docs/ru/basic-vector-search-with-structarray.md">«Базовый векторный поиск с использованием StructArray</a>».</p></li>
 <li><p>Чтобы добавить скалярные фильтры к группированному поиску, ознакомьтесь с разделом <a href="/docs/ru/filtered-search-with-structarray.md">«Фильтрованный поиск с StructArray</a>».</p></li>
 <li><p>Чтобы использовать границы оценки или расстояния вместо группировки, ознакомьтесь с разделом <a href="/docs/ru/range-search-with-structarray.md">«Поиск по диапазону с StructArray</a>».</p></li>
 <li><p>Чтобы ознакомиться с ограничениями поиска с использованием StructArray, прочтите раздел <a href="/docs/ru/structarray-limits.md">«Ограничения StructArray</a>».</p></li>

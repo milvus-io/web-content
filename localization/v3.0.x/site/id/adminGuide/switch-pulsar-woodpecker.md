@@ -69,7 +69,7 @@ summary: >-
 <p><strong>Langkah 3: Pastikan proses peralihan telah selesai.</strong></p>
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
-<p>Pergantian yang berhasil akan mencatat <code translate="no">[mqTypeValue=woodpecker]</code>.</p>
+<p>Pergantian yang berhasil akan mencatat " <code translate="no">[mqTypeValue=woodpecker]</code>".</p>
 <p><strong>Langkah 4: (Opsional) Hentikan Pulsar dan lakukan pembersihan.</strong> Untuk Pulsar <strong>bawaan</strong>, nonaktifkan Pulsar dan aktifkan Woodpecker, lalu hapus PVC Pulsar:</p>
 <pre><code translate="no" class="language-shell">helm upgrade my-release zilliztech/milvus \
   --set image.all.tag=v3.0-beta \
@@ -101,7 +101,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>Langkah 1: Pastikan instance Milvus sedang berjalan.</strong></p>
-<p><strong>Langkah 2: Konfigurasikan koneksi Pulsar tujuan dan mulai ulang Milvus.</strong> Proses peralihan ini memerlukan Milvus untuk sudah mengetahui koneksi Pulsar, jadi masukkan konfigurasi tersebut ke dalam ` <code translate="no">user.yaml</code> ` melalui ` <code translate="no">extraConfigFiles</code> ` dan terapkan dengan ` <code translate="no">helm upgrade</code> ` (yang akan merestart pod-pod). ` <code translate="no">streaming.enabled=true</code> ` diperlukan untuk fitur Switch MQ.</p>
+<p><strong>Langkah 2: Konfigurasikan koneksi Pulsar tujuan dan mulai ulang Milvus.</strong> Proses peralihan ini memerlukan Milvus untuk sudah mengetahui koneksi Pulsar, jadi masukkan konfigurasi tersebut ke dalam ` <code translate="no">user.yaml</code> ` melalui ` <code translate="no">extraConfigFiles</code> ` dan terapkan dengan ` <code translate="no">helm upgrade</code> ` (yang akan me-roll pod-pod). ` <code translate="no">streaming.enabled=true</code> ` diperlukan untuk fitur Switch MQ.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -115,10 +115,10 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
   --set streaming.enabled=true \
   -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Tunggu hingga semua pod siap, lalu pastikan konfigurasi akses Pulsar telah diterapkan ke konfigurasi Milvus.</p>
+<p>Tunggu hingga semua pod siap, lalu pastikan konfigurasi akses Pulsar telah diterapkan ke dalam konfigurasi Milvus.</p>
 <p><strong>Langkah 3: Jalankan peralihan MQ.</strong></p>
 <div class="alert note">
-<p>Pastikan Pulsar tujuan tidak berisi topik Milvus dari konfigurasi sebelumnya. Jika ini adalah peralihan pertama Anda ke Pulsar, abaikan catatan ini; jika tidak, bersihkan terlebih dahulu topik Milvus sisa dengan nama yang sama.</p>
+<p>Pastikan Pulsar tujuan tidak berisi topik Milvus dari konfigurasi sebelumnya. Jika ini adalah peralihan pertama Anda ke Pulsar, abaikan catatan ini; jika tidak, bersihkan terlebih dahulu sisa topik Milvus dengan nama yang sama.</p>
 </div>
 <pre><code translate="no" class="language-shell">kubectl port-forward --address 0.0.0.0 service/my-release-milvus-mixcoord 29091:9091
 <button class="copy-code-btn"></button></code></pre>

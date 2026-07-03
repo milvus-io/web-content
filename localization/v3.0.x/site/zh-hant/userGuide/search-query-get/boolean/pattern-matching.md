@@ -56,7 +56,7 @@ res = client.query(
 </thead>
 <tbody>
 <tr><td><code translate="no">VARCHAR</code> 欄位</td><td>是</td><td>是</td><td>字串欄位進行模式比對的典型目標。</td></tr>
-<tr><td><code translate="no">JSON</code> 路徑，並使用 `<code translate="no">VARCHAR</code> ` 進行類型轉換</td><td>是</td><td>是</td><td>若要獲得正向匹配，JSON 路徑值必須為字串。若您在 JSON 路徑上建立索引以提升效能，請設定<code translate="no">json_cast_type=&quot;varchar&quot;</code> 。</td></tr>
+<tr><td><code translate="no">JSON</code> 路徑，使用 `<code translate="no">VARCHAR</code> ` 型別轉換</td><td>是</td><td>是</td><td>若要獲得正向匹配，JSON 路徑值必須為字串。若要在 JSON 路徑上建立索引以提升效能，請設定<code translate="no">json_cast_type=&quot;varchar&quot;</code> 。</td></tr>
 <tr><td><code translate="no">ARRAY&lt;VARCHAR&gt;</code> element</td><td>是</td><td>是</td><td>根據索引匹配特定元素，例如<code translate="no">tags[0]</code> 。模式匹配<strong>不會</strong>掃描所有元素；它僅適用於指定索引處的元素。</td></tr>
 <tr><td>數值、布林值、向量、<code translate="no">TEXT</code> 或其他非<code translate="no">VARCHAR</code> 目標</td><td>否</td><td>否</td><td>模式匹配僅適用於 `<code translate="no">VARCHAR</code> ` 值、解析為字串的 JSON 路徑，或具索引的 `<code translate="no">ARRAY&lt;VARCHAR&gt;</code> ` 元素。</td></tr>
 </tbody>
@@ -87,7 +87,7 @@ res = client.query(
 <tr><td>簡單前綴匹配</td><td><code translate="no">LIKE</code></td><td><code translate="no">name LIKE &quot;Prod%&quot;</code></td><td>匹配以<code translate="no">Prod</code> 開頭的字串。</td></tr>
 <tr><td>簡單後綴匹配</td><td><code translate="no">LIKE</code></td><td><code translate="no">filename LIKE &quot;%.json&quot;</code></td><td>匹配以<code translate="no">.json</code> 結尾的字串。</td></tr>
 <tr><td>簡單包含匹配</td><td><code translate="no">LIKE</code></td><td><code translate="no">description LIKE &quot;%vector database%&quot;</code></td><td>匹配字串中任何位置包含<code translate="no">vector database</code> 的值。</td></tr>
-<tr><td>匹配結構化代碼或固定長度模式</td><td><code translate="no">=~</code></td><td><code translate="no">code =~ &quot;E[0-9]{4}&quot;</code></td><td>匹配那些區分大小寫且包含<code translate="no">E</code> 後接四位數字的字串，例如<code translate="no">E1001</code> 。</td></tr>
+<tr><td>匹配結構化代碼或固定長度模式</td><td><code translate="no">=~</code></td><td><code translate="no">code =~ &quot;E[0-9]{4}&quot;</code></td><td>匹配那些區分大小寫且包含<code translate="no">E</code> 後接四個數字的字串，例如<code translate="no">E1001</code> 。</td></tr>
 <tr><td>不區分大小寫的模式匹配</td><td><code translate="no">=~</code> 使用<code translate="no">(?i)</code></td><td><code translate="no">message =~ &quot;(?i)error&quot;</code></td><td>匹配<code translate="no">error</code> 、<code translate="no">ERROR</code> 或其他大小寫變體。</td></tr>
 <tr><td>排除符合正規表達式模式的值</td><td><code translate="no">!~</code></td><td><code translate="no">message !~ &quot;^DEBUG&quot;</code></td><td>排除以<code translate="no">DEBUG</code> 開頭的字串。</td></tr>
 </tbody>
@@ -160,7 +160,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>請使用<code translate="no">LIKE</code> 進行前綴、後綴、包含以及固定位置單一字元比對。<code translate="no">LIKE</code> 不支援字元類別（例如<code translate="no">[0-9]</code> ）、選擇關係（例如<code translate="no">error|failed</code> ）、重複次數（例如<code translate="no">{4}</code> ）、錨點（例如<code translate="no">^</code> 或<code translate="no">$</code> ），亦不支援不區分大小寫的標誌（例如<code translate="no">(?i)</code> ）。若需使用這些模式，請改用正規表達式。</p>
+    </button></h3><p>請使用<code translate="no">LIKE</code> 進行前綴、後綴、包含及固定位置單一字元比對。<code translate="no">LIKE</code> 不支援字元類別（例如<code translate="no">[0-9]</code> ）、選擇關係（例如<code translate="no">error|failed</code> ）、重複次數（例如<code translate="no">{4}</code> ）、錨點（例如<code translate="no">^</code> 或<code translate="no">$</code> ），亦不支援不區分大小寫標誌（例如<code translate="no">(?i)</code> ）。若需使用此類模式，請改用正規表達式。</p>
 <p>若需進行完全字串相等比對，請使用<code translate="no">==</code> 。僅當篩選條件需要通配符匹配時，才使用<code translate="no">LIKE</code> 。</p>
 <h3 id="Escaping-wildcards-in-a-LIKE-pattern" class="common-anchor-header">在 LIKE 模式中對通配符進行轉義<button data-href="#Escaping-wildcards-in-a-LIKE-pattern" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -230,7 +230,7 @@ res = client.query(
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ r&quot;\d{4}-\d{2}-\d{2}&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>這會匹配包含類似日期的字串，例如<code translate="no">2026-07-01</code> 。</p>
-<p>若未使用原始字串，一般字串文字會在評估正規表達式模式之前先處理轉義序列，因此像<code translate="no">\d</code> 、<code translate="no">\s</code> 這樣的模式，或是包含轉義字元字面值的字串，可能需要額外的反斜線。</p>
+<p>若未使用原始字串，一般字串文字會在評估正規表達式模式之前先處理轉義序列，因此像<code translate="no">\d</code> 、<code translate="no">\s</code> 這樣的模式，或是包含轉義字元的字串，可能需要額外的反斜線。</p>
 <h3 id="Common-regex-patterns" class="common-anchor-header">常見的正規表達式模式<button data-href="#Common-regex-patterns" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -265,10 +265,10 @@ res = client.query(
 <p>若要匹配多個單字中的任一個，請使用<code translate="no">|</code> 進行選擇：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ &quot;error|failed|timeout&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>若要字面匹配正規表達式中的元字元，請在正規表達式模式中對其進行轉義。例如，若要匹配字面上的點（正規表達式中的 `<code translate="no">\.</code> `），請在 Python 篩選器字串中寫作 `<code translate="no">\\.</code> `：</p>
+<p>若要字面匹配正則表達式元字元，請在正則表達式模式中對其進行轉義。例如，若要匹配字面上的點（正則表達式中的 `<code translate="no">\.</code> `），請在 Python 篩選器字串中寫作 `<code translate="no">\\.</code> `：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;email =~ &quot;@gmail\\.com$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>注意：Milvus 的正規表達式篩選器遵循 RE2 語法。若正規表達式模式使用了 RE2 不支援的語法，或因其他原因而無效，Milvus 將拒絕該篩選器表達式。有關正規表達式元字元、旗標及匹配行為的詳細資訊，請參閱<a href="https://github.com/google/re2/wiki/syntax">RE2 語法參考</a>。</p>
+<p>注意：Milvus 的正規表達式篩選器遵循 RE2 語法。若正規表達式模式使用了 RE2 不支援的語法，或因其他原因而無效，Milvus 將拒絕該篩選器表達式。有關正規表達式元字元、標誌及匹配行為的詳細資訊，請參閱<a href="https://github.com/google/re2/wiki/syntax">RE2 語法參考</a>。</p>
 <h3 id="Matching-behavior" class="common-anchor-header">匹配行為<button data-href="#Matching-behavior" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -293,7 +293,7 @@ res = client.query(
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;code =~ &quot;^E[0-9]{4}$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>可為空的 VARCHAR 欄位</strong></p>
-<p>正規表達式篩選器不會匹配 null 值。這同時適用於<code translate="no">=~</code> 和<code translate="no">!~</code> 。若要排除某個正規表達式模式但保留 null 值，請明確加入<code translate="no">OR field IS NULL</code> ：</p>
+<p>正規表達式篩選器不會匹配 null 值。這同時適用於<code translate="no">=~</code> 和<code translate="no">!~</code> 。若要排除某個正規表達式模式但保留 null 值，請明確添加<code translate="no">OR field IS NULL</code> ：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot; OR message IS NULL&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>JSON 路徑</strong></p>
@@ -331,7 +331,7 @@ res = client.query(
 </thead>
 <tbody>
 <tr><td>包含固定的字面值子字串，例如<code translate="no">message =~ &quot;error.*timeout&quot;</code> 或<code translate="no">message LIKE &quot;%database%&quot;</code></td><td><code translate="no">NGRAM</code></td><td>當 Milvus 能從模式中提取有意義的字面值子字串時，此設定會有所幫助。詳細資訊請參閱<a href="/docs/zh-hant/ngram.md">NGRAM</a>。</td></tr>
-<tr><td>前綴、精確或等值類型的字串篩選器，特別適用於基數較低至中等的欄位</td><td><code translate="no">STL_SORT</code>、<code translate="no">INVERTED</code> ，或<code translate="no">BITMAP</code></td><td>當欄位具有重複值，或篩選條件接近完全匹配時，此方法可能更有效。詳情請參閱<a href="/docs/zh-hant/stl-sort.md">STL_SORT</a>、<a href="/docs/zh-hant/inverted.md">INVERTED</a> 及<a href="/docs/zh-hant/bitmap.md">BITMAP</a>。</td></tr>
-<tr><td>不含固定字面值的正規表達式模式，或以字元類別、短標記或萬用字元為主的模式</td><td>在依賴索引加速之前請先進行效能測試</td><td>這些模式可能提供有限的索引選擇性，並可能退而採用更廣泛的掃描。</td></tr>
+<tr><td>前綴、精確或等值類型的字串篩選器，特別適用於基數較低至中等的欄位</td><td><code translate="no">STL_SORT</code>、<code translate="no">INVERTED</code> ，或<code translate="no">BITMAP</code></td><td>當欄位具有重複值，或篩選條件接近完全匹配時，此方法可能更為有效。詳情請參閱<a href="/docs/zh-hant/stl-sort.md">STL_SORT</a>、<a href="/docs/zh-hant/inverted.md">INVERTED</a> 及<a href="/docs/zh-hant/bitmap.md">BITMAP</a>。</td></tr>
+<tr><td>不含固定字面值的正規表達式模式，或以字元類別、短標記或萬用字元為主的模式</td><td>在依賴索引加速之前應先進行效能測試</td><td>這些模式可能提供有限的索引選擇性，並可能退而採用更廣泛的掃描。</td></tr>
 </tbody>
 </table>

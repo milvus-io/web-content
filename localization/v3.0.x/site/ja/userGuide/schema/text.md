@@ -27,7 +27,7 @@ beta: Milvus 3.0.x
 <span class="highlighted-wrapper-line">    datatype=DataType.TEXT,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>フィールドの定義後、各エンティティはそのフィールドに文字列値を格納できるようになります。<code translate="no">TEXT</code> の値は他のスカラーフィールドと同様に挿入でき、クエリや検索結果から返す際には、<code translate="no">output_fields</code> にそのフィールドを指定することで取得できます。</p>
+<p>フィールドの定義後、各エンティティはそのフィールドに文字列値を格納できるようになります。<code translate="no">TEXT</code> の値は他のスカラーフィールドと同様に挿入でき、クエリや検索結果から返す際には、<code translate="no">output_fields</code> にそのフィールドを指定します。</p>
 <div class="alert note">
 <p><code translate="no">TEXT</code> フィールドはNULL値をサポートしています。この機能を有効にするには、<code translate="no">nullable</code> を<code translate="no">True</code> に設定します。詳細については、「<a href="/docs/ja/nullable-and-default.md">NULL許容フィールド</a>」を参照してください。</p>
 </div>
@@ -69,7 +69,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">TEXT</code> と<code translate="no">VARCHAR</code> はどちらも文字列値を格納しますが、対応するアプリケーションのニーズが異なります。エンティティの識別、分類、またはフィルタリングを行う、短く長さが制限されたメタデータには<code translate="no">VARCHAR</code> を使用してください。LLM やエージェントが読み取り、引用、要約、またはプロンプトを作成するのに十分なコンテキストを提供する、より長いソースコンテンツには<code translate="no">TEXT</code> を使用してください。</p>
+    </button></h2><p><code translate="no">TEXT</code> と<code translate="no">VARCHAR</code> はどちらも文字列値を格納しますが、対応するアプリケーションのニーズが異なります。エンティティの識別、分類、またはフィルタリングを行う、短く長さが限定されたメタデータには<code translate="no">VARCHAR</code> を使用してください。LLM やエージェントが読み取り、引用、要約、またはプロンプトを作成するのに十分なコンテキストを提供する、より長いソースコンテンツには<code translate="no">TEXT</code> を使用してください。</p>
 <table>
 <thead>
 <tr><th>側面</th><th><code translate="no">VARCHAR</code></th><th><code translate="no">TEXT</code></th></tr>
@@ -109,7 +109,7 @@ beta: Milvus 3.0.x
  </span></p>
 <ul>
 <li><strong>インライン保存</strong>：<code translate="no">TEXT</code> の値が<code translate="no">dataNode.text.inlineThreshold</code> より小さい場合、Milvusは元のテキスト値を<code translate="no">TEXT</code> フィールドdataに直接保存します。</li>
-<li><strong>LOB ストレージ</strong>：<code translate="no">TEXT</code> の値が<code translate="no">dataNode.text.inlineThreshold</code> 以上の場合、Milvusはその値をLOB（大容量オブジェクト）として扱い、元のテキストをMinIOなどのオブジェクトストレージに別途保存します。<code translate="no">TEXT</code> フィールドのデータには、別途保存されたテキストへの内部参照が格納されます。クエリや検索結果で<code translate="no">TEXT</code> フィールドが要求されると、Milvusはこの参照を使用して元のテキストを取得し、返します。</li>
+<li><strong>LOB ストレージ</strong>：<code translate="no">TEXT</code> の値が<code translate="no">dataNode.text.inlineThreshold</code> 以上の場合、Milvusはその値を大容量オブジェクトとして扱い、元のテキストをMinIOなどのオブジェクトストレージに別途保存します。<code translate="no">TEXT</code> フィールドのデータには、別途保存されたテキストへの内部参照が格納されます。クエリや検索結果で<code translate="no">TEXT</code> フィールドが要求されると、Milvusはこの参照を使用して元のテキストを取得し、返します。</li>
 </ul>
 <p>このストレージの選択は内部的なものです。Milvusがどのストレージパスを使用する場合でも、<code translate="no">TEXT</code> フィールドへの挿入、クエリ、検索は同じ方法で行います。しきい値や、関連するストレージ、コンパクション、ガベージコレクションの動作を調整するには、<a href="/docs/ja/configure_datanode.md">dataNode関連の設定</a> <a href="/docs/ja/configure_datacoord.md">およびdataCoord関連の設定</a>を参照してください。</p>
 <p>デプロイメントでオブジェクトストレージを使用している場合、<code translate="no">TEXT</code> の値が大きいと、<code translate="no">lobs/...</code> などのパス下にMilvusが管理するオブジェクトとして表示されることがあります。これらのオブジェクトは実装上の詳細であり、手動で移動、コピー、または削除してはなりません。 エンティティの削除、パーティションの削除、またはデータの圧縮を行った後、オブジェクトストレージの使用量が減少するのは、Milvusのガベージコレクションがセーフティウィンドウ経過後に参照されていない大容量オブジェクトデータを削除してからとなります。</p>

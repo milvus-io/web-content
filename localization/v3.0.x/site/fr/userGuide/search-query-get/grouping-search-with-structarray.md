@@ -173,7 +173,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Le prédicat de niveau supérieur sélectionne les entités candidates. Le prédicat « <code translate="no">element_filter</code> » limite la recherche vectorielle au niveau des éléments aux éléments Struct correspondants. Le regroupement regroupe ensuite les résultats d’éléments correspondants en fonction de la clé primaire.</p>
+<p>Le prédicat de niveau supérieur sélectionne les entités candidates. Le prédicat « <code translate="no">element_filter</code> » restreint la recherche vectorielle au niveau des éléments aux éléments Struct correspondants. Le regroupement regroupe ensuite les résultats d’éléments correspondants en fonction de la clé primaire.</p>
 <h2 id="Use-grouping-in-hybrid-search" class="common-anchor-header">Utilisation du regroupement dans la recherche hybride<button data-href="#Use-grouping-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -243,10 +243,10 @@ results = client.hybrid_search(
 </thead>
 <tbody>
 <tr><td><code translate="no">id</code></td><td>Clé primaire de l’entité parente regroupée.</td></tr>
-<tr><td><code translate="no">distance</code> ou score</td><td>Score ou distance de l’élément Struct sélectionné pour cette entité parente.</td></tr>
+<tr><td><code translate="no">distance</code> ou score</td><td>Score ou distance de l'élément Struct sélectionné pour cette entité parente.</td></tr>
 <tr><td><code translate="no">offset</code></td><td>Position (à partir de zéro) de l’élément Struct sélectionné lors du renvoi.</td></tr>
 <tr><td>Clés primaires répétées</td><td>Non attendues lors d'un regroupement par clé primaire.</td></tr>
-<tr><td><code translate="no">limit</code></td><td>S'applique aux résultats groupés par entité parente.</td></tr>
+<tr><td><code translate="no">limit</code></td><td>S'applique aux résultats groupés de l'entité parente.</td></tr>
 </tbody>
 </table>
 <h2 id="Limitations" class="common-anchor-header">Limitations<button data-href="#Limitations" class="anchor-icon" translate="no">
@@ -270,7 +270,7 @@ results = client.hybrid_search(
 <li><p>Ne combinez pas la recherche avec regroupement et la recherche par plage.</p></li>
 <li><p>N’utilisez pas de requête « <code translate="no">EmbeddingList</code> » ni de métrique « <code translate="no">MAX_SIM*</code> » pour la recherche groupée.</p></li>
 <li><p>Le regroupement hybride n’est pris en charge que lorsque toutes les sous-recherches ciblent des champs vectoriels au niveau des éléments sous le même champ StructArray.</p></li>
-<li><p>Le regroupement hybride n’est pas pris en charge lorsque la recherche hybride mélange un champ vectoriel normal, un autre champ StructArray ou une requête au niveau EmbeddingList.</p></li>
+<li><p>Le regroupement hybride n’est pas pris en charge lorsque la recherche hybride mélange un champ vectoriel normal, un autre champ StructArray ou une requête au niveau d’une EmbeddingList.</p></li>
 </ul>
 <h2 id="Common-mistakes" class="common-anchor-header">Erreurs courantes<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"

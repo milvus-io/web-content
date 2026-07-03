@@ -310,8 +310,8 @@ client.create_index(
 <tr><th>ルール</th><th>説明</th></tr>
 </thead>
 <tbody>
-<tr><td>サブフィールドインデックスにはパス構文を使用してください。</td><td>インデックスは `<code translate="no">chunks[emb]</code>` とし、`<code translate="no">emb</code> ` や `<code translate="no">chunks.emb</code>` は使用しないでください。</td></tr>
-<tr><td>1 つのベクトルサブフィールドには 1 つのインデックスしか指定できません。</td><td>異なるメトリックファミリーが必要な場合は、別々のベクトルサブフィールドを使用してください。</td></tr>
+<tr><td>サブフィールドインデックスにはパス構文を使用してください。</td><td>インデックスは `<code translate="no">chunks[emb]</code>` とし、`<code translate="no">emb</code> ` や `<code translate="no">chunks.emb</code>` とはしないでください。</td></tr>
+<tr><td>1 つのベクトルサブフィールドには、1 つのインデックスしか指定できません。</td><td>異なるメトリックファミリーが必要な場合は、別々のベクトルサブフィールドを使用してください。</td></tr>
 <tr><td>EmbeddingList 検索には、<code translate="no">MAX_SIM*</code> メトリックを使用してください。</td><td>EmbeddingList クエリデータには、<code translate="no">MAX_SIM*</code> メトリックを使用して構築されたインデックスが必要です。</td></tr>
 <tr><td>要素レベルの検索には、通常のベクトルメトリクスを使用してください。</td><td>要素レベルの検索では、通常のベクトルクエリデータと、<code translate="no">COSINE</code> 、<code translate="no">IP</code> 、<code translate="no">L2</code> などのメトリックが使用されます。</td></tr>
 <tr><td>フィルタに現れるスカラーサブフィールドをインデックス化してください。</td><td>ターゲットでサポートされているスカラーインデックス型を使用してください。</td></tr>
@@ -357,7 +357,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>エンティティレベルの EmbeddingList 検索や要素レベルのベクトル検索を実行するには、「StructArray を使用した基本的なベクトル検索」を参照してください。</p></li>
+<li><p>エンティティレベルの EmbeddingList 検索または要素レベルのベクトル検索を実行するには、「StructArray を使用した基本的なベクトル検索」を参照してください。</p></li>
 <li><p>検索時に StructArray のスカラーサブフィールドをフィルタリングするには、「StructArray を使用したフィルタ検索」を参照してください。</p></li>
 <li><p>インデックスおよびメトリックの制限を確認するには、「<a href="/docs/ja/structarray-limits.md">StructArray の制限</a>」を参照してください。</p></li>
 </ol>

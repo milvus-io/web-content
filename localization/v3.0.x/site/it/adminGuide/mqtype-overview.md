@@ -51,7 +51,7 @@ summary: >-
 <div class="alert note">
 <ul>
 <li><p>Ogni istanza di Milvus utilizza esattamente una coda di messaggi.</p></li>
-<li><p><strong>Limiti della coda dei messaggi</strong>: quando si esegue l'aggiornamento a Milvus v3.0-beta, è necessario mantenere la coda dei messaggi attualmente in uso. Il passaggio tra diversi sistemi di code dei messaggi durante l'aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code dei messaggi sarà disponibile nelle versioni future.</p></li>
+<li><p><strong>Limiti della coda dei messaggi</strong>: quando si esegue l'aggiornamento a Milvus v3.0-beta, è necessario mantenere la coda dei messaggi attualmente in uso. Il passaggio da un sistema di code dei messaggi a un altro durante l'aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code dei messaggi sarà disponibile nelle versioni future.</p></li>
 <li><p>Per modificare la coda dei messaggi di un'istanza in esecuzione, consultare <a href="/docs/it/switch-mq-type.md">la sezione "Cambiare il tipo di coda dei messaggi"</a>. La funzione "Cambiare il tipo di coda dei messaggi" è disponibile in <strong>Milvus 3.0 e versioni successive</strong>: eseguire prima l'aggiornamento a Milvus 3.0 o versioni successive.</p></li>
 </ul>
 </div>

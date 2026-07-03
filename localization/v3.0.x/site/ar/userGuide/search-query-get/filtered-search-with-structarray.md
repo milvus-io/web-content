@@ -45,8 +45,8 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>التصفية حسب حقل قياسي من المستوى الأعلى، مثل <code translate="no">category</code>.</td><td>تعبير تصفية عادي.</td><td>يختار الكيانات الأصلية قبل البحث أو أثناءه.</td></tr>
-<tr><td>تقييد البحث المتجهي على مستوى العنصر ليقتصر على عناصر Struct التي تتطابق مع الشروط القياسية.</td><td><code translate="no">element_filter</code>.</td><td>يبحث فقط في عناصر Struct المطابقة ويمكنه إرجاع إزاحات العناصر المطابقة.</td></tr>
-<tr><td>تحديد الكيانات بناءً على ما إذا كانت أي عناصر من نوع Struct أو جميعها أو عدد محدد منها تتطابق مع المسند.</td><td><code translate="no">MATCH_ANY</code>، <code translate="no">MATCH_ALL</code> ، <code translate="no">MATCH_LEAST</code> ، <code translate="no">MATCH_MOST</code> ، أو <code translate="no">MATCH_EXACT</code>.</td><td>التصفية على مستوى الصف. لا تُرجع هذه العوامل إزاحات بحد ذاتها.</td></tr>
+<tr><td>تقييد البحث المتجهي على مستوى العنصر ليقتصر على عناصر Struct التي تتطابق مع الشروط القياسية.</td><td><code translate="no">element_filter</code>.</td><td>يبحث فقط عن عناصر Struct المطابقة ويمكنه إرجاع إزاحات العناصر المطابقة.</td></tr>
+<tr><td>تحديد الكيانات بناءً على ما إذا كانت أي عناصر Struct أو جميعها أو عدد محدد منها تتطابق مع المسند.</td><td><code translate="no">MATCH_ANY</code>، <code translate="no">MATCH_ALL</code> ، <code translate="no">MATCH_LEAST</code> ، <code translate="no">MATCH_MOST</code> ، أو <code translate="no">MATCH_EXACT</code>.</td><td>التصفية على مستوى الصف. لا تُرجع هذه العوامل إزاحات بحد ذاتها.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -95,7 +95,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>يختار التصفية أعلاه فقط الكيانات التي يكون حقل المستوى الأعلى الخاص بـ <code translate="no">category</code> فيها هو <code translate="no">&quot;search&quot;</code>. ولا يحدد عنصر Struct واحدًا مطابقًا.</p>
+<p>يختار التصفية أعلاه فقط الكيانات التي يكون حقل المستوى الأعلى الخاص بها ( <code translate="no">category</code> ) هو <code translate="no">&quot;search&quot;</code>. ولا يحدد عنصر Struct واحدًا مطابقًا.</p>
 <h2 id="Filter-element-level-vector-search" class="common-anchor-header">تصفية البحث المتجهي على مستوى العنصر<button data-href="#Filter-element-level-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -178,7 +178,7 @@ results = client.search(
 <tr><td><code translate="no">MATCH_ALL</code></td><td>يجب أن تستوفي جميع عناصر Struct الشرط.</td><td><code translate="no">MATCH_ALL(chunks, $[quality_score] &gt; 0.5)</code></td></tr>
 <tr><td><code translate="no">MATCH_LEAST</code></td><td>يجب أن تستوفي عناصر Struct التي لا يقل عددها عن <code translate="no">N</code> الشرط.</td><td><code translate="no">MATCH_LEAST(chunks, $[has_code] == true, threshold=2)</code></td></tr>
 <tr><td><code translate="no">MATCH_MOST</code></td><td>يجب أن تستوفي عناصر Struct التي لا يتجاوز عددها <code translate="no">N</code> الشرط.</td><td><code translate="no">MATCH_MOST(chunks, $[section] == &quot;appendix&quot;, threshold=1)</code></td></tr>
-<tr><td><code translate="no">MATCH_EXACT</code></td><td>يجب أن تستوفي عناصر Struct التي يبلغ عددها بالضبط <code translate="no">N</code> الشرط.</td><td><code translate="no">MATCH_EXACT(chunks, $[section] == &quot;summary&quot;, threshold=1)</code></td></tr>
+<tr><td><code translate="no">MATCH_EXACT</code></td><td>يجب أن تستوفي عناصر Struct التي يبلغ عددها <code translate="no">N</code> بالضبط الشرط.</td><td><code translate="no">MATCH_EXACT(chunks, $[section] == &quot;summary&quot;, threshold=1)</code></td></tr>
 </tbody>
 </table>
 <pre><code translate="no" class="language-python">filter_expr = (
@@ -203,7 +203,7 @@ results = client.search(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>استخدم " <code translate="no">MATCH_ANY</code> " هنا لأن نتيجة البحث في EmbeddingList تكون على مستوى الكيان. يتطلب المرشح أن تكون هناك قطعة واحدة على الأقل في الكيان من نوع " <code translate="no">&quot;index&quot;</code> " ذات جودة عالية، لكن نتيجة البحث نفسها لا تزال تمثل الكيان الأصلي.</p>
-<h2 id="Use-filters-in-hybrid-search" class="common-anchor-header">استخدم المرشحات في البحث المختلط<button data-href="#Use-filters-in-hybrid-search" class="anchor-icon" translate="no">
+<h2 id="Use-filters-in-hybrid-search" class="common-anchor-header">استخدم المرشحات في البحث الهجين<button data-href="#Use-filters-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -252,7 +252,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>تطبق وسيطة <code translate="no">filter</code> شرط الكيان من المستوى الأعلى، بينما يقيد <code translate="no">expr</code> على <code translate="no">chunk_req</code> طلب المتجه على مستوى عنصر StructArray فقط. للاطلاع على تركيبات البحث الهجين المدعومة والقيود الخاصة بالإصدار، راجع <a href="/docs/ar/hybrid-search-with-structarray.md">البحث الهجين باستخدام StructArray</a> <a href="/docs/ar/structarray-limits.md">وقيود StructArray</a>.</p>
+<p>تطبق وسيطة <code translate="no">filter</code> شرط الكيان من المستوى الأعلى، بينما يقيد <code translate="no">expr</code> في <code translate="no">chunk_req</code> طلب المتجه على مستوى عنصر StructArray فقط. للاطلاع على تركيبات البحث الهجين المدعومة والقيود الخاصة بالإصدار، راجع <a href="/docs/ar/hybrid-search-with-structarray.md">البحث الهجين باستخدام StructArray</a> <a href="/docs/ar/structarray-limits.md">وحدود StructArray</a>.</p>
 <h2 id="Predicate-support-summary" class="common-anchor-header">ملخص دعم المسندات<button data-href="#Predicate-support-summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -281,7 +281,7 @@ results = client.hybrid_search(
 <tr><td>الحقول الفرعية للمتجهات</td><td>غير مدعومة كمدخلات للمسندات القياسية في <code translate="no">$[...]</code>. استخدم الحقول الفرعية للمتجهات من خلال البحث المتجهي بدلاً من ذلك.</td></tr>
 </tbody>
 </table>
-<p>بالنسبة للحالات غير المدعومة مثل مسارات JSON، ووظائف حاويات المصفوفات، ووظائف مطابقة النص، والشرط القيم الصفرية في <code translate="no">$[...]</code> ، ووظائف Geometry، وتعبيرات Timestamptz، واستدعاءات الوظائف العامة، راجع <a href="/docs/ar/struct-array-operators.md">StructArray Operators</a>.</p>
+<p>بالنسبة للحالات غير المدعومة مثل مسارات JSON، ووظائف حاويات المصفوفات، ووظائف مطابقة النص، والشرط «null» على <code translate="no">$[...]</code> ، ووظائف Geometry، وتعبيرات Timestamptz، واستدعاءات الوظائف العامة، راجع <a href="/docs/ar/struct-array-operators.md">«StructArray Operators</a>».</p>
 <h2 id="Common-mistakes" class="common-anchor-header">الأخطاء الشائعة<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -322,7 +322,7 @@ results = client.hybrid_search(
       </svg>
     </button></h2><ol>
 <li><p>لمراجعة صيغة تصفية StructArray الكاملة، اقرأ <a href="/docs/ar/struct-array-operators.md">«مشغلات StructArray</a>».</p></li>
-<li><p>لتشغيل عمليات البحث المتجهية غير المفلترة أولاً، اقرأ <a href="/docs/ar/basic-vector-search-with-structarray.md">«البحث المتجهي الأساسي باستخدام StructArray</a>».</p></li>
+<li><p>لتشغيل عمليات البحث المتجهية غير المفلترة أولاً، اقرأ <a href="/docs/ar/basic-vector-search-with-structarray.md">البحث المتجهي الأساسي باستخدام StructArray</a>.</p></li>
 <li><p>لإنشاء فهارس قياسية لفلاتر StructArray المستخدمة بشكل متكرر، اقرأ " <a href="/docs/ar/index-structarray-fields.md">فهرسة حقول StructArray</a>".</p></li>
 <li><p>للتحقق من حدود التصفية والبحث الخاصة بكل إصدار، اقرأ " <a href="/docs/ar/structarray-limits.md">حدود StructArray</a>".</p></li>
 </ol>

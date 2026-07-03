@@ -643,45 +643,51 @@
                     "children": []
                   },
                   {
+                    "label": "Pinyin",
+                    "id": "pinyin-filter.md",
+                    "order": 5,
+                    "children": []
+                  },
+                  {
                     "label": "Length",
                     "id": "length-filter.md",
-                    "order": 5,
+                    "order": 6,
                     "children": []
                   },
                   {
                     "label": "Stop",
                     "id": "stop-filter.md",
-                    "order": 6,
+                    "order": 7,
                     "children": []
                   },
                   {
                     "label": "Decompounder",
                     "id": "decompounder-filter.md",
-                    "order": 7,
+                    "order": 8,
                     "children": []
                   },
                   {
                     "label": "Stemmer",
                     "id": "stemmer-filter.md",
-                    "order": 8,
+                    "order": 9,
                     "children": []
                   },
                   {
                     "label": "Remove Punct",
                     "id": "removepunct-filter.md",
-                    "order": 9,
+                    "order": 10,
                     "children": []
                   },
                   {
                     "label": "Regex",
                     "id": "regex-filter.md",
-                    "order": 10,
+                    "order": 11,
                     "children": []
                   },
                   {
                     "label": "Synonym",
                     "id": "synonym-filter.md",
-                    "order": 11,
+                    "order": 12,
                     "children": []
                   }
                 ]

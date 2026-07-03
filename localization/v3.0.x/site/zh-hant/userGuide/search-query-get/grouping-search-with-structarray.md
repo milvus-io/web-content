@@ -3,7 +3,7 @@ id: grouping-search-with-structarray.md
 title: 使用 StructArray 進行分組搜尋
 summary: >-
   請使用此頁面，將 StructArray 的元素層級搜尋結果依父實體進行分組。當多個 Struct
-  元素符合查詢條件時，元素層級搜尋可能會從同一實體中返回多個搜尋結果。透過分組功能，這些元素搜尋結果將被合併，因此每個父實體最多只會出現一次。
+  元素符合查詢條件時，元素層級搜尋可能會從同一實體中返回多個搜尋結果。透過分組功能，系統會將這些元素搜尋結果合併，使每個父實體最多只出現一次。
 ---
 <h1 id="Grouping-Search-with-StructArray" class="common-anchor-header">使用 StructArray 進行分組搜尋<button data-href="#Grouping-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -169,7 +169,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>頂層謂詞用於篩選候選實體。<code translate="no">element_filter</code> 謂詞則將元素層級向量搜尋限制在符合條件的 Struct 元素上。隨後，分組功能會根據主鍵將符合條件的元素搜尋結果進行彙總。</p>
+<p>頂層謂詞用於篩選候選實體。<code translate="no">element_filter</code> 謂詞則將元素層級向量搜尋限制於符合條件的 Struct 元素。隨後，分組功能會根據主鍵彙總符合條件的元素搜尋結果。</p>
 <h2 id="Use-grouping-in-hybrid-search" class="common-anchor-header">在混合搜尋中使用分組<button data-href="#Use-grouping-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -186,7 +186,7 @@ results = client.search(
         ></path>
       </svg>
     </button></h2><p>與 StructArray 結合的混合分組是一項元素層級功能。僅當所有子搜尋皆針對同一 StructArray 欄位下的元素層級向量欄位時，此功能才受支援。請勿在分組的 StructArray 混合搜尋中使用 EmbeddingList 層級的請求。</p>
-<p>以下範例假設<code translate="no">chunks</code> 的 StructArray 欄位具有兩個元素層級向量子欄位：<code translate="no">chunks[emb]</code> 與<code translate="no">chunks[code_emb]</code> ，且兩者皆使用標準向量度量進行索引。</p>
+<p>以下範例假設<code translate="no">chunks</code> 的 StructArray 欄位有兩個元素層級向量子欄位，分別為<code translate="no">chunks[emb]</code> 和<code translate="no">chunks[code_emb]</code> ，且兩者皆使用常規向量度量進行索引。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest, RRFRanker
 
 index_chunk_req = AnnSearchRequest(
@@ -261,10 +261,10 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>分組搜尋僅適用於元素層級的 StructArray 向量搜尋。EmbeddingList 搜尋及 EmbeddingList 層級的混合搜尋不支援「按...分組」。</p></li>
+<li><p>分組搜尋僅適用於元素層級的 StructArray 向量搜尋。EmbeddingList 搜尋及 EmbeddingList 層級的混合搜尋不支援「group-by」。</p></li>
 <li><p>請將主鍵用作 `<code translate="no">group_by_field</code>`。StructArray 元素層級的分組並非針對任意標量欄位的通用分組操作。</p></li>
 <li><p>請勿將分組搜尋與範圍搜尋結合使用。</p></li>
-<li><p>請勿在分組搜尋中使用<code translate="no">EmbeddingList</code> 查詢或<code translate="no">MAX_SIM*</code> 指標。</p></li>
+<li><p>請勿在分組搜尋中使用 `<code translate="no">EmbeddingList</code> ` 查詢或 `<code translate="no">MAX_SIM*</code> ` 指標。</p></li>
 <li><p>僅當所有子搜尋皆針對同一 StructArray 欄位下的元素層級向量欄位時，才支援混合分組。</p></li>
 <li><p>當混合搜尋同時包含一般向量場、不同的 StructArray 場或 EmbeddingList 層級請求時，則不支援混合分組。</p></li>
 </ul>
@@ -284,11 +284,11 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>將分組功能用於<code translate="no">chunks[emb_list_vector]</code> ，該功能原本是針對 EmbeddingList 搜尋設計的。</p></li>
-<li><p>根據非主鍵的標量欄位進行分組。</p></li>
+<li><p>將分組功能用於 `<code translate="no">chunks[emb_list_vector]</code>`，該字段原本是為 `EmbeddingList` 搜尋而設計的。</p></li>
+<li><p>根據非主鍵標量欄位進行分組。</p></li>
 <li><p>根據多個欄位進行分組。元素層級的 StructArray 分組僅支援主鍵分組。</p></li>
 <li><p>預期分組結果會代表每個匹配的 Struct 元素。分組每項父實體最多只會返回一個結果。</p></li>
-<li><p>假設分組後的元素層級搜尋會重新計算 EmbeddingList 風格的<code translate="no">MAX_SIM*</code> 分數。分組會彙總元素層級的搜尋結果；它並不會改變評分模型。</p></li>
+<li><p>假設分組後的元素層級搜尋會重新計算 EmbeddingList 風格的<code translate="no">MAX_SIM*</code> 分數。分組會彙整元素層級的搜尋結果；它並不會改變評分模型。</p></li>
 <li><p>將<code translate="no">group_by_field</code> 與<code translate="no">radius</code> 或<code translate="no">range_filter</code> 結合使用。</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">下一步<button data-href="#Next-steps" class="anchor-icon" translate="no">

@@ -18,7 +18,7 @@ summary: 概述 Milvus 支持的消息队列（mqType）选项，以及在独立
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 依赖消息队列（预写日志，WAL）来管理最近的变更日志、输出流日志，并提供日志订阅功能。在 Milvus 3.x<strong>中，Woodpecker</strong>是默认的消息队列，无需单独的消息传递基础设施。Pulsar、Kafka 和 RocksMQ 仍支持用于特定场景。</p>
+    </button></h1><p>Milvus 依赖消息队列（预写日志，WAL）来管理最近的变更日志、输出流日志，并提供日志订阅服务。在 Milvus 3.x<strong>中，Woodpecker</strong>是默认的消息队列，无需单独的消息传递基础设施。Pulsar、Kafka 和 RocksMQ 仍支持用于特定场景。</p>
 <h2 id="Supported-message-queues" class="common-anchor-header">支持的消息队列<button data-href="#Supported-message-queues" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +40,7 @@ summary: 概述 Milvus 支持的消息队列（mqType）选项，以及在独立
 </thead>
 <tbody>
 <tr><td><a href="/docs/zh/woodpecker.md">Woodpecker</a></td><td style="text-align:center">✔️（嵌入式）</td><td style="text-align:center">✔️（嵌入式或服务模式）</td><td><strong>Milvus 3.x</strong>（两种模式）</td><td>默认且推荐。基于对象存储的云原生WAL；无需外部服务。</td></tr>
-<tr><td><a href="/docs/zh/mq_pulsar.md">Pulsar</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td>≤ 2.5.x（集群默认）</td><td>受支持，可选外部服务或捆绑提供。</td></tr>
+<tr><td><a href="/docs/zh/mq_pulsar.md">Pulsar</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td>≤ 2.5.x（集群默认）</td><td>受支持，可选外部服务或捆绑方案。</td></tr>
 <tr><td><a href="/docs/zh/mq_kafka.md">Kafka</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td>—</td><td>受支持。仅支持 Kafka 2.x 或 3.x。</td></tr>
 <tr><td><a href="/docs/zh/mq_rocksmq.md">RocksMQ</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✖️</td><td>≤ 2.5.x（独立模式默认）</td><td><strong>仅</strong>支持<strong>独立</strong>模式。</td></tr>
 </tbody>

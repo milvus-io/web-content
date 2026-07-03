@@ -70,7 +70,7 @@ summary: >-
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>Bei einem erfolgreichen Wechsel wird „ <code translate="no">[mqTypeValue=woodpecker]</code> “ protokolliert.</p>
-<p><strong>Schritt 4: (Optional) Stoppen Sie Kafka und führen Sie eine Bereinigung durch.</strong> Bei <strong>integriertem</strong> Kafka entfernen Sie die Kafka-Pods und deren PVCs. Bei <strong>externem</strong> Kafka bereinigen Sie die Milvus-Topics in der externen Kafka-Instanz – diese folgen dem Format <code translate="no">&lt;cluster_prefix&gt;-dml_&lt;seqNo&gt;_&lt;TimeTick&gt;&lt;Version&gt;</code>.</p>
+<p><strong>Schritt 4: (Optional) Stoppen Sie Kafka und führen Sie eine Bereinigung durch.</strong> Bei <strong>integriertem</strong> Kafka entfernen Sie die Kafka-Pods und deren PVCs. Bei <strong>externem</strong> Kafka bereinigen Sie die Milvus-Themen in der externen Kafka-Instanz – diese folgen dem Format <code translate="no">&lt;cluster_prefix&gt;-dml_&lt;seqNo&gt;_&lt;TimeTick&gt;&lt;Version&gt;</code>.</p>
 <div class="alert note">
 <p>Wenn Sie später wieder zu Kafka zurückwechseln möchten, bereinigen Sie zunächst die Daten/Themen, um Konflikte zu vermeiden.</p>
 </div>
@@ -156,7 +156,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p><strong>Schritt 1: Überprüfen Sie, ob die Milvus-Instanz läuft.</strong></p>
-<p><strong>Schritt 2: Führen Sie den MQ-Wechsel durch.</strong> Da der MixCoord-Dienst nicht öffentlich zugänglich ist, führen Sie die Switch-API aus dem MixCoord-Pod heraus aus:</p>
+<p><strong>Schritt 2: Führen Sie den MQ-Wechsel durch.</strong> Da der MixCoord-Dienst nicht nach außen zugänglich ist, führen Sie die Switch-API aus dem MixCoord-Pod heraus aus:</p>
 <pre><code translate="no" class="language-shell">kubectl exec -it &lt;mixcoord-pod&gt; -- \
   curl -X POST http://localhost:9091/management/wal/alter \
   -H &quot;Content-Type: application/json&quot; \
@@ -196,7 +196,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p><strong>Schritt 1: Überprüfen Sie, ob die Milvus-Instanz läuft.</strong></p>
-<p><strong>Schritt 2: Konfigurieren Sie die Verbindung zum Ziel-Kafka und starten Sie Milvus neu.</strong> Tragen Sie die Kafka-Verbindung unter <code translate="no">spec.config</code> ein (der Operator wandelt <code translate="no">spec.config</code> in <code translate="no">user.yaml</code> um) und legen Sie den MQ-Typ fest; durch das Anwenden des CR werden die Pods mit der neuen Konfiguration neu gestartet. Details zu SASL/SSL finden Sie unter <a href="/docs/de/connect_kafka_ssl.md">„Verbindung zu Kafka mit SASL/SSL herstellen</a>“.</p>
+<p><strong>Schritt 2: Konfigurieren Sie die Verbindung zum Ziel-Kafka und starten Sie Milvus neu.</strong> Tragen Sie die Kafka-Verbindung unter <code translate="no">spec.config</code> ein (der Operator wandelt <code translate="no">spec.config</code> in <code translate="no">user.yaml</code> um) und legen Sie den MQ-Typ fest; durch Anwenden des CR werden die Pods mit der neuen Konfiguration neu gestartet. Details zu SASL/SSL finden Sie unter <a href="/docs/de/connect_kafka_ssl.md">„Verbindung zu Kafka mit SASL/SSL herstellen</a>“.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># change_configmap.yaml</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -232,7 +232,7 @@ summary: >-
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>Bei einem erfolgreichen Wechsel wird Folgendes protokolliert: „ <code translate="no">[mqTypeValue=kafka]</code> “.</p>
-<p><strong>Schritt 5: (Optional) Woodpecker-Daten bereinigen.</strong> Löschen Sie die Woodpecker-Daten auf MinIO/S3 (unter <code translate="no">&lt;rootPath&gt;/wp/...</code>, typischerweise <code translate="no">files/wp/...</code>) und die Woodpecker-Metadaten in etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). Wenn Sie später wieder zu Woodpecker zurückwechseln möchten, bereinigen Sie diese Dateien zuerst.</p>
+<p><strong>Schritt 5: (Optional) Woodpecker-Daten bereinigen.</strong> Löschen Sie die Woodpecker-Daten auf MinIO/S3 (unter „ <code translate="no">&lt;rootPath&gt;/wp/...</code> “, typischerweise „ <code translate="no">files/wp/...</code> “) sowie die Woodpecker-Metadaten in etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). Wenn Sie später wieder zu Woodpecker zurückwechseln möchten, bereinigen Sie diese Dateien zunächst.</p>
 <h2 id="Supported-scenarios" class="common-anchor-header">Unterstützte Szenarien<button data-href="#Supported-scenarios" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

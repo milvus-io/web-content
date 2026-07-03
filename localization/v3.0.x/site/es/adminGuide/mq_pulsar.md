@@ -81,7 +81,7 @@ title: Pulsar
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>En Kubernetes v1.25 y versiones posteriores, si se producen problemas con la API de PodDisruptionBudget (PDB) debido al sub-chart de Pulsar incluido, desactive las políticas de PDB de Pulsar:</p>
+<p>En Kubernetes v1.25 y versiones posteriores, si se producen problemas con la API de PodDisruptionBudget (PDB) debido al subgráfico de Pulsar incluido, desactive las políticas de PDB de Pulsar:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> pulsar.bookkeeper.pdb.usePolicy=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsar.broker.pdb.usePolicy=<span class="hljs-literal">false</span> \
@@ -263,7 +263,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Actualización de la versión 2.5.x a la 2.6.x:</strong> <strong>Limitaciones de la cola de mensajes</strong>: Al actualizar a Milvus v3.0-beta, debes mantener tu elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.
+<li><strong>Actualización de la versión 2.5.x a la 2.6.x:</strong> <strong>Limitaciones de la cola de mensajes</strong>: Al actualizar a Milvus v3.0-beta, debe mantener su elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.
 Si utilizas Pulsar y deseas seguir utilizándolo, no cambies la cola de mensajes durante la actualización.</li>
 <li><strong>Pulsar v2 → v3:</strong> consulta <a href="/docs/es/upgrade-pulsar-v3.md">Actualizar Pulsar de la v2 a la v3</a>; para seguir con la v2, consulta <a href="/docs/es/use-pulsar-v2.md">Seguir utilizando Pulsar v2</a>.</li>
 </ul>

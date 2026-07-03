@@ -23,7 +23,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Utiliza esta página para añadir filtrado escalar a la búsqueda vectorial en campos StructArray. El filtrado de StructArray tiene dos niveles: los filtros a nivel de fila seleccionan entidades padre, mientras que los filtros a nivel de elemento restringen qué elementos Struct participan en la búsqueda vectorial a nivel de elemento.</p>
+    </button></h1><p>Utiliza esta página para añadir filtrado escalar a la búsqueda vectorial en campos StructArray. El filtrado de StructArray tiene dos niveles: los filtros a nivel de fila seleccionan entidades padre, mientras que los filtros a nivel de elemento restringen qué elementos de Struct participan en la búsqueda vectorial a nivel de elemento.</p>
 <p>Esta página utiliza la colección « <code translate="no">tech_articles</code> » de <a href="/docs/es/create-structarray-field.md">«Crear un campo StructArray</a>». La colección tiene un campo StructArray denominado « <code translate="no">chunks</code> », con subcampos escalares como « <code translate="no">section</code> », « <code translate="no">page</code> », « <code translate="no">quality_score</code> » y « <code translate="no">has_code</code> », además de subcampos vectoriales para la búsqueda.</p>
 <h2 id="Choose-a-filter-type" class="common-anchor-header">Elige un tipo de filtro<button data-href="#Choose-a-filter-type" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,7 +45,7 @@ summary: >-
 <tr><th>Objetivo</th><th>Uso</th><th>Comportamiento del resultado</th></tr>
 </thead>
 <tbody>
-<tr><td>Filtrar por un campo escalar de nivel superior, como <code translate="no">category</code>.</td><td>Expresión de filtro habitual.</td><td>Selecciona las entidades padre antes o durante la búsqueda.</td></tr>
+<tr><td>Filtrar por un campo escalar de primer nivel, como <code translate="no">category</code>.</td><td>Expresión de filtro habitual.</td><td>Selecciona las entidades padre antes o durante la búsqueda.</td></tr>
 <tr><td>Limita la búsqueda vectorial a nivel de elemento a los elementos Struct que cumplan las condiciones escalares.</td><td><code translate="no">element_filter</code>.</td><td>Busca únicamente los elementos Struct que coincidan y puede devolver las coordenadas de los elementos coincidentes.</td></tr>
 <tr><td>Selecciona entidades en función de si alguno, todos o un número específico de elementos Struct cumplen un predicado.</td><td><code translate="no">MATCH_ANY</code>, <code translate="no">MATCH_ALL</code>, <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> o <code translate="no">MATCH_EXACT</code>.</td><td>Filtrado a nivel de fila. Estos operadores no devuelven desplazamientos por sí mismos.</td></tr>
 </tbody>
@@ -68,7 +68,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilice expresiones de filtro habituales cuando la condición se refiera a la entidad principal, y no a un elemento Struct concreto. Esto funciona tanto con la búsqueda EmbeddingList como con la búsqueda a nivel de elemento.</p>
+    </button></h2><p>Utilice expresiones de filtro habituales cuando la condición se refiera a la entidad principal, y no a un elemento Struct concreto. Esto funciona tanto con la búsqueda de EmbeddingList como con la búsqueda a nivel de elemento.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">from</span> pymilvus.client.embedding_list <span class="hljs-keyword">import</span> EmbeddingList
 
@@ -322,8 +322,8 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>Para revisar la sintaxis completa de los filtros de StructArray, consulta <a href="/docs/es/struct-array-operators.md">Operadores de StructArray</a>.</p></li>
+<li><p>Para revisar la sintaxis completa de los filtros de StructArray, consulta <a href="/docs/es/struct-array-operators.md">«Operadores de StructArray</a>».</p></li>
 <li><p>Para realizar primero búsquedas vectoriales sin filtrar, consulta <a href="/docs/es/basic-vector-search-with-structarray.md">«Búsqueda vectorial básica con StructArray</a>».</p></li>
 <li><p>Para crear índices escalares para filtros de StructArray de uso frecuente, consulta <a href="/docs/es/index-structarray-fields.md">«Indexar campos de StructArray</a>».</p></li>
-<li><p>Para consultar los límites de filtrado y búsqueda específicos de cada versión, consulta <a href="/docs/es/structarray-limits.md">«Límites de StructArray</a>».</p></li>
+<li><p>Para consultar los límites de filtrado y búsqueda específicos de cada versión, lee <a href="/docs/es/structarray-limits.md">«Límites de StructArray</a>».</p></li>
 </ol>

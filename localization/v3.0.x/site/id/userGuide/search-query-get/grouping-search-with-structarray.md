@@ -189,8 +189,8 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pengelompokan hibrida dengan StructArray merupakan fitur tingkat elemen. Fitur ini hanya didukung jika semua pencarian anak menargetkan bidang vektor tingkat elemen di bawah bidang StructArray yang sama. Jangan gunakan permintaan tingkat EmbeddingList dalam pencarian hibrida StructArray yang dikelompokkan.</p>
-<p>Contoh berikut mengasumsikan bahwa bidang StructArray ` <code translate="no">chunks</code> ` memiliki dua subbidang vektor tingkat elemen, ` <code translate="no">chunks[emb]</code> ` dan ` <code translate="no">chunks[code_emb]</code>`, dan keduanya diindeks dengan metrik vektor reguler.</p>
+    </button></h2><p>Pengelompokan hibrida dengan StructArray merupakan fitur tingkat elemen. Fitur ini hanya didukung jika semua sub-pencarian menargetkan bidang vektor tingkat elemen di bawah bidang StructArray yang sama. Jangan gunakan permintaan tingkat EmbeddingList dalam pencarian hibrida StructArray yang dikelompokkan.</p>
+<p>Contoh berikut mengasumsikan bidang StructArray ` <code translate="no">chunks</code> ` memiliki dua subbidang vektor tingkat elemen, ` <code translate="no">chunks[emb]</code> ` dan ` <code translate="no">chunks[code_emb]</code>`, dan keduanya diindeks dengan metrik vektor reguler.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest, RRFRanker
 
 index_chunk_req = AnnSearchRequest(
@@ -221,7 +221,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Dalam contoh ini, kedua sub-permintaan menargetkan bidang vektor tingkat elemen di bawah bidang StructArray yang sama, yaitu <code translate="no">chunks</code>. Pencarian hibrida tidak mendukung pengelompokan tingkat elemen jika mencampurkan bidang vektor biasa, bidang StructArray yang berbeda, atau permintaan tingkat EmbeddingList.</p>
+<p>Dalam contoh ini, kedua sub-permintaan menargetkan bidang vektor tingkat elemen di bawah bidang StructArray yang sama, <code translate="no">chunks</code>. Pencarian hibrida tidak mendukung pengelompokan tingkat elemen jika mencampurkan bidang vektor biasa, bidang StructArray yang berbeda, atau permintaan tingkat EmbeddingList.</p>
 <h2 id="Interpret-grouped-results" class="common-anchor-header">Menafsirkan hasil yang dikelompokkan<button data-href="#Interpret-grouped-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -292,7 +292,7 @@ results = client.hybrid_search(
 <li><p>Pengelompokan berdasarkan bidang skalar non-kunci utama.</p></li>
 <li><p>Pengelompokan berdasarkan beberapa bidang. Pengelompokan StructArray tingkat elemen hanya mendukung pengelompokan berdasarkan kunci utama.</p></li>
 <li><p>Mengharapkan hasil yang dikelompokkan mewakili setiap elemen Struct yang cocok. Pengelompokan mengembalikan paling banyak satu hasil per entitas induk.</p></li>
-<li><p>Menganggap bahwa pencarian tingkat elemen yang dikelompokkan menghitung ulang skor " <code translate="no">MAX_SIM*</code> " bergaya EmbeddingList. Pengelompokan menggabungkan hasil pencocokan tingkat elemen; hal ini tidak mengubah model penilaian.</p></li>
+<li><p>Menganggap bahwa pencarian tingkat elemen yang dikelompokkan menghitung ulang skor <code translate="no">MAX_SIM*</code> bergaya EmbeddingList. Pengelompokan menggabungkan hasil pencocokan tingkat elemen; hal ini tidak mengubah model penilaian.</p></li>
 <li><p>Menggabungkan " <code translate="no">group_by_field</code> " dengan " <code translate="no">radius</code> " atau " <code translate="no">range_filter</code>".</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Langkah selanjutnya<button data-href="#Next-steps" class="anchor-icon" translate="no">
@@ -312,7 +312,7 @@ results = client.hybrid_search(
       </svg>
     </button></h2><ol>
 <li><p>Untuk mempelajari pencarian tingkat elemen tanpa pengelompokan terlebih dahulu, baca " <a href="/docs/id/basic-vector-search-with-structarray.md">Basic Vector Search with StructArray</a>".</p></li>
-<li><p>Untuk menambahkan filter skalar ke pencarian yang dikelompokkan, baca " <a href="/docs/id/filtered-search-with-structarray.md">Pencarian yang Difilter dengan StructArray</a>".</p></li>
+<li><p>Untuk menambahkan filter skalar ke pencarian yang dikelompokkan, baca " <a href="/docs/id/filtered-search-with-structarray.md">Pencarian yang Disaring dengan StructArray</a>".</p></li>
 <li><p>Untuk menggunakan batas skor atau jarak sebagai pengganti pengelompokan, baca " <a href="/docs/id/range-search-with-structarray.md">Pencarian Rentang dengan StructArray</a>".</p></li>
 <li><p>Untuk memeriksa batasan pencarian StructArray, baca <a href="/docs/id/structarray-limits.md">Batasan StructArray</a>.</p></li>
 </ol>

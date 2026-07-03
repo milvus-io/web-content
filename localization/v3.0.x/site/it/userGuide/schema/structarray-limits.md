@@ -44,7 +44,7 @@ summary: >-
 <tr><th>Area</th><th>Limite</th></tr>
 </thead>
 <tbody>
-<tr><td>Struttura dello schema</td><td>Una Struct può essere utilizzata solo come tipo di elemento di un campo Array. La Struct non è supportata come campo di collezione di primo livello.</td></tr>
+<tr><td>Struttura dello schema</td><td>Una Struct può essere utilizzata solo come tipo di elemento di un campo Array. La Struct non è supportata come campo di raccolta di primo livello.</td></tr>
 <tr><td>Schema dei sottocampi</td><td>Tutti gli elementi Struct presenti nello stesso campo StructArray condividono un unico schema Struct predefinito.</td></tr>
 <tr><td>Capacità</td><td><code translate="no">max_capacity</code> è obbligatorio e limita il numero di elementi Struct che un'entità può memorizzare nel campo StructArray.</td></tr>
 <tr><td>Modifiche ai sottocampi</td><td>Una volta creato un campo StructArray, non è possibile aggiungere sottocampi a quel campo StructArray esistente.</td></tr>
@@ -150,7 +150,7 @@ summary: >-
 <tr><td>Ambito del valore nullo</td><td>Il valore nullo si applica all'intero campo StructArray. Ad esempio, <code translate="no">chunks=None</code> è valido solo quando <code translate="no">chunks</code> è nullabile.</td></tr>
 <tr><td>Valore StructArray parzialmente nullo</td><td>Quando un campo StructArray contiene un valore array valido, non mescolare array di sottocampi null con array di sottocampi validi nello stesso valore.</td></tr>
 <tr><td>Aggiunta dinamica di un campo StructArray</td><td>L'aggiunta di un campo StructArray a una raccolta esistente è supportata solo nelle versioni che includono il supporto per i campi StructArray dinamici.</td></tr>
-<tr><td>Requisito di nullabilità per l'aggiunta dinamica</td><td>Un campo StructArray aggiunto a una collezione esistente deve essere nullabile poiché le entità esistenti non dispongono di alcun valore per il nuovo campo.</td></tr>
+<tr><td>Requisito di nullabilità per l'aggiunta dinamica</td><td>Un campo StructArray aggiunto a una raccolta esistente deve essere nullabile poiché le entità esistenti non dispongono di alcun valore per il nuovo campo.</td></tr>
 <tr><td>Entità esistenti dopo l'aggiunta dinamica</td><td>Le entità esistenti restituiscono il valore " <code translate="no">null</code> " per il campo StructArray aggiunto in tutti i suoi sottocampi.</td></tr>
 </tbody>
 </table>
@@ -181,7 +181,7 @@ summary: >-
 <tr><td>Allineamento allo schema</td><td>Ogni elemento Struct deve corrispondere allo schema Struct.</td></tr>
 <tr><td>Capacità</td><td>Il numero di elementi Struct in un'entità non deve superare <code translate="no">max_capacity</code>.</td></tr>
 <tr><td>Dimensioni del vettore</td><td>I valori vettoriali devono corrispondere all'<code translate="no">dim</code> e configurata per i relativi sottocampi vettoriali.</td></tr>
-<tr><td>Duplicazione in modalità di ricerca</td><td>Se sono necessarie sia la ricerca EmbeddingList che quella a livello di elemento, scrivere i vettori in due sottocampi vettoriali distinti.</td></tr>
+<tr><td>Duplicazione in modalità di ricerca</td><td>Se sono necessarie sia la ricerca EmbeddingList che quella a livello di elemento, scrivere i vettori in due sottocampi vettoriali separati.</td></tr>
 </tbody>
 </table>
 <h2 id="Index-and-metric-limits" class="common-anchor-header">Limiti di indice e metrica<button data-href="#Index-and-metric-limits" class="anchor-icon" translate="no">
@@ -205,7 +205,7 @@ summary: >-
 <tr><th>Modalità di ricerca</th><th>Famiglia di metriche</th><th>Livello dei risultati</th></tr>
 </thead>
 <tbody>
-<tr><td>Ricerca EmbeddingList</td><td><code translate="no">MAX_SIM</code>, <code translate="no">MAX_SIM_COSINE</code>, <code translate="no">MAX_SIM_IP</code>, <code translate="no">MAX_SIM_L2</code>, o metriche binarie <code translate="no">MAX_SIM_*</code> </td><td>Risultati a livello di entità.</td></tr>
+<tr><td>Ricerca EmbeddingList</td><td><code translate="no">MAX_SIM</code>, <code translate="no">MAX_SIM_COSINE</code>, <code translate="no">MAX_SIM_IP</code>, <code translate="no">MAX_SIM_L2</code> o metriche binarie <code translate="no">MAX_SIM_*</code> </td><td>Risultati a livello di entità.</td></tr>
 <tr><td>Ricerca a livello di elemento</td><td>Metriche vettoriali regolari quali <code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">COSINE</code>, <code translate="no">HAMMING</code> o <code translate="no">JACCARD</code></td><td>Risultati a livello di elemento che possono includere l’offset dell’elemento corrispondente.</td></tr>
 </tbody>
 </table>

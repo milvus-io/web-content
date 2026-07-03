@@ -21,7 +21,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>使用本页面可将 StructArray 向量搜索与其他向量搜索结合，形成一个混合搜索请求。StructArray 混合搜索可返回实体级结果或元素级结果，具体取决于您组合的<code translate="no">AnnSearchRequest</code> 对象。</p>
-<p>本页面<a href="/docs/zh/create-structarray-field.md">使用“创建 StructArray 字段</a>”中的<code translate="no">tech_articles</code> Collection。该 Collection 包含一个名为<code translate="no">title_vector</code> 的顶级向量字段，以及一个名为<code translate="no">chunks</code> 的 StructArray 字段。<code translate="no">chunks[emb_list_vector]</code> 子字段已为 EmbeddingList 搜索建立索引，而<code translate="no">chunks[emb]</code> 已为元素级搜索建立索引。</p>
+<p>本页面使用<a href="/docs/zh/create-structarray-field.md">来自“创建 StructArray 字段”中的</a> <code translate="no">tech_articles</code> Collection。该 Collection 包含一个名为<code translate="no">title_vector</code> 的顶级向量字段，以及一个名为<code translate="no">chunks</code> 的 StructArray 字段。<code translate="no">chunks[emb_list_vector]</code> 子字段已为 EmbeddingList 搜索建立索引，而<code translate="no">chunks[emb]</code> 已为元素级搜索建立索引。</p>
 <h2 id="How-hybrid-search-applies-to-StructArray" class="common-anchor-header">混合搜索如何应用于 StructArray<button data-href="#How-hybrid-search-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -152,7 +152,7 @@ results = client.hybrid_search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>当所有 `<code translate="no">AnnSearchRequest</code> ` 对象均针对同一 `StructArray` 字段下的元素级向量子字段时，混合搜索可通过重新排序保留元素级候选结果。这是唯一一种最终结果仍保持为元素级的 `StructArray` 混合模式。</p>
+    </button></h2><p>当所有 `<code translate="no">AnnSearchRequest</code> ` 对象均针对同一 `StructArray` 字段下的元素级向量字段时，混合搜索可通过重新排序保留元素级候选结果。这是唯一一种最终结果仍保持为元素级的 `StructArray` 混合模式。</p>
 <p>以下示例假设<code translate="no">chunks</code> 的 StructArray 字段包含两个元素级向量子字段：<code translate="no">chunks[emb]</code> 和<code translate="no">chunks[code_emb]</code> ，且两者均使用常规向量度量。</p>
 <pre><code translate="no">index_chunk_req = AnnSearchRequest(
     data=[query_vector],
@@ -191,7 +191,7 @@ results = client.hybrid_search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>这两个<code translate="no">AnnSearchRequest</code> 对象均在<code translate="no">chunks</code> 下搜索向量字段。相同的零基偏移量指向同一个Struct元素，因此混合Reranker可以直接对元素候选项进行排序。在此模式下请勿设置<code translate="no">element_scope</code> ，因为不会执行实体级别的折叠。</p>
+<p>这两个<code translate="no">AnnSearchRequest</code> 对象均在<code translate="no">chunks</code> 下搜索向量字段。相同的零基偏移量指向同一个Struct元素，因此混合重新排序器可以直接对元素候选结果进行排序。在此模式下请勿设置<code translate="no">element_scope</code> ，因为不会执行实体级别的折叠。</p>
 <h2 id="Collapse-element-level-hits-for-entity-level-hybrid-search" class="common-anchor-header">为实体级混合搜索折叠元素级命中结果<button data-href="#Collapse-element-level-hits-for-entity-level-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -247,7 +247,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>在此示例中，<code translate="no">title_req</code> 属于实体级，因此最终的混合结果也是实体级的。<code translate="no">chunk_req</code> 请求首先从<code translate="no">chunks[emb]</code> 返回元素命中结果，然后通过汇总同一实体的三个最佳元素得分，将返回的元素进行合并。如果在需要实体级合并时省略了<code translate="no">element_scope</code> ，则合并策略将默认采用<code translate="no">max</code> 。</p>
+<p>在此示例中，<code translate="no">title_req</code> 属于实体级，因此最终的混合结果也是实体级的。<code translate="no">chunk_req</code> 请求首先从<code translate="no">chunks[emb]</code> 返回元素命中结果，然后通过汇总同一实体的三个最佳元素得分来合并返回的元素。如果在需要实体级合并时省略了<code translate="no">element_scope</code> ，则合并策略将默认采用<code translate="no">max</code> 。</p>
 <h2 id="Choose-a-collapse-strategy" class="common-anchor-header">选择聚合策略<button data-href="#Choose-a-collapse-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -314,7 +314,7 @@ results = client.hybrid_search(
 <tr><th>最终候选范围</th><th>结果键</th><th>偏移量行为</th><th>发生条件</th></tr>
 </thead>
 <tbody>
-<tr><td>实体级别</td><td>主键。</td><td>最终结果中不包含元素偏移量。</td><td>混合请求包含 Collection 级向量字段、EmbeddingList 请求，或不同 StructArray 字段下的元素级请求。</td></tr>
+<tr><td>实体级别</td><td>主键。</td><td>最终结果中不包含元素偏移量。</td><td>混合请求包含 Collection 级向量字段、EmbeddingList 请求，或位于不同 StructArray 字段下的元素级请求。</td></tr>
 <tr><td>元素级别</td><td>主键加上父级 StructArray 字段加上元素偏移量。</td><td>当 API 或 SDK 公开时，可返回所选元素的偏移量。</td><td>所有<code translate="no">AnnSearchRequest</code> 对象均为元素级，且位于同一个StructArray字段下。</td></tr>
 </tbody>
 </table>

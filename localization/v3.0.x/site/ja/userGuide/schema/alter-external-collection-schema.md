@@ -40,7 +40,7 @@ beta: Milvus 3.0.x
 <li><p>外部コレクションでは現在、作成後のフィールド追加がサポートされています。フィールドの削除、フィールド名の変更、フィールドのデータ型の変更、ベクトルの次元の変更、<code translate="no">external_field</code> の再マッピングなど、その他のスキーマ変更はサポートされていません。</p></li>
 <li><p>追加できるのは、外部データソースにすでに存在するフィールドのみです。この操作は、既存の外部フィールドをMilvusフィールドにマッピングするものです。外部データソースに新しいフィールドを作成したり、ソースデータをバックフィルしたりすることはありません。</p></li>
 <li><p>既存の外部コレクションへの<code translate="no">SPARSE_FLOAT_VECTOR</code> フィールドの追加はサポートされていません。</p></li>
-<li><p>既存の外部コレクションへの StructArray フィールドの追加はサポートされていません。外部コレクションに StructArray フィールドが必要な場合は、コレクションの作成時にコレクションスキーマ内で定義してください。</p></li>
+<li><p>既存の外部コレクションへの StructArray フィールドの追加はサポートされていません。外部コレクションに StructArray フィールドが必要な場合は、コレクションの作成時にコレクションスキーマで定義してください。</p></li>
 </ul>
 <h2 id="Add-a-field" class="common-anchor-header">フィールドの追加<button data-href="#Add-a-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -90,7 +90,7 @@ client.add_collection_field(
 <span class="highlighted-wrapper-line">    external_field=<span class="hljs-string">&quot;score&quot;</span>,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>この例では、<code translate="no">score</code> が Milvus のフィールド名であり、<code translate="no">external_field=&quot;score&quot;</code> は外部データソースの<code translate="no">score</code> フィールドにマッピングされます。コレクションがすでに作成された後にフィールドが追加されるため、<code translate="no">nullable=True</code> を設定します。</p>
+<p>この例では、<code translate="no">score</code> が Milvus のフィールド名であり、<code translate="no">external_field=&quot;score&quot;</code> は外部データソースの<code translate="no">score</code> フィールドにマッピングされます。コレクションがすでに作成された後にフィールドを追加するため、<code translate="no">nullable=True</code> を設定します。</p>
 <h3 id="Add-a-vector-field" class="common-anchor-header">ベクトルフィールドの追加<button data-href="#Add-a-vector-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

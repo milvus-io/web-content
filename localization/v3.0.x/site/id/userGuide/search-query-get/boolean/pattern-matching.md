@@ -58,7 +58,7 @@ res = client.query(
 </thead>
 <tbody>
 <tr><td><code translate="no">VARCHAR</code> bidang</td><td>Ya</td><td>Ya</td><td>Target umum untuk pencocokan pola pada bidang string.</td></tr>
-<tr><td><code translate="no">JSON</code> jalur dengan tipe konversi <code translate="no">VARCHAR</code> </td><td>Ya</td><td>Ya</td><td>Nilai jalur JSON harus berupa string agar pencocokan berhasil. Jika Anda membuat indeks pada jalur JSON untuk percepatan, atur ` <code translate="no">json_cast_type=&quot;varchar&quot;</code>`.</td></tr>
+<tr><td><code translate="no">JSON</code> jalur dengan tipe konversi <code translate="no">VARCHAR</code> </td><td>Ya</td><td>Ya</td><td>Nilai jalur JSON harus berupa string agar pencocokan berhasil. Jika Anda membuat indeks pada jalur JSON untuk percepatan, atur <code translate="no">json_cast_type=&quot;varchar&quot;</code>.</td></tr>
 <tr><td><code translate="no">ARRAY&lt;VARCHAR&gt;</code> elemen</td><td>Ya</td><td>Ya</td><td>Cocokkan elemen tertentu berdasarkan indeks, seperti <code translate="no">tags[0]</code>. Pencocokan pola <strong>tidak</strong> memindai semua elemen; pencocokan hanya berlaku untuk elemen pada indeks yang ditentukan.</td></tr>
 <tr><td>Numerik, Boolean, vektor, <code translate="no">TEXT</code>, atau target non-<code translate="no">VARCHAR</code> lainnya</td><td>Tidak</td><td>Tidak</td><td>Pencocokan pola hanya tersedia untuk nilai <code translate="no">VARCHAR</code>, jalur JSON yang diterjemahkan menjadi string, atau elemen <code translate="no">ARRAY&lt;VARCHAR&gt;</code> yang diindeks.</td></tr>
 </tbody>
@@ -79,7 +79,7 @@ res = client.query(
         ></path>
       </svg>
     </button></h2><p>Pilih operator paling sederhana yang dapat mengekspresikan pola yang Anda butuhkan.</p>
-<p>Jika Anda memerlukan pencocokan string yang tepat, kami menyarankan Anda menggunakan <code translate="no">==</code> alih-alih pencocokan pola. Gunakan <code translate="no">LIKE</code> atau regex hanya jika filter perlu mencocokkan suatu pola.</p>
+<p>Jika Anda memerlukan pencocokan string yang tepat, kami menyarankan Anda menggunakan ` <code translate="no">==</code> ` alih-alih pencocokan pola. Gunakan ` <code translate="no">LIKE</code> ` atau regex hanya jika filter perlu mencocokkan suatu pola.</p>
 <table>
 <thead>
 <tr><th>Persyaratan</th><th>Operator yang direkomendasikan</th><th>Contoh</th><th>Deskripsi</th></tr>
@@ -164,7 +164,7 @@ res = client.query(
       </svg>
     </button></h3><p>Gunakan ` <code translate="no">LIKE</code> ` untuk pencocokan awalan, akhiran, mengandung, dan satu karakter pada posisi tetap. ` <code translate="no">LIKE</code> ` tidak mendukung kelas karakter seperti ` <code translate="no">[0-9]</code>`, alternatif seperti ` <code translate="no">error|failed</code>`, pengulangan seperti ` <code translate="no">{4}</code>`, jangkar seperti ` <code translate="no">^</code> ` atau ` <code translate="no">$</code>`, atau bendera tidak peka huruf besar-kecil seperti ` <code translate="no">(?i)</code>`. Gunakan regex untuk pola-pola tersebut.</p>
 <p>Gunakan ` <code translate="no">==</code> ` untuk kesamaan string penuh yang tepat. Gunakan ` <code translate="no">LIKE</code> ` hanya jika filter memerlukan pencocokan karakter pengganti.</p>
-<h3 id="Escaping-wildcards-in-a-LIKE-pattern" class="common-anchor-header">Mengescap karakter pengganti dalam pola LIKE<button data-href="#Escaping-wildcards-in-a-LIKE-pattern" class="anchor-icon" translate="no">
+<h3 id="Escaping-wildcards-in-a-LIKE-pattern" class="common-anchor-header">Mengescap karakter wildcard dalam pola LIKE<button data-href="#Escaping-wildcards-in-a-LIKE-pattern" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -179,13 +179,13 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Dalam pola <code translate="no">LIKE</code>, <code translate="no">%</code> cocok dengan nol atau lebih karakter, dan <code translate="no">_</code> cocok dengan tepat satu karakter. Untuk mencocokkan <code translate="no">%</code>, <code translate="no">_</code>, atau <code translate="no">\</code> secara literal, lakukan escaping pada karakter tersebut dengan tanda backslash (<code translate="no">\</code>):</p>
+    </button></h3><p>Dalam pola <code translate="no">LIKE</code>, <code translate="no">%</code> cocok dengan nol atau lebih karakter, sedangkan <code translate="no">_</code> cocok dengan tepat satu karakter. Untuk mencocokkan <code translate="no">%</code>, <code translate="no">_</code>, atau <code translate="no">\</code> secara literal, lakukan escaping pada karakter tersebut dengan tanda backslash (<code translate="no">\</code>):</p>
 <ul>
 <li><code translate="no">name LIKE r&quot;\%&quot;</code> cocok dengan nilai literal <code translate="no">%</code>.</li>
 <li><code translate="no">name LIKE r&quot;\_%&quot;</code> cocok dengan nilai yang dimulai dengan karakter literal <code translate="no">_</code>.</li>
 <li><code translate="no">name LIKE r&quot;\\%&quot;</code> cocok dengan nilai yang dimulai dengan tanda garis miring terbalik literal.</li>
 </ul>
-<p>Literal string mentah, ditulis sebagai <code translate="no">r&quot;...&quot;</code> atau <code translate="no">r'...'</code>, mempertahankan tanda garis miring terbalik apa adanya dalam ekspresi filter Milvus. Penggunaan literal string mentah direkomendasikan untuk <code translate="no">LIKE</code> dan pola regex yang mengandung tanda garis miring terbalik. Tanpa literal string mentah, literal string biasa tetap memproses urutan pelarian sebelum pola dievaluasi, sehingga mungkin diperlukan lebih banyak tanda garis miring terbalik.</p>
+<p>Literal string mentah, ditulis sebagai <code translate="no">r&quot;...&quot;</code> atau <code translate="no">r'...'</code>, mempertahankan tanda garis miring terbalik apa adanya dalam ekspresi filter Milvus. Penggunaan ini direkomendasikan untuk <code translate="no">LIKE</code> dan pola regex yang mengandung tanda garis miring terbalik. Tanpa string mentah, literal string biasa tetap memproses urutan pelarian sebelum pola dievaluasi, sehingga mungkin diperlukan lebih banyak tanda garis miring terbalik.</p>
 <h2 id="Use-regex--Milvus-30x" class="common-anchor-header">Gunakan regex<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Use-regex--Milvus-30x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -306,7 +306,7 @@ res = client.query(
 </thead>
 <tbody>
 <tr><td><code translate="no">json_field[&quot;path&quot;] =~ &quot;pattern&quot;</code></td><td>Tidak</td><td>Hanya cocok dengan nilai string yang memenuhi pola regex.</td></tr>
-<tr><td><code translate="no">json_field[&quot;path&quot;] !~ &quot;pattern&quot;</code></td><td>Ya</td><td>Mengembalikan entitas yang jalurnya hilang, null, bukan string, atau berupa string yang tidak sesuai dengan pola regex.</td></tr>
+<tr><td><code translate="no">json_field[&quot;path&quot;] !~ &quot;pattern&quot;</code></td><td>Ya</td><td>Mengembalikan entitas yang jalurnya hilang, null, bukan string, atau string yang tidak sesuai dengan pola regex.</td></tr>
 </tbody>
 </table>
 <h2 id="Accelerate-pattern-matching-with-indexes" class="common-anchor-header">Mempercepat pencocokan pola dengan indeks<button data-href="#Accelerate-pattern-matching-with-indexes" class="anchor-icon" translate="no">
@@ -324,8 +324,8 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus mendukung beberapa jenis indeks pada bidang string yang dapat digunakan bersama dengan filter " <code translate="no">LIKE</code> " dan filter regex pada bidang " <code translate="no">VARCHAR</code> " atau jalur string JSON, seperti <code translate="no">NGRAM</code>, <code translate="no">STL_SORT</code>, <code translate="no">INVERTED</code>, dan <code translate="no">BITMAP</code>. Pencocokan pola dapat berfungsi tanpa indeks, tetapi indeks dapat meningkatkan kinerja pada dataset besar.</p>
-<p>Efektivitas indeks bergantung pada ekspresi pola, apakah Milvus dapat mengekstrak substring literal tetap, serta kardinalitas dan distribusi bidang target. Pola bergaya awalan seperti <code translate="no">name LIKE &quot;Prod%&quot;</code> mungkin memerlukan strategi indeks yang berbeda dibandingkan pola infiks atau sufiks seperti <code translate="no">description LIKE &quot;%vector%&quot;</code> atau <code translate="no">filename LIKE &quot;%.json&quot;</code>.</p>
+    </button></h2><p>Milvus mendukung beberapa jenis indeks pada bidang string yang dapat digunakan bersama dengan filter " <code translate="no">LIKE</code> " dan regex pada bidang " <code translate="no">VARCHAR</code> " atau jalur string JSON, seperti <code translate="no">NGRAM</code>, <code translate="no">STL_SORT</code>, <code translate="no">INVERTED</code>, dan <code translate="no">BITMAP</code>. Pencocokan pola dapat berfungsi tanpa indeks, tetapi indeks dapat meningkatkan kinerja pada dataset besar.</p>
+<p>Efektivitas indeks bergantung pada ekspresi pola, apakah Milvus dapat mengekstrak substring literal tetap, serta kardinalitas dan distribusi bidang target. Pola bergaya awalan seperti <code translate="no">name LIKE &quot;Prod%&quot;</code> mungkin lebih diuntungkan oleh strategi indeks yang berbeda dibandingkan pola infiks atau sufiks seperti <code translate="no">description LIKE &quot;%vector%&quot;</code> atau <code translate="no">filename LIKE &quot;%.json&quot;</code>.</p>
 <p>Gunakan tabel berikut sebagai titik awal, lalu lakukan pengujian kinerja dengan beban kerja Anda sendiri:</p>
 <table>
 <thead>
@@ -334,6 +334,6 @@ res = client.query(
 <tbody>
 <tr><td>Mengandung substring literal tetap, seperti <code translate="no">message =~ &quot;error.*timeout&quot;</code> atau <code translate="no">message LIKE &quot;%database%&quot;</code></td><td><code translate="no">NGRAM</code></td><td>Berguna ketika Milvus dapat mengekstrak substring literal yang bermakna dari pola tersebut. Untuk detailnya, lihat <a href="/docs/id/ngram.md">NGRAM</a>.</td></tr>
 <tr><td>Filter string awalan, tepat, atau mirip kesetaraan, terutama pada bidang dengan kardinalitas rendah hingga sedang</td><td><code translate="no">STL_SORT</code>, <code translate="no">INVERTED</code>, atau <code translate="no">BITMAP</code></td><td>Mungkin lebih efektif jika bidang memiliki nilai yang berulang atau jika filter mendekati pencocokan eksak. Untuk detailnya, lihat <a href="/docs/id/stl-sort.md">STL_SORT</a>, <a href="/docs/id/inverted.md">INVERTED</a>, dan <a href="/docs/id/bitmap.md">BITMAP</a>.</td></tr>
-<tr><td>Pola regex tanpa literal tetap, atau pola yang didominasi oleh kelas karakter, token pendek, atau karakter pengganti</td><td>Lakukan pengujian kinerja sebelum mengandalkan percepatan indeks</td><td>Pola-pola ini mungkin memberikan selektivitas indeks yang terbatas dan dapat beralih ke pemindaian yang lebih luas.</td></tr>
+<tr><td>Pola regex tanpa literal tetap, atau pola yang didominasi oleh kelas karakter, token pendek, atau karakter pengganti</td><td>Lakukan pengujian kinerja sebelum mengandalkan akselerasi indeks</td><td>Pola-pola ini mungkin memberikan selektivitas indeks yang terbatas dan dapat beralih ke pemindaian yang lebih luas.</td></tr>
 </tbody>
 </table>

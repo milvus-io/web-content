@@ -4,7 +4,7 @@ title: StructArray를 사용한 기본 벡터 검색
 summary: >-
   이 페이지를 사용하여 StructArray 필드 내의 벡터 하위 필드에 대해 벡터 검색을 실행할 수 있습니다. StructArray는 두
   가지 기본 벡터 검색 모드를 지원합니다. 하나는 각 엔티티에 저장된 임베딩 목록에 점수를 매기는 ‘임베딩 목록 검색(EmbeddingList
-  search)’이고, 다른 하나는 각 Struct 요소를 개별적으로 검색하는 ‘요소 수준 검색’입니다.
+  search)’이고, 다른 하나는 각 Struct 요소를 독립적으로 검색하는 ‘요소 수준 검색’입니다.
 ---
 <h1 id="Basic-Vector-Search-with-StructArray" class="common-anchor-header">StructArray를 사용한 기본 벡터 검색<button data-href="#Basic-Vector-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -196,10 +196,10 @@ results = client.search(
 <tr><th>결과 항목</th><th>EmbeddingList 검색</th><th>요소 수준 검색</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">id</code></td><td>일치하는 엔티티의 기본 키.</td><td>일치하는 Struct 요소를 포함하는 엔티티의 기본 키.</td></tr>
+<tr><td><code translate="no">id</code></td><td>일치한 엔티티의 기본 키.</td><td>일치하는 Struct 요소를 포함하는 엔티티의 기본 키.</td></tr>
 <tr><td><code translate="no">distance</code> 또는 점수</td><td>쿼리 임베딩 목록과 저장된 임베딩 목록 간의 점수 또는 거리.</td><td>쿼리 벡터와 일치하는 Struct 요소 벡터 간의 점수 또는 거리.</td></tr>
 <tr><td><code translate="no">offset</code></td><td>해당 사항 없음.</td><td>반환 시 일치하는 Struct 요소의 0을 기준으로 한 위치.</td></tr>
-<tr><td>반복되는 기본 키</td><td>결과는 엔티티 수준이므로 단일 쿼리의 경우 중복 기본 키가 발생하지 않을 것으로 예상됩니다.</td><td>동일한 엔티티 내의 여러 Struct 요소가 일치할 수 있으므로 발생할 수 있습니다.</td></tr>
+<tr><td>반복되는 기본 키</td><td>결과는 엔티티 수준이므로 단일 쿼리의 경우 중복 기본 키가 발생하지 않을 것으로 예상됩니다.</td><td>동일한 엔티티 내의 여러 Struct 요소가 일치할 수 있으므로 가능합니다.</td></tr>
 <tr><td>요청된 StructArray 출력 필드</td><td>일치하는 엔티티에서 반환됩니다.</td><td>대상 API 및 SDK에서 지원하는 요소 수준 히트 셰이프와 함께 반환됩니다.</td></tr>
 </tbody>
 </table>
@@ -223,8 +223,8 @@ results = client.search(
 <li><p>일반 벡터 메트릭으로 인덱싱된 벡터 하위 필드에 대해 EmbeddingList 쿼리를 사용하는 경우.</p></li>
 <li><p><code translate="no">MAX_SIM*</code> 메트릭으로 인덱싱된 벡터 하위 필드에 일반 벡터 쿼리를 사용하는 경우.</p></li>
 <li><p>요소 수준 검색( <code translate="no">limit</code> )이 그만큼의 고유한 상위 엔티티를 반환할 것이라고 기대하는 경우. 이 검색은 요소 일치 결과를 반환합니다.</p></li>
-<li><p>EmbeddingList 검색이 하나의 특정 요소 오프셋을 반환할 것으로 예상하는 경우. 엔티티 수준의 일치 결과를 반환합니다.</p></li>
-<li><p>두 검색 모드 모두에 하나의 벡터 하위 필드를 재사용하는 경우. 각 벡터 하위 필드는 하나의 인덱스만 허용하므로 별도의 벡터 하위 필드를 사용해야 합니다.</p></li>
+<li><p>EmbeddingList 검색이 하나의 특정 요소 오프셋을 반환할 것으로 예상했으나, 엔티티 수준의 일치 결과를 반환합니다.</p></li>
+<li><p>두 검색 모드 모두에 하나의 벡터 하위 필드를 재사용합니다. 각 벡터 하위 필드는 하나의 인덱스만 허용하므로 별도의 벡터 하위 필드를 사용하십시오.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">다음 단계<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"

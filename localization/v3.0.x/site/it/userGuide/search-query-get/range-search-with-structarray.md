@@ -5,7 +5,7 @@ summary: >-
   Utilizza questa pagina per eseguire una ricerca per intervallo sui sottocampi
   vettoriali di StructArray. La ricerca per intervallo restituisce i risultati
   vettoriali il cui punteggio o distanza rientra in un intervallo specificato.
-  Per i campi StructArray, utilizza la ricerca per intervallo con la ricerca
+  Per i campi StructArray, utilizza la ricerca per intervallo con ricerca
   vettoriale a livello di elemento, in cui ogni elemento Struct viene cercato in
   modo indipendente.
 ---
@@ -81,7 +81,7 @@ summary: >-
 <tr><td>Dati della query</td><td>La query è un vettore regolare, non un <code translate="no">EmbeddingList</code>.</td></tr>
 </tbody>
 </table>
-<p>Per la configurazione dell’indice, consultare <a href="/docs/it/index-structarray-fields.md">Campi StructArray dell’indice</a>.</p>
+<p>Per la configurazione dell’indice, consultare la sezione <a href="/docs/it/index-structarray-fields.md">Campi StructArray dell’indice</a>.</p>
 <h2 id="Use-radius-and-rangefilter" class="common-anchor-header">Utilizzare radius e range_filter<button data-href="#Use-radius-and-rangefilter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -350,5 +350,5 @@ results = client.hybrid_search(
 <li><p>Per conoscere le due modalità di ricerca vettoriale di base con StructArray, leggere <a href="/docs/it/basic-vector-search-with-structarray.md">Ricerca vettoriale di base con StructArray</a>.</p></li>
 <li><p>Per aggiungere filtri scalari alla ricerca per intervallo, consultare <a href="/docs/it/filtered-search-with-structarray.md">Ricerca filtrata con StructArray</a>.</p></li>
 <li><p>Per restituire al massimo un risultato per entità padre, ove supportato, leggere <a href="/docs/it/grouping-search-with-structarray.md">Ricerca raggruppata con StructArray</a>.</p></li>
-<li><p>Per verificare i limiti di ricerca specifici per versione, leggere <a href="/docs/it/structarray-limits.md">Limiti di StructArray</a>.</p></li>
+<li><p>Per verificare i limiti di ricerca specifici per versione, consultare <a href="/docs/it/structarray-limits.md">Limiti di StructArray</a>.</p></li>
 </ol>

@@ -6,7 +6,7 @@ summary: >-
   eines StructArray-Feldes durchführen. StructArray unterstützt zwei
   grundlegende Vektorsuchmodi: die „EmbeddingList“-Suche, bei der eine in jeder
   Entität gespeicherte Einbettungsliste ausgewertet wird, und die Suche auf
-  Elementebene, bei der jedes Struct-Element einzeln durchsucht wird.
+  Elementebene, bei der jedes Struct-Element unabhängig durchsucht wird.
 ---
 <h1 id="Basic-Vector-Search-with-StructArray" class="common-anchor-header">Einfache Vektorsuche mit StructArray<button data-href="#Basic-Vector-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -81,7 +81,7 @@ summary: >-
 <tr><td>Metrikfamilie</td><td><code translate="no">MAX_SIM*</code>, wie z. B. <code translate="no">MAX_SIM_COSINE</code>.</td><td>Reguläre Vektormetriken, wie z. B. „ <code translate="no">COSINE</code> “, „ <code translate="no">IP</code> “ oder „ <code translate="no">L2</code> “.</td></tr>
 <tr><td>Was ein Treffer darstellt</td><td>Eine übereinstimmende Entität, deren StructArray-Vektor-Unterfeld der Einbettungsliste der Abfrage ähnelt.</td><td>Ein übereinstimmendes Struct-Element innerhalb des StructArray-Feldes.</td></tr>
 <tr><td>Granularität der Ergebnisse</td><td>Entitäts-Ebene.</td><td>Struct-Element-Ebene.</td></tr>
-<tr><td>Offset</td><td>Nicht zutreffend.</td><td>Gibt die Position des übereinstimmenden Struct-Elements bei der Rückgabe, beginnend bei Null, an.</td></tr>
+<tr><td>Offset</td><td>Nicht zutreffend.</td><td>Gibt die Position des gefundenen Struct-Elements (ab Null) bei der Rückgabe an.</td></tr>
 <tr><td>Typische Verwendung</td><td>ColBERT, ColPali und andere Retrieval-Muster mit später Interaktion.</td><td>Retrieval auf Chunk-, Passage-, Clip-, Patch- oder Faktenebene.</td></tr>
 </tbody>
 </table>
@@ -131,9 +131,9 @@ results = client.search(
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
         <span class="hljs-built_in">print</span>(hit[<span class="hljs-string">&quot;id&quot;</span>], hit[<span class="hljs-string">&quot;distance&quot;</span>], hit[<span class="hljs-string">&quot;entity&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>In diesem Suchmodus steuert „ <code translate="no">limit</code> “, wie viele Entitäten für jede Abfrage zurückgegeben werden. Die Ausgabe kann StructArray-Unterfelder enthalten, aber der Treffer selbst steht für die übereinstimmende übergeordnete Entität und nicht für ein bestimmtes Struct-Element.</p>
+<p>In diesem Suchmodus steuert „ <code translate="no">limit</code> “, wie viele Entitäten für jede Abfrage zurückgegeben werden. Die Ausgabe kann StructArray-Unterfelder enthalten, aber der Treffer selbst repräsentiert die übereinstimmende übergeordnete Entität und nicht ein bestimmtes Struct-Element.</p>
 <div class="alert note">
-<p>Eine vollständige Anleitung im Stil von ColBERT oder ColPali finden Sie unter <a href="/docs/de/search-with-embedding-lists.md">„Suche mit Embedding-Listen</a>“. Diese Seite behandelt lediglich das grundlegende Suchverhalten von StructArray.</p>
+<p>Eine vollständige Anleitung im Stil von ColBERT oder ColPali finden Sie unter <a href="/docs/de/search-with-embedding-lists.md">„Suche mit Einbettungslisten</a>“. Diese Seite behandelt lediglich das grundlegende Suchverhalten von StructArray.</p>
 </div>
 <h2 id="Run-element-level-search" class="common-anchor-header">Suche auf Elementebene durchführen<button data-href="#Run-element-level-search" class="anchor-icon" translate="no">
       <svg translate="no"

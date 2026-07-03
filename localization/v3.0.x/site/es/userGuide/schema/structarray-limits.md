@@ -5,7 +5,7 @@ summary: >-
   La compatibilidad con StructArray abarca la definición del esquema, las cargas
   de datos de inserción, la indexación, los modos de búsqueda y los filtros
   específicos de StructArray. Utiliza esta página como referencia de límites
-  antes de basarte en el comportamiento de StructArray en un entorno de
+  antes de confiar en el comportamiento de StructArray en un entorno de
   producción.
 ---
 <h1 id="StructArray-Limits" class="common-anchor-header">Límites de StructArray<button data-href="#StructArray-Limits" class="anchor-icon" translate="no">
@@ -261,7 +261,7 @@ summary: >-
 <ul>
 <li><p>Utilice « <code translate="no">$[subfield]</code> » únicamente dentro de operadores de StructArray.</p></li>
 <li><p>Utilice subcampos escalares para los predicados escalares.</p></li>
-<li><p>No utilice subcampos vectoriales como entradas de predicados escalares de « <code translate="no">$[...]</code> ».</p></li>
+<li><p>No utilices subcampos vectoriales como entradas de predicados escalares de « <code translate="no">$[...]</code> ».</p></li>
 <li><p>La sintaxis de ruta JSON, las funciones JSON, las funciones de contenedores de matrices, las funciones de coincidencia de texto, las funciones de geometría/SIG y las expresiones Timestamptz no son compatibles con los predicados a nivel de elemento de StructArray.</p></li>
 <li><p>Es preferible utilizar comparaciones booleanas explícitas, como « <code translate="no">$[has_code] == true</code> », en lugar de expresiones booleanas simples.</p></li>
 </ul>

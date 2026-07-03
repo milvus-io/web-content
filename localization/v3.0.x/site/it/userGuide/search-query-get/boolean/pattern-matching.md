@@ -79,7 +79,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Scegli l’operatore più semplice che esprima il pattern di cui hai bisogno.</p>
+    </button></h2><p>Scegli l’operatore più semplice che esprima il modello di cui hai bisogno.</p>
 <p>Se è necessaria una corrispondenza esatta della stringa, si consiglia di utilizzare <code translate="no">==</code> anziché la corrispondenza dei pattern. Utilizzare <code translate="no">LIKE</code> o regex solo quando il filtro deve corrispondere a un pattern.</p>
 <table>
 <thead>
@@ -95,7 +95,7 @@ res = client.query(
 <tr><td>Escludi i valori che corrispondono a un modello regex</td><td><code translate="no">!~</code></td><td><code translate="no">message !~ &quot;^DEBUG&quot;</code></td><td>Esclude le stringhe che iniziano con <code translate="no">DEBUG</code>.</td></tr>
 </tbody>
 </table>
-<p>Utilizza <code translate="no">LIKE</code> per una semplice corrispondenza con caratteri jolly. Utilizza l’espressione regolare quando il modello richiede classi di caratteri, ripetizioni, alternative come <code translate="no">error|failed</code>, ancore o corrispondenze senza distinzione tra maiuscole e minuscole.</p>
+<p>Utilizza <code translate="no">LIKE</code> per una semplice corrispondenza con caratteri jolly. Utilizza regex quando il modello richiede classi di caratteri, ripetizioni, alternanze come <code translate="no">error|failed</code>, ancore o corrispondenze senza distinzione tra maiuscole e minuscole.</p>
 <h2 id="Use-LIKE" class="common-anchor-header">Utilizzare LIKE<button data-href="#Use-LIKE" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -180,7 +180,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Nei modelli <code translate="no">LIKE</code>, <code translate="no">%</code> corrisponde a zero o più caratteri e <code translate="no">_</code> corrisponde esattamente a un carattere. Per trovare una corrispondenza letterale con <code translate="no">%</code>, <code translate="no">_</code> o <code translate="no">\</code>, si deve eseguire l'escape del carattere con una barra rovesciata (<code translate="no">\</code>):</p>
+    </button></h3><p>Nei modelli <code translate="no">LIKE</code>, <code translate="no">%</code> corrisponde a zero o più caratteri e <code translate="no">_</code> corrisponde esattamente a un carattere. Per trovare una corrispondenza letterale con <code translate="no">%</code>, <code translate="no">_</code> o <code translate="no">\</code>, si deve sfuggire il carattere con una barra rovesciata (<code translate="no">\</code>):</p>
 <ul>
 <li><code translate="no">name LIKE r&quot;\%&quot;</code> corrisponde al valore letterale <code translate="no">%</code>.</li>
 <li><code translate="no">name LIKE r&quot;\_%&quot;</code> corrisponde ai valori che iniziano con il carattere letterale <code translate="no">_</code>.</li>
@@ -228,12 +228,12 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>I letterali stringa grezzi sono consigliati per i modelli regex che contengono barre rovesciate. In una stringa grezza, scritta come <code translate="no">r&quot;...&quot;</code> o <code translate="no">r'...'</code>, le barre rovesciate vengono passate al motore regex così come sono. Ciò evita l'escape aggiuntivo richiesto dai normali letterali stringa.</p>
+    </button></h3><p>I letterali stringa grezzi sono consigliati per i modelli regex che contengono barre rovesciate. In una stringa grezza, scritta come <code translate="no">r&quot;...&quot;</code> o <code translate="no">r'...'</code>, le barre rovesciate vengono passate al motore regex alla lettera. Ciò evita l'escape aggiuntivo richiesto dai normali letterali stringa.</p>
 <p>Ad esempio:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ r&quot;\d{4}-\d{2}-\d{2}&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Questo pattern trova corrispondenza con stringhe che contengono un valore simile a una data, come <code translate="no">2026-07-01</code>.</p>
-<p>Senza una stringa raw, le stringhe letterali ordinarie elaborano le sequenze di escape prima che il pattern regex venga valutato, quindi pattern come <code translate="no">\d</code>, <code translate="no">\s</code> o caratteri letterali con escape potrebbero richiedere barre rovesciate aggiuntive.</p>
+<p>Senza una stringa raw, le stringhe letterali ordinarie elaborano le sequenze di escape prima che il pattern regex venga valutato, quindi pattern come <code translate="no">\d</code>, <code translate="no">\s</code> o caratteri letterali con escape potrebbero richiedere ulteriori barre rovesciate.</p>
 <h3 id="Common-regex-patterns" class="common-anchor-header">Modelli di espressioni regolari comuni<button data-href="#Common-regex-patterns" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -271,7 +271,7 @@ res = client.query(
 <p>Quando si effettuano corrispondenze letterali con i metacaratteri delle espressioni regolari, è necessario eseguire l'escape all'interno del pattern. Ad esempio, per trovare un punto letterale (<code translate="no">\.</code> nell'espressione regolare), scrivere <code translate="no">\\.</code> in una stringa di filtro Python:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;email =~ &quot;@gmail\\.com$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Nota: i filtri regex di Milvus seguono la sintassi RE2. Se un pattern regex utilizza una sintassi non supportata da RE2 o è altrimenti non valido, Milvus rifiuta l’espressione del filtro. Per i dettagli sui metacaratteri regex, i flag e il comportamento di corrispondenza, consultare il riferimento <a href="https://github.com/google/re2/wiki/syntax">alla sintassi RE2</a>.</p>
+<p>Nota: i filtri regex di Milvus seguono la sintassi RE2. Se un pattern regex utilizza una sintassi non supportata da RE2 o è comunque non valido, Milvus rifiuta l’espressione del filtro. Per i dettagli sui metacaratteri regex, i flag e il comportamento di corrispondenza, consultare il riferimento <a href="https://github.com/google/re2/wiki/syntax">alla sintassi RE2</a>.</p>
 <h3 id="Matching-behavior" class="common-anchor-header">Comportamento di corrispondenza<button data-href="#Matching-behavior" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

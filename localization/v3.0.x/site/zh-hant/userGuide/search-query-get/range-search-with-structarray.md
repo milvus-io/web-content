@@ -48,7 +48,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>若您僅需最接近的 Struct 元素，請先<a href="/docs/zh-hant/basic-vector-search-with-structarray.md">使用 StructArray 進行基本向量搜尋</a>。當結果必須滿足分數或距離邊界（而非僅限前 K 名排名）時，請使用範圍搜尋。</p>
+<p>若您僅需最接近的 Struct 元素，請先<a href="/docs/zh-hant/basic-vector-search-with-structarray.md">使用 StructArray 進行基本向量搜尋</a>。當結果必須滿足分數或距離的邊界條件，而非僅滿足前 K 名排名時，請使用範圍搜尋。</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">開始之前<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -159,7 +159,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>在此範例中，<code translate="no">COSINE</code> 為相似度型指標，因此結果範圍大於<code translate="no">radius</code> 且小於或等於<code translate="no">range_filter</code> 。當結果返回時，<code translate="no">offset</code> 值可識別<code translate="no">chunks</code> 陣列中對應的 Struct 元素。</p>
+<p>在此範例中，<code translate="no">COSINE</code> 為相似度型指標，因此結果範圍大於<code translate="no">radius</code> 且小於或等於<code translate="no">range_filter</code> 。當結果返回時，<code translate="no">offset</code> 值會識別出<code translate="no">chunks</code> 陣列中匹配的 Struct 元素。</p>
 <h2 id="Add-scalar-filters" class="common-anchor-header">新增標量篩選器<button data-href="#Add-scalar-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -257,7 +257,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>在此範例中，僅有 `<code translate="no">chunks[emb]</code> ` 子請求會使用範圍搜尋參數。StructArray 請求仍遵循元素層級語意：範圍邊界適用於混合搜尋將結果合併並重新排序之前所找到的 Struct 元素命中項目。</p>
+<p>在此範例中，僅有 `<code translate="no">chunks[emb]</code> ` 子請求會使用範圍搜尋參數。StructArray 請求仍遵循元素層級語義：範圍邊界適用於混合搜尋將結果合併並重新排序之前所找到的 Struct 元素命中項目。</p>
 <h2 id="Interpret-range-results" class="common-anchor-header">解析範圍結果<button data-href="#Interpret-range-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -324,7 +324,7 @@ results = client.hybrid_search(
 <li><p>針對<code translate="no">chunks[emb_list_vector]</code> 執行範圍搜尋，該指標原本是為 EmbeddingList 搜尋所設計。</p></li>
 <li><p>在元素層級範圍搜尋中，使用 `<code translate="no">MAX_SIM_COSINE</code> ` 取代常規指標（例如 `<code translate="no">COSINE</code> `）。</p></li>
 <li><p>使用<code translate="no">EmbeddingList</code> 查詢，而非標準向量查詢。</p></li>
-<li><p>預期範圍搜尋結果在父實體層級下是唯一的。範圍搜尋會返回符合條件的 Struct 元素命中結果。</p></li>
+<li><p>預期範圍搜尋結果在父實體層級下是唯一的。範圍搜尋會返回符合條件的 Struct 元素搜尋結果。</p></li>
 <li><p>使用 `<code translate="no">chunks.emb</code> ` 取代必需的子欄位路徑語法 `<code translate="no">chunks[emb]</code>`。</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">後續步驟<button data-href="#Next-steps" class="anchor-icon" translate="no">

@@ -42,7 +42,7 @@ title: Pulsar
 <tr><td>2.4.x e precedenti</td><td>Pulsar v2</td><td>Pulsar v2</td></tr>
 </tbody>
 </table>
-<p>A partire da Milvus 2.5, il chart Helm di Milvus e Milvus Operator distribuiscono <strong>Pulsar v3</strong> per impostazione predefinita; Pulsar v2 rimane compatibile. Vedi <a href="/docs/it/upgrade-pulsar-v3.md">Aggiornamento di Pulsar dalla versione v2 alla v3</a> e <a href="/docs/it/use-pulsar-v2.md">Continuare a utilizzare Pulsar v2</a>.</p>
+<p>A partire da Milvus 2.5, il chart Helm di Milvus e Milvus Operator distribuiscono <strong>Pulsar v3</strong> per impostazione predefinita; Pulsar v2 rimane compatibile. Vedere <a href="/docs/it/upgrade-pulsar-v3.md">Aggiornamento di Pulsar dalla versione v2 alla v3</a> e <a href="/docs/it/use-pulsar-v2.md">Continuare a utilizzare Pulsar v2</a>.</p>
 <h2 id="Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="common-anchor-header">Distribuzione di un cluster Milvus con Pulsar tramite Helm<button data-href="#Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -81,7 +81,7 @@ title: Pulsar
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Su Kubernetes v1.25 e versioni successive, se si riscontrano problemi con l’API PodDisruptionBudget (PDB) derivanti dal sottografico Pulsar integrato, disabilitare le politiche PDB di Pulsar:</p>
+<p>Su Kubernetes v1.25 e versioni successive, se si riscontrano problemi con l’API PodDisruptionBudget (PDB) derivanti dal sub-chart di Pulsar integrato, disabilitare le policy PDB di Pulsar:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> pulsar.bookkeeper.pdb.usePolicy=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsar.broker.pdb.usePolicy=<span class="hljs-literal">false</span> \

@@ -47,7 +47,7 @@ summary: >-
 <tbody>
 <tr><td>Pencarian EmbeddingList</td><td>Tidak didukung.</td><td>Tidak berlaku.</td></tr>
 <tr><td>Pencarian tingkat elemen</td><td>Gunakan kueri vektor biasa dengan ` <code translate="no">radius</code> ` dan, secara opsional, ` <code translate="no">range_filter</code>`.</td><td>Tingkat elemen struktur.</td></tr>
-<tr><td>Pencarian hibrida</td><td>Didukung jika permintaan StructArray menargetkan bidang vektor tingkat elemen. Permintaan tingkat EmbeddingList tidak mendukung pencarian rentang.</td><td>Pencarian sub-tingkat elemen, kemudian pemeringkatan ulang hibrida.</td></tr>
+<tr><td>Pencarian hibrida</td><td>Didukung jika permintaan StructArray menargetkan bidang vektor tingkat elemen. Permintaan tingkat EmbeddingList tidak mendukung pencarian rentang.</td><td>Pencarian sub-tingkat elemen, kemudian penentuan peringkat ulang hibrida.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -122,7 +122,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Contoh berikut mencari potongan-potongan individual yang vektor <code translate="no">chunks[emb]</code> -nya cukup mirip dengan vektor kueri. Setiap hasil yang cocok mewakili elemen Struct yang cocok.</p>
+    </button></h2><p>Contoh berikut mencari potongan-potongan individual yang vektor <code translate="no">chunks[emb]</code> -nya cukup mirip dengan vektor kueri. Setiap hasil yang cocok mewakili elemen Struct yang sesuai.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -304,7 +304,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Jangan gunakan kueri ` <code translate="no">EmbeddingList</code> ` atau metrik ` <code translate="no">MAX_SIM*</code> ` untuk pencarian rentang pada subbidang vektor StructArray. Pencarian tingkat EmbeddingList tidak mendukung pencarian rentang.</p></li>
+<li><p>Jangan gunakan kueri " <code translate="no">EmbeddingList</code> " atau metrik " <code translate="no">MAX_SIM*</code> " untuk pencarian rentang pada subbidang vektor StructArray. Pencarian tingkat EmbeddingList tidak mendukung pencarian rentang.</p></li>
 <li><p>Jangan menggabungkan pencarian rentang dengan pencarian pengelompokan. Jika Anda memerlukan satu hasil per entitas induk, jalankan pencarian tingkat elemen tanpa parameter rentang dan gunakan pengelompokan jika didukung.</p></li>
 <li><p>Pencarian rentang hibrida didukung untuk bidang vektor tingkat elemen StructArray. Fitur ini tidak didukung untuk permintaan StructArray tingkat EmbeddingList.</p></li>
 </ul>
@@ -348,6 +348,6 @@ results = client.hybrid_search(
     </button></h2><ol>
 <li><p>Untuk mempelajari dua mode pencarian vektor StructArray dasar, baca " <a href="/docs/id/basic-vector-search-with-structarray.md">Pencarian Vektor Dasar dengan StructArray</a>".</p></li>
 <li><p>Untuk menambahkan filter skalar ke pencarian rentang, baca " <a href="/docs/id/filtered-search-with-structarray.md">Pencarian Terfilter dengan StructArray</a>".</p></li>
-<li><p>Untuk mengembalikan paling banyak satu hasil per entitas induk di mana hal ini didukung, baca " <a href="/docs/id/grouping-search-with-structarray.md">Pencarian Berkelompok dengan StructArray</a>".</p></li>
+<li><p>Untuk mengembalikan paling banyak satu hasil per entitas induk di mana hal ini didukung, baca <a href="/docs/id/grouping-search-with-structarray.md">Pencarian Berkelompok dengan StructArray</a>.</p></li>
 <li><p>Untuk memeriksa batasan pencarian berdasarkan versi, baca <a href="/docs/id/structarray-limits.md">Batasan StructArray</a>.</p></li>
 </ol>

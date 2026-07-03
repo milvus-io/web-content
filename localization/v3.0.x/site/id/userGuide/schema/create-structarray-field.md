@@ -106,7 +106,7 @@ summary: >-
 <tr><td><code translate="no">Array</code></td><td>Tidak didukung</td><td>Subbidang geometri dan fungsi GIS tidak didukung dalam bidang StructArray.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Tidak didukung</td><td>Subbidang teks tidak didukung dalam bidang StructArray.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Tidak didukung</td><td>Subbidang timestamptz dan ekspresi berbasis waktu tidak didukung dalam bidang StructArray.</td></tr>
-<tr><td><code translate="no">Array</code>, <code translate="no">ArrayOfVector</code>, <code translate="no">Struct</code>, atau <code translate="no">ArrayOfStruct</code></td><td>Tidak didukung</td><td>Bidang StructArray tidak dapat berisi array bersarang, array vektor bersarang, bidang Struct bersarang, atau bidang Array-of-Struct bersarang.</td></tr>
+<tr><td><code translate="no">Array</code>, <code translate="no">ArrayOfVector</code>, <code translate="no">Struct</code>, atau <code translate="no">ArrayOfStruct</code></td><td>Tidak didukung</td><td>Bidang StructArray tidak boleh berisi array bersarang, array vektor bersarang, bidang Struct bersarang, atau bidang Array-of-Struct bersarang.</td></tr>
 </tbody>
 </table>
 <p>Untuk dukungan versi tertentu, perilaku nullable, dan batasan lainnya, lihat <a href="/docs/id/structarray-limits.md">Batasan StructArray</a>.</p>

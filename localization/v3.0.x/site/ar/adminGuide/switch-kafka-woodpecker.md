@@ -124,7 +124,7 @@ summary: >-
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>يُسجل التبديل الناجح الرسالة التالية: <code translate="no">[mqTypeValue=kafka]</code>.</p>
-<p><strong>الخطوة 5: (اختياري) قم بإزالة بيانات Woodpecker.</strong> احذف بيانات Woodpecker الموجودة على MinIO/S3 (ضمن <code translate="no">&lt;rootPath&gt;/wp/...</code> ، وعادةً ما تكون <code translate="no">files/wp/...</code>) وبيانات تعريف Woodpecker في etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). إذا كنت تخطط للعودة إلى Woodpecker لاحقًا، فقم بإزالة هذه الملفات أولاً.</p>
+<p><strong>الخطوة 5: (اختياري) قم بإزالة بيانات Woodpecker.</strong> احذف بيانات Woodpecker الموجودة على MinIO/S3 (تحت <code translate="no">&lt;rootPath&gt;/wp/...</code> ، وعادةً ما تكون <code translate="no">files/wp/...</code>) وبيانات تعريف Woodpecker في etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). إذا كنت تخطط للعودة إلى Woodpecker لاحقًا، فقم بإزالة هذه الملفات أولاً.</p>
 <h2 id="With-Milvus-Operator" class="common-anchor-header">باستخدام Milvus Operator<button data-href="#With-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -218,7 +218,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">kubectl patch -f change_configmap.yaml --patch-file change_configmap.yaml --type merge
 <button class="copy-code-btn"></button></code></pre>
-<p>انتظر حتى تصبح جميع البودات جاهزة، ثم تأكد من أن تكوين الوصول إلى Kafka قد تم تضمينه في تكوين Milvus.</p>
+<p>انتظر حتى تصبح جميع البودات جاهزة، ثم تأكد من أن تكوين الوصول إلى Kafka قد تم تحويله إلى تكوين Milvus.</p>
 <p><strong>الخطوة 3: تنفيذ التبديل إلى MQ.</strong></p>
 <div class="alert note">
 <p>تأكد من أن Kafka الهدف لا يحتوي على مواضيع Milvus من تكوين سابق. إذا كان هذا هو التبديل الأول إلى Kafka، فتخط هذه الملاحظة؛ وإلا فقم أولاً بتنظيف مواضيع Milvus المتبقية التي تحمل نفس الأسماء.</p>

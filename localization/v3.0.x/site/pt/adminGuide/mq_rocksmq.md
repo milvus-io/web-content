@@ -34,7 +34,7 @@ title: RocksMQ
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Apenas Standalone</strong> — O RocksMQ <strong>não</strong> é suportado no Milvus Distributed (cluster). Consulte a <a href="/docs/pt/mqtype-overview.md#Supported-message-queues">matriz de suporte à fila de mensagens</a>.</li>
+<li><strong>Apenas Standalone</strong> — o RocksMQ <strong>não</strong> é suportado no Milvus Distributed (cluster). Consulte a <a href="/docs/pt/mqtype-overview.md#Supported-message-queues">matriz de suporte à fila de mensagens</a>.</li>
 <li>O RocksMQ é fornecido com o Milvus, pelo que não é necessário instalar uma versão separada.</li>
 <li>Era a fila de mensagens autónoma predefinida nas versões anteriores do Milvus e foi substituída pelo Woodpecker incorporado no Milvus 3.x.</li>
 </ul>

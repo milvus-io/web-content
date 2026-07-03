@@ -26,4 +26,4 @@ summary: >-
 <li><strong><a href="/docs/ar/object-storage.md">تخزين الكائنات</a></strong> — يخزن Milvus ملفات الفهرس والسجلات الثنائية في MinIO أو AWS S3 أو أي نظام تخزين كائنات سحابي آخر متوافق مع S3.</li>
 <li><strong><a href="/docs/ar/mqtype-overview.md">قائمة انتظار الرسائل</a></strong> — يستخدم Milvus سجل الكتابة المسبقة (WAL): Woodpecker (الافتراضي)، أو Pulsar، أو Kafka، أو RocksMQ.</li>
 </ul>
-<p>بشكل افتراضي، يعمل النشر الجديد لـ Milvus 3.x باستخدام <strong>Woodpecker</strong> كقائمة انتظار الرسائل، <strong>وetcd</strong> للبيانات الوصفية، <strong>وMinIO</strong> لتخزين الكائنات — دون الحاجة إلى بنية تحتية إضافية للرسائل.</p>
+<p>بشكل افتراضي، يعمل النشر الجديد لـ Milvus 3.x باستخدام <strong>Woodpecker</strong> كقائمة انتظار الرسائل، <strong>وetcd</strong> للبيانات الوصفية، <strong>وMinIO</strong> لتخزين الكائنات — دون الحاجة إلى بنية تحتية إضافية للمراسلة.</p>

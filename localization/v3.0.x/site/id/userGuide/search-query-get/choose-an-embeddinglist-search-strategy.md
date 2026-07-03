@@ -146,7 +146,7 @@ summary: >-
 </div>
 <ul>
 <li><p><strong>Cocok untuk:</strong> pencarian dokumen visual, embedding patch multimodal, ruang embedding dengan tingkat diskriminasi rendah, daftar embedding besar di mana TokenANN tidak praktis.</p></li>
-<li><p><strong>Kurang cocok:</strong> korpus yang sering berubah, embedding dengan tingkat diskriminasi tinggi dan distribusi panjang dokumen yang sangat tidak seimbang, serta beban kerja di mana biaya pelatihan tidak dapat diterima.</p></li>
+<li><p><strong>Kurang cocok:</strong> korpus yang sering berubah, embedding dengan tingkat diskriminasi tinggi dan distribusi panjang dokumen yang sangat tidak seimbang, beban kerja di mana biaya pelatihan tidak dapat diterima.</p></li>
 <li><p><strong>Parameter penting:</strong><code translate="no">lemur_hidden_dim</code>, <code translate="no">lemur_num_train_samples</code>, <code translate="no">lemur_num_epochs</code>, <code translate="no">lemur_batch_size</code>, <code translate="no">lemur_learning_rate</code>, <code translate="no">lemur_seed</code>, dan <code translate="no">lemur_num_layers</code>.</p></li>
 </ul>
 <hr>
@@ -189,7 +189,7 @@ summary: >-
 <tbody>
 <tr><td><code translate="no">tokenann</code></td><td><code translate="no">emb_list_strategy=&quot;tokenann&quot;</code></td><td>Pembuatan indeks</td><td><code translate="no">tokenann</code></td><td>Gunakan secara eksplisit jika Anda menginginkan perilaku pengindeksan vektor elemen default atau saat DiskANN digunakan.</td></tr>
 <tr><td><code translate="no">muvera</code></td><td><code translate="no">emb_list_strategy=&quot;muvera&quot;</code></td><td>Pembuatan indeks</td><td><code translate="no">tokenann</code></td><td>Gunakan saat Anda menginginkan pengambilan data yang dikodekan pada tingkat baris tanpa pelatihan.</td></tr>
-<tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_num_projections</code></td><td>Pembuatan indeks</td><td><code translate="no">4</code></td><td>Mengontrol jumlah proyeksi SimHash. Nilai yang lebih tinggi akan membuat lebih banyak bucket dan dapat meningkatkan kualitas pengkodean, tetapi juga meningkatkan dimensi yang dikodekan.</td></tr>
+<tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_num_projections</code></td><td>Pembuatan indeks</td><td><code translate="no">4</code></td><td>Mengontrol jumlah proyeksi SimHash. Nilai yang lebih tinggi akan membuat lebih banyak bucket dan mungkin meningkatkan kualitas pengkodean, tetapi juga meningkatkan dimensi yang dikodekan.</td></tr>
 <tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_num_repeats</code></td><td>Pembuatan indeks</td><td><code translate="no">7</code></td><td>Mengontrol berapa banyak pengkodean FDE independen yang digabungkan. Nilai yang lebih tinggi mungkin meningkatkan ketahanan tetapi meningkatkan biaya indeks/pencarian.</td></tr>
 <tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_seed</code></td><td>Pembuatan indeks</td><td><code translate="no">42</code></td><td>Ditetapkan untuk proyeksi acak yang dapat direproduksi, terutama dalam pengujian dan perbandingan benchmark.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">emb_list_strategy=&quot;lemur&quot;</code></td><td>Pembuatan indeks</td><td><code translate="no">tokenann</code></td><td>Gunakan ketika kompresi tingkat baris yang dipelajari diperkirakan akan bekerja lebih baik daripada proyeksi acak tetap.</td></tr>
@@ -280,7 +280,7 @@ index_params.add_index(
 <div class="alert note">
 <p><strong>Gunakan parameter per-indeks untuk pemilihan strategi.</strong> Pengaturan default berkas konfigurasi Milvus berlaku secara luas untuk indeks dengan jenis dan tahap yang sama. Gunakan parameter <code translate="no">create_index</code> ketika koleksi atau bidang yang berbeda memerlukan strategi EmbeddingList yang berbeda.</p>
 </div>
-<h2 id="Configure-Candidate-Retrieval-at-Search-Time" class="common-anchor-header">Konfigurasikan Pengambilan Kandidat pada Waktu Pencarian<button data-href="#Configure-Candidate-Retrieval-at-Search-Time" class="anchor-icon" translate="no">
+<h2 id="Configure-Candidate-Retrieval-at-Search-Time" class="common-anchor-header">Konfigurasikan Pengambilan Kandidat pada Saat Pencarian<button data-href="#Configure-Candidate-Retrieval-at-Search-Time" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -295,7 +295,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Strategi ini menentukan cara indeks dibangun. Pada saat pencarian, gunakan <code translate="no">retrieval_ann_ratio</code> untuk mengontrol berapa banyak kandidat tahap pertama yang diambil sebelum pemeringkatan ulang MaxSim. Nilai yang lebih tinggi biasanya meningkatkan recall tetapi meningkatkan latensi.</p>
+    </button></h2><p>Strategi ini menentukan cara indeks dibangun. Pada saat pencarian, gunakan <code translate="no">retrieval_ann_ratio</code> untuk mengontrol berapa banyak kandidat tahap pertama yang diambil sebelum penataan ulang MaxSim. Nilai yang lebih tinggi biasanya meningkatkan recall tetapi meningkatkan latensi.</p>
 <pre><code translate="no" class="language-python">results = client.search(
     collection_name=collection_name,
     data=[query_embedding_list],
@@ -379,7 +379,7 @@ index_params.add_index(
 </ol>
 <table>
 <thead>
-<tr><th>### Utamakan Kualitas Mulailah dengan ` <code translate="no">tokenann</code>`. Gunakan sebagai patokan untuk kualitas aproksimasi MaxSim.</th><th>### Seimbang Cobalah <code translate="no">muvera</code> saat Anda membutuhkan biaya yang lebih rendah tanpa perlu menambahkan pipeline pelatihan.</th><th>### Terkompresi Cobalah <code translate="no">lemur</code> jika kompresi tingkat baris yang dipelajari kemungkinan akan mengungguli proyeksi acak tetap.</th></tr>
+<tr><th>### Kualitas diutamakan Mulailah dengan ` <code translate="no">tokenann</code>`. Gunakan sebagai patokan untuk kualitas aproksimasi MaxSim.</th><th>### Seimbang Cobalah <code translate="no">muvera</code> saat Anda membutuhkan biaya yang lebih rendah tanpa perlu menambahkan pipeline pelatihan.</th><th>### Terkompresi Cobalah <code translate="no">lemur</code> jika kompresi tingkat baris yang dipelajari kemungkinan akan mengungguli proyeksi acak tetap.</th></tr>
 </thead>
 <tbody>
 </tbody>

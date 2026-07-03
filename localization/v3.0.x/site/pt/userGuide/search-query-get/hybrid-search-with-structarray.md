@@ -97,7 +97,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A pesquisa EmbeddingList num subcampo vetorial StructArray é ao nível da entidade na pesquisa híbrida. Comporta-se como uma solicitação de pesquisa vetorial ao nível da entidade e não devolve um único deslocamento de elemento Struct correspondente.</p>
+    </button></h2><p>A pesquisa EmbeddingList num subcampo vetorial StructArray é ao nível da entidade na pesquisa híbrida. Funciona como uma solicitação de pesquisa vetorial ao nível da entidade e não devolve um único deslocamento de elemento Struct correspondente.</p>
 <pre><code translate="no">from pymilvus import AnnSearchRequest, MilvusClient, RRFRanker
 from pymilvus.client.embedding_list import EmbeddingList
 
@@ -210,7 +210,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><p>Se uma pesquisa híbrida combinar um <code translate="no">AnnSearchRequest</code> ao nível do elemento StructArray com um pedido de vetor ao nível da coleção, um pedido EmbeddingList ou um pedido ao nível do elemento num campo StructArray diferente, o âmbito final dos candidatos é ao nível da entidade. Neste caso, cada <code translate="no">AnnSearchRequest</code> ao nível do elemento StructArray é agrupado em candidatos ao nível da entidade antes da reclassificação híbrida.</p>
-<p>Utilize « <code translate="no">element_scope</code> » dentro do « <code translate="no">params</code> » do « <code translate="no">AnnSearchRequest</code> » ao nível do elemento StructArray quando precisar de controlar a forma como vários elementos correspondentes da mesma entidade são agrupados.</p>
+<p>Utilize « <code translate="no">element_scope</code> » dentro do « <code translate="no">params</code> » do « <code translate="no">AnnSearchRequest</code> » ao nível do elemento do StructArray quando precisar de controlar a forma como vários elementos correspondentes da mesma entidade são agrupados.</p>
 <pre><code translate="no">title_req = AnnSearchRequest(
     data=[query_vector],
     anns_field=<span class="hljs-string">&quot;title_vector&quot;</span>,
@@ -342,7 +342,7 @@ results = client.hybrid_search(
 <li><p><code translate="no">topk_sum</code> e <code translate="no">topk_avg</code> requerem um valor positivo de <code translate="no">topk</code>. Outras estratégias de colapso não devem incluir <code translate="no">topk</code>.</p></li>
 <li><p>Os pedidos de StructArray ao nível da EmbeddingList não suportam pesquisa por intervalo nem agrupamento.</p></li>
 <li><p>A agrupamento híbrido é suportada apenas para pesquisas híbridas ao nível do elemento do mesmo StructArray e apenas por chave primária.</p></li>
-<li><p>Não combine a pesquisa por intervalo com a agrupamento por.</p></li>
+<li><p>Não combine a pesquisa por intervalo com o agrupamento.</p></li>
 </ul>
 <h2 id="Common-mistakes" class="common-anchor-header">Erros comuns<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"

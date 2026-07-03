@@ -25,7 +25,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>As estratégias de pesquisa da EmbeddingList determinam a forma como o Milvus constrói um índice aproximado de candidatos para a pesquisa da EmbeddingList. A estratégia predefinida é « <code translate="no">tokenann</code> ». Pode mudar para « <code translate="no">muvera</code> » ou « <code translate="no">lemur</code> » quando a lista de embeddings for grande, o TokenANN for demasiado dispendioso ou uma representação aprendida/comprimida ao nível da linha for mais adequada. O resultado final continua a ser produzido pelo reclassificação do MaxSim quando a opção « <code translate="no">emb_list_rerank</code> » está ativada.</p>
+    </button></h1><p>As estratégias de pesquisa da EmbeddingList determinam como o Milvus constrói um índice aproximado de candidatos para a pesquisa da EmbeddingList. A estratégia predefinida é « <code translate="no">tokenann</code> ». Pode mudar para « <code translate="no">muvera</code> » ou « <code translate="no">lemur</code> » quando a lista de embeddings for grande, o TokenANN for demasiado dispendioso ou uma representação aprendida/comprimida ao nível da linha for mais adequada. O resultado final continua a ser produzido pelo reclassificação do MaxSim quando a opção « <code translate="no">emb_list_rerank</code> » está ativada.</p>
 <h2 id="Why-Search-Strategies-Exist" class="common-anchor-header">Por que razão existem estratégias de pesquisa<button data-href="#Why-Search-Strategies-Exist" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -45,7 +45,7 @@ summary: >-
 <p>Isto proporciona um melhor poder de representação, mas o MaxSim exato é dispendioso em grande escala. Uma pesquisa MaxSim por força bruta teria de comparar os vetores de consulta com todos os vetores em todas as linhas candidatas. Isso é normalmente demasiado lento para uma pesquisa em produção.</p>
 <table>
 <thead>
-<tr><th>### Problema - Cada linha pode conter muitos vetores. - A aplicação exata do MaxSim em todas as linhas é dispendiosa. - O tamanho do índice e a latência da pesquisa podem aumentar rapidamente.</th><th>### Estratégia - Utilizar um método de recuperação aproximado na primeira fase. - Recuperar mais candidatos do que os topK solicitados. - Reordenar os candidatos com o MaxSim exato.</th></tr>
+<tr><th>### Problema - Cada linha pode conter muitos vetores. - O MaxSim exato em todas as linhas é dispendioso. - O tamanho do índice e a latência de pesquisa podem aumentar rapidamente.</th><th>### Estratégia - Utilizar um método de recuperação aproximado na primeira fase. - Recuperar mais candidatos do que os topK solicitados. - Reordenar os candidatos com o MaxSim exato.</th></tr>
 </thead>
 <tbody>
 </tbody>
@@ -199,7 +199,7 @@ summary: >-
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_batch_size</code></td><td>Construção do índice</td><td><code translate="no">512</code></td><td>Ajuste de acordo com o rendimento do treino e a utilização de memória.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_learning_rate</code></td><td>Construção do índice</td><td><code translate="no">0.001</code></td><td>Ajuste quando o treino estiver instável ou convergir demasiado lentamente.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_seed</code></td><td>Criação do índice</td><td><code translate="no">42</code></td><td>Defina para execuções de treino reprodutíveis.</td></tr>
-<tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_num_layers</code></td><td>Criação de índice</td><td><code translate="no">2</code></td><td>Aumente apenas quando o corpus necessitar de um extrator de características mais expressivo e se puder suportar o custo adicional de treino.</td></tr>
+<tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_num_layers</code></td><td>Criação de índice</td><td><code translate="no">2</code></td><td>Aumente apenas quando o corpus necessitar de um extrator de características mais expressivo e for possível suportar o custo adicional de treino.</td></tr>
 <tr><td>Todas as estratégias</td><td><code translate="no">retrieval_ann_ratio</code></td><td>Pesquisa</td><td><code translate="no">3.0</code></td><td>Aumente para recuperar mais candidatos na primeira fase e melhorar a taxa de recuperação; diminua para reduzir a latência.</td></tr>
 <tr><td>Todas as estratégias</td><td><code translate="no">emb_list_rerank</code></td><td>Pesquisa</td><td><code translate="no">true</code></td><td>Mantenha ativado para a reclassificação do MaxSim. Desative apenas em experiências controladas em que a qualidade da ANN da primeira fase esteja a ser medida diretamente.</td></tr>
 </tbody>
@@ -278,7 +278,7 @@ index_params.add_index(
       <span class="hljs-attr">emb_list_rerank:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Dê preferência aos parâmetros por índice para a seleção da estratégia.</strong> Um valor predefinido do ficheiro de configuração do Milvus aplica-se de forma geral aos índices desse tipo e fase. Utilize os parâmetros de <code translate="no">create_index</code> quando diferentes coleções ou campos necessitarem de estratégias EmbeddingList diferentes.</p>
+<p><strong>Dê preferência aos parâmetros por índice para a seleção de estratégias.</strong> Um valor predefinido do ficheiro de configuração do Milvus aplica-se de forma geral aos índices desse tipo e fase. Utilize os parâmetros de <code translate="no">create_index</code> quando diferentes coleções ou campos necessitarem de estratégias EmbeddingList diferentes.</p>
 </div>
 <h2 id="Configure-Candidate-Retrieval-at-Search-Time" class="common-anchor-header">Configurar a recuperação de candidatos no momento da pesquisa<button data-href="#Configure-Candidate-Retrieval-at-Search-Time" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -340,7 +340,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Não existe uma estratégia universalmente melhor. Escolha com base no comprimento da lista de incorporação, na discriminação do espaço de incorporação, no orçamento de latência, no tamanho do índice e na possibilidade de realizar uma etapa de treino.</p>
+    </button></h2><p>Não existe uma estratégia universalmente melhor. Escolha com base no comprimento da lista de incorporação, na capacidade de discriminação do espaço de incorporação, no orçamento de latência, no tamanho do índice e na possibilidade de realizar uma etapa de treino.</p>
 <table>
 <thead>
 <tr><th>Pergunta</th><th>Sinal</th><th>Ponto de partida recomendado</th></tr>

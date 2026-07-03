@@ -378,10 +378,10 @@ client.add_collection_struct_field(
 <tr><td>Alle Elemente teilen sich ein gemeinsames Schema.</td><td>Jedes „Struct“-Element im selben „StructArray“-Feld folgt dem für dieses Feld definierten „Struct“-Schema.</td></tr>
 <tr><td><code translate="no">max_capacity</code> ist erforderlich.</td><td>Es begrenzt die Anzahl der „Struct“-Elemente, die jede Entität im „StructArray“-Feld speichern kann.</td></tr>
 <tr><td>Es sind nur unterstützte Unterfeldtypen zulässig.</td><td>Verwenden Sie die von StructArray unterstützten Skalar- und Vektor-Unterfeldtypen. Definieren Sie keine JSON-, Geometry-, Text-, Timestamptz-, SparseFloatVector- oder verschachtelten Struct-/Array-Unterfelder.</td></tr>
-<tr><td>Vektor-Unterfelder benötigen vor der Suche Indizes.</td><td>Erstellen Sie Indizes auf Pfaden wie <code translate="no">chunks[emb_list_vector]</code> oder <code translate="no">chunks[emb]</code>, bevor Sie eine Vektorsuche durchführen.</td></tr>
+<tr><td>Vektor-Unterfelder benötigen vor der Suche Indizes.</td><td>Erstellen Sie Indizes auf Pfaden wie <code translate="no">chunks[emb_list_vector]</code> oder <code translate="no">chunks[emb]</code>, bevor Sie eine Vektorsuche ausführen.</td></tr>
 <tr><td>Ein Vektor-Unterfeld hat einen Index.</td><td>Wenn Sie sowohl eine EmbeddingList-Suche als auch eine Suche auf Elementebene benötigen, erstellen Sie zwei separate Vektor-Unterfelder.</td></tr>
 <tr><td>Vorhandene „StructArray“-Unterfelder sind fest vorgegeben.</td><td>Nachdem Sie ein StructArray-Feld erstellt haben, können Sie diesem StructArray-Feld keine weiteren Unterfelder mehr hinzufügen.</td></tr>
-<tr><td>Funktionen werden innerhalb von „Struct“ nicht unterstützt.</td><td>Definieren Sie keine Funktionen für Felder oder Unterfelder innerhalb eines StructArray-Feldes.</td></tr>
+<tr><td>Funktionen werden innerhalb von Struct nicht unterstützt.</td><td>Definieren Sie keine Funktionen für Felder oder Unterfelder innerhalb eines StructArray-Feldes.</td></tr>
 <tr><td>Skalar-Unterfelder sollten den Filteranforderungen entsprechen.</td><td>Fügen Sie Felder wie „ <code translate="no">section</code> “, „ <code translate="no">quality_score</code> “ oder „ <code translate="no">has_code</code> “ nur dann hinzu, wenn Sie diese später filtern, gruppieren oder ausgeben müssen.</td></tr>
 </tbody>
 </table>
@@ -403,11 +403,11 @@ client.add_collection_struct_field(
     </button></h2><ul>
 <li><p>„ <code translate="no">DataType.STRUCT</code> “ als Sammlungsfeld auf oberster Ebene anlegen, anstatt es als Elementtyp eines Array-Feldes zu verwenden.</p></li>
 <li><p>Das Vergessen, „ <code translate="no">max_capacity</code> “ für das StructArray-Feld festzulegen.</p></li>
-<li><p>Definition nicht unterstützter Unterfeldtypen, wie z. B. JSON, Geometry, Text, Timestamptz, SparseFloatVector, verschachteltes Array, verschachtelte Struktur oder Array-of-Struct.</p></li>
+<li><p>Definition nicht unterstützter Unterfeldtypen wie JSON, Geometry, Text, Timestamptz, SparseFloatVector, verschachteltes Array, verschachtelte Struktur oder Array-of-Struct.</p></li>
 <li><p>Verwendung von „ <code translate="no">String</code> “ als Unterfeldtyp. Verwenden Sie „ <code translate="no">VARCHAR</code> “ und setzen Sie „ <code translate="no">max_length</code> “.</p></li>
 <li><p>Verwendung eines einzigen Vektor-Unterfelds sowohl für die „EmbeddingList“-Suche als auch für die Suche auf Elementebene.</p></li>
-<li><p>Das Hinzufügen ausschließlich von Vektor-Unterfeldern und das Auslassen von für die Filterung benötigten Skalar-Unterfeldern wie „ <code translate="no">section</code> “, „ <code translate="no">quality_score</code> “ oder „ <code translate="no">has_code</code> “.</p></li>
-<li><p>Vektor-Unterfelder werden als skalare Prädikate für „ <code translate="no">$[...]</code> “ behandelt. Vektor-Unterfelder werden für die Vektorsuche verwendet, skalare Unterfelder für skalare Prädikate.</p></li>
+<li><p>Das Hinzufügen nur von Vektor-Unterfeldern und das Auslassen von für die Filterung benötigten skalaren Unterfeldern, wie z. B. „ <code translate="no">section</code> “, „ <code translate="no">quality_score</code> “ oder „ <code translate="no">has_code</code> “.</p></li>
+<li><p>Vektor-Unterfelder werden als skalare Prädikate für „ <code translate="no">$[...]</code> “ behandelt. Verwenden Sie Vektor-Unterfelder für die Vektorsuche und skalare Unterfelder für skalare Prädikate.</p></li>
 <li><p>Annahme, dass einem bestehenden StructArray-Feld nach dessen Erstellung neue Teilfelder hinzugefügt werden können.</p></li>
 <li><p>Verwendung von <code translate="no">chunks.emb</code> oder <code translate="no">chunks.emb_list_vector</code> anstelle der erforderlichen Pfadsyntax <code translate="no">chunks[emb]</code> oder <code translate="no">chunks[emb_list_vector]</code>.</p></li>
 <li><p>Das Verhalten von nullfähigen StructArrays wird so behandelt, als wäre es in jeder Zielversion verfügbar.</p></li>
