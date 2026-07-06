@@ -2,9 +2,9 @@
 id: pinyin-filter.md
 title: PinyinCompatible with Milvus 3.0.x
 summary: >-
-  Der Pinyin-Filter wandelt bei der Textanalyse chinesische Schriftzeichen-Token
-  in Pinyin-Token um und ermöglicht so einen Pinyin-basierten Abgleich für
-  chinesische Texte.
+  Der Pinyin-Filter wandelt bei der Textanalyse chinesische
+  Schriftzeichen-Tokens in Pinyin-Tokens um und ermöglicht so einen
+  Pinyin-basierten Abgleich für chinesischen Text.
 beta: Milvus 3.0.x
 ---
 <h1 id="Pinyin" class="common-anchor-header">Pinyin<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Pinyin" class="anchor-icon" translate="no">
@@ -22,7 +22,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Bei der Suche nach chinesischen Texten müssen Nutzer chinesische Schriftzeichen oft genau so eingeben, wie sie im indizierten Text vorkommen. Bei der Namenssuche, der automatischen Vervollständigung und der Suche während der Eingabe geben Nutzer häufig Pinyin anstelle von chinesischen Schriftzeichen ein. Beispielsweise könnte ein Benutzer „ <code translate="no">zuqiu</code> “ eingeben, um nach „ <code translate="no">足球</code> “ zu suchen. Der Filter „ <code translate="no">pinyin</code> “ fügt der Ausgabe des Analysators Pinyin-Token hinzu, sodass chinesischer Text mit der Pinyin-Eingabe abgeglichen werden kann, ohne dass ein separates Pinyin-Feld gepflegt werden muss.</p>
+    </button></h1><p>Bei der Suche nach chinesischen Texten müssen Nutzer chinesische Schriftzeichen oft genau so eingeben, wie sie im indizierten Text vorkommen. Bei der Namenssuche, der Autovervollständigung und der Suche während der Eingabe geben Nutzer häufig Pinyin anstelle von chinesischen Schriftzeichen ein. Beispielsweise könnte ein Benutzer „ <code translate="no">zuqiu</code> “ eingeben, um nach „ <code translate="no">足球</code> “ zu suchen. Der Filter „ <code translate="no">pinyin</code> “ fügt der Ausgabe des Analysators Pinyin-Token hinzu, sodass chinesischer Text mit der Pinyin-Eingabe abgeglichen werden kann, ohne dass ein separates Pinyin-Feld gepflegt werden muss.</p>
 <p>Der Filter „ <code translate="no">pinyin</code> “ wird in der Regel zusammen mit dem <a href="/docs/de/jieba-tokenizer.md">Jieba-Tokenizer</a> für chinesischen Text verwendet. Er arbeitet in einer benutzerdefinierten Analysator-Filter-Pipeline und kann mehrere Pinyin-Tokenformen für dasselbe chinesische Token ausgeben.</p>
 <h2 id="Configuration" class="common-anchor-header">Konfiguration<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -66,9 +66,9 @@ beta: Milvus 3.0.x
 <tr><th>Parameter</th><th>Typ</th><th>Standard</th><th>Beschreibung</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">keep_original</code></td><td>Boolesch</td><td><code translate="no">true</code></td><td>Behält das ursprüngliche chinesische Token in der Ausgabe des Analysators bei.</td></tr>
+<tr><td><code translate="no">keep_original</code></td><td>Boolescher Wert</td><td><code translate="no">true</code></td><td>Behält das ursprüngliche chinesische Token in der Ausgabe des Analysators bei.</td></tr>
 <tr><td><code translate="no">keep_full_pinyin</code></td><td>Boolescher Wert</td><td><code translate="no">true</code></td><td>Gibt Pinyin-Token auf Zeichenebene aus. Beispielsweise erzeugt „ <code translate="no">中文</code> “ die Ausgabewerte „ <code translate="no">zhong</code> “ und „ <code translate="no">wen</code> “.</td></tr>
-<tr><td><code translate="no">keep_joined_full_pinyin</code></td><td>Boolescher Wert</td><td><code translate="no">false</code></td><td>Gibt für jedes Quell-Token ein zusammengefügtes Pinyin-Token aus. Beispielsweise erzeugt „ <code translate="no">中文</code> “ das Pinyin-Token „ <code translate="no">zhongwen</code> “.</td></tr>
+<tr><td><code translate="no">keep_joined_full_pinyin</code></td><td>Boolescher Wert</td><td><code translate="no">false</code></td><td>Gibt für jedes Quell-Token ein zusammengefügtes Pinyin-Token aus. Beispielsweise erzeugt „ <code translate="no">中文</code> “ das Ergebnis „ <code translate="no">zhongwen</code> “.</td></tr>
 <tr><td><code translate="no">keep_separate_first_letter</code></td><td>Boolescher Wert</td><td><code translate="no">false</code></td><td>Gibt für jedes Quell-Token ein Pinyin-Initialen-Token aus. Beispielsweise erzeugt <code translate="no">中文</code> das Ergebnis <code translate="no">zw</code>.</td></tr>
 </tbody>
 </table>

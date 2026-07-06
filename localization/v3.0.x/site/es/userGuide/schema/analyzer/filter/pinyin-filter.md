@@ -23,7 +23,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h1><p>La búsqueda de texto en chino suele requerir que los usuarios introduzcan los caracteres chinos exactamente tal y como aparecen en el texto indexado. En los procesos de búsqueda de nombres, autocompletado y búsqueda mientras se escribe, los usuarios suelen escribir pinyin en lugar de caracteres chinos. Por ejemplo, un usuario puede escribir « <code translate="no">zuqiu</code> » para buscar « <code translate="no">足球</code> ». El filtro « <code translate="no">pinyin</code> » añade tokens de pinyin a la salida del analizador, de modo que el texto en chino pueda coincidir con la entrada en pinyin sin necesidad de mantener un campo de pinyin independiente.</p>
-<p>El filtro « <code translate="no">pinyin</code> » se utiliza normalmente con el tokenizador <a href="/docs/es/jieba-tokenizer.md">Jieba</a> para texto chino. Funciona en una cadena de filtros de un analizador personalizado y puede generar múltiples formas de tokens pinyin para un mismo token chino.</p>
+<p>El filtro « <code translate="no">pinyin</code> » se suele utilizar con el tokenizador <a href="/docs/es/jieba-tokenizer.md">Jieba</a> para texto chino. Funciona en una cadena de filtros de un analizador personalizado y puede generar múltiples formas de tokens pinyin para un mismo token chino.</p>
 <h2 id="Configuration" class="common-anchor-header">Configuración<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -45,7 +45,7 @@ beta: Milvus 3.0.x
 <span class="highlighted-wrapper-line">    <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;pinyin&quot;</span>],</span>
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Esta sintaxis abreviada conserva los tokens chinos originales y genera tokens pinyin a nivel de carácter. No genera pinyin unido ni iniciales pinyin a menos que se habiliten esas opciones explícitamente.</p>
+<p>Esta configuración abreviada conserva los tokens chinos originales y genera tokens pinyin a nivel de carácter. No genera pinyin unido ni iniciales pinyin a menos que se habiliten esas opciones explícitamente.</p>
 <p>Para un control total, especifica el filtro como un objeto y configura los formatos de los tokens de pinyin que genera Milvus.</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
@@ -68,7 +68,7 @@ beta: Milvus 3.0.x
 <tbody>
 <tr><td><code translate="no">keep_original</code></td><td>Booleano</td><td><code translate="no">true</code></td><td>Mantiene el token chino original en la salida del analizador.</td></tr>
 <tr><td><code translate="no">keep_full_pinyin</code></td><td>Booleano</td><td><code translate="no">true</code></td><td>Genera tokens de pinyin a nivel de carácter. Por ejemplo, « <code translate="no">中文</code> » genera « <code translate="no">zhong</code> » y « <code translate="no">wen</code> ».</td></tr>
-<tr><td><code translate="no">keep_joined_full_pinyin</code></td><td>Booleano</td><td><code translate="no">false</code></td><td>Genera un token pinyin unido para cada token de origen. Por ejemplo, « <code translate="no">中文</code> » genera « <code translate="no">zhongwen</code> ».</td></tr>
+<tr><td><code translate="no">keep_joined_full_pinyin</code></td><td>Booleano</td><td><code translate="no">false</code></td><td>Genera un token pinyin combinado por cada token de origen. Por ejemplo, « <code translate="no">中文</code> » genera « <code translate="no">zhongwen</code> ».</td></tr>
 <tr><td><code translate="no">keep_separate_first_letter</code></td><td>Booleano</td><td><code translate="no">false</code></td><td>Genera un token con las iniciales en pinyin para cada token de origen. Por ejemplo, <code translate="no">中文</code> genera <code translate="no">zw</code>.</td></tr>
 </tbody>
 </table>
@@ -95,7 +95,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 
 sample_text = <span class="hljs-string">&quot;中文测试&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Match-Chinese-text-with-character-level-Pinyin" class="common-anchor-header">Asignar pinyin a nivel de carácter al texto en chino<button data-href="#Match-Chinese-text-with-character-level-Pinyin" class="anchor-icon" translate="no">
+<h3 id="Match-Chinese-text-with-character-level-Pinyin" class="common-anchor-header">Hacer coincidir texto en chino con tokens de pinyin a nivel de carácter<button data-href="#Match-Chinese-text-with-character-level-Pinyin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

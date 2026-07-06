@@ -2,8 +2,8 @@
 id: data-infra-integration-overview.md
 title: Infraestructura e integración de datos
 summary: >-
-  Descripción general de la infraestructura de terceros con la que se integra
-  Milvus: metadatos, almacenamiento de objetos y colas de mensajes.
+  Resumen de la infraestructura de terceros con la que se integra Milvus:
+  metadatos, almacenamiento de objetos y colas de mensajes.
 ---
 <h1 id="Data-Infrastructure--Integration" class="common-anchor-header">Infraestructura e integración de datos<button data-href="#Data-Infrastructure--Integration" class="anchor-icon" translate="no">
       <svg translate="no"

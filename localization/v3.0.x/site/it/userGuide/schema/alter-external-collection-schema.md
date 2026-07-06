@@ -21,8 +21,8 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Le fonti di dati esterne spesso subiscono modifiche dopo la creazione di una raccolta esterna. Ad esempio, una tabella Lakehouse che memorizza già gli embedding potrebbe in seguito includere un nuovo campo scalare, come un punteggio, una categoria o un timestamp, che si desidera restituire nei risultati delle query o utilizzare nei filtri.</p>
-<p>Anziché ricreare la raccolta esterna o copiare i dati di origine in Milvus, aggiungere un campo Milvus che sia mappato al campo esistente nella fonte di dati esterna. Dopo aver aggiunto il campo, aggiornare la raccolta esterna in modo che il nuovo campo possa essere utilizzato nelle query e nelle ricerche.</p>
+    </button></h1><p>Le fonti di dati esterne spesso subiscono modifiche dopo la creazione di una raccolta esterna. Ad esempio, una tabella Lakehouse che memorizza già degli embedding potrebbe in seguito includere un nuovo campo scalare, come un punteggio, una categoria o un timestamp, che si desidera restituire nei risultati delle query o utilizzare nei filtri.</p>
+<p>Anziché ricreare la raccolta esterna o copiare i dati di origine in Milvus, aggiungere un campo Milvus che corrisponda al campo esistente nella fonte di dati esterna. Dopo aver aggiunto il campo, aggiornare la raccolta esterna in modo che il nuovo campo possa essere utilizzato nelle query e nelle ricerche.</p>
 <h2 id="Limits" class="common-anchor-header">Limiti<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -59,7 +59,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Prima di aggiungere un campo a una raccolta esterna, verificare che il campo esista già nella fonte di dati esterna. Quindi richiamare ` <code translate="no">add_collection_field()</code> ` per esporre quel campo in Milvus impostando ` <code translate="no">external_field</code> ` sul nome del campo nella fonte di dati esterna. Impostare ` <code translate="no">data_type</code> ` sul tipo di dati Milvus che corrisponde al campo nella fonte di dati esterna. Ad esempio, se il campo mappato memorizza valori a doppia precisione, utilizzare ` <code translate="no">DataType.DOUBLE</code>`.</p>
+    </button></h2><p>Prima di aggiungere un campo a una raccolta esterna, verificare che il campo esista già nella fonte di dati esterna. Quindi richiamare ` <code translate="no">add_collection_field()</code> ` per esporre quel campo in Milvus impostando ` <code translate="no">external_field</code> ` sul nome del campo nella fonte di dati esterna. Impostare ` <code translate="no">data_type</code> ` sul tipo di dati Milvus corrispondente al campo nella fonte di dati esterna. Ad esempio, se il campo mappato memorizza valori a doppia precisione, utilizzare ` <code translate="no">DataType.DOUBLE</code>`.</p>
 <p>A differenza delle collezioni gestite, i valori del campo aggiunto vengono letti dalla fonte di dati esterna dopo l’aggiornamento della collezione esterna.</p>
 <h3 id="Add-a-scalar-field" class="common-anchor-header">Aggiungere un campo scalare<button data-href="#Add-a-scalar-field" class="anchor-icon" translate="no">
       <svg translate="no"

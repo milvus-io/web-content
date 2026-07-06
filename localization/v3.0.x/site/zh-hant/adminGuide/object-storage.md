@@ -35,7 +35,7 @@ title: 物件儲存
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>供應商／服務</th><th style="text-align:center">作為 Milvus 物件儲存的支援情況</th></tr>
+<tr><th>供應商／服務</th><th style="text-align:center">作為 Milvus 物件儲存的支援</th></tr>
 </thead>
 <tbody>
 <tr><td>MinIO</td><td style="text-align:center">✔️（自建部署的預設選項）</td></tr>
@@ -64,5 +64,5 @@ title: 物件儲存
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>當您執行預設的<strong>Woodpecker</strong>訊息佇列及其物件儲存後端（<code translate="no">storage.type=minio</code> ）時，Woodpecker 會將其預寫日誌寫入相同的物件儲存中，並需要<strong>嚴格的 S3 條件寫入語義</strong>。 並非所有物件儲存服務都符合資格——例如，儘管華為雲 OBS 可作為常規的 Milvus 物件儲存使用，但目前<strong>尚不支援</strong>作為 Woodpecker 的後端。</p>
+    </button></h2><p>當您執行預設的<strong>Woodpecker</strong>訊息佇列及其物件儲存後端（<code translate="no">storage.type=minio</code> ）時，Woodpecker 會將其預寫日誌寫入相同的物件儲存中，並需要<strong>嚴格遵循 S3 條件寫入語義</strong>。 並非所有物件儲存服務都符合資格——例如，儘管華為雲 OBS 可作為常規的 Milvus 物件儲存使用，但目前<strong>尚不支援</strong>作為 Woodpecker 的後端。</p>
 <p>請參閱<a href="/docs/zh-hant/woodpecker.md">Woodpecker</a>頁面上的物件儲存相容性對照表，以了解各供應商的具體要求。</p>

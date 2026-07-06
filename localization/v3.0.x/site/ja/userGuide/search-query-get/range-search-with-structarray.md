@@ -2,7 +2,7 @@
 id: range-search-with-structarray.md
 title: StructArray を使用した範囲検索
 summary: >-
-  このページを使用して、StructArrayのベクトルサブフィールドに対して範囲検索を実行します。範囲検索では、スコアまたは距離が指定された範囲内に収まるベクトルヒットが返されます。StructArrayフィールドの場合、要素レベルのベクトル検索と組み合わせて範囲検索を使用します。この場合、各Struct要素が個別に検索されます。
+  このページを使用して、StructArrayのベクトルサブフィールドに対して範囲検索を実行します。範囲検索では、スコアまたは距離が指定された範囲内にあるベクトルヒットが返されます。StructArrayフィールドの場合、要素レベルのベクトル検索と組み合わせて範囲検索を使用します。この場合、各Struct要素が個別に検索されます。
 ---
 <h1 id="Range-Search-with-StructArray" class="common-anchor-header">StructArray を使用した範囲検索<button data-href="#Range-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>このページでは、StructArrayのベクトルサブフィールドに対して範囲検索を実行できます。範囲検索では、スコアまたは距離が指定された範囲内に収まるベクトルヒットが返されます。StructArrayフィールドの場合、要素レベルのベクトル検索と組み合わせて範囲検索を使用します。この場合、各Struct要素が個別に検索されます。</p>
-<p>このページでは、「<a href="/docs/ja/create-structarray-field.md">StructArrayフィールドの作成</a>」の<code translate="no">tech_articles</code> コレクションを使用しています。このコレクションには、<code translate="no">chunks</code> という名前のStructArrayフィールドがあります。<code translate="no">chunks[emb]</code> ベクトルサブフィールドは、<code translate="no">COSINE</code> 、<code translate="no">IP</code> 、<code translate="no">L2</code> などの通常のベクトルメトリックを使用して、要素レベルの検索が行えるようインデックス化されています。</p>
+<p>このページでは、<a href="/docs/ja/create-structarray-field.md">「StructArrayフィールドの作成</a>」の<code translate="no">tech_articles</code> コレクションを使用しています。このコレクションには、<code translate="no">chunks</code> という名前のStructArrayフィールドがあります。<code translate="no">chunks[emb]</code> ベクトルサブフィールドは、<code translate="no">COSINE</code> 、<code translate="no">IP</code> 、<code translate="no">L2</code> などの通常のベクトルメトリックを使用した要素レベルの検索に対応するようにインデックスが作成されています。</p>
 <h2 id="How-range-search-applies-to-StructArray" class="common-anchor-header">StructArray に対する範囲検索の適用方法<button data-href="#How-range-search-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,8 +42,8 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>EmbeddingList 検索</td><td>サポートされていません。</td><td>該当なし。</td></tr>
-<tr><td>要素単位の検索</td><td><code translate="no">radius</code> および、必要に応じて<code translate="no">range_filter</code> を使用した通常のベクトルクエリを使用してください。</td><td>構造体要素レベル。</td></tr>
-<tr><td>ハイブリッド検索</td><td>StructArray リクエストが要素レベルのベクトルフィールドを対象としている場合にサポートされます。EmbeddingList レベルのリクエストでは、範囲検索はサポートされていません。</td><td>要素レベルのサブ検索、その後ハイブリッド再ランク付けを行います。</td></tr>
+<tr><td>要素レベルの検索</td><td><code translate="no">radius</code> および、必要に応じて<code translate="no">range_filter</code> を使用した通常のベクトルクエリを使用してください。</td><td>構造体要素レベル。</td></tr>
+<tr><td>ハイブリッド検索</td><td>StructArray リクエストが要素レベルのベクトルフィールドを対象としている場合にサポートされます。EmbeddingList レベルのリクエストでは、範囲検索はサポートされていません。</td><td>要素レベルのサブ検索、その後ハイブリッド再ランク付け。</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -71,8 +71,8 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>StructArray フィールド</td><td>コレクションには、<code translate="no">chunks</code> などの StructArray フィールドが含まれています。</td></tr>
-<tr><td>要素レベルのベクトルサブフィールド</td><td>対象のベクトルサブフィールドは<code translate="no">chunks[emb]</code> であり、<code translate="no">chunks[emb_list_vector]</code> ではありません。</td></tr>
-<tr><td>インデックス指標</td><td>このベクトルサブフィールドは、<code translate="no">COSINE</code> 、<code translate="no">IP</code> 、または<code translate="no">L2</code> などの通常のベクトルメトリックでインデックス付けされます。</td></tr>
+<tr><td>要素レベルのベクトルサブフィールド</td><td>対象となるベクトルサブフィールドは<code translate="no">chunks[emb]</code> であり、<code translate="no">chunks[emb_list_vector]</code> ではありません。</td></tr>
+<tr><td>インデックス指標</td><td>ベクトルサブフィールドは、<code translate="no">COSINE</code> 、<code translate="no">IP</code> 、または<code translate="no">L2</code> などの通常のベクトルメトリックでインデックス付けされます。</td></tr>
 <tr><td>クエリデータ</td><td>クエリは、<code translate="no">EmbeddingList</code> ではなく、通常のベクトルです。</td></tr>
 </tbody>
 </table>
@@ -174,7 +174,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要素レベルの範囲検索と StructArray のスカラーフィルタリングを組み合わせることができます。親エンティティのフィールドにはトップレベルの述語を使用し、<code translate="no">element_filter</code> を使用して、ベクトル範囲検索の対象となる Struct 要素を制限します。</p>
+    </button></h2><p>要素レベルの範囲検索を、StructArrayのスカラーフィルタリングと組み合わせることができます。親エンティティのフィールドにはトップレベルの述語を使用し、<code translate="no">element_filter</code> を使用して、ベクトル範囲検索の対象となるStruct要素を制限します。</p>
 <pre><code translate="no" class="language-python">filter_expr = (
     <span class="hljs-string">&#x27;category == &quot;search&quot; &amp;&amp; &#x27;</span>
     <span class="hljs-string">&#x27;element_filter(chunks, &#x27;</span>
@@ -220,7 +220,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>StructArrayの要素レベルのベクトルフィールドは、ハイブリッド検索における範囲検索をサポートしています。StructArrayの要素レベルのベクトルフィールドを対象とする<code translate="no">AnnSearchRequest</code> に、<code translate="no">radius</code> を追加し、必要に応じて<code translate="no">range_filter</code> も追加します。</p>
+    </button></h2><p>StructArrayの要素レベルのベクトルフィールドは、ハイブリッド検索での範囲検索をサポートしています。StructArrayの要素レベルのベクトルフィールドを対象とする<code translate="no">AnnSearchRequest</code> に、<code translate="no">radius</code> を追加し、必要に応じて<code translate="no">range_filter</code> も追加します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest, RRFRanker
 
 title_req = AnnSearchRequest(
@@ -256,7 +256,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>この例では、<code translate="no">chunks[emb]</code> サブリクエストのみが範囲検索パラメータを使用します。StructArray リクエストは依然として要素レベルのセマンティクスに従います。つまり、範囲の境界は、ハイブリッド検索が結果を結合して再ランク付けを行う前に、Struct 要素のヒットに適用されます。</p>
+<p>この例では、<code translate="no">chunks[emb]</code> サブリクエストのみが範囲検索パラメータを使用します。StructArray リクエストは依然として要素レベルのセマンティクスに従います。つまり、範囲の境界は、ハイブリッド検索が結果を結合して再ランク付けを行う前に、Struct 要素のヒットに対して適用されます。</p>
 <h2 id="Interpret-range-results" class="common-anchor-header">範囲検索結果の解釈<button data-href="#Interpret-range-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -280,7 +280,7 @@ results = client.hybrid_search(
 <tr><td><code translate="no">id</code></td><td>一致した Struct 要素を含むエンティティのプライマリキー。</td></tr>
 <tr><td><code translate="no">distance</code> またはスコア</td><td>クエリベクトルと一致したStruct要素のベクトルとの間のスコアまたは距離。</td></tr>
 <tr><td><code translate="no">offset</code></td><td>返される際、StructArrayフィールド内での一致したStruct要素の0を基点とする位置。</td></tr>
-<tr><td>重複する主キー</td><td>あり得ます。同じエンティティ内の複数の Struct 要素が、指定された範囲内に収まる場合があります。</td></tr>
+<tr><td>重複する主キー</td><td>あり得ます。同じエンティティ内の複数の Struct 要素が、指定された範囲内に収まることがあります。</td></tr>
 <tr><td><code translate="no">limit</code></td><td>これは要素のヒットに適用され、一意の親エンティティには適用されません。</td></tr>
 </tbody>
 </table>

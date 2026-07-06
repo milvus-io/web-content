@@ -36,7 +36,7 @@ title: RocksMQ
     </button></h2><ul>
 <li><strong>スタンドアロンのみ</strong>— Milvus Distributed（クラスタ）ではRocksMQはサポート<strong>されていません</strong>。<a href="/docs/ja/mqtype-overview.md#Supported-message-queues">メッセージキューのサポートマトリックス</a>を参照してください。</li>
 <li>RocksMQはMilvusに同梱されているため、別途インストールする必要はありません。</li>
-<li>以前のMilvusバージョンでは、これがスタンドアロン環境のデフォルトのメッセージキューでしたが、Milvus 3.xでは組み込み型のWoodpeckerに取って代わられました。</li>
+<li>以前のMilvusバージョンでは、これがスタンドアロン環境のデフォルトのメッセージキューでしたが、Milvus 3.xでは組み込み型のWoodpeckerに置き換えられました。</li>
 </ul>
 <h2 id="Deploy-Milvus-Standalone-with-RocksMQ-using-Docker" class="common-anchor-header">Docker を使用して RocksMQ と共に Milvus Standalone をデプロイする<button data-href="#Deploy-Milvus-Standalone-with-RocksMQ-using-Docker" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -2,7 +2,7 @@
 id: switch-rocksmq-woodpecker.md
 title: Переключение между RocksMQ и Woodpecker
 summary: >-
-  Переключите очередь сообщений в развертывании Milvus Standalone (Docker
+  Переключите очередь сообщений автономного развертывания Milvus (Docker
   Compose) с RocksMQ на Woodpecker.
 ---
 <h1 id="Switch-between-RocksMQ-and-Woodpecker" class="common-anchor-header">Переключение между RocksMQ и Woodpecker<button data-href="#Switch-between-RocksMQ-and-Woodpecker" class="anchor-icon" translate="no">
@@ -20,10 +20,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>На этой странице описано, как переключить очередь сообщений (MQ) <strong>автономного</strong> развертывания <strong>Milvus (Docker Compose)</strong> между <strong>RocksMQ</strong> и <strong>Woodpecker</strong> (локальный бэкенд или бэкенд MinIO) в обоих направлениях. Общий порядок действий и необходимые условия см. в разделе <a href="/docs/ru/switch-mq-type.md">«Переключение типа MQ</a>».</p>
+    </button></h1><p>На этой странице описано, как переключить очередь сообщений (MQ) <strong>автономного</strong> развертывания <strong>Milvus (Docker Compose)</strong> между <strong>RocksMQ</strong> и <strong>Woodpecker</strong> (локальный бэкэнд или бэкэнд MinIO) в обоих направлениях. Общий порядок действий и необходимые условия см. в разделе <a href="/docs/ru/switch-mq-type.md">«Переключение типа MQ</a>».</p>
 <div class="alert note">
 <ul>
-<li><strong>Предпосылка:</strong> функция «Переключение MQ» доступна в <strong>Milvus 3.0 и более поздних версиях</strong>. Перед началом обновите свой экземпляр Milvus до версии 3.0 или более поздней — эта функция недоступна в более ранних версиях.</li>
+<li><strong>Необходимое условие:</strong> функция «Переключение MQ» доступна в <strong>Milvus 3.0 и более поздних версиях</strong>. Перед началом обновите свой экземпляр Milvus до версии 3.0 или более поздней — эта функция недоступна в более ранних версиях.</li>
 <li>Для переключения MQ требуется развертывание с использованием Docker <strong>Compose</strong> (которое включает источник конфигурации etcd). Развертывание Docker с одним контейнером не поддерживает переключение.</li>
 </ul>
 </div>
@@ -57,7 +57,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Убедитесь, что ваш автономный экземпляр Milvus с Docker Compose работает корректно — например, создав тестовую коллекцию, вставив данные и запустив запрос.</p>
+    </button></h3><p>Убедитесь, что ваш автономный экземпляр Milvus с Docker Compose работает корректно — например, создав тестовую коллекцию, вставив данные и выполнив запрос.</p>
 <h3 id="Step-2-Configure-Woodpecker-storage" class="common-anchor-header">Шаг 2: Настройте хранилище Woodpecker<button data-href="#Step-2-Configure-Woodpecker-storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -122,7 +122,7 @@ summary: >-
     </button></h3><pre><code translate="no" class="language-shell">docker logs milvus-standalone | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>При успешном переключении в журнале регистрируется сообщение <code translate="no">[mqTypeValue=woodpecker]</code>.</p>
-<h3 id="Step-5-Optional-Clean-up-RocksMQ-data" class="common-anchor-header">Шаг 5: (Необязательно) Очистка данных RocksMQ<button data-href="#Step-5-Optional-Clean-up-RocksMQ-data" class="anchor-icon" translate="no">
+<h3 id="Step-5-Optional-Clean-up-RocksMQ-data" class="common-anchor-header">Шаг 5: (Необязательно) Очистите данные RocksMQ<button data-href="#Step-5-Optional-Clean-up-RocksMQ-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -153,7 +153,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Verify-the-Milvus-instance-is-running" class="common-anchor-header">Шаг 1: Убедитесь, что экземпляр Milvus запущен<button data-href="#Step-1-Verify-the-Milvus-instance-is-running" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Verify-the-Milvus-instance-is-running" class="common-anchor-header">Шаг 1: Убедитесь, что экземпляр Milvus работает<button data-href="#Step-1-Verify-the-Milvus-instance-is-running" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -191,7 +191,7 @@ summary: >-
   -H &quot;Content-Type: application/json&quot; \
   -d &#x27;{&quot;target_wal_name&quot;: &quot;rocksmq&quot;}&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Verify-the-switch-is-complete" class="common-anchor-header">Шаг 3: Проверьте, завершился ли переход<button data-href="#Step-3-Verify-the-switch-is-complete" class="anchor-icon" translate="no">
+<h3 id="Step-3-Verify-the-switch-is-complete" class="common-anchor-header">Шаг 3: Убедитесь, что переход завершён<button data-href="#Step-3-Verify-the-switch-is-complete" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -246,13 +246,13 @@ summary: >-
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Источник MQ</th><th>Целевой MQ</th><th>Статус</th><th>Примечания</th></tr>
+<tr><th>Источник MQ</th><th>Целевой MQ</th><th>Состояние</th><th>Примечания</th></tr>
 </thead>
 <tbody>
 <tr><td>RocksMQ</td><td>Woodpecker (MinIO/локальный)</td><td><strong>Поддерживается</strong></td><td></td></tr>
-<tr><td>Woodpecker (MinIO/local)</td><td>RocksMQ</td><td><strong>Поддерживается</strong></td><td></td></tr>
+<tr><td>Woodpecker (MinIO/локальный)</td><td>RocksMQ</td><td><strong>Поддерживается</strong></td><td></td></tr>
 <tr><td>Woodpecker MinIO</td><td>Woodpecker локальный</td><td><strong>Не поддерживается</strong></td><td>Переключение между режимами хранения Woodpecker требует дополнительной обработки метаданных, которая пока не поддерживается.</td></tr>
-<tr><td>Локальный режим Woodpecker</td><td>Woodpecker MinIO</td><td><strong>Не поддерживается</strong></td><td>То же, что и выше.</td></tr>
+<tr><td>Woodpecker local</td><td>Woodpecker MinIO</td><td><strong>Не поддерживается</strong></td><td>То же, что и выше.</td></tr>
 <tr><td>RocksMQ / Woodpecker</td><td>Внешний Pulsar / Kafka</td><td><strong>Поддерживается, но не рекомендуется</strong></td><td>Сделайте автономные экземпляры как можно более простыми.</td></tr>
 </tbody>
 </table>

@@ -70,7 +70,7 @@ summary: 使用 Helm 或 Milvus Operator，將 Milvus 叢集的訊息佇列在 K
 <p>若切換成功，系統會記錄<code translate="no">[mqTypeValue=woodpecker]</code> 。</p>
 <p><strong>步驟 4：（可選）停止 Kafka 並進行清理。</strong>對於<strong>內建的</strong>Kafka，請移除 Kafka Pod 及其 PVC。對於<strong>外部</strong>Kafka，請清理外部 Kafka 實例中的 Milvus 主題——其格式為<code translate="no">&lt;cluster_prefix&gt;-dml_&lt;seqNo&gt;_&lt;TimeTick&gt;&lt;Version&gt;</code> 。</p>
 <div class="alert note">
-<p>若您計劃日後切換回 Kafka，請先清理資料/主題以避免衝突。</p>
+<p>若您計劃日後切換回 Kafka，請先清理資料／主題以避免衝突。</p>
 </div>
 <h3 id="Switch-from-Woodpecker-to-Kafka-Helm" class="common-anchor-header">從 Woodpecker 切換至 Kafka（Helm）<button data-href="#Switch-from-Woodpecker-to-Kafka-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -88,7 +88,7 @@ summary: 使用 Helm 或 Milvus Operator，將 Milvus 叢集的訊息佇列在 K
         ></path>
       </svg>
     </button></h3><p><strong>步驟 1：確認 Milvus 實例正在運行。</strong></p>
-<p><strong>步驟 2：設定目標 Kafka 連線並重新啟動 Milvus。</strong>此切換操作需要 Milvus 已知曉 Kafka 連線資訊，因此請透過 `<code translate="no">extraConfigFiles</code> ` 將其寫入 `<code translate="no">user.yaml</code> `，並使用 `<code translate="no">helm upgrade</code> ` 套用設定（此操作會重啟 Pod）。`<code translate="no">streaming.enabled=true</code> ` 是「切換訊息佇列 (Switch MQ)」功能所需的設定。有關 SASL/SSL 的詳細資訊，請參閱<a href="/docs/zh-hant/connect_kafka_ssl.md">《使用 SASL/SSL 連線至 Kafka》</a>。</p>
+<p><strong>步驟 2：設定目標 Kafka 連線並重新啟動 Milvus。</strong>此切換操作需要 Milvus 已知曉 Kafka 連線資訊，因此請透過 `<code translate="no">extraConfigFiles</code> ` 將其寫入 `<code translate="no">user.yaml</code> `，並使用 `<code translate="no">helm upgrade</code> ` 套用設定（此操作會重啟 Pod）。`<code translate="no">streaming.enabled=true</code> ` 是「切換訊息佇列 (Switch MQ)」功能的必要條件。有關 SASL/SSL 的詳細資訊，請參閱<a href="/docs/zh-hant/connect_kafka_ssl.md">《使用 SASL/SSL 連線至 Kafka》</a>。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -154,7 +154,7 @@ summary: 使用 Helm 或 Milvus Operator，將 Milvus 叢集的訊息佇列在 K
         ></path>
       </svg>
     </button></h3><p><strong>步驟 1：確認 Milvus 實例正在運行。</strong></p>
-<p><strong>步驟 2：執行 MQ 切換。</strong>由於 MixCoord 服務未對外公開，因此請在 MixCoord pod 內部執行切換 API：</p>
+<p><strong>步驟 2：執行 MQ 切換。</strong>由於 MixCoord 服務未對外公開，因此請從 MixCoord pod 內部執行切換 API：</p>
 <pre><code translate="no" class="language-shell">kubectl exec -it &lt;mixcoord-pod&gt; -- \
   curl -X POST http://localhost:9091/management/wal/alter \
   -H &quot;Content-Type: application/json&quot; \
@@ -163,8 +163,8 @@ summary: 使用 Helm 或 Milvus Operator，將 Milvus 叢集的訊息佇列在 K
 <p><strong>步驟 3：驗證切換是否完成。</strong></p>
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
-<p>切換成功時會記錄<code translate="no">[mqTypeValue=woodpecker]</code> 。</p>
-<p><strong>步驟 4：更新 Operator 中的訊息佇列類型。</strong>更新由<strong>Operator</strong>管理的配置，以防止 Operator 將切換狀態還原。建立<code translate="no">change_configmap.yaml</code> ：</p>
+<p>若切換成功，系統會記錄<code translate="no">[mqTypeValue=woodpecker]</code> 。</p>
+<p><strong>步驟 4：更新 Operator 中的訊息佇列類型。</strong>更新由<strong>Operator</strong>管理的配置，以防止 Operator 將切換操作還原。建立<code translate="no">change_configmap.yaml</code> ：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -193,8 +193,8 @@ summary: 使用 Helm 或 Milvus Operator，將 Milvus 叢集的訊息佇列在 K
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><strong>步驟 1：確認 Milvus 執行個體正在運行。</strong></p>
-<p><strong>步驟 2：配置目標 Kafka 連線並重新啟動 Milvus。</strong>將 Kafka 連線置於<code translate="no">spec.config</code> 下（Operator 會將<code translate="no">spec.config</code> 渲染為<code translate="no">user.yaml</code> ），並設定 MQ 類型；套用 CR 後，系統會根據新配置重新部署 Pod。有關 SASL/SSL 的詳細資訊，請參閱<a href="/docs/zh-hant/connect_kafka_ssl.md">《使用 SASL/SSL 連線至 Kafka》</a>。</p>
+    </button></h3><p><strong>步驟 1：確認 Milvus 實例正在運行。</strong></p>
+<p><strong>步驟 2：設定目標 Kafka 連線並重新啟動 Milvus。</strong>將 Kafka 連線置於<code translate="no">spec.config</code> 下（Operator 會將<code translate="no">spec.config</code> 渲染為<code translate="no">user.yaml</code> ），並設定 MQ 類型；套用 CR 後，系統會根據新設定重新部署 Pod。有關 SASL/SSL 的詳細資訊，請參閱<a href="/docs/zh-hant/connect_kafka_ssl.md">《使用 SASL/SSL 連線至 Kafka》</a>。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># change_configmap.yaml</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -219,7 +219,7 @@ summary: 使用 Helm 或 Milvus Operator，將 Milvus 叢集的訊息佇列在 K
 <p>等待所有 Pod 準備就緒後，確認 Kafka 存取設定已渲染至 Milvus 設定中。</p>
 <p><strong>步驟 3：執行 MQ 切換。</strong></p>
 <div class="alert note">
-<p>請確保目標 Kafka 中不包含來自先前配置的 Milvus 主題。若這是您首次切換至 Kafka，請跳過此說明；否則請先清理同名的殘留 Milvus 主題。</p>
+<p>請確保目標 Kafka 中不包含來自先前配置的 Milvus 主題。若這是您首次切換至 Kafka，請跳過此注意事項；否則請先清理名稱相同的殘留 Milvus 主題。</p>
 </div>
 <pre><code translate="no" class="language-shell">kubectl exec -it &lt;mixcoord-pod&gt; -- \
   curl -X POST http://localhost:9091/management/wal/alter \
@@ -253,7 +253,7 @@ summary: 使用 Helm 或 Milvus Operator，將 Milvus 叢集的訊息佇列在 K
 <tbody>
 <tr><td>內建 Kafka</td><td>Woodpecker (MinIO)</td><td><strong>已支援</strong></td><td><strong>已支援</strong></td></tr>
 <tr><td>外部 Kafka</td><td>Woodpecker (MinIO)</td><td><strong>已支援</strong></td><td><strong>受支援</strong></td></tr>
-<tr><td>Woodpecker (MinIO)</td><td>外部 Kafka</td><td><strong>受支援</strong></td><td><strong>受支援</strong></td></tr>
+<tr><td>Woodpecker (MinIO)</td><td>外部 Kafka</td><td><strong>已支援</strong></td><td><strong>受支援</strong></td></tr>
 <tr><td>Kafka</td><td>Woodpecker（本地）</td><td><strong>受支援但不建議使用</strong>（所有 Pod 都需要共用檔案系統）</td><td><strong>不支援</strong></td></tr>
 </tbody>
 </table>

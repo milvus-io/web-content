@@ -85,7 +85,7 @@ summary: >-
 <div class="alert note">
 <ul>
 <li>If you omit analyzer configurations during collection creation, Milvus uses the <code translate="no">standard</code> analyzer for all text processing by default. For details, refer to <a href="/docs/standard-analyzer.md">Standard Analyzer</a>.</li>
-<li>For optimal search and query performance, choose an analyzer that matches the language of your text data. For instance, while the <code translate="no">standard</code> analyzer is versatile, it may not be the best choice for languages with unique grammatical structures, such as Chinese, Japanese, or Korean. In such cases, using a language-specific analyzer like <a href="/docs/chinese-analyzer.md"><code translate="no">chinese</code></a> or custom analyzers with specialized tokenizers (such as <a href="/docs/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/icu-tokenizer.md"><code translate="no">icu</code></a>) and filters is highly recommended to ensure accurate tokenization and better search results.</li>
+<li>For optimal search and query performance, choose an analyzer that matches the language of your text data. For instance, while the <code translate="no">standard</code> analyzer is versatile, it may not be the best choice for languages with unique grammatical structures, such as Chinese, Arabic, Thai, Japanese, or Korean. In such cases, using a language-specific analyzer like <a href="/docs/chinese-analyzer.md"><code translate="no">chinese</code></a>, <a href="/docs/arabic-analyzer.md"><code translate="no">arabic</code></a>, or <a href="/docs/thai-analyzer.md"><code translate="no">thai</code></a>, or custom analyzers with specialized tokenizers (such as <a href="/docs/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/icu-tokenizer.md"><code translate="no">icu</code></a>) and filters is highly recommended to ensure accurate tokenization and better search results.</li>
 </ul>
 </div>
 <h3 id="Built-in-analyzer" class="common-anchor-header">Built-in analyzer<button data-href="#Built-in-analyzer" class="anchor-icon" translate="no">
@@ -257,6 +257,8 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <li><p><code translate="no">standard</code>: Suitable for general-purpose text processing, applying standard tokenization and lowercase filtering.</p></li>
 <li><p><code translate="no">english</code>: Optimized for English-language text, with support for English stop words.</p></li>
 <li><p><code translate="no">chinese</code>: Specialized for processing Chinese text, including tokenization adapted for Chinese language structures.</p></li>
+<li><p><code translate="no">arabic</code>: Specialized for Arabic text, with Arabic normalization, decimal digit normalization, Arabic stemming, and Arabic stop-word removal.</p></li>
+<li><p><code translate="no">thai</code>: Specialized for Thai text, with Thai word segmentation, decimal digit normalization, and Thai stop-word removal.</p></li>
 </ul>
 <h3 id="Custom-analyzer" class="common-anchor-header">Custom analyzer<button data-href="#Custom-analyzer" class="anchor-icon" translate="no">
       <svg translate="no"

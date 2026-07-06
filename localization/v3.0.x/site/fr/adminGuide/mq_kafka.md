@@ -17,7 +17,7 @@ title: Kafka
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Apache Kafka est l'un des backends de file d'attente de messages (WAL) pris en charge par Milvus. Dans Milvus 3.x, <a href="/docs/fr/woodpecker.md">Woodpecker</a> est la file d’attente de messages par défaut ; Kafka reste entièrement pris en charge pour les utilisateurs qui le préfèrent. Kafka est principalement utilisé avec Milvus Distributed (cluster) ; les déploiements autonomes utilisent généralement Woodpecker intégré ou <a href="/docs/fr/mq_rocksmq.md">RocksMQ</a>.</p>
+    </button></h1><p>Apache Kafka est l'un des backends de file d'attente de messages (WAL) pris en charge par Milvus. Dans Milvus 3.x, <a href="/docs/fr/woodpecker.md">Woodpecker</a> est la file d’attente de messages par défaut ; Kafka reste toutefois entièrement pris en charge pour les utilisateurs qui le préfèrent. Kafka est principalement utilisé avec Milvus Distributed (cluster) ; les déploiements autonomes utilisent généralement Woodpecker intégré ou <a href="/docs/fr/mq_rocksmq.md">RocksMQ</a>.</p>
 <h2 id="Version-compatibility" class="common-anchor-header">Compatibilité des versions<button data-href="#Version-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -67,7 +67,7 @@ title: Kafka
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pour utiliser un service Kafka externe, désactivez Pulsar (fourni avec Milvus) et activez <code translate="no">externalKafka</code> dans une surécriture de la directive ` <code translate="no">values.yaml</code> `, puis installez Milvus avec ce service :</p>
+    </button></h3><p>Pour utiliser un service Kafka externe, désactivez Pulsar intégré et activez l'option « <code translate="no">externalKafka</code> » dans une surcouche « <code translate="no">values.yaml</code> », puis installez Milvus avec cette configuration :</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">pulsarv3:</span>
   <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span>
 <span class="hljs-attr">externalKafka:</span>
@@ -186,7 +186,7 @@ title: Kafka
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<p>Appliquez la configuration (en supposant que le fichier s'appelle <code translate="no">milvuscluster.yaml</code>) :</p>
+<p>Appliquez la configuration (en supposant que le fichier soit <code translate="no">milvuscluster.yaml</code>) :</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Uninstall" class="common-anchor-header">Désinstallation<button data-href="#Uninstall" class="anchor-icon" translate="no">

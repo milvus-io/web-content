@@ -1,7 +1,7 @@
 ---
 id: switch-kafka-woodpecker.md
 title: 在 Kafka 和 Woodpecker 之间切换
-summary: 使用 Helm 或 Milvus Operator，将 Milvus 集群的消息队列在 Kafka 和 Woodpecker 之间切换。
+summary: 使用 Helm 或 Milvus Operator，将 Milvus 集群的消息队列在 Kafka 和 Woodpecker 之间进行切换。
 ---
 <h1 id="Switch-between-Kafka-and-Woodpecker" class="common-anchor-header">在 Kafka 和 Woodpecker 之间切换<button data-href="#Switch-between-Kafka-and-Woodpecker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,7 +18,7 @@ summary: 使用 Helm 或 Milvus Operator，将 Milvus 集群的消息队列在 K
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本页面介绍了如何在<strong>Milvus 集群中</strong>将消息队列（MQ）在<strong>Kafka</strong>（内置或外部）和<strong>Woodpecker</strong>（MinIO 后端）之间双向切换。有关一般工作流和先决条件，请参阅<a href="/docs/zh/switch-mq-type.md">《切换 MQ 类型</a>》。</p>
+    </button></h1><p>本页面介绍如何在<strong>Milvus 集群中</strong>将消息队列（MQ）在<strong>Kafka</strong>（内置或外部）和<strong>Woodpecker</strong>（MinIO 后端）之间双向切换。有关一般工作流和先决条件，请参阅<a href="/docs/zh/switch-mq-type.md">《切换 MQ 类型</a>》。</p>
 <div class="alert note">
 <p><strong>先决条件：</strong>MQ 切换功能仅在<strong>Milvus 3.0 及更高版本中</strong>提供。开始操作前，请将您的 Milvus 实例升级至 Milvus 3.0 或更高版本——此功能在早期版本中不可用。</p>
 </div>
@@ -154,7 +154,7 @@ summary: 使用 Helm 或 Milvus Operator，将 Milvus 集群的消息队列在 K
         ></path>
       </svg>
     </button></h3><p><strong>步骤 1：验证 Milvus 实例是否正在运行。</strong></p>
-<p><strong>步骤 2：执行 MQ 切换。</strong>由于 MixCoord 服务未对外暴露，因此需在 MixCoord pod 内部运行切换 API：</p>
+<p><strong>步骤 2：执行 MQ 切换。</strong>由于 MixCoord 服务未对外暴露，因此需在 MixCoord Pod 内部运行切换 API：</p>
 <pre><code translate="no" class="language-shell">kubectl exec -it &lt;mixcoord-pod&gt; -- \
   curl -X POST http://localhost:9091/management/wal/alter \
   -H &quot;Content-Type: application/json&quot; \
@@ -194,7 +194,7 @@ summary: 使用 Helm 或 Milvus Operator，将 Milvus 集群的消息队列在 K
         ></path>
       </svg>
     </button></h3><p><strong>步骤 1：验证 Milvus 实例是否正在运行。</strong></p>
-<p><strong>步骤 2：配置目标 Kafka 连接并重启 Milvus。</strong>将 Kafka 连接配置放置在<code translate="no">spec.config</code> 下（Operator 会将<code translate="no">spec.config</code> 渲染为<code translate="no">user.yaml</code> ），并设置 MQ 类型；应用 CR 后，Pod 会根据新配置进行滚动更新。有关 SASL/SSL 的详细信息，请参阅<a href="/docs/zh/connect_kafka_ssl.md">《使用 SASL/SSL 连接到 Kafka》</a>。</p>
+<p><strong>步骤 2：配置目标 Kafka 连接并重启 Milvus。</strong>将 Kafka 连接配置放置在<code translate="no">spec.config</code> 下（操作符会将<code translate="no">spec.config</code> 渲染为<code translate="no">user.yaml</code> ），并设置 MQ 类型；应用 CR 后，Pod 将根据新配置进行滚动更新。有关 SASL/SSL 的详细信息，请参阅<a href="/docs/zh/connect_kafka_ssl.md">《使用 SASL/SSL 连接到 Kafka》</a>。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># change_configmap.yaml</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -253,7 +253,7 @@ summary: 使用 Helm 或 Milvus Operator，将 Milvus 集群的消息队列在 K
 <tbody>
 <tr><td>内置 Kafka</td><td>Woodpecker (MinIO)</td><td><strong>已支持</strong></td><td><strong>已支持</strong></td></tr>
 <tr><td>外部 Kafka</td><td>Woodpecker (MinIO)</td><td><strong>已支持</strong></td><td><strong>已支持</strong></td></tr>
-<tr><td>Woodpecker (MinIO)</td><td>外部 Kafka</td><td><strong>已支持</strong></td><td><strong>已支持</strong></td></tr>
+<tr><td>Woodpecker (MinIO)</td><td>外部 Kafka</td><td><strong>支持</strong></td><td><strong>已支持</strong></td></tr>
 <tr><td>Kafka</td><td>Woodpecker（本地）</td><td><strong>受支持但不推荐</strong>（所有 Pod 都需要共享文件系统）</td><td><strong>不支持</strong></td></tr>
 </tbody>
 </table>

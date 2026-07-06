@@ -1,7 +1,7 @@
 ---
 id: data-infra-integration-overview.md
 title: 資料基礎架構與整合
-summary: Milvus 所整合的第三方基礎架構概覽——元資料、物件儲存及訊息佇列。
+summary: Milvus 整合的第三方基礎架構概覽——元資料、物件儲存及訊息佇列。
 ---
 <h1 id="Data-Infrastructure--Integration" class="common-anchor-header">資料基礎架構與整合<button data-href="#Data-Infrastructure--Integration" class="anchor-icon" translate="no">
       <svg translate="no"

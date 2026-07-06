@@ -17,7 +17,7 @@ title: RocksMQ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>RocksMQ est une file d’attente de messages intégrée (WAL) fournie avec Milvus, disponible <strong>uniquement</strong> pour <strong>Milvus Standalone</strong>. Il s’agissait de la file d’attente de messages par défaut dans les versions antérieures de Milvus ; dans Milvus 3.x, Milvus Standalone utilise par défaut <a href="/docs/fr/woodpecker.md">Woodpecker</a> intégré.</p>
+    </button></h1><p>RocksMQ est une file d'attente de messages intégrée (WAL) fournie avec Milvus, disponible <strong>uniquement</strong> pour <strong>Milvus Standalone</strong>. Il s'agissait de la file d'attente de messages par défaut dans les versions antérieures de Milvus ; dans Milvus 3.x, Milvus Standalone utilise par défaut <a href="/docs/fr/woodpecker.md">Woodpecker</a> intégré.</p>
 <h2 id="Version-compatibility" class="common-anchor-header">Compatibilité des versions<button data-href="#Version-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -85,7 +85,7 @@ EOF
 bash standalone_embed.sh restart
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-La modification de l'<code translate="no">mq.type</code> de cette manière est destinée à une <b>toute nouvelle</b> instance (ne contenant encore aucune collection). Pour modifier la file d'attente de messages d'une instance contenant déjà des données, suivez plutôt la <a href="/docs/fr/switch-rocksmq-woodpecker.md">procédure de basculement</a>.
+La modification d’ <code translate="no">mq.type</code> s de cette manière est destinée à une <b>toute nouvelle</b> instance (ne contenant encore aucune collection). Pour modifier la file d’attente de messages d’une instance contenant déjà des données, suivez plutôt la <a href="/docs/fr/switch-rocksmq-woodpecker.md">procédure de basculement</a>.
 </div>
 <h3 id="Configure" class="common-anchor-header">Configuration<button data-href="#Configure" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -151,7 +151,7 @@ bash standalone_embed.sh delete
       </svg>
     </button></h2><ul>
 <li><strong>Mise à niveau de la version 2.5.x vers la version 2.6.x :</strong> <strong>limitations des files d’attente de messages</strong>: lors de la mise à niveau vers Milvus v3.0-beta, vous devez conserver votre choix actuel de file d’attente de messages. Le passage d’un système de file d’attente de messages à un autre pendant la mise à niveau n’est pas pris en charge. La prise en charge du changement de système de file d’attente de messages sera disponible dans les versions futures.
-La version 2.6.x définissant Woodpecker comme valeur par défaut pour le mode autonome, fixez la valeur « <code translate="no">mq.type: rocksmq</code> » dans votre fichier « <code translate="no">user.yaml</code> » <strong>avant</strong> la mise à niveau si vous souhaitez conserver RocksMQ.</li>
+La version 2.6.x définissant Woodpecker comme valeur par défaut pour les instances autonomes, fixez la valeur « <code translate="no">mq.type: rocksmq</code> » dans votre fichier <code translate="no">user.yaml</code> <strong>avant</strong> la mise à niveau si vous souhaitez conserver RocksMQ.</li>
 <li>Pour modifier la file d’attente de messages d’une instance en cours d’exécution, consultez la section « <a href="/docs/fr/switch-rocksmq-woodpecker.md">Passer de RocksMQ à Woodpecker</a> ».</li>
 </ul>
 <h2 id="Whats-next" class="common-anchor-header">Prochaines étapes<button data-href="#Whats-next" class="anchor-icon" translate="no">

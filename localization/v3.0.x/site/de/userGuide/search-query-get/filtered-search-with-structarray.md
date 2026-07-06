@@ -47,7 +47,7 @@ summary: >-
 <tbody>
 <tr><td>Filtern nach einem Skalarfeld der obersten Ebene, z. B. <code translate="no">category</code>.</td><td>Regulärer Filterausdruck.</td><td>Wählt übergeordnete Entitäten vor oder während der Suche aus.</td></tr>
 <tr><td>Beschränkt die Vektorsuche auf Elementebene auf Struct-Elemente, die den skalaren Bedingungen entsprechen.</td><td><code translate="no">element_filter</code>.</td><td>Durchsucht nur übereinstimmende Struct-Elemente und kann Offsets der übereinstimmenden Elemente zurückgeben.</td></tr>
-<tr><td>Wählt Entitäten danach aus, ob ein, alle oder eine bestimmte Anzahl von Struct-Elementen einem Prädikat entsprechen.</td><td><code translate="no">MATCH_ANY</code>, <code translate="no">MATCH_ALL</code>, <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> oder <code translate="no">MATCH_EXACT</code>.</td><td>Filterung auf Zeilenebene. Diese Operatoren geben selbst keine Offsets zurück.</td></tr>
+<tr><td>Wählt Entitäten danach aus, ob einige, alle oder eine bestimmte Anzahl von Struct-Elementen einem Prädikat entsprechen.</td><td><code translate="no">MATCH_ANY</code>, <code translate="no">MATCH_ALL</code>, <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> oder <code translate="no">MATCH_EXACT</code>.</td><td>Filterung auf Zeilenebene. Diese Operatoren geben selbst keine Offsets zurück.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -68,7 +68,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Verwenden Sie reguläre Filterausdrücke, wenn die Bedingung zur übergeordneten Entität gehört und nicht zu einem einzelnen Struct-Element. Dies funktioniert sowohl bei der EmbeddingList-Suche als auch bei der Suche auf Elementebene.</p>
+    </button></h2><p>Verwenden Sie reguläre Filterausdrücke, wenn die Bedingung sich auf die übergeordnete Entität bezieht und nicht auf ein einzelnes Struct-Element. Dies funktioniert sowohl bei der EmbeddingList-Suche als auch bei der Suche auf Elementebene.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">from</span> pymilvus.client.embedding_list <span class="hljs-keyword">import</span> EmbeddingList
 
@@ -282,7 +282,7 @@ results = client.hybrid_search(
 <tr><td>Vektor-Teilfelder</td><td>Werden nicht als skalare Prädikate für „ <code translate="no">$[...]</code> “ unterstützt. Verwenden Sie stattdessen Vektor-Teilfelder über die Vektorsuche.</td></tr>
 </tbody>
 </table>
-<p>Für nicht unterstützte Fälle wie JSON-Pfade, Array-Container-Funktionen, Textvergleichsfunktionen, Null-Prädikate auf ` <code translate="no">$[...]</code>`, Geometrie-Funktionen, `Timestamptz`-Ausdrücke und generische Funktionsaufrufe siehe <a href="/docs/de/struct-array-operators.md">„StructArray-Operatoren</a>“.</p>
+<p>Für nicht unterstützte Fälle wie JSON-Pfade, Array-Container-Funktionen, Textabgleichsfunktionen, Null-Prädikate auf ` <code translate="no">$[...]</code>`, Geometrie-Funktionen, `Timestamptz`-Ausdrücke und generische Funktionsaufrufe siehe <a href="/docs/de/struct-array-operators.md">„StructArray-Operatoren</a>“.</p>
 <h2 id="Common-mistakes" class="common-anchor-header">Häufige Fehler<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -300,10 +300,10 @@ results = client.hybrid_search(
       </svg>
     </button></h2><ul>
 <li><p>Verwendung von „ <code translate="no">$[subfield]</code> “ außerhalb von „ <code translate="no">element_filter</code> “ oder „ <code translate="no">MATCH_*</code> “.</p></li>
-<li><p>Verwendung von „ <code translate="no">chunks.section</code> “ anstelle der StructArray-Operatorsyntax wie beispielsweise „ <code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code> “.</p></li>
+<li><p>Verwendung von „ <code translate="no">chunks.section</code> “ anstelle der StructArray-Operatorsyntax wie z. B. „ <code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code> “.</p></li>
 <li><p>Verwendung von „ <code translate="no">element_filter</code> “, wenn nur eine Filterung auf Zeilenebene erforderlich ist. Verwenden Sie stattdessen „ <code translate="no">MATCH_ANY</code> “, wenn Sie lediglich Entitäten auswählen müssen.</p></li>
 <li><p>Die Erwartung, dass „ <code translate="no">MATCH_*</code> “ Element-Offsets zurückgibt. Diese Operatoren wählen Entitäten aus und identifizieren selbst kein einzelnes übereinstimmendes Element.</p></li>
-<li><p>Das Schreiben von einfachen booleschen Prädikaten wie „ <code translate="no">$[has_code]</code> “. Verwenden Sie explizite Vergleiche wie „ <code translate="no">$[has_code] == true</code> “.</p></li>
+<li><p>Das Schreiben von bloßen booleschen Prädikaten wie „ <code translate="no">$[has_code]</code> “. Verwenden Sie explizite Vergleiche wie „ <code translate="no">$[has_code] == true</code> “.</p></li>
 <li><p>„ <code translate="no">element_filter</code> “ vor einem Prädikat der obersten Ebene im selben Filterausdruck platzieren.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Nächste Schritte<button data-href="#Next-steps" class="anchor-icon" translate="no">

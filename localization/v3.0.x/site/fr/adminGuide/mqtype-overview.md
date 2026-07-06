@@ -45,12 +45,12 @@ summary: >-
 <tr><td><a href="/docs/fr/woodpecker.md">Woodpecker</a></td><td style="text-align:center">✔️ (intégré)</td><td style="text-align:center">✔️ (intégré ou en tant que service)</td><td><strong>Milvus 3.x</strong> (les deux modes)</td><td>Par défaut et recommandé. WAL natif du cloud sur stockage objet ; aucun service externe requis.</td></tr>
 <tr><td><a href="/docs/fr/mq_pulsar.md">Pulsar</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td>≤ 2.5.x (par défaut du cluster)</td><td>Pris en charge, externe ou intégré.</td></tr>
 <tr><td><a href="/docs/fr/mq_kafka.md">Kafka</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td>—</td><td>Pris en charge. Uniquement Kafka 2.x ou 3.x.</td></tr>
-<tr><td><a href="/docs/fr/mq_rocksmq.md">RocksMQ</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✖️</td><td>≤ 2.5.x (par défaut en mode autonome)</td><td>Pris en charge <strong>uniquement</strong> en mode <strong>autonome</strong>.</td></tr>
+<tr><td><a href="/docs/fr/mq_rocksmq.md">RocksMQ</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✖️</td><td>≤ 2.5.x (par défaut en mode autonome)</td><td>Pris en charge <strong>uniquement</strong> pour <strong>le mode autonome</strong>.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
 <ul>
-<li><p>Chaque instance Milvus utilise exactement une file d’attente de messages.</p></li>
+<li><p>Chaque instance Milvus utilise exactement une file d'attente de messages.</p></li>
 <li><p><strong>Limitations relatives aux files d’attente de messages</strong>: lors de la mise à niveau vers Milvus v3.0-beta, vous devez conserver votre choix actuel de file d’attente de messages. Le passage d’un système de file d’attente de messages à un autre pendant la mise à niveau n’est pas pris en charge. La prise en charge du changement de système de file d’attente de messages sera disponible dans les versions futures.</p></li>
 <li><p>Pour modifier la file d’attente de messages d’une instance en cours d’exécution, consultez la section « <a href="/docs/fr/switch-mq-type.md">Changer de type de file d’attente de messages</a> ». La fonctionnalité « Changer de type de file d’attente de messages » est disponible à partir de <strong>Milvus 3.0 —</strong> effectuez d’abord la mise à niveau vers Milvus 3.0 ou <strong>une version ultérieure</strong>.</p></li>
 </ul>

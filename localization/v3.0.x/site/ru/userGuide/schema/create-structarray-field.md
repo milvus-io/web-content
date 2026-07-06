@@ -5,8 +5,8 @@ summary: >-
   Поле StructArray следует создавать в том случае, если одна сущность должна
   содержать упорядоченный список структурированных элементов. Поле StructArray
   представляет собой поле типа Array, тип элементов которого — Struct. Каждый
-  элемент Struct соответствует одной и той же схеме и может содержать скалярные
-  подполя, векторные подполя или и те, и другие.
+  элемент типа Struct соответствует одной и той же схеме и может содержать
+  скалярные подполя, векторные подполя или и те, и другие.
 ---
 <h1 id="Create-a-StructArray-Field" class="common-anchor-header">Создание поля StructArray<button data-href="#Create-a-StructArray-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,7 +60,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td><code translate="no">text</code></td><td><code translate="no">VARCHAR</code></td><td>Текст фрагмента.</td></tr>
-<tr><td><code translate="no">section</code></td><td><code translate="no">VARCHAR</code></td><td>Название раздела, например « <code translate="no">index</code> », « <code translate="no">search</code> » или « <code translate="no">filter</code> ».</td></tr>
+<tr><td><code translate="no">section</code></td><td><code translate="no">VARCHAR</code></td><td>Имя раздела, например <code translate="no">index</code>, <code translate="no">search</code> или <code translate="no">filter</code>.</td></tr>
 <tr><td><code translate="no">page</code></td><td><code translate="no">INT64</code></td><td>Номер страницы или логическое положение фрагмента.</td></tr>
 <tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>Оценка на уровне фрагмента, используемая в примерах скалярной фильтрации и диапазонов.</td></tr>
 <tr><td><code translate="no">has_code</code></td><td><code translate="no">BOOL</code></td><td>Содержит ли фрагмент код.</td></tr>
@@ -106,7 +106,7 @@ summary: >-
 <tr><td><code translate="no">Array</code></td><td>Не поддерживается</td><td>Поподполя JSON не поддерживаются в полях StructArray.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Не поддерживается</td><td>По podpolu «Геометрия» и функции ГИС не поддерживаются в полях StructArray.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Не поддерживается</td><td>По podpolu «Текст» в полях StructArray не поддерживаются.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Не поддерживается</td><td>В полях StructArray не поддерживаются подполя Timestamptz и выражения, связанные со временем.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Не поддерживается</td><td>По podpola «Timestamptz» и выражения, связанные со временем, не поддерживаются в полях StructArray.</td></tr>
 <tr><td>Вложенные <code translate="no">Array</code>, <code translate="no">ArrayOfVector</code>, <code translate="no">Struct</code> или <code translate="no">ArrayOfStruct</code></td><td>Не поддерживается</td><td>Поле StructArray не может содержать вложенные массивы, вложенные векторные массивы, вложенные поля Struct или вложенные поля Array-of-Struct.</td></tr>
 </tbody>
 </table>
@@ -238,16 +238,16 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>После создания поля StructArray обращайтесь к его подполям с использованием синтаксиса пути <code translate="no">structArray[subfield]</code>. Используйте этот синтаксис при создании индексов, поиске векторных подполей, выводе подполей или построении скалярных фильтров.</p>
+    </button></h2><p>После создания поля StructArray обращайтесь к его подполям с использованием синтаксиса пути <code translate="no">structArray[subfield]</code>. Используйте этот синтаксис при создании индексов, поиске в векторных подполях, выводе подполей или построении скалярных фильтров.</p>
 <table>
 <thead>
 <tr><th>Путь</th><th>Значение</th><th>Типичное использование</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">chunks[text]</code></td><td>Поле « <code translate="no">text</code> » внутри каждого элемента Struct.</td><td>Поле вывода или скалярная фильтрация.</td></tr>
-<tr><td><code translate="no">chunks[section]</code></td><td>Метка раздела для каждого фрагмента.</td><td>Скалярная фильтрация.</td></tr>
-<tr><td><code translate="no">chunks[quality_score]</code></td><td>Оценка качества на уровне фрагмента.</td><td>Скалярная фильтрация или скалярный индекс.</td></tr>
-<tr><td><code translate="no">chunks[emb_list_vector]</code></td><td>Векторное подполе, используемое в качестве списка вложений.</td><td>Поиск EmbeddingList с помощью <code translate="no">MAX_SIM*</code>.</td></tr>
+<tr><td><code translate="no">chunks[text]</code></td><td>Поле <code translate="no">text</code> внутри каждого элемента Struct.</td><td>Поле вывода или скалярная фильтрация.</td></tr>
+<tr><td><code translate="no">chunks[section]</code></td><td>Метка секции для каждого фрагмента.</td><td>Скалярная фильтрация.</td></tr>
+<tr><td><code translate="no">chunks[quality_score]</code></td><td>Показатель качества на уровне фрагмента.</td><td>Скалярная фильтрация или скалярный индекс.</td></tr>
+<tr><td><code translate="no">chunks[emb_list_vector]</code></td><td>Векторное подполе, используемое в качестве списка вложений.</td><td>Поиск в EmbeddingList с помощью <code translate="no">MAX_SIM*</code>.</td></tr>
 <tr><td><code translate="no">chunks[emb]</code></td><td>Векторное подполе, используемое каждым элементом Struct независимо.</td><td>Векторный поиск на уровне элементов.</td></tr>
 </tbody>
 </table>
@@ -278,7 +278,7 @@ client.create_collection(
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Предупреждение
-Поля StructArray, допускающие значение null, доступны только в Milvus v3.0.x. Для поля StructArray, допускающего значение null, сущность может предоставлять допустимое значение StructArray или устанавливать для всего поля значение <code translate="no">null</code>. При вставке допустимого значения StructArray все подполя должны либо быть равны null, либо иметь допустимые значения. Вставка сущности, в которой некоторые подполя имеют значение null, а другие — допустимые значения, приводит к ошибке. Подробности см. в разделе <a href="/docs/ru/structarray-limits.md">«Ограничения StructArray</a>».</p>
+Поля StructArray, допускающие значение null, доступны только в Milvus v3.0.x. Для такого поля сущность может предоставить допустимое значение StructArray или установить для всего поля значение <code translate="no">null</code>. При вставке допустимого значения StructArray все подполя должны либо быть равны null, либо иметь допустимые значения. Вставка сущности, в которой некоторые подполя установлены в null, а другие — в допустимые значения, приводит к ошибке. Подробности см. в разделе <a href="/docs/ru/structarray-limits.md">«Ограничения StructArray</a>».</p>
 </div>
 <h2 id="Add-a-StructArray-field-to-an-existing-collection" class="common-anchor-header">Добавление поля StructArray в существующую коллекцию<button data-href="#Add-a-StructArray-field-to-an-existing-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -374,11 +374,11 @@ client.add_collection_struct_field(
 <tr><th>Правило</th><th>Объяснение</th></tr>
 </thead>
 <tbody>
-<tr><td>Struct используется в качестве типа элемента Array.</td><td>Создайте поле StructArray как поле Array с помощью команды « <code translate="no">element_type=STRUCT</code> ». Не создавайте Struct в качестве поля коллекции верхнего уровня.</td></tr>
+<tr><td>Struct используется в качестве типа элемента массива (Array).</td><td>Создайте поле StructArray как поле Array с помощью команды « <code translate="no">element_type=STRUCT</code> ». Не создавайте Struct в качестве поля коллекции верхнего уровня.</td></tr>
 <tr><td>Все элементы используют одну схему.</td><td>Каждый элемент Struct в одном и том же поле StructArray соответствует схеме Struct, определённой для этого поля.</td></tr>
 <tr><td><code translate="no">max_capacity</code> обязателен.</td><td>Оно ограничивает количество элементов Struct, которые каждая сущность может хранить в поле StructArray.</td></tr>
 <tr><td>Допускаются только поддерживаемые типы подполей.</td><td>Используйте скалярные и векторные типы подполей, поддерживаемые StructArray. Не определяйте подполя типов JSON, Geometry, Text, Timestamptz, SparseFloatVector или вложенные подполя Struct / Array.</td></tr>
-<tr><td>Перед поиском векторным подполям необходимо создать индексы.</td><td>Создайте индексы по путям, таким как <code translate="no">chunks[emb_list_vector]</code> или <code translate="no">chunks[emb]</code>, перед запуском векторного поиска.</td></tr>
+<tr><td>Для векторных подполей перед поиском необходимо создать индексы.</td><td>Перед запуском векторного поиска создайте индексы по путям, таким как <code translate="no">chunks[emb_list_vector]</code> или <code translate="no">chunks[emb]</code>.</td></tr>
 <tr><td>Одно векторное подполе имеет один индекс.</td><td>Если вам нужен как поиск по EmbeddingList, так и поиск на уровне элементов, создайте два отдельных векторных подполя.</td></tr>
 <tr><td>Существующие подполя StructArray являются фиксированными.</td><td>После создания поля StructArray не рассчитывайте на добавление дополнительных подполей в это же поле StructArray.</td></tr>
 <tr><td>Функции внутри Struct не поддерживаются.</td><td>Не определяйте функции для полей или подполей внутри поля StructArray.</td></tr>
@@ -403,14 +403,14 @@ client.add_collection_struct_field(
     </button></h2><ul>
 <li><p>Создание <code translate="no">DataType.STRUCT</code> в качестве поля коллекции верхнего уровня вместо использования его в качестве типа элемента поля Array.</p></li>
 <li><p>Забывание установить « <code translate="no">max_capacity</code> » для поля «StructArray».</p></li>
-<li><p>Определение неподдерживаемых типов подполей, таких как JSON, Geometry, Text, Timestamptz, SparseFloatVector, вложенный массив, вложенная структура или массив структур.</p></li>
+<li><p>Определение неподдерживаемых типов подполей, таких как JSON, Geometry, Text, Timestamptz, SparseFloatVector, вложенный массив (Array), вложенная структура (Struct) или массив структур (Array-of-Struct).</p></li>
 <li><p>Использование <code translate="no">String</code> в качестве типа подполя. Используйте <code translate="no">VARCHAR</code> и установите <code translate="no">max_length</code>.</p></li>
 <li><p>Использование одного векторного подполя как для поиска по EmbeddingList, так и для поиска на уровне элементов.</p></li>
 <li><p>Добавление только векторных подполей и игнорирование скалярных подполей, необходимых для фильтрации, таких как <code translate="no">section</code>, <code translate="no">quality_score</code> или <code translate="no">has_code</code>.</p></li>
 <li><p>Рассматривать векторные подполя как входные данные для скалярных предикатов <code translate="no">$[...]</code>. Использовать векторные подполя для векторного поиска, а скалярные подполя — для скалярных предикатов.</p></li>
 <li><p>Предположение о том, что в существующее поле StructArray можно добавлять новые подполя после его создания.</p></li>
-<li><p>Использование <code translate="no">chunks.emb</code> или <code translate="no">chunks.emb_list_vector</code> вместо обязательного синтаксиса пути <code translate="no">chunks[emb]</code> или <code translate="no">chunks[emb_list_vector]</code>.</p></li>
-<li><p>Рассмотрение поведения StructArray с возможностью принятия значения null как доступного в каждой целевой версии.</p></li>
+<li><p>Использование <code translate="no">chunks.emb</code> или <code translate="no">chunks.emb_list_vector</code> вместо требуемого синтаксиса пути <code translate="no">chunks[emb]</code> или <code translate="no">chunks[emb_list_vector]</code>.</p></li>
+<li><p>Рассмотрение поведения StructArray, допускающего нулевые значения, как доступного в каждой целевой версии.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Следующие шаги<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"

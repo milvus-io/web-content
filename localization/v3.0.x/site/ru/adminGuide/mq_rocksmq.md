@@ -17,7 +17,7 @@ title: RocksMQ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>RocksMQ — это встроенная очередь сообщений (WAL), поставляемая в комплекте с Milvus и доступная <strong>только</strong> для <strong>автономной версии Milvus</strong>. В более ранних версиях Milvus она была автономной очередью сообщений по умолчанию; в Milvus 3.x автономная версия Milvus по умолчанию использует встроенный <a href="/docs/ru/woodpecker.md">Woodpecker</a>.</p>
+    </button></h1><p>RocksMQ — это встроенная очередь сообщений (WAL), поставляемая в комплекте с Milvus и доступная <strong>только</strong> для <strong>Milvus Standalone</strong>. В более ранних версиях Milvus она была стандартной автономной очередью сообщений; в Milvus 3.x Milvus Standalone по умолчанию использует встроенный <a href="/docs/ru/woodpecker.md">Woodpecker</a>.</p>
 <h2 id="Version-compatibility" class="common-anchor-header">Совместимость версий<button data-href="#Version-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +38,7 @@ title: RocksMQ
 <li>RocksMQ поставляется в составе Milvus, поэтому отдельно устанавливать его не нужно.</li>
 <li>В более ранних версиях Milvus она являлась автономной очередью сообщений по умолчанию, а в Milvus 3.x её заменила встроенная Woodpecker.</li>
 </ul>
-<h2 id="Deploy-Milvus-Standalone-with-RocksMQ-using-Docker" class="common-anchor-header">Развертывание автономной версии Milvus с RocksMQ с помощью Docker<button data-href="#Deploy-Milvus-Standalone-with-RocksMQ-using-Docker" class="anchor-icon" translate="no">
+<h2 id="Deploy-Milvus-Standalone-with-RocksMQ-using-Docker" class="common-anchor-header">Развертывание Milvus Standalone с RocksMQ с помощью Docker<button data-href="#Deploy-Milvus-Standalone-with-RocksMQ-using-Docker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -150,7 +150,7 @@ bash standalone_embed.sh delete
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Обновление с версии 2.5.x до 2.6.x:</strong> <strong>Ограничения</strong>, связанные <strong>с очередями сообщений</strong>: при обновлении до Milvus v3.0-beta необходимо сохранить текущий выбор системы очередей сообщений. Переключение между различными системами очередей сообщений во время обновления не поддерживается. Поддержка смены системы очередей сообщений будет доступна в будущих версиях.
+<li><strong>Обновление с версии 2.5.x до 2.6.x:</strong> <strong>Ограничения</strong>, связанные <strong>с очередями сообщений</strong>: При обновлении до Milvus v3.0-beta необходимо сохранить текущий выбор системы очередей сообщений. Переключение между различными системами очередей сообщений во время обновления не поддерживается. Поддержка смены систем очередей сообщений будет доступна в будущих версиях.
 Поскольку в версии 2.6.x по умолчанию для автономного режима используется Woodpecker, <strong>перед</strong> обновлением зафиксируйте значение <code translate="no">mq.type: rocksmq</code> в файле <code translate="no">user.yaml</code>, если вы хотите сохранить RocksMQ.</li>
 <li>Чтобы изменить систему очередей сообщений для запущенного экземпляра, см. раздел <a href="/docs/ru/switch-rocksmq-woodpecker.md">«Переход с RocksMQ на Woodpecker</a>».</li>
 </ul>

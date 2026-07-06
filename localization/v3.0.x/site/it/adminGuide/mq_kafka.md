@@ -99,7 +99,7 @@ title: Kafka
       </svg>
     </button></h3><pre><code translate="no" class="language-bash">helm uninstall my-release
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Deploy-a-Milvus-cluster-with-Kafka-using-Milvus-Operator" class="common-anchor-header">Distribuzione di un cluster Milvus con Kafka utilizzando Milvus Operator<button data-href="#Deploy-a-Milvus-cluster-with-Kafka-using-Milvus-Operator" class="anchor-icon" translate="no">
+<h2 id="Deploy-a-Milvus-cluster-with-Kafka-using-Milvus-Operator" class="common-anchor-header">Distribuire un cluster Milvus con Kafka utilizzando Milvus Operator<button data-href="#Deploy-a-Milvus-cluster-with-Kafka-using-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -244,5 +244,5 @@ Se si utilizza Kafka e si desidera mantenerlo, non modificare la coda dei messag
       </svg>
     </button></h2><ul>
 <li><a href="/docs/it/woodpecker.md">Woodpecker (coda di messaggi predefinita)</a></li>
-<li><a href="/docs/it/switch-kafka-woodpecker.md">Passare da Kafka a Woodpecker</a></li>
+<li><a href="/docs/it/switch-kafka-woodpecker.md">Passaggio da Kafka a Woodpecker</a></li>
 </ul>

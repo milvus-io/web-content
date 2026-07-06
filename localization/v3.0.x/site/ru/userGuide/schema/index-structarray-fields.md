@@ -2,10 +2,10 @@
 id: index-structarray-fields.md
 title: Индексирование полей StructArray
 summary: >-
-  Перед выполнением векторного поиска или ускорением скалярной фильтрации
-  создайте индексы для подполей StructArray. Для поля StructArray целевым
-  объектом индекса является путь к подполю, например chunks[emb_list_vector],
-  chunks[emb] или chunks[section].
+  Перед запуском векторного поиска или ускорением скалярной фильтрации создайте
+  индексы для подполей StructArray. Для поля StructArray целевым объектом
+  индекса является путь к подполю, например chunks[emb_list_vector], chunks[emb]
+  или chunks[section].
 ---
 <h1 id="Index-StructArray-Fields" class="common-anchor-header">Индексирование полей StructArray<button data-href="#Index-StructArray-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,9 +22,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Создайте индексы для подполей StructArray перед запуском векторного поиска или ускорением скалярной фильтрации. Для поля StructArray целевым объектом индекса является путь к подполю, например <code translate="no">chunks[emb_list_vector]</code>, <code translate="no">chunks[emb]</code> или <code translate="no">chunks[section]</code>.</p>
+    </button></h1><p>Создайте индексы для подполей StructArray перед выполнением векторного поиска или ускорением скалярной фильтрации. Для поля StructArray целевым объектом индекса является путь к подполю, например <code translate="no">chunks[emb_list_vector]</code>, <code translate="no">chunks[emb]</code> или <code translate="no">chunks[section]</code>.</p>
 <p>На этой странице используется коллекция <code translate="no">tech_articles</code> из раздела <a href="/docs/ru/create-structarray-field.md">«Создание поля StructArray</a>». Поле StructArray <code translate="no">chunks</code> содержит скалярные подполя для фильтрации и векторные подполя для поиска.</p>
-<h2 id="Before-you-begin" class="common-anchor-header">Перед началом работы<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
+<h2 id="Before-you-begin" class="common-anchor-header">Перед началом<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -70,7 +70,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Используйте режим поиска для выбора семейства векторных метрик.</p>
+    </button></h2><p>Используйте режим поиска, чтобы выбрать семейство векторных метрик.</p>
 <table>
 <thead>
 <tr><th>Цель поиска или фильтрации</th><th>Целевой путь</th><th>Что выбрать</th></tr>
@@ -140,7 +140,7 @@ client.create_index(
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Предупреждение
-Не создавайте индекс с метрикой « <code translate="no">MAX_SIM*</code> » и индекс с обычной векторной метрикой для одного и того же векторного подполя. Если требуются оба режима поиска, запишите векторы в два отдельных векторных подполя и создайте по одному индексу для каждого подполя.</p>
+Не создавайте индекс с метрикой « <code translate="no">MAX_SIM*</code> » и индекс с обычной векторной метрикой для одного и того же векторного подполя. Если требуются оба режима поиска, записывайте векторы в два отдельных векторных подполя и создавайте по одному индексу для каждого подполя.</p>
 </div>
 <h2 id="Create-scalar-indexes" class="common-anchor-header">Создание скалярных индексов<button data-href="#Create-scalar-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -157,7 +157,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Создавайте скалярные индексы на скалярных подполях StructArray, если вы используете их в фильтрах. Используйте тот же синтаксис пути <code translate="no">structArray[subfield]</code>.</p>
+    </button></h2><p>Создавайте скалярные индексы на скалярных подполях StructArray, если вы используете их в фильтрах. Используйте тот же синтаксис пути, что и для <code translate="no">structArray[subfield]</code>.</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
@@ -314,8 +314,8 @@ client.create_index(
 <tbody>
 <tr><td>Используйте синтаксис путей для индексов подполей.</td><td>Индексируйте <code translate="no">chunks[emb]</code>, а не <code translate="no">emb</code> или <code translate="no">chunks.emb</code>.</td></tr>
 <tr><td>Одно векторное подполе допускает один индекс.</td><td>Используйте отдельные векторные подполя, если вам нужны разные семейства метрик.</td></tr>
-<tr><td>Используйте метрики типа « <code translate="no">MAX_SIM*</code> » для поиска по EmbeddingList.</td><td>Для запросов по EmbeddingList требуется индекс, построенный с использованием метрики <code translate="no">MAX_SIM*</code>.</td></tr>
-<tr><td>Для поиска на уровне элементов используйте обычные векторные метрики.</td><td>При поиске на уровне элементов используются данные запросов обычных векторных метрик и такие метрики, как <code translate="no">COSINE</code>, <code translate="no">IP</code> или <code translate="no">L2</code>.</td></tr>
+<tr><td>Используйте метрики <code translate="no">MAX_SIM*</code> для поиска по EmbeddingList.</td><td>Для запросов EmbeddingList требуется индекс, построенный с использованием метрики <code translate="no">MAX_SIM*</code>.</td></tr>
+<tr><td>Для поиска на уровне элементов используйте обычные векторные метрики.</td><td>При поиске на уровне элементов используются данные запросов обычных векторных метрик, таких как « <code translate="no">COSINE</code> », « <code translate="no">IP</code> » или « <code translate="no">L2</code> ».</td></tr>
 <tr><td>Индексируйте скалярные подполя, которые появляются в фильтрах.</td><td>Используйте типы скалярных индексов, поддерживаемые вашей целевой платформой.</td></tr>
 <tr><td>Учитывайте ограничения на векторные поля.</td><td>Общее количество векторных полей и векторных подполей ограничено. Перед добавлением большого количества векторных подполей ознакомьтесь с разделом «Ограничения StructArray».</td></tr>
 </tbody>
@@ -336,9 +336,9 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Создание индекса на массиве « <code translate="no">chunks.emb</code> » вместо « <code translate="no">chunks[emb]</code> ».</p></li>
-<li><p>Создание только индекса <code translate="no">MAX_SIM*</code> и последующая попытка запустить поиск на уровне элементов в том же подполе.</p></li>
-<li><p>Создание только обычного векторного индекса, а затем попытка выполнить поиск по EmbeddingList в том же подполе.</p></li>
+<li><p>Создание индекса на массиве элементов ( <code translate="no">chunks.emb</code> ) вместо массива элементов с индексами ( <code translate="no">chunks[emb]</code>).</p></li>
+<li><p>Создание только индекса <code translate="no">MAX_SIM*</code>, а затем попытка запустить поиск на уровне элементов в том же подполе.</p></li>
+<li><p>Создание только обычного векторного индекса, а затем попытка выполнить поиск по списку вложений (EmbeddingList) в том же подполе.</p></li>
 <li><p>Повторное использование одного векторного подполя как для метрики <code translate="no">MAX_SIM*</code>, так и для обычной векторной метрики.</p></li>
 <li><p>Отсутствие скалярных индексов для часто используемых фильтров StructArray.</p></li>
 <li><p>Индексирование подполя StructArray, которое отсутствует в схеме Struct.</p></li>
@@ -361,5 +361,5 @@ client.create_index(
     </button></h2><ol>
 <li><p>Чтобы выполнить поиск EmbeddingList на уровне сущностей или векторный поиск на уровне элементов, ознакомьтесь с разделом «Базовый векторный поиск с использованием StructArray».</p></li>
 <li><p>Чтобы фильтровать скалярные подполя StructArray во время поиска, ознакомьтесь со статьей «Фильтрованный поиск с использованием StructArray».</p></li>
-<li><p>Чтобы ознакомиться с ограничениями на индексы и метрики, ознакомьтесь с разделом <a href="/docs/ru/structarray-limits.md">«Ограничения StructArray</a>».</p></li>
+<li><p>Чтобы ознакомиться с ограничениями на индексы и метрики, ознакомьтесь со статьей <a href="/docs/ru/structarray-limits.md">«Ограничения StructArray</a>».</p></li>
 </ol>

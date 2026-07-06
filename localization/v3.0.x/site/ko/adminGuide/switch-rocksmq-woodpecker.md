@@ -21,7 +21,7 @@ summary: Milvus Standalone(Docker Compose) 배포 환경의 메시지 큐를 Roc
     </button></h1><p>이 페이지에서는 <strong>Milvus Standalone(Docker Compose)</strong> 배포 환경의 메시지 큐(MQ)를 <strong>RocksMQ와</strong> <strong>Woodpecker</strong> (로컬 또는 MinIO 백엔드) 간에 양방향으로 전환하는 방법을 설명합니다. 일반적인 워크플로우 및 필수 조건에 대해서는 <a href="/docs/ko/switch-mq-type.md">MQ 유형 전환을</a> 참조하십시오.</p>
 <div class="alert note">
 <ul>
-<li><strong>필수 조건:</strong> MQ 전환 기능은 <strong>Milvus 3.0 이상</strong> 버전에서 사용할 수 있습니다. 시작하기 전에 Milvus 인스턴스를 Milvus 3.0 이상으로 업그레이드하십시오. 이전 버전에서는 이 기능을 사용할 수 없습니다.</li>
+<li><strong>필수 조건:</strong> MQ 전환 기능은 <strong>Milvus 3.0 이상에서</strong> 사용할 수 있습니다. 시작하기 전에 Milvus 인스턴스를 Milvus 3.0 이상으로 업그레이드하십시오. 이전 버전에서는 이 기능을 사용할 수 없습니다.</li>
 <li>MQ 전환을 위해서는 Docker <strong>Compose</strong> 배포 환경(etcd 구성 소스를 활성화하는)이 필요합니다. 단일 컨테이너 Docker 배포 환경에서는 전환을 지원하지 않습니다.</li>
 </ul>
 </div>
@@ -71,7 +71,7 @@ summary: Milvus Standalone(Docker Compose) 배포 환경의 메시지 큐를 Roc
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">mqType</code> 값을 변경하지 <strong>않고</strong> Milvus 구성에 Woodpecker 설정을 추가합니다. ` <code translate="no">docker exec -it milvus-standalone bash</code> ` 명령을 실행하여 컨테이너에 진입한 후, ` <code translate="no">/milvus/configs/user.yaml</code>` 파일을 편집합니다:</p>
+    </button></h3><p><code translate="no">mqType</code> 값을 변경하지 <strong>않은 상태에서</strong> Milvus 구성에 Woodpecker 설정을 추가합니다. ` <code translate="no">docker exec -it milvus-standalone bash</code> ` 명령을 실행하여 컨테이너에 진입한 후, ` <code translate="no">/milvus/configs/user.yaml</code>` 파일을 편집합니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">woodpecker:</span>
   <span class="hljs-attr">storage:</span>
     <span class="hljs-attr">type:</span> <span class="hljs-string">minio</span>   <span class="hljs-comment"># minio or local</span>
@@ -102,7 +102,7 @@ summary: Milvus Standalone(Docker Compose) 배포 환경의 메시지 큐를 Roc
   -d &#x27;{&quot;target_wal_name&quot;: &quot;woodpecker&quot;}&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <p>MixCoord 포트는 일반적으로 <code translate="no">9091</code> 입니다.</p>
-<h3 id="Step-4-Verify-the-switch-is-complete" class="common-anchor-header">4단계: 전환 완료 확인<button data-href="#Step-4-Verify-the-switch-is-complete" class="anchor-icon" translate="no">
+<h3 id="Step-4-Verify-the-switch-is-complete" class="common-anchor-header">4단계: 전환이 완료되었는지 확인<button data-href="#Step-4-Verify-the-switch-is-complete" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -189,7 +189,7 @@ summary: Milvus Standalone(Docker Compose) 배포 환경의 메시지 큐를 Roc
   -H &quot;Content-Type: application/json&quot; \
   -d &#x27;{&quot;target_wal_name&quot;: &quot;rocksmq&quot;}&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Verify-the-switch-is-complete" class="common-anchor-header">3단계: 전환 완료 확인<button data-href="#Step-3-Verify-the-switch-is-complete" class="anchor-icon" translate="no">
+<h3 id="Step-3-Verify-the-switch-is-complete" class="common-anchor-header">3단계: 전환이 완료되었는지 확인<button data-href="#Step-3-Verify-the-switch-is-complete" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -244,13 +244,13 @@ summary: Milvus Standalone(Docker Compose) 배포 환경의 메시지 큐를 Roc
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>소스 MQ</th><th>대상 MQ</th><th>상태</th><th>비고</th></tr>
+<tr><th>소스 MQ</th><th>대상 MQ</th><th>상태</th><th>참고</th></tr>
 </thead>
 <tbody>
 <tr><td>RocksMQ</td><td>Woodpecker (MinIO/로컬)</td><td><strong>지원됨</strong></td><td></td></tr>
 <tr><td>Woodpecker (MinIO/로컬)</td><td>RocksMQ</td><td><strong>지원됨</strong></td><td></td></tr>
 <tr><td>Woodpecker MinIO</td><td>Woodpecker 로컬</td><td><strong>지원되지 않음</strong></td><td>Woodpecker 스토리지 모드 간 전환에는 추가적인 메타데이터 처리가 필요하지만, 이는 아직 지원되지 않습니다.</td></tr>
 <tr><td>Woodpecker 로컬</td><td>Woodpecker MinIO</td><td><strong>지원되지 않음</strong></td><td>위와 동일합니다.</td></tr>
-<tr><td>RocksMQ / Woodpecker</td><td>외부 Pulsar / Kafka</td><td><strong>지원되지만 권장하지 않음</strong></td><td>독립 실행형 인스턴스는 가능한 한 단순하게 유지하십시오.</td></tr>
+<tr><td>RocksMQ / Woodpecker</td><td>외부 Pulsar / Kafka</td><td><strong>지원되지만 권장하지 않음</strong></td><td>독립형 인스턴스는 가능한 한 단순하게 유지하십시오.</td></tr>
 </tbody>
 </table>

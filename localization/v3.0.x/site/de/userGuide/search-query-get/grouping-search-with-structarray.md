@@ -1,15 +1,15 @@
 ---
 id: grouping-search-with-structarray.md
-title: Gruppierung der Suche mit StructArray
+title: Gruppierung von Suchergebnissen mit StructArray
 summary: >-
-  Auf dieser Seite können Sie Suchergebnisse auf StructArray-Ebene nach der
-  übergeordneten Entität gruppieren. Bei der Suche auf Elementebene können
+  Verwenden Sie diese Seite, um Suchergebnisse auf StructArray-Ebene nach der
+  übergeordneten Entität zu gruppieren. Bei der Suche auf Elementebene können
   mehrere Treffer derselben Entität zurückgegeben werden, wenn mehrere
   Struct-Elemente der Suchanfrage entsprechen. Durch die Gruppierung werden
   diese Elementtreffer zusammengefasst, sodass jede übergeordnete Entität
   höchstens einmal erscheint.
 ---
-<h1 id="Grouping-Search-with-StructArray" class="common-anchor-header">Gruppierung der Suche mit StructArray<button data-href="#Grouping-Search-with-StructArray" class="anchor-icon" translate="no">
+<h1 id="Grouping-Search-with-StructArray" class="common-anchor-header">Gruppierung von Suchergebnissen mit StructArray<button data-href="#Grouping-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -25,7 +25,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Verwenden Sie diese Seite, um Suchergebnisse auf StructArray-Ebene nach der übergeordneten Entität zu gruppieren. Bei der Suche auf Elementebene können mehrere Treffer derselben Entität zurückgegeben werden, wenn mehrere Struct-Elemente der Abfrage entsprechen. Durch die Gruppierung werden diese Elementtreffer zusammengefasst, sodass jede übergeordnete Entität höchstens einmal erscheint.</p>
-<p>Diese Seite verwendet die Sammlung „ <code translate="no">tech_articles</code> “ aus dem Abschnitt <a href="/docs/de/create-structarray-field.md">„Erstellen eines StructArray-Feldes</a>“. Die Sammlung enthält ein StructArray-Feld mit dem Namen „ <code translate="no">chunks</code> “. Das Vektor-Unterfeld „ <code translate="no">chunks[emb]</code> “ ist für die Suche auf Elementebene mit einer regulären Vektormetrik indiziert.</p>
+<p>Diese Seite verwendet die Sammlung „ <code translate="no">tech_articles</code> “ aus dem Abschnitt <a href="/docs/de/create-structarray-field.md">„Erstellen eines StructArray-Feldes</a>“. Die Sammlung enthält ein StructArray-Feld namens „ <code translate="no">chunks</code> “. Das Vektor-Unterfeld „ <code translate="no">chunks[emb]</code> “ ist für die Suche auf Elementebene mit einer regulären Vektormetrik indiziert.</p>
 <h2 id="How-grouping-applies-to-StructArray" class="common-anchor-header">Wie sich die Gruppierung auf StructArray auswirkt<button data-href="#How-grouping-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -48,11 +48,11 @@ summary: >-
 <tbody>
 <tr><td>„EmbeddingList“-Suche</td><td>Nicht unterstützt.</td><td>Nicht zutreffend.</td></tr>
 <tr><td>Suche auf Elementebene</td><td>Wird durch Gruppierung nach dem Primärschlüssel unterstützt.</td><td>Liefert höchstens ein Ergebnis pro übergeordneter Entität. Metadaten auf Elementebene bleiben erhalten, sodass der Index oder Offset des ausgewählten Elements zurückgegeben werden kann, wenn dieser über die API oder das SDK bereitgestellt wird.</td></tr>
-<tr><td>Hybride Suche</td><td>Wird nur unterstützt, wenn alle Teilsuchen auf Vektorfelder auf Elementebene unter demselben StructArray-Feld abzielen.</td><td>Teilsuchen auf Elementebene werden vor der Verarbeitung des Endergebnisses nach Primärschlüssel gruppiert.</td></tr>
+<tr><td>Hybride Suche</td><td>Wird nur unterstützt, wenn alle Teilsuchen auf Vektorfelder auf Elementebene unter demselben StructArray-Feld abzielen.</td><td>Teilsuchen auf Elementebene werden vor der endgültigen Ergebnisverarbeitung nach Primärschlüssel gruppiert.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
-<p>Verwenden Sie die Gruppierung, wenn eine ungruppierte Suche auf Elementebene zu viele doppelte übergeordnete Entitäten zurückgibt. Wenn Sie jedes übereinstimmende Struct-Element als einzelnen Treffer erhalten möchten, verwenden Sie <a href="/docs/de/basic-vector-search-with-structarray.md">die einfache Vektorsuche mit StructArray</a> ohne „ <code translate="no">group_by_field</code> “.</p>
+<p>Verwenden Sie die Gruppierung, wenn eine nicht gruppierte Suche auf Elementebene zu viele doppelte übergeordnete Entitäten zurückgibt. Wenn Sie jedes übereinstimmende Struct-Element als einzelnen Treffer erhalten möchten, verwenden Sie <a href="/docs/de/basic-vector-search-with-structarray.md">die einfache Vektorsuche mit StructArray</a> ohne „ <code translate="no">group_by_field</code> “.</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">Bevor Sie beginnen<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -75,13 +75,13 @@ summary: >-
 <tr><th>Voraussetzung</th><th>Details</th></tr>
 </thead>
 <tbody>
-<tr><td>Vektor-Unterfeld auf Elementebene</td><td>Verwenden Sie ein StructArray-Vektor-Unterfeld wie z. B. „ <code translate="no">chunks[emb]</code> “, das mit einer regulären Vektormetrik indiziert ist.</td></tr>
+<tr><td>Vektor-Unterfeld auf Elementebene</td><td>Verwenden Sie ein StructArray-Vektor-Unterfeld wie beispielsweise „ <code translate="no">chunks[emb]</code> “, das mit einer regulären Vektormetrik indiziert ist.</td></tr>
 <tr><td>Reguläre Vektorabfrage</td><td>Verwenden Sie einen regulären Abfragevektor, keinen „ <code translate="no">EmbeddingList</code> “.</td></tr>
 <tr><td>Gruppierung nach Primärschlüssel</td><td>Verwenden Sie den Primärschlüssel der Sammlung als „ <code translate="no">group_by_field</code> “, z. B. „ <code translate="no">doc_id</code> “.</td></tr>
 <tr><td>Keine Bereichsparameter</td><td>Kombinieren Sie die Gruppierungssuche nicht mit Bereichssuchparametern wie <code translate="no">radius</code> oder <code translate="no">range_filter</code>.</td></tr>
 </tbody>
 </table>
-<p>Informationen zur Indexeinrichtung finden Sie unter <a href="/docs/de/index-structarray-fields.md">„Index StructArray-Felder</a>“.</p>
+<p>Informationen zur Indexkonfiguration finden Sie unter <a href="/docs/de/index-structarray-fields.md">„Index StructArray-Felder</a>“.</p>
 <h2 id="Run-grouped-element-level-search" class="common-anchor-header">Gruppierte Suche auf Elementebene ausführen<button data-href="#Run-grouped-element-level-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -97,7 +97,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Im folgenden Beispiel werden zunächst einzelne Chunks durchsucht, anschließend werden die Elementtreffer anhand des Primärschlüssels der übergeordneten Entität gruppiert.</p>
+    </button></h2><p>Das folgende Beispiel durchsucht zunächst einzelne Chunks und gruppiert anschließend die Elementtreffer anhand des Primärschlüssels der übergeordneten Entität.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -189,7 +189,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die hybride Gruppierung mit StructArray ist eine Funktion auf Elementebene. Sie wird nur unterstützt, wenn alle Teilsuchen auf Vektorfelder auf Elementebene unter demselben StructArray-Feld abzielen. Verwenden Sie keine Anfragen auf EmbeddingList-Ebene in einer gruppierten StructArray-Hybridsuche.</p>
+    </button></h2><p>Die hybride Gruppierung mit StructArray ist eine Funktion auf Elementebene. Sie wird nur unterstützt, wenn alle Teilsuchen auf Vektorfelder auf Elementebene unter demselben StructArray-Feld abzielen. Verwenden Sie keine Abfragen auf EmbeddingList-Ebene in einer gruppierten StructArray-Hybridsuche.</p>
 <p>Das folgende Beispiel geht davon aus, dass das StructArray-Feld „ <code translate="no">chunks</code> “ zwei Vektor-Unterfelder auf Elementebene enthält, „ <code translate="no">chunks[emb]</code> “ und „ <code translate="no">chunks[code_emb]</code> “, und dass beide mit regulären Vektormetriken indiziert sind.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest, RRFRanker
 
@@ -221,7 +221,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In diesem Beispiel zielen beide Unterabfragen auf Vektorfelder auf Elementebene unter demselben StructArray-Feld „ <code translate="no">chunks</code> “ ab. Eine Hybrid-Suche unterstützt keine Gruppierung auf Elementebene, wenn sie normale Vektorfelder, verschiedene StructArray-Felder oder Abfragen auf EmbeddingList-Ebene mischt.</p>
+<p>In diesem Beispiel zielen beide Unterabfragen auf Vektorfelder auf Elementebene unter demselben StructArray-Feld „ <code translate="no">chunks</code> “ ab. Eine Hybrid-Suche unterstützt keine Gruppierung auf Elementebene, wenn sie normale Vektorfelder, verschiedene StructArray-Felder oder Abfragen auf „EmbeddingList“-Ebene mischt.</p>
 <h2 id="Interpret-grouped-results" class="common-anchor-header">Gruppierte Ergebnisse interpretieren<button data-href="#Interpret-grouped-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -243,7 +243,7 @@ results = client.hybrid_search(
 </thead>
 <tbody>
 <tr><td><code translate="no">id</code></td><td>Primärschlüssel der gruppierten übergeordneten Entität.</td></tr>
-<tr><td><code translate="no">distance</code> oder Wert</td><td>Punktzahl oder Abstand des ausgewählten Struct-Elements für diese übergeordnete Entität.</td></tr>
+<tr><td><code translate="no">distance</code> oder Wert</td><td>Wert oder Abstand des ausgewählten Struct-Elements für diese übergeordnete Entität.</td></tr>
 <tr><td><code translate="no">offset</code></td><td>Nullbasierte Position des ausgewählten Struct-Elements bei der Rückgabe.</td></tr>
 <tr><td>Wiederholte Primärschlüssel</td><td>Bei einer Gruppierung nach dem Primärschlüssel nicht zu erwarten.</td></tr>
 <tr><td><code translate="no">limit</code></td><td>Gilt für gruppierte Ergebnisse der übergeordneten Entität.</td></tr>
@@ -292,7 +292,7 @@ results = client.hybrid_search(
 <li><p>Gruppierung nach einem Skalarfeld, das kein Primärschlüssel ist.</p></li>
 <li><p>Gruppierung nach mehreren Feldern. Die StructArray-Gruppierung auf Elementebene unterstützt nur die Gruppierung nach Primärschlüsseln.</p></li>
 <li><p>Die Erwartung, dass gruppierte Ergebnisse jedes übereinstimmende Struct-Element darstellen. Die Gruppierung liefert höchstens ein Ergebnis pro übergeordneter Entität.</p></li>
-<li><p>Annahme, dass die gruppierte Suche auf Elementebene einen „ <code translate="no">MAX_SIM*</code> “-Score im Stil einer „EmbeddingList“ neu berechnet. Die Gruppierung fasst Treffer auf Elementebene zusammen; sie ändert das Bewertungsmodell nicht.</p></li>
+<li><p>Annahme, dass die gruppierte Suche auf Elementebene einen „ <code translate="no">MAX_SIM*</code> “-Score im Stil von „EmbeddingList“ neu berechnet. Die Gruppierung fasst Treffer auf Elementebene zusammen; sie ändert das Bewertungsmodell nicht.</p></li>
 <li><p>Kombination von „ <code translate="no">group_by_field</code> “ mit „ <code translate="no">radius</code> “ oder „ <code translate="no">range_filter</code> “.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Nächste Schritte<button data-href="#Next-steps" class="anchor-icon" translate="no">

@@ -23,8 +23,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>En las aplicaciones de búsqueda agentiva, la búsqueda vectorial y la coincidencia de patrones al estilo «grep» suelen complementarse entre sí. La búsqueda vectorial recupera entidades que son semánticamente relevantes, mientras que la coincidencia de patrones filtra esos resultados según estructuras de cadenas exactas, como códigos de error, prefijos de registros, dominios de correo electrónico, rutas URL o identificadores.</p>
-<p>En Milvus, puedes expresar estas restricciones de patrones en filtros escalares con « <code translate="no">LIKE</code> » para una coincidencia sencilla con comodines, y « <code translate="no">=~</code> » o « <code translate="no">!~</code> » para expresiones regulares <a href="https://github.com/google/re2/wiki/syntax">RE2</a>. Puedes combinar estos filtros con « <code translate="no">query</code> », « <code translate="no">search</code> » o la búsqueda híbrida.</p>
+    </button></h1><p>En las aplicaciones de búsqueda agentiva, la búsqueda vectorial y la coincidencia de patrones al estilo «grep» suelen complementarse entre sí. La búsqueda vectorial recupera entidades que son semánticamente relevantes, mientras que la coincidencia de patrones filtra esos resultados según estructuras de cadenas exactas, como códigos de error, prefijos de registros, dominios de correo electrónico, rutas de URL o identificadores.</p>
+<p>En Milvus, puedes expresar estas restricciones de patrones en filtros escalares con « <code translate="no">LIKE</code> » para la coincidencia simple con comodines, y « <code translate="no">=~</code> » o « <code translate="no">!~</code> » para expresiones regulares <a href="https://github.com/google/re2/wiki/syntax">RE2</a>. Puedes combinar estos filtros con « <code translate="no">query</code> », « <code translate="no">search</code> » o la búsqueda híbrida.</p>
 <p>Las expresiones de coincidencia de patrones se escriben en el parámetro <code translate="no">filter</code>. Por ejemplo, la siguiente consulta busca mensajes de registro que contengan un código de error como <code translate="no">E1001</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -61,7 +61,7 @@ res = client.query(
 <tr><td><code translate="no">VARCHAR</code> campo</td><td>Sí</td><td>Sí</td><td>Objetivo típico para la coincidencia de patrones en campos de cadena.</td></tr>
 <tr><td><code translate="no">JSON</code> ruta con tipo de conversión « <code translate="no">VARCHAR</code> »</td><td>Sí</td><td>Sí</td><td>El valor de la ruta JSON debe ser una cadena para que las coincidencias sean positivas. Si creas un índice en la ruta JSON para acelerar el proceso, establece <code translate="no">json_cast_type=&quot;varchar&quot;</code>.</td></tr>
 <tr><td><code translate="no">ARRAY&lt;VARCHAR&gt;</code> elemento</td><td>Sí</td><td>Sí</td><td>Coincide con un elemento específico por índice, como <code translate="no">tags[0]</code>. La coincidencia de patrones <strong>no</strong> analiza todos los elementos; solo se aplica al elemento del índice especificado.</td></tr>
-<tr><td>Objetivos numéricos, booleanos, vectoriales, « <code translate="no">TEXT</code> » u otros que no sean de tipo «<code translate="no">VARCHAR</code> »</td><td>No</td><td>No</td><td>La coincidencia de patrones solo está disponible para valores de tipo « <code translate="no">VARCHAR</code> », rutas JSON que se resuelven en cadenas o elementos indexados de tipo « <code translate="no">ARRAY&lt;VARCHAR&gt;</code> ».</td></tr>
+<tr><td>Objetivos numéricos, booleanos, vectoriales, « <code translate="no">TEXT</code> » u otros no «<code translate="no">VARCHAR</code> »</td><td>No</td><td>No</td><td>La coincidencia de patrones solo está disponible para valores de tipo « <code translate="no">VARCHAR</code> », rutas JSON que se resuelven en cadenas o elementos indexados de tipo « <code translate="no">ARRAY&lt;VARCHAR&gt;</code> ».</td></tr>
 </tbody>
 </table>
 <h2 id="Choose-LIKE-or-regex" class="common-anchor-header">Elige «LIKE» o una expresión regular<button data-href="#Choose-LIKE-or-regex" class="anchor-icon" translate="no">
@@ -80,18 +80,18 @@ res = client.query(
         ></path>
       </svg>
     </button></h2><p>Elige el operador más sencillo que exprese el patrón que necesitas.</p>
-<p>Si necesitas una coincidencia exacta de cadena, te recomendamos que utilices « <code translate="no">==</code> » en lugar de la coincidencia de patrones. Utiliza « <code translate="no">LIKE</code> » o «regex» solo cuando el filtro deba coincidir con un patrón.</p>
+<p>Si necesitas una coincidencia exacta de cadena, te recomendamos que utilices « <code translate="no">==</code> » en lugar de la coincidencia de patrones. Utiliza « <code translate="no">LIKE</code> » o «regex» solo cuando el filtro tenga que coincidir con un patrón.</p>
 <table>
 <thead>
 <tr><th>Requisito</th><th>Operador recomendado</th><th>Ejemplo</th><th>Descripción</th></tr>
 </thead>
 <tbody>
 <tr><td>Igualdad exacta de la cadena</td><td><code translate="no">==</code></td><td><code translate="no">status == &quot;active&quot;</code></td><td>Coincidencia exacta de la cadena « <code translate="no">active</code> ».</td></tr>
-<tr><td>Coincidencia simple de prefijo</td><td><code translate="no">LIKE</code></td><td><code translate="no">name LIKE &quot;Prod%&quot;</code></td><td>Coincide con las cadenas que empiezan por « <code translate="no">Prod</code> ».</td></tr>
+<tr><td>Coincidencia simple de prefijo</td><td><code translate="no">LIKE</code></td><td><code translate="no">name LIKE &quot;Prod%&quot;</code></td><td>Coincide con cadenas que empiezan por « <code translate="no">Prod</code> ».</td></tr>
 <tr><td>Coincidencia simple de sufijo</td><td><code translate="no">LIKE</code></td><td><code translate="no">filename LIKE &quot;%.json&quot;</code></td><td>Coincide con cadenas que terminan en « <code translate="no">.json</code> ».</td></tr>
-<tr><td>Coincidencia simple por contenido</td><td><code translate="no">LIKE</code></td><td><code translate="no">description LIKE &quot;%vector database%&quot;</code></td><td>Coincide con valores que contengan « <code translate="no">vector database</code> » en cualquier parte de la cadena.</td></tr>
-<tr><td>Coincidencia con un código estructurado o un patrón de longitud fija</td><td><code translate="no">=~</code></td><td><code translate="no">code =~ &quot;E[0-9]{4}&quot;</code></td><td>Coincide con cadenas que, distinguiendo entre mayúsculas y minúsculas, contengan « <code translate="no">E</code> » seguido de cuatro dígitos, como « <code translate="no">E1001</code> ».</td></tr>
-<tr><td>Coincidencia de patrones sin distinción entre mayúsculas y minúsculas</td><td><code translate="no">=~</code> con <code translate="no">(?i)</code></td><td><code translate="no">message =~ &quot;(?i)error&quot;</code></td><td>Coincide con « <code translate="no">error</code> », « <code translate="no">ERROR</code> » u otras variantes de mayúsculas y minúsculas.</td></tr>
+<tr><td>Coincidencia simple «contiene»</td><td><code translate="no">LIKE</code></td><td><code translate="no">description LIKE &quot;%vector database%&quot;</code></td><td>Coincide con valores que contengan <code translate="no">vector database</code> en cualquier parte de la cadena.</td></tr>
+<tr><td>Búsqueda de un código estructurado o un patrón de longitud fija</td><td><code translate="no">=~</code></td><td><code translate="no">code =~ &quot;E[0-9]{4}&quot;</code></td><td>Coincide con cadenas que contengan, distinguiendo entre mayúsculas y minúsculas, « <code translate="no">E</code> » seguido de cuatro dígitos, como « <code translate="no">E1001</code> ».</td></tr>
+<tr><td>Coincidencia de patrones sin distinción entre mayúsculas y minúsculas</td><td><code translate="no">=~</code> con <code translate="no">(?i)</code></td><td><code translate="no">message =~ &quot;(?i)error&quot;</code></td><td>Coincide con « <code translate="no">error</code> », « <code translate="no">ERROR</code> » u otras variantes con mayúsculas y minúsculas.</td></tr>
 <tr><td>Excluir valores que coincidan con un patrón de expresión regular</td><td><code translate="no">!~</code></td><td><code translate="no">message !~ &quot;^DEBUG&quot;</code></td><td>Excluye las cadenas que comienzan por <code translate="no">DEBUG</code>.</td></tr>
 </tbody>
 </table>
@@ -114,7 +114,7 @@ res = client.query(
     </button></h2><p>El operador <code translate="no">LIKE</code> sirve para la coincidencia simple con comodines en valores de cadena. Solo admite los siguientes comodines:</p>
 <table>
 <thead>
-<tr><th>Carácter comodín</th><th>Descripción</th></tr>
+<tr><th>Comodín</th><th>Descripción</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">%</code></td><td>Coincide con cero o más caracteres.</td></tr>
@@ -136,7 +136,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Utiliza la posición de <code translate="no">%</code> y <code translate="no">_</code> para controlar dónde aparece el texto fijo en la cadena coincidente.</p>
+    </button></h3><p>Utiliza la posición de « <code translate="no">%</code> » y « <code translate="no">_</code> » para controlar dónde aparece el texto fijo en la cadena coincidente.</p>
 <table>
 <thead>
 <tr><th>Requisito</th><th>Patrón</th><th>Ejemplo de filtro</th></tr>
@@ -163,7 +163,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Utiliza « <code translate="no">LIKE</code> » para coincidencias de prefijo, sufijo, contenido y un solo carácter en una posición fija. « <code translate="no">LIKE</code> » no admite clases de caracteres como « <code translate="no">[0-9]</code> », alternancias como « <code translate="no">error|failed</code> », recuentos de repeticiones como « <code translate="no">{4}</code> », anclajes como « <code translate="no">^</code> » o « <code translate="no">$</code> », ni indicadores de no distinguir mayúsculas y minúsculas como « <code translate="no">(?i)</code> ». Utiliza expresiones regulares (regex) para esos patrones.</p>
+    </button></h3><p>Utiliza « <code translate="no">LIKE</code> » para coincidencias de prefijo, sufijo, contenido y un solo carácter en una posición fija. « <code translate="no">LIKE</code> » no admite clases de caracteres como « <code translate="no">[0-9]</code> », alternancias como « <code translate="no">error|failed</code> », recuentos de repeticiones como « <code translate="no">{4}</code> », anclajes como « <code translate="no">^</code> » o « <code translate="no">$</code> », ni indicadores de no distinción entre mayúsculas y minúsculas como « <code translate="no">(?i)</code> ». Utiliza expresiones regulares para esos patrones.</p>
 <p>Utiliza « <code translate="no">==</code> » para la igualdad exacta de una cadena completa. Utiliza « <code translate="no">LIKE</code> » solo cuando el filtro necesite una coincidencia con comodines.</p>
 <h3 id="Escaping-wildcards-in-a-LIKE-pattern" class="common-anchor-header">Escapar los comodines en un patrón LIKE<button data-href="#Escaping-wildcards-in-a-LIKE-pattern" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -182,7 +182,7 @@ res = client.query(
       </svg>
     </button></h3><p>En los patrones « <code translate="no">LIKE</code> », « <code translate="no">%</code> » coincide con cero o más caracteres y « <code translate="no">_</code> » coincide exactamente con un carácter. Para que coincidan literalmente « <code translate="no">%</code> », « <code translate="no">_</code> » o « <code translate="no">\</code> », escapa el carácter con una barra invertida (<code translate="no">\</code>):</p>
 <ul>
-<li><code translate="no">name LIKE r&quot;\%&quot;</code> coincide con el valor literal <code translate="no">%</code>.</li>
+<li><code translate="no">name LIKE r&quot;\%&quot;</code> coincide con el valor literal « <code translate="no">%</code> ».</li>
 <li><code translate="no">name LIKE r&quot;\_%&quot;</code> coincide con valores que empiezan por el carácter literal « <code translate="no">_</code> ».</li>
 <li><code translate="no">name LIKE r&quot;\\%&quot;</code> coincide con valores que empiezan por una barra invertida literal.</li>
 </ul>
@@ -228,7 +228,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Se recomienda el uso de literales de cadena sin formato para los patrones de expresiones regulares que contengan barras invertidas. En una cadena sin formato, escrita como <code translate="no">r&quot;...&quot;</code> o <code translate="no">r'...'</code>, las barras invertidas se pasan tal cual al motor de expresiones regulares. Esto evita el escape adicional que requieren los literales de cadena normales.</p>
+    </button></h3><p>Se recomienda utilizar literales de cadena sin formato para los patrones de expresiones regulares que contengan barras invertidas. En una cadena sin formato, escrita como <code translate="no">r&quot;...&quot;</code> o <code translate="no">r'...'</code>, las barras invertidas se pasan tal cual al motor de expresiones regulares. Esto evita el escape adicional que requieren los literales de cadena normales.</p>
 <p>Por ejemplo:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ r&quot;\d{4}-\d{2}-\d{2}&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -256,7 +256,7 @@ res = client.query(
 </thead>
 <tbody>
 <tr><td>Contiene texto literal</td><td><code translate="no">error</code></td><td><code translate="no">filter = 'message =~ &quot;error&quot;'</code></td></tr>
-<tr><td>Empieza por un prefijo</td><td><code translate="no">^ERR</code></td><td><code translate="no">filter = 'code =~ &quot;^ERR&quot;'</code></td></tr>
+<tr><td>Empieza con un prefijo</td><td><code translate="no">^ERR</code></td><td><code translate="no">filter = 'code =~ &quot;^ERR&quot;'</code></td></tr>
 <tr><td>Termina con un sufijo</td><td><code translate="no">\.json$</code></td><td><code translate="no">filter = 'filename =~ &quot;\\.json$&quot;'</code></td></tr>
 <tr><td>Coincide con una secuencia de dígitos</td><td><code translate="no">[0-9]+</code></td><td><code translate="no">filter = 'message =~ &quot;[0-9]+&quot;'</code></td></tr>
 <tr><td>Coincide con un número fijo de dígitos</td><td><code translate="no">[0-9]{4}</code></td><td><code translate="no">filter = 'code =~ &quot;[0-9]{4}&quot;'</code></td></tr>
@@ -333,7 +333,7 @@ res = client.query(
 <tr><th>Patrón o característica de los datos</th><th>Índice a tener en cuenta</th><th>Notas</th></tr>
 </thead>
 <tbody>
-<tr><td>Contiene subcadenas literales fijas, como <code translate="no">message =~ &quot;error.*timeout&quot;</code> o <code translate="no">message LIKE &quot;%database%&quot;</code></td><td><code translate="no">NGRAM</code></td><td>Resulta útil cuando Milvus puede extraer subcadenas literales significativas del patrón. Para más detalles, consulte <a href="/docs/es/ngram.md">NGRAM</a>.</td></tr>
+<tr><td>Contiene subcadenas literales fijas, como <code translate="no">message =~ &quot;error.*timeout&quot;</code> o <code translate="no">message LIKE &quot;%database%&quot;</code></td><td><code translate="no">NGRAM</code></td><td>Resulta útil cuando Milvus puede extraer subcadenas literales significativas del patrón. Para más detalles, consulta <a href="/docs/es/ngram.md">NGRAM</a>.</td></tr>
 <tr><td>Filtros de cadenas de tipo prefijo, exactos o de igualdad, especialmente en campos con cardinalidad baja o moderada</td><td><code translate="no">STL_SORT</code>, « <code translate="no">INVERTED</code> » o <code translate="no">BITMAP</code></td><td>Pueden resultar más eficaces cuando el campo tiene valores repetidos o cuando el filtro se aproxima a una coincidencia exacta. Para más detalles, consulta <a href="/docs/es/stl-sort.md">STL_SORT</a>, <a href="/docs/es/inverted.md">INVERTED</a> y <a href="/docs/es/bitmap.md">BITMAP</a>.</td></tr>
 <tr><td>Patrones Regex sin literales fijos, o patrones dominados por clases de caracteres, tokens cortos o comodines</td><td>Realice pruebas de rendimiento antes de confiar en la aceleración por índice</td><td>Estos patrones pueden ofrecer una selectividad de índice limitada y pueden recurrir a exploraciones más amplias.</td></tr>
 </tbody>

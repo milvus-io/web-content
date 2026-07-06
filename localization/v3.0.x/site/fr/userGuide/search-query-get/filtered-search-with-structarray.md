@@ -2,10 +2,10 @@
 id: filtered-search-with-structarray.md
 title: Recherche filtrée avec StructArray
 summary: >-
-  Cette page permet d'ajouter un filtrage scalaire à la recherche vectorielle
-  sur les champs d'un StructArray. Le filtrage d'un StructArray comporte deux
+  Cette page vous permet d'ajouter un filtrage scalaire à la recherche
+  vectorielle sur les champs StructArray. Le filtrage StructArray comporte deux
   niveaux : les filtres au niveau des lignes sélectionnent les entités parentes,
-  tandis que les filtres au niveau des éléments déterminent quels éléments du
+  tandis que les filtres au niveau des éléments déterminent quels éléments
   Struct participent à la recherche vectorielle au niveau des éléments.
 ---
 <h1 id="Filtered-Search-with-StructArray" class="common-anchor-header">Recherche filtrée avec StructArray<button data-href="#Filtered-Search-with-StructArray" class="anchor-icon" translate="no">
@@ -97,7 +97,7 @@ results = client.search(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Le filtre ci-dessus sélectionne uniquement les entités dont le champ de niveau supérieur « <code translate="no">category</code> » est « <code translate="no">&quot;search&quot;</code> ». Il n’identifie pas un élément Struct correspondant en particulier.</p>
-<h2 id="Filter-element-level-vector-search" class="common-anchor-header">Filtrage de la recherche vectorielle au niveau des éléments<button data-href="#Filter-element-level-vector-search" class="anchor-icon" translate="no">
+<h2 id="Filter-element-level-vector-search" class="common-anchor-header">Filtrer la recherche vectorielle au niveau des éléments<button data-href="#Filter-element-level-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -169,7 +169,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilisez les opérateurs <code translate="no">MATCH_*</code> lorsque le filtre doit déterminer si une entité parente est éligible en fonction de ses éléments Struct. Ces opérateurs sont des filtres au niveau des lignes : ils sélectionnent des entités, mais ne renvoient pas d’offset d’élément en eux-mêmes.</p>
+    </button></h2><p>Utilisez les opérateurs « <code translate="no">MATCH_*</code> » lorsque le filtre doit déterminer si une entité parente est éligible en fonction de ses éléments Struct. Ces opérateurs sont des filtres au niveau des lignes : ils sélectionnent des entités, mais ne renvoient pas d’offset d’élément en eux-mêmes.</p>
 <table>
 <thead>
 <tr><th>Opérateur</th><th>À utiliser lorsque</th><th>Exemple</th></tr>
@@ -219,7 +219,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">element_filter</code> Dans la recherche hybride, appliquez les filtres StructArray là où la condition doit s’appliquer. Un filtre de niveau supérieur peut être partagé par l’ensemble de la recherche hybride. Un filtre « » doit être associé à la requête de niveau élément StructArray qui nécessite des contraintes au niveau des éléments.</p>
+    </button></h2><p>Dans la recherche hybride, appliquez les filtres StructArray là où la condition doit s’appliquer. Un filtre de niveau supérieur peut être partagé par l’ensemble de la recherche hybride. Un filtre « <code translate="no">element_filter</code> » doit être associé à la requête de niveau élément StructArray qui nécessite des contraintes au niveau des éléments.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest, RRFRanker
 
 query_vector = [<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>]
@@ -301,7 +301,7 @@ results = client.hybrid_search(
     </button></h2><ul>
 <li><p>Utilisation de ` <code translate="no">$[subfield]</code> ` en dehors de ` <code translate="no">element_filter</code> ` ou ` <code translate="no">MATCH_*</code>`.</p></li>
 <li><p>Utilisation de ` <code translate="no">chunks.section</code> ` à la place de la syntaxe des opérateurs StructArray, telle que ` <code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code>`.</p></li>
-<li><p>Utiliser <code translate="no">element_filter</code> alors que vous n'avez besoin que d'un filtrage au niveau des lignes. Utilisez plutôt <code translate="no">MATCH_ANY</code> si vous avez uniquement besoin de sélectionner des entités.</p></li>
+<li><p>Utilisation de ` <code translate="no">element_filter</code> ` alors que seul un filtrage au niveau des lignes est nécessaire. Utilisez plutôt ` <code translate="no">MATCH_ANY</code> ` si vous avez uniquement besoin de sélectionner des entités.</p></li>
 <li><p>S'attendre à ce que ` <code translate="no">MATCH_*</code> ` renvoie des indices d'éléments. Ces opérateurs sélectionnent des entités et n'identifient pas eux-mêmes un élément correspondant.</p></li>
 <li><p>Écrire des prédicats booléens nus tels que <code translate="no">$[has_code]</code>. Utilisez des comparaisons explicites telles que <code translate="no">$[has_code] == true</code>.</p></li>
 <li><p>Placer « <code translate="no">element_filter</code> » avant un prédicat de niveau supérieur dans la même expression de filtre.</p></li>
@@ -325,5 +325,5 @@ results = client.hybrid_search(
 <li><p>Pour consulter la syntaxe complète des filtres StructArray, lisez la section <a href="/docs/fr/struct-array-operators.md">Opérateurs StructArray</a>.</p></li>
 <li><p>Pour effectuer d’abord des recherches vectorielles non filtrées, consultez la section « <a href="/docs/fr/basic-vector-search-with-structarray.md">Recherche vectorielle de base avec StructArray</a> ».</p></li>
 <li><p>Pour créer des index scalaires pour les filtres StructArray fréquemment utilisés, consultez la section « <a href="/docs/fr/index-structarray-fields.md">Indexer les champs StructArray</a> ».</p></li>
-<li><p>Pour connaître les limites de filtrage et de recherche spécifiques à chaque version, consultez la section « <a href="/docs/fr/structarray-limits.md">Limites de StructArray</a> ».</p></li>
+<li><p>Pour vérifier les limites de filtrage et de recherche spécifiques à chaque version, consultez la section « <a href="/docs/fr/structarray-limits.md">Limites de StructArray</a> ».</p></li>
 </ol>

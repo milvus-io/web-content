@@ -25,7 +25,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Utilisez cette page pour regrouper les résultats de recherche au niveau des éléments StructArray par entité parente. La recherche au niveau des éléments peut renvoyer plusieurs résultats provenant de la même entité lorsque plusieurs éléments Struct correspondent à la requête. Le regroupement regroupe ces résultats au niveau des éléments de sorte que chaque entité parente n'apparaisse qu'une seule fois au maximum.</p>
-<p>Cette page utilise la collection « <code translate="no">tech_articles</code> » issue de la <a href="/docs/fr/create-structarray-field.md">section «Créer un champ StructArray</a>». La collection comporte un champ StructArray nommé « <code translate="no">chunks</code> ». Le sous-champ vectoriel « <code translate="no">chunks[emb]</code> » est indexé pour la recherche au niveau des éléments à l’aide d’une métrique vectorielle standard.</p>
+<p>Cette page utilise la collection « <code translate="no">tech_articles</code> » issue de la section « <a href="/docs/fr/create-structarray-field.md">Créer un champ StructArray</a> ». Cette collection comporte un champ StructArray nommé « <code translate="no">chunks</code> ». Le sous-champ vectoriel « <code translate="no">chunks[emb]</code> » est indexé pour la recherche au niveau des éléments à l’aide d’une métrique vectorielle standard.</p>
 <h2 id="How-grouping-applies-to-StructArray" class="common-anchor-header">Comment le regroupement s’applique à StructArray<button data-href="#How-grouping-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -52,7 +52,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Utilisez le regroupement lorsque la recherche au niveau des éléments non regroupés renvoie trop d’entités parentes en double. Si vous souhaitez que chaque élément Struct correspondant soit considéré comme un résultat individuel, utilisez <a href="/docs/fr/basic-vector-search-with-structarray.md">la recherche vectorielle de base avec StructArray</a> sans l’option « <code translate="no">group_by_field</code> ».</p>
+<p>Utilisez le regroupement lorsque la recherche au niveau des éléments non regroupés renvoie trop d’entités parentes en double. Si vous souhaitez que chaque élément Struct correspondant soit considéré comme un résultat distinct, utilisez <a href="/docs/fr/basic-vector-search-with-structarray.md">la recherche vectorielle de base avec StructArray</a> sans l’option « <code translate="no">group_by_field</code> ».</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">Avant de commencer<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -75,7 +75,7 @@ summary: >-
 <tr><th>Conditions requises</th><th>Détails</th></tr>
 </thead>
 <tbody>
-<tr><td>Sous-champ vectoriel au niveau des éléments</td><td>Utilisez un sous-champ vectoriel StructArray tel que <code translate="no">chunks[emb]</code>, indexé à l'aide d'une métrique vectorielle standard.</td></tr>
+<tr><td>Sous-champ vectoriel au niveau de l’élément</td><td>Utilisez un sous-champ vectoriel de type StructArray, tel que <code translate="no">chunks[emb]</code>, indexé à l'aide d'une métrique vectorielle standard.</td></tr>
 <tr><td>Requête vectorielle standard</td><td>Utilisez un vecteur de requête standard, et non un <code translate="no">EmbeddingList</code>.</td></tr>
 <tr><td>Regroupement par clé primaire</td><td>Utilisez la clé primaire de la collection sous la forme d'un « <code translate="no">group_by_field</code> », par exemple <code translate="no">doc_id</code>.</td></tr>
 <tr><td>Pas de paramètres de plage</td><td>Ne combinez pas la recherche par regroupement avec des paramètres de recherche par plage tels que <code translate="no">radius</code> ou <code translate="no">range_filter</code>.</td></tr>
@@ -189,7 +189,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Le regroupement hybride avec StructArray est une fonctionnalité au niveau des éléments. Il n’est pris en charge que lorsque toutes les sous-recherches ciblent des champs vectoriels au niveau des éléments sous le même champ StructArray. N’utilisez pas de requêtes au niveau de l’EmbeddingList dans une recherche hybride StructArray regroupée.</p>
+    </button></h2><p>Le regroupement hybride avec StructArray est une fonctionnalité au niveau des éléments. Il n’est pris en charge que lorsque toutes les sous-recherches ciblent des champs vectoriels au niveau des éléments sous le même champ StructArray. N’utilisez pas de requêtes au niveau de la liste d’embeddings (EmbeddingList) dans une recherche hybride StructArray regroupée.</p>
 <p>L’exemple suivant part du principe que le champ StructArray « <code translate="no">chunks</code> » comporte deux sous-champs vectoriels au niveau des éléments, « <code translate="no">chunks[emb]</code> » et « <code translate="no">chunks[code_emb]</code> », et que ces deux sous-champs sont indexés à l’aide de métriques vectorielles standard.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest, RRFRanker
 
@@ -221,8 +221,8 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Dans cet exemple, les deux sous-requêtes ciblent des champs vectoriels au niveau des éléments appartenant au même champ StructArray, <code translate="no">chunks</code>. Une recherche hybride ne prend pas en charge le regroupement au niveau des éléments si elle mélange des champs vectoriels normaux, différents champs StructArray ou des requêtes au niveau de l’EmbeddingList.</p>
-<h2 id="Interpret-grouped-results" class="common-anchor-header">Interpréter les résultats groupés<button data-href="#Interpret-grouped-results" class="anchor-icon" translate="no">
+<p>Dans cet exemple, les deux sous-requêtes ciblent des champs vectoriels au niveau des éléments appartenant au même champ StructArray, <code translate="no">chunks</code>. Une recherche hybride ne prend pas en charge le regroupement au niveau des éléments si elle mélange des champs vectoriels normaux, différents champs StructArray ou des requêtes au niveau de la liste d’intégration (EmbeddingList).</p>
+<h2 id="Interpret-grouped-results" class="common-anchor-header">Interprétation des résultats groupés<button data-href="#Interpret-grouped-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -243,9 +243,9 @@ results = client.hybrid_search(
 </thead>
 <tbody>
 <tr><td><code translate="no">id</code></td><td>Clé primaire de l’entité parente regroupée.</td></tr>
-<tr><td><code translate="no">distance</code> ou score</td><td>Score ou distance de l'élément Struct sélectionné pour cette entité parente.</td></tr>
+<tr><td><code translate="no">distance</code> ou score</td><td>Score ou distance de l’élément Struct sélectionné pour cette entité parente.</td></tr>
 <tr><td><code translate="no">offset</code></td><td>Position (à partir de zéro) de l’élément Struct sélectionné lors du renvoi.</td></tr>
-<tr><td>Clés primaires répétées</td><td>Non attendues lors d'un regroupement par clé primaire.</td></tr>
+<tr><td>Clés primaires répétées</td><td>Non attendues lors d’un regroupement par clé primaire.</td></tr>
 <tr><td><code translate="no">limit</code></td><td>S'applique aux résultats groupés de l'entité parente.</td></tr>
 </tbody>
 </table>
@@ -270,7 +270,7 @@ results = client.hybrid_search(
 <li><p>Ne combinez pas la recherche avec regroupement et la recherche par plage.</p></li>
 <li><p>N’utilisez pas de requête « <code translate="no">EmbeddingList</code> » ni de métrique « <code translate="no">MAX_SIM*</code> » pour la recherche groupée.</p></li>
 <li><p>Le regroupement hybride n’est pris en charge que lorsque toutes les sous-recherches ciblent des champs vectoriels au niveau des éléments sous le même champ StructArray.</p></li>
-<li><p>Le regroupement hybride n’est pas pris en charge lorsque la recherche hybride mélange un champ vectoriel normal, un autre champ StructArray ou une requête au niveau d’une EmbeddingList.</p></li>
+<li><p>Le regroupement hybride n’est pas pris en charge lorsque la recherche hybride mélange un champ vectoriel normal, un autre champ StructArray ou une requête au niveau de la liste d’intégration (EmbeddingList).</p></li>
 </ul>
 <h2 id="Common-mistakes" class="common-anchor-header">Erreurs courantes<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"

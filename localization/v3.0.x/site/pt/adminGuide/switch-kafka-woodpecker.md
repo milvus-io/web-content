@@ -22,7 +22,7 @@ summary: >-
       </svg>
     </button></h1><p>Esta página descreve como alternar a fila de mensagens (MQ) de um <strong>cluster Milvus</strong> entre <strong>o Kafka</strong> (integrado ou externo) e <strong>o Woodpecker</strong> (backend MinIO), em ambos os sentidos. Para conhecer o fluxo de trabalho geral e os pré-requisitos, consulte <a href="/docs/pt/switch-mq-type.md">Alternar o tipo de MQ</a>.</p>
 <div class="alert note">
-<p><strong>Pré-requisito:</strong> A funcionalidade «Alternar MQ» está disponível no <strong>Milvus 3.0 e versões posteriores</strong>. Atualize a sua instância do Milvus para o Milvus 3.0 ou posterior antes de começar — a funcionalidade não está disponível em versões anteriores.</p>
+<p><strong>Pré-requisito:</strong> A funcionalidade «Alternar MQ» está disponível no <strong>Milvus 3.0 e versões posteriores</strong>. Atualize a sua instância do Milvus para a versão 3.0 ou posterior antes de começar — a funcionalidade não está disponível em versões anteriores.</p>
 </div>
 <div class="alert warning">
 <p>A alteração da fila de mensagens é uma <strong>operação de alto risco</strong>. Escolha a secção que corresponde <strong>ao seu</strong> método de implementação — <strong>«Com o Helm»</strong> ou <strong>«Com o Milvus Operator»</strong> — e siga-a do início ao fim. Não misture comandos do Helm com os do Operator.</p>
@@ -58,7 +58,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p><strong>Passo 1: Verifique se a instância do Milvus está em execução.</strong> Certifique-se de que o seu cluster do Milvus está a funcionar corretamente — por exemplo, criando uma coleção de teste, inserindo dados e executando uma consulta.</p>
-<p><strong>Passo 2: Execute a mudança de MQ.</strong> Exponha a interface de gestão do MixCoord e, em seguida, chame a API de mudança:</p>
+<p><strong>Passo 2: Execute a mudança de MQ.</strong> Abra a interface de gestão do MixCoord e, em seguida, chame a API de mudança:</p>
 <pre><code translate="no" class="language-shell">kubectl port-forward --address 0.0.0.0 service/my-release-milvus-mixcoord 29091:9091
 <button class="copy-code-btn"></button></code></pre>
 <p>Noutro terminal:</p>
@@ -72,7 +72,7 @@ summary: >-
 <p>Uma mudança bem-sucedida regista « <code translate="no">[mqTypeValue=woodpecker]</code> ».</p>
 <p><strong>Passo 4: (Opcional) Parar o Kafka e limpar.</strong> Para o Kafka <strong>integrado</strong>, remova os pods do Kafka e os respetivos PVCs. Para o Kafka <strong>externo</strong>, limpe os tópicos do Milvus na instância externa do Kafka — estes seguem o formato <code translate="no">&lt;cluster_prefix&gt;-dml_&lt;seqNo&gt;_&lt;TimeTick&gt;&lt;Version&gt;</code>.</p>
 <div class="alert note">
-<p>Se pretender voltar a utilizar o Kafka mais tarde, limpe primeiro os dados/tópicos para evitar conflitos.</p>
+<p>Se pretender voltar a utilizar o Kafka mais tarde, elimine primeiro os dados/tópicos para evitar conflitos.</p>
 </div>
 <h3 id="Switch-from-Woodpecker-to-Kafka-Helm" class="common-anchor-header">Mudar do Woodpecker para o Kafka (Helm)<button data-href="#Switch-from-Woodpecker-to-Kafka-Helm" class="anchor-icon" translate="no">
       <svg translate="no"

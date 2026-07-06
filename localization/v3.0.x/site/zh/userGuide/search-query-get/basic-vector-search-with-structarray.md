@@ -40,12 +40,12 @@ summary: >-
     </button></h2><p>请确保Collection Schema、数据和索引已准备就绪。</p>
 <table>
 <thead>
-<tr><th>要求</th><th>准备位置</th></tr>
+<tr><th>要求</th><th>在哪里准备</th></tr>
 </thead>
 <tbody>
 <tr><td>创建一个 StructArray 字段，例如<code translate="no">chunks</code> 。</td><td><a href="/docs/zh/create-structarray-field.md">创建 StructArray 字段</a></td></tr>
 <tr><td>插入其<code translate="no">chunks</code> 字段包含Struct对象的实体。</td><td><a href="/docs/zh/insert-data-into-structarray-fields.md">将数据插入 StructArray 字段</a></td></tr>
-<tr><td>在<code translate="no">chunks[emb_list_vector]</code> 上创建<code translate="no">MAX_SIM*</code> 索引，用于EmbeddingList搜索。</td><td><a href="/docs/zh/index-structarray-fields.md">为 StructArray 字段建立索引</a></td></tr>
+<tr><td>在<code translate="no">chunks[emb_list_vector]</code> 上为EmbeddingList搜索创建<code translate="no">MAX_SIM*</code> 索引。</td><td><a href="/docs/zh/index-structarray-fields.md">为 StructArray 字段建立索引</a></td></tr>
 <tr><td>在<code translate="no">chunks[emb]</code> 上创建常规向量度量索引，用于元素级搜索。</td><td><a href="/docs/zh/index-structarray-fields.md">为 StructArray 字段建立索引</a></td></tr>
 </tbody>
 </table>
@@ -78,7 +78,7 @@ summary: >-
 <tr><td>度量族</td><td><code translate="no">MAX_SIM*</code>，例如<code translate="no">MAX_SIM_COSINE</code> 。</td><td>常规向量度量，例如<code translate="no">COSINE</code> 、<code translate="no">IP</code> 或<code translate="no">L2</code> 。</td></tr>
 <tr><td>一个匹配结果代表什么</td><td>一个匹配的实体，其 StructArray 向量子场与查询嵌入列表相似。</td><td>StructArray 字段内的匹配 Struct 元素。</td></tr>
 <tr><td>结果粒度</td><td>实体级别。</td><td>Struct 元素级别。</td></tr>
-<tr><td>偏移量</td><td>不适用。</td><td>标识返回时匹配的结构体元素的零基位置。</td></tr>
+<tr><td>偏移量</td><td>不适用。</td><td>标识返回时匹配的 Struct 元素的零基位置。</td></tr>
 <tr><td>典型用法</td><td>ColBERT、ColPali 及其他后期交互检索模式。</td><td>块级、段落级、片段级、补丁级或事实级检索。</td></tr>
 </tbody>
 </table>
@@ -130,7 +130,7 @@ results = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <p>在此搜索模式下，<code translate="no">limit</code> 控制每个查询返回的实体数量。输出可能包含 StructArray 子字段，但命中结果本身代表匹配的父实体，而非某个特定的 Struct 元素。</p>
 <div class="alert note">
-<p>如需完整的 ColBERT 或 ColPali 风格操作指南，请参阅《<a href="/docs/zh/search-with-embedding-lists.md">使用 Embeddings 进行搜索》</a>。本页面仅介绍 StructArray 的基本搜索行为。</p>
+<p>有关完整的 ColBERT 或 ColPali 风格操作指南，请参阅《<a href="/docs/zh/search-with-embedding-lists.md">使用 Embeddings 列表进行搜索</a>》。本页面仅介绍 StructArray 的基本搜索行为。</p>
 </div>
 <h2 id="Run-element-level-search" class="common-anchor-header">运行元素级搜索<button data-href="#Run-element-level-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -174,7 +174,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>在元素级搜索中，每个命中结果代表一个匹配的 Struct 元素。<code translate="no">offset</code> 值是该元素在 StructArray 字段中的零起始位置。如果多个 Struct 元素与查询匹配，同一实体可能会出现多次。<code translate="no">limit</code> 值适用于元素命中结果，而非唯一的父实体。</p>
+<p>在元素级搜索中，每个命中结果代表一个匹配的 Struct 元素。<code translate="no">offset</code> 值是该元素在 StructArray 字段中的从零开始的索引位置。如果多个 Struct 元素与查询匹配，同一实体可能会出现多次。<code translate="no">limit</code> 值适用于元素命中结果，而非唯一的父实体。</p>
 <h2 id="Interpret-results" class="common-anchor-header">解读结果<button data-href="#Interpret-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -242,8 +242,8 @@ results = client.search(
       </svg>
     </button></h2><ol>
 <li><p>若要通过标量条件限制元素级搜索，请参阅《<a href="/docs/zh/filtered-search-with-structarray.md">使用 StructArray 进行过滤搜索</a>》。</p></li>
-<li><p>若要按得分或距离阈值进行搜索，请参阅《<a href="/docs/zh/range-search-with-structarray.md">使用 StructArray 进行范围搜索</a>》。</p></li>
+<li><p>若要按分数或距离阈值进行搜索，请参阅《<a href="/docs/zh/range-search-with-structarray.md">使用 StructArray 进行范围搜索</a>》。</p></li>
 <li><p>若要在元素级搜索后，为每个父实体最多返回一个结果，请参阅《<a href="/docs/zh/grouping-search-with-structarray.md">使用 StructArray 进行分组搜索</a>》。</p></li>
 <li><p>若要将 StructArray 搜索与其他向量搜索结合使用，请参阅《<a href="/docs/zh/hybrid-search-with-structarray.md">使用 StructArray 进行混合搜索</a>》。</p></li>
-<li><p>要查看支持的数据类型、度量、过滤器以及特定版本的限制，请参阅《<a href="/docs/zh/structarray-limits.md">StructArray 限制</a>》。</p></li>
+<li><p>如需了解支持的数据类型、度量、过滤器以及特定版本的限制，请参阅《<a href="/docs/zh/structarray-limits.md">StructArray 限制</a>》。</p></li>
 </ol>

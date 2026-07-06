@@ -45,7 +45,7 @@ summary: >-
 <tr><th>Objetivo</th><th>Utilização</th><th>Comportamento do resultado</th></tr>
 </thead>
 <tbody>
-<tr><td>Filtrar por um campo escalar de nível superior, como <code translate="no">category</code>.</td><td>Expressão de filtro normal.</td><td>Seleciona entidades pai antes ou durante a pesquisa.</td></tr>
+<tr><td>Filtrar por um campo escalar de nível superior, como <code translate="no">category</code>.</td><td>Expressão de filtro regular.</td><td>Seleciona entidades pai antes ou durante a pesquisa.</td></tr>
 <tr><td>Restringe a pesquisa vetorial ao nível do elemento aos elementos Struct que correspondam às condições escalares.</td><td><code translate="no">element_filter</code>.</td><td>Pesquisa apenas os elementos Struct correspondentes e pode devolver os deslocamentos dos elementos correspondentes.</td></tr>
 <tr><td>Seleciona entidades consoante se algum, todos ou um número específico de elementos Struct correspondam a um predicado.</td><td><code translate="no">MATCH_ANY</code>, <code translate="no">MATCH_ALL</code>, <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> ou <code translate="no">MATCH_EXACT</code>.</td><td>Filtragem ao nível da linha. Estes operadores não devolvem deslocamentos por si próprios.</td></tr>
 </tbody>
@@ -152,7 +152,7 @@ results = client.search(
 <p>Neste exemplo, o predicado de nível superior <code translate="no">category == &quot;search&quot;</code> seleciona entidades candidatas, e <code translate="no">element_filter</code> restringe a pesquisa vetorial ao nível do elemento a blocos em que <code translate="no">section</code>, <code translate="no">quality_score</code> e <code translate="no">has_code</code> coincidem todos no mesmo elemento Struct.</p>
 <div class="alert note">
 <p>Aviso</p>
-<p>Quando combinar um predicado de nível superior com <code translate="no">element_filter</code>, coloque <code translate="no">element_filter</code> no final da expressão. Uma expressão de filtro pode conter apenas um <code translate="no">element_filter</code>, e não é possível aninhar <code translate="no">element_filter</code> ou <code translate="no">MATCH_*</code> dentro de outro operador StructArray.</p>
+<p>Quando combinar um predicado de nível superior com <code translate="no">element_filter</code>, coloque <code translate="no">element_filter</code> no final da expressão. Uma expressão de filtro só pode conter um <code translate="no">element_filter</code>, e não é possível aninhar <code translate="no">element_filter</code> ou <code translate="no">MATCH_*</code> dentro de outro operador StructArray.</p>
 </div>
 <h2 id="Filter-entities-with-MATCH-operators" class="common-anchor-header">Filtrar entidades com operadores MATCH<button data-href="#Filter-entities-with-MATCH-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -169,7 +169,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilize os operadores « <code translate="no">MATCH_*</code> » quando o filtro tiver de determinar se uma entidade pai é elegível com base nos seus elementos «Struct». Estes operadores são filtros ao nível da linha: selecionam entidades, mas não devolvem, por si só, os deslocamentos dos elementos.</p>
+    </button></h2><p>Utilize os operadores <code translate="no">MATCH_*</code> quando o filtro tiver de decidir se uma entidade pai se qualifica com base nos seus elementos Struct. Estes operadores são filtros ao nível da linha: selecionam entidades, mas não devolvem, por si só, os deslocamentos dos elementos.</p>
 <table>
 <thead>
 <tr><th>Operador</th><th>Utilize-o quando</th><th>Exemplo</th></tr>
@@ -177,7 +177,7 @@ results = client.search(
 <tbody>
 <tr><td><code translate="no">MATCH_ANY</code></td><td>Pelo menos um elemento Struct deve satisfazer o predicado.</td><td><code translate="no">MATCH_ANY(chunks, $[section] == &quot;index&quot;)</code></td></tr>
 <tr><td><code translate="no">MATCH_ALL</code></td><td>Todos os elementos Struct devem satisfazer o predicado.</td><td><code translate="no">MATCH_ALL(chunks, $[quality_score] &gt; 0.5)</code></td></tr>
-<tr><td><code translate="no">MATCH_LEAST</code></td><td>Pelo menos <code translate="no">N</code> elementos da estrutura Struct devem satisfazer o predicado.</td><td><code translate="no">MATCH_LEAST(chunks, $[has_code] == true, threshold=2)</code></td></tr>
+<tr><td><code translate="no">MATCH_LEAST</code></td><td>Pelo menos <code translate="no">N</code> elementos da estrutura devem satisfazer o predicado.</td><td><code translate="no">MATCH_LEAST(chunks, $[has_code] == true, threshold=2)</code></td></tr>
 <tr><td><code translate="no">MATCH_MOST</code></td><td>No máximo, <code translate="no">N</code> elementos da Struct devem satisfazer o predicado.</td><td><code translate="no">MATCH_MOST(chunks, $[section] == &quot;appendix&quot;, threshold=1)</code></td></tr>
 <tr><td><code translate="no">MATCH_EXACT</code></td><td>Exatamente <code translate="no">N</code> elementos Struct devem satisfazer o predicado.</td><td><code translate="no">MATCH_EXACT(chunks, $[section] == &quot;summary&quot;, threshold=1)</code></td></tr>
 </tbody>

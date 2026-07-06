@@ -76,7 +76,7 @@ summary: >-
 <tbody>
 <tr><td>Subcampo vetorial ao nível do elemento</td><td>Utilize um subcampo vetorial StructArray, como <code translate="no">chunks[emb]</code>, indexado com uma métrica vetorial regular.</td></tr>
 <tr><td>Consulta vetorial normal</td><td>Utilize um vetor de consulta regular, e não um <code translate="no">EmbeddingList</code>.</td></tr>
-<tr><td>Agrupamento por chave primária</td><td>Utilize a chave primária da coleção como um ` <code translate="no">group_by_field</code>`, tal como ` <code translate="no">doc_id</code>`.</td></tr>
+<tr><td>Agrupamento por chave primária</td><td>Utilize a chave primária da coleção como « <code translate="no">group_by_field</code> », tal como <code translate="no">doc_id</code>.</td></tr>
 <tr><td>Sem parâmetros de intervalo</td><td>Não combine a pesquisa de agrupamento com parâmetros de pesquisa de intervalo, como <code translate="no">radius</code> ou <code translate="no">range_filter</code>.</td></tr>
 </tbody>
 </table>
@@ -147,7 +147,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pode combinar a pesquisa agrupada com a filtragem escalar do StructArray. Utilize « <code translate="no">element_filter</code> » quando a condição escalar deva restringir quais os elementos Struct que participam na pesquisa vetorial ao nível do elemento.</p>
+    </button></h2><p>Pode combinar a pesquisa agrupada com a filtragem escalar do `StructArray`. Utilize ` <code translate="no">element_filter</code> ` quando a condição escalar deva restringir quais os elementos `Struct` que participam na pesquisa vetorial ao nível do elemento.</p>
 <pre><code translate="no" class="language-python">filter_expr = (
     <span class="hljs-string">&#x27;category == &quot;search&quot; &amp;&amp; &#x27;</span>
     <span class="hljs-string">&#x27;element_filter(chunks, &#x27;</span>
@@ -188,7 +188,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O agrupamento híbrido com StructArray é uma funcionalidade ao nível do elemento. Só é suportado quando todas as sub-pesquisas têm como alvo campos vetoriais ao nível do elemento no âmbito do mesmo campo StructArray. Não utilize pedidos ao nível de EmbeddingList numa pesquisa híbrida agrupada de StructArray.</p>
+    </button></h2><p>O agrupamento híbrido com StructArray é uma funcionalidade ao nível do elemento. Só é suportado quando todas as sub-pesquisas têm como alvo campos vetoriais ao nível do elemento no âmbito do mesmo campo StructArray. Não utilize pedidos ao nível da EmbeddingList numa pesquisa híbrida agrupada com StructArray.</p>
 <p>O exemplo seguinte pressupõe que o campo StructArray « <code translate="no">chunks</code> » tem dois subcampos vetoriais ao nível do elemento, « <code translate="no">chunks[emb]</code> » e « <code translate="no">chunks[code_emb]</code> », e que ambos estão indexados com métricas vetoriais regulares.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest, RRFRanker
 
@@ -243,9 +243,9 @@ results = client.hybrid_search(
 <tbody>
 <tr><td><code translate="no">id</code></td><td>Chave primária da entidade pai agrupada.</td></tr>
 <tr><td><code translate="no">distance</code> ou pontuação</td><td>Pontuação ou distância do elemento Struct selecionado para essa entidade pai.</td></tr>
-<tr><td><code translate="no">offset</code></td><td>Posição, a partir de zero, do elemento Struct selecionado quando devolvido.</td></tr>
+<tr><td><code translate="no">offset</code></td><td>Posição, com início em zero, do elemento Struct selecionado quando devolvido.</td></tr>
 <tr><td>Chaves primárias repetidas</td><td>Não esperadas ao agrupar pela chave primária.</td></tr>
-<tr><td><code translate="no">limit</code></td><td>Aplica-se aos resultados agrupados da entidade pai.</td></tr>
+<tr><td><code translate="no">limit</code></td><td>Aplica-se a resultados agrupados da entidade pai.</td></tr>
 </tbody>
 </table>
 <h2 id="Limitations" class="common-anchor-header">Limitações<button data-href="#Limitations" class="anchor-icon" translate="no">
@@ -265,7 +265,7 @@ results = client.hybrid_search(
       </svg>
     </button></h2><ul>
 <li><p>A pesquisa de agrupamento aplica-se apenas à pesquisa de vetores StructArray ao nível do elemento. A pesquisa EmbeddingList e a pesquisa híbrida ao nível de EmbeddingList não suportam o agrupamento.</p></li>
-<li><p>Utilize a chave primária como ` <code translate="no">group_by_field</code>`. O agrupamento ao nível do elemento StructArray não é um agrupamento de uso geral sobre campos escalares arbitrários.</p></li>
+<li><p>Utilize a chave primária como « <code translate="no">group_by_field</code> ». O agrupamento ao nível dos elementos do StructArray não é um agrupamento de uso geral sobre campos escalares arbitrários.</p></li>
 <li><p>Não combine a pesquisa de agrupamento com a pesquisa por intervalo.</p></li>
 <li><p>Não utilize uma consulta « <code translate="no">EmbeddingList</code> » nem uma métrica « <code translate="no">MAX_SIM*</code> » para a pesquisa de agrupamento.</p></li>
 <li><p>O agrupamento híbrido só é suportado quando todas as sub-pesquisas têm como alvo campos vetoriais ao nível do elemento no âmbito do mesmo campo StructArray.</p></li>
@@ -312,6 +312,6 @@ results = client.hybrid_search(
     </button></h2><ol>
 <li><p>Para aprender primeiro a pesquisa ao nível do elemento sem agrupamento, leia <a href="/docs/pt/basic-vector-search-with-structarray.md">«Pesquisa vetorial básica com StructArray</a>».</p></li>
 <li><p>Para adicionar filtros escalares à pesquisa agrupada, leia <a href="/docs/pt/filtered-search-with-structarray.md">«Pesquisa filtrada com StructArray</a>».</p></li>
-<li><p>Para utilizar limites de pontuação ou distância em vez de agrupamento, leia <a href="/docs/pt/range-search-with-structarray.md">«Pesquisa por intervalo com StructArray</a>».</p></li>
+<li><p>Para utilizar limites de pontuação ou distância em vez do agrupamento, leia <a href="/docs/pt/range-search-with-structarray.md">«Pesquisa por intervalo com StructArray</a>».</p></li>
 <li><p>Para verificar os limites de pesquisa do StructArray, leia <a href="/docs/pt/structarray-limits.md">«Limites do StructArray</a>».</p></li>
 </ol>

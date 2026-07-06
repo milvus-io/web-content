@@ -17,7 +17,7 @@ title: Pulsar
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Apache Pulsar est l’un des backends de file d’attente de messages (WAL) pris en charge par Milvus. Dans Milvus 3.x, <a href="/docs/fr/woodpecker.md">Woodpecker</a> est la file d’attente de messages par défaut ; Pulsar reste toutefois entièrement pris en charge pour les utilisateurs qui le préfèrent. Pulsar est principalement utilisé avec Milvus Distributed (cluster) ; les déploiements autonomes utilisent généralement Woodpecker intégré ou <a href="/docs/fr/mq_rocksmq.md">RocksMQ</a>.</p>
+    </button></h1><p>Apache Pulsar est l'un des backends de file d'attente de messages (WAL) pris en charge par Milvus. Dans Milvus 3.x, <a href="/docs/fr/woodpecker.md">Woodpecker</a> est la file d’attente de messages par défaut ; Pulsar reste toutefois entièrement pris en charge pour les utilisateurs qui le préfèrent. Pulsar est principalement utilisé avec Milvus Distributed (cluster) ; les déploiements autonomes utilisent généralement Woodpecker intégré ou <a href="/docs/fr/mq_rocksmq.md">RocksMQ</a>.</p>
 <h2 id="Version-compatibility" class="common-anchor-header">Compatibilité des versions<button data-href="#Version-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +39,7 @@ title: Pulsar
 </thead>
 <tbody>
 <tr><td>2.5.x et versions ultérieures</td><td>Pulsar v3 (recommandée) ou Pulsar v2</td><td>Pulsar v3 (via Helm / Milvus Operator)</td></tr>
-<tr><td>2.4.x et versions antérieures</td><td>Pulsar v2</td><td>Pulsar v2</td></tr>
+<tr><td>2.4.x et antérieures</td><td>Pulsar v2</td><td>Pulsar v2</td></tr>
 </tbody>
 </table>
 <p>Depuis Milvus 2.5, le chart Helm de Milvus et Milvus Operator déploient <strong>Pulsar v3</strong> par défaut ; Pulsar v2 reste compatible. Voir <a href="/docs/fr/upgrade-pulsar-v3.md">Mettre à niveau Pulsar de la version 2 à la version 3</a> et <a href="/docs/fr/use-pulsar-v2.md">Continuer à utiliser Pulsar v2</a>.</p>
@@ -103,7 +103,7 @@ title: Pulsar
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pour connecter Milvus à un service Pulsar <strong>externe</strong>, désactivez le Pulsar intégré et activez l'option « <code translate="no">externalPulsar</code> » dans une surécriture de la configuration « <code translate="no">values.yaml</code> » :</p>
+    </button></h3><p><code translate="no">values.yaml</code> Pour connecter Milvus à un service Pulsar <strong>externe</strong>, désactivez le Pulsar intégré et activez l'option « <code translate="no">externalPulsar</code> » dans une surc :</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">pulsarv3:</span>
   <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span>
 <span class="hljs-attr">externalPulsar:</span>
@@ -264,7 +264,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
       </svg>
     </button></h2><ul>
 <li><strong>Mise à niveau de la version 2.5.x vers la version 2.6.x :</strong> <strong>limitations de la file d’attente de messages</strong>: lors de la mise à niveau vers Milvus v3.0-beta, vous devez conserver votre choix actuel de file d’attente de messages. Le passage d’un système de file d’attente de messages à un autre pendant la mise à niveau n’est pas pris en charge. La prise en charge du changement de système de file d’attente de messages sera disponible dans les versions futures.
-Si vous utilisez Pulsar et souhaitez le conserver, ne modifiez pas la file d’attente de messages pendant la mise à niveau.</li>
+Si vous utilisez Pulsar et souhaitez le conserver, ne modifiez pas la file d'attente de messages pendant la mise à niveau.</li>
 <li><strong>Pulsar v2 → v3 :</strong> consultez <a href="/docs/fr/upgrade-pulsar-v3.md">la section Mise à niveau de Pulsar de la v2 à la v3</a>; pour rester en v2, consultez <a href="/docs/fr/use-pulsar-v2.md">la section Continuer à utiliser Pulsar v2</a>.</li>
 </ul>
 <h2 id="Whats-next" class="common-anchor-header">Prochaines étapes<button data-href="#Whats-next" class="anchor-icon" translate="no">

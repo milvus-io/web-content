@@ -22,7 +22,7 @@ summary: >-
       </svg>
     </button></h1><p>Esta guía describe cómo cambiar la cola de mensajes (MQ) de una implementación existente de Milvus <strong>de Woodpecker a otra cola de mensajes</strong>, en línea y sin tiempo de inactividad.</p>
 <div class="alert warning">
-<p>Esta función está pendiente de lanzamiento y está sujeta a cambios. Ponte en contacto con el servicio de asistencia de Milvus si deseas probarla o tienes alguna pregunta.</p>
+<p>Esta función está pendiente de lanzamiento y está sujeta a cambios. Ponte en contacto con el servicio de asistencia de Milvus si quieres probarla o tienes alguna duda.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Requisitos previos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -82,7 +82,7 @@ summary: >-
     </button></h2><ol>
 <li>Asegúrate de que la instancia de Milvus se esté ejecutando correctamente.</li>
 <li>Confirma el tipo de MQ de origen y el tipo de MQ de destino.</li>
-<li>Aplica la configuración de acceso de la cola de mensajes de destino a la configuración de Milvus <strong>sin</strong> modificar el valor de « <code translate="no">mqType</code> ».</li>
+<li>Aplica los ajustes de acceso de la cola de mensajes de destino a la configuración de Milvus <strong>sin</strong> modificar el valor de « <code translate="no">mqType</code> ».</li>
 <li>Activa el cambio llamando a la API «WAL alter» en MixCoord.</li>
 <li>Supervisa los registros para confirmar que el cambio se ha completado.</li>
 </ol>
@@ -119,5 +119,5 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Evita cambiar de tipo de MQ repetidamente. Si necesitas cambiar, asegúrate de limpiar los datos relacionados antes de cada cambio; los datos residuales pueden provocar un comportamiento inesperado.</p>
+<p>Evita cambiar repetidamente de un tipo de MQ a otro. Si necesitas cambiar, asegúrate de limpiar los datos relacionados antes de cada cambio; los datos residuales pueden provocar un comportamiento inesperado.</p>
 </div>

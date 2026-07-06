@@ -46,14 +46,14 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>Champ vectoriel au niveau de la collection + sous-champ EmbeddingList de StructArray</td><td>Niveau de l’entité</td><td>Les candidats finaux sont indexés par clé primaire.</td><td>Ne pas utiliser.</td></tr>
-<tr><td>Champ vectoriel au niveau de la collection + sous-champ au niveau de l'élément de StructArray</td><td>Niveau de l’entité</td><td>Les résultats au niveau des éléments sont regroupés en candidats au niveau des entités avant le reclassement hybride.</td><td>Configuration facultative de regroupement sur l'<code translate="no">AnnSearchRequest</code> au niveau des éléments de StructArray.</td></tr>
+<tr><td>Champ vectoriel au niveau de la collection + sous-champ au niveau de l'élément de StructArray</td><td>Niveau de l’entité</td><td>Les résultats au niveau des éléments sont regroupés en candidats au niveau des entités avant le reclassement hybride.</td><td>Configuration facultative de regroupement sur l’ <code translate="no">AnnSearchRequest</code> au niveau des éléments de StructArray.</td></tr>
 <tr><td>Plusieurs sous-champs au niveau des éléments sous le même champ StructArray</td><td>Niveau élément</td><td>Les candidats finaux sont indexés par la clé primaire et le décalage de l'élément Struct.</td><td>Ne pas utiliser.</td></tr>
 <tr><td>Sous-champs au niveau des éléments sous différents champs StructArray</td><td>Niveau de l’entité</td><td>Les décalages d’éléments ne partagent pas d’identité commune ; par conséquent, chaque <code translate="no">AnnSearchRequest</code> au niveau des éléments de StructArray est regroupée avant le reclassement.</td><td><code translate="no">AnnSearchRequest</code>Configuration facultative de regroupement pour chaque sous-champ au niveau des éléments de StructArray.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
 <p>Avertissement</p>
-<p>Utilisez l’ <code translate="no">element_scope</code> uniquement pour configurer la réduction des objets d’ <code translate="no">AnnSearchRequest</code> s au niveau des éléments de StructArray dans une recherche hybride au niveau des éléments ne portant pas sur la même structure. Ne l’utilisez pas pour les requêtes EmbeddingList, les requêtes vectorielles au niveau des collections ou la recherche hybride au niveau des éléments de StructArray portant sur la même structure.</p>
+<p>Utilisez l’ <code translate="no">element_scope</code> uniquement pour configurer le regroupement des objets d’ <code translate="no">AnnSearchRequest</code> s au niveau des éléments de StructArray dans une recherche hybride au niveau des éléments ne portant pas sur la même structure. Ne l’utilisez pas pour les requêtes EmbeddingList, les requêtes vectorielles au niveau des collections ou la recherche hybride au niveau des éléments de StructArray portant sur la même structure.</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">Avant de commencer<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -70,19 +70,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Préparez la collection, les données et les index avant d'exécuter une recherche hybride.</p>
+    </button></h2><p>Préparez la collection, les données et les index avant d’exécuter une recherche hybride.</p>
 <table>
 <thead>
-<tr><th>Condition préalable</th><th>Détails</th></tr>
+<tr><th>Prérequis</th><th>Détails</th></tr>
 </thead>
 <tbody>
 <tr><td>Champ StructArray</td><td>La collection contient un champ StructArray tel que <code translate="no">chunks</code>.</td></tr>
 <tr><td>Sous-champs vectoriels</td><td>Utilisez des sous-champs vectoriels distincts pour la recherche dans EmbeddingList et la recherche au niveau des éléments.</td></tr>
-<tr><td>Les index</td><td><code translate="no">chunks[emb_list_vector]</code> utilise une métrique de type « <code translate="no">MAX_SIM*</code> ». « <code translate="no">chunks[emb]</code> » utilise une métrique vectorielle classique telle que <code translate="no">COSINE</code>, <code translate="no">IP</code> ou <code translate="no">L2</code>.</td></tr>
+<tr><td>Les index</td><td><code translate="no">chunks[emb_list_vector]</code> utilise une métrique de type « <code translate="no">MAX_SIM*</code> ». La fonction « <code translate="no">chunks[emb]</code> » utilise une métrique vectorielle classique telle que <code translate="no">COSINE</code>, <code translate="no">IP</code> ou <code translate="no">L2</code>.</td></tr>
 <tr><td>Reranker</td><td>Choisissez un réclassificateur hybride tel que <code translate="no">RRFRanker</code> ou un autre réclassificateur pris en charge par votre application.</td></tr>
 </tbody>
 </table>
-<p>Pour la configuration de l'index, consultez la section <a href="/docs/fr/index-structarray-fields.md">Champs StructArray de l'index</a>.</p>
+<p>Pour la configuration de l'index, consultez la section « <a href="/docs/fr/index-structarray-fields.md">Champs StructArray de l'index</a> ».</p>
 <h2 id="Run-hybrid-search-with-an-EmbeddingList-request" class="common-anchor-header">Lancer une recherche hybride avec une requête EmbeddingList<button data-href="#Run-hybrid-search-with-an-EmbeddingList-request" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -139,7 +139,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Dans cet exemple, les deux objets ` <code translate="no">AnnSearchRequest</code> ` produisent des candidats au niveau de l’entité. Le résultat final est indexé par la clé primaire de l’entité parente. N’ajoutez pas de ` <code translate="no">element_scope</code> ` à la requête `EmbeddingList`.</p>
+<p>Dans cet exemple, les deux objets ` <code translate="no">AnnSearchRequest</code> ` produisent des candidats au niveau de l’entité. Le résultat final est indexé par la clé primaire de l’entité parente. N’ajoutez pas ` <code translate="no">element_scope</code> ` à la requête `EmbeddingList`.</p>
 <h2 id="Run-same-StructArray-element-level-hybrid-search" class="common-anchor-header">Lancer une recherche hybride au niveau des éléments d’un même StructArray<button data-href="#Run-same-StructArray-element-level-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -195,7 +195,7 @@ results = client.hybrid_search(
         )
 <button class="copy-code-btn"></button></code></pre>
 <p>Les deux objets <code translate="no">AnnSearchRequest</code> effectuent une recherche dans les sous-champs vectoriels sous <code translate="no">chunks</code>. Le même décalage (à partir de zéro) fait référence au même élément Struct ; le reclassement hybride peut donc classer directement les candidats au niveau des éléments. Ne définissez pas <code translate="no">element_scope</code> dans ce mode, car aucun regroupement au niveau des entités n’est effectué.</p>
-<h2 id="Collapse-element-level-hits-for-entity-level-hybrid-search" class="common-anchor-header">Regroupement des résultats au niveau des éléments pour la recherche hybride au niveau des entités<button data-href="#Collapse-element-level-hits-for-entity-level-hybrid-search" class="anchor-icon" translate="no">
+<h2 id="Collapse-element-level-hits-for-entity-level-hybrid-search" class="common-anchor-header">Regrouper les résultats au niveau des éléments pour une recherche hybride au niveau des entités<button data-href="#Collapse-element-level-hits-for-entity-level-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -250,7 +250,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Dans cet exemple, la stratégie de regroupement ( <code translate="no">title_req</code> ) s’applique au niveau de l’entité ; le résultat hybride final est donc également au niveau de l’entité. La requête <code translate="no">chunk_req</code> renvoie d’abord les occurrences d’éléments issues de l’ <code translate="no">chunks[emb]</code>, puis regroupe les éléments renvoyés provenant de la même entité en additionnant les trois meilleurs scores d’éléments. Si l’attribut « <code translate="no">element_scope</code> » est omis alors qu’un regroupement au niveau de l’entité est nécessaire, la stratégie de regroupement par défaut est « <code translate="no">max</code> ».</p>
+<p>Dans cet exemple, la stratégie de regroupement ( <code translate="no">title_req</code> ) est définie au niveau de l’entité ; le résultat hybride final est donc également au niveau de l’entité. La requête « <code translate="no">chunk_req</code> » renvoie d’abord les occurrences d’éléments issues de l’ <code translate="no">chunks[emb]</code>, puis regroupe les éléments renvoyés provenant de la même entité en additionnant les trois meilleurs scores d’éléments. Si l’attribut « <code translate="no">element_scope</code> » est omis alors qu’un regroupement au niveau de l’entité est nécessaire, la stratégie de regroupement par défaut est « <code translate="no">max</code> ».</p>
 <h2 id="Choose-a-collapse-strategy" class="common-anchor-header">Choisissez une stratégie de regroupement<button data-href="#Choose-a-collapse-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -272,10 +272,10 @@ results = client.hybrid_search(
 </thead>
 <tbody>
 <tr><td><code translate="no">max</code></td><td>Conserver le meilleur score des éléments renvoyés pour l’entité.</td><td>Non autorisé.</td><td>Toute métrique vectorielle régulière prise en charge.</td></tr>
-<tr><td><code translate="no">sum</code></td><td>Faire la somme de tous les scores des éléments renvoyés pour l'entité.</td><td>Non autorisé.</td><td>Uniquement les métriques à corrélation positive, telles que <code translate="no">IP</code> ou <code translate="no">COSINE</code>.</td></tr>
+<tr><td><code translate="no">sum</code></td><td>Additionner tous les scores des éléments renvoyés pour l'entité.</td><td>Non autorisé.</td><td>Uniquement les métriques à corrélation positive, telles que <code translate="no">IP</code> ou <code translate="no">COSINE</code>.</td></tr>
 <tr><td><code translate="no">avg</code></td><td>Calculer la moyenne de tous les scores des éléments renvoyés pour l'entité.</td><td>Non autorisé.</td><td>Toute métrique vectorielle régulière prise en charge.</td></tr>
 <tr><td><code translate="no">topk_sum</code></td><td>Faites la somme des meilleurs scores des éléments renvoyés par « <code translate="no">K</code> » pour l’entité.</td><td>Obligatoire et doit être positif.</td><td>Uniquement les métriques à corrélation positive, telles que l'<code translate="no">IP</code> ou l'<code translate="no">COSINE</code>.</td></tr>
-<tr><td><code translate="no">topk_avg</code></td><td>Calculer la moyenne des meilleurs scores d'éléments renvoyés par l'<code translate="no">K</code> pour l'entité.</td><td>Obligatoire et doit être positif.</td><td>Toute métrique vectorielle régulière prise en charge.</td></tr>
+<tr><td><code translate="no">topk_avg</code></td><td>Calcule la moyenne des meilleurs scores des éléments renvoyés par l'<code translate="no">K</code> pour l'entité.</td><td>Obligatoire et doit être positif.</td><td>Toute métrique vectorielle régulière prise en charge.</td></tr>
 </tbody>
 </table>
 <p>La fonction « Collapse » utilise uniquement les occurrences d’éléments renvoyées par cette <code translate="no">AnnSearchRequest</code> au niveau des éléments de StructArray. Elle n’analyse pas chaque élément Struct de l’entité après la recherche ANN. Définissez la <code translate="no">limit</code> de la requête à une valeur suffisamment élevée pour fournir les éléments que vous souhaitez rendre disponibles pour la fonction « Collapse ».</p>
@@ -297,7 +297,7 @@ results = client.hybrid_search(
     </button></h2><p>Vous pouvez associer des <code translate="no">element_filter</code> à une <code translate="no">AnnSearchRequest</code> au niveau des éléments de StructArray lorsque des conditions scalaires doivent s’appliquer aux mêmes éléments Struct participant à la recherche vectorielle. Vous pouvez également utiliser une <code translate="no">filter</code> de niveau supérieur sur <code translate="no">hybrid_search()</code> pour les conditions relatives à l’entité parente.</p>
 <p>Les champs vectoriels au niveau des éléments de StructArray prennent en charge la recherche par plage dans le cadre d’une recherche hybride. Ajoutez des requêtes de type « <code translate="no">radius</code> » et, éventuellement, « <code translate="no">range_filter</code> » à l’ <code translate="no">AnnSearchRequest</code> au niveau des éléments. Les requêtes StructArray au niveau d’EmbeddingList ne prennent pas en charge la recherche par plage.</p>
 <p>Le regroupement hybride au niveau des éléments n’est pris en charge que lorsque tous les objets ` <code translate="no">AnnSearchRequest</code> ` ciblent des champs vectoriels au niveau des éléments appartenant au même champ `StructArray`, et que ` <code translate="no">group_by_field</code> ` doit être la clé primaire. Le regroupement hybride n’est pas pris en charge lorsque la requête mélange des champs vectoriels au niveau des collections, différents champs `StructArray` ou des requêtes au niveau `EmbeddingList`. Ne combinez pas la recherche par plage avec le regroupement.</p>
-<h2 id="Interpret-hybrid-results" class="common-anchor-header">Interpréter les résultats hybrides<button data-href="#Interpret-hybrid-results" class="anchor-icon" translate="no">
+<h2 id="Interpret-hybrid-results" class="common-anchor-header">Interprétation des résultats hybrides<button data-href="#Interpret-hybrid-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -342,7 +342,7 @@ results = client.hybrid_search(
 <li><p><code translate="no">sum</code> Les stratégies de regroupement « and » et « <code translate="no">topk_sum</code> » nécessitent des métriques de corrélation positive, telles que « <code translate="no">IP</code> » ou « <code translate="no">COSINE</code> ». Ne les utilisez pas avec « <code translate="no">L2</code> ».</p></li>
 <li><p><code translate="no">topk_sum</code> et <code translate="no">topk_avg</code> nécessitent une valeur positive pour <code translate="no">topk</code>. Les autres stratégies de regroupement ne doivent pas inclure <code translate="no">topk</code>.</p></li>
 <li><p>Les requêtes StructArray au niveau EmbeddingList ne prennent pas en charge la recherche par plage ni le regroupement.</p></li>
-<li><p>Le regroupement hybride n’est pris en charge que pour la recherche hybride au niveau des éléments d’un même StructArray et uniquement par clé primaire.</p></li>
+<li><p>Le regroupement hybride n’est pris en charge que pour les recherches hybrides au niveau des éléments d’un même StructArray et uniquement par clé primaire.</p></li>
 <li><p>Ne combinez pas la recherche par plage avec le regroupement.</p></li>
 </ul>
 <h2 id="Common-mistakes" class="common-anchor-header">Erreurs courantes<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
@@ -362,8 +362,8 @@ results = client.hybrid_search(
       </svg>
     </button></h2><ul>
 <li><p>Ajouter « <code translate="no">element_scope</code> » à une requête hybride au niveau des éléments d’un même StructArray. Cette requête reste au niveau des éléments et n’effectue pas de regroupement au niveau des entités.</p></li>
-<li><p>Ajouter des « <code translate="no">element_scope</code> » à une requête de type « <code translate="no">chunks[emb_list_vector]</code> ». La recherche «EmbeddingList» s’effectue déjà au niveau de l’entité.</p></li>
-<li><p>Supposer que deux champs StructArray partagent les mêmes décalages d’éléments. L’ <code translate="no">3</code> décalé dans <code translate="no">chunks</code> et l’ <code translate="no">3</code> décalé dans un autre champ StructArray correspondent à des éléments différents ; la requête hybride devient donc de niveau entité.</p></li>
+<li><p>Ajouter une « <code translate="no">element_scope</code> » à une requête « <code translate="no">chunks[emb_list_vector]</code> ». La recherche « EmbeddingList » s’effectue déjà au niveau de l’entité.</p></li>
+<li><p>Supposer que deux champs StructArray partagent des décalages d’éléments. L’ <code translate="no">3</code> décalé dans <code translate="no">chunks</code> et l’ <code translate="no">3</code> décalé dans un autre champ StructArray correspondent à des éléments différents ; la requête hybride devient donc de niveau entité.</p></li>
 <li><p>Utilisation de <code translate="no">topk_sum</code> avec <code translate="no">L2</code>. Utilisez <code translate="no">max</code>, <code translate="no">avg</code> ou <code translate="no">topk_avg</code> pour les métriques de distance négatives.</p></li>
 <li><p>Les résultats hybrides au niveau de l’entité devraient inclure le décalage de l’élément Struct sélectionné après réduction.</p></li>
 </ul>
@@ -387,5 +387,5 @@ results = client.hybrid_search(
 <li><p>Pour ajouter des filtres scalaires à la recherche hybride, consultez la section « <a href="/docs/fr/filtered-search-with-structarray.md">Recherche filtrée avec StructArray</a> ».</p></li>
 <li><p>Pour utiliser des limites de score ou de distance dans la recherche hybride, consultez la section « <a href="/docs/fr/range-search-with-structarray.md">Recherche par plage avec StructArray</a> ».</p></li>
 <li><p>Pour regrouper les résultats hybrides au niveau des éléments par entité parente, consultez la section « <a href="/docs/fr/grouping-search-with-structarray.md">Recherche groupée avec StructArray</a> ».</p></li>
-<li><p>Pour vérifier les limites de recherche de StructArray, consultez la section « <a href="/docs/fr/structarray-limits.md">Limites de StructArray</a> ».</p></li>
+<li><p>Pour connaître les limites de recherche de StructArray, consultez la section « <a href="/docs/fr/structarray-limits.md">Limites de StructArray</a> ».</p></li>
 </ol>

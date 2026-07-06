@@ -20,10 +20,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>このページでは、<strong>Milvus Standalone（Docker Compose）</strong>環境において、メッセージキュー（MQ）<strong>をRocksMQとWoodpecker</strong>（ローカルまたはMinIOバックエンド）の間で双方向に切り替える方法について説明します。一般的なワークフローと前提条件については、<a href="/docs/ja/switch-mq-type.md">「MQタイプの切り替え</a>」を参照してください。</p>
+    </button></h1><p>このページでは、<strong>Milvus Standalone（Docker Compose）</strong>環境のメッセージキュー（MQ）を、<strong>RocksMQとWoodpecker</strong>（ローカルまたはMinIOバックエンド）の間で双方向に切り替える方法について説明します。一般的なワークフローと前提条件については、<a href="/docs/ja/switch-mq-type.md">「MQタイプの切り替え</a>」を参照してください。</p>
 <div class="alert note">
 <ul>
-<li><strong>前提条件：</strong>MQの切り替え機能は<strong>、Milvus 3.0以降で</strong>利用可能です。作業を開始する前に、MilvusインスタンスをMilvus 3.0以降にアップグレードしてください。以前のバージョンではこの機能は利用できません。</li>
+<li><strong>前提条件：</strong>MQ切り替え機能は<strong>、Milvus 3.0以降で</strong>利用可能です。作業を開始する前に、MilvusインスタンスをMilvus 3.0以降にアップグレードしてください。以前のバージョンではこの機能は利用できません。</li>
 <li>MQの切り替えには、Docker<strong>Composeによる</strong>デプロイ（etcd設定ソースを有効にするもの）が必要です。シングルコンテナのDockerデプロイでは、切り替えはサポートされていません。</li>
 </ul>
 </div>
@@ -42,7 +42,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Verify-the-Milvus-instance-is-running" class="common-anchor-header">ステップ 1: Milvus インスタンスが実行されていることを確認する<button data-href="#Step-1-Verify-the-Milvus-instance-is-running" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Verify-the-Milvus-instance-is-running" class="common-anchor-header">ステップ 1: Milvus インスタンスが実行中であることを確認する<button data-href="#Step-1-Verify-the-Milvus-instance-is-running" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -185,7 +185,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><div class="alert note">
-<p>インスタンスに、以前の実行から残っているRocksMQのデータがないことを確認してください。今回がRocksMQへの切り替えが初めての場合は、この注意事項をスキップしてください。それ以外の場合は、まず関連するRocksMQのメタデータとデータをクリーンアップしてください。</p>
+<p>インスタンスに前回の実行から残っているRocksMQのデータがないことを確認してください。今回がRocksMQへの切り替えが初めての場合は、この注意事項をスキップしてください。それ以外の場合は、まず関連するRocksMQのメタデータとデータをクリーンアップしてください。</p>
 </div>
 <pre><code translate="no" class="language-shell">curl -X POST http://&lt;mixcoord_addr&gt;:&lt;mixcoord_port&gt;/management/wal/alter \
   -H &quot;Content-Type: application/json&quot; \
@@ -253,6 +253,6 @@ summary: >-
 <tr><td>Woodpecker (MinIO/ローカル)</td><td>RocksMQ</td><td><strong>サポート対象</strong></td><td></td></tr>
 <tr><td>Woodpecker MinIO</td><td>Woodpecker ローカル</td><td><strong>未対応</strong></td><td>Woodpeckerのストレージモードを切り替えるには、追加のメタデータ処理が必要ですが、これはまだサポートされていません。</td></tr>
 <tr><td>Woodpecker ローカル</td><td>Woodpecker MinIO</td><td><strong>未対応</strong></td><td>上記と同様です。</td></tr>
-<tr><td>RocksMQ / Woodpecker</td><td>外部のPulsar / Kafka</td><td><strong>サポートされていますが、推奨されません</strong></td><td>スタンドアロンインスタンスは、可能な限りシンプルに保ってください。</td></tr>
+<tr><td>RocksMQ / Woodpecker</td><td>外部の Pulsar / Kafka</td><td><strong>サポートされていますが、推奨されません</strong></td><td>スタンドアロンインスタンスは、可能な限りシンプルに保つこと。</td></tr>
 </tbody>
 </table>

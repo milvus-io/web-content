@@ -37,7 +37,7 @@ title: Kafka
 <li>Milvus unterstützt ausschließlich <strong>Kafka 2.x und 3.x</strong>.</li>
 <li>Kafka wird für Milvus Distributed (Cluster) über Helm oder den Milvus Operator konfiguriert.</li>
 </ul>
-<h2 id="Deploy-a-Milvus-cluster-with-Kafka-using-Helm" class="common-anchor-header">Einen Milvus-Cluster mit Kafka mithilfe von Helm bereitstellen<button data-href="#Deploy-a-Milvus-cluster-with-Kafka-using-Helm" class="anchor-icon" translate="no">
+<h2 id="Deploy-a-Milvus-cluster-with-Kafka-using-Helm" class="common-anchor-header">Stellen Sie einen Milvus-Cluster mit Kafka mithilfe von Helm bereit<button data-href="#Deploy-a-Milvus-cluster-with-Kafka-using-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

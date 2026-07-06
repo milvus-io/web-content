@@ -186,7 +186,7 @@ title: Kafka
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<p>Aplica la configuración (suponiendo que el archivo es <code translate="no">milvuscluster.yaml</code>):</p>
+<p>Aplica la configuración (suponiendo que el archivo sea <code translate="no">milvuscluster.yaml</code>):</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Uninstall" class="common-anchor-header">Desinstalar<button data-href="#Uninstall" class="anchor-icon" translate="no">
@@ -222,8 +222,8 @@ title: Kafka
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Actualización de la versión 2.5.x a la 2.6.x:</strong> <strong>Limitaciones de la cola de mensajes</strong>: Al actualizar a Milvus v3.0-beta, debes mantener tu elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.
-Si utiliza Kafka y desea seguir utilizándolo, no cambie la cola de mensajes durante la actualización.</li>
+<li><strong>Actualización de la versión 2.5.x a la 2.6.x:</strong> <strong>Limitaciones de la cola de mensajes</strong>: al actualizar a Milvus v3.0-beta, debes mantener tu elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.
+Si utilizas Kafka y deseas mantenerlo, no cambies la cola de mensajes durante la actualización.</li>
 <li>Solo se admiten las versiones <strong>2.x y 3.x de Kafka</strong>.</li>
 <li>Para la conectividad SASL/SSL, consulta <a href="/docs/es/connect_kafka_ssl.md">«Conectarse a Kafka con SASL/SSL</a>».</li>
 </ul>

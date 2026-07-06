@@ -24,8 +24,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>В приложениях агентного поиска векторный поиск и сопоставление шаблонов в стиле grep часто дополняют друг друга. Векторный поиск извлекает сущности, имеющие семантическое отношение, в то время как сопоставление шаблонов сужает эти результаты по точным строковым структурам, таким как коды ошибок, префиксы журналов, домены электронной почты, пути URL или идентификаторы.</p>
-<p>В Milvus эти ограничения по шаблонам можно выражать в скалярных фильтрах с помощью <code translate="no">LIKE</code> для простого сопоставления с подстановочными знаками, а также <code translate="no">=~</code> или <code translate="no">!~</code> для регулярных выражений <a href="https://github.com/google/re2/wiki/syntax">RE2</a>. Эти фильтры можно комбинировать с <code translate="no">query</code>, <code translate="no">search</code> или гибридным поиском.</p>
+    </button></h1><p>В приложениях для агентного поиска векторный поиск и сопоставление шаблонов в стиле grep часто дополняют друг друга. Векторный поиск извлекает семантически релевантные объекты, а сопоставление шаблонов сужает эти результаты по точным строковым структурам, таким как коды ошибок, префиксы журналов, домены электронной почты, пути URL или идентификаторы.</p>
+<p>В Milvus эти ограничения по шаблонам можно выразить в скалярных фильтрах с помощью <code translate="no">LIKE</code> для простого сопоставления с подстановочными знаками, а также <code translate="no">=~</code> или <code translate="no">!~</code> для регулярных выражений <a href="https://github.com/google/re2/wiki/syntax">RE2</a>. Эти фильтры можно комбинировать с <code translate="no">query</code>, <code translate="no">search</code> или гибридным поиском.</p>
 <p>Выражения для сопоставления шаблонов задаются в параметре <code translate="no">filter</code>. Например, следующий запрос находит сообщения журнала, содержащие код ошибки, такой как <code translate="no">E1001</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -37,7 +37,7 @@ res = client.query(
     output_fields=[<span class="hljs-string">&quot;message&quot;</span>, <span class="hljs-string">&quot;severity&quot;</span>],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Примеры на этой странице посвящены выражению, заданному в параметре <code translate="no">filter</code>. Тот же синтаксис выражений фильтрации можно использовать в операциях Milvus, поддерживающих скалярный фильтр, таких как <code translate="no">query</code>, <code translate="no">search</code> и гибридный поиск.</p>
+<p>Примеры на этой странице посвящены выражению, заданному в параметре « <code translate="no">filter</code> ». Тот же синтаксис выражений фильтрации можно использовать в операциях Milvus, поддерживающих скалярные фильтры, таких как « <code translate="no">query</code> », « <code translate="no">search</code> » и гибридный поиск.</p>
 <h2 id="Supported-field-types" class="common-anchor-header">Поддерживаемые типы полей<button data-href="#Supported-field-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -60,7 +60,7 @@ res = client.query(
 </thead>
 <tbody>
 <tr><td><code translate="no">VARCHAR</code> поле</td><td>Да</td><td>Да</td><td>Типичная цель для сопоставления шаблонов в строковых полях.</td></tr>
-<tr><td><code translate="no">JSON</code> путь с типом приведения <code translate="no">VARCHAR</code> </td><td>Да</td><td>Да</td><td>Значение JSON-пути должно быть строкой для положительных совпадений. Если вы создаете индекс по JSON-пути для ускорения, установите флаг « <code translate="no">json_cast_type=&quot;varchar&quot;</code> ».</td></tr>
+<tr><td><code translate="no">JSON</code> путь с типом преобразования <code translate="no">VARCHAR</code> </td><td>Да</td><td>Да</td><td>Значение JSON-пути должно быть строкой для положительных совпадений. Если вы создаете индекс по JSON-пути для ускорения, установите флаг « <code translate="no">json_cast_type=&quot;varchar&quot;</code> ».</td></tr>
 <tr><td><code translate="no">ARRAY&lt;VARCHAR&gt;</code> элемент</td><td>Да</td><td>Да</td><td>Сопоставление с конкретным элементом по индексу, например <code translate="no">tags[0]</code>. При сопоставлении по шаблону <strong>не</strong> происходит сканирование всех элементов; оно применяется только к элементу с указанным индексом.</td></tr>
 <tr><td>Числовые, логические, векторные, <code translate="no">TEXT</code> или другие цели, не относящиеся к типу «<code translate="no">VARCHAR</code> »</td><td>Нет</td><td>Нет</td><td>Сопоставление по шаблону доступно только для значений типа « <code translate="no">VARCHAR</code> », путей JSON, которые преобразуются в строки, или индексированных элементов типа « <code translate="no">ARRAY&lt;VARCHAR&gt;</code> ».</td></tr>
 </tbody>
@@ -87,12 +87,12 @@ res = client.query(
 <tr><th>Требование</th><th>Рекомендуемый оператор</th><th>Пример</th><th>Описание</th></tr>
 </thead>
 <tbody>
-<tr><td>Точное равенство строк</td><td><code translate="no">==</code></td><td><code translate="no">status == &quot;active&quot;</code></td><td>Точное совпадение строки « <code translate="no">active</code> ».</td></tr>
+<tr><td>Точное совпадение строк</td><td><code translate="no">==</code></td><td><code translate="no">status == &quot;active&quot;</code></td><td>Точное совпадение строки « <code translate="no">active</code> ».</td></tr>
 <tr><td>Простое совпадение префикса</td><td><code translate="no">LIKE</code></td><td><code translate="no">name LIKE &quot;Prod%&quot;</code></td><td>Соответствует строкам, начинающимся с <code translate="no">Prod</code>.</td></tr>
 <tr><td>Простое совпадение суффикса</td><td><code translate="no">LIKE</code></td><td><code translate="no">filename LIKE &quot;%.json&quot;</code></td><td>Соответствует строкам, заканчивающимся на <code translate="no">.json</code>.</td></tr>
 <tr><td>Простое совпадение по содержанию</td><td><code translate="no">LIKE</code></td><td><code translate="no">description LIKE &quot;%vector database%&quot;</code></td><td>Соответствует значениям, содержащим <code translate="no">vector database</code> в любом месте строки.</td></tr>
-<tr><td>Поиск структурированного кода или шаблона фиксированной длины</td><td><code translate="no">=~</code></td><td><code translate="no">code =~ &quot;E[0-9]{4}&quot;</code></td><td>Соответствует строкам, в которых (с учетом регистра) присутствует <code translate="no">E</code>, за которым следуют четыре цифры, например <code translate="no">E1001</code>.</td></tr>
-<tr><td>Поиск шаблона без учета регистра</td><td><code translate="no">=~</code> с <code translate="no">(?i)</code></td><td><code translate="no">message =~ &quot;(?i)error&quot;</code></td><td>Находит <code translate="no">error</code>, <code translate="no">ERROR</code> или другие варианты с учетом регистра.</td></tr>
+<tr><td>Поиск структурированного кода или шаблона фиксированной длины</td><td><code translate="no">=~</code></td><td><code translate="no">code =~ &quot;E[0-9]{4}&quot;</code></td><td>Соответствует строкам, в которых (с учетом регистра) содержится <code translate="no">E</code>, за которым следуют четыре цифры, например <code translate="no">E1001</code>.</td></tr>
+<tr><td>Сопоставление шаблонов без учета регистра</td><td><code translate="no">=~</code> с <code translate="no">(?i)</code></td><td><code translate="no">message =~ &quot;(?i)error&quot;</code></td><td>Находит <code translate="no">error</code>, <code translate="no">ERROR</code> или другие варианты с учетом регистра.</td></tr>
 <tr><td>Исключение значений, соответствующих шаблону регулярного выражения</td><td><code translate="no">!~</code></td><td><code translate="no">message !~ &quot;^DEBUG&quot;</code></td><td>Исключает строки, начинающиеся с <code translate="no">DEBUG</code>.</td></tr>
 </tbody>
 </table>
@@ -115,7 +115,7 @@ res = client.query(
     </button></h2><p>Оператор <code translate="no">LIKE</code> предназначен для простого сопоставления с подстановочными знаками в строковых значениях. Он поддерживает только следующие подстановочные знаки:</p>
 <table>
 <thead>
-<tr><th>Символ-заполнитель</th><th>Описание</th></tr>
+<tr><th>Символ-заменитель</th><th>Описание</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">%</code></td><td>Соответствует нулю или большему количеству символов.</td></tr>
@@ -183,7 +183,7 @@ res = client.query(
       </svg>
     </button></h3><p>В шаблонах <code translate="no">LIKE</code> символ <code translate="no">%</code> соответствует нулю или большему количеству символов, а <code translate="no">_</code> — ровно одному символу. Чтобы буквально сопоставить <code translate="no">%</code>, <code translate="no">_</code> или <code translate="no">\</code>, используйте экранирование символа обратной косой чертой (<code translate="no">\</code>):</p>
 <ul>
-<li><code translate="no">name LIKE r&quot;\%&quot;</code> соответствует буквальному значению <code translate="no">%</code>.</li>
+<li><code translate="no">name LIKE r&quot;\%&quot;</code> соответствует литеральному значению <code translate="no">%</code>.</li>
 <li><code translate="no">name LIKE r&quot;\_%&quot;</code> соответствует значениям, начинающимся с литерала <code translate="no">_</code>.</li>
 <li><code translate="no">name LIKE r&quot;\\%&quot;</code> соответствует значениям, начинающимся с литерального обратного слеша.</li>
 </ul>
@@ -204,7 +204,7 @@ res = client.query(
         ></path>
       </svg>
     </button></h2><p>Используйте фильтры на основе регулярных выражений, если шаблон требует таких возможностей регулярных выражений, как классы символов, повторения, альтернативы, якоря или сопоставление без учета регистра. Milvus применяет регулярное выражение <a href="https://github.com/google/re2/wiki/syntax">RE2</a> к строковому значению.</p>
-<p>Правая часть выражения <code translate="no">=~</code> или <code translate="no">!~</code> должна быть строковым литералом.</p>
+<p>Правая часть выражения <code translate="no">=~</code> или <code translate="no">!~</code> должна представлять собой строковый литерал.</p>
 <table>
 <thead>
 <tr><th>Оператор</th><th>Значение</th><th>Пример</th></tr>
@@ -272,7 +272,7 @@ res = client.query(
 <p>При буквальном сопоставлении метасимволов регулярных выражений следует экранировать их в шаблоне регулярного выражения. Например, чтобы найти буквальную точку (<code translate="no">\.</code> в регулярном выражении), в строке фильтра Python следует написать <code translate="no">\\.</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;email =~ &quot;@gmail\\.com$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Примечание: Фильтры Milvus на основе регулярных выражений следуют синтаксису RE2. Если шаблон регулярного выражения использует синтаксис, который RE2 не поддерживает, или является недействительным по иным причинам, Milvus отклоняет выражение фильтра. Подробности о метасимволах, флагах и поведении при сопоставлении регулярных выражений см. в справочнике <a href="https://github.com/google/re2/wiki/syntax">по синтаксису RE2</a>.</p>
+<p>Примечание: Фильтры Milvus на основе регулярных выражений следуют синтаксису RE2. Если шаблон регулярного выражения использует синтаксис, который RE2 не поддерживает, или является недействительным по иным причинам, Milvus отклоняет выражение фильтра. Подробную информацию о метасимволах регулярных выражений, флагах и поведении при сопоставлении см. в справочнике <a href="https://github.com/google/re2/wiki/syntax">по синтаксису RE2</a>.</p>
 <h3 id="Matching-behavior" class="common-anchor-header">Поведение сопоставления<button data-href="#Matching-behavior" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -289,10 +289,10 @@ res = client.query(
         ></path>
       </svg>
     </button></h3><p><strong>Сопоставление подстрок</strong></p>
-<p>Сопоставление по регулярным выражениям в Milvus использует семантику подстрок. Шаблон не обязательно должен совпадать со всем значением поля. Например, следующий фильтр находит как <code translate="no">E1001</code>, так и <code translate="no">failed with E1001 after retry</code>:</p>
+<p>Сопоставление по регулярным выражениям в Milvus использует семантику подстрок. Шаблон не обязательно должен совпадать со всем значением поля. Например, следующий фильтр сопоставляет как <code translate="no">E1001</code>, так и <code translate="no">failed with E1001 after retry</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ &quot;E[0-9]{4}&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Чтобы найти совпадение со всем значением поля, используйте якоря <code translate="no">^</code> и <code translate="no">$</code>:</p>
+<p>Чтобы найти совпадение со всем значением поля, используйте анкоры <code translate="no">^</code> и <code translate="no">$</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match only values that are exactly E followed by four digits</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;code =~ &quot;^E[0-9]{4}$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>

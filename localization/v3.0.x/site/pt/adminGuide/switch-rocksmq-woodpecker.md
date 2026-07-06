@@ -2,7 +2,7 @@
 id: switch-rocksmq-woodpecker.md
 title: Alternar entre o RocksMQ e o Woodpecker
 summary: >-
-  Alterar a fila de mensagens de uma implementação do Milvus Standalone (Docker
+  Alterne a fila de mensagens de uma implementação do Milvus Standalone (Docker
   Compose) entre o RocksMQ e o Woodpecker.
 ---
 <h1 id="Switch-between-RocksMQ-and-Woodpecker" class="common-anchor-header">Alternar entre o RocksMQ e o Woodpecker<button data-href="#Switch-between-RocksMQ-and-Woodpecker" class="anchor-icon" translate="no">
@@ -57,7 +57,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Verifique se a sua instância do Milvus Standalone Docker Compose está a funcionar corretamente — por exemplo, criando uma coleção de teste, inserindo dados e executando uma consulta.</p>
+    </button></h3><p>Verifique se a sua instância autônoma do Milvus no Docker Compose está a funcionar corretamente — por exemplo, criando uma coleção de teste, inserindo dados e executando uma consulta.</p>
 <h3 id="Step-2-Configure-Woodpecker-storage" class="common-anchor-header">Passo 2: Configurar o armazenamento do Woodpecker<button data-href="#Step-2-Configure-Woodpecker-storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -97,7 +97,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><div class="alert note">
-<p>Se esta for a primeira vez que muda para o Woodpecker, ignore esta nota. Caso contrário, limpe os metadados e dados residuais do Woodpecker antes de mudar novamente — os dados residuais podem causar um comportamento inesperado.</p>
+<p>Se for a primeira vez que muda para o Woodpecker, ignore esta nota. Caso contrário, elimine os dados e metadados residuais do Woodpecker antes de mudar novamente — os dados residuais podem causar um comportamento inesperado.</p>
 </div>
 <pre><code translate="no" class="language-shell">curl -X POST http://&lt;mixcoord_addr&gt;:&lt;mixcoord_port&gt;/management/wal/alter \
   -H &quot;Content-Type: application/json&quot; \
@@ -253,6 +253,6 @@ summary: >-
 <tr><td>Woodpecker (MinIO/local)</td><td>RocksMQ</td><td><strong>Compatível</strong></td><td></td></tr>
 <tr><td>Woodpecker MinIO</td><td>Woodpecker local</td><td><strong>Não suportado</strong></td><td>A alternância entre os modos de armazenamento do Woodpecker requer o tratamento de metadados adicionais, o que ainda não é suportado.</td></tr>
 <tr><td>Woodpecker local</td><td>Woodpecker MinIO</td><td><strong>Não suportado</strong></td><td>Tal como acima.</td></tr>
-<tr><td>RocksMQ / Woodpecker</td><td>Pulsar / Kafka externos</td><td><strong>Suportado, mas não recomendado</strong></td><td>Mantenha as instâncias autónomas o mais simples possível.</td></tr>
+<tr><td>RocksMQ / Woodpecker</td><td>Pulsar / Kafka externo</td><td><strong>Suportado, mas não recomendado</strong></td><td>Mantenha as instâncias autónomas o mais simples possível.</td></tr>
 </tbody>
 </table>

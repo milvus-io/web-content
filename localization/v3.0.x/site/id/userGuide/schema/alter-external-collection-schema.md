@@ -41,7 +41,7 @@ beta: Milvus 3.0.x
     </button></h2><ul>
 <li><p>Koleksi eksternal saat ini mendukung penambahan bidang setelah pembuatan. Perubahan skema lainnya, seperti menghapus bidang, mengganti nama bidang, mengubah tipe data bidang, mengubah dimensi vektor, atau memetakan ulang <code translate="no">external_field</code>, tidak didukung.</p></li>
 <li><p>Anda hanya dapat menambahkan bidang yang sudah ada di sumber data eksternal. Operasi ini memetakan bidang eksternal yang sudah ada ke bidang Milvus. Operasi ini tidak membuat bidang baru di sumber data eksternal atau mengisi ulang data sumber.</p></li>
-<li><p>Menambahkan bidang <code translate="no">SPARSE_FLOAT_VECTOR</code> ke koleksi eksternal yang sudah ada tidak didukung.</p></li>
+<li><p>Penambahan bidang <code translate="no">SPARSE_FLOAT_VECTOR</code> ke koleksi eksternal yang sudah ada tidak didukung.</p></li>
 <li><p>Menambahkan bidang StructArray ke koleksi eksternal yang sudah ada tidak didukung. Jika koleksi eksternal Anda memerlukan bidang StructArray, tentukan bidang tersebut dalam skema koleksi saat Anda membuat koleksi.</p></li>
 </ul>
 <h2 id="Add-a-field" class="common-anchor-header">Menambahkan bidang<button data-href="#Add-a-field" class="anchor-icon" translate="no">

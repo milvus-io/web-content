@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 페이지를 사용하여 StructArray 필드에 대한 벡터 검색에 스칼라 필터링을 추가할 수 있습니다. StructArray 필터링에는 두 가지 수준이 있습니다. 행 수준 필터는 상위 엔티티를 선택하고, 요소 수준 필터는 요소 수준 벡터 검색에 참여할 Struct 요소를 제한합니다.</p>
+    </button></h1><p>이 페이지를 사용하여 StructArray 필드에 대한 벡터 검색에 스칼라 필터링을 추가할 수 있습니다. StructArray 필터링에는 두 가지 수준이 있습니다. 행 수준 필터는 상위 엔티티를 선택하고, 요소 수준 필터는 요소 수준 벡터 검색에 포함될 Struct 요소를 제한합니다.</p>
 <p>이 페이지에서는 <a href="/docs/ko/create-structarray-field.md">‘StructArray 필드 생성’의</a> <code translate="no">tech_articles</code> 컬렉션을 사용합니다. 이 컬렉션에는 <code translate="no">chunks</code> 라는 StructArray 필드가 있으며, <code translate="no">section</code>, <code translate="no">page</code>, <code translate="no">quality_score</code>, <code translate="no">has_code</code> 와 같은 스칼라 하위 필드와 검색용 벡터 하위 필드가 포함되어 있습니다.</p>
 <h2 id="Choose-a-filter-type" class="common-anchor-header">필터 유형 선택<button data-href="#Choose-a-filter-type" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -43,7 +43,7 @@ summary: >-
 <tr><th>목표</th><th>사용</th><th>결과 동작</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">category</code> 와 같은 최상위 스칼라 필드를 기준으로 필터링합니다.</td><td>일반 필터 표현식.</td><td>검색 전이나 검색 중에 상위 엔티티를 선택합니다.</td></tr>
+<tr><td><code translate="no">category</code> 와 같은 최상위 스칼라 필드로 필터링합니다.</td><td>일반 필터 표현식.</td><td>검색 전이나 검색 중에 상위 엔티티를 선택합니다.</td></tr>
 <tr><td>요소 수준 벡터 검색을 스칼라 조건에 일치하는 Struct 요소로 제한합니다.</td><td><code translate="no">element_filter</code>.</td><td>일치하는 Struct 요소만 검색하며, 일치하는 요소의 오프셋을 반환할 수 있습니다.</td></tr>
 <tr><td>Struct 요소 중 일부, 전체 또는 특정 개수가 술어와 일치하는지 여부에 따라 엔티티를 선택합니다.</td><td><code translate="no">MATCH_ANY</code>, <code translate="no">MATCH_ALL</code>, <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> 또는 <code translate="no">MATCH_EXACT</code>.</td><td>행 수준 필터링. 이 연산자들은 자체적으로 오프셋을 반환하지 않습니다.</td></tr>
 </tbody>
@@ -150,7 +150,7 @@ results = client.search(
 <p>이 예제에서 최상위 술어 <code translate="no">category == &quot;search&quot;</code> 는 후보 엔티티를 선택하고, <code translate="no">element_filter</code> 는 <code translate="no">section</code>, <code translate="no">quality_score</code>, <code translate="no">has_code</code> 가 모두 동일한 Struct 요소 내에서 일치하는 청크로 요소 수준 벡터 검색을 제한합니다.</p>
 <div class="alert note">
 <p>경고</p>
-<p>최상위 술어를 <code translate="no">element_filter</code> 와 결합할 때는 <code translate="no">element_filter</code> 를 식의 맨 끝에 배치해야 합니다. 필터 식에는 <code translate="no">element_filter</code> 가 하나만 포함될 수 있으며, <code translate="no">element_filter</code> 나 <code translate="no">MATCH_*</code> 를 다른 StructArray 연산자 안에 중첩할 수 없습니다.</p>
+<p>최상위 술어와 <code translate="no">element_filter</code> 를 결합할 때는 <code translate="no">element_filter</code> 를 식의 맨 끝에 배치해야 합니다. 필터 식에는 <code translate="no">element_filter</code> 가 하나만 포함될 수 있으며, <code translate="no">element_filter</code> 나 <code translate="no">MATCH_*</code> 를 다른 StructArray 연산자 안에 중첩할 수 없습니다.</p>
 </div>
 <h2 id="Filter-entities-with-MATCH-operators" class="common-anchor-header">MATCH 연산자를 사용한 엔티티 필터링<button data-href="#Filter-entities-with-MATCH-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -177,7 +177,7 @@ results = client.search(
 <tr><td><code translate="no">MATCH_ALL</code></td><td>모든 Struct 요소가 술어를 만족해야 합니다.</td><td><code translate="no">MATCH_ALL(chunks, $[quality_score] &gt; 0.5)</code></td></tr>
 <tr><td><code translate="no">MATCH_LEAST</code></td><td><code translate="no">N</code> 개 이상의 Struct 요소가 술어를 만족해야 합니다.</td><td><code translate="no">MATCH_LEAST(chunks, $[has_code] == true, threshold=2)</code></td></tr>
 <tr><td><code translate="no">MATCH_MOST</code></td><td><code translate="no">N</code> 개 이하의 Struct 요소가 술어를 만족해야 합니다.</td><td><code translate="no">MATCH_MOST(chunks, $[section] == &quot;appendix&quot;, threshold=1)</code></td></tr>
-<tr><td><code translate="no">MATCH_EXACT</code></td><td><code translate="no">N</code> 개의 Struct 요소가 정확히 해당 술어를 만족해야 합니다.</td><td><code translate="no">MATCH_EXACT(chunks, $[section] == &quot;summary&quot;, threshold=1)</code></td></tr>
+<tr><td><code translate="no">MATCH_EXACT</code></td><td>정확히 <code translate="no">N</code> 개의 Struct 요소가 술어를 만족해야 합니다.</td><td><code translate="no">MATCH_EXACT(chunks, $[section] == &quot;summary&quot;, threshold=1)</code></td></tr>
 </tbody>
 </table>
 <pre><code translate="no" class="language-python">filter_expr = (
@@ -321,7 +321,7 @@ results = client.hybrid_search(
       </svg>
     </button></h2><ol>
 <li><p>StructArray 필터 구문의 전체 내용을 확인하려면 <a href="/docs/ko/struct-array-operators.md">StructArray 연산자를</a> 참조하십시오.</p></li>
-<li><p>먼저 필터링되지 않은 벡터 검색을 실행하려면 <a href="/docs/ko/basic-vector-search-with-structarray.md">‘StructArray를 사용한 기본 벡터 검색’을</a> 참조하십시오.</p></li>
+<li><p>먼저 필터링되지 않은 벡터 검색을 실행하려면 <a href="/docs/ko/basic-vector-search-with-structarray.md">StructArray를 사용한 기본 벡터 검색을</a> 참조하십시오.</p></li>
 <li><p>자주 사용하는 StructArray 필터에 대한 스칼라 인덱스를 생성하려면 <a href="/docs/ko/index-structarray-fields.md">StructArray 필드 인덱싱을</a> 참조하십시오.</p></li>
 <li><p>버전별 필터 및 검색 제한 사항을 확인하려면 <a href="/docs/ko/structarray-limits.md">‘StructArray 제한 사항’을</a> 참조하십시오.</p></li>
 </ol>

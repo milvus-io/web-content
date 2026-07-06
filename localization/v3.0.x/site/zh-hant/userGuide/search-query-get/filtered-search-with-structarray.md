@@ -42,9 +42,9 @@ summary: >-
 <tr><th>目標</th><th>用途</th><th>結果行為</th></tr>
 </thead>
 <tbody>
-<tr><td>根據頂層標量欄位進行篩選，例如<code translate="no">category</code> 。</td><td>常規篩選表達式。</td><td>在搜尋之前或期間選取父實體。</td></tr>
+<tr><td>根據頂層標量欄位進行篩選，例如<code translate="no">category</code> 。</td><td>常規篩選表達式。</td><td>在搜尋之前或過程中選取父實體。</td></tr>
 <tr><td>將元素層級向量搜尋限制為符合標量條件的 Struct 元素。</td><td><code translate="no">element_filter</code>.</td><td>僅搜尋符合條件的 Struct 元素，並可回傳匹配元素的偏移量。</td></tr>
-<tr><td>根據是否有任何、全部或特定數量的 Struct 元素符合謂詞來選取實體。</td><td><code translate="no">MATCH_ANY</code>、<code translate="no">MATCH_ALL</code> 、<code translate="no">MATCH_LEAST</code> 、<code translate="no">MATCH_MOST</code> 或<code translate="no">MATCH_EXACT</code> 。</td><td>行級篩選。這些運算子本身不會回傳偏移量。</td></tr>
+<tr><td>根據是否有任何、所有或特定數量的 Struct 元素符合謂詞來選取實體。</td><td><code translate="no">MATCH_ANY</code>、<code translate="no">MATCH_ALL</code> 、<code translate="no">MATCH_LEAST</code> 、<code translate="no">MATCH_MOST</code> 或<code translate="no">MATCH_EXACT</code> 。</td><td>行級篩選。這些運算子本身不會回傳偏移量。</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -109,7 +109,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>當標量條件必須套用至參與元素層級向量搜尋的同一 Struct 元素時，請使用 `<code translate="no">element_filter(structArrayField, predicate)</code> `。在謂詞內部，請使用 `<code translate="no">$[subfield]</code> ` 來引用當前 Struct 元素的標量子欄位。</p>
+    </button></h2><p>當標量條件必須套用至參與元素層級向量搜尋的同一 Struct 元素時，請使用 `<code translate="no">element_filter(structArrayField, predicate)</code> `。在謂詞內部，請使用 `<code translate="no">$[subfield]</code> ` 來指稱當前 Struct 元素的標量子欄位。</p>
 <pre><code translate="no" class="language-python">query_vector = [<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>]
 
 filter_expr = (
@@ -166,7 +166,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>當篩選條件需根據父實體的 Struct 元素來判定其是否符合資格時，請使用<code translate="no">MATCH_*</code> 運算子。這些運算子屬於列級篩選：它們會選取實體，但本身不會回傳元素偏移量。</p>
+    </button></h2><p>當篩選條件需根據父實體的 Struct 元素來判定其是否符合資格時，請使用<code translate="no">MATCH_*</code> 運算子。這些運算子屬於行級篩選：它們會選取實體，但本身不會回傳元素偏移量。</p>
 <table>
 <thead>
 <tr><th>運算子</th><th>適用於</th><th>範例</th></tr>
@@ -200,7 +200,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>此處使用<code translate="no">MATCH_ANY</code> ，是因為 EmbeddingList 的搜尋結果屬於實體層級。此篩選條件要求該實體中至少有一個片段為高品質的<code translate="no">&quot;index&quot;</code> 片段，但搜尋結果本身仍代表其父實體。</p>
+<p>此處使用<code translate="no">MATCH_ANY</code> ，是因為 EmbeddingList 的搜尋結果是實體層級的。此篩選條件要求該實體中至少有一個片段為高品質的<code translate="no">&quot;index&quot;</code> 片段，但搜尋結果本身仍代表父實體。</p>
 <h2 id="Use-filters-in-hybrid-search" class="common-anchor-header">在混合搜尋中使用篩選器<button data-href="#Use-filters-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -216,7 +216,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在混合搜尋中，應於條件需生效之處套用 StructArray 篩選器。頂層篩選器可由整個混合搜尋共用。若需元素層級的限制條件，應將 `<code translate="no">element_filter</code> ` 附加至需要元素層級限制的 StructArray 元素層級請求上。</p>
+    </button></h2><p>在混合搜尋中，應於條件需生效之處套用 StructArray 篩選器。頂層篩選器可由整個混合搜尋共用。若需元素層級的限制，應將 `<code translate="no">element_filter</code> ` 附加至需要元素層級限制的 StructArray 元素層級請求上。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest, RRFRanker
 
 query_vector = [<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>]
@@ -266,7 +266,7 @@ results = client.hybrid_search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>請在 StructArray 謂詞中使用標量子欄位。向量子欄位不屬於標量謂詞的輸入。</p>
+    </button></h2><p>請在 StructArray 謂詞中使用標量子欄位。向量子欄位不能作為標量謂詞的輸入。</p>
 <table>
 <thead>
 <tr><th>子欄位類型</th><th>典型謂詞範例</th></tr>
@@ -298,9 +298,9 @@ results = client.hybrid_search(
     </button></h2><ul>
 <li><p>在 `<code translate="no">element_filter</code> ` 或 `<code translate="no">MATCH_*</code>` 之外使用 `<code translate="no">$[subfield]</code> `。</p></li>
 <li><p>使用 `<code translate="no">chunks.section</code> ` 代替 `<code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code>` 等 `StructArray` 運算子語法。</p></li>
-<li><p>僅需進行列級篩選時卻使用 `<code translate="no">element_filter</code> `。若僅需選取實體，請改用 `<code translate="no">MATCH_ANY</code> `。</p></li>
-<li><p>預期<code translate="no">MATCH_*</code> 會返回元素偏移量。這些運算子僅用於選取實體，本身並不會識別出單一符合條件的元素。</p></li>
-<li><p>撰寫如<code translate="no">$[has_code]</code> 這類未加修飾的布林謂詞。請改用如<code translate="no">$[has_code] == true</code> 這類明確的比較運算子。</p></li>
+<li><p>僅需進行行級篩選時卻使用 `<code translate="no">element_filter</code> `。若僅需選取實體，請改用 `<code translate="no">MATCH_ANY</code> `。</p></li>
+<li><p>預期 `<code translate="no">MATCH_*</code> ` 會返回元素偏移量。這些運算子僅用於選取實體，本身並不會識別出單一符合條件的元素。</p></li>
+<li><p>撰寫如<code translate="no">$[has_code]</code> 這類未加修飾的布林判別式。請改用明確的比較運算，例如<code translate="no">$[has_code] == true</code> 。</p></li>
 <li><p>將 `<code translate="no">element_filter</code> ` 置於同一篩選表達式中頂層判別式的前方。</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">下一步<button data-href="#Next-steps" class="anchor-icon" translate="no">
@@ -321,6 +321,6 @@ results = client.hybrid_search(
     </button></h2><ol>
 <li><p>若要檢視完整的 StructArray 篩選語法，請參閱《<a href="/docs/zh-hant/struct-array-operators.md">StructArray 運算子</a>》。</p></li>
 <li><p>若要先執行未過濾的向量搜尋，請參閱《<a href="/docs/zh-hant/basic-vector-search-with-structarray.md">使用 StructArray 進行基本向量搜尋》</a>。</p></li>
-<li><p>若要為常用 StructArray 篩選條件建立標量索引，請參閱《<a href="/docs/zh-hant/index-structarray-fields.md">索引 StructArray 欄位</a>》。</p></li>
+<li><p>若要為常用 StructArray 篩選器建立標量索引，請參閱《<a href="/docs/zh-hant/index-structarray-fields.md">索引 StructArray 欄位</a>》。</p></li>
 <li><p>若要查看特定版本的篩選與搜尋限制，請參閱《<a href="/docs/zh-hant/structarray-limits.md">StructArray 限制》</a>。</p></li>
 </ol>

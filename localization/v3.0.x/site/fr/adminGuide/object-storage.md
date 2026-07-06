@@ -35,7 +35,7 @@ title: Stockage d'objets
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Fournisseur / service</th><th style="text-align:center">Prise en charge en tant que stockage d’objets Milvus</th></tr>
+<tr><th>Fournisseur / service</th><th style="text-align:center">Prise en charge en tant que stockage objet Milvus</th></tr>
 </thead>
 <tbody>
 <tr><td>MinIO</td><td style="text-align:center">✔️ (par défaut pour les déploiements auto-hébergés)</td></tr>

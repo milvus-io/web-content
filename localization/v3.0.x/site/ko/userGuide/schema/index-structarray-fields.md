@@ -52,7 +52,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>벡터 필드 또는 벡터 하위 필드는 하나의 인덱스만 허용합니다. EmbeddingList 검색과 요소 수준 검색이 모두 필요한 경우, 두 개의 별도 벡터 하위 필드를 생성하고 각각에 대해 별도로 인덱싱하십시오. 이 페이지에서는 EmbeddingList 검색을 위해 <code translate="no">chunks[emb_list_vector]</code> 에 인덱싱하고, 요소 수준 검색을 위해 <code translate="no">chunks[emb]</code> 에 인덱싱합니다.</p>
+<p>벡터 필드 또는 벡터 하위 필드는 하나의 인덱스만 허용합니다. EmbeddingList 검색과 요소 수준 검색이 모두 필요한 경우, 두 개의 별도 벡터 하위 필드를 생성하고 각각 별도로 인덱싱하십시오. 이 페이지에서는 <code translate="no">chunks[emb_list_vector]</code> 가 EmbeddingList 검색용으로 인덱싱되고, <code translate="no">chunks[emb]</code> 가 요소 수준 검색용으로 인덱싱됩니다.</p>
 </div>
 <h2 id="Choose-indexes" class="common-anchor-header">인덱스 선택<button data-href="#Choose-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -139,7 +139,7 @@ client.create_index(
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>경고
-동일한 벡터 하위 필드에 <code translate="no">MAX_SIM*</code> 인덱스와 일반 벡터 메트릭 인덱스를 함께 생성하지 마십시오. 두 검색 모드 모두 필요한 경우, 벡터를 두 개의 별도 벡터 하위 필드에 저장하고 각 하위 필드에 대해 하나의 인덱스를 생성하십시오.</p>
+동일한 벡터 하위 필드에 ‘ <code translate="no">MAX_SIM*</code> ’ 인덱스와 일반 벡터 메트릭 인덱스를 함께 생성하지 마십시오. 두 검색 모드가 모두 필요한 경우, 벡터를 두 개의 별도 벡터 하위 필드에 저장하고 각 하위 필드에 대해 하나의 인덱스를 생성하십시오.</p>
 </div>
 <h2 id="Create-scalar-indexes" class="common-anchor-header">스칼라 인덱스 생성<button data-href="#Create-scalar-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -188,7 +188,7 @@ client.create_index(
     index_params=index_params,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>스칼라 인덱스는 선택 사항이지만, ` <code translate="no">element_filter(chunks, $[quality_score] &gt; 0.9)</code> `이나 ` <code translate="no">MATCH_ANY(chunks, $[section] == &quot;index&quot;)</code>`과 같이 필터에 StructArray 스칼라 하위 필드가 자주 등장하는 경우 유용합니다.</p>
+<p>스칼라 인덱스는 선택 사항이지만, <code translate="no">element_filter(chunks, $[quality_score] &gt; 0.9)</code> 이나 <code translate="no">MATCH_ANY(chunks, $[section] == &quot;index&quot;)</code> 와 같은 필터에서 StructArray 스칼라 하위 필드가 자주 등장할 때 유용합니다.</p>
 <h2 id="Index-metric-compatibility" class="common-anchor-header">인덱스 메트릭 호환성<button data-href="#Index-metric-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -250,7 +250,7 @@ client.create_index(
     </button></h3><p>요소 수준 검색은 일반적인 벡터 메트릭을 사용합니다. 각 Struct 요소를 독립적으로 검색하며, 일치하는 요소의 오프셋을 반환할 수 있습니다.</p>
 <table>
 <thead>
-<tr><th>벡터 하위 필드 데이터 유형</th><th>인덱스 유형</th><th>메트릭 유형</th></tr>
+<tr><th>벡터 서브필드 데이터 유형</th><th>인덱스 유형</th><th>메트릭 유형</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">FLOAT_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code></td><td><code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_FLAT_CC</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">IVF_SQ_CC</code>, <code translate="no">IVF_PQ</code>, <code translate="no">SCANN</code>, <code translate="no">IVF_RABITQ</code>, <code translate="no">IVF_RABITQ_FASTSCAN</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code>, <code translate="no">DISKANN</code></td><td><code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">COSINE</code></td></tr>
@@ -311,7 +311,7 @@ client.create_index(
 <tr><th>규칙</th><th>설명</th></tr>
 </thead>
 <tbody>
-<tr><td>서브필드 인덱스에는 경로 구문을 사용하십시오.</td><td>인덱스는 <code translate="no">chunks[emb]</code> 로 지정해야 하며, <code translate="no">emb</code> 또는 <code translate="no">chunks.emb</code> 로 지정해서는 안 됩니다.</td></tr>
+<tr><td>서브필드 인덱스에는 경로 구문을 사용하세요.</td><td>인덱스는 <code translate="no">chunks[emb]</code> 로 지정해야 하며, <code translate="no">emb</code> 또는 <code translate="no">chunks.emb</code> 로 지정해서는 안 됩니다.</td></tr>
 <tr><td>하나의 벡터 하위 필드에는 하나의 인덱스만 사용할 수 있습니다.</td><td>서로 다른 메트릭 계열이 필요한 경우 별도의 벡터 서브필드를 사용하십시오.</td></tr>
 <tr><td>EmbeddingList 검색에는 <code translate="no">MAX_SIM*</code> 메트릭을 사용하십시오.</td><td>EmbeddingList 쿼리 데이터에는 <code translate="no">MAX_SIM*</code> 메트릭으로 구축된 인덱스가 필요합니다.</td></tr>
 <tr><td>요소 수준 검색에는 일반 벡터 메트릭을 사용하십시오.</td><td>요소 수준 검색은 일반 벡터 쿼리 데이터와 <code translate="no">COSINE</code>, <code translate="no">IP</code> 또는 <code translate="no">L2</code> 와 같은 메트릭을 사용합니다.</td></tr>

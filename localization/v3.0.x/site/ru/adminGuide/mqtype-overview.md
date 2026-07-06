@@ -38,7 +38,7 @@ summary: >-
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Очередь сообщений</th><th style="text-align:center">Milvus Standalone</th><th style="text-align:center">Распределенная версия Milvus (кластер)</th><th>По умолчанию в</th><th>Примечания</th></tr>
+<tr><th>Очередь сообщений</th><th style="text-align:center">Milvus Standalone</th><th style="text-align:center">Распределённая версия Milvus (кластер)</th><th>По умолчанию в</th><th>Примечания</th></tr>
 </thead>
 <tbody>
 <tr><td><a href="/docs/ru/woodpecker.md">Woodpecker</a></td><td style="text-align:center">✔️ (встроенный)</td><td style="text-align:center">✔️ (встроенный или в виде службы)</td><td><strong>Milvus 3.x</strong> (оба режима)</td><td>По умолчанию и рекомендуется. Облачный WAL в объектном хранилище; внешний сервис не требуется.</td></tr>
@@ -72,5 +72,5 @@ summary: >-
     </button></h2><ul>
 <li><strong>Новые развертывания (Milvus 3.x):</strong> используйте <strong>Woodpecker</strong> (по умолчанию). В автономном режиме он запускается встроенным; для распределенного (кластерного) режима рекомендуется по умолчанию использовать выделенный <a href="/docs/ru/woodpecker.md#Deployment-modes">сервис</a>, развернутый с помощью Helm, при этом также поддерживается встроенный вариант.</li>
 <li><strong>Существующие пользователи Pulsar или Kafka:</strong> Pulsar и Kafka по-прежнему полностью поддерживаются. Можно оставить их или <a href="/docs/ru/switch-mq-type.md">перейти на Woodpecker</a>.</li>
-<li><strong>RocksMQ:</strong> поддерживается только в автономном режиме и заменен встроенным Woodpecker в Milvus 3.x.</li>
+<li><strong>RocksMQ:</strong> доступен только в автономном режиме и заменен встроенным Woodpecker в Milvus 3.x.</li>
 </ul>

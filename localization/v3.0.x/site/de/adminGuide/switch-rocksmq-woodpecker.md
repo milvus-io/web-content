@@ -59,7 +59,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p>Stellen Sie sicher, dass Ihre Milvus Standalone Docker Compose-Instanz ordnungsgemäß läuft – beispielsweise, indem Sie eine Testkollektion erstellen, Daten einfügen und eine Abfrage ausführen.</p>
-<h3 id="Step-2-Configure-Woodpecker-storage" class="common-anchor-header">Schritt 2: Woodpecker-Speicher konfigurieren<button data-href="#Step-2-Configure-Woodpecker-storage" class="anchor-icon" translate="no">
+<h3 id="Step-2-Configure-Woodpecker-storage" class="common-anchor-header">Schritt 2: Konfigurieren Sie den Woodpecker-Speicher<button data-href="#Step-2-Configure-Woodpecker-storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -229,7 +229,7 @@ summary: >-
 <li><strong>Metadaten (etcd):</strong> Das Schlüsselpräfix für Woodpecker lautet in der Regel <code translate="no">woodpecker/...</code>. Rufen Sie es mit dem Befehl <code translate="no">etcdctl get woodpecker --prefix</code> ab und löschen Sie es anschließend.</li>
 <li><strong>Speicherdaten:</strong> Im <strong>MinIO-Modus</strong> löschen Sie die Protokolldaten unter <code translate="no">&lt;rootPath&gt;/wp/...</code> (in der Regel <code translate="no">files/wp/...</code>) im Bucket; im <strong>lokalen Modus</strong> befinden sich die Daten auf der lokalen Festplatte unter <code translate="no">volumes/milvus/data/wp/...</code>.</li>
 </ul>
-<p>Wenn Sie später wieder zu Woodpecker zurückwechseln möchten, löschen Sie diese Dateien zunächst, um Konflikte zu vermeiden.</p>
+<p>Wenn Sie später wieder zu Woodpecker wechseln möchten, bereinigen Sie diese Dateien zunächst, um Konflikte zu vermeiden.</p>
 <h2 id="Supported-scenarios" class="common-anchor-header">Unterstützte Szenarien<button data-href="#Supported-scenarios" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

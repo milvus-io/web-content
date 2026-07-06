@@ -2,11 +2,11 @@
 id: range-search-with-structarray.md
 title: Recherche par intervalle avec StructArray
 summary: >-
-  Utilisez cette page pour effectuer une recherche par plage sur les sous-champs
-  vectoriels de StructArray. La recherche par plage renvoie les résultats
-  vectoriels dont le score ou la distance se situe dans une plage spécifiée.
-  Pour les champs StructArray, utilisez la recherche par plage avec une
-  recherche vectorielle au niveau des éléments, dans laquelle chaque élément
+  Cette page vous permet d'effectuer une recherche par plage sur les sous-champs
+  vectoriels d'un StructArray. La recherche par plage renvoie les résultats
+  vectoriels dont le score ou la distance se situe dans une fourchette
+  spécifiée. Pour les champs StructArray, utilisez la recherche par plage avec
+  une recherche vectorielle au niveau des éléments, dans laquelle chaque élément
   Struct est recherché indépendamment.
 ---
 <h1 id="Range-Search-with-StructArray" class="common-anchor-header">Recherche par intervalle avec StructArray<button data-href="#Range-Search-with-StructArray" class="anchor-icon" translate="no">
@@ -47,12 +47,12 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>Recherche dans EmbeddingList</td><td>Non pris en charge.</td><td>Sans objet.</td></tr>
-<tr><td>Recherche au niveau des éléments</td><td>Utilisez une requête vectorielle standard avec <code translate="no">radius</code> et, éventuellement, <code translate="no">range_filter</code>.</td><td>Niveau des éléments de structure.</td></tr>
-<tr><td>Recherche hybride</td><td>Prise en charge lorsque la requête StructArray cible un champ vectoriel au niveau des éléments. Les requêtes au niveau de l’EmbeddingList ne prennent pas en charge la recherche par plage.</td><td>Sous-recherche au niveau des éléments, puis reclassement hybride.</td></tr>
+<tr><td>Recherche au niveau des éléments</td><td>Utilisez une requête vectorielle standard avec l'<code translate="no">radius</code> et, éventuellement, l'<code translate="no">range_filter</code>.</td><td>Niveau des éléments de structure.</td></tr>
+<tr><td>Recherche hybride</td><td>Prise en charge lorsque la requête StructArray cible un champ vectoriel au niveau des éléments. Les requêtes au niveau de EmbeddingList ne prennent pas en charge la recherche par plage.</td><td>Sous-recherche au niveau des éléments, puis reclassement hybride.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
-<p>Si vous n’avez besoin que des éléments Struct les plus proches, commencez par <a href="/docs/fr/basic-vector-search-with-structarray.md">une recherche vectorielle de base avec StructArray</a>. Utilisez la recherche par plage lorsque le résultat doit respecter une limite de score ou de distance, et non pas uniquement un classement top-K.</p>
+<p>Si vous n’avez besoin que des éléments Struct les plus proches, commencez par <a href="/docs/fr/basic-vector-search-with-structarray.md">une recherche vectorielle de base avec StructArray</a>. Utilisez la recherche par plage lorsque le résultat doit respecter une limite de score ou de distance, et non pas uniquement un classement Top-K.</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">Avant de commencer<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -72,7 +72,7 @@ summary: >-
     </button></h2><p>Préparez la collection, les données et les index avant d'exécuter une recherche par plage.</p>
 <table>
 <thead>
-<tr><th>Prérequis</th><th>Détails</th></tr>
+<tr><th>Conditions requises</th><th>Détails</th></tr>
 </thead>
 <tbody>
 <tr><td>Champ StructArray</td><td>La collection contient un champ StructArray tel que <code translate="no">chunks</code>.</td></tr>
@@ -107,7 +107,7 @@ summary: >-
 <tr><td><code translate="no">IP</code>, <code translate="no">COSINE</code></td><td>Oui. Un score plus élevé est préférable.</td><td><code translate="no">radius &lt; distance &lt;= range_filter</code></td></tr>
 </tbody>
 </table>
-<p>Lorsque seule l'<code translate="no">radius</code> est définie, la recherche par intervalle renvoie les résultats qui respectent la limite extérieure de la métrique. Choisissez les valeurs en fonction de l'échelle de score ou de distance de vos représentations.</p>
+<p>Lorsque seule l'<code translate="no">radius</code> est définie, la recherche par plage renvoie les résultats qui respectent la limite extérieure de la métrique. Choisissez les valeurs en fonction de l'échelle de score ou de distance de vos représentations.</p>
 <h2 id="Run-element-level-range-search" class="common-anchor-header">Lancer une recherche par plage au niveau des éléments<button data-href="#Run-element-level-range-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -163,7 +163,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>Dans cet exemple, <code translate="no">COSINE</code> est une métrique de type « similarité » ; l’intervalle de résultats est donc supérieur à <code translate="no">radius</code> et inférieur ou égal à <code translate="no">range_filter</code>. La valeur <code translate="no">offset</code> identifie l’élément Struct correspondant dans le tableau <code translate="no">chunks</code> lorsqu’elle est renvoyée.</p>
+<p>Dans cet exemple, « <code translate="no">COSINE</code> » est une métrique de type similarité ; l’intervalle de résultats est donc supérieur à <code translate="no">radius</code> et inférieur ou égal à <code translate="no">range_filter</code>. La valeur « <code translate="no">offset</code> » identifie l’élément Struct correspondant dans le tableau « <code translate="no">chunks</code> » lors du renvoi.</p>
 <h2 id="Add-scalar-filters" class="common-anchor-header">Ajouter des filtres scalaires<button data-href="#Add-scalar-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -262,7 +262,7 @@ results = client.hybrid_search(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Dans cet exemple, seule la sous-requête « <code translate="no">chunks[emb]</code> » utilise des paramètres de recherche par plage. La requête StructArray suit toujours la sémantique au niveau des éléments : la limite de la plage s’applique aux résultats correspondant aux éléments Struct avant que la recherche hybride ne combine et ne reclasse les résultats.</p>
-<h2 id="Interpret-range-results" class="common-anchor-header">Interpréter les résultats de la recherche par plage<button data-href="#Interpret-range-results" class="anchor-icon" translate="no">
+<h2 id="Interpret-range-results" class="common-anchor-header">Interprétation des résultats de la recherche par plage<button data-href="#Interpret-range-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -284,7 +284,7 @@ results = client.hybrid_search(
 <tbody>
 <tr><td><code translate="no">id</code></td><td>Clé primaire de l’entité contenant l’élément Struct correspondant.</td></tr>
 <tr><td><code translate="no">distance</code> ou score</td><td>Le score ou la distance entre le vecteur de requête et le vecteur de l'élément Struct correspondant.</td></tr>
-<tr><td><code translate="no">offset</code></td><td>Position (à partir de zéro) de l’élément Struct correspondant dans le champ StructArray lors du retour.</td></tr>
+<tr><td><code translate="no">offset</code></td><td>Position (à partir de zéro) de l’élément Struct correspondant dans le champ StructArray lors du renvoi.</td></tr>
 <tr><td>Clés primaires répétées</td><td>Possible. Plus d’un élément Struct d’une même entité peut se situer dans la plage spécifiée.</td></tr>
 <tr><td><code translate="no">limit</code></td><td>S'applique aux occurrences d'éléments, et non aux entités parentes uniques.</td></tr>
 </tbody>
@@ -305,7 +305,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>N’utilisez pas de requête de type « <code translate="no">EmbeddingList</code> » ni de métrique de type « <code translate="no">MAX_SIM*</code> » pour la recherche par plage sur les sous-champs vectoriels de StructArray. La recherche au niveau de l’EmbeddingList ne prend pas en charge la recherche par plage.</p></li>
+<li><p>N’utilisez pas de requête « <code translate="no">EmbeddingList</code> » ni de métrique « <code translate="no">MAX_SIM*</code> » pour la recherche par plage sur les sous-champs vectoriels de StructArray. La recherche au niveau de l’EmbeddingList ne prend pas en charge la recherche par plage.</p></li>
 <li><p>Ne combinez pas la recherche par plage avec la recherche par regroupement. Si vous avez besoin d’un résultat par entité parente, effectuez une recherche au niveau des éléments sans paramètres de plage et utilisez le regroupement lorsque cela est pris en charge.</p></li>
 <li><p>La recherche par plage hybride est prise en charge pour les champs vectoriels au niveau des éléments de StructArray. Elle n’est pas prise en charge pour les requêtes StructArray au niveau de l’EmbeddingList.</p></li>
 </ul>
@@ -326,9 +326,9 @@ results = client.hybrid_search(
       </svg>
     </button></h2><ul>
 <li><p>Lancer une recherche par plage sur <code translate="no">chunks[emb_list_vector]</code>, qui est destiné à la recherche au niveau de l’EmbeddingList.</p></li>
-<li><p>Utiliser <code translate="no">MAX_SIM_COSINE</code> au lieu d’une métrique standard telle que <code translate="no">COSINE</code> pour une recherche par plage au niveau des éléments.</p></li>
+<li><p>Utiliser <code translate="no">MAX_SIM_COSINE</code> à la place d’une métrique standard telle que <code translate="no">COSINE</code> pour une recherche par plage au niveau des éléments.</p></li>
 <li><p>Utilisation d’une requête de type « <code translate="no">EmbeddingList</code> » à la place d’une requête vectorielle classique.</p></li>
-<li><p>S’attendre à ce que les résultats de la recherche par plage soient uniques par entité parente. La recherche par plage renvoie les éléments Struct correspondants.</p></li>
+<li><p>S’attendre à ce que les résultats de la recherche par plage soient uniques par entité parente. La recherche par plage renvoie les occurrences d’éléments Struct correspondantes.</p></li>
 <li><p>Utilisation de « <code translate="no">chunks.emb</code> » au lieu de la syntaxe requise pour le chemin d’accès au sous-champ « <code translate="no">chunks[emb]</code> ».</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Étapes suivantes<button data-href="#Next-steps" class="anchor-icon" translate="no">

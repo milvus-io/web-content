@@ -101,7 +101,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>Étape 1 : Vérifiez que l’instance Milvus est en cours d’exécution.</strong></p>
-<p><strong>Étape 2 : Configurez la connexion Pulsar cible et redémarrez Milvus.</strong> Pour que la transition s’effectue, Milvus doit déjà connaître la connexion Pulsar ; vous devez donc l’enregistrer dans « <code translate="no">user.yaml</code> » via <code translate="no">extraConfigFiles</code>, puis appliquer les modifications avec <code translate="no">helm upgrade</code> (ce qui redémarre les pods). La commande « <code translate="no">streaming.enabled=true</code> » est requise pour la fonctionnalité Switch MQ.</p>
+<p><strong>Étape 2 : Configurez la connexion Pulsar cible et redémarrez Milvus.</strong> La transition nécessite que Milvus connaisse déjà la connexion Pulsar ; vous devez donc l’enregistrer dans <code translate="no">user.yaml</code> via <code translate="no">extraConfigFiles</code>, puis l’appliquer avec <code translate="no">helm upgrade</code> (ce qui redémarre les pods). <code translate="no">streaming.enabled=true</code> est requis pour la fonctionnalité Switch MQ.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -130,7 +130,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <p><strong>Étape 4 : Vérifiez que la migration est terminée.</strong></p>
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
-<p>Une migration réussie génère le message « <code translate="no">[mqTypeValue=pulsar]</code> ».</p>
+<p>Une migration réussie génère l'entrée suivante dans le journal : <code translate="no">[mqTypeValue=pulsar]</code>.</p>
 <p><strong>Étape 5 : (Facultatif) Supprimez les données Woodpecker.</strong> Supprimez les données Woodpecker sur MinIO/S3 (dans le répertoire <code translate="no">&lt;rootPath&gt;/wp/...</code>, généralement <code translate="no">files/wp/...</code>) ainsi que les métadonnées Woodpecker dans etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). Si vous prévoyez de revenir à Woodpecker ultérieurement, supprimez d’abord ces fichiers.</p>
 <h2 id="With-Milvus-Operator" class="common-anchor-header">Avec Milvus Operator<button data-href="#With-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -169,11 +169,11 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
   -H &quot;Content-Type: application/json&quot; \
   -d &#x27;{&quot;target_wal_name&quot;: &quot;woodpecker&quot;}&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Étape 3 : Vérifiez que la bascule est terminée.</strong></p>
+<p><strong>Étape 3 : Vérifiez que la commutation est terminée.</strong></p>
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>Une commutation réussie génère l'entrée suivante dans le journal : <code translate="no">[mqTypeValue=woodpecker]</code>.</p>
-<p><strong>Étape 4 : Mettez à jour le type de MQ dans l’Operator.</strong> Mettez à jour la configuration gérée par l’Operator afin que celui-ci ne revienne pas en arrière. Créez <code translate="no">change_configmap.yaml</code>:</p>
+<p><strong>Étape 4 : Mettez à jour le type de MQ dans l’Operator.</strong> Mettez à jour la configuration gérée par l’Operator afin que celui-ci ne revienne pas sur la bascule. Créez <code translate="no">change_configmap.yaml</code>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -265,8 +265,8 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 </thead>
 <tbody>
 <tr><td>Pulsar intégré</td><td>Woodpecker (MinIO)</td><td><strong>Prise en charge</strong></td><td><strong>Prise en charge</strong></td></tr>
-<tr><td>Pulsar externe</td><td>Woodpecker (MinIO)</td><td><strong>Pris en charge</strong></td><td><strong>Pris en charge</strong></td></tr>
-<tr><td>Woodpecker (MinIO)</td><td>Pulsar externe</td><td><strong>Prise en charge</strong></td><td><strong>Pris en charge</strong></td></tr>
-<tr><td>Pulsar</td><td>Woodpecker (local)</td><td><strong>Prise en charge, mais non recommandée</strong> (tous les pods doivent partager un système de fichiers)</td><td><strong>Non pris en charge</strong></td></tr>
+<tr><td>Pulsar externe</td><td>Woodpecker (MinIO)</td><td><strong>Pris en charge</strong></td><td><strong>Prise en charge</strong></td></tr>
+<tr><td>Woodpecker (MinIO)</td><td>Pulsar externe</td><td><strong>Prise en charge</strong></td><td><strong>Prise en charge</strong></td></tr>
+<tr><td>Pulsar</td><td>Woodpecker (local)</td><td><strong>Pris en charge mais non recommandé</strong> (tous les pods doivent partager un système de fichiers)</td><td><strong>Non pris en charge</strong></td></tr>
 </tbody>
 </table>

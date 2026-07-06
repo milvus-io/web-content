@@ -2,9 +2,9 @@
 id: pinyin-filter.md
 title: البينيينCompatible with Milvus 3.0.x
 summary: >-
-  يقوم مرشح «بينيين» بتحويل الرموز الخاصة بالأحرف الصينية إلى رموز «بينيين»
-  أثناء تحليل النص، مما يتيح إجراء المطابقة استنادًا إلى نظام «بينيين» للنصوص
-  الصينية.
+  يقوم مرشح «البينين» بتحويل الرموز المميزة للأحرف الصينية إلى رموز مميزة بنظام
+  «البينين» أثناء تحليل النص، مما يتيح إجراء المطابقة استنادًا إلى نظام
+  «البينين» للنصوص الصينية.
 beta: Milvus 3.0.x
 ---
 <h1 id="Pinyin" class="common-anchor-header">البينيين<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Pinyin" class="anchor-icon" translate="no">
@@ -69,7 +69,7 @@ beta: Milvus 3.0.x
 <tr><td><code translate="no">keep_original</code></td><td>منطقية</td><td><code translate="no">true</code></td><td>يحتفظ بالرمز الصيني الأصلي في ناتج المحلل.</td></tr>
 <tr><td><code translate="no">keep_full_pinyin</code></td><td>منطقية</td><td><code translate="no">true</code></td><td>يصدر رموز بينيين على مستوى الحرف. على سبيل المثال، ينتج عن <code translate="no">中文</code> <code translate="no">zhong</code> و <code translate="no">wen</code>.</td></tr>
 <tr><td><code translate="no">keep_joined_full_pinyin</code></td><td>منطقية</td><td><code translate="no">false</code></td><td>يُصدر رمز بينيين مدمجًا لكل رمز مصدر. على سبيل المثال، ينتج عن <code translate="no">中文</code> الرمز <code translate="no">zhongwen</code>.</td></tr>
-<tr><td><code translate="no">keep_separate_first_letter</code></td><td>منطقية</td><td><code translate="no">false</code></td><td>يُصدر رمزًا من الأحرف الأولى بالبينيين لكل رمز مصدر. على سبيل المثال، يُنتج <code translate="no">中文</code> الرمز <code translate="no">zw</code>.</td></tr>
+<tr><td><code translate="no">keep_separate_first_letter</code></td><td>منطقية</td><td><code translate="no">false</code></td><td>يُخرج رمزًا من الأحرف الأولى بالبينيين لكل رمز مصدر. على سبيل المثال، يُنتج <code translate="no">中文</code> <code translate="no">zw</code> .</td></tr>
 </tbody>
 </table>
 <p>يعمل المرشح على الرموز التي ينتجها مُجزئ الرموز. بالنسبة للنص الصيني، استخدمه مع مُجزئ رموز مثل <code translate="no">jieba</code>.</p>

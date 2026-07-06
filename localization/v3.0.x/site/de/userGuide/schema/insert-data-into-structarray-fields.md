@@ -23,7 +23,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Fügen Sie Daten in ein StructArray-Feld ein, wenn jede Entität eine geordnete Liste strukturierter Elemente enthält. In der Einfüge-Nutzlast wird ein StructArray-Feld als Array von Objekten dargestellt. Jedes Objekt repräsentiert ein Struct-Element und verwendet die im Sammlungsschema definierten Namen der Struct-Unterfelder.</p>
+    </button></h1><p>Fügen Sie Daten in ein StructArray-Feld ein, wenn jede Entität eine geordnete Liste strukturierter Elemente enthält. In der Einfüge-Nutzlast wird ein StructArray-Feld als Array von Objekten dargestellt. Jedes Objekt repräsentiert ein Struct-Element und verwendet die im Sammlungsschema definierten Struct-Unterfeldnamen.</p>
 <p>Auf dieser Seite wird die Sammlung „ <code translate="no">tech_articles</code> “ aus dem Abschnitt <a href="/docs/de/create-structarray-field.md">„Erstellen eines StructArray-Feldes“</a> verwendet. Jede Entität ist ein technischer Artikel, und das Feld „ <code translate="no">chunks</code> “ speichert Artikelabschnitte als Struct-Elemente.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Bevor Sie beginnen<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -61,11 +61,11 @@ summary: >-
 <tbody>
 <tr><td><code translate="no">text</code></td><td><code translate="no">VARCHAR</code></td><td>Chunk-Text.</td></tr>
 <tr><td><code translate="no">section</code></td><td><code translate="no">VARCHAR</code></td><td>Abschnittsname, z. B. „ <code translate="no">index</code> “, „ <code translate="no">search</code> “ oder „ <code translate="no">filter</code> “.</td></tr>
-<tr><td><code translate="no">page</code></td><td><code translate="no">INT64</code></td><td>Seitenzahl oder logische Position.</td></tr>
+<tr><td><code translate="no">page</code></td><td><code translate="no">INT64</code></td><td>Seitennummer oder logische Position.</td></tr>
 <tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>Bewertung auf Chunk-Ebene.</td></tr>
 <tr><td><code translate="no">has_code</code></td><td><code translate="no">BOOL</code></td><td>Angabe, ob der Textblock Code enthält.</td></tr>
 <tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Für die EmbeddingList-Suche erstellter Vektor.</td></tr>
-<tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Vektor, der für die Suche auf Elementebene geschrieben wurde.</td></tr>
+<tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Vektor für die Suche auf Elementebene.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -114,7 +114,7 @@ summary: >-
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">emb_list_vector</code> und „ <code translate="no">emb</code> “ sind separate Vektor-Unterfelder, da sie unterschiedliche Suchmodi unterstützen. Die „EmbeddingList“-Suche behandelt alle Vektoren in einem „StructArray“-Feld als eine einzige Einbettungsliste und gibt Ergebnisse auf Entitätsebene mit „ <code translate="no">MAX_SIM*</code> “-Metriken zurück. Die Suche auf Elementebene durchsucht jedes „Struct“-Element unabhängig und kann den Offset des übereinstimmenden Elements zurückgeben. In diesem Beispiel werden der Einfachheit halber in beiden Feldern dieselben Vektorwerte gespeichert. In einer Produktionsanwendung können Sie in beiden Unterfeldern dieselben Einbettungen speichern, wenn beide Suchmodi dieselbe Chunk-Einbettung verwenden, oder unterschiedliche Einbettungen speichern, wenn die beiden Suchmodi unterschiedliche Darstellungen verwenden.</p>
+<p><code translate="no">emb_list_vector</code> und „ <code translate="no">emb</code> “ sind separate Vektor-Unterfelder, da sie unterschiedliche Suchmodi unterstützen. Die „EmbeddingList“-Suche behandelt alle Vektoren in einem „StructArray“-Feld als eine einzige Einbettungsliste und gibt Ergebnisse auf Entitätsebene mit „ <code translate="no">MAX_SIM*</code> “-Metriken zurück. Die Suche auf Elementebene durchsucht jedes „Struct“-Element unabhängig und kann den Offset des übereinstimmenden Elements zurückgeben. In diesem Beispiel werden der Einfachheit halber in beiden Feldern dieselben Vektorwerte gespeichert. In einer Produktionsanwendung können Sie in beiden Unterfeldern dieselben Einbettungen speichern, wenn beide Suchmodi dieselbe Chunk-Einbettung verwenden, oder unterschiedliche Einbettungen speichern, wenn die beiden Suchmodi unterschiedliche Darstellungen nutzen.</p>
 <h2 id="Insert-rows" class="common-anchor-header">Zeilen einfügen<button data-href="#Insert-rows" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -249,9 +249,9 @@ result = client.insert(
 <p>Wenn ein nullfähiges „StructArray“-Feld einen gültigen „StructArray“-Wert enthält, sollten alle Unterfelder in diesem Wert entweder null sein oder gültige Werte aufweisen. Das Einfügen einer Entität, bei der einige Unterfelder auf null und andere auf gültige Werte gesetzt sind, führt zu einem Fehler.</p>
 <div class="alert note">
 <p>Warnung
-Nullfähige StructArray-Felder sind nur in Milvus v3.0.x verfügbar. Wenn Sie einem bestehenden Datensatz dynamisch ein StructArray-Feld hinzufügen, muss das hinzugefügte Feld nullfähig sein, und bestehende Entitäten geben für das neue Feld in allen seinen Unterfeldern den Wert „ <code translate="no">null</code> “ zurück.</p>
+Nullfähige StructArray-Felder sind nur in Milvus v3.0.x verfügbar. Wenn Sie einem bestehenden Datensatz dynamisch ein StructArray-Feld hinzufügen, muss das hinzugefügte Feld nullfähig sein, und bestehende Entitäten geben für das neue Feld in allen seinen Unterfeldern „ <code translate="no">null</code> “ zurück.</p>
 </div>
-<h2 id="Validate-inserted-data" class="common-anchor-header">Eingegebene Daten validieren<button data-href="#Validate-inserted-data" class="anchor-icon" translate="no">
+<h2 id="Validate-inserted-data" class="common-anchor-header">Eingefügte Daten validieren<button data-href="#Validate-inserted-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -307,7 +307,7 @@ Nullfähige StructArray-Felder sind nur in Milvus v3.0.x verfügbar. Wenn Sie ei
 <tr><td>Verwenden Sie Unterfeldnamen innerhalb jedes Struct-Elements.</td><td>Fügen Sie „ <code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> “ innerhalb von „ <code translate="no">chunks</code> “ ein, nicht innerhalb von „ <code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code> “.</td></tr>
 <tr><td>Halten Sie sich an das Struct-Schema.</td><td>Jedes Struct-Element muss die im Struct-Schema definierten Unterfelder verwenden.</td></tr>
 <tr><td>Die Vektordimensionen müssen übereinstimmen.</td><td>Die Vektorwerte müssen mit den für ihre Vektor-Unterfelder konfigurierten „ <code translate="no">dim</code> “ übereinstimmen.</td></tr>
-<tr><td>Beachten Sie die „ <code translate="no">max_capacity</code> “.</td><td>Die Anzahl der Struct-Elemente in einer Entität darf die im StructArray-Feld konfigurierte „ <code translate="no">max_capacity</code> “ nicht überschreiten.</td></tr>
+<tr><td><code translate="no">max_capacity</code> beachten.</td><td>Die Anzahl der Struct-Elemente in einer Entität darf die im StructArray-Feld konfigurierte „ <code translate="no">max_capacity</code> “ nicht überschreiten.</td></tr>
 <tr><td>Verwenden Sie separate Vektor-Unterfelder für separate Suchmodi.</td><td>Wenn sowohl die EmbeddingList-Suche als auch die Suche auf Elementebene erforderlich sind, schreiben Sie Vektorwerte in beide Vektor-Unterfelder.</td></tr>
 <tr><td>Verwenden Sie „ <code translate="no">null</code> “ nur, wenn das Feld nullfähig ist.</td><td>Nicht-nullfähige StructArray-Felder erfordern gültige StructArray-Werte.</td></tr>
 </tbody>

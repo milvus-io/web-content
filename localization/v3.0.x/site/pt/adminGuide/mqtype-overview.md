@@ -41,10 +41,10 @@ summary: >-
 <tr><th>Fila de mensagens</th><th style="text-align:center">Milvus Standalone</th><th style="text-align:center">Milvus Distribuído (cluster)</th><th>Padrão em</th><th>Notas</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="/docs/pt/woodpecker.md">Woodpecker</a></td><td style="text-align:center">✔️ (incorporado)</td><td style="text-align:center">✔️ (integrado ou serviço)</td><td><strong>Milvus 3.x</strong> (ambos os modos)</td><td>Padrão e recomendado. WAL nativo da nuvem em armazenamento de objetos; não requer serviço externo.</td></tr>
+<tr><td><a href="/docs/pt/woodpecker.md">Woodpecker</a></td><td style="text-align:center">✔️ (integrado)</td><td style="text-align:center">✔️ (integrado ou serviço)</td><td><strong>Milvus 3.x</strong> (ambos os modos)</td><td>Padrão e recomendado. WAL nativo da nuvem em armazenamento de objetos; não requer serviço externo.</td></tr>
 <tr><td><a href="/docs/pt/mq_pulsar.md">Pulsar</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td>≤ 2.5.x (predefinição do cluster)</td><td>Compatível, externo ou integrado.</td></tr>
 <tr><td><a href="/docs/pt/mq_kafka.md">Kafka</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td>—</td><td>Compatível. Apenas Kafka 2.x ou 3.x.</td></tr>
-<tr><td><a href="/docs/pt/mq_rocksmq.md">RocksMQ</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✖️</td><td>≤ 2.5.x (predefinição da versão autónoma)</td><td>Suportado <strong>apenas</strong> para a versão <strong>autónoma</strong>.</td></tr>
+<tr><td><a href="/docs/pt/mq_rocksmq.md">RocksMQ</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✖️</td><td>≤ 2.5.x (predefinição da versão autónoma)</td><td>Compatível <strong>apenas</strong> com <strong>a versão autónoma</strong>.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -70,7 +70,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Novas implementações (Milvus 3.x):</strong> utilize <strong>o Woodpecker</strong> (a opção predefinida). Na versão autónoma, este é executado de forma incorporada; para a versão distribuída (cluster), a opção predefinida recomendada é um <a href="/docs/pt/woodpecker.md#Deployment-modes">serviço</a> dedicado implementado com o Helm, sendo que a execução incorporada também é suportada.</li>
+<li><strong>Novas implementações (Milvus 3.x):</strong> utilize <strong>o Woodpecker</strong> (a predefinição). Na versão autónoma, este é executado de forma incorporada; para a versão distribuída (cluster), a predefinição recomendada é um <a href="/docs/pt/woodpecker.md#Deployment-modes">serviço</a> dedicado implementado com o Helm, sendo que a execução incorporada também é suportada.</li>
 <li><strong>Utilizadores existentes do Pulsar ou do Kafka:</strong> o Pulsar e o Kafka continuam a ser totalmente suportados. Mantenha-os ou <a href="/docs/pt/switch-mq-type.md">mude para o Woodpecker</a>.</li>
 <li><strong>RocksMQ:</strong> apenas na versão autónoma e substituído pelo Woodpecker incorporado no Milvus 3.x.</li>
 </ul>

@@ -2,9 +2,9 @@
 id: switch-mq-type.md
 title: MQ-Typ wechseln
 summary: >-
-  Die Nachrichtenwarteschlange einer bestehenden Milvus-Bereitstellung ohne
-  Ausfallzeit zwischen Woodpecker und einer anderen Nachrichtenwarteschlange
-  umschalten.
+  Wechseln Sie die Nachrichtenwarteschlange einer bestehenden
+  Milvus-Bereitstellung ohne Ausfallzeit von Woodpecker zu einer anderen
+  Nachrichtenwarteschlange.
 ---
 <h1 id="Switch-MQ-Type" class="common-anchor-header">MQ-Typ wechseln<button data-href="#Switch-MQ-Type" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In dieser Anleitung wird beschrieben, wie Sie die Nachrichtenwarteschlange (MQ) einer bestehenden Milvus-Bereitstellung online und ohne Ausfallzeiten <strong>von Woodpecker auf eine andere Nachrichtenwarteschlange</strong> umstellen können.</p>
+    </button></h1><p>In dieser Anleitung wird beschrieben, wie Sie die Nachrichtenwarteschlange (MQ) einer bestehenden Milvus-Bereitstellung online und ohne Ausfallzeit <strong>von Woodpecker auf eine andere Nachrichtenwarteschlange</strong> umstellen können.</p>
 <div class="alert warning">
 <p>Diese Funktion steht noch nicht zur Verfügung und kann sich ändern. Bitte wenden Sie sich an den Milvus-Support, wenn Sie sie ausprobieren möchten oder Fragen haben.</p>
 </div>
@@ -59,7 +59,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Diese Anleitung behandelt ausschließlich den Wechsel <strong>zwischen Woodpecker und einer anderen Nachrichtenwarteschlange</strong>. Der direkte Wechsel zwischen Pulsar und Kafka liegt außerhalb des Geltungsbereichs.</p>
+    </button></h2><p>Diese Anleitung behandelt ausschließlich den Wechsel <strong>zwischen Woodpecker und einer anderen Nachrichtenwarteschlange</strong>. Der direkte Wechsel zwischen Pulsar und Kafka fällt nicht in den Geltungsbereich dieser Anleitung.</p>
 <ul>
 <li><a href="/docs/de/switch-rocksmq-woodpecker.md">Wechsel zwischen RocksMQ und Woodpecker</a> – Milvus Standalone (Docker Compose)</li>
 <li><a href="/docs/de/switch-pulsar-woodpecker.md">Wechsel zwischen Pulsar und Woodpecker</a> – Milvus-Cluster (Helm / Milvus Operator)</li>

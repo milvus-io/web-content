@@ -51,7 +51,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Jika Anda hanya memerlukan elemen Struct terdekat, mulailah dengan <a href="/docs/id/basic-vector-search-with-structarray.md">Pencarian Vektor Dasar dengan StructArray</a>. Gunakan pencarian rentang ketika hasilnya harus memenuhi batas skor atau jarak, bukan hanya peringkat top-K.</p>
+<p>Jika Anda hanya memerlukan elemen Struct terdekat, mulailah dengan <a href="/docs/id/basic-vector-search-with-structarray.md">Pencarian Vektor Dasar menggunakan StructArray</a>. Gunakan pencarian rentang ketika hasil harus memenuhi batas skor atau jarak, bukan hanya peringkat top-K.</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">Sebelum Anda mulai<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -96,7 +96,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Tetapkan ` <code translate="no">radius</code> ` untuk menentukan batas pencarian. Tetapkan ` <code translate="no">range_filter</code> ` jika Anda juga memerlukan batas bagian dalam. Arahnya bergantung pada apakah jarak yang lebih kecil lebih baik atau skor kesamaan yang lebih besar lebih baik.</p>
+    </button></h2><p>Atur ` <code translate="no">radius</code> ` untuk menentukan batas pencarian. Atur ` <code translate="no">range_filter</code> ` jika Anda juga memerlukan batas bagian dalam. Arahnya bergantung pada apakah jarak yang lebih kecil lebih baik atau skor kesamaan yang lebih besar lebih baik.</p>
 <table>
 <thead>
 <tr><th>Jenis metrik</th><th>Skor yang lebih tinggi lebih baik?</th><th>Kondisi rentang saat <code translate="no">range_filter</code> digunakan</th></tr>
@@ -122,7 +122,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Contoh berikut mencari potongan-potongan individual yang vektor <code translate="no">chunks[emb]</code> -nya cukup mirip dengan vektor kueri. Setiap hasil yang cocok mewakili elemen Struct yang sesuai.</p>
+    </button></h2><p>Contoh berikut mencari potongan-potongan individual yang vektor <code translate="no">chunks[emb]</code> -nya cukup mirip dengan vektor kueri. Setiap hasil yang cocok mewakili elemen Struct yang cocok.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -324,7 +324,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Menjalankan pencarian rentang terhadap <code translate="no">chunks[emb_list_vector]</code>, yang dimaksudkan untuk pencarian EmbeddingList.</p></li>
+<li><p>Melakukan pencarian rentang terhadap <code translate="no">chunks[emb_list_vector]</code>, yang dimaksudkan untuk pencarian EmbeddingList.</p></li>
 <li><p>Menggunakan ` <code translate="no">MAX_SIM_COSINE</code> ` alih-alih metrik biasa seperti ` <code translate="no">COSINE</code> ` untuk pencarian rentang tingkat elemen.</p></li>
 <li><p>Menggunakan kueri ` <code translate="no">EmbeddingList</code> ` alih-alih kueri vektor biasa.</p></li>
 <li><p>Mengharapkan hasil pencarian rentang bersifat unik berdasarkan entitas induk. Pencarian rentang mengembalikan hasil yang cocok pada elemen Struct.</p></li>

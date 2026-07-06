@@ -40,8 +40,8 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>ميزة "تبديل طابور الرسائل" متاحة في Milvus 3.0 والإصدارات الأحدث.</strong> قم بترقية مثيل Milvus الخاص بك إلى Milvus 3.0 أو إصدار أحدث قبل استخدامها — فالميزة غير متاحة في الإصدارات الأقدم.</li>
-<li>يجب أن يكون المثيل قيد التشغيل بشكل صحيح.</li>
+<li><strong>ميزة "تبديل قائمة انتظار الرسائل" متاحة في Milvus 3.0 والإصدارات الأحدث.</strong> قم بترقية مثيل Milvus الخاص بك إلى Milvus 3.0 أو إصدار أحدث قبل استخدامها — فالميزة غير متاحة في الإصدارات الأقدم.</li>
+<li>يجب أن تعمل النسخة بشكل صحيح.</li>
 </ul>
 <h2 id="Scope" class="common-anchor-header">النطاق<button data-href="#Scope" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,7 +60,7 @@ summary: >-
       </svg>
     </button></h2><p>يغطي هذا الدليل التبديل <strong>بين Woodpecker وقائمة انتظار رسائل أخرى</strong> فقط. لا يشمل نطاق هذا الدليل التبديل المباشر بين Pulsar و Kafka.</p>
 <ul>
-<li><a href="/docs/ar/switch-rocksmq-woodpecker.md">التبديل بين RocksMQ و Woodpecker</a> — Milvus المستقل (Docker Compose)</li>
+<li><a href="/docs/ar/switch-rocksmq-woodpecker.md">التبديل بين RocksMQ و Woodpecker</a> — Milvus Standalone (Docker Compose)</li>
 <li><a href="/docs/ar/switch-pulsar-woodpecker.md">التبديل بين Pulsar و Woodpecker</a> — مجموعة Milvus (Helm / Milvus Operator)</li>
 <li><a href="/docs/ar/switch-kafka-woodpecker.md">التبديل بين Kafka و Woodpecker</a> — مجموعة Milvus (Helm / Milvus Operator)</li>
 </ul>
@@ -87,7 +87,7 @@ summary: >-
 <li>راقب السجلات للتأكد من اكتمال عملية التبديل.</li>
 </ol>
 <div class="alert note">
-<p>قبل التبديل، تأكد من أن MQ الهدف لا يحتوي على مواضيع تحمل نفس الأسماء المستخدمة في مثيل Milvus الحالي. وهذا مهم بشكل خاص إذا كان MQ الهدف قد استخدمه مثيل Milvus آخر، حيث يمكن أن تؤدي أسماء المواضيع المتعارضة إلى سلوك غير متوقع.</p>
+<p>قبل التبديل، تأكد من أن MQ الهدف لا يحتوي على مواضيع تحمل نفس الأسماء المستخدمة في مثيل Milvus الحالي. وهذا مهم بشكل خاص إذا كان MQ الهدف قد استخدمه مثيل Milvus آخر، حيث إن أسماء المواضيع المتعارضة قد تؤدي إلى سلوك غير متوقع.</p>
 </div>
 <h2 id="Support-matrix" class="common-anchor-header">مصفوفة الدعم<button data-href="#Support-matrix" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -111,7 +111,7 @@ summary: >-
 <tbody>
 <tr><td>RocksMQ</td><td>Woodpecker (محلي/MinIO)</td><td>مستقل (Docker Compose)</td><td><strong>مدعوم</strong></td></tr>
 <tr><td>Woodpecker (محلي/MinIO)</td><td>RocksMQ</td><td>مستقل (Docker Compose)</td><td><strong>مدعوم</strong></td></tr>
-<tr><td>Pulsar (مدمج/خارجي)</td><td>Woodpecker (MinIO)</td><td>مجموعة (Helm / Operator)</td><td><strong>مدعوم</strong></td></tr>
+<tr><td>Pulsar (مدمج/خارجي)</td><td>Woodpecker (MinIO)</td><td>العنقود (Helm / Operator)</td><td><strong>مدعوم</strong></td></tr>
 <tr><td>وودبيكر (MinIO)</td><td>بولسار (خارجي)</td><td>العنقود (Helm / Operator)</td><td><strong>مدعوم</strong></td></tr>
 <tr><td>Kafka (مدمج/خارجي)</td><td>وودبيكر (MinIO)</td><td>العنقود (Helm / Operator)</td><td><strong>مدعوم</strong></td></tr>
 <tr><td>وودبيكر (MinIO)</td><td>كافكا (خارجي)</td><td>العنقود (Helm / Operator)</td><td><strong>مدعوم</strong></td></tr>

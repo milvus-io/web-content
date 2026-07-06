@@ -24,7 +24,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Insérez des données dans un champ StructArray lorsque chaque entité contient une liste ordonnée d’éléments structurés. Dans la charge utile d’insertion, un champ StructArray est représenté sous la forme d’un tableau d’objets. Chaque objet représente un élément Struct et utilise les noms des sous-champs Struct définis dans le schéma de la collection.</p>
-<p>Cette page utilise la collection « <code translate="no">tech_articles</code> » de la section « <a href="/docs/fr/create-structarray-field.md">Créer un champ StructArray</a> ». Chaque entité est un article technique, et le champ « <code translate="no">chunks</code> » stocke des segments d’article sous forme d’éléments Struct.</p>
+<p>Cette page utilise la collection « <code translate="no">tech_articles</code> » issue de la section « <a href="/docs/fr/create-structarray-field.md">Créer un champ StructArray</a> ». Chaque entité est un article technique, et le champ « <code translate="no">chunks</code> » stocke des segments d’article sous forme d’éléments Struct.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Avant de commencer<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,7 +46,7 @@ summary: >-
 <tr><th>Champ</th><th>Type</th><th>Valeur d’insertion</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">doc_id</code></td><td><code translate="no">INT64</code></td><td>ID de l’article.</td></tr>
+<tr><td><code translate="no">doc_id</code></td><td><code translate="no">INT64</code></td><td>ID de l'article.</td></tr>
 <tr><td><code translate="no">title</code></td><td><code translate="no">VARCHAR</code></td><td>Titre de l’article.</td></tr>
 <tr><td><code translate="no">category</code></td><td><code translate="no">VARCHAR</code></td><td>Catégorie de l'article.</td></tr>
 <tr><td><code translate="no">title_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Intégration au niveau de l'article.</td></tr>
@@ -64,12 +64,12 @@ summary: >-
 <tr><td><code translate="no">page</code></td><td><code translate="no">INT64</code></td><td>Numéro de page ou position logique.</td></tr>
 <tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>Note au niveau du bloc.</td></tr>
 <tr><td><code translate="no">has_code</code></td><td><code translate="no">BOOL</code></td><td>Indique si le bloc contient du code.</td></tr>
-<tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Vecteur généré pour la recherche EmbeddingList.</td></tr>
+<tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Vecteur écrit pour la recherche EmbeddingList.</td></tr>
 <tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Vecteur créé pour la recherche au niveau des éléments.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
-<p>Dans une charge utile d’insertion, « <code translate="no">chunks</code> » est un champ standard dont la valeur est un tableau d’objets Struct. À l’intérieur de chaque objet, utilisez des noms de sous-champs tels que « <code translate="no">text</code> » et « <code translate="no">emb</code> ». N’utilisez la syntaxe de chemin d’accès, telle que « <code translate="no">chunks[text]</code> » ou « <code translate="no">chunks[emb]</code> », qu’après l’insertion, lorsque vous créez des index, lancez des recherches, construisez des filtres ou spécifiez des champs de sortie.</p>
+<p>Dans une charge utile d’insertion, « <code translate="no">chunks</code> » est un champ standard dont la valeur est un tableau d’objets Struct. À l’intérieur de chaque objet, utilisez des noms de sous-champs tels que « <code translate="no">text</code> » et « <code translate="no">emb</code> ». N’utilisez la syntaxe de chemin d’accès, telle que « <code translate="no">chunks[text]</code> » ou « <code translate="no">chunks[emb]</code> », qu’après l’insertion, lorsque vous créez des index, effectuez des recherches, construisez des filtres ou spécifiez des champs de sortie.</p>
 </div>
 <h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">Comprendre la structure de la charge utile d’insertion<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -306,10 +306,10 @@ Les champs StructArray pouvant prendre la valeur null ne sont disponibles que da
 <tr><td>Utilisez un tableau d’objets pour un champ StructArray.</td><td>La valeur de <code translate="no">chunks</code> est une liste, et chaque élément de cette liste est un élément Struct.</td></tr>
 <tr><td>Utilisez des noms de sous-champs à l'intérieur de chaque élément Struct.</td><td>Insérez « <code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> » dans « <code translate="no">chunks</code> », et non dans « <code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code> ».</td></tr>
 <tr><td>Respectez le schéma de la structure.</td><td>Chaque élément Struct doit utiliser les sous-champs définis dans le schéma Struct.</td></tr>
-<tr><td>Respectez les dimensions des vecteurs.</td><td>Les valeurs des vecteurs doivent correspondre aux « <code translate="no">dim</code> » configurées pour leurs sous-champs vectoriels.</td></tr>
+<tr><td>Respectez les dimensions des vecteurs.</td><td>Les valeurs des vecteurs doivent correspondre aux <code translate="no">dim</code> s configurées pour leurs sous-champs vectoriels.</td></tr>
 <tr><td>Respecter l’ <code translate="no">max_capacity</code>.</td><td>Le nombre d’éléments Struct dans une entité ne doit pas dépasser l’ <code translate="no">max_capacity</code> du champ StructArray.</td></tr>
 <tr><td>Utilisez des sous-champs vectoriels distincts pour les différents modes de recherche.</td><td>Si la recherche EmbeddingList et la recherche au niveau des éléments sont toutes deux requises, écrivez les valeurs vectorielles dans les deux sous-champs vectoriels.</td></tr>
-<tr><td>N’utilisez la valeur « <code translate="no">null</code> » que lorsque le champ est non nul.</td><td>Les champs StructArray non nuls nécessitent des valeurs StructArray valides.</td></tr>
+<tr><td>N’utilisez la valeur « <code translate="no">null</code> » que lorsque le champ peut prendre la valeur «null».</td><td>Les champs StructArray non nuls nécessitent des valeurs StructArray valides.</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">Erreurs courantes<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
@@ -334,7 +334,7 @@ Les champs StructArray pouvant prendre la valeur null ne sont disponibles que da
 <li><p>Insérer plus d’éléments Struct que ne le permet <code translate="no">max_capacity</code>.</p></li>
 <li><p>Définir un seul sous-champ sur « <code translate="no">null</code> » alors que d’autres sous-champs de la même valeur StructArray sont valides.</p></li>
 <li><p>Écriture de vecteurs uniquement dans ` <code translate="no">emb_list_vector</code> `, puis tentative d’exécution d’une recherche au niveau des éléments sur ` <code translate="no">chunks[emb]</code>`.</p></li>
-<li><p>Écriture de vecteurs uniquement dans « <code translate="no">emb</code> » puis tentative d’exécution d’une recherche EmbeddingList sur « <code translate="no">chunks[emb_list_vector]</code> ».</p></li>
+<li><p>Écriture de vecteurs uniquement dans « <code translate="no">emb</code> », puis tentative d’exécution d’une recherche EmbeddingList sur « <code translate="no">chunks[emb_list_vector]</code> ».</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Étapes suivantes<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -354,5 +354,5 @@ Les champs StructArray pouvant prendre la valeur null ne sont disponibles que da
     </button></h2><ol>
 <li><p>Pour créer des index pour les sous-champs <code translate="no">chunks[emb_list_vector]</code>, <code translate="no">chunks[emb]</code> et scalaires, consultez la section <a href="/docs/fr/index-structarray-fields.md">Indexer les champs StructArray</a>.</p></li>
 <li><p>Pour effectuer une recherche dans les sous-champs vectoriels de StructArray, consultez la section « Recherche vectorielle de base avec StructArray ».</p></li>
-<li><p>Pour en savoir plus sur le comportement des valeurs nullables et les limitations spécifiques à chaque version, consultez la section « <a href="/docs/fr/structarray-limits.md">Limites de StructArray</a> ».</p></li>
+<li><p>Pour en savoir plus sur le comportement des valeurs nulles et les limitations spécifiques à chaque version, consultez la section « <a href="/docs/fr/structarray-limits.md">Limites de StructArray</a> ».</p></li>
 </ol>

@@ -48,7 +48,7 @@ summary: >-
 <tbody>
 <tr><td>Erstellen Sie ein StructArray-Feld, z. B. „ <code translate="no">chunks</code> “.</td><td><a href="/docs/de/create-structarray-field.md">Erstellen eines StructArray-Feldes</a></td></tr>
 <tr><td>Fügen Sie Entitäten ein, deren Feld „ <code translate="no">chunks</code> “ Struct-Objekte enthält.</td><td><a href="/docs/de/insert-data-into-structarray-fields.md">Daten in „StructArray“-Felder einfügen</a></td></tr>
-<tr><td>Erstellen Sie einen „ <code translate="no">MAX_SIM*</code> “-Index unter „ <code translate="no">chunks[emb_list_vector]</code> “ für die Suche in der „EmbeddingList“.</td><td><a href="/docs/de/index-structarray-fields.md">StructArray-Felder indizieren</a></td></tr>
+<tr><td>Erstellen Sie einen „ <code translate="no">MAX_SIM*</code> “-Index unter „ <code translate="no">chunks[emb_list_vector]</code> “ für die Suche in „EmbeddingList“.</td><td><a href="/docs/de/index-structarray-fields.md">StructArray-Felder indizieren</a></td></tr>
 <tr><td>Erstellen Sie einen regulären vektormetrischen Index auf „ <code translate="no">chunks[emb]</code> “ für die Suche auf Elementebene.</td><td><a href="/docs/de/index-structarray-fields.md">StructArray-Felder indizieren</a></td></tr>
 </tbody>
 </table>
@@ -225,7 +225,7 @@ results = client.search(
 <li><p>Verwendung einer „EmbeddingList“-Abfrage für ein Vektor-Unterfeld, das mit einer regulären Vektormetrik indiziert ist.</p></li>
 <li><p>Verwendung einer regulären Vektorabfrage für ein Vektor-Unterfeld, das mit einer „ <code translate="no">MAX_SIM*</code> “-Metrik indiziert ist.</p></li>
 <li><p>Die Erwartung, dass die Suche auf Elementebene mit „ <code translate="no">limit</code> “ ebenso viele eindeutige übergeordnete Entitäten zurückgibt. Es werden Elementtreffer zurückgegeben.</p></li>
-<li><p>Die Erwartung, dass die „EmbeddingList“-Suche einen bestimmten Element-Offset zurückgibt. Es werden Übereinstimmungen auf Entitätsebene zurückgegeben.</p></li>
+<li><p>Erwartung, dass die „EmbeddingList“-Suche einen bestimmten Element-Offset zurückgibt. Es werden Übereinstimmungen auf Entitätsebene zurückgegeben.</p></li>
 <li><p>Wiederverwendung eines Vektor-Teilfelds für beide Suchmodi. Verwenden Sie separate Vektor-Teilfelder, da jedes Vektor-Teilfeld nur einen Index akzeptiert.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Nächste Schritte<button data-href="#Next-steps" class="anchor-icon" translate="no">

@@ -263,7 +263,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Atualização da versão 2.5.x para a 2.6.x:</strong> <strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v3.0-beta, deve manter a sua escolha atual de fila de mensagens. A alternância entre diferentes sistemas de fila de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de fila de mensagens estará disponível em versões futuras.
+<li><strong>Atualização da versão 2.5.x para a 2.6.x:</strong> <strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v3.0-beta, deve manter a sua escolha atual de fila de mensagens. A alternância entre diferentes sistemas de fila de mensagens durante a atualização não é suportada. O suporte para a alteração de sistemas de fila de mensagens estará disponível em versões futuras.
 Se estiver a utilizar o Pulsar e pretender mantê-lo, não altere a fila de mensagens durante a atualização.</li>
 <li><strong>Pulsar v2 → v3:</strong> consulte <a href="/docs/pt/upgrade-pulsar-v3.md">Atualizar o Pulsar da v2 para a v3</a>; para permanecer na v2, consulte <a href="/docs/pt/use-pulsar-v2.md">Continuar a utilizar o Pulsar v2</a>.</li>
 </ul>

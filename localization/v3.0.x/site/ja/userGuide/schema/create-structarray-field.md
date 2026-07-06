@@ -49,7 +49,7 @@ summary: >-
 <tr><td><code translate="no">chunks</code></td><td><code translate="no">ARRAY</code></td><td>チャンクレベルのテキスト、メタデータ、および埋め込みを格納する StructArray フィールド。</td></tr>
 </tbody>
 </table>
-<p><code translate="no">chunks</code> のStructArrayフィールドには、以下のサブフィールドが含まれます。</p>
+<p><code translate="no">chunks</code> StructArrayフィールドには、以下のサブフィールドが含まれます。</p>
 <table>
 <thead>
 <tr><th>サブフィールド</th><th>タイプ</th><th>目的</th></tr>
@@ -61,7 +61,7 @@ summary: >-
 <tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>スカラーフィルタリングや範囲の例で使用されるチャンクレベルのスコア。</td></tr>
 <tr><td><code translate="no">has_code</code></td><td><code translate="no">BOOL</code></td><td>チャンクにコードが含まれているかどうか。</td></tr>
 <tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td><code translate="no">MAX_SIM*</code> メトリックを使用した EmbeddingList 検索のためのベクトルサブフィールド。</td></tr>
-<tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>通常のベクトルメトリクスを使用した要素レベル検索用のベクトルサブフィールド。</td></tr>
+<tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>通常のベクトルメトリックを使用した要素レベル検索用のベクトルサブフィールド。</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -96,11 +96,11 @@ summary: >-
 <tr><td><code translate="no">ArrayOfVector</code></td><td>サポート対象</td><td>サブフィールドを「<code translate="no">DataType.FLOAT16_VECTOR</code> 」として定義し、「<code translate="no">dim</code> 」に設定します。</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>サポート対象</td><td>サブフィールドを「<code translate="no">DataType.BFLOAT16_VECTOR</code> 」として定義し、「<code translate="no">dim</code> 」に設定します。</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>サポート対象</td><td>サブフィールドを「<code translate="no">DataType.INT8_VECTOR</code> 」として定義し、「<code translate="no">dim</code> 」に設定します。</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>サポート対象</td><td>サブフィールドを「<code translate="no">DataType.BINARY_VECTOR</code> 」として定義し、「<code translate="no">dim</code> 」に設定します。</td></tr>
+<tr><td><code translate="no">ArrayOfVector</code></td><td>サポート対象</td><td>サブフィールドを「<code translate="no">DataType.BINARY_VECTOR</code> 」として定義し、「<code translate="no">dim</code> 」に設定します。サポート対象</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>サポートされていません</td><td>StructArray フィールドでは、スパースベクトルのサブフィールドはサポートされていません。</td></tr>
-<tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td>`<code translate="no">VARCHAR</code>` を使用し、`<code translate="no">String</code>` は使用しないでください。</td></tr>
+<tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td><code translate="no">VARCHAR</code> を使用し、<code translate="no">String</code> は使用しないでください。</td></tr>
 <tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td>StructArray フィールドでは、JSON サブフィールドはサポートされていません。</td></tr>
-<tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td>StructArray フィールドでは、ジオメトリのサブフィールドおよび GIS 関数はサポートされていません。</td></tr>
+<tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td>StructArray フィールドでは、Geometry サブフィールドおよび GIS 関数はサポートされていません。</td></tr>
 <tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td>StructArray フィールドでは、Text サブフィールドはサポートされていません。</td></tr>
 <tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td>StructArray フィールドでは、Timestamptz サブフィールドおよび時間指定式はサポートされていません。</td></tr>
 <tr><td>StructArray フィールドでは、ネストされた<code translate="no">Array</code> 、<code translate="no">ArrayOfVector</code> 、<code translate="no">Struct</code> 、または<code translate="no">ArrayOfStruct</code></td><td>サポートされていません</td><td>StructArray フィールドには、ネストされた配列、ネストされたベクトル配列、ネストされた Struct フィールド、またはネストされた Array-of-Struct フィールドを含めることはできません。</td></tr>
@@ -372,13 +372,13 @@ client.add_collection_struct_field(
 <tbody>
 <tr><td>Struct は Array 要素型として使用されます。</td><td><code translate="no">element_type=STRUCT</code> を使用して、StructArray フィールドを Array フィールドとして作成します。Struct をトップレベルのコレクションフィールドとして作成しないでください。</td></tr>
 <tr><td>すべての要素は 1 つのスキーマを共有します。</td><td>同じ StructArray フィールド内のすべての Struct 要素は、そのフィールドに対して定義された Struct スキーマに従います。</td></tr>
-<tr><td><code translate="no">max_capacity</code> は必須です。</td><td>これは、各エンティティが StructArray フィールドに格納できる Struct 要素の数を制限するものです。</td></tr>
+<tr><td><code translate="no">max_capacity</code> は必須です。</td><td>これは、各エンティティが StructArray フィールドに格納できる Struct 要素の数を制限します。</td></tr>
 <tr><td>サポートされているサブフィールド型のみ使用できます。</td><td>StructArray でサポートされているスカラーおよびベクトルサブフィールド型を使用してください。JSON、Geometry、Text、Timestamptz、SparseFloatVector、またはネストされた Struct / Array サブフィールドは定義しないでください。</td></tr>
 <tr><td>ベクトルサブフィールドは、検索の前にインデックスを作成する必要があります。</td><td>ベクトル検索を実行する前に、<code translate="no">chunks[emb_list_vector]</code> や<code translate="no">chunks[emb]</code> などのパスにインデックスを作成してください。</td></tr>
 <tr><td>1 つのベクトルサブフィールドには 1 つのインデックスがあります。</td><td>EmbeddingList 検索と要素レベルの検索の両方が必要な場合は、2 つの別々のベクトルサブフィールドを作成してください。</td></tr>
 <tr><td>既存の StructArray サブフィールドは固定されています。</td><td>StructArray フィールドを作成した後、その同じ StructArray フィールドにサブフィールドを追加することはできません。</td></tr>
 <tr><td>Struct 内での関数の使用はサポートされていません。</td><td>StructArray フィールド内のフィールドやサブフィールドに対して関数を定義しないでください。</td></tr>
-<tr><td>スカラーサブフィールドは、フィルタの要件に合致している必要があります。</td><td><code translate="no">section</code> 、<code translate="no">quality_score</code> 、<code translate="no">has_code</code> などのフィールドは、後でフィルタリング、グループ化、または出力を行う必要がある場合にのみ追加してください。</td></tr>
+<tr><td>スカラーサブフィールドは、フィルタの要件に合致している必要があります。</td><td><code translate="no">section</code> 、<code translate="no">quality_score</code> 、<code translate="no">has_code</code> などのフィールドは、後でフィルタリング、グループ化、または出力する必要がある場合にのみ追加してください。</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">よくある間違い<button data-href="#Common-mistakes" class="anchor-icon" translate="no">

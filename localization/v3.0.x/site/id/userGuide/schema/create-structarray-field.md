@@ -49,7 +49,7 @@ summary: >-
 <tr><td><code translate="no">title</code></td><td><code translate="no">VARCHAR</code></td><td>Judul artikel.</td></tr>
 <tr><td><code translate="no">category</code></td><td><code translate="no">VARCHAR</code></td><td>Kategori tingkat artikel.</td></tr>
 <tr><td><code translate="no">title_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Bidang vektor tingkat artikel, yang akan digunakan nanti dalam contoh pencarian hibrida.</td></tr>
-<tr><td><code translate="no">chunks</code></td><td><code translate="no">ARRAY</code></td><td>Bidang StructArray yang menyimpan teks tingkat chunk, metadata, dan embedding.</td></tr>
+<tr><td><code translate="no">chunks</code></td><td><code translate="no">ARRAY</code></td><td>Bidang StructArray yang menyimpan teks tingkat potongan, metadata, dan embedding.</td></tr>
 </tbody>
 </table>
 <p>Bidang StructArray " <code translate="no">chunks</code> " berisi subbidang berikut.</p>
@@ -60,7 +60,7 @@ summary: >-
 <tbody>
 <tr><td><code translate="no">text</code></td><td><code translate="no">VARCHAR</code></td><td>Teks chunk.</td></tr>
 <tr><td><code translate="no">section</code></td><td><code translate="no">VARCHAR</code></td><td>Nama bagian, seperti <code translate="no">index</code>, <code translate="no">search</code>, atau <code translate="no">filter</code>.</td></tr>
-<tr><td><code translate="no">page</code></td><td><code translate="no">INT64</code></td><td>Nomor halaman atau posisi logis dari chunk tersebut.</td></tr>
+<tr><td><code translate="no">page</code></td><td><code translate="no">INT64</code></td><td>Nomor halaman atau posisi logis dari potongan tersebut.</td></tr>
 <tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>Skor tingkat potongan yang digunakan dalam penyaringan skalar dan contoh rentang.</td></tr>
 <tr><td><code translate="no">has_code</code></td><td><code translate="no">BOOL</code></td><td>Apakah potongan tersebut berisi kode.</td></tr>
 <tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Subbidang vektor untuk pencarian EmbeddingList dengan metrik <code translate="no">MAX_SIM*</code>.</td></tr>
@@ -68,7 +68,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Sebuah bidang vektor atau subbidang vektor hanya menerima satu indeks. Jika Anda memerlukan baik pencarian EmbeddingList maupun pencarian tingkat elemen, tentukan dua subbidang vektor terpisah. Dalam contoh ini, ` <code translate="no">chunks[emb_list_vector]</code> ` digunakan untuk pencarian EmbeddingList, dan ` <code translate="no">chunks[emb]</code> ` digunakan untuk pencarian tingkat elemen.</p>
+<p>Sebuah bidang vektor atau subbidang vektor hanya menerima satu indeks. Jika Anda memerlukan pencarian EmbeddingList dan pencarian tingkat elemen, tentukan dua subbidang vektor terpisah. Dalam contoh ini, <code translate="no">chunks[emb_list_vector]</code> digunakan untuk pencarian EmbeddingList, dan <code translate="no">chunks[emb]</code> digunakan untuk pencarian tingkat elemen.</p>
 </div>
 <h2 id="Supported-subfield-data-types" class="common-anchor-header">Tipe data subbidang yang didukung<button data-href="#Supported-subfield-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -101,15 +101,15 @@ summary: >-
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Didukung</td><td>Tentukan subbidang sebagai <code translate="no">DataType.INT8_VECTOR</code> dan atur <code translate="no">dim</code>.</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Didukung</td><td>Tentukan subbidang sebagai <code translate="no">DataType.BINARY_VECTOR</code> dan atur <code translate="no">dim</code>.</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Tidak didukung</td><td>Subbidang vektor sparce tidak didukung dalam bidang StructArray.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Tidak didukung</td><td>Gunakan <code translate="no">VARCHAR</code>, bukan <code translate="no">String</code>.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Tidak didukung</td><td>Gunakan ` <code translate="no">VARCHAR</code>`, bukan ` <code translate="no">String</code>`.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Tidak didukung</td><td>Subbidang JSON tidak didukung dalam bidang StructArray.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Tidak didukung</td><td>Subbidang geometri dan fungsi GIS tidak didukung dalam bidang StructArray.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Tidak didukung</td><td>Subbidang teks tidak didukung dalam bidang StructArray.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Tidak didukung</td><td>Subbidang teks tidak didukung di bidang StructArray.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Tidak didukung</td><td>Subbidang timestamptz dan ekspresi berbasis waktu tidak didukung dalam bidang StructArray.</td></tr>
-<tr><td><code translate="no">Array</code>, <code translate="no">ArrayOfVector</code>, <code translate="no">Struct</code>, atau <code translate="no">ArrayOfStruct</code></td><td>Tidak didukung</td><td>Bidang StructArray tidak boleh berisi array bersarang, array vektor bersarang, bidang Struct bersarang, atau bidang Array-of-Struct bersarang.</td></tr>
+<tr><td><code translate="no">Array</code>, <code translate="no">ArrayOfVector</code>, <code translate="no">Struct</code>, atau <code translate="no">ArrayOfStruct</code></td><td>Tidak didukung</td><td>Bidang StructArray tidak dapat berisi array bersarang, array vektor bersarang, bidang Struct bersarang, atau bidang Array-of-Struct bersarang.</td></tr>
 </tbody>
 </table>
-<p>Untuk dukungan versi tertentu, perilaku nullable, dan batasan lainnya, lihat <a href="/docs/id/structarray-limits.md">Batasan StructArray</a>.</p>
+<p>Untuk dukungan khusus versi, perilaku nullable, dan batasan lainnya, lihat <a href="/docs/id/structarray-limits.md">Batasan StructArray</a>.</p>
 <h2 id="Create-a-collection-with-a-StructArray-field" class="common-anchor-header">Buat koleksi dengan bidang StructArray<button data-href="#Create-a-collection-with-a-StructArray-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -237,7 +237,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah Anda membuat bidang StructArray, rujuk subbidangnya dengan sintaks jalur ` <code translate="no">structArray[subfield]</code> `. Gunakan sintaks ini saat Anda membuat indeks, mencari subbidang vektor, mengeluarkan subbidang, atau membuat filter skalar.</p>
+    </button></h2><p>Setelah Anda membuat bidang StructArray, rujuk subbidangnya dengan sintaks jalur <code translate="no">structArray[subfield]</code>. Gunakan sintaks ini saat Anda membuat indeks, mencari subbidang vektor, menampilkan subbidang, atau membuat filter skalar.</p>
 <table>
 <thead>
 <tr><th>Jalur</th><th>Arti</th><th>Penggunaan umum</th></tr>
@@ -277,7 +277,7 @@ client.create_collection(
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Peringatan
-Bidang StructArray yang dapat bernilai null hanya tersedia di Milvus v3.0.x. Untuk bidang StructArray yang dapat bernilai null, suatu entitas dapat menyediakan nilai StructArray yang valid atau menetapkan seluruh bidang tersebut ke ` <code translate="no">null</code>`. Saat memasukkan nilai StructArray yang valid, semua subbidang harus bernilai null atau memiliki nilai yang valid. Menyisipkan entitas dengan beberapa subbidang yang ditetapkan ke null dan yang lainnya ditetapkan ke nilai yang valid akan mengakibatkan kesalahan. Untuk detailnya, lihat <a href="/docs/id/structarray-limits.md">Batasan StructArray</a>.</p>
+Bidang StructArray yang dapat bernilai null hanya tersedia di Milvus v3.0.x. Untuk bidang StructArray yang dapat bernilai null, suatu entitas dapat memberikan nilai StructArray yang valid atau menetapkan seluruh bidang tersebut ke ` <code translate="no">null</code>`. Saat memasukkan nilai StructArray yang valid, semua subbidang harus bernilai null atau memiliki nilai yang valid. Menyisipkan entitas dengan beberapa subbidang yang ditetapkan ke null dan yang lainnya ditetapkan ke nilai yang valid akan mengakibatkan kesalahan. Untuk detailnya, lihat <a href="/docs/id/structarray-limits.md">Batasan StructArray</a>.</p>
 </div>
 <h2 id="Add-a-StructArray-field-to-an-existing-collection" class="common-anchor-header">Menambahkan bidang StructArray ke koleksi yang sudah ada<button data-href="#Add-a-StructArray-field-to-an-existing-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -378,7 +378,7 @@ client.add_collection_struct_field(
 <tr><td><code translate="no">max_capacity</code> diperlukan.</td><td>Ini membatasi jumlah elemen Struct yang dapat disimpan oleh setiap entitas dalam bidang StructArray.</td></tr>
 <tr><td>Hanya tipe subbidang yang didukung yang diperbolehkan.</td><td>Gunakan tipe subbidang skalar dan vektor yang didukung oleh StructArray. Jangan mendefinisikan subbidang JSON, Geometry, Text, Timestamptz, SparseFloatVector, atau subbidang Struct / Array bersarang.</td></tr>
 <tr><td>Subbidang vektor memerlukan indeks sebelum pencarian.</td><td>Buat indeks pada jalur seperti <code translate="no">chunks[emb_list_vector]</code> atau <code translate="no">chunks[emb]</code> sebelum menjalankan pencarian vektor.</td></tr>
-<tr><td>Satu subfield vektor memiliki satu indeks.</td><td>Jika Anda memerlukan pencarian EmbeddingList dan pencarian tingkat elemen, buat dua subbidang vektor terpisah.</td></tr>
+<tr><td>Satu subbidang vektor memiliki satu indeks.</td><td>Jika Anda memerlukan pencarian EmbeddingList dan pencarian tingkat elemen, buat dua subbidang vektor terpisah.</td></tr>
 <tr><td>Subbidang StructArray yang sudah ada bersifat tetap.</td><td>Setelah membuat bidang StructArray, jangan berharap dapat menambahkan subbidang lain ke bidang StructArray yang sama.</td></tr>
 <tr><td>Fungsi tidak didukung di dalam Struct.</td><td>Jangan mendefinisikan fungsi untuk bidang atau subbidang di dalam bidang StructArray.</td></tr>
 <tr><td>Subbidang skalar harus sesuai dengan kebutuhan filter.</td><td>Tambahkan bidang seperti <code translate="no">section</code>, <code translate="no">quality_score</code>, atau <code translate="no">has_code</code> hanya jika Anda perlu memfilter, mengelompokkan, atau menampilkannya nanti.</td></tr>
@@ -430,5 +430,5 @@ client.add_collection_struct_field(
 <li><p>Untuk menyisipkan data bersarang ke dalam bidang StructArray, baca <a href="/docs/id/insert-data-into-structarray-fields.md">Menyisipkan Data ke dalam Bidang StructArray</a>.</p></li>
 <li><p>Untuk membuat indeks vektor dan skalar, baca " <a href="/docs/id/index-structarray-fields.md">Index StructArray Fields</a>".</p></li>
 <li><p>Untuk mencari subbidang vektor StructArray, baca "Pencarian Vektor Dasar dengan StructArray".</p></li>
-<li><p>Untuk meninjau tipe data yang didukung, perilaku nullable, dan batasan khusus versi, baca " <a href="/docs/id/structarray-limits.md">Batasan StructArray</a>".</p></li>
+<li><p>Untuk meninjau tipe data yang didukung, perilaku nullable, dan batasan khusus versi, baca <a href="/docs/id/structarray-limits.md">Batasan StructArray</a>.</p></li>
 </ol>

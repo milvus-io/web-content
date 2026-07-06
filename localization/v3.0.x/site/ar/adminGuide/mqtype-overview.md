@@ -38,11 +38,11 @@ summary: >-
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>قائمة انتظار الرسائل</th><th style="text-align:center">Milvus المستقل</th><th style="text-align:center">Milvus Distributed (العنقود)</th><th>الافتراضي في</th><th>ملاحظات</th></tr>
+<tr><th>قائمة انتظار الرسائل</th><th style="text-align:center">Milvus المستقل</th><th style="text-align:center">Milvus الموزع (العنقود)</th><th>الافتراضي في</th><th>ملاحظات</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="/docs/ar/woodpecker.md">Woodpecker</a></td><td style="text-align:center">✔️ (مدمج)</td><td style="text-align:center">✔️ (مدمج أو خدمة)</td><td><strong>Milvus 3.x</strong> (كلا الوضعين)</td><td>الافتراضي والموصى به. WAL السحابي الأصلي على تخزين الكائنات؛ لا يلزم وجود خدمة خارجية.</td></tr>
-<tr><td><a href="/docs/ar/mq_pulsar.md">Pulsar</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td>≤ 2.5.x (الافتراضي للمجموعة)</td><td>مدعوم، خارجي أو مدمج.</td></tr>
+<tr><td><a href="/docs/ar/woodpecker.md">Woodpecker</a></td><td style="text-align:center">✔️ (مُدمج)</td><td style="text-align:center">✔️ (مُدمج أو خدمة)</td><td><strong>Milvus 3.x</strong> (كلا الوضعين)</td><td>الافتراضي والموصى به. WAL السحابي الأصلي على تخزين الكائنات؛ لا يلزم وجود خدمة خارجية.</td></tr>
+<tr><td><a href="/docs/ar/mq_pulsar.md">Pulsar</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td>≤ 2.5.x (الإعداد الافتراضي للمجموعة)</td><td>مدعوم، خارجي أو مدمج.</td></tr>
 <tr><td><a href="/docs/ar/mq_kafka.md">كافكا</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td>—</td><td>مدعوم. كافكا 2.x أو 3.x فقط.</td></tr>
 <tr><td><a href="/docs/ar/mq_rocksmq.md">RocksMQ</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✖️</td><td>≤ 2.5.x (الإعداد الافتراضي للنسخة المستقلة)</td><td>مدعوم للإصدار <strong>المستقل فقط</strong>.</td></tr>
 </tbody>
@@ -51,7 +51,7 @@ summary: >-
 <ul>
 <li><p>تستخدم كل مثيل من Milvus قائمة انتظار رسائل واحدة فقط.</p></li>
 <li><p><strong>قيود قائمة انتظار الرسائل</strong>: عند الترقية إلى Milvus v3.0-beta، يجب الحفاظ على اختيارك الحالي لقائمة انتظار الرسائل. لا يُدعم التبديل بين أنظمة قوائم انتظار الرسائل المختلفة أثناء الترقية. سيتوفر دعم تغيير أنظمة قوائم انتظار الرسائل في الإصدارات المستقبلية.</p></li>
-<li><p>لتغيير قائمة انتظار الرسائل لمثيل قيد التشغيل، راجع <a href="/docs/ar/switch-mq-type.md">"تبديل نوع قائمة انتظار الرسائل</a>". تتوفر ميزة "تبديل قائمة انتظار الرسائل" في <strong>Milvus 3.0 والإصدارات الأحدث</strong> — قم أولاً بالترقية إلى Milvus 3.0 أو إصدار أحدث.</p></li>
+<li><p>لتغيير قائمة انتظار الرسائل لمثيل قيد التشغيل، راجع <a href="/docs/ar/switch-mq-type.md">«تبديل نوع قائمة انتظار الرسائل</a>». تتوفر ميزة «تبديل قائمة انتظار الرسائل» في <strong>Milvus 3.0 والإصدارات الأحدث</strong> — قم بالترقية إلى Milvus 3.0 أو إصدار أحدث أولاً.</p></li>
 </ul>
 </div>
 <h2 id="Choosing-a-message-queue" class="common-anchor-header">اختيار قائمة انتظار الرسائل<button data-href="#Choosing-a-message-queue" class="anchor-icon" translate="no">

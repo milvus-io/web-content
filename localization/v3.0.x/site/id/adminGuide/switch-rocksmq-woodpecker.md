@@ -2,8 +2,8 @@
 id: switch-rocksmq-woodpecker.md
 title: Beralih antara RocksMQ dan Woodpecker
 summary: >-
-  Ganti antrian pesan pada deployment Milvus Standalone (Docker Compose) dari
-  RocksMQ ke Woodpecker.
+  Beralihkan antrian pesan pada implementasi Milvus Standalone (Docker Compose)
+  antara RocksMQ dan Woodpecker.
 ---
 <h1 id="Switch-between-RocksMQ-and-Woodpecker" class="common-anchor-header">Beralih antara RocksMQ dan Woodpecker<button data-href="#Switch-between-RocksMQ-and-Woodpecker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -23,8 +23,8 @@ summary: >-
     </button></h1><p>Halaman ini menjelaskan cara mengganti antrian pesan (MQ) pada deployment <strong>Milvus Standalone (Docker Compose)</strong> antara <strong>RocksMQ</strong> dan <strong>Woodpecker</strong> (backend lokal atau MinIO), baik dari satu ke yang lain maupun sebaliknya. Untuk alur kerja umum dan prasyarat, lihat <a href="/docs/id/switch-mq-type.md">Mengganti Jenis MQ</a>.</p>
 <div class="alert note">
 <ul>
-<li><strong>Persyaratan:</strong> Fitur Beralih MQ tersedia di <strong>Milvus 3.0 dan versi yang lebih baru</strong>. Perbarui instance Milvus Anda ke Milvus 3.0 atau versi yang lebih baru sebelum memulai — fitur ini tidak tersedia pada versi sebelumnya.</li>
-<li>Peralihan MQ memerlukan penyebaran Docker <strong>Compose</strong> (yang mengaktifkan sumber konfigurasi etcd). Penyebaran Docker satu kontainer tidak mendukung peralihan.</li>
+<li><strong>Prasyarat:</strong> Fitur Beralih MQ tersedia di <strong>Milvus 3.0 dan versi yang lebih baru</strong>. Tingkatkan instance Milvus Anda ke Milvus 3.0 atau versi yang lebih baru sebelum memulai — fitur ini tidak tersedia pada versi sebelumnya.</li>
+<li>Pengalihan MQ memerlukan penyebaran Docker <strong>Compose</strong> (yang mengaktifkan sumber konfigurasi etcd). Penyebaran Docker satu kontainer tidak mendukung pengalihan.</li>
 </ul>
 </div>
 <h2 id="Switch-from-RocksMQ-to-Woodpecker" class="common-anchor-header">Beralih dari RocksMQ ke Woodpecker<button data-href="#Switch-from-RocksMQ-to-Woodpecker" class="anchor-icon" translate="no">
@@ -97,13 +97,13 @@ summary: >-
         ></path>
       </svg>
     </button></h3><div class="alert note">
-<p>Jika ini adalah pertama kalinya Anda beralih ke Woodpecker, abaikan catatan ini. Jika tidak, bersihkan sisa meta dan data Woodpecker sebelum beralih kembali — data sisa dapat menyebabkan perilaku yang tidak terduga.</p>
+<p>Jika ini adalah pertama kalinya Anda beralih ke Woodpecker, abaikan catatan ini. Jika tidak, bersihkan sisa meta dan data Woodpecker sebelum beralih lagi — data sisa dapat menyebabkan perilaku yang tidak terduga.</p>
 </div>
 <pre><code translate="no" class="language-shell">curl -X POST http://&lt;mixcoord_addr&gt;:&lt;mixcoord_port&gt;/management/wal/alter \
   -H &quot;Content-Type: application/json&quot; \
   -d &#x27;{&quot;target_wal_name&quot;: &quot;woodpecker&quot;}&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>Port MixCoord biasanya <code translate="no">9091</code>.</p>
+<p>Port MixCoord biasanya adalah <code translate="no">9091</code>.</p>
 <h3 id="Step-4-Verify-the-switch-is-complete" class="common-anchor-header">Langkah 4: Verifikasi bahwa peralihan telah selesai<button data-href="#Step-4-Verify-the-switch-is-complete" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -185,7 +185,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><div class="alert note">
-<p>Pastikan instance tersebut tidak memiliki sisa data RocksMQ dari proses sebelumnya. Jika ini adalah pertama kalinya Anda beralih ke RocksMQ, abaikan catatan ini; jika tidak, bersihkan terlebih dahulu meta dan data RocksMQ yang terkait.</p>
+<p>Pastikan instance tersebut tidak memiliki sisa data RocksMQ dari eksekusi sebelumnya. Jika ini adalah pertama kalinya Anda beralih ke RocksMQ, abaikan catatan ini; jika tidak, bersihkan terlebih dahulu meta dan data RocksMQ yang terkait.</p>
 </div>
 <pre><code translate="no" class="language-shell">curl -X POST http://&lt;mixcoord_addr&gt;:&lt;mixcoord_port&gt;/management/wal/alter \
   -H &quot;Content-Type: application/json&quot; \
@@ -225,7 +225,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><ul>
-<li><strong>Metadata (etcd):</strong> awalan kunci Woodpecker biasanya adalah <code translate="no">woodpecker/...</code>. Lihat dengan perintah <code translate="no">etcdctl get woodpecker --prefix</code>, lalu hapus.</li>
+<li><strong>Metadata (etcd):</strong> awalan kunci Woodpecker biasanya adalah <code translate="no">woodpecker/...</code>. Lihat dengan perintah ` <code translate="no">etcdctl get woodpecker --prefix</code>`, lalu hapus.</li>
 <li><strong>Data penyimpanan:</strong> dalam <strong>mode MinIO</strong>, hapus data log di bawah <code translate="no">&lt;rootPath&gt;/wp/...</code> (biasanya <code translate="no">files/wp/...</code>) di bucket; dalam <strong>mode lokal</strong>, data tersebut berada di disk lokal di <code translate="no">volumes/milvus/data/wp/...</code>.</li>
 </ul>
 <p>Jika Anda berencana untuk kembali ke Woodpecker nanti, bersihkan file-file ini terlebih dahulu untuk menghindari konflik.</p>

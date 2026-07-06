@@ -46,7 +46,7 @@ summary: >-
 <tr><th>Modo de pesquisa</th><th>Comportamento da pesquisa por intervalo</th><th>Granularidade dos resultados</th></tr>
 </thead>
 <tbody>
-<tr><td>Pesquisa na EmbeddingList</td><td>Não suportado.</td><td>Não aplicável.</td></tr>
+<tr><td>Pesquisa EmbeddingList</td><td>Não suportado.</td><td>Não aplicável.</td></tr>
 <tr><td>Pesquisa ao nível do elemento</td><td>Utilize uma consulta vetorial normal com ` <code translate="no">radius</code> ` e, opcionalmente, ` <code translate="no">range_filter</code>`.</td><td>Nível de elemento da estrutura.</td></tr>
 <tr><td>Pesquisa híbrida</td><td>Suportada quando o pedido StructArray tem como alvo um campo vetorial ao nível do elemento. Os pedidos ao nível de EmbeddingList não suportam a pesquisa por intervalo.</td><td>Subpesquisa ao nível do elemento, seguida de reclassificação híbrida.</td></tr>
 </tbody>
@@ -123,7 +123,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O exemplo seguinte pesquisa blocos individuais cujos vetores de « <code translate="no">chunks[emb]</code> » sejam suficientemente semelhantes ao vetor de consulta. Cada resultado representa um elemento Struct correspondente.</p>
+    </button></h2><p>O exemplo seguinte pesquisa blocos individuais cujos vetores de « <code translate="no">chunks[emb]</code> » sejam suficientemente semelhantes ao vetor de consulta. Cada resultado encontrado representa um elemento Struct correspondente.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -284,7 +284,7 @@ results = client.hybrid_search(
 <tbody>
 <tr><td><code translate="no">id</code></td><td>Chave primária da entidade que contém o elemento Struct correspondente.</td></tr>
 <tr><td><code translate="no">distance</code> ou pontuação</td><td>A pontuação ou distância entre o vetor de consulta e o vetor do elemento Struct correspondente.</td></tr>
-<tr><td><code translate="no">offset</code></td><td>Posição, a partir de zero, do elemento Struct correspondente no campo StructArray quando devolvido.</td></tr>
+<tr><td><code translate="no">offset</code></td><td>Posição, com início em zero, do elemento Struct correspondente no campo StructArray quando devolvido.</td></tr>
 <tr><td>Chaves primárias repetidas</td><td>Possível. Mais do que um elemento Struct na mesma entidade pode estar dentro do intervalo especificado.</td></tr>
 <tr><td><code translate="no">limit</code></td><td>Aplica-se a ocorrências de elementos, não a entidades-pai únicas.</td></tr>
 </tbody>
@@ -305,7 +305,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Não utilize uma consulta « <code translate="no">EmbeddingList</code> » nem uma métrica « <code translate="no">MAX_SIM*</code> » para a pesquisa por intervalo nos subcampos do vetor «StructArray». A pesquisa ao nível da «EmbeddingList» não suporta a pesquisa por intervalo.</p></li>
+<li><p>Não utilize uma consulta « <code translate="no">EmbeddingList</code> » nem uma métrica « <code translate="no">MAX_SIM*</code> » para a pesquisa por intervalo nos subcampos vetoriais do «StructArray». A pesquisa ao nível da «EmbeddingList» não suporta a pesquisa por intervalo.</p></li>
 <li><p>Não combine a pesquisa por intervalo com a pesquisa por agrupamento. Se precisar de um resultado por entidade pai, execute uma pesquisa ao nível do elemento sem parâmetros de intervalo e utilize o agrupamento sempre que for suportado.</p></li>
 <li><p>A pesquisa de intervalo híbrida é suportada para campos vetoriais ao nível do elemento do StructArray. Não é suportada para pedidos do StructArray ao nível da EmbeddingList.</p></li>
 </ul>
@@ -325,7 +325,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Executar uma pesquisa por intervalo em ` <code translate="no">chunks[emb_list_vector]</code>`, que se destina à pesquisa ao nível de `EmbeddingList`.</p></li>
+<li><p>Executar a pesquisa por intervalo em ` <code translate="no">chunks[emb_list_vector]</code>`, que se destina à pesquisa ao nível de `EmbeddingList`.</p></li>
 <li><p>Utilizar ` <code translate="no">MAX_SIM_COSINE</code> ` em vez de uma métrica normal, como ` <code translate="no">COSINE</code> `, para a pesquisa por intervalo ao nível do elemento.</p></li>
 <li><p>Utilizar uma consulta « <code translate="no">EmbeddingList</code> » em vez de uma consulta vetorial normal.</p></li>
 <li><p>Esperar que os resultados da pesquisa por intervalo sejam únicos por entidade pai. A pesquisa por intervalo devolve resultados correspondentes a elementos Struct.</p></li>

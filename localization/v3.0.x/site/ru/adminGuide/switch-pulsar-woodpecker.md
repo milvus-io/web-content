@@ -83,7 +83,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Для <strong>внешнего</strong> Pulsar очистите темы Milvus во внешнем экземпляре Pulsar. Темы Milvus имеют формат <code translate="no">&lt;cluster_prefix&gt;-dml_&lt;seqNo&gt;_&lt;TimeTick&gt;&lt;Version&gt;</code> (например, <code translate="no">by-dev-rootcoord-dml_10_464633776992639586v0</code>).</p>
 <div class="alert note">
-<p>Если вы планируете позже вернуться к Pulsar, сначала очистите данные/темы, чтобы избежать конфликтов. Из-за ограничений диаграмм Helm возврат к <strong>встроенному</strong> экземпляру Pulsar в настоящее время невозможен.</p>
+<p>Если вы планируете позже вернуться к Pulsar, сначала очистите данные/темы, чтобы избежать конфликтов. Из-за ограничений диаграмм Helm возвращение к <strong>встроенному</strong> экземпляру Pulsar в настоящее время невозможно.</p>
 </div>
 <h3 id="Switch-from-Woodpecker-to-Pulsar-Helm" class="common-anchor-header">Переход с Woodpecker на Pulsar (Helm)<button data-href="#Switch-from-Woodpecker-to-Pulsar-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -101,7 +101,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>Шаг 1: Убедитесь, что экземпляр Milvus запущен.</strong></p>
-<p><strong>Шаг 2: Настройте целевое соединение с Pulsar и перезапустите Milvus.</strong> Для перехода необходимо, чтобы Milvus уже знал о соединении с Pulsar, поэтому запишите его в файл « <code translate="no">user.yaml</code> » с помощью команды ` <code translate="no">extraConfigFiles</code> ` и примените с помощью ` <code translate="no">helm upgrade</code> ` (которая перезапускает поды). Для работы функции Switch MQ требуется файл « <code translate="no">streaming.enabled=true</code> ».</p>
+<p><strong>Шаг 2: Настройте целевое подключение к Pulsar и перезапустите Milvus.</strong> Для перехода необходимо, чтобы Milvus уже знал о подключении к Pulsar, поэтому запишите его в файл « <code translate="no">user.yaml</code> » через <code translate="no">extraConfigFiles</code> и примените с помощью команды <code translate="no">helm upgrade</code> (которая перезапускает поды). Для работы функции Switch MQ требуется файл « <code translate="no">streaming.enabled=true</code> ».</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -115,7 +115,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
   --set streaming.enabled=true \
   -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Дождитесь, пока все поды будут готовы, затем убедитесь, что конфигурация доступа к Pulsar была применена к конфигурации Milvus.</p>
+<p>Дождитесь, пока все поды будут готовы, затем убедитесь, что конфигурация доступа к Pulsar была отражена в конфигурации Milvus.</p>
 <p><strong>Шаг 3: Выполните переключение MQ.</strong></p>
 <div class="alert note">
 <p>Убедитесь, что целевой Pulsar не содержит тем Milvus из предыдущей конфигурации. Если это ваш первый переход на Pulsar, пропустите это примечание; в противном случае сначала удалите оставшиеся темы Milvus с такими же именами.</p>
@@ -130,7 +130,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <p><strong>Шаг 4: Убедитесь, что переход завершен.</strong></p>
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
-<p>При успешном переключении в журнале появляется запись « <code translate="no">[mqTypeValue=pulsar]</code> ».</p>
+<p>При успешном переключении в журнале регистрируется сообщение « <code translate="no">[mqTypeValue=pulsar]</code> ».</p>
 <p><strong>Шаг 5: (Необязательно) Удалите данные Woodpecker.</strong> Удалите данные Woodpecker на MinIO/S3 (в каталоге <code translate="no">&lt;rootPath&gt;/wp/...</code>, обычно <code translate="no">files/wp/...</code>) и метаданные Woodpecker в etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). Если вы планируете позже вернуться к Woodpecker, сначала удалите эти файлы.</p>
 <h2 id="With-Milvus-Operator" class="common-anchor-header">С помощью Milvus Operator<button data-href="#With-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -211,7 +211,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>Шаг 1: Убедитесь, что экземпляр Milvus работает.</strong></p>
-<p><strong>Шаг 2: Настройте подключение к целевому Pulsar и перезапустите Milvus.</strong> Разместите подключение к Pulsar в <code translate="no">spec.config</code> (оператор преобразует <code translate="no">spec.config</code> в <code translate="no">user.yaml</code>) и установите тип MQ; при применении CR поды будут перезапущены с новой конфигурацией.</p>
+<p><strong>Шаг 2: Настройте подключение к целевому Pulsar и перезапустите Milvus.</strong> Разместите настройки подключения к Pulsar в файле <code translate="no">spec.config</code> (оператор преобразует <code translate="no">spec.config</code> в <code translate="no">user.yaml</code>) и задайте тип MQ; приложение CR перезапустит поды с новой конфигурацией.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># change_configmap.yaml</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -232,7 +232,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <p>Дождитесь, пока все поды будут готовы, затем убедитесь, что конфигурация доступа к Pulsar была преобразована в конфигурацию Milvus.</p>
 <p><strong>Шаг 3: Выполните переключение MQ.</strong></p>
 <div class="alert note">
-<p>Убедитесь, что целевой Pulsar не содержит тем Milvus из предыдущей конфигурации. Если это ваш первый переход на Pulsar, пропустите это примечание; в противном случае сначала удалите остаточные темы Milvus с такими же именами.</p>
+<p>Убедитесь, что целевой Pulsar не содержит тем Milvus из предыдущей конфигурации. Если это ваш первый переход на Pulsar, пропустите это примечание; в противном случае сначала удалите оставшиеся темы Milvus с такими же именами.</p>
 </div>
 <pre><code translate="no" class="language-shell">kubectl exec -it &lt;mixcoord-pod&gt; -- \
   curl -X POST http://localhost:9091/management/wal/alter \
@@ -242,7 +242,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <p><strong>Шаг 4: Убедитесь, что переход завершён.</strong></p>
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
-<p>При успешном переключении в журнале регистрируется сообщение « <code translate="no">[mqTypeValue=pulsar]</code> ».</p>
+<p>В случае успешного перехода в журнале регистрируется сообщение « <code translate="no">[mqTypeValue=pulsar]</code> ».</p>
 <p><strong>Шаг 5: (Необязательно) Удалите данные Woodpecker.</strong> Удалите данные Woodpecker на MinIO/S3 (в папке <code translate="no">&lt;rootPath&gt;/wp/...</code>, обычно <code translate="no">files/wp/...</code>) и метаданные Woodpecker в etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). Если вы планируете позже вернуться к Woodpecker, сначала удалите эти файлы.</p>
 <h2 id="Supported-scenarios" class="common-anchor-header">Поддерживаемые сценарии<button data-href="#Supported-scenarios" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -261,7 +261,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Исходный MQ</th><th>Целевой MQ</th><th>Helm</th><th>Оператор Milvus</th></tr>
+<tr><th>Источник MQ</th><th>Целевой MQ</th><th>Helm</th><th>Оператор Milvus</th></tr>
 </thead>
 <tbody>
 <tr><td>Встроенный Pulsar</td><td>Woodpecker (MinIO)</td><td><strong>Поддерживается</strong></td><td><strong>Поддерживается</strong></td></tr>

@@ -2,8 +2,8 @@
 id: switch-mq-type.md
 title: Cambiare il tipo di coda dei messaggi (MQ)
 summary: >-
-  Commutare la coda dei messaggi di un'istanza Milvus esistente da Woodpecker a
-  un'altra coda dei messaggi senza tempi di inattività.
+  Passare dalla coda di messaggi di un'istanza Milvus esistente a Woodpecker o a
+  un'altra coda di messaggi senza tempi di inattività.
 ---
 <h1 id="Switch-MQ-Type" class="common-anchor-header">Cambiare il tipo di coda dei messaggi (MQ)<button data-href="#Switch-MQ-Type" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,7 +22,7 @@ summary: >-
       </svg>
     </button></h1><p>Questa guida descrive come passare dalla coda dei messaggi (MQ) di un'istanza Milvus esistente <strong>da Woodpecker a un'altra coda dei messaggi</strong>, online e senza tempi di inattività.</p>
 <div class="alert warning">
-<p>Questa funzionalità è in fase di rilascio ed è soggetta a modifiche. Contatta l'assistenza Milvus se desideri provarla o se hai domande.</p>
+<p>Questa funzionalità è in fase di rilascio ed è soggetta a modifiche. Si prega di contattare l’assistenza Milvus se si desidera provarla o se si hanno domande.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisiti<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -84,7 +84,7 @@ summary: >-
 <li>Verificare il tipo di MQ di origine e quello di destinazione.</li>
 <li>Inserire le impostazioni di accesso dell’MQ di destinazione nella configurazione di Milvus <strong>senza</strong> modificare il valore di <code translate="no">mqType</code>.</li>
 <li>Avviare il passaggio chiamando l’API WAL alter su MixCoord.</li>
-<li>Monitorare i log per verificare che il passaggio sia stato completato.</li>
+<li>Monitorare i log per confermare che il passaggio sia stato completato.</li>
 </ol>
 <div class="alert note">
 <p>Prima del passaggio, assicurarsi che l’MQ di destinazione non contenga argomenti con nomi identici a quelli utilizzati dall’istanza Milvus corrente. Ciò è particolarmente importante se l’MQ di destinazione è stato utilizzato da un’altra istanza Milvus, poiché nomi di argomenti in conflitto possono causare comportamenti imprevisti.</p>

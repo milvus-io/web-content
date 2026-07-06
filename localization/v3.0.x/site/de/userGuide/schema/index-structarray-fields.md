@@ -4,7 +4,7 @@ title: StructArray-Felder indizieren
 summary: >-
   Erstellen Sie Indizes für StructArray-Unterfelder, bevor Sie eine Vektorsuche
   durchführen oder die skalare Filterung beschleunigen. Bei einem
-  StructArray-Feld ist das Indexziel ein Unterfeldpfad, z. B.
+  StructArray-Feld ist das Indexziel ein Unterfeldpfad, beispielsweise
   chunks[emb_list_vector], chunks[emb] oder chunks[section].
 ---
 <h1 id="Index-StructArray-Fields" class="common-anchor-header">StructArray-Felder indizieren<button data-href="#Index-StructArray-Fields" class="anchor-icon" translate="no">
@@ -80,7 +80,7 @@ summary: >-
 <tr><td>Vektorsuche auf Elementebene</td><td><code translate="no">chunks[emb]</code></td><td>Eine reguläre Vektormetrikfamilie, wie z. B. „ <code translate="no">COSINE</code> “, „ <code translate="no">IP</code> “ oder „ <code translate="no">L2</code> “.</td></tr>
 <tr><td>Nach Zeichenfolge oder Kategorie filtern</td><td><code translate="no">chunks[section]</code></td><td>Ein von Ihrem Ziel unterstützter skalarer Index.</td></tr>
 <tr><td>Nach numerischem Bereich filtern</td><td><code translate="no">chunks[quality_score]</code>, <code translate="no">chunks[page]</code></td><td>Ein von Ihrem Ziel unterstützter skalarer Index.</td></tr>
-<tr><td>Nach boolescher Wert filtern</td><td><code translate="no">chunks[has_code]</code></td><td>Ein von Ihrem Zielobjekt unterstützter Skalarindex.</td></tr>
+<tr><td>Nach boolescher Wert filtern</td><td><code translate="no">chunks[has_code]</code></td><td>Ein von Ihrem Zielobjekt unterstützter skalarer Index.</td></tr>
 </tbody>
 </table>
 <p>Die „EmbeddingList“-Suche behandelt die Vektoren in einem StructArray-Vektor-Unterfeld als Einbettungsliste und gibt Ergebnisse auf Entitätsebene zurück. Die Suche auf Elementebene durchsucht jedes Struct-Element unabhängig und kann den Offset des übereinstimmenden Elements zurückgeben.</p>
@@ -251,7 +251,7 @@ client.create_index(
     </button></h3><p>Die Suche auf Elementebene verwendet reguläre Vektormetriken. Sie durchsucht jedes Struct-Element unabhängig und kann den Offset des übereinstimmenden Elements zurückgeben.</p>
 <table>
 <thead>
-<tr><th>Datentyp des Vektor-Unterfelds</th><th>Indextyp</th><th>Metriktyp</th></tr>
+<tr><th>Datentyp für Vektor-Unterfelder</th><th>Indextyp</th><th>Metriktyp</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">FLOAT_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code></td><td><code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_FLAT_CC</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">IVF_SQ_CC</code>, <code translate="no">IVF_PQ</code>, <code translate="no">SCANN</code>, <code translate="no">IVF_RABITQ</code>, <code translate="no">IVF_RABITQ_FASTSCAN</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code>, <code translate="no">DISKANN</code></td><td><code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">COSINE</code></td></tr>
@@ -277,7 +277,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Beschreiben Sie nach dem Erstellen der Indizes die Sammlung oder die Listenindizes, um sicherzustellen, dass die erwarteten Unterfeldpfade indiziert sind.</p>
+    </button></h2><p>Beschreiben Sie nach dem Erstellen der Indizes die Sammlung oder listen Sie die Indizes auf, um sicherzustellen, dass die erwarteten Unterfeldpfade indiziert sind.</p>
 <pre><code translate="no" class="language-python">indexes = client.list_indexes(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
 )
@@ -314,9 +314,9 @@ client.create_index(
 <tbody>
 <tr><td>Verwenden Sie die Pfadsyntax für Unterfeldindizes.</td><td>Indexieren Sie „ <code translate="no">chunks[emb]</code> “, nicht „ <code translate="no">emb</code> “ oder „ <code translate="no">chunks.emb</code> “.</td></tr>
 <tr><td>Ein Vektor-Unterfeld akzeptiert einen Index.</td><td>Verwenden Sie separate Vektor-Teilfelder, wenn Sie unterschiedliche Metrikfamilien benötigen.</td></tr>
-<tr><td>Verwenden Sie „ <code translate="no">MAX_SIM*</code> “-Metriken für die EmbeddingList-Suche.</td><td>Für Abfragen in der „EmbeddingList“ sind Daten aus einem Index erforderlich, der mit einer „ <code translate="no">MAX_SIM*</code> “-Metrik erstellt wurde.</td></tr>
+<tr><td>Verwenden Sie „ <code translate="no">MAX_SIM*</code> “-Metriken für die EmbeddingList-Suche.</td><td>Für Abfragen in der „EmbeddingList“ ist ein Index erforderlich, der mit einer „ <code translate="no">MAX_SIM*</code> “-Metrik erstellt wurde.</td></tr>
 <tr><td>Verwenden Sie reguläre Vektormetriken für die Suche auf Elementebene.</td><td>Die Suche auf Elementebene verwendet reguläre Vektorabfragedaten und Metriken wie „ <code translate="no">COSINE</code> “, „ <code translate="no">IP</code> “ oder „ <code translate="no">L2</code> “.</td></tr>
-<tr><td>Indizieren Sie skalare Unterfelder, die in Filtern vorkommen.</td><td>Verwenden Sie skalare Indextypen, die von Ihrem Ziel unterstützt werden.</td></tr>
+<tr><td>Indizieren Sie skalare Unterfelder, die in Filtern vorkommen.</td><td>Verwenden Sie skalare Indizierungstypen, die von Ihrem Zielsystem unterstützt werden.</td></tr>
 <tr><td>Beachten Sie die Beschränkungen für Vektorfelder.</td><td>Die Gesamtzahl der Vektorfelder und Vektor-Teilfelder ist begrenzt. Lesen Sie den Abschnitt „StructArray-Grenzwerte“, bevor Sie viele Vektor-Teilfelder hinzufügen.</td></tr>
 </tbody>
 </table>
@@ -361,5 +361,5 @@ client.create_index(
     </button></h2><ol>
 <li><p>Um eine „EmbeddingList“-Suche auf Entitätsebene oder eine Vektorsuche auf Elementebene durchzuführen, lesen Sie „Grundlegende Vektorsuche mit StructArray“.</p></li>
 <li><p>Informationen zum Filtern von skalaren StructArray-Unterfeldern während der Suche finden Sie unter „Gefilterte Suche mit StructArray“.</p></li>
-<li><p>Informationen zu Index- und Metrikgrenzen finden Sie unter <a href="/docs/de/structarray-limits.md">„StructArray-Grenzwerte</a>“.</p></li>
+<li><p>Informationen zu Index- und Metrikbeschränkungen finden Sie unter <a href="/docs/de/structarray-limits.md">„StructArray-Beschränkungen</a>“.</p></li>
 </ol>

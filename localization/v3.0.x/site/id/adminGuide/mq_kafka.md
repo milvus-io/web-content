@@ -2,7 +2,7 @@
 id: mq_kafka.md
 title: Kafka
 ---
-<h1 id="Use-Kafka-as-the-Milvus-Message-Queue" class="common-anchor-header">Gunakan Kafka sebagai antrian pesan Milvus<button data-href="#Use-Kafka-as-the-Milvus-Message-Queue" class="anchor-icon" translate="no">
+<h1 id="Use-Kafka-as-the-Milvus-Message-Queue" class="common-anchor-header">Gunakan Kafka sebagai Antrian Pesan Milvus<button data-href="#Use-Kafka-as-the-Milvus-Message-Queue" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

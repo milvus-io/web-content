@@ -22,7 +22,7 @@ summary: >-
       </svg>
     </button></h1><p>Este guia descreve como mudar a fila de mensagens (MQ) de uma implementação existente do Milvus <strong>entre o Woodpecker e outra fila de mensagens</strong>, em linha e sem tempo de inatividade.</p>
 <div class="alert warning">
-<p>Esta funcionalidade está pendente de lançamento e está sujeita a alterações. Contacte o suporte do Milvus se quiser experimentá-la ou se tiver alguma dúvida.</p>
+<p>Esta funcionalidade está pendente de lançamento e está sujeita a alterações. Contacte o apoio técnico do Milvus se quiser experimentá-la ou se tiver alguma dúvida.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -22,7 +22,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Поиск по китайскому тексту часто требует от пользователей ввода китайских иероглифов в точном соответствии с их написанием в индексированном тексте. При поиске по имени, автозаполнении и поиске по мере ввода пользователи часто вводят пиньинь вместо китайских иероглифов. Например, пользователь может ввести « <code translate="no">zuqiu</code> », чтобы найти « <code translate="no">足球</code> ». Фильтр « <code translate="no">pinyin</code> » добавляет токены пиньинь к результатам анализатора, благодаря чему китайский текст может сопоставляться с вводом на пиньинь без необходимости ведения отдельного поля для пиньинь.</p>
+    </button></h1><p>Поиск по китайскому тексту часто требует от пользователей ввода китайских иероглифов в точном соответствии с их написанием в индексированном тексте. При поиске по имени, автозаполнении и поиске по мере ввода пользователи часто вводят пиньинь вместо китайских иероглифов. Например, пользователь может ввести « <code translate="no">zuqiu</code> », чтобы найти « <code translate="no">足球</code> ». Фильтр « <code translate="no">pinyin</code> » добавляет токены пиньинь к результатам анализатора, благодаря чему китайский текст может сопоставляться с вводом пиньинь без необходимости ведения отдельного поля для пиньинь.</p>
 <p>Фильтр <code translate="no">pinyin</code> обычно используется с токенизатором <a href="/docs/ru/jieba-tokenizer.md">Jieba</a> для китайского текста. Он работает в конвейере фильтров пользовательского анализатора и может выдавать несколько форм токенов пиньинь для одного и того же китайского токена.</p>
 <h2 id="Configuration" class="common-anchor-header">Настройка<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -69,7 +69,7 @@ beta: Milvus 3.0.x
 <tr><td><code translate="no">keep_original</code></td><td>Логическое значение</td><td><code translate="no">true</code></td><td>Сохраняет исходный китайский токен в выводе анализатора.</td></tr>
 <tr><td><code translate="no">keep_full_pinyin</code></td><td>Логическое</td><td><code translate="no">true</code></td><td>Выдает токены пиньинь на уровне символов. Например, « <code translate="no">中文</code> » генерирует « <code translate="no">zhong</code> » и « <code translate="no">wen</code> ».</td></tr>
 <tr><td><code translate="no">keep_joined_full_pinyin</code></td><td>Логическое</td><td><code translate="no">false</code></td><td>Выдает объединенный токен пиньинь для каждого исходного токена. Например, <code translate="no">中文</code> генерирует <code translate="no">zhongwen</code>.</td></tr>
-<tr><td><code translate="no">keep_separate_first_letter</code></td><td>Булево</td><td><code translate="no">false</code></td><td>Выдает лексему с инициалами пиньинь для каждой исходной лексемы. Например, <code translate="no">中文</code> выдает <code translate="no">zw</code>.</td></tr>
+<tr><td><code translate="no">keep_separate_first_letter</code></td><td>Булево</td><td><code translate="no">false</code></td><td>Выдает токен с инициалами по системе пиньинь для каждого исходного токена. Например, <code translate="no">中文</code> генерирует <code translate="no">zw</code>.</td></tr>
 </tbody>
 </table>
 <p>Фильтр работает с токенами, сгенерированными токенизатором. Для китайского текста используйте его с токенизатором, таким как <code translate="no">jieba</code>.</p>
@@ -137,7 +137,7 @@ result = client.run_analyzer(sample_text, analyzer_params)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Включите <code translate="no">keep_joined_full_pinyin</code>, если вам нужно, чтобы китайский термин сопоставлялся с его полной соединенной формой пиньинь.</p>
+    </button></h3><p>Включите фильтр <code translate="no">keep_joined_full_pinyin</code>, если вам нужно, чтобы китайский термин сопоставлялся с его полной соединенной формой пиньинь.</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [

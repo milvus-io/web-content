@@ -18,10 +18,10 @@ summary: 将 Milvus Standalone 部署（Docker Compose）的消息队列在 Rock
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本页面介绍如何将<strong>Milvus Standalone（Docker Compose）</strong>的消息队列（MQ）在<strong>RocksMQ</strong>和<strong>Woodpecker</strong>（本地或 MinIO 后端）之间双向切换。有关一般工作流和先决条件，请参阅《<a href="/docs/zh/switch-mq-type.md">切换 MQ 类型</a>》。</p>
+    </button></h1><p>本页面介绍如何将<strong>Milvus Standalone</strong>部署<strong>（Docker Compose）</strong>的消息队列（MQ）在<strong>RocksMQ</strong>和<strong>Woodpecker</strong>（本地或 MinIO 后端）之间双向切换。有关一般工作流和先决条件，请参阅《<a href="/docs/zh/switch-mq-type.md">切换 MQ 类型</a>》。</p>
 <div class="alert note">
 <ul>
-<li><strong>先决条件：</strong>MQ 切换功能仅在<strong>Milvus 3.0 及更高版本中</strong>提供。开始操作前，请将您的 Milvus 实例升级至 Milvus 3.0 或更高版本——此功能在早期版本中不可用。</li>
+<li><strong>先决条件：</strong>MQ 切换功能仅在<strong>Milvus 3.0 及更高版本中</strong>提供。开始操作前，请将您的 Milvus 实例升级至 Milvus 3.0 或更高版本——此功能在更早版本中不可用。</li>
 <li>MQ 切换需要 Docker<strong>Compose</strong>部署（该部署启用了 etcd 配置源）。单容器 Docker 部署不支持切换。</li>
 </ul>
 </div>
@@ -71,7 +71,7 @@ summary: 将 Milvus Standalone 部署（Docker Compose）的消息队列在 Rock
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><strong>在不</strong>更改<code translate="no">mqType</code> 值<strong>的情况下，</strong>将 Woodpecker 设置添加到 Milvus 配置中。运行<code translate="no">docker exec -it milvus-standalone bash</code> 进入容器，然后编辑<code translate="no">/milvus/configs/user.yaml</code> ：</p>
+    </button></h3><p><strong>在不</strong>更改<code translate="no">mqType</code> 值<strong>的情况下，</strong>将 Woodpecker 设置添加到 Milvus 配置中。运行 `<code translate="no">docker exec -it milvus-standalone bash</code> ` 进入容器，然后编辑 `<code translate="no">/milvus/configs/user.yaml</code>`：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">woodpecker:</span>
   <span class="hljs-attr">storage:</span>
     <span class="hljs-attr">type:</span> <span class="hljs-string">minio</span>   <span class="hljs-comment"># minio or local</span>

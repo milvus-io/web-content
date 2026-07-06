@@ -41,7 +41,7 @@ summary: 가동 중단 없이 기존 Milvus 배포 환경의 메시지 큐를 Wo
 <li><strong>MQ 전환 기능은 Milvus 3.0 이상 버전에서 사용할 수 있습니다.</strong> 이 기능을 사용하기 전에 Milvus 인스턴스를 Milvus 3.0 이상으로 업그레이드하십시오. 이전 버전에서는 이 기능을 사용할 수 없습니다.</li>
 <li>인스턴스가 정상적으로 실행 중이어야 합니다.</li>
 </ul>
-<h2 id="Scope" class="common-anchor-header">범위<button data-href="#Scope" class="anchor-icon" translate="no">
+<h2 id="Scope" class="common-anchor-header">적용 범위<button data-href="#Scope" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,7 +56,7 @@ summary: 가동 중단 없이 기존 Milvus 배포 환경의 메시지 큐를 Wo
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이 가이드에서는 <strong>Woodpecker와 다른 메시지 큐 간의</strong> 전환에 대해서만 다룹니다. Pulsar와 Kafka 간의 직접 전환은 이 가이드의 범위에 포함되지 않습니다.</p>
+    </button></h2><p>이 가이드에서는 <strong>Woodpecker와 다른 메시지 큐 간의</strong> 전환에 대해서만 다룹니다. Pulsar와 Kafka 간의 직접적인 전환은 이 가이드의 범위에 포함되지 않습니다.</p>
 <ul>
 <li><a href="/docs/ko/switch-rocksmq-woodpecker.md">RocksMQ와 Woodpecker 간 전환</a> — Milvus Standalone (Docker Compose)</li>
 <li><a href="/docs/ko/switch-pulsar-woodpecker.md">Pulsar와 Woodpecker 간 전환</a> — Milvus 클러스터 (Helm / Milvus Operator)</li>

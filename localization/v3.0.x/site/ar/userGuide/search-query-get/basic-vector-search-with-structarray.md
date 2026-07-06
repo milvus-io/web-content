@@ -23,7 +23,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>استخدم هذه الصفحة لإجراء بحث متجهي على الحقول الفرعية المتجهة داخل حقل StructArray. يدعم StructArray وضعين أساسيين للبحث المتجهي: البحث في قائمة التضمين (EmbeddingList)، الذي يقوم بتقييم قائمة التضمين المخزنة في كل كيان، والبحث على مستوى العناصر، الذي يبحث في كل عنصر من عناصر Struct بشكل مستقل.</p>
-<p>تستخدم هذه الصفحة مجموعة « <code translate="no">tech_articles</code> » من <a href="/docs/ar/create-structarray-field.md">«إنشاء حقل StructArray</a>». تحتوي المجموعة على حقل StructArray باسم « <code translate="no">chunks</code> ». يحتوي كل جزء على نص وبيانات وصفية قياسية وحقل فرعي متجه باسم « <code translate="no">emb_list_vector</code> » مع فهرس للبحث في قائمة التضمين، وحقل فرعي متجه باسم « <code translate="no">emb</code> » مع فهرس للبحث على مستوى العناصر.</p>
+<p>تستخدم هذه الصفحة مجموعة « <code translate="no">tech_articles</code> » من <a href="/docs/ar/create-structarray-field.md">«إنشاء حقل StructArray</a>». تحتوي المجموعة على حقل StructArray باسم « <code translate="no">chunks</code> ». يحتوي كل جزء على نص وبيانات وصفية قياسية وحقل فرعي متجه باسم « <code translate="no">emb_list_vector</code> » مع فهرس للبحث في قائمة التضمين، وحقل فرعي متجه باسم « <code translate="no">emb</code> » مع فهرس للبحث على مستوى العنصر.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">قبل البدء<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -47,7 +47,7 @@ summary: >-
 <tbody>
 <tr><td>قم بإنشاء حقل StructArray، مثل <code translate="no">chunks</code>.</td><td><a href="/docs/ar/create-structarray-field.md">إنشاء حقل StructArray</a></td></tr>
 <tr><td>أدخل الكيانات التي يحتوي حقل <code translate="no">chunks</code> الخاص بها على كائنات Struct.</td><td><a href="/docs/ar/insert-data-into-structarray-fields.md">إدراج البيانات في حقول StructArray</a></td></tr>
-<tr><td>قم بإنشاء فهرس <code translate="no">MAX_SIM*</code> على <code translate="no">chunks[emb_list_vector]</code> من أجل البحث في EmbeddingList.</td><td><a href="/docs/ar/index-structarray-fields.md">فهرسة حقول StructArray</a></td></tr>
+<tr><td>قم بإنشاء فهرس " <code translate="no">MAX_SIM*</code> " على " <code translate="no">chunks[emb_list_vector]</code> " من أجل البحث في "EmbeddingList".</td><td><a href="/docs/ar/index-structarray-fields.md">فهرسة حقول StructArray</a></td></tr>
 <tr><td>إنشاء فهرس متجهي قياسي على <code translate="no">chunks[emb]</code> للبحث على مستوى العناصر.</td><td><a href="/docs/ar/index-structarray-fields.md">فهرسة حقول StructArray</a></td></tr>
 </tbody>
 </table>
@@ -77,11 +77,11 @@ summary: >-
 <tbody>
 <tr><td>الحقل الفرعي المستهدف</td><td><code translate="no">chunks[emb_list_vector]</code></td><td><code translate="no">chunks[emb]</code></td></tr>
 <tr><td>بيانات الاستعلام</td><td>قائمة تضمين تحتوي على متجه واحد أو أكثر.</td><td>متجه عادي.</td></tr>
-<tr><td>عائلة المقاييس</td><td><code translate="no">MAX_SIM*</code>، مثل <code translate="no">MAX_SIM_COSINE</code>.</td><td>مقاييس متجهات عادية، مثل <code translate="no">COSINE</code> أو <code translate="no">IP</code> أو <code translate="no">L2</code>.</td></tr>
-<tr><td>ما يمثله كل نتيجة</td><td>كيان مطابق يكون حقل فرعي متجه StructArray الخاص به مشابهًا لقائمة تضمين الاستعلام.</td><td>عنصر Struct مطابق داخل حقل StructArray.</td></tr>
+<tr><td>عائلة المقاييس</td><td><code translate="no">MAX_SIM*</code>، مثل <code translate="no">MAX_SIM_COSINE</code>.</td><td>مقاييس المتجهات العادية، مثل <code translate="no">COSINE</code> أو <code translate="no">IP</code> أو <code translate="no">L2</code>.</td></tr>
+<tr><td>ما يمثله كل نتيجة</td><td>كيان مطابق يكون حقله الفرعي StructArray متشابهًا مع قائمة التضمين الخاصة بالاستعلام.</td><td>عنصر Struct مطابق داخل حقل StructArray.</td></tr>
 <tr><td>تفصيل النتائج</td><td>مستوى الكيان.</td><td>مستوى عنصر Struct.</td></tr>
 <tr><td>الإزاحة</td><td>غير قابل للتطبيق.</td><td>يحدد الموضع الذي يبدأ من الصفر لعنصر Struct المطابق عند إرجاعه.</td></tr>
-<tr><td>الاستخدام النموذجي</td><td>ColBERT وColPali وأنماط الاسترجاع الأخرى ذات التفاعل المتأخر.</td><td>الاسترجاع على مستوى المقطع، أو مستوى الفقرة، أو مستوى المقتطف، أو مستوى الرقعة، أو مستوى الحقيقة.</td></tr>
+<tr><td>الاستخدام النموذجي</td><td>ColBERT و ColPali وأنماط الاسترجاع الأخرى ذات التفاعل المتأخر.</td><td>الاسترجاع على مستوى المقطع، أو مستوى الفقرة، أو مستوى المقتطف، أو مستوى الجزء، أو مستوى الحقيقة.</td></tr>
 </tbody>
 </table>
 <h2 id="Run-EmbeddingList-search" class="common-anchor-header">تشغيل بحث EmbeddingList<button data-href="#Run-EmbeddingList-search" class="anchor-icon" translate="no">
@@ -130,9 +130,9 @@ results = client.search(
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
         <span class="hljs-built_in">print</span>(hit[<span class="hljs-string">&quot;id&quot;</span>], hit[<span class="hljs-string">&quot;distance&quot;</span>], hit[<span class="hljs-string">&quot;entity&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>في وضع البحث هذا، يتحكم مقياس « <code translate="no">limit</code> » في عدد الكيانات التي يتم إرجاعها لكل استعلام. يمكن أن تتضمن النتيجة حقول فرعية لـ StructArray، لكن النتيجة نفسها تمثل الكيان الأصلي المتطابق بدلاً من عنصر Struct واحد محدد.</p>
+<p>في وضع البحث هذا، يتحكم مقياس " <code translate="no">limit</code> " في عدد الكيانات التي يتم إرجاعها لكل استعلام. يمكن أن تتضمن النتيجة حقول فرعية لـ StructArray، لكن النتيجة نفسها تمثل الكيان الأصلي المطابق بدلاً من عنصر Struct واحد محدد.</p>
 <div class="alert note">
-<p>للحصول على شرح تفصيلي كامل على غرار ColBERT أو ColPali، راجع <a href="/docs/ar/search-with-embedding-lists.md">«البحث باستخدام قوائم التضمين</a>». تغطي هذه الصفحة فقط سلوك البحث الأساسي في StructArray.</p>
+<p>للحصول على شرح تفصيلي كامل بنمط ColBERT أو ColPali، راجع <a href="/docs/ar/search-with-embedding-lists.md">«البحث باستخدام قوائم التضمين</a>». تغطي هذه الصفحة سلوك البحث الأساسي في StructArray فقط.</p>
 </div>
 <h2 id="Run-element-level-search" class="common-anchor-header">تشغيل البحث على مستوى العناصر<button data-href="#Run-element-level-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -176,7 +176,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>في البحث على مستوى العناصر، تمثل كل نتيجة عنصر Struct مطابق. قيمة « <code translate="no">offset</code> » هي الموضع الذي يبدأ من الصفر لهذا العنصر في حقل StructArray. يمكن أن تظهر الكيان نفسه أكثر من مرة إذا تطابق أكثر من عنصر Struct واحد مع الاستعلام. تنطبق قيمة « <code translate="no">limit</code> » على نتائج العناصر، وليس على الكيانات الأصلية الفريدة.</p>
+<p>في البحث على مستوى العناصر، تمثل كل نتيجة عنصر Struct مطابقًا. قيمة « <code translate="no">offset</code> » هي الموضع الذي يبدأ من الصفر لهذا العنصر في حقل StructArray. يمكن أن تظهر الكيان نفسه أكثر من مرة إذا تطابق أكثر من عنصر Struct واحد مع الاستعلام. تنطبق قيمة « <code translate="no">limit</code> » على نتائج العناصر، وليس على الكيانات الأصلية الفريدة.</p>
 <h2 id="Interpret-results" class="common-anchor-header">تفسير النتائج<button data-href="#Interpret-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -222,7 +222,7 @@ results = client.search(
     </button></h2><ul>
 <li><p>استخدام <code translate="no">chunks.emb</code> بدلاً من صيغة مسار الحقل الفرعي المطلوبة <code translate="no">chunks[emb]</code>.</p></li>
 <li><p>استخدام استعلام EmbeddingList على حقل فرعي متجه تم فهرسته باستخدام مقياس متجه عادي.</p></li>
-<li><p>استخدام استعلام متجه عادي على حقل فرعي متجه مفهرس باستخدام مقياس <code translate="no">MAX_SIM*</code>.</p></li>
+<li><p>استخدام استعلام متجه عادي على حقل فرعي متجه تم فهرسته باستخدام مقياس <code translate="no">MAX_SIM*</code>.</p></li>
 <li><p>توقع أن يعرض البحث على مستوى العنصر <code translate="no">limit</code> هذا العدد من الكيانات الأصلية الفريدة. فهو يعرض نتائج العناصر المطابقة.</p></li>
 <li><p>توقع أن يعيد بحث EmbeddingList إزاحة عنصر واحد محدد. لكنه يعيد نتائج مطابقة على مستوى الكيان.</p></li>
 <li><p>إعادة استخدام حقل فرعي متجه واحد لكلا وضعي البحث. استخدم حقول فرعية متجهة منفصلة لأن كل حقل فرعي متجه لا يقبل سوى فهرس واحد.</p></li>
@@ -244,8 +244,8 @@ results = client.search(
       </svg>
     </button></h2><ol>
 <li><p>لتقييد البحث على مستوى العناصر بشروط قياسية، اقرأ <a href="/docs/ar/filtered-search-with-structarray.md">البحث المُصفى باستخدام StructArray</a>.</p></li>
-<li><p>للبحث حسب حدود النتيجة أو المسافة، اقرأ " <a href="/docs/ar/range-search-with-structarray.md">البحث في النطاق باستخدام StructArray</a>".</p></li>
+<li><p>للبحث حسب حدود النتيجة أو المسافة، اقرأ " <a href="/docs/ar/range-search-with-structarray.md">البحث النطاقي باستخدام StructArray</a>".</p></li>
 <li><p>لإرجاع نتيجة واحدة على الأكثر لكل كيان أب بعد البحث على مستوى العنصر، اقرأ " <a href="/docs/ar/grouping-search-with-structarray.md">البحث المجمّع باستخدام StructArray</a>".</p></li>
 <li><p>لدمج البحث باستخدام StructArray مع عمليات بحث متجهة أخرى، اقرأ " <a href="/docs/ar/hybrid-search-with-structarray.md">البحث الهجين باستخدام StructArray</a>".</p></li>
-<li><p>لمراجعة أنواع البيانات المدعومة والمقاييس والمرشحات والحدود الخاصة بكل إصدار، اقرأ <a href="/docs/ar/structarray-limits.md">«حدود StructArray</a>».</p></li>
+<li><p>لمراجعة أنواع البيانات المدعومة والمقاييس والمرشحات والحدود الخاصة بالإصدارات، اقرأ <a href="/docs/ar/structarray-limits.md">«حدود StructArray</a>».</p></li>
 </ol>

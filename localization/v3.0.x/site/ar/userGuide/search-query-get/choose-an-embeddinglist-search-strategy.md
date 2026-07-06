@@ -49,7 +49,7 @@ summary: >-
 <tbody>
 </tbody>
 </table>
-<p>وبهذا المعنى، فإن «البحث التقديري» ( <code translate="no">emb_list_strategy</code> ) هو في الأساس استراتيجية لبناء الفهرس واسترجاع المرشحين. يتم تكوينه عند بناء الفهرس، وهو يحدد كيفية إنتاج مجموعة المرشحين من الشبكة العصبية الاصطناعية (ANN) في المرحلة الأولى. ثم تتحكم المعلمات الخاصة بوقت البحث، مثل «الحد الأقصى لعدد المرشحين» ( <code translate="no">retrieval_ann_ratio</code> ) و«الحد الأقصى لعدد الصفوف» ( <code translate="no">emb_list_rerank</code> )، في عدد المرشحين الذين يتم استرجاعهم وما إذا كان سيتم تطبيق إعادة الترتيب باستخدام MaxSim أم لا.</p>
+<p>وبهذا المعنى، فإن «البحث التقديري» ( <code translate="no">emb_list_strategy</code> ) هو في الأساس استراتيجية لبناء الفهرس واسترجاع المرشحين. يتم تكوينه عند بناء الفهرس، وهو يحدد كيفية إنتاج مجموعة المرشحين من الشبكة العصبية الاصطناعية (ANN) في المرحلة الأولى. ثم تتحكم المعلمات الخاصة بوقت البحث، مثل « <code translate="no">retrieval_ann_ratio</code> » و« <code translate="no">emb_list_rerank</code> »، في عدد المرشحين الذين يتم استرجاعهم وما إذا كان سيتم تطبيق إعادة الترتيب باستخدام MaxSim أم لا.</p>
 <hr>
 <h2 id="Available-Strategies" class="common-anchor-header">الاستراتيجيات المتاحة<button data-href="#Available-Strategies" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,10 +68,10 @@ summary: >-
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>الاستراتيجية</th><th>وحدة استرجاع المرشحين</th><th>ما تحله</th><th>أفضل ملاءمة</th><th>المفاضلة الرئيسية</th></tr>
+<tr><th>الاستراتيجية</th><th>وحدة استرجاع المرشحين</th><th>ما تحله</th><th>أفضل مطابقة</th><th>المفاضلة الرئيسية</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">tokenann</code></td><td>المتجهات الفردية داخل كل صف</td><td>يحتفظ بالمتجهات الأصلية ويتجنب فقدان البيانات الناتج عن الضغط.</td><td>البحث الذي يضع الجودة في المقام الأول، وقوائم التضمين القصيرة أو المتوسطة، والتضمينات عالية التمييز.</td><td>فهرس أكبر وتكلفة أعلى لاسترجاع المرشحين.</td></tr>
+<tr><td><code translate="no">tokenann</code></td><td>المتجهات الفردية داخل كل صف</td><td>يحتفظ بالمتجهات الأصلية ويتجنب فقدان البيانات الناتج عن الضغط.</td><td>البحث الذي يركز على الجودة أولاً، وقوائم التضمين القصيرة أو المتوسطة، والتضمينات عالية التمييز.</td><td>فهرس أكبر وتكلفة أعلى لاسترجاع المرشحين.</td></tr>
 <tr><td><code translate="no">muvera</code></td><td>متجه واحد مشفر لكل صف</td><td>يضغط قائمة التضمين إلى تمثيل FDE ذي أبعاد ثابتة دون الحاجة إلى التدريب.</td><td>المستندات الأطول، والتضمينات عالية التمييز، والحالات التي يكون فيها TokenANN ثقيلًا جدًّا.</td><td>يؤدي الإسقاط العشوائي إلى خسارة في الدقة؛ ويؤثر بُعد FDE على زمن الاستجابة.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td>متجه واحد مُتعلم لكل صف</td><td>يتعلم ضغطًا خاصًا بالمجموعة النصية من قوائم التضمين إلى متجهات صفية ذات أبعاد ثابتة.</td><td>التضمينات منخفضة التمييز، واسترجاع المستندات متعددة الوسائط أو المرئية، وقوائم التضمين الكبيرة.</td><td>يتطلب تدريبًا وقد يكون حساسًا لتوزيع المجموعة وللتحيز في طول المستندات.</td></tr>
 </tbody>
@@ -91,13 +91,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">tokenann</code> يقوم بفهرسة كل متجه في قائمة التضمين. أثناء البحث، يقوم كل متجه استعلام بإجراء استرجاع ANN، ويتم تجميع المتجهات المطابقة مرة أخرى إلى صفوفها، ويتم إعادة ترتيب الصفوف المرشحة الناتجة باستخدام MaxSim.</p>
+    </button></h2><p><code translate="no">tokenann</code> يقوم بفهرسة كل متجه في قائمة التضمين. أثناء البحث، يقوم كل متجه استعلام بإجراء استرجاع ANN، ويتم تجميع المتجهات المتطابقة مرة أخرى إلى صفوفها، ويتم إعادة ترتيب الصفوف المرشحة الناتجة باستخدام MaxSim.</p>
 <div class="alert note">
 <p><strong>استخدم TokenANN عندما تكون الجودة هي الأولوية الأولى.</strong> إنه أقرب تقريب لحساب MaxSim الأصلي لأنه يحافظ على توفر جميع المتجهات في فهرس المرحلة الأولى.</p>
 </div>
 <ul>
 <li><p><strong>مناسب تمامًا:</strong> أجزاء نصية قصيرة، صفوف تحتوي على عدد صغير أو متوسط من المتجهات، فصل دلالي قوي على مستوى الرموز، خطوط أساس حساسة للجودة.</p></li>
-<li><p><strong>أقل ملاءمة:</strong> المستندات الطويلة جدًّا، والصفحات المرئية التي تحتوي على آلاف متجهات البقع، وميزانيات الذاكرة أو زمن الاستجابة الصارمة.</p></li>
+<li><p><strong>أقل ملاءمة:</strong> المستندات الطويلة جدًّا، والصفحات المرئية التي تحتوي على آلاف متجهات الباتش، وميزانيات الذاكرة أو زمن الاستجابة الصارمة.</p></li>
 <li><p><strong>السلوك على مستوى العناصر:</strong> يمكن لـ TokenANN استرداد المرشحات من المتجهات الفردية قبل تجميعها مرة أخرى في صفوف. تظل نتيجة البحث النهائية في EmbeddingList على مستوى الصفوف بعد تقييم MaxSim.</p></li>
 </ul>
 <h2 id="MUVERA" class="common-anchor-header">MUVERA<button data-href="#MUVERA" class="anchor-icon" translate="no">
@@ -117,10 +117,10 @@ summary: >-
       </svg>
     </button></h2><p><code translate="no">muvera</code> يقوم بترميز كل قائمة تضمين إلى متجه ذي أبعاد ثابتة باستخدام إسقاطات عشوائية. وهذا يحول عملية الاسترجاع في المرحلة الأولى إلى بحث قياسي للمتجهات على مستوى الصفوف. ثم يتم إعادة ترتيب المرشحات باستخدام MaxSim.</p>
 <div class="alert note">
-<p><strong>استخدم MUVERA عندما يكون TokenANN ثقيلًا جدًّا ولكنك لا ترغب في إجراء خطوة تدريب.</strong> إنه حل وسط عملي بين الجودة والتكلفة.</p>
+<p><strong>استخدم MUVERA عندما يكون TokenANN ثقيلًا جدًّا ولكنك لا ترغب في خطوة تدريب.</strong> إنه حل وسط عملي بين الجودة والتكلفة.</p>
 </div>
 <ul>
-<li><p><strong>مناسب تمامًا:</strong> المستندات النصية الطويلة، ومساحات التضمين عالية التمييز، وأحمال العمل التي تتطلب حجم فهرس أقل من TokenANN.</p></li>
+<li><p><strong>مناسبة تمامًا:</strong> المستندات النصية الطويلة، ومساحات التضمين عالية التمييز، وأحمال العمل التي تتطلب حجم فهرس أصغر من TokenANN.</p></li>
 <li><p><strong>الحالات الأقل ملاءمة:</strong> مساحات التضمين ذات التمييز المنخفض أو الحالات التي يصبح فيها تمثيل FDE عالي الأبعاد بشكل لا يتناسب مع ميزانية زمن الاستجابة.</p></li>
 <li><p><strong>المعلمات المهمة:</strong><code translate="no">muvera_num_projections</code> و <code translate="no">muvera_num_repeats</code> و <code translate="no">muvera_seed</code>.</p></li>
 </ul>
@@ -141,7 +141,7 @@ summary: >-
       </svg>
     </button></h2><p><code translate="no">lemur</code> يقوم بتدريب نموذج لضغط كل قائمة تضمين إلى تمثيل ذي أبعاد ثابتة. يتم تشغيل البحث ANN في المرحلة الأولى على المتجهات المُتعلمة على مستوى الصفوف، ويتم إعادة ترتيب المرشحين باستخدام MaxSim.</p>
 <div class="alert note">
-<p><strong>استخدم LEMUR عندما يكون الضغط المُتعلَّم يستحق تكلفة التدريب.</strong> يمكن أن يعمل بشكل جيد مع مساحات التضمين منخفضة التمييز والاسترجاع متعدد الوسائط، ولكن يجب التحقق من صحته مقابل المجموعة المستهدفة لأنه قد يكون حساسًا لتوزيع طول المستندات.</p>
+<p><strong>استخدم LEMUR عندما يكون الضغط المُتعلم يستحق تكلفة التدريب.</strong> يمكن أن يعمل بشكل جيد مع مساحات التضمين منخفضة التمييز والاسترجاع متعدد الوسائط، ولكن يجب التحقق من صحته مقابل المجموعة النصية المستهدفة لأنه قد يكون حساسًا لتوزيع طول المستندات.</p>
 </div>
 <ul>
 <li><p><strong>مناسب تمامًا:</strong> البحث عن المستندات المرئية، وتضمينات الرقع متعددة الوسائط، ومساحات التضمين منخفضة التمييز، وقوائم التضمين الكبيرة التي لا يكون فيها استخدام TokenANN عمليًا.</p></li>
@@ -164,7 +164,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>استراتيجية EmbeddingList الافتراضية في Knowhere هي <code translate="no">tokenann</code>. إذا لم تحدد <code translate="no">emb_list_strategy</code> ، فسيستخدم Knowhere TokenANN. تتضمن الإعدادات الافتراضية لوقت البحث <code translate="no">retrieval_ann_ratio=3.0</code> و <code translate="no">emb_list_rerank=true</code>.</p>
+    </button></h2><p>استراتيجية EmbeddingList الافتراضية في Knowhere هي <code translate="no">tokenann</code>. إذا لم تحدد <code translate="no">emb_list_strategy</code> ، فسيستخدم Knowhere TokenANN. تشمل الإعدادات الافتراضية لوقت البحث <code translate="no">retrieval_ann_ratio=3.0</code> و <code translate="no">emb_list_rerank=true</code>.</p>
 <h2 id="Configuration-Items-by-Strategy" class="common-anchor-header">عناصر التكوين حسب الاستراتيجية<button data-href="#Configuration-Items-by-Strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -180,25 +180,25 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يسرد الجدول التالي عناصر التكوين الخاصة بكل استراتيجية. في Milvus، عادةً ما يتم تمرير عناصر وقت الإنشاء في خريطة <code translate="no">params</code> عند إنشاء فهرس. إذا كنت بحاجة إلى إعدادات افتراضية من جانب الخادم، فيجب تعريفها في ملف تكوين Milvus ضمن قسم <code translate="no">knowhere</code>.</p>
+    </button></h2><p>يسرد الجدول التالي عناصر التكوين الخاصة بكل استراتيجية. في Milvus، عادةً ما يتم تمرير عناصر وقت الإنشاء في خريطة <code translate="no">params</code> عند إنشاء فهرس. إذا كنت بحاجة إلى قيم افتراضية من جانب الخادم، فيجب تعريفها في ملف تكوين Milvus ضمن قسم <code translate="no">knowhere</code>.</p>
 <table>
 <thead>
 <tr><th>الاستراتيجية</th><th>عنصر التكوين</th><th>المرحلة</th><th>القيمة الافتراضية</th><th>متى يتم تغييره</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">tokenann</code></td><td><code translate="no">emb_list_strategy=&quot;tokenann&quot;</code></td><td>إنشاء الفهرس</td><td><code translate="no">tokenann</code></td><td>استخدمه صراحةً عندما تريد سلوك الفهرسة الافتراضي لمتجه العناصر أو عند استخدام DiskANN.</td></tr>
+<tr><td><code translate="no">tokenann</code></td><td><code translate="no">emb_list_strategy=&quot;tokenann&quot;</code></td><td>إنشاء الفهرس</td><td><code translate="no">tokenann</code></td><td>استخدمه بشكل صريح عندما تريد سلوك الفهرسة الافتراضي لمتجه العناصر أو عند استخدام DiskANN.</td></tr>
 <tr><td><code translate="no">muvera</code></td><td><code translate="no">emb_list_strategy=&quot;muvera&quot;</code></td><td>بناء الفهرس</td><td><code translate="no">tokenann</code></td><td>استخدمه عندما تريد استرجاعًا مشفرًا على مستوى الصفوف دون تدريب.</td></tr>
 <tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_num_projections</code></td><td>إنشاء الفهرس</td><td><code translate="no">4</code></td><td>يتحكم في عدد إسقاطات SimHash. تؤدي القيم الأعلى إلى إنشاء المزيد من المجموعات وقد تحسن جودة الترميز، ولكنها تزيد من أبعاد الترميز.</td></tr>
 <tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_num_repeats</code></td><td>إنشاء الفهرس</td><td><code translate="no">7</code></td><td>يتحكم في عدد عمليات الترميز FDE المستقلة التي يتم ربطها معًا. قد تؤدي القيم الأعلى إلى تحسين المتانة، ولكنها تزيد من تكلفة الفهرسة/البحث.</td></tr>
 <tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_seed</code></td><td>إنشاء الفهرس</td><td><code translate="no">42</code></td><td>يُضبط للحصول على إسقاطات عشوائية قابلة للتكرار، خاصة في الاختبارات ومقارنات المعايير.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">emb_list_strategy=&quot;lemur&quot;</code></td><td>بناء الفهرس</td><td><code translate="no">tokenann</code></td><td>يُستخدم عندما يُتوقع أن يعمل الضغط المُتعلم على مستوى الصفوف بشكل أفضل من الإسقاط العشوائي الثابت.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_hidden_dim</code></td><td>إنشاء الفهرس</td><td><code translate="no">256</code></td><td>يتحكم في حجم التمثيل المضغوط. قم بزيادته للحصول على سعة أكبر؛ وقم بتقليله لتقليل استهلاك الذاكرة وتسريع عملية الاسترجاع.</td></tr>
-<tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_num_train_samples</code></td><td>بناء الفهرس</td><td><code translate="no">20000</code></td><td>قم بزيادته عندما يكون النص متنوعًا ويكون الضغط المُتعلم غير ملائم؛ وقم بتقليله فقط للاختبارات الصغيرة أو لعمليات الإنشاء الأسرع.</td></tr>
-<tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_num_epochs</code></td><td>بناء الفهرس</td><td><code translate="no">50</code></td><td>قم بزيادته إذا لم يتقارب التدريب؛ وقم بتقليصه عندما يكون وقت الإنشاء هو القيد الرئيسي.</td></tr>
+<tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_num_train_samples</code></td><td>إنشاء الفهرس</td><td><code translate="no">20000</code></td><td>قم بزيادته عندما يكون النص متنوعًا ويكون الضغط المُتعلم غير ملائم؛ وقم بتقليله فقط للاختبارات الصغيرة أو لعمليات الإنشاء الأسرع.</td></tr>
+<tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_num_epochs</code></td><td>بناء الفهرس</td><td><code translate="no">50</code></td><td>قم بزيادته إذا لم يتقارب التدريب؛ وقم بتقليله عندما يكون وقت الإنشاء هو القيد الرئيسي.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_batch_size</code></td><td>بناء الفهرس</td><td><code translate="no">512</code></td><td>اضبط وفقًا لإنتاجية التدريب واستخدام الذاكرة.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_learning_rate</code></td><td>بناء الفهرس</td><td><code translate="no">0.001</code></td><td>اضبطه عندما يكون التدريب غير مستقر أو يتقارب ببطء شديد.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_seed</code></td><td>بناء الفهرس</td><td><code translate="no">42</code></td><td>اضبطه لإجراء عمليات تدريب قابلة للتكرار.</td></tr>
-<tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_num_layers</code></td><td>بناء الفهرس</td><td><code translate="no">2</code></td><td>قم بزيادته فقط عندما يحتاج المجموع إلى أداة استخراج ميزات أكثر تعبيرًا ويمكنك تحمل تكلفة التدريب الإضافية.</td></tr>
+<tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_num_layers</code></td><td>بناء الفهرس</td><td><code translate="no">2</code></td><td>قم بزيادته فقط عندما يحتاج المجموع النصي إلى أداة استخراج ميزات أكثر تعبيرًا ويمكنك تحمل تكلفة التدريب الإضافية.</td></tr>
 <tr><td>جميع الاستراتيجيات</td><td><code translate="no">retrieval_ann_ratio</code></td><td>البحث</td><td><code translate="no">3.0</code></td><td>قم بزيادة القيمة لاسترداد المزيد من المرشحين في المرحلة الأولى وتحسين معدل الاسترجاع؛ وقم بتخفيضها لتقليل زمن الاستجابة.</td></tr>
 <tr><td>جميع الاستراتيجيات</td><td><code translate="no">emb_list_rerank</code></td><td>البحث</td><td><code translate="no">true</code></td><td>اترك هذه الخيار مفعّلاً لإعادة ترتيب MaxSim. قم بتعطيله فقط في التجارب الخاضعة للرقابة حيث يتم قياس جودة الشبكة العصبية الاصطناعية (ANN) في المرحلة الأولى بشكل مباشر.</td></tr>
 </tbody>
@@ -234,7 +234,7 @@ index_params.add_index(
     },
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>بالنسبة لـ LEMUR، قم بتوفير معلمات تدريب LEMUR في نفس خريطة " <code translate="no">params</code> ".</p>
+<p>بالنسبة لـ LEMUR، قم بتوفير معلمات تدريب LEMUR في نفس خريطة <code translate="no">params</code>.</p>
 <pre><code translate="no" class="language-python">params={
     <span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>,
     <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">96</span>,
@@ -321,7 +321,7 @@ index_params.add_index(
 </tbody>
 </table>
 <div class="alert note">
-<p><strong>ملاحظات التوافق:</strong> يدعم كل من MUVERA و LEMUR حاليًا بيانات fp32 في Knowhere. يدعم DiskANN قائمة EmbeddingList فقط مع استراتيجية TokenANN. إذا كنت تستخدم أنواع متجهات غير fp32 أو DiskANN، فتأكد من دعم الاستراتيجية قبل تغيير الإعداد الافتراضي.</p>
+<p><strong>ملاحظات التوافق:</strong> يدعم كل من MUVERA و LEMUR حاليًا بيانات fp32 في Knowhere. يدعم DiskANN قائمة التضمين (EmbeddingList) فقط مع استراتيجية TokenANN. إذا كنت تستخدم أنواع متجهات غير fp32 أو DiskANN، فتأكد من دعم الاستراتيجية قبل تغيير الإعداد الافتراضي.</p>
 </div>
 <hr>
 <h2 id="How-to-Choose-a-Strategy" class="common-anchor-header">كيفية اختيار الاستراتيجية<button data-href="#How-to-Choose-a-Strategy" class="anchor-icon" translate="no">
@@ -349,8 +349,8 @@ index_params.add_index(
 <tr><td>هل عدد المتجهات في كل صف قصير أم متوسط؟</td><td>يحتوي كل صف على عدد صغير من متجهات الرموز أو الباتشات أو المقاطع.</td><td><code translate="no">tokenann</code></td></tr>
 <tr><td>هل TokenANN كبير جدًا أم بطيء جدًا؟</td><td>يُعد حجم الفهرس أو زمن استجابة الاسترجاع في المرحلة الأولى هو عنق الزجاجة.</td><td><code translate="no">muvera</code></td></tr>
 <tr><td>هل تريد الضغط دون تدريب؟</td><td>تحتاج إلى نموذج تشغيلي أبسط وترميز قابل للتكرار.</td><td><code translate="no">muvera</code></td></tr>
-<tr><td>هل مساحة التضمين منخفضة التمييز؟</td><td>تتميز شبكات ANN المرشحة على مستوى الرموز بوجود ضوضاء، ولا يحافظ الإسقاط العشوائي على إشارة كافية.</td><td><code translate="no">lemur</code></td></tr>
-<tr><td>هل عبء العمل بصري أم متعدد الوسائط؟</td><td>تحتوي الصفوف على العديد من متجهات الباتش، وتكلفة شبكة ANN على مستوى الرموز (TokenANN) باهظة للغاية.</td><td><code translate="no">lemur</code> أو <code translate="no">muvera</code></td></tr>
+<tr><td>هل مساحة التضمين منخفضة التمييز؟</td><td>تتميز شبكات ANN المرشحة على مستوى الرموز بوجود ضوضاء، كما أن الإسقاط العشوائي لا يحافظ على إشارة كافية.</td><td><code translate="no">lemur</code></td></tr>
+<tr><td>هل عبء العمل بصري أم متعدد الوسائط؟</td><td>تحتوي الصفوف على العديد من متجهات البقع، وتكلفة شبكة ANN على مستوى الرموز (TokenANN) باهظة للغاية.</td><td><code translate="no">lemur</code> أو <code translate="no">muvera</code></td></tr>
 <tr><td>هل طول المستندات متفاوت بشكل كبير؟</td><td>تحتوي بعض الصفوف على متجهات أكثر بكثير من غيرها.</td><td>ابدأ بـ <code translate="no">muvera</code> ؛ وتحقق من صحة <code translate="no">lemur</code> بعناية.</td></tr>
 </tbody>
 </table>

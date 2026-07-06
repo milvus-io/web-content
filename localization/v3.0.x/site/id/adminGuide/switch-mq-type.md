@@ -87,7 +87,7 @@ summary: >-
 <li>Pantau log untuk memastikan peralihan telah selesai.</li>
 </ol>
 <div class="alert note">
-<p>Sebelum melakukan peralihan, pastikan MQ tujuan tidak mengandung topik dengan nama yang sama dengan yang digunakan oleh instance Milvus saat ini. Hal ini sangat penting jika MQ tujuan pernah digunakan oleh instance Milvus lain, karena nama topik yang bertabrakan dapat menyebabkan perilaku yang tidak terduga.</p>
+<p>Sebelum melakukan peralihan, pastikan MQ tujuan tidak berisi topik dengan nama yang sama dengan yang digunakan oleh instance Milvus saat ini. Hal ini sangat penting terutama jika MQ tujuan telah digunakan oleh instance Milvus lain, karena nama topik yang bertabrakan dapat menyebabkan perilaku yang tidak terduga.</p>
 </div>
 <h2 id="Support-matrix" class="common-anchor-header">Matriks dukungan<button data-href="#Support-matrix" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -106,7 +106,7 @@ summary: >-
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>MQ sumber</th><th>MQ Tujuan</th><th>Penerapan</th><th>Status</th></tr>
+<tr><th>MQ Sumber</th><th>MQ Tujuan</th><th>Penerapan</th><th>Status</th></tr>
 </thead>
 <tbody>
 <tr><td>RocksMQ</td><td>Woodpecker (lokal/MinIO)</td><td>Standalone (Docker Compose)</td><td><strong>Didukung</strong></td></tr>
@@ -119,5 +119,5 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Hindari berpindah-pindah jenis MQ berulang kali. Jika Anda memang perlu berpindah, pastikan untuk membersihkan data terkait sebelum setiap perpindahan — data sisa dapat menyebabkan perilaku yang tidak terduga.</p>
+<p>Hindari berpindah-pindah jenis MQ secara berulang-ulang. Jika Anda memang perlu berpindah, pastikan untuk membersihkan data terkait sebelum setiap perpindahan — data sisa dapat menyebabkan perilaku yang tidak terduga.</p>
 </div>

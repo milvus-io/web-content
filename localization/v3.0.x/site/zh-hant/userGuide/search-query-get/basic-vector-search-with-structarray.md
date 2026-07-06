@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>請使用此頁面對 StructArray 欄位內的向量子欄位執行向量搜尋。StructArray 支援兩種基本向量搜尋模式：嵌入清單搜尋（EmbeddingList search），此模式會針對儲存於每個實體中的嵌入清單進行評分；以及元素層級搜尋，此模式會獨立搜尋每個 Struct 元素。</p>
+    </button></h1><p>請使用此頁面對 StructArray 欄位內的向量子欄位執行向量搜尋。StructArray 支援兩種基本向量搜尋模式：嵌入清單搜尋（EmbeddingList search），此模式會對儲存於每個實體中的嵌入清單進行評分；以及元素層級搜尋，此模式會獨立搜尋每個 Struct 元素。</p>
 <p>本頁面使用<a href="/docs/zh-hant/create-structarray-field.md">《建立 StructArray 欄位</a>》中的<code translate="no">tech_articles</code> 集合。該集合包含一個名為<code translate="no">chunks</code> 的 StructArray 欄位。每個區塊包含文字、標量元數據、一個名為<code translate="no">emb_list_vector</code> 的向量子欄位（其索引用於 EmbeddingList 搜尋），以及一個名為<code translate="no">emb</code> 的向量子欄位（其索引用於元素層級搜尋）。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">開始之前<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -47,7 +47,7 @@ summary: >-
 <tr><td>建立一個 StructArray 欄位，例如<code translate="no">chunks</code> 。</td><td><a href="/docs/zh-hant/create-structarray-field.md">建立 StructArray 欄位</a></td></tr>
 <tr><td>插入其 `<code translate="no">chunks</code> ` 欄位包含 Struct 物件的實體。</td><td><a href="/docs/zh-hant/insert-data-into-structarray-fields.md">將資料插入 StructArray 欄位</a></td></tr>
 <tr><td>在<code translate="no">chunks[emb_list_vector]</code> 上建立<code translate="no">MAX_SIM*</code> 索引，以便進行EmbeddingList搜尋。</td><td><a href="/docs/zh-hant/index-structarray-fields.md">為 StructArray 欄位建立索引</a></td></tr>
-<tr><td>在 `<code translate="no">chunks[emb]</code> ` 上建立常規向量度量索引，以支援元素層級搜尋。</td><td><a href="/docs/zh-hant/index-structarray-fields.md">為 StructArray 欄位建立索引</a></td></tr>
+<tr><td>在 `<code translate="no">chunks[emb]</code> ` 上建立常規向量度量索引，以供元素層級搜尋使用。</td><td><a href="/docs/zh-hant/index-structarray-fields.md">為 StructArray 欄位建立索引</a></td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -77,10 +77,10 @@ summary: >-
 <tr><td>目標子欄位</td><td><code translate="no">chunks[emb_list_vector]</code></td><td><code translate="no">chunks[emb]</code></td></tr>
 <tr><td>查詢資料</td><td>一個包含一個或多個向量的嵌入清單。</td><td>一個常規向量。</td></tr>
 <tr><td>度量族</td><td><code translate="no">MAX_SIM*</code>，例如<code translate="no">MAX_SIM_COSINE</code> 。</td><td>常規向量度量，例如<code translate="no">COSINE</code> 、<code translate="no">IP</code> 或<code translate="no">L2</code> 。</td></tr>
-<tr><td>一個搜尋結果代表什麼</td><td>一個與查詢嵌入清單相似的 StructArray 向量子欄位的匹配實體。</td><td>StructArray 欄位內的一個匹配 Struct 元素。</td></tr>
+<tr><td>一個搜尋結果代表什麼</td><td>一個匹配的實體，其 StructArray 向量子欄位與查詢嵌入清單相似。</td><td>StructArray 欄位內的一個匹配 Struct 元素。</td></tr>
 <tr><td>結果的細粒度</td><td>實體層級。</td><td>Struct 元素層級。</td></tr>
-<tr><td>偏移量</td><td>不適用。</td><td>識別在返回時，匹配的結構體元素以零為起點的位置。</td></tr>
-<tr><td>典型用途</td><td>ColBERT、ColPali 及其他後期交互檢索模式。</td><td>塊級、段落級、片段級、區塊級或事實級檢索。</td></tr>
+<tr><td>偏移量</td><td>不適用。</td><td>識別在返回時，匹配的 Struct 元素以零為起點的位置。</td></tr>
+<tr><td>典型用途</td><td>ColBERT、ColPali 及其他後期交互檢索模式。</td><td>塊級、段落級、片段級、補丁級或事實級檢索。</td></tr>
 </tbody>
 </table>
 <h2 id="Run-EmbeddingList-search" class="common-anchor-header">執行 EmbeddingList 搜尋<button data-href="#Run-EmbeddingList-search" class="anchor-icon" translate="no">
@@ -98,7 +98,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>當查詢本身包含多個向量，且目標 StructArray 向量子欄位採用<code translate="no">MAX_SIM*</code> 度量進行索引時，請使用 EmbeddingList 搜尋。搜尋結果為實體層級的匹配。</p>
+    </button></h2><p>當查詢本身包含多個向量，且目標 StructArray 向量子欄位是透過<code translate="no">MAX_SIM*</code> 度量進行索引時，請使用 EmbeddingList 搜尋。結果為實體層級的匹配。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">from</span> pymilvus.client.embedding_list <span class="hljs-keyword">import</span> EmbeddingList
 
@@ -148,7 +148,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>當每個 Struct 元素應獨立參與向量搜尋時，請使用元素層級搜尋。查詢為一般向量，且目標向量子欄位必須採用一般向量度量法進行索引。</p>
+    </button></h2><p>當每個 Struct 元素應獨立參與向量搜尋時，請使用元素層級搜尋。查詢為一般向量，且目標向量子欄位必須採用一般向量度量進行索引。</p>
 <pre><code translate="no" class="language-python">query_vector = [<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>]
 
 results = client.search(
@@ -175,7 +175,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>在元素層級搜尋中，每個搜尋結果代表一個匹配的 Struct 元素。<code translate="no">offset</code> 的值即為該元素在 StructArray 欄位中的零起始位置。若有多個 Struct 元素與查詢相符，同一實體可能會出現多次。<code translate="no">limit</code> 的值適用於元素搜尋結果，而非唯一的父實體。</p>
+<p>在元素層級搜尋中，每個搜尋結果代表一個匹配的 Struct 元素。<code translate="no">offset</code> 值即為該元素在 StructArray 欄位中的零起始位置。若有多個 Struct 元素與查詢相符，同一實體可能會出現多次。<code translate="no">limit</code> 值適用於元素搜尋結果，而非唯一的父實體。</p>
 <h2 id="Interpret-results" class="common-anchor-header">解讀結果<button data-href="#Interpret-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -220,11 +220,11 @@ results = client.search(
       </svg>
     </button></h2><ul>
 <li><p>使用 `<code translate="no">chunks.emb</code> ` 代替所需的子欄位路徑語法 `<code translate="no">chunks[emb]</code>`。</p></li>
-<li><p>對使用常規向量度量進行索引的向量子欄位，使用 EmbeddingList 查詢。</p></li>
+<li><p>對使用一般向量度量進行索引的向量子欄位，使用 EmbeddingList 查詢。</p></li>
 <li><p>對使用<code translate="no">MAX_SIM*</code> 度量進行索引的向量子欄位，使用一般向量查詢。</p></li>
 <li><p>預期元素層級搜尋<code translate="no">limit</code> 會返回相應數量的唯一父實體。其實它返回的是元素搜尋結果。</p></li>
 <li><p>預期 EmbeddingList 搜尋會返回一個特定的元素偏移量，但實際返回的是實體層級的匹配結果。</p></li>
-<li><p>將同一個向量子欄位同時用於兩種搜尋模式。應使用獨立的向量子欄位，因為每個向量子欄位僅接受一種索引。</p></li>
+<li><p>將同一個向量子欄位同時用於兩種搜尋模式。應使用獨立的向量子欄位，因為每個向量子欄位僅能接受一種索引。</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">後續步驟<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
