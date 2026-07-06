@@ -49,7 +49,7 @@ Milvus provides two types of analyzers to meet different text processing needs:
 <div class="alert note">
 
 - If you omit analyzer configurations during collection creation, Milvus uses the `standard` analyzer for all text processing by default. For details, refer to [Standard Analyzer](standard-analyzer.md). 
-- For optimal search and query performance, choose an analyzer that matches the language of your text data. For instance, while the `standard` analyzer is versatile, it may not be the best choice for languages with unique grammatical structures, such as Chinese, Japanese, or Korean. In such cases, using a language-specific analyzer like [`chinese`](chinese-analyzer.md) or custom analyzers with specialized tokenizers (such as [`lindera`](lindera-tokenizer.md), [`icu`](icu-tokenizer.md)) and filters is highly recommended to ensure accurate tokenization and better search results.
+- For optimal search and query performance, choose an analyzer that matches the language of your text data. For instance, while the `standard` analyzer is versatile, it may not be the best choice for languages with unique grammatical structures, such as Chinese, Arabic, Thai, Japanese, or Korean. In such cases, using a language-specific analyzer like [`chinese`](chinese-analyzer.md), [`arabic`](arabic-analyzer.md), or [`thai`](thai-analyzer.md), or custom analyzers with specialized tokenizers (such as [`lindera`](lindera-tokenizer.md), [`icu`](icu-tokenizer.md)) and filters is highly recommended to ensure accurate tokenization and better search results.
 
 </div>
 
@@ -252,6 +252,10 @@ Milvus offers the following built-in analyzers, each designed for specific text 
 - `english`: Optimized for English-language text, with support for English stop words.
 
 - `chinese`: Specialized for processing Chinese text, including tokenization adapted for Chinese language structures.
+
+- `arabic`: Specialized for Arabic text, with Arabic normalization, decimal digit normalization, Arabic stemming, and Arabic stop-word removal.
+
+- `thai`: Specialized for Thai text, with Thai word segmentation, decimal digit normalization, and Thai stop-word removal.
 
 ### Custom analyzer
 

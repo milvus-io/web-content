@@ -78,12 +78,16 @@ multi_analyzer_params = {
   "analyzers": {
     "english": {"type": "english"},          # English-optimized analyzer
     "chinese": {"type": "chinese"},          # Chinese-optimized analyzer
+    "arabic": {"type": "arabic"},            # Arabic-optimized analyzer
+    "thai": {"type": "thai"},                # Thai-optimized analyzer
     "default": {"tokenizer": "icu"}          # Required fallback analyzer
   },
   "by_field": "language",                    # Field determining analyzer selection
   "alias": {
+    "ar": "arabic",                          # Use "ar" as shorthand for Arabic
     "cn": "chinese",                         # Use "cn" as shorthand for Chinese
-    "en": "english"                          # Use "en" as shorthand for English
+    "en": "english",                         # Use "en" as shorthand for English
+    "th": "thai"                             # Use "th" as shorthand for Thai
   }
 }
 ```
@@ -97,14 +101,22 @@ analyzerParams.put("analyzers", new HashMap<String, Object>() {{
     put("chinese", new HashMap<String, Object>() {{
         put("type", "chinese");
     }});
+    put("arabic", new HashMap<String, Object>() {{
+        put("type", "arabic");
+    }});
+    put("thai", new HashMap<String, Object>() {{
+        put("type", "thai");
+    }});
     put("default", new HashMap<String, Object>() {{
         put("tokenizer", "icu");
     }});
 }});
 analyzerParams.put("by_field", "language");
 analyzerParams.put("alias", new HashMap<String, Object>() {{
+    put("ar", "arabic");
     put("cn", "chinese");
     put("en", "english");
+    put("th", "thai");
 }});
 ```
 
@@ -115,12 +127,16 @@ const multi_analyzer_params = {
   "analyzers": {
     "english": {"type": "english"},          # English-optimized analyzer
     "chinese": {"type": "chinese"},          # Chinese-optimized analyzer
+    "arabic": {"type": "arabic"},            # Arabic-optimized analyzer
+    "thai": {"type": "thai"},                # Thai-optimized analyzer
     "default": {"tokenizer": "icu"}          # Required fallback analyzer
   },
   "by_field": "language",                    # Field determining analyzer selection
   "alias": {
+    "ar": "arabic",                          # Use "ar" as shorthand for Arabic
     "cn": "chinese",                         # Use "cn" as shorthand for Chinese
-    "en": "english"                          # Use "en" as shorthand for English
+    "en": "english",                         # Use "en" as shorthand for English
+    "th": "thai"                             # Use "th" as shorthand for Thai
   }
 }
 ```
@@ -130,12 +146,16 @@ multiAnalyzerParams := map[string]any{
     "analyzers": map[string]any{
         "english": map[string]string{"type": "english"},
         "chinese": map[string]string{"type": "chinese"},
+        "arabic": map[string]string{"type": "arabic"},
+        "thai": map[string]string{"type": "thai"},
         "default": map[string]string{"tokenizer": "icu"},
     },
     "by_field": "language",
     "alias": map[string]string{
+        "ar": "arabic",
         "cn": "chinese",
         "en": "english",
+        "th": "thai",
     },
 }
 ```
@@ -150,14 +170,22 @@ export multi_analyzer_params='{
     "chinese": {
       "type": "chinese"
     },
+    "arabic": {
+      "type": "arabic"
+    },
+    "thai": {
+      "type": "thai"
+    },
     "default": {
       "tokenizer": "icu"
     }
   },
   "by_field": "language",
   "alias": {
+    "ar": "arabic",
     "cn": "chinese",
-    "en": "english"
+    "en": "english",
+    "th": "thai"
   }
 }'
 
@@ -1109,4 +1137,3 @@ curl --request POST \
   "consistencyLevel": "Bounded"
 }'
 ```
-

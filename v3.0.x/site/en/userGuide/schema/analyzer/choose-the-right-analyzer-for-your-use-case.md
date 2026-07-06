@@ -123,6 +123,18 @@ Use this table to quickly determine if the default `standard` analyzer meets you
      <td><p>Use a built-in <a href="chinese-analyzer.md"><code>chinese</code></a> analyzer.</p></td>
    </tr>
    <tr>
+     <td><p>Arabic documents</p></td>
+     <td><p>❌ No</p></td>
+     <td><p>Arabic text may include letter variants, diacritics, Tatweel, Arabic-Indic digits, and common Arabic stop words that need language-specific handling.</p></td>
+     <td><p>Use a built-in <a href="arabic-analyzer.md"><code>arabic</code></a> analyzer.</p></td>
+   </tr>
+   <tr>
+     <td><p>Thai documents</p></td>
+     <td><p>❌ No</p></td>
+     <td><p>Thai text usually does not use spaces between words, so it needs language-specific word segmentation.</p></td>
+     <td><p>Use a built-in <a href="thai-analyzer.md"><code>thai</code></a> analyzer.</p></td>
+   </tr>
+   <tr>
      <td><p>Technical documentation</p></td>
      <td><p>❌ No</p></td>
      <td><p>Punctuation is stripped from terms like <code>C++</code>.</p></td>
@@ -178,6 +190,18 @@ Built-in analyzers are pre-configured solutions for common languages. They are t
      <td><p>Chinese</p></td>
      <td><ul><li><p>Tokenizer: <code>jieba</code></p></li><li><p>Filters: <code>cnalphanumonly</code></p></li></ul></td>
      <td><p>Currently uses Simplified Chinese dictionary by default.</p></td>
+   </tr>
+   <tr>
+     <td><p><a href="arabic-analyzer.md"><code>arabic</code></a></p></td>
+     <td><p>Arabic</p></td>
+     <td><ul><li><p>Tokenizer: <code>standard</code></p></li><li><p>Filters: <code>lowercase</code>, <code>decimaldigit</code>, <code>arabic_normalization</code>, <code>stemmer</code>, <code>stop</code></p></li></ul></td>
+     <td><p>Recommended for Arabic text over <code>standard</code>.</p></td>
+   </tr>
+   <tr>
+     <td><p><a href="thai-analyzer.md"><code>thai</code></a></p></td>
+     <td><p>Thai</p></td>
+     <td><ul><li><p>Tokenizer: <code>thai</code></p></li><li><p>Filters: <code>lowercase</code>, <code>decimaldigit</code>, <code>stop</code></p></li></ul></td>
+     <td><p>Recommended for Thai text over <code>standard</code> or whitespace-based tokenization.</p></td>
    </tr>
 </table>
 
@@ -243,7 +267,7 @@ For space-separated languages, you have these options:
 
 #### East Asian languages
 
-Dictionary-based languages require specialized tokenizers for proper word segmentation:
+Languages that do not use spaces consistently between words require specialized tokenizers for proper word segmentation:
 
 ##### Chinese
 
@@ -265,6 +289,25 @@ Dictionary-based languages require specialized tokenizers for proper word segmen
      <td><p>Pure dictionary-based morphological analysis with Chinese dictionary (<a href="https://cc-cedict.org/wiki/">cc-cedict</a>)</p></td>
      <td><p>Compared to <code>jieba</code>, processes Chinese text in a more generic manner</p></td>
      <td><ul><li><p>Input: <code>"机器学习算法"</code></p></li><li><p>Output: <code>["机器", "学习", "算法"]</code></p></li></ul></td>
+   </tr>
+</table>
+
+##### Thai
+
+For most Thai text, use the built-in [`thai`](thai-analyzer.md) analyzer. Use the standalone [`thai`](thai-tokenizer.md) tokenizer only when you need to build a custom analyzer pipeline.
+
+<table>
+   <tr>
+     <th><p>Tokenizer</p></th>
+     <th><p>How It Works</p></th>
+     <th><p>Best For</p></th>
+     <th><p>Examples</p></th>
+   </tr>
+   <tr>
+     <td><p><a href="thai-tokenizer.md"><code>thai</code></a></p></td>
+     <td><p>Segments Thai text into word tokens and filters out whitespace and punctuation-only segments</p></td>
+     <td><p>Custom analyzer pipelines for Thai or mixed Thai/English text</p></td>
+     <td><ul><li><p>Input: <code>"สวัสดี! ทดสอบ, ระบบ Milvus"</code></p></li><li><p>Output: <code>['สวัสดี', 'ทดสอบ', 'ระบบ', 'Milvus']</code></p></li></ul></td>
    </tr>
 </table>
 

@@ -10,7 +10,7 @@ The `standard` analyzer is the default analyzer in Milvus, which is automaticall
 
 <div class="alert note">
 
-The `standard` analyzer is suitable for languages that rely on separators (such as spaces, punctuation) for word boundaries. However, languages like Chinese, Japanese, and Korean require dictionary-based tokenizations. In such cases, using a language-specific analyzer like [`chinese`](chinese-analyzer.md) or custom analyzers with specialized tokenizers (such as [`lindera`](lindera-tokenizer.md), [`icu`](icu-tokenizer.md)) and filters is highly recommended to ensure accurate tokenization and better search results.
+The `standard` analyzer is suitable for languages that rely on separators (such as spaces, punctuation) for word boundaries. However, languages like Chinese, Arabic, Thai, Japanese, and Korean need language-specific tokenization or normalization. In such cases, use a language-specific analyzer such as [`chinese`](chinese-analyzer.md), [`arabic`](arabic-analyzer.md), or [`thai`](thai-analyzer.md), or custom analyzers with specialized tokenizers such as [`lindera`](lindera-tokenizer.md) and [`icu`](icu-tokenizer.md).
 
 </div>
 

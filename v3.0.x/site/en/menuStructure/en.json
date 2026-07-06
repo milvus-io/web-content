@@ -561,6 +561,18 @@
                     "id": "chinese-analyzer.md",
                     "order": 2,
                     "children": []
+                  },
+                  {
+                    "label": "Arabic",
+                    "id": "arabic-analyzer.md",
+                    "order": 3,
+                    "children": []
+                  },
+                  {
+                    "label": "Thai",
+                    "id": "thai-analyzer.md",
+                    "order": 4,
+                    "children": []
                   }
                 ]
               },
@@ -588,21 +600,27 @@
                     "children": []
                   },
                   {
+                    "label": "Thai",
+                    "id": "thai-tokenizer.md",
+                    "order": 3,
+                    "children": []
+                  },
+                  {
                     "label": "Lindera",
                     "id": "lindera-tokenizer.md",
-                    "order": 3,
+                    "order": 4,
                     "children": []
                   },
                   {
                     "label": "ICU",
                     "id": "icu-tokenizer.md",
-                    "order": 4,
+                    "order": 5,
                     "children": []
                   },
                   {
                     "label": "Language Identifier",
                     "id": "language-identifier.md",
-                    "order": 5,
+                    "order": 6,
                     "children": []
                   }
                 ]
@@ -625,69 +643,81 @@
                     "children": []
                   },
                   {
+                    "label": "Arabic Normalization",
+                    "id": "arabic-normalization-filter.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Decimal Digit",
+                    "id": "decimaldigit-filter.md",
+                    "order": 3,
+                    "children": []
+                  },
+                  {
                     "label": "Alphanumonly",
                     "id": "alphanumonly-filter.md",
-                    "order": 2,
+                    "order": 4,
                     "children": []
                   },
                   {
                     "label": "Cnalphanumonly",
                     "id": "cnalphanumonly-filter.md",
-                    "order": 3,
+                    "order": 5,
                     "children": []
                   },
                   {
                     "label": "Cncharonly",
                     "id": "cncharonly-filter.md",
-                    "order": 4,
+                    "order": 6,
                     "children": []
                   },
                   {
                     "label": "Pinyin",
                     "id": "pinyin-filter.md",
-                    "order": 5,
+                    "order": 7,
                     "children": []
                   },
                   {
                     "label": "Length",
                     "id": "length-filter.md",
-                    "order": 6,
+                    "order": 8,
                     "children": []
                   },
                   {
                     "label": "Stop",
                     "id": "stop-filter.md",
-                    "order": 7,
+                    "order": 9,
                     "children": []
                   },
                   {
                     "label": "Decompounder",
                     "id": "decompounder-filter.md",
-                    "order": 8,
+                    "order": 10,
                     "children": []
                   },
                   {
                     "label": "Stemmer",
                     "id": "stemmer-filter.md",
-                    "order": 9,
+                    "order": 11,
                     "children": []
                   },
                   {
                     "label": "Remove Punct",
                     "id": "removepunct-filter.md",
-                    "order": 10,
+                    "order": 12,
                     "children": []
                   },
                   {
                     "label": "Regex",
                     "id": "regex-filter.md",
-                    "order": 11,
+                    "order": 13,
                     "children": []
                   },
                   {
                     "label": "Synonym",
                     "id": "synonym-filter.md",
-                    "order": 12,
+                    "order": 14,
                     "children": []
                   }
                 ]
