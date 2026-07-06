@@ -2,7 +2,7 @@
 id: install_standalone-docker-compose.md
 label: Docker Compose
 related_key: Docker Compose
-summary: 'Узнайте, как установить Milvus в автономном режиме с помощью Docker Compose.'
+summary: 'Узнайте, как установить автономную версию Milvus с помощью Docker Compose.'
 title: Запуск Milvus с помощью Docker Compose (Linux)
 ---
 <h1 id="Run-Milvus-with-Docker-Compose-Linux" class="common-anchor-header">Запуск Milvus с помощью Docker Compose (Linux)<button data-href="#Run-Milvus-with-Docker-Compose-Linux" class="anchor-icon" translate="no">
@@ -20,7 +20,7 @@ title: Запуск Milvus с помощью Docker Compose (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>На этой странице показано, как запустить экземпляр Milvus в Docker с помощью Docker Compose.</p>
+    </button></h1><p>На этой странице описано, как запустить экземпляр Milvus в Docker с помощью Docker Compose.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Необходимые условия<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +40,7 @@ title: Запуск Milvus с помощью Docker Compose (Linux)
 <li><a href="https://docs.docker.com/get-docker/">Установите Docker</a>.</li>
 <li>Перед установкой<a href="/docs/ru/v2.6.x/prerequisite-docker.md">проверьте требования к аппаратному и программному обеспечению</a>.</li>
 </ul>
-<h2 id="Install-Milvus" class="common-anchor-header">Установите Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
+<h2 id="Install-Milvus" class="common-anchor-header">Установка Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -55,9 +55,9 @@ title: Запуск Milvus с помощью Docker Compose (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus предоставляет конфигурационный файл Docker Compose в репозитории Milvus. Чтобы установить Milvus с помощью Docker Compose, просто выполните команду</p>
+    </button></h2><p>Milvus предоставляет файл конфигурации Docker Compose в репозитории Milvus. Чтобы установить Milvus с помощью Docker Compose, просто выполните команду</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.18/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.19/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,27 +67,28 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Что нового в версии 2.6.18:</strong></p>
+<p><strong>Что нового в версии 2.6.19:</strong></p>
 <ul>
-<li><strong>Улучшенная архитектура</strong>: Включает новый узел потоковой передачи и оптимизированные компоненты</li>
-<li><strong>Обновленные зависимости</strong>: Включает последние версии MinIO и etcd</li>
-<li><strong>Улучшенная конфигурация</strong>: Оптимизированы настройки для повышения производительности</li>
+<li><strong>Улучшенная архитектура</strong>: включает новый узел потоковой передачи данных и оптимизированные компоненты</li>
+<li><strong>Обновленные зависимости</strong>: включены последние версии MinIO и etcd</li>
+<li><strong>Улучшенная конфигурация</strong>: оптимизированные настройки для повышения производительности</li>
 </ul>
-<p>Всегда загружайте последнюю версию конфигурации Docker Compose, чтобы обеспечить совместимость с функциями версии 2.6.18.</p>
+<p>Всегда загружайте самую последнюю конфигурацию Docker Compose, чтобы обеспечить совместимость с функциями версии v2.6.19.</p>
 <ul>
-<li><p>Если вам не удалось выполнить приведенную выше команду, проверьте, установлена ли в вашей системе Docker Compose V1. Если это так, рекомендуем перейти на Docker Compose V2 в соответствии с примечаниями на <a href="https://docs.docker.com/compose/">этой странице</a>.</p></li>
-<li><p>Если у вас возникнут проблемы с извлечением образа, свяжитесь с нами по адресу <a href="mailto:community@zilliz.com">community@zilliz.com</a>, сообщив подробности проблемы, и мы окажем вам необходимую поддержку.</p></li>
+<li><p>Если у вас не удалось выполнить приведенную выше команду, проверьте, установлен ли в вашей системе Docker Compose версии 1. В этом случае рекомендуется перейти на Docker Compose версии 2 в соответствии с указаниями на <a href="https://docs.docker.com/compose/">этой странице</a>.</p></li>
+<li><p>Если у вас возникли проблемы с загрузкой образа, свяжитесь с нами по адресу <a href="mailto:community@zilliz.com">community@zilliz.com</a>, указав подробности проблемы, и мы предоставим вам необходимую поддержку.</p></li>
 </ul>
 </div>
-<p>После запуска Milvus,</p>
+<p>После запуска Milvus</p>
 <ul>
-<li>Контейнеры с именами <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> и <strong>milvus-etcd</strong> работают.<ul>
-<li>Контейнер <strong>milvus-etcd</strong> не открывает никаких портов для хоста и сопоставляет свои данные с <strong>томами/etcd</strong> в текущей папке.</li>
-<li>Контейнер <strong>milvus-minio</strong> обслуживает порты <strong>9090</strong> и <strong>9091</strong> локально, используя стандартные учетные данные аутентификации, и сопоставляет свои данные с <strong>томами/minio</strong> в текущей папке.</li>
-<li>Контейнер <strong>milvus-standalone</strong> обслуживает порты <strong>19530</strong> локально с настройками по умолчанию и сопоставляет свои данные с <strong>томами/milvus</strong> в текущей папке.</li>
+<li>запускаются контейнеры с именами <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> и <strong>milvus-etcd</strong>.
+<ul>
+<li>Контейнер <strong>milvus-etcd</strong> не открывает никаких портов для хоста и сопоставляет свои данные с <strong>папкой volumes/etcd</strong> в текущем каталоге.</li>
+<li>Контейнер <strong>milvus-minio</strong> обслуживает локальные порты <strong>9090</strong> и <strong>9091</strong> с учетными данными аутентификации по умолчанию и сопоставляет свои данные с <strong>папкой volumes/minio</strong> в текущем каталоге.</li>
+<li>Контейнер <strong>milvus-standalone</strong> обслуживает локальные порты <strong>19530</strong> с настройками по умолчанию и сопоставляет свои данные с <strong>каталогом volumes/milvus</strong> в текущей папке.</li>
 </ul></li>
 </ul>
-<p>Проверить работоспособность контейнеров можно с помощью следующей команды:</p>
+<p>Вы можете проверить, запущены ли контейнеры, с помощью следующей команды:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker-compose ps</span>
 
       Name                     Command                  State                            Ports
@@ -96,7 +97,7 @@ milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 23
 milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-<p>Вы также можете зайти в Milvus WebUI по адресу <code translate="no">http://127.0.0.1:9091/webui/</code>, чтобы узнать больше о вашем экземпляре Milvus. Для получения подробной информации см. раздел <a href="/docs/ru/v2.6.x/milvus-webui.md">Milvus WebUI</a>.</p>
+<p>Вы также можете перейти в веб-интерфейс Milvus по адресу <code translate="no">http://127.0.0.1:9091/webui/</code>, чтобы узнать больше о вашем экземпляре Milvus. Подробности см. в разделе <a href="/docs/ru/v2.6.x/milvus-webui.md">«Веб-интерфейс Milvus</a>».</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Необязательно) Обновление конфигурации Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -114,10 +115,11 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
       </svg>
     </button></h2><p>Чтобы обновить конфигурацию Milvus в соответствии с вашими потребностями, необходимо изменить файл <code translate="no">/milvus/configs/user.yaml</code> в контейнере <code translate="no">milvus-standalone</code>.</p>
 <ol>
-<li><p>Зайдите в контейнер <code translate="no">milvus-standalone</code>.</p>
+<li><p>Перейдите в контейнер <code translate="no">milvus-standalone</code>.</p>
 <pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Добавьте дополнительные конфигурации, чтобы отменить конфигурации по умолчанию. Ниже предполагается, что вам нужно отменить конфигурации по умолчанию <code translate="no">proxy.healthCheckTimeout</code>. Соответствующие элементы конфигурации см. в разделе <a href="/docs/ru/v2.6.x/system_configuration.md">Конфигурация системы</a>.</p>
+<li><p>Добавьте дополнительные настройки, чтобы переопределить настройки по умолчанию.
+Ниже предполагается, что вам необходимо переопределить настройки файла <code translate="no">proxy.healthCheckTimeout</code> по умолчанию. Информацию о соответствующих элементах конфигурации см. в разделе <a href="/docs/ru/v2.6.x/system_configuration.md">«Конфигурация системы</a>».</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; /milvus/configs/user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
@@ -143,7 +145,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Остановить и удалить этот контейнер можно следующим образом.</p>
+    </button></h2><p>Вы можете остановить и удалить этот контейнер следующим образом</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Stop Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose down</span>
 <span class="hljs-meta prompt_">
@@ -167,27 +169,27 @@ EOF
       </svg>
     </button></h2><p>Установив Milvus в Docker, вы можете:</p>
 <ul>
-<li><p>Проверить <a href="/docs/ru/v2.6.x/quickstart.md">Quickstart</a>, чтобы узнать, на что способен Milvus.</p></li>
-<li><p>Изучить основные операции Milvus:</p>
+<li><p>Ознакомьтесь с <a href="/docs/ru/v2.6.x/quickstart.md">разделом «Быстрый старт»</a>, чтобы узнать, на что способен Milvus.</p></li>
+<li><p>Ознакомиться с основными операциями Milvus:</p>
 <ul>
-<li><a href="/docs/ru/v2.6.x/manage_databases.md">Управлять базами данных</a></li>
-<li><a href="/docs/ru/v2.6.x/manage-collections.md">Управлять коллекциями</a></li>
+<li><a href="/docs/ru/v2.6.x/manage_databases.md">Управление базами данных</a></li>
+<li><a href="/docs/ru/v2.6.x/manage-collections.md">Управление коллекциями</a></li>
 <li><a href="/docs/ru/v2.6.x/manage-partitions.md">Управление разделами</a></li>
-<li><a href="/docs/ru/v2.6.x/insert-update-delete.md">Вставка, вставка и удаление</a></li>
-<li><a href="/docs/ru/v2.6.x/single-vector-search.md">Одновекторный поиск</a></li>
+<li><a href="/docs/ru/v2.6.x/insert-update-delete.md">Вставка, обновление и удаление</a></li>
+<li><a href="/docs/ru/v2.6.x/single-vector-search.md">Поиск по одному вектору</a></li>
 <li><a href="/docs/ru/v2.6.x/multi-vector-search.md">Гибридный поиск</a></li>
 </ul></li>
 <li><p><a href="/docs/ru/v2.6.x/upgrade_milvus_cluster-helm.md">Обновление Milvus с помощью Helm Chart</a>.</p></li>
-<li><p><a href="/docs/ru/v2.6.x/scaleout.md">Масштабирование кластера Milvus</a>.</p></li>
-<li><p>Развертывание кластера Milvus в облаках:</p>
+<li><p><a href="/docs/ru/v2.6.x/scaleout.md">Масштабируйте кластер Milvus</a>.</p></li>
+<li><p>Разверните кластер Milvus в облаке:</p>
 <ul>
 <li><a href="/docs/ru/v2.6.x/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/ru/v2.6.x/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/ru/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Изучите <a href="/docs/ru/v2.6.x/milvus-webui.md">Milvus WebUI</a>, интуитивно понятный веб-интерфейс для наблюдения и управления Milvus.</p></li>
-<li><p>Изучите <a href="/docs/ru/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, инструмент с открытым исходным кодом для резервного копирования данных Milvus.</p></li>
-<li><p>Изучите <a href="/docs/ru/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, инструмент с открытым исходным кодом для отладки Milvus и динамического обновления конфигурации.</p></li>
-<li><p>Изучите <a href="https://github.com/zilliztech/attu">Attu</a>, инструмент с открытым исходным кодом GUI для интуитивного управления Milvus.</p></li>
+<li><p>Ознакомьтесь с <a href="/docs/ru/v2.6.x/milvus-webui.md">Milvus WebUI</a> — интуитивно понятным веб-интерфейсом для мониторинга и управления Milvus.</p></li>
+<li><p>Ознакомьтесь с <a href="/docs/ru/v2.6.x/milvus_backup_overview.md">Milvus Backup</a> — инструментом с открытым исходным кодом для резервного копирования данных Milvus.</p></li>
+<li><p>Познакомьтесь с <a href="/docs/ru/v2.6.x/birdwatcher_overview.md">Birdwatcher</a> — инструментом с открытым исходным кодом для отладки Milvus и динамического обновления конфигурации.</p></li>
+<li><p>Познакомьтесь с <a href="https://github.com/zilliztech/attu">Attu</a> — инструментом с графическим интерфейсом с открытым исходным кодом для интуитивного управления Milvus.</p></li>
 <li><p><a href="/docs/ru/v2.6.x/monitor.md">Мониторинг Milvus с помощью Prometheus</a>.</p></li>
 </ul>

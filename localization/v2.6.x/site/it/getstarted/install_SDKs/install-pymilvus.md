@@ -61,7 +61,7 @@ title: Installazione dell'SDK Python di Milvus
 <div class="alert note">
 Si consiglia di installare una versione di PyMilvus compatibile con quella del server Milvus installato. Per ulteriori informazioni, consultare <a href="/docs/it/v2.6.x/release_notes.md">le Note di rilascio</a>.
 </div>
-<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.6</span>.<span class="hljs-number">15</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.6</span>.<span class="hljs-number">16</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">Verifica dell’installazione<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"

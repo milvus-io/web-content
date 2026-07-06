@@ -57,13 +57,13 @@ title: Installazione di Milvus in modalità standalone con pacchetto RPM/DEB
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>È possibile scaricare il pacchetto RPM/DEB in base all'architettura del proprio sistema dalla <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.18">pagina delle versioni di Milvus</a>.</p>
+    </button></h2><p>È possibile scaricare il pacchetto RPM/DEB in base all'architettura del proprio sistema dalla <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.19">pagina delle versioni di Milvus</a>.</p>
 <ul>
-<li>Per x86_64/amd64, scaricare il pacchetto <strong>milvus_2.6.18-1_amd64.deb</strong> o <strong>milvus_2.6.18-1_amd64.rpm</strong>.</li>
-<li>Per ARM64, scaricare il pacchetto <strong>milvus_2.6.18-1_arm64.deb</strong> o <strong>milvus_2.6.18-1_arm64.rpm</strong>.</li>
+<li>Per x86_64/amd64, scaricare il pacchetto <strong>milvus_2.6.19-1_amd64.deb</strong> o <strong>milvus_2.6.19-1_amd64.rpm</strong>.</li>
+<li>Per ARM64, scaricare il pacchetto <strong>milvus_2.6.19-1_arm64.deb</strong> o <strong>milvus_2.6.19-1_arm64.rpm</strong>.</li>
 </ul>
 <p>Il comando seguente presuppone che si intenda eseguire Milvus Standalone su una macchina x86_64/amd64.</p>
-<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.18/milvus_2.6.18-1_amd64.rpm -O milvus_2.6.18-1_amd64.rpm
+<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.19/milvus_2.6.19-1_amd64.rpm -O milvus_2.6.19-1_amd64.rpm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-the-RPMDEB-Package" class="common-anchor-header">Installazione del pacchetto RPM/DEB<button data-href="#Install-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -82,11 +82,11 @@ title: Installazione di Milvus in modalità standalone con pacchetto RPM/DEB
       </svg>
     </button></h2><p>Per installare il pacchetto RPM/DEB, è possibile utilizzare il gestore di pacchetti del proprio sistema.</p>
 <p>Per i sistemi basati su RPM (come CentOS, Fedora e RHEL), utilizzare il comando ` <code translate="no">yum</code> ` per installare il pacchetto.</p>
-<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.18-1_amd64.rpm
+<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.19-1_amd64.rpm
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>Per i sistemi basati su DEB (come Ubuntu e Debian), utilizzare il comando ` <code translate="no">apt</code> ` per installare il pacchetto.</p>
-<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.18-1_amd64.deb
+<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.19-1_amd64.deb
 dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Start-Milvus-Standalone" class="common-anchor-header">Avvio di Milvus in modalità standalone<button data-href="#Start-Milvus-Standalone" class="anchor-icon" translate="no">
@@ -135,7 +135,7 @@ dpkg -l | grep milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>È possibile modificare le configurazioni di Milvus nel file <code translate="no">/etc/milvus/configs/milvus.yaml</code>. Ad esempio, per cambiare l'<code translate="no">proxy.healthCheckTimeout</code> in <code translate="no">1000</code> ms, è possibile cercare il parametro target e modificarlo di conseguenza. Per le voci di configurazione applicabili, fare riferimento a <a href="/docs/it/v2.6.x/system_configuration.md">Configurazione di sistema</a>.</p>
+    </button></h2><p>È possibile modificare le configurazioni di Milvus nel file <code translate="no">/etc/milvus/configs/milvus.yaml</code>. Ad esempio, per cambiare l’ <code translate="no">proxy.healthCheckTimeout</code> in <code translate="no">1000</code> ms, è possibile cercare il parametro target e modificarlo di conseguenza. Per le voci di configurazione applicabili, fare riferimento a <a href="/docs/it/v2.6.x/system_configuration.md">Configurazione di sistema</a>.</p>
 <h2 id="Stop-Milvus-Standalone" class="common-anchor-header">Arresto di Milvus Standalone<button data-href="#Stop-Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -203,8 +203,8 @@ dpkg -l | grep milvus
 <li><a href="/docs/it/v2.6.x/single-vector-search.md">Ricerca su singolo vettore</a></li>
 <li><a href="/docs/it/v2.6.x/multi-vector-search.md">Ricerca ibrida</a></li>
 </ul></li>
-<li><p><a href="/docs/it/v2.6.x/upgrade_milvus_cluster-helm.md">Aggiornamento di Milvus tramite Helm Chart</a>.</p></li>
-<li><p><a href="/docs/it/v2.6.x/scaleout.md">Scalare il cluster Milvus</a>.</p></li>
+<li><p><a href="/docs/it/v2.6.x/upgrade_milvus_cluster-helm.md">Eseguire l'aggiornamento di Milvus utilizzando Helm Chart</a>.</p></li>
+<li><p><a href="/docs/it/v2.6.x/scaleout.md">Scalare il proprio cluster Milvus</a>.</p></li>
 <li><p>Distribuisci il tuo cluster Milvus su cloud:</p>
 <ul>
 <li><a href="/docs/it/v2.6.x/eks.md">Amazon EKS</a></li>

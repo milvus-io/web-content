@@ -40,7 +40,7 @@ title: Instalar el SDK de Python de Milvus
     </button></h2><ul>
 <li>Se requiere Python 3.7 o posterior.</li>
 <li>Google Protobuf debe estar instalado. Puedes instalarlo con el comando « <code translate="no">pip3 install protobuf==3.20.0</code> ».</li>
-<li>grpcio-tools debe estar instalado. Se puede instalar con el comando ` <code translate="no">pip3 install grpcio-tools</code>`.</li>
+<li>grpcio-tools debe estar instalado. Se puede instalar con el comando « <code translate="no">pip3 install grpcio-tools</code> ».</li>
 </ul>
 <h2 id="Install-PyMilvus-via-pip" class="common-anchor-header">Instalar PyMilvus mediante pip<button data-href="#Install-PyMilvus-via-pip" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -61,7 +61,7 @@ title: Instalar el SDK de Python de Milvus
 <div class="alert note">
 Se recomienda instalar una versión de PyMilvus que coincida con la versión del servidor Milvus que hayas instalado. Para obtener más información, consulta <a href="/docs/es/v2.6.x/release_notes.md">las Notas de la versión</a>.
 </div>
-<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.6</span>.<span class="hljs-number">15</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.6</span>.<span class="hljs-number">16</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">Comprueba la instalación<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -106,5 +106,5 @@ Se recomienda instalar una versión de PyMilvus que coincida con la versión del
 <li><a href="/docs/es/v2.6.x/single-vector-search.md">Realizar búsquedas de un solo vector</a></li>
 <li><a href="/docs/es/v2.6.x/multi-vector-search.md">Búsqueda híbrida</a></li>
 </ul></li>
-<li><p>Explorar <a href="/api-reference/pymilvus/v2.6.x/About.md">la referencia de la API de PyMilvus</a></p></li>
+<li><p>Explora <a href="/api-reference/pymilvus/v2.6.x/About.md">la referencia de la API de PyMilvus</a></p></li>
 </ul>

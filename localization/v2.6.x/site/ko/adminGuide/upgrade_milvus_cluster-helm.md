@@ -23,7 +23,7 @@ title: Helm 차트를 사용하여 Milvus 클러스터 업그레이드하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 가이드에서는 Helm 차트를 사용하여 Milvus 클러스터를 v2.5.x에서 v2.6.18로 업그레이드하는 방법을 설명합니다.</p>
+    </button></h1><p>이 가이드에서는 Helm 차트를 사용하여 Milvus 클러스터를 v2.5.x에서 v2.6.19로 업그레이드하는 방법을 설명합니다.</p>
 <h2 id="Before-you-start" class="common-anchor-header">시작하기 전에<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +39,7 @@ title: Helm 차트를 사용하여 Milvus 클러스터 업그레이드하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-new-in-v2618" class="common-anchor-header">v2.6.18의 새로운 기능<button data-href="#Whats-new-in-v2618" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Whats-new-in-v2619" class="common-anchor-header">v2.6.19의 새로운 기능<button data-href="#Whats-new-in-v2619" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -54,13 +54,13 @@ title: Helm 차트를 사용하여 Milvus 클러스터 업그레이드하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus 2.5.x에서 2.6.18로 업그레이드하는 과정에는 다음과 같은 주요 아키텍처 변경 사항이 포함됩니다:</p>
+    </button></h3><p>Milvus 2.5.x에서 2.6.19로 업그레이드하는 과정에는 다음과 같은 중대한 아키텍처 변경 사항이 포함됩니다:</p>
 <ul>
 <li><strong>코디네이터 통합</strong>: 기존에 별도로 운영되던 코디네이터(<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>)가 단일 코디네이터로 통합되었습니다. <code translate="no">mixCoord</code></li>
 <li><strong>새로운 구성 요소</strong>: 향상된 데이터 처리를 위한 스트리밍 노드 도입</li>
 <li><strong>구성 요소 제거</strong>: <code translate="no">indexNode</code> 이 제거되고 통합되었습니다</li>
 </ul>
-<p>이 업그레이드 프로세스는 새로운 아키텍처로의 원활한 마이그레이션을 보장합니다. 아키텍처 변경 사항에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/architecture_overview.md">Milvus 아키텍처 개요를</a> 참조하십시오.</p>
+<p>이 업그레이드 프로세스는 새로운 아키텍처로의 원활한 마이그레이션을 보장합니다. 아키텍처 변경에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/architecture_overview.md">Milvus 아키텍처 개요를</a> 참조하십시오.</p>
 <h3 id="Requirements" class="common-anchor-header">요구 사항<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -84,11 +84,11 @@ title: Helm 차트를 사용하여 Milvus 클러스터 업그레이드하기
 </ul>
 <p><strong>호환성 요구 사항:</strong></p>
 <ul>
-<li>Milvus v2.6.0-rc1은 v2.6.18과 <strong>호환되지 않습니다</strong>. 릴리스 후보(RC) 버전에서 직접 업그레이드하는 것은 지원되지 않습니다.</li>
+<li>Milvus v2.6.0-rc1은 v2.6.19와 <strong>호환되지 않습니다</strong>. 릴리스 후보(RC) 버전에서 직접 업그레이드하는 것은 지원되지 않습니다.</li>
 <li>현재 v2.6.0-rc1을 실행 중이며 데이터를 보존해야 하는 경우, 마이그레이션 지원을 위해 <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">이 커뮤니티 가이드를</a> 참조하십시오.</li>
-<li>v2.6.18로 업그레이드하기 전에, <code translate="no">mixCoordinator</code> 가 활성화된 상태에서 v2.5.16 이상으로 먼저 <strong>업그레이드해야 합니다</strong>.</li>
+<li>v2.6.19로 업그레이드하기 전에, <code translate="no">mixCoordinator</code> 가 활성화된 상태에서 v2.5.16 이상으로 먼저 <strong>업그레이드해야 합니다</strong>.</li>
 </ul>
-<p><strong>메시지 큐 제한 사항</strong>: Milvus v2.6.18로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</p>
+<p><strong>메시지 큐 제한 사항</strong>: Milvus v2.6.19로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</p>
 <div class="alert note">
 Milvus Helm 차트 버전 4.2.21부터 pulsar-v3.x 차트를 종속성으로 도입했습니다. 하위 호환성을 위해 Helm을 v3.14 이상 버전으로 업그레이드하고, ` <code translate="no">helm upgrade</code>`을 사용할 때마다 ` <code translate="no">--reset-then-reuse-values</code> ` 옵션을 반드시 추가해 주십시오.
 </div>
@@ -131,7 +131,7 @@ helm repo update zilliztech
 <p>Helm 차트 버전과 Milvus 버전의 호환성을 확인하려면:</p>
 <pre><code translate="no" class="language-bash">helm search repo zilliztech/milvus --versions
 <button class="copy-code-btn"></button></code></pre>
-<p>이 가이드는 최신 버전을 설치한다고 가정합니다. 특정 버전을 설치해야 하는 경우, <code translate="no">--version</code> 매개변수를 적절히 지정하십시오.</p>
+<p>이 가이드에서는 최신 버전을 설치한다고 가정합니다. 특정 버전을 설치해야 하는 경우, <code translate="no">--version</code> 매개변수를 적절히 지정하십시오.</p>
 <h3 id="Step-2-Upgrade-to-v2516-with-mixCoordinator" class="common-anchor-header">2단계: mixCoordinator를 사용하여 v2.5.16으로 업그레이드<button data-href="#Step-2-Upgrade-to-v2516-with-mixCoordinator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -162,7 +162,7 @@ helm repo update zilliztech
   --version=4.2.58
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert-note">
-<p>클러스터에서 이미 <code translate="no">mixCoordinator</code> 을 사용하고 있다면, 이미지를 업그레이드하기만 하면 됩니다:</p>
+<p>클러스터에서 이미 <code translate="no">mixCoordinator</code> 를 사용하고 있다면, 이미지를 업그레이드하기만 하면 됩니다:</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.5.16&quot;</span> \
   --reset-then-reuse-values \
@@ -173,7 +173,7 @@ helm repo update zilliztech
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Upgrade-to-v2618" class="common-anchor-header">3단계: v2.6.18로 업그레이드<button data-href="#Step-3-Upgrade-to-v2618" class="anchor-icon" translate="no">
+<h3 id="Step-3-Upgrade-to-v2619" class="common-anchor-header">3단계: v2.6.19로 업그레이드<button data-href="#Step-3-Upgrade-to-v2619" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -188,9 +188,9 @@ kubectl get pods
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>v2.5.16이 <code translate="no">mixCoordinator</code> 와 함께 정상적으로 실행되면 v2.6.18로 업그레이드하십시오:</p>
+    </button></h3><p><code translate="no">mixCoordinator</code> 를 사용하여 v2.5.16이 정상적으로 실행되면 v2.6.19로 업그레이드하십시오:</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.6.18&quot;</span> \
+  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.6.19&quot;</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span> \
   --reset-then-reuse-values \

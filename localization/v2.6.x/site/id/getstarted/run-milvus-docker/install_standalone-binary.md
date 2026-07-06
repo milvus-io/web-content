@@ -57,13 +57,13 @@ title: Menginstal Milvus Standalone dengan Paket RPM/DEB
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Anda dapat mengunduh paket RPM/DEB sesuai dengan arsitektur sistem Anda dari <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.18">halaman Rilis Milvus</a>.</p>
+    </button></h2><p>Anda dapat mengunduh paket RPM/DEB sesuai dengan arsitektur sistem Anda dari <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.19">halaman Rilis Milvus</a>.</p>
 <ul>
-<li>Untuk x86_64/amd64, unduh paket <strong>milvus_2.6.18-1_amd64.deb</strong> atau <strong>milvus_2.6.18-1_amd64.rpm</strong>.</li>
-<li>Untuk ARM64, unduh paket <strong>milvus_2.6.18-1_arm64.deb</strong> atau <strong>milvus_2.6.18-1_arm64.rpm</strong>.</li>
+<li>Untuk x86_64/amd64, unduh paket <strong>milvus_2.6.19-1_amd64.deb</strong> atau <strong>milvus_2.6.19-1_amd64.rpm</strong>.</li>
+<li>Untuk ARM64, unduh paket <strong>milvus_2.6.19-1_arm64.deb</strong> atau <strong>milvus_2.6.19-1_arm64.rpm</strong>.</li>
 </ul>
-<p>Perintah berikut mengasumsikan bahwa Anda akan menjalankan Milvus Standalone pada mesin x86_64/amd64.</p>
-<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.18/milvus_2.6.18-1_amd64.rpm -O milvus_2.6.18-1_amd64.rpm
+<p>Perintah berikut ini mengasumsikan bahwa Anda akan menjalankan Milvus Standalone pada mesin x86_64/amd64.</p>
+<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.19/milvus_2.6.19-1_amd64.rpm -O milvus_2.6.19-1_amd64.rpm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-the-RPMDEB-Package" class="common-anchor-header">Instal Paket RPM/DEB<button data-href="#Install-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -82,14 +82,14 @@ title: Menginstal Milvus Standalone dengan Paket RPM/DEB
       </svg>
     </button></h2><p>Untuk menginstal paket RPM/DEB, Anda dapat menggunakan pengelola paket pada sistem Anda.</p>
 <p>Untuk sistem berbasis RPM (seperti CentOS, Fedora, dan RHEL), gunakan perintah ` <code translate="no">yum</code> ` untuk menginstal paket tersebut.</p>
-<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.18-1_amd64.rpm
+<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.19-1_amd64.rpm
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>Untuk sistem berbasis DEB (seperti Ubuntu dan Debian), gunakan perintah ` <code translate="no">apt</code> ` untuk menginstal paket tersebut.</p>
-<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.18-1_amd64.deb
+<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.19-1_amd64.deb
 dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Start-Milvus-Standalone" class="common-anchor-header">Menjalankan Milvus Standalone<button data-href="#Start-Milvus-Standalone" class="anchor-icon" translate="no">
+<h2 id="Start-Milvus-Standalone" class="common-anchor-header">Memulai Milvus Standalone<button data-href="#Start-Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -110,7 +110,7 @@ dpkg -l | grep milvus
 <p>Anda dapat memeriksa status layanan Milvus menggunakan perintah berikut:</p>
 <pre><code translate="no" class="language-shell">systemctl status milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Jika Milvus berjalan dengan baik, Anda akan melihat output berikut:</p>
+<p>Jika Milvus berjalan dengan sukses, Anda akan melihat output berikut:</p>
 <pre><code translate="no"><span class="hljs-string">●</span> <span class="hljs-string">milvus.service</span> <span class="hljs-bullet">-</span> <span class="hljs-string">Milvus</span> <span class="hljs-string">Standalone</span> <span class="hljs-string">Server</span>
    <span class="hljs-attr">Loaded:</span> <span class="hljs-string">loaded</span> <span class="hljs-string">(/lib/systemd/system/milvus.service;</span> <span class="hljs-string">enabled;</span> <span class="hljs-attr">vendor preset:</span> <span class="hljs-string">enabled)</span>
    <span class="hljs-attr">Active:</span> <span class="hljs-string">active</span> <span class="hljs-string">(running)</span> <span class="hljs-string">since</span> <span class="hljs-string">Fri</span> <span class="hljs-number">2025-08-10 10:30:00 </span><span class="hljs-string">UTC;</span> <span class="hljs-string">5s</span> <span class="hljs-string">ago</span>
@@ -199,7 +199,7 @@ dpkg -l | grep milvus
 <li><a href="/docs/id/v2.6.x/manage_databases.md">Mengelola Basis Data</a></li>
 <li><a href="/docs/id/v2.6.x/manage-collections.md">Mengelola Koleksi</a></li>
 <li><a href="/docs/id/v2.6.x/manage-partitions.md">Mengelola Partisi</a></li>
-<li><a href="/docs/id/v2.6.x/insert-update-delete.md">Sisipkan, Upsert, dan Hapus</a></li>
+<li><a href="/docs/id/v2.6.x/insert-update-delete.md">Sisipkan, Upsert &amp; Hapus</a></li>
 <li><a href="/docs/id/v2.6.x/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
 <li><a href="/docs/id/v2.6.x/multi-vector-search.md">Pencarian Hibrida</a></li>
 </ul></li>
@@ -211,9 +211,9 @@ dpkg -l | grep milvus
 <li><a href="/docs/id/v2.6.x/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/id/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus-webui.md">Milvus WebUI</a>, antarmuka web yang intuitif untuk pemantauan dan pengelolaan Milvus.</p></li>
+<li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus-webui.md">Milvus WebUI</a>, antarmuka web intuitif untuk pemantauan dan pengelolaan Milvus.</p></li>
 <li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, alat sumber terbuka untuk pencadangan data Milvus.</p></li>
-<li><p>Jelajahi <a href="/docs/id/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk debugging Milvus dan pembaruan konfigurasi dinamis.</p></li>
+<li><p>Jelajahi <a href="/docs/id/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk men-debug Milvus dan pembaruan konfigurasi dinamis.</p></li>
 <li><p>Jelajahi <a href="https://github.com/zilliztech/attu">Attu</a>, alat GUI sumber terbuka untuk pengelolaan Milvus yang intuitif.</p></li>
 <li><p><a href="/docs/id/v2.6.x/monitor.md">Pantau Milvus dengan Prometheus</a>.</p></li>
 </ul>

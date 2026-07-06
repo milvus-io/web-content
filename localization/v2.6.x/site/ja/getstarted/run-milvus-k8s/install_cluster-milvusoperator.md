@@ -2,7 +2,7 @@
 id: install_cluster-milvusoperator.md
 label: Milvus Operator
 related_key: Kubernetes
-summary: Milvus Operator を使用して、Kubernetes 上に Milvus クラスターをインストールする方法について学びましょう
+summary: Milvus Operator を使用して Kubernetes に Milvus クラスターをインストールする方法について学びましょう
 title: Milvus Operator を使用して Milvus クラスターをインストールする
 ---
 <h1 id="Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="common-anchor-header">Milvus Operator を使用して Kubernetes で Milvus を実行する<button data-href="#Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="anchor-icon" translate="no">
@@ -93,7 +93,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
   --<span class="hljs-built_in">wait</span> --wait-for-jobs \
   https://github.com/zilliztech/milvus-operator/releases/download/v1.3.7/milvus-operator-1.3.7.tgz</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>インストール処理が完了すると、次のような出力が表示されます。</p>
+<p>インストール処理が終了すると、次のような出力が表示されます。</p>
 <pre><code translate="no" class="language-shell">NAME: milvus-operator
 LAST DEPLOYED: Thu Jul  7 13:18:40 2022
 NAMESPACE: milvus-operator
@@ -108,7 +108,7 @@ Quick start with `kubectl apply -f https://raw.githubusercontent.com/zilliztech/
 More samples can be found in https://github.com/zilliztech/milvus-operator/tree/main/config/samples
 CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/tree/main/docs/CRD
 <button class="copy-code-btn"></button></code></pre>
-<p>以前にMilvus Operatorをインストールしたことがある場合は、次のコマンドを使用してアップグレードしてください。</p>
+<p>以前にMilvus Operatorをインストール済みの場合は、次のコマンドを使用してアップグレードしてください。</p>
 <pre><code translate="no" class="language-shell">helm upgrade milvus-operator \
   -n milvus-operator --create-namespace \
   --wait --wait-for-jobs \
@@ -119,7 +119,7 @@ CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/
 <p><code translate="no">kubectl</code> を使用してMilvus Operatorをインストールするには、次のコマンドを実行してください。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/deploy/manifests/deployment.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>インストール処理が完了すると、次のような出力が表示されます。</p>
+<p>インストール処理が終了すると、次のような出力が表示されます。</p>
 <pre><code translate="no" class="language-shell">namespace/milvus-operator created
 customresourcedefinition.apiextensions.k8s.io/milvusclusters.milvus.io created
 serviceaccount/milvus-operator-controller-manager created
@@ -135,7 +135,7 @@ service/milvus-operator-controller-manager-metrics-service created
 service/milvus-operator-webhook-service created
 deployment.apps/milvus-operator-controller-manager created
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus OperatorのPodが実行中かどうかは、次のように確認できます：</p>
+<p>Milvus OperatorのPodが実行されているかどうかは、次のように確認できます：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods -n milvus-operator</span>
 
 NAME                               READY   STATUS    RESTARTS   AGE
@@ -172,10 +172,10 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus OperatorのPodが実行されている状態になったら、次のようにMilvusクラスタをデプロイできます。</p>
+    </button></h3><p>Milvus OperatorのPodが実行されている状態になったら、次のようにMilvusクラスターをデプロイできます。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上記のコマンドは、メッセージキューとして<strong>Woodpecker</strong>を使用し（v2.6.18 では推奨）、Streaming Node を含むすべての新しいアーキテクチャコンポーネントを備えた Milvus クラスタをデプロイします。</p>
+<p>上記のコマンドは、メッセージキューとして<strong>Woodpecker</strong>を使用し（v2.6.19 では推奨）、Streaming Node を含むすべての新しいアーキテクチャコンポーネントを備えた Milvus クラスタをデプロイします。</p>
 <p><strong>このデプロイにおけるアーキテクチャの主な特徴:</strong></p>
 <ul>
 <li><strong>メッセージキュー</strong>：<a href="/docs/ja/v2.6.x/use-woodpecker.md">Woodpecker を使用</a>（インフラのメンテナンス負担を軽減）</li>
@@ -186,7 +186,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 <div class="alert note">
 <ul>
 <li>リリース名には、英字、数字、ハイフンのみを含めることができます。リリース名にドットを使用することはできません。</li>
-<li>また、すべてのコンポーネントが単一のポッド内に収まるスタンドアロンモードでMilvusインスタンスをデプロイすることも可能です。その場合は、上記のコマンド内の設定ファイルのURLを次のように変更してください。<code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
+<li>Milvusインスタンスをスタンドアロンモードでデプロイすることも可能です。このモードでは、すべてのコンポーネントが単一のポッド内に収められます。これを行うには、上記のコマンド内の設定ファイルのURLを次のように変更してください。<code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
 </ul>
 </div>
 <h3 id="2-Check-Milvus-cluster-status" class="common-anchor-header">2. Milvusクラスタの状態を確認する<button data-href="#2-Check-Milvus-cluster-status" class="anchor-icon" translate="no">
@@ -236,7 +236,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
   <span class="hljs-attr">endpoint:</span> <span class="hljs-string">my-release-milvus.default:19530</span>
   <span class="hljs-attr">status:</span> <span class="hljs-string">Healthy</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus Operatorは、etcd、Pulsar、MinIOなどのMilvus依存関係を構築した後、プロキシ、コーディネーター、ノードなどのMilvusコンポーネントを作成します。</p>
+<p>Milvus Operatorは、etcd、Pulsar、MinIOなどのMilvus依存関係を構築した後、プロキシ、コーディネーター、ノードなどのMilvusコンポーネントを構築します。</p>
 <p>Milvusクラスタの準備が完了すると、Milvusクラスタ内のすべてのポッドのステータスは以下のようになります。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods</span>
 
@@ -276,9 +276,9 @@ my-release-minio-3                               1/1     Running   0          2m
 <button class="copy-code-btn"></button></code></pre>
 <p>出力結果から、Milvus インスタンスがデフォルトのポート<strong>19530</strong> でサービスを提供していることがわかります。</p>
 <div class="alert note">
-<p>Milvusをスタンドアロンモードでデプロイした場合は、pod名を<code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> から<code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code> に変更してください。</p>
+<p>Milvusをスタンドアロンモードでデプロイした場合は、ポッド名を `<code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> ` から `<code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code>` に変更してください。</p>
 </div>
-<p>次に、以下のコマンドを実行して、ローカルポートをMilvusがサービスを提供しているポートに転送します。</p>
+<p>その後、次のコマンドを実行して、ローカルポートをMilvusがサービスを提供しているポートに転送します。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward service/my-release-milvus 27017:19530</span>
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
@@ -288,7 +288,7 @@ Forwarding from 127.0.0.1:27017 -&gt; 19530
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>これで、転送されたポートを使用して Milvus に接続できるようになります。</p>
-<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(オプション) Milvus の設定を更新する<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
+<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">（オプション）Milvusの設定を更新する<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -305,7 +305,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
       </svg>
     </button></h2><p>次のように `<code translate="no">patch</code> ` コマンドを実行することで、Milvus クラスタの設定を確認および更新できます。</p>
 <ol>
-<li><p>以下のコマンドを実行すると、変更後の設定内容をプレビューできます。</p>
+<li><p>以下のコマンドを実行して、更新後の設定内容をプレビューします。</p>
 <p>以下では、<code translate="no">spec.components.disableMetric</code> パラメータを<code translate="no">false</code> msに更新する場合を想定しています。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl patch milvus my-release --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;merge&#x27;</span>\
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span> \
@@ -358,7 +358,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>デフォルトの設定で Milvus クラスタを削除した場合、etcd、Pulsar、MinIO などの依存関係は削除されません。そのため、次回同じ Milvus クラスタインスタンスをインストールする際には、これらの依存関係が再利用されます。</li>
+<li>デフォルトの設定で Milvus クラスタを削除しても、etcd、Pulsar、MinIO などの依存関係は削除されません。そのため、次回同じ Milvus クラスタインスタンスをインストールする際には、これらの依存関係が再利用されます。</li>
 <li>Milvus クラスタとともに依存関係および永続ボリュームクレーム (PVC) を削除するには、<a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">設定ファイルを</a>参照してください。</li>
 </ul>
 </div>
@@ -424,6 +424,6 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li><p>Milvusの可観測性と管理のための直感的なWebインターフェース「<a href="/docs/ja/v2.6.x/milvus-webui.md">Milvus WebUI</a>」をご覧ください。</p></li>
 <li><p>Milvusデータのバックアップを行うオープンソースツール「<a href="/docs/ja/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>」をご覧ください。</p></li>
 <li><p>Milvusのデバッグや動的な構成更新を行うためのオープンソースツール「<a href="/docs/ja/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>」をご覧ください。</p></li>
-<li><p>Milvusを直感的に管理できるオープンソースのGUIツール「<a href="https://github.com/zilliztech/attu">Attu</a>」をご覧ください。</p></li>
+<li><p>Milvusを直感的に管理するためのオープンソースGUIツール「<a href="https://github.com/zilliztech/attu">Attu</a>」をご覧ください。</p></li>
 <li><p><a href="/docs/ja/v2.6.x/monitor.md">Prometheus を使用して Milvus を監視しましょう</a>。</p></li>
 </ul>

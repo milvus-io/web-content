@@ -2,7 +2,7 @@
 id: install-pymilvus.md
 label: Install PyMilvus
 related_key: SDK
-summary: MilvusのPython SDKのインストール方法をご覧ください。
+summary: MilvusのPython SDKのインストール方法について学びましょう。
 title: Milvus Python SDK のインストール
 ---
 <h1 id="Install-Milvus-Python-SDK" class="common-anchor-header">Milvus Python SDK のインストール<button data-href="#Install-Milvus-Python-SDK" class="anchor-icon" translate="no">
@@ -39,7 +39,7 @@ title: Milvus Python SDK のインストール
       </svg>
     </button></h2><ul>
 <li>Python 3.7 以降が必要です。</li>
-<li>Google Protobuf がインストールされている必要があります。コマンド `<code translate="no">pip3 install protobuf==3.20.0</code>` でインストールできます。</li>
+<li>Google Protobuf がインストールされていること。コマンド `<code translate="no">pip3 install protobuf==3.20.0</code>` でインストールできます。</li>
 <li>grpcio-tools がインストールされていること。コマンド `<code translate="no">pip3 install grpcio-tools</code>` でインストールできます。</li>
 </ul>
 <h2 id="Install-PyMilvus-via-pip" class="common-anchor-header">pip を使用して PyMilvus をインストールする<button data-href="#Install-PyMilvus-via-pip" class="anchor-icon" translate="no">
@@ -61,7 +61,7 @@ title: Milvus Python SDK のインストール
 <div class="alert note">
 インストールした Milvus サーバーのバージョンと一致する PyMilvus バージョンをインストールすることを推奨します。詳細については、<a href="/docs/ja/v2.6.x/release_notes.md">リリースノートを</a>参照してください。
 </div>
-<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.6</span>.<span class="hljs-number">15</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.6</span>.<span class="hljs-number">16</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">インストールの確認<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"

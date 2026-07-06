@@ -5,9 +5,9 @@ related_key: RPM/DEB Package
 summary: >-
   Descubre cómo instalar Milvus de forma independiente con un paquete RPM/DEB ya
   compilado.
-title: Instalación de Milvus en modo autónomo con un paquete RPM/DEB
+title: Instalar Milvus en modo autónomo con un paquete RPM/DEB
 ---
-<h1 id="Install-Milvus-Standalone-with-RPMDEB-Package" class="common-anchor-header">Instalación de Milvus en modo autónomo con un paquete RPM/DEB<button data-href="#Install-Milvus-Standalone-with-RPMDEB-Package" class="anchor-icon" translate="no">
+<h1 id="Install-Milvus-Standalone-with-RPMDEB-Package" class="common-anchor-header">Instalar Milvus en modo autónomo con un paquete RPM/DEB<button data-href="#Install-Milvus-Standalone-with-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,7 +22,7 @@ title: Instalación de Milvus en modo autónomo con un paquete RPM/DEB
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>En esta página se explica cómo instalar Milvus Standalone con un paquete RPM/DEB precompilado.</p>
+    </button></h1><p>En esta página se explica cómo instalar Milvus en modo autónomo con un paquete RPM/DEB ya compilado.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Requisitos previos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -57,13 +57,13 @@ title: Instalación de Milvus en modo autónomo con un paquete RPM/DEB
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Puede descargar el paquete RPM/DEB adecuado a la arquitectura de su sistema desde la <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.18">página de versiones de Milvus</a>.</p>
+    </button></h2><p>Puede descargar el paquete RPM/DEB adecuado a la arquitectura de su sistema desde la <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.19">página de versiones de Milvus</a>.</p>
 <ul>
-<li>Para x86_64/amd64, descarga el paquete <strong>milvus_2.6.18-1_amd64.deb</strong> o <strong>milvus_2.6.18-1_amd64.rpm</strong>.</li>
-<li>Para ARM64, descargue el paquete <strong>milvus_2.6.18-1_arm64.deb</strong> o <strong>milvus_2.6.18-1_arm64.rpm</strong>.</li>
+<li>Para x86_64/amd64, descarga el paquete <strong>milvus_2.6.19-1_amd64.deb</strong> o <strong>milvus_2.6.19-1_amd64.rpm</strong>.</li>
+<li>Para ARM64, descargue el paquete <strong>milvus_2.6.19-1_arm64.deb</strong> o <strong>milvus_2.6.19-1_arm64.rpm</strong>.</li>
 </ul>
 <p>El siguiente comando da por hecho que vas a ejecutar Milvus Standalone en un equipo x86_64/amd64.</p>
-<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.18/milvus_2.6.18-1_amd64.rpm -O milvus_2.6.18-1_amd64.rpm
+<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.19/milvus_2.6.19-1_amd64.rpm -O milvus_2.6.19-1_amd64.rpm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-the-RPMDEB-Package" class="common-anchor-header">Instalar el paquete RPM/DEB<button data-href="#Install-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -82,14 +82,14 @@ title: Instalación de Milvus en modo autónomo con un paquete RPM/DEB
       </svg>
     </button></h2><p>Para instalar el paquete RPM/DEB, puede utilizar el gestor de paquetes de su sistema.</p>
 <p>Para sistemas basados en RPM (como CentOS, Fedora y RHEL), utiliza el comando « <code translate="no">yum</code> » para instalar el paquete.</p>
-<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.18-1_amd64.rpm
+<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.19-1_amd64.rpm
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>En los sistemas basados en DEB (como Ubuntu y Debian), utiliza el comando « <code translate="no">apt</code> » para instalar el paquete.</p>
-<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.18-1_amd64.deb
+<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.19-1_amd64.deb
 dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Start-Milvus-Standalone" class="common-anchor-header">Iniciar Milvus en modo autónomo<button data-href="#Start-Milvus-Standalone" class="anchor-icon" translate="no">
+<h2 id="Start-Milvus-Standalone" class="common-anchor-header">Iniciar Milvus de forma independiente<button data-href="#Start-Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -107,7 +107,7 @@ dpkg -l | grep milvus
     </button></h2><p>Una vez completada la instalación, Milvus queda instalado como un servicio de systemd y se puede iniciar mediante el siguiente comando:</p>
 <pre><code translate="no" class="language-shell">systemctl start milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Puede comprobar el estado del servicio Milvus con el siguiente comando:</p>
+<p>Puede comprobar el estado del servicio Milvus mediante el siguiente comando:</p>
 <pre><code translate="no" class="language-shell">systemctl status milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>Si Milvus se está ejecutando correctamente, deberías ver el siguiente resultado:</p>
@@ -193,7 +193,7 @@ dpkg -l | grep milvus
       </svg>
     </button></h2><p>Una vez instalado Milvus Standalone, puedes:</p>
 <ul>
-<li><p>Consulta <a href="/docs/es/v2.6.x/quickstart.md">la Guía de inicio rápido</a> para ver qué puede hacer Milvus.</p></li>
+<li><p>Consulta <a href="/docs/es/v2.6.x/quickstart.md">la Guía de inicio rápido</a> para ver lo que Milvus puede hacer.</p></li>
 <li><p>Aprender las operaciones básicas de Milvus:</p>
 <ul>
 <li><a href="/docs/es/v2.6.x/manage_databases.md">Gestionar bases de datos</a></li>
@@ -213,7 +213,7 @@ dpkg -l | grep milvus
 </ul></li>
 <li><p>Descubre <a href="/docs/es/v2.6.x/milvus-webui.md">Milvus WebUI</a>, una interfaz web intuitiva para la observabilidad y la gestión de Milvus.</p></li>
 <li><p>Descubre <a href="/docs/es/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, una herramienta de código abierto para realizar copias de seguridad de los datos de Milvus.</p></li>
-<li><p>Descubre <a href="/docs/es/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, una herramienta de código abierto para la depuración de Milvus y las actualizaciones dinámicas de configuración.</p></li>
+<li><p>Descubre <a href="/docs/es/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, una herramienta de código abierto para la depuración de Milvus y las actualizaciones dinámicas de la configuración.</p></li>
 <li><p>Descubre <a href="https://github.com/zilliztech/attu">Attu</a>, una herramienta GUI de código abierto para la gestión intuitiva de Milvus.</p></li>
 <li><p><a href="/docs/es/v2.6.x/monitor.md">Supervisa Milvus con Prometheus</a>.</p></li>
 </ul>

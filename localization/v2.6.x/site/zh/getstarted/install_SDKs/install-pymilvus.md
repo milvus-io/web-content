@@ -21,7 +21,7 @@ title: 安装 Milvus Python SDK
         ></path>
       </svg>
     </button></h1><p>本主题介绍了如何安装 Milvus 的 Python SDK（pymilvus）。</p>
-<p>Milvus 的当前版本支持 Python、Node.js、Go 和 Java 语言的 SDK。</p>
+<p>Milvus 的当前版本支持 Python、Node.js、GO 和 Java 语言的 SDK。</p>
 <h2 id="Requirements" class="common-anchor-header">系统要求<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -57,11 +57,11 @@ title: 安装 Milvus Python SDK
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>PyMilvus 可在<a href="https://pypi.org/project/pymilvus/">Python 软件包索引</a>（Python Package<a href="https://pypi.org/project/pymilvus/">Index</a>）中获取。</p>
+    </button></h2><p>PyMilvus 可在<a href="https://pypi.org/project/pymilvus/">Python 软件包索引</a>中获取。</p>
 <div class="alert note">
-建议安装与您已安装的 Milvus 服务器版本相匹配的 PyMilvus 版本。有关更多信息，请参阅《<a href="/docs/zh/v2.6.x/release_notes.md">发行说明》</a>。
+建议安装与您已安装的 Milvus 服务器版本相匹配的 PyMilvus 版本。有关更多信息，请参阅《<a href="/docs/zh/v2.6.x/release_notes.md">发布说明》</a>。
 </div>
-<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.6</span>.<span class="hljs-number">15</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.6</span>.<span class="hljs-number">16</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">验证安装<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"

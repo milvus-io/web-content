@@ -7,7 +7,7 @@ summary: >-
   Operator
 title: Installare il cluster Milvus con Milvus Operator
 ---
-<h1 id="Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="common-anchor-header">Eseguire Milvus in Kubernetes con Milvus Operator<button data-href="#Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="anchor-icon" translate="no">
+<h1 id="Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="common-anchor-header">Eseguire Milvus su Kubernetes con Milvus Operator<button data-href="#Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -62,8 +62,8 @@ title: Installare il cluster Milvus con Milvus Operator
 NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Verifica <a href="/docs/it/v2.6.x/prerequisite-helm.md">i requisiti hardware e software</a> prima dell’installazione.</p></li>
-<li><p>Prima di installare Milvus, si consiglia di utilizzare lo <a href="https://milvus.io/tools/sizing">strumento Milvus Sizing Tool</a> per stimare i requisiti hardware in base alla dimensione dei dati. Ciò contribuisce a garantire prestazioni ottimali e un'allocazione ottimale delle risorse per l'installazione di Milvus.</p></li>
+<li><p>Verifica <a href="/docs/it/v2.6.x/prerequisite-helm.md">i requisiti hardware e software</a> prima dell'installazione.</p></li>
+<li><p>Prima di installare Milvus, si consiglia di utilizzare lo <a href="https://milvus.io/tools/sizing">strumento di dimensionamento Milvus</a> per stimare i requisiti hardware in base alla dimensione dei dati. Ciò contribuisce a garantire prestazioni ottimali e un'allocazione ottimale delle risorse per l'installazione di Milvus.</p></li>
 </ul>
 <div class="alert note">
 <p>Se si riscontrano problemi durante il download dell’immagine, contattarci all’indirizzo <a href="mailto:community@zilliz.com">community@zilliz.com</a> fornendo i dettagli del problema e forniremo l’assistenza necessaria.</p>
@@ -83,7 +83,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Operator definisce le risorse personalizzate del cluster Milvus basate <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">sulle risorse personalizzate di Kubernetes</a>. Una volta definite le risorse personalizzate, è possibile utilizzare le API di K8s in modo dichiarativo e gestire lo stack di distribuzione di Milvus per garantirne la scalabilità e l’alta disponibilità.</p>
+    </button></h2><p>Milvus Operator definisce le risorse personalizzate del cluster Milvus sulla base <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">delle risorse personalizzate di Kubernetes</a>. Una volta definite le risorse personalizzate, è possibile utilizzare le API di K8s in modo dichiarativo e gestire lo stack di distribuzione di Milvus per garantirne la scalabilità e l’alta disponibilità.</p>
 <div class="filter">
  <a href="#helm">Helm</a>
  <a href="#kubectl"> Kubectl</a>
@@ -177,18 +177,18 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Una volta che il pod di Milvus Operator è in esecuzione, è possibile distribuire un cluster Milvus come segue.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Il comando sopra riportato distribuisce un cluster Milvus con <strong>Woodpecker</strong> come coda di messaggi (consigliato per la versione v2.6.18) e tutti i nuovi componenti architetturali, incluso lo Streaming Node.</p>
+<p>Il comando sopra riportato distribuisce un cluster Milvus con <strong>Woodpecker</strong> come coda dei messaggi (consigliato per la versione v2.6.19) e tutti i nuovi componenti architetturali, incluso lo Streaming Node.</p>
 <p><strong>Caratteristiche principali dell’architettura in questa distribuzione:</strong></p>
 <ul>
 <li><strong>Coda di messaggi</strong>: <a href="/docs/it/v2.6.x/use-woodpecker.md">utilizza Woodpecker</a> (riduce la manutenzione dell’infrastruttura)</li>
 <li><strong>Nodo di streaming</strong>: abilitato per un'elaborazione dei dati potenziata</li>
-<li><strong>Mix Coordinator</strong>: componenti di coordinamento consolidati per una maggiore efficienza</li>
+<li><strong>Mix Coordinator</strong>: componenti del coordinatore consolidati per una maggiore efficienza</li>
 </ul>
 <p>Per personalizzare queste impostazioni, si consiglia di utilizzare lo <a href="https://milvus.io/tools/sizing">strumento di dimensionamento di Milvus</a> per adattare le configurazioni in base alle dimensioni effettive dei dati e quindi scaricare il file YAML corrispondente. Per ulteriori informazioni sui parametri di configurazione, consultare <a href="https://milvus.io/docs/system_configuration.md">la Lista di controllo delle configurazioni di sistema di Milvus</a>.</p>
 <div class="alert note">
 <ul>
 <li>Il nome della versione deve contenere solo lettere, numeri e trattini. I punti non sono consentiti nel nome della versione.</li>
-<li>È inoltre possibile distribuire un'istanza di Milvus in modalità standalone, in cui tutti i suoi componenti sono contenuti in un unico pod. Per farlo, modificare l’URL del file di configurazione nel comando sopra riportato in <code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
+<li>È inoltre possibile distribuire un’istanza di Milvus in modalità standalone, in cui tutti i suoi componenti sono contenuti in un unico pod. A tal fine, modificare l’URL del file di configurazione nel comando sopra riportato in <code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
 </ul>
 </div>
 <h3 id="2-Check-Milvus-cluster-status" class="common-anchor-header">2. Verifica dello stato del cluster Milvus<button data-href="#2-Check-Milvus-cluster-status" class="anchor-icon" translate="no">
@@ -239,7 +239,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
   <span class="hljs-attr">status:</span> <span class="hljs-string">Healthy</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus Operator crea le dipendenze di Milvus, quali etcd, Pulsar e MinIO, e successivamente i componenti di Milvus, quali proxy, coordinatori e nodi.</p>
-<p>Una volta che il cluster Milvus è pronto, lo stato di tutti i pod nel cluster Milvus dovrebbe essere simile al seguente.</p>
+<p>Una volta che il cluster Milvus è pronto, lo stato di tutti i pod nel cluster Milvus dovrebbe essere simile a quello riportato di seguito.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods</span>
 
 NAME                                             READY   STATUS    RESTARTS   AGE
@@ -313,7 +313,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span> \
   --dry-run=client -o yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Per le voci di configurazione applicabili, consultare <a href="/docs/it/v2.6.x/system_configuration.md">Configurazione di sistema</a>.</p></li>
+<p>Per le voci di configurazione applicabili, fare riferimento alla sezione <a href="/docs/it/v2.6.x/system_configuration.md">Configurazione di sistema</a>.</p></li>
 <li><p>Aggiornare le configurazioni.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl patch milvus my-release --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;merge&#x27;</span>\
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span></span> 
@@ -405,11 +405,11 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>Dopo aver installato Milvus in Docker, puoi:</p>
 <ul>
-<li><p>Consultare <a href="/docs/it/v2.6.x/quickstart.md">Hello Milvus</a> per scoprire cosa può fare Milvus.</p></li>
+<li><p>Consultare <a href="/docs/it/v2.6.x/quickstart.md">Hello Milvus</a> per scoprire le funzionalità di Milvus.</p></li>
 <li><p>Imparare le operazioni di base di Milvus:</p>
 <ul>
 <li><a href="/docs/it/v2.6.x/manage_databases.md">Gestire i database</a></li>
-<li><a href="/docs/it/v2.6.x/manage-collections.md">Gestire le raccolte</a></li>
+<li><a href="/docs/it/v2.6.x/manage-collections.md">Gestire le collezioni</a></li>
 <li><a href="/docs/it/v2.6.x/manage-partitions.md">Gestire le partizioni</a></li>
 <li><a href="/docs/it/v2.6.x/insert-update-delete.md">Inserimento, aggiornamento e cancellazione</a></li>
 <li><a href="/docs/it/v2.6.x/single-vector-search.md">Ricerca su singolo vettore</a></li>

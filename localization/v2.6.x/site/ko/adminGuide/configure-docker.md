@@ -2,10 +2,10 @@
 id: configure-docker.md
 label: Docker Compose
 related_key: configure
-summary: Docker Compose로 Milvus를 구성합니다.
-title: Docker Compose로 Milvus 구성하기
+summary: Docker Compose를 사용하여 Milvus를 구성합니다.
+title: Docker Compose를 사용하여 Milvus 구성하기
 ---
-<h1 id="Configure-Milvus-with-Docker-Compose" class="common-anchor-header">Docker Compose로 Milvus 구성하기<button data-href="#Configure-Milvus-with-Docker-Compose" class="anchor-icon" translate="no">
+<h1 id="Configure-Milvus-with-Docker-Compose" class="common-anchor-header">Docker Compose를 사용하여 Milvus 구성하기<button data-href="#Configure-Milvus-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,9 +20,10 @@ title: Docker Compose로 Milvus 구성하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 항목에서는 Docker Compose를 사용하여 Milvus 구성 요소 및 타사 종속성을 구성하는 방법에 대해 설명합니다.</p>
+    </button></h1><p>이 항목에서는 Docker Compose를 사용하여 Milvus 구성 요소 및 타사 종속성을 구성하는 방법을 설명합니다.</p>
 <div class="alert note">
-현재 릴리스에서는 모든 매개변수가 Milvus를 재시작한 후에만 적용됩니다.</div>
+현재 릴리스에서는 모든 매개변수가 Milvus를 재시작한 후에만 적용됩니다.
+</div>
 <h2 id="Download-a-configuration-file" class="common-anchor-header">구성 파일 다운로드<button data-href="#Download-a-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,10 +39,10 @@ title: Docker Compose로 Milvus 구성하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">milvus.yaml</code> 을 직접<a href="https://raw.githubusercontent.com/milvus-io/milvus/v2.6.18/configs/milvus.yaml">다운로드하거나</a> 다음 명령을 사용하여<a href="https://raw.githubusercontent.com/milvus-io/milvus/v2.6.18/configs/milvus.yaml">다운로드합니다</a>.</p>
-<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/v2.6.18/configs/milvus.yaml</span>
+    </button></h2><p><code translate="no">milvus.yaml</code> 를 직접 다운로드하거나 다음 명령어를 사용하여<a href="https://raw.githubusercontent.com/milvus-io/milvus/v2.6.19/configs/milvus.yaml">다운로드하십시오</a>.</p>
+<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/v2.6.19/configs/milvus.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Modify-the-configuration-file" class="common-anchor-header">구성 파일 수정하기<button data-href="#Modify-the-configuration-file" class="anchor-icon" translate="no">
+<h2 id="Modify-the-configuration-file" class="common-anchor-header">구성 파일 수정<button data-href="#Modify-the-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,17 +57,18 @@ title: Docker Compose로 Milvus 구성하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">milvus.yaml</code> 에서 해당 파라미터를 조정하여 애플리케이션 시나리오에 맞게 Milvus 인스턴스를 구성하세요.</p>
-<p>각 매개변수에 대한 자세한 내용은 다음 링크를 참조하세요.</p>
-<p>정렬 기준</p>
+    </button></h2><p><code translate="no">milvus.yaml</code> 에서 해당 매개변수를 조정하여 애플리케이션 시나리오에 맞게 Milvus 인스턴스를 구성하십시오.</p>
+<p>각 매개변수에 대한 자세한 내용은 다음 링크를 참조하십시오.</p>
+<p>정렬 기준:</p>
 <div class="filter">
-<a href="#component">구성 요소 또는 종속성</a> <a href="#purpose">구성 목적</a> </div>
+구성<a href="#component">요소 또는 종속성</a> <a href="#purpose">구성 목적</a> 
+</div>
 <div class="filter-component table-wrapper">
 <table id="component">
 <thead>
   <tr>
-    <th>종속성</th>
-    <th>컴포넌트</th>
+    <th>의존성</th>
+    <th>구성 요소</th>
   </tr>
 </thead>
 <tbody>
@@ -81,9 +83,9 @@ title: Docker Compose로 Milvus 구성하기
     </td>
     <td>
         <ul>
-            <li><a href="/docs/ko/v2.6.x/configure_rootcoord.md">루트 코디</a></li>
+            <li><a href="/docs/ko/v2.6.x/configure_rootcoord.md">루트 코디네이터</a></li>
             <li><a href="/docs/ko/v2.6.x/configure_proxy.md">프록시</a></li>
-            <li><a href="/docs/ko/v2.6.x/configure_querycoord.md">쿼리 좌표</a></li>
+            <li><a href="/docs/ko/v2.6.x/configure_querycoord.md">쿼리 코디네이터</a></li>
             <li><a href="/docs/ko/v2.6.x/configure_querynode.md">쿼리 노드</a></li>
             <li><a href="/docs/ko/v2.6.x/configure_indexnode.md">인덱스 노드</a></li>
             <li><a href="/docs/ko/v2.6.x/configure_datacoord.md">데이터 좌표</a></li>
@@ -94,11 +96,11 @@ title: Docker Compose로 Milvus 구성하기
             <li><a href="/docs/ko/v2.6.x/configure_common.md">공통</a></li>
             <li><a href="/docs/ko/v2.6.x/configure_gpu.md">GPU</a></li>
             <li><a href="/docs/ko/v2.6.x/configure_grpc.md">GRPC</a></li>
-            <li><a href="/docs/ko/v2.6.x/configure_indexcoord.md">인덱스 조정</a></li>
+            <li><a href="/docs/ko/v2.6.x/configure_indexcoord.md">인덱스 좌표</a></li>
             <li><a href="/docs/ko/v2.6.x/configure_metastore.md">메타스토어</a></li>
             <li><a href="/docs/ko/v2.6.x/configure_mq.md">메시지 큐</a></li>
             <li><a href="/docs/ko/v2.6.x/configure_tikv.md">Tikv</a></li>
-            <li><a href="/docs/ko/v2.6.x/configure_trace.md">Trace</a></li>
+            <li><a href="/docs/ko/v2.6.x/configure_trace.md">추적</a></li>
             <li><a href="/docs/ko/v2.6.x/configure_quotaandlimits.md">할당량 및 제한</a></li>
         </ul>
     </td>
@@ -111,7 +113,7 @@ title: Docker Compose로 Milvus 구성하기
 <thead>
   <tr>
     <th>목적</th>
-    <th>매개변수</th>
+    <th>매개 변수</th>
   </tr>
 </thead>
 <tbody>
@@ -210,12 +212,12 @@ title: Docker Compose로 Milvus 구성하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.18/milvus-standalone-docker-compose.yml">스탠드얼론용</a> 설치 파일을 다운로드하고 <code translate="no">docker-compose.yml</code> 에 저장합니다.</p>
-<p>다음 명령을 간단히 실행할 수도 있습니다.</p>
+    </button></h2><p>Milvus <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.19/milvus-standalone-docker-compose.yml">독립 실행형</a>용 설치 파일을 다운로드하여 <code translate="no">docker-compose.yml</code> 로 저장하십시오.</p>
+<p>다음 명령을 실행해도 됩니다.</p>
 <pre><code translate="no"><span class="hljs-meta prompt_"># </span><span class="language-bash">For Milvus standalone</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.18/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.19/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Modify-the-installation-file" class="common-anchor-header">설치 파일 수정하기<button data-href="#Modify-the-installation-file" class="anchor-icon" translate="no">
+<h2 id="Modify-the-installation-file" class="common-anchor-header">설치 파일 수정<button data-href="#Modify-the-installation-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -230,8 +232,8 @@ title: Docker Compose로 Milvus 구성하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">docker-compose.yml</code> 에서 각 <code translate="no">milvus-standalone</code> 아래에 <code translate="no">volumes</code> 섹션을 추가합니다.</p>
-<p><code translate="no">milvus.yaml</code> 파일의 로컬 경로를 모든 <code translate="no">volumes</code> 섹션 아래에 있는 구성 파일 <code translate="no">/milvus/configs/milvus.yaml</code> 의 해당 도커 컨테이너 경로에 매핑합니다.</p>
+    </button></h2><p><code translate="no">docker-compose.yml</code> 파일에서 각 <code translate="no">milvus-standalone</code> 아래에 <code translate="no">volumes</code> 섹션을 추가하십시오.</p>
+<p><code translate="no">milvus.yaml</code> 파일의 로컬 경로를 모든 <code translate="no">volumes</code> 섹션 아래의 <code translate="no">/milvus/configs/milvus.yaml</code> 구성 파일에 해당하는 Docker 컨테이너 경로에 매핑하십시오.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
   <span class="hljs-attr">standalone:</span>
     <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
@@ -252,7 +254,8 @@ title: Docker Compose로 Milvus 구성하기
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-데이터는 <code translate="no">docker-compose.yml</code> 의 기본 구성에 따라 <code translate="no">/volumes</code> 폴더에 저장됩니다. 데이터를 저장할 폴더를 변경하려면 <code translate="no">docker-compose.yml</code> 을 편집하거나 <code translate="no">$ export DOCKER_VOLUME_DIRECTORY=</code> 을 실행합니다.</div>
+데이터는 <code translate="no">docker-compose.yml</code> 의 기본 구성에 따라 <code translate="no">/volumes</code> 폴더에 저장됩니다. 데이터를 저장할 폴더를 변경하려면 <code translate="no">docker-compose.yml</code> 를 편집하거나 <code translate="no">$ export DOCKER_VOLUME_DIRECTORY=</code> 를 실행하십시오.
+</div>
 <h2 id="Start-Milvus" class="common-anchor-header">Milvus 시작<button data-href="#Start-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -268,7 +271,7 @@ title: Docker Compose로 Milvus 구성하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>구성 파일과 설치 파일 수정을 마쳤으면 Milvus를 시작할 수 있습니다.</p>
+    </button></h2><p>구성 파일과 설치 파일 수정을 완료했다면 Milvus를 시작할 수 있습니다.</p>
 <pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
@@ -287,9 +290,10 @@ title: Docker Compose로 Milvus 구성하기
         ></path>
       </svg>
     </button></h2><ul>
-<li>Docker Compose 또는 Helm으로 다음 Milvus 종속성을 관리하는 방법을 알아보세요:<ul>
-<li><a href="/docs/ko/v2.6.x/deploy_s3.md">도커 컴포즈 또는 헬름으로 오브젝트 스토리지 구성하기</a></li>
-<li><a href="/docs/ko/v2.6.x/deploy_etcd.md">도커 컴포즈 또는 헬름으로 메타 스토리지 구성하기</a></li>
-<li><a href="/docs/ko/v2.6.x/deploy_pulsar.md">도커 컴포즈 또는 헬름으로 메시지 스토리지 구성하기</a></li>
+<li>Docker Compose 또는 Helm을 사용하여 다음 Milvus 종속성을 관리하는 방법을 알아보세요:
+<ul>
+<li><a href="/docs/ko/v2.6.x/deploy_s3.md">Docker Compose 또는 Helm을 사용하여 오브젝트 스토리지 구성</a></li>
+<li><a href="/docs/ko/v2.6.x/deploy_etcd.md">Docker Compose 또는 Helm을 사용하여 메타 스토리지 구성</a></li>
+<li><a href="/docs/ko/v2.6.x/deploy_pulsar.md">Docker Compose 또는 Helm을 사용하여 메시지 스토리지 구성</a></li>
 </ul></li>
 </ul>

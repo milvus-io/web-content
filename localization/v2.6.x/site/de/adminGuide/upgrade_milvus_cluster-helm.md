@@ -25,7 +25,7 @@ title: Milvus-Cluster mit Helm-Chart aktualisieren
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In dieser Anleitung wird beschrieben, wie Sie Ihren Milvus-Cluster mithilfe eines Helm-Charts von Version 2.5.x auf Version 2.6.18 aktualisieren können.</p>
+    </button></h1><p>In dieser Anleitung wird beschrieben, wie Sie Ihren Milvus-Cluster mithilfe eines Helm-Charts von Version 2.5.x auf Version 2.6.19 aktualisieren.</p>
 <h2 id="Before-you-start" class="common-anchor-header">Bevor Sie beginnen<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +41,7 @@ title: Milvus-Cluster mit Helm-Chart aktualisieren
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-new-in-v2618" class="common-anchor-header">Neuerungen in Version 2.6.18<button data-href="#Whats-new-in-v2618" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Whats-new-in-v2619" class="common-anchor-header">Neuerungen in Version 2.6.19<button data-href="#Whats-new-in-v2619" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,7 +56,7 @@ title: Milvus-Cluster mit Helm-Chart aktualisieren
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Das Upgrade von Milvus 2.5.x auf 2.6.18 bringt erhebliche architektonische Änderungen mit sich:</p>
+    </button></h3><p>Das Upgrade von Milvus 2.5.x auf 2.6.19 bringt erhebliche architektonische Änderungen mit sich:</p>
 <ul>
 <li><strong>Konsolidierung der Koordinatoren</strong>: Die bisher separaten Koordinatoren (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) wurden zu einem einzigen zusammengefasst <code translate="no">mixCoord</code></li>
 <li><strong>Neue Komponenten</strong>: Einführung des Streaming-Knotens für eine verbesserte Datenverarbeitung</li>
@@ -86,11 +86,11 @@ title: Milvus-Cluster mit Helm-Chart aktualisieren
 </ul>
 <p><strong>Kompatibilitätsanforderungen:</strong></p>
 <ul>
-<li>Milvus v2.6.0-rc1 ist <strong>nicht</strong> mit v2.6.18 <strong>kompatibel</strong>. Direkte Upgrades von Release-Kandidaten werden nicht unterstützt.</li>
+<li>Milvus v2.6.0-rc1 ist <strong>nicht</strong> mit v2.6.19 <strong>kompatibel</strong>. Direkte Upgrades von Release-Kandidaten werden nicht unterstützt.</li>
 <li>Wenn Sie derzeit v2.6.0-rc1 verwenden und Ihre Daten erhalten möchten, finden Sie in <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">diesem Community-Leitfaden</a> Hilfe zur Migration.</li>
-<li>Sie <strong>müssen</strong> vor dem Upgrade auf v2.6.18 ein Upgrade auf v2.5.16 oder höher durchführen, wobei „ <code translate="no">mixCoordinator</code> “ aktiviert sein muss.</li>
+<li>Sie <strong>müssen</strong> vor dem Upgrade auf v2.6.19 ein Upgrade auf v2.5.16 oder höher durchführen, wobei „ <code translate="no">mixCoordinator</code> “ aktiviert sein muss.</li>
 </ul>
-<p><strong>Einschränkungen bei den Nachrichtenwarteschlangen</strong>: Beim Upgrade auf Milvus v2.6.18 müssen Sie Ihre derzeitige Auswahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</p>
+<p><strong>Einschränkungen bei den Nachrichtenwarteschlangen</strong>: Beim Upgrade auf Milvus v2.6.19 müssen Sie Ihre derzeitige Auswahl an Nachrichtenwarteschlangen beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel von Nachrichtenwarteschlangensystemen wird in zukünftigen Versionen verfügbar sein.</p>
 <div class="alert note">
 Seit der Milvus-Helm-Chart-Version 4.2.21 haben wir das Chart „pulsar-v3.x“ als Abhängigkeit eingeführt. Aus Gründen der Abwärtskompatibilität aktualisieren Sie bitte Ihr Helm auf Version 3.14 oder höher und stellen Sie sicher, dass Sie die Option „ <code translate="no">--reset-then-reuse-values</code> “ hinzufügen, wann immer Sie „ <code translate="no">helm upgrade</code> “ verwenden.
 </div>
@@ -176,7 +176,7 @@ Das Milvus-Helm-Charts-Repo unter <code translate="no">https://milvus-io.github.
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Upgrade-to-v2618" class="common-anchor-header">Schritt 3: Aktualisieren Sie auf Version 2.6.18<button data-href="#Step-3-Upgrade-to-v2618" class="anchor-icon" translate="no">
+<h3 id="Step-3-Upgrade-to-v2619" class="common-anchor-header">Schritt 3: Aktualisieren Sie auf Version 2.6.19<button data-href="#Step-3-Upgrade-to-v2619" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -191,9 +191,9 @@ kubectl get pods
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Sobald v2.5.16 erfolgreich mit <code translate="no">mixCoordinator</code> läuft, führen Sie ein Upgrade auf v2.6.18 durch:</p>
+    </button></h3><p>Sobald v2.5.16 erfolgreich mit <code translate="no">mixCoordinator</code> läuft, führen Sie ein Upgrade auf v2.6.19 durch:</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.6.18&quot;</span> \
+  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.6.19&quot;</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span> \
   --reset-then-reuse-values \

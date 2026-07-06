@@ -22,7 +22,7 @@ title: Milvus Python SDK 설치
       </svg>
     </button></h1><p>이 문서에서는 Milvus용 Python SDK인 pymilvus를 설치하는 방법을 설명합니다.</p>
 <p>현재 버전의 Milvus는 Python, Node.js, Go 및 Java용 SDK를 지원합니다.</p>
-<h2 id="Requirements" class="common-anchor-header">필수 사항<button data-href="#Requirements" class="anchor-icon" translate="no">
+<h2 id="Requirements" class="common-anchor-header">필수 조건<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,7 +61,7 @@ title: Milvus Python SDK 설치
 <div class="alert note">
 설치한 Milvus 서버의 버전과 일치하는 PyMilvus 버전을 설치하는 것이 좋습니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/release_notes.md">릴리스 노트를</a> 참조하십시오.
 </div>
-<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.6</span>.<span class="hljs-number">15</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.6</span>.<span class="hljs-number">16</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">설치 확인<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -98,7 +98,7 @@ title: Milvus Python SDK 설치
       </svg>
     </button></h2><p>PyMilvus를 설치한 후에는 다음을 수행할 수 있습니다:</p>
 <ul>
-<li><p>Milvus의 기본 작동 방식을 익힐 수 있습니다:</p>
+<li><p>Milvus의 기본 작동 방식을 익히기:</p>
 <ul>
 <li><a href="/docs/ko/v2.6.x/manage-collections.md">컬렉션 관리</a></li>
 <li><a href="/docs/ko/v2.6.x/manage-partitions.md">파티션 관리</a></li>
