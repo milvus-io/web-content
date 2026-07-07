@@ -84,6 +84,12 @@ Milvus supports the following model service providers for reranking, each with d
      <td><ul><li><p>Advanced document chunking with configurable overlap</p></li><li><p>Chunk-based scoring (highest-scoring chunk represents document)</p></li><li><p>Support for diverse reranking models</p></li><li><p>Cost-effective with standard and pro model variants</p></li></ul></td>
      <td><p>Technical documentation search system processing lengthy manuals and papers that need intelligent segmentation and overlap control</p></td>
    </tr>
+   <tr>
+     <td><p>DashScope</p></td>
+     <td><p>Applications using Alibaba Cloud or Qwen reranking models</p></td>
+     <td><ul><li><p>Managed DashScope reranking API</p></li><li><p>Supports reranking models such as <code>gte-rerank-v2</code></p></li><li><p>API-key based authentication</p></li></ul></td>
+     <td><p>RAG applications that want to rerank candidates with Alibaba Cloud-hosted reranking models</p></td>
+   </tr>
 </table>
 
 For detailed information about implementation of each model service, refer to the dedicated documentation:
@@ -97,6 +103,8 @@ For detailed information about implementation of each model service, refer to th
 - [Voyage AI Ranker](voyage-ai-ranker.md)
 
 - [SiliconFlow Ranker](siliconflow-ranker.md)
+
+- [DashScope Ranker](dashscope-ranker.md)
 
 ## Implementation
 

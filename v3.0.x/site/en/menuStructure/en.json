@@ -1301,6 +1301,12 @@
                 "id": "google-gemini.md",
                 "order": 10,
                 "children": []
+              },
+              {
+                "label": "Yandex Cloud",
+                "id": "yandex-cloud.md",
+                "order": 11,
+                "children": []
               }
             ]
           },
@@ -1412,6 +1418,12 @@
                     "label": "SiliconFlow Ranker",
                     "id": "siliconflow-ranker.md",
                     "order": 5,
+                    "children": []
+                  },
+                  {
+                    "label": "DashScope Ranker",
+                    "id": "dashscope-ranker.md",
+                    "order": 6,
                     "children": []
                   }
                 ]
