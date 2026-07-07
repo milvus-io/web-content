@@ -23,7 +23,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>قم بإدراج البيانات في حقل StructArray عندما تحتوي كل كيان على قائمة مرتبة من العناصر المنظمة. في حمولة الإدراج، يتم تمثيل حقل StructArray كمصفوفة من الكائنات. يمثل كل كائن عنصر Struct واحدًا ويستخدم أسماء الحقول الفرعية لـ Struct المحددة في مخطط المجموعة.</p>
-<p>تستخدم هذه الصفحة مجموعة « <code translate="no">tech_articles</code> » من <a href="/docs/ar/create-structarray-field.md">«إنشاء حقل StructArray</a>». كل كيان يمثل مقالًا تقنيًا، ويخزن حقل « <code translate="no">chunks</code> » أجزاء المقال كعناصر Struct.</p>
+<p>تستخدم هذه الصفحة مجموعة « <code translate="no">tech_articles</code> » من <a href="/docs/ar/create-structarray-field.md">«إنشاء حقل StructArray</a>». كل كيان هو مقال تقني، ويخزن حقل « <code translate="no">chunks</code> » أجزاء المقال كعناصر Struct.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">قبل البدء<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -306,7 +306,7 @@ result = client.insert(
 <tr><td>استخدم أسماء الحقول الفرعية داخل كل عنصر Struct.</td><td>أدخل <code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> داخل <code translate="no">chunks</code> ، وليس <code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code>.</td></tr>
 <tr><td>تأكد من مطابقة مخطط Struct.</td><td>يجب أن يستخدم كل عنصر Struct الحقول الفرعية المحددة في مخطط Struct.</td></tr>
 <tr><td>تطابق أبعاد المتجهات.</td><td>يجب أن تتطابق قيم المتجهات مع <code translate="no">dim</code> المُعدة لحقولها الفرعية المتجهة.</td></tr>
-<tr><td>يجب مراعاة " <code translate="no">max_capacity</code>".</td><td>يجب ألا يتجاوز عدد عناصر Struct في كيان واحد الحد الأقصى المسموح به ( <code translate="no">max_capacity</code> ) لحقل StructArray.</td></tr>
+<tr><td>يجب مراعاة " <code translate="no">max_capacity</code>".</td><td>يجب ألا يتجاوز عدد عناصر Struct في كيان واحد الحد الأقصى المسمى ( <code translate="no">max_capacity</code> ) لحقل StructArray.</td></tr>
 <tr><td>استخدم حقول فرعية متجهة منفصلة لأوضاع البحث المنفصلة.</td><td>إذا كان كل من البحث في EmbeddingList والبحث على مستوى العنصر مطلوبين، فاكتب قيم المتجهات في كل من الحقول الفرعية للمتجهات.</td></tr>
 <tr><td>استخدم <code translate="no">null</code> فقط عندما يكون الحقل قابلاً للقيمة الفارغة.</td><td>تتطلب حقول StructArray غير القابلة للقيمة الفارغة قيم StructArray صالحة.</td></tr>
 </tbody>
@@ -331,7 +331,7 @@ result = client.insert(
 <li><p>إغفال الحقول الفرعية المطلوبة من عنصر Struct.</p></li>
 <li><p>إدراج متجهات ذات أبعاد خاطئة.</p></li>
 <li><p>إدراج عناصر Struct أكثر مما يسمح به <code translate="no">max_capacity</code>.</p></li>
-<li><p>تعيين حقل فرعي واحد فقط على <code translate="no">null</code> بينما تكون الحقول الفرعية الأخرى في نفس قيمة StructArray صالحة.</p></li>
+<li><p>تعيين حقل فرعي واحد فقط إلى <code translate="no">null</code> بينما تكون الحقول الفرعية الأخرى في نفس قيمة StructArray صالحة.</p></li>
 <li><p>كتابة المتجهات إلى <code translate="no">emb_list_vector</code> فقط ثم محاولة إجراء بحث على مستوى العناصر في <code translate="no">chunks[emb]</code>.</p></li>
 <li><p>كتابة المتجهات إلى <code translate="no">emb</code> فقط ثم محاولة إجراء بحث EmbeddingList على <code translate="no">chunks[emb_list_vector]</code>.</p></li>
 </ul>
@@ -353,5 +353,5 @@ result = client.insert(
     </button></h2><ol>
 <li><p>لإنشاء فهارس لـ <code translate="no">chunks[emb_list_vector]</code> و <code translate="no">chunks[emb]</code> والحقول الفرعية القياسية، اقرأ <a href="/docs/ar/index-structarray-fields.md">«فهرسة حقول StructArray</a>».</p></li>
 <li><p>للبحث في الحقول الفرعية المتجهة لـ StructArray، اقرأ "البحث المتجه الأساسي باستخدام StructArray".</p></li>
-<li><p>لمراجعة سلوك القيم القابلة للصفر والقيود الخاصة بالإصدار، اقرأ " <a href="/docs/ar/structarray-limits.md">حدود StructArray</a>".</p></li>
+<li><p>لمراجعة سلوك القيم القابلة للصفر والقيود الخاصة بالإصدارات، اقرأ " <a href="/docs/ar/structarray-limits.md">حدود StructArray</a>".</p></li>
 </ol>

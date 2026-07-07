@@ -56,7 +56,7 @@ beta: Milvus 3.0.0+
      <td><p><code translate="no">stop_words</code></p></td>
      <td><p><code translate="no">list[str]</code></p></td>
      <td><p><code translate="no">_arabic_</code></p></td>
-     <td><p>Liste des mots vides supplémentaires à exclure de la tokenisation. Par défaut, l'analyseur « <code translate="no">arabic</code> » utilise le dictionnaire intégré « <code translate="no">_arabic_</code> ». Pour consulter le dictionnaire par défaut, reportez-vous à la <a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/arabic.txt">liste des mots vides en arabe</a> de Milvus. Cette liste provient du <a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/ar/stopwords.txt">fichier de mots vides en arabe</a> d'Apache Lucene.</p></td>
+     <td><p>Liste des mots vides supplémentaires à exclure de la tokenisation. Par défaut, l’analyseur « <code translate="no">arabic</code> » utilise le dictionnaire intégré « <code translate="no">_arabic_</code> ». Pour consulter le dictionnaire par défaut, reportez-vous à la <a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/arabic.txt">liste des mots vides en arabe</a> de Milvus. Cette liste provient du <a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/ar/stopwords.txt">fichier de mots vides en arabe</a> d’Apache Lucene.</p></td>
    </tr>
 </table>
 <p>Pour ajouter des mots vides personnalisés, incluez <code translate="no">stop_words</code>:</p>

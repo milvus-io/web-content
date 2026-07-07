@@ -26,4 +26,4 @@ summary: >-
 <li><strong><a href="/docs/ru/object-storage.md">Объектное хранилище</a></strong> — Milvus хранит индексные файлы и двоичные журналы в MinIO, AWS S3 или других S3-совместимых облачных объектных хранилищах.</li>
 <li><strong><a href="/docs/ru/mqtype-overview.md">Очередь сообщений</a></strong> — Milvus использует журнал предварительной записи (WAL): Woodpecker (по умолчанию), Pulsar, Kafka или RocksMQ.</li>
 </ul>
-<p>По умолчанию новое развертывание Milvus 3.x работает с <strong>Woodpecker</strong> в качестве очереди сообщений, <strong>etcd</strong> — для метаданных и <strong>MinIO</strong> — для объектного хранилища; дополнительная инфраструктура обмена сообщениями не требуется.</p>
+<p>По умолчанию новое развертывание Milvus 3.x работает с <strong>Woodpecker</strong> в качестве очереди сообщений, <strong>etcd</strong> для метаданных и <strong>MinIO</strong> для объектного хранилища — дополнительная инфраструктура обмена сообщениями не требуется.</p>

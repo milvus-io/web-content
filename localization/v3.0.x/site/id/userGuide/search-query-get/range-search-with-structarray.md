@@ -51,7 +51,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Jika Anda hanya memerlukan elemen Struct terdekat, mulailah dengan <a href="/docs/id/basic-vector-search-with-structarray.md">Pencarian Vektor Dasar menggunakan StructArray</a>. Gunakan pencarian rentang ketika hasil harus memenuhi batas skor atau jarak, bukan hanya peringkat top-K.</p>
+<p>Jika Anda hanya memerlukan elemen Struct terdekat, mulailah dengan <a href="/docs/id/basic-vector-search-with-structarray.md">Pencarian Vektor Dasar dengan StructArray</a>. Gunakan pencarian rentang ketika hasilnya harus memenuhi batas skor atau jarak, bukan hanya peringkat top-K.</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">Sebelum Anda mulai<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -77,7 +77,7 @@ summary: >-
 <tr><td>Bidang StructArray</td><td>Koleksi tersebut berisi bidang StructArray seperti <code translate="no">chunks</code>.</td></tr>
 <tr><td>Subbidang vektor tingkat elemen</td><td>Subbidang vektor yang dituju adalah <code translate="no">chunks[emb]</code>, bukan <code translate="no">chunks[emb_list_vector]</code>.</td></tr>
 <tr><td>Metrik indeks</td><td>Subbidang vektor diindeks dengan metrik vektor reguler, seperti <code translate="no">COSINE</code>, <code translate="no">IP</code>, atau <code translate="no">L2</code>.</td></tr>
-<tr><td>Data kueri</td><td>Kueri adalah vektor biasa, bukan <code translate="no">EmbeddingList</code>.</td></tr>
+<tr><td>Data kueri</td><td>Kueri berupa vektor biasa, bukan <code translate="no">EmbeddingList</code>.</td></tr>
 </tbody>
 </table>
 <p>Untuk pengaturan indeks, lihat <a href="/docs/id/index-structarray-fields.md">Bidang StructArray Indeks</a>.</p>
@@ -304,7 +304,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Jangan gunakan kueri " <code translate="no">EmbeddingList</code> " atau metrik " <code translate="no">MAX_SIM*</code> " untuk pencarian rentang pada subbidang vektor StructArray. Pencarian tingkat EmbeddingList tidak mendukung pencarian rentang.</p></li>
+<li><p>Jangan gunakan kueri ` <code translate="no">EmbeddingList</code> ` atau metrik ` <code translate="no">MAX_SIM*</code> ` untuk pencarian rentang pada subbidang vektor StructArray. Pencarian tingkat EmbeddingList tidak mendukung pencarian rentang.</p></li>
 <li><p>Jangan menggabungkan pencarian rentang dengan pencarian pengelompokan. Jika Anda memerlukan satu hasil per entitas induk, jalankan pencarian tingkat elemen tanpa parameter rentang dan gunakan pengelompokan jika didukung.</p></li>
 <li><p>Pencarian rentang hibrida didukung untuk bidang vektor tingkat elemen StructArray. Fitur ini tidak didukung untuk permintaan StructArray tingkat EmbeddingList.</p></li>
 </ul>

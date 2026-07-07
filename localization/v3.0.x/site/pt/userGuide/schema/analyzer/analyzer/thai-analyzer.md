@@ -22,7 +22,7 @@ beta: Milvus 3.0.0+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>O analisador « <code translate="no">thai</code> » é um analisador integrado para texto em tailandês. Utilize este analisador quando precisar que o Milvus segmente texto em tailandês em palavras, normalize algarismos tailandeses, converta texto misto em alfabeto latino para minúsculas e remova palavras vazias em tailandês.</p>
+    </button></h1><p>O analisador <code translate="no">thai</code> é um analisador integrado para texto em tailandês. Utilize este analisador quando precisar que o Milvus segmente texto em tailandês em palavras, normalize algarismos tailandeses, converta texto misto em latim para minúsculas e remova palavras vazias em tailandês.</p>
 <h2 id="Configuration" class="common-anchor-header">Configuração<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -59,7 +59,7 @@ beta: Milvus 3.0.0+
      <td><p>Uma lista de palavras de exclusão adicionais a remover da tokenização. Por predefinição, o analisador <code translate="no">thai</code> utiliza o dicionário integrado « <code translate="no">_thai_</code> ». Para consultar o dicionário predefinido, consulte a <a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/thai.txt">lista de palavras de exclusão</a> do Milvus <a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/thai.txt">Thai</a>. A lista provém do <a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/th/stopwords.txt">ficheiro de palavras de exclusão</a> do Apache Lucene <a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/th/stopwords.txt">Thai</a>.</p></td>
    </tr>
 </table>
-<p>Para adicionar palavras de exclusão personalizadas, inclua <code translate="no">stop_words</code>:</p>
+<p>Para adicionar palavras de paragem personalizadas, inclua <code translate="no">stop_words</code>:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;thai&quot;</span>,
     <span class="hljs-string">&quot;stop_words&quot;</span>: [<span class="hljs-string">&quot;มิลวัส&quot;</span>],
@@ -87,7 +87,7 @@ beta: Milvus 3.0.0+
 <li><strong>Remoção de palavras vazias</strong>: utiliza o filtro « <code translate="no">stop</code> » com o dicionário integrado « <code translate="no">_thai_</code> ».</li>
 <li><strong>Sem stemming</strong>: O analisador « <code translate="no">thai</code> » integrado não aplica o filtro « <code translate="no">stemmer</code> ».</li>
 </ul>
-<p>Após definir o <code translate="no">analyzer_params</code>, pode aplicar o analisador a um campo <code translate="no">VARCHAR</code> ao definir um esquema de coleção. Para mais detalhes, consulte o <a href="/docs/pt/analyzer-overview.md#Example-use">Exemplo de utilização</a>.</p>
+<p>Após definir o <code translate="no">analyzer_params</code>, pode aplicar o analisador a um campo <code translate="no">VARCHAR</code> ao definir um esquema de coleção. Para mais detalhes, consulte <a href="/docs/pt/analyzer-overview.md#Example-use">Exemplo</a> de <a href="/docs/pt/analyzer-overview.md#Example-use">utilização</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Exemplos<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

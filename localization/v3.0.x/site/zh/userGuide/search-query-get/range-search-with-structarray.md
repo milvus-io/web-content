@@ -43,7 +43,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>EmbeddingList 搜索</td><td>不支持。</td><td>不适用。</td></tr>
-<tr><td>元素级搜索</td><td>使用常规向量查询，配合 `<code translate="no">radius</code> ` 以及可选的 `<code translate="no">range_filter</code>`。</td><td>结构元素级别。</td></tr>
+<tr><td>元素级搜索</td><td>使用常规向量查询，配合 `<code translate="no">radius</code> ` 以及（可选）`<code translate="no">range_filter</code>`。</td><td>结构元素级别。</td></tr>
 <tr><td>混合搜索</td><td>当 StructArray 请求针对元素级向量字段时支持。EmbeddingList 级请求不支持范围搜索。</td><td>先进行元素级子搜索，然后进行混合重新排序。</td></tr>
 </tbody>
 </table>
@@ -72,7 +72,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>StructArray 字段</td><td>Collection 包含一个 StructArray 字段，例如<code translate="no">chunks</code> 。</td></tr>
-<tr><td>元素级向量子字段</td><td>目标量子向量是<code translate="no">chunks[emb]</code> ，而不是<code translate="no">chunks[emb_list_vector]</code> 。</td></tr>
+<tr><td>元素级向量量子字段</td><td>目标量子向量是<code translate="no">chunks[emb]</code> ，而不是<code translate="no">chunks[emb_list_vector]</code> 。</td></tr>
 <tr><td>索引度量</td><td>该向量子场采用常规向量度量进行索引，例如<code translate="no">COSINE</code> 、<code translate="no">IP</code> 或<code translate="no">L2</code> 。</td></tr>
 <tr><td>查询数据</td><td>查询对象是一个常规向量，而非<code translate="no">EmbeddingList</code> 。</td></tr>
 </tbody>
@@ -119,7 +119,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下示例搜索那些其<code translate="no">chunks[emb]</code> 向量与查询向量足够相似的单个片段。每个匹配结果代表一个匹配的Struct元素。</p>
+    </button></h2><p>以下示例搜索那些其<code translate="no">chunks[emb]</code> 向量与查询向量足够相似的单个片段。每个匹配结果都代表一个匹配的Struct元素。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -321,10 +321,10 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>对<code translate="no">chunks[emb_list_vector]</code> 执行范围搜索，而该指标本应用于EmbeddingList搜索。</p></li>
+<li><p>对<code translate="no">chunks[emb_list_vector]</code> 执行范围搜索，而该指标专用于EmbeddingList搜索。</p></li>
 <li><p>在元素级范围搜索中使用<code translate="no">MAX_SIM_COSINE</code> ，而非常规指标（如<code translate="no">COSINE</code> ）。</p></li>
 <li><p>使用<code translate="no">EmbeddingList</code> 查询代替常规向量查询。</p></li>
-<li><p>期望范围搜索结果按父实体唯一。范围搜索会返回匹配的 Struct 元素命中结果。</p></li>
+<li><p>期望范围搜索结果按父实体唯一。范围搜索会返回匹配的 Struct 元素命中项。</p></li>
 <li><p>使用 `<code translate="no">chunks.emb</code> ` 代替必需的子字段路径语法 `<code translate="no">chunks[emb]</code>`。</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">后续步骤<button data-href="#Next-steps" class="anchor-icon" translate="no">

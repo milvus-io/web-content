@@ -38,7 +38,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li>Di Milvus 3.x, Woodpecker adalah WAL/antrian pesan <strong>bawaan</strong>, yang menyediakan penulisan terurut dan pemulihan sebagai layanan pencatatan. Tidak diperlukan layanan antrian pesan eksternal (seperti Pulsar atau Kafka).</li>
+<li>Di Milvus 3.x, Woodpecker adalah WAL/antrian pesan <strong>default</strong>, yang menyediakan penulisan terurut dan pemulihan sebagai layanan pencatatan. Tidak diperlukan layanan antrian pesan eksternal (seperti Pulsar atau Kafka).</li>
 <li>Woodpecker dapat dijalankan <strong>secara tertanam</strong> di dalam node Milvus/streaming (default), atau sebagai <strong>layanan khusus</strong> dengan pod-nya sendiri (hanya untuk distribusi/kluster).</li>
 <li>Woodpecker mendukung tiga mode penyimpanan ( <code translate="no">storage.type</code> ): penyimpanan objek (<code translate="no">minio</code>, default), sistem file lokal (<code translate="no">local</code>), dan penyimpanan khusus ( <code translate="no">service</code>). Lihat <a href="#Deployment-modes">Mode Deployment</a>.</li>
 </ul>
@@ -382,14 +382,14 @@ docker restart milvus-standalone
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Ini akan mengimplementasikan Woodpecker sebagai StatefulSet khusus (<code translate="no">my-release-milvus-woodpecker</code>, 4 replika secara default) yang didukung oleh layanan headless, terkluster melalui gossip pada port <code translate="no">18080</code> (layanan), <code translate="no">17946</code> (gossip), dan <code translate="no">9091</code> (metrik), dengan MinIO sebagai backend penyimpanannya. Layanan ini memerlukan kuorum sebanyak <strong>3</strong> node; pengaturan default <strong>4</strong> replika memastikan kuorum tetap terpenuhi sekaligus menoleransi kegagalan satu node, jadi jangan atur ` <code translate="no">woodpecker.replicaCount</code> ` di bawah 3. Kluster tersebut kemudian mencakup sekumpulan pod ` <code translate="no">woodpecker</code> ` terpisah:</p>
+<p>Ini akan mengimplementasikan Woodpecker sebagai StatefulSet khusus (<code translate="no">my-release-milvus-woodpecker</code>, 4 replika secara default) yang didukung oleh layanan headless, terkluster melalui gossip pada port <code translate="no">18080</code> (layanan), <code translate="no">17946</code> (gossip), dan <code translate="no">9091</code> (metrik), dengan MinIO sebagai backend penyimpanannya. Layanan ini memerlukan kuorum sebanyak <strong>3</strong> node; pengaturan default <strong>4</strong> replika menjaga kuorum sekaligus mentoleransi kegagalan satu node, jadi jangan atur ` <code translate="no">woodpecker.replicaCount</code> ` di bawah 3. Kluster tersebut kemudian mencakup sekumpulan pod ` <code translate="no">woodpecker</code> ` terpisah:</p>
 <pre><code translate="no"><span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">0</span>
 <span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">1</span>
 <span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">2</span>
 <span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">3</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Mode layanan Woodpecker ( <code translate="no">service</code> ) hanya untuk deployment <strong>terdistribusi/kluster</strong> — deployment standalone menjalankan Woodpecker yang tertanam (<code translate="no">minio</code> atau <code translate="no">local</code>). Milvus Operator belum mendukung mode layanan Woodpecker.</p>
+<p>Mode layanan Woodpecker ( <code translate="no">service</code> ) hanya untuk deployment <strong>terdistribusi/kluster</strong> — deployment mandiri menjalankan Woodpecker yang tertanam (<code translate="no">minio</code> atau <code translate="no">local</code>). Milvus Operator belum mendukung mode layanan Woodpecker.</p>
 </div>
 <h2 id="Throughput-tuning-tips" class="common-anchor-header">Tips penyetelan throughput<button data-href="#Throughput-tuning-tips" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -530,7 +530,7 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Woodpecker adalah WAL cloud-native yang dirancang untuk penyimpanan objek dengan kompromi antara throughput, biaya, dan latensi. Mode tertanam yang ringan memprioritaskan optimasi biaya dan throughput, karena sebagian besar skenario hanya memerlukan data ditulis dalam waktu tertentu daripada menuntut latensi rendah untuk permintaan penulisan individu. Oleh karena itu, Woodpecker menerapkan penulisan berbatch, dengan interval default 10 ms untuk backend penyimpanan sistem berkas lokal dan 200 ms untuk backend penyimpanan sejenis MinIO. Selama operasi penulisan yang lambat, latensi maksimum sama dengan waktu interval ditambah waktu flush.</p>
+    </button></h3><p>Woodpecker adalah WAL cloud-native yang dirancang untuk penyimpanan objek dengan pertimbangan antara throughput, biaya, dan latensi. Mode tertanam yang ringan memprioritaskan optimasi biaya dan throughput, karena sebagian besar skenario hanya memerlukan data ditulis dalam waktu tertentu daripada menuntut latensi rendah untuk setiap permintaan penulisan. Oleh karena itu, Woodpecker menerapkan penulisan berbatch, dengan interval default 10 ms untuk backend penyimpanan sistem berkas lokal dan 200 ms untuk backend penyimpanan sejenis MinIO. Selama operasi penulisan yang lambat, latensi maksimum sama dengan waktu interval ditambah waktu flush.</p>
 <p>Perlu dicatat bahwa penyisipan batch dipicu tidak hanya oleh interval waktu tetapi juga oleh ukuran batch, yang secara default sebesar 2MB.</p>
 <h3 id="Service-mode-Milvus-30+" class="common-anchor-header">Mode Layanan (Milvus 3.0+)<button data-href="#Service-mode-Milvus-30+" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -550,7 +550,7 @@ batch_count = <span class="hljs-number">2000</span>
     </button></h3><p>Mode layanan menghadirkan <strong>latensi penulisan tingkat milidetik</strong> — setara dengan WAL disk lokal tiga replika tradisional — sambil menjaga biaya tetap rendah. Dalam penerapan tiga replika lintas AZ yang umum, latensi penulisan tetap berada dalam kisaran milidetik. Hal ini dicapai melalui:</p>
 <ul>
 <li><strong>Penulisan kuorum satu RTT</strong> — replikasi yang digerakkan klien menyelesaikan penulisan kuorum dalam satu putaran perjalanan (round trip), dengan lalu lintas lintas-AZ dibatasi pada data setara dua replika (dibandingkan dengan lalu lintas lintas-AZ tambahan sekitar 1/3 yang umum pada replikasi berbasis broker/leader).</li>
-<li><strong>Pembacaan satu lompatan yang sadar topologi</strong> — setiap pembacaan langsung menuju replika terdekat alih-alih diteruskan melalui broker, sehingga menghindari pembacaan lintas AZ acak (≈2/3 lalu lintas pembacaan lintas AZ) yang umum terjadi pada sistem berbasis broker.</li>
+<li><strong>Pembacaan satu lompatan yang sadar topologi</strong> — setiap pembacaan langsung menuju replika terdekat alih-alih diteruskan melalui broker, sehingga menghindari pembacaan lintas-AZ acak (≈2/3 lalu lintas pembacaan lintas-AZ) yang umum terjadi pada sistem berbasis broker.</li>
 <li><strong>Unggahan langsung ke penyimpanan objek setelah penggantian segmen</strong> — setiap segmen melacak siklus hidupnya secara penuh dan diunggah ke penyimpanan objek segera setelah diganti, sehingga menjaga penggunaan ruang disk lokal dan biaya penyimpanan tetap rendah tanpa mengorbankan latensi.</li>
 <li><strong>Tidak ada replikasi node-ke-node yang berkelanjutan</strong> — log disimpan ke penyimpanan objek yang berfungsi sebagai penyimpanan bersama, sehingga failover hanya mengunggah ulang replika yang masih berfungsi (tanpa menyalin seluruh node), penskalaan tidak dibatasi oleh bandwidth replikasi antar-node, dan penggantian node skala besar tidak menyebabkan badai replikasi.</li>
 </ul>

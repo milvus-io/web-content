@@ -80,7 +80,7 @@ summary: >-
 <tr><td>Alle Elemente teilen sich ein gemeinsames Schema.</td><td>Jedes „Struct“-Element in einem „StructArray“-Feld folgt derselben Unterfeldliste und denselben Unterfelddatentypen.</td></tr>
 <tr><td><code translate="no">max_capacity</code> ist erforderlich.</td><td>Die Anzahl der Struct-Elemente in einer Entität darf die für das StructArray-Feld konfigurierte „ <code translate="no">max_capacity</code> “ nicht überschreiten.</td></tr>
 <tr><td>Vorhandene Unterfelder sind fest vorgegeben.</td><td>Sie können einem bestehenden StructArray-Feld keine neuen Unterfelder anhängen. Um das Unterfeldschema zu ändern, löschen Sie das StructArray-Feld und fügen Sie es mit dem aktualisierten Schema erneut hinzu.</td></tr>
-<tr><td>Verschachtelte StructArray-Felder werden nicht unterstützt.</td><td>Ein „StructArray“-Feld darf keine verschachtelten „ <code translate="no">Array</code> “- „ <code translate="no">ArrayOfVector</code> “- „ <code translate="no">Struct</code> “- oder „ <code translate="no">ArrayOfStruct</code> “-Unterfelder enthalten.</td></tr>
+<tr><td>Verschachtelte StructArrays werden nicht unterstützt.</td><td>Ein „StructArray“-Feld darf keine verschachtelten „ <code translate="no">Array</code> “- „ <code translate="no">ArrayOfVector</code> “- „ <code translate="no">Struct</code> “- oder „ <code translate="no">ArrayOfStruct</code> “-Unterfelder enthalten.</td></tr>
 <tr><td>Funktionen werden innerhalb von „StructArray“ nicht unterstützt.</td><td>Definieren Sie keine Feldfunktionen für „StructArray“-Felder oder deren Unterfelder.</td></tr>
 </tbody>
 </table>
@@ -147,7 +147,7 @@ summary: >-
 <tbody>
 <tr><td>Nullfähiges StructArray-Feld</td><td>Wird nur in Versionen unterstützt, die nullfähige StructArrays und nullfähige Vektor-Arrays unterstützen.</td></tr>
 <tr><td>Null-Wert in Python</td><td>Verwenden Sie „ <code translate="no">None</code> “, um einen Null-Wert für „StructArray“ in Python einzufügen. Verwenden Sie nicht „ <code translate="no">Null</code> “ oder „ <code translate="no">null</code> “.</td></tr>
-<tr><td>Gültigkeitsbereich von „null“</td><td>„Null“ gilt für das gesamte StructArray-Feld. Beispielsweise ist „ <code translate="no">chunks=None</code> “ nur dann gültig, wenn „ <code translate="no">chunks</code> “ nullfähig ist.</td></tr>
+<tr><td>Gültigkeitsbereich von „null“</td><td>„Null“ gilt für das gesamte StructArray-Feld. Beispielsweise ist „ <code translate="no">chunks=None</code> “ nur gültig, wenn „ <code translate="no">chunks</code> “ nullfähig ist.</td></tr>
 <tr><td>Teilweise null-fähige StructArray-Werte</td><td>Wenn ein StructArray-Feld einen gültigen Array-Wert enthält, dürfen Sie in demselben Wert keine null-Subfeld-Arrays mit gültigen Subfeld-Arrays mischen.</td></tr>
 <tr><td>Dynamisches Hinzufügen eines StructArray-Feldes</td><td>Das Hinzufügen eines StructArray-Feldes zu einer bestehenden Sammlung wird nur in Versionen unterstützt, die die dynamische Unterstützung von StructArray-Feldern enthalten.</td></tr>
 <tr><td>Null-Anforderung für dynamisches Hinzufügen</td><td>Ein StructArray-Feld, das einer bestehenden Sammlung hinzugefügt wird, muss nullfähig sein, da bestehende Entitäten noch keinen Wert für das neue Feld haben.</td></tr>
@@ -181,7 +181,7 @@ summary: >-
 <tr><td>Schema-Übereinstimmung</td><td>Jedes Struct-Element muss dem Struct-Schema entsprechen.</td></tr>
 <tr><td>Kapazität</td><td>Die Anzahl der Struct-Elemente in einer Entität darf <code translate="no">max_capacity</code> nicht überschreiten.</td></tr>
 <tr><td>Vektordimensionen</td><td>Vektorwerte müssen mit den für ihre Vektor-Unterfelder konfigurierten „ <code translate="no">dim</code> “ übereinstimmen.</td></tr>
-<tr><td>Duplikate im Suchmodus</td><td>Wenn Sie sowohl die „EmbeddingList“-Suche als auch die Suche auf Elementebene benötigen, schreiben Sie Vektoren in zwei separate Vektor-Unterfelder.</td></tr>
+<tr><td>Duplikate im Suchmodus</td><td>Wenn Sie sowohl die „EmbeddingList“-Suche als auch die Suche auf Elementebene benötigen, schreiben Sie die Vektoren in zwei separate Vektor-Unterfelder.</td></tr>
 </tbody>
 </table>
 <h2 id="Index-and-metric-limits" class="common-anchor-header">Index- und Metrikbeschränkungen<button data-href="#Index-and-metric-limits" class="anchor-icon" translate="no">
@@ -209,7 +209,7 @@ summary: >-
 <tr><td>Suche auf Elementebene</td><td>Reguläre Vektormetriken wie <code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">COSINE</code>, <code translate="no">HAMMING</code> oder <code translate="no">JACCARD</code></td><td>Ergebnisse auf Elementebene, die den Offset des gefundenen Elements enthalten können.</td></tr>
 </tbody>
 </table>
-<p>Verwenden Sie separate Vektor-Unterfelder, wenn beide Modi erforderlich sind. Verwenden Sie beispielsweise „ <code translate="no">chunks[emb_list_vector]</code> “ für die „EmbeddingList“-Suche und „ <code translate="no">chunks[emb]</code> “ für die Suche auf Elementebene.</p>
+<p>Verwenden Sie separate Vektor-Unterfelder, wenn beide Modi erforderlich sind. Verwenden Sie beispielsweise „ <code translate="no">chunks[emb_list_vector]</code> “ für die EmbeddingList-Suche und „ <code translate="no">chunks[emb]</code> “ für die Suche auf Elementebene.</p>
 <p>StructArray-Vektor-Unterfelder zählen bei der Planung Ihres Sammlungsschemas als Vektor-Unterfelder. Halten Sie die Gesamtzahl der Vektorfelder und Vektor-Unterfelder innerhalb der Grenzen Ihrer Zielversion und Ihrer Service-Stufe.</p>
 <p>Informationen zur unterstützten Matrix aus Index- und Metriktypen finden Sie unter <a href="/docs/de/index-structarray-fields.md">„Index-StructArray-Felder</a>“.</p>
 <h2 id="Search-limits" class="common-anchor-header">Suchbeschränkungen<button data-href="#Search-limits" class="anchor-icon" translate="no">

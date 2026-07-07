@@ -244,13 +244,13 @@ summary: Milvus Standalone(Docker Compose) 배포 환경의 메시지 큐를 Roc
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>소스 MQ</th><th>대상 MQ</th><th>상태</th><th>참고</th></tr>
+<tr><th>소스 MQ</th><th>대상 MQ</th><th>상태</th><th>비고</th></tr>
 </thead>
 <tbody>
 <tr><td>RocksMQ</td><td>Woodpecker (MinIO/로컬)</td><td><strong>지원됨</strong></td><td></td></tr>
 <tr><td>Woodpecker (MinIO/로컬)</td><td>RocksMQ</td><td><strong>지원됨</strong></td><td></td></tr>
 <tr><td>Woodpecker MinIO</td><td>Woodpecker 로컬</td><td><strong>지원되지 않음</strong></td><td>Woodpecker 스토리지 모드 간 전환에는 추가적인 메타데이터 처리가 필요하지만, 이는 아직 지원되지 않습니다.</td></tr>
 <tr><td>Woodpecker 로컬</td><td>Woodpecker MinIO</td><td><strong>지원되지 않음</strong></td><td>위와 동일합니다.</td></tr>
-<tr><td>RocksMQ / Woodpecker</td><td>외부 Pulsar / Kafka</td><td><strong>지원되지만 권장하지 않음</strong></td><td>독립형 인스턴스는 가능한 한 단순하게 유지하십시오.</td></tr>
+<tr><td>RocksMQ / Woodpecker</td><td>외부 Pulsar / Kafka</td><td><strong>지원되지만 권장하지 않음</strong></td><td>독립 실행형 인스턴스는 가능한 한 단순하게 유지하십시오.</td></tr>
 </tbody>
 </table>

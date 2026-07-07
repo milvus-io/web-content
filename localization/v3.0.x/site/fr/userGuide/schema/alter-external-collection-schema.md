@@ -22,7 +22,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h1><p>Les sources de données externes évoluent souvent après la création d’une collection externe. Par exemple, une table Lakehouse qui stocke déjà des embeddings peut par la suite inclure un nouveau champ scalaire, tel qu’un score, une catégorie ou un horodatage, que vous souhaitez faire apparaître dans les résultats de requête ou utiliser dans des filtres.</p>
-<p>Au lieu de recréer la collection externe ou de copier les données sources dans Milvus, ajoutez un champ Milvus qui correspond au champ existant dans la source de données externe. Après avoir ajouté le champ, actualisez la collection externe afin que le nouveau champ puisse être utilisé dans les requêtes et les recherches.</p>
+<p>Au lieu de recréer la collection externe ou de copier les données source dans Milvus, ajoutez un champ Milvus qui correspond au champ existant dans la source de données externe. Après avoir ajouté le champ, actualisez la collection externe afin que le nouveau champ puisse être utilisé dans les requêtes et les recherches.</p>
 <h2 id="Limits" class="common-anchor-header">Restrictions<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

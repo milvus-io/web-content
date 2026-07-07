@@ -2,9 +2,7 @@
 id: filtered-search-with-structarray.md
 title: StructArray を使用したフィルタリング検索
 summary: >-
-  このページを使用して、StructArray フィールドのベクトル検索にスカラーフィルタリングを追加します。StructArray のフィルタリングには 2
-  つのレベルがあります。行レベルのフィルタは親エンティティを選択し、要素レベルのフィルタは、要素レベルのベクトル検索の対象となる Struct
-  要素を制限します。
+  このページを使用して、StructArrayフィールドのベクトル検索にスカラーフィルタリングを追加します。StructArrayのフィルタリングには2つのレベルがあります。行レベルのフィルタは親エンティティを選択し、要素レベルのフィルタは、要素レベルのベクトル検索の対象となるStruct要素を制限します。
 ---
 <h1 id="Filtered-Search-with-StructArray" class="common-anchor-header">StructArray を使用したフィルタリング検索<button data-href="#Filtered-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -152,7 +150,7 @@ results = client.search(
 <p>警告</p>
 <p>トップレベルの述語を<code translate="no">element_filter</code> と組み合わせる場合は、<code translate="no">element_filter</code> を式の最後に配置してください。フィルタ式には<code translate="no">element_filter</code> を1つしか含めることができず、<code translate="no">element_filter</code> や<code translate="no">MATCH_*</code> を別のStructArray演算子の内部にネストすることはできません。</p>
 </div>
-<h2 id="Filter-entities-with-MATCH-operators" class="common-anchor-header">MATCH演算子によるエンティティのフィルタリング<button data-href="#Filter-entities-with-MATCH-operators" class="anchor-icon" translate="no">
+<h2 id="Filter-entities-with-MATCH-operators" class="common-anchor-header">MATCH演算子を使用したエンティティのフィルタリング<button data-href="#Filter-entities-with-MATCH-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -167,7 +165,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>フィルタが、親エンティティがそのStruct要素に基づいて条件を満たすかどうかを判断する必要がある場合は、<code translate="no">MATCH_*</code> 演算子を使用します。これらの演算子は行レベルのフィルタであり、エンティティを選択しますが、それ自体では要素のオフセットを返しません。</p>
+    </button></h2><p>フィルタが、親エンティティの Struct 要素に基づいてそのエンティティが条件を満たすかどうかを判断する必要がある場合は、<code translate="no">MATCH_*</code> 演算子を使用します。これらの演算子は行レベルのフィルタであり、エンティティを選択しますが、それ自体では要素のオフセットを返しません。</p>
 <table>
 <thead>
 <tr><th>演算子</th><th>次のような場合に使用します</th><th>例</th></tr>
@@ -201,7 +199,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>EmbeddingListの検索結果はエンティティレベルであるため、ここでは<code translate="no">MATCH_ANY</code> を使用します。このフィルターでは、エンティティ内の少なくとも1つのチャンクが、高品質な<code translate="no">&quot;index&quot;</code> チャンクであることが求められますが、検索結果自体は依然として親エンティティを表しています。</p>
+<p>EmbeddingListの検索結果はエンティティレベルであるため、ここでは<code translate="no">MATCH_ANY</code> を使用します。このフィルターでは、エンティティ内の少なくとも1つのチャンクが、高品質な<code translate="no">&quot;index&quot;</code> チャンクである必要がありますが、検索結果自体は依然として親エンティティを表しています。</p>
 <h2 id="Use-filters-in-hybrid-search" class="common-anchor-header">ハイブリッド検索でのフィルターの使用<button data-href="#Use-filters-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -301,7 +299,7 @@ results = client.hybrid_search(
 <li><p><code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code> などのStructArray演算子構文の代わりに<code translate="no">chunks.section</code> を使用すること。</p></li>
 <li><p>行レベルのフィルタリングのみが必要な場合に `<code translate="no">element_filter</code> ` を使用すること。エンティティを選択するだけなら、代わりに `<code translate="no">MATCH_ANY</code> ` を使用してください。</p></li>
 <li><p><code translate="no">MATCH_*</code> が要素のオフセットを返すことを期待しないこと。これらの演算子はエンティティを選択するものであり、それ自体では一致した要素を特定するものではありません。</p></li>
-<li><p><code translate="no">$[has_code]</code> のような単純なブール述語を記述すること。<code translate="no">$[has_code] == true</code> のような明示的な比較を使用してください。</p></li>
+<li><p><code translate="no">$[has_code]</code> のような、単純なブール述語を記述すること。<code translate="no">$[has_code] == true</code> のような明示的な比較を使用してください。</p></li>
 <li><p>同じフィルタ式内で、<code translate="no">element_filter</code> をトップレベルの述語の前に配置すること。</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">次のステップ<button data-href="#Next-steps" class="anchor-icon" translate="no">

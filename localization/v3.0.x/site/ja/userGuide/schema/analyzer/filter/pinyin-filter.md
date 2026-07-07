@@ -19,7 +19,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>中国語テキストの検索では、ユーザーがインデックス化されたテキストに表示されているとおりに漢字を正確に入力する必要がある場合がよくあります。名前検索、オートコンプリート、および入力と同時に検索が行われるワークフローでは、ユーザーは漢字の代わりにピンインを入力することがよくあります。 たとえば、ユーザーが「<code translate="no">zuqiu</code> 」と入力して「<code translate="no">足球</code> 」を検索する場合があります。「<code translate="no">pinyin</code> 」フィルターは、アナライザーの出力にピンイントークンを追加することで、別途ピンインフィールドを維持することなく、中国語テキストとピンイン入力の照合を可能にします。</p>
+    </button></h1><p>中国語テキストの検索では、ユーザーがインデックス化されたテキストに表示されているとおりに漢字を正確に入力する必要があることがよくあります。名前検索、オートコンプリート、および入力と同時に検索が行われるワークフローでは、ユーザーは漢字の代わりにピンインを入力することがよくあります。 たとえば、ユーザーが「<code translate="no">zuqiu</code> 」と入力して「<code translate="no">足球</code> 」を検索する場合があります。「<code translate="no">pinyin</code> 」フィルターは、アナライザーの出力にピンイントークンを追加するため、別途ピンインフィールドを維持することなく、中国語テキストをピンイン入力と照合することができます。</p>
 <p>「<code translate="no">pinyin</code> 」フィルターは、通常、中国語テキスト用の<a href="/docs/ja/jieba-tokenizer.md">Jieba</a>トークナイザーと組み合わせて使用されます。これはカスタムアナライザーフィルターパイプライン内で動作し、同じ中国語トークンに対して複数のピンイントークン形式を出力することができます。</p>
 <h2 id="Configuration" class="common-anchor-header">設定<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -42,7 +42,7 @@ beta: Milvus 3.0.x
 <span class="highlighted-wrapper-line">    <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;pinyin&quot;</span>],</span>
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>この簡略設定では、元の中国語トークンが保持され、文字レベルのピンイントークンが出力されます。明示的にそれらのオプションを有効にしない限り、連結ピンインやピンインの頭文字は出力されません。</p>
+<p>この簡略設定では、元の中国語トークンが保持され、文字レベルのピンイントークンが出力されます。これらのオプションを明示的に有効にしない限り、連結ピンインやピンインの頭文字は出力されません。</p>
 <p>完全に制御するには、フィルターをオブジェクトとして指定し、Milvus が出力するピンイン・トークンの形式を設定してください。</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
@@ -66,7 +66,7 @@ beta: Milvus 3.0.x
 <tr><td><code translate="no">keep_original</code></td><td>ブール値</td><td><code translate="no">true</code></td><td>アナライザの出力に元の中国語トークンを保持します。</td></tr>
 <tr><td><code translate="no">keep_full_pinyin</code></td><td>ブール値</td><td><code translate="no">true</code></td><td>文字レベルのピンイントークンを出力します。たとえば、<code translate="no">中文</code> は、<code translate="no">zhong</code> および<code translate="no">wen</code> を生成します。</td></tr>
 <tr><td><code translate="no">keep_joined_full_pinyin</code></td><td>ブール値</td><td><code translate="no">false</code></td><td>各ソーストークンに対して、結合されたピンイントークンを出力します。たとえば、<code translate="no">中文</code> の場合、<code translate="no">zhongwen</code> が出力されます。</td></tr>
-<tr><td><code translate="no">keep_separate_first_letter</code></td><td>ブール値ソーストークンごとに、結合されたピンイントークンを出力します。たとえば、xml-ph-0000@deepl.internal は xml-ph-0001@deepl.internal を出力します。</td><td><code translate="no">false</code></td><td>各ソーストークンに対して、ピンインの頭文字トークンを出力します。たとえば、<code translate="no">中文</code> は<code translate="no">zw</code> を生成します。</td></tr>
+<tr><td><code translate="no">keep_separate_first_letter</code></td><td>ブール値各ソーストークンに対して、結合されたピンイントークンを出力します。たとえば、xml-ph-0000@deepl.internal は xml-ph-0001@deepl.internal を出力します。</td><td><code translate="no">false</code></td><td>各ソーストークンに対して、ピンインの頭文字トークンを出力します。たとえば、<code translate="no">中文</code> は<code translate="no">zw</code> を生成します。</td></tr>
 </tbody>
 </table>
 <p>このフィルターは、トークナイザーによって生成されたトークンを処理します。中国語のテキストの場合は、<code translate="no">jieba</code> などのトークナイザーと組み合わせて使用してください。</p>
@@ -169,7 +169,7 @@ result = client.run_analyzer(sample_text, analyzer_params)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>中国語の用語を、そのピンイン形式の頭文字と照合する必要がある場合は、「<code translate="no">keep_separate_first_letter</code> 」を有効にしてください。</p>
+    </button></h3><p>中国語の用語を、そのピンイン表記の頭文字と照合する必要がある場合は、「<code translate="no">keep_separate_first_letter</code> 」を有効にしてください。</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [

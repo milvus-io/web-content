@@ -36,9 +36,9 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>アラビア語テキストについては、ほとんどの場合、組み込みの <a href="/docs/ja/arabic-analyzer.md"><code translate="no">arabic</code></a> アナライザーを使用してください。この組み込みアナライザーには、標準的なトークン化、小文字化、小数点桁の正規化、アラビア語のステミング、およびアラビア語のストップワード除去に加え、このフィルターが含まれています。<code translate="no">arabic_normalization</code> を直接使用するのは、カスタムアナライザーパイプラインを構築する必要がある場合に限ってください。</p>
+<p>アラビア語テキストについては、ほとんどの場合、組み込みの <a href="/docs/ja/arabic-analyzer.md"><code translate="no">arabic</code></a> アナライザーを使用してください。この組み込みアナライザーには、標準的なトークン化、小文字化、小数点桁の正規化、アラビア語のステミング、アラビア語のストップワード除去に加え、このフィルターも含まれています。<code translate="no">arabic_normalization</code> を直接使用するのは、カスタムアナライザーパイプラインを構築する必要がある場合に限ってください。</p>
 </div>
-<p>カスタムアナライザーで<code translate="no">arabic_normalization</code> フィルターを使用するには、<code translate="no">analyzer_params</code> の<code translate="no">filter</code> セクションに追加します：</p>
+<p>カスタムアナライザーで<code translate="no">arabic_normalization</code> フィルターを使用するには、<code translate="no">analyzer_params</code> の<code translate="no">filter</code> セクションに次のように追加します：</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;arabic_normalization&quot;</span>],

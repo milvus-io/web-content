@@ -21,7 +21,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>請使用此頁面，為 StructArray 欄位的向量搜尋新增標量篩選功能。StructArray 篩選分為兩個層級：列層級篩選用於選取父實體，而元素層級篩選則用於限制哪些 Struct 元素會參與元素層級的向量搜尋。</p>
-<p>本頁面使用<a href="/docs/zh-hant/create-structarray-field.md">《建立 StructArray 欄位</a>》中的<code translate="no">tech_articles</code> 集合。該集合包含一個名為<code translate="no">chunks</code> 的 StructArray 欄位，其中包含<code translate="no">section</code> 、<code translate="no">page</code> 、<code translate="no">quality_score</code> 及<code translate="no">has_code</code> 等標量子欄位，以及用於搜尋的向量子欄位。</p>
+<p>本頁面使用「<a href="/docs/zh-hant/create-structarray-field.md">建立 StructArray 欄位</a>」中的<code translate="no">tech_articles</code> 集合。該集合包含一個名為<code translate="no">chunks</code> 的 StructArray 欄位，其中包含諸如<code translate="no">section</code> 、<code translate="no">page</code> 、<code translate="no">quality_score</code> 及<code translate="no">has_code</code> 等標量子欄位，以及用於搜尋的向量子欄位。</p>
 <h2 id="Choose-a-filter-type" class="common-anchor-header">選擇篩選類型<button data-href="#Choose-a-filter-type" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -166,7 +166,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>當篩選條件需根據父實體的 Struct 元素來判定其是否符合資格時，請使用<code translate="no">MATCH_*</code> 運算子。這些運算子屬於行級篩選：它們會選取實體，但本身不會回傳元素偏移量。</p>
+    </button></h2><p>當篩選器需根據父實體的 Struct 元素來判定其是否符合條件時，請使用<code translate="no">MATCH_*</code> 運算子。這些運算子屬於行級篩選器：它們會選取實體，但本身不會回傳元素偏移量。</p>
 <table>
 <thead>
 <tr><th>運算子</th><th>適用於</th><th>範例</th></tr>
@@ -216,7 +216,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在混合搜尋中，應於條件需生效之處套用 StructArray 篩選器。頂層篩選器可由整個混合搜尋共用。若需元素層級的限制，應將 `<code translate="no">element_filter</code> ` 附加至需要元素層級限制的 StructArray 元素層級請求上。</p>
+    </button></h2><p>在混合搜尋中，應在條件需生效之處套用 StructArray 篩選器。頂層篩選器可由整個混合搜尋共用。若需元素層級的限制，應將 `<code translate="no">element_filter</code> ` 附加至需要元素層級限制的 StructArray 元素層級請求上。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest, RRFRanker
 
 query_vector = [<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>]
@@ -276,7 +276,7 @@ results = client.hybrid_search(
 <tr><td>整數類型</td><td><code translate="no">$[page] &gt;= 2</code>,<code translate="no">$[page] in [1, 2, 3]</code></td></tr>
 <tr><td><code translate="no">FLOAT</code>,<code translate="no">DOUBLE</code></td><td><code translate="no">$[quality_score] &gt; 0.9</code>,<code translate="no">0.7 &lt; $[quality_score] &lt; 0.95</code></td></tr>
 <tr><td><code translate="no">VARCHAR</code></td><td><code translate="no">$[section] == &quot;index&quot;</code>,<code translate="no">$[text] like &quot;range%&quot;</code></td></tr>
-<tr><td>向量子域</td><td>不支援作為<code translate="no">$[...]</code> 標量判別式輸入。請改用向量搜尋來處理向量子欄位。</td></tr>
+<tr><td>向量子域</td><td>不支援作為<code translate="no">$[...]</code> 標量判別式輸入。請改為透過向量搜尋使用向量子欄位。</td></tr>
 </tbody>
 </table>
 <p>關於不支援的情況（例如 JSON 路徑、陣列容器函式、文字比對函式、針對<code translate="no">$[...]</code> 的 null 判別式、幾何函式、Timestamptz 表達式以及泛型函式呼叫），請參閱<a href="/docs/zh-hant/struct-array-operators.md">StructArray 運算子</a>。</p>
@@ -300,7 +300,7 @@ results = client.hybrid_search(
 <li><p>使用 `<code translate="no">chunks.section</code> ` 代替 `<code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code>` 等 `StructArray` 運算子語法。</p></li>
 <li><p>僅需進行行級篩選時卻使用 `<code translate="no">element_filter</code> `。若僅需選取實體，請改用 `<code translate="no">MATCH_ANY</code> `。</p></li>
 <li><p>預期 `<code translate="no">MATCH_*</code> ` 會返回元素偏移量。這些運算子僅用於選取實體，本身並不會識別出單一符合條件的元素。</p></li>
-<li><p>撰寫如<code translate="no">$[has_code]</code> 這類未加修飾的布林判別式。請改用明確的比較運算，例如<code translate="no">$[has_code] == true</code> 。</p></li>
+<li><p>撰寫如<code translate="no">$[has_code]</code> 這類未加修飾的布林謂詞。請改用如<code translate="no">$[has_code] == true</code> 這類明確的比較運算子。</p></li>
 <li><p>將 `<code translate="no">element_filter</code> ` 置於同一篩選表達式中頂層判別式的前方。</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">下一步<button data-href="#Next-steps" class="anchor-icon" translate="no">

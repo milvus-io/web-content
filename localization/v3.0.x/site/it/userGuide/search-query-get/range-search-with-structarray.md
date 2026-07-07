@@ -104,7 +104,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td><code translate="no">L2</code></td><td>No. È preferibile una distanza minore.</td><td><code translate="no">range_filter &lt;= distance &lt; radius</code></td></tr>
-<tr><td><code translate="no">IP</code>, <code translate="no">COSINE</code></td><td>Sì. Un punteggio più alto è migliore.</td><td><code translate="no">radius &lt; distance &lt;= range_filter</code></td></tr>
+<tr><td><code translate="no">IP</code>, <code translate="no">COSINE</code></td><td>Sì. Un punteggio più alto è preferibile.</td><td><code translate="no">radius &lt; distance &lt;= range_filter</code></td></tr>
 </tbody>
 </table>
 <p>Quando è impostato solo " <code translate="no">radius</code> ", la ricerca per intervallo restituisce i risultati che soddisfano il limite esterno della metrica. Scegli i valori in base alla scala di punteggio o di distanza dei tuoi embedding.</p>
@@ -325,11 +325,11 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Eseguire la ricerca per intervallo su <code translate="no">chunks[emb_list_vector]</code>, che è destinata alla ricerca a livello di EmbeddingList.</p></li>
+<li><p>Eseguire la ricerca per intervallo su <code translate="no">chunks[emb_list_vector]</code>, che è destinato alla ricerca a livello di EmbeddingList.</p></li>
 <li><p>Utilizzo di <code translate="no">MAX_SIM_COSINE</code> al posto di una metrica standard come <code translate="no">COSINE</code> per la ricerca per intervallo a livello di elemento.</p></li>
 <li><p>Utilizzo di una query <code translate="no">EmbeddingList</code> al posto di una normale query vettoriale.</p></li>
 <li><p>Aspettarsi che i risultati della ricerca per intervallo siano univoci per entità padre. La ricerca per intervallo restituisce risultati corrispondenti a elementi Struct.</p></li>
-<li><p>Utilizzo di <code translate="no">chunks.emb</code> invece della sintassi richiesta per il percorso del sottocampo <code translate="no">chunks[emb]</code>.</p></li>
+<li><p>Utilizzo di <code translate="no">chunks.emb</code> al posto della sintassi richiesta per il percorso del sottocampo <code translate="no">chunks[emb]</code>.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Prossimi passi<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"

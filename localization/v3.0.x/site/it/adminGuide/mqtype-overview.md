@@ -71,7 +71,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Nuove distribuzioni (Milvus 3.x):</strong> utilizzare <strong>Woodpecker</strong> (impostazione predefinita). La versione standalone lo esegue in modalità incorporata; per quella distribuita (cluster), l’impostazione predefinita consigliata è un <a href="/docs/it/woodpecker.md#Deployment-modes">servizio</a> dedicato distribuito con Helm, ma è supportata anche la modalità incorporata.</li>
+<li><strong>Nuove distribuzioni (Milvus 3.x):</strong> utilizzare <strong>Woodpecker</strong> (impostazione predefinita). Nella versione standalone è integrato; per quella distribuita (cluster), l’impostazione predefinita consigliata è un <a href="/docs/it/woodpecker.md#Deployment-modes">servizio</a> dedicato distribuito con Helm, ma è supportata anche l’integrazione.</li>
 <li><strong>Utenti esistenti di Pulsar o Kafka:</strong> Pulsar e Kafka continuano a essere pienamente supportati. È possibile mantenerli o <a href="/docs/it/switch-mq-type.md">passare a Woodpecker</a>.</li>
 <li><strong>RocksMQ:</strong> solo in modalità standalone, sostituito da Woodpecker integrato in Milvus 3.x.</li>
 </ul>

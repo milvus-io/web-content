@@ -43,7 +43,7 @@ summary: >-
 <tr><th>목표</th><th>사용</th><th>결과 동작</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">category</code> 와 같은 최상위 스칼라 필드로 필터링합니다.</td><td>일반 필터 표현식.</td><td>검색 전이나 검색 중에 상위 엔티티를 선택합니다.</td></tr>
+<tr><td><code translate="no">category</code> 와 같은 최상위 스칼라 필드를 기준으로 필터링합니다.</td><td>일반 필터 표현식.</td><td>검색 전이나 검색 중에 상위 엔티티를 선택합니다.</td></tr>
 <tr><td>요소 수준 벡터 검색을 스칼라 조건에 일치하는 Struct 요소로 제한합니다.</td><td><code translate="no">element_filter</code>.</td><td>일치하는 Struct 요소만 검색하며, 일치하는 요소의 오프셋을 반환할 수 있습니다.</td></tr>
 <tr><td>Struct 요소 중 일부, 전체 또는 특정 개수가 술어와 일치하는지 여부에 따라 엔티티를 선택합니다.</td><td><code translate="no">MATCH_ANY</code>, <code translate="no">MATCH_ALL</code>, <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> 또는 <code translate="no">MATCH_EXACT</code>.</td><td>행 수준 필터링. 이 연산자들은 자체적으로 오프셋을 반환하지 않습니다.</td></tr>
 </tbody>
@@ -147,7 +147,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>이 예제에서 최상위 술어 <code translate="no">category == &quot;search&quot;</code> 는 후보 엔티티를 선택하고, <code translate="no">element_filter</code> 는 <code translate="no">section</code>, <code translate="no">quality_score</code>, <code translate="no">has_code</code> 가 모두 동일한 Struct 요소 내에서 일치하는 청크로 요소 수준 벡터 검색을 제한합니다.</p>
+<p>이 예제에서 최상위 술어 <code translate="no">category == &quot;search&quot;</code> 는 후보 엔티티를 선택하고, <code translate="no">element_filter</code> 는 <code translate="no">section</code>, <code translate="no">quality_score</code> 및 <code translate="no">has_code</code> 가 모두 동일한 Struct 요소 내에서 일치하는 청크로 요소 수준 벡터 검색을 제한합니다.</p>
 <div class="alert note">
 <p>경고</p>
 <p>최상위 술어와 <code translate="no">element_filter</code> 를 결합할 때는 <code translate="no">element_filter</code> 를 식의 맨 끝에 배치해야 합니다. 필터 식에는 <code translate="no">element_filter</code> 가 하나만 포함될 수 있으며, <code translate="no">element_filter</code> 나 <code translate="no">MATCH_*</code> 를 다른 StructArray 연산자 안에 중첩할 수 없습니다.</p>

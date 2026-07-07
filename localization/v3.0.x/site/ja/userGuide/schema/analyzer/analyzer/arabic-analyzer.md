@@ -1,7 +1,7 @@
 ---
 id: arabic-analyzer.md
 title: アラビア語Compatible with Milvus 3.0.0+
-summary: 組み込みのアラビア語解析機能は、文字の異体や数字を正規化し、語幹抽出を行い、アラビア語のストップワードを除去することで、アラビア語のテキストを処理します。
+summary: 組み込みのアラビア語解析機能は、文字の異体や数字の正規化、用語のステミング、アラビア語のストップワードの除去を行うことで、アラビア語のテキストを処理します。
 beta: Milvus 3.0.0+
 ---
 <h1 id="Arabic" class="common-anchor-header">アラビア語<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Arabic" class="anchor-icon" translate="no">

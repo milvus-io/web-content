@@ -1,7 +1,7 @@
 ---
 id: thai-analyzer.md
 title: タイ語Compatible with Milvus 3.0.0+
-summary: 組み込みのタイ語解析機能は、タイ語のテキストを単語単位に分割し、Unicodeの10進数字を正規化し、タイ語のストップワードを除去します。
+summary: 組み込みのタイ語解析機能は、タイ語のテキストを単語ごとに分割し、Unicodeの10進数字を正規化し、タイ語のストップワードを除去します。
 beta: Milvus 3.0.0+
 ---
 <h1 id="Thai" class="common-anchor-header">タイ語<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Thai" class="anchor-icon" translate="no">
@@ -63,7 +63,7 @@ beta: Milvus 3.0.0+
 }
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvusは、組み込みの<code translate="no">_thai_</code> 辞書に加えて、カスタムストップワードを適用します。</p>
-<p>組み込みの<code translate="no">thai</code> アナライザーは、以下のカスタムアナライザー設定と同等です:</p>
+<p>組み込みの<code translate="no">thai</code> アナライザは、以下のカスタムアナライザ設定と同等です:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;thai&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [

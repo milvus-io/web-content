@@ -45,7 +45,7 @@ beta: Milvus 3.0.0+
 }
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">decimaldigit</code> 필터에는 구성 가능한 매개변수가 없습니다.</p>
-<p>이 필터는 아랍-인도 문자, 태국어, 데바나가리, 벵골어 및 전폭 숫자를 포함한 유니코드 십진수 숫자를 ASCII 숫자로 변환합니다. 이 필터는 토큰화기가 생성한 토큰을 대상으로 작동합니다. 위의 구성은 의도적으로 사용자 정의 분석기의 예시이며, 완전한 아랍어 처리 파이프라인을 포함하지 않습니다.</p>
+<p>이 필터는 아랍-인도 문자, 태국어, 데바나가리, 벵골어 및 전각 숫자를 포함한 유니코드 십진수 숫자를 ASCII 숫자로 변환합니다. 이 필터는 토큰화기가 생성한 토큰을 대상으로 작동합니다. 위의 구성은 의도적으로 사용자 정의 분석기의 예시이며, 완전한 아랍어 처리 파이프라인을 포함하지 않습니다.</p>
 <h2 id="Examples" class="common-anchor-header">예시<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

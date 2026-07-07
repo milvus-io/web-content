@@ -34,8 +34,8 @@ title: RocksMQ
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>仅限独立版</strong>— Milvus Distributed（集群）<strong>版本不</strong>支持 RocksMQ。请参阅<a href="/docs/zh/mqtype-overview.md#Supported-message-queues">消息队列支持矩阵</a>。</li>
-<li>RocksMQ 随 Milvus 一起提供，因此无需单独安装。</li>
+<li><strong>仅限独立版</strong>— Milvus Distributed（集群）<strong>不</strong>支持 RocksMQ。请参阅<a href="/docs/zh/mqtype-overview.md#Supported-message-queues">消息队列支持矩阵</a>。</li>
+<li>RocksMQ 随 Milvus 一起发布，因此无需单独安装。</li>
 <li>它是早期 Milvus 版本中的默认独立模式消息队列，但在 Milvus 3.x 中已被内置的 Woodpecker 取代。</li>
 </ul>
 <h2 id="Deploy-Milvus-Standalone-with-RocksMQ-using-Docker" class="common-anchor-header">使用 Docker 部署带 RocksMQ 的 Milvus Standalone 版本<button data-href="#Deploy-Milvus-Standalone-with-RocksMQ-using-Docker" class="anchor-icon" translate="no">
@@ -151,7 +151,7 @@ bash standalone_embed.sh delete
       </svg>
     </button></h2><ul>
 <li><strong>从 2.5.x 升级至 2.6.x：</strong> <strong>消息队列限制</strong>：升级至 Milvus v3.0-beta 时，必须保留当前的消息队列选择。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。
-由于 2.6.x 将独立部署的默认消息队列更改为 Woodpecker，若您希望保留 RocksMQ，请<strong>在升级前</strong>将<code translate="no">mq.type: rocksmq</code> 固定在您的<code translate="no">user.yaml</code> 中。</li>
+由于 2.6.x 将独立模式的默认消息队列更改为 Woodpecker，若您希望保留 RocksMQ，请<strong>在升级前</strong>将<code translate="no">mq.type: rocksmq</code> 固定在您的<code translate="no">user.yaml</code> 中。</li>
 <li>若要更改正在运行的实例的消息队列，请参阅<a href="/docs/zh/switch-rocksmq-woodpecker.md">《从 RocksMQ 切换到 Woodpecker</a>》。</li>
 </ul>
 <h2 id="Whats-next" class="common-anchor-header">后续计划<button data-href="#Whats-next" class="anchor-icon" translate="no">

@@ -18,7 +18,7 @@ summary: 使用 Helm 或 Milvus Operator，將 Milvus 叢集的訊息佇列在 P
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本頁面說明如何將<strong>Milvus 叢集的</strong>訊息佇列 (MQ) 在<strong>Pulsar</strong>（內建或外部）與<strong>Woodpecker</strong>（MinIO 後端）之間進行雙向切換。有關一般工作流程與先決條件，請參閱《<a href="/docs/zh-hant/switch-mq-type.md">切換 MQ 類型》</a>。</p>
+    </button></h1><p>本頁面說明如何將<strong>Milvus 叢集的</strong>訊息佇列 (MQ) 在<strong>Pulsar</strong>（內建或外部）與<strong>Woodpecker</strong>（MinIO 後端）之間雙向切換。有關一般工作流程與先決條件，請參閱《<a href="/docs/zh-hant/switch-mq-type.md">切換 MQ 類型》</a>。</p>
 <div class="alert note">
 <p><strong>先決條件：</strong>MQ 切換功能僅適用於<strong>Milvus 3.0 及後續版本</strong>。開始操作前，請將您的 Milvus 實例升級至 Milvus 3.0 或後續版本——此功能在較早版本中不可用。</p>
 </div>
@@ -99,7 +99,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>步驟 1：確認 Milvus 實例正在運行。</strong></p>
-<p><strong>步驟 2：配置目標 Pulsar 連線並重新啟動 Milvus。</strong>此切換操作需要 Milvus 已知曉 Pulsar 連線設定，因此請透過<code translate="no">extraConfigFiles</code> 將設定寫入<code translate="no">user.yaml</code> ，並使用<code translate="no">helm upgrade</code> 套用（此操作會滾動更新 Pod）。<code translate="no">streaming.enabled=true</code> 是「切換訊息佇列（Switch MQ）」功能所需的設定。</p>
+<p><strong>步驟 2：配置目標 Pulsar 連線並重新啟動 Milvus。</strong>此切換操作需要 Milvus 已知曉 Pulsar 連線設定，因此請透過<code translate="no">extraConfigFiles</code> 將設定寫入<code translate="no">user.yaml</code> ，並使用<code translate="no">helm upgrade</code> 套用（此操作會滾動更新 Pod）。<code translate="no">streaming.enabled=true</code> 是「切換 MQ」功能所需的設定。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -129,7 +129,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>若切換成功，系統會記錄<code translate="no">[mqTypeValue=pulsar]</code> 。</p>
-<p><strong>步驟 5：（可選）清理 Woodpecker 資料。</strong>刪除 MinIO/S3 上的 Woodpecker 資料（位於<code translate="no">&lt;rootPath&gt;/wp/...</code> 目錄下，通常為<code translate="no">files/wp/...</code> ）以及 etcd 中的 Woodpecker 元資料（<code translate="no">etcdctl get woodpecker --prefix</code> ）。若您計劃日後切換回 Woodpecker，請先清理這些檔案。</p>
+<p><strong>步驟 5：（可選）清理 Woodpecker 資料。</strong>刪除 MinIO/S3 上的 Woodpecker 資料（位於<code translate="no">&lt;rootPath&gt;/wp/...</code> 目錄下，通常為<code translate="no">files/wp/...</code> ）以及 etcd 中的 Woodpecker 元資料（<code translate="no">etcdctl get woodpecker --prefix</code> ）。若您日後計畫切換回 Woodpecker，請先清理這些檔案。</p>
 <h2 id="With-Milvus-Operator" class="common-anchor-header">使用 Milvus Operator<button data-href="#With-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -160,7 +160,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><strong>步驟 1：確認 Milvus 實例正在運行。</strong></p>
+    </button></h3><p><strong>步驟 1：確認 Milvus 實例正在執行。</strong></p>
 <p><strong>步驟 2：執行 MQ 切換。</strong>由於 MixCoord 服務未對外公開，因此請從 MixCoord pod 內部執行切換 API：</p>
 <pre><code translate="no" class="language-shell">kubectl exec -it &lt;mixcoord-pod&gt; -- \
   curl -X POST http://localhost:9091/management/wal/alter \
@@ -171,7 +171,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>若切換成功，系統會記錄<code translate="no">[mqTypeValue=woodpecker]</code> 。</p>
-<p><strong>步驟 4：更新 Operator 中的 MQ 類型。</strong>更新由<strong>Operator</strong>管理的配置，以防止 Operator 還原此切換。建立<code translate="no">change_configmap.yaml</code> ：</p>
+<p><strong>步驟 4：更新 Operator 中的 MQ 類型。</strong>更新由<strong>Operator</strong>管理的配置，以防止 Operator 將切換操作還原。建立<code translate="no">change_configmap.yaml</code> ：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -184,7 +184,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">kubectl patch -f change_configmap.yaml --patch-file change_configmap.yaml --type merge
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>步驟 5：(可選) 停止 Pulsar 並進行清理。</strong>對於<strong>內建的</strong>Pulsar，請解除安裝 Pulsar 發行版並刪除其 PVC：</p>
+<p><strong>步驟 5：（可選）停止 Pulsar 並進行清理。</strong>對於<strong>內建的</strong>Pulsar，請解除安裝該 Pulsar 發行版並刪除其 PVC：</p>
 <pre><code translate="no" class="language-shell">helm uninstall my-release-pulsar
 kubectl get pvc | grep my-release-pulsar
 kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
@@ -209,7 +209,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>步驟 1：確認 Milvus 實例正在運行。</strong></p>
-<p><strong>步驟 2：配置目標 Pulsar 連線並重新啟動 Milvus。</strong>將 Pulsar 連線置於<code translate="no">spec.config</code> 下（Operator 會將<code translate="no">spec.config</code> 渲染為<code translate="no">user.yaml</code> ），並設定 MQ 類型；套用 CR 後，系統會根據新配置重新部署 Pod。</p>
+<p><strong>步驟 2：配置目標 Pulsar 連線並重新啟動 Milvus。</strong>將 Pulsar 連線置於<code translate="no">spec.config</code> 下（Operator 會將<code translate="no">spec.config</code> 渲染為<code translate="no">user.yaml</code> ），並設定 MQ 類型；套用 CR 後，系統會根據新配置重新啟動 Pod。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># change_configmap.yaml</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>

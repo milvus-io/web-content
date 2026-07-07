@@ -35,7 +35,7 @@ res = client.query(
     output_fields=[<span class="hljs-string">&quot;message&quot;</span>, <span class="hljs-string">&quot;severity&quot;</span>],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Contoh-contoh pada halaman ini berfokus pada ekspresi yang ditetapkan ke <code translate="no">filter</code>. Anda dapat menggunakan sintaks ekspresi filter yang sama dalam operasi Milvus yang menerima filter skalar, seperti <code translate="no">query</code>, <code translate="no">search</code>, dan pencarian hibrida.</p>
+<p>Contoh-contoh pada halaman ini berfokus pada ekspresi yang ditetapkan ke ` <code translate="no">filter</code>`. Anda dapat menggunakan sintaks ekspresi filter yang sama dalam operasi Milvus yang menerima filter skalar, seperti ` <code translate="no">query</code>`, ` <code translate="no">search</code>`, dan pencarian hibrida.</p>
 <h2 id="Supported-field-types" class="common-anchor-header">Jenis bidang yang didukung<button data-href="#Supported-field-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -58,9 +58,9 @@ res = client.query(
 </thead>
 <tbody>
 <tr><td><code translate="no">VARCHAR</code> bidang</td><td>Ya</td><td>Ya</td><td>Target umum untuk pencocokan pola pada bidang string.</td></tr>
-<tr><td><code translate="no">JSON</code> jalur dengan tipe konversi <code translate="no">VARCHAR</code> </td><td>Ya</td><td>Ya</td><td>Nilai jalur JSON harus berupa string agar pencocokan berhasil. Jika Anda membuat indeks pada jalur JSON untuk percepatan, atur ` <code translate="no">json_cast_type=&quot;varchar&quot;</code>`.</td></tr>
+<tr><td><code translate="no">JSON</code> jalur dengan tipe yang dikonversi ke <code translate="no">VARCHAR</code> </td><td>Ya</td><td>Ya</td><td>Nilai jalur JSON harus berupa string agar pencocokan berhasil. Jika Anda membuat indeks pada jalur JSON untuk percepatan, atur <code translate="no">json_cast_type=&quot;varchar&quot;</code>.</td></tr>
 <tr><td><code translate="no">ARRAY&lt;VARCHAR&gt;</code> elemen</td><td>Ya</td><td>Ya</td><td>Cocokkan elemen tertentu berdasarkan indeks, seperti <code translate="no">tags[0]</code>. Pencocokan pola <strong>tidak</strong> memindai semua elemen; pencocokan hanya berlaku untuk elemen pada indeks yang ditentukan.</td></tr>
-<tr><td>Numerik, Boolean, vektor, <code translate="no">TEXT</code>, atau target non-<code translate="no">VARCHAR</code> lainnya</td><td>Tidak</td><td>Tidak</td><td>Pencocokan pola hanya tersedia untuk nilai <code translate="no">VARCHAR</code>, jalur JSON yang diselesaikan menjadi string, atau elemen <code translate="no">ARRAY&lt;VARCHAR&gt;</code> yang diindeks.</td></tr>
+<tr><td>Numerik, Boolean, vektor, <code translate="no">TEXT</code>, atau target non-<code translate="no">VARCHAR</code> lainnya</td><td>Tidak</td><td>Tidak</td><td>Pencocokan pola hanya tersedia untuk nilai <code translate="no">VARCHAR</code>, jalur JSON yang diterjemahkan menjadi string, atau elemen <code translate="no">ARRAY&lt;VARCHAR&gt;</code> yang diindeks.</td></tr>
 </tbody>
 </table>
 <h2 id="Choose-LIKE-or-regex" class="common-anchor-header">Pilih LIKE atau regex<button data-href="#Choose-LIKE-or-regex" class="anchor-icon" translate="no">
@@ -185,7 +185,7 @@ res = client.query(
 <li><code translate="no">name LIKE r&quot;\_%&quot;</code> cocok dengan nilai yang dimulai dengan karakter literal <code translate="no">_</code>.</li>
 <li><code translate="no">name LIKE r&quot;\\%&quot;</code> cocok dengan nilai yang dimulai dengan tanda garis miring terbalik literal.</li>
 </ul>
-<p>Literal string mentah, ditulis sebagai <code translate="no">r&quot;...&quot;</code> atau <code translate="no">r'...'</code>, mempertahankan tanda garis miring terbalik apa adanya dalam ekspresi filter Milvus. Penggunaan ini direkomendasikan untuk <code translate="no">LIKE</code> dan pola regex yang mengandung tanda garis miring terbalik. Tanpa string mentah, literal string biasa tetap memproses urutan pelarian sebelum pola dievaluasi, sehingga mungkin diperlukan lebih banyak tanda garis miring terbalik.</p>
+<p>Literal string mentah, ditulis sebagai <code translate="no">r&quot;...&quot;</code> atau <code translate="no">r'...'</code>, mempertahankan tanda garis miring terbalik apa adanya dalam ekspresi filter Milvus. Penggunaan literal string mentah direkomendasikan untuk <code translate="no">LIKE</code> dan pola regex yang mengandung tanda garis miring terbalik. Tanpa literal string mentah, literal string biasa tetap memproses urutan pelarian sebelum pola dievaluasi, sehingga mungkin diperlukan lebih banyak tanda garis miring terbalik.</p>
 <h2 id="Use-regex--Milvus-30x" class="common-anchor-header">Gunakan regex<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Use-regex--Milvus-30x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

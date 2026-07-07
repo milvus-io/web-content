@@ -238,13 +238,13 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>После создания поля StructArray обращайтесь к его подполям с использованием синтаксиса пути <code translate="no">structArray[subfield]</code>. Используйте этот синтаксис при создании индексов, поиске в векторных подполях, выводе подполей или построении скалярных фильтров.</p>
+    </button></h2><p>После создания поля StructArray обращайтесь к его подполям с использованием синтаксиса пути <code translate="no">structArray[subfield]</code>. Используйте этот синтаксис при создании индексов, поиске векторных подполей, выводе подполей или построении скалярных фильтров.</p>
 <table>
 <thead>
 <tr><th>Путь</th><th>Значение</th><th>Типичное использование</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">chunks[text]</code></td><td>Поле <code translate="no">text</code> внутри каждого элемента Struct.</td><td>Поле вывода или скалярная фильтрация.</td></tr>
+<tr><td><code translate="no">chunks[text]</code></td><td>Поле « <code translate="no">text</code> » внутри каждого элемента Struct.</td><td>Поле вывода или скалярная фильтрация.</td></tr>
 <tr><td><code translate="no">chunks[section]</code></td><td>Метка секции для каждого фрагмента.</td><td>Скалярная фильтрация.</td></tr>
 <tr><td><code translate="no">chunks[quality_score]</code></td><td>Показатель качества на уровне фрагмента.</td><td>Скалярная фильтрация или скалярный индекс.</td></tr>
 <tr><td><code translate="no">chunks[emb_list_vector]</code></td><td>Векторное подполе, используемое в качестве списка вложений.</td><td>Поиск в EmbeddingList с помощью <code translate="no">MAX_SIM*</code>.</td></tr>
@@ -296,7 +296,7 @@ client.create_collection(
         ></path>
       </svg>
     </button></h2><p>Milvus v3.0.x поддерживает добавление поля StructArray в существующую коллекцию. Добавляемое поле StructArray должно быть допускать значение null, поскольку сущности, уже существующие в коллекции, не имеют значений для нового поля.</p>
-<p>Чтобы добавить поле StructArray в существующую коллекцию, сначала определите схему Struct. Затем вызовите метод ` <code translate="no">add_collection_struct_field()</code> ` и задайте ` <code translate="no">nullable=True</code>`.</p>
+<p>Чтобы добавить поле StructArray в существующую коллекцию, сначала определите схему Struct. Затем вызовите метод ` <code translate="no">add_collection_struct_field()</code> ` и установите значение ` <code translate="no">nullable=True</code>`.</p>
 <pre><code translate="no" class="language-python">chunk_schema = client.create_struct_field_schema()
 chunk_schema.add_field(
     field_name=<span class="hljs-string">&quot;text&quot;</span>,
@@ -403,7 +403,7 @@ client.add_collection_struct_field(
     </button></h2><ul>
 <li><p>Создание <code translate="no">DataType.STRUCT</code> в качестве поля коллекции верхнего уровня вместо использования его в качестве типа элемента поля Array.</p></li>
 <li><p>Забывание установить « <code translate="no">max_capacity</code> » для поля «StructArray».</p></li>
-<li><p>Определение неподдерживаемых типов подполей, таких как JSON, Geometry, Text, Timestamptz, SparseFloatVector, вложенный массив (Array), вложенная структура (Struct) или массив структур (Array-of-Struct).</p></li>
+<li><p>Определение неподдерживаемых типов подполей, таких как JSON, Geometry, Text, Timestamptz, SparseFloatVector, вложенный массив, вложенная структура или массив структур.</p></li>
 <li><p>Использование <code translate="no">String</code> в качестве типа подполя. Используйте <code translate="no">VARCHAR</code> и установите <code translate="no">max_length</code>.</p></li>
 <li><p>Использование одного векторного подполя как для поиска по EmbeddingList, так и для поиска на уровне элементов.</p></li>
 <li><p>Добавление только векторных подполей и игнорирование скалярных подполей, необходимых для фильтрации, таких как <code translate="no">section</code>, <code translate="no">quality_score</code> или <code translate="no">has_code</code>.</p></li>

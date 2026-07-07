@@ -3,7 +3,7 @@ id: structarray-limits.md
 title: Batasan StructArray
 summary: >-
   Dukungan StructArray mencakup definisi skema, data yang dimasukkan,
-  pengindeksan, mode pencarian, serta filter khusus StructArray. Gunakan halaman
+  pengindeksan, mode pencarian, dan filter khusus StructArray. Gunakan halaman
   ini sebagai panduan batasan sebelum Anda mengandalkan perilaku StructArray
   dalam lingkungan produksi.
 ---
@@ -119,7 +119,7 @@ summary: >-
 <tr><td><code translate="no">Array</code></td><td>Tidak didukung</td><td>Gunakan ` <code translate="no">VARCHAR</code>`, bukan ` <code translate="no">String</code>`.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Tidak didukung</td><td>Subbidang JSON tidak didukung dalam bidang StructArray.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Tidak didukung</td><td>Subbidang geometri dan fungsi GIS tidak didukung dalam bidang StructArray.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Tidak didukung</td><td>Subbidang teks tidak didukung dalam bidang StructArray.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Tidak didukung</td><td>Subbidang teks tidak didukung di bidang StructArray.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Tidak didukung</td><td>Subbidang timestamptz dan ekspresi berbasis waktu tidak didukung dalam bidang StructArray.</td></tr>
 <tr><td><code translate="no">Array</code>, <code translate="no">ArrayOfVector</code>, <code translate="no">Struct</code>, atau <code translate="no">ArrayOfStruct</code></td><td>Tidak didukung</td><td>Bidang StructArray tidak mendukung subbidang array bersarang, array vektor, Struct, atau Array-of-Struct.</td></tr>
 </tbody>
@@ -155,7 +155,7 @@ summary: >-
 </tbody>
 </table>
 <p>Di Milvus v3.0.x, bidang StructArray yang dapat bernilai null, array vektor yang dapat bernilai null, dan penambahan bidang StructArray dinamis tersedia.</p>
-<p>Untuk contoh penyisipan dengan bidang StructArray yang dapat bernilai null, lihat <a href="/docs/id/insert-data-into-structarray-fields.md">Menyisipkan Data ke dalam Bidang StructArray</a>.</p>
+<p>Untuk contoh penyisipan dengan bidang StructArray yang dapat bernilai null, lihat <a href="/docs/id/insert-data-into-structarray-fields.md">Menyisipkan Data ke Bidang StructArray</a>.</p>
 <h2 id="Insert-limits" class="common-anchor-header">Batas penyisipan<button data-href="#Insert-limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -206,7 +206,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>Pencarian EmbeddingList</td><td><code translate="no">MAX_SIM</code>, <code translate="no">MAX_SIM_COSINE</code>, <code translate="no">MAX_SIM_IP</code>, <code translate="no">MAX_SIM_L2</code>, atau metrik biner <code translate="no">MAX_SIM_*</code> </td><td>Hasil tingkat entitas.</td></tr>
-<tr><td>Pencarian tingkat elemen</td><td>Metrik vektor biasa seperti <code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">COSINE</code>, <code translate="no">HAMMING</code>, atau <code translate="no">JACCARD</code></td><td>Hasil tingkat elemen yang dapat menyertakan offset elemen yang cocok.</td></tr>
+<tr><td>Pencarian tingkat elemen</td><td>Metrik vektor biasa seperti <code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">COSINE</code>, <code translate="no">HAMMING</code>, atau <code translate="no">JACCARD</code></td><td>Hasil tingkat elemen yang dapat mencakup offset elemen yang cocok.</td></tr>
 </tbody>
 </table>
 <p>Gunakan subbidang vektor terpisah jika kedua mode tersebut diperlukan. Misalnya, gunakan <code translate="no">chunks[emb_list_vector]</code> untuk pencarian EmbeddingList dan <code translate="no">chunks[emb]</code> untuk pencarian tingkat elemen.</p>
@@ -281,7 +281,7 @@ summary: >-
       </svg>
     </button></h2><ol>
 <li><p>Untuk membuat bidang StructArray, baca <a href="/docs/id/create-structarray-field.md">Membuat Bidang StructArray</a>.</p></li>
-<li><p>Untuk menyisipkan data, baca " <a href="/docs/id/insert-data-into-structarray-fields.md">Menyisipkan Data ke dalam Bidang StructArray</a>".</p></li>
+<li><p>Untuk menyisipkan data, baca " <a href="/docs/id/insert-data-into-structarray-fields.md">Menyisipkan Data ke Bidang StructArray</a>".</p></li>
 <li><p>Untuk membuat indeks vektor dan skalar, baca " <a href="/docs/id/index-structarray-fields.md">Mengindeks Bidang StructArray</a>".</p></li>
 <li><p>Untuk meninjau sintaks filter StructArray, baca " <a href="/docs/id/struct-array-operators.md">Operator StructArray</a>".</p></li>
 </ol>

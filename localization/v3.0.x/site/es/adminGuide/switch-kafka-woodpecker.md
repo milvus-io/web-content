@@ -3,7 +3,7 @@ id: switch-kafka-woodpecker.md
 title: Cambiar entre Kafka y Woodpecker
 summary: >-
   Cambia la cola de mensajes de un clúster de Milvus entre Kafka y Woodpecker,
-  utilizando Helm o Milvus Operator.
+  con Helm o Milvus Operator.
 ---
 <h1 id="Switch-between-Kafka-and-Woodpecker" class="common-anchor-header">Cambiar entre Kafka y Woodpecker<button data-href="#Switch-between-Kafka-and-Woodpecker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,7 +22,7 @@ summary: >-
       </svg>
     </button></h1><p>En esta página se describe cómo cambiar la cola de mensajes (MQ) de un <strong>clúster de Milvus</strong> entre <strong>Kafka</strong> (integrado o externo) y <strong>Woodpecker</strong> (backend MinIO), en ambas direcciones. Para conocer el flujo de trabajo general y los requisitos previos, consulta <a href="/docs/es/switch-mq-type.md">Cambiar el tipo de MQ</a>.</p>
 <div class="alert note">
-<p><strong>Requisito previo:</strong> la función «Cambiar MQ» está disponible en <strong>Milvus 3.0 y versiones posteriores</strong>. Actualiza tu instancia de Milvus a la versión 3.0 o posterior antes de empezar; esta función no está disponible en versiones anteriores.</p>
+<p><strong>Requisito previo:</strong> la función «Cambiar MQ» está disponible en <strong>Milvus 3.0 y versiones posteriores</strong>. Actualiza tu instancia de Milvus a la versión 3.0 o posterior antes de comenzar; esta función no está disponible en versiones anteriores.</p>
 </div>
 <div class="alert warning">
 <p>Cambiar la cola de mensajes es una <strong>operación de alto riesgo</strong>. Elige la sección que se ajuste <strong>a tu</strong> método de implementación <strong>—Con Helm</strong> o <strong>Con Milvus Operator</strong> — y síguela de principio a fin. No mezcles comandos de Helm y de Operator.</p>
@@ -70,7 +70,7 @@ summary: >-
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>Si el cambio se ha realizado correctamente, se registrará en el registro de eventos de Milvus ( <code translate="no">[mqTypeValue=woodpecker]</code>).</p>
-<p><strong>Paso 4: (Opcional) Detén Kafka y limpia el entorno.</strong> Para Kafka <strong>integrado</strong>, elimina los pods de Kafka y sus PVC. Para Kafka <strong>externo</strong>, limpia los temas de Milvus en la instancia externa de Kafka; siguen el formato <code translate="no">&lt;cluster_prefix&gt;-dml_&lt;seqNo&gt;_&lt;TimeTick&gt;&lt;Version&gt;</code>.</p>
+<p><strong>Paso 4: (Opcional) Detén Kafka y realiza una limpieza.</strong> Para Kafka <strong>integrado</strong>, elimina los pods de Kafka y sus PVC. Para Kafka <strong>externo</strong>, limpia los temas de Milvus en la instancia externa de Kafka; siguen el formato <code translate="no">&lt;cluster_prefix&gt;-dml_&lt;seqNo&gt;_&lt;TimeTick&gt;&lt;Version&gt;</code>.</p>
 <div class="alert note">
 <p>Si tiene previsto volver a Kafka más adelante, elimine primero los datos y los temas para evitar conflictos.</p>
 </div>
@@ -156,7 +156,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p><strong>Paso 1: Comprueba que la instancia de Milvus esté en ejecución.</strong></p>
-<p><strong>Paso 2: Ejecuta el cambio de MQ.</strong> El servicio MixCoord no está expuesto, por lo que debes ejecutar la API de cambio desde dentro del pod de MixCoord:</p>
+<p><strong>Paso 2: Ejecuta el cambio de MQ.</strong> El servicio MixCoord no está expuesto, así que ejecuta la API de cambio desde dentro del pod de MixCoord:</p>
 <pre><code translate="no" class="language-shell">kubectl exec -it &lt;mixcoord-pod&gt; -- \
   curl -X POST http://localhost:9091/management/wal/alter \
   -H &quot;Content-Type: application/json&quot; \
@@ -196,7 +196,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p><strong>Paso 1: Comprueba que la instancia de Milvus esté en ejecución.</strong></p>
-<p><strong>Paso 2: Configura la conexión a Kafka de destino y reinicia Milvus.</strong> Introduce la conexión a Kafka en <code translate="no">spec.config</code> (el operador convierte <code translate="no">spec.config</code> en <code translate="no">user.yaml</code>) y establece el tipo de MQ; al aplicar el CR, los pods se actualizan con la nueva configuración. Para obtener más detalles sobre SASL/SSL, consulta <a href="/docs/es/connect_kafka_ssl.md">«Conectarse a Kafka con SASL/SSL</a>».</p>
+<p><strong>Paso 2: Configura la conexión a Kafka de destino y reinicia Milvus.</strong> Introduce la conexión a Kafka en <code translate="no">spec.config</code> (el operador convierte <code translate="no">spec.config</code> en <code translate="no">user.yaml</code>) y establece el tipo de MQ; al aplicar el CR, los pods se actualizan con la nueva configuración. Para obtener más información sobre SASL/SSL, consulta <a href="/docs/es/connect_kafka_ssl.md">«Conectarse a Kafka con SASL/SSL</a>».</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># change_configmap.yaml</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>

@@ -2,7 +2,7 @@
 id: switch-kafka-woodpecker.md
 title: Beralih antara Kafka dan Woodpecker
 summary: >-
-  Beralihkan antrian pesan pada kluster Milvus antara Kafka dan Woodpecker,
+  Beralihkan antrian pesan pada klaster Milvus antara Kafka dan Woodpecker,
   menggunakan Helm atau Milvus Operator.
 ---
 <h1 id="Switch-between-Kafka-and-Woodpecker" class="common-anchor-header">Beralih antara Kafka dan Woodpecker<button data-href="#Switch-between-Kafka-and-Woodpecker" class="anchor-icon" translate="no">
@@ -22,7 +22,7 @@ summary: >-
       </svg>
     </button></h1><p>Halaman ini menjelaskan cara mengganti antrian pesan (MQ) pada <strong>kluster Milvus</strong> antara <strong>Kafka</strong> (bawaan atau eksternal) dan <strong>Woodpecker</strong> (backend MinIO), baik untuk arah masuk maupun keluar. Untuk alur kerja umum dan prasyarat, lihat <a href="/docs/id/switch-mq-type.md">Mengganti Jenis MQ</a>.</p>
 <div class="alert note">
-<p><strong>Prasyarat:</strong> Fitur Beralih MQ tersedia di <strong>Milvus 3.0 dan versi selanjutnya</strong>. Tingkatkan instance Milvus Anda ke Milvus 3.0 atau versi selanjutnya sebelum memulai — fitur ini tidak tersedia pada versi sebelumnya.</p>
+<p><strong>Prasyarat:</strong> Fitur Beralih MQ tersedia di <strong>Milvus 3.0 dan versi yang lebih baru</strong>. Tingkatkan instance Milvus Anda ke Milvus 3.0 atau versi yang lebih baru sebelum memulai — fitur ini tidak tersedia pada versi sebelumnya.</p>
 </div>
 <div class="alert warning">
 <p>Mengganti antrian pesan adalah <strong>operasi berisiko tinggi</strong>. Pilih bagian yang sesuai dengan metode penyebaran <strong>Anda</strong> — <strong>Dengan Helm</strong> atau <strong>Dengan Milvus Operator</strong> — dan ikuti langkah-langkahnya dari atas ke bawah. Jangan mencampurkan perintah Helm dan Operator.</p>
@@ -90,7 +90,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p><strong>Langkah 1: Pastikan instance Milvus sedang berjalan.</strong></p>
-<p><strong>Langkah 2: Konfigurasikan koneksi Kafka tujuan dan mulai ulang Milvus.</strong> Proses peralihan ini memerlukan Milvus untuk sudah mengetahui koneksi Kafka, jadi masukkan koneksi tersebut ke <code translate="no">user.yaml</code> melalui <code translate="no">extraConfigFiles</code> dan terapkan dengan <code translate="no">helm upgrade</code> (yang akan me-roll pod-pod tersebut). <code translate="no">streaming.enabled=true</code> diperlukan untuk fitur Switch MQ. Untuk detail SASL/SSL, lihat <a href="/docs/id/connect_kafka_ssl.md">Connect to Kafka with SASL/SSL</a>.</p>
+<p><strong>Langkah 2: Konfigurasikan koneksi Kafka tujuan dan mulai ulang Milvus.</strong> Proses peralihan ini memerlukan Milvus untuk sudah mengetahui koneksi Kafka, jadi masukkan koneksi tersebut ke dalam ` <code translate="no">user.yaml</code> ` melalui ` <code translate="no">extraConfigFiles</code> ` dan terapkan dengan ` <code translate="no">helm upgrade</code> ` (yang akan me-roll pod-pod tersebut). ` <code translate="no">streaming.enabled=true</code> ` diperlukan untuk fitur Switch MQ. Untuk detail SASL/SSL, lihat <a href="/docs/id/connect_kafka_ssl.md">"Connect to Kafka with SASL/SSL</a>".</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -180,7 +180,7 @@ summary: >-
 <pre><code translate="no" class="language-shell">kubectl patch -f change_configmap.yaml --patch-file change_configmap.yaml --type merge
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Langkah 5: (Opsional) Hentikan Kafka dan bersihkan.</strong> Untuk Kafka <strong>bawaan</strong>, hapus pod Kafka dan PVC-nya. Untuk Kafka <strong>eksternal</strong>, bersihkan topik Milvus (format <code translate="no">&lt;cluster_prefix&gt;-dml_&lt;seqNo&gt;_&lt;TimeTick&gt;&lt;Version&gt;</code>).</p>
-<h3 id="Switch-from-Woodpecker-to-Kafka-Milvus-Operator" class="common-anchor-header">Beralih dari Woodpecker ke Kafka (Operator Milvus)<button data-href="#Switch-from-Woodpecker-to-Kafka-Milvus-Operator" class="anchor-icon" translate="no">
+<h3 id="Switch-from-Woodpecker-to-Kafka-Milvus-Operator" class="common-anchor-header">Beralih dari Woodpecker ke Kafka (Milvus Operator)<button data-href="#Switch-from-Woodpecker-to-Kafka-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

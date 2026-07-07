@@ -19,7 +19,7 @@ beta: Milvus 3.0.0+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">arabic_normalization</code> 篩選器是專為阿拉伯文設計的內建標記篩選器。它會將阿拉伯文特有的字母變體進行標準化處理，並移除那些可能導致等效阿拉伯文術語在文字分析過程中顯得不同的可選標記。</p>
+    </button></h1><p><code translate="no">arabic_normalization</code> 篩選器是專為阿拉伯文設計的內建詞元篩選器。它會將阿拉伯文特有的字母變體進行標準化處理，並移除那些可能導致等效阿拉伯文術語在文字分析過程中顯得不同的可選標記。</p>
 <h2 id="Configuration" class="common-anchor-header">設定<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,7 +36,7 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>對於阿拉伯文，在大多數情況下請使用內建的 <a href="/docs/zh-hant/arabic-analyzer.md"><code translate="no">arabic</code></a> 分析器。此內建分析器包含此濾波器，並結合標準的詞元分割、轉為小寫、小數位數標準化、阿拉伯語詞幹提取以及阿拉伯語停用詞移除功能。僅當您需要建立自訂分析器管線時，才應直接使用「<code translate="no">arabic_normalization</code> 」。</p>
+<p>對於阿拉伯文，在大多數情況下請使用內建的 <a href="/docs/zh-hant/arabic-analyzer.md"><code translate="no">arabic</code></a> 分析器。此內建分析器包含此濾波器，並結合標準的詞元分割、轉為小寫、小數位數標準化、阿拉伯語詞幹化以及阿拉伯語停用詞移除功能。僅當您需要建立自訂分析器管線時，才應直接使用「<code translate="no">arabic_normalization</code> 」。</p>
 </div>
 <p>若要在自訂分析器中使用<code translate="no">arabic_normalization</code> 篩選器，請將其新增至<code translate="no">analyzer_params</code> 中的<code translate="no">filter</code> 區段：</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -78,7 +78,7 @@ beta: Milvus 3.0.0+
      <td><p>已移除</p></td>
    </tr>
 </table>
-<p>此篩選器針對分詞器所產生的標記進行處理。上述設定是刻意作為自訂分析器的範例，並不包含完整的阿拉伯語處理流程。</p>
+<p>此篩選器作用於分詞器所產生的標記。上述設定是刻意作為自訂分析器的範例，並不包含完整的阿拉伯語處理流程。</p>
 <h2 id="Examples" class="common-anchor-header">範例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -94,7 +94,7 @@ beta: Milvus 3.0.0+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在將分析器設定套用至您的集合架構之前，請先使用 `<code translate="no">run_analyzer</code> ` 方法驗證其行為。</p>
+    </button></h2><p>在將分析器設定套用至您的集合架構之前，請先使用 `<code translate="no">run_analyzer</code> ` 方法驗證其運作行為。</p>
 <h3 id="Analyzer-configuration" class="common-anchor-header">分析器設定<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

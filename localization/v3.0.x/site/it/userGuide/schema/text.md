@@ -3,7 +3,7 @@ id: text.md
 title: Campo di testoCompatible with Milvus 3.0.x
 summary: >-
   TEXT è un tipo di campo scalare utilizzato per memorizzare il testo dei
-  documenti, i brani e altri contenuti testuali di grandi dimensioni in Milvus.
+  documenti, i brani e altri contenuti testuali di lunga durata in Milvus.
 beta: Milvus 3.0.x
 ---
 <h1 id="Text-Field" class="common-anchor-header">Campo di testo<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Text-Field" class="anchor-icon" translate="no">
@@ -29,7 +29,7 @@ beta: Milvus 3.0.x
 <span class="highlighted-wrapper-line">    datatype=DataType.TEXT,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Una volta definito il campo, ogni entità può includere un valore stringa in quel campo. I valori di tipo " <code translate="no">TEXT</code> " si inseriscono come gli altri campi scalari e vengono restituiti dai risultati delle query o delle ricerche elencando il campo in <code translate="no">output_fields</code>.</p>
+<p>Una volta definito il campo, ogni entità può includere un valore di tipo stringa in quel campo. I valori di tipo " <code translate="no">TEXT</code> " si inseriscono come gli altri campi scalari e vengono restituiti dai risultati delle query o delle ricerche elencando il campo in <code translate="no">output_fields</code>.</p>
 <div class="alert note">
 <p><code translate="no">TEXT</code> I campi supportano i valori nulli. Per abilitare questa funzionalità, impostare <code translate="no">nullable</code> su <code translate="no">True</code>. Per ulteriori dettagli, consultare <a href="/docs/it/nullable-and-default.md">Campo nullabile</a>.</p>
 </div>
@@ -71,7 +71,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">TEXT</code> e <code translate="no">VARCHAR</code> memorizzano entrambi valori di stringa, ma soddisfano esigenze applicative diverse. Utilizza <code translate="no">VARCHAR</code> per metadati brevi e circoscritti che identificano, categorizzano o filtrano le entità. Utilizza <code translate="no">TEXT</code> per contenuti di origine più lunghi che forniscono a un LLM o a un agente un contesto sufficiente per leggere, citare, riassumere o costruire un prompt.</p>
+    </button></h2><p><code translate="no">TEXT</code> e <code translate="no">VARCHAR</code> memorizzano entrambi valori di stringa, ma soddisfano esigenze applicative diverse. Utilizza <code translate="no">VARCHAR</code> per metadati brevi e circoscritti che identificano, categorizzano o filtrano le entità. Utilizza <code translate="no">TEXT</code> per contenuti di origine più lunghi che forniscono a un LLM o a un agente un contesto sufficiente per leggere, citare, riassumere o creare un prompt.</p>
 <table>
 <thead>
 <tr><th>Aspetto</th><th><code translate="no">VARCHAR</code></th><th><code translate="no">TEXT</code></th></tr>
@@ -84,7 +84,7 @@ beta: Milvus 3.0.x
 <tr><td>Filtraggio</td><td>Da utilizzare per metadati costituiti da stringhe brevi che devono comparire nelle espressioni di filtro, come <code translate="no">category == &quot;news&quot;</code> o <code translate="no">tag in [&quot;ai&quot;, &quot;database&quot;]</code>.</td><td>Non è destinato al filtraggio regolare dei metadati.</td></tr>
 </tbody>
 </table>
-<p>Per ulteriori dettagli sui campi di tipo <code translate="no">VARCHAR</code>, consultare la sezione <a href="/docs/it/string.md">Campo VarChar</a>.</p>
+<p>Per ulteriori dettagli sui campi di tipo " <code translate="no">VARCHAR</code> ", consultare la sezione " <a href="/docs/it/string.md">Campo VarChar</a>".</p>
 <h2 id="How-Milvus-stores-large-TEXT-values" class="common-anchor-header">Come Milvus memorizza i valori TEXT di grandi dimensioni<button data-href="#How-Milvus-stores-large-TEXT-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -110,7 +110,7 @@ beta: Milvus 3.0.x
   
  </span></p>
 <ul>
-<li><strong>Archiviazione in linea</strong>: se il valore di ` <code translate="no">TEXT</code> ` è inferiore a ` <code translate="no">dataNode.text.inlineThreshold</code>`, Milvus memorizza il valore di testo originale direttamente nei dati del campo ` <code translate="no">TEXT</code> `.</li>
+<li><strong>Archiviazione in linea</strong>: se il valore di ` <code translate="no">TEXT</code> ` è inferiore a ` <code translate="no">dataNode.text.inlineThreshold</code>`, Milvus memorizza il valore del testo originale direttamente nei dati del campo ` <code translate="no">TEXT</code> `.</li>
 <li><strong>Archiviazione LOB</strong>: se un valore di ` <code translate="no">TEXT</code> ` è maggiore o uguale a ` <code translate="no">dataNode.text.inlineThreshold</code>`, Milvus tratta il valore come un oggetto di grandi dimensioni e archivia il testo originale separatamente in un sistema di archiviazione oggetti, come MinIO. Il campo ` <code translate="no">TEXT</code> ` memorizza un riferimento interno al testo archiviato separatamente. Quando il campo ` <code translate="no">TEXT</code> ` viene richiesto nei risultati di una query o di una ricerca, Milvus utilizza il riferimento per recuperare e restituire il testo originale.</li>
 </ul>
 <p>Questa scelta di archiviazione è interna. L’inserimento, l’interrogazione e la ricerca nel campo ` <code translate="no">TEXT</code> ` avvengono allo stesso modo, indipendentemente dal percorso di archiviazione utilizzato da Milvus. Per ottimizzare la soglia o il comportamento relativo all’archiviazione, alla compattazione e alla garbage collection, consultare <a href="/docs/it/configure_datanode.md">le configurazioni relative a `dataNode`</a> e <a href="/docs/it/configure_datacoord.md">quelle relative a `dataCoord`</a>.</p>
@@ -133,7 +133,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><p>L’esempio seguente crea una raccolta con un campo <code translate="no">TEXT</code> per il contenuto di origine e un campo vettore sparso per i vettori sparsi generati da BM25. La funzione BM25 converte il testo tokenizzato da <code translate="no">content</code> in vettori sparsi memorizzati in <code translate="no">sparse</code>.</p>
-<p>Per la ricerca full-text con BM25, il campo di input ` <code translate="no">TEXT</code> ` deve essere impostato su ` <code translate="no">enable_analyzer=True</code>`.</p>
+<p>Per la ricerca full-text con BM25, il campo di input « <code translate="no">TEXT</code> » deve essere impostato su <code translate="no">enable_analyzer=True</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, Function, FunctionType, MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -208,7 +208,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Inserire il testo direttamente nel campo « <code translate="no">TEXT</code> ». Non specificare valori per il campo « <code translate="no">sparse</code> ». Milvus genera internamente i vettori sparsi applicando la funzione BM25 a « <code translate="no">content</code> ».</p>
+    </button></h2><p>Inserire il testo direttamente nel campo <code translate="no">TEXT</code>. Non specificare valori per il campo <code translate="no">sparse</code>. Milvus genera internamente i vettori sparsi applicando la funzione BM25 a <code translate="no">content</code>.</p>
 <pre><code translate="no" class="language-python">data = [
     {
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,

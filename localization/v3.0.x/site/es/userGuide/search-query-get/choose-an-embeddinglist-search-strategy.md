@@ -45,12 +45,12 @@ summary: >-
 <p>Esto proporciona una mayor capacidad de representación, pero el MaxSim exacto resulta costoso a gran escala. Una búsqueda MaxSim por fuerza bruta tendría que comparar los vectores de consulta con cada vector de cada fila candidata. Esto suele ser demasiado lento para la búsqueda en producción.</p>
 <table>
 <thead>
-<tr><th>### Problema - Cada fila puede contener muchos vectores. - Aplicar MaxSim exacto a todas las filas resulta costoso. - El tamaño del índice y la latencia de la búsqueda pueden aumentar rápidamente.</th><th>### Estrategia - Utilizar un método de recuperación aproximado en la primera etapa. - Recuperar más candidatos que los topK solicitados. - Reordenar los candidatos con MaxSim exacto.</th></tr>
+<tr><th>### Problema - Cada fila puede contener muchos vectores. - Aplicar MaxSim exacto a todas las filas resulta costoso. - El tamaño del índice y la latencia de la búsqueda pueden aumentar rápidamente.</th><th>### Estrategia - Utilizar un método de recuperación aproximado en una primera etapa. - Recuperar más candidatos que los topK solicitados. - Reordenar los candidatos con MaxSim exacto.</th></tr>
 </thead>
 <tbody>
 </tbody>
 </table>
-<p>En este sentido, « <code translate="no">emb_list_strategy</code> » es principalmente una estrategia de creación de índices y recuperación de candidatos. Se configura al crear el índice y determina cómo se genera el conjunto de candidatos de la primera etapa de la red neuronal (ANN). Los parámetros de tiempo de búsqueda, como « <code translate="no">retrieval_ann_ratio</code> » y « <code translate="no">emb_list_rerank</code> », controlan entonces cuántos candidatos se recuperan y si se aplica la reordenación mediante MaxSim.</p>
+<p>En este sentido, « <code translate="no">emb_list_strategy</code> » es principalmente una estrategia de creación de índices y recuperación de candidatos. Se configura al crear el índice y determina cómo se genera el conjunto de candidatos de la primera etapa de la red neuronal artificial (ANN). Los parámetros en tiempo de búsqueda, como « <code translate="no">retrieval_ann_ratio</code> » y « <code translate="no">emb_list_rerank</code> », controlan entonces cuántos candidatos se recuperan y si se aplica la reordenación mediante MaxSim.</p>
 <hr>
 <h2 id="Available-Strategies" class="common-anchor-header">Estrategias disponibles<button data-href="#Available-Strategies" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -97,7 +97,7 @@ summary: >-
 <p><strong>Utiliza TokenANN cuando la calidad sea la máxima prioridad.</strong> Es la aproximación más cercana al cálculo original de MaxSim, ya que mantiene todos los vectores disponibles en el índice de la primera etapa.</p>
 </div>
 <ul>
-<li><p><strong>Adecuado para:</strong> fragmentos de texto cortos, filas con un número pequeño o moderado de vectores, fuerte separación semántica a nivel de token y líneas de base sensibles a la calidad.</p></li>
+<li><p><strong>Ideal para:</strong> fragmentos de texto cortos, filas con un número pequeño o moderado de vectores, separación semántica marcada a nivel de token y líneas de base en las que prima la calidad.</p></li>
 <li><p><strong>Menos adecuado:</strong> documentos muy largos, páginas visuales con miles de vectores de parches, restricciones estrictas de memoria o latencia.</p></li>
 <li><p><strong>Comportamiento a nivel de elemento:</strong> TokenANN puede recuperar candidatos a partir de vectores individuales antes de volver a agregarlos en filas. El resultado final de la búsqueda en EmbeddingList sigue siendo a nivel de fila tras la puntuación de MaxSim.</p></li>
 </ul>
@@ -191,13 +191,13 @@ summary: >-
 <tr><td><code translate="no">muvera</code></td><td><code translate="no">emb_list_strategy=&quot;muvera&quot;</code></td><td>Creación de índices</td><td><code translate="no">tokenann</code></td><td>Úsalo cuando desees una recuperación codificada a nivel de fila sin necesidad de entrenamiento.</td></tr>
 <tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_num_projections</code></td><td>Creación de índice</td><td><code translate="no">4</code></td><td>Controla el recuento de proyecciones de SimHash. Los valores más altos crean más compartimentos y pueden mejorar la calidad de la codificación, pero aumentan la dimensionalidad codificada.</td></tr>
 <tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_num_repeats</code></td><td>Creación de índice</td><td><code translate="no">7</code></td><td>Controla cuántas codificaciones FDE independientes se concatenan. Los valores más altos pueden mejorar la robustez, pero aumentan el coste del índice y de la búsqueda.</td></tr>
-<tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_seed</code></td><td>Creación del índice</td><td><code translate="no">42</code></td><td>Se establece para obtener proyecciones aleatorias reproducibles, especialmente en pruebas y comparativas de rendimiento.</td></tr>
+<tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_seed</code></td><td>Creación del índice</td><td><code translate="no">42</code></td><td>Se configura para obtener proyecciones aleatorias reproducibles, especialmente en pruebas y comparativas de rendimiento.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">emb_list_strategy=&quot;lemur&quot;</code></td><td>Creación de índices</td><td><code translate="no">tokenann</code></td><td>Utilízalo cuando se espere que la compresión aprendida a nivel de fila funcione mejor que la proyección aleatoria fija.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_hidden_dim</code></td><td>Creación de índices</td><td><code translate="no">256</code></td><td>Controla el tamaño de la representación comprimida. Aumenta este valor para obtener más capacidad; disminúyelo para reducir el consumo de memoria y acelerar la recuperación.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_num_train_samples</code></td><td>Creación de índices</td><td><code translate="no">20000</code></td><td>Aumenta este valor cuando el corpus sea diverso y la compresión aprendida no se ajuste bien; redúcelo solo para pruebas pequeñas o para creaciones más rápidas.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_num_epochs</code></td><td>Creación de índices</td><td><code translate="no">50</code></td><td>Aumenta si el entrenamiento no ha convergido; reduce cuando el tiempo de creación sea la principal limitación.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_batch_size</code></td><td>Creación del índice</td><td><code translate="no">512</code></td><td>Ajústalo en función del rendimiento del entrenamiento y del uso de memoria.</td></tr>
-<tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_learning_rate</code></td><td>Creación del índice</td><td><code translate="no">0.001</code></td><td>Ajustar cuando el entrenamiento sea inestable o converja demasiado lentamente.</td></tr>
+<tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_learning_rate</code></td><td>Creación de índices</td><td><code translate="no">0.001</code></td><td>Ajustar cuando el entrenamiento sea inestable o converja demasiado lentamente.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_seed</code></td><td>Creación de índices</td><td><code translate="no">42</code></td><td>Configurar para que las ejecuciones de entrenamiento sean reproducibles.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_num_layers</code></td><td>Creación de índices</td><td><code translate="no">2</code></td><td>Aumenta este valor solo cuando el corpus necesite un extractor de características más expresivo y puedas asumir el coste adicional del entrenamiento.</td></tr>
 <tr><td>Todas las estrategias</td><td><code translate="no">retrieval_ann_ratio</code></td><td>Búsqueda</td><td><code translate="no">3.0</code></td><td>Aumenta para recuperar más candidatos de primera etapa y mejorar la recuperación; disminuye para reducir la latencia.</td></tr>
@@ -379,7 +379,7 @@ index_params.add_index(
 </ol>
 <table>
 <thead>
-<tr><th>### La calidad ante todo: empieza con <code translate="no">tokenann</code>. Úsalo como referencia para la calidad de la aproximación de MaxSim.</th><th>### Equilibrado Prueba <code translate="no">muvera</code> cuando necesites reducir el coste sin añadir un proceso de entrenamiento.</th><th>### Comprimido: Prueba <code translate="no">lemur</code> cuando sea probable que la compresión aprendida a nivel de fila supere a la proyección aleatoria fija.</th></tr>
+<tr><th>### La calidad ante todo Empieza con <code translate="no">tokenann</code>. Úsalo como referencia para la calidad de la aproximación de MaxSim.</th><th>### Equilibrado Prueba <code translate="no">muvera</code> cuando necesites reducir el coste sin añadir un proceso de entrenamiento.</th><th>### Comprimido: Prueba <code translate="no">lemur</code> cuando sea probable que la compresión aprendida a nivel de fila supere a la proyección aleatoria fija.</th></tr>
 </thead>
 <tbody>
 </tbody>

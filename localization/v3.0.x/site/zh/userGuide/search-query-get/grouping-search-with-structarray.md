@@ -3,7 +3,7 @@ id: grouping-search-with-structarray.md
 title: 使用 StructArray 进行分组搜索
 summary: >-
   使用此页面可按父实体对 StructArray 的元素级搜索结果进行分组。当多个 Struct
-  元素匹配查询条件时，元素级搜索可能会返回来自同一实体的多个匹配结果。分组操作会将这些元素级匹配结果合并，从而确保每个父实体至多出现一次。
+  元素与查询条件匹配时，元素级搜索可能会返回来自同一实体的多个匹配结果。分组操作会将这些元素级匹配结果合并，从而确保每个父实体至多出现一次。
 ---
 <h1 id="Grouping-Search-with-StructArray" class="common-anchor-header">使用 StructArray 进行分组搜索<button data-href="#Grouping-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -43,7 +43,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>EmbeddingList 搜索</td><td>不支持。</td><td>不适用。</td></tr>
-<tr><td>元素级搜索</td><td>支持按主键分组。</td><td>每个父实体最多返回一个结果。元素级元数据将被保留，因此当通过 API 或 SDK 暴露时，可以返回所选元素的索引或偏移量。</td></tr>
+<tr><td>元素级搜索</td><td>支持按主键分组。</td><td>每个父实体最多返回一个结果。元素级元数据得以保留，因此当通过 API 或 SDK 暴露时，可以返回所选元素的索引或偏移量。</td></tr>
 <tr><td>混合搜索</td><td>仅当所有子搜索都针对同一 StructArray 字段下的元素级向量字段时才受支持。</td><td>在处理最终结果之前，元素级子搜索会按主键进行分组。</td></tr>
 </tbody>
 </table>
@@ -128,7 +128,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>如果不进行分组，当多个块匹配查询时，相同的<code translate="no">doc_id</code> 可能会出现多次。使用<code translate="no">group_by_field=&quot;doc_id&quot;</code> 时，每个父实体最多出现一次。分组会保留元素级元数据，因此当API或SDK公开相关信息时，分组后的结果仍可包含所选的Struct元素索引或偏移量。</p>
+<p>如果不进行分组，当多个块匹配查询时，相同的<code translate="no">doc_id</code> 可能会出现多次。使用<code translate="no">group_by_field=&quot;doc_id&quot;</code> 时，每个父实体最多出现一次。分组会保留元素级元数据，因此当API或SDK公开时，分组后的结果仍可包含所选的Struct元素索引或偏移量。</p>
 <h2 id="Add-scalar-filters" class="common-anchor-header">添加标量过滤器<button data-href="#Add-scalar-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -284,11 +284,11 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>将分组与<code translate="no">chunks[emb_list_vector]</code> 结合使用，而该字段专用于 EmbeddingList 搜索。</p></li>
+<li><p>将分组与<code translate="no">chunks[emb_list_vector]</code> 结合使用，而 专用于 EmbeddingList 搜索。</p></li>
 <li><p>按非主键标量字段进行分组。</p></li>
 <li><p>按多个字段进行分组。元素级 StructArray 分组仅支持主键分组。</p></li>
 <li><p>期望分组结果能代表每个匹配的 Struct 元素。分组操作每个父实体最多返回一个结果。</p></li>
-<li><p>假设按元素级分组搜索会重新计算 EmbeddingList 风格的<code translate="no">MAX_SIM*</code> 得分。分组操作会合并元素级匹配结果，但不会改变评分模型。</p></li>
+<li><p>假设按元素级分组搜索会重新计算 EmbeddingList 风格的<code translate="no">MAX_SIM*</code> 得分。分组会合并元素级匹配结果，但不会改变评分模型。</p></li>
 <li><p>将<code translate="no">group_by_field</code> 与<code translate="no">radius</code> 或<code translate="no">range_filter</code> 结合使用。</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">下一步<button data-href="#Next-steps" class="anchor-icon" translate="no">
@@ -307,8 +307,8 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>若要先了解未分组的元素级搜索，请阅读《<a href="/docs/zh/basic-vector-search-with-structarray.md">使用 StructArray 进行基本向量搜索</a>》。</p></li>
-<li><p>若要在分组搜索中添加标量过滤器，请阅读《<a href="/docs/zh/filtered-search-with-structarray.md">使用 StructArray 进行过滤搜索</a>》。</p></li>
+<li><p>若要先了解未分组的元素级搜索，请阅读《<a href="/docs/zh/basic-vector-search-with-structarray.md">使用 StructArray 进行基础向量搜索</a>》。</p></li>
+<li><p>若要为分组搜索添加标量过滤器，请阅读《<a href="/docs/zh/filtered-search-with-structarray.md">使用 StructArray 进行过滤搜索</a>》。</p></li>
 <li><p>若要使用得分或距离边界代替分组，请阅读《<a href="/docs/zh/range-search-with-structarray.md">使用 StructArray 进行范围搜索</a>》。</p></li>
 <li><p>要查看 StructArray 的搜索限制，请阅读《<a href="/docs/zh/structarray-limits.md">StructArray 限制</a>》。</p></li>
 </ol>

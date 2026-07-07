@@ -80,7 +80,7 @@ beta: Milvus 3.0.0+
      <td><p>Entfernt</p></td>
    </tr>
 </table>
-<p>Der Filter verarbeitet die vom Tokenizer generierten Token. Die obige Konfiguration ist bewusst als Beispiel für einen benutzerdefinierten Analysator gedacht und umfasst nicht die vollständige Pipeline zur Verarbeitung arabischer Sprache.</p>
+<p>Der Filter verarbeitet die vom Tokenizer generierten Tokens. Die obige Konfiguration ist bewusst als Beispiel für einen benutzerdefinierten Analysator gedacht und umfasst nicht die vollständige Pipeline zur Verarbeitung arabischer Sprache.</p>
 <h2 id="Examples" class="common-anchor-header">Beispiele<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

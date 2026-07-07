@@ -109,7 +109,7 @@ summary: >-
 <tr><td><code translate="no">Array</code> أو <code translate="no">ArrayOfVector</code> أو <code translate="no">Struct</code> أو <code translate="no">ArrayOfStruct</code></td><td>غير مدعوم</td><td>لا يمكن أن يحتوي حقل StructArray على مصفوفات متداخلة، أو مصفوفات متجهة متداخلة، أو حقول Struct متداخلة، أو حقول Array-of-Struct متداخلة.</td></tr>
 </tbody>
 </table>
-<p>للحصول على الدعم الخاص بالإصدار، وسلوك القيم التي يمكن أن تكون فارغة، والقيود الأخرى، راجع " <a href="/docs/ar/structarray-limits.md">قيود StructArray</a>".</p>
+<p>للحصول على معلومات حول الدعم الخاص بالإصدارات وسلوك القيم التي يمكن أن تكون فارغة والقيود الأخرى، راجع " <a href="/docs/ar/structarray-limits.md">قيود StructArray</a>".</p>
 <h2 id="Create-a-collection-with-a-StructArray-field" class="common-anchor-header">إنشاء مجموعة تحتوي على حقل StructArray<button data-href="#Create-a-collection-with-a-StructArray-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -237,7 +237,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بعد إنشاء حقل StructArray، قم بالإشارة إلى حقوله الفرعية باستخدام صيغة مسار <code translate="no">structArray[subfield]</code>. استخدم هذه الصيغة عند إنشاء الفهارس، أو البحث في الحقول الفرعية المتجهة، أو إخراج الحقول الفرعية، أو إنشاء عوامل تصفية سكالارية.</p>
+    </button></h2><p>بعد إنشاء حقل StructArray، قم بالإشارة إلى حقوله الفرعية باستخدام صيغة مسار <code translate="no">structArray[subfield]</code>. استخدم هذه الصيغة عند إنشاء الفهارس، أو البحث في الحقول الفرعية المتجهة، أو إخراج الحقول الفرعية، أو إنشاء عوامل تصفية قياسية.</p>
 <table>
 <thead>
 <tr><th>المسار</th><th>المعنى</th><th>الاستخدام الشائع</th></tr>
@@ -379,7 +379,7 @@ client.add_collection_struct_field(
 <tr><td>يُسمح فقط بأنواع الحقول الفرعية المدعومة.</td><td>استخدم أنواع الحقول الفرعية القياسية والمتجهة التي يدعمها StructArray. لا تقم بتعريف الحقول الفرعية من أنواع JSON أو Geometry أو Text أو Timestamptz أو SparseFloatVector أو الحقول الفرعية المتداخلة من نوع Struct / Array.</td></tr>
 <tr><td>تحتاج الحقول الفرعية المتجهة إلى فهارس قبل البحث.</td><td>قم بإنشاء فهارس على مسارات مثل <code translate="no">chunks[emb_list_vector]</code> أو <code translate="no">chunks[emb]</code> قبل تشغيل البحث المتجهي.</td></tr>
 <tr><td>يحتوي كل حقل فرعي متجه على فهرس واحد.</td><td>إذا كنت بحاجة إلى كل من البحث في EmbeddingList والبحث على مستوى العناصر، فأنشئ حقلين فرعيين متجهين منفصلين.</td></tr>
-<tr><td>الحقول الفرعية StructArray الموجودة ثابتة.</td><td>بعد إنشاء حقل StructArray، لا تتوقع إضافة المزيد من الحقول الفرعية إلى نفس حقل StructArray هذا.</td></tr>
+<tr><td>الحقول الفرعية StructArray الموجودة ثابتة.</td><td>بعد إنشاء حقل StructArray، لا تتوقع إضافة المزيد من الحقول الفرعية إلى حقل StructArray نفسه.</td></tr>
 <tr><td>لا يتم دعم الدوال داخل Struct.</td><td>لا تقم بتعريف وظائف للحقول أو الحقول الفرعية داخل حقل StructArray.</td></tr>
 <tr><td>يجب أن تتوافق الحقول الفرعية القياسية مع متطلبات التصفية.</td><td>أضف حقولًا مثل <code translate="no">section</code> أو <code translate="no">quality_score</code> أو <code translate="no">has_code</code> فقط عندما تحتاج إلى تصفية هذه الحقول أو تجميعها أو إخراجها لاحقًا.</td></tr>
 </tbody>
@@ -402,7 +402,7 @@ client.add_collection_struct_field(
     </button></h2><ul>
 <li><p>إنشاء <code translate="no">DataType.STRUCT</code> كحقل تجميع من المستوى الأعلى بدلاً من استخدامه كنوع عنصر لحقل Array.</p></li>
 <li><p>نسيان تعيين <code translate="no">max_capacity</code> في حقل StructArray.</p></li>
-<li><p>تحديد أنواع الحقول الفرعية غير المدعومة، مثل JSON أو Geometry أو Text أو Timestamptz أو SparseFloatVector أو Array المتداخلة أو Struct المتداخلة أو Array-of-Struct.</p></li>
+<li><p>تحديد أنواع حقول فرعية غير مدعومة، مثل JSON أو Geometry أو Text أو Timestamptz أو SparseFloatVector أو Array متداخلة أو Struct متداخلة أو Array-of-Struct.</p></li>
 <li><p>استخدام <code translate="no">String</code> كنوع حقل فرعي. استخدم <code translate="no">VARCHAR</code> وقم بتعيين <code translate="no">max_length</code>.</p></li>
 <li><p>استخدام حقل فرعي متجه واحد لكل من البحث في EmbeddingList والبحث على مستوى العناصر.</p></li>
 <li><p>إضافة الحقول الفرعية المتجهة فقط وتجاهل الحقول الفرعية القياسية اللازمة للتصفية، مثل <code translate="no">section</code> أو <code translate="no">quality_score</code> أو <code translate="no">has_code</code>.</p></li>
@@ -428,7 +428,7 @@ client.add_collection_struct_field(
       </svg>
     </button></h2><ol>
 <li><p>لإدراج بيانات متداخلة في حقل StructArray، اقرأ " <a href="/docs/ar/insert-data-into-structarray-fields.md">إدراج البيانات في حقول StructArray</a>".</p></li>
-<li><p>لإنشاء فهارس متجهة وقيمية، اقرأ <a href="/docs/ar/index-structarray-fields.md">«فهرسة حقول StructArray</a>».</p></li>
+<li><p>لإنشاء فهارس متجهة وقيمية، اقرأ " <a href="/docs/ar/index-structarray-fields.md">فهرسة حقول StructArray</a>".</p></li>
 <li><p>للبحث في الحقول الفرعية المتجهة لـ StructArray، اقرأ "البحث المتجه الأساسي باستخدام StructArray".</p></li>
 <li><p>لمراجعة أنواع البيانات المدعومة، وسلوك القيم التي يمكن أن تكون فارغة، والقيود الخاصة بالإصدارات، اقرأ " <a href="/docs/ar/structarray-limits.md">حدود StructArray</a>".</p></li>
 </ol>

@@ -96,7 +96,7 @@ res = client.query(
 </tbody>
 </table>
 <p>Utilize <code translate="no">LIKE</code> para correspondências simples com caracteres curinga. Utilize expressões regulares quando o padrão necessitar de classes de caracteres, repetições, alternativas como <code translate="no">error|failed</code>, âncoras ou correspondências sem distinção entre maiúsculas e minúsculas.</p>
-<h2 id="Use-LIKE" class="common-anchor-header">Utilize LIKE<button data-href="#Use-LIKE" class="anchor-icon" translate="no">
+<h2 id="Use-LIKE" class="common-anchor-header">Utilizar LIKE<button data-href="#Use-LIKE" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -111,7 +111,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O operador <code translate="no">LIKE</code> destina-se à correspondência simples com caracteres curinga em valores de cadeia de caracteres. Suporta apenas os seguintes caracteres curinga:</p>
+    </button></h2><p>O operador <code translate="no">LIKE</code> destina-se à correspondência simples com caracteres curinga em valores de cadeia de caracteres. Apoia apenas os seguintes caracteres curinga:</p>
 <table>
 <thead>
 <tr><th>Caractere curinga</th><th>Descrição</th></tr>
@@ -163,7 +163,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Utilize « <code translate="no">LIKE</code> » para correspondências de prefixo, sufixo, «contém» e de um único carácter numa posição fixa. « <code translate="no">LIKE</code> » não suporta classes de caracteres como « <code translate="no">[0-9]</code> », alternâncias como « <code translate="no">error|failed</code> », contagens de repetições como « <code translate="no">{4}</code> », âncoras como « <code translate="no">^</code> » ou « <code translate="no">$</code> », nem sinalizadores de insensibilidade a maiúsculas e minúsculas como « <code translate="no">(?i)</code> ». Utilize expressões regulares (regex) para esses padrões.</p>
+    </button></h3><p>Utilize « <code translate="no">LIKE</code> » para correspondências de prefixo, sufixo, «contém» e de um único carácter numa posição fixa. « <code translate="no">LIKE</code> » não suporta classes de caracteres como « <code translate="no">[0-9]</code> », alternâncias como « <code translate="no">error|failed</code> », contagens de repetições como « <code translate="no">{4}</code> », âncoras como « <code translate="no">^</code> » ou « <code translate="no">$</code> », nem indicadores de insensibilidade a maiúsculas e minúsculas como « <code translate="no">(?i)</code> ». Utilize expressões regulares (regex) para esses padrões.</p>
 <p>Utilize <code translate="no">==</code> para igualdade exata de cadeias completas. Utilize <code translate="no">LIKE</code> apenas quando o filtro necessitar de correspondência com caracteres curinga.</p>
 <h3 id="Escaping-wildcards-in-a-LIKE-pattern" class="common-anchor-header">Escapar caracteres curinga num padrão LIKE<button data-href="#Escaping-wildcards-in-a-LIKE-pattern" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -268,10 +268,10 @@ res = client.query(
 <p>Para corresponder a uma de várias palavras, utilize a alternância com <code translate="no">|</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ &quot;error|failed|timeout&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Ao corresponder metacaracteres de expressões regulares literalmente, escape-os no padrão de expressão regular. Por exemplo, para corresponder a um ponto literal (<code translate="no">\.</code> na expressão regular), escreva <code translate="no">\\.</code> numa cadeia de filtro Python:</p>
+<p>Ao corresponder metacaracteres de expressões regulares literalmente, utilize o escape no padrão de expressão regular. Por exemplo, para corresponder a um ponto literal (<code translate="no">\.</code> na expressão regular), escreva <code translate="no">\\.</code> numa cadeia de filtro Python:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;email =~ &quot;@gmail\\.com$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Nota: Os filtros de expressões regulares do Milvus seguem a sintaxe RE2. Se um padrão de expressão regular utilizar sintaxe que a RE2 não suporta ou for inválido por qualquer outro motivo, o Milvus rejeita a expressão do filtro. Para obter detalhes sobre metacaracteres de expressões regulares, sinalizadores e comportamento de correspondência, consulte a referência <a href="https://github.com/google/re2/wiki/syntax">de sintaxe RE2</a>.</p>
+<p>Nota: Os filtros de expressões regulares do Milvus seguem a sintaxe RE2. Se um padrão de expressão regular utilizar sintaxe que o RE2 não suporta ou for inválido por qualquer outro motivo, o Milvus rejeita a expressão do filtro. Para obter detalhes sobre metacaracteres de expressões regulares, sinalizadores e comportamento de correspondência, consulte a referência <a href="https://github.com/google/re2/wiki/syntax">de sintaxe RE2</a>.</p>
 <h3 id="Matching-behavior" class="common-anchor-header">Comportamento de correspondência<button data-href="#Matching-behavior" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -335,6 +335,6 @@ res = client.query(
 <tbody>
 <tr><td>Contém subcadeias literais fixas, como <code translate="no">message =~ &quot;error.*timeout&quot;</code> ou <code translate="no">message LIKE &quot;%database%&quot;</code></td><td><code translate="no">NGRAM</code></td><td>É útil quando o Milvus consegue extrair subcadeias literais significativas do padrão. Para mais detalhes, consulte <a href="/docs/pt/ngram.md">NGRAM</a>.</td></tr>
 <tr><td>Filtros de cadeias de caracteres do tipo prefixo, exato ou de igualdade, especialmente em campos com cardinalidade baixa a moderada</td><td><code translate="no">STL_SORT</code>, <code translate="no">INVERTED</code> ou <code translate="no">BITMAP</code></td><td>Podem ser mais eficazes quando o campo contém valores repetidos ou quando o filtro se aproxima de uma correspondência exata. Para mais detalhes, consulte <a href="/docs/pt/stl-sort.md">STL_SORT</a>, <a href="/docs/pt/inverted.md">INVERTED</a> e <a href="/docs/pt/bitmap.md">BITMAP</a>.</td></tr>
-<tr><td>Padrões Regex sem literais fixos, ou padrões dominados por classes de caracteres, tokens curtos ou curingas</td><td>Faça testes de desempenho antes de contar com a aceleração por índice</td><td>Estes padrões podem proporcionar uma seletividade de índice limitada e podem recorrer a varreduras mais abrangentes.</td></tr>
+<tr><td>Padrões Regex sem literais fixos, ou padrões dominados por classes de caracteres, tokens curtos ou caracteres curinga</td><td>Faça testes de desempenho antes de confiar na aceleração por índice</td><td>Estes padrões podem proporcionar uma seletividade de índice limitada e podem recorrer a varreduras mais abrangentes.</td></tr>
 </tbody>
 </table>

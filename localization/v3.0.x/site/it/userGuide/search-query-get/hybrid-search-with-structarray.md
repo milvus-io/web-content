@@ -52,7 +52,7 @@ summary: >-
 </table>
 <div class="alert note">
 <p>Avviso</p>
-<p>Utilizzare <code translate="no">element_scope</code> solo per configurare il raggruppamento per oggetti a livello di elemento di StructArray <code translate="no">AnnSearchRequest</code> in una ricerca ibrida a livello di elemento non della stessa struttura. Non utilizzarlo per richieste EmbeddingList, richieste vettoriali a livello di raccolta o ricerche ibride a livello di elemento dello stesso StructArray.</p>
+<p>Utilizzare <code translate="no">element_scope</code> solo per configurare il raggruppamento per oggetti a livello di elemento StructArray <code translate="no">AnnSearchRequest</code> in una ricerca ibrida a livello di elemento non della stessa struttura. Non utilizzarlo per richieste EmbeddingList, richieste vettoriali a livello di raccolta o ricerche ibride a livello di elemento dello stesso StructArray.</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">Prima di iniziare<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -249,7 +249,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In questo esempio, ` <code translate="no">title_req</code> ` è a livello di entità, quindi anche il risultato ibrido finale è a livello di entità. La richiesta ` <code translate="no">chunk_req</code> ` restituisce innanzitutto i risultati a livello di elemento da ` <code translate="no">chunks[emb]</code>`, quindi raggruppa gli elementi restituiti appartenenti alla stessa entità sommando i punteggi dei tre migliori elementi. Se ` <code translate="no">element_scope</code> ` viene omesso quando è necessario un raggruppamento a livello di entità, la strategia di raggruppamento predefinita è ` <code translate="no">max</code>`.</p>
+<p>In questo esempio, ` <code translate="no">title_req</code> ` è a livello di entità, quindi anche il risultato ibrido finale è a livello di entità. La richiesta ` <code translate="no">chunk_req</code> ` restituisce innanzitutto i risultati a livello di elemento da ` <code translate="no">chunks[emb]</code>`, quindi raggruppa gli elementi restituiti provenienti dalla stessa entità sommando i punteggi dei tre migliori elementi. Se ` <code translate="no">element_scope</code> ` viene omesso quando è necessario un raggruppamento a livello di entità, la strategia di raggruppamento predefinita è ` <code translate="no">max</code>`.</p>
 <h2 id="Choose-a-collapse-strategy" class="common-anchor-header">Scegliere una strategia di raggruppamento<button data-href="#Choose-a-collapse-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -273,7 +273,7 @@ results = client.hybrid_search(
 <tr><td><code translate="no">max</code></td><td>Mantenere il punteggio migliore tra gli elementi restituiti per l’entità.</td><td>Non consentito.</td><td>Qualsiasi metrica vettoriale regolare supportata.</td></tr>
 <tr><td><code translate="no">sum</code></td><td>Sommare tutti i punteggi degli elementi restituiti per l'entità.</td><td>Non consentito.</td><td>Solo metriche a correlazione positiva, come <code translate="no">IP</code> o <code translate="no">COSINE</code>.</td></tr>
 <tr><td><code translate="no">avg</code></td><td>Calcola la media di tutti i punteggi degli elementi restituiti per l’entità.</td><td>Non consentito.</td><td>Qualsiasi metrica vettoriale regolare supportata.</td></tr>
-<tr><td><code translate="no">topk_sum</code></td><td>Somma i migliori punteggi degli elementi restituiti da <code translate="no">K</code> per l'entità.</td><td>Obbligatorio e deve essere positivo.</td><td>Solo metriche a correlazione positiva, come <code translate="no">IP</code> o <code translate="no">COSINE</code>.</td></tr>
+<tr><td><code translate="no">topk_sum</code></td><td>Somma i migliori punteggi degli elementi restituiti da <code translate="no">K</code> per l’entità.</td><td>Obbligatorio e deve essere positivo.</td><td>Solo metriche a correlazione positiva, come <code translate="no">IP</code> o <code translate="no">COSINE</code>.</td></tr>
 <tr><td><code translate="no">topk_avg</code></td><td>Calcola la media dei punteggi degli elementi migliori restituiti da <code translate="no">K</code> per l’entità.</td><td>Obbligatorio e deve essere positivo.</td><td>Qualsiasi metrica vettoriale regolare supportata.</td></tr>
 </tbody>
 </table>
@@ -293,7 +293,7 @@ results = client.hybrid_search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>È possibile associare un'<code translate="no">element_filter</code> a un'<code translate="no">AnnSearchRequest</code> a livello di elemento di StructArray quando le condizioni scalari devono essere applicate agli stessi elementi Struct che partecipano alla ricerca vettoriale. È inoltre possibile utilizzare un'<code translate="no">filter</code> di primo livello su <code translate="no">hybrid_search()</code> per le condizioni relative all'entità padre.</p>
+    </button></h2><p>È possibile associare un’ <code translate="no">element_filter</code> a un <code translate="no">AnnSearchRequest</code> a livello di elemento di StructArray quando le condizioni scalari devono essere applicate agli stessi elementi Struct che partecipano alla ricerca vettoriale. È inoltre possibile utilizzare un <code translate="no">filter</code> di primo livello su <code translate="no">hybrid_search()</code> per le condizioni relative all’entità padre.</p>
 <p>I campi vettoriali a livello di elemento di StructArray supportano la ricerca per intervallo nella ricerca ibrida. Aggiungere <code translate="no">radius</code> e, facoltativamente, <code translate="no">range_filter</code> all’ <code translate="no">AnnSearchRequest</code> a livello di elemento. Le richieste StructArray a livello di EmbeddingList non supportano la ricerca per intervallo.</p>
 <p>Il raggruppamento ibrido a livello di elemento è supportato solo quando tutti gli oggetti ` <code translate="no">AnnSearchRequest</code> ` hanno come destinazione campi vettoriali a livello di elemento all’interno dello stesso campo `StructArray`, e ` <code translate="no">group_by_field</code> ` deve essere la chiave primaria. Il raggruppamento ibrido non è supportato quando la richiesta combina campi vettoriali a livello di collezione, campi `StructArray` diversi o richieste a livello di `EmbeddingList`. Non combinare la ricerca per intervallo con il raggruppamento.</p>
 <h2 id="Interpret-hybrid-results" class="common-anchor-header">Interpretazione dei risultati ibridi<button data-href="#Interpret-hybrid-results" class="anchor-icon" translate="no">
@@ -384,7 +384,7 @@ results = client.hybrid_search(
     </button></h2><ol>
 <li><p>Per conoscere le due modalità di ricerca vettoriale di base con StructArray, leggere <a href="/docs/it/basic-vector-search-with-structarray.md">Ricerca vettoriale di base con StructArray</a>.</p></li>
 <li><p>Per aggiungere filtri scalari alla ricerca ibrida, consultare <a href="/docs/it/filtered-search-with-structarray.md">Ricerca filtrata con StructArray</a>.</p></li>
-<li><p>Per utilizzare i limiti di punteggio o di distanza nella ricerca ibrida, leggere <a href="/docs/it/range-search-with-structarray.md">Ricerca per intervallo con StructArray</a>.</p></li>
-<li><p>Per raggruppare i risultati ibridi a livello di elemento per entità padre, leggere <a href="/docs/it/grouping-search-with-structarray.md">Ricerca raggruppata con StructArray</a>.</p></li>
-<li><p>Per verificare i limiti di ricerca di StructArray, leggi " <a href="/docs/it/structarray-limits.md">Limiti di StructArray</a>".</p></li>
+<li><p>Per utilizzare i limiti di punteggio o di distanza nella ricerca ibrida, consultare <a href="/docs/it/range-search-with-structarray.md">Ricerca per intervallo con StructArray</a>.</p></li>
+<li><p>Per raggruppare i risultati ibridi a livello di elemento in base all’entità padre, consultare <a href="/docs/it/grouping-search-with-structarray.md">Ricerca raggruppata con StructArray</a>.</p></li>
+<li><p>Per verificare i limiti di ricerca di StructArray, leggi <a href="/docs/it/structarray-limits.md">Limiti di StructArray</a>.</p></li>
 </ol>

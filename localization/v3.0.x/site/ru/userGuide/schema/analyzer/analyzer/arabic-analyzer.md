@@ -43,7 +43,7 @@ beta: Milvus 3.0.0+
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;arabic&quot;</span>,
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Анализатор <code translate="no">arabic</code> принимает следующий необязательный параметр:</p>
+<p>Анализатор <code translate="no">arabic</code> принимает следующий дополнительный параметр:</p>
 <table>
    <tr>
      <th><p>Параметр</p></th>

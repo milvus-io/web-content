@@ -38,7 +38,7 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Для текста на тайском языке в большинстве случаев используйте встроенный <a href="/docs/ru/thai-analyzer.md"><code translate="no">thai</code></a> анализатор. Встроенный анализатор включает этот токенизатор, а также преобразование в нижний регистр, нормализацию десятичных цифр и удаление тайских стоп-слов. Используйте токенизатор <code translate="no">thai</code> напрямую только в том случае, если вам необходимо создать пользовательский конвейер анализаторов.</p>
+<p>Для текста на тайском языке в большинстве случаев используйте встроенный <a href="/docs/ru/thai-analyzer.md"><code translate="no">thai</code></a> анализатор. Встроенный анализатор включает в себя этот токенизатор, а также преобразование в нижний регистр, нормализацию десятичных цифр и удаление тайских стоп-слов. Используйте токенизатор <code translate="no">thai</code> напрямую только в том случае, если вам необходимо создать пользовательский конвейер анализаторов.</p>
 </div>
 <p>Чтобы настроить анализатор с использованием токенизатора <code translate="no">thai</code>, установите для параметра ` <code translate="no">tokenizer</code> ` значение ` <code translate="no">thai</code> ` в файле ` <code translate="no">analyzer_params</code>`.</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -46,7 +46,7 @@ beta: Milvus 3.0.0+
 }
 <button class="copy-code-btn"></button></code></pre>
 <p>У токенизатора <code translate="no">thai</code> нет настраиваемых параметров.</p>
-<p>Токенизатор может работать с одним или несколькими фильтрами. Например, в приведенной ниже конфигурации используется токенизатор <code translate="no">thai</code> с <a href="/docs/ru/lowercase-filter.md"><code translate="no">lowercase</code></a> и <a href="/docs/ru/decimaldigit-filter.md"><code translate="no">decimaldigit</code></a> :</p>
+<p>Токенизатор может работать с одним или несколькими фильтрами. Например, в приведённой ниже конфигурации используется токенизатор <code translate="no">thai</code> с <a href="/docs/ru/lowercase-filter.md"><code translate="no">lowercase</code></a> и <a href="/docs/ru/decimaldigit-filter.md"><code translate="no">decimaldigit</code></a> :</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;thai&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [
@@ -58,7 +58,7 @@ beta: Milvus 3.0.0+
 <p>Этот настраиваемый конвейер не эквивалентен встроенному анализатору <code translate="no">thai</code>, поскольку он не включает встроенный словарь стоп-слов <code translate="no">_thai_</code>. Для использования полного набора предопределенных конвейеров обратитесь к <code translate="no">{&quot;type&quot;: &quot;thai&quot;}</code>.</p>
 <p>Токенизатор работает следующим образом:</p>
 <ul>
-<li><strong>Сегментация тайского языка</strong>: разбивает тайский текст на лексические единицы, не полагаясь на пробелы.</li>
+<li><strong>Сегментация тайского языка</strong>: сегментирует текст на тайском языке на лексические единицы, не полагаясь на пробелы.</li>
 <li><strong>Фильтрация пробелов и знаков препинания</strong>: отфильтровывает сегменты, состоящие только из пробелов и знаков препинания. Это отличается от <a href="/docs/ru/icu-tokenizer.md"><code translate="no">icu</code></a> токенизер, который может сохранять знаки препинания и пробелы в качестве токенов.</li>
 <li><strong>Текст со смешанными алфавитами</strong>: выдает лексемы в латинском алфавите в тексте, содержащем как тайский, так и английский языки.</li>
 <li><strong>Токенизатор только</strong>: не преобразует токены в нижний регистр, не нормализует цифры Unicode и не удаляет стоп-слова. Для выполнения этих шагов добавьте фильтры или используйте встроенный <a href="/docs/ru/thai-analyzer.md"><code translate="no">thai</code></a> анализатор для выполнения этих шагов.</li>

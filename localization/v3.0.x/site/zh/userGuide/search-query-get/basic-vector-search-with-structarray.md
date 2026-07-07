@@ -20,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>使用本页面可在 StructArray 字段内的向量字段上执行向量搜索。StructArray 支持两种基本的向量搜索模式：嵌入列表搜索（对存储在每个实体中的嵌入列表进行评分）和元素级搜索（独立搜索每个 Struct 元素）。</p>
-<p>本页面<a href="/docs/zh/create-structarray-field.md">使用“创建 StructArray 字段</a>”中的<code translate="no">tech_articles</code> Collection。该 Collection 包含一个名为<code translate="no">chunks</code> 的 StructArray 字段。每个块包含文本、标量元数据、一个名为<code translate="no">emb_list_vector</code> 的向量字段（带有用于嵌入列表搜索的索引），以及一个名为<code translate="no">emb</code> 的向量字段（带有用于元素级搜索的索引）。</p>
+    </button></h1><p>使用本页面可在 StructArray 字段内的向量子字段上执行向量搜索。StructArray 支持两种基本向量搜索模式：嵌入列表搜索（对存储在每个实体中的嵌入列表进行评分）和元素级搜索（独立搜索每个 Struct 元素）。</p>
+<p>本页面<a href="/docs/zh/create-structarray-field.md">使用“创建 StructArray 字段</a>”中的<code translate="no">tech_articles</code> Collection。该 Collection 包含一个名为<code translate="no">chunks</code> 的 StructArray 字段。每个块包含文本、标量元数据、一个名为<code translate="no">emb_list_vector</code> 的向量字段（带有用于 EmbeddingList 搜索的索引），以及一个名为<code translate="no">emb</code> 的向量字段（带有用于元素级搜索的索引）。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">开始之前<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -78,7 +78,7 @@ summary: >-
 <tr><td>度量族</td><td><code translate="no">MAX_SIM*</code>，例如<code translate="no">MAX_SIM_COSINE</code> 。</td><td>常规向量度量，例如<code translate="no">COSINE</code> 、<code translate="no">IP</code> 或<code translate="no">L2</code> 。</td></tr>
 <tr><td>一个匹配结果代表什么</td><td>一个匹配的实体，其 StructArray 向量子场与查询嵌入列表相似。</td><td>StructArray 字段内的匹配 Struct 元素。</td></tr>
 <tr><td>结果粒度</td><td>实体级别。</td><td>Struct 元素级别。</td></tr>
-<tr><td>偏移量</td><td>不适用。</td><td>标识返回时匹配的 Struct 元素的零基位置。</td></tr>
+<tr><td>偏移量</td><td>不适用。</td><td>标识返回时匹配的 Struct 元素的零起始位置。</td></tr>
 <tr><td>典型用法</td><td>ColBERT、ColPali 及其他后期交互检索模式。</td><td>块级、段落级、片段级、补丁级或事实级检索。</td></tr>
 </tbody>
 </table>
@@ -174,7 +174,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>在元素级搜索中，每个命中结果代表一个匹配的 Struct 元素。<code translate="no">offset</code> 值是该元素在 StructArray 字段中的从零开始的索引位置。如果多个 Struct 元素与查询匹配，同一实体可能会出现多次。<code translate="no">limit</code> 值适用于元素命中结果，而非唯一的父实体。</p>
+<p>在元素级搜索中，每个命中结果代表一个匹配的 Struct 元素。<code translate="no">offset</code> 值是该元素在 StructArray 字段中的从零起算的位置。如果多个 Struct 元素与查询匹配，同一实体可能会出现多次。<code translate="no">limit</code> 值适用于元素命中结果，而非唯一的父实体。</p>
 <h2 id="Interpret-results" class="common-anchor-header">解读结果<button data-href="#Interpret-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -199,7 +199,7 @@ results = client.search(
 <tr><td><code translate="no">distance</code> 或得分</td><td>查询Embeddings列表与存储的Embeddings列表之间的得分或距离。</td><td>查询向量与匹配的 Struct 元素向量之间的得分或距离。</td></tr>
 <tr><td><code translate="no">offset</code></td><td>不适用。</td><td>返回时匹配的 Struct 元素的从零开始的索引位置。</td></tr>
 <tr><td>重复的主键</td><td>由于结果是实体级别的，因此单个查询中不应出现这种情况。</td><td>可能出现，因为同一实体中的多个 Struct 元素可能会匹配。</td></tr>
-<tr><td>请求的 StructArray 输出字段</td><td>从匹配的实体中返回。</td><td>将根据目标 API 和 SDK 支持的元素级命中结构进行返回。</td></tr>
+<tr><td>请求的 StructArray 输出字段</td><td>从匹配的实体中返回。</td><td>将根据目标 API 和 SDK 支持的元素级命中结构返回。</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">常见错误<button data-href="#Common-mistakes" class="anchor-icon" translate="no">

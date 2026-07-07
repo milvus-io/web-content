@@ -39,7 +39,7 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Per il testo in thailandese, nella maggior parte dei casi utilizzare l’analizzatore integrato <a href="/docs/it/thai-analyzer.md"><code translate="no">thai</code></a> analizzatore integrato. L’analizzatore integrato include questo tokenizer insieme alla conversione in minuscolo, alla normalizzazione delle cifre decimali e alla rimozione delle parole vuote in tailandese. Utilizzare direttamente il tokenizer <code translate="no">thai</code> solo quando è necessario creare una pipeline di analisi personalizzata.</p>
+<p>Per il testo in thailandese, nella maggior parte dei casi utilizzare l’analizzatore integrato <a href="/docs/it/thai-analyzer.md"><code translate="no">thai</code></a> analizzatore integrato. L’analizzatore integrato include questo tokenizzatore insieme alla conversione in minuscolo, alla normalizzazione delle cifre decimali e alla rimozione delle parole vuote in tailandese. Utilizzare direttamente il tokenizzatore <code translate="no">thai</code> solo quando è necessario creare una pipeline di analisi personalizzata.</p>
 </div>
 <p>Per configurare un analizzatore utilizzando il tokenizer <code translate="no">thai</code>, impostare ` <code translate="no">tokenizer</code> ` su ` <code translate="no">thai</code> ` in ` <code translate="no">analyzer_params</code>`.</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -56,16 +56,16 @@ beta: Milvus 3.0.0+
     ],
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Questa pipeline personalizzata non è equivalente all’analizzatore <code translate="no">thai</code> integrato poiché non include il dizionario di parole vuote <code translate="no">_thai_</code> integrato. Per la pipeline predefinita completa, utilizzare <code translate="no">{&quot;type&quot;: &quot;thai&quot;}</code>.</p>
+<p>Questa pipeline personalizzata non è equivalente all’analizzatore <code translate="no">thai</code> integrato, poiché non include il dizionario di parole vuote <code translate="no">_thai_</code> integrato. Per la pipeline predefinita completa, utilizzare <code translate="no">{&quot;type&quot;: &quot;thai&quot;}</code>.</p>
 <p>Il tokenizzatore applica il seguente comportamento:</p>
 <ul>
 <li><strong>Segmentazione in thailandese</strong>: segmenta il testo thailandese in token di parole senza fare affidamento sugli spazi.</li>
 <li><strong>Filtraggio degli spazi bianchi e della punteggiatura</strong>: filtra i segmenti composti esclusivamente da spazi bianchi e segni di punteggiatura. Ciò differisce dal <a href="/docs/it/icu-tokenizer.md"><code translate="no">icu</code></a> tokenizer, che può conservare la punteggiatura e gli spazi come token.</li>
-<li><strong>Testo con scrittura mista</strong>: genera token di parole in alfabeto latino all’interno di testo misto in thailandese e inglese.</li>
+<li><strong>Testo con scrittura mista</strong>: genera token di parole in alfabeto latino in un testo misto in thailandese e inglese.</li>
 <li><strong>Solo tokenizer</strong>: non converte i token in minuscolo, non normalizza le cifre Unicode né rimuove le parole vuote. Aggiungi filtri o utilizza l’ <a href="/docs/it/thai-analyzer.md"><code translate="no">thai</code></a> per tali operazioni.</li>
 <li><strong>Semantica di posizione</strong>: utilizza posizioni dei token basate sui caratteri che includono spazi e segni di punteggiatura saltati, il che mantiene il comportamento di corrispondenza delle frasi e di prossimità coerente con altri tokenizzatori non latini.</li>
 </ul>
-<p>Dopo aver definito un'<code translate="no">analyzer_params</code>, è possibile applicare l'analizzatore a un campo <code translate="no">VARCHAR</code> durante la definizione di uno schema di raccolta. Per i dettagli, fare riferimento a <a href="/docs/it/analyzer-overview.md#Example-use">Esempio di utilizzo</a>.</p>
+<p>Dopo aver definito un'<code translate="no">analyzer_params</code>, è possibile applicare l'analizzatore a un campo <code translate="no">VARCHAR</code> durante la definizione di uno schema di raccolta. Per i dettagli, fare riferimento <a href="/docs/it/analyzer-overview.md#Example-use">all'Esempio di utilizzo</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Esempi<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -29,9 +29,9 @@ beta: Milvus 3.0.x
 <span class="highlighted-wrapper-line">    datatype=DataType.TEXT,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>بعد تعريف الحقل، يمكن لكل كيان تضمين قيمة سلسلة في هذا الحقل. يمكنك إدراج قيم " <code translate="no">TEXT</code> " مثل الحقول القياسية الأخرى وإرجاعها من نتائج الاستعلام أو البحث عن طريق إدراج الحقل في " <code translate="no">output_fields</code>".</p>
+<p>بعد تعريف الحقل، يمكن لكل كيان تضمين قيمة سلسلة في هذا الحقل. يمكنك إدراج قيم " <code translate="no">TEXT</code> " مثل الحقول القياسية الأخرى واسترجاعها من نتائج الاستعلام أو البحث عن طريق إدراج الحقل في " <code translate="no">output_fields</code>".</p>
 <div class="alert note">
-<p><code translate="no">TEXT</code> تدعم الحقول القيم الفارغة. لتمكين هذه الميزة، اضبط <code translate="no">nullable</code> على <code translate="no">True</code>. لمزيد من التفاصيل، راجع <a href="/docs/ar/nullable-and-default.md">«الحقل القابل للفراغ» (Nullable Field</a>).</p>
+<p><code translate="no">TEXT</code> تدعم الحقول القيم الفارغة. لتمكين هذه الميزة، قم بتعيين <code translate="no">nullable</code> إلى <code translate="no">True</code>. لمزيد من التفاصيل، راجع <a href="/docs/ar/nullable-and-default.md">الحقل القابل للفراغ</a>.</p>
 </div>
 <h2 id="Limits" class="common-anchor-header">القيود<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -52,7 +52,7 @@ beta: Milvus 3.0.x
 <li>لا يمكن أن يكون حقل « <code translate="no">TEXT</code> » حقلًا أساسيًا. تدعم الحقول الأساسية « <code translate="no">INT64</code> » و« <code translate="no">VARCHAR</code> ».</li>
 <li>في Milvus 3.0.0، لا تدعم الحقول من نوع « <code translate="no">TEXT</code> » <code translate="no">PHRASE_MATCH</code>.</li>
 <li>في Milvus 3.0.0، لا تدعم الحقول <code translate="no">TEXT</code> القيم الافتراضية.</li>
-<li>في Milvus 3.0.0، لا يتم دعم حقول <code translate="no">TEXT</code> في المجموعات الخارجية.</li>
+<li>في Milvus 3.0.0، لا تُدعم حقول <code translate="no">TEXT</code> في المجموعات الخارجية.</li>
 <li>في Milvus 3.0.0، لا تدعم حقول <code translate="no">TEXT</code> الفهارس القياسية.</li>
 <li><code translate="no">TEXT</code> لا يُقصد به تصفية البيانات الوصفية العادية. إذا كنت بحاجة إلى التصفية بناءً على بيانات وصفية ذات سلاسل قصيرة وكانت قيمة الحقل تتناسب مع حد طول <code translate="no">VARCHAR</code> ، فاستخدم <code translate="no">VARCHAR</code>.</li>
 </ul>
@@ -78,7 +78,7 @@ beta: Milvus 3.0.x
 </thead>
 <tbody>
 <tr><td>الأفضل لـ</td><td>البيانات الوصفية القصيرة المستخدمة لتحديد الكيانات أو تصنيفها أو تصفيتها، مثل <code translate="no">title</code> و <code translate="no">tag</code> و <code translate="no">category</code> و <code translate="no">external_id</code>.</td><td>محتوى مصدر أطول تستخدمه نماذج اللغة الكبيرة (LLM) أو سير عمل الوكلاء، مثل <code translate="no">content</code> أو <code translate="no">passage</code> أو <code translate="no">article_body</code> أو <code translate="no">log_message</code>.</td></tr>
-<tr><td>إعداد الطول</td><td>يتطلب <code translate="no">max_length</code> ، الذي يحدد الحد الأقصى لعدد البايتات التي يمكن للحقل تخزينها. القيمة القصوى هي <code translate="no">65,535</code> بايت. إذا كانت القيمة قد تتجاوز هذا الحد، فاستخدم <code translate="no">TEXT</code>.</td><td>لا يتطلب <code translate="no">max_length</code> ، لذا لا يحتاج المخطط إلى حد ثابت للبايتات لقيمة النص.</td></tr>
+<tr><td>إعداد الطول</td><td>يتطلب <code translate="no">max_length</code> ، الذي يحدد الحد الأقصى لعدد البايتات التي يمكن للحقل تخزينها. القيمة القصوى هي <code translate="no">65,535</code> بايت. إذا كانت القيمة قد تتجاوز هذا الحد، فاستخدم <code translate="no">TEXT</code>.</td><td>لا يتطلب <code translate="no">max_length</code> ، لذا لا يحتاج المخطط إلى حد ثابت بالبايت لقيمة النص.</td></tr>
 <tr><td>سلوك التخزين</td><td>يخزن كل قيمة ضمن نطاق التخزين المحدد ( <code translate="no">max_length</code>) للحقل.</td><td>يستخدم التحديد التلقائي للتخزين للقيم النصية الأكبر حجمًا. لمزيد من التفاصيل، راجع <a href="#how-milvus-stores-large-text-values">كيفية تخزين Milvus للقيم النصية الكبيرة</a>.</td></tr>
 <tr><td>دعم الحقل الأساسي</td><td>يمكن استخدامه كحقل أساسي.</td><td>لا يمكن استخدامه كحقل أساسي.</td></tr>
 <tr><td>التصفية</td><td>يُستخدم للبيانات الوصفية ذات السلاسل القصيرة التي يجب أن تظهر في تعبيرات التصفية، مثل <code translate="no">category == &quot;news&quot;</code> أو <code translate="no">tag in [&quot;ai&quot;, &quot;database&quot;]</code>.</td><td>غير مخصص لتصفية البيانات الوصفية العادية.</td></tr>
@@ -113,8 +113,8 @@ beta: Milvus 3.0.x
 <li><strong>التخزين المضمن</strong>: إذا كانت قيمة <code translate="no">TEXT</code> أصغر من <code translate="no">dataNode.text.inlineThreshold</code> ، يقوم Milvus بتخزين قيمة النص الأصلية مباشرةً في بيانات حقل <code translate="no">TEXT</code>.</li>
 <li><strong>تخزين LOB</strong>: إذا كانت قيمة <code translate="no">TEXT</code> أكبر من أو تساوي <code translate="no">dataNode.text.inlineThreshold</code> ، فإن Milvus تعامل القيمة ككائن كبير وتخزن النص الأصلي بشكل منفصل في تخزين الكائنات، مثل MinIO. تخزن بيانات حقل <code translate="no">TEXT</code> مرجعًا داخليًا للنص المخزن بشكل منفصل. عند طلب حقل <code translate="no">TEXT</code> في نتائج الاستعلام أو البحث، يستخدم Milvus المرجع لاسترداد النص الأصلي وإرجاعه.</li>
 </ul>
-<p>يُعد اختيار التخزين هذا داخليًّا. يمكنك إدراج الحقل <code translate="no">TEXT</code> والاستعلام عنه والبحث فيه بنفس الطريقة بغض النظر عن مسار التخزين الذي يستخدمه Milvus. لضبط العتبة أو سلوك التخزين والضغط وإزالة البيانات غير الضرورية ذات الصلة، راجع <a href="/docs/ar/configure_datanode.md">«التكوينات المتعلقة بـ dataNode</a> » <a href="/docs/ar/configure_datacoord.md">و«التكوينات المتعلقة بـ dataCoord</a>».</p>
-<p>إذا كان النشر الخاص بك يستخدم تخزين الكائنات، فقد تظهر قيم <code translate="no">TEXT</code> الكبيرة ككائنات تديرها Milvus ضمن مسارات مثل <code translate="no">lobs/...</code>. هذه الكائنات هي تفاصيل تنفيذية ولا يجب نقلها أو نسخها أو حذفها يدويًّا. بعد حذف الكيانات أو إزالة الأقسام أو ضغط البيانات، قد ينخفض استخدام تخزين الكائنات فقط بعد أن تقوم عملية جمع القمامة في Milvus بإزالة بيانات الكائنات الكبيرة غير المشار إليها بعد انتهاء فترة الأمان الخاصة بها.</p>
+<p>يُعد اختيار التخزين هذا داخليًّا. يمكنك إدراج الحقل <code translate="no">TEXT</code> والاستعلام عنه والبحث فيه بنفس الطريقة بغض النظر عن مسار التخزين الذي يستخدمه Milvus. لضبط العتبة أو سلوك التخزين والضغط وإزالة البيانات غير الضرورية ذات الصلة، راجع <a href="/docs/ar/configure_datanode.md">التكوينات المتعلقة بـ dataNode</a> <a href="/docs/ar/configure_datacoord.md">والتكوينات المتعلقة بـ dataCoord</a>.</p>
+<p>إذا كان النشر الخاص بك يستخدم تخزين الكائنات، فقد تظهر قيم <code translate="no">TEXT</code> الكبيرة ككائنات تديرها Milvus ضمن مسارات مثل <code translate="no">lobs/...</code>. هذه الكائنات هي تفاصيل تنفيذية ولا ينبغي نقلها أو نسخها أو حذفها يدويًّا. بعد حذف الكيانات أو إزالة الأقسام أو ضغط البيانات، قد ينخفض استخدام تخزين الكائنات فقط بعد أن تقوم عملية جمع القمامة في Milvus بإزالة بيانات الكائنات الكبيرة غير المشار إليها بعد انتهاء فترة الأمان الخاصة بها.</p>
 <p></details></p>
 <p>يُعد البحث عن النص الكامل باستخدام BM25 أحد الاستخدامات الشائعة لـ <code translate="no">TEXT</code>. في هذا النمط، يخزن الحقل <code translate="no">TEXT</code> المحتوى الأصلي للمصدر، ويقوم BM25 بتحليل النص وإنشاء متجهات متفرقة لترتيب التطابقات المستندة إلى الكلمات المفتاحية. يمكن لنتائج البحث بعد ذلك إرجاع قيمة <code translate="no">TEXT</code> المطابقة كسياق لسير عمل LLM أو الوكيل. يوضح المثال التالي كيفية استخدام حقل « <code translate="no">TEXT</code> » كحقل إدخال لـ BM25. لمعرفة المزيد عن مفاهيم البحث عن النص الكامل وخيارات الاستعلام، راجع <a href="/docs/ar/full-text-search.md">«البحث عن النص الكامل</a>».</p>
 <h2 id="Step-1-Create-a-collection-with-a-TEXT-field" class="common-anchor-header">الخطوة 1: إنشاء مجموعة تحتوي على حقل TEXT<button data-href="#Step-1-Create-a-collection-with-a-TEXT-field" class="anchor-icon" translate="no">
@@ -132,7 +132,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يُنشئ المثال التالي مجموعة تحتوي على حقل <code translate="no">TEXT</code> للمحتوى المصدر وحقل متجه متفرق للمتجهات المتفرقة التي تم إنشاؤها بواسطة BM25. تقوم دالة BM25 بتحويل النص المُقسّم إلى رموز من <code translate="no">content</code> إلى متجهات متفرقة مخزنة في <code translate="no">sparse</code>.</p>
+    </button></h2><p>يُنشئ المثال التالي مجموعة تحتوي على حقل <code translate="no">TEXT</code> للمحتوى المصدر وحقل متجه متفرق للمتجهات المتفرقة التي تم إنشاؤها بواسطة BM25. تقوم دالة BM25 بتحويل النص المُقسَّم إلى رموز من <code translate="no">content</code> إلى متجهات متفرقة مخزنة في <code translate="no">sparse</code>.</p>
 <p>لإجراء بحث النص الكامل باستخدام BM25، يجب تعيين حقل <code translate="no">TEXT</code> المدخل على <code translate="no">enable_analyzer=True</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, Function, FunctionType, MilvusClient
 
@@ -271,4 +271,4 @@ client.load_collection(collection_name=COLLECTION_NAME)
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;id: <span class="hljs-subst">{hit[<span class="hljs-string">&#x27;id&#x27;</span>]}</span>, score: <span class="hljs-subst">{hit[<span class="hljs-string">&#x27;distance&#x27;</span>]}</span>&quot;</span>)
     <span class="hljs-built_in">print</span>(hit[<span class="hljs-string">&quot;entity&quot;</span>][<span class="hljs-string">&quot;content&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>لمزيد من المعلومات حول وظائف BM25، وفهارس المتجهات المتفرقة، وبناء جملة الاستعلام للبحث عن النص الكامل، راجع <a href="/docs/ar/full-text-search.md">«البحث</a> عن <a href="/docs/ar/full-text-search.md">النص الكامل</a>».</p>
+<p>لمزيد من المعلومات حول وظائف BM25، وفهارس المتجهات المتفرقة، وصيغة الاستعلام للبحث عن النص الكامل، راجع <a href="/docs/ar/full-text-search.md">«البحث</a> عن <a href="/docs/ar/full-text-search.md">النص الكامل</a>».</p>

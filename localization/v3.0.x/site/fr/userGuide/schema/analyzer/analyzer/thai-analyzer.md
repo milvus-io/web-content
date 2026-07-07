@@ -37,7 +37,7 @@ beta: Milvus 3.0.0+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Les analyseurs intégrés sont des modèles d’analyse fournis par Milvus. Pour utiliser un analyseur intégré, définissez ` <code translate="no">type</code> ` sur le nom d’un analyseur prédéfini dans ` <code translate="no">analyzer_params</code>`.</p>
+    </button></h2><p>Les analyseurs intégrés sont des modèles d’analyse fournis par Milvus. Pour utiliser un analyseur intégré, définissez ` <code translate="no">type</code> ` sur un nom d’analyseur prédéfini dans ` <code translate="no">analyzer_params</code>`.</p>
 <p>Pour utiliser l’analyseur thaï intégré, définissez ` <code translate="no">type</code> ` sur ` <code translate="no">thai</code>` :</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;thai&quot;</span>,
@@ -55,7 +55,7 @@ beta: Milvus 3.0.0+
      <td><p><code translate="no">stop_words</code></p></td>
      <td><p><code translate="no">list[str]</code></p></td>
      <td><p><code translate="no">_thai_</code></p></td>
-     <td><p>Liste des mots vides supplémentaires à exclure de la tokenisation. Par défaut, l'analyseur « <code translate="no">thai</code> » utilise le dictionnaire intégré « <code translate="no">_thai_</code> ». Pour consulter le dictionnaire par défaut, reportez-vous à la <a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/thai.txt">liste des mots vides thaï</a> de Milvus. Cette liste provient du <a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/th/stopwords.txt">fichier</a> « Apache Lucene <a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/th/stopwords.txt">Thai stopwords</a> ».</p></td>
+     <td><p>Liste des mots vides supplémentaires à exclure de la tokenisation. Par défaut, l'analyseur « <code translate="no">thai</code> » utilise le dictionnaire intégré « <code translate="no">_thai_</code> ». Pour consulter le dictionnaire par défaut, reportez-vous à la <a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/thai.txt">liste des mots vides thaï</a> de Milvus. Cette liste provient du <a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/th/stopwords.txt">fichier de mots vides thaï</a> d'Apache Lucene.</p></td>
    </tr>
 </table>
 <p>Pour ajouter des mots vides personnalisés, incluez <code translate="no">stop_words</code>:</p>
@@ -81,7 +81,7 @@ beta: Milvus 3.0.0+
 <p>Cet analyseur applique les étapes de traitement suivantes :</p>
 <ul>
 <li><strong>Tokenisation</strong>: utilise le <a href="/docs/fr/thai-tokenizer.md"><code translate="no">thai</code></a> tokeniseur pour segmenter le texte thaï en tokens de mots sans s’appuyer sur les espaces. Le tokeniseur filtre les espaces et les segments composés uniquement de signes de ponctuation.</li>
-<li><strong>Normalisation de la casse</strong>: utilise le filtre « <code translate="no">lowercase</code> », qui s’applique aux lettres latines dans un texte mixte thaï/anglais.</li>
+<li><strong>Normalisation de la casse</strong>: utilise le filtre « <code translate="no">lowercase</code> », qui s’applique aux lettres latines dans un texte mêlant le thaï et l’anglais.</li>
 <li><strong>Normalisation des chiffres</strong>: utilise le filtre « <code translate="no">decimaldigit</code> » pour convertir les chiffres thaïlandais et autres chiffres décimaux Unicode en chiffres ASCII.</li>
 <li><strong>Suppression des mots vides</strong>: utilise le filtre « <code translate="no">stop</code> » avec le dictionnaire intégré « <code translate="no">_thai_</code> ».</li>
 <li><strong>Pas de lemmatisation</strong>: l’analyseur intégré « <code translate="no">thai</code> » n’applique pas de filtre « <code translate="no">stemmer</code> ».</li>

@@ -244,7 +244,7 @@ result = client.insert(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Nullable StructArray 필드에 유효한 StructArray 값이 포함된 경우, 해당 값 내의 모든 하위 필드는 null이거나 유효한 값을 가져야 합니다. 일부 하위 필드는 null로, 다른 필드는 유효한 값으로 설정된 엔티티를 삽입하면 오류가 발생합니다.</p>
+<p>Nullable StructArray 필드에 유효한 StructArray 값이 포함된 경우, 해당 값의 모든 하위 필드는 null이거나 유효한 값을 가져야 합니다. 일부 하위 필드는 null로, 다른 하위 필드는 유효한 값으로 설정된 엔티티를 삽입하면 오류가 발생합니다.</p>
 <div class="alert note">
 <p>경고
 Nullable StructArray 필드는 Milvus v3.0.x에서만 사용할 수 있습니다. 기존 컬렉션에 StructArray 필드를 동적으로 추가하는 경우, 추가된 필드는 nullable이어야 하며, 기존 엔티티는 새 필드의 모든 하위 필드에 대해 ` <code translate="no">null</code> `를 반환해야 합니다.</p>

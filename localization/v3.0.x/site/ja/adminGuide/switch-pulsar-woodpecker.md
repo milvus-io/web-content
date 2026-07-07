@@ -25,7 +25,7 @@ summary: >-
 <p><strong>前提条件：</strong>MQ切り替え機能は<strong>、Milvus 3.0以降で</strong>利用可能です。作業を開始する前に、MilvusインスタンスをMilvus 3.0以降にアップグレードしてください。以前のバージョンではこの機能は利用できません。</p>
 </div>
 <div class="alert warning">
-<p>メッセージキューの切り替えは、<strong>リスクの高い操作</strong>です。<strong>ご自身の</strong>デプロイ方法（<strong>Helm を使用する場合</strong>、または<strong>Milvus Operator を使用する場合</strong>）に該当するセクションを選択し、その手順を最初から最後まで順を追って実行してください。Helm コマンドと Operator コマンドを混在させないでください。</p>
+<p>メッセージキューの切り替えは、<strong>リスクの高い操作</strong>です。<strong>ご自身の</strong>デプロイ方法（<strong>Helm を使用する場合</strong>、または<strong>Milvus Operator を使用する場合</strong>）に該当するセクションを選び、その手順を最初から最後まで順を追って実行してください。Helm コマンドと Operator コマンドを混在させないでください。</p>
 </div>
 <h2 id="With-Helm" class="common-anchor-header">Helm を使用する場合<button data-href="#With-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -211,7 +211,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>ステップ 1: Milvus インスタンスが実行中であることを確認します。</strong></p>
-<p><strong>ステップ 2: 対象の Pulsar 接続を設定し、Milvus を再起動します。</strong>Pulsar 接続を `<code translate="no">spec.config</code> ` に記述し（Operator は `<code translate="no">spec.config</code> ` を `<code translate="no">user.yaml</code>` に変換します）、MQ タイプを設定します。CR を適用すると、新しい設定でポッドが再起動されます。</p>
+<p><strong>ステップ 2: 対象の Pulsar 接続を設定し、Milvus を再起動します。</strong>Pulsar 接続<strong>を</strong> <code translate="no">spec.config</code> に配置し（Operator は<code translate="no">spec.config</code> を<code translate="no">user.yaml</code> に変換します）、MQ タイプを設定します。CR を適用すると、新しい構成でポッドが再起動されます。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># change_configmap.yaml</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -229,7 +229,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 </span><button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">kubectl patch -f change_configmap.yaml --patch-file change_configmap.yaml --type merge
 <button class="copy-code-btn"></button></code></pre>
-<p>すべてのポッドが「ready」状態になるのを待ち、Pulsar アクセス設定が Milvus 設定に反映されていることを確認します。</p>
+<p>すべてのポッドが「ready」状態になるのを待ち、Pulsar アクセス設定が Milvus の設定に反映されていることを確認します。</p>
 <p><strong>ステップ 3: MQ の切り替えを実行します。</strong></p>
 <div class="alert note">
 <p>対象のPulsarに、以前の設定からのMilvusトピックが含まれていないことを確認してください。今回がPulsarへの初めての切り替えである場合は、この注意事項をスキップしてください。そうでない場合は、まず同じ名前の残存するMilvusトピックをクリーンアップしてください。</p>
@@ -243,7 +243,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>切り替えが成功すると、<code translate="no">[mqTypeValue=pulsar]</code> というログが出力されます。</p>
-<p><strong>ステップ 5: (オプション) Woodpecker データのクリーンアップ。</strong>MinIO/S3 上の Woodpecker データ（<code translate="no">&lt;rootPath&gt;/wp/...</code> 配下、通常は<code translate="no">files/wp/...</code> ）および etcd 内の Woodpecker メタデータ（<code translate="no">etcdctl get woodpecker --prefix</code> ）を削除します。後で Woodpecker に切り戻す予定がある場合は、まずこれらのファイルをクリーンアップしてください。</p>
+<p><strong>ステップ 5: (オプション) Woodpecker データのクリーンアップ。</strong>MinIO/S3 上の Woodpecker データ（<code translate="no">&lt;rootPath&gt;/wp/...</code> 配下、通常は<code translate="no">files/wp/...</code> ）および etcd 内の Woodpecker メタデータ（<code translate="no">etcdctl get woodpecker --prefix</code> ）を削除します。後で Woodpecker に戻す予定がある場合は、まずこれらのファイルをクリーンアップしてください。</p>
 <h2 id="Supported-scenarios" class="common-anchor-header">サポートされるシナリオ<button data-href="#Supported-scenarios" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -267,6 +267,6 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <tr><td>組み込みPulsar</td><td>Woodpecker (MinIO)</td><td><strong>サポート対象</strong></td><td><strong>サポート対象</strong></td></tr>
 <tr><td>外部 Pulsar</td><td>Woodpecker (MinIO)</td><td><strong>対応</strong></td><td><strong>対応</strong></td></tr>
 <tr><td>Woodpecker (MinIO)</td><td>External Pulsar</td><td><strong>対応</strong></td><td><strong>対応</strong></td></tr>
-<tr><td>Pulsar</td><td>Woodpecker (ローカル)</td><td><strong>対応していますが、推奨されません</strong>（すべてのポッドで共有ファイルシステムが必要です）</td><td><strong>未対応</strong></td></tr>
+<tr><td>Pulsar</td><td>Woodpecker (ローカル)</td><td><strong>サポートされていますが、推奨されません</strong>（すべてのポッドで共有ファイルシステムが必要です）</td><td><strong>未対応</strong></td></tr>
 </tbody>
 </table>

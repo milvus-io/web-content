@@ -36,7 +36,7 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>对于泰语文本，在大多数情况下请使用内置的 <a href="/docs/zh/thai-analyzer.md"><code translate="no">thai</code></a> 分析器。该内置分析器集成了此分词器，并包含小写转换、小数位规范化以及泰语停用词过滤功能。仅当需要构建自定义分析器管道时，才应直接使用<code translate="no">thai</code> 分词器。</p>
+<p>对于泰语文本，在大多数情况下请使用内置的 <a href="/docs/zh/thai-analyzer.md"><code translate="no">thai</code></a> 分析器。该内置分析器集成了此分词器，并包含小写转换、小数位规范化以及泰语停用词过滤功能。仅当您需要构建自定义分析器管道时，才应直接使用<code translate="no">thai</code> 分词器。</p>
 </div>
 <p>若要使用<code translate="no">thai</code> 分词器配置分析器，请在<code translate="no">analyzer_params</code> 中将<code translate="no">tokenizer</code> 设置为<code translate="no">thai</code> 。</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -57,12 +57,12 @@ beta: Milvus 3.0.0+
 <p>该分词器具有以下行为：</p>
 <ul>
 <li><strong>泰语分词</strong>：将泰语文本分割为单词词素，而不依赖空格。</li>
-<li><strong>空格和标点符号过滤</strong>：过滤掉仅包含空格和标点符号的片段。这与 <a href="/docs/zh/icu-tokenizer.md"><code translate="no">icu</code></a> 分词器，后者可将标点符号和空格保留为词素。</li>
+<li><strong>空格和标点符号过滤</strong>：过滤掉仅包含空格和标点符号的片段。这与 <a href="/docs/zh/icu-tokenizer.md"><code translate="no">icu</code></a> 分词器，后者可将标点符号和空格保留为词片段。</li>
 <li><strong>混合字符集文本</strong>：在泰语/英语混合文本中输出拉丁字母单词分词。</li>
 <li><strong>仅分词器</strong>：不将词素转换为小写，不规范化 Unicode 数字，也不移除停用词。请为这些步骤添加过滤器或使用内置的 <a href="/docs/zh/thai-analyzer.md"><code translate="no">thai</code></a> 分析器来执行这些步骤。</li>
-<li><strong>位置语义</strong>：使用基于字符的词素位置（包括被跳过的空格和标点符号），这使得短语和邻近匹配行为与其他非拉丁语词素化器保持一致。</li>
+<li><strong>位置语义</strong>：使用基于字符的词元位置（包括被跳过的空格和标点符号），这使得短语和邻近匹配行为与其他非拉丁语词元化器保持一致。</li>
 </ul>
-<p>定义<code translate="no">analyzer_params</code> 后，您可以在定义Collection Schema时将该分析器应用于<code translate="no">VARCHAR</code> 字段。有关详细信息，请参阅<a href="/docs/zh/analyzer-overview.md#Example-use">使用示例</a>。</p>
+<p>定义<code translate="no">analyzer_params</code> 后，您可以在定义Collection Schema时将该分析器应用于<code translate="no">VARCHAR</code> 字段。有关详细信息，请参阅<a href="/docs/zh/analyzer-overview.md#Example-use">“使用示例”</a>。</p>
 <h2 id="Examples" class="common-anchor-header">示例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

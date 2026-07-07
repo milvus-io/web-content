@@ -1,7 +1,7 @@
 ---
 id: mqtype-overview.md
 title: 消息队列概述
-summary: 概述 Milvus 支持的消息队列（mqType）选项，以及在独立部署与分布式部署中应选用哪一种。
+summary: 概述 Milvus 支持的消息队列（mqType）选项，以及在独立部署和分布式部署中应选用哪一种。
 ---
 <h1 id="Message-Queue-Overview" class="common-anchor-header">消息队列概述<button data-href="#Message-Queue-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,7 +39,7 @@ summary: 概述 Milvus 支持的消息队列（mqType）选项，以及在独立
 <tr><th>消息队列</th><th style="text-align:center">Milvus Standalone</th><th style="text-align:center">Milvus Distributed（集群）</th><th>默认配置</th><th>备注</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="/docs/zh/woodpecker.md">Woodpecker</a></td><td style="text-align:center">✔️（嵌入式）</td><td style="text-align:center">✔️（嵌入式或服务模式）</td><td><strong>Milvus 3.x</strong>（两种模式）</td><td>默认且推荐。基于对象存储的云原生WAL；无需外部服务。</td></tr>
+<tr><td><a href="/docs/zh/woodpecker.md">Woodpecker</a></td><td style="text-align:center">✔️（嵌入式）</td><td style="text-align:center">✔️（嵌入式或服务）</td><td><strong>Milvus 3.x</strong>（两种模式）</td><td>默认且推荐。基于对象存储的云原生WAL；无需外部服务。</td></tr>
 <tr><td><a href="/docs/zh/mq_pulsar.md">Pulsar</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td>≤ 2.5.x（集群默认）</td><td>受支持，可选外部服务或捆绑提供。</td></tr>
 <tr><td><a href="/docs/zh/mq_kafka.md">Kafka</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td>—</td><td>受支持。仅支持 Kafka 2.x 或 3.x。</td></tr>
 <tr><td><a href="/docs/zh/mq_rocksmq.md">RocksMQ</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✖️</td><td>≤ 2.5.x（独立模式默认）</td><td><strong>仅</strong>支持<strong>独立</strong>模式。</td></tr>

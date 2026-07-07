@@ -96,6 +96,12 @@ beta: Milvus 2.6.x
      <td><p>API key</p></td>
    </tr>
    <tr>
+     <td><p><a href="/docs/yandex-cloud.md">Yandex Cloud</a></p></td>
+     <td><p>Yandex Cloud AI Studio text vectorization models</p></td>
+     <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
+     <td><p>API key</p></td>
+   </tr>
+   <tr>
      <td><p><a href="/docs/bedrock.md">Bedrock</a></p></td>
      <td><p>amazon.titan-embed-text-v2</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>

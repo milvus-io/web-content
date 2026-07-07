@@ -52,7 +52,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Gunakan pengelompokan jika pencarian tingkat elemen yang tidak dikelompokkan mengembalikan terlalu banyak entitas induk yang duplikat. Jika Anda ingin setiap elemen Struct yang cocok ditampilkan sebagai hasil terpisah, gunakan <a href="/docs/id/basic-vector-search-with-structarray.md">Pencarian Vektor Dasar dengan StructArray</a> tanpa opsi ` <code translate="no">group_by_field</code>`.</p>
+<p>Gunakan pengelompokan jika pencarian tingkat elemen tanpa pengelompokan mengembalikan terlalu banyak entitas induk yang duplikat. Jika Anda ingin setiap elemen Struct yang cocok ditampilkan sebagai hasil terpisah, gunakan <a href="/docs/id/basic-vector-search-with-structarray.md">Pencarian Vektor Dasar dengan StructArray</a> tanpa opsi ` <code translate="no">group_by_field</code>`.</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">Sebelum Anda memulai<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -311,7 +311,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>Untuk mempelajari pencarian tingkat elemen tanpa pengelompokan terlebih dahulu, baca " <a href="/docs/id/basic-vector-search-with-structarray.md">Pencarian Vektor Dasar dengan StructArray</a>".</p></li>
+<li><p>Untuk mempelajari pencarian tingkat elemen tanpa pengelompokan terlebih dahulu, baca " <a href="/docs/id/basic-vector-search-with-structarray.md">Basic Vector Search with StructArray</a>".</p></li>
 <li><p>Untuk menambahkan filter skalar ke pencarian yang dikelompokkan, baca " <a href="/docs/id/filtered-search-with-structarray.md">Filtered Search with StructArray</a>".</p></li>
 <li><p>Untuk menggunakan batas skor atau jarak sebagai pengganti pengelompokan, baca " <a href="/docs/id/range-search-with-structarray.md">Pencarian Rentang dengan StructArray</a>".</p></li>
 <li><p>Untuk memeriksa batasan pencarian StructArray, baca <a href="/docs/id/structarray-limits.md">Batasan StructArray</a>.</p></li>

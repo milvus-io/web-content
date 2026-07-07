@@ -44,7 +44,7 @@ beta: Milvus 3.0.0+
 }
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">thai</code> トークナイザーには、設定可能なパラメータはありません。</p>
-<p>このトークナイザーは、1つまたは複数のフィルターと組み合わせて使用できます。たとえば、以下の設定では、<code translate="no">thai</code> トークナイザーを <a href="/docs/ja/lowercase-filter.md"><code translate="no">lowercase</code></a> および <a href="/docs/ja/decimaldigit-filter.md"><code translate="no">decimaldigit</code></a> フィルターと組み合わせて使用しています：</p>
+<p>このトークナイザーは、1つまたは複数のフィルターと組み合わせて使用できます。たとえば、以下の設定では、<code translate="no">thai</code> トークナイザーを <a href="/docs/ja/lowercase-filter.md"><code translate="no">lowercase</code></a> および <a href="/docs/ja/decimaldigit-filter.md"><code translate="no">decimaldigit</code></a> フィルターを組み合わせて使用しています：</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;thai&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [
@@ -79,7 +79,7 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><p>アナライザの設定をコレクションスキーマに適用する前に、<code translate="no">run_analyzer</code> メソッドを使用してその動作を確認してください。</p>
-<h3 id="Analyzer-configuration" class="common-anchor-header">アナライザーの設定<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
+<h3 id="Analyzer-configuration" class="common-anchor-header">アナライザの設定<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

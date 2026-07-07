@@ -40,7 +40,7 @@ beta: Milvus 3.0.x
 <li><p>현재 외부 컬렉션은 생성 후 필드 추가를 지원합니다. 필드 삭제, 필드 이름 변경, 필드 데이터 유형 변경, 벡터 차원 변경 또는 <code translate="no">external_field</code> 재매핑과 같은 기타 스키마 변경은 지원되지 않습니다.</p></li>
 <li><p>외부 데이터 소스에 이미 존재하는 필드만 추가할 수 있습니다. 이 작업은 기존 외부 필드를 Milvus 필드에 매핑합니다. 외부 데이터 소스에 새 필드를 생성하거나 소스 데이터를 역방향으로 채우는 작업은 수행하지 않습니다.</p></li>
 <li><p>기존 외부 컬렉션에 <code translate="no">SPARSE_FLOAT_VECTOR</code> 필드를 추가하는 기능은 지원되지 않습니다.</p></li>
-<li><p>기존 외부 컬렉션에 StructArray 필드를 추가하는 기능은 지원되지 않습니다. 외부 컬렉션에 StructArray 필드가 필요한 경우, 컬렉션을 생성할 때 컬렉션 스키마에서 해당 필드를 정의하십시오.</p></li>
+<li><p>기존 외부 컬렉션에 StructArray 필드를 추가하는 기능은 지원되지 않습니다. 외부 컬렉션에 StructArray 필드가 필요한 경우, 컬렉션을 생성할 때 컬렉션 스키마에서 해당 필드를 정의해야 합니다.</p></li>
 </ul>
 <h2 id="Add-a-field" class="common-anchor-header">필드 추가<button data-href="#Add-a-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -74,7 +74,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>쿼리 결과에 필드를 반환하거나 필터에서 사용하려면 <code translate="no">add_collection_field()</code> 을 사용하여 스칼라 필드를 추가하십시오. 다음 예제는 외부 데이터 소스의 <code translate="no">score</code> 필드에 매핑되는 <code translate="no">score</code> 필드를 추가합니다.</p>
+    </button></h3><p>쿼리 결과에 필드를 반환하거나 필터에서 사용하려면 <code translate="no">add_collection_field()</code> 을 사용하여 스칼라 필드를 추가하십시오. 다음 예제에서는 외부 데이터 소스의 <code translate="no">score</code> 필드에 매핑되는 <code translate="no">score</code> 필드를 추가합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient
 
 client = MilvusClient(

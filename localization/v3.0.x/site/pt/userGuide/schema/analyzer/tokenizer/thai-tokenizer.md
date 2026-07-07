@@ -61,7 +61,7 @@ beta: Milvus 3.0.0+
 <ul>
 <li><strong>Segmentação em tailandês</strong>: Segmenta o texto em tailandês em tokens de palavras sem depender de espaços em branco.</li>
 <li><strong>Filtragem de espaços em branco e pontuação</strong>: Filtra segmentos que consistem apenas em espaços em branco e pontuação. Isto difere do <a href="/docs/pt/icu-tokenizer.md"><code translate="no">icu</code></a> tokenizador, que pode preservar a pontuação e os espaços como tokens.</li>
-<li><strong>Texto com scripts misturados</strong>: Gera tokens de palavras em alfabeto latino em texto misto de tailandês e inglês.</li>
+<li><strong>Texto com alfabetos misturados</strong>: Gera tokens de palavras em alfabeto latino em texto misto de tailandês e inglês.</li>
 <li><strong>Apenas tokenizador</strong>: Não converte os tokens para minúsculas, não normaliza os dígitos Unicode nem remove palavras vazias. Adicione filtros ou utilize o <a href="/docs/pt/thai-analyzer.md"><code translate="no">thai</code></a> para essas etapas.</li>
 <li><strong>Semântica de posição</strong>: Utiliza posições de tokens baseadas em caracteres que incluem espaços em branco e pontuação ignorados, o que mantém o comportamento de correspondência de frases e proximidade consistente com outros tokenizadores não latinos.</li>
 </ul>

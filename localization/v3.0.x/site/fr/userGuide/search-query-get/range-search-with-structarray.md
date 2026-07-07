@@ -4,9 +4,9 @@ title: Recherche par intervalle avec StructArray
 summary: >-
   Cette page vous permet d'effectuer une recherche par plage sur les sous-champs
   vectoriels d'un StructArray. La recherche par plage renvoie les résultats
-  vectoriels dont le score ou la distance se situe dans une fourchette
-  spécifiée. Pour les champs StructArray, utilisez la recherche par plage avec
-  une recherche vectorielle au niveau des éléments, dans laquelle chaque élément
+  vectoriels dont le score ou la distance se situe dans une plage spécifiée.
+  Pour les champs StructArray, utilisez la recherche par plage avec une
+  recherche vectorielle au niveau des éléments, dans laquelle chaque élément
   Struct est recherché indépendamment.
 ---
 <h1 id="Range-Search-with-StructArray" class="common-anchor-header">Recherche par intervalle avec StructArray<button data-href="#Range-Search-with-StructArray" class="anchor-icon" translate="no">
@@ -47,7 +47,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>Recherche dans EmbeddingList</td><td>Non pris en charge.</td><td>Sans objet.</td></tr>
-<tr><td>Recherche au niveau des éléments</td><td>Utilisez une requête vectorielle standard avec l'<code translate="no">radius</code> et, éventuellement, l'<code translate="no">range_filter</code>.</td><td>Niveau des éléments de structure.</td></tr>
+<tr><td>Recherche au niveau des éléments</td><td>Utilisez une requête vectorielle standard avec <code translate="no">radius</code> et, éventuellement, <code translate="no">range_filter</code>.</td><td>Niveau des éléments de structure.</td></tr>
 <tr><td>Recherche hybride</td><td>Prise en charge lorsque la requête StructArray cible un champ vectoriel au niveau des éléments. Les requêtes au niveau de EmbeddingList ne prennent pas en charge la recherche par plage.</td><td>Sous-recherche au niveau des éléments, puis reclassement hybride.</td></tr>
 </tbody>
 </table>
@@ -76,7 +76,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>Champ StructArray</td><td>La collection contient un champ StructArray tel que <code translate="no">chunks</code>.</td></tr>
-<tr><td>Sous-champ vectoriel au niveau de l'élément</td><td>Le sous-champ vectoriel cible est <code translate="no">chunks[emb]</code>, et non <code translate="no">chunks[emb_list_vector]</code>.</td></tr>
+<tr><td>Sous-champ vectoriel au niveau de l’élément</td><td>Le sous-champ vectoriel cible est <code translate="no">chunks[emb]</code>, et non <code translate="no">chunks[emb_list_vector]</code>.</td></tr>
 <tr><td>Métrique d’indexation</td><td>Le sous-champ vectoriel est indexé à l’aide d’une métrique vectorielle standard, telle que <code translate="no">COSINE</code>, <code translate="no">IP</code> ou <code translate="no">L2</code>.</td></tr>
 <tr><td>Données de requête</td><td>La requête est un vecteur standard, et non un <code translate="no">EmbeddingList</code>.</td></tr>
 </tbody>
@@ -305,7 +305,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>N’utilisez pas de requête « <code translate="no">EmbeddingList</code> » ni de métrique « <code translate="no">MAX_SIM*</code> » pour la recherche par plage sur les sous-champs vectoriels de StructArray. La recherche au niveau de l’EmbeddingList ne prend pas en charge la recherche par plage.</p></li>
+<li><p>N’utilisez pas de requête de type « <code translate="no">EmbeddingList</code> » ni de métrique de type « <code translate="no">MAX_SIM*</code> » pour une recherche par plage sur les sous-champs vectoriels de StructArray. La recherche au niveau de l’EmbeddingList ne prend pas en charge la recherche par plage.</p></li>
 <li><p>Ne combinez pas la recherche par plage avec la recherche par regroupement. Si vous avez besoin d’un résultat par entité parente, effectuez une recherche au niveau des éléments sans paramètres de plage et utilisez le regroupement lorsque cela est pris en charge.</p></li>
 <li><p>La recherche par plage hybride est prise en charge pour les champs vectoriels au niveau des éléments de StructArray. Elle n’est pas prise en charge pour les requêtes StructArray au niveau de l’EmbeddingList.</p></li>
 </ul>

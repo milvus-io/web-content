@@ -22,7 +22,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>에이전트 기반 검색 애플리케이션에서 벡터 검색과 grep 스타일의 패턴 매칭은 종종 서로를 보완합니다. 벡터 검색은 의미적으로 관련성이 있는 엔티티를 검색하는 반면, 패턴 매칭은 오류 코드, 로그 접두사, 이메일 도메인, URL 경로 또는 식별자와 같은 정확한 문자열 구조를 기준으로 해당 결과를 좁혀줍니다.</p>
-<p>Milvus에서는 간단한 와일드카드 일치를 위해 ` <code translate="no">LIKE</code> `을, <a href="https://github.com/google/re2/wiki/syntax">RE2</a> 정규식을 위해 ` <code translate="no">=~</code> ` 또는 ` <code translate="no">!~</code> `을 사용하여 스칼라 필터 내에서 이러한 패턴 제약 조건을 표현할 수 있습니다. 이러한 필터를 ` <code translate="no">query</code>`, ` <code translate="no">search</code>` 또는 하이브리드 검색과 결합할 수 있습니다.</p>
+<p>Milvus에서는 이러한 패턴 제약 조건을 스칼라 필터 내에서 ` <code translate="no">LIKE</code> `을 사용하여 간단한 와일드카드 일치를 지정하거나, ` <code translate="no">=~</code> ` 또는 ` <code translate="no">!~</code> `을 사용하여 <a href="https://github.com/google/re2/wiki/syntax">RE2</a> 정규식을 지정할 수 있습니다. 이러한 필터는 ` <code translate="no">query</code>`, ` <code translate="no">search</code>` 또는 하이브리드 검색과 결합하여 사용할 수 있습니다.</p>
 <p>패턴 일치 표현식은 <code translate="no">filter</code> 매개변수에 작성됩니다. 예를 들어, 다음 쿼리는 <code translate="no">E1001</code> 와 같은 오류 코드가 포함된 로그 메시지를 일치시킵니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -34,7 +34,7 @@ res = client.query(
     output_fields=[<span class="hljs-string">&quot;message&quot;</span>, <span class="hljs-string">&quot;severity&quot;</span>],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>이 페이지의 예제는 <code translate="no">filter</code> 에 할당된 표현식에 중점을 둡니다. <code translate="no">query</code>, <code translate="no">search</code>, 하이브리드 검색과 같이 스칼라 필터를 허용하는 Milvus 작업에서도 동일한 필터 표현식 구문을 사용할 수 있습니다.</p>
+<p>이 페이지의 예제는 <code translate="no">filter</code> 에 할당된 표현식에 중점을 둡니다. <code translate="no">query</code>, <code translate="no">search</code> 및 하이브리드 검색과 같이 스칼라 필터를 허용하는 Milvus 작업에서도 동일한 필터 표현식 구문을 사용할 수 있습니다.</p>
 <h2 id="Supported-field-types" class="common-anchor-header">지원되는 필드 유형<button data-href="#Supported-field-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -57,7 +57,7 @@ res = client.query(
 </thead>
 <tbody>
 <tr><td><code translate="no">VARCHAR</code> 필드</td><td>예</td><td>예</td><td>문자열 필드에 대한 패턴 매칭의 일반적인 대상입니다.</td></tr>
-<tr><td><code translate="no">JSON</code> <code translate="no">VARCHAR</code> 로 형 변환된 경로</td><td>예</td><td>예</td><td>정확한 일치를 위해서는 JSON 경로 값이 문자열이어야 합니다. 성능 향상을 위해 JSON 경로에 인덱스를 생성하는 경우, ` <code translate="no">json_cast_type=&quot;varchar&quot;</code>`을 설정하십시오.</td></tr>
+<tr><td><code translate="no">JSON</code> <code translate="no">VARCHAR</code> 로 형변환된 경로</td><td>예</td><td>예</td><td>정확한 일치를 위해서는 JSON 경로 값이 문자열이어야 합니다. 성능 향상을 위해 JSON 경로에 인덱스를 생성하는 경우, ` <code translate="no">json_cast_type=&quot;varchar&quot;</code>`을 설정하십시오.</td></tr>
 <tr><td><code translate="no">ARRAY&lt;VARCHAR&gt;</code> element</td><td>예</td><td>예</td><td><code translate="no">tags[0]</code> 와 같이 인덱스를 사용하여 특정 요소를 일치시킵니다. 패턴 일치는 모든 요소를 스캔하지 <strong>않으며</strong>, 지정된 인덱스의 요소에만 적용됩니다.</td></tr>
 <tr><td>숫자, 부울, 벡터, <code translate="no">TEXT</code> 또는 기타<code translate="no">VARCHAR</code> 가 아닌 대상</td><td>아니요</td><td>아니요</td><td>패턴 매칭은 <code translate="no">VARCHAR</code> 값, 문자열로 해석되는 JSON 경로 또는 인덱스가 지정된 <code translate="no">ARRAY&lt;VARCHAR&gt;</code> 요소에만 사용할 수 있습니다.</td></tr>
 </tbody>
@@ -269,7 +269,7 @@ res = client.query(
 <p>정규식 메타문자를 리터럴로 일치시키려면 정규식 패턴에서 해당 문자를 이스케이프 처리하십시오. 예를 들어, 리터럴 점(정규식에서 `<code translate="no">\.</code> `)을 일치시키려면 Python 필터 문자열에 ` <code translate="no">\\.</code> `를 작성하십시오:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;email =~ &quot;@gmail\\.com$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>참고: Milvus 정규식 필터는 RE2 구문을 따릅니다. 정규식 패턴이 RE2에서 지원하지 않는 구문을 사용하거나 기타 이유로 유효하지 않은 경우, Milvus는 해당 필터 표현식을 거부합니다. 정규식 메타문자, 플래그 및 일치 동작에 대한 자세한 내용은 <a href="https://github.com/google/re2/wiki/syntax">RE2 구문</a> 참조를 참조하십시오.</p>
+<p>참고: Milvus 정규 표현식 필터는 RE2 구문을 따릅니다. 정규 표현식 패턴이 RE2에서 지원하지 않는 구문을 사용하거나 기타 이유로 유효하지 않은 경우, Milvus는 해당 필터 표현식을 거부합니다. 정규 표현식 메타문자, 플래그 및 일치 동작에 대한 자세한 내용은 <a href="https://github.com/google/re2/wiki/syntax">RE2 구문</a> 참조를 참조하십시오.</p>
 <h3 id="Matching-behavior" class="common-anchor-header">일치 동작<button data-href="#Matching-behavior" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -293,15 +293,15 @@ res = client.query(
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match only values that are exactly E followed by four digits</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;code =~ &quot;^E[0-9]{4}$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Null이 허용되는 VARCHAR 필드</strong></p>
-<p>정규식 필터는 null 값과 일치하지 않습니다. 이는 <code translate="no">=~</code> 과 <code translate="no">!~</code> 모두에 적용됩니다. 정규식 패턴은 제외하고 null 값은 유지하려면 <code translate="no">OR field IS NULL</code> 을 명시적으로 추가하십시오:</p>
+<p><strong>Null 허용 VARCHAR 필드</strong></p>
+<p>정규식 필터는 null 값과 일치하지 않습니다. 이는 <code translate="no">=~</code> 와 <code translate="no">!~</code> 모두에 적용됩니다. 정규식 패턴은 제외하고 null 값은 유지하려면 <code translate="no">OR field IS NULL</code> 를 명시적으로 추가하십시오:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot; OR message IS NULL&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>JSON 경로</strong></p>
 <p>JSON 경로의 경우, 경로가 누락되었거나 null이거나 문자열이 아닌 값으로 해석될 때 정규식 필터의 동작이 달라집니다:</p>
 <table>
 <thead>
-<tr><th>필터</th><th>누락/null/문자가 아닌 값을 포함하나요?</th><th>참고</th></tr>
+<tr><th>필터</th><th>누락/null/문자열이 아닌 값을 포함하나요?</th><th>참고</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">json_field[&quot;path&quot;] =~ &quot;pattern&quot;</code></td><td>아니요</td><td>정규식 패턴을 만족하는 문자열 값에만 일치합니다.</td></tr>
@@ -324,15 +324,15 @@ res = client.query(
         ></path>
       </svg>
     </button></h2><p>Milvus는 문자열 필드에 대해 여러 인덱스 유형을 지원하며, 이는 <code translate="no">VARCHAR</code> 필드 또는 JSON 문자열 경로(예: <code translate="no">NGRAM</code>, <code translate="no">STL_SORT</code>, <code translate="no">INVERTED</code>, <code translate="no">BITMAP</code>)에 대한 <code translate="no">LIKE</code> 및 정규식 필터와 함께 사용할 수 있습니다. 패턴 매칭은 인덱스 없이도 작동할 수 있지만, 인덱스를 사용하면 대용량 데이터셋에서 성능이 향상될 수 있습니다.</p>
-<p>인덱스의 효과는 패턴 표현식, Milvus가 고정된 리터럴 부분 문자열을 추출할 수 있는지 여부, 그리고 대상 필드의 카디널리티와 분포에 따라 달라집니다. <code translate="no">name LIKE &quot;Prod%&quot;</code> 와 같은 접두사 스타일 패턴은 <code translate="no">description LIKE &quot;%vector%&quot;</code> 또는 <code translate="no">filename LIKE &quot;%.json&quot;</code> 와 같은 중위 또는 접미사 패턴과는 다른 인덱스 전략을 적용하는 것이 유리할 수 있습니다.</p>
+<p>인덱스의 효과는 패턴 표현식, Milvus가 고정된 리터럴 부분 문자열을 추출할 수 있는지 여부, 그리고 대상 필드의 카디널리티와 분포에 따라 달라집니다. <code translate="no">name LIKE &quot;Prod%&quot;</code> 와 같은 접두사 스타일 패턴은 <code translate="no">description LIKE &quot;%vector%&quot;</code> 또는 <code translate="no">filename LIKE &quot;%.json&quot;</code> 와 같은 중위 또는 접미사 패턴과는 다른 인덱스 전략을 적용할 때 더 큰 이점을 얻을 수 있습니다.</p>
 <p>다음 표를 참고로 삼은 후, 실제 워크로드를 사용하여 벤치마크를 수행하십시오:</p>
 <table>
 <thead>
-<tr><th>패턴 또는 데이터 특성</th><th>고려할 인덱스</th><th>참고 사항</th></tr>
+<tr><th>패턴 또는 데이터 특성</th><th>고려할 인덱스</th><th>참고</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">message =~ &quot;error.*timeout&quot;</code> 와 같이 고정된 리터럴 부분 문자열을 포함하거나 <code translate="no">message LIKE &quot;%database%&quot;</code></td><td><code translate="no">NGRAM</code></td><td>Milvus가 패턴에서 의미 있는 리터럴 부분 문자열을 추출할 수 있는 경우 도움이 됩니다. 자세한 내용은 <a href="/docs/ko/ngram.md">NGRAM을</a> 참조하십시오.</td></tr>
-<tr><td>접두사, 정확한 일치 또는 등가성 문자열 필터(특히 카디널리티가 낮거나 중간 정도인 필드에서)</td><td><code translate="no">STL_SORT</code>, <code translate="no">INVERTED</code>, 또는 <code translate="no">BITMAP</code></td><td>필드에 반복되는 값이 있거나 필터가 완전 일치에 가까운 경우 더 효과적일 수 있습니다. 자세한 내용은 <a href="/docs/ko/stl-sort.md">STL_SORT</a>, <a href="/docs/ko/inverted.md">INVERTED</a> 및 <a href="/docs/ko/bitmap.md">BITMAP을</a> 참조하십시오.</td></tr>
+<tr><td>접두사, 정확한 일치 또는 등가성 유사 문자열 필터(특히 카디널리티가 낮거나 중간 정도인 필드에서)</td><td><code translate="no">STL_SORT</code>, <code translate="no">INVERTED</code>, 또는 <code translate="no">BITMAP</code></td><td>필드에 반복되는 값이 있거나 필터가 완전 일치에 가까운 경우 더 효과적일 수 있습니다. 자세한 내용은 <a href="/docs/ko/stl-sort.md">STL_SORT</a>, <a href="/docs/ko/inverted.md">INVERTED</a> 및 <a href="/docs/ko/bitmap.md">BITMAP을</a> 참조하십시오.</td></tr>
 <tr><td>고정 리터럴이 없는 정규식 패턴, 또는 문자 클래스, 짧은 토큰, 와일드카드가 주를 이루는 패턴</td><td>인덱스 가속화에 의존하기 전에 벤치마크를 수행하십시오</td><td>이러한 패턴은 인덱스 선택성이 제한적일 수 있으며, 더 광범위한 스캔으로 전환될 수 있습니다.</td></tr>
 </tbody>
 </table>

@@ -39,7 +39,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Atualmente, as coleções externas suportam a adição de campos após a sua criação. Outras alterações ao esquema, tais como eliminar campos, renomear campos, alterar tipos de dados de campos, alterar dimensões de vetores ou remapear <code translate="no">external_field</code>, não são suportadas.</p></li>
+<li><p>Atualmente, as coleções externas suportam a adição de campos após a sua criação. Outras alterações no esquema, tais como eliminar campos, renomear campos, alterar tipos de dados de campos, alterar dimensões de vetores ou remapear um <code translate="no">external_field</code>, não são suportadas.</p></li>
 <li><p>Só é possível adicionar um campo que já exista na fonte de dados externa. Esta operação mapeia um campo externo existente para um campo do Milvus. Não cria um novo campo na fonte de dados externa nem preenche retroativamente os dados da fonte.</p></li>
 <li><p>A adição de campos « <code translate="no">SPARSE_FLOAT_VECTOR</code> » a uma coleção externa existente não é suportada.</p></li>
 <li><p>A adição de campos StructArray a uma coleção externa existente não é suportada. Se a sua coleção externa necessitar de um campo StructArray, defina-o no esquema da coleção ao criá-la.</p></li>

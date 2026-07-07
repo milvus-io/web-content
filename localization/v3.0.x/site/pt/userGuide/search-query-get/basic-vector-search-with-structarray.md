@@ -150,7 +150,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilize a pesquisa ao nível do elemento quando cada elemento Struct deva participar na pesquisa vetorial de forma independente. A consulta é um vetor normal, e o subcampo do vetor de destino deve ser indexado com uma métrica de vetor normal.</p>
+    </button></h2><p>Utilize a pesquisa ao nível do elemento quando cada elemento Struct deva participar na pesquisa vetorial de forma independente. A consulta é um vetor normal, e o subcampo do vetor de destino deve ser indexado com uma métrica vetorial normal.</p>
 <pre><code translate="no" class="language-python">query_vector = [<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>]
 
 results = client.search(
@@ -224,7 +224,7 @@ results = client.search(
 <li><p>Utilizar « <code translate="no">chunks.emb</code> » em vez da sintaxe de caminho de subcampo exigida « <code translate="no">chunks[emb]</code> ».</p></li>
 <li><p>Utilizar uma consulta EmbeddingList num subcampo vetorial indexado com uma métrica vetorial normal.</p></li>
 <li><p>Utilizar uma consulta vetorial normal num subcampo vetorial indexado com uma métrica « <code translate="no">MAX_SIM*</code> ».</p></li>
-<li><p>Esperar que a pesquisa ao nível do elemento <code translate="no">limit</code> devolva esse número de entidades-pai únicas. Ela devolve resultados ao nível do elemento.</p></li>
+<li><p>Esperar que a pesquisa ao nível do elemento « <code translate="no">limit</code> » devolva esse número de entidades-pai únicas. Ela devolve resultados ao nível do elemento.</p></li>
 <li><p>Esperar que a pesquisa «EmbeddingList» devolva um deslocamento específico de um elemento. Devolve correspondências ao nível da entidade.</p></li>
 <li><p>Reutilizar um subcampo vetorial para ambos os modos de pesquisa. Utilize subcampos vetoriais separados, uma vez que cada subcampo vetorial aceita apenas um índice.</p></li>
 </ul>
@@ -246,7 +246,7 @@ results = client.search(
     </button></h2><ol>
 <li><p>Para restringir a pesquisa ao nível do elemento por condições escalares, consulte <a href="/docs/pt/filtered-search-with-structarray.md">«Pesquisa filtrada com StructArray</a>».</p></li>
 <li><p>Para pesquisar por limites de pontuação ou distância, leia <a href="/docs/pt/range-search-with-structarray.md">«Pesquisa por intervalo com StructArray</a>».</p></li>
-<li><p>Para devolver, no máximo, um resultado por entidade pai após uma pesquisa ao nível do elemento, consulte <a href="/docs/pt/grouping-search-with-structarray.md">«Pesquisa agrupada com StructArray</a>».</p></li>
+<li><p>Para devolver, no máximo, um resultado por entidade pai após uma pesquisa ao nível do elemento, leia <a href="/docs/pt/grouping-search-with-structarray.md">«Pesquisa agrupada com StructArray</a>».</p></li>
 <li><p>Para combinar a pesquisa com StructArray com outras pesquisas vetoriais, consulte <a href="/docs/pt/hybrid-search-with-structarray.md">«Pesquisa híbrida com StructArray</a>».</p></li>
 <li><p>Para consultar os tipos de dados, métricas, filtros e limites específicos da versão suportados, leia <a href="/docs/pt/structarray-limits.md">«Limites do StructArray</a>».</p></li>
 </ol>

@@ -203,7 +203,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Utilizzare " <code translate="no">MATCH_ANY</code> " in questo caso poiché il risultato della ricerca EmbeddingList è a livello di entità. Il filtro richiede che almeno un chunk nell'entità sia un chunk " <code translate="no">&quot;index&quot;</code> " di alta qualità, ma il risultato della ricerca stesso rappresenta comunque l'entità padre.</p>
+<p>Utilizzare " <code translate="no">MATCH_ANY</code> " in questo caso poiché il risultato della ricerca in EmbeddingList è a livello di entità. Il filtro richiede che almeno un chunk nell'entità sia un chunk " <code translate="no">&quot;index&quot;</code> " di alta qualità, ma il risultato della ricerca stesso rappresenta comunque l'entità padre.</p>
 <h2 id="Use-filters-in-hybrid-search" class="common-anchor-header">Utilizzo dei filtri nella ricerca ibrida<button data-href="#Use-filters-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -253,7 +253,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>L'argomento <code translate="no">filter</code> applica la condizione a livello di entità di primo livello, mentre l'<code translate="no">expr</code> e su <code translate="no">chunk_req</code> limita solo la richiesta vettoriale a livello di elemento di StructArray. Per le combinazioni di ricerca ibrida supportate e i limiti specifici per versione, consultare <a href="/docs/it/hybrid-search-with-structarray.md">Ricerca ibrida con StructArray</a> e <a href="/docs/it/structarray-limits.md">Limiti di StructArray</a>.</p>
+<p>L'argomento ` <code translate="no">filter</code> ` applica la condizione a livello di entità di primo livello, mentre ` <code translate="no">expr</code> ` su ` <code translate="no">chunk_req</code> ` limita solo la richiesta vettoriale a livello di elemento di StructArray. Per le combinazioni di ricerca ibrida supportate e i limiti specifici per versione, consultare <a href="/docs/it/hybrid-search-with-structarray.md">Ricerca ibrida con StructArray</a> e <a href="/docs/it/structarray-limits.md">Limiti di StructArray</a>.</p>
 <h2 id="Predicate-support-summary" class="common-anchor-header">Riepilogo del supporto dei predicati<button data-href="#Predicate-support-summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -301,7 +301,7 @@ results = client.hybrid_search(
     </button></h2><ul>
 <li><p>Utilizzo di ` <code translate="no">$[subfield]</code> ` al di fuori di ` <code translate="no">element_filter</code> ` o ` <code translate="no">MATCH_*</code>`.</p></li>
 <li><p>Utilizzo di ` <code translate="no">chunks.section</code> ` al posto della sintassi degli operatori StructArray, come ad esempio ` <code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code>`.</p></li>
-<li><p>Utilizzo di ` <code translate="no">element_filter</code> ` quando è necessario solo un filtro a livello di riga. Utilizzare invece ` <code translate="no">MATCH_ANY</code> ` se è necessario selezionare solo le entità.</p></li>
+<li><p>Utilizzo di <code translate="no">element_filter</code> quando è necessario solo un filtro a livello di riga. Utilizzare invece <code translate="no">MATCH_ANY</code> se è necessario solo selezionare le entità.</p></li>
 <li><p>Aspettarsi che ` <code translate="no">MATCH_*</code> ` restituisca gli offset degli elementi. Questi operatori selezionano le entità e non identificano di per sé un singolo elemento corrispondente.</p></li>
 <li><p>Scrivere predicati booleani semplici come <code translate="no">$[has_code]</code>. Utilizzare confronti espliciti come <code translate="no">$[has_code] == true</code>.</p></li>
 <li><p>Inserire ` <code translate="no">element_filter</code> ` prima di un predicato di primo livello nella stessa espressione di filtro.</p></li>
@@ -324,6 +324,6 @@ results = client.hybrid_search(
     </button></h2><ol>
 <li><p>Per consultare la sintassi completa dei filtri StructArray, leggere <a href="/docs/it/struct-array-operators.md">Operatori StructArray</a>.</p></li>
 <li><p>Per eseguire prima ricerche vettoriali non filtrate, leggere <a href="/docs/it/basic-vector-search-with-structarray.md">Ricerca vettoriale di base con StructArray</a>.</p></li>
-<li><p>Per creare indici scalari per i filtri StructArray utilizzati di frequente, leggere " <a href="/docs/it/index-structarray-fields.md">Indice dei campi StructArray</a>".</p></li>
+<li><p>Per creare indici scalari per i filtri StructArray utilizzati di frequente, consultare <a href="/docs/it/index-structarray-fields.md">Indice dei campi StructArray</a>.</p></li>
 <li><p>Per verificare i limiti di filtro e ricerca specifici per versione, consultare <a href="/docs/it/structarray-limits.md">Limiti di StructArray</a>.</p></li>
 </ol>

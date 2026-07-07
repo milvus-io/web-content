@@ -58,7 +58,7 @@ summary: >-
 <tr><th>Subcampo</th><th>Tipo</th><th>Finalidade</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">text</code></td><td><code translate="no">VARCHAR</code></td><td>Texto do bloco.</td></tr>
+<tr><td><code translate="no">text</code></td><td><code translate="no">VARCHAR</code></td><td>Texto do fragmento.</td></tr>
 <tr><td><code translate="no">section</code></td><td><code translate="no">VARCHAR</code></td><td>Nome da secção, como « <code translate="no">index</code> », « <code translate="no">search</code> » ou « <code translate="no">filter</code> ».</td></tr>
 <tr><td><code translate="no">page</code></td><td><code translate="no">INT64</code></td><td>Número da página ou posição lógica do fragmento.</td></tr>
 <tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>Pontuação ao nível do fragmento utilizada na filtragem escalar e nos exemplos de intervalo.</td></tr>
@@ -68,7 +68,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Um campo vetorial ou subcampo vetorial aceita apenas um índice. Se precisar tanto da pesquisa EmbeddingList como da pesquisa ao nível do elemento, defina dois subcampos vetoriais separados. Neste exemplo, « <code translate="no">chunks[emb_list_vector]</code> » destina-se à pesquisa EmbeddingList e « <code translate="no">chunks[emb]</code> » destina-se à pesquisa ao nível do elemento.</p>
+<p>Um campo vetorial ou subcampo vetorial aceita apenas um índice. Se necessitar tanto da pesquisa EmbeddingList como da pesquisa ao nível do elemento, defina dois subcampos vetoriais separados. Neste exemplo, « <code translate="no">chunks[emb_list_vector]</code> » destina-se à pesquisa EmbeddingList e « <code translate="no">chunks[emb]</code> » destina-se à pesquisa ao nível do elemento.</p>
 </div>
 <h2 id="Supported-subfield-data-types" class="common-anchor-header">Tipos de dados de subcampos suportados<button data-href="#Supported-subfield-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -237,7 +237,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de criar um campo StructArray, refira-se aos seus subcampos utilizando a sintaxe de caminho « <code translate="no">structArray[subfield]</code> ». Utilize esta sintaxe ao criar índices, pesquisar subcampos vetoriais, gerar subcampos de saída ou criar filtros escalares.</p>
+    </button></h2><p>Depois de criar um campo StructArray, refira-se aos seus subcampos utilizando a sintaxe de caminho « <code translate="no">structArray[subfield]</code> ». Utilize esta sintaxe ao criar índices, pesquisar subcampos vetoriais, gerar subcampos ou criar filtros escalares.</p>
 <table>
 <thead>
 <tr><th>Caminho</th><th>Significado</th><th>Utilização comum</th></tr>
@@ -339,7 +339,7 @@ client.add_collection_struct_field(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Após a adição do campo StructArray, as entidades existentes devolvem ` <code translate="no">null</code> ` para o novo campo em todos os seus subcampos.</p>
-<p>Depois de criado um campo StructArray, não é possível adicionar novos subcampos a esse campo StructArray existente. Se, posteriormente, necessitar de atributos de elemento adicionais, chame <code translate="no">drop_collection_field()</code> para eliminar o campo StructArray e, em seguida, adicione um novo campo StructArray com o esquema Struct atualizado.</p>
+<p>Depois de um campo StructArray ser criado, não é possível adicionar novos subcampos a esse campo StructArray existente. Se precisar de atributos de elemento adicionais mais tarde, chame <code translate="no">drop_collection_field()</code> para eliminar o campo StructArray e, em seguida, adicione um novo campo StructArray com o esquema Struct atualizado.</p>
 <pre><code translate="no" class="language-python">client.drop_collection_field(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
     field_name=<span class="hljs-string">&quot;chunks&quot;</span>,

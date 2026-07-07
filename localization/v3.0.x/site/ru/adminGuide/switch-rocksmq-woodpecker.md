@@ -122,7 +122,7 @@ summary: >-
     </button></h3><pre><code translate="no" class="language-shell">docker logs milvus-standalone | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>При успешном переключении в журнале регистрируется сообщение <code translate="no">[mqTypeValue=woodpecker]</code>.</p>
-<h3 id="Step-5-Optional-Clean-up-RocksMQ-data" class="common-anchor-header">Шаг 5: (Необязательно) Очистите данные RocksMQ<button data-href="#Step-5-Optional-Clean-up-RocksMQ-data" class="anchor-icon" translate="no">
+<h3 id="Step-5-Optional-Clean-up-RocksMQ-data" class="common-anchor-header">Шаг 5: (Необязательно) Очистка данных RocksMQ<button data-href="#Step-5-Optional-Clean-up-RocksMQ-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -208,7 +208,7 @@ summary: >-
       </svg>
     </button></h3><pre><code translate="no" class="language-shell">docker logs milvus-standalone | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
-<p>При успешном переключении в журнале появляется запись « <code translate="no">[mqTypeValue=rocksmq]</code> ».</p>
+<p>При успешном переходе в журнале появляется запись « <code translate="no">[mqTypeValue=rocksmq]</code> ».</p>
 <h3 id="Step-4-Optional-Clean-up-Woodpecker-data" class="common-anchor-header">Шаг 4: (Необязательно) Очистка данных Woodpecker<button data-href="#Step-4-Optional-Clean-up-Woodpecker-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -226,7 +226,7 @@ summary: >-
       </svg>
     </button></h3><ul>
 <li><strong>Метаданные (etcd):</strong> префикс ключа Woodpecker обычно имеет вид <code translate="no">woodpecker/...</code>. Просмотрите его с помощью команды <code translate="no">etcdctl get woodpecker --prefix</code>, а затем удалите.</li>
-<li><strong>Данные хранилища:</strong> в <strong>режиме MinIO</strong> удалите данные журнала в папке <code translate="no">&lt;rootPath&gt;/wp/...</code> (обычно <code translate="no">files/wp/...</code>) в бакете; в <strong>локальном режиме</strong> данные находятся на локальном диске по пути <code translate="no">volumes/milvus/data/wp/...</code>.</li>
+<li><strong>Данные хранилища:</strong> в <strong>режиме MinIO</strong> удалите данные журнала в папке <code translate="no">&lt;rootPath&gt;/wp/...</code> (обычно <code translate="no">files/wp/...</code>) в бакете; в <strong>локальном режиме</strong> данные находятся на локальном диске по адресу <code translate="no">volumes/milvus/data/wp/...</code>.</li>
 </ul>
 <p>Если вы планируете позже вернуться к Woodpecker, сначала удалите эти файлы, чтобы избежать конфликтов.</p>
 <h2 id="Supported-scenarios" class="common-anchor-header">Поддерживаемые сценарии<button data-href="#Supported-scenarios" class="anchor-icon" translate="no">

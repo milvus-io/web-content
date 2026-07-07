@@ -204,7 +204,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><p>StructArrayのベクトルサブフィールドに対するインデックス型およびメトリック型を選択する際は、以下の表を参照してください。対象から始め、検索モードに応じてメトリックファミリーを選択してください。</p>
-<p>以下の互換性表から、Milvus のインデックス型とメトリック型を選択してください。</p>
+<p>以下の互換性表から、Milvus インデックス・タイプとメトリック・タイプを選択してください。</p>
 <h3 id="EmbeddingList-search" class="common-anchor-header">EmbeddingList 検索<button data-href="#EmbeddingList-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -311,7 +311,7 @@ client.create_index(
 </thead>
 <tbody>
 <tr><td>サブフィールドインデックスにはパス構文を使用してください。</td><td>インデックスは `<code translate="no">chunks[emb]</code>` とし、`<code translate="no">emb</code> ` や `<code translate="no">chunks.emb</code>` とはしないでください。</td></tr>
-<tr><td>1 つのベクトルサブフィールドには、1 つのインデックスしか指定できません。</td><td>異なるメトリックファミリーが必要な場合は、別々のベクトルサブフィールドを使用してください。</td></tr>
+<tr><td>1 つのベクトルサブフィールドには 1 つのインデックスしか指定できません。</td><td>異なるメトリックファミリーが必要な場合は、別々のベクトルサブフィールドを使用してください。</td></tr>
 <tr><td>EmbeddingList 検索には、<code translate="no">MAX_SIM*</code> メトリクスを使用してください。</td><td>EmbeddingList クエリデータには、<code translate="no">MAX_SIM*</code> メトリックを使用して構築されたインデックスが必要です。</td></tr>
 <tr><td>要素レベルの検索には、通常のベクトルメトリクスを使用してください。</td><td>要素レベルの検索では、通常のベクトルクエリデータと、<code translate="no">COSINE</code> 、<code translate="no">IP</code> 、<code translate="no">L2</code> などのメトリックが使用されます。</td></tr>
 <tr><td>フィルタに現れるスカラーサブフィールドをインデックス化してください。</td><td>ターゲットでサポートされているスカラーインデックス型を使用してください。</td></tr>

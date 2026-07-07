@@ -2,7 +2,7 @@
 id: arabic-analyzer.md
 title: ÁrabeCompatible with Milvus 3.0.0+
 summary: >-
-  O analisador de árabe integrado processa o texto em árabe, normalizando as
+  O analisador de árabe integrado processa o texto em árabe normalizando as
   variantes das letras e os algarismos, reduzindo os termos à sua forma base e
   removendo as palavras vazias em árabe.
 beta: Milvus 3.0.0+
@@ -84,15 +84,15 @@ beta: Milvus 3.0.0+
     ],
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Este analisador aplica os seguintes passos de processamento:</p>
+<p>Este analisador aplica as seguintes etapas de processamento:</p>
 <ul>
 <li><strong>Tokenização</strong>: utiliza o tokenizador <code translate="no">standard</code> para dividir o texto em tokens.</li>
-<li><strong>Normalização de dígitos</strong>: utiliza o filtro « <code translate="no">decimaldigit</code> » para converter dígitos decimais árabe-índicos e outros dígitos Unicode em dígitos ASCII.</li>
+<li><strong>Normalização de dígitos</strong>: utiliza o filtro « <code translate="no">decimaldigit</code> » para converter dígitos decimais árabes-índicos e outros dígitos Unicode em dígitos ASCII.</li>
 <li><strong>Normalização árabe</strong>: utiliza o filtro <code translate="no">arabic_normalization</code> para normalizar variantes do Alef, Teh Marbuta e Alef Maksura, e remover Harakat e Tatweel.</li>
 <li><strong>Stemming</strong>: Utiliza o filtro « <code translate="no">stemmer</code> » com « <code translate="no">language</code> » definido para « <code translate="no">arabic</code> ».</li>
 <li><strong>Remoção de palavras irrelevantes</strong>: Utiliza o filtro « <code translate="no">stop</code> » com o dicionário integrado « <code translate="no">_arabic_</code> ».</li>
 </ul>
-<p>Após definir o <code translate="no">analyzer_params</code>, pode aplicar o analisador a um campo <code translate="no">VARCHAR</code> ao definir um esquema de coleção. Para mais detalhes, consulte o <a href="/docs/pt/analyzer-overview.md#Example-use">Exemplo de utilização</a>.</p>
+<p>Após definir o <code translate="no">analyzer_params</code>, pode aplicar o analisador a um campo <code translate="no">VARCHAR</code> ao definir um esquema de coleção. Para mais detalhes, consulte <a href="/docs/pt/analyzer-overview.md#Example-use">Exemplo</a> de <a href="/docs/pt/analyzer-overview.md#Example-use">utilização</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Exemplos<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

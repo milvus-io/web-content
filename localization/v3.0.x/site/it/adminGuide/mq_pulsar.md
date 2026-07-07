@@ -133,7 +133,7 @@ title: Pulsar
       </svg>
     </button></h3><pre><code translate="no" class="language-bash">helm uninstall my-release
 <button class="copy-code-btn"></button></code></pre>
-<p>Se è stato utilizzato il Pulsar integrato e si desidera rimuovere i relativi dati persistenti, eliminare i PVC di Pulsar (denominati <code translate="no">my-release-pulsarv3-*</code>):</p>
+<p>Se è stato utilizzato il Pulsar integrato e si desidera rimuovere i dati persistenti, eliminare i PVC di Pulsar (denominati <code translate="no">my-release-pulsarv3-*</code>):</p>
 <pre><code translate="no" class="language-bash">kubectl get pvc | grep my-release-pulsarv3
 kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <button class="copy-code-btn"></button></code></pre>
@@ -265,7 +265,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
     </button></h2><ul>
 <li><strong>Aggiornamento dalla versione 2.5.x alla 2.6.x:</strong> <strong>limitazioni relative alla coda dei messaggi</strong>: durante l'aggiornamento a Milvus v3.0-beta, è necessario mantenere la coda dei messaggi attualmente in uso. Il passaggio a sistemi di coda dei messaggi diversi durante l'aggiornamento non è supportato. Il supporto per la modifica dei sistemi di coda dei messaggi sarà disponibile nelle versioni future.
 Se si utilizza Pulsar e si desidera mantenerlo, non modificare la coda dei messaggi durante l’aggiornamento.</li>
-<li><strong>Pulsar v2 → v3:</strong> consultare <a href="/docs/it/upgrade-pulsar-v3.md">Aggiornamento di Pulsar dalla v2 alla v3</a>; per rimanere sulla v2, consultare <a href="/docs/it/use-pulsar-v2.md">Continuare a utilizzare Pulsar v2</a>.</li>
+<li><strong>Pulsar v2 → v3:</strong> consultare <a href="/docs/it/upgrade-pulsar-v3.md">Aggiornamento di Pulsar dalla v2 alla v3</a>; per rimanere alla v2, consultare <a href="/docs/it/use-pulsar-v2.md">Continuare a utilizzare Pulsar v2</a>.</li>
 </ul>
 <h2 id="Whats-next" class="common-anchor-header">Prossimi passi<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

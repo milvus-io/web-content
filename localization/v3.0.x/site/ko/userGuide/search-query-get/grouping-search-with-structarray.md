@@ -170,7 +170,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>최상위 술어는 후보 엔티티를 선택합니다. ` <code translate="no">element_filter</code> ` 술어는 요소 수준 벡터 검색을 일치하는 Struct 요소로만 제한합니다. 그런 다음 그룹화는 일차 키를 기준으로 일치하는 요소 검색 결과를 통합합니다.</p>
+<p>최상위 술어는 후보 엔티티를 선택합니다. ` <code translate="no">element_filter</code> ` 술어는 요소 수준 벡터 검색을 일치하는 Struct 요소로 제한합니다. 그런 다음 그룹화는 일차 키를 기준으로 일치하는 요소 검색 결과를 통합합니다.</p>
 <h2 id="Use-grouping-in-hybrid-search" class="common-anchor-header">하이브리드 검색에서 그룹화 사용<button data-href="#Use-grouping-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -262,7 +262,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>그룹화 검색은 요소 수준의 StructArray 벡터 검색에만 적용됩니다. EmbeddingList 검색 및 EmbeddingList 수준의 하이브리드 검색은 그룹화(group-by)를 지원하지 않습니다.</p></li>
+<li><p>그룹화 검색은 요소 수준의 StructArray 벡터 검색에만 적용됩니다. EmbeddingList 검색 및 EmbeddingList 수준의 하이브리드 검색은 그룹화 기능을 지원하지 않습니다.</p></li>
 <li><p>주키를 ` <code translate="no">group_by_field</code>` 형식으로 사용하십시오. StructArray 요소 수준 그룹화는 임의의 스칼라 필드에 대한 범용 그룹화 기능이 아닙니다.</p></li>
 <li><p>그룹화 검색을 범위 검색과 결합하지 마십시오.</p></li>
 <li><p>그룹화 검색에는 <code translate="no">EmbeddingList</code> 쿼리나 <code translate="no">MAX_SIM*</code> 메트릭을 사용하지 마십시오.</p></li>
@@ -310,6 +310,6 @@ results = client.hybrid_search(
     </button></h2><ol>
 <li><p>먼저 그룹화되지 않은 요소 수준 검색을 배우려면 <a href="/docs/ko/basic-vector-search-with-structarray.md">‘StructArray를 사용한 기본 벡터 검색’을</a> 읽어보세요.</p></li>
 <li><p>그룹화된 검색에 스칼라 필터를 추가하려면 <a href="/docs/ko/filtered-search-with-structarray.md">‘StructArray를 사용한 필터링 검색’을</a> 읽어보세요.</p></li>
-<li><p>그룹화 대신 점수 또는 거리 경계를 사용하려면 <a href="/docs/ko/range-search-with-structarray.md">StructArray를 사용한 범위 검색을</a> 참조하십시오.</p></li>
+<li><p>그룹화 대신 점수 또는 거리 경계를 사용하려면 <a href="/docs/ko/range-search-with-structarray.md">StructArray를 사용한 범위 검색을</a> 읽어보세요.</p></li>
 <li><p>StructArray 검색 제한 사항을 확인하려면 <a href="/docs/ko/structarray-limits.md">‘StructArray 제한 사항’을</a> 읽어보세요.</p></li>
 </ol>

@@ -77,7 +77,7 @@ summary: >-
 <tbody>
 <tr><td>الحقل الفرعي المستهدف</td><td><code translate="no">chunks[emb_list_vector]</code></td><td><code translate="no">chunks[emb]</code></td></tr>
 <tr><td>بيانات الاستعلام</td><td>قائمة تضمين تحتوي على متجه واحد أو أكثر.</td><td>متجه عادي.</td></tr>
-<tr><td>عائلة المقاييس</td><td><code translate="no">MAX_SIM*</code>، مثل <code translate="no">MAX_SIM_COSINE</code>.</td><td>مقاييس المتجهات العادية، مثل <code translate="no">COSINE</code> أو <code translate="no">IP</code> أو <code translate="no">L2</code>.</td></tr>
+<tr><td>عائلة المقاييس</td><td><code translate="no">MAX_SIM*</code>، مثل <code translate="no">MAX_SIM_COSINE</code>.</td><td>مقاييس متجهات عادية، مثل <code translate="no">COSINE</code> أو <code translate="no">IP</code> أو <code translate="no">L2</code>.</td></tr>
 <tr><td>ما يمثله كل نتيجة</td><td>كيان مطابق يكون حقله الفرعي StructArray متشابهًا مع قائمة التضمين الخاصة بالاستعلام.</td><td>عنصر Struct مطابق داخل حقل StructArray.</td></tr>
 <tr><td>تفصيل النتائج</td><td>مستوى الكيان.</td><td>مستوى عنصر Struct.</td></tr>
 <tr><td>الإزاحة</td><td>غير قابل للتطبيق.</td><td>يحدد الموضع الذي يبدأ من الصفر لعنصر Struct المطابق عند إرجاعه.</td></tr>
@@ -130,9 +130,9 @@ results = client.search(
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
         <span class="hljs-built_in">print</span>(hit[<span class="hljs-string">&quot;id&quot;</span>], hit[<span class="hljs-string">&quot;distance&quot;</span>], hit[<span class="hljs-string">&quot;entity&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>في وضع البحث هذا، يتحكم مقياس " <code translate="no">limit</code> " في عدد الكيانات التي يتم إرجاعها لكل استعلام. يمكن أن تتضمن النتيجة حقول فرعية لـ StructArray، لكن النتيجة نفسها تمثل الكيان الأصلي المطابق بدلاً من عنصر Struct واحد محدد.</p>
+<p>في وضع البحث هذا، يتحكم مقياس « <code translate="no">limit</code> » في عدد الكيانات التي يتم إرجاعها لكل استعلام. يمكن أن تتضمن النتيجة حقول فرعية لـ StructArray، لكن النتيجة نفسها تمثل الكيان الأصلي المطابق بدلاً من عنصر Struct واحد محدد.</p>
 <div class="alert note">
-<p>للحصول على شرح تفصيلي كامل بنمط ColBERT أو ColPali، راجع <a href="/docs/ar/search-with-embedding-lists.md">«البحث باستخدام قوائم التضمين</a>». تغطي هذه الصفحة سلوك البحث الأساسي في StructArray فقط.</p>
+<p>للحصول على شرح تفصيلي كامل على غرار ColBERT أو ColPali، راجع <a href="/docs/ar/search-with-embedding-lists.md">«البحث باستخدام قوائم التضمين</a>». تغطي هذه الصفحة فقط سلوك البحث الأساسي في StructArray.</p>
 </div>
 <h2 id="Run-element-level-search" class="common-anchor-header">تشغيل البحث على مستوى العناصر<button data-href="#Run-element-level-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -244,7 +244,7 @@ results = client.search(
       </svg>
     </button></h2><ol>
 <li><p>لتقييد البحث على مستوى العناصر بشروط قياسية، اقرأ <a href="/docs/ar/filtered-search-with-structarray.md">البحث المُصفى باستخدام StructArray</a>.</p></li>
-<li><p>للبحث حسب حدود النتيجة أو المسافة، اقرأ " <a href="/docs/ar/range-search-with-structarray.md">البحث النطاقي باستخدام StructArray</a>".</p></li>
+<li><p>للبحث حسب حدود النتيجة أو المسافة، اقرأ " <a href="/docs/ar/range-search-with-structarray.md">البحث في النطاق باستخدام StructArray</a>".</p></li>
 <li><p>لإرجاع نتيجة واحدة على الأكثر لكل كيان أب بعد البحث على مستوى العنصر، اقرأ " <a href="/docs/ar/grouping-search-with-structarray.md">البحث المجمّع باستخدام StructArray</a>".</p></li>
 <li><p>لدمج البحث باستخدام StructArray مع عمليات بحث متجهة أخرى، اقرأ " <a href="/docs/ar/hybrid-search-with-structarray.md">البحث الهجين باستخدام StructArray</a>".</p></li>
 <li><p>لمراجعة أنواع البيانات المدعومة والمقاييس والمرشحات والحدود الخاصة بالإصدارات، اقرأ <a href="/docs/ar/structarray-limits.md">«حدود StructArray</a>».</p></li>

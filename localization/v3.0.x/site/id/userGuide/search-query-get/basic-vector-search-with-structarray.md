@@ -244,7 +244,7 @@ results = client.search(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>Untuk membatasi pencarian tingkat elemen berdasarkan kondisi skalar, baca <a href="/docs/id/filtered-search-with-structarray.md">Pencarian Terfilter dengan StructArray</a>.</p></li>
+<li><p>Untuk membatasi pencarian tingkat elemen berdasarkan kondisi skalar, baca <a href="/docs/id/filtered-search-with-structarray.md">Filtered Search with StructArray</a>.</p></li>
 <li><p>Untuk melakukan pencarian berdasarkan batas skor atau jarak, baca <a href="/docs/id/range-search-with-structarray.md">Pencarian Rentang dengan StructArray</a>.</p></li>
 <li><p>Untuk mengembalikan paling banyak satu hasil per entitas induk setelah pencarian tingkat elemen, baca <a href="/docs/id/grouping-search-with-structarray.md">Pencarian Pengelompokan dengan StructArray</a>.</p></li>
 <li><p>Untuk menggabungkan pencarian StructArray dengan pencarian vektor lainnya, baca <a href="/docs/id/hybrid-search-with-structarray.md">Pencarian Hibrida dengan StructArray</a>.</p></li>

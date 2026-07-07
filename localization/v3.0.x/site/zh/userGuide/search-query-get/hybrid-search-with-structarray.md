@@ -43,7 +43,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>Collection 级向量字段 + StructArray 的 EmbeddingList 子字段</td><td>实体级别</td><td>最终候选项以主键为键。</td><td>请勿使用。</td></tr>
-<tr><td>Collection级向量字段 + StructArray 元素级子字段</td><td>实体级别</td><td>在混合重新排序之前，元素级别的匹配结果会被折叠为实体级别的候选结果。</td><td>StructArray 元素级<code translate="no">AnnSearchRequest</code> 上的可选折叠配置。</td></tr>
+<tr><td>Collection级向量字段 + StructArray 元素级子字段</td><td>实体级别</td><td>在混合重新排序之前，元素级命中结果会被折叠为实体级候选结果。</td><td>StructArray 元素级<code translate="no">AnnSearchRequest</code> 上的可选折叠配置。</td></tr>
 <tr><td>同一 StructArray 字段下的多个元素级子字段</td><td>元素级别</td><td>最终候选结果以主键加上 Struct 元素偏移量作为键。</td><td>请勿使用。</td></tr>
 <tr><td>位于不同 StructArray 字段下的元素级子字段</td><td>实体级别</td><td>元素偏移量不共享标识，因此每个 StructArray 元素级别的<code translate="no">AnnSearchRequest</code> 都会在重新排序之前被折叠。</td><td>每个 StructArray 元素级<code translate="no">AnnSearchRequest</code> 上的可选折叠配置。</td></tr>
 </tbody>
@@ -247,7 +247,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>在此示例中，<code translate="no">title_req</code> 设置为实体级别，因此最终的混合结果也是实体级别。<code translate="no">chunk_req</code> 请求首先从<code translate="no">chunks[emb]</code> 返回元素命中结果，然后通过汇总同一实体的三个最佳元素得分来合并返回的元素。如果在需要实体级别合并时省略了<code translate="no">element_scope</code> ，则合并策略将默认采用<code translate="no">max</code> 。</p>
+<p>在此示例中，<code translate="no">title_req</code> 设置为实体级别，因此最终的混合结果也是实体级别的。<code translate="no">chunk_req</code> 请求首先从<code translate="no">chunks[emb]</code> 返回元素命中结果，然后通过汇总同一实体的三个最佳元素得分，将返回的元素进行折叠。如果在需要实体级别折叠时省略了<code translate="no">element_scope</code> ，折叠策略将默认采用<code translate="no">max</code> 。</p>
 <h2 id="Choose-a-collapse-strategy" class="common-anchor-header">选择聚合策略<button data-href="#Choose-a-collapse-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -334,9 +334,9 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>仅将<code translate="no">element_scope</code> 用于 StructArray 元素级别的<code translate="no">AnnSearchRequest</code> 对象，这些对象在混合搜索中必须折叠为实体级别的候选项。</p></li>
+<li><p>仅将 `<code translate="no">element_scope</code> ` 用于 StructArray 元素级别的 `<code translate="no">AnnSearchRequest</code> ` 对象，这些对象在混合搜索中必须折叠为实体级别的候选项。</p></li>
 <li><p>请勿将<code translate="no">element_scope</code> 用于 EmbeddingList 请求、Collection 级向量请求或同一 StructArray 元素级的混合搜索。</p></li>
-<li><p><code translate="no">sum</code> <code translate="no">topk_sum</code> 折叠策略需要正相关度量，例如 或 。请勿将其与 结合使用。<code translate="no">IP</code> <code translate="no">COSINE</code> <code translate="no">L2</code></p></li>
+<li><p><code translate="no">sum</code> <code translate="no">topk_sum</code> 折叠策略需要正相关度量，例如 或 。请勿将其与 配合使用。<code translate="no">IP</code> <code translate="no">COSINE</code> <code translate="no">L2</code></p></li>
 <li><p><code translate="no">topk_sum</code> 且<code translate="no">topk_avg</code> 需要正的<code translate="no">topk</code> 值。其他折叠策略不得包含<code translate="no">topk</code> 。</p></li>
 <li><p>EmbeddingList 级别的 StructArray 请求不支持范围搜索或分组操作。</p></li>
 <li><p>混合分组仅支持同一 StructArray 元素级别的混合搜索，且仅支持按主键进行。</p></li>
@@ -358,7 +358,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>在同一 StructArray 元素级混合请求中添加<code translate="no">element_scope</code> 。该请求仍为元素级，不会执行实体级折叠。</p></li>
+<li><p>在同一 StructArray 元素级混合请求中添加<code translate="no">element_scope</code> 。该请求仍保持为元素级，不会执行实体级折叠。</p></li>
 <li><p>将<code translate="no">element_scope</code> 添加到<code translate="no">chunks[emb_list_vector]</code> 中。EmbeddingList搜索已经是实体级别的。</p></li>
 <li><p>假设两个 StructArray 字段共享元素偏移量。<code translate="no">chunks</code> 中的偏移量<code translate="no">3</code> 与另一个 StructArray 字段中的偏移量<code translate="no">3</code> 对应的是不同的元素，因此该混合请求将变为实体级。</p></li>
 <li><p>使用<code translate="no">topk_sum</code> 时需配合<code translate="no">L2</code> 。若距离度量为负值，请使用<code translate="no">max</code> 、<code translate="no">avg</code> 或<code translate="no">topk_avg</code> 。</p></li>

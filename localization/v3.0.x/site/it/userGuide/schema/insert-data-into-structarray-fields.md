@@ -56,7 +56,7 @@ summary: >-
 <p>Ogni oggetto in <code translate="no">chunks</code> deve seguire lo schema Struct.</p>
 <table>
 <thead>
-<tr><th>Sottocampo</th><th>Tipo</th><th>Inserire valore</th></tr>
+<tr><th>Sottocampo</th><th>Tipo</th><th>Inserire il valore</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">text</code></td><td><code translate="no">VARCHAR</code></td><td>Testo del chunk.</td></tr>
@@ -114,7 +114,7 @@ summary: >-
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">emb_list_vector</code> e <code translate="no">emb</code> sono sottocampi vettoriali separati poiché supportano modalità di ricerca diverse. La ricerca EmbeddingList tratta tutti i vettori in un campo StructArray come un unico elenco di embedding e restituisce risultati a livello di entità con metriche <code translate="no">MAX_SIM*</code>. La ricerca a livello di elemento esegue la ricerca su ciascun elemento Struct in modo indipendente e può restituire l’offset dell’elemento corrispondente. Per semplicità, questo esempio memorizza gli stessi valori vettoriali in entrambi i campi. In un’applicazione di produzione, è possibile memorizzare gli stessi embedding in entrambi i sottocampi quando entrambe le modalità di ricerca utilizzano lo stesso embedding a blocchi, oppure memorizzare embedding diversi quando le due modalità di ricerca utilizzano rappresentazioni diverse.</p>
+<p><code translate="no">emb_list_vector</code> e <code translate="no">emb</code> sono sottocampi vettoriali distinti poiché supportano modalità di ricerca diverse. La ricerca EmbeddingList tratta tutti i vettori in un campo StructArray come un unico elenco di embedding e restituisce risultati a livello di entità con metriche <code translate="no">MAX_SIM*</code>. La ricerca a livello di elemento esegue la ricerca su ciascun elemento Struct in modo indipendente e può restituire l’offset dell’elemento corrispondente. Per semplicità, questo esempio memorizza gli stessi valori vettoriali in entrambi i campi. In un’applicazione di produzione, è possibile memorizzare gli stessi embedding in entrambi i sottocampi quando entrambe le modalità di ricerca utilizzano lo stesso embedding a blocchi, oppure memorizzare embedding diversi quando le due modalità di ricerca utilizzano rappresentazioni diverse.</p>
 <h2 id="Insert-rows" class="common-anchor-header">Inserimento di righe<button data-href="#Insert-rows" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -130,7 +130,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilizzare ` <code translate="no">client.insert()</code> ` per inserire righe contenenti valori StructArray.</p>
+    </button></h2><p>Utilizzare ` <code translate="no">client.insert()</code> ` per inserire righe contenenti valori `StructArray`.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -330,7 +330,7 @@ I campi StructArray nullabili sono disponibili solo in Milvus v3.0.x. Se si aggi
     </button></h2><ul>
 <li><p>Utilizzo di percorsi di campo come <code translate="no">chunks[text]</code> nei payload di inserimento.</p></li>
 <li><p>Omissione di sottocampi obbligatori da un elemento Struct.</p></li>
-<li><p>Inserimento di vettori con dimensioni errate.</p></li>
+<li><p>Inserimento di vettori con la dimensione errata.</p></li>
 <li><p>Inserimento di un numero di elementi Struct superiore a quello consentito da <code translate="no">max_capacity</code>.</p></li>
 <li><p>Impostare un solo sottocampo su <code translate="no">null</code> mentre altri sottocampi nello stesso valore StructArray sono validi.</p></li>
 <li><p>Scrittura di vettori solo su <code translate="no">emb_list_vector</code> e successivo tentativo di eseguire una ricerca a livello di elemento su <code translate="no">chunks[emb]</code>.</p></li>

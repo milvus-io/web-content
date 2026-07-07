@@ -73,7 +73,7 @@ summary: >-
     </button></h2><p>Utilice el modo de búsqueda para elegir la familia de métricas vectoriales.</p>
 <table>
 <thead>
-<tr><th>Objetivo de la búsqueda o el filtro</th><th>Ruta de destino</th><th>Qué elegir</th></tr>
+<tr><th>Objetivo de la búsqueda o el filtrado</th><th>Ruta de destino</th><th>Qué elegir</th></tr>
 </thead>
 <tbody>
 <tr><td>Búsqueda en EmbeddingList</td><td><code translate="no">chunks[emb_list_vector]</code></td><td>Una familia de métricas « <code translate="no">MAX_SIM*</code> ».</td></tr>
@@ -140,7 +140,7 @@ client.create_index(
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Advertencia
-No crees un índice de « <code translate="no">MAX_SIM*</code> » y un índice con métrica vectorial normal en el mismo subcampo vectorial. Si se requieren ambos modos de búsqueda, escribe los vectores en dos subcampos vectoriales distintos y crea un índice en cada subcampo.</p>
+No crees un índice de « <code translate="no">MAX_SIM*</code> » ni un índice con métrica vectorial normal en el mismo subcampo vectorial. Si se requieren ambos modos de búsqueda, escribe los vectores en dos subcampos vectoriales distintos y crea un índice para cada subcampo.</p>
 </div>
 <h2 id="Create-scalar-indexes" class="common-anchor-header">Crear índices escalares<button data-href="#Create-scalar-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -313,7 +313,7 @@ client.create_index(
 </thead>
 <tbody>
 <tr><td>Utilice la sintaxis de ruta para los índices de subcampos.</td><td><code translate="no">chunks[emb]</code>, no <code translate="no">emb</code> ni <code translate="no">chunks.emb</code>.</td></tr>
-<tr><td>Un subcampo vectorial admite un único índice.</td><td>Utilice subcampos vectoriales independientes si necesita familias de métricas diferentes.</td></tr>
+<tr><td>Un subcampo vectorial admite un único índice.</td><td>Utilice subcampos vectoriales separados si necesita familias de métricas diferentes.</td></tr>
 <tr><td>Utilice métricas de tipo « <code translate="no">MAX_SIM*</code> » para la búsqueda en EmbeddingList.</td><td>Los datos de consulta de EmbeddingList requieren un índice creado con una métrica de tipo « <code translate="no">MAX_SIM*</code> ».</td></tr>
 <tr><td>Utiliza métricas vectoriales normales para la búsqueda a nivel de elemento.</td><td>La búsqueda a nivel de elemento utiliza datos de consulta vectorial normales y métricas como « <code translate="no">COSINE</code> », « <code translate="no">IP</code> » o « <code translate="no">L2</code> ».</td></tr>
 <tr><td>Indexe los subcampos escalares que aparecen en los filtros.</td><td>Utiliza los tipos de índice escalar compatibles con tu destino.</td></tr>
@@ -337,7 +337,7 @@ client.create_index(
       </svg>
     </button></h2><ul>
 <li><p>Crear un índice en « <code translate="no">chunks.emb</code> » en lugar de en « <code translate="no">chunks[emb]</code> ».</p></li>
-<li><p>Crear únicamente un índice de tipo « <code translate="no">MAX_SIM*</code> » y, a continuación, intentar realizar una búsqueda a nivel de elemento en el mismo subcampo.</p></li>
+<li><p>Crear únicamente un índice de « <code translate="no">MAX_SIM*</code> » y, a continuación, intentar realizar una búsqueda a nivel de elemento en el mismo subcampo.</p></li>
 <li><p>Crear únicamente un índice vectorial normal y, a continuación, intentar realizar una búsqueda en EmbeddingList en el mismo subcampo.</p></li>
 <li><p>Reutilizar un subcampo vectorial tanto para métricas de tipo « <code translate="no">MAX_SIM*</code> » como para métricas vectoriales normales.</p></li>
 <li><p>Olvidarse de los índices escalares para los filtros StructArray más utilizados.</p></li>

@@ -282,7 +282,7 @@ results = client.hybrid_search(
 <tr><td>Sous-champs vectoriels</td><td>Non pris en charge en tant qu’entrées de prédicats scalaires d’ <code translate="no">$[...]</code>. Utilisez plutôt les sous-champs vectoriels via la recherche vectorielle.</td></tr>
 </tbody>
 </table>
-<p>Pour les cas non pris en charge, tels que les chemins JSON, les fonctions de conteneurs de tableaux, les fonctions de correspondance de texte, les prédicats null sur <code translate="no">$[...]</code>, les fonctions de géométrie, les expressions Timestamptz et les appels de fonctions génériques, consultez la <a href="/docs/fr/struct-array-operators.md">section Opérateurs StructArray</a>.</p>
+<p>Pour les cas non pris en charge, tels que les chemins JSON, les fonctions de conteneur de tableaux, les fonctions de correspondance de texte, les prédicats null sur <code translate="no">$[...]</code>, les fonctions de géométrie, les expressions Timestamptz et les appels de fonctions génériques, consultez la <a href="/docs/fr/struct-array-operators.md">section Opérateurs StructArray</a>.</p>
 <h2 id="Common-mistakes" class="common-anchor-header">Erreurs courantes<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -325,5 +325,5 @@ results = client.hybrid_search(
 <li><p>Pour consulter la syntaxe complète des filtres StructArray, lisez la section <a href="/docs/fr/struct-array-operators.md">Opérateurs StructArray</a>.</p></li>
 <li><p>Pour effectuer d’abord des recherches vectorielles non filtrées, consultez la section « <a href="/docs/fr/basic-vector-search-with-structarray.md">Recherche vectorielle de base avec StructArray</a> ».</p></li>
 <li><p>Pour créer des index scalaires pour les filtres StructArray fréquemment utilisés, consultez la section « <a href="/docs/fr/index-structarray-fields.md">Indexer les champs StructArray</a> ».</p></li>
-<li><p>Pour vérifier les limites de filtrage et de recherche spécifiques à chaque version, consultez la section « <a href="/docs/fr/structarray-limits.md">Limites de StructArray</a> ».</p></li>
+<li><p>Pour connaître les limites de filtrage et de recherche spécifiques à chaque version, consultez la section « <a href="/docs/fr/structarray-limits.md">Limites de StructArray</a> ».</p></li>
 </ol>

@@ -48,7 +48,7 @@ summary: >-
 <tbody>
 <tr><td>Erstellen Sie ein StructArray-Feld, z. B. „ <code translate="no">chunks</code> “.</td><td><a href="/docs/de/create-structarray-field.md">Erstellen eines StructArray-Feldes</a></td></tr>
 <tr><td>Fügen Sie Entitäten ein, deren Feld „ <code translate="no">chunks</code> “ Struct-Objekte enthält.</td><td><a href="/docs/de/insert-data-into-structarray-fields.md">Daten in „StructArray“-Felder einfügen</a></td></tr>
-<tr><td>Erstellen Sie einen „ <code translate="no">MAX_SIM*</code> “-Index unter „ <code translate="no">chunks[emb_list_vector]</code> “ für die Suche in „EmbeddingList“.</td><td><a href="/docs/de/index-structarray-fields.md">StructArray-Felder indizieren</a></td></tr>
+<tr><td>Erstellen Sie einen „ <code translate="no">MAX_SIM*</code> “-Index auf „ <code translate="no">chunks[emb_list_vector]</code> “ für die Suche in „EmbeddingList“.</td><td><a href="/docs/de/index-structarray-fields.md">StructArray-Felder indizieren</a></td></tr>
 <tr><td>Erstellen Sie einen regulären vektormetrischen Index auf „ <code translate="no">chunks[emb]</code> “ für die Suche auf Elementebene.</td><td><a href="/docs/de/index-structarray-fields.md">StructArray-Felder indizieren</a></td></tr>
 </tbody>
 </table>
@@ -78,10 +78,10 @@ summary: >-
 <tbody>
 <tr><td>Ziel-Unterfeld</td><td><code translate="no">chunks[emb_list_vector]</code></td><td><code translate="no">chunks[emb]</code></td></tr>
 <tr><td>Abfragedaten</td><td>Eine Einbettungsliste, die einen oder mehrere Vektoren enthält.</td><td>Ein regulärer Vektor.</td></tr>
-<tr><td>Metrikfamilie</td><td><code translate="no">MAX_SIM*</code>, wie z. B. <code translate="no">MAX_SIM_COSINE</code>.</td><td>Reguläre Vektormetriken, wie z. B. „ <code translate="no">COSINE</code> “, „ <code translate="no">IP</code> “ oder „ <code translate="no">L2</code> “.</td></tr>
+<tr><td>Metrikfamilie</td><td><code translate="no">MAX_SIM*</code>, wie z. B. <code translate="no">MAX_SIM_COSINE</code>.</td><td>Reguläre Vektormetriken, wie z. B. <code translate="no">COSINE</code>, <code translate="no">IP</code> oder <code translate="no">L2</code>.</td></tr>
 <tr><td>Was ein Treffer darstellt</td><td>Eine übereinstimmende Entität, deren StructArray-Vektor-Unterfeld der Einbettungsliste der Abfrage ähnelt.</td><td>Ein übereinstimmendes Struct-Element innerhalb des StructArray-Feldes.</td></tr>
 <tr><td>Granularität der Ergebnisse</td><td>Entitäts-Ebene.</td><td>Struct-Element-Ebene.</td></tr>
-<tr><td>Offset</td><td>Nicht zutreffend.</td><td>Gibt die Position des gefundenen Struct-Elements (ab Null) bei der Rückgabe an.</td></tr>
+<tr><td>Offset</td><td>Nicht zutreffend.</td><td>Gibt die Position des übereinstimmenden Struct-Elements bei der Rückgabe, beginnend bei Null, an.</td></tr>
 <tr><td>Typische Verwendung</td><td>ColBERT, ColPali und andere Retrieval-Muster mit später Interaktion.</td><td>Retrieval auf Chunk-, Passage-, Clip-, Patch- oder Faktenebene.</td></tr>
 </tbody>
 </table>

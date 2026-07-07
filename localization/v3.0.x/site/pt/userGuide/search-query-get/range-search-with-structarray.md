@@ -4,10 +4,10 @@ title: Pesquisa por intervalo com StructArray
 summary: >-
   Utilize esta página para efetuar uma pesquisa por intervalo nos subcampos
   vetoriais do StructArray. A pesquisa por intervalo devolve resultados
-  vetoriais cuja pontuação ou distância se situa dentro de um intervalo
-  especificado. Para os campos StructArray, utilize a pesquisa por intervalo em
-  conjunto com a pesquisa vetorial ao nível dos elementos, em que cada elemento
-  Struct é pesquisado de forma independente.
+  vetoriais cuja pontuação ou distância se situam dentro de um intervalo
+  especificado. No caso dos campos StructArray, utilize a pesquisa por intervalo
+  em conjunto com a pesquisa vetorial ao nível dos elementos, em que cada
+  elemento do Struct é pesquisado de forma independente.
 ---
 <h1 id="Range-Search-with-StructArray" class="common-anchor-header">Pesquisa por intervalo com StructArray<button data-href="#Range-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -46,7 +46,7 @@ summary: >-
 <tr><th>Modo de pesquisa</th><th>Comportamento da pesquisa por intervalo</th><th>Granularidade dos resultados</th></tr>
 </thead>
 <tbody>
-<tr><td>Pesquisa EmbeddingList</td><td>Não suportado.</td><td>Não aplicável.</td></tr>
+<tr><td>Pesquisa na EmbeddingList</td><td>Não suportado.</td><td>Não aplicável.</td></tr>
 <tr><td>Pesquisa ao nível do elemento</td><td>Utilize uma consulta vetorial normal com ` <code translate="no">radius</code> ` e, opcionalmente, ` <code translate="no">range_filter</code>`.</td><td>Nível de elemento da estrutura.</td></tr>
 <tr><td>Pesquisa híbrida</td><td>Suportada quando o pedido StructArray tem como alvo um campo vetorial ao nível do elemento. Os pedidos ao nível de EmbeddingList não suportam a pesquisa por intervalo.</td><td>Subpesquisa ao nível do elemento, seguida de reclassificação híbrida.</td></tr>
 </tbody>
@@ -163,7 +163,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>Neste exemplo, « <code translate="no">COSINE</code> » é uma métrica do tipo «similaridade», pelo que o intervalo de resultados é superior a <code translate="no">radius</code> e inferior ou igual a <code translate="no">range_filter</code>. O valor « <code translate="no">offset</code> » identifica o elemento «Struct» correspondente na matriz « <code translate="no">chunks</code> » quando devolvido.</p>
+<p>Neste exemplo, « <code translate="no">COSINE</code> » é uma métrica do tipo «similaridade», pelo que o intervalo de resultados é superior a <code translate="no">radius</code> e inferior ou igual a <code translate="no">range_filter</code>. O valor « <code translate="no">offset</code> » identifica o elemento Struct correspondente na matriz « <code translate="no">chunks</code> » quando devolvido.</p>
 <h2 id="Add-scalar-filters" class="common-anchor-header">Adicionar filtros escalares<button data-href="#Add-scalar-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -305,7 +305,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Não utilize uma consulta « <code translate="no">EmbeddingList</code> » nem uma métrica « <code translate="no">MAX_SIM*</code> » para a pesquisa por intervalo nos subcampos vetoriais do «StructArray». A pesquisa ao nível da «EmbeddingList» não suporta a pesquisa por intervalo.</p></li>
+<li><p>Não utilize uma consulta « <code translate="no">EmbeddingList</code> » nem uma métrica « <code translate="no">MAX_SIM*</code> » para a pesquisa por intervalo nos subcampos vetoriais de «StructArray». A pesquisa ao nível da «EmbeddingList» não suporta a pesquisa por intervalo.</p></li>
 <li><p>Não combine a pesquisa por intervalo com a pesquisa por agrupamento. Se precisar de um resultado por entidade pai, execute uma pesquisa ao nível do elemento sem parâmetros de intervalo e utilize o agrupamento sempre que for suportado.</p></li>
 <li><p>A pesquisa de intervalo híbrida é suportada para campos vetoriais ao nível do elemento do StructArray. Não é suportada para pedidos do StructArray ao nível da EmbeddingList.</p></li>
 </ul>
@@ -348,7 +348,7 @@ results = client.hybrid_search(
       </svg>
     </button></h2><ol>
 <li><p>Para conhecer os dois modos básicos de pesquisa vetorial <a href="/docs/pt/basic-vector-search-with-structarray.md">com</a> StructArray, leia <a href="/docs/pt/basic-vector-search-with-structarray.md">«Pesquisa vetorial básica com StructArray</a>».</p></li>
-<li><p>Para adicionar filtros escalares à pesquisa por intervalo, leia <a href="/docs/pt/filtered-search-with-structarray.md">«Pesquisa filtrada com StructArray</a>».</p></li>
-<li><p>Para devolver, no máximo, um resultado por entidade pai, quando suportado, leia <a href="/docs/pt/grouping-search-with-structarray.md">«Pesquisa agrupada com StructArray</a>».</p></li>
+<li><p>Para adicionar filtros escalares à pesquisa por intervalo, leia <a href="/docs/pt/filtered-search-with-structarray.md">«Pesquisa Filtrada com StructArray</a>».</p></li>
+<li><p>Para devolver, no máximo, um resultado por entidade-pai, quando suportado, leia <a href="/docs/pt/grouping-search-with-structarray.md">«Pesquisa agrupada com StructArray</a>».</p></li>
 <li><p>Para verificar os limites de pesquisa específicos de cada versão, leia <a href="/docs/pt/structarray-limits.md">«Limites do StructArray</a>».</p></li>
 </ol>

@@ -69,7 +69,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Numa carga de inserção, « <code translate="no">chunks</code> » é um campo normal cujo valor é uma matriz de objetos «Struct». Dentro de cada objeto, utilize nomes de subcampos como « <code translate="no">text</code> » e « <code translate="no">emb</code> ». Utilize a sintaxe de caminho, como « <code translate="no">chunks[text]</code> » ou « <code translate="no">chunks[emb]</code> », apenas após a inserção, quando criar índices, executar pesquisas, construir filtros ou especificar campos de saída.</p>
+<p>Numa carga de inserção, « <code translate="no">chunks</code> » é um campo normal cujo valor é uma matriz de objetos «Struct». Dentro de cada objeto, utilize nomes de subcampos como « <code translate="no">text</code> » e « <code translate="no">emb</code> ». Utilize a sintaxe de caminho, como « <code translate="no">chunks[text]</code> » ou « <code translate="no">chunks[emb]</code> », apenas após a inserção, quando criar índices, executar pesquisas, criar filtros ou especificar campos de saída.</p>
 </div>
 <h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">Compreender a estrutura da carga útil de inserção<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -282,7 +282,7 @@ Os campos StructArray nulos estão disponíveis apenas no Milvus v3.0.x. Se adic
 <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> rows:
     <span class="hljs-built_in">print</span>(row)
 <button class="copy-code-btn"></button></code></pre>
-<p>Utilize caminhos de campos StructArray, tais como <code translate="no">chunks[text]</code>, apenas quando consultar, pesquisar, filtrar ou criar índices. As cargas de dados de inserção devem continuar a utilizar objetos aninhados em <code translate="no">chunks</code>.</p>
+<p>Utilize caminhos de campo StructArray, tais como <code translate="no">chunks[text]</code>, apenas quando consultar, pesquisar, filtrar ou criar índices. As cargas de dados de inserção devem continuar a utilizar objetos aninhados em <code translate="no">chunks</code>.</p>
 <h2 id="Insert-rules" class="common-anchor-header">Regras de inserção<button data-href="#Insert-rules" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

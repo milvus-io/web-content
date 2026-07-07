@@ -138,7 +138,7 @@ client.create_index(
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>警告
-請勿在同一個向量子欄位上建立「<code translate="no">MAX_SIM*</code> 」索引與一般向量度量索引。若需同時使用這兩種搜尋模式，請將向量寫入兩個獨立的向量子欄位，並分別針對每個子欄位建立一個索引。</p>
+請勿在同一個向量子字段上建立「<code translate="no">MAX_SIM*</code> 」索引與一般向量度量索引。若需同時使用這兩種搜尋模式，請將向量寫入兩個獨立的向量子字段，並分別針對每個子字段建立一個索引。</p>
 </div>
 <h2 id="Create-scalar-indexes" class="common-anchor-header">建立標量索引<button data-href="#Create-scalar-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -155,7 +155,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>當您在篩選器中使用 StructArray 標量子欄位時，請為其建立標量索引。請使用與<code translate="no">structArray[subfield]</code> 路徑相同的語法。</p>
+    </button></h2><p>當您在篩選器中使用 StructArray 標量子欄位時，請為其建立標量索引。請使用與<code translate="no">structArray[subfield]</code> 相同的路徑語法。</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
@@ -275,7 +275,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>建立索引後，請描述集合或清單索引，以確認預期的子欄位路徑已納入索引。</p>
+    </button></h2><p>建立索引後，請描述該集合或清單中的索引，以確認預期的子欄位路徑已納入索引。</p>
 <pre><code translate="no" class="language-python">indexes = client.list_indexes(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
 )
@@ -315,7 +315,7 @@ client.create_index(
 <tr><td>請使用<code translate="no">MAX_SIM*</code> 指標進行 EmbeddingList 搜尋。</td><td>EmbeddingList 查詢資料需要使用<code translate="no">MAX_SIM*</code> 指標建立的索引。</td></tr>
 <tr><td>請使用一般向量指標進行元素層級搜尋。</td><td>元素層級搜尋使用一般向量查詢資料，以及諸如<code translate="no">COSINE</code> 、<code translate="no">IP</code> 或<code translate="no">L2</code> 等指標。</td></tr>
 <tr><td>請為出現在篩選器中的標量子欄位建立索引。</td><td>請使用目標所支援的標量索引類型。</td></tr>
-<tr><td>請留意向量欄位的限制。</td><td>向量場和向量子場的總數受到限制。在新增大量向量子場之前，請參閱《StructArray 限制》。</td></tr>
+<tr><td>請注意向量欄位的限制。</td><td>向量場和向量子場的總數受到限制。在新增大量向量子場之前，請參閱《StructArray 限制》。</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">常見錯誤<button data-href="#Common-mistakes" class="anchor-icon" translate="no">

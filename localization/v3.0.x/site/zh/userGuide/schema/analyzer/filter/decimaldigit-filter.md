@@ -38,7 +38,7 @@ beta: Milvus 3.0.0+
     </button></h2><div class="alert note">
 <p>对于阿拉伯语文本，内置的 <a href="/docs/zh/arabic-analyzer.md"><code translate="no">arabic</code></a> 分析器已包含<code translate="no">decimaldigit</code> 过滤器。若在自定义分析器管道中需要数字规范化处理，请直接使用<code translate="no">decimaldigit</code> 。</p>
 </div>
-<p>要在自定义分析器中使用<code translate="no">decimaldigit</code> 过滤器，请将其添加到<code translate="no">analyzer_params</code> 中的<code translate="no">filter</code> 部分：</p>
+<p>要在自定义分析器中使用<code translate="no">decimaldigit</code> 过滤器，请将其添加到<code translate="no">analyzer_params</code> 文件中的<code translate="no">filter</code> 部分：</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;decimaldigit&quot;</span>],

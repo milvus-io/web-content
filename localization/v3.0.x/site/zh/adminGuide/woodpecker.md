@@ -125,7 +125,7 @@ summary: 了解 Woodpecker 如何作为 Milvus 中的默认消息队列（WAL）
 </ul></li>
 <li><code translate="no">woodpecker.logstore</code>
 <ul>
-<li>控制日志分段的同步/刷新/压缩/读取策略。这些是调整吞吐量和延迟的主要控制参数。</li>
+<li>控制日志分段的同步/刷新/压缩/读取策略。这些是用于吞吐量/延迟调优的主要控制参数。</li>
 </ul></li>
 <li><code translate="no">woodpecker.storage</code>
 <ul>
@@ -155,14 +155,14 @@ summary: 了解 Woodpecker 如何作为 Milvus 中的默认消息队列（WAL）
 </thead>
 <tbody>
 <tr><td><code translate="no">minio</code> （默认）</td><td>嵌入 Milvus/流式处理节点中</td><td>对象存储（MinIO/S3兼容）</td><td>支持</td><td>支持</td></tr>
-<tr><td><code translate="no">local</code></td><td>嵌入在 Milvus/流式处理节点中</td><td>本地文件系统</td><td>支持</td><td>受限（所有节点都需要一个共享文件系统，例如 NFS）</td></tr>
+<tr><td><code translate="no">local</code></td><td>嵌入在 Milvus/流处理节点中</td><td>本地文件系统</td><td>支持</td><td>受限（所有节点都需要一个共享文件系统，例如 NFS）</td></tr>
 <tr><td><code translate="no">service</code></td><td><strong>专用的 Woodpecker 服务</strong>（拥有独立的 Pod）</td><td>对象存储（MinIO/S3兼容）</td><td><strong>不支持</strong></td><td>支持</td></tr>
 </tbody>
 </table>
 <p>注：</p>
 <ul>
 <li>在<code translate="no">minio</code> 模式下，Woodpecker与Milvus共享同一对象存储（MinIO/S3/GCS/OSS等）。</li>
-<li>在<code translate="no">local</code> 下，单节点本地磁盘仅适用于独立模式。如果所有Pod都能访问共享文件系统（例如NFS），则集群模式也可使用<code translate="no">local</code> 。</li>
+<li>在<code translate="no">local</code> 下，单节点本地磁盘仅适用于独立模式。如果所有Pod都能访问共享文件系统（例如NFS），集群模式也可使用<code translate="no">local</code> 。</li>
 <li><strong><code translate="no">service</code> 该模式将 Woodpecker 作为独立且可独立扩展的服务运行，仅适用于分布式/集群部署。</strong>独立部署则使用嵌入式模式（<code translate="no">minio</code> 或<code translate="no">local</code> ）。</li>
 </ul>
 <h2 id="Object-storage-compatibility-for-storagetypeminio" class="common-anchor-header">对象存储兼容性<code translate="no">storage.type=minio</code><button data-href="#Object-storage-compatibility-for-storagetypeminio" class="anchor-icon" translate="no">
@@ -237,7 +237,7 @@ summary: 了解 Woodpecker 如何作为 Milvus 中的默认消息队列（WAL）
 <pre><code translate="no" class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml
 
 <button class="copy-code-btn"></button></code></pre>
-<p>此示例将 Woodpecker 配置为消息队列，并启用流式处理节点。首次启动时，拉取镜像可能需要一些时间；请等待直至所有 Pod 准备就绪：</p>
+<p>此示例将 Woodpecker 配置为消息队列，并启用了流式处理节点。首次启动时，拉取镜像可能需要一些时间；请等待直至所有 Pod 准备就绪：</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 kubectl get milvus my-release -o yaml | grep -A2 status
 <button class="copy-code-btn"></button></code></pre>
@@ -310,7 +310,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在 Milvus 3.x 中，Docker 独立部署<strong>默认</strong>使用 Woodpecker<strong>并将本地文件系统</strong>作为其 WAL 后端——无需额外配置。请按照《<a href="/docs/zh/install_standalone-docker.md">在 Docker 中运行 Milvus</a>》中的说明操作：</p>
+    </button></h3><p>在 Milvus 3.x 中，Docker 独立部署<strong>默认</strong>使用 Woodpecker<strong>并将本地文件系统</strong>作为其 WAL 后端——无需额外配置。请按照《<a href="/docs/zh/install_standalone-docker.md">在 Docker 中运行 Milvus Stand</a>alone》中的说明操作：</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> milvus-wp &amp;&amp; <span class="hljs-built_in">cd</span> milvus-wp
 curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
 bash standalone_embed.sh start
@@ -547,10 +547,10 @@ batch_count = <span class="hljs-number">2000</span>
       </svg>
     </button></h3><p>服务模式在保持低成本的同时，实现了<strong>毫秒级写入延迟</strong>——与传统的三副本本地磁盘 WAL 处于同一量级。在典型的三副本跨可用区部署中，写入延迟始终保持在毫秒范围内。其实现方式包括：</p>
 <ul>
-<li><strong>单 RTT 法定数写入</strong>——客户端驱动的复制可在单次往返内完成法定数写入，跨可用区流量固定为两个副本的数据量（相比之下，基于代理/领导者的复制通常会产生额外约 1/3 的跨可用区流量）。</li>
+<li><strong>单 RTT 法定多数写入</strong>——客户端驱动的复制可在单次往返内完成法定多数写入，跨可用区流量固定为两个副本的数据量（相比之下，基于代理/领导者的复制通常会产生额外约 1/3 的跨可用区流量）。</li>
 <li><strong>拓扑感知单跳读取</strong>——每次读取都直接发送到最近的副本，而不是通过代理转发，从而避免了基于代理系统中随机的跨可用区读取（约占跨可用区读取流量的 2/3）。</li>
 <li><strong>分段滚动后立即上传至对象存储</strong>——每个分段都会追踪其完整生命周期，并在滚动后立即上传至对象存储，从而在不牺牲延迟性能的前提下，保持本地磁盘占用空间和存储成本处于较低水平。</li>
-<li><strong>无持续的节点间复制</strong>——日志持久化到充当共享存储的对象存储中，因此故障转移时仅需重新上传幸存的副本（无需复制整个节点），扩展不再受节点间复制带宽的限制，且大规模节点替换不会引发复制风暴。</li>
+<li><strong>无持续的节点间复制</strong>——日志持久化到充当共享存储的对象存储中，因此故障转移时仅需重新上传幸存的副本（无需复制整个节点），扩展不受节点间复制带宽的限制，且大规模节点替换不会引发复制风暴。</li>
 </ul>
 <p>在跨可用区（AZ）部署中，与基于代理的日志系统相比，服务模式还可节省约<strong>1/3 的跨可用区写入</strong>网络流量和<strong>2/3 的</strong>跨可用区<strong>读取</strong>网络流量。有关完整的设计和成本分析，请参阅《<a href="/docs/zh/woodpecker_architecture.md">Woodpecker 架构</a>》。</p>
 <p>有关架构、部署模式（MemoryBuffer / QuorumBuffer）和性能的详细信息，请参阅《<a href="/docs/zh/woodpecker_architecture.md">Woodpecker 架构</a>》。</p>

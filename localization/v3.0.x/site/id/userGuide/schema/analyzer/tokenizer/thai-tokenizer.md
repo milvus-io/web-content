@@ -55,14 +55,14 @@ beta: Milvus 3.0.0+
     ],
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Pipa kustom ini tidak setara dengan penganalisis bawaan <code translate="no">thai</code> karena tidak menyertakan kamus kata henti bawaan <code translate="no">_thai_</code>. Untuk pipa yang telah ditentukan sebelumnya secara lengkap, gunakan <code translate="no">{&quot;type&quot;: &quot;thai&quot;}</code>.</p>
+<p>Pipa kustom ini tidak setara dengan penganalisis bawaan <code translate="no">thai</code> karena tidak menyertakan kamus kata-kata yang diabaikan (stop-word) bawaan <code translate="no">_thai_</code>. Untuk pipa yang telah ditentukan sebelumnya secara lengkap, gunakan <code translate="no">{&quot;type&quot;: &quot;thai&quot;}</code>.</p>
 <p>Tokenizer menerapkan perilaku berikut:</p>
 <ul>
 <li><strong>Segmentasi bahasa Thailand</strong>: Menyegmentasikan teks bahasa Thailand menjadi token kata tanpa bergantung pada spasi.</li>
 <li><strong>Penyaringan spasi kosong dan tanda baca</strong>: Menyaring segmen yang hanya berisi spasi kosong dan tanda baca. Hal ini berbeda dari <a href="/docs/id/icu-tokenizer.md"><code translate="no">icu</code></a> tokenizer, yang dapat mempertahankan tanda baca dan spasi sebagai token.</li>
 <li><strong>Teks campuran skrip</strong>: Menghasilkan token kata Latin dalam teks campuran bahasa Thailand/Inggris.</li>
 <li><strong>Hanya tokenizer</strong>: Tidak mengubah huruf besar menjadi huruf kecil, menormalkan angka Unicode, atau menghapus kata penghubung. Tambahkan filter atau gunakan <a href="/docs/id/thai-analyzer.md"><code translate="no">thai</code></a> untuk langkah-langkah tersebut.</li>
-<li><strong>Semantik posisi</strong>: Menggunakan posisi token berbasis karakter yang mencakup spasi kosong dan tanda baca yang dilewati, sehingga perilaku pencocokan frasa dan kedekatan tetap konsisten dengan tokenizer non-Latin lainnya.</li>
+<li><strong>Semantik posisi</strong>: Menggunakan posisi token berbasis karakter yang mencakup spasi kosong dan tanda baca yang dilewati, yang menjaga perilaku pencocokan frasa dan kedekatan tetap konsisten dengan tokenizer non-Latin lainnya.</li>
 </ul>
 <p>Setelah mendefinisik <code translate="no">analyzer_params</code>, Anda dapat menerapkan penganalisis ke bidang <code translate="no">VARCHAR</code> saat mendefinisikan skema koleksi. Untuk detailnya, lihat <a href="/docs/id/analyzer-overview.md#Example-use">Contoh penggunaan</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Contoh<button data-href="#Examples" class="anchor-icon" translate="no">

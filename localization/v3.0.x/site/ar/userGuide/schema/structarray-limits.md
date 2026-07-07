@@ -78,7 +78,7 @@ summary: >-
 <tr><td>Struct ليس نوع حقل من المستوى الأعلى.</td><td>قم بإنشاء حقل StructArray كـ <code translate="no">datatype=DataType.ARRAY</code> مع <code translate="no">element_type=DataType.STRUCT</code> و <code translate="no">struct_schema</code>.</td></tr>
 <tr><td>تشترك جميع العناصر في مخطط واحد.</td><td>يتبع كل عنصر Struct في حقل StructArray نفس قائمة الحقول الفرعية وأنواع بيانات الحقول الفرعية.</td></tr>
 <tr><td><code translate="no">max_capacity</code> مطلوب.</td><td>يجب ألا يتجاوز عدد عناصر Struct في كيان واحد قيمة <code translate="no">max_capacity</code> المُعدة لحقل StructArray.</td></tr>
-<tr><td>الحقول الفرعية الموجودة ثابتة.</td><td>لا يمكنك إضافة حقول فرعية جديدة إلى حقل StructArray موجود. لتغيير مخطط الحقول الفرعية، قم بإزالة حقل StructArray ثم أضفه مرة أخرى باستخدام المخطط المحدث.</td></tr>
+<tr><td>الحقول الفرعية الموجودة ثابتة.</td><td>لا يمكنك إضافة حقول فرعية جديدة إلى حقل StructArray موجود. لتغيير مخطط الحقول الفرعية، قم بإزالة حقل StructArray وأضفه مرة أخرى باستخدام المخطط المحدث.</td></tr>
 <tr><td>لا يتم دعم StructArray المتداخل.</td><td>لا يمكن أن يحتوي حقل StructArray على حقول فرعية متداخلة من نوع <code translate="no">Array</code> أو <code translate="no">ArrayOfVector</code> أو <code translate="no">Struct</code> أو <code translate="no">ArrayOfStruct</code>.</td></tr>
 <tr><td>لا يتم دعم الدوال داخل StructArray.</td><td>لا تقم بتعريف دوال الحقول لحقول StructArray أو حقولها الفرعية.</td></tr>
 </tbody>
@@ -119,7 +119,7 @@ summary: >-
 <tr><td><code translate="no">Array</code></td><td>غير مدعوم</td><td>الحقول الفرعية JSON غير مدعومة في حقول StructArray.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>غير مدعوم</td><td>الحقول الفرعية للهندسة ووظائف نظم المعلومات الجغرافية (GIS) غير مدعومة في حقول StructArray.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>غير مدعوم</td><td>الحقول الفرعية النصية غير مدعومة في حقول StructArray.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>غير مدعوم</td><td>الحقول الفرعية من نوع Timestamptz والتعبيرات المرتبطة بالوقت غير مدعومة في حقول StructArray.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>غير مدعوم</td><td>الحقول الفرعية من نوع Timestamptz والتعبيرات المحددة بالوقت غير مدعومة في حقول StructArray.</td></tr>
 <tr><td><code translate="no">Array</code> أو <code translate="no">ArrayOfVector</code> أو <code translate="no">Struct</code> أو <code translate="no">ArrayOfStruct</code></td><td>غير مدعوم</td><td>لا تدعم حقول StructArray الحقول الفرعية المتداخلة من نوع المصفوفة أو مصفوفة المتجهات أو Struct أو Array-of-Struct.</td></tr>
 </tbody>
 </table>
@@ -180,10 +180,10 @@ summary: >-
 <tr><td>مواءمة المخطط</td><td>يجب أن يتوافق كل عنصر Struct مع مخطط Struct.</td></tr>
 <tr><td>السعة</td><td>يجب ألا يتجاوز عدد عناصر Struct في كيان واحد <code translate="no">max_capacity</code>.</td></tr>
 <tr><td>أبعاد المتجه</td><td>يجب أن تتطابق قيم المتجهات مع <code translate="no">dim</code> المُعدة لحقولها الفرعية المتجهة.</td></tr>
-<tr><td>تكرار في وضع البحث</td><td>إذا كنت بحاجة إلى كل من البحث في قائمة التضمين (EmbeddingList) والبحث على مستوى العناصر، فاكتب المتجهات في حقلين فرعيين منفصلين للمتجهات.</td></tr>
+<tr><td>تكرار في وضع البحث</td><td>إذا كنت بحاجة إلى كل من البحث في EmbeddingList والبحث على مستوى العناصر، فاكتب المتجهات في حقلين فرعيين منفصلين للمتجهات.</td></tr>
 </tbody>
 </table>
-<h2 id="Index-and-metric-limits" class="common-anchor-header">حدود الفهرس والمقياس<button data-href="#Index-and-metric-limits" class="anchor-icon" translate="no">
+<h2 id="Index-and-metric-limits" class="common-anchor-header">حدود الفهرس والمقاييس<button data-href="#Index-and-metric-limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -198,7 +198,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكن فهرسة حقل فرعي متجه من نوع StructArray إما للبحث في قائمة التضمين (EmbeddingList) أو للبحث على مستوى العناصر. ولا يمكن للحقل الفرعي المتجه نفسه استخدام مجموعتي المقاييس معًا لأن كل حقل متجه أو حقل فرعي متجه لا يقبل سوى فهرس واحد.</p>
+    </button></h2><p>يمكن فهرسة حقل فرعي متجه من نوع StructArray إما للبحث في EmbeddingList أو للبحث على مستوى العناصر. ولا يمكن للحقل الفرعي المتجه نفسه استخدام مجموعتي المقاييس معًا لأن كل حقل متجه أو حقل فرعي متجه لا يقبل سوى فهرس واحد فقط.</p>
 <table>
 <thead>
 <tr><th>وضع البحث</th><th>مجموعة المقاييس</th><th>مستوى النتيجة</th></tr>
@@ -231,12 +231,12 @@ summary: >-
 <tr><th>سلوك البحث</th><th>الدعم والحدود</th></tr>
 </thead>
 <tbody>
-<tr><td>البحث الأساسي في EmbeddingList</td><td>مدعوم في الحقول الفرعية للمتجهات StructArray المفهرسة باستخدام مقاييس <code translate="no">MAX_SIM*</code>. يُرجع نتائج على مستوى الكيان.</td></tr>
+<tr><td>البحث الأساسي في EmbeddingList</td><td>مدعوم في الحقول الفرعية للمتجهات StructArray المفهرسة باستخدام المقاييس <code translate="no">MAX_SIM*</code>. يُرجع نتائج على مستوى الكيان.</td></tr>
 <tr><td>البحث الأساسي على مستوى العناصر</td><td>مدعوم في الحقول الفرعية للمتجهات StructArray المفهرسة باستخدام مقاييس المتجهات العادية. يمكن أن يعرض إزاحات العناصر المطابقة.</td></tr>
-<tr><td>البحث في النطاق</td><td>مدعوم وفقًا لوضع البحث ودعم الفهرس/المقياس في الإصدار المستهدف. لمعرفة سلوك نطاق البحث المختلط في طلبات StructArray على مستوى العنصر، تحقق من الإصدار المستهدف.</td></tr>
+<tr><td>البحث في النطاق</td><td>مدعوم وفقًا لوضع البحث ودعم الفهرس/المقياس في الإصدار المستهدف. لمعرفة سلوك نطاق البحث المختلط في طلبات StructArray على مستوى العناصر، تحقق من الإصدار المستهدف.</td></tr>
 <tr><td>البحث بالتجميع</td><td>يمكن أن يُرجع البحث المجمّع على مستوى العناصر الإزاحات. يعتمد سلوك التجميع في البحث المختلط لطلبات StructArray على مستوى العناصر على الإصدار.</td></tr>
 <tr><td>البحث المختلط</td><td>يمكن أن يتضمن طلب البحث الهجين طلبات الحقول الفرعية للمتجه StructArray فقط عندما يدعم الإصدار المستهدف تركيبة البحث هذه. ولا يزال كل طلب يتبع عائلة المقاييس الخاصة بالحقل الفرعي للمتجه المفهرس.</td></tr>
-<tr><td>إخراج الإزاحة</td><td>يتوفر الإزاحة لنتائج البحث على مستوى العنصر. يعرض بحث EmbeddingList نتائج على مستوى الكيان ولا يستخدم إزاحات العناصر كوحدة النتيجة الأساسية.</td></tr>
+<tr><td>إخراج الإزاحة</td><td>يتوفر الإزاحة لنتائج البحث على مستوى العنصر. يُرجع بحث EmbeddingList نتائج على مستوى الكيان ولا يستخدم إزاحات العناصر كوحدة النتيجة الأساسية.</td></tr>
 </tbody>
 </table>
 <h2 id="Filter-and-operator-limits" class="common-anchor-header">حدود التصفية والمشغلات<button data-href="#Filter-and-operator-limits" class="anchor-icon" translate="no">

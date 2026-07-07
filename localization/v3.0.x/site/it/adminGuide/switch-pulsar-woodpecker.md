@@ -20,12 +20,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Questa pagina descrive come passare dalla coda dei messaggi (MQ) di un <strong>cluster Milvus</strong> da <strong>Pulsar</strong> (integrato o esterno) a <strong>Woodpecker</strong> (backend MinIO) e viceversa. Per il flusso di lavoro generale e i prerequisiti, consultare <a href="/docs/it/switch-mq-type.md">Passare a un altro tipo di MQ</a>.</p>
+    </button></h1><p>Questa pagina descrive come passare dalla coda dei messaggi (MQ) di un <strong>cluster Milvus</strong> da <strong>Pulsar</strong> (integrato o esterno) a <strong>Woodpecker</strong> (backend MinIO) e viceversa. Per il flusso di lavoro generale e i prerequisiti, consultare <a href="/docs/it/switch-mq-type.md">Passare da un tipo di MQ all'altro</a>.</p>
 <div class="alert note">
 <p><strong>Prerequisito:</strong> la funzionalità "Cambio di MQ" è disponibile in <strong>Milvus 3.0 e versioni successive</strong>. Aggiornare l’istanza di Milvus a Milvus 3.0 o versioni successive prima di iniziare: la funzionalità non è disponibile nelle versioni precedenti.</p>
 </div>
 <div class="alert warning">
-<p>Il cambio della coda dei messaggi è <strong>un'operazione ad alto rischio</strong>. Scegli la sezione che corrisponde <strong>al tuo</strong> metodo di distribuzione — <strong>Con Helm</strong> o <strong>Con Milvus Operator</strong> — e seguila dall'inizio alla fine. Non mescolare i comandi di Helm e Operator.</p>
+<p>Il cambio della coda dei messaggi è <strong>un'operazione ad alto rischio</strong>. Scegli la sezione che corrisponde <strong>al tuo</strong> metodo di distribuzione — <strong>Con Helm</strong> o <strong>Con Milvus Operator</strong> — e seguila dall’inizio alla fine. Non mescolare i comandi di Helm e Operator.</p>
 </div>
 <h2 id="With-Helm" class="common-anchor-header">Con Helm<button data-href="#With-Helm" class="anchor-icon" translate="no">
       <svg translate="no"

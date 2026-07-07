@@ -24,7 +24,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Utiliza esta página para realizar búsquedas vectoriales en subcampos vectoriales dentro de un campo StructArray. StructArray admite dos modos básicos de búsqueda vectorial: la búsqueda en EmbeddingList, que evalúa una lista de incrustaciones almacenada en cada entidad, y la búsqueda a nivel de elemento, que busca en cada elemento de Struct de forma independiente.</p>
-<p>Esta página utiliza la colección « <code translate="no">tech_articles</code> » de la sección <a href="/docs/es/create-structarray-field.md">«Crear un campo StructArray</a>». La colección cuenta con un campo StructArray denominado « <code translate="no">chunks</code> ». Cada fragmento contiene texto, metadatos escalares, un subcampo vectorial denominado « <code translate="no">emb_list_vector</code> » con un índice para la búsqueda EmbeddingList, y un subcampo vectorial denominado « <code translate="no">emb</code> » con un índice para la búsqueda a nivel de elemento.</p>
+<p>Esta página utiliza la colección « <code translate="no">tech_articles</code> » de la sección <a href="/docs/es/create-structarray-field.md">«Crear un campo StructArray</a>». La colección cuenta con un campo StructArray denominado « <code translate="no">chunks</code> ». Cada fragmento contiene texto, metadatos escalares, un subcampo vectorial denominado « <code translate="no">emb_list_vector</code> » con un índice para la búsqueda en EmbeddingList, y un subcampo vectorial denominado « <code translate="no">emb</code> » con un índice para la búsqueda a nivel de elemento.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Antes de empezar<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -222,9 +222,9 @@ results = client.search(
       </svg>
     </button></h2><ul>
 <li><p>Utilizar « <code translate="no">chunks.emb</code> » en lugar de la sintaxis de ruta de subcampo requerida « <code translate="no">chunks[emb]</code> ».</p></li>
-<li><p>Utilizar una consulta EmbeddingList sobre un subcampo vectorial indexado con una métrica vectorial normal.</p></li>
+<li><p>Utilizar una consulta EmbeddingList en un subcampo vectorial indexado con una métrica vectorial normal.</p></li>
 <li><p>Utilizar una consulta vectorial normal en un subcampo vectorial indexado con una métrica de « <code translate="no">MAX_SIM*</code> ».</p></li>
-<li><p>Esperar que la búsqueda a nivel de elemento <code translate="no">limit</code> devuelva ese número de entidades padre únicas. Devuelve coincidencias de elementos.</p></li>
+<li><p>Esperar que la búsqueda a nivel de elemento <code translate="no">limit</code> devuelva ese número de entidades principales únicas. Devuelve coincidencias de elementos.</p></li>
 <li><p>Esperar que la búsqueda de EmbeddingList devuelva un desplazamiento de elemento específico. Devuelve coincidencias a nivel de entidad.</p></li>
 <li><p>Reutilizar un mismo subcampo vectorial para ambos modos de búsqueda. Utilice subcampos vectoriales independientes, ya que cada subcampo vectorial solo admite un índice.</p></li>
 </ul>

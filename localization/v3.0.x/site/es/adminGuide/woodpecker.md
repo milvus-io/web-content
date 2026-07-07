@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Woodpecker es la <strong>cola de mensajes predeterminada (registro de escritura anticipada, WAL)</strong> en Milvus 3.x. Se trata de un WAL nativo de la nube diseñado para el almacenamiento de objetos, que ofrece un alto rendimiento, una baja sobrecarga operativa y una escalabilidad fluida. Para obtener más detalles sobre la arquitectura y las pruebas de rendimiento, consulta <a href="/docs/es/woodpecker_architecture.md">Woodpecker</a>.</p>
+    </button></h1><p>Woodpecker es la <strong>cola de mensajes predeterminada (registro de escritura anticipada, WAL)</strong> en Milvus 3.x. Se trata de un WAL nativo de la nube diseñado para el almacenamiento de objetos, que ofrece un alto rendimiento, una baja sobrecarga operativa y una escalabilidad fluida. Para obtener más información sobre la arquitectura y las pruebas de rendimiento, consulta <a href="/docs/es/woodpecker_architecture.md">Woodpecker</a>.</p>
 <h2 id="Overview" class="common-anchor-header">Descripción general<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -203,7 +203,7 @@ summary: >-
 <ul>
 <li>La compatibilidad depende de la compatibilidad nativa con el SDK o de la compatibilidad con la semántica de escritura condicional de S3.</li>
 <li>Si alojas MinIO por tu cuenta para Woodpecker, utiliza la versión <code translate="no">RELEASE.2024-12-18T13-15-44Z</code> o posterior.</li>
-<li>Esta matriz refleja <a href="https://github.com/zilliztech/woodpecker/discussions/150">el debate actual</a> y puede evolucionar a medida que se valide más a fondo la compatibilidad del backend.</li>
+<li>Esta matriz refleja <a href="https://github.com/zilliztech/woodpecker/discussions/150">el estado actual de las conversaciones</a> y puede evolucionar a medida que se valide más a fondo la compatibilidad del backend.</li>
 </ul>
 <h2 id="Deployment-guides" class="common-anchor-header">Guías de implementación<button data-href="#Deployment-guides" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -239,7 +239,7 @@ summary: >-
 <pre><code translate="no" class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Este ejemplo configura Woodpecker como cola de mensajes y habilita el nodo de streaming. El primer inicio puede tardar un tiempo en descargar las imágenes; espera hasta que todos los pods estén listos:</p>
+<p>Este ejemplo configura Woodpecker como cola de mensajes y habilita el nodo de streaming. El primer arranque puede tardar un tiempo en descargar las imágenes; espera hasta que todos los pods estén listos:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 kubectl get milvus my-release -o yaml | grep -A2 status
 <button class="copy-code-btn"></button></code></pre>
@@ -432,7 +432,7 @@ docker restart milvus-standalone
 <li>Parámetros de Woodpecker
 <ul>
 <li>Aumenta los valores de « <code translate="no">logstore.segmentSyncPolicy.maxFlushSize</code> » y « <code translate="no">maxFlushThreads</code> » para obtener vaciados más grandes y un mayor paralelismo.</li>
-<li>Ajuste <code translate="no">maxInterval</code> según las características del soporte (sacrifique latencia a cambio de rendimiento con una agregación más larga).</li>
+<li>Ajuste <code translate="no">maxInterval</code> según las características del soporte (sacrifique la latencia a favor del rendimiento con una agregación más larga).</li>
 <li>En el caso del almacenamiento de objetos, plantéate aumentar <code translate="no">segmentRollingPolicy.maxSize</code> para reducir los cambios de segmento.</li>
 </ul></li>
 <li>Lado del cliente/aplicación
@@ -530,7 +530,7 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Woodpecker es un WAL nativo de la nube diseñado para el almacenamiento de objetos, que ofrece un equilibrio entre rendimiento, coste y latencia. El modo integrado, de bajo peso, da prioridad a la optimización del coste y el rendimiento, ya que la mayoría de los escenarios solo requieren que los datos se escriban dentro de un plazo determinado, en lugar de exigir una baja latencia para las solicitudes de escritura individuales. Por lo tanto, Woodpecker emplea escrituras por lotes, con intervalos predeterminados de 10 ms para backends de almacenamiento en sistemas de archivos locales y de 200 ms para backends de almacenamiento tipo MinIO. Durante las operaciones de escritura lentas, la latencia máxima es igual al tiempo del intervalo más el tiempo de vaciado.</p>
+    </button></h3><p>Woodpecker es un WAL nativo de la nube diseñado para el almacenamiento de objetos, que ofrece un equilibrio entre rendimiento, coste y latencia. El modo integrado, de bajo peso, da prioridad a la optimización del coste y el rendimiento, ya que la mayoría de los escenarios solo requieren que los datos se escriban dentro de un plazo determinado, en lugar de exigir una baja latencia para las solicitudes de escritura individuales. Por lo tanto, Woodpecker emplea escrituras por lotes, con intervalos predeterminados de 10 ms para los backends de almacenamiento en sistemas de archivos locales y de 200 ms para los backends de almacenamiento tipo MinIO. Durante las operaciones de escritura lentas, la latencia máxima es igual al tiempo del intervalo más el tiempo de vaciado.</p>
 <p>Cabe señalar que la inserción por lotes se activa no solo por intervalos de tiempo, sino también por el tamaño del lote, cuyo valor por defecto es de 2 MB.</p>
 <h3 id="Service-mode-Milvus-30+" class="common-anchor-header">Modo de servicio (Milvus 3.0+)<button data-href="#Service-mode-Milvus-30+" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -547,9 +547,9 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>El modo de servicio ofrece <strong>una latencia de escritura del orden de los milisegundos</strong> —del mismo orden que un WAL tradicional en disco local con tres réplicas— al tiempo que mantiene bajos los costes. En una implementación típica de tres réplicas entre zonas (AZ), la latencia de escritura se mantiene en el rango de los milisegundos. Esto se consigue mediante:</p>
+    </button></h3><p>El modo de servicio ofrece <strong>una latencia de escritura del orden de los milisegundos</strong> —del mismo orden que un WAL tradicional en disco local con tres réplicas— al tiempo que mantiene bajos los costes. En una implementación típica con tres réplicas entre zonas de disponibilidad (AZ), la latencia de escritura se mantiene en el rango de los milisegundos. Esto se consigue mediante:</p>
 <ul>
-<li><strong>Escrituras de quórum en un solo RTT</strong>: la replicación impulsada por el cliente completa una escritura de quórum en un solo viaje de ida y vuelta, con el tráfico entre zonas fijado en el volumen de datos equivalente a dos réplicas (frente al tráfico adicional entre zonas de aproximadamente un tercio, típico de la replicación basada en broker o líder).</li>
+<li><strong>Escrituras de quórum en un solo RTT</strong>: la replicación impulsada por el cliente completa una escritura de quórum en un solo viaje de ida y vuelta, con un tráfico entre zonas (AZ) fijado en el volumen de datos equivalente a dos réplicas (frente al tráfico adicional entre zonas de aproximadamente un tercio, típico de la replicación basada en broker o líder).</li>
 <li><strong>Lecturas de un solo salto que tienen en cuenta la topología</strong>: cada lectura se dirige directamente a la réplica más cercana en lugar de reenviarse a través de un broker, lo que evita las lecturas aleatorias entre zonas (aproximadamente dos tercios del tráfico de lectura entre zonas) propias de los sistemas basados en brokers.</li>
 <li><strong>Carga inmediata al almacenamiento de objetos tras el desplazamiento de segmentos</strong>: cada segmento realiza un seguimiento de todo su ciclo de vida y se carga al almacenamiento de objetos tan pronto como se desplaza, lo que mantiene bajo el espacio ocupado en el disco local y el coste de almacenamiento sin sacrificar la latencia.</li>
 <li><strong>No hay replicación continua de nodo a nodo</strong>: los registros persisten en el almacenamiento de objetos, que actúa como almacenamiento compartido, por lo que la conmutación por error solo vuelve a cargar las réplicas supervivientes (sin copia completa del nodo); el escalado no está limitado por el ancho de banda de replicación entre nodos, y la sustitución de nodos a gran escala no provoca tormentas de replicación.</li>

@@ -81,7 +81,7 @@ title: 펄서
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Kubernetes v1.25 이상에서 번들된 Pulsar 서브 차트로 인해 PodDisruptionBudget(PDB) API 문제가 발생하는 경우, Pulsar PDB 정책을 비활성화하십시오:</p>
+<p>Kubernetes v1.25 이상에서 번들된 Pulsar 하위 차트로 인해 PodDisruptionBudget(PDB) API 문제가 발생하는 경우, Pulsar PDB 정책을 비활성화하십시오:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> pulsar.bookkeeper.pdb.usePolicy=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsar.broker.pdb.usePolicy=<span class="hljs-literal">false</span> \
@@ -152,7 +152,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Operator를 사용하여 <code translate="no">spec.dependencies.pulsar</code> 아래에서 Pulsar를 구성하십시오(Milvus 클러스터에서만 지원됨). <code translate="no">pulsar</code> 은 <code translate="no">external</code> 및 <code translate="no">inCluster</code> 을 지원합니다.</p>
+    </button></h2><p>Milvus Operator를 사용하여 <code translate="no">spec.dependencies.pulsar</code> 아래에서 Pulsar를 구성하십시오(Milvus 클러스터에서만 지원됨). <code translate="no">pulsar</code> 는 <code translate="no">external</code> 및 <code translate="no">inCluster</code> 를 지원합니다.</p>
 <h3 id="External-Pulsar" class="common-anchor-header">외부 Pulsar<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -263,7 +263,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>2.5.x에서 2.6.x로 업그레이드:</strong> <strong>메시지 큐 제한 사항</strong>: Milvus v3.0-beta로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.
+<li><strong>2.5.x에서 2.6.x로 업그레이드:</strong> <strong>메시지 큐 제한 사항</strong>: Milvus v3.0-beta로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경 기능은 향후 버전에서 제공될 예정입니다.
 Pulsar를 실행 중이며 계속 사용하려는 경우, 업그레이드 중에 메시지 큐를 변경하지 마십시오.</li>
 <li><strong>Pulsar v2 → v3:</strong> <a href="/docs/ko/upgrade-pulsar-v3.md">‘Pulsar v2에서 v3로 업그레이드’를</a> 참조하십시오. v2를 계속 사용하려면 <a href="/docs/ko/use-pulsar-v2.md">‘Pulsar v2 계속 사용’을</a> 참조하십시오.</li>
 </ul>

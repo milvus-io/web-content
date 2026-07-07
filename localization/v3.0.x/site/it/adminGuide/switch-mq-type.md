@@ -22,7 +22,7 @@ summary: >-
       </svg>
     </button></h1><p>Questa guida descrive come passare dalla coda dei messaggi (MQ) di un'istanza Milvus esistente <strong>da Woodpecker a un'altra coda dei messaggi</strong>, online e senza tempi di inattività.</p>
 <div class="alert warning">
-<p>Questa funzionalità è in fase di rilascio ed è soggetta a modifiche. Si prega di contattare l’assistenza Milvus se si desidera provarla o se si hanno domande.</p>
+<p>Questa funzionalità è in fase di rilascio ed è soggetta a modifiche. Contatta l’assistenza Milvus se desideri provarla o se hai domande.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisiti<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"

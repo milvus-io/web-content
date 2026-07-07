@@ -68,7 +68,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Un campo vettoriale o un sottocampo vettoriale accetta un solo indice. Se sono necessarie sia la ricerca EmbeddingList che quella a livello di elemento, definire due sottocampi vettoriali distinti. In questo esempio, <code translate="no">chunks[emb_list_vector]</code> è destinato alla ricerca EmbeddingList, mentre <code translate="no">chunks[emb]</code> è destinato alla ricerca a livello di elemento.</p>
+<p>Un campo vettoriale o un sottocampo vettoriale accetta un solo indice. Se sono necessarie sia la ricerca EmbeddingList che quella a livello di elemento, definire due sottocampi vettoriali separati. In questo esempio, <code translate="no">chunks[emb_list_vector]</code> è destinato alla ricerca EmbeddingList, mentre <code translate="no">chunks[emb]</code> è destinato alla ricerca a livello di elemento.</p>
 </div>
 <h2 id="Supported-subfield-data-types" class="common-anchor-header">Tipi di dati supportati per i sottocampi<button data-href="#Supported-subfield-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -85,7 +85,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un campo StructArray memorizza un valore di array per ogni sottocampo Struct. Quando si definisce uno schema Struct, scegliere i tipi dei sottocampi tra le famiglie scalari e vettoriali supportate.</p>
+    </button></h2><p>Un campo StructArray memorizza un valore di array per ciascun sottocampo Struct. Quando si definisce uno schema Struct, scegliere i tipi dei sottocampi tra le famiglie scalari e vettoriali supportate.</p>
 <table>
 <thead>
 <tr><th>Tipo fisico dei sottocampi Struct</th><th>Supporto</th><th>Note</th></tr>
@@ -246,7 +246,7 @@ client.create_collection(
 <tr><td><code translate="no">chunks[text]</code></td><td>Il sottocampo <code translate="no">text</code> all'interno di ciascun elemento Struct.</td><td>Campo di output o filtraggio scalare.</td></tr>
 <tr><td><code translate="no">chunks[section]</code></td><td>L'etichetta della sezione per ciascun blocco.</td><td>Filtraggio scalare.</td></tr>
 <tr><td><code translate="no">chunks[quality_score]</code></td><td>Il punteggio di qualità a livello di blocco.</td><td>Filtraggio scalare o indice scalare.</td></tr>
-<tr><td><code translate="no">chunks[emb_list_vector]</code></td><td>Il sottocampo vettoriale utilizzato come elenco di embedding.</td><td>Ricerca EmbeddingList con <code translate="no">MAX_SIM*</code>.</td></tr>
+<tr><td><code translate="no">chunks[emb_list_vector]</code></td><td>Il sottocampo vettoriale utilizzato come lista di embedding.</td><td>Ricerca EmbeddingList con <code translate="no">MAX_SIM*</code>.</td></tr>
 <tr><td><code translate="no">chunks[emb]</code></td><td>Il sottocampo vettoriale utilizzato in modo indipendente da ciascun elemento Struct.</td><td>Ricerca vettoriale a livello di elemento.</td></tr>
 </tbody>
 </table>
@@ -294,7 +294,7 @@ I campi StructArray nullabili sono disponibili solo in Milvus v3.0.x. Per un cam
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus v3.0.x supporta l’aggiunta di un campo StructArray a una collezione esistente. Il campo StructArray aggiunto deve essere nullabile, poiché le entità già presenti nella collezione non dispongono di valori per il nuovo campo.</p>
+    </button></h2><p>Milvus v3.0.x supporta l’aggiunta di un campo StructArray a una collezione esistente. Il campo StructArray aggiunto deve essere nullable, poiché le entità già presenti nella collezione non dispongono di valori per il nuovo campo.</p>
 <p>Per aggiungere un campo StructArray a una collezione esistente, definire innanzitutto lo schema Struct. Quindi chiamare ` <code translate="no">add_collection_struct_field()</code> ` e impostare ` <code translate="no">nullable=True</code>`.</p>
 <pre><code translate="no" class="language-python">chunk_schema = client.create_struct_field_schema()
 chunk_schema.add_field(
@@ -381,7 +381,7 @@ client.add_collection_struct_field(
 <tr><td>Un sottocampo vettoriale ha un solo indice.</td><td>Se sono necessarie sia la ricerca EmbeddingList che quella a livello di elemento, creare due sottocampi vettoriali separati.</td></tr>
 <tr><td>I sottocampi StructArray esistenti sono fissi.</td><td>Dopo aver creato un campo StructArray, non è possibile aggiungere ulteriori sottocampi a quello stesso campo StructArray.</td></tr>
 <tr><td>Le funzioni non sono supportate all’interno di Struct.</td><td>Non definire funzioni per campi o sottocampi all'interno di un campo StructArray.</td></tr>
-<tr><td>I sottocampi scalari devono soddisfare le esigenze di filtraggio.</td><td>Aggiungere campi quali <code translate="no">section</code>, <code translate="no">quality_score</code> o <code translate="no">has_code</code> solo quando è necessario filtrarli, raggrupparli o visualizzarli in un secondo momento.</td></tr>
+<tr><td>I sottocampi scalari dovrebbero soddisfare le esigenze di filtraggio.</td><td>Aggiungere campi quali <code translate="no">section</code>, <code translate="no">quality_score</code> o <code translate="no">has_code</code> solo quando è necessario filtrarli, raggrupparli o visualizzarli in un secondo momento.</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">Errori comuni<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
@@ -402,7 +402,7 @@ client.add_collection_struct_field(
     </button></h2><ul>
 <li><p>Creare <code translate="no">DataType.STRUCT</code> come campo di raccolta di primo livello invece di utilizzarlo come tipo di elemento di un campo Array.</p></li>
 <li><p>Dimenticare di impostare " <code translate="no">max_capacity</code> " sul campo StructArray.</p></li>
-<li><p>Definizione di tipi di sottocampo non supportati, come JSON, Geometry, Text, Timestamptz, SparseFloatVector, Array annidato, Struct annidato o Array-of-Struct.</p></li>
+<li><p>Definizione di tipi di sottocampo non supportati, quali JSON, Geometry, Text, Timestamptz, SparseFloatVector, Array annidato, Struct annidato o Array-of-Struct.</p></li>
 <li><p>Utilizzo di ` <code translate="no">String</code> ` come tipo di sottocampo. Utilizzare ` <code translate="no">VARCHAR</code> ` e impostare ` <code translate="no">max_length</code>`.</p></li>
 <li><p>Utilizzo di un unico sottocampo vettoriale sia per la ricerca EmbeddingList che per la ricerca a livello di elemento.</p></li>
 <li><p>Aggiunta solo di sottocampi vettoriali e omissione dei sottocampi scalari necessari per il filtraggio, come <code translate="no">section</code>, <code translate="no">quality_score</code> o <code translate="no">has_code</code>.</p></li>

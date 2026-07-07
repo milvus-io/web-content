@@ -45,7 +45,7 @@ summary: >-
 <tr><td><a href="/docs/es/woodpecker.md">Woodpecker</a></td><td style="text-align:center">✔️ (integrado)</td><td style="text-align:center">✔️ (integrado o como servicio)</td><td><strong>Milvus 3.x</strong> (ambos modos)</td><td>Predeterminado y recomendado. WAL nativo en la nube en almacenamiento de objetos; no requiere ningún servicio externo.</td></tr>
 <tr><td><a href="/docs/es/mq_pulsar.md">Pulsar</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td>≤ 2.5.x (predeterminado del clúster)</td><td>Compatible, externo o integrado.</td></tr>
 <tr><td><a href="/docs/es/mq_kafka.md">Kafka</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td>—</td><td>Compatible. Solo Kafka 2.x o 3.x.</td></tr>
-<tr><td><a href="/docs/es/mq_rocksmq.md">RocksMQ</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✖️</td><td>≤ 2.5.x (predeterminado en modo autónomo)</td><td>Compatible <strong>únicamente</strong> con <strong>la versión independiente</strong>.</td></tr>
+<tr><td><a href="/docs/es/mq_rocksmq.md">RocksMQ</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✖️</td><td>≤ 2.5.x (predeterminado en modo autónomo)</td><td>Compatible <strong>solo</strong> con la versión <strong>independiente</strong>.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -71,7 +71,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Nuevas implementaciones (Milvus 3.x):</strong> utilice <strong>Woodpecker</strong> (la opción predeterminada). En el modo autónomo se ejecuta de forma integrada; para el modo distribuido (clúster), la opción predeterminada recomendada es un <a href="/docs/es/woodpecker.md#Deployment-modes">servicio</a> dedicado implementado con Helm, aunque también se admite la ejecución integrada.</li>
-<li><strong>Usuarios actuales de Pulsar o Kafka:</strong> Pulsar y Kafka siguen siendo totalmente compatibles. Manténlas o <a href="/docs/es/switch-mq-type.md">cambia a Woodpecker</a>.</li>
+<li><strong>Nuevas implementaciones (Milvus 3.x):</strong> utilice <strong>Woodpecker</strong> (la opción predeterminada). La versión independiente lo ejecuta de forma integrada; para la versión distribuida (clúster), la opción predeterminada recomendada es un <a href="/docs/es/woodpecker.md#Deployment-modes">servicio</a> dedicado implementado con Helm, aunque también se admite la ejecución integrada.</li>
+<li><strong>Usuarios actuales de Pulsar o Kafka:</strong> Pulsar y Kafka siguen siendo totalmente compatibles. Mantén estos servicios o <a href="/docs/es/switch-mq-type.md">cambia a Woodpecker</a>.</li>
 <li><strong>RocksMQ:</strong> solo en modo autónomo, y sustituido por Woodpecker integrado en Milvus 3.x.</li>
 </ul>

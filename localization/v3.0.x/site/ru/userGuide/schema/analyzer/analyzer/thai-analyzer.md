@@ -55,7 +55,7 @@ beta: Milvus 3.0.0+
      <td><p><code translate="no">stop_words</code></p></td>
      <td><p><code translate="no">list[str]</code></p></td>
      <td><p><code translate="no">_thai_</code></p></td>
-     <td><p>Список дополнительных стоп-слов, которые следует исключить из токенизации. По умолчанию анализатор « <code translate="no">thai</code> » использует встроенный словарь « <code translate="no">_thai_</code> ». Чтобы ознакомиться со словарем по умолчанию, см. <a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/thai.txt">список тайских стоп-слов</a> Milvus. Этот список взят из <a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/th/stopwords.txt">файла тайских стоп-слов</a> Apache Lucene.</p></td>
+     <td><p>Список дополнительных стоп-слов, которые следует исключить из токенизации. По умолчанию анализатор « <code translate="no">thai</code> » использует встроенный словарь « <code translate="no">_thai_</code> ». Чтобы ознакомиться со словарем по умолчанию, обратитесь к <a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/thai.txt">списку стоп-слов</a> Milvus <a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/thai.txt">Thai</a>. Этот список взят из <a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/th/stopwords.txt">файла стоп-слов</a> Apache Lucene <a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/th/stopwords.txt">Thai</a>.</p></td>
    </tr>
 </table>
 <p>Чтобы добавить пользовательские стоп-слова, включите <code translate="no">stop_words</code>:</p>
@@ -80,8 +80,8 @@ beta: Milvus 3.0.0+
 <button class="copy-code-btn"></button></code></pre>
 <p>Этот анализатор применяет следующие этапы обработки:</p>
 <ul>
-<li><strong>Токенизация</strong>: использует <a href="/docs/ru/thai-tokenizer.md"><code translate="no">thai</code></a> токеннизатор для сегментирования текста на тайском языке на словесные токены без учета пробелов. Токеннизатор отфильтровывает пробелы и сегменты, состоящие исключительно из знаков препинания.</li>
-<li><strong>Нормализация регистра</strong>: использует фильтр <code translate="no">lowercase</code>, который воздействует на латинские буквы в смешанном тексте на тайском и английском языках.</li>
+<li><strong>Токенизация</strong>: использует <a href="/docs/ru/thai-tokenizer.md"><code translate="no">thai</code></a> токеннизатор для сегментирования текста на тайском языке на лексические единицы без учета пробелов. Токеннизатор отфильтровывает пробелы и сегменты, состоящие исключительно из знаков препинания.</li>
+<li><strong>Нормализация регистра</strong>: использует фильтр <code translate="no">lowercase</code>, который действует на латинские буквы в смешанном тексте на тайском и английском языках.</li>
 <li><strong>Нормализация цифр</strong>: использует фильтр « <code translate="no">decimaldigit</code> » для преобразования тайских цифр и других десятичных цифр Unicode в цифры ASCII.</li>
 <li><strong>Удаление стоп-слов</strong>: используется фильтр « <code translate="no">stop</code> » со встроенным словарем « <code translate="no">_thai_</code> ».</li>
 <li><strong>Без стемминга</strong>: встроенный анализатор « <code translate="no">thai</code> » не применяет фильтр « <code translate="no">stemmer</code> ».</li>

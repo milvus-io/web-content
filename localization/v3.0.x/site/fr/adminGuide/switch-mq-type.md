@@ -1,12 +1,12 @@
 ---
 id: switch-mq-type.md
-title: Changer de type de file d'attente de messages (MQ)
+title: Changer de type de file d'attente de messages
 summary: >-
-  Basculer la file d'attente de messages d'un déploiement Milvus existant entre
-  Woodpecker et une autre file d'attente de messages sans interruption de
+  Basculer la file d'attente de messages d'un déploiement Milvus existant de
+  Woodpecker vers une autre file d'attente de messages sans interruption de
   service.
 ---
-<h1 id="Switch-MQ-Type" class="common-anchor-header">Changer de type de file d'attente de messages (MQ)<button data-href="#Switch-MQ-Type" class="anchor-icon" translate="no">
+<h1 id="Switch-MQ-Type" class="common-anchor-header">Changer de type de file d'attente de messages<button data-href="#Switch-MQ-Type" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,7 +23,7 @@ summary: >-
       </svg>
     </button></h1><p>Ce guide décrit comment basculer la file d’attente de messages (MQ) d’un déploiement Milvus existant <strong>de Woodpecker vers une autre file d’attente de messages</strong>, en ligne et sans interruption de service.</p>
 <div class="alert warning">
-<p>Cette fonctionnalité n'est pas encore disponible et est susceptible d'évoluer. Veuillez contacter le support Milvus si vous souhaitez la tester ou si vous avez des questions.</p>
+<p>Cette fonctionnalité n'est pas encore disponible et est susceptible d'être modifiée. Veuillez contacter le support Milvus si vous souhaitez la tester ou si vous avez des questions.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Prérequis<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,7 +41,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>La fonctionnalité « Changer de file d’attente de messages » est disponible dans Milvus 3.0 et les versions ultérieures.</strong> Mettez à jour votre instance Milvus vers la version 3.0 ou une version ultérieure avant de l’utiliser — cette fonctionnalité n’est pas disponible dans les versions antérieures.</li>
+<li><strong>La fonctionnalité « Changer de file d’attente de messages » est disponible à partir de Milvus 3.0.</strong> Mettez à jour votre instance Milvus vers la version 3.0 ou une version<strong>ultérieure</strong> avant de l’utiliser — cette fonctionnalité n’est pas disponible sur les versions antérieures.</li>
 <li>L’instance fonctionne correctement.</li>
 </ul>
 <h2 id="Scope" class="common-anchor-header">Portée<button data-href="#Scope" class="anchor-icon" translate="no">
@@ -83,7 +83,7 @@ summary: >-
     </button></h2><ol>
 <li>Assurez-vous que l’instance Milvus fonctionne correctement.</li>
 <li>Vérifiez le type de MQ source et le type de MQ cible.</li>
-<li>Intégrez les paramètres d’accès du MQ cible dans la configuration de Milvus <strong>sans</strong> modifier la valeur de l’ <code translate="no">mqType</code>.</li>
+<li>Intégrez les paramètres d’accès du MQ cible dans la configuration de Milvus <strong>sans</strong> modifier la valeur « <code translate="no">mqType</code> ».</li>
 <li>Déclenchez la bascule en appelant l’API WAL alter sur MixCoord.</li>
 <li>Surveillez les journaux pour vérifier que la bascule s’est bien effectuée.</li>
 </ol>
@@ -120,5 +120,5 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Évitez de changer de type de MQ à plusieurs reprises. Si vous devez changer de type, veillez à nettoyer les données associées avant chaque changement — les données résiduelles peuvent entraîner un comportement inattendu.</p>
+<p>Évitez de changer de type de MQ à plusieurs reprises. Si vous devez tout de même effectuer un changement, veillez à nettoyer les données associées avant chaque changement — les données résiduelles peuvent entraîner un comportement inattendu.</p>
 </div>

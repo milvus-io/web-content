@@ -3,7 +3,7 @@ id: hybrid-search-with-structarray.md
 title: Búsqueda híbrida con StructArray
 summary: >-
   Utiliza esta página para combinar la búsqueda vectorial de StructArray con
-  otras búsquedas vectoriales en una única solicitud de búsqueda híbrida. La
+  otras búsquedas vectoriales en una única consulta de búsqueda híbrida. La
   búsqueda híbrida de StructArray puede generar resultados a nivel de entidad o
   a nivel de elemento, dependiendo de los objetos AnnSearchRequest que se
   combinen.
@@ -156,7 +156,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><p>Cuando todos los objetos ` <code translate="no">AnnSearchRequest</code> ` se dirigen a subcampos vectoriales a nivel de elemento dentro del mismo campo `StructArray`, la búsqueda híbrida puede conservar los candidatos a nivel de elemento mediante una nueva clasificación. Este es el único modo híbrido de `StructArray` en el que los resultados finales se mantienen a nivel de elemento.</p>
-<p>El siguiente ejemplo supone que el campo StructArray de <code translate="no">chunks</code> tiene dos subcampos vectoriales a nivel de elemento, <code translate="no">chunks[emb]</code> y <code translate="no">chunks[code_emb]</code>, y que ambos utilizan métricas vectoriales estándar.</p>
+<p>El siguiente ejemplo supone que el campo StructArray de <code translate="no">chunks</code> tiene dos subcampos vectoriales a nivel de elemento, <code translate="no">chunks[emb]</code> y <code translate="no">chunks[code_emb]</code>, y que ambos utilizan métricas vectoriales normales.</p>
 <pre><code translate="no">index_chunk_req = AnnSearchRequest(
     data=[query_vector],
     anns_field=<span class="hljs-string">&quot;chunks[emb]&quot;</span>,
@@ -194,7 +194,7 @@ results = client.hybrid_search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>Ambos objetos <code translate="no">AnnSearchRequest</code> buscan subcampos vectoriales en <code translate="no">chunks</code>. El mismo desplazamiento con base en cero hace referencia al mismo elemento Struct, por lo que el reordenador híbrido puede clasificar directamente los candidatos a nivel de elemento. No establezcas <code translate="no">element_scope</code> en este modo, ya que no se realiza ninguna agrupación a nivel de entidad.</p>
+<p>Ambos objetos <code translate="no">AnnSearchRequest</code> buscan subcampos vectoriales en <code translate="no">chunks</code>. El mismo desplazamiento con base en cero hace referencia al mismo elemento de Struct, por lo que el reordenador híbrido puede clasificar directamente los candidatos a nivel de elemento. No establezcas <code translate="no">element_scope</code> en este modo, ya que no se realiza ninguna agrupación a nivel de entidad.</p>
 <h2 id="Collapse-element-level-hits-for-entity-level-hybrid-search" class="common-anchor-header">Agrupar resultados a nivel de elemento para la búsqueda híbrida a nivel de entidad<button data-href="#Collapse-element-level-hits-for-entity-level-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -250,7 +250,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>En este ejemplo, « <code translate="no">title_req</code> » es a nivel de entidad, por lo que el resultado híbrido final también es a nivel de entidad. La solicitud « <code translate="no">chunk_req</code> » devuelve primero los resultados de los elementos de « <code translate="no">chunks[emb]</code> » y, a continuación, agrupa los elementos devueltos de la misma entidad sumando las tres mejores puntuaciones de los elementos. Si se omite « <code translate="no">element_scope</code> » cuando se necesita una agrupación a nivel de entidad, la estrategia de agrupación por defecto es « <code translate="no">max</code> ».</p>
+<p>En este ejemplo, « <code translate="no">title_req</code> » es a nivel de entidad, por lo que el resultado híbrido final también es a nivel de entidad. La solicitud « <code translate="no">chunk_req</code> » devuelve primero los resultados de elementos de « <code translate="no">chunks[emb]</code> » y, a continuación, agrupa los elementos devueltos de la misma entidad sumando las tres mejores puntuaciones de los elementos. Si se omite « <code translate="no">element_scope</code> » cuando se necesita una agrupación a nivel de entidad, la estrategia de agrupación por defecto es « <code translate="no">max</code> ».</p>
 <h2 id="Choose-a-collapse-strategy" class="common-anchor-header">Elegir una estrategia de agrupación<button data-href="#Choose-a-collapse-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -318,7 +318,7 @@ results = client.hybrid_search(
 </thead>
 <tbody>
 <tr><td>Nivel de entidad</td><td>Clave primaria.</td><td>No hay desplazamiento de elementos en el resultado final.</td><td>La solicitud híbrida incluye un campo vectorial a nivel de colección, una solicitud EmbeddingList o solicitudes a nivel de elemento en distintos campos StructArray.</td></tr>
-<tr><td>Nivel de elemento</td><td>Clave primaria más el campo StructArray principal más el desplazamiento del elemento.</td><td>El desplazamiento del elemento seleccionado puede devolverse cuando lo exponga la API o el SDK.</td><td>Todos los objetos « <code translate="no">AnnSearchRequest</code> » son a nivel de elemento y se encuentran bajo el mismo campo «StructArray».</td></tr>
+<tr><td>Nivel de elemento</td><td>Clave primaria más el campo StructArray padre más el desplazamiento del elemento.</td><td>El desplazamiento del elemento seleccionado puede devolverse cuando lo exponga la API o el SDK.</td><td>Todos los objetos « <code translate="no">AnnSearchRequest</code> » son a nivel de elemento y se encuentran bajo el mismo campo «StructArray».</td></tr>
 </tbody>
 </table>
 <h2 id="Limitations" class="common-anchor-header">Limitaciones<button data-href="#Limitations" class="anchor-icon" translate="no">
@@ -363,7 +363,7 @@ results = client.hybrid_search(
     </button></h2><ul>
 <li><p>Añadir « <code translate="no">element_scope</code> » a una solicitud híbrida a nivel de elemento del mismo StructArray. Esa solicitud sigue siendo a nivel de elemento y no realiza la compresión a nivel de entidad.</p></li>
 <li><p>Añadir « <code translate="no">element_scope</code> » a « <code translate="no">chunks[emb_list_vector]</code> ». La búsqueda de «EmbeddingList» ya se realiza a nivel de entidad.</p></li>
-<li><p>Suponer que dos campos de StructArray comparten desplazamientos de elementos. El desplazamiento « <code translate="no">3</code> » en <code translate="no">chunks</code> y el desplazamiento « <code translate="no">3</code> » en otro campo de StructArray corresponden a elementos diferentes, por lo que la solicitud híbrida pasa a ser a nivel de entidad.</p></li>
+<li><p>Suponer que dos campos de StructArray comparten desplazamientos de elementos. El desplazamiento « <code translate="no">3</code> » en « <code translate="no">chunks</code> » y el desplazamiento « <code translate="no">3</code> » en otro campo de StructArray corresponden a elementos diferentes, por lo que la solicitud híbrida pasa a ser a nivel de entidad.</p></li>
 <li><p>Utilizando <code translate="no">topk_sum</code> con <code translate="no">L2</code>. Utiliza <code translate="no">max</code>, <code translate="no">avg</code> o <code translate="no">topk_avg</code> para métricas de distancia negativas.</p></li>
 <li><p>Se espera que los resultados híbridos a nivel de entidad incluyan el desplazamiento del elemento Struct seleccionado tras el colapso.</p></li>
 </ul>

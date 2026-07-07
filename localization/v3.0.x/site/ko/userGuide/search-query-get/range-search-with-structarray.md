@@ -74,7 +74,7 @@ summary: >-
 <tbody>
 <tr><td>StructArray 필드</td><td>컬렉션에는 <code translate="no">chunks</code> 와 같은 StructArray 필드가 포함되어 있습니다.</td></tr>
 <tr><td>요소 수준 벡터 하위 필드</td><td>대상 벡터 하위 필드는 <code translate="no">chunks[emb_list_vector]</code> 가 아니라 <code translate="no">chunks[emb]</code> 입니다.</td></tr>
-<tr><td>인덱스 메트릭</td><td>벡터 하위 필드는 <code translate="no">COSINE</code>, <code translate="no">IP</code> 또는 <code translate="no">L2</code> 과 같은 일반 벡터 메트릭으로 인덱싱됩니다.</td></tr>
+<tr><td>인덱스 메트릭</td><td>벡터 하위 필드는 <code translate="no">COSINE</code>, <code translate="no">IP</code> 또는 <code translate="no">L2</code> 와 같은 일반 벡터 메트릭으로 인덱싱됩니다.</td></tr>
 <tr><td>쿼리 데이터</td><td>쿼리는 <code translate="no">EmbeddingList</code> 가 아닌 일반 벡터입니다.</td></tr>
 </tbody>
 </table>
@@ -104,7 +104,7 @@ summary: >-
 <tr><td><code translate="no">IP</code>, <code translate="no">COSINE</code></td><td>네. 점수가 클수록 좋습니다.</td><td><code translate="no">radius &lt; distance &lt;= range_filter</code></td></tr>
 </tbody>
 </table>
-<p><code translate="no">radius</code> 만 설정된 경우, 범위 검색은 해당 메트릭의 외부 경계를 충족하는 히트를 반환합니다. 임베딩의 점수 또는 거리 척도에 따라 값을 선택하십시오.</p>
+<p><code translate="no">radius</code> 만 설정된 경우, 범위 검색은 해당 메트릭의 외부 경계를 충족하는 일치 항목을 반환합니다. 임베딩의 점수 또는 거리 척도에 따라 값을 선택하십시오.</p>
 <h2 id="Run-element-level-range-search" class="common-anchor-header">요소 수준 범위 검색 실행<button data-href="#Run-element-level-range-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -222,7 +222,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>StructArray 요소 수준 벡터 필드는 하이브리드 검색에서 범위 검색을 지원합니다. StructArray 요소 수준 벡터 필드를 대상으로 하는 <code translate="no">AnnSearchRequest</code> 에 <code translate="no">radius</code> 를 추가하고, 선택적으로 <code translate="no">range_filter</code> 를 추가하십시오.</p>
+    </button></h2><p>StructArray 요소 수준 벡터 필드는 하이브리드 검색에서 범위 검색을 지원합니다. StructArray 요소 수준 벡터 필드를 대상으로 하는 <code translate="no">AnnSearchRequest</code> 에 ` <code translate="no">radius</code> `를 추가하고, 선택적으로 ` <code translate="no">range_filter</code> `를 추가하십시오.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest, RRFRanker
 
 title_req = AnnSearchRequest(
@@ -258,7 +258,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>이 예제에서는 <code translate="no">chunks[emb]</code> 하위 요청만 범위 검색 매개변수를 사용합니다. StructArray 요청은 여전히 요소 수준 의미 체계를 따릅니다. 즉, 범위 경계는 하이브리드 검색이 결과를 결합하고 재순위를 매기기 전에 Struct 요소 일치 항목에 적용됩니다.</p>
+<p>이 예제에서는 <code translate="no">chunks[emb]</code> 하위 요청만 범위 검색 매개변수를 사용합니다. StructArray 요청은 여전히 요소 수준 의미론을 따릅니다. 즉, 범위 경계는 하이브리드 검색이 결과를 결합하고 재순위를 매기기 전에 Struct 요소 일치 항목에 적용됩니다.</p>
 <h2 id="Interpret-range-results" class="common-anchor-header">범위 결과 해석<button data-href="#Interpret-range-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -322,11 +322,11 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><code translate="no">chunks[emb_list_vector]</code> 에 대해 범위 검색을 실행하는 경우. 이 메트릭은 EmbeddingList 검색용으로 설계되었습니다.</p></li>
+<li><p><code translate="no">chunks[emb_list_vector]</code> 에 대해 범위 검색을 실행하는 경우(이 메트릭은 EmbeddingList 검색용으로 설계됨).</p></li>
 <li><p>요소 수준 범위 검색에 <code translate="no">COSINE</code> 와 같은 일반 메트릭 대신 <code translate="no">MAX_SIM_COSINE</code> 를 사용하는 경우.</p></li>
 <li><p>일반 벡터 쿼리 대신 <code translate="no">EmbeddingList</code> 쿼리를 사용하는 경우.</p></li>
 <li><p>범위 검색 결과가 상위 엔티티별로 고유할 것으로 기대하는 경우. 범위 검색은 일치하는 Struct 요소 히트를 반환합니다.</p></li>
-<li><p>필수 하위 필드 경로 구문( <code translate="no">chunks[emb]</code>) 대신 <code translate="no">chunks.emb</code> 를 사용하는 경우.</p></li>
+<li><p>필수 하위 필드 경로 구문인 <code translate="no">chunks[emb]</code> 대신 <code translate="no">chunks.emb</code> 을 사용하는 경우.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">다음 단계<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -302,7 +302,7 @@ results = client.hybrid_search(
 <li><p>Verwendung von „ <code translate="no">$[subfield]</code> “ außerhalb von „ <code translate="no">element_filter</code> “ oder „ <code translate="no">MATCH_*</code> “.</p></li>
 <li><p>Verwendung von „ <code translate="no">chunks.section</code> “ anstelle der StructArray-Operatorsyntax wie z. B. „ <code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code> “.</p></li>
 <li><p>Verwendung von „ <code translate="no">element_filter</code> “, wenn nur eine Filterung auf Zeilenebene erforderlich ist. Verwenden Sie stattdessen „ <code translate="no">MATCH_ANY</code> “, wenn Sie lediglich Entitäten auswählen müssen.</p></li>
-<li><p>Die Erwartung, dass „ <code translate="no">MATCH_*</code> “ Element-Offsets zurückgibt. Diese Operatoren wählen Entitäten aus und identifizieren selbst kein einzelnes übereinstimmendes Element.</p></li>
+<li><p>Die Erwartung, dass ` <code translate="no">MATCH_*</code> ` Element-Offsets zurückgibt. Diese Operatoren wählen Entitäten aus und identifizieren selbst kein einzelnes übereinstimmendes Element.</p></li>
 <li><p>Das Schreiben von bloßen booleschen Prädikaten wie „ <code translate="no">$[has_code]</code> “. Verwenden Sie explizite Vergleiche wie „ <code translate="no">$[has_code] == true</code> “.</p></li>
 <li><p>„ <code translate="no">element_filter</code> “ vor einem Prädikat der obersten Ebene im selben Filterausdruck platzieren.</p></li>
 </ul>

@@ -71,7 +71,7 @@ summary: >-
 <div class="alert note">
 <p>En una carga útil de inserción, « <code translate="no">chunks</code> » es un campo normal cuyo valor es una matriz de objetos Struct. Dentro de cada objeto, utiliza nombres de subcampos como « <code translate="no">text</code> » y « <code translate="no">emb</code> ». Utiliza la sintaxis de ruta, como « <code translate="no">chunks[text]</code> » o « <code translate="no">chunks[emb]</code> », solo después de la inserción, cuando crees índices, realices búsquedas, crees filtros o especifiques campos de salida.</p>
 </div>
-<h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">Comprender la estructura de la carga útil de la inserción<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
+<h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">Comprender la estructura de la carga útil de inserción<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -232,7 +232,7 @@ result = client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Si el campo ` <code translate="no">chunks</code> ` es nulo, una entidad puede establecer todo el campo ` <code translate="no">chunks</code> ` en nulo. En Python, utiliza ` <code translate="no">None</code> ` para representar un valor nulo.</p>
+    </button></h2><p>Si el campo ` <code translate="no">chunks</code> ` es nulo, una entidad puede establecer todo el campo ` <code translate="no">chunks</code> ` como nulo. En Python, utiliza ` <code translate="no">None</code> ` para representar un valor nulo.</p>
 <pre><code translate="no" class="language-python">client.insert(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
     data=[
@@ -282,7 +282,7 @@ Los campos StructArray nulos solo están disponibles en Milvus v3.0.x. Si añade
 <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> rows:
     <span class="hljs-built_in">print</span>(row)
 <button class="copy-code-btn"></button></code></pre>
-<p>Utiliza rutas de campos StructArray, como <code translate="no">chunks[text]</code>, únicamente al consultar, buscar, filtrar o crear índices. Las cargas útiles de inserción deben seguir utilizando objetos anidados bajo <code translate="no">chunks</code>.</p>
+<p>Utiliza rutas de campo StructArray, como <code translate="no">chunks[text]</code>, únicamente al consultar, buscar, filtrar o crear índices. Las cargas útiles de inserción deben seguir utilizando objetos anidados bajo <code translate="no">chunks</code>.</p>
 <h2 id="Insert-rules" class="common-anchor-header">Reglas de inserción<button data-href="#Insert-rules" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

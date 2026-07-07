@@ -23,7 +23,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Fügen Sie Daten in ein StructArray-Feld ein, wenn jede Entität eine geordnete Liste strukturierter Elemente enthält. In der Einfüge-Nutzlast wird ein StructArray-Feld als Array von Objekten dargestellt. Jedes Objekt repräsentiert ein Struct-Element und verwendet die im Sammlungsschema definierten Struct-Unterfeldnamen.</p>
+    </button></h1><p>Fügen Sie Daten in ein StructArray-Feld ein, wenn jede Entität eine geordnete Liste strukturierter Elemente enthält. In der Einfüge-Nutzlast wird ein StructArray-Feld als Array von Objekten dargestellt. Jedes Objekt repräsentiert ein Struct-Element und verwendet die im Sammlungsschema definierten Namen der Struct-Unterfelder.</p>
 <p>Auf dieser Seite wird die Sammlung „ <code translate="no">tech_articles</code> “ aus dem Abschnitt <a href="/docs/de/create-structarray-field.md">„Erstellen eines StructArray-Feldes“</a> verwendet. Jede Entität ist ein technischer Artikel, und das Feld „ <code translate="no">chunks</code> “ speichert Artikelabschnitte als Struct-Elemente.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Bevor Sie beginnen<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -249,7 +249,7 @@ result = client.insert(
 <p>Wenn ein nullfähiges „StructArray“-Feld einen gültigen „StructArray“-Wert enthält, sollten alle Unterfelder in diesem Wert entweder null sein oder gültige Werte aufweisen. Das Einfügen einer Entität, bei der einige Unterfelder auf null und andere auf gültige Werte gesetzt sind, führt zu einem Fehler.</p>
 <div class="alert note">
 <p>Warnung
-Nullfähige StructArray-Felder sind nur in Milvus v3.0.x verfügbar. Wenn Sie einem bestehenden Datensatz dynamisch ein StructArray-Feld hinzufügen, muss das hinzugefügte Feld nullfähig sein, und bestehende Entitäten geben für das neue Feld in allen seinen Unterfeldern „ <code translate="no">null</code> “ zurück.</p>
+Nullfähige „StructArray“-Felder sind nur in Milvus v3.0.x verfügbar. Wenn Sie einem bestehenden Datensatz dynamisch ein „StructArray“-Feld hinzufügen, muss das hinzugefügte Feld nullfähig sein, und bestehende Entitäten geben für das neue Feld in allen seinen Unterfeldern „ <code translate="no">null</code> “ zurück.</p>
 </div>
 <h2 id="Validate-inserted-data" class="common-anchor-header">Eingefügte Daten validieren<button data-href="#Validate-inserted-data" class="anchor-icon" translate="no">
       <svg translate="no"

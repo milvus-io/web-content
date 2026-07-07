@@ -4,7 +4,7 @@ title: Créer un champ StructArray
 summary: >-
   Créez un champ StructArray lorsqu'une entité doit contenir une liste ordonnée
   d'éléments structurés. Un champ StructArray est un champ Array dont le type
-  d'élément est Struct. Chaque élément Struct suit le même schéma et peut
+  d'élément est Struct. Chaque élément Struct respecte le même schéma et peut
   contenir des sous-champs scalaires, des sous-champs vectoriels, ou les deux.
 ---
 <h1 id="Create-a-StructArray-Field" class="common-anchor-header">Créer un champ StructArray<button data-href="#Create-a-StructArray-Field" class="anchor-icon" translate="no">
@@ -95,9 +95,9 @@ summary: >-
 <tr><td><code translate="no">Array</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme suit : <code translate="no">DataType.INT8</code>, <code translate="no">DataType.INT16</code>, <code translate="no">DataType.INT32</code> ou <code translate="no">DataType.INT64</code>.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme suit : <code translate="no">DataType.FLOAT</code> ou <code translate="no">DataType.DOUBLE</code>.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme suit : <code translate="no">DataType.VARCHAR</code> et définissez <code translate="no">max_length</code>.</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>Pris en charge</td><td>Définissez le sous-champ comme <code translate="no">DataType.FLOAT_VECTOR</code> et définissez <code translate="no">dim</code>.</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme « <code translate="no">DataType.FLOAT16_VECTOR</code> » et définissez « <code translate="no">dim</code> ».</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme « <code translate="no">DataType.BFLOAT16_VECTOR</code> » et définissez « <code translate="no">dim</code> ».</td></tr>
+<tr><td><code translate="no">ArrayOfVector</code></td><td>Pris en charge</td><td>Définissez le sous-champ comme « <code translate="no">DataType.FLOAT_VECTOR</code> » et définissez « <code translate="no">dim</code> ».</td></tr>
+<tr><td><code translate="no">ArrayOfVector</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme « <code translate="no">DataType.FLOAT16_VECTOR</code> » et configurez « <code translate="no">dim</code> ».</td></tr>
+<tr><td><code translate="no">ArrayOfVector</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme « <code translate="no">DataType.BFLOAT16_VECTOR</code> » et configurez « <code translate="no">dim</code> ».</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme « <code translate="no">DataType.INT8_VECTOR</code> » et configurez « <code translate="no">dim</code> ».</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme « <code translate="no">DataType.BINARY_VECTOR</code> » et configurez « <code translate="no">dim</code> ».</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Non pris en charge</td><td>Les sous-champs de vecteurs clairsemés ne sont pas pris en charge dans les champs StructArray.</td></tr>
@@ -237,7 +237,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Une fois que vous avez créé un champ StructArray, faites référence à ses sous-champs à l’aide de la syntaxe de chemin d’accès « <code translate="no">structArray[subfield]</code> ». Utilisez cette syntaxe lorsque vous créez des index, effectuez des recherches dans des sous-champs vectoriels, générez des sous-champs de sortie ou créez des filtres scalaires.</p>
+    </button></h2><p>Une fois que vous avez créé un champ StructArray, faites référence à ses sous-champs à l’aide de la syntaxe de chemin d’accès « <code translate="no">structArray[subfield]</code> ». Utilisez cette syntaxe lorsque vous créez des index, effectuez des recherches dans des sous-champs vectoriels, générez des sous-champs ou créez des filtres scalaires.</p>
 <table>
 <thead>
 <tr><th>Chemin</th><th>Signification</th><th>Utilisation courante</th></tr>
@@ -250,7 +250,7 @@ client.create_collection(
 <tr><td><code translate="no">chunks[emb]</code></td><td>Le sous-champ vectoriel utilisé indépendamment par chaque élément Struct.</td><td>Recherche vectorielle au niveau des éléments.</td></tr>
 </tbody>
 </table>
-<h2 id="Make-a-StructArray-field-nullable" class="common-anchor-header">Rendre un champ StructArray non nul<button data-href="#Make-a-StructArray-field-nullable" class="anchor-icon" translate="no">
+<h2 id="Make-a-StructArray-field-nullable" class="common-anchor-header">Rendre un champ StructArray nullable<button data-href="#Make-a-StructArray-field-nullable" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

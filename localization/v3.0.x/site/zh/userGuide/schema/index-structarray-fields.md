@@ -51,7 +51,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>一个向量字段或向量子字段只能接受一个索引。如果您同时需要 EmbeddingList 搜索和元素级搜索，请创建两个独立的向量子字段，并分别对其进行索引。在此页面中，<code translate="no">chunks[emb_list_vector]</code> 被索引用于 EmbeddingList 搜索，而<code translate="no">chunks[emb]</code> 被索引用于元素级搜索。</p>
+<p>一个向量字段或向量子字段只能接受一个索引。如果您同时需要 EmbeddingList 搜索和元素级搜索，请创建两个独立的向量子字段，并分别对其进行索引。在此页面中，<code translate="no">chunks[emb_list_vector]</code> 已为 EmbeddingList 搜索建立索引，而<code translate="no">chunks[emb]</code> 已为元素级搜索建立索引。</p>
 </div>
 <h2 id="Choose-indexes" class="common-anchor-header">选择索引<button data-href="#Choose-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -204,7 +204,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><p>请参考以下表格，为 StructArray 向量子字段选择索引类型和度量类型。请从目标开始，然后根据搜索模式选择度量族。</p>
-<p>请从以下兼容性表中选择 Milvus 索引类型和度量类型。</p>
+<p>请从以下兼容性表格中选择 Milvus 索引类型和度量类型。</p>
 <h3 id="EmbeddingList-search" class="common-anchor-header">EmbeddingList 搜索<button data-href="#EmbeddingList-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -338,7 +338,7 @@ client.create_index(
 <li><p>仅在<code translate="no">MAX_SIM*</code> 上创建索引，然后尝试在同一子字段上执行元素级搜索。</p></li>
 <li><p>仅创建常规向量索引，随后却试图在同一子字段上执行 EmbeddingList 搜索。</p></li>
 <li><p>将同一个向量子字段同时用于<code translate="no">MAX_SIM*</code> 和常规向量度量。</p></li>
-<li><p>遗漏了针对高频使用的 StructArray 过滤器的标量索引。</p></li>
+<li><p>忽略了高频使用的 StructArray 过滤器对应的标量索引。</p></li>
 <li><p>为 Struct 模式中不存在的 StructArray 子字段创建索引。</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">后续步骤<button data-href="#Next-steps" class="anchor-icon" translate="no">

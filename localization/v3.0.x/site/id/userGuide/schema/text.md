@@ -29,7 +29,7 @@ beta: Milvus 3.0.x
 <span class="highlighted-wrapper-line">    datatype=DataType.TEXT,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Setelah bidang tersebut didefinisikan, setiap entitas dapat menyertakan nilai string di bidang tersebut. Anda dapat memasukkan nilai <code translate="no">TEXT</code> seperti halnya bidang skalar lainnya dan mengembalikannya dari hasil kueri atau pencarian dengan mencantumkan bidang tersebut dalam <code translate="no">output_fields</code>.</p>
+<p>Setelah bidang tersebut didefinisikan, setiap entitas dapat menyertakan nilai string di bidang tersebut. Anda dapat memasukkan nilai " <code translate="no">TEXT</code> " seperti halnya bidang skalar lainnya dan mengembalikannya dari hasil kueri atau pencarian dengan mencantumkan bidang tersebut dalam " <code translate="no">output_fields</code>".</p>
 <div class="alert note">
 <p><code translate="no">TEXT</code> Bidang mendukung nilai null. Untuk mengaktifkan fitur ini, atur <code translate="no">nullable</code> menjadi <code translate="no">True</code>. Untuk detailnya, lihat <a href="/docs/id/nullable-and-default.md">Bidang yang Dapat Bernilai Null</a>.</p>
 </div>
@@ -49,7 +49,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><ul>
-<li>Sebuah bidang ` <code translate="no">TEXT</code> ` tidak dapat dijadikan sebagai bidang utama. Bidang utama mendukung ` <code translate="no">INT64</code> ` dan ` <code translate="no">VARCHAR</code>`.</li>
+<li>Sebuah bidang ` <code translate="no">TEXT</code> ` tidak dapat dijadikan bidang utama. Bidang utama mendukung ` <code translate="no">INT64</code> ` dan ` <code translate="no">VARCHAR</code>`.</li>
 <li>Di Milvus 3.0.0, bidang <code translate="no">TEXT</code> tidak mendukung <code translate="no">PHRASE_MATCH</code>.</li>
 <li>Di Milvus 3.0.0, bidang <code translate="no">TEXT</code> tidak mendukung nilai default.</li>
 <li>Di Milvus 3.0.0, bidang <code translate="no">TEXT</code> tidak didukung dalam koleksi eksternal.</li>
@@ -242,7 +242,7 @@ client.load_collection(collection_name=COLLECTION_NAME)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Gunakan teks kueri mentah sebagai data pencarian dan lakukan pencarian terhadap bidang vektor spars. Milvus mengubah teks kueri menjadi vektor spars, menentukan peringkat kecocokan dengan BM25, dan mengembalikan bidang <code translate="no">TEXT</code> yang diminta dalam <code translate="no">output_fields</code>.</p>
+    </button></h2><p>Gunakan teks kueri mentah sebagai data pencarian dan lakukan pencarian terhadap bidang vektor langka. Milvus mengubah teks kueri menjadi vektor langka, menentukan peringkat kecocokan dengan BM25, dan mengembalikan bidang <code translate="no">TEXT</code> yang diminta dalam <code translate="no">output_fields</code>.</p>
 <pre><code translate="no" class="language-python">results = client.search(
     collection_name=COLLECTION_NAME,
 <span class="highlighted-comment-line">    data=[<span class="hljs-string">&quot;how does Milvus store source text for retrieval&quot;</span>],</span>

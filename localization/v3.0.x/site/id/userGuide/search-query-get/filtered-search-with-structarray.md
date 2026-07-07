@@ -96,7 +96,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Filter di atas hanya memilih entitas yang bidang tingkat atasnya ( <code translate="no">category</code> ) adalah <code translate="no">&quot;search&quot;</code>. Filter ini tidak mengidentifikasi satu elemen Struct yang cocok.</p>
+<p>Filter di atas hanya memilih entitas yang bidang tingkat atasnya <code translate="no">category</code> adalah <code translate="no">&quot;search&quot;</code>. Filter ini tidak mengidentifikasi satu elemen Struct yang cocok.</p>
 <h2 id="Filter-element-level-vector-search" class="common-anchor-header">Penyaringan pencarian vektor tingkat elemen<button data-href="#Filter-element-level-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -169,7 +169,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Gunakan operator <code translate="no">MATCH_*</code> ketika filter harus menentukan apakah entitas induk memenuhi syarat berdasarkan elemen Struct-nya. Operator ini merupakan filter tingkat baris: mereka memilih entitas, tetapi tidak mengembalikan offset elemen secara mandiri.</p>
+    </button></h2><p>Gunakan operator <code translate="no">MATCH_*</code> ketika filter harus menentukan apakah entitas induk memenuhi syarat berdasarkan elemen Struct-nya. Operator ini merupakan filter tingkat baris: mereka memilih entitas, tetapi tidak mengembalikan offset elemen secara langsung.</p>
 <table>
 <thead>
 <tr><th>Operator</th><th>Gunakan saat</th><th>Contoh</th></tr>
@@ -179,7 +179,7 @@ results = client.search(
 <tr><td><code translate="no">MATCH_ALL</code></td><td>Semua elemen Struct harus memenuhi predikat.</td><td><code translate="no">MATCH_ALL(chunks, $[quality_score] &gt; 0.5)</code></td></tr>
 <tr><td><code translate="no">MATCH_LEAST</code></td><td>Setidaknya <code translate="no">N</code> elemen Struct harus memenuhi predikat tersebut.</td><td><code translate="no">MATCH_LEAST(chunks, $[has_code] == true, threshold=2)</code></td></tr>
 <tr><td><code translate="no">MATCH_MOST</code></td><td>Paling banyak <code translate="no">N</code> elemen Struct harus memenuhi predikat tersebut.</td><td><code translate="no">MATCH_MOST(chunks, $[section] == &quot;appendix&quot;, threshold=1)</code></td></tr>
-<tr><td><code translate="no">MATCH_EXACT</code></td><td>Tepat <code translate="no">N</code> elemen Struct harus memenuhi predikat tersebut.</td><td><code translate="no">MATCH_EXACT(chunks, $[section] == &quot;summary&quot;, threshold=1)</code></td></tr>
+<tr><td><code translate="no">MATCH_EXACT</code></td><td>Tepat <code translate="no">N</code> elemen Struct harus memenuhi predikat.</td><td><code translate="no">MATCH_EXACT(chunks, $[section] == &quot;summary&quot;, threshold=1)</code></td></tr>
 </tbody>
 </table>
 <pre><code translate="no" class="language-python">filter_expr = (
@@ -253,7 +253,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Argumen ` <code translate="no">filter</code> ` menerapkan kondisi entitas tingkat atas, sedangkan ` <code translate="no">expr</code> ` pada ` <code translate="no">chunk_req</code> ` hanya membatasi permintaan vektor tingkat elemen StructArray. Untuk kombinasi pencarian hibrida yang didukung dan batasan khusus versi, lihat <a href="/docs/id/hybrid-search-with-structarray.md">Pencarian Hibrida dengan StructArray</a> dan <a href="/docs/id/structarray-limits.md">Batasan StructArray</a>.</p>
+<p>Argumen ` <code translate="no">filter</code> ` menerapkan kondisi entitas tingkat atas, sedangkan ` <code translate="no">expr</code> ` pada ` <code translate="no">chunk_req</code> ` hanya membatasi permintaan vektor tingkat elemen StructArray. Untuk kombinasi pencarian hibrida yang didukung dan batasan versi tertentu, lihat <a href="/docs/id/hybrid-search-with-structarray.md">Pencarian Hibrida dengan StructArray</a> dan <a href="/docs/id/structarray-limits.md">Batasan StructArray</a>.</p>
 <h2 id="Predicate-support-summary" class="common-anchor-header">Ringkasan dukungan predikat<button data-href="#Predicate-support-summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -303,7 +303,7 @@ results = client.hybrid_search(
 <li><p>Menggunakan <code translate="no">chunks.section</code> alih-alih sintaks operator StructArray seperti <code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code>.</p></li>
 <li><p>Menggunakan <code translate="no">element_filter</code> saat Anda hanya memerlukan penyaringan tingkat baris. Gunakan <code translate="no">MATCH_ANY</code> sebagai gantinya jika Anda hanya perlu memilih entitas.</p></li>
 <li><p>Mengharapkan <code translate="no">MATCH_*</code> mengembalikan offset elemen. Operator-operator ini memilih entitas dan tidak mengidentifikasi satu elemen yang cocok secara mandiri.</p></li>
-<li><p>Menulis predikat boolean tanpa operator, seperti <code translate="no">$[has_code]</code>. Gunakan perbandingan eksplisit seperti <code translate="no">$[has_code] == true</code>.</p></li>
+<li><p>Menulis predikat boolean tanpa operator seperti <code translate="no">$[has_code]</code>. Gunakan perbandingan eksplisit seperti <code translate="no">$[has_code] == true</code>.</p></li>
 <li><p>Menempatkan ` <code translate="no">element_filter</code> ` sebelum predikat tingkat atas dalam ekspresi filter yang sama.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Langkah selanjutnya<button data-href="#Next-steps" class="anchor-icon" translate="no">

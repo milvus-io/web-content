@@ -51,7 +51,7 @@ summary: >-
 <ul>
 <li><p>تستخدم كل مثيل من Milvus قائمة انتظار رسائل واحدة فقط.</p></li>
 <li><p><strong>قيود قائمة انتظار الرسائل</strong>: عند الترقية إلى Milvus v3.0-beta، يجب الحفاظ على اختيارك الحالي لقائمة انتظار الرسائل. لا يُدعم التبديل بين أنظمة قوائم انتظار الرسائل المختلفة أثناء الترقية. سيتوفر دعم تغيير أنظمة قوائم انتظار الرسائل في الإصدارات المستقبلية.</p></li>
-<li><p>لتغيير قائمة انتظار الرسائل لمثيل قيد التشغيل، راجع <a href="/docs/ar/switch-mq-type.md">«تبديل نوع قائمة انتظار الرسائل</a>». تتوفر ميزة «تبديل قائمة انتظار الرسائل» في <strong>Milvus 3.0 والإصدارات الأحدث</strong> — قم بالترقية إلى Milvus 3.0 أو إصدار أحدث أولاً.</p></li>
+<li><p>لتغيير قائمة انتظار الرسائل لمثيل قيد التشغيل، راجع <a href="/docs/ar/switch-mq-type.md">"تبديل نوع قائمة انتظار الرسائل</a>". تتوفر ميزة "تبديل قائمة انتظار الرسائل" في <strong>Milvus 3.0 والإصدارات الأحدث</strong> — قم أولاً بالترقية إلى Milvus 3.0 أو إصدار أحدث.</p></li>
 </ul>
 </div>
 <h2 id="Choosing-a-message-queue" class="common-anchor-header">اختيار قائمة انتظار الرسائل<button data-href="#Choosing-a-message-queue" class="anchor-icon" translate="no">
@@ -70,7 +70,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>عمليات النشر الجديدة (Milvus 3.x):</strong> استخدم <strong>Woodpecker</strong> (الافتراضي). يتم تشغيله مدمجًا في الإصدار المستقل؛ أما بالنسبة للإصدار الموزع (المجموعة)، فإن الإعداد الافتراضي الموصى به هو <a href="/docs/ar/woodpecker.md#Deployment-modes">خدمة</a> مخصصة يتم نشرها باستخدام Helm، كما يتم دعم التشغيل المدمج أيضًا.</li>
+<li><strong>عمليات النشر الجديدة (Milvus 3.x):</strong> استخدم <strong>Woodpecker</strong> (الافتراضي). يتم تشغيله مدمجًا في الإصدار المستقل؛ أما بالنسبة للإصدار الموزع (العنقودي)، فإن الإعداد الافتراضي الموصى به هو <a href="/docs/ar/woodpecker.md#Deployment-modes">خدمة</a> مخصصة يتم نشرها باستخدام Helm، كما يتم دعم التشغيل المدمج أيضًا.</li>
 <li><strong>مستخدمو Pulsar أو Kafka الحاليون:</strong> لا يزال كل من Pulsar و Kafka مدعومين بالكامل. احتفظ بهما، أو <a href="/docs/ar/switch-mq-type.md">قم بالتبديل إلى Woodpecker</a>.</li>
 <li><strong>RocksMQ:</strong> متاح في الإصدار المستقل فقط، وقد حلت محلها خدمة Woodpecker المدمجة في Milvus 3.x.</li>
 </ul>

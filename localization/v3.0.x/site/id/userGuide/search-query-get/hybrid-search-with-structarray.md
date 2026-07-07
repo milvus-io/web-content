@@ -156,7 +156,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><p>Ketika semua objek ` <code translate="no">AnnSearchRequest</code> ` menargetkan subbidang vektor tingkat elemen di bawah bidang `StructArray` yang sama, pencarian hibrida dapat mempertahankan kandidat tingkat elemen melalui penataan ulang peringkat. Ini adalah satu-satunya mode hibrida `StructArray` di mana hasil akhir tetap berada pada tingkat elemen.</p>
-<p>Contoh berikut mengasumsikan bidang StructArray <code translate="no">chunks</code> memiliki dua subbidang vektor tingkat elemen, <code translate="no">chunks[emb]</code> dan <code translate="no">chunks[code_emb]</code>, dan keduanya menggunakan metrik vektor reguler.</p>
+<p>Contoh berikut mengasumsikan bidang StructArray ` <code translate="no">chunks</code> ` memiliki dua subbidang vektor tingkat elemen, ` <code translate="no">chunks[emb]</code> ` dan ` <code translate="no">chunks[code_emb]</code>`, dan keduanya menggunakan metrik vektor reguler.</p>
 <pre><code translate="no">index_chunk_req = AnnSearchRequest(
     data=[query_vector],
     anns_field=<span class="hljs-string">&quot;chunks[emb]&quot;</span>,
@@ -250,7 +250,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Dalam contoh ini, ` <code translate="no">title_req</code> ` berada pada tingkat entitas, sehingga hasil hibrida akhir juga berada pada tingkat entitas. Permintaan ` <code translate="no">chunk_req</code> ` terlebih dahulu mengembalikan hasil elemen dari ` <code translate="no">chunks[emb]</code>`, kemudian menggabungkan elemen yang dikembalikan dari entitas yang sama dengan menjumlahkan tiga skor elemen terbaik. Jika ` <code translate="no">element_scope</code> ` diabaikan saat penggabungan tingkat entitas diperlukan, strategi penggabungan secara default akan menggunakan ` <code translate="no">max</code>`.</p>
+<p>Dalam contoh ini, ` <code translate="no">title_req</code> ` berada pada tingkat entitas, sehingga hasil hibrida akhir juga berada pada tingkat entitas. Permintaan ` <code translate="no">chunk_req</code> ` terlebih dahulu mengembalikan hasil elemen dari ` <code translate="no">chunks[emb]</code>`, kemudian menggabungkan elemen-elemen yang dikembalikan dari entitas yang sama dengan menjumlahkan tiga skor elemen terbaik. Jika ` <code translate="no">element_scope</code> ` diabaikan saat penggabungan tingkat entitas diperlukan, strategi penggabungan secara default akan menggunakan ` <code translate="no">max</code>`.</p>
 <h2 id="Choose-a-collapse-strategy" class="common-anchor-header">Pilih strategi penggabungan<button data-href="#Choose-a-collapse-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -341,7 +341,7 @@ results = client.hybrid_search(
 <li><p>Jangan gunakan <code translate="no">element_scope</code> untuk permintaan EmbeddingList, permintaan vektor tingkat koleksi, atau pencarian hibrida tingkat elemen StructArray yang sama.</p></li>
 <li><p><code translate="no">sum</code> dan strategi penggabungan <code translate="no">topk_sum</code> memerlukan metrik korelasi positif, seperti <code translate="no">IP</code> atau <code translate="no">COSINE</code>. Jangan gunakan metrik tersebut dengan <code translate="no">L2</code>.</p></li>
 <li><p><code translate="no">topk_sum</code> dan <code translate="no">topk_avg</code> memerlukan nilai <code translate="no">topk</code> yang positif. Strategi penggabungan lainnya tidak boleh menyertakan <code translate="no">topk</code>.</p></li>
-<li><p>Permintaan StructArray tingkat EmbeddingList tidak mendukung pencarian rentang atau pengelompokan berdasarkan grup.</p></li>
+<li><p>Permintaan StructArray tingkat EmbeddingList tidak mendukung pencarian rentang atau pengelompokan berdasarkan (group-by).</p></li>
 <li><p>Pengelompokan hibrida hanya didukung untuk pencarian hibrida tingkat elemen StructArray yang sama dan hanya berdasarkan kunci utama.</p></li>
 <li><p>Jangan menggabungkan pencarian rentang dengan pengelompokan.</p></li>
 </ul>
@@ -363,7 +363,7 @@ results = client.hybrid_search(
     </button></h2><ul>
 <li><p>Menambahkan ` <code translate="no">element_scope</code> ` ke permintaan hibrida tingkat elemen `StructArray` yang sama. Permintaan tersebut tetap berada di tingkat elemen dan tidak melakukan penggabungan (collapse) di tingkat entitas.</p></li>
 <li><p>Menambahkan ` <code translate="no">element_scope</code> ` ke ` <code translate="no">chunks[emb_list_vector]</code>`. Pencarian `EmbeddingList` sudah berada di tingkat entitas.</p></li>
-<li><p>Mengasumsikan dua bidang StructArray berbagi offset elemen. Offset ` <code translate="no">3</code> ` dalam ` <code translate="no">chunks</code> ` dan offset ` <code translate="no">3</code> ` dalam bidang StructArray lain merupakan elemen yang berbeda, sehingga permintaan hibrida menjadi tingkat entitas.</p></li>
+<li><p>Mengasumsikan dua bidang StructArray berbagi offset elemen. Offset ` <code translate="no">3</code> ` di ` <code translate="no">chunks</code> ` dan offset ` <code translate="no">3</code> ` di bidang StructArray lain merupakan elemen yang berbeda, sehingga permintaan hibrida menjadi tingkat entitas.</p></li>
 <li><p>Gunakan <code translate="no">topk_sum</code> dengan <code translate="no">L2</code>. Gunakan <code translate="no">max</code>, <code translate="no">avg</code>, atau <code translate="no">topk_avg</code> untuk metrik jarak negatif.</p></li>
 <li><p>Diharapkan hasil hibrida tingkat entitas mencakup offset elemen Struct yang dipilih setelah penggabungan.</p></li>
 </ul>
@@ -384,7 +384,7 @@ results = client.hybrid_search(
       </svg>
     </button></h2><ol>
 <li><p>Untuk mempelajari dua mode pencarian vektor StructArray dasar, baca <a href="/docs/id/basic-vector-search-with-structarray.md">Pencarian Vektor Dasar dengan StructArray</a>.</p></li>
-<li><p>Untuk menambahkan filter skalar ke pencarian hibrida, baca " <a href="/docs/id/filtered-search-with-structarray.md">Pencarian Terfilter dengan StructArray</a>".</p></li>
+<li><p>Untuk menambahkan filter skalar ke pencarian hibrida, baca " <a href="/docs/id/filtered-search-with-structarray.md">Pencarian yang Difilter dengan StructArray</a>".</p></li>
 <li><p>Untuk menggunakan batas skor atau jarak dalam pencarian hibrida, baca " <a href="/docs/id/range-search-with-structarray.md">Pencarian Rentang dengan StructArray</a>".</p></li>
 <li><p>Untuk mengelompokkan hasil pencarian hibrida tingkat elemen berdasarkan entitas induk, baca " <a href="/docs/id/grouping-search-with-structarray.md">Pengelompokan Pencarian dengan StructArray</a>".</p></li>
 <li><p>Untuk memeriksa batasan pencarian StructArray, baca " <a href="/docs/id/structarray-limits.md">Batasan StructArray</a>".</p></li>

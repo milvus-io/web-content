@@ -380,7 +380,7 @@ client.add_collection_struct_field(
 <tr><td>벡터 하위 필드 하나당 인덱스는 하나만 있어야 합니다.</td><td>EmbeddingList 검색과 요소 수준 검색이 모두 필요한 경우, 두 개의 별도 벡터 하위 필드를 생성하십시오.</td></tr>
 <tr><td>기존 StructArray 하위 필드는 고정되어 있습니다.</td><td>StructArray 필드를 생성한 후에는 동일한 StructArray 필드에 하위 필드를 더 추가할 수 없습니다.</td></tr>
 <tr><td>Struct 내부에서는 함수가 지원되지 않습니다.</td><td>StructArray 필드 내의 필드나 하위 필드에 대한 함수를 정의하지 마십시오.</td></tr>
-<tr><td>스칼라 하위 필드는 필터 요구 사항과 일치해야 합니다.</td><td><code translate="no">section</code>, <code translate="no">quality_score</code> 또는 <code translate="no">has_code</code> 와 같은 필드는 나중에 필터링, 그룹화 또는 출력이 필요한 경우에만 추가하십시오.</td></tr>
+<tr><td>스칼라 하위 필드는 필터 요구 사항에 부합해야 합니다.</td><td><code translate="no">section</code>, <code translate="no">quality_score</code> 또는 <code translate="no">has_code</code> 와 같은 필드는 나중에 필터링, 그룹화 또는 출력이 필요한 경우에만 추가하십시오.</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">흔히 저지르는 실수<button data-href="#Common-mistakes" class="anchor-icon" translate="no">

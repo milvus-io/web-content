@@ -37,7 +37,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>本页面使用名为<code translate="no">tech_articles</code> 的Collection。每个实体代表一篇技术文章，而<code translate="no">chunks</code> 字段将以Struct元素的形式存储块级数据。</p>
+    </button></h2><p>本页面使用名为<code translate="no">tech_articles</code> 的Collection。每个实体代表一篇技术文章，而<code translate="no">chunks</code> 字段将块级数据作为Struct元素进行存储。</p>
 <table>
 <thead>
 <tr><th>字段</th><th>类型</th><th>用途</th></tr>
@@ -66,7 +66,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>向量字段或向量子字段仅接受一个索引。如果您同时需要 EmbeddingList 搜索和元素级搜索，请定义两个独立的向量子字段。在此示例中，<code translate="no">chunks[emb_list_vector]</code> 用于 EmbeddingList 搜索，<code translate="no">chunks[emb]</code> 用于元素级搜索。</p>
+<p>向量字段或向量子字段仅接受一个索引。如果您同时需要 EmbeddingList 搜索和元素级搜索，请定义两个独立的向量子字段。在此示例中，<code translate="no">chunks[emb_list_vector]</code> 用于 EmbeddingList 搜索，而<code translate="no">chunks[emb]</code> 用于元素级搜索。</p>
 </div>
 <h2 id="Supported-subfield-data-types" class="common-anchor-header">支持的子字段数据类型<button data-href="#Supported-subfield-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -83,7 +83,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>StructArray 字段为每个 Struct 子字段存储一个数组值。定义 Struct Schema 时，请从支持的标量和向量类型族中选择子字段类型。</p>
+    </button></h2><p>StructArray 字段为每个 Struct 子字段存储一个数组值。定义 Struct Schema 时，请从支持的标量和向量类型家族中选择子字段类型。</p>
 <table>
 <thead>
 <tr><th>Struct 子字段的物理类型</th><th>支持</th><th>备注</th></tr>
@@ -98,7 +98,7 @@ summary: >-
 <tr><td><code translate="no">ArrayOfVector</code></td><td>受支持</td><td>将子字段定义为<code translate="no">DataType.BFLOAT16_VECTOR</code> ，并设置<code translate="no">dim</code> 。</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>受支持</td><td>将子字段定义为<code translate="no">DataType.INT8_VECTOR</code> ，并设置<code translate="no">dim</code> 。</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>受支持</td><td>将子字段定义为<code translate="no">DataType.BINARY_VECTOR</code> ，并设置<code translate="no">dim</code> 。</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>不支持</td><td>StructArray 字段不支持稀疏向量子字段。</td></tr>
+<tr><td><code translate="no">ArrayOfVector</code></td><td>不支持</td><td>StructArray 字段不支持稀疏向量子场。</td></tr>
 <tr><td><code translate="no">Array</code></td><td>不支持</td><td>请使用 `<code translate="no">VARCHAR</code>`，而非 `<code translate="no">String</code>`。</td></tr>
 <tr><td><code translate="no">Array</code></td><td>不支持</td><td>StructArray 字段不支持 JSON 子字段。</td></tr>
 <tr><td><code translate="no">Array</code></td><td>不支持</td><td>StructArray 字段不支持几何子字段和 GIS 函数。</td></tr>
@@ -275,7 +275,7 @@ client.create_collection(
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>警告
-可空的 StructArray 字段仅在 Milvus v3.0.x 中可用。对于可空的 StructArray 字段，实体可以提供有效的 StructArray 值，也可以将整个字段设置为 `<code translate="no">null</code>`。插入有效的 StructArray 值时，所有子字段应均为空或具有有效值。 若插入的实体中部分子字段设置为 null 而其他子字段设置为有效值，将导致错误。详情请参阅<a href="/docs/zh/structarray-limits.md">StructArray 限制</a>。</p>
+可空的 StructArray 字段仅在 Milvus v3.0.x 中可用。对于可空的 StructArray 字段，实体可以提供有效的 StructArray 值，也可以将整个字段设置为 `<code translate="no">null</code>`。插入有效的 StructArray 值时，所有子字段应均为空或具有有效值。 若插入的实体中部分子字段设置为 null 而其他子字段设置为有效值，将导致错误。详情请参阅《<a href="/docs/zh/structarray-limits.md">StructArray 限制</a>》。</p>
 </div>
 <h2 id="Add-a-StructArray-field-to-an-existing-collection" class="common-anchor-header">向现有 Collection 添加 StructArray 字段<button data-href="#Add-a-StructArray-field-to-an-existing-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -292,7 +292,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus v3.0.x 支持向现有 Collection 添加 StructArray 字段。所添加的 StructArray 字段必须为可为空的，因为 Collection 中已存在的实体对于新字段尚无值。</p>
+    </button></h2><p>Milvus v3.0.x 支持向现有 Collection 添加 StructArray 字段。所添加的 StructArray 字段必须为可为空的，因为 Collection 中已存在的实体不具备该新字段的值。</p>
 <p>要向现有 Collection 添加 StructArray 字段，请先定义 Struct Schema。然后调用 `<code translate="no">add_collection_struct_field()</code> ` 并设置 `<code translate="no">nullable=True</code>`。</p>
 <pre><code translate="no" class="language-python">chunk_schema = client.create_struct_field_schema()
 chunk_schema.add_field(
@@ -371,7 +371,7 @@ client.add_collection_struct_field(
 <tr><th>规则</th><th>说明</th></tr>
 </thead>
 <tbody>
-<tr><td>Struct 用作数组元素类型。</td><td>使用<code translate="no">element_type=STRUCT</code> 将 StructArray 字段创建为数组字段。请勿将 Struct 创建为顶级 Collection 字段。</td></tr>
+<tr><td>Struct 用作数组元素类型。</td><td>使用<code translate="no">element_type=STRUCT</code> 将 StructArray 字段作为数组字段创建。请勿将 Struct 作为顶级 Collection 字段创建。</td></tr>
 <tr><td>所有元素共享一个Schema。</td><td>同一 StructArray 字段中的每个 Struct 元素均遵循为该字段定义的 Struct Schema。</td></tr>
 <tr><td><code translate="no">max_capacity</code> 是必需的。</td><td>它限制了每个实体可以在 StructArray 字段中存储的 Struct 元素数量。</td></tr>
 <tr><td>仅允许使用受支持的子字段类型。</td><td>请使用 StructArray 支持的标量和向量字段类型。请勿定义 JSON、Geometry、Text、Timestamptz、SparseFloatVector 或嵌套的 Struct / Array 子字段。</td></tr>
@@ -402,7 +402,7 @@ client.add_collection_struct_field(
 <li><p>忘记在 StructArray 字段上设置<code translate="no">max_capacity</code> 。</p></li>
 <li><p>定义了不受支持的子字段类型，例如 JSON、Geometry、Text、Timestamptz、SparseFloatVector、嵌套 Array、嵌套 Struct 或 Array-of-Struct。</p></li>
 <li><p>将<code translate="no">String</code> 用作子字段类型。请使用<code translate="no">VARCHAR</code> 并设置<code translate="no">max_length</code> 。</p></li>
-<li><p>将同一个向量子字段同时用于 EmbeddingList 搜索和元素级搜索。</p></li>
+<li><p>将同一个向量子场同时用于 EmbeddingList 搜索和元素级搜索。</p></li>
 <li><p>仅添加向量子字段，而忽略用于过滤所需的标量子字段，例如<code translate="no">section</code> 、<code translate="no">quality_score</code> 或<code translate="no">has_code</code> 。</p></li>
 <li><p>将向量字段视为<code translate="no">$[...]</code> 的标量谓词输入。使用向量字段进行向量搜索，使用标量子字段进行标量谓词搜索。</p></li>
 <li><p>假设在 StructArray 字段创建后，可以向其添加新的子字段。</p></li>

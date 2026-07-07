@@ -133,7 +133,7 @@ title: 脉冲星
       </svg>
     </button></h3><pre><code translate="no" class="language-bash">helm uninstall my-release
 <button class="copy-code-btn"></button></code></pre>
-<p>若您使用了内置的 Pulsar 并希望清除其持久化数据，请删除 Pulsar PVC（名称为<code translate="no">my-release-pulsarv3-*</code> ）：</p>
+<p>若您使用了内置的 Pulsar 并希望删除其持久化数据，请删除 Pulsar PVC（名为<code translate="no">my-release-pulsarv3-*</code> ）：</p>
 <pre><code translate="no" class="language-bash">kubectl get pvc | grep my-release-pulsarv3
 kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <button class="copy-code-btn"></button></code></pre>

@@ -2,7 +2,7 @@
 id: pattern-matching.md
 title: 模式匹配
 summary: >-
-  Milvus 支持使用 LIKE 通配符模式和 RE2 正则表达式进行字符串模式匹配。可使用模式过滤器，在 VARCHAR 字段、JSON 字符串路径或
+  Milvus 支持使用 LIKE 通配符模式和 RE2 正则表达式进行字符串模式匹配。可使用模式过滤器在 VARCHAR 字段、JSON 字符串路径或
   ARRAY 元素中匹配前缀、后缀、子字符串、结构化代码、电子邮件域名、URL 路径及其他字符串模式。
 ---
 <h1 id="Pattern-Matching" class="common-anchor-header">模式匹配<button data-href="#Pattern-Matching" class="anchor-icon" translate="no">
@@ -33,7 +33,7 @@ res = client.query(
     output_fields=[<span class="hljs-string">&quot;message&quot;</span>, <span class="hljs-string">&quot;severity&quot;</span>],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>本页面的示例重点介绍分配给 `<code translate="no">filter</code>` 的表达式。在支持标量过滤器的 Milvus 操作中（例如 `<code translate="no">query</code>`、`<code translate="no">search</code>` 和混合搜索），您可以使用相同的过滤表达式语法。</p>
+<p>本页面的示例重点介绍分配给 `<code translate="no">filter</code>` 的表达式。在支持标量过滤器的 Milvus 操作中（例如 `<code translate="no">query</code>`、`<code translate="no">search</code>` 和混合搜索），您可以使用相同的过滤器表达式语法。</p>
 <h2 id="Supported-field-types" class="common-anchor-header">支持的字段类型<button data-href="#Supported-field-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -77,7 +77,7 @@ res = client.query(
         ></path>
       </svg>
     </button></h2><p>请选择能表达所需模式的最简单操作符。</p>
-<p>如果您需要精确的字符串匹配，建议使用<code translate="no">==</code> 而非模式匹配。仅当过滤器需要匹配特定模式时，才使用<code translate="no">LIKE</code> 或regex。</p>
+<p>如果您需要精确的字符串匹配，建议使用<code translate="no">==</code> 而非模式匹配。仅当过滤器需要匹配特定模式时，才使用<code translate="no">LIKE</code> 或正则表达式。</p>
 <table>
 <thead>
 <tr><th>要求</th><th>推荐操作符</th><th>示例</th><th>说明</th></tr>
@@ -183,7 +183,7 @@ res = client.query(
 <li><code translate="no">name LIKE r&quot;\_%&quot;</code> 匹配以字面量<code translate="no">_</code> 开头的值。</li>
 <li><code translate="no">name LIKE r&quot;\\%&quot;</code> 匹配以字面量反斜杠开头的值。</li>
 </ul>
-<p>原始字符串字面量（写法为<code translate="no">r&quot;...&quot;</code> 或<code translate="no">r'...'</code> ）会在 Milvus 过滤器表达式中原样保留反斜杠。建议在<code translate="no">LIKE</code> 以及包含反斜杠的正则表达式模式中使用它们。如果不使用原始字符串，普通字符串字面量在评估模式之前仍会处理转义序列，因此可能需要添加更多反斜杠。</p>
+<p>原始字符串字面量（写法为<code translate="no">r&quot;...&quot;</code> 或<code translate="no">r'...'</code> ）在 Milvus 过滤器表达式中会原样保留反斜杠。建议在<code translate="no">LIKE</code> 以及包含反斜杠的正则表达式模式中使用它们。如果不使用原始字符串，普通字符串字面量在评估模式之前仍会处理转义序列，因此可能需要添加更多反斜杠。</p>
 <h2 id="Use-regex--Milvus-30x" class="common-anchor-header">使用正则表达式<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Use-regex--Milvus-30x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

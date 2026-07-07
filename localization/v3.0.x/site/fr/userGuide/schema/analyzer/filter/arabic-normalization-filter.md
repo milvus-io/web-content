@@ -117,7 +117,7 @@ beta: Milvus 3.0.0+
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;arabic_normalization&quot;</span>],
 }
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Vérification à l’aide de <code translate="no">run_analyzer</code><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
+<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Vérification à l'aide de <code translate="no">run_analyzer</code><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

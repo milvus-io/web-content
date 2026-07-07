@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Utilizza questa pagina per eseguire una ricerca vettoriale sui sottocampi vettoriali all'interno di un campo StructArray. StructArray supporta due modalità di ricerca vettoriale di base: la ricerca EmbeddingList, che valuta un elenco di embedding memorizzato in ciascuna entità, e la ricerca a livello di elemento, che esegue la ricerca su ciascun elemento Struct in modo indipendente.</p>
+    </button></h1><p>Utilizza questa pagina per eseguire una ricerca vettoriale sui sottocampi vettoriali all'interno di un campo StructArray. StructArray supporta due modalità di ricerca vettoriale di base: la ricerca EmbeddingList, che valuta un elenco di embedding memorizzato in ciascuna entità, e la ricerca a livello di elemento, che effettua la ricerca su ciascun elemento Struct in modo indipendente.</p>
 <p>Questa pagina utilizza la raccolta " <code translate="no">tech_articles</code> " descritta nella sezione <a href="/docs/it/create-structarray-field.md">"Creazione di un campo StructArray</a>". La raccolta presenta un campo StructArray denominato " <code translate="no">chunks</code>". Ogni chunk contiene testo, metadati scalari, un sottocampo vettoriale denominato " <code translate="no">emb_list_vector</code> " con un indice per la ricerca EmbeddingList e un sottocampo vettoriale denominato " <code translate="no">emb</code> " con un indice per la ricerca a livello di elemento.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Prima di iniziare<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -178,7 +178,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>Nella ricerca a livello di elemento, ogni risultato rappresenta un elemento Struct corrispondente. Il valore " <code translate="no">offset</code> " è la posizione, a partire da zero, di quell’elemento nel campo StructArray. La stessa entità può comparire più di una volta se più di un elemento Struct corrisponde alla query. Il valore " <code translate="no">limit</code> " si applica ai risultati a livello di elemento, non alle entità principali univoche.</p>
+<p>Nella ricerca a livello di elemento, ogni risultato rappresenta un elemento Struct corrispondente. Il valore " <code translate="no">offset</code> " è la posizione, a partire da zero, di quell’elemento nel campo StructArray. La stessa entità può apparire più di una volta se più di un elemento Struct corrisponde alla query. Il valore " <code translate="no">limit</code> " si applica ai risultati a livello di elemento, non alle entità padre univoche.</p>
 <h2 id="Interpret-results" class="common-anchor-header">Interpretazione dei risultati<button data-href="#Interpret-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -200,7 +200,7 @@ results = client.search(
 </thead>
 <tbody>
 <tr><td><code translate="no">id</code></td><td>Chiave primaria dell’entità corrispondente.</td><td>Chiave primaria dell'entità che contiene l'elemento Struct corrispondente.</td></tr>
-<tr><td><code translate="no">distance</code> o punteggio</td><td>Punteggio o distanza tra l'elenco di embedding della query e l'elenco di embedding memorizzato.</td><td>Punteggio o distanza tra il vettore della query e il vettore dell’elemento Struct corrispondente.</td></tr>
+<tr><td><code translate="no">distance</code> o punteggio</td><td>Punteggio o distanza tra l'elenco di embedding della query e l'elenco di embedding memorizzato.</td><td>Punteggio o distanza tra il vettore della query e il vettore dell’elemento Struct trovato.</td></tr>
 <tr><td><code translate="no">offset</code></td><td>Non applicabile.</td><td>Posizione a partire da zero dell'elemento Struct corrispondente al momento della restituzione.</td></tr>
 <tr><td>Chiavi primarie ripetute</td><td>Non previsto per una singola query poiché i risultati sono a livello di entità.</td><td>Possibile, poiché più elementi Struct nella stessa entità possono corrispondere.</td></tr>
 <tr><td>Campi di output StructArray richiesti</td><td>Restituiti dall’entità corrispondente.</td><td>Restituiti con la forma di corrispondenza a livello di elemento supportata dall’API e dall’SDK di destinazione.</td></tr>
@@ -222,7 +222,7 @@ results = client.search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Utilizzo di " <code translate="no">chunks.emb</code> " invece della sintassi richiesta per il percorso del sottocampo " <code translate="no">chunks[emb]</code>".</p></li>
+<li><p>Utilizzo di " <code translate="no">chunks.emb</code> " anziché della sintassi richiesta per il percorso del sottocampo " <code translate="no">chunks[emb]</code>".</p></li>
 <li><p>Utilizzo di una query EmbeddingList su un sottocampo vettoriale indicizzato con una metrica vettoriale regolare.</p></li>
 <li><p>Utilizzo di una query vettoriale regolare su un sottocampo vettoriale indicizzato con una metrica <code translate="no">MAX_SIM*</code>.</p></li>
 <li><p>Aspettarsi che la ricerca a livello di elemento <code translate="no">limit</code> restituisca altrettante entità padre univoche. Restituisce invece i risultati a livello di elemento.</p></li>
