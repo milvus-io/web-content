@@ -12,7 +12,7 @@ Milvus provides a rich set of basic operators to help you filter and query data 
 
 Comparison operators are used to filter data based on equality, inequality, or size. They are applicable to numeric and text fields.
 
-### Supported Comparison Operators:
+### Supported comparison operators
 
 - `==` (Equal to)
 
@@ -26,7 +26,7 @@ Comparison operators are used to filter data based on equality, inequality, or s
 
 - `<=` (Less than or equal to)
 
-### Example 1: Filtering with Equal To (`==`)
+### Example 1: Filtering with equal to (`==`)
 
 Assume you have a field named `status` and you want to find all entities where `status` is "active". You can use the equality operator `==`:
 
@@ -34,7 +34,7 @@ Assume you have a field named `status` and you want to find all entities where `
 filter = 'status == "active"'
 ```
 
-### Example 2: Filtering with Not Equal To (`!=`)
+### Example 2: Filtering with not equal to (`!=`)
 
 To find entities where `status` is not "inactive":
 
@@ -42,7 +42,7 @@ To find entities where `status` is not "inactive":
 filter = 'status != "inactive"'
 ```
 
-### Example 3: Filtering with Greater Than (`>`)
+### Example 3: Filtering with greater than (`>`)
 
 If you want to find all entities with an `age` greater than 30:
 
@@ -50,7 +50,7 @@ If you want to find all entities with an `age` greater than 30:
 filter = 'age > 30'
 ```
 
-### Example 4: Filtering with Less Than
+### Example 4: Filtering with less than
 
 To find entities where `price` is less than 100:
 
@@ -58,7 +58,7 @@ To find entities where `price` is less than 100:
 filter = 'price < 100'
 ```
 
-### Example 5: Filtering with Greater Than or Equal To (`>=`)
+### Example 5: Filtering with greater than or equal to (`>=`)
 
 If you want to find all entities with `rating` greater than or equal to 4:
 
@@ -66,7 +66,7 @@ If you want to find all entities with `rating` greater than or equal to 4:
 filter = 'rating >= 4'
 ```
 
-### Example 6: Filtering with Less Than or Equal To
+### Example 6: Filtering with less than or equal to
 
 To find entities with `discount` less than or equal to 10%:
 
@@ -116,11 +116,11 @@ filter = 'message !~ "^DEBUG"'
 
 For more details about choosing between `LIKE` and regex, supported field types, regex syntax, escaping rules, and performance, refer to [Pattern Matching](pattern-matching.md). Milvus also allows you to build an `NGRAM` index on `VARCHAR` fields or JSON string paths to accelerate eligible pattern matching filters. For details, refer to [NGRAM](ngram.md).
 
-## Arithmetic Operators
+## Arithmetic operators
 
 Arithmetic operators allow you to create conditions based on calculations involving numeric fields.
 
-### Supported Arithmetic Operators:
+### Supported arithmetic operators
 
 - `+` (Addition)
 
@@ -134,7 +134,7 @@ Arithmetic operators allow you to create conditions based on calculations involv
 
 - `**` (Exponentiation)
 
-### Example 1: Using Modulus (`%`)
+### Example 1: Using modulus (`%`)
 
 To find entities where the `id` is an even number (i.e., divisible by 2):
 
@@ -142,7 +142,7 @@ To find entities where the `id` is an even number (i.e., divisible by 2):
 filter = 'id % 2 == 0'
 ```
 
-### Example 2: Using Exponentiation (`**`)
+### Example 2: Using exponentiation (`**`)
 
 To find entities where `price` raised to the power of 2 is greater than 1000:
 
@@ -150,11 +150,62 @@ To find entities where `price` raised to the power of 2 is greater than 1000:
 filter = 'price ** 2 > 1000'
 ```
 
-## Logical Operators
+## Bitwise operators | Milvus 3.0.0+
+
+Bitwise operators are useful when an integer field encodes multiple flags, such as permissions, feature flags, or status bits. You can use these operators in filter expressions to check, combine, or compare individual bits in an integer value.
+
+For scalar fields, bitwise operators apply to integer field types, such as `INT8`, `INT16`, `INT32`, and `INT64`.
+
+### Supported bitwise operators
+
+| Operator | Name | Typical use |
+| --- | --- | --- |
+| `&` | Bitwise AND | Check whether specific bits are set. |
+| <code>&#124;</code> | Bitwise OR | Combine bits before comparison. |
+| `^` | Bitwise XOR | Compare bit differences between two values. |
+
+### Example: Filtering by permission bits
+
+Assume you have an integer field named `permissions`, and each bit in the integer represents a permission flag:
+
+| Permission flag | Bit value |
+| --- | --- |
+| `READ` | `1` |
+| `WRITE` | `2` |
+| `SHARE` | `4` |
+| `ADMIN` | `8` |
+
+For example, `permissions = 5` means that the `READ` and `SHARE` bits are set, because `5 = 1 + 4`.
+
+To find entities where the `SHARE` bit is set, use bitwise AND (`&`):
+
+```python
+filter = "(permissions & 4) == 4"
+```
+
+To find entities where setting the `WRITE` bit produces the `READ + WRITE + SHARE` permission set, use bitwise OR (`|`):
+
+```python
+filter = "(permissions | 2) == 7"
+```
+
+To find entities whose permission bits differ from `READ + WRITE + SHARE` by only the `WRITE` bit, use bitwise XOR (`^`):
+
+```python
+filter = "(permissions ^ 7) == 2"
+```
+
+<div class="alert note">
+
+Always wrap the bitwise operation in parentheses before comparing the result, such as `(permissions & 4) == 4`. Milvus 3.0.0 supports `&`, `|`, and `^` in filter expressions. Bitwise NOT (`~`) and shift operators (`<<` and `>>`) are not supported.
+
+</div>
+
+## Logical operators
 
 Logical operators are used to combine multiple conditions into a more complex filter expression. These include `AND`, `OR`, and `NOT`.
 
-### Supported Logical Operators:
+### Supported logical operators
 
 - `AND`: Combines multiple conditions that must all be true.
 
@@ -162,7 +213,7 @@ Logical operators are used to combine multiple conditions into a more complex fi
 
 - `NOT`: Negates a condition.
 
-### Example 1: Using `AND` to Combine Conditions
+### Example 1: Using `AND` to combine conditions
 
 To find all products where `price` is greater than 100 and `stock` is greater than 50:
 
@@ -170,7 +221,7 @@ To find all products where `price` is greater than 100 and `stock` is greater th
 filter = 'price > 100 AND stock > 50'
 ```
 
-### Example 2: Using `OR` to Combine Conditions
+### Example 2: Using `OR` to combine conditions
 
 To find all products where `color` is either "red" or "blue":
 
@@ -178,7 +229,7 @@ To find all products where `color` is either "red" or "blue":
 filter = 'color == "red" OR color == "blue"'
 ```
 
-### Example 3: Using `NOT` to Exclude a Condition
+### Example 3: Using `NOT` to exclude a condition
 
 To find all products where `color` is not "green":
 
@@ -186,7 +237,7 @@ To find all products where `color` is not "green":
 filter = 'NOT color == "green"'
 ```
 
-## IS NULL and IS NOT NULL Operators
+## IS NULL and IS NOT NULL operators
 
 The `IS NULL` and `IS NOT NULL` operators are used to filter fields based on whether they contain a null value (absence of data).
 
@@ -200,7 +251,7 @@ The operators are case-insensitive, so you can use `IS NULL` or `is null`, and `
 
 </div>
 
-### Regular Scalar Fields with Null Values
+### Regular scalar fields with null values
 
 Milvus allows filtering on regular scalar fields, such as strings or numbers, with null values.
 
@@ -228,7 +279,7 @@ To retrieve entities where the `description` field is not null and the `price` f
 filter = 'description IS NOT NULL AND price > 10'
 ```
 
-### JSON Fields with Null Values
+### JSON fields with null values
 
 Milvus allows filtering on JSON fields that contain null values. A JSON field is treated as null in the following ways:
 
@@ -296,7 +347,7 @@ filter = 'metadata IS NOT NULL'
 # ]
 ```
 
-### ARRAY Fields with Null Values
+### ARRAY fields with null values
 
 Milvus allows filtering on ARRAY fields that contain null values. An ARRAY field is treated as null in the following ways:
 
@@ -362,7 +413,7 @@ filter = 'tags IS NOT NULL'
 # ]
 ```
 
-## Tips on Using Basic Operators with JSON and ARRAY Fields
+## Tips on using basic operators with JSON and ARRAY fields
 
 While the basic operators in Milvus are versatile and can be applied to scalar fields, they can also be effectively used with the keys and indexes in the JSON and ARRAY fields.
 

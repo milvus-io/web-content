@@ -211,7 +211,7 @@ print(f"Collection '{collection_name}' loaded successfully.")
 
 #### Query with timestamp filtering
 
-Use arithmetic operators like `==`, `!=`, `<`, `>`, `<=`, `>=`. For a full list of arithmetic operators available in Milvus, refer to [Arithmetic Operators](basic-operators.md#Arithmetic-Operators).
+Use arithmetic operators like `==`, `!=`, `<`, `>`, `<=`, `>=`. For a full list of arithmetic operators available in Milvus, refer to [Arithmetic operators](basic-operators.md#Arithmetic-operators).
 
 The example below filters entities with timestamps (`tsz`) that are not equal to **2025-01-03T00:00:00+08:00**:
 

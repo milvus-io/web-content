@@ -18,9 +18,11 @@ Milvus supports several basic operators for filtering data:
 
 - **Arithmetic Operators**: `+`, `-`, `*`, `/`, `%`, and `**` are used for calculations involving numeric fields.
 
+- **Bitwise Operators**: In Milvus 3.0.0 and later, `&`, `|`, and `^` filter integer fields that encode multiple flags, such as permissions or status bits. For details, refer to [Basic Operators](basic-operators.md#Bitwise-operators).
+
 - **Logical Operators**: `AND`, `OR`, and `NOT` combine multiple conditions into complex expressions.
 
-- **IS NULL and IS NOT NULL Operators**: The `IS NULL` and `IS NOT NULL` operators are used to filter fields based on whether they contain a null value (absence of data). For details, refer to [Basic Operators](basic-operators.md#IS-NULL-and-IS-NOT-NULL-Operators).
+- **IS NULL and IS NOT NULL Operators**: The `IS NULL` and `IS NOT NULL` operators are used to filter fields based on whether they contain a null value (absence of data). For details, refer to [Basic Operators](basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators).
 
 ### Example: Filtering by Color
 
@@ -28,6 +30,14 @@ To find entities with primary colors (red, green, or blue) in a scalar field `co
 
 ```python
 filter='color in ["red", "green", "blue"]'
+```
+
+### Example: Filtering by Permission Bits
+
+To find entities whose integer `permissions` field has the `SHARE` bit set, use the bitwise AND operator (`&`):
+
+```python
+filter='(permissions & 4) == 4'
 ```
 
 ### Example: Filtering by Regex Pattern
