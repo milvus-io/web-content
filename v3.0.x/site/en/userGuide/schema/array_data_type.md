@@ -524,6 +524,12 @@ curl --request POST \
 }'
 ```
 
+<div class="alert note">
+
+Beyond inserting full arrays, `ARRAY` fields also support the `ARRAY_APPEND` and `ARRAY_REMOVE` partial-update operators on the `upsert` API in Milvus v2.6.17 and later. These let you append elements to or remove matching elements from an existing array without first retrieving its current value, which avoids the client-side read-modify-write pattern. For details, see [Upsert ARRAY fields in merge mode](upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode).
+
+</div>
+
 ## Query with filter expressions
 
 After inserting entities, use the `query` method to retrieve entities that match the specified filter expressions.
