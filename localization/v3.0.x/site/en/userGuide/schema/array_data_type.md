@@ -544,6 +544,9 @@ client.<span class="hljs-title function_">insert</span>({
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>Beyond inserting full arrays, <code translate="no">ARRAY</code> fields also support the <code translate="no">ARRAY_APPEND</code> and <code translate="no">ARRAY_REMOVE</code> partial-update operators on the <code translate="no">upsert</code> API in Milvus v2.6.17 and later. These let you append elements to or remove matching elements from an existing array without first retrieving its current value, which avoids the client-side read-modify-write pattern. For details, see <a href="/docs/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">Upsert ARRAY fields in merge mode</a>.</p>
+</div>
 <h2 id="Query-with-filter-expressions" class="common-anchor-header">Query with filter expressions<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
