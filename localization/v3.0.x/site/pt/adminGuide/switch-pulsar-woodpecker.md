@@ -25,7 +25,7 @@ summary: >-
 <p><strong>Pré-requisito:</strong> A funcionalidade «Alternar MQ» está disponível no <strong>Milvus 3.0 e versões posteriores</strong>. Atualize a sua instância do Milvus para o Milvus 3.0 ou posterior antes de começar — a funcionalidade não está disponível em versões anteriores.</p>
 </div>
 <div class="alert warning">
-<p>A alteração da fila de mensagens é uma <strong>operação de alto risco</strong>. Escolha a secção que corresponda <strong>ao seu</strong> método de implementação — <strong>«Com o Helm»</strong> ou <strong>«Com o Milvus Operator»</strong> — e siga-a do início ao fim. Não misture comandos do Helm com os do Operator.</p>
+<p>A alteração da fila de mensagens é uma <strong>operação de alto risco</strong>. Escolha a secção que corresponde <strong>ao seu</strong> método de implementação — <strong>«Com o Helm»</strong> ou <strong>«Com o Milvus Operator»</strong> — e siga-a do início ao fim. Não misture comandos do Helm com os do Operator.</p>
 </div>
 <h2 id="With-Helm" class="common-anchor-header">Com o Helm<button data-href="#With-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -83,7 +83,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Para o Pulsar <strong>externo</strong>, limpe os tópicos do Milvus na instância externa do Pulsar. Os tópicos do Milvus seguem o formato <code translate="no">&lt;cluster_prefix&gt;-dml_&lt;seqNo&gt;_&lt;TimeTick&gt;&lt;Version&gt;</code> (por exemplo, <code translate="no">by-dev-rootcoord-dml_10_464633776992639586v0</code>).</p>
 <div class="alert note">
-<p>Se pretender voltar a utilizar o Pulsar mais tarde, limpe primeiro os dados/tópicos para evitar conflitos. Devido às limitações do gráfico Helm, não é atualmente possível voltar a utilizar uma instância <strong>integrada</strong> do Pulsar.</p>
+<p>Se pretender voltar a utilizar o Pulsar mais tarde, limpe primeiro os dados/tópicos para evitar conflitos. Devido às limitações do gráfico Helm, não é atualmente possível voltar a uma instância <strong>integrada</strong> do Pulsar.</p>
 </div>
 <h3 id="Switch-from-Woodpecker-to-Pulsar-Helm" class="common-anchor-header">Mudar do Woodpecker para o Pulsar (Helm)<button data-href="#Switch-from-Woodpecker-to-Pulsar-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -163,7 +163,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>Passo 1: Verifique se a instância do Milvus está em execução.</strong></p>
-<p><strong>Passo 2: Execute a mudança de MQ.</strong> O serviço MixCoord não está exposto, por isso execute a API de mudança a partir do interior do pod do MixCoord:</p>
+<p><strong>Passo 2: Execute a mudança do MQ.</strong> O serviço MixCoord não está exposto, por isso execute a API de mudança a partir do interior do pod do MixCoord:</p>
 <pre><code translate="no" class="language-shell">kubectl exec -it &lt;mixcoord-pod&gt; -- \
   curl -X POST http://localhost:9091/management/wal/alter \
   -H &quot;Content-Type: application/json&quot; \
@@ -232,7 +232,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <p>Aguarde até que todos os pods estejam prontos e, em seguida, confirme se a configuração de acesso ao Pulsar foi incorporada na configuração do Milvus.</p>
 <p><strong>Passo 3: Execute a mudança para o MQ.</strong></p>
 <div class="alert note">
-<p>Certifique-se de que o Pulsar de destino não contém tópicos do Milvus provenientes de uma configuração anterior. Se esta for a sua primeira transição para o Pulsar, ignore esta nota; caso contrário, elimine primeiro os tópicos residuais do Milvus com os mesmos nomes.</p>
+<p>Certifique-se de que o Pulsar de destino não contém tópicos do Milvus de uma configuração anterior. Se esta for a sua primeira transição para o Pulsar, ignore esta nota; caso contrário, elimine primeiro os tópicos residuais do Milvus com os mesmos nomes.</p>
 </div>
 <pre><code translate="no" class="language-shell">kubectl exec -it &lt;mixcoord-pod&gt; -- \
   curl -X POST http://localhost:9091/management/wal/alter \

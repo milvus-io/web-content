@@ -1,7 +1,7 @@
 ---
 id: alter-external-collection-schema.md
 title: 修改外部Collection SchemaCompatible with Milvus 3.0.x
-summary: 了解如何在现有外部Collection中，从外部数据源中暴露一个额外字段。
+summary: 了解如何在现有外部Collection中，从外部数据源中暴露一个额外的字段。
 beta: Milvus 3.0.x
 ---
 <h1 id="Alter-External-Collection-Schema" class="common-anchor-header">修改外部Collection Schema<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Alter-External-Collection-Schema" class="anchor-icon" translate="no">
@@ -40,7 +40,7 @@ beta: Milvus 3.0.x
 <li><p>外部 Collection 目前支持在创建后添加字段。其他 Schema 更改（例如删除字段、重命名字段、更改字段数据类型、更改向量维度或重新映射<code translate="no">external_field</code> ）均不支持。</p></li>
 <li><p>您只能添加在外部数据源中已存在的字段。此操作将现有的外部字段映射到 Milvus 字段，不会在外部数据源中创建新字段，也不会回填源数据。</p></li>
 <li><p>不支持向现有外部 Collection 添加<code translate="no">SPARSE_FLOAT_VECTOR</code> 字段。</p></li>
-<li><p>不支持将 StructArray 字段添加到现有外部 Collection 中。如果您的外部 Collection 需要 StructArray 字段，请在创建 Collection 时在 Schema 中进行定义。</p></li>
+<li><p>不支持将 StructArray 字段添加到现有外部 Collection 中。如果您的外部 Collection 需要 StructArray 字段，请在创建 Collection 时在 Schema 中定义该字段。</p></li>
 </ul>
 <h2 id="Add-a-field" class="common-anchor-header">添加字段<button data-href="#Add-a-field" class="anchor-icon" translate="no">
       <svg translate="no"

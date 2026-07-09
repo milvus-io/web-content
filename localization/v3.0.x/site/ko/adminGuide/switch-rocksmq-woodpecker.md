@@ -244,7 +244,7 @@ summary: Milvus Standalone(Docker Compose) 배포 환경의 메시지 큐를 Roc
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>소스 MQ</th><th>대상 MQ</th><th>상태</th><th>비고</th></tr>
+<tr><th>소스 MQ</th><th>대상 MQ</th><th>상태</th><th>참고</th></tr>
 </thead>
 <tbody>
 <tr><td>RocksMQ</td><td>Woodpecker (MinIO/로컬)</td><td><strong>지원됨</strong></td><td></td></tr>

@@ -1,7 +1,7 @@
 ---
 id: arabic-normalization-filter.md
 title: 아랍어 정규화Compatible with Milvus 3.0.0+
-summary: 'arabic_normalization 필터는 아랍어 문자 변형을 정규화하고, 아랍어 분음 부호 및 타트윌을 제거합니다.'
+summary: 'arabic_normalization 필터는 아랍어 문자 변형을 표준화하고, 아랍어 분음 부호 및 타트윌을 제거합니다.'
 beta: Milvus 3.0.0+
 ---
 <h1 id="Arabic-Normalization" class="common-anchor-header">아랍어 정규화<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Arabic-Normalization" class="anchor-icon" translate="no">
@@ -38,7 +38,7 @@ beta: Milvus 3.0.0+
     </button></h2><div class="alert note">
 <p>아랍어 텍스트의 경우, 대부분의 경우 내장된 <a href="/docs/ko/arabic-analyzer.md"><code translate="no">arabic</code></a> 분석기를 사용하십시오. 이 내장 분석기에는 표준 토큰화, 소문자 변환, 소수점 자리 수 정규화, 아랍어 어근 추출 및 아랍어 스톱워드 제거 기능과 함께 이 필터가 포함되어 있습니다. 사용자 정의 분석기 파이프라인을 구축해야 하는 경우에만 ‘ <code translate="no">arabic_normalization</code> ’ 필터를 직접 사용하십시오.</p>
 </div>
-<p>사용자 정의 분석기에서 <code translate="no">arabic_normalization</code> 필터를 사용하려면, <code translate="no">analyzer_params</code> 의 <code translate="no">filter</code> 섹션에 다음을 추가하십시오:</p>
+<p>사용자 정의 분석기에서 <code translate="no">arabic_normalization</code> 필터를 사용하려면, <code translate="no">analyzer_params</code> 파일의 <code translate="no">filter</code> 섹션에 다음을 추가하십시오:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;arabic_normalization&quot;</span>],

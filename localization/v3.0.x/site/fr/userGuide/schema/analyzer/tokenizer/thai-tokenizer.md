@@ -21,7 +21,7 @@ beta: Milvus 3.0.0+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Le tokeniseur « <code translate="no">thai</code> » segmente le texte thaï en tokens de mots sans s'appuyer sur les espaces. Utilisez ce tokeniseur lorsque vous devez créer un pipeline d'analyse personnalisé pour du texte en thaï ou mixte (thaï/anglais).</p>
+    </button></h1><p>Le tokeniseur « <code translate="no">thai</code> » segmente le texte thaï en tokens de mots sans se baser sur les espaces. Utilisez ce tokeniseur lorsque vous devez créer un pipeline d'analyse personnalisé pour du texte en thaï ou mixte (thaï/anglais).</p>
 <h2 id="Configuration" class="common-anchor-header">Configuration<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +38,7 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Pour le texte en thaï, utilisez dans la plupart des cas l’analyseur intégré <a href="/docs/fr/thai-analyzer.md"><code translate="no">thai</code></a> dans la plupart des cas. L’analyseur intégré inclut ce tokenizer ainsi que la conversion en minuscules, la normalisation des chiffres décimaux et la suppression des mots vides en thaï. N’utilisez le tokenizer « <code translate="no">thai</code> » directement que lorsque vous devez créer un pipeline d’analyse personnalisé.</p>
+<p>Pour le texte en thaï, utilisez dans la plupart des cas l’analyseur intégré <a href="/docs/fr/thai-analyzer.md"><code translate="no">thai</code></a> dans la plupart des cas. L’analyseur intégré inclut ce tokeniseur ainsi que la conversion en minuscules, la normalisation des chiffres décimaux et la suppression des mots vides en thaï. N’utilisez le tokeniseur « <code translate="no">thai</code> » directement que lorsque vous devez créer un pipeline d’analyse personnalisé.</p>
 </div>
 <p>Pour configurer un analyseur à l’aide du tokenizer « <code translate="no">thai</code> », définissez ` <code translate="no">tokenizer</code> ` sur ` <code translate="no">thai</code> ` dans ` <code translate="no">analyzer_params</code>`.</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -60,11 +60,11 @@ beta: Milvus 3.0.0+
 <ul>
 <li><strong>Segmentation du thaï</strong>: segmente le texte thaï en tokens de mots sans s’appuyer sur les espaces.</li>
 <li><strong>Filtrage des espaces et de la ponctuation</strong>: filtre les segments composés uniquement d’espaces et de signes de ponctuation. Cela diffère du <a href="/docs/fr/icu-tokenizer.md"><code translate="no">icu</code></a> tokenizer, qui peut conserver la ponctuation et les espaces en tant que tokens.</li>
-<li><strong>Texte à scripts mixtes</strong>: génère des tokens de mots en alphabet latin dans un texte mêlant le thaï et l’anglais.</li>
+<li><strong>Texte à scripts mixtes</strong>: génère des tokens de mots en alphabet latin dans un texte mêlant thaï et anglais.</li>
 <li><strong>Tokeniseur uniquement</strong>: ne met pas les tokens en minuscules, ne normalise pas les chiffres Unicode et ne supprime pas les mots vides. Ajoutez des filtres ou utilisez l’ <a href="/docs/fr/thai-analyzer.md"><code translate="no">thai</code></a> pour ces étapes.</li>
 <li><strong>Sémantique de position</strong>: utilise les positions des tokens basées sur les caractères, y compris les espaces et la ponctuation ignorés, ce qui garantit une cohérence du comportement de correspondance de phrases et de proximité avec d’autres tokeniseurs non latins.</li>
 </ul>
-<p>Après avoir défini l’ <code translate="no">analyzer_params</code>, vous pouvez appliquer l’analyseur à un champ de type « <code translate="no">VARCHAR</code> » lors de la définition d’un schéma de collection. Pour plus de détails, reportez-vous à la section « <a href="/docs/fr/analyzer-overview.md#Example-use">Exemple d’utilisation</a> ».</p>
+<p>Après avoir défini l’ <code translate="no">analyzer_params</code>, vous pouvez appliquer l’analyseur à un champ de type « <code translate="no">VARCHAR</code> » lors de la définition d’un schéma de collection. Pour plus de détails, reportez-vous à la section <a href="/docs/fr/analyzer-overview.md#Example-use">«Exemple d’utilisation</a>».</p>
 <h2 id="Examples" class="common-anchor-header">Exemples<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

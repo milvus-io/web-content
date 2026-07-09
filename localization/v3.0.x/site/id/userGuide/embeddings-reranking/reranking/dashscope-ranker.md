@@ -209,7 +209,7 @@ dashscope_ranker = Function(
    </tr>
 </table>
 <div class="alert note">
-<p>Untuk parameter umum yang digunakan bersama di semua pemeringkat model, seperti <code translate="no">provider</code> dan <code translate="no">queries</code>, lihat <a href="/docs/id/model-ranker-overview.md#Create-a-model-ranker">Membuat pemeringkat model</a>.</p>
+<p>Untuk parameter umum yang digunakan bersama oleh semua pemeringkat model, seperti <code translate="no">provider</code> dan <code translate="no">queries</code>, lihat <a href="/docs/id/model-ranker-overview.md#Create-a-model-ranker">Membuat pemeringkat model</a>.</p>
 </div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Terapkan ke pencarian vektor standar<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"

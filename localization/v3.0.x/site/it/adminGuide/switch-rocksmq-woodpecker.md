@@ -24,7 +24,7 @@ summary: >-
 <div class="alert note">
 <ul>
 <li><strong>Prerequisito:</strong> la funzionalità "Cambio di MQ" è disponibile in <strong>Milvus 3.0 e versioni successive</strong>. Aggiornare l’istanza di Milvus a Milvus 3.0 o versioni successive prima di iniziare: la funzionalità non è disponibile nelle versioni precedenti.</li>
-<li>Il cambio di MQ richiede la distribuzione Docker <strong>Compose</strong> (che abilita una sorgente di configurazione etcd). La distribuzione Docker a container singolo non supporta il cambio.</li>
+<li>Il cambio di MQ richiede la distribuzione Docker <strong>Compose</strong> (che abilita una fonte di configurazione etcd). La distribuzione Docker a container singolo non supporta il cambio.</li>
 </ul>
 </div>
 <h2 id="Switch-from-RocksMQ-to-Woodpecker" class="common-anchor-header">Passaggio da RocksMQ a Woodpecker<button data-href="#Switch-from-RocksMQ-to-Woodpecker" class="anchor-icon" translate="no">
@@ -97,7 +97,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><div class="alert note">
-<p>Se è la prima volta che si passa a Woodpecker, ignorare questa nota. In caso contrario, ripulire i metadati e i dati residui di Woodpecker prima di effettuare nuovamente il passaggio: i dati residui potrebbero causare comportamenti imprevisti.</p>
+<p>Se è la prima volta che si passa a Woodpecker, ignorare questa nota. In caso contrario, eliminare i metadati e i dati residui di Woodpecker prima di effettuare nuovamente il passaggio: i dati residui potrebbero causare comportamenti imprevisti.</p>
 </div>
 <pre><code translate="no" class="language-shell">curl -X POST http://&lt;mixcoord_addr&gt;:&lt;mixcoord_port&gt;/management/wal/alter \
   -H &quot;Content-Type: application/json&quot; \

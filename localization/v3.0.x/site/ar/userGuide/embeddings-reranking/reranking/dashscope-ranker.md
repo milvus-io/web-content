@@ -174,7 +174,7 @@ dashscope_ranker = Function(
    <tr>
      <td><p><code translate="no">reranker</code></p></td>
      <td><p>نعم</p></td>
-     <td><p>يجب ضبطه على <code translate="no">"model"</code> لتمكين إعادة ترتيب النموذج.</p></td>
+     <td><p>يجب ضبطها على <code translate="no">"model"</code> لتمكين إعادة ترتيب النماذج.</p></td>
      <td><p><code translate="no">"model"</code></p></td>
    </tr>
    <tr>
@@ -209,7 +209,7 @@ dashscope_ranker = Function(
    </tr>
 </table>
 <div class="alert note">
-<p>بالنسبة للمعلمات العامة المشتركة بين جميع مصنفات النماذج، مثل <code translate="no">provider</code> و <code translate="no">queries</code> ، راجع <a href="/docs/ar/model-ranker-overview.md#Create-a-model-ranker">إنشاء مصنف نموذج</a>.</p>
+<p>بالنسبة للمعلمات العامة المشتركة بين جميع مُصنِّفي النماذج، مثل <code translate="no">provider</code> و <code translate="no">queries</code> ، راجع <a href="/docs/ar/model-ranker-overview.md#Create-a-model-ranker">إنشاء مُصنف نماذج</a>.</p>
 </div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">التطبيق على البحث المتجهي القياسي<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -57,7 +57,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Убедитесь, что ваш автономный экземпляр Milvus с Docker Compose работает корректно — например, создав тестовую коллекцию, вставив данные и выполнив запрос.</p>
+    </button></h3><p>Убедитесь, что ваш автономный экземпляр Milvus с Docker Compose работает корректно — например, создав тестовую коллекцию, вставив данные и запустив запрос.</p>
 <h3 id="Step-2-Configure-Woodpecker-storage" class="common-anchor-header">Шаг 2: Настройте хранилище Woodpecker<button data-href="#Step-2-Configure-Woodpecker-storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -226,7 +226,7 @@ summary: >-
       </svg>
     </button></h3><ul>
 <li><strong>Метаданные (etcd):</strong> префикс ключа Woodpecker обычно имеет вид <code translate="no">woodpecker/...</code>. Просмотрите его с помощью команды <code translate="no">etcdctl get woodpecker --prefix</code>, а затем удалите.</li>
-<li><strong>Данные хранилища:</strong> в <strong>режиме MinIO</strong> удалите данные журнала в папке <code translate="no">&lt;rootPath&gt;/wp/...</code> (обычно <code translate="no">files/wp/...</code>) в бакете; в <strong>локальном режиме</strong> данные находятся на локальном диске по адресу <code translate="no">volumes/milvus/data/wp/...</code>.</li>
+<li><strong>Данные хранилища:</strong> в <strong>режиме MinIO</strong> удалите данные журнала в папке <code translate="no">&lt;rootPath&gt;/wp/...</code> (обычно <code translate="no">files/wp/...</code>) в бакете; в <strong>локальном режиме</strong> данные находятся на локальном диске по пути <code translate="no">volumes/milvus/data/wp/...</code>.</li>
 </ul>
 <p>Если вы планируете позже вернуться к Woodpecker, сначала удалите эти файлы, чтобы избежать конфликтов.</p>
 <h2 id="Supported-scenarios" class="common-anchor-header">Поддерживаемые сценарии<button data-href="#Supported-scenarios" class="anchor-icon" translate="no">

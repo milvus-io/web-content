@@ -176,7 +176,7 @@ schema.add_function(text_embedding_function)
    <tr>
      <td><p><code translate="no">provider</code></p></td>
      <td><p>Да</p></td>
-     <td><p>Поставщик модели встраивания, который необходимо использовать.</p></td>
+     <td><p>Поставщик модели встраивания, который следует использовать.</p></td>
      <td><p><code translate="no">"yc"</code></p></td>
    </tr>
    <tr>

@@ -119,5 +119,5 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Evita cambiar de tipo de MQ repetidamente. Si necesitas cambiar, asegúrate de limpiar los datos relacionados antes de cada cambio; los datos residuales pueden provocar un comportamiento inesperado.</p>
+<p>Evita cambiar repetidamente de un tipo de MQ a otro. Si tienes que hacerlo, asegúrate de limpiar los datos relacionados antes de cada cambio; los datos residuales pueden provocar un comportamiento inesperado.</p>
 </div>

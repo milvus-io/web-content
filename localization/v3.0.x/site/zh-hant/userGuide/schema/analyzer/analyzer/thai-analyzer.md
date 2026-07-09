@@ -19,7 +19,7 @@ beta: Milvus 3.0.0+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">thai</code> 分析器是專為泰文設計的內建分析器。當您需要 Milvus 將泰文分割為單詞、正規化泰文數字、將混合拉丁文字轉為小寫，以及移除泰文停用詞時，請使用此分析器。</p>
+    </button></h1><p><code translate="no">thai</code> 分析器是專為泰文設計的內建分析器。當您需要 Milvus 將泰文分割為單詞、將泰文數字標準化、將混合拉丁文字轉為小寫，以及移除泰文停用詞時，請使用此分析器。</p>
 <h2 id="Configuration" class="common-anchor-header">設定<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -79,12 +79,12 @@ beta: Milvus 3.0.0+
 <p>此分析器會執行以下處理步驟：</p>
 <ul>
 <li><strong>分詞</strong>：使用 <a href="/docs/zh-hant/thai-tokenizer.md"><code translate="no">thai</code></a> 分詞器將泰文分割為單詞詞元，且不依賴空白字元。該分詞器會過濾掉僅含空白字元及標點符號的片段。</li>
-<li><strong>大小寫規範化</strong>：使用<code translate="no">lowercase</code> 濾波器，該濾波器會影響泰英混合文本中的拉丁字母。</li>
+<li><strong>大小寫規範化</strong>：使用<code translate="no">lowercase</code> 濾波器，該濾波器會影響泰文與英文混合文本中的拉丁字母。</li>
 <li><strong>數字標準化</strong>：使用<code translate="no">decimaldigit</code> 篩選器，將泰文數字及其他Unicode十進位數字轉換為ASCII數字。</li>
 <li><strong>停用詞移除</strong>：使用<code translate="no">stop</code> 篩選器，並搭配內建的<code translate="no">_thai_</code> 字典。</li>
 <li><strong>不進行詞幹提取</strong>：內建的<code translate="no">thai</code> 分析器不會套用<code translate="no">stemmer</code> 篩選器。</li>
 </ul>
-<p>定義<code translate="no">analyzer_params</code> 後，您可在定義集合架構時，將此分析器套用至<code translate="no">VARCHAR</code> 欄位。詳細資訊請參閱「<a href="/docs/zh-hant/analyzer-overview.md#Example-use">使用範例</a>」。</p>
+<p>定義<code translate="no">analyzer_params</code> 後，您可在定義集合架構時，將該分析器套用至<code translate="no">VARCHAR</code> 欄位。詳細資訊請參閱「<a href="/docs/zh-hant/analyzer-overview.md#Example-use">使用範例</a>」。</p>
 <h2 id="Examples" class="common-anchor-header">範例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -100,7 +100,7 @@ beta: Milvus 3.0.0+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在將分析器設定套用至您的集合架構之前，請先使用 `<code translate="no">run_analyzer</code> ` 方法驗證其行為。</p>
+    </button></h2><p>在將分析器設定套用至您的集合架構之前，請先使用 `<code translate="no">run_analyzer</code> ` 方法驗證其運作行為。</p>
 <h3 id="Analyzer-configuration" class="common-anchor-header">分析器設定<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

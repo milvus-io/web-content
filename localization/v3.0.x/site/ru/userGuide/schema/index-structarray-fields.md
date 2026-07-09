@@ -22,8 +22,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Создайте индексы для подполей StructArray перед выполнением векторного поиска или ускорением скалярной фильтрации. Для поля StructArray целевым объектом индекса является путь к подполю, например <code translate="no">chunks[emb_list_vector]</code>, <code translate="no">chunks[emb]</code> или <code translate="no">chunks[section]</code>.</p>
-<p>На этой странице используется коллекция <code translate="no">tech_articles</code> из раз <a href="/docs/ru/create-structarray-field.md">дела «Создание поля StructArray</a>». Поле StructArray <code translate="no">chunks</code> содержит скалярные подполя для фильтрации и векторные подполя для поиска.</p>
+    </button></h1><p>Создайте индексы для подполей StructArray перед выполнением векторного поиска или ускорением скалярной фильтрации. Для поля StructArray цель индекса представляет собой путь к подполю, например <code translate="no">chunks[emb_list_vector]</code>, <code translate="no">chunks[emb]</code> или <code translate="no">chunks[section]</code>.</p>
+<p>На этой странице используется коллекция <code translate="no">tech_articles</code> из раздела <a href="/docs/ru/create-structarray-field.md">«Создание поля StructArray</a>». Поле StructArray <code translate="no">chunks</code> содержит скалярные подполя для фильтрации и векторные подполя для поиска.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Перед началом<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -315,7 +315,7 @@ client.create_index(
 <tr><td>Используйте синтаксис путей для индексов подполей.</td><td>Индексируйте <code translate="no">chunks[emb]</code>, а не <code translate="no">emb</code> или <code translate="no">chunks.emb</code>.</td></tr>
 <tr><td>Одно векторное подполе допускает один индекс.</td><td>Используйте отдельные векторные подполя, если вам нужны разные семейства метрик.</td></tr>
 <tr><td>Используйте метрики <code translate="no">MAX_SIM*</code> для поиска по EmbeddingList.</td><td>Для запросов EmbeddingList требуется индекс, построенный с использованием метрики <code translate="no">MAX_SIM*</code>.</td></tr>
-<tr><td>Для поиска на уровне элементов используйте обычные векторные метрики.</td><td>При поиске на уровне элементов используются данные запросов обычных векторных метрик, таких как <code translate="no">COSINE</code>, <code translate="no">IP</code> или <code translate="no">L2</code>.</td></tr>
+<tr><td>Для поиска на уровне элементов используйте обычные векторные метрики.</td><td>При поиске на уровне элементов используются данные запросов обычных векторных метрик, таких как « <code translate="no">COSINE</code> », « <code translate="no">IP</code> » или « <code translate="no">L2</code> ».</td></tr>
 <tr><td>Индексируйте скалярные подполя, которые появляются в фильтрах.</td><td>Используйте типы скалярных индексов, поддерживаемые вашей целевой платформой.</td></tr>
 <tr><td>Учитывайте ограничения на векторные поля.</td><td>Общее количество векторных полей и векторных подполей ограничено. Перед добавлением большого количества векторных подполей ознакомьтесь с разделом «Ограничения StructArray».</td></tr>
 </tbody>

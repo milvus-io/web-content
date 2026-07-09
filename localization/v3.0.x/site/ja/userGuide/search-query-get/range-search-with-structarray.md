@@ -43,7 +43,7 @@ summary: >-
 <tbody>
 <tr><td>EmbeddingList 検索</td><td>サポートされていません。</td><td>該当なし。</td></tr>
 <tr><td>要素レベルの検索</td><td><code translate="no">radius</code> および、必要に応じて<code translate="no">range_filter</code> を使用した通常のベクトルクエリを使用してください。</td><td>構造体要素レベル。</td></tr>
-<tr><td>ハイブリッド検索</td><td>StructArray リクエストが要素レベルのベクトルフィールドを対象としている場合にサポートされます。EmbeddingList レベルのリクエストでは、範囲検索はサポートされていません。</td><td>要素レベルのサブ検索、その後ハイブリッド再ランク付け。</td></tr>
+<tr><td>ハイブリッド検索</td><td>StructArray リクエストが要素レベルのベクトルフィールドを対象とする場合にサポートされます。EmbeddingList レベルのリクエストでは、範囲検索はサポートされていません。</td><td>要素レベルのサブ検索、その後ハイブリッド再ランク付け。</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -256,7 +256,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>この例では、<code translate="no">chunks[emb]</code> サブリクエストのみが範囲検索パラメータを使用します。StructArray リクエストは依然として要素レベルのセマンティクスに従います。つまり、範囲の境界は、ハイブリッド検索が結果を結合して再ランク付けを行う前に、Struct 要素のヒットに適用されます。</p>
+<p>この例では、<code translate="no">chunks[emb]</code> サブリクエストのみが範囲検索パラメータを使用します。StructArray リクエストは依然として要素レベルのセマンティクスに従います。つまり、範囲の境界は、ハイブリッド検索が結果を結合して再ランク付けを行う前に、Struct 要素のヒットに対して適用されます。</p>
 <h2 id="Interpret-range-results" class="common-anchor-header">範囲検索結果の解釈<button data-href="#Interpret-range-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -278,9 +278,9 @@ results = client.hybrid_search(
 </thead>
 <tbody>
 <tr><td><code translate="no">id</code></td><td>一致した Struct 要素を含むエンティティのプライマリキー。</td></tr>
-<tr><td><code translate="no">distance</code> またはスコア</td><td>クエリベクトルと一致した Struct 要素のベクトルとの間のスコアまたは距離。</td></tr>
+<tr><td><code translate="no">distance</code> またはスコア</td><td>クエリベクトルと一致したStruct要素のベクトルとの間のスコアまたは距離。</td></tr>
 <tr><td><code translate="no">offset</code></td><td>返される際、StructArrayフィールド内での一致したStruct要素の0を基点とする位置。</td></tr>
-<tr><td>重複する主キー</td><td>あり得ます。同じエンティティ内の複数の Struct 要素が、指定された範囲内に収まる場合があります。</td></tr>
+<tr><td>重複する主キー</td><td>あり得ます。同じエンティティ内の複数の Struct 要素が、指定された範囲内に収まることがあります。</td></tr>
 <tr><td><code translate="no">limit</code></td><td>これは要素のヒットに適用され、一意の親エンティティには適用されません。</td></tr>
 </tbody>
 </table>

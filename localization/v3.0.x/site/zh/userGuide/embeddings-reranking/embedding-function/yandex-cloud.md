@@ -174,7 +174,7 @@ schema.add_function(text_embedding_function)
    <tr>
      <td><p><code translate="no">provider</code></p></td>
      <td><p>是</p></td>
-     <td><p>要使用的嵌入模型提供程序。</p></td>
+     <td><p>要使用的Embeddings提供程序。</p></td>
      <td><p><code translate="no">"yc"</code></p></td>
    </tr>
    <tr>
@@ -192,7 +192,7 @@ schema.add_function(text_embedding_function)
    <tr>
      <td><p><code translate="no">dim</code></p></td>
      <td><p>否</p></td>
-     <td><p>输出向量的维度。若设置此参数，其值必须与输出向量字段的维度一致。</p></td>
+     <td><p>输出向量的维度。如果设置了该参数，其值必须与输出向量字段的维度一致。</p></td>
      <td><p><code translate="no">"256"</code></p></td>
    </tr>
 </table>

@@ -29,9 +29,9 @@ beta: Milvus 3.0.x
 <span class="highlighted-wrapper-line">    datatype=DataType.TEXT,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>بعد تعريف الحقل، يمكن لكل كيان تضمين قيمة سلسلة في هذا الحقل. يمكنك إدراج قيم " <code translate="no">TEXT</code> " مثل الحقول القياسية الأخرى واسترجاعها من نتائج الاستعلام أو البحث عن طريق إدراج الحقل في " <code translate="no">output_fields</code>".</p>
+<p>بعد تعريف الحقل، يمكن لكل كيان تضمين قيمة سلسلة في هذا الحقل. يمكنك إدراج قيم " <code translate="no">TEXT</code> " مثل الحقول القياسية الأخرى وإرجاعها من نتائج الاستعلام أو البحث عن طريق إدراج الحقل في " <code translate="no">output_fields</code>".</p>
 <div class="alert note">
-<p><code translate="no">TEXT</code> تدعم الحقول القيم الفارغة. لتمكين هذه الميزة، قم بتعيين <code translate="no">nullable</code> إلى <code translate="no">True</code>. لمزيد من التفاصيل، راجع <a href="/docs/ar/nullable-and-default.md">الحقل القابل للفراغ</a>.</p>
+<p><code translate="no">TEXT</code> تدعم الحقول القيم الفارغة. لتمكين هذه الميزة، اضبط <code translate="no">nullable</code> على <code translate="no">True</code>. لمزيد من التفاصيل، راجع <a href="/docs/ar/nullable-and-default.md">«الحقل القابل للفراغ» (Nullable Field</a>).</p>
 </div>
 <h2 id="Limits" class="common-anchor-header">القيود<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -52,7 +52,7 @@ beta: Milvus 3.0.x
 <li>لا يمكن أن يكون حقل « <code translate="no">TEXT</code> » حقلًا أساسيًا. تدعم الحقول الأساسية « <code translate="no">INT64</code> » و« <code translate="no">VARCHAR</code> ».</li>
 <li>في Milvus 3.0.0، لا تدعم الحقول من نوع « <code translate="no">TEXT</code> » <code translate="no">PHRASE_MATCH</code>.</li>
 <li>في Milvus 3.0.0، لا تدعم الحقول <code translate="no">TEXT</code> القيم الافتراضية.</li>
-<li>في Milvus 3.0.0، لا تُدعم حقول <code translate="no">TEXT</code> في المجموعات الخارجية.</li>
+<li>في Milvus 3.0.0، لا يتم دعم حقول <code translate="no">TEXT</code> في المجموعات الخارجية.</li>
 <li>في Milvus 3.0.0، لا تدعم حقول <code translate="no">TEXT</code> الفهارس القياسية.</li>
 <li><code translate="no">TEXT</code> لا يُقصد به تصفية البيانات الوصفية العادية. إذا كنت بحاجة إلى التصفية بناءً على بيانات وصفية ذات سلاسل قصيرة وكانت قيمة الحقل تتناسب مع حد طول <code translate="no">VARCHAR</code> ، فاستخدم <code translate="no">VARCHAR</code>.</li>
 </ul>
@@ -78,7 +78,7 @@ beta: Milvus 3.0.x
 </thead>
 <tbody>
 <tr><td>الأفضل لـ</td><td>البيانات الوصفية القصيرة المستخدمة لتحديد الكيانات أو تصنيفها أو تصفيتها، مثل <code translate="no">title</code> و <code translate="no">tag</code> و <code translate="no">category</code> و <code translate="no">external_id</code>.</td><td>محتوى مصدر أطول تستخدمه نماذج اللغة الكبيرة (LLM) أو سير عمل الوكلاء، مثل <code translate="no">content</code> أو <code translate="no">passage</code> أو <code translate="no">article_body</code> أو <code translate="no">log_message</code>.</td></tr>
-<tr><td>إعداد الطول</td><td>يتطلب <code translate="no">max_length</code> ، الذي يحدد الحد الأقصى لعدد البايتات التي يمكن للحقل تخزينها. القيمة القصوى هي <code translate="no">65,535</code> بايت. إذا كانت القيمة قد تتجاوز هذا الحد، فاستخدم <code translate="no">TEXT</code>.</td><td>لا يتطلب <code translate="no">max_length</code> ، لذا لا يحتاج المخطط إلى حد ثابت بالبايت لقيمة النص.</td></tr>
+<tr><td>إعداد الطول</td><td>يتطلب <code translate="no">max_length</code> ، الذي يحدد الحد الأقصى لعدد البايتات التي يمكن للحقل تخزينها. القيمة القصوى هي <code translate="no">65,535</code> بايت. إذا كانت القيمة قد تتجاوز هذا الحد، فاستخدم <code translate="no">TEXT</code>.</td><td>لا يتطلب <code translate="no">max_length</code> ، لذا لا يحتاج المخطط إلى حد ثابت للبايتات لقيمة النص.</td></tr>
 <tr><td>سلوك التخزين</td><td>يخزن كل قيمة ضمن نطاق التخزين المحدد ( <code translate="no">max_length</code>) للحقل.</td><td>يستخدم التحديد التلقائي للتخزين للقيم النصية الأكبر حجمًا. لمزيد من التفاصيل، راجع <a href="#how-milvus-stores-large-text-values">كيفية تخزين Milvus للقيم النصية الكبيرة</a>.</td></tr>
 <tr><td>دعم الحقل الأساسي</td><td>يمكن استخدامه كحقل أساسي.</td><td>لا يمكن استخدامه كحقل أساسي.</td></tr>
 <tr><td>التصفية</td><td>يُستخدم للبيانات الوصفية ذات السلاسل القصيرة التي يجب أن تظهر في تعبيرات التصفية، مثل <code translate="no">category == &quot;news&quot;</code> أو <code translate="no">tag in [&quot;ai&quot;, &quot;database&quot;]</code>.</td><td>غير مخصص لتصفية البيانات الوصفية العادية.</td></tr>

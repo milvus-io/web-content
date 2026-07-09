@@ -34,7 +34,7 @@ res = client.query(
     output_fields=[<span class="hljs-string">&quot;message&quot;</span>, <span class="hljs-string">&quot;severity&quot;</span>],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>이 페이지의 예제는 <code translate="no">filter</code> 에 할당된 표현식에 중점을 둡니다. <code translate="no">query</code>, <code translate="no">search</code> 및 하이브리드 검색과 같이 스칼라 필터를 허용하는 Milvus 작업에서도 동일한 필터 표현식 구문을 사용할 수 있습니다.</p>
+<p>이 페이지의 예제는 <code translate="no">filter</code> 에 할당된 표현식에 중점을 둡니다. <code translate="no">query</code>, <code translate="no">search</code>, 하이브리드 검색과 같이 스칼라 필터를 허용하는 Milvus 작업에서도 동일한 필터 표현식 구문을 사용할 수 있습니다.</p>
 <h2 id="Supported-field-types" class="common-anchor-header">지원되는 필드 유형<button data-href="#Supported-field-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -78,7 +78,7 @@ res = client.query(
         ></path>
       </svg>
     </button></h2><p>필요한 패턴을 표현하는 가장 간단한 연산자를 선택하십시오.</p>
-<p>문자열을 정확히 일치시켜야 하는 경우, 패턴 매칭 대신 ` <code translate="no">==</code> `을 사용하는 것이 좋습니다. 필터가 특정 패턴과 일치해야 할 때만 ` <code translate="no">LIKE</code> ` 또는 정규식을 사용하십시오.</p>
+<p>문자열을 정확히 일치시켜야 하는 경우, 패턴 매칭 대신 ` <code translate="no">==</code> `을 사용하는 것이 좋습니다. 필터가 특정 패턴과 일치해야 하는 경우에만 ` <code translate="no">LIKE</code> ` 또는 정규식을 사용하십시오.</p>
 <table>
 <thead>
 <tr><th>요구 사항</th><th>권장 연산자</th><th>예시</th><th>설명</th></tr>
@@ -226,7 +226,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>백슬래시가 포함된 정규식 패턴의 경우 원시 문자열 리터럴을 사용하는 것이 좋습니다. <code translate="no">r&quot;...&quot;</code> 또는 <code translate="no">r'...'</code> 형태로 작성된 원시 문자열에서는 백슬래시가 그대로 정규식 엔진으로 전달됩니다. 이를 통해 일반 문자열 리터럴에서 필요한 추가적인 이스케이프 처리를 피할 수 있습니다.</p>
+    </button></h3><p>백슬래시가 포함된 정규식 패턴의 경우 원시 문자열 리터럴을 사용하는 것이 좋습니다. <code translate="no">r&quot;...&quot;</code> 또는 <code translate="no">r'...'</code> 형식으로 작성된 원시 문자열에서는 백슬래시가 그대로 정규식 엔진으로 전달됩니다. 이를 통해 일반 문자열 리터럴에서 필요한 추가 이스케이프 처리를 피할 수 있습니다.</p>
 <p>예를 들어:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ r&quot;\d{4}-\d{2}-\d{2}&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -269,7 +269,7 @@ res = client.query(
 <p>정규식 메타문자를 리터럴로 일치시키려면 정규식 패턴에서 해당 문자를 이스케이프 처리하십시오. 예를 들어, 리터럴 점(정규식에서 `<code translate="no">\.</code> `)을 일치시키려면 Python 필터 문자열에 ` <code translate="no">\\.</code> `를 작성하십시오:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;email =~ &quot;@gmail\\.com$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>참고: Milvus 정규 표현식 필터는 RE2 구문을 따릅니다. 정규 표현식 패턴이 RE2에서 지원하지 않는 구문을 사용하거나 기타 이유로 유효하지 않은 경우, Milvus는 해당 필터 표현식을 거부합니다. 정규 표현식 메타문자, 플래그 및 일치 동작에 대한 자세한 내용은 <a href="https://github.com/google/re2/wiki/syntax">RE2 구문</a> 참조를 참조하십시오.</p>
+<p>참고: Milvus 정규식 필터는 RE2 구문을 따릅니다. 정규식 패턴이 RE2에서 지원하지 않는 구문을 사용하거나 기타 이유로 유효하지 않은 경우, Milvus는 해당 필터 표현식을 거부합니다. 정규식 메타문자, 플래그 및 일치 동작에 대한 자세한 내용은 <a href="https://github.com/google/re2/wiki/syntax">RE2 구문</a> 참조를 참조하십시오.</p>
 <h3 id="Matching-behavior" class="common-anchor-header">일치 동작<button data-href="#Matching-behavior" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -293,15 +293,15 @@ res = client.query(
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match only values that are exactly E followed by four digits</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;code =~ &quot;^E[0-9]{4}$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Null 허용 VARCHAR 필드</strong></p>
-<p>정규식 필터는 null 값과 일치하지 않습니다. 이는 <code translate="no">=~</code> 와 <code translate="no">!~</code> 모두에 적용됩니다. 정규식 패턴은 제외하고 null 값은 유지하려면 <code translate="no">OR field IS NULL</code> 를 명시적으로 추가하십시오:</p>
+<p><strong>Null이 허용되는 VARCHAR 필드</strong></p>
+<p>정규식 필터는 null 값과 일치하지 않습니다. 이는 <code translate="no">=~</code> 과 <code translate="no">!~</code> 모두에 적용됩니다. 정규식 패턴은 제외하고 null 값은 유지하려면 <code translate="no">OR field IS NULL</code> 을 명시적으로 추가하십시오:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot; OR message IS NULL&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>JSON 경로</strong></p>
 <p>JSON 경로의 경우, 경로가 누락되었거나 null이거나 문자열이 아닌 값으로 해석될 때 정규식 필터의 동작이 달라집니다:</p>
 <table>
 <thead>
-<tr><th>필터</th><th>누락/null/문자열이 아닌 값을 포함하나요?</th><th>참고</th></tr>
+<tr><th>필터</th><th>누락/null/문자가 아닌 값을 포함하나요?</th><th>참고</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">json_field[&quot;path&quot;] =~ &quot;pattern&quot;</code></td><td>아니요</td><td>정규식 패턴을 만족하는 문자열 값에만 일치합니다.</td></tr>
@@ -324,7 +324,7 @@ res = client.query(
         ></path>
       </svg>
     </button></h2><p>Milvus는 문자열 필드에 대해 여러 인덱스 유형을 지원하며, 이는 <code translate="no">VARCHAR</code> 필드 또는 JSON 문자열 경로(예: <code translate="no">NGRAM</code>, <code translate="no">STL_SORT</code>, <code translate="no">INVERTED</code>, <code translate="no">BITMAP</code>)에 대한 <code translate="no">LIKE</code> 및 정규식 필터와 함께 사용할 수 있습니다. 패턴 매칭은 인덱스 없이도 작동할 수 있지만, 인덱스를 사용하면 대용량 데이터셋에서 성능이 향상될 수 있습니다.</p>
-<p>인덱스의 효과는 패턴 표현식, Milvus가 고정된 리터럴 부분 문자열을 추출할 수 있는지 여부, 그리고 대상 필드의 카디널리티와 분포에 따라 달라집니다. <code translate="no">name LIKE &quot;Prod%&quot;</code> 와 같은 접두사 스타일 패턴은 <code translate="no">description LIKE &quot;%vector%&quot;</code> 또는 <code translate="no">filename LIKE &quot;%.json&quot;</code> 와 같은 중위 또는 접미사 패턴과는 다른 인덱스 전략을 적용할 때 더 큰 이점을 얻을 수 있습니다.</p>
+<p>인덱스의 효과는 패턴 표현식, Milvus가 고정된 리터럴 부분 문자열을 추출할 수 있는지 여부, 그리고 대상 필드의 카디널리티와 분포에 따라 달라집니다. <code translate="no">name LIKE &quot;Prod%&quot;</code> 와 같은 접두사 스타일 패턴은 <code translate="no">description LIKE &quot;%vector%&quot;</code> 또는 <code translate="no">filename LIKE &quot;%.json&quot;</code> 와 같은 중위 또는 접미사 패턴과는 다른 인덱스 전략을 적용하는 것이 유리할 수 있습니다.</p>
 <p>다음 표를 참고로 삼은 후, 실제 워크로드를 사용하여 벤치마크를 수행하십시오:</p>
 <table>
 <thead>

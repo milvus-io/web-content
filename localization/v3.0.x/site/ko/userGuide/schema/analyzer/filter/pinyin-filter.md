@@ -20,7 +20,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h1><p>중국어 텍스트 검색에서는 사용자가 색인된 텍스트에 표시된 대로 한자를 정확히 입력해야 하는 경우가 많습니다. 이름 조회, 자동 완성 및 입력 시 실시간 검색과 같은 워크플로우에서 사용자는 한자 대신 병음을 입력하는 경우가 많습니다. 예를 들어, 사용자는 <code translate="no">足球</code> 을 검색하기 위해 <code translate="no">zuqiu</code> 을 입력할 수 있습니다. <code translate="no">pinyin</code> 필터는 분석기 출력에 병음 토큰을 추가하여, 별도의 병음 필드를 유지 관리하지 않고도 중국어 텍스트가 병음 입력과 일치할 수 있도록 합니다.</p>
-<p><code translate="no">pinyin</code> 필터는 일반적으로 중국어 텍스트를 처리하는 <a href="/docs/ko/jieba-tokenizer.md">Jieba</a> 토큰화기와 함께 사용됩니다. 이 필터는 사용자 정의 분석기 필터 파이프라인에서 작동하며, 동일한 중국어 토큰에 대해 여러 가지 병음 토큰 형태를 출력할 수 있습니다.</p>
+<p><code translate="no">pinyin</code> 필터는 일반적으로 중국어 텍스트를 처리하는 <a href="/docs/ko/jieba-tokenizer.md">Jieba</a> 토큰화기와 함께 사용됩니다. 이 필터는 사용자 정의 분석기 필터 파이프라인에서 작동하며, 동일한 중국어 토큰에 대해 여러 형태의 병음 토큰을 출력할 수 있습니다.</p>
 <h2 id="Configuration" class="common-anchor-header">구성<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

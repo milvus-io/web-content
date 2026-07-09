@@ -72,7 +72,7 @@ summary: >-
 <tr><th>Strategi</th><th>Unit pengambilan kandidat</th><th>Masalah yang diselesaikan</th><th>Kesesuaian terbaik</th><th>Pertimbangan utama</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">tokenann</code></td><td>Vektor individual di dalam setiap baris</td><td>Menjaga vektor asli dan menghindari kehilangan akibat kompresi.</td><td>Pencarian yang mengutamakan kualitas, daftar embedding pendek atau sedang, embedding dengan daya pembedaan tinggi.</td><td>Indeks yang lebih besar dan biaya pencarian kandidat yang lebih tinggi.</td></tr>
+<tr><td><code translate="no">tokenann</code></td><td>Vektor individual di dalam setiap baris</td><td>Menjaga vektor asli dan menghindari kehilangan akibat kompresi.</td><td>Pencarian yang mengutamakan kualitas, daftar embedding pendek atau sedang, embedding dengan daya diskriminasi tinggi.</td><td>Indeks yang lebih besar dan biaya pencarian kandidat yang lebih tinggi.</td></tr>
 <tr><td><code translate="no">muvera</code></td><td>Satu vektor terenkode per baris</td><td>Mengompres daftar embedding menjadi representasi FDE berdimensi tetap tanpa pelatihan.</td><td>Dokumen yang lebih panjang, embedding dengan tingkat diskriminasi tinggi, kasus di mana TokenANN terlalu berat.</td><td>Proyeksi acak menimbulkan kerugian akibat aproksimasi; dimensi FDE memengaruhi latensi.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td>Satu vektor yang dipelajari per baris</td><td>Mempelajari kompresi khusus korpus dari daftar embedding ke vektor baris berdimensi tetap.</td><td>Embedding dengan tingkat diskriminasi rendah, pencarian dokumen multimodal atau visual, daftar embedding yang besar.</td><td>Membutuhkan pelatihan dan dapat dipengaruhi oleh distribusi korpus serta bias panjang dokumen.</td></tr>
 </tbody>
@@ -92,14 +92,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">tokenann</code> mengindeks setiap vektor dalam daftar embedding. Selama pencarian, setiap vektor kueri melakukan pencarian ANN, vektor yang cocok dikumpulkan kembali ke barisnya, dan kandidat baris yang dihasilkan diurutkan ulang dengan MaxSim.</p>
+    </button></h2><p><code translate="no">tokenann</code> mengindeks setiap vektor dalam daftar embedding. Selama pencarian, setiap vektor kueri melakukan pencarian ANN, vektor yang cocok dikumpulkan kembali ke barisnya, dan kandidat baris yang dihasilkan diberi peringkat ulang dengan MaxSim.</p>
 <div class="alert note">
 <p><strong>Gunakan TokenANN ketika kualitas menjadi prioritas utama.</strong> Metode ini merupakan aproksimasi terdekat terhadap perhitungan MaxSim asli karena menjaga semua vektor tetap tersedia dalam indeks tahap pertama.</p>
 </div>
 <ul>
 <li><p><strong>Cocok untuk:</strong> potongan teks pendek, baris dengan jumlah vektor kecil atau sedang, pemisahan semantik tingkat token yang kuat, baseline yang sensitif terhadap kualitas.</p></li>
 <li><p><strong>Kurang cocok:</strong> dokumen yang sangat panjang, halaman visual dengan ribuan vektor patch, batasan memori atau latensi yang ketat.</p></li>
-<li><p><strong>Perilaku tingkat elemen:</strong> TokenANN dapat mengambil kandidat dari vektor individual sebelum menggabungkannya kembali ke baris. Hasil pencarian EmbeddingList akhir tetap berada pada tingkat baris setelah penilaian MaxSim.</p></li>
+<li><p><strong>Perilaku tingkat elemen:</strong> TokenANN dapat mengambil kandidat dari vektor individual sebelum menggabungkannya kembali ke baris. Hasil pencarian EmbeddingList akhir tetap berada di tingkat baris setelah penilaian MaxSim.</p></li>
 </ul>
 <h2 id="MUVERA" class="common-anchor-header">MUVERA<button data-href="#MUVERA" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -146,7 +146,7 @@ summary: >-
 </div>
 <ul>
 <li><p><strong>Cocok untuk:</strong> pencarian dokumen visual, embedding patch multimodal, ruang embedding dengan tingkat diskriminasi rendah, daftar embedding besar di mana TokenANN tidak praktis.</p></li>
-<li><p><strong>Kurang cocok:</strong> korpus yang sering berubah, embedding dengan tingkat diskriminasi tinggi dan panjang dokumen yang sangat tidak seimbang, beban kerja di mana biaya pelatihan tidak dapat diterima.</p></li>
+<li><p><strong>Kurang cocok:</strong> korpus yang sering berubah, embedding dengan tingkat diskriminasi tinggi dan distribusi panjang dokumen yang sangat tidak seimbang, beban kerja di mana biaya pelatihan tidak dapat diterima.</p></li>
 <li><p><strong>Parameter penting:</strong><code translate="no">lemur_hidden_dim</code>, <code translate="no">lemur_num_train_samples</code>, <code translate="no">lemur_num_epochs</code>, <code translate="no">lemur_batch_size</code>, <code translate="no">lemur_learning_rate</code>, <code translate="no">lemur_seed</code>, dan <code translate="no">lemur_num_layers</code>.</p></li>
 </ul>
 <hr>
@@ -404,7 +404,7 @@ index_params.add_index(
 <li><p>Pengujian Milvus untuk <code translate="no">emb_list_strategy</code>, <code translate="no">retrieval_ann_ratio</code>, dan <code translate="no">emb_list_rerank</code>.</p></li>
 <li><p>Penanganan berkas konfigurasi Milvus untuk nilai default indeks sisi server di bawah bagian " <code translate="no">knowhere</code> ".</p></li>
 <li><p>Definisi parameter Knowhere untuk nilai default dan nama strategi yang didukung.</p></li>
-<li><p>Pemeriksaan kompatibilitas Knowhere untuk dukungan MUVERA/LEMUR yang hanya mendukung fp32 dan dukungan TokenANN yang hanya mendukung DiskANN.</p></li>
+<li><p>Pemeriksaan kompatibilitas Knowhere untuk dukungan MUVERA/LEMUR yang hanya mendukung fp32 dan dukungan DiskANN yang hanya mendukung TokenANN.</p></li>
 <li><p>Catatan evaluasi internal yang membandingkan TokenANN, MUVERA, dan LEMUR untuk pengambilan kandidat MaxSim.</p></li>
 </ul>
 <div class="alert note">

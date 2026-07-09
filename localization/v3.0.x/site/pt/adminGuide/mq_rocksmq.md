@@ -85,7 +85,7 @@ EOF
 bash standalone_embed.sh restart
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-A mudança de <code translate="no">mq.type</code> desta forma destina-se a uma instância <b>totalmente nova</b> (sem coleções ainda). Para alterar a fila de mensagens de uma instância que já contém dados, siga, em vez disso, o <a href="/docs/pt/switch-rocksmq-woodpecker.md">procedimento de mudança</a>.
+A mudança de <code translate="no">mq.type</code> desta forma destina-se a uma instância <b>totalmente nova</b> (sem coleções ainda). Para alterar a fila de mensagens de uma instância que já contém dados, siga o <a href="/docs/pt/switch-rocksmq-woodpecker.md">procedimento de mudança</a>.
 </div>
 <h3 id="Configure" class="common-anchor-header">Configurar<button data-href="#Configure" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -151,7 +151,7 @@ bash standalone_embed.sh delete
       </svg>
     </button></h2><ul>
 <li><strong>Atualização da versão 2.5.x para a 2.6.x:</strong> <strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v3.0-beta, deve manter a sua escolha atual de fila de mensagens. A mudança entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.
-Como a versão 2.6.x altera a predefinição da versão autónoma para Woodpecker, defina <code translate="no">mq.type: rocksmq</code> no seu ficheiro <code translate="no">user.yaml</code> <strong>antes</strong> da atualização, caso pretenda manter o RocksMQ.</li>
+Como a versão 2.6.x altera a predefinição da versão autónoma para o Woodpecker, defina <code translate="no">mq.type: rocksmq</code> no seu ficheiro <code translate="no">user.yaml</code> <strong>antes</strong> da atualização, caso pretenda manter o RocksMQ.</li>
 <li>Para alterar a fila de mensagens de uma instância em execução, consulte <a href="/docs/pt/switch-rocksmq-woodpecker.md">«Mudar do RocksMQ para o Woodpecker</a>».</li>
 </ul>
 <h2 id="Whats-next" class="common-anchor-header">Próximos passos<button data-href="#Whats-next" class="anchor-icon" translate="no">

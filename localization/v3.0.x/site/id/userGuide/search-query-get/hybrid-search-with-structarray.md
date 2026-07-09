@@ -211,7 +211,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><p>Jika pencarian hibrida menggabungkan permintaan " <code translate="no">AnnSearchRequest</code> " tingkat elemen StructArray dengan permintaan vektor tingkat koleksi, permintaan EmbeddingList, atau permintaan tingkat elemen di bawah bidang StructArray yang berbeda, cakupan kandidat akhir berada pada tingkat entitas. Dalam hal ini, setiap permintaan " <code translate="no">AnnSearchRequest</code> " tingkat elemen StructArray digabungkan menjadi kandidat tingkat entitas sebelum pengurutan ulang hibrida.</p>
-<p>Gunakan ` <code translate="no">element_scope</code> ` di dalam ` <code translate="no">params</code> ` dari ` <code translate="no">AnnSearchRequest</code> ` tingkat elemen StructArray jika Anda perlu mengontrol cara beberapa elemen yang cocok dari entitas yang sama digabungkan.</p>
+<p>Gunakan ` <code translate="no">element_scope</code> ` di dalam ` <code translate="no">params</code> ` dari ` <code translate="no">AnnSearchRequest</code> ` tingkat elemen StructArray saat Anda perlu mengontrol cara beberapa elemen yang cocok dari entitas yang sama digabungkan.</p>
 <pre><code translate="no">title_req = AnnSearchRequest(
     data=[query_vector],
     anns_field=<span class="hljs-string">&quot;title_vector&quot;</span>,
@@ -363,7 +363,7 @@ results = client.hybrid_search(
     </button></h2><ul>
 <li><p>Menambahkan ` <code translate="no">element_scope</code> ` ke permintaan hibrida tingkat elemen `StructArray` yang sama. Permintaan tersebut tetap berada di tingkat elemen dan tidak melakukan penggabungan (collapse) di tingkat entitas.</p></li>
 <li><p>Menambahkan ` <code translate="no">element_scope</code> ` ke ` <code translate="no">chunks[emb_list_vector]</code>`. Pencarian `EmbeddingList` sudah berada di tingkat entitas.</p></li>
-<li><p>Mengasumsikan dua bidang StructArray berbagi offset elemen. Offset ` <code translate="no">3</code> ` di ` <code translate="no">chunks</code> ` dan offset ` <code translate="no">3</code> ` di bidang StructArray lain merupakan elemen yang berbeda, sehingga permintaan hibrida menjadi tingkat entitas.</p></li>
+<li><p>Mengasumsikan dua bidang StructArray berbagi offset elemen. Offset ` <code translate="no">3</code> ` dalam ` <code translate="no">chunks</code> ` dan offset ` <code translate="no">3</code> ` dalam bidang StructArray lain merupakan elemen yang berbeda, sehingga permintaan hibrida menjadi tingkat entitas.</p></li>
 <li><p>Gunakan <code translate="no">topk_sum</code> dengan <code translate="no">L2</code>. Gunakan <code translate="no">max</code>, <code translate="no">avg</code>, atau <code translate="no">topk_avg</code> untuk metrik jarak negatif.</p></li>
 <li><p>Diharapkan hasil hibrida tingkat entitas mencakup offset elemen Struct yang dipilih setelah penggabungan.</p></li>
 </ul>

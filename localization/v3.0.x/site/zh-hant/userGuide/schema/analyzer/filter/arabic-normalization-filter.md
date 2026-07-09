@@ -1,7 +1,7 @@
 ---
 id: arabic-normalization-filter.md
 title: 阿拉伯文標準化Compatible with Milvus 3.0.0+
-summary: arabic_normalization 濾波器會將阿拉伯字母的變體進行標準化處理，並移除阿拉伯語的音標符號及 Tatweel。
+summary: arabic_normalization 濾波器會將阿拉伯字母的變體進行標準化處理，並移除阿拉伯語的音標符號和塔特維爾（Tatweel）。
 beta: Milvus 3.0.0+
 ---
 <h1 id="Arabic-Normalization" class="common-anchor-header">阿拉伯文標準化<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Arabic-Normalization" class="anchor-icon" translate="no">
@@ -94,7 +94,7 @@ beta: Milvus 3.0.0+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在將分析器設定套用至您的集合架構之前，請先使用 `<code translate="no">run_analyzer</code> ` 方法驗證其運作行為。</p>
+    </button></h2><p>在將分析器設定套用至您的集合架構之前，請先使用 `<code translate="no">run_analyzer</code> ` 方法驗證其行為。</p>
 <h3 id="Analyzer-configuration" class="common-anchor-header">分析器設定<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

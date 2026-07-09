@@ -79,8 +79,8 @@ summary: >-
 <tr><td>度量族</td><td><code translate="no">MAX_SIM*</code>，例如<code translate="no">MAX_SIM_COSINE</code> 。</td><td>常規向量度量，例如<code translate="no">COSINE</code> 、<code translate="no">IP</code> 或<code translate="no">L2</code> 。</td></tr>
 <tr><td>一個搜尋結果代表什麼</td><td>一個匹配的實體，其 StructArray 向量子欄位與查詢嵌入清單相似。</td><td>StructArray 欄位內的一個匹配 Struct 元素。</td></tr>
 <tr><td>結果的細粒度</td><td>實體層級。</td><td>Struct 元素層級。</td></tr>
-<tr><td>偏移量</td><td>不適用。</td><td>識別在返回時，匹配的結構體元素以零為起點的位置。</td></tr>
-<tr><td>典型用途</td><td>ColBERT、ColPali 及其他後期交互檢索模式。</td><td>塊級、段落級、片段級、補丁級或事實級檢索。</td></tr>
+<tr><td>偏移量</td><td>不適用。</td><td>識別在返回時，匹配的 Struct 元素以零為起點的位置。</td></tr>
+<tr><td>典型用途</td><td>ColBERT、ColPali 及其他後期互動檢索模式。</td><td>塊級、段落級、片段級、補丁級或事實級檢索。</td></tr>
 </tbody>
 </table>
 <h2 id="Run-EmbeddingList-search" class="common-anchor-header">執行 EmbeddingList 搜尋<button data-href="#Run-EmbeddingList-search" class="anchor-icon" translate="no">
@@ -98,7 +98,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>當查詢本身包含多個向量，且目標 StructArray 向量子欄位是透過<code translate="no">MAX_SIM*</code> 度量進行索引時，請使用 EmbeddingList 搜尋。結果為實體層級的匹配。</p>
+    </button></h2><p>當查詢本身包含多個向量，且目標 StructArray 向量子欄位採用<code translate="no">MAX_SIM*</code> 度量進行索引時，請使用 EmbeddingList 搜尋。結果為實體層級的匹配。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">from</span> pymilvus.client.embedding_list <span class="hljs-keyword">import</span> EmbeddingList
 
@@ -129,7 +129,7 @@ results = client.search(
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
         <span class="hljs-built_in">print</span>(hit[<span class="hljs-string">&quot;id&quot;</span>], hit[<span class="hljs-string">&quot;distance&quot;</span>], hit[<span class="hljs-string">&quot;entity&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>在此搜尋模式下，<code translate="no">limit</code> 會控制每個查詢所返回的實體數量。輸出結果可能包含 StructArray 子欄位，但搜尋結果本身代表的是匹配到的父實體，而非某個特定的 Struct 元素。</p>
+<p>在此搜尋模式下，<code translate="no">limit</code> 會控制每個查詢所返回的實體數量。輸出結果可能包含 StructArray 子欄位，但搜尋結果本身代表的是匹配的父實體，而非某個特定的 Struct 元素。</p>
 <div class="alert note">
 <p>如需完整的 ColBERT 或 ColPali 風格操作指南，請參閱<a href="/docs/zh-hant/search-with-embedding-lists.md">《使用嵌入式清單進行搜尋</a>》。本頁面僅涵蓋 StructArray 的基本搜尋行為。</p>
 </div>
@@ -200,7 +200,7 @@ results = client.search(
 <tr><td><code translate="no">distance</code> 或分數</td><td>查詢嵌入清單與儲存的嵌入清單之間的分數或距離。</td><td>查詢向量與匹配的 Struct 元素向量之間的分數或距離。</td></tr>
 <tr><td><code translate="no">offset</code></td><td>不適用。</td><td>回傳時，匹配 Struct 元素的從零開始的索引位置。</td></tr>
 <tr><td>重複的主鍵</td><td>由於結果是實體層級的，因此單一查詢中不預期會出現此情況。</td><td>可能發生，因為同一實體中的多個 Struct 元素可能會匹配。</td></tr>
-<tr><td>請求的 StructArray 輸出欄位</td><td>由匹配的實體返回。</td><td>將依照目標 API 和 SDK 所支援的元素層級命中結構進行回傳。</td></tr>
+<tr><td>請求的 StructArray 輸出欄位</td><td>由匹配的實體返回。</td><td>將依照目標 API 和 SDK 所支援的元素層級命中結構一併回傳。</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">常見錯誤<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
@@ -222,9 +222,9 @@ results = client.search(
 <li><p>使用 `<code translate="no">chunks.emb</code> ` 代替所需的子欄位路徑語法 `<code translate="no">chunks[emb]</code>`。</p></li>
 <li><p>對使用一般向量度量進行索引的向量子欄位，使用 EmbeddingList 查詢。</p></li>
 <li><p>對使用<code translate="no">MAX_SIM*</code> 度量進行索引的向量子欄位，使用一般向量查詢。</p></li>
-<li><p>預期元素層級搜尋<code translate="no">limit</code> 會回傳相同數量的唯一父實體。其實它回傳的是元素匹配結果。</p></li>
+<li><p>預期元素層級搜尋<code translate="no">limit</code> 會回傳相同數量的唯一父實體。其實它回傳的是元素搜尋結果。</p></li>
 <li><p>預期 EmbeddingList 搜尋會返回一個特定的元素偏移量，但實際返回的是實體層級的匹配結果。</p></li>
-<li><p>將同一個向量子欄位同時用於兩種搜尋模式。應使用獨立的向量子欄位，因為每個向量子欄位僅能接受一種索引。</p></li>
+<li><p>將同一個向量子欄位同時用於兩種搜尋模式。應使用獨立的向量子欄位，因為每個向量子欄位僅接受一種索引。</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">後續步驟<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -244,7 +244,7 @@ results = client.search(
     </button></h2><ol>
 <li><p>若要透過標量條件限制元素層級搜尋，請參閱《<a href="/docs/zh-hant/filtered-search-with-structarray.md">使用 StructArray 進行篩選搜尋</a>》。</p></li>
 <li><p>若要根據分數或距離範圍進行搜尋，請參閱《<a href="/docs/zh-hant/range-search-with-structarray.md">使用 StructArray 進行範圍搜尋</a>》。</p></li>
-<li><p>若要在元素層級搜尋後，針對每個父實體最多僅返回一個結果，請參閱《<a href="/docs/zh-hant/grouping-search-with-structarray.md">使用 StructArray 進行分組搜尋</a>》。</p></li>
+<li><p>若要在元素層級搜尋後，針對每個父實體最多返回一個結果，請參閱《<a href="/docs/zh-hant/grouping-search-with-structarray.md">使用 StructArray 進行分組搜尋</a>》。</p></li>
 <li><p>若要將 StructArray 搜尋與其他向量搜尋結合使用，請參閱《<a href="/docs/zh-hant/hybrid-search-with-structarray.md">使用 StructArray 進行混合搜尋</a>》。</p></li>
 <li><p>若要檢視受支援的資料類型、度量、篩選器及特定版本的限制，請參閱《<a href="/docs/zh-hant/structarray-limits.md">StructArray 限制</a>》。</p></li>
 </ol>

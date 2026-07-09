@@ -44,7 +44,7 @@ beta: Milvus 3.0.0+
 }
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">thai</code> トークナイザーには、設定可能なパラメータはありません。</p>
-<p>このトークナイザーは、1つまたは複数のフィルターと組み合わせて使用できます。たとえば、以下の設定では、<code translate="no">thai</code> トークナイザーを <a href="/docs/ja/lowercase-filter.md"><code translate="no">lowercase</code></a> および <a href="/docs/ja/decimaldigit-filter.md"><code translate="no">decimaldigit</code></a> フィルターを組み合わせて使用しています：</p>
+<p>このトークナイザーは、1つまたは複数のフィルターと組み合わせて使用できます。たとえば、以下の設定では、<code translate="no">thai</code> トークナイザーを <a href="/docs/ja/lowercase-filter.md"><code translate="no">lowercase</code></a> および <a href="/docs/ja/decimaldigit-filter.md"><code translate="no">decimaldigit</code></a> フィルターと組み合わせて使用しています：</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;thai&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [
@@ -58,7 +58,7 @@ beta: Milvus 3.0.0+
 <ul>
 <li><strong>タイ語のセグメンテーション</strong>：空白に依存せずに、タイ語のテキストを単語トークンに分割します。</li>
 <li><strong>空白および句読点のフィルタリング</strong>：空白や句読点のみで構成されるセグメントを除外します。これは、 <a href="/docs/ja/icu-tokenizer.md"><code translate="no">icu</code></a> トークナイザーとは異なり、後者は句読点やスペースをトークンとして保持することができます。</li>
-<li><strong>混合スクリプトのテキスト</strong>：タイ語と英語が混在するテキストにおいて、ラテン文字の単語トークンを生成します。</li>
+<li><strong>混合スクリプトのテキスト</strong>：タイ語と英語が混在するテキストにおいて、ラテン文字の単語トークンを出力します。</li>
 <li><strong>トークナイザーのみ</strong>：トークンの小文字化、Unicode 数字の正規化、ストップワードの除去は行いません。これらの処理には、フィルタを追加するか、組み込みの <a href="/docs/ja/thai-analyzer.md"><code translate="no">thai</code></a> アナライザーを使用してください。</li>
 <li><strong>位置セマンティクス</strong>：スキップされた空白や句読点を含む、文字ベースのトークン位置を使用します。これにより、フレーズマッチングや近接マッチングの挙動が、他の非ラテン文字用トークナイザーと一貫性を保つようになります。</li>
 </ul>
@@ -79,7 +79,7 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><p>アナライザの設定をコレクションスキーマに適用する前に、<code translate="no">run_analyzer</code> メソッドを使用してその動作を確認してください。</p>
-<h3 id="Analyzer-configuration" class="common-anchor-header">アナライザの設定<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
+<h3 id="Analyzer-configuration" class="common-anchor-header">アナライザーの設定<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

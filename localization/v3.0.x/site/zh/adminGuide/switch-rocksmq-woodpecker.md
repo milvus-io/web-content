@@ -21,7 +21,7 @@ summary: 将 Milvus Standalone 部署（Docker Compose）的消息队列在 Rock
     </button></h1><p>本页面介绍如何将<strong>Milvus Standalone（Docker Compose）</strong>的消息队列（MQ）在<strong>RocksMQ</strong>和<strong>Woodpecker</strong>（本地或 MinIO 后端）之间双向切换。有关一般工作流和先决条件，请参阅《<a href="/docs/zh/switch-mq-type.md">切换 MQ 类型</a>》。</p>
 <div class="alert note">
 <ul>
-<li><strong>先决条件：</strong>MQ 切换功能仅在<strong>Milvus 3.0 及更高版本中</strong>提供。开始操作前，请将您的 Milvus 实例升级至 Milvus 3.0 或更高版本——此功能在早期版本中不可用。</li>
+<li><strong>先决条件：</strong>MQ 切换功能仅在<strong>Milvus 3.0 及更高版本中</strong>提供。开始操作前，请将您的 Milvus 实例升级至 Milvus 3.0 或更高版本——此功能在更早版本中不可用。</li>
 <li>MQ 切换需要 Docker<strong>Compose</strong>部署（该部署启用了 etcd 配置源）。单容器 Docker 部署不支持切换。</li>
 </ul>
 </div>
@@ -223,7 +223,7 @@ summary: 将 Milvus Standalone 部署（Docker Compose）的消息队列在 Rock
         ></path>
       </svg>
     </button></h3><ul>
-<li><strong>元数据（etcd）：</strong>Woodpecker 键的前缀通常为<code translate="no">woodpecker/...</code> 。请通过<code translate="no">etcdctl get woodpecker --prefix</code> 查看该键，然后将其删除。</li>
+<li><strong>元数据（etcd）：</strong>Woodpecker 键的前缀通常为<code translate="no">woodpecker/...</code> 。通过<code translate="no">etcdctl get woodpecker --prefix</code> 查看该键，然后将其删除。</li>
 <li><strong>存储数据：</strong>在<strong>MinIO 模式下</strong>，删除存储桶中<code translate="no">&lt;rootPath&gt;/wp/...</code> 下的日志数据（通常位于<code translate="no">files/wp/...</code> ）；在<strong>本地模式下</strong>，数据位于本地磁盘的<code translate="no">volumes/milvus/data/wp/...</code> 路径下。</li>
 </ul>
 <p>如果您计划稍后切换回 Woodpecker，请先清理这些文件以避免冲突。</p>

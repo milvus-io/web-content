@@ -63,13 +63,13 @@ beta: Milvus 3.0.x
 <tr><th>参数</th><th>类型</th><th>默认值</th><th>描述</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">keep_original</code></td><td>布尔值</td><td><code translate="no">true</code></td><td>在分析器的输出中保留原始的中文标记。</td></tr>
-<tr><td><code translate="no">keep_full_pinyin</code></td><td>布尔值</td><td><code translate="no">true</code></td><td>输出字符级拼音标记。例如，<code translate="no">中文</code> 将生成<code translate="no">zhong</code> 和<code translate="no">wen</code> 。</td></tr>
+<tr><td><code translate="no">keep_original</code></td><td>布尔值</td><td><code translate="no">true</code></td><td>在分析器的输出中保留原始的中文词元。</td></tr>
+<tr><td><code translate="no">keep_full_pinyin</code></td><td>布尔值</td><td><code translate="no">true</code></td><td>输出字符级别的拼音标记。例如，<code translate="no">中文</code> 将生成<code translate="no">zhong</code> 和<code translate="no">wen</code> 。</td></tr>
 <tr><td><code translate="no">keep_joined_full_pinyin</code></td><td>布尔值</td><td><code translate="no">false</code></td><td>针对每个源词素输出一个拼合的拼音词素。例如，<code translate="no">中文</code> 会生成<code translate="no">zhongwen</code> 。</td></tr>
 <tr><td><code translate="no">keep_separate_first_letter</code></td><td>布尔值</td><td><code translate="no">false</code></td><td>针对每个源词元，输出一个拼音首字母词元。例如，<code translate="no">中文</code> 会生成<code translate="no">zw</code> 。</td></tr>
 </tbody>
 </table>
-<p>该过滤器对分词器生成的词标进行处理。对于中文文本，请将其与<code translate="no">jieba</code> 等分词器配合使用。</p>
+<p>该过滤器对分词器生成的词元进行处理。对于中文文本，请将其与<code translate="no">jieba</code> 等分词器配合使用。</p>
 <h2 id="Examples" class="common-anchor-header">示例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -119,7 +119,7 @@ result = client.run_analyzer(sample_text, analyzer_params)
 <p>预期输出：</p>
 <pre><code translate="no" class="language-plaintext">[&#x27;中文&#x27;, &#x27;zhong&#x27;, &#x27;wen&#x27;, &#x27;测试&#x27;, &#x27;ce&#x27;, &#x27;shi&#x27;]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Match-Chinese-terms-with-joined-Pinyin" class="common-anchor-header">将中文词与拼写连读形式进行匹配<button data-href="#Match-Chinese-terms-with-joined-Pinyin" class="anchor-icon" translate="no">
+<h3 id="Match-Chinese-terms-with-joined-Pinyin" class="common-anchor-header">将中文词与拼写连读的拼音进行匹配<button data-href="#Match-Chinese-terms-with-joined-Pinyin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

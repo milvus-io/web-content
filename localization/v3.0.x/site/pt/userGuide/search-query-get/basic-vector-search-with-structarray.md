@@ -5,8 +5,8 @@ summary: >-
   Utilize esta página para efetuar uma pesquisa vetorial nos subcampos vetoriais
   dentro de um campo StructArray. O StructArray suporta dois modos básicos de
   pesquisa vetorial: a pesquisa EmbeddingList, que avalia uma lista de
-  incorporações armazenada em cada entidade, e a pesquisa ao nível do elemento,
-  que pesquisa cada elemento Struct de forma independente.
+  embeddings armazenada em cada entidade, e a pesquisa ao nível do elemento, que
+  pesquisa cada elemento Struct de forma independente.
 ---
 <h1 id="Basic-Vector-Search-with-StructArray" class="common-anchor-header">Pesquisa vetorial básica com StructArray<button data-href="#Basic-Vector-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -24,7 +24,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Utilize esta página para efetuar uma pesquisa vetorial em subcampos vetoriais dentro de um campo StructArray. O StructArray suporta dois modos básicos de pesquisa vetorial: a pesquisa EmbeddingList, que avalia uma lista de incorporações armazenada em cada entidade, e a pesquisa ao nível do elemento, que pesquisa cada elemento Struct de forma independente.</p>
-<p>Esta página utiliza a coleção « <code translate="no">tech_articles</code> » da secção <a href="/docs/pt/create-structarray-field.md">«Criar um campo StructArray</a>». A coleção possui um campo StructArray denominado « <code translate="no">chunks</code> ». Cada bloco contém texto, metadados escalares, um subcampo vetorial denominado « <code translate="no">emb_list_vector</code> » com um índice para a pesquisa EmbeddingList e um subcampo vetorial denominado « <code translate="no">emb</code> » com um índice para a pesquisa ao nível do elemento.</p>
+<p>Esta página utiliza a coleção « <code translate="no">tech_articles</code> » da secção <a href="/docs/pt/create-structarray-field.md">«Criar um campo StructArray</a>». A coleção possui um campo StructArray denominado « <code translate="no">chunks</code> ». Cada chunk contém texto, metadados escalares, um subcampo vetorial denominado « <code translate="no">emb_list_vector</code> » com um índice para a pesquisa EmbeddingList e um subcampo vetorial denominado « <code translate="no">emb</code> » com um índice para a pesquisa ao nível do elemento.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Antes de começar<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -131,7 +131,7 @@ results = client.search(
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
         <span class="hljs-built_in">print</span>(hit[<span class="hljs-string">&quot;id&quot;</span>], hit[<span class="hljs-string">&quot;distance&quot;</span>], hit[<span class="hljs-string">&quot;entity&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>Neste modo de pesquisa, a « <code translate="no">limit</code> » controla quantas entidades são devolvidas para cada consulta. O resultado pode incluir subcampos StructArray, mas o próprio resultado representa a entidade pai correspondente, em vez de um elemento Struct específico.</p>
+<p>Neste modo de pesquisa, a « <code translate="no">limit</code> » controla quantas entidades são devolvidas para cada consulta. O resultado pode incluir subcampos «StructArray», mas o próprio resultado representa a entidade-pai correspondente, em vez de um elemento «Struct» específico.</p>
 <div class="alert note">
 <p>Para um guia passo a passo completo ao estilo ColBERT ou ColPali, consulte <a href="/docs/pt/search-with-embedding-lists.md">«Pesquisa com listas de incorporação</a>». Esta página aborda apenas o comportamento básico da pesquisa no StructArray.</p>
 </div>

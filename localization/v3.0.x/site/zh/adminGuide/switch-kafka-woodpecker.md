@@ -1,7 +1,7 @@
 ---
 id: switch-kafka-woodpecker.md
 title: 在 Kafka 和 Woodpecker 之间切换
-summary: 使用 Helm 或 Milvus Operator，将 Milvus 集群的消息队列在 Kafka 和 Woodpecker 之间切换。
+summary: 使用 Helm 或 Milvus Operator，将 Milvus 集群的消息队列在 Kafka 和 Woodpecker 之间进行切换。
 ---
 <h1 id="Switch-between-Kafka-and-Woodpecker" class="common-anchor-header">在 Kafka 和 Woodpecker 之间切换<button data-href="#Switch-between-Kafka-and-Woodpecker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -23,7 +23,7 @@ summary: 使用 Helm 或 Milvus Operator，将 Milvus 集群的消息队列在 K
 <p><strong>先决条件：</strong>MQ 切换功能仅在<strong>Milvus 3.0 及更高版本中</strong>提供。开始操作前，请将您的 Milvus 实例升级至 Milvus 3.0 或更高版本——此功能在早期版本中不可用。</p>
 </div>
 <div class="alert warning">
-<p>切换消息队列是一项<strong>高风险操作</strong>。请选择<strong>与您的</strong>部署方式相匹配的章节<strong>——使用 Helm</strong> <strong>或使用 Milvus Operator</strong>——并按顺序从上到下操作。请勿混合使用 Helm 和 Operator 命令。</p>
+<p>切换消息队列是一项<strong>高风险操作</strong>。请选择<strong>与您的</strong>部署方式相匹配的章节<strong>——使用 Helm</strong> <strong>或使用 Milvus Operator</strong>——并按顺序从头到尾操作。请勿混合使用 Helm 和 Operator 命令。</p>
 </div>
 <h2 id="With-Helm" class="common-anchor-header">使用 Helm<button data-href="#With-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -88,7 +88,7 @@ summary: 使用 Helm 或 Milvus Operator，将 Milvus 集群的消息队列在 K
         ></path>
       </svg>
     </button></h3><p><strong>步骤 1：验证 Milvus 实例是否正在运行。</strong></p>
-<p><strong>步骤 2：配置目标 Kafka 连接并重启 Milvus。</strong>切换操作要求 Milvus 已知晓 Kafka 连接信息，因此请通过 `<code translate="no">extraConfigFiles</code> ` 将其写入 `<code translate="no">user.yaml</code> `，并使用 `<code translate="no">helm upgrade</code> ` 应用配置（该操作会滚动更新 Pod）。`<code translate="no">streaming.enabled=true</code> ` 是 Switch MQ 功能的必备条件。有关 SASL/SSL 的详细信息，请参阅<a href="/docs/zh/connect_kafka_ssl.md">《使用 SASL/SSL 连接 Kafka》</a>。</p>
+<p><strong>步骤 2：配置目标 Kafka 连接并重启 Milvus。</strong>切换操作需要 Milvus 已知晓 Kafka 连接信息，因此请通过 `<code translate="no">extraConfigFiles</code> ` 将其写入 `<code translate="no">user.yaml</code> `，并使用 `<code translate="no">helm upgrade</code> ` 应用配置（这将滚动更新 Pod）。`<code translate="no">streaming.enabled=true</code> ` 是 Switch MQ 功能的必备条件。有关 SASL/SSL 的详细信息，请参阅<a href="/docs/zh/connect_kafka_ssl.md">《使用 SASL/SSL 连接到 Kafka》</a>。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -194,7 +194,7 @@ summary: 使用 Helm 或 Milvus Operator，将 Milvus 集群的消息队列在 K
         ></path>
       </svg>
     </button></h3><p><strong>步骤 1：验证 Milvus 实例是否正在运行。</strong></p>
-<p><strong>步骤 2：配置目标 Kafka 连接并重启 Milvus。</strong>将 Kafka 连接配置放置在<code translate="no">spec.config</code> 下（Operator 会将<code translate="no">spec.config</code> 渲染为<code translate="no">user.yaml</code> ），并设置 MQ 类型；应用 CR 后，Pod 将根据新配置进行滚动更新。有关 SASL/SSL 的详细信息，请参阅<a href="/docs/zh/connect_kafka_ssl.md">《使用 SASL/SSL 连接到 Kafka》</a>。</p>
+<p><strong>步骤 2：配置目标 Kafka 连接并重启 Milvus。</strong>将 Kafka 连接配置放置在<code translate="no">spec.config</code> 下（操作符会将<code translate="no">spec.config</code> 渲染为<code translate="no">user.yaml</code> ），并设置 MQ 类型；应用 CR 后，Pod 将根据新配置进行滚动更新。有关 SASL/SSL 的详细信息，请参阅<a href="/docs/zh/connect_kafka_ssl.md">《使用 SASL/SSL 连接到 Kafka》</a>。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># change_configmap.yaml</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -230,7 +230,7 @@ summary: 使用 Helm 或 Milvus Operator，将 Milvus 集群的消息队列在 K
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>切换成功时会记录日志：<code translate="no">[mqTypeValue=kafka]</code> 。</p>
-<p><strong>步骤 5：（可选）清理 Woodpecker 数据。</strong>删除 MinIO/S3 上的 Woodpecker 数据（位于<code translate="no">&lt;rootPath&gt;/wp/...</code> 目录下，通常为<code translate="no">files/wp/...</code> ）以及 etcd 中的 Woodpecker 元数据（<code translate="no">etcdctl get woodpecker --prefix</code> ）。如果您计划日后切换回 Woodpecker，请先清理这些文件。</p>
+<p><strong>步骤 5：（可选）清理 Woodpecker 数据。</strong>删除 MinIO/S3 上的 Woodpecker 数据（位于<code translate="no">&lt;rootPath&gt;/wp/...</code> 目录下，通常为<code translate="no">files/wp/...</code> ）以及 etcd 中的 Woodpecker 元数据（<code translate="no">etcdctl get woodpecker --prefix</code> ）。如果您计划稍后切换回 Woodpecker，请先清理这些文件。</p>
 <h2 id="Supported-scenarios" class="common-anchor-header">支持的场景<button data-href="#Supported-scenarios" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -21,7 +21,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>當一個實體需要包含結構化元素的有序清單時，請建立 StructArray 欄位。StructArray 欄位是一種 Array 欄位，其元素類型為 Struct。每個 Struct 元素皆遵循相同的架構，並可包含標量子欄位、向量子欄位，或兩者兼具。</p>
-<p>本頁說明如何定義 Struct 模式、將其新增為 StructArray 欄位、選擇日後用於搜尋與篩選的子欄位，以及在插入或建立資料索引前，了解適用的模式規則。</p>
+<p>本頁說明如何定義 Struct 模式、將其新增為 StructArray 欄位、選擇日後用於搜尋與篩選的子欄位，以及在插入或建立資料索引之前，了解適用的模式規則。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">開始之前<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -83,7 +83,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>StructArray 欄位會為每個 Struct 子欄位儲存一個陣列值。定義 Struct 模式時，請從受支援的標量與向量類別中選擇子欄位類型。</p>
+    </button></h2><p>StructArray 欄位會為每個 Struct 子欄位儲存一個陣列值。定義 Struct 模式時，請從受支援的標量與向量家族中選擇子欄位類型。</p>
 <table>
 <thead>
 <tr><th>Struct 子欄位的實體類型</th><th>支援</th><th>備註</th></tr>
@@ -127,7 +127,7 @@ summary: >-
 <ol>
 <li><p>建立集合架構。</p></li>
 <li><p>新增集合層級的欄位，例如主鍵和文章層級的欄位。</p></li>
-<li><p>為儲存於 StructArray 欄位中的元素建立 Struct 模式。</p></li>
+<li><p>為儲存於 StructArray 欄位內的元素建立 Struct 架構。</p></li>
 <li><p>在 Struct 模式中新增標量與向量子欄位。</p></li>
 <li><p>新增一個陣列欄位，並將其<code translate="no">element_type=DataType.STRUCT</code> 設為 Struct 模式。</p></li>
 <li><p>將 `<code translate="no">struct_schema</code> ` 設定為 `Struct` 模式。</p></li>
@@ -337,7 +337,7 @@ client.add_collection_struct_field(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>新增 StructArray 欄位後，現有實體針對該新欄位的所有子欄位，皆會傳回 `<code translate="no">null</code> `。</p>
-<p>StructArray 欄位建立後，您無法向該現有 StructArray 欄位新增子欄位。若日後需要額外的元素屬性，請呼叫 `<code translate="no">drop_collection_field()</code> ` 來移除該 StructArray 欄位，然後使用更新的 Struct 架構新增一個新的 StructArray 欄位。</p>
+<p>StructArray 欄位建立後，您無法向該現有 StructArray 欄位新增子欄位。若日後需要額外的元素屬性，請呼叫 `<code translate="no">drop_collection_field()</code> ` 來刪除該 StructArray 欄位，然後使用更新的 Struct 架構新增一個新的 StructArray 欄位。</p>
 <pre><code translate="no" class="language-python">client.drop_collection_field(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
     field_name=<span class="hljs-string">&quot;chunks&quot;</span>,
@@ -376,7 +376,7 @@ client.add_collection_struct_field(
 <tr><td><code translate="no">max_capacity</code> 此欄位為必填。</td><td>此欄位為必填欄位。它限制每個實體可在 StructArray 欄位中儲存的 Struct 元素數量。</td></tr>
 <tr><td>僅允許使用受支援的子欄位類型。</td><td>請使用 StructArray 支援的標量和向量子欄位類型。請勿定義 JSON、Geometry、Text、Timestamptz、SparseFloatVector 或嵌套的 Struct / Array 子欄位。</td></tr>
 <tr><td>向量子欄位在搜尋前需要建立索引。</td><td>在執行向量搜尋之前，請先針對路徑（例如<code translate="no">chunks[emb_list_vector]</code> 或<code translate="no">chunks[emb]</code> ）建立索引。</td></tr>
-<tr><td>一個向量子欄位對應一個索引。</td><td>若需同時進行 EmbeddingList 搜尋與元素層級搜尋，請建立兩個獨立的向量子欄位。</td></tr>
+<tr><td>一個向量子欄位僅對應一個索引。</td><td>若需同時進行 EmbeddingList 搜尋與元素層級搜尋，請建立兩個獨立的向量子欄位。</td></tr>
 <tr><td>現有的 StructArray 子欄位是固定的。</td><td>建立 StructArray 欄位後，請勿期望能向同一個 StructArray 欄位新增更多子欄位。</td></tr>
 <tr><td>Struct 內部不支援函式。</td><td>請勿在 StructArray 欄位內為欄位或子欄位定義函式。</td></tr>
 <tr><td>標量子欄位應符合篩選需求。</td><td>僅在日後需要對其進行篩選、分組或輸出時，才應新增如<code translate="no">section</code> 、<code translate="no">quality_score</code> 或<code translate="no">has_code</code> 等欄位。</td></tr>
@@ -405,7 +405,7 @@ client.add_collection_struct_field(
 <li><p>將同一個向量子欄位同時用於 EmbeddingList 搜尋與元素層級搜尋。</p></li>
 <li><p>僅新增向量子欄位，卻忽略了篩選所需的標量子欄位，例如<code translate="no">section</code> 、<code translate="no">quality_score</code> 或<code translate="no">has_code</code> 。</p></li>
 <li><p>將向量子欄位視為<code translate="no">$[...]</code> 的標量謂詞輸入。使用向量子欄位進行向量搜尋，並使用標量子欄位進行標量謂詞搜尋。</p></li>
-<li><p>假設在 StructArray 欄位建立後，可向該欄位新增子欄位。</p></li>
+<li><p>假設在 StructArray 欄位建立後，可向其新增子欄位。</p></li>
 <li><p>使用<code translate="no">chunks.emb</code> 或<code translate="no">chunks.emb_list_vector</code> 取代必需的路徑語法<code translate="no">chunks[emb]</code> 或<code translate="no">chunks[emb_list_vector]</code> 。</p></li>
 <li><p>將可為空的 StructArray 行為視為在每個目標版本中皆可用。</p></li>
 </ul>

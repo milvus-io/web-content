@@ -23,7 +23,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Erstellen Sie Indizes für StructArray-Unterfelder, bevor Sie eine Vektorsuche durchführen oder die skalare Filterung beschleunigen. Bei einem StructArray-Feld ist das Indexziel ein Unterfeldpfad, z. B. <code translate="no">chunks[emb_list_vector]</code>, <code translate="no">chunks[emb]</code> oder <code translate="no">chunks[section]</code>.</p>
-<p>Auf dieser Seite wird die Sammlung „ <code translate="no">tech_articles</code> “ aus dem <a href="/docs/de/create-structarray-field.md">Abschnitt „Erstellen eines StructArray-Feldes“</a> verwendet. Das StructArray-Feld „ <code translate="no">chunks</code> “ enthält skalare Unterfelder für die Filterung und Vektor-Unterfelder für die Suche.</p>
+<p>Auf dieser Seite wird die Sammlung „ <code translate="no">tech_articles</code> “ aus dem <a href="/docs/de/create-structarray-field.md">Abschnitt „Erstellen eines StructArray-Feldes“</a> verwendet. Das StructArray-Feld „ <code translate="no">chunks</code> “ enthält skalare Unterfelder zum Filtern und Vektor-Unterfelder zum Suchen.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Bevor Sie beginnen<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,7 +53,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Ein Vektorfeld oder Vektorunterfeld akzeptiert nur einen Index. Wenn Sie sowohl die „EmbeddingList“-Suche als auch die Suche auf Elementebene benötigen, erstellen Sie zwei separate Vektorunterfelder und indizieren Sie diese separat. Auf dieser Seite wird „ <code translate="no">chunks[emb_list_vector]</code> “ für die „EmbeddingList“-Suche indiziert und „ <code translate="no">chunks[emb]</code> “ für die Suche auf Elementebene.</p>
+<p>Ein Vektorfeld oder Vektorunterfeld akzeptiert nur einen Index. Wenn Sie sowohl die EmbeddingList-Suche als auch die Suche auf Elementebene benötigen, erstellen Sie zwei separate Vektorunterfelder und indizieren Sie diese separat. Auf dieser Seite wird „ <code translate="no">chunks[emb_list_vector]</code> “ für die EmbeddingList-Suche indiziert und „ <code translate="no">chunks[emb]</code> “ für die Suche auf Elementebene.</p>
 </div>
 <h2 id="Choose-indexes" class="common-anchor-header">Indizes auswählen<button data-href="#Choose-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -80,7 +80,7 @@ summary: >-
 <tr><td>Vektorsuche auf Elementebene</td><td><code translate="no">chunks[emb]</code></td><td>Eine reguläre Vektormetrikfamilie, wie z. B. „ <code translate="no">COSINE</code> “, „ <code translate="no">IP</code> “ oder „ <code translate="no">L2</code> “.</td></tr>
 <tr><td>Nach Zeichenfolge oder Kategorie filtern</td><td><code translate="no">chunks[section]</code></td><td>Ein von Ihrem Ziel unterstützter skalarer Index.</td></tr>
 <tr><td>Nach numerischem Bereich filtern</td><td><code translate="no">chunks[quality_score]</code>, <code translate="no">chunks[page]</code></td><td>Ein von Ihrem Ziel unterstützter skalarer Index.</td></tr>
-<tr><td>Nach booleschem Wert filtern</td><td><code translate="no">chunks[has_code]</code></td><td>Ein von Ihrem Zielobjekt unterstützter Skalarindex.</td></tr>
+<tr><td>Nach booleschem Wert filtern</td><td><code translate="no">chunks[has_code]</code></td><td>Ein von Ihrem Zielobjekt unterstützter skalarer Index.</td></tr>
 </tbody>
 </table>
 <p>Die „EmbeddingList“-Suche behandelt die Vektoren in einem StructArray-Vektor-Unterfeld als Einbettungsliste und gibt Ergebnisse auf Entitätsebene zurück. Die Suche auf Elementebene durchsucht jedes Struct-Element unabhängig und kann den Offset des übereinstimmenden Elements zurückgeben.</p>

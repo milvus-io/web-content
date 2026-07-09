@@ -1,12 +1,12 @@
 ---
 id: switch-mq-type.md
-title: Changer de type de file d'attente de messages
+title: Changer de type de file d'attente de messages (MQ)
 summary: >-
   Basculer la file d'attente de messages d'un déploiement Milvus existant de
   Woodpecker vers une autre file d'attente de messages sans interruption de
   service.
 ---
-<h1 id="Switch-MQ-Type" class="common-anchor-header">Changer de type de file d'attente de messages<button data-href="#Switch-MQ-Type" class="anchor-icon" translate="no">
+<h1 id="Switch-MQ-Type" class="common-anchor-header">Changer de type de file d'attente de messages (MQ)<button data-href="#Switch-MQ-Type" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -120,5 +120,5 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Évitez de changer de type de MQ à plusieurs reprises. Si vous devez tout de même effectuer un changement, veillez à nettoyer les données associées avant chaque changement — les données résiduelles peuvent entraîner un comportement inattendu.</p>
+<p>Évitez de changer de type de MQ à plusieurs reprises. Si vous devez changer de type, veillez à nettoyer les données associées avant chaque changement — les données résiduelles peuvent entraîner un comportement inattendu.</p>
 </div>

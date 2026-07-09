@@ -35,7 +35,7 @@ title: 카프카
       </svg>
     </button></h2><ul>
 <li>Milvus는 <strong>Kafka 2.x 및 3.x만</strong> 지원합니다.</li>
-<li>Kafka는 Helm 또는 Milvus Operator를 통해 Milvus Distributed(클러스터)용으로 구성됩니다.</li>
+<li>Kafka는 Helm 또는 Milvus Operator를 통해 Milvus Distributed(클러스터)에 맞게 구성됩니다.</li>
 </ul>
 <h2 id="Deploy-a-Milvus-cluster-with-Kafka-using-Helm" class="common-anchor-header">Helm을 사용하여 Kafka와 함께 Milvus 클러스터 배포하기<button data-href="#Deploy-a-Milvus-cluster-with-Kafka-using-Helm" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -17,7 +17,7 @@ title: Kafka
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Apache Kafka adalah salah satu backend antrian pesan (WAL) yang didukung oleh Milvus. Pada Milvus 3.x, <a href="/docs/id/woodpecker.md">Woodpecker</a> adalah antrian pesan default; Kafka tetap didukung sepenuhnya bagi pengguna yang lebih memilihnya. Kafka terutama digunakan bersama Milvus Distributed (kluster); sementara penerapan mandiri biasanya menggunakan Woodpecker yang tertanam atau <a href="/docs/id/mq_rocksmq.md">RocksMQ</a>.</p>
+    </button></h1><p>Apache Kafka adalah salah satu backend antrian pesan (WAL) yang didukung oleh Milvus. Pada Milvus 3.x, <a href="/docs/id/woodpecker.md">Woodpecker</a> adalah antrian pesan default; Kafka tetap didukung sepenuhnya bagi pengguna yang lebih memilihnya. Kafka terutama digunakan dengan Milvus Distributed (kluster); penerapan mandiri biasanya menggunakan Woodpecker tertanam atau <a href="/docs/id/mq_rocksmq.md">RocksMQ</a>.</p>
 <h2 id="Version-compatibility" class="common-anchor-header">Kompatibilitas versi<button data-href="#Version-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -222,7 +222,7 @@ title: Kafka
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Meningkatkan versi dari 2.5.x ke 2.6.x:</strong> <strong>Batasan Antrian Pesan</strong>: Saat meningkatkan versi ke Milvus v3.0-beta, Anda harus mempertahankan pilihan antrian pesan Anda saat ini. Beralih di antara sistem antrian pesan yang berbeda selama peningkatan versi tidak didukung. Dukungan untuk mengubah sistem antrian pesan akan tersedia di versi mendatang.
+<li><strong>Meningkatkan versi dari 2.5.x ke 2.6.x:</strong> <strong>Batasan Antrian Pesan</strong>: Saat meningkatkan versi ke Milvus v3.0-beta, Anda harus mempertahankan pilihan antrian pesan Anda saat ini. Beralih di antara sistem antrian pesan yang berbeda selama proses peningkatan versi tidak didukung. Dukungan untuk mengubah sistem antrian pesan akan tersedia di versi mendatang.
 Jika Anda menjalankan Kafka dan ingin tetap menggunakannya, jangan ubah antrian pesan selama proses peningkatan versi.</li>
 <li>Hanya <strong>Kafka 2.x dan 3.x</strong> yang didukung.</li>
 <li>Untuk konektivitas SASL/SSL, lihat <a href="/docs/id/connect_kafka_ssl.md">Menghubungkan ke Kafka dengan SASL/SSL</a>.</li>

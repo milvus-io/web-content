@@ -4,10 +4,9 @@ title: Pengelompokan Hasil Pencarian dengan StructArray
 summary: >-
   Gunakan halaman ini untuk mengelompokkan hasil pencarian tingkat elemen
   StructArray berdasarkan entitas induknya. Pencarian tingkat elemen dapat
-  menghasilkan beberapa hasil dari entitas yang sama jika terdapat beberapa
-  elemen Struct yang cocok dengan kueri. Pengelompokan ini menggabungkan
-  hasil-hasil elemen tersebut sehingga setiap entitas induk muncul paling banyak
-  sekali.
+  menghasilkan beberapa hasil dari entitas yang sama jika beberapa elemen Struct
+  cocok dengan kueri. Pengelompokan ini menggabungkan hasil-hasil elemen
+  tersebut sehingga setiap entitas induk muncul paling banyak sekali.
 ---
 <h1 id="Grouping-Search-with-StructArray" class="common-anchor-header">Pengelompokan Hasil Pencarian dengan StructArray<button data-href="#Grouping-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -97,7 +96,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Contoh berikut ini terlebih dahulu mencari potongan-potongan individu, kemudian mengelompokkan hasil elemen berdasarkan kunci utama entitas induk.</p>
+    </button></h2><p>Contoh berikut ini terlebih dahulu mencari potongan-potongan individual, kemudian mengelompokkan hasil elemen berdasarkan kunci utama entitas induk.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -221,7 +220,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Dalam contoh ini, kedua sub-permintaan menargetkan bidang vektor tingkat elemen di bawah bidang StructArray yang sama, <code translate="no">chunks</code>. Pencarian hibrida tidak mendukung pengelompokan tingkat elemen jika mencampurkan bidang vektor biasa, bidang StructArray yang berbeda, atau permintaan tingkat EmbeddingList.</p>
+<p>Dalam contoh ini, kedua sub-permintaan menargetkan bidang vektor tingkat elemen di bawah bidang StructArray yang sama, yaitu ` <code translate="no">chunks</code>`. Pencarian hibrida tidak mendukung pengelompokan tingkat elemen jika mencampurkan bidang vektor biasa, bidang StructArray yang berbeda, atau permintaan tingkat EmbeddingList.</p>
 <h2 id="Interpret-grouped-results" class="common-anchor-header">Menafsirkan hasil yang dikelompokkan<button data-href="#Interpret-grouped-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

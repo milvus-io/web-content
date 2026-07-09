@@ -21,7 +21,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>使用本页面可在 StructArray 字段内的向量子字段上执行向量搜索。StructArray 支持两种基本向量搜索模式：嵌入列表搜索（对存储在每个实体中的嵌入列表进行评分）和元素级搜索（独立搜索每个 Struct 元素）。</p>
-<p>本页面<a href="/docs/zh/create-structarray-field.md">使用“创建 StructArray 字段</a>”中的<code translate="no">tech_articles</code> Collection。该 Collection 包含一个名为<code translate="no">chunks</code> 的 StructArray 字段。每个块包含文本、标量元数据、一个名为<code translate="no">emb_list_vector</code> 的向量字段（带有用于 EmbeddingList 搜索的索引），以及一个名为<code translate="no">emb</code> 的向量字段（带有用于元素级搜索的索引）。</p>
+<p>本页面<a href="/docs/zh/create-structarray-field.md">使用“创建 StructArray 字段</a>”中的<code translate="no">tech_articles</code> Collection。该 Collection 包含一个名为<code translate="no">chunks</code><a href="/docs/zh/create-structarray-field.md">的</a> StructArray 字段。每个块包含文本、标量元数据、一个名为<code translate="no">emb_list_vector</code> 的向量字段（带有用于 EmbeddingList 搜索的索引），以及一个名为<code translate="no">emb</code> 的向量字段（带有用于元素级搜索的索引）。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">开始之前<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -78,7 +78,7 @@ summary: >-
 <tr><td>度量族</td><td><code translate="no">MAX_SIM*</code>，例如<code translate="no">MAX_SIM_COSINE</code> 。</td><td>常规向量度量，例如<code translate="no">COSINE</code> 、<code translate="no">IP</code> 或<code translate="no">L2</code> 。</td></tr>
 <tr><td>一个匹配结果代表什么</td><td>一个匹配的实体，其 StructArray 向量子场与查询嵌入列表相似。</td><td>StructArray 字段内的匹配 Struct 元素。</td></tr>
 <tr><td>结果粒度</td><td>实体级别。</td><td>Struct 元素级别。</td></tr>
-<tr><td>偏移量</td><td>不适用。</td><td>标识返回时匹配的 Struct 元素的零起始位置。</td></tr>
+<tr><td>偏移量</td><td>不适用。</td><td>标识返回时匹配的 Struct 元素的零基位置。</td></tr>
 <tr><td>典型用法</td><td>ColBERT、ColPali 及其他后期交互检索模式。</td><td>块级、段落级、片段级、补丁级或事实级检索。</td></tr>
 </tbody>
 </table>

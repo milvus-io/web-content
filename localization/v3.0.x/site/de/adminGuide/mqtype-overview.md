@@ -3,8 +3,8 @@ id: mqtype-overview.md
 title: Übersicht über die Nachrichtenwarteschlange
 summary: >-
   Übersicht über die von Milvus unterstützten Optionen für die
-  Nachrichtenwarteschlange (mqType) und darüber, welche Option für eigenständige
-  bzw. verteilte Bereitstellungen verwendet werden sollte.
+  Nachrichtenwarteschlange (mqType) und darüber, welche Option bei
+  eigenständigen bzw. verteilten Bereitstellungen zu verwenden ist.
 ---
 <h1 id="Message-Queue-Overview" class="common-anchor-header">Übersicht über die Nachrichtenwarteschlange<button data-href="#Message-Queue-Overview" class="anchor-icon" translate="no">
       <svg translate="no"

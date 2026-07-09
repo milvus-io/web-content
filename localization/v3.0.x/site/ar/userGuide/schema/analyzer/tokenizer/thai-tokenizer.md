@@ -40,7 +40,7 @@ beta: Milvus 3.0.0+
     </button></h2><div class="alert note">
 <p>بالنسبة للنصوص التايلاندية، استخدم المحلل المدمج <a href="/docs/ar/thai-analyzer.md"><code translate="no">thai</code></a> في معظم الحالات. يتضمن المحلل المدمج أداة التقطيع هذه إلى جانب تحويل الأحرف إلى صغرى، وتوحيد الأرقام العشرية، وإزالة الكلمات الممنوعة في اللغة التايلاندية. استخدم أداة التقطيع <code translate="no">thai</code> مباشرةً فقط عندما تحتاج إلى إنشاء مسار تحليل مخصص.</p>
 </div>
-<p>لتكوين محلل باستخدام أداة تجزئة " <code translate="no">thai</code> "، قم بتعيين " <code translate="no">tokenizer</code> " إلى " <code translate="no">thai</code> " في " <code translate="no">analyzer_params</code>".</p>
+<p>لتكوين محلل باستخدام أداة تجزئة الكلمات " <code translate="no">thai</code> "، قم بتعيين " <code translate="no">tokenizer</code> " إلى " <code translate="no">thai</code> " في " <code translate="no">analyzer_params</code>".</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;thai&quot;</span>,
 }
@@ -55,13 +55,13 @@ beta: Milvus 3.0.0+
     ],
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>لا يعادل مسار المعالجة المخصص هذا محلل <code translate="no">thai</code> المدمج لأنه لا يتضمن قاموس الكلمات الممنوعة <code translate="no">_thai_</code> المدمج. للحصول على مسار المعالجة الكامل المُعرَّف مسبقًا، استخدم <code translate="no">{&quot;type&quot;: &quot;thai&quot;}</code>.</p>
-<p>يطبق أداة تحليل الكلمات السلوك التالي:</p>
+<p>لا يعادل مسار المعالجة المخصص هذا محلل <code translate="no">thai</code> المدمج لأنه لا يتضمن قاموس الكلمات الممنوعة <code translate="no">_thai_</code> المدمج. للحصول على مسار المعالجة المحدد مسبقًا بالكامل، استخدم <code translate="no">{&quot;type&quot;: &quot;thai&quot;}</code>.</p>
+<p>يطبق أداة التقطيع السلوك التالي:</p>
 <ul>
 <li><strong>تجزئة اللغة التايلاندية</strong>: يقسم النص التايلاندي إلى رموز كلمات دون الاعتماد على المسافات البيضاء.</li>
 <li><strong>تصفية المسافات البيضاء وعلامات الترقيم</strong>: تصفية المقاطع التي تحتوي على مسافات بيضاء وعلامات ترقيم فقط. وهذا يختلف عن <a href="/docs/ar/icu-tokenizer.md"><code translate="no">icu</code></a> أداة تحليل الرموز، التي يمكنها الاحتفاظ بعلامات الترقيم والمسافات كرموز.</li>
 <li><strong>النص ذو النصوص المختلطة</strong>: يُخرج رموز الكلمات اللاتينية في النص المختلط بين التايلاندية والإنجليزية.</li>
-<li><strong>أداة التقطيع فقط</strong>: لا تقوم بتحويل الرموز إلى أحرف صغيرة، ولا تعمل على توحيد الأرقام في يونيكود، ولا تزيل الكلمات الممنوعة. أضف عوامل تصفية أو استخدم <a href="/docs/ar/thai-analyzer.md"><code translate="no">thai</code></a> لتلك الخطوات.</li>
+<li><strong>أداة التقطيع فقط</strong>: لا تحول الرموز إلى أحرف صغيرة، ولا تعيد الأرقام المكتوبة بـ«يونيكود» إلى صيغتها القياسية، ولا تزيل الكلمات الممنوعة. أضف عوامل تصفية أو استخدم <a href="/docs/ar/thai-analyzer.md"><code translate="no">thai</code></a> لتلك الخطوات.</li>
 <li><strong>دلالات الموضع</strong>: يستخدم مواضع الرموز القائمة على الأحرف والتي تشمل المسافات البيضاء وعلامات الترقيم التي تم تخطيها، مما يحافظ على اتساق سلوك مطابقة العبارات والقرب مع أدوات تحليل الرموز الأخرى غير اللاتينية.</li>
 </ul>
 <p>بعد تعريف « <code translate="no">analyzer_params</code> » ، يمكنك تطبيق المحلل على حقل « <code translate="no">VARCHAR</code> » عند تعريف مخطط المجموعة. لمزيد من التفاصيل، راجع <a href="/docs/ar/analyzer-overview.md#Example-use">«مثال</a> على <a href="/docs/ar/analyzer-overview.md#Example-use">الاستخدام</a>».</p>

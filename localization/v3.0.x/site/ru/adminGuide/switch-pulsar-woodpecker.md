@@ -83,7 +83,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Для <strong>внешнего</strong> Pulsar очистите темы Milvus во внешнем экземпляре Pulsar. Темы Milvus имеют формат <code translate="no">&lt;cluster_prefix&gt;-dml_&lt;seqNo&gt;_&lt;TimeTick&gt;&lt;Version&gt;</code> (например, <code translate="no">by-dev-rootcoord-dml_10_464633776992639586v0</code>).</p>
 <div class="alert note">
-<p>Если вы планируете позже вернуться к Pulsar, сначала очистите данные/темы, чтобы избежать конфликтов. Из-за ограничений диаграмм Helm возвращение к <strong>встроенному</strong> экземпляру Pulsar в настоящее время невозможно.</p>
+<p>Если вы планируете позже вернуться к Pulsar, сначала очистите данные/темы, чтобы избежать конфликтов. Из-за ограничений диаграммы Helm возвращение к <strong>встроенному</strong> экземпляру Pulsar в настоящее время невозможно.</p>
 </div>
 <h3 id="Switch-from-Woodpecker-to-Pulsar-Helm" class="common-anchor-header">Переход с Woodpecker на Pulsar (Helm)<button data-href="#Switch-from-Woodpecker-to-Pulsar-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -115,7 +115,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
   --set streaming.enabled=true \
   -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Дождитесь, пока все поды будут готовы, затем убедитесь, что конфигурация доступа к Pulsar была применена к конфигурации Milvus.</p>
+<p>Дождитесь, пока все поды будут готовы, затем убедитесь, что конфигурация доступа к Pulsar была отражена в конфигурации Milvus.</p>
 <p><strong>Шаг 3: Выполните переключение MQ.</strong></p>
 <div class="alert note">
 <p>Убедитесь, что целевой Pulsar не содержит тем Milvus из предыдущей конфигурации. Если это ваш первый переход на Pulsar, пропустите это примечание; в противном случае сначала удалите оставшиеся темы Milvus с такими же именами.</p>
@@ -131,7 +131,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>При успешном переключении в журнале регистрируется сообщение « <code translate="no">[mqTypeValue=pulsar]</code> ».</p>
-<p><strong>Шаг 5: (Необязательно) Удалите данные Woodpecker.</strong> Удалите данные Woodpecker на MinIO/S3 (в каталоге <code translate="no">&lt;rootPath&gt;/wp/...</code>, обычно <code translate="no">files/wp/...</code>) и метаданные Woodpecker в etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). Если вы планируете позже вернуться к Woodpecker, сначала удалите эти файлы.</p>
+<p><strong>Шаг 5: (Необязательно) Удалите данные Woodpecker.</strong> Удалите данные Woodpecker на MinIO/S3 (в папке <code translate="no">&lt;rootPath&gt;/wp/...</code>, обычно <code translate="no">files/wp/...</code>) и метаданные Woodpecker в etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). Если вы планируете позже вернуться к Woodpecker, сначала удалите эти файлы.</p>
 <h2 id="With-Milvus-Operator" class="common-anchor-header">С помощью Milvus Operator<button data-href="#With-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -186,7 +186,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">kubectl patch -f change_configmap.yaml --patch-file change_configmap.yaml --type merge
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Шаг 5: (Необязательно) Остановите Pulsar и выполните очистку.</strong> Для <strong>встроенного</strong> Pulsar удалите релиз Pulsar и его PVC:</p>
+<p><strong>Шаг 5: (Необязательно) Остановите Pulsar и выполните очистку.</strong> Для <strong>встроенного</strong> Pulsar удалите релиз Pulsar и удалите его PVC:</p>
 <pre><code translate="no" class="language-shell">helm uninstall my-release-pulsar
 kubectl get pvc | grep my-release-pulsar
 kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
@@ -211,7 +211,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>Шаг 1: Убедитесь, что экземпляр Milvus работает.</strong></p>
-<p><strong>Шаг 2: Настройте подключение к целевому Pulsar и перезапустите Milvus.</strong> Добавьте подключение к Pulsar в файл <code translate="no">spec.config</code> (оператор преобразует <code translate="no">spec.config</code> в <code translate="no">user.yaml</code>) и задайте тип MQ; приложение CR перезапустит поды с новой конфигурацией.</p>
+<p><strong>Шаг 2: Настройте подключение к целевому Pulsar и перезапустите Milvus.</strong> Разместите настройки подключения к Pulsar в файле <code translate="no">spec.config</code> (оператор преобразует <code translate="no">spec.config</code> в <code translate="no">user.yaml</code>) и задайте тип MQ; приложение CR перезапустит поды с новой конфигурацией.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># change_configmap.yaml</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -243,7 +243,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>В случае успешного перехода в журнале регистрируется сообщение « <code translate="no">[mqTypeValue=pulsar]</code> ».</p>
-<p><strong>Шаг 5: (Необязательно) Удалите данные Woodpecker.</strong> Удалите данные Woodpecker на MinIO/S3 (в папке <code translate="no">&lt;rootPath&gt;/wp/...</code>, обычно <code translate="no">files/wp/...</code>) и метаданные Woodpecker в etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). Если вы планируете позже вернуться к Woodpecker, сначала удалите эти файлы.</p>
+<p><strong>Шаг 5: (Необязательно) Удалите данные Woodpecker.</strong> Удалите данные Woodpecker на MinIO/S3 (в каталоге <code translate="no">&lt;rootPath&gt;/wp/...</code>, обычно <code translate="no">files/wp/...</code>) и метаданные Woodpecker в etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). Если вы планируете позже вернуться к Woodpecker, сначала удалите эти файлы.</p>
 <h2 id="Supported-scenarios" class="common-anchor-header">Поддерживаемые сценарии<button data-href="#Supported-scenarios" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

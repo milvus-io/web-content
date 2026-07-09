@@ -22,7 +22,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h1><p>Le fonti di dati esterne spesso subiscono modifiche dopo la creazione di una raccolta esterna. Ad esempio, una tabella Lakehouse che memorizza già degli embedding potrebbe in seguito includere un nuovo campo scalare, come un punteggio, una categoria o un timestamp, che si desidera restituire nei risultati delle query o utilizzare nei filtri.</p>
-<p>Anziché ricreare la raccolta esterna o copiare i dati di origine in Milvus, aggiungere un campo Milvus che corrisponda al campo esistente nella fonte di dati esterna. Dopo aver aggiunto il campo, aggiornare la raccolta esterna in modo che il nuovo campo possa essere utilizzato nelle query e nelle ricerche.</p>
+<p>Anziché ricreare la raccolta esterna o copiare i dati di origine in Milvus, aggiungere un campo Milvus che si mappi al campo esistente nella fonte di dati esterna. Dopo aver aggiunto il campo, aggiornare la raccolta esterna in modo che il nuovo campo possa essere utilizzato nelle query e nelle ricerche.</p>
 <h2 id="Limits" class="common-anchor-header">Limiti<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

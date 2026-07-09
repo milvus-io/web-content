@@ -130,9 +130,9 @@ results = client.search(
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
         <span class="hljs-built_in">print</span>(hit[<span class="hljs-string">&quot;id&quot;</span>], hit[<span class="hljs-string">&quot;distance&quot;</span>], hit[<span class="hljs-string">&quot;entity&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>في وضع البحث هذا، يتحكم مقياس « <code translate="no">limit</code> » في عدد الكيانات التي يتم إرجاعها لكل استعلام. يمكن أن تتضمن النتيجة حقول فرعية لـ StructArray، لكن النتيجة نفسها تمثل الكيان الأصلي المطابق بدلاً من عنصر Struct واحد محدد.</p>
+<p>في وضع البحث هذا، يتحكم مقياس " <code translate="no">limit</code> " في عدد الكيانات التي يتم إرجاعها لكل استعلام. يمكن أن تتضمن النتيجة حقول فرعية لـ StructArray، لكن النتيجة نفسها تمثل الكيان الأصلي المطابق بدلاً من عنصر Struct واحد محدد.</p>
 <div class="alert note">
-<p>للحصول على شرح تفصيلي كامل على غرار ColBERT أو ColPali، راجع <a href="/docs/ar/search-with-embedding-lists.md">«البحث باستخدام قوائم التضمين</a>». تغطي هذه الصفحة فقط سلوك البحث الأساسي في StructArray.</p>
+<p>للحصول على شرح تفصيلي كامل بنمط ColBERT أو ColPali، راجع <a href="/docs/ar/search-with-embedding-lists.md">«البحث باستخدام قوائم التضمين</a>». تغطي هذه الصفحة فقط سلوك البحث الأساسي في StructArray.</p>
 </div>
 <h2 id="Run-element-level-search" class="common-anchor-header">تشغيل البحث على مستوى العناصر<button data-href="#Run-element-level-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -194,7 +194,7 @@ results = client.search(
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>عنصر النتيجة</th><th>البحث في EmbeddingList</th><th>البحث على مستوى العناصر</th></tr>
+<tr><th>عنصر النتيجة</th><th>البحث في EmbeddingList</th><th>البحث على مستوى العنصر</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">id</code></td><td>المفتاح الأساسي للكيان المطابق.</td><td>المفتاح الأساسي للكيان الذي يحتوي على عنصر Struct المطابق.</td></tr>
@@ -222,9 +222,9 @@ results = client.search(
     </button></h2><ul>
 <li><p>استخدام <code translate="no">chunks.emb</code> بدلاً من صيغة مسار الحقل الفرعي المطلوبة <code translate="no">chunks[emb]</code>.</p></li>
 <li><p>استخدام استعلام EmbeddingList على حقل فرعي متجه تم فهرسته باستخدام مقياس متجه عادي.</p></li>
-<li><p>استخدام استعلام متجه عادي على حقل فرعي متجه تم فهرسته باستخدام مقياس <code translate="no">MAX_SIM*</code>.</p></li>
+<li><p>استخدام استعلام متجه عادي على حقل فرعي متجه مفهرس باستخدام مقياس <code translate="no">MAX_SIM*</code>.</p></li>
 <li><p>توقع أن يعرض البحث على مستوى العنصر <code translate="no">limit</code> هذا العدد من الكيانات الأصلية الفريدة. فهو يعرض نتائج العناصر المطابقة.</p></li>
-<li><p>توقع أن يعيد بحث EmbeddingList إزاحة عنصر واحد محدد. لكنه يعيد نتائج مطابقة على مستوى الكيان.</p></li>
+<li><p>توقع أن يعود بحث EmbeddingList بإزاحة عنصر محدد واحد. لكنه يعود بنتائج مطابقة على مستوى الكيان.</p></li>
 <li><p>إعادة استخدام حقل فرعي متجه واحد لكلا وضعي البحث. استخدم حقول فرعية متجهة منفصلة لأن كل حقل فرعي متجه لا يقبل سوى فهرس واحد.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">الخطوات التالية<button data-href="#Next-steps" class="anchor-icon" translate="no">

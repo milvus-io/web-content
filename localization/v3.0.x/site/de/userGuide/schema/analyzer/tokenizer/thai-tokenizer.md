@@ -41,7 +41,7 @@ beta: Milvus 3.0.0+
     </button></h2><div class="alert note">
 <p>Für thailändischen Text verwenden Sie in den meisten Fällen den integrierten <a href="/docs/de/thai-analyzer.md"><code translate="no">thai</code></a> Analysator. Der integrierte Analysator umfasst diesen Tokenizer sowie die Umwandlung in Kleinbuchstaben, die Normalisierung von Dezimalziffern und das Entfernen thailändischer Stoppwörter. Verwenden Sie den „ <code translate="no">thai</code> “-Tokenizer nur dann direkt, wenn Sie eine benutzerdefinierte Analysator-Pipeline erstellen müssen.</p>
 </div>
-<p>Um einen Analysator mit dem Tokenizer „ <code translate="no">thai</code> “ zu konfigurieren, setzen Sie „ <code translate="no">tokenizer</code> “ in „ <code translate="no">analyzer_params</code> “ auf „ <code translate="no">thai</code> “.</p>
+<p>Um einen Analysator mit dem Tokenizer „ <code translate="no">thai</code> “ zu konfigurieren, setzen Sie „ <code translate="no">tokenizer</code> “ in der Datei „ <code translate="no">analyzer_params</code> “ auf „ <code translate="no">thai</code> “.</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;thai&quot;</span>,
 }

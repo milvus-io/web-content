@@ -17,7 +17,7 @@ title: 卡夫卡
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Apache Kafka 是 Milvus 支持的消息队列（WAL）后端之一。 在 Milvus 3.x 中<a href="/docs/zh/woodpecker.md">，Woodpecker</a>是默认的消息队列；但对于偏好 Kafka 的用户，系统仍提供全面支持。Kafka 主要与 Milvus Distributed（集群）配合使用；独立部署通常使用嵌入式的 Woodpecker 或<a href="/docs/zh/mq_rocksmq.md">RocksMQ</a>。</p>
+    </button></h1><p>Apache Kafka 是 Milvus 支持的消息队列（WAL）后端之一。 在 Milvus 3.x 中<a href="/docs/zh/woodpecker.md">，Woodpecker</a>是默认的消息队列；但对于更倾向于使用 Kafka 的用户，系统仍提供全面支持。Kafka 主要与 Milvus Distributed（集群）配合使用；独立部署通常使用嵌入式的 Woodpecker 或<a href="/docs/zh/mq_rocksmq.md">RocksMQ</a>。</p>
 <h2 id="Version-compatibility" class="common-anchor-header">版本兼容性<button data-href="#Version-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -36,7 +36,7 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>對於阿拉伯文，內建的 <a href="/docs/zh-hant/arabic-analyzer.md"><code translate="no">arabic</code></a> 分析器已內建 `<code translate="no">decimaldigit</code> ` 過濾器。若需在自訂分析器管線中進行數字正規化，請直接使用 `<code translate="no">decimaldigit</code> `。</p>
+<p>對於阿拉伯文，內建的 <a href="/docs/zh-hant/arabic-analyzer.md"><code translate="no">arabic</code></a> 分析器已內建<code translate="no">decimaldigit</code> 過濾器。若需在自訂分析器管線中進行數字正規化，請直接使用<code translate="no">decimaldigit</code> 。</p>
 </div>
 <p>若要在自訂分析器中使用<code translate="no">decimaldigit</code> 過濾器，請將其新增至<code translate="no">analyzer_params</code> 中的<code translate="no">filter</code> 區段：</p>
 <pre><code translate="no" class="language-python">analyzer_params = {

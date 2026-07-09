@@ -203,8 +203,8 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>请参考以下表格，为 StructArray 向量子字段选择索引类型和度量类型。请从目标开始，然后根据搜索模式选择度量族。</p>
-<p>请从以下兼容性表格中选择 Milvus 索引类型和度量类型。</p>
+    </button></h2><p>请参考以下表格，为 StructArray 向量子场选择索引类型和度量类型。请从目标开始，然后根据搜索模式选择度量族。</p>
+<p>请从以下兼容性表中选择 Milvus 索引类型和度量类型。</p>
 <h3 id="EmbeddingList-search" class="common-anchor-header">EmbeddingList 搜索<button data-href="#EmbeddingList-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -275,7 +275,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>创建索引后，请描述Collection或列出索引，以确认预期的子字段路径已被索引。</p>
+    </button></h2><p>创建索引后，请描述Collection或列出索引，以确认预期的子字段路径已纳入索引。</p>
 <pre><code translate="no" class="language-python">indexes = client.list_indexes(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
 )
@@ -338,7 +338,7 @@ client.create_index(
 <li><p>仅在<code translate="no">MAX_SIM*</code> 上创建索引，然后尝试在同一子字段上执行元素级搜索。</p></li>
 <li><p>仅创建常规向量索引，随后却试图在同一子字段上执行 EmbeddingList 搜索。</p></li>
 <li><p>将同一个向量子字段同时用于<code translate="no">MAX_SIM*</code> 和常规向量度量。</p></li>
-<li><p>忽略了高频使用的 StructArray 过滤器对应的标量索引。</p></li>
+<li><p>遗漏了针对高频使用的 StructArray 过滤器的标量索引。</p></li>
 <li><p>为 Struct 模式中不存在的 StructArray 子字段创建索引。</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">后续步骤<button data-href="#Next-steps" class="anchor-icon" translate="no">

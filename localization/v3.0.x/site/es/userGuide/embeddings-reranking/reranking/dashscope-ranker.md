@@ -175,7 +175,7 @@ dashscope_ranker = Function(
    <tr>
      <td><p><code translate="no">reranker</code></p></td>
      <td><p>Sí</p></td>
-     <td><p>Debe establecerse en « <code translate="no">"model"</code> » para habilitar la reclasificación del modelo.</p></td>
+     <td><p>Debe establecerse en « <code translate="no">"model"</code> » para habilitar la reordenación de modelos.</p></td>
      <td><p><code translate="no">"model"</code></p></td>
    </tr>
    <tr>

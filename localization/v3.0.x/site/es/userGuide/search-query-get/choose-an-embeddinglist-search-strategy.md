@@ -45,7 +45,7 @@ summary: >-
 <p>Esto proporciona una mayor capacidad de representación, pero el MaxSim exacto resulta costoso a gran escala. Una búsqueda MaxSim por fuerza bruta tendría que comparar los vectores de consulta con cada vector de cada fila candidata. Esto suele ser demasiado lento para la búsqueda en producción.</p>
 <table>
 <thead>
-<tr><th>### Problema - Cada fila puede contener muchos vectores. - Aplicar MaxSim exacto a todas las filas resulta costoso. - El tamaño del índice y la latencia de la búsqueda pueden aumentar rápidamente.</th><th>### Estrategia - Utilizar un método de recuperación aproximado en una primera etapa. - Recuperar más candidatos que los topK solicitados. - Reordenar los candidatos con MaxSim exacto.</th></tr>
+<tr><th>### Problema - Cada fila puede contener muchos vectores. - Aplicar MaxSim exacto a todas las filas resulta costoso. - El tamaño del índice y la latencia de la búsqueda pueden aumentar rápidamente.</th><th>### Estrategia - Utilizar un método de recuperación aproximado en una primera etapa. - Recuperar más candidatos que los topK solicitados. - Volver a clasificar los candidatos con MaxSim exacto.</th></tr>
 </thead>
 <tbody>
 </tbody>
@@ -197,7 +197,7 @@ summary: >-
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_num_train_samples</code></td><td>Creación de índices</td><td><code translate="no">20000</code></td><td>Aumenta este valor cuando el corpus sea diverso y la compresión aprendida no se ajuste bien; redúcelo solo para pruebas pequeñas o para creaciones más rápidas.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_num_epochs</code></td><td>Creación de índices</td><td><code translate="no">50</code></td><td>Aumenta si el entrenamiento no ha convergido; reduce cuando el tiempo de creación sea la principal limitación.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_batch_size</code></td><td>Creación del índice</td><td><code translate="no">512</code></td><td>Ajústalo en función del rendimiento del entrenamiento y del uso de memoria.</td></tr>
-<tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_learning_rate</code></td><td>Creación de índices</td><td><code translate="no">0.001</code></td><td>Ajustar cuando el entrenamiento sea inestable o converja demasiado lentamente.</td></tr>
+<tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_learning_rate</code></td><td>Creación del índice</td><td><code translate="no">0.001</code></td><td>Ajustar cuando el entrenamiento sea inestable o converja demasiado lentamente.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_seed</code></td><td>Creación de índices</td><td><code translate="no">42</code></td><td>Configurar para que las ejecuciones de entrenamiento sean reproducibles.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_num_layers</code></td><td>Creación de índices</td><td><code translate="no">2</code></td><td>Aumenta este valor solo cuando el corpus necesite un extractor de características más expresivo y puedas asumir el coste adicional del entrenamiento.</td></tr>
 <tr><td>Todas las estrategias</td><td><code translate="no">retrieval_ann_ratio</code></td><td>Búsqueda</td><td><code translate="no">3.0</code></td><td>Aumenta para recuperar más candidatos de primera etapa y mejorar la recuperación; disminuye para reducir la latencia.</td></tr>
@@ -373,13 +373,13 @@ index_params.add_index(
     </button></h2><ol>
 <li><p>Empieza con <code translate="no">tokenann</code> como referencia de calidad cuando el tamaño del conjunto de datos lo permita.</p></li>
 <li><p>Ejecuta las mismas consultas con <code translate="no">muvera</code> y compara la recuperación, el nDCG, la latencia y el tamaño del índice.</p></li>
-<li><p>Pruebe <code translate="no">lemur</code> cuando la lista de incrustaciones sea grande, el espacio de incrustación tenga ruido o la carga de trabajo sea visual o multimodal.</p></li>
+<li><p>Pruebe <code translate="no">lemur</code> cuando la lista de incrustaciones sea grande, el espacio de incrustación presente ruido o la carga de trabajo sea visual o multimodal.</p></li>
 <li><p>Ajuste el valor de « <code translate="no">retrieval_ann_ratio</code> » antes de modificar demasiados parámetros de compilación. Auméntelo si la recuperación es baja; redúzcalo si la latencia es demasiado alta.</p></li>
 <li><p>Valida siempre con consultas representativas y distribuciones de longitud de documentos. Una estrategia que funcione con textos cortos puede no funcionar con documentos visuales o corpus de cola larga.</p></li>
 </ol>
 <table>
 <thead>
-<tr><th>### La calidad ante todo Empieza con <code translate="no">tokenann</code>. Úsalo como referencia para la calidad de la aproximación de MaxSim.</th><th>### Equilibrado Prueba <code translate="no">muvera</code> cuando necesites reducir el coste sin añadir un proceso de entrenamiento.</th><th>### Comprimido: Prueba <code translate="no">lemur</code> cuando sea probable que la compresión aprendida a nivel de fila supere a la proyección aleatoria fija.</th></tr>
+<tr><th>### La calidad ante todo: empieza con <code translate="no">tokenann</code>. Úsalo como referencia para evaluar la calidad de la aproximación de MaxSim.</th><th>### Equilibrado Prueba <code translate="no">muvera</code> cuando necesites reducir el coste sin añadir un proceso de entrenamiento.</th><th>### Comprimido: Prueba <code translate="no">lemur</code> cuando sea probable que la compresión aprendida a nivel de fila supere a la proyección aleatoria fija.</th></tr>
 </thead>
 <tbody>
 </tbody>

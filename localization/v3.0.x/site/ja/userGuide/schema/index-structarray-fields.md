@@ -2,8 +2,7 @@
 id: index-structarray-fields.md
 title: StructArray フィールドのインデックス作成
 summary: >-
-  ベクトル検索を実行したり、スカラーフィルタリングを高速化したりする前に、StructArrayのサブフィールドにインデックスを作成してください。StructArrayのフィールドの場合、インデックスの対象となるのは、chunks[emb_list_vector]、chunks[emb]、chunks[section]
-  などのサブフィールドパスです。
+  ベクトル検索を実行したり、スカラーフィルタリングを高速化したりする前に、StructArrayのサブフィールドにインデックスを作成してください。StructArrayのフィールドの場合、インデックスの対象となるのは、chunks[emb_list_vector]、chunks[emb]、chunks[section]などのサブフィールドパスです。
 ---
 <h1 id="Index-StructArray-Fields" class="common-anchor-header">StructArray フィールドのインデックス作成<button data-href="#Index-StructArray-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -204,7 +203,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><p>StructArrayのベクトルサブフィールドに対するインデックス型およびメトリック型を選択する際は、以下の表を参照してください。対象から始め、検索モードに応じてメトリックファミリーを選択してください。</p>
-<p>以下の互換性表から、Milvus インデックス・タイプとメトリック・タイプを選択してください。</p>
+<p>以下の互換性表から、Milvus のインデックス型とメトリック型を選択してください。</p>
 <h3 id="EmbeddingList-search" class="common-anchor-header">EmbeddingList 検索<button data-href="#EmbeddingList-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -357,7 +356,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>エンティティレベルの EmbeddingList 検索や要素レベルのベクトル検索を実行するには、「StructArray を使用した基本的なベクトル検索」を参照してください。</p></li>
+<li><p>エンティティレベルの EmbeddingList 検索または要素レベルのベクトル検索を実行するには、「StructArray を使用した基本的なベクトル検索」を参照してください。</p></li>
 <li><p>検索時に StructArray のスカラーサブフィールドをフィルタリングするには、「StructArray を使用したフィルタ検索」を参照してください。</p></li>
 <li><p>インデックスおよびメトリックの制限を確認するには、「<a href="/docs/ja/structarray-limits.md">StructArray の制限</a>」を参照してください。</p></li>
 </ol>

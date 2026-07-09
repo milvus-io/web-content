@@ -2,7 +2,7 @@
 id: data-infra-integration-overview.md
 title: البنية التحتية للبيانات والتكامل
 summary: >-
-  نظرة عامة على البنية التحتية الخاصة بأطراف ثالثة التي يتكامل معها Milvus —
+  نظرة عامة على البنية التحتية التابعة لأطراف ثالثة التي يتكامل معها Milvus —
   البيانات الوصفية، وتخزين الكائنات، وقوائم انتظار الرسائل.
 ---
 <h1 id="Data-Infrastructure--Integration" class="common-anchor-header">البنية التحتية للبيانات والتكامل<button data-href="#Data-Infrastructure--Integration" class="anchor-icon" translate="no">

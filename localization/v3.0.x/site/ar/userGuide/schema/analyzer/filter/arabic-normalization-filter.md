@@ -38,7 +38,7 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>بالنسبة للنصوص العربية، استخدم <a href="/docs/ar/arabic-analyzer.md"><code translate="no">arabic</code></a> في معظم الحالات. يتضمن المحلل المدمج هذا المرشح إلى جانب التقطيع القياسي للرموز، وتحويل الأحرف إلى صغرى، وتوحيد الأرقام العشرية، واستخلاص الجذور العربية، وإزالة الكلمات الممنوعة العربية. لا تستخدم مرشح « <code translate="no">arabic_normalization</code> » مباشرةً إلا عندما تحتاج إلى إنشاء مسار محلل مخصص.</p>
+<p>بالنسبة للنصوص العربية، استخدم <a href="/docs/ar/arabic-analyzer.md"><code translate="no">arabic</code></a> في معظم الحالات. يتضمن المحلل المدمج هذا المرشح إلى جانب التقطيع القياسي، وتحويل الأحرف إلى صغرى، وتوحيد الأرقام العشرية، واستخلاص الجذور العربية، وإزالة الكلمات الممنوعة العربية. لا تستخدم مرشح « <code translate="no">arabic_normalization</code> » مباشرةً إلا عندما تحتاج إلى إنشاء مسار محلل مخصص.</p>
 </div>
 <p>لاستخدام مرشح <code translate="no">arabic_normalization</code> في محلل مخصص، أضفه إلى قسم « <code translate="no">filter</code> » في <code translate="no">analyzer_params</code>:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -80,7 +80,7 @@ beta: Milvus 3.0.0+
      <td><p>تمت إزالته</p></td>
    </tr>
 </table>
-<p>يعمل المرشح على الرموز التي يولدها أداة تحليل الرموز. التكوين أعلاه هو مثال متعمد لمحلل مخصص ولا يتضمن مسار المعالجة الكامل للغة العربية.</p>
+<p>يعمل المرشح على الرموز التي يولدها أداة الترميز. التكوين أعلاه هو مثال متعمد لمحلل مخصص ولا يتضمن مسار المعالجة الكامل للغة العربية.</p>
 <h2 id="Examples" class="common-anchor-header">أمثلة<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

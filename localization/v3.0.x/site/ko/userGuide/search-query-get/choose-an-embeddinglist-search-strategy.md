@@ -3,9 +3,9 @@ id: choose-an-embeddinglist-search-strategy.md
 title: EmbeddingList 검색 전략 선택
 summary: >-
   EmbeddingList 검색 전략은 Milvus가 EmbeddingList 검색을 위한 근사 후보 인덱스를 어떻게 구축할지 결정합니다.
-  기본 전략은 tokenann입니다. 임베딩 목록이 크거나, TokenANN의 계산 비용이 너무 높거나, 학습된/압축된 행 수준 표현이 더
+  기본 전략은 tokenann입니다. 임베딩 리스트가 크거나, TokenANN의 계산 비용이 너무 높거나, 학습된/압축된 행 수준 표현이 더
   적합할 경우 muvera 또는 lemur로 전환할 수 있습니다. emb_list_rerank가 활성화된 경우, 최종 결과는 여전히
-  MaxSim 재순위 지정 과정을 통해 산출됩니다.
+  MaxSim 재순위를 통해 산출됩니다.
 ---
 <h1 id="Choose-an-EmbeddingList-Search-Strategy" class="common-anchor-header">EmbeddingList 검색 전략 선택<button data-href="#Choose-an-EmbeddingList-Search-Strategy" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -38,7 +38,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>EmbeddingList는 텍스트 문서의 토큰 임베딩, 시각적 문서의 패치 임베딩, 또는 비디오의 클립 임베딩과 같이 여러 벡터를 포함하는 행을 위해 설계되었습니다. MaxSim은 하나의 쿼리 벡터와 하나의 행 벡터를 비교하는 대신, 쿼리 임베딩 목록과 문서 임베딩 목록을 비교하여 가장 잘 일치하는 항목을 집계합니다.</p>
+    </button></h2><p>EmbeddingList는 텍스트 문서의 토큰 임베딩, 시각적 문서의 패치 임베딩, 비디오의 클립 임베딩 등 여러 벡터를 포함하는 행을 위해 설계되었습니다. MaxSim은 하나의 쿼리 벡터와 하나의 행 벡터를 비교하는 대신, 쿼리 임베딩 목록과 문서 임베딩 목록을 비교하여 가장 잘 일치하는 항목을 집계합니다.</p>
 <p>이를 통해 더 뛰어난 표현력을 얻을 수 있지만, 대규모 환경에서는 정확한 MaxSim 계산에 많은 비용이 듭니다. 무차별 대입 방식의 MaxSim 검색은 쿼리 벡터를 모든 후보 행의 모든 벡터와 비교해야 합니다. 이는 일반적으로 실제 운영 환경의 검색에는 너무 느립니다.</p>
 <table>
 <thead>
@@ -71,7 +71,7 @@ summary: >-
 <tbody>
 <tr><td><code translate="no">tokenann</code></td><td>각 행 내의 개별 벡터</td><td>원본 벡터를 유지하며 압축 손실을 방지합니다.</td><td>품질 우선 검색, 짧거나 중간 길이의 임베딩 목록, 판별력이 높은 임베딩.</td><td>더 큰 인덱스와 더 높은 후보 검색 비용.</td></tr>
 <tr><td><code translate="no">muvera</code></td><td>행당 하나의 인코딩된 벡터</td><td>훈련 없이 임베딩 목록을 고정 차원의 FDE 표현으로 압축합니다.</td><td>문서 길이가 길거나, 판별력이 높은 임베딩인 경우, TokenANN이 너무 무거운 경우.</td><td>무작위 투영은 근사 손실을 초래하며, FDE 차원은 지연 시간에 영향을 미칩니다.</td></tr>
-<tr><td><code translate="no">lemur</code></td><td>행당 하나의 학습된 벡터</td><td>임베딩 목록을 고정 차원의 행 벡터로 변환하는 코퍼스별 압축 방식을 학습합니다.</td><td>분별력이 낮은 임베딩, 다중 모달 또는 시각적 문서 검색, 대규모 임베딩 목록.</td><td>훈련이 필요하며, 코퍼스 분포 및 문서 길이 편향에 민감할 수 있습니다.</td></tr>
+<tr><td><code translate="no">lemur</code></td><td>행당 하나의 학습된 벡터</td><td>임베딩 목록을 고정 차원의 행 벡터로 압축하는 코퍼스별 압축 방식을 학습합니다.</td><td>분별력이 낮은 임베딩, 다중 모달 또는 시각적 문서 검색, 대규모 임베딩 목록.</td><td>훈련이 필요하며, 코퍼스 분포 및 문서 길이 편향에 민감할 수 있습니다.</td></tr>
 </tbody>
 </table>
 <h2 id="TokenANN" class="common-anchor-header">TokenANN<button data-href="#TokenANN" class="anchor-icon" translate="no">
@@ -119,7 +119,7 @@ summary: >-
 </div>
 <ul>
 <li><p><strong>적합한 경우:</strong> 긴 텍스트 문서, 판별력이 높은 임베딩 공간, TokenANN보다 작은 인덱스 크기가 필요한 워크로드.</p></li>
-<li><p><strong>적합하지 않은 경우:</strong> 판별력이 낮은 임베딩 공간이나, FDE 표현의 차원이 너무 높아 지연 시간 예산에 부적합한 경우.</p></li>
+<li><p><strong>적합하지 않은 경우:</strong> 판별력이 낮은 임베딩 공간이나, FDE 표현의 차원이 너무 높아 지연 시간 예산에 부합하지 않는 경우.</p></li>
 <li><p><strong>중요한 매개변수:</strong><code translate="no">muvera_num_projections</code>, <code translate="no">muvera_num_repeats</code>, <code translate="no">muvera_seed</code>.</p></li>
 </ul>
 <h2 id="LEMUR" class="common-anchor-header">LEMUR<button data-href="#LEMUR" class="anchor-icon" translate="no">
@@ -184,9 +184,9 @@ summary: >-
 <tr><th>전략</th><th>구성 항목</th><th>단계</th><th>기본값</th><th>변경 시점</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">tokenann</code></td><td><code translate="no">emb_list_strategy=&quot;tokenann&quot;</code></td><td>인덱스 구축</td><td><code translate="no">tokenann</code></td><td>기본 요소 벡터 인덱싱 동작을 원하거나 DiskANN을 사용하는 경우 명시적으로 사용하십시오.</td></tr>
+<tr><td><code translate="no">tokenann</code></td><td><code translate="no">emb_list_strategy=&quot;tokenann&quot;</code></td><td>인덱스 구축</td><td><code translate="no">tokenann</code></td><td>기본 요소 벡터 인덱싱 동작을 원하거나 DiskANN을 사용할 때 명시적으로 사용합니다.</td></tr>
 <tr><td><code translate="no">muvera</code></td><td><code translate="no">emb_list_strategy=&quot;muvera&quot;</code></td><td>인덱스 구축</td><td><code translate="no">tokenann</code></td><td>훈련 없이 행 단위로 인코딩된 검색을 수행하려는 경우 사용합니다.</td></tr>
-<tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_num_projections</code></td><td>인덱스 구축</td><td><code translate="no">4</code></td><td>SimHash 투영 횟수를 제어합니다. 값이 높을수록 더 많은 버킷이 생성되어 인코딩 품질이 향상될 수 있지만, 인코딩 차원은 증가합니다.</td></tr>
+<tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_num_projections</code></td><td>인덱스 구축</td><td><code translate="no">4</code></td><td>SimHash 투영 횟수를 제어합니다. 값이 높을수록 더 많은 버킷이 생성되어 인코딩 품질이 향상될 수 있지만, 인코딩된 차원은 증가합니다.</td></tr>
 <tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_num_repeats</code></td><td>인덱스 구축</td><td><code translate="no">7</code></td><td>독립적인 FDE 인코딩이 몇 개나 연결될지 제어합니다. 값이 높을수록 견고성은 향상될 수 있으나, 인덱스/검색 비용이 증가합니다.</td></tr>
 <tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_seed</code></td><td>인덱스 구축</td><td><code translate="no">42</code></td><td>특히 테스트 및 벤치마크 비교 시 재현 가능한 무작위 투영을 위해 설정합니다.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">emb_list_strategy=&quot;lemur&quot;</code></td><td>인덱스 구축</td><td><code translate="no">tokenann</code></td><td>학습된 행 수준 압축이 고정 무작위 투영보다 더 나은 성능을 보일 것으로 예상될 때 사용합니다.</td></tr>
@@ -275,7 +275,7 @@ index_params.add_index(
       <span class="hljs-attr">emb_list_rerank:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>전략 선택 시 인덱스별 매개변수를 우선적으로 사용하십시오.</strong> Milvus 구성 파일의 기본값은 해당 유형 및 스테이지의 인덱스에 광범위하게 적용됩니다. 서로 다른 컬렉션이나 필드에 서로 다른 EmbeddingList 전략이 필요한 경우 <code translate="no">create_index</code> 의 매개변수를 사용하십시오.</p>
+<p><strong>전략 선택 시에는 인덱스별 매개변수를 우선적으로 사용하십시오.</strong> Milvus 구성 파일의 기본값은 해당 유형 및 스테이지의 인덱스에 광범위하게 적용됩니다. 서로 다른 컬렉션이나 필드에 서로 다른 EmbeddingList 전략이 필요한 경우 <code translate="no">create_index</code> 의 매개변수를 사용하십시오.</p>
 </div>
 <h2 id="Configure-Candidate-Retrieval-at-Search-Time" class="common-anchor-header">검색 시 후보 검색 구성<button data-href="#Configure-Candidate-Retrieval-at-Search-Time" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -376,7 +376,7 @@ index_params.add_index(
 </ol>
 <table>
 <thead>
-<tr><th>### 품질 우선: ` <code translate="no">tokenann</code>`부터 시작하십시오. 이를 MaxSim 근사 품질의 기준선으로 사용하십시오.</th><th>### 균형형: 훈련 파이프라인을 추가하지 않고 비용을 낮춰야 할 때는 <code translate="no">muvera</code> 를 시도해 보세요.</th><th>### 압축: 학습된 행 단위 압축이 고정 무작위 투영보다 우수한 성능을 보일 것으로 예상될 때 <code translate="no">lemur</code> 를 사용해 보세요.</th></tr>
+<tr><th>### 품질 우선: ` <code translate="no">tokenann</code>`부터 시작하십시오. 이를 MaxSim 근사 품질의 기준선으로 사용하십시오.</th><th>### 균형형: 훈련 파이프라인을 추가하지 않고 비용을 낮춰야 할 때는 <code translate="no">muvera</code> 을 시도해 보세요.</th><th>### 압축: 학습된 행 단위 압축이 고정 무작위 투영보다 우수한 성능을 보일 것으로 예상될 때 <code translate="no">lemur</code> 를 사용해 보세요.</th></tr>
 </thead>
 <tbody>
 </tbody>

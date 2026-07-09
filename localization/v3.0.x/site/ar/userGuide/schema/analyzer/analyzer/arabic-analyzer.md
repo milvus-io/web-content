@@ -87,7 +87,7 @@ beta: Milvus 3.0.0+
 <p>يطبق هذا المحلل خطوات المعالجة التالية:</p>
 <ul>
 <li><strong>التقطيع إلى رموز</strong>: يستخدم أداة التقطيع <code translate="no">standard</code> لتقسيم النص إلى رموز.</li>
-<li><strong>توحيد الأرقام</strong>: يستخدم مرشح « <code translate="no">decimaldigit</code> » لتحويل الأرقام العشرية العربية-الهندية وأرقام يونيكود الأخرى إلى أرقام ASCII.</li>
+<li><strong>توحيد الأرقام</strong>: يستخدم مرشح <code translate="no">decimaldigit</code> لتحويل الأرقام العشرية العربية-الهندية وأرقام يونيكود الأخرى إلى أرقام ASCII.</li>
 <li><strong>توحيد الحروف العربية</strong>: يستخدم مرشح <code translate="no">arabic_normalization</code> لتوحيد أشكال حرف الألف المختلفة، وحرف التاء المربوطة، وحرف الألف المكسورة، وإزالة الحركات والتطويل.</li>
 <li><strong>الاستخلاص</strong>: يستخدم مرشح <code translate="no">stemmer</code> مع تعيين <code translate="no">language</code> على <code translate="no">arabic</code>.</li>
 <li><strong>إزالة الكلمات الممنوعة</strong>: يستخدم مرشح " <code translate="no">stop</code> " مع القاموس المدمج " <code translate="no">_arabic_</code> ".</li>

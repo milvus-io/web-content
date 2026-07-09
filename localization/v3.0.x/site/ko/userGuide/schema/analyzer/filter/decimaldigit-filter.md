@@ -36,7 +36,7 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>아랍어 텍스트의 경우, 내장된 <a href="/docs/ko/arabic-analyzer.md"><code translate="no">arabic</code></a> 분석기에는 이미 ‘ <code translate="no">decimaldigit</code> ’ 필터가 포함되어 있습니다. 사용자 정의 분석기 파이프라인에서 숫자 정규화가 필요한 경우 ‘ <code translate="no">decimaldigit</code> ’를 직접 사용하십시오.</p>
+<p>아랍어 텍스트의 경우, 내장된 <a href="/docs/ko/arabic-analyzer.md"><code translate="no">arabic</code></a> 분석기에는 이미 ‘ <code translate="no">decimaldigit</code> ’ 필터가 포함되어 있습니다. 사용자 정의 분석기 파이프라인에서 숫자 정규화가 필요한 경우 ‘ <code translate="no">decimaldigit</code> ’을 직접 사용하십시오.</p>
 </div>
 <p>사용자 정의 분석기에서 ` <code translate="no">decimaldigit</code> ` 필터를 사용하려면 ` <code translate="no">analyzer_params</code>` 파일의 ` <code translate="no">filter</code> ` 섹션에 다음을 추가하십시오:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {

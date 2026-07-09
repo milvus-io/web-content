@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 페이지를 사용하여 StructArray 벡터 하위 필드에 대해 범위 검색을 실행할 수 있습니다. 범위 검색은 점수 또는 거리가 지정된 경계 내에 속하는 벡터 일치 결과를 반환합니다. StructArray 필드의 경우, 각 Struct 요소를 독립적으로 검색하는 요소 수준 벡터 검색과 함께 범위 검색을 사용하십시오.</p>
+    </button></h1><p>이 페이지를 사용하여 StructArray 벡터 하위 필드에 대해 범위 검색을 실행할 수 있습니다. 범위 검색은 점수 또는 거리가 지정된 경계 내에 속하는 벡터 일치 항목을 반환합니다. StructArray 필드의 경우, 각 Struct 요소를 독립적으로 검색하는 요소 수준 벡터 검색과 함께 범위 검색을 사용하십시오.</p>
 <p>이 페이지에서는 <a href="/docs/ko/create-structarray-field.md">‘StructArray 필드 생성’의</a> <code translate="no">tech_articles</code> 컬렉션을 사용합니다. 이 컬렉션에는 <code translate="no">chunks</code> 라는 StructArray 필드가 있습니다. <code translate="no">chunks[emb]</code> 벡터 하위 필드는 <code translate="no">COSINE</code>, <code translate="no">IP</code> 또는 <code translate="no">L2</code> 와 같은 일반 벡터 메트릭을 사용하여 요소 수준 검색이 가능하도록 인덱싱되어 있습니다.</p>
 <h2 id="How-range-search-applies-to-StructArray" class="common-anchor-header">StructArray에 범위 검색이 적용되는 방식<button data-href="#How-range-search-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -94,7 +94,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">radius</code> 를 설정하여 검색 경계를 정의합니다. 내부 경계도 필요한 경우 <code translate="no">range_filter</code> 를 설정하십시오. 방향은 더 짧은 거리가 더 좋은지, 아니면 더 높은 유사도 점수가 더 좋은지에 따라 달라집니다.</p>
+    </button></h2><p><code translate="no">radius</code> 를 설정하여 검색 경계를 정의합니다. 내부 경계도 필요한 경우 <code translate="no">range_filter</code> 를 설정하십시오. 방향은 더 작은 거리가 더 좋은지, 아니면 더 큰 유사도 점수가 더 좋은지에 따라 달라집니다.</p>
 <table>
 <thead>
 <tr><th>메트릭 유형</th><th>점수가 높을수록 좋은가요?</th><th><code translate="no">range_filter</code> 를 사용할 때의 범위 조건</th></tr>
@@ -104,7 +104,7 @@ summary: >-
 <tr><td><code translate="no">IP</code>, <code translate="no">COSINE</code></td><td>네. 점수가 클수록 좋습니다.</td><td><code translate="no">radius &lt; distance &lt;= range_filter</code></td></tr>
 </tbody>
 </table>
-<p><code translate="no">radius</code> 만 설정된 경우, 범위 검색은 해당 메트릭의 외부 경계를 충족하는 일치 항목을 반환합니다. 임베딩의 점수 또는 거리 척도에 따라 값을 선택하십시오.</p>
+<p><code translate="no">radius</code> 만 설정된 경우, 범위 검색은 해당 메트릭의 외부 경계를 충족하는 히트를 반환합니다. 임베딩의 점수 또는 거리 척도에 따라 값을 선택하십시오.</p>
 <h2 id="Run-element-level-range-search" class="common-anchor-header">요소 수준 범위 검색 실행<button data-href="#Run-element-level-range-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -222,7 +222,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>StructArray 요소 수준 벡터 필드는 하이브리드 검색에서 범위 검색을 지원합니다. StructArray 요소 수준 벡터 필드를 대상으로 하는 <code translate="no">AnnSearchRequest</code> 에 ` <code translate="no">radius</code> `를 추가하고, 선택적으로 ` <code translate="no">range_filter</code> `를 추가하십시오.</p>
+    </button></h2><p>StructArray 요소 수준 벡터 필드는 하이브리드 검색에서 범위 검색을 지원합니다. StructArray 요소 수준 벡터 필드를 대상으로 하는 <code translate="no">AnnSearchRequest</code> 에 ` <code translate="no">radius</code> ` 및 선택적으로 ` <code translate="no">range_filter</code> `를 추가하십시오.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest, RRFRanker
 
 title_req = AnnSearchRequest(
@@ -258,7 +258,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>이 예제에서는 <code translate="no">chunks[emb]</code> 하위 요청만 범위 검색 매개변수를 사용합니다. StructArray 요청은 여전히 요소 수준 의미론을 따릅니다. 즉, 범위 경계는 하이브리드 검색이 결과를 결합하고 재순위를 매기기 전에 Struct 요소 일치 항목에 적용됩니다.</p>
+<p>이 예제에서는 <code translate="no">chunks[emb]</code> 하위 요청만 범위 검색 매개변수를 사용합니다. StructArray 요청은 여전히 요소 수준 의미 체계를 따릅니다. 즉, 하이브리드 검색이 결과를 결합하고 재순위를 매기기 전에 범위 경계가 Struct 요소 일치 항목에 적용됩니다.</p>
 <h2 id="Interpret-range-results" class="common-anchor-header">범위 결과 해석<button data-href="#Interpret-range-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -279,7 +279,7 @@ results = client.hybrid_search(
 <tr><th>결과 항목</th><th>의미</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">id</code></td><td>일치하는 Struct 요소를 포함하는 엔터티의 기본 키입니다.</td></tr>
+<tr><td><code translate="no">id</code></td><td>일치하는 Struct 요소를 포함하는 엔티티의 기본 키입니다.</td></tr>
 <tr><td><code translate="no">distance</code> 또는 점수</td><td>쿼리 벡터와 일치하는 Struct 요소 벡터 간의 점수 또는 거리입니다.</td></tr>
 <tr><td><code translate="no">offset</code></td><td>반환 시 StructArray 필드 내에서 일치하는 Struct 요소의 0을 기준으로 한 위치.</td></tr>
 <tr><td>중복된 기본 키</td><td>가능합니다. 동일한 엔티티 내의 두 개 이상의 Struct 요소가 지정된 범위에 포함될 수 있습니다.</td></tr>
@@ -326,7 +326,7 @@ results = client.hybrid_search(
 <li><p>요소 수준 범위 검색에 <code translate="no">COSINE</code> 와 같은 일반 메트릭 대신 <code translate="no">MAX_SIM_COSINE</code> 를 사용하는 경우.</p></li>
 <li><p>일반 벡터 쿼리 대신 <code translate="no">EmbeddingList</code> 쿼리를 사용하는 경우.</p></li>
 <li><p>범위 검색 결과가 상위 엔티티별로 고유할 것으로 기대하는 경우. 범위 검색은 일치하는 Struct 요소 히트를 반환합니다.</p></li>
-<li><p>필수 하위 필드 경로 구문인 <code translate="no">chunks[emb]</code> 대신 <code translate="no">chunks.emb</code> 을 사용하는 경우.</p></li>
+<li><p>필수 하위 필드 경로 구문( <code translate="no">chunks[emb]</code>) 대신 <code translate="no">chunks.emb</code> 를 사용하는 경우.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">다음 단계<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"

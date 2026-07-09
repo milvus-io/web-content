@@ -1,7 +1,7 @@
 ---
 id: arabic-analyzer.md
 title: アラビア語Compatible with Milvus 3.0.0+
-summary: 組み込みのアラビア語解析機能は、文字の異体や数字の正規化、用語のステミング、アラビア語のストップワードの除去を行うことで、アラビア語のテキストを処理します。
+summary: 組み込みのアラビア語解析機能は、文字の異体や数字を正規化し、語幹抽出し、アラビア語のストップワードを除去することで、アラビア語のテキストを処理します。
 beta: Milvus 3.0.0+
 ---
 <h1 id="Arabic" class="common-anchor-header">アラビア語<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Arabic" class="anchor-icon" translate="no">
@@ -19,7 +19,7 @@ beta: Milvus 3.0.0+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">arabic</code> アナライザーは、アラビア語テキスト用の組み込みアナライザーです。Milvusにアラビア文字の異体字の正規化、発音記号やタトウィールの削除、アラビア・インド系数字の変換、アラビア語のステミングの適用、およびアラビア語のストップワードの削除を行わせる必要がある場合は、このアナライザーを使用してください。</p>
+    </button></h1><p><code translate="no">arabic</code> アナライザーは、アラビア語テキスト用の組み込みアナライザーです。Milvusにアラビア文字の異体字の正規化、発音記号やタトウィールの除去、アラビア・インド系数字の変換、アラビア語のステミングの適用、およびアラビア語のストップワードの除去を行わせる必要がある場合は、このアナライザーを使用してください。</p>
 <h2 id="Configuration" class="common-anchor-header">設定<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,7 +53,7 @@ beta: Milvus 3.0.0+
      <td><p><code translate="no">stop_words</code></p></td>
      <td><p><code translate="no">list[str]</code></p></td>
      <td><p><code translate="no">_arabic_</code></p></td>
-     <td><p>トークン化から除外する追加のストップワードのリスト。デフォルトでは、<code translate="no">arabic</code> アナライザは組み込みの<code translate="no">_arabic_</code> 辞書を使用します。デフォルトの辞書を確認するには、Milvus<a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/arabic.txt">アラビア語ストップワードリスト</a>を参照してください。このリストは、Apache Lucene<a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/ar/stopwords.txt">のアラビア語ストップワードファイル</a>に基づいています。</p></td>
+     <td><p>トークン化から除外する追加のストップワードのリスト。デフォルトでは、<code translate="no">arabic</code> アナライザーは組み込みの<code translate="no">_arabic_</code> 辞書を使用します。デフォルトの辞書を確認するには、Milvus<a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/arabic.txt">アラビア語ストップワードリスト</a>を参照してください。このリストは、Apache Lucene<a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/ar/stopwords.txt">のアラビア語ストップワードファイル</a>に基づいています。</p></td>
    </tr>
 </table>
 <p>カスタムストップワードを追加するには、<code translate="no">stop_words</code> を含めます：</p>

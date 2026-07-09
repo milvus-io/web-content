@@ -377,7 +377,7 @@ client.add_collection_struct_field(
 <tr><td>„Struct“ wird als Array-Elementtyp verwendet.</td><td>Erstellen Sie ein „StructArray“-Feld als Array-Feld mit „ <code translate="no">element_type=STRUCT</code> “. Erstellen Sie „Struct“ nicht als Sammlungsfeld auf oberster Ebene.</td></tr>
 <tr><td>Alle Elemente teilen sich ein gemeinsames Schema.</td><td>Jedes „Struct“-Element im selben „StructArray“-Feld folgt dem für dieses Feld definierten „Struct“-Schema.</td></tr>
 <tr><td><code translate="no">max_capacity</code> ist erforderlich.</td><td>Es begrenzt die Anzahl der „Struct“-Elemente, die jede Entität im „StructArray“-Feld speichern kann.</td></tr>
-<tr><td>Es sind nur unterstützte Unterfeldtypen zulässig.</td><td>Verwenden Sie skalare und vektorielle Unterfeldtypen, die von StructArray unterstützt werden. Definieren Sie keine JSON-, Geometry-, Text-, Timestamptz-, SparseFloatVector- oder verschachtelte Struct-/Array-Unterfelder.</td></tr>
+<tr><td>Es sind nur unterstützte Unterfeldtypen zulässig.</td><td>Verwenden Sie skalare und vektorielle Unterfeldtypen, die von „StructArray“ unterstützt werden. Definieren Sie keine JSON-, Geometry-, Text-, Timestamptz-, SparseFloatVector- oder verschachtelte Struct-/Array-Unterfelder.</td></tr>
 <tr><td>Vektor-Unterfelder benötigen vor der Suche Indizes.</td><td>Erstellen Sie Indizes auf Pfaden wie <code translate="no">chunks[emb_list_vector]</code> oder <code translate="no">chunks[emb]</code>, bevor Sie eine Vektorsuche ausführen.</td></tr>
 <tr><td>Ein Vektor-Unterfeld hat einen Index.</td><td>Wenn Sie sowohl eine „EmbeddingList“-Suche als auch eine Suche auf Elementebene benötigen, erstellen Sie zwei separate Vektor-Unterfelder.</td></tr>
 <tr><td>Vorhandene „StructArray“-Unterfelder sind fest vorgegeben.</td><td>Nachdem Sie ein StructArray-Feld erstellt haben, können Sie diesem StructArray-Feld keine weiteren Unterfelder mehr hinzufügen.</td></tr>
@@ -408,7 +408,7 @@ client.add_collection_struct_field(
 <li><p>Verwendung eines einzigen Vektor-Unterfelds sowohl für die „EmbeddingList“-Suche als auch für die Suche auf Elementebene.</p></li>
 <li><p>Das Hinzufügen nur von Vektor-Unterfeldern und das Auslassen von Skalar-Unterfeldern, die für die Filterung benötigt werden, wie z. B. „ <code translate="no">section</code> “, „ <code translate="no">quality_score</code> “ oder „ <code translate="no">has_code</code> “.</p></li>
 <li><p>Vektor-Unterfelder werden als skalare Prädikate für <code translate="no">$[...]</code> behandelt. Verwenden Sie Vektor-Unterfelder für die Vektorsuche und skalare Unterfelder für skalare Prädikate.</p></li>
-<li><p>Annahme, dass einem bestehenden StructArray-Feld nach dessen Erstellung neue Teilfelder hinzugefügt werden können.</p></li>
+<li><p>Annahme, dass einem bestehenden StructArray-Feld nach dessen Erstellung neue Unterfelder hinzugefügt werden können.</p></li>
 <li><p>Verwendung von <code translate="no">chunks.emb</code> oder <code translate="no">chunks.emb_list_vector</code> anstelle der erforderlichen Pfadsyntax <code translate="no">chunks[emb]</code> oder <code translate="no">chunks[emb_list_vector]</code>.</p></li>
 <li><p>Das Verhalten von nullfähigen StructArrays wird so behandelt, als wäre es in jeder Zielversion verfügbar.</p></li>
 </ul>

@@ -18,7 +18,7 @@ summary: 在不造成停机的情况下，将现有 Milvus 部署的消息队列
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本指南介绍了如何将现有 Milvus 部署的消息队列 (MQ)<strong>在 Woodpecker 与另一消息队列之间</strong>进行切换，该操作可在系统在线状态下进行，且不会造成停机。</p>
+    </button></h1><p>本指南介绍了如何将现有 Milvus 部署的消息队列 (MQ)<strong>在 Woodpecker 与另一个消息队列之间</strong>进行切换，该操作可在不影响服务的情况下在线完成，且不会造成停机。</p>
 <div class="alert warning">
 <p>此功能尚未发布，具体内容可能会有变动。如果您想试用该功能或有任何疑问，请联系 Milvus 支持团队。</p>
 </div>
@@ -56,7 +56,7 @@ summary: 在不造成停机的情况下，将现有 Milvus 部署的消息队列
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>本指南仅涵盖<strong>在 Woodpecker 与另一消息队列之间</strong>进行切换的情况。Pulsar 与 Kafka 之间的直接切换不在本指南范围内。</p>
+    </button></h2><p>本指南仅涵盖<strong>在 Woodpecker 与另一消息队列之间</strong>进行切换。Pulsar 与 Kafka 之间的直接切换不在本指南范围内。</p>
 <ul>
 <li><a href="/docs/zh/switch-rocksmq-woodpecker.md">在 RocksMQ 和 Woodpecker 之间切换</a>— Milvus Standalone（Docker Compose）</li>
 <li><a href="/docs/zh/switch-pulsar-woodpecker.md">在 Pulsar 和 Woodpecker 之间切换</a>— Milvus 集群（Helm / Milvus Operator）</li>
@@ -104,7 +104,7 @@ summary: 在不造成停机的情况下，将现有 Milvus 部署的消息队列
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>源消息队列</th><th>目标消息队列</th><th>部署</th><th>状态</th></tr>
+<tr><th>源消息队列</th><th>目标MQ</th><th>部署</th><th>状态</th></tr>
 </thead>
 <tbody>
 <tr><td>RocksMQ</td><td>Woodpecker（本地/MinIO）</td><td>独立部署（Docker Compose）</td><td><strong>支持</strong></td></tr>

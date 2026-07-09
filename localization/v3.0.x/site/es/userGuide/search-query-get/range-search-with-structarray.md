@@ -48,7 +48,7 @@ summary: >-
 <tbody>
 <tr><td>Búsqueda en EmbeddingList</td><td>No compatible.</td><td>No aplicable.</td></tr>
 <tr><td>Búsqueda a nivel de elemento</td><td>Utilice una consulta vectorial normal con ` <code translate="no">radius</code> ` y, opcionalmente, ` <code translate="no">range_filter</code>`.</td><td>Nivel de elemento de estructura.</td></tr>
-<tr><td>Búsqueda híbrida</td><td>Compatible cuando la solicitud de StructArray se dirige a un campo vectorial a nivel de elemento. Las solicitudes a nivel de EmbeddingList no admiten la búsqueda por rango.</td><td>Subbúsqueda a nivel de elemento, seguida de una reclasificación híbrida.</td></tr>
+<tr><td>Búsqueda híbrida</td><td>Compatible cuando la solicitud de StructArray se dirige a un campo vectorial a nivel de elemento. Las solicitudes a nivel de EmbeddingList no admiten la búsqueda por rango.</td><td>Subbúsqueda a nivel de elemento, seguida de una reordenación híbrida.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -123,7 +123,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>El siguiente ejemplo busca fragmentos individuales cuyos vectores « <code translate="no">chunks[emb]</code> » sean lo suficientemente similares al vector de consulta. Cada resultado encontrado representa un elemento Struct coincidente.</p>
+    </button></h2><p>El siguiente ejemplo busca fragmentos individuales cuyos vectores « <code translate="no">chunks[emb]</code> » sean lo suficientemente similares al vector de consulta. Cada resultado encontrado representa un elemento Struct que coincide.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -261,7 +261,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>En este ejemplo, solo la sub-solicitud « <code translate="no">chunks[emb]</code> » utiliza parámetros de búsqueda por rango. La solicitud de StructArray sigue respetando la semántica a nivel de elemento: el límite del rango se aplica a los resultados de Struct antes de que la búsqueda híbrida combine y vuelva a clasificar los resultados.</p>
+<p>En este ejemplo, solo la sub-solicitud « <code translate="no">chunks[emb]</code> » utiliza parámetros de búsqueda por rango. La solicitud de StructArray sigue respetando la semántica a nivel de elemento: el límite del rango se aplica a los resultados del elemento Struct antes de que la búsqueda híbrida combine y vuelva a clasificar los resultados.</p>
 <h2 id="Interpret-range-results" class="common-anchor-header">Interpretar los resultados del rango<button data-href="#Interpret-range-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -325,8 +325,8 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Realizar una búsqueda por rango en ` <code translate="no">chunks[emb_list_vector]</code>`, que está pensada para la búsqueda en `EmbeddingList`.</p></li>
-<li><p>Utilizar <code translate="no">MAX_SIM_COSINE</code> en lugar de una métrica habitual, como <code translate="no">COSINE</code>, para la búsqueda por rango a nivel de elemento.</p></li>
+<li><p>Realizar una búsqueda por rango en ` <code translate="no">chunks[emb_list_vector]</code>`, que está pensada para la búsqueda a nivel de `EmbeddingList`.</p></li>
+<li><p>Utilizar ` <code translate="no">MAX_SIM_COSINE</code> ` en lugar de una métrica habitual, como ` <code translate="no">COSINE</code> `, para la búsqueda por rango a nivel de elemento.</p></li>
 <li><p>Utilizar una consulta « <code translate="no">EmbeddingList</code> » en lugar de una consulta vectorial normal.</p></li>
 <li><p>Esperar que los resultados de la búsqueda por rango sean únicos por entidad principal. La búsqueda por rango devuelve resultados que coinciden con elementos de Struct.</p></li>
 <li><p>Utilizar <code translate="no">chunks.emb</code> en lugar de la sintaxis de ruta de subcampo requerida <code translate="no">chunks[emb]</code>.</p></li>

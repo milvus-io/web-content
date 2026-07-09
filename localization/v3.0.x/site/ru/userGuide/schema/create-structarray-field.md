@@ -5,8 +5,8 @@ summary: >-
   Поле StructArray следует создавать в том случае, если одна сущность должна
   содержать упорядоченный список структурированных элементов. Поле StructArray
   представляет собой поле типа Array, тип элементов которого — Struct. Каждый
-  элемент типа Struct соответствует одной и той же схеме и может содержать
-  скалярные подполя, векторные подполя или и те, и другие.
+  элемент Struct соответствует одной и той же схеме и может содержать скалярные
+  подполя, векторные подполя или и те, и другие.
 ---
 <h1 id="Create-a-StructArray-Field" class="common-anchor-header">Создание поля StructArray<button data-href="#Create-a-StructArray-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -340,7 +340,7 @@ client.add_collection_struct_field(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>После добавления поля StructArray существующие сущности возвращают значение ` <code translate="no">null</code> ` для нового поля по всем его подполям.</p>
-<p>После создания поля StructArray вы не сможете добавлять новые подполя к этому существующему полю StructArray. Если позже вам понадобятся дополнительные атрибуты элементов, вызовите метод <code translate="no">drop_collection_field()</code>, чтобы удалить поле StructArray, а затем добавьте новое поле StructArray с обновленной схемой Struct.</p>
+<p>После создания поля StructArray вы не сможете добавлять новые подполя к этому существующему полю StructArray. Если позже вам понадобятся дополнительные атрибуты элементов, вызовите метод ` <code translate="no">drop_collection_field()</code> `, чтобы удалить поле StructArray, а затем добавьте новое поле StructArray с обновленной схемой Struct.</p>
 <pre><code translate="no" class="language-python">client.drop_collection_field(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
     field_name=<span class="hljs-string">&quot;chunks&quot;</span>,
@@ -403,7 +403,7 @@ client.add_collection_struct_field(
     </button></h2><ul>
 <li><p>Создание <code translate="no">DataType.STRUCT</code> в качестве поля коллекции верхнего уровня вместо использования его в качестве типа элемента поля Array.</p></li>
 <li><p>Забывание установить « <code translate="no">max_capacity</code> » для поля «StructArray».</p></li>
-<li><p>Определение неподдерживаемых типов подполей, таких как JSON, Geometry, Text, Timestamptz, SparseFloatVector, вложенный массив, вложенная структура или массив структур.</p></li>
+<li><p>Определение неподдерживаемых типов подполей, таких как JSON, Geometry, Text, Timestamptz, SparseFloatVector, вложенный Array, вложенный Struct или Array-of-Struct.</p></li>
 <li><p>Использование <code translate="no">String</code> в качестве типа подполя. Используйте <code translate="no">VARCHAR</code> и установите <code translate="no">max_length</code>.</p></li>
 <li><p>Использование одного векторного подполя как для поиска по EmbeddingList, так и для поиска на уровне элементов.</p></li>
 <li><p>Добавление только векторных подполей и игнорирование скалярных подполей, необходимых для фильтрации, таких как <code translate="no">section</code>, <code translate="no">quality_score</code> или <code translate="no">has_code</code>.</p></li>

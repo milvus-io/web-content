@@ -2,9 +2,9 @@
 id: arabic-analyzer.md
 title: ÁrabeCompatible with Milvus 3.0.0+
 summary: >-
-  O analisador de árabe integrado processa o texto em árabe normalizando as
-  variantes das letras e os algarismos, reduzindo os termos à sua forma base e
-  removendo as palavras vazias em árabe.
+  O analisador de árabe integrado processa texto em árabe, normalizando
+  variantes de letras e algarismos, reduzindo termos à sua forma base e
+  removendo palavras vazias em árabe.
 beta: Milvus 3.0.0+
 ---
 <h1 id="Arabic" class="common-anchor-header">Árabe<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Arabic" class="anchor-icon" translate="no">
@@ -39,7 +39,7 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><p>Os analisadores integrados são modelos de analisadores fornecidos pelo Milvus. Para utilizar um analisador integrado, defina ` <code translate="no">type</code> ` para um nome de analisador predefinido em ` <code translate="no">analyzer_params</code>`.</p>
-<p>Para utilizar o analisador árabe integrado, defina ` <code translate="no">type</code> ` como ` <code translate="no">arabic</code>`:</p>
+<p>Para utilizar o analisador árabe integrado, defina <code translate="no">type</code> como <code translate="no">arabic</code>:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;arabic&quot;</span>,
 }
@@ -84,7 +84,7 @@ beta: Milvus 3.0.0+
     ],
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Este analisador aplica as seguintes etapas de processamento:</p>
+<p>Este analisador aplica os seguintes passos de processamento:</p>
 <ul>
 <li><strong>Tokenização</strong>: utiliza o tokenizador <code translate="no">standard</code> para dividir o texto em tokens.</li>
 <li><strong>Normalização de dígitos</strong>: utiliza o filtro « <code translate="no">decimaldigit</code> » para converter dígitos decimais árabes-índicos e outros dígitos Unicode em dígitos ASCII.</li>

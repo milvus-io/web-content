@@ -133,7 +133,7 @@ title: Pulsar
       </svg>
     </button></h3><pre><code translate="no" class="language-bash">helm uninstall my-release
 <button class="copy-code-btn"></button></code></pre>
-<p>Se è stato utilizzato il Pulsar integrato e si desidera rimuovere i dati persistenti, eliminare i PVC di Pulsar (denominati <code translate="no">my-release-pulsarv3-*</code>):</p>
+<p>Se è stato utilizzato il Pulsar integrato e si desidera rimuovere i relativi dati persistenti, eliminare i PVC di Pulsar (denominati <code translate="no">my-release-pulsarv3-*</code>):</p>
 <pre><code translate="no" class="language-bash">kubectl get pvc | grep my-release-pulsarv3
 kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <button class="copy-code-btn"></button></code></pre>

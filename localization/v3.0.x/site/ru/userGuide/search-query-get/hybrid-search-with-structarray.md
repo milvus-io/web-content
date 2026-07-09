@@ -48,7 +48,7 @@ summary: >-
 <tr><td>Векторное поле на уровне коллекции + подполе EmbeddingList структуры StructArray</td><td>Уровень сущности</td><td>Окончательные кандидаты индексируются по первичному ключу.</td><td>Не использовать.</td></tr>
 <tr><td>Векторное поле на уровне коллекции + подполе на уровне элемента StructArray</td><td>Уровень сущности</td><td>Соответствия на уровне элементов сворачиваются в кандидаты на уровне сущностей перед гибридным переранжированием.</td><td>Дополнительная настройка сворачивания на уровне элементов StructArray <code translate="no">AnnSearchRequest</code>.</td></tr>
 <tr><td>Несколько подполей на уровне элементов в рамках одного поля StructArray</td><td>Уровень элемента</td><td>Окончательные кандидаты индексируются по первичному ключу плюс смещению элемента Struct.</td><td>Не использовать.</td></tr>
-<tr><td>По podpolu на уровне элемента в разных полях StructArray</td><td>Уровень сущности</td><td>Смещения элементов не имеют общей идентичности, поэтому каждый <code translate="no">AnnSearchRequest</code> на уровне элемента StructArray сворачивается перед переранжированием.</td><td>Дополнительная настройка сворачивания для каждого « <code translate="no">AnnSearchRequest</code> » на уровне элементов StructArray.</td></tr>
+<tr><td>По podpolu на уровне элемента в разных полях StructArray</td><td>Уровень сущности</td><td>Смещения элементов не имеют общей идентичности, поэтому каждый <code translate="no">AnnSearchRequest</code> на уровне элемента StructArray сворачивается перед повторным ранжированием.</td><td>Дополнительная настройка сворачивания для каждого « <code translate="no">AnnSearchRequest</code> » на уровне элементов StructArray.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -194,7 +194,7 @@ results = client.hybrid_search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>Оба объекта <code translate="no">AnnSearchRequest</code> выполняют поиск по векторным подполям в рамках <code translate="no">chunks</code>. Одно и то же смещение с нулевой базой относится к одному и тому же элементу Struct, поэтому гибридный реранкер может ранжировать кандидаты на уровне элементов напрямую. Не устанавливайте <code translate="no">element_scope</code> в этом режиме, поскольку сворачивание на уровне сущностей не выполняется.</p>
+<p>Оба объекта <code translate="no">AnnSearchRequest</code> выполняют поиск по векторным подполям в рамках <code translate="no">chunks</code>. Одно и то же смещение с нулевой базой относится к одному и тому же элементу Struct, поэтому гибридный реранкер может напрямую ранжировать кандидаты на уровне элементов. Не устанавливайте <code translate="no">element_scope</code> в этом режиме, поскольку сворачивание на уровне сущностей не выполняется.</p>
 <h2 id="Collapse-element-level-hits-for-entity-level-hybrid-search" class="common-anchor-header">Сворачивание совпадений на уровне элементов для гибридного поиска на уровне сущностей<button data-href="#Collapse-element-level-hits-for-entity-level-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -210,7 +210,7 @@ results = client.hybrid_search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Если гибридный поиск сочетает запрос на уровне элементов StructArray <code translate="no">AnnSearchRequest</code> с векторным запросом на уровне коллекции, запросом EmbeddingList или запросом на уровне элементов в рамках другого поля StructArray, окончательная область кандидатов находится на уровне сущностей. В этом случае каждый запрос на уровне элементов StructArray <code translate="no">AnnSearchRequest</code> сводится к кандидатам на уровне сущностей перед гибридным переранжированием.</p>
+    </button></h2><p>Если гибридный поиск сочетает запрос на уровне элементов StructArray <code translate="no">AnnSearchRequest</code> с векторным запросом на уровне коллекции, запросом EmbeddingList или запросом на уровне элементов в рамках другого поля StructArray, то окончательная область кандидатов находится на уровне сущностей. В этом случае каждый запрос на уровне элементов StructArray <code translate="no">AnnSearchRequest</code> сводится к кандидатам на уровне сущностей перед гибридным переранжированием.</p>
 <p>Используйте <code translate="no">element_scope</code> внутри <code translate="no">params</code> элемента StructArray уровня <code translate="no">AnnSearchRequest</code>, когда необходимо контролировать, как сворачиваются несколько совпавших элементов из одного и того же объекта.</p>
 <pre><code translate="no">title_req = AnnSearchRequest(
     data=[query_vector],
@@ -271,7 +271,7 @@ results = client.hybrid_search(
 <tr><th>Стратегия</th><th>Поведение</th><th><code translate="no">topk</code></th><th>Требования к метрике</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max</code></td><td>Сохранить лучший балл возвращённого элемента для сущности.</td><td>Не допускается.</td><td>Любая поддерживаемая метрика векторного типа.</td></tr>
+<tr><td><code translate="no">max</code></td><td>Сохранить лучший балл возвращенного элемента для сущности.</td><td>Не допускается.</td><td>Любая поддерживаемая метрика векторного типа.</td></tr>
 <tr><td><code translate="no">sum</code></td><td>Суммировать оценки всех возвращаемых элементов для сущности.</td><td>Не допускается.</td><td>Только метрики с положительной корреляцией, такие как <code translate="no">IP</code> или <code translate="no">COSINE</code>.</td></tr>
 <tr><td><code translate="no">avg</code></td><td>Среднее значение всех возвращаемых оценок элементов для сущности.</td><td>Не допускается.</td><td>Любая поддерживаемая метрика регулярного вектора.</td></tr>
 <tr><td><code translate="no">topk_sum</code></td><td>Суммируйте лучшие оценки возвращённых элементов по <code translate="no">K</code> для сущности.</td><td>Обязательно и должно быть положительным.</td><td>Только метрики с положительной корреляцией, такие как « <code translate="no">IP</code> » или « <code translate="no">COSINE</code> ».</td></tr>
@@ -294,8 +294,8 @@ results = client.hybrid_search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Вы можете привязать <code translate="no">element_filter</code> к <code translate="no">AnnSearchRequest</code> на уровне элементов StructArray, когда скалярные условия должны применяться к тем же элементам Struct, которые участвуют в векторном поиске. Вы также можете использовать <code translate="no">filter</code> верхнего уровня на <code translate="no">hybrid_search()</code> для условий, относящихся к родительскому объекту.</p>
-<p>Векторные поля на уровне элементов StructArray поддерживают поиск по диапазону в гибридном поиске. Добавьте <code translate="no">radius</code> и, при желании, <code translate="no">range_filter</code> к <code translate="no">AnnSearchRequest</code> на уровне элементов. Запросы StructArray на уровне EmbeddingList не поддерживают поиск по диапазону.</p>
+    </button></h2><p>Вы можете привязать <code translate="no">element_filter</code> к <code translate="no">AnnSearchRequest</code> на уровне элементов StructArray, когда скалярные условия должны применяться к тем же элементам Struct, которые участвуют в векторном поиске. Вы также можете использовать <code translate="no">filter</code> верхнего уровня на <code translate="no">hybrid_search()</code> для условий родительского объекта.</p>
+<p>Векторные поля на уровне элементов StructArray поддерживают поиск по диапазону в гибридном поиске. Добавьте <code translate="no">radius</code> и, при необходимости, <code translate="no">range_filter</code> к <code translate="no">AnnSearchRequest</code> на уровне элементов. Запросы StructArray на уровне EmbeddingList не поддерживают поиск по диапазону.</p>
 <p>Гибридная группировка на уровне элементов поддерживается только в том случае, если все объекты <code translate="no">AnnSearchRequest</code> нацелены на векторные поля на уровне элементов в рамках одного и того же поля StructArray, при этом <code translate="no">group_by_field</code> должен быть первичным ключом. Гибридная группировка не поддерживается, если запрос сочетает векторные поля на уровне коллекций, различные поля StructArray или запросы на уровне EmbeddingList. Не следует сочетать поиск по диапазону с группировкой.</p>
 <h2 id="Interpret-hybrid-results" class="common-anchor-header">Интерпретация гибридных результатов<button data-href="#Interpret-hybrid-results" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -361,9 +361,9 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Добавление параметра <code translate="no">element_scope</code> в гибридный запрос на уровне элементов одного и того же StructArray. Такой запрос остаётся на уровне элементов и не выполняет сворачивание на уровне сущностей.</p></li>
+<li><p>Добавление параметра <code translate="no">element_scope</code> к гибридному запросу на уровне элементов одного и того же StructArray. Такой запрос остается на уровне элементов и не выполняет сворачивание на уровне сущностей.</p></li>
 <li><p>Добавление параметра « <code translate="no">element_scope</code> » к запросу « <code translate="no">chunks[emb_list_vector]</code> ». Поиск по EmbeddingList уже осуществляется на уровне сущностей.</p></li>
-<li><p>Предположение о том, что два поля StructArray имеют общие смещения элементов. Элемент с смещением <code translate="no">3</code> в поле <code translate="no">chunks</code> и элемент с смещением <code translate="no">3</code> в другом поле StructArray относятся к разным элементам, поэтому гибридный запрос становится запросом на уровне сущностей.</p></li>
+<li><p>Предположение о том, что два поля StructArray имеют общие смещения элементов. Элемент с офсетом <code translate="no">3</code> в поле <code translate="no">chunks</code> и элемент с офсетом <code translate="no">3</code> в другом поле StructArray относятся к разным элементам, поэтому гибридный запрос становится запросом на уровне сущностей.</p></li>
 <li><p>Используйте <code translate="no">topk_sum</code> с <code translate="no">L2</code>. Для отрицательных метрик расстояния используйте <code translate="no">max</code>, <code translate="no">avg</code> или <code translate="no">topk_avg</code>.</p></li>
 <li><p>Ожидается, что гибридные результаты на уровне сущностей будут включать выбранное смещение элемента Struct после сворачивания.</p></li>
 </ul>

@@ -2,7 +2,7 @@
 id: mq_rocksmq.md
 title: RocksMQ
 ---
-<h1 id="Use-RocksMQ-as-the-Milvus-Message-Queue" class="common-anchor-header">Verwenden Sie RocksMQ als Milvus-Nachrichtenwarteschlange<button data-href="#Use-RocksMQ-as-the-Milvus-Message-Queue" class="anchor-icon" translate="no">
+<h1 id="Use-RocksMQ-as-the-Milvus-Message-Queue" class="common-anchor-header">Verwendung von RocksMQ als Milvus-Nachrichtenwarteschlange<button data-href="#Use-RocksMQ-as-the-Milvus-Message-Queue" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

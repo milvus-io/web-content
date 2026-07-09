@@ -252,7 +252,7 @@ summary: >-
 <tbody>
 <tr><td>RocksMQ</td><td>Woodpecker (MinIO/lokal)</td><td><strong>Unterstützt</strong></td><td></td></tr>
 <tr><td>Woodpecker (MinIO/lokal)</td><td>RocksMQ</td><td><strong>Unterstützt</strong></td><td></td></tr>
-<tr><td>Woodpecker MinIO</td><td>Woodpecker lokal</td><td><strong>Nicht unterstützt</strong></td><td>Das Umschalten zwischen den Woodpecker-Speichermodi erfordert eine zusätzliche Metadatenverarbeitung, die derzeit noch nicht unterstützt wird.</td></tr>
+<tr><td>Woodpecker MinIO</td><td>Woodpecker lokal</td><td><strong>Nicht unterstützt</strong></td><td>Das Umschalten zwischen den Woodpecker-Speichermodi erfordert eine zusätzliche Metadatenverarbeitung, die noch nicht unterstützt wird.</td></tr>
 <tr><td>Woodpecker lokal</td><td>Woodpecker MinIO</td><td><strong>Nicht unterstützt</strong></td><td>Wie oben.</td></tr>
 <tr><td>RocksMQ / Woodpecker</td><td>Externer Pulsar / Kafka</td><td><strong>Unterstützt, aber nicht empfohlen</strong></td><td>Halten Sie eigenständige Instanzen so einfach wie möglich.</td></tr>
 </tbody>

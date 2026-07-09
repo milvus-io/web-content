@@ -23,7 +23,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Die Unterstützung von StructArray umfasst Schemadefinitionen, Einfüge-Payloads, Indizierung, Suchmodi und StructArray-spezifische Filter. Nutzen Sie diese Seite als Referenz für die Einschränkungen, bevor Sie sich in der Produktion auf das Verhalten von StructArray verlassen.</p>
-<p>Die meisten StructArray-Einschränkungen ergeben sich aus einer der folgenden drei Quellen: dem StructArray-Schemamodell, dem von Ihnen für Vektor-Unterfelder gewählten Suchmodus und der Milvus-Version, auf der Ihre Sammlung läuft.</p>
+<p>Die meisten StructArray-Einschränkungen ergeben sich aus einer der folgenden drei Quellen: dem StructArray-Schemamodell, dem von Ihnen für Vektor-Unterfelder gewählten Suchmodus und der Milvus-Version, auf der Ihre Sammlung ausgeführt wird.</p>
 <h2 id="Limits-at-a-glance" class="common-anchor-header">Einschränkungen im Überblick<button data-href="#Limits-at-a-glance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,7 +80,7 @@ summary: >-
 <tr><td>Alle Elemente teilen sich ein gemeinsames Schema.</td><td>Jedes „Struct“-Element in einem „StructArray“-Feld folgt derselben Unterfeldliste und denselben Unterfelddatentypen.</td></tr>
 <tr><td><code translate="no">max_capacity</code> ist erforderlich.</td><td>Die Anzahl der Struct-Elemente in einer Entität darf die für das StructArray-Feld konfigurierte „ <code translate="no">max_capacity</code> “ nicht überschreiten.</td></tr>
 <tr><td>Vorhandene Unterfelder sind fest vorgegeben.</td><td>Sie können einem bestehenden StructArray-Feld keine neuen Unterfelder anhängen. Um das Unterfeldschema zu ändern, löschen Sie das StructArray-Feld und fügen Sie es mit dem aktualisierten Schema erneut hinzu.</td></tr>
-<tr><td>Verschachtelte StructArrays werden nicht unterstützt.</td><td>Ein „StructArray“-Feld darf keine verschachtelten „ <code translate="no">Array</code> “- „ <code translate="no">ArrayOfVector</code> “- „ <code translate="no">Struct</code> “- oder „ <code translate="no">ArrayOfStruct</code> “-Unterfelder enthalten.</td></tr>
+<tr><td>Verschachtelte StructArray-Felder werden nicht unterstützt.</td><td>Ein „StructArray“-Feld darf keine verschachtelten „ <code translate="no">Array</code> “- „ <code translate="no">ArrayOfVector</code> “- „ <code translate="no">Struct</code> “- oder „ <code translate="no">ArrayOfStruct</code> “-Unterfelder enthalten.</td></tr>
 <tr><td>Funktionen werden innerhalb von „StructArray“ nicht unterstützt.</td><td>Definieren Sie keine Feldfunktionen für „StructArray“-Felder oder deren Unterfelder.</td></tr>
 </tbody>
 </table>
@@ -209,7 +209,7 @@ summary: >-
 <tr><td>Suche auf Elementebene</td><td>Reguläre Vektormetriken wie <code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">COSINE</code>, <code translate="no">HAMMING</code> oder <code translate="no">JACCARD</code></td><td>Ergebnisse auf Elementebene, die den Offset des gefundenen Elements enthalten können.</td></tr>
 </tbody>
 </table>
-<p>Verwenden Sie separate Vektor-Unterfelder, wenn beide Modi erforderlich sind. Verwenden Sie beispielsweise „ <code translate="no">chunks[emb_list_vector]</code> “ für die EmbeddingList-Suche und „ <code translate="no">chunks[emb]</code> “ für die Suche auf Elementebene.</p>
+<p>Verwenden Sie separate Vektor-Unterfelder, wenn beide Modi erforderlich sind. Verwenden Sie beispielsweise „ <code translate="no">chunks[emb_list_vector]</code> “ für die „EmbeddingList“-Suche und „ <code translate="no">chunks[emb]</code> “ für die Suche auf Elementebene.</p>
 <p>StructArray-Vektor-Unterfelder zählen bei der Planung Ihres Sammlungsschemas als Vektor-Unterfelder. Halten Sie die Gesamtzahl der Vektorfelder und Vektor-Unterfelder innerhalb der Grenzen Ihrer Zielversion und Ihrer Service-Stufe.</p>
 <p>Informationen zur unterstützten Matrix aus Index- und Metriktypen finden Sie unter <a href="/docs/de/index-structarray-fields.md">„Index-StructArray-Felder</a>“.</p>
 <h2 id="Search-limits" class="common-anchor-header">Suchbeschränkungen<button data-href="#Search-limits" class="anchor-icon" translate="no">
@@ -262,7 +262,7 @@ summary: >-
 <li><p>Verwenden Sie skalare Unterfelder für skalare Prädikate.</p></li>
 <li><p>Verwenden Sie keine Vektor-Teilfelder als Eingaben für skalare Prädikate von „ <code translate="no">$[...]</code> “.</p></li>
 <li><p>JSON-Path-Syntax, JSON-Funktionen, Array-Container-Funktionen, Textabgleichsfunktionen, Geometrie-/GIS-Funktionen und Timestamptz-Ausdrücke werden für Prädikate auf StructArray-Ebene nicht unterstützt.</p></li>
-<li><p>Verwenden Sie vorzugsweise explizite boolesche Vergleiche wie „ <code translate="no">$[has_code] == true</code> “ anstelle von bloßen booleschen Ausdrücken.</p></li>
+<li><p>Verwenden Sie vorzugsweise explizite boolesche Vergleiche wie „ <code translate="no">$[has_code] == true</code> “ anstelle von einfachen booleschen Ausdrücken.</p></li>
 </ul>
 <h2 id="Related-pages" class="common-anchor-header">Verwandte Seiten<button data-href="#Related-pages" class="anchor-icon" translate="no">
       <svg translate="no"

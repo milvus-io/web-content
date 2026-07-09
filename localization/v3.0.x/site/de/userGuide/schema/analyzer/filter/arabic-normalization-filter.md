@@ -38,7 +38,7 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Verwenden Sie für arabischen Text in den meisten Fällen den integrierten <a href="/docs/de/arabic-analyzer.md"><code translate="no">arabic</code></a> Analysator. Der integrierte Analysator enthält diesen Filter zusammen mit der Standard-Tokenisierung, der Umwandlung in Kleinbuchstaben, der Normalisierung von Dezimalziffern, der arabischen Wortstammbildung und der Entfernung arabischer Stoppwörter. Verwenden Sie „ <code translate="no">arabic_normalization</code> “ nur dann direkt, wenn Sie eine benutzerdefinierte Analysator-Pipeline erstellen müssen.</p>
+<p>Verwenden Sie für arabischen Text in den meisten Fällen den integrierten <a href="/docs/de/arabic-analyzer.md"><code translate="no">arabic</code></a> Analysator. Der integrierte Analysator enthält diesen Filter zusammen mit der Standard-Tokenisierung, der Umwandlung in Kleinbuchstaben, der Normalisierung von Dezimalziffern, dem arabischen Stemming und der Entfernung arabischer Stoppwörter. Verwenden Sie „ <code translate="no">arabic_normalization</code> “ nur dann direkt, wenn Sie eine benutzerdefinierte Analysator-Pipeline erstellen müssen.</p>
 </div>
 <p>Um den Filter „ <code translate="no">arabic_normalization</code> “ in einem benutzerdefinierten Analysator zu verwenden, fügen Sie ihn im Abschnitt „ <code translate="no">filter</code> “ unter „ <code translate="no">analyzer_params</code> “ hinzu:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {

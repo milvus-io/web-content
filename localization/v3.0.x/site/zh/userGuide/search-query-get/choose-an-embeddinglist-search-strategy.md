@@ -3,7 +3,7 @@ id: choose-an-embeddinglist-search-strategy.md
 title: 选择 EmbeddingList 搜索策略
 summary: >-
   EmbeddingList 搜索策略决定了 Milvus 如何为 EmbeddingList 搜索构建近似候选项索引。默认策略为
-  tokenann。当嵌入列表较大、TokenANN 计算成本过高，或者学习到的/压缩的行级表示更合适时，您可以切换到 muvera 或 lemur。 当启用
+  tokenann。当嵌入列表较大、TokenANN 计算成本过高，或者学习到的/压缩的行级表示更合适时，您可以切换为 muvera 或 lemur。 当启用
   `emb_list_rerank` 时，最终结果仍由 MaxSim 重新排序生成。
 ---
 <h1 id="Choose-an-EmbeddingList-Search-Strategy" class="common-anchor-header">选择 EmbeddingList 搜索策略<button data-href="#Choose-an-EmbeddingList-Search-Strategy" class="anchor-icon" translate="no">
@@ -41,7 +41,7 @@ summary: >-
 <p>这提供了更强的表示能力，但大规模精确 MaxSim 计算成本很高。暴力 MaxSim 搜索需要将查询向量与每个候选行中的每个向量进行比较。这通常对于生产环境中的搜索来说速度太慢。</p>
 <table>
 <thead>
-<tr><th>### 问题 - 每行可能包含多个向量。 - 对所有行进行精确 MaxSim 计算开销巨大。 - 索引大小和搜索延迟可能迅速增加。</th><th>### 策略 - 使用近似的第一阶段检索方法。 - 检索的候选结果数量应多于请求的 topK。 - 通过精确 MaxSim 对候选结果进行重新排序。</th></tr>
+<tr><th>### 问题 - 每行可能包含多个向量。 - 对所有行进行精确 MaxSim 计算开销巨大。 - 索引大小和搜索延迟可能迅速增加。</th><th>### 策略 - 使用近似的第一阶段检索方法。 - 检索的候选项数量超过请求的 topK。 - 使用精确 MaxSim 对候选项进行重新排序。</th></tr>
 </thead>
 <tbody>
 </tbody>
@@ -88,7 +88,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">tokenann</code> 为嵌入列表中的每个向量建立索引。在搜索过程中，每个查询向量执行 ANN 检索，匹配的向量被聚合回其所在行，所得的行候选结果通过 MaxSim 重新排序。</p>
+    </button></h2><p><code translate="no">tokenann</code> 为嵌入列表中的每个向量建立索引。在搜索过程中，每个查询向量执行 ANN 检索，匹配的向量被聚合回其所在行，最终得到的行候选结果通过 MaxSim 重新排序。</p>
 <div class="alert note">
 <p><strong>当质量是首要考虑因素时，请使用 TokenANN。</strong>由于它在第一阶段索引中保留了所有向量，因此这是对原始 MaxSim 计算最接近的近似。</p>
 </div>
@@ -136,7 +136,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">lemur</code> 通过训练模型，将每个 Embeddings 列表压缩为固定维度的表示。第一阶段的 ANN 搜索在已学习的行级向量上运行，并使用 MaxSim 对候选结果进行重新排序。</p>
+    </button></h2><p><code translate="no">lemur</code> 通过训练模型，将每个Embeddings列表压缩为固定维度的表示。第一阶段的ANN搜索在已学习的行级向量上运行，随后使用MaxSim对候选结果进行重新排序。</p>
 <div class="alert note">
 <p><strong>当学习压缩的收益足以抵消训练成本时，应使用 LEMUR。</strong>它在低区分度 Embeddings 空间和多模态检索中表现良好，但应针对目标语料库进行验证，因为其效果可能受文档长度分布的影响。</p>
 </div>
@@ -189,7 +189,7 @@ summary: >-
 <tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_num_repeats</code></td><td>索引构建</td><td><code translate="no">7</code></td><td>控制要拼接的独立 FDE 编码的数量。数值越高可能提高鲁棒性，但会增加索引/搜索开销。</td></tr>
 <tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_seed</code></td><td>索引构建</td><td><code translate="no">42</code></td><td>用于生成可重现的随机投影，特别适用于测试和基准比较。</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">emb_list_strategy=&quot;lemur&quot;</code></td><td>索引构建</td><td><code translate="no">tokenann</code></td><td>当预期学习型行级压缩的效果优于固定随机投影时使用。</td></tr>
-<tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_hidden_dim</code></td><td>索引构建</td><td><code translate="no">256</code></td><td>控制压缩表示的大小。增大该值可获得更大容量；减小该值可降低内存占用并加快检索速度。</td></tr>
+<tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_hidden_dim</code></td><td>索引构建</td><td><code translate="no">256</code></td><td>控制压缩表示的大小。增大该值可获得更大容量；减小该值则可降低内存占用并加快检索速度。</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_num_train_samples</code></td><td>索引构建</td><td><code translate="no">20000</code></td><td>当语料库多样性较高且学习到的压缩模型存在欠拟合时，应增加该值；仅在进行小规模测试或需要加快构建速度时才应减少该值。</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_num_epochs</code></td><td>索引构建</td><td><code translate="no">50</code></td><td>若训练尚未收敛，则增加；若构建时间是主要限制因素，则减少。</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_batch_size</code></td><td>索引构建</td><td><code translate="no">512</code></td><td>根据训练吞吐量和内存使用情况进行调整。</td></tr>
@@ -260,7 +260,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 还可以从 `<code translate="no">milvus.yaml</code>` 中获取索引参数。相关部分位于<code translate="no">knowhere</code> 。参数按索引类型和阶段组织，采用<code translate="no">knowhere.&lt;INDEX_TYPE&gt;.&lt;stage&gt;.&lt;parameter&gt;</code> 的模式。用户提供的索引参数优先于这些默认值。</p>
+    </button></h2><p>Milvus 还可以从 `<code translate="no">milvus.yaml</code>` 中获取索引参数。相关部分位于<code translate="no">knowhere</code> 。参数按索引类型和阶段进行组织，采用<code translate="no">knowhere.&lt;INDEX_TYPE&gt;.&lt;stage&gt;.&lt;parameter&gt;</code> 的模式。用户提供的索引参数优先于这些默认值。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">knowhere:</span>
   <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
   <span class="hljs-attr">HNSW:</span>
@@ -291,7 +291,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>该策略决定索引的构建方式。在搜索时，使用<code translate="no">retrieval_ann_ratio</code> 控制在 MaxSim 重新排序之前检索的第一阶段候选项数量。较高的值通常能提高召回率，但会增加延迟。</p>
+    </button></h2><p>该策略决定索引的构建方式。在搜索时，使用<code translate="no">retrieval_ann_ratio</code> 参数控制在 MaxSim 重新排序之前检索的第一阶段候选项数量。较高的数值通常能提高召回率，但会增加延迟。</p>
 <pre><code translate="no" class="language-python">results = client.search(
     collection_name=collection_name,
     data=[query_embedding_list],
@@ -342,13 +342,13 @@ index_params.add_index(
 <tr><th>问题</th><th>Signal</th><th>推荐的起点</th></tr>
 </thead>
 <tbody>
-<tr><td>是否需要高质量的基线？</td><td>您希望在优化成本之前，先评估最佳的实用近似方案。</td><td><code translate="no">tokenann</code></td></tr>
+<tr><td>是否需要高质量的基线？</td><td>您希望在优化成本之前，先评估最佳的实际近似效果。</td><td><code translate="no">tokenann</code></td></tr>
 <tr><td>向量行数较少还是中等？</td><td>每行包含少量令牌、补丁或片段向量。</td><td><code translate="no">tokenann</code></td></tr>
 <tr><td>TokenANN 是否过大或运行过慢？</td><td>索引大小或第一阶段检索延迟是瓶颈。</td><td><code translate="no">muvera</code></td></tr>
 <tr><td>您是否希望在不进行训练的情况下实现压缩？</td><td>您需要更简单的操作模型和可重现的编码方案。</td><td><code translate="no">muvera</code></td></tr>
-<tr><td>Embeddings的区分度是否较低？</td><td>词级人工神经网络（ANN）候选模型噪声较大，而随机投影无法保留足够的信号。</td><td><code translate="no">lemur</code></td></tr>
+<tr><td>Embeddings的区分度是否较低？</td><td>词元级人工神经网络（ANN）候选模型噪声较大，而随机投影无法保留足够的信号。</td><td><code translate="no">lemur</code></td></tr>
 <tr><td>工作负载是视觉类还是多模态类？</td><td>行中包含许多补丁向量，而 TokenANN 的计算成本过高。</td><td><code translate="no">lemur</code> 或者<code translate="no">muvera</code></td></tr>
-<tr><td>文档长度是否存在严重偏斜？</td><td>某些行包含的向量数量远多于其他行。</td><td>请先使用<code translate="no">muvera</code> 进行尝试；并仔细验证<code translate="no">lemur</code> 。</td></tr>
+<tr><td>文档长度是否存在严重偏斜？</td><td>某些行包含的向量远多于其他行。</td><td>请先使用<code translate="no">muvera</code> 进行尝试；并仔细验证<code translate="no">lemur</code> 。</td></tr>
 </tbody>
 </table>
 <h2 id="Suggested-Evaluation-Workflow" class="common-anchor-header">建议的评估工作流<button data-href="#Suggested-Evaluation-Workflow" class="anchor-icon" translate="no">
@@ -369,13 +369,13 @@ index_params.add_index(
     </button></h2><ol>
 <li><p>当数据集规模允许时，请以<code translate="no">tokenann</code> 作为质量基准。</p></li>
 <li><p>使用<code translate="no">muvera</code> 运行相同的查询，并比较召回率、nDCG、延迟和索引大小。</p></li>
-<li><p>当嵌入列表庞大、嵌入空间噪声较大，或工作负载涉及视觉或多模态数据时，请尝试使用<code translate="no">lemur</code> 。</p></li>
+<li><p>当嵌入列表较大、嵌入空间存在噪声，或工作负载涉及视觉或多模态数据时，请尝试使用<code translate="no">lemur</code> 。</p></li>
 <li><p>在调整过多构建时参数之前，请先对<code translate="no">retrieval_ann_ratio</code> 进行调优。若召回率较低，则增加该值；若延迟过高，则减少该值。</p></li>
 <li><p>务必使用具有代表性的查询和文档长度分布进行验证。在短文本上有效的策略，在视觉文档或长尾语料库中可能失效。</p></li>
 </ol>
 <table>
 <thead>
-<tr><th>### 质量优先 首先从 `<code translate="no">tokenann</code>` 开始。将其作为 MaxSim 近似质量的基准。</th><th>### 平衡型 若需降低成本且不增加训练管道，请尝试<code translate="no">muvera</code> 。</th><th>### 压缩 若学习到的行级压缩预计能优于固定的随机投影，请尝试使用<code translate="no">lemur</code> 。</th></tr>
+<tr><th>### 质量优先 首先从 `<code translate="no">tokenann</code>` 开始。将其作为 MaxSim 近似质量的基准。</th><th>### 平衡型 若需降低成本且不增加训练管道，请尝试<code translate="no">muvera</code> 。</th><th>### 压缩 若学习到的行级压缩很可能优于固定的随机投影，请尝试使用<code translate="no">lemur</code> 。</th></tr>
 </thead>
 <tbody>
 </tbody>

@@ -2,7 +2,7 @@
 id: structarray-limits.md
 title: StructArray 的限制
 summary: >-
-  StructArray 的支援範圍涵蓋模式定義、插入資料、索引建立、搜尋模式，以及 StructArray 專屬的篩選條件。在生產環境中依賴
+  StructArray 的支援範圍涵蓋模式定義、插入資料、索引建立、搜尋模式，以及 StructArray 專屬的篩選器。在生產環境中依賴
   StructArray 的行為之前，請將此頁面作為限制參照。
 ---
 <h1 id="StructArray-Limits" class="common-anchor-header">StructArray 的限制<button data-href="#StructArray-Limits" class="anchor-icon" translate="no">
@@ -46,8 +46,8 @@ summary: >-
 <tr><td>子欄位模式</td><td>同一 StructArray 字段中的所有 Struct 元素共用一個預定義的 Struct 模式。</td></tr>
 <tr><td>容量</td><td><code translate="no">max_capacity</code> 此屬性為必填，並限制單一實體可在 StructArray 欄位中儲存的 Struct 元素數量。</td></tr>
 <tr><td>子欄位變更</td><td>StructArray 欄位建立後，您無法向該現有的 StructArray 欄位新增子欄位。</td></tr>
-<tr><td>子欄位路徑請在索引、搜尋目標、輸出欄位和篩選器中使用xml-ph-0000@deepl.internal路徑，例如 xml-ph-0001@deepl.internal。</td><td>請使用<code translate="no">structArray[subfield]</code> 路徑（例如<code translate="no">chunks[emb]</code> ），作為索引、搜尋目標、輸出欄位及篩選條件。請勿使用<code translate="no">chunks.emb</code> 。</td></tr>
-<tr><td>插入結構</td><td>將 StructArray 欄位插入為物件陣列。請勿在插入載入資料中使用路徑語法。</td></tr>
+<tr><td>子欄位路徑請在索引、搜尋目標、輸出欄位和篩選器中使用 xml-ph-0000@deepl.internal 路徑，例如 xml-ph-0001@deepl.internal。</td><td>請使用<code translate="no">structArray[subfield]</code> 路徑（例如<code translate="no">chunks[emb]</code> ），作為索引、搜尋目標、輸出欄位及篩選條件。請勿使用<code translate="no">chunks.emb</code> 。</td></tr>
+<tr><td>插入結構</td><td>將 StructArray 欄位插入為物件陣列。請勿在插入載荷中使用路徑語法。</td></tr>
 <tr><td>向量索引</td><td>向量欄位或向量子欄位僅接受一個索引。請分別使用不同的向量子欄位進行 EmbeddingList 搜尋與元素層級搜尋。</td></tr>
 <tr><td>函式</td><td>StructArray 欄位內的欄位或子欄位不支援欄位函式。</td></tr>
 <tr><td>可為空的欄位</td><td>可為空的 StructArray 欄位受版本限制。當支援此功能時，空值適用於整個 StructArray 欄位，而非獨立地適用於個別的 Struct 元素。</td></tr>
@@ -74,10 +74,10 @@ summary: >-
 <tr><th>限制</th><th>詳細資訊</th></tr>
 </thead>
 <tbody>
-<tr><td>Struct 並非頂層欄位類型。</td><td>建立一個 StructArray 欄位，格式為<code translate="no">datatype=DataType.ARRAY</code> ，並設定<code translate="no">element_type=DataType.STRUCT</code> 及<code translate="no">struct_schema</code> 。</td></tr>
+<tr><td>Struct 並非頂層欄位類型。</td><td>建立一個 StructArray 欄位，其結構為<code translate="no">datatype=DataType.ARRAY</code> ，並使用<code translate="no">element_type=DataType.STRUCT</code> 及<code translate="no">struct_schema</code> 。</td></tr>
 <tr><td>所有元素共用一個架構。</td><td>StructArray 欄位中的每個 Struct 元素都遵循相同的子欄位清單和子欄位資料類型。</td></tr>
-<tr><td><code translate="no">max_capacity</code> 是必填的。</td><td>一個實體中的 Struct 元素數量不得超過為 StructArray 欄位所設定的<code translate="no">max_capacity</code> 。</td></tr>
-<tr><td>現有的子欄位是固定的。</td><td>您無法將新子欄位附加到現有的 StructArray 欄位上。若要變更子欄位架構，請刪除 StructArray 欄位，然後使用更新的架構重新新增該欄位。</td></tr>
+<tr><td><code translate="no">max_capacity</code> 是必填項目。</td><td>一個實體中的 Struct 元素數量不得超過為 StructArray 欄位所設定的<code translate="no">max_capacity</code> 。</td></tr>
+<tr><td>現有的子欄位是固定的。</td><td>您無法將新子欄位附加到現有的 StructArray 欄位上。若要變更子欄位架構，請刪除 StructArray 欄位，然後使用更新後的架構重新新增該欄位。</td></tr>
 <tr><td>不支援嵌套的 StructArray。</td><td>StructArray 欄位不能包含嵌套的<code translate="no">Array</code> 、<code translate="no">ArrayOfVector</code> 、<code translate="no">Struct</code> 或<code translate="no">ArrayOfStruct</code> 子欄位。</td></tr>
 <tr><td>StructArray 內部不支援函式。</td><td>請勿為 StructArray 欄位或其子欄位定義欄位函式。</td></tr>
 </tbody>
@@ -148,7 +148,7 @@ summary: >-
 <tr><td>空值作用域</td><td>空值適用於整個 StructArray 欄位。例如，<code translate="no">chunks=None</code> 僅在<code translate="no">chunks</code> 為可為空時才有效。</td></tr>
 <tr><td>部分可為空的 StructArray 值</td><td>當 StructArray 欄位包含有效的陣列值時，請勿在同一個值中將可為 null 的子欄位陣列與有效的子欄位陣列混合使用。</td></tr>
 <tr><td>動態新增 StructArray 欄位</td><td>僅在包含動態 StructArray 欄位支援的版本中，才支援將 StructArray 欄位新增至現有集合。</td></tr>
-<tr><td>動態新增的空值要求</td><td>新增至現有集合的 StructArray 欄位必須為可為空，因為現有實體對於新欄位尚無值。</td></tr>
+<tr><td>動態新增的空值要求</td><td>新增至現有集合的 StructArray 欄位必須為可為空，因為現有實體對該新欄位尚無值。</td></tr>
 <tr><td>動態新增後的現有實體</td><td>現有實體針對新增的 StructArray 欄位及其所有子欄位，均會傳回 `<code translate="no">null</code> `。</td></tr>
 </tbody>
 </table>
@@ -208,7 +208,7 @@ summary: >-
 </tbody>
 </table>
 <p>若需同時使用這兩種模式，請使用獨立的向量子欄位。例如，使用<code translate="no">chunks[emb_list_vector]</code> 進行 EmbeddingList 搜尋，並使用<code translate="no">chunks[emb]</code> 進行元素層級搜尋。</p>
-<p>在規劃集合架構時，StructArray 向量子欄位會被視為向量子欄位。請將向量欄位與向量子欄位的總數控制在目標版本及服務層級的限制範圍內。</p>
+<p>在規劃集合架構時，StructArray 向量子欄位會被視為向量子欄位。請確保向量欄位與向量子欄位的總數符合目標版本及服務層級的限制。</p>
 <p>有關受支援的索引類型和指標類型的矩陣，請參閱《<a href="/docs/zh-hant/index-structarray-fields.md">索引 StructArray 欄位</a>》。</p>
 <h2 id="Search-limits" class="common-anchor-header">搜尋限制<button data-href="#Search-limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -231,7 +231,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>基本 EmbeddingList 搜尋</td><td>支援以<code translate="no">MAX_SIM*</code> 度量進行索引的 StructArray 向量子欄位。回傳實體層級的結果。</td></tr>
-<tr><td>基本元素層級搜尋</td><td>支援以常規向量指標索引的 StructArray 向量子欄位。可回傳匹配元素的偏移量。</td></tr>
+<tr><td>基本元素層級搜尋</td><td>支援以常規向量指標進行索引的 StructArray 向量子欄位。可回傳匹配元素的偏移量。</td></tr>
 <tr><td>範圍搜尋</td><td>支援情況取決於搜尋模式以及目標版本對索引/度量的支援狀況。若要了解針對元素層級 StructArray 請求的混合搜尋範圍行為，請查閱您的目標版本。</td></tr>
 <tr><td>分組搜尋</td><td>元素層級的分組搜尋可返回偏移量。針對元素層級 StructArray 請求的混合搜尋分組行為，取決於目標版本。</td></tr>
 <tr><td>混合搜尋</td><td>混合搜尋請求僅能在目標版本支援該搜尋組合的情況下，包含 StructArray 向量子欄位請求。每個請求仍遵循已建立索引之向量子欄位的指標家族。</td></tr>
@@ -257,9 +257,9 @@ summary: >-
 <p>總體而言：</p>
 <ul>
 <li><p>請僅在 StructArray 運算子內部使用 `<code translate="no">$[subfield]</code> `。</p></li>
-<li><p>請使用標量子字段作為標量判據。</p></li>
+<li><p>請使用標量子字段作為標量判別式的輸入。</p></li>
 <li><p>請勿將向量子欄位用作<code translate="no">$[...]</code> 標量判別式的輸入。</p></li>
-<li><p>StructArray 元素層級的判別式不支援 JSON 路徑語法、JSON 函式、陣列容器函式、文字比對函式、幾何／GIS 函式，以及 Timestamptz 表達式。</p></li>
+<li><p>StructArray 元素層級的判別式不支援 JSON 路徑語法、JSON 函式、陣列容器函式、文字比對函式、幾何／GIS 函式，以及 Timestamptz 運算式。</p></li>
 <li><p>請優先使用顯式的布林比較（例如 `<code translate="no">$[has_code] == true</code> `），而非裸露的布林運算式。</p></li>
 </ul>
 <h2 id="Related-pages" class="common-anchor-header">相關頁面<button data-href="#Related-pages" class="anchor-icon" translate="no">

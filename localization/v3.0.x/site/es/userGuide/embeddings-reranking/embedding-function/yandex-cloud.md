@@ -37,7 +37,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus es compatible con los modelos de vectorización de texto de Yandex Cloud AI Studio a través del proveedor <code translate="no">yc</code>. En los parámetros de la función, establece <code translate="no">model_name</code> en la URI del modelo de Yandex Cloud que Milvus debe invocar.</p>
+    </button></h2><p>Milvus es compatible con los modelos de vectorización de texto de Yandex Cloud AI Studio a través del proveedor <code translate="no">yc</code>. En los parámetros de la función, establece « <code translate="no">model_name</code> » en la URI del modelo de Yandex Cloud que Milvus debe invocar.</p>
 <p>Por ejemplo, Yandex Text Embeddings para documentos utiliza una URI de modelo como <code translate="no">emb://&lt;folder_ID&gt;/text-search-doc/latest</code> y devuelve vectores de 256 dimensiones. Para conocer las URI de modelo y las dimensiones disponibles, consulta <a href="https://aistudio.yandex.ru/docs/en/ai-studio/concepts/embeddings">Modelos de vectorización de texto</a>.</p>
 <h2 id="Configure-credentials" class="common-anchor-header">Configurar las credenciales<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -70,7 +70,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Guarde su clave de API en <code translate="no">milvus.yaml</code> y asigne la etiqueta de credenciales al proveedor Yandex Cloud.</p>
+    </button></h3><p>Guarde su clave de API en <code translate="no">milvus.yaml</code> y asigne al proveedor Yandex Cloud la etiqueta de credenciales.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">credential:</span>
   <span class="hljs-attr">yandex_apikey:</span>
@@ -98,7 +98,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Si no hay ninguna credencial coincidente configurada en <code translate="no">milvus.yaml</code>, Milvus puede leer la clave API de Yandex Cloud a partir de la siguiente variable de entorno:</p>
+    </button></h3><p>Si no hay ninguna credencial coincidente configurada en <code translate="no">milvus.yaml</code>, Milvus puede leer la clave de la API de Yandex Cloud a partir de la siguiente variable de entorno:</p>
 <table>
    <tr>
      <th><p>Variable</p></th>

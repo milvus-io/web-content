@@ -42,7 +42,7 @@ title: بولسار
 <tr><td>2.4.x والإصدارات الأقدم</td><td>Pulsar الإصدار 2</td><td>Pulsar v2</td></tr>
 </tbody>
 </table>
-<p>بدءًا من Milvus 2.5، يقوم مخطط Milvus Helm و Milvus Operator بنشر <strong>Pulsar v3</strong> بشكل افتراضي؛ ويظل Pulsar v2 متوافقًا. راجع <a href="/docs/ar/upgrade-pulsar-v3.md">ترقية Pulsar من الإصدار v2 إلى v3</a> <a href="/docs/ar/use-pulsar-v2.md">ومواصلة استخدام Pulsar v2</a>.</p>
+<p>بدءًا من Milvus 2.5، يقوم مخطط Milvus Helm و Milvus Operator بنشر <strong>Pulsar v3</strong> بشكل افتراضي؛ ويظل Pulsar v2 متوافقًا. راجع <a href="/docs/ar/upgrade-pulsar-v3.md">ترقية Pulsar من الإصدار v2 إلى الإصدار v3</a> <a href="/docs/ar/use-pulsar-v2.md">ومواصلة استخدام Pulsar v2</a>.</p>
 <h2 id="Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="common-anchor-header">نشر مجموعة Milvus مع Pulsar باستخدام Helm<button data-href="#Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -133,7 +133,7 @@ title: بولسار
       </svg>
     </button></h3><pre><code translate="no" class="language-bash">helm uninstall my-release
 <button class="copy-code-btn"></button></code></pre>
-<p>إذا كنت قد استخدمت Pulsar المضمن وترغب في إزالة بياناته الدائمة، فاحذف PVCs الخاصة بـ Pulsar (المسمى <code translate="no">my-release-pulsarv3-*</code>):</p>
+<p>إذا كنت قد استخدمت Pulsar المضمن وترغب في إزالة بياناته الدائمة، فاحذف PVCs الخاصة بـ Pulsar (المسماة <code translate="no">my-release-pulsarv3-*</code>):</p>
 <pre><code translate="no" class="language-bash">kubectl get pvc | grep my-release-pulsarv3
 kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <button class="copy-code-btn"></button></code></pre>
@@ -263,7 +263,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>الترقية من الإصدار 2.5.x إلى الإصدار 2.6.x:</strong> <strong>قيود قائمة انتظار الرسائل</strong>: عند الترقية إلى Milvus v3.0-beta، يجب الحفاظ على اختيارك الحالي لقائمة انتظار الرسائل. لا يتم دعم التبديل بين أنظمة قائمة انتظار الرسائل المختلفة أثناء الترقية. سيتوفر دعم تغيير أنظمة قائمة انتظار الرسائل في الإصدارات المستقبلية.
+<li><strong>الترقية من الإصدار 2.5.x إلى الإصدار 2.6.x:</strong> <strong>قيود قائمة انتظار الرسائل</strong>: عند الترقية إلى Milvus v3.0-beta، يجب الحفاظ على اختيارك الحالي لقائمة انتظار الرسائل. لا يتم دعم التبديل بين أنظمة قوائم انتظار الرسائل المختلفة أثناء الترقية. سيتوفر دعم تغيير أنظمة قوائم انتظار الرسائل في الإصدارات المستقبلية.
 إذا كنت تستخدم Pulsar وترغب في الاحتفاظ به، فلا تقم بتغيير قائمة انتظار الرسائل أثناء الترقية.</li>
 <li><strong>Pulsar v2 → v3:</strong> راجع <a href="/docs/ar/upgrade-pulsar-v3.md">ترقية Pulsar من الإصدار v2 إلى v3</a>؛ للاستمرار في استخدام الإصدار v2، راجع <a href="/docs/ar/use-pulsar-v2.md">الاستمرار في استخدام Pulsar v2</a>.</li>
 </ul>

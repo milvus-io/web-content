@@ -140,7 +140,7 @@ client.create_index(
     index_params=index_params,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Refresh-the-external-collection" class="common-anchor-header">Perbarui koleksi eksternal<button data-href="#Refresh-the-external-collection" class="anchor-icon" translate="no">
+<h2 id="Refresh-the-external-collection" class="common-anchor-header">Segarkan koleksi eksternal<button data-href="#Refresh-the-external-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

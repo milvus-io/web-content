@@ -21,9 +21,9 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>En las aplicaciones de búsqueda con IA, la búsqueda vectorial ayuda a encontrar entidades semánticamente similares, pero la aplicación a menudo también necesita el texto original de cada coincidencia. Un modelo de lenguaje grande (LLM) o un agente puede utilizar ese texto como contexto para leer, citar, resumir o incluir el resultado en una solicitud.</p>
+    </button></h1><p>En las aplicaciones de búsqueda con IA, la búsqueda vectorial ayuda a encontrar entidades semánticamente similares, pero la aplicación a menudo también necesita el texto original de cada coincidencia. Un modelo de lenguaje grande (LLM) o un agente puede utilizar ese texto como contexto para leer, citar, resumir o incluir el resultado en una indicación.</p>
 <p>Milvus proporciona el tipo de campo escalar « <code translate="no">TEXT</code> » para almacenar texto fuente extenso directamente con las entidades. Entre los valores típicos se incluyen pasajes, documentos largos, cuerpos de artículos, tickets y registros. A diferencia de « <code translate="no">VARCHAR</code> », que requiere una longitud máxima fija de bytes ( <code translate="no">max_length</code>), « <code translate="no">TEXT</code> » no exige establecer una longitud máxima de bytes en el esquema de la colección.</p>
-<p>Para definir un campo « <code translate="no">TEXT</code> », establece « <code translate="no">datatype</code> » en « <code translate="no">DataType.TEXT</code> ».</p>
+<p>Para definir un campo « <code translate="no">TEXT</code> », establece <code translate="no">datatype</code> en <code translate="no">DataType.TEXT</code>.</p>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;content&quot;</span>,
 <span class="highlighted-wrapper-line">    datatype=DataType.TEXT,</span>
@@ -102,7 +102,7 @@ beta: Milvus 3.0.x
       </svg>
     </button></h2><p><details></p>
 <p><summary>Expandir para ver cómo funciona</summary></p>
-<p>Al insertar una entidad, la cadena que se proporciona para un campo « <code translate="no">TEXT</code> » es el valor « <code translate="no">TEXT</code> ». Milvus compara el tamaño de ese valor con <a href="/docs/es/configure_datanode.md#dataNodetextinlineThreshold">«dataNode.text.inlineThreshold»</a>, que por defecto es de <code translate="no">65,536</code> bytes, y a continuación elige una de las dos rutas de almacenamiento internas.</p>
+<p>Al insertar una entidad, la cadena que se proporciona para un campo « <code translate="no">TEXT</code> » es el valor « <code translate="no">TEXT</code> ». Milvus compara el tamaño de ese valor con <a href="/docs/es/configure_datanode.md#dataNodetextinlineThreshold">«dataNode.text.inlineThreshold»</a>, que por defecto es de <code translate="no">65,536</code> bytes, y a continuación elige una de las dos rutas de almacenamiento interno.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v3.0.x/assets/text-large-storage-flow.png" alt="Large text storage" class="doc-image" id="large-text-storage" /> 

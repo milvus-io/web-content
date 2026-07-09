@@ -69,7 +69,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">TEXT</code> 與<code translate="no">VARCHAR</code> 皆用於儲存字串值，但它們支援不同的應用需求。請使用<code translate="no">VARCHAR</code> 來處理用於識別、分類或篩選實體的短且有長度限制的元資料。請使用<code translate="no">TEXT</code> 來處理較長的來源內容，以便為大型語言模型（LLM）或代理程式提供足夠的上下文，以進行閱讀、引用、摘要或建構提示詞。</p>
+    </button></h2><p><code translate="no">TEXT</code> 與<code translate="no">VARCHAR</code> 皆用於儲存字串值，但它們支援不同的應用需求。請使用<code translate="no">VARCHAR</code> 來處理用於識別、分類或篩選實體的短且有限長度的元資料。請使用<code translate="no">TEXT</code> 來處理較長的來源內容，以便為大型語言模型（LLM）或代理程式提供足夠的上下文，以進行閱讀、引用、摘要或建構提示詞。</p>
 <table>
 <thead>
 <tr><th>適用情境</th><th><code translate="no">VARCHAR</code></th><th><code translate="no">TEXT</code></th></tr>
@@ -100,7 +100,7 @@ beta: Milvus 3.0.x
       </svg>
     </button></h2><p><details></p>
 <p><summary>展開以了解其運作方式</summary></p>
-<p>當您插入實體時，您為<code translate="no">TEXT</code> 欄位提供的字串即為<code translate="no">TEXT</code> 值。Milvus 會將該值的大小與<a href="/docs/zh-hant/configure_datanode.md#dataNodetextinlineThreshold">dataNode.text.inlineThreshold</a>（預設為<code translate="no">65,536</code> 位元組）進行比較，然後從兩種內部儲存路徑中選擇其一。</p>
+<p>當您插入實體時，您為<code translate="no">TEXT</code> 欄位提供的字串即為<code translate="no">TEXT</code> 值。Milvus 會將該值的大小與<a href="/docs/zh-hant/configure_datanode.md#dataNodetextinlineThreshold">dataNode.text.inlineThreshold</a> 進行比較（預設值為<code translate="no">65,536</code> 位元組），然後從兩種內部儲存路徑中選擇其一。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v3.0.x/assets/text-large-storage-flow.png" alt="Large text storage" class="doc-image" id="large-text-storage" /> 
@@ -109,12 +109,12 @@ beta: Milvus 3.0.x
  </span></p>
 <ul>
 <li><strong>內聯儲存</strong>：若<code translate="no">TEXT</code> 值小於<code translate="no">dataNode.text.inlineThreshold</code> ，Milvus 會將原始文字值直接儲存於<code translate="no">TEXT</code> 欄位的 data 中。</li>
-<li><strong>LOB 儲存</strong>：若 `<code translate="no">TEXT</code> ` 的值大於或等於 `<code translate="no">dataNode.text.inlineThreshold</code>`，Milvus 會將該值視為大型物件，並將原始文字分別儲存於物件儲存空間（例如 MinIO）中。此時，<code translate="no">TEXT</code> 欄位的資料會儲存一個指向該獨立儲存文字的內部參照。當在查詢或搜尋結果中請求 `<code translate="no">TEXT</code> ` 欄位時，Milvus 會使用該參照來擷取並回傳原始文字。</li>
+<li><strong>LOB 儲存</strong>：若 `<code translate="no">TEXT</code> ` 的值大於或等於 `<code translate="no">dataNode.text.inlineThreshold</code>`，Milvus 會將該值視為大型物件，並將原始文字分別儲存於物件儲存空間（例如 MinIO）中。`<code translate="no">TEXT</code> ` 欄位資料則儲存指向該獨立儲存文字的內部參照。當在查詢或搜尋結果中請求 `<code translate="no">TEXT</code> ` 欄位時，Milvus 會使用該參照來擷取並回傳原始文字。</li>
 </ul>
-<p>此儲存方式的選擇屬內部機制。無論 Milvus 使用哪種儲存路徑，您對<code translate="no">TEXT</code> 欄位的插入、查詢及搜尋操作方式皆相同。若要調整閾值或相關的儲存、壓縮及垃圾回收行為，請參閱與<a href="/docs/zh-hant/configure_datanode.md">dataNode 相關的設定</a>以及<a href="/docs/zh-hant/configure_datacoord.md">與 dataCoord 相關的設定</a>。</p>
-<p>若您的部署使用物件儲存，較大的<code translate="no">TEXT</code> 值可能會以 Milvus 管理的物件形式，出現在如<code translate="no">lobs/...</code> 等路徑下。這些物件屬於實作細節，不應手動移動、複製或刪除。 在您刪除實體、釋放分區或壓縮資料後，物件儲存的使用量可能僅會在 Milvus 垃圾回收於安全窗口期結束後，移除未被引用的巨型物件資料時才會減少。</p>
+<p>此儲存選項屬內部機制。無論 Milvus 使用何種儲存路徑，您對<code translate="no">TEXT</code> 欄位的插入、查詢及搜尋操作方式皆相同。若要調整閾值或相關的儲存、壓縮及垃圾回收行為，請參閱與<a href="/docs/zh-hant/configure_datanode.md">dataNode 相關的設定</a>以及<a href="/docs/zh-hant/configure_datacoord.md">與 dataCoord 相關的設定</a>。</p>
+<p>若您的部署使用物件儲存，大型的 `<code translate="no">TEXT</code> ` 值可能會以 Milvus 管理的物件形式，出現在如<code translate="no">lobs/...</code> 等路徑下。這些物件屬於實作細節，不應手動移動、複製或刪除。 在您刪除實體、釋放分區或壓縮資料後，物件儲存的使用量可能僅會在 Milvus 垃圾回收於安全窗口期結束後，移除未被引用的巨型物件資料時才會減少。</p>
 <p></details></p>
-<p><code translate="no">TEXT</code> 的常見應用之一是搭配 BM25 進行全文檢索。在此模式下，<code translate="no">TEXT</code> 欄位儲存原始來源內容，而 BM25 會分析文字並產生稀疏向量，以針對基於關鍵字的匹配結果進行排序。搜尋結果隨後可回傳匹配的<code translate="no">TEXT</code> 值，作為大型語言模型 (LLM) 或代理程式工作流程的上下文。 以下範例展示如何將「<code translate="no">TEXT</code> 」欄位用作 BM25 的輸入欄位。如需瞭解全文搜尋的概念與查詢選項，請參閱《<a href="/docs/zh-hant/full-text-search.md">全文搜尋》</a>。</p>
+<p><code translate="no">TEXT</code> 的常見應用之一是搭配 BM25 進行全文檢索。在此模式下，<code translate="no">TEXT</code> 欄位儲存原始來源內容，而 BM25 會分析文字並產生稀疏向量，以針對基於關鍵字的匹配結果進行排序。搜尋結果隨後可返回匹配的<code translate="no">TEXT</code> 值，作為大型語言模型 (LLM) 或代理程式工作流程的上下文。 以下範例展示如何將「<code translate="no">TEXT</code> 」欄位用作 BM25 的輸入欄位。如需瞭解全文搜尋的概念與查詢選項，請參閱《<a href="/docs/zh-hant/full-text-search.md">全文搜尋》</a>。</p>
 <h2 id="Step-1-Create-a-collection-with-a-TEXT-field" class="common-anchor-header">步驟 1：建立包含 TEXT 欄位的集合<button data-href="#Step-1-Create-a-collection-with-a-TEXT-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

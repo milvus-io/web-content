@@ -69,13 +69,13 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">TEXT</code> と<code translate="no">VARCHAR</code> はどちらも文字列値を格納しますが、対応するアプリケーションのニーズが異なります。エンティティの識別、分類、またはフィルタリングを行う、短く長さが制限されたメタデータには<code translate="no">VARCHAR</code> を使用してください。LLM やエージェントが読み取り、引用、要約、またはプロンプトを作成するのに十分なコンテキストを提供する、より長いソースコンテンツには<code translate="no">TEXT</code> を使用してください。</p>
+    </button></h2><p><code translate="no">TEXT</code> と<code translate="no">VARCHAR</code> はどちらも文字列値を格納しますが、対応するアプリケーションのニーズが異なります。エンティティの識別、分類、またはフィルタリングを行う、短く長さが限定されたメタデータには<code translate="no">VARCHAR</code> を使用してください。LLM やエージェントが読み取り、引用、要約、またはプロンプトを作成するのに十分なコンテキストを提供する、より長いソースコンテンツには<code translate="no">TEXT</code> を使用してください。</p>
 <table>
 <thead>
 <tr><th>アスペクト</th><th><code translate="no">VARCHAR</code></th><th><code translate="no">TEXT</code></th></tr>
 </thead>
 <tbody>
-<tr><td>最適な用途</td><td>エンティティの識別、分類、またはフィルタリングに使用される短いメタデータ（例：<code translate="no">title</code> 、<code translate="no">tag</code> 、<code translate="no">category</code> 、または<code translate="no">external_id</code> ）。</td><td><code translate="no">content</code> 、<code translate="no">passage</code> 、<code translate="no">article_body</code> 、<code translate="no">log_message</code> など、LLM やエージェントのワークフローで使用される、より長いソースコンテンツ。</td></tr>
+<tr><td>最適な用途</td><td>エンティティの識別、分類、またはフィルタリングに使用される短いメタデータ（例：<code translate="no">title</code> 、<code translate="no">tag</code> 、<code translate="no">category</code> 、<code translate="no">external_id</code> など）。</td><td><code translate="no">content</code> 、<code translate="no">passage</code> 、<code translate="no">article_body</code> 、<code translate="no">log_message</code> など、LLM やエージェントのワークフローで使用される、より長いソースコンテンツ。</td></tr>
 <tr><td>長さの設定</td><td><code translate="no">max_length</code> が必要です。これは、フィールドが格納できる最大バイト数を定義します。最大値は<code translate="no">65,535</code> バイトです。値がこの制限を超える可能性がある場合は、<code translate="no">TEXT</code> を使用してください。</td><td><code translate="no">max_length</code> は不要であるため、スキーマにテキスト値の固定バイト制限を設定する必要はありません。</td></tr>
 <tr><td>格納の動作</td><td>各値は、フィールドに設定された<code translate="no">max_length</code> 内に格納されます。</td><td>大きなテキスト値については、自動ストレージ選択が使用されます。詳細については、「<a href="#how-milvus-stores-large-text-values">Milvus による大きな TEXT 値の保存方法</a>」を参照してください。</td></tr>
 <tr><td>プライマリフィールドとしてのサポート</td><td>プライマリフィールドとして使用可能です。</td><td>プライマリフィールドとしては使用できません。</td></tr>
@@ -240,7 +240,7 @@ client.load_collection(collection_name=COLLECTION_NAME)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>生のクエリテキストを検索データとして使用し、スパースベクトルフィールドに対して検索を行います。Milvusはクエリテキストをスパースベクトルに変換し、BM25を用いて一致する結果をランク付けし、要求された<code translate="no">TEXT</code> フィールドを<code translate="no">output_fields</code> として返します。</p>
+    </button></h2><p>生のクエリテキストを検索データとして使用し、スパースベクトルフィールドに対して検索を行います。Milvusはクエリテキストをスパースベクトルに変換し、BM25を用いて一致する結果をランク付けし、要求された<code translate="no">TEXT</code> フィールドを<code translate="no">output_fields</code> に返します。</p>
 <pre><code translate="no" class="language-python">results = client.search(
     collection_name=COLLECTION_NAME,
 <span class="highlighted-comment-line">    data=[<span class="hljs-string">&quot;how does Milvus store source text for retrieval&quot;</span>],</span>

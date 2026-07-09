@@ -169,7 +169,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilisez les opérateurs « <code translate="no">MATCH_*</code> » lorsque le filtre doit déterminer si une entité parente est éligible en fonction de ses éléments Struct. Ces opérateurs sont des filtres au niveau des lignes : ils sélectionnent des entités, mais ne renvoient pas d’offset d’élément en eux-mêmes.</p>
+    </button></h2><p>Utilisez les opérateurs <code translate="no">MATCH_*</code> lorsque le filtre doit déterminer si une entité parente est éligible en fonction de ses éléments Struct. Ces opérateurs sont des filtres au niveau des lignes : ils sélectionnent des entités, mais ne renvoient pas d’offset d’élément en eux-mêmes.</p>
 <table>
 <thead>
 <tr><th>Opérateur</th><th>À utiliser lorsque</th><th>Exemple</th></tr>
@@ -282,7 +282,7 @@ results = client.hybrid_search(
 <tr><td>Sous-champs vectoriels</td><td>Non pris en charge en tant qu’entrées de prédicats scalaires d’ <code translate="no">$[...]</code>. Utilisez plutôt les sous-champs vectoriels via la recherche vectorielle.</td></tr>
 </tbody>
 </table>
-<p>Pour les cas non pris en charge, tels que les chemins JSON, les fonctions de conteneur de tableaux, les fonctions de correspondance de texte, les prédicats null sur <code translate="no">$[...]</code>, les fonctions de géométrie, les expressions Timestamptz et les appels de fonctions génériques, consultez la <a href="/docs/fr/struct-array-operators.md">section Opérateurs StructArray</a>.</p>
+<p>Pour les cas non pris en charge, tels que les chemins JSON, les fonctions de conteneurs de tableaux, les fonctions de correspondance de texte, les prédicats null sur <code translate="no">$[...]</code>, les fonctions de géométrie, les expressions Timestamptz et les appels de fonctions génériques, consultez la <a href="/docs/fr/struct-array-operators.md">section Opérateurs StructArray</a>.</p>
 <h2 id="Common-mistakes" class="common-anchor-header">Erreurs courantes<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

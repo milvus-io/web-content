@@ -3,11 +3,11 @@ id: pattern-matching.md
 title: Correspondance de motifs
 summary: >-
   Milvus prend en charge la correspondance de chaînes de caractères à l'aide de
-  caractères génériques LIKE et d'expressions régulières RE2. Utilisez des
-  filtres de correspondance pour rechercher des préfixes, des suffixes, des
-  sous-chaînes, des codes structurés, des domaines de messagerie, des chemins
-  d'URL et d'autres motifs de chaînes dans les champs VARCHAR, les chemins de
-  chaînes JSON ou les éléments ARRAY.
+  motifs génériques LIKE et d'expressions régulières RE2. Utilisez des filtres
+  de motifs pour rechercher des préfixes, des suffixes, des sous-chaînes, des
+  codes structurés, des domaines de messagerie, des chemins d'URL et d'autres
+  motifs de chaînes dans les champs VARCHAR, les chemins de chaînes JSON ou les
+  éléments ARRAY.
 ---
 <h1 id="Pattern-Matching" class="common-anchor-header">Correspondance de motifs<button data-href="#Pattern-Matching" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -26,7 +26,7 @@ summary: >-
       </svg>
     </button></h1><p>Dans les applications de recherche agentique, la recherche vectorielle et la correspondance de motifs de type grep se complètent souvent. La recherche vectorielle récupère les entités sémantiquement pertinentes, tandis que la correspondance de motifs affine ces résultats en fonction de structures de chaînes exactes, telles que les codes d’erreur, les préfixes de journaux, les domaines de messagerie, les chemins d’URL ou les identifiants.</p>
 <p>Dans Milvus, vous pouvez exprimer ces contraintes de motif dans des filtres scalaires à l’aide de ` <code translate="no">LIKE</code> ` pour une correspondance simple avec des caractères génériques, et de ` <code translate="no">=~</code> ` ou ` <code translate="no">!~</code> ` pour les expressions régulières <a href="https://github.com/google/re2/wiki/syntax">RE2</a>. Vous pouvez combiner ces filtres avec la recherche par ` <code translate="no">query</code>`, ` <code translate="no">search</code>` ou la recherche hybride.</p>
-<p>Les expressions de correspondance de motifs sont définies dans le paramètre <code translate="no">filter</code>. Par exemple, la requête suivante permet de trouver les messages de journal contenant un code d’erreur tel que <code translate="no">E1001</code>:</p>
+<p>Les expressions de correspondance de motifs sont définies dans le paramètre <code translate="no">filter</code>. Par exemple, la requête suivante permet de trouver les messages de journal contenant un code d'erreur tel que <code translate="no">E1001</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -62,7 +62,7 @@ res = client.query(
 <tr><td><code translate="no">VARCHAR</code> champ</td><td>Oui</td><td>Oui</td><td>Cible typique pour la correspondance de motifs sur les champs de chaîne de caractères.</td></tr>
 <tr><td><code translate="no">JSON</code> chemin avec type de conversion « <code translate="no">VARCHAR</code> »</td><td>Oui</td><td>Oui</td><td>La valeur du chemin JSON doit être une chaîne de caractères pour que les correspondances soient positives. Si vous créez un index sur le chemin JSON à des fins d’accélération, définissez <code translate="no">json_cast_type=&quot;varchar&quot;</code>.</td></tr>
 <tr><td><code translate="no">ARRAY&lt;VARCHAR&gt;</code> élément</td><td>Oui</td><td>Oui</td><td>Permet de faire correspondre un élément spécifique par index, par exemple <code translate="no">tags[0]</code>. La correspondance de motif <strong>ne</strong> parcourt <strong>pas</strong> tous les éléments ; elle s’applique uniquement à l’élément situé à l’index spécifié.</td></tr>
-<tr><td>Cibles numériques, booléennes, vectorielles, de type « <code translate="no">TEXT</code> » ou autres cibles non «<code translate="no">VARCHAR</code> »</td><td>Non</td><td>Non</td><td>La correspondance de motif n’est disponible que pour les valeurs de type « <code translate="no">VARCHAR</code> », les chemins JSON se résolvant en chaînes de caractères ou les éléments indexés de type « <code translate="no">ARRAY&lt;VARCHAR&gt;</code> ».</td></tr>
+<tr><td>Cibles numériques, booléennes, vectorielles, de type « <code translate="no">TEXT</code> » ou autres cibles non de type «<code translate="no">VARCHAR</code> »</td><td>Non</td><td>Non</td><td>La correspondance de motif n’est disponible que pour les valeurs de type « <code translate="no">VARCHAR</code> », les chemins JSON se résolvant en chaînes de caractères ou les éléments indexés de type « <code translate="no">ARRAY&lt;VARCHAR&gt;</code> ».</td></tr>
 </tbody>
 </table>
 <h2 id="Choose-LIKE-or-regex" class="common-anchor-header">Choisissez LIKE ou une expression régulière<button data-href="#Choose-LIKE-or-regex" class="anchor-icon" translate="no">
@@ -164,7 +164,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Utilisez « <code translate="no">LIKE</code> » pour les correspondances de préfixe, de suffixe, de contenu et de caractère unique à position fixe. « <code translate="no">LIKE</code> » ne prend pas en charge les classes de caractères telles que « <code translate="no">[0-9]</code> », les alternatives telles que « <code translate="no">error|failed</code> », les nombres de répétitions tels que « <code translate="no">{4}</code> », les ancres telles que « <code translate="no">^</code> » ou « <code translate="no">$</code> », ni les indicateurs de sensibilité à la casse tels que « <code translate="no">(?i)</code> ». Utilisez les expressions régulières pour ces motifs.</p>
+    </button></h3><p>Utilisez « <code translate="no">LIKE</code> » pour les correspondances de préfixe, de suffixe, de contenu et de caractère unique à position fixe. « <code translate="no">LIKE</code> » ne prend pas en charge les classes de caractères telles que « <code translate="no">[0-9]</code> », les alternatives telles que « <code translate="no">error|failed</code> », les nombres de répétitions tels que « <code translate="no">{4}</code> », les ancrages tels que « <code translate="no">^</code> » ou « <code translate="no">$</code> », ni les indicateurs de sensibilité à la casse tels que « <code translate="no">(?i)</code> ». Utilisez les expressions régulières pour ces motifs.</p>
 <p>Utilisez <code translate="no">==</code> pour une égalité exacte de la chaîne complète. N'utilisez <code translate="no">LIKE</code> que lorsque le filtre nécessite une correspondance avec des caractères génériques.</p>
 <h3 id="Escaping-wildcards-in-a-LIKE-pattern" class="common-anchor-header">Échappement des caractères génériques dans un motif LIKE<button data-href="#Escaping-wildcards-in-a-LIKE-pattern" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -203,7 +203,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilisez des filtres d’expressions régulières lorsque le motif nécessite des fonctionnalités d’expressions régulières telles que les classes de caractères, la répétition, l’alternance, les ancres ou la correspondance insensible à la casse. Milvus applique une expression régulière <a href="https://github.com/google/re2/wiki/syntax">RE2</a> à une valeur de chaîne.</p>
+    </button></h2><p>Utilisez des filtres d’expressions régulières lorsque le motif nécessite des fonctionnalités propres aux expressions régulières, telles que les classes de caractères, la répétition, l’alternance, les ancres ou la correspondance insensible à la casse. Milvus applique une expression régulière <a href="https://github.com/google/re2/wiki/syntax">RE2</a> à une valeur de chaîne.</p>
 <p>Le côté droit de <code translate="no">=~</code> ou <code translate="no">!~</code> doit être un littéral de chaîne.</p>
 <table>
 <thead>
@@ -308,7 +308,7 @@ res = client.query(
 </thead>
 <tbody>
 <tr><td><code translate="no">json_field[&quot;path&quot;] =~ &quot;pattern&quot;</code></td><td>Non</td><td>Ne correspond qu’aux valeurs de type chaîne de caractères qui satisfont au motif d’expression régulière.</td></tr>
-<tr><td><code translate="no">json_field[&quot;path&quot;] !~ &quot;pattern&quot;</code></td><td>Oui</td><td>Renvoie les entités dont le chemin est manquant, nul, non-chaîne ou une chaîne qui ne correspond pas au motif d'expression régulière.</td></tr>
+<tr><td><code translate="no">json_field[&quot;path&quot;] !~ &quot;pattern&quot;</code></td><td>Oui</td><td>Renvoie les entités dont le chemin est manquant, nul, non de type chaîne de caractères ou une chaîne de caractères qui ne correspond pas au motif d'expression régulière.</td></tr>
 </tbody>
 </table>
 <h2 id="Accelerate-pattern-matching-with-indexes" class="common-anchor-header">Accélérer la correspondance de motifs grâce aux index<button data-href="#Accelerate-pattern-matching-with-indexes" class="anchor-icon" translate="no">

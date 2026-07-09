@@ -38,7 +38,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>O Milvus suporta os modelos de vetorização de texto do Yandex Cloud AI Studio através do fornecedor <code translate="no">yc</code>. Nos parâmetros da função, defina « <code translate="no">model_name</code> » como o URI do modelo do Yandex Cloud que o Milvus deve chamar.</p>
-<p>Por exemplo, o Yandex Text Embeddings para documentos utiliza um URI de modelo como <code translate="no">emb://&lt;folder_ID&gt;/text-search-doc/latest</code> e devolve vetores de 256 dimensões. Para conhecer os URIs de modelo e as dimensões disponíveis, consulte <a href="https://aistudio.yandex.ru/docs/en/ai-studio/concepts/embeddings">Modelos de vetorização de texto</a>.</p>
+<p>Por exemplo, o Yandex Text Embeddings para documentos utiliza um URI de modelo como <code translate="no">emb://&lt;folder_ID&gt;/text-search-doc/latest</code> e devolve vetores de 256 dimensões. Para conhecer os URIs de modelos e dimensões disponíveis, consulte <a href="https://aistudio.yandex.ru/docs/en/ai-studio/concepts/embeddings">Modelos de vetorização de texto</a>.</p>
 <h2 id="Configure-credentials" class="common-anchor-header">Configurar credenciais<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -98,7 +98,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Se não estiver configurada nenhuma credencial correspondente em <code translate="no">milvus.yaml</code>, o Milvus pode ler a chave API do Yandex Cloud a partir da seguinte variável de ambiente:</p>
+    </button></h3><p>Se não estiver configurada nenhuma credencial correspondente em <code translate="no">milvus.yaml</code>, o Milvus pode ler a chave da API do Yandex Cloud a partir da seguinte variável de ambiente:</p>
 <table>
    <tr>
      <th><p>Variável</p></th>

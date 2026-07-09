@@ -65,4 +65,4 @@ title: Stockage d'objets
         ></path>
       </svg>
     </button></h2><p>Lorsque vous exécutez la file d’attente de messages <strong>Woodpecker</strong> par défaut avec son backend de stockage d’objets (<code translate="no">storage.type=minio</code>), Woodpecker écrit son journal d’écriture anticipée (write-ahead log) dans ce même stockage d’objets et nécessite <strong>une sémantique d’écriture conditionnelle S3 stricte</strong>. Tous les stockages d’objets ne sont pas compatibles — par exemple, Huawei Cloud OBS <strong>n’</strong> est actuellement <strong>pas pris en charge</strong> en tant que backend Woodpecker, même s’il fonctionne comme un stockage d’objets Milvus classique.</p>
-<p>Consultez le tableau de compatibilité des stockages d’objets sur la page <a href="/docs/fr/woodpecker.md">Woodpecker</a> pour connaître les exigences précises par fournisseur.</p>
+<p>Consultez le tableau de compatibilité des stockages d’objets sur la page <a href="/docs/fr/woodpecker.md">Woodpecker</a> pour connaître les exigences exactes par fournisseur.</p>

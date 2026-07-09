@@ -60,15 +60,15 @@ summary: >-
 <tbody>
 <tr><td><code translate="no">text</code></td><td><code translate="no">VARCHAR</code></td><td>Teks chunk.</td></tr>
 <tr><td><code translate="no">section</code></td><td><code translate="no">VARCHAR</code></td><td>Nama bagian, seperti <code translate="no">index</code>, <code translate="no">search</code>, atau <code translate="no">filter</code>.</td></tr>
-<tr><td><code translate="no">page</code></td><td><code translate="no">INT64</code></td><td>Nomor halaman atau posisi logis dari potongan tersebut.</td></tr>
+<tr><td><code translate="no">page</code></td><td><code translate="no">INT64</code></td><td>Nomor halaman atau posisi logis dari chunk tersebut.</td></tr>
 <tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>Skor tingkat potongan yang digunakan dalam penyaringan skalar dan contoh rentang.</td></tr>
 <tr><td><code translate="no">has_code</code></td><td><code translate="no">BOOL</code></td><td>Apakah potongan tersebut berisi kode.</td></tr>
 <tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Subbidang vektor untuk pencarian EmbeddingList dengan metrik <code translate="no">MAX_SIM*</code>.</td></tr>
-<tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Subbidang vektor untuk pencarian tingkat elemen dengan metrik vektor reguler.</td></tr>
+<tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Subbidang vektor untuk pencarian tingkat elemen dengan metrik vektor biasa.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
-<p>Sebuah bidang vektor atau subbidang vektor hanya menerima satu indeks. Jika Anda memerlukan pencarian EmbeddingList dan pencarian tingkat elemen, tentukan dua subbidang vektor terpisah. Dalam contoh ini, <code translate="no">chunks[emb_list_vector]</code> digunakan untuk pencarian EmbeddingList, dan <code translate="no">chunks[emb]</code> digunakan untuk pencarian tingkat elemen.</p>
+<p>Sebuah bidang vektor atau subbidang vektor hanya menerima satu indeks. Jika Anda memerlukan baik pencarian EmbeddingList maupun pencarian tingkat elemen, tentukan dua subbidang vektor terpisah. Dalam contoh ini, <code translate="no">chunks[emb_list_vector]</code> digunakan untuk pencarian EmbeddingList, dan <code translate="no">chunks[emb]</code> digunakan untuk pencarian tingkat elemen.</p>
 </div>
 <h2 id="Supported-subfield-data-types" class="common-anchor-header">Tipe data subbidang yang didukung<button data-href="#Supported-subfield-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -131,7 +131,7 @@ summary: >-
 <li><p>Tambahkan bidang tingkat koleksi, seperti kunci utama dan bidang tingkat artikel.</p></li>
 <li><p>Buat skema Struct untuk elemen yang disimpan di dalam bidang StructArray.</p></li>
 <li><p>Tambahkan subbidang skalar dan vektor ke skema Struct.</p></li>
-<li><p>Tambahkan bidang Array dengan nilai ` <code translate="no">element_type=DataType.STRUCT</code>`.</p></li>
+<li><p>Tambahkan bidang Array dengan nilai " <code translate="no">element_type=DataType.STRUCT</code>".</p></li>
 <li><p>Tetapkan ` <code translate="no">struct_schema</code> ` ke skema Struct.</p></li>
 <li><p>Tetapkan ` <code translate="no">max_capacity</code> ` untuk membatasi jumlah elemen Struct yang dapat disimpan oleh setiap entitas di dalam bidang tersebut.</p></li>
 </ol>
@@ -237,7 +237,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah Anda membuat bidang StructArray, rujuk subbidangnya dengan sintaks jalur ` <code translate="no">structArray[subfield]</code> `. Gunakan sintaks ini saat Anda membuat indeks, mencari subbidang vektor, mengeluarkan subbidang, atau membuat filter skalar.</p>
+    </button></h2><p>Setelah Anda membuat bidang StructArray, rujuk subbidangnya dengan sintaks jalur <code translate="no">structArray[subfield]</code>. Gunakan sintaks ini saat Anda membuat indeks, mencari subbidang vektor, menampilkan subbidang, atau membuat filter skalar.</p>
 <table>
 <thead>
 <tr><th>Jalur</th><th>Arti</th><th>Penggunaan umum</th></tr>
@@ -379,7 +379,7 @@ client.add_collection_struct_field(
 <tr><td>Hanya tipe subbidang yang didukung yang diperbolehkan.</td><td>Gunakan tipe subbidang skalar dan vektor yang didukung oleh StructArray. Jangan mendefinisikan subbidang JSON, Geometry, Text, Timestamptz, SparseFloatVector, atau subbidang Struct / Array bersarang.</td></tr>
 <tr><td>Subbidang vektor memerlukan indeks sebelum pencarian.</td><td>Buat indeks pada jalur seperti <code translate="no">chunks[emb_list_vector]</code> atau <code translate="no">chunks[emb]</code> sebelum menjalankan pencarian vektor.</td></tr>
 <tr><td>Satu subbidang vektor memiliki satu indeks.</td><td>Jika Anda memerlukan pencarian EmbeddingList dan pencarian tingkat elemen, buat dua subbidang vektor terpisah.</td></tr>
-<tr><td>Subbidang StructArray yang sudah ada bersifat tetap.</td><td>Setelah membuat bidang StructArray, jangan berharap dapat menambahkan subbidang lain ke bidang StructArray yang sama tersebut.</td></tr>
+<tr><td>Subbidang StructArray yang sudah ada bersifat tetap.</td><td>Setelah membuat bidang StructArray, jangan berharap dapat menambahkan subbidang lain ke bidang StructArray yang sama.</td></tr>
 <tr><td>Fungsi tidak didukung di dalam Struct.</td><td>Jangan mendefinisikan fungsi untuk bidang atau subbidang di dalam bidang StructArray.</td></tr>
 <tr><td>Subbidang skalar harus sesuai dengan kebutuhan filter.</td><td>Tambahkan bidang seperti <code translate="no">section</code>, <code translate="no">quality_score</code>, atau <code translate="no">has_code</code> hanya jika Anda perlu memfilter, mengelompokkan, atau menampilkannya nanti.</td></tr>
 </tbody>

@@ -119,8 +119,8 @@ summary: >-
 <tr><td><code translate="no">Array</code></td><td>غير مدعوم</td><td>الحقول الفرعية JSON غير مدعومة في حقول StructArray.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>غير مدعوم</td><td>الحقول الفرعية للهندسة ووظائف نظم المعلومات الجغرافية (GIS) غير مدعومة في حقول StructArray.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>غير مدعوم</td><td>الحقول الفرعية النصية غير مدعومة في حقول StructArray.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>غير مدعوم</td><td>الحقول الفرعية من نوع Timestamptz والتعبيرات المحددة بالوقت غير مدعومة في حقول StructArray.</td></tr>
-<tr><td><code translate="no">Array</code> أو <code translate="no">ArrayOfVector</code> أو <code translate="no">Struct</code> أو <code translate="no">ArrayOfStruct</code></td><td>غير مدعوم</td><td>لا تدعم حقول StructArray الحقول الفرعية المتداخلة من نوع المصفوفة أو مصفوفة المتجهات أو Struct أو Array-of-Struct.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>غير مدعوم</td><td>الحقول الفرعية من نوع Timestamptz والتعبيرات المرتبطة بالوقت غير مدعومة في حقول StructArray.</td></tr>
+<tr><td><code translate="no">Array</code> أو <code translate="no">ArrayOfVector</code> أو <code translate="no">Struct</code> أو <code translate="no">ArrayOfStruct</code></td><td>غير مدعوم</td><td>لا تدعم حقول StructArray الحقول الفرعية المتداخلة من نوع المصفوفة أو المصفوفة المتجهة أو Struct أو Array-of-Struct.</td></tr>
 </tbody>
 </table>
 <h2 id="Nullable-and-dynamic-schema-limits" class="common-anchor-header">حدود المخطط القابل للفراغ والديناميكي<button data-href="#Nullable-and-dynamic-schema-limits" class="anchor-icon" translate="no">
@@ -146,7 +146,7 @@ summary: >-
 <tbody>
 <tr><td>حقل StructArray القابل للقيمة الفارغة</td><td>مدعوم فقط في الإصدارات التي تتضمن دعم StructArray القابلة للقيمة الفارغة ودعم المصفوفات المتجهة القابلة للقيمة الفارغة.</td></tr>
 <tr><td>القيمة الفارغة في Python</td><td>استخدم <code translate="no">None</code> لإدراج قيمة StructArray فارغة في Python. لا تستخدم <code translate="no">Null</code> أو <code translate="no">null</code>.</td></tr>
-<tr><td>نطاق القيمة الفارغة</td><td>تنطبق القيمة "Null" على حقل StructArray بأكمله. على سبيل المثال، لا يكون <code translate="no">chunks=None</code> صالحًا إلا عندما يكون <code translate="no">chunks</code> قابلاً للقيمة "Null".</td></tr>
+<tr><td>نطاق القيمة الفارغة</td><td>تنطبق القيمة "null" على حقل StructArray بأكمله. على سبيل المثال، لا يكون <code translate="no">chunks=None</code> صالحًا إلا عندما يكون <code translate="no">chunks</code> قابلاً للقيمة "null".</td></tr>
 <tr><td>قيمة StructArray فارغة جزئيًا</td><td>عندما يحتوي حقل StructArray على قيمة صفيف صالحة، لا تخلط صفيفات الحقول الفرعية التي يمكن أن تكون null مع صفيفات الحقول الفرعية الصالحة في نفس القيمة.</td></tr>
 <tr><td>الإضافة الديناميكية لحقل StructArray</td><td>لا يتم دعم إضافة حقل StructArray إلى مجموعة موجودة إلا في الإصدارات التي تتضمن دعمًا ديناميكيًا لحقول StructArray.</td></tr>
 <tr><td>متطلبات القابلية للصفر للإضافة الديناميكية</td><td>يجب أن يكون حقل StructArray المضاف إلى مجموعة موجودة قابلاً للقيمة null لأن الكيانات الموجودة لا تحتوي على قيمة للحقل الجديد.</td></tr>
@@ -180,10 +180,10 @@ summary: >-
 <tr><td>مواءمة المخطط</td><td>يجب أن يتوافق كل عنصر Struct مع مخطط Struct.</td></tr>
 <tr><td>السعة</td><td>يجب ألا يتجاوز عدد عناصر Struct في كيان واحد <code translate="no">max_capacity</code>.</td></tr>
 <tr><td>أبعاد المتجه</td><td>يجب أن تتطابق قيم المتجهات مع <code translate="no">dim</code> المُعدة لحقولها الفرعية المتجهة.</td></tr>
-<tr><td>تكرار في وضع البحث</td><td>إذا كنت بحاجة إلى كل من البحث في EmbeddingList والبحث على مستوى العناصر، فاكتب المتجهات في حقلين فرعيين منفصلين للمتجهات.</td></tr>
+<tr><td>تكرار في وضع البحث</td><td>إذا كنت بحاجة إلى كل من البحث في قائمة التضمين (EmbeddingList) والبحث على مستوى العناصر، فاكتب المتجهات في حقلين فرعيين منفصلين للمتجهات.</td></tr>
 </tbody>
 </table>
-<h2 id="Index-and-metric-limits" class="common-anchor-header">حدود الفهرس والمقاييس<button data-href="#Index-and-metric-limits" class="anchor-icon" translate="no">
+<h2 id="Index-and-metric-limits" class="common-anchor-header">حدود الفهرس والمقياس<button data-href="#Index-and-metric-limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -231,7 +231,7 @@ summary: >-
 <tr><th>سلوك البحث</th><th>الدعم والحدود</th></tr>
 </thead>
 <tbody>
-<tr><td>البحث الأساسي في EmbeddingList</td><td>مدعوم في الحقول الفرعية للمتجهات StructArray المفهرسة باستخدام المقاييس <code translate="no">MAX_SIM*</code>. يُرجع نتائج على مستوى الكيان.</td></tr>
+<tr><td>البحث الأساسي في EmbeddingList</td><td>مدعوم في الحقول الفرعية للمتجهات StructArray المفهرسة باستخدام مقاييس <code translate="no">MAX_SIM*</code>. يُرجع نتائج على مستوى الكيان.</td></tr>
 <tr><td>البحث الأساسي على مستوى العناصر</td><td>مدعوم في الحقول الفرعية للمتجهات StructArray المفهرسة باستخدام مقاييس المتجهات العادية. يمكن أن يعرض إزاحات العناصر المطابقة.</td></tr>
 <tr><td>البحث في النطاق</td><td>مدعوم وفقًا لوضع البحث ودعم الفهرس/المقياس في الإصدار المستهدف. لمعرفة سلوك نطاق البحث المختلط في طلبات StructArray على مستوى العناصر، تحقق من الإصدار المستهدف.</td></tr>
 <tr><td>البحث بالتجميع</td><td>يمكن أن يُرجع البحث المجمّع على مستوى العناصر الإزاحات. يعتمد سلوك التجميع في البحث المختلط لطلبات StructArray على مستوى العناصر على الإصدار.</td></tr>
@@ -260,7 +260,7 @@ summary: >-
 <li><p>استخدم <code translate="no">$[subfield]</code> فقط داخل عوامل StructArray.</p></li>
 <li><p>استخدم الحقول الفرعية القياسية للمسلّطات القياسية.</p></li>
 <li><p>لا تستخدم الحقول الفرعية المتجهة كمدخلات للمسلّطات القياسية لـ <code translate="no">$[...]</code>.</p></li>
-<li><p>لا يتم دعم صيغة مسار JSON، ووظائف JSON، ووظائف حاويات المصفوفات، ووظائف مطابقة النص، ووظائف الهندسة / نظم المعلومات الجغرافية، وتعبيرات Timestamptz للمسندات على مستوى عناصر StructArray.</p></li>
+<li><p>لا يتم دعم صيغة مسار JSON، ووظائف JSON، ووظائف حاويات المصفوفات، ووظائف مطابقة النص، ووظائف الهندسة / نظم المعلومات الجغرافية، وتعبيرات Timestamptz للمسافات على مستوى عناصر StructArray.</p></li>
 <li><p>يفضل استخدام المقارنات المنطقية الصريحة مثل <code translate="no">$[has_code] == true</code> بدلاً من التعبيرات المنطقية المجردة.</p></li>
 </ul>
 <h2 id="Related-pages" class="common-anchor-header">الصفحات ذات الصلة<button data-href="#Related-pages" class="anchor-icon" translate="no">
@@ -280,7 +280,7 @@ summary: >-
       </svg>
     </button></h2><ol>
 <li><p>لإنشاء حقل StructArray، اقرأ <a href="/docs/ar/create-structarray-field.md">إنشاء حقل StructArray</a>.</p></li>
-<li><p>لإدراج البيانات، اقرأ <a href="/docs/ar/insert-data-into-structarray-fields.md">إدراج البيانات في حقول StructArray</a>.</p></li>
+<li><p>لإدراج البيانات، اقرأ " <a href="/docs/ar/insert-data-into-structarray-fields.md">إدراج البيانات في حقول StructArray</a>".</p></li>
 <li><p>لإنشاء فهارس متجهة وعلمية، اقرأ <a href="/docs/ar/index-structarray-fields.md">«فهرسة حقول StructArray</a>».</p></li>
 <li><p>لمراجعة صيغة مرشح StructArray، اقرأ " <a href="/docs/ar/struct-array-operators.md">عوامل StructArray</a>".</p></li>
 </ol>

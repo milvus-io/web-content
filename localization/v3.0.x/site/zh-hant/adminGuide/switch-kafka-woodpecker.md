@@ -23,7 +23,7 @@ summary: 使用 Helm 或 Milvus Operator，將 Milvus 叢集的訊息佇列在 K
 <p><strong>先決條件：</strong>MQ 切換功能僅適用於<strong>Milvus 3.0 及後續版本</strong>。開始操作前，請將您的 Milvus 實例升級至 Milvus 3.0 或後續版本——此功能在較早版本中不可用。</p>
 </div>
 <div class="alert warning">
-<p>切換訊息佇列是一項<strong>高風險操作</strong>。請選擇<strong>與您的</strong>部署方式相符的章節 ——<strong>「使用 Helm</strong>」或「<strong>使用 Milvus Operator</strong>」 —— 並依序從頭至尾執行。請勿混用 Helm 與 Operator 指令。</p>
+<p>切換訊息佇列是一項<strong>高風險操作</strong>。請選擇<strong>與您的</strong>部署方式相符的章節 —<strong>「使用 Helm</strong>」或<strong>「使用 Milvus Operator</strong>」— 並依序從頭至尾執行。請勿混用 Helm 與 Operator 指令。</p>
 </div>
 <h2 id="With-Helm" class="common-anchor-header">使用 Helm<button data-href="#With-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,7 +68,7 @@ summary: 使用 Helm 或 Milvus Operator，將 Milvus 叢集的訊息佇列在 K
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>若切換成功，系統會記錄<code translate="no">[mqTypeValue=woodpecker]</code> 。</p>
-<p><strong>步驟 4：（可選）停止 Kafka 並進行清理。</strong>對於<strong>內建的</strong>Kafka，請移除 Kafka Pod 及其 PVC。對於<strong>外部</strong>Kafka，請清理外部 Kafka 實例中的 Milvus 主題 — 這些主題的格式為<code translate="no">&lt;cluster_prefix&gt;-dml_&lt;seqNo&gt;_&lt;TimeTick&gt;&lt;Version&gt;</code> 。</p>
+<p><strong>步驟 4：（可選）停止 Kafka 並進行清理。</strong>對於<strong>內建的</strong>Kafka，請移除 Kafka Pod 及其 PVC。對於<strong>外部</strong>Kafka，請清理外部 Kafka 實例中的 Milvus 主題——其格式為<code translate="no">&lt;cluster_prefix&gt;-dml_&lt;seqNo&gt;_&lt;TimeTick&gt;&lt;Version&gt;</code> 。</p>
 <div class="alert note">
 <p>若您計劃日後切換回 Kafka，請先清理資料/主題以避免衝突。</p>
 </div>
@@ -88,7 +88,7 @@ summary: 使用 Helm 或 Milvus Operator，將 Milvus 叢集的訊息佇列在 K
         ></path>
       </svg>
     </button></h3><p><strong>步驟 1：確認 Milvus 實例正在運行。</strong></p>
-<p><strong>步驟 2：設定目標 Kafka 連線並重新啟動 Milvus。</strong>此切換操作需要 Milvus 已知曉 Kafka 連線設定，因此請透過 `<code translate="no">extraConfigFiles</code> ` 將其寫入 `<code translate="no">user.yaml</code> `，並使用 `<code translate="no">helm upgrade</code> ` 套用設定（此操作會重啟 Pod）。`<code translate="no">streaming.enabled=true</code> ` 是「切換訊息佇列 (Switch MQ)」功能的必要條件。有關 SASL/SSL 的詳細資訊，請參閱<a href="/docs/zh-hant/connect_kafka_ssl.md">《使用 SASL/SSL 連線至 Kafka》</a>。</p>
+<p><strong>步驟 2：設定目標 Kafka 連線並重新啟動 Milvus。</strong>此切換操作需要 Milvus 已知曉 Kafka 連線資訊，因此請透過 `<code translate="no">extraConfigFiles</code> ` 將其寫入 `<code translate="no">user.yaml</code> `，並使用 `<code translate="no">helm upgrade</code> ` 套用設定（此操作會重啟 Pod）。`<code translate="no">streaming.enabled=true</code> ` 是「切換訊息佇列 (Switch MQ)」功能的必要條件。有關 SASL/SSL 的詳細資訊，請參閱<a href="/docs/zh-hant/connect_kafka_ssl.md">《使用 SASL/SSL 連線至 Kafka》</a>。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -164,7 +164,7 @@ summary: 使用 Helm 或 Milvus Operator，將 Milvus 叢集的訊息佇列在 K
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>若切換成功，系統會記錄<code translate="no">[mqTypeValue=woodpecker]</code> 。</p>
-<p><strong>步驟 4：更新 Operator 中的訊息佇列類型。</strong>更新由<strong>Operator</strong>管理的設定，以防止 Operator 將切換操作還原。建立<code translate="no">change_configmap.yaml</code> ：</p>
+<p><strong>步驟 4：更新 Operator 中的訊息佇列類型。</strong>更新由<strong>Operator</strong>管理的配置，以防止 Operator 將切換操作還原。建立<code translate="no">change_configmap.yaml</code> ：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

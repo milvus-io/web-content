@@ -65,4 +65,4 @@ title: Archiviazione a oggetti
         ></path>
       </svg>
     </button></h2><p>Quando si esegue la coda di messaggi predefinita <strong>di Woodpecker</strong> con il relativo backend di archiviazione a oggetti (<code translate="no">storage.type=minio</code>), Woodpecker scrive il proprio log di scrittura anticipata (write-ahead) nello stesso archivio a oggetti e richiede <strong>una semantica rigorosa di scrittura condizionale S3</strong>. Non tutti gli archivi a oggetti sono idonei: ad esempio, Huawei Cloud OBS <strong>non</strong> è attualmente <strong>supportato</strong> come backend di Woodpecker, sebbene funzioni come normale archiviazione a oggetti Milvus.</p>
-<p>Consultare la matrice di compatibilità degli archivi a oggetti nella pagina di <a href="/docs/it/woodpecker.md">Woodpecker</a> per i requisiti esatti per ciascun provider.</p>
+<p>Consultare la matrice di compatibilità dello storage a oggetti nella pagina <a href="/docs/it/woodpecker.md">di Woodpecker</a> per i requisiti esatti per ciascun provider.</p>

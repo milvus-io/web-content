@@ -226,7 +226,7 @@ summary: >-
       </svg>
     </button></h3><ul>
 <li><strong>Metadatos (etcd):</strong> el prefijo de la clave de Woodpecker suele ser <code translate="no">woodpecker/...</code>. Consúltalo con <code translate="no">etcdctl get woodpecker --prefix</code> y, a continuación, elimínalo.</li>
-<li><strong>Datos de almacenamiento:</strong> en <strong>modo MinIO</strong>, elimina los datos de registro que se encuentran en <code translate="no">&lt;rootPath&gt;/wp/...</code> (normalmente <code translate="no">files/wp/...</code>) dentro del bucket; en <strong>modo local</strong>, los datos se encuentran en el disco local en <code translate="no">volumes/milvus/data/wp/...</code>.</li>
+<li><strong>Datos de almacenamiento:</strong> en <strong>modo MinIO</strong>, elimine los datos de registro que se encuentran en <code translate="no">&lt;rootPath&gt;/wp/...</code> (normalmente <code translate="no">files/wp/...</code>) dentro del bucket; en <strong>modo local</strong>, los datos se encuentran en el disco local en <code translate="no">volumes/milvus/data/wp/...</code>.</li>
 </ul>
 <p>Si tiene previsto volver a Woodpecker más adelante, elimine primero estos archivos para evitar conflictos.</p>
 <h2 id="Supported-scenarios" class="common-anchor-header">Escenarios compatibles<button data-href="#Supported-scenarios" class="anchor-icon" translate="no">

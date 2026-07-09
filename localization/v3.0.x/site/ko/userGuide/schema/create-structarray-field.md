@@ -130,7 +130,7 @@ summary: >-
 <li><p>기본 키 및 기사 수준 필드와 같은 컬렉션 수준 필드를 추가합니다.</p></li>
 <li><p>StructArray 필드 내에 저장될 요소에 대한 Struct 스키마를 생성합니다.</p></li>
 <li><p>Struct 스키마에 스칼라 및 벡터 하위 필드를 추가합니다.</p></li>
-<li><p><code translate="no">element_type=DataType.STRUCT</code> 를 사용하여 Array 필드를 추가합니다.</p></li>
+<li><p><code translate="no">element_type=DataType.STRUCT</code> 를 가진 Array 필드를 추가합니다.</p></li>
 <li><p><code translate="no">struct_schema</code> 를 Struct 스키마로 설정합니다.</p></li>
 <li><p><code translate="no">max_capacity</code> 을 설정하여 각 엔티티가 필드에 저장할 수 있는 Struct 요소의 수를 제한합니다.</p></li>
 </ol>
@@ -378,9 +378,9 @@ client.add_collection_struct_field(
 <tr><td>지원되는 하위 필드 유형만 사용할 수 있습니다.</td><td>StructArray에서 지원하는 스칼라 및 벡터 하위 필드 유형을 사용하십시오. JSON, Geometry, Text, Timestamptz, SparseFloatVector 또는 중첩된 Struct/Array 하위 필드는 정의하지 마십시오.</td></tr>
 <tr><td>벡터 하위 필드는 검색 전에 인덱스가 필요합니다.</td><td>벡터 검색을 실행하기 전에 <code translate="no">chunks[emb_list_vector]</code> 또는 <code translate="no">chunks[emb]</code> 와 같은 경로에 인덱스를 생성하십시오.</td></tr>
 <tr><td>벡터 하위 필드 하나당 인덱스는 하나만 있어야 합니다.</td><td>EmbeddingList 검색과 요소 수준 검색이 모두 필요한 경우, 두 개의 별도 벡터 하위 필드를 생성하십시오.</td></tr>
-<tr><td>기존 StructArray 하위 필드는 고정되어 있습니다.</td><td>StructArray 필드를 생성한 후에는 동일한 StructArray 필드에 하위 필드를 더 추가할 수 없습니다.</td></tr>
+<tr><td>기존 StructArray 하위 필드는 고정되어 있습니다.</td><td>StructArray 필드를 생성한 후에는 동일한 StructArray 필드에 더 이상 하위 필드를 추가할 수 없습니다.</td></tr>
 <tr><td>Struct 내부에서는 함수가 지원되지 않습니다.</td><td>StructArray 필드 내의 필드나 하위 필드에 대한 함수를 정의하지 마십시오.</td></tr>
-<tr><td>스칼라 하위 필드는 필터 요구 사항에 부합해야 합니다.</td><td><code translate="no">section</code>, <code translate="no">quality_score</code> 또는 <code translate="no">has_code</code> 와 같은 필드는 나중에 필터링, 그룹화 또는 출력이 필요한 경우에만 추가하십시오.</td></tr>
+<tr><td>스칼라 하위 필드는 필터 요구 사항과 일치해야 합니다.</td><td><code translate="no">section</code>, <code translate="no">quality_score</code> 또는 <code translate="no">has_code</code> 와 같은 필드는 나중에 필터링, 그룹화 또는 출력이 필요한 경우에만 추가하십시오.</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">흔히 저지르는 실수<button data-href="#Common-mistakes" class="anchor-icon" translate="no">

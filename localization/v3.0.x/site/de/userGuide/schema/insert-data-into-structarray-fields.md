@@ -69,7 +69,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>In einer Einfüge-Nutzlast ist „ <code translate="no">chunks</code> “ ein reguläres Feld, dessen Wert ein Array von Struct-Objekten ist. Verwenden Sie innerhalb jedes Objekts Unterfeldnamen wie „ <code translate="no">text</code> “ und „ <code translate="no">emb</code> “. Verwenden Sie die Pfadsyntax, wie z. B. „ <code translate="no">chunks[text]</code> “ oder „ <code translate="no">chunks[emb]</code> “, erst nach dem Einfügen, wenn Sie Indizes erstellen, Suchvorgänge ausführen, Filter erstellen oder Ausgabefelder angeben.</p>
+<p>In einer Einfüge-Nutzlast ist „ <code translate="no">chunks</code> “ ein reguläres Feld, dessen Wert ein Array von Struct-Objekten ist. Verwenden Sie innerhalb jedes Objekts Unterfeldnamen wie „ <code translate="no">text</code> “ und „ <code translate="no">emb</code> “. Verwenden Sie die Pfadsyntax, z. B. „ <code translate="no">chunks[text]</code> “ oder „ <code translate="no">chunks[emb]</code> “, erst nach dem Einfügen, wenn Sie Indizes erstellen, Suchvorgänge ausführen, Filter erstellen oder Ausgabefelder angeben.</p>
 </div>
 <h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">Die Struktur der Einfüge-Nutzdaten verstehen<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -217,7 +217,7 @@ result = client.insert(
 
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-into-nullable-StructArray-fields" class="common-anchor-header">In nullfähige StructArray-Felder einfügen<button data-href="#Insert-into-nullable-StructArray-fields" class="anchor-icon" translate="no">
+<h2 id="Insert-into-nullable-StructArray-fields" class="common-anchor-header">In nullfähige „StructArray“-Felder einfügen<button data-href="#Insert-into-nullable-StructArray-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -249,9 +249,9 @@ result = client.insert(
 <p>Wenn ein nullfähiges „StructArray“-Feld einen gültigen „StructArray“-Wert enthält, sollten alle Unterfelder in diesem Wert entweder null sein oder gültige Werte aufweisen. Das Einfügen einer Entität, bei der einige Unterfelder auf null und andere auf gültige Werte gesetzt sind, führt zu einem Fehler.</p>
 <div class="alert note">
 <p>Warnung
-Nullfähige „StructArray“-Felder sind nur in Milvus v3.0.x verfügbar. Wenn Sie einem bestehenden Datensatz dynamisch ein „StructArray“-Feld hinzufügen, muss das hinzugefügte Feld nullfähig sein, und bestehende Entitäten geben für das neue Feld in allen seinen Unterfeldern „ <code translate="no">null</code> “ zurück.</p>
+Nullfähige StructArray-Felder sind nur in Milvus v3.0.x verfügbar. Wenn Sie einem bestehenden Datensatz dynamisch ein StructArray-Feld hinzufügen, muss das hinzugefügte Feld nullfähig sein, und bestehende Entitäten geben für das neue Feld in allen seinen Unterfeldern den Wert „ <code translate="no">null</code> “ zurück.</p>
 </div>
-<h2 id="Validate-inserted-data" class="common-anchor-header">Eingefügte Daten validieren<button data-href="#Validate-inserted-data" class="anchor-icon" translate="no">
+<h2 id="Validate-inserted-data" class="common-anchor-header">Eingegebene Daten validieren<button data-href="#Validate-inserted-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

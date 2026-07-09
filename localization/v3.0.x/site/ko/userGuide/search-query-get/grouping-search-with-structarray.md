@@ -22,7 +22,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>이 페이지를 사용하여 StructArray 요소 수준 검색 결과를 상위 엔티티별로 그룹화할 수 있습니다. 여러 Struct 요소가 쿼리와 일치할 경우, 요소 수준 검색에서는 동일한 엔티티에서 여러 개의 검색 결과가 반환될 수 있습니다. 그룹화 기능을 사용하면 이러한 요소 검색 결과를 통합하여 각 상위 엔티티가 최대 한 번만 표시되도록 합니다.</p>
-<p>이 페이지에서는 <a href="/docs/ko/create-structarray-field.md">‘StructArray 필드 생성’의</a> <code translate="no">tech_articles</code> 컬렉션을 사용합니다. 이 컬렉션에는 <code translate="no">chunks</code> 라는 StructArray 필드가 있습니다. <code translate="no">chunks[emb]</code> 벡터 하위 필드는 일반 벡터 메트릭을 사용하여 요소 수준 검색에 대한 인덱싱이 되어 있습니다.</p>
+<p>이 페이지에서는 <a href="/docs/ko/create-structarray-field.md">‘StructArray 필드 생성’의</a> <code translate="no">tech_articles</code> 컬렉션을 사용합니다. 이 컬렉션에는 <code translate="no">chunks</code> 라는 StructArray 필드가 있습니다. <code translate="no">chunks[emb]</code> 벡터 하위 필드는 일반 벡터 메트릭을 사용하여 요소 수준 검색이 가능하도록 인덱싱되어 있습니다.</p>
 <h2 id="How-grouping-applies-to-StructArray" class="common-anchor-header">StructArray에 그룹화가 적용되는 방식<button data-href="#How-grouping-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -49,7 +49,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>그룹화되지 않은 요소 수준 검색에서 중복된 부모 엔티티가 너무 많이 반환될 경우 그룹화를 사용하십시오. 일치하는 모든 Struct 요소를 개별 히트로 반환하려면 ` <code translate="no">group_by_field</code>`를 사용하지 않고 <a href="/docs/ko/basic-vector-search-with-structarray.md">StructArray와 함께 기본 벡터 검색을</a> 사용하십시오.</p>
+<p>그룹화되지 않은 요소 수준 검색에서 중복된 상위 엔티티가 너무 많이 반환될 경우 그룹화를 사용하십시오. 일치하는 모든 Struct 요소를 개별 히트로 반환하려면 ` <code translate="no">group_by_field</code>`를 사용하지 않고 <a href="/docs/ko/basic-vector-search-with-structarray.md">StructArray와 함께 기본 벡터 검색을</a> 사용하십시오.</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">시작하기 전에<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -94,7 +94,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>다음 예제는 먼저 개별 청크를 검색한 다음, 부모 엔티티의 기본 키를 기준으로 요소 검색 결과를 그룹화합니다.</p>
+    </button></h2><p>다음 예제는 먼저 개별 청크를 검색한 다음, 부모 엔터티의 기본 키를 기준으로 요소 검색 결과를 그룹화합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -170,7 +170,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>최상위 술어는 후보 엔티티를 선택합니다. ` <code translate="no">element_filter</code> ` 술어는 요소 수준 벡터 검색을 일치하는 Struct 요소로 제한합니다. 그런 다음 그룹화는 일차 키를 기준으로 일치하는 요소 검색 결과를 통합합니다.</p>
+<p>최상위 술어는 후보 엔티티를 선택합니다. ` <code translate="no">element_filter</code> ` 술어는 요소 수준 벡터 검색을 일치하는 Struct 요소로만 제한합니다. 그런 다음 그룹화는 일차 키를 기준으로 일치하는 요소 검색 결과를 통합합니다.</p>
 <h2 id="Use-grouping-in-hybrid-search" class="common-anchor-header">하이브리드 검색에서 그룹화 사용<button data-href="#Use-grouping-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -288,7 +288,7 @@ results = client.hybrid_search(
 <li><p><code translate="no">chunks[emb_list_vector]</code> 와 함께 그룹화를 사용하는 경우. 이 기능은 EmbeddingList 검색용으로 설계되었습니다.</p></li>
 <li><p>주 키가 아닌 스칼라 필드를 기준으로 그룹화하는 경우.</p></li>
 <li><p>여러 필드를 기준으로 그룹화하는 경우. 요소 수준 StructArray 그룹화는 기본 키 그룹화만 지원합니다.</p></li>
-<li><p>그룹화된 결과가 일치하는 모든 Struct 요소를 나타낼 것이라고 기대하는 경우. 그룹화는 부모 엔티티당 최대 하나의 결과만 반환합니다.</p></li>
+<li><p>그룹화된 결과가 일치하는 모든 Struct 요소를 나타낼 것이라고 기대하는 경우. 그룹화는 상위 엔티티당 최대 하나의 결과만 반환합니다.</p></li>
 <li><p>그룹화된 요소 수준 검색이 EmbeddingList 스타일의 <code translate="no">MAX_SIM*</code> 점수를 재계산한다고 가정하는 경우. 그룹화는 요소 수준의 일치 결과를 통합할 뿐, 점수 산정 모델을 변경하지 않습니다.</p></li>
 <li><p><code translate="no">group_by_field</code> 를 <code translate="no">radius</code> 또는 <code translate="no">range_filter</code> 와 결합하는 경우.</p></li>
 </ul>

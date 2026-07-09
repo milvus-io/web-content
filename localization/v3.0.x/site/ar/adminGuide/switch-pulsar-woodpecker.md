@@ -101,7 +101,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>الخطوة 1: تحقق من أن مثيل Milvus قيد التشغيل.</strong></p>
-<p><strong>الخطوة 2: قم بتكوين اتصال Pulsar المستهدف وأعد تشغيل Milvus.</strong> يتطلب التبديل أن يكون Milvus على دراية مسبقة باتصال Pulsar، لذا قم بكتابته في <code translate="no">user.yaml</code> عبر <code translate="no">extraConfigFiles</code> وقم بتطبيقه باستخدام <code translate="no">helm upgrade</code> (الذي يقوم بتدوير البودات). يعد <code translate="no">streaming.enabled=true</code> مطلوبًا لميزة Switch MQ.</p>
+<p><strong>الخطوة 2: قم بتكوين اتصال Pulsar المستهدف وأعد تشغيل Milvus.</strong> يتطلب التبديل أن يكون Milvus على دراية مسبقة باتصال Pulsar، لذا قم بكتابته في <code translate="no">user.yaml</code> عبر <code translate="no">extraConfigFiles</code> وقم بتطبيقه باستخدام <code translate="no">helm upgrade</code> (الذي يقوم بتدوير البودات). يُعد <code translate="no">streaming.enabled=true</code> ضروريًا لميزة Switch MQ.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -173,7 +173,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>يتم تسجيل التبديل الناجح في <code translate="no">[mqTypeValue=woodpecker]</code>.</p>
-<p><strong>الخطوة 4: تحديث نوع MQ في Operator.</strong> قم بتحديث التكوين الذي يديره<strong>Operator</strong> حتى لا يقوم Operator بإلغاء عملية التبديل. قم بإنشاء <code translate="no">change_configmap.yaml</code>:</p>
+<p><strong>الخطوة 4: قم بتحديث نوع MQ في Operator.</strong> قم بتحديث التكوين الذي يديره<strong>Operator</strong> حتى لا يقوم Operator بإلغاء عملية التبديل. قم بإنشاء <code translate="no">change_configmap.yaml</code>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -267,6 +267,6 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <tr><td>Pulsar المدمج</td><td>وودبيكر (MinIO)</td><td><strong>مدعوم</strong></td><td><strong>مدعوم</strong></td></tr>
 <tr><td>Pulsar خارجي</td><td>وودبيكر (MinIO)</td><td><strong>مدعوم</strong></td><td><strong>مدعوم</strong></td></tr>
 <tr><td>وودبيكر (MinIO)</td><td>Pulsar الخارجي</td><td><strong>مدعوم</strong></td><td><strong>مدعوم</strong></td></tr>
-<tr><td>بولسار</td><td>وودبيكر (محلي)</td><td><strong>مدعوم ولكن غير موصى به</strong> (تحتاج جميع الحاويات إلى نظام ملفات مشترك)</td><td><strong>غير مدعوم</strong></td></tr>
+<tr><td>بولسار</td><td>وودبيكر (محلي)</td><td><strong>مدعوم ولكن غير موصى به</strong> (تحتاج جميع الوحدات إلى نظام ملفات مشترك)</td><td><strong>غير مدعوم</strong></td></tr>
 </tbody>
 </table>

@@ -53,7 +53,7 @@ summary: >-
 <tr><td><code translate="no">chunks</code></td><td><code translate="no">ARRAY</code></td><td>Una lista de objetos «chunk».</td></tr>
 </tbody>
 </table>
-<p>Cada objeto de « <code translate="no">chunks</code> » debe seguir el esquema Struct.</p>
+<p>Cada objeto de « <code translate="no">chunks</code> » debe seguir el esquema «Struct».</p>
 <table>
 <thead>
 <tr><th>Subcampo</th><th>Tipo</th><th>Valor de inserción</th></tr>
@@ -71,7 +71,7 @@ summary: >-
 <div class="alert note">
 <p>En una carga útil de inserción, « <code translate="no">chunks</code> » es un campo normal cuyo valor es una matriz de objetos Struct. Dentro de cada objeto, utiliza nombres de subcampos como « <code translate="no">text</code> » y « <code translate="no">emb</code> ». Utiliza la sintaxis de ruta, como « <code translate="no">chunks[text]</code> » o « <code translate="no">chunks[emb]</code> », solo después de la inserción, cuando crees índices, realices búsquedas, crees filtros o especifiques campos de salida.</p>
 </div>
-<h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">Comprender la estructura de la carga útil de inserción<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
+<h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">Comprender la estructura de la carga útil de la inserción<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -282,7 +282,7 @@ Los campos StructArray nulos solo están disponibles en Milvus v3.0.x. Si añade
 <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> rows:
     <span class="hljs-built_in">print</span>(row)
 <button class="copy-code-btn"></button></code></pre>
-<p>Utiliza rutas de campo StructArray, como <code translate="no">chunks[text]</code>, únicamente al consultar, buscar, filtrar o crear índices. Las cargas útiles de inserción deben seguir utilizando objetos anidados bajo <code translate="no">chunks</code>.</p>
+<p>Utiliza rutas de campos StructArray, como <code translate="no">chunks[text]</code>, únicamente al consultar, buscar, filtrar o crear índices. Las cargas útiles de inserción deben seguir utilizando objetos anidados bajo <code translate="no">chunks</code>.</p>
 <h2 id="Insert-rules" class="common-anchor-header">Reglas de inserción<button data-href="#Insert-rules" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -305,7 +305,7 @@ Los campos StructArray nulos solo están disponibles en Milvus v3.0.x. Si añade
 <tbody>
 <tr><td>Utilice una matriz de objetos para un campo StructArray.</td><td>El valor de <code translate="no">chunks</code> es una lista, y cada elemento de la lista es un elemento Struct.</td></tr>
 <tr><td>Utiliza nombres de subcampos dentro de cada elemento Struct.</td><td>Inserta ` <code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> ` dentro de ` <code translate="no">chunks</code>`, no en ` <code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code>`.</td></tr>
-<tr><td>Cumpla con el esquema de Struct.</td><td>Cada elemento Struct debe utilizar los subcampos definidos en el esquema de Struct.</td></tr>
+<tr><td>Cumple con el esquema de Struct.</td><td>Cada elemento Struct debe utilizar los subcampos definidos en el esquema de Struct.</td></tr>
 <tr><td>Las dimensiones de los vectores deben coincidir.</td><td>Los valores de los vectores deben coincidir con los « <code translate="no">dim</code> » configurados para sus subcampos vectoriales.</td></tr>
 <tr><td>Respetar el « <code translate="no">max_capacity</code> ».</td><td>El número de elementos Struct en una entidad no debe superar el « <code translate="no">max_capacity</code> » del campo StructArray.</td></tr>
 <tr><td>Utilice subcampos vectoriales independientes para los distintos modos de búsqueda.</td><td>Si se requieren tanto la búsqueda en EmbeddingList como la búsqueda a nivel de elemento, escriba los valores vectoriales en ambos subcampos vectoriales.</td></tr>

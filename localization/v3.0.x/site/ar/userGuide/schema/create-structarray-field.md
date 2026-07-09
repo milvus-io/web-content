@@ -68,7 +68,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>لا يقبل الحقل المتجه أو الحقل الفرعي المتجه سوى مؤشر واحد. إذا كنت بحاجة إلى كل من البحث في EmbeddingList والبحث على مستوى العنصر، فقم بتعريف حقلين فرعيين متجهين منفصلين. في هذا المثال، يُستخدم <code translate="no">chunks[emb_list_vector]</code> للبحث في EmbeddingList، بينما يُستخدم <code translate="no">chunks[emb]</code> للبحث على مستوى العنصر.</p>
+<p>لا يقبل الحقل المتجه أو الحقل الفرعي المتجه سوى مؤشر واحد. إذا كنت بحاجة إلى كل من البحث في EmbeddingList والبحث على مستوى العنصر، فقم بتعريف حقلين فرعيين متجهين منفصلين. في هذا المثال، يُستخدم <code translate="no">chunks[emb_list_vector]</code> للبحث في EmbeddingList، ويُستخدم <code translate="no">chunks[emb]</code> للبحث على مستوى العنصر.</p>
 </div>
 <h2 id="Supported-subfield-data-types" class="common-anchor-header">أنواع بيانات الحقول الفرعية المدعومة<button data-href="#Supported-subfield-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -105,11 +105,11 @@ summary: >-
 <tr><td><code translate="no">Array</code></td><td>غير مدعوم</td><td>الحقول الفرعية JSON غير مدعومة في حقول StructArray.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>غير مدعوم</td><td>الحقول الفرعية للهندسة ووظائف نظم المعلومات الجغرافية (GIS) غير مدعومة في حقول StructArray.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>غير مدعوم</td><td>الحقول الفرعية النصية غير مدعومة في حقول StructArray.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>غير مدعوم</td><td>الحقول الفرعية من نوع Timestamptz والتعبيرات المرتبطة بوقت محدد غير مدعومة في حقول StructArray.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>غير مدعوم</td><td>الحقول الفرعية من نوع Timestamptz والتعبيرات المحددة بالوقت غير مدعومة في حقول StructArray.</td></tr>
 <tr><td><code translate="no">Array</code> أو <code translate="no">ArrayOfVector</code> أو <code translate="no">Struct</code> أو <code translate="no">ArrayOfStruct</code></td><td>غير مدعوم</td><td>لا يمكن أن يحتوي حقل StructArray على مصفوفات متداخلة، أو مصفوفات متجهة متداخلة، أو حقول Struct متداخلة، أو حقول Array-of-Struct متداخلة.</td></tr>
 </tbody>
 </table>
-<p>للحصول على معلومات حول الدعم الخاص بالإصدارات وسلوك القيم التي يمكن أن تكون فارغة والقيود الأخرى، راجع " <a href="/docs/ar/structarray-limits.md">قيود StructArray</a>".</p>
+<p>للحصول على الدعم الخاص بالإصدار، وسلوك القيم التي يمكن أن تكون null، والقيود الأخرى، راجع <a href="/docs/ar/structarray-limits.md">قيود StructArray</a>.</p>
 <h2 id="Create-a-collection-with-a-StructArray-field" class="common-anchor-header">إنشاء مجموعة تحتوي على حقل StructArray<button data-href="#Create-a-collection-with-a-StructArray-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -376,10 +376,10 @@ client.add_collection_struct_field(
 <tr><td>يُستخدم Struct كنوع عنصر Array.</td><td>قم بإنشاء حقل StructArray كحقل Array باستخدام <code translate="no">element_type=STRUCT</code>. لا تقم بإنشاء Struct كحقل تجميع من المستوى الأعلى.</td></tr>
 <tr><td>تشترك جميع العناصر في مخطط واحد.</td><td>يتبع كل عنصر Struct في حقل StructArray نفسه مخطط Struct المحدد لذلك الحقل.</td></tr>
 <tr><td><code translate="no">max_capacity</code> مطلوب.</td><td>وهو يحدد عدد عناصر Struct التي يمكن لكل كيان تخزينها في حقل StructArray.</td></tr>
-<tr><td>يُسمح فقط بأنواع الحقول الفرعية المدعومة.</td><td>استخدم أنواع الحقول الفرعية القياسية والمتجهة التي يدعمها StructArray. لا تقم بتعريف الحقول الفرعية من أنواع JSON أو Geometry أو Text أو Timestamptz أو SparseFloatVector أو الحقول الفرعية المتداخلة من نوع Struct / Array.</td></tr>
+<tr><td>يُسمح فقط بأنواع الحقول الفرعية المدعومة.</td><td>استخدم أنواع الحقول الفرعية القياسية والمتجهة التي يدعمها StructArray. لا تقم بتعريف الحقول الفرعية من نوع JSON أو Geometry أو Text أو Timestamptz أو SparseFloatVector أو الحقول الفرعية المتداخلة من نوع Struct / Array.</td></tr>
 <tr><td>تحتاج الحقول الفرعية المتجهة إلى فهارس قبل البحث.</td><td>قم بإنشاء فهارس على مسارات مثل <code translate="no">chunks[emb_list_vector]</code> أو <code translate="no">chunks[emb]</code> قبل تشغيل البحث المتجهي.</td></tr>
 <tr><td>يحتوي كل حقل فرعي متجه على فهرس واحد.</td><td>إذا كنت بحاجة إلى كل من البحث في EmbeddingList والبحث على مستوى العناصر، فأنشئ حقلين فرعيين متجهين منفصلين.</td></tr>
-<tr><td>الحقول الفرعية StructArray الموجودة ثابتة.</td><td>بعد إنشاء حقل StructArray، لا تتوقع إضافة المزيد من الحقول الفرعية إلى حقل StructArray نفسه.</td></tr>
+<tr><td>الحقول الفرعية StructArray الموجودة ثابتة.</td><td>بعد إنشاء حقل StructArray، لا تتوقع إضافة المزيد من الحقول الفرعية إلى نفس حقل StructArray هذا.</td></tr>
 <tr><td>لا يتم دعم الدوال داخل Struct.</td><td>لا تقم بتعريف وظائف للحقول أو الحقول الفرعية داخل حقل StructArray.</td></tr>
 <tr><td>يجب أن تتوافق الحقول الفرعية القياسية مع متطلبات التصفية.</td><td>أضف حقولًا مثل <code translate="no">section</code> أو <code translate="no">quality_score</code> أو <code translate="no">has_code</code> فقط عندما تحتاج إلى تصفية هذه الحقول أو تجميعها أو إخراجها لاحقًا.</td></tr>
 </tbody>
@@ -428,7 +428,7 @@ client.add_collection_struct_field(
       </svg>
     </button></h2><ol>
 <li><p>لإدراج بيانات متداخلة في حقل StructArray، اقرأ " <a href="/docs/ar/insert-data-into-structarray-fields.md">إدراج البيانات في حقول StructArray</a>".</p></li>
-<li><p>لإنشاء فهارس متجهة وقيمية، اقرأ " <a href="/docs/ar/index-structarray-fields.md">فهرسة حقول StructArray</a>".</p></li>
+<li><p>لإنشاء فهارس متجهة وقيمية، اقرأ <a href="/docs/ar/index-structarray-fields.md">«فهرسة حقول StructArray</a>».</p></li>
 <li><p>للبحث في الحقول الفرعية المتجهة لـ StructArray، اقرأ "البحث المتجه الأساسي باستخدام StructArray".</p></li>
 <li><p>لمراجعة أنواع البيانات المدعومة، وسلوك القيم التي يمكن أن تكون فارغة، والقيود الخاصة بالإصدارات، اقرأ " <a href="/docs/ar/structarray-limits.md">حدود StructArray</a>".</p></li>
 </ol>

@@ -198,7 +198,7 @@ results = client.search(
 <tr><td><code translate="no">distance</code> またはスコア</td><td>クエリの埋め込みリストと保存済みの埋め込みリストとの間のスコアまたは距離。</td><td>クエリベクトルと一致した Struct 要素のベクトルとの間のスコアまたは距離。</td></tr>
 <tr><td><code translate="no">offset</code></td><td>該当なし。</td><td>返される際の一致した Struct 要素の 0 を基点とする位置。</td></tr>
 <tr><td>重複する主キー</td><td>結果はエンティティレベルであるため、単一のクエリでは発生しないことが予想されます。</td><td>同じエンティティ内の複数の Struct 要素が一致する可能性があるため、発生する可能性があります。</td></tr>
-<tr><td>要求された StructArray 出力フィールド</td><td>一致したエンティティから返されます。</td><td>ターゲット API および SDK がサポートする要素レベルのヒットシェープで返されます。</td></tr>
+<tr><td>要求された StructArray 出力フィールド</td><td>一致したエンティティから返されます。</td><td>ターゲット API および SDK がサポートする要素レベルのヒットシェイプで返されます。</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">よくある間違い<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
@@ -219,7 +219,7 @@ results = client.search(
     </button></h2><ul>
 <li><p>必要なサブフィールドパス構文<code translate="no">chunks[emb]</code> の代わりに、<code translate="no">chunks.emb</code> を使用してしまう。</p></li>
 <li><p>通常のベクトルメトリックでインデックス付けされたベクトルサブフィールドに対して、EmbeddingList クエリを使用すること。</p></li>
-<li><p><code translate="no">MAX_SIM*</code> メトリックでインデックス付けされたベクトルサブフィールドに対して、通常のベクトルクエリを使用すること。</p></li>
+<li><p><code translate="no">MAX_SIM*</code> メトリックでインデックス化されたベクトルサブフィールドに対して、通常のベクトルクエリを使用すること。</p></li>
 <li><p>要素レベルの検索（<code translate="no">limit</code> ）が、その数だけの一意な親エンティティを返すことを期待している。実際には、要素レベルのヒットが返されます。</p></li>
 <li><p>EmbeddingList検索が特定の要素オフセットを1つ返すことを期待している。しかし、エンティティレベルの一致が返される。</p></li>
 <li><p>1つのベクトルサブフィールドを両方の検索モードで再利用している。各ベクトルサブフィールドは1つのインデックスのみを受け入れるため、別々のベクトルサブフィールドを使用する。</p></li>

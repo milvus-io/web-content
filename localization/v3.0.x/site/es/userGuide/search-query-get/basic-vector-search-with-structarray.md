@@ -24,7 +24,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Utiliza esta página para realizar búsquedas vectoriales en subcampos vectoriales dentro de un campo StructArray. StructArray admite dos modos básicos de búsqueda vectorial: la búsqueda en EmbeddingList, que evalúa una lista de incrustaciones almacenada en cada entidad, y la búsqueda a nivel de elemento, que busca en cada elemento de Struct de forma independiente.</p>
-<p>Esta página utiliza la colección « <code translate="no">tech_articles</code> » de la sección <a href="/docs/es/create-structarray-field.md">«Crear un campo StructArray</a>». La colección cuenta con un campo StructArray denominado « <code translate="no">chunks</code> ». Cada fragmento contiene texto, metadatos escalares, un subcampo vectorial denominado « <code translate="no">emb_list_vector</code> » con un índice para la búsqueda en EmbeddingList, y un subcampo vectorial denominado « <code translate="no">emb</code> » con un índice para la búsqueda a nivel de elemento.</p>
+<p>Esta página utiliza la colección « <code translate="no">tech_articles</code> » de la sección <a href="/docs/es/create-structarray-field.md">«Crear un campo StructArray</a>». La colección cuenta con un campo StructArray denominado « <code translate="no">chunks</code> ». Cada fragmento contiene texto, metadatos escalares, un subcampo vectorial denominado « <code translate="no">emb_list_vector</code> » con un índice para la búsqueda EmbeddingList, y un subcampo vectorial denominado « <code translate="no">emb</code> » con un índice para la búsqueda a nivel de elemento.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Antes de empezar<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -54,7 +54,7 @@ summary: >-
 </table>
 <div class="alert note">
 <p>Advertencia</p>
-<p>Un campo vectorial o un subcampo vectorial solo admite un índice. Si necesitas tanto la búsqueda en EmbeddingList como la búsqueda a nivel de elemento, crea dos subcampos vectoriales independientes. En esta página, <code translate="no">chunks[emb_list_vector]</code> está indexado para la búsqueda en EmbeddingList, y <code translate="no">chunks[emb]</code> está indexado para la búsqueda a nivel de elemento.</p>
+<p>Un campo vectorial o un subcampo vectorial solo admite un índice. Si necesitas tanto la búsqueda en EmbeddingList como la búsqueda a nivel de elemento, crea dos subcampos vectoriales independientes. En esta página, <code translate="no">chunks[emb_list_vector]</code> se indexa para la búsqueda en EmbeddingList, y <code translate="no">chunks[emb]</code> se indexa para la búsqueda a nivel de elemento.</p>
 </div>
 <h2 id="Choose-a-search-mode" class="common-anchor-header">Elige un modo de búsqueda<button data-href="#Choose-a-search-mode" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -131,7 +131,7 @@ results = client.search(
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
         <span class="hljs-built_in">print</span>(hit[<span class="hljs-string">&quot;id&quot;</span>], hit[<span class="hljs-string">&quot;distance&quot;</span>], hit[<span class="hljs-string">&quot;entity&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>En este modo de búsqueda, « <code translate="no">limit</code> » controla cuántas entidades se devuelven para cada consulta. El resultado puede incluir subcampos de StructArray, pero la coincidencia en sí representa la entidad principal con la que coincide, en lugar de un elemento Struct específico.</p>
+<p>En este modo de búsqueda, « <code translate="no">limit</code> » controla cuántas entidades se devuelven para cada consulta. El resultado puede incluir subcampos de StructArray, pero la coincidencia en sí misma representa la entidad principal con la que coincide, en lugar de un elemento Struct específico.</p>
 <div class="alert note">
 <p>Para obtener una guía completa al estilo de ColBERT o ColPali, consulta <a href="/docs/es/search-with-embedding-lists.md">«Búsqueda con listas de incrustación</a>». Esta página solo aborda el comportamiento básico de la búsqueda en StructArray.</p>
 </div>

@@ -45,12 +45,12 @@ summary: >-
 <p>Isto proporciona um melhor poder de representação, mas o MaxSim exato é dispendioso em grande escala. Uma pesquisa MaxSim por força bruta teria de comparar os vetores de consulta com todos os vetores em todas as linhas candidatas. Isso é normalmente demasiado lento para uma pesquisa em produção.</p>
 <table>
 <thead>
-<tr><th>### Problema - Cada linha pode conter muitos vetores. - A aplicação exata do MaxSim a todas as linhas é dispendiosa. - O tamanho do índice e a latência da pesquisa podem aumentar rapidamente.</th><th>### Estratégia - Utilizar um método de recuperação aproximado na primeira fase. - Recuperar mais candidatos do que os topK solicitados. - Reordenar os candidatos com o MaxSim exato.</th></tr>
+<tr><th>### Problema - Cada linha pode conter muitos vetores. - A aplicação exata do MaxSim em todas as linhas é dispendiosa. - O tamanho do índice e a latência da pesquisa podem aumentar rapidamente.</th><th>### Estratégia - Utilizar um método de recuperação aproximado na primeira fase. - Recuperar mais candidatos do que os topK solicitados. - Reordenar os candidatos com o MaxSim exato.</th></tr>
 </thead>
 <tbody>
 </tbody>
 </table>
-<p>Neste sentido, a « <code translate="no">emb_list_strategy</code> » é principalmente uma estratégia de construção de índices e de recuperação de candidatos. É configurada durante a construção do índice e determina como é produzido o conjunto de candidatos da ANN na primeira fase. Parâmetros de tempo de pesquisa, como « <code translate="no">retrieval_ann_ratio</code> » e « <code translate="no">emb_list_rerank</code> », controlam então quantos candidatos são recuperados e se a reclassificação por MaxSim é aplicada.</p>
+<p>Neste sentido, a « <code translate="no">emb_list_strategy</code> » é principalmente uma estratégia de construção de índices e de recuperação de candidatos. É configurada durante a construção do índice e determina como é produzido o conjunto de candidatos da ANN na primeira fase. Parâmetros de tempo de pesquisa, tais como « <code translate="no">retrieval_ann_ratio</code> » e « <code translate="no">emb_list_rerank</code> », controlam então quantos candidatos são recuperados e se a reclassificação por MaxSim é aplicada.</p>
 <hr>
 <h2 id="Available-Strategies" class="common-anchor-header">Estratégias disponíveis<button data-href="#Available-Strategies" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -145,7 +145,7 @@ summary: >-
 <p><strong>Utilize o LEMUR quando a compressão aprendida justificar o custo de treino.</strong> Pode funcionar bem para espaços de incorporação de baixa discriminação e recuperação multimodal, mas deve ser validado em relação ao corpus-alvo, uma vez que pode ser sensível à distribuição do comprimento dos documentos.</p>
 </div>
 <ul>
-<li><p><strong>Adequado para:</strong> pesquisa de documentos visuais, embeddings multimodais de patches, espaços de embedding de baixa discriminação, grandes listas de embeddings onde o TokenANN não é prático.</p></li>
+<li><p><strong>Adequado para:</strong> pesquisa de documentos visuais, embeddings multimodais de patches, espaços de embedding de baixa discriminação, grandes listas de embeddings em que o TokenANN não é prático.</p></li>
 <li><p><strong>Menos adequado:</strong> corpora em constante mudança, embeddings de alta discriminação com comprimentos de documentos altamente assimétricos, cargas de trabalho em que o custo de treino é inaceitável.</p></li>
 <li><p><strong>Parâmetros importantes:</strong><code translate="no">lemur_hidden_dim</code>, <code translate="no">lemur_num_train_samples</code>, <code translate="no">lemur_num_epochs</code>, <code translate="no">lemur_batch_size</code>, <code translate="no">lemur_learning_rate</code>, <code translate="no">lemur_seed</code> e <code translate="no">lemur_num_layers</code>.</p></li>
 </ul>
@@ -198,7 +198,7 @@ summary: >-
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_num_epochs</code></td><td>Criação do índice</td><td><code translate="no">50</code></td><td>Aumente se o treino não tiver convergido; reduza quando o tempo de construção for a principal restrição.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_batch_size</code></td><td>Construção do índice</td><td><code translate="no">512</code></td><td>Ajuste em função do rendimento do treino e da utilização de memória.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_learning_rate</code></td><td>Construção do índice</td><td><code translate="no">0.001</code></td><td>Ajuste quando o treino estiver instável ou convergir demasiado lentamente.</td></tr>
-<tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_seed</code></td><td>Criação do índice</td><td><code translate="no">42</code></td><td>Defina para execuções de treino reproduzíveis.</td></tr>
+<tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_seed</code></td><td>Criação do índice</td><td><code translate="no">42</code></td><td>Defina para execuções de treino reprodutíveis.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_num_layers</code></td><td>Criação do índice</td><td><code translate="no">2</code></td><td>Aumente apenas quando o corpus necessitar de um extrator de características mais expressivo e se puder suportar o custo adicional de treino.</td></tr>
 <tr><td>Todas as estratégias</td><td><code translate="no">retrieval_ann_ratio</code></td><td>Pesquisa</td><td><code translate="no">3.0</code></td><td>Aumente para recuperar mais candidatos da primeira fase e melhorar a taxa de recuperação; diminua para reduzir a latência.</td></tr>
 <tr><td>Todas as estratégias</td><td><code translate="no">emb_list_rerank</code></td><td>Pesquisa</td><td><code translate="no">true</code></td><td>Mantenha ativado para o reclassificação do MaxSim. Desative apenas em experiências controladas em que a qualidade da ANN da primeira fase esteja a ser medida diretamente.</td></tr>
@@ -219,7 +219,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>No Milvus, a estratégia é passada como um parâmetro de índice ao criar um índice num campo EmbeddingList, tal como um subcampo vetorial StructArray.</p>
+    </button></h2><p>No Milvus, a estratégia é passada como um parâmetro de índice ao criar um índice num campo EmbeddingList, como um subcampo vetorial StructArray.</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;clips[clip_embedding]&quot;</span>,
@@ -348,7 +348,7 @@ index_params.add_index(
 <tbody>
 <tr><td>Precisa de uma linha de base de alta qualidade?</td><td>Pretende medir a melhor aproximação prática antes de otimizar o custo.</td><td><code translate="no">tokenann</code></td></tr>
 <tr><td>As linhas têm um número reduzido ou moderado de vetores?</td><td>Cada linha tem um número reduzido de vetores de token, patch ou clip.</td><td><code translate="no">tokenann</code></td></tr>
-<tr><td>O TokenANN é demasiado grande ou demasiado lento?</td><td>O tamanho do índice ou a latência de recuperação na primeira fase constituem o gargalo.</td><td><code translate="no">muvera</code></td></tr>
+<tr><td>O TokenANN é demasiado grande ou demasiado lento?</td><td>O tamanho do índice ou a latência de recuperação na primeira fase constituem o estrangulamento.</td><td><code translate="no">muvera</code></td></tr>
 <tr><td>Queres compressão sem treino?</td><td>Precisa de um modelo operacional mais simples e de uma codificação reprodutível.</td><td><code translate="no">muvera</code></td></tr>
 <tr><td>O espaço de incorporação tem baixa capacidade de discriminação?</td><td>As ANN a nível de token apresentam ruído, e a projeção aleatória não preserva sinal suficiente.</td><td><code translate="no">lemur</code></td></tr>
 <tr><td>A carga de trabalho é visual ou multimodal?</td><td>As linhas contêm muitos vetores de patch, e a TokenANN é demasiado dispendiosa.</td><td><code translate="no">lemur</code> ou <code translate="no">muvera</code></td></tr>

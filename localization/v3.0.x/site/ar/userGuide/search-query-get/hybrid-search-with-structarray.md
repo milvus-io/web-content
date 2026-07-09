@@ -52,7 +52,7 @@ summary: >-
 </table>
 <div class="alert note">
 <p>تحذير</p>
-<p>استخدم <code translate="no">element_scope</code> فقط لتكوين الطي لكائنات <code translate="no">AnnSearchRequest</code> على مستوى العنصر في StructArray في بحث هجين على مستوى العنصر غير المتطابق في البنية. لا تستخدمه لطلبات EmbeddingList، أو طلبات المتجهات على مستوى المجموعة، أو البحث الهجين على مستوى العنصر في StructArray المتطابق.</p>
+<p>استخدم <code translate="no">element_scope</code> فقط لتكوين الطي لكائنات <code translate="no">AnnSearchRequest</code> على مستوى العناصر في StructArray في بحث هجين على مستوى العناصر غير المتطابق في البنية. لا تستخدمه لطلبات EmbeddingList، أو طلبات المتجهات على مستوى المجموعة، أو البحث الهجين على مستوى العناصر في StructArray المتطابق.</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">قبل البدء<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -138,7 +138,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>في هذا المثال، ينتج كلا كائني <code translate="no">AnnSearchRequest</code> مرشحين على مستوى الكيان. يتم تحديد النتيجة النهائية بواسطة المفتاح الأساسي للكيان الأصلي. لا تقم بإضافة <code translate="no">element_scope</code> إلى طلب EmbeddingList.</p>
+<p>في هذا المثال، ينتج كلا كائني « <code translate="no">AnnSearchRequest</code> » مرشحين على مستوى الكيان. يتم فهرسة النتيجة النهائية باستخدام المفتاح الأساسي للكيان الأصلي. لا تقم بإضافة « <code translate="no">element_scope</code> » إلى طلب «EmbeddingList».</p>
 <h2 id="Run-same-StructArray-element-level-hybrid-search" class="common-anchor-header">تشغيل البحث الهجين على مستوى العناصر لنفس StructArray<button data-href="#Run-same-StructArray-element-level-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -209,7 +209,7 @@ results = client.hybrid_search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>إذا مزج البحث الهجين طلبًا من نوع « <code translate="no">AnnSearchRequest</code> » على مستوى عنصر StructArray مع طلب متجه على مستوى المجموعة، أو طلب «EmbeddingList»، أو طلب على مستوى العنصر ضمن حقل StructArray مختلف، فإن نطاق المرشحين النهائي يكون على مستوى الكيان. في هذه الحالة، يتم طي كل حقل « <code translate="no">AnnSearchRequest</code> » على مستوى عنصر StructArray إلى مرشحين على مستوى الكيان قبل إعادة الترتيب الهجين.</p>
+    </button></h2><p>إذا مزج البحث الهجين طلبًا من نوع « <code translate="no">AnnSearchRequest</code> » على مستوى عنصر StructArray مع طلب متجه على مستوى المجموعة، أو طلب «EmbeddingList»، أو طلب على مستوى العنصر ضمن حقل StructArray مختلف، فإن نطاق المرشحين النهائي يكون على مستوى الكيان. في هذه الحالة، يتم طي كل طلب « <code translate="no">AnnSearchRequest</code> » على مستوى عنصر StructArray إلى مرشحين على مستوى الكيان قبل إعادة الترتيب الهجين.</p>
 <p>استخدم <code translate="no">element_scope</code> داخل <code translate="no">params</code> الخاص بـ <code translate="no">AnnSearchRequest</code> على مستوى عنصر StructArray عندما تحتاج إلى التحكم في كيفية طي العناصر المتطابقة المتعددة من نفس الكيان.</p>
 <pre><code translate="no">title_req = AnnSearchRequest(
     data=[query_vector],
@@ -277,8 +277,8 @@ results = client.hybrid_search(
 <tr><td><code translate="no">topk_avg</code></td><td>حساب متوسط أفضل درجات العناصر التي تم إرجاعها بواسطة <code translate="no">K</code> للكيان.</td><td>مطلوب ويجب أن يكون موجبًا.</td><td>أي مقياس متجه عادي مدعوم.</td></tr>
 </tbody>
 </table>
-<p>يستخدم "Collapse" فقط نتائج العناصر التي تم إرجاعها بواسطة " <code translate="no">AnnSearchRequest</code>" على مستوى عنصر StructArray. ولا يقوم بمسح كل عنصر Struct في الكيان بعد البحث ANN. اضبط " <code translate="no">limit</code> " للطلب على قيمة عالية بما يكفي لتوفير العناصر التي تريدها لتكون متاحة لـ "Collapse".</p>
-<h2 id="Add-filters-range-search-and-grouping" class="common-anchor-header">إضافة عوامل التصفية والبحث عن النطاق والتجميع<button data-href="#Add-filters-range-search-and-grouping" class="anchor-icon" translate="no">
+<p>يستخدم "Collapse" فقط نتائج العناصر التي تم إرجاعها بواسطة مقياس " <code translate="no">AnnSearchRequest</code>" على مستوى العنصر في StructArray. ولا يقوم بمسح كل عنصر Struct في الكيان بعد البحث باستخدام الشبكة العصبية الاصطناعية (ANN). اضبط قيمة " <code translate="no">limit</code> " للطلب على مستوى عالٍ بما يكفي لتوفير العناصر التي تريدها لتكون متاحة لعملية "Collapse".</p>
+<h2 id="Add-filters-range-search-and-grouping" class="common-anchor-header">إضافة عوامل التصفية والبحث في النطاق والتجميع<button data-href="#Add-filters-range-search-and-grouping" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -316,7 +316,7 @@ results = client.hybrid_search(
 <tr><th>نطاق المرشح النهائي</th><th>مفتاح النتيجة</th><th>سلوك الإزاحة</th><th>متى يحدث</th></tr>
 </thead>
 <tbody>
-<tr><td>مستوى الكيان</td><td>المفتاح الأساسي.</td><td>لا يوجد إزاحة للعناصر في النتيجة النهائية.</td><td>يتضمن الطلب الهجين حقل متجه على مستوى المجموعة، أو طلب EmbeddingList، أو طلبات على مستوى العنصر ضمن حقول StructArray مختلفة.</td></tr>
+<tr><td>مستوى الكيان</td><td>المفتاح الأساسي.</td><td>لا يوجد إزاحة للعناصر في النتيجة النهائية.</td><td>يتضمن الطلب المختلط حقل متجه على مستوى المجموعة، أو طلب EmbeddingList، أو طلبات على مستوى العنصر ضمن حقول StructArray مختلفة.</td></tr>
 <tr><td>مستوى العنصر</td><td>المفتاح الأساسي بالإضافة إلى حقل StructArray الأصلي بالإضافة إلى إزاحة العنصر.</td><td>يمكن إرجاع إزاحة العنصر المحدد عند عرضها بواسطة واجهة برمجة التطبيقات (API) أو مجموعة أدوات تطوير البرامج (SDK).</td><td>جميع كائنات " <code translate="no">AnnSearchRequest</code> " تكون على مستوى العنصر وتقع ضمن حقل StructArray نفسه.</td></tr>
 </tbody>
 </table>
@@ -339,7 +339,7 @@ results = client.hybrid_search(
 <li><p>استخدم <code translate="no">element_scope</code> فقط لكائنات <code translate="no">AnnSearchRequest</code> على مستوى عنصر StructArray التي يجب طيها إلى مرشحين على مستوى الكيان في البحث المختلط.</p></li>
 <li><p>لا تستخدم <code translate="no">element_scope</code> لطلبات EmbeddingList، أو طلبات المتجهات على مستوى المجموعة، أو البحث الهجين على مستوى العناصر في نفس StructArray.</p></li>
 <li><p><code translate="no">sum</code> وتتطلب استراتيجيات التجميع <code translate="no">topk_sum</code> مقاييس ارتباط موجبة، مثل <code translate="no">IP</code> أو <code translate="no">COSINE</code>. لا تستخدمها مع <code translate="no">L2</code>.</p></li>
-<li><p><code translate="no">topk_sum</code> وتتطلب <code translate="no">topk_avg</code> قيمة <code translate="no">topk</code> موجبة. ويجب ألا تتضمن استراتيجيات الطي الأخرى <code translate="no">topk</code>.</p></li>
+<li><p><code translate="no">topk_sum</code> وتتطلب <code translate="no">topk_avg</code> قيمة موجبة لـ <code translate="no">topk</code>. ويجب ألا تتضمن استراتيجيات الطي الأخرى <code translate="no">topk</code>.</p></li>
 <li><p>لا تدعم طلبات StructArray على مستوى EmbeddingList البحث عن النطاق أو التجميع حسب.</p></li>
 <li><p>يتم دعم التجميع الهجين فقط للبحث الهجين على مستوى عنصر StructArray نفسه وفقط حسب المفتاح الأساسي.</p></li>
 <li><p>لا تقم بدمج البحث عن النطاق مع التجميع.</p></li>

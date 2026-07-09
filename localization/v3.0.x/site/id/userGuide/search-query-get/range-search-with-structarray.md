@@ -327,7 +327,7 @@ results = client.hybrid_search(
 <li><p>Melakukan pencarian rentang terhadap <code translate="no">chunks[emb_list_vector]</code>, yang dimaksudkan untuk pencarian EmbeddingList.</p></li>
 <li><p>Menggunakan ` <code translate="no">MAX_SIM_COSINE</code> ` alih-alih metrik biasa seperti ` <code translate="no">COSINE</code> ` untuk pencarian rentang tingkat elemen.</p></li>
 <li><p>Menggunakan kueri ` <code translate="no">EmbeddingList</code> ` alih-alih kueri vektor biasa.</p></li>
-<li><p>Mengharapkan hasil pencarian rentang bersifat unik berdasarkan entitas induk. Pencarian rentang mengembalikan hasil yang cocok pada elemen Struct.</p></li>
+<li><p>Mengharapkan hasil pencarian rentang menjadi unik berdasarkan entitas induk. Pencarian rentang mengembalikan hasil yang cocok pada elemen Struct.</p></li>
 <li><p>Menggunakan ` <code translate="no">chunks.emb</code> ` alih-alih sintaks jalur subfield yang diwajibkan ` <code translate="no">chunks[emb]</code>`.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Langkah selanjutnya<button data-href="#Next-steps" class="anchor-icon" translate="no">

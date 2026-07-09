@@ -20,7 +20,7 @@ summary: 가동 중단 없이 기존 Milvus 배포 환경의 메시지 큐를 Wo
       </svg>
     </button></h1><p>이 가이드에서는 기존 Milvus 배포 환경의 메시지 큐(MQ)를 <strong>Woodpecker와 다른 메시지 큐 간에</strong> 가동 중지 시간 없이 온라인 상태로 전환하는 방법을 설명합니다.</p>
 <div class="alert warning">
-<p>이 기능은 출시 예정이며 변경될 수 있습니다. 기능을 사용해 보고 싶거나 궁금한 점이 있으시면 Milvus 지원팀에 문의해 주십시오.</p>
+<p>이 기능은 출시 예정이며 변경될 수 있습니다. 기능을 사용해 보시거나 궁금한 점이 있으시면 Milvus 지원팀에 문의해 주십시오.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">필수 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -85,7 +85,7 @@ summary: 가동 중단 없이 기존 Milvus 배포 환경의 메시지 큐를 Wo
 <li>로그를 모니터링하여 전환이 완료되었는지 확인합니다.</li>
 </ol>
 <div class="alert note">
-<p>전환하기 전에, 대상 MQ에 현재 Milvus 인스턴스에서 사용 중인 것과 동일한 이름의 토픽이 포함되어 있지 않은지 확인하십시오. 대상 MQ가 다른 Milvus 인스턴스에서 사용된 적이 있는 경우, 토픽 이름 충돌로 인해 예기치 않은 동작이 발생할 수 있으므로 이 사항은 특히 중요합니다.</p>
+<p>전환하기 전에, 대상 MQ에 현재 Milvus 인스턴스에서 사용하는 것과 동일한 이름의 토픽이 포함되어 있지 않은지 확인하십시오. 대상 MQ가 다른 Milvus 인스턴스에서 사용된 적이 있는 경우, 토픽 이름 충돌로 인해 예기치 않은 동작이 발생할 수 있으므로 이 점은 특히 중요합니다.</p>
 </div>
 <h2 id="Support-matrix" class="common-anchor-header">지원 매트릭스<button data-href="#Support-matrix" class="anchor-icon" translate="no">
       <svg translate="no"

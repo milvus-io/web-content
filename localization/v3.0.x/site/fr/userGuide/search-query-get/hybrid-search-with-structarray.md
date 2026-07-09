@@ -23,7 +23,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Utilisez cette page pour combiner la recherche vectorielle StructArray avec d’autres recherches vectorielles au sein d’une seule requête de recherche hybride. La recherche hybride StructArray peut produire des résultats au niveau de l’entité ou au niveau de l’élément, selon les objets de la collection « <code translate="no">AnnSearchRequest</code> » que vous combinez.</p>
+    </button></h1><p>Utilisez cette page pour combiner la recherche vectorielle StructArray avec d’autres recherches vectorielles au sein d’une seule requête de recherche hybride. La recherche hybride StructArray peut produire soit des résultats au niveau de l’entité, soit des résultats au niveau de l’élément, en fonction des objets de la collection « <code translate="no">AnnSearchRequest</code> » que vous combinez.</p>
 <p>Cette page utilise la collection « <code translate="no">tech_articles</code> » issue de la section <a href="/docs/fr/create-structarray-field.md">« Créer un champ StructArray</a> ». Cette collection comporte un champ vectoriel de niveau supérieur nommé « <code translate="no">title_vector</code> » et un champ StructArray nommé « <code translate="no">chunks</code> ». Le sous-champ « <code translate="no">chunks[emb_list_vector]</code> » est indexé pour la recherche EmbeddingList, tandis que « <code translate="no">chunks[emb]</code> » est indexé pour la recherche au niveau des éléments.</p>
 <h2 id="How-hybrid-search-applies-to-StructArray" class="common-anchor-header">Comment la recherche hybride s’applique à StructArray<button data-href="#How-hybrid-search-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -250,7 +250,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Dans cet exemple, la stratégie de regroupement ( <code translate="no">title_req</code> ) est définie au niveau de l’entité ; le résultat hybride final est donc également au niveau de l’entité. La requête « <code translate="no">chunk_req</code> » renvoie d’abord les occurrences d’éléments issues de l’ <code translate="no">chunks[emb]</code>, puis regroupe les éléments renvoyés provenant de la même entité en additionnant les trois meilleurs scores d’éléments. Si la stratégie de regroupement ( <code translate="no">element_scope</code> ) est omise alors qu’un regroupement au niveau de l’entité est nécessaire, la stratégie de regroupement par défaut est « <code translate="no">max</code> ».</p>
+<p>Dans cet exemple, la stratégie de regroupement ( <code translate="no">title_req</code> ) est définie au niveau de l’entité ; le résultat hybride final est donc également au niveau de l’entité. La requête « <code translate="no">chunk_req</code> » renvoie d’abord les occurrences d’éléments issues de l’ <code translate="no">chunks[emb]</code>, puis regroupe les éléments renvoyés provenant de la même entité en additionnant les trois meilleurs scores d’éléments. Si l’attribut « <code translate="no">element_scope</code> » est omis alors qu’un regroupement au niveau de l’entité est nécessaire, la stratégie de regroupement par défaut est « <code translate="no">max</code> ».</p>
 <h2 id="Choose-a-collapse-strategy" class="common-anchor-header">Choisissez une stratégie de regroupement<button data-href="#Choose-a-collapse-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -274,7 +274,7 @@ results = client.hybrid_search(
 <tr><td><code translate="no">max</code></td><td>Conserver le meilleur score des éléments renvoyés pour l’entité.</td><td>Non autorisé.</td><td>Toute métrique vectorielle régulière prise en charge.</td></tr>
 <tr><td><code translate="no">sum</code></td><td>Additionner tous les scores des éléments renvoyés pour l'entité.</td><td>Non autorisé.</td><td>Uniquement les métriques à corrélation positive, telles que <code translate="no">IP</code> ou <code translate="no">COSINE</code>.</td></tr>
 <tr><td><code translate="no">avg</code></td><td>Calculer la moyenne de tous les scores des éléments renvoyés pour l'entité.</td><td>Non autorisé.</td><td>Toute métrique vectorielle régulière prise en charge.</td></tr>
-<tr><td><code translate="no">topk_sum</code></td><td>Faites la somme des meilleurs scores des éléments renvoyés par <code translate="no">K</code> pour l’entité.</td><td>Obligatoire et doit être positif.</td><td>Uniquement les métriques à corrélation positive, telles que l'<code translate="no">IP</code> ou l'<code translate="no">COSINE</code>.</td></tr>
+<tr><td><code translate="no">topk_sum</code></td><td>Faites la somme des meilleurs scores des éléments renvoyés par « <code translate="no">K</code> » pour l’entité.</td><td>Obligatoire et doit être positif.</td><td>Uniquement les métriques à corrélation positive, telles que l'<code translate="no">IP</code> ou l'<code translate="no">COSINE</code>.</td></tr>
 <tr><td><code translate="no">topk_avg</code></td><td>Calcule la moyenne des meilleurs scores des éléments renvoyés par l’ <code translate="no">K</code> pour l’entité.</td><td>Obligatoire et doit être positif.</td><td>Toute métrique vectorielle régulière prise en charge.</td></tr>
 </tbody>
 </table>
@@ -317,7 +317,7 @@ results = client.hybrid_search(
 <tr><th>Portée finale des candidats</th><th>Clé de résultat</th><th>Comportement du décalage</th><th>Quand cela se produit</th></tr>
 </thead>
 <tbody>
-<tr><td>Au niveau de l'entité</td><td>Clé primaire.</td><td>Aucun décalage d’élément dans le résultat final.</td><td>La requête hybride inclut un champ vectoriel au niveau de la collection, une requête EmbeddingList ou des requêtes au niveau des éléments sous différents champs StructArray.</td></tr>
+<tr><td>Au niveau de l'entité</td><td>Clé primaire.</td><td>Aucun décalage d'élément dans le résultat final.</td><td>La requête hybride inclut un champ vectoriel au niveau de la collection, une requête EmbeddingList ou des requêtes au niveau des éléments sous différents champs StructArray.</td></tr>
 <tr><td>Niveau élément</td><td>Clé primaire, champ StructArray parent et décalage de l'élément.</td><td>Le décalage de l’élément sélectionné peut être renvoyé lorsqu’il est exposé par l’API ou le SDK.</td><td>Tous les objets « <code translate="no">AnnSearchRequest</code> » sont au niveau des éléments et se trouvent sous le même champ StructArray.</td></tr>
 </tbody>
 </table>

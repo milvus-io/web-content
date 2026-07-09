@@ -202,7 +202,7 @@ results = client.search(
 <tr><td><code translate="no">distance</code> atau skor</td><td>Skor atau jarak antara daftar embedding kueri dan daftar embedding yang tersimpan.</td><td>Skor atau jarak antara vektor kueri dan vektor elemen Struct yang cocok.</td></tr>
 <tr><td><code translate="no">offset</code></td><td>Tidak berlaku.</td><td>Posisi berbasis nol dari elemen Struct yang cocok saat dikembalikan.</td></tr>
 <tr><td>Kunci utama yang berulang</td><td>Tidak diharapkan untuk satu kueri karena hasilnya berada di tingkat entitas.</td><td>Mungkin terjadi, karena beberapa elemen Struct dalam entitas yang sama dapat cocok.</td></tr>
-<tr><td>Bidang keluaran StructArray yang diminta</td><td>Dikembalikan dari entitas yang cocok.</td><td>Dikembalikan dengan bentuk hasil pencocokan tingkat elemen yang didukung oleh API dan SDK tujuan.</td></tr>
+<tr><td>Bidang keluaran StructArray yang diminta</td><td>Dikembalikan dari entitas yang cocok.</td><td>Dikembalikan dengan bentuk hasil pencocokan tingkat elemen yang didukung oleh API dan SDK target.</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">Kesalahan umum<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
@@ -221,7 +221,7 @@ results = client.search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Menggunak <code translate="no">chunks.emb</code> alih-alih sintaks jalur subbidang yang diperlukan, yaitu <code translate="no">chunks[emb]</code>.</p></li>
+<li><p>Menggunak <code translate="no">chunks.emb</code> alih-alih sintaks jalur subbidang yang diperlukan <code translate="no">chunks[emb]</code>.</p></li>
 <li><p>Menggunakan kueri EmbeddingList terhadap subbidang vektor yang diindeks dengan metrik vektor biasa.</p></li>
 <li><p>Menggunakan kueri vektor biasa terhadap subbidang vektor yang diindeks dengan metrik <code translate="no">MAX_SIM*</code>.</p></li>
 <li><p>Mengharapkan pencarian tingkat elemen <code translate="no">limit</code> mengembalikan sejumlah entitas induk yang unik. Pencarian ini mengembalikan hasil elemen.</p></li>
@@ -244,7 +244,7 @@ results = client.search(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>Untuk membatasi pencarian tingkat elemen berdasarkan kondisi skalar, baca <a href="/docs/id/filtered-search-with-structarray.md">Filtered Search with StructArray</a>.</p></li>
+<li><p>Untuk membatasi pencarian tingkat elemen berdasarkan kondisi skalar, baca <a href="/docs/id/filtered-search-with-structarray.md">Pencarian Terfilter dengan StructArray</a>.</p></li>
 <li><p>Untuk melakukan pencarian berdasarkan batas skor atau jarak, baca <a href="/docs/id/range-search-with-structarray.md">Pencarian Rentang dengan StructArray</a>.</p></li>
 <li><p>Untuk mengembalikan paling banyak satu hasil per entitas induk setelah pencarian tingkat elemen, baca <a href="/docs/id/grouping-search-with-structarray.md">Pencarian Pengelompokan dengan StructArray</a>.</p></li>
 <li><p>Untuk menggabungkan pencarian StructArray dengan pencarian vektor lainnya, baca <a href="/docs/id/hybrid-search-with-structarray.md">Pencarian Hibrida dengan StructArray</a>.</p></li>

@@ -307,7 +307,7 @@ Nullable StructArray 필드는 Milvus v3.0.x에서만 사용할 수 있습니다
 <tr><td>벡터 차원을 일치시켜야 합니다.</td><td>벡터 값은 해당 벡터 하위 필드에 대해 구성된 <code translate="no">dim</code> 와 일치해야 합니다.</td></tr>
 <tr><td><code translate="no">max_capacity</code> 을 준수해야 합니다.</td><td>하나의 엔티티에 포함된 Struct 요소의 수는 StructArray 필드의 <code translate="no">max_capacity</code> 을 초과해서는 안 됩니다.</td></tr>
 <tr><td>별도의 검색 모드에는 별도의 벡터 하위 필드를 사용하십시오.</td><td>EmbeddingList 검색과 요소 수준 검색이 모두 필요한 경우, 두 벡터 하위 필드 모두에 벡터 값을 작성하십시오.</td></tr>
-<tr><td><code translate="no">null</code> 는 필드가 null이 허용되는 경우에만 사용하십시오.</td><td>null이 허용되지 않는 StructArray 필드에는 유효한 StructArray 값이 필요합니다.</td></tr>
+<tr><td><code translate="no">null</code> 는 필드가 nullable인 경우에만 사용하십시오.</td><td>null이 허용되지 않는 StructArray 필드에는 유효한 StructArray 값이 필요합니다.</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">흔히 저지르는 실수<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
@@ -330,7 +330,7 @@ Nullable StructArray 필드는 Milvus v3.0.x에서만 사용할 수 있습니다
 <li><p>Struct 요소에서 필수 하위 필드를 생략하는 경우.</p></li>
 <li><p>잘못된 차원의 벡터를 삽입하는 경우.</p></li>
 <li><p><code translate="no">max_capacity</code> 에서 허용하는 것보다 더 많은 Struct 요소를 삽입하는 경우.</p></li>
-<li><p>동일한 StructArray 값 내의 다른 하위 필드는 유효한데, 하나의 하위 필드만 <code translate="no">null</code> 로 설정하는 경우.</p></li>
+<li><p>동일한 StructArray 값 내의 다른 하위 필드는 유효한데도, 하나의 하위 필드만 <code translate="no">null</code> 로 설정하는 경우.</p></li>
 <li><p>벡터를 <code translate="no">emb_list_vector</code> 에만 기록한 후 <code translate="no">chunks[emb]</code> 에서 요소 수준 검색을 실행하려고 시도하는 경우.</p></li>
 <li><p>벡터를 <code translate="no">emb</code> 에만 기록한 후, <code translate="no">chunks[emb_list_vector]</code> 에서 EmbeddingList 검색을 실행하려는 경우.</p></li>
 </ul>

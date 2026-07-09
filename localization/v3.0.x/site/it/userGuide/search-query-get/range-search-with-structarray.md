@@ -81,7 +81,7 @@ summary: >-
 <tr><td>Dati della query</td><td>La query è un vettore regolare, non un <code translate="no">EmbeddingList</code>.</td></tr>
 </tbody>
 </table>
-<p>Per la configurazione dell’indice, consultare la sezione <a href="/docs/it/index-structarray-fields.md">«Campi StructArray dell’indice</a>».</p>
+<p>Per la configurazione dell’indice, consultare <a href="/docs/it/index-structarray-fields.md">Campi StructArray dell’indice</a>.</p>
 <h2 id="Use-radius-and-rangefilter" class="common-anchor-header">Utilizzare radius e range_filter<button data-href="#Use-radius-and-rangefilter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -104,7 +104,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td><code translate="no">L2</code></td><td>No. È preferibile una distanza minore.</td><td><code translate="no">range_filter &lt;= distance &lt; radius</code></td></tr>
-<tr><td><code translate="no">IP</code>, <code translate="no">COSINE</code></td><td>Sì. Un punteggio più alto è preferibile.</td><td><code translate="no">radius &lt; distance &lt;= range_filter</code></td></tr>
+<tr><td><code translate="no">IP</code>, <code translate="no">COSINE</code></td><td>Sì. Un punteggio più alto è migliore.</td><td><code translate="no">radius &lt; distance &lt;= range_filter</code></td></tr>
 </tbody>
 </table>
 <p>Quando è impostato solo " <code translate="no">radius</code> ", la ricerca per intervallo restituisce i risultati che soddisfano il limite esterno della metrica. Scegli i valori in base alla scala di punteggio o di distanza dei tuoi embedding.</p>
@@ -163,7 +163,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>In questo esempio, <code translate="no">COSINE</code> è una metrica di tipo "similarity", quindi l'intervallo dei risultati è maggiore di <code translate="no">radius</code> e minore o uguale a <code translate="no">range_filter</code>. Il valore <code translate="no">offset</code> identifica l'elemento Struct corrispondente nell'array <code translate="no">chunks</code> al momento della restituzione.</p>
+<p>In questo esempio, <code translate="no">COSINE</code> è una metrica di tipo "similarity", quindi l'intervallo dei risultati è maggiore di <code translate="no">radius</code> e minore o uguale a <code translate="no">range_filter</code>. Il valore <code translate="no">offset</code> identifica l'elemento Struct corrispondente nell'array <code translate="no">chunks</code> quando viene restituito.</p>
 <h2 id="Add-scalar-filters" class="common-anchor-header">Aggiungere filtri scalari<button data-href="#Add-scalar-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -325,11 +325,11 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Eseguire la ricerca per intervallo su <code translate="no">chunks[emb_list_vector]</code>, che è destinato alla ricerca a livello di EmbeddingList.</p></li>
+<li><p>Eseguire la ricerca per intervallo su <code translate="no">chunks[emb_list_vector]</code>, che è destinata alla ricerca a livello di EmbeddingList.</p></li>
 <li><p>Utilizzo di <code translate="no">MAX_SIM_COSINE</code> al posto di una metrica standard come <code translate="no">COSINE</code> per la ricerca per intervallo a livello di elemento.</p></li>
 <li><p>Utilizzo di una query <code translate="no">EmbeddingList</code> al posto di una normale query vettoriale.</p></li>
 <li><p>Aspettarsi che i risultati della ricerca per intervallo siano univoci per entità padre. La ricerca per intervallo restituisce risultati corrispondenti a elementi Struct.</p></li>
-<li><p>Utilizzo di <code translate="no">chunks.emb</code> al posto della sintassi richiesta per il percorso del sottocampo <code translate="no">chunks[emb]</code>.</p></li>
+<li><p>Utilizzo di <code translate="no">chunks.emb</code> invece della sintassi richiesta per il percorso del sottocampo <code translate="no">chunks[emb]</code>.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Prossimi passi<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"

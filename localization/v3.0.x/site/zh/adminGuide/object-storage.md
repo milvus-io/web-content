@@ -64,5 +64,5 @@ title: 对象存储
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>当您运行默认的<strong>Woodpecker</strong>消息队列及其对象存储后端（<code translate="no">storage.type=minio</code> ）时，Woodpecker 会将其预写日志写入同一对象存储，并要求<strong>严格遵守 S3 条件写入语义</strong>。 并非所有对象存储都符合要求——例如，尽管华为云 OBS 可以作为常规的 Milvus 对象存储使用，但目前<strong>不支持</strong>将其用作 Woodpecker 的后端。</p>
+    </button></h2><p>当您运行默认的<strong>Woodpecker</strong>消息队列及其对象存储后端（<code translate="no">storage.type=minio</code> ）时，Woodpecker 会将其预写日志写入同一对象存储，并要求<strong>严格遵守 S3 条件写入语义</strong>。 并非所有对象存储都符合要求——例如，尽管华为云 OBS 可以作为常规的 Milvus 对象存储使用，但目前<strong>尚不支持</strong>将其用作 Woodpecker 的后端。</p>
 <p>有关各提供商的具体要求，请参阅<a href="/docs/zh/woodpecker.md">Woodpecker</a>页面上的对象存储兼容性对照表。</p>

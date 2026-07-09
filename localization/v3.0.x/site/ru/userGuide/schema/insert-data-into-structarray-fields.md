@@ -304,10 +304,10 @@ result = client.insert(
 </thead>
 <tbody>
 <tr><td>Используйте массив объектов для поля StructArray.</td><td>Значение <code translate="no">chunks</code> представляет собой список, и каждый элемент в этом списке является элементом Struct.</td></tr>
-<tr><td>Используйте имена подполей внутри каждого элемента Struct.</td><td>Вставьте ` <code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> ` внутрь ` <code translate="no">chunks</code>`, а не в ` <code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code>`.</td></tr>
+<tr><td>Используйте имена подполей внутри каждого элемента Struct.</td><td>Вставьте ` <code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> ` внутрь ` <code translate="no">chunks</code>`, а не ` <code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code>`.</td></tr>
 <tr><td>Соблюдайте схему Struct.</td><td>Каждый элемент Struct должен использовать подполя, определенные в схеме Struct.</td></tr>
 <tr><td>Размеры векторов должны совпадать.</td><td>Значения векторов должны соответствовать параметрам « <code translate="no">dim</code> », настроенным для их подполей вектора.</td></tr>
-<tr><td>Соблюдайте ограничения на размеры ( <code translate="no">max_capacity</code>).</td><td>Количество элементов Struct в одной сущности не должно превышать значение параметра « <code translate="no">max_capacity</code> » поля StructArray.</td></tr>
+<tr><td>Соблюдайте ограничения по размеру ( <code translate="no">max_capacity</code>).</td><td>Количество элементов Struct в одной сущности не должно превышать значение параметра « <code translate="no">max_capacity</code> » поля StructArray.</td></tr>
 <tr><td>Используйте отдельные векторные подполя для отдельных режимов поиска.</td><td>Если требуется как поиск по EmbeddingList, так и поиск на уровне элементов, записывайте значения вектора в оба подполя вектора.</td></tr>
 <tr><td>Используйте <code translate="no">null</code> только в том случае, если поле допускает нулевые значения.</td><td>Поля StructArray, не допускающие нулевых значений, требуют действительных значений StructArray.</td></tr>
 </tbody>

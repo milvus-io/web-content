@@ -147,7 +147,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>이 예제에서 최상위 술어 <code translate="no">category == &quot;search&quot;</code> 는 후보 엔티티를 선택하고, <code translate="no">element_filter</code> 는 <code translate="no">section</code>, <code translate="no">quality_score</code> 및 <code translate="no">has_code</code> 가 모두 동일한 Struct 요소 내에서 일치하는 청크로 요소 수준 벡터 검색을 제한합니다.</p>
+<p>이 예제에서 최상위 술어 <code translate="no">category == &quot;search&quot;</code> 는 후보 엔티티를 선택하고, <code translate="no">element_filter</code> 는 <code translate="no">section</code>, <code translate="no">quality_score</code>, <code translate="no">has_code</code> 가 모두 동일한 Struct 요소 내에서 일치하는 청크로 요소 수준 벡터 검색을 제한합니다.</p>
 <div class="alert note">
 <p>경고</p>
 <p>최상위 술어와 <code translate="no">element_filter</code> 를 결합할 때는 <code translate="no">element_filter</code> 를 식의 맨 끝에 배치해야 합니다. 필터 식에는 <code translate="no">element_filter</code> 가 하나만 포함될 수 있으며, <code translate="no">element_filter</code> 나 <code translate="no">MATCH_*</code> 를 다른 StructArray 연산자 안에 중첩할 수 없습니다.</p>

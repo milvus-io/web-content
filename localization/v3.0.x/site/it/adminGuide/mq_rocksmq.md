@@ -151,7 +151,7 @@ bash standalone_embed.sh delete
       </svg>
     </button></h2><ul>
 <li><strong>Aggiornamento dalla versione 2.5.x alla 2.6.x:</strong> <strong>Limitazioni relative alle code di messaggi</strong>: durante l’aggiornamento a Milvus v3.0-beta, è necessario mantenere la scelta attuale della coda di messaggi. Il passaggio da un sistema di code di messaggi a un altro durante l’aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code di messaggi sarà disponibile nelle versioni future.
-Poiché la versione 2.6.x imposta Woodpecker come impostazione predefinita per l’esecuzione standalone, se si desidera mantenere RocksMQ è necessario fissare <code translate="no">mq.type: rocksmq</code> nel file <code translate="no">user.yaml</code> <strong>prima</strong> dell’aggiornamento.</li>
+Poiché la versione 2.6.x imposta Woodpecker come impostazione predefinita per l’installazione standalone, se si desidera mantenere RocksMQ è necessario fissare <code translate="no">mq.type: rocksmq</code> nel file <code translate="no">user.yaml</code> <strong>prima</strong> dell’aggiornamento.</li>
 <li>Per modificare la coda dei messaggi di un'istanza in esecuzione, consultare <a href="/docs/it/switch-rocksmq-woodpecker.md">Passaggio da RocksMQ a Woodpecker</a>.</li>
 </ul>
 <h2 id="Whats-next" class="common-anchor-header">Prossimi sviluppi<button data-href="#Whats-next" class="anchor-icon" translate="no">

@@ -2,7 +2,7 @@
 id: arabic-normalization-filter.md
 title: Normalisasi Bahasa ArabCompatible with Milvus 3.0.0+
 summary: >-
-  Filter arabic_normalization menstandarkan variasi huruf Arab serta menghapus
+  Filter arabic_normalization menstandarkan varian huruf Arab serta menghapus
   tanda diakritik Arab dan Tatweel.
 beta: Milvus 3.0.0+
 ---
@@ -21,7 +21,7 @@ beta: Milvus 3.0.0+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Filter " <code translate="no">arabic_normalization</code> " adalah filter token bawaan untuk teks Arab. Filter ini menormalisasi variasi huruf khas bahasa Arab dan menghapus tanda-tanda opsional yang dapat membuat istilah-istilah Arab yang setara tampak berbeda selama analisis teks.</p>
+    </button></h1><p>Filter " <code translate="no">arabic_normalization</code> " adalah filter token bawaan untuk teks Arab. Filter ini menormalisasi variasi huruf yang khas dalam bahasa Arab dan menghapus tanda-tanda opsional yang dapat membuat istilah-istilah Arab yang setara tampak berbeda selama analisis teks.</p>
 <h2 id="Configuration" class="common-anchor-header">Konfigurasi<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +38,7 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Untuk teks Arab, gunakan <a href="/docs/id/arabic-analyzer.md"><code translate="no">arabic</code></a> dalam kebanyakan kasus. Penganalisis bawaan ini mencakup filter ini bersama dengan tokenisasi standar, pengubahan huruf besar menjadi kecil, normalisasi angka desimal, stemming bahasa Arab, dan penghapusan kata penghubung bahasa Arab. Gunakan " <code translate="no">arabic_normalization</code> " secara langsung hanya jika Anda perlu membangun alur kerja penganalisis kustom.</p>
+<p>Untuk teks Arab, gunakan <a href="/docs/id/arabic-analyzer.md"><code translate="no">arabic</code></a> dalam kebanyakan kasus. Penganalisis bawaan ini mencakup filter ini bersama dengan tokenisasi standar, pengubahan huruf besar menjadi kecil, normalisasi angka desimal, stemming bahasa Arab, dan penghapusan kata penghalang bahasa Arab. Gunakan " <code translate="no">arabic_normalization</code> " secara langsung hanya jika Anda perlu membangun alur kerja penganalisis kustom.</p>
 </div>
 <p>Untuk menggunakan filter ` <code translate="no">arabic_normalization</code> ` dalam pipa penganalisis kustom, tambahkan ke bagian ` <code translate="no">filter</code> ` di ` <code translate="no">analyzer_params</code>`:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {

@@ -232,8 +232,8 @@ summary: >-
 <tbody>
 <tr><td>기본 EmbeddingList 검색</td><td><code translate="no">MAX_SIM*</code> 메트릭으로 인덱싱된 StructArray 벡터 하위 필드에서 지원됩니다. 엔티티 수준 결과를 반환합니다.</td></tr>
 <tr><td>기본 요소 수준 검색</td><td>일반 벡터 메트릭으로 인덱싱된 StructArray 벡터 하위 필드에서 지원됩니다. 일치하는 요소의 오프셋을 반환할 수 있습니다.</td></tr>
-<tr><td>범위 검색</td><td>대상 버전의 검색 모드 및 인덱스/메트릭 지원 여부에 따라 지원됩니다. 요소 수준 StructArray 요청에 대한 하이브리드 범위 검색 동작 여부는 대상 버전을 확인하십시오.</td></tr>
-<tr><td>그룹화 검색</td><td>요소 수준 그룹화 검색은 오프셋을 반환할 수 있습니다. 요소 수준 StructArray 요청에 대한 하이브리드 검색의 그룹화 동작은 버전에 따라 달라집니다.</td></tr>
+<tr><td>범위 검색</td><td>대상 버전의 검색 모드 및 인덱스/메트릭 지원 여부에 따라 지원됩니다. 요소 수준 StructArray 요청에 대한 하이브리드 범위 검색 동작은 대상 버전을 확인하십시오.</td></tr>
+<tr><td>그룹화 검색</td><td>요소 수준 그룹화 검색은 오프셋을 반환할 수 있습니다. 요소 수준 StructArray 요청에 대한 하이브리드 검색의 그룹화 동작은 버전에 따라 다릅니다.</td></tr>
 <tr><td>하이브리드 검색</td><td>하이브리드 검색 요청은 대상 버전이 해당 검색 조합을 지원하는 경우에만 StructArray 벡터 하위 필드 요청을 포함할 수 있습니다. 각 요청은 여전히 인덱싱된 벡터 하위 필드의 메트릭 패밀리를 따릅니다.</td></tr>
 <tr><td>오프셋 출력</td><td>오프셋은 요소 수준 검색 결과에 사용할 수 있습니다. EmbeddingList 검색은 엔티티 수준 결과를 반환하며, 요소 오프셋을 주요 결과 단위로 사용하지 않습니다.</td></tr>
 </tbody>
@@ -259,7 +259,7 @@ summary: >-
 <li><p><code translate="no">$[subfield]</code> 는 StructArray 연산자 내부에서만 사용하십시오.</p></li>
 <li><p>스칼라 술어에는 스칼라 하위 필드를 사용하십시오.</p></li>
 <li><p>벡터 하위 필드를 <code translate="no">$[...]</code> 스칼라 술어 입력으로 사용하지 마십시오.</p></li>
-<li><p>JSON 경로 구문, JSON 함수, 배열 컨테이너 함수, 텍스트 일치 함수, 기하학/GIS 함수 및 Timestamptz 표현식은 StructArray 요소 수준 조건식에서 지원되지 않습니다.</p></li>
+<li><p>JSON 경로 구문, JSON 함수, 배열 컨테이너 함수, 텍스트 일치 함수, 기하학/GIS 함수 및 Timestamptz 표현식은 StructArray 요소 수준 술어에서 지원되지 않습니다.</p></li>
 <li><p>단순한 부울 표현식 대신 <code translate="no">$[has_code] == true</code> 와 같은 명시적인 부울 비교를 사용하는 것이 좋습니다.</p></li>
 </ul>
 <h2 id="Related-pages" class="common-anchor-header">관련 페이지<button data-href="#Related-pages" class="anchor-icon" translate="no">

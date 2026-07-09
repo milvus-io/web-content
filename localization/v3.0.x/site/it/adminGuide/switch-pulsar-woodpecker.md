@@ -2,7 +2,7 @@
 id: switch-pulsar-woodpecker.md
 title: Passaggio da Pulsar a Woodpecker
 summary: >-
-  Passare dalla coda di messaggi di un cluster Milvus da Pulsar a Woodpecker,
+  Passare dalla coda dei messaggi di un cluster Milvus da Pulsar a Woodpecker,
   utilizzando Helm o Milvus Operator.
 ---
 <h1 id="Switch-between-Pulsar-and-Woodpecker" class="common-anchor-header">Passaggio da Pulsar a Woodpecker<button data-href="#Switch-between-Pulsar-and-Woodpecker" class="anchor-icon" translate="no">

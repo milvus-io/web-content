@@ -25,7 +25,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Utilizzare questa pagina per raggruppare i risultati della ricerca a livello di elemento StructArray in base all'entità padre. La ricerca a livello di elemento può restituire più risultati provenienti dalla stessa entità quando diversi elementi Struct corrispondono alla query. Il raggruppamento comprime tali risultati a livello di elemento in modo che ogni entità padre appaia al massimo una volta.</p>
-<p>Questa pagina utilizza la raccolta « <code translate="no">tech_articles</code> » descritta in <a href="/docs/it/create-structarray-field.md">«Creazione di un campo StructArray</a>». La raccolta presenta un campo StructArray denominato « <code translate="no">chunks</code> ». Il sottocampo vettoriale « <code translate="no">chunks[emb]</code> » è indicizzato per la ricerca a livello di elemento con una metrica vettoriale regolare.</p>
+<p>Questa pagina utilizza la raccolta « <code translate="no">tech_articles</code> » descritta in <a href="/docs/it/create-structarray-field.md">«Creazione di un campo StructArray</a>». La raccolta presenta un campo StructArray denominato « <code translate="no">chunks</code> ». Il sottocampo vettoriale « <code translate="no">chunks[emb]</code> » è indicizzato per la ricerca a livello di elemento con una metrica vettoriale standard.</p>
 <h2 id="How-grouping-applies-to-StructArray" class="common-anchor-header">Come si applica il raggruppamento a StructArray<button data-href="#How-grouping-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -288,7 +288,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Utilizzo del raggruppamento con ` <code translate="no">chunks[emb_list_vector]</code>`, destinato alla ricerca su `EmbeddingList`.</p></li>
+<li><p>Utilizzo del raggruppamento con ` <code translate="no">chunks[emb_list_vector]</code>`, che è destinato alla ricerca su `EmbeddingList`.</p></li>
 <li><p>Raggruppamento in base a un campo scalare non chiave primaria.</p></li>
 <li><p>Raggruppamento in base a più campi. Il raggruppamento StructArray a livello di elemento supporta solo il raggruppamento in base alla chiave primaria.</p></li>
 <li><p>Aspettarsi che i risultati raggruppati rappresentino ogni elemento Struct corrispondente. Il raggruppamento restituisce al massimo un risultato per entità padre.</p></li>

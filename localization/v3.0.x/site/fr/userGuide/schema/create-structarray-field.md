@@ -3,9 +3,10 @@ id: create-structarray-field.md
 title: Créer un champ StructArray
 summary: >-
   Créez un champ StructArray lorsqu'une entité doit contenir une liste ordonnée
-  d'éléments structurés. Un champ StructArray est un champ Array dont le type
-  d'élément est Struct. Chaque élément Struct respecte le même schéma et peut
-  contenir des sous-champs scalaires, des sous-champs vectoriels, ou les deux.
+  d'éléments structurés. Un champ StructArray est un champ de type tableau dont
+  le type d'élément est Struct. Chaque élément Struct respecte le même schéma et
+  peut contenir des sous-champs scalaires, des sous-champs vectoriels, ou les
+  deux.
 ---
 <h1 id="Create-a-StructArray-Field" class="common-anchor-header">Créer un champ StructArray<button data-href="#Create-a-StructArray-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -63,7 +64,7 @@ summary: >-
 <tr><td><code translate="no">page</code></td><td><code translate="no">INT64</code></td><td>Numéro de page ou position logique du bloc.</td></tr>
 <tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>Score au niveau du bloc utilisé dans le filtrage scalaire et les exemples de plage.</td></tr>
 <tr><td><code translate="no">has_code</code></td><td><code translate="no">BOOL</code></td><td>Indique si le segment contient du code.</td></tr>
-<tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Sous-champ vectoriel pour la recherche dans EmbeddingList avec les métriques « <code translate="no">MAX_SIM*</code> ».</td></tr>
+<tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Sous-champ vectoriel pour la recherche dans EmbeddingList avec les métriques de type « <code translate="no">MAX_SIM*</code> ».</td></tr>
 <tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Sous-champ vectoriel pour la recherche au niveau des éléments avec des métriques vectorielles classiques.</td></tr>
 </tbody>
 </table>
@@ -237,7 +238,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Une fois que vous avez créé un champ StructArray, faites référence à ses sous-champs à l’aide de la syntaxe de chemin d’accès « <code translate="no">structArray[subfield]</code> ». Utilisez cette syntaxe lorsque vous créez des index, effectuez des recherches dans des sous-champs vectoriels, générez des sous-champs ou créez des filtres scalaires.</p>
+    </button></h2><p>Une fois que vous avez créé un champ StructArray, faites référence à ses sous-champs à l’aide de la syntaxe de chemin d’accès « <code translate="no">structArray[subfield]</code> ». Utilisez cette syntaxe lorsque vous créez des index, effectuez des recherches dans des sous-champs vectoriels, générez des sous-champs de sortie ou créez des filtres scalaires.</p>
 <table>
 <thead>
 <tr><th>Chemin</th><th>Signification</th><th>Utilisation courante</th></tr>
@@ -250,7 +251,7 @@ client.create_collection(
 <tr><td><code translate="no">chunks[emb]</code></td><td>Le sous-champ vectoriel utilisé indépendamment par chaque élément Struct.</td><td>Recherche vectorielle au niveau des éléments.</td></tr>
 </tbody>
 </table>
-<h2 id="Make-a-StructArray-field-nullable" class="common-anchor-header">Rendre un champ StructArray nullable<button data-href="#Make-a-StructArray-field-nullable" class="anchor-icon" translate="no">
+<h2 id="Make-a-StructArray-field-nullable" class="common-anchor-header">Rendre un champ StructArray non nul<button data-href="#Make-a-StructArray-field-nullable" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -277,7 +278,7 @@ client.create_collection(
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Avertissement
-Les champs StructArray pouvant prendre la valeur null ne sont disponibles que dans Milvus v3.0.x. Pour un champ StructArray pouvant prendre la valeur null, une entité peut fournir une valeur StructArray valide ou définir l’ensemble du champ sur « <code translate="no">null</code> ». Lors de l’insertion d’une valeur StructArray valide, tous les sous-champs doivent être soit nuls, soit avoir des valeurs valides. L’insertion d’une entité dont certains sous-champs sont définis sur null et d’autres sur des valeurs valides entraîne une erreur. Pour plus de détails, consultez la section « <a href="/docs/fr/structarray-limits.md">Limites de StructArray</a> ».</p>
+Les champs StructArray pouvant prendre la valeur null ne sont disponibles que dans Milvus v3.0.x. Pour un champ StructArray pouvant prendre la valeur null, une entité peut fournir une valeur StructArray valide ou définir l’ensemble du champ sur la valeur « <code translate="no">null</code> ». Lors de l’insertion d’une valeur StructArray valide, tous les sous-champs doivent être soit nuls, soit avoir des valeurs valides. L’insertion d’une entité dont certains sous-champs sont définis sur null et d’autres sur des valeurs valides entraîne une erreur. Pour plus de détails, consultez la section « <a href="/docs/fr/structarray-limits.md">Limites de StructArray</a> ».</p>
 </div>
 <h2 id="Add-a-StructArray-field-to-an-existing-collection" class="common-anchor-header">Ajouter un champ StructArray à une collection existante<button data-href="#Add-a-StructArray-field-to-an-existing-collection" class="anchor-icon" translate="no">
       <svg translate="no"

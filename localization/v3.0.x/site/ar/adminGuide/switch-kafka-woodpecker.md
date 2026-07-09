@@ -90,7 +90,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p><strong>الخطوة 1: تحقق من أن مثيل Milvus قيد التشغيل.</strong></p>
-<p><strong>الخطوة 2: قم بتكوين اتصال Kafka المستهدف وأعد تشغيل Milvus.</strong> يتطلب التبديل أن يكون Milvus على دراية مسبقة باتصال Kafka، لذا قم بكتابته في <code translate="no">user.yaml</code> عبر <code translate="no">extraConfigFiles</code> وقم بالتطبيق باستخدام <code translate="no">helm upgrade</code> (الذي يقوم بتحديث البودات). يعد <code translate="no">streaming.enabled=true</code> مطلوبًا لميزة Switch MQ. للحصول على تفاصيل SASL/SSL، راجع <a href="/docs/ar/connect_kafka_ssl.md">«الاتصال بـ Kafka باستخدام SASL/SSL</a>».</p>
+<p><strong>الخطوة 2: قم بتكوين اتصال Kafka المستهدف وأعد تشغيل Milvus.</strong> يتطلب التبديل أن يكون Milvus على علم مسبق باتصال Kafka، لذا قم بكتابته في <code translate="no">user.yaml</code> عبر <code translate="no">extraConfigFiles</code> وقم بالتطبيق باستخدام <code translate="no">helm upgrade</code> (الذي يقوم بتحديث البودات). يعد <code translate="no">streaming.enabled=true</code> مطلوبًا لميزة Switch MQ. للحصول على تفاصيل SASL/SSL، راجع <a href="/docs/ar/connect_kafka_ssl.md">«الاتصال بـ Kafka باستخدام SASL/SSL</a>».</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -156,7 +156,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p><strong>الخطوة 1: تحقق من أن مثيل Milvus قيد التشغيل.</strong></p>
-<p><strong>الخطوة 2: تنفيذ عملية التبديل في MQ.</strong> خدمة MixCoord غير مكشوفة، لذا قم بتشغيل واجهة برمجة تطبيقات (API) التبديل من داخل بود MixCoord:</p>
+<p><strong>الخطوة 2: تنفيذ عملية التبديل في MQ.</strong> خدمة MixCoord غير متاحة للخارج، لذا قم بتشغيل واجهة برمجة تطبيقات (API) التبديل من داخل بود MixCoord:</p>
 <pre><code translate="no" class="language-shell">kubectl exec -it &lt;mixcoord-pod&gt; -- \
   curl -X POST http://localhost:9091/management/wal/alter \
   -H &quot;Content-Type: application/json&quot; \
@@ -218,7 +218,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">kubectl patch -f change_configmap.yaml --patch-file change_configmap.yaml --type merge
 <button class="copy-code-btn"></button></code></pre>
-<p>انتظر حتى تصبح جميع البودات جاهزة، ثم تأكد من أن تكوين الوصول إلى Kafka قد تم تضمينه في تكوين Milvus.</p>
+<p>انتظر حتى تصبح جميع البودات جاهزة، ثم تأكد من أن تكوين الوصول إلى Kafka قد تم تحويله إلى تكوين Milvus.</p>
 <p><strong>الخطوة 3: تنفيذ التبديل إلى MQ.</strong></p>
 <div class="alert note">
 <p>تأكد من أن Kafka الهدف لا يحتوي على مواضيع Milvus من تكوين سابق. إذا كان هذا هو التبديل الأول إلى Kafka، فتخط هذه الملاحظة؛ وإلا فقم أولاً بتنظيف مواضيع Milvus المتبقية التي تحمل نفس الأسماء.</p>
@@ -231,7 +231,7 @@ summary: >-
 <p><strong>الخطوة 4: تحقق من اكتمال عملية التبديل.</strong></p>
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
-<p>يتم تسجيل التبديل الناجح في <code translate="no">[mqTypeValue=kafka]</code>.</p>
+<p>يتم تسجيل " <code translate="no">[mqTypeValue=kafka]</code>" عند نجاح عملية التبديل.</p>
 <p><strong>الخطوة 5: (اختياري) قم بإزالة بيانات Woodpecker.</strong> احذف بيانات Woodpecker الموجودة على MinIO/S3 (تحت <code translate="no">&lt;rootPath&gt;/wp/...</code> ، وعادةً ما تكون <code translate="no">files/wp/...</code>) وبيانات تعريف Woodpecker في etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). إذا كنت تخطط للعودة إلى Woodpecker لاحقًا، فقم بإزالة هذه الملفات أولاً.</p>
 <h2 id="Supported-scenarios" class="common-anchor-header">السيناريوهات المدعومة<button data-href="#Supported-scenarios" class="anchor-icon" translate="no">
       <svg translate="no"

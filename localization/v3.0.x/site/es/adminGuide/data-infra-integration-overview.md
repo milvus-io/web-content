@@ -23,7 +23,7 @@ summary: >-
     </button></h1><p>Milvus se basa en una infraestructura de datos abierta para sus dependencias principales. En este capítulo se describen los componentes que se pueden integrar y configurar:</p>
 <ul>
 <li><strong><a href="/docs/es/etcd.md">Metadatos</a></strong>: Milvus almacena metadatos (esquemas de colecciones, estado de los nodos, puntos de control de consumo) en etcd.</li>
-<li><strong><a href="/docs/es/object-storage.md">Almacenamiento de objetos</a></strong>: Milvus almacena los archivos de índice y los registros binarios en MinIO, AWS S3 u otros sistemas de almacenamiento de objetos en la nube compatibles con S3.</li>
+<li><strong><a href="/docs/es/object-storage.md">Almacenamiento de objetos</a></strong>: Milvus almacena los archivos de índice y los registros binarios en MinIO, AWS S3 u otro almacenamiento de objetos en la nube compatible con S3.</li>
 <li><strong><a href="/docs/es/mqtype-overview.md">Cola de mensajes</a></strong>: Milvus utiliza un registro de escritura anticipada (WAL): Woodpecker (por defecto), Pulsar, Kafka o RocksMQ.</li>
 </ul>
-<p>De forma predeterminada, una nueva implementación de Milvus 3.x se ejecuta con <strong>Woodpecker</strong> como cola de mensajes, <strong>etcd</strong> para los metadatos y <strong>MinIO</strong> para el almacenamiento de objetos, sin necesidad de una infraestructura de mensajería adicional.</p>
+<p>De forma predeterminada, una nueva implementación de Milvus 3.x se ejecuta con <strong>Woodpecker</strong> como cola de mensajes, <strong>etcd</strong> para los metadatos y <strong>MinIO</strong> para el almacenamiento de objetos, sin necesidad de infraestructura de mensajería adicional.</p>

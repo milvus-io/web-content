@@ -1,7 +1,7 @@
 ---
 id: mqtype-overview.md
 title: 消息队列概述
-summary: 概述 Milvus 支持的消息队列（mqType）选项，以及在独立部署和分布式部署中应选用哪一种。
+summary: 概述 Milvus 支持的消息队列（mqType）选项，以及在独立部署和分布式部署中应分别使用哪一种。
 ---
 <h1 id="Message-Queue-Overview" class="common-anchor-header">消息队列概述<button data-href="#Message-Queue-Overview" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -23,7 +23,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Il supporto di StructArray comprende la definizione dello schema, l'inserimento dei payload, l'indicizzazione, le modalità di ricerca e i filtri specifici di StructArray. Utilizza questa pagina come riferimento per i limiti prima di affidarti al comportamento di StructArray in produzione.</p>
-<p>La maggior parte dei limiti di StructArray deriva da una delle tre fonti seguenti: il modello di schema di StructArray, la modalità di ricerca scelta per i sottocampi vettoriali e la versione di Milvus su cui viene eseguita la collezione.</p>
+<p>La maggior parte dei limiti di StructArray deriva da una delle tre fonti seguenti: il modello di schema di StructArray, la modalità di ricerca scelta per i sottocampi vettoriali e la versione di Milvus su cui gira la propria collezione.</p>
 <h2 id="Limits-at-a-glance" class="common-anchor-header">Panoramica dei limiti<button data-href="#Limits-at-a-glance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -52,7 +52,7 @@ summary: >-
 <tr><td>Inserimento della forma</td><td>Inserire un campo StructArray come array di oggetti. Non utilizzare la sintassi dei percorsi all'interno dei payload di inserimento.</td></tr>
 <tr><td>Indici vettoriali</td><td>Un campo vettoriale o un sottocampo vettoriale accetta un solo indice. Utilizzare sottocampi vettoriali separati per la ricerca EmbeddingList e la ricerca a livello di elemento.</td></tr>
 <tr><td>Funzioni</td><td>Le funzioni di campo non sono supportate per i campi o i sottocampi all'interno di un campo StructArray.</td></tr>
-<tr><td>Campi nullabili</td><td>I campi StructArray nullabili sono soggetti a restrizioni di versione. Quando supportati, il valore null si applica all'intero campo StructArray, non a un singolo elemento Struct in modo indipendente.</td></tr>
+<tr><td>Campi nullabili</td><td>I campi StructArray nullabili sono soggetti a restrizioni di versione. Quando supportati, il valore null si applica all'intero campo StructArray, non a singoli elementi Struct in modo indipendente.</td></tr>
 <tr><td>Aggiunta dinamica di un campo</td><td>L'aggiunta di un campo StructArray a una collezione esistente dipende dalla versione e richiede che il campo aggiunto sia nullabile.</td></tr>
 </tbody>
 </table>
@@ -199,7 +199,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un sottocampo vettoriale StructArray può essere indicizzato sia per la ricerca EmbeddingList che per la ricerca a livello di elemento. Lo stesso sottocampo vettoriale non può utilizzare entrambe le famiglie di metriche, poiché ogni campo vettoriale o sottocampo vettoriale accetta un solo indice.</p>
+    </button></h2><p>Un sottocampo vettoriale StructArray può essere indicizzato sia per la ricerca EmbeddingList che per la ricerca a livello di elemento. Lo stesso sottocampo vettoriale non può utilizzare entrambe le famiglie di metriche poiché ogni campo vettoriale o sottocampo vettoriale accetta un solo indice.</p>
 <table>
 <thead>
 <tr><th>Modalità di ricerca</th><th>Famiglia di metriche</th><th>Livello dei risultati</th></tr>
@@ -261,7 +261,7 @@ summary: >-
 <li><p>Utilizzare ` <code translate="no">$[subfield]</code> ` solo all’interno degli operatori StructArray.</p></li>
 <li><p>Utilizzare i sottocampi scalari per i predicati scalari.</p></li>
 <li><p>Non utilizzare sottocampi vettoriali come input per i predicati scalari di tipo " <code translate="no">$[...]</code> ".</p></li>
-<li><p>La sintassi JSON path, le funzioni JSON, le funzioni dei contenitori array, le funzioni di corrispondenza del testo, le funzioni di geometria/GIS e le espressioni Timestamptz non sono supportate per i predicati a livello di elemento di StructArray.</p></li>
+<li><p>La sintassi JSON path, le funzioni JSON, le funzioni dei contenitori array, le funzioni di corrispondenza del testo, le funzioni di geometria/GIS e le espressioni Timestamptz non sono supportate per i predicati a livello di elemento StructArray.</p></li>
 <li><p>Preferire confronti booleani espliciti, come ` <code translate="no">$[has_code] == true</code> `, anziché semplici espressioni booleane.</p></li>
 </ul>
 <h2 id="Related-pages" class="common-anchor-header">Pagine correlate<button data-href="#Related-pages" class="anchor-icon" translate="no">
@@ -280,7 +280,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>Per creare un campo StructArray, consultare la sezione <a href="/docs/it/create-structarray-field.md">Creazione di un campo StructArray</a>.</p></li>
+<li><p>Per creare un campo StructArray, consultare la sezione <a href="/docs/it/create-structarray-field.md">Creare un campo StructArray</a>.</p></li>
 <li><p>Per inserire dati, consultare <a href="/docs/it/insert-data-into-structarray-fields.md">Inserimento di dati nei campi StructArray</a>.</p></li>
 <li><p>Per creare indici vettoriali e scalari, consultare <a href="/docs/it/index-structarray-fields.md">Indice dei campi StructArray</a>.</p></li>
 <li><p>Per rivedere la sintassi dei filtri StructArray, consultare <a href="/docs/it/struct-array-operators.md">Operatori StructArray</a>.</p></li>

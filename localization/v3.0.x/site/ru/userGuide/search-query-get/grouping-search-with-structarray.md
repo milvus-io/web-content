@@ -25,7 +25,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Используйте эту страницу для группировки результатов поиска на уровне элементов StructArray по родительскому объекту. Поиск на уровне элементов может возвращать несколько результатов из одного и того же объекта, если несколько элементов Struct соответствуют запросу. Группировка сворачивает эти результаты на уровне элементов, так что каждый родительский объект появляется не более одного раза.</p>
-<p>На этой странице используется коллекция « <code translate="no">tech_articles</code> » из раздела <a href="/docs/ru/create-structarray-field.md">«Создание поля StructArray</a>». В коллекции имеется поле StructArray с именем « <code translate="no">chunks</code> ». Поле вектора « <code translate="no">chunks[emb]</code> » индексировано для поиска на уровне элементов с использованием стандартной векторной метрики.</p>
+<p>На этой странице используется коллекция « <code translate="no">tech_articles</code> » из раздела <a href="/docs/ru/create-structarray-field.md">«Создание поля StructArray</a>». В коллекции имеется поле StructArray с именем « <code translate="no">chunks</code> ». Поле-вектор « <code translate="no">chunks[emb]</code> » индексируется для поиска на уровне элементов с использованием стандартной векторной метрики.</p>
 <h2 id="How-grouping-applies-to-StructArray" class="common-anchor-header">Как группировка применяется к StructArray<button data-href="#How-grouping-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -48,11 +48,11 @@ summary: >-
 <tbody>
 <tr><td>Поиск в EmbeddingList</td><td>Не поддерживается.</td><td>Не применимо.</td></tr>
 <tr><td>Поиск на уровне элементов</td><td>Поддерживается путем группировки по первичному ключу.</td><td>Возвращается не более одного результата на каждую родительскую сущность. Метаданные на уровне элементов сохраняются, поэтому индекс или смещение выбранного элемента могут быть возвращены при предоставлении доступа через API или SDK.</td></tr>
-<tr><td>Гибридный поиск</td><td>Поддерживается только в том случае, если все подзапросы нацелены на векторные поля на уровне элементов в рамках одного и того же поля StructArray.</td><td>Вспомогательные поиски на уровне элементов группируются по первичному ключу перед окончательной обработкой результатов.</td></tr>
+<tr><td>Гибридный поиск</td><td>Поддерживается только в том случае, если все подзапросы нацелены на векторные поля на уровне элементов в рамках одного и того же поля StructArray.</td><td>Вспомогательные поиски на уровне элементов группируются по первичному ключу перед обработкой окончательного результата.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
-<p>Используйте группировку, если поиск на уровне элементов без группировки возвращает слишком много повторяющихся родительских сущностей. Если вы хотите, чтобы каждый совпадающий элемент Struct рассматривался как отдельное совпадение, используйте <a href="/docs/ru/basic-vector-search-with-structarray.md">базовый векторный поиск с StructArray</a> без параметра ` <code translate="no">group_by_field</code>`.</p>
+<p>Используйте группировку, если поиск на уровне элементов без группировки возвращает слишком много дубликатов родительских сущностей. Если вы хотите, чтобы каждый совпадающий элемент Struct рассматривался как отдельный результат, используйте <a href="/docs/ru/basic-vector-search-with-structarray.md">базовый векторный поиск с StructArray</a> без параметра ` <code translate="no">group_by_field</code>`.</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">Прежде чем начать<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -132,7 +132,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>Без группировки один и тот же <code translate="no">doc_id</code> может появиться несколько раз, если запросу соответствуют несколько фрагментов. При использовании <code translate="no">group_by_field=&quot;doc_id&quot;</code> каждая родительская сущность появляется не более одного раза. Группировка сохраняет метаданные на уровне элементов, поэтому сгруппированный результат по-прежнему может включать выбранный индекс или смещение элемента Struct, если API или SDK его предоставляют.</p>
+<p>Без группировки один и тот же <code translate="no">doc_id</code> может появиться несколько раз, если запросу соответствуют несколько фрагментов. При использовании <code translate="no">group_by_field=&quot;doc_id&quot;</code> каждая родительская сущность появляется не более одного раза. Группировка сохраняет метаданные на уровне элементов, поэтому сгруппированный результат по-прежнему может включать выбранный индекс или смещение элемента Struct, если API или SDK предоставляют эту информацию.</p>
 <h2 id="Add-scalar-filters" class="common-anchor-header">Добавление скалярных фильтров<button data-href="#Add-scalar-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -311,8 +311,8 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>Чтобы сначала изучить поиск на уровне элементов без группировки, ознакомьтесь со статьёй <a href="/docs/ru/basic-vector-search-with-structarray.md">«Базовый векторный поиск с использованием StructArray</a>».</p></li>
+<li><p>Чтобы сначала изучить поиск на уровне элементов без группировки, ознакомьтесь с разделом <a href="/docs/ru/basic-vector-search-with-structarray.md">«Базовый векторный поиск с использованием StructArray</a>».</p></li>
 <li><p>Чтобы добавить скалярные фильтры к группированному поиску, ознакомьтесь с разделом <a href="/docs/ru/filtered-search-with-structarray.md">«Фильтрованный поиск с StructArray</a>».</p></li>
-<li><p>Чтобы использовать границы оценки или расстояния вместо группировки, ознакомьтесь с разделом <a href="/docs/ru/range-search-with-structarray.md">«Поиск по диапазону с использованием StructArray</a>».</p></li>
+<li><p>Чтобы использовать границы оценки или расстояния вместо группировки, ознакомьтесь с разделом <a href="/docs/ru/range-search-with-structarray.md">«Поиск по диапазону с StructArray</a>».</p></li>
 <li><p>Чтобы ознакомиться с ограничениями поиска с использованием StructArray, прочтите раздел <a href="/docs/ru/structarray-limits.md">«Ограничения StructArray</a>».</p></li>
 </ol>

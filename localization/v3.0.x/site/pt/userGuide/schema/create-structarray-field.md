@@ -23,7 +23,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Crie um campo StructArray quando uma entidade precisar de conter uma lista ordenada de elementos estruturados. Um campo StructArray é um campo Array cujo tipo de elemento é Struct. Cada elemento Struct segue o mesmo esquema e pode conter subcampos escalares, subcampos vetoriais ou ambos.</p>
-<p>Esta página mostra como definir um esquema Struct, adicioná-lo como um campo StructArray, selecionar subcampos para pesquisa e filtragem posteriores e compreender as regras do esquema aplicáveis antes de inserir ou indexar dados.</p>
+<p>Esta página mostra como definir um esquema Struct, adicioná-lo como um campo StructArray, escolher subcampos para pesquisa e filtragem posteriores e compreender as regras do esquema que se aplicam antes de inserir ou indexar dados.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Antes de começar<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +39,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Esta página utiliza uma coleção denominada « <code translate="no">tech_articles</code> ». Cada entidade representa um artigo técnico, e o campo « <code translate="no">chunks</code> » armazena dados ao nível de fragmentos como elementos Struct.</p>
+    </button></h2><p>Esta página utiliza uma coleção denominada « <code translate="no">tech_articles</code> ». Cada entidade representa um artigo técnico, e o campo « <code translate="no">chunks</code> » armazena dados ao nível de fragmentos como elementos «Struct».</p>
 <table>
 <thead>
 <tr><th>Campo</th><th>Tipo</th><th>Finalidade</th></tr>
@@ -58,7 +58,7 @@ summary: >-
 <tr><th>Subcampo</th><th>Tipo</th><th>Finalidade</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">text</code></td><td><code translate="no">VARCHAR</code></td><td>Texto do fragmento.</td></tr>
+<tr><td><code translate="no">text</code></td><td><code translate="no">VARCHAR</code></td><td>Texto do bloco.</td></tr>
 <tr><td><code translate="no">section</code></td><td><code translate="no">VARCHAR</code></td><td>Nome da secção, como « <code translate="no">index</code> », « <code translate="no">search</code> » ou « <code translate="no">filter</code> ».</td></tr>
 <tr><td><code translate="no">page</code></td><td><code translate="no">INT64</code></td><td>Número da página ou posição lógica do fragmento.</td></tr>
 <tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>Pontuação ao nível do fragmento utilizada na filtragem escalar e nos exemplos de intervalo.</td></tr>
@@ -105,7 +105,7 @@ summary: >-
 <tr><td><code translate="no">Array</code></td><td>Não suportado</td><td>Os subcampos JSON não são suportados nos campos StructArray.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Não suportado</td><td>Os subcampos de geometria e as funções GIS não são suportados nos campos StructArray.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Não suportado</td><td>Os subcampos de texto não são suportados nos campos StructArray.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Não suportado</td><td>Os subcampos «Timestamptz» e as expressões específicas de tempo não são suportados nos campos StructArray.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Não suportado</td><td>Os subcampos «Timestamptz» e as expressões específicas de hora não são suportados nos campos StructArray.</td></tr>
 <tr><td><code translate="no">Array</code>, <code translate="no">ArrayOfVector</code>, <code translate="no">Struct</code> ou <code translate="no">ArrayOfStruct</code></td><td>Não suportado</td><td>Um campo StructArray não pode conter matrizes aninhadas, matrizes vetoriais aninhadas, campos Struct aninhados ou campos Array-of-Struct aninhados.</td></tr>
 </tbody>
 </table>
@@ -265,7 +265,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus v3.0.x suporta campos StructArray nulos. Um campo StructArray nulo permite que uma entidade armazene valores do tipo « <code translate="no">null</code> » para todo o campo StructArray.</p>
+    </button></h2><p>O Milvus v3.0.x suporta campos StructArray nulos. Um campo StructArray nulo permite que uma entidade armazene um valor ` <code translate="no">null</code> ` para todo o campo StructArray.</p>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;chunks&quot;</span>,
     datatype=DataType.ARRAY,
@@ -339,7 +339,7 @@ client.add_collection_struct_field(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Após a adição do campo StructArray, as entidades existentes devolvem ` <code translate="no">null</code> ` para o novo campo em todos os seus subcampos.</p>
-<p>Depois de um campo StructArray ser criado, não é possível adicionar novos subcampos a esse campo StructArray existente. Se precisar de atributos de elemento adicionais mais tarde, chame <code translate="no">drop_collection_field()</code> para eliminar o campo StructArray e, em seguida, adicione um novo campo StructArray com o esquema Struct atualizado.</p>
+<p>Depois de criado um campo StructArray, não é possível adicionar novos subcampos a esse campo StructArray existente. Se, posteriormente, necessitar de atributos de elemento adicionais, chame ` <code translate="no">drop_collection_field()</code> ` para eliminar o campo StructArray e, em seguida, adicione um novo campo StructArray com o esquema Struct atualizado.</p>
 <pre><code translate="no" class="language-python">client.drop_collection_field(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
     field_name=<span class="hljs-string">&quot;chunks&quot;</span>,
