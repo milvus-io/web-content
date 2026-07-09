@@ -121,7 +121,7 @@ Memory-mapped files enable efficient data handling by mapping file contents dire
 
 ## Milvus CDC
 
-[Milvus CDC](https://milvus.io/docs/milvus-cdc-overview.md) (Change data capture) is a user-friendly tool that can capture and synchronize incremental data in Milvus instances. It ensures the reliability of business data by seamlessly transferring it between source and target instances, allowing for easy incremental backup and disaster recovery.
+[Milvus CDC](https://milvus.io/docs/milvus_cdc_overview.md) (Change data capture) replicates data changes from one Milvus cluster to another for primary-standby disaster recovery.
 
 ## Milvus CLI
 

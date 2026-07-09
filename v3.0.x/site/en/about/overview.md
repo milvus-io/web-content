@@ -56,7 +56,7 @@ Milvus was designed from day one to be a highly efficient vector database system
 
 **Advanced Search Algorithms**: Milvus supports a wide range of in-memory and on-disk indexing/search algorithms, including IVF, HNSW, DiskANN, and more, all of which have been deeply optimized. Compared to popular implementations like FAISS and HNSWLib, Milvus delivers 30%-70% better performance.
 
-**Search Engine in C++**: Over 80% of a vector database's performance is determined by its search engine. Milvus uses C++ for this critical component due to the language's high performance, low-level optimization, and efficient resource management. Most importantly, Milvus integrates numerous hardware-aware code optimizations, ranging from assembly-level vectorization to multi-thread parallelization and scheduling, to fully leverage hardware capabilities. 
+**Search Engine in C++**: Over 80% of a vector database's performance is determined by its search engine. Milvus uses C++ for this critical component due to the language's high performance, low-level optimization, and efficient resource management. Most importantly, Milvus integrates numerous hardware-aware code optimizations, ranging from assembly-level vectorization to multi-thread parallelization and scheduling, to fully leverage hardware capabilities.
 
 **Column-Oriented**: Milvus is a column-oriented vector database system. The primary advantages come from the data access patterns. When performing queries, a column-oriented database reads only the specific fields involved in the query, rather than entire rows, which greatly reduces the amount of data accessed. Additionally, operations on column-based data can be easily vectorized, allowing for operations to be applied in the entire columns at once, further enhancing performance.
 
@@ -129,7 +129,7 @@ In addition to primitive data types, Milvus supports various advanced data types
 
 - **Data Security and Fine-grain Access Control**
 
-  Milvus ensures data security by implementing [mandatory user authentication](authenticate.md), [TLS encryption](tls.md), and [Role-Based Access Control (RBAC)](rbac.md). User authentication ensures that only authorized users with valid credentials can access the database, while TLS encryption secures all communications within the network. Additionally, RBAC allows for fine-grained access control by assigning specific permissions to users based on their roles. These features make Milvus a robust and secure choice for enterprise applications, protecting sensitive data from unauthorized access and potential breaches. 
+  Milvus ensures data security by implementing [mandatory user authentication](authenticate.md), [TLS encryption](tls.md), and [Role-Based Access Control (RBAC)](rbac.md). User authentication ensures that only authorized users with valid credentials can access the database, while TLS encryption secures all communications within the network. Additionally, RBAC allows for fine-grained access control by assigning specific permissions to users based on their roles. These features make Milvus a robust and secure choice for enterprise applications, protecting sensitive data from unauthorized access and potential breaches.
 
 ### AI Integrations
 
@@ -157,7 +157,7 @@ In addition to primitive data types, Milvus supports various advanced data types
   Milvus Backup is a tool that allows users to back up and restore Milvus data. It provides both CLI and API to fit itself into different application scenarios. For details, refer to [Milvus Backup](milvus_backup_overview.md).
 
 - Milvus Capture Data Change (CDC)
-  Milvus-CDC can capture and synchronize incremental data in Milvus instances and ensures the reliability of business data by seamlessly transferring it between source and target instances, allowing for easy incremental backup and disaster recovery. For details, refer to [Milvus CDC](milvus-cdc-overview.md).
+  Milvus CDC replicates data changes from one Milvus cluster to another for primary-standby disaster recovery. For details, refer to [Milvus CDC](milvus_cdc_overview.md).
 
 - Milvus Connectors
   Milvus has planned a set of connectors for you to seamlessly integrate Milvus with third-party tools, such as Apache Spark. Currently, you can use our Spark Connector to feed your Milvus data to Apache Spark for machine-learning processing. For details, refer to [Spark-Milvus Connector](integrate_with_spark.md).
