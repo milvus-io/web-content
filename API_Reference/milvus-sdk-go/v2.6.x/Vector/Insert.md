@@ -15,6 +15,7 @@ option := milvusclient.NewColumnBasedInsertOption(collName).
 	WithFloatVectorColumn(colName, dim, data).
 	WithBinaryVectorColumn(colName, dim, data).
 	WithBoolColumn(colName, data).
+	WithStructArrayColumn(colName, structSchema, rows).
 	WithPartition(partitionName)
 
 // Alternative (row-based):
@@ -33,55 +34,59 @@ The name of the target collection.
 
 - `WithColumns(columns ...column.Column)`
 
-Inserts arbitrary typed columns.
+    Inserts arbitrary typed columns.
 
 - `WithBoolColumn(colName string, data []bool)`
 
-Inserts a column of boolean values.
+    Inserts a column of boolean values.
 
 - `WithInt8Column(colName string, data []int8)`
 
-Inserts a column of int8 values.
+    Inserts a column of int8 values.
 
 - `WithInt16Column(colName string, data []int16)`
 
-Inserts a column of int16 values.
+    Inserts a column of int16 values.
 
 - `WithInt32Column(colName string, data []int32)`
 
-Inserts a column of int32 values.
+    Inserts a column of int32 values.
 
 - `WithInt64Column(colName string, data []int64)`
 
-Inserts a column of int64 values.
+    Inserts a column of int64 values.
 
 - `WithVarcharColumn(colName string, data []string)`
 
-Inserts a column of string values.
+    Inserts a column of string values.
 
 - `WithFloatVectorColumn(colName string, dim int, data [][]float32)`
 
-Inserts a column of float32 dense vectors.
+    Inserts a column of float32 dense vectors.
 
 - `WithFloat16VectorColumn(colName string, dim int, data [][]float32)`
 
-Inserts a column of float16 vectors (converted from float32).
+    Inserts a column of float16 vectors (converted from float32).
 
 - `WithBFloat16VectorColumn(colName string, dim int, data [][]float32)`
 
-Inserts a column of bfloat16 vectors (converted from float32).
+    Inserts a column of bfloat16 vectors (converted from float32).
 
 - `WithBinaryVectorColumn(colName string, dim int, data [][]byte)`
 
-Inserts a column of binary vectors.
+    Inserts a column of binary vectors.
 
 - `WithInt8VectorColumn(colName string, dim int, data [][]int8)`
 
-Inserts a column of int8 vectors.
+    Inserts a column of int8 vectors.
 
 - `WithPartition(partitionName string)`
 
-Targets a specific partition for the insert operation.
+    Targets a specific partition for the insert operation.
+
+- `WithStructArrayColumn(colName string, structSchema *entity.StructSchema, rows []map[string]any)`
+
+    Inserts a struct-array column built from per-row maps. Each row map is keyed by struct sub-field name. Scalar sub-fields use slices such as []int32 or []string, and vector sub-fields use nested slices such as [][]float32, [][]byte, or [][]int8.
 
 **RETURN TYPE:**
 
