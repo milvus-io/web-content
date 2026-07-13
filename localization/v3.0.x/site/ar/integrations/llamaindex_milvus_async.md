@@ -1,15 +1,15 @@
 ---
 id: llamaindex_milvus_async.md
-title: بناء RAG مع LlamaIndex و Milvus Async API
+title: إنشاء RAG باستخدام LlamaIndex وواجهة برمجة التطبيقات غير المتزامنة لـ Milvus
 related_key: LlamaIndex
 summary: >-
-  يوضّح هذا البرنامج التعليمي كيفية استخدام LlamaIndex مع Milvus لبناء خط أنابيب
-  معالجة المستندات غير المتزامن لـ RAG. يوفّر LlamaIndex طريقة لمعالجة المستندات
-  وتخزينها في قاعدة بيانات متجهة مثل Milvus. من خلال الاستفادة من واجهة برمجة
-  التطبيقات غير المتزامنة ل LlamaIndex ومكتبة عميل Milvus Python، يمكننا زيادة
+  يوضح هذا الدليل التعليمي كيفية استخدام LlamaIndex مع Milvus لإنشاء مسار معالجة
+  غير متزامن للوثائق من أجل RAG. يوفر LlamaIndex طريقة لمعالجة الوثائق وتخزينها
+  في قاعدة بيانات متجهة مثل Milvus. من خلال الاستفادة من واجهة برمجة التطبيقات
+  (API) غير المتزامنة لـ LlamaIndex ومكتبة عميل Milvus لـ Python، يمكننا زيادة
   إنتاجية خط الأنابيب لمعالجة وفهرسة كميات كبيرة من البيانات بكفاءة.
 ---
-<h1 id="RAG-with-Milvus-and-LlamaIndex-Async-API" class="common-anchor-header">RAG مع Milvus وLlamaIndex Async API<button data-href="#RAG-with-Milvus-and-LlamaIndex-Async-API" class="anchor-icon" translate="no">
+<h1 id="RAG-with-Milvus-and-LlamaIndex-Async-API" class="common-anchor-header">RAG باستخدام Milvus وواجهة برمجة التطبيقات غير المتزامنة لـ LlamaIndex<button data-href="#RAG-with-Milvus-and-LlamaIndex-Async-API" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -30,9 +30,9 @@ summary: >-
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_async.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>يوضّح هذا البرنامج التعليمي كيفية استخدام <a href="https://www.llamaindex.ai/">LlamaIndex</a> مع <a href="https://milvus.io/">Milvus</a> لإنشاء خط أنابيب معالجة غير متزامن للمستندات ل RAG. يوفر LlamaIndex طريقة لمعالجة المستندات وتخزينها في قاعدة بيانات متجهة مثل Milvus. من خلال الاستفادة من واجهة برمجة التطبيقات غير المتزامنة ل LlamaIndex ومكتبة عميل Milvus Python، يمكننا زيادة إنتاجية خط الأنابيب لمعالجة وفهرسة كميات كبيرة من البيانات بكفاءة.</p>
-<p>في هذا البرنامج التعليمي، سنقدم أولاً استخدام الأساليب غير المتزامنة لبناء RAG مع LlamaIndex و Milvus من مستوى عالٍ، ثم سنقدم استخدام الأساليب منخفضة المستوى ومقارنة الأداء بين المتزامن وغير المتزامن.</p>
-<h2 id="Before-you-begin" class="common-anchor-header">قبل أن تبدأ<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
+<p>يوضح هذا البرنامج التعليمي كيفية استخدام <a href="https://www.llamaindex.ai/">LlamaIndex</a> مع <a href="https://milvus.io/">Milvus</a> لإنشاء مسار معالجة مستندات غير متزامن لـ RAG. يوفر LlamaIndex طريقة لمعالجة المستندات وتخزينها في قاعدة بيانات متجهة مثل Milvus. من خلال الاستفادة من واجهة برمجة التطبيقات غير المتزامنة لـ LlamaIndex ومكتبة عميل Milvus لـ Python، يمكننا زيادة إنتاجية خط الأنابيب لمعالجة وفهرسة كميات كبيرة من البيانات بكفاءة.</p>
+<p>في هذا البرنامج التعليمي، سنقدم أولاً استخدام الأساليب غير المتزامنة لإنشاء RAG باستخدام LlamaIndex وMilvus من منظور عام، ثم سنقدم استخدام الأساليب التفصيلية ومقارنة الأداء بين الأساليب المتزامنة وغير المتزامنة.</p>
+<h2 id="Before-you-begin" class="common-anchor-header">قبل البدء<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -47,23 +47,23 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تتطلب مقتطفات التعليمات البرمجية في هذه الصفحة تبعيات pymilvus وlamaindex. يمكنك تثبيتها باستخدام الأوامر التالية:</p>
+    </button></h2><p>تتطلب مقتطفات الكود في هذه الصفحة تبعيات pymilvus و llamaindex. يمكنك تثبيتها باستخدام الأوامر التالية:</p>
 <pre><code translate="no" class="language-bash">$ pip install -U pymilvus llama-index-vector-stores-milvus llama-index nest-asyncio
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، قد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong> (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
+<p>إذا كنت تستخدم Google Colab، فلتفعيل التبعيات التي تم تثبيتها للتو، قد تحتاج إلى <strong>إعادة تشغيل بيئة التشغيل</strong> (انقر على قائمة «Runtime» في أعلى الشاشة، واختر «Restart session» من القائمة المنسدلة).</p>
 </div>
-<p>سنستخدم النماذج من OpenAI. يجب عليك إعداد <a href="https://platform.openai.com/docs/quickstart">مفتاح api</a> <code translate="no">OPENAI_API_KEY</code> كمتغير بيئة.</p>
+<p>سنستخدم النماذج من OpenAI. يجب عليك إعداد مفتاح <a href="https://platform.openai.com/docs/quickstart">واجهة برمجة التطبيقات (API key</a> ) <code translate="no">OPENAI_API_KEY</code> كمتغير بيئة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>إذا كنت تستخدم دفتر Jupyter Notebook، فستحتاج إلى تشغيل هذا السطر من التعليمات البرمجية قبل تشغيل التعليمات البرمجية غير المتزامنة.</p>
+<p>إذا كنت تستخدم Jupyter Notebook، فستحتاج إلى تشغيل سطر التعليمات البرمجية هذا قبل تشغيل التعليمات البرمجية غير المتزامنة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> nest_asyncio
 
 nest_asyncio.apply()
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-data" class="common-anchor-header">إعداد البيانات<button data-href="#Prepare-data" class="anchor-icon" translate="no">
+<h3 id="Prepare-data" class="common-anchor-header">تحضير البيانات<button data-href="#Prepare-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -78,12 +78,12 @@ nest_asyncio.apply()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يمكنك تنزيل عينة من البيانات باستخدام الأوامر التالية:</p>
+    </button></h3><p>يمكنك تنزيل بيانات نموذجية باستخدام الأوامر التالية:</p>
 <pre><code translate="no" class="language-bash">$ <span class="hljs-built_in">mkdir</span> -p <span class="hljs-string">&#x27;data/&#x27;</span>
 $ wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt&#x27;</span> -O <span class="hljs-string">&#x27;data/paul_graham_essay.txt&#x27;</span>
 $ wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/10k/uber_2021.pdf&#x27;</span> -O <span class="hljs-string">&#x27;data/uber_2021.pdf&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Build-RAG-with-Asynchronous-Processing" class="common-anchor-header">بناء RAG مع المعالجة غير المتزامنة<button data-href="#Build-RAG-with-Asynchronous-Processing" class="anchor-icon" translate="no">
+<h2 id="Build-RAG-with-Asynchronous-Processing" class="common-anchor-header">بناء نظام RAG باستخدام المعالجة غير المتزامنة<button data-href="#Build-RAG-with-Asynchronous-Processing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -98,8 +98,8 @@ $ wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-lla
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يوضح هذا القسم كيفية بناء نظام RAG الذي يمكنه معالجة المستندات بطريقة غير متزامنة.</p>
-<p>استورد المكتبات اللازمة وحدد Milvus URI وأبعاد التضمين.</p>
+    </button></h2><p>يوضح هذا القسم كيفية إنشاء نظام RAG قادر على معالجة المستندات بطريقة غير متزامنة.</p>
+<p>قم باستيراد المكتبات الضرورية وحدد عنوان URI الخاص بـ Milvus وأبعاد التضمين.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> asyncio
 <span class="hljs-keyword">import</span> random
 <span class="hljs-keyword">import</span> time
@@ -113,12 +113,12 @@ DIM = <span class="hljs-number">768</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>إذا كان لديك حجم كبير من البيانات، يمكنك إعداد خادم Milvus فعال على <a href="https://milvus.io/docs/quickstart.md">docker أو kubernetes</a>. في هذا الإعداد، يُرجى استخدام uri الخادم، على سبيل المثال<code translate="no">http://localhost:19530</code> ، كـ <code translate="no">uri</code>.</li>
-<li>إذا كنت ترغب في استخدام <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> الخدمة السحابية المدارة بالكامل لـ Milvus، اضبط <code translate="no">uri</code> و <code translate="no">token</code> ، والتي تتوافق مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">نقطة النهاية العامة ومفتاح Api</a> في Zilliz Cloud.</li>
-<li>في حالة الأنظمة المعقدة (مثل الاتصالات الشبكية)، يمكن أن تؤدي المعالجة غير المتزامنة إلى تحسين الأداء مقارنة بالمزامنة. لذلك نعتقد أن Milvus-Lite غير مناسب لاستخدام الواجهات غير المتزامنة لأن السيناريوهات المستخدمة غير مناسبة.</li>
+<li>إذا كانت لديك بيانات ضخمة الحجم، فيمكنك إعداد خادم Milvus عالي الأداء على <a href="https://milvus.io/docs/quickstart.md">Docker أو Kubernetes</a>. في هذا الإعداد، يرجى استخدام عنوان URI للخادم، على سبيل المثال<code translate="no">http://localhost:19530</code> ، كـ <code translate="no">uri</code>.</li>
+<li>إذا كنت ترغب في استخدام <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> وهي الخدمة السحابية المُدارة بالكامل لـ Milvus، فقم بتعديل <code translate="no">uri</code> و <code translate="no">token</code> ، اللذين يتوافقان مع نقطة <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">النهاية العامة (Public Endpoint) ومفتاح واجهة برمجة التطبيقات (API key)</a> في Zilliz Cloud.</li>
+<li>في حالة الأنظمة المعقدة (مثل الاتصالات الشبكية)، يمكن أن تؤدي المعالجة غير المتزامنة إلى تحسين الأداء مقارنةً بالتزامن. لذلك نعتقد أن Milvus-Lite غير مناسب لاستخدام واجهات غير متزامنة لأن السيناريوهات المستخدمة غير مناسبة.</li>
 </ul>
 </div>
-<p>حدد دالة تهيئة يمكننا استخدامها مرة أخرى لإعادة بناء مجموعة Milvus.</p>
+<p>قم بتعريف دالة تهيئة يمكننا استخدامها مرة أخرى لإعادة بناء مجموعة Milvus.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">init_vector_store</span>():
     <span class="hljs-keyword">return</span> MilvusVectorStore(
         uri=URI,
@@ -137,7 +137,7 @@ vector_store = init_vector_store()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">2025-01-24 20:04:39,414 [DEBUG][_create_connection]: Created new connection using: faa8be8753f74288bffc7e6d38942f8a (async_milvus_client.py:600)
 </code></pre>
-<p>استخدم SimpleDirectoryReader SimpleDirectoryReader لتغليف كائن مستند LlamaIndex من الملف <code translate="no">paul_graham_essay.txt</code>.</p>
+<p>استخدم SimpleDirectoryReader لتغليف كائن مستند LlamaIndex من الملف <code translate="no">paul_graham_essay.txt</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> SimpleDirectoryReader
 
 <span class="hljs-comment"># load documents</span>
@@ -149,14 +149,14 @@ documents = SimpleDirectoryReader(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Document ID: 41a6f99c-489f-49ff-9821-14e2561140eb
 </code></pre>
-<p>قم بتثبيت نموذج تضمين الوجه المعانق محليًا. يؤدي استخدام نموذج محلي إلى تجنب خطر الوصول إلى حدود معدل واجهة برمجة التطبيقات أثناء إدراج البيانات غير المتزامن، حيث يمكن أن تتراكم طلبات واجهة برمجة التطبيقات المتزامنة بسرعة وتستهلك ميزانيتك في واجهة برمجة التطبيقات العامة. ومع ذلك، إذا كان لديك حد معدل مرتفع، يمكنك اختيار استخدام خدمة نموذج بعيد بدلاً من ذلك.</p>
+<p>قم بإنشاء مثيل لنموذج التضمين Hugging Face محليًا. يؤدي استخدام نموذج محلي إلى تجنب مخاطر الوصول إلى حدود معدل استخدام واجهة برمجة التطبيقات (API) أثناء الإدراج غير المتزامن للبيانات، حيث يمكن أن تتراكم طلبات واجهة برمجة التطبيقات المتزامنة بسرعة وتستنفد ميزانيتك في واجهة برمجة التطبيقات العامة. ومع ذلك، إذا كان لديك حد معدل استخدام مرتفع، فيمكنك اختيار استخدام خدمة نموذج عن بُعد بدلاً من ذلك.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.embeddings.huggingface <span class="hljs-keyword">import</span> HuggingFaceEmbedding
 
 
 embed_model = HuggingFaceEmbedding(model_name=<span class="hljs-string">&quot;BAAI/bge-base-en-v1.5&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>قم بإنشاء فهرس وإدراج المستند.</p>
-<p>قمنا بتعيين <code translate="no">use_async</code> على <code translate="no">True</code> لتمكين وضع الإدراج غير المتزامن.</p>
+<p>نقوم بتعيين <code translate="no">use_async</code> إلى <code translate="no">True</code> لتمكين وضع الإدراج غير المتزامن.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create an index over the documents</span>
 <span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> VectorStoreIndex, StorageContext
 
@@ -168,7 +168,7 @@ index = VectorStoreIndex.from_documents(
     use_async=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>قم بتهيئة LLM.</p>
+<p>تهيئة نموذج اللغة الكبير (LLM).</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.llms.openai <span class="hljs-keyword">import</span> OpenAI
 
 llm = OpenAI(model=<span class="hljs-string">&quot;gpt-3.5-turbo&quot;</span>)
@@ -181,7 +181,7 @@ response = <span class="hljs-keyword">await</span> query_engine.aquery(<span cla
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">The author learned that the field of artificial intelligence, as practiced at the time, was not as promising as initially believed. The approach of using explicit data structures to represent concepts in AI was not effective in achieving true understanding of natural language. This realization led the author to shift his focus towards Lisp and eventually towards exploring the field of art.
 </code></pre>
-<h2 id="Explore-the-Async-API" class="common-anchor-header">استكشف واجهة برمجة التطبيقات غير المتزامنة<button data-href="#Explore-the-Async-API" class="anchor-icon" translate="no">
+<h2 id="Explore-the-Async-API" class="common-anchor-header">استكشاف واجهة برمجة التطبيقات غير المتزامنة<button data-href="#Explore-the-Async-API" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -196,8 +196,8 @@ response = <span class="hljs-keyword">await</span> query_engine.aquery(<span cla
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>في هذا القسم، سنقدم في هذا القسم استخدام واجهة برمجة التطبيقات ذات المستوى الأدنى ومقارنة أداء عمليات التشغيل المتزامنة وغير المتزامنة.</p>
-<h3 id="Async-add" class="common-anchor-header">إضافة غير متزامن<button data-href="#Async-add" class="anchor-icon" translate="no">
+    </button></h2><p>في هذا القسم، سنقدم استخدام واجهة برمجة التطبيقات (API) ذات المستوى الأدنى ونقارن أداء عمليات التشغيل المتزامنة وغير المتزامنة.</p>
+<h3 id="Async-add" class="common-anchor-header">الإضافة غير المتزامنة<button data-href="#Async-add" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -217,7 +217,7 @@ response = <span class="hljs-keyword">await</span> query_engine.aquery(<span cla
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">2025-01-24 20:07:38,727 [DEBUG][_create_connection]: Created new connection using: 5e0d130f3b644555ad7ea6b8df5f1fc2 (async_milvus_client.py:600)
 </code></pre>
-<p>لنعرّف دالة إنتاج عقدة، والتي ستُستخدم لتوليد عدد كبير من عقد الاختبار للفهرس.</p>
+<p>دعونا نحدد دالة إنتاج العقد، والتي ستُستخدم لتوليد عدد كبير من العقد الاختبارية للفهرس.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">random_id</span>():
     random_num_str = <span class="hljs-string">&quot;&quot;</span>
     <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">16</span>):
@@ -238,7 +238,7 @@ response = <span class="hljs-keyword">await</span> query_engine.aquery(<span cla
         node_list.append(node)
     <span class="hljs-keyword">return</span> node_list
 <button class="copy-code-btn"></button></code></pre>
-<p>تحديد دالة aync لإضافة مستندات إلى مخزن المتجهات. نستخدم الدالة <code translate="no">async_add()</code> في مثيل مخزن متجه ميلفوس.</p>
+<p>حدد دالة غير متزامنة لإضافة المستندات إلى مخزن المتجهات. نستخدم الدالة <code translate="no">async_add()</code> في مثيل مخزن المتجهات Milvus.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">async_add</span>(<span class="hljs-params">num_adding</span>):
     node_list = produce_nodes(num_adding)
     start_time = time.time()
@@ -253,10 +253,10 @@ response = <span class="hljs-keyword">await</span> query_engine.aquery(<span cla
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python">add_counts = [<span class="hljs-number">10</span>, <span class="hljs-number">100</span>, <span class="hljs-number">1000</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>احصل على حلقة الحدث.</p>
+<p>الحصول على حلقة الأحداث.</p>
 <pre><code translate="no" class="language-python">loop = asyncio.get_event_loop()
 <button class="copy-code-btn"></button></code></pre>
-<p>إضافة مستندات بشكل غير متزامن إلى مخزن المتجهات.</p>
+<p>أضف المستندات إلى مخزن المتجهات بشكل غير متزامن.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> count <span class="hljs-keyword">in</span> add_counts:
 
     <span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">measure_async_add</span>():
@@ -274,7 +274,7 @@ Async add for 1000 took 3.22 seconds
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">2025-01-24 20:07:45,554 [DEBUG][_create_connection]: Created new connection using: b14dde8d6d24489bba26a907593f692d (async_milvus_client.py:600)
 </code></pre>
-<h4 id="Compare-with-synchronous-add" class="common-anchor-header">قارن مع الإضافة المتزامنة</h4><p>حدد دالة إضافة متزامنة. ثم قم بقياس وقت التشغيل تحت نفس الشرط.</p>
+<h4 id="Compare-with-synchronous-add" class="common-anchor-header">قارن ذلك مع الإضافة المتزامنة</h4><p>نحدد دالة إضافة متزامنة. ثم نقيس وقت التشغيل في نفس الظروف.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">sync_add</span>(<span class="hljs-params">num_adding</span>):
     node_list = produce_nodes(num_adding)
     start_time = time.time()
@@ -291,8 +291,8 @@ Async add for 1000 took 3.22 seconds
 Sync add for 100 took 5.85 seconds
 Sync add for 1000 took 62.91 seconds
 </code></pre>
-<p>تُظهر النتيجة أن عملية الإضافة المتزامنة أبطأ بكثير من عملية الإضافة غير المتزامنة.</p>
-<h3 id="Async-search" class="common-anchor-header">بحث غير متزامن<button data-href="#Async-search" class="anchor-icon" translate="no">
+<p>تُظهر النتيجة أن عملية الإضافة المتزامنة أبطأ بكثير من العملية غير المتزامنة.</p>
+<h3 id="Async-search" class="common-anchor-header">البحث غير المتزامن<button data-href="#Async-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -307,14 +307,14 @@ Sync add for 1000 took 62.91 seconds
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>أعد تهيئة مخزن المتجهات وأضف بعض المستندات قبل تشغيل البحث.</p>
+    </button></h3><p>أعد تهيئة مخزن المتجهات وأضف بعض المستندات قبل تشغيل عملية البحث.</p>
 <pre><code translate="no" class="language-python">vector_store = init_vector_store()
 node_list = produce_nodes(num_adding=<span class="hljs-number">1000</span>)
 inserted_ids = vector_store.add(node_list)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">2025-01-24 20:08:57,982 [DEBUG][_create_connection]: Created new connection using: 351dc7ea4fb14d4386cfab02621ab7d1 (async_milvus_client.py:600)
 </code></pre>
-<p>حدد دالة بحث غير متزامن. نستخدم الدالة <code translate="no">aquery()</code> في مثيل مخزن متجهات Milvus.</p>
+<p>حدد دالة بحث غير متزامن. نستخدم دالة <code translate="no">aquery()</code> في مثيل مخزن المتجهات Milvus.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">async_search</span>(<span class="hljs-params">num_queries</span>):
     start_time = time.time()
     tasks = []
@@ -344,7 +344,7 @@ inserted_ids = vector_store.add(node_list)
 Async search for 100 queries took 1.39 seconds
 Async search for 1000 queries took 8.81 seconds
 </code></pre>
-<h4 id="Compare-with-synchronous-search" class="common-anchor-header">قارن مع البحث المتزامن</h4><p>حدد دالة بحث متزامن. ثم قم بقياس وقت التشغيل تحت نفس الشرط.</p>
+<h4 id="Compare-with-synchronous-search" class="common-anchor-header">قارن ذلك بالبحث المتزامن</h4><p>تحديد دالة بحث متزامن. ثم قياس وقت التشغيل في نفس الظروف.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">sync_search</span>(<span class="hljs-params">num_queries</span>):
     start_time = time.time()
     <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num_queries):
@@ -363,4 +363,4 @@ Async search for 1000 queries took 8.81 seconds
 Sync search for 100 queries took 30.80 seconds
 Sync search for 1000 queries took 308.80 seconds
 </code></pre>
-<p>تظهر النتيجة أن عملية البحث المتزامن أبطأ بكثير من البحث غير المتزامن.</p>
+<p>تُظهر النتيجة أن عملية البحث المتزامن أبطأ بكثير من عملية البحث غير المتزامن.</p>

@@ -1,11 +1,12 @@
 ---
 id: llamaindex_milvus_async.md
-title: LlamaIndexとmilvus非同期APIでRAGを構築する
+title: LlamaIndex と Milvus Async API を使用した RAG の構築
 related_key: LlamaIndex
 summary: >-
-  このチュートリアルでは、LlamaIndexとMilvusを使用して、RAG用の非同期ドキュメント処理パイプラインを構築する方法を示します。LlamaIndexはMilvusのようにドキュメントを処理し、ベクトルDBに保存する方法を提供します。LlamaIndexの非同期APIとMilvusのPythonクライアントライブラリを活用することで、パイプラインのスループットを向上させ、大量のデータを効率的に処理し、インデックスを作成することができます。
+  このチュートリアルでは、LlamaIndexとMilvusを組み合わせて、RAG向けの非同期ドキュメント処理パイプラインを構築する方法について解説します。LlamaIndexを使用すると、ドキュメントを処理し、MilvusのようなベクトルDBに格納することができます。
+  LlamaIndexの非同期APIとMilvusのPythonクライアントライブラリを活用することで、パイプラインのスループットを向上させ、大量のデータを効率的に処理・インデックス化することができます。
 ---
-<h1 id="RAG-with-Milvus-and-LlamaIndex-Async-API" class="common-anchor-header">MilvusとLlamaIndexの非同期APIを使ったRAG<button data-href="#RAG-with-Milvus-and-LlamaIndex-Async-API" class="anchor-icon" translate="no">
+<h1 id="RAG-with-Milvus-and-LlamaIndex-Async-API" class="common-anchor-header">MilvusとLlamaIndexの非同期APIを活用したRAG<button data-href="#RAG-with-Milvus-and-LlamaIndex-Async-API" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -26,8 +27,8 @@ summary: >-
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_async.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>このチュートリアルでは、<a href="https://www.llamaindex.ai/">LlamaIndexと</a> <a href="https://milvus.io/">Milvusを使って</a>RAGの非同期ドキュメント処理パイプラインを構築する方法を説明します。LlamaIndexはMilvusのようにドキュメントを処理してベクトルDBに保存する方法を提供します。LlamaIndexの非同期APIとMilvusのPythonクライアントライブラリを活用することで、パイプラインのスループットを向上させ、大量のデータを効率的に処理し、インデックスを作成することができます。</p>
-<p>このチュートリアルでは、まずLlamaIndexとMilvusを使ってRAGを構築するための非同期メソッドの使い方を高いレベルから紹介し、次に低レベルメソッドの使い方と同期と非同期の性能比較について紹介します。</p>
+<p>このチュートリアルでは、<a href="https://milvus.io/">MilvusとLlamaIndexを</a>組み合わせて、RAG向けの非同期ドキュメント処理パイプラインを構築する方法について解説します。LlamaIndexを使用することで、ドキュメントを処理し、MilvusのようなベクトルDBに格納することができます。 LlamaIndexの非同期APIとMilvusのPythonクライアントライブラリを活用することで、パイプラインのスループットを向上させ、大量のデータを効率的に処理・インデックス化できます。</p>
+<p>このチュートリアルでは、まず高レベルな観点から、非同期メソッドを使用して LlamaIndex と Milvus で RAG を構築する方法を紹介し、その後、低レベルなメソッドの使用方法と、同期処理および非同期処理のパフォーマンス比較について解説します。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">始める前に<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,18 +44,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このページのコードスニペットにはpymilvusとllamaindexの依存関係が必要です。以下のコマンドでインストールできます：</p>
+    </button></h2><p>このページのコードスニペットには、pymilvus および llamaindex の依存関係が必要です。以下のコマンドを使用してインストールできます：</p>
 <pre><code translate="no" class="language-bash">$ pip install -U pymilvus llama-index-vector-stores-milvus llama-index nest-asyncio
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Google Colabを使用している場合、インストールした依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
+<p>Google Colab を使用している場合、インストールしたばかりの依存関係を有効にするには、<strong>ランタイムを再起動する必要がある</strong>場合があります（画面上部の「Runtime」メニューをクリックし、ドロップダウンメニューから「Restart session」を選択してください）。</p>
 </div>
-<p>OpenAIのモデルを使います。環境変数として、<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> を用意してください。</p>
+<p>OpenAIのモデルを使用します。環境変数として<a href="https://platform.openai.com/docs/quickstart">APIキー</a>`<code translate="no">OPENAI_API_KEY</code> ` を設定しておいてください。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Jupyter Notebookを使用している場合は、非同期コードを実行する前にこのコードを実行する必要があります。</p>
+<p>Jupyter Notebook を使用している場合は、非同期コードを実行する前に、次のコード行を実行する必要があります。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> nest_asyncio
 
 nest_asyncio.apply()
@@ -74,12 +75,12 @@ nest_asyncio.apply()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>以下のコマンドでサンプルデータをダウンロードできる：</p>
+    </button></h3><p>以下のコマンドでサンプルデータをダウンロードできます：</p>
 <pre><code translate="no" class="language-bash">$ <span class="hljs-built_in">mkdir</span> -p <span class="hljs-string">&#x27;data/&#x27;</span>
 $ wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt&#x27;</span> -O <span class="hljs-string">&#x27;data/paul_graham_essay.txt&#x27;</span>
 $ wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/10k/uber_2021.pdf&#x27;</span> -O <span class="hljs-string">&#x27;data/uber_2021.pdf&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Build-RAG-with-Asynchronous-Processing" class="common-anchor-header">非同期処理でRAGをビルドする<button data-href="#Build-RAG-with-Asynchronous-Processing" class="anchor-icon" translate="no">
+<h2 id="Build-RAG-with-Asynchronous-Processing" class="common-anchor-header">非同期処理を用いたRAGの構築<button data-href="#Build-RAG-with-Asynchronous-Processing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -94,8 +95,8 @@ $ wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-lla
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このセクションでは、非同期でドキュメントを処理できるRAGシステムを構築する方法を示します。</p>
-<p>必要なライブラリをインポートし、Milvus URIとエンベッディングの次元を定義します。</p>
+    </button></h2><p>このセクションでは、ドキュメントを非同期で処理できるRAGシステムの構築方法について説明します。</p>
+<p>必要なライブラリをインポートし、MilvusのURIと埋め込みの次元を定義します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> asyncio
 <span class="hljs-keyword">import</span> random
 <span class="hljs-keyword">import</span> time
@@ -109,12 +110,12 @@ DIM = <span class="hljs-number">768</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>大規模なデータを扱う場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上にMilvusサーバを構築します。このセットアップでは、サーバURI、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">uri</code> として使用してください。</li>
-<li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
-<li>複雑なシステム（ネットワーク通信など）の場合、同期処理よりも非同期処理の方が性能向上が期待できます。そのため、Milvus-Liteは非同期インタフェースを使用するシナリオには適していないと考えます。</li>
+<li>大規模なデータがある場合は、<a href="https://milvus.io/docs/quickstart.md">Docker または Kubernetes</a> 上で高性能な Milvus サーバーをセットアップできます。この設定では、<code translate="no">uri</code> として、サーバー URI（例:<code translate="no">http://localhost:19530</code> ）を使用してください。</li>
+<li>Milvusのフルマネージドクラウドサービス<a href="https://zilliz.com/cloud">であるZilliz Cloud</a>を使用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">パブリックエンドポイントおよびAPIキー</a>に対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
+<li>複雑なシステム（ネットワーク通信など）の場合、同期処理に比べて非同期処理の方がパフォーマンスが向上することがあります。そのため、Milvus-Liteでは使用されるシナリオが適していないため、非同期インターフェースの使用には向いていないと考えています。</li>
 </ul>
 </div>
-<p>Milvusコレクションを再構築するための初期化関数を定義する。</p>
+<p>Milvusコレクションを再構築するために再利用可能な初期化関数を定義します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">init_vector_store</span>():
     <span class="hljs-keyword">return</span> MilvusVectorStore(
         uri=URI,
@@ -133,7 +134,7 @@ vector_store = init_vector_store()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">2025-01-24 20:04:39,414 [DEBUG][_create_connection]: Created new connection using: faa8be8753f74288bffc7e6d38942f8a (async_milvus_client.py:600)
 </code></pre>
-<p>ファイル<code translate="no">paul_graham_essay.txt</code> からLlamaIndexドキュメントオブジェクトをラップするためにSimpleDirectoryReaderを使用する。</p>
+<p>SimpleDirectoryReader を使用して、ファイル `<code translate="no">paul_graham_essay.txt</code>` からの LlamaIndex ドキュメントオブジェクトをラップします。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> SimpleDirectoryReader
 
 <span class="hljs-comment"># load documents</span>
@@ -145,14 +146,14 @@ documents = SimpleDirectoryReader(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Document ID: 41a6f99c-489f-49ff-9821-14e2561140eb
 </code></pre>
-<p>Hugging Face埋め込みモデルをローカルにインスタンス化する。ローカルモデルを使用することで、非同期データ挿入中にAPIレート制限に達するリスクを回避できます。同時APIリクエストはすぐに加算され、パブリックAPIの予算を使い果たしてしまうからです。しかし、レート制限が高い場合は、代わりにリモートモデルサービスを使用することもできます。</p>
+<p>Hugging Faceの埋め込みモデルをローカルでインスタンス化します。ローカルモデルを使用することで、非同期データ挿入中にAPIのレート制限に達するリスクを回避できます。これは、並行して行われるAPIリクエストが急速に蓄積し、パブリックAPIの利用枠を使い果たしてしまう可能性があるためです。ただし、レート制限に余裕がある場合は、代わりにリモートモデルサービスを使用することも可能です。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.embeddings.huggingface <span class="hljs-keyword">import</span> HuggingFaceEmbedding
 
 
 embed_model = HuggingFaceEmbedding(model_name=<span class="hljs-string">&quot;BAAI/bge-base-en-v1.5&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>インデックスを作成し、ドキュメントを挿入する。</p>
-<p>非同期挿入モードを有効にするため、<code translate="no">use_async</code> を<code translate="no">True</code> に設定します。</p>
+<p>インデックスを作成し、ドキュメントを挿入します。</p>
+<p><code translate="no">use_async</code> を<code translate="no">True</code> に設定し、非同期挿入モードを有効にします。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create an index over the documents</span>
 <span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> VectorStoreIndex, StorageContext
 
@@ -164,12 +165,12 @@ index = VectorStoreIndex.from_documents(
     use_async=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>LLMを初期化する。</p>
+<p>LLMを初期化します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.llms.openai <span class="hljs-keyword">import</span> OpenAI
 
 llm = OpenAI(model=<span class="hljs-string">&quot;gpt-3.5-turbo&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>クエリエンジンを構築する際に、<code translate="no">use_async</code> パラメータを<code translate="no">True</code> に設定して、非同期検索を有効にすることもできます。</p>
+<p>クエリエンジンを構築する際も、<code translate="no">use_async</code> パラメータを<code translate="no">True</code> に設定することで、非同期検索を有効にできます。</p>
 <pre><code translate="no" class="language-python">query_engine = index.as_query_engine(use_async=<span class="hljs-literal">True</span>, llm=llm)
 response = <span class="hljs-keyword">await</span> query_engine.aquery(<span class="hljs-string">&quot;What did the author learn?&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
@@ -177,7 +178,7 @@ response = <span class="hljs-keyword">await</span> query_engine.aquery(<span cla
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">The author learned that the field of artificial intelligence, as practiced at the time, was not as promising as initially believed. The approach of using explicit data structures to represent concepts in AI was not effective in achieving true understanding of natural language. This realization led the author to shift his focus towards Lisp and eventually towards exploring the field of art.
 </code></pre>
-<h2 id="Explore-the-Async-API" class="common-anchor-header">非同期APIを調べる<button data-href="#Explore-the-Async-API" class="anchor-icon" translate="no">
+<h2 id="Explore-the-Async-API" class="common-anchor-header">非同期 API の概要<button data-href="#Explore-the-Async-API" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -192,7 +193,7 @@ response = <span class="hljs-keyword">await</span> query_engine.aquery(<span cla
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このセクションでは、より低レベルのAPIの使い方を紹介し、同期実行と非同期実行のパフォーマンスを比較します。</p>
+    </button></h2><p>このセクションでは、より低レベルの API の使用方法を紹介し、同期実行と非同期実行のパフォーマンスを比較します。</p>
 <h3 id="Async-add" class="common-anchor-header">非同期追加<button data-href="#Async-add" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -208,12 +209,12 @@ response = <span class="hljs-keyword">await</span> query_engine.aquery(<span cla
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>ベクトルストアを再初期化する。</p>
+    </button></h3><p>ベクトルストアを再初期化します。</p>
 <pre><code translate="no" class="language-python">vector_store = init_vector_store()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">2025-01-24 20:07:38,727 [DEBUG][_create_connection]: Created new connection using: 5e0d130f3b644555ad7ea6b8df5f1fc2 (async_milvus_client.py:600)
 </code></pre>
-<p>インデックス用に大量のテスト・ノードを生成するために使用する、ノード生成関数を定義しよう。</p>
+<p>インデックス用のテストノードを大量に生成するために使用する、ノード生成関数を定義しましょう。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">random_id</span>():
     random_num_str = <span class="hljs-string">&quot;&quot;</span>
     <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">16</span>):
@@ -234,7 +235,7 @@ response = <span class="hljs-keyword">await</span> query_engine.aquery(<span cla
         node_list.append(node)
     <span class="hljs-keyword">return</span> node_list
 <button class="copy-code-btn"></button></code></pre>
-<p>ベクトルストアにドキュメントを追加するaync関数を定義する。Milvusベクターストアのインスタンスで<code translate="no">async_add()</code> 。</p>
+<p>ベクトルストアにドキュメントを追加する非同期関数を定義します。Milvus ベクトルストアインスタンスの `<code translate="no">async_add()</code> ` 関数を使用します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">async_add</span>(<span class="hljs-params">num_adding</span>):
     node_list = produce_nodes(num_adding)
     start_time = time.time()
@@ -249,10 +250,10 @@ response = <span class="hljs-keyword">await</span> query_engine.aquery(<span cla
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python">add_counts = [<span class="hljs-number">10</span>, <span class="hljs-number">100</span>, <span class="hljs-number">1000</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>イベントループを取得する。</p>
+<p>イベントループを取得します。</p>
 <pre><code translate="no" class="language-python">loop = asyncio.get_event_loop()
 <button class="copy-code-btn"></button></code></pre>
-<p>非同期にベクトルストアに文書を追加する。</p>
+<p>ベクトルストアにドキュメントを非同期で追加します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> count <span class="hljs-keyword">in</span> add_counts:
 
     <span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">measure_async_add</span>():
@@ -270,7 +271,7 @@ Async add for 1000 took 3.22 seconds
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">2025-01-24 20:07:45,554 [DEBUG][_create_connection]: Created new connection using: b14dde8d6d24489bba26a907593f692d (async_milvus_client.py:600)
 </code></pre>
-<h4 id="Compare-with-synchronous-add" class="common-anchor-header">同期追加との比較</h4><p>同期追加関数を定義する。そして、同じ条件で実行時間を計測する。</p>
+<h4 id="Compare-with-synchronous-add" class="common-anchor-header">同期的な追加と比較します。</h4><p>同期追加関数を定義します。その後、同じ条件下で実行時間を測定します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">sync_add</span>(<span class="hljs-params">num_adding</span>):
     node_list = produce_nodes(num_adding)
     start_time = time.time()
@@ -287,7 +288,7 @@ Async add for 1000 took 3.22 seconds
 Sync add for 100 took 5.85 seconds
 Sync add for 1000 took 62.91 seconds
 </code></pre>
-<p>その結果、同期追加処理の方が非同期追加処理よりもはるかに遅いことがわかる。</p>
+<p>結果から、同期追加処理は非同期追加処理よりもはるかに遅いことがわかります。</p>
 <h3 id="Async-search" class="common-anchor-header">非同期検索<button data-href="#Async-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -303,14 +304,14 @@ Sync add for 1000 took 62.91 seconds
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>検索を実行する前にベクトルストアを再初期化し、いくつかの文書を追加する。</p>
+    </button></h3><p>検索を実行する前に、ベクトルストアを再初期化し、いくつかのドキュメントを追加します。</p>
 <pre><code translate="no" class="language-python">vector_store = init_vector_store()
 node_list = produce_nodes(num_adding=<span class="hljs-number">1000</span>)
 inserted_ids = vector_store.add(node_list)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">2025-01-24 20:08:57,982 [DEBUG][_create_connection]: Created new connection using: 351dc7ea4fb14d4386cfab02621ab7d1 (async_milvus_client.py:600)
 </code></pre>
-<p>非同期検索関数を定義する。ここではMilvusベクターストアインスタンスの<code translate="no">aquery()</code> 。</p>
+<p>非同期検索関数を定義します。ここでは、Milvusベクトルストアインスタンスの<code translate="no">aquery()</code> 関数を使用します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">async_search</span>(<span class="hljs-params">num_queries</span>):
     start_time = time.time()
     tasks = []
@@ -326,7 +327,7 @@ inserted_ids = vector_store.add(node_list)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python">query_counts = [<span class="hljs-number">10</span>, <span class="hljs-number">100</span>, <span class="hljs-number">1000</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvusストアから非同期検索を実行する。</p>
+<p>Milvusストアから非同期で検索を行います。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> count <span class="hljs-keyword">in</span> query_counts:
 
     <span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">measure_async_search</span>():
@@ -340,7 +341,7 @@ inserted_ids = vector_store.add(node_list)
 Async search for 100 queries took 1.39 seconds
 Async search for 1000 queries took 8.81 seconds
 </code></pre>
-<h4 id="Compare-with-synchronous-search" class="common-anchor-header">同期検索との比較</h4><p>同期検索関数を定義する。そして、同じ条件で実行時間を計測する。</p>
+<h4 id="Compare-with-synchronous-search" class="common-anchor-header">同期検索との比較</h4><p>同期検索関数を定義します。その後、同じ条件下で実行時間を測定します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">sync_search</span>(<span class="hljs-params">num_queries</span>):
     start_time = time.time()
     <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num_queries):
@@ -359,4 +360,4 @@ Async search for 1000 queries took 8.81 seconds
 Sync search for 100 queries took 30.80 seconds
 Sync search for 1000 queries took 308.80 seconds
 </code></pre>
-<p>その結果、同期検索処理は非同期検索処理よりはるかに遅いことがわかる。</p>
+<p>結果から、同期検索の処理は非同期検索に比べてはるかに遅いことがわかります。</p>
