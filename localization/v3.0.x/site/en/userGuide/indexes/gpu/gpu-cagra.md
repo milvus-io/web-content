@@ -227,6 +227,11 @@ res = MilvusClient.search(
      <td><p>Empty</p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">num_random_samplings</code></p></td>
+     <td><p>Controls how much random sampling CAGRA performs when choosing initial entry points for graph search. A larger value gives CAGRA more chances to start from better points, improving recall at the cost of increased search latency. The value must be at least <code translate="no">1</code>.</p></td>
+     <td><p><code translate="no">1</code></p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">min_iterations</code> / <code translate="no">max_iterations</code></p></td>
      <td><p>Controls the search iteration process. By default, they are set to <code translate="no">0</code>, and CAGRA automatically determines the number of iterations based on <code translate="no">itopk_size</code> and <code translate="no">search_width</code>. Adjusting these values manually can help balance performance and accuracy.</p></td>
      <td><p><code translate="no">0</code></p></td>
