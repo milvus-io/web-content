@@ -156,6 +156,11 @@ The following table lists the parameters that can be configured in `search_param
      <td><p>Empty</p></td>
    </tr>
    <tr>
+     <td><p><code>num_random_samplings</code></p></td>
+     <td><p>A parameter used in the CAGRA approximate nearest neighbor search algorithm to define the number of iterations for the initial random seed node selection. Its value must be at least <code>1</code>. Available in Milvus 2.6.20+.</p></td>
+     <td><p><code>1</code></p></td>
+   </tr>
+   <tr>
      <td><p><code>min_iterations</code> / <code>max_iterations</code></p></td>
      <td><p>Controls the search iteration process. By default, they are set to <code>0</code>, and CAGRA automatically determines the number of iterations based on <code>itopk_size</code> and <code>search_width</code>. Adjusting these values manually can help balance performance and accuracy.</p></td>
      <td><p><code>0</code></p></td>
