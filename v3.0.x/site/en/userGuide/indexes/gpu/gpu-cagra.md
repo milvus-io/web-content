@@ -157,7 +157,7 @@ The following table lists the parameters that can be configured in `search_param
    </tr>
    <tr>
      <td><p><code>num_random_samplings</code></p></td>
-     <td><p>Controls how much random sampling CAGRA performs when choosing initial entry points for graph search. A larger value gives CAGRA more chances to start from better points, improving recall at the cost of increased search latency. The value must be at least <code>1</code>.</p></td>
+     <td><p>Controls how much random sampling CAGRA performs when choosing initial entry points for graph search. A larger value gives CAGRA more chances to start from better points, improving recall at the cost of increased search latency. The value must be at least <code>1</code>. Available in Milvus 2.6.20+.</p></td>
      <td><p><code>1</code></p></td>
    </tr>
    <tr>
