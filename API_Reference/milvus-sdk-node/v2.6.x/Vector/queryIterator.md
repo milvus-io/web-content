@@ -95,6 +95,6 @@ const iterator = await milvusClient.queryIterator({
 });
 
 for await (const batch of iterator) {
-    console.log(`Batch of ${batch.length} entities:`, batch);
+    console.log(\`Batch of ${batch.length} entities:\`, batch);
 }
 ```
