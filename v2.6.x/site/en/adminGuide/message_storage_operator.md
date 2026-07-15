@@ -35,7 +35,7 @@ There are also other limitations for specifying the message storage:
   - cluster mode: Pulsar (default) > Kafka
 - The message storage cannot be changed while the Milvus system is running. 
 - Only Kafka 2.x or 3.x verison is supported.
-- **Upgrade limitations**: **Message Queue limitations**: When upgrading to Milvus v2.6.19, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
+- **Upgrade limitations**: **Message Queue limitations**: When upgrading to Milvus v2.6.20, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
 
 
 ## Configure RocksMQ
