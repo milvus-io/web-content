@@ -57,7 +57,7 @@ title: Eseguire Milvus con Docker Compose (Linux)
       </svg>
     </button></h2><p>Milvus mette a disposizione un file di configurazione Docker Compose nel repository di Milvus. Per installare Milvus utilizzando Docker Compose, è sufficiente eseguire</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.19/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.20/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,13 +67,13 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Novità della versione 2.6.19:</strong></p>
+<p><strong>Novità della versione 2.6.20:</strong></p>
 <ul>
-<li><strong>Architettura migliorata</strong>: include il nuovo nodo di streaming e componenti ottimizzati</li>
+<li><strong>Architettura migliorata</strong>: include il nuovo Streaming Node e componenti ottimizzati</li>
 <li><strong>Dipendenze aggiornate</strong>: include le ultime versioni di MinIO ed etcd</li>
 <li><strong>Configurazione migliorata</strong>: impostazioni ottimizzate per prestazioni migliori</li>
 </ul>
-<p>Scaricare sempre la configurazione Docker Compose più recente per garantire la compatibilità con le funzionalità della v2.6.19.</p>
+<p>Scarica sempre la configurazione Docker Compose più recente per garantire la compatibilità con le funzionalità della v2.6.20.</p>
 <ul>
 <li><p>Se non sei riuscito a eseguire il comando sopra indicato, verifica se sul tuo sistema è installato Docker Compose V1. In tal caso, ti consigliamo di migrare a Docker Compose V2 in base alle indicazioni riportate in <a href="https://docs.docker.com/compose/">questa pagina</a>.</p></li>
 <li><p>Se si riscontrano problemi durante il download dell’immagine, contattateci all’indirizzo <a href="mailto:community@zilliz.com">community@zilliz.com</a> fornendo i dettagli del problema e vi forniremo l’assistenza necessaria.</p></li>
@@ -85,7 +85,7 @@ Creating milvus-standalone ... done
 <ul>
 <li>Il container <strong>milvus-etcd</strong> non espone alcuna porta all’host e mappa i propri dati su <strong>volumes/etcd</strong> nella cartella corrente.</li>
 <li>Il container <strong>milvus-minio</strong> serve localmente le porte <strong>9090</strong> e <strong>9091</strong> con le credenziali di autenticazione predefinite e mappa i propri dati nella cartella <strong>volumes/minio</strong> nella directory corrente.</li>
-<li>Il container <strong>milvus-standalone</strong> serve localmente le porte <strong>19530</strong> con le impostazioni predefinite e mappa i propri dati nella cartella <strong>volumes/milvus</strong> nella directory corrente.</li>
+<li>Il container <strong>milvus-standalone</strong> serve localmente le porte <strong>19530</strong> con le impostazioni predefinite e mappa i propri dati nella <strong>cartella volumes/milvus</strong> all'interno della directory corrente.</li>
 </ul></li>
 </ul>
 <p>È possibile verificare se i container sono attivi e in esecuzione utilizzando il seguente comando:</p>
@@ -119,7 +119,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Aggiungere ulteriori configurazioni per sovrascrivere quelle predefinite.
-Quanto segue presuppone che sia necessario sovrascrivere il file <code translate="no">proxy.healthCheckTimeout</code> predefinito. Per le voci di configurazione applicabili, consultare <a href="/docs/it/v2.6.x/system_configuration.md">Configurazione di sistema</a>.</p>
+Quanto segue presuppone che sia necessario sovrascrivere il file <code translate="no">proxy.healthCheckTimeout</code> predefinito. Per le voci di configurazione applicabili, fare riferimento a <a href="/docs/it/v2.6.x/system_configuration.md">Configurazione di sistema</a>.</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; /milvus/configs/user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:

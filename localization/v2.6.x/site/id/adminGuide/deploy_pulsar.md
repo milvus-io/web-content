@@ -24,7 +24,7 @@ summary: >-
     </button></h1><p>Milvus menggunakan Pulsar atau Kafka untuk mengelola log perubahan terbaru, menghasilkan log aliran, dan menyediakan langganan log. Pulsar adalah sistem penyimpanan pesan default. Topik ini menjelaskan cara mengonfigurasi penyimpanan pesan dengan Docker Compose atau Helm.</p>
 <p>Anda dapat mengonfigurasi Pulsar dengan <a href="https://docs.docker.com/get-started/overview/">Docker Compose</a> atau di K8s, serta mengonfigurasi Kafka di K8s.</p>
 <div class="alert note">
-<p><strong>Batasan Antrian Pesan</strong>: Saat melakukan upgrade ke Milvus v2.6.19, Anda harus mempertahankan pilihan antrian pesan yang saat ini digunakan. Pergantian antara sistem antrian pesan yang berbeda selama proses upgrade tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia pada versi mendatang.</p>
+<p><strong>Batasan Antrian Pesan</strong>: Saat melakukan upgrade ke Milvus v2.6.20, Anda harus mempertahankan pilihan antrian pesan yang saat ini digunakan. Pergantian antara sistem antrian pesan yang berbeda selama proses upgrade tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia pada versi mendatang.</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Mengonfigurasi Pulsar dengan Docker Compose<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -97,7 +97,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk klaster Milvus di K8s, Anda dapat mengonfigurasi Pulsar dalam perintah yang sama yang digunakan untuk memulai Milvus. Atau, Anda dapat mengonfigurasi Pulsar menggunakan berkas ` <code translate="no">values.yml</code> ` di jalur `/charts/milvus` dalam repositori <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> sebelum memulai Milvus.</p>
+    </button></h2><p>Untuk klaster Milvus di K8s, Anda dapat mengonfigurasi Pulsar dalam perintah yang sama yang digunakan untuk memulai Milvus. Atau, Anda dapat mengonfigurasi Pulsar menggunakan berkas ` <code translate="no">values.yml</code> ` di jalur `/charts/milvus` dalam repositori ` <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> ` sebelum memulai Milvus.</p>
 <p>Untuk detail tentang cara mengonfigurasi Milvus menggunakan Helm, lihat <a href="/docs/id/v2.6.x/configure-helm.md">Konfigurasi Milvus dengan Helm Charts</a>. Untuk detail tentang item konfigurasi terkait Pulsar, lihat <a href="/docs/id/v2.6.x/configure_pulsar.md">Konfigurasi terkait Pulsar</a>.
 |</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">Menggunakan berkas YAML<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
@@ -226,7 +226,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk kluster Milvus di K8s, Anda dapat mengonfigurasi Kafka dalam perintah yang sama saat memulai Milvus. Atau, Anda dapat mengonfigurasi Kafka menggunakan berkas ` <code translate="no">values.yml</code> ` di jalur `/charts/milvus` dalam repositori ` <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> ` sebelum memulai Milvus.</p>
+    </button></h2><p>Untuk kluster Milvus di K8s, Anda dapat mengonfigurasi Kafka dalam perintah yang sama saat memulai Milvus. Sebagai alternatif, Anda dapat mengonfigurasi Kafka menggunakan berkas ` <code translate="no">values.yml</code> ` di jalur `/charts/milvus` dalam repositori ` <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> ` sebelum memulai Milvus.</p>
 <p>Untuk detail tentang cara mengonfigurasi Milvus menggunakan Helm, lihat <a href="/docs/id/v2.6.x/configure-helm.md">Mengonfigurasi Milvus dengan Helm Charts</a>. Untuk detail tentang item konfigurasi terkait Pulsar, lihat <a href="/docs/id/v2.6.x/configure_pulsar.md">Konfigurasi terkait Pulsar</a>.</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">Menggunakan berkas YAML<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -298,7 +298,7 @@ summary: >-
       compressionTypes: [0, 0, 7, 7, 7]    
 </span><button class="copy-code-btn"></button></code></pre>
 <div class="alert warning">
-<p>Mengubah penyimpanan pesan tidak disarankan. Jika Anda tetap ingin melakukannya, hentikan semua operasi DDL, lalu panggil API FlushAll untuk mengosongkan semua koleksi, dan akhirnya hentikan Milvus sebelum benar-benar mengubah penyimpanan pesan.</p>
+<p>Mengganti penyimpanan pesan tidak disarankan. Jika Anda tetap ingin melakukannya, hentikan semua operasi DDL, lalu panggil API FlushAll untuk mengosongkan semua koleksi, dan akhirnya hentikan Milvus sebelum Anda benar-benar mengganti penyimpanan pesan.</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">Langkah Selanjutnya<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

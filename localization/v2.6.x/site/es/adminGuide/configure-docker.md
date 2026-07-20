@@ -39,8 +39,8 @@ En la versión actual, todos los parámetros solo surten efecto tras reiniciar M
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://raw.githubusercontent.com/milvus-io/milvus/v2.6.19/configs/milvus.yaml">Descarga</a> <code translate="no">milvus.yaml</code> directamente o mediante el siguiente comando.</p>
-<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/v2.6.19/configs/milvus.yaml</span>
+    </button></h2><p><a href="https://raw.githubusercontent.com/milvus-io/milvus/v2.6.20/configs/milvus.yaml">Descarga</a> « <code translate="no">milvus.yaml</code> » directamente o mediante el siguiente comando.</p>
+<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/v2.6.20/configs/milvus.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Modify-the-configuration-file" class="common-anchor-header">Modificar el archivo de configuración<button data-href="#Modify-the-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -57,11 +57,11 @@ En la versión actual, todos los parámetros solo surten efecto tras reiniciar M
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Configura tu instancia de Milvus para adaptarla a los escenarios de tu aplicación ajustando los parámetros correspondientes en <code translate="no">milvus.yaml</code>.</p>
+    </button></h2><p>Configura tu instancia de Milvus para que se adapte a los escenarios de tu aplicación ajustando los parámetros correspondientes en <code translate="no">milvus.yaml</code>.</p>
 <p>Consulta los siguientes enlaces para obtener más información sobre cada parámetro.</p>
 <p>Ordenado por:</p>
 <div class="filter">
-<a href="#component">Componentes o dependencias</a> <a href="#purpose">Finalidad de la configuración</a> 
+<a href="#component">Componentes o dependencias</a> <a href="#purpose">Fines de configuración</a> 
 </div>
 <div class="filter-component table-wrapper">
 <table id="component">
@@ -112,13 +112,13 @@ En la versión actual, todos los parámetros solo surten efecto tras reiniciar M
 <table id="purpose">
 <thead>
   <tr>
-    <th>Finalidad</th>
+    <th>Objetivo</th>
     <th>Parámetros</th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td>Ajuste del rendimiento</td>
+    <td>Optimización del rendimiento</td>
     <td>
         <ul>
             <li><a href="/docs/es/v2.6.x/configure_querynode.md#queryNodegracefulTime"><code translate="no">queryNode.gracefulTime</code></a></li>
@@ -212,10 +212,10 @@ En la versión actual, todos los parámetros solo surten efecto tras reiniciar M
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Descarga el archivo de instalación de Milvus <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.19/milvus-standalone-docker-compose.yml">independiente</a> y guárdalo como « <code translate="no">docker-compose.yml</code> ».</p>
+    </button></h2><p>Descarga el archivo de instalación de Milvus <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.20/milvus-standalone-docker-compose.yml">independiente</a> y guárdalo como « <code translate="no">docker-compose.yml</code> ».</p>
 <p>También puede simplemente ejecutar el siguiente comando.</p>
 <pre><code translate="no"><span class="hljs-meta prompt_"># </span><span class="language-bash">For Milvus standalone</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.19/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.20/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Modify-the-installation-file" class="common-anchor-header">Modifica el archivo de instalación<button data-href="#Modify-the-installation-file" class="anchor-icon" translate="no">
       <svg translate="no"

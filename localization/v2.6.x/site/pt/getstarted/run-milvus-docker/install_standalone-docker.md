@@ -63,14 +63,14 @@ title: Executar o Milvus no Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Novidades na versão 2.6.19:</strong></p>
+<p><strong>Novidades na versão 2.6.20:</strong></p>
 <ul>
 <li><strong>Nó de streaming</strong>: Capacidades de processamento de dados melhoradas</li>
 <li><strong>Woodpecker MQ</strong>: Fila de mensagens melhorada com menor sobrecarga de manutenção; consulte <a href="/docs/pt/v2.6.x/use-woodpecker.md">«Utilizar o Woodpecker</a> » para mais detalhes</li>
 <li><strong>Arquitetura otimizada</strong>: componentes consolidados para um melhor desempenho</li>
 </ul>
 <p>Descarregue sempre o script mais recente para garantir que obtém as configurações e melhorias de arquitetura mais recentes.</p>
-<p>Se pretender utilizar <a href="https://milvus.io/docs/milvus_backup_overview.md">o Backup</a> no modo de implementação autónoma, recomenda-se que utilize o método de implementação <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
+<p>Se pretender utilizar <a href="https://milvus.io/docs/milvus_backup_overview.md">o Backup</a> no modo de implementação autónoma, recomenda-se a utilização do método de implementação <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
 <p>Se tiver alguma dificuldade ao descarregar a imagem, contacte-nos através do endereço <a href="mailto:community@zilliz.com">community@zilliz.com</a> com detalhes sobre o problema e iremos prestar-lhe o apoio necessário.</p>
 </div>
 <p>Após executar o script de instalação:</p>

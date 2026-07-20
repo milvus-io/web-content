@@ -1,6 +1,6 @@
 ---
 id: upgrade_milvus_cluster-docker.md
-summary: Aprende a actualizar un clúster de Milvus con Docker Compose.
+summary: Descubre cómo actualizar un clúster de Milvus con Docker Compose.
 title: Actualizar el clúster de Milvus con Docker Compose
 ---
 <div class="tab-wrapper"><a href="/docs/es/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/es/v2.6.x/upgrade_milvus_cluster-operator.md" class=''>OperatorMilvus</a><a href="/docs/es/v2.6.x/configure_operator.md" class=''>OperatorMilvus</a><a href="/docs/es/v2.6.x/configure-docker.md" class=''>OperatorHelmDocker</a><a href="/docs/es/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>ComposeHelmDocker</a><a href="/docs/es/v2.6.x/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>
@@ -20,9 +20,9 @@ title: Actualizar el clúster de Milvus con Docker Compose
         ></path>
       </svg>
     </button></h1><p>En este tema se describe cómo actualizar Milvus mediante Docker Compose.</p>
-<p>En condiciones normales, puede <a href="#Upgrade-Milvus-by-changing-its-image">actualizar Milvus cambiando su imagen</a>. Sin embargo, es necesario <a href="#Migrate-the-metadata">migrar los metadatos</a> antes de cualquier actualización de la versión v2.1.x a la v2.6.19.</p>
+<p>En condiciones normales, puede <a href="#Upgrade-Milvus-by-changing-its-image">actualizar Milvus cambiando su imagen</a>. Sin embargo, es necesario <a href="#Migrate-the-metadata">migrar los metadatos</a> antes de cualquier actualización de la versión v2.1.x a la v2.6.20.</p>
 <div class="alert note">
-<p><strong>Limitaciones de la cola de mensajes</strong>: al actualizar a Milvus v2.6.19, debe mantener su elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</p>
+<p><strong>Limitaciones de la cola de mensajes</strong>: al actualizar a Milvus v2.6.20, debe mantener su elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</p>
 </div>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Actualizar Milvus cambiando su imagen<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -46,35 +46,35 @@ title: Actualizar el clúster de Milvus con Docker Compose
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">rootcoord:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-rootcoord</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.19</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.20</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-proxy</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.19</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.20</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">querycoord:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-querycoord</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.19</span>  
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.20</span>  
 <span class="hljs-string">...</span>
 <span class="hljs-attr">querynode:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-querynode</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.19</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.20</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">indexcoord:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-indexcoord</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.19</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.20</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">indexnode:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-indexnode</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.19</span> 
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.20</span> 
 <span class="hljs-string">...</span>
 <span class="hljs-attr">datacoord:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-datacoord</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.19</span>   
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.20</span>   
 <span class="hljs-string">...</span>
 <span class="hljs-attr">datanode:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-datanode</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.19</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.20</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Ejecute los siguientes comandos para realizar la actualización.</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -108,7 +108,7 @@ docker compose up -d
   <span class="hljs-attr">runWithBackup:</span> <span class="hljs-literal">true</span>
 <span class="hljs-attr">config:</span>
   <span class="hljs-attr">sourceVersion:</span> <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  <span class="hljs-attr">targetVersion:</span> <span class="hljs-number">2.6</span><span class="hljs-number">.19</span>
+  <span class="hljs-attr">targetVersion:</span> <span class="hljs-number">2.6</span><span class="hljs-number">.20</span>
   <span class="hljs-attr">backupFilePath:</span> <span class="hljs-string">/tmp/migration.bak</span>
 <span class="hljs-attr">metastore:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">etcd</span>

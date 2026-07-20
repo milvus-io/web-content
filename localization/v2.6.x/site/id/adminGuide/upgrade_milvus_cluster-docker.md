@@ -1,6 +1,8 @@
 ---
 id: upgrade_milvus_cluster-docker.md
-summary: Pelajari cara meng-upgrade kluster Milvus menggunakan Docker Compose.
+summary: >-
+  Pelajari cara melakukan upgrade pada kluster Milvus menggunakan Docker
+  Compose.
 title: Memperbarui Kluster Milvus dengan Docker Compose
 ---
 <div class="tab-wrapper"><a href="/docs/id/v2.6.x/upgrade_milvus_cluster-operator.md" class=''>Operator MilvusOperator</a><a href="/docs/id/v2.6.x/configure_operator.md" class=''>MilvusOperator</a><a href="/docs/id/v2.6.x/configure-docker.md" class=''>MilvusHelmDocker</a><a href="/docs/id/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>ComposeHelmDocker</a><a href="/docs/id/v2.6.x/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>
@@ -20,9 +22,9 @@ title: Memperbarui Kluster Milvus dengan Docker Compose
         ></path>
       </svg>
     </button></h1><p>Topik ini menjelaskan cara memperbarui Milvus Anda menggunakan Docker Compose.</p>
-<p>Dalam kondisi normal, Anda dapat <a href="#Upgrade-Milvus-by-changing-its-image">memperbarui Milvus dengan mengganti gambarnya</a>. Namun, Anda perlu <a href="#Migrate-the-metadata">memigrasikan metadata</a> sebelum melakukan pembaruan dari v2.1.x ke v2.6.19.</p>
+<p>Dalam kondisi normal, Anda dapat <a href="#Upgrade-Milvus-by-changing-its-image">memperbarui Milvus dengan mengganti gambarnya</a>. Namun, Anda perlu <a href="#Migrate-the-metadata">memigrasikan metadata</a> sebelum melakukan pembaruan dari v2.1.x ke v2.6.20.</p>
 <div class="alert note">
-<p><strong>Batasan Antrian Pesan</strong>: Saat melakukan pembaruan ke Milvus v2.6.19, Anda harus mempertahankan pilihan antrian pesan saat ini. Beralih antara sistem antrian pesan yang berbeda selama proses pembaruan tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia di versi mendatang.</p>
+<p><strong>Batasan Antrian Pesan</strong>: Saat melakukan pembaruan ke Milvus v2.6.20, Anda harus mempertahankan pilihan antrian pesan saat ini. Beralih antara sistem antrian pesan yang berbeda selama proses pembaruan tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia pada versi mendatang.</p>
 </div>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Memperbarui Milvus dengan mengganti gambarnya<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -46,35 +48,35 @@ title: Memperbarui Kluster Milvus dengan Docker Compose
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">rootcoord:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-rootcoord</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.19</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.20</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-proxy</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.19</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.20</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">querycoord:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-querycoord</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.19</span>  
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.20</span>  
 <span class="hljs-string">...</span>
 <span class="hljs-attr">querynode:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-querynode</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.19</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.20</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">indexcoord:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-indexcoord</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.19</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.20</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">indexnode:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-indexnode</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.19</span> 
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.20</span> 
 <span class="hljs-string">...</span>
 <span class="hljs-attr">datacoord:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-datacoord</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.19</span>   
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.20</span>   
 <span class="hljs-string">...</span>
 <span class="hljs-attr">datanode:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-datanode</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.19</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.20</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Jalankan perintah berikut untuk melakukan peningkatan versi.</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -108,7 +110,7 @@ docker compose up -d
   <span class="hljs-attr">runWithBackup:</span> <span class="hljs-literal">true</span>
 <span class="hljs-attr">config:</span>
   <span class="hljs-attr">sourceVersion:</span> <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  <span class="hljs-attr">targetVersion:</span> <span class="hljs-number">2.6</span><span class="hljs-number">.19</span>
+  <span class="hljs-attr">targetVersion:</span> <span class="hljs-number">2.6</span><span class="hljs-number">.20</span>
   <span class="hljs-attr">backupFilePath:</span> <span class="hljs-string">/tmp/migration.bak</span>
 <span class="hljs-attr">metastore:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">etcd</span>
@@ -124,7 +126,7 @@ docker compose up -d
 <span class="hljs-comment"># and you put migration.yaml in the same directory with docker-compose.yaml.</span>
 docker run --<span class="hljs-built_in">rm</span> -it --network milvus -v $(<span class="hljs-built_in">pwd</span>)/migration.yaml:/milvus/configs/migration.yaml milvus/meta-migration:v2.2.0 /milvus/bin/meta-migration -config=/milvus/configs/migration.yaml
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Jalankan kembali komponen Milvus dengan gambar Milvus yang baru.</p>
+<li><p>Jalankan kembali komponen Milvus menggunakan gambar Milvus yang baru.</p>
 <pre><code translate="no">Update the milvus <span class="hljs-selector-tag">image</span> tag in the docker-compose<span class="hljs-selector-class">.yaml</span>
 docker compose down
 docker compose up -d
@@ -152,7 +154,7 @@ docker compose up -d
 </ul></li>
 <li>Jika Anda siap untuk menerapkan kluster Anda di cloud:
 <ul>
-<li>Pelajari cara <a href="/docs/id/v2.6.x/eks.md">Deploy Milvus di Amazon EKS dengan Terraform</a></li>
+<li>Pelajari cara <a href="/docs/id/v2.6.x/eks.md">mengimplementasikan Milvus di Amazon EKS dengan Terraform</a></li>
 <li>Pelajari cara <a href="/docs/id/v2.6.x/gcp.md">mengimplementasikan kluster Milvus di GCP dengan Kubernetes</a></li>
 <li>Pelajari cara <a href="/docs/id/v2.6.x/azure.md">mengimplementasikan Milvus di Microsoft Azure dengan Kubernetes</a></li>
 </ul></li>

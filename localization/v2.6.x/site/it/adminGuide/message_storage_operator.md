@@ -19,13 +19,13 @@ summary: Scopri come configurare l'archiviazione dei messaggi con Milvus Operato
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus utilizza RocksMQ, Pulsar o Kafka per gestire i log delle modifiche recenti, generare log di flusso e fornire sottoscrizioni ai log. Questo argomento illustra come configurare le dipendenze relative all'archiviazione dei messaggi quando si installa Milvus con Milvus Operator. Per ulteriori dettagli, consultare <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">Configurazione dell'archiviazione dei messaggi con Milvus Operator</a> nel repository di Milvus Operator.</p>
+    </button></h1><p>Milvus utilizza RocksMQ, Pulsar o Kafka per gestire i log delle modifiche recenti, generare log di flusso e fornire sottoscrizioni ai log. Questo argomento illustra come configurare le dipendenze relative all'archiviazione dei messaggi quando si installa Milvus con Milvus Operator. Per ulteriori dettagli, consultare la sezione <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">"Configurazione dell'archiviazione dei messaggi con Milvus Operator</a> " nel repository di Milvus Operator.</p>
 <p>Questo argomento presuppone che Milvus Operator sia già stato distribuito.</p>
 <div class="alert note">Per ulteriori informazioni, consultare " <a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">Distribuzione di Milvus Operator</a> ". </div>
 <p>È necessario specificare un file di configurazione per utilizzare Milvus Operator e avviare un cluster Milvus.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-string">kubectl</span> <span class="hljs-string">apply</span> <span class="hljs-string">-f</span> <span class="hljs-string">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Per configurare le dipendenze di terze parti è sufficiente modificare il modello di codice in <code translate="no">milvus_cluster_default.yaml</code>. Le sezioni seguenti illustrano come configurare rispettivamente l’object storage, etcd e Pulsar.</p>
+<p>Per configurare le dipendenze di terze parti è sufficiente modificare il modello di codice in ` <code translate="no">milvus_cluster_default.yaml</code> `. Le sezioni seguenti illustrano come configurare rispettivamente l’object storage, etcd e Pulsar.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Prima di iniziare<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -51,16 +51,16 @@ summary: Scopri come configurare l'archiviazione dei messaggi con Milvus Operato
 <tr><td style="text-align:center">Modalità cluster</td><td style="text-align:center">✖️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td></tr>
 </tbody>
 </table>
-<p>Esistono anche altre limitazioni relative alla specificazione dell'archivio dei messaggi:</p>
+<p>Esistono anche altre limitazioni relative alla specificazione dell'archivio messaggi:</p>
 <ul>
-<li>È supportato un solo archivio messaggi per ogni istanza di Milvus. Tuttavia, è ancora garantita la retrocompatibilità con più archivi messaggi configurati per una singola istanza. L’ordine di priorità è il seguente:
+<li>È supportato un solo archivio messaggi per ogni istanza di Milvus. Tuttavia, è ancora garantita la retrocompatibilità con la configurazione di più archivi messaggi per una singola istanza. L'ordine di priorità è il seguente:
 <ul>
 <li>modalità standalone:  RocksMQ (predefinito) &gt; Pulsar &gt; Kafka</li>
 <li>modalità cluster: Pulsar (predefinito) &gt; Kafka</li>
 </ul></li>
-<li>L'archivio dei messaggi non può essere modificato mentre il sistema Milvus è in esecuzione.</li>
+<li>L'archivio messaggi non può essere modificato mentre il sistema Milvus è in esecuzione.</li>
 <li>Sono supportate solo le versioni 2.x o 3.x di Kafka.</li>
-<li><strong>Limiti dell’aggiornamento</strong>: <strong>Limiti relativi alle code di messaggi</strong>: durante l’aggiornamento a Milvus v2.6.19, è necessario mantenere la scelta attuale della coda di messaggi. Il passaggio da un sistema di code di messaggi a un altro durante l’aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code di messaggi sarà disponibile nelle versioni future.</li>
+<li><strong>Limiti dell’aggiornamento</strong>: <strong>Limiti relativi alle code di messaggi</strong>: durante l’aggiornamento a Milvus v2.6.20, è necessario mantenere la scelta attuale della coda di messaggi. Il passaggio da un sistema di code di messaggi a un altro durante l’aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code di messaggi sarà disponibile nelle versioni future.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Configurazione di RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -107,7 +107,7 @@ summary: Scopri come configurare l'archiviazione dei messaggi con Milvus Operato
 <h5 id="Key-configuration-options" class="common-anchor-header">Opzioni di configurazione principali:</h5><ul>
 <li><code translate="no">msgStreamType</code>: rocksmq: Imposta esplicitamente RocksMQ come coda dei messaggi</li>
 <li><code translate="no">persistence.enabled</code>: Abilita l'archiviazione persistente dei dati di RocksMQ</li>
-<li><code translate="no">persistence.pvcDeletion</code>: Se impostato su true, il PVC verrà eliminato quando l’istanza Milvus viene eliminata</li>
+<li><code translate="no">persistence.pvcDeletion</code>: Se impostato su true, il PVC verrà eliminato quando l’istanza di Milvus verrà eliminata</li>
 <li><code translate="no">persistentVolumeClaim.spec</code>: Specifiche standard del PVC di Kubernetes</li>
 <li><code translate="no">accessModes</code>: In genere <code translate="no">ReadWriteOnce</code> per lo storage a blocchi</li>
 <li><code translate="no">storageClassName</code>: La classe di archiviazione del proprio cluster</li>
@@ -243,7 +243,7 @@ I campi utilizzati per configurare un servizio Pulsar esterno includono:</p>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">Questo esempio specifica il numero di repliche di ciascun componente di Pulsar, le risorse di calcolo di Pulsar BookKeeper e altre configurazioni.</div>
 <div class="alert note">Trovi le voci di configurazione complete per configurare un servizio Pulsar interno nel file ` <a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">values.yaml`</a>. Aggiunga le voci di configurazione necessarie sotto ` <code translate="no">pulsar.inCluster.values</code> `, come mostrato nell’esempio precedente.</div>
-<p>Supponendo che il file di configurazione si chiami <code translate="no">milvuscluster.yaml</code>, eseguire il comando seguente per applicare la configurazione.</p>
+<p>Supponendo che il file di configurazione si chiami ` <code translate="no">milvuscluster.yaml</code>`, eseguire il comando seguente per applicare la configurazione.</p>
 <pre><code translate="no" class="language-Shell">kubectl apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Configure-Kafka" class="common-anchor-header">Configurazione di Kafka<button data-href="#Configure-Kafka" class="anchor-icon" translate="no">
@@ -312,7 +312,7 @@ I campi utilizzati per configurare un servizio Pulsar esterno includono:</p>
         <span class="hljs-comment"># ...</span>
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
-<p>Le configurazioni SASL sono supportate a partire dalla versione v0.8.5 dell’operatore.</p>
+<p>Le configurazioni SASL sono supportate nella versione v0.8.5 o successive dell’operatore.</p>
 </blockquote>
 <h3 id="Internal-Kafka" class="common-anchor-header">Kafka interno<button data-href="#Internal-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"

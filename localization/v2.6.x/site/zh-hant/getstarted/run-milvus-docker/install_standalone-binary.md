@@ -3,9 +3,9 @@ id: install_standalone-binary.md
 label: RPM/DEB Package
 related_key: RPM/DEB Package
 summary: 瞭解如何使用預先建置的 RPM/DEB 套件安裝 Milvus 獨立版本。
-title: 使用 RPM/DEB 套件安裝 Milvus 獨立版本
+title: 使用 RPM/DEB 套件安裝 Milvus 獨立版
 ---
-<h1 id="Install-Milvus-Standalone-with-RPMDEB-Package" class="common-anchor-header">使用 RPM/DEB 套件安裝 Milvus 獨立版本<button data-href="#Install-Milvus-Standalone-with-RPMDEB-Package" class="anchor-icon" translate="no">
+<h1 id="Install-Milvus-Standalone-with-RPMDEB-Package" class="common-anchor-header">使用 RPM/DEB 套件安裝 Milvus 獨立版<button data-href="#Install-Milvus-Standalone-with-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +20,7 @@ title: 使用 RPM/DEB 套件安裝 Milvus 獨立版本
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本頁面說明如何使用預先建置的 RPM/DEB 套件安裝 Milvus 獨立版。</p>
+    </button></h1><p>本頁面說明如何使用預先編譯的 RPM/DEB 套件安裝 Milvus 獨立版。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先決條件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -55,13 +55,13 @@ title: 使用 RPM/DEB 套件安裝 Milvus 獨立版本
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以從<a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.19">Milvus 發行版頁面</a>，根據您的系統架構下載 RPM/DEB 套件。</p>
+    </button></h2><p>您可以從<a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.20">Milvus 發行版頁面</a>，根據您的系統架構下載 RPM/DEB 套件。</p>
 <ul>
-<li>若為 x86_64/amd64 架構，請下載<strong>milvus_2.6.19-1_amd64.deb</strong>或<strong>milvus_2.6.19-1_amd64.rpm</strong>套件。</li>
-<li>若為 ARM64 架構，請下載<strong>milvus_2.6.19-1_arm64.deb</strong>或<strong>milvus_2.6.19-1_arm64.rpm</strong>套件。</li>
+<li>若為 x86_64/amd64 架構，請下載<strong>milvus_2.6.20-1_amd64.deb</strong>或<strong>milvus_2.6.20-1_amd64.rpm</strong>套件。</li>
+<li>若為 ARM64 架構，請下載<strong>milvus_2.6.20-1_arm64.deb</strong>或<strong>milvus_2.6.20-1_arm64.rpm</strong>套件。</li>
 </ul>
-<p>以下指令假設您將在 x86_64/amd64 機器上執行 Milvus 獨立版本。</p>
-<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.19/milvus_2.6.19-1_amd64.rpm -O milvus_2.6.19-1_amd64.rpm
+<p>以下指令假設您將在 x86_64/amd64 機器上執行 Milvus 獨立版。</p>
+<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.20/milvus_2.6.20-1_amd64.rpm -O milvus_2.6.20-1_amd64.rpm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-the-RPMDEB-Package" class="common-anchor-header">安裝 RPM/DEB 套件<button data-href="#Install-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -80,11 +80,11 @@ title: 使用 RPM/DEB 套件安裝 Milvus 獨立版本
       </svg>
     </button></h2><p>要安裝 RPM/DEB 套件，您可以使用系統的套件管理員。</p>
 <p>對於基於 RPM 的系統（例如 CentOS、Fedora 和 RHEL），請使用<code translate="no">yum</code> 指令來安裝套件。</p>
-<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.19-1_amd64.rpm
+<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.20-1_amd64.rpm
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>對於基於 DEB 的系統（例如 Ubuntu 和 Debian），請使用<code translate="no">apt</code> 指令來安裝套件。</p>
-<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.19-1_amd64.deb
+<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.20-1_amd64.deb
 dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Start-Milvus-Standalone" class="common-anchor-header">啟動 Milvus 獨立模式<button data-href="#Start-Milvus-Standalone" class="anchor-icon" translate="no">
@@ -149,7 +149,7 @@ dpkg -l | grep milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要停止 Milvus 獨立版，可使用以下指令：</p>
+    </button></h2><p>若要停止 Milvus 獨立版，可使用以下指令：</p>
 <pre><code translate="no" class="language-shell">systemctl stop milvus
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Uninstall-Milvus-Standalone" class="common-anchor-header">解除安裝 Milvus 獨立版<button data-href="#Uninstall-Milvus-Standalone" class="anchor-icon" translate="no">
@@ -191,7 +191,7 @@ dpkg -l | grep milvus
       </svg>
     </button></h2><p>安裝完 Milvus 獨立版後，您可以：</p>
 <ul>
-<li><p>請參閱<a href="/docs/zh-hant/v2.6.x/quickstart.md">《快速入門》</a>以了解 Milvus 的功能。</p></li>
+<li><p>請參閱<a href="/docs/zh-hant/v2.6.x/quickstart.md">《快速入門指南》</a>，了解 Milvus 的功能。</p></li>
 <li><p>學習 Milvus 的基本操作：</p>
 <ul>
 <li><a href="/docs/zh-hant/v2.6.x/manage_databases.md">管理資料庫</a></li>
@@ -212,6 +212,6 @@ dpkg -l | grep milvus
 <li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus-webui.md">Milvus WebUI</a>，這是專為 Milvus 可觀察性與管理設計的直覺式網頁介面。</p></li>
 <li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>，這是一款用於 Milvus 資料備份的開源工具。</p></li>
 <li><p>探索<a href="/docs/zh-hant/v2.6.x/birdwatcher_overview.md">Birdwatcher，這</a>是一款用於 Milvus 除錯與動態配置更新的開源工具。</p></li>
-<li><p>探索<a href="https://github.com/zilliztech/attu">Attu，</a>這是一款用於直觀管理 Milvus 的開源 GUI 工具。</p></li>
-<li><p><a href="/docs/zh-hant/v2.6.x/monitor.md">使用 Prometheus 監控 Milvus</a>。</p></li>
+<li><p>探索<a href="https://github.com/zilliztech/attu">Attu，這</a>是一款用於直觀管理 Milvus 的開源圖形化介面工具。</p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/monitor.md">透過 Prometheus 監控 Milvus</a>。</p></li>
 </ul>

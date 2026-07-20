@@ -63,10 +63,10 @@ title: Menjalankan Milvus di Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Apa yang baru di v2.6.19:</strong></p>
+<p><strong>Apa yang baru di v2.6.20:</strong></p>
 <ul>
 <li><strong>Streaming Node</strong>: Kemampuan pemrosesan data yang ditingkatkan</li>
-<li><strong>Woodpecker MQ</strong>: Antrian pesan yang ditingkatkan dengan beban pemeliharaan yang lebih rendah; lihat " <a href="/docs/id/v2.6.x/use-woodpecker.md">Gunakan Woodpecker</a> " untuk detailnya</li>
+<li><strong>Woodpecker MQ</strong>: Antrian pesan yang ditingkatkan dengan beban pemeliharaan yang lebih rendah, lihat <a href="/docs/id/v2.6.x/use-woodpecker.md">Gunakan Woodpecker</a> untuk detailnya</li>
 <li><strong>Arsitektur yang Dioptimalkan</strong>: Komponen yang dikonsolidasikan untuk kinerja yang lebih baik</li>
 </ul>
 <p>Selalu unduh skrip terbaru untuk memastikan Anda mendapatkan konfigurasi dan peningkatan arsitektur terbaru.</p>
@@ -77,7 +77,7 @@ title: Menjalankan Milvus di Docker (Linux)
 <ul>
 <li>Sebuah kontainer Docker bernama milvus telah dimulai di port <strong>19530</strong>.</li>
 <li>Embed etcd telah diinstal bersama Milvus di kontainer yang sama dan beroperasi di port <strong>2379</strong>. Berkas konfigurasinya dipetakan ke <strong>`embedEtcd.yaml</strong> ` di folder saat ini.</li>
-<li>Untuk mengubah konfigurasi Milvus default, tambahkan pengaturan Anda ke berkas <strong>user.yaml</strong> di folder saat ini, lalu mulai ulang layanan.</li>
+<li>Untuk mengubah konfigurasi default Milvus, tambahkan pengaturan Anda ke berkas <strong>user.yaml</strong> di folder saat ini, lalu mulai ulang layanan.</li>
 <li>Volume data Milvus dipetakan ke ` <strong>volumes/milvus</strong> ` di folder saat ini.</li>
 </ul>
 <p>Anda dapat mengakses Milvus WebUI di <code translate="no">http://127.0.0.1:9091/webui/</code> untuk mempelajari lebih lanjut tentang instance Milvus Anda. Untuk detailnya, lihat <a href="/docs/id/v2.6.x/milvus-webui.md">Milvus WebUI</a>.</p>
@@ -122,7 +122,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Anda dapat memperbarui ke versi terbaru Milvus menggunakan perintah pembaruan bawaan. Perintah ini secara otomatis mengunduh konfigurasi terbaru dan gambar Milvus:</p>
+    </button></h2><p>Anda dapat melakukan pembaruan ke versi terbaru Milvus menggunakan perintah pembaruan bawaan. Perintah ini secara otomatis mengunduh konfigurasi terbaru dan gambar Milvus:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Upgrade Milvus to the latest version</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh upgrade</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -181,7 +181,7 @@ EOF
 <li><a href="/docs/id/v2.6.x/manage_databases.md">Mengelola Basis Data</a></li>
 <li><a href="/docs/id/v2.6.x/manage-collections.md">Mengelola Koleksi</a></li>
 <li><a href="/docs/id/v2.6.x/manage-partitions.md">Mengelola Partisi</a></li>
-<li><a href="/docs/id/v2.6.x/insert-update-delete.md">Sisipkan, Upsert &amp; Hapus</a></li>
+<li><a href="/docs/id/v2.6.x/insert-update-delete.md">Sisipkan, Upsert, &amp; Hapus</a></li>
 <li><a href="/docs/id/v2.6.x/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
 <li><a href="/docs/id/v2.6.x/multi-vector-search.md">Pencarian Hibrida</a></li>
 </ul></li>

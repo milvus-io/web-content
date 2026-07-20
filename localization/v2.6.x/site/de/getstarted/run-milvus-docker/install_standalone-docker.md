@@ -63,15 +63,15 @@ title: Milvus in Docker ausführen (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Neuerungen in Version 2.6.19:</strong></p>
+<p><strong>Neuerungen in Version 2.6.20:</strong></p>
 <ul>
 <li><strong>Streaming-Knoten</strong>: Erweiterte Datenverarbeitungsfunktionen</li>
 <li><strong>Woodpecker MQ</strong>: Verbesserte Nachrichtenwarteschlange mit reduziertem Wartungsaufwand; weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/use-woodpecker.md">„Woodpecker verwenden“</a> </li>
 <li><strong>Optimierte Architektur</strong>: Konsolidierte Komponenten für bessere Leistung</li>
 </ul>
-<p>Laden Sie immer das neueste Skript herunter, um sicherzustellen, dass Sie die aktuellsten Konfigurationen und Architekturverbesserungen erhalten.</p>
-<p>Wenn Sie <a href="https://milvus.io/docs/milvus_backup_overview.md">„Backup“</a> im Standalone-Bereitstellungsmodus nutzen möchten, wird die Verwendung der <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker-Compose</a> -Bereitstellungsmethode empfohlen.</p>
-<p>Sollten beim Abrufen des Images Probleme auftreten, kontaktieren Sie uns bitte unter <a href="mailto:community@zilliz.com">community@zilliz.com</a> mit Details zum Problem, und wir werden Ihnen die erforderliche Unterstützung zukommen lassen.</p>
+<p>Laden Sie immer das aktuellste Skript herunter, um sicherzustellen, dass Sie die neuesten Konfigurationen und Architekturverbesserungen erhalten.</p>
+<p>Wenn Sie <a href="https://milvus.io/docs/milvus_backup_overview.md">„Backup“</a> im Standalone-Bereitstellungsmodus nutzen möchten, wird die Verwendung der <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker-Compose-</a> Bereitstellungsmethode empfohlen.</p>
+<p>Sollten beim Abrufen des Images Probleme auftreten, kontaktieren Sie uns bitte unter <a href="mailto:community@zilliz.com">community@zilliz.com</a> mit detaillierten Angaben zum Problem, und wir werden Ihnen die erforderliche Unterstützung zukommen lassen.</p>
 </div>
 <p>Nach Ausführung des Installationsskripts:</p>
 <ul>
@@ -96,7 +96,7 @@ title: Milvus in Docker ausführen (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie können die Milvus-Konfigurationen in der Datei <strong>„user.yaml“</strong> im aktuellen Ordner ändern. Um beispielsweise die URL von <code translate="no">proxy.healthCheckTimeout</code> auf <code translate="no">1000</code> zu ändern, können Sie die Datei wie folgt anpassen:</p>
+    </button></h2><p>Sie können die Milvus-Konfigurationen in der Datei <strong>„user.yaml“</strong> im aktuellen Ordner ändern. Um beispielsweise die Adresse von <code translate="no">proxy.healthCheckTimeout</code> in <code translate="no">1000</code> zu ändern, können Sie die Datei wie folgt anpassen:</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
@@ -122,7 +122,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie können mithilfe des integrierten Upgrade-Befehls auf die neueste Version von Milvus aktualisieren. Dadurch werden automatisch die neueste Konfiguration und das Milvus-Image heruntergeladen:</p>
+    </button></h2><p>Sie können mithilfe des integrierten Upgrade-Befehls auf die neueste Version von Milvus aktualisieren. Dadurch werden automatisch die neueste Konfiguration und das neueste Milvus-Image heruntergeladen:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Upgrade Milvus to the latest version</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh upgrade</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -130,7 +130,7 @@ EOF
 <p>Der Upgrade-Befehl führt automatisch folgende Schritte aus:</p>
 <ul>
 <li>Lädt das neueste Installationsskript mit aktualisierten Konfigurationen herunter</li>
-<li>Das neueste Milvus-Docker-Image abruft</li>
+<li>Das neueste Milvus-Docker-Image abrufen</li>
 <li>den Container mit der neuen Version neu startet</li>
 <li>Ihre vorhandenen Daten und Konfigurationen bleiben erhalten</li>
 </ul>
@@ -179,7 +179,7 @@ EOF
 <li><p>Lernen Sie die grundlegenden Funktionen von Milvus kennen:</p>
 <ul>
 <li><a href="/docs/de/v2.6.x/manage_databases.md">Datenbanken verwalten</a></li>
-<li><a href="/docs/de/v2.6.x/manage-collections.md">Sammlungen verwalten</a></li>
+<li><a href="/docs/de/v2.6.x/manage-collections.md">Kollektionen verwalten</a></li>
 <li><a href="/docs/de/v2.6.x/manage-partitions.md">Partitionen verwalten</a></li>
 <li><a href="/docs/de/v2.6.x/insert-update-delete.md">Einfügen, Upsert und Löschen</a></li>
 <li><a href="/docs/de/v2.6.x/single-vector-search.md">Einzelvektor-Suche</a></li>
@@ -187,7 +187,7 @@ EOF
 </ul></li>
 <li><p><a href="/docs/de/v2.6.x/upgrade_milvus_cluster-helm.md">Milvus mit Helm-Chart aktualisieren</a>.</p></li>
 <li><p><a href="/docs/de/v2.6.x/scaleout.md">Skalieren Sie Ihren Milvus-Cluster</a>.</p></li>
-<li><p>Stellen Sie Ihren Milvus-Cluster in der Cloud bereit:</p>
+<li><p>Stellen Sie Ihren Milvus-Cluster in folgenden Clouds bereit:</p>
 <ul>
 <li><a href="/docs/de/v2.6.x/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/de/v2.6.x/gcp.md">Google Cloud</a></li>

@@ -19,7 +19,7 @@ summary: Pelajari cara mengonfigurasi penyimpanan pesan menggunakan Milvus Opera
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus menggunakan RocksMQ, Pulsar, atau Kafka untuk mengelola log perubahan terbaru, mengeluarkan log aliran, dan menyediakan langganan log. Topik ini menjelaskan cara mengonfigurasi dependensi penyimpanan pesan saat Anda menginstal Milvus dengan Milvus Operator. Untuk detail lebih lanjut, lihat " <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">Mengonfigurasi Penyimpanan Pesan dengan Milvus Operator</a> " di repositori Milvus Operator.</p>
+    </button></h1><p>Milvus menggunakan RocksMQ, Pulsar, atau Kafka untuk mengelola log perubahan terbaru, mengeluarkan log aliran, dan menyediakan langganan log. Topik ini menjelaskan cara mengonfigurasi dependensi penyimpanan pesan saat Anda menginstal Milvus dengan Milvus Operator. Untuk detail lebih lanjut, lihat <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">Konfigurasi Penyimpanan Pesan dengan Milvus Operator</a> di repositori Milvus Operator.</p>
 <p>Topik ini mengasumsikan bahwa Anda telah menerapkan Milvus Operator.</p>
 <div class="alert note">Lihat " <a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">Menerapkan Milvus Operator</a> " untuk informasi lebih lanjut. </div>
 <p>Anda perlu menentukan berkas konfigurasi untuk menggunakan Milvus Operator guna memulai kluster Milvus.</p>
@@ -60,7 +60,7 @@ summary: Pelajari cara mengonfigurasi penyimpanan pesan menggunakan Milvus Opera
 </ul></li>
 <li>Penyimpanan pesan tidak dapat diubah saat sistem Milvus sedang berjalan.</li>
 <li>Hanya versi Kafka 2.x atau 3.x yang didukung.</li>
-<li><strong>Batasan peningkatan versi</strong>: <strong>Batasan Antrian Pesan</strong>: Saat meningkatkan ke Milvus v2.6.19, Anda harus mempertahankan pilihan antrian pesan Anda saat ini. Beralih di antara sistem antrian pesan yang berbeda selama peningkatan versi tidak didukung. Dukungan untuk mengubah sistem antrian pesan akan tersedia di versi mendatang.</li>
+<li><strong>Batasan peningkatan versi</strong>: <strong>Batasan Antrian Pesan</strong>: Saat meningkatkan ke Milvus v2.6.20, Anda harus mempertahankan pilihan antrian pesan Anda saat ini. Beralih di antara sistem antrian pesan yang berbeda selama peningkatan versi tidak didukung. Dukungan untuk mengubah sistem antrian pesan akan tersedia di versi mendatang.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Konfigurasi RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -312,7 +312,7 @@ Bidang yang digunakan untuk mengonfigurasi layanan Pulsar eksternal meliputi:</p
         <span class="hljs-comment"># ...</span>
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
-<p>Konfigurasi SASL didukung pada operator versi v0.8.5 atau yang lebih baru.</p>
+<p>Konfigurasi SASL didukung pada operator v0.8.5 atau versi yang lebih tinggi.</p>
 </blockquote>
 <h3 id="Internal-Kafka" class="common-anchor-header">Kafka Internal<button data-href="#Internal-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -330,7 +330,7 @@ Bidang yang digunakan untuk mengonfigurasi layanan Pulsar eksternal meliputi:</p
         ></path>
       </svg>
     </button></h3><p><code translate="no">inCluster</code> menunjukkan bahwa saat kluster Milvus dimulai, layanan Kafka akan dimulai secara otomatis di dalam kluster tersebut.</p>
-<h4 id="Example" class="common-anchor-header">Contoh</h4><p>Contoh berikut ini mengonfigurasi layanan Kafka internal.</p>
+<h4 id="Example" class="common-anchor-header">Contoh</h4><p>Contoh berikut mengonfigurasi layanan Kafka internal.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -346,8 +346,8 @@ Bidang yang digunakan untuk mengonfigurasi layanan Pulsar eksternal meliputi:</p
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<p>Temukan item konfigurasi lengkap untuk mengonfigurasi layanan Kafka internal <a href="https://artifacthub.io/packages/helm/bitnami/kafka">di sini</a>. Tambahkan item konfigurasi sesuai kebutuhan di bawah <code translate="no">kafka.inCluster.values</code>.</p>
-<p>Dengan asumsi bahwa berkas konfigurasi bernama ` <code translate="no">milvuscluster.yaml</code>`, jalankan perintah berikut untuk menerapkan konfigurasi.</p>
+<p>Temukan item konfigurasi lengkap untuk mengonfigurasi layanan Kafka internal <a href="https://artifacthub.io/packages/helm/bitnami/kafka">di sini</a>. Tambahkan item konfigurasi sesuai kebutuhan di bawah ` <code translate="no">kafka.inCluster.values</code>`.</p>
+<p>Dengan asumsi bahwa berkas konfigurasi tersebut bernama ` <code translate="no">milvuscluster.yaml</code>`, jalankan perintah berikut untuk menerapkan konfigurasi.</p>
 <pre><code translate="no"><span class="hljs-attribute">kubectl</span> apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">Langkah Selanjutnya<button data-href="#Whats-next" class="anchor-icon" translate="no">

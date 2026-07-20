@@ -23,7 +23,7 @@ title: Atualizar o cluster Milvus com o Helm Chart
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Este guia descreve como atualizar o seu cluster Milvus da versão v2.5.x para a v2.6.19 utilizando o Helm Chart.</p>
+    </button></h1><p>Este guia descreve como atualizar o seu cluster Milvus da versão v2.5.x para a v2.6.20 utilizando o Helm Chart.</p>
 <h2 id="Before-you-start" class="common-anchor-header">Antes de começar<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +39,7 @@ title: Atualizar o cluster Milvus com o Helm Chart
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-new-in-v2619" class="common-anchor-header">Novidades na v2.6.19<button data-href="#Whats-new-in-v2619" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Whats-new-in-v2620" class="common-anchor-header">Novidades na versão 2.6.20<button data-href="#Whats-new-in-v2620" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -54,7 +54,7 @@ title: Atualizar o cluster Milvus com o Helm Chart
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>A atualização do Milvus 2.5.x para a versão 2.6.19 envolve alterações arquitetónicas significativas:</p>
+    </button></h3><p>A atualização do Milvus 2.5.x para a versão 2.6.20 envolve alterações arquitetónicas significativas:</p>
 <ul>
 <li><strong>Consolidação do coordenador</strong>: os coordenadores separados legados (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) foram consolidados num único <code translate="no">mixCoord</code></li>
 <li><strong>Novos componentes</strong>: Introdução do Nodo de Streaming para um processamento de dados melhorado</li>
@@ -84,11 +84,11 @@ title: Atualizar o cluster Milvus com o Helm Chart
 </ul>
 <p><strong>Requisitos de compatibilidade:</strong></p>
 <ul>
-<li>O Milvus v2.6.0-rc1 <strong>não</strong> é <strong>compatível</strong> com a v2.6.19. Não são suportadas atualizações diretas a partir de versões candidatas.</li>
+<li>O Milvus v2.6.0-rc1 <strong>não</strong> é <strong>compatível</strong> com a v2.6.20. Não são suportadas atualizações diretas a partir de versões candidatas.</li>
 <li>Se estiver atualmente a utilizar a v2.6.0-rc1 e precisar de preservar os seus dados, consulte <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">este guia da comunidade</a> para obter assistência na migração.</li>
-<li><strong>Deve</strong> atualizar para a v2.5.16 ou posterior, com a funcionalidade « <code translate="no">mixCoordinator</code> » ativada, antes de atualizar para a v2.6.19.</li>
+<li><strong>Deve</strong> atualizar para a v2.5.16 ou posterior, com a funcionalidade « <code translate="no">mixCoordinator</code> » ativada, antes de atualizar para a v2.6.20.</li>
 </ul>
-<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v2.6.19, deve manter a sua escolha atual de fila de mensagens. A alternância entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte para a alteração de sistemas de filas de mensagens estará disponível em versões futuras.</p>
+<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v2.6.20, deve manter a sua escolha atual de fila de mensagens. A alternância entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.</p>
 <div class="alert note">
 A partir da versão 4.2.21 do gráfico Helm do Milvus, introduzimos o gráfico pulsar-v3.x como dependência. Para garantir a compatibilidade com versões anteriores, atualize o seu Helm para a versão 3.14 ou posterior e certifique-se de que adiciona a opção « <code translate="no">--reset-then-reuse-values</code> » sempre que utilizar « <code translate="no">helm upgrade</code> ».
 </div>
@@ -127,7 +127,7 @@ A partir da versão 4.2.21 do gráfico Helm do Milvus, introduzimos o gráfico p
 helm repo update zilliztech
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-O repositório de gráficos Helm do Milvus em <code translate="no">https://milvus-io.github.io/milvus-helm/</code> foi arquivado. Utilize o novo repositório <code translate="no">https://zilliztech.github.io/milvus-helm/</code> para as versões 4.0.31 e posteriores dos gráficos.
+O repositório de gráficos Helm do Milvus em <code translate="no">https://milvus-io.github.io/milvus-helm/</code> foi arquivado. Utilize o novo repositório <code translate="no">https://zilliztech.github.io/milvus-helm/</code> para as versões 4.0.31 e posteriores do gráfico.
 </div>
 <p>Para verificar a compatibilidade da versão do Helm Chart com as versões do Milvus:</p>
 <pre><code translate="no" class="language-bash">helm search repo zilliztech/milvus --versions
@@ -174,7 +174,7 @@ O repositório de gráficos Helm do Milvus em <code translate="no">https://milvu
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Upgrade-to-v2619" class="common-anchor-header">Passo 3: Atualize para a versão 2.6.19<button data-href="#Step-3-Upgrade-to-v2619" class="anchor-icon" translate="no">
+<h3 id="Step-3-Upgrade-to-v2620" class="common-anchor-header">Passo 3: Atualize para a versão v2.6.20<button data-href="#Step-3-Upgrade-to-v2620" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -189,9 +189,9 @@ kubectl get pods
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Assim que a v2.5.16 estiver a funcionar corretamente com <code translate="no">mixCoordinator</code>, atualize para a v2.6.19:</p>
+    </button></h3><p>Assim que a v2.5.16 estiver a funcionar corretamente com <code translate="no">mixCoordinator</code>, atualize para a v2.6.20:</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.6.19&quot;</span> \
+  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.6.20&quot;</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span> \
   --reset-then-reuse-values \

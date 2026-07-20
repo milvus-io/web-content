@@ -74,8 +74,8 @@ title: Eseguire Milvus con supporto GPU utilizzando Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Scarica <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.19/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> e salvalo come docker-compose.yml manualmente o con il seguente comando.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.19/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
+    </button></h3><p>Scarica <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.20/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> e salvalo come docker-compose.yml manualmente o con il seguente comando.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.20/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>È necessario apportare alcune modifiche alle variabili d’ambiente del servizio standalone nel file YAML come segue:</p>
 <ul>
@@ -136,9 +136,9 @@ Creating milvus-standalone ... done
 <ul>
 <li>i container denominati <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> e <strong>milvus-etcd</strong> sono attivi.
 <ul>
-<li>Il container <strong>milvus-etcd</strong> non espone alcuna porta all’host e mappa i propri dati in <strong>volumes/etcd</strong> nella cartella corrente.</li>
+<li>Il container <strong>milvus-etcd</strong> non espone alcuna porta all’host e mappa i propri dati nella cartella <strong>volumes/etcd</strong> all’interno della cartella corrente.</li>
 <li>Il container <strong>milvus-minio</strong> serve localmente le porte <strong>9090</strong> e <strong>9091</strong> con le credenziali di autenticazione predefinite e mappa i propri dati nella cartella <strong>volumes/minio</strong> nella directory corrente.</li>
-<li>Il container <strong>milvus-standalone</strong> serve localmente le porte <strong>19530</strong> con le impostazioni predefinite e mappa i propri dati nella cartella <strong>volumes/milvus</strong> nella directory corrente.</li>
+<li>Il container <strong>milvus-standalone</strong> serve localmente le porte <strong>19530</strong> con le impostazioni predefinite e mappa i propri dati nella <strong>cartella volumes/milvus</strong> all’interno della directory corrente.</li>
 </ul></li>
 </ul>
 <p>È possibile verificare se i container sono attivi e in esecuzione utilizzando il seguente comando:</p>
@@ -150,7 +150,7 @@ milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 23
 milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-<p>È inoltre possibile accedere all’interfaccia web di Milvus all’indirizzo <code translate="no">http://127.0.0.1:9091/webui/</code> per ottenere ulteriori informazioni sulla propria istanza di Milvus. Per i dettagli, consultare la documentazione relativa <a href="/docs/it/v2.6.x/milvus-webui.md">all’interfaccia web di Milvus</a>.</p>
+<p>È inoltre possibile accedere all’interfaccia web di Milvus all’indirizzo <code translate="no">http://127.0.0.1:9091/webui/</code> per ottenere ulteriori informazioni sull’istanza di Milvus in uso. Per i dettagli, consultare la documentazione relativa <a href="/docs/it/v2.6.x/milvus-webui.md">all’interfaccia web di Milvus</a>.</p>
 <p>Se nel file docker-compose.yml sono stati assegnati più dispositivi GPU a Milvus, è possibile specificare quale dispositivo GPU sia visibile o disponibile per l’uso.</p>
 <p>Rendere visibile a Milvus il dispositivo GPU <code translate="no">0</code>:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">CUDA_VISIBLE_DEVICES=0 ./milvus run standalone</span>
@@ -186,7 +186,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 </div>
 <p>Per configurare il pool di memoria, modificare le impostazioni <code translate="no">initMemSize</code> e <code translate="no">maxMemSize</code> nel file <code translate="no">milvus.yaml</code> come segue.</p>
 <ol>
-<li><p>Utilizza il seguente comando per copiare il file ` <code translate="no">milvus.yaml</code> ` dal container Milvus sul tuo computer locale. Sostituisci ` <code translate="no">&lt;milvus_container_id&gt;</code> ` con l'ID effettivo del tuo container Milvus.</p>
+<li><p>Utilizzare il seguente comando per copiare il file ` <code translate="no">milvus.yaml</code> ` dal container Milvus sul proprio computer locale. Sostituire ` <code translate="no">&lt;milvus_container_id&gt;</code> ` con l’ID effettivo del proprio container Milvus.</p>
 <pre><code translate="no" class="language-shell">docker cp &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Apri il file <code translate="no">milvus.yaml</code> copiato con il tuo editor di testo preferito. Ad esempio, utilizzando vim:</p>
@@ -233,14 +233,14 @@ docker start &lt;milvus_container_id&gt;
 <li><p>Imparare le operazioni di base di Milvus:</p>
 <ul>
 <li><a href="/docs/it/v2.6.x/manage_databases.md">Gestire i database</a></li>
-<li><a href="/docs/it/v2.6.x/manage-collections.md">Gestire le raccolte</a></li>
+<li><a href="/docs/it/v2.6.x/manage-collections.md">Gestire le collezioni</a></li>
 <li><a href="/docs/it/v2.6.x/manage-partitions.md">Gestire le partizioni</a></li>
 <li><a href="/docs/it/v2.6.x/insert-update-delete.md">Inserimento, aggiornamento e cancellazione</a></li>
 <li><a href="/docs/it/v2.6.x/single-vector-search.md">Ricerca su singolo vettore</a></li>
 <li><a href="/docs/it/v2.6.x/multi-vector-search.md">Ricerca ibrida</a></li>
 </ul></li>
 <li><p><a href="/docs/it/v2.6.x/upgrade_milvus_cluster-helm.md">Eseguire l'aggiornamento di Milvus utilizzando Helm Chart</a>.</p></li>
-<li><p><a href="/docs/it/v2.6.x/scaleout.md">Scalare il proprio cluster Milvus</a>.</p></li>
+<li><p><a href="/docs/it/v2.6.x/scaleout.md">Scalare il cluster Milvus</a>.</p></li>
 <li><p>Distribuisci il tuo cluster Milvus su cloud:</p>
 <ul>
 <li><a href="/docs/it/v2.6.x/eks.md">Amazon EKS</a></li>

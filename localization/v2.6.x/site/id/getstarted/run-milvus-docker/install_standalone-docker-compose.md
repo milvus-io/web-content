@@ -2,7 +2,7 @@
 id: install_standalone-docker-compose.md
 label: Docker Compose
 related_key: Docker Compose
-summary: Pelajari cara menginstal Milvus versi mandiri menggunakan Docker Compose.
+summary: Pelajari cara menginstal Milvus standalone menggunakan Docker Compose.
 title: Menjalankan Milvus dengan Docker Compose (Linux)
 ---
 <h1 id="Run-Milvus-with-Docker-Compose-Linux" class="common-anchor-header">Menjalankan Milvus dengan Docker Compose (Linux)<button data-href="#Run-Milvus-with-Docker-Compose-Linux" class="anchor-icon" translate="no">
@@ -57,7 +57,7 @@ title: Menjalankan Milvus dengan Docker Compose (Linux)
       </svg>
     </button></h2><p>Milvus menyediakan berkas konfigurasi Docker Compose di repositori Milvus. Untuk menginstal Milvus menggunakan Docker Compose, cukup jalankan</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.19/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.20/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,13 +67,13 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Apa yang baru di v2.6.19:</strong></p>
+<p><strong>Apa yang baru di v2.6.20:</strong></p>
 <ul>
 <li><strong>Arsitektur yang Ditingkatkan</strong>: Menampilkan Streaming Node baru dan komponen yang dioptimalkan</li>
 <li><strong>Dependensi yang Diperbarui</strong>: Termasuk versi terbaru MinIO dan etcd</li>
 <li><strong>Konfigurasi yang Ditingkatkan</strong>: Pengaturan yang dioptimalkan untuk kinerja yang lebih baik</li>
 </ul>
-<p>Selalu unduh konfigurasi Docker Compose terbaru untuk memastikan kompatibilitas dengan fitur v2.6.19.</p>
+<p>Selalu unduh konfigurasi Docker Compose terbaru untuk memastikan kompatibilitas dengan fitur-fitur v2.6.20.</p>
 <ul>
 <li><p>Jika Anda gagal menjalankan perintah di atas, silakan periksa apakah sistem Anda telah menginstal Docker Compose V1. Jika demikian, Anda disarankan untuk bermigrasi ke Docker Compose V2 sesuai dengan catatan di <a href="https://docs.docker.com/compose/">halaman ini</a>.</p></li>
 <li><p>Jika Anda mengalami masalah saat menarik gambar, hubungi kami di <a href="mailto:community@zilliz.com">community@zilliz.com</a> dengan detail mengenai masalah tersebut, dan kami akan memberikan dukungan yang diperlukan.</p></li>
@@ -119,7 +119,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Tambahkan konfigurasi tambahan untuk menggantikan konfigurasi default.
-Berikut ini mengasumsikan bahwa Anda perlu menggantikan konfigurasi default <code translate="no">proxy.healthCheckTimeout</code>. Untuk item konfigurasi yang berlaku, lihat <a href="/docs/id/v2.6.x/system_configuration.md">Konfigurasi Sistem</a>.</p>
+Berikut ini mengasumsikan bahwa Anda perlu menggantikan konfigurasi default ` <code translate="no">proxy.healthCheckTimeout</code>`. Untuk item konfigurasi yang berlaku, lihat <a href="/docs/id/v2.6.x/system_configuration.md">Konfigurasi Sistem</a>.</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; /milvus/configs/user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
@@ -175,7 +175,7 @@ EOF
 <li><a href="/docs/id/v2.6.x/manage_databases.md">Mengelola Basis Data</a></li>
 <li><a href="/docs/id/v2.6.x/manage-collections.md">Mengelola Koleksi</a></li>
 <li><a href="/docs/id/v2.6.x/manage-partitions.md">Mengelola Partisi</a></li>
-<li><a href="/docs/id/v2.6.x/insert-update-delete.md">Sisipkan, Upsert &amp; Hapus</a></li>
+<li><a href="/docs/id/v2.6.x/insert-update-delete.md">Sisipkan, Upsert, &amp; Hapus</a></li>
 <li><a href="/docs/id/v2.6.x/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
 <li><a href="/docs/id/v2.6.x/multi-vector-search.md">Pencarian Hibrida</a></li>
 </ul></li>
@@ -189,7 +189,7 @@ EOF
 </ul></li>
 <li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus-webui.md">Milvus WebUI</a>, antarmuka web yang intuitif untuk pemantauan dan pengelolaan Milvus.</p></li>
 <li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, alat sumber terbuka untuk pencadangan data Milvus.</p></li>
-<li><p>Jelajahi <a href="/docs/id/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk mendebug Milvus dan pembaruan konfigurasi dinamis.</p></li>
+<li><p>Jelajahi <a href="/docs/id/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk men-debug Milvus dan pembaruan konfigurasi dinamis.</p></li>
 <li><p>Jelajahi <a href="https://github.com/zilliztech/attu">Attu</a>, alat GUI sumber terbuka untuk pengelolaan Milvus yang intuitif.</p></li>
 <li><p><a href="/docs/id/v2.6.x/monitor.md">Pantau Milvus dengan Prometheus</a>.</p></li>
 </ul>

@@ -63,14 +63,14 @@ title: Ejecutar Milvus en Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Novedades de la versión 2.6.19:</strong></p>
+<p><strong>Novedades de la versión 2.6.20:</strong></p>
 <ul>
 <li><strong>Nodo de streaming</strong>: capacidades de procesamiento de datos mejoradas</li>
 <li><strong>Woodpecker MQ</strong>: cola de mensajes mejorada con menor carga de mantenimiento; consulta <a href="/docs/es/v2.6.x/use-woodpecker.md">«Usar Woodpecker</a> » para obtener más detalles</li>
 <li><strong>Arquitectura optimizada</strong>: componentes consolidados para un mejor rendimiento</li>
 </ul>
 <p>Descarga siempre el script más reciente para asegurarte de obtener las configuraciones y mejoras de arquitectura más actuales.</p>
-<p>Si desea utilizar <a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a> en modo de implementación autónoma, se recomienda utilizar el método de implementación <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
+<p>Si desea utilizar <a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a> en modo de implementación independiente, se recomienda utilizar el método de implementación <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
 <p>Si tiene algún problema al descargar la imagen, póngase en contacto con nosotros en <a href="mailto:community@zilliz.com">community@zilliz.com</a> con los detalles del problema y le proporcionaremos la asistencia necesaria.</p>
 </div>
 <p>Tras ejecutar el script de instalación:</p>
@@ -106,7 +106,7 @@ EOF
 <p>A continuación, reinicie el servicio de la siguiente manera:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh restart</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para conocer los elementos de configuración aplicables, consulta <a href="/docs/es/v2.6.x/system_configuration.md">«Configuración del sistema</a>».</p>
+<p>Para conocer los elementos de configuración aplicables, consulte <a href="/docs/es/v2.6.x/system_configuration.md">«Configuración del sistema</a>».</p>
 <h2 id="Upgrade-Milvus" class="common-anchor-header">Actualizar Milvus<button data-href="#Upgrade-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -181,7 +181,7 @@ EOF
 <li><a href="/docs/es/v2.6.x/manage_databases.md">Gestionar bases de datos</a></li>
 <li><a href="/docs/es/v2.6.x/manage-collections.md">Gestionar colecciones</a></li>
 <li><a href="/docs/es/v2.6.x/manage-partitions.md">Gestionar particiones</a></li>
-<li><a href="/docs/es/v2.6.x/insert-update-delete.md">Insertar, actualizar o eliminar</a></li>
+<li><a href="/docs/es/v2.6.x/insert-update-delete.md">Insertar, actualizar o insertar y eliminar</a></li>
 <li><a href="/docs/es/v2.6.x/single-vector-search.md">Búsqueda de un solo vector</a></li>
 <li><a href="/docs/es/v2.6.x/multi-vector-search.md">Búsqueda híbrida</a></li>
 </ul></li>
@@ -195,7 +195,7 @@ EOF
 </ul></li>
 <li><p>Descubre <a href="/docs/es/v2.6.x/milvus-webui.md">Milvus WebUI</a>, una interfaz web intuitiva para la observabilidad y la gestión de Milvus.</p></li>
 <li><p>Descubre <a href="/docs/es/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, una herramienta de código abierto para realizar copias de seguridad de los datos de Milvus.</p></li>
-<li><p>Descubre <a href="/docs/es/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, una herramienta de código abierto para la depuración de Milvus y las actualizaciones dinámicas de configuración.</p></li>
+<li><p>Descubre <a href="/docs/es/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, una herramienta de código abierto para la depuración de Milvus y las actualizaciones dinámicas de la configuración.</p></li>
 <li><p>Descubre <a href="https://github.com/zilliztech/attu">Attu</a>, una herramienta GUI de código abierto para la gestión intuitiva de Milvus.</p></li>
 <li><p><a href="/docs/es/v2.6.x/monitor.md">Supervisa Milvus con Prometheus</a>.</p></li>
 </ul>

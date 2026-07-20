@@ -19,7 +19,7 @@ summary: Découvrez comment configurer le stockage des messages avec Milvus Oper
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus utilise RocksMQ, Pulsar ou Kafka pour gérer les journaux des modifications récentes, générer des journaux de flux et fournir des abonnements aux journaux. Cette rubrique explique comment configurer les dépendances de stockage des messages lors de l'installation de Milvus avec Milvus Operator. Pour plus de détails, consultez la rubrique « <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">Configurer le stockage des messages avec Milvus Operator</a> » dans le référentiel Milvus Operator.</p>
+    </button></h1><p>Milvus utilise RocksMQ, Pulsar ou Kafka pour gérer les journaux des modifications récentes, générer des journaux de flux et fournir des abonnements aux journaux. Cette rubrique explique comment configurer les dépendances de stockage des messages lorsque vous installez Milvus avec Milvus Operator. Pour plus de détails, consultez la section « <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">Configurer le stockage des messages avec Milvus Operator</a> » dans le référentiel Milvus Operator.</p>
 <p>Cette rubrique part du principe que vous avez déployé Milvus Operator.</p>
 <div class="alert note">Consultez la section « <a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">Déployer Milvus Operator</a> » pour plus d’informations. </div>
 <p>Vous devez spécifier un fichier de configuration pour utiliser Milvus Operator afin de démarrer un cluster Milvus.</p>
@@ -60,7 +60,7 @@ summary: Découvrez comment configurer le stockage des messages avec Milvus Oper
 </ul></li>
 <li>Le stockage des messages ne peut pas être modifié pendant que le système Milvus est en cours d’exécution.</li>
 <li>Seules les versions 2.x ou 3.x de Kafka sont prises en charge.</li>
-<li><strong>Restrictions de mise à niveau</strong>: <strong>Restrictions relatives aux files d’attente de messages</strong>: lors de la mise à niveau vers Milvus v2.6.19, vous devez conserver votre choix actuel de file d’attente de messages. Le passage d’un système de file d’attente de messages à un autre pendant la mise à niveau n’est pas pris en charge. La prise en charge du changement de système de file d’attente de messages sera disponible dans les versions futures.</li>
+<li><strong>Restrictions de mise à niveau</strong>: <strong>Restrictions relatives aux files d’attente de messages</strong>: lors de la mise à niveau vers Milvus v2.6.20, vous devez conserver votre choix actuel de file d’attente de messages. Le passage d’un système de file d’attente de messages à un autre pendant la mise à niveau n’est pas pris en charge. La prise en charge du changement de système de file d’attente de messages sera disponible dans les versions futures.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Configurer RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -105,7 +105,7 @@ summary: Découvrez comment configurer le stockage des messages avec Milvus Oper
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
 <h5 id="Key-configuration-options" class="common-anchor-header">Options de configuration clés :</h5><ul>
-<li><code translate="no">msgStreamType</code>: rocksmq : définit explicitement RocksMQ comme file d’attente de messages</li>
+<li><code translate="no">msgStreamType</code>: rocksmq : définit explicitement RocksMQ comme file d'attente de messages</li>
 <li><code translate="no">persistence.enabled</code>: Active le stockage persistant des données RocksMQ</li>
 <li><code translate="no">persistence.pvcDeletion</code>: Si la valeur est « true », le PVC sera supprimé lors de la suppression de l’instance Milvus</li>
 <li><code translate="no">persistentVolumeClaim.spec</code>: Spécification PVC Kubernetes standard</li>
@@ -144,8 +144,8 @@ summary: Découvrez comment configurer le stockage des messages avec Milvus Oper
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pulsar gère les journaux des modifications récentes, génère des flux de journaux et permet de s’abonner à ces journaux. La configuration de Pulsar en tant que stockage de messages est prise en charge aussi bien dans Milvus en mode autonome que dans un cluster Milvus. Cependant, avec Milvus Operator, vous ne pouvez configurer Pulsar comme stockage de messages que pour un cluster Milvus. Remplissez les champs obligatoires sous « <code translate="no">spec.dependencies.pulsar</code> » pour configurer Pulsar.</p>
-<p><code translate="no">pulsar</code> Prise en charge de <code translate="no">external</code> et <code translate="no">inCluster</code>.</p>
+    </button></h2><p>Pulsar gère les journaux des modifications récentes, génère des flux de journaux et permet de s’abonner à ces journaux. La configuration de Pulsar en tant que stockage de messages est prise en charge aussi bien dans Milvus en mode autonome que dans un cluster Milvus. Cependant, avec Milvus Operator, vous ne pouvez configurer Pulsar en tant que stockage de messages que pour un cluster Milvus. Remplissez les champs obligatoires sous « <code translate="no">spec.dependencies.pulsar</code> » pour configurer Pulsar.</p>
+<p><code translate="no">pulsar</code> Prend en charge <code translate="no">external</code> et <code translate="no">inCluster</code>.</p>
 <h3 id="External-Pulsar" class="common-anchor-header">Pulsar externe<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -346,7 +346,7 @@ Les champs permettant de configurer un service Pulsar externe sont les suivants 
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<p>Retrouvez <a href="https://artifacthub.io/packages/helm/bitnami/kafka">ici</a> la liste complète des éléments de configuration nécessaires pour configurer un service Kafka interne. Ajoutez les éléments de configuration nécessaires sous « <code translate="no">kafka.inCluster.values</code> ».</p>
+<p>Vous trouverez <a href="https://artifacthub.io/packages/helm/bitnami/kafka">ici</a> la liste complète des éléments de configuration nécessaires pour configurer un service Kafka interne. Ajoutez les éléments de configuration nécessaires sous « <code translate="no">kafka.inCluster.values</code> ».</p>
 <p>En supposant que le fichier de configuration s'appelle <code translate="no">milvuscluster.yaml</code>, exécutez la commande suivante pour appliquer la configuration.</p>
 <pre><code translate="no"><span class="hljs-attribute">kubectl</span> apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>

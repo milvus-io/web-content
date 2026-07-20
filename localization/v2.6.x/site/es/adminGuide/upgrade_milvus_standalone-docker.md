@@ -7,10 +7,10 @@ related_key: upgrade Milvus Standalone
 summary: >-
   Descubre cómo actualizar la versión independiente de Milvus con Docker
   Compose.
-title: Actualizar Milvus independiente con Docker Compose
+title: Actualizar Milvus Standalone con Docker Compose
 ---
 <div class="tab-wrapper"><a href="/docs/es/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus,</a><a href="/docs/es/v2.6.x/upgrade_milvus_standalone-docker.md" class='active '>Operator</a>, Helm, Docker<a href="/docs/es/v2.6.x/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
-<h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">Actualizar Milvus independiente con Docker Compose<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
+<h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">Actualizar Milvus Standalone con Docker Compose<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -25,7 +25,7 @@ title: Actualizar Milvus independiente con Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Esta guía describe cómo actualizar tu implementación de Milvus independiente de la versión v2.5.x a la v2.6.19 utilizando Docker Compose.</p>
+    </button></h1><p>Esta guía describe cómo actualizar tu implementación de Milvus independiente de la versión v2.5.x a la v2.6.20 utilizando Docker Compose.</p>
 <h2 id="Before-you-start" class="common-anchor-header">Antes de empezar<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +41,7 @@ title: Actualizar Milvus independiente con Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-new-in-v2619" class="common-anchor-header">Novedades de la versión 2.6.19<button data-href="#Whats-new-in-v2619" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Whats-new-in-v2620" class="common-anchor-header">Novedades de la versión 2.6.20<button data-href="#Whats-new-in-v2620" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,7 +56,7 @@ title: Actualizar Milvus independiente con Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>La actualización de Milvus 2.5.x a 2.6.19 conlleva cambios arquitectónicos significativos:</p>
+    </button></h3><p>La actualización de Milvus 2.5.x a la versión 2.6.20 conlleva cambios arquitectónicos significativos:</p>
 <ul>
 <li><strong>Consolidación del coordinador</strong>: los coordinadores independientes heredados (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) se han consolidado en uno solo <code translate="no">mixCoord</code></li>
 <li><strong>Nuevos componentes</strong>: Introducción del nodo de streaming para mejorar el procesamiento de datos</li>
@@ -85,13 +85,13 @@ title: Actualizar Milvus independiente con Docker Compose
 </ul>
 <p><strong>Requisitos de compatibilidad:</strong></p>
 <ul>
-<li>Milvus v2.6.0-rc1 <strong>no</strong> es <strong>compatible</strong> con la versión v2.6.19. No se admiten actualizaciones directas desde versiones candidatas.</li>
+<li>Milvus v2.6.0-rc1 <strong>no</strong> es <strong>compatible</strong> con la versión v2.6.20. No se admiten actualizaciones directas desde versiones candidatas.</li>
 <li>Si actualmente estás ejecutando la versión v2.6.0-rc1 y necesitas conservar tus datos, consulta <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">esta guía</a> de <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">la comunidad</a> para obtener ayuda con la migración.</li>
-<li><strong>Debes</strong> actualizar a la v2.5.16 o posterior antes de actualizar a la v2.6.19.</li>
+<li><strong>Debes</strong> actualizar a la versión v2.5.16 o posterior antes de actualizar a la v2.6.20.</li>
 </ul>
-<p><strong>Limitaciones de la cola de mensajes</strong>: Al actualizar a Milvus v2.6.19, debes mantener tu elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</p>
+<p><strong>Limitaciones de la cola de mensajes</strong>: Al actualizar a Milvus v2.6.20, debes mantener tu elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</p>
 <div class="alter note">
-<p>Por motivos de seguridad, Milvus actualiza su MinIO a RELEASE.2024-12-18T13-15-44Z con el lanzamiento de la versión v2.6.19.</p>
+<p>Por motivos de seguridad, Milvus actualiza su MinIO a RELEASE.2024-12-18T13-15-44Z con el lanzamiento de la versión v2.6.20.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Proceso de actualización<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -142,7 +142,7 @@ docker compose up -d
 <pre><code translate="no" class="language-bash">docker compose ps
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Step-2-Upgrade-to-v2619" class="common-anchor-header">Paso 2: Actualizar a la versión 2.6.19<button data-href="#Step-2-Upgrade-to-v2619" class="anchor-icon" translate="no">
+<h3 id="Step-2-Upgrade-to-v2620" class="common-anchor-header">Paso 2: Actualizar a la versión 2.6.20<button data-href="#Step-2-Upgrade-to-v2620" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -157,9 +157,9 @@ docker compose up -d
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Una vez que la versión v2.5.16 se ejecute correctamente, actualiza a la versión v2.6.19:</p>
+    </button></h3><p>Una vez que la versión v2.5.16 se ejecute correctamente, actualiza a la versión v2.6.20:</p>
 <ol>
-<li><p>Edita tu archivo « <code translate="no">docker-compose.yaml</code> » y actualiza las etiquetas de imagen tanto de Milvus como de MinIO:</p>
+<li><p>Edita el archivo « <code translate="no">docker-compose.yaml</code> » existente y actualiza las etiquetas de imagen tanto de Milvus como de MinIO:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">minio:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-minio</span>
@@ -168,7 +168,7 @@ docker compose up -d
 <span class="hljs-string">...</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.19</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.20</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Aplica la actualización final:</p>
 <pre><code translate="no" class="language-bash">docker compose down

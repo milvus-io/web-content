@@ -57,7 +57,7 @@ title: Docker Compose를 사용하여 Milvus 실행하기 (Linux)
       </svg>
     </button></h2><p>Milvus는 Milvus 저장소에서 Docker Compose 구성 파일을 제공합니다. Docker Compose를 사용하여 Milvus를 설치하려면 다음 명령을 실행하기만 하면 됩니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.19/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.20/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,16 +67,16 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>v2.6.19의 새로운 기능:</strong></p>
+<p><strong>v2.6.20의 새로운 기능:</strong></p>
 <ul>
 <li><strong>아키텍처 개선</strong>: 새로운 스트리밍 노드 및 최적화된 구성 요소를 제공합니다.</li>
 <li><strong>업데이트된 종속성</strong>: 최신 버전의 MinIO 및 etcd 포함</li>
-<li><strong>개선된 구성</strong>: 성능 향상을 위한 최적화된 설정</li>
+<li><strong>구성 개선</strong>: 성능 향상을 위한 설정 최적화</li>
 </ul>
-<p>v2.6.19 기능과의 호환성을 보장하려면 항상 최신 Docker Compose 구성 파일을 다운로드하십시오.</p>
+<p>v2.6.20 기능과의 호환성을 보장하려면 항상 최신 Docker Compose 구성 파일을 다운로드하십시오.</p>
 <ul>
-<li><p>위의 명령어를 실행하는 데 실패한 경우, 시스템에 Docker Compose V1이 설치되어 있는지 확인해 주십시오. 설치되어 있는 경우, <a href="https://docs.docker.com/compose/">이 페이지의</a> 안내 사항에 따라 Docker Compose V2로 마이그레이션하는 것이 좋습니다.</p></li>
-<li><p>이미지 가져오기에 문제가 발생하면, 문제에 대한 자세한 내용을 <a href="mailto:community@zilliz.com">community@zilliz.com으로</a> 문의해 주시면 필요한 지원을 제공해 드리겠습니다.</p></li>
+<li><p>위 명령어를 실행하는 데 실패한 경우, 시스템에 Docker Compose V1이 설치되어 있는지 확인해 주십시오. 설치되어 있는 경우, <a href="https://docs.docker.com/compose/">이 페이지의</a> 안내 사항에 따라 Docker Compose V2로 마이그레이션하는 것이 좋습니다.</p></li>
+<li><p>이미지 가져오기 과정에서 문제가 발생하면, 문제에 대한 자세한 내용을 <a href="mailto:community@zilliz.com">community@zilliz.com으로</a> 문의해 주시면 필요한 지원을 제공해 드리겠습니다.</p></li>
 </ul>
 </div>
 <p>Milvus를 시작한 후,</p>

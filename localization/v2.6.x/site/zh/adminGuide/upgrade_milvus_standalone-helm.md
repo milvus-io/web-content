@@ -5,10 +5,10 @@ order: 1
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
 summary: 了解如何使用 Helm Chart 升级 Milvus Standalone。
-title: 使用 Helm Chart 升级 Milvus Standalone
+title: 使用 Helm 图表升级 Milvus Standalone
 ---
 <div class="tab-wrapper"><a href="/docs/zh/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/zh/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>Operator</a>、Helm、Docker<a href="/docs/zh/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>Compose</a></div>
-<h1 id="Upgrade-Milvus-Standalone-with-Helm-Chart" class="common-anchor-header">使用 Helm Chart 升级 Milvus Standalone<button data-href="#Upgrade-Milvus-Standalone-with-Helm-Chart" class="anchor-icon" translate="no">
+<h1 id="Upgrade-Milvus-Standalone-with-Helm-Chart" class="common-anchor-header">使用 Helm 图表升级 Milvus Standalone<button data-href="#Upgrade-Milvus-Standalone-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,7 +23,7 @@ title: 使用 Helm Chart 升级 Milvus Standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本指南介绍了如何使用 Helm 图将您的 Milvus Standalone 部署从 v2.5.x 升级至 v2.6.19。</p>
+    </button></h1><p>本指南介绍了如何使用 Helm 图将您的 Milvus Standalone 部署从 v2.5.x 升级到 v2.6.20。</p>
 <h2 id="Before-you-start" class="common-anchor-header">开始之前<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +39,7 @@ title: 使用 Helm Chart 升级 Milvus Standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-new-in-v2619" class="common-anchor-header">v2.6.19 的新功能<button data-href="#Whats-new-in-v2619" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Whats-new-in-v2620" class="common-anchor-header">v2.6.20 的新功能<button data-href="#Whats-new-in-v2620" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -54,7 +54,7 @@ title: 使用 Helm Chart 升级 Milvus Standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>从 Milvus 2.5.x 升级到 2.6.19 涉及重大的架构变更：</p>
+    </button></h3><p>从 Milvus 2.5.x 升级到 2.6.20 涉及重大的架构变更：</p>
 <ul>
 <li><strong>协调器整合</strong>：旧版中独立的协调器（<code translate="no">dataCoord</code> 、<code translate="no">queryCoord</code> 、<code translate="no">indexCoord</code> ）已整合为单一<code translate="no">mixCoord</code></li>
 <li><strong>新组件</strong>：引入流式处理节点（Streaming Node）以增强数据处理能力</li>
@@ -84,11 +84,11 @@ title: 使用 Helm Chart 升级 Milvus Standalone
 </ul>
 <p><strong>兼容性要求：</strong></p>
 <ul>
-<li>Milvus v2.6.0-rc1 与 v2.6.19<strong>不兼容</strong>。不支持从候选版本直接升级。</li>
-<li>如果您当前正在运行 v2.6.0-rc1 且需要保留数据，请参考<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">此社区指南</a>获取迁移帮助。</li>
-<li>在升级至 v2.6.19 之前，您<strong>必须先</strong>升级至 v2.5.16 或更高版本。</li>
+<li>Milvus v2.6.0-rc1 与 v2.6.20<strong>不兼容</strong>。不支持从候选版本直接升级。</li>
+<li>如果您当前正在运行 v2.6.0-rc1 且需要保留数据，请参阅<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">此社区指南</a>以获取迁移帮助。</li>
+<li>在升级至 v2.6.20 之前，您<strong>必须先</strong>升级至 v2.5.16 或更高版本。</li>
 </ul>
-<p><strong>消息队列限制</strong>：升级至 Milvus v2.6.19 时，您必须保留当前的消息队列选择。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</p>
+<p><strong>消息队列限制</strong>：升级至 Milvus v2.6.20 时，您必须保留当前的消息队列选择。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</p>
 <div class="alert note">
 自 Milvus Helm 图表版本 4.2.21 起，我们引入了 pulsar-v3.x 图表作为依赖项。为确保向后兼容性，请将您的 Helm 升级至 v3.14 或更高版本，并且在每次使用 `<code translate="no">helm upgrade</code>` 时，请务必添加 `<code translate="no">--reset-then-reuse-values</code> ` 选项。
 </div>
@@ -161,7 +161,7 @@ helm repo update zilliztech
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Upgrade-to-v2619" class="common-anchor-header">步骤 3：升级至 v2.6.19<button data-href="#Step-3-Upgrade-to-v2619" class="anchor-icon" translate="no">
+<h3 id="Step-3-Upgrade-to-v2620" class="common-anchor-header">步骤 3：升级至 v2.6.20<button data-href="#Step-3-Upgrade-to-v2620" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -176,9 +176,9 @@ kubectl get pods
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>待 v2.5.16 成功运行后，请升级至 v2.6.19：</p>
+    </button></h3><p>待 v2.5.16 成功运行后，请升级至 v2.6.20：</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.6.19&quot;</span> \
+  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.6.20&quot;</span> \
   --reset-then-reuse-values \
   --version=5.0.22
 <button class="copy-code-btn"></button></code></pre>

@@ -63,21 +63,21 @@ title: Eseguire Milvus in Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Novità della versione 2.6.19:</strong></p>
+<p><strong>Novità della versione 2.6.20:</strong></p>
 <ul>
 <li><strong>Nodo di streaming</strong>: funzionalità di elaborazione dei dati potenziate</li>
 <li><strong>Woodpecker MQ</strong>: coda di messaggi migliorata con minori costi di manutenzione; per i dettagli, consultare la sezione " <a href="/docs/it/v2.6.x/use-woodpecker.md">Utilizzo di Woodpecker</a> "</li>
 <li><strong>Architettura ottimizzata</strong>: componenti consolidati per prestazioni migliori</li>
 </ul>
 <p>Scaricare sempre lo script più recente per assicurarsi di disporre delle configurazioni e dei miglioramenti architetturali più aggiornati.</p>
-<p>Se si desidera utilizzare <a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a> in modalità di distribuzione standalone, si consiglia di utilizzare il metodo di distribuzione <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
-<p>Se si riscontrano problemi durante il recupero dell’immagine, contattateci all’indirizzo <a href="mailto:community@zilliz.com">community@zilliz.com</a> fornendo i dettagli del problema e vi forniremo l’assistenza necessaria.</p>
+<p>Se si desidera utilizzare <a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a> in modalità di distribuzione autonoma, si consiglia di utilizzare il metodo di distribuzione <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
+<p>Se si riscontrano problemi durante il download dell’immagine, contattateci all’indirizzo <a href="mailto:community@zilliz.com">community@zilliz.com</a> fornendo i dettagli del problema e vi forniremo l’assistenza necessaria.</p>
 </div>
 <p>Dopo aver eseguito lo script di installazione:</p>
 <ul>
 <li>È stato avviato un container Docker denominato milvus sulla porta <strong>19530</strong>.</li>
 <li>Insieme a Milvus, nello stesso container è installato un etcd integrato, che opera sulla porta <strong>2379</strong>. Il suo file di configurazione è mappato su <strong>embedEtcd.yaml</strong> nella cartella corrente.</li>
-<li>Per modificare la configurazione predefinita di Milvus, aggiungi le tue impostazioni al file <strong>user.yaml</strong> nella cartella corrente, quindi riavvia il servizio.</li>
+<li>Per modificare la configurazione predefinita di Milvus, aggiungete le vostre impostazioni al file <strong>user.yaml</strong> nella cartella corrente e quindi riavviate il servizio.</li>
 <li>Il volume dati di Milvus è mappato su <strong>volumes/milvus</strong> nella cartella corrente.</li>
 </ul>
 <p>È possibile accedere all’interfaccia Web di Milvus all’indirizzo <code translate="no">http://127.0.0.1:9091/webui/</code> per ottenere ulteriori informazioni sull’istanza di Milvus in uso. Per i dettagli, consultare la documentazione relativa <a href="/docs/it/v2.6.x/milvus-webui.md">all’interfaccia Web di Milvus</a>.</p>
@@ -106,7 +106,7 @@ EOF
 <p>Quindi riavviare il servizio come segue:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh restart</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Per le voci di configurazione applicabili, consultare <a href="/docs/it/v2.6.x/system_configuration.md">Configurazione di sistema</a>.</p>
+<p>Per le voci di configurazione applicabili, fare riferimento alla sezione <a href="/docs/it/v2.6.x/system_configuration.md">Configurazione di sistema</a>.</p>
 <h2 id="Upgrade-Milvus" class="common-anchor-header">Aggiornamento di Milvus<button data-href="#Upgrade-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -136,7 +136,7 @@ EOF
 </ul>
 <p>Questo è il metodo consigliato per aggiornare la tua distribuzione standalone di Milvus.</p>
 </div>
-<h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Arrestare ed eliminare Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
+<h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Arresta ed elimina Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -63,11 +63,11 @@ title: 在 Docker 中运行 Milvus（Linux）
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>v2.6.19 版本更新内容：</strong></p>
+<p><strong>v2.6.20 版本更新内容：</strong></p>
 <ul>
 <li><strong>流式处理节点</strong>：增强了数据处理能力</li>
 <li><strong>Woodpecker MQ</strong>：改进的消息队列，降低了维护开销，详情请参阅《<a href="/docs/zh/v2.6.x/use-woodpecker.md">使用 Woodpecker</a>》</li>
-<li><strong>架构优化</strong>：整合组件以提升性能</li>
+<li><strong>优化架构</strong>：整合组件以提升性能</li>
 </ul>
 <p>请务必下载最新脚本，以确保获得最新的配置和架构改进。</p>
 <p>如果您希望在独立部署模式下使用<a href="https://milvus.io/docs/milvus_backup_overview.md">Backup，</a>建议采用<a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>部署方式。</p>
@@ -76,8 +76,8 @@ title: 在 Docker 中运行 Milvus（Linux）
 <p>运行安装脚本后：</p>
 <ul>
 <li>一个名为 milvus 的 Docker 容器已在端口<strong>19530</strong> 上启动。</li>
-<li>一个嵌入式 etcd 已随 Milvus 一起安装在同一容器中，并在<strong>2379</strong> 端口提供服务。其配置文件映射到当前文件夹中的<strong>embedEtcd.yaml</strong>。</li>
-<li>若要修改 Milvus 的默认配置，请在当前目录的<strong>user.yaml</strong>文件中添加您的设置，然后重启服务。</li>
+<li>一个嵌入式 etcd 已随 Milvus 一起安装在同一容器中，并通过端口<strong>2379</strong> 提供服务。其配置文件映射到当前文件夹中的<strong>embedEtcd.yaml</strong>。</li>
+<li>若要修改 Milvus 的默认配置，请在当前文件夹中的<strong>user.yaml</strong>文件中添加您的设置，然后重启服务。</li>
 <li>Milvus 数据卷已映射到当前文件夹中的<strong>volumes/milvus</strong>。</li>
 </ul>
 <p>您可以通过<code translate="no">http://127.0.0.1:9091/webui/</code> 访问 Milvus WebUI，以了解有关您的 Milvus 实例的更多信息。有关详细信息，请参阅<a href="/docs/zh/v2.6.x/milvus-webui.md">Milvus WebUI</a>。</p>
@@ -195,7 +195,7 @@ EOF
 </ul></li>
 <li><p>探索<a href="/docs/zh/v2.6.x/milvus-webui.md">Milvus WebUI</a>——一个用于 Milvus 可观测性和管理的直观 Web 界面。</p></li>
 <li><p>探索<a href="/docs/zh/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>——一款用于 Milvus 数据备份的开源工具。</p></li>
-<li><p>了解<a href="/docs/zh/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>——一款用于调试 Milvus 并动态更新配置的开源工具。</p></li>
+<li><p>了解<a href="/docs/zh/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>——一款用于调试 Milvus 并更新动态配置的开源工具。</p></li>
 <li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>——一款用于直观管理 Milvus 的开源图形界面工具。</p></li>
 <li><p><a href="/docs/zh/v2.6.x/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
 </ul>

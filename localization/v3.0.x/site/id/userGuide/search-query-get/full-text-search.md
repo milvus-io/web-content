@@ -3,13 +3,14 @@ id: full-text-search.md
 title: Pencarian Teks Lengkap
 summary: >-
   Pencarian teks lengkap adalah fitur yang mengambil dokumen yang mengandung
-  istilah atau frasa tertentu dalam kumpulan data teks, kemudian memberi
+  istilah atau frasa tertentu dalam kumpulan data teks, kemudian menyusun
   peringkat hasil berdasarkan relevansi. Fitur ini mengatasi keterbatasan
-  pencarian semantik, yang mungkin mengabaikan istilah yang tepat, sehingga
-  memastikan Anda menerima hasil yang paling akurat dan relevan secara
-  kontekstual. Selain itu, fitur ini menyederhanakan pencarian vektor dengan
-  menerima input teks mentah, secara otomatis mengubah data teks Anda menjadi
-  sematan yang jarang tanpa perlu membuat sematan vektor secara manual.
+  pencarian semantik, yang mungkin mengabaikan istilah-istilah yang tepat,
+  sehingga memastikan Anda mendapatkan hasil yang paling akurat dan relevan
+  secara kontekstual. Selain itu, fitur ini menyederhanakan pencarian vektor
+  dengan menerima masukan teks mentah, serta secara otomatis mengubah data teks
+  Anda menjadi embedding spars tanpa perlu membuat embedding vektor secara
+  manual.
 ---
 <h1 id="Full-Text-Search" class="common-anchor-header">Pencarian Teks Lengkap<button data-href="#Full-Text-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -26,8 +27,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Pencarian teks lengkap adalah fitur yang mengambil dokumen yang mengandung istilah atau frasa tertentu dalam kumpulan data teks, lalu memberi peringkat hasil berdasarkan relevansi. Fitur ini mengatasi keterbatasan pencarian semantik, yang mungkin mengabaikan istilah yang tepat, sehingga memastikan Anda menerima hasil yang paling akurat dan relevan secara kontekstual. Selain itu, fitur ini menyederhanakan pencarian vektor dengan menerima input teks mentah, secara otomatis mengubah data teks Anda menjadi sematan yang jarang tanpa perlu membuat sematan vektor secara manual.</p>
-<p>Dengan menggunakan algoritme BM25 untuk penilaian relevansi, fitur ini sangat berharga dalam skenario retrieval-augmented generation (RAG), yang memprioritaskan dokumen yang sangat cocok dengan istilah pencarian tertentu.</p>
+    </button></h1><p>Pencarian teks lengkap adalah fitur yang mengambil dokumen yang mengandung istilah atau frasa tertentu dalam kumpulan data teks, kemudian menyusun peringkat hasil berdasarkan relevansi. Fitur ini mengatasi keterbatasan pencarian semantik, yang mungkin mengabaikan istilah yang tepat, sehingga memastikan Anda mendapatkan hasil yang paling akurat dan relevan secara kontekstual. Selain itu, fitur ini menyederhanakan pencarian vektor dengan menerima masukan teks mentah, secara otomatis mengubah data teks Anda menjadi embedding spars tanpa perlu membuat embedding vektor secara manual.</p>
+<p>Dengan menggunakan algoritma BM25 untuk penilaian relevansi, fitur ini sangat berguna dalam skenario Retrieval-Augmented Generation (RAG), di mana fitur ini memprioritaskan dokumen yang sangat sesuai dengan istilah pencarian tertentu.</p>
 <div class="alert note">
 <p>Dengan mengintegrasikan pencarian teks lengkap dengan pencarian vektor padat berbasis semantik, Anda dapat meningkatkan akurasi dan relevansi hasil pencarian. Untuk informasi lebih lanjut, lihat <a href="/docs/id/multi-vector-search.md">Pencarian Hibrida</a>.</p>
 </div>
@@ -46,26 +47,28 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus menyediakan pencarian teks lengkap yang didukung oleh algoritme relevansi BM25, fungsi penilaian yang diadopsi secara luas dalam sistem pencarian informasi, dan Milvus mengintegrasikannya ke dalam alur kerja pencarian untuk memberikan hasil teks yang akurat dan memiliki peringkat relevansi.</p>
-<p>Pencarian teks lengkap di Milvus mengikuti alur kerja di bawah ini:</p>
+    </button></h2><p>Milvus menyediakan pencarian teks lengkap yang didukung oleh algoritma relevansi BM25, sebuah fungsi penilaian yang banyak digunakan dalam sistem pencarian informasi, dan Milvus mengintegrasikannya ke dalam alur kerja pencarian untuk memberikan hasil teks yang akurat dan diurutkan berdasarkan relevansi.</p>
+<p>Pencarian teks lengkap di Milvus mengikuti alur kerja berikut:</p>
 <ol>
-<li><p><strong>Masukan teks mentah</strong>: Anda memasukkan dokumen teks atau memberikan kueri menggunakan teks biasa, tidak perlu model penyematan.</p></li>
+<li><p><strong>Masukan teks mentah</strong>: Anda memasukkan dokumen teks atau memberikan kueri menggunakan teks biasa, tanpa memerlukan model embedding.</p></li>
 <li><p><strong>Analisis teks</strong>: Milvus menggunakan <a href="/docs/id/analyzer-overview.md">penganalisis</a> untuk memproses teks Anda menjadi istilah-istilah bermakna yang dapat diindeks dan dicari.</p></li>
-<li><p><strong>Pemrosesan fungsi BM25</strong>: Fungsi bawaan mengubah istilah-istilah ini menjadi representasi vektor jarang yang dioptimalkan untuk penilaian BM25.</p></li>
-<li><p><strong>Penyimpanan koleksi</strong>: Milvus menyimpan sematan jarang yang dihasilkan dalam koleksi untuk pengambilan dan pemeringkatan yang cepat.</p></li>
-<li><p><strong>Penilaian relevansi BM25</strong>: Pada waktu pencarian, Milvus menerapkan fungsi penilaian BM25 untuk menghitung relevansi dokumen dan mengembalikan hasil peringkat yang paling sesuai dengan istilah kueri.</p></li>
+<li><p><strong>Pemrosesan fungsi BM25</strong>: Fungsi bawaan mengubah istilah-istilah ini menjadi representasi vektor spars yang dioptimalkan untuk penilaian BM25.</p></li>
+<li><p><strong>Penyimpanan koleksi</strong>: Milvus menyimpan embedding langka yang dihasilkan dalam sebuah koleksi untuk pengambilan dan pemeringkatan yang cepat.</p></li>
+<li><p><strong>Penilaian relevansi BM25</strong>: Saat pencarian, Milvus menerapkan fungsi penilaian BM25 untuk menghitung relevansi dokumen dan menampilkan hasil yang diurutkan berdasarkan kesesuaian terbaik dengan istilah kueri.</p></li>
 </ol>
-<p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/full-text-search.png" alt="Full Text Search" class="doc-image" id="full-text-search" />
-   </span> <span class="img-wrapper"> <span>Pencarian Teks Lengkap</span> </span></p>
-<p>Untuk menggunakan pencarian teks lengkap, ikuti langkah-langkah utama berikut ini:</p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/full-text-search.png" alt="Full Text Search" class="doc-image" id="full-text-search" /> 
+   <span>Pencarian Teks Lengkap</span>
+  
+ </span></p>
+<p>Untuk menggunakan pencarian teks lengkap, ikuti langkah-langkah utama berikut:</p>
 <ol>
-<li><p><a href="/docs/id/full-text-search.md#Create-a-collection-for-BM25-full-text-search">Buat koleksi</a>: Siapkan bidang yang diperlukan dan tentukan fungsi BM25 yang mengubah teks mentah menjadi sematan jarang.</p></li>
-<li><p><a href="/docs/id/full-text-search.md#Insert-text-data">Memasukkan data</a>: Memasukkan dokumen teks mentah Anda ke dalam koleksi.</p></li>
-<li><p><a href="/docs/id/full-text-search.md#Perform-full-text-search">Melakukan pencarian</a>: Gunakan teks kueri bahasa alami untuk mengambil hasil peringkat berdasarkan relevansi BM25.</p></li>
+<li><p><a href="/docs/id/full-text-search.md#Create-a-collection-for-BM25-full-text-search">Buat koleksi</a>: Atur bidang yang diperlukan dan tentukan fungsi BM25 yang mengubah teks mentah menjadi representasi vektor langka.</p></li>
+<li><p><a href="/docs/id/full-text-search.md#Insert-text-data">Masukkan data</a>: Impor dokumen teks mentah Anda ke dalam koleksi.</p></li>
+<li><p><a href="/docs/id/full-text-search.md#Perform-full-text-search">Lakukan pencarian</a>: Gunakan teks kueri dalam bahasa alami untuk mengambil hasil yang diurutkan berdasarkan relevansi BM25.</p></li>
 </ol>
-<h2 id="Create-a-collection-for-BM25-full-text-search" class="common-anchor-header">Membuat koleksi untuk pencarian teks lengkap BM25<button data-href="#Create-a-collection-for-BM25-full-text-search" class="anchor-icon" translate="no">
+<h2 id="Create-a-collection-for-BM25-full-text-search" class="common-anchor-header">Buat koleksi untuk pencarian teks lengkap BM25<button data-href="#Create-a-collection-for-BM25-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -80,8 +83,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk mengaktifkan pencarian teks lengkap yang didukung BM25, Anda harus menyiapkan koleksi dengan bidang yang diperlukan, menentukan fungsi BM25 untuk menghasilkan vektor jarang, mengonfigurasi indeks, lalu membuat koleksi.</p>
-<h3 id="Define-schema-fields" class="common-anchor-header">Menentukan bidang skema<button data-href="#Define-schema-fields" class="anchor-icon" translate="no">
+    </button></h2><p>Untuk mengaktifkan pencarian teks lengkap yang didukung BM25, Anda harus menyiapkan koleksi dengan bidang yang diperlukan, tentukan fungsi BM25 untuk menghasilkan vektor spars, konfigurasikan indeks, lalu buat koleksi tersebut.</p>
+<h3 id="Define-schema-fields" class="common-anchor-header">Tentukan bidang skema<button data-href="#Define-schema-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -96,14 +99,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Skema koleksi Anda harus menyertakan setidaknya tiga bidang wajib:</p>
+    </button></h3><p>Skema koleksi Anda harus mencakup setidaknya tiga bidang yang diperlukan:</p>
 <ul>
-<li><p><strong>Bidang utama</strong>: Mengidentifikasi secara unik setiap entitas dalam koleksi.</p></li>
-<li><p><strong>Bidang teks</strong> (<code translate="no">VARCHAR</code>): Menyimpan dokumen teks mentah. Harus menetapkan <code translate="no">enable_analyzer=True</code> agar Milvus dapat memproses teks untuk peringkat relevansi BM25. Secara default, Milvus menggunakan fitur <a href="/docs/id/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/id/standard-analyzer.md"> analyzer</a> untuk analisis teks. Untuk mengonfigurasi penganalisis yang berbeda, lihat <a href="/docs/id/analyzer-overview.md">Ikhtisar Penganalisis</a>.</p></li>
-<li><p><strong>Bidang vektor jarang</strong> (<code translate="no">SPARSE_FLOAT_VECTOR</code>): Menyimpan sematan jarang yang dihasilkan secara otomatis oleh fungsi BM25.</p></li>
+<li><p><strong>Bidang utama</strong>: Mengidentifikasi setiap entitas dalam koleksi secara unik.</p></li>
+<li><p><strong>Bidang teks</strong> (<code translate="no">VARCHAR</code>): Menyimpan dokumen teks mentah. Harus mengatur ` <code translate="no">enable_analyzer=True</code> ` agar Milvus dapat memproses teks untuk peringkat relevansi BM25. Secara default, Milvus menggunakan <a href="/docs/id/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/id/standard-analyzer.md"> analyzer</a> untuk analisis teks. Untuk mengonfigurasi analyzer yang berbeda, lihat <a href="/docs/id/analyzer-overview.md">Ikhtisar Analyzer</a>.</p></li>
+<li><p><strong>Bidang vektor jarang</strong> (<code translate="no">SPARSE_FLOAT_VECTOR</code>): Menyimpan embedding jarang yang dihasilkan secara otomatis oleh fungsi BM25.</p></li>
 </ul>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 client = MilvusClient(
@@ -229,11 +237,11 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Dalam konfigurasi sebelumnya,</p>
+<p>Dalam konfigurasi di atas,</p>
 <ul>
-<li><p><code translate="no">id</code>: berfungsi sebagai kunci utama dan secara otomatis dihasilkan dengan <code translate="no">auto_id=True</code>.</p></li>
-<li><p><code translate="no">text</code>menyimpan data teks mentah Anda untuk operasi pencarian teks lengkap. Tipe datanya harus <code translate="no">VARCHAR</code>, karena <code translate="no">VARCHAR</code> adalah tipe data string Milvus untuk penyimpanan teks.</p></li>
-<li><p><code translate="no">sparse</code>: bidang vektor yang disediakan untuk menyimpan sematan jarang yang dihasilkan secara internal untuk operasi pencarian teks lengkap. Tipe data harus <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
+<li><p><code translate="no">id</code>: berfungsi sebagai kunci utama dan dihasilkan secara otomatis dengan <code translate="no">auto_id=True</code>.</p></li>
+<li><p><code translate="no">text</code>: menyimpan data teks mentah Anda untuk operasi pencarian teks lengkap. Tipe data harus berupa <code translate="no">VARCHAR</code>, karena <code translate="no">VARCHAR</code> adalah tipe data string Milvus untuk penyimpanan teks.</p></li>
+<li><p><code translate="no">sparse</code>: bidang vektor yang disediakan untuk menyimpan embedding langka yang dihasilkan secara internal guna operasi pencarian teks lengkap. Tipe datanya harus <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 </ul>
 <h3 id="Define-the-BM25-function" class="common-anchor-header">Tentukan fungsi BM25<button data-href="#Define-the-BM25-function" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -250,10 +258,15 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Fungsi BM25 mengubah teks yang diberi token menjadi vektor jarang yang mendukung penilaian BM25.</p>
-<p>Tentukan fungsi dan tambahkan ke skema Anda:</p>
+    </button></h3><p>Fungsi BM25 mengubah teks yang telah ditokenisasi menjadi vektor spars yang mendukung penilaian BM25.</p>
+<p>Tentukan fungsi tersebut dan tambahkan ke skema Anda:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">bm25_function = Function(
     name=<span class="hljs-string">&quot;text_bm25_emb&quot;</span>, <span class="hljs-comment"># Function name</span>
     input_field_names=[<span class="hljs-string">&quot;text&quot;</span>], <span class="hljs-comment"># Name of the VARCHAR field containing raw text data</span>
@@ -333,25 +346,25 @@ schema.WithFunction(function)
    </tr>
    <tr>
      <td><p><code translate="no">name</code></p></td>
-     <td><p>Nama fungsi. Fungsi ini mengonversi teks mentah Anda dari bidang <code translate="no">text</code> menjadi vektor jarang yang kompatibel dengan BM25 yang akan disimpan di bidang <code translate="no">sparse</code>.</p></td>
+     <td><p>Nama fungsi. Fungsi ini mengubah teks mentah Anda dari bidang ` <code translate="no">text</code> ` menjadi vektor langka yang kompatibel dengan BM25, yang akan disimpan di bidang ` <code translate="no">sparse</code> `.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
-     <td><p>Nama bidang <code translate="no">VARCHAR</code> yang membutuhkan konversi teks ke vektor jarang. Untuk <code translate="no">FunctionType.BM25</code>, parameter ini hanya menerima satu nama bidang.</p></td>
+     <td><p>Nama bidang ` <code translate="no">VARCHAR</code> ` yang memerlukan konversi teks ke vektor spars. Untuk ` <code translate="no">FunctionType.BM25</code>`, parameter ini hanya menerima satu nama bidang.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">output_field_names</code></p></td>
-     <td><p>Nama bidang di mana vektor jarang yang dihasilkan secara internal akan disimpan. Untuk <code translate="no">FunctionType.BM25</code>, parameter ini hanya menerima satu nama bidang.</p></td>
+     <td><p>Nama bidang tempat vektor langka yang dihasilkan secara internal akan disimpan. Untuk ` <code translate="no">FunctionType.BM25</code>`, parameter ini hanya menerima satu nama bidang.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>Jenis fungsi yang akan digunakan. Harus <code translate="no">FunctionType.BM25</code>.</p></td>
+     <td><p>Jenis fungsi yang akan digunakan. Harus berupa ` <code translate="no">FunctionType.BM25</code>`.</p></td>
    </tr>
 </table>
 <div class="alert note">
-<p>Jika beberapa bidang <code translate="no">VARCHAR</code> memerlukan pemrosesan BM25, tentukan <strong>satu fungsi BM25 per bidang</strong>, masing-masing dengan nama dan bidang keluaran yang unik.</p>
+<p>Jika beberapa bidang ` <code translate="no">VARCHAR</code> ` memerlukan pemrosesan BM25, tentukan <strong>satu fungsi BM25 per bidang</strong>, masing-masing dengan nama dan bidang keluaran yang unik.</p>
 </div>
-<h3 id="Configure-the-index" class="common-anchor-header">Mengonfigurasi indeks<button data-href="#Configure-the-index" class="anchor-icon" translate="no">
+<h3 id="Configure-the-index" class="common-anchor-header">Konfigurasikan indeks<button data-href="#Configure-the-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -366,9 +379,14 @@ schema.WithFunction(function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Setelah mendefinisikan skema dengan bidang yang diperlukan dan fungsi bawaan, siapkan indeks untuk koleksi Anda.</p>
+    </button></h3><p>Setelah mendefinisikan skema dengan bidang-bidang yang diperlukan dan fungsi bawaan, atur indeks untuk koleksi Anda.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
@@ -438,34 +456,34 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">field_name</code></p></td>
-     <td><p>Nama bidang vektor yang akan diindeks. Untuk pencarian teks lengkap, ini harus menjadi bidang yang menyimpan vektor jarang yang dihasilkan. Dalam contoh ini, tetapkan nilainya ke <code translate="no">sparse</code>.</p></td>
+     <td><p>Nama bidang vektor yang akan diindeks. Untuk pencarian teks lengkap, ini haruslah bidang yang menyimpan vektor spars yang dihasilkan. Dalam contoh ini, atur nilainya menjadi <code translate="no">sparse</code>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">index_type</code></p></td>
-     <td><p>Jenis indeks yang akan dibuat. <code translate="no">AUTOINDEX</code> memungkinkan Milvus mengoptimalkan pengaturan indeks secara otomatis. Jika Anda membutuhkan kontrol lebih besar atas pengaturan indeks Anda, Anda dapat memilih dari berbagai jenis indeks yang tersedia untuk vektor jarang di Milvus. Untuk informasi lebih lanjut, lihat <a href="/docs/id/index.md#Indexes-supported-in-Milvus">Indeks yang didukung di Milvus</a>.</p></td>
+     <td><p>Jenis indeks yang akan dibuat. Pilihan " <code translate="no">AUTOINDEX</code> " memungkinkan Milvus mengoptimalkan pengaturan indeks secara otomatis. Jika Anda memerlukan kontrol lebih besar atas pengaturan indeks, Anda dapat memilih dari berbagai jenis indeks yang tersedia untuk vektor spars di Milvus. Untuk informasi lebih lanjut, lihat " <a href="/docs/id/index.md#Indexes-supported-in-Milvus">Indeks yang Didukung di Milvus</a>".</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">metric_type</code></p></td>
-     <td><p>Nilai untuk parameter ini harus diatur ke <code translate="no">BM25</code> secara khusus untuk fungsionalitas pencarian teks lengkap.</p></td>
+     <td><p>Nilai untuk parameter ini harus diatur ke ` <code translate="no">BM25</code> ` secara khusus untuk fungsi pencarian teks lengkap.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params</code></p></td>
-     <td><p>Kamus parameter tambahan khusus untuk indeks.</p></td>
+     <td><p>Kamus parameter tambahan yang spesifik untuk indeks.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>Algoritme yang digunakan untuk membangun dan menanyakan indeks. Nilai yang valid:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (default): Pemrosesan kueri Dokumen per Dokumen (DAAT) yang dioptimalkan menggunakan algoritme MaxScore. MaxScore memberikan kinerja yang lebih baik untuk nilai <em>k</em> yang tinggi atau kueri dengan banyak istilah dengan melewatkan istilah dan dokumen yang kemungkinan besar berdampak minimal. Hal ini dicapai dengan mempartisi istilah ke dalam kelompok penting dan tidak penting berdasarkan nilai dampak maksimumnya, dengan fokus pada istilah yang dapat berkontribusi pada hasil k teratas.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Pemrosesan kueri DAAT yang dioptimalkan menggunakan algoritme WAND. WAND mengevaluasi lebih sedikit dokumen yang terkena dampak dengan memanfaatkan nilai dampak maksimum untuk melewatkan dokumen yang tidak kompetitif, tetapi memiliki overhead per hit yang lebih tinggi. Hal ini membuat WAND lebih efisien untuk kueri dengan nilai <em>k</em> kecil atau kueri pendek, di mana melewatkan lebih memungkinkan.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Pemrosesan kueri dasar Term-at-a-Time (TAAT). Meskipun lebih lambat dibandingkan dengan <code translate="no">DAAT_MAXSCORE</code> dan <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> menawarkan keuntungan yang unik. Tidak seperti algoritme DAAT, yang menggunakan skor dampak maksimum yang di-cache yang tetap statis terlepas dari perubahan pada parameter koleksi global (avgdl), <code translate="no">TAAT_NAIVE</code> secara dinamis beradaptasi dengan perubahan tersebut.</p></li></ul></td>
+     <td><p>Algoritma yang digunakan untuk membangun dan melakukan kueri pada indeks. Nilai yang valid:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (default): Pemrosesan kueri Document-at-a-Time (DAAT) yang dioptimalkan menggunakan algoritma MaxScore. MaxScore memberikan kinerja yang lebih baik untuk nilai <em>k</em> yang tinggi atau kueri dengan banyak istilah dengan melewatkan istilah dan dokumen yang kemungkinan besar memiliki dampak minimal. Hal ini dicapai dengan membagi istilah menjadi kelompok esensial dan non-esensial berdasarkan skor dampak maksimumnya, dengan fokus pada istilah yang dapat berkontribusi pada hasil top-k.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Pemrosesan kueri DAAT yang dioptimalkan menggunakan algoritma WAND. WAND mengevaluasi lebih sedikit dokumen yang cocok dengan memanfaatkan skor dampak maksimum untuk melewati dokumen yang tidak kompetitif, tetapi memiliki beban tambahan per hasil yang lebih tinggi. Hal ini membuat WAND lebih efisien untuk kueri dengan nilai <em>k</em> kecil atau kueri pendek, di mana proses melewati dokumen lebih memungkinkan.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Pemrosesan kueri Term-at-a-Time (TAAT) dasar. Meskipun lebih lambat dibandingkan dengan <code translate="no">DAAT_MAXSCORE</code> dan <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> menawarkan keunggulan unik. Berbeda dengan algoritma DAAT, yang menggunakan skor dampak maksimum yang disimpan dalam cache dan tetap statis terlepas dari perubahan pada parameter koleksi global (avgdl), <code translate="no">TAAT_NAIVE</code> beradaptasi secara dinamis terhadap perubahan tersebut.</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
-     <td><p>Mengontrol saturasi frekuensi istilah. Nilai yang lebih tinggi meningkatkan pentingnya frekuensi istilah dalam pemeringkatan dokumen. Rentang nilai: [1.2, 2.0].</p></td>
+     <td><p>Mengontrol saturasi frekuensi istilah. Nilai yang lebih tinggi meningkatkan bobot frekuensi istilah dalam peringkat dokumen. Rentang nilai: [1,2; 2,0].</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_b</code></p></td>
-     <td><p>Mengontrol sejauh mana panjang dokumen dinormalisasi. Nilai antara 0 dan 1 biasanya digunakan, dengan standar umum sekitar 0,75. Nilai 1 berarti tidak ada normalisasi panjang, sedangkan nilai 0 berarti normalisasi penuh.</p></td>
+     <td><p>Mengontrol sejauh mana panjang dokumen dinormalisasi. Nilai antara 0 dan 1 biasanya digunakan, dengan nilai default 0,75. Nilai 0 berarti tidak ada normalisasi panjang, sedangkan nilai 1 berarti normalisasi panjang penuh.</p></td>
    </tr>
 </table>
-<h3 id="Create-the-collection" class="common-anchor-header">Membuat koleksi<button data-href="#Create-the-collection" class="anchor-icon" translate="no">
+<h3 id="Create-the-collection" class="common-anchor-header">Buat koleksi<button data-href="#Create-the-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -480,9 +498,14 @@ indexes.add(IndexParam.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Sekarang buatlah koleksi menggunakan skema dan parameter indeks yang telah ditentukan.</p>
+    </button></h3><p>Sekarang buat koleksi menggunakan skema dan parameter indeks yang telah ditentukan.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&#x27;my_collection&#x27;</span>, 
     schema=schema, 
@@ -527,7 +550,7 @@ curl --request POST \
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-text-data" class="common-anchor-header">Menyisipkan data teks<button data-href="#Insert-text-data" class="anchor-icon" translate="no">
+<h2 id="Insert-text-data" class="common-anchor-header">Sisipkan data teks<button data-href="#Insert-text-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -542,9 +565,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah menyiapkan koleksi dan indeks, Anda siap memasukkan data teks. Dalam proses ini, Anda hanya perlu menyediakan teks mentah. Fungsi bawaan yang telah kita definisikan sebelumnya secara otomatis menghasilkan vektor jarang yang sesuai untuk setiap entri teks.</p>
+    </button></h2><p>Setelah menyiapkan koleksi dan indeks, Anda siap untuk menyisipkan data teks. Dalam proses ini, Anda hanya perlu menyediakan teks mentah. Fungsi bawaan yang telah kita tentukan sebelumnya secara otomatis menghasilkan vektor spars yang sesuai untuk setiap entri teks.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.insert(<span class="hljs-string">&#x27;my_collection&#x27;</span>, [
     {<span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;information retrieval is a field of study.&#x27;</span>},
     {<span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;information retrieval focuses on finding relevant information in large datasets.&#x27;</span>},
@@ -593,7 +621,7 @@ client.insert(InsertReq.builder()
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Perform-full-text-search" class="common-anchor-header">Melakukan pencarian teks lengkap<button data-href="#Perform-full-text-search" class="anchor-icon" translate="no">
+<h2 id="Perform-full-text-search" class="common-anchor-header">Lakukan pencarian teks lengkap<button data-href="#Perform-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -608,12 +636,17 @@ client.insert(InsertReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah Anda memasukkan data ke dalam koleksi Anda, Anda dapat melakukan pencarian teks lengkap menggunakan kueri teks mentah. Milvus secara otomatis mengubah kueri Anda menjadi vektor yang jarang dan mengurutkan hasil pencarian yang cocok menggunakan algoritme BM25, lalu mengembalikan hasil topK (<code translate="no">limit</code>).</p>
+    </button></h2><p>Setelah Anda menyisipkan data ke dalam koleksi, Anda dapat melakukan pencarian teks lengkap menggunakan kueri teks mentah. Milvus secara otomatis mengubah kueri Anda menjadi vektor spars dan menentukan peringkat hasil pencarian yang cocok menggunakan algoritma BM25, lalu mengembalikan hasil topK (<code translate="no">limit</code>).</p>
 <div class="alert note">
-<p>Anda dapat menyorot istilah yang cocok dalam hasil pencarian dengan mengonfigurasi penyorot teks. Lihat Penyorot <a href="/docs/id/text-highlighter.md">Teks</a> untuk detailnya.</p>
+<p>Anda dapat menyorot istilah yang cocok dalam hasil pencarian dengan mengonfigurasi penyorot teks. Lihat <a href="/docs/id/text-highlighter.md">Penyorot Teks</a> untuk detailnya.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&#x27;my_collection&#x27;</span>, 
 <span class="highlighted-comment-line">    data=[<span class="hljs-string">&#x27;whats the focus of information retrieval?&#x27;</span>],</span>
@@ -694,11 +727,11 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">search_params</code></p></td>
-     <td><p>Kamus yang berisi parameter pencarian.</p></td>
+     <td><p>Sebuah kamus yang berisi parameter pencarian.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.drop_ratio_search</code></p></td>
-     <td><p>Proporsi istilah yang kurang penting untuk diabaikan selama pencarian. Untuk detailnya, lihat <a href="/docs/id/sparse_vector.md">Vektor Jarang</a>.</p></td>
+     <td><p>Proporsi istilah dengan tingkat kepentingan rendah yang akan diabaikan selama pencarian. Untuk detailnya, lihat <a href="/docs/id/sparse_vector.md">Vektor Jarang</a>.</p></td>
    </tr>
    <tr>
      <td></td>
@@ -706,22 +739,22 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">data</code></p></td>
-     <td><p>Teks kueri mentah dalam bahasa alami. Milvus secara otomatis mengubah kueri teks Anda menjadi vektor jarang menggunakan fungsi BM25 - jangan berikan vektor yang telah dihitung sebelumnya.</p></td>
+     <td><p>Teks kueri mentah dalam bahasa alami. Milvus secara otomatis mengubah kueri teks Anda menjadi vektor sparse menggunakan fungsi BM25 — jangan berikan vektor yang telah dihitung sebelumnya.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">anns_field</code></p></td>
-     <td><p>Nama bidang yang berisi vektor jarang yang dihasilkan secara internal.</p></td>
+     <td><p>Nama bidang yang berisi vektor sparse yang dihasilkan secara internal.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">output_fields</code></p></td>
-     <td><p>Daftar nama bidang yang akan dikembalikan dalam hasil pencarian. Mendukung semua bidang <strong>kecuali bidang vektor jarang</strong> yang berisi sematan yang dihasilkan BM25. Bidang keluaran yang umum termasuk bidang kunci utama (misalnya, <code translate="no">id</code>) dan bidang teks asli (misalnya, <code translate="no">text</code>). Untuk informasi lebih lanjut, lihat <a href="/docs/id/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">Pertanyaan</a> Umum.</p></td>
+     <td><p>Daftar nama bidang yang akan ditampilkan dalam hasil pencarian. Mendukung semua bidang <strong>kecuali bidang vektor sparse yang</strong> berisi embedding yang dihasilkan oleh BM25. Bidang keluaran umum meliputi bidang kunci utama (misalnya, <code translate="no">id</code>) dan bidang teks asli (misalnya, <code translate="no">text</code>). Untuk informasi lebih lanjut, lihat <a href="/docs/id/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">FAQ</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">limit</code></p></td>
-     <td><p>Jumlah maksimum kecocokan teratas yang akan dikembalikan.</p></td>
+     <td><p>Jumlah maksimum hasil pencocokan teratas yang akan ditampilkan.</p></td>
    </tr>
 </table>
-<h2 id="FAQ" class="common-anchor-header">PERTANYAAN UMUM<button data-href="#FAQ" class="anchor-icon" translate="no">
+<h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -736,7 +769,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search" class="common-anchor-header">Dapatkah saya menampilkan atau mengakses vektor jarang yang dihasilkan oleh fungsi BM25 dalam pencarian teks lengkap?<button data-href="#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search" class="common-anchor-header">Apakah saya dapat menampilkan atau mengakses vektor langka yang dihasilkan oleh fungsi BM25 dalam pencarian teks lengkap?<button data-href="#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -751,10 +784,10 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Tidak, vektor jarang yang dihasilkan oleh fungsi BM25 tidak dapat diakses atau dikeluarkan secara langsung dalam pencarian teks lengkap. Berikut ini detailnya:</p>
+    </button></h3><p>Tidak, vektor spars yang dihasilkan oleh fungsi BM25 tidak dapat diakses atau ditampilkan secara langsung dalam pencarian teks lengkap. Berikut rinciannya:</p>
 <ul>
-<li><p>Fungsi BM25 menghasilkan vektor jarang secara internal untuk pemeringkatan dan pengambilan</p></li>
-<li><p>Vektor-vektor ini disimpan di bidang jarang tetapi tidak dapat dimasukkan ke dalam <code translate="no">output_fields</code></p></li>
+<li><p>Fungsi BM25 menghasilkan vektor spars secara internal untuk pemeringkatan dan pengambilan hasil</p></li>
+<li><p>Vektor-vektor ini disimpan dalam bidang sparse tetapi tidak dapat dimasukkan ke dalam <code translate="no">output_fields</code></p></li>
 <li><p>Anda hanya dapat menampilkan bidang teks asli dan metadata (seperti <code translate="no">id</code>, <code translate="no">text</code>)</p></li>
 </ul>
 <p>Contoh:</p>
@@ -778,7 +811,7 @@ client.search(
     search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="common-anchor-header">Mengapa saya perlu mendefinisikan bidang vektor jarang jika saya tidak dapat mengaksesnya?<button data-href="#Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="anchor-icon" translate="no">
+<h3 id="Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="common-anchor-header">Mengapa saya perlu mendefinisikan bidang vektor spars jika saya tidak dapat mengaksesnya?<button data-href="#Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -793,16 +826,16 @@ client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Bidang vektor jarang berfungsi sebagai indeks pencarian internal, mirip dengan indeks basis data yang tidak berinteraksi langsung dengan pengguna.</p>
-<p><strong>Dasar Pemikiran Desain</strong>:</p>
+    </button></h3><p>Bidang vektor sparsitas berfungsi sebagai indeks pencarian internal, mirip dengan indeks basis data yang tidak berinteraksi langsung dengan pengguna.</p>
+<p><strong>Alasan Desain</strong>:</p>
 <ul>
-<li><p>Pemisahan Masalah: Anda bekerja dengan teks (input/output), Milvus menangani vektor (pemrosesan internal)</p></li>
-<li><p>Kinerja: Vektor jarang yang telah dihitung sebelumnya memungkinkan pemeringkatan BM25 yang cepat selama kueri</p></li>
-<li><p>Pengalaman Pengguna: Mengabstraksikan operasi vektor yang kompleks di balik antarmuka teks yang sederhana</p></li>
+<li><p>Pemisahan Tanggung Jawab: Anda bekerja dengan teks (input/output), Milvus menangani vektor (pemrosesan internal)</p></li>
+<li><p>Kinerja: Vektor langka yang dihitung sebelumnya memungkinkan pemeringkatan BM25 yang cepat selama kueri</p></li>
+<li><p>Pengalaman Pengguna: Menyembunyikan operasi vektor yang kompleks di balik antarmuka teks yang sederhana</p></li>
 </ul>
-<p><strong>Jika Anda membutuhkan akses vektor</strong>:</p>
+<p><strong>Jika Anda memerlukan akses ke vektor</strong>:</p>
 <ul>
-<li><p>Gunakan operasi vektor jarang manual alih-alih pencarian teks lengkap</p></li>
-<li><p>Buat koleksi terpisah untuk alur kerja vektor jarang khusus</p></li>
+<li><p>Gunakan operasi vektor spars yang dilakukan secara manual, bukan pencarian teks lengkap</p></li>
+<li><p>Buat koleksi terpisah untuk alur kerja vektor langka khusus</p></li>
 </ul>
 <p>Untuk detailnya, lihat <a href="/docs/id/sparse_vector.md">Vektor Jarang</a>.</p>

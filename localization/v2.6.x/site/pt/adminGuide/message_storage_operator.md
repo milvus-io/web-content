@@ -21,11 +21,11 @@ summary: Saiba como configurar o armazenamento de mensagens com o Milvus Operato
       </svg>
     </button></h1><p>O Milvus utiliza o RocksMQ, o Pulsar ou o Kafka para gerir registos de alterações recentes, emitir registos de fluxo e disponibilizar subscrições de registos. Este tópico apresenta como configurar as dependências de armazenamento de mensagens ao instalar o Milvus com o Milvus Operator. Para mais detalhes, consulte <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">«Configurar o armazenamento de mensagens com o Milvus Operator»</a> no repositório do Milvus Operator.</p>
 <p>Este tópico pressupõe que já tenha implementado o Milvus Operator.</p>
-<div class="alert note">Consulte <a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">«Implementar o Milvus Operator</a> » para obter mais informações. </div>
+<div class="alert note">Consulte <a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">«Implantar o Milvus Operator</a> » para obter mais informações. </div>
 <p>É necessário especificar um ficheiro de configuração para utilizar o Milvus Operator e iniciar um cluster do Milvus.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-string">kubectl</span> <span class="hljs-string">apply</span> <span class="hljs-string">-f</span> <span class="hljs-string">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Basta editar o modelo de código em <code translate="no">milvus_cluster_default.yaml</code> para configurar as dependências de terceiros. As secções seguintes explicam como configurar o armazenamento de objetos, o etcd e o Pulsar, respetivamente.</p>
+<p>Basta editar o modelo de código em « <code translate="no">milvus_cluster_default.yaml</code> » para configurar as dependências de terceiros. As secções seguintes explicam como configurar o armazenamento de objetos, o etcd e o Pulsar, respetivamente.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Antes de começar<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,14 +53,14 @@ summary: Saiba como configurar o armazenamento de mensagens com o Milvus Operato
 </table>
 <p>Existem também outras limitações para a especificação do armazenamento de mensagens:</p>
 <ul>
-<li>É suportado apenas um armazenamento de mensagens por instância do Milvus. No entanto, mantemos a compatibilidade retroativa com a configuração de vários armazenamentos de mensagens para uma única instância. A prioridade é a seguinte:
+<li>Apenas é suportado um armazenamento de mensagens por instância do Milvus. No entanto, mantemos a compatibilidade retroativa com a configuração de vários armazenamentos de mensagens para uma única instância. A prioridade é a seguinte:
 <ul>
 <li>modo autónomo: RocksMQ (predefinição) &gt; Pulsar &gt; Kafka</li>
-<li>modo de cluster: Pulsar (predefinição) &gt; Kafka</li>
+<li>modo de cluster: Pulsar (padrão) &gt; Kafka</li>
 </ul></li>
 <li>O armazenamento de mensagens não pode ser alterado enquanto o sistema Milvus estiver em execução.</li>
-<li>Apenas as versões 2.x ou 3.x do Kafka são suportadas.</li>
-<li><strong>Limitações de atualização</strong>: <strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v2.6.19, deve manter a sua escolha atual de fila de mensagens. Não é suportada a mudança entre diferentes sistemas de filas de mensagens durante a atualização. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.</li>
+<li>Apenas são suportadas as versões 2.x ou 3.x do Kafka.</li>
+<li><strong>Limitações de atualização</strong>: <strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v2.6.20, deve manter a sua escolha atual de fila de mensagens. Não é suportada a mudança entre diferentes sistemas de filas de mensagens durante a atualização. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Configurar o RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -201,7 +201,7 @@ Os campos utilizados para configurar um serviço Pulsar externo incluem:</p>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">inCluster</code> indica que, quando um cluster do Milvus é iniciado, um serviço Pulsar é iniciado automaticamente nesse cluster.</p>
+    </button></h3><p><code translate="no">inCluster</code> indica que, quando um cluster Milvus é iniciado, um serviço Pulsar é iniciado automaticamente no cluster.</p>
 <h4 id="Example" class="common-anchor-header">Exemplo</h4><p>O exemplo seguinte configura um serviço Pulsar interno.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -242,7 +242,7 @@ Os campos utilizados para configurar um serviço Pulsar externo incluem:</p>
   <span class="hljs-attr">config:</span> {}            
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">Este exemplo especifica o número de réplicas de cada componente do Pulsar, os recursos de computação do Pulsar BookKeeper e outras configurações.</div>
-<div class="alert note">Consulte os itens de configuração completos para configurar um serviço Pulsar interno no ficheiro <a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">values.yaml</a>. Adicione os itens de configuração necessários na secção « <code translate="no">pulsar.inCluster.values</code> », tal como mostrado no exemplo anterior.</div>
+<div class="alert note">Consulte os itens de configuração completos para configurar um serviço Pulsar interno no ficheiro ` <a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">values.yaml`</a>. Adicione os itens de configuração necessários na secção ` <code translate="no">pulsar.inCluster.values</code> `, tal como mostrado no exemplo anterior.</div>
 <p>Partindo do princípio de que o ficheiro de configuração se chama <code translate="no">milvuscluster.yaml</code>, execute o comando seguinte para aplicar a configuração.</p>
 <pre><code translate="no" class="language-Shell">kubectl apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>

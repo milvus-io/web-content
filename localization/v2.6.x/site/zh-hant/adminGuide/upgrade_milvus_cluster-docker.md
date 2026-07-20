@@ -1,6 +1,6 @@
 ---
 id: upgrade_milvus_cluster-docker.md
-summary: 瞭解如何使用 Docker Compose 升級 Milvus 叢集。
+summary: 了解如何使用 Docker Compose 升級 Milvus 叢集。
 title: 使用 Docker Compose 升級 Milvus 叢集
 ---
 <div class="tab-wrapper"><a href="/docs/zh-hant/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/zh-hant/v2.6.x/upgrade_milvus_cluster-operator.md" class=''>OperatorMilvus</a><a href="/docs/zh-hant/v2.6.x/configure_operator.md" class=''>OperatorMilvus</a><a href="/docs/zh-hant/v2.6.x/configure-docker.md" class=''>OperatorHelmDocker</a><a href="/docs/zh-hant/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>ComposeHelmDocker</a><a href="/docs/zh-hant/v2.6.x/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>
@@ -20,9 +20,9 @@ title: 使用 Docker Compose 升級 Milvus 叢集
         ></path>
       </svg>
     </button></h1><p>本主題說明如何使用 Docker Compose 升級您的 Milvus。</p>
-<p>通常情況下，您可以<a href="#Upgrade-Milvus-by-changing-its-image">透過更換映像檔來升級 Milvus</a>。然而，在從 v2.1.x 升級至 v2.6.19 之前，您必須<a href="#Migrate-the-metadata">先遷移元資料</a>。</p>
+<p>在一般情況下，您可以<a href="#Upgrade-Milvus-by-changing-its-image">透過更換映像檔來升級 Milvus</a>。然而，在從 v2.1.x 升級至 v2.6.20 之前，您必須<a href="#Migrate-the-metadata">先遷移元資料</a>。</p>
 <div class="alert note">
-<p><strong>訊息佇列限制</strong>：升級至 Milvus v2.6.19 時，您必須維持當前的訊息佇列選擇。升級過程中不支援在不同的訊息佇列系統之間切換。未來版本將支援變更訊息佇列系統。</p>
+<p><strong>訊息佇列限制</strong>：升級至 Milvus v2.6.20 時，您必須維持當前的訊息佇列選擇。升級過程中不支援在不同的訊息佇列系統之間切換。未來版本將支援變更訊息佇列系統。</p>
 </div>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">透過更換映像檔升級 Milvus<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,42 +39,42 @@ title: 使用 Docker Compose 升級 Milvus 叢集
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在一般情況下，您可以按照以下步驟升級 Milvus：</p>
+    </button></h2><p>在一般情況下，您可以依照以下步驟升級 Milvus：</p>
 <ol>
-<li><p>在<code translate="no">docker-compose.yaml</code> 中變更 Milvus 映像標籤。</p>
+<li><p>在 `<code translate="no">docker-compose.yaml</code>` 中變更 Milvus 映像標籤。</p>
 <p>請注意，您需要變更代理伺服器、所有協調器以及所有工作節點的映像標籤。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">rootcoord:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-rootcoord</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.19</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.20</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-proxy</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.19</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.20</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">querycoord:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-querycoord</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.19</span>  
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.20</span>  
 <span class="hljs-string">...</span>
 <span class="hljs-attr">querynode:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-querynode</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.19</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.20</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">indexcoord:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-indexcoord</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.19</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.20</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">indexnode:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-indexnode</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.19</span> 
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.20</span> 
 <span class="hljs-string">...</span>
 <span class="hljs-attr">datacoord:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-datacoord</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.19</span>   
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.20</span>   
 <span class="hljs-string">...</span>
 <span class="hljs-attr">datanode:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-datanode</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.19</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.20</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>執行以下指令以進行升級。</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -100,7 +100,7 @@ docker compose up -d
 <li><p>停止所有 Milvus 元件。</p>
 <pre><code translate="no">docker stop <span class="hljs-tag">&lt;<span class="hljs-name">milvus-component-docker-container-name</span>&gt;</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>為元資料遷移準備配置檔案<code translate="no">migrate.yaml</code> 。</p>
+<li><p>為元資料遷移準備設定檔<code translate="no">migrate.yaml</code> 。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># migration.yaml</span>
 <span class="hljs-attr">cmd:</span>
   <span class="hljs-comment"># Option: run/backup/rollback</span>
@@ -108,7 +108,7 @@ docker compose up -d
   <span class="hljs-attr">runWithBackup:</span> <span class="hljs-literal">true</span>
 <span class="hljs-attr">config:</span>
   <span class="hljs-attr">sourceVersion:</span> <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  <span class="hljs-attr">targetVersion:</span> <span class="hljs-number">2.6</span><span class="hljs-number">.19</span>
+  <span class="hljs-attr">targetVersion:</span> <span class="hljs-number">2.6</span><span class="hljs-number">.20</span>
   <span class="hljs-attr">backupFilePath:</span> <span class="hljs-string">/tmp/migration.bak</span>
 <span class="hljs-attr">metastore:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">etcd</span>
@@ -124,7 +124,7 @@ docker compose up -d
 <span class="hljs-comment"># and you put migration.yaml in the same directory with docker-compose.yaml.</span>
 docker run --<span class="hljs-built_in">rm</span> -it --network milvus -v $(<span class="hljs-built_in">pwd</span>)/migration.yaml:/milvus/configs/migration.yaml milvus/meta-migration:v2.2.0 /milvus/bin/meta-migration -config=/milvus/configs/migration.yaml
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>使用新的 Milvus 映像重新啟動 Milvus 元件。</p>
+<li><p>使用新的 Milvus 映像檔重新啟動 Milvus 元件。</p>
 <pre><code translate="no">Update the milvus <span class="hljs-selector-tag">image</span> tag in the docker-compose<span class="hljs-selector-class">.yaml</span>
 docker compose down
 docker compose up -d
@@ -150,7 +150,7 @@ docker compose up -d
 <ul>
 <li><a href="/docs/zh-hant/v2.6.x/scaleout.md">擴展 Milvus 叢集</a></li>
 </ul></li>
-<li>若您已準備好在雲端部署叢集：
+<li>若您已準備好將叢集部署至雲端：
 <ul>
 <li>了解如何<a href="/docs/zh-hant/v2.6.x/eks.md">使用 Terraform 在 Amazon EKS 上部署 Milvus</a></li>
 <li>了解如何<a href="/docs/zh-hant/v2.6.x/gcp.md">使用 Kubernetes 在 GCP 上部署 Milvus 叢集</a></li>

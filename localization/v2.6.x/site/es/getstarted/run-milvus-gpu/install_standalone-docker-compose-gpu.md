@@ -74,12 +74,12 @@ title: Ejecutar Milvus con soporte para GPU mediante Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Descarga <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.19/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> y guárdalo como docker-compose.yml manualmente o con el siguiente comando.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.19/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
+    </button></h3><p>Descarga <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.20/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> y guárdalo como docker-compose.yml manualmente o con el siguiente comando.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.20/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Debe realizar algunos cambios en las variables de entorno del servicio independiente en el archivo YAML, tal y como se indica a continuación:</p>
 <ul>
-<li>Para asignar un dispositivo GPU específico a Milvus, localice el campo « <code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> » en la definición del servicio « <code translate="no">standalone</code> » y sustituya su valor por el ID de la GPU deseada. Puede utilizar la herramienta « <code translate="no">nvidia-smi</code> », incluida con los controladores de pantalla de las GPU de NVIDIA, para determinar el ID de un dispositivo GPU. Milvus admite varios dispositivos GPU.</li>
+<li>Para asignar un dispositivo de GPU específico a Milvus, localice el campo « <code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> » en la definición del servicio « <code translate="no">standalone</code> » y sustituya su valor por el ID de la GPU deseada. Puede utilizar la herramienta « <code translate="no">nvidia-smi</code> », incluida con los controladores de pantalla de las GPU de NVIDIA, para determinar el ID de un dispositivo de GPU. Milvus admite varios dispositivos de GPU.</li>
 </ul>
 <p>Asignar un único dispositivo de GPU a Milvus:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
@@ -94,7 +94,7 @@ title: Ejecutar Milvus con soporte para GPU mediante Docker Compose
             <span class="hljs-attr">device_ids:</span> [<span class="hljs-string">&quot;0&quot;</span>]
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Asignar varios dispositivos de GPU a Milvus:</p>
+<p>Asignar varios dispositivos GPU a Milvus:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-string">...</span>
@@ -138,7 +138,7 @@ Creating milvus-standalone ... done
 <ul>
 <li>El contenedor <strong>milvus-etcd</strong> no expone ningún puerto al host y asigna sus datos a <strong>volumes/etcd</strong> en la carpeta actual.</li>
 <li>El contenedor <strong>«milvus-minio»</strong> atiende los puertos <strong>9090</strong> y <strong>9091</strong> localmente con las credenciales de autenticación predeterminadas y asigna sus datos a <strong>«volumes/minio»</strong> en la carpeta actual.</li>
-<li>El contenedor <strong>milvus-standalone</strong> atiende los puertos <strong>19530</strong> localmente con la configuración predeterminada y asigna sus datos a <strong>la carpeta volumes/milvus</strong> de la carpeta actual.</li>
+<li>El contenedor <strong>«milvus-standalone»</strong> atiende los puertos <strong>19530</strong> localmente con la configuración predeterminada y asigna sus datos a <strong>la carpeta «volumes/milvus»</strong> de la carpeta actual.</li>
 </ul></li>
 </ul>
 <p>Puedes comprobar si los contenedores están en funcionamiento mediante el siguiente comando:</p>
@@ -182,7 +182,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
       </svg>
     </button></h2><p>Una vez que Milvus esté en funcionamiento, puede personalizar el grupo de memoria modificando los ajustes de <code translate="no">initMemSize</code> y <code translate="no">maxMemSize</code> en el archivo <code translate="no">milvus.yaml</code>.</p>
 <div class="alert note">
-<p>El archivo <code translate="no">milvus.yaml</code> se encuentra en el directorio <code translate="no">/milvus/configs/</code>, dentro del contenedor de Milvus.</p>
+<p>El archivo « <code translate="no">milvus.yaml</code> » se encuentra en el directorio « <code translate="no">/milvus/configs/</code> » dentro del contenedor de Milvus.</p>
 </div>
 <p>Para configurar el grupo de memoria, modifica los ajustes de <code translate="no">initMemSize</code> y <code translate="no">maxMemSize</code> en el archivo <code translate="no">milvus.yaml</code> de la siguiente manera.</p>
 <ol>
@@ -192,7 +192,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <li><p>Abre el archivo « <code translate="no">milvus.yaml</code> » copiado con tu editor de texto preferido. Por ejemplo, utilizando vim:</p>
 <pre><code translate="no" class="language-shell">vim milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Edita los ajustes de « <code translate="no">initMemSize</code> » y « <code translate="no">maxMemSize</code> » según sea necesario y guarda los cambios:</p>
+<li><p>Modifica los parámetros « <code translate="no">initMemSize</code> » y « <code translate="no">maxMemSize</code> » según sea necesario y guarda los cambios:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">gpu:</span>
   <span class="hljs-attr">initMemSize:</span> <span class="hljs-number">0</span>

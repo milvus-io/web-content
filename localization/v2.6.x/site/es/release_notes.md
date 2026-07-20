@@ -19,6 +19,84 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.6.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v2620" class="common-anchor-header">v2.6.20<button data-href="#v2620" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release date: July 14, 2026</p>
+<table>
+<thead>
+<tr><th>Milvus Version</th><th>Python SDK Version</th><th>Node.js SDK Version</th><th>Java SDK Version</th><th>Go SDK Version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.6.20</td><td>2.6.16</td><td>2.6.17</td><td>2.6.22</td><td>2.6.20</td></tr>
+</tbody>
+</table>
+<p>We are excited to announce the release of Milvus v2.6.20! This release improves query scheduling and batching, index loading, filtering performance, streaming rebalancing, and observability. It also resolves correctness and reliability issues across JSON filtering, streaming recovery, text indexing, analyzer configuration, and GPU_CAGRA operations.</p>
+<h3 id="Improvements" class="common-anchor-header">Improvements<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Added named C++ thread-pool activity metrics and Grafana monitoring (<a href="https://github.com/milvus-io/milvus/pull/50299">#50299</a>)</li>
+<li>Improved QueryCoord scheduling by decoupling task dispatch from distribution polling to allow independent scheduling intervals (<a href="https://github.com/milvus-io/milvus/pull/50774">#50774</a>, <a href="https://github.com/milvus-io/milvus/pull/50777">#50777</a>)</li>
+<li>Improved QueryNode query batching by increasing the default NQ grouping limits for larger merged query batches (<a href="https://github.com/milvus-io/milvus/pull/50859">#50859</a>, <a href="https://github.com/milvus-io/milvus/pull/50898">#50898</a>)</li>
+<li>Improved index-loading resilience by safely completing pending range reads after partial failures (<a href="https://github.com/milvus-io/milvus/pull/50937">#50937</a>)</li>
+<li>Optimized VARCHAR primary-key population when loading sealed segments (<a href="https://github.com/milvus-io/milvus/pull/51063">#51063</a>)</li>
+<li>Improved filter execution performance by skipping null-bitmap processing for all-valid results (<a href="https://github.com/milvus-io/milvus/pull/51067">#51067</a>)</li>
+<li>Improved channel balancing by enabling the channel-level score balancer by default and introducing a safer default threshold for channel-exclusive mode (<a href="https://github.com/milvus-io/milvus/pull/51132">#51132</a>)</li>
+<li>Improved streaming rebalancing to trigger immediately when the primary resource group configuration changed (<a href="https://github.com/milvus-io/milvus/pull/51147">#51147</a>)</li>
+<li>Upgraded Knowhere to v2.6.17 to prevent GPU_CAGRA operations from failing with bad_optional_access under the default ef configuration (<a href="https://github.com/milvus-io/milvus/pull/51209">#51209</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Fixed incorrect JSON path filter results for missing, null, or type-mismatched values (<a href="https://github.com/milvus-io/milvus/pull/50722">#50722</a>, <a href="https://github.com/milvus-io/milvus/pull/50723">#50723</a>)</li>
+<li>Fixed an issue where Marisa string indexes could fail to upload or load when the local temporary directory was missing (<a href="https://github.com/milvus-io/milvus/pull/50772">#50772</a>)</li>
+<li>Fixed an issue where stale streaming writes could retry indefinitely after their target collection or partition was dropped (<a href="https://github.com/milvus-io/milvus/pull/50849">#50849</a>, <a href="https://github.com/milvus-io/milvus/pull/50895">#50895</a>)</li>
+<li>Fixed an issue where cluster-level load configuration could override user-specified collection replica settings without force override enabled (<a href="https://github.com/milvus-io/milvus/pull/50860">#50860</a>)</li>
+<li>Fixed an issue where analyzer runtime settings and YAML updates were not applied to the Rust analyzer layer (<a href="https://github.com/milvus-io/milvus/pull/50998">#50998</a>)</li>
+<li>Fixed an issue where StorageV2 text index builds could use incorrect paths for existing segment insert logs (<a href="https://github.com/milvus-io/milvus/pull/51002">#51002</a>)</li>
+<li>Fixed an issue where DumpMessages omitted transaction data messages and produced incomplete exports (<a href="https://github.com/milvus-io/milvus/pull/51102">#51102</a>)</li>
+<li>Fixed an issue where ARRAY containment expressions could return incorrect results for float literals (<a href="https://github.com/milvus-io/milvus/pull/51130">#51130</a>)</li>
+<li>Fixed an issue where filters on missing nested JSON values, failed JSON casts, or out-of-range array elements could return incorrect results instead of UNKNOWN (<a href="https://github.com/milvus-io/milvus/pull/51135">#51135</a>)</li>
+<li>Fixed an issue where streaming recovery could omit physical channels recorded in collection metadata and leave required WAL topics unavailable after startup (<a href="https://github.com/milvus-io/milvus/pull/51144">#51144</a>)</li>
+</ul>
 <h2 id="v2619" class="common-anchor-header">v2.6.19<button data-href="#v2619" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

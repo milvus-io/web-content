@@ -21,7 +21,7 @@ title: Menjalankan Milvus dengan Dukungan GPU Menggunakan Docker Compose
         ></path>
       </svg>
     </button></h1><p>Halaman ini menjelaskan cara menjalankan instance Milvus dengan dukungan GPU menggunakan Docker Compose.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Prasyarat<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+<h2 id="Prerequisites" class="common-anchor-header">Persyaratan<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -74,10 +74,10 @@ title: Menjalankan Milvus dengan Dukungan GPU Menggunakan Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Unduh <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.19/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> dan simpan sebagai docker-compose.yml secara manual, atau dengan perintah berikut.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.19/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
+    </button></h3><p>Unduh <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.20/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> dan simpan sebagai docker-compose.yml secara manual, atau dengan perintah berikut.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.20/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Anda perlu melakukan beberapa perubahan pada variabel lingkungan layanan mandiri dalam berkas YAML sebagai berikut:</p>
+<p>Anda perlu melakukan beberapa perubahan pada variabel lingkungan layanan mandiri di berkas YAML sebagai berikut:</p>
 <ul>
 <li>Untuk menetapkan perangkat GPU tertentu ke Milvus, temukan bidang ` <code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> ` dalam definisi layanan ` <code translate="no">standalone</code> ` dan ganti nilainya dengan ID GPU yang diinginkan. Anda dapat menggunakan alat ` <code translate="no">nvidia-smi</code> `, yang disertakan dalam driver tampilan GPU NVIDIA, untuk menentukan ID perangkat GPU. Milvus mendukung beberapa perangkat GPU.</li>
 </ul>
@@ -122,7 +122,7 @@ title: Menjalankan Milvus dengan Dukungan GPU Menggunakan Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Di direktori yang berisi file `docker-compose.yml`, jalankan Milvus dengan perintah berikut:</p>
+    </button></h3><p>Di direktori yang menyimpan berkas `docker-compose.yml`, jalankan Milvus dengan perintah berikut:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
 
 Creating milvus-etcd  ... done
@@ -134,7 +134,7 @@ Creating milvus-standalone ... done
 </div>
 <p>Setelah Milvus dimulai,</p>
 <ul>
-<li>Kontainer bernama <strong>milvus-standalone</strong>, <strong>milvus-minio</strong>, dan <strong>milvus-etcd</strong> sudah aktif.
+<li>kontainer bernama <strong>milvus-standalone</strong>, <strong>milvus-minio</strong>, dan <strong>milvus-etcd</strong> sudah aktif.
 <ul>
 <li>Kontainer <strong>milvus-etcd</strong> tidak mengekspos port apa pun ke host dan memetakan datanya ke <strong>volumes/etcd</strong> di folder saat ini.</li>
 <li>Kontainer <strong>milvus-minio</strong> melayani port <strong>9090</strong> dan <strong>9091</strong> secara lokal dengan kredensial otentikasi default dan memetakan datanya ke <strong>volumes/minio</strong> di folder saat ini.</li>

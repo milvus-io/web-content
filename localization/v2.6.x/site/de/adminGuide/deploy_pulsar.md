@@ -24,7 +24,7 @@ summary: >-
     </button></h1><p>Milvus nutzt Pulsar oder Kafka zur Verwaltung von Protokollen der letzten Änderungen, zur Ausgabe von Stream-Protokollen und zur Bereitstellung von Protokollabonnements. Pulsar ist das standardmäßige Nachrichtenspeichersystem. In diesem Abschnitt wird erläutert, wie Sie den Nachrichtenspeicher mit Docker Compose oder Helm konfigurieren.</p>
 <p>Sie können Pulsar mit <a href="https://docs.docker.com/get-started/overview/">Docker Compose</a> oder auf K8s konfigurieren und Kafka auf K8s einrichten.</p>
 <div class="alert note">
-<p><strong>Einschränkungen bei den Nachrichtenwarteschlangen</strong>: Beim Upgrade auf Milvus v2.6.19 müssen Sie Ihre derzeitige Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</p>
+<p><strong>Einschränkungen bei den Nachrichtenwarteschlangen</strong>: Beim Upgrade auf Milvus v2.6.20 müssen Sie Ihre aktuelle Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Pulsar mit Docker Compose konfigurieren<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -56,7 +56,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Um Pulsar mit Docker Compose zu konfigurieren, geben Sie Ihre Werte für den Abschnitt „ <code translate="no">pulsar</code> “ in der Datei „ <code translate="no">milvus.yaml</code> “ im Verzeichnis „milvus/configs“ an.</p>
+    </button></h3><p>Um Pulsar mit Docker Compose zu konfigurieren, geben Sie Ihre Werte für den Abschnitt „ <code translate="no">pulsar</code> “ in der Datei „ <code translate="no">milvus.yaml</code> “ im Pfad „milvus/configs“ an.</p>
 <pre><code translate="no"><span class="hljs-attr">pulsar:</span>
   <span class="hljs-attr">address:</span> <span class="hljs-string">localhost</span> <span class="hljs-comment"># Address of pulsar</span>
   <span class="hljs-attr">port:</span> <span class="hljs-number">6650</span> <span class="hljs-comment"># Port of pulsar</span>
@@ -148,7 +148,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Für Milvus-Cluster auf K8s können Sie Woodpecker mit demselben Befehl konfigurieren, mit dem Milvus gestartet wird. Alternativ können Sie Woodpecker mithilfe der Datei „ <code translate="no">values.yml</code> “ im Pfad „/charts/milvus“ im Repository <a href="https://github.com/milvus-io/milvus-helm">„milvus-helm“</a> konfigurieren, bevor Sie Milvus starten.</p>
+    </button></h2><p>Für Milvus-Cluster auf K8s können Sie Woodpecker im selben Befehl konfigurieren, mit dem Milvus gestartet wird. Alternativ können Sie Woodpecker mithilfe der Datei „ <code translate="no">values.yml</code> “ im Pfad „/charts/milvus“ im Repository <a href="https://github.com/milvus-io/milvus-helm">„milvus-helm“</a> konfigurieren, bevor Sie Milvus starten.</p>
 <p>Einzelheiten zur Konfiguration von Milvus mit Helm finden Sie unter <a href="/docs/de/v2.6.x/configure-helm.md">„Milvus mit Helm-Charts konfigurieren</a>“. Einzelheiten zu den Konfigurationselementen für Woodpecker finden Sie unter <a href="/docs/de/v2.6.x/use-woodpecker.md">„Woodpecker-bezogene Konfigurationen</a>“.
 |</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">Verwendung der YAML-Datei<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
@@ -226,7 +226,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bei Milvus-Clustern auf K8s können Sie Kafka im selben Befehl konfigurieren, mit dem Milvus gestartet wird. Alternativ können Sie Kafka mithilfe der Datei „ <code translate="no">values.yml</code> “ im Pfad „/charts/milvus“ im Repository <a href="https://github.com/milvus-io/milvus-helm">„milvus-helm“</a> konfigurieren, bevor Sie Milvus starten.</p>
+    </button></h2><p>Für Milvus-Cluster auf K8s können Sie Kafka im selben Befehl konfigurieren, mit dem Milvus gestartet wird. Alternativ können Sie Kafka mithilfe der Datei „ <code translate="no">values.yml</code> “ im Pfad „/charts/milvus“ im Repository <a href="https://github.com/milvus-io/milvus-helm">„milvus-helm“</a> konfigurieren, bevor Sie Milvus starten.</p>
 <p>Einzelheiten zur Konfiguration von Milvus mit Helm finden Sie unter <a href="/docs/de/v2.6.x/configure-helm.md">„Milvus mit Helm-Charts konfigurieren</a>“. Einzelheiten zu Pulsar-bezogenen Konfigurationselementen finden Sie unter <a href="/docs/de/v2.6.x/configure_pulsar.md">„Pulsar-bezogene Konfigurationen</a>“.</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">Verwendung der YAML-Datei<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -278,8 +278,8 @@ summary: >-
       </svg>
     </button></h2><p>Milvus im Standalone-Modus verwendet RocksMQ als Standard-Nachrichtenspeicher. Ausführliche Anweisungen zur Konfiguration von Milvus mit Helm finden Sie unter <a href="/docs/de/v2.6.x/configure-helm.md">„Milvus mit Helm-Charts konfigurieren</a>“. Einzelheiten zu den RocksMQ-bezogenen Konfigurationselementen finden Sie unter <a href="/docs/de/v2.6.x/configure_rocksmq.md">„RocksMQ-bezogene Konfigurationen</a>“.</p>
 <ul>
-<li><p>Wenn Sie Milvus mit RocksMQ gestartet haben und dessen Einstellungen ändern möchten, können Sie den Befehl „ <code translate="no">helm upgrade -f</code> “ mit den geänderten Einstellungen aus der folgenden YAML-Datei ausführen.</p></li>
-<li><p>Wenn Sie Milvus als Standalone-Anwendung mit Helm und einem anderen Nachrichtenspeicher als RocksMQ installiert haben und wieder zu RocksMQ zurückwechseln möchten, führen Sie den Befehl „ <code translate="no">helm upgrade -f</code> “ mit der folgenden YAML-Datei aus, nachdem Sie alle Sammlungen geleert und Milvus angehalten haben.</p></li>
+<li><p>Wenn Sie Milvus mit RocksMQ gestartet haben und dessen Einstellungen ändern möchten, können Sie „ <code translate="no">helm upgrade -f</code> “ mit den geänderten Einstellungen in der folgenden YAML-Datei ausführen.</p></li>
+<li><p>Wenn Sie Milvus als Standalone-Lösung mit Helm und einem anderen Nachrichtenspeicher als RocksMQ installiert haben und wieder zu RocksMQ zurückwechseln möchten, führen Sie den Befehl „ <code translate="no">helm upgrade -f</code> “ mit der folgenden YAML-Datei aus, nachdem Sie alle Sammlungen geleert und Milvus angehalten haben.</p></li>
 </ul>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -298,7 +298,7 @@ summary: >-
       compressionTypes: [0, 0, 7, 7, 7]    
 </span><button class="copy-code-btn"></button></code></pre>
 <div class="alert warning">
-<p>Ein Wechsel des Message-Stores wird nicht empfohlen. Wenn Sie dies dennoch tun möchten, stellen Sie zunächst alle DDL-Operationen ein, rufen Sie dann die FlushAll-API auf, um alle Sammlungen zu leeren, und beenden Sie schließlich Milvus, bevor Sie den Message-Store tatsächlich ändern.</p>
+<p>Ein Wechsel des Message-Stores wird nicht empfohlen. Falls Sie dies dennoch tun möchten, stellen Sie zunächst alle DDL-Operationen ein, rufen Sie dann die FlushAll-API auf, um alle Sammlungen zu leeren, und beenden Sie schließlich Milvus, bevor Sie den Message-Store tatsächlich ändern.</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">Was kommt als Nächstes?<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

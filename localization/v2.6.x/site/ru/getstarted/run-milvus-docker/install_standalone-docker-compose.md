@@ -57,7 +57,7 @@ title: Запуск Milvus с помощью Docker Compose (Linux)
       </svg>
     </button></h2><p>Milvus предоставляет файл конфигурации Docker Compose в репозитории Milvus. Чтобы установить Milvus с помощью Docker Compose, просто выполните команду</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.19/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.20/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,13 +67,13 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Что нового в версии 2.6.19:</strong></p>
+<p><strong>Что нового в версии 2.6.20:</strong></p>
 <ul>
 <li><strong>Улучшенная архитектура</strong>: включает новый узел потоковой передачи данных и оптимизированные компоненты</li>
 <li><strong>Обновленные зависимости</strong>: включены последние версии MinIO и etcd</li>
 <li><strong>Улучшенная конфигурация</strong>: оптимизированные настройки для повышения производительности</li>
 </ul>
-<p>Всегда загружайте самую последнюю конфигурацию Docker Compose, чтобы обеспечить совместимость с функциями версии v2.6.19.</p>
+<p>Всегда загружайте последнюю конфигурацию Docker Compose, чтобы обеспечить совместимость с функциями версии v2.6.20.</p>
 <ul>
 <li><p>Если у вас не удалось выполнить приведенную выше команду, проверьте, установлен ли в вашей системе Docker Compose версии 1. В этом случае рекомендуется перейти на Docker Compose версии 2 в соответствии с указаниями на <a href="https://docs.docker.com/compose/">этой странице</a>.</p></li>
 <li><p>Если у вас возникли проблемы с загрузкой образа, свяжитесь с нами по адресу <a href="mailto:community@zilliz.com">community@zilliz.com</a>, указав подробности проблемы, и мы предоставим вам необходимую поддержку.</p></li>
@@ -84,7 +84,7 @@ Creating milvus-standalone ... done
 <li>запускаются контейнеры с именами <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> и <strong>milvus-etcd</strong>.
 <ul>
 <li>Контейнер <strong>milvus-etcd</strong> не открывает никаких портов для хоста и сопоставляет свои данные с <strong>папкой volumes/etcd</strong> в текущем каталоге.</li>
-<li>Контейнер <strong>milvus-minio</strong> обслуживает локальные порты <strong>9090</strong> и <strong>9091</strong> с учетными данными аутентификации по умолчанию и сопоставляет свои данные с <strong>папкой volumes/minio</strong> в текущем каталоге.</li>
+<li>Контейнер <strong>milvus-minio</strong> обслуживает порты <strong>9090</strong> и <strong>9091</strong> локально с использованием учетных данных по умолчанию и сопоставляет свои данные с <strong>папкой volumes/minio</strong> в текущем каталоге.</li>
 <li>Контейнер <strong>milvus-standalone</strong> обслуживает локальные порты <strong>19530</strong> с настройками по умолчанию и сопоставляет свои данные с <strong>каталогом volumes/milvus</strong> в текущей папке.</li>
 </ul></li>
 </ul>
@@ -189,7 +189,7 @@ EOF
 </ul></li>
 <li><p>Ознакомьтесь с <a href="/docs/ru/v2.6.x/milvus-webui.md">Milvus WebUI</a> — интуитивно понятным веб-интерфейсом для мониторинга и управления Milvus.</p></li>
 <li><p>Ознакомьтесь с <a href="/docs/ru/v2.6.x/milvus_backup_overview.md">Milvus Backup</a> — инструментом с открытым исходным кодом для резервного копирования данных Milvus.</p></li>
-<li><p>Познакомьтесь с <a href="/docs/ru/v2.6.x/birdwatcher_overview.md">Birdwatcher</a> — инструментом с открытым исходным кодом для отладки Milvus и динамического обновления конфигурации.</p></li>
+<li><p>Ознакомьтесь с <a href="/docs/ru/v2.6.x/birdwatcher_overview.md">Birdwatcher</a> — инструментом с открытым исходным кодом для отладки Milvus и динамического обновления конфигурации.</p></li>
 <li><p>Познакомьтесь с <a href="https://github.com/zilliztech/attu">Attu</a> — инструментом с графическим интерфейсом с открытым исходным кодом для интуитивного управления Milvus.</p></li>
-<li><p><a href="/docs/ru/v2.6.x/monitor.md">Мониторинг Milvus с помощью Prometheus</a>.</p></li>
+<li><p><a href="/docs/ru/v2.6.x/monitor.md">Осуществляйте мониторинг Milvus с помощью Prometheus</a>.</p></li>
 </ul>

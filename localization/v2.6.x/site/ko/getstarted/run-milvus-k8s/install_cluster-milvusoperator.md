@@ -175,17 +175,17 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Milvus Operator 포드가 실행 중이면 다음과 같이 Milvus 클러스터를 배포할 수 있습니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>위의 명령어는 <strong>Woodpecker를</strong> 메시지 큐로 사용하고(v2.6.19 권장), 스트리밍 노드를 포함한 모든 새로운 아키텍처 구성 요소를 갖춘 Milvus 클러스터를 배포합니다.</p>
+<p>위의 명령어는 <strong>Woodpecker를</strong> 메시지 큐로 사용하고(v2.6.20 권장), 스트리밍 노드를 포함한 모든 새로운 아키텍처 구성 요소를 갖춘 Milvus 클러스터를 배포합니다.</p>
 <p><strong>이번 배포의 아키텍처 주요 특징:</strong></p>
 <ul>
 <li><strong>메시지 큐</strong>: <a href="/docs/ko/v2.6.x/use-woodpecker.md">Woodpecker 사용</a> (인프라 유지 관리 부담 감소)</li>
 <li><strong>스트리밍 노드</strong>: 향상된 데이터 처리를 위해 활성화됨</li>
-<li><strong>Mix 코디네이터</strong>: 효율성 향상을 위해 코디네이터 구성 요소가 통합됨</li>
+<li><strong>Mix 코디네이터</strong>: 효율성 향상을 위해 코디네이터 구성 요소를 통합</li>
 </ul>
 <p>이러한 설정을 사용자 정의하려면 <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool을</a> 사용하여 실제 데이터 크기에 따라 구성을 조정한 후, 해당 YAML 파일을 다운로드하는 것을 권장합니다. 구성 매개변수에 대한 자세한 내용은 <a href="https://milvus.io/docs/system_configuration.md">Milvus 시스템 구성 체크리스트를</a> 참조하십시오.</p>
 <div class="alert note">
 <ul>
-<li>릴리스 이름에는 영문자, 숫자 및 대시만 포함되어야 합니다. 릴리스 이름에 점은 사용할 수 없습니다.</li>
+<li>릴리스 이름에는 영문자, 숫자 및 대시만 포함되어야 합니다. 릴리스 이름에는 점(.)을 사용할 수 없습니다.</li>
 <li>모든 구성 요소가 단일 포드 내에 포함되는 독립 실행 모드(standalone mode)로 Milvus 인스턴스를 배포할 수도 있습니다. 이를 위해서는 위 명령어의 구성 파일 URL을 다음과 같이 변경하십시오. <code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
 </ul>
 </div>
@@ -207,7 +207,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>다음 명령어를 실행하여 Milvus 클러스터 상태를 확인하십시오</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get milvus my-release -o yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus 클러스터가 준비되면 위 명령어의 출력은 다음과 비슷해야 합니다. ‘ <code translate="no">status.status</code> ’ 필드가 ‘ <code translate="no">Unhealthy</code> ’ 상태로 유지된다면, Milvus 클러스터가 아직 생성 중인 것입니다.</p>
+<p>Milvus 클러스터가 준비되면 위 명령어의 출력 결과는 다음과 유사해야 합니다. ‘ <code translate="no">status.status</code> ’ 필드가 ‘ <code translate="no">Unhealthy</code> ’ 상태로 유지된다면, Milvus 클러스터가 아직 생성 중인 것입니다.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -237,7 +237,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
   <span class="hljs-attr">status:</span> <span class="hljs-string">Healthy</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus Operator는 etcd, Pulsar, MinIO와 같은 Milvus 종속성을 생성한 다음, 프록시, 코디네이터, 노드와 같은 Milvus 구성 요소를 생성합니다.</p>
-<p>Milvus 클러스터가 준비되면, Milvus 클러스터 내 모든 포드의 상태는 다음과 비슷해야 합니다.</p>
+<p>Milvus 클러스터가 준비되면, Milvus 클러스터 내 모든 파드의 상태는 다음과 비슷해야 합니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods</span>
 
 NAME                                             READY   STATUS    RESTARTS   AGE
@@ -274,7 +274,7 @@ my-release-minio-3                               1/1     Running   0          2m
 =&#x27;{{(index (index .spec.containers 0).ports 0).containerPort}}{{&quot;\n&quot;}}&#x27;
 19530
 <button class="copy-code-btn"></button></code></pre>
-<p>출력 결과를 보면 Milvus 인스턴스가 기본 포트 <strong>19530에서</strong> 서비스를 제공하는 것을 확인할 수 있습니다.</p>
+<p>출력 결과를 보면 Milvus 인스턴스가 기본 <strong>포트인 19530에서</strong> 서비스를 제공하는 것을 확인할 수 있습니다.</p>
 <div class="alert note">
 <p>Milvus를 독립형 모드로 배포한 경우, pod 이름을 <code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> 에서 <code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code> 로 변경하십시오.</p>
 </div>
@@ -283,7 +283,7 @@ my-release-minio-3                               1/1     Running   0          2m
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>선택적으로, 위 명령어에서 <code translate="no">27017:19530</code> 대신 <code translate="no">:19530</code> 을 사용하여 <code translate="no">kubectl</code> 가 로컬 포트를 자동으로 할당하도록 할 수 있습니다. 이렇게 하면 포트 충돌을 직접 관리할 필요가 없습니다.</p>
-<p>기본적으로 kubectl의 포트 포워딩은 <code translate="no">localhost</code> 에서만 수신 대기합니다. Milvus가 선택한 IP 주소 또는 모든 IP 주소에서 수신 대기하도록 하려면 <code translate="no">address</code> 플래그를 사용하십시오. 다음 명령어는 포트 포워딩이 호스트 머신의 모든 IP 주소에서 수신 대기하도록 설정합니다.</p>
+<p>기본적으로 kubectl의 포트 포워딩은 <code translate="no">localhost</code> 에서만 수신 대기합니다. Milvus가 선택한 IP 주소 또는 모든 IP 주소에서 수신 대기하도록 하려면 <code translate="no">address</code> 플래그를 사용하십시오. 다음 명령은 포트 포워딩이 호스트 머신의 모든 IP 주소에서 수신 대기하도록 설정합니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
@@ -303,7 +303,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>다음과 같이 <code translate="no">patch</code> 명령어를 실행하여 Milvus 클러스터의 구성을 확인하고 업데이트할 수 있습니다.</p>
+    </button></h2><p>다음과 같이 <code translate="no">patch</code> 명령을 실행하여 Milvus 클러스터의 구성을 확인하고 업데이트할 수 있습니다.</p>
 <ol>
 <li><p>다음 명령을 실행하여 적용될 구성 내용을 미리 확인할 수 있습니다.</p>
 <p>다음은 ` <code translate="no">spec.components.disableMetric</code> ` 매개변수를 <code translate="no">false</code> ms로 업데이트하려는 경우를 가정합니다.</p>

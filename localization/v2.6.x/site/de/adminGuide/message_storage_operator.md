@@ -62,7 +62,7 @@ summary: >-
 </ul></li>
 <li>Der Nachrichtenspeicher kann nicht geändert werden, während das Milvus-System läuft.</li>
 <li>Es werden nur die Versionen Kafka 2.x oder 3.x unterstützt.</li>
-<li><strong>Einschränkungen beim Upgrade</strong>: <strong>Einschränkungen bei den Nachrichtenwarteschlangen</strong>: Beim Upgrade auf Milvus v2.6.19 müssen Sie Ihre aktuelle Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</li>
+<li><strong>Einschränkungen beim Upgrade</strong>: <strong>Einschränkungen bei den Nachrichtenwarteschlangen</strong>: Beim Upgrade auf Milvus v2.6.20 müssen Sie Ihre aktuelle Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">RocksMQ konfigurieren<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -163,7 +163,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">external</code> bedeutet, dass ein externer Pulsar-Dienst verwendet wird.
+    </button></h3><p><code translate="no">external</code> Gibt die Verwendung eines externen Pulsar-Dienstes an.
 Zu den Feldern zur Konfiguration eines externen Pulsar-Dienstes gehören:</p>
 <ul>
 <li><code translate="no">external</code>:  Ein Wert unter „ <code translate="no">true</code> “ gibt an, dass Milvus einen externen Pulsar-Dienst nutzt.</li>
@@ -244,7 +244,7 @@ Zu den Feldern zur Konfiguration eines externen Pulsar-Dienstes gehören:</p>
   <span class="hljs-attr">config:</span> {}            
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">In diesem Beispiel werden die Anzahl der Replikate jeder Pulsar-Komponente, die Rechenressourcen von Pulsar BookKeeper sowie weitere Konfigurationen festgelegt.</div>
-<div class="alert note">Die vollständigen Konfigurationselemente zur Einrichtung eines internen Pulsar-Dienstes finden Sie in <a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">der Datei „values.yaml</a>“. Fügen Sie Konfigurationselemente nach Bedarf unter „ <code translate="no">pulsar.inCluster.values</code> “ hinzu, wie im vorangegangenen Beispiel gezeigt.</div>
+<div class="alert note">Die vollständigen Konfigurationselemente zur Einrichtung eines internen Pulsar-Dienstes finden Sie in <a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">der Datei „values.yaml</a>“. Fügen Sie die Konfigurationselemente nach Bedarf unter „ <code translate="no">pulsar.inCluster.values</code> “ hinzu, wie im vorangehenden Beispiel gezeigt.</div>
 <p>Angenommen, die Konfigurationsdatei heißt „ <code translate="no">milvuscluster.yaml</code> “, führen Sie den folgenden Befehl aus, um die Konfiguration zu übernehmen.</p>
 <pre><code translate="no" class="language-Shell">kubectl apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -265,7 +265,7 @@ Zu den Feldern zur Konfiguration eines externen Pulsar-Dienstes gehören:</p>
       </svg>
     </button></h2><p>Pulsar ist der Standard-Nachrichtenspeicher in einem Milvus-Cluster. Wenn Sie Kafka verwenden möchten, fügen Sie das optionale Feld „ <code translate="no">msgStreamType</code> “ hinzu, um Kafka zu konfigurieren.</p>
 <p><code translate="no">kafka</code> Unterstützt <code translate="no">external</code> und <code translate="no">inCluster</code>.</p>
-<h3 id="External-Kafka" class="common-anchor-header">„External Kafka“<button data-href="#External-Kafka" class="anchor-icon" translate="no">
+<h3 id="External-Kafka" class="common-anchor-header">Externes Kafka<button data-href="#External-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -283,7 +283,7 @@ Zu den Feldern zur Konfiguration eines externen Pulsar-Dienstes gehören:</p>
     </button></h3><p><code translate="no">external</code> Gibt die Verwendung eines externen Kafka-Dienstes an.</p>
 <p>Zu den Feldern, die zur Konfiguration eines externen Kafka-Dienstes verwendet werden, gehören:</p>
 <ul>
-<li><code translate="no">external</code>: Ein Wert von „ <code translate="no">true</code> “ gibt an, dass Milvus einen externen Kafka-Dienst verwendet.</li>
+<li><code translate="no">external</code>: Ein Wert von „ <code translate="no">true</code> “ gibt an, dass Milvus einen externen Kafka-Dienst nutzt.</li>
 <li><code translate="no">brokerList</code>: Die Liste der Broker, an die die Nachrichten gesendet werden sollen.</li>
 </ul>
 <h4 id="Example" class="common-anchor-header">Beispiel</h4><p>Das folgende Beispiel konfiguriert einen externen Kafka-Dienst.</p>
