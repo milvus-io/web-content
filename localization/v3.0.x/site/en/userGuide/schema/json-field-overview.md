@@ -316,6 +316,9 @@ res = client.search(
         ></path>
       </svg>
     </button></h2><p>By default, queries on JSON fields without acceleration will perform a full scan of all rows, which can be slow on large datasets. To speed up JSON queries, Milvus provides advanced indexing and storage optimization features.</p>
+<div class="alert warning">
+<p>Starting in Milvus 3.0.0, whole-object JSON indexing (<code translate="no">json_cast_type=&quot;JSON&quot;</code>), also known as JSON flat indexing, is deprecated. Existing indexes and new index-creation requests remain supported for compatibility, but this mode is no longer recommended for new workloads. Use JSON path indexing for known query paths, or consider <a href="/docs/json-shredding.md">JSON Shredding</a> for broad query acceleration across complex or evolving documents.</p>
+</div>
 <p>The table below summarizes their differences and best-use scenarios:</p>
 <table>
    <tr>
