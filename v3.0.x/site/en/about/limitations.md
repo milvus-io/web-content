@@ -12,6 +12,7 @@ Milvus is committed to providing the best vector databases to power AI applicati
 
 | Resource      | Limit  |
 | ----------- | ----------- |
+| Database      | 255 characters      |
 | Collection      | 255 characters      |
 | Field   | 255 characters        |
 | Index   | 255 characters       |
