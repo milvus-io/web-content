@@ -90,6 +90,12 @@ Milvus supports the following model service providers for reranking, each with d
      <td><ul><li><p>Managed DashScope reranking API</p></li><li><p>Supports reranking models such as <code>gte-rerank-v2</code></p></li><li><p>API-key based authentication</p></li></ul></td>
      <td><p>RAG applications that want to rerank candidates with Alibaba Cloud-hosted reranking models</p></td>
    </tr>
+   <tr>
+     <td><p>Hugging Face</p></td>
+     <td><p>Applications using hosted Hugging Face sentence-similarity models</p></td>
+     <td><ul><li><p>Uses the hosted <code>hf-inference</code> provider</p></li><li><p>Selects models from the Hugging Face Hub</p></li><li><p>Calculates one sentence-similarity score per candidate</p></li><li><p>Uses API-key authentication</p></li></ul></td>
+     <td><p>Semantic search applications that want to rerank candidate text with a Hugging Face model without operating a separate inference service</p></td>
+   </tr>
 </table>
 
 For detailed information about implementation of each model service, refer to the dedicated documentation:
@@ -105,6 +111,8 @@ For detailed information about implementation of each model service, refer to th
 - [SiliconFlow Ranker](siliconflow-ranker.md)
 
 - [DashScope Ranker](dashscope-ranker.md)
+
+- [Hugging Face Ranker](hugging-face-ranker.md)
 
 ## Implementation
 
