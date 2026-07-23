@@ -146,7 +146,7 @@ docker compose up -d
         ></path>
       </svg>
     </button></h2><ul>
-<li>다음과 같은 방법도 알아보시기 바랍니다:
+<li>다음과 같은 내용도 알아보시기 바랍니다:
 <ul>
 <li><a href="/docs/ko/v2.6.x/scaleout.md">Milvus 클러스터 확장하기</a></li>
 </ul></li>

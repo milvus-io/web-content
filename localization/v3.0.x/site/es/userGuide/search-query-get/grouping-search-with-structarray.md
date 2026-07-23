@@ -74,13 +74,13 @@ summary: >-
 <tr><th>Requisitos</th><th>Detalles</th></tr>
 </thead>
 <tbody>
-<tr><td>Subcampo vectorial a nivel de elemento</td><td>Utilice un subcampo vectorial StructArray, como <code translate="no">chunks[emb]</code>, indexado con una métrica vectorial estándar.</td></tr>
-<tr><td>Consulta vectorial normal</td><td>Utilice un vector de consulta regular, no un <code translate="no">EmbeddingList</code>.</td></tr>
+<tr><td>Subcampo vectorial a nivel de elemento</td><td>Utilice un subcampo vectorial StructArray, como <code translate="no">chunks[emb]</code>, indexado con una métrica vectorial regular.</td></tr>
+<tr><td>Consulta vectorial normal</td><td>Utilice un vector de consulta regular, no un ` <code translate="no">EmbeddingList</code>`.</td></tr>
 <tr><td>Agrupación por clave primaria</td><td>Utilice la clave primaria de la colección como ` <code translate="no">group_by_field</code>`, por ejemplo, ` <code translate="no">doc_id</code>`.</td></tr>
 <tr><td>Sin parámetros de rango</td><td>No combine la búsqueda por agrupación con parámetros de búsqueda por rango, como <code translate="no">radius</code> o <code translate="no">range_filter</code>.</td></tr>
 </tbody>
 </table>
-<p>Para la configuración del índice, consulte <a href="/docs/es/index-structarray-fields.md">«Campos StructArray del índice</a>».</p>
+<p>Para la configuración del índice, consulta <a href="/docs/es/index-structarray-fields.md">«Campos StructArray del índice</a>».</p>
 <h2 id="Run-grouped-element-level-search" class="common-anchor-header">Ejecutar una búsqueda agrupada a nivel de elemento<button data-href="#Run-grouped-element-level-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -147,7 +147,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Puedes combinar la búsqueda agrupada con el filtrado escalar de StructArray. Utiliza « <code translate="no">element_filter</code> » cuando la condición escalar deba restringir qué elementos de Struct participan en la búsqueda vectorial a nivel de elemento.</p>
+    </button></h2><p>Puedes combinar la búsqueda agrupada con el filtrado escalar de StructArray. Utiliza « <code translate="no">element_filter</code> » cuando la condición escalar deba restringir qué elementos Struct participan en la búsqueda vectorial a nivel de elemento.</p>
 <pre><code translate="no" class="language-python">filter_expr = (
     <span class="hljs-string">&#x27;category == &quot;search&quot; &amp;&amp; &#x27;</span>
     <span class="hljs-string">&#x27;element_filter(chunks, &#x27;</span>
@@ -172,7 +172,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>El predicado de nivel superior selecciona las entidades candidatas. El predicado « <code translate="no">element_filter</code> » restringe la búsqueda vectorial a nivel de elemento a los elementos Struct que coincidan. A continuación, la agrupación agrupa los resultados de elementos coincidentes por la clave principal.</p>
+<p>El predicado de nivel superior selecciona las entidades candidatas. El predicado « <code translate="no">element_filter</code> » restringe la búsqueda vectorial a nivel de elemento a los elementos Struct que coincidan. A continuación, la agrupación agrupa los resultados de elementos coincidentes por la clave primaria.</p>
 <h2 id="Use-grouping-in-hybrid-search" class="common-anchor-header">Utilice la agrupación en la búsqueda híbrida<button data-href="#Use-grouping-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -267,7 +267,7 @@ results = client.hybrid_search(
 <li><p>La búsqueda por agrupación solo se aplica a la búsqueda vectorial de StructArray a nivel de elemento. La búsqueda en EmbeddingList y la búsqueda híbrida a nivel de EmbeddingList no admiten la agrupación.</p></li>
 <li><p>Utiliza la clave primaria como « <code translate="no">group_by_field</code> ». La agrupación a nivel de elemento de StructArray no es una agrupación de uso general sobre campos escalares arbitrarios.</p></li>
 <li><p>No combine la búsqueda por agrupación con la búsqueda por rango.</p></li>
-<li><p>No utilice una consulta « <code translate="no">EmbeddingList</code> » ni una métrica « <code translate="no">MAX_SIM*</code> » para la búsqueda agrupada.</p></li>
+<li><p>No utilices una consulta « <code translate="no">EmbeddingList</code> » ni una métrica « <code translate="no">MAX_SIM*</code> » para la búsqueda agrupada.</p></li>
 <li><p>La agrupación híbrida solo es compatible cuando todas las subbúsquedas se dirigen a campos vectoriales a nivel de elemento dentro del mismo campo StructArray.</p></li>
 <li><p>La agrupación híbrida no es compatible cuando la búsqueda híbrida combina un campo vectorial normal, un campo StructArray diferente o una solicitud a nivel de EmbeddingList.</p></li>
 </ul>
@@ -289,7 +289,7 @@ results = client.hybrid_search(
     </button></h2><ul>
 <li><p>Utilizar la agrupación con ` <code translate="no">chunks[emb_list_vector]</code>`, que está pensada para la búsqueda en `EmbeddingList`.</p></li>
 <li><p>Agrupación por un campo escalar que no sea la clave primaria.</p></li>
-<li><p>Agrupar por varios campos. La agrupación de StructArray a nivel de elemento solo admite la agrupación por clave primaria.</p></li>
+<li><p>Agrupación por varios campos. La agrupación de StructArray a nivel de elemento solo admite la agrupación por clave primaria.</p></li>
 <li><p>Esperar que los resultados agrupados representen todos los elementos Struct coincidentes. La agrupación devuelve como máximo un resultado por entidad principal.</p></li>
 <li><p>Suponer que la búsqueda agrupada a nivel de elemento vuelve a calcular una puntuación de tipo « <code translate="no">MAX_SIM*</code> » al estilo de EmbeddingList. La agrupación agrupa los resultados a nivel de elemento; no cambia el modelo de puntuación.</p></li>
 <li><p>Combinación de « <code translate="no">group_by_field</code> » con « <code translate="no">radius</code> » o « <code translate="no">range_filter</code> ».</p></li>

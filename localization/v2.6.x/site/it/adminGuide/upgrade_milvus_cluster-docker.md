@@ -1,6 +1,6 @@
 ---
 id: upgrade_milvus_cluster-docker.md
-summary: Scopri come aggiornare un cluster Milvus con Docker Compose.
+summary: Scopri come aggiornare il cluster Milvus con Docker Compose.
 title: Aggiornamento del cluster Milvus con Docker Compose
 ---
 <div class="tab-wrapper"><a href="/docs/it/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/it/v2.6.x/upgrade_milvus_cluster-operator.md" class=''>OperatorMilvus</a><a href="/docs/it/v2.6.x/configure_operator.md" class=''>OperatorMilvus</a><a href="/docs/it/v2.6.x/configure-docker.md" class=''>OperatorHelmDocker</a><a href="/docs/it/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>ComposeHelmDocker</a><a href="/docs/it/v2.6.x/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>
@@ -22,7 +22,7 @@ title: Aggiornamento del cluster Milvus con Docker Compose
     </button></h1><p>In questa sezione viene descritto come aggiornare Milvus utilizzando Docker Compose.</p>
 <p>Normalmente, è possibile <a href="#Upgrade-Milvus-by-changing-its-image">aggiornare Milvus modificandone l'immagine</a>. Tuttavia, prima di qualsiasi aggiornamento dalla versione v2.1.x alla v2.6.17, è necessario <a href="#Migrate-the-metadata">migrare i metadati</a>.</p>
 <div class="alert note">
-<p><strong>Limiti delle code di messaggi</strong>: durante l’aggiornamento a Milvus v2.6.17, è necessario mantenere la coda di messaggi attualmente in uso. Il passaggio a sistemi di code di messaggi diversi durante l’aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code di messaggi sarà disponibile nelle versioni future.</p>
+<p><strong>Limitazioni relative alle code di messaggi</strong>: durante l'aggiornamento a Milvus v2.6.17, è necessario mantenere la coda di messaggi attualmente in uso. Il passaggio a sistemi di code di messaggi diversi durante l'aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code di messaggi sarà disponibile nelle versioni future.</p>
 </div>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Aggiornamento di Milvus modificandone l’immagine<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"

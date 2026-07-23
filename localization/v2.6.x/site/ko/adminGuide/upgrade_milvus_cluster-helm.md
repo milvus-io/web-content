@@ -90,7 +90,7 @@ title: Helm 차트를 사용하여 Milvus 클러스터 업그레이드하기
 </ul>
 <p><strong>메시지 큐 제한 사항</strong>: Milvus v2.6.17로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</p>
 <div class="alert note">
-Milvus Helm 차트 버전 4.2.21부터 pulsar-v3.x 차트를 종속성으로 도입했습니다. 하위 호환성을 위해 Helm을 v3.14 이상 버전으로 업그레이드하고, ` <code translate="no">helm upgrade</code>`을 사용할 때마다 ` <code translate="no">--reset-then-reuse-values</code> ` 옵션을 반드시 추가해 주십시오.
+Milvus Helm 차트 버전 4.2.21부터 pulsar-v3.x 차트를 종속성으로 도입했습니다. 하위 호환성을 위해 Helm을 v3.14 이상 버전으로 업그레이드하고, ` <code translate="no">helm upgrade</code>`을 사용할 때마다 반드시 ` <code translate="no">--reset-then-reuse-values</code> ` 옵션을 추가해 주십시오.
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">업그레이드 절차<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -147,7 +147,7 @@ helm repo update zilliztech
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>클러스터에서 현재 별도의 코디네이터를 사용하고 있는지 확인합니다:</p>
+    </button></h3><p>클러스터에서 현재 별도의 코디네이터를 사용하고 있는지 확인하십시오:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
 <p>별도의 코디네이터 포드(<code translate="no">datacoord</code>, <code translate="no">querycoord</code>, <code translate="no">indexcoord</code>)가 표시되면 v2.5.16으로 업그레이드하고 <code translate="no">mixCoordinator</code> 를 활성화하십시오:</p>
@@ -162,7 +162,7 @@ helm repo update zilliztech
   --version=4.2.58
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert-note">
-<p>클러스터에서 이미 <code translate="no">mixCoordinator</code> 을 사용하고 있다면, 이미지를 업그레이드하기만 하면 됩니다:</p>
+<p>클러스터에서 이미 <code translate="no">mixCoordinator</code> 를 사용하고 있다면, 이미지를 업그레이드하기만 하면 됩니다:</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.5.16&quot;</span> \
   --reset-then-reuse-values \

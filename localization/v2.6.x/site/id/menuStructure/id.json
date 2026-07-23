@@ -346,7 +346,7 @@
             "children": []
           },
           {
-            "label": "Tentukan Tingkat Konsistensi",
+            "label": "Tetapkan Tingkat Konsistensi",
             "id": "tune_consistency.md",
             "order": 7,
             "children": []
@@ -491,7 +491,7 @@
                 "children": []
               },
               {
-                "label": "Alat Analisis Bawaan",
+                "label": "Alat Analisis Terintegrasi",
                 "id": "built-in-analyzers",
                 "order": 1,
                 "children": [
@@ -516,7 +516,7 @@
                 ]
               },
               {
-                "label": "Pembagi Kata",
+                "label": "Tokenizer",
                 "id": "tokenizers",
                 "order": 2,
                 "children": [
@@ -570,7 +570,7 @@
                     "children": []
                   },
                   {
-                    "label": "Penyusunan ASCII",
+                    "label": "Penyusutan ASCII",
                     "id": "ascii-folding-filter.md",
                     "order": 1,
                     "children": []
@@ -582,7 +582,7 @@
                     "children": []
                   },
                   {
-                    "label": "Hanya Cnalphanum",
+                    "label": "Cnalphanumonly",
                     "id": "cnalphanumonly-filter.md",
                     "order": 3,
                     "children": []
@@ -829,7 +829,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "INDEKS TERBALIK YANG JARANG",
+                "label": "SPARSE_INVERTED_INDEX",
                 "id": "sparse-inverted-index.md",
                 "order": 0,
                 "children": []
@@ -920,7 +920,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Pencarian ANN Dasar",
+            "label": "Pencarian Jaringan Saraf Tiruan Dasar",
             "id": "single-vector-search.md",
             "order": 0,
             "children": []
@@ -1141,7 +1141,7 @@
             ]
           },
           {
-            "label": "Fungsi Penilaian Ulang",
+            "label": "Fungsi Penentuan Peringkat Ulang",
             "id": "reranking",
             "order": 1,
             "isMenu": true,
@@ -1448,7 +1448,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Melakukan deployment di AWS",
+                "label": "Melakukan Deploy di AWS",
                 "id": "eks.md",
                 "order": 1,
                 "children": []
@@ -1670,7 +1670,7 @@
             "children": []
           },
           {
-            "label": "Skalakan dengan HPA",
+            "label": "Skalabilitas dengan HPA",
             "id": "hpa.md",
             "order": 2,
             "children": []
@@ -1689,7 +1689,7 @@
         "order": 7,
         "children": [
           {
-            "label": "Meningkatkan Kluster Milvus",
+            "label": "Meningkatkan Kapasitas Kluster Milvus",
             "id": "upgrade_milvus_cluster-operator.md",
             "order": 0,
             "children": []
@@ -1733,7 +1733,7 @@
                 "children": []
               },
               {
-                "label": "Dasbor Milvus Metrics",
+                "label": "Dasbor Metrik Milvus",
                 "id": "metrics_dashboard.md",
                 "order": 3,
                 "children": []
@@ -1761,7 +1761,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Konfigurasi Grafana Loki",
+                "label": "Mengonfigurasi Grafana Loki",
                 "id": "configure_grafana_loki.md",
                 "order": 0,
                 "children": []
@@ -1796,7 +1796,7 @@
         "order": 9,
         "children": [
           {
-            "label": "Kelola Kelompok Sumber Daya",
+            "label": "Mengelola Kelompok Sumber Daya",
             "id": "resource_group.md",
             "order": 0,
             "children": []
@@ -1897,7 +1897,7 @@
             "children": []
           },
           {
-            "label": "Sakelar Milvus Standalone tipe MQ",
+            "label": "Sakelar Mandiri Milvus tipe MQ",
             "id": "switch_milvus_standalone_mq_type-operator.md",
             "order": 1,
             "children": []
@@ -1943,7 +1943,7 @@
             "children": []
           },
           {
-            "label": "Kasus-kasus Umum",
+            "label": "Kasus-Kasus Umum",
             "id": "common-cases",
             "order": 3,
             "isMenu": true,
@@ -1961,7 +1961,7 @@
                 "children": []
               },
               {
-                "label": "Migrasi Antar-Instan di Berbagai Bucket",
+                "label": "Migrasi Antar-Instan di Lintas Bucket",
                 "id": "cross-bucket-backup-and-restore.md",
                 "order": 2,
                 "children": []
@@ -2199,7 +2199,7 @@
             ]
           },
           {
-            "label": "Pemeringkat Ulang",
+            "label": "Para Pengubah Peringkat",
             "id": "rerankers",
             "order": 1,
             "isMenu": true,
@@ -2330,7 +2330,7 @@
                 "children": []
               },
               {
-                "label": "API Milvus Async",
+                "label": "API Asinkron Milvus",
                 "id": "llamaindex_milvus_async.md",
                 "order": 1,
                 "children": []
@@ -2854,13 +2854,13 @@
         "children": []
       },
       {
-        "label": "Grafik RAG dengan Milvus",
+        "label": "Membuat Grafik RAG dengan Milvus",
         "id": "graph_rag_with_milvus.md",
         "order": 7,
         "children": []
       },
       {
-        "label": "Pencarian Kontekstual",
+        "label": "Pencarian Berdasarkan Konteks",
         "id": "contextual_retrieval_with_milvus.md",
         "order": 8,
         "children": []
@@ -2872,7 +2872,7 @@
         "children": []
       },
       {
-        "label": "Gunakan ColBERT dan ColPali bersama Milvus",
+        "label": "Gunakan ColBERT dan ColPali dengan Milvus",
         "id": "search-with-embedding-lists",
         "order": 10,
         "externalLink": "https://milvus.io/docs/search-with-embedding-lists.md",
@@ -2915,7 +2915,7 @@
         "children": []
       },
       {
-        "label": "Membuat Ekspresi Filter Kueri Milvus Menggunakan Model Bahasa Besar",
+        "label": "Pembuatan Ekspresi Filter Kueri Milvus Menggunakan Model Bahasa Besar",
         "id": "generating_milvus_query_filter_expressions.md",
         "order": 17,
         "children": []
@@ -2990,7 +2990,7 @@
         "children": []
       },
       {
-        "label": "Pertanyaan Umum (FAQ) tentang Operasional",
+        "label": "Pertanyaan Umum (FAQ) Operasional",
         "id": "operational_faq.md",
         "order": 2,
         "children": []

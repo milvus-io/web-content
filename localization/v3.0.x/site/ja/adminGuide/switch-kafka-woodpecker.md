@@ -22,10 +22,10 @@ summary: >-
       </svg>
     </button></h1><p>このページでは、<strong>Milvusクラスタの</strong>メッセージキュー（MQ）を、<strong>Kafka</strong>（組み込みまたは外部）<strong>とWoodpecker</strong>（MinIOバックエンド）の間で双方向に切り替える方法について説明します。一般的なワークフローと前提条件については、<a href="/docs/ja/switch-mq-type.md">「MQタイプの切り替え</a>」を参照してください。</p>
 <div class="alert note">
-<p><strong>前提条件：</strong>MQの切り替え機能は<strong>、Milvus 3.0以降で</strong>利用可能です。作業を開始する前に、MilvusインスタンスをMilvus 3.0以降にアップグレードしてください。以前のバージョンではこの機能は利用できません。</p>
+<p><strong>前提条件：</strong>MQ切り替え機能は<strong>、Milvus 3.0以降で</strong>利用可能です。作業を開始する前に、MilvusインスタンスをMilvus 3.0以降にアップグレードしてください。以前のバージョンではこの機能は利用できません。</p>
 </div>
 <div class="alert warning">
-<p>メッセージキューの切り替えは、<strong>リスクの高い操作</strong>です。<strong>ご自身の</strong>デプロイ方法（<strong>Helm を使用する場合</strong>、または<strong>Milvus Operator を使用する場合</strong>）に該当するセクションを選び、その手順を最初から最後まで順を追って実行してください。Helm コマンドと Operator コマンドを混在させないでください。</p>
+<p>メッセージキューの切り替えは、<strong>リスクの高い操作</strong>です。<strong>ご自身の</strong>デプロイ方法（<strong>Helm を使用する場合</strong>、または<strong>Milvus Operator を使用する場合</strong>）に該当するセクションを選択し、その手順を最初から最後まで順を追って実行してください。Helm コマンドと Operator コマンドを混在させないでください。</p>
 </div>
 <h2 id="With-Helm" class="common-anchor-header">Helm を使用する場合<button data-href="#With-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -108,7 +108,7 @@ summary: >-
   --set streaming.enabled=true \
   -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>すべてのポッドの準備が整うまで待機し、Kafkaへのアクセス設定がMilvusの設定に反映されていることを確認してください。</p>
+<p>すべてのポッドの準備が整うまで待機し、Kafka へのアクセス設定が Milvus の設定に反映されていることを確認してください。</p>
 <p><strong>ステップ 3: MQ 切り替えを実行します。</strong></p>
 <div class="alert note">
 <p>対象のKafkaに、以前の設定からのMilvusトピックが含まれていないことを確認してください。今回がKafkaへの初めての切り替えである場合は、この注意事項をスキップしてください。そうでない場合は、まず同じ名前の残存するMilvusトピックをクリーンアップしてください。</p>
@@ -124,7 +124,7 @@ summary: >-
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>切り替えが成功すると、<code translate="no">[mqTypeValue=kafka]</code> というログが出力されます。</p>
-<p><strong>ステップ 5: (オプション) Woodpecker データのクリーンアップを行います。</strong>MinIO/S3 上の Woodpecker データ（<code translate="no">&lt;rootPath&gt;/wp/...</code> 配下、通常は<code translate="no">files/wp/...</code> ）および etcd 内の Woodpecker メタデータ（<code translate="no">etcdctl get woodpecker --prefix</code> ）を削除します。後で Woodpecker に戻す予定がある場合は、まずこれらのファイルをクリーンアップしてください。</p>
+<p><strong>ステップ 5: (オプション) Woodpecker データをクリーンアップします。</strong>MinIO/S3 上の Woodpecker データ（<code translate="no">&lt;rootPath&gt;/wp/...</code> 配下、通常は<code translate="no">files/wp/...</code> ）および etcd 内の Woodpecker メタデータ（<code translate="no">etcdctl get woodpecker --prefix</code> ）を削除します。後で Woodpecker に戻す予定がある場合は、まずこれらのファイルをクリーンアップしてください。</p>
 <h2 id="With-Milvus-Operator" class="common-anchor-header">Milvus Operator を使用する場合<button data-href="#With-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -156,7 +156,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p><strong>ステップ 1: Milvus インスタンスが実行中であることを確認します。</strong></p>
-<p><strong>ステップ 2: MQ の切り替えを実行します。</strong>MixCoord サービスは外部に公開されていないため、MixCoord ポッド内部から切り替え API を実行してください:</p>
+<p><strong>ステップ 2: MQ の切り替えを実行します。</strong>MixCoord サービスは外部からアクセスできないため、MixCoord ポッド内部から切り替え API を実行してください:</p>
 <pre><code translate="no" class="language-shell">kubectl exec -it &lt;mixcoord-pod&gt; -- \
   curl -X POST http://localhost:9091/management/wal/alter \
   -H &quot;Content-Type: application/json&quot; \
@@ -218,7 +218,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">kubectl patch -f change_configmap.yaml --patch-file change_configmap.yaml --type merge
 <button class="copy-code-btn"></button></code></pre>
-<p>すべてのポッドの準備が整うまで待機し、Kafka へのアクセス設定が Milvus の設定に反映されていることを確認します。</p>
+<p>すべてのポッドが「ready」状態になるのを待ち、Kafka へのアクセス設定が Milvus の設定に反映されていることを確認します。</p>
 <p><strong>ステップ 3: MQ の切り替えを実行します。</strong></p>
 <div class="alert note">
 <p>対象のKafkaに、以前の設定からのMilvusトピックが含まれていないことを確認してください。今回がKafkaへの初めての切り替えである場合は、この注意事項をスキップしてください。そうでない場合は、まず同じ名前の残存するMilvusトピックをクリーンアップしてください。</p>
@@ -253,8 +253,8 @@ summary: >-
 <tr><th>ソースMQ</th><th>ターゲットMQ</th><th>Helm</th><th>Milvus Operator</th></tr>
 </thead>
 <tbody>
-<tr><td>組み込みKafka</td><td>Woodpecker (MinIO)</td><td><strong>対応</strong></td><td><strong>サポート対象</strong></td></tr>
-<tr><td>外部Kafka</td><td>Woodpecker (MinIO)</td><td><strong>対応</strong></td><td><strong>対応</strong></td></tr>
+<tr><td>組み込みKafka</td><td>Woodpecker (MinIO)</td><td><strong>サポート対象</strong></td><td><strong>サポート対象</strong></td></tr>
+<tr><td>外部Kafka</td><td>Woodpecker (MinIO)</td><td><strong>対応済み</strong></td><td><strong>対応</strong></td></tr>
 <tr><td>Woodpecker (MinIO)</td><td>外部Kafka</td><td><strong>対応</strong></td><td><strong>対応</strong></td></tr>
 <tr><td>Kafka</td><td>Woodpecker（ローカル）</td><td><strong>サポートされていますが、推奨されません</strong>（すべてのポッドに共有ファイルシステムが必要です）</td><td><strong>未対応</strong></td></tr>
 </tbody>

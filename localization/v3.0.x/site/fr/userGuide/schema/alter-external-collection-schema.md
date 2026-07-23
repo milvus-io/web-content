@@ -23,7 +23,7 @@ beta: Milvus 3.0.x
       </svg>
     </button></h1><p>Les sources de données externes évoluent souvent après la création d’une collection externe. Par exemple, une table Lakehouse qui stocke déjà des embeddings peut par la suite inclure un nouveau champ scalaire, tel qu’un score, une catégorie ou un horodatage, que vous souhaitez faire apparaître dans les résultats de requête ou utiliser dans des filtres.</p>
 <p>Au lieu de recréer la collection externe ou de copier les données sources dans Milvus, ajoutez un champ Milvus qui correspond au champ existant dans la source de données externe. Après avoir ajouté le champ, actualisez la collection externe afin que le nouveau champ puisse être utilisé dans les requêtes et les recherches.</p>
-<h2 id="Limits" class="common-anchor-header">Restrictions<button data-href="#Limits" class="anchor-icon" translate="no">
+<h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,7 +40,7 @@ beta: Milvus 3.0.x
       </svg>
     </button></h2><ul>
 <li><p>Les collections externes prennent actuellement en charge l’ajout de champs après leur création. Les autres modifications de schéma, telles que la suppression de champs, le renommage de champs, la modification des types de données des champs, la modification des dimensions des vecteurs ou le remappage d’ <code translate="no">external_field</code>, ne sont pas prises en charge.</p></li>
-<li><p>Vous ne pouvez ajouter qu’un champ existant dans la source de données externe. Cette opération mappe un champ externe existant à un champ Milvus. Elle ne crée pas de nouveau champ dans la source de données externe et ne remplit pas rétrospectivement les données source.</p></li>
+<li><p>Vous ne pouvez ajouter qu’un champ qui existe déjà dans la source de données externe. Cette opération mappe un champ externe existant à un champ Milvus. Elle ne crée pas de nouveau champ dans la source de données externe et ne remplit pas rétrospectivement les données source.</p></li>
 <li><p>L’ajout de champs de type « <code translate="no">SPARSE_FLOAT_VECTOR</code> » à une collection externe existante n’est pas pris en charge.</p></li>
 <li><p>L’ajout de champs StructArray à une collection externe existante n’est pas pris en charge. Si votre collection externe nécessite un champ StructArray, définissez-le dans le schéma de la collection lors de sa création.</p></li>
 </ul>
@@ -108,7 +108,7 @@ client.add_collection_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Vous pouvez également ajouter un champ vectoriel si la source de données externe contient déjà les valeurs vectorielles. Définissez les champs vectoriels <code translate="no">data_type</code> et <code translate="no">dim</code> de manière à ce qu’ils correspondent au champ vectoriel de la source de données externe.</p>
+    </button></h3><p>Vous pouvez également ajouter un champ vectoriel si la source de données externe contient déjà les valeurs vectorielles. Définissez le vecteur <code translate="no">data_type</code> et <code translate="no">dim</code> de manière à ce qu’ils correspondent au champ vectoriel de la source de données externe.</p>
 <p>L’exemple suivant ajoute un champ vectoriel dense nommé <code translate="no">image_embedding_v2</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient
 

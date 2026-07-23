@@ -21,7 +21,7 @@ title: Importação em massa na replicação CDC
         ></path>
       </svg>
     </button></h1><p>Este guia explica como executar uma importação em massa em clusters Milvus que fazem parte de uma topologia de replicação CDC. Num cluster de replicação, a importação em massa deve utilizar o commit em duas fases (2PC), para que a importação seja confirmada como um único ponto ordenado nos clusters primário e de reserva.</p>
-<p>Neste guia, o cluster primário é o cluster Milvus de origem e o cluster de reserva é o cluster Milvus de destino.</p>
+<p>Neste guia, o cluster primário é o cluster Milvus de origem e o cluster em espera é o cluster Milvus de destino.</p>
 <p>Antes de começar, certifique-se de que a replicação CDC já está configurada entre os seus clusters. Para mais detalhes, consulte <a href="/docs/pt/set_up_cdc_replication.md">«Configurar a replicação CDC</a>».</p>
 <h2 id="Why-2PC-is-required" class="common-anchor-header">Por que razão o 2PC é necessário<button data-href="#Why-2PC-is-required" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -72,7 +72,7 @@ title: Importação em massa na replicação CDC
   <span class="hljs-attr">import:</span>
     <span class="hljs-attr">enableInReplicatingCluster:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Esta configuração é atualizável, pelo que pode entrar em vigor sem necessidade de um reinício completo.</p>
+<p>Esta configuração é atualizável, pelo que pode entrar em vigor sem ser necessário um reinício completo.</p>
 <p>Quando esta configuração está ativada, um cluster de replicação aceita apenas importações com ` <code translate="no">auto_commit=false</code>`. A tabela seguinte lista os pedidos rejeitados mais comuns:</p>
 <table>
 <thead>
@@ -177,7 +177,7 @@ wait_for_state(standby_url, job_id, <span class="hljs-string">&quot;Completed&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Efetuar o commit antes de o cluster de reserva ter concluído a importação não corrompe os dados, mas o cluster de reserva ainda está a atualizar-se quando o commit é aplicado. Esperar até que tanto o cluster primário como o de reserva indiquem <code translate="no">Uncommitted</code> confirma que os dados importados foram totalmente replicados e que ambos os clusters estão prontos para os tornar visíveis em simultâneo.</p>
+    </button></h3><p>Efetuar o commit antes de o cluster de reserva ter concluído a importação não corrompe os dados, mas o cluster de reserva ainda está a atualizar-se quando o commit é aplicado. Esperar até que tanto o cluster primário como o de reserva indiquem « <code translate="no">Uncommitted</code> » confirma que os dados importados foram totalmente replicados e que ambos os clusters estão prontos para os tornar visíveis em simultâneo.</p>
 <h2 id="Step-3-Verify-the-data" class="common-anchor-header">Passo 3: Verificar os dados<button data-href="#Step-3-Verify-the-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -194,7 +194,7 @@ wait_for_state(standby_url, job_id, <span class="hljs-string">&quot;Completed&qu
         ></path>
       </svg>
     </button></h2><p>Depois de a tarefa atingir o estado « <code translate="no">Completed</code> », as entidades importadas ficam visíveis em ambos os clusters. Carregue e consulte a coleção no cluster primário; em seguida, execute a mesma consulta no cluster de reserva sem carregar manualmente a coleção nesse cluster e confirme que as entidades importadas estão presentes em ambos os clusters.</p>
-<p>O cluster de reserva é de leitura apenas enquanto permanecer em modo de reserva. Não envie importações, confirmações ou outras operações DDL ou DCL diretamente para o cluster de reserva. Realize estas operações no cluster primário e deixe que a replicação CDC as aplique ao cluster de reserva.</p>
+<p>O cluster de reserva é de leitura apenas enquanto permanecer em modo de reserva. Não envie importações, confirmações nem outras operações DDL ou DCL diretamente para o cluster de reserva. Realize estas operações no cluster primário e deixe que a replicação CDC as aplique ao cluster de reserva.</p>
 <h2 id="FAQ" class="common-anchor-header">Perguntas frequentes<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -257,7 +257,7 @@ wait_for_state(standby_url, job_id, <span class="hljs-string">&quot;Completed&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">dataCoord.import.enableInReplicatingCluster</code> não está ativado nesse cluster. Defina-o como « <code translate="no">true</code> » tanto no cluster primário como no cluster de reserva.</p>
+    </button></h3><p><code translate="no">dataCoord.import.enableInReplicatingCluster</code> não está ativado nesse cluster. Defina-o para « <code translate="no">true</code> » tanto no cluster primário como no cluster de reserva.</p>
 <h3 id="Why-does-my-import-fail-with-autocommittrue-import-in-replicating-cluster-is-not-supported" class="common-anchor-header">Por que razão a minha importação falha com a opção « <code translate="no">auto_commit=true import in replicating cluster is not supported</code> »?<button data-href="#Why-does-my-import-fail-with-autocommittrue-import-in-replicating-cluster-is-not-supported" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -273,4 +273,4 @@ wait_for_state(standby_url, job_id, <span class="hljs-string">&quot;Completed&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Num cluster de replicação, apenas são aceites importações 2PC com a opção « <code translate="no">auto_commit=false</code> ». Defina « <code translate="no">options={&quot;auto_commit&quot;: &quot;false&quot;}</code> » na solicitação de importação.</p>
+    </button></h3><p>Num cluster de replicação, apenas são aceites importações 2PC com « <code translate="no">auto_commit=false</code> ». Defina « <code translate="no">options={&quot;auto_commit&quot;: &quot;false&quot;}</code> » na solicitação de importação.</p>

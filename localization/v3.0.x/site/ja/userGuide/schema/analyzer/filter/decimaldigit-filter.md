@@ -19,7 +19,7 @@ beta: Milvus 3.0.0+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">decimaldigit</code> フィルターは、サポートされている文字体系のUnicode十進数字をASCII数字に変換する組み込みのトークンフィルターです。これにより、言語や文字体系を問わず、数値トークンの表現が統一されます。</p>
+    </button></h1><p><code translate="no">decimaldigit</code> フィルターは、サポートされている文字体系のUnicode 10進数字をASCII数字に変換する組み込みのトークンフィルターです。これにより、言語や文字体系を問わず、数値トークンの表現が統一されます。</p>
 <h2 id="Configuration" class="common-anchor-header">設定<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -45,7 +45,7 @@ beta: Milvus 3.0.0+
 }
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">decimaldigit</code> フィルターには設定可能なパラメータはありません。</p>
-<p>このフィルタは、アラビア・インド系、タイ語、デーヴァナーガリー、ベンガル語、および全角数字を含むUnicode 10進数字を、ASCII数字に変換します。これは、トークナイザによって生成されたトークンを対象として動作します。上記の設定は意図的にカスタムアナライザの例として示されたものであり、完全なアラビア語処理パイプラインは含まれていません。</p>
+<p>このフィルタは、アラビア・インド系、タイ語、デーヴァナーガリー、ベンガル語、および全角数字を含むUnicodeの10進数字を、ASCII数字に変換します。これは、トークナイザによって生成されたトークンを対象として動作します。上記の設定は意図的にカスタムアナライザの例として示されたものであり、完全なアラビア語処理パイプラインは含まれていません。</p>
 <h2 id="Examples" class="common-anchor-header">例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -2,8 +2,8 @@
 id: dashscope-ranker.md
 title: DashScope RankerCompatible with Milvus 2.6.x
 summary: >-
-  このトピックでは、Milvus において、Qwen リランキングモデルなどの DashScope
-  リランキングモデルを設定および使用する方法について説明します。
+  このトピックでは、Milvus において、Qwen 再ランク付けモデルなどの DashScope
+  再ランク付けモデルを設定および使用する方法について説明します。
 beta: Milvus 2.6.x
 ---
 <h1 id="DashScope-Ranker" class="common-anchor-header">DashScope Ranker<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#DashScope-Ranker" class="anchor-icon" translate="no">
@@ -21,7 +21,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>DashScope Ranker を使用すると、Milvus は Alibaba Cloud DashScope の再ランク付けモデルを呼び出し、意味的な関連性に基づいて検索結果の順序を変更することができます。</p>
+    </button></h1><p>DashScope Ranker を使用すると、Milvus は Alibaba Cloud DashScope の再ランク付けモデルを呼び出し、意味的な関連性に基づいて検索結果の順序を並べ替えることができます。</p>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,13 +37,13 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DashScope Ranker を使用する前に、以下の条件を満たしていることを確認してください：</p>
+    </button></h2><p>DashScope Ranker を使用する前に、以下の条件を満たしていることを確認してください。</p>
 <ul>
 <li><p>再ランク付け対象のテキストを含む「<code translate="no">VARCHAR</code> 」フィールドを持つMilvusコレクション。</p></li>
 <li><p>有効な DashScope API キー。</p></li>
 <li><p><code translate="no">gte-rerank-v2</code> などの DashScope 再ランク付けモデルへのアクセス権。</p></li>
 </ul>
-<p>利用可能な再ランク付けモデルおよび地域ごとのエンドポイントについては、<a href="https://www.alibabacloud.com/help/en/model-studio/text-rerank-api">Alibaba Cloud Model StudioのText Rerank API</a>を参照してください。</p>
+<p>利用可能な再ランク付けモデルおよび地域別エンドポイントについては、<a href="https://www.alibabacloud.com/help/en/model-studio/text-rerank-api">Alibaba Cloud Model StudioのText Rerank API</a>を参照してください。</p>
 <h2 id="Configure-credentials" class="common-anchor-header">認証情報の設定<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -75,7 +75,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>APIキーを<code translate="no">milvus.yaml</code> に保存し、DashScopeリランクプロバイダーでその認証情報ラベルを指定します。</p>
+    </button></h3><p>API キーを<code translate="no">milvus.yaml</code> に保存し、DashScope リランクプロバイダーでその認証情報ラベルを指定します。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">credential:</span>
   <span class="hljs-attr">dashscope_apikey:</span>
@@ -192,7 +192,7 @@ dashscope_ranker = Function(
    <tr>
      <td><p><code translate="no">queries</code></p></td>
      <td><p>はい</p></td>
-     <td><p>再ランク付けモデルが関連性スコアを計算するために使用するクエリ文字列のリスト。クエリ文字列の数は、検索リクエスト内のクエリ数と一致している必要があります。</p></td>
+     <td><p>再ランク付けモデルが関連性スコアを計算するために使用するクエリ文字列のリスト。クエリ文字列の数は、検索リクエストに含まれるクエリの数と一致している必要があります。</p></td>
      <td><p><code translate="no">["renewable energy developments"]</code></p></td>
    </tr>
    <tr>
@@ -204,7 +204,7 @@ dashscope_ranker = Function(
    <tr>
      <td><p><code translate="no">credential</code></p></td>
      <td><p>いいえ</p></td>
-     <td><p><code translate="no">milvus.yaml</code> の最上位セクションである `<code translate="no">credential:</code> ` で定義されたクレデンシャルのラベル。</p></td>
+     <td><p><code translate="no">milvus.yaml</code> の最上位セクションである<code translate="no">credential:</code> で定義されたクレデンシャルのラベル。</p></td>
      <td><p><code translate="no">"dashscope_apikey"</code></p></td>
    </tr>
 </table>
@@ -226,7 +226,7 @@ dashscope_ranker = Function(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DashScope Ranker を標準のベクトル検索に適用するには、<code translate="no">search()</code> に ranker 関数を渡します。</p>
+    </button></h2><p>DashScope Rankerを標準のベクトル検索に適用するには、<code translate="no">search()</code> にranker関数を渡します。</p>
 <pre><code translate="no" class="language-python">results = client.search(
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
     data=[your_query_vector],

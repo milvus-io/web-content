@@ -56,7 +56,7 @@ beta: Milvus 3.0.0+
      <td><p><code translate="no">stop_words</code></p></td>
      <td><p><code translate="no">list[str]</code></p></td>
      <td><p><code translate="no">_thai_</code></p></td>
-     <td><p>Daftar kata henti tambahan yang akan dihilangkan dari proses tokenisasi. Secara default, penganalisis <code translate="no">thai</code> menggunakan kamus bawaan <code translate="no">_thai_</code>. Untuk memeriksa kamus default, lihat <a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/thai.txt">daftar kata henti</a> Milvus <a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/thai.txt">Thai</a>. Daftar ini bersumber dari <a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/th/stopwords.txt">berkas kata henti Thai</a> Apache Lucene.</p></td>
+     <td><p>Daftar kata-kata yang diabaikan (stop words) tambahan yang akan dihilangkan dari proses tokenisasi. Secara default, penganalisis <code translate="no">thai</code> menggunakan kamus bawaan <code translate="no">_thai_</code>. Untuk memeriksa kamus default, lihat <a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/thai.txt">daftar kata-kata yang diabaikan (stop words)</a> Milvus <a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/thai.txt">Thai</a>. Daftar ini bersumber dari <a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/th/stopwords.txt">berkas kata-kata yang diabaikan (stop words)</a> Apache Lucene <a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/th/stopwords.txt">Thai</a>.</p></td>
    </tr>
 </table>
 <p>Untuk menambahkan kata henti kustom, sertakan <code translate="no">stop_words</code>:</p>
@@ -65,8 +65,8 @@ beta: Milvus 3.0.0+
     <span class="hljs-string">&quot;stop_words&quot;</span>: [<span class="hljs-string">&quot;มิลวัส&quot;</span>],
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus menerapkan kata-kata stop kustom selain kamus bawaan <code translate="no">_thai_</code>.</p>
-<p>Penganalisis bawaan " <code translate="no">thai</code> " setara dengan konfigurasi penganalisis kustom berikut:</p>
+<p>Milvus menerapkan kata-kata stop kustom selain kamus <code translate="no">_thai_</code> bawaan.</p>
+<p>Penganalisis bawaan ` <code translate="no">thai</code> ` setara dengan konfigurasi penganalisis kustom berikut:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;thai&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [
@@ -79,11 +79,11 @@ beta: Milvus 3.0.0+
     ],
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Analisis ini menerapkan langkah-langkah pemrosesan berikut:</p>
+<p>Analizer ini menerapkan langkah-langkah pemrosesan berikut:</p>
 <ul>
 <li><strong>Tokenisasi</strong>: Menggunakan <a href="/docs/id/thai-tokenizer.md"><code translate="no">thai</code></a> tokenizer untuk memotong teks bahasa Thailand menjadi token kata tanpa bergantung pada spasi. Tokenizer ini menyaring spasi dan segmen yang hanya berisi tanda baca.</li>
 <li><strong>Normalisasi huruf besar/kecil</strong>: Menggunakan filter <code translate="no">lowercase</code>, yang memengaruhi huruf Latin dalam teks campuran bahasa Thailand/Inggris.</li>
-<li><strong>Normalisasi angka</strong>: Menggunakan filter ` <code translate="no">decimaldigit</code> ` untuk mengubah angka Thailand dan angka desimal Unicode lainnya menjadi angka ASCII.</li>
+<li><strong>Normalisasi angka</strong>: Menggunakan filter ` <code translate="no">decimaldigit</code> ` untuk mengonversi angka dalam bahasa Thailand dan angka desimal Unicode lainnya menjadi angka ASCII.</li>
 <li><strong>Penghapusan kata stop</strong>: Menggunakan filter ` <code translate="no">stop</code> ` dengan kamus bawaan ` <code translate="no">_thai_</code> `.</li>
 <li><strong>Tanpa stemming</strong>: Penganalisis bawaan " <code translate="no">thai</code> " tidak menerapkan filter " <code translate="no">stemmer</code> ".</li>
 </ul>

@@ -55,7 +55,7 @@ title: 使用 RPM/DEB 软件包安装 Milvus Standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以从<a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.17">Milvus 发布页面</a>根据您的系统架构下载 RPM/DEB 软件包。</p>
+    </button></h2><p>您可以从<a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.17">Milvus 发布页面</a>根据您的系统架构下载相应的 RPM/DEB 软件包。</p>
 <ul>
 <li>对于 x86_64/amd64 架构，请下载<strong>milvus_2.6.9-1_amd64.deb</strong>或<strong>milvus_2.6.9-1_amd64.rpm</strong>软件包。</li>
 <li>对于 ARM64，请下载<strong>milvus_2.6.9-1_arm64.deb</strong>或<strong>milvus_2.6.9-1_arm64.rpm</strong>软件包。</li>
@@ -210,7 +210,7 @@ dpkg -l | grep milvus
 <li><a href="/docs/zh/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
 <li><p>探索<a href="/docs/zh/v2.6.x/milvus-webui.md">Milvus WebUI</a>——一个用于 Milvus 可观测性和管理的直观 Web 界面。</p></li>
-<li><p>探索<a href="/docs/zh/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>，这是一个用于 Milvus 数据备份的开源工具。</p></li>
+<li><p>探索<a href="/docs/zh/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>——一款用于 Milvus 数据备份的开源工具。</p></li>
 <li><p>了解<a href="/docs/zh/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>——一款用于调试 Milvus 并进行动态配置更新的开源工具。</p></li>
 <li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>——一款用于直观管理 Milvus 的开源图形用户界面工具。</p></li>
 <li><p><a href="/docs/zh/v2.6.x/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>

@@ -108,9 +108,9 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <h5 id="Key-configuration-options" class="common-anchor-header">Wichtige Konfigurationsoptionen:</h5><ul>
 <li><code translate="no">msgStreamType</code>: rocksmq: Legt RocksMQ explizit als Nachrichtenwarteschlange fest</li>
-<li><code translate="no">persistence.enabled</code>: Aktiviert die persistente Speicherung für RocksMQ-Daten</li>
+<li><code translate="no">persistence.enabled</code>: Aktiviert den persistenten Speicher für RocksMQ-Daten</li>
 <li><code translate="no">persistence.pvcDeletion</code>: Wenn „true“, wird das PVC gelöscht, sobald die Milvus-Instanz gelöscht wird</li>
-<li><code translate="no">persistentVolumeClaim.spec</code>: Standard-Kubernetes-PVC-Spezifikation</li>
+<li><code translate="no">persistentVolumeClaim.spec</code>: Standardmäßige Kubernetes-PVC-Spezifikation</li>
 <li><code translate="no">accessModes</code>: In der Regel „ <code translate="no">ReadWriteOnce</code> “ für Blockspeicher</li>
 <li><code translate="no">storageClassName</code>: Die Speicherklasse Ihres Clusters</li>
 <li><code translate="no">storage</code>: Größe des persistenten Volumes</li>
@@ -265,7 +265,7 @@ Zu den Feldern zur Konfiguration eines externen Pulsar-Dienstes gehören:</p>
       </svg>
     </button></h2><p>Pulsar ist der Standard-Nachrichtenspeicher in einem Milvus-Cluster. Wenn Sie Kafka verwenden möchten, fügen Sie das optionale Feld „ <code translate="no">msgStreamType</code> “ hinzu, um Kafka zu konfigurieren.</p>
 <p><code translate="no">kafka</code> Unterstützt <code translate="no">external</code> und <code translate="no">inCluster</code>.</p>
-<h3 id="External-Kafka" class="common-anchor-header">„External Kafka“<button data-href="#External-Kafka" class="anchor-icon" translate="no">
+<h3 id="External-Kafka" class="common-anchor-header">Externes Kafka<button data-href="#External-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -281,7 +281,7 @@ Zu den Feldern zur Konfiguration eines externen Pulsar-Dienstes gehören:</p>
         ></path>
       </svg>
     </button></h3><p><code translate="no">external</code> Gibt die Verwendung eines externen Kafka-Dienstes an.</p>
-<p>Zu den Feldern zur Konfiguration eines externen Kafka-Dienstes gehören:</p>
+<p>Zu den Feldern, die zur Konfiguration eines externen Kafka-Dienstes verwendet werden, gehören:</p>
 <ul>
 <li><code translate="no">external</code>: Ein Wert von „ <code translate="no">true</code> “ gibt an, dass Milvus einen externen Kafka-Dienst verwendet.</li>
 <li><code translate="no">brokerList</code>: Die Liste der Broker, an die die Nachrichten gesendet werden sollen.</li>

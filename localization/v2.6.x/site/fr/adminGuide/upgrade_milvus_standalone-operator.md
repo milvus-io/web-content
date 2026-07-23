@@ -62,7 +62,7 @@ title: Mise à niveau de Milvus Standalone avec Milvus Operator
 <li><strong>Nouveaux composants</strong>: introduction du nœud de streaming pour un traitement amélioré des données</li>
 <li><strong>Suppression de composants</strong>: <code translate="no">indexNode</code> a été supprimé et consolidé</li>
 </ul>
-<p>Ce processus de mise à niveau garantit une migration correcte vers la nouvelle architecture. Pour plus d’informations sur les modifications apportées à l’architecture, consultez <a href="/docs/fr/v2.6.x/architecture_overview.md">la présentation de l’architecture de Milvus</a>.</p>
+<p>Ce processus de mise à niveau garantit une migration correcte vers la nouvelle architecture. Pour plus d’informations sur les modifications apportées à l’architecture, consultez <a href="/docs/fr/v2.6.x/architecture_overview.md">la présentation de l’architecture Milvus</a>.</p>
 <h3 id="Requirements" class="common-anchor-header">Configuration requise<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,7 +80,7 @@ title: Mise à niveau de Milvus Standalone avec Milvus Operator
       </svg>
     </button></h3><p><strong>Configuration système requise :</strong></p>
 <ul>
-<li>Cluster Kubernetes avec Milvus standalone déployé via Milvus Operator</li>
+<li>Cluster Kubernetes avec Milvus Standalone déployé via Milvus Operator</li>
 <li><code translate="no">kubectl</code> configuré pour accéder à votre cluster</li>
 <li>Helm 3.x installé</li>
 </ul>
@@ -121,7 +121,7 @@ title: Mise à niveau de Milvus Standalone avec Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Commencez par mettre à niveau votre Milvus Operator vers la version v1.3.0 :</p>
+    </button></h3><p>Commencez par mettre à niveau votre Milvus Operator vers la version 1.3.0 :</p>
 <pre><code translate="no" class="language-bash">helm repo add zilliztech-milvus-operator https://zilliztech.github.io/milvus-operator/
 helm repo update zilliztech-milvus-operator
 helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvus-operator

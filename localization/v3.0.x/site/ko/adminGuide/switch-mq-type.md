@@ -41,7 +41,7 @@ summary: 가동 중단 없이 기존 Milvus 배포 환경의 메시지 큐를 Wo
 <li><strong>MQ 전환 기능은 Milvus 3.0 이상 버전에서 사용할 수 있습니다.</strong> 이 기능을 사용하기 전에 Milvus 인스턴스를 Milvus 3.0 이상으로 업그레이드하십시오. 이전 버전에서는 이 기능을 사용할 수 없습니다.</li>
 <li>인스턴스가 정상적으로 실행 중이어야 합니다.</li>
 </ul>
-<h2 id="Scope" class="common-anchor-header">적용 범위<button data-href="#Scope" class="anchor-icon" translate="no">
+<h2 id="Scope" class="common-anchor-header">범위<button data-href="#Scope" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -85,7 +85,7 @@ summary: 가동 중단 없이 기존 Milvus 배포 환경의 메시지 큐를 Wo
 <li>로그를 모니터링하여 전환이 완료되었는지 확인합니다.</li>
 </ol>
 <div class="alert note">
-<p>전환하기 전에, 대상 MQ에 현재 Milvus 인스턴스에서 사용하는 것과 동일한 이름의 토픽이 포함되어 있지 않은지 확인하십시오. 대상 MQ가 다른 Milvus 인스턴스에서 사용된 적이 있는 경우, 토픽 이름 충돌로 인해 예기치 않은 동작이 발생할 수 있으므로 이 점은 특히 중요합니다.</p>
+<p>전환하기 전에, 대상 MQ에 현재 Milvus 인스턴스에서 사용 중인 것과 동일한 이름의 토픽이 포함되어 있지 않은지 확인하십시오. 대상 MQ가 다른 Milvus 인스턴스에서 사용된 적이 있는 경우, 토픽 이름 충돌로 인해 예기치 않은 동작이 발생할 수 있으므로 이 점은 특히 중요합니다.</p>
 </div>
 <h2 id="Support-matrix" class="common-anchor-header">지원 매트릭스<button data-href="#Support-matrix" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -110,7 +110,7 @@ summary: 가동 중단 없이 기존 Milvus 배포 환경의 메시지 큐를 Wo
 <tr><td>RocksMQ</td><td>Woodpecker (로컬/MinIO)</td><td>독립형 (Docker Compose)</td><td><strong>지원됨</strong></td></tr>
 <tr><td>Woodpecker (로컬/MinIO)</td><td>RocksMQ</td><td>독립형 (Docker Compose)</td><td><strong>지원됨</strong></td></tr>
 <tr><td>Pulsar (내장/외부)</td><td>Woodpecker (MinIO)</td><td>클러스터 (Helm / Operator)</td><td><strong>지원됨</strong></td></tr>
-<tr><td>Woodpecker (MinIO)</td><td>Pulsar (외부)</td><td>클러스터 (Helm / Operator)</td><td><strong>지원됨</strong></td></tr>
+<tr><td>Woodpecker (MinIO)</td><td>펄사 (외부)</td><td>클러스터 (Helm / Operator)</td><td><strong>지원됨</strong></td></tr>
 <tr><td>Kafka (내장/외부)</td><td>Woodpecker (MinIO)</td><td>클러스터 (Helm / Operator)</td><td><strong>지원됨</strong></td></tr>
 <tr><td>Woodpecker (MinIO)</td><td>카프카 (외부)</td><td>클러스터 (Helm / Operator)</td><td><strong>지원됨</strong></td></tr>
 <tr><td>Woodpecker MinIO</td><td>Woodpecker 로컬 (또는 그 반대)</td><td>어느 것이든</td><td><strong>지원되지 않음</strong></td></tr>

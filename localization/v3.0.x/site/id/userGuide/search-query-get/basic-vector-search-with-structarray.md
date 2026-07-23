@@ -49,7 +49,7 @@ summary: >-
 <tr><td>Buat bidang StructArray, seperti <code translate="no">chunks</code>.</td><td><a href="/docs/id/create-structarray-field.md">Buat bidang StructArray</a></td></tr>
 <tr><td>Sisipkan entitas yang bidang ` <code translate="no">chunks</code> `-nya berisi objek Struct.</td><td><a href="/docs/id/insert-data-into-structarray-fields.md">Masukkan Data ke dalam Bidang StructArray</a></td></tr>
 <tr><td>Buat indeks ` <code translate="no">MAX_SIM*</code> ` pada ` <code translate="no">chunks[emb_list_vector]</code> ` untuk pencarian `EmbeddingList`.</td><td><a href="/docs/id/index-structarray-fields.md">Indeks Bidang StructArray</a></td></tr>
-<tr><td>Buat indeks vektor-metrik biasa pada <code translate="no">chunks[emb]</code> untuk pencarian tingkat elemen.</td><td><a href="/docs/id/index-structarray-fields.md">Indeks Bidang StructArray</a></td></tr>
+<tr><td>Buat indeks vektor-metrik biasa pada ` <code translate="no">chunks[emb]</code> ` untuk pencarian tingkat elemen.</td><td><a href="/docs/id/index-structarray-fields.md">Indeks Bidang StructArray</a></td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -79,7 +79,7 @@ summary: >-
 <tr><td>Subbidang target</td><td><code translate="no">chunks[emb_list_vector]</code></td><td><code translate="no">chunks[emb]</code></td></tr>
 <tr><td>Data kueri</td><td>Daftar embedding yang berisi satu atau lebih vektor.</td><td>Vektor biasa.</td></tr>
 <tr><td>Keluarga metrik</td><td><code translate="no">MAX_SIM*</code>, seperti <code translate="no">MAX_SIM_COSINE</code>.</td><td>Metrik vektor reguler, seperti <code translate="no">COSINE</code>, <code translate="no">IP</code>, atau <code translate="no">L2</code>.</td></tr>
-<tr><td>Apa yang diwakili oleh satu hasil pencocokan</td><td>Entitas yang cocok yang subbidang vektor StructArray-nya mirip dengan daftar embedding kueri.</td><td>Elemen Struct yang cocok di dalam bidang StructArray.</td></tr>
+<tr><td>Apa yang diwakili oleh satu hasil pencocokan</td><td>Sebuah entitas yang cocok yang subbidang vektor StructArray-nya mirip dengan daftar embedding kueri.</td><td>Elemen Struct yang cocok di dalam bidang StructArray.</td></tr>
 <tr><td>Tingkat granularitas hasil</td><td>Tingkat entitas.</td><td>Tingkat elemen Struct.</td></tr>
 <tr><td>Offset</td><td>Tidak berlaku.</td><td>Mengidentifikasi posisi berbasis nol dari elemen Struct yang cocok saat dikembalikan.</td></tr>
 <tr><td>Penggunaan umum</td><td>ColBERT, ColPali, dan pola pengambilan data interaksi akhir lainnya.</td><td>Pencarian tingkat chunk, tingkat bagian teks, tingkat klip, tingkat patch, atau tingkat fakta.</td></tr>
@@ -100,7 +100,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Gunakan pencarian EmbeddingList jika kueri itu sendiri berisi beberapa vektor dan subbidang vektor StructArray target diindeks dengan metrik " <code translate="no">MAX_SIM*</code> ". Hasilnya adalah kecocokan tingkat entitas.</p>
+    </button></h2><p>Gunakan pencarian EmbeddingList ketika kueri itu sendiri berisi beberapa vektor dan subbidang vektor StructArray target diindeks dengan metrik " <code translate="no">MAX_SIM*</code> ". Hasilnya adalah kecocokan tingkat entitas.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">from</span> pymilvus.client.embedding_list <span class="hljs-keyword">import</span> EmbeddingList
 
@@ -131,7 +131,7 @@ results = client.search(
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
         <span class="hljs-built_in">print</span>(hit[<span class="hljs-string">&quot;id&quot;</span>], hit[<span class="hljs-string">&quot;distance&quot;</span>], hit[<span class="hljs-string">&quot;entity&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>Dalam mode pencarian ini, <code translate="no">limit</code> mengontrol berapa banyak entitas yang dikembalikan untuk setiap kueri. Output dapat mencakup subbidang StructArray, tetapi hasil pencocokan itu sendiri mewakili entitas induk yang cocok, bukan satu elemen Struct tertentu.</p>
+<p>Dalam mode pencarian ini, " <code translate="no">limit</code> " mengontrol berapa banyak entitas yang dikembalikan untuk setiap kueri. Output dapat mencakup subbidang StructArray, tetapi hasil pencocokan itu sendiri mewakili entitas induk yang cocok, bukan satu elemen Struct tertentu.</p>
 <div class="alert note">
 <p>Untuk panduan lengkap bergaya ColBERT atau ColPali, lihat <a href="/docs/id/search-with-embedding-lists.md">Pencarian dengan Daftar Embedding</a>. Halaman ini hanya membahas perilaku pencarian StructArray dasar.</p>
 </div>
@@ -177,7 +177,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>Dalam pencarian tingkat elemen, setiap hasil pencocokan mewakili elemen Struct yang cocok. Nilai " <code translate="no">offset</code> " adalah posisi berbasis nol dari elemen tersebut di bidang StructArray. Entitas yang sama dapat muncul lebih dari sekali jika lebih dari satu elemen Struct cocok dengan kueri. Nilai " <code translate="no">limit</code> " berlaku untuk hasil pencocokan elemen, bukan entitas induk yang unik.</p>
+<p>Dalam pencarian tingkat elemen, setiap hasil pencocokan mewakili elemen Struct yang cocok. Nilai " <code translate="no">offset</code> " adalah posisi berbasis nol dari elemen tersebut dalam bidang StructArray. Entitas yang sama dapat muncul lebih dari sekali jika lebih dari satu elemen Struct cocok dengan kueri. Nilai " <code translate="no">limit</code> " berlaku untuk hasil pencocokan elemen, bukan entitas induk yang unik.</p>
 <h2 id="Interpret-results" class="common-anchor-header">Menafsirkan hasil<button data-href="#Interpret-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -202,7 +202,7 @@ results = client.search(
 <tr><td><code translate="no">distance</code> atau skor</td><td>Skor atau jarak antara daftar embedding kueri dan daftar embedding yang tersimpan.</td><td>Skor atau jarak antara vektor kueri dan vektor elemen Struct yang cocok.</td></tr>
 <tr><td><code translate="no">offset</code></td><td>Tidak berlaku.</td><td>Posisi berbasis nol dari elemen Struct yang cocok saat dikembalikan.</td></tr>
 <tr><td>Kunci utama yang berulang</td><td>Tidak diharapkan untuk satu kueri karena hasilnya berada di tingkat entitas.</td><td>Mungkin terjadi, karena beberapa elemen Struct dalam entitas yang sama dapat cocok.</td></tr>
-<tr><td>Bidang keluaran StructArray yang diminta</td><td>Dikembalikan dari entitas yang cocok.</td><td>Dikembalikan dengan bentuk hasil pencocokan tingkat elemen yang didukung oleh API dan SDK target.</td></tr>
+<tr><td>Bidang keluaran StructArray yang diminta</td><td>Dikembalikan dari entitas yang cocok.</td><td>Dikembalikan dengan bentuk hasil pencocokan tingkat elemen yang didukung oleh API dan SDK tujuan.</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">Kesalahan umum<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
@@ -221,7 +221,7 @@ results = client.search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Menggunak <code translate="no">chunks.emb</code> alih-alih sintaks jalur subbidang yang diperlukan <code translate="no">chunks[emb]</code>.</p></li>
+<li><p>Menggunak <code translate="no">chunks.emb</code> alih-alih sintaks jalur subbidang yang diperlukan, yaitu <code translate="no">chunks[emb]</code>.</p></li>
 <li><p>Menggunakan kueri EmbeddingList terhadap subbidang vektor yang diindeks dengan metrik vektor biasa.</p></li>
 <li><p>Menggunakan kueri vektor biasa terhadap subbidang vektor yang diindeks dengan metrik <code translate="no">MAX_SIM*</code>.</p></li>
 <li><p>Mengharapkan pencarian tingkat elemen <code translate="no">limit</code> mengembalikan sejumlah entitas induk yang unik. Pencarian ini mengembalikan hasil elemen.</p></li>

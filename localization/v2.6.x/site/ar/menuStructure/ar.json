@@ -160,7 +160,7 @@
         ]
       },
       {
-        "label": "تثبيت حزم SDK",
+        "label": "تثبيت حزم أدوات التطوير (SDK)",
         "id": "install_sdks",
         "order": 2,
         "children": [
@@ -249,7 +249,7 @@
         ]
       },
       {
-        "label": "Bitset",
+        "label": "مجموعة البتات",
         "id": "bitset.md",
         "order": 1,
         "children": []
@@ -401,7 +401,7 @@
             "children": []
           },
           {
-            "label": "المتجه المتفرق",
+            "label": "متجه متفرق",
             "id": "sparse_vector.md",
             "order": 4,
             "children": []
@@ -485,7 +485,7 @@
             "order": 14,
             "children": [
               {
-                "label": "نظرة عامة على جهاز التحليل",
+                "label": "نظرة عامة على أداة التحليل",
                 "id": "analyzer-overview.md",
                 "order": 0,
                 "children": []
@@ -606,7 +606,7 @@
                     "children": []
                   },
                   {
-                    "label": "جهاز تفكيك المركبات",
+                    "label": "جهاز فصل المركبات",
                     "id": "decompounder-filter.md",
                     "order": 7,
                     "children": []
@@ -618,7 +618,7 @@
                     "children": []
                   },
                   {
-                    "label": "إزالة النقطة",
+                    "label": "إزالة الثقب",
                     "id": "removepunct-filter.md",
                     "order": 9,
                     "children": []
@@ -717,7 +717,7 @@
             "children": []
           },
           {
-            "label": "مؤشرات المتجهات العائمة",
+            "label": "الفهارس المتجهة العائمة",
             "id": "floating-vector-indexes",
             "order": 1,
             "isMenu": true,
@@ -985,13 +985,13 @@
                 "children": []
               },
               {
-                "label": "عوامل JSON",
+                "label": "مشغلات JSON",
                 "id": "json-operators.md",
                 "order": 3,
                 "children": []
               },
               {
-                "label": "مشغلات المصفوفات",
+                "label": "عمليات المصفوفات",
                 "id": "array-operators.md",
                 "order": 4,
                 "children": []
@@ -1003,7 +1003,7 @@
                 "children": []
               },
               {
-                "label": "مُشغِّلات الهندسة",
+                "label": "مشغلات الهندسة",
                 "id": "geometry-operators.md",
                 "order": 6,
                 "children": []
@@ -1053,7 +1053,7 @@
             "children": []
           },
           {
-            "label": "استخدام مفتاح القسم",
+            "label": "استخدام مفتاح التقسيم",
             "id": "use-partition-key.md",
             "order": 15,
             "children": []
@@ -1153,7 +1153,7 @@
                 "children": []
               },
               {
-                "label": "مُصنِّف RRF",
+                "label": "تصنيف RRF",
                 "id": "rrf-ranker.md",
                 "order": 1,
                 "children": []
@@ -1227,7 +1227,7 @@
                     "children": []
                   },
                   {
-                    "label": "Cohere Ranker",
+                    "label": "مُصنِّف كوهير",
                     "id": "cohere-ranker.md",
                     "order": 3,
                     "children": []
@@ -1239,7 +1239,7 @@
                     "children": []
                   },
                   {
-                    "label": "برنامج SiliconFlow Ranker",
+                    "label": "برنامج تصنيف SiliconFlow",
                     "id": "siliconflow-ranker.md",
                     "order": 5,
                     "children": []
@@ -1590,7 +1590,7 @@
                 "children": []
               },
               {
-                "label": "ميتا ستوريج",
+                "label": "تخزين ميتا",
                 "id": "deploy_etcd.md",
                 "order": 1,
                 "children": []
@@ -1616,7 +1616,7 @@
                 "children": []
               },
               {
-                "label": "مخزن ميتا",
+                "label": "تخزين ميتا",
                 "id": "meta_storage_operator.md",
                 "order": 1,
                 "children": []
@@ -1652,7 +1652,7 @@
         ]
       },
       {
-        "label": "التحجيم",
+        "label": "التوسع",
         "id": "scaling",
         "order": 4,
         "isMenu": true,
@@ -1897,7 +1897,7 @@
             "children": []
           },
           {
-            "label": "محول Milvus المستقل من طراز MQ",
+            "label": "محول «ميلفوس» المستقل من طراز MQ",
             "id": "switch_milvus_standalone_mq_type-operator.md",
             "order": 1,
             "children": []
@@ -2002,7 +2002,7 @@
         ]
       },
       {
-        "label": "ميلفوس CDC",
+        "label": "ميلفوس سي دي سي",
         "id": "milvus_cdc",
         "order": 2,
         "children": [
@@ -2167,7 +2167,7 @@
                 "children": []
               },
               {
-                "label": "ميسترال أي آي",
+                "label": "ميسترال آي آي",
                 "id": "embed-with-mistral-ai.md",
                 "order": 10,
                 "children": []
@@ -2199,7 +2199,7 @@
             ]
           },
           {
-            "label": "أجهزة إعادة الترتيب",
+            "label": "أدوات إعادة الترتيب",
             "id": "rerankers",
             "order": 1,
             "isMenu": true,
@@ -2253,7 +2253,7 @@
     ]
   },
   {
-    "label": "عمليات التكامل",
+    "label": "عمليات الدمج",
     "id": "integrations",
     "isMenu": true,
     "order": 8,
@@ -2275,7 +2275,7 @@
             "order": 0,
             "children": [
               {
-                "label": "الاستخدام الأساسي",
+                "label": "طرق الاستخدام الأساسية",
                 "id": "basic_usage_langchain.md",
                 "order": 1,
                 "children": []
@@ -2311,7 +2311,7 @@
                 "children": []
               },
               {
-                "label": "العميل RAG",
+                "label": "الوكيل RAG",
                 "id": "agentic_rag_with_milvus_and_langgraph.md",
                 "order": 7,
                 "children": []
@@ -2607,7 +2607,7 @@
             "children": []
           },
           {
-            "label": "ميسترال AI",
+            "label": "ميسترال آي آي",
             "id": "llama_agents_metadata.md",
             "order": 1,
             "children": []
@@ -2717,7 +2717,7 @@
             "children": []
           },
           {
-            "label": "أداة إخفاء المعلومات الشخصية",
+            "label": "أداة إخفاء المعلومات الشخصية (PII)",
             "id": "RAG_with_pii_and_milvus.md",
             "order": 4,
             "children": []
@@ -2790,7 +2790,7 @@
         "order": 8,
         "children": [
           {
-            "label": "ندفة الثلج",
+            "label": "نجمة الثلج",
             "id": "integrate_with_snowpark.md",
             "order": 0,
             "children": []
@@ -2872,7 +2872,7 @@
         "children": []
       },
       {
-        "label": "استخدم ColBERT وColPali مع Milvus",
+        "label": "استخدام ColBERT وColPali مع Milvus",
         "id": "search-with-embedding-lists",
         "order": 10,
         "externalLink": "https://milvus.io/docs/search-with-embedding-lists.md",
@@ -2891,7 +2891,7 @@
         "children": []
       },
       {
-        "label": "البحث القمعي باستخدام تمثيلات «ماتريوشكا»",
+        "label": "البحث القمعي باستخدام التضمينات المتداخلة (Matryoshka Embeddings)",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

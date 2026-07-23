@@ -194,17 +194,17 @@ dpkg -l | grep milvus
     </button></h2><p>После установки Milvus Standalone вы можете:</p>
 <ul>
 <li><p>Ознакомьтесь с <a href="/docs/ru/v2.6.x/quickstart.md">разделом «Быстрый старт»</a>, чтобы узнать, на что способен Milvus.</p></li>
-<li><p>Ознакомиться с основными операциями Milvus:</p>
+<li><p>Ознакомьтесь с основными операциями Milvus:</p>
 <ul>
-<li><a href="/docs/ru/v2.6.x/manage_databases.md">Управление базами данных</a></li>
+<li><a href="/docs/ru/v2.6.x/manage_databases.md">Управлять базами данных</a></li>
 <li><a href="/docs/ru/v2.6.x/manage-collections.md">Управление коллекциями</a></li>
-<li><a href="/docs/ru/v2.6.x/manage-partitions.md">Управление разделами</a></li>
+<li><a href="/docs/ru/v2.6.x/manage-partitions.md">Управлять разделами</a></li>
 <li><a href="/docs/ru/v2.6.x/insert-update-delete.md">Вставка, обновление и удаление</a></li>
 <li><a href="/docs/ru/v2.6.x/single-vector-search.md">Поиск по одному вектору</a></li>
 <li><a href="/docs/ru/v2.6.x/multi-vector-search.md">Гибридный поиск</a></li>
 </ul></li>
 <li><p><a href="/docs/ru/v2.6.x/upgrade_milvus_cluster-helm.md">Обновление Milvus с помощью Helm Chart</a>.</p></li>
-<li><p><a href="/docs/ru/v2.6.x/scaleout.md">Масштабируйте свой кластер Milvus</a>.</p></li>
+<li><p><a href="/docs/ru/v2.6.x/scaleout.md">Масштабируйте кластер Milvus</a>.</p></li>
 <li><p>Разверните кластер Milvus в облаке:</p>
 <ul>
 <li><a href="/docs/ru/v2.6.x/eks.md">Amazon EKS</a></li>
@@ -213,7 +213,7 @@ dpkg -l | grep milvus
 </ul></li>
 <li><p>Ознакомьтесь с <a href="/docs/ru/v2.6.x/milvus-webui.md">Milvus WebUI</a> — интуитивно понятным веб-интерфейсом для мониторинга и управления Milvus.</p></li>
 <li><p>Ознакомьтесь с <a href="/docs/ru/v2.6.x/milvus_backup_overview.md">Milvus Backup</a> — инструментом с открытым исходным кодом для резервного копирования данных Milvus.</p></li>
-<li><p>Познакомьтесь с <a href="/docs/ru/v2.6.x/birdwatcher_overview.md">Birdwatcher</a> — инструментом с открытым исходным кодом для отладки Milvus и динамического обновления конфигурации.</p></li>
+<li><p>Ознакомьтесь с <a href="/docs/ru/v2.6.x/birdwatcher_overview.md">Birdwatcher</a> — инструментом с открытым исходным кодом для отладки Milvus и динамического обновления конфигурации.</p></li>
 <li><p>Познакомьтесь с <a href="https://github.com/zilliztech/attu">Attu</a> — инструментом с графическим интерфейсом с открытым исходным кодом для интуитивного управления Milvus.</p></li>
-<li><p><a href="/docs/ru/v2.6.x/monitor.md">Мониторинг Milvus с помощью Prometheus</a>.</p></li>
+<li><p><a href="/docs/ru/v2.6.x/monitor.md">Осуществляйте мониторинг Milvus с помощью Prometheus</a>.</p></li>
 </ul>

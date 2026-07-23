@@ -38,7 +38,7 @@ summary: >-
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>قائمة انتظار الرسائل</th><th style="text-align:center">Milvus المستقل</th><th style="text-align:center">Milvus الموزع (العنقود)</th><th>الافتراضي في</th><th>ملاحظات</th></tr>
+<tr><th>قائمة انتظار الرسائل</th><th style="text-align:center">Milvus المستقل</th><th style="text-align:center">Milvus Distributed (العنقود)</th><th>الافتراضي في</th><th>ملاحظات</th></tr>
 </thead>
 <tbody>
 <tr><td><a href="/docs/ar/woodpecker.md">Woodpecker</a></td><td style="text-align:center">✔️ (مُدمج)</td><td style="text-align:center">✔️ (مُدمج أو خدمة)</td><td><strong>Milvus 3.x</strong> (كلا الوضعين)</td><td>الافتراضي والموصى به. WAL السحابي الأصلي على تخزين الكائنات؛ لا يلزم وجود خدمة خارجية.</td></tr>

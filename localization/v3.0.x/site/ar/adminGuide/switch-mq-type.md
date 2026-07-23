@@ -2,8 +2,8 @@
 id: switch-mq-type.md
 title: تغيير نوع قائمة انتظار الرسائل (MQ)
 summary: >-
-  تبديل قائمة انتظار الرسائل في نشر Milvus قائم بين Woodpecker وقائمة انتظار
-  رسائل أخرى دون توقف.
+  تبديل قائمة انتظار الرسائل في أحد عمليات نشر Milvus الحالية بين Woodpecker
+  وقائمة انتظار رسائل أخرى دون توقف.
 ---
 <h1 id="Switch-MQ-Type" class="common-anchor-header">تغيير نوع قائمة انتظار الرسائل (MQ)<button data-href="#Switch-MQ-Type" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -40,7 +40,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>ميزة "تبديل قائمة انتظار الرسائل" متاحة في Milvus 3.0 والإصدارات الأحدث.</strong> قم بترقية مثيل Milvus الخاص بك إلى Milvus 3.0 أو إصدار أحدث قبل استخدامها — فهذه الميزة غير متوفرة في الإصدارات الأقدم.</li>
+<li><strong>تتوفر ميزة تبديل قائمة انتظار الرسائل (MQ) في Milvus 3.0 والإصدارات الأحدث.</strong> قم بترقية مثيل Milvus الخاص بك إلى Milvus 3.0 أو إصدار أحدث قبل استخدامها — فهذه الميزة غير متوفرة في الإصدارات الأقدم.</li>
 <li>يجب أن تعمل النسخة بشكل صحيح.</li>
 </ul>
 <h2 id="Scope" class="common-anchor-header">النطاق<button data-href="#Scope" class="anchor-icon" translate="no">
@@ -87,7 +87,7 @@ summary: >-
 <li>راقب السجلات للتأكد من اكتمال عملية التبديل.</li>
 </ol>
 <div class="alert note">
-<p>قبل التبديل، تأكد من أن MQ الهدف لا يحتوي على مواضيع تحمل نفس الأسماء المستخدمة في مثيل Milvus الحالي. وهذا مهم بشكل خاص إذا كان MQ الهدف قد استخدمه مثيل Milvus آخر، حيث إن أسماء المواضيع المتعارضة قد تؤدي إلى سلوك غير متوقع.</p>
+<p>قبل التبديل، تأكد من أن MQ الهدف لا يحتوي على مواضيع تحمل نفس الأسماء المستخدمة من قبل مثيل Milvus الحالي. هذا مهم بشكل خاص إذا كان MQ الهدف قد استخدم من قبل مثيل Milvus آخر، حيث يمكن أن تؤدي أسماء المواضيع المتعارضة إلى سلوك غير متوقع.</p>
 </div>
 <h2 id="Support-matrix" class="common-anchor-header">مصفوفة الدعم<button data-href="#Support-matrix" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -111,7 +111,7 @@ summary: >-
 <tbody>
 <tr><td>RocksMQ</td><td>Woodpecker (محلي/MinIO)</td><td>مستقل (Docker Compose)</td><td><strong>مدعوم</strong></td></tr>
 <tr><td>Woodpecker (محلي/MinIO)</td><td>RocksMQ</td><td>مستقل (Docker Compose)</td><td><strong>مدعوم</strong></td></tr>
-<tr><td>Pulsar (مدمج/خارجي)</td><td>Woodpecker (MinIO)</td><td>العنقود (Helm / Operator)</td><td><strong>مدعوم</strong></td></tr>
+<tr><td>Pulsar (مدمج/خارجي)</td><td>Woodpecker (MinIO)</td><td>المجموعة (Helm / Operator)</td><td><strong>مدعوم</strong></td></tr>
 <tr><td>وودبيكر (MinIO)</td><td>بولسار (خارجي)</td><td>العنقود (Helm / Operator)</td><td><strong>مدعوم</strong></td></tr>
 <tr><td>Kafka (مدمج/خارجي)</td><td>وودبيكر (MinIO)</td><td>العنقود (Helm / Operator)</td><td><strong>مدعوم</strong></td></tr>
 <tr><td>وودبيكر (MinIO)</td><td>كافكا (خارجي)</td><td>العنقود (Helm / Operator)</td><td><strong>مدعوم</strong></td></tr>

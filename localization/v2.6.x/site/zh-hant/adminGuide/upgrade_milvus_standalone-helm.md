@@ -57,11 +57,11 @@ title: 使用 Helm Chart 升級 Milvus 獨立部署
     </button></h3><p>從 Milvus 2.5.x 升級至 2.6.17 涉及重大的架構變更：</p>
 <ul>
 <li><strong>協調器整合</strong>：舊版獨立的協調器（<code translate="no">dataCoord</code> 、<code translate="no">queryCoord</code> 、<code translate="no">indexCoord</code> ）已整合為單一<code translate="no">mixCoord</code></li>
-<li><strong>新元件</strong>：引入「串流節點」（Streaming Node）以強化資料處理能力</li>
+<li><strong>新元件</strong>：導入「串流節點」（Streaming Node）以強化資料處理能力</li>
 <li><strong>元件移除</strong>：已移除並整合<code translate="no">indexNode</code> </li>
 </ul>
 <p>此升級流程可確保順利遷移至新架構。有關架構變更的更多資訊，請參閱《<a href="/docs/zh-hant/v2.6.x/architecture_overview.md">Milvus 架構概覽</a>》。</p>
-<h3 id="Requirements" class="common-anchor-header">系統需求<button data-href="#Requirements" class="anchor-icon" translate="no">
+<h3 id="Requirements" class="common-anchor-header">需求<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -88,9 +88,9 @@ title: 使用 Helm Chart 升級 Milvus 獨立部署
 <li>若您目前正在運行 v2.6.0-rc1 且需要保留資料，請參閱<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">此社群指南</a>以獲取遷移協助。</li>
 <li>在升級至 v2.6.17 之前，您<strong>必須先</strong>升級至 v2.5.16 或更新版本。</li>
 </ul>
-<p><strong>訊息佇列限制</strong>：升級至 Milvus v2.6.17 時，您必須維持當前的訊息佇列選擇。升級過程中不支援在不同的訊息佇列系統之間切換。未來版本將支援變更訊息佇列系統。</p>
+<p><strong>訊息佇列限制</strong>：升級至 Milvus v2.6.17 時，您必須維持當前的訊息佇列選項。升級過程中不支援在不同的訊息佇列系統之間切換。未來版本將支援變更訊息佇列系統。</p>
 <div class="alert note">
-自 Milvus Helm 圖表版本 4.2.21 起，我們已將 pulsar-v3.x 圖表引入作為依賴項。為確保向後相容性，請將您的 Helm 升級至 v3.14 或更高版本，並確保在每次使用 `<code translate="no">helm upgrade</code>` 時，務必添加 `<code translate="no">--reset-then-reuse-values</code> ` 選項。
+自 Milvus Helm 圖表版本 4.2.21 起，我們已將 pulsar-v3.x 圖表引入作為依賴項。為確保向後相容性，請將您的 Helm 升級至 v3.14 或更高版本，並務必在每次使用 `<code translate="no">helm upgrade</code>` 時添加 `<code translate="no">--reset-then-reuse-values</code> ` 選項。
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">升級流程<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"

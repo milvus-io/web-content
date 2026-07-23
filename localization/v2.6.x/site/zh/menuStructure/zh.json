@@ -12,7 +12,7 @@
         "children": []
       },
       {
-        "label": "Milvus 领养者",
+        "label": "Milvus 采用者",
         "id": "milvus_adopters.md",
         "order": 1,
         "children": []
@@ -328,7 +328,7 @@
             "children": []
           },
           {
-            "label": "修改 Collection",
+            "label": "修改Collection",
             "id": "modify-collection.md",
             "order": 4,
             "children": []
@@ -1153,7 +1153,7 @@
                 "children": []
               },
               {
-                "label": "RRF 排名器",
+                "label": "RRF 排名系统",
                 "id": "rrf-ranker.md",
                 "order": 1,
                 "children": []
@@ -1165,7 +1165,7 @@
                 "children": []
               },
               {
-                "label": "衰减排名器",
+                "label": "衰减排名榜",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -1203,7 +1203,7 @@
                 ]
               },
               {
-                "label": "模型排名器",
+                "label": "模型排名榜",
                 "id": "model-ranker",
                 "order": 4,
                 "isMenu": true,
@@ -1389,7 +1389,7 @@
         "children": []
       },
       {
-        "label": "Claude 代码的 MCP 服务器",
+        "label": "Claude Code 的 MCP 服务器",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -1590,7 +1590,7 @@
                 "children": []
               },
               {
-                "label": "元数据存储",
+                "label": "元存储",
                 "id": "deploy_etcd.md",
                 "order": 1,
                 "children": []
@@ -1616,7 +1616,7 @@
                 "children": []
               },
               {
-                "label": "元数据存储",
+                "label": "元存储",
                 "id": "meta_storage_operator.md",
                 "order": 1,
                 "children": []
@@ -1652,19 +1652,19 @@
         ]
       },
       {
-        "label": "扩展",
+        "label": "缩放",
         "id": "scaling",
         "order": 4,
         "isMenu": true,
         "children": [
           {
-            "label": "扩展集群",
+            "label": "规模集群",
             "id": "scaleout.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "独立版",
+            "label": "独立秤",
             "id": "scale-standalone.md",
             "order": 1,
             "children": []
@@ -1676,7 +1676,7 @@
             "children": []
           },
           {
-            "label": "规模依赖性",
+            "label": "规模依赖关系",
             "id": "scale-dependencies.md",
             "order": 3,
             "children": []
@@ -1703,7 +1703,7 @@
         ]
       },
       {
-        "label": "监控、警报和日志",
+        "label": "监控、警报与日志",
         "id": "monitor_alert_log",
         "order": 8,
         "isMenu": true,
@@ -1897,7 +1897,7 @@
             "children": []
           },
           {
-            "label": "Milvus Standalone 独立式交换机 MQ 型",
+            "label": "Milvus Standalone 独立交换机 MQ 型",
             "id": "switch_milvus_standalone_mq_type-operator.md",
             "order": 1,
             "children": []
@@ -1920,7 +1920,7 @@
         "children": []
       },
       {
-        "label": "Milvus 备份",
+        "label": "Milvus Backup",
         "id": "milvus_backup",
         "order": 1,
         "children": [
@@ -1955,13 +1955,13 @@
                 "children": []
               },
               {
-                "label": "在同一个存储桶内迁移实例",
+                "label": "在同一个存储桶内进行实例间迁移",
                 "id": "shared-bucket-backup-and-restore.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "在不同存储桶的实例之间迁移",
+                "label": "在不同存储桶之间的实例之间进行迁移",
                 "id": "cross-bucket-backup-and-restore.md",
                 "order": 2,
                 "children": []
@@ -2387,7 +2387,7 @@
             ]
           },
           {
-            "label": "Kotaemon",
+            "label": "小太右卫门",
             "id": "kotaemon_with_milvus.md",
             "order": 5,
             "children": []

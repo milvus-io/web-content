@@ -86,14 +86,14 @@ title: Upgrade von Milvus Standalone mit Docker Compose
 <p><strong>Kompatibilitätsanforderungen:</strong></p>
 <ul>
 <li>Milvus v2.6.0-rc1 ist <strong>nicht</strong> mit v2.6.17 <strong>kompatibel</strong>. Direkte Upgrades von Release-Kandidaten werden nicht unterstützt.</li>
-<li>Wenn Sie derzeit v2.6.0-rc1 verwenden und Ihre Daten erhalten möchten, finden Sie in <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">diesem Community-Leitfaden</a> Hilfe zur Migration.</li>
+<li>Wenn Sie derzeit v2.6.0-rc1 verwenden und Ihre Daten beibehalten möchten, finden Sie in <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">diesem Community-Leitfaden</a> Hilfe zur Migration.</li>
 <li>Sie <strong>müssen</strong> zunächst auf Version 2.5.16 oder höher aktualisieren, bevor Sie ein Upgrade auf Version 2.6.17 durchführen können.</li>
 </ul>
-<p><strong>Einschränkungen bei der Nachrichtenwarteschlange</strong>: Beim Upgrade auf Milvus v2.6.17 müssen Sie Ihre derzeitige Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</p>
+<p><strong>Einschränkungen bei den Nachrichtenwarteschlangen</strong>: Beim Upgrade auf Milvus v2.6.17 müssen Sie Ihre derzeitige Auswahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</p>
 <div class="alter note">
 <p>Aus Sicherheitsgründen aktualisiert Milvus mit der Veröffentlichung von v2.6.17 sein MinIO auf RELEASE.2024-12-18T13-15-44Z.</p>
 </div>
-<h2 id="Upgrade-process" class="common-anchor-header">Upgrade-Vorgehensweise<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
+<h2 id="Upgrade-process" class="common-anchor-header">Upgrade-Vorgang<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -157,7 +157,7 @@ docker compose up -d
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Sobald v2.5.16 erfolgreich läuft, führen Sie das Upgrade auf v2.6.17 durch:</p>
+    </button></h3><p>Sobald Version 2.5.16 erfolgreich läuft, führen Sie das Upgrade auf Version 2.6.17 durch:</p>
 <ol>
 <li><p>Bearbeiten Sie Ihre vorhandene Datei „ <code translate="no">docker-compose.yaml</code> “ und aktualisieren Sie sowohl den Milvus- als auch den MinIO-Image-Tag:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>

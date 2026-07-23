@@ -25,7 +25,7 @@ summary: >-
 <p><strong>Voraussetzung:</strong> Die Funktion „MQ wechseln“ ist <strong>ab Milvus 3.0</strong> verfügbar. Aktualisieren Sie Ihre Milvus-Instanz auf Milvus 3.0 oder <strong>höher</strong>, bevor Sie beginnen – die Funktion ist in früheren Versionen nicht verfügbar.</p>
 </div>
 <div class="alert warning">
-<p>Das Umschalten der Nachrichtenwarteschlange ist ein <strong>risikoreicher Vorgang</strong>. Wählen Sie den Abschnitt aus, der <strong>Ihrer</strong> Bereitstellungsmethode entspricht – <strong>„Mit Helm“</strong> oder <strong>„Mit Milvus Operator“</strong> – und befolgen Sie die Anweisungen von oben bis unten. Mischen Sie keine Helm- und Operator-Befehle.</p>
+<p>Das Umschalten der Nachrichtenwarteschlange ist ein <strong>risikoreicher Vorgang</strong>. Wählen Sie den Abschnitt aus, der <strong>Ihrer</strong> Bereitstellungsmethode entspricht – <strong>„Mit Helm“</strong> oder <strong>„Mit Milvus Operator“</strong> – und befolgen Sie die Anweisungen von oben nach unten. Mischen Sie keine Helm- und Operator-Befehle.</p>
 </div>
 <h2 id="With-Helm" class="common-anchor-header">Mit Helm<button data-href="#With-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -57,7 +57,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><strong>Schritt 1: Überprüfen Sie, ob die Milvus-Instanz läuft.</strong> Stellen Sie sicher, dass Ihr Milvus-Cluster ordnungsgemäß funktioniert – beispielsweise indem Sie eine Testkollektion erstellen, Daten einfügen und eine Abfrage ausführen.</p>
+    </button></h3><p><strong>Schritt 1: Überprüfen Sie, ob die Milvus-Instanz läuft.</strong> Stellen Sie sicher, dass Ihr Milvus-Cluster ordnungsgemäß funktioniert – beispielsweise, indem Sie eine Testkollektion erstellen, Daten einfügen und eine Abfrage ausführen.</p>
 <p><strong>Schritt 2: Führen Sie den MQ-Wechsel durch.</strong> Stellen Sie die MixCoord-Verwaltungsschnittstelle bereit und rufen Sie dann die Switch-API auf:</p>
 <pre><code translate="no" class="language-shell">kubectl port-forward --address 0.0.0.0 service/my-release-milvus-mixcoord 29091:9091
 <button class="copy-code-btn"></button></code></pre>
@@ -130,9 +130,9 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <p><strong>Schritt 4: Überprüfen Sie, ob der Wechsel abgeschlossen ist.</strong></p>
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
-<p>Bei einem erfolgreichen Wechsel wird Folgendes protokolliert: „ <code translate="no">[mqTypeValue=pulsar]</code> “.</p>
+<p>Bei einer erfolgreichen Umstellung wird Folgendes protokolliert: „ <code translate="no">[mqTypeValue=pulsar]</code> “.</p>
 <p><strong>Schritt 5: (Optional) Woodpecker-Daten bereinigen.</strong> Löschen Sie die Woodpecker-Daten auf MinIO/S3 (unter „ <code translate="no">&lt;rootPath&gt;/wp/...</code> “, typischerweise „ <code translate="no">files/wp/...</code> “) sowie die Woodpecker-Metadaten in etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). Wenn Sie später wieder zu Woodpecker zurückwechseln möchten, bereinigen Sie diese Dateien zunächst.</p>
-<h2 id="With-Milvus-Operator" class="common-anchor-header">Mit dem Milvus-Operator<button data-href="#With-Milvus-Operator" class="anchor-icon" translate="no">
+<h2 id="With-Milvus-Operator" class="common-anchor-header">Mit dem Milvus Operator<button data-href="#With-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -163,7 +163,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>Schritt 1: Überprüfen Sie, ob die Milvus-Instanz läuft.</strong></p>
-<p><strong>Schritt 2: Führen Sie den MQ-Wechsel durch.</strong> Da der MixCoord-Dienst nicht nach außen zugänglich ist, führen Sie die Switch-API aus dem MixCoord-Pod heraus aus:</p>
+<p><strong>Schritt 2: Führen Sie den MQ-Wechsel durch.</strong> Da der MixCoord-Dienst nicht öffentlich zugänglich ist, führen Sie die Switch-API aus dem MixCoord-Pod heraus aus:</p>
 <pre><code translate="no" class="language-shell">kubectl exec -it &lt;mixcoord-pod&gt; -- \
   curl -X POST http://localhost:9091/management/wal/alter \
   -H &quot;Content-Type: application/json&quot; \
@@ -232,14 +232,14 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <p>Warten Sie, bis alle Pods bereit sind, und überprüfen Sie anschließend, ob die Pulsar-Zugriffskonfiguration in die Milvus-Konfiguration übernommen wurde.</p>
 <p><strong>Schritt 3: Führen Sie den MQ-Wechsel durch.</strong></p>
 <div class="alert note">
-<p>Stellen Sie sicher, dass der Ziel-Pulsar keine Milvus-Themen aus einer früheren Konfiguration enthält. Wenn dies Ihr erster Wechsel zu Pulsar ist, überspringen Sie diesen Hinweis; andernfalls bereinigen Sie zunächst verbleibende Milvus-Themen mit denselben Namen.</p>
+<p>Stellen Sie sicher, dass das Ziel-Pulsar keine Milvus-Themen aus einer früheren Konfiguration enthält. Wenn dies Ihr erster Wechsel zu Pulsar ist, überspringen Sie diesen Hinweis; andernfalls bereinigen Sie zunächst verbleibende Milvus-Themen mit denselben Namen.</p>
 </div>
 <pre><code translate="no" class="language-shell">kubectl exec -it &lt;mixcoord-pod&gt; -- \
   curl -X POST http://localhost:9091/management/wal/alter \
   -H &quot;Content-Type: application/json&quot; \
   -d &#x27;{&quot;target_wal_name&quot;: &quot;pulsar&quot;}&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Schritt 4: Überprüfen Sie, ob der Wechsel abgeschlossen ist.</strong></p>
+<p><strong>Schritt 4: Überprüfen Sie, ob die Umstellung abgeschlossen ist.</strong></p>
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>Bei einer erfolgreichen Umstellung wird Folgendes protokolliert: „ <code translate="no">[mqTypeValue=pulsar]</code> “.</p>

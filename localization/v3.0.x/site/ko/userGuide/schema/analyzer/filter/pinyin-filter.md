@@ -19,8 +19,8 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>중국어 텍스트 검색에서는 사용자가 색인된 텍스트에 표시된 대로 한자를 정확히 입력해야 하는 경우가 많습니다. 이름 조회, 자동 완성 및 입력 시 실시간 검색과 같은 워크플로우에서 사용자는 한자 대신 병음을 입력하는 경우가 많습니다. 예를 들어, 사용자는 <code translate="no">足球</code> 을 검색하기 위해 <code translate="no">zuqiu</code> 을 입력할 수 있습니다. <code translate="no">pinyin</code> 필터는 분석기 출력에 병음 토큰을 추가하여, 별도의 병음 필드를 유지 관리하지 않고도 중국어 텍스트가 병음 입력과 일치할 수 있도록 합니다.</p>
-<p><code translate="no">pinyin</code> 필터는 일반적으로 중국어 텍스트를 처리하는 <a href="/docs/ko/jieba-tokenizer.md">Jieba</a> 토큰화기와 함께 사용됩니다. 이 필터는 사용자 정의 분석기 필터 파이프라인에서 작동하며, 동일한 중국어 토큰에 대해 여러 형태의 병음 토큰을 출력할 수 있습니다.</p>
+    </button></h1><p>중국어 텍스트 검색에서는 사용자가 색인된 텍스트에 표시된 그대로 한자를 정확히 입력해야 하는 경우가 많습니다. 이름 조회, 자동 완성 및 입력 시 실시간 검색과 같은 워크플로우에서 사용자는 한자 대신 병음을 입력하는 경우가 많습니다. 예를 들어, 사용자는 <code translate="no">足球</code> 을 검색하기 위해 <code translate="no">zuqiu</code> 을 입력할 수 있습니다. <code translate="no">pinyin</code> 필터는 분석기 출력에 병음 토큰을 추가하여, 별도의 병음 필드를 유지 관리하지 않고도 중국어 텍스트가 병음 입력과 일치할 수 있도록 합니다.</p>
+<p><code translate="no">pinyin</code> 필터는 일반적으로 중국어 텍스트용 <a href="/docs/ko/jieba-tokenizer.md">Jieba</a> 토큰화기와 함께 사용됩니다. 이 필터는 사용자 정의 분석기 필터 파이프라인에서 작동하며, 동일한 중국어 토큰에 대해 여러 형태의 병음 토큰을 출력할 수 있습니다.</p>
 <h2 id="Configuration" class="common-anchor-header">구성<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,7 +36,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>기본 옵션을 사용하려면 <code translate="no">analyzer_params</code> 파일의 <code translate="no">filter</code> 섹션에 <code translate="no">&quot;pinyin&quot;</code> 를 지정하십시오.</p>
+    </button></h2><p>기본 옵션을 사용하려면 <code translate="no">analyzer_params</code> 파일의 <code translate="no">filter</code> 섹션에 <code translate="no">&quot;pinyin&quot;</code> 을 지정하십시오.</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
 <span class="highlighted-wrapper-line">    <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;pinyin&quot;</span>],</span>
@@ -169,7 +169,7 @@ result = client.run_analyzer(sample_text, analyzer_params)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>중국어 용어를 해당 병음 형태의 초성과 일치시켜야 할 때는 ‘ <code translate="no">keep_separate_first_letter</code> ’를 활성화하십시오.</p>
+    </button></h3><p>중국어 용어가 해당 병음 형태의 초성과 일치해야 할 경우 ‘ <code translate="no">keep_separate_first_letter</code> ’를 활성화하십시오.</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [

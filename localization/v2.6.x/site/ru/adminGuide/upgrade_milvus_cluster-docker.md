@@ -100,7 +100,7 @@ docker compose up -d
 <li><p>Остановите все компоненты Milvus.</p>
 <pre><code translate="no">docker stop <span class="hljs-tag">&lt;<span class="hljs-name">milvus-component-docker-container-name</span>&gt;</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Подготовьте конфигурационный файл <code translate="no">migrate.yaml</code> для миграции метаданных.</p>
+<li><p>Подготовьте файл конфигурации <code translate="no">migrate.yaml</code> для миграции метаданных.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># migration.yaml</span>
 <span class="hljs-attr">cmd:</span>
   <span class="hljs-comment"># Option: run/backup/rollback</span>

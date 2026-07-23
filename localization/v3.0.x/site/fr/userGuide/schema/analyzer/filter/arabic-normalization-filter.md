@@ -3,7 +3,7 @@ id: arabic-normalization-filter.md
 title: Normalisation de l'arabeCompatible with Milvus 3.0.0+
 summary: >-
   Le filtre « arabic_normalization » normalise les variantes des lettres arabes
-  et supprime les signes diacritiques arabes ainsi que les tatweel.
+  et supprime les signes diacritiques arabes ainsi que le tatweel.
 beta: Milvus 3.0.0+
 ---
 <h1 id="Arabic-Normalization" class="common-anchor-header">Normalisation de l'arabe<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Arabic-Normalization" class="anchor-icon" translate="no">
@@ -21,7 +21,7 @@ beta: Milvus 3.0.0+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Le filtre « <code translate="no">arabic_normalization</code> » est un filtre de tokens intégré destiné au texte arabe. Il normalise les variantes de lettres spécifiques à l’arabe et supprime les marques facultatives qui peuvent faire apparaître des termes arabes équivalents comme différents lors de l’analyse de texte.</p>
+    </button></h1><p>Le filtre « <code translate="no">arabic_normalization</code> » est un filtre de tokens intégré destiné au texte arabe. Il normalise les variantes de lettres spécifiques à l'arabe et supprime les marques facultatives qui peuvent faire apparaître des termes arabes équivalents comme différents lors de l'analyse de texte.</p>
 <h2 id="Configuration" class="common-anchor-header">Configuration<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,7 +46,7 @@ beta: Milvus 3.0.0+
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;arabic_normalization&quot;</span>],
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Le filtre <code translate="no">arabic_normalization</code> ne comporte aucun paramètre configurable.</p>
+<p>Le filtre « <code translate="no">arabic_normalization</code> » ne comporte aucun paramètre configurable.</p>
 <p>Le filtre applique les transformations suivantes :</p>
 <table>
    <tr>
@@ -80,7 +80,7 @@ beta: Milvus 3.0.0+
      <td><p>Supprimé</p></td>
    </tr>
 </table>
-<p>Le filtre agit sur les tokens générés par le tokeniseur. La configuration ci-dessus est volontairement un exemple d'analyseur personnalisé et n'inclut pas l'intégralité du pipeline de traitement de l'arabe.</p>
+<p>Le filtre fonctionne sur les tokens générés par le tokeniseur. La configuration ci-dessus est volontairement un exemple d'analyseur personnalisé et n'inclut pas l'intégralité du pipeline de traitement de l'arabe.</p>
 <h2 id="Examples" class="common-anchor-header">Exemples<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

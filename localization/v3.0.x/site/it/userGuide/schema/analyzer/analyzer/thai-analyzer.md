@@ -1,12 +1,12 @@
 ---
 id: thai-analyzer.md
-title: ThaiCompatible with Milvus 3.0.0+
+title: ThailandeseCompatible with Milvus 3.0.0+
 summary: >-
   L'analizzatore thailandese integrato suddivide il testo thailandese in parole,
   normalizza le cifre decimali Unicode ed elimina le parole vuote thailandesi.
 beta: Milvus 3.0.0+
 ---
-<h1 id="Thai" class="common-anchor-header">Thai<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Thai" class="anchor-icon" translate="no">
+<h1 id="Thai" class="common-anchor-header">Thailandese<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Thai" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -65,7 +65,7 @@ beta: Milvus 3.0.0+
 }
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus applica le parole di stop personalizzate in aggiunta al dizionario <code translate="no">_thai_</code> integrato.</p>
-<p>L'analizzatore <code translate="no">thai</code> integrato è equivalente alla seguente configurazione dell'analizzatore personalizzato:</p>
+<p>L'analizzatore " <code translate="no">thai</code> " integrato è equivalente alla seguente configurazione dell'analizzatore personalizzato:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;thai&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [
@@ -81,12 +81,12 @@ beta: Milvus 3.0.0+
 <p>Questo analizzatore applica le seguenti fasi di elaborazione:</p>
 <ul>
 <li><strong>Tokenizzazione</strong>: utilizza il <a href="/docs/it/thai-tokenizer.md"><code translate="no">thai</code></a> tokenizer per segmentare il testo thailandese in token di parole senza fare affidamento sugli spazi bianchi. Il tokenizer filtra gli spazi bianchi e i segmenti composti esclusivamente da segni di punteggiatura.</li>
-<li><strong>Normalizzazione delle maiuscole/minuscole</strong>: utilizza il filtro <code translate="no">lowercase</code>, che agisce sulle lettere latine presenti in testi misti in thailandese e inglese.</li>
-<li><strong>Normalizzazione delle cifre</strong>: utilizza il filtro <code translate="no">decimaldigit</code> per convertire le cifre in thailandese e altre cifre decimali Unicode in cifre ASCII.</li>
+<li><strong>Normalizzazione maiuscole/minuscole</strong>: utilizza il filtro <code translate="no">lowercase</code>, che agisce sulle lettere latine presenti in testi misti in thailandese e inglese.</li>
+<li><strong>Normalizzazione delle cifre</strong>: utilizza il filtro <code translate="no">decimaldigit</code> per convertire le cifre thailandesi e altre cifre decimali Unicode in cifre ASCII.</li>
 <li><strong>Rimozione delle parole vuote</strong>: utilizza il filtro <code translate="no">stop</code> con il dizionario integrato <code translate="no">_thai_</code>.</li>
 <li><strong>Nessuno stemming</strong>: l’analizzatore integrato “ <code translate="no">thai</code> ” non applica il filtro “ <code translate="no">stemmer</code> ”.</li>
 </ul>
-<p>Dopo aver definito l'<code translate="no">analyzer_params</code>, è possibile applicare l'analizzatore a un campo <code translate="no">VARCHAR</code> durante la definizione di uno schema di raccolta. Per ulteriori dettagli, consultare <a href="/docs/it/analyzer-overview.md#Example-use">Esempio di utilizzo</a>.</p>
+<p>Dopo aver definito <code translate="no">analyzer_params</code>, è possibile applicare l'analizzatore a un campo <code translate="no">VARCHAR</code> durante la definizione di uno schema di raccolta. Per ulteriori dettagli, consultare <a href="/docs/it/analyzer-overview.md#Example-use">Esempio di utilizzo</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Esempi<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

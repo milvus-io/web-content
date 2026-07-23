@@ -39,7 +39,7 @@ title: Importation en masse dans le cadre d'une réplication CDC
         ></path>
       </svg>
     </button></h2><p>Une importation en masse normale est validée automatiquement à la fin de la tâche d’importation, ce qui rend les données importées immédiatement visibles. Dans une topologie de réplication CDC, ce comportement n’est pas autorisé car les clusters principal et de secours doivent rendre les données importées visibles au même moment logique.</p>
-<p>Exécutez plutôt l’importation en mode de validation en deux phases en définissant l’option « <code translate="no">auto_commit=false</code> » :</p>
+<p>Exécutez plutôt l’importation en mode de validation en deux phases en définissant ` <code translate="no">auto_commit=false</code>` :</p>
 <ol>
 <li><p><strong>Phase d’importation</strong>: Milvus charge les données sur le cluster principal et réplique l’importation vers le cluster de secours, mais les données importées restent invisibles. La tâche d’importation s’arrête à l’état « <code translate="no">Uncommitted</code> » et reste en attente.</p></li>
 <li><p><strong>Phase de validation</strong>: vous validez explicitement la tâche d’importation sur le cluster principal. La validation est répliquée vers le cluster de secours sous la forme d’une seule barrière ordonnée, de sorte que les deux clusters rendent les données importées visibles au même point logique.</p></li>

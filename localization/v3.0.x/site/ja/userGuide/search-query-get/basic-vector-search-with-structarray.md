@@ -20,7 +20,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>このページでは、StructArrayフィールド内のベクトルサブフィールドに対してベクトル検索を実行できます。StructArrayは、各エンティティに格納された埋め込みリストを評価する「EmbeddingList検索」と、各Struct要素を個別に検索する「要素レベル検索」という2つの基本的なベクトル検索モードをサポートしています。</p>
-<p>このページでは、「<a href="/docs/ja/create-structarray-field.md">StructArrayフィールドの作成</a>」にある<code translate="no">tech_articles</code> コレクションを使用しています。このコレクションには、<code translate="no">chunks</code> という名前のStructArrayフィールドが含まれています。各チャンクには、テキスト、スカラーメタデータ、EmbeddingList検索用のインデックスを持つ<code translate="no">emb_list_vector</code> という名前のベクトルサブフィールド、および要素レベル検索用のインデックスを持つ<code translate="no">emb</code> という名前のベクトルサブフィールドが含まれています。</p>
+<p>このページでは、「<a href="/docs/ja/create-structarray-field.md">StructArrayフィールドの作成</a>」にある<code translate="no">tech_articles</code> コレクションを使用します。このコレクションには、<code translate="no">chunks</code> という名前のStructArrayフィールドが含まれています。各チャンクには、テキスト、スカラーメタデータ、EmbeddingList検索用のインデックスを持つ<code translate="no">emb_list_vector</code> という名前のベクトルサブフィールド、および要素レベル検索用のインデックスを持つ<code translate="no">emb</code> という名前のベクトルサブフィールドが含まれています。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">開始する前に<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,9 +42,9 @@ summary: >-
 <tr><th>要件</th><th>準備場所</th></tr>
 </thead>
 <tbody>
-<tr><td>開始する前に<code translate="no">chunks</code> などの StructArray フィールドを作成してください。</td><td><a href="/docs/ja/create-structarray-field.md">StructArrayフィールドの作成</a></td></tr>
+<tr><td><code translate="no">chunks</code> などの StructArray フィールドを作成します。</td><td><a href="/docs/ja/create-structarray-field.md">StructArrayフィールドの作成</a></td></tr>
 <tr><td><code translate="no">chunks</code> フィールドにStructオブジェクトが含まれるエンティティを挿入します。</td><td><a href="/docs/ja/insert-data-into-structarray-fields.md">StructArrayフィールドへのデータの挿入</a></td></tr>
-<tr><td><code translate="no">chunks[emb_list_vector]</code> に対して、EmbeddingList 検索用の<code translate="no">MAX_SIM*</code> インデックスを作成します。</td><td><a href="/docs/ja/index-structarray-fields.md">StructArrayフィールドのインデックス作成</a></td></tr>
+<tr><td>EmbeddingList検索用に、<code translate="no">chunks[emb_list_vector]</code> に<code translate="no">MAX_SIM*</code> インデックスを作成します。</td><td><a href="/docs/ja/index-structarray-fields.md">StructArrayフィールドのインデックス作成</a></td></tr>
 <tr><td>要素レベルの検索用に、<code translate="no">chunks[emb]</code> に対して通常のベクトルメトリックインデックスを作成します。</td><td><a href="/docs/ja/index-structarray-fields.md">StructArrayフィールドのインデックス作成</a></td></tr>
 </tbody>
 </table>
@@ -74,11 +74,11 @@ summary: >-
 <tbody>
 <tr><td>対象サブフィールド</td><td><code translate="no">chunks[emb_list_vector]</code></td><td><code translate="no">chunks[emb]</code></td></tr>
 <tr><td>クエリデータ</td><td>1つ以上のベクトルを含む埋め込みリスト。</td><td>通常のベクトル。</td></tr>
-<tr><td>メトリックファミリー</td><td><code translate="no">MAX_SIM*</code>（例：<code translate="no">MAX_SIM_COSINE</code> ）。</td><td><code translate="no">COSINE</code> 、<code translate="no">IP</code> 、<code translate="no">L2</code> などの通常のベクトルメトリック。</td></tr>
+<tr><td>メトリックファミリー</td><td><code translate="no">MAX_SIM*</code>、例えば<code translate="no">MAX_SIM_COSINE</code> など。</td><td><code translate="no">COSINE</code> 、<code translate="no">IP</code> 、<code translate="no">L2</code> などの通常のベクトルメトリック。</td></tr>
 <tr><td>1つのヒットが表すもの</td><td>StructArray ベクトルサブフィールドがクエリの埋め込みリストと類似している、一致したエンティティ。</td><td>StructArray フィールド内の、一致した Struct 要素。</td></tr>
 <tr><td>結果の粒度</td><td>エンティティレベル。</td><td>Struct 要素レベル。</td></tr>
-<tr><td>オフセット</td><td>該当なし。</td><td>返される際、一致した構造体要素の 0 を基点とする位置を識別します。</td></tr>
-<tr><td>一般的な使用例</td><td>ColBERT、ColPali、およびその他の後期相互作用型検索パターン。</td><td>チャンクレベル、パッセージレベル、クリップレベル、パッチレベル、またはファクトレベルの検索。</td></tr>
+<tr><td>オフセット</td><td>該当なし。</td><td>返される際、一致した Struct 要素の 0 を基点とする位置を識別します。</td></tr>
+<tr><td>一般的な使用例</td><td>ColBERT、ColPali、およびその他の後期相互作用型検索パターン。</td><td>チャンクレベル、パッセージレベル、クリップレベル、パッチレベル、またはファクトレベルのリトリーブ。</td></tr>
 </tbody>
 </table>
 <h2 id="Run-EmbeddingList-search" class="common-anchor-header">EmbeddingList 検索の実行<button data-href="#Run-EmbeddingList-search" class="anchor-icon" translate="no">
@@ -146,7 +146,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>各Struct要素が個別にベクトル検索の対象となる場合は、要素レベルの検索を使用します。クエリは通常のベクトルであり、対象となるベクトルサブフィールドには通常のベクトルメトリックによるインデックスが付けられている必要があります。</p>
+    </button></h2><p>各Struct要素が個別にベクトル検索に参加する必要がある場合は、要素レベルの検索を使用します。クエリは通常のベクトルであり、対象となるベクトルサブフィールドには通常のベクトルメトリックによるインデックスが付けられている必要があります。</p>
 <pre><code translate="no" class="language-python">query_vector = [<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>]
 
 results = client.search(
@@ -217,7 +217,7 @@ results = client.search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>必要なサブフィールドパス構文<code translate="no">chunks[emb]</code> の代わりに、<code translate="no">chunks.emb</code> を使用してしまう。</p></li>
+<li><p>必須のサブフィールドパス構文 `<code translate="no">chunks[emb]</code>` の代わりに、<code translate="no">chunks.emb</code> を使用してしまう。</p></li>
 <li><p>通常のベクトルメトリックでインデックス付けされたベクトルサブフィールドに対して、EmbeddingList クエリを使用すること。</p></li>
 <li><p><code translate="no">MAX_SIM*</code> メトリックでインデックス化されたベクトルサブフィールドに対して、通常のベクトルクエリを使用すること。</p></li>
 <li><p>要素レベルの検索（<code translate="no">limit</code> ）が、その数だけの一意な親エンティティを返すことを期待している。実際には、要素レベルのヒットが返されます。</p></li>

@@ -60,7 +60,7 @@ title: Docker Compose를 사용하여 Milvus 독립형 버전 업그레이드
 <li><strong>새로운 구성 요소</strong>: 향상된 데이터 처리를 위한 스트리밍 노드 도입</li>
 <li><strong>구성 요소 제거</strong>: <code translate="no">indexNode</code> 이 제거되고 통합되었습니다</li>
 </ul>
-<p>이 업그레이드 프로세스는 새로운 아키텍처로의 원활한 마이그레이션을 보장합니다. 아키텍처 변경에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/architecture_overview.md">Milvus 아키텍처 개요를</a> 참조하십시오.</p>
+<p>이 업그레이드 프로세스는 새로운 아키텍처로의 원활한 마이그레이션을 보장합니다. 아키텍처 변경 사항에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/architecture_overview.md">Milvus 아키텍처 개요를</a> 참조하십시오.</p>
 <h3 id="Requirements" class="common-anchor-header">요구 사항<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -132,7 +132,7 @@ title: Docker Compose를 사용하여 Milvus 독립형 버전 업그레이드
   <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.16</span>
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>v2.5.16으로 업그레이드를 적용합니다:</p>
+<li><p>v2.5.16으로 업그레이드를 적용하십시오:</p>
 <pre><code translate="no" class="language-bash">docker compose down
 docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
@@ -188,7 +188,7 @@ docker compose up -d
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>독립형 배포 환경에서 새 버전이 실행 중인지 확인하십시오:</p>
+    </button></h2><p>독립형 배포 환경이 새 버전으로 실행 중인지 확인하십시오:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check container status</span>
 docker compose ps
 
@@ -215,7 +215,7 @@ docker compose logs standalone | grep <span class="hljs-string">&quot;version&qu
 <ul>
 <li><a href="/docs/ko/v2.6.x/scaleout.md">Milvus 클러스터 확장하기</a></li>
 </ul></li>
-<li>클라우드에 클러스터를 배포할 준비가 되셨다면:
+<li>클라우드로 클러스터를 배포할 준비가 되셨다면:
 <ul>
 <li><a href="/docs/ko/v2.6.x/eks.md">Terraform을 사용하여 Amazon EKS에 Milvus를 배포하는</a> 방법 알아보기</li>
 <li><a href="/docs/ko/v2.6.x/gcp.md">Kubernetes를 사용하여 GCP에 Milvus 클러스터를 배포하는</a> 방법 알아보기</li>

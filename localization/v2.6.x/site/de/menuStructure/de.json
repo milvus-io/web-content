@@ -12,7 +12,7 @@
         "children": []
       },
       {
-        "label": "Milvus-Anwender",
+        "label": "Milvus-Nutzer",
         "id": "milvus_adopters.md",
         "order": 1,
         "children": []
@@ -249,7 +249,7 @@
         ]
       },
       {
-        "label": "Bitset",
+        "label": "Bitsatz",
         "id": "bitset.md",
         "order": 1,
         "children": []
@@ -285,7 +285,7 @@
         "children": []
       },
       {
-        "label": "Begriffsbestand",
+        "label": "Begriffsbestimmungen",
         "id": "glossary.md",
         "order": 9,
         "children": []
@@ -364,7 +364,7 @@
             "children": []
           },
           {
-            "label": "Abgabe der Sendungen",
+            "label": "Abgabe der Abholware",
             "id": "drop-collection.md",
             "order": 10,
             "children": []
@@ -436,7 +436,7 @@
                 "children": []
               },
               {
-                "label": "JSON-Aufspaltung",
+                "label": "JSON-Aufteilung",
                 "id": "json-shredding.md",
                 "order": 2,
                 "children": []
@@ -450,7 +450,7 @@
             "children": []
           },
           {
-            "label": "Array von Strukturen",
+            "label": "Array aus Strukturen",
             "id": "array-of-structs.md",
             "order": 9,
             "children": []
@@ -491,7 +491,7 @@
                 "children": []
               },
               {
-                "label": "Integrierte Analysegeräte",
+                "label": "Integrierte Analysatoren",
                 "id": "built-in-analyzers",
                 "order": 1,
                 "children": [
@@ -551,7 +551,7 @@
                     "children": []
                   },
                   {
-                    "label": "Sprachkennzeichnung",
+                    "label": "Sprachkennung",
                     "id": "language-identifier.md",
                     "order": 5,
                     "children": []
@@ -606,7 +606,7 @@
                     "children": []
                   },
                   {
-                    "label": "Entmischungsgerät",
+                    "label": "Entmischungsanlage",
                     "id": "decompounder-filter.md",
                     "order": 7,
                     "children": []
@@ -717,7 +717,7 @@
             "children": []
           },
           {
-            "label": "Gleitkommavektorindizes",
+            "label": "Gleitkomma-Vektorindizes",
             "id": "floating-vector-indexes",
             "order": 1,
             "isMenu": true,
@@ -823,7 +823,7 @@
             ]
           },
           {
-            "label": "Indizes für spärliche Vektoren",
+            "label": "Spärliche Vektorindizes",
             "id": "sparse-vector-indexes",
             "order": 3,
             "isMenu": true,
@@ -967,7 +967,7 @@
             "order": 7,
             "children": [
               {
-                "label": "Erläuterungen zur Filterung",
+                "label": "Erläuterung zur Filterung",
                 "id": "boolean.md",
                 "order": 0,
                 "children": []
@@ -1061,7 +1061,7 @@
         ]
       },
       {
-        "label": "Einbettungen und Neuordnung",
+        "label": "Einbettungen und Neurangfolge",
         "id": "embeddings-reranking",
         "order": 6,
         "isMenu": true,
@@ -1165,7 +1165,7 @@
                 "children": []
               },
               {
-                "label": "Verfall-Rangliste",
+                "label": "Verfalls-Ranking",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -1630,7 +1630,7 @@
             ]
           },
           {
-            "label": "Pulsar mit Milvus verwenden",
+            "label": "Verwenden Sie Pulsar mit Milvus",
             "id": "pulsar_dependencies",
             "order": 2,
             "isMenu": true,
@@ -1874,7 +1874,7 @@
         ]
       },
       {
-        "label": "Milvus WebUI",
+        "label": "Milvus-WebUI",
         "id": "milvus-webui.md",
         "order": "12",
         "children": []
@@ -1897,7 +1897,7 @@
             "children": []
           },
           {
-            "label": "Milvus Standalone-Switch, Typ MQ",
+            "label": "Milvus Standalone-Switch vom Typ MQ",
             "id": "switch_milvus_standalone_mq_type-operator.md",
             "order": 1,
             "children": []
@@ -2199,7 +2199,7 @@
             ]
           },
           {
-            "label": "Reranker",
+            "label": "Neubewertungen",
             "id": "rerankers",
             "order": 1,
             "isMenu": true,
@@ -2281,7 +2281,7 @@
                 "children": []
               },
               {
-                "label": "Text-Einbettung",
+                "label": "Texteinbettung",
                 "id": "langchain_milvus_dido.md",
                 "order": 2,
                 "children": []
@@ -2854,7 +2854,7 @@
         "children": []
       },
       {
-        "label": "Graph-RAG mit Milvus",
+        "label": "RAG-Diagramm mit Milvus",
         "id": "graph_rag_with_milvus.md",
         "order": 7,
         "children": []

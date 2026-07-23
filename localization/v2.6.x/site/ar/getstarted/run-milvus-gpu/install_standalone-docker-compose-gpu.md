@@ -21,7 +21,7 @@ title: تشغيل Milvus مع دعم وحدة معالجة الرسومات (GPU
         ></path>
       </svg>
     </button></h1><p>توضح هذه الصفحة كيفية تشغيل مثيل Milvus مع دعم GPU باستخدام Docker Compose.</p>
-<h2 id="Prerequisites" class="common-anchor-header">المتطلبات المسبقة<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+<h2 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,7 +37,7 @@ title: تشغيل Milvus مع دعم وحدة معالجة الرسومات (GPU
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="https://docs.docker.com/get-docker/">قم بتثبيت Docker</a>.</li>
+<li><a href="https://docs.docker.com/get-docker/">تثبيت Docker</a>.</li>
 <li><a href="/docs/ar/v2.6.x/prerequisite-gpu.md">تحقق من متطلبات الأجهزة والبرامج</a> قبل التثبيت.</li>
 </ul>
 <div class="alert note">
@@ -77,9 +77,9 @@ title: تشغيل Milvus مع دعم وحدة معالجة الرسومات (GPU
     </button></h3><p>قم بالتنزيل <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> وحفظه باسم docker-compose.yml يدويًّا، أو باستخدام الأمر التالي.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>تحتاج إلى إجراء بعض التغييرات على متغيرات البيئة الخاصة بالخدمة المستقلة في ملف YAML على النحو التالي:</p>
+<p>تحتاج إلى إجراء بعض التغييرات على متغيرات البيئة للخدمة المستقلة في ملف YAML على النحو التالي:</p>
 <ul>
-<li>لتخصيص جهاز GPU معين لـ Milvus، حدد موقع الحقل « <code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> » في تعريف الخدمة « <code translate="no">standalone</code> » واستبدل قيمته بمعرف جهاز GPU المطلوب. يمكنك استخدام أداة « <code translate="no">nvidia-smi</code> »، المضمنة في برامج تشغيل شاشات NVIDIA GPU، لتحديد معرف جهاز GPU. يدعم Milvus أجهزة GPU متعددة.</li>
+<li>لتخصيص جهاز GPU معين لـ Milvus، حدد موقع الحقل « <code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> » في تعريف الخدمة « <code translate="no">standalone</code> » واستبدل قيمته بمعرف GPU المطلوب. يمكنك استخدام أداة « <code translate="no">nvidia-smi</code> »، المضمنة في برامج تشغيل شاشات NVIDIA GPU، لتحديد معرف جهاز GPU. يدعم Milvus أجهزة GPU متعددة.</li>
 </ul>
 <p>تعيين جهاز GPU واحد لـ Milvus:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
@@ -229,7 +229,7 @@ docker start &lt;milvus_container_id&gt;
     </button></h2><p>بعد تثبيت Milvus في Docker، يمكنك:</p>
 <ul>
 <li><p>راجع «البدء السريع» ( <a href="/docs/ar/v2.6.x/quickstart.md">Quickstart</a> ) لمعرفة ما يمكن لـ Milvus القيام به.</p></li>
-<li><p>راجع <a href="/docs/ar/v2.6.x/milvus-webui.md">واجهة المستخدم على الويب لـ Milvus</a> لمعرفة المزيد عن مثيل Milvus.</p></li>
+<li><p>راجع <a href="/docs/ar/v2.6.x/milvus-webui.md">واجهة المستخدم على الويب لـ Milvus (Milvus WebUI</a> ) لمعرفة المزيد عن مثيل Milvus.</p></li>
 <li><p>تعلم العمليات الأساسية لـ Milvus:</p>
 <ul>
 <li><a href="/docs/ar/v2.6.x/manage_databases.md">إدارة قواعد البيانات</a></li>
@@ -237,7 +237,7 @@ docker start &lt;milvus_container_id&gt;
 <li><a href="/docs/ar/v2.6.x/manage-partitions.md">إدارة الأقسام</a></li>
 <li><a href="/docs/ar/v2.6.x/insert-update-delete.md">الإدراج والتحديث والحذف</a></li>
 <li><a href="/docs/ar/v2.6.x/single-vector-search.md">البحث أحادي المتجه</a></li>
-<li><a href="/docs/ar/v2.6.x/multi-vector-search.md">البحث المختلط</a></li>
+<li><a href="/docs/ar/v2.6.x/multi-vector-search.md">البحث الهجين</a></li>
 </ul></li>
 <li><p><a href="/docs/ar/v2.6.x/upgrade_milvus_cluster-helm.md">ترقية Milvus باستخدام Helm Chart</a>.</p></li>
 <li><p><a href="/docs/ar/v2.6.x/scaleout.md">توسيع نطاق مجموعة Milvus الخاصة بك</a>.</p></li>
@@ -248,7 +248,7 @@ docker start &lt;milvus_container_id&gt;
 <li><a href="/docs/ar/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
 <li><p>استكشف <a href="/docs/ar/v2.6.x/milvus-webui.md">Milvus WebUI،</a> وهي واجهة ويب سهلة الاستخدام لمراقبة وإدارة Milvus.</p></li>
-<li><p>استكشف <a href="/docs/ar/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>، وهي أداة مفتوحة المصدر لنسخ بيانات Milvus احتياطيًا.</p></li>
+<li><p>اكتشف <a href="/docs/ar/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>، وهي أداة مفتوحة المصدر لنسخ بيانات Milvus احتياطيًا.</p></li>
 <li><p>اكتشف <a href="/docs/ar/v2.6.x/birdwatcher_overview.md">Birdwatcher،</a> وهي أداة مفتوحة المصدر لتصحيح أخطاء Milvus وتحديثات التكوين الديناميكية.</p></li>
 <li><p>اكتشف <a href="https://github.com/zilliztech/attu">Attu،</a> وهي أداة واجهة مستخدم رسومية مفتوحة المصدر لإدارة Milvus بطريقة بديهية.</p></li>
 <li><p><a href="/docs/ar/v2.6.x/monitor.md">راقب Milvus باستخدام Prometheus</a>.</p></li>

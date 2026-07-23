@@ -2,8 +2,9 @@
 id: dashscope-ranker.md
 title: DashScope RankerCompatible with Milvus 2.6.x
 summary: >-
-  Questo argomento illustra come configurare e utilizzare i modelli di reranking
-  di DashScope, come ad esempio i modelli di reranking Qwen, in Milvus.
+  In questa sezione viene spiegato come configurare e utilizzare i modelli di
+  reranking di DashScope, come ad esempio i modelli di reranking Qwen, in
+  Milvus.
 beta: Milvus 2.6.x
 ---
 <h1 id="DashScope-Ranker" class="common-anchor-header">DashScope Ranker<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#DashScope-Ranker" class="anchor-icon" translate="no">
@@ -21,7 +22,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>DashScope Ranker consente a Milvus di richiamare i modelli di riordino di DashScope di Alibaba Cloud per riorganizzare i risultati di ricerca in base alla rilevanza semantica.</p>
+    </button></h1><p>DashScope Ranker consente a Milvus di richiamare i modelli di riclassificazione di Alibaba Cloud DashScope per riordinare i risultati di ricerca in base alla rilevanza semantica.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisiti<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +40,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>Prima di utilizzare DashScope Ranker, assicurati di disporre di:</p>
 <ul>
-<li><p>Una collezione Milvus con un campo " <code translate="no">VARCHAR</code> " contenente il testo da riorganizzare.</p></li>
+<li><p>Una collezione Milvus con un campo " <code translate="no">VARCHAR</code> " contenente il testo da riordinare.</p></li>
 <li><p>Una chiave API DashScope valida.</p></li>
 <li><p>Accesso a un modello di riclassificazione DashScope, come <code translate="no">gte-rerank-v2</code>.</p></li>
 </ul>
@@ -59,7 +60,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus deve conoscere la chiave API di DashScope prima di poter richiedere il riclassificatore a DashScope. È possibile configurare la chiave API in <code translate="no">milvus.yaml</code> o tramite una variabile d’ambiente.</p>
+    </button></h2><p>Milvus deve conoscere la chiave API di DashScope prima di poter richiedere il riclassamento a DashScope. È possibile configurare la chiave API in <code translate="no">milvus.yaml</code> o tramite una variabile d’ambiente.</p>
 <h3 id="Option-1-Configuration-file" class="common-anchor-header">Opzione 1: file di configurazione<button data-href="#Option-1-Configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -192,7 +193,7 @@ dashscope_ranker = Function(
    <tr>
      <td><p><code translate="no">queries</code></p></td>
      <td><p>Sì</p></td>
-     <td><p>Elenco delle stringhe di query utilizzate dal modello di riclassificazione per calcolare i punteggi di rilevanza. Il numero delle stringhe di query deve corrispondere al numero di query presenti nella richiesta di ricerca.</p></td>
+     <td><p>Elenco delle stringhe di query utilizzate dal modello di riclassificazione per calcolare i punteggi di rilevanza. Il numero di stringhe di query deve corrispondere al numero di query presenti nella richiesta di ricerca.</p></td>
      <td><p><code translate="no">["renewable energy developments"]</code></p></td>
    </tr>
    <tr>
@@ -226,7 +227,7 @@ dashscope_ranker = Function(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Per applicare DashScope Ranker a una ricerca vettoriale standard, passare la funzione del classificatore a <code translate="no">search()</code>.</p>
+    </button></h2><p>Per applicare DashScope Ranker a una ricerca vettoriale standard, passare la funzione del classificatore a ` <code translate="no">search()</code>`.</p>
 <pre><code translate="no" class="language-python">results = client.search(
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
     data=[your_query_vector],

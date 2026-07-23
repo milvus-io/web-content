@@ -2,7 +2,7 @@
 id: grouping-search-with-structarray.md
 title: StructArray を使用した検索結果のグループ化
 summary: >-
-  このページでは、StructArrayの要素レベルの検索結果を親エンティティごとにグループ化できます。要素レベルの検索では、複数のStruct要素がクエリに一致する場合、同じエンティティから複数の検索結果が返されることがあります。グループ化を行うと、これらの要素の検索結果がまとめられ、各親エンティティが最大1回だけ表示されるようになります。
+  このページを使用すると、StructArrayの要素レベルの検索結果を親エンティティごとにグループ化できます。要素レベルの検索では、複数のStruct要素がクエリに一致する場合、同じエンティティから複数の検索結果が返されることがあります。グループ化を行うと、これらの要素の検索結果がまとめられるため、各親エンティティは最大1回だけ表示されます。
 ---
 <h1 id="Grouping-Search-with-StructArray" class="common-anchor-header">StructArray を使用した検索結果のグループ化<button data-href="#Grouping-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -38,7 +38,7 @@ summary: >-
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>検索モード</th><th>グループ化の動作</th><th>結果の挙動</th></tr>
+<tr><th>検索モード</th><th>グループ化の挙動</th><th>結果の挙動</th></tr>
 </thead>
 <tbody>
 <tr><td>EmbeddingList検索</td><td>サポートされていません。</td><td>該当なし。</td></tr>
@@ -71,8 +71,8 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>要素レベルのベクトルサブフィールド</td><td><code translate="no">chunks[emb]</code> などの StructArray ベクトルサブフィールドを使用し、通常のベクトルメトリックでインデックス付けしてください。</td></tr>
-<tr><td>通常のベクトルクエリ</td><td><code translate="no">EmbeddingList</code> ではなく、通常のクエリベクトルを使用します。</td></tr>
-<tr><td>主キーによるグループ化</td><td>コレクションの主キーを<code translate="no">group_by_field</code> として使用します（例：<code translate="no">doc_id</code> ）。</td></tr>
+<tr><td>通常のベクトルクエリ</td><td><code translate="no">EmbeddingList</code> ではなく、通常のクエリベクトルを使用してください。</td></tr>
+<tr><td>主キーによるグループ化</td><td>コレクションの主キーを `<code translate="no">group_by_field</code>` として使用します（例: `<code translate="no">doc_id</code>`）。</td></tr>
 <tr><td>範囲パラメータは使用しない</td><td>グループ化検索を、<code translate="no">radius</code> や<code translate="no">range_filter</code> などの範囲検索パラメータと組み合わせて使用しないでください。</td></tr>
 </tbody>
 </table>
@@ -264,7 +264,7 @@ results = client.hybrid_search(
 <li><p>主キーを `<code translate="no">group_by_field</code>` として使用してください。StructArray の要素レベルのグループ化は、任意のスカラーフィールドに対する汎用的なグループ化ではありません。</p></li>
 <li><p>グループ化検索を範囲検索と組み合わせないでください。</p></li>
 <li><p>グループ化検索には、<code translate="no">EmbeddingList</code> クエリや<code translate="no">MAX_SIM*</code> メトリックを使用しないでください。</p></li>
-<li><p>ハイブリッドグループ化は、すべてのサブ検索が、同じ StructArray フィールドの下にある要素レベルのベクトルフィールドを対象としている場合にのみサポートされます。</p></li>
+<li><p>ハイブリッドグループ化は、すべてのサブ検索が同じ StructArray フィールドの下にある要素レベルのベクトルフィールドを対象としている場合にのみサポートされます。</p></li>
 <li><p>ハイブリッド検索で、通常のベクトルフィールド、別の StructArray フィールド、または EmbeddingList レベルのリクエストが混在している場合、ハイブリッドグループ化はサポートされません。</p></li>
 </ul>
 <h2 id="Common-mistakes" class="common-anchor-header">よくある間違い<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
@@ -286,7 +286,7 @@ results = client.hybrid_search(
 <li><p><code translate="no">chunks[emb_list_vector]</code> でのグループ化の使用。これは EmbeddingList 検索を目的としています。</p></li>
 <li><p>主キー以外のスカラーフィールドによるグループ化。</p></li>
 <li><p>複数のフィールドによるグループ化。要素レベルの StructArray グループ化では、主キーによるグループ化のみがサポートされています。</p></li>
-<li><p>グループ化された結果が、一致したすべての Struct 要素を表すものと想定すること。グループ化では、親エンティティごとに最大 1 つの結果が返されます。</p></li>
+<li><p>グループ化された結果が、一致したすべての Struct 要素を表すものと期待すること。グループ化では、親エンティティごとに最大 1 つの結果が返されます。</p></li>
 <li><p>グループ化された要素レベルの検索によって、EmbeddingList形式の<code translate="no">MAX_SIM*</code> スコアが再計算されると想定すること。グループ化は要素レベルのヒットを統合するものであり、スコアリングモデルを変更するものではありません。</p></li>
 <li><p><code translate="no">group_by_field</code> と<code translate="no">radius</code> または<code translate="no">range_filter</code> の組み合わせ。</p></li>
 </ul>

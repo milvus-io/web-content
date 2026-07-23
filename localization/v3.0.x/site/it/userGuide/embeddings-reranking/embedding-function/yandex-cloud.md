@@ -2,8 +2,8 @@
 id: yandex-cloud.md
 title: Yandex CloudCompatible with Milvus 2.6.x
 summary: >-
-  In questa sezione viene spiegato come configurare e utilizzare le funzioni di
-  embedding di Yandex Cloud in Milvus.
+  In questa sezione viene illustrato come configurare e utilizzare le funzioni
+  di embedding di Yandex Cloud in Milvus.
 beta: Milvus 2.6.x
 ---
 <h1 id="Yandex-Cloud" class="common-anchor-header">Yandex Cloud<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Yandex-Cloud" class="anchor-icon" translate="no">
@@ -188,7 +188,7 @@ schema.add_function(text_embedding_function)
    <tr>
      <td><p><code translate="no">credential</code></p></td>
      <td><p>No</p></td>
-     <td><p>L'etichetta di una credenziale definita nella sezione di primo livello <code translate="no">credential:</code> del documento <code translate="no">milvus.yaml</code>.</p></td>
+     <td><p>L'etichetta di una credenziale definita nella sezione di primo livello <code translate="no">credential:</code> di <code translate="no">milvus.yaml</code>.</p></td>
      <td><p><code translate="no">"yandex_apikey"</code></p></td>
    </tr>
    <tr>

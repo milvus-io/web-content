@@ -41,7 +41,7 @@ title: Docker Compose를 사용하여 GPU를 지원하는 Milvus 실행하기
 <li>설치 전에<a href="/docs/ko/v2.6.x/prerequisite-gpu.md">하드웨어 및 소프트웨어 요구 사항을 확인하십시오</a>.</li>
 </ul>
 <div class="alert note">
-<p>이미지 가져오기 과정에서 문제가 발생하면, 문제 세부 정보를 기재하여 <a href="mailto:community@zilliz.com">community@zilliz.com으로</a> 문의해 주시면 필요한 지원을 제공해 드리겠습니다.</p>
+<p>이미지 가져오기 과정에서 문제가 발생하면, 문제의 세부 내용을 기재하여 <a href="mailto:community@zilliz.com">community@zilliz.com으로</a> 문의해 주시면 필요한 지원을 제공해 드리겠습니다.</p>
 </div>
 <h2 id="Install-Milvus" class="common-anchor-header">Milvus 설치<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -151,8 +151,8 @@ milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
 <p>또한 <code translate="no">http://127.0.0.1:9091/webui/</code> 에서 Milvus WebUI에 접속하여 Milvus 인스턴스에 대한 자세한 정보를 확인할 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/milvus-webui.md">Milvus WebUI를</a> 참조하십시오.</p>
-<p>docker-compose.yml에서 Milvus에 여러 GPU 장치를 할당했다면, 어떤 GPU 장치를 표시하거나 사용할 수 있도록 할지 지정할 수 있습니다.</p>
-<p>Milvus에서 GPU 장치 <code translate="no">0</code> 을 표시하도록 설정:</p>
+<p>docker-compose.yml에서 Milvus에 여러 개의 GPU 장치를 할당했다면, 어떤 GPU 장치를 노출하거나 사용 가능하게 할지 지정할 수 있습니다.</p>
+<p>Milvus에서 GPU 장치 <code translate="no">0</code> 를 인식하도록 설정:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">CUDA_VISIBLE_DEVICES=0 ./milvus run standalone</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>GPU 장치 <code translate="no">0</code> 및 <code translate="no">1</code> 를 Milvus에서 인식할 수 있도록 설정:</p>
@@ -186,7 +186,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 </div>
 <p>메모리 풀을 구성하려면 <code translate="no">milvus.yaml</code> 파일 내의 <code translate="no">initMemSize</code> 및 <code translate="no">maxMemSize</code> 설정을 다음과 같이 수정하십시오.</p>
 <ol>
-<li><p>다음 명령어를 사용하여 Milvus 컨테이너의 <code translate="no">milvus.yaml</code> 파일을 로컬 컴퓨터로 복사하십시오. <code translate="no">&lt;milvus_container_id&gt;</code> 을 실제 Milvus 컨테이너 ID로 대체하십시오.</p>
+<li><p>다음 명령어를 사용하여 Milvus 컨테이너의 ` <code translate="no">milvus.yaml</code> ` 파일을 로컬 컴퓨터로 복사하십시오. ` <code translate="no">&lt;milvus_container_id&gt;</code> `을 실제 Milvus 컨테이너 ID로 대체하십시오.</p>
 <pre><code translate="no" class="language-shell">docker cp &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>복사한 <code translate="no">milvus.yaml</code> 파일을 선호하는 텍스트 편집기로 엽니다. 예를 들어, vim을 사용하는 경우:</p>
@@ -240,7 +240,7 @@ docker start &lt;milvus_container_id&gt;
 <li><a href="/docs/ko/v2.6.x/multi-vector-search.md">하이브리드 검색</a></li>
 </ul></li>
 <li><p><a href="/docs/ko/v2.6.x/upgrade_milvus_cluster-helm.md">Helm 차트를 사용하여 Milvus 업그레이드하기</a>.</p></li>
-<li><p><a href="/docs/ko/v2.6.x/scaleout.md">Milvus 클러스터 확장</a></p></li>
+<li><p><a href="/docs/ko/v2.6.x/scaleout.md">Milvus 클러스터 확장</a>.</p></li>
 <li><p>클라우드에 Milvus 클러스터 배포:</p>
 <ul>
 <li><a href="/docs/ko/v2.6.x/eks.md">Amazon EKS</a></li>

@@ -21,7 +21,7 @@ title: Docker에서 Milvus 실행하기 (Linux)
         ></path>
       </svg>
     </button></h1><p>이 페이지에서는 Windows용 Docker Desktop을 사용하여 Windows에서 Milvus를 실행하는 방법을 설명합니다.​</p>
-<h2 id="Prerequisites​" class="common-anchor-header">필수 조건​<button data-href="#Prerequisites​" class="anchor-icon" translate="no">
+<h2 id="Prerequisites​" class="common-anchor-header">필수 준비 사항​<button data-href="#Prerequisites​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -90,7 +90,7 @@ To change the default Milvus configuration, edit user.yaml and restart the servi
 <ul>
 <li><p><strong>milvus-standalone이라는</strong> 이름의 Docker 컨테이너가 포트 <strong>19530</strong>에서 시작되었습니다.​</p></li>
 <li><p>Milvus와 함께 동일한 컨테이너 내에 임베디드 etcd가 설치되었으며, 포트 <strong>2379</strong>에서 서비스를 제공합니다. 해당 구성 파일은 현재 폴더의 <strong>embedEtcd.yaml</strong> 에 매핑되어 있습니다.​</p></li>
-<li><p>Milvus 데이터 볼륨은 현재 폴더의 <strong>volumes/milvus</strong> 에 매핑됩니다.​</p></li>
+<li><p>Milvus 데이터 볼륨은 현재 폴더의 ` <strong>volumes/milvus</strong> `에 매핑됩니다.​</p></li>
 </ul>
 <p>다음 명령어를 사용하여 Milvus 컨테이너와 저장된 데이터를 관리할 수 있습니다.​</p>
 <pre><code translate="no" class="language-powershell"># Stop Milvus​
@@ -186,7 +186,7 @@ Delete successfully.​
         ></path>
       </svg>
     </button></h3><ol>
-<li><p>Docker Desktop을 마우스 오른쪽 버튼으로 클릭하고 <strong>‘관리자 권한으로 실행’을</strong> 선택하여 관리자 모드로 엽니다.</p></li>
+<li><p>Docker Desktop을 마우스 오른쪽 버튼으로 클릭하고 <strong>‘관리자 권한으로 실행’을</strong> 선택하여 관리자 모드로 엽니다.​</p></li>
 <li><p>PowerShell 또는 Windows 명령 프롬프트에서 다음 명령을 실행하여 Milvus Standalone용 Docker Compose 구성 파일을 다운로드하고 Milvus를 시작합니다.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
 C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
@@ -233,7 +233,7 @@ Starting Ubuntu...​
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Milvus를 시작합니다.</p>
+<li><p>Milvus를 실행합니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d​</span>
 ​
 Creating milvus-etcd  ... done​
@@ -257,7 +257,7 @@ Creating milvus-standalone ... done​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="How-can-I-deal-with-the-Docker-Engine-stopped-error​" class="common-anchor-header"><code translate="no">Docker Engine stopped</code> 오류는 어떻게 해결하나요?​<button data-href="#How-can-I-deal-with-the-Docker-Engine-stopped-error​" class="anchor-icon" translate="no">
+    </button></h2><h3 id="How-can-I-deal-with-the-Docker-Engine-stopped-error​" class="common-anchor-header"><code translate="no">Docker Engine stopped</code> 오류는 어떻게 해결할 수 있나요?​<button data-href="#How-can-I-deal-with-the-Docker-Engine-stopped-error​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -305,8 +305,8 @@ C:\Program Files\Docker\Docker&gt;.\DockerCli.exe -SwitchDaemon​
 Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.\pipe\dockerBackendApiServer: The system cannot find the file specified.​
 
 </code></pre></li>
-<li><p>Docker Desktop을 <strong>관리자</strong> 모드로 실행했는지 확인하십시오.</p>
-<p>Docker Desktop을 관리자 모드로 실행했는지 확인하십시오. 이를 위해 <strong>Docker Desktop을</strong> 마우스 오른쪽 버튼으로 클릭하고 <strong>‘관리자 권한으로 실행’을</strong> 선택하십시오.​</p>
+<li><p>Docker Desktop을 <strong>관리자</strong> 모드로 시작했는지 확인하십시오.</p>
+<p>Docker Desktop을 관리자 모드로 시작했는지 확인하십시오. 이를 위해 <strong>Docker Desktop을</strong> 마우스 오른쪽 버튼으로 클릭하고 <strong>‘관리자 권한으로 실행’을</strong> 선택하십시오.​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/docker-desktop.png" alt="Start Docker Desktop as Administrator" class="doc-image" id="start-docker-desktop-as-administrator" /> 
@@ -338,7 +338,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span>Docker Desktop 설정에서 WSL 2 기반 엔진 사용</span>
   
  </span></p></li>
-<li><p><strong>설정</strong> &gt; <strong>리소스</strong> &gt; <strong>WSL 통합으로</strong> 이동하여, Docker 통합을 활성화할 설치된 WSL 2 배포판 중 하나를 선택하십시오.</p>
+<li><p><strong>설정</strong> &gt; <strong>리소스</strong> &gt; <strong>WSL 통합으로</strong> 이동하여, Docker 통합을 활성화할 설치된 WSL 2 배포판 중에서 선택하십시오.​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" /> 
@@ -367,7 +367,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span>Milvus 시작 시 발생하는 ‘Read config failed’ 오류 메시지</span>
   
  </span></p>
-<p>Milvus 시작 시 “Read config failed”라는 오류가 표시될 경우, Milvus 컨테이너에 마운트된 볼륨이 올바른지 확인해야 합니다. 볼륨이 컨테이너에 올바르게 마운트된 경우, <code translate="no">docker exec</code> 명령어를 사용하여 컨테이너로 진입한 후 다음과 같이 <strong>/milvus/configs</strong> 폴더의 내용을 확인할 수 있습니다:​</p>
+<p>Milvus 시작 시 “Read config failed”라는 오류 메시지가 표시될 경우, Milvus 컨테이너에 마운트된 볼륨이 올바른지 확인해야 합니다. 볼륨이 컨테이너에 올바르게 마운트된 경우, <code translate="no">docker exec</code> 명령어를 사용하여 컨테이너로 진입한 후 다음과 같이 <strong>/milvus/configs</strong> 폴더의 내용을 확인할 수 있습니다:​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" /> 
@@ -403,7 +403,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 <li><a href="/docs/ko/v2.6.x/multi-vector-search.md">하이브리드 검색</a></li>
 </ul></li>
 <li><p><a href="/docs/ko/v2.6.x/upgrade_milvus_cluster-helm.md">Helm 차트를 사용하여 Milvus 업그레이드하기</a>.</p></li>
-<li><p><a href="/docs/ko/v2.6.x/scaleout.md">Milvus 클러스터 확장</a></p></li>
+<li><p><a href="/docs/ko/v2.6.x/scaleout.md">Milvus 클러스터 확장</a>.</p></li>
 <li><p>클라우드에 Milvus 클러스터 배포:</p>
 <ul>
 <li><a href="/docs/ko/v2.6.x/eks.md">Amazon EKS</a></li>

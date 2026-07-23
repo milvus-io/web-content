@@ -34,7 +34,7 @@ title: RocksMQ
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Только для автономной версии</strong> — RocksMQ <strong>не</strong> поддерживается в Milvus Distributed (кластер). См. <a href="/docs/ru/mqtype-overview.md#Supported-message-queues">таблицу поддержки очередей сообщений</a>.</li>
+<li><strong>Только для автономной версии</strong> — RocksMQ <strong>не</strong> поддерживается в Milvus Distributed (кластер). См. <a href="/docs/ru/mqtype-overview.md#Supported-message-queues">матрицу поддержки очередей сообщений</a>.</li>
 <li>RocksMQ поставляется в составе Milvus, поэтому отдельно устанавливать его не нужно.</li>
 <li>В более ранних версиях Milvus она являлась стандартной автономной очередью сообщений, а в Milvus 3.x её заменила встроенная Woodpecker.</li>
 </ul>

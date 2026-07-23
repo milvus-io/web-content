@@ -169,7 +169,7 @@ schema.add_function(text_embedding_function)
      <th><p>매개변수</p></th>
      <th><p>필수 항목인가요?</p></th>
      <th><p>설명</p></th>
-     <th><p>값 / 예시</p></th>
+     <th><p>값 / 예</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">provider</code></p></td>

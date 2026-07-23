@@ -23,7 +23,7 @@ summary: >-
     </button></h1><p>Halaman ini menjelaskan cara mengganti antrian pesan (MQ) pada deployment <strong>Milvus Standalone (Docker Compose)</strong> antara <strong>RocksMQ</strong> dan <strong>Woodpecker</strong> (backend lokal atau MinIO), baik dari satu ke yang lain maupun sebaliknya. Untuk alur kerja umum dan prasyarat, lihat <a href="/docs/id/switch-mq-type.md">Mengganti Jenis MQ</a>.</p>
 <div class="alert note">
 <ul>
-<li><strong>Prasyarat:</strong> Fitur Beralih MQ tersedia di <strong>Milvus 3.0 dan versi yang lebih baru</strong>. Perbarui instance Milvus Anda ke Milvus 3.0 atau versi yang lebih baru sebelum memulai — fitur ini tidak tersedia pada versi sebelumnya.</li>
+<li><strong>Prasyarat:</strong> Fitur Beralih MQ tersedia di <strong>Milvus 3.0 dan versi yang lebih baru</strong>. Tingkatkan instance Milvus Anda ke Milvus 3.0 atau versi yang lebih baru sebelum memulai — fitur ini tidak tersedia pada versi sebelumnya.</li>
 <li>Pengalihan MQ memerlukan penyebaran Docker <strong>Compose</strong> (yang mengaktifkan sumber konfigurasi etcd). Penyebaran Docker satu kontainer tidak mendukung pengalihan.</li>
 </ul>
 </div>
@@ -103,7 +103,7 @@ summary: >-
   -H &quot;Content-Type: application/json&quot; \
   -d &#x27;{&quot;target_wal_name&quot;: &quot;woodpecker&quot;}&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>Port MixCoord biasanya adalah <code translate="no">9091</code>.</p>
+<p>Port MixCoord biasanya <code translate="no">9091</code>.</p>
 <h3 id="Step-4-Verify-the-switch-is-complete" class="common-anchor-header">Langkah 4: Verifikasi bahwa peralihan telah selesai<button data-href="#Step-4-Verify-the-switch-is-complete" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -185,7 +185,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><div class="alert note">
-<p>Pastikan instance tidak memiliki sisa data RocksMQ dari eksekusi sebelumnya. Jika ini adalah pertama kalinya Anda beralih ke RocksMQ, abaikan catatan ini; jika tidak, bersihkan terlebih dahulu meta dan data RocksMQ yang terkait.</p>
+<p>Pastikan instance tidak memiliki sisa data RocksMQ dari eksekusi sebelumnya. Jika ini adalah pertama kalinya Anda beralih ke RocksMQ, lewati catatan ini; jika tidak, bersihkan meta dan data RocksMQ terkait terlebih dahulu.</p>
 </div>
 <pre><code translate="no" class="language-shell">curl -X POST http://&lt;mixcoord_addr&gt;:&lt;mixcoord_port&gt;/management/wal/alter \
   -H &quot;Content-Type: application/json&quot; \
@@ -208,7 +208,7 @@ summary: >-
       </svg>
     </button></h3><pre><code translate="no" class="language-shell">docker logs milvus-standalone | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
-<p>Peralihan yang berhasil akan mencatat pesan " <code translate="no">[mqTypeValue=rocksmq]</code>".</p>
+<p>Peralihan yang berhasil akan mencatat log " <code translate="no">[mqTypeValue=rocksmq]</code>".</p>
 <h3 id="Step-4-Optional-Clean-up-Woodpecker-data" class="common-anchor-header">Langkah 4: (Opsional) Bersihkan data Woodpecker<button data-href="#Step-4-Optional-Clean-up-Woodpecker-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

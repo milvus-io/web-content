@@ -24,7 +24,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Gunakan halaman ini untuk menjalankan pencarian rentang pada subbidang vektor StructArray. Pencarian rentang mengembalikan hasil vektor yang skor atau jaraknya berada dalam batas yang ditentukan. Untuk bidang StructArray, gunakan pencarian rentang dengan pencarian vektor tingkat elemen, di mana setiap elemen Struct dicari secara terpisah.</p>
-<p>Halaman ini menggunakan koleksi " <code translate="no">tech_articles</code> " dari <a href="/docs/id/create-structarray-field.md">"Create a StructArray Field</a>". Koleksi tersebut memiliki bidang StructArray bernama " <code translate="no">chunks</code>". Subbidang vektor " <code translate="no">chunks[emb]</code> " diindeks untuk pencarian tingkat elemen menggunakan metrik vektor standar seperti " <code translate="no">COSINE</code>", " <code translate="no">IP</code>", atau " <code translate="no">L2</code>".</p>
+<p>Halaman ini menggunakan koleksi " <code translate="no">tech_articles</code> " dari <a href="/docs/id/create-structarray-field.md">"Create a StructArray Field</a>". Koleksi tersebut memiliki bidang StructArray bernama " <code translate="no">chunks</code>". Subbidang vektor " <code translate="no">chunks[emb]</code> " diindeks untuk pencarian tingkat elemen menggunakan metrik vektor reguler seperti " <code translate="no">COSINE</code>", " <code translate="no">IP</code>", atau " <code translate="no">L2</code>".</p>
 <h2 id="How-range-search-applies-to-StructArray" class="common-anchor-header">Bagaimana pencarian rentang diterapkan pada StructArray<button data-href="#How-range-search-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -47,7 +47,7 @@ summary: >-
 <tbody>
 <tr><td>Pencarian EmbeddingList</td><td>Tidak didukung.</td><td>Tidak berlaku.</td></tr>
 <tr><td>Pencarian tingkat elemen</td><td>Gunakan kueri vektor biasa dengan ` <code translate="no">radius</code> ` dan, secara opsional, ` <code translate="no">range_filter</code>`.</td><td>Tingkat elemen struktur.</td></tr>
-<tr><td>Pencarian hibrida</td><td>Didukung jika permintaan StructArray menargetkan bidang vektor tingkat elemen. Permintaan tingkat EmbeddingList tidak mendukung pencarian rentang.</td><td>Pencarian sub-tingkat elemen, kemudian penentuan peringkat ulang hibrida.</td></tr>
+<tr><td>Pencarian hibrida</td><td>Didukung jika permintaan StructArray menargetkan bidang vektor tingkat elemen. Permintaan tingkat EmbeddingList tidak mendukung pencarian rentang.</td><td>Pencarian sub-tingkat elemen, kemudian penataan ulang peringkat hibrida.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -106,7 +106,7 @@ summary: >-
 <tr><td><code translate="no">IP</code>, <code translate="no">COSINE</code></td><td>Ya. Skor yang lebih besar lebih baik.</td><td><code translate="no">radius &lt; distance &lt;= range_filter</code></td></tr>
 </tbody>
 </table>
-<p>Jika hanya " <code translate="no">radius</code> " yang ditetapkan, pencarian rentang akan mengembalikan hasil yang memenuhi batas luar metrik tersebut. Pilih nilai sesuai dengan skala skor atau jarak dari embedding Anda.</p>
+<p>Ketika hanya " <code translate="no">radius</code> " yang ditetapkan, pencarian rentang akan mengembalikan hasil yang memenuhi batas luar metrik tersebut. Pilih nilai sesuai dengan skala skor atau jarak dari embedding Anda.</p>
 <h2 id="Run-element-level-range-search" class="common-anchor-header">Jalankan pencarian rentang tingkat elemen<button data-href="#Run-element-level-range-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -327,7 +327,7 @@ results = client.hybrid_search(
 <li><p>Melakukan pencarian rentang terhadap <code translate="no">chunks[emb_list_vector]</code>, yang dimaksudkan untuk pencarian EmbeddingList.</p></li>
 <li><p>Menggunakan ` <code translate="no">MAX_SIM_COSINE</code> ` alih-alih metrik biasa seperti ` <code translate="no">COSINE</code> ` untuk pencarian rentang tingkat elemen.</p></li>
 <li><p>Menggunakan kueri ` <code translate="no">EmbeddingList</code> ` alih-alih kueri vektor biasa.</p></li>
-<li><p>Mengharapkan hasil pencarian rentang menjadi unik berdasarkan entitas induk. Pencarian rentang mengembalikan hasil yang cocok pada elemen Struct.</p></li>
+<li><p>Mengharapkan hasil pencarian rentang bersifat unik berdasarkan entitas induk. Pencarian rentang mengembalikan hasil yang cocok pada elemen Struct.</p></li>
 <li><p>Menggunakan ` <code translate="no">chunks.emb</code> ` alih-alih sintaks jalur subfield yang diwajibkan ` <code translate="no">chunks[emb]</code>`.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Langkah selanjutnya<button data-href="#Next-steps" class="anchor-icon" translate="no">
@@ -346,7 +346,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>Untuk mempelajari dua mode pencarian vektor StructArray dasar, baca " <a href="/docs/id/basic-vector-search-with-structarray.md">Pencarian Vektor Dasar dengan StructArray</a>".</p></li>
+<li><p>Untuk mempelajari dua mode pencarian vektor StructArray dasar, baca <a href="/docs/id/basic-vector-search-with-structarray.md">Pencarian Vektor Dasar dengan StructArray</a>.</p></li>
 <li><p>Untuk menambahkan filter skalar ke pencarian rentang, baca " <a href="/docs/id/filtered-search-with-structarray.md">Pencarian Terfilter dengan StructArray</a>".</p></li>
 <li><p>Untuk mengembalikan paling banyak satu hasil per entitas induk di mana hal ini didukung, baca <a href="/docs/id/grouping-search-with-structarray.md">Pencarian Berkelompok dengan StructArray</a>.</p></li>
 <li><p>Untuk memeriksa batasan pencarian berdasarkan versi, baca <a href="/docs/id/structarray-limits.md">Batasan StructArray</a>.</p></li>

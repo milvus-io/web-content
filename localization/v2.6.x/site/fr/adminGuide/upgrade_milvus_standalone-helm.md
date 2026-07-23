@@ -7,10 +7,10 @@ related_key: upgrade Milvus Standalone
 summary: >-
   Découvrez comment mettre à jour Milvus en mode autonome à l'aide d'un Helm
   Chart.
-title: Mise à niveau de Milvus en mode autonome à l'aide d'un Helm Chart
+title: Mise à niveau de Milvus Standalone avec Helm Chart
 ---
 <div class="tab-wrapper"><a href="/docs/fr/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus,</a><a href="/docs/fr/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>Operator</a>, Helm, Docker<a href="/docs/fr/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>Compose</a></div>
-<h1 id="Upgrade-Milvus-Standalone-with-Helm-Chart" class="common-anchor-header">Mise à niveau de Milvus en mode autonome à l'aide d'un Helm Chart<button data-href="#Upgrade-Milvus-Standalone-with-Helm-Chart" class="anchor-icon" translate="no">
+<h1 id="Upgrade-Milvus-Standalone-with-Helm-Chart" class="common-anchor-header">Mise à niveau de Milvus Standalone avec Helm Chart<button data-href="#Upgrade-Milvus-Standalone-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -62,7 +62,7 @@ title: Mise à niveau de Milvus en mode autonome à l'aide d'un Helm Chart
 <li><strong>Nouveaux composants</strong>: introduction du nœud de streaming pour un traitement amélioré des données</li>
 <li><strong>Suppression de composants</strong>: <code translate="no">indexNode</code> a été supprimé et consolidé</li>
 </ul>
-<p>Ce processus de mise à niveau garantit une migration correcte vers la nouvelle architecture. Pour plus d’informations sur les changements d’architecture, consultez <a href="/docs/fr/v2.6.x/architecture_overview.md">la présentation de l’architecture de Milvus</a>.</p>
+<p>Ce processus de mise à niveau garantit une migration correcte vers la nouvelle architecture. Pour plus d’informations sur les modifications apportées à l’architecture, consultez <a href="/docs/fr/v2.6.x/architecture_overview.md">la présentation de l’architecture de Milvus</a>.</p>
 <h3 id="Requirements" class="common-anchor-header">Configuration requise<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -151,7 +151,7 @@ Le dépôt des charts Helm de Milvus à l’adresse <code translate="no">https:/
         ></path>
       </svg>
     </button></h3><div class="alert-note">
-<p>Ignorez cette étape si votre déploiement autonome fonctionne déjà sous la version v2.5.16 ou une version ultérieure.</p>
+<p>Ignorez cette étape si votre déploiement autonome exécute déjà la version 2.5.16 ou une version ultérieure.</p>
 </div>
 <p>Mettez à niveau votre Milvus autonome vers la version v2.5.16 :</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \

@@ -38,9 +38,9 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>بالنسبة للنصوص العربية، استخدم <a href="/docs/ar/arabic-analyzer.md"><code translate="no">arabic</code></a> في معظم الحالات. يتضمن المحلل المدمج هذا المرشح إلى جانب التقطيع القياسي، وتحويل الأحرف إلى صغرى، وتوحيد الأرقام العشرية، واستخلاص الجذور العربية، وإزالة الكلمات الممنوعة العربية. لا تستخدم مرشح « <code translate="no">arabic_normalization</code> » مباشرةً إلا عندما تحتاج إلى إنشاء مسار محلل مخصص.</p>
+<p>بالنسبة للنصوص العربية، استخدم <a href="/docs/ar/arabic-analyzer.md"><code translate="no">arabic</code></a> في معظم الحالات. يتضمن المحلل المدمج هذا المرشح إلى جانب التقطيع القياسي، وتحويل الأحرف إلى صغرى، وتوحيد الأرقام العشرية، واستخلاص الجذور العربية، وإزالة الكلمات الممنوعة العربية. لا تستخدم مرشح « <code translate="no">arabic_normalization</code> » مباشرةً إلا عند الحاجة إلى إنشاء مسار محلل مخصص.</p>
 </div>
-<p>لاستخدام مرشح <code translate="no">arabic_normalization</code> في محلل مخصص، أضفه إلى قسم « <code translate="no">filter</code> » في <code translate="no">analyzer_params</code>:</p>
+<p>لاستخدام مرشح « <code translate="no">arabic_normalization</code> » في محلل مخصص، أضفه إلى قسم « <code translate="no">filter</code> » في « <code translate="no">analyzer_params</code> »:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;arabic_normalization&quot;</span>],
@@ -55,7 +55,7 @@ beta: Milvus 3.0.0+
      <th><p>إلى</p></th>
    </tr>
    <tr>
-     <td><p>متغيرات الحمزة + الألف</p></td>
+     <td><p>متغيرات الحاء + الهمزة</p></td>
      <td><p><code translate="no">آ</code>، <code translate="no">أ</code> ، <code translate="no">إ</code></p></td>
      <td><p><code translate="no">ا</code></p></td>
    </tr>
@@ -72,7 +72,7 @@ beta: Milvus 3.0.0+
    <tr>
      <td><p>الحركات</p></td>
      <td><p><code translate="no">U+064B</code> من خلال <code translate="no">U+065F</code></p></td>
-     <td><p>تم حذفها</p></td>
+     <td><p>تم الحذف</p></td>
    </tr>
    <tr>
      <td><p>التطويل / الكشيدة</p></td>

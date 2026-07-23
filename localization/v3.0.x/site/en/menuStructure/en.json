@@ -1297,15 +1297,21 @@
                 "children": []
               },
               {
+                "label": "Hugging Face",
+                "id": "hugging-face.md",
+                "order": 10,
+                "children": []
+              },
+              {
                 "label": "Google Gemini",
                 "id": "google-gemini.md",
-                "order": 10,
+                "order": 11,
                 "children": []
               },
               {
                 "label": "Yandex Cloud",
                 "id": "yandex-cloud.md",
-                "order": 11,
+                "order": 12,
                 "children": []
               }
             ]
@@ -1424,6 +1430,12 @@
                     "label": "DashScope Ranker",
                     "id": "dashscope-ranker.md",
                     "order": 6,
+                    "children": []
+                  },
+                  {
+                    "label": "Hugging Face Ranker",
+                    "id": "hugging-face-ranker.md",
+                    "order": 7,
                     "children": []
                   }
                 ]

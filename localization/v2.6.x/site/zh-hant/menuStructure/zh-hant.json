@@ -12,7 +12,7 @@
         "children": []
       },
       {
-        "label": "Milvus 領養者",
+        "label": "Milvus 採用者",
         "id": "milvus_adopters.md",
         "order": 1,
         "children": []
@@ -241,7 +241,7 @@
             "children": []
           },
           {
-            "label": "諾瓦",
+            "label": "諾瓦爾",
             "id": "knowhere.md",
             "order": 5,
             "children": []
@@ -334,7 +334,7 @@
             "children": []
           },
           {
-            "label": "裝填與釋放",
+            "label": "裝載與釋放",
             "id": "load-and-release.md",
             "order": 5,
             "children": []
@@ -364,7 +364,7 @@
             "children": []
           },
           {
-            "label": "現場取件",
+            "label": "取件服務",
             "id": "drop-collection.md",
             "order": 10,
             "children": []
@@ -606,13 +606,13 @@
                     "children": []
                   },
                   {
-                    "label": "解複合劑",
+                    "label": "解合器",
                     "id": "decompounder-filter.md",
                     "order": 7,
                     "children": []
                   },
                   {
-                    "label": "施特默",
+                    "label": "史特默",
                     "id": "stemmer-filter.md",
                     "order": 8,
                     "children": []
@@ -920,7 +920,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "人工神經網路基本搜尋",
+            "label": "人工神經網路（ANN）的基本搜尋",
             "id": "single-vector-search.md",
             "order": 0,
             "children": []
@@ -967,7 +967,7 @@
             "order": 7,
             "children": [
               {
-                "label": "篩選機制解析",
+                "label": "篩選機制詳解",
                 "id": "boolean.md",
                 "order": 0,
                 "children": []
@@ -1165,13 +1165,13 @@
                 "children": []
               },
               {
-                "label": "衰減排名表",
+                "label": "腐朽排名榜",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
                 "children": [
                   {
-                    "label": "《Decay Ranker》概覽",
+                    "label": "《Decay》排名系統概覽",
                     "id": "decay-ranker-overview.md",
                     "order": 0,
                     "children": []
@@ -1215,7 +1215,7 @@
                     "children": []
                   },
                   {
-                    "label": "vLLM 排名器",
+                    "label": "vLLM 排名工具",
                     "id": "vllm-ranker.md",
                     "order": 1,
                     "children": []
@@ -1263,7 +1263,7 @@
             "children": []
           },
           {
-            "label": "叢集壓縮",
+            "label": "叢集式壓縮",
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []
@@ -1305,7 +1305,7 @@
     "isMenu": true,
     "children": [
       {
-        "label": "準備原始資料",
+        "label": "準備來源資料",
         "id": "prepare-source-data.md",
         "order": 0,
         "children": []
@@ -1466,7 +1466,7 @@
                 "children": []
               },
               {
-                "label": "部署至 OpenShift",
+                "label": "在 OpenShift 上部署",
                 "id": "openshift.md",
                 "order": 4,
                 "children": []
@@ -1822,7 +1822,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "RBAC 概述",
+                "label": "RBAC 概覽",
                 "id": "rbac.md",
                 "order": 0,
                 "children": []
@@ -1860,7 +1860,7 @@
             ]
           },
           {
-            "label": "傳輸過程中的加密",
+            "label": "傳輸中的加密",
             "id": "tls.md",
             "order": 2,
             "children": []
@@ -1897,7 +1897,7 @@
             "children": []
           },
           {
-            "label": "Milvus 獨立式交換器 MQ 型",
+            "label": "Milvus 獨立式交換器 MQ 型號",
             "id": "switch_milvus_standalone_mq_type-operator.md",
             "order": 1,
             "children": []
@@ -2080,7 +2080,7 @@
         "children": []
       },
       {
-        "label": "Milvus 尺寸選擇工具",
+        "label": "Milvus 尺寸選配工具",
         "id": "sizing",
         "order": 7,
         "externalLink": "https://milvus.io/tools/sizing/",
@@ -2107,7 +2107,7 @@
         "order": 10,
         "children": [
           {
-            "label": "嵌入",
+            "label": "嵌入向量",
             "id": "embeddings",
             "order": 0,
             "isMenu": true,
@@ -2596,7 +2596,7 @@
         ]
       },
       {
-        "label": "大型語言模型（LLMs）",
+        "label": "大型語言模型 (LLMs)",
         "id": "integrate-llms",
         "order": 2,
         "children": [
@@ -2879,7 +2879,7 @@
         "children": []
       },
       {
-        "label": "向量可視化",
+        "label": "向量視覺化",
         "id": "vector_visualization.md",
         "order": 11,
         "children": []
@@ -2891,7 +2891,7 @@
         "children": []
       },
       {
-        "label": "運用「套娃」嵌入法進行漏斗式搜尋",
+        "label": "運用「套娃」嵌入式模型進行漏斗式搜尋",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []
@@ -2978,7 +2978,7 @@
     "order": 9,
     "children": [
       {
-        "label": "效能常見問題解答",
+        "label": "效能常見問題",
         "id": "performance_faq.md",
         "order": 0,
         "children": []

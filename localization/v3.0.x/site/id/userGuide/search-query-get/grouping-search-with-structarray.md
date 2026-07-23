@@ -4,9 +4,10 @@ title: Pengelompokan Hasil Pencarian dengan StructArray
 summary: >-
   Gunakan halaman ini untuk mengelompokkan hasil pencarian tingkat elemen
   StructArray berdasarkan entitas induknya. Pencarian tingkat elemen dapat
-  menghasilkan beberapa hasil dari entitas yang sama jika beberapa elemen Struct
-  cocok dengan kueri. Pengelompokan ini menggabungkan hasil-hasil elemen
-  tersebut sehingga setiap entitas induk muncul paling banyak sekali.
+  menghasilkan beberapa hasil dari entitas yang sama jika terdapat beberapa
+  elemen Struct yang sesuai dengan kueri. Pengelompokan ini menggabungkan
+  hasil-hasil elemen tersebut sehingga setiap entitas induk hanya muncul paling
+  banyak satu kali.
 ---
 <h1 id="Grouping-Search-with-StructArray" class="common-anchor-header">Pengelompokan Hasil Pencarian dengan StructArray<button data-href="#Grouping-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -311,7 +312,7 @@ results = client.hybrid_search(
       </svg>
     </button></h2><ol>
 <li><p>Untuk mempelajari pencarian tingkat elemen tanpa pengelompokan terlebih dahulu, baca " <a href="/docs/id/basic-vector-search-with-structarray.md">Basic Vector Search with StructArray</a>".</p></li>
-<li><p>Untuk menambahkan filter skalar ke pencarian yang dikelompokkan, baca " <a href="/docs/id/filtered-search-with-structarray.md">Filtered Search with StructArray</a>".</p></li>
+<li><p>Untuk menambahkan filter skalar ke pencarian yang dikelompokkan, baca " <a href="/docs/id/filtered-search-with-structarray.md">Pencarian yang Disaring dengan StructArray</a>".</p></li>
 <li><p>Untuk menggunakan batas skor atau jarak sebagai pengganti pengelompokan, baca " <a href="/docs/id/range-search-with-structarray.md">Pencarian Rentang dengan StructArray</a>".</p></li>
 <li><p>Untuk memeriksa batasan pencarian StructArray, baca <a href="/docs/id/structarray-limits.md">Batasan StructArray</a>.</p></li>
 </ol>

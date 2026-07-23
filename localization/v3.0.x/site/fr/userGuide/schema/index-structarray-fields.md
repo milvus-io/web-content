@@ -23,7 +23,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Créez des index sur les sous-champs StructArray avant d’exécuter une recherche vectorielle ou d’accélérer un filtrage scalaire. Pour un champ StructArray, la cible de l’index est un chemin de sous-champ, tel que <code translate="no">chunks[emb_list_vector]</code>, <code translate="no">chunks[emb]</code> ou <code translate="no">chunks[section]</code>.</p>
-<p>Cette page utilise la collection <code translate="no">tech_articles</code> issue de la section « <a href="/docs/fr/create-structarray-field.md">Créer un champ StructArray</a> ». Le champ StructArray <code translate="no">chunks</code> contient des sous-champs scalaires destinés au filtrage et des sous-champs vectoriels destinés à la recherche.</p>
+<p>Cette page utilise la collection <code translate="no">tech_articles</code> issue de la section <a href="/docs/fr/create-structarray-field.md">Créer un champ StructArray</a>. Le champ StructArray <code translate="no">chunks</code> contient des sous-champs scalaires pour le filtrage et des sous-champs vectoriels pour la recherche.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Avant de commencer<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -189,7 +189,7 @@ client.create_index(
     index_params=index_params,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Les index scalaires sont facultatifs, mais utiles lorsque les sous-champs scalaires de StructArray apparaissent fréquemment dans des filtres, tels que ` <code translate="no">element_filter(chunks, $[quality_score] &gt; 0.9)</code> ` ou ` <code translate="no">MATCH_ANY(chunks, $[section] == &quot;index&quot;)</code>`.</p>
+<p>Les index scalaires sont facultatifs mais utiles lorsque les sous-champs scalaires de StructArray apparaissent fréquemment dans des filtres, tels que <code translate="no">element_filter(chunks, $[quality_score] &gt; 0.9)</code> ou <code translate="no">MATCH_ANY(chunks, $[section] == &quot;index&quot;)</code>.</p>
 <h2 id="Index-metric-compatibility" class="common-anchor-header">Compatibilité des métriques d’index<button data-href="#Index-metric-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -222,7 +222,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>La recherche EmbeddingList utilise les métriques de type « <code translate="no">MAX_SIM*</code> ». Elle traite les vecteurs d’un sous-champ vectoriel StructArray comme une liste d’embedding et renvoie des résultats au niveau de l’entité.</p>
+    </button></h3><p>La recherche EmbeddingList utilise les métriques de type « <code translate="no">MAX_SIM*</code> ». Elle traite les vecteurs d’un sous-champ vectoriel StructArray comme une liste d’embeddings et renvoie des résultats au niveau des entités.</p>
 <table>
 <thead>
 <tr><th>Type de données du sous-champ vectoriel</th><th>Type d’index</th><th>Type de métrique</th></tr>
@@ -277,7 +277,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Après avoir créé des index, décrivez les index de collection ou de liste pour vous assurer que les chemins de sous-champs attendus sont bien indexés.</p>
+    </button></h2><p>Après avoir créé des index, décrivez les index de la collection ou de la liste pour vous assurer que les chemins de sous-champs attendus sont bien indexés.</p>
 <pre><code translate="no" class="language-python">indexes = client.list_indexes(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
 )
@@ -337,11 +337,11 @@ client.create_index(
       </svg>
     </button></h2><ul>
 <li><p>Créer un index sur « <code translate="no">chunks.emb</code> » au lieu de « <code translate="no">chunks[emb]</code> ».</p></li>
-<li><p>Créer uniquement un index « <code translate="no">MAX_SIM*</code> », puis tenter d’effectuer une recherche au niveau des éléments sur ce même sous-champ.</p></li>
+<li><p>Créer uniquement un index <code translate="no">MAX_SIM*</code>, puis tenter d'effectuer une recherche au niveau des éléments sur ce même sous-champ.</p></li>
 <li><p>Créer uniquement un index vectoriel standard, puis tenter d’effectuer une recherche EmbeddingList sur ce même sous-champ.</p></li>
 <li><p>Réutiliser un sous-champ vectoriel à la fois pour les métriques « <code translate="no">MAX_SIM*</code> » et les métriques vectorielles classiques.</p></li>
 <li><p>Oublier les index scalaires pour les filtres StructArray très utilisés.</p></li>
-<li><p>L'indexation d’un sous-champ StructArray qui n’existe pas dans le schéma Struct.</p></li>
+<li><p>L'indexation d'un sous-champ StructArray qui n'existe pas dans le schéma Struct.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Étapes suivantes<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"

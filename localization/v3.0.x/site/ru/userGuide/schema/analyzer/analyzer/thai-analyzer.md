@@ -3,7 +3,7 @@ id: thai-analyzer.md
 title: ТайскийCompatible with Milvus 3.0.0+
 summary: >-
   Встроенный анализатор тайского языка разбивает текст на слова, нормализует
-  десятичные цифры в кодировке Unicode и удаляет тайские стоп-слова.
+  десятичные цифры в формате Unicode и удаляет тайские стоп-слова.
 beta: Milvus 3.0.0+
 ---
 <h1 id="Thai" class="common-anchor-header">Тайский<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Thai" class="anchor-icon" translate="no">
@@ -21,7 +21,7 @@ beta: Milvus 3.0.0+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Анализатор « <code translate="no">thai</code> » — это встроенный анализатор для текстов на тайском языке. Используйте этот анализатор, если вам нужно, чтобы Milvus разбивал текст на тайском языке на слова, нормализовал тайские цифры, преобразовывал смешанный текст на латинском алфавите в нижний регистр и удалял тайские стоп-слова.</p>
+    </button></h1><p>Анализатор « <code translate="no">thai</code> » — это встроенный анализатор для текстов на тайском языке. Используйте этот анализатор, если вам нужно, чтобы Milvus разбивал текст на тайском языке на слова, нормализовал тайские цифры, преобразовывал смешанный латинский текст в нижний регистр и удалял тайские стоп-слова.</p>
 <h2 id="Configuration" class="common-anchor-header">Настройка<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +38,7 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><p>Встроенные анализаторы представляют собой шаблоны анализаторов, предоставляемые Milvus. Чтобы использовать встроенный анализатор, установите для параметра ` <code translate="no">type</code> ` значение, соответствующее одному из предопределенных имен анализаторов, указанных в файле ` <code translate="no">analyzer_params</code>`.</p>
-<p>Чтобы использовать встроенный анализатор тайского языка, установите для параметра ` <code translate="no">type</code> ` значение из списка <code translate="no">thai</code>:</p>
+<p>Чтобы использовать встроенный тайский анализатор, установите для параметра ` <code translate="no">type</code> ` значение из списка <code translate="no">thai</code>:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;thai&quot;</span>,
 }
@@ -80,8 +80,8 @@ beta: Milvus 3.0.0+
 <button class="copy-code-btn"></button></code></pre>
 <p>Этот анализатор применяет следующие этапы обработки:</p>
 <ul>
-<li><strong>Токенизация</strong>: использует <a href="/docs/ru/thai-tokenizer.md"><code translate="no">thai</code></a> токеннизатор для сегментирования текста на тайском языке на лексические единицы без учета пробелов. Токеннизатор отфильтровывает пробелы и сегменты, состоящие исключительно из знаков препинания.</li>
-<li><strong>Нормализация регистра</strong>: использует фильтр <code translate="no">lowercase</code>, который воздействует на латинские буквы в смешанном тексте на тайском и английском языках.</li>
+<li><strong>Токенизация</strong>: использует <a href="/docs/ru/thai-tokenizer.md"><code translate="no">thai</code></a> токеннизатор для сегментирования текста на тайском языке на словесные токены без использования пробелов. Токеннизатор отфильтровывает пробелы и сегменты, состоящие исключительно из знаков препинания.</li>
+<li><strong>Нормализация регистра</strong>: использует фильтр <code translate="no">lowercase</code>, который действует на латинские буквы в смешанном тексте на тайском и английском языках.</li>
 <li><strong>Нормализация цифр</strong>: использует фильтр « <code translate="no">decimaldigit</code> » для преобразования тайских цифр и других десятичных цифр Unicode в цифры ASCII.</li>
 <li><strong>Удаление стоп-слов</strong>: используется фильтр « <code translate="no">stop</code> » со встроенным словарем « <code translate="no">_thai_</code> ».</li>
 <li><strong>Без стемминга</strong>: встроенный анализатор « <code translate="no">thai</code> » не применяет фильтр « <code translate="no">stemmer</code> ».</li>
@@ -102,8 +102,8 @@ beta: Milvus 3.0.0+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Прежде чем применить конфигурацию анализатора к схеме коллекции, проверьте его поведение с помощью метода ` <code translate="no">run_analyzer</code> `.</p>
-<h3 id="Analyzer-configuration" class="common-anchor-header">Настройка анализатора<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
+    </button></h2><p>Прежде чем применять конфигурацию анализатора к схеме коллекции, проверьте его поведение с помощью метода ` <code translate="no">run_analyzer</code> `.</p>
+<h3 id="Analyzer-configuration" class="common-anchor-header">Конфигурация анализатора<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

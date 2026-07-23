@@ -1,11 +1,11 @@
 ---
 id: data-infra-integration-overview.md
-title: Infrastruktur dan Integrasi Data
+title: Infrastruktur Data & Integrasi
 summary: >-
   Gambaran umum mengenai infrastruktur pihak ketiga yang terintegrasi dengan
   Milvus — metadata, penyimpanan objek, dan antrian pesan.
 ---
-<h1 id="Data-Infrastructure--Integration" class="common-anchor-header">Infrastruktur dan Integrasi Data<button data-href="#Data-Infrastructure--Integration" class="anchor-icon" translate="no">
+<h1 id="Data-Infrastructure--Integration" class="common-anchor-header">Infrastruktur Data &amp; Integrasi<button data-href="#Data-Infrastructure--Integration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

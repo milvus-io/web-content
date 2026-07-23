@@ -57,10 +57,10 @@ title: Обновление автономной версии Milvus с помо
     </button></h3><p>Обновление с Milvus 2.5.x до 2.6.17 сопряжено со значительными изменениями в архитектуре:</p>
 <ul>
 <li><strong>Объединение координаторов</strong>: Устаревшие отдельные координаторы (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) были объединены в один <code translate="no">mixCoord</code></li>
-<li><strong>Новые компоненты</strong>: введение потокового узла (Streaming Node) для усовершенствованной обработки данных</li>
-<li><strong>Удаление компонентов</strong>: удален и объединен <code translate="no">indexNode</code> </li>
+<li><strong>Новые компоненты</strong>: введение потокового узла (Streaming Node) для расширенной обработки данных</li>
+<li><strong>Удаление компонентов</strong>: узел <code translate="no">indexNode</code> был удален и объединен</li>
 </ul>
-<p>Этот процесс обновления обеспечивает правильный переход на новую архитектуру. Для получения дополнительной информации об изменениях в архитектуре см. <a href="/docs/ru/v2.6.x/architecture_overview.md">«Обзор архитектуры Milvus</a>».</p>
+<p>Данный процесс обновления обеспечивает правильный переход на новую архитектуру. Для получения дополнительной информации об изменениях в архитектуре см. <a href="/docs/ru/v2.6.x/architecture_overview.md">«Обзор архитектуры Milvus</a>».</p>
 <h3 id="Requirements" class="common-anchor-header">Требования<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -78,7 +78,7 @@ title: Обновление автономной версии Milvus с помо
       </svg>
     </button></h3><p><strong>Системные требования:</strong></p>
 <ul>
-<li>Установленные Docker и Docker Compose</li>
+<li>Установлены Docker и Docker Compose</li>
 <li>Автономная версия Milvus, развернутая с помощью Docker Compose</li>
 </ul>
 <p><strong>Требования к совместимости:</strong></p>
@@ -122,7 +122,7 @@ title: Обновление автономной версии Milvus с помо
         ></path>
       </svg>
     </button></h3><div class="alert note">
-<p>Пропустите этот шаг, если в вашем автономном развертывании уже установлена версия v2.5.16 или выше.</p>
+<p>Пропустите этот шаг, если в вашем автономном развертывании уже используется версия v2.5.16 или выше.</p>
 </div>
 <ol>
 <li><p>Отредактируйте существующий файл ` <code translate="no">docker-compose.yaml</code> ` и обновите тег образа Milvus до v2.5.16:</p>

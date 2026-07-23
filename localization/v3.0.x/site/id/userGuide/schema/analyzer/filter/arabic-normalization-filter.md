@@ -2,7 +2,7 @@
 id: arabic-normalization-filter.md
 title: Normalisasi Bahasa ArabCompatible with Milvus 3.0.0+
 summary: >-
-  Filter arabic_normalization menstandarkan varian huruf Arab serta menghapus
+  Filter `arabic_normalization` menstandarkan variasi huruf Arab serta menghapus
   tanda diakritik Arab dan Tatweel.
 beta: Milvus 3.0.0+
 ---
@@ -38,9 +38,9 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Untuk teks Arab, gunakan <a href="/docs/id/arabic-analyzer.md"><code translate="no">arabic</code></a> dalam kebanyakan kasus. Penganalisis bawaan ini mencakup filter ini bersama dengan tokenisasi standar, pengubahan huruf besar menjadi kecil, normalisasi angka desimal, stemming bahasa Arab, dan penghapusan kata penghalang bahasa Arab. Gunakan " <code translate="no">arabic_normalization</code> " secara langsung hanya jika Anda perlu membangun alur kerja penganalisis kustom.</p>
+<p>Untuk teks Arab, gunakan <a href="/docs/id/arabic-analyzer.md"><code translate="no">arabic</code></a> dalam kebanyakan kasus. Penganalisis bawaan ini mencakup filter ini bersama dengan tokenisasi standar, pengubahan huruf besar menjadi kecil, normalisasi angka desimal, stemming bahasa Arab, dan penghapusan kata-kata penghalang bahasa Arab. Gunakan " <code translate="no">arabic_normalization</code> " secara langsung hanya jika Anda perlu membangun alur kerja penganalisis kustom.</p>
 </div>
-<p>Untuk menggunakan filter ` <code translate="no">arabic_normalization</code> ` dalam pipa penganalisis kustom, tambahkan ke bagian ` <code translate="no">filter</code> ` di ` <code translate="no">analyzer_params</code>`:</p>
+<p>Untuk menggunakan filter ` <code translate="no">arabic_normalization</code> ` dalam pipa penganalisis kustom, tambahkan filter tersebut ke bagian ` <code translate="no">filter</code> ` di ` <code translate="no">analyzer_params</code>`:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;arabic_normalization&quot;</span>],

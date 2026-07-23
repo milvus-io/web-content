@@ -2,7 +2,7 @@
 id: install_standalone-windows.md
 label: Docker
 related_key: Docker
-summary: 了解如何使用 Docker Desktop for Windows 安裝 Milvus 獨立版本。
+summary: 瞭解如何使用 Docker Desktop for Windows 安裝 Milvus 獨立版本。
 title: 在 Docker 中執行 Milvus（Linux）
 ---
 <h1 id="Run-Milvus-in-Docker-Windows" class="common-anchor-header">在 Docker 中執行 Milvus（Windows）<button data-href="#Run-Milvus-in-Docker-Windows" class="anchor-icon" translate="no">
@@ -37,7 +37,7 @@ title: 在 Docker 中執行 Milvus（Linux）
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="https://docs.docker.com/desktop/setup/install/windows-install/">安裝 Docker Desktop</a>。</p></li>
+<li><p><a href="https://docs.docker.com/desktop/setup/install/windows-install/">安裝 Docker Desktop</a>。​</p></li>
 <li><p><a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">安裝 Windows Subsystem for Linux 2 (WSL 2)</a>。​</p></li>
 <li><p>安裝 Python 3.8 或更高版本。</p></li>
 </ul>
@@ -79,7 +79,7 @@ title: 在 Docker 中執行 Milvus（Linux）
 <pre><code translate="no" class="language-powershell">C:\&gt;Invoke-WebRequest https://raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/scripts/standalone_embed.bat -OutFile standalone.bat​
 
 </code></pre></li>
-<li><p>執行已下載的腳本，以 Docker 容器形式啟動 Milvus。​</p>
+<li><p>執行下載的腳本，以 Docker 容器形式啟動 Milvus。​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;standalone.bat start​
 Wait for Milvus starting...​
 Start successfully.​
@@ -89,7 +89,7 @@ To change the default Milvus configuration, edit user.yaml and restart the servi
 <p>執行安裝腳本後：​</p>
 <ul>
 <li><p>一個名為<strong>milvus-standalone</strong>的 Docker 容器已於<strong>19530</strong> 埠啟動。​</p></li>
-<li><p>嵌入式 etcd 已隨 Milvus 一起安裝在同一個容器中，並在<strong>2379</strong> 埠提供服務。其設定檔已映射至當前資料夾中的<strong>embedEtcd.yaml</strong>。​</p></li>
+<li><p>嵌入式 etcd 已隨 Milvus 一起安裝在同一個容器中，並於<strong>2379</strong> 埠提供服務。其設定檔已映射至當前資料夾中的<strong>embedEtcd.yaml</strong>。​</p></li>
 <li><p>Milvus 資料卷已映射至當前資料夾中的<strong>volumes/milvus​</strong></p></li>
 </ul>
 <p>您可以使用以下指令來管理 Milvus 容器及儲存的資料。​</p>
@@ -187,7 +187,7 @@ Delete successfully.​
       </svg>
     </button></h3><ol>
 <li><p>以管理員模式開啟 Docker Desktop：右鍵點擊並選擇「<strong>以管理員身分執行</strong>」。​</p></li>
-<li><p>在 PowerShell 或 Windows 命令提示字元中執行以下指令，以下載 Milvus 獨立版（Standalone）的 Docker Compose 配置檔案並啟動 Milvus。​</p>
+<li><p>在 PowerShell 或 Windows 命令提示字元中執行以下指令，以下載 Milvus 獨立版（Standalone）的 Docker Compose 配置檔並啟動 Milvus。​</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
 C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
@@ -198,11 +198,11 @@ Creating milvus-minio ... done​
 Creating milvus-standalone ... done​
 
 </code></pre>
-<p>視您的網路連線狀況而定，下載 Milvus 安裝所需的映像檔可能需要一段時間。當名為<strong>milvus-standalone</strong>、<strong>milvus-minio</strong> 及<strong>milvus-etcd</strong>的容器啟動後，您將看到 ​</p>
+<p>視您的網路連線狀況而定，下載 Milvus 安裝所需的映像檔可能需要一段時間。一旦名為<strong>milvus-standalone</strong>、<strong>milvus-minio</strong> 及<strong>milvus-etcd</strong>的容器啟動後，您將看到 ​</p>
 <ul>
 <li><p><strong>milvus-etcd</strong>容器並未向主機公開任何端口，且將其資料映射至當前資料夾中的<strong>volumes/etcd​</strong></p></li>
-<li><p><strong>milvus-minio</strong>容器在本地端提供<strong>9090</strong>和<strong>9091</strong>埠，並使用預設的驗證憑證，其資料會映射至當前資料夾中的<strong>volumes/minio</strong>目錄。​</p></li>
-<li><p><strong>milvus-standalone</strong>容器在本地端以預設設定提供<strong>19530</strong>埠，並將其資料映射至當前資料夾中的<strong>volumes/milvus</strong>。​</p></li>
+<li><p><strong>milvus-minio</strong>容器在本地端提供<strong>9090</strong>和<strong>9091</strong>埠，使用預設的驗證憑證，並將其資料映射至當前資料夾中的<strong>volumes/minio</strong>。​</p></li>
+<li><p><strong>milvus-standalone</strong>容器在本地端以預設設定提供<strong>19530</strong>埠，並將其資料映射至當前資料夾中的<strong>volumes/milvus</strong>目錄。​</p></li>
 </ul></li>
 </ol>
 <p>若您已安裝 WSL 2，亦可呼叫 Linux 版本的 Docker Compose 指令。​</p>
@@ -229,7 +229,7 @@ Ubuntu already installed.​
 Starting Ubuntu...​
 
 </code></pre></li>
-<li><p>下載 Milvus 設定檔。</p>
+<li><p>下載 Milvus 配置檔案。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
@@ -282,7 +282,7 @@ Creating milvus-standalone ... done​
    <span>「工作管理員」中的虛擬化設定</span>
   
  </span></p>
-<p>若虛擬化功能已停用，您可能需要檢查主機板韌體的 BIOS 設定。在 BIOS 設定中啟用虛擬化的方法因主機板廠商而異。以華碩（ASUS）<a href="https://www.asus.com/support/faq/1043786/">主機板為例，您可以參考這篇關於啟用虛擬化的文章</a>。​</p>
+<p>若虛擬化功能已停用，您可能需要檢查主機板韌體的 BIOS 設定。在 BIOS 設定中啟用虛擬化的方法因主機板製造商而異。以華碩（ASUS）<a href="https://www.asus.com/support/faq/1043786/">主機板為例，您可以參考這篇關於啟用虛擬化的文章</a>。​</p>
 <p>接著，您需要重新啟動電腦並啟用 Hyper-V。詳細資訊請參閱這篇<a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">Microsoft 文章</a>。​</p></li>
 <li><p>檢查 Docker Desktop 服務是否已啟動。​</p>
 <p>您可以執行以下指令來啟動 Docker Desktop 服務。</p>
@@ -292,21 +292,21 @@ The Docker for Windows Service service was started successfully.​
 
 </code></pre></li>
 <li><p>檢查 WSL 是否已正確安裝。</p>
-<p>您可以執行以下指令來安裝或更新 WSL 2。​</p>
+<p>您可以執行以下命令來安裝或更新 WSL 2。​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --update​
 Checking for updates.​
 The most recent version of Windows Subsystem for Linux is already installed.​
 
 </code></pre></li>
 <li><p>檢查 Docker Daemon 是否已啟動。</p>
-<p>您需要前往 Docker Desktop 的安裝目錄，並執行 `<code translate="no">.\DockerCli.exe -SwitchDaemon</code> ` 來啟動 Docker 守護程序。​</p>
+<p>您需要前往 Docker Desktop 的安裝目錄，並執行 `<code translate="no">.\DockerCli.exe -SwitchDaemon</code> ` 來啟動 Docker 守護程式。​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;cd &quot;C:\Program Files\Docker\Docker&quot;​
 C:\Program Files\Docker\Docker&gt;.\DockerCli.exe -SwitchDaemon​
 Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.\pipe\dockerBackendApiServer: The system cannot find the file specified.​
 
 </code></pre></li>
 <li><p>請確認您是否已以<strong>系統管理員模式</strong>啟動 Docker Desktop。​</p>
-<p>請確保您已以系統管理員模式啟動 Docker Desktop。要執行此操作，請右鍵點擊<strong>Docker</strong>Desktop，然後選擇「<strong>以系統管理員身分執行</strong>」。​</p>
+<p>請確保您已以系統管理員模式啟動 Docker Desktop。要執行此操作，請右鍵點擊<strong>Docker</strong>Desktop，然後選擇<strong>「以系統管理員身分執行</strong>」。​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/docker-desktop.png" alt="Start Docker Desktop as Administrator" class="doc-image" id="start-docker-desktop-as-administrator" /> 
@@ -346,7 +346,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
   
  </span></p></li>
 </ol>
-<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">如何處理 Milvus 啟動時出現的與卷相關的錯誤訊息「<code translate="no">Read config failed</code> 」？​<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
+<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">如何處理 Milvus 啟動時出現的與卷相關的錯誤提示，內容為「<code translate="no">Read config failed</code> 」？​<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -367,7 +367,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span>Milvus 啟動時出現「讀取設定失敗」錯誤提示</span>
   
  </span></p>
-<p>若要處理 Milvus 啟動時出現的「讀取設定檔失敗」錯誤，您需要檢查掛載至 Milvus 容器中的卷是否正確。若卷已正確掛載至容器中，您可以使用<code translate="no">docker exec</code> 指令進入容器，並如下所示列出<strong>/milvus/configs</strong>資料夾：​</p>
+<p>若要處理 Milvus 啟動時出現的「讀取設定檔失敗（<code translate="no">docker exec</code> ）」錯誤，您需要檢查掛載至 Milvus 容器中的卷是否正確。若卷已正確掛載至容器中，您可以使用 指令進入容器，並如下所示列出<strong>/milvus/configs</strong>資料夾：​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" /> 
@@ -410,9 +410,9 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 <li><a href="/docs/zh-hant/v2.6.x/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/zh-hant/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus-webui.md">Milvus WebUI</a>，這是專為 Milvus 可觀察性與管理而設計的直觀網頁介面。</p></li>
+<li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus-webui.md">Milvus WebUI</a>，這是專為 Milvus 可觀察性與管理設計的直覺式網頁介面。</p></li>
 <li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>，這是一款用於 Milvus 資料備份的開源工具。</p></li>
 <li><p>探索<a href="/docs/zh-hant/v2.6.x/birdwatcher_overview.md">Birdwatcher，這</a>是一款用於 Milvus 除錯與動態配置更新的開源工具。</p></li>
-<li><p>探索<a href="https://github.com/zilliztech/attu">Attu，這</a>是一款用於直觀管理 Milvus 的開源圖形化介面工具。</p></li>
-<li><p><a href="/docs/zh-hant/v2.6.x/monitor.md">使用 Prometheus 監控 Milvus</a>。</p></li>
+<li><p>探索<a href="https://github.com/zilliztech/attu">Attu，</a>這是一款用於直觀管理 Milvus 的開源 GUI 工具。</p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/monitor.md">透過 Prometheus 監控 Milvus</a>。</p></li>
 </ul>

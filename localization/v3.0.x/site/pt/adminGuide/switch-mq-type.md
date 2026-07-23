@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Este guia descreve como mudar a fila de mensagens (MQ) de uma implementação existente do Milvus <strong>entre o Woodpecker e outra fila de mensagens</strong>, em linha e sem tempo de inatividade.</p>
+    </button></h1><p>Este guia descreve como alternar a fila de mensagens (MQ) de uma implementação existente do Milvus <strong>entre o Woodpecker e outra fila de mensagens</strong>, em linha e sem tempo de inatividade.</p>
 <div class="alert warning">
 <p>Esta funcionalidade está pendente de lançamento e está sujeita a alterações. Contacte o apoio técnico do Milvus se quiser experimentá-la ou se tiver alguma dúvida.</p>
 </div>
@@ -82,7 +82,7 @@ summary: >-
     </button></h2><ol>
 <li>Certifique-se de que a instância do Milvus está a funcionar corretamente.</li>
 <li>Confirme o tipo de MQ de origem e o tipo de MQ de destino.</li>
-<li>Incorpore as definições de acesso do MQ de destino na configuração do Milvus <strong>sem</strong> alterar o valor de « <code translate="no">mqType</code> ».</li>
+<li>Aplique as definições de acesso do MQ de destino à configuração do Milvus <strong>sem</strong> alterar o valor de « <code translate="no">mqType</code> ».</li>
 <li>Acionar a alternância chamando a API WAL alter no MixCoord.</li>
 <li>Monitorize os registos para confirmar que a transição foi concluída.</li>
 </ol>
@@ -119,5 +119,5 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Evite alternar repetidamente entre tipos de MQ. Se for necessário alternar, certifique-se de limpar os dados relacionados antes de cada alternância — os dados residuais podem causar um comportamento inesperado.</p>
+<p>Evite alternar repetidamente entre tipos de MQ. Se for necessário alternar, certifique-se de que limpa os dados relacionados antes de cada alternância — os dados residuais podem causar um comportamento inesperado.</p>
 </div>

@@ -24,7 +24,7 @@ title: Milvus-Cluster mit Docker Compose aktualisieren
     </button></h1><p>In diesem Abschnitt wird beschrieben, wie Sie Ihren Milvus-Cluster mithilfe von Docker Compose aktualisieren können.</p>
 <p>Normalerweise können Sie <a href="#Upgrade-Milvus-by-changing-its-image">Milvus durch Ändern des Images aktualisieren</a>. Vor einem Upgrade von v2.1.x auf v2.6.17 müssen Sie jedoch <a href="#Migrate-the-metadata">die Metadaten migrieren</a>.</p>
 <div class="alert note">
-<p><strong>Einschränkungen bei den Nachrichtenwarteschlangen</strong>: Beim Upgrade auf Milvus v2.6.17 müssen Sie Ihre derzeitige Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</p>
+<p><strong>Einschränkungen bei der Nachrichtenwarteschlange</strong>: Beim Upgrade auf Milvus v2.6.17 müssen Sie Ihre aktuelle Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</p>
 </div>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Milvus durch Ändern des Images aktualisieren<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 페이지를 사용하여 StructArray 벡터 하위 필드에 대해 범위 검색을 실행할 수 있습니다. 범위 검색은 점수 또는 거리가 지정된 경계 내에 속하는 벡터 일치 항목을 반환합니다. StructArray 필드의 경우, 각 Struct 요소를 독립적으로 검색하는 요소 수준 벡터 검색과 함께 범위 검색을 사용하십시오.</p>
+    </button></h1><p>이 페이지를 사용하여 StructArray 벡터 하위 필드에 대해 범위 검색을 실행할 수 있습니다. 범위 검색은 점수 또는 거리가 지정된 범위 내에 속하는 벡터 일치 결과를 반환합니다. StructArray 필드의 경우, 각 Struct 요소를 독립적으로 검색하는 요소 수준 벡터 검색과 함께 범위 검색을 사용하십시오.</p>
 <p>이 페이지에서는 <a href="/docs/ko/create-structarray-field.md">‘StructArray 필드 생성’의</a> <code translate="no">tech_articles</code> 컬렉션을 사용합니다. 이 컬렉션에는 <code translate="no">chunks</code> 라는 StructArray 필드가 있습니다. <code translate="no">chunks[emb]</code> 벡터 하위 필드는 <code translate="no">COSINE</code>, <code translate="no">IP</code> 또는 <code translate="no">L2</code> 와 같은 일반 벡터 메트릭을 사용하여 요소 수준 검색이 가능하도록 인덱싱되어 있습니다.</p>
 <h2 id="How-range-search-applies-to-StructArray" class="common-anchor-header">StructArray에 범위 검색이 적용되는 방식<button data-href="#How-range-search-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -73,7 +73,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>StructArray 필드</td><td>컬렉션에는 <code translate="no">chunks</code> 와 같은 StructArray 필드가 포함되어 있습니다.</td></tr>
-<tr><td>요소 수준 벡터 하위 필드</td><td>대상 벡터 하위 필드는 <code translate="no">chunks[emb_list_vector]</code> 가 아니라 <code translate="no">chunks[emb]</code> 입니다.</td></tr>
+<tr><td>요소 수준 벡터 하위 필드</td><td><code translate="no">chunks[emb]</code>대상 벡터 하위 필드는 <code translate="no">chunks[emb_list_vector]</code> 이며, 가 아닙니다.</td></tr>
 <tr><td>인덱스 메트릭</td><td>벡터 하위 필드는 <code translate="no">COSINE</code>, <code translate="no">IP</code> 또는 <code translate="no">L2</code> 와 같은 일반 벡터 메트릭으로 인덱싱됩니다.</td></tr>
 <tr><td>쿼리 데이터</td><td>쿼리는 <code translate="no">EmbeddingList</code> 가 아닌 일반 벡터입니다.</td></tr>
 </tbody>
@@ -94,7 +94,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">radius</code> 를 설정하여 검색 경계를 정의합니다. 내부 경계도 필요한 경우 <code translate="no">range_filter</code> 를 설정하십시오. 방향은 더 작은 거리가 더 좋은지, 아니면 더 큰 유사도 점수가 더 좋은지에 따라 달라집니다.</p>
+    </button></h2><p><code translate="no">radius</code> 을 설정하여 검색 경계를 정의합니다. 내부 경계도 필요한 경우 <code translate="no">range_filter</code> 을 설정하십시오. 방향은 더 짧은 거리가 더 좋은지, 아니면 더 높은 유사도 점수가 더 좋은지에 따라 달라집니다.</p>
 <table>
 <thead>
 <tr><th>메트릭 유형</th><th>점수가 높을수록 좋은가요?</th><th><code translate="no">range_filter</code> 를 사용할 때의 범위 조건</th></tr>
@@ -120,7 +120,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>다음 예제는 <code translate="no">chunks[emb]</code> 벡터가 쿼리 벡터와 충분히 유사한 개별 청크를 검색합니다. 각 결과 히트는 일치하는 Struct 요소를 나타냅니다.</p>
+    </button></h2><p>다음 예제는 <code translate="no">chunks[emb]</code> 벡터가 쿼리 벡터와 충분히 유사한 개별 청크를 검색합니다. 각 검색 결과는 일치하는 Struct 요소를 나타냅니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -160,7 +160,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>이 예제에서 <code translate="no">COSINE</code> 는 유사도 방식의 메트릭이므로, 결과 범위는 <code translate="no">radius</code> 보다 크고 <code translate="no">range_filter</code> 이하입니다. 반환된 <code translate="no">offset</code> 값은 <code translate="no">chunks</code> 배열 내에서 일치하는 Struct 요소를 식별합니다.</p>
+<p>이 예제에서 ` <code translate="no">COSINE</code> `는 유사도 방식의 메트릭이므로, 결과 범위는 ` <code translate="no">radius</code> `보다 크고 ` <code translate="no">range_filter</code>` 이하입니다. ` <code translate="no">offset</code> ` 값은 결과가 반환될 때 ` <code translate="no">chunks</code> ` 배열 내에서 일치하는 Struct 요소를 식별합니다.</p>
 <h2 id="Add-scalar-filters" class="common-anchor-header">스칼라 필터 추가<button data-href="#Add-scalar-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -322,7 +322,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><code translate="no">chunks[emb_list_vector]</code> 에 대해 범위 검색을 실행하는 경우(이 메트릭은 EmbeddingList 검색용으로 설계됨).</p></li>
+<li><p><code translate="no">chunks[emb_list_vector]</code> 에 대해 범위 검색을 실행하는 경우. 이 메트릭은 EmbeddingList 검색용으로 설계되었습니다.</p></li>
 <li><p>요소 수준 범위 검색에 <code translate="no">COSINE</code> 와 같은 일반 메트릭 대신 <code translate="no">MAX_SIM_COSINE</code> 를 사용하는 경우.</p></li>
 <li><p>일반 벡터 쿼리 대신 <code translate="no">EmbeddingList</code> 쿼리를 사용하는 경우.</p></li>
 <li><p>범위 검색 결과가 상위 엔티티별로 고유할 것으로 기대하는 경우. 범위 검색은 일치하는 Struct 요소 히트를 반환합니다.</p></li>
@@ -346,6 +346,6 @@ results = client.hybrid_search(
     </button></h2><ol>
 <li><p>두 가지 기본 StructArray 벡터 검색 모드에 대해 알아보려면 <a href="/docs/ko/basic-vector-search-with-structarray.md">‘StructArray를 사용한 기본 벡터 검색’을</a> 참조하십시오.</p></li>
 <li><p>범위 검색에 스칼라 필터를 추가하려면 <a href="/docs/ko/filtered-search-with-structarray.md">'StructArray를 사용한 필터링 검색'을</a> 참조하십시오.</p></li>
-<li><p>지원되는 경우 상위 엔티티당 최대 하나의 결과만 반환하려면 <a href="/docs/ko/grouping-search-with-structarray.md">StructArray를 사용한 그룹화 검색을</a> 참조하십시오.</p></li>
+<li><p>지원되는 경우 상위 엔티티당 최대 하나의 결과만 반환하려면 <a href="/docs/ko/grouping-search-with-structarray.md">‘StructArray를 사용한 그룹화 검색’을</a> 참조하십시오.</p></li>
 <li><p>버전별 검색 제한 사항을 확인하려면 <a href="/docs/ko/structarray-limits.md">StructArray 제한 사항을</a> 참조하십시오.</p></li>
 </ol>

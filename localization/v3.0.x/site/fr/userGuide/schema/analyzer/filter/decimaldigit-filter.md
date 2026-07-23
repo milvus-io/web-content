@@ -47,7 +47,7 @@ beta: Milvus 3.0.0+
 }
 <button class="copy-code-btn"></button></code></pre>
 <p>Le filtre « <code translate="no">decimaldigit</code> » ne comporte aucun paramètre configurable.</p>
-<p>Le filtre convertit les chiffres décimaux Unicode, y compris les chiffres arabo-indiens, thaï, devanagari, bengali et à pleine largeur, en chiffres ASCII. Il s’applique aux tokens générés par le tokenizer. La configuration ci-dessus est volontairement un exemple d’analyseur personnalisé et n’inclut pas le pipeline complet de traitement de l’arabe.</p>
+<p>Le filtre convertit les chiffres décimaux Unicode, y compris les chiffres arabes-indiens, thaï, devanagari, bengali et à pleine largeur, en chiffres ASCII. Il opère sur les tokens générés par le tokenizer. La configuration ci-dessus est volontairement un exemple d’analyseur personnalisé et n’inclut pas le pipeline complet de traitement de l’arabe.</p>
 <h2 id="Examples" class="common-anchor-header">Exemples<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

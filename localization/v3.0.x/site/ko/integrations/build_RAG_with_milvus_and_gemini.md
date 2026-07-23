@@ -1,9 +1,10 @@
 ---
 id: build_RAG_with_milvus_and_gemini.md
 summary: >-
-  이 튜토리얼에서는 Milvus와 Gemini를 사용하여 RAG(검색 증강 생성) 파이프라인을 구축하는 방법을 보여드리겠습니다. Gemini
-  모델을 사용하여 주어진 쿼리를 기반으로 텍스트를 생성합니다. 또한 생성된 텍스트를 저장하고 검색하는 데 Milvus를 사용합니다.
-title: Milvus 및 Gemini로 RAG 구축하기
+  이 튜토리얼에서는 Milvus와 Gemini를 사용하여 RAG(검색 강화 생성, Retrieval-Augmented Generation)
+  파이프라인을 구축하는 방법을 안내해 드리겠습니다. Gemini 모델을 활용하여 주어진 쿼리를 기반으로 텍스트를 생성할 것입니다. 또한
+  Milvus를 사용하여 생성된 텍스트를 저장하고 검색할 것입니다.
+title: Milvus와 Gemini를 활용한 RAG 구축
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_gemini.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -11,7 +12,7 @@ title: Milvus 및 Gemini로 RAG 구축하기
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_gemini.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h1 id="Build-RAG-with-Milvus-and-Gemini" class="common-anchor-header">Milvus 및 Gemini로 RAG 구축하기<button data-href="#Build-RAG-with-Milvus-and-Gemini" class="anchor-icon" translate="no">
+<h1 id="Build-RAG-with-Milvus-and-Gemini" class="common-anchor-header">Milvus와 Gemini를 활용한 RAG 구축<button data-href="#Build-RAG-with-Milvus-and-Gemini" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -26,9 +27,9 @@ title: Milvus 및 Gemini로 RAG 구축하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://ai.google.dev/gemini-api/docs">Gemini API와</a> <a href="https://ai.google.dev/aistudio">Google AI Studio를</a> 사용하면 Google의 최신 모델로 작업을 시작하고 아이디어를 확장 가능한 애플리케이션으로 전환할 수 있습니다. Gemini는 텍스트 생성, 문서 처리, 시각, 오디오 분석 등과 같은 작업을 위해 <code translate="no">Gemini-2.5-Flash</code> 및 <code translate="no">Gemini-2.5-Pro</code> 과 같은 강력한 언어 모델에 대한 액세스를 제공합니다. 또한 마트료시카 표현 학습을 통해 텍스트, 이미지, 비디오, 오디오 및 PDF 문서를 유연한 출력 크기로 지원하는 멀티모달 임베딩 모델인 <code translate="no">Gemini Embedding 2</code> 을 제공합니다. 이 API를 사용하면 수백만 개의 토큰으로 긴 컨텍스트를 입력하고, 특정 작업에 맞게 모델을 미세 조정하고, JSON과 같은 구조화된 출력을 생성하고, 시맨틱 검색 및 코드 실행과 같은 기능을 활용할 수 있습니다.</p>
-<p>이 튜토리얼에서는 Milvus와 Gemini를 사용하여 RAG(검색 증강 생성) 파이프라인을 구축하는 방법을 보여드리겠습니다. Gemini 모델을 사용하여 주어진 쿼리를 기반으로 Milvus에서 검색된 관련 정보로 보강된 응답을 생성할 것입니다.</p>
-<h2 id="Preparation" class="common-anchor-header">준비<button data-href="#Preparation" class="anchor-icon" translate="no">
+    </button></h1><p><a href="https://ai.google.dev/gemini-api/docs">Gemini API와</a> <a href="https://ai.google.dev/aistudio">Google AI Studio를</a> 활용하면 Google의 최신 모델을 바로 사용해 보고, 여러분의 아이디어를 확장 가능한 애플리케이션으로 구현할 수 있습니다. Gemini는 텍스트 생성, 문서 처리, 비전, 오디오 분석 등의 작업을 위해 <code translate="no">Gemini-2.5-Flash</code> 및 <code translate="no">Gemini-2.5-Pro</code> 와 같은 강력한 언어 모델에 대한 액세스를 제공합니다. 또한 Matryoshka Representation Learning을 통해 유연한 출력 차원을 지원하는 텍스트, 이미지, 비디오, 오디오 및 PDF 문서를 처리할 수 있는 다중 모달 임베딩 모델인 <code translate="no">Gemini Embedding 2</code> 도 제공합니다. 이 API를 사용하면 수백만 개의 토큰으로 구성된 긴 컨텍스트를 입력하고, 특정 작업에 맞게 모델을 미세 조정하며, JSON과 같은 구조화된 출력을 생성하고, 의미적 검색 및 코드 실행과 같은 기능을 활용할 수 있습니다.</p>
+<p>이 튜토리얼에서는 Milvus와 Gemini를 사용하여 RAG(Retrieval-Augmented Generation) 파이프라인을 구축하는 방법을 보여드리겠습니다. Gemini 모델을 사용하여 주어진 쿼리에 기반한 응답을 생성하고, Milvus에서 검색한 관련 정보를 이를 보완하는 방식으로 활용할 것입니다.</p>
+<h2 id="Preparation" class="common-anchor-header">준비 사항<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,7 +44,7 @@ title: Milvus 및 Gemini로 RAG 구축하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">종속성 및 환경<button data-href="#Dependencies-and-Environment" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">필수 구성 요소 및 환경<button data-href="#Dependencies-and-Environment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -58,13 +59,13 @@ title: Milvus 및 Gemini로 RAG 구축하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>먼저 필요한 패키지를 설치합니다:</p>
+    </button></h3><p>먼저, 필요한 패키지를 설치합니다:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus milvus-lite google-genai requests tqdm</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Google Colab을 사용하는 경우 방금 설치한 종속 요소를 사용하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다(화면 상단의 '런타임' 메뉴를 클릭하고 드롭다운 메뉴에서 '세션 다시 시작'을 선택).</p>
+<p>Google Colab을 사용하는 경우, 방금 설치한 종속성을 활성화하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다(화면 상단의 ‘Runtime’ 메뉴를 클릭하고 드롭다운 메뉴에서 ‘Restart session’을 선택하세요).</p>
 </div>
-<p>먼저 Google AI Studio 플랫폼에 로그인하여 환경 변수로 <code translate="no">GEMINI_API_KEY</code> <a href="https://aistudio.google.com/apikey">API 키를</a> 준비해야 합니다.</p>
+<p>먼저 Google AI Studio 플랫폼에 로그인하고 <a href="https://aistudio.google.com/apikey">API 키</a> <code translate="no">GEMINI_API_KEY</code> 를 환경 변수로 설정해야 합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;GEMINI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;***********&quot;</span>
@@ -84,12 +85,12 @@ os.environ[<span class="hljs-string">&quot;GEMINI_API_KEY&quot;</span>] = <span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus 문서 2.4.x의</a> FAQ 페이지를 RAG의 비공개 지식으로 사용하며, 이는 간단한 RAG 파이프라인을 위한 좋은 데이터 소스입니다.</p>
-<p>zip 파일을 다운로드하고 문서를 <code translate="no">milvus_docs</code> 폴더에 압축을 풉니다.</p>
+    </button></h3><p>우리는 RAG의 사내 지식으로 <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus Documentation 2.4.x의</a> FAQ 페이지를 사용하며, 이는 간단한 RAG 파이프라인을 위한 훌륭한 데이터 소스입니다.</p>
+<p>zip 파일을 다운로드하고 문서를 <code translate="no">milvus_docs</code> 폴더에 추출합니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">milvus_docs/en/faq</code> 폴더에서 모든 마크다운 파일을 로드합니다. 각 문서에 대해 "#"를 사용하여 파일의 내용을 구분하기만 하면 마크다운 파일의 각 주요 부분의 내용을 대략적으로 구분할 수 있습니다.</p>
+<p><code translate="no">milvus_docs/en/faq</code> 폴더에 있는 모든 마크다운 파일을 불러옵니다. 각 문서에 대해 "# "을 사용하여 파일 내의 내용을 구분하면, 마크다운 파일의 각 주요 부분의 내용을 대략적으로 분리할 수 있습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 
 text_lines = []
@@ -115,8 +116,8 @@ text_lines = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">gemini-2.5-flash</code> 을 LLM으로, <code translate="no">gemini-embedding-2-preview</code> 을 임베딩 모델로 사용합니다. <code translate="no">gemini-embedding-2-preview</code> 은 구글의 최신 멀티모달 임베딩 모델로, Matryoshka 표현 학습을 통해 유연한 출력 크기(128~3,072)의 텍스트, 이미지, 비디오, 오디오 및 PDF 문서를 지원합니다.</p>
-<p>LLM에서 테스트 응답을 생성해 보겠습니다:</p>
+    </button></h3><p><code translate="no">gemini-2.5-flash</code> 을 LLM으로 사용하고, <code translate="no">gemini-embedding-2-preview</code> 을 임베딩 모델로 사용합니다. <code translate="no">gemini-embedding-2-preview</code> 은 Google의 최신 멀티모달 임베딩 모델로, Matryoshka Representation Learning을 통해 텍스트, 이미지, 동영상, 오디오 및 PDF 문서를 지원하며 유연한 출력 차원(128–3,072)을 제공합니다.</p>
+<p>이제 LLM을 통해 테스트 응답을 생성해 보겠습니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> google <span class="hljs-keyword">import</span> genai
 
 client = genai.Client(api_key=os.environ[<span class="hljs-string">&quot;GEMINI_API_KEY&quot;</span>])
@@ -138,7 +139,7 @@ I'm designed to process and generate human-like text based on the vast amount of
 
 I don't have personal experiences, feelings, or consciousness. I'm a tool designed to be helpful and informative.
 </code></pre>
-<p>테스트 임베딩을 생성하고 해당 치수와 처음 몇 개의 요소를 인쇄합니다.</p>
+<p>테스트 임베딩을 생성하고, 그 차원과 처음 몇 개의 요소를 출력해 봅시다.</p>
 <pre><code translate="no" class="language-python">test_embeddings = client.models.embed_content(
     model=<span class="hljs-string">&quot;gemini-embedding-2-preview&quot;</span>, contents=[<span class="hljs-string">&quot;This is a test1&quot;</span>, <span class="hljs-string">&quot;This is a test2&quot;</span>]
 )
@@ -150,7 +151,7 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embeddings.embedding
 <pre><code translate="no">3072
 [-0.016769307, 0.013630492, 0.020277105, 0.0035285393, 0.003968259, -0.013498845, 0.028525498, 0.025498547, -0.021553498, 0.015233516]
 </code></pre>
-<h2 id="Load-data-into-Milvus" class="common-anchor-header">Milvus에 데이터 로드<button data-href="#Load-data-into-Milvus" class="anchor-icon" translate="no">
+<h2 id="Load-data-into-Milvus" class="common-anchor-header">Milvus에 데이터 불러오기<button data-href="#Load-data-into-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -165,7 +166,7 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embeddings.embedding
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">컬렉션 만들기<button data-href="#Create-the-Collection" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">컬렉션 생성<button data-href="#Create-the-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -180,7 +181,7 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embeddings.embedding
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus 클라이언트를 초기화하고 컬렉션을 설정해 보겠습니다:</p>
+    </button></h3><p>Milvus 클라이언트를 초기화하고 컬렉션을 설정해 봅시다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
@@ -188,19 +189,19 @@ milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.d
 collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><code translate="no">MilvusClient</code> 의 인수는 다음과 같습니다:</p>
+<p><code translate="no">MilvusClient</code> 의 인자에 대해서는:</p>
 <ul>
-<li><code translate="no">uri</code> 을 로컬 파일(예:<code translate="no">./milvus.db</code>)로 설정하는 것이 가장 편리한 방법인데, <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite를</a> 자동으로 활용하여 모든 데이터를 이 파일에 저장하기 때문입니다.</li>
-<li>데이터 규모가 큰 경우, <a href="https://milvus.io/docs/quickstart.md">도커나 쿠버네티스에</a> 더 고성능의 Milvus 서버를 설정할 수 있습니다. 이 설정에서는 서버 URL(예:<code translate="no">http://localhost:19530</code>)을 <code translate="no">uri</code> 으로 사용하세요.</li>
-<li>밀버스의 완전 관리형 클라우드 서비스인 <a href="https://zilliz.com/cloud">질리즈 클라우드를</a> 사용하려면, 질리즈 클라우드의 <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">퍼블릭 엔드포인트와 API 키에</a> 해당하는 <code translate="no">uri</code> 와 <code translate="no">token</code> 을 조정하세요.</li>
+<li><code translate="no">uri</code> 을 로컬 파일(예:<code translate="no">./milvus.db</code>)로 설정하는 것이 가장 편리한 방법입니다. 이렇게 하면 <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite를</a> 자동으로 활용하여 이 파일에 모든 데이터를 저장할 수 있기 때문입니다.</li>
+<li>대규모 데이터를 다루는 경우, <a href="https://milvus.io/docs/quickstart.md">Docker나 Kubernetes에서</a> 더 높은 성능을 발휘하는 Milvus 서버를 구축할 수 있습니다. 이 경우, <code translate="no">uri</code> 대신 서버 URI(예:<code translate="no">http://localhost:19530</code>)를 사용하십시오.</li>
+<li>Milvus 전용 완전 관리형 클라우드 서비스인 <a href="https://zilliz.com/cloud">Zilliz Cloud를</a> 사용하려면, Zilliz Cloud의 <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">공개 엔드포인트(Public Endpoint) 및 API 키</a> 에 해당하는 <code translate="no">uri</code> 와 <code translate="no">token</code> 를 조정하십시오.</li>
 </ul>
 </div>
-<p>컬렉션이 이미 존재하는지 확인하고 존재한다면 삭제합니다.</p>
+<p>컬렉션이 이미 존재하는지 확인하고, 존재할 경우 삭제하십시오.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> milvus_client.has_collection(collection_name):
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
-<p>지정된 파라미터로 새 컬렉션을 생성합니다.</p>
-<p>필드 정보를 지정하지 않으면 기본 키인 <code translate="no">id</code> 필드와 벡터 데이터를 저장할 <code translate="no">vector</code> 필드가 자동으로 생성됩니다. 예약된 JSON 필드는 스키마에 정의되지 않은 필드와 그 값을 저장하는 데 사용됩니다.</p>
+<p>지정된 매개변수로 새 컬렉션을 생성합니다.</p>
+<p>필드 정보를 지정하지 않으면 Milvus는 기본 키를 위한 기본 <code translate="no">id</code> 필드와 벡터 데이터를 저장하기 위한 <code translate="no">vector</code> 필드를 자동으로 생성합니다. 예약된 JSON 필드는 스키마에 정의되지 않은 필드와 해당 값을 저장하는 데 사용됩니다.</p>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
@@ -224,8 +225,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>텍스트 줄을 반복하여 임베딩을 만든 다음 데이터를 Milvus에 삽입합니다.</p>
-<p>다음은 컬렉션 스키마에 정의되지 않은 필드인 새 필드 <code translate="no">text</code> 입니다. 이 필드는 상위 수준에서 일반 필드로 취급할 수 있는 예약된 JSON 동적 필드에 자동으로 추가됩니다.</p>
+    </button></h3><p>텍스트 줄을 순차적으로 처리하여 임베딩을 생성한 다음, 데이터를 Milvus에 삽입합니다.</p>
+<p>여기에는 컬렉션 스키마에 정의되지 않은 새로운 필드 ` <code translate="no">text</code>`가 있습니다. 이 필드는 예약된 JSON 동적 필드에 자동으로 추가되며, 높은 수준에서는 일반 필드로 취급할 수 있습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 
 data = []
@@ -275,10 +276,10 @@ milvus_client.insert(collection_name=collection_name, data=data)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus에 대해 자주 묻는 질문을 지정해 보겠습니다.</p>
+    </button></h3><p>Milvus에 대해 자주 묻는 질문을 지정해 봅시다.</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;How is data stored in milvus?&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>컬렉션에서 해당 질문을 검색하고 시맨틱 상위 3개 일치 항목을 검색합니다.</p>
+<p>컬렉션에서 해당 질문을 검색하고, 의미적으로 가장 관련성이 높은 상위 3개 일치 항목을 가져옵니다.</p>
 <pre><code translate="no" class="language-python">quest_embed = client.models.embed_content(model=<span class="hljs-string">&quot;gemini-embedding-2-preview&quot;</span>, contents=question)
 
 search_res = milvus_client.search(
@@ -289,7 +290,7 @@ search_res = milvus_client.search(
     output_fields=[<span class="hljs-string">&quot;text&quot;</span>],  <span class="hljs-comment"># Return the text field</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>쿼리의 검색 결과를 살펴봅시다.</p>
+<p>쿼리의 검색 결과를 살펴보겠습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 
 retrieved_lines_with_distances = [
@@ -312,7 +313,7 @@ retrieved_lines_with_distances = [
     ]
 ]
 </code></pre>
-<h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">LLM을 사용하여 RAG 응답 얻기<button data-href="#Use-LLM-to-get-a-RAG-response" class="anchor-icon" translate="no">
+<h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">LLM을 사용하여 RAG 응답을 얻기<button data-href="#Use-LLM-to-get-a-RAG-response" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -332,7 +333,7 @@ retrieved_lines_with_distances = [
     [line_with_distance[<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> line_with_distance <span class="hljs-keyword">in</span> retrieved_lines_with_distances]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>언어 모델에 대한 시스템 및 사용자 프롬프트를 정의합니다. 이 프롬프트는 Milvus에서 검색된 문서로 조립됩니다.</p>
+<p>언어 모델(Language Model)에 대한 시스템 프롬프트와 사용자 프롬프트를 정의합니다. 이 프롬프트는 Milvus에서 검색된 문서를 바탕으로 구성됩니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> google.genai <span class="hljs-keyword">import</span> types
 
 SYSTEM_PROMPT = <span class="hljs-string">&quot;&quot;&quot;
@@ -348,7 +349,7 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
 &lt;/question&gt;
 &quot;&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Gemini를 사용하여 프롬프트에 따라 응답을 생성합니다.</p>
+<p>Gemini를 사용하여 프롬프트를 기반으로 응답을 생성합니다.</p>
 <pre><code translate="no" class="language-python">response = client.models.generate_content(
     model=<span class="hljs-string">&quot;gemini-2.5-flash&quot;</span>,
     config=types.GenerateContentConfig(system_instruction=SYSTEM_PROMPT),
@@ -361,7 +362,7 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
 1.  **Inserted Data:** This includes vector data, scalar data, and collection-specific schema. This type of data is stored in persistent storage as an incremental log. Milvus supports various object storage backends for this, such as MinIO, AWS S3, Google Cloud Storage (GCS), Azure Blob Storage, Alibaba Cloud OSS, and Tencent Cloud Object Storage (COS).
 2.  **Metadata:** Metadata is generated within Milvus by its various modules. Each module's metadata is stored in etcd.
 </code></pre>
-<h2 id="Multimodal-Search" class="common-anchor-header">멀티모달 검색<button data-href="#Multimodal-Search" class="anchor-icon" translate="no">
+<h2 id="Multimodal-Search" class="common-anchor-header">다중 모달 검색<button data-href="#Multimodal-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -376,7 +377,7 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">gemini-embedding-2-preview</code> 은 텍스트, 이미지 및 기타 모달리티를 동일한 임베딩 공간에 매핑하므로, 예를 들어 텍스트 쿼리를 사용하여 가장 관련성이 높은 이미지를 찾는 등 모달리티 간 검색을 수행할 수 있습니다.</p>
+    </button></h2><p><code translate="no">gemini-embedding-2-preview</code> 는 텍스트, 이미지 및 기타 모달리티를 동일한 임베딩 공간으로 매핑하므로, 예를 들어 텍스트 쿼리를 사용하여 가장 관련성이 높은 이미지를 찾는 등 크로스 모달 검색을 수행할 수 있습니다.</p>
 <h3 id="Prepare-image-data" class="common-anchor-header">이미지 데이터 준비<button data-href="#Prepare-image-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -392,7 +393,7 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>이미지 데이터 세트로 사용하기 위해 Milvus Bootcamp 리포지토리에서 RAG 아키텍처 다이어그램 세트를 다운로드합니다.</p>
+    </button></h3><p>이미지 데이터셋으로 사용할 RAG 아키텍처 다이어그램 세트를 Milvus Bootcamp 저장소에서 다운로드합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> urllib.request
 <span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
 
@@ -429,7 +430,7 @@ Downloaded hierarchical_index.png
 
 Total images: 6
 </code></pre>
-<h3 id="Embed-images-and-store-in-Milvus" class="common-anchor-header">이미지 임베드 및 Milvus에 저장<button data-href="#Embed-images-and-store-in-Milvus" class="anchor-icon" translate="no">
+<h3 id="Embed-images-and-store-in-Milvus" class="common-anchor-header">이미지 임베딩 및 Milvus에 저장<button data-href="#Embed-images-and-store-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -444,7 +445,7 @@ Total images: 6
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>각 이미지를 바이트 단위로 읽고 <code translate="no">gemini-embedding-2-preview</code> 로 전달하여 임베딩을 생성한 다음 새 Milvus 컬렉션에 저장합니다.</p>
+    </button></h3><p>각 이미지를 바이트 단위로 읽어 <code translate="no">gemini-embedding-2-preview</code> 에 전달하여 임베딩을 생성한 후, 이를 새로운 Milvus 컬렉션에 저장합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> google.genai <span class="hljs-keyword">import</span> types
 
 image_data = []
@@ -490,7 +491,7 @@ Embedded hierarchical_index.png
 
 Inserted 6 image embeddings (dim=3072)
 </code></pre>
-<h3 id="Cross-modal-search-Text-query-→-Image-results" class="common-anchor-header">교차 모달 검색: 텍스트 쿼리 → 이미지 결과<button data-href="#Cross-modal-search-Text-query-→-Image-results" class="anchor-icon" translate="no">
+<h3 id="Cross-modal-search-Text-query-→-Image-results" class="common-anchor-header">크로스 모달 검색: 텍스트 쿼리 → 이미지 결과<button data-href="#Cross-modal-search-Text-query-→-Image-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -505,7 +506,7 @@ Inserted 6 image embeddings (dim=3072)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>이제 텍스트 쿼리를 사용하여 이미지 임베딩을 검색해 보겠습니다. 텍스트와 이미지가 모두 동일한 임베딩 공간에 매핑되므로 직접 비교할 수 있습니다.</p>
+    </button></h3><p>이제 텍스트 쿼리를 사용하여 이미지 임베딩을 검색해 보겠습니다. 텍스트와 이미지가 모두 동일한 임베딩 공간에 매핑되므로, 이를 직접 비교할 수 있습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> IPython.display <span class="hljs-keyword">import</span> display, Image
 
 text_queries = [
@@ -535,22 +536,28 @@ text_queries = [
 <pre><code translate="no">Query: How does a basic RAG pipeline work?
 Match: vanilla_rag.png (score: 0.5132)
 </code></pre>
-<p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/build_RAG_with_milvus_and_gemini_38_1.png" alt="Vanilla RAG Pipeline" class="doc-image" id="vanilla-rag-pipeline" />
-   </span> <span class="img-wrapper"> <span>바닐라 RAG 파이프라인</span> </span></p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/vanilla_rag.png" alt="Vanilla RAG Pipeline" class="doc-image" id="vanilla-rag-pipeline" /> 
+   <span>기본 RAG 파이프라인</span>
+  
+ </span></p>
 <pre><code translate="no">Query: What is the hypothetical document embedding approach?
 Match: hyde.png (score: 0.4756)
 </code></pre>
-<p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/build_RAG_with_milvus_and_gemini_38_3.png" alt="HyDE" class="doc-image" id="hyde" />
-   </span> <span class="img-wrapper"> <span>HyDE</span> </span></p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hyde.png" alt="HyDE" class="doc-image" id="hyde" /> 
+   <span>HyDE</span>
+  
+ </span></p>
 <pre><code translate="no">Query: How to combine hybrid search with reranking?
 Match: hybrid_and_rerank.png (score: 0.5271)
 </code></pre>
-<p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/build_RAG_with_milvus_and_gemini_38_5.png" alt="Hybrid Retrieval and Reranking" class="doc-image" id="hybrid-retrieval-and-reranking" />
-   </span> <span class="img-wrapper"> <span>하이브리드 검색 및 재랭크</span> </span></p>
-<p>훌륭합니다! Milvus와 Gemini로 RAG 파이프라인을 성공적으로 구축했으며, 텍스트 쿼리를 사용해 관련 이미지를 검색하는 크로스 모달 검색을 시연했으며, 모두 <code translate="no">gemini-embedding-2-preview</code> 의 통합 임베딩 공간으로 구동됩니다.</p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hybrid_and_rerank.png" alt="Hybrid Retrieval and Reranking" class="doc-image" id="hybrid-retrieval-and-reranking" /> 
+   <span>하이브리드 검색 및 재순위</span> </span>지정 <span class="img-wrapper">
+  
+ </span></p>
+<p>훌륭합니다! Milvus와 Gemini를 활용해 RAG 파이프라인을 성공적으로 구축했으며, 텍스트 쿼리를 사용하여 관련 이미지를 검색하는 크로스모달 검색을 시연했습니다. 이 모든 과정은 <code translate="no">gemini-embedding-2-preview</code> 의 통합 임베딩 공간을 기반으로 이루어졌습니다.</p>

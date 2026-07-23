@@ -491,7 +491,7 @@
                 "children": []
               },
               {
-                "label": "内蔵アナライザ",
+                "label": "組み込みアナライザ",
                 "id": "built-in-analyzers",
                 "order": 1,
                 "children": [
@@ -570,7 +570,7 @@
                     "children": []
                   },
                   {
-                    "label": "ASCIIの折りたたみ",
+                    "label": "ASCII折り畳み",
                     "id": "ascii-folding-filter.md",
                     "order": 1,
                     "children": []
@@ -638,7 +638,7 @@
                 "children": []
               },
               {
-                "label": "用途に合ったアナライザーを選びましょう",
+                "label": "用途に合ったアナライザーを選ぶ",
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
@@ -979,7 +979,7 @@
                 "children": []
               },
               {
-                "label": "フィルタリングとテンプレート処理",
+                "label": "フィルタリングとテンプレート",
                 "id": "filtering-templating.md",
                 "order": 2,
                 "children": []
@@ -1017,7 +1017,7 @@
             "children": []
           },
           {
-            "label": "テキスト一致",
+            "label": "テキストの一致",
             "id": "keyword-match.md",
             "order": 9,
             "children": []
@@ -1041,7 +1041,7 @@
             "children": []
           },
           {
-            "label": "Milvus への Elasticsearch クエリ",
+            "label": "Elasticsearch クエリを Milvus に送信",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 13,
             "children": []
@@ -1239,7 +1239,7 @@
                     "children": []
                   },
                   {
-                    "label": "SiliconFlow Ranker",
+                    "label": "SiliconFlow ランカー",
                     "id": "siliconflow-ranker.md",
                     "order": 5,
                     "children": []
@@ -1630,7 +1630,7 @@
             ]
           },
           {
-            "label": "Pulsar を Milvus と併用する",
+            "label": "PulsarとMilvusを併用する",
             "id": "pulsar_dependencies",
             "order": 2,
             "isMenu": true,
@@ -1943,7 +1943,7 @@
             "children": []
           },
           {
-            "label": "よくある症例",
+            "label": "よくある事例",
             "id": "common-cases",
             "order": 3,
             "isMenu": true,
@@ -2199,7 +2199,7 @@
             ]
           },
           {
-            "label": "再ランク付け者",
+            "label": "リランカー",
             "id": "rerankers",
             "order": 1,
             "isMenu": true,
@@ -2348,7 +2348,7 @@
                 "children": []
               },
               {
-                "label": "メタデータによるフィルタリング",
+                "label": "メタデータのフィルタリング",
                 "id": "llamaindex_milvus_metadata_filter.md",
                 "order": 4,
                 "children": []
@@ -2454,7 +2454,7 @@
             "children": []
           },
           {
-            "label": "ラクダ",
+            "label": "キャメル",
             "id": "integrate_with_camel.md",
             "order": 1,
             "children": []
@@ -2625,7 +2625,7 @@
             "children": []
           },
           {
-            "label": "SambaNova",
+            "label": "サンバノヴァ",
             "id": "use_milvus_with_sambanova.md",
             "order": 5,
             "children": []
@@ -2651,12 +2651,12 @@
         ]
       },
       {
-        "label": "ナレッジエンジニアリング",
+        "label": "ナレッジ・エンジニアリング",
         "id": "knowledge-engineering",
         "order": 5,
         "children": [
           {
-            "label": "なぜ・どのように",
+            "label": "WhyHow",
             "id": "integrate_with_whyhow.md",
             "order": 0,
             "children": []
@@ -2891,7 +2891,7 @@
         "children": []
       },
       {
-        "label": "マトリョーシカ・エンベディングを用いたファンネル検索",
+        "label": "マトリョーシカ・エンベディングを用いたファネル検索",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []
@@ -2944,7 +2944,7 @@
             "children": []
           },
           {
-            "label": "音声類似性検索",
+            "label": "音声類似度検索",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []

@@ -21,7 +21,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>在执行向量搜索或加速标量过滤之前，请先在 StructArray 子字段上创建索引。对于 StructArray 字段，索引目标是一个子字段路径，例如<code translate="no">chunks[emb_list_vector]</code> 、<code translate="no">chunks[emb]</code> 或<code translate="no">chunks[section]</code> 。</p>
-<p>本页使用《<a href="/docs/zh/create-structarray-field.md">创建 StructArray 字段</a>》中的<code translate="no">tech_articles</code> Collection。<code translate="no">chunks</code> StructArray 字段包含用于过滤的标量子字段和用于搜索的向量字段。</p>
+<p>本页使用<a href="/docs/zh/create-structarray-field.md">“创建 StructArray 字段</a>”中的<code translate="no">tech_articles</code> Collection。<code translate="no">chunks</code> StructArray 字段包含用于过滤的标量子字段和用于搜索的向量字段。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">开始之前<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -203,7 +203,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>请参考以下表格，为 StructArray 向量子场选择索引类型和度量类型。请从目标开始，然后根据搜索模式选择度量族。</p>
+    </button></h2><p>请参考以下表格，为 StructArray 向量子字段选择索引类型和度量类型。请从目标开始，然后根据搜索模式选择度量族。</p>
 <p>请从以下兼容性表中选择 Milvus 索引类型和度量类型。</p>
 <h3 id="EmbeddingList-search" class="common-anchor-header">EmbeddingList 搜索<button data-href="#EmbeddingList-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -246,7 +246,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>元素级搜索使用常规向量度量。它会独立搜索每个 Struct 元素，并可返回匹配元素的偏移量。</p>
+    </button></h3><p>元素级搜索使用常规向量度量。它会独立搜索每个 Struct 元素，并能返回匹配元素的偏移量。</p>
 <table>
 <thead>
 <tr><th>向量子场数据类型</th><th>索引类型</th><th>度量类型</th></tr>
@@ -313,8 +313,8 @@ client.create_index(
 <tr><td>对子字段索引，请使用路径语法。</td><td>请使用索引<code translate="no">chunks[emb]</code> ，而不是<code translate="no">emb</code> 或<code translate="no">chunks.emb</code> 。</td></tr>
 <tr><td>一个向量量子字段只能接受一个索引。</td><td>如果需要不同的度量家族，请使用独立的向量子字段。</td></tr>
 <tr><td>请使用<code translate="no">MAX_SIM*</code> 指标进行 EmbeddingList 搜索。</td><td>EmbeddingList 查询数据需要使用<code translate="no">MAX_SIM*</code> 度量构建的索引。</td></tr>
-<tr><td>对于元素级搜索，请使用常规向量指标。</td><td>元素级搜索使用常规向量查询数据和度量，例如<code translate="no">COSINE</code> 、<code translate="no">IP</code> 或<code translate="no">L2</code> 。</td></tr>
-<tr><td>对出现在过滤器中的标量子字段进行索引。</td><td>使用目标支持的标量索引类型。</td></tr>
+<tr><td>对于元素级搜索，请使用常规向量指标。</td><td>元素级搜索使用常规向量查询数据和诸如<code translate="no">COSINE</code> 、<code translate="no">IP</code> 或<code translate="no">L2</code> 等度量。</td></tr>
+<tr><td>对出现在过滤器中的标量子字段进行索引。</td><td>请使用目标支持的标量索引类型。</td></tr>
 <tr><td>请注意向量字段的限制。</td><td>向量字段和向量子字段的总数是有限的。在添加大量向量子字段之前，请参阅《StructArray 限制》。</td></tr>
 </tbody>
 </table>
@@ -335,11 +335,11 @@ client.create_index(
       </svg>
     </button></h2><ul>
 <li><p>在 `<code translate="no">chunks.emb</code> ` 上创建索引，而不是在 `<code translate="no">chunks[emb]</code>` 上创建。</p></li>
-<li><p>仅在<code translate="no">MAX_SIM*</code> 上创建索引，然后尝试在同一子字段上执行元素级搜索。</p></li>
+<li><p>仅创建<code translate="no">MAX_SIM*</code> 索引，然后尝试在同一子字段上运行元素级搜索。</p></li>
 <li><p>仅创建常规向量索引，随后却试图在同一子字段上执行 EmbeddingList 搜索。</p></li>
 <li><p>将同一个向量子字段同时用于<code translate="no">MAX_SIM*</code> 和常规向量度量。</p></li>
-<li><p>遗漏了针对高频使用的 StructArray 过滤器的标量索引。</p></li>
-<li><p>为 Struct 模式中不存在的 StructArray 子字段创建索引。</p></li>
+<li><p>忽略了高频使用的 StructArray 过滤器对应的标量索引。</p></li>
+<li><p>对 Struct Schema 中不存在的 StructArray 子字段进行索引。</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">后续步骤<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -57,11 +57,11 @@ title: 使用 Milvus Operator 升級 Milvus 獨立部署
     </button></h3><p>從 Milvus 2.5.x 升級至 2.6.17 涉及重大的架構變更：</p>
 <ul>
 <li><strong>協調器整合</strong>：舊版獨立的協調器（<code translate="no">dataCoord</code> 、<code translate="no">queryCoord</code> 、<code translate="no">indexCoord</code> ）已整合為單一<code translate="no">mixCoord</code></li>
-<li><strong>新元件</strong>：引入「串流節點」（Streaming Node）以強化資料處理能力</li>
+<li><strong>新元件</strong>：導入「串流節點」（Streaming Node）以強化資料處理能力</li>
 <li><strong>元件移除</strong>：已移除並整合<code translate="no">indexNode</code> </li>
 </ul>
 <p>此升級流程可確保順利遷移至新架構。有關架構變更的更多資訊，請參閱《<a href="/docs/zh-hant/v2.6.x/architecture_overview.md">Milvus 架構概覽</a>》。</p>
-<h3 id="Requirements" class="common-anchor-header">系統需求<button data-href="#Requirements" class="anchor-icon" translate="no">
+<h3 id="Requirements" class="common-anchor-header">需求<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -78,13 +78,13 @@ title: 使用 Milvus Operator 升級 Milvus 獨立部署
       </svg>
     </button></h3><p><strong>系統需求：</strong></p>
 <ul>
-<li>已透過 Milvus Operator 部署 Milvus 獨立版本的 Kubernetes 叢集</li>
+<li>已透過 Milvus Operator 部署 Milvus 獨立模式的 Kubernetes 叢集</li>
 <li><code translate="no">kubectl</code> 並已設定可存取您的叢集</li>
 <li>已安裝 Helm 3.x</li>
 </ul>
 <p><strong>相容性要求：</strong></p>
 <ul>
-<li>Milvus v2.6.0-rc1 與 v2.6.17<strong>不相容</strong>。不支援直接從候選版本進行升級。</li>
+<li>Milvus v2.6.0-rc1 與 v2.6.17<strong>不相容</strong>。不支援直接從候選版本（release candidates）進行升級。</li>
 <li>若您目前正在運行 v2.6.0-rc1 且需要保留資料，請參閱<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">此社群指南</a>以獲取遷移協助。</li>
 <li>在升級至 v2.6.17 之前，您<strong>必須先</strong>升級至 v2.5.16 或更新版本。</li>
 </ul>
@@ -124,10 +124,10 @@ title: 使用 Milvus Operator 升級 Milvus 獨立部署
 helm repo update zilliztech-milvus-operator
 helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvus-operator
 <button class="copy-code-btn"></button></code></pre>
-<p>驗證操作員升級狀態：</p>
+<p>驗證 Operator 升級狀態：</p>
 <pre><code translate="no" class="language-bash">kubectl -n milvus-operator get pods
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Upgrade-your-Milvus-standalone" class="common-anchor-header">步驟 2：升級您的 Milvus 獨立執行個體<button data-href="#Step-2-Upgrade-your-Milvus-standalone" class="anchor-icon" translate="no">
+<h3 id="Step-2-Upgrade-your-Milvus-standalone" class="common-anchor-header">步驟 2：升級您的 Milvus 獨立執行環境<button data-href="#Step-2-Upgrade-your-Milvus-standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

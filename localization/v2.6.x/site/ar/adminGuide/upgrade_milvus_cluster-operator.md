@@ -145,7 +145,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
     </button></h3><h4 id="21-Check-current-coordinator-configuration" class="common-anchor-header">2.1 التحقق من التكوين الحالي للمنسق</h4><p>تحقق مما إذا كانت مجموعتك تستخدم بالفعل <code translate="no">mixCoord</code>:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p>إذا رأيت بدلاً من ذلك وحدات منسق منفصلة (<code translate="no">datacoord</code> ، <code translate="no">querycoord</code> ، <code translate="no">indexcoord</code>)، فستحتاج إلى تمكين <code translate="no">mixCoord</code> في الخطوة التالية.</p>
+<p>إذا رأيت بدلاً من ذلك وحدات pod منفصلة للمنسق (<code translate="no">datacoord</code> ، <code translate="no">querycoord</code> ، <code translate="no">indexcoord</code>)، فستحتاج إلى تمكين <code translate="no">mixCoord</code> في الخطوة التالية.</p>
 <h4 id="22-Upgrade-to-v2516-with-mixCoord" class="common-anchor-header">2.2 الترقية إلى الإصدار v2.5.16 باستخدام mixCoord</h4><div class="alert-note">
 <p>تخطّ هذه الخطوة إذا كانت مجموعتك تعمل بالفعل بالإصدار v2.5.16 أو أعلى مع تمكين <code translate="no">mixCoord</code>.</p>
 </div>

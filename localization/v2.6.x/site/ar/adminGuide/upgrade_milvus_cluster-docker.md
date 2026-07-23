@@ -3,7 +3,7 @@ id: upgrade_milvus_cluster-docker.md
 summary: تعرف على كيفية ترقية مجموعة Milvus باستخدام Docker Compose.
 title: ترقية مجموعة Milvus باستخدام Docker Compose
 ---
-<div class="tab-wrapper"><a href="/docs/ar/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/ar/v2.6.x/upgrade_milvus_cluster-operator.md" class=''>OperatorMilvus</a><a href="/docs/ar/v2.6.x/configure_operator.md" class=''>OperatorMilvus</a><a href="/docs/ar/v2.6.x/configure-docker.md" class=''>OperatorHelmDocker</a><a href="/docs/ar/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>ComposeHelmDocker</a><a href="/docs/ar/v2.6.x/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>
+<div class="tab-wrapper"><a href="/docs/ar/v2.6.x/upgrade_milvus_cluster-operator.md" class=''>مشغل</a><a href="/docs/ar/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/ar/v2.6.x/configure_operator.md" class=''>مشغل Milvus مشغل</a><a href="/docs/ar/v2.6.x/configure-docker.md" class=''>Milvus Helm Docker</a><a href="/docs/ar/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>Compose</a><a href="/docs/ar/v2.6.x/upgrade_milvus_cluster-helm.md" class=''>Helm Docker Compose Helm</a></div>
 <h1 id="Upgrade-Milvus-Cluster-with-Docker-Compose" class="common-anchor-header">ترقية مجموعة Milvus باستخدام Docker Compose<button data-href="#Upgrade-Milvus-Cluster-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -124,7 +124,7 @@ docker compose up -d
 <span class="hljs-comment"># and you put migration.yaml in the same directory with docker-compose.yaml.</span>
 docker run --<span class="hljs-built_in">rm</span> -it --network milvus -v $(<span class="hljs-built_in">pwd</span>)/migration.yaml:/milvus/configs/migration.yaml milvus/meta-migration:v2.2.0 /milvus/bin/meta-migration -config=/milvus/configs/migration.yaml
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>ابدأ تشغيل مكونات Milvus مرة أخرى باستخدام الصورة الجديدة لـ Milvus.</p>
+<li><p>أعد تشغيل مكونات Milvus مرة أخرى باستخدام الصورة الجديدة لـ Milvus.</p>
 <pre><code translate="no">Update the milvus <span class="hljs-selector-tag">image</span> tag in the docker-compose<span class="hljs-selector-class">.yaml</span>
 docker compose down
 docker compose up -d
@@ -153,7 +153,7 @@ docker compose up -d
 <li>إذا كنت مستعدًا لنشر مجموعتك على السحابة:
 <ul>
 <li>تعرف على كيفية <a href="/docs/ar/v2.6.x/eks.md">نشر Milvus على Amazon EKS باستخدام Terraform</a></li>
-<li>تعلم كيفية <a href="/docs/ar/v2.6.x/gcp.md">نشر مجموعة Milvus على GCP باستخدام Kubernetes</a></li>
+<li>تعرف على كيفية <a href="/docs/ar/v2.6.x/gcp.md">نشر مجموعة Milvus على GCP باستخدام Kubernetes</a></li>
 <li>تعرف على كيفية <a href="/docs/ar/v2.6.x/azure.md">نشر Milvus على Microsoft Azure باستخدام Kubernetes</a></li>
 </ul></li>
 </ul>

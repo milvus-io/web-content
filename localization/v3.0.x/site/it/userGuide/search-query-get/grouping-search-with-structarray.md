@@ -24,8 +24,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Utilizzare questa pagina per raggruppare i risultati della ricerca a livello di elemento StructArray in base all'entità padre. La ricerca a livello di elemento può restituire più risultati provenienti dalla stessa entità quando diversi elementi Struct corrispondono alla query. Il raggruppamento comprime tali risultati a livello di elemento in modo che ogni entità padre appaia al massimo una volta.</p>
-<p>Questa pagina utilizza la raccolta « <code translate="no">tech_articles</code> » descritta in <a href="/docs/it/create-structarray-field.md">«Creazione di un campo StructArray</a>». La raccolta presenta un campo StructArray denominato « <code translate="no">chunks</code> ». Il sottocampo vettoriale « <code translate="no">chunks[emb]</code> » è indicizzato per la ricerca a livello di elemento con una metrica vettoriale standard.</p>
+    </button></h1><p>Utilizzare questa pagina per raggruppare i risultati della ricerca a livello di elemento StructArray in base all'entità padre. La ricerca a livello di elemento può restituire più risultati provenienti dalla stessa entità quando diversi elementi Struct corrispondono alla query. Il raggruppamento raggruppa tali risultati a livello di elemento in modo che ogni entità padre appaia al massimo una volta.</p>
+<p>Questa pagina utilizza la raccolta « <code translate="no">tech_articles</code> » descritta in <a href="/docs/it/create-structarray-field.md">«Creazione di un campo StructArray</a>». La raccolta presenta un campo StructArray denominato « <code translate="no">chunks</code> ». Il sottocampo vettoriale « <code translate="no">chunks[emb]</code> » è indicizzato per la ricerca a livello di elemento con una metrica vettoriale regolare.</p>
 <h2 id="How-grouping-applies-to-StructArray" class="common-anchor-header">Come si applica il raggruppamento a StructArray<button data-href="#How-grouping-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,7 +46,7 @@ summary: >-
 <tr><th>Modalità di ricerca</th><th>Comportamento del raggruppamento</th><th>Comportamento dei risultati</th></tr>
 </thead>
 <tbody>
-<tr><td>Ricerca EmbeddingList</td><td>Non supportata.</td><td>Non applicabile.</td></tr>
+<tr><td>Ricerca EmbeddingList</td><td>Non supportato.</td><td>Non applicabile.</td></tr>
 <tr><td>Ricerca a livello di elemento</td><td>Supportata tramite raggruppamento sulla chiave primaria.</td><td>Restituisce al massimo un risultato per entità padre. I metadati a livello di elemento vengono conservati, pertanto l'indice o l'offset dell'elemento selezionato può essere restituito quando esposto dall'API o dall'SDK.</td></tr>
 <tr><td>Ricerca ibrida</td><td>Supportata solo quando tutte le sotto-ricerche hanno come obiettivo campi vettoriali a livello di elemento all'interno dello stesso campo StructArray.</td><td>Le sotto-ricerche a livello di elemento vengono raggruppate in base alla chiave primaria prima della gestione del risultato finale.</td></tr>
 </tbody>
@@ -81,7 +81,7 @@ summary: >-
 <tr><td>Nessun parametro di intervallo</td><td>Non combinare la ricerca per raggruppamento con parametri di ricerca per intervallo come <code translate="no">radius</code> o <code translate="no">range_filter</code>.</td></tr>
 </tbody>
 </table>
-<p>Per la configurazione dell’indice, consultare <a href="/docs/it/index-structarray-fields.md">i campi StructArray dell’indice</a>.</p>
+<p>Per la configurazione dell’indice, consultare <a href="/docs/it/index-structarray-fields.md">Campi StructArray dell’indice</a>.</p>
 <h2 id="Run-grouped-element-level-search" class="common-anchor-header">Eseguire una ricerca raggruppata a livello di elemento<button data-href="#Run-grouped-element-level-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -174,7 +174,7 @@ results = client.search(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Il predicato di primo livello seleziona le entità candidate. Il predicato ` <code translate="no">element_filter</code> ` limita la ricerca vettoriale a livello di elemento agli elementi Struct corrispondenti. Il raggruppamento raggruppa quindi i risultati corrispondenti in base alla chiave primaria.</p>
-<h2 id="Use-grouping-in-hybrid-search" class="common-anchor-header">Utilizzo del raggruppamento nella ricerca ibrida<button data-href="#Use-grouping-in-hybrid-search" class="anchor-icon" translate="no">
+<h2 id="Use-grouping-in-hybrid-search" class="common-anchor-header">Utilizzare il raggruppamento nella ricerca ibrida<button data-href="#Use-grouping-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -288,9 +288,9 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Utilizzo del raggruppamento con ` <code translate="no">chunks[emb_list_vector]</code>`, che è destinato alla ricerca su `EmbeddingList`.</p></li>
+<li><p>Utilizzo del raggruppamento con ` <code translate="no">chunks[emb_list_vector]</code>`, destinato alla ricerca EmbeddingList.</p></li>
 <li><p>Raggruppamento in base a un campo scalare non chiave primaria.</p></li>
-<li><p>Raggruppamento in base a più campi. Il raggruppamento StructArray a livello di elemento supporta solo il raggruppamento in base alla chiave primaria.</p></li>
+<li><p>Raggruppamento in base a più campi. Il raggruppamento StructArray a livello di elemento supporta solo il raggruppamento per chiave primaria.</p></li>
 <li><p>Aspettarsi che i risultati raggruppati rappresentino ogni elemento Struct corrispondente. Il raggruppamento restituisce al massimo un risultato per entità padre.</p></li>
 <li><p>Presumere che la ricerca raggruppata a livello di elemento ricalcoli un punteggio di tipo " <code translate="no">MAX_SIM*</code> " in stile EmbeddingList. Il raggruppamento comprime i risultati a livello di elemento; non modifica il modello di punteggio.</p></li>
 <li><p>Combinazione dell’ <code translate="no">group_by_field</code> con <code translate="no">radius</code> o <code translate="no">range_filter</code>.</p></li>
@@ -311,7 +311,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>Per imparare prima la ricerca a livello di elemento non raggruppata, leggi <a href="/docs/it/basic-vector-search-with-structarray.md">Ricerca vettoriale di base con StructArray</a>.</p></li>
+<li><p>Per imparare innanzitutto la ricerca a livello di elemento non raggruppata, leggi <a href="/docs/it/basic-vector-search-with-structarray.md">Ricerca vettoriale di base con StructArray</a>.</p></li>
 <li><p>Per aggiungere filtri scalari alla ricerca raggruppata, leggi <a href="/docs/it/filtered-search-with-structarray.md">Ricerca filtrata con StructArray</a>.</p></li>
 <li><p>Per utilizzare limiti di punteggio o di distanza al posto del raggruppamento, leggi <a href="/docs/it/range-search-with-structarray.md">Ricerca per intervallo con StructArray</a>.</p></li>
 <li><p>Per verificare i limiti di ricerca di StructArray, leggi <a href="/docs/it/structarray-limits.md">Limiti di StructArray</a>.</p></li>

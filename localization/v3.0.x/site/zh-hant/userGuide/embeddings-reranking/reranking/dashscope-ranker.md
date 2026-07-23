@@ -1,7 +1,7 @@
 ---
 id: dashscope-ranker.md
 title: DashScope RankerCompatible with Milvus 2.6.x
-summary: 本主題說明如何在 Milvus 中設定和使用 DashScope 重新排序模型，例如 Qwen 重新排序模型。
+summary: 本主題說明如何在 Milvus 中設定及使用 DashScope 重新排序模型，例如 Qwen 重新排序模型。
 beta: Milvus 2.6.x
 ---
 <h1 id="DashScope-Ranker" class="common-anchor-header">DashScope Ranker<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#DashScope-Ranker" class="anchor-icon" translate="no">
@@ -19,7 +19,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>DashScope 排名器可讓 Milvus 呼叫阿里雲 DashScope 的重新排序模型，根據語義相關性重新排列搜尋結果的順序。</p>
+    </button></h1><p>DashScope 排名器可讓 Milvus 呼叫阿里雲 DashScope 重新排序模型，根據語義相關性重新排列搜尋結果的順序。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先決條件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +41,7 @@ beta: Milvus 2.6.x
 <li><p>一個有效的 DashScope API 金鑰。</p></li>
 <li><p>可存取的 DashScope 重新排序模型，例如<code translate="no">gte-rerank-v2</code> 。</p></li>
 </ul>
-<p>有關可用的重新排序模型和區域端點，請參閱「<a href="https://www.alibabacloud.com/help/en/model-studio/text-rerank-api">阿里雲 Model Studio 文本重新排序 API</a>」。</p>
+<p>有關可用的重新排序模型及區域端點，請參閱「<a href="https://www.alibabacloud.com/help/en/model-studio/text-rerank-api">阿里雲 Model Studio 文本重新排序 API</a>」。</p>
 <h2 id="Configure-credentials" class="common-anchor-header">設定憑證<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

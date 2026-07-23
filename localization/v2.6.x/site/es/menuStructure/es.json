@@ -124,7 +124,7 @@
                 "children": []
               },
               {
-                "label": "Gráfico de Helm",
+                "label": "Mapa de Helm",
                 "id": "install_cluster-helm.md",
                 "order": 2,
                 "children": []
@@ -273,7 +273,7 @@
         "children": []
       },
       {
-        "label": "Tipos de unidades métricas",
+        "label": "Tipos métricos",
         "id": "metric.md",
         "order": 7,
         "children": []
@@ -310,7 +310,7 @@
         "order": 1,
         "children": [
           {
-            "label": "Explicación del cobro",
+            "label": "Explicación de la colección",
             "id": "manage-collections.md",
             "order": 0,
             "children": []
@@ -456,7 +456,7 @@
             "children": []
           },
           {
-            "label": "Campo de geometría",
+            "label": "Área de geometría",
             "id": "geometry-field.md",
             "order": 10,
             "children": []
@@ -474,7 +474,7 @@
             "children": []
           },
           {
-            "label": "Nullable y por defecto",
+            "label": "Valores nulos y valores por defecto",
             "id": "nullable-and-default.md",
             "order": 13,
             "children": []
@@ -829,7 +829,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "ÍNDICE_INVERTIDO_DISPARSO",
+                "label": "ÍNDICE_INVERTIDO_ESCASO",
                 "id": "sparse-inverted-index.md",
                 "order": 0,
                 "children": []
@@ -1035,7 +1035,7 @@
             "children": []
           },
           {
-            "label": "Buscar con listas de inserción",
+            "label": "Buscar con listas de incrustaciones",
             "id": "search-with-embedding-lists.md",
             "order": 12,
             "children": []
@@ -1053,7 +1053,7 @@
             "children": []
           },
           {
-            "label": "Utilizar la clave de partición",
+            "label": "Utilizar clave de partición",
             "id": "use-partition-key.md",
             "order": 15,
             "children": []
@@ -1165,7 +1165,7 @@
                 "children": []
               },
               {
-                "label": "Clasificación de la descomposición",
+                "label": "Clasificación de decadencia",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -1233,7 +1233,7 @@
                     "children": []
                   },
                   {
-                    "label": "Ranker de IA de Voyage",
+                    "label": "Ranker de Voyage AI",
                     "id": "voyage-ai-ranker.md",
                     "order": 4,
                     "children": []
@@ -1331,7 +1331,7 @@
         "children": []
       },
       {
-        "label": "Sugerencias para la IA",
+        "label": "Indicaciones para la IA",
         "id": "ai_prompts",
         "isMenu": true,
         "order": 1,
@@ -1367,7 +1367,7 @@
             "children": []
           },
           {
-            "label": "Proceso RAG",
+            "label": "Canalización RAG",
             "id": "rag_pipeline.md",
             "order": 5,
             "children": []
@@ -1670,7 +1670,7 @@
             "children": []
           },
           {
-            "label": "Escala con HPA",
+            "label": "Ampliar con HPA",
             "id": "hpa.md",
             "order": 2,
             "children": []
@@ -1961,7 +1961,7 @@
                 "children": []
               },
               {
-                "label": "Migrar entre instancias de distintos buckets",
+                "label": "Migrar entre instancias de distintos depósitos",
                 "id": "cross-bucket-backup-and-restore.md",
                 "order": 2,
                 "children": []
@@ -2818,7 +2818,7 @@
         "children": []
       },
       {
-        "label": "Crear un RAG con Milvus",
+        "label": "Crea un RAG con Milvus",
         "id": "build-rag-with-milvus.md",
         "order": 1,
         "children": []
@@ -2860,7 +2860,7 @@
         "children": []
       },
       {
-        "label": "Búsqueda contextual",
+        "label": "Recuperación contextual",
         "id": "contextual_retrieval_with_milvus.md",
         "order": 8,
         "children": []

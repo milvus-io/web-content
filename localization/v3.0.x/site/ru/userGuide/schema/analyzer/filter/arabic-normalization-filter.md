@@ -40,7 +40,7 @@ beta: Milvus 3.0.0+
     </button></h2><div class="alert note">
 <p>Для арабского текста в большинстве случаев следует использовать встроенный <a href="/docs/ru/arabic-analyzer.md"><code translate="no">arabic</code></a> анализатор. Встроенный анализатор включает этот фильтр наряду со стандартной токенизацией, преобразованием в нижний регистр, нормализацией десятичных цифр, арабским стеммингом и удалением арабских стоп-слов. Используйте « <code translate="no">arabic_normalization</code> » напрямую только в том случае, если вам необходимо создать собственный конвейер анализатора.</p>
 </div>
-<p>Чтобы использовать фильтр <code translate="no">arabic_normalization</code> в пользовательском анализаторе, добавьте его в раздел « <code translate="no">filter</code> » в файле <code translate="no">analyzer_params</code>:</p>
+<p>Чтобы использовать фильтр « <code translate="no">arabic_normalization</code> » в пользовательском анализаторе, добавьте его в раздел « <code translate="no">filter</code> » в файле « <code translate="no">analyzer_params</code> »:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;arabic_normalization&quot;</span>],
@@ -80,7 +80,7 @@ beta: Milvus 3.0.0+
      <td><p>Удалено</p></td>
    </tr>
 </table>
-<p>Фильтр работает с токенами, сгенерированными токенизатором. Приведённая выше конфигурация является намеренно приведённым примером пользовательского анализатора и не включает полный конвейер обработки арабского языка.</p>
+<p>Фильтр работает с токенами, сгенерированными токенизатором. Приведенная выше конфигурация является намеренно приведенным примером пользовательского анализатора и не включает полный конвейер обработки арабского языка.</p>
 <h2 id="Examples" class="common-anchor-header">Примеры<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

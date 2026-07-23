@@ -2,7 +2,7 @@
 id: install_standalone-docker-compose.md
 label: Docker Compose
 related_key: Docker Compose
-summary: 了解如何使用 Docker Compose 安裝 Milvus 獨立版本。
+summary: 瞭解如何使用 Docker Compose 安裝 Milvus 獨立版本。
 title: 使用 Docker Compose 執行 Milvus（Linux）
 ---
 <h1 id="Run-Milvus-with-Docker-Compose-Linux" class="common-anchor-header">使用 Docker Compose 執行 Milvus（Linux）<button data-href="#Run-Milvus-with-Docker-Compose-Linux" class="anchor-icon" translate="no">
@@ -75,7 +75,7 @@ Creating milvus-standalone ... done
 </ul>
 <p>請務必下載最新的 Docker Compose 配置檔，以確保與 v2.6.17 功能相容。</p>
 <ul>
-<li><p>若您無法執行上述指令，請檢查您的系統是否已安裝 Docker Compose V1。若屬此情況，建議您根據<a href="https://docs.docker.com/compose/">本頁</a>說明遷移至 Docker Compose V2。</p></li>
+<li><p>若您無法執行上述指令，請檢查系統是否已安裝 Docker Compose V1。若屬此情況，建議您根據<a href="https://docs.docker.com/compose/">本頁</a>說明遷移至 Docker Compose V2。</p></li>
 <li><p>若在拉取映像檔時遇到任何問題，請透過<a href="mailto:community@zilliz.com">community@zilliz.com</a>聯絡我們，並提供問題詳情，我們將為您提供必要的支援。</p></li>
 </ul>
 </div>
@@ -85,7 +85,7 @@ Creating milvus-standalone ... done
 <ul>
 <li><strong>milvus-etcd</strong>容器不會向主機公開任何埠號，並將其資料映射至當前資料夾中的<strong>volumes/etcd</strong>。</li>
 <li><strong>milvus-minio</strong>容器在本地端提供<strong>9090</strong>和<strong>9091</strong>埠，並使用預設的驗證憑證，其資料會映射至當前資料夾中的<strong>volumes/minio</strong>目錄。</li>
-<li><strong>milvus-standalone</strong>容器在本地端以預設設定提供<strong>19530</strong>埠的服務，並將其資料映射至當前資料夾中的<strong>volumes/milvus</strong>目錄。</li>
+<li><strong>milvus-standalone</strong>容器在本地端以預設設定提供<strong>19530</strong>埠，並將其資料映射至當前資料夾中的<strong>volumes/milvus</strong>。</li>
 </ul></li>
 </ul>
 <p>您可以使用以下指令檢查容器是否已啟動並正常運作：</p>
@@ -187,9 +187,9 @@ EOF
 <li><a href="/docs/zh-hant/v2.6.x/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/zh-hant/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus-webui.md">Milvus WebUI</a>，這是專為 Milvus 可觀察性與管理而設計的直觀網頁介面。</p></li>
+<li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus-webui.md">Milvus WebUI</a>，這是專為 Milvus 可觀察性與管理設計的直覺式網頁介面。</p></li>
 <li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>，這是一款用於 Milvus 資料備份的開源工具。</p></li>
 <li><p>探索<a href="/docs/zh-hant/v2.6.x/birdwatcher_overview.md">Birdwatcher，這</a>是一款用於 Milvus 除錯與動態配置更新的開源工具。</p></li>
 <li><p>探索<a href="https://github.com/zilliztech/attu">Attu，這</a>是一款用於直觀管理 Milvus 的開源圖形化介面工具。</p></li>
-<li><p><a href="/docs/zh-hant/v2.6.x/monitor.md">使用 Prometheus 監控 Milvus</a>。</p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/monitor.md">透過 Prometheus 監控 Milvus</a>。</p></li>
 </ul>

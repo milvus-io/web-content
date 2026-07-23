@@ -77,7 +77,7 @@ title: Запуск Milvus в Docker (Linux)
     </button></h3><p>Если вы лучше знакомы с PowerShell или командной строкой Windows, выполните следующие команды.​</p>
 <ol>
 <li><p>Откройте Docker Desktop в режиме администратора, щелкнув правой кнопкой мыши и выбрав <strong>«Запуск от имени администратора</strong>».​</p></li>
-<li><p>Скачайте скрипт установки и сохраните его как « <code translate="no">standalone.bat</code> ».​</p>
+<li><p>Загрузите скрипт установки и сохраните его как « <code translate="no">standalone.bat</code> ».​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;Invoke-WebRequest https://raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/scripts/standalone_embed.bat -OutFile standalone.bat​
 
 </code></pre></li>
@@ -90,7 +90,7 @@ To change the default Milvus configuration, edit user.yaml and restart the servi
 </code></pre>
 <p>После запуска скрипта установки:​</p>
 <ul>
-<li><p>Запущен контейнер Docker с именем <strong>milvus-standalone</strong> на порту <strong>19530</strong>.​</p></li>
+<li><p>Контейнер Docker с именем <strong>milvus-standalone</strong> запущен на порту <strong>19530</strong>.​</p></li>
 <li><p>Вместе с Milvus в том же контейнере установлен встроенный etcd, работающий на порту <strong>2379</strong>. Его файл конфигурации сопоставлен файлу <strong>embedEtcd.yaml</strong> в текущей папке.​</p></li>
 <li><p>Том данных Milvus сопоставлен папке <strong>volumes/milvus</strong> в текущей папке.​</p></li>
 </ul>
@@ -203,8 +203,8 @@ Creating milvus-standalone ... done​
 <p>В зависимости от вашего сетевого соединения загрузка образов для установки Milvus может занять некоторое время. Как только контейнеры с именами <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> и <strong>milvus-etcd</strong> будут запущены, вы увидите, что ​</p>
 <ul>
 <li><p>контейнер <strong>milvus-etcd</strong> не открывает никаких портов для хоста и сопоставляет свои данные с <strong>папкой volumes/etcd</strong> в текущем каталоге.</p></li>
-<li><p>Контейнер <strong>milvus-minio</strong> обслуживает локальные порты <strong>9090</strong> и <strong>9091</strong> с учетными данными аутентификации по умолчанию и сопоставляет свои данные с <strong>папкой volumes/minio</strong> в текущем каталоге.​</p></li>
-<li><p>Контейнер <strong>milvus-standalone</strong> обслуживает порты <strong>19530</strong> локально с настройками по умолчанию и сопоставляет свои данные с <strong>папкой volumes/milvus</strong> в текущем каталоге.​</p></li>
+<li><p>Контейнер <strong>milvus-minio</strong> обслуживает локально порты <strong>9090</strong> и <strong>9091</strong> с учетными данными аутентификации по умолчанию и сопоставляет свои данные с <strong>папкой volumes/minio</strong> в текущем каталоге.​</p></li>
+<li><p>Контейнер <strong>milvus-standalone</strong> обслуживает локальные порты <strong>19530</strong> с настройками по умолчанию и сопоставляет свои данные с <strong>папкой volumes/milvus</strong> в текущем каталоге.​</p></li>
 </ul></li>
 </ol>
 <p>Вы также можете использовать команды Docker Compose для Linux, если у вас установлен WSL 2.​</p>
@@ -277,7 +277,7 @@ Creating milvus-standalone ... done​
     </button></h3><p>После установки Docker Desktop в Windows может возникнуть ошибка « <code translate="no">Docker Engine stopped</code> », если ваш компьютер настроен некорректно. В этом случае необходимо выполнить следующие проверки:​</p>
 <ol>
 <li><p>Проверьте, включена ли виртуализация.​</p>
-<p>Проверить, включена ли виртуализация, можно на вкладке <strong>«Производительность»</strong> в <strong>диспетчере задач</strong>.</p>
+<p>Проверить, включена ли виртуализация, можно на вкладке <strong>«Производительность»</strong> в <strong>диспетчере задач</strong>.​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/task-manager.png" alt="Virtualization in Task Manager" class="doc-image" id="virtualization-in-task-manager" /> 
@@ -300,14 +300,14 @@ Checking for updates.​
 The most recent version of Windows Subsystem for Linux is already installed.​
 
 </code></pre></li>
-<li><p>Убедитесь, что Docker Daemon запущен.</p>
+<li><p>Проверьте, запущен ли Docker Daemon.</p>
 <p>Для запуска демона Docker необходимо перейти в каталог установки Docker Desktop и выполнить команду « <code translate="no">.\DockerCli.exe -SwitchDaemon</code> ».</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;cd &quot;C:\Program Files\Docker\Docker&quot;​
 C:\Program Files\Docker\Docker&gt;.\DockerCli.exe -SwitchDaemon​
 Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.\pipe\dockerBackendApiServer: The system cannot find the file specified.​
 
 </code></pre></li>
-<li><p>Убедитесь, что вы запустили Docker Desktop в режиме <strong>администратора</strong>.</p>
+<li><p>Убедитесь, что Docker Desktop запущен в режиме <strong>администратора</strong>.</p>
 <p>Убедитесь, что Docker Desktop запущен в режиме администратора. Для этого щелкните правой кнопкой мыши по <strong>Docker Desktop</strong> и выберите <strong>«Запуск от имени администратора</strong>».​</p>
 <p><span class="img-wrapper">
   
@@ -348,7 +348,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
   
  </span></p></li>
 </ol>
-<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">Как устранить ошибку, связанную с томом, возникающую при запуске Milvus: « <code translate="no">Read config failed</code> »?​<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
+<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">Как устранить ошибку, связанную с томом, возникающую при запуске Milvus с сообщением « <code translate="no">Read config failed</code> »?​<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -394,7 +394,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
       </svg>
     </button></h2><p>Установив Milvus в Docker, вы можете:</p>
 <ul>
-<li><p>Ознакомиться <a href="/docs/ru/v2.6.x/quickstart.md">с руководством по быстрому запуску</a>, чтобы узнать, на что способен Milvus.</p></li>
+<li><p>Ознакомиться с <a href="/docs/ru/v2.6.x/quickstart.md">руководством «Быстрый старт»</a>, чтобы узнать, на что способен Milvus.</p></li>
 <li><p>Ознакомиться с основными операциями Milvus:</p>
 <ul>
 <li><a href="/docs/ru/v2.6.x/manage_databases.md">Управление базами данных</a></li>
@@ -405,7 +405,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 <li><a href="/docs/ru/v2.6.x/multi-vector-search.md">Гибридный поиск</a></li>
 </ul></li>
 <li><p><a href="/docs/ru/v2.6.x/upgrade_milvus_cluster-helm.md">Обновление Milvus с помощью Helm Chart</a>.</p></li>
-<li><p><a href="/docs/ru/v2.6.x/scaleout.md">Масштабируйте свой кластер Milvus</a>.</p></li>
+<li><p><a href="/docs/ru/v2.6.x/scaleout.md">Масштабируйте кластер Milvus</a>.</p></li>
 <li><p>Разверните кластер Milvus в облаке:</p>
 <ul>
 <li><a href="/docs/ru/v2.6.x/eks.md">Amazon EKS</a></li>
@@ -414,7 +414,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 </ul></li>
 <li><p>Ознакомьтесь с <a href="/docs/ru/v2.6.x/milvus-webui.md">Milvus WebUI</a> — интуитивно понятным веб-интерфейсом для мониторинга и управления Milvus.</p></li>
 <li><p>Ознакомьтесь с <a href="/docs/ru/v2.6.x/milvus_backup_overview.md">Milvus Backup</a> — инструментом с открытым исходным кодом для резервного копирования данных Milvus.</p></li>
-<li><p>Познакомьтесь с <a href="/docs/ru/v2.6.x/birdwatcher_overview.md">Birdwatcher</a> — инструментом с открытым исходным кодом для отладки Milvus и динамического обновления конфигурации.</p></li>
+<li><p>Ознакомьтесь с <a href="/docs/ru/v2.6.x/birdwatcher_overview.md">Birdwatcher</a> — инструментом с открытым исходным кодом для отладки Milvus и динамического обновления конфигурации.</p></li>
 <li><p>Познакомьтесь с <a href="https://github.com/zilliztech/attu">Attu</a> — инструментом с графическим интерфейсом с открытым исходным кодом для интуитивного управления Milvus.</p></li>
-<li><p><a href="/docs/ru/v2.6.x/monitor.md">Мониторинг Milvus с помощью Prometheus</a>.</p></li>
+<li><p><a href="/docs/ru/v2.6.x/monitor.md">Осуществляйте мониторинг Milvus с помощью Prometheus</a>.</p></li>
 </ul>

@@ -1,10 +1,10 @@
 ---
 id: arabic-analyzer.md
-title: 阿拉伯文Compatible with Milvus 3.0.0+
+title: 阿拉伯語Compatible with Milvus 3.0.0+
 summary: 內建的阿拉伯語分析器會透過將字母變體和數字標準化、進行詞幹提取，以及移除阿拉伯語停用詞，來處理阿拉伯語文本。
 beta: Milvus 3.0.0+
 ---
-<h1 id="Arabic" class="common-anchor-header">阿拉伯文<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Arabic" class="anchor-icon" translate="no">
+<h1 id="Arabic" class="common-anchor-header">阿拉伯語<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Arabic" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +19,7 @@ beta: Milvus 3.0.0+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">arabic</code> 分析器是專為阿拉伯文設計的內建分析器。當您需要 Milvus 對阿拉伯字母變體進行標準化、移除標點符號與 Tatweel、轉換阿拉伯-印度數字、套用阿拉伯語詞幹化，以及移除阿拉伯語停用詞時，請使用此分析器。</p>
+    </button></h1><p><code translate="no">arabic</code> 分析器是專為阿拉伯文設計的內建分析器。當您需要 Milvus 執行以下操作時，請使用此分析器：規範化阿拉伯字母變體、移除音標與 Tatweel、轉換阿拉伯-印度數字、套用阿拉伯文詞幹化，以及移除阿拉伯文停用詞。</p>
 <h2 id="Configuration" class="common-anchor-header">設定<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,7 +53,7 @@ beta: Milvus 3.0.0+
      <td><p><code translate="no">stop_words</code></p></td>
      <td><p><code translate="no">list[str]</code></p></td>
      <td><p><code translate="no">_arabic_</code></p></td>
-     <td><p>一組需從詞元化過程中移除的額外停用詞清單。預設情況下，<code translate="no">arabic</code> 分析器會使用內建的<code translate="no">_arabic_</code> 字典。若要檢視預設字典，請參閱 Milvus<a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/arabic.txt">阿拉伯語停用詞清單</a>。該清單來源為 Apache Lucene<a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/ar/stopwords.txt">阿拉伯語停用詞檔案</a>。</p></td>
+     <td><p>一組需從分詞過程中移除的額外停用詞清單。預設情況下，<code translate="no">arabic</code> 分析器會使用內建的<code translate="no">_arabic_</code> 字典。如需檢視預設字典，請參閱 Milvus<a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/arabic.txt">阿拉伯語停用詞清單</a>。該清單來源為 Apache Lucene<a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/ar/stopwords.txt">阿拉伯語停用詞檔案</a>。</p></td>
    </tr>
 </table>
 <p>若要新增自訂停用詞，請加入<code translate="no">stop_words</code> ：</p>
@@ -63,7 +63,7 @@ beta: Milvus 3.0.0+
 }
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus 會在內建的<code translate="no">_arabic_</code> 詞典之外，額外套用自訂停用詞。</p>
-<p>內建的 `<code translate="no">arabic</code> ` 分析器相當於以下自訂分析器設定：</p>
+<p>內建的 `<code translate="no">arabic</code> ` 分析器等同於以下自訂分析器設定：</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [
@@ -85,7 +85,7 @@ beta: Milvus 3.0.0+
 <ul>
 <li><strong>分詞</strong>：使用<code translate="no">standard</code> 分詞器將文字分割為詞元。</li>
 <li><strong>數字正規化</strong>：使用<code translate="no">decimaldigit</code> 過濾器，將阿拉伯-印度數字及其他 Unicode 十進位數字轉換為 ASCII 數字。</li>
-<li><strong>阿拉伯文正規化</strong>：使用<code translate="no">arabic_normalization</code> 篩選器，對Alef變體、Teh Marbuta及Alef Maksura進行正規化，並移除Harakat和Tatweel。</li>
+<li><strong>阿拉伯文正規化</strong>：使用<code translate="no">arabic_normalization</code> 篩選器，將阿萊夫（Alef）變體、帶綁帶的泰（Teh Marbuta）及帶點的阿萊夫（Alef Maksura）進行正規化，並移除哈拉卡特（Harakat）與塔特維爾（Tatweel）。</li>
 <li><strong>詞幹提取</strong>：使用<code translate="no">stemmer</code> 篩選器，並將<code translate="no">language</code> 設定為<code translate="no">arabic</code> 。</li>
 <li><strong>停用詞移除</strong>：使用<code translate="no">stop</code> 篩選器，並搭配內建的<code translate="no">_arabic_</code> 字典。</li>
 </ul>

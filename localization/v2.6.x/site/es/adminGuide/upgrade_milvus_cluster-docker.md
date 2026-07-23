@@ -100,7 +100,7 @@ docker compose up -d
 <li><p>Detenga todos los componentes de Milvus.</p>
 <pre><code translate="no">docker stop <span class="hljs-tag">&lt;<span class="hljs-name">milvus-component-docker-container-name</span>&gt;</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Prepare el archivo de configuración <code translate="no">migrate.yaml</code> para la migración de metadatos.</p>
+<li><p>Prepara el archivo de configuración <code translate="no">migrate.yaml</code> para la migración de metadatos.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># migration.yaml</span>
 <span class="hljs-attr">cmd:</span>
   <span class="hljs-comment"># Option: run/backup/rollback</span>
@@ -119,7 +119,7 @@ docker compose up -d
   <span class="hljs-attr">metaSubPath:</span> <span class="hljs-string">meta</span>
   <span class="hljs-attr">kvSubPath:</span> <span class="hljs-string">kv</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Ejecute el contenedor de migración.</p>
+<li><p>Ejecuta el contenedor de migración.</p>
 <pre><code translate="no"><span class="hljs-comment"># Suppose your docker-compose run with the default milvus network,</span>
 <span class="hljs-comment"># and you put migration.yaml in the same directory with docker-compose.yaml.</span>
 docker run --<span class="hljs-built_in">rm</span> -it --network milvus -v $(<span class="hljs-built_in">pwd</span>)/migration.yaml:/milvus/configs/migration.yaml milvus/meta-migration:v2.2.0 /milvus/bin/meta-migration -config=/milvus/configs/migration.yaml

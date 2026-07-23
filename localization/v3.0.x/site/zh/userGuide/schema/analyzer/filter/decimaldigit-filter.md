@@ -19,7 +19,7 @@ beta: Milvus 3.0.0+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">decimaldigit</code> 过滤器是一个内置的标记过滤器，它将受支持脚本中的Unicode十进制数字转换为ASCII数字。这使得不同语言和书写系统中的数字标记保持一致。</p>
+    </button></h1><p><code translate="no">decimaldigit</code> 过滤器是一个内置的标记过滤器，用于将受支持脚本中的Unicode十进制数字转换为ASCII数字。这使得不同语言和书写系统中的数字标记保持一致。</p>
 <h2 id="Configuration" class="common-anchor-header">配置<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,14 +38,14 @@ beta: Milvus 3.0.0+
     </button></h2><div class="alert note">
 <p>对于阿拉伯语文本，内置的 <a href="/docs/zh/arabic-analyzer.md"><code translate="no">arabic</code></a> 分析器已包含<code translate="no">decimaldigit</code> 过滤器。若在自定义分析器管道中需要数字规范化处理，请直接使用<code translate="no">decimaldigit</code> 。</p>
 </div>
-<p>要在自定义分析器中使用<code translate="no">decimaldigit</code> 过滤器，请将其添加到<code translate="no">analyzer_params</code> 文件中的<code translate="no">filter</code> 部分：</p>
+<p>要在自定义分析器中使用<code translate="no">decimaldigit</code> 过滤器，请将其添加到<code translate="no">analyzer_params</code> 中的<code translate="no">filter</code> 部分：</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;decimaldigit&quot;</span>],
 }
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">decimaldigit</code> 过滤器没有可配置的参数。</p>
-<p>该过滤器将 Unicode 十进制数字（包括阿拉伯-印度数字、泰语数字、天城文数字、孟加拉语数字和全宽数字）转换为 ASCII 数字。它对词法分析器生成的词元进行处理。上述配置仅作为自定义分析器的示例，并未包含完整的阿拉伯语处理管道。</p>
+<p>该过滤器将 Unicode 十进制数字（包括阿拉伯-印度数字、泰语数字、天城文数字、孟加拉语数字和全角数字）转换为 ASCII 数字。它对词法分析器生成的令牌进行处理。上述配置仅作为自定义分析器的示例，并未包含完整的阿拉伯语处理管道。</p>
 <h2 id="Examples" class="common-anchor-header">示例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -82,7 +82,7 @@ beta: Milvus 3.0.0+
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;decimaldigit&quot;</span>],
 }
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">使用<code translate="no">run_analyzer</code><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
+<h3 id="Verification-using-runanalyzer" class="common-anchor-header">使用以下方法进行验证<code translate="no">run_analyzer</code><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

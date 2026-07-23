@@ -5,12 +5,12 @@ order: 1
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
 summary: >-
-  Découvrez comment mettre à jour Milvus en mode autonome à l'aide de Docker
+  Découvrez comment mettre à niveau Milvus en mode autonome à l'aide de Docker
   Compose.
-title: Mise à niveau de Milvus Standalone avec Docker Compose
+title: Mise à niveau de Milvus en mode autonome avec Docker Compose
 ---
 <div class="tab-wrapper"><a href="/docs/fr/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus,</a><a href="/docs/fr/v2.6.x/upgrade_milvus_standalone-docker.md" class='active '>Operator</a>, Helm, Docker<a href="/docs/fr/v2.6.x/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
-<h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">Mise à niveau de Milvus Standalone avec Docker Compose<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
+<h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">Mise à niveau de Milvus en mode autonome avec Docker Compose<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -157,7 +157,7 @@ docker compose up -d
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Une fois que la version v2.5.16 fonctionne correctement, effectuez la mise à niveau vers la version v2.6.17 :</p>
+    </button></h3><p>Une fois que la version 2.5.16 fonctionne correctement, effectuez la mise à niveau vers la version 2.6.17 :</p>
 <ol>
 <li><p>Modifiez votre fichier <code translate="no">docker-compose.yaml</code> existant et mettez à jour les balises d'image Milvus et MinIO :</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
@@ -175,7 +175,7 @@ docker compose up -d
 docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h2 id="Verify-the-upgrade" class="common-anchor-header">Vérifiez la mise à jour<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
+<h2 id="Verify-the-upgrade" class="common-anchor-header">Vérifiez la mise à niveau<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

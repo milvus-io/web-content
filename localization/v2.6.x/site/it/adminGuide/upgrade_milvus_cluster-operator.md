@@ -85,7 +85,7 @@ title: Aggiornamento del cluster Milvus con Milvus Operator
 <p><strong>Requisiti di compatibilità:</strong></p>
 <ul>
 <li>Milvus v2.6.0-rc1 <strong>non</strong> è <strong>compatibile</strong> con la versione v2.6.17. Gli aggiornamenti diretti dalle versioni candidate (release candidate) non sono supportati.</li>
-<li>Se attualmente si utilizza la versione v2.6.0-rc1 e si desidera conservare i propri dati, si prega di consultare <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">questa guida della community</a> per assistenza nella migrazione.</li>
+<li>Se attualmente si sta utilizzando la versione v2.6.0-rc1 e si desidera conservare i propri dati, si prega di consultare <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">questa guida della community</a> per assistenza nella migrazione.</li>
 <li><strong>È necessario</strong> eseguire l'aggiornamento alla versione v2.5.16 o successive con l'opzione " <code translate="no">mixCoord</code> " abilitata prima di passare alla versione v2.6.17.</li>
 </ul>
 <p><strong>Limitazioni relative alle code dei messaggi</strong>: durante l’aggiornamento a Milvus v2.6.17, è necessario mantenere l’attuale scelta della coda dei messaggi. Il passaggio da un sistema di code dei messaggi a un altro durante l’aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code dei messaggi sarà disponibile nelle versioni future.</p>
@@ -149,7 +149,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
 <h4 id="22-Upgrade-to-v2516-with-mixCoord" class="common-anchor-header">2.2 Aggiornamento alla versione v2.5.16 con mixCoord</h4><div class="alert-note">
 <p>Salta questo passaggio se il tuo cluster è già in esecuzione con la versione v2.5.16 o superiore e con l’opzione <code translate="no">mixCoord</code> abilitata.</p>
 </div>
-<p>Crea un file di configurazione denominato ` <code translate="no">milvusupgrade.yaml</code> ` per abilitare ` <code translate="no">mixCoord</code> ` ed eseguire l'aggiornamento alla versione v2.5.16:</p>
+<p>Creare un file di configurazione denominato ` <code translate="no">milvusupgrade.yaml</code> ` per abilitare ` <code translate="no">mixCoord</code> ` ed eseguire l'aggiornamento alla versione v2.5.16:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -168,7 +168,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="23-Upgrade-to-v2617" class="common-anchor-header">2.3 Aggiornamento alla versione v2.6.17</h4><p>Una volta che la versione 2.5.16 è in esecuzione con successo con l'<code translate="no">mixCoord</code>, eseguire l'aggiornamento alla versione 2.6.17:</p>
-<p>Aggiornare il file di configurazione (<code translate="no">milvusupgrade.yaml</code> in questo esempio):</p>
+<p>Aggiornare il file di configurazione (in questo esempio<code translate="no">milvusupgrade.yaml</code> ):</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -199,4 +199,4 @@ kubectl get pods
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check pod status</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p>Per ulteriore assistenza, consultare la <a href="https://milvus.io/docs">documentazione di Milvus</a> o <a href="https://github.com/milvus-io/milvus/discussions">il forum della community</a>.</p>
+<p>Per ulteriore assistenza, consulta la <a href="https://milvus.io/docs">documentazione di Milvus</a> o <a href="https://github.com/milvus-io/milvus/discussions">il forum della community</a>.</p>

@@ -51,12 +51,12 @@ summary: Scopri come configurare l'archiviazione dei messaggi con Milvus Operato
 <tr><td style="text-align:center">Modalità cluster</td><td style="text-align:center">✖️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td></tr>
 </tbody>
 </table>
-<p>Esistono anche altre limitazioni relative alla specificazione dell'archivio dei messaggi:</p>
+<p>Esistono anche altre limitazioni relative alla specificazione dell'archivio messaggi:</p>
 <ul>
-<li>È supportato un solo archivio messaggi per ogni istanza di Milvus. Tuttavia, è ancora garantita la retrocompatibilità con più archivi messaggi configurati per una singola istanza. L’ordine di priorità è il seguente:
+<li>È supportato un solo archivio messaggi per ogni istanza di Milvus. Tuttavia, è garantita la retrocompatibilità con la configurazione di più archivi messaggi per una singola istanza. L'ordine di priorità è il seguente:
 <ul>
 <li>modalità standalone:  RocksMQ (predefinito) &gt; Pulsar &gt; Kafka</li>
-<li>modalità cluster: Pulsar (impostazione predefinita) &gt; Kafka</li>
+<li>modalità cluster: Pulsar (predefinito) &gt; Kafka</li>
 </ul></li>
 <li>L'archivio dei messaggi non può essere modificato mentre il sistema Milvus è in esecuzione.</li>
 <li>Sono supportate solo le versioni 2.x o 3.x di Kafka.</li>
@@ -105,9 +105,9 @@ summary: Scopri come configurare l'archiviazione dei messaggi con Milvus Operato
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
 <h5 id="Key-configuration-options" class="common-anchor-header">Opzioni di configurazione principali:</h5><ul>
-<li><code translate="no">msgStreamType</code>: rocksmq: imposta esplicitamente RocksMQ come coda dei messaggi</li>
+<li><code translate="no">msgStreamType</code>: rocksmq: Imposta esplicitamente RocksMQ come coda dei messaggi</li>
 <li><code translate="no">persistence.enabled</code>: Abilita l'archiviazione persistente dei dati di RocksMQ</li>
-<li><code translate="no">persistence.pvcDeletion</code>: Se impostato su true, il PVC verrà eliminato quando l’istanza di Milvus verrà eliminata</li>
+<li><code translate="no">persistence.pvcDeletion</code>: Se impostato su true, il PVC verrà eliminato quando l’istanza di Milvus viene eliminata</li>
 <li><code translate="no">persistentVolumeClaim.spec</code>: Specifiche standard del PVC di Kubernetes</li>
 <li><code translate="no">accessModes</code>: In genere <code translate="no">ReadWriteOnce</code> per lo storage a blocchi</li>
 <li><code translate="no">storageClassName</code>: La classe di archiviazione del proprio cluster</li>
@@ -144,7 +144,7 @@ summary: Scopri come configurare l'archiviazione dei messaggi con Milvus Operato
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pulsar gestisce i log delle modifiche recenti, genera log in streaming e fornisce sottoscrizioni ai log. La configurazione di Pulsar come archivio dei messaggi è supportata sia in Milvus standalone che nel cluster Milvus. Tuttavia, con Milvus Operator, è possibile configurare Pulsar come archivio dei messaggi solo per il cluster Milvus. Aggiungere i campi obbligatori in " <code translate="no">spec.dependencies.pulsar</code> " per configurare Pulsar.</p>
+    </button></h2><p>Pulsar gestisce i log delle modifiche recenti, genera log di stream e fornisce sottoscrizioni ai log. La configurazione di Pulsar come archivio dei messaggi è supportata sia in Milvus standalone che nel cluster Milvus. Tuttavia, con Milvus Operator, è possibile configurare Pulsar come archivio dei messaggi solo per il cluster Milvus. Aggiungere i campi obbligatori in " <code translate="no">spec.dependencies.pulsar</code> " per configurare Pulsar.</p>
 <p><code translate="no">pulsar</code> Supporta <code translate="no">external</code> e <code translate="no">inCluster</code>.</p>
 <h3 id="External-Pulsar" class="common-anchor-header">Pulsar esterno<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -242,7 +242,7 @@ I campi utilizzati per configurare un servizio Pulsar esterno includono:</p>
   <span class="hljs-attr">config:</span> {}            
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">Questo esempio specifica il numero di repliche di ciascun componente di Pulsar, le risorse di calcolo di Pulsar BookKeeper e altre configurazioni.</div>
-<div class="alert note">Le voci di configurazione complete per configurare un servizio Pulsar interno sono disponibili nel file ` <a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">values.yaml`</a>. Aggiungere le voci di configurazione necessarie sotto ` <code translate="no">pulsar.inCluster.values</code> `, come mostrato nell’esempio precedente.</div>
+<div class="alert note">Trovi le voci di configurazione complete per configurare un servizio Pulsar interno nel file ` <a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">values.yaml`</a>. Aggiunga le voci di configurazione necessarie sotto ` <code translate="no">pulsar.inCluster.values</code> `, come mostrato nell’esempio precedente.</div>
 <p>Supponendo che il file di configurazione si chiami ` <code translate="no">milvuscluster.yaml</code>`, eseguire il comando seguente per applicare la configurazione.</p>
 <pre><code translate="no" class="language-Shell">kubectl apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -261,7 +261,7 @@ I campi utilizzati per configurare un servizio Pulsar esterno includono:</p>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pulsar è l’archivio messaggi predefinito in un cluster Milvus. Se si desidera utilizzare Kafka, aggiungere il campo opzionale <code translate="no">msgStreamType</code> per configurare Kafka.</p>
+    </button></h2><p>Pulsar è l’archivio messaggi predefinito in un cluster Milvus. Se si desidera utilizzare Kafka, aggiungere il campo opzionale ` <code translate="no">msgStreamType</code> ` per configurare Kafka.</p>
 <p><code translate="no">kafka</code> Supporta <code translate="no">external</code> e <code translate="no">inCluster</code>.</p>
 <h3 id="External-Kafka" class="common-anchor-header">Kafka esterno<button data-href="#External-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -312,7 +312,7 @@ I campi utilizzati per configurare un servizio Pulsar esterno includono:</p>
         <span class="hljs-comment"># ...</span>
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
-<p>Le configurazioni SASL sono supportate a partire dalla versione v0.8.5 dell’operatore.</p>
+<p>Le configurazioni SASL sono supportate nella versione v0.8.5 o successive dell’operatore.</p>
 </blockquote>
 <h3 id="Internal-Kafka" class="common-anchor-header">Kafka interno<button data-href="#Internal-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -330,7 +330,7 @@ I campi utilizzati per configurare un servizio Pulsar esterno includono:</p>
         ></path>
       </svg>
     </button></h3><p><code translate="no">inCluster</code> indica che all’avvio di un cluster Milvus, un servizio Kafka si avvia automaticamente all’interno del cluster.</p>
-<h4 id="Example" class="common-anchor-header">Esempio</h4><p>L'esempio seguente illustra come configurare un servizio Kafka interno.</p>
+<h4 id="Example" class="common-anchor-header">Esempio</h4><p>L'esempio seguente illustra la configurazione di un servizio Kafka interno.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

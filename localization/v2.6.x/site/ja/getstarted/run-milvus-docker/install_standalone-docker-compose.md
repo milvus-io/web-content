@@ -70,7 +70,7 @@ Creating milvus-standalone ... done
 <p><strong>v2.6.17の新機能:</strong></p>
 <ul>
 <li><strong>アーキテクチャの強化</strong>：新しいストリーミングノードと最適化されたコンポーネントを搭載</li>
-<li><strong>依存関係の更新</strong>：最新のMinIOおよびetcdのバージョンが含まれています</li>
+<li><strong>依存関係の更新</strong>：最新の MinIO および etcd バージョンが含まれています</li>
 <li><strong>設定の改善</strong>：パフォーマンス向上のための設定最適化</li>
 </ul>
 <p>v2.6.17の機能との互換性を確保するため、常に最新のDocker Compose設定ファイルをダウンロードしてください。</p>
@@ -85,7 +85,7 @@ Creating milvus-standalone ... done
 <ul>
 <li><strong>milvus-etcd</strong>コンテナはホストに対してポートを公開せず、そのデータを現在のフォルダ内の<strong>volumes/etcd</strong>にマッピングします。</li>
 <li><strong>milvus-minio</strong>コンテナは、デフォルトの認証情報を使用してローカルでポート<strong>9090</strong>および<strong>9091</strong>を提供し、そのデータを現在のフォルダ内の<strong>volumes/minio</strong>にマッピングします。</li>
-<li><strong>milvus-standalone</strong>コンテナは、デフォルト設定でローカルのポート<strong>19530</strong>を提供し、そのデータを現在のフォルダ内の<strong>volumes/milvus</strong>にマッピングします。</li>
+<li><strong>milvus-standalone</strong>コンテナは、デフォルト設定でローカルでポート<strong>19530</strong>を提供し、そのデータを現在のフォルダ内の<strong>volumes/milvus</strong>にマッピングします。</li>
 </ul></li>
 </ul>
 <p>以下のコマンドを使用して、コンテナが起動して実行中かどうかを確認できます。</p>
@@ -97,8 +97,8 @@ milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 23
 milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-<p>また、<code translate="no">http://127.0.0.1:9091/webui/</code> から Milvus WebUI にアクセスして、お使いの Milvus インスタンスに関する詳細を確認することもできます。詳細については、<a href="/docs/ja/v2.6.x/milvus-webui.md">Milvus WebUI</a> を参照してください。</p>
-<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(オプション) Milvus の設定を更新する<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
+<p>また、<code translate="no">http://127.0.0.1:9091/webui/</code> から Milvus WebUI にアクセスして、お使いの Milvus インスタンスの詳細を確認することもできます。詳細については、<a href="/docs/ja/v2.6.x/milvus-webui.md">Milvus WebUI</a> を参照してください。</p>
+<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(オプション) Milvusの設定を更新する<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -170,7 +170,7 @@ EOF
     </button></h2><p>Docker に Milvus をインストールしたら、次のことができます:</p>
 <ul>
 <li><p><a href="/docs/ja/v2.6.x/quickstart.md">クイックスタートを</a>参照して、Milvusの機能を確認してください。</p></li>
-<li><p>Milvusの基本的な操作を学びましょう：</p>
+<li><p>Milvusの基本操作を学びましょう：</p>
 <ul>
 <li><a href="/docs/ja/v2.6.x/manage_databases.md">データベースの管理</a></li>
 <li><a href="/docs/ja/v2.6.x/manage-collections.md">コレクションの管理</a></li>

@@ -1,7 +1,7 @@
 ---
 id: text.md
 title: 文字欄位Compatible with Milvus 3.0.x
-summary: TEXT 是一種標量字段類型，用於在 Milvus 中儲存文件文本、段落及其他長篇文本內容。
+summary: TEXT 是一種標量欄位類型，用於在 Milvus 中儲存文件文字、段落及其他長篇文字內容。
 beta: Milvus 3.0.x
 ---
 <h1 id="Text-Field" class="common-anchor-header">文字欄位<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Text-Field" class="anchor-icon" translate="no">
@@ -19,7 +19,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在 AI 搜尋應用中，向量搜尋可協助您找出語義相似的實體，但應用程式通常也需要每個搜尋結果背後的原始來源文字。大型語言模型（LLM）或代理程式可將該文字作為上下文，用於閱讀、引用、摘要，或將結果納入提示字串中。</p>
+    </button></h1><p>在 AI 搜尋應用中，向量搜尋可協助您找出語義相似的實體，但應用程式通常也需要每個搜尋結果背後原始的來源文字。大型語言模型（LLM）或代理程式可將該文字作為上下文，用於閱讀、引用、摘要，或將結果納入提示字串中。</p>
 <p>Milvus 提供「<code translate="no">TEXT</code> 」標量欄位類型，可直接將長篇來源文字與實體一併儲存。典型值包括段落、長篇文件、文章正文、工單及日誌。與「<code translate="no">VARCHAR</code> 」不同，後者需要設定固定的「<code translate="no">max_length</code> 」，而「<code translate="no">TEXT</code> 」則無需在集合架構中設定最大位元組長度。</p>
 <p>要定義<code translate="no">TEXT</code> 欄位，請將<code translate="no">datatype</code> 設定為<code translate="no">DataType.TEXT</code> 。</p>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -111,10 +111,10 @@ beta: Milvus 3.0.x
 <li><strong>內聯儲存</strong>：若<code translate="no">TEXT</code> 值小於<code translate="no">dataNode.text.inlineThreshold</code> ，Milvus 會將原始文字值直接儲存於<code translate="no">TEXT</code> 欄位的 data 中。</li>
 <li><strong>LOB 儲存</strong>：若 `<code translate="no">TEXT</code> ` 的值大於或等於 `<code translate="no">dataNode.text.inlineThreshold</code>`，Milvus 會將該值視為大型物件，並將原始文字分別儲存於物件儲存空間（例如 MinIO）中。`<code translate="no">TEXT</code> ` 欄位資料則儲存指向該獨立儲存文字的內部參照。當在查詢或搜尋結果中請求 `<code translate="no">TEXT</code> ` 欄位時，Milvus 會使用該參照來擷取並回傳原始文字。</li>
 </ul>
-<p>此儲存選項屬內部機制。無論 Milvus 使用何種儲存路徑，您對<code translate="no">TEXT</code> 欄位的插入、查詢及搜尋操作方式皆相同。若要調整閾值或相關的儲存、壓縮及垃圾回收行為，請參閱與<a href="/docs/zh-hant/configure_datanode.md">dataNode 相關的設定</a>以及<a href="/docs/zh-hant/configure_datacoord.md">與 dataCoord 相關的設定</a>。</p>
-<p>若您的部署使用物件儲存，大型的 `<code translate="no">TEXT</code> ` 值可能會以 Milvus 管理的物件形式，出現在如<code translate="no">lobs/...</code> 等路徑下。這些物件屬於實作細節，不應手動移動、複製或刪除。 在您刪除實體、釋放分區或壓縮資料後，物件儲存的使用量可能僅會在 Milvus 垃圾回收於安全窗口期結束後，移除未被引用的巨型物件資料時才會減少。</p>
+<p>此儲存選項屬內部機制。無論 Milvus 使用哪種儲存路徑，您對<code translate="no">TEXT</code> 欄位的插入、查詢及搜尋操作方式皆相同。若要調整閾值或相關的儲存、壓縮及垃圾回收行為，請參閱與<a href="/docs/zh-hant/configure_datanode.md">dataNode 相關的設定</a>以及<a href="/docs/zh-hant/configure_datacoord.md">與 dataCoord 相關的設定</a>。</p>
+<p>若您的部署使用物件儲存，較大的 `<code translate="no">TEXT</code> ` 值可能會以 Milvus 管理的物件形式，出現在如<code translate="no">lobs/...</code> 等路徑下。這些物件屬於實作細節，不應手動移動、複製或刪除。 在刪除實體、釋放分區或壓縮資料後，物件儲存的使用量可能僅會在 Milvus 垃圾回收於安全時窗結束後，移除未被引用的巨型物件資料時才會減少。</p>
 <p></details></p>
-<p><code translate="no">TEXT</code> 的常見應用之一是搭配 BM25 進行全文檢索。在此模式下，<code translate="no">TEXT</code> 欄位儲存原始來源內容，而 BM25 會分析文字並產生稀疏向量，以針對基於關鍵字的匹配結果進行排序。搜尋結果隨後可返回匹配的<code translate="no">TEXT</code> 值，作為大型語言模型 (LLM) 或代理程式工作流程的上下文。 以下範例展示如何將「<code translate="no">TEXT</code> 」欄位用作 BM25 的輸入欄位。如需瞭解全文搜尋的概念與查詢選項，請參閱《<a href="/docs/zh-hant/full-text-search.md">全文搜尋》</a>。</p>
+<p><code translate="no">TEXT</code> 的常見應用之一是搭配 BM25 進行全文檢索。在此模式下，<code translate="no">TEXT</code> 欄位儲存原始來源內容，而 BM25 會分析文字並產生稀疏向量，以針對基於關鍵字的匹配結果進行排序。搜尋結果隨後可返回匹配的<code translate="no">TEXT</code> 值，作為大型語言模型（LLM）或代理程式工作流程的上下文。 以下範例展示如何將「<code translate="no">TEXT</code> 」欄位用作 BM25 的輸入欄位。如需瞭解全文搜尋的概念與查詢選項，請參閱《<a href="/docs/zh-hant/full-text-search.md">全文搜尋》</a>。</p>
 <h2 id="Step-1-Create-a-collection-with-a-TEXT-field" class="common-anchor-header">步驟 1：建立包含 TEXT 欄位的集合<button data-href="#Step-1-Create-a-collection-with-a-TEXT-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -172,7 +172,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;sparse&quot;</span>,
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>針對由 BM25 函式產生的稀疏向量欄位建立索引。度量類型必須設定為<code translate="no">BM25</code> 。</p>
+    </button></h2><p>針對由 BM25 函式所產生的稀疏向量欄位建立索引。度量類型必須設定為<code translate="no">BM25</code> 。</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 <span class="highlighted-comment-line">index_params.add_index(</span>
 <span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;sparse&quot;</span>,</span>
@@ -206,7 +206,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>將文字直接插入至<code translate="no">TEXT</code> 欄位中。請勿為<code translate="no">sparse</code> 欄位提供值。Milvus 會透過將 BM25 函式套用至<code translate="no">content</code> ，在內部生成稀疏向量。</p>
+    </button></h2><p>請直接將文字插入<code translate="no">TEXT</code> 欄位中。請勿為<code translate="no">sparse</code> 欄位提供值。Milvus 會透過將 BM25 函式套用至<code translate="no">content</code> ，在內部自動產生稀疏向量。</p>
 <pre><code translate="no" class="language-python">data = [
     {
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
@@ -240,7 +240,7 @@ client.load_collection(collection_name=COLLECTION_NAME)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>將原始查詢文字用作搜尋資料，並針對稀疏向量欄位進行搜尋。Milvus 會將查詢文字轉換為稀疏向量，透過 BM25 對匹配結果進行排序，並將請求的<code translate="no">TEXT</code> 欄位結果回傳至<code translate="no">output_fields</code> 。</p>
+    </button></h2><p>將原始查詢文字用作搜尋資料，並針對稀疏向量欄位進行搜尋。Milvus 會將查詢文字轉換為稀疏向量，透過 BM25 對匹配結果進行排序，並將請求的<code translate="no">TEXT</code> 欄位結果回傳至<code translate="no">output_fields</code> 中。</p>
 <pre><code translate="no" class="language-python">results = client.search(
     collection_name=COLLECTION_NAME,
 <span class="highlighted-comment-line">    data=[<span class="hljs-string">&quot;how does Milvus store source text for retrieval&quot;</span>],</span>
@@ -264,7 +264,7 @@ client.load_collection(collection_name=COLLECTION_NAME)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>每個搜尋結果皆包含 BM25 分數及原始的<code translate="no">TEXT</code> 值。</p>
+    </button></h2><p>每個搜尋結果均包含 BM25 分數及原始的<code translate="no">TEXT</code> 值。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> results[<span class="hljs-number">0</span>]:
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;id: <span class="hljs-subst">{hit[<span class="hljs-string">&#x27;id&#x27;</span>]}</span>, score: <span class="hljs-subst">{hit[<span class="hljs-string">&#x27;distance&#x27;</span>]}</span>&quot;</span>)
     <span class="hljs-built_in">print</span>(hit[<span class="hljs-string">&quot;entity&quot;</span>][<span class="hljs-string">&quot;content&quot;</span>])

@@ -55,7 +55,7 @@ title: 使用 Docker Compose 运行 Milvus（Linux）
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 在其代码库中提供了一个 Docker Compose 配置文件。若要使用 Docker Compose 安装 Milvus，只需运行</p>
+    </button></h2><p>Milvus 在其代码库中提供了一个 Docker Compose 配置文件。要使用 Docker Compose 安装 Milvus，只需运行</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
@@ -69,8 +69,8 @@ Creating milvus-standalone ... done
 <div class="alert note">
 <p><strong>v2.6.17 版本更新内容：</strong></p>
 <ul>
-<li><strong>架构增强</strong>：引入了新的流式处理节点并优化了组件</li>
-<li><strong>更新了依赖项</strong>：包含最新版本的 MinIO 和 etcd</li>
+<li><strong>架构增强</strong>：新增流式处理节点并优化了各项组件</li>
+<li><strong>更新的依赖项</strong>：包含最新版本的 MinIO 和 etcd</li>
 <li><strong>配置优化</strong>：优化了设置以提升性能</li>
 </ul>
 <p>请务必下载最新的 Docker Compose 配置文件，以确保与 v2.6.17 版本的功能兼容。</p>
@@ -84,8 +84,8 @@ Creating milvus-standalone ... done
 <li>名为<strong>Milvus Standalone</strong>、<strong>milvus-minio</strong> 和<strong>milvus-etcd</strong>的容器已启动。
 <ul>
 <li><strong>milvus-etcd</strong>容器未向主机暴露任何端口，并将数据映射到当前文件夹中的<strong>volumes/etcd</strong>。</li>
-<li><strong>milvus-minio</strong>容器使用默认身份验证凭据在本地监听<strong>9090</strong>和<strong>9091</strong>端口，并将数据映射到当前文件夹中的<strong>volumes/minio</strong>目录。</li>
-<li><strong>Milvus Standalone</strong>容器使用默认设置在本地提供<strong>19530</strong>端口服务，并将数据映射到当前文件夹中的<strong>volumes/milvus</strong>目录。</li>
+<li><strong>milvus-minio</strong>容器使用默认身份验证凭据在本地提供<strong>9090</strong>和<strong>9091</strong>端口服务，并将数据映射到当前文件夹中的<strong>volumes/minio</strong>目录。</li>
+<li><strong>Milvus Standalone</strong>容器使用默认设置在本地提供<strong>19530</strong>端口服务，并将数据映射到当前目录下的<strong>volumes/milvus</strong>卷中。</li>
 </ul></li>
 </ul>
 <p>您可以使用以下命令检查容器是否已启动并运行：</p>
@@ -97,7 +97,7 @@ milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 23
 milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-<p>您还可以访问<code translate="no">http://127.0.0.1:9091/webui/</code> 上的 Milvus WebUI，以了解有关您的 Milvus 实例的更多信息。有关详细信息，请参阅<a href="/docs/zh/v2.6.x/milvus-webui.md">Milvus WebUI</a>。</p>
+<p>您还可以访问 Milvus WebUI（<code translate="no">http://127.0.0.1:9091/webui/</code> ）以了解有关您的 Milvus 实例的更多信息。有关详细信息，请参阅<a href="/docs/zh/v2.6.x/milvus-webui.md">Milvus WebUI</a>。</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">（可选）更新 Milvus 配置<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -189,7 +189,7 @@ EOF
 </ul></li>
 <li><p>探索<a href="/docs/zh/v2.6.x/milvus-webui.md">Milvus WebUI</a>——一个用于 Milvus 可观测性和管理的直观 Web 界面。</p></li>
 <li><p>探索<a href="/docs/zh/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>，一款用于 Milvus 数据备份的开源工具。</p></li>
-<li><p>了解<a href="/docs/zh/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>——一款用于调试 Milvus 并进行动态配置更新的开源工具。</p></li>
-<li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>——一款用于直观管理 Milvus 的开源图形用户界面工具。</p></li>
+<li><p>了解<a href="/docs/zh/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>——一款用于调试 Milvus 并更新动态配置的开源工具。</p></li>
+<li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>——一款用于直观管理 Milvus 的开源图形界面工具。</p></li>
 <li><p><a href="/docs/zh/v2.6.x/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
 </ul>

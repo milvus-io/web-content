@@ -81,11 +81,11 @@ title: Milvus Standalone mit RPM-/DEB-Paket installieren
         ></path>
       </svg>
     </button></h2><p>Zur Installation des RPM-/DEB-Pakets können Sie den Paketmanager Ihres Systems verwenden.</p>
-<p>Verwenden Sie bei RPM-basierten Systemen (wie CentOS, Fedora und RHEL) den Befehl „ <code translate="no">yum</code> “, um das Paket zu installieren.</p>
+<p>Bei RPM-basierten Systemen (wie CentOS, Fedora und RHEL) verwenden Sie den Befehl „ <code translate="no">yum</code> “, um das Paket zu installieren.</p>
 <pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.9-1_amd64.rpm
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Bei DEB-basierten Systemen (wie Ubuntu und Debian) verwenden Sie den Befehl ` <code translate="no">apt</code> `, um das Paket zu installieren.</p>
+<p>Bei DEB-basierten Systemen (wie Ubuntu und Debian) verwenden Sie den Befehl „ <code translate="no">apt</code> “, um das Paket zu installieren.</p>
 <pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.9-1_amd64.deb
 dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
@@ -213,7 +213,7 @@ dpkg -l | grep milvus
 </ul></li>
 <li><p>Entdecken Sie <a href="/docs/de/v2.6.x/milvus-webui.md">Milvus WebUI</a>, eine intuitive Weboberfläche für die Überwachung und Verwaltung von Milvus.</p></li>
 <li><p>Entdecken Sie <a href="/docs/de/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, ein Open-Source-Tool für Milvus-Datensicherungen.</p></li>
-<li><p>Entdecken Sie <a href="/docs/de/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zur Fehlerbehebung bei Milvus und für dynamische Konfigurationsaktualisierungen.</p></li>
+<li><p>Entdecken Sie <a href="/docs/de/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zur Fehlerbehebung in Milvus und für dynamische Konfigurationsaktualisierungen.</p></li>
 <li><p>Entdecken Sie <a href="https://github.com/zilliztech/attu">Attu</a>, ein Open-Source-GUI-Tool für die intuitive Verwaltung von Milvus.</p></li>
 <li><p><a href="/docs/de/v2.6.x/monitor.md">Überwachen Sie Milvus mit Prometheus</a>.</p></li>
 </ul>

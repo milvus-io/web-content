@@ -3,7 +3,7 @@ id: filtered-search-with-structarray.md
 title: 使用 StructArray 进行过滤搜索
 summary: >-
   使用此页面可在 StructArray 字段的向量搜索中添加标量过滤。StructArray
-  过滤分为两个层次：行级过滤器用于选择父实体，而元素级过滤器则用于限制哪些 Struct 元素参与元素级的向量搜索。
+  过滤分为两个层次：行级过滤器用于选择父实体，而元素级过滤器则用于限定哪些 Struct 元素参与元素级的向量搜索。
 ---
 <h1 id="Filtered-Search-with-StructArray" class="common-anchor-header">使用 StructArray 进行过滤搜索<button data-href="#Filtered-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>使用本页面可在 StructArray 字段的向量搜索中添加标量过滤。StructArray 过滤分为两个层次：行级过滤器用于选择父实体，而元素级过滤器则用于限定哪些 Struct 元素参与元素级的向量搜索。</p>
+    </button></h1><p>使用本页面可在 StructArray 字段的向量搜索中添加标量过滤。StructArray 过滤分为两个层次：行级过滤器用于选择父实体，而元素级过滤器则用于限制哪些 Struct 元素参与元素级的向量搜索。</p>
 <p>本页面<a href="/docs/zh/create-structarray-field.md">使用“创建 StructArray 字段”</a>中的<code translate="no">tech_articles</code> Collection。该 Collection 包含一个名为<code translate="no">chunks</code> 的 StructArray 字段，其中包含<code translate="no">section</code> 、<code translate="no">page</code> 、<code translate="no">quality_score</code> 和<code translate="no">has_code</code> 等标量子字段，以及用于搜索的向量字段。</p>
 <h2 id="Choose-a-filter-type" class="common-anchor-header">选择过滤器类型<button data-href="#Choose-a-filter-type" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -44,7 +44,7 @@ summary: >-
 <tbody>
 <tr><td>按顶级标量字段（例如<code translate="no">category</code> ）进行过滤。</td><td>常规筛选表达式。</td><td>在搜索之前或期间选择父实体。</td></tr>
 <tr><td>将元素级向量搜索限制为符合标量条件的 Struct 元素。</td><td><code translate="no">element_filter</code>.</td><td>仅搜索匹配的 Struct 元素，并可返回匹配元素的偏移量。</td></tr>
-<tr><td>根据任何、所有或特定数量的 Struct 元素是否匹配谓词来选择实体。</td><td><code translate="no">MATCH_ANY</code>、<code translate="no">MATCH_ALL</code> 、<code translate="no">MATCH_LEAST</code> 、<code translate="no">MATCH_MOST</code> 或<code translate="no">MATCH_EXACT</code> 。</td><td>行级过滤。这些操作符本身不会返回偏移量。</td></tr>
+<tr><td>根据任意、全部或特定数量的 Struct 元素是否匹配谓词来选择实体。</td><td><code translate="no">MATCH_ANY</code>、<code translate="no">MATCH_ALL</code> 、<code translate="no">MATCH_LEAST</code> 、<code translate="no">MATCH_MOST</code> 或<code translate="no">MATCH_EXACT</code> 。</td><td>行级过滤。这些操作符本身不会返回偏移量。</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -174,7 +174,7 @@ results = client.search(
 <tbody>
 <tr><td><code translate="no">MATCH_ANY</code></td><td>至少有一个 Struct 元素必须满足谓词。</td><td><code translate="no">MATCH_ANY(chunks, $[section] == &quot;index&quot;)</code></td></tr>
 <tr><td><code translate="no">MATCH_ALL</code></td><td>所有 Struct 元素都必须满足谓词。</td><td><code translate="no">MATCH_ALL(chunks, $[quality_score] &gt; 0.5)</code></td></tr>
-<tr><td><code translate="no">MATCH_LEAST</code></td><td>至少有<code translate="no">N</code> 个结构体元素必须满足该谓词。</td><td><code translate="no">MATCH_LEAST(chunks, $[has_code] == true, threshold=2)</code></td></tr>
+<tr><td><code translate="no">MATCH_LEAST</code></td><td>至少有<code translate="no">N</code> 个 Struct 元素必须满足该谓词。</td><td><code translate="no">MATCH_LEAST(chunks, $[has_code] == true, threshold=2)</code></td></tr>
 <tr><td><code translate="no">MATCH_MOST</code></td><td>至多有<code translate="no">N</code> 个Struct元素必须满足该谓词。</td><td><code translate="no">MATCH_MOST(chunks, $[section] == &quot;appendix&quot;, threshold=1)</code></td></tr>
 <tr><td><code translate="no">MATCH_EXACT</code></td><td>必须有恰好<code translate="no">N</code> 个Struct元素满足该谓词。</td><td><code translate="no">MATCH_EXACT(chunks, $[section] == &quot;summary&quot;, threshold=1)</code></td></tr>
 </tbody>
@@ -266,7 +266,7 @@ results = client.hybrid_search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 StructArray 谓词中使用向量子字段。向量子字段不能作为标量谓词的输入。</p>
+    </button></h2><p>在 StructArray 谓词中使用标量子向量字段。向量字段不能作为标量谓词的输入。</p>
 <table>
 <thead>
 <tr><th>子字段类型</th><th>典型谓词示例</th></tr>
@@ -276,7 +276,7 @@ results = client.hybrid_search(
 <tr><td>整数类型</td><td><code translate="no">$[page] &gt;= 2</code>,<code translate="no">$[page] in [1, 2, 3]</code></td></tr>
 <tr><td><code translate="no">FLOAT</code>,<code translate="no">DOUBLE</code></td><td><code translate="no">$[quality_score] &gt; 0.9</code>,<code translate="no">0.7 &lt; $[quality_score] &lt; 0.95</code></td></tr>
 <tr><td><code translate="no">VARCHAR</code></td><td><code translate="no">$[section] == &quot;index&quot;</code>,<code translate="no">$[text] like &quot;range%&quot;</code></td></tr>
-<tr><td>向量子域</td><td>不支持作为<code translate="no">$[...]</code> 标量谓词的输入。请改用向量搜索来处理向量子字段。</td></tr>
+<tr><td>向量子场</td><td>不支持作为<code translate="no">$[...]</code> 标量谓词的输入。请改用向量搜索来处理向量子字段。</td></tr>
 </tbody>
 </table>
 <p>对于不支持的情况，例如 JSON 路径、数组容器函数、文本匹配函数、针对<code translate="no">$[...]</code> 的 null 谓词、几何函数、Timestamptz 表达式以及泛型函数调用，请参阅<a href="/docs/zh/struct-array-operators.md">StructArray 操作符</a>。</p>
@@ -300,7 +300,7 @@ results = client.hybrid_search(
 <li><p>使用<code translate="no">chunks.section</code> 代替StructArray操作符语法（如<code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code> ）。</p></li>
 <li><p>仅需行级过滤时却使用 `<code translate="no">element_filter</code> `。若仅需选择实体，请改用 `<code translate="no">MATCH_ANY</code> `。</p></li>
 <li><p>期望 `<code translate="no">MATCH_*</code> ` 返回元素偏移量。这些操作符用于选择实体，本身并不能识别出单个匹配元素。</p></li>
-<li><p>编写诸如<code translate="no">$[has_code]</code> 这样的裸布尔谓词。请使用显式比较，例如<code translate="no">$[has_code] == true</code> 。</p></li>
+<li><p>编写诸如<code translate="no">$[has_code]</code> 之类的裸布尔谓词。请使用显式比较，例如<code translate="no">$[has_code] == true</code> 。</p></li>
 <li><p>在同一过滤表达式中，将 `<code translate="no">element_filter</code> ` 置于顶级谓词之前。</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">后续步骤<button data-href="#Next-steps" class="anchor-icon" translate="no">

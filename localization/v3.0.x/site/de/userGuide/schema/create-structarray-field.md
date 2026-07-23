@@ -2,9 +2,9 @@
 id: create-structarray-field.md
 title: Ein StructArray-Feld erstellen
 summary: >-
-  Erstellen Sie ein StructArray-Feld, wenn eine Entität eine geordnete Liste
-  strukturierter Elemente enthalten soll. Ein StructArray-Feld ist ein
-  Array-Feld, dessen Elementtyp „Struct“ ist. Jedes Struct-Element folgt
+  Erstellen Sie ein „StructArray“-Feld, wenn eine Entität eine geordnete Liste
+  strukturierter Elemente enthalten soll. Ein „StructArray“-Feld ist ein
+  Array-Feld, dessen Elementtyp „Struct“ ist. Jedes „Struct“-Element folgt
   demselben Schema und kann skalare Unterfelder, Vektor-Unterfelder oder beides
   enthalten.
 ---
@@ -61,7 +61,7 @@ summary: >-
 <tbody>
 <tr><td><code translate="no">text</code></td><td><code translate="no">VARCHAR</code></td><td>Chunk-Text.</td></tr>
 <tr><td><code translate="no">section</code></td><td><code translate="no">VARCHAR</code></td><td>Abschnittsname, z. B. „ <code translate="no">index</code> “, „ <code translate="no">search</code> “ oder „ <code translate="no">filter</code> “.</td></tr>
-<tr><td><code translate="no">page</code></td><td><code translate="no">INT64</code></td><td>Seitennummer oder logische Position des Abschnitts.</td></tr>
+<tr><td><code translate="no">page</code></td><td><code translate="no">INT64</code></td><td>Seitennummer oder logische Position des Chunks.</td></tr>
 <tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>Bewertung auf Chunk-Ebene, die in den Beispielen zur skalaren Filterung und zum Bereich verwendet wird.</td></tr>
 <tr><td><code translate="no">has_code</code></td><td><code translate="no">BOOL</code></td><td>Angabe, ob der Textabschnitt Code enthält.</td></tr>
 <tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Vektor-Unterfeld für die EmbeddingList-Suche mit „ <code translate="no">MAX_SIM*</code> “-Metriken.</td></tr>
@@ -101,7 +101,7 @@ summary: >-
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Unterstützt</td><td>Definieren Sie das Unterfeld als „ <code translate="no">DataType.BFLOAT16_VECTOR</code> “ und legen Sie „ <code translate="no">dim</code> “ fest.</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Unterstützt</td><td>Definieren Sie das Unterfeld als „ <code translate="no">DataType.INT8_VECTOR</code> “ und legen Sie „ <code translate="no">dim</code> “ fest.</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Unterstützt</td><td>Definieren Sie das Unterfeld als „ <code translate="no">DataType.BINARY_VECTOR</code> “ und legen Sie „ <code translate="no">dim</code> “ fest.</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>Nicht unterstützt</td><td>Sparse-Vektor-Unterfelder werden in StructArray-Feldern nicht unterstützt.</td></tr>
+<tr><td><code translate="no">ArrayOfVector</code></td><td>Nicht unterstützt</td><td>Sparse-Vektor-Teilfelder werden in StructArray-Feldern nicht unterstützt.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Nicht unterstützt</td><td>Verwenden Sie „ <code translate="no">VARCHAR</code> “ und nicht „ <code translate="no">String</code> “.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Nicht unterstützt</td><td>JSON-Unterfelder werden in StructArray-Feldern nicht unterstützt.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Nicht unterstützt</td><td>Geometrie-Unterfelder und GIS-Funktionen werden in StructArray-Feldern nicht unterstützt.</td></tr>
@@ -110,7 +110,7 @@ summary: >-
 <tr><td>Verschachtelte „ <code translate="no">Array</code> “, „ <code translate="no">ArrayOfVector</code> “, „ <code translate="no">Struct</code> “ oder <code translate="no">ArrayOfStruct</code></td><td>Nicht unterstützt</td><td>Ein StructArray-Feld darf keine verschachtelten Arrays, verschachtelten Vektor-Arrays, verschachtelten Struct-Felder oder verschachtelten Array-of-Struct-Felder enthalten.</td></tr>
 </tbody>
 </table>
-<p>Informationen zur versionsspezifischen Unterstützung, zum Verhalten bei nullfähigen Werten und zu weiteren Einschränkungen finden Sie unter <a href="/docs/de/structarray-limits.md">„StructArray-Einschränkungen</a>“.</p>
+<p>Informationen zur versionsspezifischen Unterstützung, zum Verhalten bei nullfähigen Werten und zu weiteren Einschränkungen finden Sie unter <a href="/docs/de/structarray-limits.md">„Einschränkungen</a> für <a href="/docs/de/structarray-limits.md">StructArray</a>“.</p>
 <h2 id="Create-a-collection-with-a-StructArray-field" class="common-anchor-header">Erstellen einer Sammlung mit einem StructArray-Feld<button data-href="#Create-a-collection-with-a-StructArray-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -266,7 +266,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus v3.0.x unterstützt nullfähige StructArray-Felder. Ein nullfähiges StructArray-Feld ermöglicht es einer Entität, für das gesamte StructArray-Feld „ <code translate="no">null</code> “ zu speichern.</p>
+    </button></h2><p>Milvus v3.0.x unterstützt nullfähige StructArray-Felder. Ein nullfähiges StructArray-Feld ermöglicht es einer Entität, „ <code translate="no">null</code> “ für das gesamte StructArray-Feld zu speichern.</p>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;chunks&quot;</span>,
     datatype=DataType.ARRAY,
@@ -374,12 +374,12 @@ client.add_collection_struct_field(
 <tr><th>Regel</th><th>Erläuterung</th></tr>
 </thead>
 <tbody>
-<tr><td>„Struct“ wird als Array-Elementtyp verwendet.</td><td>Erstellen Sie ein „StructArray“-Feld als Array-Feld mit „ <code translate="no">element_type=STRUCT</code> “. Erstellen Sie „Struct“ nicht als Sammlungsfeld auf oberster Ebene.</td></tr>
+<tr><td>„Struct“ wird als Array-Elementtyp verwendet.</td><td>Erstellen Sie ein StructArray-Feld als Array-Feld mit „ <code translate="no">element_type=STRUCT</code> “. Erstellen Sie Struct nicht als Sammlungsfeld auf oberster Ebene.</td></tr>
 <tr><td>Alle Elemente teilen sich ein gemeinsames Schema.</td><td>Jedes „Struct“-Element im selben „StructArray“-Feld folgt dem für dieses Feld definierten „Struct“-Schema.</td></tr>
 <tr><td><code translate="no">max_capacity</code> ist erforderlich.</td><td>Es begrenzt die Anzahl der „Struct“-Elemente, die jede Entität im „StructArray“-Feld speichern kann.</td></tr>
-<tr><td>Es sind nur unterstützte Unterfeldtypen zulässig.</td><td>Verwenden Sie skalare und vektorielle Unterfeldtypen, die von „StructArray“ unterstützt werden. Definieren Sie keine JSON-, Geometry-, Text-, Timestamptz-, SparseFloatVector- oder verschachtelte Struct-/Array-Unterfelder.</td></tr>
+<tr><td>Es sind nur unterstützte Unterfeldtypen zulässig.</td><td>Verwenden Sie die von StructArray unterstützten Skalar- und Vektor-Unterfeldtypen. Definieren Sie keine JSON-, Geometry-, Text-, Timestamptz-, SparseFloatVector- oder verschachtelten Struct-/Array-Unterfelder.</td></tr>
 <tr><td>Vektor-Unterfelder benötigen vor der Suche Indizes.</td><td>Erstellen Sie Indizes auf Pfaden wie <code translate="no">chunks[emb_list_vector]</code> oder <code translate="no">chunks[emb]</code>, bevor Sie eine Vektorsuche ausführen.</td></tr>
-<tr><td>Ein Vektor-Unterfeld hat einen Index.</td><td>Wenn Sie sowohl eine „EmbeddingList“-Suche als auch eine Suche auf Elementebene benötigen, erstellen Sie zwei separate Vektor-Unterfelder.</td></tr>
+<tr><td>Ein Vektor-Unterfeld hat einen Index.</td><td>Wenn Sie sowohl eine EmbeddingList-Suche als auch eine Suche auf Elementebene benötigen, erstellen Sie zwei separate Vektor-Unterfelder.</td></tr>
 <tr><td>Vorhandene „StructArray“-Unterfelder sind fest vorgegeben.</td><td>Nachdem Sie ein StructArray-Feld erstellt haben, können Sie diesem StructArray-Feld keine weiteren Unterfelder mehr hinzufügen.</td></tr>
 <tr><td>Funktionen werden innerhalb von „Struct“ nicht unterstützt.</td><td>Definieren Sie keine Funktionen für Felder oder Unterfelder innerhalb eines StructArray-Feldes.</td></tr>
 <tr><td>Skalare Unterfelder sollten den Filteranforderungen entsprechen.</td><td>Fügen Sie Felder wie „ <code translate="no">section</code> “, „ <code translate="no">quality_score</code> “ oder „ <code translate="no">has_code</code> “ nur dann hinzu, wenn Sie diese später filtern, gruppieren oder ausgeben müssen.</td></tr>
@@ -406,8 +406,8 @@ client.add_collection_struct_field(
 <li><p>Definition nicht unterstützter Unterfeldtypen wie JSON, Geometry, Text, Timestamptz, SparseFloatVector, verschachteltes Array, verschachtelte Struktur oder Array-of-Struct.</p></li>
 <li><p>Verwendung von „ <code translate="no">String</code> “ als Unterfeldtyp. Verwenden Sie „ <code translate="no">VARCHAR</code> “ und setzen Sie „ <code translate="no">max_length</code> “.</p></li>
 <li><p>Verwendung eines einzigen Vektor-Unterfelds sowohl für die „EmbeddingList“-Suche als auch für die Suche auf Elementebene.</p></li>
-<li><p>Das Hinzufügen nur von Vektor-Unterfeldern und das Auslassen von Skalar-Unterfeldern, die für die Filterung benötigt werden, wie z. B. „ <code translate="no">section</code> “, „ <code translate="no">quality_score</code> “ oder „ <code translate="no">has_code</code> “.</p></li>
-<li><p>Vektor-Unterfelder werden als skalare Prädikate für <code translate="no">$[...]</code> behandelt. Verwenden Sie Vektor-Unterfelder für die Vektorsuche und skalare Unterfelder für skalare Prädikate.</p></li>
+<li><p>Das Hinzufügen ausschließlich von Vektor-Unterfeldern und das Auslassen von für die Filterung benötigten skalaren Unterfeldern, wie z. B. „ <code translate="no">section</code> “, „ <code translate="no">quality_score</code> “ oder „ <code translate="no">has_code</code> “.</p></li>
+<li><p>Vektor-Unterfelder werden als skalare Prädikate für <code translate="no">$[...]</code> behandelt. Vektor-Unterfelder werden für die Vektorsuche verwendet, skalare Unterfelder für skalare Prädikate.</p></li>
 <li><p>Annahme, dass einem bestehenden StructArray-Feld nach dessen Erstellung neue Unterfelder hinzugefügt werden können.</p></li>
 <li><p>Verwendung von <code translate="no">chunks.emb</code> oder <code translate="no">chunks.emb_list_vector</code> anstelle der erforderlichen Pfadsyntax <code translate="no">chunks[emb]</code> oder <code translate="no">chunks[emb_list_vector]</code>.</p></li>
 <li><p>Das Verhalten von nullfähigen StructArrays wird so behandelt, als wäre es in jeder Zielversion verfügbar.</p></li>

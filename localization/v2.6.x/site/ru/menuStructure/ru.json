@@ -44,7 +44,7 @@
     "order": 1,
     "children": [
       {
-        "label": "Краткое руководство",
+        "label": "Быстрый старт",
         "id": "quickstart.md",
         "order": 0,
         "children": []
@@ -340,7 +340,7 @@
             "children": []
           },
           {
-            "label": "TTL набора наборов",
+            "label": "Установить TTL коллекции",
             "id": "set-collection-ttl.md",
             "order": 6,
             "children": []
@@ -364,7 +364,7 @@
             "children": []
           },
           {
-            "label": "Сбор отправлений",
+            "label": "Сбор отходов",
             "id": "drop-collection.md",
             "order": 10,
             "children": []
@@ -436,7 +436,7 @@
                 "children": []
               },
               {
-                "label": "Разбор JSON",
+                "label": "Разделение JSON",
                 "id": "json-shredding.md",
                 "order": 2,
                 "children": []
@@ -474,7 +474,7 @@
             "children": []
           },
           {
-            "label": "Nullable и значение по умолчанию",
+            "label": "Допустимые значения «null» и значения по умолчанию",
             "id": "nullable-and-default.md",
             "order": 13,
             "children": []
@@ -618,7 +618,7 @@
                     "children": []
                   },
                   {
-                    "label": "Удалить пробел",
+                    "label": "Удалить прокол",
                     "id": "removepunct-filter.md",
                     "order": 9,
                     "children": []
@@ -638,7 +638,7 @@
                 "children": []
               },
               {
-                "label": "Выберите анализатор, подходящий для ваших задач",
+                "label": "Выберите анализатор, подходящий для вашей задачи",
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
@@ -1147,7 +1147,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Рейтинг с учетом весов",
+                "label": "Рейтинг по взвешенным оценкам",
                 "id": "weighted-ranker.md",
                 "order": 0,
                 "children": []
@@ -1275,7 +1275,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Обзор многоуровневого хранения",
+                "label": "Обзор многоуровневого хранения данных",
                 "id": "tiered-storage-overview.md",
                 "order": 0,
                 "children": []
@@ -1741,7 +1741,7 @@
             ]
           },
           {
-            "label": "Оповещения",
+            "label": "Уведомления",
             "id": "alerts",
             "order": 1,
             "isMenu": true,
@@ -1852,7 +1852,7 @@
                 "children": []
               },
               {
-                "label": "Удалить пользователей и роли",
+                "label": "Удаление пользователей и ролей",
                 "id": "drop_users_roles.md",
                 "order": 5,
                 "children": []
@@ -2019,7 +2019,7 @@
             "children": []
           },
           {
-            "label": "Переход",
+            "label": "Переключение",
             "id": "cdc_switchover.md",
             "order": 2,
             "children": []
@@ -2087,14 +2087,14 @@
         "children": []
       },
       {
-        "label": "Клиент PowerShell Milvus",
+        "label": "Клиент Milvus для PowerShell",
         "id": "milvus_powershell",
         "order": 8,
         "externalLink": "https://github.com/rrg92/ps-milvus/blob/main/docs/integrate_powershell.md",
         "children": []
       },
       {
-        "label": "ExportLog",
+        "label": "Журнал экспорта",
         "id": "export-log",
         "order": 9,
         "externalLink": "https://github.com/milvus-io/milvus/tree/master/deployments/export-log",
@@ -2915,7 +2915,7 @@
         "children": []
       },
       {
-        "label": "Генерация выражений фильтров запросов Milvus с помощью крупных языковых моделей",
+        "label": "Генерация выражений фильтрации запросов Milvus с помощью крупных языковых моделей",
         "id": "generating_milvus_query_filter_expressions.md",
         "order": 17,
         "children": []

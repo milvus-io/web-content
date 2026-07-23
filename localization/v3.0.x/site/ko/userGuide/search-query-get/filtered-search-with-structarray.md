@@ -147,7 +147,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>이 예제에서 최상위 술어 <code translate="no">category == &quot;search&quot;</code> 는 후보 엔티티를 선택하고, <code translate="no">element_filter</code> 는 <code translate="no">section</code>, <code translate="no">quality_score</code>, <code translate="no">has_code</code> 가 모두 동일한 Struct 요소 내에서 일치하는 청크로 요소 수준 벡터 검색을 제한합니다.</p>
+<p>이 예제에서 최상위 술어 <code translate="no">category == &quot;search&quot;</code> 는 후보 엔티티를 선택하고, <code translate="no">element_filter</code> 는 <code translate="no">section</code>, <code translate="no">quality_score</code> 및 <code translate="no">has_code</code> 가 모두 동일한 Struct 요소 내에서 일치하는 청크로 요소 수준 벡터 검색을 제한합니다.</p>
 <div class="alert note">
 <p>경고</p>
 <p>최상위 술어와 <code translate="no">element_filter</code> 를 결합할 때는 <code translate="no">element_filter</code> 를 식의 맨 끝에 배치해야 합니다. 필터 식에는 <code translate="no">element_filter</code> 가 하나만 포함될 수 있으며, <code translate="no">element_filter</code> 나 <code translate="no">MATCH_*</code> 를 다른 StructArray 연산자 안에 중첩할 수 없습니다.</p>
@@ -177,7 +177,7 @@ results = client.search(
 <tr><td><code translate="no">MATCH_ALL</code></td><td>모든 Struct 요소가 술어를 만족해야 합니다.</td><td><code translate="no">MATCH_ALL(chunks, $[quality_score] &gt; 0.5)</code></td></tr>
 <tr><td><code translate="no">MATCH_LEAST</code></td><td><code translate="no">N</code> 개 이상의 Struct 요소가 술어를 만족해야 합니다.</td><td><code translate="no">MATCH_LEAST(chunks, $[has_code] == true, threshold=2)</code></td></tr>
 <tr><td><code translate="no">MATCH_MOST</code></td><td><code translate="no">N</code> 개 이하의 Struct 요소가 술어를 만족해야 합니다.</td><td><code translate="no">MATCH_MOST(chunks, $[section] == &quot;appendix&quot;, threshold=1)</code></td></tr>
-<tr><td><code translate="no">MATCH_EXACT</code></td><td>정확히 <code translate="no">N</code> 개의 Struct 요소가 술어를 만족해야 합니다.</td><td><code translate="no">MATCH_EXACT(chunks, $[section] == &quot;summary&quot;, threshold=1)</code></td></tr>
+<tr><td><code translate="no">MATCH_EXACT</code></td><td><code translate="no">N</code> 개의 Struct 요소가 정확히 해당 술어를 만족해야 합니다.</td><td><code translate="no">MATCH_EXACT(chunks, $[section] == &quot;summary&quot;, threshold=1)</code></td></tr>
 </tbody>
 </table>
 <pre><code translate="no" class="language-python">filter_expr = (
@@ -280,7 +280,7 @@ results = client.hybrid_search(
 <tr><td>벡터 하위 필드</td><td><code translate="no">$[...]</code> 의 스칼라 술어 입력으로는 지원되지 않습니다. 대신 벡터 검색을 통해 벡터 하위 필드를 사용하십시오.</td></tr>
 </tbody>
 </table>
-<p>JSON 경로, 배열 컨테이너 함수, 텍스트 일치 함수, ` <code translate="no">$[...]</code>`에 대한 null 술어, 기하 함수, `Timestamptz` 표현식 및 제네릭 함수 호출과 같이 지원되지 않는 사례에 대해서는 <a href="/docs/ko/struct-array-operators.md">StructArray 연산자를</a> 참조하십시오.</p>
+<p>JSON 경로, 배열 컨테이너 함수, 텍스트 일치 함수, ` <code translate="no">$[...]</code>`에 대한 null 술어, 기하학 함수, `Timestamptz` 표현식 및 제네릭 함수 호출과 같이 지원되지 않는 사례에 대해서는 <a href="/docs/ko/struct-array-operators.md">StructArray 연산자를</a> 참조하십시오.</p>
 <h2 id="Common-mistakes" class="common-anchor-header">흔히 저지르는 실수<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -321,7 +321,7 @@ results = client.hybrid_search(
       </svg>
     </button></h2><ol>
 <li><p>StructArray 필터 구문의 전체 내용을 확인하려면 <a href="/docs/ko/struct-array-operators.md">StructArray 연산자를</a> 참조하십시오.</p></li>
-<li><p>먼저 필터링되지 않은 벡터 검색을 실행하려면 <a href="/docs/ko/basic-vector-search-with-structarray.md">StructArray를 사용한 기본 벡터 검색을</a> 참조하십시오.</p></li>
+<li><p>먼저 필터링되지 않은 벡터 검색을 실행하려면 <a href="/docs/ko/basic-vector-search-with-structarray.md">‘StructArray를 사용한 기본 벡터 검색’을</a> 참조하십시오.</p></li>
 <li><p>자주 사용하는 StructArray 필터에 대한 스칼라 인덱스를 생성하려면 <a href="/docs/ko/index-structarray-fields.md">StructArray 필드 인덱싱을</a> 참조하십시오.</p></li>
 <li><p>버전별 필터 및 검색 제한 사항을 확인하려면 <a href="/docs/ko/structarray-limits.md">‘StructArray 제한 사항’을</a> 참조하십시오.</p></li>
 </ol>

@@ -4,7 +4,7 @@ label: Helm
 order: 1
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
-summary: Helm 차트를 사용하여 Milvus 독립형 버전을 업그레이드하는 방법을 알아보세요.
+summary: Helm 차트를 사용하여 Milvus 독립 실행형 버전을 업그레이드하는 방법을 알아보세요.
 title: Helm 차트를 사용하여 Milvus 독립형 버전 업그레이드
 ---
 <div class="tab-wrapper"><a href="/docs/ko/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/ko/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>Operator</a>, Helm, Docker<a href="/docs/ko/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>Compose</a></div>
@@ -148,7 +148,7 @@ helm repo update zilliztech
         ></path>
       </svg>
     </button></h3><div class="alert-note">
-<p>독립형 배포 환경이 이미 v2.5.16 이상을 실행 중인 경우 이 단계를 건너뛰십시오.</p>
+<p>독립형 배포 환경이 이미 v2.5.16 이상을 실행 중이라면 이 단계를 건너뛰십시오.</p>
 </div>
 <p>Milvus 독립형 환경을 v2.5.16으로 업그레이드하십시오:</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \

@@ -1,6 +1,8 @@
 ---
 id: upgrade_milvus_cluster-docker.md
-summary: Pelajari cara meng-upgrade kluster Milvus menggunakan Docker Compose.
+summary: >-
+  Pelajari cara melakukan upgrade pada kluster Milvus menggunakan Docker
+  Compose.
 title: Memperbarui Kluster Milvus dengan Docker Compose
 ---
 <div class="tab-wrapper"><a href="/docs/id/v2.6.x/upgrade_milvus_cluster-operator.md" class=''>Operator MilvusOperator</a><a href="/docs/id/v2.6.x/configure_operator.md" class=''>MilvusOperator</a><a href="/docs/id/v2.6.x/configure-docker.md" class=''>MilvusHelmDocker</a><a href="/docs/id/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>ComposeHelmDocker</a><a href="/docs/id/v2.6.x/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>
@@ -22,7 +24,7 @@ title: Memperbarui Kluster Milvus dengan Docker Compose
     </button></h1><p>Topik ini menjelaskan cara memperbarui Milvus Anda menggunakan Docker Compose.</p>
 <p>Dalam kondisi normal, Anda dapat <a href="#Upgrade-Milvus-by-changing-its-image">memperbarui Milvus dengan mengganti gambarnya</a>. Namun, Anda perlu <a href="#Migrate-the-metadata">memigrasikan metadata</a> sebelum melakukan pembaruan dari v2.1.x ke v2.6.17.</p>
 <div class="alert note">
-<p><strong>Batasan Antrian Pesan</strong>: Saat melakukan pembaruan ke Milvus v2.6.17, Anda harus mempertahankan pilihan antrian pesan saat ini. Beralih antara sistem antrian pesan yang berbeda selama proses pembaruan tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia pada versi mendatang.</p>
+<p><strong>Batasan Antrian Pesan</strong>: Saat melakukan pembaruan ke Milvus v2.6.17, Anda harus mempertahankan pilihan antrian pesan saat ini. Beralih antara sistem antrian pesan yang berbeda selama proses pembaruan tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia di versi mendatang.</p>
 </div>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Memperbarui Milvus dengan mengganti gambarnya<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"

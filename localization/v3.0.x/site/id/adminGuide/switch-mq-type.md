@@ -62,7 +62,7 @@ summary: >-
 <ul>
 <li><a href="/docs/id/switch-rocksmq-woodpecker.md">Beralih antara RocksMQ dan Woodpecker</a> — Milvus Standalone (Docker Compose)</li>
 <li><a href="/docs/id/switch-pulsar-woodpecker.md">Beralih antara Pulsar dan Woodpecker</a> — kluster Milvus (Helm / Milvus Operator)</li>
-<li><a href="/docs/id/switch-kafka-woodpecker.md">Beralih antara Kafka dan Woodpecker</a> — kluster Milvus (Helm / Milvus Operator)</li>
+<li><a href="/docs/id/switch-kafka-woodpecker.md">Beralih antara Kafka dan Woodpecker</a> — Kluster Milvus (Helm / Milvus Operator)</li>
 </ul>
 <h2 id="General-workflow" class="common-anchor-header">Alur kerja umum<button data-href="#General-workflow" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -20,7 +20,7 @@ title: Executar o Milvus com suporte para GPU utilizando o Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Esta página ilustra como iniciar uma instância do Milvus com suporte para GPU utilizando o Docker Compose.</p>
+    </button></h1><p>Esta página explica como iniciar uma instância do Milvus com suporte para GPU utilizando o Docker Compose.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -58,7 +58,7 @@ title: Executar o Milvus com suporte para GPU utilizando o Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para instalar o Milvus com suporte para GPU utilizando o Docker Compose, siga estes passos.</p>
+    </button></h2><p>Para instalar o Milvus com suporte a GPU utilizando o Docker Compose, siga estes passos.</p>
 <h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Descarregue e configure o ficheiro YAML<button data-href="#1-Download-and-configure-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -130,18 +130,18 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Se não conseguir executar o comando acima, verifique se o seu sistema tem o Docker Compose V1 instalado. Se for esse o caso, recomenda-se que migre para o Docker Compose V2, devido às notas <a href="https://docs.docker.com/compose/">nesta página</a>.</p>
+<p>Se não conseguir executar o comando acima, verifique se o seu sistema tem o Docker Compose V1 instalado. Se for esse o caso, recomenda-se que migre para o Docker Compose V2, devido às notas apresentadas <a href="https://docs.docker.com/compose/">nesta página</a>.</p>
 </div>
 <p>Após iniciar o Milvus,</p>
 <ul>
-<li>os contentores denominados <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> e <strong>milvus-etcd</strong> estão ativos.
+<li>os contentores denominados <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> e <strong>milvus-etcd</strong> estão em funcionamento.
 <ul>
 <li>O contentor <strong>milvus-etcd</strong> não expõe quaisquer portas ao anfitrião e mapeia os seus dados para <strong>volumes/etcd</strong> na pasta atual.</li>
 <li>O contentor <strong>milvus-minio</strong> disponibiliza as portas <strong>9090</strong> e <strong>9091</strong> localmente com as credenciais de autenticação predefinidas e mapeia os seus dados para <strong>volumes/minio</strong> na pasta atual.</li>
 <li>O contentor <strong>milvus-standalone</strong> serve as portas <strong>19530</strong> localmente com as definições predefinidas e mapeia os seus dados para <strong>volumes/milvus</strong> na pasta atual.</li>
 </ul></li>
 </ul>
-<p>Pode verificar se os contentores estão em funcionamento utilizando o seguinte comando:</p>
+<p>Pode verificar se os contentores estão ativos e a funcionar utilizando o seguinte comando:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose ps</span>
 
       Name                     Command                  State                            Ports
@@ -189,7 +189,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <li><p>Utilize o seguinte comando para copiar o ficheiro « <code translate="no">milvus.yaml</code> » do contentor Milvus para o seu computador local. Substitua « <code translate="no">&lt;milvus_container_id&gt;</code> » pelo ID real do seu contentor Milvus.</p>
 <pre><code translate="no" class="language-shell">docker cp &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Abra o ficheiro <code translate="no">milvus.yaml</code> copiado com o seu editor de texto preferido. Por exemplo, utilizando o vim:</p>
+<li><p>Abra o ficheiro « <code translate="no">milvus.yaml</code> » copiado com o seu editor de texto preferido. Por exemplo, utilizando o vim:</p>
 <pre><code translate="no" class="language-shell">vim milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Edite as definições « <code translate="no">initMemSize</code> » e « <code translate="no">maxMemSize</code> » conforme necessário e guarde as alterações:</p>
@@ -200,10 +200,10 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><code translate="no">initMemSize</code>: Tamanho inicial do pool de memória. O valor predefinido é 1024.</li>
-<li><code translate="no">maxMemSize</code>: Tamanho máximo do pool de memória. O valor predefinido é 2048.</li>
+<li><code translate="no">initMemSize</code>: Tamanho inicial do conjunto de memória. O valor predefinido é 1024.</li>
+<li><code translate="no">maxMemSize</code>: Tamanho máximo do conjunto de memória. O valor predefinido é 2048.</li>
 </ul></li>
-<li><p>Utilize o seguinte comando para copiar o ficheiro <code translate="no">milvus.yaml</code> modificado de volta para o contentor do Milvus. Substitua <code translate="no">&lt;milvus_container_id&gt;</code> pelo ID real do seu contentor do Milvus.</p>
+<li><p>Utilize o seguinte comando para copiar o ficheiro « <code translate="no">milvus.yaml</code> » modificado de volta para o contentor do Milvus. Substitua « <code translate="no">&lt;milvus_container_id&gt;</code> » pelo ID real do seu contentor do Milvus.</p>
 <pre><code translate="no" class="language-shell">docker cp milvus.yaml &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Reinicie o contentor Milvus para aplicar as alterações:</p>

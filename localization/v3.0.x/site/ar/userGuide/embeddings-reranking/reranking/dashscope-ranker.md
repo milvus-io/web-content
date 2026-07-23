@@ -3,7 +3,7 @@ id: dashscope-ranker.md
 title: DashScope RankerCompatible with Milvus 2.6.x
 summary: >-
   يصف هذا الموضوع كيفية تكوين نماذج إعادة الترتيب في DashScope، مثل نماذج إعادة
-  الترتيب في Qwen، واستخدامها في Milvus.
+  الترتيب Qwen، واستخدامها في Milvus.
 beta: Milvus 2.6.x
 ---
 <h1 id="DashScope-Ranker" class="common-anchor-header">DashScope Ranker<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#DashScope-Ranker" class="anchor-icon" translate="no">
@@ -174,7 +174,7 @@ dashscope_ranker = Function(
    <tr>
      <td><p><code translate="no">reranker</code></p></td>
      <td><p>نعم</p></td>
-     <td><p>يجب ضبطها على <code translate="no">"model"</code> لتمكين إعادة ترتيب النماذج.</p></td>
+     <td><p>يجب ضبطها على " <code translate="no">"model"</code> " لتمكين إعادة ترتيب النماذج.</p></td>
      <td><p><code translate="no">"model"</code></p></td>
    </tr>
    <tr>
@@ -198,7 +198,7 @@ dashscope_ranker = Function(
    <tr>
      <td><p><code translate="no">max_client_batch_size</code></p></td>
      <td><p>لا</p></td>
-     <td><p>الحد الأقصى لعدد المستندات التي يمكن إرسالها إلى خدمة النموذج لكل طلب.</p></td>
+     <td><p>الحد الأقصى لعدد المستندات التي سيتم إرسالها إلى خدمة النموذج لكل طلب.</p></td>
      <td><p><code translate="no">128</code> (الافتراضي)</p></td>
    </tr>
    <tr>

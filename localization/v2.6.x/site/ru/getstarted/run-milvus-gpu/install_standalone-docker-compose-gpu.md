@@ -130,11 +130,11 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Если выполнение вышеуказанной команды не удалось, проверьте, установлен ли в вашей системе Docker Compose V1. В этом случае рекомендуется перейти на Docker Compose V2 в соответствии с примечаниями на <a href="https://docs.docker.com/compose/">этой странице</a>.</p>
+<p>Если выполнение вышеуказанной команды не удалось, проверьте, установлен ли в вашей системе Docker Compose версии 1. В этом случае рекомендуется перейти на Docker Compose версии 2 в соответствии с примечаниями на <a href="https://docs.docker.com/compose/">этой странице</a>.</p>
 </div>
 <p>После запуска Milvus</p>
 <ul>
-<li>контейнеры с именами <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> и <strong>milvus-etcd</strong> будут запущены.
+<li>запустятся контейнеры с именами <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> и <strong>milvus-etcd</strong>.
 <ul>
 <li>Контейнер <strong>milvus-etcd</strong> не открывает никаких портов для хоста и сопоставляет свои данные с <strong>папкой volumes/etcd</strong> в текущем каталоге.</li>
 <li>Контейнер <strong>milvus-minio</strong> обслуживает локальные порты <strong>9090</strong> и <strong>9091</strong> с использованием учетных данных по умолчанию и сопоставляет свои данные с <strong>папкой volumes/minio</strong> в текущем каталоге.</li>
@@ -151,7 +151,7 @@ milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
 <p>Вы также можете перейти в веб-интерфейс Milvus по адресу <code translate="no">http://127.0.0.1:9091/webui/</code>, чтобы узнать больше о вашем экземпляре Milvus. Подробности см. в разделе <a href="/docs/ru/v2.6.x/milvus-webui.md">«Веб-интерфейс Milvus</a>».</p>
-<p>Если в файле docker-compose.yml вы назначили Milvus несколько графических процессоров, вы можете указать, какой из них будет видимым или доступным для использования.</p>
+<p>Если в файле docker-compose.yml вы назначили Milvus несколько устройств GPU, вы можете указать, какое из них будет видимым или доступным для использования.</p>
 <p>Сделать устройство GPU <code translate="no">0</code> видимым для Milvus:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">CUDA_VISIBLE_DEVICES=0 ./milvus run standalone</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -180,7 +180,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>После запуска и запуска Milvus вы можете настроить пул памяти, изменив параметры <code translate="no">initMemSize</code> и <code translate="no">maxMemSize</code> в файле <code translate="no">milvus.yaml</code>.</p>
+    </button></h2><p>После запуска и работы Milvus вы можете настроить пул памяти, изменив параметры <code translate="no">initMemSize</code> и <code translate="no">maxMemSize</code> в файле <code translate="no">milvus.yaml</code>.</p>
 <div class="alert note">
 <p>Файл <code translate="no">milvus.yaml</code> находится в каталоге <code translate="no">/milvus/configs/</code> внутри контейнера Milvus.</p>
 </div>
@@ -192,7 +192,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <li><p>Откройте скопированный файл <code translate="no">milvus.yaml</code> в удобном для вас текстовом редакторе. Например, с помощью vim:</p>
 <pre><code translate="no" class="language-shell">vim milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Измените настройки <code translate="no">initMemSize</code> и <code translate="no">maxMemSize</code> по необходимости и сохраните изменения:</p>
+<li><p>Отредактируйте настройки <code translate="no">initMemSize</code> и <code translate="no">maxMemSize</code> по необходимости и сохраните изменения:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">gpu:</span>
   <span class="hljs-attr">initMemSize:</span> <span class="hljs-number">0</span>
@@ -203,7 +203,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <li><code translate="no">initMemSize</code>: Начальный размер пула памяти. По умолчанию — 1024.</li>
 <li><code translate="no">maxMemSize</code>: Максимальный размер пула памяти. По умолчанию — 2048.</li>
 </ul></li>
-<li><p>Используйте следующую команду, чтобы скопировать отредактированный файл ` <code translate="no">milvus.yaml</code> ` обратно в контейнер Milvus. Замените ` <code translate="no">&lt;milvus_container_id&gt;</code> ` на фактический ID вашего контейнера Milvus.</p>
+<li><p>Используйте следующую команду, чтобы скопировать отредактированный файл <code translate="no">milvus.yaml</code> обратно в контейнер Milvus. Замените <code translate="no">&lt;milvus_container_id&gt;</code> на фактический идентификатор вашего контейнера Milvus.</p>
 <pre><code translate="no" class="language-shell">docker cp milvus.yaml &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Перезапустите контейнер Milvus, чтобы изменения вступили в силу:</p>
@@ -240,7 +240,7 @@ docker start &lt;milvus_container_id&gt;
 <li><a href="/docs/ru/v2.6.x/multi-vector-search.md">Гибридный поиск</a></li>
 </ul></li>
 <li><p><a href="/docs/ru/v2.6.x/upgrade_milvus_cluster-helm.md">Обновление Milvus с помощью Helm Chart</a>.</p></li>
-<li><p><a href="/docs/ru/v2.6.x/scaleout.md">Масштабируйте свой кластер Milvus</a>.</p></li>
+<li><p><a href="/docs/ru/v2.6.x/scaleout.md">Масштабируйте кластер Milvus</a>.</p></li>
 <li><p>Разверните кластер Milvus в облаке:</p>
 <ul>
 <li><a href="/docs/ru/v2.6.x/eks.md">Amazon EKS</a></li>
@@ -249,7 +249,7 @@ docker start &lt;milvus_container_id&gt;
 </ul></li>
 <li><p>Ознакомьтесь с <a href="/docs/ru/v2.6.x/milvus-webui.md">Milvus WebUI</a> — интуитивно понятным веб-интерфейсом для мониторинга и управления Milvus.</p></li>
 <li><p>Ознакомьтесь с <a href="/docs/ru/v2.6.x/milvus_backup_overview.md">Milvus Backup</a> — инструментом с открытым исходным кодом для резервного копирования данных Milvus.</p></li>
-<li><p>Познакомьтесь с <a href="/docs/ru/v2.6.x/birdwatcher_overview.md">Birdwatcher</a> — инструментом с открытым исходным кодом для отладки Milvus и динамического обновления конфигурации.</p></li>
+<li><p>Ознакомьтесь с <a href="/docs/ru/v2.6.x/birdwatcher_overview.md">Birdwatcher</a> — инструментом с открытым исходным кодом для отладки Milvus и динамического обновления конфигурации.</p></li>
 <li><p>Познакомьтесь с <a href="https://github.com/zilliztech/attu">Attu</a> — инструментом с графическим интерфейсом с открытым исходным кодом для интуитивного управления Milvus.</p></li>
-<li><p><a href="/docs/ru/v2.6.x/monitor.md">Мониторинг Milvus с помощью Prometheus</a>.</p></li>
+<li><p><a href="/docs/ru/v2.6.x/monitor.md">Осуществляйте мониторинг Milvus с помощью Prometheus</a>.</p></li>
 </ul>

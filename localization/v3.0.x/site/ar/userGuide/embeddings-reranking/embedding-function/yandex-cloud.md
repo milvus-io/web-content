@@ -2,7 +2,7 @@
 id: yandex-cloud.md
 title: Yandex CloudCompatible with Milvus 2.6.x
 summary: >-
-  يشرح هذا الموضوع كيفية تكوين وظائف التضمين في Yandex Cloud واستخدامها في
+  يشرح هذا الموضوع كيفية تكوين وظائف التضمين السحابية من Yandex واستخدامها في
   Milvus.
 beta: Milvus 2.6.x
 ---
@@ -126,7 +126,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بمجرد تكوين بيانات الاعتماد، قم بتعريف مخطط يحتوي على حقل نصي للإدخال وحقل متجه للإخراج، ثم أضف وظيفة التضمين الخاصة بـ Yandex Cloud إلى المخطط.</p>
+    </button></h2><p>بمجرد تكوين بيانات الاعتماد، قم بتعريف مخطط يحتوي على حقل نصي للإدخال وحقل متجه للإخراج، ثم أضف وظيفة التضمين من Yandex Cloud إلى المخطط.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -182,7 +182,7 @@ schema.add_function(text_embedding_function)
    <tr>
      <td><p><code translate="no">model_name</code></p></td>
      <td><p>نعم</p></td>
-     <td><p>عنوان URI لنموذج Yandex Cloud المطلوب استدعاؤه.</p></td>
+     <td><p>URI نموذج Yandex Cloud المطلوب استدعاؤه.</p></td>
      <td><p><code translate="no">"emb://&lt;folder_ID&gt;/text-search-doc/latest"</code></p></td>
    </tr>
    <tr>

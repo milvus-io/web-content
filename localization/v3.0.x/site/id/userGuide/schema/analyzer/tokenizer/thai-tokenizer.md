@@ -61,7 +61,7 @@ beta: Milvus 3.0.0+
 <li><strong>Segmentasi bahasa Thailand</strong>: Menyegmentasikan teks bahasa Thailand menjadi token kata tanpa bergantung pada spasi.</li>
 <li><strong>Penyaringan spasi kosong dan tanda baca</strong>: Menyaring segmen yang hanya berisi spasi kosong dan tanda baca. Hal ini berbeda dari <a href="/docs/id/icu-tokenizer.md"><code translate="no">icu</code></a> tokenizer, yang dapat mempertahankan tanda baca dan spasi sebagai token.</li>
 <li><strong>Teks campuran skrip</strong>: Menghasilkan token kata Latin dalam teks campuran bahasa Thailand/Inggris.</li>
-<li><strong>Hanya tokenizer</strong>: Tidak mengubah huruf besar menjadi huruf kecil, menormalkan angka Unicode, atau menghapus kata-kata pengisi. Tambahkan filter atau gunakan <a href="/docs/id/thai-analyzer.md"><code translate="no">thai</code></a> untuk langkah-langkah tersebut.</li>
+<li><strong>Hanya tokenizer</strong>: Tidak mengubah huruf besar menjadi huruf kecil, menormalkan angka Unicode, atau menghapus kata penghubung. Tambahkan filter atau gunakan <a href="/docs/id/thai-analyzer.md"><code translate="no">thai</code></a> untuk langkah-langkah tersebut.</li>
 <li><strong>Semantik posisi</strong>: Menggunakan posisi token berbasis karakter yang mencakup spasi kosong dan tanda baca yang dilewati, yang menjaga perilaku pencocokan frasa dan kedekatan tetap konsisten dengan tokenizer non-Latin lainnya.</li>
 </ul>
 <p>Setelah mendefinisik <code translate="no">analyzer_params</code>, Anda dapat menerapkan penganalisis ke bidang <code translate="no">VARCHAR</code> saat mendefinisikan skema koleksi. Untuk detailnya, lihat <a href="/docs/id/analyzer-overview.md#Example-use">Contoh penggunaan</a>.</p>

@@ -56,7 +56,7 @@ beta: Milvus 3.0.0+
      <td><p><code translate="no">stop_words</code></p></td>
      <td><p><code translate="no">list[str]</code></p></td>
      <td><p><code translate="no">_arabic_</code></p></td>
-     <td><p>قائمة بالكلمات الممنوعة الإضافية التي يجب إزالتها من عملية التقطيع إلى رموز. بشكل افتراضي، يستخدم محلل " <code translate="no">arabic</code> " قاموس " <code translate="no">_arabic_</code> " المدمج. للاطلاع على القاموس الافتراضي، راجع <a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/arabic.txt">قائمة الكلمات الممنوعة</a> في Milvus <a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/arabic.txt">Arabic</a>. تم الحصول على هذه القائمة من <a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/ar/stopwords.txt">ملف الكلمات الممنوعة في</a> Apache Lucene <a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/ar/stopwords.txt">Arabic</a>.</p></td>
+     <td><p>قائمة بالكلمات الممنوعة الإضافية التي يجب إزالتها من عملية التقطيع إلى رموز. بشكل افتراضي، يستخدم محلل " <code translate="no">arabic</code> " القاموس المدمج " <code translate="no">_arabic_</code> ". للاطلاع على القاموس الافتراضي، راجع <a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/arabic.txt">قائمة الكلمات الممنوعة العربية</a> في Milvus. يتم الحصول على هذه القائمة من <a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/ar/stopwords.txt">ملف الكلمات الممنوعة العربية</a> في Apache Lucene.</p></td>
    </tr>
 </table>
 <p>لإضافة كلمات توقف مخصصة، قم بتضمين <code translate="no">stop_words</code>:</p>
@@ -66,7 +66,7 @@ beta: Milvus 3.0.0+
 }
 <button class="copy-code-btn"></button></code></pre>
 <p>يطبق Milvus الكلمات الممنوعة المخصصة بالإضافة إلى قاموس <code translate="no">_arabic_</code> المدمج.</p>
-<p>المحلل المدمج <code translate="no">arabic</code> يعادل تكوين المحلل المخصص التالي:</p>
+<p>المحلل المدمج « <code translate="no">arabic</code> » يعادل تكوين المحلل المخصص التالي:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [
@@ -87,7 +87,7 @@ beta: Milvus 3.0.0+
 <p>يطبق هذا المحلل خطوات المعالجة التالية:</p>
 <ul>
 <li><strong>التقطيع إلى رموز</strong>: يستخدم أداة التقطيع <code translate="no">standard</code> لتقسيم النص إلى رموز.</li>
-<li><strong>توحيد الأرقام</strong>: يستخدم مرشح <code translate="no">decimaldigit</code> لتحويل الأرقام العشرية العربية-الهندية وأرقام يونيكود الأخرى إلى أرقام ASCII.</li>
+<li><strong>توحيد الأرقام</strong>: يستخدم مرشح <code translate="no">decimaldigit</code> لتحويل الأرقام العشرية العربية-الهندية وأرقام يونيكود العشرية الأخرى إلى أرقام ASCII.</li>
 <li><strong>توحيد الحروف العربية</strong>: يستخدم مرشح <code translate="no">arabic_normalization</code> لتوحيد أشكال حرف الألف المختلفة، وحرف التاء المربوطة، وحرف الألف المكسورة، وإزالة الحركات والتطويل.</li>
 <li><strong>الاستخلاص</strong>: يستخدم مرشح <code translate="no">stemmer</code> مع تعيين <code translate="no">language</code> على <code translate="no">arabic</code>.</li>
 <li><strong>إزالة الكلمات الممنوعة</strong>: يستخدم مرشح " <code translate="no">stop</code> " مع القاموس المدمج " <code translate="no">_arabic_</code> ".</li>

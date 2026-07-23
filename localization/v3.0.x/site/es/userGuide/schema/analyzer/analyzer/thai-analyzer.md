@@ -65,8 +65,8 @@ beta: Milvus 3.0.0+
     <span class="hljs-string">&quot;stop_words&quot;</span>: [<span class="hljs-string">&quot;มิลวัส&quot;</span>],
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus aplica las palabras vacías personalizadas además del diccionario integrado « <code translate="no">_thai_</code> ».</p>
-<p>El analizador integrado « <code translate="no">thai</code> » equivale a la siguiente configuración de analizador personalizado:</p>
+<p>Milvus aplica palabras vacías personalizadas además del diccionario integrado « <code translate="no">_thai_</code> ».</p>
+<p>El analizador integrado « <code translate="no">thai</code> » es equivalente a la siguiente configuración de analizador personalizado:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;thai&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [
@@ -87,7 +87,7 @@ beta: Milvus 3.0.0+
 <li><strong>Eliminación de palabras vacías</strong>: utiliza el filtro « <code translate="no">stop</code> » con el diccionario integrado « <code translate="no">_thai_</code> ».</li>
 <li><strong>Sin derivación</strong>: el analizador integrado « <code translate="no">thai</code> » no aplica el filtro « <code translate="no">stemmer</code> ».</li>
 </ul>
-<p>Una vez definido « <code translate="no">analyzer_params</code> », puede aplicar el analizador a un campo « <code translate="no">VARCHAR</code> » al definir un esquema de colección. Para obtener más información, consulte <a href="/docs/es/analyzer-overview.md#Example-use">«Ejemplo de uso</a>».</p>
+<p>Una vez definido « <code translate="no">analyzer_params</code> », puede aplicar el analizador a un campo « <code translate="no">VARCHAR</code> » al definir un esquema de colección. Para obtener más detalles, consulte <a href="/docs/es/analyzer-overview.md#Example-use">«Ejemplo de uso</a>».</p>
 <h2 id="Examples" class="common-anchor-header">Ejemplos<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

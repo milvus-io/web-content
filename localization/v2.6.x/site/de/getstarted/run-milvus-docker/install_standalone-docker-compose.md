@@ -75,7 +75,7 @@ Creating milvus-standalone ... done
 <li><strong>Aktualisierte Abhängigkeiten</strong>: Enthält die neuesten Versionen von MinIO und etcd</li>
 <li><strong>Verbesserte Konfiguration</strong>: Optimierte Einstellungen für eine bessere Leistung</li>
 </ul>
-<p>Laden Sie stets die aktuellste Docker-Compose-Konfiguration herunter, um die Kompatibilität mit den Funktionen von v2.6.17 sicherzustellen.</p>
+<p>Laden Sie stets die aktuellste Docker-Compose-Konfiguration herunter, um die Kompatibilität mit den Funktionen von Version 2.6.17 sicherzustellen.</p>
 <ul>
 <li><p>Falls die Ausführung des obigen Befehls fehlgeschlagen ist, überprüfen Sie bitte, ob auf Ihrem System Docker Compose V1 installiert ist. Sollte dies der Fall sein, empfehlen wir Ihnen aufgrund der Hinweise auf <a href="https://docs.docker.com/compose/">dieser Seite</a>, auf Docker Compose V2 umzusteigen.</p></li>
 <li><p>Sollten beim Abrufen des Images Probleme auftreten, kontaktieren Sie uns bitte unter <a href="mailto:community@zilliz.com">community@zilliz.com</a> mit Details zum Problem, und wir werden Ihnen die erforderliche Unterstützung zukommen lassen.</p></li>
@@ -85,7 +85,7 @@ Creating milvus-standalone ... done
 <ul>
 <li>sind die Container mit den Namen <strong>„milvus-standalone“</strong>, <strong>„milvus-minio“</strong> und <strong>„milvus-etcd“</strong> aktiv.
 <ul>
-<li>Der Container <strong>„milvus-etcd“</strong> stellt keine Ports für den Host bereit und ordnet seine Daten dem Verzeichnis <strong>„volumes/etcd“</strong> im aktuellen Ordner zu.</li>
+<li>Der Container <strong>„milvus-etcd“</strong> gibt keine Ports für den Host frei und ordnet seine Daten dem Verzeichnis <strong>„volumes/etcd“</strong> im aktuellen Ordner zu.</li>
 <li>Der Container <strong>„milvus-minio“</strong> stellt lokal die Ports <strong>9090</strong> und <strong>9091</strong> mit den Standard-Anmeldedaten bereit und ordnet seine Daten dem Verzeichnis <strong>„volumes/minio“</strong> im aktuellen Ordner zu.</li>
 <li>Der Container <strong>„milvus-standalone“</strong> stellt lokal die Ports <strong>19530</strong> mit den Standardeinstellungen bereit und ordnet seine Daten dem Verzeichnis <strong>„volumes/milvus“</strong> im aktuellen Ordner zu.</li>
 </ul></li>
@@ -120,8 +120,8 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <li><p>Rufen Sie den Container „ <code translate="no">milvus-standalone</code> “ auf.</p>
 <pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Fügen Sie zusätzliche Konfigurationen hinzu, um die Standardeinstellungen zu überschreiben.
-Im Folgenden wird davon ausgegangen, dass Sie die Standardkonfiguration in „ <code translate="no">proxy.healthCheckTimeout</code> “ überschreiben müssen. Informationen zu den entsprechenden Konfigurationselementen finden Sie unter <a href="/docs/de/v2.6.x/system_configuration.md">„Systemkonfiguration</a>“.</p>
+<li><p>Fügen Sie zusätzliche Konfigurationen hinzu, um die Standardkonfigurationen zu überschreiben.
+Im Folgenden wird davon ausgegangen, dass Sie die Standardkonfiguration in ` <code translate="no">proxy.healthCheckTimeout</code>` überschreiben müssen. Informationen zu den entsprechenden Konfigurationselementen finden Sie unter <a href="/docs/de/v2.6.x/system_configuration.md">„Systemkonfiguration</a>“.</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; /milvus/configs/user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
@@ -175,7 +175,7 @@ EOF
 <li><p>Lernen Sie die grundlegenden Funktionen von Milvus kennen:</p>
 <ul>
 <li><a href="/docs/de/v2.6.x/manage_databases.md">Datenbanken verwalten</a></li>
-<li><a href="/docs/de/v2.6.x/manage-collections.md">Sammlungen verwalten</a></li>
+<li><a href="/docs/de/v2.6.x/manage-collections.md">Kollektionen verwalten</a></li>
 <li><a href="/docs/de/v2.6.x/manage-partitions.md">Partitionen verwalten</a></li>
 <li><a href="/docs/de/v2.6.x/insert-update-delete.md">Einfügen, Upsert und Löschen</a></li>
 <li><a href="/docs/de/v2.6.x/single-vector-search.md">Einzelvektor-Suche</a></li>

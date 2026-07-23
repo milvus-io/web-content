@@ -58,9 +58,9 @@ title: Обновление кластера Milvus с помощью Milvus Ope
 <ul>
 <li><strong>Объединение координаторов</strong>: Устаревшие отдельные координаторы (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) были объединены в один <code translate="no">mixCoord</code></li>
 <li><strong>Новые компоненты</strong>: введение потокового узла (Streaming Node) для усовершенствованной обработки данных</li>
-<li><strong>Удаление компонентов</strong>: удален и объединен <code translate="no">indexNode</code> </li>
+<li><strong>Удаление компонентов</strong>: узел <code translate="no">indexNode</code> был удален и объединен</li>
 </ul>
-<p>Этот процесс обновления обеспечивает правильный переход на новую архитектуру. Для получения дополнительной информации об изменениях в архитектуре см. <a href="/docs/ru/v2.6.x/architecture_overview.md">«Обзор архитектуры Milvus</a>».</p>
+<p>Данный процесс обновления обеспечивает правильный переход на новую архитектуру. Дополнительную информацию об изменениях в архитектуре см. в <a href="/docs/ru/v2.6.x/architecture_overview.md">обзоре архитектуры Milvus</a>.</p>
 <h3 id="Requirements" class="common-anchor-header">Требования<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -167,7 +167,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="23-Upgrade-to-v2617" class="common-anchor-header">2.3 Обновление до версии v2.6.17</h4><p>Как только версия v2.5.16 успешно заработает с поддержкой <code translate="no">mixCoord</code>, выполните обновление до версии v2.6.17:</p>
+<h4 id="23-Upgrade-to-v2617" class="common-anchor-header">2.3 Обновление до версии v2.6.17</h4><p>Как только версия v2.5.16 успешно запустится с поддержкой <code translate="no">mixCoord</code>, выполните обновление до версии v2.6.17:</p>
 <p>Обновите файл конфигурации (в данном примере —<code translate="no">milvusupgrade.yaml</code> ):</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>

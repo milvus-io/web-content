@@ -49,7 +49,7 @@ title: Archiviazione a oggetti
 </tbody>
 </table>
 <p>Per i dettagli sulla configurazione, consultare <a href="/docs/it/deploy_s3.md">Configurare l'Object Storage con Docker Compose o Helm</a> e <a href="/docs/it/object_storage_operator.md">Configurare l'Object Storage con Milvus Operator</a>.</p>
-<h2 id="Additional-requirements-when-using-embedded-Woodpecker" class="common-anchor-header">Requisiti aggiuntivi per l’utilizzo di Woodpecker integrato<button data-href="#Additional-requirements-when-using-embedded-Woodpecker" class="anchor-icon" translate="no">
+<h2 id="Additional-requirements-when-using-embedded-Woodpecker" class="common-anchor-header">Requisiti aggiuntivi per l'utilizzo di Woodpecker integrato<button data-href="#Additional-requirements-when-using-embedded-Woodpecker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

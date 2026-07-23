@@ -18,7 +18,7 @@ title: CDC 複製中的批次匯入
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本指南說明如何針對屬於 CDC 複製拓撲結構的 Milvus 叢集執行批次匯入。在進行複製的叢集中，批次匯入必須使用兩階段提交 (2PC)，以確保匯入操作能在主叢集與備援叢集之間作為單一且有序的點被提交。</p>
+    </button></h1><p>本指南說明如何針對屬於 CDC 複製拓撲結構的 Milvus 叢集執行批次匯入。在進行複製的叢集中，批次匯入必須使用兩階段提交 (2PC)，以確保匯入操作能在主叢集與備援叢集中作為單一且有序的點被提交。</p>
 <p>在本指南中，主叢集即為來源 Milvus 叢集，而備援叢集則為目標 Milvus 叢集。</p>
 <p>開始之前，請確保您的叢集之間已設定好 CDC 複製。詳細資訊請參閱《<a href="/docs/zh-hant/set_up_cdc_replication.md">設定 CDC 複製</a>》。</p>
 <h2 id="Why-2PC-is-required" class="common-anchor-header">為何需要 2PC<button data-href="#Why-2PC-is-required" class="anchor-icon" translate="no">
@@ -97,7 +97,7 @@ title: CDC 複製中的批次匯入
         ></path>
       </svg>
     </button></h2><p>請在主叢集上執行所有匯入呼叫。匯入的資料與提交決定會自動複製到備用叢集，因此請勿在備用叢集上自行提交或確認匯入。</p>
-<p>每個叢集皆從其自身的物件儲存讀取匯入檔案。請確保待匯入的檔案同時存在於主叢集與備用叢集的物件儲存中。您可以將檔案上傳至兩個叢集，或使用兩個叢集皆可讀取的物件儲存。若備用叢集上缺少檔案，複製的匯入作業將在該處失敗，並顯示「物件未找到」錯誤。</p>
+<p>每個叢集皆從其自身的物件儲存中讀取匯入檔案。請確保待匯入的檔案同時存在於主叢集與備用叢集的物件儲存中。您可以將檔案上傳至兩個叢集，或使用兩個叢集皆可讀取的物件儲存。若備用叢集上缺少檔案，複製的匯入作業將在該處失敗，並顯示「物件未找到」錯誤。</p>
 <p>以下範例使用來自<code translate="no">pymilvus.bulk_writer</code> 的基於 REST 的匯入輔助程式。<code translate="no">url</code> 的值即為您用於其他 API 呼叫的相同 Milvus 位址。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> time
 
@@ -175,7 +175,7 @@ wait_for_state(standby_url, job_id, <span class="hljs-string">&quot;Completed&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在備用叢集完成匯入前進行提交並不會導致資料損毀，但當提交被套用時，備用叢集仍處於追趕狀態。等待主叢集和備用叢集皆回報<code translate="no">Uncommitted</code> ，可確認匯入的資料已完全複製，且兩個叢集都已準備好共同顯示該資料。</p>
+    </button></h3><p>在備用叢集完成匯入前執行提交並不會導致資料損毀，但當提交被套用時，備用叢集仍在進行資料同步。等待主叢集和備用叢集皆回報<code translate="no">Uncommitted</code> 狀態，可確認匯入的資料已完全複製，且兩個叢集都已準備好共同顯示該資料。</p>
 <h2 id="Step-3-Verify-the-data" class="common-anchor-header">步驟 3：驗證資料<button data-href="#Step-3-Verify-the-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -191,7 +191,7 @@ wait_for_state(standby_url, job_id, <span class="hljs-string">&quot;Completed&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>當工作進度達到「<code translate="no">Completed</code> 」狀態後，匯入的實體將在兩個叢集中皆可見。請先在主叢集上載入並查詢該集合，接著在備用叢集上執行相同的查詢（無需在該處手動載入該集合），並確認匯入的實體確實存在於兩個叢集中。</p>
+    </button></h2><p>當工作達到「<code translate="no">Completed</code> 」狀態後，匯入的實體將在兩個叢集中皆可見。請先在主叢集中載入並查詢該集合，接著在備用叢集中執行相同的查詢（無需在該處手動載入該集合），並確認匯入的實體確實存在於兩個叢集中。</p>
 <p>備援叢集在維持備援狀態期間為唯讀模式。請勿直接在備援叢集上提交匯入、提交或其他 DDL 或 DCL 操作。請在主叢集上執行這些操作，並讓 CDC 複製將其套用至備援叢集。</p>
 <h2 id="FAQ" class="common-anchor-header">常見問題<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -223,7 +223,7 @@ wait_for_state(standby_url, job_id, <span class="hljs-string">&quot;Completed&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>請在主叢集上執行匯入與提交。備援叢集會透過 CDC 複製同時接收匯入的資料與提交操作。</p>
+    </button></h3><p>請在主叢集上執行匯入與提交。備援叢集會透過 CDC 複製接收匯入的資料及提交操作。</p>
 <h3 id="Do-I-need-to-commit-on-the-standby-cluster" class="common-anchor-header">我需要在備用叢集上執行提交嗎？<button data-href="#Do-I-need-to-commit-on-the-standby-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -255,8 +255,8 @@ wait_for_state(standby_url, job_id, <span class="hljs-string">&quot;Completed&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">dataCoord.import.enableInReplicatingCluster</code> 該叢集未啟用此功能。請將主叢集和備援叢集的設定皆設為「<code translate="no">true</code> 」。</p>
-<h3 id="Why-does-my-import-fail-with-autocommittrue-import-in-replicating-cluster-is-not-supported" class="common-anchor-header">為何我的匯入操作在啟用「<code translate="no">auto_commit=true import in replicating cluster is not supported</code> 」時會失敗？<button data-href="#Why-does-my-import-fail-with-autocommittrue-import-in-replicating-cluster-is-not-supported" class="anchor-icon" translate="no">
+    </button></h3><p><code translate="no">dataCoord.import.enableInReplicatingCluster</code> 該叢集未啟用此功能。請將主叢集和備用叢集的設定皆設為「<code translate="no">true</code> 」。</p>
+<h3 id="Why-does-my-import-fail-with-autocommittrue-import-in-replicating-cluster-is-not-supported" class="common-anchor-header">為何我的匯入在啟用「<code translate="no">auto_commit=true import in replicating cluster is not supported</code> 」時會失敗？<button data-href="#Why-does-my-import-fail-with-autocommittrue-import-in-replicating-cluster-is-not-supported" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

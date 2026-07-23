@@ -21,7 +21,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>غالبًا ما تتطور مصادر البيانات الخارجية بعد إنشاء مجموعة خارجية. على سبيل المثال، قد يتضمن جدول Lakehouse الذي يخزن بالفعل التضمينات في وقت لاحق حقلًا عدديًا جديدًا، مثل النتيجة أو الفئة أو الطابع الزمني، الذي تريد إرجاعه في نتائج الاستعلام أو استخدامه في عوامل التصفية.</p>
+    </button></h1><p>غالبًا ما تتطور مصادر البيانات الخارجية بعد إنشاء مجموعة خارجية. على سبيل المثال، قد تتضمن جدول Lakehouse الذي يخزن بالفعل التضمينات في وقت لاحق حقلًا عدديًا جديدًا، مثل النتيجة أو الفئة أو الطابع الزمني، الذي تريد إرجاعه في نتائج الاستعلام أو استخدامه في عوامل التصفية.</p>
 <p>بدلاً من إعادة إنشاء المجموعة الخارجية أو نسخ البيانات المصدر إلى Milvus، أضف حقل Milvus يرتبط بالحقل الموجود في مصدر البيانات الخارجي. بعد إضافة الحقل، قم بتحديث المجموعة الخارجية حتى يمكن استخدام الحقل الجديد في الاستعلامات وعمليات البحث.</p>
 <h2 id="Limits" class="common-anchor-header">القيود<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -92,7 +92,7 @@ client.add_collection_field(
 <span class="highlighted-wrapper-line">    external_field=<span class="hljs-string">&quot;score&quot;</span>,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>في هذا المثال، يُعد « <code translate="no">score</code> » اسم الحقل في Milvus، ويقوم « <code translate="no">external_field=&quot;score&quot;</code> » بربطه بحقل « <code translate="no">score</code> » في مصدر البيانات الخارجي. قم بتعيين « <code translate="no">nullable=True</code> » لأن الحقل تمت إضافته بعد إنشاء المجموعة بالفعل.</p>
+<p>في هذا المثال، يُعد « <code translate="no">score</code> » اسم الحقل في Milvus، ويقوم « <code translate="no">external_field=&quot;score&quot;</code> » بتعيينه إلى الحقل « <code translate="no">score</code> » في مصدر البيانات الخارجي. قم بتعيين « <code translate="no">nullable=True</code> » لأن الحقل يُضاف بعد إنشاء المجموعة بالفعل.</p>
 <h3 id="Add-a-vector-field" class="common-anchor-header">إضافة حقل متجه<button data-href="#Add-a-vector-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

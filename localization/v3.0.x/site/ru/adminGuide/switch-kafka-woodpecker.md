@@ -22,7 +22,7 @@ summary: >-
       </svg>
     </button></h1><p>На этой странице описано, как переключить очередь сообщений (MQ) <strong>кластера Milvus</strong> между <strong>Kafka</strong> (встроенной или внешней) и <strong>Woodpecker</strong> (с бэкэндом MinIO) в обоих направлениях. Общий порядок действий и необходимые условия см. в разделе <a href="/docs/ru/switch-mq-type.md">«Переключение типа MQ</a>».</p>
 <div class="alert note">
-<p><strong>Предпосылка:</strong> функция «Переключение MQ» доступна в <strong>Milvus 3.0 и более поздних версиях</strong>. Перед началом обновите свой экземпляр Milvus до версии 3.0 или более поздней — эта функция недоступна в более ранних версиях.</p>
+<p><strong>Необходимое условие:</strong> функция «Переключение MQ» доступна в <strong>Milvus 3.0 и более поздних версиях</strong>. Перед началом обновите свой экземпляр Milvus до версии 3.0 или более поздней — эта функция недоступна в более ранних версиях.</p>
 </div>
 <div class="alert warning">
 <p>Переключение очереди сообщений — <strong>операция с высоким уровнем риска</strong>. Выберите раздел, соответствующий <strong>вашему</strong> способу развертывания — <strong>«С помощью Helm»</strong> или <strong>«С помощью Milvus Operator»</strong> — и следуйте инструкциям от начала до конца. Не смешивайте команды Helm и Operator.</p>
@@ -120,11 +120,11 @@ summary: >-
   -H &quot;Content-Type: application/json&quot; \
   -d &#x27;{&quot;target_wal_name&quot;: &quot;kafka&quot;}&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Шаг 4: Убедитесь, что переход завершён.</strong></p>
+<p><strong>Шаг 4: Убедитесь, что переключение завершено.</strong></p>
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
-<p>В случае успешного переключения в журнале появляется запись « <code translate="no">[mqTypeValue=kafka]</code> ».</p>
-<p><strong>Шаг 5: (Необязательно) Удалите данные Woodpecker.</strong> Удалите данные Woodpecker на MinIO/S3 (в папке <code translate="no">&lt;rootPath&gt;/wp/...</code>, обычно <code translate="no">files/wp/...</code>) и метаданные Woodpecker в etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). Если вы планируете позже вернуться к Woodpecker, сначала удалите эти файлы.</p>
+<p>При успешном переключении в журнале регистрируется сообщение « <code translate="no">[mqTypeValue=kafka]</code> ».</p>
+<p><strong>Шаг 5: (Необязательно) Удалите данные Woodpecker.</strong> Удалите данные Woodpecker из MinIO/S3 (в каталоге <code translate="no">&lt;rootPath&gt;/wp/...</code>, обычно <code translate="no">files/wp/...</code>) и метаданные Woodpecker из etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). Если вы планируете позже вернуться к Woodpecker, сначала удалите эти файлы.</p>
 <h2 id="With-Milvus-Operator" class="common-anchor-header">С помощью Milvus Operator<button data-href="#With-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -156,7 +156,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p><strong>Шаг 1: Убедитесь, что экземпляр Milvus запущен.</strong></p>
-<p><strong>Шаг 2: Выполните переключение MQ.</strong> Служба MixCoord не доступна извне, поэтому запустите API переключения изнутри пода MixCoord:</p>
+<p><strong>Шаг 2: Выполните переключение MQ.</strong> Сервис MixCoord не доступен извне, поэтому запустите API переключения изнутри пода MixCoord:</p>
 <pre><code translate="no" class="language-shell">kubectl exec -it &lt;mixcoord-pod&gt; -- \
   curl -X POST http://localhost:9091/management/wal/alter \
   -H &quot;Content-Type: application/json&quot; \
@@ -196,7 +196,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p><strong>Шаг 1: Убедитесь, что экземпляр Milvus работает.</strong></p>
-<p><strong>Шаг 2: Настройте подключение к целевому Kafka и перезапустите Milvus.</strong> Укажите подключение к Kafka в файле <code translate="no">spec.config</code> (оператор преобразует <code translate="no">spec.config</code> в <code translate="no">user.yaml</code>) и задайте тип MQ; при применении CR поды будут перезапущены с новой конфигурацией. Подробности о SASL/SSL см. в разделе <a href="/docs/ru/connect_kafka_ssl.md">«Подключение к Kafka с помощью SASL/SSL</a>».</p>
+<p><strong>Шаг 2: Настройте целевое соединение с Kafka и перезапустите Milvus.</strong> Укажите соединение с Kafka в разделе <code translate="no">spec.config</code> (оператор преобразует <code translate="no">spec.config</code> в <code translate="no">user.yaml</code>) и задайте тип MQ; при применении CR поды будут перезапущены с новой конфигурацией. Подробности о SASL/SSL см. в разделе <a href="/docs/ru/connect_kafka_ssl.md">«Подключение к Kafka с помощью SASL/SSL</a>».</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># change_configmap.yaml</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -232,7 +232,7 @@ summary: >-
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>При успешном переключении в журнале регистрируется сообщение « <code translate="no">[mqTypeValue=kafka]</code> ».</p>
-<p><strong>Шаг 5: (Необязательно) Удалите данные Woodpecker.</strong> Удалите данные Woodpecker на MinIO/S3 (в каталоге <code translate="no">&lt;rootPath&gt;/wp/...</code>, обычно <code translate="no">files/wp/...</code>) и метаданные Woodpecker в etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). Если вы планируете позже вернуться к Woodpecker, сначала удалите эти файлы.</p>
+<p><strong>Шаг 5: (Необязательно) Удалите данные Woodpecker.</strong> Удалите данные Woodpecker на MinIO/S3 (в папке <code translate="no">&lt;rootPath&gt;/wp/...</code>, обычно <code translate="no">files/wp/...</code>) и метаданные Woodpecker в etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). Если вы планируете позже вернуться к Woodpecker, сначала удалите эти файлы.</p>
 <h2 id="Supported-scenarios" class="common-anchor-header">Поддерживаемые сценарии<button data-href="#Supported-scenarios" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -256,6 +256,6 @@ summary: >-
 <tr><td>Встроенный Kafka</td><td>Woodpecker (MinIO)</td><td><strong>Поддерживается</strong></td><td><strong>Поддерживается</strong></td></tr>
 <tr><td>Внешний Kafka</td><td>Woodpecker (MinIO)</td><td><strong>Поддерживается</strong></td><td><strong>Поддерживается</strong></td></tr>
 <tr><td>Woodpecker (MinIO)</td><td>Внешний Kafka</td><td><strong>Поддерживается</strong></td><td><strong>Поддерживается</strong></td></tr>
-<tr><td>Kafka</td><td>Woodpecker (локальный)</td><td><strong>Поддерживается, но не рекомендуется</strong> (для всех подсistem требуется общая файловая система)</td><td><strong>Не поддерживается</strong></td></tr>
+<tr><td>Kafka</td><td>Woodpecker (локальный)</td><td><strong>Поддерживается, но не рекомендуется</strong> (для всех подсистем требуется общая файловая система)</td><td><strong>Не поддерживается</strong></td></tr>
 </tbody>
 </table>

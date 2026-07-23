@@ -4,10 +4,10 @@ label: Docker Compose
 order: 1
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
-summary: 了解如何使用 Docker Compose 升級 Milvus 獨立執行版本。
+summary: 瞭解如何使用 Docker Compose 升級 Milvus 獨立執行版本。
 title: 使用 Docker Compose 升級 Milvus 獨立部署
 ---
-<div class="tab-wrapper"><a href="/docs/zh-hant/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/zh-hant/v2.6.x/upgrade_milvus_standalone-docker.md" class='active '>操作員</a>、Helm、<a href="/docs/zh-hant/v2.6.x/upgrade_milvus_standalone-docker.md" class='active '>Docker Compose</a></div>
+<div class="tab-wrapper"><a href="/docs/zh-hant/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/zh-hant/v2.6.x/upgrade_milvus_standalone-docker.md" class='active '>Operator</a>、Helm、Docker<a href="/docs/zh-hant/v2.6.x/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">使用 Docker Compose 升級 Milvus 獨立部署<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -57,11 +57,11 @@ title: 使用 Docker Compose 升級 Milvus 獨立部署
     </button></h3><p>從 Milvus 2.5.x 升級至 2.6.17 涉及重大的架構變更：</p>
 <ul>
 <li><strong>協調器整合</strong>：舊版獨立的協調器（<code translate="no">dataCoord</code> 、<code translate="no">queryCoord</code> 、<code translate="no">indexCoord</code> ）已整合為單一<code translate="no">mixCoord</code></li>
-<li><strong>新元件</strong>：引入「串流節點」（Streaming Node）以強化資料處理能力</li>
+<li><strong>新元件</strong>：導入「串流節點」（Streaming Node）以強化資料處理能力</li>
 <li><strong>元件移除</strong>：已移除並整合<code translate="no">indexNode</code> </li>
 </ul>
 <p>此升級流程可確保順利遷移至新架構。有關架構變更的更多資訊，請參閱《<a href="/docs/zh-hant/v2.6.x/architecture_overview.md">Milvus 架構概覽</a>》。</p>
-<h3 id="Requirements" class="common-anchor-header">系統需求<button data-href="#Requirements" class="anchor-icon" translate="no">
+<h3 id="Requirements" class="common-anchor-header">需求<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -79,7 +79,7 @@ title: 使用 Docker Compose 升級 Milvus 獨立部署
     </button></h3><p><strong>系統需求：</strong></p>
 <ul>
 <li>已安裝 Docker 和 Docker Compose</li>
-<li>已透過 Docker Compose 部署 Milvus 獨立執行環境</li>
+<li>透過 Docker Compose 部署的 Milvus 獨立執行環境</li>
 </ul>
 <p><strong>相容性要求：</strong></p>
 <ul>
@@ -217,7 +217,7 @@ docker compose logs standalone | grep <span class="hljs-string">&quot;version&qu
 </ul></li>
 <li>若您已準備好在雲端部署叢集：
 <ul>
-<li>了解如何<a href="/docs/zh-hant/v2.6.x/eks.md">使用 Terraform 在 Amazon EKS 上部署 Milvus</a></li>
+<li>瞭解如何<a href="/docs/zh-hant/v2.6.x/eks.md">使用 Terraform 在 Amazon EKS 上部署 Milvus</a></li>
 <li>了解如何<a href="/docs/zh-hant/v2.6.x/gcp.md">使用 Kubernetes 在 GCP 上部署 Milvus 叢集</a></li>
 <li>了解如何<a href="/docs/zh-hant/v2.6.x/azure.md">透過 Kubernetes 在 Microsoft Azure 上部署 Milvus</a></li>
 </ul></li>

@@ -51,9 +51,9 @@ summary: 瞭解如何使用 Milvus Operator 設定訊息儲存。
 <tr><td style="text-align:center">叢集模式</td><td style="text-align:center">✖️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td></tr>
 </tbody>
 </table>
-<p>指定訊息儲存時還存在其他限制：</p>
+<p>指定訊息儲存時還有其他限制：</p>
 <ul>
-<li>每個 Milvus 實例僅支援一個訊息儲存。不過，我們仍維持向後相容性，允許為單一實例設定多個訊息儲存。其優先順序如下：
+<li>每個 Milvus 執行個體僅支援一個訊息儲存。不過，我們仍維持對單一執行個體設定多個訊息儲存的向後相容性。優先順序如下：
 <ul>
 <li>獨立模式：RocksMQ（預設） &gt; Pulsar &gt; Kafka</li>
 <li>叢集模式：Pulsar（預設） &gt; Kafka</li>
@@ -77,11 +77,11 @@ summary: 瞭解如何使用 Milvus Operator 設定訊息儲存。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>RocksMQ 是 Milvus 獨立執行模式中的預設訊息儲存系統。</p>
+    </button></h2><p>RocksMQ 是 Milvus 獨立部署模式中的預設訊息儲存系統。</p>
 <div class="alert note">
-<p>目前，您僅能透過 Milvus Operator 將 RocksMQ 設定為 Milvus 獨立模式的訊息儲存方案。</p>
+<p>目前，您只能透過 Milvus Operator 將 RocksMQ 設定為 Milvus 獨立模式的消息儲存。</p>
 </div>
-<h4 id="Example" class="common-anchor-header">範例</h4><p>以下範例展示如何配置 RocksMQ 服務。</p>
+<h4 id="Example" class="common-anchor-header">範例</h4><p>以下範例示範如何配置 RocksMQ 服務。</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -145,7 +145,7 @@ summary: 瞭解如何使用 Milvus Operator 設定訊息儲存。
         ></path>
       </svg>
     </button></h2><p>Pulsar 負責管理近期變更的日誌、輸出串流日誌，並提供日誌訂閱功能。無論是 Milvus 獨立執行模式還是 Milvus 叢集模式，皆支援將 Pulsar 配置為訊息儲存。然而，若使用 Milvus Operator，您僅能將 Pulsar 配置為 Milvus 叢集的訊息儲存。請在 `<code translate="no">spec.dependencies.pulsar</code> ` 下新增必要欄位以配置 Pulsar。</p>
-<p><code translate="no">pulsar</code> 支援<code translate="no">external</code> 和<code translate="no">inCluster</code> 。</p>
+<p><code translate="no">pulsar</code> 支援<code translate="no">external</code> 及<code translate="no">inCluster</code> 。</p>
 <h3 id="External-Pulsar" class="common-anchor-header">外部 Pulsar<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -164,8 +164,8 @@ summary: 瞭解如何使用 Milvus Operator 設定訊息儲存。
     </button></h3><p><code translate="no">external</code> 表示使用外部 Pulsar 服務。
 用於配置外部 Pulsar 服務的欄位包括：</p>
 <ul>
-<li><code translate="no">external</code>:  若<code translate="no">true</code> 欄位設為「是」，表示 Milvus 將使用外部 Pulsar 服務。</li>
-<li><code translate="no">endpoints</code>：Pulsar 的端點。</li>
+<li><code translate="no">external</code>：若<code translate="no">true</code> 欄位設為「是」，表示 Milvus 將使用外部 Pulsar 服務。</li>
+<li><code translate="no">endpoints</code>: Pulsar 的端點。</li>
 </ul>
 <h4 id="Example" class="common-anchor-header">範例</h4><p>以下範例展示如何配置外部 Pulsar 服務。</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
@@ -281,8 +281,8 @@ summary: 瞭解如何使用 Milvus Operator 設定訊息儲存。
     </button></h3><p><code translate="no">external</code> 表示使用外部 Kafka 服務。</p>
 <p>用於配置外部 Kafka 服務的欄位包括：</p>
 <ul>
-<li><code translate="no">external</code>:<code translate="no">true</code> 值表示 Milvus 使用外部 Kafka 服務。</li>
-<li><code translate="no">brokerList</code>：要傳送訊息的經紀人清單。</li>
+<li><code translate="no">external</code>:<code translate="no">true</code> 的值表示 Milvus 會使用外部 Kafka 服務。</li>
+<li><code translate="no">brokerList</code>：要傳送訊息至的經紀人清單。</li>
 </ul>
 <h4 id="Example" class="common-anchor-header">範例</h4><p>以下範例展示如何配置外部 Kafka 服務。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
@@ -330,7 +330,7 @@ summary: 瞭解如何使用 Milvus Operator 設定訊息儲存。
         ></path>
       </svg>
     </button></h3><p><code translate="no">inCluster</code> 表示當 Milvus 叢集啟動時，叢集內的 Kafka 服務會自動啟動。</p>
-<h4 id="Example" class="common-anchor-header">範例</h4><p>以下範例說明如何設定內部 Kafka 服務。</p>
+<h4 id="Example" class="common-anchor-header">範例</h4><p>以下範例說明如何配置內部 Kafka 服務。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -368,5 +368,5 @@ summary: 瞭解如何使用 Milvus Operator 設定訊息儲存。
     </button></h2><p>瞭解如何使用 Milvus Operator 配置其他 Milvus 依賴項：</p>
 <ul>
 <li><a href="/docs/zh-hant/v2.6.x/object_storage_operator.md">使用 Milvus Operator 配置物件儲存</a></li>
-<li><a href="/docs/zh-hant/v2.6.x/meta_storage_operator.md">使用 Milvus Operator 配置元數據儲存</a></li>
+<li><a href="/docs/zh-hant/v2.6.x/meta_storage_operator.md">使用 Milvus Operator 配置元資料儲存</a></li>
 </ul>

@@ -23,7 +23,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Используйте эту страницу, чтобы добавить скалярную фильтрацию к векторному поиску по полям StructArray. Фильтрация StructArray имеет два уровня: фильтры на уровне строк выбирают родительские сущности, а фильтры на уровне элементов ограничивают набор элементов Struct, участвующих в векторном поиске на уровне элементов.</p>
+    </button></h1><p>Используйте эту страницу для добавления скалярной фильтрации к векторному поиску по полям StructArray. Фильтрация StructArray имеет два уровня: фильтры на уровне строк выбирают родительские сущности, а фильтры на уровне элементов ограничивают набор элементов Struct, участвующих в векторном поиске на уровне элементов.</p>
 <p>На этой странице используется коллекция « <code translate="no">tech_articles</code> » из <a href="/docs/ru/create-structarray-field.md">раздела «Создание поля StructArray</a>». В коллекции имеется поле StructArray с именем « <code translate="no">chunks</code> », содержащее скалярные подполя, такие как « <code translate="no">section</code> », « <code translate="no">page</code> », « <code translate="no">quality_score</code> » и « <code translate="no">has_code</code> », а также векторные подполя для поиска.</p>
 <h2 id="Choose-a-filter-type" class="common-anchor-header">Выберите тип фильтра<button data-href="#Choose-a-filter-type" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -51,7 +51,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>На этой странице объясняется, как использовать фильтры StructArray в рабочих процессах поиска. Полные правила синтаксиса, поддерживаемые типы предикатов и матрица неподдерживаемых предикатов см. в разделе <a href="/docs/ru/struct-array-operators.md">«Операторы StructArray</a>».</p>
+<p>На этой странице объясняется, как использовать фильтры StructArray в рабочих процессах поиска. Полные правила синтаксиса, поддерживаемые типы предикатов и матрица неподдерживаемых предикатов приведены в разделе <a href="/docs/ru/struct-array-operators.md">«Операторы StructArray</a>».</p>
 </div>
 <h2 id="Filter-by-top-level-fields" class="common-anchor-header">Фильтрация по полям верхнего уровня<button data-href="#Filter-by-top-level-fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,7 +68,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Используйте обычные выражения фильтрации, если условие относится к родительской сущности, а не к отдельному элементу Struct. Это работает как при поиске с помощью EmbeddingList, так и при поиске на уровне элементов.</p>
+    </button></h2><p>Используйте обычные выражения фильтрации, если условие относится к родительской сущности, а не к отдельному элементу Struct. Это работает как при поиске по EmbeddingList, так и при поиске на уровне элементов.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">from</span> pymilvus.client.embedding_list <span class="hljs-keyword">import</span> EmbeddingList
 
@@ -96,7 +96,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Приведенный выше фильтр выбирает только сущности, у которых поле верхнего уровня <code translate="no">category</code> имеет значение <code translate="no">&quot;search&quot;</code>. Он не выделяет один конкретный соответствующий элемент Struct.</p>
+<p>Приведенный выше фильтр выбирает только сущности, у которых поле верхнего уровня ` <code translate="no">category</code> ` имеет значение ` <code translate="no">&quot;search&quot;</code>`. Он не выделяет один конкретный соответствующий элемент Struct.</p>
 <h2 id="Filter-element-level-vector-search" class="common-anchor-header">Фильтрация векторного поиска на уровне элементов<button data-href="#Filter-element-level-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -152,7 +152,7 @@ results = client.search(
 <p>В данном примере предикат верхнего уровня <code translate="no">category == &quot;search&quot;</code> выбирает кандидатов, а <code translate="no">element_filter</code> ограничивает векторный поиск на уровне элементов фрагментами, в которых <code translate="no">section</code>, <code translate="no">quality_score</code> и <code translate="no">has_code</code> совпадают в одном и том же элементе Struct.</p>
 <div class="alert note">
 <p>Предупреждение</p>
-<p>При объединении предиката верхнего уровня с оператором <code translate="no">element_filter</code> помещайте оператор <code translate="no">element_filter</code> в конец выражения. Выражение фильтра может содержать только один оператор <code translate="no">element_filter</code>, и нельзя вкладывать операторы <code translate="no">element_filter</code> или <code translate="no">MATCH_*</code> внутрь другого оператора StructArray.</p>
+<p>При объединении предиката верхнего уровня с оператором « <code translate="no">element_filter</code> » помещайте оператор « <code translate="no">element_filter</code> » в конец выражения. Выражение фильтра может содержать только один оператор « <code translate="no">element_filter</code> », и нельзя вкладывать операторы « <code translate="no">element_filter</code> » или « <code translate="no">MATCH_*</code> » внутрь другого оператора «StructArray».</p>
 </div>
 <h2 id="Filter-entities-with-MATCH-operators" class="common-anchor-header">Фильтрация сущностей с помощью операторов MATCH<button data-href="#Filter-entities-with-MATCH-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -177,9 +177,9 @@ results = client.search(
 <tbody>
 <tr><td><code translate="no">MATCH_ANY</code></td><td>По крайней мере один элемент Struct должен удовлетворять предикату.</td><td><code translate="no">MATCH_ANY(chunks, $[section] == &quot;index&quot;)</code></td></tr>
 <tr><td><code translate="no">MATCH_ALL</code></td><td>Все элементы Struct должны удовлетворять предикату.</td><td><code translate="no">MATCH_ALL(chunks, $[quality_score] &gt; 0.5)</code></td></tr>
-<tr><td><code translate="no">MATCH_LEAST</code></td><td>По крайней мере, <code translate="no">N</code> элементов структуры должны удовлетворять предикату.</td><td><code translate="no">MATCH_LEAST(chunks, $[has_code] == true, threshold=2)</code></td></tr>
+<tr><td><code translate="no">MATCH_LEAST</code></td><td>По крайней мере <code translate="no">N</code> элементов структуры должны удовлетворять предикату.</td><td><code translate="no">MATCH_LEAST(chunks, $[has_code] == true, threshold=2)</code></td></tr>
 <tr><td><code translate="no">MATCH_MOST</code></td><td>Не более чем <code translate="no">N</code> элементов структуры должны удовлетворять предикату.</td><td><code translate="no">MATCH_MOST(chunks, $[section] == &quot;appendix&quot;, threshold=1)</code></td></tr>
-<tr><td><code translate="no">MATCH_EXACT</code></td><td>Ровно <code translate="no">N</code> элементов Struct должны удовлетворять предикату.</td><td><code translate="no">MATCH_EXACT(chunks, $[section] == &quot;summary&quot;, threshold=1)</code></td></tr>
+<tr><td><code translate="no">MATCH_EXACT</code></td><td>Именно <code translate="no">N</code> элементов Struct должны удовлетворять предикату.</td><td><code translate="no">MATCH_EXACT(chunks, $[section] == &quot;summary&quot;, threshold=1)</code></td></tr>
 </tbody>
 </table>
 <pre><code translate="no" class="language-python">filter_expr = (
@@ -253,7 +253,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Аргумент « <code translate="no">filter</code> » применяет условие сущности верхнего уровня, тогда как « <code translate="no">expr</code> » в « <code translate="no">chunk_req</code> » ограничивает только запрос вектора на уровне элементов StructArray. Поддерживаемые комбинации гибридного поиска и ограничения, специфичные для конкретной версии, см. в разделах <a href="/docs/ru/hybrid-search-with-structarray.md">«Гибридный поиск с StructArray</a> » и <a href="/docs/ru/structarray-limits.md">«Ограничения StructArray</a>».</p>
+<p>Аргумент « <code translate="no">filter</code> » применяет условие сущности верхнего уровня, тогда как « <code translate="no">expr</code> » в « <code translate="no">chunk_req</code> » ограничивает только запрос вектора на уровне элементов StructArray. Поддерживаемые комбинации гибридного поиска и ограничения для конкретных версий см. в разделах <a href="/docs/ru/hybrid-search-with-structarray.md">«Гибридный поиск с StructArray</a> » и <a href="/docs/ru/structarray-limits.md">«Ограничения StructArray</a>».</p>
 <h2 id="Predicate-support-summary" class="common-anchor-header">Сводка поддержки предикатов<button data-href="#Predicate-support-summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -276,13 +276,13 @@ results = client.hybrid_search(
 </thead>
 <tbody>
 <tr><td><code translate="no">BOOL</code></td><td><code translate="no">$[has_code] == true</code>, <code translate="no">!($[has_code] == true)</code></td></tr>
-<tr><td>Целочисленные типы</td><td><code translate="no">$[page] &gt;= 2</code>, <code translate="no">$[page] in [1, 2, 3]</code></td></tr>
+<tr><td>Целые типы</td><td><code translate="no">$[page] &gt;= 2</code>, <code translate="no">$[page] in [1, 2, 3]</code></td></tr>
 <tr><td><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code></td><td><code translate="no">$[quality_score] &gt; 0.9</code>, <code translate="no">0.7 &lt; $[quality_score] &lt; 0.95</code></td></tr>
 <tr><td><code translate="no">VARCHAR</code></td><td><code translate="no">$[section] == &quot;index&quot;</code>, <code translate="no">$[text] like &quot;range%&quot;</code></td></tr>
 <tr><td>Векторные подполя</td><td>Не поддерживаются в качестве входных данных для скалярных предикатов <code translate="no">$[...]</code>. Вместо этого используйте векторные подполя с помощью векторного поиска.</td></tr>
 </tbody>
 </table>
-<p>Для неподдерживаемых случаев, таких как пути JSON, функции контейнеров массивов, функции сопоставления текста, предикаты null для <code translate="no">$[...]</code>, функции Geometry, выражения Timestamptz и вызовы обобщённых функций, см. раздел <a href="/docs/ru/struct-array-operators.md">«Операторы StructArray</a>».</p>
+<p>В отношении неподдерживаемых случаев, таких как пути JSON, функции контейнеров массивов, функции сопоставления текста, предикаты null для <code translate="no">$[...]</code>, функции Geometry, выражения Timestamptz и вызовы обобщённых функций, см. раздел <a href="/docs/ru/struct-array-operators.md">«Операторы StructArray</a>».</p>
 <h2 id="Common-mistakes" class="common-anchor-header">Распространённые ошибки<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -301,8 +301,8 @@ results = client.hybrid_search(
     </button></h2><ul>
 <li><p>Использование ` <code translate="no">$[subfield]</code> ` вне контекста ` <code translate="no">element_filter</code> ` или ` <code translate="no">MATCH_*</code>`.</p></li>
 <li><p>Использование <code translate="no">chunks.section</code> вместо синтаксиса операторов StructArray, например <code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code>.</p></li>
-<li><p>Использование <code translate="no">element_filter</code>, когда требуется только фильтрация на уровне строк. Вместо этого используйте <code translate="no">MATCH_ANY</code>, если вам нужно только выбрать сущности.</p></li>
-<li><p>Ожидание того, что оператор ` <code translate="no">MATCH_*</code> ` вернет смещения элементов. Эти операторы выбирают сущности и сами по себе не определяют один соответствующий элемент.</p></li>
+<li><p>Использование <code translate="no">element_filter</code>, когда требуется только фильтрация на уровне строк. Вместо этого используйте <code translate="no">MATCH_ANY</code>, если требуется только выборка сущностей.</p></li>
+<li><p>Ожидание того, что оператор ` <code translate="no">MATCH_*</code> ` вернет смещения элементов. Эти операторы выбирают сущности и сами по себе не идентифицируют один соответствующий элемент.</p></li>
 <li><p>Написание простых булевых предикатов, таких как <code translate="no">$[has_code]</code>. Используйте явные сравнения, такие как <code translate="no">$[has_code] == true</code>.</p></li>
 <li><p>Размещение <code translate="no">element_filter</code> перед предикатом верхнего уровня в одном и том же выражении фильтра.</p></li>
 </ul>

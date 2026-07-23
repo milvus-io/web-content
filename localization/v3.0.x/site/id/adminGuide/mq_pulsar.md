@@ -17,7 +17,7 @@ title: Pulsar
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Apache Pulsar adalah salah satu backend antrian pesan (WAL) yang didukung oleh Milvus. Di Milvus 3.x, <a href="/docs/id/woodpecker.md">Woodpecker</a> adalah antrian pesan default; Pulsar tetap didukung sepenuhnya bagi pengguna yang lebih memilihnya. Pulsar terutama digunakan dengan Milvus Distributed (kluster); penerapan mandiri biasanya menggunakan Woodpecker tertanam atau <a href="/docs/id/mq_rocksmq.md">RocksMQ</a>.</p>
+    </button></h1><p>Apache Pulsar adalah salah satu backend antrian pesan (WAL) yang didukung oleh Milvus. Pada Milvus 3.x, <a href="/docs/id/woodpecker.md">Woodpecker</a> adalah antrian pesan default; Pulsar tetap didukung sepenuhnya bagi pengguna yang lebih memilihnya. Pulsar terutama digunakan dengan Milvus Distributed (kluster); penerapan mandiri biasanya menggunakan Woodpecker tertanam atau <a href="/docs/id/mq_rocksmq.md">RocksMQ</a>.</p>
 <h2 id="Version-compatibility" class="common-anchor-header">Kompatibilitas versi<button data-href="#Version-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,7 +42,7 @@ title: Pulsar
 <tr><td>2.4.x dan versi sebelumnya</td><td>Pulsar v2</td><td>Pulsar v2</td></tr>
 </tbody>
 </table>
-<p>Sejak Milvus 2.5, chart Helm Milvus dan Milvus Operator secara default menginstal <strong>Pulsar v3</strong>; Pulsar v2 tetap kompatibel. Lihat <a href="/docs/id/upgrade-pulsar-v3.md">Memutakhirkan Pulsar dari v2 ke v3</a> dan <a href="/docs/id/use-pulsar-v2.md">Tetap Menggunakan Pulsar v2</a>.</p>
+<p>Sejak Milvus 2.5, chart Helm Milvus dan Milvus Operator secara default melakukan deployment <strong>Pulsar v3</strong>; Pulsar v2 tetap kompatibel. Lihat <a href="/docs/id/upgrade-pulsar-v3.md">Memutakhirkan Pulsar dari v2 ke v3</a> dan <a href="/docs/id/use-pulsar-v2.md">Tetap Menggunakan Pulsar v2</a>.</p>
 <h2 id="Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="common-anchor-header">Deploy kluster Milvus dengan Pulsar menggunakan Helm<button data-href="#Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -183,7 +183,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Internal-in-cluster-Pulsar" class="common-anchor-header">Pulsar Internal (di dalam kluster)<button data-href="#Internal-in-cluster-Pulsar" class="anchor-icon" translate="no">
+<h3 id="Internal-in-cluster-Pulsar" class="common-anchor-header">Pulsar Internal (dalam kluster)<button data-href="#Internal-in-cluster-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -45,7 +45,7 @@ summary: >-
 <tr><th>Objectif</th><th>Utilisation</th><th>Comportement du résultat</th></tr>
 </thead>
 <tbody>
-<tr><td>Filtrer selon un champ scalaire de niveau supérieur, tel que <code translate="no">category</code>.</td><td>Expression de filtre standard.</td><td>Sélectionne les entités parentes avant ou pendant la recherche.</td></tr>
+<tr><td>Filtrer selon un champ scalaire de niveau supérieur, tel que <code translate="no">category</code>.</td><td>Expression de filtrage standard.</td><td>Sélectionne les entités parentes avant ou pendant la recherche.</td></tr>
 <tr><td>Limite la recherche vectorielle au niveau des éléments aux éléments Struct qui répondent aux conditions scalaires.</td><td><code translate="no">element_filter</code>.</td><td>Recherche uniquement les éléments Struct correspondants et peut renvoyer les décalages des éléments correspondants.</td></tr>
 <tr><td>Sélectionne les entités selon qu’aucun, tous ou un nombre spécifique d’éléments Struct correspondent à un prédicat.</td><td><code translate="no">MATCH_ANY</code>, <code translate="no">MATCH_ALL</code>, <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> ou <code translate="no">MATCH_EXACT</code>.</td><td>Filtrage au niveau des lignes. Ces opérateurs ne renvoient pas d’offset en eux-mêmes.</td></tr>
 </tbody>
@@ -96,8 +96,8 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Le filtre ci-dessus sélectionne uniquement les entités dont le champ de niveau supérieur « <code translate="no">category</code> » est « <code translate="no">&quot;search&quot;</code> ». Il n’identifie pas un élément Struct correspondant en particulier.</p>
-<h2 id="Filter-element-level-vector-search" class="common-anchor-header">Filtrer la recherche vectorielle au niveau des éléments<button data-href="#Filter-element-level-vector-search" class="anchor-icon" translate="no">
+<p>Le filtre ci-dessus sélectionne uniquement les entités dont le champ de niveau supérieur « <code translate="no">category</code> » est « <code translate="no">&quot;search&quot;</code> ». Il n’identifie pas un élément Struct correspondant.</p>
+<h2 id="Filter-element-level-vector-search" class="common-anchor-header">Filtrage de la recherche vectorielle au niveau des éléments<button data-href="#Filter-element-level-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -112,7 +112,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilisez « <code translate="no">element_filter(structArrayField, predicate)</code> » lorsque les conditions scalaires doivent s’appliquer au même élément Struct participant à la recherche vectorielle au niveau des éléments. À l’intérieur du prédicat, utilisez « <code translate="no">$[subfield]</code> » pour faire référence aux sous-champs scalaires de l’élément Struct actuel.</p>
+    </button></h2><p>Utilisez ` <code translate="no">element_filter(structArrayField, predicate)</code> ` lorsque les conditions scalaires doivent s’appliquer au même élément Struct participant à la recherche vectorielle au niveau des éléments. À l’intérieur du prédicat, utilisez ` <code translate="no">$[subfield]</code> ` pour faire référence aux sous-champs scalaires de l’élément Struct actuel.</p>
 <pre><code translate="no" class="language-python">query_vector = [<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>]
 
 filter_expr = (
@@ -169,7 +169,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilisez les opérateurs <code translate="no">MATCH_*</code> lorsque le filtre doit déterminer si une entité parente est éligible en fonction de ses éléments Struct. Ces opérateurs sont des filtres au niveau des lignes : ils sélectionnent des entités, mais ne renvoient pas d’offset d’élément en eux-mêmes.</p>
+    </button></h2><p>Utilisez les opérateurs « <code translate="no">MATCH_*</code> » lorsque le filtre doit déterminer si une entité parente est éligible en fonction de ses éléments Struct. Ces opérateurs sont des filtres au niveau des lignes : ils sélectionnent des entités, mais ne renvoient pas d’offset d’élément en eux-mêmes.</p>
 <table>
 <thead>
 <tr><th>Opérateur</th><th>À utiliser lorsque</th><th>Exemple</th></tr>
@@ -179,7 +179,7 @@ results = client.search(
 <tr><td><code translate="no">MATCH_ALL</code></td><td>Tous les éléments Struct doivent satisfaire le prédicat.</td><td><code translate="no">MATCH_ALL(chunks, $[quality_score] &gt; 0.5)</code></td></tr>
 <tr><td><code translate="no">MATCH_LEAST</code></td><td>Au moins <code translate="no">N</code> éléments de la structure doivent satisfaire le prédicat.</td><td><code translate="no">MATCH_LEAST(chunks, $[has_code] == true, threshold=2)</code></td></tr>
 <tr><td><code translate="no">MATCH_MOST</code></td><td>Au plus <code translate="no">N</code> éléments de la structure doivent satisfaire le prédicat.</td><td><code translate="no">MATCH_MOST(chunks, $[section] == &quot;appendix&quot;, threshold=1)</code></td></tr>
-<tr><td><code translate="no">MATCH_EXACT</code></td><td>Exactement <code translate="no">N</code> éléments Struct doivent satisfaire le prédicat.</td><td><code translate="no">MATCH_EXACT(chunks, $[section] == &quot;summary&quot;, threshold=1)</code></td></tr>
+<tr><td><code translate="no">MATCH_EXACT</code></td><td><code translate="no">N</code> éléments Struct exactement doivent satisfaire le prédicat.</td><td><code translate="no">MATCH_EXACT(chunks, $[section] == &quot;summary&quot;, threshold=1)</code></td></tr>
 </tbody>
 </table>
 <pre><code translate="no" class="language-python">filter_expr = (
@@ -301,7 +301,7 @@ results = client.hybrid_search(
     </button></h2><ul>
 <li><p>Utilisation de ` <code translate="no">$[subfield]</code> ` en dehors de ` <code translate="no">element_filter</code> ` ou ` <code translate="no">MATCH_*</code>`.</p></li>
 <li><p>Utilisation de ` <code translate="no">chunks.section</code> ` à la place de la syntaxe des opérateurs StructArray, telle que ` <code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code>`.</p></li>
-<li><p>Utilisation de ` <code translate="no">element_filter</code> ` alors que seul un filtrage au niveau des lignes est nécessaire. Utilisez plutôt ` <code translate="no">MATCH_ANY</code> ` si vous avez uniquement besoin de sélectionner des entités.</p></li>
+<li><p>Utiliser <code translate="no">element_filter</code> alors que vous n'avez besoin que d'un filtrage au niveau des lignes. Utilisez plutôt <code translate="no">MATCH_ANY</code> si vous avez uniquement besoin de sélectionner des entités.</p></li>
 <li><p>S'attendre à ce que ` <code translate="no">MATCH_*</code> ` renvoie des indices d'éléments. Ces opérateurs sélectionnent des entités et n'identifient pas eux-mêmes un élément correspondant.</p></li>
 <li><p>Écrire des prédicats booléens nus tels que <code translate="no">$[has_code]</code>. Utilisez des comparaisons explicites telles que <code translate="no">$[has_code] == true</code>.</p></li>
 <li><p>Placer « <code translate="no">element_filter</code> » avant un prédicat de niveau supérieur dans la même expression de filtre.</p></li>

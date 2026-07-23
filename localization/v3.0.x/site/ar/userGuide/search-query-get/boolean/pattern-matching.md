@@ -23,7 +23,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>في تطبيقات البحث التفاعلي، غالبًا ما يكمل كل من البحث المتجه ومطابقة الأنماط على غرار grep بعضهما البعض. يسترد البحث المتجه الكيانات ذات الصلة من الناحية الدلالية، بينما تضيق مطابقة الأنماط نطاق تلك النتائج بناءً على هياكل سلاسل نصية محددة، مثل رموز الأخطاء، أو بادئات السجلات، أو نطاقات البريد الإلكتروني، أو مسارات عناوين URL، أو المعرفات.</p>
-<p>في Milvus، يمكنك التعبير عن قيود الأنماط هذه في مرشحات قياسية باستخدام <code translate="no">LIKE</code> لمطابقة أحرف البدل البسيطة، و <code translate="no">=~</code> أو <code translate="no">!~</code> للتعبيرات العادية <a href="https://github.com/google/re2/wiki/syntax">RE2</a>. يمكنك دمج هذه المرشحات مع <code translate="no">query</code> أو <code translate="no">search</code> أو البحث الهجين.</p>
+<p>في Milvus، يمكنك التعبير عن قيود الأنماط هذه في عوامل التصفية القياسية باستخدام <code translate="no">LIKE</code> لمطابقة أحرف البدل البسيطة، و <code translate="no">=~</code> أو <code translate="no">!~</code> للتعبيرات العادية <a href="https://github.com/google/re2/wiki/syntax">RE2</a>. يمكنك دمج عوامل التصفية هذه مع <code translate="no">query</code> أو <code translate="no">search</code> أو البحث الهجين.</p>
 <p>تُكتب تعبيرات مطابقة الأنماط في المعلمة <code translate="no">filter</code>. على سبيل المثال، يطابق الاستعلام التالي رسائل السجل التي تحتوي على رمز خطأ مثل <code translate="no">E1001</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -58,7 +58,7 @@ res = client.query(
 </thead>
 <tbody>
 <tr><td><code translate="no">VARCHAR</code> الحقل</td><td>نعم</td><td>نعم</td><td>الهدف النموذجي لمطابقة الأنماط في حقول السلسلة.</td></tr>
-<tr><td><code translate="no">JSON</code> مسار مع نوع التحويل <code translate="no">VARCHAR</code> </td><td>نعم</td><td>نعم</td><td>يجب أن تكون قيمة مسار JSON سلسلة نصية للحصول على مطابقات إيجابية. إذا قمت بإنشاء فهرس على مسار JSON من أجل التسريع، فقم بتعيين <code translate="no">json_cast_type=&quot;varchar&quot;</code>.</td></tr>
+<tr><td><code translate="no">JSON</code> مسار مع نوع تحويل <code translate="no">VARCHAR</code> </td><td>نعم</td><td>نعم</td><td>يجب أن تكون قيمة مسار JSON سلسلة نصية للحصول على مطابقات إيجابية. إذا قمت بإنشاء فهرس على مسار JSON من أجل التسريع، فقم بتعيين <code translate="no">json_cast_type=&quot;varchar&quot;</code>.</td></tr>
 <tr><td><code translate="no">ARRAY&lt;VARCHAR&gt;</code> العنصر</td><td>نعم</td><td>نعم</td><td>مطابقة عنصر معين حسب الفهرس، مثل <code translate="no">tags[0]</code>. <strong>لا</strong> تقوم مطابقة الأنماط بمسح جميع العناصر؛ بل تنطبق فقط على العنصر الموجود في الفهرس المحدد.</td></tr>
 <tr><td>أهداف رقمية أو منطقية أو متجهة أو <code translate="no">TEXT</code> أو أهداف أخرى غير<code translate="no">VARCHAR</code> </td><td>لا</td><td>لا</td><td>مطابقة الأنماط متاحة فقط لقيم <code translate="no">VARCHAR</code> ، أو مسارات JSON التي تُحل إلى سلاسل، أو عناصر <code translate="no">ARRAY&lt;VARCHAR&gt;</code> المفهرسة.</td></tr>
 </tbody>
@@ -90,11 +90,11 @@ res = client.query(
 <tr><td>مطابقة بسيطة لللاحقة</td><td><code translate="no">LIKE</code></td><td><code translate="no">filename LIKE &quot;%.json&quot;</code></td><td>تطابق السلاسل التي تنتهي بـ <code translate="no">.json</code>.</td></tr>
 <tr><td>مطابقة بسيطة لـ "يحتوي على"</td><td><code translate="no">LIKE</code></td><td><code translate="no">description LIKE &quot;%vector database%&quot;</code></td><td>تطابق القيم التي تحتوي على <code translate="no">vector database</code> في أي مكان في السلسلة.</td></tr>
 <tr><td>مطابقة رمز منظم أو نمط ذي طول ثابت</td><td><code translate="no">=~</code></td><td><code translate="no">code =~ &quot;E[0-9]{4}&quot;</code></td><td>تطابق السلاسل التي تحتوي، مع مراعاة الأحرف الكبيرة والصغيرة، على <code translate="no">E</code> متبوعًا بأربعة أرقام، مثل <code translate="no">E1001</code>.</td></tr>
-<tr><td>مطابقة الأنماط دون التمييز بين الأحرف الكبيرة والصغيرة</td><td><code translate="no">=~</code> مع <code translate="no">(?i)</code></td><td><code translate="no">message =~ &quot;(?i)error&quot;</code></td><td>تطابق <code translate="no">error</code> أو <code translate="no">ERROR</code> أو أي أشكال أخرى بأحرف كبيرة أو صغيرة.</td></tr>
+<tr><td>مطابقة الأنماط دون التمييز بين الأحرف الكبيرة والصغيرة</td><td><code translate="no">=~</code> مع <code translate="no">(?i)</code></td><td><code translate="no">message =~ &quot;(?i)error&quot;</code></td><td>تطابق <code translate="no">error</code> أو <code translate="no">ERROR</code> أو أي صيغ أخرى بأحرف كبيرة أو صغيرة.</td></tr>
 <tr><td>استبعاد القيم التي تتطابق مع نمط تعبير عادي</td><td><code translate="no">!~</code></td><td><code translate="no">message !~ &quot;^DEBUG&quot;</code></td><td>يستبعد السلاسل التي تبدأ بـ <code translate="no">DEBUG</code>.</td></tr>
 </tbody>
 </table>
-<p>استخدم <code translate="no">LIKE</code> للمطابقة البسيطة باستخدام أحرف البدل. استخدم regex عندما يحتاج النمط إلى فئات الأحرف، أو التكرار، أو التناوب مثل <code translate="no">error|failed</code> ، أو نقاط الربط، أو المطابقة غير الحساسة لحالة الأحرف.</p>
+<p>استخدم <code translate="no">LIKE</code> لمطابقة بسيطة باستخدام أحرف البدل. استخدم regex عندما يحتاج النمط إلى فئات الأحرف، أو التكرار، أو التناوب مثل <code translate="no">error|failed</code> ، أو نقاط الربط، أو المطابقة غير الحساسة لحالة الأحرف.</p>
 <h2 id="Use-LIKE" class="common-anchor-header">استخدم LIKE<button data-href="#Use-LIKE" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -135,7 +135,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>استخدم موضع <code translate="no">%</code> و <code translate="no">_</code> للتحكم في مكان ظهور النص الثابت في السلسلة المتطابقة.</p>
+    </button></h3><p>استخدم موضع <code translate="no">%</code> و <code translate="no">_</code> للتحكم في مكان ظهور النص الثابت في السلسلة المطابقة.</p>
 <table>
 <thead>
 <tr><th>المتطلبات</th><th>النمط</th><th>مثال على التصفية</th></tr>
@@ -209,10 +209,10 @@ res = client.query(
 </thead>
 <tbody>
 <tr><td><code translate="no">=~</code></td><td>يطابق القيم التي تستوفي نمط التعبير العادي.</td><td><code translate="no">filter = 'message =~ &quot;E[0-9]{4}&quot;'</code></td></tr>
-<tr><td><code translate="no">!~</code></td><td>يستبعد القيم التي تتوافق مع نمط التعبير النمطي.</td><td><code translate="no">filter = 'message !~ &quot;^DEBUG&quot;'</code></td></tr>
+<tr><td><code translate="no">!~</code></td><td>يستبعد القيم التي تتوافق مع نمط التعبير العادي.</td><td><code translate="no">filter = 'message !~ &quot;^DEBUG&quot;'</code></td></tr>
 </tbody>
 </table>
-<h3 id="Use-raw-string-literals" class="common-anchor-header">استخدام القيم الثابتة للسلسلة الخام<button data-href="#Use-raw-string-literals" class="anchor-icon" translate="no">
+<h3 id="Use-raw-string-literals" class="common-anchor-header">استخدم القيم الثابتة للسلسلة الخام<button data-href="#Use-raw-string-literals" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -227,12 +227,12 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يُنصح باستخدام سلاسل نصية خام لأنماط التعبيرات العادية التي تحتوي على خطوط مائلة عكسية. في السلسلة النصية الخام، المكتوبة على النحو التالي: <code translate="no">r&quot;...&quot;</code> أو <code translate="no">r'...'</code> ، يتم تمرير الخطوط المائلة العكسية إلى محرك التعبيرات العادية حرفياً. وهذا يتجنب الهروب الإضافي المطلوب في السلاسل النصية العادية.</p>
+    </button></h3><p>يُنصح باستخدام سلاسل نصية خام لأنماط التعبير العادي التي تحتوي على خطوط مائلة عكسية. في السلسلة النصية الخام، المكتوبة على النحو التالي: <code translate="no">r&quot;...&quot;</code> أو <code translate="no">r'...'</code> ، يتم تمرير الخطوط المائلة العكسية إلى محرك التعبير العادي حرفياً. وهذا يتجنب الهروب الإضافي المطلوب في السلاسل النصية العادية.</p>
 <p>على سبيل المثال:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ r&quot;\d{4}-\d{2}-\d{2}&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>يتطابق هذا مع السلاسل التي تحتوي على قيمة تشبه التاريخ مثل <code translate="no">2026-07-01</code>.</p>
-<p>بدون سلسلة نصية خام، تقوم السلاسل النصية العادية بمعالجة تسلسلات الهروب قبل تقييم نمط التعبير النمطي، لذا قد تتطلب أنماط مثل <code translate="no">\d</code> أو <code translate="no">\s</code> أو الأحرف النصية التي تم الهروب منها علامات مائلة عكسية إضافية.</p>
+<p>بدون سلسلة نصية خام، تقوم السلاسل النصية العادية بمعالجة تسلسلات الهروب قبل تقييم نمط التعبير العادي، لذا قد تتطلب أنماط مثل <code translate="no">\d</code> أو <code translate="no">\s</code> أو الأحرف النصية التي تم الهروب منها علامات مائلة عكسية إضافية.</p>
 <h3 id="Common-regex-patterns" class="common-anchor-header">أنماط التعبيرات النمطية الشائعة<button data-href="#Common-regex-patterns" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -290,7 +290,7 @@ res = client.query(
 <p>تستخدم مطابقة التعبيرات النمطية في Milvus دلالات السلسلة الفرعية. لا يلزم أن يتطابق النمط مع قيمة الحقل بالكامل. على سبيل المثال، يتطابق المرشح التالي مع كل من <code translate="no">E1001</code> و <code translate="no">failed with E1001 after retry</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ &quot;E[0-9]{4}&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>لمطابقة قيمة الحقل بالكامل، استخدم المراسي <code translate="no">^</code> و <code translate="no">$</code>:</p>
+<p>لمطابقة قيمة الحقل بالكامل، استخدم نقاط الربط <code translate="no">^</code> و <code translate="no">$</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match only values that are exactly E followed by four digits</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;code =~ &quot;^E[0-9]{4}$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -299,14 +299,14 @@ res = client.query(
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot; OR message IS NULL&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>مسارات JSON</strong></p>
-<p>بالنسبة لمسارات JSON، تتصرف مرشحات regex بشكل مختلف عندما يكون المسار مفقودًا أو فارغًا أو يُحل إلى قيمة غير سلسلة:</p>
+<p>بالنسبة لمسارات JSON، تتصرف مرشحات التعبيرات النمطية بشكل مختلف عندما يكون المسار مفقودًا أو فارغًا أو يُحل إلى قيمة غير سلسلة:</p>
 <table>
 <thead>
 <tr><th>المرشح</th><th>هل يشمل القيم المفقودة/الصفرية/غير السلسلية؟</th><th>ملاحظات</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">json_field[&quot;path&quot;] =~ &quot;pattern&quot;</code></td><td>لا</td><td>يتطابق فقط مع القيم النصية التي تستوفي نمط التعبير العادي.</td></tr>
-<tr><td><code translate="no">json_field[&quot;path&quot;] !~ &quot;pattern&quot;</code></td><td>نعم</td><td>يعرض الكيانات التي يكون مسارها مفقودًا أو فارغًا أو غير نصي أو عبارة عن سلسلة لا تتطابق مع نمط التعبير العادي.</td></tr>
+<tr><td><code translate="no">json_field[&quot;path&quot;] !~ &quot;pattern&quot;</code></td><td>نعم</td><td>تُرجع الكيانات التي يكون مسارها مفقودًا أو فارغًا أو غير نصي أو عبارة عن سلسلة لا تتطابق مع نمط التعبير العادي.</td></tr>
 </tbody>
 </table>
 <h2 id="Accelerate-pattern-matching-with-indexes" class="common-anchor-header">تسريع مطابقة الأنماط باستخدام الفهارس<button data-href="#Accelerate-pattern-matching-with-indexes" class="anchor-icon" translate="no">
@@ -324,8 +324,8 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يدعم Milvus عدة أنواع من الفهارس في الحقول النصية التي يمكن استخدامها مع <code translate="no">LIKE</code> وفلاتر التعبيرات العادية في الحقول <code translate="no">VARCHAR</code> أو مسارات سلاسل JSON، مثل <code translate="no">NGRAM</code> و <code translate="no">STL_SORT</code> و <code translate="no">INVERTED</code> و <code translate="no">BITMAP</code>. يمكن أن تعمل مطابقة الأنماط بدون فهرس، لكن الفهرس يمكن أن يحسن الأداء في مجموعات البيانات الكبيرة.</p>
-<p>تعتمد فعالية الفهرس على تعبير النمط، وما إذا كان بإمكان Milvus استخراج سلاسل فرعية حرفية ثابتة، بالإضافة إلى عدد العناصر وتوزيعها في الحقل المستهدف. قد تستفيد الأنماط ذات البادئة، مثل <code translate="no">name LIKE &quot;Prod%&quot;</code> ، من استراتيجيات فهرسة مختلفة عن الأنماط ذات الوسيطة أو اللاحقة، مثل <code translate="no">description LIKE &quot;%vector%&quot;</code> أو <code translate="no">filename LIKE &quot;%.json&quot;</code>.</p>
+    </button></h2><p>يدعم Milvus عدة أنواع من الفهارس على الحقول النصية التي يمكن استخدامها مع <code translate="no">LIKE</code> وفلاتر التعبيرات العادية على حقول <code translate="no">VARCHAR</code> أو مسارات سلاسل JSON، مثل <code translate="no">NGRAM</code> و <code translate="no">STL_SORT</code> و <code translate="no">INVERTED</code> و <code translate="no">BITMAP</code>. يمكن أن تعمل مطابقة الأنماط بدون فهرس، لكن الفهرس يمكن أن يحسن الأداء على مجموعات البيانات الكبيرة.</p>
+<p>تعتمد فعالية الفهرس على تعبير النمط، وما إذا كان بإمكان Milvus استخراج سلاسل فرعية حرفية ثابتة، بالإضافة إلى عدد عناصر الحقل المستهدف وتوزيعها. قد تستفيد الأنماط ذات البادئة، مثل <code translate="no">name LIKE &quot;Prod%&quot;</code> ، من استراتيجيات فهرسة مختلفة عن الأنماط ذات الوسيطة أو اللاحقة، مثل <code translate="no">description LIKE &quot;%vector%&quot;</code> أو <code translate="no">filename LIKE &quot;%.json&quot;</code>.</p>
 <p>استخدم الجدول التالي كنقطة انطلاق، ثم قم بإجراء مقارنة مع حمل العمل الخاص بك:</p>
 <table>
 <thead>

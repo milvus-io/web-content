@@ -23,7 +23,7 @@ title: ترقية Milvus Standalone باستخدام Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يصف هذا الدليل كيفية ترقية النشر المستقل لـ Milvus من الإصدار v2.5.x إلى الإصدار v2.6.17 باستخدام Milvus Operator.</p>
+    </button></h1><p>يصف هذا الدليل كيفية ترقية نشر Milvus المستقل من الإصدار v2.5.x إلى الإصدار v2.6.17 باستخدام Milvus Operator.</p>
 <h2 id="Before-you-start" class="common-anchor-header">قبل البدء<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -78,7 +78,7 @@ title: ترقية Milvus Standalone باستخدام Milvus Operator
       </svg>
     </button></h3><p><strong>متطلبات النظام:</strong></p>
 <ul>
-<li>مجموعة Kubernetes مع Milvus standalone التي تم نشرها عبر Milvus Operator</li>
+<li>مجموعة Kubernetes مع Milvus المستقل الذي تم نشره عبر Milvus Operator</li>
 <li><code translate="no">kubectl</code> المُهيأة للوصول إلى مجموعتك</li>
 <li>تثبيت Helm 3.x</li>
 </ul>
@@ -145,7 +145,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
     </button></h3><h4 id="21-Upgrade-to-v2516" class="common-anchor-header">2.1 الترقية إلى الإصدار v2.5.16</h4><div class="alert-note">
 <p>تخط هذه الخطوة إذا كان إصدارك المستقل يعمل بالفعل بالإصدار v2.5.16 أو أعلى.</p>
 </div>
-<p>قم بإنشاء ملف التكوين <code translate="no">milvusupgrade.yaml</code> للترقية إلى الإصدار v2.5.16:</p>
+<p>أنشئ ملف تكوين <code translate="no">milvusupgrade.yaml</code> للترقية إلى الإصدار v2.5.16:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

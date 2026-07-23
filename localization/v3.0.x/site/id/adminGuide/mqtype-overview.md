@@ -3,8 +3,8 @@ id: mqtype-overview.md
 title: Gambaran Umum Antrian Pesan
 summary: >-
   Gambaran umum mengenai opsi antrian pesan (mqType) yang didukung oleh Milvus,
-  serta opsi mana yang sebaiknya digunakan untuk penerapan mandiri (standalone)
-  dan terdistribusi.
+  serta opsi mana yang sebaiknya digunakan untuk penerapan standalone dan
+  terdistribusi.
 ---
 <h1 id="Message-Queue-Overview" class="common-anchor-header">Gambaran Umum Antrian Pesan<button data-href="#Message-Queue-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -52,7 +52,7 @@ summary: >-
 <ul>
 <li><p>Setiap instance Milvus menggunakan tepat satu antrian pesan.</p></li>
 <li><p><strong>Batasan Antrian Pesan</strong>: Saat melakukan upgrade ke Milvus v3.0-beta, Anda harus mempertahankan pilihan antrian pesan saat ini. Beralih antara sistem antrian pesan yang berbeda selama proses upgrade tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia di versi mendatang.</p></li>
-<li><p>Untuk mengubah antrian pesan pada instance yang sedang berjalan, lihat <a href="/docs/id/switch-mq-type.md">Switch MQ Type</a>. Fitur Switch MQ tersedia di <strong>Milvus 3.0 dan versi selanjutnya</strong> — lakukan pembaruan ke Milvus 3.0 atau versi selanjutnya terlebih dahulu.</p></li>
+<li><p>Untuk mengubah antrian pesan pada instance yang sedang berjalan, lihat <a href="/docs/id/switch-mq-type.md">Switch MQ Type</a>. Fitur Switch MQ tersedia di <strong>Milvus 3.0 dan versi selanjutnya</strong> — lakukan upgrade ke Milvus 3.0 atau versi selanjutnya terlebih dahulu.</p></li>
 </ul>
 </div>
 <h2 id="Choosing-a-message-queue" class="common-anchor-header">Memilih antrian pesan<button data-href="#Choosing-a-message-queue" class="anchor-icon" translate="no">

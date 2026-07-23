@@ -106,7 +106,7 @@ EOF
 <p>Затем перезапустите службу следующим образом:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh restart</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Информацию о соответствующих элементах конфигурации см. в разделе <a href="/docs/ru/v2.6.x/system_configuration.md">«Конфигурация системы</a>».</p>
+<p>Информацию о соответствующих параметрах конфигурации см. в разделе <a href="/docs/ru/v2.6.x/system_configuration.md">«Конфигурация системы</a>».</p>
 <h2 id="Upgrade-Milvus" class="common-anchor-header">Обновление Milvus<button data-href="#Upgrade-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -130,7 +130,7 @@ EOF
 <p>Команда обновления автоматически:</p>
 <ul>
 <li>Загружает последний скрипт установки с обновленными настройками</li>
-<li>загружает последний образ Milvus для Docker</li>
+<li>Загружает последний образ Milvus для Docker</li>
 <li>перезапускает контейнер с новой версией</li>
 <li>сохраняет ваши существующие данные и конфигурации</li>
 </ul>
@@ -176,7 +176,7 @@ EOF
     </button></h2><p>Установив Milvus в Docker, вы можете:</p>
 <ul>
 <li><p>Ознакомьтесь с <a href="/docs/ru/v2.6.x/quickstart.md">разделом «Быстрый старт»</a>, чтобы узнать, на что способен Milvus.</p></li>
-<li><p>Ознакомьтесь с основными операциями Milvus:</p>
+<li><p>Ознакомиться с основными операциями Milvus:</p>
 <ul>
 <li><a href="/docs/ru/v2.6.x/manage_databases.md">Управление базами данных</a></li>
 <li><a href="/docs/ru/v2.6.x/manage-collections.md">Управление коллекциями</a></li>
@@ -186,7 +186,7 @@ EOF
 <li><a href="/docs/ru/v2.6.x/multi-vector-search.md">Гибридный поиск</a></li>
 </ul></li>
 <li><p><a href="/docs/ru/v2.6.x/upgrade_milvus_cluster-helm.md">Обновление Milvus с помощью Helm Chart</a>.</p></li>
-<li><p><a href="/docs/ru/v2.6.x/scaleout.md">Масштабируйте свой кластер Milvus</a>.</p></li>
+<li><p><a href="/docs/ru/v2.6.x/scaleout.md">Масштабируйте кластер Milvus</a>.</p></li>
 <li><p>Разверните кластер Milvus в облаке:</p>
 <ul>
 <li><a href="/docs/ru/v2.6.x/eks.md">Amazon EKS</a></li>
@@ -195,7 +195,7 @@ EOF
 </ul></li>
 <li><p>Ознакомьтесь с <a href="/docs/ru/v2.6.x/milvus-webui.md">Milvus WebUI</a> — интуитивно понятным веб-интерфейсом для мониторинга и управления Milvus.</p></li>
 <li><p>Ознакомьтесь с <a href="/docs/ru/v2.6.x/milvus_backup_overview.md">Milvus Backup</a> — инструментом с открытым исходным кодом для резервного копирования данных Milvus.</p></li>
-<li><p>Познакомьтесь с <a href="/docs/ru/v2.6.x/birdwatcher_overview.md">Birdwatcher</a> — инструментом с открытым исходным кодом для отладки Milvus и динамического обновления конфигурации.</p></li>
+<li><p>Ознакомьтесь с <a href="/docs/ru/v2.6.x/birdwatcher_overview.md">Birdwatcher</a> — инструментом с открытым исходным кодом для отладки Milvus и динамического обновления конфигурации.</p></li>
 <li><p>Познакомьтесь с <a href="https://github.com/zilliztech/attu">Attu</a> — инструментом с графическим интерфейсом с открытым исходным кодом для интуитивного управления Milvus.</p></li>
-<li><p><a href="/docs/ru/v2.6.x/monitor.md">Мониторинг Milvus с помощью Prometheus</a>.</p></li>
+<li><p><a href="/docs/ru/v2.6.x/monitor.md">Осуществляйте мониторинг Milvus с помощью Prometheus</a>.</p></li>
 </ul>

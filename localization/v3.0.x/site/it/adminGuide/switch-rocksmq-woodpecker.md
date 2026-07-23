@@ -2,8 +2,8 @@
 id: switch-rocksmq-woodpecker.md
 title: Passaggio da RocksMQ a Woodpecker
 summary: >-
-  Passare dalla coda dei messaggi di un'istanza Milvus Standalone (Docker
-  Compose) da RocksMQ a Woodpecker.
+  Passare dalla coda dei messaggi di RocksMQ a quella di Woodpecker in
+  un'installazione Milvus Standalone (Docker Compose).
 ---
 <h1 id="Switch-between-RocksMQ-and-Woodpecker" class="common-anchor-header">Passaggio da RocksMQ a Woodpecker<button data-href="#Switch-between-RocksMQ-and-Woodpecker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Questa pagina descrive come passare dalla coda di messaggi (MQ) di una distribuzione <strong>Milvus Standalone (Docker Compose)</strong> da <strong>RocksMQ</strong> a <strong>Woodpecker</strong> (backend locale o MinIO) e viceversa. Per il flusso di lavoro generale e i prerequisiti, consultare <a href="/docs/it/switch-mq-type.md">Passare da un tipo di MQ all'altro</a>.</p>
+    </button></h1><p>Questa pagina descrive come passare dalla coda dei messaggi (MQ) di una distribuzione <strong>Milvus Standalone (Docker Compose)</strong> da <strong>RocksMQ</strong> a <strong>Woodpecker</strong> (backend locale o MinIO) e viceversa. Per il flusso di lavoro generale e i prerequisiti, consultare <a href="/docs/it/switch-mq-type.md">Passare da un tipo di MQ all'altro</a>.</p>
 <div class="alert note">
 <ul>
 <li><strong>Prerequisito:</strong> la funzionalità "Cambio di MQ" è disponibile in <strong>Milvus 3.0 e versioni successive</strong>. Aggiornare l’istanza di Milvus a Milvus 3.0 o versioni successive prima di iniziare: la funzionalità non è disponibile nelle versioni precedenti.</li>
@@ -57,7 +57,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Verifica che l’istanza Docker Compose di Milvus Standalone sia in esecuzione correttamente — ad esempio, creando una raccolta di prova, inserendo dati ed eseguendo una query.</p>
+    </button></h3><p>Verifica che la tua istanza Milvus Standalone Docker Compose sia in esecuzione correttamente — ad esempio, creando una raccolta di prova, inserendo dati ed eseguendo una query.</p>
 <h3 id="Step-2-Configure-Woodpecker-storage" class="common-anchor-header">Passaggio 2: configurare l’archiviazione Woodpecker<button data-href="#Step-2-Configure-Woodpecker-storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -97,7 +97,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><div class="alert note">
-<p>Se è la prima volta che si passa a Woodpecker, ignorare questa nota. In caso contrario, eliminare i metadati e i dati residui di Woodpecker prima di effettuare nuovamente il passaggio: i dati residui potrebbero causare comportamenti imprevisti.</p>
+<p>Se è la prima volta che si passa a Woodpecker, ignorare questa nota. In caso contrario, ripulire i metadati e i dati residui di Woodpecker prima di effettuare nuovamente il passaggio: i dati residui potrebbero causare comportamenti imprevisti.</p>
 </div>
 <pre><code translate="no" class="language-shell">curl -X POST http://&lt;mixcoord_addr&gt;:&lt;mixcoord_port&gt;/management/wal/alter \
   -H &quot;Content-Type: application/json&quot; \
@@ -153,7 +153,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Verify-the-Milvus-instance-is-running" class="common-anchor-header">Passaggio 1: verificare che l’istanza di Milvus sia in esecuzione<button data-href="#Step-1-Verify-the-Milvus-instance-is-running" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Verify-the-Milvus-instance-is-running" class="common-anchor-header">Passaggio 1: Verificare che l’istanza di Milvus sia in esecuzione<button data-href="#Step-1-Verify-the-Milvus-instance-is-running" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -185,7 +185,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><div class="alert note">
-<p>Assicurarsi che l’istanza non contenga dati residui di RocksMQ derivanti da un’esecuzione precedente. Se è la prima volta che si passa a RocksMQ, ignorare questa nota; in caso contrario, ripulire prima i metadati e i dati relativi a RocksMQ.</p>
+<p>Assicurarsi che l’istanza non contenga dati residui di RocksMQ provenienti da un’esecuzione precedente. Se è la prima volta che si passa a RocksMQ, ignorare questa nota; in caso contrario, ripulire prima i metadati e i dati relativi a RocksMQ.</p>
 </div>
 <pre><code translate="no" class="language-shell">curl -X POST http://&lt;mixcoord_addr&gt;:&lt;mixcoord_port&gt;/management/wal/alter \
   -H &quot;Content-Type: application/json&quot; \
@@ -253,6 +253,6 @@ summary: >-
 <tr><td>Woodpecker (MinIO/locale)</td><td>RocksMQ</td><td><strong>Supportato</strong></td><td></td></tr>
 <tr><td>Woodpecker MinIO</td><td>Woodpecker locale</td><td><strong>Non supportato</strong></td><td>Il passaggio tra le modalità di archiviazione di Woodpecker richiede una gestione aggiuntiva dei metadati, che non è ancora supportata.</td></tr>
 <tr><td>Woodpecker locale</td><td>Woodpecker MinIO</td><td><strong>Non supportato</strong></td><td>Come sopra.</td></tr>
-<tr><td>RocksMQ / Woodpecker</td><td>Pulsar / Kafka esterno</td><td><strong>Supportato ma non raccomandato</strong></td><td>Mantenere le istanze standalone il più semplici possibile.</td></tr>
+<tr><td>RocksMQ / Woodpecker</td><td>Pulsar / Kafka esterno</td><td><strong>Supportato ma non consigliato</strong></td><td>Mantenere le istanze standalone il più semplici possibile.</td></tr>
 </tbody>
 </table>

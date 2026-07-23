@@ -17,7 +17,7 @@ title: 脉冲星
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Apache Pulsar 是 Milvus 支持的消息队列（WAL）后端之一。 在 Milvus 3.x 中<a href="/docs/zh/woodpecker.md">，Woodpecker</a>是默认的消息队列；但对于偏好 Pulsar 的用户，Pulsar 仍提供全面支持。Pulsar 主要与 Milvus Distributed（集群）配合使用；独立部署通常使用嵌入式的 Woodpecker 或<a href="/docs/zh/mq_rocksmq.md">RocksMQ</a>。</p>
+    </button></h1><p>Apache Pulsar 是 Milvus 支持的消息队列（WAL）后端之一。 在 Milvus 3.x 中<a href="/docs/zh/woodpecker.md">，Woodpecker</a>是默认的消息队列；但对于偏好 Pulsar 的用户，Pulsar 仍提供全面支持。Pulsar 主要与 Milvus Distributed（集群）配合使用；独立部署通常使用嵌入式 Woodpecker 或<a href="/docs/zh/mq_rocksmq.md">RocksMQ</a>。</p>
 <h2 id="Version-compatibility" class="common-anchor-header">版本兼容性<button data-href="#Version-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -73,7 +73,7 @@ title: 脉冲星
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>若要部署使用捆绑版 Pulsar（而非 Woodpecker）的 Milvus 集群，请安装启用了流式处理节点（Streaming Node）的 Helm 图表：</p>
+    </button></h3><p>若要部署使用捆绑版 Pulsar（而非 Woodpecker）的 Milvus 集群，请安装启用了流式处理节点的 Helm 图表：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0-beta \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">true</span> \
@@ -133,7 +133,7 @@ title: 脉冲星
       </svg>
     </button></h3><pre><code translate="no" class="language-bash">helm uninstall my-release
 <button class="copy-code-btn"></button></code></pre>
-<p>若您使用了内置的 Pulsar 并希望删除其持久化数据，请删除 Pulsar PVC（名为<code translate="no">my-release-pulsarv3-*</code> ）：</p>
+<p>若您使用了内置的 Pulsar 并希望清除其持久化数据，请删除 Pulsar PVC（名称为<code translate="no">my-release-pulsarv3-*</code> ）：</p>
 <pre><code translate="no" class="language-bash">kubectl get pvc | grep my-release-pulsarv3
 kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <button class="copy-code-btn"></button></code></pre>
@@ -263,7 +263,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>从 2.5.x 升级到 2.6.x：</strong> <strong>消息队列限制</strong>：升级到 Milvus v3.0-beta 时，必须保留当前的消息队列选择。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。
+<li><strong>从 2.5.x 升级至 2.6.x：</strong> <strong>消息队列限制</strong>：升级至 Milvus v3.0-beta 时，必须保留当前的消息队列选择。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。
 如果您正在运行 Pulsar 且希望继续使用，请在升级过程中不要更改消息队列。</li>
 <li><strong>Pulsar v2 → v3：</strong>请参阅<a href="/docs/zh/upgrade-pulsar-v3.md">《将 Pulsar 从 v2 升级至 v3》</a>；若要继续<a href="/docs/zh/use-pulsar-v2.md">使用</a> v2，请参阅《<a href="/docs/zh/use-pulsar-v2.md">继续使用 Pulsar v2</a>》。</li>
 </ul>

@@ -4,8 +4,8 @@ title: Indeks Bidang StructArray
 summary: >-
   Buat indeks pada subbidang StructArray sebelum Anda menjalankan pencarian
   vektor atau mempercepat penyaringan skalar. Untuk bidang StructArray, target
-  indeksnya adalah jalur subbidang, seperti chunks[emb_list_vector],
-  chunks[emb], atau chunks[section].
+  indeks adalah jalur subbidang, seperti chunks[emb_list_vector], chunks[emb],
+  atau chunks[section].
 ---
 <h1 id="Index-StructArray-Fields" class="common-anchor-header">Indeks Bidang StructArray<button data-href="#Index-StructArray-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -48,7 +48,7 @@ summary: >-
 <tr><td><code translate="no">chunks[emb_list_vector]</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Pencarian EmbeddingList dengan metrik <code translate="no">MAX_SIM*</code>.</td></tr>
 <tr><td><code translate="no">chunks[emb]</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Pencarian tingkat elemen dengan metrik vektor biasa.</td></tr>
 <tr><td><code translate="no">chunks[section]</code></td><td><code translate="no">VARCHAR</code></td><td>Penyaringan kategorikal.</td></tr>
-<tr><td><code translate="no">chunks[quality_score]</code></td><td><code translate="no">FLOAT</code></td><td>Penyaringan numerik dan predikat gaya rentang.</td></tr>
+<tr><td><code translate="no">chunks[quality_score]</code></td><td><code translate="no">FLOAT</code></td><td>Penyaringan numerik dan predikat bergaya rentang.</td></tr>
 <tr><td><code translate="no">chunks[has_code]</code></td><td><code translate="no">BOOL</code></td><td>Penyaringan Boolean.</td></tr>
 </tbody>
 </table>
@@ -83,8 +83,8 @@ summary: >-
 <tr><td>Saring berdasarkan nilai boolean</td><td><code translate="no">chunks[has_code]</code></td><td>Indeks skalar yang didukung oleh target Anda.</td></tr>
 </tbody>
 </table>
-<p>Pencarian EmbeddingList memperlakukan vektor-vektor dalam subbidang vektor StructArray sebagai daftar embedding dan mengembalikan hasil pada tingkat entitas. Pencarian tingkat elemen mencari setiap elemen Struct secara terpisah dan dapat mengembalikan offset elemen yang cocok.</p>
-<h2 id="Create-vector-indexes" class="common-anchor-header">Buat indeks vektor<button data-href="#Create-vector-indexes" class="anchor-icon" translate="no">
+<p>Pencarian EmbeddingList memperlakukan vektor-vektor dalam subbidang vektor StructArray sebagai daftar embedding dan mengembalikan hasil tingkat entitas. Pencarian tingkat elemen mencari setiap elemen Struct secara terpisah dan dapat mengembalikan offset elemen yang cocok.</p>
+<h2 id="Create-vector-indexes" class="common-anchor-header">Membuat indeks vektor<button data-href="#Create-vector-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -205,7 +205,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Gunakan tabel berikut untuk memilih jenis indeks dan jenis metrik untuk subbidang vektor StructArray. Mulailah dari target, lalu pilih keluarga metrik berdasarkan mode pencarian.</p>
+    </button></h2><p>Gunakan tabel berikut untuk memilih jenis indeks dan jenis metrik untuk subbidang vektor StructArray. Mulailah dari tujuan, lalu pilih keluarga metrik berdasarkan mode pencarian.</p>
 <p>Pilih jenis indeks Milvus dan jenis metrik dari tabel kompatibilitas berikut.</p>
 <h3 id="EmbeddingList-search" class="common-anchor-header">Pencarian EmbeddingList<button data-href="#EmbeddingList-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -361,5 +361,5 @@ client.create_index(
     </button></h2><ol>
 <li><p>Untuk menjalankan pencarian EmbeddingList tingkat entitas atau pencarian vektor tingkat elemen, baca Pencarian Vektor Dasar dengan StructArray.</p></li>
 <li><p>Untuk menyaring subbidang skalar StructArray selama pencarian, baca "Pencarian yang Disaring dengan StructArray".</p></li>
-<li><p>Untuk meninjau batasan indeks dan metrik, baca " <a href="/docs/id/structarray-limits.md">Batasan StructArray</a>".</p></li>
+<li><p>Untuk meninjau batasan indeks dan metrik, baca <a href="/docs/id/structarray-limits.md">Batasan StructArray</a>.</p></li>
 </ol>

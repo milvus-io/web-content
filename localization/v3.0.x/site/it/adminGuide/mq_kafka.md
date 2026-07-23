@@ -37,7 +37,7 @@ title: Kafka
 <li>Milvus supporta solo <strong>Kafka 2.x e 3.x</strong>.</li>
 <li>Kafka viene configurato per Milvus Distributed (cluster) tramite Helm o Milvus Operator.</li>
 </ul>
-<h2 id="Deploy-a-Milvus-cluster-with-Kafka-using-Helm" class="common-anchor-header">Distribuzione di un cluster Milvus con Kafka utilizzando Helm<button data-href="#Deploy-a-Milvus-cluster-with-Kafka-using-Helm" class="anchor-icon" translate="no">
+<h2 id="Deploy-a-Milvus-cluster-with-Kafka-using-Helm" class="common-anchor-header">Distribuire un cluster Milvus con Kafka utilizzando Helm<button data-href="#Deploy-a-Milvus-cluster-with-Kafka-using-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -222,7 +222,7 @@ title: Kafka
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Aggiornamento dalla versione 2.5.x alla 2.6.x:</strong> <strong>limitazioni relative alle code di messaggi</strong>: durante l’aggiornamento a Milvus v3.0-beta, è necessario mantenere la scelta attuale della coda di messaggi. Il passaggio da un sistema di code di messaggi a un altro durante l’aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code di messaggi sarà disponibile nelle versioni future.
+<li><strong>Aggiornamento dalla versione 2.5.x alla 2.6.x:</strong> <strong>limitazioni relative alle code di messaggi</strong>: durante l'aggiornamento a Milvus v3.0-beta, è necessario mantenere la scelta attuale della coda di messaggi. Il passaggio da un sistema di code di messaggi a un altro durante l'aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code di messaggi sarà disponibile nelle versioni future.
 Se si utilizza Kafka e si desidera mantenerlo, non modificare la coda dei messaggi durante l'aggiornamento.</li>
 <li>Sono supportate solo le versioni <strong>2.x e 3.x di Kafka</strong>.</li>
 <li>Per la connettività SASL/SSL, consultare <a href="/docs/it/connect_kafka_ssl.md">Connettersi a Kafka con SASL/SSL</a>.</li>

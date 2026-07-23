@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Woodpecker ist die <strong>Standard-Nachrichtenwarteschlange (Write-Ahead-Log, WAL)</strong> in Milvus 3.x. Es handelt sich um ein cloud-natives WAL, das für den Objektspeicher entwickelt wurde und einen hohen Durchsatz, geringen Betriebsaufwand sowie nahtlose Skalierbarkeit bietet. Details zur Architektur und zu Benchmarks finden Sie unter <a href="/docs/de/woodpecker_architecture.md">Woodpecker</a>.</p>
+    </button></h1><p>Woodpecker ist die <strong>Standard-Nachrichtenwarteschlange (Write-Ahead-Log, WAL)</strong> in Milvus 3.x. Es handelt sich um ein cloud-natives WAL, das speziell für den Objektspeicher entwickelt wurde und einen hohen Durchsatz, geringen Betriebsaufwand sowie nahtlose Skalierbarkeit bietet. Details zur Architektur und zu Benchmarks finden Sie unter <a href="/docs/de/woodpecker_architecture.md">Woodpecker</a>.</p>
 <h2 id="Overview" class="common-anchor-header">Übersicht<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +41,7 @@ summary: >-
     </button></h2><ul>
 <li>In Milvus 3.x ist Woodpecker die <strong>Standard-</strong> WAL/Nachrichtenwarteschlange, die als Protokollierungsdienst geordnete Schreibvorgänge und Wiederherstellung ermöglicht. Ein externer Nachrichtenwarteschlangendienst (wie Pulsar oder Kafka) ist nicht erforderlich.</li>
 <li>Woodpecker kann <strong>eingebettet</strong> im Milvus-/Streaming-Knoten (Standard) oder als <strong>dedizierter Dienst</strong> mit eigenen Pods (nur verteilt/Cluster) ausgeführt werden.</li>
-<li>Er unterstützt drei Bereitstellungsmodi ( <code translate="no">storage.type</code> ): Objektspeicher (<code translate="no">minio</code>, Standard), lokales Dateisystem (<code translate="no">local</code>) und den dedizierten <a href="#Deployment-modes">Modus</a>( <code translate="no">service</code>). Siehe <a href="#Deployment-modes">„Bereitstellungsmodi</a>“.</li>
+<li>Er unterstützt drei „ <code translate="no">storage.type</code> “-Modi: Objektspeicher (<code translate="no">minio</code>, Standard), lokales Dateisystem (<code translate="no">local</code>) und den dedizierten <code translate="no">service</code>. Siehe <a href="#Deployment-modes">Bereitstellungsmodi</a>.</li>
 </ul>
 <h2 id="Quick-start" class="common-anchor-header">Schnellstart<button data-href="#Quick-start" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -62,7 +62,7 @@ summary: >-
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">woodpecker</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Hinweis: Das Umschalten auf „ <code translate="no">mq.type</code> “ bei einem laufenden Cluster ist ein Upgrade-Vorgang. Befolgen Sie die Upgrade-Anleitung sorgfältig und testen Sie die Konfiguration zunächst auf einem neuen Cluster, bevor Sie die Umstellung in der Produktionsumgebung vornehmen.</p>
+<p>Hinweis: Die Umstellung von „ <code translate="no">mq.type</code> “ bei einem laufenden Cluster ist ein Upgrade-Vorgang. Befolgen Sie die Upgrade-Anleitung sorgfältig und testen Sie die Umstellung zunächst an einem neuen Cluster, bevor Sie die Umstellung in der Produktionsumgebung vornehmen.</p>
 <h2 id="Configuration" class="common-anchor-header">Konfiguration<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -124,7 +124,7 @@ summary: >-
 </ul></li>
 <li><code translate="no">woodpecker.client</code>
 <ul>
-<li>Steuert das Verhalten beim Anhängen, Rollieren und Überwachen von Segmenten auf der Client-Seite, um einen Ausgleich zwischen Durchsatz und End-to-End-Latenz zu schaffen.</li>
+<li>Steuert das Verhalten beim Anhängen, Rollover und der Überwachung von Segmenten auf der Client-Seite, um einen Ausgleich zwischen Durchsatz und End-to-End-Latenz zu schaffen.</li>
 </ul></li>
 <li><code translate="no">woodpecker.logstore</code>
 <ul>
@@ -183,7 +183,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die folgende Matrix fasst die derzeit bekannte Kompatibilität von Objektspeicher-Backends zusammen, wenn Woodpecker mit „ <code translate="no">storage.type=minio</code> “ konfiguriert ist. Diese Informationen basieren auf <a href="https://github.com/zilliztech/woodpecker/discussions/150">der GitHub-Diskussion Nr. 150</a>.</p>
+    </button></h2><p>Die folgende Matrix fasst die derzeit bekannte Kompatibilität von Objektspeicher-Backends zusammen, wenn Woodpecker mit „ <code translate="no">storage.type=minio</code> “ konfiguriert ist. Diese Informationen basieren auf <a href="https://github.com/zilliztech/woodpecker/discussions/150">der GitHub-Diskussion #150</a>.</p>
 <table>
 <thead>
 <tr><th>Anbieter / Dienst</th><th>Status</th><th>Anmerkungen</th></tr>
@@ -360,7 +360,7 @@ EOF&#x27;</span>
 <span class="hljs-comment"># Restart the container to apply the changes</span>
 docker restart milvus-standalone
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Enable-Woodpecker-service-mode-for-a-Milvus-Cluster-Helm" class="common-anchor-header">Woodpecker-Dienstmodus für einen Milvus-Cluster (Helm) aktivieren<button data-href="#Enable-Woodpecker-service-mode-for-a-Milvus-Cluster-Helm" class="anchor-icon" translate="no">
+<h3 id="Enable-Woodpecker-service-mode-for-a-Milvus-Cluster-Helm" class="common-anchor-header">Aktivieren des Woodpecker-Dienstmodus für einen Milvus-Cluster (Helm)<button data-href="#Enable-Woodpecker-service-mode-for-a-Milvus-Cluster-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -427,7 +427,7 @@ docker restart milvus-standalone
 <ul>
 <li>Speicherseitig
 <ul>
-<li><strong>Objektspeicher (MinIO/S3-kompatibel)</strong>: Erhöhen Sie die Parallelität und die Objektgröße (vermeiden Sie sehr kleine Objekte). Achten Sie auf die Bandbreitenbeschränkungen des Netzwerks und der Buckets. Ein einzelner MinIO-Knoten auf einer SSD erreicht lokal oft eine Obergrenze von etwa 100 MB/s; eine einzelne Verbindung von EC2 zu S3 kann GB/s erreichen.</li>
+<li><strong>Objektspeicher (MinIO/S3-kompatibel)</strong>: Erhöhen Sie die Parallelität und die Objektgröße (vermeiden Sie sehr kleine Objekte). Achten Sie auf die Bandbreitenbeschränkungen des Netzwerks und der Buckets. Ein einzelner MinIO-Knoten auf SSD erreicht lokal oft eine Obergrenze von etwa 100 MB/s; eine einzelne Verbindung von EC2 zu S3 kann GB/s erreichen.</li>
 <li><strong>Lokale/gemeinsam genutzte Dateisysteme (lokal)</strong>: Bevorzugen Sie NVMe- oder schnelle Festplatten. Stellen Sie sicher, dass das Dateisystem kleine Schreibvorgänge und die fsync-Latenz gut bewältigt.</li>
 </ul></li>
 <li>Woodpecker-Einstellungen
@@ -457,7 +457,7 @@ docker restart milvus-standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Der Dienstmodus bewahrt den hohen Schreibdurchsatz eines auf Objektspeicher basierenden WAL bei und bietet gleichzeitig eine geringe Latenz (siehe <a href="#Latency">„Latenz“</a>). Die oben genannten Optimierungen auf Speicher- und Client-Seite gelten weiterhin; da Woodpecker zudem als eigener Dienst läuft, skalieren Sie die Schreibkapazität horizontal durch Hinzufügen von Replikaten (<code translate="no">woodpecker.replicaCount</code>, Standardwert 4), und Schreibvorgänge profitieren von einer One-RTT-Quorum-Replikation sowie topologiebewussten Lesevorgängen, die eine Weiterleitung durch den Broker vermeiden.</p>
+    </button></h3><p>Der Dienstmodus bewahrt den hohen Schreibdurchsatz eines auf Objektspeicher basierenden WAL bei und bietet gleichzeitig eine geringe Latenz (siehe <a href="#Latency">„Latenz“</a>). Die oben genannten Optimierungen auf Speicher- und Client-Seite gelten weiterhin; da Woodpecker zudem als eigener Dienst läuft, skalieren Sie die Schreibkapazität horizontal durch Hinzufügen von Replikaten (<code translate="no">woodpecker.replicaCount</code>, Standardwert 4), und Schreibvorgänge profitieren von einer One-RTT-Quorum-Replikation sowie topologiebewussten Lesevorgängen, die die Weiterleitung durch den Broker vermeiden.</p>
 <p><strong>Demo zur Batch-Einfügung</strong> – verwenden Sie Folgendes, um den Schreibdurchsatz zu messen:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">import</span> random
@@ -531,7 +531,7 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Woodpecker ist ein cloud-natives WAL, das für Objektspeicher entwickelt wurde und Kompromisse zwischen Durchsatz, Kosten und Latenz eingeht. Der ressourcenschonende Embedded-Modus legt den Schwerpunkt auf Kosten- und Durchsatzoptimierung, da in den meisten Szenarien lediglich gefordert wird, dass Daten innerhalb einer bestimmten Zeit geschrieben werden, anstatt eine niedrige Latenz für einzelne Schreibanfragen zu verlangen. Daher nutzt Woodpecker Batch-Schreibvorgänge mit Standardintervallen von 10 ms für lokale Dateisystem-Speicher-Backends und 200 ms für MinIO-ähnliche Speicher-Backends. Bei langsamen Schreibvorgängen entspricht die maximale Latenz der Intervallzeit zuzüglich der Flush-Zeit.</p>
+    </button></h3><p>Woodpecker ist ein cloud-natives WAL, das für Objektspeicher entwickelt wurde und Kompromisse zwischen Durchsatz, Kosten und Latenz eingeht. Der ressourcenschonende eingebettete Modus legt den Schwerpunkt auf Kosten- und Durchsatzoptimierung, da in den meisten Szenarien lediglich gefordert wird, dass Daten innerhalb einer bestimmten Zeit geschrieben werden, anstatt eine niedrige Latenz für einzelne Schreibanfragen zu verlangen. Daher nutzt Woodpecker Batch-Schreibvorgänge mit Standardintervallen von 10 ms für lokale Dateisystem-Speicher-Backends und 200 ms für MinIO-ähnliche Speicher-Backends. Bei langsamen Schreibvorgängen entspricht die maximale Latenz der Intervallzeit zuzüglich der Flush-Zeit.</p>
 <p>Beachten Sie, dass das Einfügen von Batches nicht nur durch Zeitintervalle, sondern auch durch die Batchgröße ausgelöst wird, die standardmäßig 2 MB beträgt.</p>
 <h3 id="Service-mode-Milvus-30+" class="common-anchor-header">Service-Modus (Milvus 3.0+)<button data-href="#Service-mode-Milvus-30+" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -551,9 +551,9 @@ batch_count = <span class="hljs-number">2000</span>
     </button></h3><p>Der Service-Modus bietet <strong>eine Schreiblatenz im Millisekundenbereich</strong> – in derselben Größenordnung wie ein herkömmliches WAL mit drei Replikaten auf lokalen Festplatten – bei gleichzeitig geringen Kosten. In einer typischen Bereitstellung mit drei Replikaten über mehrere AZs hinweg bleibt die Schreiblatenz im Millisekundenbereich. Dies wird erreicht durch:</p>
 <ul>
 <li><strong>Quorum-Schreibvorgänge mit einer RTT</strong> – die clientgesteuerte Replikation schließt einen Quorum-Schreibvorgang innerhalb einer einzigen Round-Trip-Zeit ab, wobei der AZ-übergreifende Datenverkehr auf das Datenvolumen von zwei Replikaten begrenzt ist (im Gegensatz zu dem zusätzlichen AZ-übergreifenden Datenverkehr von etwa einem Drittel, der für Broker-/Leader-basierte Replikation typisch ist).</li>
-<li><strong>Topologiebewusste Single-Hop-Lesevorgänge</strong> – Jeder Lesevorgang erfolgt direkt an die nächstgelegene Replik, anstatt über einen Broker weitergeleitet zu werden, wodurch die zufälligen AZ-übergreifenden Lesevorgänge (≈2/3 des AZ-übergreifenden Lesedatenverkehrs) von Broker-basierten Systemen vermieden werden.</li>
-<li><strong>Sofortiges Hochladen in den Objektspeicher nach Segmentrollover</strong> – jedes Segment verfolgt seinen gesamten Lebenszyklus und wird sofort nach dem Rollover in den Objektspeicher hochgeladen, wodurch der Speicherplatzbedarf auf der lokalen Festplatte und die Speicherkosten gering gehalten werden, ohne dass dabei Kompromisse bei der Latenz eingegangen werden müssen.</li>
-<li><strong>Keine kontinuierliche Replikation von Knoten zu Knoten</strong> – Protokolle werden im Objektspeicher als gemeinsamer Speicher persistent gespeichert, sodass beim Failover nur die überlebenden Replikate erneut hochgeladen werden (keine Kopie des gesamten Knotens); die Skalierung ist nicht an die Bandbreite der Replikation zwischen den Knoten gebunden, und der groß angelegte Austausch von Knoten verursacht keine Replikationsstürme.</li>
+<li><strong>Topologiebewusste Single-Hop-Lesevorgänge</strong> – Jeder Lesevorgang erfolgt direkt bei der nächstgelegenen Replik, anstatt über einen Broker weitergeleitet zu werden, wodurch die zufälligen Lesevorgänge über AZ-Grenzen hinweg (≈2/3 des Leseverkehrs über AZ-Grenzen hinweg) von Broker-basierten Systemen vermieden werden.</li>
+<li><strong>Sofortiges Hochladen in den Objektspeicher nach Segment-Rollover</strong> – jedes Segment verfolgt seinen gesamten Lebenszyklus und wird sofort nach dem Rollover in den Objektspeicher hochgeladen, wodurch der Speicherbedarf auf der lokalen Festplatte und die Speicherkosten gering gehalten werden, ohne dass dies zu Lasten der Latenz geht.</li>
+<li><strong>Keine kontinuierliche Replikation von Knoten zu Knoten</strong> – Protokolle werden im Objektspeicher als gemeinsamer Speicher persistent gespeichert, sodass beim Failover nur die überlebenden Replikate erneut hochgeladen werden (keine Kopie des gesamten Knotens); die Skalierung ist nicht an die Bandbreite der Replikation zwischen den Knoten gebunden, und der Austausch zahlreicher Knoten verursacht keine Replikationsstürme.</li>
 </ul>
 <p>Bei bereichsübergreifenden Bereitstellungen spart der Servicemodus im Vergleich zu Broker-basierten Protokollsystemen zudem etwa <strong>1/3 des Schreib-</strong> und <strong>2/3 des Lese-Netzwerkverkehrs</strong> zwischen den Verfügbarkeitszonen ein. Die vollständige Design- und Kostenanalyse finden Sie unter <a href="/docs/de/woodpecker_architecture.md">„Woodpecker-Architektur</a>“.</p>
 <p>Einzelheiten zur Architektur, zu den Bereitstellungsmodi (MemoryBuffer / QuorumBuffer) und zur Leistung finden Sie unter <a href="/docs/de/woodpecker_architecture.md">„Woodpecker-Architektur</a>“.</p>

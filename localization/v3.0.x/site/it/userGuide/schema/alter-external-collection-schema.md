@@ -21,7 +21,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Le fonti di dati esterne spesso subiscono modifiche dopo la creazione di una raccolta esterna. Ad esempio, una tabella Lakehouse che memorizza già degli embedding potrebbe in seguito includere un nuovo campo scalare, come un punteggio, una categoria o un timestamp, che si desidera restituire nei risultati delle query o utilizzare nei filtri.</p>
+    </button></h1><p>Le fonti di dati esterne spesso subiscono modifiche dopo la creazione di una raccolta esterna. Ad esempio, una tabella Lakehouse che memorizza già gli embedding potrebbe in seguito includere un nuovo campo scalare, come un punteggio, una categoria o un timestamp, che si desidera restituire nei risultati delle query o utilizzare nei filtri.</p>
 <p>Anziché ricreare la raccolta esterna o copiare i dati di origine in Milvus, aggiungere un campo Milvus che si mappi al campo esistente nella fonte di dati esterna. Dopo aver aggiunto il campo, aggiornare la raccolta esterna in modo che il nuovo campo possa essere utilizzato nelle query e nelle ricerche.</p>
 <h2 id="Limits" class="common-anchor-header">Limiti<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -92,7 +92,7 @@ client.add_collection_field(
 <span class="highlighted-wrapper-line">    external_field=<span class="hljs-string">&quot;score&quot;</span>,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In questo esempio, ` <code translate="no">score</code> ` è il nome del campo in Milvus e ` <code translate="no">external_field=&quot;score&quot;</code> ` lo mappa al campo ` <code translate="no">score</code> ` nella fonte di dati esterna. Impostare ` <code translate="no">nullable=True</code> ` poiché il campo viene aggiunto dopo che la collezione è già stata creata.</p>
+<p>In questo esempio, ` <code translate="no">score</code> ` è il nome del campo Milvus e ` <code translate="no">external_field=&quot;score&quot;</code> ` lo mappa al campo ` <code translate="no">score</code> ` nella fonte di dati esterna. Impostare ` <code translate="no">nullable=True</code> ` poiché il campo viene aggiunto dopo che la raccolta è già stata creata.</p>
 <h3 id="Add-a-vector-field" class="common-anchor-header">Aggiungere un campo vettoriale<button data-href="#Add-a-vector-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -155,7 +155,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dopo aver modificato lo schema di una raccolta esterna, aggiornare la raccolta esterna in modo che Milvus aggiorni i metadati della raccolta esterna e renda effettiva la modifica dello schema nei risultati delle query, delle ricerche e dei filtri.</p>
+    </button></h2><p>Dopo aver modificato lo schema di una raccolta esterna, aggiorna la raccolta esterna in modo che Milvus aggiorni i metadati della raccolta esterna e renda effettiva la modifica dello schema nei risultati delle query, delle ricerche e dei filtri.</p>
 <pre><code translate="no" class="language-python">client.refresh_external_collection(
     collection_name=<span class="hljs-string">&quot;product_embeddings&quot;</span>
 )

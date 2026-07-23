@@ -39,7 +39,7 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Für thailändischen Text verwenden Sie in den meisten Fällen den integrierten <a href="/docs/de/thai-analyzer.md"><code translate="no">thai</code></a> Analysator. Der integrierte Analysator umfasst diesen Tokenizer sowie die Umwandlung in Kleinbuchstaben, die Normalisierung von Dezimalziffern und das Entfernen thailändischer Stoppwörter. Verwenden Sie den „ <code translate="no">thai</code> “-Tokenizer nur dann direkt, wenn Sie eine benutzerdefinierte Analysator-Pipeline erstellen müssen.</p>
+<p>Für thailändischen Text verwenden Sie in den meisten Fällen den integrierten <a href="/docs/de/thai-analyzer.md"><code translate="no">thai</code></a> Analysator. Der integrierte Analysator umfasst diesen Tokenizer sowie die Umwandlung in Kleinbuchstaben, die Normalisierung von Dezimalziffern und die Entfernung thailändischer Stoppwörter. Verwenden Sie den „ <code translate="no">thai</code> “-Tokenizer nur dann direkt, wenn Sie eine benutzerdefinierte Analysator-Pipeline erstellen müssen.</p>
 </div>
 <p>Um einen Analysator mit dem Tokenizer „ <code translate="no">thai</code> “ zu konfigurieren, setzen Sie „ <code translate="no">tokenizer</code> “ in der Datei „ <code translate="no">analyzer_params</code> “ auf „ <code translate="no">thai</code> “.</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -59,7 +59,7 @@ beta: Milvus 3.0.0+
 <p>Diese benutzerdefinierte Pipeline entspricht nicht dem integrierten „ <code translate="no">thai</code> “-Analysator, da sie nicht das integrierte „ <code translate="no">_thai_</code> “-Stopwort-Wörterbuch enthält. Verwenden Sie für die vollständige vordefinierte Pipeline <code translate="no">{&quot;type&quot;: &quot;thai&quot;}</code>.</p>
 <p>Der Tokenizer verhält sich wie folgt:</p>
 <ul>
-<li><strong>Thailändische Segmentierung</strong>: Segmentiert thailändischen Text in Wort-Token, ohne sich auf Leerzeichen zu stützen.</li>
+<li><strong>Thai-Segmentierung</strong>: Segmentiert thailändischen Text in Wort-Token, ohne sich auf Leerzeichen zu stützen.</li>
 <li><strong>Filterung von Leerzeichen und Satzzeichen</strong>: Filtert Segmente heraus, die ausschließlich aus Leerzeichen und Satzzeichen bestehen. Dies unterscheidet sich vom <a href="/docs/de/icu-tokenizer.md"><code translate="no">icu</code></a> Tokenizer, der Satzzeichen und Leerzeichen als Token beibehalten kann.</li>
 <li><strong>Text mit gemischten Schriftzeichen</strong>: Gibt lateinische Wort-Token in gemischtem Thai/Englisch-Text aus.</li>
 <li><strong>Nur Tokenizer</strong>: Wandelt Token nicht in Kleinbuchstaben um, normalisiert keine Unicode-Ziffern und entfernt keine Stoppwörter. Fügen Sie Filter hinzu oder verwenden Sie den integrierten <a href="/docs/de/thai-analyzer.md"><code translate="no">thai</code></a> Analysator für diese Schritte.</li>
@@ -101,7 +101,7 @@ beta: Milvus 3.0.0+
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;thai&quot;</span>,
 }
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Überprüfung mit <code translate="no">run_analyzer</code><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
+<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Überprüfung mithilfe von <code translate="no">run_analyzer</code><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

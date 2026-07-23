@@ -66,7 +66,7 @@ beta: Milvus 3.0.0+
 }
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus wendet zusätzlich zum integrierten „ <code translate="no">_arabic_</code> “-Wörterbuch benutzerdefinierte Stoppwörter an.</p>
-<p>Der integrierte „ <code translate="no">arabic</code> “-Analysator entspricht der folgenden Konfiguration eines benutzerdefinierten Analysators:</p>
+<p>Der integrierte „ <code translate="no">arabic</code> “-Analysator entspricht der folgenden Konfiguration für einen benutzerdefinierten Analysator:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [
@@ -84,7 +84,7 @@ beta: Milvus 3.0.0+
     ],
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Dieser Analysator führt die folgenden Verarbeitungsschritte durch:</p>
+<p>Dieser Analysator wendet die folgenden Verarbeitungsschritte an:</p>
 <ul>
 <li><strong>Tokenisierung</strong>: Verwendet den „ <code translate="no">standard</code> “-Tokenizer, um Text in Token zu zerlegen.</li>
 <li><strong>Ziffernnormalisierung</strong>: Verwendet den Filter „ <code translate="no">decimaldigit</code> “, um arabisch-indische und andere Unicode-Dezimalziffern in ASCII-Ziffern umzuwandeln.</li>
@@ -128,7 +128,7 @@ beta: Milvus 3.0.0+
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;arabic&quot;</span>,
 }
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Überprüfung mithilfe von <code translate="no">run_analyzer</code><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
+<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Überprüfung mit <code translate="no">run_analyzer</code><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

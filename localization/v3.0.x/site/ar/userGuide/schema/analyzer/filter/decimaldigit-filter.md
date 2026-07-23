@@ -1,12 +1,12 @@
 ---
 id: decimaldigit-filter.md
-title: الرقم العشريCompatible with Milvus 3.0.0+
+title: الأرقام العشريةCompatible with Milvus 3.0.0+
 summary: >-
   يقوم مرشح الأرقام العشرية بتحويل الأرقام العشرية في نظام يونيكود إلى أرقام
   ASCII.
 beta: Milvus 3.0.0+
 ---
-<h1 id="Decimal-Digit" class="common-anchor-header">الرقم العشري<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Decimal-Digit" class="anchor-icon" translate="no">
+<h1 id="Decimal-Digit" class="common-anchor-header">الأرقام العشرية<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Decimal-Digit" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,7 +38,7 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>بالنسبة للنص العربي، فإن محلل <a href="/docs/ar/arabic-analyzer.md"><code translate="no">arabic</code></a> مرشح « <code translate="no">decimaldigit</code> » بالفعل. استخدم « <code translate="no">decimaldigit</code> » مباشرةً عندما تحتاج إلى توحيد الأرقام في مسار محلل مخصص.</p>
+<p>بالنسبة للنص العربي، يتضمن محلل <a href="/docs/ar/arabic-analyzer.md"><code translate="no">arabic</code></a> مرشح « <code translate="no">decimaldigit</code> » بالفعل. استخدم « <code translate="no">decimaldigit</code> » مباشرةً عندما تحتاج إلى توحيد الأرقام في مسار محلل مخصص.</p>
 </div>
 <p>لاستخدام مرشح « <code translate="no">decimaldigit</code> » في محلل مخصص، أضفه إلى قسم « <code translate="no">filter</code> » في « <code translate="no">analyzer_params</code> »:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -47,7 +47,7 @@ beta: Milvus 3.0.0+
 }
 <button class="copy-code-btn"></button></code></pre>
 <p>لا يحتوي مرشح « <code translate="no">decimaldigit</code> » على معلمات قابلة للتكوين.</p>
-<p>يقوم المرشح بتحويل الأرقام العشرية في Unicode، بما في ذلك الأرقام العربية-الهندية، والتايلاندية، والديفاناغارية، والبنغالية، والأرقام ذات العرض الكامل، إلى أرقام ASCII. وهو يعمل على الرموز التي يولدها أداة تحليل الرموز. التكوين أعلاه هو مثال متعمد لمحلل مخصص ولا يتضمن مسار المعالجة الكامل للغة العربية.</p>
+<p>يقوم المرشح بتحويل الأرقام العشرية في Unicode، بما في ذلك الأرقام العربية-الهندية، والتايلاندية، والديفاناغارية، والبنغالية، والأرقام ذات العرض الكامل، إلى أرقام ASCII. ويعمل المرشح على الرموز التي يولدها أداة تحليل الرموز. التكوين أعلاه هو مثال متعمد لمحلل مخصص ولا يتضمن مسار المعالجة الكامل للغة العربية.</p>
 <h2 id="Examples" class="common-anchor-header">أمثلة<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

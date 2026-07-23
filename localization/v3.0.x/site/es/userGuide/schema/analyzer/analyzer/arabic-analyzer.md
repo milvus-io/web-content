@@ -22,7 +22,7 @@ beta: Milvus 3.0.0+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>El analizador « <code translate="no">arabic</code> » es un analizador integrado para texto árabe. Utiliza este analizador cuando necesites que Milvus normalice las variantes de las letras árabes, elimine los signos diacríticos y el tatweel, convierta los dígitos árabes-índicos, aplique la derivación léxica árabe y elimine las palabras vacías árabes.</p>
+    </button></h1><p>El analizador « <code translate="no">arabic</code> » es un analizador integrado para texto en árabe. Utiliza este analizador cuando necesites que Milvus normalice las variantes de las letras árabes, elimine los signos diacríticos y el tatweel, convierta los dígitos árabe-índicos, aplique la derivación léxica del árabe y elimine las palabras vacías en árabe.</p>
 <h2 id="Configuration" class="common-anchor-header">Configuración<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -66,7 +66,7 @@ beta: Milvus 3.0.0+
 }
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus aplica palabras vacías personalizadas además del diccionario integrado « <code translate="no">_arabic_</code> ».</p>
-<p>El analizador integrado « <code translate="no">arabic</code> » equivale a la siguiente configuración de analizador personalizado:</p>
+<p>El analizador integrado « <code translate="no">arabic</code> » es equivalente a la siguiente configuración de analizador personalizado:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [
@@ -86,13 +86,13 @@ beta: Milvus 3.0.0+
 <button class="copy-code-btn"></button></code></pre>
 <p>Este analizador aplica los siguientes pasos de procesamiento:</p>
 <ul>
-<li><strong>Tokenización</strong>: utiliza el tokenizador <code translate="no">standard</code> para dividir el texto en tokens.</li>
+<li><strong>Tokenización</strong>: utiliza el tokenizador « <code translate="no">standard</code> » para dividir el texto en tokens.</li>
 <li><strong>Normalización de dígitos</strong>: utiliza el filtro « <code translate="no">decimaldigit</code> » para convertir los dígitos decimales árabe-índicos y otros dígitos Unicode en dígitos ASCII.</li>
 <li><strong>Normalización del árabe</strong>: utiliza el filtro « <code translate="no">arabic_normalization</code> » para normalizar las variantes de la alef, la teh marbuta y la alef maksura, y eliminar los harakat y los tatweel.</li>
-<li><strong>Derivación</strong>: utiliza el filtro « <code translate="no">stemmer</code> » con « <code translate="no">language</code> » configurado en « <code translate="no">arabic</code> ».</li>
+<li><strong>Derivación</strong>: utiliza el filtro « <code translate="no">stemmer</code> » con la opción « <code translate="no">language</code> » configurada en « <code translate="no">arabic</code> ».</li>
 <li><strong>Eliminación de palabras vacías</strong>: utiliza el filtro « <code translate="no">stop</code> » con el diccionario integrado « <code translate="no">_arabic_</code> ».</li>
 </ul>
-<p>Una vez definido <code translate="no">analyzer_params</code>, puede aplicar el analizador a un campo <code translate="no">VARCHAR</code> al definir un esquema de colección. Para obtener más detalles, consulte <a href="/docs/es/analyzer-overview.md#Example-use">«Ejemplo de uso</a>».</p>
+<p>Una vez definido <code translate="no">analyzer_params</code>, puede aplicar el analizador a un campo <code translate="no">VARCHAR</code> al definir un esquema de colección. Para obtener más información, consulte <a href="/docs/es/analyzer-overview.md#Example-use">«Ejemplo de uso</a>».</p>
 <h2 id="Examples" class="common-anchor-header">Ejemplos<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -108,7 +108,7 @@ beta: Milvus 3.0.0+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Antes de aplicar la configuración del analizador al esquema de la colección, compruebe su comportamiento utilizando el método ` <code translate="no">run_analyzer</code> `.</p>
+    </button></h2><p>Antes de aplicar la configuración del analizador al esquema de su colección, compruebe su comportamiento utilizando el método ` <code translate="no">run_analyzer</code> `.</p>
 <h3 id="Analyzer-configuration" class="common-anchor-header">Configuración del analizador<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

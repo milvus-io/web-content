@@ -65,7 +65,7 @@ beta: Milvus 3.0.0+
 }
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus wendet zusätzlich zum integrierten „ <code translate="no">_thai_</code> “-Wörterbuch benutzerdefinierte Stoppwörter an.</p>
-<p>Der integrierte „ <code translate="no">thai</code> “-Analysator entspricht der folgenden Konfiguration für einen benutzerdefinierten Analysator:</p>
+<p>Der integrierte „ <code translate="no">thai</code> “-Analysator entspricht der folgenden benutzerdefinierten Analysatorkonfiguration:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;thai&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [

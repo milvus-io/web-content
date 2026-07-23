@@ -36,7 +36,7 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Para texto em árabe, o analisador integrado <a href="/docs/pt/arabic-analyzer.md"><code translate="no">arabic</code></a> já inclui o filtro « <code translate="no">decimaldigit</code> ». Utilize « <code translate="no">decimaldigit</code> » diretamente quando precisar de normalização de dígitos num pipeline de analisadores personalizados.</p>
+<p>Para texto em árabe, o analisador integrado <a href="/docs/pt/arabic-analyzer.md"><code translate="no">arabic</code></a> já inclui o filtro « <code translate="no">decimaldigit</code> ». Utilize « <code translate="no">decimaldigit</code> » diretamente quando necessitar de normalização de dígitos num pipeline de analisadores personalizados.</p>
 </div>
 <p>Para utilizar o filtro « <code translate="no">decimaldigit</code> » num analisador personalizado, adicione-o à secção « <code translate="no">filter</code> » em « <code translate="no">analyzer_params</code> »:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -44,7 +44,7 @@ beta: Milvus 3.0.0+
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;decimaldigit&quot;</span>],
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>O filtro « <code translate="no">decimaldigit</code> » não possui parâmetros configuráveis.</p>
+<p>O filtro « <code translate="no">decimaldigit</code> » não tem parâmetros configuráveis.</p>
 <p>O filtro converte dígitos decimais Unicode, incluindo dígitos árabes-índicos, tailandeses, devanágari, bengalis e de largura total, em dígitos ASCII. Funciona sobre tokens gerados pelo tokenizador. A configuração acima é, intencionalmente, um exemplo de analisador personalizado e não inclui o pipeline completo de processamento árabe.</p>
 <h2 id="Examples" class="common-anchor-header">Exemplos<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"

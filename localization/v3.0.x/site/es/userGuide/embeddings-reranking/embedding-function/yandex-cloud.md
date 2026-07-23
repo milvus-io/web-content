@@ -22,7 +22,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h1><p>En este tema se describe cómo configurar y utilizar las funciones de incrustación de Yandex Cloud en Milvus.</p>
-<h2 id="Choose-an-embedding-model" class="common-anchor-header">Elegir un modelo de vectorización<button data-href="#Choose-an-embedding-model" class="anchor-icon" translate="no">
+<h2 id="Choose-an-embedding-model" class="common-anchor-header">Elegir un modelo de incrustación<button data-href="#Choose-an-embedding-model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -176,7 +176,7 @@ schema.add_function(text_embedding_function)
    <tr>
      <td><p><code translate="no">provider</code></p></td>
      <td><p>Sí</p></td>
-     <td><p>El proveedor del modelo de integración que se va a utilizar.</p></td>
+     <td><p>El proveedor del modelo de incrustación que se va a utilizar.</p></td>
      <td><p><code translate="no">"yc"</code></p></td>
    </tr>
    <tr>

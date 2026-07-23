@@ -6,13 +6,13 @@
     "order": 0,
     "children": [
       {
-        "label": "Cos'è Milvus",
+        "label": "Cos’è Milvus",
         "id": "overview.md",
         "order": 0,
         "children": []
       },
       {
-        "label": "Adottanti Milvus",
+        "label": "Adottanti di Milvus",
         "id": "milvus_adopters.md",
         "order": 1,
         "children": []
@@ -334,7 +334,7 @@
             "children": []
           },
           {
-            "label": "Caricamento e rilascio",
+            "label": "Carica e rilascio",
             "id": "load-and-release.md",
             "order": 5,
             "children": []
@@ -474,7 +474,7 @@
             "children": []
           },
           {
-            "label": "Nullable e valori predefiniti",
+            "label": "Nullabile e valore predefinito",
             "id": "nullable-and-default.md",
             "order": 13,
             "children": []
@@ -564,7 +564,7 @@
                 "order": 3,
                 "children": [
                   {
-                    "label": "Minuscole",
+                    "label": "Minuscolo",
                     "id": "lowercase-filter.md",
                     "order": 0,
                     "children": []
@@ -691,7 +691,7 @@
             "children": []
           },
           {
-            "label": "Entità \"Upsert\"",
+            "label": "Entità Upsert",
             "id": "upsert-entities.md",
             "order": 1,
             "children": []
@@ -920,7 +920,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Ricerca di base con reti neurali artificiali",
+            "label": "Ricerca di base con reti neurali artificiali (ANN)",
             "id": "single-vector-search.md",
             "order": 0,
             "children": []
@@ -979,7 +979,7 @@
                 "children": []
               },
               {
-                "label": "Filtraggio e creazione di modelli",
+                "label": "Filtraggio e modelli",
                 "id": "filtering-templating.md",
                 "order": 2,
                 "children": []
@@ -1017,7 +1017,7 @@
             "children": []
           },
           {
-            "label": "Corrispondenza del testo",
+            "label": "Corrispondenza testo",
             "id": "keyword-match.md",
             "order": 9,
             "children": []
@@ -1053,7 +1053,7 @@
             "children": []
           },
           {
-            "label": "Usa chiave di partizione",
+            "label": "Utilizza la chiave di partizione",
             "id": "use-partition-key.md",
             "order": 15,
             "children": []
@@ -1061,7 +1061,7 @@
         ]
       },
       {
-        "label": "Embedding e riorganizzazione dei risultati",
+        "label": "Incorporamenti e riclassificazione",
         "id": "embeddings-reranking",
         "order": 6,
         "isMenu": true,
@@ -1215,7 +1215,7 @@
                     "children": []
                   },
                   {
-                    "label": "vLLM Ranker",
+                    "label": "Classificatore vLLM",
                     "id": "vllm-ranker.md",
                     "order": 1,
                     "children": []
@@ -1263,7 +1263,7 @@
             "children": []
           },
           {
-            "label": "Compattazione a cluster",
+            "label": "Compattazione per raggruppamento",
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []
@@ -1389,7 +1389,7 @@
         "children": []
       },
       {
-        "label": "Server MCP per il codice Claude",
+        "label": "Server MCP per Claude Code",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -1552,7 +1552,7 @@
             "children": []
           },
           {
-            "label": "Configura la cache dei chunk",
+            "label": "Configurazione della cache dei chunk",
             "id": "chunk_cache.md",
             "order": 3,
             "children": []
@@ -1846,7 +1846,7 @@
                 "children": []
               },
               {
-                "label": "Ruoli di sovvenzione",
+                "label": "Assegnazione dei ruoli",
                 "id": "grant_roles.md",
                 "order": 4,
                 "children": []
@@ -1886,7 +1886,7 @@
         "children": []
       },
       {
-        "label": "Cambia il tipo di MQ",
+        "label": "Cambia tipo di MQ",
         "id": "switch_milvus_mq_type",
         "order": 14,
         "children": [
@@ -1943,7 +1943,7 @@
             "children": []
           },
           {
-            "label": "Casi più comuni",
+            "label": "Casi comuni",
             "id": "common-cases",
             "order": 3,
             "isMenu": true,
@@ -2094,7 +2094,7 @@
         "children": []
       },
       {
-        "label": "ExportLog",
+        "label": "Registro delle esportazioni",
         "id": "export-log",
         "order": 9,
         "externalLink": "https://github.com/milvus-io/milvus/tree/master/deployments/export-log",
@@ -2529,7 +2529,7 @@
         ]
       },
       {
-        "label": "Incorporamento dei modelli",
+        "label": "Incorporazione dei modelli",
         "id": "integrate-embeddings-models",
         "order": 1,
         "children": [

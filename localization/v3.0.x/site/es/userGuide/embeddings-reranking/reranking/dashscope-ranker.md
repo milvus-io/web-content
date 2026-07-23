@@ -3,7 +3,7 @@ id: dashscope-ranker.md
 title: DashScope RankerCompatible with Milvus 2.6.x
 summary: >-
   En este tema se describe cómo configurar y utilizar los modelos de
-  reclasificación de DashScope, como los modelos de reclasificación de Qwen, en
+  reordenación de DashScope, como los modelos de reordenación de Qwen, en
   Milvus.
 beta: Milvus 2.6.x
 ---
@@ -175,7 +175,7 @@ dashscope_ranker = Function(
    <tr>
      <td><p><code translate="no">reranker</code></p></td>
      <td><p>Sí</p></td>
-     <td><p>Debe establecerse en « <code translate="no">"model"</code> » para habilitar la reordenación de modelos.</p></td>
+     <td><p>Debe establecerse en « <code translate="no">"model"</code> » para habilitar la reclasificación del modelo.</p></td>
      <td><p><code translate="no">"model"</code></p></td>
    </tr>
    <tr>
@@ -205,12 +205,12 @@ dashscope_ranker = Function(
    <tr>
      <td><p><code translate="no">credential</code></p></td>
      <td><p>No</p></td>
-     <td><p>La etiqueta de una credencial definida en la sección de nivel superior <code translate="no">credential:</code> de <code translate="no">milvus.yaml</code>.</p></td>
+     <td><p>La etiqueta de una credencial definida en la sección de nivel superior « <code translate="no">credential:</code> » de <code translate="no">milvus.yaml</code>.</p></td>
      <td><p><code translate="no">"dashscope_apikey"</code></p></td>
    </tr>
 </table>
 <div class="alert note">
-<p>Para los parámetros generales compartidos por todos los clasificadores de modelos, como <code translate="no">provider</code> y <code translate="no">queries</code>, consulta <a href="/docs/es/model-ranker-overview.md#Create-a-model-ranker">Crear un clasificador de modelos</a>.</p>
+<p>Para los parámetros generales compartidos por todos los clasificadores de modelos, como <code translate="no">provider</code> y <code translate="no">queries</code>, consulta <a href="/docs/es/model-ranker-overview.md#Create-a-model-ranker">«Crear un clasificador de modelos</a>».</p>
 </div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Aplicación a la búsqueda vectorial estándar<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"

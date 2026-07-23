@@ -85,7 +85,7 @@ EOF
 bash standalone_embed.sh restart
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-La modification d’ <code translate="no">mq.type</code> s de cette manière est destinée à une <b>toute nouvelle</b> instance (ne contenant encore aucune collection). Pour modifier la file d’attente de messages d’une instance contenant déjà des données, suivez plutôt la <a href="/docs/fr/switch-rocksmq-woodpecker.md">procédure de basculement</a>.
+La modification de l'<code translate="no">mq.type</code> ation de cette manière est destinée à une <b>toute nouvelle</b> instance (ne contenant encore aucune collection). Pour modifier la file d'attente de messages d'une instance contenant déjà des données, suivez plutôt la <a href="/docs/fr/switch-rocksmq-woodpecker.md">procédure de basculement</a>.
 </div>
 <h3 id="Configure" class="common-anchor-header">Configuration<button data-href="#Configure" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -151,7 +151,7 @@ bash standalone_embed.sh delete
       </svg>
     </button></h2><ul>
 <li><strong>Mise à niveau de la version 2.5.x vers la version 2.6.x :</strong> <strong>limitations des files d’attente de messages</strong>: lors de la mise à niveau vers Milvus v3.0-beta, vous devez conserver votre choix actuel de file d’attente de messages. Le passage d’un système de file d’attente de messages à un autre pendant la mise à niveau n’est pas pris en charge. La prise en charge du changement de système de file d’attente de messages sera disponible dans les versions futures.
-La version 2.6.x définissant Woodpecker comme valeur par défaut pour les instances autonomes, fixez la valeur « <code translate="no">mq.type: rocksmq</code> » dans votre fichier <code translate="no">user.yaml</code> <strong>avant</strong> la mise à niveau si vous souhaitez conserver RocksMQ.</li>
+La version 2.6.x définissant Woodpecker comme valeur par défaut pour les instances autonomes, fixez la valeur « <code translate="no">mq.type: rocksmq</code> » dans votre fichier « <code translate="no">user.yaml</code> » <strong>avant</strong> la mise à niveau si vous souhaitez conserver RocksMQ.</li>
 <li>Pour modifier la file d’attente de messages d’une instance en cours d’exécution, consultez la section « <a href="/docs/fr/switch-rocksmq-woodpecker.md">Passer de RocksMQ à Woodpecker</a> ».</li>
 </ul>
 <h2 id="Whats-next" class="common-anchor-header">Prochaines étapes<button data-href="#Whats-next" class="anchor-icon" translate="no">

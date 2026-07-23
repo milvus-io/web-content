@@ -1,12 +1,12 @@
 ---
 id: alter-external-collection-schema.md
-title: Externes Sammlungsschema ändernCompatible with Milvus 3.0.x
+title: Schema einer externen Sammlung ändernCompatible with Milvus 3.0.x
 summary: >-
   Erfahren Sie, wie Sie ein zusätzliches Feld aus einer externen Datenquelle in
   einer bestehenden externen Sammlung anzeigen können.
 beta: Milvus 3.0.x
 ---
-<h1 id="Alter-External-Collection-Schema" class="common-anchor-header">Externes Sammlungsschema ändern<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Alter-External-Collection-Schema" class="anchor-icon" translate="no">
+<h1 id="Alter-External-Collection-Schema" class="common-anchor-header">Schema einer externen Sammlung ändern<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Alter-External-Collection-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,7 +21,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Externe Datenquellen entwickeln sich oft weiter, nachdem Sie eine externe Sammlung erstellt haben. Beispielsweise kann eine Lakehouse-Tabelle, in der bereits Embeddings gespeichert sind, später ein neues Skalarfeld enthalten, wie z. B. eine Punktzahl, eine Kategorie oder einen Zeitstempel, die Sie in Abfrageergebnissen zurückgeben oder in Filtern verwenden möchten.</p>
+    </button></h1><p>Externe Datenquellen entwickeln sich oft weiter, nachdem Sie eine externe Sammlung erstellt haben. Beispielsweise könnte eine Lakehouse-Tabelle, in der bereits Embeddings gespeichert sind, später ein neues Skalarfeld enthalten, wie z. B. eine Punktzahl, eine Kategorie oder einen Zeitstempel, die Sie in Abfrageergebnissen zurückgeben oder in Filtern verwenden möchten.</p>
 <p>Anstatt die externe Sammlung neu zu erstellen oder die Quelldaten in Milvus zu kopieren, fügen Sie ein Milvus-Feld hinzu, das dem vorhandenen Feld in der externen Datenquelle zugeordnet ist. Aktualisieren Sie nach dem Hinzufügen des Feldes die externe Sammlung, damit das neue Feld in Abfragen und Suchvorgängen verwendet werden kann.</p>
 <h2 id="Limits" class="common-anchor-header">Einschränkungen<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -59,7 +59,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bevor Sie ein Feld zu einer externen Sammlung hinzufügen, vergewissern Sie sich, dass das Feld bereits in der externen Datenquelle vorhanden ist. Rufen Sie anschließend „ <code translate="no">add_collection_field()</code> “ auf, um dieses Feld in Milvus verfügbar zu machen, indem Sie „ <code translate="no">external_field</code> “ auf den Feldnamen in der externen Datenquelle setzen. Setzen Sie „ <code translate="no">data_type</code> “ auf den Milvus-Datentyp, der dem Feld in der externen Datenquelle entspricht. Wenn das zugeordnete Feld beispielsweise Werte mit doppelter Genauigkeit speichert, verwenden Sie „ <code translate="no">DataType.DOUBLE</code> “.</p>
+    </button></h2><p>Bevor Sie ein Feld zu einer externen Sammlung hinzufügen, stellen Sie sicher, dass das Feld bereits in der externen Datenquelle vorhanden ist. Rufen Sie anschließend „ <code translate="no">add_collection_field()</code> “ auf, um dieses Feld in Milvus verfügbar zu machen, indem Sie „ <code translate="no">external_field</code> “ auf den Feldnamen in der externen Datenquelle setzen. Setzen Sie „ <code translate="no">data_type</code> “ auf den Milvus-Datentyp, der dem Feld in der externen Datenquelle entspricht. Wenn das zugeordnete Feld beispielsweise Werte mit doppelter Genauigkeit speichert, verwenden Sie „ <code translate="no">DataType.DOUBLE</code> “.</p>
 <p>Im Gegensatz zu verwalteten Sammlungen werden die Werte für das hinzugefügte Feld nach dem Aktualisieren der externen Sammlung aus der externen Datenquelle gelesen.</p>
 <h3 id="Add-a-scalar-field" class="common-anchor-header">Ein Skalarfeld hinzufügen<button data-href="#Add-a-scalar-field" class="anchor-icon" translate="no">
       <svg translate="no"

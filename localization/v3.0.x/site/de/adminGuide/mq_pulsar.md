@@ -42,7 +42,7 @@ title: Pulsar
 <tr><td>2.4.x und früher</td><td>Pulsar v2</td><td>Pulsar v2</td></tr>
 </tbody>
 </table>
-<p>Seit Milvus 2.5 stellen das Milvus-Helm-Chart und der Milvus-Operator standardmäßig <strong>Pulsar v3</strong> bereit; Pulsar v2 bleibt kompatibel. Siehe <a href="/docs/de/upgrade-pulsar-v3.md">„Pulsar von v2 auf v3 aktualisieren</a> “ und <a href="/docs/de/use-pulsar-v2.md">„Pulsar v2 weiterhin verwenden</a>“.</p>
+<p>Seit Milvus 2.5 stellen das Milvus-Helm-Chart und der Milvus-Operator standardmäßig <strong>Pulsar v3</strong> bereit; Pulsar v2 bleibt weiterhin kompatibel. Siehe <a href="/docs/de/upgrade-pulsar-v3.md">„Pulsar von v2 auf v3 aktualisieren</a> “ und <a href="/docs/de/use-pulsar-v2.md">„Pulsar v2 weiterhin verwenden</a>“.</p>
 <h2 id="Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="common-anchor-header">Stellen Sie einen Milvus-Cluster mit Pulsar über Helm bereit<button data-href="#Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -137,7 +137,7 @@ title: Pulsar
 <pre><code translate="no" class="language-bash">kubectl get pvc | grep my-release-pulsarv3
 kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Deploy-a-Milvus-cluster-with-Pulsar-using-Milvus-Operator" class="common-anchor-header">Stellen Sie einen Milvus-Cluster mit Pulsar mithilfe des Milvus-Operators bereit<button data-href="#Deploy-a-Milvus-cluster-with-Pulsar-using-Milvus-Operator" class="anchor-icon" translate="no">
+<h2 id="Deploy-a-Milvus-cluster-with-Pulsar-using-Milvus-Operator" class="common-anchor-header">Bereitstellung eines Milvus-Clusters mit Pulsar mithilfe des Milvus-Operators<button data-href="#Deploy-a-Milvus-cluster-with-Pulsar-using-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -265,7 +265,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
     </button></h2><ul>
 <li><strong>Upgrade von 2.5.x auf 2.6.x:</strong> <strong>Einschränkungen bei der Nachrichtenwarteschlange</strong>: Beim Upgrade auf Milvus v3.0-beta müssen Sie Ihre aktuelle Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.
 Wenn Sie Pulsar einsetzen und weiterhin nutzen möchten, ändern Sie die Nachrichtenwarteschlange während des Upgrades nicht.</li>
-<li><strong>Pulsar v2 → v3:</strong> Siehe <a href="/docs/de/upgrade-pulsar-v3.md">„Pulsar von v2 auf v3 aktualisieren“</a>; um bei v2 zu bleiben, siehe <a href="/docs/de/use-pulsar-v2.md">„Pulsar v2 weiterhin verwenden</a>“.</li>
+<li><strong>Pulsar v2 → v3:</strong> Siehe <a href="/docs/de/upgrade-pulsar-v3.md">„Upgrade von Pulsar von v2 auf v3</a>“; um bei v2 zu bleiben, siehe <a href="/docs/de/use-pulsar-v2.md">„Weiterverwendung von Pulsar v2</a>“.</li>
 </ul>
 <h2 id="Whats-next" class="common-anchor-header">Was kommt als Nächstes<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

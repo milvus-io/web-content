@@ -81,14 +81,14 @@ Creating milvus-standalone ... done
 </div>
 <p>Após iniciar o Milvus,</p>
 <ul>
-<li>os contentores denominados <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> e <strong>milvus-etcd</strong> estão ativos.
+<li>os contentores denominados <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> e <strong>milvus-etcd</strong> estão em funcionamento.
 <ul>
 <li>O contentor <strong>milvus-etcd</strong> não expõe quaisquer portas ao anfitrião e mapeia os seus dados para <strong>volumes/etcd</strong> na pasta atual.</li>
 <li>O contentor <strong>milvus-minio</strong> disponibiliza as portas <strong>9090</strong> e <strong>9091</strong> localmente com as credenciais de autenticação predefinidas e mapeia os seus dados para <strong>volumes/minio</strong> na pasta atual.</li>
 <li>O contentor <strong>milvus-standalone</strong> serve as portas <strong>19530</strong> localmente com as definições predefinidas e mapeia os seus dados para <strong>volumes/milvus</strong> na pasta atual.</li>
 </ul></li>
 </ul>
-<p>Pode verificar se os contentores estão em funcionamento utilizando o seguinte comando:</p>
+<p>Pode verificar se os contentores estão ativos e a funcionar utilizando o seguinte comando:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker-compose ps</span>
 
       Name                     Command                  State                            Ports
@@ -119,7 +119,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Adicione configurações adicionais para substituir as predefinidas.
-O que se segue pressupõe que precisa de substituir o ficheiro <code translate="no">proxy.healthCheckTimeout</code> predefinido. Para os itens de configuração aplicáveis, consulte a <a href="/docs/pt/v2.6.x/system_configuration.md">Configuração do Sistema</a>.</p>
+O que se segue pressupõe que precisa de substituir o ficheiro <code translate="no">proxy.healthCheckTimeout</code> predefinido. Para conhecer os itens de configuração aplicáveis, consulte <a href="/docs/pt/v2.6.x/system_configuration.md">a Configuração do Sistema</a>.</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; /milvus/configs/user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:

@@ -112,7 +112,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilize ` <code translate="no">element_filter(structArrayField, predicate)</code> ` quando as condições escalares se aplicarem ao mesmo elemento `Struct` que participa na pesquisa vetorial ao nível do elemento. Dentro do predicado, utilize ` <code translate="no">$[subfield]</code> ` para se referir a subcampos escalares do elemento `Struct` atual.</p>
+    </button></h2><p>Utilize « <code translate="no">element_filter(structArrayField, predicate)</code> » quando as condições escalares se aplicarem ao mesmo elemento Struct que participa na pesquisa vetorial ao nível do elemento. Dentro do predicado, utilize « <code translate="no">$[subfield]</code> » para se referir a subcampos escalares do elemento Struct atual.</p>
 <pre><code translate="no" class="language-python">query_vector = [<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>]
 
 filter_expr = (
@@ -282,7 +282,7 @@ results = client.hybrid_search(
 <tr><td>Subcampos vetoriais</td><td>Não são suportados como entradas de predicados escalares d <code translate="no">$[...]</code>. Em vez disso, utilize subcampos vetoriais através da pesquisa vetorial.</td></tr>
 </tbody>
 </table>
-<p>Para casos não suportados, tais como percursos JSON, funções de contentores de matrizes, funções de correspondência de texto, predicados nulos em <code translate="no">$[...]</code>, funções de geometria, expressões Timestamptz e chamadas a funções genéricas, consulte <a href="/docs/pt/struct-array-operators.md">Operadores StructArray</a>.</p>
+<p>Para casos não suportados, tais como percursos JSON, funções de contentores de matrizes, funções de correspondência de texto, predicados nulos em ` <code translate="no">$[...]</code>`, funções de geometria, expressões `Timestamptz` e chamadas a funções genéricas, consulte <a href="/docs/pt/struct-array-operators.md">Operadores StructArray</a>.</p>
 <h2 id="Common-mistakes" class="common-anchor-header">Erros comuns<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -302,7 +302,7 @@ results = client.hybrid_search(
 <li><p>Utilizar ` <code translate="no">$[subfield]</code> ` fora de ` <code translate="no">element_filter</code> ` ou ` <code translate="no">MATCH_*</code>`.</p></li>
 <li><p>Utilizar ` <code translate="no">chunks.section</code> ` em vez da sintaxe do operador `StructArray`, como ` <code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code>`.</p></li>
 <li><p>Utilizar ` <code translate="no">element_filter</code> ` quando apenas é necessária uma filtragem ao nível da linha. Utilize ` <code translate="no">MATCH_ANY</code> ` em vez disso, se apenas precisar de selecionar entidades.</p></li>
-<li><p>Esperar que ` <code translate="no">MATCH_*</code> ` devolva índices de elementos. Estes operadores selecionam entidades e não identificam, por si só, um elemento correspondente.</p></li>
+<li><p>Esperar que ` <code translate="no">MATCH_*</code> ` devolva deslocamentos de elementos. Estes operadores selecionam entidades e não identificam, por si só, um elemento correspondente.</p></li>
 <li><p>Escrever predicados booleanos simples, como <code translate="no">$[has_code]</code>. Utilize comparações explícitas, como <code translate="no">$[has_code] == true</code>.</p></li>
 <li><p>Colocar « <code translate="no">element_filter</code> » antes de um predicado de nível superior na mesma expressão de filtro.</p></li>
 </ul>

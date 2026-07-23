@@ -74,12 +74,12 @@ title: 使用 Docker Compose 运行支持 GPU 的 Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>下载 <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> 并将其手动保存为 docker-compose.yml，或使用以下命令进行操作。</p>
+    </button></h3><p>下载 <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> 并手动将其保存为 docker-compose.yml，或使用以下命令进行操作。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>您需要对 YAML 文件中独立服务的环境变量进行如下修改：</p>
 <ul>
-<li>若要将特定 GPU 设备分配给 Milvus，请在<code translate="no">standalone</code> 服务的定义中找到 `<code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> ` 字段，并将该字段的值替换为所需 GPU 的 ID。您可以使用 NVIDIA GPU 显示驱动程序中附带的<code translate="no">nvidia-smi</code> 工具来确定 GPU 设备的 ID。Milvus 支持多个 GPU 设备。</li>
+<li>若要为 Milvus 分配特定的 GPU 设备，请在<code translate="no">standalone</code> 服务的定义中找到 `<code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> ` 字段，并将该字段的值替换为所需 GPU 的 ID。您可以使用 NVIDIA GPU 显示驱动程序中附带的<code translate="no">nvidia-smi</code> 工具来确定 GPU 设备的 ID。Milvus 支持多个 GPU 设备。</li>
 </ul>
 <p>将单个 GPU 设备分配给 Milvus：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
@@ -130,7 +130,7 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>如果无法运行上述命令，请检查您的系统是否安装了 Docker Compose V1。如果是这种情况，建议您根据<a href="https://docs.docker.com/compose/">本页</a>的说明迁移到 Docker Compose V2。</p>
+<p>如果无法执行上述命令，请检查您的系统是否安装了 Docker Compose V1。如果是这种情况，建议您根据<a href="https://docs.docker.com/compose/">本页</a>的说明迁移到 Docker Compose V2。</p>
 </div>
 <p>Milvus 启动后，</p>
 <ul>
@@ -138,7 +138,7 @@ Creating milvus-standalone ... done
 <ul>
 <li><strong>milvus-etcd</strong>容器未向主机暴露任何端口，并将数据映射到当前文件夹中的<strong>volumes/etcd</strong>。</li>
 <li><strong>milvus-minio</strong>容器在本地监听<strong>9090</strong>和<strong>9091</strong>端口，使用默认身份验证凭据，并将数据映射到当前文件夹中的<strong>volumes/minio</strong>。</li>
-<li><strong>Milvus Standalone</strong>容器使用默认设置在本地提供<strong>19530</strong>端口服务，并将数据映射到当前目录下的<strong>volumes/milvus</strong>卷中。</li>
+<li><strong>Milvus Standalone</strong>容器使用默认设置在本地监听<strong>19530</strong>端口，并将数据映射到当前目录下的<strong>volumes/milvus</strong>卷中。</li>
 </ul></li>
 </ul>
 <p>您可以使用以下命令检查容器是否已启动并运行：</p>
@@ -151,11 +151,11 @@ milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
 <p>您还可以访问<code translate="no">http://127.0.0.1:9091/webui/</code> 上的 Milvus WebUI，以了解有关您的 Milvus 实例的更多信息。有关详细信息，请参阅<a href="/docs/zh/v2.6.x/milvus-webui.md">Milvus WebUI</a>。</p>
-<p>如果您在 docker-compose.yml 中为 Milvus 分配了多个 GPU 设备，可以指定哪个 GPU 设备对 Milvus 可见或可供使用。</p>
+<p>如果您在 docker-compose.yml 中为 Milvus 分配了多个 GPU 设备，可以指定哪个 GPU 设备对 Milvus 可见或可用。</p>
 <p>使 GPU 设备<code translate="no">0</code> 对 Milvus 可见：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">CUDA_VISIBLE_DEVICES=0 ./milvus run standalone</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>让 GPU 设备<code translate="no">0</code> 和<code translate="no">1</code> 对 Milvus 可见：</p>
+<p>使 GPU 设备<code translate="no">0</code> 和<code translate="no">1</code> 对 Milvus 可见：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">CUDA_VISIBLE_DEVICES=0,1 ./milvus run standalone</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>您可以按以下方式停止并删除此容器。</p>
@@ -248,8 +248,8 @@ docker start &lt;milvus_container_id&gt;
 <li><a href="/docs/zh/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
 <li><p>探索<a href="/docs/zh/v2.6.x/milvus-webui.md">Milvus WebUI</a>——一个用于 Milvus 可观测性和管理的直观 Web 界面。</p></li>
-<li><p>探索<a href="/docs/zh/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>，这是一个用于 Milvus 数据备份的开源工具。</p></li>
-<li><p>了解<a href="/docs/zh/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>——一款用于调试 Milvus 并进行动态配置更新的开源工具。</p></li>
-<li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>——一款用于直观管理 Milvus 的开源图形用户界面工具。</p></li>
+<li><p>探索<a href="/docs/zh/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>——一款用于 Milvus 数据备份的开源工具。</p></li>
+<li><p>了解<a href="/docs/zh/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>——一款用于调试 Milvus 并更新动态配置的开源工具。</p></li>
+<li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>——一款用于直观管理 Milvus 的开源图形界面工具。</p></li>
 <li><p><a href="/docs/zh/v2.6.x/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
 </ul>

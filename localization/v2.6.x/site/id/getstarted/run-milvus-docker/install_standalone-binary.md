@@ -62,7 +62,7 @@ title: Menginstal Milvus Standalone dengan Paket RPM/DEB
 <li>Untuk x86_64/amd64, unduh paket <strong>milvus_2.6.9-1_amd64.deb</strong> atau <strong>milvus_2.6.9-1_amd64.rpm</strong>.</li>
 <li>Untuk ARM64, unduh paket <strong>milvus_2.6.9-1_arm64.deb</strong> atau <strong>milvus_2.6.9-1_arm64.rpm</strong>.</li>
 </ul>
-<p>Perintah berikut ini mengasumsikan bahwa Anda akan menjalankan Milvus Standalone pada mesin x86_64/amd64.</p>
+<p>Perintah berikut mengasumsikan bahwa Anda akan menjalankan Milvus Standalone pada mesin x86_64/amd64.</p>
 <pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.9/milvus_2.6.9-1_amd64.rpm -O milvus_2.6.9-1_amd64.rpm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-the-RPMDEB-Package" class="common-anchor-header">Instal Paket RPM/DEB<button data-href="#Install-the-RPMDEB-Package" class="anchor-icon" translate="no">
@@ -154,7 +154,7 @@ dpkg -l | grep milvus
     </button></h2><p>Untuk menghentikan Milvus Standalone, Anda dapat menggunakan perintah berikut:</p>
 <pre><code translate="no" class="language-shell">systemctl stop milvus
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Uninstall-Milvus-Standalone" class="common-anchor-header">Hapus Instalasi Milvus Standalone<button data-href="#Uninstall-Milvus-Standalone" class="anchor-icon" translate="no">
+<h2 id="Uninstall-Milvus-Standalone" class="common-anchor-header">Mencopot Instalasi Milvus Standalone<button data-href="#Uninstall-Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -213,7 +213,7 @@ dpkg -l | grep milvus
 </ul></li>
 <li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus-webui.md">Milvus WebUI</a>, antarmuka web yang intuitif untuk pemantauan dan pengelolaan Milvus.</p></li>
 <li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, alat sumber terbuka untuk pencadangan data Milvus.</p></li>
-<li><p>Jelajahi <a href="/docs/id/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk debugging Milvus dan pembaruan konfigurasi dinamis.</p></li>
+<li><p>Jelajahi <a href="/docs/id/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk men-debug Milvus dan pembaruan konfigurasi dinamis.</p></li>
 <li><p>Jelajahi <a href="https://github.com/zilliztech/attu">Attu</a>, alat GUI sumber terbuka untuk pengelolaan Milvus yang intuitif.</p></li>
 <li><p><a href="/docs/id/v2.6.x/monitor.md">Pantau Milvus dengan Prometheus</a>.</p></li>
 </ul>

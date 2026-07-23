@@ -60,7 +60,7 @@ title: Mise à niveau du cluster Milvus à l'aide d'un Helm Chart
 <li><strong>Nouveaux composants</strong>: introduction du nœud de streaming pour un traitement amélioré des données</li>
 <li><strong>Suppression de composants</strong>: <code translate="no">indexNode</code> a été supprimé et consolidé</li>
 </ul>
-<p>Ce processus de mise à niveau garantit une migration correcte vers la nouvelle architecture. Pour plus d’informations sur les modifications apportées à l’architecture, consultez <a href="/docs/fr/v2.6.x/architecture_overview.md">la présentation de l’architecture de Milvus</a>.</p>
+<p>Ce processus de mise à niveau garantit une migration correcte vers la nouvelle architecture. Pour plus d’informations sur les modifications apportées à l’architecture, consultez <a href="/docs/fr/v2.6.x/architecture_overview.md">la présentation de l’architecture Milvus</a>.</p>
 <h3 id="Requirements" class="common-anchor-header">Configuration requise<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -151,7 +151,7 @@ Le dépôt des charts Helm de Milvus à l’adresse <code translate="no">https:/
     </button></h3><p>Vérifiez si votre cluster utilise actuellement des coordinateurs distincts :</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p>Si vous voyez des pods de coordinateurs distincts (<code translate="no">datacoord</code>, <code translate="no">querycoord</code>, <code translate="no">indexcoord</code>), effectuez la mise à niveau vers la v2.5.16 et activez <code translate="no">mixCoordinator</code>:</p>
+<p>Si vous constatez la présence de pods de coordinateurs distincts (<code translate="no">datacoord</code>, <code translate="no">querycoord</code>, <code translate="no">indexcoord</code>), effectuez la mise à niveau vers la v2.5.16 et activez <code translate="no">mixCoordinator</code>:</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.5.16&quot;</span> \
   --<span class="hljs-built_in">set</span> mixCoordinator.enabled=<span class="hljs-literal">true</span> \
@@ -174,7 +174,7 @@ Le dépôt des charts Helm de Milvus à l’adresse <code translate="no">https:/
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Upgrade-to-v2617" class="common-anchor-header">Étape 3 : Mise à niveau vers la version 2.6.17<button data-href="#Step-3-Upgrade-to-v2617" class="anchor-icon" translate="no">
+<h3 id="Step-3-Upgrade-to-v2617" class="common-anchor-header">Étape 3 : Passez à la version 2.6.17<button data-href="#Step-3-Upgrade-to-v2617" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -189,7 +189,7 @@ kubectl get pods
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Une fois que la version v2.5.16 fonctionne correctement avec <code translate="no">mixCoordinator</code>, effectuez la mise à niveau vers la version v2.6.17 :</p>
+    </button></h3><p>Une fois que la version 2.5.16 fonctionne correctement avec <code translate="no">mixCoordinator</code>, effectuez la mise à niveau vers la version 2.6.17 :</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.6.17&quot;</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \

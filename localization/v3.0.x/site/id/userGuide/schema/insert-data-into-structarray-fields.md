@@ -4,7 +4,7 @@ title: Memasukkan Data ke dalam Bidang StructArray
 summary: >-
   Masukkan data ke dalam bidang StructArray jika setiap entitas berisi daftar
   elemen terstruktur yang terurut. Dalam muatan penyisipan, bidang StructArray
-  direpresentasikan sebagai larik objek. Setiap objek mewakili satu elemen
+  direpresentasikan sebagai array objek. Setiap objek mewakili satu elemen
   Struct dan menggunakan nama subbidang Struct yang didefinisikan dalam skema
   koleksi.
 ---
@@ -24,8 +24,8 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Masukkan data ke dalam bidang StructArray ketika setiap entitas berisi daftar terurut dari elemen-elemen terstruktur. Dalam payload penyisipan, bidang StructArray direpresentasikan sebagai array objek. Setiap objek mewakili satu elemen Struct dan menggunakan nama subbidang Struct yang didefinisikan dalam skema koleksi.</p>
-<p>Halaman ini menggunakan koleksi ` <code translate="no">tech_articles</code> ` dari <a href="/docs/id/create-structarray-field.md">"Membuat Bidang StructArray</a>". Setiap entitas adalah artikel teknis, dan bidang ` <code translate="no">chunks</code> ` menyimpan bagian-bagian artikel sebagai elemen Struct.</p>
-<h2 id="Before-you-begin" class="common-anchor-header">Sebelum Anda mulai<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
+<p>Halaman ini menggunakan koleksi ` <code translate="no">tech_articles</code> ` dari <a href="/docs/id/create-structarray-field.md">"Membuat Bidang StructArray"</a>. Setiap entitas adalah artikel teknis, dan bidang ` <code translate="no">chunks</code> ` menyimpan potongan artikel sebagai elemen Struct.</p>
+<h2 id="Before-you-begin" class="common-anchor-header">Sebelum memulai<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,7 +56,7 @@ summary: >-
 <p>Setiap objek dalam ` <code translate="no">chunks</code> ` harus mengikuti skema Struct.</p>
 <table>
 <thead>
-<tr><th>Subbidang</th><th>Jenis</th><th>Nilai sisipan</th></tr>
+<tr><th>Subbidang</th><th>Tipe</th><th>Nilai sisipan</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">text</code></td><td><code translate="no">VARCHAR</code></td><td>Teks chunk.</td></tr>
@@ -306,7 +306,7 @@ Bidang StructArray yang dapat bernilai null hanya tersedia di Milvus v3.0.x. Jik
 <tr><td>Gunakan array objek untuk bidang StructArray.</td><td>Nilai <code translate="no">chunks</code> adalah daftar, dan setiap item dalam daftar tersebut merupakan elemen Struct.</td></tr>
 <tr><td>Gunakan nama subbidang di dalam setiap elemen Struct.</td><td>Masukkan ` <code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> ` di dalam ` <code translate="no">chunks</code>`, bukan ` <code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code>`.</td></tr>
 <tr><td>Sesuaikan dengan skema Struct.</td><td>Setiap elemen Struct harus menggunakan subfield yang didefinisikan dalam skema Struct.</td></tr>
-<tr><td>Sesuaikan dimensi vektor.</td><td>Nilai vektor harus sesuai dengan <code translate="no">dim</code> yang dikonfigurasi untuk subfield vektornya.</td></tr>
+<tr><td>Sesuaikan dimensi vektor.</td><td>Nilai vektor harus sesuai dengan <code translate="no">dim</code> yang dikonfigurasi untuk subbidang vektornya.</td></tr>
 <tr><td>Patuhi batasan ukuran ( <code translate="no">max_capacity</code>).</td><td>Jumlah elemen Struct dalam satu entitas tidak boleh melebihi batas maksimum ( <code translate="no">max_capacity</code> ) dari bidang StructArray.</td></tr>
 <tr><td>Gunakan subbidang vektor terpisah untuk mode pencarian yang berbeda.</td><td>Jika pencarian EmbeddingList dan pencarian tingkat elemen diperlukan, tulis nilai vektor ke kedua subbidang vektor tersebut.</td></tr>
 <tr><td>Gunakan <code translate="no">null</code> hanya jika bidang tersebut dapat bernilai null.</td><td>Bidang StructArray yang tidak boleh bernilai null memerlukan nilai StructArray yang valid.</td></tr>
@@ -353,6 +353,6 @@ Bidang StructArray yang dapat bernilai null hanya tersedia di Milvus v3.0.x. Jik
       </svg>
     </button></h2><ol>
 <li><p>Untuk membuat indeks untuk <code translate="no">chunks[emb_list_vector]</code>, <code translate="no">chunks[emb]</code>, dan subbidang skalar, baca <a href="/docs/id/index-structarray-fields.md">Indeks Bidang StructArray</a>.</p></li>
-<li><p>Untuk mencari subbidang vektor StructArray, baca "Basic Vector Search with StructArray".</p></li>
+<li><p>Untuk melakukan pencarian pada subbidang vektor StructArray, baca "Basic Vector Search with StructArray".</p></li>
 <li><p>Untuk meninjau perilaku nullable dan batasan khusus versi, baca " <a href="/docs/id/structarray-limits.md">StructArray Limits</a>".</p></li>
 </ol>

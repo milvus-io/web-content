@@ -44,7 +44,7 @@
     "order": 1,
     "children": [
       {
-        "label": "Guia de início rápido",
+        "label": "Introdução rápida",
         "id": "quickstart.md",
         "order": 0,
         "children": []
@@ -124,7 +124,7 @@
                 "children": []
               },
               {
-                "label": "Gráfico de leme",
+                "label": "Gráfico do leme",
                 "id": "install_cluster-helm.md",
                 "order": 2,
                 "children": []
@@ -144,7 +144,7 @@
                 "children": []
               },
               {
-                "label": "Gráfico de leme",
+                "label": "Gráfico do leme",
                 "id": "install_cluster-helm-gpu.md",
                 "order": 1,
                 "children": []
@@ -340,7 +340,7 @@
             "children": []
           },
           {
-            "label": "Definir o TTL do conjunto",
+            "label": "Definir o TTL da coleção",
             "id": "set-collection-ttl.md",
             "order": 6,
             "children": []
@@ -383,7 +383,7 @@
             "children": []
           },
           {
-            "label": "Campo principal e identificação automática",
+            "label": "Campo principal e AutoID",
             "id": "primary-field.md",
             "order": 1,
             "children": []
@@ -691,7 +691,7 @@
             "children": []
           },
           {
-            "label": "Entidades «Upsert»",
+            "label": "Entidades Upsert",
             "id": "upsert-entities.md",
             "order": 1,
             "children": []
@@ -920,7 +920,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Pesquisa básica com redes neurais artificiais",
+            "label": "Pesquisa básica com RAN",
             "id": "single-vector-search.md",
             "order": 0,
             "children": []
@@ -979,7 +979,7 @@
                 "children": []
               },
               {
-                "label": "Filtragem e Modelagem",
+                "label": "Filtragem e modelos",
                 "id": "filtering-templating.md",
                 "order": 2,
                 "children": []
@@ -1147,7 +1147,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Classificador ponderado",
+                "label": "Classificador Ponderado",
                 "id": "weighted-ranker.md",
                 "order": 0,
                 "children": []
@@ -1189,7 +1189,7 @@
                     "children": []
                   },
                   {
-                    "label": "Decadência linear",
+                    "label": "Decaimento linear",
                     "id": "linear-decay.md",
                     "order": 3,
                     "children": []
@@ -1361,7 +1361,7 @@
             "children": []
           },
           {
-            "label": "Seleção do índice",
+            "label": "Seleção do Índice",
             "id": "index_selection.md",
             "order": 4,
             "children": []
@@ -1389,7 +1389,7 @@
         "children": []
       },
       {
-        "label": "Servidor MCP para o código Claude",
+        "label": "Servidor MCP para o Código Claude",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -1584,7 +1584,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Armazenamento de objetos",
+                "label": "Armazenamento de Objetos",
                 "id": "deploy_s3.md",
                 "order": 0,
                 "children": []
@@ -1610,7 +1610,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Armazenamento de objetos",
+                "label": "Armazenamento de Objetos",
                 "id": "object_storage_operator.md",
                 "order": 0,
                 "children": []
@@ -1840,7 +1840,7 @@
                 "children": []
               },
               {
-                "label": "Conceder privilégios",
+                "label": "Conceder Privilégios",
                 "id": "grant_privileges.md",
                 "order": 3,
                 "children": []
@@ -1860,7 +1860,7 @@
             ]
           },
           {
-            "label": "Encriptação em trânsito",
+            "label": "Criptografia em trânsito",
             "id": "tls.md",
             "order": 2,
             "children": []
@@ -2013,7 +2013,7 @@
             "children": []
           },
           {
-            "label": "Configurar a replicação CDC",
+            "label": "Configurar a replicação do CDC",
             "id": "set_up_cdc_replication.md",
             "order": 1,
             "children": []
@@ -2094,7 +2094,7 @@
         "children": []
       },
       {
-        "label": "Registo de Exportação",
+        "label": "Registo de exportação",
         "id": "export-log",
         "order": 9,
         "externalLink": "https://github.com/milvus-io/milvus/tree/master/deployments/export-log",
@@ -2860,7 +2860,7 @@
         "children": []
       },
       {
-        "label": "Pesquisa contextual",
+        "label": "Recuperação contextual",
         "id": "contextual_retrieval_with_milvus.md",
         "order": 8,
         "children": []
@@ -2891,7 +2891,7 @@
         "children": []
       },
       {
-        "label": "Pesquisa em funil com representações Matryoshka",
+        "label": "Pesquisa em funil com incorporações Matryoshka",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

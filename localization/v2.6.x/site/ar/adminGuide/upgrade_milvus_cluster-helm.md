@@ -5,10 +5,10 @@ order: 1
 group: upgrade_milvus_cluster-operator.md
 related_key: upgrade Milvus Cluster
 summary: تعرف على كيفية ترقية مجموعة Milvus باستخدام Helm Chart.
-title: ترقية مجموعة Milvus باستخدام Helm Chart
+title: ترقية مجموعة Milvus باستخدام مخطط Helm
 ---
 <div class="tab-wrapper"><a href="/docs/ar/v2.6.x/upgrade_milvus_cluster-operator.md" class=''>Milvus</a><a href="/docs/ar/v2.6.x/upgrade_milvus_cluster-helm.md" class='active '>OperatorHelm</a></div>
-<h1 id="Upgrade-Milvus-Cluster-with-Helm-Chart" class="common-anchor-header">ترقية مجموعة Milvus باستخدام Helm Chart<button data-href="#Upgrade-Milvus-Cluster-with-Helm-Chart" class="anchor-icon" translate="no">
+<h1 id="Upgrade-Milvus-Cluster-with-Helm-Chart" class="common-anchor-header">ترقية مجموعة Milvus باستخدام مخطط Helm<button data-href="#Upgrade-Milvus-Cluster-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -88,9 +88,9 @@ title: ترقية مجموعة Milvus باستخدام Helm Chart
 <li>إذا كنت تستخدم الإصدار v2.6.0-rc1 حاليًا وتحتاج إلى الاحتفاظ ببياناتك، فيرجى الرجوع إلى <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">دليل المجتمع هذا</a> للحصول على المساعدة في عملية الترحيل.</li>
 <li><strong>يجب</strong> عليك الترقية إلى الإصدار v2.5.16 أو أحدث مع تمكين ميزة " <code translate="no">mixCoordinator</code> " قبل الترقية إلى الإصدار v2.6.17.</li>
 </ul>
-<p><strong>قيود قائمة انتظار الرسائل</strong>: عند الترقية إلى Milvus v2.6.17، يجب الحفاظ على اختيارك الحالي لقائمة انتظار الرسائل. لا يتم دعم التبديل بين أنظمة قوائم انتظار الرسائل المختلفة أثناء الترقية. سيتوفر دعم تغيير أنظمة قوائم انتظار الرسائل في الإصدارات المستقبلية.</p>
+<p><strong>قيود قائمة انتظار الرسائل</strong>: عند الترقية إلى Milvus الإصدار 2.6.17، يجب الحفاظ على اختيارك الحالي لقائمة انتظار الرسائل. لا يتم دعم التبديل بين أنظمة قوائم انتظار الرسائل المختلفة أثناء الترقية. سيتوفر دعم تغيير أنظمة قوائم انتظار الرسائل في الإصدارات المستقبلية.</p>
 <div class="alert note">
-بدءًا من الإصدار 4.2.21 من مخطط Helm الخاص بـ Milvus، أدخلنا مخطط pulsar-v3.x كعنصر تابع. من أجل التوافق مع الإصدارات السابقة، يرجى ترقية Helm إلى الإصدار v3.14 أو أحدث، وتأكد من إضافة الخيار <code translate="no">--reset-then-reuse-values</code> كلما استخدمت <code translate="no">helm upgrade</code>.
+بدءًا من إصدار مخطط Helm الخاص بـ Milvus 4.2.21، أدخلنا مخطط pulsar-v3.x كاعتماد. من أجل التوافق مع الإصدارات السابقة، يرجى ترقية Helm إلى الإصدار v3.14 أو أحدث، وتأكد من إضافة خيار <code translate="no">--reset-then-reuse-values</code> كلما استخدمت <code translate="no">helm upgrade</code>.
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">عملية الترقية<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -127,7 +127,7 @@ title: ترقية مجموعة Milvus باستخدام Helm Chart
 helm repo update zilliztech
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-تم أرشفة مستودع مخططات Helm الخاصة بـ Milvus الموجود على <code translate="no">https://milvus-io.github.io/milvus-helm/</code>. استخدم المستودع الجديد <code translate="no">https://zilliztech.github.io/milvus-helm/</code> لإصدارات المخططات 4.0.31 والإصدارات الأحدث.
+تم أرشفة مستودع مخططات Helm الخاصة بـ Milvus الموجود على <code translate="no">https://milvus-io.github.io/milvus-helm/</code>. استخدم المستودع الجديد <code translate="no">https://zilliztech.github.io/milvus-helm/</code> للحصول على إصدارات المخطط 4.0.31 والإصدارات الأحدث.
 </div>
 <p>للتحقق من توافق إصدار مخطط Helm مع إصدارات Milvus:</p>
 <pre><code translate="no" class="language-bash">helm search repo zilliztech/milvus --versions

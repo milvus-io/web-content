@@ -23,7 +23,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Insira dados num campo StructArray quando cada entidade contiver uma lista ordenada de elementos estruturados. Na carga útil de inserção, um campo StructArray é representado como uma matriz de objetos. Cada objeto representa um elemento Struct e utiliza os nomes dos subcampos Struct definidos no esquema da coleção.</p>
+    </button></h1><p>Inserir dados num campo StructArray quando cada entidade contém uma lista ordenada de elementos estruturados. Na carga útil de inserção, um campo StructArray é representado como uma matriz de objetos. Cada objeto representa um elemento Struct e utiliza os nomes dos subcampos Struct definidos no esquema da coleção.</p>
 <p>Esta página utiliza a coleção « <code translate="no">tech_articles</code> » da secção <a href="/docs/pt/create-structarray-field.md">«Criar um campo StructArray</a>». Cada entidade é um artigo técnico e o campo « <code translate="no">chunks</code> » armazena partes do artigo como elementos Struct.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Antes de começar<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -69,7 +69,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Numa carga de inserção, « <code translate="no">chunks</code> » é um campo normal cujo valor é uma matriz de objetos «Struct». Dentro de cada objeto, utilize nomes de subcampos como « <code translate="no">text</code> » e « <code translate="no">emb</code> ». Utilize a sintaxe de caminho, como « <code translate="no">chunks[text]</code> » ou « <code translate="no">chunks[emb]</code> », apenas após a inserção, quando criar índices, executar pesquisas, construir filtros ou especificar campos de saída.</p>
+<p>Numa carga útil de inserção, « <code translate="no">chunks</code> » é um campo normal cujo valor é uma matriz de objetos «Struct». Dentro de cada objeto, utilize nomes de subcampos como « <code translate="no">text</code> » e « <code translate="no">emb</code> ». Utilize a sintaxe de caminho, como « <code translate="no">chunks[text]</code> » ou « <code translate="no">chunks[emb]</code> », apenas após a inserção, quando criar índices, executar pesquisas, criar filtros ou especificar campos de saída.</p>
 </div>
 <h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">Compreender a estrutura da carga útil de inserção<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -114,7 +114,7 @@ summary: >-
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">emb_list_vector</code> e <code translate="no">emb</code> são subcampos vetoriais separados, uma vez que suportam modos de pesquisa diferentes. A pesquisa EmbeddingList trata todos os vetores num campo StructArray como uma única lista de embeddings e devolve resultados ao nível da entidade com métricas <code translate="no">MAX_SIM*</code>. A pesquisa ao nível do elemento pesquisa cada elemento Struct de forma independente e pode devolver o deslocamento do elemento correspondente. Este exemplo armazena os mesmos valores vetoriais em ambos os campos por uma questão de simplicidade. Numa aplicação de produção, pode armazenar as mesmas incorporações em ambos os subcampos quando ambos os modos de pesquisa utilizam a mesma incorporação de blocos, ou armazenar incorporações diferentes quando os dois modos de pesquisa utilizam representações diferentes.</p>
+<p><code translate="no">emb_list_vector</code> e <code translate="no">emb</code> são subcampos vetoriais separados, uma vez que suportam modos de pesquisa diferentes. A pesquisa por lista de incorporação (EmbeddingList) trata todos os vetores num campo StructArray como uma única lista de incorporação e devolve resultados ao nível da entidade com métricas de <code translate="no">MAX_SIM*</code>. A pesquisa ao nível do elemento pesquisa cada elemento Struct de forma independente e pode devolver o deslocamento do elemento correspondente. Este exemplo armazena os mesmos valores vetoriais em ambos os campos por uma questão de simplicidade. Numa aplicação de produção, pode armazenar as mesmas incorporações em ambos os subcampos quando ambos os modos de pesquisa utilizam a mesma incorporação de blocos, ou armazenar incorporações diferentes quando os dois modos de pesquisa utilizam representações diferentes.</p>
 <h2 id="Insert-rows" class="common-anchor-header">Inserir linhas<button data-href="#Insert-rows" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -309,7 +309,7 @@ Os campos StructArray nulos estão disponíveis apenas no Milvus v3.0.x. Se adic
 <tr><td>Respeite as dimensões do vetor.</td><td>Os valores dos vetores devem corresponder aos « <code translate="no">dim</code> » configurados para os seus subcampos vetoriais.</td></tr>
 <tr><td>Respeitar o « <code translate="no">max_capacity</code> ».</td><td>O número de elementos Struct numa entidade não deve exceder o <code translate="no">max_capacity</code> do campo StructArray.</td></tr>
 <tr><td>Utilize subcampos vetoriais separados para modos de pesquisa distintos.</td><td>Se forem necessárias tanto a pesquisa EmbeddingList como a pesquisa ao nível do elemento, escreva os valores do vetor em ambos os subcampos do vetor.</td></tr>
-<tr><td>Utilize « <code translate="no">null</code> » apenas quando o campo for nulo.</td><td>Os campos StructArray não nulos exigem valores StructArray válidos.</td></tr>
+<tr><td>Utilize o parâmetro « <code translate="no">null</code> » apenas quando o campo for nulo.</td><td>Os campos StructArray não nulos exigem valores StructArray válidos.</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">Erros comuns<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
@@ -328,7 +328,7 @@ Os campos StructArray nulos estão disponíveis apenas no Milvus v3.0.x. Se adic
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Utilizar caminhos de campo como <code translate="no">chunks[text]</code> em cargas de inserção.</p></li>
+<li><p>Utilizar caminhos de campo como « <code translate="no">chunks[text]</code> » em cargas de inserção.</p></li>
 <li><p>Omitir subcampos obrigatórios de um elemento Struct.</p></li>
 <li><p>Inserir vetores com a dimensão errada.</p></li>
 <li><p>Inserir mais elementos Struct do que o permitido por <code translate="no">max_capacity</code>.</p></li>
@@ -352,7 +352,7 @@ Os campos StructArray nulos estão disponíveis apenas no Milvus v3.0.x. Se adic
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>Para criar índices para os subcampos « <code translate="no">chunks[emb_list_vector]</code> », « <code translate="no">chunks[emb]</code> » e escalares, consulte <a href="/docs/pt/index-structarray-fields.md">«Indexar campos StructArray</a>».</p></li>
+<li><p>Para criar índices para <code translate="no">chunks[emb_list_vector]</code>, <code translate="no">chunks[emb]</code> e subcampos escalares, consulte <a href="/docs/pt/index-structarray-fields.md">«Indexar campos StructArray</a>».</p></li>
 <li><p>Para pesquisar subcampos vetoriais do StructArray, consulte «Pesquisa vetorial básica com StructArray».</p></li>
 <li><p>Para rever o comportamento de valores nulos e as limitações específicas de cada versão, consulte <a href="/docs/pt/structarray-limits.md">«Limites do StructArray</a>».</p></li>
 </ol>

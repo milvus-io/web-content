@@ -3,7 +3,7 @@ id: insert-data-into-structarray-fields.md
 title: 将数据插入 StructArray 字段
 summary: >-
   当每个实体包含一个有序的结构化元素列表时，将数据插入到 StructArray 字段中。在插入有效载荷中，StructArray
-  字段表示为一个对象数组。每个对象代表一个 Struct 元素，并使用 Collection 模式中定义的 Struct 子字段名称。
+  字段被表示为一个对象数组。每个对象代表一个 Struct 元素，并使用 Collection 模式中定义的 Struct 子字段名称。
 ---
 <h1 id="Insert-Data-into-StructArray-Fields" class="common-anchor-header">将数据插入 StructArray 字段<button data-href="#Insert-Data-into-StructArray-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>当每个实体包含一个有序的结构化元素列表时，可将数据插入到 StructArray 字段中。在插入负载中，StructArray 字段表示为一个对象数组。每个对象代表一个 Struct 元素，并使用 Collection 模式中定义的 Struct 子字段名称。</p>
+    </button></h1><p>当每个实体包含一个有序的结构化元素列表时，可将数据插入到 StructArray 字段中。在插入有效载荷中，StructArray 字段表示为一个对象数组。每个对象代表一个 Struct 元素，并使用 Collection Schema 中定义的 Struct 子字段名称。</p>
 <p>本页使用《<a href="/docs/zh/create-structarray-field.md">创建 StructArray 字段</a>》中的<code translate="no">tech_articles</code> Collection。每个实体都是一篇技术文章，而<code translate="no">chunks</code> 字段将文章片段作为 Struct 元素进行存储。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">开始之前<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -59,16 +59,16 @@ summary: >-
 <tr><td><code translate="no">text</code></td><td><code translate="no">VARCHAR</code></td><td>块文本。</td></tr>
 <tr><td><code translate="no">section</code></td><td><code translate="no">VARCHAR</code></td><td>部分名称，例如<code translate="no">index</code> 、<code translate="no">search</code> 或<code translate="no">filter</code> 。</td></tr>
 <tr><td><code translate="no">page</code></td><td><code translate="no">INT64</code></td><td>页码或逻辑位置。</td></tr>
-<tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>段级评分。</td></tr>
+<tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>片段级评分。</td></tr>
 <tr><td><code translate="no">has_code</code></td><td><code translate="no">BOOL</code></td><td>该片段是否包含代码。</td></tr>
 <tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>为 EmbeddingList 搜索编写的向量。</td></tr>
 <tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>为元素级搜索编写的向量。</td></tr>
 </tbody>
 </table>
 <div class="alert note">
-<p>在插入型有效载荷中，<code translate="no">chunks</code> 是一个常规字段，其值为 Struct 对象的数组。在每个对象内部，请使用诸如<code translate="no">text</code> 和<code translate="no">emb</code> 之类的子字段名称。仅在插入完成后，当您创建索引、运行搜索、构建过滤器或指定输出字段时，才使用路径语法，例如<code translate="no">chunks[text]</code> 或<code translate="no">chunks[emb]</code> 。</p>
+<p>在插入有效载荷中，<code translate="no">chunks</code> 是一个常规字段，其值为一个Struct对象数组。在每个对象内部，请使用<code translate="no">text</code> 和<code translate="no">emb</code> 等子字段名称。仅在插入完成后创建索引、运行搜索、构建过滤器或指定输出字段时，才使用<code translate="no">chunks[text]</code> 或<code translate="no">chunks[emb]</code> 等路径语法。</p>
 </div>
-<h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">了解插入有效负载的结构<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
+<h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">了解插入有效载荷的结构<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -303,9 +303,9 @@ result = client.insert(
 <tr><td>对于 StructArray 字段，请使用对象数组。</td><td><code translate="no">chunks</code> 的值是一个列表，列表中的每个项目都是一个 Struct 元素。</td></tr>
 <tr><td>在每个 Struct 元素内部使用子字段名称。</td><td>将<code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> 插入<code translate="no">chunks</code> 中，而非<code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code> 中。</td></tr>
 <tr><td>需符合 Struct Schema。</td><td>每个 Struct 元素必须使用 Struct Schema 中定义的子字段。</td></tr>
-<tr><td>匹配向量维度。</td><td>向量值必须与为其向量子字段配置的<code translate="no">dim</code> 相匹配。</td></tr>
+<tr><td>向量维度必须匹配。</td><td>向量值必须与为其向量子字段配置的<code translate="no">dim</code> 相匹配。</td></tr>
 <tr><td>遵守<code translate="no">max_capacity</code> 。</td><td>一个实体中的 Struct 元素数量不得超过 StructArray 字段的<code translate="no">max_capacity</code> 。</td></tr>
-<tr><td>为不同的搜索模式使用单独的向量字段。</td><td>如果同时需要 EmbeddingList 搜索和元素级搜索，请将向量值写入两个向量子字段。</td></tr>
+<tr><td>针对不同的搜索模式，请使用单独的向量子场。</td><td>如果同时需要 EmbeddingList 搜索和元素级搜索，请将向量值写入两个向量子字段。</td></tr>
 <tr><td>仅当字段允许为空时，才使用<code translate="no">null</code> 。</td><td>非可空的 StructArray 字段需要有效的 StructArray 值。</td></tr>
 </tbody>
 </table>
@@ -328,9 +328,9 @@ result = client.insert(
 <li><p>在插入有效载荷中使用诸如<code translate="no">chunks[text]</code> 之类的字段路径。</p></li>
 <li><p>从 Struct 元素中省略必需的子字段。</p></li>
 <li><p>插入维度错误的向量。</p></li>
-<li><p>插入的 Struct 元素数量超过<code translate="no">max_capacity</code> 允许的数量。</p></li>
-<li><p>仅将一个子字段设置为<code translate="no">null</code> ，而同一StructArray值中的其他子字段却是有效的。</p></li>
-<li><p>仅将向量写入<code translate="no">emb_list_vector</code> ，随后却尝试在<code translate="no">chunks[emb]</code> 上执行元素级搜索。</p></li>
+<li><p>插入的 Struct 元素数量超过了<code translate="no">max_capacity</code> 允许的数量。</p></li>
+<li><p>仅将一个子字段设置为<code translate="no">null</code> ，而同一StructArray值中的其他子字段却有效。</p></li>
+<li><p>仅将向量写入<code translate="no">emb_list_vector</code> ，随后尝试在<code translate="no">chunks[emb]</code> 上执行元素级搜索。</p></li>
 <li><p>仅将向量写入<code translate="no">emb</code> ，随后尝试在<code translate="no">chunks[emb_list_vector]</code> 上执行EmbeddingList搜索。</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">后续步骤<button data-href="#Next-steps" class="anchor-icon" translate="no">

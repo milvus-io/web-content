@@ -21,7 +21,7 @@ summary: Milvus Standalone(Docker Compose) 배포 환경의 메시지 큐를 Roc
     </button></h1><p>이 페이지에서는 <strong>Milvus Standalone(Docker Compose)</strong> 배포 환경의 메시지 큐(MQ)를 <strong>RocksMQ와</strong> <strong>Woodpecker</strong> (로컬 또는 MinIO 백엔드) 간에 양방향으로 전환하는 방법을 설명합니다. 일반적인 워크플로우 및 필수 조건에 대해서는 <a href="/docs/ko/switch-mq-type.md">MQ 유형 전환을</a> 참조하십시오.</p>
 <div class="alert note">
 <ul>
-<li><strong>필수 조건:</strong> MQ 전환 기능은 <strong>Milvus 3.0 이상에서</strong> 사용할 수 있습니다. 시작하기 전에 Milvus 인스턴스를 Milvus 3.0 이상으로 업그레이드하십시오. 이전 버전에서는 이 기능을 사용할 수 없습니다.</li>
+<li><strong>필수 조건:</strong> MQ 전환 기능은 <strong>Milvus 3.0 이상</strong> 버전에서 사용할 수 있습니다. 시작하기 전에 Milvus 인스턴스를 Milvus 3.0 이상으로 업그레이드하십시오. 이전 버전에서는 이 기능을 사용할 수 없습니다.</li>
 <li>MQ 전환을 위해서는 Docker <strong>Compose</strong> 배포 환경(etcd 구성 소스를 활성화하는)이 필요합니다. 단일 컨테이너 Docker 배포 환경에서는 전환을 지원하지 않습니다.</li>
 </ul>
 </div>
@@ -102,7 +102,7 @@ summary: Milvus Standalone(Docker Compose) 배포 환경의 메시지 큐를 Roc
   -d &#x27;{&quot;target_wal_name&quot;: &quot;woodpecker&quot;}&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <p>MixCoord 포트는 일반적으로 <code translate="no">9091</code> 입니다.</p>
-<h3 id="Step-4-Verify-the-switch-is-complete" class="common-anchor-header">4단계: 전환이 완료되었는지 확인<button data-href="#Step-4-Verify-the-switch-is-complete" class="anchor-icon" translate="no">
+<h3 id="Step-4-Verify-the-switch-is-complete" class="common-anchor-header">4단계: 전환 완료 확인<button data-href="#Step-4-Verify-the-switch-is-complete" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -244,7 +244,7 @@ summary: Milvus Standalone(Docker Compose) 배포 환경의 메시지 큐를 Roc
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>소스 MQ</th><th>대상 MQ</th><th>상태</th><th>참고</th></tr>
+<tr><th>소스 MQ</th><th>대상 MQ</th><th>상태</th><th>비고</th></tr>
 </thead>
 <tbody>
 <tr><td>RocksMQ</td><td>Woodpecker (MinIO/로컬)</td><td><strong>지원됨</strong></td><td></td></tr>

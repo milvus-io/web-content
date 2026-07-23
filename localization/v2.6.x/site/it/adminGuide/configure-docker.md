@@ -57,7 +57,7 @@ Nella versione attuale, tutti i parametri hanno effetto solo dopo il riavvio di 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Configurare l'istanza di Milvus in base ai propri scenari applicativi regolando i parametri corrispondenti nel file ` <code translate="no">milvus.yaml</code>`.</p>
+    </button></h2><p>Configurare l’istanza di Milvus in base alle proprie esigenze applicative regolando i parametri corrispondenti nel file ` <code translate="no">milvus.yaml</code>`.</p>
 <p>Per ulteriori informazioni su ciascun parametro, consultare i link seguenti.</p>
 <p>Ordinati per:</p>
 <div class="filter">
@@ -85,7 +85,7 @@ Nella versione attuale, tutti i parametri hanno effetto solo dopo il riavvio di 
         <ul>
             <li><a href="/docs/it/v2.6.x/configure_rootcoord.md">Coordinata radice</a></li>
             <li><a href="/docs/it/v2.6.x/configure_proxy.md">Proxy</a></li>
-            <li><a href="/docs/it/v2.6.x/configure_querycoord.md">Coordinamento delle query</a></li>
+            <li><a href="/docs/it/v2.6.x/configure_querycoord.md">Coordinato di query</a></li>
             <li><a href="/docs/it/v2.6.x/configure_querynode.md">Nodo di query</a></li>
             <li><a href="/docs/it/v2.6.x/configure_indexnode.md">Nodo indice</a></li>
             <li><a href="/docs/it/v2.6.x/configure_datacoord.md">Coordinata dati</a></li>
@@ -293,7 +293,7 @@ I dati vengono memorizzati nella cartella <code translate="no">/volumes</code> i
 <li>Scopri come gestire le seguenti dipendenze di Milvus con Docker Compose o Helm:
 <ul>
 <li><a href="/docs/it/v2.6.x/deploy_s3.md">Configurare l’Object Storage con Docker Compose o Helm</a></li>
-<li><a href="/docs/it/v2.6.x/deploy_etcd.md">Configurare l'archiviazione dei metadati con Docker Compose o Helm</a></li>
-<li><a href="/docs/it/v2.6.x/deploy_pulsar.md">Configurare l'archiviazione dei messaggi con Docker Compose o Helm</a></li>
+<li><a href="/docs/it/v2.6.x/deploy_etcd.md">Configurare Meta Storage con Docker Compose o Helm</a></li>
+<li><a href="/docs/it/v2.6.x/deploy_pulsar.md">Configurare l'archivio dei messaggi con Docker Compose o Helm</a></li>
 </ul></li>
 </ul>

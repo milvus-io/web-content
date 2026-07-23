@@ -20,7 +20,7 @@ title: 使用 Docker Compose 設定 Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本主題說明如何使用 Docker Compose 配置 Milvus 組件及其第三方依賴項。</p>
+    </button></h1><p>本主題說明如何使用 Docker Compose 配置 Milvus 元件及其第三方依賴項。</p>
 <div class="alert note">
 在當前版本中，所有參數僅在 Milvus 重新啟動後才會生效。
 </div>
@@ -39,7 +39,7 @@ title: 使用 Docker Compose 設定 Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://raw.githubusercontent.com/milvus-io/milvus/v2.6.17/configs/milvus.yaml">可</a>直接<a href="https://raw.githubusercontent.com/milvus-io/milvus/v2.6.17/configs/milvus.yaml">下載</a>`<code translate="no">milvus.yaml</code> `，或使用以下指令<a href="https://raw.githubusercontent.com/milvus-io/milvus/v2.6.17/configs/milvus.yaml">進行下載</a>。</p>
+    </button></h2><p>可直接<a href="https://raw.githubusercontent.com/milvus-io/milvus/v2.6.17/configs/milvus.yaml">下載</a>`<code translate="no">milvus.yaml</code> `，或使用以下指令<a href="https://raw.githubusercontent.com/milvus-io/milvus/v2.6.17/configs/milvus.yaml">進行下載</a>。</p>
 <pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/v2.6.17/configs/milvus.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Modify-the-configuration-file" class="common-anchor-header">修改設定檔<button data-href="#Modify-the-configuration-file" class="anchor-icon" translate="no">
@@ -83,7 +83,7 @@ title: 使用 Docker Compose 設定 Milvus
     </td>
     <td>
         <ul>
-            <li><a href="/docs/zh-hant/v2.6.x/configure_rootcoord.md">根座標</a></li>
+            <li><a href="/docs/zh-hant/v2.6.x/configure_rootcoord.md">根協調器</a></li>
             <li><a href="/docs/zh-hant/v2.6.x/configure_proxy.md">代理</a></li>
             <li><a href="/docs/zh-hant/v2.6.x/configure_querycoord.md">查詢節點</a></li>
             <li><a href="/docs/zh-hant/v2.6.x/configure_querynode.md">查詢節點</a></li>
@@ -212,7 +212,7 @@ title: 使用 Docker Compose 設定 Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>下載 Milvus<a href="https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus-standalone-docker-compose.yml">獨立版本</a>的安裝檔案，並將其儲存為<code translate="no">docker-compose.yml</code> 。</p>
+    </button></h2><p>下載 Milvus<a href="https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus-standalone-docker-compose.yml">獨立版</a> 的安裝檔案，並將其儲存為<code translate="no">docker-compose.yml</code> 。</p>
 <p>您也可以直接執行以下指令。</p>
 <pre><code translate="no"><span class="hljs-meta prompt_"># </span><span class="language-bash">For Milvus standalone</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
@@ -232,7 +232,7 @@ title: 使用 Docker Compose 設定 Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在<code translate="no">docker-compose.yml</code> 中，於每個<code translate="no">milvus-standalone</code> 下方新增一個<code translate="no">volumes</code> 區段。</p>
+    </button></h2><p>在<code translate="no">docker-compose.yml</code> 檔案中，於每個<code translate="no">milvus-standalone</code> 下方新增一個<code translate="no">volumes</code> 區段。</p>
 <p>將您的<code translate="no">milvus.yaml</code> 檔案的本地路徑，映射至所有<code translate="no">volumes</code> 區段下對應的 Docker 容器路徑，以指向<code translate="no">/milvus/configs/milvus.yaml</code> 中的設定檔。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
   <span class="hljs-attr">standalone:</span>

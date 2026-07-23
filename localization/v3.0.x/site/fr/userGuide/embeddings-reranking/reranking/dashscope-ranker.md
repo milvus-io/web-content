@@ -42,10 +42,10 @@ beta: Milvus 2.6.x
 <ul>
 <li><p>Une collection Milvus comportant un champ « <code translate="no">VARCHAR</code> » contenant le texte à reclasser.</p></li>
 <li><p>Une clé API DashScope valide.</p></li>
-<li><p>L'accès à un modèle de reclassement DashScope, tel que « <code translate="no">gte-rerank-v2</code> ».</p></li>
+<li><p>L'accès à un modèle de reclassement DashScope, tel que <code translate="no">gte-rerank-v2</code>.</p></li>
 </ul>
 <p>Pour connaître les modèles de reclassement disponibles et les points de terminaison régionaux, consultez <a href="https://www.alibabacloud.com/help/en/model-studio/text-rerank-api">l’API de reclassement de texte d’Alibaba Cloud Model Studio</a>.</p>
-<h2 id="Configure-credentials" class="common-anchor-header">Configurer les informations d’identification<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
+<h2 id="Configure-credentials" class="common-anchor-header">Configurer les identifiants<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -76,7 +76,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Enregistrez votre clé API dans <code translate="no">milvus.yaml</code> et indiquez au fournisseur de reclassement DashScope le libellé correspondant à ces informations d’authentification.</p>
+    </button></h3><p>Enregistrez votre clé API dans <code translate="no">milvus.yaml</code> et pointez le fournisseur de reclassement DashScope vers le libellé des informations d’authentification.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">credential:</span>
   <span class="hljs-attr">dashscope_apikey:</span>
@@ -90,7 +90,7 @@ beta: Milvus 2.6.x
           <span class="hljs-attr">credential:</span> <span class="hljs-string">dashscope_apikey</span>
           <span class="hljs-comment"># url: https://dashscope.aliyuncs.com/api/v1/services/rerank/text-rerank/text-rerank</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Option-2-Environment-variable" class="common-anchor-header">Option 2 : variable d’environnement<button data-href="#Option-2-Environment-variable" class="anchor-icon" translate="no">
+<h3 id="Option-2-Environment-variable" class="common-anchor-header">Option 2 : Variable d’environnement<button data-href="#Option-2-Environment-variable" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -133,7 +133,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pour utiliser le classement DashScope, créez un objet Function qui spécifie le modèle de reclassement DashScope et le texte de la requête. Utilisez <code translate="no">provider: &quot;ali&quot;</code> pour le reclassement DashScope.</p>
+    </button></h2><p>Pour utiliser le classificateur DashScope, créez un objet Function qui spécifie le modèle de reclassement DashScope et le texte de la requête. Utilisez <code translate="no">provider: &quot;ali&quot;</code> pour le reclassement DashScope.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 dashscope_ranker = Function(

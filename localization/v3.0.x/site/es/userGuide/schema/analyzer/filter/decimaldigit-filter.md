@@ -38,7 +38,7 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Para el texto en árabe, el analizador integrado <a href="/docs/es/arabic-analyzer.md"><code translate="no">arabic</code></a> ya incluye el filtro « <code translate="no">decimaldigit</code> ». Utiliza « <code translate="no">decimaldigit</code> » directamente cuando necesites normalizar los dígitos en un flujo de análisis personalizado.</p>
+<p>Para el texto en árabe, el analizador integrado <a href="/docs/es/arabic-analyzer.md"><code translate="no">arabic</code></a> ya incluye el filtro « <code translate="no">decimaldigit</code> ». Utiliza « <code translate="no">decimaldigit</code> » directamente cuando necesites normalizar los dígitos en una cadena de análisis personalizada.</p>
 </div>
 <p>Para utilizar el filtro « <code translate="no">decimaldigit</code> » en un analizador personalizado, añádelo a la sección « <code translate="no">filter</code> » en <code translate="no">analyzer_params</code>:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -47,7 +47,7 @@ beta: Milvus 3.0.0+
 }
 <button class="copy-code-btn"></button></code></pre>
 <p>El filtro « <code translate="no">decimaldigit</code> » no tiene parámetros configurables.</p>
-<p>El filtro convierte los dígitos decimales Unicode —incluidos los dígitos arábigo-indios, tailandeses, devanagari, bengalíes y de ancho completo— a dígitos ASCII. Actúa sobre los tokens generados por el tokenizador. La configuración anterior es, intencionadamente, un ejemplo de analizador personalizado y no incluye el proceso completo de procesamiento del árabe.</p>
+<p>El filtro convierte los dígitos decimales Unicode —incluidos los dígitos arábico-indios, tailandeses, devanagari, bengalíes y de ancho completo— a dígitos ASCII. Actúa sobre los tokens generados por el tokenizador. La configuración anterior es, intencionadamente, un ejemplo de analizador personalizado y no incluye el proceso completo de procesamiento del árabe.</p>
 <h2 id="Examples" class="common-anchor-header">Ejemplos<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

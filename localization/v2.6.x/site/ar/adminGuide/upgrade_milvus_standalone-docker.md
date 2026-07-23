@@ -5,10 +5,10 @@ order: 1
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
 summary: تعرف على كيفية ترقية الإصدار المستقل من Milvus باستخدام Docker Compose.
-title: ترقية Milvus Standalone باستخدام Docker Compose
+title: ترقية Milvus المستقل باستخدام Docker Compose
 ---
-<div class="tab-wrapper"><a href="/docs/ar/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/ar/v2.6.x/upgrade_milvus_standalone-docker.md" class='active '>Operator Helm Docker Compose</a></div>
-<h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">ترقية Milvus Standalone باستخدام Docker Compose<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
+<div class="tab-wrapper"><a href="/docs/ar/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/ar/v2.6.x/upgrade_milvus_standalone-docker.md" class='active '>OperatorHelmDocker Compose</a></div>
+<h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">ترقية Milvus المستقل باستخدام Docker Compose<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -84,7 +84,7 @@ title: ترقية Milvus Standalone باستخدام Docker Compose
 <p><strong>متطلبات التوافق:</strong></p>
 <ul>
 <li>Milvus v2.6.0-rc1 <strong>غير متوافق</strong> مع الإصدار v2.6.17. لا يتم دعم الترقيات المباشرة من الإصدارات التجريبية.</li>
-<li>إذا كنت تستخدم الإصدار v2.6.0-rc1 حاليًا وتحتاج إلى الحفاظ على بياناتك، فيرجى الرجوع إلى <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">دليل المجتمع هذا</a> للحصول على المساعدة في عملية الترحيل.</li>
+<li>إذا كنت تستخدم الإصدار v2.6.0-rc1 حاليًا وتحتاج إلى الاحتفاظ ببياناتك، فيرجى الرجوع إلى <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">دليل المجتمع هذا</a> للحصول على المساعدة في عملية الترحيل.</li>
 <li><strong>يجب</strong> عليك الترقية إلى الإصدار v2.5.16 أو أحدث قبل الترقية إلى الإصدار v2.6.17.</li>
 </ul>
 <p><strong>قيود قائمة انتظار الرسائل</strong>: عند الترقية إلى Milvus v2.6.17، يجب الحفاظ على اختيارك الحالي لقائمة انتظار الرسائل. لا يتم دعم التبديل بين أنظمة قوائم انتظار الرسائل المختلفة أثناء الترقية. سيتوفر دعم تغيير أنظمة قوائم انتظار الرسائل في الإصدارات المستقبلية.</p>
@@ -122,10 +122,10 @@ title: ترقية Milvus Standalone باستخدام Docker Compose
         ></path>
       </svg>
     </button></h3><div class="alert note">
-<p>تخط هذه الخطوة إذا كان النشر المستقل الخاص بك يعمل بالفعل بالإصدار v2.5.16 أو أعلى.</p>
+<p>تخطّ هذه الخطوة إذا كان النشر المستقل الخاص بك يعمل بالفعل بالإصدار v2.5.16 أو أعلى.</p>
 </div>
 <ol>
-<li><p>قم بتحرير ملف <code translate="no">docker-compose.yaml</code> الموجود لديك وقم بتحديث علامة صورة Milvus إلى الإصدار v2.5.16:</p>
+<li><p>قم بتحرير ملف « <code translate="no">docker-compose.yaml</code> » الموجود لديك وقم بتحديث علامة صورة Milvus إلى الإصدار v2.5.16:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
@@ -157,7 +157,7 @@ docker compose up -d
       </svg>
     </button></h3><p>بمجرد تشغيل الإصدار v2.5.16 بنجاح، قم بالترقية إلى الإصدار v2.6.17:</p>
 <ol>
-<li><p>قم بتحرير ملف <code translate="no">docker-compose.yaml</code> الموجود لديك وقم بتحديث علامتي صورتي Milvus و MinIO:</p>
+<li><p>قم بتحرير ملف <code translate="no">docker-compose.yaml</code> الموجود لديك وقم بتحديث كل من علامتي صورة Milvus و MinIO:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">minio:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-minio</span>
@@ -218,7 +218,7 @@ docker compose logs standalone | grep <span class="hljs-string">&quot;version&qu
 <li>إذا كنت مستعدًا لنشر مجموعتك على السحابة:
 <ul>
 <li>تعرف على كيفية <a href="/docs/ar/v2.6.x/eks.md">نشر Milvus على Amazon EKS باستخدام Terraform</a></li>
-<li>تعلم كيفية <a href="/docs/ar/v2.6.x/gcp.md">نشر مجموعة Milvus على GCP باستخدام Kubernetes</a></li>
+<li>تعرف على كيفية <a href="/docs/ar/v2.6.x/gcp.md">نشر مجموعة Milvus على GCP باستخدام Kubernetes</a></li>
 <li>تعرف على كيفية <a href="/docs/ar/v2.6.x/azure.md">نشر Milvus على Microsoft Azure باستخدام Kubernetes</a></li>
 </ul></li>
 </ul>

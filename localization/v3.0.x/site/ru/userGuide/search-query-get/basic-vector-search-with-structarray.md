@@ -47,7 +47,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>Создайте поле StructArray, например <code translate="no">chunks</code>.</td><td><a href="/docs/ru/create-structarray-field.md">Создание поля StructArray</a></td></tr>
-<tr><td>Вставьте сущности, поле <code translate="no">chunks</code> которых содержит объекты Struct.</td><td><a href="/docs/ru/insert-data-into-structarray-fields.md">Вставка данных в поля StructArray</a></td></tr>
+<tr><td>Вставьте сущности, поле « <code translate="no">chunks</code> » которых содержит объекты Struct.</td><td><a href="/docs/ru/insert-data-into-structarray-fields.md">Вставка данных в поля StructArray</a></td></tr>
 <tr><td>Создайте индекс <code translate="no">MAX_SIM*</code> на <code translate="no">chunks[emb_list_vector]</code> для поиска по EmbeddingList.</td><td><a href="/docs/ru/index-structarray-fields.md">Индексирование полей StructArray</a></td></tr>
 <tr><td>Создайте обычный векторно-метрический индекс на поле « <code translate="no">chunks[emb]</code> » для поиска на уровне элементов.</td><td><a href="/docs/ru/index-structarray-fields.md">Индексирование полей StructArray</a></td></tr>
 </tbody>
@@ -82,7 +82,7 @@ summary: >-
 <tr><td>Что представляет собой один результат</td><td>Соответствующий объект, подполе вектора StructArray которого схоже со списком вложений запроса.</td><td>Соответствующий элемент Struct внутри поля StructArray.</td></tr>
 <tr><td>Детализация результатов</td><td>Уровень сущности.</td><td>Уровень элемента Struct.</td></tr>
 <tr><td>Смещение</td><td>Не применимо.</td><td>Определяет позицию сопоставленного элемента структуры с нулевым индексом при возвращении.</td></tr>
-<tr><td>Типичное использование</td><td>ColBERT, ColPali и другие шаблоны поиска с поздним взаимодействием.</td><td>Поиск на уровне фрагментов, абзацев, клипов, патчей или фактов.</td></tr>
+<tr><td>Типичное использование</td><td>ColBERT, ColPali и другие шаблоны поиска с поздним взаимодействием.</td><td>Поиск на уровне фрагментов, отрывков, клипов, патчей или фактов.</td></tr>
 </tbody>
 </table>
 <h2 id="Run-EmbeddingList-search" class="common-anchor-header">Запуск поиска с помощью EmbeddingList<button data-href="#Run-EmbeddingList-search" class="anchor-icon" translate="no">
@@ -100,7 +100,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Используйте поиск EmbeddingList, если сам запрос содержит несколько векторов, а целевое подполе вектора StructArray индексируется с помощью метрики « <code translate="no">MAX_SIM*</code> ». Результатом является совпадение на уровне сущностей.</p>
+    </button></h2><p>Используйте поиск EmbeddingList, если сам запрос содержит несколько векторов, а целевое подполе вектора StructArray индексируется с помощью метрики « <code translate="no">MAX_SIM*</code> ». Результатом является совпадение на уровне сущности.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">from</span> pymilvus.client.embedding_list <span class="hljs-keyword">import</span> EmbeddingList
 
@@ -131,7 +131,7 @@ results = client.search(
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
         <span class="hljs-built_in">print</span>(hit[<span class="hljs-string">&quot;id&quot;</span>], hit[<span class="hljs-string">&quot;distance&quot;</span>], hit[<span class="hljs-string">&quot;entity&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>В этом режиме поиска параметр « <code translate="no">limit</code> » определяет, сколько сущностей будет возвращено по каждому запросу. Результат может включать подполя StructArray, однако само совпадение представляет собой найденную родительскую сущность, а не какой-то конкретный элемент Struct.</p>
+<p>В этом режиме поиска параметр « <code translate="no">limit</code> » определяет, сколько сущностей будет возвращено по каждому запросу. Результат может включать подполя StructArray, однако само совпадение представляет собой найденную родительскую сущность, а не какой-либо конкретный элемент Struct.</p>
 <div class="alert note">
 <p>Полное руководство по работе с ColBERT или ColPali см. в разделе <a href="/docs/ru/search-with-embedding-lists.md">«Поиск с использованием списков вложений</a>». На этой странице рассматриваются только основные особенности поиска по StructArray.</p>
 </div>
@@ -177,7 +177,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>При поиске на уровне элементов каждый результат соответствует найденному элементу Struct. Значение « <code translate="no">offset</code> » представляет собой позицию этого элемента в поле StructArray, начиная с нуля. Один и тот же объект может появляться более одного раза, если запросу соответствует более одного элемента Struct. Значение « <code translate="no">limit</code> » применяется к найденным элементам, а не к уникальным родительским объектам.</p>
+<p>При поиске на уровне элементов каждый результат соответствует найденному элементу Struct. Значение « <code translate="no">offset</code> » представляет собой позицию этого элемента в поле StructArray, начиная с нуля. Один и тот же объект может появляться несколько раз, если запросу соответствует более одного элемента Struct. Значение « <code translate="no">limit</code> » применяется к найденным элементам, а не к уникальным родительским объектам.</p>
 <h2 id="Interpret-results" class="common-anchor-header">Интерпретация результатов<button data-href="#Interpret-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -195,13 +195,13 @@ results = client.search(
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Элемент результата</th><th>Поиск по списку вложений</th><th>Поиск на уровне элементов</th></tr>
+<tr><th>Элемент результата</th><th>Поиск по списку вложений (EmbeddingList)</th><th>Поиск на уровне элементов</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">id</code></td><td>Первичный ключ найденного объекта.</td><td>Первичный ключ сущности, содержащей найденный элемент Struct.</td></tr>
 <tr><td><code translate="no">distance</code> или оценка</td><td>Оценка или расстояние между списком вложений запроса и сохраненным списком вложений.</td><td>Оценка или расстояние между вектором запроса и вектором найденного элемента Struct.</td></tr>
-<tr><td><code translate="no">offset</code></td><td>Не применимо.</td><td>Позиция сопоставленного элемента Struct с нулевым индексом при возвращении.</td></tr>
-<tr><td>Повторяющиеся первичные ключи</td><td>Не ожидается для отдельного запроса, поскольку результаты предоставляются на уровне сущности.</td><td>Возможно, так как в одной сущности могут совпадать несколько элементов Struct.</td></tr>
+<tr><td><code translate="no">offset</code></td><td>Не применимо.</td><td>Позиция соревновательного элемента Struct с нулевым индексом при возвращении.</td></tr>
+<tr><td>Повторяющиеся первичные ключи</td><td>Не ожидается для отдельного запроса, поскольку результаты предоставляются на уровне сущности.</td><td>Возможно, поскольку могут совпадать несколько элементов Struct в одной сущности.</td></tr>
 <tr><td>Запрашиваемые поля вывода StructArray</td><td>Возвращаются из найденной сущности.</td><td>Возвращаются с формой совпадения на уровне элементов, поддерживаемой целевым API и SDK.</td></tr>
 </tbody>
 </table>
@@ -246,7 +246,7 @@ results = client.search(
     </button></h2><ol>
 <li><p>Чтобы ограничить поиск на уровне элементов с помощью скалярных условий, ознакомьтесь с разделом <a href="/docs/ru/filtered-search-with-structarray.md">«Фильтрованный поиск с использованием StructArray</a>».</p></li>
 <li><p>Чтобы выполнить поиск по границам оценки или расстояния, ознакомьтесь с разделом <a href="/docs/ru/range-search-with-structarray.md">«Поиск по диапазону с использованием StructArray</a>».</p></li>
-<li><p>Чтобы после поиска на уровне элементов возвращалось не более одного результата на родительский объект, ознакомьтесь с разделом <a href="/docs/ru/grouping-search-with-structarray.md">«Групповой поиск с использованием StructArray</a>».</p></li>
+<li><p>Чтобы после поиска на уровне элементов возвращался не более одного результата на родительский объект, ознакомьтесь с разделом <a href="/docs/ru/grouping-search-with-structarray.md">«Групповой поиск с использованием StructArray</a>».</p></li>
 <li><p>Чтобы объединить поиск с использованием StructArray с другими векторными поисками, ознакомьтесь с разделом <a href="/docs/ru/hybrid-search-with-structarray.md">«Гибридный поиск с использованием StructArray</a>».</p></li>
 <li><p>Чтобы ознакомиться с поддерживаемыми типами данных, метриками, фильтрами и ограничениями для конкретных версий, ознакомьтесь с разделом <a href="/docs/ru/structarray-limits.md">«Ограничения StructArray</a>».</p></li>
 </ol>

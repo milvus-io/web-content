@@ -1,6 +1,6 @@
 ---
 id: upgrade_milvus_cluster-docker.md
-summary: 瞭解如何使用 Docker Compose 升級 Milvus 叢集。
+summary: 了解如何使用 Docker Compose 升級 Milvus 叢集。
 title: 使用 Docker Compose 升級 Milvus 叢集
 ---
 <div class="tab-wrapper"><a href="/docs/zh-hant/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/zh-hant/v2.6.x/upgrade_milvus_cluster-operator.md" class=''>OperatorMilvus</a><a href="/docs/zh-hant/v2.6.x/configure_operator.md" class=''>OperatorMilvus</a><a href="/docs/zh-hant/v2.6.x/configure-docker.md" class=''>OperatorHelmDocker</a><a href="/docs/zh-hant/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>ComposeHelmDocker</a><a href="/docs/zh-hant/v2.6.x/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>
@@ -100,7 +100,7 @@ docker compose up -d
 <li><p>停止所有 Milvus 元件。</p>
 <pre><code translate="no">docker stop <span class="hljs-tag">&lt;<span class="hljs-name">milvus-component-docker-container-name</span>&gt;</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>為元資料遷移準備配置檔案<code translate="no">migrate.yaml</code> 。</p>
+<li><p>為元資料遷移準備設定檔<code translate="no">migrate.yaml</code> 。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># migration.yaml</span>
 <span class="hljs-attr">cmd:</span>
   <span class="hljs-comment"># Option: run/backup/rollback</span>
@@ -124,7 +124,7 @@ docker compose up -d
 <span class="hljs-comment"># and you put migration.yaml in the same directory with docker-compose.yaml.</span>
 docker run --<span class="hljs-built_in">rm</span> -it --network milvus -v $(<span class="hljs-built_in">pwd</span>)/migration.yaml:/milvus/configs/migration.yaml milvus/meta-migration:v2.2.0 /milvus/bin/meta-migration -config=/milvus/configs/migration.yaml
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>使用新的 Milvus 映像重新啟動 Milvus 元件。</p>
+<li><p>使用新的 Milvus 映像檔重新啟動 Milvus 元件。</p>
 <pre><code translate="no">Update the milvus <span class="hljs-selector-tag">image</span> tag in the docker-compose<span class="hljs-selector-class">.yaml</span>
 docker compose down
 docker compose up -d

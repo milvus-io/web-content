@@ -91,7 +91,7 @@ To change the default Milvus configuration, edit user.yaml and restart the servi
 <p>Após executar o script de instalação:​</p>
 <ul>
 <li><p>Foi iniciado um contentor Docker denominado <strong>milvus-standalone</strong> na porta <strong>19530</strong>.​</p></li>
-<li><p>Um embed etcd é instalado juntamente com o Milvus no mesmo contentor e está disponível na porta <strong>2379</strong>. O seu ficheiro de configuração está mapeado para <strong>embedEtcd.yaml</strong> na pasta atual.​</p></li>
+<li><p>Um etcd incorporado está instalado juntamente com o Milvus no mesmo contentor e funciona na porta <strong>2379</strong>. O seu ficheiro de configuração está mapeado para <strong>embedEtcd.yaml</strong> na pasta atual.​</p></li>
 <li><p>O volume de dados do Milvus está mapeado para <strong>volumes/milvus</strong> na pasta atual.​</p></li>
 </ul>
 <p>Pode utilizar os seguintes comandos para gerir o contentor do Milvus e os dados armazenados.​</p>
@@ -121,7 +121,7 @@ Delete successfully. # Data has been removed.​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Se preferir iniciar o Milvus utilizando comandos Linux e scripts de shell no Windows, certifique-se de que já instalou o WSL 2. Para obter detalhes sobre como instalar o WSL 2, pode consultar este <a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">artigo da Microsoft</a>.​</p>
+    </button></h3><p>Se preferir iniciar o Milvus utilizando comandos Linux e scripts de shell no Windows, certifique-se de que já tem o WSL 2 instalado. Para obter detalhes sobre como instalar o WSL 2, pode consultar este <a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">artigo da Microsoft</a>.​</p>
 <ol>
 <li><p>Inicie o WSL 2.​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --install​
@@ -171,7 +171,7 @@ Delete successfully.​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de instalar o Docker Desktop no Microsoft Windows, pode aceder à CLI do Docker a partir do PowerShell ou do Prompt de Comando do Windows no modo <strong>de administrador</strong>. Pode executar o Docker Compose no PowerShell, no Prompt de Comando do Windows ou no WSL 2 para iniciar o Milvus.​</p>
+    </button></h2><p>Depois de instalar o Docker Desktop no Microsoft Windows, pode aceder à CLI do Docker a partir do PowerShell ou do Prompt de Comando do Windows em modo <strong>de administrador</strong>. Pode executar o Docker Compose no PowerShell, no Prompt de Comando do Windows ou no WSL 2 para iniciar o Milvus.​</p>
 <h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">A partir do PowerShell ou do Prompt de Comando do Windows​<button data-href="#From-PowerShell-or-Windows-Command-Prompt​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -188,7 +188,7 @@ Delete successfully.​
         ></path>
       </svg>
     </button></h3><ol>
-<li><p>Abra o Docker Desktop no modo de administrador clicando com o botão direito do rato e selecionando <strong>«Executar como administrador</strong>».​</p></li>
+<li><p>Abra o Docker Desktop no modo de administrador, clicando com o botão direito do rato e selecionando <strong>«Executar como administrador</strong>».​</p></li>
 <li><p>Execute os seguintes comandos no PowerShell ou no Prompt de Comando do Windows para descarregar o ficheiro de configuração do Docker Compose para o Milvus Standalone e iniciar o Milvus.​</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
 C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
@@ -308,7 +308,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 
 </code></pre></li>
 <li><p>Verifique se iniciou o Docker Desktop no modo <strong>de administrador</strong>.​</p>
-<p>Certifique-se de que iniciou o Docker Desktop no modo de administrador. Para tal, clique com o botão direito do rato no <strong>Docker Desktop</strong> e selecione <strong>«Executar como administrador</strong>».​</p>
+<p>Certifique-se de que iniciou o Docker Desktop no modo de administrador. Para tal, clique com o botão direito do rato no ícone <strong>do Docker Desktop</strong> e selecione <strong>«Executar como administrador</strong>».​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/docker-desktop.png" alt="Start Docker Desktop as Administrator" class="doc-image" id="start-docker-desktop-as-administrator" /> 

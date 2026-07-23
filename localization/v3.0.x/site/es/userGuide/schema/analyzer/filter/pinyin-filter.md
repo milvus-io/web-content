@@ -46,7 +46,7 @@ beta: Milvus 3.0.x
 }
 <button class="copy-code-btn"></button></code></pre>
 <p>Esta configuración abreviada conserva los tokens chinos originales y genera tokens pinyin a nivel de carácter. No genera pinyin unido ni iniciales pinyin a menos que se habiliten esas opciones explícitamente.</p>
-<p>Para un control total, especifica el filtro como un objeto y configura los formatos de los tokens de pinyin que genera Milvus.</p>
+<p>Para un control total, especifica el filtro como un objeto y configura los formatos de tokens de pinyin que genera Milvus.</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
 <span class="highlighted-comment-line">    <span class="hljs-string">&quot;filter&quot;</span>: [</span>
@@ -95,7 +95,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 
 sample_text = <span class="hljs-string">&quot;中文测试&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Match-Chinese-text-with-character-level-Pinyin" class="common-anchor-header">Hacer coincidir texto en chino con pinyin a nivel de carácter<button data-href="#Match-Chinese-text-with-character-level-Pinyin" class="anchor-icon" translate="no">
+<h3 id="Match-Chinese-text-with-character-level-Pinyin" class="common-anchor-header">Hacer coincidir texto en chino con tokens de pinyin a nivel de carácter<button data-href="#Match-Chinese-text-with-character-level-Pinyin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

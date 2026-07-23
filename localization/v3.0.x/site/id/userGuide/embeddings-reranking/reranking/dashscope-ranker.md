@@ -21,8 +21,8 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>DashScope Ranker memungkinkan Milvus memanggil model penataan ulang peringkat DashScope dari Alibaba Cloud untuk menyusun ulang hasil pencarian berdasarkan relevansi semantik.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Prasyarat<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h1><p>DashScope Ranker memungkinkan Milvus memanggil model pengurutan ulang DashScope dari Alibaba Cloud untuk menyusun ulang hasil pencarian berdasarkan relevansi semantik.</p>
+<h2 id="Prerequisites" class="common-anchor-header">Persyaratan<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -108,7 +108,7 @@ beta: Milvus 2.6.x
 <table>
    <tr>
      <th><p>Variabel</p></th>
-     <th><p>Wajib?</p></th>
+     <th><p>Diperlukan?</p></th>
      <th><p>Deskripsi</p></th>
    </tr>
    <tr>
@@ -132,7 +132,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk menggunakan DashScope Ranker, buat objek Function yang menentukan model penentuan peringkat ulang DashScope dan teks kueri. Gunakan <code translate="no">provider: &quot;ali&quot;</code> untuk penentuan peringkat ulang DashScope.</p>
+    </button></h2><p>Untuk menggunakan DashScope Ranker, buat objek Function yang menentukan model pengurutan ulang DashScope dan teks kueri. Gunakan <code translate="no">provider: &quot;ali&quot;</code> untuk pengurutan ulang DashScope.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 dashscope_ranker = Function(
@@ -209,7 +209,7 @@ dashscope_ranker = Function(
    </tr>
 </table>
 <div class="alert note">
-<p>Untuk parameter umum yang digunakan bersama oleh semua pemeringkat model, seperti <code translate="no">provider</code> dan <code translate="no">queries</code>, lihat <a href="/docs/id/model-ranker-overview.md#Create-a-model-ranker">Membuat pemeringkat model</a>.</p>
+<p>Untuk parameter umum yang digunakan bersama di semua pemeringkat model, seperti <code translate="no">provider</code> dan <code translate="no">queries</code>, lihat <a href="/docs/id/model-ranker-overview.md#Create-a-model-ranker">Membuat pemeringkat model</a>.</p>
 </div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Terapkan ke pencarian vektor standar<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"

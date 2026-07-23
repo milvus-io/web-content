@@ -36,9 +36,9 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>태국어 텍스트의 경우, 대부분의 경우 내장된 <a href="/docs/ko/thai-analyzer.md"><code translate="no">thai</code></a> 분석기를 사용하십시오. 내장 분석기에는 이 토큰화기와 함께 소문자 변환, 소수점 숫자 정규화, 태국어 스톱워드 제거 기능이 포함되어 있습니다. 사용자 정의 분석기 파이프라인을 구축해야 할 때에만 <code translate="no">thai</code> 토큰화기를 직접 사용하십시오.</p>
+<p>태국어 텍스트의 경우, 대부분의 경우 내장된 <a href="/docs/ko/thai-analyzer.md"><code translate="no">thai</code></a> 분석기를 사용하십시오. 내장 분석기에는 이 토큰화기와 함께 소문자 변환, 소수점 숫자 정규화, 태국어 스톱워드 제거 기능이 포함되어 있습니다. 사용자 정의 분석기 파이프라인을 구축해야 하는 경우에만 <code translate="no">thai</code> 토큰화기를 직접 사용하십시오.</p>
 </div>
-<p><code translate="no">thai</code> 토큰화기를 사용하여 분석기를 구성하려면, <code translate="no">analyzer_params</code> 에서 <code translate="no">tokenizer</code> 를 <code translate="no">thai</code> 로 설정하십시오.</p>
+<p><code translate="no">thai</code> 토큰화기를 사용하여 분석기를 구성하려면, <code translate="no">analyzer_params</code> 에서 ` <code translate="no">tokenizer</code> `을 ` <code translate="no">thai</code> `으로 설정하십시오.</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;thai&quot;</span>,
 }
@@ -57,9 +57,9 @@ beta: Milvus 3.0.0+
 <p>이 토큰화기는 다음과 같은 동작을 적용합니다:</p>
 <ul>
 <li><strong>태국어 분절</strong>: 공백에 의존하지 않고 태국어 텍스트를 단어 토큰으로 분절합니다.</li>
-<li><strong>공백 및 구두점 필터링</strong>: 공백과 구두점만으로 구성된 세그먼트를 필터링하여 제거합니다. 이는 <a href="/docs/ko/icu-tokenizer.md"><code translate="no">icu</code></a> 구분자와는 다릅니다. 해당 구분자는 구두점과 공백을 토큰으로 보존할 수 있습니다.</li>
+<li><strong>공백 및 구두점 필터링</strong>: 공백과 구두점만으로 구성된 세그먼트를 필터링하여 제거합니다. 이는 <a href="/docs/ko/icu-tokenizer.md"><code translate="no">icu</code></a> 구문 분석기와는 다릅니다. 해당 구문 분석기는 구두점과 공백을 토큰으로 보존할 수 있습니다.</li>
 <li><strong>혼합 문자 텍스트</strong>: 태국어와 영어가 혼합된 텍스트에서 라틴 문자 단어 토큰을 출력합니다.</li>
-<li><strong>토큰화기 전용</strong>: 토큰을 소문자로 변환하지 않으며, 유니코드 숫자를 정규화하지 않고, 스톱 워드를 제거하지 않습니다. 해당 단계에 필터를 추가하거나 내장된 <a href="/docs/ko/thai-analyzer.md"><code translate="no">thai</code></a> 분석기를 사용하십시오.</li>
+<li><strong>토큰화기 전용</strong>: 토큰을 소문자로 변환하지 않으며, 유니코드 숫자를 정규화하지 않고, 스톱워드를 제거하지 않습니다. 해당 단계에 필터를 추가하거나 내장된 <a href="/docs/ko/thai-analyzer.md"><code translate="no">thai</code></a> 분석기를 사용하십시오.</li>
 <li><strong>위치 의미론</strong>: 건너뛴 공백 및 구두점을 포함하는 문자 기반 토큰 위치를 사용하므로, 구문 및 근접성 매칭 동작이 다른 비라틴 문자 토큰화기와 일관성을 유지합니다.</li>
 </ul>
 <p><code translate="no">analyzer_params</code> 를 정의한 후, 컬렉션 스키마를 정의할 때 <code translate="no">VARCHAR</code> 필드에 분석기를 적용할 수 있습니다. 자세한 내용은 <a href="/docs/ko/analyzer-overview.md#Example-use">사용 예제를</a> 참조하십시오.</p>

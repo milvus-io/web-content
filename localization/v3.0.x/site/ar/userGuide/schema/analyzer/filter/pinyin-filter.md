@@ -2,8 +2,8 @@
 id: pinyin-filter.md
 title: البينيينCompatible with Milvus 3.0.x
 summary: >-
-  يقوم مرشح «البينين» بتحويل الرموز الخاصة بالأحرف الصينية إلى رموز «البينين»
-  أثناء تحليل النص، مما يتيح إجراء المطابقة استنادًا إلى «البينين» للنصوص
+  يقوم مرشح «البينيين» بتحويل الرموز الخاصة بالأحرف الصينية إلى رموز «البينيين»
+  أثناء تحليل النص، مما يتيح إجراء المطابقة استنادًا إلى «البينيين» للنصوص
   الصينية.
 beta: Milvus 3.0.x
 ---
@@ -22,7 +22,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>غالبًا ما يتطلب البحث عن النص الصيني من المستخدمين إدخال الأحرف الصينية تمامًا كما تظهر في النص المفهرس. في عمليات البحث عن الأسماء، والإكمال التلقائي، والبحث أثناء الكتابة، غالبًا ما يكتب المستخدمون بينيين بدلاً من الأحرف الصينية. على سبيل المثال، قد يكتب المستخدم « <code translate="no">zuqiu</code> » للبحث عن « <code translate="no">足球</code> ». يضيف مرشح « <code translate="no">pinyin</code> » رموز بينيين إلى ناتج المحلل بحيث يمكن للنص الصيني مطابقة الإدخال بالبينيين دون الحاجة إلى الاحتفاظ بحقل منفصل للبينيين.</p>
+    </button></h1><p>غالبًا ما يتطلب البحث عن النص الصيني من المستخدمين إدخال الأحرف الصينية تمامًا كما تظهر في النص المفهرس. في عمليات البحث عن الأسماء، والإكمال التلقائي، والبحث أثناء الكتابة، غالبًا ما يكتب المستخدمون بينيين بدلاً من الأحرف الصينية. على سبيل المثال، قد يكتب المستخدم « <code translate="no">zuqiu</code> » للبحث عن « <code translate="no">足球</code> ». يضيف مرشح « <code translate="no">pinyin</code> » رموز بينيين إلى ناتج المحلل بحيث يمكن للنص الصيني مطابقة الإدخال بالبينيين دون الحاجة إلى حقل منفصل للبينيين.</p>
 <p>يُستخدم مرشح <code translate="no">pinyin</code> عادةً مع أداة تجزئة <a href="/docs/ar/jieba-tokenizer.md">Jieba</a> للنص الصيني. وهو يعمل في مسار مرشحات محلل مخصص ويمكنه إصدار أشكال متعددة من رموز بينيين لنفس الرمز الصيني.</p>
 <h2 id="Configuration" class="common-anchor-header">التكوين<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,14 +39,14 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لاستخدام الخيارات الافتراضية، حدد <code translate="no">&quot;pinyin&quot;</code> في قسم <code translate="no">filter</code> في <code translate="no">analyzer_params</code>.</p>
+    </button></h2><p>لاستخدام الخيارات الافتراضية، حدد « <code translate="no">&quot;pinyin&quot;</code> » في قسم « <code translate="no">filter</code> » في « <code translate="no">analyzer_params</code> ».</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
 <span class="highlighted-wrapper-line">    <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;pinyin&quot;</span>],</span>
 }
 <button class="copy-code-btn"></button></code></pre>
 <p>يحتفظ هذا الاختصار بالرموز الصينية الأصلية ويُنتج رموز بينيين على مستوى الحرف. ولا يُنتج بينيين مركبًا أو أحرف بينيين الأولى ما لم تقم بتمكين هذه الخيارات صراحةً.</p>
-<p>للتحكم الكامل، حدد المرشح ككائن وقم بتكوين أشكال رموز بينيين التي يصدرها Milvus.</p>
+<p>للتحكم الكامل، حدد المرشح ككائن وقم بتكوين أشكال رموز بينيين التي ينتجها Milvus.</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
 <span class="highlighted-comment-line">    <span class="hljs-string">&quot;filter&quot;</span>: [</span>
@@ -72,7 +72,7 @@ beta: Milvus 3.0.x
 <tr><td><code translate="no">keep_separate_first_letter</code></td><td>منطقية</td><td><code translate="no">false</code></td><td>يُخرج رمزًا من الأحرف الأولى بالبينيين لكل رمز مصدر. على سبيل المثال، يُنتج <code translate="no">中文</code> <code translate="no">zw</code> .</td></tr>
 </tbody>
 </table>
-<p>يعمل المرشح على الرموز التي ينتجها مُجزئ الرموز. بالنسبة للنص الصيني، استخدمه مع مُجزئ رموز مثل <code translate="no">jieba</code>.</p>
+<p>يعمل المرشح على الرموز التي ينتجها أداة تحليل الرموز. بالنسبة للنص الصيني، استخدمه مع أداة تحليل رموز مثل <code translate="no">jieba</code>.</p>
 <h2 id="Examples" class="common-anchor-header">أمثلة<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

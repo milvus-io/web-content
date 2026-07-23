@@ -93,7 +93,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
   --<span class="hljs-built_in">wait</span> --wait-for-jobs \
   https://github.com/zilliztech/milvus-operator/releases/download/v1.3.0/milvus-operator-1.3.0.tgz</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>インストール処理が終了すると、次のような出力が表示されます。</p>
+<p>インストール処理が完了すると、次のような出力が表示されます。</p>
 <pre><code translate="no" class="language-shell">NAME: milvus-operator
 LAST DEPLOYED: Thu Jul  7 13:18:40 2022
 NAMESPACE: milvus-operator
@@ -119,7 +119,7 @@ CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/
 <p><code translate="no">kubectl</code> を使用してMilvus Operatorをインストールするには、次のコマンドを実行してください。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/deploy/manifests/deployment.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>インストール処理が完了すると、次のような出力が表示されます。</p>
+<p>インストール処理が終了すると、次のような出力が表示されます。</p>
 <pre><code translate="no" class="language-shell">namespace/milvus-operator created
 customresourcedefinition.apiextensions.k8s.io/milvusclusters.milvus.io created
 serviceaccount/milvus-operator-controller-manager created
@@ -135,7 +135,7 @@ service/milvus-operator-controller-manager-metrics-service created
 service/milvus-operator-webhook-service created
 deployment.apps/milvus-operator-controller-manager created
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus OperatorのPodが実行中かどうかは、次のように確認できます：</p>
+<p>Milvus OperatorのPodが実行中かどうかは、次のように確認できます:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods -n milvus-operator</span>
 
 NAME                               READY   STATUS    RESTARTS   AGE
@@ -186,7 +186,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 <div class="alert note">
 <ul>
 <li>リリース名には、英字、数字、ハイフンのみを含めることができます。リリース名にドットを使用することはできません。</li>
-<li>また、すべてのコンポーネントが単一のポッド内に収まるスタンドアロンモードでMilvusインスタンスをデプロイすることも可能です。その場合は、上記のコマンド内の設定ファイルのURLを次のように変更してください。<code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
+<li>Milvusインスタンスをスタンドアロンモードでデプロイすることも可能です。このモードでは、すべてのコンポーネントが単一のポッド内に収められます。これを行うには、上記のコマンド内の設定ファイルのURLを次のように変更してください。<code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
 </ul>
 </div>
 <h3 id="2-Check-Milvus-cluster-status" class="common-anchor-header">2. Milvusクラスタの状態を確認する<button data-href="#2-Check-Milvus-cluster-status" class="anchor-icon" translate="no">
@@ -276,14 +276,14 @@ my-release-minio-3                               1/1     Running   0          2m
 <button class="copy-code-btn"></button></code></pre>
 <p>出力結果から、Milvus インスタンスがデフォルトのポート<strong>19530</strong> でサービスを提供していることがわかります。</p>
 <div class="alert note">
-<p>Milvusをスタンドアロンモードでデプロイした場合は、pod名を<code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> から<code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code> に変更してください。</p>
+<p>Milvusをスタンドアロンモードでデプロイした場合は、Pod名を `<code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> ` から `<code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code>` に変更してください。</p>
 </div>
 <p>次に、以下のコマンドを実行して、ローカルポートを Milvus がサービスを提供しているポートに転送します。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward service/my-release-milvus 27017:19530</span>
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>オプションとして、上記のコマンドで `<code translate="no">27017:19530</code> ` の代わりに `<code translate="no">:19530</code> ` を使用すると、<code translate="no">kubectl</code> がローカルポートを自動的に割り当ててくれるため、ポートの競合を管理する必要がなくなります。</p>
-<p>デフォルトでは、kubectl のポート転送は<code translate="no">localhost</code> でのみリスニングします。Milvus に選択した IP アドレスまたはすべての IP アドレスでリスニングさせたい場合は、<code translate="no">address</code> フラグを使用してください。次のコマンドを実行すると、ポート転送がホストマシンのすべての IP アドレスでリスニングするようになります。</p>
+<p>デフォルトでは、kubectl のポートフォワーディングは<code translate="no">localhost</code> でのみリスニングします。Milvus に選択した IP アドレスまたはすべての IP アドレスでリスニングさせたい場合は、<code translate="no">address</code> フラグを使用してください。次のコマンドを実行すると、ポートフォワーディングがホストマシンのすべての IP アドレスでリスニングするようになります。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
@@ -358,7 +358,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>デフォルトの設定で Milvus クラスタを削除した場合、etcd、Pulsar、MinIO などの依存関係は削除されません。そのため、次回同じ Milvus クラスタインスタンスをインストールする際には、これらの依存関係が再利用されます。</li>
+<li>デフォルトの設定で Milvus クラスタを削除する場合、etcd、Pulsar、MinIO などの依存関係は削除されません。そのため、次回同じ Milvus クラスタインスタンスをインストールする際には、これらの依存関係が再利用されます。</li>
 <li>Milvus クラスタとともに依存関係および永続ボリュームクレーム (PVC) を削除するには、<a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">設定ファイルを</a>参照してください。</li>
 </ul>
 </div>
@@ -409,7 +409,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li><a href="/docs/ja/v2.6.x/manage_databases.md">データベースの管理</a></li>
 <li><a href="/docs/ja/v2.6.x/manage-collections.md">コレクションの管理</a></li>
 <li><a href="/docs/ja/v2.6.x/manage-partitions.md">パーティションの管理</a></li>
-<li><a href="/docs/ja/v2.6.x/insert-update-delete.md">挿入、Upsert、削除</a></li>
+<li><a href="/docs/ja/v2.6.x/insert-update-delete.md">挿入、アップサート、削除</a></li>
 <li><a href="/docs/ja/v2.6.x/single-vector-search.md">単一ベクトル検索</a></li>
 <li><a href="/docs/ja/v2.6.x/multi-vector-search.md">ハイブリッド検索</a></li>
 </ul></li>

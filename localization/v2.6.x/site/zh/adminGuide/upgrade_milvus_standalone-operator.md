@@ -145,7 +145,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
     </button></h3><h4 id="21-Upgrade-to-v2516" class="common-anchor-header">2.1 升级至 v2.5.16</h4><div class="alert-note">
 <p>如果您的独立部署已运行 v2.5.16 或更高版本，请跳过此步骤。</p>
 </div>
-<p>创建配置文件 `<code translate="no">milvusupgrade.yaml</code> ` 以升级至 v2.5.16：</p>
+<p>创建配置文件<code translate="no">milvusupgrade.yaml</code> 以升级至v2.5.16：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

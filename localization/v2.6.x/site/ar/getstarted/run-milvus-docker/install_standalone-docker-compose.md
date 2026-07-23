@@ -3,9 +3,9 @@ id: install_standalone-docker-compose.md
 label: Docker Compose
 related_key: Docker Compose
 summary: تعرف على كيفية تثبيت Milvus بشكل مستقل باستخدام Docker Compose.
-title: تشغيل Milvus باستخدام Docker Compose (Linux)
+title: تشغيل Milvus باستخدام Docker Compose (لينكس)
 ---
-<h1 id="Run-Milvus-with-Docker-Compose-Linux" class="common-anchor-header">تشغيل Milvus باستخدام Docker Compose (Linux)<button data-href="#Run-Milvus-with-Docker-Compose-Linux" class="anchor-icon" translate="no">
+<h1 id="Run-Milvus-with-Docker-Compose-Linux" class="common-anchor-header">تشغيل Milvus باستخدام Docker Compose (لينكس)<button data-href="#Run-Milvus-with-Docker-Compose-Linux" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -71,7 +71,7 @@ Creating milvus-standalone ... done
 <ul>
 <li><strong>بنية محسّنة</strong>: تتضمن عقدة البث الجديدة والمكونات المُحسّنة</li>
 <li><strong>التبعيات المحدثة</strong>: تتضمن أحدث إصدارات MinIO و etcd</li>
-<li><strong>تكوين محسّن</strong>: إعدادات مُحسّنة لأداء أفضل</li>
+<li><strong>تحسينات في التكوين</strong>: إعدادات مُحسّنة لتحقيق أداء أفضل</li>
 </ul>
 <p>قم دائمًا بتنزيل أحدث تكوين لـ Docker Compose لضمان التوافق مع ميزات الإصدار v2.6.17.</p>
 <ul>
@@ -169,7 +169,7 @@ EOF
       </svg>
     </button></h2><p>بعد تثبيت Milvus في Docker، يمكنك:</p>
 <ul>
-<li><p>الاطلاع على <a href="/docs/ar/v2.6.x/quickstart.md">«البدء السريع»</a> لمعرفة ما يمكن لـ Milvus القيام به.</p></li>
+<li><p>الاطلاع على <a href="/docs/ar/v2.6.x/quickstart.md">دليل البدء السريع</a> لمعرفة ما يمكن لـ Milvus القيام به.</p></li>
 <li><p>تعلم العمليات الأساسية لـ Milvus:</p>
 <ul>
 <li><a href="/docs/ar/v2.6.x/manage_databases.md">إدارة قواعد البيانات</a></li>

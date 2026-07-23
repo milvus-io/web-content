@@ -39,7 +39,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تستخدم هذه الصفحة مجموعة تُسمى « <code translate="no">tech_articles</code> ». يمثل كل كيان مقالًا تقنيًا واحدًا، ويخزن حقل « <code translate="no">chunks</code> » البيانات على مستوى المقطع كعناصر Struct.</p>
+    </button></h2><p>تستخدم هذه الصفحة مجموعة باسم « <code translate="no">tech_articles</code> ». يمثل كل كيان مقالًا تقنيًا واحدًا، ويخزن حقل « <code translate="no">chunks</code> » البيانات على مستوى المقطع كعناصر Struct.</p>
 <table>
 <thead>
 <tr><th>الحقل</th><th>النوع</th><th>الغرض</th></tr>
@@ -48,7 +48,7 @@ summary: >-
 <tr><td><code translate="no">doc_id</code></td><td><code translate="no">INT64</code></td><td>المفتاح الأساسي للمقالة.</td></tr>
 <tr><td><code translate="no">title</code></td><td><code translate="no">VARCHAR</code></td><td>عنوان المقالة.</td></tr>
 <tr><td><code translate="no">category</code></td><td><code translate="no">VARCHAR</code></td><td>فئة على مستوى المقالة.</td></tr>
-<tr><td><code translate="no">title_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>حقل متجه على مستوى المقالة، يُستخدم لاحقًا في أمثلة البحث المختلط.</td></tr>
+<tr><td><code translate="no">title_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>حقل متجه على مستوى المقالة، يُستخدم لاحقًا في أمثلة البحث الهجين.</td></tr>
 <tr><td><code translate="no">chunks</code></td><td><code translate="no">ARRAY</code></td><td>حقل StructArray الذي يخزن النص على مستوى المقطع، والبيانات الوصفية، والتضمينات.</td></tr>
 </tbody>
 </table>
@@ -61,14 +61,14 @@ summary: >-
 <tr><td><code translate="no">text</code></td><td><code translate="no">VARCHAR</code></td><td>نص المقطع.</td></tr>
 <tr><td><code translate="no">section</code></td><td><code translate="no">VARCHAR</code></td><td>اسم القسم، مثل <code translate="no">index</code> أو <code translate="no">search</code> أو <code translate="no">filter</code>.</td></tr>
 <tr><td><code translate="no">page</code></td><td><code translate="no">INT64</code></td><td>رقم الصفحة أو الموضع المنطقي للجزء.</td></tr>
-<tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>النتيجة على مستوى الجزء المستخدمة في التصفية القياسية وأمثلة النطاق.</td></tr>
+<tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>الدرجة على مستوى المقطع المستخدمة في التصفية القياسية وأمثلة النطاق.</td></tr>
 <tr><td><code translate="no">has_code</code></td><td><code translate="no">BOOL</code></td><td>ما إذا كانت المقطوعة تحتوي على كود أم لا.</td></tr>
-<tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>الحقل الفرعي المتجه للبحث في EmbeddingList باستخدام مقاييس <code translate="no">MAX_SIM*</code>.</td></tr>
+<tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>الحقل الفرعي للمتجه للبحث في EmbeddingList باستخدام مقاييس <code translate="no">MAX_SIM*</code>.</td></tr>
 <tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>حقل فرعي متجه للبحث على مستوى العنصر باستخدام مقاييس متجهة عادية.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
-<p>لا يقبل الحقل المتجه أو الحقل الفرعي المتجه سوى مؤشر واحد. إذا كنت بحاجة إلى كل من البحث في EmbeddingList والبحث على مستوى العنصر، فقم بتعريف حقلين فرعيين متجهين منفصلين. في هذا المثال، يُستخدم <code translate="no">chunks[emb_list_vector]</code> للبحث في EmbeddingList، ويُستخدم <code translate="no">chunks[emb]</code> للبحث على مستوى العنصر.</p>
+<p>لا يقبل الحقل المتجه أو الحقل الفرعي المتجه سوى فهرس واحد. إذا كنت بحاجة إلى كل من البحث في EmbeddingList والبحث على مستوى العنصر، فقم بتعريف حقلين فرعيين متجهين منفصلين. في هذا المثال، يُستخدم <code translate="no">chunks[emb_list_vector]</code> للبحث في EmbeddingList، بينما يُستخدم <code translate="no">chunks[emb]</code> للبحث على مستوى العنصر.</p>
 </div>
 <h2 id="Supported-subfield-data-types" class="common-anchor-header">أنواع بيانات الحقول الفرعية المدعومة<button data-href="#Supported-subfield-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -109,7 +109,7 @@ summary: >-
 <tr><td><code translate="no">Array</code> أو <code translate="no">ArrayOfVector</code> أو <code translate="no">Struct</code> أو <code translate="no">ArrayOfStruct</code></td><td>غير مدعوم</td><td>لا يمكن أن يحتوي حقل StructArray على مصفوفات متداخلة، أو مصفوفات متجهة متداخلة، أو حقول Struct متداخلة، أو حقول Array-of-Struct متداخلة.</td></tr>
 </tbody>
 </table>
-<p>للحصول على الدعم الخاص بالإصدار، وسلوك القيم التي يمكن أن تكون null، والقيود الأخرى، راجع <a href="/docs/ar/structarray-limits.md">قيود StructArray</a>.</p>
+<p>للحصول على معلومات حول الدعم الخاص بالإصدارات وسلوك القيم التي يمكن أن تكون null والقيود الأخرى، راجع " <a href="/docs/ar/structarray-limits.md">قيود StructArray</a>".</p>
 <h2 id="Create-a-collection-with-a-StructArray-field" class="common-anchor-header">إنشاء مجموعة تحتوي على حقل StructArray<button data-href="#Create-a-collection-with-a-StructArray-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -128,12 +128,12 @@ summary: >-
     </button></h2><p>لإنشاء حقل StructArray، قم أولاً بتعريف مخطط Struct الذي يستخدمه كل عنصر. ثم أضف حقل Array وقم بتعيين نوع العنصر الخاص به إلى Struct.</p>
 <ol>
 <li><p>قم بإنشاء مخطط المجموعة.</p></li>
-<li><p>أضف حقول على مستوى المجموعة، مثل المفتاح الأساسي وحقول مستوى المقالة.</p></li>
+<li><p>أضف حقول على مستوى المجموعة، مثل المفتاح الأساسي والحقول على مستوى المقالة.</p></li>
 <li><p>قم بإنشاء مخطط Struct للعناصر المخزنة داخل حقل StructArray.</p></li>
 <li><p>أضف حقول فرعية قياسية ومتجهة إلى مخطط Struct.</p></li>
 <li><p>أضف حقل Array باستخدام " <code translate="no">element_type=DataType.STRUCT</code>".</p></li>
 <li><p>تعيين " <code translate="no">struct_schema</code> " إلى مخطط Struct.</p></li>
-<li><p>تعيين " <code translate="no">max_capacity</code> " لتحديد عدد عناصر Struct التي يمكن لكل كيان تخزينها في الحقل.</p></li>
+<li><p>قم بتعيين " <code translate="no">max_capacity</code> " لتحديد عدد عناصر Struct التي يمكن لكل كيان تخزينها في الحقل.</p></li>
 </ol>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -244,9 +244,9 @@ client.create_collection(
 </thead>
 <tbody>
 <tr><td><code translate="no">chunks[text]</code></td><td>الحقل الفرعي <code translate="no">text</code> داخل كل عنصر Struct.</td><td>حقل الإخراج أو التصفية القياسية.</td></tr>
-<tr><td><code translate="no">chunks[section]</code></td><td>تسمية القسم لكل مقطع.</td><td>التصفية القياسية.</td></tr>
+<tr><td><code translate="no">chunks[section]</code></td><td>تسمية القسم لكل جزء.</td><td>التصفية القياسية.</td></tr>
 <tr><td><code translate="no">chunks[quality_score]</code></td><td>درجة الجودة على مستوى المقطع.</td><td>التصفية القياسية أو الفهرس القياسي.</td></tr>
-<tr><td><code translate="no">chunks[emb_list_vector]</code></td><td>الحقل الفرعي المتجه المستخدم كقائمة تضمين.</td><td>البحث في قائمة التضمين (EmbeddingList) باستخدام "التصفية العددية" ( <code translate="no">MAX_SIM*</code>).</td></tr>
+<tr><td><code translate="no">chunks[emb_list_vector]</code></td><td>الحقل الفرعي المتجه المستخدم كقائمة تضمين.</td><td>البحث في EmbeddingList باستخدام <code translate="no">MAX_SIM*</code>.</td></tr>
 <tr><td><code translate="no">chunks[emb]</code></td><td>الحقل الفرعي المتجه الذي يستخدمه كل عنصر من عناصر Struct بشكل مستقل.</td><td>البحث المتجهي على مستوى العنصر.</td></tr>
 </tbody>
 </table>
@@ -339,7 +339,7 @@ client.add_collection_struct_field(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>بعد إضافة حقل StructArray، تُرجع الكيانات الموجودة القيمة <code translate="no">null</code> للحقل الجديد عبر جميع حقوله الفرعية.</p>
-<p>بعد إنشاء حقل StructArray، لا يمكنك إضافة حقول فرعية جديدة إلى حقل StructArray الموجود. إذا احتجت إلى سمات عناصر إضافية لاحقًا، فاستدعِ <code translate="no">drop_collection_field()</code> لإزالة حقل StructArray، ثم أضف حقل StructArray جديدًا باستخدام مخطط Struct المحدث.</p>
+<p>بعد إنشاء حقل StructArray، لا يمكنك إضافة حقول فرعية جديدة إلى حقل StructArray الموجود. إذا احتجت إلى سمات عناصر إضافية لاحقًا، فاستدعِ <code translate="no">drop_collection_field()</code> لإسقاط حقل StructArray، ثم أضف حقل StructArray جديدًا باستخدام مخطط Struct المحدث.</p>
 <pre><code translate="no" class="language-python">client.drop_collection_field(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
     field_name=<span class="hljs-string">&quot;chunks&quot;</span>,
@@ -376,7 +376,7 @@ client.add_collection_struct_field(
 <tr><td>يُستخدم Struct كنوع عنصر Array.</td><td>قم بإنشاء حقل StructArray كحقل Array باستخدام <code translate="no">element_type=STRUCT</code>. لا تقم بإنشاء Struct كحقل تجميع من المستوى الأعلى.</td></tr>
 <tr><td>تشترك جميع العناصر في مخطط واحد.</td><td>يتبع كل عنصر Struct في حقل StructArray نفسه مخطط Struct المحدد لذلك الحقل.</td></tr>
 <tr><td><code translate="no">max_capacity</code> مطلوب.</td><td>وهو يحدد عدد عناصر Struct التي يمكن لكل كيان تخزينها في حقل StructArray.</td></tr>
-<tr><td>يُسمح فقط بأنواع الحقول الفرعية المدعومة.</td><td>استخدم أنواع الحقول الفرعية القياسية والمتجهة التي يدعمها StructArray. لا تقم بتعريف الحقول الفرعية من نوع JSON أو Geometry أو Text أو Timestamptz أو SparseFloatVector أو الحقول الفرعية المتداخلة من نوع Struct / Array.</td></tr>
+<tr><td>يُسمح فقط بأنواع الحقول الفرعية المدعومة.</td><td>استخدم أنواع الحقول الفرعية القياسية والمتجهة التي يدعمها StructArray. لا تقم بتعريف الحقول الفرعية من أنواع JSON أو Geometry أو Text أو Timestamptz أو SparseFloatVector أو الحقول الفرعية المتداخلة من نوع Struct / Array.</td></tr>
 <tr><td>تحتاج الحقول الفرعية المتجهة إلى فهارس قبل البحث.</td><td>قم بإنشاء فهارس على مسارات مثل <code translate="no">chunks[emb_list_vector]</code> أو <code translate="no">chunks[emb]</code> قبل تشغيل البحث المتجهي.</td></tr>
 <tr><td>يحتوي كل حقل فرعي متجه على فهرس واحد.</td><td>إذا كنت بحاجة إلى كل من البحث في EmbeddingList والبحث على مستوى العناصر، فأنشئ حقلين فرعيين متجهين منفصلين.</td></tr>
 <tr><td>الحقول الفرعية StructArray الموجودة ثابتة.</td><td>بعد إنشاء حقل StructArray، لا تتوقع إضافة المزيد من الحقول الفرعية إلى نفس حقل StructArray هذا.</td></tr>
@@ -402,7 +402,7 @@ client.add_collection_struct_field(
     </button></h2><ul>
 <li><p>إنشاء <code translate="no">DataType.STRUCT</code> كحقل تجميع من المستوى الأعلى بدلاً من استخدامه كنوع عنصر لحقل Array.</p></li>
 <li><p>نسيان تعيين <code translate="no">max_capacity</code> في حقل StructArray.</p></li>
-<li><p>تحديد أنواع حقول فرعية غير مدعومة، مثل JSON أو Geometry أو Text أو Timestamptz أو SparseFloatVector أو Array متداخلة أو Struct متداخلة أو Array-of-Struct.</p></li>
+<li><p>تحديد أنواع الحقول الفرعية غير المدعومة، مثل JSON أو Geometry أو Text أو Timestamptz أو SparseFloatVector أو Array المتداخلة أو Struct المتداخلة أو Array-of-Struct.</p></li>
 <li><p>استخدام <code translate="no">String</code> كنوع حقل فرعي. استخدم <code translate="no">VARCHAR</code> وقم بتعيين <code translate="no">max_length</code>.</p></li>
 <li><p>استخدام حقل فرعي متجه واحد لكل من البحث في EmbeddingList والبحث على مستوى العناصر.</p></li>
 <li><p>إضافة الحقول الفرعية المتجهة فقط وتجاهل الحقول الفرعية القياسية اللازمة للتصفية، مثل <code translate="no">section</code> أو <code translate="no">quality_score</code> أو <code translate="no">has_code</code>.</p></li>

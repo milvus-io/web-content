@@ -38,7 +38,7 @@ beta: Milvus 3.0.0+
     </button></h2><div class="alert note">
 <p>Untuk teks Arab, <a href="/docs/id/arabic-analyzer.md"><code translate="no">arabic</code></a> sudah menyertakan filter " <code translate="no">decimaldigit</code> ". Gunakan " <code translate="no">decimaldigit</code> " secara langsung saat Anda memerlukan normalisasi angka dalam pipa penganalisis kustom.</p>
 </div>
-<p>Untuk menggunakan filter ` <code translate="no">decimaldigit</code> ` dalam penganalisis kustom, tambahkan ke bagian ` <code translate="no">filter</code> ` di ` <code translate="no">analyzer_params</code>`:</p>
+<p>Untuk menggunakan filter " <code translate="no">decimaldigit</code> " dalam penganalisis kustom, tambahkan filter tersebut ke bagian " <code translate="no">filter</code> " di <code translate="no">analyzer_params</code>:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;decimaldigit&quot;</span>],

@@ -45,15 +45,15 @@ summary: >-
 <tr><th>Caminho do subcampo</th><th>Tipo</th><th>Finalidade do índice</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">chunks[emb_list_vector]</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Pesquisa na EmbeddingList com métricas de <code translate="no">MAX_SIM*</code>.</td></tr>
+<tr><td><code translate="no">chunks[emb_list_vector]</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Pesquisa na EmbeddingList com métricas de « <code translate="no">MAX_SIM*</code> ».</td></tr>
 <tr><td><code translate="no">chunks[emb]</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Pesquisa ao nível do elemento com métricas vetoriais normais.</td></tr>
 <tr><td><code translate="no">chunks[section]</code></td><td><code translate="no">VARCHAR</code></td><td>Filtragem categórica.</td></tr>
-<tr><td><code translate="no">chunks[quality_score]</code></td><td><code translate="no">FLOAT</code></td><td>Filtragem numérica e predicados do tipo «intervalo».</td></tr>
+<tr><td><code translate="no">chunks[quality_score]</code></td><td><code translate="no">FLOAT</code></td><td>Filtragem numérica e predicados do tipo intervalo.</td></tr>
 <tr><td><code translate="no">chunks[has_code]</code></td><td><code translate="no">BOOL</code></td><td>Filtragem booleana.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
-<p>Um campo vetorial ou subcampo vetorial aceita apenas um índice. Se precisar tanto da pesquisa EmbeddingList como da pesquisa ao nível do elemento, crie dois subcampos vetoriais separados e indexe-os separadamente. Nesta página, <code translate="no">chunks[emb_list_vector]</code> está indexado para a pesquisa EmbeddingList e <code translate="no">chunks[emb]</code> está indexado para a pesquisa ao nível do elemento.</p>
+<p>Um campo vetorial ou subcampo vetorial aceita apenas um índice. Se precisar tanto da pesquisa EmbeddingList como da pesquisa ao nível do elemento, crie dois subcampos vetoriais separados e indexe-os separadamente. Nesta página, « <code translate="no">chunks[emb_list_vector]</code> » está indexado para a pesquisa EmbeddingList e « <code translate="no">chunks[emb]</code> » está indexado para a pesquisa ao nível do elemento.</p>
 </div>
 <h2 id="Choose-indexes" class="common-anchor-header">Escolher índices<button data-href="#Choose-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -140,7 +140,7 @@ client.create_index(
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Aviso
-Não crie um índice « <code translate="no">MAX_SIM*</code> » e um índice com métrica vetorial normal no mesmo subcampo vetorial. Se forem necessários ambos os modos de pesquisa, escreva os vetores em dois subcampos vetoriais separados e crie um índice em cada subcampo.</p>
+Não crie um índice « <code translate="no">MAX_SIM*</code> » e um índice com métrica vetorial normal no mesmo subcampo vetorial. Se forem necessários ambos os modos de pesquisa, grave os vetores em dois subcampos vetoriais separados e crie um índice para cada subcampo.</p>
 </div>
 <h2 id="Create-scalar-indexes" class="common-anchor-header">Criar índices escalares<button data-href="#Create-scalar-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -157,7 +157,7 @@ Não crie um índice « <code translate="no">MAX_SIM*</code> » e um índice com
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Crie índices escalares nos subcampos escalares de StructArray quando os utilizar em filtros. Utilize a mesma sintaxe de caminho « <code translate="no">structArray[subfield]</code> ».</p>
+    </button></h2><p>Crie índices escalares nos subcampos escalares do StructArray quando os utilizar em filtros. Utilize a mesma sintaxe de caminho « <code translate="no">structArray[subfield]</code> ».</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
@@ -277,14 +277,14 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Após criar os índices, descreva os índices da coleção ou da lista para confirmar que os caminhos dos subcampos esperados estão indexados.</p>
+    </button></h2><p>Após criar os índices, descreva os índices da coleção ou da lista para confirmar se os caminhos dos subcampos esperados estão indexados.</p>
 <pre><code translate="no" class="language-python">indexes = client.list_indexes(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
 )
 
 <span class="hljs-built_in">print</span>(indexes)
 <button class="copy-code-btn"></button></code></pre>
-<p>Também pode descrever um índice específico se a versão do seu SDK disponibilizar APIs de descrição de índices.</p>
+<p>Também pode descrever um índice específico se a sua versão do SDK disponibilizar APIs de descrição de índices.</p>
 <pre><code translate="no" class="language-python">index = client.describe_index(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
     index_name=<span class="hljs-string">&quot;chunks_emb_cosine&quot;</span>,
@@ -313,7 +313,7 @@ client.create_index(
 </thead>
 <tbody>
 <tr><td>Utilize a sintaxe de caminho para índices de subcampos.</td><td><code translate="no">chunks[emb]</code> e o índice como « », e não como « <code translate="no">emb</code> » ou « <code translate="no">chunks.emb</code> ».</td></tr>
-<tr><td>Um subcampo vetorial aceita um índice.</td><td>Utilize subcampos vetoriais separados se necessitar de famílias de métricas diferentes.</td></tr>
+<tr><td>Um subcampo vetorial aceita um único índice.</td><td>Utilize subcampos vetoriais separados se necessitar de famílias de métricas diferentes.</td></tr>
 <tr><td>Utilize métricas do tipo « <code translate="no">MAX_SIM*</code> » para a pesquisa no EmbeddingList.</td><td>Os dados de consulta da EmbeddingList requerem um índice criado com uma métrica do tipo « <code translate="no">MAX_SIM*</code> ».</td></tr>
 <tr><td>Utilize métricas vetoriais normais para a pesquisa ao nível do elemento.</td><td>A pesquisa ao nível do elemento utiliza dados de consulta vetoriais regulares e métricas como « <code translate="no">COSINE</code> », « <code translate="no">IP</code> » ou « <code translate="no">L2</code> ».</td></tr>
 <tr><td>Indexe os subcampos escalares que aparecem nos filtros.</td><td>Utilize tipos de índice escalar suportados pelo seu destino.</td></tr>

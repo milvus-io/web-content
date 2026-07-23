@@ -39,7 +39,7 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Para el texto en tailandés, utiliza el analizador integrado <a href="/docs/es/thai-analyzer.md"><code translate="no">thai</code></a> en la mayoría de los casos. El analizador integrado incluye este tokenizador, además de la conversión a minúsculas, la normalización de dígitos decimales y la eliminación de palabras vacías en tailandés. Utiliza el tokenizador « <code translate="no">thai</code> » directamente solo cuando necesites crear una cadena de análisis personalizada.</p>
+<p>Para el texto tailandés, utiliza el analizador integrado <a href="/docs/es/thai-analyzer.md"><code translate="no">thai</code></a> . El analizador integrado incluye este tokenizador, además de la conversión a minúsculas, la normalización de dígitos decimales y la eliminación de palabras vacías en tailandés. Utiliza el tokenizador « <code translate="no">thai</code> » directamente solo cuando necesites crear un flujo de análisis personalizado.</p>
 </div>
 <p>Para configurar un analizador utilizando el tokenizador « <code translate="no">thai</code> », establezca « <code translate="no">tokenizer</code> » en « <code translate="no">thai</code> » en « <code translate="no">analyzer_params</code> ».</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -47,7 +47,7 @@ beta: Milvus 3.0.0+
 }
 <button class="copy-code-btn"></button></code></pre>
 <p>El tokenizador <code translate="no">thai</code> no tiene parámetros configurables.</p>
-<p>El tokenizador puede funcionar con uno o varios filtros. Por ejemplo, la siguiente configuración utiliza el tokenizador <code translate="no">thai</code> con el <a href="/docs/es/lowercase-filter.md"><code translate="no">lowercase</code></a> y <a href="/docs/es/decimaldigit-filter.md"><code translate="no">decimaldigit</code></a> :</p>
+<p>El tokenizador puede funcionar con uno o varios filtros. Por ejemplo, la siguiente configuración utiliza el tokenizador « <code translate="no">thai</code> » con el <a href="/docs/es/lowercase-filter.md"><code translate="no">lowercase</code></a> y <a href="/docs/es/decimaldigit-filter.md"><code translate="no">decimaldigit</code></a> :</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;thai&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [
@@ -65,7 +65,7 @@ beta: Milvus 3.0.0+
 <li><strong>Solo tokenizador</strong>: no convierte los tokens a minúsculas, no normaliza los dígitos Unicode ni elimina las palabras vacías. Añade filtros o utiliza el <a href="/docs/es/thai-analyzer.md"><code translate="no">thai</code></a> analizador integrado para esos pasos.</li>
 <li><strong>Semántica de posición</strong>: utiliza posiciones de tokens basadas en caracteres que incluyen los espacios en blanco y los signos de puntuación omitidos, lo que mantiene el comportamiento de coincidencia de frases y proximidad coherente con otros tokenizadores no latinos.</li>
 </ul>
-<p>Tras definir un analizad <code translate="no">analyzer_params</code>, puede aplicar el analizador a un campo <code translate="no">VARCHAR</code> al definir un esquema de colección. Para obtener más detalles, consulte <a href="/docs/es/analyzer-overview.md#Example-use">el ejemplo de uso</a>.</p>
+<p>Tras definir un analizad <code translate="no">analyzer_params</code>, puede aplicar el analizador a un campo de tipo « <code translate="no">VARCHAR</code> » al definir un esquema de colección. Para obtener más detalles, consulte el <a href="/docs/es/analyzer-overview.md#Example-use">ejemplo de uso</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Ejemplos<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

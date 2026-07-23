@@ -57,11 +57,11 @@ title: 使用 Helm Chart 升級 Milvus 叢集
     </button></h3><p>從 Milvus 2.5.x 升級至 2.6.17 涉及重大的架構變更：</p>
 <ul>
 <li><strong>協調器整合</strong>：舊版獨立的協調器（<code translate="no">dataCoord</code> 、<code translate="no">queryCoord</code> 、<code translate="no">indexCoord</code> ）已整合為單一<code translate="no">mixCoord</code></li>
-<li><strong>新元件</strong>：引入「串流節點」（Streaming Node）以強化資料處理能力</li>
+<li><strong>新元件</strong>：導入「串流節點」（Streaming Node）以強化資料處理能力</li>
 <li><strong>元件移除</strong>：已移除並整合<code translate="no">indexNode</code> </li>
 </ul>
 <p>此升級流程可確保順利遷移至新架構。有關架構變更的更多資訊，請參閱《<a href="/docs/zh-hant/v2.6.x/architecture_overview.md">Milvus 架構概覽</a>》。</p>
-<h3 id="Requirements" class="common-anchor-header">系統需求<button data-href="#Requirements" class="anchor-icon" translate="no">
+<h3 id="Requirements" class="common-anchor-header">需求<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -88,9 +88,9 @@ title: 使用 Helm Chart 升級 Milvus 叢集
 <li>若您目前正在運行 v2.6.0-rc1 且需要保留資料，請參閱<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">此社群指南</a>以獲取遷移協助。</li>
 <li>在升級至 v2.6.17 之前，您<strong>必須先</strong>升級至 v2.5.16 或更新版本，並啟用<code translate="no">mixCoordinator</code> 功能。</li>
 </ul>
-<p><strong>訊息佇列限制</strong>：升級至 Milvus v2.6.17 時，您必須維持當前的訊息佇列選擇。升級過程中不支援在不同的訊息佇列系統之間切換。未來版本將支援變更訊息佇列系統。</p>
+<p><strong>訊息佇列限制</strong>：升級至 Milvus v2.6.17 時，您必須維持當前的訊息佇列選項。升級過程中不支援在不同的訊息佇列系統之間切換。未來版本將支援變更訊息佇列系統。</p>
 <div class="alert note">
-自 Milvus Helm 圖表版本 4.2.21 起，我們已將 pulsar-v3.x 圖表納入依賴項。為確保向後相容性，請將您的 Helm 升級至 v3.14 或更新版本，並務必在每次使用 `<code translate="no">helm upgrade</code>` 時加入 `<code translate="no">--reset-then-reuse-values</code> ` 選項。
+自 Milvus Helm 圖表版本 4.2.21 起，我們已將 pulsar-v3.x 圖表納入依賴項。為確保向後相容性，請將您的 Helm 升級至 v3.14 或更新版本，並務必在每次使用 `<code translate="no">helm upgrade</code>` 時，加入 `<code translate="no">--reset-then-reuse-values</code> ` 選項。
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">升級流程<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -132,7 +132,7 @@ helm repo update zilliztech
 <p>若要檢查 Helm Chart 版本與 Milvus 版本的相容性：</p>
 <pre><code translate="no" class="language-bash">helm search repo zilliztech/milvus --versions
 <button class="copy-code-btn"></button></code></pre>
-<p>本指南假設您正在安裝最新版本。若需安裝特定版本，請據此指定<code translate="no">--version</code> 參數。</p>
+<p>本指南假設您將安裝最新版本。若需安裝特定版本，請據此指定<code translate="no">--version</code> 參數。</p>
 <h3 id="Step-2-Upgrade-to-v2516-with-mixCoordinator" class="common-anchor-header">步驟 2：使用 mixCoordinator 升級至 v2.5.16<button data-href="#Step-2-Upgrade-to-v2516-with-mixCoordinator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -189,7 +189,7 @@ kubectl get pods
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>當 v2.5.16 已成功在<code translate="no">mixCoordinator</code> 上運行後，請升級至 v2.6.17：</p>
+    </button></h3><p>當 v2.5.16 已成功運行並啟用<code translate="no">mixCoordinator</code> 後，請升級至 v2.6.17：</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.6.17&quot;</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \

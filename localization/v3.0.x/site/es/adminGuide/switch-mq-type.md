@@ -22,7 +22,7 @@ summary: >-
       </svg>
     </button></h1><p>Esta guía describe cómo cambiar la cola de mensajes (MQ) de una implementación existente de Milvus <strong>de Woodpecker a otra cola de mensajes</strong>, en línea y sin tiempo de inactividad.</p>
 <div class="alert warning">
-<p>Esta función está pendiente de lanzamiento y está sujeta a cambios. Ponte en contacto con el servicio de asistencia de Milvus si quieres probarla o tienes alguna duda.</p>
+<p>Esta función está pendiente de lanzamiento y está sujeta a cambios. Ponte en contacto con el servicio de asistencia de Milvus si deseas probarla o tienes alguna pregunta.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Requisitos previos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -80,7 +80,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ol>
-<li>Asegúrate de que la instancia de Milvus se esté ejecutando correctamente.</li>
+<li>Asegúrate de que la instancia de Milvus se está ejecutando correctamente.</li>
 <li>Confirma el tipo de MQ de origen y el tipo de MQ de destino.</li>
 <li>Aplica los ajustes de acceso de la cola de mensajes de destino a la configuración de Milvus <strong>sin</strong> modificar el valor de « <code translate="no">mqType</code> ».</li>
 <li>Activa el cambio llamando a la API «WAL alter» en MixCoord.</li>
@@ -111,7 +111,7 @@ summary: >-
 <tbody>
 <tr><td>RocksMQ</td><td>Woodpecker (local/MinIO)</td><td>Autónomo (Docker Compose)</td><td><strong>Compatible</strong></td></tr>
 <tr><td>Woodpecker (local/MinIO)</td><td>RocksMQ</td><td>Autónomo (Docker Compose)</td><td><strong>Compatible</strong></td></tr>
-<tr><td>Pulsar (integrado/externo)</td><td>Woodpecker (MinIO)</td><td>Clúster (Helm / Operador)</td><td><strong>Compatible</strong></td></tr>
+<tr><td>Pulsar (integrado/externo)</td><td>Woodpecker (MinIO)</td><td>Clúster (Helm / Operator)</td><td><strong>Compatible</strong></td></tr>
 <tr><td>Woodpecker (MinIO)</td><td>Pulsar (externo)</td><td>Clúster (Helm / Operator)</td><td><strong>Compatible</strong></td></tr>
 <tr><td>Kafka (integrado/externo)</td><td>Woodpecker (MinIO)</td><td>Clúster (Helm / Operador)</td><td><strong>Compatible</strong></td></tr>
 <tr><td>Woodpecker (MinIO)</td><td>Kafka (externo)</td><td>Clúster (Helm / Operator)</td><td><strong>Compatible</strong></td></tr>
@@ -119,5 +119,5 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Evita cambiar repetidamente de un tipo de MQ a otro. Si tienes que hacerlo, asegúrate de limpiar los datos relacionados antes de cada cambio; los datos residuales pueden provocar un comportamiento inesperado.</p>
+<p>Evita cambiar de tipo de MQ repetidamente. Si necesitas cambiar, asegúrate de limpiar los datos relacionados antes de cada cambio; los datos residuales pueden provocar un comportamiento inesperado.</p>
 </div>

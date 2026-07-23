@@ -23,7 +23,7 @@ summary: >-
     </button></h1><p>En esta página se describe cómo cambiar la cola de mensajes (MQ) de una implementación <strong>de Milvus Standalone (Docker Compose)</strong> entre <strong>RocksMQ</strong> y <strong>Woodpecker</strong> (backend local o MinIO), en ambas direcciones. Para conocer el flujo de trabajo general y los requisitos previos, consulta <a href="/docs/es/switch-mq-type.md">Cambiar el tipo de MQ</a>.</p>
 <div class="alert note">
 <ul>
-<li><strong>Requisito previo:</strong> la función «Cambiar MQ» está disponible en <strong>Milvus 3.0 y versiones posteriores</strong>. Actualiza tu instancia de Milvus a Milvus 3.0 o una versión posterior antes de empezar; la función no está disponible en versiones anteriores.</li>
+<li><strong>Requisito previo:</strong> la función «Cambiar MQ» está disponible en <strong>Milvus 3.0 y versiones posteriores</strong>. Actualiza tu instancia de Milvus a la versión 3.0 o posterior antes de comenzar; esta función no está disponible en versiones anteriores.</li>
 <li>El cambio de MQ requiere la implementación de Docker <strong>Compose</strong> (que habilita una fuente de configuración etcd). La implementación de Docker de un solo contenedor no admite el cambio.</li>
 </ul>
 </div>
@@ -42,7 +42,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Verify-the-Milvus-instance-is-running" class="common-anchor-header">Paso 1: Comprueba que la instancia de Milvus esté en funcionamiento<button data-href="#Step-1-Verify-the-Milvus-instance-is-running" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Verify-the-Milvus-instance-is-running" class="common-anchor-header">Paso 1: Comprueba que la instancia de Milvus se esté ejecutando<button data-href="#Step-1-Verify-the-Milvus-instance-is-running" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -153,7 +153,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Verify-the-Milvus-instance-is-running" class="common-anchor-header">Paso 1: Comprueba que la instancia de Milvus esté en ejecución<button data-href="#Step-1-Verify-the-Milvus-instance-is-running" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Verify-the-Milvus-instance-is-running" class="common-anchor-header">Paso 1: Comprueba que la instancia de Milvus se esté ejecutando<button data-href="#Step-1-Verify-the-Milvus-instance-is-running" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -226,7 +226,7 @@ summary: >-
       </svg>
     </button></h3><ul>
 <li><strong>Metadatos (etcd):</strong> el prefijo de la clave de Woodpecker suele ser <code translate="no">woodpecker/...</code>. Consúltalo con <code translate="no">etcdctl get woodpecker --prefix</code> y, a continuación, elimínalo.</li>
-<li><strong>Datos de almacenamiento:</strong> en <strong>modo MinIO</strong>, elimine los datos de registro que se encuentran en <code translate="no">&lt;rootPath&gt;/wp/...</code> (normalmente <code translate="no">files/wp/...</code>) dentro del bucket; en <strong>modo local</strong>, los datos se encuentran en el disco local en <code translate="no">volumes/milvus/data/wp/...</code>.</li>
+<li><strong>Datos de almacenamiento:</strong> en <strong>modo MinIO</strong>, elimina los datos de registro que se encuentran en <code translate="no">&lt;rootPath&gt;/wp/...</code> (normalmente <code translate="no">files/wp/...</code>) dentro del bucket; en <strong>modo local</strong>, los datos se encuentran en el disco local en <code translate="no">volumes/milvus/data/wp/...</code>.</li>
 </ul>
 <p>Si tiene previsto volver a Woodpecker más adelante, elimine primero estos archivos para evitar conflictos.</p>
 <h2 id="Supported-scenarios" class="common-anchor-header">Escenarios compatibles<button data-href="#Supported-scenarios" class="anchor-icon" translate="no">
@@ -251,7 +251,7 @@ summary: >-
 <tbody>
 <tr><td>RocksMQ</td><td>Woodpecker (MinIO/local)</td><td><strong>Compatible</strong></td><td></td></tr>
 <tr><td>Woodpecker (MinIO/local)</td><td>RocksMQ</td><td><strong>Compatible</strong></td><td></td></tr>
-<tr><td>Woodpecker MinIO</td><td>Woodpecker local</td><td><strong>No compatible</strong></td><td>Cambiar entre los modos de almacenamiento de Woodpecker requiere una gestión adicional de metadatos, que aún no está compatible.</td></tr>
+<tr><td>Woodpecker MinIO</td><td>Woodpecker local</td><td><strong>No compatible</strong></td><td>El cambio entre los modos de almacenamiento de Woodpecker requiere una gestión adicional de metadatos, que aún no es compatible.</td></tr>
 <tr><td>Woodpecker local</td><td>Woodpecker MinIO</td><td><strong>No compatible</strong></td><td>Lo mismo que arriba.</td></tr>
 <tr><td>RocksMQ / Woodpecker</td><td>Pulsar externo / Kafka</td><td><strong>Compatible, pero no recomendado</strong></td><td>Mantén las instancias independientes lo más sencillas posible.</td></tr>
 </tbody>

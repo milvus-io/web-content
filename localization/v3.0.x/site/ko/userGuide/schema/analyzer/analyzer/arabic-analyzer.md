@@ -2,7 +2,7 @@
 id: arabic-analyzer.md
 title: 아랍어Compatible with Milvus 3.0.0+
 summary: >-
-  내장된 아랍어 분석기는 문자 변형과 숫자를 표준화하고, 용어의 어근을 추출하며, 아랍어 스톱워드를 제거하는 방식으로 아랍어 텍스트를
+  내장된 아랍어 분석기는 문자 변형과 숫자를 표준화하고, 용어의 어간을 추출하며, 아랍어 스톱워드를 제거하는 방식으로 아랍어 텍스트를
   처리합니다.
 beta: Milvus 3.0.0+
 ---
@@ -55,7 +55,7 @@ beta: Milvus 3.0.0+
      <td><p><code translate="no">stop_words</code></p></td>
      <td><p><code translate="no">list[str]</code></p></td>
      <td><p><code translate="no">_arabic_</code></p></td>
-     <td><p>토큰화 과정에서 제외할 추가 스톱워드 목록입니다. 기본적으로 <code translate="no">arabic</code> 분석기는 내장된 <code translate="no">_arabic_</code> 사전(dictionary)을 사용합니다. 기본 사전을 확인하려면 Milvus <a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/arabic.txt">아랍어 스톱워드 목록을</a> 참조하십시오. 이 목록은 Apache Lucene <a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/ar/stopwords.txt">아랍어 스톱워드 파일에서</a> 가져온 것입니다.</p></td>
+     <td><p>토큰화 과정에서 제외할 추가 스톱워드 목록입니다. 기본적으로 ' <code translate="no">arabic</code> ' 분석기는 내장된 ' <code translate="no">_arabic_</code> ' 사전(dictionary)을 사용합니다. 기본 사전 내용을 확인하려면 Milvus <a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/arabic.txt">아랍어 스톱워드 목록을</a> 참조하십시오. 이 목록은 Apache Lucene <a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/ar/stopwords.txt">아랍어 스톱워드 파일에서</a> 가져온 것입니다.</p></td>
    </tr>
 </table>
 <p>사용자 정의 스톱워드를 추가하려면 <code translate="no">stop_words</code> 를 포함하십시오:</p>
@@ -86,8 +86,8 @@ beta: Milvus 3.0.0+
 <p>이 분석기는 다음 처리 단계를 적용합니다:</p>
 <ul>
 <li><strong>토큰화</strong>: <code translate="no">standard</code> 토큰화기를 사용하여 텍스트를 토큰으로 분할합니다.</li>
-<li><strong>숫자 정규화</strong>: <code translate="no">decimaldigit</code> 필터를 사용하여 아랍-인도계 및 기타 유니코드 십진수 자릿수를 ASCII 자릿수로 변환합니다.</li>
-<li><strong>아랍어 정규화</strong>: ` <code translate="no">arabic_normalization</code> ` 필터를 사용하여 알레프 변형, 테 마르부타, 알레프 막수라를 정규화하고, 하라카트 및 타트윌을 제거합니다.</li>
+<li><strong>숫자 정규화</strong>: ‘ <code translate="no">decimaldigit</code> ’ 필터를 사용하여 아랍-인도계 및 기타 유니코드 십진수 자릿수를 ASCII 자릿수로 변환합니다.</li>
+<li><strong>아랍어 정규화</strong>: <code translate="no">arabic_normalization</code> 필터를 사용하여 알레프 변형, 테 마르부타, 알레프 막수라를 정규화하고, 하라카트 및 타트윌을 제거합니다.</li>
 <li><strong>스템밍</strong>: ` <code translate="no">language</code> `를 ` <code translate="no">arabic</code>`로 설정하고 ` <code translate="no">stemmer</code> ` 필터를 사용합니다.</li>
 <li><strong>중지어 제거</strong>: 내장된 <code translate="no">_arabic_</code> 사전을 사용하여 <code translate="no">stop</code> 필터를 적용합니다.</li>
 </ul>
@@ -107,7 +107,7 @@ beta: Milvus 3.0.0+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>분석기 구성을 컬렉션 스키마에 적용하기 전에 <code translate="no">run_analyzer</code> 메서드를 사용하여 동작을 확인해 보십시오.</p>
+    </button></h2><p>분석기 구성을 컬렉션 스키마에 적용하기 전에 <code translate="no">run_analyzer</code> 메서드를 사용하여 동작을 확인하십시오.</p>
 <h3 id="Analyzer-configuration" class="common-anchor-header">분석기 구성<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

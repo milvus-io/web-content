@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 페이지를 사용하여 StructArray 필드 내의 벡터 하위 필드에 대해 벡터 검색을 실행할 수 있습니다. StructArray는 두 가지 기본 벡터 검색 모드를 지원합니다. 하나는 각 엔티티에 저장된 임베딩 목록에 점수를 매기는 EmbeddingList 검색이고, 다른 하나는 각 Struct 요소를 독립적으로 검색하는 요소 수준 검색입니다.</p>
+    </button></h1><p>이 페이지를 사용하여 StructArray 필드 내의 벡터 하위 필드에 대해 벡터 검색을 실행할 수 있습니다. StructArray는 두 가지 기본 벡터 검색 모드를 지원합니다. 하나는 각 엔티티에 저장된 임베딩 목록에 점수를 매기는 ‘임베딩 목록(EmbeddingList) 검색’이고, 다른 하나는 각 Struct 요소를 독립적으로 검색하는 ‘요소 수준 검색’입니다.</p>
 <p>이 페이지에서는 <a href="/docs/ko/create-structarray-field.md">‘StructArray 필드 생성’의</a> <code translate="no">tech_articles</code> 컬렉션을 사용합니다. 이 컬렉션에는 <code translate="no">chunks</code> 라는 StructArray 필드가 있습니다. 각 청크에는 텍스트, 스칼라 메타데이터, EmbeddingList 검색용 인덱스가 포함된 <code translate="no">emb_list_vector</code> 라는 벡터 하위 필드, 그리고 요소 수준 검색용 인덱스가 포함된 <code translate="no">emb</code> 라는 벡터 하위 필드가 포함되어 있습니다.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">시작하기 전에<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -47,7 +47,7 @@ summary: >-
 <tr><td><code translate="no">chunks</code> 와 같은 StructArray 필드를 생성합니다.</td><td><a href="/docs/ko/create-structarray-field.md">StructArray 필드 생성</a></td></tr>
 <tr><td><code translate="no">chunks</code> 필드에 Struct 객체가 포함된 엔티티를 삽입합니다.</td><td><a href="/docs/ko/insert-data-into-structarray-fields.md">StructArray 필드에 데이터 삽입</a></td></tr>
 <tr><td>EmbeddingList 검색을 위해 <code translate="no">chunks[emb_list_vector]</code> 에 <code translate="no">MAX_SIM*</code> 인덱스를 생성합니다.</td><td><a href="/docs/ko/index-structarray-fields.md">StructArray 필드 인덱싱</a></td></tr>
-<tr><td>요소 수준 검색을 위해 ` <code translate="no">chunks[emb]</code> `에 일반 벡터 메트릭 인덱스를 생성합니다.</td><td><a href="/docs/ko/index-structarray-fields.md">StructArray 필드 인덱싱</a></td></tr>
+<tr><td>요소 수준 검색을 위해 ` <code translate="no">chunks[emb]</code> `에 일반 벡터-메트릭 인덱스를 생성합니다.</td><td><a href="/docs/ko/index-structarray-fields.md">StructArray 필드 인덱싱</a></td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -148,7 +148,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>각 Struct 요소가 벡터 검색에 독립적으로 참여해야 할 때는 요소 수준 검색을 사용하십시오. 쿼리는 일반 벡터이며, 대상 벡터 하위 필드는 일반 벡터 메트릭으로 인덱싱되어야 합니다.</p>
+    </button></h2><p>각 Struct 요소가 벡터 검색에 독립적으로 참여해야 하는 경우 요소 수준 검색을 사용합니다. 쿼리는 일반 벡터이며, 대상 벡터 하위 필드는 일반 벡터 메트릭으로 인덱싱되어야 합니다.</p>
 <pre><code translate="no" class="language-python">query_vector = [<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>]
 
 results = client.search(
@@ -199,7 +199,7 @@ results = client.search(
 <tr><td><code translate="no">id</code></td><td>일치하는 엔티티의 기본 키.</td><td>일치하는 Struct 요소를 포함하는 엔티티의 기본 키.</td></tr>
 <tr><td><code translate="no">distance</code> 또는 점수</td><td>쿼리 임베딩 목록과 저장된 임베딩 목록 간의 점수 또는 거리.</td><td>쿼리 벡터와 일치하는 Struct 요소 벡터 간의 점수 또는 거리.</td></tr>
 <tr><td><code translate="no">offset</code></td><td>해당 사항 없음.</td><td>반환 시 일치하는 Struct 요소의 0을 기준으로 한 위치.</td></tr>
-<tr><td>반복되는 기본 키</td><td>결과는 엔티티 수준이므로 단일 쿼리의 경우 반복되지 않을 것으로 예상됩니다.</td><td>동일한 엔티티 내의 여러 Struct 요소가 일치할 수 있으므로 가능합니다.</td></tr>
+<tr><td>반복된 기본 키</td><td>결과가 엔티티 수준이므로 단일 쿼리의 경우 예상되지 않습니다.</td><td>동일한 엔티티 내의 여러 Struct 요소가 일치할 수 있으므로 가능합니다.</td></tr>
 <tr><td>요청된 StructArray 출력 필드</td><td>일치하는 엔티티에서 반환됩니다.</td><td>대상 API 및 SDK에서 지원하는 요소 수준 히트 셰이프와 함께 반환됩니다.</td></tr>
 </tbody>
 </table>

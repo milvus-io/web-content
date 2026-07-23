@@ -1,6 +1,6 @@
 ---
 id: release_notes.md
-summary: Milvus 发行说明
+summary: Milvus 版本说明
 title: Release Notes
 ---
 <h1 id="Release-Notes" class="common-anchor-header">Release Notes<button data-href="#Release-Notes" class="anchor-icon" translate="no">

@@ -4,9 +4,10 @@ title: Recherche vectorielle de base avec StructArray
 summary: >-
   Cette page vous permet d'effectuer une recherche vectorielle sur les
   sous-champs vectoriels d'un champ StructArray. StructArray prend en charge
-  deux modes de recherche vectorielle de base : la recherche « EmbeddingList »,
-  qui évalue une liste d'embeddings stockée dans chaque entité, et la recherche
-  au niveau des éléments, qui explore chaque élément Struct indépendamment.
+  deux modes de recherche vectorielle de base : la recherche par liste
+  d'embeddings, qui évalue une liste d'embeddings stockée dans chaque entité, et
+  la recherche au niveau des éléments, qui explore chaque élément Struct
+  indépendamment.
 ---
 <h1 id="Basic-Vector-Search-with-StructArray" class="common-anchor-header">Recherche vectorielle de base avec StructArray<button data-href="#Basic-Vector-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -80,7 +81,7 @@ summary: >-
 <tr><td>Données de requête</td><td>Une liste d'embeddings contenant un ou plusieurs vecteurs.</td><td>Un vecteur standard.</td></tr>
 <tr><td>Famille de métriques</td><td><code translate="no">MAX_SIM*</code>, telle que <code translate="no">MAX_SIM_COSINE</code>.</td><td>Des métriques vectorielles classiques, telles que <code translate="no">COSINE</code>, <code translate="no">IP</code> ou <code translate="no">L2</code>.</td></tr>
 <tr><td>Ce que représente un résultat</td><td>Une entité correspondante dont le sous-champ vectoriel StructArray est similaire à la liste d’embeddings de la requête.</td><td>Un élément Struct correspondant à l’intérieur du champ StructArray.</td></tr>
-<tr><td>Niveau de détail des résultats</td><td>Niveau de l’entité.</td><td>Niveau de l'élément Struct.</td></tr>
+<tr><td>Niveau de détail des résultats</td><td>Au niveau de l’entité.</td><td>Niveau de l'élément Struct.</td></tr>
 <tr><td>Décalage</td><td>Sans objet.</td><td>Identifie la position (à partir de zéro) de l’élément Struct correspondant lors de son renvoi.</td></tr>
 <tr><td>Utilisation typique</td><td>ColBERT, ColPali et autres modèles de recherche à interaction tardive.</td><td>Récupération au niveau des segments, des passages, des extraits, des fragments ou des faits.</td></tr>
 </tbody>
@@ -131,7 +132,7 @@ results = client.search(
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
         <span class="hljs-built_in">print</span>(hit[<span class="hljs-string">&quot;id&quot;</span>], hit[<span class="hljs-string">&quot;distance&quot;</span>], hit[<span class="hljs-string">&quot;entity&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>Dans ce mode de recherche, la métrique « <code translate="no">limit</code> » détermine le nombre d’entités renvoyées pour chaque requête. Le résultat peut inclure des sous-champs StructArray, mais le résultat de la recherche correspond à l’entité parente mise en correspondance plutôt qu’à un élément Struct spécifique.</p>
+<p>Dans ce mode de recherche, l’ <code translate="no">limit</code> contrôle le nombre d’entités renvoyées pour chaque requête. Le résultat peut inclure des sous-champs StructArray, mais le résultat lui-même représente l’entité parente correspondante plutôt qu’un élément Struct spécifique.</p>
 <div class="alert note">
 <p>Pour un guide complet de type ColBERT ou ColPali, consultez la section « <a href="/docs/fr/search-with-embedding-lists.md">Recherche avec des listes d’embeddings</a> ». Cette page ne traite que du comportement de base de la recherche StructArray.</p>
 </div>
@@ -177,7 +178,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>Dans la recherche au niveau des éléments, chaque résultat correspond à un élément Struct trouvé. La valeur « <code translate="no">offset</code> » correspond à la position (à partir de zéro) de cet élément dans le champ StructArray. Une même entité peut apparaître plusieurs fois si plusieurs éléments Struct correspondent à la requête. La valeur « <code translate="no">limit</code> » s’applique aux résultats au niveau des éléments, et non aux entités parentes uniques.</p>
+<p>Dans la recherche au niveau des éléments, chaque résultat correspond à un élément Struct correspondant. La valeur « <code translate="no">offset</code> » correspond à la position (à partir de zéro) de cet élément dans le champ StructArray. Une même entité peut apparaître plusieurs fois si plusieurs éléments Struct correspondent à la requête. La valeur « <code translate="no">limit</code> » s’applique aux résultats au niveau des éléments, et non aux entités parentes uniques.</p>
 <h2 id="Interpret-results" class="common-anchor-header">Interprétation des résultats<button data-href="#Interpret-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -199,7 +200,7 @@ results = client.search(
 </thead>
 <tbody>
 <tr><td><code translate="no">id</code></td><td>Clé primaire de l’entité correspondante.</td><td>Clé primaire de l’entité contenant l’élément Struct correspondant.</td></tr>
-<tr><td><code translate="no">distance</code> ou score</td><td>Score ou distance entre la liste d'embeddings de la requête et la liste d'embeddings stockée.</td><td>Score ou distance entre le vecteur de requête et le vecteur de l'élément Struct correspondant.</td></tr>
+<tr><td><code translate="no">distance</code> ou score</td><td>Score ou distance entre la liste d’embeddings de la requête et la liste d’embeddings stockée.</td><td>Score ou distance entre le vecteur de requête et le vecteur de l'élément Struct correspondant.</td></tr>
 <tr><td><code translate="no">offset</code></td><td>Sans objet.</td><td>Position (à partir de zéro) de l’élément Struct correspondant lors de son renvoi.</td></tr>
 <tr><td>Clés primaires répétées</td><td>Non prévu pour une requête unique, car les résultats sont au niveau de l’entité.</td><td>Possible, car plusieurs éléments Struct d’une même entité peuvent correspondre.</td></tr>
 <tr><td>Champs de sortie StructArray demandés</td><td>Renvoyés à partir de l’entité correspondante.</td><td>Renvoyés avec la forme de résultat au niveau des éléments prise en charge par l’API et le SDK cibles.</td></tr>
@@ -245,7 +246,7 @@ results = client.search(
       </svg>
     </button></h2><ol>
 <li><p>Pour restreindre la recherche au niveau des éléments à l’aide de conditions scalaires, consultez la section « <a href="/docs/fr/filtered-search-with-structarray.md">Recherche filtrée avec StructArray</a> ».</p></li>
-<li><p>Pour effectuer une recherche par score ou par limites de distance, consultez la section « <a href="/docs/fr/range-search-with-structarray.md">Recherche par plage avec StructArray</a> ».</p></li>
+<li><p>Pour effectuer une recherche par limites de score ou de distance, consultez la section « <a href="/docs/fr/range-search-with-structarray.md">Recherche par plage avec StructArray</a> ».</p></li>
 <li><p>Pour renvoyer au maximum un résultat par entité parente après une recherche au niveau des éléments, consultez la section « <a href="/docs/fr/grouping-search-with-structarray.md">Recherche groupée avec StructArray</a> ».</p></li>
 <li><p>Pour combiner la recherche StructArray avec d’autres recherches vectorielles, consultez la section « <a href="/docs/fr/hybrid-search-with-structarray.md">Recherche hybride avec StructArray</a> ».</p></li>
 <li><p>Pour connaître les types de données, les métriques, les filtres et les limites spécifiques à chaque version pris en charge, consultez la section « <a href="/docs/fr/structarray-limits.md">Limites de StructArray</a> ».</p></li>

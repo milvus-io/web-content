@@ -86,9 +86,9 @@ title: 使用 Milvus Operator 升级 Milvus 集群
 <ul>
 <li>Milvus v2.6.0-rc1 与 v2.6.17<strong>不兼容</strong>。不支持从候选版本直接升级。</li>
 <li>如果您当前正在运行 v2.6.0-rc1 且需要保留数据，请参阅<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">此社区指南</a>以获取迁移帮助。</li>
-<li>在升级至 v2.6.17 之前，您<strong>必须先</strong>升级至 v2.5.16 或更高版本，并启用<code translate="no">mixCoord</code> 。</li>
+<li>在升级至 v2.6.17 之前，您<strong>必须先</strong>升级至 v2.5.16 或更高版本，并启用<code translate="no">mixCoord</code> 功能。</li>
 </ul>
-<p><strong>消息队列限制</strong>：升级至 Milvus v2.6.17 时，您必须保留当前的消息队列选择。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</p>
+<p><strong>消息队列限制</strong>：在升级至 Milvus v2.6.17 时，您必须保留当前的消息队列选择。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</p>
 <h2 id="Upgrade-process" class="common-anchor-header">升级流程<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -124,7 +124,7 @@ title: 使用 Milvus Operator 升级 Milvus 集群
 helm repo update zilliztech-milvus-operator
 helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvus-operator
 <button class="copy-code-btn"></button></code></pre>
-<p>验证操作员升级：</p>
+<p>验证操作员升级情况：</p>
 <pre><code translate="no" class="language-bash">kubectl -n milvus-operator get pods
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-2-Upgrade-your-Milvus-cluster" class="common-anchor-header">步骤 2：升级 Milvus 集群<button data-href="#Step-2-Upgrade-your-Milvus-cluster" class="anchor-icon" translate="no">

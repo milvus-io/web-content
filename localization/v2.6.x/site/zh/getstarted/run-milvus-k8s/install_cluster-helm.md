@@ -36,7 +36,7 @@ title: 使用 Helm 安装 Milvus 集群
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Helm 使用一种称为“图表”（charts）的打包格式。图表是一组文件的集合，用于描述一组相关的 Kubernetes 资源。Milvus 提供了一组图表，以帮助您部署 Milvus 的依赖项和组件。</p>
+    </button></h2><p>Helm 使用一种称为“图表”（charts）的打包格式。图表是一组文件的 Collection，用于描述一组相关的 Kubernetes 资源。Milvus 提供了一套图表，以帮助您部署 Milvus 的依赖项和组件。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先决条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -62,7 +62,7 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>安装前请检查<a href="/docs/zh/v2.6.x/prerequisite-helm.md">硬件和软件要求</a>。</p></li>
-<li><p>在安装 Milvus 之前，建议使用<a href="https://milvus.io/tools/sizing">Milvus 规格规划工具，</a>根据您的数据规模估算硬件需求。这有助于确保您的 Milvus 安装获得最佳性能和资源分配。</p></li>
+<li><p>在安装 Milvus 之前，建议使用<a href="https://milvus.io/tools/sizing">Milvus 规格规划工具，</a>根据您的数据量估算硬件需求。这有助于确保您的 Milvus 安装获得最佳性能和资源分配。</p></li>
 </ul>
 <div class="alert note">
 <p>若在拉取镜像时遇到任何问题，请将问题详情发送至<a href="mailto:community@zilliz.com">community@zilliz.com</a>联系我们，我们将为您提供必要的支持。</p>
@@ -82,13 +82,13 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在安装 Milvus Helm 图表之前，您需要添加 Milvus Helm 仓库。</p>
+    </button></h2><p>在安装 Milvus Helm 图表之前，您需要添加 Milvus Helm 存储库。</p>
 <pre><code translate="no" class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>位于<code translate="no">https://github.com/milvus-io/milvus-helm</code> 的 Milvus Helm Charts 仓库现已归档。我们现在使用新仓库<code translate="no">https://github.com/zilliztech/milvus-helm</code> 。归档的仓库仍可提供 4.0.31 及更早版本的图表，但后续版本请使用新仓库。</p>
+<p>位于<code translate="no">https://github.com/milvus-io/milvus-helm</code> 的 Milvus Helm Charts 仓库现已归档。我们目前使用新仓库<code translate="no">https://github.com/zilliztech/milvus-helm</code> 。归档的仓库仍可提供 4.0.31 及更早版本的图表，但后续版本请使用新仓库。</p>
 </div>
-<p>然后，请按以下方式从仓库获取 Milvus Helm Charts：</p>
+<p>然后按以下方式从仓库获取 Milvus Helm Charts：</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>helm repo update
 <button class="copy-code-btn"></button></code></pre>
 <p>您可以随时运行以下命令来获取最新的 Milvus Helm Charts。</p>
@@ -134,10 +134,10 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>注意</strong>：独立模式默认使用 Woodpecker 作为消息队列，并启用 Streaming Node 组件。详情请参阅《<a href="/docs/zh/v2.6.x/architecture_overview.md">架构概述</a>》和《<a href="/docs/zh/v2.6.x/use-woodpecker.md">使用 Woodpecker</a>》。</p>
+<p><strong>注意</strong>：独立模式默认使用 Woodpecker 作为消息队列，并启用流式处理节点（Streaming Node）组件。详情请参阅《<a href="/docs/zh/v2.6.x/architecture_overview.md">架构概述</a>》和《<a href="/docs/zh/v2.6.x/use-woodpecker.md">使用 Woodpecker</a>》。</p>
 </div>
 <p><strong>部署 Milvus 集群：</strong></p>
-<p>以下命令将部署一个针对 v2.6.17 进行过优化的 Milvus 集群，并使用 Woodpecker 作为推荐的消息队列：</p>
+<p>以下命令将部署一个针对 v2.6.17 进行过优化设置的 Milvus 集群，并使用 Woodpecker 作为推荐的消息队列：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v2.6.17 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
@@ -159,7 +159,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <li><strong>新组件</strong>：引入<strong>流式处理节点（Streaming Node</strong>），并默认启用</li>
 <li><strong>组件合并</strong>：<strong>索引节点</strong>和<strong>数据节点</strong>合并为单一<strong>的数据节点</strong></li>
 </ul>
-<p>有关架构的完整详情，请参阅《<a href="/docs/zh/v2.6.x/architecture_overview.md">架构概述</a>》。</p>
+<p>有关完整的架构详情，请参阅《<a href="/docs/zh/v2.6.x/architecture_overview.md">架构概述</a>》。</p>
 </div>
 <p><strong>其他消息队列选项：</strong></p>
 <p>如果您更倾向于使用<strong>Pulsar</strong>（传统选择）而非 Woodpecker：</p>
@@ -177,7 +177,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <div class="alert note">
 <p><strong>重要注意事项：</strong></p>
 <ul>
-<li><strong>版本命名</strong>：仅使用字母、数字和连字符（不允许使用点）</li>
+<li><strong>版本命名</strong>：仅允许使用字母、数字和连字符（不允许使用句点）</li>
 <li><strong>Kubernetes v1.25 及以上版本</strong>：若遇到 PodDisruptionBudget 相关问题，请使用以下解决方法：
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> pulsar.bookkeeper.pdb.usePolicy=<span class="hljs-literal">false</span> \
@@ -323,8 +323,8 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 随附了一个名为 Milvus WebUI 的内置图形用户界面工具，您可以通过浏览器访问该工具。Milvus WebUI 通过简单直观的界面增强了系统的可观察性。您可以使用 Milvus WebUI 观察 Milvus 组件和依赖项的统计数据与指标，查看数据库和 Collection 的详细信息，并列出详细的 Milvus 配置。 有关 Milvus WebUI 的详细信息，请参阅<a href="/docs/zh/v2.6.x/milvus-webui.md">Milvus WebUI</a></p>
-<p>要启用对 Milvus WebUI 的访问，您需要将代理 Pod 进行端口转发至本地端口。</p>
+    </button></h2><p>Milvus 随附了一个名为 Milvus WebUI 的内置图形化用户界面工具，您可以通过浏览器访问该工具。Milvus WebUI 通过简单直观的界面增强了系统的可观察性。您可以使用 Milvus WebUI 观察 Milvus 组件和依赖项的统计数据与指标，查看数据库和 Collection 的详细信息，并列出详细的 Milvus 配置。 有关 Milvus WebUI 的详细信息，请参阅<a href="/docs/zh/v2.6.x/milvus-webui.md">Milvus WebUI</a></p>
+<p>要启用对 Milvus WebUI 的访问，您需要将代理 Pod 的端口转发到本地端口。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
@@ -345,7 +345,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
         ></path>
       </svg>
     </button></h2><p>如果您处于网络受限的环境中，请按照本节中的步骤启动 Milvus 集群。</p>
-<h3 id="1-Get-Milvus-manifest" class="common-anchor-header">1. 获取 Milvus 配置文件<button data-href="#1-Get-Milvus-manifest" class="anchor-icon" translate="no">
+<h3 id="1-Get-Milvus-manifest" class="common-anchor-header">1. 获取 Milvus 清单<button data-href="#1-Get-Milvus-manifest" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -385,7 +385,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>镜像拉取脚本采用 Python 编写。您应将该脚本及其依赖项一并下载到<code translate="no">requirement.txt</code> 文件中。</p>
+    </button></h3><p>镜像拉取脚本采用 Python 编写。您应将该脚本及其依赖项一并从<code translate="no">requirement.txt</code> 文件中下载。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/offline/requirements.txt</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/offline/save_image.py</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -404,7 +404,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>运行以下命令以拉取并保存所需的镜像。</p>
+    </button></h3><p>运行以下命令以拉取并保存所需的图像。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -r requirements.txt</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">python3 save_image.py --manifest milvus_manifest.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -519,7 +519,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 </ul></li>
 <li><p>探索<a href="/docs/zh/v2.6.x/milvus-webui.md">Milvus WebUI</a>——一个用于 Milvus 可观测性和管理的直观 Web 界面。</p></li>
 <li><p>探索<a href="/docs/zh/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>，一款用于 Milvus 数据备份的开源工具。</p></li>
-<li><p>了解<a href="/docs/zh/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>——一款用于调试 Milvus 并进行动态配置更新的开源工具。</p></li>
-<li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>——一款用于直观管理 Milvus 的开源图形用户界面工具。</p></li>
+<li><p>了解<a href="/docs/zh/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>——一款用于调试 Milvus 并更新动态配置的开源工具。</p></li>
+<li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>——一款用于直观管理 Milvus 的开源图形界面工具。</p></li>
 <li><p><a href="/docs/zh/v2.6.x/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
 </ul>

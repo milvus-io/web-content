@@ -59,7 +59,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p>Stellen Sie sicher, dass Ihre Milvus Standalone Docker Compose-Instanz ordnungsgemäß läuft – beispielsweise, indem Sie eine Testkollektion erstellen, Daten einfügen und eine Abfrage ausführen.</p>
-<h3 id="Step-2-Configure-Woodpecker-storage" class="common-anchor-header">Schritt 2: Konfigurieren Sie den Woodpecker-Speicher<button data-href="#Step-2-Configure-Woodpecker-storage" class="anchor-icon" translate="no">
+<h3 id="Step-2-Configure-Woodpecker-storage" class="common-anchor-header">Schritt 2: Woodpecker-Speicher konfigurieren<button data-href="#Step-2-Configure-Woodpecker-storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -74,7 +74,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Fügen Sie die Woodpecker-Einstellungen zur Milvus-Konfiguration hinzu, <strong>ohne</strong> den Wert „ <code translate="no">mqType</code> “ zu ändern. Führen Sie „ <code translate="no">docker exec -it milvus-standalone bash</code> “ aus, um in den Container zu wechseln, und bearbeiten Sie dann die Datei „ <code translate="no">/milvus/configs/user.yaml</code> “:</p>
+    </button></h3><p>Fügen Sie die Woodpecker-Einstellungen zur Milvus-Konfiguration hinzu, <strong>ohne</strong> den Wert „ <code translate="no">mqType</code> “ zu ändern. Führen Sie „ <code translate="no">docker exec -it milvus-standalone bash</code> “ aus, um den Container zu betreten, und bearbeiten Sie anschließend die Datei „ <code translate="no">/milvus/configs/user.yaml</code> “:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">woodpecker:</span>
   <span class="hljs-attr">storage:</span>
     <span class="hljs-attr">type:</span> <span class="hljs-string">minio</span>   <span class="hljs-comment"># minio or local</span>
@@ -209,7 +209,7 @@ summary: >-
       </svg>
     </button></h3><pre><code translate="no" class="language-shell">docker logs milvus-standalone | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
-<p>Bei einer erfolgreichen Umstellung wird Folgendes protokolliert: „ <code translate="no">[mqTypeValue=rocksmq]</code> “.</p>
+<p>Bei einer erfolgreichen Umstellung wird folgende Meldung protokolliert: „ <code translate="no">[mqTypeValue=rocksmq]</code> “.</p>
 <h3 id="Step-4-Optional-Clean-up-Woodpecker-data" class="common-anchor-header">Schritt 4: (Optional) Woodpecker-Daten bereinigen<button data-href="#Step-4-Optional-Clean-up-Woodpecker-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -226,10 +226,10 @@ summary: >-
         ></path>
       </svg>
     </button></h3><ul>
-<li><strong>Metadaten (etcd):</strong> Das Schlüsselpräfix für Woodpecker lautet in der Regel <code translate="no">woodpecker/...</code>. Rufen Sie es mit dem Befehl <code translate="no">etcdctl get woodpecker --prefix</code> ab und löschen Sie es anschließend.</li>
-<li><strong>Speicherdaten:</strong> Im <strong>MinIO-Modus</strong> löschen Sie die Protokolldaten unter <code translate="no">&lt;rootPath&gt;/wp/...</code> (in der Regel <code translate="no">files/wp/...</code>) im Bucket; im <strong>lokalen Modus</strong> befinden sich die Daten auf der lokalen Festplatte unter <code translate="no">volumes/milvus/data/wp/...</code>.</li>
+<li><strong>Metadaten (etcd):</strong> Das Schlüsselpräfix für Woodpecker lautet in der Regel <code translate="no">woodpecker/...</code>. Rufen Sie es mit dem Befehl „ <code translate="no">etcdctl get woodpecker --prefix</code> “ ab und löschen Sie es anschließend.</li>
+<li><strong>Speicherdaten:</strong> Im <strong>MinIO-Modus</strong> löschen Sie die Protokolldaten unter „ <code translate="no">&lt;rootPath&gt;/wp/...</code> “ (in der Regel „ <code translate="no">files/wp/...</code> “) im Bucket; im <strong>lokalen Modus</strong> befinden sich die Daten auf der lokalen Festplatte unter „ <code translate="no">volumes/milvus/data/wp/...</code> “.</li>
 </ul>
-<p>Wenn Sie später wieder zu Woodpecker wechseln möchten, bereinigen Sie diese Dateien zunächst, um Konflikte zu vermeiden.</p>
+<p>Wenn Sie später wieder zu Woodpecker wechseln möchten, löschen Sie diese Dateien zunächst, um Konflikte zu vermeiden.</p>
 <h2 id="Supported-scenarios" class="common-anchor-header">Unterstützte Szenarien<button data-href="#Supported-scenarios" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -252,7 +252,7 @@ summary: >-
 <tbody>
 <tr><td>RocksMQ</td><td>Woodpecker (MinIO/lokal)</td><td><strong>Unterstützt</strong></td><td></td></tr>
 <tr><td>Woodpecker (MinIO/lokal)</td><td>RocksMQ</td><td><strong>Unterstützt</strong></td><td></td></tr>
-<tr><td>Woodpecker MinIO</td><td>Woodpecker lokal</td><td><strong>Nicht unterstützt</strong></td><td>Das Umschalten zwischen den Woodpecker-Speichermodi erfordert eine zusätzliche Metadatenverarbeitung, die noch nicht unterstützt wird.</td></tr>
+<tr><td>Woodpecker MinIO</td><td>Woodpecker lokal</td><td><strong>Nicht unterstützt</strong></td><td>Das Umschalten zwischen den Woodpecker-Speichermodi erfordert eine zusätzliche Metadatenverarbeitung, die derzeit noch nicht unterstützt wird.</td></tr>
 <tr><td>Woodpecker lokal</td><td>Woodpecker MinIO</td><td><strong>Nicht unterstützt</strong></td><td>Wie oben.</td></tr>
 <tr><td>RocksMQ / Woodpecker</td><td>Externer Pulsar / Kafka</td><td><strong>Unterstützt, aber nicht empfohlen</strong></td><td>Halten Sie eigenständige Instanzen so einfach wie möglich.</td></tr>
 </tbody>

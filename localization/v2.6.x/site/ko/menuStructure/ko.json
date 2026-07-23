@@ -279,7 +279,7 @@
         "children": []
       },
       {
-        "label": "메모리 내 복제본",
+        "label": "인메모리 복제본",
         "id": "replica.md",
         "order": 8,
         "children": []
@@ -334,7 +334,7 @@
             "children": []
           },
           {
-            "label": "로드 및 해제",
+            "label": "장전 및 방아쇠 풀기",
             "id": "load-and-release.md",
             "order": 5,
             "children": []
@@ -823,7 +823,7 @@
             ]
           },
           {
-            "label": "스파스 벡터 인덱스",
+            "label": "희소 벡터 인덱스",
             "id": "sparse-vector-indexes",
             "order": 3,
             "isMenu": true,
@@ -944,7 +944,7 @@
             "children": []
           },
           {
-            "label": "주키 검색",
+            "label": "기본 키 검색",
             "id": "primary-key-search.md",
             "order": 4,
             "children": []
@@ -967,7 +967,7 @@
             "order": 7,
             "children": [
               {
-                "label": "필터링에 대해 알아보기",
+                "label": "필터링에 대한 설명",
                 "id": "boolean.md",
                 "order": 0,
                 "children": []
@@ -1434,7 +1434,7 @@
                 "children": []
               },
               {
-                "label": "자원 배정",
+                "label": "자원 할당",
                 "id": "allocate.md",
                 "order": 3,
                 "children": []
@@ -1670,13 +1670,13 @@
             "children": []
           },
           {
-            "label": "HPA를 활용한 확장",
+            "label": "HPA를 통한 확장",
             "id": "hpa.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "스케일 관련 종속성",
+            "label": "스케일 종속성",
             "id": "scale-dependencies.md",
             "order": 3,
             "children": []
@@ -1747,7 +1747,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "알림 생성하기",
+                "label": "알림 생성",
                 "id": "alert.md",
                 "order": 0,
                 "children": []
@@ -1834,7 +1834,7 @@
                 "children": []
               },
               {
-                "label": "프릴리저 그룹",
+                "label": "프라이빌리지 그룹",
                 "id": "privilege_group.md",
                 "order": 2,
                 "children": []
@@ -1891,7 +1891,7 @@
         "order": 14,
         "children": [
           {
-            "label": "Milvus 클러스터 스위치 MQ형",
+            "label": "Milvus 클러스터 스위치 MQ 유형",
             "id": "switch_milvus_cluster_mq_type-operator.md",
             "order": 0,
             "children": []
@@ -1913,7 +1913,7 @@
     "order": 6,
     "children": [
       {
-        "label": "Attu (Milvus GUI)",
+        "label": "아투 (Milvus GUI)",
         "id": "milvus_attu",
         "order": 0,
         "externalLink": "https://github.com/zilliztech/attu",
@@ -1955,13 +1955,13 @@
                 "children": []
               },
               {
-                "label": "하나의 버킷 내 인스턴스 간 마이그레이션",
+                "label": "동일 버킷 내 인스턴스 간 마이그레이션",
                 "id": "shared-bucket-backup-and-restore.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "버킷 간 인스턴스 마이그레이션",
+                "label": "버킷 간 인스턴스 간 마이그레이션",
                 "id": "cross-bucket-backup-and-restore.md",
                 "order": 2,
                 "children": []
@@ -1977,7 +1977,7 @@
         ]
       },
       {
-        "label": "조류 관찰가",
+        "label": "조류 관찰자",
         "id": "birdwatcher",
         "order": 3,
         "children": [
@@ -2149,7 +2149,7 @@
                 "children": []
               },
               {
-                "label": "Jina AI",
+                "label": "지나 AI",
                 "id": "embed-with-jina.md",
                 "order": 7,
                 "children": []
@@ -2199,7 +2199,7 @@
             ]
           },
           {
-            "label": "재순위 지정자",
+            "label": "재순위 결정자",
             "id": "rerankers",
             "order": 1,
             "isMenu": true,
@@ -2235,7 +2235,7 @@
                 "children": []
               },
               {
-                "label": "Jina AI",
+                "label": "지나 AI",
                 "id": "rerankers-jina.md",
                 "order": 5,
                 "children": []

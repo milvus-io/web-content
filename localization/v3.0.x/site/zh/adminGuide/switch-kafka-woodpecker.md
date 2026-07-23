@@ -23,7 +23,7 @@ summary: 使用 Helm 或 Milvus Operator，将 Milvus 集群的消息队列在 K
 <p><strong>先决条件：</strong>MQ 切换功能仅在<strong>Milvus 3.0 及更高版本中</strong>提供。开始操作前，请将您的 Milvus 实例升级至 Milvus 3.0 或更高版本——此功能在早期版本中不可用。</p>
 </div>
 <div class="alert warning">
-<p>切换消息队列是一项<strong>高风险操作</strong>。请选择<strong>与您的</strong>部署方式相匹配的章节<strong>——使用 Helm</strong> <strong>或使用 Milvus Operator</strong>——并按顺序从头到尾操作。请勿混合使用 Helm 和 Operator 命令。</p>
+<p>切换消息队列是一项<strong>高风险操作</strong>。请选择<strong>与您的</strong>部署方式相匹配的章节<strong>——使用 Helm</strong> <strong>或使用 Milvus Operator</strong>——并按顺序从上到下操作。请勿混合使用 Helm 和 Operator 命令。</p>
 </div>
 <h2 id="With-Helm" class="common-anchor-header">使用 Helm<button data-href="#With-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -88,7 +88,7 @@ summary: 使用 Helm 或 Milvus Operator，将 Milvus 集群的消息队列在 K
         ></path>
       </svg>
     </button></h3><p><strong>步骤 1：验证 Milvus 实例是否正在运行。</strong></p>
-<p><strong>步骤 2：配置目标 Kafka 连接并重启 Milvus。</strong>切换操作需要 Milvus 已知晓 Kafka 连接信息，因此请通过 `<code translate="no">extraConfigFiles</code> ` 将其写入 `<code translate="no">user.yaml</code> `，并使用 `<code translate="no">helm upgrade</code> ` 应用配置（这将滚动更新 Pod）。`<code translate="no">streaming.enabled=true</code> ` 是 Switch MQ 功能的必备条件。有关 SASL/SSL 的详细信息，请参阅<a href="/docs/zh/connect_kafka_ssl.md">《使用 SASL/SSL 连接到 Kafka》</a>。</p>
+<p><strong>步骤 2：配置目标 Kafka 连接并重启 Milvus。</strong>切换操作要求 Milvus 已知晓 Kafka 连接信息，因此请通过 `<code translate="no">extraConfigFiles</code> ` 将其写入 `<code translate="no">user.yaml</code> `，并使用 `<code translate="no">helm upgrade</code> ` 应用配置（该操作会滚动更新 Pod）。<code translate="no">streaming.enabled=true</code> 是“切换消息队列（Switch MQ）”功能的必备条件。有关 SASL/SSL 的详细信息，请参阅<a href="/docs/zh/connect_kafka_ssl.md">《使用 SASL/SSL 连接到 Kafka》</a>。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -154,7 +154,7 @@ summary: 使用 Helm 或 Milvus Operator，将 Milvus 集群的消息队列在 K
         ></path>
       </svg>
     </button></h3><p><strong>步骤 1：验证 Milvus 实例是否正在运行。</strong></p>
-<p><strong>步骤 2：执行 MQ 切换。</strong>由于 MixCoord 服务未对外暴露，因此需在 MixCoord pod 内部运行切换 API：</p>
+<p><strong>步骤 2：执行 MQ 切换。</strong>由于 MixCoord 服务未对外暴露，因此需在 MixCoord Pod 内部运行切换 API：</p>
 <pre><code translate="no" class="language-shell">kubectl exec -it &lt;mixcoord-pod&gt; -- \
   curl -X POST http://localhost:9091/management/wal/alter \
   -H &quot;Content-Type: application/json&quot; \
@@ -164,7 +164,7 @@ summary: 使用 Helm 或 Milvus Operator，将 Milvus 集群的消息队列在 K
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>切换成功时会记录日志：<code translate="no">[mqTypeValue=woodpecker]</code> 。</p>
-<p><strong>步骤 4：更新操作符中的 MQ 类型。</strong>更新操作符管理的配置，以防止操作符撤销此次切换。创建<code translate="no">change_configmap.yaml</code> ：</p>
+<p><strong>步骤 4：更新 Operator 中的 MQ 类型。</strong>更新<strong>Operator</strong>管理的配置，以防止 Operator 撤销此次切换。创建<code translate="no">change_configmap.yaml</code> ：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -194,7 +194,7 @@ summary: 使用 Helm 或 Milvus Operator，将 Milvus 集群的消息队列在 K
         ></path>
       </svg>
     </button></h3><p><strong>步骤 1：验证 Milvus 实例是否正在运行。</strong></p>
-<p><strong>步骤 2：配置目标 Kafka 连接并重启 Milvus。</strong>将 Kafka 连接配置放置在<code translate="no">spec.config</code> 下（操作符会将<code translate="no">spec.config</code> 渲染为<code translate="no">user.yaml</code> ），并设置 MQ 类型；应用 CR 后，Pod 将根据新配置进行滚动更新。有关 SASL/SSL 的详细信息，请参阅<a href="/docs/zh/connect_kafka_ssl.md">《使用 SASL/SSL 连接到 Kafka》</a>。</p>
+<p><strong>步骤 2：配置目标 Kafka 连接并重启 Milvus。</strong>将 Kafka 连接配置放置在<code translate="no">spec.config</code> 下（操作符会将<code translate="no">spec.config</code> 渲染为<code translate="no">user.yaml</code> ），并设置 MQ 类型；应用 CR 后，Pod 会根据新配置进行滚动更新。有关 SASL/SSL 的详细信息，请参阅<a href="/docs/zh/connect_kafka_ssl.md">《使用 SASL/SSL 连接到 Kafka》</a>。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># change_configmap.yaml</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -253,7 +253,7 @@ summary: 使用 Helm 或 Milvus Operator，将 Milvus 集群的消息队列在 K
 <tbody>
 <tr><td>内置 Kafka</td><td>Woodpecker (MinIO)</td><td><strong>已支持</strong></td><td><strong>已支持</strong></td></tr>
 <tr><td>外部 Kafka</td><td>Woodpecker (MinIO)</td><td><strong>已支持</strong></td><td><strong>已支持</strong></td></tr>
-<tr><td>Woodpecker (MinIO)</td><td>外部 Kafka</td><td><strong>支持</strong></td><td><strong>已支持</strong></td></tr>
-<tr><td>Kafka</td><td>Woodpecker（本地）</td><td><strong>受支持但不推荐</strong>（所有 Pod 都需要共享文件系统）</td><td><strong>不支持</strong></td></tr>
+<tr><td>Woodpecker (MinIO)</td><td>外部 Kafka</td><td><strong>已支持</strong></td><td><strong>已支持</strong></td></tr>
+<tr><td>Kafka</td><td>Woodpecker（本地）</td><td><strong>支持但不推荐</strong>（所有 Pod 都需要共享文件系统）</td><td><strong>不支持</strong></td></tr>
 </tbody>
 </table>

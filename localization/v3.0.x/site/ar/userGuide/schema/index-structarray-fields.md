@@ -4,8 +4,7 @@ title: فهرسة حقول StructArray
 summary: >-
   قم بإنشاء فهارس على الحقول الفرعية لـ StructArray قبل إجراء البحث المتجه أو
   تسريع عملية التصفية القياسية. بالنسبة لحقل StructArray، يكون هدف الفهرس هو
-  مسار الحقل الفرعي، مثل chunks[emb_list_vector] أو chunks[emb] أو
-  chunks[section].
+  مسار حقل فرعي، مثل chunks[emb_list_vector] أو chunks[emb] أو chunks[section].
 ---
 <h1 id="Index-StructArray-Fields" class="common-anchor-header">فهرسة حقول StructArray<button data-href="#Index-StructArray-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,8 +21,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>قم بإنشاء فهارس على الحقول الفرعية لـ StructArray قبل تشغيل البحث المتجه أو تسريع التصفية القياسية. بالنسبة لحقل StructArray، يكون هدف الفهرس هو مسار الحقل الفرعي، مثل <code translate="no">chunks[emb_list_vector]</code> أو <code translate="no">chunks[emb]</code> أو <code translate="no">chunks[section]</code>.</p>
-<p>تستخدم هذه الصفحة مجموعة <code translate="no">tech_articles</code> من <a href="/docs/ar/create-structarray-field.md">"إنشاء حقل StructArray</a>". يحتوي حقل StructArray <code translate="no">chunks</code> على حقول فرعية سكالارية للتصفية وحقول فرعية متجهة للبحث.</p>
+    </button></h1><p>قم بإنشاء فهارس على الحقول الفرعية لـ StructArray قبل إجراء البحث المتجه أو تسريع التصفية القياسية. بالنسبة لحقل StructArray، يكون هدف الفهرس هو مسار حقل فرعي، مثل <code translate="no">chunks[emb_list_vector]</code> أو <code translate="no">chunks[emb]</code> أو <code translate="no">chunks[section]</code>.</p>
+<p>تستخدم هذه الصفحة مجموعة <code translate="no">tech_articles</code> المأخوذة من <a href="/docs/ar/create-structarray-field.md">«إنشاء حقل StructArray</a>». يحتوي حقل StructArray <code translate="no">chunks</code> على حقول فرعية سكالارية للتصفية وحقول فرعية متجهة للبحث.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">قبل البدء<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -77,9 +76,9 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>البحث في قائمة التضمين</td><td><code translate="no">chunks[emb_list_vector]</code></td><td>مجموعة المقاييس " <code translate="no">MAX_SIM*</code> ".</td></tr>
-<tr><td>البحث المتجهي على مستوى العنصر</td><td><code translate="no">chunks[emb]</code></td><td>عائلة مقاييس متجهة عادية، مثل <code translate="no">COSINE</code> أو <code translate="no">IP</code> أو <code translate="no">L2</code>.</td></tr>
-<tr><td>التصفية حسب السلسلة أو الفئة</td><td><code translate="no">chunks[section]</code></td><td>فهرس قياسي يدعمه هدفك.</td></tr>
-<tr><td>التصفية حسب النطاق العددي</td><td><code translate="no">chunks[quality_score]</code>، <code translate="no">chunks[page]</code></td><td>مؤشر قياسي يدعمه الهدف الخاص بك.</td></tr>
+<tr><td>البحث المتجهي على مستوى العنصر</td><td><code translate="no">chunks[emb]</code></td><td>مجموعة مقاييس متجهة عادية، مثل <code translate="no">COSINE</code> أو <code translate="no">IP</code> أو <code translate="no">L2</code>.</td></tr>
+<tr><td>التصفية حسب السلسلة أو الفئة</td><td><code translate="no">chunks[section]</code></td><td>فهرس قياسي يدعمه الهدف الخاص بك.</td></tr>
+<tr><td>التصفية حسب النطاق الرقمي</td><td><code translate="no">chunks[quality_score]</code>، <code translate="no">chunks[page]</code></td><td>مؤشر قياسي يدعمه الهدف الخاص بك.</td></tr>
 <tr><td>التصفية حسب القيمة المنطقية</td><td><code translate="no">chunks[has_code]</code></td><td>مؤشر قياسي يدعمه الهدف الخاص بك.</td></tr>
 </tbody>
 </table>
@@ -99,7 +98,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يُنشئ المثال التالي فهرسين متجهيين. يستخدم الفهرس الأول مقياس " <code translate="no">MAX_SIM*</code> " للبحث في قائمة التضمين (EmbeddingList). ويستخدم الفهرس الثاني مقياسًا متجهيًا عاديًا للبحث على مستوى العنصر.</p>
+    </button></h2><p>يُنشئ المثال التالي فهرسين متجهين. يستخدم الفهرس الأول مقياس " <code translate="no">MAX_SIM*</code> " للبحث في قائمة التضمين (EmbeddingList). ويستخدم الفهرس الثاني مقياس متجه عادي للبحث على مستوى العنصر.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -142,7 +141,7 @@ client.create_index(
 <p>تحذير
 لا تقم بإنشاء فهرس « <code translate="no">MAX_SIM*</code> » وفهرس بمقياس متجه عادي في نفس الحقل الفرعي للمتجه. إذا كان كلا وضعي البحث مطلوبين، فاكتب المتجهات في حقلين فرعيين منفصلين للمتجه وأنشئ فهرسًا واحدًا لكل حقل فرعي.</p>
 </div>
-<h2 id="Create-scalar-indexes" class="common-anchor-header">إنشاء فهارس قياسية<button data-href="#Create-scalar-indexes" class="anchor-icon" translate="no">
+<h2 id="Create-scalar-indexes" class="common-anchor-header">إنشاء فهارس سكالارية<button data-href="#Create-scalar-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -284,7 +283,7 @@ client.create_index(
 
 <span class="hljs-built_in">print</span>(indexes)
 <button class="copy-code-btn"></button></code></pre>
-<p>يمكنك أيضًا وصف فهرس معين إذا كان إصدار SDK الخاص بك يوفر واجهات برمجة تطبيقات (API) لوصف الفهارس.</p>
+<p>يمكنك أيضًا وصف فهرس معين إذا كان إصدار SDK الخاص بك يوفر واجهات برمجة تطبيقات (APIs) لوصف الفهارس.</p>
 <pre><code translate="no" class="language-python">index = client.describe_index(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
     index_name=<span class="hljs-string">&quot;chunks_emb_cosine&quot;</span>,

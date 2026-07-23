@@ -17,7 +17,7 @@ title: 脈衝星
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Apache Pulsar 是 Milvus 支援的訊息佇列（WAL）後端之一。 在 Milvus 3.x 中<a href="/docs/zh-hant/woodpecker.md">，Woodpecker</a>是預設的訊息佇列；但對於偏好 Pulsar 的使用者，Pulsar 仍獲得完整支援。Pulsar 主要用於 Milvus Distributed（叢集）環境；獨立部署則通常使用內嵌的 Woodpecker 或<a href="/docs/zh-hant/mq_rocksmq.md">RocksMQ</a>。</p>
+    </button></h1><p>Apache Pulsar 是 Milvus 所支援的訊息佇列（WAL）後端之一。 在 Milvus 3.x 中<a href="/docs/zh-hant/woodpecker.md">，Woodpecker</a>是預設的訊息佇列；但對於偏好 Pulsar 的使用者，Pulsar 仍獲得完整支援。Pulsar 主要用於 Milvus Distributed（叢集）環境；獨立部署則通常使用內嵌的 Woodpecker 或<a href="/docs/zh-hant/mq_rocksmq.md">RocksMQ</a>。</p>
 <h2 id="Version-compatibility" class="common-anchor-header">版本相容性<button data-href="#Version-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,7 +43,7 @@ title: 脈衝星
 </tbody>
 </table>
 <p>自 Milvus 2.5 起，Milvus Helm 圖表和 Milvus Operator 預設會部署<strong>Pulsar v3</strong>；Pulsar v2 仍保持相容性。請參閱《<a href="/docs/zh-hant/upgrade-pulsar-v3.md">將 Pulsar 從 v2 升級至 v3</a>》及《<a href="/docs/zh-hant/use-pulsar-v2.md">繼續使用 Pulsar v2</a>》。</p>
-<h2 id="Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="common-anchor-header">使用 Helm 部署帶有 Pulsar 的 Milvus 叢集<button data-href="#Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="anchor-icon" translate="no">
+<h2 id="Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="common-anchor-header">使用 Helm 部署搭載 Pulsar 的 Milvus 叢集<button data-href="#Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -133,7 +133,7 @@ title: 脈衝星
       </svg>
     </button></h3><pre><code translate="no" class="language-bash">helm uninstall my-release
 <button class="copy-code-btn"></button></code></pre>
-<p>若您曾使用內建的 Pulsar 並希望移除其持久化資料，請刪除 Pulsar PVC（名稱<code translate="no">my-release-pulsarv3-*</code> ）：</p>
+<p>若您曾使用內建的 Pulsar 且欲移除其持久化資料，請刪除 Pulsar PVC（名稱<code translate="no">my-release-pulsarv3-*</code> ）：</p>
 <pre><code translate="no" class="language-bash">kubectl get pvc | grep my-release-pulsarv3
 kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <button class="copy-code-btn"></button></code></pre>

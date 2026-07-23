@@ -48,7 +48,7 @@ summary: >-
 <tr><td>Bidang vektor tingkat koleksi + subbidang EmbeddingList StructArray</td><td>Tingkat entitas</td><td>Kandidat akhir diindeks berdasarkan kunci utama.</td><td>Jangan gunakan.</td></tr>
 <tr><td>Bidang vektor tingkat koleksi + subbidang tingkat elemen StructArray</td><td>Tingkat entitas</td><td>Hasil pencocokan tingkat elemen digabungkan menjadi kandidat tingkat entitas sebelum pemeringkatan ulang hibrida.</td><td>Konfigurasi penggabungan opsional pada tingkat elemen StructArray <code translate="no">AnnSearchRequest</code>.</td></tr>
 <tr><td>Beberapa subbidang tingkat elemen di bawah bidang StructArray yang sama</td><td>Tingkat elemen</td><td>Kandidat akhir diindeks berdasarkan kunci utama ditambah offset elemen Struct.</td><td>Jangan gunakan.</td></tr>
-<tr><td>Subbidang tingkat elemen di bawah bidang StructArray yang berbeda</td><td>Tingkat entitas</td><td>Offset elemen tidak berbagi identitas, sehingga setiap <code translate="no">AnnSearchRequest</code> tingkat elemen StructArray diringkas sebelum diurutkan ulang.</td><td>Konfigurasi penggabungan opsional pada setiap sub <code translate="no">AnnSearchRequest</code> tingkat elemen StructArray.</td></tr>
+<tr><td>Subbidang tingkat elemen di bawah bidang StructArray yang berbeda</td><td>Tingkat entitas</td><td>Offset elemen tidak berbagi identitas, sehingga setiap <code translate="no">AnnSearchRequest</code> tingkat elemen StructArray dikompres sebelum diurutkan ulang.</td><td>Konfigurasi penyembunyian opsional pada setiap sub <code translate="no">AnnSearchRequest</code> tingkat elemen StructArray.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -211,7 +211,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><p>Jika pencarian hibrida menggabungkan permintaan " <code translate="no">AnnSearchRequest</code> " tingkat elemen StructArray dengan permintaan vektor tingkat koleksi, permintaan EmbeddingList, atau permintaan tingkat elemen di bawah bidang StructArray yang berbeda, cakupan kandidat akhir berada pada tingkat entitas. Dalam hal ini, setiap permintaan " <code translate="no">AnnSearchRequest</code> " tingkat elemen StructArray digabungkan menjadi kandidat tingkat entitas sebelum pengurutan ulang hibrida.</p>
-<p>Gunakan ` <code translate="no">element_scope</code> ` di dalam ` <code translate="no">params</code> ` dari ` <code translate="no">AnnSearchRequest</code> ` tingkat elemen StructArray saat Anda perlu mengontrol cara beberapa elemen yang cocok dari entitas yang sama digabungkan.</p>
+<p>Gunakan ` <code translate="no">element_scope</code> ` di dalam ` <code translate="no">params</code> ` dari ` <code translate="no">AnnSearchRequest</code> ` tingkat elemen StructArray jika Anda perlu mengontrol cara beberapa elemen yang cocok dari entitas yang sama digabungkan.</p>
 <pre><code translate="no">title_req = AnnSearchRequest(
     data=[query_vector],
     anns_field=<span class="hljs-string">&quot;title_vector&quot;</span>,
@@ -250,7 +250,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Dalam contoh ini, ` <code translate="no">title_req</code> ` berada pada tingkat entitas, sehingga hasil hibrida akhir juga berada pada tingkat entitas. Permintaan ` <code translate="no">chunk_req</code> ` terlebih dahulu mengembalikan hasil elemen dari ` <code translate="no">chunks[emb]</code>`, kemudian menggabungkan elemen-elemen yang dikembalikan dari entitas yang sama dengan menjumlahkan tiga skor elemen terbaik. Jika ` <code translate="no">element_scope</code> ` diabaikan saat penggabungan tingkat entitas diperlukan, strategi penggabungan secara default akan menggunakan ` <code translate="no">max</code>`.</p>
+<p>Dalam contoh ini, ` <code translate="no">title_req</code> ` berada pada tingkat entitas, sehingga hasil hibrida akhir juga berada pada tingkat entitas. Permintaan ` <code translate="no">chunk_req</code> ` terlebih dahulu mengembalikan hasil elemen dari ` <code translate="no">chunks[emb]</code>`, kemudian menggabungkan elemen yang dikembalikan dari entitas yang sama dengan menjumlahkan tiga skor elemen terbaik. Jika ` <code translate="no">element_scope</code> ` diabaikan saat penggabungan tingkat entitas diperlukan, strategi penggabungan secara default akan menggunakan ` <code translate="no">max</code>`.</p>
 <h2 id="Choose-a-collapse-strategy" class="common-anchor-header">Pilih strategi penggabungan<button data-href="#Choose-a-collapse-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -275,7 +275,7 @@ results = client.hybrid_search(
 <tr><td><code translate="no">sum</code></td><td>Jumlahkan semua skor elemen yang dikembalikan untuk entitas tersebut.</td><td>Tidak diperbolehkan.</td><td>Hanya metrik korelasi positif, seperti <code translate="no">IP</code> atau <code translate="no">COSINE</code>.</td></tr>
 <tr><td><code translate="no">avg</code></td><td>Rata-rata semua skor elemen yang dikembalikan untuk entitas tersebut.</td><td>Tidak diperbolehkan.</td><td>Metrik vektor reguler apa pun yang didukung.</td></tr>
 <tr><td><code translate="no">topk_sum</code></td><td>Jumlahkan skor elemen terbaik yang dikembalikan oleh <code translate="no">K</code> untuk entitas tersebut.</td><td>Diperlukan dan harus bernilai positif.</td><td>Hanya metrik dengan korelasi positif, seperti <code translate="no">IP</code> atau <code translate="no">COSINE</code>.</td></tr>
-<tr><td><code translate="no">topk_avg</code></td><td>Hitung rata-rata skor elemen terbaik yang dikembalikan oleh " <code translate="no">K</code> " untuk entitas tersebut.</td><td>Wajib dan harus bernilai positif.</td><td>Metrik vektor reguler apa pun yang didukung.</td></tr>
+<tr><td><code translate="no">topk_avg</code></td><td>Hitung rata-rata skor elemen terbaik yang dikembalikan oleh " <code translate="no">K</code> " untuk entitas tersebut.</td><td>Diperlukan dan harus bernilai positif.</td><td>Metrik vektor reguler apa pun yang didukung.</td></tr>
 </tbody>
 </table>
 <p>Collapse hanya menggunakan hit elemen yang dikembalikan oleh <code translate="no">AnnSearchRequest</code> tingkat elemen StructArray tersebut. Fitur ini tidak memindai setiap elemen Struct dalam entitas setelah pencarian ANN. Tetapkan <code translate="no">limit</code> permintaan cukup tinggi agar elemen yang Anda inginkan tersedia untuk collapse.</p>
@@ -341,7 +341,7 @@ results = client.hybrid_search(
 <li><p>Jangan gunakan <code translate="no">element_scope</code> untuk permintaan EmbeddingList, permintaan vektor tingkat koleksi, atau pencarian hibrida tingkat elemen StructArray yang sama.</p></li>
 <li><p><code translate="no">sum</code> dan strategi penggabungan <code translate="no">topk_sum</code> memerlukan metrik korelasi positif, seperti <code translate="no">IP</code> atau <code translate="no">COSINE</code>. Jangan gunakan metrik tersebut dengan <code translate="no">L2</code>.</p></li>
 <li><p><code translate="no">topk_sum</code> dan <code translate="no">topk_avg</code> memerlukan nilai <code translate="no">topk</code> yang positif. Strategi penggabungan lainnya tidak boleh menyertakan <code translate="no">topk</code>.</p></li>
-<li><p>Permintaan StructArray tingkat EmbeddingList tidak mendukung pencarian rentang atau pengelompokan berdasarkan (group-by).</p></li>
+<li><p>Permintaan StructArray tingkat EmbeddingList tidak mendukung pencarian rentang atau pengelompokan.</p></li>
 <li><p>Pengelompokan hibrida hanya didukung untuk pencarian hibrida tingkat elemen StructArray yang sama dan hanya berdasarkan kunci utama.</p></li>
 <li><p>Jangan menggabungkan pencarian rentang dengan pengelompokan.</p></li>
 </ul>
@@ -361,7 +361,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Menambahkan ` <code translate="no">element_scope</code> ` ke permintaan hibrida tingkat elemen `StructArray` yang sama. Permintaan tersebut tetap berada di tingkat elemen dan tidak melakukan penggabungan (collapse) di tingkat entitas.</p></li>
+<li><p>Menambahkan ` <code translate="no">element_scope</code> ` ke permintaan hibrida tingkat elemen StructArray yang sama. Permintaan tersebut tetap berada di tingkat elemen dan tidak melakukan penggabungan di tingkat entitas.</p></li>
 <li><p>Menambahkan ` <code translate="no">element_scope</code> ` ke ` <code translate="no">chunks[emb_list_vector]</code>`. Pencarian `EmbeddingList` sudah berada di tingkat entitas.</p></li>
 <li><p>Mengasumsikan dua bidang StructArray berbagi offset elemen. Offset ` <code translate="no">3</code> ` dalam ` <code translate="no">chunks</code> ` dan offset ` <code translate="no">3</code> ` dalam bidang StructArray lain merupakan elemen yang berbeda, sehingga permintaan hibrida menjadi tingkat entitas.</p></li>
 <li><p>Gunakan <code translate="no">topk_sum</code> dengan <code translate="no">L2</code>. Gunakan <code translate="no">max</code>, <code translate="no">avg</code>, atau <code translate="no">topk_avg</code> untuk metrik jarak negatif.</p></li>

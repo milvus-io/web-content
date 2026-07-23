@@ -71,7 +71,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Neue Bereitstellungen (Milvus 3.x):</strong> Verwenden Sie <strong>Woodpecker</strong> (Standard). Bei Standalone-Instanzen wird es eingebettet ausgeführt; für verteilte (Cluster-)Instanzen ist der empfohlene Standard ein dedizierter, mit Helm bereitgestellter <a href="/docs/de/woodpecker.md#Deployment-modes">Dienst</a>, wobei auch die eingebettete Ausführung unterstützt wird.</li>
+<li><strong>Neue Bereitstellungen (Milvus 3.x):</strong> Verwenden Sie <strong>Woodpecker</strong> (Standard). Bei Standalone-Instanzen wird es eingebettet ausgeführt; für verteilte (Cluster-)Instanzen ist der empfohlene Standard ein mit Helm bereitgestellter dedizierter <a href="/docs/de/woodpecker.md#Deployment-modes">Dienst</a>, wobei auch die eingebettete Ausführung unterstützt wird.</li>
 <li><strong>Bestehende Pulsar- oder Kafka-Nutzer:</strong> Pulsar und Kafka werden weiterhin vollständig unterstützt. Behalten Sie diese bei oder <a href="/docs/de/switch-mq-type.md">wechseln Sie zu Woodpecker</a>.</li>
 <li><strong>RocksMQ:</strong> nur im Standalone-Modus verfügbar und in Milvus 3.x durch den eingebetteten Woodpecker abgelöst.</li>
 </ul>

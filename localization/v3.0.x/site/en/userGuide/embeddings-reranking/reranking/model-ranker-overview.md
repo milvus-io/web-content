@@ -141,6 +141,12 @@ beta: Milvus 2.6.x
      <td><ul><li><p>Managed DashScope reranking API</p></li><li><p>Supports reranking models such as <code translate="no">gte-rerank-v2</code></p></li><li><p>API-key based authentication</p></li></ul></td>
      <td><p>RAG applications that want to rerank candidates with Alibaba Cloud-hosted reranking models</p></td>
    </tr>
+   <tr>
+     <td><p>Hugging Face</p></td>
+     <td><p>Applications using hosted Hugging Face sentence-similarity models</p></td>
+     <td><ul><li><p>Uses the hosted <code translate="no">hf-inference</code> provider</p></li><li><p>Selects models from the Hugging Face Hub</p></li><li><p>Calculates one sentence-similarity score per candidate</p></li><li><p>Uses API-key authentication</p></li></ul></td>
+     <td><p>Semantic search applications that want to rerank candidate text with a Hugging Face model without operating a separate inference service</p></td>
+   </tr>
 </table>
 <p>For detailed information about implementation of each model service, refer to the dedicated documentation:</p>
 <ul>
@@ -150,6 +156,7 @@ beta: Milvus 2.6.x
 <li><p><a href="/docs/voyage-ai-ranker.md">Voyage AI Ranker</a></p></li>
 <li><p><a href="/docs/siliconflow-ranker.md">SiliconFlow Ranker</a></p></li>
 <li><p><a href="/docs/dashscope-ranker.md">DashScope Ranker</a></p></li>
+<li><p><a href="/docs/hugging-face-ranker.md">Hugging Face Ranker</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">Implementation<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"

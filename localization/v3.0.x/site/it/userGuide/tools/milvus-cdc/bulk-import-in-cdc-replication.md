@@ -99,7 +99,7 @@ title: Importazione in blocco nella replica CDC
         ></path>
       </svg>
     </button></h2><p>Eseguire tutte le chiamate di importazione sul cluster primario. I dati importati e la decisione di commit vengono replicati automaticamente sul cluster di standby, pertanto non inviare né eseguire il commit dell'importazione manualmente sul cluster di standby.</p>
-<p>Ciascun cluster legge i file di importazione dal proprio object storage. Assicurarsi che i file da importare siano presenti sia nell’object storage primario che in quello di standby. È possibile caricare i file su entrambi i cluster oppure utilizzare un object storage leggibile da entrambi i cluster. Se i file mancano sul cluster di standby, l’importazione replicata fallirà con un errore “oggetto non trovato”.</p>
+<p>Ciascun cluster legge i file di importazione dal proprio object storage. Assicurarsi che i file da importare siano presenti sia nell’object storage primario che in quello di standby. È possibile caricare i file su entrambi i cluster oppure utilizzare un object storage leggibile da entrambi i cluster. Se i file mancano sul cluster di standby, l’importazione replicata fallirà con un errore di oggetto non trovato.</p>
 <p>L’esempio seguente utilizza gli helper di importazione basati su REST disponibili all’indirizzo <code translate="no">pymilvus.bulk_writer</code>. I valori <code translate="no">url</code> corrispondono agli stessi indirizzi Milvus utilizzati per altre chiamate API.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> time
 
@@ -177,7 +177,7 @@ wait_for_state(standby_url, job_id, <span class="hljs-string">&quot;Completed&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>L'esecuzione del commit prima che il cluster di standby abbia completato l'importazione non danneggia i dati, ma il cluster di standby sta ancora recuperando il ritardo quando il commit viene applicato. Attendere che sia il cluster primario che quello di standby segnalino <code translate="no">Uncommitted</code> conferma che i dati importati siano stati completamente replicati ed entrambi i cluster siano pronti a renderli visibili contemporaneamente.</p>
+    </button></h3><p>L'esecuzione del commit prima che il cluster di standby abbia completato l'importazione non danneggia i dati, ma il cluster di standby sta ancora recuperando il ritardo quando il commit viene applicato. Attendere che sia il cluster primario che quello di standby segnalino <code translate="no">Uncommitted</code> conferma che i dati importati sono stati completamente replicati ed entrambi i cluster sono pronti a renderli visibili contemporaneamente.</p>
 <h2 id="Step-3-Verify-the-data" class="common-anchor-header">Passaggio 3: Verifica dei dati<button data-href="#Step-3-Verify-the-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -242,7 +242,7 @@ wait_for_state(standby_url, job_id, <span class="hljs-string">&quot;Completed&qu
         ></path>
       </svg>
     </button></h3><p>No. Il commit sul cluster primario replica il commit sul cluster di standby come un unico fence ordinato.</p>
-<h3 id="Why-does-my-import-fail-with-import-in-replicating-cluster-is-not-supported-yet" class="common-anchor-header">Perché l’importazione fallisce con l’errore “ <code translate="no">import in replicating cluster is not supported yet</code> ”?<button data-href="#Why-does-my-import-fail-with-import-in-replicating-cluster-is-not-supported-yet" class="anchor-icon" translate="no">
+<h3 id="Why-does-my-import-fail-with-import-in-replicating-cluster-is-not-supported-yet" class="common-anchor-header">Perché l’importazione fallisce con l’errore « <code translate="no">import in replicating cluster is not supported yet</code> »?<button data-href="#Why-does-my-import-fail-with-import-in-replicating-cluster-is-not-supported-yet" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -257,7 +257,7 @@ wait_for_state(standby_url, job_id, <span class="hljs-string">&quot;Completed&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">dataCoord.import.enableInReplicatingCluster</code> non è abilitato su quel cluster. Impostalo su " <code translate="no">true</code> " sia sul cluster primario che su quello di standby.</p>
+    </button></h3><p><code translate="no">dataCoord.import.enableInReplicatingCluster</code> non è abilitato su quel cluster. Impostalo su « <code translate="no">true</code> » sia sul cluster primario che su quello di standby.</p>
 <h3 id="Why-does-my-import-fail-with-autocommittrue-import-in-replicating-cluster-is-not-supported" class="common-anchor-header">Perché la mia importazione fallisce con l’opzione “ <code translate="no">auto_commit=true import in replicating cluster is not supported</code> ”?<button data-href="#Why-does-my-import-fail-with-autocommittrue-import-in-replicating-cluster-is-not-supported" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -273,4 +273,4 @@ wait_for_state(standby_url, job_id, <span class="hljs-string">&quot;Completed&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>In un cluster in replica, vengono accettate solo importazioni 2PC con ` <code translate="no">auto_commit=false</code> `. Impostare ` <code translate="no">options={&quot;auto_commit&quot;: &quot;false&quot;}</code> ` nella richiesta di importazione.</p>
+    </button></h3><p>In un cluster con replica, vengono accettate solo importazioni 2PC con ` <code translate="no">auto_commit=false</code> `. Impostare ` <code translate="no">options={&quot;auto_commit&quot;: &quot;false&quot;}</code> ` nella richiesta di importazione.</p>

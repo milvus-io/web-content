@@ -5,7 +5,7 @@ summary: >-
   Utiliza esta página para realizar búsquedas vectoriales en subcampos
   vectoriales dentro de un campo StructArray. StructArray admite dos modos
   básicos de búsqueda vectorial: la búsqueda en EmbeddingList, que evalúa una
-  lista de incrustaciones almacenada en cada entidad, y la búsqueda a nivel de
+  lista de representaciones almacenada en cada entidad, y la búsqueda a nivel de
   elemento, que busca en cada elemento de Struct de forma independiente.
 ---
 <h1 id="Basic-Vector-Search-with-StructArray" class="common-anchor-header">Búsqueda vectorial básica con StructArray<button data-href="#Basic-Vector-Search-with-StructArray" class="anchor-icon" translate="no">
@@ -24,7 +24,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Utiliza esta página para realizar búsquedas vectoriales en subcampos vectoriales dentro de un campo StructArray. StructArray admite dos modos básicos de búsqueda vectorial: la búsqueda en EmbeddingList, que evalúa una lista de incrustaciones almacenada en cada entidad, y la búsqueda a nivel de elemento, que busca en cada elemento de Struct de forma independiente.</p>
-<p>Esta página utiliza la colección « <code translate="no">tech_articles</code> » de la sección <a href="/docs/es/create-structarray-field.md">«Crear un campo StructArray</a>». La colección cuenta con un campo StructArray denominado « <code translate="no">chunks</code> ». Cada fragmento contiene texto, metadatos escalares, un subcampo vectorial denominado « <code translate="no">emb_list_vector</code> » con un índice para la búsqueda EmbeddingList, y un subcampo vectorial denominado « <code translate="no">emb</code> » con un índice para la búsqueda a nivel de elemento.</p>
+<p>Esta página utiliza la colección « <code translate="no">tech_articles</code> » de la sección <a href="/docs/es/create-structarray-field.md">«Crear un campo StructArray</a>». La colección cuenta con un campo StructArray denominado « <code translate="no">chunks</code> ». Cada fragmento contiene texto, metadatos escalares, un subcampo vectorial denominado « <code translate="no">emb_list_vector</code> » con un índice para la búsqueda en EmbeddingList, y un subcampo vectorial denominado « <code translate="no">emb</code> » con un índice para la búsqueda a nivel de elemento.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Antes de empezar<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -100,7 +100,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utiliza la búsqueda con EmbeddingList cuando la propia consulta contenga varios vectores y el subcampo del vector StructArray de destino esté indexado con una métrica de « <code translate="no">MAX_SIM*</code> ». El resultado es una coincidencia a nivel de entidad.</p>
+    </button></h2><p>Utiliza la búsqueda EmbeddingList cuando la propia consulta contenga varios vectores y el subcampo del vector StructArray de destino esté indexado con una métrica « <code translate="no">MAX_SIM*</code> ». El resultado es una coincidencia a nivel de entidad.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">from</span> pymilvus.client.embedding_list <span class="hljs-keyword">import</span> EmbeddingList
 
@@ -131,7 +131,7 @@ results = client.search(
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
         <span class="hljs-built_in">print</span>(hit[<span class="hljs-string">&quot;id&quot;</span>], hit[<span class="hljs-string">&quot;distance&quot;</span>], hit[<span class="hljs-string">&quot;entity&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>En este modo de búsqueda, « <code translate="no">limit</code> » controla cuántas entidades se devuelven para cada consulta. El resultado puede incluir subcampos de StructArray, pero la coincidencia en sí misma representa la entidad principal con la que coincide, en lugar de un elemento Struct específico.</p>
+<p>En este modo de búsqueda, « <code translate="no">limit</code> » controla cuántas entidades se devuelven para cada consulta. El resultado puede incluir subcampos de StructArray, pero la coincidencia en sí representa la entidad principal con la que coincide, en lugar de un elemento Struct específico.</p>
 <div class="alert note">
 <p>Para obtener una guía completa al estilo de ColBERT o ColPali, consulta <a href="/docs/es/search-with-embedding-lists.md">«Búsqueda con listas de incrustación</a>». Esta página solo aborda el comportamiento básico de la búsqueda en StructArray.</p>
 </div>
@@ -202,7 +202,7 @@ results = client.search(
 <tr><td><code translate="no">distance</code> o puntuación</td><td>Puntuación o distancia entre la lista de incrustaciones de la consulta y la lista de incrustaciones almacenada.</td><td>Puntuación o distancia entre el vector de consulta y el vector del elemento Struct coincidente.</td></tr>
 <tr><td><code translate="no">offset</code></td><td>No aplicable.</td><td>Posición, contada a partir de cero, del elemento Struct coincidente cuando se devuelve.</td></tr>
 <tr><td>Claves primarias repetidas</td><td>No es de esperar en una sola consulta, ya que los resultados son a nivel de entidad.</td><td>Es posible, ya que pueden coincidir varios elementos Struct de la misma entidad.</td></tr>
-<tr><td>Campos de salida solicitados de StructArray</td><td>Devueltos desde la entidad coincidente.</td><td>Se devuelven con la forma de coincidencia a nivel de elemento que admiten la API y el SDK de destino.</td></tr>
+<tr><td>Campos de salida solicitados de StructArray</td><td>Devueltos desde la entidad coincidente.</td><td>Se devuelven con la forma de coincidencia a nivel de elemento admitida por la API y el SDK de destino.</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">Errores comunes<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
@@ -221,11 +221,11 @@ results = client.search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Utilizar « <code translate="no">chunks.emb</code> » en lugar de la sintaxis de ruta de subcampo requerida « <code translate="no">chunks[emb]</code> ».</p></li>
-<li><p>Utilizar una consulta EmbeddingList en un subcampo vectorial indexado con una métrica vectorial normal.</p></li>
-<li><p>Utilizar una consulta vectorial normal en un subcampo vectorial indexado con una métrica de « <code translate="no">MAX_SIM*</code> ».</p></li>
-<li><p>Esperar que la búsqueda a nivel de elemento <code translate="no">limit</code> devuelva ese número de entidades principales únicas. Devuelve coincidencias de elementos.</p></li>
-<li><p>Esperar que la búsqueda de EmbeddingList devuelva un desplazamiento de elemento específico. Devuelve coincidencias a nivel de entidad.</p></li>
+<li><p>Utilizar « <code translate="no">chunks.emb</code> » en lugar de la sintaxis de ruta de subcampo requerida: « <code translate="no">chunks[emb]</code> ».</p></li>
+<li><p>Utilizar una consulta EmbeddingList sobre un subcampo vectorial indexado con una métrica vectorial normal.</p></li>
+<li><p>Utilizar una consulta vectorial normal contra un subcampo vectorial indexado con una métrica de « <code translate="no">MAX_SIM*</code> ».</p></li>
+<li><p>Esperar que la búsqueda a nivel de elemento « <code translate="no">limit</code> » devuelva ese número de entidades principales únicas. Lo que devuelve son coincidencias de elementos.</p></li>
+<li><p>Esperar que la búsqueda EmbeddingList devuelva un desplazamiento de elemento específico. Devuelve coincidencias a nivel de entidad.</p></li>
 <li><p>Reutilizar un mismo subcampo vectorial para ambos modos de búsqueda. Utilice subcampos vectoriales independientes, ya que cada subcampo vectorial solo admite un índice.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Próximos pasos<button data-href="#Next-steps" class="anchor-icon" translate="no">

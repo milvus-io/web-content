@@ -63,7 +63,7 @@ summary: >-
 <tr><td><code translate="no">page</code></td><td><code translate="no">INT64</code></td><td>Número de página o posición lógica del fragmento.</td></tr>
 <tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>Puntuación a nivel de fragmento utilizada en el filtrado escalar y en los ejemplos de rango.</td></tr>
 <tr><td><code translate="no">has_code</code></td><td><code translate="no">BOOL</code></td><td>Si el fragmento contiene código.</td></tr>
-<tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Subcampo vectorial para la búsqueda en EmbeddingList con métricas de <code translate="no">MAX_SIM*</code>.</td></tr>
+<tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Subcampo vectorial para la búsqueda en EmbeddingList con métricas de « <code translate="no">MAX_SIM*</code> ».</td></tr>
 <tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Subcampo vectorial para la búsqueda a nivel de elemento con métricas vectoriales habituales.</td></tr>
 </tbody>
 </table>
@@ -85,7 +85,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un campo StructArray almacena un valor de matriz para cada subcampo Struct. Al definir un esquema Struct, elija los tipos de subcampo de entre las familias escalares y vectoriales compatibles.</p>
+    </button></h2><p>Un campo StructArray almacena un valor de matriz para cada subcampo Struct. Al definir un esquema Struct, elija los tipos de subcampos de entre las familias escalares y vectoriales compatibles.</p>
 <table>
 <thead>
 <tr><th>Tipo físico de subcampo Struct</th><th>Compatibilidad</th><th>Notas</th></tr>
@@ -94,7 +94,7 @@ summary: >-
 <tr><td><code translate="no">Array</code></td><td>Compatible</td><td>Defina el subcampo como « <code translate="no">DataType.BOOL</code> ».</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Compatible</td><td>Defina el subcampo como « <code translate="no">DataType.INT8</code> », « <code translate="no">DataType.INT16</code> », « <code translate="no">DataType.INT32</code> » o « <code translate="no">DataType.INT64</code> ».</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Compatible</td><td>Defina el subcampo como <code translate="no">DataType.FLOAT</code> o <code translate="no">DataType.DOUBLE</code>.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Compatible</td><td>Defina el subcampo como <code translate="no">DataType.VARCHAR</code> y establezca <code translate="no">max_length</code>.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Compatible</td><td>Defina el subcampo como « <code translate="no">DataType.VARCHAR</code> » y establezca « <code translate="no">max_length</code> ».</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Compatible</td><td>Defina el subcampo como « <code translate="no">DataType.FLOAT_VECTOR</code> » y establezca « <code translate="no">dim</code> ».</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Compatible</td><td>Defina el subcampo como « <code translate="no">DataType.FLOAT16_VECTOR</code> » y establezca « <code translate="no">dim</code> ».</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Compatible</td><td>Defina el subcampo como « <code translate="no">DataType.BFLOAT16_VECTOR</code> » y establezca « <code translate="no">dim</code> ».</td></tr>
@@ -109,7 +109,7 @@ summary: >-
 <tr><td><code translate="no">Array</code>, <code translate="no">ArrayOfVector</code>, <code translate="no">Struct</code> o <code translate="no">ArrayOfStruct</code></td><td>No compatible</td><td>Un campo StructArray no puede contener matrices anidadas, matrices vectoriales anidadas, campos Struct anidados ni campos Array-of-Struct anidados.</td></tr>
 </tbody>
 </table>
-<p>Para obtener información sobre la compatibilidad específica de cada versión, el comportamiento de los valores nulos y otras restricciones, consulta <a href="/docs/es/structarray-limits.md">«Restricciones de StructArray</a>».</p>
+<p>Para obtener información sobre la compatibilidad específica de cada versión, el comportamiento de los valores nulos y otras restricciones, consulta <a href="/docs/es/structarray-limits.md">Restricciones de StructArray</a>.</p>
 <h2 id="Create-a-collection-with-a-StructArray-field" class="common-anchor-header">Crear una colección con un campo StructArray<button data-href="#Create-a-collection-with-a-StructArray-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -237,7 +237,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una vez creado un campo StructArray, haz referencia a sus subcampos utilizando la sintaxis de ruta « <code translate="no">structArray[subfield]</code> ». Utiliza esta sintaxis al crear índices, buscar en subcampos vectoriales, generar subcampos o crear filtros escalares.</p>
+    </button></h2><p>Una vez creado un campo StructArray, haz referencia a sus subcampos utilizando la sintaxis de ruta « <code translate="no">structArray[subfield]</code> ». Utiliza esta sintaxis al crear índices, buscar en subcampos vectoriales, generar subcampos de salida o crear filtros escalares.</p>
 <table>
 <thead>
 <tr><th>Ruta</th><th>Significado</th><th>Uso habitual</th></tr>
@@ -407,7 +407,7 @@ client.add_collection_struct_field(
 <li><p>Utilizar un único subcampo vectorial tanto para la búsqueda en EmbeddingList como para la búsqueda a nivel de elemento.</p></li>
 <li><p>Añadir únicamente subcampos vectoriales y omitir los subcampos escalares necesarios para el filtrado, como <code translate="no">section</code>, <code translate="no">quality_score</code> o <code translate="no">has_code</code>.</p></li>
 <li><p>Tratar los subcampos vectoriales como entradas de predicados escalares de tipo <code translate="no">$[...]</code>. Utilizar los subcampos vectoriales para la búsqueda vectorial y los subcampos escalares para los predicados escalares.</p></li>
-<li><p>Suponer que se pueden añadir nuevos subcampos a un campo StructArray ya existente una vez creado dicho campo.</p></li>
+<li><p>Suponer que se pueden añadir nuevos subcampos a un campo StructArray existente una vez creado dicho campo.</p></li>
 <li><p>Utilizar <code translate="no">chunks.emb</code> o <code translate="no">chunks.emb_list_vector</code> en lugar de la sintaxis de ruta requerida <code translate="no">chunks[emb]</code> o <code translate="no">chunks[emb_list_vector]</code>.</p></li>
 <li><p>Tratar el comportamiento de los StructArray nulos como si estuviera disponible en todas las versiones de destino.</p></li>
 </ul>

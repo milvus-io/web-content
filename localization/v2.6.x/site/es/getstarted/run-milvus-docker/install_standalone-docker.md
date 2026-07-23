@@ -70,14 +70,14 @@ title: Ejecutar Milvus en Docker (Linux)
 <li><strong>Arquitectura optimizada</strong>: componentes consolidados para un mejor rendimiento</li>
 </ul>
 <p>Descarga siempre el script más reciente para asegurarte de obtener las configuraciones y mejoras de arquitectura más actuales.</p>
-<p>Si desea utilizar <a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a> en modo de implementación independiente, se recomienda utilizar el método de implementación <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
+<p>Si desea utilizar <a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a> en modo de implementación autónoma, se recomienda utilizar el método de implementación <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
 <p>Si tiene algún problema al descargar la imagen, póngase en contacto con nosotros en <a href="mailto:community@zilliz.com">community@zilliz.com</a> con los detalles del problema y le proporcionaremos la asistencia necesaria.</p>
 </div>
 <p>Tras ejecutar el script de instalación:</p>
 <ul>
 <li>Se ha iniciado un contenedor de Docker llamado «milvus» en el puerto <strong>19530</strong>.</li>
-<li>Se ha instalado un etcd integrado junto con Milvus en el mismo contenedor y está disponible en el puerto <strong>2379</strong>. Su archivo de configuración está asociado a <strong>embedEtcd.yaml</strong> en la carpeta actual.</li>
-<li>Para cambiar la configuración predeterminada de Milvus, añade tus ajustes al archivo <strong>user.yaml</strong> de la carpeta actual y, a continuación, reinicia el servicio.</li>
+<li>Se ha instalado un etcd integrado junto con Milvus en el mismo contenedor y está disponible en el puerto <strong>2379</strong>. Su archivo de configuración está asignado a <strong>«embedEtcd.yaml»</strong> en la carpeta actual.</li>
+<li>Para modificar la configuración predeterminada de Milvus, añade tus ajustes al archivo <strong>user.yaml</strong> de la carpeta actual y, a continuación, reinicia el servicio.</li>
 <li>El volumen de datos de Milvus está asignado a <strong>«volumes/milvus»</strong> en la carpeta actual.</li>
 </ul>
 <p>Puede acceder a la interfaz web de Milvus en <code translate="no">http://127.0.0.1:9091/webui/</code> para obtener más información sobre su instancia de Milvus. Para más detalles, consulte <a href="/docs/es/v2.6.x/milvus-webui.md">la interfaz web de Milvus</a>.</p>

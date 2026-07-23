@@ -36,7 +36,7 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>タイ語テキストの場合は、ほとんどの場合、組み込みの <a href="/docs/ja/thai-analyzer.md"><code translate="no">thai</code></a> アナライザーを使用してください。この組み込みアナライザーには、このトークナイザーに加え、小文字変換、小数点桁の正規化、およびタイ語のストップワード除去機能が含まれています。<code translate="no">thai</code> トークナイザーを直接使用するのは、カスタムアナライザーパイプラインを構築する必要がある場合に限ってください。</p>
+<p>タイ語テキストについては、ほとんどの場合、組み込みの <a href="/docs/ja/thai-analyzer.md"><code translate="no">thai</code></a> アナライザーを使用してください。この組み込みアナライザーには、このトークナイザーに加え、小文字変換、小数点桁の正規化、およびタイ語のストップワード除去機能が含まれています。<code translate="no">thai</code> トークナイザーを直接使用するのは、カスタムアナライザーパイプラインを構築する必要がある場合に限ってください。</p>
 </div>
 <p><code translate="no">thai</code> トークナイザーを使用してアナライザーを設定するには、<code translate="no">analyzer_params</code> で<code translate="no">tokenizer</code> を<code translate="no">thai</code> に設定します。</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -53,14 +53,14 @@ beta: Milvus 3.0.0+
     ],
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>このカスタムパイプラインは、組み込みの<code translate="no">_thai_</code> ストップワード辞書が含まれていないため、組み込みの<code translate="no">thai</code> アナライザとは同等ではありません。完全な事前定義済みパイプラインについては、<code translate="no">{&quot;type&quot;: &quot;thai&quot;}</code> を使用してください。</p>
+<p>このカスタムパイプラインは、組み込みの<code translate="no">_thai_</code> ストップワード辞書が含まれていないため、組み込みの<code translate="no">thai</code> アナライザーとは同等ではありません。完全な事前定義済みパイプラインについては、<code translate="no">{&quot;type&quot;: &quot;thai&quot;}</code> を使用してください。</p>
 <p>このトークナイザーは、以下の動作を行います：</p>
 <ul>
-<li><strong>タイ語のセグメンテーション</strong>：空白に依存せずに、タイ語のテキストを単語トークンに分割します。</li>
+<li><strong>タイ語のセグメンテーション</strong>：空白に依存することなく、タイ語のテキストを単語トークンに分割します。</li>
 <li><strong>空白および句読点のフィルタリング</strong>：空白や句読点のみで構成されるセグメントを除外します。これは、 <a href="/docs/ja/icu-tokenizer.md"><code translate="no">icu</code></a> トークナイザーとは異なり、後者は句読点やスペースをトークンとして保持することができます。</li>
-<li><strong>混合スクリプトのテキスト</strong>：タイ語と英語が混在するテキストにおいて、ラテン文字の単語トークンを出力します。</li>
+<li><strong>混合スクリプトのテキスト</strong>：タイ語と英語が混在するテキストにおいて、ラテン文字の単語トークンを生成します。</li>
 <li><strong>トークナイザーのみ</strong>：トークンの小文字化、Unicode 数字の正規化、ストップワードの除去は行いません。これらの処理には、フィルタを追加するか、組み込みの <a href="/docs/ja/thai-analyzer.md"><code translate="no">thai</code></a> アナライザーを使用してください。</li>
-<li><strong>位置セマンティクス</strong>：スキップされた空白や句読点を含む、文字ベースのトークン位置を使用します。これにより、フレーズマッチングや近接マッチングの挙動が、他の非ラテン文字用トークナイザーと一貫性を保つようになります。</li>
+<li><strong>位置セマンティクス</strong>：スキップされた空白や句読点を含む、文字ベースのトークン位置を使用します。これにより、フレーズマッチングや近接マッチングの挙動が、他の非ラテン文字トークナイザーと一貫性を保つようになります。</li>
 </ul>
 <p><code translate="no">analyzer_params</code> を定義した後、コレクションスキーマを定義する際に、<code translate="no">VARCHAR</code> フィールドにこのアナライザーを適用できます。詳細については、<a href="/docs/ja/analyzer-overview.md#Example-use">「使用例</a>」を参照してください。</p>
 <h2 id="Examples" class="common-anchor-header">例<button data-href="#Examples" class="anchor-icon" translate="no">
@@ -79,7 +79,7 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><p>アナライザの設定をコレクションスキーマに適用する前に、<code translate="no">run_analyzer</code> メソッドを使用してその動作を確認してください。</p>
-<h3 id="Analyzer-configuration" class="common-anchor-header">アナライザーの設定<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
+<h3 id="Analyzer-configuration" class="common-anchor-header">アナライザの設定<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

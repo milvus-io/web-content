@@ -88,7 +88,7 @@ title: Atualizar o Milvus Standalone com o Helm Chart
 <li>Se estiver atualmente a utilizar a v2.6.0-rc1 e precisar de preservar os seus dados, consulte <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">este guia da comunidade</a> para obter assistência na migração.</li>
 <li><strong>Deve</strong> atualizar para a v2.5.16 ou posterior antes de atualizar para a v2.6.17.</li>
 </ul>
-<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v2.6.17, deve manter a sua escolha atual de fila de mensagens. A mudança entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte para a mudança de sistemas de filas de mensagens estará disponível em versões futuras.</p>
+<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v2.6.17, deve manter a sua escolha atual de fila de mensagens. A mudança entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à mudança de sistemas de filas de mensagens estará disponível em versões futuras.</p>
 <div class="alert note">
 A partir da versão 4.2.21 do gráfico Helm do Milvus, introduzimos o gráfico pulsar-v3.x como dependência. Para garantir a compatibilidade com versões anteriores, atualize o seu Helm para a versão 3.14 ou posterior e certifique-se de que adiciona a opção « <code translate="no">--reset-then-reuse-values</code> » sempre que utilizar « <code translate="no">helm upgrade</code> ».
 </div>
@@ -132,7 +132,7 @@ O repositório de gráficos Helm do Milvus em <code translate="no">https://milvu
 <p>Para verificar a compatibilidade da versão do Helm Chart com as versões do Milvus:</p>
 <pre><code translate="no" class="language-bash">helm search repo zilliztech/milvus --versions
 <button class="copy-code-btn"></button></code></pre>
-<p>Este guia parte do princípio de que está a instalar a versão mais recente. Se precisar de instalar uma versão específica, especifique o parâmetro <code translate="no">--version</code> em conformidade.</p>
+<p>Este guia pressupõe que está a instalar a versão mais recente. Se precisar de instalar uma versão específica, especifique o parâmetro <code translate="no">--version</code> em conformidade.</p>
 <h3 id="Step-2-Upgrade-to-v2516" class="common-anchor-header">Passo 2: Atualizar para a v2.5.16<button data-href="#Step-2-Upgrade-to-v2516" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -161,7 +161,7 @@ O repositório de gráficos Helm do Milvus em <code translate="no">https://milvu
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Upgrade-to-v2617" class="common-anchor-header">Passo 3: Atualizar para a versão v2.6.17<button data-href="#Step-3-Upgrade-to-v2617" class="anchor-icon" translate="no">
+<h3 id="Step-3-Upgrade-to-v2617" class="common-anchor-header">Passo 3: Atualizar para a versão 2.6.17<button data-href="#Step-3-Upgrade-to-v2617" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

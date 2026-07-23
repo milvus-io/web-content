@@ -48,7 +48,7 @@ summary: >-
 <tbody>
 <tr><td>Erstellen Sie ein StructArray-Feld, z. B. „ <code translate="no">chunks</code> “.</td><td><a href="/docs/de/create-structarray-field.md">Erstellen eines StructArray-Feldes</a></td></tr>
 <tr><td>Fügen Sie Entitäten ein, deren Feld „ <code translate="no">chunks</code> “ Struct-Objekte enthält.</td><td><a href="/docs/de/insert-data-into-structarray-fields.md">Daten in „StructArray“-Felder einfügen</a></td></tr>
-<tr><td>Erstellen Sie einen „ <code translate="no">MAX_SIM*</code> “-Index unter „ <code translate="no">chunks[emb_list_vector]</code> “ für die Suche in „EmbeddingList“.</td><td><a href="/docs/de/index-structarray-fields.md">StructArray-Felder indizieren</a></td></tr>
+<tr><td>Erstellen Sie einen „ <code translate="no">MAX_SIM*</code> “-Index auf „ <code translate="no">chunks[emb_list_vector]</code> “ für die Suche in „EmbeddingList“.</td><td><a href="/docs/de/index-structarray-fields.md">StructArray-Felder indizieren</a></td></tr>
 <tr><td>Erstellen Sie einen regulären vektormetrischen Index auf „ <code translate="no">chunks[emb]</code> “ für die Suche auf Elementebene.</td><td><a href="/docs/de/index-structarray-fields.md">StructArray-Felder indizieren</a></td></tr>
 </tbody>
 </table>
@@ -78,7 +78,7 @@ summary: >-
 <tbody>
 <tr><td>Ziel-Unterfeld</td><td><code translate="no">chunks[emb_list_vector]</code></td><td><code translate="no">chunks[emb]</code></td></tr>
 <tr><td>Abfragedaten</td><td>Eine Einbettungsliste, die einen oder mehrere Vektoren enthält.</td><td>Ein regulärer Vektor.</td></tr>
-<tr><td>Metrikfamilie</td><td><code translate="no">MAX_SIM*</code>, wie z. B. <code translate="no">MAX_SIM_COSINE</code>.</td><td>Reguläre Vektormetriken, wie z. B. <code translate="no">COSINE</code>, <code translate="no">IP</code> oder <code translate="no">L2</code>.</td></tr>
+<tr><td>Metrikfamilie</td><td><code translate="no">MAX_SIM*</code>, wie z. B. <code translate="no">MAX_SIM_COSINE</code>.</td><td>Reguläre Vektormetriken, wie z. B. „ <code translate="no">COSINE</code> “, „ <code translate="no">IP</code> “ oder „ <code translate="no">L2</code> “.</td></tr>
 <tr><td>Was ein Treffer darstellt</td><td>Eine übereinstimmende Entität, deren StructArray-Vektor-Unterfeld der Einbettungsliste der Abfrage ähnelt.</td><td>Ein übereinstimmendes Struct-Element innerhalb des StructArray-Feldes.</td></tr>
 <tr><td>Granularität der Ergebnisse</td><td>Entitäts-Ebene.</td><td>Struct-Element-Ebene.</td></tr>
 <tr><td>Offset</td><td>Nicht zutreffend.</td><td>Gibt die Position des gefundenen Struct-Elements (ab Null) bei der Rückgabe an.</td></tr>
@@ -177,7 +177,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>Bei der Suche auf Elementebene steht jeder Treffer für ein übereinstimmendes „Struct“-Element. Der Wert „ <code translate="no">offset</code> “ ist die nullbasierte Position dieses Elements im „StructArray“-Feld. Dieselbe Entität kann mehrmals vorkommen, wenn mehr als ein „Struct“-Element mit der Abfrage übereinstimmt. Der Wert „ <code translate="no">limit</code> “ bezieht sich auf Elementtreffer, nicht auf eindeutige übergeordnete Entitäten.</p>
+<p>Bei der Suche auf Elementebene repräsentiert jeder Treffer ein übereinstimmendes „Struct“-Element. Der Wert „ <code translate="no">offset</code> “ ist die nullbasierte Position dieses Elements im „StructArray“-Feld. Dieselbe Entität kann mehrmals vorkommen, wenn mehr als ein „Struct“-Element mit der Abfrage übereinstimmt. Der Wert „ <code translate="no">limit</code> “ bezieht sich auf Elementtreffer, nicht auf eindeutige übergeordnete Entitäten.</p>
 <h2 id="Interpret-results" class="common-anchor-header">Ergebnisse interpretieren<button data-href="#Interpret-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -225,7 +225,7 @@ results = client.search(
 <li><p>Verwendung einer „EmbeddingList“-Abfrage für ein Vektor-Unterfeld, das mit einer regulären Vektormetrik indiziert ist.</p></li>
 <li><p>Verwendung einer regulären Vektorabfrage für ein Vektor-Unterfeld, das mit einer „ <code translate="no">MAX_SIM*</code> “-Metrik indiziert ist.</p></li>
 <li><p>Die Erwartung, dass die Suche auf Elementebene mit „ <code translate="no">limit</code> “ ebenso viele eindeutige übergeordnete Entitäten zurückgibt. Es werden Elementtreffer zurückgegeben.</p></li>
-<li><p>Erwartung, dass die „EmbeddingList“-Suche einen bestimmten Element-Offset zurückgibt. Es werden Übereinstimmungen auf Entitätsebene zurückgegeben.</p></li>
+<li><p>Die Erwartung, dass die „EmbeddingList“-Suche einen bestimmten Element-Offset zurückgibt. Es werden Übereinstimmungen auf Entitätsebene zurückgegeben.</p></li>
 <li><p>Wiederverwendung eines Vektor-Teilfelds für beide Suchmodi. Verwenden Sie separate Vektor-Teilfelder, da jedes Vektor-Teilfeld nur einen Index akzeptiert.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Nächste Schritte<button data-href="#Next-steps" class="anchor-icon" translate="no">
