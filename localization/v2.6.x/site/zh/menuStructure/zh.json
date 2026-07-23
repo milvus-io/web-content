@@ -6,7 +6,7 @@
     "order": 0,
     "children": [
       {
-        "label": "Milvus 是什么？",
+        "label": "什么是 Milvus",
         "id": "overview.md",
         "order": 0,
         "children": []
@@ -24,7 +24,7 @@
         "children": []
       },
       {
-        "label": "发布",
+        "label": "新闻稿",
         "id": "release_notes.md",
         "order": 3,
         "children": []
@@ -38,7 +38,7 @@
     ]
   },
   {
-    "label": "开始",
+    "label": "开始使用",
     "id": "getstarted",
     "isMenu": true,
     "order": 1,
@@ -86,19 +86,19 @@
                 "children": []
               },
               {
-                "label": "Docker (Linux)",
+                "label": "Docker（Linux）",
                 "id": "install_standalone-docker.md",
                 "order": 2,
                 "children": []
               },
               {
-                "label": "Docker Compose (Linux)",
+                "label": "Docker Compose（Linux）",
                 "id": "install_standalone-docker-compose.md",
                 "order": 3,
                 "children": []
               },
               {
-                "label": "Docker 桌面（Windows）",
+                "label": "Docker Desktop（Windows）",
                 "id": "install_standalone-windows.md",
                 "order": 4,
                 "children": []
@@ -132,7 +132,7 @@
             ]
           },
           {
-            "label": "使用 GPU 运行 Milvus",
+            "label": "在 GPU 上运行 Milvus",
             "id": "run_milvus_gpu",
             "order": 4,
             "isMenu": true,
@@ -191,7 +191,7 @@
         ]
       },
       {
-        "label": "连接 Milvus 服务器",
+        "label": "连接到 Milvus 服务器",
         "id": "connect-to-milvus-server.md",
         "order": 3,
         "children": []
@@ -241,7 +241,7 @@
             "children": []
           },
           {
-            "label": "Knowhere",
+            "label": "诺瓦",
             "id": "knowhere.md",
             "order": 5,
             "children": []
@@ -249,7 +249,7 @@
         ]
       },
       {
-        "label": "比特集",
+        "label": "Bitset",
         "id": "bitset.md",
         "order": 1,
         "children": []
@@ -273,13 +273,13 @@
         "children": []
       },
       {
-        "label": "公制类型",
+        "label": "度量类型",
         "id": "metric.md",
         "order": 7,
         "children": []
       },
       {
-        "label": "内存复制",
+        "label": "内存副本",
         "id": "replica.md",
         "order": 8,
         "children": []
@@ -310,13 +310,13 @@
         "order": 1,
         "children": [
           {
-            "label": "Collections 解释",
+            "label": "About the Collection",
             "id": "manage-collections.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "创建 Collections",
+            "label": "Create Collection",
             "id": "create-collection.md",
             "order": 1,
             "children": []
@@ -328,19 +328,19 @@
             "children": []
           },
           {
-            "label": "修改 Collections",
+            "label": "修改 Collection",
             "id": "modify-collection.md",
             "order": 4,
             "children": []
           },
           {
-            "label": "装载和释放",
+            "label": "加载与释放",
             "id": "load-and-release.md",
             "order": 5,
             "children": []
           },
           {
-            "label": "设置 Collections TTL",
+            "label": "Collection TTL",
             "id": "set-collection-ttl.md",
             "order": 6,
             "children": []
@@ -372,24 +372,24 @@
         ]
       },
       {
-        "label": "Schema 和数据字段",
+        "label": "Schema与数据字段",
         "id": "schema",
         "order": 2,
         "children": [
           {
-            "label": "Schema 解释",
+            "label": "Schema说明",
             "id": "schema.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "主字段和自动识别",
+            "label": "主字段与自动标识符",
             "id": "primary-field.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "密集向量",
+            "label": "稠密向量",
             "id": "dense-vector.md",
             "order": 2,
             "children": []
@@ -436,7 +436,7 @@
                 "children": []
               },
               {
-                "label": "JSON 粉碎",
+                "label": "JSON 拆分",
                 "id": "json-shredding.md",
                 "order": 2,
                 "children": []
@@ -450,7 +450,7 @@
             "children": []
           },
           {
-            "label": "结构数组",
+            "label": "结构体数组",
             "id": "array-of-structs.md",
             "order": 9,
             "children": []
@@ -474,7 +474,7 @@
             "children": []
           },
           {
-            "label": "可归零字段",
+            "label": "可为空字段",
             "id": "nullable-and-default.md",
             "order": 13,
             "children": []
@@ -497,7 +497,7 @@
                 "children": []
               },
               {
-                "label": "内置分析仪",
+                "label": "内置分析器",
                 "id": "built-in-analyzers",
                 "order": 1,
                 "children": [
@@ -522,7 +522,7 @@
                 ]
               },
               {
-                "label": "代币化器",
+                "label": "分词器",
                 "id": "tokenizers",
                 "order": 2,
                 "children": [
@@ -533,25 +533,25 @@
                     "children": []
                   },
                   {
-                    "label": "白色空间",
+                    "label": "空白",
                     "id": "whitespace-tokenizer.md",
                     "order": 1,
                     "children": []
                   },
                   {
-                    "label": "杰巴",
+                    "label": "Jieba",
                     "id": "jieba-tokenizer.md",
                     "order": 2,
                     "children": []
                   },
                   {
-                    "label": "林德拉",
+                    "label": "Lindera",
                     "id": "lindera-tokenizer.md",
                     "order": 3,
                     "children": []
                   },
                   {
-                    "label": "加护病房",
+                    "label": "ICU",
                     "id": "icu-tokenizer.md",
                     "order": 4,
                     "children": []
@@ -565,7 +565,7 @@
                 ]
               },
               {
-                "label": "过滤器",
+                "label": "筛选条件",
                 "id": "filters",
                 "order": 3,
                 "children": [
@@ -576,25 +576,25 @@
                     "children": []
                   },
                   {
-                    "label": "ASCII 折叠件",
+                    "label": "ASCII 折叠",
                     "id": "ascii-folding-filter.md",
                     "order": 1,
                     "children": []
                   },
                   {
-                    "label": "Alphanumonly",
+                    "label": "仅限字母数字",
                     "id": "alphanumonly-filter.md",
                     "order": 2,
                     "children": []
                   },
                   {
-                    "label": "仅 Cnalphanumonly",
+                    "label": "Cnalphanumonly",
                     "id": "cnalphanumonly-filter.md",
                     "order": 3,
                     "children": []
                   },
                   {
-                    "label": "Cncharonly",
+                    "label": "Cncharonly简体中文（大陆）",
                     "id": "cncharonly-filter.md",
                     "order": 4,
                     "children": []
@@ -612,13 +612,13 @@
                     "children": []
                   },
                   {
-                    "label": "分解器",
+                    "label": "解合器",
                     "id": "decompounder-filter.md",
                     "order": 7,
                     "children": []
                   },
                   {
-                    "label": "Stemmer",
+                    "label": "斯特默",
                     "id": "stemmer-filter.md",
                     "order": 8,
                     "children": []
@@ -630,7 +630,7 @@
                     "children": []
                   },
                   {
-                    "label": "Regex",
+                    "label": "正则表达式",
                     "id": "regex-filter.md",
                     "order": 10,
                     "children": []
@@ -638,13 +638,13 @@
                 ]
               },
               {
-                "label": "多语言分析仪",
+                "label": "多语言分析器",
                 "id": "multi-language-analyzers.md",
                 "order": 4,
                 "children": []
               },
               {
-                "label": "根据使用案例选择合适的分析仪",
+                "label": "根据您的应用场景选择合适的分析仪",
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
@@ -652,31 +652,31 @@
             ]
           },
           {
-            "label": "更改 Collections 字段",
+            "label": "修改Collection字段",
             "id": "alter-collection-field.md",
             "order": 15,
             "children": []
           },
           {
-            "label": "为现有 Collections 添加字段",
+            "label": "向现有Collection添加字段",
             "id": "add-fields-to-an-existing-collection.md",
             "order": 16,
             "children": []
           },
           {
-            "label": "最佳做法",
+            "label": "最佳实践",
             "id": "best-practices",
             "isMenu": true,
             "order": 17,
             "children": [
               {
-                "label": "搜索数据模型设计",
+                "label": "搜索的数据模型设计",
                 "id": "schema-hands-on.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "使用结构数组设计数据模型",
+                "label": "使用结构体数组进行数据模型设计",
                 "id": "best-practices-for-array-of-structs.md",
                 "order": 1,
                 "children": []
@@ -686,7 +686,7 @@
         ]
       },
       {
-        "label": "插入和删除",
+        "label": "插入与删除",
         "id": "insert-and-delete",
         "order": 3,
         "children": [
@@ -697,7 +697,7 @@
             "children": []
           },
           {
-            "label": "上传实体",
+            "label": "Upsert 实体",
             "id": "upsert-entities.md",
             "order": 1,
             "children": []
@@ -717,19 +717,19 @@
         "isMenu": true,
         "children": [
           {
-            "label": "索引解释",
+            "label": "索引说明",
             "id": "index-explained.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "浮动向量索引",
+            "label": "浮点向量索引",
             "id": "floating-vector-indexes",
             "order": 1,
             "isMenu": true,
             "children": [
               {
-                "label": "平面",
+                "label": "FLAT",
                 "id": "flat.md",
                 "order": 0,
                 "children": []
@@ -783,7 +783,7 @@
                 "children": []
               },
               {
-                "label": "迪斯坎",
+                "label": "DISKANN",
                 "id": "diskann.md",
                 "order": 9,
                 "children": []
@@ -835,7 +835,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "稀疏倒排索引",
+                "label": "SPARSE_INVERTED_INDEX",
                 "id": "sparse-inverted-index.md",
                 "order": 0,
                 "children": []
@@ -849,13 +849,13 @@
             "isMenu": true,
             "children": [
               {
-                "label": "BITMAP",
+                "label": "位图",
                 "id": "bitmap.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "反转",
+                "label": "倒置",
                 "id": "inverted.md",
                 "order": 1,
                 "children": []
@@ -886,7 +886,7 @@
             "order": 5,
             "children": [
               {
-                "label": "GPU 指数概览",
+                "label": "GPU 指数概述",
                 "id": "gpu-index-overview.md",
                 "order": 0,
                 "children": []
@@ -910,7 +910,7 @@
                 "children": []
               },
               {
-                "label": "gpu_brute_force",
+                "label": "GPU_BRUTE_FORCE",
                 "id": "gpu-brute-force.md",
                 "order": 4,
                 "children": []
@@ -926,13 +926,13 @@
         "isMenu": true,
         "children": [
           {
-            "label": "基本 ANN 搜索",
+            "label": "基本人工神经网络搜索",
             "id": "single-vector-search.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "过滤搜索",
+            "label": "筛选搜索",
             "id": "filtered-search.md",
             "order": 1,
             "children": []
@@ -968,12 +968,12 @@
             "children": []
           },
           {
-            "label": "过滤",
+            "label": "筛选",
             "id": "filtering",
             "order": 7,
             "children": [
               {
-                "label": "过滤说明",
+                "label": "过滤原理详解",
                 "id": "boolean.md",
                 "order": 0,
                 "children": []
@@ -985,7 +985,7 @@
                 "children": []
               },
               {
-                "label": "过滤模板",
+                "label": "过滤与模板化",
                 "id": "filtering-templating.md",
                 "order": 2,
                 "children": []
@@ -1003,7 +1003,7 @@
                 "children": []
               },
               {
-                "label": "结构数组操作符",
+                "label": "StructArray 操作符",
                 "id": "struct-array-operators.md",
                 "order": 5,
                 "children": []
@@ -1023,7 +1023,7 @@
             ]
           },
           {
-            "label": "全文检索",
+            "label": "全文搜索",
             "id": "full-text-search.md",
             "order": 8,
             "children": []
@@ -1035,7 +1035,7 @@
             "children": []
           },
           {
-            "label": "文本高亮显示",
+            "label": "文本高亮工具",
             "id": "text-highlighter.md",
             "order": 10,
             "children": []
@@ -1047,13 +1047,13 @@
             "children": []
           },
           {
-            "label": "使用 Embeddings 列表搜索",
+            "label": "使用Embeddings列表进行搜索",
             "id": "search-with-embedding-lists.md",
             "order": 12,
             "children": []
           },
           {
-            "label": "将 Elasticsearch 查询转至 Milvus",
+            "label": "Elasticsearch 向 Milvus 发送的查询",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 13,
             "children": []
@@ -1065,7 +1065,7 @@
             "children": []
           },
           {
-            "label": "使用 Partition Key",
+            "label": "使用Partition Key",
             "id": "use-partition-key.md",
             "order": 15,
             "children": []
@@ -1073,19 +1073,19 @@
         ]
       },
       {
-        "label": "Embeddings &amp; Rerankers",
+        "label": "Embeddings与重新排序",
         "id": "embeddings-reranking",
         "order": 6,
         "isMenu": true,
         "children": [
           {
-            "label": "嵌入功能",
+            "label": "嵌入函数",
             "id": "embedding-function",
             "order": 0,
             "isMenu": true,
             "children": [
               {
-                "label": "Embeddings 功能概述",
+                "label": "嵌入函数概述",
                 "id": "embedding-function-overview.md",
                 "order": 0,
                 "children": []
@@ -1115,13 +1115,13 @@
                 "children": []
               },
               {
-                "label": "顶点人工智能",
+                "label": "Vertex AI",
                 "id": "vertex-ai.md",
                 "order": 5,
                 "children": []
               },
               {
-                "label": "Voyage 人工智能",
+                "label": "Voyage AI",
                 "id": "voyage-ai.md",
                 "order": 6,
                 "children": []
@@ -1139,51 +1139,57 @@
                 "children": []
               },
               {
-                "label": "拥抱脸 TEI",
+                "label": "Hugging Face TEI",
                 "id": "hugging-face-tei.md",
                 "order": 9,
                 "children": []
               },
               {
-                "label": "谷歌双子座",
-                "id": "google-gemini.md",
+                "label": "Hugging Face",
+                "id": "hugging-face.md",
                 "order": 10,
+                "children": []
+              },
+              {
+                "label": "Google Gemini",
+                "id": "google-gemini.md",
+                "order": 11,
                 "children": []
               }
             ]
           },
           {
-            "label": "Rerankers 功能",
+            "label": "重新排序函数",
             "id": "reranking",
             "order": 1,
             "isMenu": true,
             "children": [
               {
-                "label": "加权排名",
+                "label": "加权排序器",
                 "id": "weighted-ranker.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "RRF 排行榜",
+                "label": "RRF 排名系统",
                 "id": "rrf-ranker.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "提升排名器",
+                "label": "排名提升器",
                 "id": "boost-ranker.md",
                 "order": 2,
                 "children": []
               },
               {
-                "label": "衰变排名器",
+                "label": "衰减排名榜",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
                 "children": [
                   {
-                    "label": "衰变排名器概述",
+                    "label": "《Decay》排名系统概述",
                     "id": "decay-ranker-overview.md",
                     "order": 0,
                     "children": []
@@ -1207,7 +1213,7 @@
                     "children": []
                   },
                   {
-                    "label": "教程：在 Milvus 中实施基于时间的排名",
+                    "label": "教程：在 Milvus 中实现基于时间的排序",
                     "id": "tutorial-implement-a-time-based-ranking-in-milvus.md",
                     "order": 4,
                     "children": []
@@ -1215,25 +1221,25 @@
                 ]
               },
               {
-                "label": "模型排名器",
+                "label": "模型排名榜",
                 "id": "model-ranker",
                 "order": 4,
                 "isMenu": true,
                 "children": [
                   {
-                    "label": "模型排名器概述",
+                    "label": "模型排名概述",
                     "id": "model-ranker-overview.md",
                     "order": 0,
                     "children": []
                   },
                   {
-                    "label": "vLLM 排行榜",
+                    "label": "vLLM 排名器",
                     "id": "vllm-ranker.md",
                     "order": 1,
                     "children": []
                   },
                   {
-                    "label": "TEI 排行榜",
+                    "label": "TEI 排名器",
                     "id": "tei-ranker.md",
                     "order": 2,
                     "children": []
@@ -1245,15 +1251,21 @@
                     "children": []
                   },
                   {
-                    "label": "Voyage 人工智能排名器",
+                    "label": "Voyage AI 排名系统",
                     "id": "voyage-ai-ranker.md",
                     "order": 4,
                     "children": []
                   },
                   {
-                    "label": "SiliconFlow 排行榜",
+                    "label": "SiliconFlow Ranker",
                     "id": "siliconflow-ranker.md",
                     "order": 5,
+                    "children": []
+                  },
+                  {
+                    "label": "Hugging Face 排名器",
+                    "id": "hugging-face-ranker.md",
+                    "order": 6,
                     "children": []
                   }
                 ]
@@ -1275,7 +1287,7 @@
             "children": []
           },
           {
-            "label": "聚类压缩",
+            "label": "聚簇压缩",
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []
@@ -1331,25 +1343,25 @@
     ]
   },
   {
-    "label": "人工智能工具",
+    "label": "AI 工具",
     "id": "aiTools",
     "order": 4,
     "isMenu": true,
     "children": [
       {
-        "label": "用于人工智能代理的 Milvus",
+        "label": "适用于 AI 代理的 Milvus",
         "id": "milvus_for_agents.md",
         "order": 0,
         "children": []
       },
       {
-        "label": "人工智能提示",
+        "label": "AI 提示词",
         "id": "ai_prompts",
         "isMenu": true,
         "order": 1,
         "children": [
           {
-            "label": "Milvus 的 AGENTS.md",
+            "label": "Milvus 版 Agents.md",
             "id": "agents_overview.md",
             "order": 0,
             "children": []
@@ -1361,7 +1373,7 @@
             "children": []
           },
           {
-            "label": "Schema 设计",
+            "label": "模式设计",
             "id": "schema_design.md",
             "order": 2,
             "children": []
@@ -1373,7 +1385,7 @@
             "children": []
           },
           {
-            "label": "索引选择",
+            "label": "指数选择",
             "id": "index_selection.md",
             "order": 4,
             "children": []
@@ -1401,7 +1413,7 @@
         "children": []
       },
       {
-        "label": "克劳德代码 MCP 服务器",
+        "label": "Claude Code 的 MCP 服务器",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -1440,7 +1452,7 @@
                 "children": []
               },
               {
-                "label": "使用 Milvus 操作符",
+                "label": "使用 Milvus Operator",
                 "id": "configure_operator.md",
                 "order": 2,
                 "children": []
@@ -1454,7 +1466,7 @@
             ]
           },
           {
-            "label": "关于云",
+            "label": "《云上》",
             "id": "on_cloud",
             "order": 1,
             "isMenu": true,
@@ -1472,7 +1484,7 @@
                 "children": []
               },
               {
-                "label": "在 Azure 上部署",
+                "label": "部署到 Azure",
                 "id": "azure.md",
                 "order": 3,
                 "children": []
@@ -1484,7 +1496,7 @@
                 "children": []
               },
               {
-                "label": "Layer-7 负载均衡",
+                "label": "Layer-7负载均衡",
                 "id": "layer-7-lb",
                 "order": 5,
                 "isMenu": true,
@@ -1576,7 +1588,7 @@
             "children": []
           },
           {
-            "label": "使用本地磁盘的查询节点",
+            "label": "QueryNode 使用本地磁盘",
             "id": "configure-querynode-localdisk.md",
             "order": 5,
             "children": []
@@ -1584,7 +1596,7 @@
         ]
       },
       {
-        "label": "管理依赖关系",
+        "label": "管理依赖项",
         "id": "manage_dependencies",
         "order": 2,
         "isMenu": true,
@@ -1608,7 +1620,7 @@
                 "children": []
               },
               {
-                "label": "信息存储",
+                "label": "消息存储",
                 "id": "deploy_pulsar.md",
                 "order": 2,
                 "children": []
@@ -1616,7 +1628,7 @@
             ]
           },
           {
-            "label": "使用 Milvus 操作符",
+            "label": "使用 Milvus Operator",
             "id": "milvus_operator_dependencies",
             "order": 1,
             "isMenu": true,
@@ -1634,7 +1646,7 @@
                 "children": []
               },
               {
-                "label": "信息存储",
+                "label": "消息存储",
                 "id": "message_storage_operator.md",
                 "order": 2,
                 "children": []
@@ -1642,7 +1654,7 @@
             ]
           },
           {
-            "label": "将 Pulsar 与 Milvus 配合使用",
+            "label": "将 Pulsar 与 Milvus 结合使用",
             "id": "pulsar_dependencies",
             "order": 2,
             "isMenu": true,
@@ -1670,25 +1682,25 @@
         "isMenu": true,
         "children": [
           {
-            "label": "规模群",
+            "label": "规模集群",
             "id": "scaleout.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "独立规模",
+            "label": "独立秤",
             "id": "scale-standalone.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "与 HPA 成比例",
+            "label": "借助HPA实现规模化",
             "id": "hpa.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "规模依赖性",
+            "label": "规模依赖关系",
             "id": "scale-dependencies.md",
             "order": 3,
             "children": []
@@ -1715,7 +1727,7 @@
         ]
       },
       {
-        "label": "监控、警报和日志",
+        "label": "监控、警报与日志",
         "id": "monitor_alert_log",
         "order": 8,
         "isMenu": true,
@@ -1739,13 +1751,13 @@
                 "children": []
               },
               {
-                "label": "可视化指标",
+                "label": "指标可视化",
                 "id": "visualize.md",
                 "order": 2,
                 "children": []
               },
               {
-                "label": "Milvus 指标仪表板",
+                "label": "Milvus 指标仪表盘",
                 "id": "metrics_dashboard.md",
                 "order": 3,
                 "children": []
@@ -1753,7 +1765,7 @@
             ]
           },
           {
-            "label": "警报",
+            "label": "提醒",
             "id": "alerts",
             "order": 1,
             "isMenu": true,
@@ -1787,13 +1799,13 @@
             ]
           },
           {
-            "label": "跟踪",
+            "label": "Trace",
             "id": "trace",
             "order": 3,
             "isMenu": true,
             "children": [
               {
-                "label": "积格追踪",
+                "label": "Jaeger 描图",
                 "id": "config_jaeger_tracing.md",
                 "order": 0,
                 "children": []
@@ -1828,7 +1840,7 @@
             "children": []
           },
           {
-            "label": "启用 RBAC",
+            "label": "启用基于角色的访问控制（RBAC）",
             "id": "rbac",
             "order": 1,
             "isMenu": true,
@@ -1846,13 +1858,13 @@
                 "children": []
               },
               {
-                "label": "特权小组",
+                "label": "Privilege Group",
                 "id": "privilege_group.md",
                 "order": 2,
                 "children": []
               },
               {
-                "label": "授予特权",
+                "label": "授予权限",
                 "id": "grant_privileges.md",
                 "order": 3,
                 "children": []
@@ -1872,13 +1884,13 @@
             ]
           },
           {
-            "label": "传输中加密",
+            "label": "传输过程中的加密",
             "id": "tls.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "使用 SASL/SSL 连接 Kafka",
+            "label": "使用 SASL/SSL 连接到 Kafka",
             "id": "connect_kafka_ssl.md",
             "order": 3,
             "children": []
@@ -1886,7 +1898,7 @@
         ]
       },
       {
-        "label": "Milvus 网络用户界面",
+        "label": "Milvus WebUI",
         "id": "milvus-webui.md",
         "order": "12",
         "children": []
@@ -1898,18 +1910,18 @@
         "children": []
       },
       {
-        "label": "开关 MQ 类型",
+        "label": "切换 MQ 类型",
         "id": "switch_milvus_mq_type",
         "order": 14,
         "children": [
           {
-            "label": "Milvus 集群开关 MQ 类型",
+            "label": "Milvus 集群交换机 MQ 型",
             "id": "switch_milvus_cluster_mq_type-operator.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "Milvus 独立开关 MQ 型",
+            "label": "Milvus Standalone 独立交换机 MQ 型",
             "id": "switch_milvus_standalone_mq_type-operator.md",
             "order": 1,
             "children": []
@@ -1925,14 +1937,14 @@
     "order": 6,
     "children": [
       {
-        "label": "Attu（Milvus 图形用户界面）",
+        "label": "Attu（Milvus GUI）",
         "id": "milvus_attu",
         "order": 0,
         "externalLink": "https://github.com/zilliztech/attu",
         "children": []
       },
       {
-        "label": "Milvus 后备电源",
+        "label": "Milvus Backup",
         "id": "milvus_backup",
         "order": 1,
         "children": [
@@ -1961,25 +1973,25 @@
             "isMenu": true,
             "children": [
               {
-                "label": "在一个实例中进行备份和恢复",
+                "label": "单实例中的备份与还原",
                 "id": "single-instance-backup-and-restore.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "在一个数据桶中的不同实例之间迁移",
+                "label": "在同一个存储桶内进行实例间迁移",
                 "id": "shared-bucket-backup-and-restore.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "跨数据集的实例间迁移",
+                "label": "在不同存储桶之间的实例之间进行迁移",
                 "id": "cross-bucket-backup-and-restore.md",
                 "order": 2,
                 "children": []
               },
               {
-                "label": "在跨 S3 环境的实例间迁移",
+                "label": "在不同 S3 环境之间的实例之间进行迁移",
                 "id": "multi-storage-backup-and-restore.md",
                 "order": 3,
                 "children": []
@@ -2025,7 +2037,7 @@
             "children": []
           },
           {
-            "label": "设置 CDC 复制",
+            "label": "配置 CDC 复制",
             "id": "set_up_cdc_replication.md",
             "order": 1,
             "children": []
@@ -2037,7 +2049,7 @@
             "children": []
           },
           {
-            "label": "故障切换",
+            "label": "故障转移",
             "id": "cdc_failover.md",
             "order": 3,
             "children": []
@@ -2092,21 +2104,21 @@
         "children": []
       },
       {
-        "label": "Milvus 尺寸工具",
+        "label": "Milvus 尺寸选择工具",
         "id": "sizing",
         "order": 7,
         "externalLink": "https://milvus.io/tools/sizing/",
         "children": []
       },
       {
-        "label": "Powershell Milvus 客户端",
+        "label": "PowerShell Milvus 客户端",
         "id": "milvus_powershell",
         "order": 8,
         "externalLink": "https://github.com/rrg92/ps-milvus/blob/main/docs/integrate_powershell.md",
         "children": []
       },
       {
-        "label": "导出日志",
+        "label": "ExportLog",
         "id": "export-log",
         "order": 9,
         "externalLink": "https://github.com/milvus-io/milvus/tree/master/deployments/export-log",
@@ -2173,7 +2185,7 @@
                 "children": []
               },
               {
-                "label": "教员",
+                "label": "讲师",
                 "id": "embed-with-instructor.md",
                 "order": 9,
                 "children": []
@@ -2185,7 +2197,7 @@
                 "children": []
               },
               {
-                "label": "诺米",
+                "label": "Nomic",
                 "id": "embed-with-nomic.md",
                 "order": 11,
                 "children": []
@@ -2257,7 +2269,7 @@
         ]
       },
       {
-        "label": "SDK 代码助手（MCP）",
+        "label": "SDK 代码助手 (MCP)",
         "id": "milvus-sdk-helper-mcp.md",
         "order": 11,
         "children": []
@@ -2311,7 +2323,7 @@
                 "children": []
               },
               {
-                "label": "全文检索",
+                "label": "全文搜索",
                 "id": "full_text_search_with_langchain.md",
                 "order": 5,
                 "children": []
@@ -2323,7 +2335,7 @@
                 "children": []
               },
               {
-                "label": "Agents",
+                "label": "RAG 代理",
                 "id": "agentic_rag_with_milvus_and_langgraph.md",
                 "order": 7,
                 "children": []
@@ -2342,13 +2354,13 @@
                 "children": []
               },
               {
-                "label": "Milvus 异步应用程序接口",
+                "label": "Milvus 异步 API",
                 "id": "llamaindex_milvus_async.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "全文检索",
+                "label": "全文搜索",
                 "id": "llamaindex_milvus_full_text_search.md",
                 "order": 2,
                 "children": []
@@ -2391,7 +2403,7 @@
                 "children": []
               },
               {
-                "label": "全文检索",
+                "label": "全文搜索",
                 "id": "full_text_search_with_milvus_and_haystack.md",
                 "order": 1,
                 "children": []
@@ -2411,13 +2423,13 @@
             "children": []
           },
           {
-            "label": "朗流",
+            "label": "Langflow",
             "id": "rag_with_langflow.md",
             "order": 7,
             "children": []
           },
           {
-            "label": "文件GPT",
+            "label": "DocsGPT",
             "id": "use_milvus_in_docsgpt.md",
             "order": 9,
             "children": []
@@ -2435,7 +2447,7 @@
             "children": []
           },
           {
-            "label": "骆驼堆",
+            "label": "Llama Stack",
             "id": "llama_stack_with_milvus.md",
             "order": 12,
             "children": []
@@ -2478,7 +2490,7 @@
             "children": []
           },
           {
-            "label": "Agno",
+            "label": "阿格诺",
             "id": "integrate_with_agno.md",
             "order": 3,
             "children": []
@@ -2498,7 +2510,7 @@
         ]
       },
       {
-        "label": "评估与可观察性",
+        "label": "评估与可观测性",
         "id": "evaluation-observability",
         "order": 6,
         "children": [
@@ -2521,13 +2533,13 @@
             "children": []
           },
           {
-            "label": "阿里兹-菲尼克斯",
+            "label": "阿里泽·菲尼克斯",
             "id": "evaluation_with_phoenix.md",
             "order": 3,
             "children": []
           },
           {
-            "label": "深度评估",
+            "label": "DeepEval",
             "id": "evaluation_with_deepeval.md",
             "order": 4,
             "children": []
@@ -2541,7 +2553,7 @@
         ]
       },
       {
-        "label": "嵌入模型",
+        "label": "模型嵌入",
         "id": "integrate-embeddings-models",
         "order": 1,
         "children": [
@@ -2600,7 +2612,7 @@
             "children": []
           },
           {
-            "label": "嵌入任何东西",
+            "label": "EmbedAnything",
             "id": "build_RAG_with_milvus_and_embedAnything.md",
             "order": 15,
             "children": []
@@ -2637,7 +2649,7 @@
             "children": []
           },
           {
-            "label": "桑巴诺瓦",
+            "label": "SambaNova",
             "id": "use_milvus_with_sambanova.md",
             "order": 5,
             "children": []
@@ -2649,13 +2661,13 @@
             "children": []
           },
           {
-            "label": "奥拉玛",
+            "label": "奥拉马",
             "id": "build_RAG_with_milvus_and_ollama.md",
             "order": 7,
             "children": []
           },
           {
-            "label": "深度搜索",
+            "label": "DeepSeek",
             "id": "build_RAG_with_milvus_and_deepseek.md",
             "order": 8,
             "children": []
@@ -2729,13 +2741,13 @@
             "children": []
           },
           {
-            "label": "PII 屏蔽器",
+            "label": "PII 遮罩",
             "id": "RAG_with_pii_and_milvus.md",
             "order": 4,
             "children": []
           },
           {
-            "label": "消防车",
+            "label": "Firecrawl",
             "id": "build_RAG_with_milvus_and_firecrawl.md",
             "order": 5,
             "children": []
@@ -2771,7 +2783,7 @@
             "children": []
           },
           {
-            "label": "多克林",
+            "label": "Docling",
             "id": "build_RAG_with_milvus_and_docling.md",
             "order": 11,
             "children": []
@@ -2783,7 +2795,7 @@
             "children": []
           },
           {
-            "label": "语言提取",
+            "label": "LangExtract",
             "id": "langextract_milvus_demo.md",
             "order": 13,
             "children": []
@@ -2808,7 +2820,7 @@
             "children": []
           },
           {
-            "label": "手臂",
+            "label": "Arm",
             "id": "build_rag_on_arm.md",
             "order": 1,
             "children": []
@@ -2830,7 +2842,7 @@
         "children": []
       },
       {
-        "label": "用 Milvus 打造 RAG",
+        "label": "使用 Milvus 构建 RAG",
         "id": "build-rag-with-milvus.md",
         "order": 1,
         "children": []
@@ -2842,7 +2854,7 @@
         "children": []
       },
       {
-        "label": "使用 Milvus 进行全文检索",
+        "label": "使用 Milvus 进行全文搜索",
         "id": "full_text_search_with_milvus.md",
         "order": 3,
         "children": []
@@ -2854,19 +2866,19 @@
         "children": []
       },
       {
-        "label": "使用 Milvus 进行图像搜索",
+        "label": "使用 Milvus 进行图片搜索",
         "id": "image_similarity_search.md",
         "order": 5,
         "children": []
       },
       {
-        "label": "多式联运 RAG",
+        "label": "多模态RAG",
         "id": "multimodal_rag_with_milvus.md",
         "order": 6,
         "children": []
       },
       {
-        "label": "用 Milvus 绘制 RAG 图表",
+        "label": "使用 Milvus 构建图 RAG",
         "id": "graph_rag_with_milvus.md",
         "order": 7,
         "children": []
@@ -2878,13 +2890,13 @@
         "children": []
       },
       {
-        "label": "HDBSCAN 集群",
+        "label": "HDBSCAN 聚类",
         "id": "hdbscan_clustering_with_milvus.md",
         "order": 9,
         "children": []
       },
       {
-        "label": "与 Milvus 一起使用 ColBERT 和 ColPali",
+        "label": "在 Milvus 中使用 ColBERT 和 ColPali",
         "id": "search-with-embedding-lists",
         "order": 10,
         "externalLink": "https://milvus.io/docs/search-with-embedding-lists.md",
@@ -2903,13 +2915,13 @@
         "children": []
       },
       {
-        "label": "利用 Matryoshka Embeddings 进行漏斗搜索",
+        "label": "基于套娃Embeddings的漏斗搜索",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []
       },
       {
-        "label": "快速入门使用 Attu",
+        "label": "Attu 快速入门",
         "id": "quickstart_with_attu.md",
         "order": 14,
         "children": []
@@ -2921,13 +2933,13 @@
         "children": []
       },
       {
-        "label": "使用 Milvus 进行文本到图片搜索",
+        "label": "使用 Milvus 进行文本到图像搜索",
         "id": "text_image_search.md",
         "order": 16,
         "children": []
       },
       {
-        "label": "利用大型语言模型生成 Milvus 查询过滤器表达式",
+        "label": "利用大型语言模型生成 Milvus 查询过滤表达式",
         "id": "generating_milvus_query_filter_expressions.md",
         "order": 17,
         "children": []
@@ -2938,7 +2950,7 @@
         "order": 99,
         "children": [
           {
-            "label": "答题系统",
+            "label": "问答系统",
             "id": "question_answering_system.md",
             "order": 5,
             "children": []
@@ -2950,19 +2962,19 @@
             "children": []
           },
           {
-            "label": "视频相似性搜索",
+            "label": "视频相似度搜索",
             "id": "video_similarity_search.md",
             "order": 7,
             "children": []
           },
           {
-            "label": "音频相似性搜索",
+            "label": "音频相似度搜索",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []
           },
           {
-            "label": "DNA 序列分类",
+            "label": "DNA序列分类",
             "id": "dna_sequence_classification.md",
             "order": 9,
             "children": []
@@ -2974,7 +2986,7 @@
             "children": []
           },
           {
-            "label": "图像重复数据删除系统",
+            "label": "图像去重系统",
             "id": "image_deduplication_system.md",
             "order": 12,
             "children": []
@@ -2984,19 +2996,19 @@
     ]
   },
   {
-    "label": "常见问题",
+    "label": "常见问题解答",
     "id": "faq",
     "isMenu": true,
     "order": 9,
     "children": [
       {
-        "label": "性能常见问题",
+        "label": "性能常见问题解答",
         "id": "performance_faq.md",
         "order": 0,
         "children": []
       },
       {
-        "label": "产品常见问题",
+        "label": "产品常见问题解答",
         "id": "product_faq.md",
         "order": 1,
         "children": []

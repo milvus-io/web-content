@@ -126,10 +126,16 @@ beta: Milvus 2.6.x
      <td><p>API key</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/v2.6.x/hugging-face-tei.md">Hugging Face</a></p></td>
+     <td><p><a href="/docs/v2.6.x/hugging-face-tei.md">Hugging Face TEI</a></p></td>
      <td><p>Any TEI-served model</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>Optional API key</p></td>
+   </tr>
+   <tr>
+     <td><p><a href="/docs/v2.6.x/hugging-face.md">Hugging Face</a></p></td>
+     <td><p>Models served through <code translate="no">hf-inference</code> for feature extraction</p></td>
+     <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
+     <td><p>API key</p></td>
    </tr>
 </table>
 <h2 id="How-it-works" class="common-anchor-header">How it works<button data-href="#How-it-works" class="anchor-icon" translate="no">

@@ -1,20 +1,20 @@
 ---
 id: embedding-function-overview.md
-title: Ikhtisar Fungsi PenyematanCompatible with Milvus 2.6.x
+title: Gambaran Umum Fungsi EmbeddingCompatible with Milvus 2.6.x
 summary: >-
-  Modul Function di Milvus memungkinkan Anda untuk mengubah data teks mentah
-  menjadi penyematan vektor dengan secara otomatis memanggil penyedia layanan
-  penyematan eksternal (seperti OpenAI, AWS Bedrock, Google Vertex AI, dll.).
-  Dengan modul Function, Anda tidak perlu lagi berinteraksi secara manual dengan
-  embedding API-Milvus menangani seluruh proses pengiriman permintaan ke
-  penyedia, menerima embedding, dan menyimpannya dalam koleksi Anda. Untuk
+  Modul Function di Milvus memungkinkan Anda mengubah data teks mentah menjadi
+  vektor embedding dengan secara otomatis memanggil penyedia layanan embedding
+  eksternal (seperti OpenAI, AWS Bedrock, Google Vertex AI, dll.). Dengan modul
+  Function, Anda tidak perlu lagi berinteraksi secara manual dengan API
+  embedding—Milvus menangani seluruh proses pengiriman permintaan ke penyedia
+  layanan, penerimaan embedding, dan penyimpanannya di koleksi Anda. Untuk
   pencarian semantik, Anda hanya perlu menyediakan data kueri mentah, bukan
-  vektor kueri. Milvus menghasilkan vektor kueri dengan model yang sama dengan
-  yang Anda gunakan untuk penyematan, membandingkannya dengan vektor yang
-  tersimpan, dan mengembalikan hasil yang paling relevan.
+  vektor kueri. Milvus menghasilkan vektor kueri menggunakan model yang sama
+  dengan yang Anda gunakan untuk proses ingestion, membandingkannya dengan
+  vektor-vektor yang tersimpan, dan mengembalikan hasil yang paling relevan.
 beta: Milvus 2.6.x
 ---
-<h1 id="Embedding-Function-Overview" class="common-anchor-header">Ikhtisar Fungsi Penyematan<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Embedding-Function-Overview" class="anchor-icon" translate="no">
+<h1 id="Embedding-Function-Overview" class="common-anchor-header">Gambaran Umum Fungsi Embedding<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Embedding-Function-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -29,7 +29,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Modul Function di Milvus memungkinkan Anda untuk mengubah data teks mentah menjadi penyematan vektor dengan secara otomatis memanggil penyedia layanan penyematan eksternal (seperti OpenAI, AWS Bedrock, Google Vertex AI, dll.). Dengan modul Function, Anda tidak perlu lagi berinteraksi secara manual dengan embedding API-Milvus menangani seluruh proses pengiriman permintaan ke penyedia, menerima embedding, dan menyimpannya dalam koleksi Anda. Untuk pencarian semantik, Anda hanya perlu menyediakan data kueri mentah, bukan vektor kueri. Milvus menghasilkan vektor kueri dengan model yang sama dengan yang Anda gunakan untuk penyematan, membandingkannya dengan vektor yang tersimpan, dan mengembalikan hasil yang paling relevan.</p>
+    </button></h1><p>Modul Fungsi di Milvus memungkinkan Anda mengubah data teks mentah menjadi embedding vektor dengan secara otomatis memanggil penyedia layanan embedding eksternal (seperti OpenAI, AWS Bedrock, Google Vertex AI, dll.). Dengan modul Fungsi, Anda tidak perlu lagi berinteraksi secara manual dengan API embedding—Milvus menangani seluruh proses pengiriman permintaan ke penyedia layanan, penerimaan embedding, dan penyimpanannya di koleksi Anda. Untuk pencarian semantik, Anda hanya perlu menyediakan data kueri mentah, bukan vektor kueri. Milvus menghasilkan vektor kueri dengan model yang sama yang Anda gunakan untuk pengambilan data, membandingkannya dengan vektor yang tersimpan, dan mengembalikan hasil yang paling relevan.</p>
 <h2 id="Limits" class="common-anchor-header">Batasan<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,17 +46,17 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Setiap bidang input yang disematkan modul Function harus selalu berisi nilai; jika nilai null diberikan, modul akan melemparkan kesalahan.</p></li>
-<li><p>Modul Function hanya memproses bidang yang secara eksplisit didefinisikan dalam skema koleksi; modul ini tidak menghasilkan penyematan untuk bidang dinamis.</p></li>
-<li><p>Bidang input yang akan disematkan harus bertipe <code translate="no">VARCHAR</code>.</p></li>
-<li><p>Modul Function dapat menyematkan bidang input ke:</p>
+<li><p>Setiap bidang input yang di-embed oleh modul Function harus selalu berisi nilai; jika nilai null diberikan, modul akan memunculkan kesalahan.</p></li>
+<li><p>Modul Function hanya memproses bidang yang secara eksplisit didefinisikan dalam skema koleksi; modul ini tidak menghasilkan embedding untuk bidang dinamis.</p></li>
+<li><p>Bidang masukan yang akan di-embed harus bertipe " <code translate="no">VARCHAR</code> ".</p></li>
+<li><p>Modul Fungsi dapat menyematkan bidang masukan ke:</p>
 <ul>
 <li><p><code translate="no">FLOAT_VECTOR</code></p></li>
 <li><p><code translate="no">INT8_VECTOR</code></p></li>
 </ul>
 <p>Konversi ke <code translate="no">BINARY_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, atau <code translate="no">BFLOAT16_VECTOR</code> tidak didukung.</p></li>
 </ul>
-<h2 id="Supported-embedding-service-providers" class="common-anchor-header">Penyedia layanan penyematan yang didukung<button data-href="#Supported-embedding-service-providers" class="anchor-icon" translate="no">
+<h2 id="Supported-embedding-service-providers" class="common-anchor-header">Penyedia layanan penyisipan yang didukung<button data-href="#Supported-embedding-service-providers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -75,65 +75,71 @@ beta: Milvus 2.6.x
    <tr>
      <th><p>Penyedia</p></th>
      <th><p>Model Umum</p></th>
-     <th><p>Jenis Penyematan</p></th>
-     <th><p>Metode Autentikasi</p></th>
+     <th><p>Jenis Penyisipan</p></th>
+     <th><p>Metode Otentikasi</p></th>
    </tr>
    <tr>
-     <td><p><a href="/docs/id/openai.md">OpenAI</a></p></td>
-     <td><p>penyematan teks-3-*</p></td>
+     <td><p><a href="/docs/id/v2.6.x/openai.md">OpenAI</a></p></td>
+     <td><p>text-embedding-3-*</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>Kunci API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/id/azure-openai.md">Azure OpenAI</a></p></td>
-     <td><p>Berbasis penyebaran</p></td>
+     <td><p><a href="/docs/id/v2.6.x/azure-openai.md">Azure OpenAI</a></p></td>
+     <td><p>Berbasis penerapan</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>Kunci API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/id/dashscope.md">DashScope</a></p></td>
-     <td><p>penyematan teks-v3</p></td>
+     <td><p><a href="/docs/id/v2.6.x/dashscope.md">DashScope</a></p></td>
+     <td><p>text-embedding-v3</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>Kunci API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/id/bedrock.md">Batuan dasar</a></p></td>
+     <td><p><a href="/docs/id/v2.6.x/bedrock.md">Bedrock</a></p></td>
      <td><p>amazon.titan-embed-text-v2</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>Pasangan AK/SK</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/id/vertex-ai.md">Vertex AI</a></p></td>
-     <td><p>penyematan-teks-005</p></td>
+     <td><p><a href="/docs/id/v2.6.x/vertex-ai.md">Vertex AI</a></p></td>
+     <td><p>text-embedding-005</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>Kredensial JSON akun layanan GCP</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/id/voyage-ai.md">Voyage AI</a></p></td>
+     <td><p><a href="/docs/id/v2.6.x/voyage-ai.md">Voyage AI</a></p></td>
      <td><p>voyage-3, voyage-lite-02</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code> / <code translate="no">INT8_VECTOR</code></p></td>
      <td><p>Kunci API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/id/cohere.md">Cohere</a></p></td>
+     <td><p><a href="/docs/id/v2.6.x/cohere.md">Cohere</a></p></td>
      <td><p>embed-english-v3.0</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code> / <code translate="no">INT8_VECTOR</code></p></td>
      <td><p>Kunci API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/id/siliconflow.md">SiliconFlow</a></p></td>
-     <td><p>BAAI/bge-besar-zh-v1.5</p></td>
+     <td><p><a href="/docs/id/v2.6.x/siliconflow.md">SiliconFlow</a></p></td>
+     <td><p>BAAI/bge-large-zh-v1.5</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>Kunci API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/id/hugging-face-tei.md">Memeluk Wajah</a></p></td>
-     <td><p>Semua model yang dilayani TEI</p></td>
+     <td><p><a href="/docs/id/v2.6.x/hugging-face-tei.md">Hugging Face TEI</a></p></td>
+     <td><p>Model apa pun yang disajikan melalui TEI</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>Kunci API opsional</p></td>
    </tr>
+   <tr>
+     <td><p><a href="/docs/id/v2.6.x/hugging-face.md">Hugging Face</a></p></td>
+     <td><p>Model yang disajikan melalui <code translate="no">hf-inference</code> untuk ekstraksi fitur</p></td>
+     <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
+     <td><p>Kunci API</p></td>
+   </tr>
 </table>
-<h2 id="How-it-works" class="common-anchor-header">Bagaimana cara kerjanya<button data-href="#How-it-works" class="anchor-icon" translate="no">
+<h2 id="How-it-works" class="common-anchor-header">Cara kerjanya<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -148,20 +154,22 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Diagram berikut ini menunjukkan bagaimana Fungsi bekerja di Milvus.</p>
+    </button></h2><p>Diagram berikut menunjukkan cara kerja Fungsi di Milvus.</p>
 <ol>
-<li><p><strong>Memasukkan teks</strong>: Pengguna memasukkan data mentah (misalnya dokumen) ke dalam Milvus.</p></li>
-<li><p><strong>Menghasilkan penyematan</strong>: Modul Function di dalam Milvus secara otomatis memanggil penyedia model yang telah dikonfigurasi untuk mengkonversi data mentah menjadi embedding vektor.</p></li>
-<li><p><strong>Menyimpan embeddings</strong>: Penyematan yang dihasilkan disimpan dalam bidang vektor yang didefinisikan secara eksplisit dalam koleksi Milvus.</p></li>
+<li><p><strong>Teks masukan</strong>: Pengguna memasukkan data mentah (misalnya dokumen) ke dalam Milvus.</p></li>
+<li><p><strong>Menghasilkan embedding</strong>: Modul Fungsi di dalam Milvus secara otomatis memanggil penyedia model yang telah dikonfigurasi untuk mengubah data mentah menjadi embedding vektor.</p></li>
+<li><p><strong>Menyimpan embedding</strong>: Embedding yang dihasilkan disimpan dalam bidang vektor yang didefinisikan secara eksplisit di dalam koleksi Milvus.</p></li>
 <li><p><strong>Kueri teks</strong>: Pengguna mengirimkan kueri teks ke Milvus.</p></li>
-<li><p><strong>Pencarian semantik</strong>: Milvus secara internal mengubah kueri menjadi sematan vektor, melakukan pencarian kemiripan terhadap sematan yang tersimpan, dan mengambil hasil yang relevan.</p></li>
-<li><p><strong>Mengembalikan hasil</strong>: Milvus mengembalikan hasil pencocokan teratas ke aplikasi.</p></li>
+<li><p><strong>Pencarian semantik</strong>: Milvus secara internal mengubah kueri menjadi embedding vektor, melakukan pencarian kesamaan terhadap embedding yang disimpan, dan mengambil hasil yang relevan.</p></li>
+<li><p><strong>Mengembalikan hasil</strong>: Milvus mengembalikan hasil yang paling sesuai ke aplikasi.</p></li>
 </ol>
-<p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
-   </span> <span class="img-wrapper"> <span>Ikhtisar Fungsi Penyematan</span> </span></p>
-<h2 id="Configure-credentials" class="common-anchor-header">Mengonfigurasi kredensial<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
+   <img translate="no" src="/docs/v2.6.x/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" /> 
+   <span>Ikhtisar Fungsi Embedding</span>
+  
+ </span></p>
+<h2 id="Configure-credentials" class="common-anchor-header">Konfigurasi kredensial<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -176,20 +184,22 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sebelum menggunakan fungsi penyematan dengan Milvus, konfigurasikan kredensial layanan penyematan untuk akses Milvus.</p>
-<p>Milvus memungkinkan Anda memberikan kredensial layanan penyematan dengan dua cara:</p>
+    </button></h2><p>Sebelum menggunakan fungsi embedding dengan Milvus, konfigurasikan kredensial layanan embedding untuk akses Milvus.</p>
+<p>Milvus memungkinkan Anda memasukkan kredensial layanan embedding dengan dua cara:</p>
 <ul>
 <li><p><strong>Berkas konfigurasi</strong> (<code translate="no">milvus.yaml</code>):</p>
-<p>Contoh pada topik ini mendemonstrasikan <strong>penyiapan</strong> yang <strong>direkomendasikan</strong> menggunakan <code translate="no">milvus.yaml</code>.</p></li>
+<p>Contoh dalam topik ini menunjukkan <strong>pengaturan</strong> yang <strong>direkomendasikan</strong> menggunakan <code translate="no">milvus.yaml</code>.</p></li>
 <li><p><strong>Variabel lingkungan</strong>:</p>
-<p>Untuk detail tentang cara mengonfigurasi kredensial melalui variabel lingkungan, lihat dokumentasi penyedia layanan penyematan (misalnya, <a href="/docs/id/openai.md">OpenAI</a> atau <a href="/docs/id/azure-openai.md">Azure OpenAI</a>).</p></li>
+<p>Untuk detail tentang mengonfigurasi kredensial melalui variabel lingkungan, lihat dokumentasi penyedia layanan embedding (misalnya, <a href="/docs/id/v2.6.x/openai.md">OpenAI</a> atau <a href="/docs/id/v2.6.x/azure-openai.md">Azure OpenAI</a>).</p></li>
 </ul>
-<p>Diagram berikut ini menunjukkan proses konfigurasi kredensial melalui file konfigurasi Milvus (<code translate="no">milvus.yaml</code>) dan kemudian memanggil Fungsi dalam Milvus.</p>
-<p>
+<p>Diagram berikut menunjukkan proses konfigurasi kredensial melalui berkas konfigurasi Milvus (<code translate="no">milvus.yaml</code>) dan kemudian memanggil Fungsi di dalam Milvus.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
-   </span> <span class="img-wrapper"> <span>Konfigurasi Kredensial Melimpah</span> </span></p>
-<h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">Langkah 1: Menambahkan kredensial ke file konfigurasi Milvus<button data-href="#Step-1-Add-credentials-to-Milvus-configuration-file" class="anchor-icon" translate="no">
+   <img translate="no" src="/docs/v2.6.x/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" /> 
+   <span>Konfigurasi Kredensial Overflow</span>
+  
+ </span></p>
+<h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">Langkah 1: Tambahkan kredensial ke berkas konfigurasi Milvus<button data-href="#Step-1-Add-credentials-to-Milvus-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -204,7 +214,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pada berkas <code translate="no">milvus.yaml</code> anda, edit blok <code translate="no">credential</code> dengan entri untuk setiap penyedia yang perlu anda akses:</p>
+    </button></h3><p>Di berkas <code translate="no">milvus.yaml</code> Anda, edit blok ` <code translate="no">credential</code> ` dengan entri untuk setiap penyedia yang perlu Anda akses:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml credential store section</span>
 <span class="hljs-comment"># This section defines all your authentication credentials for external embedding providers</span>
 <span class="hljs-comment"># Each credential gets a unique name (e.g., aksk1, apikey1) that you&#x27;ll reference elsewhere</span>
@@ -225,7 +235,7 @@ beta: Milvus 2.6.x
   <span class="hljs-attr">gcp1:</span>                        
     <span class="hljs-attr">credential_json:</span> <span class="hljs-string">&lt;BASE64_OF_JSON&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Configure-provider-settings" class="common-anchor-header">Langkah 2: Konfigurasi pengaturan penyedia<button data-href="#Step-2-Configure-provider-settings" class="anchor-icon" translate="no">
+<h3 id="Step-2-Configure-provider-settings" class="common-anchor-header">Langkah 2: Konfigurasikan pengaturan penyedia<button data-href="#Step-2-Configure-provider-settings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -240,7 +250,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pada berkas konfigurasi yang sama (<code translate="no">milvus.yaml</code>), edit blok <code translate="no">function</code> untuk memberi tahu Milvus kunci mana yang akan digunakan untuk menyematkan panggilan layanan:</p>
+    </button></h3><p>Di berkas konfigurasi yang sama (<code translate="no">milvus.yaml</code>), edit blok ` <code translate="no">function</code> ` untuk memberitahu Milvus kunci mana yang akan digunakan untuk menyematkan panggilan layanan:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
@@ -259,8 +269,8 @@ beta: Milvus 2.6.x
       <span class="hljs-attr">tei:</span>                            <span class="hljs-comment"># Built-in Tiny Embedding model</span>
         <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>                  <span class="hljs-comment"># Whether to enable TEI model service</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk informasi lebih lanjut tentang cara menerapkan konfigurasi Milvus, lihat Mengkonfigurasi <a href="/docs/id/dynamic_config.md">Milvus</a> dengan <a href="/docs/id/dynamic_config.md">Cepat</a>.</p>
-<h2 id="Use-embedding-function" class="common-anchor-header">Menggunakan fungsi penyematan<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
+<p>Untuk informasi lebih lanjut tentang cara menerapkan konfigurasi Milvus, lihat <a href="/docs/id/v2.6.x/dynamic_config.md">Konfigurasi Milvus secara Langsung</a>.</p>
+<h2 id="Use-embedding-function" class="common-anchor-header">Gunakan fungsi embedding<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -275,8 +285,8 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah kredensial dikonfigurasikan dalam berkas konfigurasi Milvus Anda, ikuti langkah-langkah berikut untuk mendefinisikan dan menggunakan fungsi penyematan.</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Langkah 1: Mendefinisikan bidang skema<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
+    </button></h2><p>Setelah kredensial dikonfigurasi dalam berkas konfigurasi Milvus Anda, ikuti langkah-langkah berikut untuk mendefinisikan dan menggunakan fungsi embedding.</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Langkah 1: Tentukan bidang skema<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -291,15 +301,20 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Untuk menggunakan fungsi penyematan, buatlah koleksi dengan skema tertentu. Skema ini harus menyertakan setidaknya tiga bidang yang diperlukan:</p>
+    </button></h3><p>Untuk menggunakan fungsi embedding, buat koleksi dengan skema tertentu. Skema ini harus mencakup setidaknya tiga bidang yang diperlukan:</p>
 <ul>
 <li><p><strong>Bidang utama</strong> yang secara unik mengidentifikasi setiap entitas dalam koleksi.</p></li>
-<li><p><strong>Bidang skalar</strong> yang menyimpan data mentah yang akan disematkan.</p></li>
-<li><p><strong>Bidang vektor</strong> yang dicadangkan untuk menyimpan penyematan vektor yang akan dihasilkan oleh fungsi untuk bidang skalar.</p></li>
+<li><p><strong>Bidang skalar</strong> yang menyimpan data mentah yang akan di-embed.</p></li>
+<li><p>Sebuah <strong>bidang vektor</strong> yang disediakan untuk menyimpan embedding vektor yang akan dihasilkan oleh fungsi tersebut untuk bidang skalar.</p></li>
 </ul>
-<p>Contoh berikut ini mendefinisikan skema dengan satu bidang skalar <code translate="no">&quot;document&quot;</code> untuk menyimpan data tekstual dan satu bidang vektor <code translate="no">&quot;dense&quot;</code> untuk menyimpan embedding yang akan dihasilkan oleh modul Function. Ingatlah untuk mengatur dimensi vektor (<code translate="no">dim</code>) agar sesuai dengan keluaran dari model penyematan yang Anda pilih.</p>
+<p>Contoh berikut mendefinisikan skema dengan satu bidang skalar <code translate="no">&quot;document&quot;</code> untuk menyimpan data teks dan satu bidang vektor <code translate="no">&quot;dense&quot;</code> untuk menyimpan embedding yang akan dihasilkan oleh modul Function. Pastikan untuk mengatur dimensi vektor (<code translate="no">dim</code>) agar sesuai dengan output model embedding yang Anda pilih.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>
@@ -330,7 +345,7 @@ schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FL
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Langkah 2: Menambahkan fungsi penyematan ke skema<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Langkah 2: Tambahkan fungsi embedding ke skema<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -345,10 +360,15 @@ schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FL
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Modul Function di Milvus secara otomatis mengubah data mentah yang disimpan dalam bidang skalar menjadi penyematan dan menyimpannya ke dalam bidang vektor yang didefinisikan secara eksplisit.</p>
-<p>Contoh di bawah ini menambahkan modul Function (<code translate="no">openai_embedding</code>) yang mengubah bidang skalar <code translate="no">&quot;document&quot;</code> menjadi embedding, menyimpan vektor yang dihasilkan dalam bidang vektor <code translate="no">&quot;dense&quot;</code> yang didefinisikan sebelumnya.</p>
+    </button></h3><p>Modul Function di Milvus secara otomatis mengubah data mentah yang disimpan dalam bidang skalar menjadi embedding dan menyimpannya ke dalam bidang vektor yang telah ditentukan secara eksplisit.</p>
+<p>Contoh di bawah ini menambahkan modul Function (<code translate="no">openai_embedding</code>) yang mengubah bidang skalar <code translate="no">&quot;document&quot;</code> menjadi embedding, lalu menyimpan vektor hasilnya ke dalam bidang vektor <code translate="no">&quot;dense&quot;</code> yang telah didefinisikan sebelumnya.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function (example: OpenAI provider)</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;openai_embedding&quot;</span>,                  <span class="hljs-comment"># Unique identifier for this embedding function</span>
@@ -384,57 +404,57 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">name</code></p></td>
-     <td><p>Pengenal unik untuk fungsi penyematan di dalam Milvus.</p></td>
+     <td><p>Pengidentifikasi unik untuk fungsi embedding di dalam Milvus.</p></td>
      <td><p><code translate="no">"openai_embedding"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>Jenis fungsi yang digunakan. Untuk penyematan teks, setel nilainya ke <code translate="no">FunctionType.TEXTEMBEDDING</code>.</p><p><strong>Catatan</strong>: Milvus menerima <code translate="no">FunctionType.BM25</code> (untuk transformasi penyematan jarang) dan <code translate="no">FunctionType.RERANK</code> (untuk pemeringkatan) untuk parameter ini. Lihat <a href="/docs/id/full-text-search.md">Pencarian Teks Lengkap</a> dan <a href="/docs/id/decay-ranker-overview.md">Gambaran Umum Pemeringkatan Peluruhan</a> untuk detailnya.</p></td>
+     <td><p>Jenis fungsi yang digunakan. Untuk embedding teks, atur nilainya menjadi <code translate="no">FunctionType.TEXTEMBEDDING</code>.</p><p><strong>Catatan</strong>: Milvus menerima <code translate="no">FunctionType.BM25</code> (untuk transformasi embedding sparsitas) dan <code translate="no">FunctionType.RERANK</code> (untuk reranking) untuk parameter ini. Lihat <a href="/docs/id/v2.6.x/decay-ranker-overview.md">Ikhtisar</a> <a href="/docs/id/v2.6.x/full-text-search.md">Pencarian Teks Lengkap</a> dan <a href="/docs/id/v2.6.x/decay-ranker-overview.md">Decay Ranker</a> untuk detailnya.</p></td>
      <td><p><code translate="no">FunctionType.TEXTEMBEDDING</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
-     <td><p>Bidang skalar yang berisi data mentah yang akan disematkan. Saat ini, parameter ini hanya menerima satu nama bidang.</p></td>
+     <td><p>Bidang skalar yang berisi data mentah yang akan di-embed. Saat ini, parameter ini hanya menerima satu nama bidang.</p></td>
      <td><p><code translate="no">["document"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">output_field_names</code></p></td>
-     <td><p>Bidang vektor untuk menyimpan sematan yang dihasilkan. Saat ini, parameter ini hanya menerima satu nama bidang.</p></td>
+     <td><p>Bidang vektor untuk menyimpan embedding yang dihasilkan. Saat ini, parameter ini hanya menerima satu nama bidang.</p></td>
      <td><p><code translate="no">["dense"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params</code></p></td>
-     <td><p>Kamus yang berisi konfigurasi penyematan. Catatan: Parameter dalam <code translate="no">params</code> bervariasi, tergantung pada penyedia model penyematan.</p></td>
+     <td><p>Kamus yang berisi konfigurasi embedding. Catatan: Parameter dalam " <code translate="no">params</code> " bervariasi tergantung pada penyedia model embedding.</p></td>
      <td><p><code translate="no">{...}</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">provider</code></p></td>
-     <td><p>Penyedia model penyematan.</p></td>
+     <td><p>Penyedia model embedding.</p></td>
      <td><p><code translate="no">"openai"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">model_name</code></p></td>
-     <td><p>Menentukan model penyematan yang akan digunakan.</p></td>
+     <td><p>Menentukan model embedding mana yang akan digunakan.</p></td>
      <td><p><code translate="no">"text-embedding-3-small"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">credential</code></p></td>
-     <td><p>Label kredensial yang ditentukan di bagian <code translate="no">credential:</code> tingkat atas dari <code translate="no">milvus.yaml</code>. </p><ul><li><p>Jika disediakan, Milvus mengambil pasangan kunci yang cocok atau token API dan menandatangani permintaan di sisi server.</p></li><li><p>Ketika dihilangkan (<code translate="no">None</code>), Milvus kembali ke kredensial yang dikonfigurasikan secara eksplisit untuk penyedia model target di <code translate="no">milvus.yaml</code>.</p></li><li><p>Jika label tidak diketahui atau kunci yang direferensikan tidak ada, panggilan akan gagal.</p></li></ul></td>
+     <td><p>Label kredensial yang didefinisikan di bagian ` <code translate="no">credential:</code> ` tingkat atas pada <code translate="no">milvus.yaml</code>. </p><ul><li><p>Jika disediakan, Milvus akan mengambil pasangan kunci atau token API yang sesuai dan menandatangani permintaan di sisi server.</p></li><li><p>Jika diabaikan (<code translate="no">None</code>), Milvus akan menggunakan kredensial yang secara eksplisit dikonfigurasi untuk penyedia model target di <code translate="no">milvus.yaml</code>.</p></li><li><p>Jika label tidak dikenal atau kunci yang dirujuk tidak ada, panggilan akan gagal.</p></li></ul></td>
      <td><p><code translate="no">"apikey1"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dim</code></p></td>
-     <td><p>Jumlah dimensi untuk penyematan keluaran. Untuk model generasi ketiga OpenAI, Anda dapat mempersingkat vektor penuh untuk mengurangi biaya dan latensi tanpa kehilangan informasi semantik yang signifikan. Untuk informasi lebih lanjut, lihat <a href="https://openai.com/blog/new-embedding-models-and-api-updates">posting blog pengumuman OpenAI</a>.</p><p><strong>Catatan:</strong> Jika Anda memperpendek dimensi vektor, pastikan nilai <code translate="no">dim</code> yang ditentukan dalam metode <code translate="no">add_field</code> skema untuk bidang vektor sesuai dengan dimensi keluaran akhir fungsi penyematan Anda.</p></td>
+     <td><p>Jumlah dimensi untuk embedding keluaran. Untuk model generasi ketiga OpenAI, Anda dapat mempersingkat vektor penuh untuk mengurangi biaya dan latensi tanpa kehilangan informasi semantik yang signifikan. Untuk informasi lebih lanjut, lihat <a href="https://openai.com/blog/new-embedding-models-and-api-updates">postingan blog pengumuman OpenAI</a>.</p><p><strong>Catatan:</strong> Jika Anda mempersingkat dimensi vektor, pastikan nilai ` <code translate="no">dim</code> ` yang ditentukan dalam metode ` <code translate="no">add_field</code> ` skema untuk bidang vektor sesuai dengan dimensi keluaran akhir dari fungsi embedding Anda.</p></td>
      <td><p><code translate="no">"1536"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">user</code></p></td>
-     <td><p>Pengenal tingkat pengguna untuk melacak penggunaan API.</p></td>
+     <td><p>Pengidentifikasi tingkat pengguna untuk melacak penggunaan API.</p></td>
      <td><p><code translate="no">"user123"</code></p></td>
    </tr>
 </table>
 <div class="alert note">
-<p>Untuk koleksi dengan beberapa bidang skalar yang memerlukan konversi teks ke vektor, tambahkan fungsi terpisah ke skema koleksi, pastikan setiap fungsi memiliki nama unik dan nilai <code translate="no">output_field_names</code>.</p>
+<p>Untuk koleksi dengan beberapa bidang skalar yang memerlukan konversi teks ke vektor, tambahkan fungsi terpisah ke skema koleksi, pastikan setiap fungsi memiliki nama dan nilai ` <code translate="no">output_field_names</code> ` yang unik.</p>
 </div>
 <h3 id="Step-3-Configure-index" class="common-anchor-header">Langkah 3: Konfigurasi indeks<button data-href="#Step-3-Configure-index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -451,9 +471,14 @@ schema.add_function(text_embedding_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Setelah mendefinisikan skema dengan bidang yang diperlukan dan fungsi bawaan, siapkan indeks untuk koleksi Anda. Untuk menyederhanakan proses ini, gunakan <code translate="no">AUTOINDEX</code> sebagai <code translate="no">index_type</code>, sebuah opsi yang memungkinkan Milvus untuk memilih dan mengonfigurasi jenis indeks yang paling sesuai berdasarkan struktur data Anda.</p>
+    </button></h3><p>Setelah mendefinisikan skema dengan bidang yang diperlukan dan fungsi bawaan, atur indeks untuk koleksi Anda. Untuk menyederhanakan proses ini, gunakan ` <code translate="no">AUTOINDEX</code> ` sebagai ` <code translate="no">index_type</code>`, opsi yang memungkinkan Milvus memilih dan mengonfigurasi jenis indeks yang paling sesuai berdasarkan struktur data Anda.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -472,7 +497,7 @@ index_params.add_index(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-4-Create-collection" class="common-anchor-header">Langkah 4: Membuat koleksi<button data-href="#Step-4-Create-collection" class="anchor-icon" translate="no">
+<h3 id="Step-4-Create-collection" class="common-anchor-header">Langkah 4: Buat koleksi<button data-href="#Step-4-Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -487,9 +512,14 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Sekarang buatlah koleksi menggunakan skema dan parameter indeks yang telah ditentukan.</p>
+    </button></h3><p>Sekarang buat koleksi menggunakan skema dan parameter indeks yang telah ditentukan.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create collection named &quot;demo&quot;</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -520,9 +550,14 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Setelah menyiapkan koleksi dan indeks, Anda siap untuk memasukkan data mentah. Dalam proses ini, Anda hanya perlu menyediakan teks mentah. Modul Fungsi yang kita definisikan sebelumnya secara otomatis menghasilkan vektor jarang yang sesuai untuk setiap entri teks.</p>
+    </button></h3><p>Setelah menyiapkan koleksi dan indeks Anda, Anda siap untuk memasukkan data mentah Anda. Dalam proses ini, Anda hanya perlu menyediakan teks mentah. Modul Fungsi yang telah kita tentukan sebelumnya secara otomatis menghasilkan vektor spars yang sesuai untuk setiap entri teks.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Insert sample documents</span>
 client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Milvus simplifies semantic search through embeddings.&#x27;</span>},
@@ -553,9 +588,14 @@ client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Setelah penyisipan data, lakukan pencarian semantik menggunakan teks kueri mentah. Milvus secara otomatis mengubah kueri Anda menjadi vektor penyisipan, mengambil dokumen yang relevan berdasarkan kemiripan, dan mengembalikan hasil yang paling cocok.</p>
+    </button></h3><p>Setelah memasukkan data, lakukan pencarian semantik menggunakan teks kueri mentah. Milvus secara otomatis mengubah kueri Anda menjadi vektor embedding, mengambil dokumen yang relevan berdasarkan kesamaan, dan menampilkan hasil yang paling cocok.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Perform semantic search</span>
 results = client.search(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -578,8 +618,8 @@ results = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk informasi lebih lanjut tentang operasi pencarian dan kueri, lihat <a href="/docs/id/single-vector-search.md">Pencarian</a> dan <a href="/docs/id/get-and-scalar-query.md">Kueri</a> <a href="/docs/id/single-vector-search.md">Vektor Dasar</a>.</p>
-<h2 id="FAQ" class="common-anchor-header">PERTANYAAN UMUM<button data-href="#FAQ" class="anchor-icon" translate="no">
+<p>Untuk informasi lebih lanjut tentang operasi pencarian dan kueri, lihat <a href="/docs/id/v2.6.x/single-vector-search.md">Pencarian Vektor Dasar</a> dan <a href="/docs/id/v2.6.x/get-and-scalar-query.md">Kueri</a>.</p>
+<h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -594,7 +634,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="common-anchor-header">Apa perbedaan antara mengonfigurasi kredensial di milvus.yaml vs variabel lingkungan?<button data-href="#Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="common-anchor-header">Apa perbedaan antara mengonfigurasi kredensial di milvus.yaml dengan menggunakan variabel lingkungan?<button data-href="#Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -609,7 +649,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Kedua metode ini dapat digunakan, tetapi menggunakan <code translate="no">milvus.yaml</code> adalah pendekatan yang direkomendasikan karena menyediakan manajemen kredensial terpusat dan penamaan kredensial yang konsisten di semua penyedia. Saat menggunakan variabel lingkungan, nama variabel bervariasi tergantung pada penyedia layanan penyematan, jadi rujuklah ke halaman khusus masing-masing penyedia untuk memahami nama variabel lingkungan spesifik yang diperlukan (misalnya, <a href="/docs/id/openai.md">OpenAI</a> atau <a href="/docs/id/azure-openai.md">Azure OpenAI</a>).</p>
+    </button></h3><p>Kedua metode tersebut dapat digunakan, namun penggunaan ` <code translate="no">milvus.yaml</code> ` merupakan pendekatan yang direkomendasikan karena menyediakan pengelolaan kredensial terpusat dan penamaan kredensial yang konsisten di seluruh penyedia layanan. Saat menggunakan variabel lingkungan, nama variabel bervariasi tergantung pada penyedia layanan embedding, jadi silakan merujuk ke halaman khusus masing-masing penyedia untuk memahami nama variabel lingkungan spesifik yang diperlukan (misalnya, <a href="/docs/id/v2.6.x/openai.md">OpenAI</a> atau <a href="/docs/id/v2.6.x/azure-openai.md">Azure OpenAI</a>).</p>
 <h3 id="What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="common-anchor-header">Apa yang terjadi jika saya tidak menentukan parameter kredensial dalam definisi fungsi?<button data-href="#What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -625,13 +665,13 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus mengikuti urutan resolusi kredensial ini:</p>
+    </button></h3><p>Milvus mengikuti urutan resolusi kredensial berikut:</p>
 <ol>
-<li>Pertama, mencari kredensial default yang dikonfigurasi untuk penyedia tersebut di file <code translate="no">milvus.yaml</code> </li>
-<li>Jika tidak ada kredensial default yang ada di milvus.yaml, maka akan kembali ke variabel lingkungan (jika dikonfigurasi)</li>
-<li>Jika kredensial <code translate="no">milvus.yaml</code> maupun variabel lingkungan tidak dikonfigurasi, Milvus akan melemparkan kesalahan</li>
+<li>Pertama, Milvus mencari kredensial default yang dikonfigurasi untuk penyedia tersebut di berkas ` <code translate="no">milvus.yaml</code> `</li>
+<li>Jika tidak ada kredensial default di milvus.yaml, sistem akan beralih ke variabel lingkungan (jika telah dikonfigurasi)</li>
+<li>Jika kredensial di ` <code translate="no">milvus.yaml</code> ` maupun variabel lingkungan tidak dikonfigurasi, Milvus akan menampilkan pesan kesalahan</li>
 </ol>
-<h3 id="How-can-I-verify-that-embeddings-are-being-generated-correctly" class="common-anchor-header">Bagaimana cara memverifikasi bahwa penyematan dibuat dengan benar?<button data-href="#How-can-I-verify-that-embeddings-are-being-generated-correctly" class="anchor-icon" translate="no">
+<h3 id="How-can-I-verify-that-embeddings-are-being-generated-correctly" class="common-anchor-header">Bagaimana cara memverifikasi bahwa embedding dihasilkan dengan benar?<button data-href="#How-can-I-verify-that-embeddings-are-being-generated-correctly" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -648,11 +688,11 @@ results = client.search(
       </svg>
     </button></h3><p>Anda dapat memeriksanya dengan:</p>
 <ol>
-<li>Menguji koleksi Anda setelah penyisipan untuk melihat apakah bidang vektor berisi data</li>
-<li>Memeriksa apakah panjang bidang vektor sesuai dengan dimensi yang Anda harapkan</li>
-<li>Melakukan pencarian kemiripan sederhana untuk memverifikasi penyematan menghasilkan hasil yang berarti</li>
+<li>Melakukan kueri pada koleksi Anda setelah penyisipan untuk melihat apakah bidang vektor berisi data</li>
+<li>Memastikan panjang bidang vektor sesuai dengan dimensi yang Anda harapkan</li>
+<li>Melakukan pencarian kesamaan sederhana untuk memverifikasi bahwa embeddings menghasilkan hasil yang bermakna</li>
 </ol>
-<h3 id="When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="common-anchor-header">Ketika saya melakukan pencarian kemiripan, dapatkah saya menggunakan vektor kueri dan bukan teks mentah?<button data-href="#When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="anchor-icon" translate="no">
+<h3 id="When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="common-anchor-header">Saat saya melakukan pencarian kesamaan, apakah saya bisa menggunakan vektor kueri daripada teks mentah?<button data-href="#When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -667,10 +707,15 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Ya, Anda dapat menggunakan vektor kueri yang telah dihitung sebelumnya, bukan teks mentah untuk pencarian kemiripan. Meskipun modul Fungsi secara otomatis mengubah kueri teks mentah menjadi sematan, Anda juga dapat secara langsung memberikan data vektor ke parameter <code translate="no">data</code> dalam operasi pencarian Anda. <strong>Catatan</strong>: Ukuran dimensi vektor kueri yang Anda berikan harus konsisten dengan ukuran dimensi sematan vektor yang dihasilkan oleh modul Function.</p>
+    </button></h3><p>Ya, Anda dapat menggunakan vektor kueri yang telah dihitung sebelumnya sebagai pengganti teks mentah untuk pencarian kesamaan. Meskipun modul Fungsi secara otomatis mengonversi kueri teks mentah menjadi embedding, Anda juga dapat langsung menyediakan data vektor ke parameter ` <code translate="no">data</code> ` dalam operasi pencarian Anda. <strong>Catatan</strong>: Ukuran dimensi vektor kueri yang Anda berikan harus konsisten dengan ukuran dimensi vektor embedding yang dihasilkan oleh modul Fungsi Anda.</p>
 <p><strong>Contoh</strong>:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Using raw text (Function module converts automatically)</span>
 results = client.search(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
