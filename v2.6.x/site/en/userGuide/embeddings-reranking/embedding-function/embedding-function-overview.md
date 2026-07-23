@@ -83,10 +83,16 @@ The Function module in Milvus allows you to transform raw text data into vector 
      <td><p>API key</p></td>
    </tr>
    <tr>
-     <td><p><a href="hugging-face-tei.md">Hugging Face</a></p></td>
+     <td><p><a href="hugging-face-tei.md">Hugging Face TEI</a></p></td>
      <td><p>Any TEI-served model</p></td>
      <td><p><code>FLOAT_VECTOR</code></p></td>
      <td><p>Optional API key</p></td>
+   </tr>
+   <tr>
+     <td><p><a href="hugging-face.md">Hugging Face</a></p></td>
+     <td><p>Models served through <code>hf-inference</code> for feature extraction</p></td>
+     <td><p><code>FLOAT_VECTOR</code></p></td>
+     <td><p>API key</p></td>
    </tr>
 </table>
 
