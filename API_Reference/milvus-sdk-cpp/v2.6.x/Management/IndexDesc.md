@@ -2,13 +2,6 @@
 
 This class carries the parameters needed to build a vector or scalar index. Pass one or more `IndexDesc` objects to `CreateIndexRequest::AddIndex()`. `DescribeIndex()` also returns `IndexDesc` objects (via `DescribeIndexResponse::Descs()`) that include build-progress and state information.
 
-```cpp
-IndexDesc();
-IndexDesc(std::string field_name, std::string index_name,
-          milvus::IndexType index_type,
-          milvus::MetricType metric_type = milvus::MetricType::INVALID);
-```
-
 **PARAMETERS:**
 
 - **field_name** (*std::string*)
@@ -87,41 +80,3 @@ IndexDesc(std::string field_name, std::string index_name,
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-#include <milvus/MilvusClientV2.h>
-using namespace milvus;
-
-auto client = MilvusClientV2::Create();
-client->Connect(ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
-
-// Create an HNSW vector index and a scalar TRIE index together
-IndexDesc index_vec("vec", "vec_idx", IndexType::HNSW, MetricType::COSINE);
-index_vec.AddExtraParam("M", "16");
-index_vec.AddExtraParam("efConstruction", "200");
-
-IndexDesc index_name("name", "", IndexType::TRIE);
-
-auto status = client->CreateIndex(
-    CreateIndexRequest()
-        .WithCollectionName("my_collection")
-        .WithSync(true)
-        .AddIndex(std::move(index_vec))
-        .AddIndex(std::move(index_name)));
-
-// Inspect build progress via DescribeIndex
-DescribeIndexResponse resp;
-client->DescribeIndex(
-    DescribeIndexRequest()
-        .WithCollectionName("my_collection")
-        .WithIndexName("vec_idx"),
-    resp);
-
-for (const auto& desc : resp.Descs()) {
-    std::cout << "IndexName:   " << desc.IndexName()   << "\n"
-              << "IndexType:   " << std::to_string(desc.IndexType())  << "\n"
-              << "State:       " << std::to_string(desc.StateCode())  << "\n"
-              << "IndexedRows: " << desc.IndexedRows() << "\n"
-              << "TotalRows:   " << desc.TotalRows()   << "\n";
-}
-```
