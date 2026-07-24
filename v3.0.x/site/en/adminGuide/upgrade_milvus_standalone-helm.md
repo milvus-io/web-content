@@ -10,50 +10,42 @@ title: Upgrade Milvus Standalone with Helm Chart
 
 <div class="tab-wrapper"><a href="upgrade_milvus_standalone-operator.md" class=''>Milvus Operator</a><a href="upgrade_milvus_standalone-helm.md" class='active '>Helm</a><a href="upgrade_milvus_standalone-docker.md" class=''>Docker Compose</a></div>
 
-
 # Upgrade Milvus Standalone with Helm Chart
 
-This guide describes how to upgrade your Milvus standalone deployment from v2.5.x to v3.0-beta using Helm Chart.
+This guide describes how to upgrade your Milvus 2.6.x standalone deployment to v3.0-beta using Helm.
 
-## Before you start
+<div class="alert note">
 
-### What's new in v3.0-beta
+This procedure has been validated from Milvus 2.6.20 to Milvus v3.0-beta with Milvus Helm Chart 5.0.22. If you use another Milvus 2.6.x patch release or Helm Chart version, validate the upgrade in a non-production environment first.
 
-Upgrading from Milvus 2.5.x to 3.0-beta involves significant architectural changes:
+</div>
 
-- **Coordinator consolidation**: Legacy separate coordinators (`dataCoord`, `queryCoord`, `indexCoord`) have been consolidated into a single `mixCoord`
-- **New components**: Introduction of Streaming Node for enhanced data processing
-- **Component removal**: `indexNode` removed and consolidated
+## Prerequisites
 
-This upgrade process ensures proper migration to the new architecture. For more information on architecture changes, refer to [Milvus Architecture Overview](architecture_overview.md).
-
-### Requirements
-
-**System requirements:**
-- Helm version >= 3.14.0
-- Kubernetes version >= 1.20.0
-- Milvus standalone deployed via Helm Chart
-
-**Compatibility requirements:**
-- Milvus v2.6.0-rc1 is **not compatible** with v3.0-beta. Direct upgrades from release candidates are not supported.
-- If you are currently running v2.6.0-rc1 and need to preserve your data, please refer to [this community guide](https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997) for migration assistance.
-- You **must** upgrade to v2.5.16 or later before upgrading to v3.0-beta.
+- Helm 3.14.0 or later
+- An existing Milvus 2.6.x deployment managed by Helm
+- The Helm values used for the existing deployment
+- A current backup of Milvus metadata and persistent data
 
 **Message Queue limitations**: When upgrading to Milvus v3.0-beta, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
 
 
-<div class="alert note">
-Since Milvus Helm chart version 4.2.21, we introduced pulsar-v3.x chart as dependency. For backward compatibility, please upgrade your Helm to v3.14 or later version, and be sure to add the <code>--reset-then-reuse-values</code> option whenever you use <code>helm upgrade</code>.
+<div class="alert warning">
+
+Do not change or downgrade the Helm Chart as part of this procedure. Keep the Chart version already installed for your Helm release. The tested baseline retained Helm Chart 5.0.22 and changed only the Milvus image tag to `v3.0-beta`.
+
+This procedure does not validate a downgrade or rollback by changing the Milvus image back to 2.6.x. After v3.0-beta writes data, an image-only rollback can fail to read the updated state. If the upgrade fails, stop writes and use a recovery plan that restores the pre-upgrade metadata and persistent data backups. Validate the recovery plan in a non-production environment first.
+
 </div>
 
 ## Upgrade process
 
-### Step 1: Upgrade Helm Chart
+### Step 1: Update the Helm repository
 
-First, upgrade your Milvus Helm chart to version 5.0.0:
+Add or update the Milvus Helm repository:
 
 ```bash
-helm repo add zilliztech https://zilliztech.github.io/milvus-helm
+helm repo add zilliztech https://zilliztech.github.io/milvus-helm --force-update
 helm repo update zilliztech
 ```
 
@@ -61,56 +53,39 @@ helm repo update zilliztech
 The Milvus Helm Charts repo at <code>https://milvus-io.github.io/milvus-helm/</code> has been archived. Use the new repo <code>https://zilliztech.github.io/milvus-helm/</code> for chart versions 4.0.31 and later.
 </div>
 
-To check Helm chart version compatibility with Milvus versions:
+### Step 2: Upgrade Milvus
+
+Check the Chart version installed for your Helm release:
 
 ```bash
-helm search repo zilliztech/milvus --versions
+helm list --namespace <namespace>
 ```
 
-This guide assumes you are installing the latest version. If you need to install a specific version, specify the `--version` parameter accordingly.
-
-### Step 2: Upgrade to v2.5.16
-
-<div class="alert-note">
-
-Skip this step if your standalone deployment is already running v2.5.16 or higher.
-
-</div>
-
-Upgrade your Milvus standalone to v2.5.16:
+In the `CHART` column, remove the `milvus-` prefix from the value and use the remaining version as `<current-chart-version>`. Then run the upgrade command:
 
 ```bash
-helm upgrade my-release zilliztech/milvus \
-  --set image.all.tag="v2.5.16" \
-  --reset-then-reuse-values \
-  --version=4.2.58
-```
-
-Wait for the upgrade to complete:
-
-```bash
-# Verify all pods are ready
-kubectl get pods
-```
-
-### Step 3: Upgrade to v3.0-beta
-
-Once v2.5.16 is running successfully, upgrade to v3.0-beta:
-
-```bash
-helm upgrade my-release zilliztech/milvus \
+helm upgrade <release-name> zilliztech/milvus \
+  --namespace <namespace> \
+  --version <current-chart-version> \
   --set image.all.tag="v3.0-beta" \
   --reset-then-reuse-values \
-  --version=5.0.0
+  --wait \
+  --timeout 20m
 ```
+
+The `--reset-then-reuse-values` option retains the values from the previous release while applying the explicit image override against the selected Chart defaults.
 
 ## Verify the upgrade
 
-Confirm your standalone deployment is running the new version:
+Check the Helm revision, Pod status, and container images:
 
 ```bash
-# Check pod status
-kubectl get pods
+helm history <release-name> --namespace <namespace>
+
+kubectl get pods --namespace <namespace>
+
+kubectl get pods --namespace <namespace> \
+  -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{range .spec.containers[*]}{.image}{" "}{end}{"\n"}{end}'
 ```
 
-For additional support, consult the [Milvus documentation](https://milvus.io/docs) or [community forum](https://github.com/milvus-io/milvus/discussions).
+Verify that all required workloads are ready, Milvus uses `v3.0-beta`, and your existing collections remain queryable and searchable. Complete these checks before you enable any v3.0-beta-specific feature.
