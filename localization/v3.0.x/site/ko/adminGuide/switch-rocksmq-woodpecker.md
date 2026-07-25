@@ -21,7 +21,7 @@ summary: Milvus Standalone(Docker Compose) 배포 환경의 메시지 큐를 Roc
     </button></h1><p>이 페이지에서는 <strong>Milvus Standalone(Docker Compose)</strong> 배포 환경의 메시지 큐(MQ)를 <strong>RocksMQ와</strong> <strong>Woodpecker</strong> (로컬 또는 MinIO 백엔드) 간에 양방향으로 전환하는 방법을 설명합니다. 일반적인 워크플로우 및 필수 조건에 대해서는 <a href="/docs/ko/switch-mq-type.md">MQ 유형 전환을</a> 참조하십시오.</p>
 <div class="alert note">
 <ul>
-<li><strong>필수 조건:</strong> MQ 전환 기능은 <strong>Milvus 3.0 이상</strong> 버전에서 사용할 수 있습니다. 시작하기 전에 Milvus 인스턴스를 Milvus 3.0 이상으로 업그레이드하십시오. 이전 버전에서는 이 기능을 사용할 수 없습니다.</li>
+<li><strong>필수 조건:</strong> MQ 전환 기능은 <strong>Milvus 3.0 이상에서</strong> 사용할 수 있습니다. 시작하기 전에 Milvus 인스턴스를 Milvus 3.0 이상으로 업그레이드하십시오. 이전 버전에서는 이 기능을 사용할 수 없습니다.</li>
 <li>MQ 전환을 위해서는 Docker <strong>Compose</strong> 배포 환경(etcd 구성 소스를 활성화하는)이 필요합니다. 단일 컨테이너 Docker 배포 환경에서는 전환을 지원하지 않습니다.</li>
 </ul>
 </div>

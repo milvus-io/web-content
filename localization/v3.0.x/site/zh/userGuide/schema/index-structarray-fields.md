@@ -155,7 +155,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>当在过滤器中使用 StructArray 的标量子字段时，请为其创建标量索引。使用与<code translate="no">structArray[subfield]</code> 路径相同的语法。</p>
+    </button></h2><p>当在过滤器中使用 StructArray 标量子字段时，请为其创建标量索引。使用与<code translate="no">structArray[subfield]</code> 路径相同的语法。</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
@@ -275,7 +275,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>创建索引后，请描述Collection或列出索引，以确认预期的子字段路径已纳入索引。</p>
+    </button></h2><p>创建索引后，请描述Collection或列表索引，以确认预期的子字段路径已纳入索引。</p>
 <pre><code translate="no" class="language-python">indexes = client.list_indexes(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
 )
@@ -335,7 +335,7 @@ client.create_index(
       </svg>
     </button></h2><ul>
 <li><p>在 `<code translate="no">chunks.emb</code> ` 上创建索引，而不是在 `<code translate="no">chunks[emb]</code>` 上创建。</p></li>
-<li><p>仅创建<code translate="no">MAX_SIM*</code> 索引，然后尝试在同一子字段上运行元素级搜索。</p></li>
+<li><p>仅在<code translate="no">MAX_SIM*</code> 上创建索引，然后尝试在同一子字段上执行元素级搜索。</p></li>
 <li><p>仅创建常规向量索引，随后却试图在同一子字段上执行 EmbeddingList 搜索。</p></li>
 <li><p>将同一个向量子字段同时用于<code translate="no">MAX_SIM*</code> 和常规向量度量。</p></li>
 <li><p>忽略了高频使用的 StructArray 过滤器对应的标量索引。</p></li>

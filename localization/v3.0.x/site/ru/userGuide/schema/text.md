@@ -79,7 +79,7 @@ beta: Milvus 3.0.x
 <tbody>
 <tr><td>Лучше всего подходит для</td><td>Короткие метаданные, используемые для идентификации, классификации или фильтрации объектов, например <code translate="no">title</code>, <code translate="no">tag</code>, <code translate="no">category</code> или <code translate="no">external_id</code>.</td><td>Более длинный исходный контент, используемый LLM или рабочими процессами агентов, например <code translate="no">content</code>, <code translate="no">passage</code>, <code translate="no">article_body</code> или <code translate="no">log_message</code>.</td></tr>
 <tr><td>Параметр «Length»</td><td>Требуется параметр <code translate="no">max_length</code>, который определяет максимальное количество байтов, которое может хранить поле. Максимальное значение составляет <code translate="no">65,535</code> байт. Если значение может превысить этот предел, используйте параметр <code translate="no">TEXT</code>.</td><td>Не требует значения <code translate="no">max_length</code>, поэтому в схеме не требуется фиксированное ограничение на количество байтов для текстового значения.</td></tr>
-<tr><td>Поведение хранения</td><td>Каждое значение хранится в пределах настроенного для поля параметра « <code translate="no">max_length</code> ».</td><td>Использует автоматический выбор хранилища для текстовых значений большого размера. Подробности см. в разделе <a href="#how-milvus-stores-large-text-values">«Как Milvus хранит большие значения TEXT</a>».</td></tr>
+<tr><td>Поведение хранения</td><td>Каждое значение хранится в пределах настроенного для поля параметра « <code translate="no">max_length</code> ».</td><td>Использует автоматический выбор хранилища для больших текстовых значений. Подробности см. в разделе <a href="#how-milvus-stores-large-text-values">«Как Milvus хранит большие значения TEXT</a>».</td></tr>
 <tr><td>Поддержка в качестве основного поля</td><td>Может использоваться в качестве первичного поля.</td><td>Не может использоваться в качестве первичного поля.</td></tr>
 <tr><td>Фильтрация</td><td>Используется для коротких строковых метаданных, которые должны фигурировать в выражениях фильтрации, таких как <code translate="no">category == &quot;news&quot;</code> или <code translate="no">tag in [&quot;ai&quot;, &quot;database&quot;]</code>.</td><td>Не предназначено для обычной фильтрации метаданных.</td></tr>
 </tbody>
@@ -132,7 +132,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В следующем примере создаётся коллекция с полем « <code translate="no">TEXT</code> » для исходного контента и полем «sparse vector» для разреженных векторов, сгенерированных с помощью BM25. Функция BM25 преобразует токенизированный текст из поля « <code translate="no">content</code> » в разреженные векторы, хранящиеся в поле « <code translate="no">sparse</code> ».</p>
+    </button></h2><p>В следующем примере создаётся коллекция с полем « <code translate="no">TEXT</code> » для исходного контента и полем «sparse vector» для разреженных векторов, сгенерированных BM25. Функция BM25 преобразует токенизированный текст из « <code translate="no">content</code> » в разреженные векторы, хранящиеся в « <code translate="no">sparse</code> ».</p>
 <p>Для полнотекстового поиска BM25 входное поле <code translate="no">TEXT</code> должно иметь значение <code translate="no">enable_analyzer=True</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, Function, FunctionType, MilvusClient
 
@@ -242,7 +242,7 @@ client.load_collection(collection_name=COLLECTION_NAME)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Используйте исходный текст запроса в качестве данных для поиска и выполните поиск по полю разреженных векторов. Milvus преобразует текст запроса в разреженный вектор, ранжирует совпадения с помощью BM25 и возвращает запрошенное поле « <code translate="no">TEXT</code> » в поле « <code translate="no">output_fields</code> ».</p>
+    </button></h2><p>Используйте исходный текст запроса в качестве данных для поиска и выполните поиск по полю разреженного вектора. Milvus преобразует текст запроса в разреженный вектор, ранжирует совпадения с помощью BM25 и возвращает запрошенное поле « <code translate="no">TEXT</code> » в поле « <code translate="no">output_fields</code> ».</p>
 <pre><code translate="no" class="language-python">results = client.search(
     collection_name=COLLECTION_NAME,
 <span class="highlighted-comment-line">    data=[<span class="hljs-string">&quot;how does Milvus store source text for retrieval&quot;</span>],</span>

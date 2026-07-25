@@ -277,7 +277,7 @@ client.create_collection(
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>تحذير
-الحقول StructArray القابلة للقيمة الفارغة متاحة فقط في Milvus v3.0.x. بالنسبة لحقل StructArray القابل للقيمة الفارغة، يمكن للكيان توفير قيمة StructArray صالحة أو تعيين الحقل بأكمله إلى <code translate="no">null</code>. عند إدراج قيمة StructArray صالحة، يجب أن تكون جميع الحقول الفرعية إما فارغة أو ذات قيم صالحة. يؤدي إدراج كيان مع تعيين بعض الحقول الفرعية على null وتعيين أخرى على قيم صالحة إلى حدوث خطأ. لمزيد من التفاصيل، راجع <a href="/docs/ar/structarray-limits.md">حدود StructArray</a>.</p>
+الحقول StructArray القابلة للقيمة الفارغة متاحة فقط في Milvus v3.0.x. بالنسبة لحقل StructArray القابل للقيمة الفارغة، يمكن للكيان توفير قيمة StructArray صالحة أو تعيين الحقل بأكمله إلى <code translate="no">null</code>. عند إدراج قيمة StructArray صالحة، يجب أن تكون جميع الحقول الفرعية إما فارغة أو ذات قيم صالحة. يؤدي إدراج كيان مع تعيين بعض الحقول الفرعية على القيمة null وتعيين أخرى على قيم صالحة إلى حدوث خطأ. لمزيد من التفاصيل، راجع <a href="/docs/ar/structarray-limits.md">حدود StructArray</a>.</p>
 </div>
 <h2 id="Add-a-StructArray-field-to-an-existing-collection" class="common-anchor-header">إضافة حقل StructArray إلى مجموعة موجودة<button data-href="#Add-a-StructArray-field-to-an-existing-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -338,8 +338,8 @@ client.add_collection_struct_field(
     nullable=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>بعد إضافة حقل StructArray، تُرجع الكيانات الموجودة القيمة <code translate="no">null</code> للحقل الجديد عبر جميع حقوله الفرعية.</p>
-<p>بعد إنشاء حقل StructArray، لا يمكنك إضافة حقول فرعية جديدة إلى حقل StructArray الموجود. إذا احتجت إلى سمات عناصر إضافية لاحقًا، فاستدعِ <code translate="no">drop_collection_field()</code> لإسقاط حقل StructArray، ثم أضف حقل StructArray جديدًا باستخدام مخطط Struct المحدث.</p>
+<p>بعد إضافة حقل StructArray، تُرجع الكيانات الموجودة القيمة « <code translate="no">null</code> » للحقل الجديد عبر جميع حقوله الفرعية.</p>
+<p>بعد إنشاء حقل StructArray، لا يمكنك إضافة حقول فرعية جديدة إلى حقل StructArray الموجود. إذا احتجت إلى سمات عناصر إضافية لاحقًا، فاستدعِ <code translate="no">drop_collection_field()</code> لإزالة حقل StructArray، ثم أضف حقل StructArray جديدًا باستخدام مخطط Struct المحدث.</p>
 <pre><code translate="no" class="language-python">client.drop_collection_field(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
     field_name=<span class="hljs-string">&quot;chunks&quot;</span>,

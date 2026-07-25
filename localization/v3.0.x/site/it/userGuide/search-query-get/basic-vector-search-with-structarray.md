@@ -178,7 +178,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>Nella ricerca a livello di elemento, ogni risultato rappresenta un elemento Struct corrispondente. Il valore " <code translate="no">offset</code> " è la posizione, a partire da zero, di quell’elemento nel campo StructArray. La stessa entità può comparire più di una volta se più di un elemento Struct corrisponde alla query. Il valore " <code translate="no">limit</code> " si applica ai risultati a livello di elemento, non alle entità padre univoche.</p>
+<p>Nella ricerca a livello di elemento, ogni risultato rappresenta un elemento Struct corrispondente. Il valore " <code translate="no">offset</code> " è la posizione, a partire da zero, di quell’elemento nel campo StructArray. La stessa entità può comparire più di una volta se più di un elemento Struct corrisponde alla query. Il valore " <code translate="no">limit</code> " si applica ai risultati a livello di elemento, non alle entità principali univoche.</p>
 <h2 id="Interpret-results" class="common-anchor-header">Interpretazione dei risultati<button data-href="#Interpret-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -200,7 +200,7 @@ results = client.search(
 </thead>
 <tbody>
 <tr><td><code translate="no">id</code></td><td>Chiave primaria dell’entità corrispondente.</td><td>Chiave primaria dell'entità che contiene l'elemento Struct corrispondente.</td></tr>
-<tr><td><code translate="no">distance</code> o punteggio</td><td>Punteggio o distanza tra l'elenco di embedding della query e l'elenco di embedding memorizzato.</td><td>Punteggio o distanza tra il vettore della query e il vettore dell’elemento Struct corrispondente.</td></tr>
+<tr><td><code translate="no">distance</code> o punteggio</td><td>Punteggio o distanza tra l'elenco di embedding della query e l'elenco di embedding memorizzato.</td><td>Punteggio o distanza tra il vettore della query e il vettore dell’elemento Struct trovato.</td></tr>
 <tr><td><code translate="no">offset</code></td><td>Non applicabile.</td><td>Posizione a partire da zero dell'elemento Struct corrispondente al momento della restituzione.</td></tr>
 <tr><td>Chiavi primarie ripetute</td><td>Non previsto per una singola query poiché i risultati sono a livello di entità.</td><td>Possibile, poiché più elementi Struct nella stessa entità possono corrispondere.</td></tr>
 <tr><td>Campi di output StructArray richiesti</td><td>Restituiti dall’entità corrispondente.</td><td>Restituiti con la forma di corrispondenza a livello di elemento supportata dall’API e dall’SDK di destinazione.</td></tr>

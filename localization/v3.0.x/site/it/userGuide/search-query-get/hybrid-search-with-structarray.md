@@ -23,7 +23,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Utilizza questa pagina per combinare la ricerca vettoriale StructArray con altre ricerche vettoriali in un'unica richiesta di ricerca ibrida. La ricerca ibrida StructArray può produrre risultati a livello di entità o a livello di elemento, a seconda degli oggetti <code translate="no">AnnSearchRequest</code> che si combinano.</p>
-<p>Questa pagina utilizza la raccolta <code translate="no">tech_articles</code> tratta da <a href="/docs/it/create-structarray-field.md">"Creare un campo StructArray</a>". La raccolta presenta un campo vettoriale di primo livello denominato <code translate="no">title_vector</code> e un campo StructArray denominato <code translate="no">chunks</code>. Il sottocampo <code translate="no">chunks[emb_list_vector]</code> è indicizzato per la ricerca EmbeddingList, mentre <code translate="no">chunks[emb]</code> è indicizzato per la ricerca a livello di elemento.</p>
+<p>Questa pagina utilizza la raccolta " <code translate="no">tech_articles</code> " descritta nella sezione <a href="/docs/it/create-structarray-field.md">"Creazione di un campo StructArray</a>". La raccolta presenta un campo vettoriale di primo livello denominato " <code translate="no">title_vector</code> " e un campo StructArray denominato " <code translate="no">chunks</code>". Il sottocampo " <code translate="no">chunks[emb_list_vector]</code> " è indicizzato per la ricerca EmbeddingList, mentre " <code translate="no">chunks[emb]</code> " è indicizzato per la ricerca a livello di elemento.</p>
 <h2 id="How-hybrid-search-applies-to-StructArray" class="common-anchor-header">Come si applica la ricerca ibrida a StructArray<button data-href="#How-hybrid-search-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -193,7 +193,7 @@ results = client.hybrid_search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>Entrambi gli oggetti <code translate="no">AnnSearchRequest</code> effettuano la ricerca nei sottocampi vettoriali presenti in <code translate="no">chunks</code>. Lo stesso offset con base zero fa riferimento allo stesso elemento Struct, pertanto il sistema di riclassificazione ibrido può classificare direttamente i candidati a livello di elemento. Non impostare <code translate="no">element_scope</code> in questa modalità poiché non viene eseguito alcun raggruppamento a livello di entità.</p>
+<p>Entrambi gli oggetti <code translate="no">AnnSearchRequest</code> effettuano la ricerca nei sottocampi vettoriali presenti in <code translate="no">chunks</code>. Lo stesso offset con base zero fa riferimento allo stesso elemento Struct, pertanto il sistema di riclassificazione ibrido può classificare direttamente i candidati a livello di elemento. In questa modalità non impostare <code translate="no">element_scope</code> poiché non viene eseguito alcun raggruppamento a livello di entità.</p>
 <h2 id="Collapse-element-level-hits-for-entity-level-hybrid-search" class="common-anchor-header">Comprimere i risultati a livello di elemento per la ricerca ibrida a livello di entità<button data-href="#Collapse-element-level-hits-for-entity-level-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -209,8 +209,8 @@ results = client.hybrid_search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Se una ricerca ibrida combina un <code translate="no">AnnSearchRequest</code> a livello di elemento StructArray con una richiesta vettoriale a livello di collezione, una richiesta EmbeddingList o una richiesta a livello di elemento in un campo StructArray diverso, l’ambito finale dei candidati è a livello di entità. In questo caso, ogni <code translate="no">AnnSearchRequest</code> a livello di elemento StructArray viene raggruppato in candidati a livello di entità prima del riordino ibrido.</p>
-<p>Utilizzare ` <code translate="no">element_scope</code> ` all’interno di ` <code translate="no">params</code> ` dell’ <code translate="no">AnnSearchRequest</code> a livello di elemento StructArray quando è necessario controllare il modo in cui vengono raggruppati più elementi corrispondenti provenienti dalla stessa entità.</p>
+    </button></h2><p>Se una ricerca ibrida combina un’ <code translate="no">AnnSearchRequest</code> a livello di elemento StructArray con una richiesta vettoriale a livello di collezione, una richiesta EmbeddingList o una richiesta a livello di elemento in un campo StructArray diverso, l’ambito finale dei candidati è a livello di entità. In questo caso, ogni <code translate="no">AnnSearchRequest</code> a livello di elemento StructArray viene raggruppata in candidati a livello di entità prima del riordino ibrido.</p>
+<p>Utilizzare ` <code translate="no">element_scope</code> ` all’interno di ` <code translate="no">params</code> ` dell’` <code translate="no">AnnSearchRequest</code> ` a livello di elemento di StructArray quando è necessario controllare il modo in cui vengono raggruppati più elementi corrispondenti della stessa entità.</p>
 <pre><code translate="no">title_req = AnnSearchRequest(
     data=[query_vector],
     anns_field=<span class="hljs-string">&quot;title_vector&quot;</span>,
@@ -274,7 +274,7 @@ results = client.hybrid_search(
 <tr><td><code translate="no">sum</code></td><td>Sommare tutti i punteggi degli elementi restituiti per l'entità.</td><td>Non consentito.</td><td>Solo metriche a correlazione positiva, come <code translate="no">IP</code> o <code translate="no">COSINE</code>.</td></tr>
 <tr><td><code translate="no">avg</code></td><td>Calcola la media di tutti i punteggi degli elementi restituiti per l’entità.</td><td>Non consentito.</td><td>Qualsiasi metrica vettoriale regolare supportata.</td></tr>
 <tr><td><code translate="no">topk_sum</code></td><td>Somma i migliori punteggi degli elementi restituiti da <code translate="no">K</code> per l'entità.</td><td>Obbligatorio e deve essere positivo.</td><td>Solo metriche a correlazione positiva, come <code translate="no">IP</code> o <code translate="no">COSINE</code>.</td></tr>
-<tr><td><code translate="no">topk_avg</code></td><td>Calcola la media dei punteggi degli elementi migliori restituiti da <code translate="no">K</code> per l’entità.</td><td>Obbligatorio e deve essere positivo.</td><td>Qualsiasi metrica vettoriale regolare supportata.</td></tr>
+<tr><td><code translate="no">topk_avg</code></td><td>Calcola la media dei punteggi degli elementi migliori restituiti dall'<code translate="no">K</code> per l'entità.</td><td>Obbligatorio e deve essere positivo.</td><td>Qualsiasi metrica vettoriale regolare supportata.</td></tr>
 </tbody>
 </table>
 <p>Il collasso utilizza solo i risultati degli elementi restituiti da quell'<code translate="no">AnnSearchRequest</code> a livello di elemento StructArray. Non esegue la scansione di ogni elemento Struct nell'entità dopo la ricerca ANN. Impostare l'<code translate="no">limit</code> della richiesta a un valore sufficientemente alto da fornire gli elementi che si desidera siano disponibili per il collasso.</p>
@@ -364,7 +364,7 @@ results = client.hybrid_search(
 <li><p>Aggiunta di un’ <code translate="no">element_scope</code> a un’ <code translate="no">chunks[emb_list_vector]</code>. La ricerca EmbeddingList è già a livello di entità.</p></li>
 <li><p>Presumere che due campi StructArray condividano gli offset degli elementi. L’ <code translate="no">3</code> con offset in <code translate="no">chunks</code> e l’ <code translate="no">3</code> con offset in un altro campo StructArray sono elementi diversi, quindi la richiesta ibrida diventa a livello di entità.</p></li>
 <li><p>Utilizzo di <code translate="no">topk_sum</code> con <code translate="no">L2</code>. Utilizzare <code translate="no">max</code>, <code translate="no">avg</code> o <code translate="no">topk_avg</code> per metriche di distanza negative.</p></li>
-<li><p>Ci si aspetta che i risultati ibridi a livello di entità includano l’offset dell’elemento Struct selezionato dopo il collasso.</p></li>
+<li><p>Ci si aspetta che i risultati ibridi a livello di entità includano l’offset dell’elemento Struct selezionato dopo il raggruppamento.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Prossimi passi<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"

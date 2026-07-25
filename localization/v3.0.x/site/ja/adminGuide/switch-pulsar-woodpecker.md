@@ -25,7 +25,7 @@ summary: >-
 <p><strong>前提条件：</strong>MQの切り替え機能は<strong>、Milvus 3.0以降で</strong>利用可能です。作業を開始する前に、MilvusインスタンスをMilvus 3.0以降にアップグレードしてください。以前のバージョンではこの機能は利用できません。</p>
 </div>
 <div class="alert warning">
-<p>メッセージキューの切り替えは、<strong>リスクの高い操作</strong>です。<strong>ご自身の</strong>デプロイ方法（<strong>Helm を使用する場合</strong>、または<strong>Milvus Operator を使用する場合</strong>）に該当するセクションを選択し、その手順を最初から最後まで順を追って実行してください。Helm コマンドと Operator コマンドを混在させないでください。</p>
+<p>メッセージキューの切り替えは、<strong>リスクの高い操作</strong>です。<strong>ご自身の</strong>デプロイ方法（<strong>Helm を使用する場合</strong>、または<strong>Milvus Operator を使用する場合</strong>）に該当するセクションを選択し、その手順を最初から最後まで順を追って実行してください。Helm コマンドと Operator コマンドを混在させて使用しないでください。</p>
 </div>
 <h2 id="With-Helm" class="common-anchor-header">Helm を使用する場合<button data-href="#With-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -101,7 +101,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>ステップ 1: Milvus インスタンスが実行中であることを確認します。</strong></p>
-<p><strong>ステップ 2: 対象の Pulsar 接続を設定し、Milvus を再起動します。</strong>切り替えを行うには、Milvus がすでに Pulsar 接続を認識している必要があるため、<code translate="no">extraConfigFiles</code> 経由で<code translate="no">user.yaml</code> に書き込み、<code translate="no">helm upgrade</code> で適用します（これによりポッドが再起動されます）。Switch MQ 機能を利用するには、<code translate="no">streaming.enabled=true</code> が必要です。</p>
+<p><strong>ステップ 2: 対象の Pulsar 接続を設定し、Milvus を再起動します。</strong>切り替えを行うには、Milvus がすでに Pulsar 接続を認識している必要があるため、<code translate="no">extraConfigFiles</code> 経由で<code translate="no">user.yaml</code> に書き込み、<code translate="no">helm upgrade</code> で適用します（これによりポッドが再起動されます）。Switch MQ 機能には、<code translate="no">streaming.enabled=true</code> が必要です。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -131,7 +131,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>切り替えが成功すると、<code translate="no">[mqTypeValue=pulsar]</code> というログが出力されます。</p>
-<p><strong>ステップ 5: (オプション) Woodpecker データのクリーンアップを行います。</strong>MinIO/S3 上の Woodpecker データ（<code translate="no">&lt;rootPath&gt;/wp/...</code> 配下、通常は<code translate="no">files/wp/...</code> ）および etcd 内の Woodpecker メタデータ（<code translate="no">etcdctl get woodpecker --prefix</code> ）を削除します。後で Woodpecker に戻す予定がある場合は、まずこれらのファイルをクリーンアップしてください。</p>
+<p><strong>ステップ 5: (オプション) Woodpecker データをクリーンアップします。</strong>MinIO/S3 上の Woodpecker データ（<code translate="no">&lt;rootPath&gt;/wp/...</code> 配下、通常は<code translate="no">files/wp/...</code> ）および etcd 内の Woodpecker メタデータ（<code translate="no">etcdctl get woodpecker --prefix</code> ）を削除します。後で Woodpecker に戻す予定がある場合は、まずこれらのファイルをクリーンアップしてください。</p>
 <h2 id="With-Milvus-Operator" class="common-anchor-header">Milvus Operator を使用する場合<button data-href="#With-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -173,7 +173,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>切り替えが成功すると、<code translate="no">[mqTypeValue=woodpecker]</code> がログに記録されます。</p>
-<p><strong>ステップ 4: Operator 内の MQ タイプを更新します。</strong>Operator が切り替えを元に戻さないように、<strong>Operator</strong>が管理する設定を更新します<strong>。</strong> <code translate="no">change_configmap.yaml</code> を作成します:</p>
+<p><strong>ステップ 4: Operator 内の MQ タイプを更新します。</strong>Operator が切り替えを元に戻さないように、<strong>Operator</strong>が管理する構成を更新します<strong>。</strong> <code translate="no">change_configmap.yaml</code> を作成します:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -211,7 +211,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>ステップ 1: Milvus インスタンスが実行中であることを確認します。</strong></p>
-<p><strong>ステップ 2: 対象の Pulsar 接続を設定し、Milvus を再起動します。</strong>Pulsar 接続<strong>を</strong>`<code translate="no">spec.config</code> ` に配置し（Operator は `<code translate="no">spec.config</code> ` を `<code translate="no">user.yaml</code>` に変換します）、MQ タイプを設定します。CR を適用すると、新しい構成でポッドが再起動されます。</p>
+<p><strong>ステップ 2: 対象の Pulsar 接続を設定し、Milvus を再起動します。</strong>Pulsar 接続<strong>を</strong>`<code translate="no">spec.config</code> ` に配置し（Operator は `<code translate="no">spec.config</code> ` を `<code translate="no">user.yaml</code>` に変換します）、MQ タイプを設定します。CR を適用すると、ポッドが新しい構成で再起動されます。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># change_configmap.yaml</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -243,7 +243,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>切り替えが成功すると、<code translate="no">[mqTypeValue=pulsar]</code> というログが出力されます。</p>
-<p><strong>ステップ 5: (オプション) Woodpecker データのクリーンアップ。</strong>MinIO/S3 上の Woodpecker データ（<code translate="no">&lt;rootPath&gt;/wp/...</code> 配下、通常は<code translate="no">files/wp/...</code> ）および etcd 内の Woodpecker メタデータ（<code translate="no">etcdctl get woodpecker --prefix</code> ）を削除します。後で Woodpecker に切り戻す予定がある場合は、まずこれらのファイルをクリーンアップしてください。</p>
+<p><strong>ステップ 5: (オプション) Woodpecker データのクリーンアップ。</strong>MinIO/S3 上の Woodpecker データ（<code translate="no">&lt;rootPath&gt;/wp/...</code> 配下、通常は<code translate="no">files/wp/...</code> ）および etcd 内の Woodpecker メタデータ（<code translate="no">etcdctl get woodpecker --prefix</code> ）を削除します。後で Woodpecker に戻す予定がある場合は、まずこれらのファイルをクリーンアップしてください。</p>
 <h2 id="Supported-scenarios" class="common-anchor-header">サポートされるシナリオ<button data-href="#Supported-scenarios" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

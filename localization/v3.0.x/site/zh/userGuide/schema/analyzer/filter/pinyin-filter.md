@@ -19,8 +19,8 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>中文文本搜索通常要求用户输入的汉字与索引文本中的汉字完全一致。在名称查询、自动补全和边输入边搜索等操作流程中，用户通常会输入拼音而非汉字。 例如，用户可能输入“<code translate="no">zuqiu</code> ”来搜索“<code translate="no">足球</code> ”。<code translate="no">pinyin</code> 过滤器会在分析器输出中添加拼音分词，从而使中文文本能够与拼音输入进行匹配，而无需维护单独的拼音字段。</p>
-<p><code translate="no">pinyin</code> 过滤器通常与<a href="/docs/zh/jieba-tokenizer.md">Jieba分</a>词器配合使用，处理中文文本。它可在自定义分析器过滤器管道中运行，并能针对同一中文词元输出多种拼音词元形式。</p>
+    </button></h1><p>中文文本搜索通常要求用户输入的汉字与索引文本中的汉字完全一致。在名称查询、自动完成和边输入边搜索等操作流程中，用户通常会输入拼音而非汉字。 例如，用户可能输入“<code translate="no">zuqiu</code> ”来搜索“<code translate="no">足球</code> ”。<code translate="no">pinyin</code> 过滤器会在分析器输出中添加拼音分词，从而使中文文本能够与拼音输入进行匹配，而无需维护单独的拼音字段。</p>
+<p><code translate="no">pinyin</code> 过滤器通常与<a href="/docs/zh/jieba-tokenizer.md">Jieba分词器</a>配合使用，处理中文文本。它可在自定义分析器过滤器管道中运行，并能针对同一个中文词元输出多种拼音词元形式。</p>
 <h2 id="Configuration" class="common-anchor-header">配置<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -169,7 +169,7 @@ result = client.run_analyzer(sample_text, analyzer_params)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>当需要将中文词汇与它的拼音首字母进行匹配时，请启用<code translate="no">keep_separate_first_letter</code> 。</p>
+    </button></h3><p>当需要将中文词条与该词的拼音首字母进行匹配时，请启用<code translate="no">keep_separate_first_letter</code> 。</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [

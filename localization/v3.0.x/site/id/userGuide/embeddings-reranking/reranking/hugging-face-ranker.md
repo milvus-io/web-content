@@ -21,7 +21,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Pencarian vektor mengurutkan hasil berdasarkan jarak vektor, tetapi urutan awal mungkin tidak mencerminkan seberapa baik teks setiap kandidat menjawab kueri. Hugging Face Ranker mengirimkan kueri dan teks kandidat ke <a href="https://huggingface.co/docs/inference-providers/index">Penyedia Inferensi Hugging Face</a> yang dihosting dan menggunakan skor " <code translate="no">sentence-similarity</code> " untuk menyusun ulang urutan kandidat yang dikembalikan oleh Milvus.</p>
+    </button></h1><p>Pencarian vektor mengurutkan hasil berdasarkan jarak vektor, tetapi urutan awal mungkin tidak mencerminkan seberapa baik teks setiap kandidat menjawab kueri. Hugging Face Ranker mengirimkan kueri dan teks kandidat ke <a href="https://huggingface.co/docs/inference-providers/index">Penyedia Inferensi Hugging Face</a> yang dihosting dan menggunakan skor " <code translate="no">sentence-similarity</code> " untuk mengurutkan ulang kandidat yang dikembalikan oleh Milvus.</p>
 <p>Integrasi ini menggunakan router Hugging Face yang dihosting. Untuk melakukan pengurutan ulang menggunakan layanan Text Embeddings Inference (TEI) yang di-deploy secara terpisah, lihat <a href="/docs/id/tei-ranker.md">TEI Ranker</a>.</p>
 <h2 id="Limits" class="common-anchor-header">Batasan<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,7 +39,7 @@ beta: Milvus v2.6.20+
         ></path>
       </svg>
     </button></h2><ul>
-<li>Fungsi harus merujuk tepat pada satu bidang ` <code translate="no">VARCHAR</code> ` yang tidak boleh null di ` <code translate="no">input_field_names</code>`.</li>
+<li>Fungsi harus merujuk tepat pada satu bidang ` <code translate="no">VARCHAR</code> ` yang tidak boleh null di <code translate="no">input_field_names</code>.</li>
 <li>Jumlah string di ` <code translate="no">queries</code> ` harus sama dengan jumlah kueri pencarian (<code translate="no">nq</code>).</li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">Cara kerjanya<button data-href="#How-it-works" class="anchor-icon" translate="no">
@@ -65,7 +65,7 @@ beta: Milvus v2.6.20+
  </span></p>
 <p>Hugging Face Ranker berjalan setelah pencarian vektor awal:</p>
 <ol>
-<li><strong>Mengambil entitas kandidat.</strong> Milvus mencari di bidang vektor yang dikonfigurasi dan mengumpulkan entitas kandidat.</li>
+<li><strong>Mengambil entitas kandidat.</strong> Milvus mencari di bidang vektor yang telah dikonfigurasi dan mengumpulkan entitas kandidat.</li>
 <li><strong>Siapkan teks untuk pengurutan ulang.</strong> Fungsi ini membaca teks kueri dari <code translate="no">params.queries</code> dan teks kandidat dari bidang <code translate="no">VARCHAR</code> yang ditentukan di <code translate="no">input_field_names</code>.</li>
 <li><strong>Meminta skor kesamaan.</strong> Milvus mengirimkan kueri sebagai <code translate="no">source_sentence</code> dan teks kandidat sebagai <code translate="no">sentences</code> melalui <code translate="no">hf-inference</code> ke pipa Hugging Face <code translate="no">sentence-similarity</code>.</li>
 <li><strong>Menyusun ulang peringkat kandidat.</strong> Hugging Face mengembalikan satu skor per kandidat. Milvus mengurutkan kandidat dari skor tertinggi ke terendah dan mengembalikan hasil yang telah disusun ulang peringkatnya.</li>
@@ -83,7 +83,7 @@ beta: Milvus v2.6.20+
 <li><strong>Membuat representasi model terpisah.</strong> Milvus mengirimkan kueri sebagai <code translate="no">source_sentence</code> dan teks kandidat sebagai <code translate="no">sentences</code>. Model secara internal mengenkode kueri dan setiap kandidat secara terpisah.</li>
 <li><strong>Bandingkan dan kembalikan skor.</strong> Model membandingkan representasi kueri dengan setiap representasi kandidat dan mengembalikan satu skor kesamaan per kandidat.</li>
 </ol>
-<p>Embedding atau representasi yang digunakan oleh model Hugging Face merupakan proses pemrosesan model antara. Hugging Face mengembalikan skor, bukan vektor. Oleh karena itu, pengambilan vektor awal dan pemeringkatan ulang model menggunakan representasi terpisah dan mungkin menggunakan model yang berbeda.</p>
+<p>Embedding atau representasi yang digunakan oleh model Hugging Face merupakan bagian dari pemrosesan model antara. Hugging Face mengembalikan skor, bukan vektor. Oleh karena itu, pengambilan vektor awal dan pemeringkatan ulang model menggunakan representasi terpisah dan mungkin menggunakan model yang berbeda.</p>
 <h2 id="Before-you-start" class="common-anchor-header">Sebelum Anda mulai<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -277,7 +277,7 @@ client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Tentukan fungsi ` <code translate="no">RERANK</code> ` yang membaca teks kandidat dari ` <code translate="no">document</code> ` dan menggunakan teks kueri dari ` <code translate="no">queries</code>`:</p>
+    </button></h3><p>Tentukan fungsi ` <code translate="no">RERANK</code> ` yang membaca teks kandidat dari ` <code translate="no">document</code> ` dan menggunakan teks kueri di ` <code translate="no">queries</code>`:</p>
 <pre><code translate="no" class="language-python">hugging_face_ranker = Function(
     name=<span class="hljs-string">&quot;hugging_face_semantic_ranker&quot;</span>,
     input_field_names=[<span class="hljs-string">&quot;document&quot;</span>],
@@ -324,7 +324,7 @@ client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Masukkan Fungsi melalui parameter ` <code translate="no">ranker</code> ` dari ` <code translate="no">search()</code>`:</p>
+    </button></h3><p>Masukkan Fungsi melalui parameter <code translate="no">ranker</code> di <code translate="no">search()</code>:</p>
 <pre><code translate="no" class="language-python">query_vector = [<span class="hljs-number">0.12</span>, <span class="hljs-number">0.21</span>, <span class="hljs-number">0.29</span>, <span class="hljs-number">0.41</span>]
 
 results = client.search(

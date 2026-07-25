@@ -79,7 +79,7 @@ beta: Milvus v2.6.20+
 <ol>
 <li><strong>准备文本输入。</strong>Ranker 从<code translate="no">params.queries</code> 读取查询文本，并从配置的<code translate="no">VARCHAR</code> 字段读取候选文本。</li>
 <li><strong>创建独立的模型表示。</strong>Milvus将查询文本作为<code translate="no">source_sentence</code> ，将候选文本作为<code translate="no">sentences</code> 发送。模型在内部分别对查询和每个候选文本进行编码。</li>
-<li><strong>比较并返回评分。</strong>模型将查询表示与每个候选表示进行比较，并针对每个候选结果返回一个相似度评分。</li>
+<li><strong>比较并返回评分。</strong>模型将查询表示与每个候选表示进行比较，并为每个候选结果返回一个相似度评分。</li>
 </ol>
 <p>Hugging Face 模型所使用的 Embeddings 或表示形式属于模型处理的中间结果。Hugging Face 返回的是评分，而非向量。因此，初始向量检索和模型重新排序使用的是独立的表示形式，且可能采用不同的模型。</p>
 <h2 id="Before-you-start" class="common-anchor-header">开始之前<button data-href="#Before-you-start" class="anchor-icon" translate="no">
@@ -106,7 +106,7 @@ beta: Milvus v2.6.20+
 <li>一个Collection，用于将候选文本存储在<code translate="no">VARCHAR</code> 的不可为空字段中。</li>
 </ul>
 <div class="alert note">
-<p>Milvus 无法控制 Hugging Face 模型是否仍可通过<code translate="no">hf-inference</code> 获取，也无法保证该模型是否满足您的稳定性、延迟和输出质量要求。在将模型投入生产环境使用之前，请先在 Hugging Face 上验证该模型，并评估其是否适合您的工作负载。</p>
+<p>Milvus 无法控制 Hugging Face 模型是否仍可通过<code translate="no">hf-inference</code> 提供，也无法保证该模型是否满足您的稳定性、延迟和输出质量要求。在将模型投入生产环境使用之前，请先在 Hugging Face 上验证该模型，并评估其是否适合您的工作负载。</p>
 </div>
 <p>示例中仅使用 <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2"><code translate="no">sentence-transformers/all-MiniLM-L6-v2</code></a> 仅用于演示配置。该模型不代表 Milvus 的推荐或认证。</p>
 <h2 id="Configure-credentials" class="common-anchor-header">配置凭据<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
@@ -173,7 +173,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>如果函数和提供程序配置中均未指定凭据标签，请在 Milvus 服务环境中设置<code translate="no">MILVUS_HUGGINGFACE_API_KEY</code> ：</p>
+    </button></h3><p>如果函数和提供程序配置中均未指定凭据标签，请在 Milvus 服务环境中设置 `<code translate="no">MILVUS_HUGGINGFACE_API_KEY</code> `：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># docker-compose.yaml</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">environment:</span>
@@ -385,7 +385,7 @@ results = client.search(
         ></path>
       </svg>
     </button></h3><p><code translate="no">queries</code> 中的字符串数量必须与搜索查询的数量（<code translate="no">nq</code> ）相等。对于仅包含一个查询向量的搜索，请提供恰好一个查询字符串。</p>
-<h3 id="Candidate-text-is-missing-or-nullable" class="common-anchor-header">候选项文本缺失或为可空<button data-href="#Candidate-text-is-missing-or-nullable" class="anchor-icon" translate="no">
+<h3 id="Candidate-text-is-missing-or-nullable" class="common-anchor-header">候选项文本缺失或可为空<button data-href="#Candidate-text-is-missing-or-nullable" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -416,7 +416,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>请确认<code translate="no">milvus.yaml</code> 中存在Function凭证标签，且提供商级别的标签有效，或者Milvus服务环境中存在<code translate="no">MILVUS_HUGGINGFACE_API_KEY</code> 。</p>
+    </button></h3><p>请确认<code translate="no">milvus.yaml</code> 中存在Function凭证标签，且提供商级别的标签有效，或者<code translate="no">MILVUS_HUGGINGFACE_API_KEY</code> 已存在于Milvus服务环境中。</p>
 <h2 id="Next-steps" class="common-anchor-header">后续步骤<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

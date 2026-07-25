@@ -4,7 +4,7 @@ title: 使用 StructArray 進行基本向量搜尋
 summary: >-
   請使用此頁面，對 StructArray 欄位內的向量子欄位執行向量搜尋。StructArray
   支援兩種基本的向量搜尋模式：嵌入清單搜尋（EmbeddingList
-  search），此模式會對儲存於每個實體中的嵌入清單進行評分；以及元素層級搜尋，此模式會獨立搜尋每個 Struct 元素。
+  search），此模式會針對儲存於每個實體中的嵌入清單進行評分；以及元素層級搜尋，此模式會獨立搜尋每個 Struct 元素。
 ---
 <h1 id="Basic-Vector-Search-with-StructArray" class="common-anchor-header">使用 StructArray 進行基本向量搜尋<button data-href="#Basic-Vector-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"

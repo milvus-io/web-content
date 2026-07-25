@@ -19,7 +19,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Hugging Faceの埋め込みモデルを使用する場合、通常はアプリケーション側で認証情報を管理し、モデルを個別に呼び出し、挿入されたデータや検索クエリに対して一貫して埋め込みを生成する必要があります。テキスト埋め込み機能を使用すると、Milvusはホスト<a href="https://huggingface.co/docs/inference-providers/index">型のHugging Face推論プロバイダー</a>を呼び出し、データの挿入時および検索時に生のテキストをベクトルに変換します。</p>
+    </button></h1><p>Hugging Faceの埋め込みモデルを使用する場合、通常はアプリケーション側で認証情報を管理し、モデルを個別に呼び出し、挿入されたデータや検索クエリに対して一貫して埋め込みを生成する必要があります。テキスト埋め込み機能を使用すると、Milvusはホストされている<a href="https://huggingface.co/docs/inference-providers/index">Hugging Face推論プロバイダー</a>を呼び出し、データの挿入時および検索時に生のテキストをベクトルに変換します。</p>
 <p>この統合では、ホスト型 Hugging Face ルーターが使用されます。Milvus を別途デプロイされた Text Embeddings Inference (TEI) サービスに接続するには、「<a href="/docs/ja/hugging-face-tei.md">Hugging Face TEI」を</a>参照してください。</p>
 <h2 id="Limits" class="common-anchor-header">制限事項<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -37,7 +37,7 @@ beta: Milvus v2.6.20+
         ></path>
       </svg>
     </button></h2><ul>
-<li>Functionの出力フィールドには、<code translate="no">FLOAT_VECTOR</code> データ型を使用する必要があります。MilvusにおけるHugging Faceの埋め込み機能では、<code translate="no">INT8_VECTOR</code> 、<code translate="no">BINARY_VECTOR</code> 、<code translate="no">FLOAT16_VECTOR</code> 、<code translate="no">BFLOAT16_VECTOR</code> の出力フィールドはサポートされていません。</li>
+<li>Functionの出力フィールドには、<code translate="no">FLOAT_VECTOR</code> データ型を使用する必要があります。MilvusにおけるHugging Faceの埋め込み機能では、<code translate="no">INT8_VECTOR</code> 、<code translate="no">BINARY_VECTOR</code> 、<code translate="no">FLOAT16_VECTOR</code> 、または<code translate="no">BFLOAT16_VECTOR</code> 出力フィールドはサポートされていません。</li>
 <li>「Function」出力フィールドの次元は、選択したモデルの出力次元と一致している必要があります。</li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">仕組み<button data-href="#How-it-works" class="anchor-icon" translate="no">
@@ -86,7 +86,7 @@ beta: Milvus v2.6.20+
     </button></h2><p>Hugging Faceのホスト型テキスト埋め込み機能を使用する前に、以下の条件を満たしていることを確認してください：</p>
 <ul>
 <li>2.6リリースラインのMilvus 2.6.20以降。</li>
-<li>PyMilvus 2.6.16以降。</li>
+<li>PyMilvus 2.6.16 以降。</li>
 <li>推論プロバイダーを呼び出せる Hugging Face ユーザーアクセストークン。</li>
 <li><code translate="no">hf-inference</code> によって現在提供されている、 <a href="https://huggingface.co/docs/inference-providers/en/tasks/feature-extraction"><code translate="no">feature-extraction</code></a> タスク用にxml-ph-0000@deepl.internalで現在提供されているモデル。</li>
 </ul>
@@ -110,7 +110,7 @@ beta: Milvus v2.6.20+
         ></path>
       </svg>
     </button></h2><p>Milvusでは、ホスト型ルーターを呼び出すためにHugging Faceのユーザーアクセストークンが必要です。トークンは<code translate="no">milvus.yaml</code> で設定するか、環境変数を通じて設定できます。</p>
-<p>認証情報の優先順位は以下の通りです：</p>
+<p>認証情報の優先順位は次のとおりです：</p>
 <pre><code translate="no" class="language-text">Function credential label -&gt; provider credential label in milvus.yaml -&gt; environment variable
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Option-1-Configuration-file" class="common-anchor-header">オプション 1: 設定ファイル<button data-href="#Option-1-Configuration-file" class="anchor-icon" translate="no">
@@ -158,7 +158,7 @@ beta: Milvus v2.6.20+
         ></path>
       </svg>
     </button></h3><p>Function およびプロバイダーの設定のいずれにも認証情報ラベルが指定されていない場合、Milvus は `<code translate="no">MILVUS_HUGGINGFACE_API_KEY</code>` からトークンを読み取ります。</p>
-<p>Docker Compose の場合、Milvus スタンドアロンサービスで以下の変数を設定します:</p>
+<p>Docker Compose の場合、Milvus スタンドアロンサービス内で変数を設定します:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># docker-compose.yaml</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">environment:</span>
@@ -412,6 +412,6 @@ client.create_collection(
         ></path>
       </svg>
     </button></h2><ul>
-<li>Function の一般的な概念および挿入/検索の動作については、「<a href="/docs/ja/embedding-function-overview.md">Embedding Function の概要</a>」を参照してください。</li>
+<li>Functionの一般的な概念および挿入/検索の動作については、「<a href="/docs/ja/embedding-function-overview.md">Embedding Functionの概要」を</a>参照してください。</li>
 <li>ホスト型 Hugging Face の文類似度スコアを使用してベクトル検索の候補を再ランク付けするには、「<a href="/docs/ja/hugging-face-ranker.md">Hugging Face Ranker</a>」を参照してください。</li>
 </ul>

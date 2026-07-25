@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 페이지를 사용하여 StructArray 필드 내의 벡터 하위 필드에 대해 벡터 검색을 실행할 수 있습니다. StructArray는 두 가지 기본 벡터 검색 모드를 지원합니다. 하나는 각 엔티티에 저장된 임베딩 목록에 점수를 매기는 ‘임베딩 목록(EmbeddingList) 검색’이고, 다른 하나는 각 Struct 요소를 독립적으로 검색하는 ‘요소 수준 검색’입니다.</p>
+    </button></h1><p>이 페이지를 사용하여 StructArray 필드 내의 벡터 하위 필드에 대해 벡터 검색을 실행할 수 있습니다. StructArray는 두 가지 기본 벡터 검색 모드를 지원합니다. 하나는 각 엔티티에 저장된 임베딩 목록에 점수를 매기는 EmbeddingList 검색이고, 다른 하나는 각 Struct 요소를 독립적으로 검색하는 요소 수준 검색입니다.</p>
 <p>이 페이지에서는 <a href="/docs/ko/create-structarray-field.md">‘StructArray 필드 생성’의</a> <code translate="no">tech_articles</code> 컬렉션을 사용합니다. 이 컬렉션에는 <code translate="no">chunks</code> 라는 StructArray 필드가 있습니다. 각 청크에는 텍스트, 스칼라 메타데이터, EmbeddingList 검색용 인덱스가 포함된 <code translate="no">emb_list_vector</code> 라는 벡터 하위 필드, 그리고 요소 수준 검색용 인덱스가 포함된 <code translate="no">emb</code> 라는 벡터 하위 필드가 포함되어 있습니다.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">시작하기 전에<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"

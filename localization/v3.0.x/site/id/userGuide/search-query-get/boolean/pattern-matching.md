@@ -162,7 +162,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Gunakan ` <code translate="no">LIKE</code> ` untuk pencocokan awalan, akhiran, mengandung, dan satu karakter pada posisi tetap. ` <code translate="no">LIKE</code> ` tidak mendukung kelas karakter seperti ` <code translate="no">[0-9]</code>`, alternatif seperti ` <code translate="no">error|failed</code>`, jumlah pengulangan seperti ` <code translate="no">{4}</code>`, jangkar seperti ` <code translate="no">^</code> ` atau ` <code translate="no">$</code>`, atau bendera tidak peka huruf besar-kecil seperti ` <code translate="no">(?i)</code>`. Gunakan regex untuk pola-pola tersebut.</p>
+    </button></h3><p>Gunakan ` <code translate="no">LIKE</code> ` untuk pencocokan awalan, akhiran, mengandung, dan satu karakter pada posisi tetap. ` <code translate="no">LIKE</code> ` tidak mendukung kelas karakter seperti ` <code translate="no">[0-9]</code>`, alternatif seperti ` <code translate="no">error|failed</code>`, pengulangan seperti ` <code translate="no">{4}</code>`, jangkar seperti ` <code translate="no">^</code> ` atau ` <code translate="no">$</code>`, atau bendera tidak peka huruf besar-kecil seperti ` <code translate="no">(?i)</code>`. Gunakan regex untuk pola-pola tersebut.</p>
 <p>Gunakan ` <code translate="no">==</code> ` untuk kesamaan string penuh yang tepat. Gunakan ` <code translate="no">LIKE</code> ` hanya jika filter memerlukan pencocokan karakter pengganti.</p>
 <h3 id="Escaping-wildcards-in-a-LIKE-pattern" class="common-anchor-header">Mengescap karakter pengganti dalam pola LIKE<button data-href="#Escaping-wildcards-in-a-LIKE-pattern" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -267,7 +267,7 @@ res = client.query(
 <p>Untuk mencocokkan salah satu dari beberapa kata, gunakan alternatif dengan <code translate="no">|</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ &quot;error|failed|timeout&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Saat mencocokkan karakter meta regex secara harfiah, lakukan escape pada pola regex tersebut. Misalnya, untuk mencocokkan titik harfiah (<code translate="no">\.</code> dalam regex), tulis <code translate="no">\\.</code> dalam string filter Python:</p>
+<p>Saat mencocokkan karakter meta regex secara harfiah, lakukan escape pada pola regex tersebut. Misalnya, untuk mencocokkan titik (<code translate="no">\.</code> ) secara harfiah dalam regex, tulis <code translate="no">\\.</code> dalam string filter Python:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;email =~ &quot;@gmail\\.com$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Catatan: Filter regex Milvus mengikuti sintaks RE2. Jika pola regex menggunakan sintaks yang tidak didukung oleh RE2 atau tidak valid, Milvus akan menolak ekspresi filter tersebut. Untuk detail mengenai karakter meta regex, bendera, dan perilaku pencocokan, lihat referensi <a href="https://github.com/google/re2/wiki/syntax">sintaks RE2</a>.</p>
@@ -295,7 +295,7 @@ res = client.query(
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;code =~ &quot;^E[0-9]{4}$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Kolom VARCHAR yang dapat bernilai null</strong></p>
-<p>Filter regex tidak mencocokkan nilai null. Hal ini berlaku baik untuk <code translate="no">=~</code> maupun <code translate="no">!~</code>. Jika Anda ingin mengecualikan pola regex tetapi tetap mempertahankan nilai null, tambahkan secara eksplisit <code translate="no">OR field IS NULL</code>:</p>
+<p>Filter regex tidak cocok dengan nilai null. Hal ini berlaku baik untuk <code translate="no">=~</code> maupun <code translate="no">!~</code>. Jika Anda ingin mengecualikan pola regex tetapi tetap mempertahankan nilai null, tambahkan secara eksplisit <code translate="no">OR field IS NULL</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot; OR message IS NULL&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Jalur JSON</strong></p>

@@ -43,7 +43,7 @@ beta: Milvus 3.0.x
 }
 <button class="copy-code-btn"></button></code></pre>
 <p>この簡略表記では、元の中国語トークンが保持され、文字レベルのピンイントークンが出力されます。これらのオプションを明示的に有効にしない限り、連結ピンインやピンインの頭文字は出力されません。</p>
-<p>完全に制御するには、フィルターをオブジェクトとして指定し、Milvus が出力するピンイントークンの形式を設定してください。</p>
+<p>完全に制御するには、フィルターをオブジェクトとして指定し、Milvus が出力するピンイン・トークンの形式を設定してください。</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
 <span class="highlighted-comment-line">    <span class="hljs-string">&quot;filter&quot;</span>: [</span>
@@ -69,7 +69,7 @@ beta: Milvus 3.0.x
 <tr><td><code translate="no">keep_separate_first_letter</code></td><td>ブール値ソーストークンごとに、結合されたピンイントークンを出力します。たとえば、xml-ph-0000@deepl.internal は xml-ph-0001@deepl.internal を出力します。</td><td><code translate="no">false</code></td><td>各ソーストークンに対して、ピンインの頭文字トークンを出力します。たとえば、<code translate="no">中文</code> は<code translate="no">zw</code> を生成します。</td></tr>
 </tbody>
 </table>
-<p>このフィルターは、トークナイザーによって生成されたトークンを処理します。中国語のテキストの場合は、<code translate="no">jieba</code> などのトークナイザーと組み合わせて使用してください。</p>
+<p>このフィルターは、トークナイザーによって生成されたトークンを処理します。中国語のテキストについては、<code translate="no">jieba</code> などのトークナイザーと組み合わせて使用してください。</p>
 <h2 id="Examples" class="common-anchor-header">例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

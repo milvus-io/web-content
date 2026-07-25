@@ -1,12 +1,12 @@
 ---
 id: switch-mq-type.md
-title: Changer de type de file d'attente de messages (MQ)
+title: Changer de type de file d'attente de messages
 summary: >-
   Basculer la file d'attente de messages d'un déploiement Milvus existant de
   Woodpecker vers une autre file d'attente de messages sans interruption de
   service.
 ---
-<h1 id="Switch-MQ-Type" class="common-anchor-header">Changer de type de file d'attente de messages (MQ)<button data-href="#Switch-MQ-Type" class="anchor-icon" translate="no">
+<h1 id="Switch-MQ-Type" class="common-anchor-header">Changer de type de file d'attente de messages<button data-href="#Switch-MQ-Type" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,7 +41,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>La fonctionnalité « Changer de file d'attente de messages » est disponible à partir de Milvus 3.0.</strong> Mettez à niveau votre instance Milvus vers la version 3.0 ou une version<strong>ultérieure</strong> avant de l'utiliser — cette fonctionnalité n'est pas disponible sur les versions antérieures.</li>
+<li><strong>La fonctionnalité « Changer de file d'attente de messages » est disponible à partir de Milvus 3.0.</strong> Mettez à jour votre instance Milvus vers la version 3.0 ou une version<strong>ultérieure</strong> avant de l'utiliser — cette fonctionnalité n'est pas disponible sur les versions antérieures.</li>
 <li>L’instance fonctionne correctement.</li>
 </ul>
 <h2 id="Scope" class="common-anchor-header">Portée<button data-href="#Scope" class="anchor-icon" translate="no">
@@ -59,7 +59,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ce guide traite uniquement de la bascule <strong>entre Woodpecker et une autre file d’attente de messages</strong>. La bascule directe entre Pulsar et Kafka n’est pas couverte par ce guide.</p>
+    </button></h2><p>Ce guide traite uniquement de la bascule <strong>entre Woodpecker et une autre file d’attente de messages</strong>. La bascule directe entre Pulsar et Kafka n’est pas couverte.</p>
 <ul>
 <li><a href="/docs/fr/switch-rocksmq-woodpecker.md">Basculer entre RocksMQ et Woodpecker</a> — Milvus autonome (Docker Compose)</li>
 <li><a href="/docs/fr/switch-pulsar-woodpecker.md">Basculer entre Pulsar et Woodpecker</a> — Cluster Milvus (Helm / Milvus Operator)</li>
@@ -90,7 +90,7 @@ summary: >-
 <div class="alert note">
 <p>Avant la bascule, assurez-vous que le MQ cible ne contient pas de sujets portant les mêmes noms que ceux utilisés par l’instance Milvus actuelle. Ceci est particulièrement important si le MQ cible a déjà été utilisé par une autre instance Milvus, car des noms de sujets en conflit peuvent entraîner un comportement inattendu.</p>
 </div>
-<h2 id="Support-matrix" class="common-anchor-header">Matrice de compatibilité<button data-href="#Support-matrix" class="anchor-icon" translate="no">
+<h2 id="Support-matrix" class="common-anchor-header">Matrice de prise en charge<button data-href="#Support-matrix" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

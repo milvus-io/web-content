@@ -81,7 +81,7 @@ beta: Milvus 3.0.x
 <tr><td>Definição de comprimento</td><td>Requer <code translate="no">max_length</code>, que define o número máximo de bytes que o campo pode armazenar. O valor máximo é <code translate="no">65,535</code> bytes. Se um valor puder exceder este limite, utilize <code translate="no">TEXT</code>.</td><td>Não requer <code translate="no">max_length</code>, pelo que o esquema não necessita de um limite fixo de bytes para o valor do texto.</td></tr>
 <tr><td>Comportamento de armazenamento</td><td>Armazena cada valor dentro do ` <code translate="no">max_length</code>` configurado para o campo.</td><td>Utiliza a seleção automática de armazenamento para valores de texto maiores. Para mais detalhes, consulte <a href="#how-milvus-stores-large-text-values">Como o Milvus armazena valores TEXT de grande dimensão</a>.</td></tr>
 <tr><td>Suporte a campos primários</td><td>Pode ser utilizado como campo primário.</td><td>Não pode ser utilizado como campo primário.</td></tr>
-<tr><td>Filtragem</td><td>Utilize para metadados de cadeias curtas que precisem de aparecer em expressões de filtragem, tais como <code translate="no">category == &quot;news&quot;</code> ou <code translate="no">tag in [&quot;ai&quot;, &quot;database&quot;]</code>.</td><td>Não se destina à filtragem regular de metadados.</td></tr>
+<tr><td>Filtragem</td><td>Utilize para metadados de cadeias curtas que precisem de aparecer em expressões de filtro, tais como <code translate="no">category == &quot;news&quot;</code> ou <code translate="no">tag in [&quot;ai&quot;, &quot;database&quot;]</code>.</td><td>Não se destina à filtragem regular de metadados.</td></tr>
 </tbody>
 </table>
 <p>Para mais detalhes sobre os campos « <code translate="no">VARCHAR</code> », consulte o <a href="/docs/pt/string.md">campo VarChar</a>.</p>
@@ -102,7 +102,7 @@ beta: Milvus 3.0.x
       </svg>
     </button></h2><p><details></p>
 <p><summary>Expanda para ver como funciona</summary></p>
-<p>Quando insere uma entidade, a cadeia de caracteres que fornece para um campo « <code translate="no">TEXT</code> » é o valor « <code translate="no">TEXT</code> ». O Milvus compara o tamanho desse valor com <a href="/docs/pt/configure_datanode.md#dataNodetextinlineThreshold">«dataNode.text.inlineThreshold»</a>, que é de « <code translate="no">65,536</code> » bytes por predefinição, e, em seguida, escolhe um de dois caminhos de armazenamento internos.</p>
+<p>Quando insere uma entidade, a cadeia de caracteres que fornece para um campo « <code translate="no">TEXT</code> » é o valor « <code translate="no">TEXT</code> ». O Milvus compara o tamanho desse valor com <a href="/docs/pt/configure_datanode.md#dataNodetextinlineThreshold">«dataNode.text.inlineThreshold»</a>, que, por predefinição, é de <code translate="no">65,536</code> bytes, e, em seguida, escolhe um de dois caminhos de armazenamento internos.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v3.0.x/assets/text-large-storage-flow.png" alt="Large text storage" class="doc-image" id="large-text-storage" /> 

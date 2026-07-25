@@ -127,7 +127,7 @@ summary: >-
 <ol>
 <li><p>建立集合模式。</p></li>
 <li><p>新增集合層級的欄位，例如主鍵和文章層級的欄位。</p></li>
-<li><p>為儲存於 StructArray 欄位內的元素建立 Struct 架構。</p></li>
+<li><p>為儲存於 StructArray 欄位內的元素建立 Struct 模式。</p></li>
 <li><p>在 Struct 模式中新增標量與向量子欄位。</p></li>
 <li><p>新增一個陣列欄位，並將其<code translate="no">element_type=DataType.STRUCT</code> 設為 Struct。</p></li>
 <li><p>將 `<code translate="no">struct_schema</code> ` 設定為 `Struct` 模式。</p></li>
@@ -244,7 +244,7 @@ client.create_collection(
 <tr><td><code translate="no">chunks[text]</code></td><td><code translate="no">text</code> 子欄位位於每個 Struct 元素之中。</td><td>輸出欄位或標量篩選。</td></tr>
 <tr><td><code translate="no">chunks[section]</code></td><td>每個區塊的區段標籤。</td><td>標量篩選。</td></tr>
 <tr><td><code translate="no">chunks[quality_score]</code></td><td>區塊層級的品質分數。</td><td>標量過濾或標量索引。</td></tr>
-<tr><td><code translate="no">chunks[emb_list_vector]</code></td><td>用作嵌入清單的向量子欄位。</td><td>使用 `<code translate="no">MAX_SIM*</code>` 進行 EmbeddingList 搜尋。</td></tr>
+<tr><td><code translate="no">chunks[emb_list_vector]</code></td><td>用作嵌入清單的向量子欄位。</td><td>使用 `<code translate="no">MAX_SIM*</code>` 進行 `EmbeddingList` 搜尋。</td></tr>
 <tr><td><code translate="no">chunks[emb]</code></td><td>每個 Struct 元素獨立使用的向量子欄位。</td><td>元素層級向量搜尋。</td></tr>
 </tbody>
 </table>
@@ -275,7 +275,7 @@ client.create_collection(
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>警告
-可為空的 StructArray 欄位僅在 Milvus v3.0.x 中提供。對於可為空的 StructArray 欄位，實體可以提供有效的 StructArray 值，或將整個欄位設為 `<code translate="no">null</code>`。插入有效的 StructArray 值時，所有子欄位應為空或具有有效值。 若插入的實體中，部分子欄位設定為 null 而其他子欄位設定為有效值，將會導致錯誤。詳情請參閱《<a href="/docs/zh-hant/structarray-limits.md">StructArray 限制</a>》。</p>
+可為空的 StructArray 欄位僅在 Milvus v3.0.x 中提供。對於可為空的 StructArray 欄位，實體可以提供有效的 StructArray 值，或將整個欄位設為 `<code translate="no">null</code>`。插入有效的 StructArray 值時，所有子欄位應為空或具有有效值。 若插入的實體中，部分子欄位設定為 null 而其他子欄位設定為有效值，將會導致錯誤。詳細資訊請參閱《<a href="/docs/zh-hant/structarray-limits.md">StructArray 限制</a>》。</p>
 </div>
 <h2 id="Add-a-StructArray-field-to-an-existing-collection" class="common-anchor-header">將 StructArray 欄位新增至現有集合<button data-href="#Add-a-StructArray-field-to-an-existing-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -337,7 +337,7 @@ client.add_collection_struct_field(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>新增 StructArray 欄位後，現有實體針對該新欄位的所有子欄位，其值皆為 `<code translate="no">null</code> `。</p>
-<p>StructArray 欄位建立後，您無法向該現有 StructArray 欄位新增子欄位。若日後需要額外的元素屬性，請呼叫 `<code translate="no">drop_collection_field()</code> ` 來刪除該 StructArray 欄位，然後使用更新的 Struct 架構新增一個新的 StructArray 欄位。</p>
+<p>StructArray 欄位建立後，您無法向該現有 StructArray 欄位新增子欄位。若日後需要額外的元素屬性，請呼叫 `<code translate="no">drop_collection_field()</code> ` 來移除該 StructArray 欄位，然後使用更新的 Struct 架構新增一個新的 StructArray 欄位。</p>
 <pre><code translate="no" class="language-python">client.drop_collection_field(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
     field_name=<span class="hljs-string">&quot;chunks&quot;</span>,
@@ -373,7 +373,7 @@ client.add_collection_struct_field(
 <tbody>
 <tr><td>Struct 用作 Array 元素類型。</td><td>請使用<code translate="no">element_type=STRUCT</code> 建立 StructArray 欄位作為 Array 欄位。請勿將 Struct 建立為頂層集合欄位。</td></tr>
 <tr><td>所有元素共用一個架構。</td><td>同一 StructArray 欄位中的每個 Struct 元素均遵循為該欄位所定義的 Struct 架構。</td></tr>
-<tr><td><code translate="no">max_capacity</code> 是必填的。</td><td>此欄位為必填欄位。它限制每個實體可在 StructArray 欄位中儲存的 Struct 元素數量。</td></tr>
+<tr><td><code translate="no">max_capacity</code> 是必填的。</td><td>此欄位為必填欄位。它限制了每個實體可在 StructArray 欄位中儲存的 Struct 元素數量。</td></tr>
 <tr><td>僅允許使用受支援的子欄位類型。</td><td>請使用 StructArray 支援的標量和向量子欄位類型。請勿定義 JSON、Geometry、Text、Timestamptz、SparseFloatVector 或嵌套的 Struct / Array 子欄位。</td></tr>
 <tr><td>向量子欄位在搜尋前需要建立索引。</td><td>在執行向量搜尋之前，請先針對路徑（例如<code translate="no">chunks[emb_list_vector]</code> 或<code translate="no">chunks[emb]</code> ）建立索引。</td></tr>
 <tr><td>一個向量子欄位僅對應一個索引。</td><td>若需同時進行 EmbeddingList 搜尋與元素層級搜尋，請建立兩個獨立的向量子欄位。</td></tr>

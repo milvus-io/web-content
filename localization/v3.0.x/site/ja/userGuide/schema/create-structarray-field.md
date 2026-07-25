@@ -20,7 +20,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>1つのエンティティに、構造化された要素の順序付きリストを含める必要がある場合は、StructArrayフィールドを作成します。StructArrayフィールドは、要素型がStructであるArrayフィールドです。各Struct要素は同じスキーマに従い、スカラーサブフィールド、ベクトルサブフィールド、またはその両方を含むことができます。</p>
-<p>このページでは、Structスキーマを定義し、それをStructArrayフィールドとして追加し、後の検索やフィルタリング用にサブフィールドを選択する方法、およびデータの挿入やインデックス作成の前に適用されるスキーマ規則について解説します。</p>
+<p>このページでは、Structスキーマを定義し、それをStructArrayフィールドとして追加し、後の検索やフィルタリングに使用するサブフィールドを選択する方法、およびデータの挿入やインデックス作成前に適用されるスキーマ規則について解説します。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">開始する前に<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -102,11 +102,11 @@ summary: >-
 <tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td>StructArray フィールドでは、JSON サブフィールドはサポートされていません。</td></tr>
 <tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td>StructArray フィールドでは、Geometry サブフィールドおよび GIS 関数はサポートされていません。</td></tr>
 <tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td>StructArray フィールドでは、Text サブフィールドはサポートされていません。</td></tr>
-<tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td>StructArray フィールドでは、Timestamptz サブフィールドおよび時間指定式はサポートされていません。</td></tr>
+<tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td>StructArray フィールドでは、Timestamptz サブフィールドおよび時刻指定式はサポートされていません。</td></tr>
 <tr><td>StructArray フィールドでは、<code translate="no">Array</code> 、<code translate="no">ArrayOfVector</code> 、<code translate="no">Struct</code> 、または<code translate="no">ArrayOfStruct</code></td><td>サポートされていません</td><td>StructArray フィールドには、ネストされた配列、ネストされたベクトル配列、ネストされた Struct フィールド、またはネストされた Array-of-Struct フィールドを含めることはできません。</td></tr>
 </tbody>
 </table>
-<p>バージョン固有のサポート、NULL 許容の挙動、およびその他の制限については、「<a href="/docs/ja/structarray-limits.md">StructArray の制限</a>」を参照してください。</p>
+<p>バージョン固有のサポート、null 許容の挙動、およびその他の制限については、「<a href="/docs/ja/structarray-limits.md">StructArray の制限</a>」を参照してください。</p>
 <h2 id="Create-a-collection-with-a-StructArray-field" class="common-anchor-header">StructArray フィールドを含むコレクションを作成する<button data-href="#Create-a-collection-with-a-StructArray-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -404,7 +404,7 @@ client.add_collection_struct_field(
 <li><p>EmbeddingList検索と要素レベル検索の両方に、1つのベクトルサブフィールドを使用している。</p></li>
 <li><p>ベクトルサブフィールドのみを追加し、<code translate="no">section</code> 、<code translate="no">quality_score</code> 、<code translate="no">has_code</code> など、フィルタリングに必要なスカラーサブフィールドを省略すること。</p></li>
 <li><p>ベクトルサブフィールドを、<code translate="no">$[...]</code> のようなスカラー述語の入力として扱う。ベクトル検索にはベクトルサブフィールドを、スカラー述語にはスカラーサブフィールドを使用する。</p></li>
-<li><p>フィールドの作成後、既存の StructArray フィールドに新しいサブフィールドを追加できるものと仮定する。</p></li>
+<li><p>フィールド作成後、既存の StructArray フィールドに新しいサブフィールドを追加できるものと仮定する。</p></li>
 <li><p>必須のパス構文 `<code translate="no">chunks[emb]</code> ` または `<code translate="no">chunks[emb_list_vector]</code>` の代わりに、`<code translate="no">chunks.emb</code> ` または `<code translate="no">chunks.emb_list_vector</code> ` を使用している。</p></li>
 <li><p>Null 許容型 StructArray の挙動を、すべてのターゲットバージョンで利用可能であるかのように扱う。</p></li>
 </ul>

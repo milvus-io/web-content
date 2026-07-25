@@ -51,7 +51,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>En esta página se explica cómo utilizar los filtros de StructArray en los flujos de trabajo de búsqueda. Para conocer las reglas sintácticas completas, los tipos de predicados admitidos y la matriz de predicados no admitidos, consulta <a href="/docs/es/struct-array-operators.md">Operadores de StructArray</a>.</p>
+<p>En esta página se explica cómo utilizar los filtros de StructArray en los flujos de trabajo de búsqueda. Para conocer las reglas sintácticas completas, los tipos de predicados admitidos y la matriz de predicados no admitidos, consulte <a href="/docs/es/struct-array-operators.md">Operadores de StructArray</a>.</p>
 </div>
 <h2 id="Filter-by-top-level-fields" class="common-anchor-header">Filtrar por campos de nivel superior<button data-href="#Filter-by-top-level-fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,7 +68,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilice expresiones de filtro habituales cuando la condición se refiera a la entidad principal, y no a un elemento Struct concreto. Esto funciona tanto con la búsqueda EmbeddingList como con la búsqueda a nivel de elemento.</p>
+    </button></h2><p>Utilice expresiones de filtro habituales cuando la condición se refiera a la entidad principal, y no a un elemento Struct concreto. Esto funciona tanto con la búsqueda de EmbeddingList como con la búsqueda a nivel de elemento.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">from</span> pymilvus.client.embedding_list <span class="hljs-keyword">import</span> EmbeddingList
 
@@ -219,7 +219,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>En la búsqueda híbrida, aplica filtros StructArray donde la condición deba surtir efecto. Un filtro de nivel superior puede ser compartido por toda la búsqueda híbrida. Se debe adjuntar un « <code translate="no">element_filter</code> » a la solicitud a nivel de elemento de StructArray que requiera restricciones a nivel de elemento.</p>
+    </button></h2><p>En la búsqueda híbrida, aplica filtros StructArray donde la condición deba surtir efecto. Un filtro de nivel superior puede ser compartido por toda la búsqueda híbrida. Se debe adjuntar un « <code translate="no">element_filter</code> » a la solicitud a nivel de elemento de StructArray que necesite restricciones a nivel de elemento.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest, RRFRanker
 
 query_vector = [<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>]
@@ -279,10 +279,10 @@ results = client.hybrid_search(
 <tr><td>Tipos enteros</td><td><code translate="no">$[page] &gt;= 2</code>, <code translate="no">$[page] in [1, 2, 3]</code></td></tr>
 <tr><td><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code></td><td><code translate="no">$[quality_score] &gt; 0.9</code>, <code translate="no">0.7 &lt; $[quality_score] &lt; 0.95</code></td></tr>
 <tr><td><code translate="no">VARCHAR</code></td><td><code translate="no">$[section] == &quot;index&quot;</code>, <code translate="no">$[text] like &quot;range%&quot;</code></td></tr>
-<tr><td>Subcampos vectoriales</td><td>No son compatibles como entradas de predicados escalares de <code translate="no">$[...]</code>. En su lugar, utiliza subcampos vectoriales mediante la búsqueda vectorial.</td></tr>
+<tr><td>Subcampos vectoriales</td><td>No son compatibles como entradas de predicados escalares de <code translate="no">$[...]</code>. En su lugar, utilice subcampos vectoriales mediante la búsqueda vectorial.</td></tr>
 </tbody>
 </table>
-<p>Para los casos no admitidos, como las rutas JSON, las funciones de contenedores de matrices, las funciones de coincidencia de texto, los predicados nulos en « <code translate="no">$[...]</code> », las funciones de geometría, las expresiones de Timestamptz y las llamadas a funciones genéricas, consulte <a href="/docs/es/struct-array-operators.md">Operadores de StructArray</a>.</p>
+<p>Para los casos no admitidos, como las rutas JSON, las funciones de contenedores de matrices, las funciones de coincidencia de texto, los predicados nulos en <code translate="no">$[...]</code>, las funciones de geometría, las expresiones Timestamptz y las llamadas a funciones genéricas, consulte <a href="/docs/es/struct-array-operators.md">Operadores de StructArray</a>.</p>
 <h2 id="Common-mistakes" class="common-anchor-header">Errores comunes<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

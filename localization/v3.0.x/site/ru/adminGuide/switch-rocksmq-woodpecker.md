@@ -226,7 +226,7 @@ summary: >-
       </svg>
     </button></h3><ul>
 <li><strong>Метаданные (etcd):</strong> префикс ключа Woodpecker обычно имеет вид <code translate="no">woodpecker/...</code>. Просмотрите его с помощью команды <code translate="no">etcdctl get woodpecker --prefix</code>, а затем удалите.</li>
-<li><strong>Данные хранилища:</strong> в <strong>режиме MinIO</strong> удалите данные журнала в папке <code translate="no">&lt;rootPath&gt;/wp/...</code> (обычно <code translate="no">files/wp/...</code>) в бакете; в <strong>локальном режиме</strong> данные находятся на локальном диске по адресу <code translate="no">volumes/milvus/data/wp/...</code>.</li>
+<li><strong>Данные хранилища:</strong> в <strong>режиме MinIO</strong> удалите данные журнала, расположенные в папке <code translate="no">&lt;rootPath&gt;/wp/...</code> (обычно <code translate="no">files/wp/...</code>) в бакете; в <strong>локальном режиме</strong> данные находятся на локальном диске по пути <code translate="no">volumes/milvus/data/wp/...</code>.</li>
 </ul>
 <p>Если вы планируете позже вернуться к Woodpecker, сначала удалите эти файлы, чтобы избежать конфликтов.</p>
 <h2 id="Supported-scenarios" class="common-anchor-header">Поддерживаемые сценарии<button data-href="#Supported-scenarios" class="anchor-icon" translate="no">

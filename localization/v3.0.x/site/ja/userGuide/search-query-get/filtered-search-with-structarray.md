@@ -145,7 +145,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>この例では、最上位の述語 `<code translate="no">category == &quot;search&quot;</code> ` が候補エンティティを選択し、`<code translate="no">element_filter</code> ` が、`<code translate="no">section</code>`、`<code translate="no">quality_score</code>`、および `<code translate="no">has_code</code> ` のすべてが同じ Struct 要素内で一致するチャンクに、要素レベルのベクトル検索を制限しています。</p>
+<p>この例では、最上位の述語 `<code translate="no">category == &quot;search&quot;</code> ` が候補エンティティを選択し、`<code translate="no">element_filter</code> ` が、同じ Struct 要素内で `<code translate="no">section</code>`、`<code translate="no">quality_score</code>`、および `<code translate="no">has_code</code> ` のすべてが一致するチャンクに、要素レベルのベクトル検索を制限します。</p>
 <div class="alert note">
 <p>警告</p>
 <p>トップレベルの述語を<code translate="no">element_filter</code> と組み合わせる場合は、<code translate="no">element_filter</code> を式の最後に配置してください。フィルタ式には<code translate="no">element_filter</code> を1つしか含めることができず、<code translate="no">element_filter</code> や<code translate="no">MATCH_*</code> を別のStructArray演算子の内部にネストすることはできません。</p>
@@ -199,7 +199,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>EmbeddingList の検索結果はエンティティレベルであるため、ここでは `<code translate="no">MATCH_ANY</code> ` を使用します。このフィルターでは、エンティティ内のチャンクのうち少なくとも 1 つが、高品質な `<code translate="no">&quot;index&quot;</code> ` チャンクである必要がありますが、検索結果自体は依然として親エンティティを表しています。</p>
+<p>EmbeddingList の検索結果はエンティティレベルであるため、ここでは `<code translate="no">MATCH_ANY</code> ` を使用します。このフィルターでは、エンティティ内の少なくとも 1 つのチャンクが、高品質な `<code translate="no">&quot;index&quot;</code> ` チャンクである必要がありますが、検索結果自体は依然として親エンティティを表しています。</p>
 <h2 id="Use-filters-in-hybrid-search" class="common-anchor-header">ハイブリッド検索でのフィルタの使用<button data-href="#Use-filters-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -249,7 +249,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">filter</code> 引数はトップレベルのエンティティ条件を適用しますが、<code translate="no">chunk_req</code> の<code translate="no">expr</code> は、StructArrayの要素レベルのベクトルリクエストのみを制限します。サポートされているハイブリッド検索の組み合わせおよびバージョン固有の制限については、<a href="/docs/ja/hybrid-search-with-structarray.md">「StructArrayを使用したハイブリッド検索」</a>および<a href="/docs/ja/structarray-limits.md">「StructArrayの制限</a>」を参照してください。</p>
+<p><code translate="no">filter</code> 引数はトップレベルのエンティティ条件を適用しますが、<code translate="no">chunk_req</code> 上の<code translate="no">expr</code> は、StructArrayの要素レベルのベクトルリクエストのみを制限します。サポートされているハイブリッド検索の組み合わせおよびバージョン固有の制限については、<a href="/docs/ja/hybrid-search-with-structarray.md">「StructArrayを使用したハイブリッド検索</a>」および<a href="/docs/ja/structarray-limits.md">「StructArrayの制限</a>」を参照してください。</p>
 <h2 id="Predicate-support-summary" class="common-anchor-header">述語のサポート概要<button data-href="#Predicate-support-summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -318,8 +318,8 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>StructArray フィルタの構文全体を確認するには、「<a href="/docs/ja/struct-array-operators.md">StructArray 演算子</a>」を参照してください。</p></li>
-<li><p>まず、フィルタリングなしのベクトル検索を実行するには、「<a href="/docs/ja/basic-vector-search-with-structarray.md">StructArray を使用した基本的なベクトル検索</a>」を参照してください。</p></li>
+<li><p>StructArray フィルタ構文の全容を確認するには、「<a href="/docs/ja/struct-array-operators.md">StructArray 演算子</a>」を参照してください。</p></li>
+<li><p>まず、フィルタリングを行わないベクトル検索を実行するには、「<a href="/docs/ja/basic-vector-search-with-structarray.md">StructArray を使用した基本的なベクトル検索</a>」を参照してください。</p></li>
 <li><p>頻繁に使用する StructArray フィルタ用のスカラーインデックスを作成するには、「<a href="/docs/ja/index-structarray-fields.md">StructArray フィールドのインデックス作成</a>」を参照してください。</p></li>
 <li><p>バージョンごとのフィルタおよび検索の制限を確認するには、「<a href="/docs/ja/structarray-limits.md">StructArrayの制限</a>」を参照してください。</p></li>
 </ol>

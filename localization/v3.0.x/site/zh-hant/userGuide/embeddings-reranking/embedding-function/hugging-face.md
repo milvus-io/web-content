@@ -37,7 +37,7 @@ beta: Milvus v2.6.20+
         ></path>
       </svg>
     </button></h2><ul>
-<li>「函式輸出」欄位必須使用<code translate="no">FLOAT_VECTOR</code> 資料型別。Milvus 中的 Hugging Face 嵌入功能不支援<code translate="no">INT8_VECTOR</code> 、<code translate="no">BINARY_VECTOR</code> 、<code translate="no">FLOAT16_VECTOR</code> 或<code translate="no">BFLOAT16_VECTOR</code> 這些輸出欄位。</li>
+<li>「函式輸出」欄位必須使用 `<code translate="no">FLOAT_VECTOR</code> ` 資料類型。Milvus 中的 Hugging Face 嵌入功能不支援 `<code translate="no">INT8_VECTOR</code>`、`<code translate="no">BINARY_VECTOR</code>`、`<code translate="no">FLOAT16_VECTOR</code>` 或 `<code translate="no">BFLOAT16_VECTOR</code> ` 輸出欄位。</li>
 <li>「函式」的輸出欄位維度必須與所選模型的輸出維度相符。</li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">運作原理<button data-href="#How-it-works" class="anchor-icon" translate="no">
@@ -65,7 +65,7 @@ beta: Milvus v2.6.20+
 <ol>
 <li><strong>傳送原始文字。</strong>您的應用程式會在插入或搜尋請求中提供原始文字。</li>
 <li><strong>產生嵌入向量。</strong>文字嵌入函式會將文字透過<code translate="no">hf-inference</code> 傳送至 Hugging Face 的<code translate="no">feature-extraction</code> 處理流程。該函式使用<code translate="no">model_name</code> 來選取模型，並可傳遞受支援的推論選項，例如正規化與截斷。</li>
-<li><strong>使用嵌入向量。</strong>Hugging Face 會針對每段輸入文字返回一個浮點數嵌入向量。在插入操作期間，Milvus 會將該向量儲存於函式的輸出欄位中；在搜尋操作期間，Milvus 則會將該向量用作查詢向量。</li>
+<li><strong>使用嵌入向量。</strong>Hugging Face 會針對每段輸入文字返回一個浮點數嵌入向量。在插入操作期間，Milvus 會將該向量儲存於函數的輸出欄位中；在搜尋操作期間，Milvus 則會將該向量用作查詢向量。</li>
 </ol>
 <p>相同的 Function 配置可同時處理插入與搜尋操作，確保模型與推論參數在兩項操作中保持一致。</p>
 <h2 id="Before-you-start" class="common-anchor-header">開始之前<button data-href="#Before-you-start" class="anchor-icon" translate="no">
@@ -262,13 +262,13 @@ client.create_collection(
 <tbody>
 <tr><td><code translate="no">provider</code></td><td>是</td><td>嵌入模型提供者。請將此值設定為<code translate="no">huggingface</code> 。</td></tr>
 <tr><td><code translate="no">model_name</code></td><td>是</td><td>透過<code translate="no">hf-inference</code> 提供服務的 Hugging Face 模型 ID，適用於<code translate="no">feature-extraction</code> 任務。</td></tr>
-<tr><td><code translate="no">hf_provider</code></td><td>否</td><td>Hugging Face 推論提供者的路徑。在 Milvus 2.6.20 中，預設值且唯一受支援的值為<code translate="no">hf-inference</code> 。</td></tr>
+<tr><td><code translate="no">hf_provider</code></td><td>否</td><td>Hugging Face 推論提供者的路徑。在 Milvus 2.6.20 中，預設且唯一受支援的值為<code translate="no">hf-inference</code> 。</td></tr>
 <tr><td><code translate="no">credential</code></td><td>否</td><td>在<code translate="no">milvus.yaml</code> 的頂層<code translate="no">credential</code> 區段中定義之憑證標籤。此值並非代幣本身。</td></tr>
 <tr><td><code translate="no">normalize</code></td><td>否</td><td>是否應由 Hugging Face 返回正規化嵌入向量。支援的值為<code translate="no">true</code> 和<code translate="no">false</code> 。若省略此參數，Milvus 將不會在請求中設定此選項。</td></tr>
 <tr><td><code translate="no">prompt_name</code></td><td>否</td><td>在所選模型的 Sentence Transformers 配置中定義的提示詞名稱。</td></tr>
 <tr><td><code translate="no">truncate</code></td><td>否</td><td>Hugging Face 是否應截斷超過模型支援長度的輸入。支援的值為<code translate="no">true</code> 和<code translate="no">false</code> 。</td></tr>
 <tr><td><code translate="no">truncation_direction</code></td><td>否</td><td>Hugging Face 截斷輸入的起始方向。支援的值為<code translate="no">left</code> 和<code translate="no">right</code> 。</td></tr>
-<tr><td><code translate="no">max_client_batch_size</code></td><td>無</td><td>單次 Hugging Face 請求中傳送的輸入文字最大數量。預設值為<code translate="no">128</code> ，且該值必須大於<code translate="no">0</code> 。</td></tr>
+<tr><td><code translate="no">max_client_batch_size</code></td><td>無</td><td>單次 Hugging Face 請求中可傳送的輸入文字最大數量。預設值為<code translate="no">128</code> ，且該值必須大於<code translate="no">0</code> 。</td></tr>
 </tbody>
 </table>
 <h3 id="Step-2-Insert-raw-text" class="common-anchor-header">步驟 2：插入原始文字<button data-href="#Step-2-Insert-raw-text" class="anchor-icon" translate="no">
@@ -412,6 +412,6 @@ client.create_collection(
         ></path>
       </svg>
     </button></h2><ul>
-<li>有關 Function 的一般概念及插入/搜尋行為，請參閱《<a href="/docs/zh-hant/embedding-function-overview.md">嵌入式函數概述</a>》。</li>
+<li>有關 Function 的一般概念以及插入/搜尋行為，請參閱《<a href="/docs/zh-hant/embedding-function-overview.md">嵌入式函數概覽</a>》。</li>
 <li>若要使用託管版 Hugging Face 的句子相似度分數對向量搜尋候選結果進行重新排序，請參閱《<a href="/docs/zh-hant/hugging-face-ranker.md">Hugging Face Ranker</a>》。</li>
 </ul>

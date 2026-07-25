@@ -3,7 +3,7 @@ id: grouping-search-with-structarray.md
 title: 使用 StructArray 進行分組搜尋
 summary: >-
   請使用此頁面，根據父實體將 StructArray 的元素層級搜尋結果進行分組。當多個 Struct
-  元素符合查詢條件時，元素層級搜尋可能會從同一實體中返回多個搜尋結果。透過分組功能，這些元素搜尋結果將被彙總，使每個父實體最多只出現一次。
+  元素符合查詢條件時，元素層級搜尋可能會從同一實體中返回多個搜尋結果。透過分組功能，這些元素搜尋結果將被合併，使每個父實體最多只出現一次。
 ---
 <h1 id="Grouping-Search-with-StructArray" class="common-anchor-header">使用 StructArray 進行分組搜尋<button data-href="#Grouping-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>請使用此頁面，根據父實體對 StructArray 的元素層級搜尋結果進行分組。當多個 Struct 元素符合查詢條件時，元素層級搜尋可能會從同一實體中返回多個搜尋結果。分組功能會將這些元素搜尋結果合併，確保每個父實體最多只出現一次。</p>
-<p>本頁面使用《<a href="/docs/zh-hant/create-structarray-field.md">建立 StructArray 欄位</a>》中的<code translate="no">tech_articles</code> 集合。該集合包含一個名為<code translate="no">chunks</code> 的 StructArray 欄位。其中<code translate="no">chunks[emb]</code> 向量子欄位已針對元素層級搜尋設定索引，並採用標準向量度量標準。</p>
+    </button></h1><p>請使用此頁面，根據父實體對 StructArray 的元素層級搜尋結果進行分組。當多個 Struct 元素符合查詢條件時，元素層級搜尋可能會從同一實體中返回多個搜尋結果。分組功能會將這些元素搜尋結果合併，使每個父實體最多只出現一次。</p>
+<p>本頁面使用《<a href="/docs/zh-hant/create-structarray-field.md">建立 StructArray 欄位</a>》中的<code translate="no">tech_articles</code> 集合。該集合包含一個名為<code translate="no">chunks</code> 的 StructArray 欄位。其中<code translate="no">chunks[emb]</code> 向量子欄位已針對元素層級搜尋進行索引，並採用標準向量度量標準。</p>
 <h2 id="How-grouping-applies-to-StructArray" class="common-anchor-header">分組機制如何套用至 StructArray<button data-href="#How-grouping-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -169,7 +169,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>頂層謂詞用於篩選候選實體。<code translate="no">element_filter</code> 謂詞則將元素層級向量搜尋限制在符合條件的 Struct 元素上。隨後，分組功能會根據主鍵將符合條件的元素搜尋結果進行彙總。</p>
+<p>頂層謂詞用於篩選候選實體。<code translate="no">element_filter</code> 謂詞則將元素層級向量搜尋限制在符合條件的 Struct 元素上。隨後，分組功能會根據主鍵彙總符合條件的元素搜尋結果。</p>
 <h2 id="Use-grouping-in-hybrid-search" class="common-anchor-header">在混合搜尋中使用分組<button data-href="#Use-grouping-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -185,7 +185,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>與 StructArray 結合的混合分組是一項元素層級功能。僅當所有子搜尋皆針對同一 StructArray 欄位下的元素層級向量欄位時，此功能才會受到支援。請勿在分組的 StructArray 混合搜尋中使用 EmbeddingList 層級的請求。</p>
+    </button></h2><p>與 StructArray 結合的混合分組是一項元素層級功能。僅當所有子搜尋皆針對同一 StructArray 欄位下的元素層級向量欄位時，此功能才受支援。請勿在分組的 StructArray 混合搜尋中使用 EmbeddingList 層級的請求。</p>
 <p>以下範例假設<code translate="no">chunks</code> 的 StructArray 欄位具有兩個元素級向量子欄位：<code translate="no">chunks[emb]</code> 和<code translate="no">chunks[code_emb]</code> ，且兩者均使用標準向量度量進行索引。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest, RRFRanker
 
@@ -217,7 +217,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>在此範例中，兩個子請求皆針對同一 StructArray 欄位（<code translate="no">chunks</code> ）下的元素層級向量子欄位。若混合了一般向量欄位、不同的 StructArray 欄位或 EmbeddingList 層級的請求，混合搜尋將不支援元素層級的分組操作。</p>
+<p>在此範例中，兩個子請求皆針對同一 StructArray 欄位（<code translate="no">chunks</code> ）下的元素層級向量子欄位。若混合使用一般向量欄位、不同的 StructArray 欄位或 EmbeddingList 層級的請求，混合搜尋將不支援元素層級的分組操作。</p>
 <h2 id="Interpret-grouped-results" class="common-anchor-header">解析分組結果<button data-href="#Interpret-grouped-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

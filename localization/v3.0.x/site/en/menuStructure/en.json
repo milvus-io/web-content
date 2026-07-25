@@ -1047,27 +1047,33 @@
             "children": []
           },
           {
+            "label": "Search Aggregation",
+            "id": "search-aggregation.md",
+            "order": 4,
+            "children": []
+          },
+          {
             "label": "Primary-Key Search",
             "id": "primary-key-search.md",
-            "order": 4,
+            "order": 5,
             "children": []
           },
           {
             "label": "Hybrid Search",
             "id": "multi-vector-search.md",
-            "order": 5,
+            "order": 6,
             "children": []
           },
           {
             "label": "Query",
             "id": "get-and-scalar-query.md",
-            "order": 6,
+            "order": 7,
             "children": []
           },
           {
             "label": "Filtering",
             "id": "filtering",
-            "order": 7,
+            "order": 8,
             "children": [
               {
                 "label": "Filtering Explained",
@@ -1128,31 +1134,31 @@
           {
             "label": "Full Text Search",
             "id": "full-text-search.md",
-            "order": 8,
+            "order": 9,
             "children": []
           },
           {
             "label": "Text Match",
             "id": "keyword-match.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "Text Highlighter",
             "id": "text-highlighter.md",
-            "order": 10,
+            "order": 11,
             "children": []
           },
           {
             "label": "Phrase Match",
             "id": "phrase-match.md",
-            "order": 11,
+            "order": 12,
             "children": []
           },
           {
             "label": "Search with StructArray",
             "id": "search-with-structarray",
-            "order": 12,
+            "order": 13,
             "children": [
               {
                 "label": "Basic Vector Search with StructArray",
@@ -1201,19 +1207,19 @@
           {
             "label": "Elasticsearch Queries to Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
-            "order": 13,
+            "order": 14,
             "children": []
           },
           {
             "label": "Search Iterators",
             "id": "with-iterators.md",
-            "order": 14,
+            "order": 15,
             "children": []
           },
           {
             "label": "Use Partition Key",
             "id": "use-partition-key.md",
-            "order": 15,
+            "order": 16,
             "children": []
           }
         ]

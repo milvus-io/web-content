@@ -3,7 +3,7 @@ id: dashscope-ranker.md
 title: DashScope RankerCompatible with Milvus 2.6.x
 summary: >-
   يصف هذا الموضوع كيفية تكوين نماذج إعادة الترتيب في DashScope، مثل نماذج إعادة
-  الترتيب Qwen، واستخدامها في Milvus.
+  الترتيب في Qwen، واستخدامها في Milvus.
 beta: Milvus 2.6.x
 ---
 <h1 id="DashScope-Ranker" class="common-anchor-header">DashScope Ranker<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#DashScope-Ranker" class="anchor-icon" translate="no">

@@ -2,7 +2,7 @@
 id: grouping-search-with-structarray.md
 title: StructArray を使用した検索結果のグループ化
 summary: >-
-  このページを使用すると、StructArrayの要素レベルの検索結果を親エンティティごとにグループ化できます。要素レベルの検索では、複数のStruct要素がクエリに一致する場合、同じエンティティから複数の検索結果が返されることがあります。グループ化を行うと、これらの要素の検索結果がまとめられるため、各親エンティティは最大1回だけ表示されます。
+  このページを使用すると、StructArrayの要素レベルの検索結果を親エンティティごとにグループ化できます。要素レベルの検索では、複数のStruct要素がクエリに一致する場合、同じエンティティから複数の検索結果が返されることがあります。グループ化を行うと、これらの要素の検索結果がまとめられ、各親エンティティが最大1回だけ表示されるようになります。
 ---
 <h1 id="Grouping-Search-with-StructArray" class="common-anchor-header">StructArray を使用した検索結果のグループ化<button data-href="#Grouping-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -47,7 +47,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>グループ化されていない要素レベルの検索で重複する親エンティティが多数返される場合は、グループ化を使用してください。一致するすべての Struct 要素を個別のヒットとして取得したい場合は、<code translate="no">group_by_field</code> を使用せずに<a href="/docs/ja/basic-vector-search-with-structarray.md">StructArray を使用した基本ベクトル検索</a>を使用してください。</p>
+<p>グループ化されていない要素レベルの検索で重複する親エンティティが多数返される場合は、グループ化を使用してください。一致するすべての Struct 要素を個別のヒットとして取得したい場合は、<code translate="no">group_by_field</code> を使用せずに、<a href="/docs/ja/basic-vector-search-with-structarray.md">StructArray を使用した基本ベクトル検索</a>を使用してください。</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">開始する前に<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -92,7 +92,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>次の例では、まず個々のチャンクを検索し、その後、親エンティティのプライマリキーに基づいてヒットした要素をグループ化します。</p>
+    </button></h2><p>次の例では、まず個々のチャンクを検索し、その後、親エンティティの主キーに基づいてヒットした要素をグループ化します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(

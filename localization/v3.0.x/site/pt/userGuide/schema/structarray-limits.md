@@ -80,8 +80,8 @@ summary: >-
 <tr><td>Todos os elementos partilham um único esquema.</td><td>Cada elemento Struct num campo StructArray segue a mesma lista de subcampos e os mesmos tipos de dados dos subcampos.</td></tr>
 <tr><td><code translate="no">max_capacity</code> é obrigatório.</td><td>O número de elementos Struct numa entidade não deve exceder o <code translate="no">max_capacity</code> configurado para o campo StructArray.</td></tr>
 <tr><td>Os subcampos existentes são fixos.</td><td>Não é possível adicionar novos subcampos a um campo StructArray existente. Para alterar o esquema dos subcampos, elimine o campo StructArray e adicione-o novamente com o esquema atualizado.</td></tr>
-<tr><td>O StructArray aninhado não é suportado.</td><td>Um campo StructArray não pode conter subcampos aninhados do tipo <code translate="no">Array</code>, <code translate="no">ArrayOfVector</code>, <code translate="no">Struct</code> ou <code translate="no">ArrayOfStruct</code>.</td></tr>
-<tr><td>As funções não são suportadas no interior de StructArray.</td><td>Não defina funções de campo para campos StructArray nem para os seus subcampos.</td></tr>
+<tr><td>Não são suportados StructArray aninhados.</td><td>Um campo StructArray não pode conter subcampos aninhados do tipo <code translate="no">Array</code>, <code translate="no">ArrayOfVector</code>, <code translate="no">Struct</code> ou <code translate="no">ArrayOfStruct</code>.</td></tr>
+<tr><td>As funções não são suportadas dentro de StructArray.</td><td>Não defina funções de campo para campos StructArray nem para os seus subcampos.</td></tr>
 </tbody>
 </table>
 <p>Para exemplos de criação de esquemas, consulte <a href="/docs/pt/create-structarray-field.md">Criar um campo StructArray</a>.</p>
@@ -199,7 +199,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Um subcampo vetorial StructArray pode ser indexado para a pesquisa EmbeddingList ou para a pesquisa ao nível do elemento. O mesmo subcampo vetorial não pode utilizar ambas as famílias de métricas, uma vez que cada campo vetorial ou subcampo vetorial aceita apenas um índice.</p>
+    </button></h2><p>Um subcampo vetorial StructArray pode ser indexado para pesquisa EmbeddingList ou para pesquisa ao nível do elemento. O mesmo subcampo vetorial não pode utilizar ambas as famílias de métricas, uma vez que cada campo vetorial ou subcampo vetorial aceita apenas um índice.</p>
 <table>
 <thead>
 <tr><th>Modo de pesquisa</th><th>Família de métricas</th><th>Nível de resultado</th></tr>
@@ -211,7 +211,7 @@ summary: >-
 </table>
 <p>Utilize subcampos vetoriais separados quando ambos os modos forem necessários. Por exemplo, utilize <code translate="no">chunks[emb_list_vector]</code> para a pesquisa EmbeddingList e <code translate="no">chunks[emb]</code> para a pesquisa ao nível do elemento.</p>
 <p>Os subcampos vetoriais do StructArray contam como subcampos vetoriais quando planear o esquema da sua coleção. Mantenha o número total de campos vetoriais e subcampos vetoriais dentro dos limites da sua versão de destino e nível de serviço.</p>
-<p>Para conhecer a matriz de tipos de índice e de métrica suportados, consulte <a href="/docs/pt/index-structarray-fields.md">Campos StructArray do índice</a>.</p>
+<p>Para conhecer a matriz de tipos de índice e de métricas suportados, consulte <a href="/docs/pt/index-structarray-fields.md">Campos StructArray do índice</a>.</p>
 <h2 id="Search-limits" class="common-anchor-header">Limites de pesquisa<button data-href="#Search-limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -236,7 +236,7 @@ summary: >-
 <tr><td>Pesquisa básica ao nível do elemento</td><td>Suportada em subcampos vetoriais de StructArray indexados com métricas vetoriais regulares. Pode devolver os deslocamentos dos elementos correspondentes.</td></tr>
 <tr><td>Pesquisa por intervalo</td><td>Suportada de acordo com o modo de pesquisa e o suporte a índices/métricas da versão de destino. Para o comportamento do intervalo de pesquisa híbrido em pedidos StructArray ao nível do elemento, verifique a sua versão de destino.</td></tr>
 <tr><td>Pesquisa por agrupamento</td><td>A pesquisa agrupada ao nível do elemento pode devolver deslocamentos. O comportamento de agrupamento da pesquisa híbrida para pedidos StructArray ao nível do elemento depende da versão.</td></tr>
-<tr><td>Pesquisa híbrida</td><td>Uma solicitação de pesquisa híbrida só pode incluir solicitações de subcampos vetoriais StructArray se a versão de destino suportar essa combinação de pesquisa. Cada solicitação continua a seguir a família de métricas do subcampo vetorial indexado.</td></tr>
+<tr><td>Pesquisa híbrida</td><td>Uma solicitação de pesquisa híbrida só pode incluir solicitações de subcampos do vetor StructArray se a versão de destino suportar essa combinação de pesquisa. Cada solicitação continua a seguir a família de métricas do subcampo do vetor indexado.</td></tr>
 <tr><td>Saída de deslocamento</td><td>O deslocamento está disponível para resultados de pesquisa ao nível do elemento. A pesquisa EmbeddingList devolve resultados ao nível da entidade e não utiliza deslocamentos de elementos como unidade principal de resultados.</td></tr>
 </tbody>
 </table>
@@ -255,13 +255,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A filtragem escalar do StructArray é gerida por operadores do StructArray, tais como « <code translate="no">element_filter</code> » e a família « <code translate="no">MATCH_*</code> ». A matriz detalhada de suporte a predicados encontra-se em <a href="/docs/pt/struct-array-operators.md">«Operadores do StructArray</a>».</p>
+    </button></h2><p>A filtragem escalar do StructArray é tratada por operadores do StructArray, tais como « <code translate="no">element_filter</code> » e a família « <code translate="no">MATCH_*</code> ». A matriz detalhada de suporte a predicados encontra-se em <a href="/docs/pt/struct-array-operators.md">«Operadores do StructArray</a>».</p>
 <p>A um nível geral:</p>
 <ul>
 <li><p>Utilize « <code translate="no">$[subfield]</code> » apenas no interior de operadores StructArray.</p></li>
 <li><p>Utilize subcampos escalares para predicados escalares.</p></li>
 <li><p>Não utilize subcampos vetoriais como entradas de predicados escalares do tipo « <code translate="no">$[...]</code> ».</p></li>
-<li><p>A sintaxe JSON path, as funções JSON, as funções de contentores de matrizes, as funções de correspondência de texto, as funções de geometria/SIG e as expressões Timestamptz não são suportadas para predicados ao nível do elemento StructArray.</p></li>
+<li><p>A sintaxe JSON path, as funções JSON, as funções de contentores de matrizes, as funções de correspondência de texto, as funções de geometria/SIG e as expressões Timestamptz não são suportadas para predicados ao nível dos elementos do StructArray.</p></li>
 <li><p>Dê preferência a comparações booleanas explícitas, como « <code translate="no">$[has_code] == true</code> », em vez de expressões booleanas simples.</p></li>
 </ul>
 <h2 id="Related-pages" class="common-anchor-header">Páginas relacionadas<button data-href="#Related-pages" class="anchor-icon" translate="no">

@@ -56,13 +56,13 @@ beta: Milvus 3.0.0+
 <p>此自定义管道不等同于内置的<code translate="no">thai</code> 分析器，因为它不包含内置的<code translate="no">_thai_</code> 停用词词典。如需完整的预定义管道，请使用<code translate="no">{&quot;type&quot;: &quot;thai&quot;}</code> 。</p>
 <p>该分词器具有以下行为：</p>
 <ul>
-<li><strong>泰语分词</strong>：将泰语文本分割为单词词素，而不依赖空格。</li>
+<li><strong>泰语分词</strong>：将泰语文本分割为单词分词，而不依赖空格。</li>
 <li><strong>空格和标点符号过滤</strong>：过滤掉仅包含空格和标点符号的分段。这与 <a href="/docs/zh/icu-tokenizer.md"><code translate="no">icu</code></a> 分词器，后者可将标点符号和空格保留为词素。</li>
 <li><strong>混合字符集文本</strong>：在泰语/英语混合文本中输出拉丁字母单词分词。</li>
 <li><strong>仅分词器</strong>：不将词素转换为小写、不规范化 Unicode 数字，也不移除停用词。请为这些步骤添加过滤器或使用内置的 <a href="/docs/zh/thai-analyzer.md"><code translate="no">thai</code></a> 分析器来执行这些步骤。</li>
-<li><strong>位置语义</strong>：使用基于字符的词素位置（包括被跳过的空格和标点符号），这使得短语和邻近匹配的行为与其他非拉丁语词素分析器保持一致。</li>
+<li><strong>位置语义</strong>：使用基于字符的词元位置（包括被跳过的空格和标点符号），这使得短语和邻近匹配行为与其他非拉丁语词元化器保持一致。</li>
 </ul>
-<p>定义<code translate="no">analyzer_params</code> 后，您可以在定义Collection Schema时将该分析器应用于<code translate="no">VARCHAR</code> 字段。有关详细信息，请参阅<a href="/docs/zh/analyzer-overview.md#Example-use">“使用示例”</a>。</p>
+<p>定义<code translate="no">analyzer_params</code> 后，您可以在定义Collection Schema时将该分析器应用于<code translate="no">VARCHAR</code> 字段。有关详细信息，请参阅<a href="/docs/zh/analyzer-overview.md#Example-use">使用示例</a>。</p>
 <h2 id="Examples" class="common-anchor-header">示例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

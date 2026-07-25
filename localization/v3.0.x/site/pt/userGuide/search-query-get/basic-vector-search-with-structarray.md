@@ -5,8 +5,8 @@ summary: >-
   Utilize esta página para efetuar uma pesquisa vetorial nos subcampos vetoriais
   dentro de um campo StructArray. O StructArray suporta dois modos básicos de
   pesquisa vetorial: a pesquisa EmbeddingList, que avalia uma lista de
-  embeddings armazenada em cada entidade, e a pesquisa ao nível do elemento, que
-  pesquisa cada elemento Struct de forma independente.
+  incorporações armazenada em cada entidade, e a pesquisa ao nível do elemento,
+  que pesquisa cada elemento do Struct de forma independente.
 ---
 <h1 id="Basic-Vector-Search-with-StructArray" class="common-anchor-header">Pesquisa vetorial básica com StructArray<button data-href="#Basic-Vector-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -24,7 +24,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Utilize esta página para efetuar uma pesquisa vetorial em subcampos vetoriais dentro de um campo StructArray. O StructArray suporta dois modos básicos de pesquisa vetorial: a pesquisa EmbeddingList, que avalia uma lista de incorporações armazenada em cada entidade, e a pesquisa ao nível do elemento, que pesquisa cada elemento Struct de forma independente.</p>
-<p>Esta página utiliza a coleção « <code translate="no">tech_articles</code> » da secção <a href="/docs/pt/create-structarray-field.md">«Criar um campo StructArray</a>». A coleção possui um campo StructArray denominado « <code translate="no">chunks</code> ». Cada bloco contém texto, metadados escalares, um subcampo vetorial denominado « <code translate="no">emb_list_vector</code> » com um índice para a pesquisa EmbeddingList e um subcampo vetorial denominado « <code translate="no">emb</code> » com um índice para a pesquisa ao nível do elemento.</p>
+<p>Esta página utiliza a coleção « <code translate="no">tech_articles</code> » da secção <a href="/docs/pt/create-structarray-field.md">«Criar um campo StructArray</a>». A coleção possui um campo StructArray denominado « <code translate="no">chunks</code> ». Cada chunk contém texto, metadados escalares, um subcampo vetorial denominado « <code translate="no">emb_list_vector</code> » com um índice para a pesquisa EmbeddingList e um subcampo vetorial denominado « <code translate="no">emb</code> » com um índice para a pesquisa ao nível do elemento.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Antes de começar<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -49,7 +49,7 @@ summary: >-
 <tr><td>Crie um campo StructArray, como <code translate="no">chunks</code>.</td><td><a href="/docs/pt/create-structarray-field.md">Criar um campo StructArray</a></td></tr>
 <tr><td>Inserir entidades cujo campo « <code translate="no">chunks</code> » contenha objetos Struct.</td><td><a href="/docs/pt/insert-data-into-structarray-fields.md">Inserir dados nos campos StructArray</a></td></tr>
 <tr><td>Crie um índice « <code translate="no">MAX_SIM*</code> » no « <code translate="no">chunks[emb_list_vector]</code> » para a pesquisa «EmbeddingList».</td><td><a href="/docs/pt/index-structarray-fields.md">Indexar campos StructArray</a></td></tr>
-<tr><td>Criar um índice métrico vetorial regular em « <code translate="no">chunks[emb]</code> » para pesquisa ao nível do elemento.</td><td><a href="/docs/pt/index-structarray-fields.md">Indexar campos StructArray</a></td></tr>
+<tr><td>Criar um índice métrico vetorial regular em « <code translate="no">chunks[emb]</code> » para pesquisa ao nível dos elementos.</td><td><a href="/docs/pt/index-structarray-fields.md">Indexar campos StructArray</a></td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -177,7 +177,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>Na pesquisa ao nível do elemento, cada resultado representa um elemento Struct correspondente. O valor « <code translate="no">offset</code> » é a posição, com início em zero, desse elemento no campo StructArray. A mesma entidade pode aparecer mais do que uma vez se mais do que um elemento Struct corresponder à consulta. O valor « <code translate="no">limit</code> » aplica-se aos resultados dos elementos, e não a entidades-pai únicas.</p>
+<p>Na pesquisa ao nível do elemento, cada resultado representa um elemento Struct correspondente. O valor « <code translate="no">offset</code> » é a posição, com base zero, desse elemento no campo StructArray. A mesma entidade pode aparecer mais do que uma vez se mais do que um elemento Struct corresponder à consulta. O valor « <code translate="no">limit</code> » aplica-se aos resultados dos elementos, e não a entidades-pai únicas.</p>
 <h2 id="Interpret-results" class="common-anchor-header">Interpretar resultados<button data-href="#Interpret-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -199,7 +199,7 @@ results = client.search(
 </thead>
 <tbody>
 <tr><td><code translate="no">id</code></td><td>Chave primária da entidade correspondente.</td><td>Chave primária da entidade que contém o elemento Struct correspondente.</td></tr>
-<tr><td><code translate="no">distance</code> ou pontuação</td><td>Pontuação ou distância entre a lista de embeddings da consulta e a lista de embeddings armazenada.</td><td>Pontuação ou distância entre o vetor da consulta e o vetor do elemento Struct correspondente.</td></tr>
+<tr><td><code translate="no">distance</code> ou pontuação</td><td>Pontuação ou distância entre a lista de incorporações da consulta e a lista de incorporações armazenada.</td><td>Pontuação ou distância entre o vetor da consulta e o vetor do elemento Struct correspondente.</td></tr>
 <tr><td><code translate="no">offset</code></td><td>Não aplicável.</td><td>Posição, a partir de zero, do elemento Struct correspondente quando devolvido.</td></tr>
 <tr><td>Chaves primárias repetidas</td><td>Não é esperado para uma única consulta, uma vez que os resultados são ao nível da entidade.</td><td>Possível, uma vez que vários elementos Struct na mesma entidade podem corresponder.</td></tr>
 <tr><td>Campos de saída StructArray solicitados</td><td>Devolvidos a partir da entidade correspondente.</td><td>Devolvidos com a forma de correspondência ao nível do elemento suportada pela API e pelo SDK de destino.</td></tr>
@@ -224,7 +224,7 @@ results = client.search(
 <li><p>Utilizar « <code translate="no">chunks.emb</code> » em vez da sintaxe de caminho de subcampo exigida « <code translate="no">chunks[emb]</code> ».</p></li>
 <li><p>Utilizar uma consulta EmbeddingList num subcampo vetorial indexado com uma métrica vetorial normal.</p></li>
 <li><p>Utilizar uma consulta vetorial normal num subcampo vetorial indexado com uma métrica « <code translate="no">MAX_SIM*</code> ».</p></li>
-<li><p>Esperar que a pesquisa ao nível do elemento « <code translate="no">limit</code> » devolva esse número de entidades-pai únicas. Devolve resultados ao nível do elemento.</p></li>
+<li><p>Esperar que a pesquisa ao nível do elemento « <code translate="no">limit</code> » devolva esse número de entidades-pai únicas. Ela devolve resultados ao nível do elemento.</p></li>
 <li><p>Esperar que a pesquisa «EmbeddingList» devolva um deslocamento específico de um elemento. Devolve correspondências ao nível da entidade.</p></li>
 <li><p>Reutilizar um subcampo vetorial para ambos os modos de pesquisa. Utilize subcampos vetoriais separados, uma vez que cada subcampo vetorial aceita apenas um índice.</p></li>
 </ul>

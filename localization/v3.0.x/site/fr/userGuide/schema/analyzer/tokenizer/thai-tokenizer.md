@@ -38,7 +38,7 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Pour le texte en thaï, utilisez dans la plupart des cas l’analyseur intégré <a href="/docs/fr/thai-analyzer.md"><code translate="no">thai</code></a> dans la plupart des cas. L'analyseur intégré inclut ce tokeniseur ainsi que la conversion en minuscules, la normalisation des chiffres décimaux et la suppression des mots vides en thaï. N'utilisez directement le tokeniseur « <code translate="no">thai</code> » que lorsque vous devez créer un pipeline d'analyseur personnalisé.</p>
+<p>Pour le texte en thaï, utilisez dans la plupart des cas l’analyseur intégré <a href="/docs/fr/thai-analyzer.md"><code translate="no">thai</code></a> dans la plupart des cas. L'analyseur intégré inclut ce tokeniseur ainsi que la conversion en minuscules, la normalisation des chiffres décimaux et la suppression des mots vides en thaï. N'utilisez directement le tokeniseur « <code translate="no">thai</code> » que lorsque vous devez créer un pipeline d'analyse personnalisé.</p>
 </div>
 <p>Pour configurer un analyseur à l’aide du tokenizer « <code translate="no">thai</code> », définissez ` <code translate="no">tokenizer</code> ` sur ` <code translate="no">thai</code> ` dans ` <code translate="no">analyzer_params</code>`.</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -55,7 +55,7 @@ beta: Milvus 3.0.0+
     ],
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Ce pipeline personnalisé n’est pas équivalent à l’analyseur <code translate="no">thai</code> intégré, car il n’inclut pas le dictionnaire de mots vides <code translate="no">_thai_</code> intégré. Pour le pipeline prédéfini complet, utilisez <code translate="no">{&quot;type&quot;: &quot;thai&quot;}</code>.</p>
+<p>Ce pipeline personnalisé n’est pas équivalent à l’analyseur intégré « <code translate="no">thai</code> », car il n’inclut pas le dictionnaire de mots vides intégré « <code translate="no">_thai_</code> ». Pour le pipeline prédéfini complet, utilisez <code translate="no">{&quot;type&quot;: &quot;thai&quot;}</code>.</p>
 <p>Le tokeniseur applique le comportement suivant :</p>
 <ul>
 <li><strong>Segmentation du thaï</strong>: segmente le texte thaï en tokens de mots sans s’appuyer sur les espaces.</li>
@@ -64,7 +64,7 @@ beta: Milvus 3.0.0+
 <li><strong>Tokeniseur uniquement</strong>: ne met pas les tokens en minuscules, ne normalise pas les chiffres Unicode et ne supprime pas les mots vides. Ajoutez des filtres ou utilisez l' <a href="/docs/fr/thai-analyzer.md"><code translate="no">thai</code></a> pour ces étapes.</li>
 <li><strong>Sémantique de position</strong>: utilise les positions des tokens basées sur les caractères, y compris les espaces et la ponctuation ignorés, ce qui garantit une cohérence du comportement de correspondance de phrases et de proximité avec d’autres tokeniseurs non latins.</li>
 </ul>
-<p>Après avoir défini l’ <code translate="no">analyzer_params</code>, vous pouvez appliquer l’analyseur à un champ de type « <code translate="no">VARCHAR</code> » lors de la définition d’un schéma de collection. Pour plus de détails, reportez-vous à la section <a href="/docs/fr/analyzer-overview.md#Example-use">«Exemple d’utilisation</a>».</p>
+<p>Après avoir défini l’ <code translate="no">analyzer_params</code>, vous pouvez appliquer l’analyseur à un champ de type « <code translate="no">VARCHAR</code> » lors de la définition d’un schéma de collection. Pour plus de détails, reportez-vous à la section « <a href="/docs/fr/analyzer-overview.md#Example-use">Exemple d’utilisation</a> ».</p>
 <h2 id="Examples" class="common-anchor-header">Exemples<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

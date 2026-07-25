@@ -1,11 +1,11 @@
 ---
 id: switch-kafka-woodpecker.md
-title: Kafka と Woodpecker の切り替え
+title: KafkaとWoodpeckerの切り替え
 summary: >-
   Helm または Milvus Operator を使用して、Milvus クラスタのメッセージキューを Kafka と Woodpecker
   の間で切り替えます。
 ---
-<h1 id="Switch-between-Kafka-and-Woodpecker" class="common-anchor-header">Kafka と Woodpecker の切り替え<button data-href="#Switch-between-Kafka-and-Woodpecker" class="anchor-icon" translate="no">
+<h1 id="Switch-between-Kafka-and-Woodpecker" class="common-anchor-header">KafkaとWoodpeckerの切り替え<button data-href="#Switch-between-Kafka-and-Woodpecker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -70,7 +70,7 @@ summary: >-
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>切り替えが成功すると、<code translate="no">[mqTypeValue=woodpecker]</code> というログが出力されます。</p>
-<p><strong>ステップ 4: (オプション) Kafka を停止し、クリーンアップを行います。</strong> <strong>組み込みの</strong>Kafka の場合は、Kafka ポッドとその PVC を削除します。<strong>外部</strong>Kafka の場合は、外部 Kafka インスタンス内の Milvus トピックをクリーンアップします。これらのトピックは<code translate="no">&lt;cluster_prefix&gt;-dml_&lt;seqNo&gt;_&lt;TimeTick&gt;&lt;Version&gt;</code> という形式に従います。</p>
+<p><strong>ステップ 4: (オプション) Kafka を停止し、クリーンアップを行います。</strong> <strong>組み込みの</strong>Kafka の場合は、Kafka ポッドとその PVC を削除します。<strong>外部</strong>Kafka の場合は、外部 Kafka インスタンス内の Milvus トピックをクリーンアップします。これらのトピックは<code translate="no">&lt;cluster_prefix&gt;-dml_&lt;seqNo&gt;_&lt;TimeTick&gt;&lt;Version&gt;</code> という形式になっています。</p>
 <div class="alert note">
 <p>後でKafkaに戻す予定がある場合は、競合を避けるために、まずデータやトピックをクリーンアップしてください。</p>
 </div>
@@ -90,7 +90,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p><strong>ステップ 1: Milvus インスタンスが実行中であることを確認します。</strong></p>
-<p><strong>ステップ 2: 対象の Kafka 接続を設定し、Milvus を再起動します。</strong>切り替えを行うには、Milvus がすでに Kafka 接続を認識している必要があるため、<code translate="no">extraConfigFiles</code> を使用して<code translate="no">user.yaml</code> に書き込み、<code translate="no">helm upgrade</code> で適用します（これによりポッドが再起動されます）。Switch MQ 機能には、<code translate="no">streaming.enabled=true</code> が必要です。SASL/SSL の詳細については、<a href="/docs/ja/connect_kafka_ssl.md">「SASL/SSL を使用した Kafka への接続」を</a>参照してください。</p>
+<p><strong>ステップ 2: 対象の Kafka 接続を設定し、Milvus を再起動します。</strong>この切り替えには、Milvus が Kafka 接続情報を既に認識している必要があるため、<code translate="no">extraConfigFiles</code> を使用して<code translate="no">user.yaml</code> に書き込み、<code translate="no">helm upgrade</code> で適用します（これによりポッドが再起動されます）。Switch MQ 機能には、<code translate="no">streaming.enabled=true</code> が必要です。SASL/SSL の詳細については、<a href="/docs/ja/connect_kafka_ssl.md">「SASL/SSL を使用した Kafka への接続」を</a>参照してください。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -108,7 +108,7 @@ summary: >-
   --set streaming.enabled=true \
   -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>すべてのポッドの準備が整うまで待機し、Kafka へのアクセス設定が Milvus の設定に反映されていることを確認してください。</p>
+<p>すべてのポッドの準備が整うまで待機し、Kafkaへのアクセス設定がMilvusの設定に反映されていることを確認してください。</p>
 <p><strong>ステップ 3: MQ 切り替えを実行します。</strong></p>
 <div class="alert note">
 <p>対象のKafkaに、以前の設定からのMilvusトピックが含まれていないことを確認してください。今回がKafkaへの初めての切り替えである場合は、この注意事項をスキップしてください。そうでない場合は、まず同じ名前の残存するMilvusトピックをクリーンアップしてください。</p>
@@ -124,7 +124,7 @@ summary: >-
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>切り替えが成功すると、<code translate="no">[mqTypeValue=kafka]</code> というログが出力されます。</p>
-<p><strong>ステップ 5: (オプション) Woodpecker データをクリーンアップします。</strong>MinIO/S3 上の Woodpecker データ（<code translate="no">&lt;rootPath&gt;/wp/...</code> 配下、通常は<code translate="no">files/wp/...</code> ）および etcd 内の Woodpecker メタデータ（<code translate="no">etcdctl get woodpecker --prefix</code> ）を削除します。後で Woodpecker に戻す予定がある場合は、まずこれらのファイルをクリーンアップしてください。</p>
+<p><strong>ステップ 5: (オプション) Woodpecker データのクリーンアップを行います。</strong>MinIO/S3 上の Woodpecker データ（<code translate="no">&lt;rootPath&gt;/wp/...</code> 配下、通常は<code translate="no">files/wp/...</code> ）および etcd 内の Woodpecker メタデータ（<code translate="no">etcdctl get woodpecker --prefix</code> ）を削除します。後で Woodpecker に戻す予定がある場合は、まずこれらのファイルをクリーンアップしてください。</p>
 <h2 id="With-Milvus-Operator" class="common-anchor-header">Milvus Operator を使用する場合<button data-href="#With-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -218,7 +218,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">kubectl patch -f change_configmap.yaml --patch-file change_configmap.yaml --type merge
 <button class="copy-code-btn"></button></code></pre>
-<p>すべてのポッドが「ready」状態になるのを待ち、Kafka へのアクセス設定が Milvus の設定に反映されていることを確認します。</p>
+<p>すべてのポッドが「ready」状態になるまで待機し、Kafka へのアクセス設定が Milvus の設定に反映されていることを確認してください。</p>
 <p><strong>ステップ 3: MQ の切り替えを実行します。</strong></p>
 <div class="alert note">
 <p>対象のKafkaに、以前の設定からのMilvusトピックが含まれていないことを確認してください。今回がKafkaへの初めての切り替えである場合は、この注意事項をスキップしてください。そうでない場合は、まず同じ名前の残存するMilvusトピックをクリーンアップしてください。</p>

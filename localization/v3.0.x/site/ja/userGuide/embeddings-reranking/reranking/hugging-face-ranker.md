@@ -19,7 +19,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>ベクトル検索では、結果がベクトル距離に基づいて並べ替えられますが、初期の順序は、各候補のテキストがクエリにどの程度適切に応答しているかを必ずしも反映しているとは限りません。Hugging Face Rankerは、クエリと候補テキストをホスト型<a href="https://huggingface.co/docs/inference-providers/index">Hugging Face Inference Providersに</a>送信し、<code translate="no">sentence-similarity</code> のスコアを用いて、Milvusから返された候補の順序を再編成します。</p>
+    </button></h1><p>ベクトル検索はベクトル距離に基づいて結果を並べ替えますが、初期の順序は、各候補テキストがクエリにどの程度適切に応答しているかを必ずしも反映しているとは限りません。Hugging Face Rankerは、クエリと候補テキストをホスト<a href="https://huggingface.co/docs/inference-providers/index">型Hugging Face Inference Providersに</a>送信し、<code translate="no">sentence-similarity</code> のスコアを用いて、Milvusから返された候補の順序を再編成します。</p>
 <p>この統合では、ホスト型Hugging Faceルーターを使用します。別途デプロイされたText Embeddings Inference（TEI）サービスを使用して再ランク付けを行う場合は、<a href="/docs/ja/tei-ranker.md">TEI Rankerを</a>参照してください。</p>
 <h2 id="Limits" class="common-anchor-header">制限事項<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -64,9 +64,9 @@ beta: Milvus v2.6.20+
 <p>Hugging Face Rankerは、初期のベクトル検索後に実行されます：</p>
 <ol>
 <li><strong>候補エンティティを取得します。</strong>Milvusは設定されたベクトルフィールドを検索し、候補エンティティを収集します。</li>
-<li><strong>再ランク付け用のテキストを準備します。</strong>Functionは、<code translate="no">params.queries</code> からクエリテキストを読み取り、<code translate="no">input_field_names</code> で指定された<code translate="no">VARCHAR</code> フィールドから候補テキストを読み取ります。</li>
+<li><strong>再ランク付けのためのテキストを準備します。</strong>Functionは、<code translate="no">params.queries</code> からクエリテキストを読み取り、<code translate="no">input_field_names</code> で指定された<code translate="no">VARCHAR</code> フィールドから候補テキストを読み取ります。</li>
 <li><strong>類似度スコアの要求。</strong>Milvusは、クエリを<code translate="no">source_sentence</code> として、候補テキストを<code translate="no">sentences</code> として、<code translate="no">hf-inference</code> を経由してHugging Faceの<code translate="no">sentence-similarity</code> パイプラインに送信します。</li>
-<li><strong>候補テキストの再ランク付けを行います。</strong>Hugging Faceは候補ごとに1つのスコアを返します。Milvusはスコアの高い順に候補を並べ替え、再ランク付けされた結果を返します。</li>
+<li><strong>候補テキストの再ランク付けを行います。</strong>Hugging Faceは候補ごとに1つのスコアを返します。Milvusはスコアの高い順から低い順に候補を並べ替え、再ランク付けされた結果を返します。</li>
 </ol>
 <p><strong>類似度スコアの算出方法</strong></p>
 <p><span class="img-wrapper">
@@ -79,7 +79,7 @@ beta: Milvus v2.6.20+
 <ol>
 <li><strong>テキスト入力の準備。</strong>Rankerは、<code translate="no">params.queries</code> からクエリテキストを読み取り、設定された<code translate="no">VARCHAR</code> フィールドから候補テキストを読み取ります。</li>
 <li><strong>個別のモデル表現を作成します。</strong>Milvusは、クエリを<code translate="no">source_sentence</code> として、候補テキストを<code translate="no">sentences</code> として送信します。モデルは内部で、クエリと各候補を個別にエンコードします。</li>
-<li><strong>比較を行い、スコアを返します。</strong>モデルは、クエリの表現と各候補の表現を比較し、候補ごとに1つの類似度スコアを返します。</li>
+<li><strong>スコアを比較して返す。</strong>モデルは、クエリの表現と各候補の表現を比較し、候補ごとに1つの類似度スコアを返します。</li>
 </ol>
 <p>Hugging Faceモデルが使用する埋め込みや表現は、モデル処理の中間段階のものです。Hugging Faceが返すのはスコアであり、ベクトルではありません。したがって、初期のベクトル検索とモデルによる再ランク付けでは、別々の表現が使用され、異なるモデルが使用される場合があります。</p>
 <h2 id="Before-you-start" class="common-anchor-header">開始する前に<button data-href="#Before-you-start" class="anchor-icon" translate="no">
@@ -106,7 +106,7 @@ beta: Milvus v2.6.20+
 <li><code translate="no">VARCHAR</code> の null 不可フィールドに候補テキストを格納するコレクション。</li>
 </ul>
 <div class="alert note">
-<p>Milvus は、Hugging Face モデルが<code translate="no">hf-inference</code> を通じて引き続き利用可能であるかどうか、あるいはそのモデルが安定性、レイテンシ、出力品質に関する要件を満たしているかどうかについては管理していません。本番環境で使用する前に、Hugging Face 上でモデルを確認し、ワークロードに対して評価を行ってください。</p>
+<p>Milvus は、Hugging Face モデルが<code translate="no">hf-inference</code> を通じて引き続き利用可能であるかどうか、あるいはそのモデルが安定性、レイテンシ、出力品質に関する要件を満たしているかどうかについては管理していません。本番環境で使用する前に、Hugging Face でモデルを確認し、ワークロードに対して評価を行ってください。</p>
 </div>
 <p>これらの例では、 <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2"><code translate="no">sentence-transformers/all-MiniLM-L6-v2</code></a> は設定の説明のみを目的としています。このモデルは、Milvusによる推奨や認定を示すものではありません。</p>
 <h2 id="Configure-credentials" class="common-anchor-header">認証情報の設定<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
@@ -260,7 +260,7 @@ client.insert(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Define-the-rerank-Function" class="common-anchor-header">ステップ 2: リランキング関数の定義<button data-href="#Step-2-Define-the-rerank-Function" class="anchor-icon" translate="no">
+<h3 id="Step-2-Define-the-rerank-Function" class="common-anchor-header">ステップ 2: リランク関数の定義<button data-href="#Step-2-Define-the-rerank-Function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -337,7 +337,7 @@ results = client.search(
 
 <span class="hljs-built_in">print</span>(results)
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvusはまず<code translate="no">dense</code> から候補を抽出し、次に<code translate="no">queries</code> のクエリテキストと<code translate="no">document</code> の候補テキストを用いて、文の類似度スコアを計算します。返される候補は、Hugging Faceのスコア順に並べ替えられます。</p>
+<p>Milvusはまず<code translate="no">dense</code> から候補を抽出し、次に<code translate="no">queries</code> のクエリテキストと<code translate="no">document</code> の候補テキストを用いて、文の類似度スコアを算出します。返される候補は、Hugging Faceのスコア順に並べ替えられます。</p>
 <h2 id="Troubleshooting" class="common-anchor-header">トラブルシューティング<button data-href="#Troubleshooting" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -385,7 +385,7 @@ results = client.search(
         ></path>
       </svg>
     </button></h3><p><code translate="no">queries</code> 内の文字列数は、検索クエリの数（<code translate="no">nq</code> ）と一致している必要があります。クエリベクトルが 1 つの検索の場合、クエリ文字列を正確に 1 つ指定してください。</p>
-<h3 id="Candidate-text-is-missing-or-nullable" class="common-anchor-header">候補テキストが欠落しているか、NULL 許容です<button data-href="#Candidate-text-is-missing-or-nullable" class="anchor-icon" translate="no">
+<h3 id="Candidate-text-is-missing-or-nullable" class="common-anchor-header">候補テキストが欠落しているか、null 許容です<button data-href="#Candidate-text-is-missing-or-nullable" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

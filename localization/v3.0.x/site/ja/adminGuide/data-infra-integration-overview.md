@@ -20,8 +20,8 @@ summary: Milvusが連携するサードパーティ製インフラストラク�
       </svg>
     </button></h1><p>Milvusは、中核となる依存関係においてオープンなデータインフラストラクチャを基盤としています。この章では、プラグインとして組み込み、設定可能なコンポーネントについて説明します：</p>
 <ul>
-<li><strong><a href="/docs/ja/etcd.md">メタデータ</a></strong>— Milvusは、メタデータ（コレクションスキーマ、ノードステータス、消費チェックポイント）をetcdに格納します。</li>
+<li><strong><a href="/docs/ja/etcd.md">メタデータ</a></strong>— Milvus は、メタデータ（コレクションスキーマ、ノードステータス、消費チェックポイント）を etcd に格納します。</li>
 <li><strong><a href="/docs/ja/object-storage.md">オブジェクトストレージ</a></strong>— Milvusは、インデックスファイルやバイナリログをMinIO、AWS S3、またはその他のS3互換／クラウドオブジェクトストレージに保存します。</li>
 <li><strong><a href="/docs/ja/mqtype-overview.md">メッセージキュー</a></strong>— Milvusは、書き込み先行ログ（WAL）として、Woodpecker（デフォルト）、Pulsar、Kafka、またはRocksMQを使用します。</li>
 </ul>
-<p>デフォルトでは、新しい Milvus 3.x デプロイメントは、メッセージキューとして<strong>Woodpecker</strong>、メタデータとして<strong>etcd</strong>、オブジェクトストレージとして<strong>MinIO</strong>を使用して動作します。追加のメッセージングインフラストラクチャは必要ありません。</p>
+<p>デフォルトでは、新しい Milvus 3.x デプロイメントは、メッセージキューとして<strong>Woodpecker</strong>、メタデータとして<strong>etcd</strong>、オブジェクトストレージとして<strong>MinIO</strong>を使用して実行されます。追加のメッセージングインフラストラクチャは必要ありません。</p>

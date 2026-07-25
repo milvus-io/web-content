@@ -280,7 +280,7 @@ results = client.hybrid_search(
 <tr><td>벡터 하위 필드</td><td><code translate="no">$[...]</code> 의 스칼라 술어 입력으로는 지원되지 않습니다. 대신 벡터 검색을 통해 벡터 하위 필드를 사용하십시오.</td></tr>
 </tbody>
 </table>
-<p>JSON 경로, 배열 컨테이너 함수, 텍스트 일치 함수, ` <code translate="no">$[...]</code>`에 대한 null 술어, 기하학 함수, `Timestamptz` 표현식 및 제네릭 함수 호출과 같이 지원되지 않는 사례에 대해서는 <a href="/docs/ko/struct-array-operators.md">StructArray 연산자를</a> 참조하십시오.</p>
+<p>JSON 경로, 배열 컨테이너 함수, 텍스트 일치 함수, ` <code translate="no">$[...]</code>`에 대한 null 술어, 기하 함수, `Timestamptz` 표현식 및 제네릭 함수 호출과 같이 지원되지 않는 사례에 대해서는 <a href="/docs/ko/struct-array-operators.md">StructArray 연산자를</a> 참조하십시오.</p>
 <h2 id="Common-mistakes" class="common-anchor-header">흔히 저지르는 실수<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

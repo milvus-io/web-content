@@ -38,7 +38,7 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Untuk teks bahasa Thailand, gunakan <a href="/docs/id/thai-analyzer.md"><code translate="no">thai</code></a> pengurai bawaan dalam kebanyakan kasus. Pengurai bawaan ini mencakup tokenizer ini bersama dengan konversi huruf kecil, normalisasi angka desimal, dan penghapusan kata penghalang bahasa Thailand. Gunakan tokenizer <code translate="no">thai</code> secara langsung hanya jika Anda perlu membangun pipa pengurai kustom.</p>
+<p>Untuk teks bahasa Thailand, gunakan <a href="/docs/id/thai-analyzer.md"><code translate="no">thai</code></a> pengurai bawaan dalam kebanyakan kasus. Pengurai bawaan ini mencakup tokenizer ini bersama dengan konversi huruf kecil, normalisasi angka desimal, dan penghapusan kata-kata penghalang dalam bahasa Thailand. Gunakan tokenizer <code translate="no">thai</code> secara langsung hanya jika Anda perlu membangun pipa pengurai kustom.</p>
 </div>
 <p>Untuk mengonfigurasi penganalisis menggunakan tokenizer ` <code translate="no">thai</code> `, atur ` <code translate="no">tokenizer</code> ` menjadi ` <code translate="no">thai</code> ` di ` <code translate="no">analyzer_params</code>`.</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -55,7 +55,7 @@ beta: Milvus 3.0.0+
     ],
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Pipa kustom ini tidak setara dengan penganalisis bawaan <code translate="no">thai</code> karena tidak menyertakan kamus kata-kata yang diabaikan (stop-word) bawaan <code translate="no">_thai_</code>. Untuk pipa yang telah ditentukan sebelumnya secara lengkap, gunakan <code translate="no">{&quot;type&quot;: &quot;thai&quot;}</code>.</p>
+<p>Pipa kustom ini tidak setara dengan penganalisis bawaan <code translate="no">thai</code> karena tidak menyertakan kamus kata henti bawaan <code translate="no">_thai_</code>. Untuk pipa yang telah ditentukan sebelumnya secara lengkap, gunakan <code translate="no">{&quot;type&quot;: &quot;thai&quot;}</code>.</p>
 <p>Tokenizer menerapkan perilaku berikut:</p>
 <ul>
 <li><strong>Segmentasi bahasa Thailand</strong>: Menyegmentasikan teks bahasa Thailand menjadi token kata tanpa bergantung pada spasi.</li>

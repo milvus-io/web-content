@@ -38,7 +38,7 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Per il testo arabo, utilizzare l’analizzatore integrato <a href="/docs/it/arabic-analyzer.md"><code translate="no">arabic</code></a> analizzatore integrato. L’analizzatore integrato include questo filtro insieme alla tokenizzazione standard, alla conversione in minuscolo, alla normalizzazione delle cifre decimali, allo stemming arabo e alla rimozione delle parole vuote arabe. Utilizzare direttamente “ <code translate="no">arabic_normalization</code> ” solo quando è necessario creare una pipeline di analizzatori personalizzata.</p>
+<p>Per il testo arabo, utilizzare l’analizzatore integrato <a href="/docs/it/arabic-analyzer.md"><code translate="no">arabic</code></a> analizzatore integrato. L'analizzatore integrato include questo filtro insieme alla tokenizzazione standard, alla conversione in minuscolo, alla normalizzazione delle cifre decimali, allo stemming arabo e alla rimozione delle parole vuote arabe. Utilizzare direttamente " <code translate="no">arabic_normalization</code> " solo quando è necessario creare una pipeline di analizzatori personalizzata.</p>
 </div>
 <p>Per utilizzare il filtro ` <code translate="no">arabic_normalization</code> ` in un analizzatore personalizzato, aggiungerlo alla sezione ` <code translate="no">filter</code> ` in ` <code translate="no">analyzer_params</code>`:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {

@@ -47,7 +47,7 @@ summary: >-
 <tbody>
 <tr><td>Forma del esquema</td><td>Un Struct solo se puede utilizar como tipo de elemento de un campo Array. Struct no es compatible como campo de colección de nivel superior.</td></tr>
 <tr><td>Esquema de subcampos</td><td>Todos los elementos Struct de un mismo campo StructArray comparten un esquema Struct predefinido.</td></tr>
-<tr><td>La capacidad</td><td><code translate="no">max_capacity</code> Es obligatorio y limita el número de elementos Struct que una entidad puede almacenar en el campo StructArray.</td></tr>
+<tr><td>La capacidad</td><td><code translate="no">max_capacity</code> es obligatorio y limita el número de elementos Struct que una entidad puede almacenar en el campo StructArray.</td></tr>
 <tr><td>Cambios en los subcampos</td><td>Una vez creado un campo StructArray, no se pueden añadir subcampos a ese campo StructArray ya existente.</td></tr>
 <tr><td>Ruta del subcampo</td><td>Utilice rutas del tipo <code translate="no">structArray[subfield]</code>, como <code translate="no">chunks[emb]</code>, para índices, objetivos de búsqueda, campos de salida y filtros. No utilice <code translate="no">chunks.emb</code>.</td></tr>
 <tr><td>Insertar forma</td><td>Inserta un campo StructArray como una matriz de objetos. No utilices la sintaxis de ruta dentro de las cargas útiles de inserción.</td></tr>
@@ -282,7 +282,7 @@ summary: >-
       </svg>
     </button></h2><ol>
 <li><p>Para crear un campo StructArray, consulta <a href="/docs/es/create-structarray-field.md">«Crear un campo StructArray</a>».</p></li>
-<li><p>Para insertar datos, consulta <a href="/docs/es/insert-data-into-structarray-fields.md">Insertar datos en campos StructArray</a>.</p></li>
+<li><p>Para insertar datos, consulte <a href="/docs/es/insert-data-into-structarray-fields.md">Insertar datos en campos StructArray</a>.</p></li>
 <li><p>Para crear índices vectoriales y escalares, consulta <a href="/docs/es/index-structarray-fields.md">«Indexar campos StructArray</a>».</p></li>
 <li><p>Para repasar la sintaxis de los filtros de StructArray, consulta <a href="/docs/es/struct-array-operators.md">«Operadores de StructArray</a>».</p></li>
 </ol>

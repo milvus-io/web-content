@@ -263,7 +263,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>2.5.x에서 2.6.x로 업그레이드:</strong> <strong>메시지 큐 제한 사항</strong>: Milvus v3.0-beta로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.
+<li><strong>2.5.x에서 2.6.x로 업그레이드:</strong> <strong>메시지 큐 제한 사항</strong>: Milvus v3.0-beta로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경 기능은 향후 버전에서 제공될 예정입니다.
 Pulsar를 실행 중이며 계속 사용하려는 경우, 업그레이드 중에 메시지 큐를 변경하지 마십시오.</li>
 <li><strong>Pulsar v2 → v3:</strong> <a href="/docs/ko/upgrade-pulsar-v3.md">‘Pulsar v2에서 v3로 업그레이드’를</a> 참조하십시오. v2를 계속 사용하려면 <a href="/docs/ko/use-pulsar-v2.md">‘Pulsar v2 계속 사용’을</a> 참조하십시오.</li>
 </ul>

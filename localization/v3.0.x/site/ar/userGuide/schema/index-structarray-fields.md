@@ -4,7 +4,8 @@ title: فهرسة حقول StructArray
 summary: >-
   قم بإنشاء فهارس على الحقول الفرعية لـ StructArray قبل إجراء البحث المتجه أو
   تسريع عملية التصفية القياسية. بالنسبة لحقل StructArray، يكون هدف الفهرس هو
-  مسار حقل فرعي، مثل chunks[emb_list_vector] أو chunks[emb] أو chunks[section].
+  مسار الحقل الفرعي، مثل chunks[emb_list_vector] أو chunks[emb] أو
+  chunks[section].
 ---
 <h1 id="Index-StructArray-Fields" class="common-anchor-header">فهرسة حقول StructArray<button data-href="#Index-StructArray-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,7 +23,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>قم بإنشاء فهارس على الحقول الفرعية لـ StructArray قبل إجراء البحث المتجه أو تسريع التصفية القياسية. بالنسبة لحقل StructArray، يكون هدف الفهرس هو مسار حقل فرعي، مثل <code translate="no">chunks[emb_list_vector]</code> أو <code translate="no">chunks[emb]</code> أو <code translate="no">chunks[section]</code>.</p>
-<p>تستخدم هذه الصفحة مجموعة <code translate="no">tech_articles</code> المأخوذة من <a href="/docs/ar/create-structarray-field.md">«إنشاء حقل StructArray</a>». يحتوي حقل StructArray <code translate="no">chunks</code> على حقول فرعية سكالارية للتصفية وحقول فرعية متجهة للبحث.</p>
+<p>تستخدم هذه الصفحة مجموعة <code translate="no">tech_articles</code> من <a href="/docs/ar/create-structarray-field.md">«إنشاء حقل StructArray</a>». يحتوي حقل StructArray <code translate="no">chunks</code> على حقول فرعية سكالارية للتصفية وحقول فرعية متجهة للبحث.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">قبل البدء<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -82,7 +83,7 @@ summary: >-
 <tr><td>التصفية حسب القيمة المنطقية</td><td><code translate="no">chunks[has_code]</code></td><td>مؤشر قياسي يدعمه الهدف الخاص بك.</td></tr>
 </tbody>
 </table>
-<p>يعامل البحث في EmbeddingList المتجهات الموجودة في حقل فرعي من نوع StructArray كقائمة تضمين ويُرجع نتائج على مستوى الكيان. أما البحث على مستوى العنصر فيبحث في كل عنصر من عناصر Struct بشكل مستقل ويمكنه إرجاع إزاحة العنصر المطابق.</p>
+<p>يعامل البحث في EmbeddingList المتجهات الموجودة في حقل فرعي من نوع StructArray على أنها قائمة تضمين ويُرجع نتائج على مستوى الكيان. أما البحث على مستوى العنصر فيبحث في كل عنصر من عناصر Struct بشكل مستقل ويمكنه إرجاع إزاحة العنصر المطابق.</p>
 <h2 id="Create-vector-indexes" class="common-anchor-header">إنشاء فهارس متجهة<button data-href="#Create-vector-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -283,7 +284,7 @@ client.create_index(
 
 <span class="hljs-built_in">print</span>(indexes)
 <button class="copy-code-btn"></button></code></pre>
-<p>يمكنك أيضًا وصف فهرس معين إذا كان إصدار SDK الخاص بك يوفر واجهات برمجة تطبيقات (APIs) لوصف الفهارس.</p>
+<p>يمكنك أيضًا وصف فهرس معين إذا كان إصدار SDK الخاص بك يوفر واجهات برمجة تطبيقات (API) لوصف الفهارس.</p>
 <pre><code translate="no" class="language-python">index = client.describe_index(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
     index_name=<span class="hljs-string">&quot;chunks_emb_cosine&quot;</span>,

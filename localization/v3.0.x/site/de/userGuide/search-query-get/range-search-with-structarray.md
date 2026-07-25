@@ -107,7 +107,7 @@ summary: >-
 <tr><td><code translate="no">IP</code>, <code translate="no">COSINE</code></td><td>Ja. Ein höherer Wert ist besser.</td><td><code translate="no">radius &lt; distance &lt;= range_filter</code></td></tr>
 </tbody>
 </table>
-<p>Wenn nur „ <code translate="no">radius</code> “ eingestellt ist, liefert die Bereichssuche Treffer, die die äußere Grenze der Metrik erfüllen. Wählen Sie die Werte entsprechend der Werteskala oder der Abstandsskala Ihrer Einbettungen aus.</p>
+<p>Wenn nur „ <code translate="no">radius</code> “ festgelegt ist, liefert die Bereichssuche Treffer, die die äußere Grenze der Metrik erfüllen. Wählen Sie Werte entsprechend der Werteskala oder der Abstandsskala Ihrer Einbettungen aus.</p>
 <h2 id="Run-element-level-range-search" class="common-anchor-header">Bereichssuche auf Elementebene durchführen<button data-href="#Run-element-level-range-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -307,7 +307,7 @@ results = client.hybrid_search(
     </button></h2><ul>
 <li><p>Verwenden Sie keine „ <code translate="no">EmbeddingList</code> “-Abfrage oder die Metrik „ <code translate="no">MAX_SIM*</code> “ für die Bereichssuche in StructArray-Vektor-Unterfeldern. Die Suche auf „EmbeddingList“-Ebene unterstützt keine Bereichssuche.</p></li>
 <li><p>Kombinieren Sie die Bereichssuche nicht mit einer Gruppierungssuche. Wenn Sie ein Ergebnis pro übergeordneter Entität benötigen, führen Sie eine Suche auf Elementebene ohne Bereichsparameter durch und verwenden Sie die Gruppierung, sofern diese unterstützt wird.</p></li>
-<li><p>Die hybride Bereichssuche wird für Vektorfelder auf StructArray-Ebene unterstützt. Sie wird nicht für StructArray-Anfragen auf „EmbeddingList“-Ebene unterstützt.</p></li>
+<li><p>Die hybride Bereichssuche wird für Vektorfelder auf StructArray-Ebene unterstützt. Sie wird nicht für StructArray-Anfragen auf EmbeddingList-Ebene unterstützt.</p></li>
 </ul>
 <h2 id="Common-mistakes" class="common-anchor-header">Häufige Fehler<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"

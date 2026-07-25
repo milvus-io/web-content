@@ -72,7 +72,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>StructArray 字段</td><td>Collection 包含一个 StructArray 字段，例如<code translate="no">chunks</code> 。</td></tr>
-<tr><td>元素级向量量子字段</td><td>目标量子向量应为<code translate="no">chunks[emb]</code> ，而非<code translate="no">chunks[emb_list_vector]</code> 。</td></tr>
+<tr><td>元素级向量子字段</td><td>目标量子向量应为<code translate="no">chunks[emb]</code> ，而非<code translate="no">chunks[emb_list_vector]</code> 。</td></tr>
 <tr><td>索引度量</td><td>该向量子场使用常规向量度量进行索引，例如<code translate="no">COSINE</code> 、<code translate="no">IP</code> 或<code translate="no">L2</code> 。</td></tr>
 <tr><td>查询数据</td><td>查询对象是一个常规向量，而非<code translate="no">EmbeddingList</code> 。</td></tr>
 </tbody>
@@ -93,7 +93,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>设置 `<code translate="no">radius</code> ` 以定义搜索边界。若同时需要内部边界，请设置 `<code translate="no">range_filter</code> `。方向取决于“更小的距离”更优，还是“更高的相似度得分”更优。</p>
+    </button></h2><p>设置 `<code translate="no">radius</code> ` 以定义搜索边界。若同时需要内部边界，请设置 `<code translate="no">range_filter</code> `。方向取决于“更小的距离”与“更高的相似度得分”何者更优。</p>
 <table>
 <thead>
 <tr><th>度量类型</th><th>分数越高越好？</th><th>使用<code translate="no">range_filter</code> 时的范围条件</th></tr>

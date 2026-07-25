@@ -160,7 +160,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>請使用<code translate="no">LIKE</code> 進行前綴、後綴、包含以及固定位置單一字元匹配。<code translate="no">LIKE</code> 不支援字元類別（例如<code translate="no">[0-9]</code> ）、選擇關係（例如<code translate="no">error|failed</code> ）、重複次數（例如<code translate="no">{4}</code> ）、錨點（例如<code translate="no">^</code> 或<code translate="no">$</code> ），亦不支援不區分大小寫標誌（例如<code translate="no">(?i)</code> ）。若需使用此類模式，請改用正規表達式。</p>
+    </button></h3><p>請使用<code translate="no">LIKE</code> 進行前綴、後綴、包含以及固定位置單一字元匹配。<code translate="no">LIKE</code> 不支援字元類別（例如<code translate="no">[0-9]</code> ）、選擇關係（例如<code translate="no">error|failed</code> ）、重複次數（例如<code translate="no">{4}</code> ）、錨點（例如<code translate="no">^</code> 或<code translate="no">$</code> ），亦不支援不區分大小寫的標誌（例如<code translate="no">(?i)</code> ）。若需使用這些模式，請改用正規表達式。</p>
 <p>若需進行完全字串相等比對，請使用<code translate="no">==</code> 。僅當篩選條件需要通配符匹配時，才使用<code translate="no">LIKE</code> 。</p>
 <h3 id="Escaping-wildcards-in-a-LIKE-pattern" class="common-anchor-header">在 LIKE 模式中對通配符進行轉義<button data-href="#Escaping-wildcards-in-a-LIKE-pattern" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -230,7 +230,7 @@ res = client.query(
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ r&quot;\d{4}-\d{2}-\d{2}&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>這會匹配包含類似日期的字串，例如<code translate="no">2026-07-01</code> 。</p>
-<p>若未使用原始字串，一般字串文字會在評估正規表達式模式之前先處理轉義序列，因此像<code translate="no">\d</code> 、<code translate="no">\s</code> 這樣的模式，或是包含轉義字元字面值的字串，可能需要額外的反斜線。</p>
+<p>若未使用原始字串，一般字串文字會在評估正規表達式模式之前先處理轉義序列，因此像<code translate="no">\d</code> 、<code translate="no">\s</code> 這樣的模式，或是包含轉義字元的字串，可能需要額外的反斜線。</p>
 <h3 id="Common-regex-patterns" class="common-anchor-header">常見的正規表達式模式<button data-href="#Common-regex-patterns" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -265,7 +265,7 @@ res = client.query(
 <p>若要匹配多個單字中的任一個，請使用<code translate="no">|</code> 進行選擇：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ &quot;error|failed|timeout&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>若要字面匹配正則表達式元字元，請在正則表達式模式中對其進行轉義。例如，若要匹配字面上的點（正則表達式中的 `<code translate="no">\.</code> `），請在 Python 篩選器字串中寫作 `<code translate="no">\\.</code> `：</p>
+<p>若要字面匹配正則表達式元字元，請在正則表達式模式中對其進行轉義。例如，若要匹配字面上的點（正則表達式中的 `<code translate="no">\.</code> `），請在 Python 篩選器字串中寫入 `<code translate="no">\\.</code> `：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;email =~ &quot;@gmail\\.com$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>注意：Milvus 的正規表達式篩選器遵循 RE2 語法。若正規表達式模式使用了 RE2 不支援的語法，或因其他原因而無效，Milvus 將拒絕該篩選器表達式。有關正規表達式元字元、標誌及匹配行為的詳細資訊，請參閱<a href="https://github.com/google/re2/wiki/syntax">RE2 語法參考</a>。</p>

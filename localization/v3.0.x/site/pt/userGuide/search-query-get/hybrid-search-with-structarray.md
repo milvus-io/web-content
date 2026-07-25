@@ -47,12 +47,12 @@ summary: >-
 <tr><td>Campo vetorial ao nível da coleção + subcampo EmbeddingList do StructArray</td><td>Nível da entidade</td><td>Os candidatos finais são indexados pela chave primária.</td><td>Não utilizar.</td></tr>
 <tr><td>Campo vetorial ao nível da coleção + subcampo ao nível do elemento StructArray</td><td>Nível da entidade</td><td>Os resultados ao nível do elemento são agrupados em candidatos ao nível da entidade antes da reclassificação híbrida.</td><td>Configuração opcional de agrupamento no sub <code translate="no">AnnSearchRequest</code>, ao nível do elemento StructArray.</td></tr>
 <tr><td>Vários subcampos ao nível do elemento no âmbito do mesmo campo StructArray</td><td>Nível de elemento</td><td>Os candidatos finais são identificados pela chave primária mais o deslocamento do elemento Struct.</td><td>Não utilizar.</td></tr>
-<tr><td>Subcampos ao nível do elemento em diferentes campos StructArray</td><td>Nível da entidade</td><td>Os deslocamentos dos elementos não partilham identidade, pelo que cada <code translate="no">AnnSearchRequest</code> ao nível do elemento StructArray é recolhido antes da reclassificação.</td><td>Configuração opcional de recolhimento em cada <code translate="no">AnnSearchRequest</code> de nível de elemento do StructArray.</td></tr>
+<tr><td>Subcampos ao nível do elemento em diferentes campos StructArray</td><td>Nível da entidade</td><td>Os deslocamentos dos elementos não partilham identidade, pelo que cada <code translate="no">AnnSearchRequest</code> ao nível do elemento StructArray é recolhido antes da reordenação.</td><td>Configuração opcional de recolhimento em cada <code translate="no">AnnSearchRequest</code> de nível de elemento do StructArray.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
 <p>Aviso</p>
-<p>Utilize o parâmetro « <code translate="no">element_scope</code> » apenas para configurar o colapso de objetos « <code translate="no">AnnSearchRequest</code> » ao nível do elemento do StructArray numa pesquisa híbrida ao nível do elemento que não seja da mesma estrutura. Não o utilize para pedidos «EmbeddingList», pedidos de vetores ao nível da coleção ou pesquisas híbridas ao nível do elemento do StructArray da mesma estrutura.</p>
+<p>Utilize o parâmetro « <code translate="no">element_scope</code> » apenas para configurar o colapso de objetos « <code translate="no">AnnSearchRequest</code> » ao nível do elemento do StructArray numa pesquisa híbrida ao nível do elemento que não utilize a mesma estrutura. Não o utilize para pedidos «EmbeddingList», pedidos de vetores ao nível da coleção ou pesquisas híbridas ao nível do elemento do StructArray com a mesma estrutura.</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">Antes de começar<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -273,11 +273,11 @@ results = client.hybrid_search(
 <tr><td><code translate="no">max</code></td><td>Manter a melhor pontuação do elemento devolvido para a entidade.</td><td>Não permitido.</td><td>Qualquer métrica vetorial regular suportada.</td></tr>
 <tr><td><code translate="no">sum</code></td><td>Somar todas as pontuações dos elementos devolvidos para a entidade.</td><td>Não permitido.</td><td>Apenas métricas de correlação positiva, tais como <code translate="no">IP</code> ou <code translate="no">COSINE</code>.</td></tr>
 <tr><td><code translate="no">avg</code></td><td>Calcular a média de todas as pontuações dos elementos devolvidos para a entidade.</td><td>Não permitido.</td><td>Qualquer métrica vetorial regular suportada.</td></tr>
-<tr><td><code translate="no">topk_sum</code></td><td>Some as melhores pontuações dos elementos devolvidos por « <code translate="no">K</code> » para a entidade.</td><td>Obrigatório e deve ser positivo.</td><td>Apenas métricas de correlação positiva, tais como « <code translate="no">IP</code> » ou « <code translate="no">COSINE</code> ».</td></tr>
+<tr><td><code translate="no">topk_sum</code></td><td>Some as melhores pontuações dos elementos devolvidos por « <code translate="no">K</code> » para a entidade.</td><td>Obrigatório e deve ser positivo.</td><td>Apenas métricas de correlação positiva, tais como <code translate="no">IP</code> ou <code translate="no">COSINE</code>.</td></tr>
 <tr><td><code translate="no">topk_avg</code></td><td>Calcular a média das melhores pontuações dos elementos devolvidos pelo « <code translate="no">K</code> » para a entidade.</td><td>Obrigatório e deve ser positivo.</td><td>Qualquer métrica vetorial regular suportada.</td></tr>
 </tbody>
 </table>
-<p>A função «Collapse» utiliza apenas os resultados dos elementos devolvidos por essa função « <code translate="no">AnnSearchRequest</code> » ao nível do elemento do StructArray. Não analisa todos os elementos Struct da entidade após a pesquisa ANN. Defina o parâmetro « <code translate="no">limit</code> » da solicitação num valor suficientemente elevado para disponibilizar os elementos que pretende para a função «Collapse».</p>
+<p>A função «Collapse» utiliza apenas os resultados dos elementos devolvidos por essa função « <code translate="no">AnnSearchRequest</code> » ao nível do elemento do StructArray. Não analisa todos os elementos do Struct na entidade após a pesquisa ANN. Defina o parâmetro « <code translate="no">limit</code> » da solicitação num valor suficientemente elevado para disponibilizar os elementos que pretende para a função «Collapse».</p>
 <h2 id="Add-filters-range-search-and-grouping" class="common-anchor-header">Adicionar filtros, pesquisa por intervalo e agrupamento<button data-href="#Add-filters-range-search-and-grouping" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -341,7 +341,7 @@ results = client.hybrid_search(
 <li><p><code translate="no">sum</code> e as estratégias de redução « <code translate="no">topk_sum</code> » requerem métricas de correlação positiva, tais como « <code translate="no">IP</code> » ou « <code translate="no">COSINE</code> ». Não as utilize com « <code translate="no">L2</code> ».</p></li>
 <li><p><code translate="no">topk_sum</code> e <code translate="no">topk_avg</code> requerem um valor positivo de <code translate="no">topk</code>. Outras estratégias de colapso não devem incluir <code translate="no">topk</code>.</p></li>
 <li><p>Os pedidos de StructArray ao nível de EmbeddingList não suportam pesquisa por intervalo nem agrupamento.</p></li>
-<li><p>A agrupamento híbrido só é suportada para pesquisas híbridas ao nível do elemento do mesmo StructArray e apenas por chave primária.</p></li>
+<li><p>A agrupamento híbrido é suportada apenas para pesquisas híbridas ao nível do elemento do mesmo StructArray e apenas por chave primária.</p></li>
 <li><p>Não combine a pesquisa por intervalo com a agrupamento por.</p></li>
 </ul>
 <h2 id="Common-mistakes" class="common-anchor-header">Erros comuns<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
@@ -364,7 +364,7 @@ results = client.hybrid_search(
 <li><p>Adicionar « <code translate="no">element_scope</code> » a « <code translate="no">chunks[emb_list_vector]</code> ». A pesquisa «EmbeddingList» já é ao nível da entidade.</p></li>
 <li><p>Presumir que dois campos StructArray partilham deslocamentos de elementos. O deslocamento <code translate="no">3</code> em <code translate="no">chunks</code> e o deslocamento <code translate="no">3</code> noutro campo StructArray correspondem a elementos diferentes, pelo que a solicitação híbrida passa a ser ao nível da entidade.</p></li>
 <li><p>Utilizar <code translate="no">topk_sum</code> com <code translate="no">L2</code>. Utilize <code translate="no">max</code>, <code translate="no">avg</code> ou <code translate="no">topk_avg</code> para métricas de distância negativas.</p></li>
-<li><p>Espera-se que os resultados híbridos ao nível da entidade incluam o deslocamento do elemento Struct selecionado após a recolocação.</p></li>
+<li><p>Espera-se que os resultados híbridos ao nível da entidade incluam o deslocamento do elemento Struct selecionado após a recolha.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Próximos passos<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"

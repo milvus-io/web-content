@@ -223,7 +223,7 @@ summary: 将 Milvus Standalone 部署（Docker Compose）的消息队列在 Rock
         ></path>
       </svg>
     </button></h3><ul>
-<li><strong>元数据（etcd）：</strong>Woodpecker 键的前缀通常为<code translate="no">woodpecker/...</code> 。通过<code translate="no">etcdctl get woodpecker --prefix</code> 查看该键，然后将其删除。</li>
+<li><strong>元数据（etcd）：</strong>Woodpecker 键的前缀通常为<code translate="no">woodpecker/...</code> 。请通过<code translate="no">etcdctl get woodpecker --prefix</code> 查看该键，然后将其删除。</li>
 <li><strong>存储数据：</strong>在<strong>MinIO 模式下</strong>，删除存储桶中<code translate="no">&lt;rootPath&gt;/wp/...</code> 下的日志数据（通常位于<code translate="no">files/wp/...</code> ）；在<strong>本地模式下</strong>，数据位于本地磁盘的<code translate="no">volumes/milvus/data/wp/...</code> 路径下。</li>
 </ul>
 <p>如果您计划稍后切换回 Woodpecker，请先清理这些文件以避免冲突。</p>
@@ -249,7 +249,7 @@ summary: 将 Milvus Standalone 部署（Docker Compose）的消息队列在 Rock
 <tbody>
 <tr><td>RocksMQ</td><td>Woodpecker (MinIO/本地)</td><td><strong>已支持</strong></td><td></td></tr>
 <tr><td>Woodpecker (MinIO/本地)</td><td>RocksMQ</td><td><strong>已支持</strong></td><td></td></tr>
-<tr><td>Woodpecker MinIO</td><td>Woodpecker 本地</td><td><strong>不支持</strong></td><td>在 Woodpecker 存储模式之间切换需要额外的元数据处理，目前尚不支持。</td></tr>
+<tr><td>Woodpecker MinIO</td><td>Woodpecker 本地</td><td><strong>不支持</strong></td><td>在 Woodpecker 存储模式之间切换需要额外的元数据处理，目前尚不支持此功能。</td></tr>
 <tr><td>Woodpecker 本地</td><td>Woodpecker MinIO</td><td><strong>不支持</strong></td><td>同上。</td></tr>
 <tr><td>RocksMQ / Woodpecker</td><td>外部 Pulsar / Kafka</td><td><strong>受支持但不推荐</strong></td><td>请尽可能简化独立实例的配置。</td></tr>
 </tbody>

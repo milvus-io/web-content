@@ -5,9 +5,9 @@ summary: >-
   Utilize esta página para efetuar uma pesquisa por intervalo nos subcampos
   vetoriais do StructArray. A pesquisa por intervalo devolve resultados
   vetoriais cuja pontuação ou distância se situa dentro de um intervalo
-  especificado. Para os campos StructArray, utilize a pesquisa por intervalo em
-  conjunto com a pesquisa vetorial ao nível dos elementos, em que cada elemento
-  Struct é pesquisado de forma independente.
+  especificado. No caso dos campos StructArray, utilize a pesquisa por intervalo
+  em conjunto com a pesquisa vetorial ao nível dos elementos, em que cada
+  elemento Struct é pesquisado de forma independente.
 ---
 <h1 id="Range-Search-with-StructArray" class="common-anchor-header">Pesquisa por intervalo com StructArray<button data-href="#Range-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"

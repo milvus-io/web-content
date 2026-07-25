@@ -39,7 +39,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Esta página utiliza uma coleção denominada « <code translate="no">tech_articles</code> ». Cada entidade representa um artigo técnico, e o campo « <code translate="no">chunks</code> » armazena dados ao nível do fragmento como elementos «Struct».</p>
+    </button></h2><p>Esta página utiliza uma coleção denominada « <code translate="no">tech_articles</code> ». Cada entidade representa um artigo técnico, e o campo « <code translate="no">chunks</code> » armazena dados ao nível de fragmentos como elementos Struct.</p>
 <table>
 <thead>
 <tr><th>Campo</th><th>Tipo</th><th>Finalidade</th></tr>
@@ -68,7 +68,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Um campo vetorial ou subcampo vetorial aceita apenas um índice. Se necessitar tanto da pesquisa EmbeddingList como da pesquisa ao nível do elemento, defina dois subcampos vetoriais separados. Neste exemplo, « <code translate="no">chunks[emb_list_vector]</code> » destina-se à pesquisa EmbeddingList e « <code translate="no">chunks[emb]</code> » destina-se à pesquisa ao nível do elemento.</p>
+<p>Um campo vetorial ou subcampo vetorial aceita apenas um índice. Se precisar tanto da pesquisa EmbeddingList como da pesquisa ao nível do elemento, defina dois subcampos vetoriais separados. Neste exemplo, « <code translate="no">chunks[emb_list_vector]</code> » destina-se à pesquisa EmbeddingList e « <code translate="no">chunks[emb]</code> » destina-se à pesquisa ao nível do elemento.</p>
 </div>
 <h2 id="Supported-subfield-data-types" class="common-anchor-header">Tipos de dados de subcampos suportados<button data-href="#Supported-subfield-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -105,7 +105,7 @@ summary: >-
 <tr><td><code translate="no">Array</code></td><td>Não suportado</td><td>Os subcampos JSON não são suportados nos campos StructArray.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Não suportado</td><td>Os subcampos de geometria e as funções GIS não são suportados nos campos StructArray.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Não suportado</td><td>Os subcampos de texto não são suportados nos campos StructArray.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Não suportado</td><td>Os subcampos «timestamptz» e as expressões específicas de hora não são suportados nos campos StructArray.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Não suportado</td><td>Os subcampos «Timestamptz» e as expressões específicas de hora não são suportados nos campos StructArray.</td></tr>
 <tr><td><code translate="no">Array</code>, <code translate="no">ArrayOfVector</code>, <code translate="no">Struct</code> ou <code translate="no">ArrayOfStruct</code></td><td>Não suportado</td><td>Um campo StructArray não pode conter matrizes aninhadas, matrizes vetoriais aninhadas, campos Struct aninhados ou campos Array-of-Struct aninhados.</td></tr>
 </tbody>
 </table>
@@ -265,7 +265,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus v3.0.x suporta campos StructArray nulos. Um campo StructArray nulo permite que uma entidade armazene valores ` <code translate="no">null</code> ` para todo o campo StructArray.</p>
+    </button></h2><p>O Milvus v3.0.x suporta campos StructArray nulos. Um campo StructArray nulo permite que uma entidade armazene valores do tipo « <code translate="no">null</code> » para todo o campo StructArray.</p>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;chunks&quot;</span>,
     datatype=DataType.ARRAY,
@@ -339,7 +339,7 @@ client.add_collection_struct_field(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Após a adição do campo StructArray, as entidades existentes devolvem ` <code translate="no">null</code> ` para o novo campo em todos os seus subcampos.</p>
-<p>Após a criação de um campo StructArray, não é possível adicionar novos subcampos a esse campo StructArray existente. Se, posteriormente, necessitar de atributos de elemento adicionais, chame <code translate="no">drop_collection_field()</code> para eliminar o campo StructArray e, em seguida, adicione um novo campo StructArray com o esquema Struct atualizado.</p>
+<p>Após a criação de um campo StructArray, não é possível adicionar novos subcampos a esse campo StructArray existente. Se necessitar de atributos de elemento adicionais posteriormente, chame <code translate="no">drop_collection_field()</code> para eliminar o campo StructArray e, em seguida, adicione um novo campo StructArray com o esquema Struct atualizado.</p>
 <pre><code translate="no" class="language-python">client.drop_collection_field(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
     field_name=<span class="hljs-string">&quot;chunks&quot;</span>,
@@ -427,7 +427,7 @@ client.add_collection_struct_field(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>Para inserir dados aninhados no campo StructArray, consulte <a href="/docs/pt/insert-data-into-structarray-fields.md">Inserir dados em campos StructArray</a>.</p></li>
+<li><p>Para inserir dados aninhados no campo StructArray, consulte <a href="/docs/pt/insert-data-into-structarray-fields.md">«Inserir dados em campos StructArray</a>».</p></li>
 <li><p>Para criar índices vetoriais e escalares, consulte <a href="/docs/pt/index-structarray-fields.md">«Indexar campos StructArray</a>».</p></li>
 <li><p>Para pesquisar subcampos vetoriais do StructArray, consulte «Pesquisa vetorial básica com StructArray».</p></li>
 <li><p>Para consultar os tipos de dados suportados, o comportamento nulo e as limitações específicas de cada versão, leia <a href="/docs/pt/structarray-limits.md">«Limites do StructArray</a>».</p></li>

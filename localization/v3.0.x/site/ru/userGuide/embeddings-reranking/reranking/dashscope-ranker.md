@@ -192,7 +192,7 @@ dashscope_ranker = Function(
    <tr>
      <td><p><code translate="no">queries</code></p></td>
      <td><p>Да</p></td>
-     <td><p>Список строк запроса, используемых моделью переранжирования для расчета показателей релевантности. Количество строк запроса должно совпадать с количеством запросов в поисковом запросе.</p></td>
+     <td><p>Список строк запроса, используемых моделью переранжирования для расчёта показателей релевантности. Количество строк запроса должно соответствовать количеству запросов в поисковом запросе.</p></td>
      <td><p><code translate="no">["renewable energy developments"]</code></p></td>
    </tr>
    <tr>
@@ -209,7 +209,7 @@ dashscope_ranker = Function(
    </tr>
 </table>
 <div class="alert note">
-<p>Общие параметры, общие для всех ранжировщиков моделей, такие как <code translate="no">provider</code> и <code translate="no">queries</code>, см. в разделе <a href="/docs/ru/model-ranker-overview.md#Create-a-model-ranker">«Создание ранжировщика моделей</a>».</p>
+<p>Общие параметры, общие для всех ранжеров моделей, такие как <code translate="no">provider</code> и <code translate="no">queries</code>, см. в разделе <a href="/docs/ru/model-ranker-overview.md#Create-a-model-ranker">«Создание ранжера моделей</a>».</p>
 </div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Применение к стандартному векторному поиску<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"

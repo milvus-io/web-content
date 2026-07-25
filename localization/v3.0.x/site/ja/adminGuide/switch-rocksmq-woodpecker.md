@@ -229,7 +229,7 @@ summary: >-
 <li><strong>ストレージデータ：</strong> <strong>MinIOモードの場合</strong>、バケット内の<code translate="no">&lt;rootPath&gt;/wp/...</code> 配下にあるログデータを削除します（通常は<code translate="no">files/wp/...</code> ）。<strong>ローカルモード</strong>の場合、データはローカルディスクの<code translate="no">volumes/milvus/data/wp/...</code> にあります。</li>
 </ul>
 <p>後でWoodpeckerに戻す予定がある場合は、競合を避けるために、まずこれらのファイルをクリーンアップしてください。</p>
-<h2 id="Supported-scenarios" class="common-anchor-header">サポートされているシナリオ<button data-href="#Supported-scenarios" class="anchor-icon" translate="no">
+<h2 id="Supported-scenarios" class="common-anchor-header">サポートされるシナリオ<button data-href="#Supported-scenarios" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

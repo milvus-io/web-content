@@ -25,7 +25,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>EmbeddingList-Suchstrategien legen fest, wie Milvus einen approximativen Kandidatenindex für die EmbeddingList-Suche erstellt. Die Standardstrategie ist „ <code translate="no">tokenann</code> “. Sie können zu „ <code translate="no">muvera</code> “ oder „ <code translate="no">lemur</code> “ wechseln, wenn die Embedding-Liste groß ist, „TokenANN“ zu rechenintensiv ist oder eine gelernte/komprimierte Darstellung auf Zeilenebene besser geeignet ist. Das Endergebnis wird weiterhin durch das MaxSim-Reranking ermittelt, wenn „ <code translate="no">emb_list_rerank</code> “ aktiviert ist.</p>
+    </button></h1><p>EmbeddingList-Suchstrategien legen fest, wie Milvus einen approximativen Kandidatenindex für die EmbeddingList-Suche erstellt. Die Standardstrategie ist „ <code translate="no">tokenann</code> “. Sie können zu „ <code translate="no">muvera</code> “ oder „ <code translate="no">lemur</code> “ wechseln, wenn die Embedding-Liste groß ist, „TokenANN“ zu rechenintensiv ist oder eine gelernte/komprimierte Darstellung auf Zeilenebene besser geeignet ist. Das Endergebnis wird weiterhin durch das MaxSim-Reranking erzeugt, wenn „ <code translate="no">emb_list_rerank</code> “ aktiviert ist.</p>
 <h2 id="Why-Search-Strategies-Exist" class="common-anchor-header">Warum es Suchstrategien gibt<button data-href="#Why-Search-Strategies-Exist" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,10 +42,10 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>„EmbeddingList“ ist für Zeilen konzipiert, die mehrere Vektoren enthalten, wie beispielsweise Token-Einbettungen in einem Textdokument, Patch-Einbettungen in einem visuellen Dokument oder Clip-Einbettungen in einem Video. Anstatt einen Abfragevektor mit einem Zeilenvektor zu vergleichen, vergleicht MaxSim eine Abfrage-Einbettungsliste mit einer Dokument-Einbettungsliste und aggregiert die besten Übereinstimmungen.</p>
-<p>Dies bietet eine bessere Repräsentationskraft, doch ein exakter MaxSim-Vorgang ist bei großem Umfang rechenintensiv. Eine Brute-Force-MaxSim-Suche müsste die Abfragevektoren mit jedem Vektor in jeder Kandidatenzeile vergleichen. Das ist für die Suche im Produktivbetrieb in der Regel zu langsam.</p>
+<p>Dies bietet eine bessere Repräsentationskraft, doch exaktes MaxSim ist bei großem Umfang rechenintensiv. Eine Brute-Force-MaxSim-Suche müsste die Abfragevektoren mit jedem Vektor in jeder Kandidatenzeile vergleichen. Das ist für die Suche in der Produktion in der Regel zu langsam.</p>
 <table>
 <thead>
-<tr><th>### Problem – Jede Zeile kann viele Vektoren enthalten. – Exaktes MaxSim über alle Zeilen hinweg ist rechenintensiv. – Indexgröße und Suchlatenz können schnell ansteigen.</th><th>### Strategie – Verwenden Sie eine approximative Abrufmethode in der ersten Stufe. – Rufen Sie mehr Kandidaten ab als die angeforderten Top-K. – Ordnen Sie die Kandidaten mit exaktem MaxSim neu.</th></tr>
+<tr><th>### Problem – Jede Zeile kann viele Vektoren enthalten. – Exaktes MaxSim über alle Zeilen ist rechenintensiv. – Indexgröße und Suchlatenz können schnell ansteigen.</th><th>### Strategie – Verwenden Sie eine approximative Abrufmethode in der ersten Stufe. – Rufen Sie mehr Kandidaten ab als die angeforderten Top-K. – Ordnen Sie die Kandidaten mit exakter MaxSim-Methode neu.</th></tr>
 </thead>
 <tbody>
 </tbody>
@@ -74,7 +74,7 @@ summary: >-
 <tbody>
 <tr><td><code translate="no">tokenann</code></td><td>Einzelne Vektoren innerhalb jeder Zeile</td><td>Behält die ursprünglichen Vektoren bei und vermeidet Kompressionsverluste.</td><td>Qualitätsorientierte Suche, kurze oder mittellange Einbettungslisten, Einbettungen mit hoher Unterscheidungskraft.</td><td>Größerer Index und höherer Aufwand beim Abruf von Kandidaten.</td></tr>
 <tr><td><code translate="no">muvera</code></td><td>Ein kodierter Vektor pro Zeile</td><td>Komprimiert eine Einbettungsliste ohne Training in eine FDE-Darstellung mit fester Dimension.</td><td>Längere Dokumente, Embeddings mit hoher Unterscheidungskraft, Fälle, in denen TokenANN zu ressourcenintensiv ist.</td><td>Die zufällige Projektion führt zu einem Approximationsverlust; die FDE-Dimension beeinflusst die Latenz.</td></tr>
-<tr><td><code translate="no">lemur</code></td><td>Ein gelernter Vektor pro Zeile</td><td>Lernt eine korpus-spezifische Komprimierung von Einbettungslisten zu festdimensionalen Zeilenvektoren.</td><td>Embeddings mit geringer Unterscheidungskraft, multimodale oder visuelle Dokumentensuche, große Einbettungslisten.</td><td>Erfordert Training und kann empfindlich auf die Korpusverteilung und Verzerrungen durch die Dokumentlänge reagieren.</td></tr>
+<tr><td><code translate="no">lemur</code></td><td>Ein gelernter Vektor pro Zeile</td><td>Lernt eine korpus-spezifische Komprimierung von Einbettungslisten zu festdimensionalen Zeilenvektoren.</td><td>Embeddings mit geringer Unterscheidungskraft, multimodale oder visuelle Dokumentensuche, große Embedding-Listen.</td><td>Erfordert Training und kann empfindlich gegenüber der Korpusverteilung und Verzerrungen durch die Dokumentlänge sein.</td></tr>
 </tbody>
 </table>
 <h2 id="TokenANN" class="common-anchor-header">TokenANN<button data-href="#TokenANN" class="anchor-icon" translate="no">
@@ -92,7 +92,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">tokenann</code> indiziert jeden Vektor in der Einbettungsliste. Während der Suche führt jeder Abfragevektor eine ANN-Abfrage durch, übereinstimmende Vektoren werden wieder zu ihren Zeilen zusammengefasst, und die resultierenden Zeilenkandidaten werden mit MaxSim neu gewertet.</p>
+    </button></h2><p><code translate="no">tokenann</code> indiziert jeden Vektor in der Einbettungsliste. Während der Suche führt jeder Abfragevektor eine ANN-Abfrage durch, übereinstimmende Vektoren werden wieder zu ihren Zeilen zusammengefasst, und die resultierenden Zeilenkandidaten werden mit MaxSim neu gereiht.</p>
 <div class="alert note">
 <p><strong>Verwenden Sie TokenANN, wenn Qualität oberste Priorität hat.</strong> Es ist die genaueste Annäherung an die ursprüngliche MaxSim-Berechnung, da alle Vektoren im Index der ersten Stufe verfügbar bleiben.</p>
 </div>
@@ -181,7 +181,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die folgende Tabelle listet die strategiespezifischen Konfigurationselemente auf. In Milvus werden Elemente zur Erstellungszeit üblicherweise beim Anlegen eines Indexes über die Map „ <code translate="no">params</code> “ übergeben. Wenn Sie serverseitige Standardwerte benötigen, sollten diese in der Milvus-Konfigurationsdatei im Abschnitt „ <code translate="no">knowhere</code> “ definiert werden.</p>
+    </button></h2><p>Die folgende Tabelle listet die strategiespezifischen Konfigurationselemente auf. In Milvus werden Elemente zur Erstellungszeit in der Regel beim Erstellen eines Indexes über die Map „ <code translate="no">params</code> “ übergeben. Wenn Sie serverseitige Standardwerte benötigen, sollten diese in der Milvus-Konfigurationsdatei im Abschnitt „ <code translate="no">knowhere</code> “ definiert werden.</p>
 <table>
 <thead>
 <tr><th>Strategie</th><th>Konfigurationselement</th><th>Stufe</th><th>Standard</th><th>Wann sollte es geändert werden</th></tr>
@@ -374,12 +374,12 @@ index_params.add_index(
 <li><p>Beginnen Sie mit „ <code translate="no">tokenann</code> “ als Qualitäts-Baseline, sofern die Größe des Datensatzes dies zulässt.</p></li>
 <li><p>Führen Sie dieselben Abfragen mit „ <code translate="no">muvera</code> “ durch und vergleichen Sie Recall, nDCG, Latenz und Indexgröße.</p></li>
 <li><p>Probieren Sie „ <code translate="no">lemur</code> “ aus, wenn die Einbettungsliste groß ist, der Einbettungsraum verrauscht ist oder es sich um visuelle oder multimodale Workloads handelt.</p></li>
-<li><p>Optimieren Sie „ <code translate="no">retrieval_ann_ratio</code> “, bevor Sie zu viele Parameter zur Erstellungszeit ändern. Erhöhen Sie den Wert, wenn der Recall niedrig ist; verringern Sie ihn, wenn die Latenz zu hoch ist.</p></li>
+<li><p>Optimieren Sie „ <code translate="no">retrieval_ann_ratio</code> “, bevor Sie zu viele Parameter bei der Erstellung ändern. Erhöhen Sie den Wert, wenn der Recall niedrig ist; verringern Sie ihn, wenn die Latenz zu hoch ist.</p></li>
 <li><p>Führen Sie die Validierung stets anhand repräsentativer Abfragen und Dokumentlängenverteilungen durch. Eine Strategie, die bei kurzen Texten funktioniert, funktioniert möglicherweise nicht bei visuellen Dokumenten oder Long-Tail-Korpora.</p></li>
 </ol>
 <table>
 <thead>
-<tr><th>### Qualität an erster Stelle: Beginnen Sie mit „ <code translate="no">tokenann</code> “. Verwenden Sie diesen Wert als Basis für die Approximationsqualität von MaxSim.</th><th>### Ausgewogen Probieren Sie „ <code translate="no">muvera</code> “ aus, wenn Sie geringere Kosten benötigen, ohne eine zusätzliche Trainingspipeline hinzuzufügen.</th><th>### Komprimiert Probieren Sie „ <code translate="no">lemur</code> “ aus, wenn eine gelernte Komprimierung auf Zeilenebene voraussichtlich eine bessere Leistung als eine feste zufällige Projektion erbringt.</th></tr>
+<tr><th>### Qualität an erster Stelle: Beginnen Sie mit „ <code translate="no">tokenann</code> “. Verwenden Sie diesen Wert als Basis für die Approximationsqualität von MaxSim.</th><th>### Ausgewogen Probieren Sie „ <code translate="no">muvera</code> “ aus, wenn Sie geringere Kosten benötigen, ohne eine zusätzliche Trainingspipeline einzurichten.</th><th>### Komprimiert Probieren Sie „ <code translate="no">lemur</code> “ aus, wenn eine gelernte Komprimierung auf Zeilenebene voraussichtlich besser abschneidet als eine feste zufällige Projektion.</th></tr>
 </thead>
 <tbody>
 </tbody>
@@ -401,7 +401,7 @@ index_params.add_index(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Milvus-Tests zu „ <code translate="no">emb_list_strategy</code> “, „ <code translate="no">retrieval_ann_ratio</code> “ und „ <code translate="no">emb_list_rerank</code> “.</p></li>
+<li><p>Milvus-Tests für „ <code translate="no">emb_list_strategy</code> “, „ <code translate="no">retrieval_ann_ratio</code> “ und „ <code translate="no">emb_list_rerank</code> “.</p></li>
 <li><p>Die Behandlung von Milvus-Konfigurationsdateien für serverseitige Index-Standardwerte im Abschnitt „ <code translate="no">knowhere</code> “.</p></li>
 <li><p>Knowhere-Parameterdefinitionen für Standardwerte und unterstützte Strategienamen.</p></li>
 <li><p>Knowhere-Kompatibilitätsprüfungen für die ausschließliche Unterstützung von fp32-basierten MUVERA/LEMUR sowie von DiskANN und TokenANN.</p></li>

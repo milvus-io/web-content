@@ -77,7 +77,7 @@ summary: >-
 <tr><td>حقل StructArray</td><td>تحتوي المجموعة على حقل StructArray مثل <code translate="no">chunks</code>.</td></tr>
 <tr><td>الحقل الفرعي للمتجه على مستوى العنصر</td><td>الحقل الفرعي للمتجه المستهدف هو <code translate="no">chunks[emb]</code> ، وليس <code translate="no">chunks[emb_list_vector]</code>.</td></tr>
 <tr><td>مقياس الفهرسة</td><td>يتم فهرسة الحقل الفرعي للمتجه باستخدام مقياس متجه عادي، مثل <code translate="no">COSINE</code> أو <code translate="no">IP</code> أو <code translate="no">L2</code>.</td></tr>
-<tr><td>بيانات الاستعلام</td><td>الاستعلام عبارة عن متجه عادي، وليس <code translate="no">EmbeddingList</code>.</td></tr>
+<tr><td>بيانات الاستعلام</td><td>الاستعلام هو متجه عادي، وليس <code translate="no">EmbeddingList</code>.</td></tr>
 </tbody>
 </table>
 <p>لإعداد الفهرس، راجع <a href="/docs/ar/index-structarray-fields.md">حقول StructArray في الفهرس</a>.</p>
@@ -103,7 +103,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td><code translate="no">L2</code></td><td>لا. المسافة الأقصر هي الأفضل.</td><td><code translate="no">range_filter &lt;= distance &lt; radius</code></td></tr>
-<tr><td><code translate="no">IP</code>، <code translate="no">COSINE</code></td><td>نعم. كلما زادت النتيجة كان ذلك أفضل.</td><td><code translate="no">radius &lt; distance &lt;= range_filter</code></td></tr>
+<tr><td><code translate="no">IP</code>، <code translate="no">COSINE</code></td><td>نعم. كلما زادت النتيجة، كان ذلك أفضل.</td><td><code translate="no">radius &lt; distance &lt;= range_filter</code></td></tr>
 </tbody>
 </table>
 <p>عند تعيين " <code translate="no">radius</code> " فقط، يعرض البحث عن النطاق النتائج التي تستوفي الحد الخارجي للمقياس. اختر القيم وفقًا لمقياس الدرجة أو المسافة الخاص بعمليات التضمين الخاصة بك.</p>
@@ -122,7 +122,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يبحث المثال التالي عن أجزاء فردية تكون متجهات <code translate="no">chunks[emb]</code> الخاصة بها مشابهة بدرجة كافية لمتجه الاستعلام. تمثل كل نتيجة مطابقة عنصر Struct مطابقًا.</p>
+    </button></h2><p>يبحث المثال التالي عن المجموعات الفردية التي تكون متجهات <code translate="no">chunks[emb]</code> الخاصة بها مشابهة بدرجة كافية لمتجه الاستعلام. تمثل كل نتيجة مطابقة عنصر Struct مطابقًا.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -305,7 +305,7 @@ results = client.hybrid_search(
       </svg>
     </button></h2><ul>
 <li><p>لا تستخدم استعلام " <code translate="no">EmbeddingList</code> " أو مقياس " <code translate="no">MAX_SIM*</code> " للبحث عن النطاق في الحقول الفرعية للمتجه StructArray. لا يدعم البحث على مستوى EmbeddingList البحث عن النطاق.</p></li>
-<li><p>لا تجمع بين البحث في النطاق والبحث المجمّع. إذا كنت بحاجة إلى نتيجة واحدة لكل كيان أبوي، فقم بتشغيل بحث على مستوى العناصر بدون معلمات النطاق واستخدم التجميع حيثما كان ذلك مدعومًا.</p></li>
+<li><p>لا تجمع بين البحث النطاقي والبحث التجميعي. إذا كنت بحاجة إلى نتيجة واحدة لكل كيان أبوي، فقم بتشغيل بحث على مستوى العناصر بدون معلمات النطاق واستخدم التجميع حيثما كان ذلك مدعومًا.</p></li>
 <li><p>يتم دعم البحث النطاقي المختلط لحقول المتجهات على مستوى العناصر في StructArray. ولا يتم دعمه لطلبات StructArray على مستوى EmbeddingList.</p></li>
 </ul>
 <h2 id="Common-mistakes" class="common-anchor-header">الأخطاء الشائعة<button data-href="#Common-mistakes" class="anchor-icon" translate="no">

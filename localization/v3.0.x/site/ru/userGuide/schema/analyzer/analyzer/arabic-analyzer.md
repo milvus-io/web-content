@@ -58,7 +58,7 @@ beta: Milvus 3.0.0+
      <td><p>Список дополнительных стоп-слов, которые следует исключить из токенизации. По умолчанию анализатор « <code translate="no">arabic</code> » использует встроенный словарь « <code translate="no">_arabic_</code> ». Чтобы ознакомиться со словарем по умолчанию, обратитесь к <a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/arabic.txt">списку арабских стоп-слов</a> Milvus. Этот список взят из <a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/ar/stopwords.txt">файла арабских стоп-слов</a> Apache Lucene.</p></td>
    </tr>
 </table>
-<p>Чтобы добавить пользовательские стоп-слова, включите <code translate="no">stop_words</code>:</p>
+<p>Чтобы добавить собственные стоп-слова, включите <code translate="no">stop_words</code>:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;arabic&quot;</span>,
     <span class="hljs-string">&quot;stop_words&quot;</span>: [<span class="hljs-string">&quot;ميلفوس&quot;</span>],

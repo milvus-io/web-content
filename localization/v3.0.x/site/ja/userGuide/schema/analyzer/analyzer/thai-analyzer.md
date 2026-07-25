@@ -19,7 +19,7 @@ beta: Milvus 3.0.0+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">thai</code> アナライザーは、タイ語テキスト用の組み込みアナライザーです。Milvusでタイ語テキストを単語単位に分割したり、タイ語の数字を正規化したり、混在するラテン文字を小文字に変換したり、タイ語のストップワードを除去したりする必要がある場合に、このアナライザーを使用してください。</p>
+    </button></h1><p><code translate="no">thai</code> アナライザーは、タイ語テキスト用の組み込みアナライザーです。Milvusにタイ語テキストの単語分割、タイ語の数字の正規化、混在するラテン文字の小文字変換、およびタイ語のストップワードの除去を行わせる必要がある場合は、このアナライザーを使用してください。</p>
 <h2 id="Configuration" class="common-anchor-header">設定<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,7 +53,7 @@ beta: Milvus 3.0.0+
      <td><p><code translate="no">stop_words</code></p></td>
      <td><p><code translate="no">list[str]</code></p></td>
      <td><p><code translate="no">_thai_</code></p></td>
-     <td><p>トークン化から除外する追加のストップワードのリスト。デフォルトでは、<code translate="no">thai</code> アナライザーは組み込みの<code translate="no">_thai_</code> 辞書を使用します。デフォルトの辞書を確認するには、Milvusの<a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/thai.txt">タイ語ストップワードリスト</a>を参照してください。このリストは、Apache Luceneの<a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/th/stopwords.txt">タイ語ストップワードファイル</a>に基づいています。</p></td>
+     <td><p>トークン化から除外する追加のストップワードのリスト。デフォルトでは、<code translate="no">thai</code> アナライザーは組み込みの<code translate="no">_thai_</code> 辞書を使用します。デフォルトの辞書を確認するには、<a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/thai.txt">Milvusタイ語ストップワードリスト</a>を参照してください。このリストは、Apache Luceneの<a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/th/stopwords.txt">タイ語ストップワードファイル</a>に基づいています。</p></td>
    </tr>
 </table>
 <p>カスタムストップワードを追加するには、<code translate="no">stop_words</code> を含めます：</p>

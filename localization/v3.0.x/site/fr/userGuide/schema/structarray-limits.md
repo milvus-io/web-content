@@ -44,7 +44,7 @@ summary: >-
 <tr><th>Domaine</th><th>Limite</th></tr>
 </thead>
 <tbody>
-<tr><td>Forme du schéma</td><td>Une structure (Struct) ne peut être utilisée que comme type d’élément d’un champ de type tableau (Array). La structure (Struct) n’est pas prise en charge en tant que champ de collection de niveau supérieur.</td></tr>
+<tr><td>Forme du schéma</td><td>Une structure (Struct) ne peut être utilisée que comme type d’élément d’un champ de type tableau (Array). La structure n’est pas prise en charge en tant que champ de collection de niveau supérieur.</td></tr>
 <tr><td>Schéma des sous-champs</td><td>Tous les éléments Struct d’un même champ StructArray partagent un schéma Struct prédéfini.</td></tr>
 <tr><td>La capacité</td><td><code translate="no">max_capacity</code> est obligatoire et limite le nombre d’éléments Struct qu’une entité peut stocker dans le champ StructArray.</td></tr>
 <tr><td>Modifications des sous-champs</td><td>Une fois qu’un champ StructArray a été créé, vous ne pouvez plus y ajouter de sous-champs.</td></tr>
@@ -100,7 +100,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Les sous-champs StructArray sont mappés à un stockage physique de type tableau. Le tableau suivant répertorie les types physiques pris en charge et non pris en charge.</p>
+    </button></h2><p>Les sous-champs StructArray sont mappés sur un stockage physique de type tableau. Le tableau suivant répertorie les types physiques pris en charge et non pris en charge.</p>
 <table>
 <thead>
 <tr><th>Type physique du sous-champ Struct</th><th>Prise en charge</th><th>Remarques</th></tr>
@@ -150,7 +150,7 @@ summary: >-
 <tr><td>Portée de la valeur nulle</td><td>La valeur nulle s'applique à l'ensemble du champ StructArray. Par exemple, <code translate="no">chunks=None</code> n'est valide que si <code translate="no">chunks</code> est de type « nullable ».</td></tr>
 <tr><td>Valeur StructArray partiellement nulle</td><td>Lorsqu’un champ StructArray contient une valeur de tableau valide, ne mélangez pas de sous-tableaux nuls avec des sous-tableaux valides au sein d’une même valeur.</td></tr>
 <tr><td>Ajout dynamique d’un champ StructArray</td><td>L'ajout d'un champ StructArray à une collection existante n'est pris en charge que dans les versions qui incluent la prise en charge des champs StructArray dynamiques.</td></tr>
-<tr><td>Exigence de nullabilité pour l’ajout dynamique</td><td>Un champ StructArray ajouté à une collection existante doit être nullable, car les entités existantes ne possèdent pas encore de valeur pour ce nouveau champ.</td></tr>
+<tr><td>Exigence de nullabilité pour l’ajout dynamique</td><td>Un champ StructArray ajouté à une collection existante doit être nullable, car les entités existantes ne disposent d’aucune valeur pour ce nouveau champ.</td></tr>
 <tr><td>Entités existantes après l'ajout dynamique</td><td>Les entités existantes renvoient la valeur « <code translate="no">null</code> » pour le champ StructArray ajouté, et ce pour chacun de ses sous-champs.</td></tr>
 </tbody>
 </table>
@@ -180,7 +180,7 @@ summary: >-
 <tr><td>Noms des sous-champs</td><td>À l’intérieur de chaque objet Struct, utilisez des noms de sous-champs tels que <code translate="no">text</code> et <code translate="no">emb</code>, et non des chemins d’accès tels que <code translate="no">chunks[text]</code>.</td></tr>
 <tr><td>Conformité au schéma</td><td>Chaque élément Struct doit respecter le schéma Struct.</td></tr>
 <tr><td>Capacité</td><td>Le nombre d’éléments Struct dans une entité ne doit pas dépasser <code translate="no">max_capacity</code>.</td></tr>
-<tr><td>Dimensions des vecteurs</td><td>Les valeurs vectorielles doivent respecter l’ <code translate="no">dim</code> configurée pour leurs sous-champs vectoriels.</td></tr>
+<tr><td>Dimensions des vecteurs</td><td>Les valeurs vectorielles doivent correspondre à l’ <code translate="no">dim</code> configurée pour leurs sous-champs vectoriels.</td></tr>
 <tr><td>Duplication en mode recherche</td><td>Si vous avez besoin à la fois de la recherche EmbeddingList et de la recherche au niveau des éléments, enregistrez les vecteurs dans deux sous-champs vectoriels distincts.</td></tr>
 </tbody>
 </table>
@@ -206,7 +206,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>Recherche EmbeddingList</td><td><code translate="no">MAX_SIM</code>, <code translate="no">MAX_SIM_COSINE</code>, <code translate="no">MAX_SIM_IP</code>, <code translate="no">MAX_SIM_L2</code>, ou métriques binaires <code translate="no">MAX_SIM_*</code> </td><td>Résultats au niveau de l’entité.</td></tr>
-<tr><td>Recherche au niveau des éléments</td><td>Métriques vectorielles classiques telles que <code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">COSINE</code>, <code translate="no">HAMMING</code> ou <code translate="no">JACCARD</code></td><td>Résultats au niveau des éléments pouvant inclure l’offset de l’élément correspondant.</td></tr>
+<tr><td>Recherche au niveau des éléments</td><td>Métriques vectorielles classiques telles que <code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">COSINE</code>, <code translate="no">HAMMING</code>, ou <code translate="no">JACCARD</code></td><td>Résultats au niveau des éléments pouvant inclure l’offset de l’élément correspondant.</td></tr>
 </tbody>
 </table>
 <p>Utilisez des sous-champs vectoriels distincts lorsque les deux modes sont requis. Par exemple, utilisez <code translate="no">chunks[emb_list_vector]</code> pour la recherche EmbeddingList et <code translate="no">chunks[emb]</code> pour la recherche au niveau des éléments.</p>
@@ -232,11 +232,11 @@ summary: >-
 <tr><th>Comportement de recherche</th><th>Prise en charge et limites</th></tr>
 </thead>
 <tbody>
-<tr><td>Recherche EmbeddingList de base</td><td>Prise en charge sur les sous-champs vectoriels StructArray indexés à l’aide de métriques de type « <code translate="no">MAX_SIM*</code> ». Renvoie des résultats au niveau de l’entité.</td></tr>
-<tr><td>Recherche de base au niveau des éléments</td><td>Prise en charge sur les sous-champs vectoriels StructArray indexés à l'aide de métriques vectorielles standard. Peut renvoyer les offsets des éléments correspondants.</td></tr>
+<tr><td>Recherche EmbeddingList de base</td><td>Prise en charge sur les sous-champs vectoriels StructArray indexés à l'aide de métriques de type « <code translate="no">MAX_SIM*</code> ». Renvoie des résultats au niveau des entités.</td></tr>
+<tr><td>Recherche de base au niveau des éléments</td><td>Prise en charge sur les sous-champs vectoriels StructArray indexés à l'aide de métriques vectorielles classiques. Peut renvoyer les décalages des éléments correspondants.</td></tr>
 <tr><td>Recherche par plage</td><td>Prise en charge en fonction du mode de recherche et de la prise en charge des index/métriques de la version cible. Pour connaître le comportement de la recherche par plage dans le cadre des requêtes StructArray au niveau des éléments, vérifiez votre version cible.</td></tr>
-<tr><td>Recherche par regroupement</td><td>La recherche groupée au niveau des éléments peut renvoyer des indices. Le comportement de la recherche hybride avec regroupement pour les requêtes StructArray au niveau des éléments dépend de la version.</td></tr>
-<tr><td>Recherche hybride</td><td>Une requête de recherche hybride ne peut inclure des requêtes de sous-champs vectoriels StructArray que si la version cible prend en charge cette combinaison de recherche. Chaque requête suit toujours la famille de métriques du sous-champ vectoriel indexé.</td></tr>
+<tr><td>Recherche par regroupement</td><td>La recherche groupée au niveau des éléments peut renvoyer des indices de position. Le comportement de la recherche groupée hybride pour les requêtes StructArray au niveau des éléments dépend de la version.</td></tr>
+<tr><td>Recherche hybride</td><td>Une requête de recherche hybride ne peut inclure des requêtes sur des sous-champs vectoriels StructArray que si la version cible prend en charge cette combinaison de recherche. Chaque requête suit toujours la famille de métriques du sous-champ vectoriel indexé.</td></tr>
 <tr><td>Sortie de décalage</td><td>Les décalages sont disponibles pour les résultats de recherche au niveau des éléments. La recherche EmbeddingList renvoie des résultats au niveau des entités et n’utilise pas les décalages d’éléments comme unité de résultat principale.</td></tr>
 </tbody>
 </table>

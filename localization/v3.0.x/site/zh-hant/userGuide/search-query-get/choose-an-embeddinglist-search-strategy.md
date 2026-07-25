@@ -3,7 +3,7 @@ id: choose-an-embeddinglist-search-strategy.md
 title: 選擇 EmbeddingList 搜尋策略
 summary: >-
   EmbeddingList 搜尋策略決定 Milvus 如何為 EmbeddingList 搜尋建立近似候選索引。預設策略為
-  tokenann。當嵌入清單規模龐大、TokenANN 的運算成本過高，或是學習所得／壓縮的列級表示法更為適合時，您可以切換至 muvera 或
+  tokenann。當嵌入清單規模龐大、TokenANN 的運算成本過高，或是學習所得／壓縮的行級表示法更為適合時，您可以切換至 muvera 或
   lemur。 當啟用 `emb_list_rerank` 時，最終結果仍由 MaxSim 重新排序產生。
 ---
 <h1 id="Choose-an-EmbeddingList-Search-Strategy" class="common-anchor-header">選擇 EmbeddingList 搜尋策略<button data-href="#Choose-an-EmbeddingList-Search-Strategy" class="anchor-icon" translate="no">
@@ -38,7 +38,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>EmbeddingList 專為包含多個向量的行而設計，例如文字文件中的詞元嵌入、視覺文件中的片段嵌入，或是影片中的片段嵌入。MaxSim 並非將一個查詢向量與一個行向量進行比對，而是將查詢嵌入清單與文件嵌入清單進行比對，並彙總最佳匹配結果。</p>
-<p>這提供了更強的表徵能力，但大規模執行精確 MaxSim 運算的開銷過高。若採用暴力搜尋方式執行 MaxSim，則需將查詢向量與每個候選列中的每個向量進行比對。這通常會導致生產環境中的搜尋速度過慢。</p>
+<p>這提供了更強的表徵能力，但大規模執行精確 MaxSim 運算的開銷過高。若採用暴力搜尋方式執行 MaxSim，則需將查詢向量與每個候選列中的每個向量進行比對，這通常會導致生產環境中的搜尋速度過慢。</p>
 <table>
 <thead>
 <tr><th>### 問題 - 每行可能包含多個向量。 - 對所有行執行精確 MaxSim 運算成本過高。 - 索引大小與搜尋延遲可能迅速增加。</th><th>### 策略 - 採用近似的第一階段檢索方法。 - 檢索的候選項目數量多於請求的 topK。 - 透過精確 MaxSim 對候選項目進行重新排序。</th></tr>
@@ -46,7 +46,7 @@ summary: >-
 <tbody>
 </tbody>
 </table>
-<p>從這個角度來看，<code translate="no">emb_list_strategy</code> 主要是一種索引建置與候選項檢索策略。它在建置索引時進行配置，並決定如何產生第一階段的 ANN 候選集。隨後，搜尋時期的參數（例如<code translate="no">retrieval_ann_ratio</code> 和<code translate="no">emb_list_rerank</code> ）將控制檢索的候選項數量，以及是否套用 MaxSim 重新排序。</p>
+<p>從這個角度來看，<code translate="no">emb_list_strategy</code> 主要是一種索引建置與候選項檢索策略。該策略在建置索引時進行配置，並決定如何產生第一階段的 ANN 候選集。隨後，搜尋時的參數（例如<code translate="no">retrieval_ann_ratio</code> 和<code translate="no">emb_list_rerank</code> ）將控制檢索的候選項數量，以及是否套用 MaxSim 重新排序。</p>
 <hr>
 <h2 id="Available-Strategies" class="common-anchor-header">可用策略<button data-href="#Available-Strategies" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -70,7 +70,7 @@ summary: >-
 <tbody>
 <tr><td><code translate="no">tokenann</code></td><td>每行內的個別向量</td><td>保留原始向量，避免壓縮損失。</td><td>以品質為優先的搜尋、短或中長度的嵌入清單、高辨別力的嵌入向量。</td><td>索引較大，且候選項檢索成本較高。</td></tr>
 <tr><td><code translate="no">muvera</code></td><td>每行一個編碼向量</td><td>無需訓練即可將嵌入清單壓縮為固定維度的 FDE 表示形式。</td><td>適用於較長的文件、高辨別力的嵌入向量，以及 TokenANN 過於耗資源的情況。</td><td>隨機投影會引入近似誤差；FDE 維度會影響延遲。</td></tr>
-<tr><td><code translate="no">lemur</code></td><td>每行一個學習得出的向量</td><td>從嵌入向量列表學習針對特定語料庫的壓縮方法，將其轉換為固定維度的行向量。</td><td>低辨別度嵌入向量、多模態或視覺文件檢索、大型嵌入向量清單。</td><td>需要進行訓練，且可能受語料庫分佈及文件長度偏誤的影響。</td></tr>
+<tr><td><code translate="no">lemur</code></td><td>每行一個學習得出的向量</td><td>從嵌入向量列表學習針對特定語料庫的壓縮方法，將其轉換為固定維度的行向量。</td><td>低辨別度嵌入向量、多模態或視覺文檔檢索、大型嵌入向量列表。</td><td>需要進行訓練，且可能受語料庫分佈及文件長度偏誤的影響。</td></tr>
 </tbody>
 </table>
 <h2 id="TokenANN" class="common-anchor-header">TokenANN<button data-href="#TokenANN" class="anchor-icon" translate="no">
@@ -95,7 +95,7 @@ summary: >-
 <ul>
 <li><p><strong>適用情境：</strong>短篇文字片段、向量數量較少或適中的行、強烈的標記層級語義分離、對品質要求嚴苛的基準測試。</p></li>
 <li><p><strong>較不適用：</strong>極長的文件、含有數千個片段向量的視覺頁面，以及記憶體或延遲資源嚴格受限的情境。</p></li>
-<li><p><strong>元素層級行為：</strong>TokenANN 可在將向量彙總回列之前，先從個別向量中檢索候選項。經過 MaxSim 評分後，最終的 EmbeddingList 搜尋結果仍為列層級。</p></li>
+<li><p><strong>元素層級行為：</strong>TokenANN 可在將向量彙總回列之前，從個別向量中檢索候選結果。經過 MaxSim 評分後，最終的 EmbeddingList 搜尋結果仍為列層級。</p></li>
 </ul>
 <h2 id="MUVERA" class="common-anchor-header">MUVERA<button data-href="#MUVERA" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -118,7 +118,7 @@ summary: >-
 </div>
 <ul>
 <li><p><strong>適用情境：</strong>長篇文本文件、高辨別力的嵌入空間，以及需要比 TokenANN 更小索引大小的作業負載。</p></li>
-<li><p><strong>較不適用：</strong>低辨別度的嵌入空間，或當 FDE 表示法維度過高以致超出延遲預算的情況。</p></li>
+<li><p><strong>較不適用：</strong>低辨別力的嵌入空間，或當 FDE 表示法因維度過高而超出延遲預算的情況。</p></li>
 <li><p><strong>重要參數：</strong><code translate="no">muvera_num_projections</code> 、<code translate="no">muvera_num_repeats</code> 以及<code translate="no">muvera_seed</code> 。</p></li>
 </ul>
 <h2 id="LEMUR" class="common-anchor-header">LEMUR<button data-href="#LEMUR" class="anchor-icon" translate="no">
@@ -138,10 +138,10 @@ summary: >-
       </svg>
     </button></h2><p><code translate="no">lemur</code> 透過訓練模型，將每個嵌入清單壓縮為固定維度的表示。第一階段的 ANN 搜尋會針對已學習的行級向量進行，並使用 MaxSim 對候選結果進行重新排序。</p>
 <div class="alert note">
-<p><strong>當學習壓縮的效益足以抵銷訓練成本時，建議使用 LEMUR。</strong>它對於低辨別度嵌入空間和多模態檢索效果良好，但由於其對文件長度分佈較為敏感，因此應針對目標語料庫進行驗證。</p>
+<p><strong>當學習壓縮的效益足以抵銷訓練成本時，建議使用 LEMUR。</strong>它對於低辨別度嵌入空間和多模態檢索效果良好，但應針對目標語料庫進行驗證，因為其效果可能受文件長度分佈的影響。</p>
 </div>
 <ul>
-<li><p><strong>適用情境：</strong>視覺文件檢索、多模態片段嵌入、低區分度嵌入空間，以及 TokenANN 難以實作的大型嵌入清單。</p></li>
+<li><p><strong>適用情境：</strong>視覺文件檢索、多模態片段嵌入、低區分度嵌入空間，以及 TokenANN 難以實行的龐大嵌入清單。</p></li>
 <li><p><strong>較不適用：</strong>頻繁變動的語料庫、文件長度高度偏斜的高區分度嵌入空間，以及訓練成本無法接受的工作負載。</p></li>
 <li><p><strong>重要參數：</strong><code translate="no">lemur_hidden_dim</code> 、<code translate="no">lemur_num_train_samples</code> 、<code translate="no">lemur_num_epochs</code> 、<code translate="no">lemur_batch_size</code> 、<code translate="no">lemur_learning_rate</code> 、<code translate="no">lemur_seed</code> 以及<code translate="no">lemur_num_layers</code> 。</p></li>
 </ul>
@@ -194,7 +194,7 @@ summary: >-
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_num_epochs</code></td><td>索引建置</td><td><code translate="no">50</code></td><td>若訓練尚未收斂，請增加；若建置時間是主要限制因素，則減少。</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_batch_size</code></td><td>索引建置</td><td><code translate="no">512</code></td><td>請根據訓練吞吐量與記憶體使用量進行調整。</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_learning_rate</code></td><td>索引建置</td><td><code translate="no">0.001</code></td><td>當訓練不穩定或收斂過慢時進行調整。</td></tr>
-<tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_seed</code></td><td>索引建置</td><td><code translate="no">42</code></td><td>設定此選項以確保訓練執行結果可重現。</td></tr>
+<tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_seed</code></td><td>索引建置</td><td><code translate="no">42</code></td><td>設定此選項以確保訓練結果可重現。</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_num_layers</code></td><td>建立索引</td><td><code translate="no">2</code></td><td>僅在語料庫需要更具表現力的特徵提取器，且您能負擔額外訓練成本時才增加。</td></tr>
 <tr><td>所有策略</td><td><code translate="no">retrieval_ann_ratio</code></td><td>搜尋</td><td><code translate="no">3.0</code></td><td>增加此參數可檢索更多第一階段候選項並提升召回率；減少此參數則可降低延遲。</td></tr>
 <tr><td>所有策略</td><td><code translate="no">emb_list_rerank</code></td><td>搜尋</td><td><code translate="no">true</code></td><td>請保持啟用狀態以進行 MaxSim 重新排序。僅在直接測量第一階段人工神經網路（ANN）品質的受控實驗中才應停用。</td></tr>
@@ -274,7 +274,7 @@ index_params.add_index(
       <span class="hljs-attr">emb_list_rerank:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>建議優先使用「每索引」參數來選擇策略。</strong>Milvus 配置檔中的預設值會廣泛套用至該類型與階段的所有索引。當不同集合或欄位需要不同的 EmbeddingList 策略時，請使用<code translate="no">create_index</code> 中的參數。</p>
+<p><strong>建議優先使用「按索引」的參數來選擇策略。</strong>Milvus 配置檔中的預設值會廣泛套用至該類型與階段的所有索引。當不同集合或欄位需要不同的 EmbeddingList 策略時，請使用<code translate="no">create_index</code> 中的參數。</p>
 </div>
 <h2 id="Configure-Candidate-Retrieval-at-Search-Time" class="common-anchor-header">於搜尋時配置候選結果檢索<button data-href="#Configure-Candidate-Retrieval-at-Search-Time" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -291,7 +291,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>策略決定索引的建置方式。在搜尋時，請使用<code translate="no">retrieval_ann_ratio</code> 來控制在進行 MaxSim 重新排序之前，會檢索多少個第一階段候選結果。較高的數值通常能提升召回率，但會增加延遲。</p>
+    </button></h2><p>策略決定索引的建置方式。在搜尋時，請使用<code translate="no">retrieval_ann_ratio</code> 來控制在進行 MaxSim 重新排序之前，應檢索多少個第一階段候選結果。較高的數值通常能提升召回率，但會增加延遲。</p>
 <pre><code translate="no" class="language-python">results = client.search(
     collection_name=collection_name,
     data=[query_embedding_list],
@@ -346,7 +346,7 @@ index_params.add_index(
 <tr><td>各列的向量數量是較少還是適中？</td><td>每行包含少量標記、片段或片段向量。</td><td><code translate="no">tokenann</code></td></tr>
 <tr><td>TokenANN 是否過大或過慢？</td><td>索引大小或第一階段檢索延遲是瓶頸。</td><td><code translate="no">muvera</code></td></tr>
 <tr><td>您是否希望在不進行訓練的情況下進行壓縮？</td><td>您需要更簡單的運作模型和可重現的編碼方式。</td><td><code translate="no">muvera</code></td></tr>
-<tr><td>嵌入空間的辨別能力是否不足？</td><td>標記層級的 ANN 候選模型存在噪聲，且隨機投影無法保留足夠的訊號。</td><td><code translate="no">lemur</code></td></tr>
+<tr><td>嵌入空間的辨別能力是否不足？</td><td>標記層級的 ANN 候選模型存在噪訊，且隨機投影無法保留足夠的訊號。</td><td><code translate="no">lemur</code></td></tr>
 <tr><td>工作負載屬於視覺型還是多模態型？</td><td>行中包含許多片段向量，而 TokenANN 的運算成本過高。</td><td><code translate="no">lemur</code> 或<code translate="no">muvera</code></td></tr>
 <tr><td>文件長度是否存在高度偏斜？</td><td>某些行所含的向量遠多於其他行。</td><td>請先從<code translate="no">muvera</code> 開始；並仔細驗證<code translate="no">lemur</code> 。</td></tr>
 </tbody>
@@ -369,8 +369,8 @@ index_params.add_index(
     </button></h2><ol>
 <li><p>當資料集大小允許時，請以<code translate="no">tokenann</code> 作為品質基準。</p></li>
 <li><p>使用<code translate="no">muvera</code> 執行相同的查詢，並比較召回率、nDCG、延遲及索引大小。</p></li>
-<li><p>當嵌入清單龐大、嵌入空間雜訊較多，或工作負載屬視覺或多模態時，請嘗試使用<code translate="no">lemur</code> 。</p></li>
-<li><p>在調整過多建置時參數之前，請先微調 `<code translate="no">retrieval_ann_ratio</code> `。若召回率偏低，請增加該參數；若延遲過高，請減少該參數。</p></li>
+<li><p>當嵌入清單龐大、嵌入空間雜訊較多，或工作負載屬視覺或多模態性質時，請嘗試使用<code translate="no">lemur</code> 。</p></li>
+<li><p>在調整過多建置時參數之前，請先微調 `<code translate="no">retrieval_ann_ratio</code> `。若召回率偏低，請增加該參數；若延遲過高，則應減少該參數。</p></li>
 <li><p>務必使用具代表性的查詢及文件長度分佈進行驗證。適用於短文本的策略，未必適用於視覺文件或長尾語料庫。</p></li>
 </ol>
 <table>
@@ -404,5 +404,5 @@ index_params.add_index(
 <li><p>針對 MaxSim 候選結果檢索，比較 TokenANN、MUVERA 和 LEMUR 的內部評估筆記。</p></li>
 </ul>
 <div class="alert note">
-<p><strong>發佈須知：</strong>在對外發佈前，請確認目標 Milvus 版本中哪些參數獲得官方支援，以及該產品是打算公開所有低階 Knowhere 參數，還是僅公開較小且已文件化的子集。</p>
+<p><strong>發佈須知：</strong>在對外發佈前，請確認目標 Milvus 版本中哪些參數獲得官方支援，以及該產品是打算公開所有低階 Knowhere 參數，還是僅公開較小的已文件化子集。</p>
 </div>

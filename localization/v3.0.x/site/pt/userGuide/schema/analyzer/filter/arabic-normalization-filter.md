@@ -38,9 +38,9 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Para texto em árabe, utilize o <a href="/docs/pt/arabic-analyzer.md"><code translate="no">arabic</code></a> na maioria dos casos. O analisador integrado inclui este filtro juntamente com a tokenização padrão, a conversão para minúsculas, a normalização de algarismos decimais, o stemming árabe e a remoção de palavras-vazio árabes. Utilize o « <code translate="no">arabic_normalization</code> » diretamente apenas quando precisar de criar um pipeline de analisadores personalizado.</p>
+<p>Para texto em árabe, utilize o <a href="/docs/pt/arabic-analyzer.md"><code translate="no">arabic</code></a> na maioria dos casos. O analisador integrado inclui este filtro juntamente com a tokenização padrão, a conversão para minúsculas, a normalização de dígitos decimais, o stemming árabe e a remoção de palavras-vazio em árabe. Utilize o « <code translate="no">arabic_normalization</code> » diretamente apenas quando precisar de criar um pipeline de analisadores personalizado.</p>
 </div>
-<p>Para utilizar o filtro « <code translate="no">arabic_normalization</code> » num analisador personalizado, adicione-o à secção « <code translate="no">filter</code> » em « <code translate="no">analyzer_params</code> »:</p>
+<p>Para utilizar o filtro « <code translate="no">arabic_normalization</code> » num analisador personalizado, adicione-o à secção « <code translate="no">filter</code> » em <code translate="no">analyzer_params</code>:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;arabic_normalization&quot;</span>],

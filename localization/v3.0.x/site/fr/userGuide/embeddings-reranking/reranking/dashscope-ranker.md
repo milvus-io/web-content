@@ -42,7 +42,7 @@ beta: Milvus 2.6.x
 <ul>
 <li><p>Une collection Milvus comportant un champ « <code translate="no">VARCHAR</code> » contenant le texte à reclasser.</p></li>
 <li><p>Une clé API DashScope valide.</p></li>
-<li><p>L'accès à un modèle de reclassement DashScope, tel que <code translate="no">gte-rerank-v2</code>.</p></li>
+<li><p>L'accès à un modèle de reclassement DashScope, tel que « <code translate="no">gte-rerank-v2</code> ».</p></li>
 </ul>
 <p>Pour connaître les modèles de reclassement disponibles et les points de terminaison régionaux, consultez <a href="https://www.alibabacloud.com/help/en/model-studio/text-rerank-api">l’API de reclassement de texte d’Alibaba Cloud Model Studio</a>.</p>
 <h2 id="Configure-credentials" class="common-anchor-header">Configurer les identifiants<button data-href="#Configure-credentials" class="anchor-icon" translate="no">

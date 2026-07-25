@@ -95,7 +95,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在混合搜尋中，針對 StructArray 向量子欄位的 EmbeddingList 搜尋屬於實體層級。其運作方式類似實體層級的向量搜尋請求，且不會回傳單一匹配的 Struct 元素偏移量。</p>
+    </button></h2><p>在混合搜尋中，針對 StructArray 向量子欄位的 EmbeddingList 搜尋屬於實體層級。其運作方式類似實體層級的向量搜尋請求，且不會返回單一匹配的 Struct 元素偏移量。</p>
 <pre><code translate="no">from pymilvus import AnnSearchRequest, MilvusClient, RRFRanker
 from pymilvus.client.embedding_list import EmbeddingList
 
@@ -208,7 +208,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><p>若混合搜尋同時包含 StructArray 元素層級的<code translate="no">AnnSearchRequest</code> ，以及集合層級的向量請求、EmbeddingList 請求，或位於不同 StructArray 欄位下的元素層級請求，則最終候選範圍為實體層級。在此情況下，每個 StructArray 元素層級的<code translate="no">AnnSearchRequest</code> 都會在混合重新排序前，彙總為實體層級的候選項目。</p>
-<p>當您需要控制如何彙總來自同一實體的多個匹配元素時，請在 StructArray 元素層級<code translate="no">AnnSearchRequest</code> 的<code translate="no">params</code> 中使用<code translate="no">element_scope</code> 。</p>
+<p>當您需要控制如何彙總來自同一實體的多個匹配元素時，請在 StructArray 元素層級<code translate="no">AnnSearchRequest</code> 的<code translate="no">params</code> 內使用<code translate="no">element_scope</code> 。</p>
 <pre><code translate="no">title_req = AnnSearchRequest(
     data=[query_vector],
     anns_field=<span class="hljs-string">&quot;title_vector&quot;</span>,
@@ -247,7 +247,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>在此範例中，<code translate="no">title_req</code> 為實體層級，因此最終的混合結果亦為實體層級。<code translate="no">chunk_req</code> 請求會先從<code translate="no">chunks[emb]</code> 返回元素命中結果，接著透過匯總來自同一實體的回傳元素中最佳的三個元素分數，來彙總這些元素。若在需要實體層級彙總時省略<code translate="no">element_scope</code> ，彙總策略將預設為<code translate="no">max</code> 。</p>
+<p>在此範例中，<code translate="no">title_req</code> 為實體層級，因此最終的混合結果亦為實體層級。<code translate="no">chunk_req</code> 請求會先從<code translate="no">chunks[emb]</code> 返回元素命中結果，接著透過將來自同一實體的返回元素中最佳的三個元素分數相加，來彙總這些元素。若在需要實體層級彙總時省略<code translate="no">element_scope</code> ，彙總策略將預設為<code translate="no">max</code> 。</p>
 <h2 id="Choose-a-collapse-strategy" class="common-anchor-header">選擇彙總策略<button data-href="#Choose-a-collapse-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -275,7 +275,7 @@ results = client.hybrid_search(
 <tr><td><code translate="no">topk_avg</code></td><td>對該實體所返回的最佳<code translate="no">K</code> 元素分數求平均值。</td><td>此參數為必填且必須為正數。</td><td>任何受支援的常規向量指標。</td></tr>
 </tbody>
 </table>
-<p>Collapse 僅使用該 StructArray 元素級別<code translate="no">AnnSearchRequest</code> 所返回的元素命中結果。它在 ANN 搜尋後不會掃描實體中的每個 Struct 元素。請將請求的<code translate="no">limit</code> 設定得足夠高，以確保您希望用於 Collapse 的元素可用。</p>
+<p>Collapse 僅使用該 StructArray 元素級別<code translate="no">AnnSearchRequest</code> 所返回的元素命中結果。它在 ANN 搜尋後不會掃描實體中的每個 Struct 元素。請將請求的<code translate="no">limit</code> 設定得足夠高，以確保您希望用於 Collapse 的元素可供使用。</p>
 <h2 id="Add-filters-range-search-and-grouping" class="common-anchor-header">新增篩選器、範圍搜尋與分組<button data-href="#Add-filters-range-search-and-grouping" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -362,7 +362,7 @@ results = client.hybrid_search(
 <li><p>將 `<code translate="no">element_scope</code> ` 新增至 `<code translate="no">chunks[emb_list_vector]</code>`。`EmbeddingList` 搜尋本身已是實體層級的。</p></li>
 <li><p>假設兩個 StructArray 欄位共享元素偏移量。<code translate="no">chunks</code> 中的偏移量<code translate="no">3</code> 與另一個 StructArray 欄位中的偏移量<code translate="no">3</code> 對應不同的元素，因此混合請求將轉為實體層級。</p></li>
 <li><p>若使用<code translate="no">topk_sum</code> 搭配<code translate="no">L2</code> ，請使用<code translate="no">max</code> 、<code translate="no">avg</code> 或<code translate="no">topk_avg</code> 來處理負數距離度量值。</p></li>
-<li><p>預期實體層級的混合結果在摺疊後將包含所選 Struct 元素的偏移量。</p></li>
+<li><p>預期實體層級的混合結果在摺疊後將包含所選的 Struct 元素偏移量。</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">後續步驟<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"

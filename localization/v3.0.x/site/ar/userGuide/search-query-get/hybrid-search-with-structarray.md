@@ -45,14 +45,14 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>حقل متجه على مستوى المجموعة + الحقل الفرعي EmbeddingList في StructArray</td><td>مستوى الكيان</td><td>يتم فهرسة المرشحين النهائيين حسب المفتاح الأساسي.</td><td>لا تستخدم.</td></tr>
-<tr><td>حقل متجه على مستوى المجموعة + حقل فرعي على مستوى عنصر StructArray</td><td>مستوى الكيان</td><td>يتم طي النتائج على مستوى العنصر إلى مرشحين على مستوى الكيان قبل إعادة الترتيب الهجين.</td><td>تكوين طي اختياري على مستوى عنصر StructArray <code translate="no">AnnSearchRequest</code>.</td></tr>
+<tr><td>حقل متجه على مستوى المجموعة + حقل فرعي على مستوى عنصر StructArray</td><td>مستوى الكيان</td><td>يتم طي النتائج على مستوى العنصر إلى مرشحين على مستوى الكيان قبل إعادة الترتيب المختلط.</td><td>تكوين طي اختياري على مستوى عنصر StructArray <code translate="no">AnnSearchRequest</code>.</td></tr>
 <tr><td>حقول فرعية متعددة على مستوى العنصر ضمن نفس حقل StructArray</td><td>مستوى العنصر</td><td>يتم تحديد المرشحين النهائيين باستخدام المفتاح الأساسي بالإضافة إلى إزاحة عنصر Struct.</td><td>لا تستخدم.</td></tr>
 <tr><td>الحقول الفرعية على مستوى العنصر ضمن حقول StructArray مختلفة</td><td>مستوى الكيان</td><td>لا تشترك إزاحات العناصر في الهوية، لذا يتم طي كل حقل فرعي على مستوى العنصر في StructArray <code translate="no">AnnSearchRequest</code> قبل إعادة الترتيب.</td><td>تكوين طي اختياري لكل حقل فرعي على مستوى العنصر ( <code translate="no">AnnSearchRequest</code>) في StructArray.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
 <p>تحذير</p>
-<p>استخدم <code translate="no">element_scope</code> فقط لتكوين الطي لكائنات <code translate="no">AnnSearchRequest</code> على مستوى العنصر في StructArray في بحث هجين على مستوى العنصر غير المتطابق في البنية. لا تستخدمه لطلبات EmbeddingList أو طلبات المتجهات على مستوى المجموعة أو البحث الهجين على مستوى العنصر في StructArray المتطابق.</p>
+<p>استخدم <code translate="no">element_scope</code> فقط لتكوين الطي لكائنات <code translate="no">AnnSearchRequest</code> على مستوى العنصر في StructArray في بحث هجين على مستوى العنصر غير المتماثل في البنية. لا تستخدمه لطلبات EmbeddingList أو طلبات المتجهات على مستوى المجموعة أو البحث الهجين على مستوى العنصر في StructArray المتماثل.</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">قبل البدء<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -81,7 +81,7 @@ summary: >-
 <tr><td>أداة إعادة الترتيب</td><td>اختر أداة إعادة ترتيب هجينة مثل <code translate="no">RRFRanker</code> أو أداة إعادة ترتيب أخرى يدعمها تطبيقك.</td></tr>
 </tbody>
 </table>
-<p>لإعداد الفهرس، راجع <a href="/docs/ar/index-structarray-fields.md">حقول StructArray للفهرس</a>.</p>
+<p>لإعداد الفهرس، راجع <a href="/docs/ar/index-structarray-fields.md">حقول StructArray الخاصة بالفهرس</a>.</p>
 <h2 id="Run-hybrid-search-with-an-EmbeddingList-request" class="common-anchor-header">تشغيل البحث الهجين باستخدام طلب EmbeddingList<button data-href="#Run-hybrid-search-with-an-EmbeddingList-request" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -277,7 +277,7 @@ results = client.hybrid_search(
 <tr><td><code translate="no">topk_avg</code></td><td>حساب متوسط أفضل درجات العناصر التي تم إرجاعها بواسطة <code translate="no">K</code> للكيان.</td><td>مطلوب ويجب أن يكون موجبًا.</td><td>أي مقياس متجه عادي مدعوم.</td></tr>
 </tbody>
 </table>
-<p>يستخدم "Collapse" فقط نتائج العناصر التي تم إرجاعها بواسطة مقياس " <code translate="no">AnnSearchRequest</code>" على مستوى عنصر StructArray. ولا يقوم بمسح كل عنصر Struct في الكيان بعد البحث باستخدام الشبكة العصبية الاصطناعية (ANN). اضبط قيمة " <code translate="no">limit</code> " للطلب على مستوى عالٍ بما يكفي لتوفير العناصر التي تريدها لتكون متاحة لعملية "Collapse".</p>
+<p>يستخدم "Collapse" فقط نتائج العناصر التي تم إرجاعها بواسطة مقياس " <code translate="no">AnnSearchRequest</code>" على مستوى العناصر في StructArray. ولا يقوم بمسح كل عنصر Struct في الكيان بعد البحث باستخدام الشبكة العصبية الاصطناعية (ANN). اضبط قيمة " <code translate="no">limit</code> " في الطلب على مستوى عالٍ بما يكفي لتوفير العناصر التي تريدها لتكون متاحة لعملية "Collapse".</p>
 <h2 id="Add-filters-range-search-and-grouping" class="common-anchor-header">إضافة عوامل التصفية والبحث في النطاق والتجميع<button data-href="#Add-filters-range-search-and-grouping" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -317,7 +317,7 @@ results = client.hybrid_search(
 </thead>
 <tbody>
 <tr><td>مستوى الكيان</td><td>المفتاح الأساسي.</td><td>لا يوجد إزاحة للعناصر في النتيجة النهائية.</td><td>يتضمن الطلب المختلط حقل متجه على مستوى المجموعة، أو طلب EmbeddingList، أو طلبات على مستوى العنصر ضمن حقول StructArray مختلفة.</td></tr>
-<tr><td>مستوى العنصر</td><td>المفتاح الأساسي بالإضافة إلى حقل StructArray الأصلي بالإضافة إلى إزاحة العنصر.</td><td>يمكن إرجاع إزاحة العنصر المحدد عند عرضها بواسطة واجهة برمجة التطبيقات (API) أو مجموعة أدوات تطوير البرامج (SDK).</td><td>جميع كائنات " <code translate="no">AnnSearchRequest</code> " تكون على مستوى العنصر وتقع ضمن حقل StructArray نفسه.</td></tr>
+<tr><td>مستوى العنصر</td><td>المفتاح الأساسي بالإضافة إلى حقل StructArray الأصلي بالإضافة إلى إزاحة العنصر.</td><td>يمكن إرجاع إزاحة العنصر المحدد عند عرضها بواسطة واجهة برمجة التطبيقات (API) أو حزمة تطوير البرامج (SDK).</td><td>جميع كائنات " <code translate="no">AnnSearchRequest</code> " تكون على مستوى العنصر وتقع ضمن حقل StructArray نفسه.</td></tr>
 </tbody>
 </table>
 <h2 id="Limitations" class="common-anchor-header">القيود<button data-href="#Limitations" class="anchor-icon" translate="no">
@@ -383,7 +383,7 @@ results = client.hybrid_search(
       </svg>
     </button></h2><ol>
 <li><p>لمعرفة وضعي البحث المتجهي الأساسيين لـ StructArray، اقرأ <a href="/docs/ar/basic-vector-search-with-structarray.md">البحث المتجهي الأساسي باستخدام StructArray</a>.</p></li>
-<li><p>لإضافة عوامل تصفية قياسية إلى البحث الهجين، اقرأ " <a href="/docs/ar/filtered-search-with-structarray.md">البحث المُصفى باستخدام StructArray</a>".</p></li>
+<li><p>لإضافة عوامل تصفية قياسية إلى البحث الهجين، اقرأ <a href="/docs/ar/filtered-search-with-structarray.md">«البحث المُصفى باستخدام StructArray</a>».</p></li>
 <li><p>لاستخدام حدود الدرجة أو المسافة في البحث الهجين، اقرأ " <a href="/docs/ar/range-search-with-structarray.md">البحث عن النطاق باستخدام StructArray</a>".</p></li>
 <li><p>لتجميع النتائج الهجينة على مستوى العنصر حسب الكيان الأصلي، اقرأ " <a href="/docs/ar/grouping-search-with-structarray.md">تجميع البحث باستخدام StructArray</a>".</p></li>
 <li><p>للتحقق من حدود البحث في StructArray، اقرأ <a href="/docs/ar/structarray-limits.md">«حدود StructArray</a>».</p></li>

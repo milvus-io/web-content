@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Verwenden Sie diese Seite, um Suchergebnisse auf StructArray-Ebene nach der übergeordneten Entität zu gruppieren. Bei der Suche auf Elementebene können mehrere Treffer derselben Entität zurückgegeben werden, wenn mehrere Struct-Elemente der Abfrage entsprechen. Durch die Gruppierung werden diese Elementtreffer zusammengefasst, sodass jede übergeordnete Entität höchstens einmal erscheint.</p>
+    </button></h1><p>Verwenden Sie diese Seite, um Suchergebnisse auf StructArray-Ebene nach der übergeordneten Entität zu gruppieren. Bei der Suche auf Elementebene können mehrere Treffer aus derselben Entität zurückgegeben werden, wenn mehrere Struct-Elemente der Abfrage entsprechen. Durch die Gruppierung werden diese Elementtreffer zusammengefasst, sodass jede übergeordnete Entität höchstens einmal erscheint.</p>
 <p>Diese Seite verwendet die Sammlung „ <code translate="no">tech_articles</code> “ aus dem Abschnitt <a href="/docs/de/create-structarray-field.md">„Erstellen eines StructArray-Feldes</a>“. Die Sammlung enthält ein StructArray-Feld namens „ <code translate="no">chunks</code> “. Das Vektor-Unterfeld „ <code translate="no">chunks[emb]</code> “ ist für die Suche auf Elementebene mit einer regulären Vektormetrik indiziert.</p>
 <h2 id="How-grouping-applies-to-StructArray" class="common-anchor-header">Wie die Gruppierung auf StructArray angewendet wird<button data-href="#How-grouping-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -132,7 +132,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>Ohne Gruppierung kann dasselbe „ <code translate="no">doc_id</code> “ mehrfach erscheinen, wenn mehrere Chunks der Abfrage entsprechen. Mit „ <code translate="no">group_by_field=&quot;doc_id&quot;</code> “ erscheint jede übergeordnete Entität höchstens einmal. Durch die Gruppierung bleiben Metadaten auf Elementebene erhalten, sodass das gruppierte Ergebnis weiterhin den ausgewählten Struct-Element-Index oder -Offset enthalten kann, sofern die API oder das SDK diesen bereitstellt.</p>
+<p>Ohne Gruppierung kann dasselbe „ <code translate="no">doc_id</code> “ mehrfach erscheinen, wenn mehrere Chunks der Abfrage entsprechen. Mit „ <code translate="no">group_by_field=&quot;doc_id&quot;</code> “ erscheint jede übergeordnete Entität höchstens einmal. Durch die Gruppierung bleiben Metadaten auf Elementebene erhalten, sodass das gruppierte Ergebnis weiterhin den ausgewählten Struct-Element-Index oder -Offset enthalten kann, sofern dieser von der API oder dem SDK bereitgestellt wird.</p>
 <h2 id="Add-scalar-filters" class="common-anchor-header">Skalarfilter hinzufügen<button data-href="#Add-scalar-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -270,7 +270,7 @@ results = client.hybrid_search(
 <li><p>Kombinieren Sie die Gruppierungssuche nicht mit der Bereichssuche.</p></li>
 <li><p>Verwenden Sie für die Gruppierungssuche keine „ <code translate="no">EmbeddingList</code> “-Abfrage oder eine „ <code translate="no">MAX_SIM*</code> “-Metrik.</p></li>
 <li><p>Die hybride Gruppierung wird nur unterstützt, wenn alle Teilsuchen auf Vektorfelder auf Elementebene unter demselben StructArray-Feld abzielen.</p></li>
-<li><p>Die hybride Gruppierung wird nicht unterstützt, wenn die hybride Suche ein normales Vektorfeld, ein anderes StructArray-Feld oder eine Abfrage auf EmbeddingList-Ebene einbezieht.</p></li>
+<li><p>Die hybride Gruppierung wird nicht unterstützt, wenn die hybride Suche ein normales Vektorfeld, ein anderes StructArray-Feld oder eine Anforderung auf EmbeddingList-Ebene einbezieht.</p></li>
 </ul>
 <h2 id="Common-mistakes" class="common-anchor-header">Häufige Fehler<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"

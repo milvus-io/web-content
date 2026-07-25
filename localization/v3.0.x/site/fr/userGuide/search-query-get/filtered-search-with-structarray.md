@@ -96,7 +96,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Le filtre ci-dessus sélectionne uniquement les entités dont le champ de niveau supérieur « <code translate="no">category</code> » est « <code translate="no">&quot;search&quot;</code> ». Il n’identifie pas un élément Struct correspondant.</p>
+<p>Le filtre ci-dessus sélectionne uniquement les entités dont le champ de niveau supérieur « <code translate="no">category</code> » est « <code translate="no">&quot;search&quot;</code> ». Il n’identifie pas un élément Struct correspondant en particulier.</p>
 <h2 id="Filter-element-level-vector-search" class="common-anchor-header">Filtrage de la recherche vectorielle au niveau des éléments<button data-href="#Filter-element-level-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

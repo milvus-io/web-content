@@ -23,7 +23,7 @@ beta: Milvus 3.0.x
       </svg>
     </button></h1><p>En las aplicaciones de búsqueda con IA, la búsqueda vectorial ayuda a encontrar entidades semánticamente similares, pero la aplicación a menudo también necesita el texto original de cada coincidencia. Un modelo de lenguaje grande (LLM) o un agente puede utilizar ese texto como contexto para leer, citar, resumir o incluir el resultado en una solicitud.</p>
 <p>Milvus proporciona el tipo de campo escalar « <code translate="no">TEXT</code> » para almacenar texto fuente extenso directamente con las entidades. Entre los valores típicos se incluyen pasajes, documentos largos, cuerpos de artículos, tickets y registros. A diferencia de « <code translate="no">VARCHAR</code> », que requiere una longitud máxima fija de bytes ( <code translate="no">max_length</code>), « <code translate="no">TEXT</code> » no exige establecer una longitud máxima de bytes en el esquema de la colección.</p>
-<p>Para definir un campo « <code translate="no">TEXT</code> », establece « <code translate="no">datatype</code> » en « <code translate="no">DataType.TEXT</code> ».</p>
+<p>Para definir un campo « <code translate="no">TEXT</code> », establezca « <code translate="no">datatype</code> » en « <code translate="no">DataType.TEXT</code> ».</p>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;content&quot;</span>,
 <span class="highlighted-wrapper-line">    datatype=DataType.TEXT,</span>
@@ -208,7 +208,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Inserte el texto directamente en el campo « <code translate="no">TEXT</code> ». No introduzca valores en el campo « <code translate="no">sparse</code> ». Milvus genera los vectores dispersos internamente aplicando la función BM25 a « <code translate="no">content</code> ».</p>
+    </button></h2><p>Inserta el texto directamente en el campo « <code translate="no">TEXT</code> ». No introduzcas valores en el campo « <code translate="no">sparse</code> ». Milvus genera los vectores dispersos internamente aplicando la función BM25 a « <code translate="no">content</code> ».</p>
 <pre><code translate="no" class="language-python">data = [
     {
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,

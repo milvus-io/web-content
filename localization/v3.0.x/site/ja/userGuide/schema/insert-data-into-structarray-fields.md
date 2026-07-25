@@ -19,7 +19,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>各エンティティが順序付き構造化要素のリストを含む場合、StructArrayフィールドにデータを挿入します。挿入ペイロードでは、StructArrayフィールドはオブジェクトの配列として表現されます。各オブジェクトは1つのStruct要素を表し、コレクションスキーマで定義されたStructサブフィールド名を使用します。</p>
+    </button></h1><p>各エンティティが構造化された要素の順序付きリストを含む場合、StructArrayフィールドにデータを挿入します。挿入ペイロードでは、StructArrayフィールドはオブジェクトの配列として表現されます。各オブジェクトは1つのStruct要素を表し、コレクションスキーマで定義されたStructサブフィールド名を使用します。</p>
 <p>このページでは、「<a href="/docs/ja/create-structarray-field.md">StructArrayフィールドの作成</a>」の<code translate="no">tech_articles</code> コレクションを使用しています。各エンティティは技術記事であり、<code translate="no">chunks</code> フィールドには、記事のチャンクがStruct要素として格納されています。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">開始する前に<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -36,7 +36,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクションスキーマに、すでに<code translate="no">chunks</code> というStructArrayフィールドが含まれていることを確認してください。</p>
+    </button></h2><p>コレクションスキーマに、<code translate="no">chunks</code> というStructArrayフィールドがすでに含まれていることを確認してください。</p>
 <table>
 <thead>
 <tr><th>フィールド</th><th>タイプ</th><th>値の挿入</th></tr>
@@ -65,7 +65,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>挿入ペイロードでは、<code translate="no">chunks</code> は、値が Struct オブジェクトの配列である通常のフィールドです。各オブジェクト内では、<code translate="no">text</code> や<code translate="no">emb</code> などのサブフィールド名を使用します。<code translate="no">chunks[text]</code> や<code translate="no">chunks[emb]</code> などのパス構文は、挿入後のインデックスの作成、検索の実行、フィルタの構築、または出力フィールドの指定時にのみ使用してください。</p>
+<p>挿入ペイロードでは、<code translate="no">chunks</code> は、値が Struct オブジェクトの配列である通常のフィールドです。各オブジェクト内では、<code translate="no">text</code> や<code translate="no">emb</code> などのサブフィールド名を使用してください。<code translate="no">chunks[text]</code> や<code translate="no">chunks[emb]</code> などのパス構文は、挿入後のインデックスの作成、検索の実行、フィルタの構築、または出力フィールドの指定時にのみ使用してください。</p>
 </div>
 <h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">挿入ペイロードの形状を理解する<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -245,7 +245,7 @@ result = client.insert(
 <p>Null 許容の StructArray フィールドに有効な StructArray 値が含まれている場合、その値内のすべてのサブフィールドは null であるか、有効な値を持つ必要があります。一部のサブフィールドが null に設定され、他のサブフィールドが有効な値に設定されたエンティティを挿入すると、エラーが発生します。</p>
 <div class="alert note">
 <p>警告
-Nullable StructArrayフィールドは、Milvus v3.0.xでのみ利用可能です。既存のコレクションにStructArrayフィールドを動的に追加する場合、追加するフィールドはNullableでなければならず、既存のエンティティは、その新しいフィールドのすべてのサブフィールドに対して<code translate="no">null</code> を返します。</p>
+Nullable StructArrayフィールドは、Milvus v3.0.xでのみ利用可能です。既存のコレクションにStructArrayフィールドを動的に追加する場合、追加するフィールドはNullableでなければならず、既存のエンティティは、その新しいフィールドのすべてのサブフィールドに対して<code translate="no">null</code> を返す必要があります。</p>
 </div>
 <h2 id="Validate-inserted-data" class="common-anchor-header">挿入データの検証<button data-href="#Validate-inserted-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -278,7 +278,7 @@ Nullable StructArrayフィールドは、Milvus v3.0.xでのみ利用可能で�
 <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> rows:
     <span class="hljs-built_in">print</span>(row)
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">chunks[text]</code> などの StructArray フィールドパスは、クエリ、検索、フィルタリング、またはインデックスの作成を行う場合にのみ使用してください。挿入ペイロードでは、引き続き<code translate="no">chunks</code> の下にネストされたオブジェクトを使用する必要があります。</p>
+<p><code translate="no">chunks[text]</code> などの StructArray フィールドパスは、クエリ、検索、フィルタリング、またはインデックスの作成時のみ使用してください。挿入ペイロードでは、引き続き<code translate="no">chunks</code> の下にネストされたオブジェクトを使用する必要があります。</p>
 <h2 id="Insert-rules" class="common-anchor-header">挿入ルール<button data-href="#Insert-rules" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -328,7 +328,7 @@ Nullable StructArrayフィールドは、Milvus v3.0.xでのみ利用可能で�
 <li><p>Struct 要素から必須のサブフィールドを省略してしまう。</p></li>
 <li><p>間違った次元のベクトルを挿入すること。</p></li>
 <li><p><code translate="no">max_capacity</code> で許可されている数よりも多くの Struct 要素を挿入すること。</p></li>
-<li><p><code translate="no">null</code> に対してサブフィールドを 1 つだけ設定し、同じ StructArray 値内の他のサブフィールドが有効である場合。</p></li>
+<li><p><code translate="no">null</code> に 1 つのサブフィールドのみを設定し、同じ StructArray 値内の他のサブフィールドが有効である場合。</p></li>
 <li><p>ベクトルを<code translate="no">emb_list_vector</code> にのみ書き込んだ後、<code translate="no">chunks[emb]</code> で要素レベルの検索を実行しようとした。</p></li>
 <li><p>ベクトルを<code translate="no">emb</code> にのみ書き込んだ後、<code translate="no">chunks[emb_list_vector]</code> に対してEmbeddingList検索を実行しようとした場合。</p></li>
 </ul>

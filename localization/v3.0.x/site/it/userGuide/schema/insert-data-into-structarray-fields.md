@@ -114,7 +114,7 @@ summary: >-
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">emb_list_vector</code> e <code translate="no">emb</code> sono sottocampi vettoriali separati poiché supportano modalità di ricerca diverse. La ricerca EmbeddingList tratta tutti i vettori in un campo StructArray come un unico elenco di embedding e restituisce risultati a livello di entità con metriche <code translate="no">MAX_SIM*</code>. La ricerca a livello di elemento esegue la ricerca su ciascun elemento Struct in modo indipendente e può restituire l’offset dell’elemento corrispondente. Per semplicità, questo esempio memorizza gli stessi valori vettoriali in entrambi i campi. In un’applicazione di produzione, è possibile memorizzare gli stessi embedding in entrambi i sottocampi quando entrambe le modalità di ricerca utilizzano lo stesso embedding a blocchi, oppure memorizzare embedding diversi quando le due modalità di ricerca utilizzano rappresentazioni diverse.</p>
+<p><code translate="no">emb_list_vector</code> e <code translate="no">emb</code> sono sottocampi vettoriali separati poiché supportano modalità di ricerca diverse. La ricerca EmbeddingList tratta tutti i vettori in un campo StructArray come un unico elenco di embedding e restituisce risultati a livello di entità con metriche <code translate="no">MAX_SIM*</code>. La ricerca a livello di elemento esegue la ricerca su ciascun elemento Struct in modo indipendente e può restituire l’offset dell’elemento corrispondente. Per semplicità, questo esempio memorizza gli stessi valori vettoriali in entrambi i campi. In un’applicazione di produzione, è possibile memorizzare gli stessi embedding in entrambi i sottocampi quando entrambe le modalità di ricerca utilizzano lo stesso embedding di chunk, oppure memorizzare embedding diversi quando le due modalità di ricerca utilizzano rappresentazioni diverse.</p>
 <h2 id="Insert-rows" class="common-anchor-header">Inserimento di righe<button data-href="#Insert-rows" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -308,7 +308,7 @@ I campi StructArray nullabili sono disponibili solo in Milvus v3.0.x. Se si aggi
 <tr><td>Rispettare lo schema della Struct.</td><td>Ogni elemento Struct deve utilizzare i sottocampi definiti nello schema Struct.</td></tr>
 <tr><td>Rispettare le dimensioni dei vettori.</td><td>I valori dei vettori devono corrispondere a <code translate="no">dim</code> configurati per i relativi sottocampi vettoriali.</td></tr>
 <tr><td>Rispettare l’ <code translate="no">max_capacity</code>.</td><td>Il numero di elementi Struct in un'entità non deve superare l'<code translate="no">max_capacity</code> del campo StructArray.</td></tr>
-<tr><td>Utilizzare sottocampi vettoriali separati per le diverse modalità di ricerca.</td><td>Se sono richieste sia la ricerca EmbeddingList che quella a livello di elemento, scrivere i valori vettoriali in entrambi i sottocampi vettoriali.</td></tr>
+<tr><td>Utilizzare sottocampi vettoriali separati per modalità di ricerca distinte.</td><td>Se sono richieste sia la ricerca EmbeddingList che quella a livello di elemento, scrivere i valori vettoriali in entrambi i sottocampi vettoriali.</td></tr>
 <tr><td>Utilizzare <code translate="no">null</code> solo quando il campo è nullable.</td><td>I campi StructArray non nullabili richiedono valori StructArray validi.</td></tr>
 </tbody>
 </table>
@@ -352,7 +352,7 @@ I campi StructArray nullabili sono disponibili solo in Milvus v3.0.x. Se si aggi
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>Per creare indici per <code translate="no">chunks[emb_list_vector]</code>, <code translate="no">chunks[emb]</code> e i sottocampi scalari, consultare la sezione " <a href="/docs/it/index-structarray-fields.md">Indice dei campi StructArray</a>".</p></li>
+<li><p>Per creare indici per <code translate="no">chunks[emb_list_vector]</code>, <code translate="no">chunks[emb]</code> e i sottocampi scalari, consultare la sezione " <a href="/docs/it/index-structarray-fields.md">Indicizzazione dei campi StructArray</a>".</p></li>
 <li><p>Per effettuare ricerche nei sottocampi vettoriali di StructArray, consultare Ricerca vettoriale di base con StructArray.</p></li>
 <li><p>Per esaminare il comportamento dei valori null e le limitazioni specifiche della versione, consultare <a href="/docs/it/structarray-limits.md">Limiti di StructArray</a>.</p></li>
 </ol>

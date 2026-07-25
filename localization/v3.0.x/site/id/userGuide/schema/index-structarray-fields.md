@@ -22,8 +22,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Buat indeks pada subbidang StructArray sebelum Anda menjalankan pencarian vektor atau mempercepat penyaringan skalar. Untuk bidang StructArray, target indeks adalah jalur subbidang, seperti <code translate="no">chunks[emb_list_vector]</code>, <code translate="no">chunks[emb]</code>, atau <code translate="no">chunks[section]</code>.</p>
-<p>Halaman ini menggunakan koleksi <code translate="no">tech_articles</code> dari <a href="/docs/id/create-structarray-field.md">Buat Bidang StructArray</a>. Bidang StructArray <code translate="no">chunks</code> berisi subbidang skalar untuk penyaringan dan subbidang vektor untuk pencarian.</p>
+    </button></h1><p>Buat indeks pada subbidang StructArray sebelum menjalankan pencarian vektor atau mempercepat penyaringan skalar. Untuk bidang StructArray, target indeks adalah jalur subbidang, seperti <code translate="no">chunks[emb_list_vector]</code>, <code translate="no">chunks[emb]</code>, atau <code translate="no">chunks[section]</code>.</p>
+<p>Halaman ini menggunakan koleksi ` <code translate="no">tech_articles</code> ` dari <a href="/docs/id/create-structarray-field.md">"Membuat Bidang StructArray</a>". Bidang StructArray ` <code translate="no">chunks</code> ` berisi subbidang skalar untuk penyaringan dan subbidang vektor untuk pencarian.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Sebelum Anda mulai<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -48,7 +48,7 @@ summary: >-
 <tr><td><code translate="no">chunks[emb_list_vector]</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Pencarian EmbeddingList dengan metrik <code translate="no">MAX_SIM*</code>.</td></tr>
 <tr><td><code translate="no">chunks[emb]</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Pencarian tingkat elemen dengan metrik vektor biasa.</td></tr>
 <tr><td><code translate="no">chunks[section]</code></td><td><code translate="no">VARCHAR</code></td><td>Penyaringan kategorikal.</td></tr>
-<tr><td><code translate="no">chunks[quality_score]</code></td><td><code translate="no">FLOAT</code></td><td>Penyaringan numerik dan predikat bergaya rentang.</td></tr>
+<tr><td><code translate="no">chunks[quality_score]</code></td><td><code translate="no">FLOAT</code></td><td>Penyaringan numerik dan predikat gaya rentang.</td></tr>
 <tr><td><code translate="no">chunks[has_code]</code></td><td><code translate="no">BOOL</code></td><td>Penyaringan Boolean.</td></tr>
 </tbody>
 </table>
@@ -313,7 +313,7 @@ client.create_index(
 </thead>
 <tbody>
 <tr><td>Gunakan sintaks jalur untuk indeks subbidang.</td><td><code translate="no">chunks[emb]</code>, bukan <code translate="no">emb</code> atau <code translate="no">chunks.emb</code>.</td></tr>
-<tr><td>Satu subbidang vektor hanya dapat memiliki satu indeks.</td><td>Gunakan subbidang vektor terpisah jika Anda memerlukan keluarga metrik yang berbeda.</td></tr>
+<tr><td>Satu subbidang vektor hanya menerima satu indeks.</td><td>Gunakan subbidang vektor terpisah jika Anda memerlukan keluarga metrik yang berbeda.</td></tr>
 <tr><td>Gunakan metrik <code translate="no">MAX_SIM*</code> untuk pencarian EmbeddingList.</td><td>Data kueri EmbeddingList memerlukan indeks yang dibangun dengan metrik <code translate="no">MAX_SIM*</code>.</td></tr>
 <tr><td>Gunakan metrik vektor biasa untuk pencarian tingkat elemen.</td><td>Pencarian tingkat elemen menggunakan data kueri vektor biasa dan metrik seperti <code translate="no">COSINE</code>, <code translate="no">IP</code>, atau <code translate="no">L2</code>.</td></tr>
 <tr><td>Indeks subbidang skalar yang muncul dalam filter.</td><td>Gunakan tipe indeks skalar yang didukung oleh target Anda.</td></tr>
@@ -361,5 +361,5 @@ client.create_index(
     </button></h2><ol>
 <li><p>Untuk menjalankan pencarian EmbeddingList tingkat entitas atau pencarian vektor tingkat elemen, baca Pencarian Vektor Dasar dengan StructArray.</p></li>
 <li><p>Untuk menyaring subbidang skalar StructArray selama pencarian, baca "Pencarian yang Disaring dengan StructArray".</p></li>
-<li><p>Untuk meninjau batasan indeks dan metrik, baca <a href="/docs/id/structarray-limits.md">Batasan StructArray</a>.</p></li>
+<li><p>Untuk meninjau batasan indeks dan metrik, baca " <a href="/docs/id/structarray-limits.md">Batasan StructArray</a>".</p></li>
 </ol>

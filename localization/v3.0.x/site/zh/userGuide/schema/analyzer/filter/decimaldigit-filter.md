@@ -45,7 +45,7 @@ beta: Milvus 3.0.0+
 }
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">decimaldigit</code> 过滤器没有可配置的参数。</p>
-<p>该过滤器将 Unicode 十进制数字（包括阿拉伯-印度数字、泰语数字、天城文数字、孟加拉语数字和全角数字）转换为 ASCII 数字。它对词法分析器生成的令牌进行处理。上述配置仅作为自定义分析器的示例，并未包含完整的阿拉伯语处理管道。</p>
+<p>该过滤器将 Unicode 十进制数字（包括阿拉伯-印度数字、泰语数字、天城文数字、孟加拉语数字和全宽数字）转换为 ASCII 数字。它对词法分析器生成的令牌进行处理。上述配置仅作为自定义分析器的示例，并未包含完整的阿拉伯语处理管道。</p>
 <h2 id="Examples" class="common-anchor-header">示例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

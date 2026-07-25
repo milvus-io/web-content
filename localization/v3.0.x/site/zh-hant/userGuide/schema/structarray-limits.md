@@ -3,7 +3,7 @@ id: structarray-limits.md
 title: StructArray 限制
 summary: >-
   StructArray 的支援範圍涵蓋模式定義、插入資料、索引建立、搜尋模式，以及 StructArray 專屬的篩選條件。在生產環境中依賴
-  StructArray 的行為之前，請將此頁面作為限制參照依據。
+  StructArray 的行為之前，請將此頁面作為限制參照。
 ---
 <h1 id="StructArray-Limits" class="common-anchor-header">StructArray 限制<button data-href="#StructArray-Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>StructArray 的支援範圍涵蓋模式定義、插入資料、建立索引、搜尋模式，以及 StructArray 專屬的篩選器。在生產環境中依賴 StructArray 的運作行為之前，請將此頁面作為限制參考。</p>
+    </button></h1><p>StructArray 的支援範圍涵蓋模式定義、插入資料、索引建立、搜尋模式，以及 StructArray 專屬的篩選器。在生產環境中依賴 StructArray 的運作行為之前，請將此頁面作為限制參考。</p>
 <p>大多數 StructArray 限制源自以下三個方面之一：StructArray 模式模型、您為向量子欄位選擇的搜尋模式，以及您的集合所運行的 Milvus 版本。</p>
 <h2 id="Limits-at-a-glance" class="common-anchor-header">限制一覽<button data-href="#Limits-at-a-glance" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -119,7 +119,7 @@ summary: >-
 <tr><td><code translate="no">Array</code></td><td>不支援</td><td>StructArray 欄位不支援幾何子欄位和 GIS 函式。</td></tr>
 <tr><td><code translate="no">Array</code></td><td>不支援</td><td>StructArray 欄位不支援文字子欄位。</td></tr>
 <tr><td><code translate="no">Array</code></td><td>不支援</td><td>StructArray 欄位不支援 Timestamptz 子欄位及時間特定表達式。</td></tr>
-<tr><td>嵌套的 `<code translate="no">Array</code>`、`<code translate="no">ArrayOfVector</code>`、`<code translate="no">Struct</code>` 或<code translate="no">ArrayOfStruct</code></td><td>不支援</td><td>StructArray 欄位不支援嵌套的陣列、向量陣列、Struct 或 Array-of-Struct 子欄位。</td></tr>
+<tr><td>嵌套的<code translate="no">Array</code> 、<code translate="no">ArrayOfVector</code> 、<code translate="no">Struct</code> 或<code translate="no">ArrayOfStruct</code></td><td>不支援</td><td>StructArray 欄位不支援嵌套的陣列、向量陣列、Struct 或 Array-of-Struct 子欄位。</td></tr>
 </tbody>
 </table>
 <h2 id="Nullable-and-dynamic-schema-limits" class="common-anchor-header">可為空與動態模式限制<button data-href="#Nullable-and-dynamic-schema-limits" class="anchor-icon" translate="no">
@@ -149,7 +149,7 @@ summary: >-
 <tr><td>部分可為空的 StructArray 值</td><td>當 StructArray 欄位包含有效的陣列值時，請勿在同一個值中將可為 null 的子欄位陣列與有效的子欄位陣列混合使用。</td></tr>
 <tr><td>動態新增 StructArray 欄位</td><td>僅在包含動態 StructArray 欄位支援的版本中，才支援將 StructArray 欄位新增至現有集合。</td></tr>
 <tr><td>動態新增的可為空要求</td><td>新增至現有集合的 StructArray 欄位必須為可為空，因為現有實體對該新欄位尚無值。</td></tr>
-<tr><td>動態新增後的既有實體</td><td>現有實體針對新增的 StructArray 欄位及其所有子欄位，均會傳回 `<code translate="no">null</code> `。</td></tr>
+<tr><td>動態新增後的既有實體</td><td>現有實體針對新增的 StructArray 欄位及其所有子欄位，均會回傳 `<code translate="no">null</code> `。</td></tr>
 </tbody>
 </table>
 <p>在 Milvus v3.0.x 中，支援可為空的 StructArray 欄位、可為空的向量陣列，以及動態新增 StructArray 欄位。</p>
@@ -231,7 +231,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>基本 EmbeddingList 搜尋</td><td>支援以<code translate="no">MAX_SIM*</code> 度量進行索引的 StructArray 向量子欄位。回傳實體層級的結果。</td></tr>
-<tr><td>基本元素層級搜尋</td><td>支援以常規向量指標索引的 StructArray 向量子欄位。可回傳匹配元素的偏移量。</td></tr>
+<tr><td>基本元素層級搜尋</td><td>支援以常規向量指標索引的 StructArray 向量子欄位。可返回匹配元素的偏移量。</td></tr>
 <tr><td>範圍搜尋</td><td>支援情況取決於搜尋模式以及目標版本對索引/度量的支援狀況。若要了解針對元素層級 StructArray 請求的混合搜尋範圍行為，請查閱您的目標版本。</td></tr>
 <tr><td>分組搜尋</td><td>元素層級的分組搜尋可回傳偏移量。針對元素層級 StructArray 請求的混合搜尋分組行為，取決於目標版本。</td></tr>
 <tr><td>混合搜尋</td><td>混合搜尋請求僅能在目標版本支援該搜尋組合的情況下，包含 StructArray 向量子欄位請求。每個請求仍遵循已建立索引之向量子欄位的指標家族。</td></tr>
@@ -253,7 +253,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>StructArray 的標量篩選由 StructArray 運算子處理，例如 `<code translate="no">element_filter</code> ` 以及 `<code translate="no">MATCH_*</code> ` 家族。詳細的謂詞支援對照表請參閱<a href="/docs/zh-hant/struct-array-operators.md">StructArray 運算子</a>。</p>
+    </button></h2><p>StructArray 的標量篩選由 StructArray 運算子處理，例如 `<code translate="no">element_filter</code> ` 以及 `<code translate="no">MATCH_*</code> ` 系列。詳細的謂詞支援對照表請參閱<a href="/docs/zh-hant/struct-array-operators.md">StructArray 運算子</a>。</p>
 <p>總體而言：</p>
 <ul>
 <li><p>請僅在 StructArray 運算子內部使用 `<code translate="no">$[subfield]</code> `。</p></li>

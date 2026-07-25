@@ -23,7 +23,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Die Unterstützung von StructArray umfasst Schemadefinitionen, Einfüge-Payloads, Indizierung, Suchmodi und StructArray-spezifische Filter. Nutzen Sie diese Seite als Referenz für die Einschränkungen, bevor Sie sich in der Produktion auf das Verhalten von StructArray verlassen.</p>
-<p>Die meisten StructArray-Einschränkungen ergeben sich aus einer der folgenden drei Quellen: dem StructArray-Schemamodell, dem von Ihnen für Vektor-Unterfelder gewählten Suchmodus und der Milvus-Version, auf der Ihre Sammlung ausgeführt wird.</p>
+<p>Die meisten StructArray-Einschränkungen ergeben sich aus einer der folgenden drei Quellen: dem StructArray-Schemamodell, dem von Ihnen für Vektor-Unterfelder gewählten Suchmodus und der Milvus-Version, auf der Ihre Sammlung läuft.</p>
 <h2 id="Limits-at-a-glance" class="common-anchor-header">Einschränkungen im Überblick<button data-href="#Limits-at-a-glance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,7 +44,7 @@ summary: >-
 <tr><th>Bereich</th><th>Beschränkung</th></tr>
 </thead>
 <tbody>
-<tr><td>Schemaform</td><td>Ein „Struct“ kann nur als Elementtyp eines Array-Feldes verwendet werden. „Struct“ wird nicht als Sammlungsfeld auf oberster Ebene unterstützt.</td></tr>
+<tr><td>Schemaform</td><td>Ein „Struct“ kann nur als Elementtyp eines Array-Feldes verwendet werden. „Struct“ wird nicht als Sammlungsfeld der obersten Ebene unterstützt.</td></tr>
 <tr><td>Schema der Unterfelder</td><td>Alle Struct-Elemente im selben StructArray-Feld teilen sich ein vordefiniertes Struct-Schema.</td></tr>
 <tr><td>Kapazität</td><td><code translate="no">max_capacity</code> ist erforderlich und begrenzt die Anzahl der Struct-Elemente, die eine Entität im StructArray-Feld speichern kann.</td></tr>
 <tr><td>Änderungen an Unterfeldern</td><td>Nachdem ein StructArray-Feld erstellt wurde, können Sie diesem bestehenden StructArray-Feld keine Unterfelder mehr hinzufügen.</td></tr>
@@ -52,7 +52,7 @@ summary: >-
 <tr><td>Form einfügen</td><td>Fügen Sie ein StructArray-Feld als Array von Objekten ein. Verwenden Sie innerhalb von Einfüge-Payloads keine Pfadsyntax.</td></tr>
 <tr><td>Vektorindizes</td><td>Ein Vektorfeld oder Vektor-Unterfeld akzeptiert nur einen Index. Verwenden Sie separate Vektor-Unterfelder für die „EmbeddingList“-Suche und die Suche auf Elementebene.</td></tr>
 <tr><td>Funktionen</td><td>Feldfunktionen werden für Felder oder Unterfelder innerhalb eines StructArray-Feldes nicht unterstützt.</td></tr>
-<tr><td>Nullfähige Felder</td><td>Nullfähige StructArray-Felder sind versionsabhängig. Sofern unterstützt, gilt „null“ für das gesamte StructArray-Feld und nicht unabhängig davon für ein einzelnes Struct-Element.</td></tr>
+<tr><td>Nullfähige Felder</td><td>Nullfähige StructArray-Felder sind versionsabhängig. Sofern unterstützt, gilt „null“ für das gesamte StructArray-Feld und nicht unabhängig für ein einzelnes Struct-Element.</td></tr>
 <tr><td>Dynamisches Hinzufügen eines Feldes</td><td>Das Hinzufügen eines StructArray-Feldes zu einer bestehenden Sammlung ist versionsabhängig und setzt voraus, dass das hinzugefügte Feld nullfähig ist.</td></tr>
 </tbody>
 </table>
@@ -209,9 +209,9 @@ summary: >-
 <tr><td>Suche auf Elementebene</td><td>Reguläre Vektormetriken wie <code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">COSINE</code>, <code translate="no">HAMMING</code> oder <code translate="no">JACCARD</code></td><td>Ergebnisse auf Elementebene, die den Offset des gefundenen Elements enthalten können.</td></tr>
 </tbody>
 </table>
-<p>Verwenden Sie separate Vektor-Unterfelder, wenn beide Modi erforderlich sind. Verwenden Sie beispielsweise „ <code translate="no">chunks[emb_list_vector]</code> “ für die EmbeddingList-Suche und „ <code translate="no">chunks[emb]</code> “ für die Suche auf Elementebene.</p>
+<p>Verwenden Sie separate Vektor-Unterfelder, wenn beide Modi erforderlich sind. Verwenden Sie beispielsweise „ <code translate="no">chunks[emb_list_vector]</code> “ für die „EmbeddingList“-Suche und „ <code translate="no">chunks[emb]</code> “ für die Suche auf Elementebene.</p>
 <p>StructArray-Vektor-Unterfelder zählen bei der Planung Ihres Sammlungsschemas als Vektor-Unterfelder. Halten Sie die Gesamtzahl der Vektorfelder und Vektor-Unterfelder innerhalb der Grenzen Ihrer Zielversion und Ihrer Service-Stufe.</p>
-<p>Informationen zu den unterstützten Matrix-Index- und Metriktypen finden Sie unter <a href="/docs/de/index-structarray-fields.md">„Index-StructArray-Felder</a>“.</p>
+<p>Informationen zur unterstützten Matrix aus Index- und Metriktypen finden Sie unter <a href="/docs/de/index-structarray-fields.md">„Index-StructArray-Felder</a>“.</p>
 <h2 id="Search-limits" class="common-anchor-header">Suchbeschränkungen<button data-href="#Search-limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -236,7 +236,7 @@ summary: >-
 <tr><td>Einfache Suche auf Elementebene</td><td>Wird für StructArray-Vektor-Teilfelder unterstützt, die mit regulären Vektormetriken indiziert sind. Kann Offsets der übereinstimmenden Elemente zurückgeben.</td></tr>
 <tr><td>Bereichssuche</td><td>Wird je nach Suchmodus und der Unterstützung von Indizes/Metriken durch die Zielversion unterstützt. Für das Verhalten bei der hybriden Bereichssuche bei StructArray-Anfragen auf Elementebene überprüfen Sie bitte Ihre Zielversion.</td></tr>
 <tr><td>Gruppierte Suche</td><td>Die gruppierte Suche auf Elementebene kann Offsets zurückgeben. Das Verhalten der hybriden Gruppensuche bei StructArray-Anfragen auf Elementebene ist versionsabhängig.</td></tr>
-<tr><td>Hybride Suche</td><td>Eine hybride Suchanfrage kann nur dann StructArray-Vektor-Teilfeldanfragen enthalten, wenn die Zielversion diese Suchkombination unterstützt. Jede Anfrage folgt weiterhin der Metrikfamilie des indizierten Vektor-Teilfelds.</td></tr>
+<tr><td>Hybride Suche</td><td>Eine hybride Suchanfrage kann nur dann StructArray-Vektor-Unterfeldanfragen enthalten, wenn die Zielversion diese Suchkombination unterstützt. Jede Anfrage folgt weiterhin der Metrikfamilie des indizierten Vektor-Unterfelds.</td></tr>
 <tr><td>Offset-Ausgabe</td><td>Offsets sind für Suchergebnisse auf Elementebene verfügbar. Die EmbeddingList-Suche liefert Ergebnisse auf Entitätsebene und verwendet keine Element-Offsets als primäre Ergebniseinheit.</td></tr>
 </tbody>
 </table>

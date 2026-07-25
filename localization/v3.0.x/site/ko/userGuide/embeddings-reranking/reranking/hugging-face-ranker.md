@@ -19,7 +19,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>벡터 검색은 벡터 거리에 따라 결과를 정렬하지만, 초기 순서는 각 후보 텍스트가 쿼리에 얼마나 잘 부합하는지를 반영하지 못할 수 있습니다. Hugging Face Ranker는 쿼리와 후보 텍스트를 호스팅된 <a href="https://huggingface.co/docs/inference-providers/index">Hugging Face 추론 제공자에게</a> 전송하고, <code translate="no">sentence-similarity</code> 점수를 사용하여 Milvus가 반환한 후보들의 순서를 재정렬합니다.</p>
+    </button></h1><p>벡터 검색은 벡터 거리에 따라 결과를 정렬하지만, 초기 순서는 각 후보 텍스트가 쿼리에 얼마나 잘 부합하는지를 반영하지 못할 수 있습니다. Hugging Face Ranker는 쿼리와 후보 텍스트를 호스팅된 <a href="https://huggingface.co/docs/inference-providers/index">Hugging Face 추론 제공자(Inference Providers</a> )로 전송하고, 벡터 유사도 점수( <code translate="no">sentence-similarity</code> )를 사용하여 Milvus가 반환한 후보들의 순서를 재정렬합니다.</p>
 <p>이 통합 기능은 호스팅된 Hugging Face 라우터를 사용합니다. 별도로 배포된 텍스트 임베딩 추론(TEI) 서비스를 사용하여 재순위를 지정하려면 <a href="/docs/ko/tei-ranker.md">TEI Ranker를</a> 참조하십시오.</p>
 <h2 id="Limits" class="common-anchor-header">제한 사항<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -77,7 +77,7 @@ beta: Milvus v2.6.20+
  </span></p>
 <p>Hugging Face 모델은 다음 세 단계에 걸쳐 점수를 계산합니다:</p>
 <ol>
-<li><strong>텍스트 입력 데이터를 준비합니다.</strong> Ranker는 <code translate="no">params.queries</code> 에서 쿼리 텍스트를, 구성된 <code translate="no">VARCHAR</code> 필드에서 후보 텍스트를 읽어들입니다.</li>
+<li><strong>텍스트 입력 데이터를 준비합니다.</strong> Ranker는 <code translate="no">params.queries</code> 에서 쿼리 텍스트를, 구성된 <code translate="no">VARCHAR</code> 필드에서 후보 텍스트를 읽어옵니다.</li>
 <li><strong>별도의 모델 표현 생성.</strong> Milvus는 쿼리를 <code translate="no">source_sentence</code> 로, 후보 텍스트를 <code translate="no">sentences</code> 로 전송합니다. 모델은 내부적으로 쿼리와 각 후보를 별도로 인코딩합니다.</li>
 <li><strong>점수를 비교하고 반환합니다.</strong> 모델은 쿼리 표현과 각 후보 표현을 비교하여 후보마다 하나의 유사도 점수를 반환합니다.</li>
 </ol>
@@ -106,7 +106,7 @@ beta: Milvus v2.6.20+
 <li><code translate="no">VARCHAR</code> 의 null 허용되지 않는 필드에 후보 텍스트를 저장하는 컬렉션.</li>
 </ul>
 <div class="alert note">
-<p>Milvus는 Hugging Face 모델이 <code translate="no">hf-inference</code> 을 통해 계속 사용 가능한지, 또는 해당 모델이 안정성, 지연 시간 및 출력 품질 요구 사항을 충족하는지 여부를 제어하지 않습니다. 프로덕션 환경에서 사용하기 전에 Hugging Face에서 모델을 확인하고 워크로드에 대해 평가하십시오.</p>
+<p>Milvus는 Hugging Face 모델이 <code translate="no">hf-inference</code> 을 통해 계속 사용 가능한지, 또는 해당 모델이 사용자의 안정성, 지연 시간 및 출력 품질 요구 사항을 충족하는지 여부를 제어하지 않습니다. 프로덕션 환경에서 사용하기 전에 Hugging Face에서 모델을 확인하고 사용자의 워크로드에 대해 평가하십시오.</p>
 </div>
 <p>이 예제에서는 <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2"><code translate="no">sentence-transformers/all-MiniLM-L6-v2</code></a> 단순히 구성을 보여주기 위한 목적으로만 사용됩니다. 이 모델은 Milvus의 권장 사항이나 인증을 의미하지 않습니다.</p>
 <h2 id="Configure-credentials" class="common-anchor-header">인증 정보 구성<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
@@ -125,7 +125,7 @@ beta: Milvus v2.6.20+
         ></path>
       </svg>
     </button></h2><p><code translate="no">milvus.yaml</code> 에서 또는 환경 변수를 통해 Hugging Face 사용자 액세스 토큰을 구성할 수 있습니다.</p>
-<p>인증 정보의 우선순위는 다음과 같습니다:</p>
+<p>인증 정보의 우선순위는 다음과 같습니다.</p>
 <pre><code translate="no" class="language-text">Function credential label -&gt; provider credential label in milvus.yaml -&gt; environment variable
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Option-1-Configuration-file" class="common-anchor-header">옵션 1: 구성 파일<button data-href="#Option-1-Configuration-file" class="anchor-icon" translate="no">
@@ -301,7 +301,7 @@ client.insert(
 <tr><td><code translate="no">reranker</code></td><td>예</td><td>재순위 지정 구현. 이 값을 ` <code translate="no">model</code>`로 설정하십시오.</td></tr>
 <tr><td><code translate="no">provider</code></td><td>예</td><td>모델 제공자입니다. 이 값을 <code translate="no">huggingface</code> 로 설정하십시오.</td></tr>
 <tr><td><code translate="no">model_name</code></td><td>예</td><td><code translate="no">sentence-similarity</code> 태스크를 위해 <code translate="no">hf-inference</code> 을 통해 제공되는 모델의 Hugging Face 모델 ID입니다.</td></tr>
-<tr><td><code translate="no">queries</code></td><td>예</td><td>재순위 지정에 사용되는 쿼리 문자열입니다. 초기 검색 시 쿼리 벡터를 사용하는 경우에도 검색 쿼리당 정확히 하나의 문자열을 제공해야 합니다.</td></tr>
+<tr><td><code translate="no">queries</code></td><td>예</td><td>재순위 지정에 사용되는 쿼리 문자열입니다. 초기 검색에 쿼리 벡터가 사용되는 경우에도 검색 쿼리당 정확히 하나의 문자열을 제공해야 합니다.</td></tr>
 <tr><td><code translate="no">hf_provider</code></td><td>아니요</td><td>Hugging Face 추론 제공자 경로입니다. Milvus 2.6.20에서 기본값이자 유일하게 지원되는 값은 <code translate="no">hf-inference</code> 입니다.</td></tr>
 <tr><td><code translate="no">credential</code></td><td>아니요</td><td><code translate="no">milvus.yaml</code> 의 최상위 <code translate="no">credential</code> 섹션에 정의된 자격 증명의 레이블입니다. 이 값은 토큰 자체가 아닙니다.</td></tr>
 <tr><td><code translate="no">max_client_batch_size</code></td><td>아니요</td><td>Hugging Face 요청 한 번에 전송되는 후보 텍스트의 최대 개수입니다. 기본값은 <code translate="no">32</code> 이며, 이 값은 <code translate="no">0</code> 보다 커야 합니다.</td></tr>
@@ -337,7 +337,7 @@ results = client.search(
 
 <span class="hljs-built_in">print</span>(results)
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus는 먼저 <code translate="no">dense</code> 에서 후보 문장을 검색한 다음, <code translate="no">queries</code> 의 쿼리 텍스트와 <code translate="no">document</code> 의 후보 텍스트를 사용하여 문장 유사도 점수를 계산합니다. 반환된 후보 문장은 Hugging Face 점수 순으로 정렬됩니다.</p>
+<p>Milvus는 먼저 <code translate="no">dense</code> 에서 후보를 검색한 다음, <code translate="no">queries</code> 의 쿼리 텍스트와 <code translate="no">document</code> 의 후보 텍스트를 사용하여 문장 유사도 점수를 계산합니다. 반환된 후보는 Hugging Face 점수 순으로 정렬됩니다.</p>
 <h2 id="Troubleshooting" class="common-anchor-header">문제 해결<button data-href="#Troubleshooting" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -368,7 +368,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Hugging Face에서 모델 페이지를 열고 <strong>‘Inference Providers’</strong> 섹션을 확인하십시오. <code translate="no">hf-inference</code> 가 <code translate="no">sentence-similarity</code> 에 대한 모델을 제공하고 있는지 확인하십시오. 그렇지 않은 경우, 해당 작업을 지원하는 다른 모델을 선택하십시오.</p>
+    </button></h3><p>Hugging Face에서 모델 페이지를 열고 <strong>‘Inference Providers’</strong> 섹션을 확인하십시오. <code translate="no">hf-inference</code> 가 <code translate="no">sentence-similarity</code> 에 대한 모델을 제공하는지 확인하십시오. 그렇지 않은 경우, 해당 작업을 지원하는 다른 모델을 선택하십시오.</p>
 <h3 id="The-number-of-query-strings-does-not-match-the-search-request" class="common-anchor-header">쿼리 문자열의 개수가 검색 요청과 일치하지 않습니다<button data-href="#The-number-of-query-strings-does-not-match-the-search-request" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

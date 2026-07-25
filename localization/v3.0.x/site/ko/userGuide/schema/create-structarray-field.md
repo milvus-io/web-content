@@ -63,11 +63,11 @@ summary: >-
 <tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>스칼라 필터링 및 범위 예제에서 사용되는 청크 수준 점수.</td></tr>
 <tr><td><code translate="no">has_code</code></td><td><code translate="no">BOOL</code></td><td>청크에 코드가 포함되어 있는지 여부.</td></tr>
 <tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td><code translate="no">MAX_SIM*</code> 메트릭을 사용한 EmbeddingList 검색을 위한 벡터 하위 필드.</td></tr>
-<tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>일반 벡터 메트릭을 사용하는 요소 수준 검색을 위한 벡터 하위 필드입니다.</td></tr>
+<tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>일반 벡터 메트릭을 사용하는 요소 수준 검색을 위한 벡터 하위 필드.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
-<p>벡터 필드 또는 벡터 하위 필드는 하나의 인덱스만 허용합니다. EmbeddingList 검색과 요소 수준 검색이 모두 필요한 경우, 두 개의 별도 벡터 하위 필드를 정의하십시오. 이 예제에서 <code translate="no">chunks[emb_list_vector]</code> 는 EmbeddingList 검색용이고, <code translate="no">chunks[emb]</code> 는 요소 수준 검색용입니다.</p>
+<p>벡터 필드 또는 벡터 하위 필드는 하나의 인덱스만 허용합니다. EmbeddingList 검색과 요소 수준 검색이 모두 필요한 경우, 두 개의 별도 벡터 하위 필드를 정의하십시오. 이 예에서 <code translate="no">chunks[emb_list_vector]</code> 는 EmbeddingList 검색용이고, <code translate="no">chunks[emb]</code> 는 요소 수준 검색용입니다.</p>
 </div>
 <h2 id="Supported-subfield-data-types" class="common-anchor-header">지원되는 하위 필드 데이터 유형<button data-href="#Supported-subfield-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -407,8 +407,8 @@ client.add_collection_struct_field(
 <li><p>벡터 하위 필드만 추가하고, <code translate="no">section</code>, <code translate="no">quality_score</code> 또는 <code translate="no">has_code</code> 와 같이 필터링에 필요한 스칼라 하위 필드를 생략하는 경우.</p></li>
 <li><p>벡터 하위 필드를 <code translate="no">$[...]</code> 스칼라 술어 입력으로 취급합니다. 벡터 검색에는 벡터 하위 필드를 사용하고, 스칼라 술어에는 스칼라 하위 필드를 사용합니다.</p></li>
 <li><p>필드가 생성된 후에도 기존 StructArray 필드에 새로운 하위 필드를 추가할 수 있다고 가정합니다.</p></li>
-<li><p>필수 경로 구문인 <code translate="no">chunks[emb]</code> 또는 <code translate="no">chunks[emb_list_vector]</code> 대신 <code translate="no">chunks.emb</code> 또는 <code translate="no">chunks.emb_list_vector</code> 을 사용합니다.</p></li>
-<li><p>Nullable StructArray의 동작을 모든 대상 버전에서 지원되는 것으로 간주합니다.</p></li>
+<li><p>필수 경로 구문인 <code translate="no">chunks[emb]</code> 또는 <code translate="no">chunks[emb_list_vector]</code> 대신 <code translate="no">chunks.emb</code> 또는 <code translate="no">chunks.emb_list_vector</code> 을 사용하는 경우.</p></li>
+<li><p>Nullable StructArray의 동작을 모든 대상 버전에서 사용할 수 있는 것으로 간주합니다.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">다음 단계<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"

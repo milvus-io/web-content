@@ -78,7 +78,7 @@ beta: Milvus 3.0.0+
 <button class="copy-code-btn"></button></code></pre>
 <p>이 분석기는 다음 처리 단계를 적용합니다:</p>
 <ul>
-<li><strong>토큰화</strong>: <a href="/docs/ko/thai-tokenizer.md"><code translate="no">thai</code></a> 토큰화기를 사용하여 공백에 의존하지 않고 태국어 텍스트를 단어 토큰으로 분할합니다. 토큰화기는 공백 및 구두점만으로 구성된 세그먼트를 걸러냅니다.</li>
+<li><strong>토큰화</strong>: <a href="/docs/ko/thai-tokenizer.md"><code translate="no">thai</code></a> 토큰화기를 사용하여 공백에 의존하지 않고 태국어 텍스트를 단어 토큰으로 분할합니다. 이 토큰화기는 공백 및 구두점만으로 구성된 세그먼트를 걸러냅니다.</li>
 <li><strong>대소문자 정규화</strong>: <code translate="no">lowercase</code> 필터를 사용하여, 태국어와 영어가 혼합된 텍스트에서 라틴 문자에 영향을 줍니다.</li>
 <li><strong>숫자 정규화</strong>: ‘ <code translate="no">decimaldigit</code> ’ 필터를 사용하여 태국어 숫자 및 기타 유니코드 십진수 숫자를 ASCII 숫자로 변환합니다.</li>
 <li><strong>중지어 제거</strong>: 내장된 <code translate="no">_thai_</code> 사전을 사용하여 <code translate="no">stop</code> 필터를 적용합니다.</li>

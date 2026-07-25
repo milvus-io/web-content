@@ -111,7 +111,7 @@ summary: >-
 <tbody>
 <tr><td>RocksMQ</td><td>Woodpecker (local/MinIO)</td><td>Autónomo (Docker Compose)</td><td><strong>Compatible</strong></td></tr>
 <tr><td>Woodpecker (local/MinIO)</td><td>RocksMQ</td><td>Autónomo (Docker Compose)</td><td><strong>Compatible</strong></td></tr>
-<tr><td>Pulsar (integrado/externo)</td><td>Woodpecker (MinIO)</td><td>Clúster (Helm / Operator)</td><td><strong>Compatible</strong></td></tr>
+<tr><td>Pulsar (integrado/externo)</td><td>Woodpecker (MinIO)</td><td>Clúster (Helm / Operador)</td><td><strong>Compatible</strong></td></tr>
 <tr><td>Woodpecker (MinIO)</td><td>Pulsar (externo)</td><td>Clúster (Helm / Operator)</td><td><strong>Compatible</strong></td></tr>
 <tr><td>Kafka (integrado/externo)</td><td>Woodpecker (MinIO)</td><td>Clúster (Helm / Operador)</td><td><strong>Compatible</strong></td></tr>
 <tr><td>Woodpecker (MinIO)</td><td>Kafka (externo)</td><td>Clúster (Helm / Operator)</td><td><strong>Compatible</strong></td></tr>

@@ -40,7 +40,7 @@ beta: Milvus 3.0.x
 <li><p>현재 외부 컬렉션은 생성 후 필드 추가를 지원합니다. 필드 삭제, 필드 이름 변경, 필드 데이터 유형 변경, 벡터 차원 변경 또는 <code translate="no">external_field</code> 재매핑과 같은 기타 스키마 변경은 지원되지 않습니다.</p></li>
 <li><p>외부 데이터 소스에 이미 존재하는 필드만 추가할 수 있습니다. 이 작업은 기존 외부 필드를 Milvus 필드에 매핑합니다. 외부 데이터 소스에 새 필드를 생성하거나 소스 데이터를 역방향으로 채우는 작업은 수행하지 않습니다.</p></li>
 <li><p>기존 외부 컬렉션에 <code translate="no">SPARSE_FLOAT_VECTOR</code> 필드를 추가하는 기능은 지원되지 않습니다.</p></li>
-<li><p>기존 외부 컬렉션에 StructArray 필드를 추가하는 기능은 지원되지 않습니다. 외부 컬렉션에 StructArray 필드가 필요한 경우, 컬렉션을 생성할 때 컬렉션 스키마에서 해당 필드를 정의해야 합니다.</p></li>
+<li><p>기존 외부 컬렉션에 StructArray 필드를 추가하는 기능은 지원되지 않습니다. 외부 컬렉션에 StructArray 필드가 필요한 경우, 컬렉션을 생성할 때 컬렉션 스키마에서 해당 필드를 정의하십시오.</p></li>
 </ul>
 <h2 id="Add-a-field" class="common-anchor-header">필드 추가<button data-href="#Add-a-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -58,7 +58,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><p>외부 컬렉션에 필드를 추가하기 전에, 해당 필드가 외부 데이터 소스에 이미 존재하는지 확인하십시오. 그런 다음 ` <code translate="no">add_collection_field()</code> `를 호출하여 ` <code translate="no">external_field</code> `를 외부 데이터 소스의 필드 이름으로 설정함으로써 Milvus에서 해당 필드를 노출시키십시오. ` <code translate="no">data_type</code> `를 외부 데이터 소스의 필드와 일치하는 Milvus 데이터 유형으로 설정하십시오. 예를 들어, 매핑된 필드가 배정밀도 값을 저장하는 경우 ` <code translate="no">DataType.DOUBLE</code>`를 사용하십시오.</p>
-<p>관리되는 컬렉션과 달리, 추가된 필드의 값은 외부 컬렉션을 새로 고친 후에 외부 데이터 소스에서 읽혀집니다.</p>
+<p>관리되는 컬렉션과 달리, 추가된 필드의 값은 외부 컬렉션을 새로 고친 후에 외부 데이터 소스에서 읽혀 옵니다.</p>
 <h3 id="Add-a-scalar-field" class="common-anchor-header">스칼라 필드 추가<button data-href="#Add-a-scalar-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

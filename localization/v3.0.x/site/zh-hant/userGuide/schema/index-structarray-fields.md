@@ -312,9 +312,9 @@ client.create_index(
 <tbody>
 <tr><td>請使用路徑語法來建立子欄位索引。</td><td>請使用<code translate="no">chunks[emb]</code> 來建立索引，而非<code translate="no">emb</code> 或<code translate="no">chunks.emb</code> 。</td></tr>
 <tr><td>一個向量子欄位僅接受一個索引。</td><td>若需使用不同的指標家族，請使用獨立的向量子欄位。</td></tr>
-<tr><td>請使用<code translate="no">MAX_SIM*</code> 指標進行 EmbeddingList 搜尋。</td><td>EmbeddingList 查詢資料需要使用<code translate="no">MAX_SIM*</code> 度量建立的索引。</td></tr>
+<tr><td>請使用<code translate="no">MAX_SIM*</code> 指標進行 EmbeddingList 搜尋。</td><td>EmbeddingList 查詢資料需要使用<code translate="no">MAX_SIM*</code> 指標建立的索引。</td></tr>
 <tr><td>請使用一般向量指標進行元素層級搜尋。</td><td>元素層級搜尋使用一般向量查詢資料，以及諸如<code translate="no">COSINE</code> 、<code translate="no">IP</code> 或<code translate="no">L2</code> 等指標。</td></tr>
-<tr><td>請為出現在篩選器中的標量子欄位建立索引。</td><td>請使用目標所支援的標量索引類型。</td></tr>
+<tr><td>請為出現在篩選條件中的標量子欄位建立索引。</td><td>請使用目標所支援的標量索引類型。</td></tr>
 <tr><td>請留意向量欄位的限制。</td><td>向量場和向量子場的總數受到限制。在新增大量向量子場之前，請參閱《StructArray 限制》。</td></tr>
 </tbody>
 </table>
@@ -336,7 +336,7 @@ client.create_index(
     </button></h2><ul>
 <li><p>在 `<code translate="no">chunks.emb</code> ` 上建立索引，而非在 `<code translate="no">chunks[emb]</code>` 上建立索引。</p></li>
 <li><p>僅建立<code translate="no">MAX_SIM*</code> 索引，隨後卻嘗試在同一子場上執行元素層級搜尋。</p></li>
-<li><p>僅建立一般向量索引，隨後卻嘗試在同一子欄位上執行 EmbeddingList 搜尋。</p></li>
+<li><p>僅建立一般向量索引，隨後卻嘗試在同一子場上執行 EmbeddingList 搜尋。</p></li>
 <li><p>將同一個向量子欄位同時用於<code translate="no">MAX_SIM*</code> 和一般向量指標。</p></li>
 <li><p>遺漏針對使用頻率極高的 StructArray 篩選條件所建立的標量索引。</p></li>
 <li><p>為 Struct 模式中不存在的 StructArray 子欄位建立索引。</p></li>

@@ -109,7 +109,7 @@ beta: Milvus v2.6.20+
 <li>Коллекция, в которой хранится текст-кандидат в поле <code translate="no">VARCHAR</code>, не допускающем нулевого значения.</li>
 </ul>
 <div class="alert note">
-<p>Milvus не контролирует, останется ли модель Hugging Face доступной через <code translate="no">hf-inference</code>, а также соответствует ли модель вашим требованиям к стабильности, задержке и качеству вывода. Перед использованием модели в производственной среде проверьте её на Hugging Face и оцените её применительно к вашей рабочей нагрузке.</p>
+<p>Milvus не контролирует, останется ли модель Hugging Face доступной через <code translate="no">hf-inference</code>, а также не гарантирует, что модель будет соответствовать вашим требованиям к стабильности, задержке и качеству выходных данных. Перед использованием модели в производственной среде проверьте её на Hugging Face и оцените её применительно к вашей рабочей нагрузке.</p>
 </div>
 <p>В примерах используется <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2"><code translate="no">sentence-transformers/all-MiniLM-L6-v2</code></a> используются исключительно для демонстрации конфигурации. Модель не является рекомендацией или сертификатом со стороны Milvus.</p>
 <h2 id="Configure-credentials" class="common-anchor-header">Настройка учетных данных<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
@@ -176,7 +176,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Если ни в конфигурации функции, ни в конфигурации провайдера не указан ярлык учетных данных, задайте параметр ` <code translate="no">MILVUS_HUGGINGFACE_API_KEY</code> ` в среде службы Milvus:</p>
+    </button></h3><p>Если ни в конфигурации функции, ни в конфигурации провайдера не указан лейбл учетных данных, установите значение <code translate="no">MILVUS_HUGGINGFACE_API_KEY</code> в среде службы Milvus:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># docker-compose.yaml</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">environment:</span>
@@ -197,7 +197,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Hugging Face Ranker определяется и применяется во время поиска. Вы можете изменять или опускать ранжировщик для каждого поиска, не изменяя схему коллекции.</p>
+    </button></h2><p>Hugging Face Ranker определяется и применяется во время поиска. Вы можете изменять или опускать ранжировщик для каждого поиска без изменения схемы коллекции.</p>
 <h3 id="Step-1-Prepare-a-collection" class="common-anchor-header">Шаг 1: Подготовка коллекции<button data-href="#Step-1-Prepare-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -213,7 +213,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>В следующем примере создается коллекция с текстовым полем для повторного ранжирования и векторным полем для первоначального извлечения:</p>
+    </button></h3><p>В следующем примере создается коллекция с текстовым полем для повторного ранжирования и векторным полем для первоначального поиска:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, Function, FunctionType, MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -403,7 +403,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Убедитесь, что поле <code translate="no">input_field_names</code> содержит ровно одно поле <code translate="no">VARCHAR</code>, не допускающее нулевого значения, и что каждая сущность-кандидат содержит текст в этом поле.</p>
+    </button></h3><p>Убедитесь, что поле <code translate="no">input_field_names</code> содержит ровно одно поле <code translate="no">VARCHAR</code>, не допускающее нулевых значений, и что каждая сущность-кандидат содержит текст в этом поле.</p>
 <h3 id="Milvus-reports-missing-Hugging-Face-credentials" class="common-anchor-header">Milvus сообщает об отсутствии учетных данных Hugging Face<button data-href="#Milvus-reports-missing-Hugging-Face-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -437,6 +437,6 @@ results = client.search(
       </svg>
     </button></h2><ul>
 <li>Информацию о поведении и ограничениях общего доступа к ранжерам моделей см. в разделе <a href="/docs/ru/model-ranker-overview.md">«Обзор ранжеров моделей</a>».</li>
-<li>Чтобы сгенерировать вложения с помощью размещенных провайдеров инференса Hugging Face, см. раздел <a href="/docs/ru/hugging-face.md">«Hugging Face</a>».</li>
+<li>Чтобы сгенерировать вложения с помощью размещённых провайдеров инференса Hugging Face, см. раздел <a href="/docs/ru/hugging-face.md">«Hugging Face</a>».</li>
 <li>Чтобы применить ранжировщик к гибридному поиску, см. раздел <a href="/docs/ru/multi-vector-search.md">«Гибридный поиск с несколькими векторами</a>».</li>
 </ul>

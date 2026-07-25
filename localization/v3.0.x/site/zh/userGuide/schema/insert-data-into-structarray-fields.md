@@ -3,7 +3,7 @@ id: insert-data-into-structarray-fields.md
 title: 将数据插入 StructArray 字段
 summary: >-
   当每个实体包含一个有序的结构化元素列表时，将数据插入到 StructArray 字段中。在插入有效载荷中，StructArray
-  字段被表示为一个对象数组。每个对象代表一个 Struct 元素，并使用 Collection 模式中定义的 Struct 子字段名称。
+  字段表示为一个对象数组。每个对象代表一个 Struct 元素，并使用 Collection 模式中定义的 Struct 子字段名称。
 ---
 <h1 id="Insert-Data-into-StructArray-Fields" class="common-anchor-header">将数据插入 StructArray 字段<button data-href="#Insert-Data-into-StructArray-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -305,7 +305,7 @@ result = client.insert(
 <tr><td>需符合 Struct Schema。</td><td>每个 Struct 元素必须使用 Struct Schema 中定义的子字段。</td></tr>
 <tr><td>向量维度必须匹配。</td><td>向量值必须与为其向量子字段配置的<code translate="no">dim</code> 相匹配。</td></tr>
 <tr><td>遵守<code translate="no">max_capacity</code> 。</td><td>一个实体中的 Struct 元素数量不得超过 StructArray 字段的<code translate="no">max_capacity</code> 。</td></tr>
-<tr><td>针对不同的搜索模式，请使用单独的向量子场。</td><td>如果同时需要 EmbeddingList 搜索和元素级搜索，请将向量值写入两个向量子字段。</td></tr>
+<tr><td>针对不同的搜索模式，请使用单独的向量子字段。</td><td>如果同时需要 EmbeddingList 搜索和元素级搜索，请将向量值写入两个向量子字段。</td></tr>
 <tr><td>仅当字段允许为空时，才使用<code translate="no">null</code> 。</td><td>非可空的 StructArray 字段需要有效的 StructArray 值。</td></tr>
 </tbody>
 </table>
@@ -325,12 +325,12 @@ result = client.insert(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>在插入有效载荷中使用诸如<code translate="no">chunks[text]</code> 之类的字段路径。</p></li>
+<li><p>在插入有效负载中使用诸如<code translate="no">chunks[text]</code> 之类的字段路径。</p></li>
 <li><p>从 Struct 元素中省略必需的子字段。</p></li>
 <li><p>插入维度错误的向量。</p></li>
 <li><p>插入的 Struct 元素数量超过了<code translate="no">max_capacity</code> 允许的数量。</p></li>
 <li><p>仅将一个子字段设置为<code translate="no">null</code> ，而同一StructArray值中的其他子字段却有效。</p></li>
-<li><p>仅将向量写入<code translate="no">emb_list_vector</code> ，随后尝试在<code translate="no">chunks[emb]</code> 上执行元素级搜索。</p></li>
+<li><p>仅将向量写入<code translate="no">emb_list_vector</code> ，随后却尝试在<code translate="no">chunks[emb]</code> 上执行元素级搜索。</p></li>
 <li><p>仅将向量写入<code translate="no">emb</code> ，随后尝试在<code translate="no">chunks[emb_list_vector]</code> 上执行EmbeddingList搜索。</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">后续步骤<button data-href="#Next-steps" class="anchor-icon" translate="no">

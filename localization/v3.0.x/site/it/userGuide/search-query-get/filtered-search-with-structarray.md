@@ -24,7 +24,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Utilizzare questa pagina per aggiungere filtri scalari alla ricerca vettoriale sui campi StructArray. Il filtraggio StructArray prevede due livelli: i filtri a livello di riga selezionano le entità padre, mentre i filtri a livello di elemento limitano quali elementi Struct partecipano alla ricerca vettoriale a livello di elemento.</p>
-<p>Questa pagina utilizza la raccolta " <code translate="no">tech_articles</code> " descritta in <a href="/docs/it/create-structarray-field.md">"Creazione di un campo StructArray</a>". La raccolta presenta un campo StructArray denominato " <code translate="no">chunks</code>", con sottocampi scalari quali " <code translate="no">section</code>", " <code translate="no">page</code>", " <code translate="no">quality_score</code>" e " <code translate="no">has_code</code>", oltre a sottocampi vettoriali per la ricerca.</p>
+<p>Questa pagina utilizza la raccolta " <code translate="no">tech_articles</code> " descritta in <a href="/docs/it/create-structarray-field.md">"Creare un campo StructArray</a>". La raccolta presenta un campo StructArray denominato " <code translate="no">chunks</code>", con sottocampi scalari quali " <code translate="no">section</code>", " <code translate="no">page</code>", " <code translate="no">quality_score</code>" e " <code translate="no">has_code</code>", oltre a sottocampi vettoriali per la ricerca.</p>
 <h2 id="Choose-a-filter-type" class="common-anchor-header">Scegli un tipo di filtro<button data-href="#Choose-a-filter-type" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -152,7 +152,7 @@ results = client.search(
 <p>In questo esempio, il predicato di primo livello ` <code translate="no">category == &quot;search&quot;</code> ` seleziona le entità candidate, mentre ` <code translate="no">element_filter</code> ` limita la ricerca vettoriale a livello di elemento ai blocchi in cui ` <code translate="no">section</code>`, ` <code translate="no">quality_score</code>` e ` <code translate="no">has_code</code> ` corrispondono tutti nello stesso elemento Struct.</p>
 <div class="alert note">
 <p>Avviso</p>
-<p>Quando si combina un predicato di primo livello con <code translate="no">element_filter</code>, posizionare <code translate="no">element_filter</code> alla fine dell’espressione. Un’espressione di filtro può contenere un solo <code translate="no">element_filter</code> e non è possibile nidificare <code translate="no">element_filter</code> o <code translate="no">MATCH_*</code> all’interno di un altro operatore StructArray.</p>
+<p>Quando si combina un predicato di primo livello con <code translate="no">element_filter</code>, posizionare <code translate="no">element_filter</code> alla fine dell’espressione. Un’espressione di filtro può contenere un solo <code translate="no">element_filter</code> e non è possibile annidare <code translate="no">element_filter</code> o <code translate="no">MATCH_*</code> all’interno di un altro operatore StructArray.</p>
 </div>
 <h2 id="Filter-entities-with-MATCH-operators" class="common-anchor-header">Filtrare le entità con gli operatori MATCH<button data-href="#Filter-entities-with-MATCH-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -203,7 +203,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Utilizzare " <code translate="no">MATCH_ANY</code> " in questo caso poiché il risultato della ricerca di EmbeddingList è a livello di entità. Il filtro richiede che almeno un chunk nell'entità sia un chunk " <code translate="no">&quot;index&quot;</code> " di alta qualità, ma il risultato della ricerca stesso rappresenta comunque l'entità padre.</p>
+<p>Utilizzare " <code translate="no">MATCH_ANY</code> " in questo caso poiché il risultato della ricerca EmbeddingList è a livello di entità. Il filtro richiede che almeno un chunk nell'entità sia un chunk " <code translate="no">&quot;index&quot;</code> " di alta qualità, ma il risultato della ricerca stesso rappresenta comunque l'entità padre.</p>
 <h2 id="Use-filters-in-hybrid-search" class="common-anchor-header">Utilizzo dei filtri nella ricerca ibrida<button data-href="#Use-filters-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -279,10 +279,10 @@ results = client.hybrid_search(
 <tr><td>Tipi interi</td><td><code translate="no">$[page] &gt;= 2</code>, <code translate="no">$[page] in [1, 2, 3]</code></td></tr>
 <tr><td><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code></td><td><code translate="no">$[quality_score] &gt; 0.9</code>, <code translate="no">0.7 &lt; $[quality_score] &lt; 0.95</code></td></tr>
 <tr><td><code translate="no">VARCHAR</code></td><td><code translate="no">$[section] == &quot;index&quot;</code>, <code translate="no">$[text] like &quot;range%&quot;</code></td></tr>
-<tr><td>Sottocampi vettoriali</td><td>Non supportati come input per i predicati scalari di tipo <code translate="no">$[...]</code>. Utilizzare invece i sottocampi vettoriali tramite la ricerca vettoriale.</td></tr>
+<tr><td>Sottocampi vettoriali</td><td>Non supportati come input per i predicati scalari di <code translate="no">$[...]</code>. Utilizzare invece i sottocampi vettoriali tramite la ricerca vettoriale.</td></tr>
 </tbody>
 </table>
-<p>Per i casi non supportati, quali percorsi JSON, funzioni relative ai contenitori array, funzioni di corrispondenza testuale, predicati null su <code translate="no">$[...]</code>, funzioni geometriche, espressioni Timestamptz e chiamate a funzioni generiche, consultare <a href="/docs/it/struct-array-operators.md">Operatori StructArray</a>.</p>
+<p>Per i casi non supportati, quali percorsi JSON, funzioni relative ai contenitori di array, funzioni di corrispondenza testuale, predicati null su <code translate="no">$[...]</code>, funzioni geometriche, espressioni Timestamptz e chiamate a funzioni generiche, consultare <a href="/docs/it/struct-array-operators.md">Operatori StructArray</a>.</p>
 <h2 id="Common-mistakes" class="common-anchor-header">Errori comuni<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

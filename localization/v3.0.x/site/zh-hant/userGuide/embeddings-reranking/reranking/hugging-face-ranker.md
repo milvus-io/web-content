@@ -19,7 +19,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>向量搜尋會根據向量距離對結果進行排序，但初始排序順序未必能反映各候選文本對查詢的回應程度。Hugging Face Ranker 會將查詢與候選文本傳送至託管的<a href="https://huggingface.co/docs/inference-providers/index">Hugging Face 推論提供者</a>，並利用<code translate="no">sentence-similarity</code> 的評分來重新排序 Milvus 所回傳的候選結果。</p>
+    </button></h1><p>向量搜尋會根據向量距離對結果進行排序，但初始排序未必能反映各候選文本對查詢的回應程度。Hugging Face Ranker 會將查詢與候選文本傳送至託管的<a href="https://huggingface.co/docs/inference-providers/index">Hugging Face 推論提供者</a>，並利用<code translate="no">sentence-similarity</code> 的評分來重新排序 Milvus 所回傳的候選結果。</p>
 <p>此整合功能使用託管的 Hugging Face 路由器。若要透過獨立部署的文字嵌入推論 (TEI) 服務進行重新排序，請參閱<a href="/docs/zh-hant/tei-ranker.md">TEI Ranker</a>。</p>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -81,7 +81,7 @@ beta: Milvus v2.6.20+
 <li><strong>建立獨立的模型表徵。</strong>Milvus 將查詢文字傳送至<code translate="no">source_sentence</code> ，並將候選文字傳送至<code translate="no">sentences</code> 。模型會在內部分別對查詢及每個候選文字進行編碼。</li>
 <li><strong>進行比對並返回分數。</strong>模型會將查詢表徵與每個候選項表徵進行比對，並針對每個候選項返回一個相似度分數。</li>
 </ol>
-<p>Hugging Face 模型所使用的嵌入向量或表徵，屬於模型處理的中間階段。Hugging Face 回傳的是分數，而非向量。因此，初始向量檢索與模型重新排序會使用不同的表徵，且可能採用不同的模型。</p>
+<p>Hugging Face 模型所使用的嵌入向量或表徵，屬於模型處理的中間階段。Hugging Face 回傳的是分數，而非向量。因此，初始向量檢索與模型重新排序會使用各自獨立的表徵，且可能採用不同的模型。</p>
 <h2 id="Before-you-start" class="common-anchor-header">開始之前<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -301,7 +301,7 @@ client.insert(
 <tr><td><code translate="no">reranker</code></td><td>是</td><td>重新排序的實作方式。請將此值設定為 `<code translate="no">model</code>`。</td></tr>
 <tr><td><code translate="no">provider</code></td><td>是</td><td>模型提供者。請將此值設定為<code translate="no">huggingface</code> 。</td></tr>
 <tr><td><code translate="no">model_name</code></td><td>是</td><td>透過<code translate="no">hf-inference</code> 提供服務的 Hugging Face 模型 ID，適用於<code translate="no">sentence-similarity</code> 任務。</td></tr>
-<tr><td><code translate="no">queries</code></td><td>是</td><td>用於重新排序的查詢字串。每個搜尋查詢請精確提供一個字串，即使初始檢索使用查詢向量時亦然。</td></tr>
+<tr><td><code translate="no">queries</code></td><td>是</td><td>用於重新排序的查詢字串。每個搜尋查詢請精確提供一個字串，即使初始檢索使用查詢向量亦然。</td></tr>
 <tr><td><code translate="no">hf_provider</code></td><td>否</td><td>Hugging Face 推論提供者的路徑。在 Milvus 2.6.20 中，預設且唯一受支援的值為<code translate="no">hf-inference</code> 。</td></tr>
 <tr><td><code translate="no">credential</code></td><td>否</td><td>在 `<code translate="no">milvus.yaml</code>` 檔案的頂層 `<code translate="no">credential</code> ` 區段中定義的憑證標籤。此值並非代幣本身。</td></tr>
 <tr><td><code translate="no">max_client_batch_size</code></td><td>否</td><td>單次 Hugging Face 請求中傳送的候選文本最大數量。預設值為<code translate="no">32</code> ，且該值必須大於<code translate="no">0</code> 。</td></tr>
@@ -400,7 +400,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>請確保 `<code translate="no">input_field_names</code> ` 包含且僅包含一個不可為空的 `<code translate="no">VARCHAR</code> ` 欄位，且每個候選實體在該欄位中皆含有文字。</p>
+    </button></h3><p>請確保 `<code translate="no">input_field_names</code> ` 中包含且僅包含一個不可為空的 `<code translate="no">VARCHAR</code> ` 欄位，且每個候選實體在該欄位中皆含有文字。</p>
 <h3 id="Milvus-reports-missing-Hugging-Face-credentials" class="common-anchor-header">Milvus 報告 Hugging Face 憑證缺失<button data-href="#Milvus-reports-missing-Hugging-Face-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

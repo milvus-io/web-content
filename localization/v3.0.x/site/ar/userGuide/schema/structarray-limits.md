@@ -3,7 +3,7 @@ id: structarray-limits.md
 title: حدود StructArray
 summary: >-
   يشمل دعم StructArray تعريف المخطط، وحمولات الإدراج، والفهرسة، وأنماط البحث،
-  والمرشحات الخاصة بـ StructArray. استخدم هذه الصفحة كمرجع للحدود قبل الاعتماد
+  والمرشحات الخاصة بـ StructArray. استخدم هذه الصفحة كمرجع للقيود قبل الاعتماد
   على سلوك StructArray في بيئة الإنتاج.
 ---
 <h1 id="StructArray-Limits" class="common-anchor-header">حدود StructArray<button data-href="#StructArray-Limits" class="anchor-icon" translate="no">
@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يشمل دعم StructArray تعريف المخطط، وإدراج الحمولات، والفهرسة، وأنماط البحث، والمرشحات الخاصة بـ StructArray. استخدم هذه الصفحة كمرجع للحدود قبل الاعتماد على سلوك StructArray في بيئة الإنتاج.</p>
+    </button></h1><p>يشمل دعم StructArray تعريف المخطط، وحمولات الإدراج، والفهرسة، وأنماط البحث، والمرشحات الخاصة بـ StructArray. استخدم هذه الصفحة كمرجع للحدود قبل الاعتماد على سلوك StructArray في بيئة الإنتاج.</p>
 <p>تأتي معظم حدود StructArray من أحد ثلاثة مصادر: نموذج مخطط StructArray، ووضع البحث الذي تختاره للحقول الفرعية للمتجهات، وإصدار Milvus الذي تعمل عليه مجموعتك.</p>
 <h2 id="Limits-at-a-glance" class="common-anchor-header">نظرة عامة على الحدود<button data-href="#Limits-at-a-glance" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -177,10 +177,10 @@ summary: >-
 <tbody>
 <tr><td>شكل الحمولة</td><td>أدخل حقل StructArray كمصفوفة من كائنات Struct، مثل <code translate="no">chunks: [{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}]</code>.</td></tr>
 <tr><td>أسماء الحقول الفرعية</td><td>داخل كل كائن Struct، استخدم أسماء الحقول الفرعية مثل <code translate="no">text</code> و <code translate="no">emb</code> ، وليس المسارات مثل <code translate="no">chunks[text]</code>.</td></tr>
-<tr><td>مطابقة المخطط</td><td>يجب أن يتطابق كل عنصر Struct مع مخطط Struct.</td></tr>
+<tr><td>مطابقة المخطط</td><td>يجب أن يتطابق كل عنصر من عناصر Struct مع مخطط Struct.</td></tr>
 <tr><td>السعة</td><td>يجب ألا يتجاوز عدد عناصر Struct في كيان واحد <code translate="no">max_capacity</code>.</td></tr>
 <tr><td>أبعاد المتجه</td><td>يجب أن تتطابق قيم المتجهات مع <code translate="no">dim</code> المُعدة لحقولها الفرعية المتجهة.</td></tr>
-<tr><td>تكرار في وضع البحث</td><td>إذا كنت بحاجة إلى كل من البحث في قائمة التضمين (EmbeddingList) والبحث على مستوى العناصر، فاكتب المتجهات في حقلين فرعيين منفصلين للمتجهات.</td></tr>
+<tr><td>تكرار في وضع البحث</td><td>إذا كنت بحاجة إلى كل من البحث في EmbeddingList والبحث على مستوى العناصر، فاكتب المتجهات في حقلين فرعيين منفصلين للمتجهات.</td></tr>
 </tbody>
 </table>
 <h2 id="Index-and-metric-limits" class="common-anchor-header">حدود الفهرس والمقياس<button data-href="#Index-and-metric-limits" class="anchor-icon" translate="no">
@@ -198,7 +198,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكن فهرسة حقل فرعي متجه من نوع StructArray إما للبحث في EmbeddingList أو للبحث على مستوى العناصر. ولا يمكن للحقل الفرعي المتجه نفسه استخدام مجموعتي المقاييس معًا لأن كل حقل متجه أو حقل فرعي متجه لا يقبل سوى فهرس واحد.</p>
+    </button></h2><p>يمكن فهرسة حقل فرعي متجه من نوع StructArray إما للبحث في EmbeddingList أو للبحث على مستوى العناصر. ولا يمكن للحقل الفرعي المتجه نفسه استخدام مجموعتي المقاييس معًا لأن كل حقل متجه أو حقل فرعي متجه لا يقبل سوى فهرس واحد فقط.</p>
 <table>
 <thead>
 <tr><th>وضع البحث</th><th>عائلة المقاييس</th><th>مستوى النتيجة</th></tr>

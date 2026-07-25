@@ -315,7 +315,7 @@ results = client.hybrid_search(
 <tr><th>최종 후보 범위</th><th>결과 키</th><th>오프셋 동작</th><th>발생 시점</th></tr>
 </thead>
 <tbody>
-<tr><td>엔티티 수준</td><td>기본 키.</td><td>최종 결과에 요소 오프셋이 없습니다.</td><td>하이브리드 요청에는 컬렉션 수준의 벡터 필드, EmbeddingList 요청 또는 서로 다른 StructArray 필드 아래의 요소 수준 요청이 포함됩니다.</td></tr>
+<tr><td>엔티티 수준</td><td>기본 키.</td><td>최종 결과에 요소 오프셋이 없습니다.</td><td>하이브리드 요청에는 컬렉션 수준 벡터 필드, EmbeddingList 요청 또는 서로 다른 StructArray 필드 아래의 요소 수준 요청이 포함됩니다.</td></tr>
 <tr><td>요소 수준</td><td>기본 키와 상위 StructArray 필드, 그리고 요소 오프셋.</td><td>선택된 요소 오프셋은 API 또는 SDK를 통해 노출될 때 반환될 수 있습니다.</td><td>모든 <code translate="no">AnnSearchRequest</code> 객체는 요소 수준이며 동일한 StructArray 필드 아래에 있습니다.</td></tr>
 </tbody>
 </table>
@@ -338,7 +338,7 @@ results = client.hybrid_search(
 <li><p><code translate="no">element_scope</code> 는 하이브리드 검색에서 엔티티 수준 후보로 축소되어야 하는 StructArray 요소 수준 <code translate="no">AnnSearchRequest</code> 객체에 대해서만 사용하십시오.</p></li>
 <li><p>EmbeddingList 요청, 컬렉션 수준 벡터 요청 또는 동일한 StructArray 요소 수준의 하이브리드 검색에는 <code translate="no">element_scope</code> 를 사용하지 마십시오.</p></li>
 <li><p><code translate="no">sum</code> <code translate="no">topk_sum</code> 축소 전략은 또는 과 같은 양의 상관관계 지표를 필요로 합니다. 와 함께 사용해서는 안 됩니다. <code translate="no">IP</code> <code translate="no">COSINE</code> <code translate="no">L2</code></p></li>
-<li><p><code translate="no">topk_sum</code> 또한 <code translate="no">topk_avg</code> 는 양의 <code translate="no">topk</code> 값을 요구합니다. 다른 축소 전략에는 <code translate="no">topk</code> 를 포함해서는 안 됩니다.</p></li>
+<li><p><code translate="no">topk_sum</code> 또한 <code translate="no">topk_avg</code> 는 양의 <code translate="no">topk</code> 값을 요구합니다. 다른 축소 전략에는 <code translate="no">topk</code> 가 포함되어서는 안 됩니다.</p></li>
 <li><p>EmbeddingList 수준 StructArray 요청은 범위 검색이나 그룹화를 지원하지 않습니다.</p></li>
 <li><p>하이브리드 그룹화는 동일한 StructArray 요소 수준의 하이브리드 검색에 대해서만 지원되며, 기본 키에 의해서만 가능합니다.</p></li>
 <li><p>범위 검색과 그룹화를 함께 사용해서는 안 됩니다.</p></li>
@@ -361,7 +361,7 @@ results = client.hybrid_search(
     </button></h2><ul>
 <li><p>동일 StructArray 요소 수준 하이브리드 요청에 <code translate="no">element_scope</code> 를 추가하는 경우. 해당 요청은 요소 수준으로 유지되며 엔티티 수준 접기는 수행되지 않습니다.</p></li>
 <li><p><code translate="no">chunks[emb_list_vector]</code> 에 <code translate="no">element_scope</code> 를 추가하는 경우. EmbeddingList 검색은 이미 엔티티 수준입니다.</p></li>
-<li><p>두 개의 StructArray 필드가 요소 오프셋을 공유한다고 가정하는 경우. <code translate="no">chunks</code> 의 오프셋 <code translate="no">3</code> 과 다른 StructArray 필드의 오프셋 <code translate="no">3</code> 은 서로 다른 요소이므로, 하이브리드 요청은 엔티티 수준이 됩니다.</p></li>
+<li><p>두 StructArray 필드가 요소 오프셋을 공유한다고 가정하는 경우. <code translate="no">chunks</code> 의 오프셋 <code translate="no">3</code> 과 다른 StructArray 필드의 오프셋 <code translate="no">3</code> 은 서로 다른 요소이므로, 하이브리드 요청은 엔티티 수준이 됩니다.</p></li>
 <li><p><code translate="no">topk_sum</code> 을 <code translate="no">L2</code> 과 함께 사용합니다. 음수 거리 메트릭의 경우 <code translate="no">max</code>, <code translate="no">avg</code> 또는 <code translate="no">topk_avg</code> 을 사용하십시오.</p></li>
 <li><p>축약 후 엔티티 수준 하이브리드 결과에 선택된 Struct 요소 오프셋이 포함될 것으로 예상됩니다.</p></li>
 </ul>

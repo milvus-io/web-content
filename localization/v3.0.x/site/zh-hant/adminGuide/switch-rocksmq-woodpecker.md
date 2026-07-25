@@ -21,7 +21,7 @@ summary: 將 Milvus 獨立部署（Docker Compose）的訊息佇列在 RocksMQ �
     </button></h1><p>本頁面說明如何將<strong>Milvus 獨立部署（Docker Compose）</strong>中的訊息佇列（MQ）在<strong>RocksMQ</strong>與<strong>Woodpecker</strong>（本地端或 MinIO 後端）之間進行雙向切換。有關一般工作流程與先決條件，請參閱《<a href="/docs/zh-hant/switch-mq-type.md">切換 MQ 類型</a>》。</p>
 <div class="alert note">
 <ul>
-<li><strong>先決條件：</strong>MQ 切換功能僅適用於<strong>Milvus 3.0 及後續版本</strong>。開始操作前，請將您的 Milvus 實例升級至 Milvus 3.0 或後續版本 — 此功能在較早版本中不可用。</li>
+<li><strong>先決條件：</strong>MQ 切換功能僅適用於<strong>Milvus 3.0 及後續版本</strong>。開始操作前，請將您的 Milvus 實例升級至 Milvus 3.0 或後續版本——此功能在較早版本中不可用。</li>
 <li>MQ 切換需採用 Docker<strong>Compose</strong>部署模式（此模式啟用了 etcd 配置來源）。單容器 Docker 部署模式不支援此切換功能。</li>
 </ul>
 </div>
@@ -40,7 +40,7 @@ summary: 將 Milvus 獨立部署（Docker Compose）的訊息佇列在 RocksMQ �
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Verify-the-Milvus-instance-is-running" class="common-anchor-header">步驟 1：確認 Milvus 實例正在運行<button data-href="#Step-1-Verify-the-Milvus-instance-is-running" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Verify-the-Milvus-instance-is-running" class="common-anchor-header">步驟 1：確認 Milvus 執行個體正在運行<button data-href="#Step-1-Verify-the-Milvus-instance-is-running" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -166,7 +166,7 @@ summary: 將 Milvus 獨立部署（Docker Compose）的訊息佇列在 RocksMQ �
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>請確保您的 Milvus 獨立 Docker Compose 實例正在正常運作。</p>
+    </button></h3><p>請確保您的 Milvus 獨立 Docker Compose 實例正在正常運行。</p>
 <h3 id="Step-2-Execute-the-MQ-switch" class="common-anchor-header">步驟 2：執行 MQ 切換<button data-href="#Step-2-Execute-the-MQ-switch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

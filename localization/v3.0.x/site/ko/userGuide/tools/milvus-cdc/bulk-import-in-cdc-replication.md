@@ -1,6 +1,6 @@
 ---
 id: bulk-import-in-cdc-replication.md
-summary: CDC 복제를 사용하는 Milvus 클러스터에서 일괄 가져오기를 실행하는 방법을 알아보세요.
+summary: CDC 복제를 사용하는 Milvus 클러스터에서 대량 가져오기를 실행하는 방법을 알아보세요.
 title: CDC 복제에서의 대량 가져오기
 ---
 <h1 id="Bulk-Import-in-CDC-Replication" class="common-anchor-header">CDC 복제에서의 대량 가져오기<button data-href="#Bulk-Import-in-CDC-Replication" class="anchor-icon" translate="no">
@@ -39,7 +39,7 @@ title: CDC 복제에서의 대량 가져오기
     </button></h2><p>일반적인 대량 가져오기는 가져오기 작업이 완료되면 자동으로 커밋되어, 가져온 데이터를 즉시 확인할 수 있습니다. 그러나 CDC 복제 토폴로지에서는 주 클러스터와 대기 클러스터가 가져온 데이터를 동일한 논리적 시점에서 노출해야 하므로 이러한 동작이 허용되지 않습니다.</p>
 <p>대신, ` <code translate="no">auto_commit=false</code>`를 설정하여 2단계 커밋(two-phase commit) 모드로 가져오기를 실행하십시오:</p>
 <ol>
-<li><p><strong>가져오기 단계</strong>: Milvus는 프라이머리 클러스터에 데이터를 로드하고 가져오기 작업을 스탠바이 클러스터로 복제하지만, 가져온 데이터는 여전히 표시되지 않습니다. 가져오기 작업은 ‘ <code translate="no">Uncommitted</code> ’ 상태에서 중지되고 대기합니다.</p></li>
+<li><p><strong>가져오기 단계</strong>: Milvus는 프라이머리 클러스터에 데이터를 로드하고 가져오기 작업을 스탠바이 클러스터로 복제하지만, 가져온 데이터는 여전히 표시되지 않습니다. 가져오기 작업은 ‘ <code translate="no">Uncommitted</code> ’ 상태에서 중지되어 대기합니다.</p></li>
 <li><p><strong>커밋 단계</strong>: 프라이머리 클러스터에서 가져오기 작업을 명시적으로 커밋합니다. 커밋은 단일 순차적 펜스(fence)로 스탠바이 클러스터에 복제되므로, 두 클러스터 모두 동일한 논리적 시점에서 가져온 데이터를 표시하게 됩니다.</p></li>
 </ol>
 <h2 id="Step-1-Enable-import-in-a-replicating-cluster" class="common-anchor-header">1단계: 복제 클러스터에서 가져오기 활성화<button data-href="#Step-1-Enable-import-in-a-replicating-cluster" class="anchor-icon" translate="no">
@@ -57,7 +57,7 @@ title: CDC 복제에서의 대량 가져오기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>복제 클러스터의 가져오기 기능은 기본적으로 비활성화되어 있습니다. 주 클러스터와 대기 클러스터 모두에서 ` <code translate="no">dataCoord.import.enableInReplicatingCluster</code> `를 ` <code translate="no">true</code> `로 설정하여 이 기능을 활성화하십시오.</p>
+    </button></h2><p>복제 클러스터에서의 가져오기 기능은 기본적으로 비활성화되어 있습니다. 주 클러스터와 대기 클러스터 모두에서 ` <code translate="no">dataCoord.import.enableInReplicatingCluster</code> `를 ` <code translate="no">true</code> `로 설정하여 이 기능을 활성화하십시오.</p>
 <p>Milvus Operator를 사용하여 Milvus를 배포하는 경우, 각 <code translate="no">Milvus</code> 리소스의 <code translate="no">spec.config</code> 에 다음 설정을 추가하십시오:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">spec:</span>
   <span class="hljs-attr">config:</span>

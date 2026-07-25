@@ -22,7 +22,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>La ricerca vettoriale ordina i risultati in base alla distanza vettoriale, ma l'ordine iniziale potrebbe non riflettere l'adeguatezza delle risposte fornite dai testi dei candidati alla query. Hugging Face Ranker invia la query e i testi dei candidati ai <a href="https://huggingface.co/docs/inference-providers/index">provider di inferenza Hugging Face</a> ospitati e utilizza i punteggi dell'<code translate="no">sentence-similarity</code> e per riordinare i candidati restituiti da Milvus.</p>
+    </button></h1><p>La ricerca vettoriale ordina i risultati in base alla distanza vettoriale, ma l'ordine iniziale potrebbe non riflettere l'adeguatezza delle risposte fornite dal testo di ciascun candidato alla query. Hugging Face Ranker invia la query e il testo dei candidati ai <a href="https://huggingface.co/docs/inference-providers/index">provider di inferenza Hugging Face</a> ospitati e utilizza i punteggi dell'<code translate="no">sentence-similarity</code> e per riordinare i candidati restituiti da Milvus.</p>
 <p>Questa integrazione utilizza il router Hugging Face ospitato. Per effettuare una nuova classificazione utilizzando un servizio Text Embeddings Inference (TEI) distribuito separatamente, consultare <a href="/docs/it/tei-ranker.md">TEI Ranker</a>.</p>
 <h2 id="Limits" class="common-anchor-header">Limiti<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -40,7 +40,7 @@ beta: Milvus v2.6.20+
         ></path>
       </svg>
     </button></h2><ul>
-<li>La funzione deve fare riferimento esattamente a un campo non nullo di ` <code translate="no">VARCHAR</code> ` in ` <code translate="no">input_field_names</code>`.</li>
+<li>La funzione deve fare riferimento esattamente a un campo non nullo di <code translate="no">VARCHAR</code> in <code translate="no">input_field_names</code>.</li>
 <li>Il numero di stringhe in <code translate="no">queries</code> deve essere uguale al numero di query di ricerca (<code translate="no">nq</code>).</li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">Come funziona<button data-href="#How-it-works" class="anchor-icon" translate="no">
@@ -69,7 +69,7 @@ beta: Milvus v2.6.20+
 <li><strong>Recupera le entità candidate.</strong> Milvus effettua la ricerca nel campo vettoriale configurato e raccoglie le entità candidate.</li>
 <li><strong>Preparazione del testo per il re-ranking.</strong> La funzione legge il testo della query da <code translate="no">params.queries</code> e il testo dei candidati dal campo <code translate="no">VARCHAR</code> specificato in <code translate="no">input_field_names</code>.</li>
 <li><strong>Richiesta dei punteggi di similarità.</strong> Milvus invia la query come <code translate="no">source_sentence</code> e i testi candidati come <code translate="no">sentences</code> tramite <code translate="no">hf-inference</code> alla pipeline Hugging Face <code translate="no">sentence-similarity</code>.</li>
-<li><strong>Riorganizza i candidati in base al punteggio.</strong> Hugging Face restituisce un punteggio per ciascun candidato. Milvus ordina i candidati dal punteggio più alto a quello più basso e restituisce i risultati riorganizzati.</li>
+<li><strong>Riorganizza i candidati in ordine di punteggio.</strong> Hugging Face restituisce un punteggio per ciascun candidato. Milvus ordina i candidati dal punteggio più alto a quello più basso e restituisce i risultati riorganizzati.</li>
 </ol>
 <p><strong>Come vengono calcolati i punteggi di similarità</strong></p>
 <p><span class="img-wrapper">
@@ -197,8 +197,8 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Hugging Face Ranker viene definito e applicato al momento della ricerca. È possibile modificare o omettere il ranker per ogni ricerca senza modificare lo schema della raccolta.</p>
-<h3 id="Step-1-Prepare-a-collection" class="common-anchor-header">Passaggio 1: Preparare una raccolta<button data-href="#Step-1-Prepare-a-collection" class="anchor-icon" translate="no">
+    </button></h2><p>Hugging Face Ranker viene definito e applicato al momento della ricerca. È possibile modificare o omettere il ranker per ogni ricerca senza modificare lo schema della collezione.</p>
+<h3 id="Step-1-Prepare-a-collection" class="common-anchor-header">Passaggio 1: Preparare una collezione<button data-href="#Step-1-Prepare-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -436,7 +436,7 @@ results = client.search(
         ></path>
       </svg>
     </button></h2><ul>
-<li>Per informazioni sul comportamento e sui limiti del Model Ranker condiviso, consultare <a href="/docs/it/model-ranker-overview.md">la Panoramica su Model Ranker</a>.</li>
+<li>Per informazioni sul comportamento e sui limiti del Model Ranker condiviso, consultare <a href="/docs/it/model-ranker-overview.md">Panoramica su Model Ranker</a>.</li>
 <li>Per generare embedding tramite i provider di inferenza Hugging Face ospitati, consultare <a href="/docs/it/hugging-face.md">Hugging Face</a>.</li>
 <li>Per applicare il ranker alla ricerca ibrida, consultare <a href="/docs/it/multi-vector-search.md">Ricerca ibrida multivettoriale</a>.</li>
 </ul>

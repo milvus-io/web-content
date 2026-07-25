@@ -36,7 +36,7 @@ title: RocksMQ
     </button></h2><ul>
 <li><strong>僅限獨立執行模式</strong>— Milvus 分散式（叢集）<strong>不</strong>支援 RocksMQ。請參閱<a href="/docs/zh-hant/mqtype-overview.md#Supported-message-queues">訊息佇列支援對照表</a>。</li>
 <li>RocksMQ 隨 Milvus 一併提供，因此無需另行安裝。</li>
-<li>在較早版本的 Milvus 中，它曾是預設的獨立模式訊息佇列，但在 Milvus 3.x 中已被內建的 Woodpecker 所取代。</li>
+<li>在較早版本的 Milvus 中，它曾是預設的獨立執行模式訊息佇列，但在 Milvus 3.x 中已被內建的 Woodpecker 所取代。</li>
 </ul>
 <h2 id="Deploy-Milvus-Standalone-with-RocksMQ-using-Docker" class="common-anchor-header">使用 Docker 部署搭配 RocksMQ 的 Milvus 獨立執行模式<button data-href="#Deploy-Milvus-Standalone-with-RocksMQ-using-Docker" class="anchor-icon" translate="no">
       <svg translate="no"

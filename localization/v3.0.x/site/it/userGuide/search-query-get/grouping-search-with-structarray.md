@@ -4,9 +4,9 @@ title: Raggruppamento dei risultati di ricerca con StructArray
 summary: >-
   Utilizza questa pagina per raggruppare i risultati della ricerca a livello di
   elemento di StructArray in base all'entità padre. La ricerca a livello di
-  elemento può restituire più risultati provenienti dalla stessa entità quando
+  elemento può restituire più risultati relativi alla stessa entità quando
   diversi elementi di Struct corrispondono alla query. Il raggruppamento
-  raggruppa tali risultati a livello di elemento in modo che ogni entità padre
+  raggruppa tali risultati relativi agli elementi in modo che ogni entità padre
   compaia al massimo una volta.
 ---
 <h1 id="Grouping-Search-with-StructArray" class="common-anchor-header">Raggruppamento dei risultati di ricerca con StructArray<button data-href="#Grouping-Search-with-StructArray" class="anchor-icon" translate="no">
@@ -24,8 +24,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Utilizzare questa pagina per raggruppare i risultati della ricerca a livello di elemento StructArray in base all'entità padre. La ricerca a livello di elemento può restituire più risultati provenienti dalla stessa entità quando diversi elementi Struct corrispondono alla query. Il raggruppamento raggruppa tali risultati a livello di elemento in modo che ogni entità padre appaia al massimo una volta.</p>
-<p>Questa pagina utilizza la raccolta « <code translate="no">tech_articles</code> » descritta in <a href="/docs/it/create-structarray-field.md">«Creazione di un campo StructArray</a>». La raccolta presenta un campo StructArray denominato « <code translate="no">chunks</code> ». Il sottocampo vettoriale « <code translate="no">chunks[emb]</code> » è indicizzato per la ricerca a livello di elemento con una metrica vettoriale regolare.</p>
+    </button></h1><p>Utilizzare questa pagina per raggruppare i risultati della ricerca a livello di elemento StructArray in base all'entità padre. La ricerca a livello di elemento può restituire più risultati provenienti dalla stessa entità quando diversi elementi Struct corrispondono alla query. Il raggruppamento raggruppa tali risultati a livello di elemento in modo che ciascuna entità padre appaia al massimo una volta.</p>
+<p>Questa pagina utilizza la raccolta <code translate="no">tech_articles</code> descritta in <a href="/docs/it/create-structarray-field.md">Creare un campo StructArray</a>. La raccolta presenta un campo StructArray denominato <code translate="no">chunks</code>. Il sottocampo vettoriale <code translate="no">chunks[emb]</code> è indicizzato per la ricerca a livello di elemento con una metrica vettoriale regolare.</p>
 <h2 id="How-grouping-applies-to-StructArray" class="common-anchor-header">Come si applica il raggruppamento a StructArray<button data-href="#How-grouping-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -174,7 +174,7 @@ results = client.search(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Il predicato di primo livello seleziona le entità candidate. Il predicato ` <code translate="no">element_filter</code> ` limita la ricerca vettoriale a livello di elemento agli elementi Struct corrispondenti. Il raggruppamento raggruppa quindi i risultati corrispondenti in base alla chiave primaria.</p>
-<h2 id="Use-grouping-in-hybrid-search" class="common-anchor-header">Utilizzare il raggruppamento nella ricerca ibrida<button data-href="#Use-grouping-in-hybrid-search" class="anchor-icon" translate="no">
+<h2 id="Use-grouping-in-hybrid-search" class="common-anchor-header">Utilizzo del raggruppamento nella ricerca ibrida<button data-href="#Use-grouping-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -244,7 +244,7 @@ results = client.hybrid_search(
 <tbody>
 <tr><td><code translate="no">id</code></td><td>Chiave primaria dell’entità padre raggruppata.</td></tr>
 <tr><td><code translate="no">distance</code> o punteggio</td><td>Punteggio o distanza dell'elemento Struct selezionato per quell'entità padre.</td></tr>
-<tr><td><code translate="no">offset</code></td><td>Posizione a partire da zero dell’elemento Struct selezionato al momento della restituzione.</td></tr>
+<tr><td><code translate="no">offset</code></td><td>Posizione a partire da zero dell'elemento Struct selezionato al momento della restituzione.</td></tr>
 <tr><td>Chiavi primarie ripetute</td><td>Non previsto in caso di raggruppamento in base alla chiave primaria.</td></tr>
 <tr><td><code translate="no">limit</code></td><td>Si applica ai risultati raggruppati dell’entità padre.</td></tr>
 </tbody>
@@ -290,7 +290,7 @@ results = client.hybrid_search(
     </button></h2><ul>
 <li><p>Utilizzo del raggruppamento con ` <code translate="no">chunks[emb_list_vector]</code>`, destinato alla ricerca EmbeddingList.</p></li>
 <li><p>Raggruppamento in base a un campo scalare non chiave primaria.</p></li>
-<li><p>Raggruppamento in base a più campi. Il raggruppamento StructArray a livello di elemento supporta solo il raggruppamento per chiave primaria.</p></li>
+<li><p>Raggruppamento in base a più campi. Il raggruppamento StructArray a livello di elemento supporta solo il raggruppamento in base alla chiave primaria.</p></li>
 <li><p>Aspettarsi che i risultati raggruppati rappresentino ogni elemento Struct corrispondente. Il raggruppamento restituisce al massimo un risultato per entità padre.</p></li>
 <li><p>Presumere che la ricerca raggruppata a livello di elemento ricalcoli un punteggio di tipo " <code translate="no">MAX_SIM*</code> " in stile EmbeddingList. Il raggruppamento comprime i risultati a livello di elemento; non modifica il modello di punteggio.</p></li>
 <li><p>Combinazione dell’ <code translate="no">group_by_field</code> con <code translate="no">radius</code> o <code translate="no">range_filter</code>.</p></li>

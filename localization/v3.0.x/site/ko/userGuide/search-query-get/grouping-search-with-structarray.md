@@ -75,7 +75,7 @@ summary: >-
 <tr><td>요소 수준 벡터 하위 필드</td><td><code translate="no">chunks[emb]</code> 와 같은 StructArray 벡터 하위 필드를 사용하고, 일반 벡터 메트릭으로 인덱싱하십시오.</td></tr>
 <tr><td>일반 벡터 쿼리</td><td><code translate="no">EmbeddingList</code> 가 아닌 일반 벡터 쿼리를 사용하십시오.</td></tr>
 <tr><td>기본 키 그룹화</td><td>컬렉션의 기본 키를 <code translate="no">group_by_field</code> 형태로 사용하십시오(예: <code translate="no">doc_id</code>).</td></tr>
-<tr><td>범위 매개변수 미사용</td><td><code translate="no">radius</code> 또는 <code translate="no">range_filter</code> 와 같은 범위 검색 매개변수와 그룹화 검색을 함께 사용하지 마십시오.</td></tr>
+<tr><td>범위 매개변수 없음</td><td><code translate="no">radius</code> 또는 <code translate="no">range_filter</code> 와 같은 범위 검색 매개변수와 그룹화 검색을 함께 사용하지 마십시오.</td></tr>
 </tbody>
 </table>
 <p>인덱스 설정에 대해서는 <a href="/docs/ko/index-structarray-fields.md">StructArray 필드 인덱스를</a> 참조하십시오.</p>
@@ -289,7 +289,7 @@ results = client.hybrid_search(
 <li><p>주 키가 아닌 스칼라 필드를 기준으로 그룹화하는 경우.</p></li>
 <li><p>여러 필드를 기준으로 그룹화하는 경우. 요소 수준 StructArray 그룹화는 기본 키 그룹화만 지원합니다.</p></li>
 <li><p>그룹화된 결과가 일치하는 모든 Struct 요소를 나타낼 것이라고 기대하는 경우. 그룹화는 부모 엔티티당 최대 하나의 결과만 반환합니다.</p></li>
-<li><p>그룹화된 요소 수준 검색이 EmbeddingList 스타일의 <code translate="no">MAX_SIM*</code> 점수를 재계산한다고 가정하는 경우. 그룹화는 요소 수준의 일치 결과를 통합할 뿐, 점수 산정 모델을 변경하지 않습니다.</p></li>
+<li><p>그룹화된 요소 수준 검색이 EmbeddingList 스타일의 <code translate="no">MAX_SIM*</code> 점수를 재계산한다고 가정하는 경우. 그룹화는 요소 수준 일치 결과를 통합할 뿐, 점수 산정 모델을 변경하지 않습니다.</p></li>
 <li><p><code translate="no">group_by_field</code> 를 <code translate="no">radius</code> 또는 <code translate="no">range_filter</code> 와 결합하는 경우.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">다음 단계<button data-href="#Next-steps" class="anchor-icon" translate="no">

@@ -93,7 +93,7 @@ beta: Milvus v2.6.20+
 <li>Un modello attualmente fornito d <code translate="no">hf-inference</code> per il <a href="https://huggingface.co/docs/inference-providers/en/tasks/feature-extraction"><code translate="no">feature-extraction</code></a> attività.</li>
 </ul>
 <div class="alert note">
-<p>Milvus non garantisce che un modello Hugging Face rimanga disponibile su <code translate="no">hf-inference</code>, né che il modello soddisfi i requisiti di stabilità, latenza e qualità dell’output. Verificare il modello su Hugging Face e valutarlo in base al proprio carico di lavoro prima di utilizzarlo in produzione.</p>
+<p>Milvus non garantisce che un modello Hugging Face rimanga disponibile su <code translate="no">hf-inference</code>, né che il modello soddisfi i requisiti di stabilità, latenza e qualità dell’output. Verificare il modello su Hugging Face e valutarlo in relazione al proprio carico di lavoro prima di utilizzarlo in produzione.</p>
 </div>
 <p>Gli esempi utilizzano <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2"><code translate="no">sentence-transformers/all-MiniLM-L6-v2</code></a>, che produce embedding a 384 dimensioni. Il modello viene utilizzato solo per illustrare la configurazione e non costituisce una raccomandazione né una certificazione da parte di Milvus.</p>
 <h2 id="Configure-credentials" class="common-anchor-header">Configurazione delle credenziali<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
@@ -241,7 +241,7 @@ schema.add_field(
 
 schema.add_function(text_embedding_function)
 <button class="copy-code-btn"></button></code></pre>
-<p>Se si utilizzano solo le credenziali a livello di provider o la variabile d’ambiente, omettere ` <code translate="no">credential</code> ` dai parametri della funzione.</p>
+<p>Se si utilizzano solo le credenziali a livello di provider o la variabile d’ambiente, omettere <code translate="no">credential</code> dai parametri della funzione.</p>
 <p>Configurare un indice per il campo di output, quindi creare la raccolta:</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 index_params.add_index(
@@ -263,7 +263,7 @@ client.create_collection(
 </thead>
 <tbody>
 <tr><td><code translate="no">provider</code></td><td>Sì</td><td>Il provider del modello di embedding. Impostare questo valore su <code translate="no">huggingface</code>.</td></tr>
-<tr><td><code translate="no">model_name</code></td><td>Sì</td><td>L'ID del modello Hugging Face per un modello fornito tramite <code translate="no">hf-inference</code> per il task " <code translate="no">feature-extraction</code> ".</td></tr>
+<tr><td><code translate="no">model_name</code></td><td>Sì</td><td>L'ID del modello Hugging Face per un modello fornito tramite <code translate="no">hf-inference</code> per il task <code translate="no">feature-extraction</code>.</td></tr>
 <tr><td><code translate="no">hf_provider</code></td><td>No</td><td>Il percorso del provider di inferenza di Hugging Face. Il valore predefinito e l'unico supportato in Milvus 2.6.20 è <code translate="no">hf-inference</code>.</td></tr>
 <tr><td><code translate="no">credential</code></td><td>No</td><td>L'etichetta di una credenziale definita nella sezione di primo livello <code translate="no">credential</code> di <code translate="no">milvus.yaml</code>. Questo valore non corrisponde al token stesso.</td></tr>
 <tr><td><code translate="no">normalize</code></td><td>No</td><td>Indica se Hugging Face deve restituire embedding normalizzati. I valori supportati sono <code translate="no">true</code> e <code translate="no">false</code>. Se omesso, Milvus non imposta questa opzione nella richiesta.</td></tr>
@@ -381,7 +381,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Controlla la dimensione di output del modello e confrontala con quella indicata su <code translate="no">dim</code> nel campo "Function output". Milvus rifiuta una risposta la cui dimensione del vettore differisce da quella del campo " <code translate="no">FLOAT_VECTOR</code> ".</p>
+    </button></h3><p>Controlla la dimensione di output del modello e confrontala con quella indicata su <code translate="no">dim</code> nel campo "Output della funzione". Milvus rifiuta una risposta la cui dimensione del vettore differisce da quella del campo <code translate="no">FLOAT_VECTOR</code>.</p>
 <h3 id="Milvus-reports-missing-Hugging-Face-credentials" class="common-anchor-header">Milvus segnala la mancanza delle credenziali Hugging Face<button data-href="#Milvus-reports-missing-Hugging-Face-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

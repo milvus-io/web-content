@@ -23,7 +23,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Auf dieser Seite können Sie die StructArray-Vektorsuche mit anderen Vektorsuchen in einer hybriden Suchanfrage kombinieren. Die StructArray-Hybridsuche kann je nach den von Ihnen kombinierten „ <code translate="no">AnnSearchRequest</code> “-Objekten entweder Ergebnisse auf Entitätsebene oder auf Elementebene liefern.</p>
+    </button></h1><p>Auf dieser Seite können Sie die StructArray-Vektorsuche mit anderen Vektorsuchen in einer hybriden Suchanfrage kombinieren. Die StructArray-Hybridsuche kann je nach den kombinierten „ <code translate="no">AnnSearchRequest</code> “-Objekten entweder Ergebnisse auf Entitätsebene oder auf Elementebene liefern.</p>
 <p>Diese Seite verwendet die „ <code translate="no">tech_articles</code> “-Sammlung aus dem Abschnitt <a href="/docs/de/create-structarray-field.md">„Erstellen eines StructArray-Feldes</a>“. Die Sammlung verfügt über ein Vektorfeld auf oberster Ebene namens „ <code translate="no">title_vector</code> “ und ein StructArray-Feld namens „ <code translate="no">chunks</code> “. Das Unterfeld „ <code translate="no">chunks[emb_list_vector]</code> “ ist für die EmbeddingList-Suche indiziert, und „ <code translate="no">chunks[emb]</code> “ ist für die Suche auf Elementebene indiziert.</p>
 <h2 id="How-hybrid-search-applies-to-StructArray" class="common-anchor-header">Anwendung der hybriden Suche auf „StructArray“<button data-href="#How-hybrid-search-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -47,13 +47,13 @@ summary: >-
 <tbody>
 <tr><td>Vektorfeld auf Sammlungsebene + StructArray-Unterfeld „EmbeddingList“</td><td>Entitätsebene</td><td>Endgültige Kandidaten werden über den Primärschlüssel indiziert.</td><td>Nicht verwenden.</td></tr>
 <tr><td>Vektorfeld auf Sammlungsebene + Unterfeld auf Elementebene von StructArray</td><td>Entitätsebene</td><td>Treffer auf Elementebene werden vor der hybriden Neureihung auf Kandidaten auf Entitätsebene zusammengefasst.</td><td>Optionale Zusammenfassungskonfiguration auf der StructArray-Elementebene <code translate="no">AnnSearchRequest</code>.</td></tr>
-<tr><td>Mehrere Unterfelder auf Elementebene unter demselben StructArray-Feld</td><td>Elementebene</td><td>Endgültige Kandidaten werden anhand des Primärschlüssels sowie des Struct-Element-Offsets indiziert.</td><td>Nicht verwenden.</td></tr>
+<tr><td>Mehrere Unterfelder auf Elementebene unter demselben StructArray-Feld</td><td>Elementebene</td><td>Endgültige Kandidaten werden anhand des Primärschlüssels plus Struct-Element-Offset indiziert.</td><td>Nicht verwenden.</td></tr>
 <tr><td>Unterfelder auf Elementebene unter verschiedenen StructArray-Feldern</td><td>Entitätsebene</td><td>Element-Offsets haben keine gemeinsame Identität, daher wird jede StructArray- <code translate="no">AnnSearchRequest</code> auf Elementebene vor der Neuanordnung zusammengefasst.</td><td>Optionale Konfiguration zum Zusammenklappen für jedes „ <code translate="no">AnnSearchRequest</code> “ auf StructArray-Elementebene.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
 <p>Warnung</p>
-<p>Verwenden Sie „ <code translate="no">element_scope</code> “ ausschließlich zur Konfiguration der Zusammenfassung für StructArray-Objekte auf Elementebene ( <code translate="no">AnnSearchRequest</code> ) bei einer hybriden Suche auf Elementebene mit nicht identischen Strukturen. Verwenden Sie diese Option nicht für EmbeddingList-Anfragen, Vektor-Anfragen auf Sammlungsebene oder eine hybride Suche auf Elementebene mit identischen StructArray-Elementen.</p>
+<p>Verwenden Sie „ <code translate="no">element_scope</code> “ ausschließlich zur Konfiguration der Zusammenfassung für StructArray-Objekte auf Elementebene ( <code translate="no">AnnSearchRequest</code> ) bei einer hybriden Suche auf Elementebene mit nicht identischen Strukturen. Verwenden Sie diese Option nicht für EmbeddingList-Anfragen, Vektor-Anfragen auf Sammlungsebene oder hybride Suchen auf Elementebene mit identischen StructArray-Elementen.</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">Bevor Sie beginnen<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -83,7 +83,7 @@ summary: >-
 </tbody>
 </table>
 <p>Informationen zur Indexeinrichtung finden Sie unter <a href="/docs/de/index-structarray-fields.md">„Index StructArray-Felder</a>“.</p>
-<h2 id="Run-hybrid-search-with-an-EmbeddingList-request" class="common-anchor-header">Führen Sie eine Hybrid-Suche mit einer „EmbeddingList“-Anfrage durch<button data-href="#Run-hybrid-search-with-an-EmbeddingList-request" class="anchor-icon" translate="no">
+<h2 id="Run-hybrid-search-with-an-EmbeddingList-request" class="common-anchor-header">Führen Sie eine hybride Suche mit einer „EmbeddingList“-Anfrage durch<button data-href="#Run-hybrid-search-with-an-EmbeddingList-request" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -98,7 +98,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die „EmbeddingList“-Suche in einem „StructArray“-Vektor-Unterfeld erfolgt bei der hybriden Suche auf Entitätsebene. Sie verhält sich wie eine Vektorsuche auf Entitätsebene und gibt keinen einzelnen Offset eines übereinstimmenden „Struct“-Elements zurück.</p>
+    </button></h2><p>Die „EmbeddingList“-Suche in einem „StructArray“-Vektor-Unterfeld erfolgt bei der hybriden Suche auf Entitätsebene. Sie verhält sich wie eine Vektorsuche auf Entitätsebene und gibt keinen Offset für ein übereinstimmendes „Struct“-Element zurück.</p>
 <pre><code translate="no">from pymilvus import AnnSearchRequest, MilvusClient, RRFRanker
 from pymilvus.client.embedding_list import EmbeddingList
 
@@ -139,7 +139,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In diesem Beispiel liefern beide „ <code translate="no">AnnSearchRequest</code> “-Objekte Kandidaten auf Entitätsebene. Das Endergebnis wird anhand des Primärschlüssels der übergeordneten Entität indiziert. Fügen Sie der „EmbeddingList“-Anfrage keine „ <code translate="no">element_scope</code> “-Angabe hinzu.</p>
+<p>In diesem Beispiel liefern beide „ <code translate="no">AnnSearchRequest</code> “-Objekte Kandidaten auf Entitätsebene. Das Endergebnis wird anhand des Primärschlüssels der übergeordneten Entität indiziert. Fügen Sie der „EmbeddingList“-Anfrage keine „ <code translate="no">element_scope</code> “ hinzu.</p>
 <h2 id="Run-same-StructArray-element-level-hybrid-search" class="common-anchor-header">Führen Sie eine hybride Suche auf Elementebene mit demselben „StructArray“ durch<button data-href="#Run-same-StructArray-element-level-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -155,7 +155,7 @@ results = client.hybrid_search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Wenn alle „ <code translate="no">AnnSearchRequest</code> “-Objekte auf Vektor-Unterfelder auf Elementebene unter demselben „StructArray“-Feld abzielen, kann die Hybrid-Suche durch eine Neugewichtung Kandidaten auf Elementebene beibehalten. Dies ist der einzige „StructArray“-Hybridmodus, bei dem die Endergebnisse auf Elementebene verbleiben.</p>
+    </button></h2><p>Wenn alle „ <code translate="no">AnnSearchRequest</code> “-Objekte auf Vektor-Unterfelder auf Elementebene unter demselben „StructArray“-Feld abzielen, kann die Hybrid-Suche durch eine Neureihung Kandidaten auf Elementebene beibehalten. Dies ist der einzige „StructArray“-Hybridmodus, bei dem die Endergebnisse auf Elementebene bleiben.</p>
 <p>Das folgende Beispiel geht davon aus, dass das „ <code translate="no">chunks</code> “-StructArray-Feld zwei Vektor-Unterfelder auf Elementebene enthält, „ <code translate="no">chunks[emb]</code> “ und „ <code translate="no">chunks[code_emb]</code> “, und dass beide reguläre Vektormetriken verwenden.</p>
 <pre><code translate="no">index_chunk_req = AnnSearchRequest(
     data=[query_vector],
@@ -250,7 +250,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In diesem Beispiel ist „ <code translate="no">title_req</code> “ auf Entitätsebene, sodass das endgültige hybride Ergebnis ebenfalls auf Entitätsebene liegt. Die „ <code translate="no">chunk_req</code> “-Anfrage gibt zunächst Elementtreffer aus „ <code translate="no">chunks[emb]</code> “ zurück und fasst dann die zurückgegebenen Elemente derselben Entität zusammen, indem sie die drei besten Elementwerte addiert. Wird „ <code translate="no">element_scope</code> “ weggelassen, obwohl eine Zusammenfassung auf Entitätsebene erforderlich ist, wird standardmäßig die Zusammenfassungsstrategie „ <code translate="no">max</code> “ verwendet.</p>
+<p>In diesem Beispiel ist „ <code translate="no">title_req</code> “ auf Entitätsebene, sodass das endgültige hybride Ergebnis ebenfalls auf Entitätsebene liegt. Die „ <code translate="no">chunk_req</code> “-Anfrage gibt zunächst Elementtreffer aus „ <code translate="no">chunks[emb]</code> “ zurück und fasst anschließend die zurückgegebenen Elemente derselben Entität zusammen, indem die drei besten Elementwerte summiert werden. Wird „ <code translate="no">element_scope</code> “ weggelassen, obwohl eine Zusammenfassung auf Entitätsebene erforderlich ist, wird standardmäßig die Zusammenfassungsstrategie „ <code translate="no">max</code> “ verwendet.</p>
 <h2 id="Choose-a-collapse-strategy" class="common-anchor-header">Wählen Sie eine Zusammenfassungsstrategie<button data-href="#Choose-a-collapse-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -278,7 +278,7 @@ results = client.hybrid_search(
 <tr><td><code translate="no">topk_avg</code></td><td>Berechne den Durchschnitt der besten von „ <code translate="no">K</code> “ zurückgegebenen Elementbewertungen für die Entität.</td><td>Erforderlich und muss positiv sein.</td><td>Jede unterstützte reguläre Vektormetrik.</td></tr>
 </tbody>
 </table>
-<p>„Collapse“ verwendet ausschließlich die Elementtreffer, die von der StructArray- <code translate="no">AnnSearchRequest</code> auf Elementebene zurückgegeben werden. Nach der ANN-Suche werden nicht alle Struct-Elemente der Entität durchsucht. Stellen Sie den Wert für „ <code translate="no">limit</code> “ in der Anfrage hoch genug ein, um die Elemente bereitzustellen, die Sie für „Collapse“ nutzen möchten.</p>
+<p>„Collapse“ verwendet ausschließlich die Elementtreffer, die von der StructArray- <code translate="no">AnnSearchRequest</code> auf Elementebene zurückgegeben werden. Es werden nach der ANN-Suche nicht alle Struct-Elemente in der Entität durchsucht. Stellen Sie den Wert für „ <code translate="no">limit</code> “ in der Anfrage hoch genug ein, um die Elemente bereitzustellen, die Sie für „Collapse“ nutzen möchten.</p>
 <h2 id="Add-filters-range-search-and-grouping" class="common-anchor-header">Filter, Bereichssuche und Gruppierung hinzufügen<button data-href="#Add-filters-range-search-and-grouping" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -294,9 +294,9 @@ results = client.hybrid_search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie können „ <code translate="no">element_filter</code> “ an eine „StructArray“-Elementebene-„ <code translate="no">AnnSearchRequest</code> “ anhängen, wenn skalare Bedingungen auf dieselben „Struct“-Elemente angewendet werden sollen, die an der Vektorsuche beteiligt sind. Sie können auch eine „ <code translate="no">filter</code> “ auf oberster Ebene für „ <code translate="no">hybrid_search()</code> “ verwenden, um Bedingungen für übergeordnete Entitäten festzulegen.</p>
+    </button></h2><p>Sie können „ <code translate="no">element_filter</code> “ an eine „StructArray“-Elementebene-„ <code translate="no">AnnSearchRequest</code> “ anhängen, wenn skalare Bedingungen auf dieselben „Struct“-Elemente angewendet werden sollen, die an der Vektorsuche teilnehmen. Sie können auch eine „ <code translate="no">filter</code> “ auf oberster Ebene für „ <code translate="no">hybrid_search()</code> “ verwenden, um Bedingungen für übergeordnete Entitäten festzulegen.</p>
 <p>Vektorfelder auf StructArray-Ebene unterstützen die Bereichssuche bei der hybriden Suche. Fügen Sie „ <code translate="no">radius</code> “ und optional „ <code translate="no">range_filter</code> “ zur „ <code translate="no">AnnSearchRequest</code> “ auf Elementebene hinzu. StructArray-Anfragen auf „EmbeddingList“-Ebene unterstützen keine Bereichssuche.</p>
-<p>Die hybride Gruppierung auf Elementebene wird nur unterstützt, wenn alle „ <code translate="no">AnnSearchRequest</code> “-Objekte auf Vektorfelder auf Elementebene unter demselben „StructArray“-Feld abzielen und „ <code translate="no">group_by_field</code> “ der Primärschlüssel sein muss. Die hybride Gruppierung wird nicht unterstützt, wenn die Abfrage Vektorfelder auf Sammlungsebene, verschiedene „StructArray“-Felder oder Abfragen auf „EmbeddingList“-Ebene mischt. Kombinieren Sie die Bereichssuche nicht mit einer Gruppierung.</p>
+<p>Die hybride Gruppierung auf Elementebene wird nur unterstützt, wenn alle „ <code translate="no">AnnSearchRequest</code> “-Objekte auf Vektorfelder auf Elementebene unter demselben „StructArray“-Feld abzielen und „ <code translate="no">group_by_field</code> “ der Primärschlüssel sein muss. Die hybride Gruppierung wird nicht unterstützt, wenn die Abfrage Vektorfelder auf Sammlungsebene, verschiedene „StructArray“-Felder oder Abfragen auf „EmbeddingList“-Ebene mischt. Kombinieren Sie die Bereichssuche nicht mit der Gruppierung.</p>
 <h2 id="Interpret-hybrid-results" class="common-anchor-header">Hybride Ergebnisse interpretieren<button data-href="#Interpret-hybrid-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -339,10 +339,10 @@ results = client.hybrid_search(
     </button></h2><ul>
 <li><p>Verwenden Sie „ <code translate="no">element_scope</code> “ ausschließlich für „ <code translate="no">AnnSearchRequest</code> “-Objekte auf StructArray-Ebene, die bei der hybriden Suche auf Kandidaten auf Entitätsebene reduziert werden müssen.</p></li>
 <li><p>Verwenden Sie „ <code translate="no">element_scope</code> “ nicht für „EmbeddingList“-Anfragen, Vektor-Anfragen auf Sammlungsebene oder die hybride Suche auf Elementebene innerhalb desselben „StructArray“.</p></li>
-<li><p><code translate="no">sum</code> Die Zusammenfassungsstrategien „ <code translate="no">topk_sum</code> “ und „ “ erfordern Metriken mit positiver Korrelation, wie beispielsweise „ <code translate="no">IP</code> “ oder „ <code translate="no">COSINE</code> “. Verwenden Sie diese nicht zusammen mit „ <code translate="no">L2</code> “.</p></li>
+<li><p><code translate="no">sum</code> Die Zusammenfassungsstrategien „ <code translate="no">topk_sum</code> “ und „ “ erfordern Metriken mit positiver Korrelation, wie beispielsweise „ <code translate="no">IP</code> “ oder „ <code translate="no">COSINE</code> “. Verwenden Sie diese nicht in Verbindung mit „ <code translate="no">L2</code> “.</p></li>
 <li><p><code translate="no">topk_sum</code> und „ <code translate="no">topk_avg</code> “ erfordern einen positiven Wert für „ <code translate="no">topk</code> “. Andere Zusammenfassungsstrategien dürfen „ <code translate="no">topk</code> “ nicht enthalten.</p></li>
 <li><p>StructArray-Anfragen auf „EmbeddingList“-Ebene unterstützen weder die Bereichssuche noch „group-by“.</p></li>
-<li><p>Hybride Gruppierungen werden nur für hybride Suchvorgänge auf Elementebene desselben StructArray und ausschließlich nach Primärschlüssel unterstützt.</p></li>
+<li><p>Hybride Gruppierungen werden nur für hybride Suchvorgänge auf Elementebene desselben „StructArray“ und ausschließlich nach Primärschlüssel unterstützt.</p></li>
 <li><p>Kombinieren Sie die Bereichssuche nicht mit „group-by“.</p></li>
 </ul>
 <h2 id="Common-mistakes" class="common-anchor-header">Häufige Fehler<button data-href="#Common-mistakes" class="anchor-icon" translate="no">

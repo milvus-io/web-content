@@ -135,7 +135,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>استخدم موضع <code translate="no">%</code> و <code translate="no">_</code> للتحكم في مكان ظهور النص الثابت في السلسلة المطابقة.</p>
+    </button></h3><p>استخدم موضع <code translate="no">%</code> و <code translate="no">_</code> للتحكم في مكان ظهور النص الثابت في السلسلة المتطابقة.</p>
 <table>
 <thead>
 <tr><th>المتطلبات</th><th>النمط</th><th>مثال على التصفية</th></tr>
@@ -227,7 +227,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يُنصح باستخدام سلاسل نصية خام لأنماط التعبير العادي التي تحتوي على خطوط مائلة عكسية. في السلسلة النصية الخام، المكتوبة على النحو التالي: <code translate="no">r&quot;...&quot;</code> أو <code translate="no">r'...'</code> ، يتم تمرير الخطوط المائلة العكسية إلى محرك التعبير العادي حرفياً. وهذا يتجنب الهروب الإضافي المطلوب في السلاسل النصية العادية.</p>
+    </button></h3><p>يُنصح باستخدام سلاسل نصية خام لأنماط التعبيرات النمطية التي تحتوي على خطوط مائلة عكسية. في السلسلة النصية الخام، المكتوبة على النحو التالي: <code translate="no">r&quot;...&quot;</code> أو <code translate="no">r'...'</code> ، يتم تمرير الخطوط المائلة العكسية إلى محرك التعبيرات النمطية حرفياً. وهذا يتجنب الهروب الإضافي المطلوب في السلاسل النصية العادية.</p>
 <p>على سبيل المثال:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ r&quot;\d{4}-\d{2}-\d{2}&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -302,11 +302,11 @@ res = client.query(
 <p>بالنسبة لمسارات JSON، تتصرف مرشحات التعبيرات النمطية بشكل مختلف عندما يكون المسار مفقودًا أو فارغًا أو يُحل إلى قيمة غير سلسلة:</p>
 <table>
 <thead>
-<tr><th>المرشح</th><th>هل يشمل القيم المفقودة/الصفرية/غير السلسلية؟</th><th>ملاحظات</th></tr>
+<tr><th>المرشح</th><th>هل يشمل القيم المفقودة/الصفرية/غير السلسلة؟</th><th>ملاحظات</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">json_field[&quot;path&quot;] =~ &quot;pattern&quot;</code></td><td>لا</td><td>يتطابق فقط مع القيم النصية التي تستوفي نمط التعبير العادي.</td></tr>
-<tr><td><code translate="no">json_field[&quot;path&quot;] !~ &quot;pattern&quot;</code></td><td>نعم</td><td>تُرجع الكيانات التي يكون مسارها مفقودًا أو فارغًا أو غير نصي أو عبارة عن سلسلة لا تتطابق مع نمط التعبير العادي.</td></tr>
+<tr><td><code translate="no">json_field[&quot;path&quot;] !~ &quot;pattern&quot;</code></td><td>نعم</td><td>تُرجع الكيانات التي يكون المسار فيها مفقودًا أو فارغًا أو غير نصي أو عبارة عن سلسلة لا تتطابق مع نمط التعبير العادي.</td></tr>
 </tbody>
 </table>
 <h2 id="Accelerate-pattern-matching-with-indexes" class="common-anchor-header">تسريع مطابقة الأنماط باستخدام الفهارس<button data-href="#Accelerate-pattern-matching-with-indexes" class="anchor-icon" translate="no">
@@ -324,7 +324,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يدعم Milvus عدة أنواع من الفهارس على الحقول النصية التي يمكن استخدامها مع <code translate="no">LIKE</code> وفلاتر التعبيرات العادية على حقول <code translate="no">VARCHAR</code> أو مسارات سلاسل JSON، مثل <code translate="no">NGRAM</code> و <code translate="no">STL_SORT</code> و <code translate="no">INVERTED</code> و <code translate="no">BITMAP</code>. يمكن أن تعمل مطابقة الأنماط بدون فهرس، لكن الفهرس يمكن أن يحسن الأداء على مجموعات البيانات الكبيرة.</p>
+    </button></h2><p>يدعم Milvus عدة أنواع من الفهارس في الحقول النصية التي يمكن استخدامها مع " <code translate="no">LIKE</code> " وفلاتر التعبيرات العادية في الحقول " <code translate="no">VARCHAR</code> " أو مسارات سلاسل JSON، مثل <code translate="no">NGRAM</code> و <code translate="no">STL_SORT</code> و <code translate="no">INVERTED</code> و <code translate="no">BITMAP</code>. يمكن أن تعمل مطابقة الأنماط بدون فهرس، لكن الفهرس يمكن أن يحسن الأداء في مجموعات البيانات الكبيرة.</p>
 <p>تعتمد فعالية الفهرس على تعبير النمط، وما إذا كان بإمكان Milvus استخراج سلاسل فرعية حرفية ثابتة، بالإضافة إلى عدد عناصر الحقل المستهدف وتوزيعها. قد تستفيد الأنماط ذات البادئة، مثل <code translate="no">name LIKE &quot;Prod%&quot;</code> ، من استراتيجيات فهرسة مختلفة عن الأنماط ذات الوسيطة أو اللاحقة، مثل <code translate="no">description LIKE &quot;%vector%&quot;</code> أو <code translate="no">filename LIKE &quot;%.json&quot;</code>.</p>
 <p>استخدم الجدول التالي كنقطة انطلاق، ثم قم بإجراء مقارنة مع حمل العمل الخاص بك:</p>
 <table>

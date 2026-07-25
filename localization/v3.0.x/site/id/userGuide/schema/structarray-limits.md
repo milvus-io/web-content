@@ -23,7 +23,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Dukungan StructArray mencakup definisi skema, muatan penyisipan, pengindeksan, mode pencarian, dan filter khusus StructArray. Gunakan halaman ini sebagai referensi batasan sebelum Anda mengandalkan perilaku StructArray dalam lingkungan produksi.</p>
-<p>Sebagian besar batasan StructArray berasal dari salah satu dari tiga sumber berikut: model skema StructArray, mode pencarian yang Anda pilih untuk subbidang vektor, dan versi Milvus yang digunakan oleh koleksi Anda.</p>
+<p>Sebagian besar batasan StructArray berasal dari salah satu dari tiga sumber: model skema StructArray, mode pencarian yang Anda pilih untuk subbidang vektor, dan versi Milvus yang digunakan oleh koleksi Anda.</p>
 <h2 id="Limits-at-a-glance" class="common-anchor-header">Sekilas tentang batasan<button data-href="#Limits-at-a-glance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -78,7 +78,7 @@ summary: >-
 <tbody>
 <tr><td>Struct bukanlah tipe bidang tingkat atas.</td><td>Buat bidang StructArray sebagai ` <code translate="no">datatype=DataType.ARRAY</code> ` dengan ` <code translate="no">element_type=DataType.STRUCT</code> ` dan ` <code translate="no">struct_schema</code>`.</td></tr>
 <tr><td>Semua elemen berbagi satu skema.</td><td>Setiap elemen Struct dalam bidang StructArray mengikuti daftar subbidang dan tipe data subbidang yang sama.</td></tr>
-<tr><td><code translate="no">max_capacity</code> diperlukan.</td><td>Jumlah elemen Struct dalam satu entitas tidak boleh melebihi <code translate="no">max_capacity</code> yang dikonfigurasi untuk bidang StructArray.</td></tr>
+<tr><td><code translate="no">max_capacity</code> diperlukan.</td><td>Jumlah elemen Struct dalam satu entitas tidak boleh melebihi batas maksimum ( <code translate="no">max_capacity</code> ) yang dikonfigurasi untuk bidang StructArray.</td></tr>
 <tr><td>Subfield yang ada bersifat tetap.</td><td>Anda tidak dapat menambahkan subfield baru ke bidang StructArray yang sudah ada. Untuk mengubah skema subfield, hapus bidang StructArray tersebut dan tambahkan kembali dengan skema yang telah diperbarui.</td></tr>
 <tr><td>StructArray bersarang tidak didukung.</td><td>Bidang StructArray tidak dapat berisi subbidang <code translate="no">Array</code>, <code translate="no">ArrayOfVector</code>, <code translate="no">Struct</code>, atau <code translate="no">ArrayOfStruct</code> yang bersarang.</td></tr>
 <tr><td>Fungsi tidak didukung di dalam StructArray.</td><td>Jangan mendefinisikan fungsi bidang untuk bidang StructArray atau subbidangnya.</td></tr>
@@ -112,7 +112,7 @@ summary: >-
 <tr><td><code translate="no">Array</code></td><td>Didukung</td><td>Tentukan subbidang sebagai <code translate="no">DataType.VARCHAR</code> dan tetapkan <code translate="no">max_length</code>.</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Didukung</td><td>Tentukan subbidang sebagai <code translate="no">DataType.FLOAT_VECTOR</code> dan tetapkan <code translate="no">dim</code>.</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Didukung</td><td>Tentukan subbidang sebagai <code translate="no">DataType.FLOAT16_VECTOR</code> dan atur <code translate="no">dim</code>.</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>Didukung</td><td>Tentukan subbidang sebagai <code translate="no">DataType.BFLOAT16_VECTOR</code> dan atur <code translate="no">dim</code>.</td></tr>
+<tr><td><code translate="no">ArrayOfVector</code></td><td>Didukung</td><td>Tentukan subbidang sebagai " <code translate="no">DataType.BFLOAT16_VECTOR</code> " dan atur " <code translate="no">dim</code>".</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Didukung</td><td>Tentukan subbidang sebagai <code translate="no">DataType.INT8_VECTOR</code> dan atur <code translate="no">dim</code>.</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Didukung</td><td>Tentukan subbidang sebagai <code translate="no">DataType.BINARY_VECTOR</code> dan atur <code translate="no">dim</code>.</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Tidak didukung</td><td>Subbidang vektor sparse tidak didukung dalam bidang StructArray.</td></tr>
@@ -145,7 +145,7 @@ summary: >-
 <tr><th>Kemampuan</th><th>Batasan</th></tr>
 </thead>
 <tbody>
-<tr><td>Bidang StructArray yang dapat bernilai null</td><td>Hanya didukung pada versi yang mencakup dukungan StructArray yang dapat bernilai null dan dukungan array vektor yang dapat bernilai null.</td></tr>
+<tr><td>Bidang StructArray yang dapat bernilai null</td><td>Hanya didukung pada versi yang menyertakan dukungan StructArray yang dapat bernilai null dan dukungan array vektor yang dapat bernilai null.</td></tr>
 <tr><td>Nilai null dalam Python</td><td>Gunakan ` <code translate="no">None</code> ` untuk menyisipkan nilai StructArray null di Python. Jangan gunakan ` <code translate="no">Null</code> ` atau ` <code translate="no">null</code>`.</td></tr>
 <tr><td>Cakupan nilai null</td><td>Null berlaku untuk seluruh bidang StructArray. Misalnya, <code translate="no">chunks=None</code> hanya valid jika <code translate="no">chunks</code> dapat bernilai null.</td></tr>
 <tr><td>Nilai StructArray yang sebagian null</td><td>Jika bidang StructArray berisi nilai array yang valid, jangan mencampurkan array subbidang null dengan array subbidang yang valid dalam nilai yang sama.</td></tr>

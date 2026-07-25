@@ -400,7 +400,7 @@ client.add_collection_struct_field(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Membuat ` <code translate="no">DataType.STRUCT</code> ` sebagai bidang koleksi tingkat atas alih-alih menggunakannya sebagai tipe elemen dari bidang Array.</p></li>
+<li><p>Membuat ` <code translate="no">DataType.STRUCT</code> ` sebagai bidang koleksi tingkat atas alih-alih menggunakannya sebagai tipe elemen dari bidang `Array`.</p></li>
 <li><p>Lupa menetapkan ` <code translate="no">max_capacity</code> ` pada bidang `StructArray`.</p></li>
 <li><p>Mendefinisikan tipe subbidang yang tidak didukung, seperti JSON, Geometry, Text, Timestamptz, SparseFloatVector, Array bersarang, Struct bersarang, atau Array-of-Struct.</p></li>
 <li><p>Menggunakan ` <code translate="no">String</code> ` sebagai tipe subbidang. Gunakan ` <code translate="no">VARCHAR</code> ` dan atur ` <code translate="no">max_length</code>`.</p></li>

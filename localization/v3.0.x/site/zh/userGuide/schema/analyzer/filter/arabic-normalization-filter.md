@@ -78,7 +78,7 @@ beta: Milvus 3.0.0+
      <td><p>已移除</p></td>
    </tr>
 </table>
-<p>该过滤器对分词器生成的词元进行处理。上述配置特意作为自定义分析器的示例，并未包含完整的阿拉伯语处理管道。</p>
+<p>该过滤器对分词器生成的令牌进行处理。上述配置是一个特意设计的自定义分析器示例，并不包含完整的阿拉伯语处理管道。</p>
 <h2 id="Examples" class="common-anchor-header">示例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

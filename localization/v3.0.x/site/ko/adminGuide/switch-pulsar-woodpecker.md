@@ -83,7 +83,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <div class="alert note">
 <p>나중에 Pulsar로 다시 전환할 계획이라면, 충돌을 방지하기 위해 먼저 데이터/토픽을 정리하십시오. Helm 차트의 제한 사항으로 인해, 현재 <strong>내장형</strong> Pulsar 인스턴스로 다시 전환하는 것은 불가능합니다.</p>
 </div>
-<h3 id="Switch-from-Woodpecker-to-Pulsar-Helm" class="common-anchor-header">Woodpecker에서 Pulsar로 전환 (Helm)<button data-href="#Switch-from-Woodpecker-to-Pulsar-Helm" class="anchor-icon" translate="no">
+<h3 id="Switch-from-Woodpecker-to-Pulsar-Helm" class="common-anchor-header">Woodpecker에서 Pulsar로 전환하기 (Helm)<button data-href="#Switch-from-Woodpecker-to-Pulsar-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -171,7 +171,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>전환이 성공하면 <code translate="no">[mqTypeValue=woodpecker]</code> 로깅됩니다.</p>
-<p><strong>4단계: Operator의 MQ 유형을 업데이트합니다.</strong> Operator가 전환을 되돌리지 않도록 Operator가 관리하는 구성을 업데이트합니다<strong>.</strong> <code translate="no">change_configmap.yaml</code> 를 생성합니다:</p>
+<p><strong>4단계: Operator의 MQ 유형을 업데이트합니다.</strong> Operator가 전환을 되돌리지 않도록 Operator가 관리하는 구성을 업데이트합니다. <code translate="no">change_configmap.yaml</code> 를 생성합니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -209,7 +209,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>1단계: Milvus 인스턴스가 실행 중인지 확인합니다.</strong></p>
-<p><strong>2단계: 대상 Pulsar 연결을 구성하고 Milvus를 다시 시작합니다.</strong> Pulsar 연결을 <code translate="no">spec.config</code> 아래에 배치하고(Operator는 <code translate="no">spec.config</code> 을 <code translate="no">user.yaml</code> 으로 변환합니다), MQ 유형을 설정합니다. CR을 적용하면 새로운 구성으로 포드가 재시작됩니다.</p>
+<p><strong>2단계: 대상 Pulsar 연결을 구성하고 Milvus를 다시 시작합니다.</strong> Pulsar 연결을 <code translate="no">spec.config</code> 아래에 배치하고(Operator는 <code translate="no">spec.config</code> 를 <code translate="no">user.yaml</code> 로 변환합니다), MQ 유형을 설정합니다. CR을 적용하면 포드가 새로운 구성으로 재시작됩니다.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># change_configmap.yaml</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>

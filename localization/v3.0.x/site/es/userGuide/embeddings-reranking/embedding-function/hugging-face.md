@@ -2,8 +2,8 @@
 id: hugging-face.md
 title: Hugging FaceCompatible with Milvus v2.6.20+
 summary: >-
-  En este tema se explica cómo utilizar los proveedores de inferencia alojados
-  de Hugging Face para la incrustación de texto en Milvus.
+  En este tema se explica cómo utilizar los proveedores de inferencia de Hugging
+  Face alojados para la incrustación de texto en Milvus.
 beta: Milvus v2.6.20+
 ---
 <h1 id="Hugging-Face" class="common-anchor-header">Hugging Face<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.20+</span><button data-href="#Hugging-Face" class="anchor-icon" translate="no">
@@ -159,8 +159,8 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Si ni la función ni la configuración del proveedor especifican una etiqueta de credencial, Milvus lee el token de <code translate="no">MILVUS_HUGGINGFACE_API_KEY</code>.</p>
-<p>Para Docker Compose, configura la variable en el servicio independiente de Milvus:</p>
+    </button></h3><p>Si ni la función ni la configuración del proveedor especifican una etiqueta de credencial, Milvus lee el token desde <code translate="no">MILVUS_HUGGINGFACE_API_KEY</code>.</p>
+<p>Para Docker Compose, configure la variable en el servicio autónomo de Milvus:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># docker-compose.yaml</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">environment:</span>
@@ -264,9 +264,9 @@ client.create_collection(
 <tbody>
 <tr><td><code translate="no">provider</code></td><td>Sí</td><td>El proveedor del modelo de incrustación. Establece este valor en <code translate="no">huggingface</code>.</td></tr>
 <tr><td><code translate="no">model_name</code></td><td>Sí</td><td>El ID del modelo de Hugging Face para un modelo servido a través de <code translate="no">hf-inference</code> para la tarea « <code translate="no">feature-extraction</code> ».</td></tr>
-<tr><td><code translate="no">hf_provider</code></td><td>No</td><td>La ruta del proveedor de inferencia de Hugging Face. El valor predeterminado y el único compatible en Milvus 2.6.20 es <code translate="no">hf-inference</code>.</td></tr>
+<tr><td><code translate="no">hf_provider</code></td><td>No</td><td>La ruta del proveedor de inferencia de Hugging Face. El valor predeterminado y único compatible en Milvus 2.6.20 es <code translate="no">hf-inference</code>.</td></tr>
 <tr><td><code translate="no">credential</code></td><td>No</td><td>La etiqueta de una credencial definida en la sección de nivel superior <code translate="no">credential</code> de <code translate="no">milvus.yaml</code>. Este valor no es el token en sí.</td></tr>
-<tr><td><code translate="no">normalize</code></td><td>No</td><td>Indica si Hugging Face debe devolver incrustaciones normalizadas. Los valores admitidos son <code translate="no">true</code> y <code translate="no">false</code>. Si se omite, Milvus no establece esta opción en la solicitud.</td></tr>
+<tr><td><code translate="no">normalize</code></td><td>No</td><td>Indica si Hugging Face debe devolver representaciones normalizadas. Los valores admitidos son <code translate="no">true</code> y <code translate="no">false</code>. Si se omite, Milvus no establece esta opción en la solicitud.</td></tr>
 <tr><td><code translate="no">prompt_name</code></td><td>No</td><td>El nombre de un prompt definido en la configuración de Sentence Transformers del modelo seleccionado.</td></tr>
 <tr><td><code translate="no">truncate</code></td><td>No</td><td>Si Hugging Face debe truncar una entrada que supere la longitud admitida por el modelo. Los valores admitidos son « <code translate="no">true</code> » y « <code translate="no">false</code> ».</td></tr>
 <tr><td><code translate="no">truncation_direction</code></td><td>No</td><td>La dirección desde la que Hugging Face trunca una entrada. Los valores admitidos son « <code translate="no">left</code> » y « <code translate="no">right</code> ».</td></tr>

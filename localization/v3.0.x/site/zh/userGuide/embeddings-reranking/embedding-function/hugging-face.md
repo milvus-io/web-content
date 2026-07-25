@@ -38,7 +38,7 @@ beta: Milvus v2.6.20+
       </svg>
     </button></h2><ul>
 <li>函数输出字段必须使用<code translate="no">FLOAT_VECTOR</code> 数据类型。Milvus中的Hugging Face嵌入功能不支持<code translate="no">INT8_VECTOR</code> 、<code translate="no">BINARY_VECTOR</code> 、<code translate="no">FLOAT16_VECTOR</code> 或<code translate="no">BFLOAT16_VECTOR</code> 类型的输出字段。</li>
-<li>“Function”输出字段的维度必须与所选模型的输出维度相匹配。</li>
+<li>“Function”输出字段的维度必须与所选模型的输出维度一致。</li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">工作原理<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -65,7 +65,7 @@ beta: Milvus v2.6.20+
 <ol>
 <li><strong>发送原始文本。</strong>您的应用程序通过插入或搜索请求提供原始文本。</li>
 <li><strong>生成嵌入向量。</strong>文本嵌入函数将文本通过<code translate="no">hf-inference</code> 发送至Hugging Face的<code translate="no">feature-extraction</code> 管道。该函数使用<code translate="no">model_name</code> 选择模型，并可传递支持的推理选项（如归一化和截断）。</li>
-<li><strong>使用嵌入向量。</strong>Hugging Face 针对每条输入文本返回一个浮点型嵌入向量。在插入操作中，Milvus 将该向量存储在函数输出字段中；在搜索操作中，Milvus 将该向量用作查询向量。</li>
+<li><strong>使用嵌入向量。</strong>Hugging Face 针对每条输入文本返回一个浮点型嵌入向量。在插入操作中，Milvus 将该向量存储在函数的输出字段中；在搜索操作中，Milvus 将该向量用作查询向量。</li>
 </ol>
 <p>同一函数配置可同时处理插入和搜索操作，确保模型及推理参数在两种操作中保持一致。</p>
 <h2 id="Before-you-start" class="common-anchor-header">开始之前<button data-href="#Before-you-start" class="anchor-icon" translate="no">
@@ -91,7 +91,7 @@ beta: Milvus v2.6.20+
 <li>当前由<code translate="no">hf-inference</code> 托管的、用于 <a href="https://huggingface.co/docs/inference-providers/en/tasks/feature-extraction"><code translate="no">feature-extraction</code></a> 任务提供服务。</li>
 </ul>
 <div class="alert note">
-<p>Milvus 无法控制 Hugging Face 模型是否仍可通过<code translate="no">hf-inference</code> 获取，也无法保证该模型是否满足您的稳定性、延迟和输出质量要求。在将模型投入生产环境使用前，请先在 Hugging Face 上验证该模型，并评估其是否适合您的工作负载。</p>
+<p>Milvus 无法控制 Hugging Face 模型是否仍可通过<code translate="no">hf-inference</code> 获取，也无法保证该模型是否满足您的稳定性、延迟和输出质量要求。在生产环境中使用该模型之前，请先在 Hugging Face 上验证该模型，并评估其是否适合您的工作负载。</p>
 </div>
 <p>示例中使用 <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2"><code translate="no">sentence-transformers/all-MiniLM-L6-v2</code></a>，该模型可生成384维的Embeddings。此模型仅用于演示配置，并不代表Milvus的推荐或认证。</p>
 <h2 id="Configure-credentials" class="common-anchor-header">配置凭据<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
@@ -141,7 +141,7 @@ beta: Milvus v2.6.20+
         <span class="hljs-attr">credential:</span> <span class="hljs-string">huggingface_apikey</span>
         <span class="hljs-comment"># url: https://router.huggingface.co</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>您还可以在函数参数中设置 `<code translate="no">credential</code> `。该值必须是 `<code translate="no">credential</code> ` 顶级部分中定义的标签，而非令牌本身。函数级凭证标签的优先级高于提供商级标签。</p>
+<p>您还可以在函数参数中设置 `<code translate="no">credential</code> `。该值必须是 `<code translate="no">credential</code> ` 顶级部分中定义的标签，而非令牌本身。函数级凭据标签的优先级高于提供程序级标签。</p>
 <h3 id="Option-2-Environment-variable" class="common-anchor-header">选项 2：环境变量<button data-href="#Option-2-Environment-variable" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -180,7 +180,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Create-a-collection-with-a-Text-Embedding-Function" class="common-anchor-header">步骤 1：创建包含文本嵌入函数的 Collection<button data-href="#Step-1-Create-a-collection-with-a-Text-Embedding-Function" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Create-a-collection-with-a-Text-Embedding-Function" class="common-anchor-header">步骤 1：创建包含文本嵌入函数的Collection<button data-href="#Step-1-Create-a-collection-with-a-Text-Embedding-Function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -260,7 +260,7 @@ client.create_collection(
 <tr><th>参数</th><th>必填？</th><th>描述</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">provider</code></td><td>是</td><td>Embeddings提供商。请将此值设置为<code translate="no">huggingface</code> 。</td></tr>
+<tr><td><code translate="no">provider</code></td><td>是</td><td>嵌入模型提供商。请将此值设置为<code translate="no">huggingface</code> 。</td></tr>
 <tr><td><code translate="no">model_name</code></td><td>是</td><td>通过<code translate="no">hf-inference</code> 提供的、用于<code translate="no">feature-extraction</code> 任务的 Hugging Face 模型 ID。</td></tr>
 <tr><td><code translate="no">hf_provider</code></td><td>否</td><td>Hugging Face 推理提供程序的路由。在 Milvus 2.6.20 中，默认值且唯一受支持的值为<code translate="no">hf-inference</code> 。</td></tr>
 <tr><td><code translate="no">credential</code></td><td>否</td><td>在<code translate="no">milvus.yaml</code> 的顶级<code translate="no">credential</code> 部分中定义的凭据标签。此值并非令牌本身。</td></tr>

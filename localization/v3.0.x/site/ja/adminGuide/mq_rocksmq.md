@@ -150,7 +150,7 @@ bash standalone_embed.sh delete
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>2.5.x から 2.6.x へのアップグレード:</strong> <strong>メッセージキューの制限事項</strong>: Milvus v3.0-beta へアップグレードする際は、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステム間で切り替えることはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。
+<li><strong>2.5.x から 2.6.x へのアップグレード:</strong> <strong>メッセージキューの制限事項</strong>: Milvus v3.0-beta へアップグレードする際は、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステムへ切り替えることはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。
 2.6.x ではスタンドアロンのデフォルトが Woodpecker に変更されるため、RocksMQ を継続して使用したい場合は、<strong>アップグレード前に</strong>`<code translate="no">user.yaml</code> ` 内の `<code translate="no">mq.type: rocksmq</code> ` を固定してください。</li>
 <li>実行中のインスタンスのメッセージキューを変更するには、「<a href="/docs/ja/switch-rocksmq-woodpecker.md">RocksMQ から Woodpecker への切り替え</a>」を参照してください。</li>
 </ul>

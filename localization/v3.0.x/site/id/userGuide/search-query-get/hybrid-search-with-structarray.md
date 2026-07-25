@@ -340,7 +340,7 @@ results = client.hybrid_search(
 <li><p>Gunakan <code translate="no">element_scope</code> hanya untuk objek <code translate="no">AnnSearchRequest</code> tingkat elemen StructArray yang harus dikompres menjadi kandidat tingkat entitas dalam pencarian hibrida.</p></li>
 <li><p>Jangan gunakan <code translate="no">element_scope</code> untuk permintaan EmbeddingList, permintaan vektor tingkat koleksi, atau pencarian hibrida tingkat elemen StructArray yang sama.</p></li>
 <li><p><code translate="no">sum</code> dan strategi penggabungan <code translate="no">topk_sum</code> memerlukan metrik korelasi positif, seperti <code translate="no">IP</code> atau <code translate="no">COSINE</code>. Jangan gunakan metrik tersebut dengan <code translate="no">L2</code>.</p></li>
-<li><p><code translate="no">topk_sum</code> dan <code translate="no">topk_avg</code> memerlukan nilai <code translate="no">topk</code> yang positif. Strategi penggabungan lainnya tidak boleh menyertakan <code translate="no">topk</code>.</p></li>
+<li><p><code translate="no">topk_sum</code> dan <code translate="no">topk_avg</code> memerlukan nilai <code translate="no">topk</code> yang positif. Strategi kolaps lainnya tidak boleh menyertakan <code translate="no">topk</code>.</p></li>
 <li><p>Permintaan StructArray tingkat EmbeddingList tidak mendukung pencarian rentang atau pengelompokan.</p></li>
 <li><p>Pengelompokan hibrida hanya didukung untuk pencarian hibrida tingkat elemen StructArray yang sama dan hanya berdasarkan kunci utama.</p></li>
 <li><p>Jangan menggabungkan pencarian rentang dengan pengelompokan.</p></li>

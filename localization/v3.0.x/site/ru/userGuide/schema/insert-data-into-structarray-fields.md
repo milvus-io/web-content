@@ -23,7 +23,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Вставьте данные в поле StructArray, если каждая сущность содержит упорядоченный список структурированных элементов. В полезной нагрузке вставки поле StructArray представлено в виде массива объектов. Каждый объект представляет один элемент Struct и использует имена подполей Struct, определенные в схеме коллекции.</p>
+    </button></h1><p>Вставьте данные в поле StructArray, если каждая сущность содержит упорядоченный список структурированных элементов. В полезной нагрузке вставки поле StructArray представляется в виде массива объектов. Каждый объект представляет один элемент Struct и использует имена подполей Struct, определенные в схеме коллекции.</p>
 <p>На этой странице используется коллекция « <code translate="no">tech_articles</code> » из раздела <a href="/docs/ru/create-structarray-field.md">«Создание поля StructArray</a>». Каждая сущность представляет собой техническую статью, а поле « <code translate="no">chunks</code> » хранит фрагменты статьи в виде элементов Struct.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Перед началом<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -333,8 +333,8 @@ result = client.insert(
 <li><p>Вставка векторов с неправильным размером.</p></li>
 <li><p>Вставка большего количества элементов Struct, чем допускает <code translate="no">max_capacity</code>.</p></li>
 <li><p>Установка значения <code translate="no">null</code> только для одного подполя, в то время как другие подполя в том же значении StructArray являются допустимыми.</p></li>
-<li><p>Запись векторов только в <code translate="no">emb_list_vector</code>, а затем попытка запустить поиск на уровне элементов в <code translate="no">chunks[emb]</code>.</p></li>
-<li><p>Запись векторов только в поле « <code translate="no">emb</code> », а затем попытка выполнить поиск по списку вложений (EmbeddingList) в поле « <code translate="no">chunks[emb_list_vector]</code> ».</p></li>
+<li><p>Запись векторов только в ` <code translate="no">emb_list_vector</code> `, а затем попытка выполнить поиск на уровне элементов в ` <code translate="no">chunks[emb]</code>`.</p></li>
+<li><p>Запись векторов только в поле « <code translate="no">emb</code> », а затем попытка выполнить поиск по EmbeddingList в поле « <code translate="no">chunks[emb_list_vector]</code> ».</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Следующие шаги<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -354,5 +354,5 @@ result = client.insert(
     </button></h2><ol>
 <li><p>Чтобы создать индексы для полей <code translate="no">chunks[emb_list_vector]</code>, <code translate="no">chunks[emb]</code> и скалярных подполей, ознакомьтесь с разделом <a href="/docs/ru/index-structarray-fields.md">«Индексирование полей StructArray</a>».</p></li>
 <li><p>Чтобы выполнить поиск по векторным подполям StructArray, ознакомьтесь с разделом «Базовый поиск по векторам с помощью StructArray».</p></li>
-<li><p>Чтобы ознакомиться с поведением при наличии нулевых значений и ограничениями, связанными с конкретными версиями, ознакомьтесь с разделом <a href="/docs/ru/structarray-limits.md">«Ограничения StructArray</a>».</p></li>
+<li><p>Чтобы ознакомиться с поведением при наличии значений null и ограничениями, связанными с конкретными версиями, ознакомьтесь с разделом <a href="/docs/ru/structarray-limits.md">«Ограничения StructArray</a>».</p></li>
 </ol>

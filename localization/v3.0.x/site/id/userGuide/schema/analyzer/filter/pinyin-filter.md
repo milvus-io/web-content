@@ -23,7 +23,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h1><p>Pencarian teks bahasa Mandarin sering kali mengharuskan pengguna memasukkan karakter Mandarin persis seperti yang muncul dalam teks yang diindeks. Dalam alur kerja pencarian nama, pelengkapan otomatis, dan pencarian saat mengetik, pengguna sering kali mengetik Pinyin alih-alih karakter Mandarin. Misalnya, pengguna mungkin mengetik <code translate="no">zuqiu</code> untuk mencari <code translate="no">足球</code>. Filter " <code translate="no">pinyin</code> " menambahkan token Pinyin ke output penganalisis sehingga teks Mandarin dapat dicocokkan dengan masukan Pinyin tanpa perlu mengelola bidang Pinyin terpisah.</p>
-<p>Filter ` <code translate="no">pinyin</code> ` biasanya digunakan bersama tokenizer <a href="/docs/id/jieba-tokenizer.md">Jieba</a> untuk teks bahasa Tionghoa. Filter ini berfungsi dalam pipa filter penganalisis khusus dan dapat menghasilkan beberapa bentuk token Pinyin untuk token bahasa Tionghoa yang sama.</p>
+<p>Filter ` <code translate="no">pinyin</code> ` biasanya digunakan bersama tokenizer <a href="/docs/id/jieba-tokenizer.md">Jieba</a> untuk teks bahasa Mandarin. Filter ini berfungsi dalam pipa filter penganalisis khusus dan dapat menghasilkan beberapa bentuk token Pinyin untuk token bahasa Mandarin yang sama.</p>
 <h2 id="Configuration" class="common-anchor-header">Konfigurasi<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

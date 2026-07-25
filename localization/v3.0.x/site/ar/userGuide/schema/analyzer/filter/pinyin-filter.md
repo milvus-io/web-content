@@ -23,7 +23,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h1><p>غالبًا ما يتطلب البحث عن النص الصيني من المستخدمين إدخال الأحرف الصينية تمامًا كما تظهر في النص المفهرس. في عمليات البحث عن الأسماء، والإكمال التلقائي، والبحث أثناء الكتابة، غالبًا ما يكتب المستخدمون بينيين بدلاً من الأحرف الصينية. على سبيل المثال، قد يكتب المستخدم « <code translate="no">zuqiu</code> » للبحث عن « <code translate="no">足球</code> ». يضيف مرشح « <code translate="no">pinyin</code> » رموز بينيين إلى ناتج المحلل بحيث يمكن للنص الصيني مطابقة الإدخال بالبينيين دون الحاجة إلى حقل منفصل للبينيين.</p>
-<p>يُستخدم مرشح <code translate="no">pinyin</code> عادةً مع أداة تجزئة <a href="/docs/ar/jieba-tokenizer.md">Jieba</a> للنص الصيني. وهو يعمل في مسار مرشحات محلل مخصص ويمكنه إصدار أشكال متعددة من رموز بينيين لنفس الرمز الصيني.</p>
+<p>يُستخدم مرشح <code translate="no">pinyin</code> عادةً مع أداة تقطيع <a href="/docs/ar/jieba-tokenizer.md">Jieba</a> للنص الصيني. وهو يعمل في مسار مرشحات محلل مخصص ويمكنه إصدار أشكال متعددة من رموز بينيين لنفس الرمز الصيني.</p>
 <h2 id="Configuration" class="common-anchor-header">التكوين<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -296,7 +296,7 @@ client.create_collection(
         ></path>
       </svg>
     </button></h2><p>Milvus v3.0.x поддерживает добавление поля StructArray в существующую коллекцию. Добавляемое поле StructArray должно быть допускать значение null, поскольку сущности, уже существующие в коллекции, не имеют значений для нового поля.</p>
-<p>Чтобы добавить поле StructArray в существующую коллекцию, сначала определите схему Struct. Затем вызовите метод ` <code translate="no">add_collection_struct_field()</code> ` и установите ` <code translate="no">nullable=True</code>`.</p>
+<p>Чтобы добавить поле StructArray в существующую коллекцию, сначала определите схему Struct. Затем вызовите метод ` <code translate="no">add_collection_struct_field()</code> ` и задайте ` <code translate="no">nullable=True</code>`.</p>
 <pre><code translate="no" class="language-python">chunk_schema = client.create_struct_field_schema()
 chunk_schema.add_field(
     field_name=<span class="hljs-string">&quot;text&quot;</span>,
@@ -340,7 +340,7 @@ client.add_collection_struct_field(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>После добавления поля StructArray существующие сущности возвращают значение ` <code translate="no">null</code> ` для нового поля по всем его подполям.</p>
-<p>После создания поля StructArray вы не сможете добавлять новые подполя к этому существующему полю StructArray. Если позже вам понадобятся дополнительные атрибуты элементов, вызовите метод <code translate="no">drop_collection_field()</code>, чтобы удалить поле StructArray, а затем добавьте новое поле StructArray с обновленной схемой Struct.</p>
+<p>После создания поля StructArray вы не сможете добавлять новые подполя к этому существующему полю StructArray. Если позже понадобятся дополнительные атрибуты элементов, вызовите метод <code translate="no">drop_collection_field()</code>, чтобы удалить поле StructArray, а затем добавьте новое поле StructArray с обновленной схемой Struct.</p>
 <pre><code translate="no" class="language-python">client.drop_collection_field(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
     field_name=<span class="hljs-string">&quot;chunks&quot;</span>,

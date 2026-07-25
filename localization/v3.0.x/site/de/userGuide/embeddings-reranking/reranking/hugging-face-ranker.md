@@ -21,7 +21,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Die Vektorsuche sortiert die Ergebnisse nach dem Vektorabstand, doch die anfängliche Reihenfolge spiegelt möglicherweise nicht wider, wie gut der Text der einzelnen Kandidaten die Suchanfrage beantwortet. Hugging Face Ranker sendet die Suchanfrage und die Kandidatentexte an gehostete <a href="https://huggingface.co/docs/inference-providers/index">Hugging Face Inference Provider</a> und verwendet die Ergebnisse von „ <code translate="no">sentence-similarity</code> “, um die von Milvus zurückgegebenen Kandidaten neu zu ordnen.</p>
+    </button></h1><p>Die Vektorsuche sortiert die Ergebnisse nach dem Vektorabstand, doch die anfängliche Reihenfolge spiegelt möglicherweise nicht wider, wie gut der Text der einzelnen Kandidaten die Suchanfrage beantwortet. Hugging Face Ranker sendet die Suchanfrage und die Kandidatentexte an gehostete <a href="https://huggingface.co/docs/inference-providers/index">Hugging Face Inference Provider</a> und verwendet die Ergebnisse der „ <code translate="no">sentence-similarity</code> “, um die von Milvus zurückgegebenen Kandidaten neu zu ordnen.</p>
 <p>Diese Integration nutzt den gehosteten Hugging Face-Router. Informationen zur Neureihenfolge mit einem separat bereitgestellten Text Embeddings Inference (TEI)-Dienst finden Sie unter <a href="/docs/de/tei-ranker.md">TEI Ranker</a>.</p>
 <h2 id="Limits" class="common-anchor-header">Einschränkungen<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -66,7 +66,7 @@ beta: Milvus v2.6.20+
 <p>Hugging Face Ranker wird nach der anfänglichen Vektorsuche ausgeführt:</p>
 <ol>
 <li><strong>Kandidatenentitäten abrufen.</strong> Milvus durchsucht das konfigurierte Vektorfeld und sammelt Kandidatenentitäten.</li>
-<li><strong>Vorbereitung des Textes für die Neureihung.</strong> Die Funktion liest den Abfragetext aus „ <code translate="no">params.queries</code> “ und den Kandidaten-Text aus dem Feld „ <code translate="no">VARCHAR</code> “, das unter „ <code translate="no">input_field_names</code> “ angegeben ist.</li>
+<li><strong>Vorbereitung des Textes für die Neureihung.</strong> Die Funktion liest den Abfragetext aus „ <code translate="no">params.queries</code> “ und den Text der Kandidaten aus dem Feld „ <code translate="no">VARCHAR</code> “, das unter „ <code translate="no">input_field_names</code> “ angegeben ist.</li>
 <li><strong>Anforderung von Ähnlichkeitswerten.</strong> Milvus sendet die Abfrage als „ <code translate="no">source_sentence</code> “ und die Kandidatentexte als „ <code translate="no">sentences</code> “ über „ <code translate="no">hf-inference</code> “ an die Hugging Face-Pipeline „ <code translate="no">sentence-similarity</code> “.</li>
 <li><strong>Neubewertung der Kandidaten.</strong> Hugging Face gibt einen Wert pro Kandidaten zurück. Milvus ordnet die Kandidaten vom höchsten zum niedrigsten Wert und gibt die neu sortierten Ergebnisse zurück.</li>
 </ol>
@@ -81,7 +81,7 @@ beta: Milvus v2.6.20+
 <ol>
 <li><strong>Vorbereitung der Texteingaben.</strong> Der Ranker liest den Suchtext aus „ <code translate="no">params.queries</code> “ und den Kandidatentext aus dem konfigurierten Feld „ <code translate="no">VARCHAR</code> “ ein.</li>
 <li><strong>Erstellen separater Modellrepräsentationen.</strong> Milvus sendet die Suchanfrage als „ <code translate="no">source_sentence</code> “ und die Kandidatentexte als „ <code translate="no">sentences</code> “. Das Modell kodiert die Suchanfrage und jeden Kandidaten intern separat.</li>
-<li><strong>Vergleichen und Rückgabe von Bewertungen.</strong> Das Modell vergleicht die Abfragedarstellung mit jeder Kandidatendarstellung und gibt pro Kandidat eine Ähnlichkeitsbewertung zurück.</li>
+<li><strong>Vergleichen und Rückgabe von Bewertungen.</strong> Das Modell vergleicht die Abfrage-Repräsentation mit jeder Kandidaten-Repräsentation und gibt pro Kandidaten eine Ähnlichkeitsbewertung zurück.</li>
 </ol>
 <p>Die vom Hugging-Face-Modell verwendeten Einbettungen oder Darstellungen sind Teil der internen Modellverarbeitung. Hugging Face gibt Bewertungen zurück, keine Vektoren. Die anfängliche Vektorabfrage und die Modell-Neurangfolge verwenden daher separate Darstellungen und können unterschiedliche Modelle nutzen.</p>
 <h2 id="Before-you-start" class="common-anchor-header">Bevor Sie beginnen<button data-href="#Before-you-start" class="anchor-icon" translate="no">
@@ -175,7 +175,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Wenn weder in der Funktions- noch in der Anbieter-Konfiguration ein Anmelde-Label angegeben ist, legen Sie „ <code translate="no">MILVUS_HUGGINGFACE_API_KEY</code> “ in der Milvus-Service-Umgebung fest:</p>
+    </button></h3><p>Wenn weder in der Funktions- noch in der Anbieter-Konfiguration ein Anmelde-Label angegeben ist, legen Sie „ <code translate="no">MILVUS_HUGGINGFACE_API_KEY</code> “ in der Milvus-Dienstumgebung fest:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># docker-compose.yaml</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">environment:</span>
@@ -212,7 +212,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Im folgenden Beispiel wird eine Sammlung mit einem Textfeld für die Neurangfolge und einem Vektorfeld für die anfängliche Abfrage erstellt:</p>
+    </button></h3><p>Im folgenden Beispiel wird eine Sammlung mit einem Textfeld für die Neureihung und einem Vektorfeld für die anfängliche Abfrage erstellt:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, Function, FunctionType, MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -303,7 +303,7 @@ client.insert(
 <tr><td><code translate="no">reranker</code></td><td>Ja</td><td>Die Reranking-Implementierung. Setzen Sie diesen Wert auf „ <code translate="no">model</code> “.</td></tr>
 <tr><td><code translate="no">provider</code></td><td>Ja</td><td>Der Modellanbieter. Setzen Sie diesen Wert auf „ <code translate="no">huggingface</code> “.</td></tr>
 <tr><td><code translate="no">model_name</code></td><td>Ja</td><td>Die Hugging-Face-Modell-ID für ein Modell, das über <code translate="no">hf-inference</code> für die Aufgabe „ <code translate="no">sentence-similarity</code> “ bereitgestellt wird.</td></tr>
-<tr><td><code translate="no">queries</code></td><td>Ja</td><td>Für die Neureihung verwendete Abfragezeichenfolgen. Geben Sie genau eine Zeichenfolge pro Suchanfrage an, auch wenn bei der anfänglichen Abfrage Abfragevektoren verwendet werden.</td></tr>
+<tr><td><code translate="no">queries</code></td><td>Ja</td><td>Für die Neureihung verwendete Abfragezeichenfolgen. Geben Sie genau eine Zeichenfolge pro Suchanfrage an, auch wenn beim ersten Abruf Abfragevektoren verwendet werden.</td></tr>
 <tr><td><code translate="no">hf_provider</code></td><td>Nein</td><td>Die Route des Hugging Face Inference Providers. Der Standardwert und der einzige in Milvus 2.6.20 unterstützte Wert ist <code translate="no">hf-inference</code>.</td></tr>
 <tr><td><code translate="no">credential</code></td><td>Nein</td><td>Die Bezeichnung einer Anmeldeinformation, die im obersten Abschnitt „ <code translate="no">credential</code> “ von „ <code translate="no">milvus.yaml</code> “ definiert ist. Dieser Wert ist nicht das Token selbst.</td></tr>
 <tr><td><code translate="no">max_client_batch_size</code></td><td>Nein</td><td>Die maximale Anzahl an Kandidatentexten, die in einer Hugging-Face-Anfrage gesendet werden. Der Standardwert ist „ <code translate="no">32</code> “, und der Wert muss größer sein als „ <code translate="no">0</code> “.</td></tr>

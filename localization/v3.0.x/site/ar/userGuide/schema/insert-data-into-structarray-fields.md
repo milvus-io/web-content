@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>قم بإدراج البيانات في حقل StructArray عندما تحتوي كل كيان على قائمة مرتبة من العناصر المنظمة. في حمولة الإدراج، يُمثَّل حقل StructArray كمصفوفة من الكائنات. يمثل كل كائن عنصر Struct واحدًا ويستخدم أسماء الحقول الفرعية لـ Struct المُعرَّفة في مخطط المجموعة.</p>
+    </button></h1><p>قم بإدراج البيانات في حقل StructArray عندما تحتوي كل كيان على قائمة مرتبة من العناصر المنظمة. في حمولة الإدراج، يتم تمثيل حقل StructArray كمصفوفة من الكائنات. يمثل كل كائن عنصر Struct واحدًا ويستخدم أسماء الحقول الفرعية لـ Struct المحددة في مخطط المجموعة.</p>
 <p>تستخدم هذه الصفحة مجموعة « <code translate="no">tech_articles</code> » من <a href="/docs/ar/create-structarray-field.md">«إنشاء حقل StructArray</a>». كل كيان هو مقال تقني، ويخزن حقل « <code translate="no">chunks</code> » أجزاء المقال كعناصر Struct.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">قبل البدء<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -85,7 +85,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تعد قيمة « <code translate="no">chunks</code> » مصفوفة من عناصر Struct. كل عنصر هو كائن تكون مفاتيحه أسماء حقول فرعية.</p>
+    </button></h2><p>تعد قيمة « <code translate="no">chunks</code> » مصفوفة من عناصر «Struct». كل عنصر هو كائن تكون مفاتيحه أسماء حقول فرعية.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;doc_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;StructArray indexing patterns&quot;</span><span class="hljs-punctuation">,</span>
@@ -113,7 +113,7 @@ summary: >-
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">emb_list_vector</code> و <code translate="no">emb</code> هما حقلان فرعيان متجهان منفصلان لأنهما يدعمان أوضاع بحث مختلفة. يعامل البحث في EmbeddingList جميع المتجهات في حقل StructArray كقائمة تضمين واحدة ويعرض نتائج على مستوى الكيان باستخدام مقاييس <code translate="no">MAX_SIM*</code>. أما البحث على مستوى العنصر فيبحث في كل عنصر Struct بشكل مستقل ويمكنه عرض إزاحة العنصر المطابق. يخزن هذا المثال نفس قيم المتجهات في كلا الحقلين للتبسيط. في تطبيق الإنتاج، يمكنك تخزين نفس التضمينات في كلا الحقلين الفرعيين عندما يستخدم كلا وضعي البحث نفس تضمين المقطع، أو تخزين تضمينات مختلفة عندما يستخدم وضعي البحث تمثيلات مختلفة.</p>
+<p><code translate="no">emb_list_vector</code> و <code translate="no">emb</code> هما حقلان فرعيان متجهان منفصلان لأنهما يدعمان أوضاع بحث مختلفة. يعامل البحث في EmbeddingList جميع المتجهات في حقل StructArray كقائمة تضمين واحدة ويعرض نتائج على مستوى الكيان باستخدام مقاييس <code translate="no">MAX_SIM*</code>. أما البحث على مستوى العنصر فيبحث في كل عنصر Struct بشكل مستقل ويمكنه عرض إزاحة العنصر المطابق. يخزن هذا المثال نفس قيم المتجهات في كلا الحقلين للتبسيط. في تطبيق الإنتاج، يمكنك تخزين نفس التضمينات في كلا الحقلين الفرعيين عندما يستخدم وضعا البحث نفس تضمين المقطع، أو تخزين تضمينات مختلفة عندما يستخدم وضعا البحث تمثيلات مختلفة.</p>
 <h2 id="Insert-rows" class="common-anchor-header">إدراج الصفوف<button data-href="#Insert-rows" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -303,7 +303,7 @@ result = client.insert(
 </thead>
 <tbody>
 <tr><td>استخدم مصفوفة من الكائنات لحقل StructArray.</td><td>قيمة <code translate="no">chunks</code> هي قائمة، وكل عنصر في القائمة هو عنصر Struct.</td></tr>
-<tr><td>استخدم أسماء الحقول الفرعية داخل كل عنصر Struct.</td><td>أدخل <code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> داخل <code translate="no">chunks</code> ، وليس <code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code>.</td></tr>
+<tr><td>استخدم أسماء الحقول الفرعية داخل كل عنصر من عناصر Struct.</td><td>أدخل <code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> داخل <code translate="no">chunks</code> ، وليس <code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code>.</td></tr>
 <tr><td>تأكد من مطابقة مخطط Struct.</td><td>يجب أن يستخدم كل عنصر من عناصر Struct الحقول الفرعية المحددة في مخطط Struct.</td></tr>
 <tr><td>تطابق أبعاد المتجه.</td><td>يجب أن تتطابق قيم المتجهات مع <code translate="no">dim</code> المُعدة لحقولها الفرعية المتجهة.</td></tr>
 <tr><td>يجب مراعاة " <code translate="no">max_capacity</code>".</td><td>يجب ألا يتجاوز عدد عناصر Struct في كيان واحد الحد الأقصى المسموح به ( <code translate="no">max_capacity</code> ) لحقل StructArray.</td></tr>

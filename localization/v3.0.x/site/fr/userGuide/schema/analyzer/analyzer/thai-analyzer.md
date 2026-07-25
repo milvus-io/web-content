@@ -82,7 +82,7 @@ beta: Milvus 3.0.0+
 <ul>
 <li><strong>Tokenisation</strong>: utilise le <a href="/docs/fr/thai-tokenizer.md"><code translate="no">thai</code></a> tokeniseur pour segmenter le texte thaï en tokens de mots sans s’appuyer sur les espaces. Le tokeniseur filtre les espaces et les segments composés uniquement de signes de ponctuation.</li>
 <li><strong>Normalisation de la casse</strong>: utilise le filtre « <code translate="no">lowercase</code> », qui s’applique aux lettres latines dans un texte mixte thaï/anglais.</li>
-<li><strong>Normalisation des chiffres</strong>: utilise le filtre « <code translate="no">decimaldigit</code> » pour convertir les chiffres thaïlandais et les autres chiffres décimaux Unicode en chiffres ASCII.</li>
+<li><strong>Normalisation des chiffres</strong>: utilise le filtre « <code translate="no">decimaldigit</code> » pour convertir les chiffres thaïlandais et autres chiffres décimaux Unicode en chiffres ASCII.</li>
 <li><strong>Suppression des mots vides</strong>: utilise le filtre « <code translate="no">stop</code> » avec le dictionnaire intégré « <code translate="no">_thai_</code> ».</li>
 <li><strong>Pas de lemmatisation</strong>: l’analyseur intégré « <code translate="no">thai</code> » n’applique pas de filtre « <code translate="no">stemmer</code> ».</li>
 </ul>

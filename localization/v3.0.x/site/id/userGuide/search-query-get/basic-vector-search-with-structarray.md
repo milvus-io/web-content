@@ -49,7 +49,7 @@ summary: >-
 <tr><td>Buat bidang StructArray, seperti <code translate="no">chunks</code>.</td><td><a href="/docs/id/create-structarray-field.md">Buat bidang StructArray</a></td></tr>
 <tr><td>Sisipkan entitas yang bidang ` <code translate="no">chunks</code> `-nya berisi objek Struct.</td><td><a href="/docs/id/insert-data-into-structarray-fields.md">Masukkan Data ke dalam Bidang StructArray</a></td></tr>
 <tr><td>Buat indeks ` <code translate="no">MAX_SIM*</code> ` pada ` <code translate="no">chunks[emb_list_vector]</code> ` untuk pencarian `EmbeddingList`.</td><td><a href="/docs/id/index-structarray-fields.md">Indeks Bidang StructArray</a></td></tr>
-<tr><td>Buat indeks vektor-metrik biasa pada ` <code translate="no">chunks[emb]</code> ` untuk pencarian tingkat elemen.</td><td><a href="/docs/id/index-structarray-fields.md">Indeks Bidang StructArray</a></td></tr>
+<tr><td>Buat indeks metrik vektor biasa pada ` <code translate="no">chunks[emb]</code> ` untuk pencarian tingkat elemen.</td><td><a href="/docs/id/index-structarray-fields.md">Indeks Bidang StructArray</a></td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -198,7 +198,7 @@ results = client.search(
 <tr><th>Item hasil</th><th>Pencarian EmbeddingList</th><th>Pencarian tingkat elemen</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">id</code></td><td>Kunci utama entitas yang cocok.</td><td>Kunci utama entitas yang berisi elemen Struct yang cocok.</td></tr>
+<tr><td><code translate="no">id</code></td><td>Kunci utama dari entitas yang cocok.</td><td>Kunci utama entitas yang berisi elemen Struct yang cocok.</td></tr>
 <tr><td><code translate="no">distance</code> atau skor</td><td>Skor atau jarak antara daftar embedding kueri dan daftar embedding yang tersimpan.</td><td>Skor atau jarak antara vektor kueri dan vektor elemen Struct yang cocok.</td></tr>
 <tr><td><code translate="no">offset</code></td><td>Tidak berlaku.</td><td>Posisi berbasis nol dari elemen Struct yang cocok saat dikembalikan.</td></tr>
 <tr><td>Kunci utama yang berulang</td><td>Tidak diharapkan untuk satu kueri karena hasilnya berada di tingkat entitas.</td><td>Mungkin terjadi, karena beberapa elemen Struct dalam entitas yang sama dapat cocok.</td></tr>

@@ -19,7 +19,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>AI 검색 애플리케이션에서 벡터 검색은 의미적으로 유사한 엔티티를 찾는 데 도움이 되지만, 애플리케이션은 종종 각 일치 항목의 원본 텍스트도 필요로 합니다. LLM이나 에이전트는 해당 텍스트를 컨텍스트로 활용하여 내용을 읽거나, 인용하거나, 요약하거나, 프롬프트에 결과를 포함시킬 수 있습니다.</p>
+    </button></h1><p>AI 검색 애플리케이션에서 벡터 검색은 의미적으로 유사한 엔티티를 찾는 데 도움이 되지만, 애플리케이션은 종종 각 일치 항목의 원본 텍스트도 필요로 합니다. LLM이나 에이전트는 해당 텍스트를 컨텍스트로 활용하여 내용을 읽거나, 인용하거나, 요약하거나, 결과를 프롬프트에 포함시킬 수 있습니다.</p>
 <p>Milvus는 긴 원본 텍스트를 엔티티와 함께 직접 저장하기 위해 ` <code translate="no">TEXT</code> ` 스칼라 필드 유형을 제공합니다. 일반적인 값으로는 문장, 긴 문서, 기사 본문, 티켓 및 로그 등이 있습니다. 고정된 ` <code translate="no">max_length</code>`을 요구하는 ` <code translate="no">VARCHAR</code>`과 달리, ` <code translate="no">TEXT</code> `은 컬렉션 스키마에서 최대 바이트 길이를 설정할 필요가 없습니다.</p>
 <p><code translate="no">TEXT</code> 필드를 정의하려면 <code translate="no">datatype</code> 을 <code translate="no">DataType.TEXT</code> 로 설정하십시오.</p>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -240,7 +240,7 @@ client.load_collection(collection_name=COLLECTION_NAME)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>원본 쿼리 텍스트를 검색 데이터로 사용하여 스파스 벡터 필드에 대해 검색을 수행합니다. Milvus는 쿼리 텍스트를 스파스 벡터로 변환하고, BM25를 통해 일치 항목을 순위 매긴 후, 요청된 <code translate="no">TEXT</code> 필드의 결과를 <code translate="no">output_fields</code> 에 반환합니다.</p>
+    </button></h2><p>원본 쿼리 텍스트를 검색 데이터로 사용하여 스파스 벡터 필드에 대해 검색합니다. Milvus는 쿼리 텍스트를 스파스 벡터로 변환하고, BM25를 통해 일치 항목을 순위 매긴 후, 요청된 <code translate="no">TEXT</code> 필드를 <code translate="no">output_fields</code> 에 반환합니다.</p>
 <pre><code translate="no" class="language-python">results = client.search(
     collection_name=COLLECTION_NAME,
 <span class="highlighted-comment-line">    data=[<span class="hljs-string">&quot;how does Milvus store source text for retrieval&quot;</span>],</span>

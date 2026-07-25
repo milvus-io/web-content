@@ -53,7 +53,7 @@ summary: >-
 </table>
 <div class="alert note">
 <p>Avertissement</p>
-<p>Utilisez l’ <code translate="no">element_scope</code> uniquement pour configurer la réduction des objets d’ <code translate="no">AnnSearchRequest</code> s au niveau des éléments de StructArray dans une recherche hybride au niveau des éléments ne portant pas la même structure. Ne l’utilisez pas pour les requêtes EmbeddingList, les requêtes vectorielles au niveau des collections ou la recherche hybride au niveau des éléments de StructArray portant la même structure.</p>
+<p>Utilisez l’ <code translate="no">element_scope</code> uniquement pour configurer la réduction des objets d’ <code translate="no">AnnSearchRequest</code> s au niveau des éléments de StructArray dans une recherche hybride au niveau des éléments ne portant pas sur la même structure. Ne l’utilisez pas pour les requêtes EmbeddingList, les requêtes vectorielles au niveau des collections ou la recherche hybride au niveau des éléments portant sur la même structure StructArray.</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">Avant de commencer<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -5,7 +5,7 @@ summary: >-
   Erstellen Sie Indizes für StructArray-Unterfelder, bevor Sie eine Vektorsuche
   durchführen oder die skalare Filterung beschleunigen. Bei einem
   StructArray-Feld ist das Indexziel ein Unterfeldpfad, beispielsweise
-  chunks[emb_list_vector], chunks[emb] oder chunks[section].
+  `chunks[emb_list_vector]`, `chunks[emb]` oder `chunks[section]`.
 ---
 <h1 id="Index-StructArray-Fields" class="common-anchor-header">StructArray-Felder indizieren<button data-href="#Index-StructArray-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -23,7 +23,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Erstellen Sie Indizes für StructArray-Unterfelder, bevor Sie eine Vektorsuche durchführen oder die skalare Filterung beschleunigen. Bei einem StructArray-Feld ist das Indexziel ein Unterfeldpfad, z. B. <code translate="no">chunks[emb_list_vector]</code>, <code translate="no">chunks[emb]</code> oder <code translate="no">chunks[section]</code>.</p>
-<p>Auf dieser Seite wird die Sammlung „ <code translate="no">tech_articles</code> “ aus dem <a href="/docs/de/create-structarray-field.md">Abschnitt „Erstellen eines StructArray-Feldes“</a> verwendet. Das StructArray-Feld „ <code translate="no">chunks</code> “ enthält skalare Unterfelder für die Filterung und Vektor-Unterfelder für die Suche.</p>
+<p>Auf dieser Seite wird die Sammlung „ <code translate="no">tech_articles</code> “ aus dem Abschnitt <a href="/docs/de/create-structarray-field.md">„Erstellen eines StructArray-Feldes“</a> verwendet. Das StructArray-Feld „ <code translate="no">chunks</code> “ enthält skalare Unterfelder für die Filterung und Vektor-Unterfelder für die Suche.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Bevor Sie beginnen<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,7 +53,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Ein Vektorfeld oder Vektorunterfeld akzeptiert nur einen Index. Wenn Sie sowohl die „EmbeddingList“-Suche als auch die Suche auf Elementebene benötigen, erstellen Sie zwei separate Vektorunterfelder und indizieren Sie diese separat. Auf dieser Seite wird „ <code translate="no">chunks[emb_list_vector]</code> “ für die „EmbeddingList“-Suche indiziert und „ <code translate="no">chunks[emb]</code> “ für die Suche auf Elementebene.</p>
+<p>Ein Vektorfeld oder Vektorunterfeld akzeptiert nur einen Index. Wenn Sie sowohl die EmbeddingList-Suche als auch die Suche auf Elementebene benötigen, erstellen Sie zwei separate Vektorunterfelder und indizieren Sie diese separat. Auf dieser Seite wird „ <code translate="no">chunks[emb_list_vector]</code> “ für die EmbeddingList-Suche indiziert und „ <code translate="no">chunks[emb]</code> “ für die Suche auf Elementebene.</p>
 </div>
 <h2 id="Choose-indexes" class="common-anchor-header">Indizes auswählen<button data-href="#Choose-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -317,7 +317,7 @@ client.create_index(
 <tr><td>Verwenden Sie „ <code translate="no">MAX_SIM*</code> “-Metriken für die EmbeddingList-Suche.</td><td>Für Abfragen in der „EmbeddingList“ sind Daten aus einem Index erforderlich, der mit einer „ <code translate="no">MAX_SIM*</code> “-Metrik erstellt wurde.</td></tr>
 <tr><td>Verwenden Sie reguläre Vektormetriken für die Suche auf Elementebene.</td><td>Die Suche auf Elementebene verwendet reguläre Vektorabfragedaten und Metriken wie „ <code translate="no">COSINE</code> “, „ <code translate="no">IP</code> “ oder „ <code translate="no">L2</code> “.</td></tr>
 <tr><td>Indizieren Sie skalare Unterfelder, die in Filtern vorkommen.</td><td>Verwenden Sie skalare Indizierungstypen, die von Ihrem Zielsystem unterstützt werden.</td></tr>
-<tr><td>Beachten Sie die Beschränkungen für Vektorfelder.</td><td>Die Gesamtzahl der Vektorfelder und Vektor-Teilfelder ist begrenzt. Lesen Sie den Abschnitt „StructArray-Grenzwerte“, bevor Sie viele Vektor-Teilfelder hinzufügen.</td></tr>
+<tr><td>Beachten Sie die Beschränkungen für Vektorfelder.</td><td>Die Gesamtzahl der Vektorfelder und Vektor-Teilfelder ist begrenzt. Lesen Sie den Abschnitt „StructArray-Beschränkungen“, bevor Sie viele Vektor-Teilfelder hinzufügen.</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">Häufige Fehler<button data-href="#Common-mistakes" class="anchor-icon" translate="no">

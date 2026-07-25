@@ -4,8 +4,8 @@ title: Choisissez une stratégie de recherche EmbeddingList
 summary: >-
   Les stratégies de recherche EmbeddingList déterminent la manière dont Milvus
   construit un index approximatif de candidats pour la recherche EmbeddingList.
-  La stratégie par défaut est « tokenann ». Vous pouvez passer à « muvera » ou «
-  lemur » lorsque la liste d’embeddings est volumineuse, que « TokenANN » est
+  La stratégie par défaut est « tokenann ». Vous pouvez opter pour « muvera » ou
+  « lemur » lorsque la liste d’embeddings est volumineuse, que « TokenANN » est
   trop coûteux en ressources, ou qu’une représentation apprise/compressée au
   niveau des lignes est plus adaptée. Le résultat final est toujours généré par
   le reclassement MaxSim lorsque l'option `emb_list_rerank` est activée.
@@ -50,7 +50,7 @@ summary: >-
 <tbody>
 </tbody>
 </table>
-<p>En ce sens, la recherche « <code translate="no">emb_list_strategy</code> » est principalement une stratégie de construction d’index et de récupération de candidats. Elle est configurée lors de la construction de l’index et détermine comment l’ensemble de candidats ANN de première étape est généré. Des paramètres de recherche tels que ` <code translate="no">retrieval_ann_ratio</code> ` et ` <code translate="no">emb_list_rerank</code> ` contrôlent ensuite le nombre de candidats récupérés et l’application ou non du reclassement par MaxSim.</p>
+<p>En ce sens, la recherche « <code translate="no">emb_list_strategy</code> » est principalement une stratégie de construction d’index et de récupération de candidats. Elle est configurée lors de la construction de l’index et détermine comment l’ensemble de candidats ANN de première étape est généré. Des paramètres de recherche tels que « <code translate="no">retrieval_ann_ratio</code> » et « <code translate="no">emb_list_rerank</code> » contrôlent ensuite le nombre de candidats récupérés et l’application ou non du reclassement par MaxSim.</p>
 <hr>
 <h2 id="Available-Strategies" class="common-anchor-header">Stratégies disponibles<button data-href="#Available-Strategies" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -73,7 +73,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td><code translate="no">tokenann</code></td><td>Vecteurs individuels au sein de chaque ligne</td><td>Conserve les vecteurs d'origine et évite les pertes liées à la compression.</td><td>Recherche axée sur la qualité, listes d’embeddings courtes ou moyennes, embeddings à haut pouvoir de discrimination.</td><td>Index plus volumineux et coût de recherche des candidats plus élevé.</td></tr>
-<tr><td><code translate="no">muvera</code></td><td>Un vecteur encodé par ligne</td><td>Compresse une liste d’embeddings en une représentation FDE de dimension fixe sans apprentissage.</td><td>Documents plus longs, vecteurs d’encodage à haut pouvoir de discrimination, cas où TokenANN est trop gourmand en ressources.</td><td>La projection aléatoire introduit une perte d’approximation ; la dimension FDE affecte la latence.</td></tr>
+<tr><td><code translate="no">muvera</code></td><td>Un vecteur encodé par ligne</td><td>Compresse une liste d’embeddings en une représentation FDE de dimension fixe sans apprentissage.</td><td>Documents plus longs, vecteurs d’encodage à haute discrimination, cas où TokenANN est trop lourd.</td><td>La projection aléatoire introduit une perte d’approximation ; la dimension FDE affecte la latence.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td>Un vecteur appris par ligne</td><td>Apprend une compression spécifique au corpus à partir de listes d’embeddings vers des vecteurs de ligne de dimension fixe.</td><td>Embeddings à faible pouvoir de discrimination, recherche multimodale ou de documents visuels, listes d’embeddings volumineuses.</td><td>Nécessite un apprentissage et peut être sensible à la distribution du corpus et au biais lié à la longueur des documents.</td></tr>
 </tbody>
 </table>
@@ -92,12 +92,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">tokenann</code> indexe chaque vecteur de la liste d’embeddings. Lors de la recherche, chaque vecteur de requête effectue une recherche ANN ; les vecteurs correspondants sont regroupés dans leurs lignes respectives, et les lignes candidates résultantes sont reclassées à l’aide de MaxSim.</p>
+    </button></h2><p><code translate="no">tokenann</code> indexe chaque vecteur de la liste d’embeddings. Lors de la recherche, chaque vecteur de requête effectue une recherche ANN, les vecteurs correspondants sont regroupés dans leurs lignes respectives, et les lignes candidates résultantes sont reclassées à l’aide de MaxSim.</p>
 <div class="alert note">
 <p><strong>Utilisez TokenANN lorsque la qualité est la priorité absolue.</strong> Il s’agit de l’approximation la plus proche du calcul MaxSim d’origine, car il conserve tous les vecteurs disponibles dans l’index de première étape.</p>
 </div>
 <ul>
-<li><p><strong>Convient particulièrement :</strong> aux fragments de texte courts, aux lignes comportant un nombre faible ou modéré de vecteurs, à une forte séparation sémantique au niveau des tokens, aux bases de référence sensibles à la qualité.</p></li>
+<li><p><strong>Convient particulièrement :</strong> aux fragments de texte courts, aux lignes comportant un nombre faible ou modéré de vecteurs, à une forte séparation sémantique au niveau des tokens, aux références sensibles à la qualité.</p></li>
 <li><p><strong>Moins adapté :</strong> documents très longs, pages visuelles comportant des milliers de vecteurs de patch, contraintes strictes en matière de mémoire ou de latence.</p></li>
 <li><p><strong>Comportement au niveau des éléments :</strong> TokenANN peut extraire des candidats à partir de vecteurs individuels avant de les regrouper en lignes. Le résultat final de la recherche dans l’EmbeddingList reste au niveau des lignes après le calcul du score MaxSim.</p></li>
 </ul>
@@ -142,11 +142,11 @@ summary: >-
       </svg>
     </button></h2><p><code translate="no">lemur</code> entraîne un modèle pour compresser chaque liste d’embeddings en une représentation de dimension fixe. La recherche ANN de première étape s’effectue sur les vecteurs appris au niveau des lignes, et les candidats sont reclassés à l’aide de MaxSim.</p>
 <div class="alert note">
-<p><strong>Utilisez LEMUR lorsque la compression apprise justifie le coût de l’entraînement.</strong> Il peut donner de bons résultats pour les espaces d’embeddings à faible discrimination et la recherche multimodale, mais il doit être validé par rapport au corpus cible car il peut être sensible à la distribution de la longueur des documents.</p>
+<p><strong>Utilisez LEMUR lorsque la compression apprise justifie le coût de l’entraînement.</strong> Il peut donner de bons résultats pour les espaces d’embedding à faible discrimination et la recherche multimodale, mais il doit être validé par rapport au corpus cible car il peut être sensible à la distribution de la longueur des documents.</p>
 </div>
 <ul>
-<li><p><strong>Convient particulièrement :</strong> recherche de documents visuels, représentations de patches multimodaux, espaces d’embedding à faible discrimination, grandes listes d’embedding pour lesquelles TokenANN n’est pas pratique.</p></li>
-<li><p><strong>Moins adapté :</strong> corpus changeant fréquemment, embeddings à forte discrimination avec des longueurs de documents très asymétriques, charges de travail pour lesquelles le coût d’entraînement est inacceptable.</p></li>
+<li><p><strong>Convient particulièrement :</strong> recherche de documents visuels, représentations de patches multimodaux, espaces d’embeddings à faible discrimination, grandes listes d’embeddings pour lesquelles TokenANN n’est pas pratique.</p></li>
+<li><p><strong>Moins adapté :</strong> corpus changeant fréquemment, plongements à forte discrimination avec des longueurs de documents très asymétriques, charges de travail pour lesquelles le coût d’entraînement est inacceptable.</p></li>
 <li><p><strong>Paramètres importants :</strong><code translate="no">lemur_hidden_dim</code>, <code translate="no">lemur_num_train_samples</code>, <code translate="no">lemur_num_epochs</code>, <code translate="no">lemur_batch_size</code>, <code translate="no">lemur_learning_rate</code>, <code translate="no">lemur_seed</code> et <code translate="no">lemur_num_layers</code>.</p></li>
 </ul>
 <hr>
@@ -193,7 +193,7 @@ summary: >-
 <tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_num_repeats</code></td><td>Création d’index</td><td><code translate="no">7</code></td><td>Contrôle le nombre de codages FDE indépendants qui sont concaténés. Des valeurs plus élevées peuvent améliorer la robustesse, mais augmentent le coût de l'indexation et de la recherche.</td></tr>
 <tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_seed</code></td><td>Création d'index</td><td><code translate="no">42</code></td><td>À définir pour obtenir des projections aléatoires reproductibles, notamment lors de tests et de comparaisons de performances.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">emb_list_strategy=&quot;lemur&quot;</code></td><td>Création d’index</td><td><code translate="no">tokenann</code></td><td>À utiliser lorsque la compression au niveau des lignes apprise est censée fonctionner mieux que la projection aléatoire fixe.</td></tr>
-<tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_hidden_dim</code></td><td>Création d’index</td><td><code translate="no">256</code></td><td>Contrôle la taille de la représentation compressée. Augmentez cette valeur pour plus de capacité ; diminuez-la pour réduire l'utilisation de mémoire et accélérer la récupération.</td></tr>
+<tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_hidden_dim</code></td><td>Création d’index</td><td><code translate="no">256</code></td><td>Contrôle la taille de la représentation compressée. Augmentez cette valeur pour plus de capacité ; diminuez-la pour réduire l’utilisation de mémoire et accélérer la récupération.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_num_train_samples</code></td><td>Création d’index</td><td><code translate="no">20000</code></td><td>Augmentez ce paramètre lorsque le corpus est varié et que la compression apprise est sous-adaptée ; ne le réduisez que pour les petits tests ou pour accélérer la création des index.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_num_epochs</code></td><td>Création d’index</td><td><code translate="no">50</code></td><td>Augmentez si l'entraînement n'a pas convergé ; réduisez lorsque le temps de création est la principale contrainte.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_batch_size</code></td><td>Création d'index</td><td><code translate="no">512</code></td><td>Ajustez en fonction du débit d’entraînement et de l’utilisation de la mémoire.</td></tr>
@@ -264,7 +264,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus peut également renseigner les paramètres d’index à partir de ` <code translate="no">milvus.yaml</code>`. La section concernée est ` <code translate="no">knowhere</code>`. Les paramètres sont organisés par type d’index et par étape, selon le modèle ` <code translate="no">knowhere.&lt;INDEX_TYPE&gt;.&lt;stage&gt;.&lt;parameter&gt;</code>`. Les paramètres d’index fournis par l’utilisateur ont priorité sur ces valeurs par défaut.</p>
+    </button></h2><p>Milvus peut également renseign <code translate="no">milvus.yaml</code> s d’index à partir de ` `. La section concernée est ` <code translate="no">knowhere</code>`. Les paramètres sont organisés par type d’index et par étape, selon le modèle ` <code translate="no">knowhere.&lt;INDEX_TYPE&gt;.&lt;stage&gt;.&lt;parameter&gt;</code>`. Les paramètres d’index fournis par l’utilisateur ont priorité sur ces valeurs par défaut.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">knowhere:</span>
   <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
   <span class="hljs-attr">HNSW:</span>
@@ -340,7 +340,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Il n’existe pas de stratégie universellement optimale. Faites votre choix en fonction de la longueur de la liste d’embedding, de la capacité de discrimination de l’espace d’embedding, du budget de latence, de la taille de l’index et de la possibilité ou non d’effectuer une étape d’entraînement.</p>
+    </button></h2><p>Il n’existe pas de stratégie universellement optimale. Faites votre choix en fonction de la longueur de la liste d’embedding, de la capacité de discrimination de l’espace d’embedding, du budget de latence, de la taille de l’index et de la possibilité ou non de réaliser une étape d’entraînement.</p>
 <table>
 <thead>
 <tr><th>Question</th><th>Signal</th><th>Point de départ recommandé</th></tr>

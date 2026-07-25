@@ -38,7 +38,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li>Di Milvus 3.x, Woodpecker adalah WAL/antrian pesan <strong>default</strong>, yang menyediakan penulisan terurut dan pemulihan sebagai layanan pencatatan. Tidak diperlukan layanan antrian pesan eksternal (seperti Pulsar atau Kafka).</li>
+<li>Di Milvus 3.x, Woodpecker adalah WAL/antrian pesan <strong>bawaan</strong>, yang menyediakan penulisan terurut dan pemulihan sebagai layanan pencatatan. Tidak diperlukan layanan antrian pesan eksternal (seperti Pulsar atau Kafka).</li>
 <li>Woodpecker dapat dijalankan <strong>secara tertanam</strong> di dalam node Milvus/streaming (default), atau sebagai <strong>layanan khusus</strong> dengan pod-nya sendiri (hanya untuk distribusi/kluster).</li>
 <li>Woodpecker mendukung tiga mode penyimpanan ( <code translate="no">storage.type</code> ): penyimpanan objek (<code translate="no">minio</code>, default), sistem file lokal (<code translate="no">local</code>), dan penyimpanan khusus ( <code translate="no">service</code>). Lihat <a href="#Deployment-modes">Mode Deployment</a>.</li>
 </ul>
@@ -127,7 +127,7 @@ summary: >-
 </ul></li>
 <li><code translate="no">woodpecker.logstore</code>
 <ul>
-<li>Mengontrol kebijakan sinkronisasi/pembuangan/pemadatan/pembacaan untuk segmen log. Ini adalah pengaturan utama untuk penyetelan throughput/latensi.</li>
+<li>Mengontrol kebijakan sinkronisasi/pembersihan/pemadatan/pembacaan untuk segmen log. Ini adalah pengaturan utama untuk penyetelan throughput/latensi.</li>
 </ul></li>
 <li><code translate="no">woodpecker.storage</code>
 <ul>
@@ -158,7 +158,7 @@ summary: >-
 <tbody>
 <tr><td><code translate="no">minio</code> (default)</td><td>Terintegrasi dalam node Milvus/streaming</td><td>Penyimpanan objek (kompatibel dengan MinIO/S3)</td><td>Didukung</td><td>Didukung</td></tr>
 <tr><td><code translate="no">local</code></td><td>Terintegrasi dalam node Milvus/streaming</td><td>Sistem berkas lokal</td><td>Didukung</td><td>Terbatas (semua node memerlukan sistem berkas bersama, misalnya NFS)</td></tr>
-<tr><td><code translate="no">service</code></td><td><strong>Layanan Woodpecker khusus</strong> (pod-nya sendiri)</td><td>Penyimpanan objek (kompatibel dengan MinIO/S3)</td><td><strong>Tidak didukung</strong></td><td>Didukung</td></tr>
+<tr><td><code translate="no">service</code></td><td><strong>Layanan Woodpecker khusus</strong> (pod-podnya sendiri)</td><td>Penyimpanan objek (kompatibel dengan MinIO/S3)</td><td><strong>Tidak didukung</strong></td><td>Didukung</td></tr>
 </tbody>
 </table>
 <p>Catatan:</p>
@@ -196,7 +196,7 @@ summary: >-
 <tr><td>Google Cloud Storage (GCS)</td><td>Didukung</td><td>Didukung melalui mode interoperabilitas S3.</td></tr>
 <tr><td>Huawei Cloud OBS</td><td>Tidak didukung</td><td>Tidak memiliki semantik Conditional Write yang diperlukan.</td></tr>
 <tr><td>VAST Data</td><td>Didukung</td><td>Telah diverifikasi oleh komunitas; hanya berfungsi dengan bucket non-versi.</td></tr>
-<tr><td>Penyimpanan lain yang kompatibel dengan S3</td><td>Sebagian</td><td>Bergantung pada dukungan penuh untuk semantik Penulisan Bersyarat S3.</td></tr>
+<tr><td>Penyimpanan lain yang kompatibel dengan S3</td><td>Sebagian</td><td>Bergantung pada dukungan penuh terhadap semantik Penulisan Bersyarat S3.</td></tr>
 </tbody>
 </table>
 <p>Catatan:</p>
@@ -317,7 +317,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
 bash standalone_embed.sh start
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk menyesuaikan Woodpecker, edit berkas ` <code translate="no">user.yaml</code> ` yang dihasilkan setelah kali pertama dijalankan, lalu jalankan perintah ` <code translate="no">bash standalone_embed.sh restart</code> ` untuk menerapkan perubahan (perintah ` <code translate="no">start</code> ` akan menghasilkan ulang berkas ` <code translate="no">user.yaml</code>`, jadi terapkan perubahan dengan perintah ` <code translate="no">restart</code>`):</p>
+<p>Untuk menyesuaikan Woodpecker, edit berkas ` <code translate="no">user.yaml</code> ` yang dihasilkan setelah kali pertama dijalankan, lalu jalankan perintah ` <code translate="no">bash standalone_embed.sh restart</code> ` untuk menerapkan perubahan (perintah ` <code translate="no">start</code> ` yang dijalankan ulang akan menghasilkan berkas ` <code translate="no">user.yaml</code>` baru, jadi terapkan perubahan dengan perintah ` <code translate="no">restart</code>`):</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml</span>
 <span class="hljs-attr">woodpecker:</span>
   <span class="hljs-attr">logstore:</span>
@@ -432,7 +432,7 @@ docker restart milvus-standalone
 <li>Pengaturan Woodpecker
 <ul>
 <li>Tingkatkan nilai ` <code translate="no">logstore.segmentSyncPolicy.maxFlushSize</code> ` dan ` <code translate="no">maxFlushThreads</code> ` untuk flush yang lebih besar dan paralelisme yang lebih tinggi.</li>
-<li>Sesuaikan nilai <code translate="no">maxInterval</code> sesuai dengan karakteristik media (tukar latensi dengan throughput dengan agregasi yang lebih panjang).</li>
+<li>Sesuaikan nilai <code translate="no">maxInterval</code> sesuai dengan karakteristik media (tukar latensi dengan throughput dengan agregasi yang lebih lama).</li>
 <li>Untuk penyimpanan objek, pertimbangkan untuk meningkatkan nilai ` <code translate="no">segmentRollingPolicy.maxSize</code> ` guna mengurangi pergantian segmen.</li>
 </ul></li>
 <li>Sisi klien/aplikasi
@@ -530,7 +530,7 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Woodpecker adalah WAL cloud-native yang dirancang untuk penyimpanan objek dengan kompromi antara throughput, biaya, dan latensi. Mode tertanam yang ringan memprioritaskan optimasi biaya dan throughput, karena sebagian besar skenario hanya memerlukan data ditulis dalam waktu tertentu daripada menuntut latensi rendah untuk setiap permintaan penulisan. Oleh karena itu, Woodpecker menerapkan penulisan berbatch, dengan interval default 10 ms untuk backend penyimpanan sistem berkas lokal dan 200 ms untuk backend penyimpanan sejenis MinIO. Selama operasi penulisan yang lambat, latensi maksimum sama dengan waktu interval ditambah waktu flush.</p>
+    </button></h3><p>Woodpecker adalah WAL cloud-native yang dirancang untuk penyimpanan objek dengan kompromi antara throughput, biaya, dan latensi. Mode tertanam yang ringan memprioritaskan optimasi biaya dan throughput, karena sebagian besar skenario hanya memerlukan data ditulis dalam waktu tertentu daripada menuntut latensi rendah untuk permintaan penulisan individu. Oleh karena itu, Woodpecker menerapkan penulisan berbatch, dengan interval default 10 ms untuk backend penyimpanan sistem berkas lokal dan 200 ms untuk backend penyimpanan sejenis MinIO. Selama operasi penulisan yang lambat, latensi maksimum sama dengan waktu interval ditambah waktu flush.</p>
 <p>Perlu dicatat bahwa penyisipan batch dipicu tidak hanya oleh interval waktu tetapi juga oleh ukuran batch, yang secara default sebesar 2MB.</p>
 <h3 id="Service-mode-Milvus-30+" class="common-anchor-header">Mode Layanan (Milvus 3.0+)<button data-href="#Service-mode-Milvus-30+" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -551,7 +551,7 @@ batch_count = <span class="hljs-number">2000</span>
 <ul>
 <li><strong>Penulisan kuorum satu RTT</strong> — replikasi yang digerakkan klien menyelesaikan penulisan kuorum dalam satu putaran perjalanan (round trip), dengan lalu lintas lintas-AZ dibatasi pada data setara dua replika (dibandingkan dengan lalu lintas lintas-AZ tambahan sekitar 1/3 yang umum pada replikasi berbasis broker/leader).</li>
 <li><strong>Pembacaan satu lompatan yang sadar topologi</strong> — setiap pembacaan langsung menuju replika terdekat alih-alih diteruskan melalui broker, sehingga menghindari pembacaan lintas-AZ acak (≈2/3 lalu lintas pembacaan lintas-AZ) yang umum terjadi pada sistem berbasis broker.</li>
-<li><strong>Unggahan langsung ke penyimpanan objek setelah segment rolling</strong> — setiap segmen melacak siklus hidupnya secara penuh dan diunggah ke penyimpanan objek segera setelah segment rolling, sehingga menjaga jejak disk lokal dan biaya penyimpanan tetap rendah tanpa mengorbankan latensi.</li>
+<li><strong>Unggahan langsung ke penyimpanan objek setelah segment rolling</strong> — setiap segmen melacak siklus hidupnya secara penuh dan diunggah ke penyimpanan objek segera setelah digulirkan, sehingga menjaga jejak disk lokal dan biaya penyimpanan tetap rendah tanpa mengorbankan latensi.</li>
 <li><strong>Tidak ada replikasi node-ke-node yang berkelanjutan</strong> — log disimpan ke penyimpanan objek yang berfungsi sebagai penyimpanan bersama, sehingga failover hanya mengunggah ulang replika yang masih berfungsi (tanpa menyalin seluruh node), penskalaan tidak dibatasi oleh bandwidth replikasi antar-node, dan penggantian node skala besar tidak menyebabkan badai replikasi.</li>
 </ul>
 <p>Dalam penerapan lintas-AZ, mode layanan juga menghemat sekitar <strong>1/3 lalu lintas jaringan tulis</strong> dan <strong>2/3 lalu lintas jaringan baca</strong> lintas-AZ dibandingkan dengan sistem log berbasis broker. Untuk analisis desain dan biaya selengkapnya, lihat <a href="/docs/id/woodpecker_architecture.md">Arsitektur Woodpecker</a>.</p>

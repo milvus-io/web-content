@@ -1,7 +1,7 @@
 ---
 id: arabic-analyzer.md
 title: 阿拉伯語Compatible with Milvus 3.0.0+
-summary: 內建的阿拉伯語分析器會透過將字母變體和數字標準化、進行詞幹提取，以及移除阿拉伯語停用詞，來處理阿拉伯語文本。
+summary: 內建的阿拉伯語分析器會透過將字母變體和數字進行標準化、對詞彙進行詞幹提取，以及移除阿拉伯語停用詞，來處理阿拉伯語文本。
 beta: Milvus 3.0.0+
 ---
 <h1 id="Arabic" class="common-anchor-header">阿拉伯語<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Arabic" class="anchor-icon" translate="no">
@@ -36,7 +36,7 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><p>內建分析器是 Milvus 提供的分析器範本。若要使用內建分析器，請將 `<code translate="no">type</code> ` 設定為 `<code translate="no">analyzer_params</code>` 中預先定義的分析器名稱。</p>
-<p>若要使用內建的阿拉伯語分析器，請將 `<code translate="no">type</code> ` 設定為 `<code translate="no">arabic</code>`：</p>
+<p>若要使用內建的阿拉伯語分析器，請將 `<code translate="no">type</code> ` 設定為<code translate="no">arabic</code> ：</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;arabic&quot;</span>,
 }
@@ -62,7 +62,7 @@ beta: Milvus 3.0.0+
     <span class="hljs-string">&quot;stop_words&quot;</span>: [<span class="hljs-string">&quot;ميلفوس&quot;</span>],
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus 會在內建的<code translate="no">_arabic_</code> 詞典之外，額外套用自訂停用詞。</p>
+<p>Milvus 會在內建的<code translate="no">_arabic_</code> 字典之外，額外套用自訂停用詞。</p>
 <p>內建的 `<code translate="no">arabic</code> ` 分析器等同於以下自訂分析器設定：</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,

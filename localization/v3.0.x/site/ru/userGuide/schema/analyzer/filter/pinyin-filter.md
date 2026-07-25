@@ -69,7 +69,7 @@ beta: Milvus 3.0.x
 <tr><td><code translate="no">keep_original</code></td><td>Логическое значение</td><td><code translate="no">true</code></td><td>Сохраняет исходный китайский токен в выводе анализатора.</td></tr>
 <tr><td><code translate="no">keep_full_pinyin</code></td><td>Логическое</td><td><code translate="no">true</code></td><td>Выдает токены пиньинь на уровне символов. Например, « <code translate="no">中文</code> » генерирует « <code translate="no">zhong</code> » и « <code translate="no">wen</code> ».</td></tr>
 <tr><td><code translate="no">keep_joined_full_pinyin</code></td><td>Логическое</td><td><code translate="no">false</code></td><td>Выдает объединенный токен пиньинь для каждого исходного токена. Например, <code translate="no">中文</code> генерирует <code translate="no">zhongwen</code>.</td></tr>
-<tr><td><code translate="no">keep_separate_first_letter</code></td><td>Булево</td><td><code translate="no">false</code></td><td>Выдает токен с инициалами по системе пиньинь для каждого исходного токена. Например, <code translate="no">中文</code> возвращает <code translate="no">zw</code>.</td></tr>
+<tr><td><code translate="no">keep_separate_first_letter</code></td><td>Булево</td><td><code translate="no">false</code></td><td>Выдает токен с инициалами по системе пиньинь для каждого исходного токена. Например, <code translate="no">中文</code> генерирует <code translate="no">zw</code>.</td></tr>
 </tbody>
 </table>
 <p>Фильтр работает с токенами, сгенерированными токенизатором. Для китайского текста используйте его с токенизатором, таким как <code translate="no">jieba</code>.</p>
@@ -122,7 +122,7 @@ result = client.run_analyzer(sample_text, analyzer_params)
 <p>Ожидаемый результат:</p>
 <pre><code translate="no" class="language-plaintext">[&#x27;中文&#x27;, &#x27;zhong&#x27;, &#x27;wen&#x27;, &#x27;测试&#x27;, &#x27;ce&#x27;, &#x27;shi&#x27;]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Match-Chinese-terms-with-joined-Pinyin" class="common-anchor-header">Сопоставление китайских терминов с объединенным пиньинь<button data-href="#Match-Chinese-terms-with-joined-Pinyin" class="anchor-icon" translate="no">
+<h3 id="Match-Chinese-terms-with-joined-Pinyin" class="common-anchor-header">Сопоставление китайских терминов с соединенным пиньинь<button data-href="#Match-Chinese-terms-with-joined-Pinyin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

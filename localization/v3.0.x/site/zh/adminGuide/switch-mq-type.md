@@ -38,7 +38,7 @@ summary: 在不造成停机的情况下，将现有 Milvus 部署的消息队列
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>“切换消息队列”功能仅在 Milvus 3.0 及更高版本中提供。</strong>使用前请将您的 Milvus 实例升级至 Milvus 3.0 或更高版本——该功能在早期版本中不可用。</li>
+<li><strong>“切换消息队列”功能仅在 Milvus 3.0 及更高版本中提供。</strong>使用前请将您的 Milvus 实例升级至 Milvus 3.0 或更高版本——此功能在早期版本中不可用。</li>
 <li>实例运行正常。</li>
 </ul>
 <h2 id="Scope" class="common-anchor-header">适用范围<button data-href="#Scope" class="anchor-icon" translate="no">
@@ -85,7 +85,7 @@ summary: 在不造成停机的情况下，将现有 Milvus 部署的消息队列
 <li>监控日志以确认切换已完成。</li>
 </ol>
 <div class="alert note">
-<p>切换前，请确保目标MQ中不包含与当前Milvus实例所用主题名称相同的主题。如果目标MQ曾被另一个Milvus实例使用过，这一点尤为重要，因为主题名称冲突可能会导致意外行为。</p>
+<p>切换前，请确保目标MQ中不包含与当前Milvus实例所用主题名称相同的主题。如果目标MQ曾被其他Milvus实例使用过，这一点尤为重要，因为主题名称冲突可能会导致意外行为。</p>
 </div>
 <h2 id="Support-matrix" class="common-anchor-header">支持矩阵<button data-href="#Support-matrix" class="anchor-icon" translate="no">
       <svg translate="no"

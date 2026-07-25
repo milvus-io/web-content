@@ -92,7 +92,7 @@ client.add_collection_field(
 <span class="highlighted-wrapper-line">    external_field=<span class="hljs-string">&quot;score&quot;</span>,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In questo esempio, ` <code translate="no">score</code> ` è il nome del campo Milvus e ` <code translate="no">external_field=&quot;score&quot;</code> ` lo mappa al campo ` <code translate="no">score</code> ` nella fonte di dati esterna. Impostare ` <code translate="no">nullable=True</code> ` poiché il campo viene aggiunto dopo che la raccolta è già stata creata.</p>
+<p>In questo esempio, ` <code translate="no">score</code> ` è il nome del campo in Milvus e ` <code translate="no">external_field=&quot;score&quot;</code> ` lo mappa al campo ` <code translate="no">score</code> ` nella fonte di dati esterna. Impostare ` <code translate="no">nullable=True</code> ` poiché il campo viene aggiunto dopo che la collezione è già stata creata.</p>
 <h3 id="Add-a-vector-field" class="common-anchor-header">Aggiungere un campo vettoriale<button data-href="#Add-a-vector-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

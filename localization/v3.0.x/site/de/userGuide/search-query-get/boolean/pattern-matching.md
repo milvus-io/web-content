@@ -2,7 +2,7 @@
 id: pattern-matching.md
 title: Musterabgleich
 summary: >-
-  Milvus unterstützt den Abgleich von Zeichenfolgenmustern mit
+  Milvus unterstützt den Abgleich von Zeichenfolgenmustern mithilfe von
   LIKE-Platzhaltermustern und RE2-regulären Ausdrücken. Verwenden Sie
   Musterfilter, um Präfixe, Suffixe, Teilzeichenfolgen, strukturierte Codes,
   E-Mail-Domänen, URL-Pfade und andere Zeichenfolgenmuster in VARCHAR-Feldern,
@@ -86,16 +86,16 @@ res = client.query(
 <tr><th>Anforderung</th><th>Empfohlener Operator</th><th>Beispiel</th><th>Beschreibung</th></tr>
 </thead>
 <tbody>
-<tr><td>Exakte Zeichenfolgenübereinstimmung</td><td><code translate="no">==</code></td><td><code translate="no">status == &quot;active&quot;</code></td><td>Exakte Übereinstimmung der Zeichenkette „ <code translate="no">active</code> “.</td></tr>
+<tr><td>Exakte Zeichenfolgenübereinstimmung</td><td><code translate="no">==</code></td><td><code translate="no">status == &quot;active&quot;</code></td><td>Exakte Übereinstimmung der Zeichenfolge „ <code translate="no">active</code> “.</td></tr>
 <tr><td>Einfache Präfixübereinstimmung</td><td><code translate="no">LIKE</code></td><td><code translate="no">name LIKE &quot;Prod%&quot;</code></td><td>Übereinstimmung mit Zeichenfolgen, die mit „ <code translate="no">Prod</code> “ beginnen.</td></tr>
 <tr><td>Einfache Suffixübereinstimmung</td><td><code translate="no">LIKE</code></td><td><code translate="no">filename LIKE &quot;%.json&quot;</code></td><td>Findet Zeichenfolgen, die mit „ <code translate="no">.json</code> “ enden.</td></tr>
 <tr><td>Einfache „Enthält“-Übereinstimmung</td><td><code translate="no">LIKE</code></td><td><code translate="no">description LIKE &quot;%vector database%&quot;</code></td><td>Sucht nach Werten, die an beliebiger Stelle im String „ <code translate="no">vector database</code> “ enthalten.</td></tr>
-<tr><td>Strukturierten Code oder Muster mit fester Länge abgleichen</td><td><code translate="no">=~</code></td><td><code translate="no">code =~ &quot;E[0-9]{4}&quot;</code></td><td>Erkennt Zeichenfolgen, die – unter Berücksichtigung der Groß-/Kleinschreibung – „ <code translate="no">E</code> “ gefolgt von vier Ziffern enthalten, z. B. „ <code translate="no">E1001</code> “.</td></tr>
+<tr><td>Strukturierten Code oder Muster mit fester Länge abgleichen</td><td><code translate="no">=~</code></td><td><code translate="no">code =~ &quot;E[0-9]{4}&quot;</code></td><td>Erkennt Zeichenfolgen, die (unter Berücksichtigung der Groß-/Kleinschreibung) „ <code translate="no">E</code> “ gefolgt von vier Ziffern enthalten, z. B. „ <code translate="no">E1001</code> “.</td></tr>
 <tr><td>Musterabgleich ohne Berücksichtigung der Groß-/Kleinschreibung</td><td><code translate="no">=~</code> mit <code translate="no">(?i)</code></td><td><code translate="no">message =~ &quot;(?i)error&quot;</code></td><td>Erkennt „ <code translate="no">error</code> “, „ <code translate="no">ERROR</code> “ oder andere Varianten mit Groß- und Kleinschreibung.</td></tr>
 <tr><td>Werte ausschließen, die einem Regex-Muster entsprechen</td><td><code translate="no">!~</code></td><td><code translate="no">message !~ &quot;^DEBUG&quot;</code></td><td>Schließt Zeichenfolgen aus, die mit „ <code translate="no">DEBUG</code> “ beginnen.</td></tr>
 </tbody>
 </table>
-<p>Verwenden Sie „ <code translate="no">LIKE</code> “ für den einfachen Platzhalterabgleich. Verwenden Sie reguläre Ausdrücke, wenn das Muster Zeichenklassen, Wiederholungen, Alternativen wie „ <code translate="no">error|failed</code> “, Anker oder einen Abgleich ohne Berücksichtigung der Groß-/Kleinschreibung erfordert.</p>
+<p>Verwenden Sie „ <code translate="no">LIKE</code> “ für den einfachen Platzhalterabgleich. Verwenden Sie „regex“, wenn das Muster Zeichenklassen, Wiederholungen, Alternativen wie „ <code translate="no">error|failed</code> “, Anker oder einen Abgleich ohne Berücksichtigung der Groß-/Kleinschreibung erfordert.</p>
 <h2 id="Use-LIKE" class="common-anchor-header">Verwenden Sie „LIKE“<button data-href="#Use-LIKE" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -136,7 +136,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Verwenden Sie die Position von „ <code translate="no">%</code> “ und „ <code translate="no">_</code> “, um zu steuern, an welcher Stelle der festgelegte Text in der übereinstimmenden Zeichenfolge erscheint.</p>
+    </button></h3><p>Verwenden Sie die Position von „ <code translate="no">%</code> “ und „ <code translate="no">_</code> “, um zu steuern, an welcher Stelle der feste Text in der übereinstimmenden Zeichenfolge erscheint.</p>
 <table>
 <thead>
 <tr><th>Anforderung</th><th>Muster</th><th>Filterbeispiel</th></tr>
@@ -228,12 +228,12 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Raw-String-Literale werden für Regex-Muster empfohlen, die Backslashes enthalten. In einem Raw-String, der als „ <code translate="no">r&quot;...&quot;</code> “ oder „ <code translate="no">r'...'</code> “ geschrieben wird, werden Backslashes unverändert an die Regex-Engine übergeben. Dadurch entfällt die zusätzliche Escape-Sequenz, die bei gewöhnlichen String-Literalen erforderlich ist.</p>
+    </button></h3><p>Raw-String-Literale werden für Regex-Muster empfohlen, die Backslashes enthalten. In einem Raw-String, der als „ <code translate="no">r&quot;...&quot;</code> “ oder „ <code translate="no">r'...'</code> “ geschrieben wird, werden Backslashes unverändert an die Regex-Engine übergeben. Dadurch entfällt die zusätzliche Escape-Behandlung, die bei gewöhnlichen String-Literalen erforderlich ist.</p>
 <p>Beispiel:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ r&quot;\d{4}-\d{2}-\d{2}&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Dies passt auf Zeichenfolgen, die einen datumsähnlichen Wert enthalten, wie z. B. <code translate="no">2026-07-01</code>.</p>
-<p>Ohne eine Raw-Zeichenkette verarbeiten gewöhnliche Zeichenfolgenliterale Escape-Sequenzen, bevor das Regex-Muster ausgewertet wird, sodass Muster wie <code translate="no">\d</code>, <code translate="no">\s</code> oder escaped Literalzeichen möglicherweise zusätzliche Backslashes erfordern.</p>
+<p>Ohne eine Raw-Zeichenkette verarbeiten gewöhnliche String-Literale Escape-Sequenzen, bevor das Regex-Muster ausgewertet wird, sodass Muster wie <code translate="no">\d</code>, <code translate="no">\s</code> oder escaped Literalzeichen möglicherweise zusätzliche Backslashes erfordern.</p>
 <h3 id="Common-regex-patterns" class="common-anchor-header">Gängige reguläre Ausdrücke<button data-href="#Common-regex-patterns" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -300,13 +300,13 @@ res = client.query(
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot; OR message IS NULL&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>JSON-Pfade</strong></p>
-<p>Bei JSON-Pfaden verhalten sich Regex-Filter anders, wenn der Pfad fehlt, den Wert „null“ hat oder zu einem Wert führt, der kein String ist:</p>
+<p>Bei JSON-Pfaden verhalten sich Regex-Filter unterschiedlich, wenn der Pfad fehlt, den Wert „null“ hat oder zu einem Wert führt, der kein String ist:</p>
 <table>
 <thead>
 <tr><th>Filter</th><th>Bezieht fehlende/Null-/Nicht-String-Werte ein?</th><th>Hinweise</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">json_field[&quot;path&quot;] =~ &quot;pattern&quot;</code></td><td>Nein</td><td>Erfasst nur Zeichenfolgenwerte, die dem Regex-Muster entsprechen.</td></tr>
+<tr><td><code translate="no">json_field[&quot;path&quot;] =~ &quot;pattern&quot;</code></td><td>Nein</td><td>Erkennt nur Zeichenfolgenwerte, die dem Regex-Muster entsprechen.</td></tr>
 <tr><td><code translate="no">json_field[&quot;path&quot;] !~ &quot;pattern&quot;</code></td><td>Ja</td><td>Gibt Entitäten zurück, bei denen der Pfad fehlt, null ist, kein String ist oder ein String ist, der nicht dem Regex-Muster entspricht.</td></tr>
 </tbody>
 </table>
@@ -333,7 +333,7 @@ res = client.query(
 <tr><th>Muster oder Datenmerkmal</th><th>Zu berücksichtigender Index</th><th>Anmerkungen</th></tr>
 </thead>
 <tbody>
-<tr><td>Enthält feste Literal-Teilstrings, wie z. B. <code translate="no">message =~ &quot;error.*timeout&quot;</code> oder <code translate="no">message LIKE &quot;%database%&quot;</code></td><td><code translate="no">NGRAM</code></td><td>Hilfreich, wenn Milvus aussagekräftige Literal-Teilzeichenfolgen aus dem Muster extrahieren kann. Weitere Informationen finden Sie unter <a href="/docs/de/ngram.md">NGRAM</a>.</td></tr>
+<tr><td>Enthält feste Literal-Teilstrings, wie z. B. <code translate="no">message =~ &quot;error.*timeout&quot;</code> oder <code translate="no">message LIKE &quot;%database%&quot;</code></td><td><code translate="no">NGRAM</code></td><td>Hilfreich, wenn Milvus aussagekräftige Literal-Teilstrings aus dem Muster extrahieren kann. Weitere Informationen finden Sie unter <a href="/docs/de/ngram.md">NGRAM</a>.</td></tr>
 <tr><td>Präfix-, exakte oder gleichheitsähnliche Zeichenfolgenfilter, insbesondere bei Feldern mit geringer bis mittlerer Kardinalität</td><td><code translate="no">STL_SORT</code>, „ <code translate="no">INVERTED</code> “ oder <code translate="no">BITMAP</code></td><td>Können effektiver sein, wenn das Feld wiederholte Werte enthält oder wenn der Filter nahe an einer exakten Übereinstimmung liegt. Weitere Informationen finden Sie unter <a href="/docs/de/stl-sort.md">STL_SORT</a>, <a href="/docs/de/inverted.md">INVERTED</a> und <a href="/docs/de/bitmap.md">BITMAP</a>.</td></tr>
 <tr><td>Regex-Muster ohne feste Literale oder Muster, die von Zeichenklassen, kurzen Tokens oder Platzhaltern dominiert werden</td><td>Führen Sie einen Benchmark durch, bevor Sie sich auf die Indexbeschleunigung verlassen</td><td>Diese Muster bieten möglicherweise nur eine begrenzte Indexselektivität und können auf umfassendere Scans zurückgreifen.</td></tr>
 </tbody>

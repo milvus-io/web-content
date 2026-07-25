@@ -25,7 +25,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Las estrategias de búsqueda de EmbeddingList determinan cómo Milvus crea un índice aproximado de candidatos para la búsqueda en EmbeddingList. La estrategia predeterminada es « <code translate="no">tokenann</code> ». Puedes cambiar a « <code translate="no">muvera</code> » o « <code translate="no">lemur</code> » cuando la lista de incrustaciones sea grande, TokenANN resulte demasiado costoso o una representación a nivel de fila aprendida o comprimida sea más adecuada. El resultado final sigue generándose mediante la reordenación de MaxSim cuando se habilita la opción « <code translate="no">emb_list_rerank</code> ».</p>
+    </button></h1><p>Las estrategias de búsqueda de EmbeddingList determinan cómo Milvus crea un índice aproximado de candidatos para la búsqueda en EmbeddingList. La estrategia predeterminada es « <code translate="no">tokenann</code> ». Puedes cambiar a « <code translate="no">muvera</code> » o « <code translate="no">lemur</code> » cuando la lista de incrustaciones sea grande, TokenANN resulte demasiado costoso o una representación a nivel de fila aprendida o comprimida sea más adecuada. El resultado final sigue generándose mediante la reclasificación de MaxSim cuando se habilita la opción « <code translate="no">emb_list_rerank</code> ».</p>
 <h2 id="Why-Search-Strategies-Exist" class="common-anchor-header">Por qué existen las estrategias de búsqueda<button data-href="#Why-Search-Strategies-Exist" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -145,8 +145,8 @@ summary: >-
 <p><strong>Utiliza LEMUR cuando la compresión aprendida compense el coste de entrenamiento.</strong> Puede funcionar bien en espacios de incrustación de baja discriminación y en la recuperación multimodal, pero debe validarse con el corpus de destino, ya que puede ser sensible a la distribución de la longitud de los documentos.</p>
 </div>
 <ul>
-<li><p><strong>Adecuado para:</strong> búsqueda de documentos visuales, incrustaciones de fragmentos multimodales, espacios de incrustación de baja discriminación, listas de incrustación grandes en las que TokenANN no resulta práctico.</p></li>
-<li><p><strong>Menos adecuado:</strong> corpus que cambian con frecuencia, incrustaciones de alta discriminación con longitudes de documentos muy sesgadas, cargas de trabajo en las que el coste de entrenamiento es inaceptable.</p></li>
+<li><p><strong>Adecuado para:</strong> búsqueda de documentos visuales, incrustaciones de fragmentos multimodales, espacios de incrustación de baja discriminación, listas de incrustaciones grandes en las que TokenANN no resulta práctico.</p></li>
+<li><p><strong>Menos adecuado:</strong> corpus que cambian con frecuencia, incrustaciones de alta discriminación con longitudes de documento muy sesgadas, cargas de trabajo en las que el coste de entrenamiento es inaceptable.</p></li>
 <li><p><strong>Parámetros importantes:</strong><code translate="no">lemur_hidden_dim</code>, <code translate="no">lemur_num_train_samples</code>, <code translate="no">lemur_num_epochs</code>, <code translate="no">lemur_batch_size</code>, <code translate="no">lemur_learning_rate</code>, <code translate="no">lemur_seed</code> y <code translate="no">lemur_num_layers</code>.</p></li>
 </ul>
 <hr>
@@ -219,7 +219,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>En Milvus, la estrategia se pasa como parámetro de índice al crear un índice en un campo EmbeddingList, como un subcampo vectorial StructArray.</p>
+    </button></h2><p>En Milvus, la estrategia se pasa como parámetro de índice al crear un índice en un campo EmbeddingList, como un subcampo vectorial de StructArray.</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;clips[clip_embedding]&quot;</span>,
@@ -278,7 +278,7 @@ index_params.add_index(
       <span class="hljs-attr">emb_list_rerank:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Es preferible utilizar parámetros por índice para la selección de estrategias.</strong> Un valor por defecto del archivo de configuración de Milvus se aplica de forma general a los índices de ese tipo y etapa. Utiliza los parámetros de <code translate="no">create_index</code> cuando diferentes colecciones o campos necesiten estrategias de EmbeddingList distintas.</p>
+<p><strong>Es preferible utilizar parámetros por índice para la selección de estrategias.</strong> Un valor predeterminado del archivo de configuración de Milvus se aplica de forma general a los índices de ese tipo y etapa. Utiliza los parámetros de <code translate="no">create_index</code> cuando diferentes colecciones o campos requieran estrategias de EmbeddingList distintas.</p>
 </div>
 <h2 id="Configure-Candidate-Retrieval-at-Search-Time" class="common-anchor-header">Configurar la recuperación de candidatos en el momento de la búsqueda<button data-href="#Configure-Candidate-Retrieval-at-Search-Time" class="anchor-icon" translate="no">
       <svg translate="no"

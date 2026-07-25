@@ -4,7 +4,7 @@ title: Memasukkan Data ke dalam Bidang StructArray
 summary: >-
   Masukkan data ke dalam bidang StructArray jika setiap entitas berisi daftar
   elemen terstruktur yang terurut. Dalam muatan penyisipan, bidang StructArray
-  direpresentasikan sebagai array objek. Setiap objek mewakili satu elemen
+  direpresentasikan sebagai larik objek. Setiap objek mewakili satu elemen
   Struct dan menggunakan nama subbidang Struct yang didefinisikan dalam skema
   koleksi.
 ---
@@ -24,7 +24,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Masukkan data ke dalam bidang StructArray ketika setiap entitas berisi daftar terurut dari elemen-elemen terstruktur. Dalam payload penyisipan, bidang StructArray direpresentasikan sebagai array objek. Setiap objek mewakili satu elemen Struct dan menggunakan nama subbidang Struct yang didefinisikan dalam skema koleksi.</p>
-<p>Halaman ini menggunakan koleksi ` <code translate="no">tech_articles</code> ` dari <a href="/docs/id/create-structarray-field.md">"Membuat Bidang StructArray"</a>. Setiap entitas adalah artikel teknis, dan bidang ` <code translate="no">chunks</code> ` menyimpan potongan artikel sebagai elemen Struct.</p>
+<p>Halaman ini menggunakan koleksi ` <code translate="no">tech_articles</code> ` dari <a href="/docs/id/create-structarray-field.md">"Membuat Bidang StructArray</a>". Setiap entitas adalah artikel teknis, dan bidang ` <code translate="no">chunks</code> ` menyimpan potongan artikel sebagai elemen Struct.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Sebelum memulai<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -332,7 +332,7 @@ Bidang StructArray yang dapat bernilai null hanya tersedia di Milvus v3.0.x. Jik
 <li><p>Mengabaikan subbidang yang wajib dari elemen Struct.</p></li>
 <li><p>Menyisipkan vektor dengan dimensi yang salah.</p></li>
 <li><p>Menyisipkan elemen Struct lebih banyak daripada yang diizinkan oleh <code translate="no">max_capacity</code>.</p></li>
-<li><p>Hanya menetapkan satu subfield ke <code translate="no">null</code> sementara subfield lain dalam nilai StructArray yang sama masih valid.</p></li>
+<li><p>Hanya menetapkan satu subfield ke <code translate="no">null</code> sementara subfield lain dalam nilai StructArray yang sama valid.</p></li>
 <li><p>Menulis vektor hanya ke ` <code translate="no">emb_list_vector</code> ` dan kemudian mencoba menjalankan pencarian tingkat elemen pada ` <code translate="no">chunks[emb]</code>`.</p></li>
 <li><p>Menulis vektor hanya ke ` <code translate="no">emb</code> ` dan kemudian mencoba menjalankan pencarian EmbeddingList pada ` <code translate="no">chunks[emb_list_vector]</code>`.</p></li>
 </ul>

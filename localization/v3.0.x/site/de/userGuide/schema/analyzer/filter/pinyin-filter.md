@@ -67,7 +67,7 @@ beta: Milvus 3.0.x
 </thead>
 <tbody>
 <tr><td><code translate="no">keep_original</code></td><td>Boolescher Wert</td><td><code translate="no">true</code></td><td>Behält das ursprüngliche chinesische Token in der Ausgabe des Analysators bei.</td></tr>
-<tr><td><code translate="no">keep_full_pinyin</code></td><td>Boolescher Wert</td><td><code translate="no">true</code></td><td>Gibt Pinyin-Token auf Zeichenebene aus. Beispielsweise erzeugt „ <code translate="no">中文</code> “ die Ausgabewerte „ <code translate="no">zhong</code> “ und „ <code translate="no">wen</code> “.</td></tr>
+<tr><td><code translate="no">keep_full_pinyin</code></td><td>Boolescher Wert</td><td><code translate="no">true</code></td><td>Gibt Pinyin-Token auf Zeichenebene aus. Beispielsweise erzeugt „ <code translate="no">中文</code> “ die Ergebnisse „ <code translate="no">zhong</code> “ und „ <code translate="no">wen</code> “.</td></tr>
 <tr><td><code translate="no">keep_joined_full_pinyin</code></td><td>Boolescher Wert</td><td><code translate="no">false</code></td><td>Gibt für jedes Quell-Token ein zusammengefügtes Pinyin-Token aus. Beispielsweise erzeugt „ <code translate="no">中文</code> “ das Token „ <code translate="no">zhongwen</code> “.</td></tr>
 <tr><td><code translate="no">keep_separate_first_letter</code></td><td>Boolescher Wert</td><td><code translate="no">false</code></td><td>Gibt für jedes Quell-Token ein Pinyin-Initialen-Token aus. Beispielsweise erzeugt <code translate="no">中文</code> das Ergebnis <code translate="no">zw</code>.</td></tr>
 </tbody>

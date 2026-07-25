@@ -107,7 +107,7 @@ summary: >-
 <tr><td><code translate="no">IP</code>, <code translate="no">COSINE</code></td><td>Да. Чем выше оценка, тем лучше.</td><td><code translate="no">radius &lt; distance &lt;= range_filter</code></td></tr>
 </tbody>
 </table>
-<p>Если задано только значение « <code translate="no">radius</code> », поиск по диапазону возвращает результаты, удовлетворяющие внешней границе метрики. Выбирайте значения в соответствии со шкалой оценок или расстояний ваших вложений.</p>
+<p>Если задано только значение « <code translate="no">radius</code> », поиск по диапазону возвращает совпадения, удовлетворяющие внешней границе метрики. Выбирайте значения в соответствии со шкалой оценок или расстояний ваших вложений.</p>
 <h2 id="Run-element-level-range-search" class="common-anchor-header">Выполнение поиска по диапазону на уровне элементов<button data-href="#Run-element-level-range-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -163,7 +163,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>В данном примере <code translate="no">COSINE</code> является метрикой типа «похожесть», поэтому диапазон результатов больше, чем <code translate="no">radius</code>, и меньше или равен <code translate="no">range_filter</code>. Значение <code translate="no">offset</code> идентифицирует совпадающий элемент Struct в массиве <code translate="no">chunks</code> при возвращении результата.</p>
+<p>В данном примере <code translate="no">COSINE</code> является метрикой типа «похожесть», поэтому диапазон результатов больше, чем <code translate="no">radius</code>, и меньше или равен <code translate="no">range_filter</code>. Значение <code translate="no">offset</code> при возвращении идентифицирует совпадающий элемент Struct в массиве <code translate="no">chunks</code>.</p>
 <h2 id="Add-scalar-filters" class="common-anchor-header">Добавление скалярных фильтров<button data-href="#Add-scalar-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -179,7 +179,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Вы можете комбинировать поиск по диапазону на уровне элементов со скалярной фильтрацией StructArray. Используйте предикат верхнего уровня для полей родительского объекта и <code translate="no">element_filter</code>, чтобы ограничить, какие элементы Struct участвуют в векторном поиске по диапазону.</p>
+    </button></h2><p>Вы можете комбинировать поиск по диапазону на уровне элементов со скалярной фильтрацией StructArray. Используйте предикат верхнего уровня для полей родительского объекта и предикат <code translate="no">element_filter</code>, чтобы ограничить круг элементов Struct, участвующих в векторном поиске по диапазону.</p>
 <pre><code translate="no" class="language-python">filter_expr = (
     <span class="hljs-string">&#x27;category == &quot;search&quot; &amp;&amp; &#x27;</span>
     <span class="hljs-string">&#x27;element_filter(chunks, &#x27;</span>
@@ -209,7 +209,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Предикат верхнего уровня выбирает сущности-кандидаты. Предикат « <code translate="no">element_filter</code> » ограничивает векторный поиск по диапазону только соответствующими элементами Struct. Дополнительные примеры фильтрации см. в разделе <a href="/docs/ru/filtered-search-with-structarray.md">«Фильтрованный поиск с использованием StructArray</a>».</p>
+<p>Предикат верхнего уровня выбирает сущности-кандидаты. Предикат ` <code translate="no">element_filter</code> ` ограничивает векторный поиск по диапазону только соответствующими элементами Struct. Дополнительные примеры фильтрации см. в разделе <a href="/docs/ru/filtered-search-with-structarray.md">«Фильтрованный поиск с использованием StructArray</a>».</p>
 <h2 id="Use-range-search-in-hybrid-search" class="common-anchor-header">Использование поиска по диапазону в гибридном поиске<button data-href="#Use-range-search-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -225,7 +225,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Векторные поля на уровне элементов StructArray поддерживают поиск по диапазону в гибридном поиске. Добавьте <code translate="no">radius</code> и, при необходимости, <code translate="no">range_filter</code> в запрос <code translate="no">AnnSearchRequest</code>, нацеленный на векторное поле на уровне элементов StructArray.</p>
+    </button></h2><p>Векторные поля на уровне элементов StructArray поддерживают поиск по диапазону в гибридном поиске. Добавьте <code translate="no">radius</code> и, при необходимости, <code translate="no">range_filter</code> в запрос <code translate="no">AnnSearchRequest</code>, нацеленный на векторное поле StructArray на уровне элементов.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest, RRFRanker
 
 title_req = AnnSearchRequest(

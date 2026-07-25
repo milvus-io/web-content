@@ -39,7 +39,7 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Für thailändischen Text verwenden Sie in den meisten Fällen den integrierten <a href="/docs/de/thai-analyzer.md"><code translate="no">thai</code></a> Analysator. Der integrierte Analysator umfasst diesen Tokenizer sowie die Umwandlung in Kleinbuchstaben, die Normalisierung von Dezimalziffern und die Entfernung thailändischer Stoppwörter. Verwenden Sie den „ <code translate="no">thai</code> “-Tokenizer nur dann direkt, wenn Sie eine benutzerdefinierte Analysator-Pipeline erstellen müssen.</p>
+<p>Für thailändischen Text verwenden Sie in den meisten Fällen den integrierten <a href="/docs/de/thai-analyzer.md"><code translate="no">thai</code></a> Analysator. Der integrierte Analysator umfasst diesen Tokenizer sowie die Umwandlung in Kleinbuchstaben, die Normalisierung von Dezimalziffern und das Entfernen thailändischer Stoppwörter. Verwenden Sie den „ <code translate="no">thai</code> “-Tokenizer nur dann direkt, wenn Sie eine benutzerdefinierte Analysator-Pipeline erstellen müssen.</p>
 </div>
 <p>Um einen Analysator mit dem Tokenizer „ <code translate="no">thai</code> “ zu konfigurieren, setzen Sie „ <code translate="no">tokenizer</code> “ in der Datei „ <code translate="no">analyzer_params</code> “ auf „ <code translate="no">thai</code> “.</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -61,7 +61,7 @@ beta: Milvus 3.0.0+
 <ul>
 <li><strong>Thai-Segmentierung</strong>: Segmentiert thailändischen Text in Wort-Token, ohne sich auf Leerzeichen zu stützen.</li>
 <li><strong>Filterung von Leerzeichen und Satzzeichen</strong>: Filtert Segmente heraus, die ausschließlich aus Leerzeichen und Satzzeichen bestehen. Dies unterscheidet sich vom <a href="/docs/de/icu-tokenizer.md"><code translate="no">icu</code></a> Tokenizer, der Satzzeichen und Leerzeichen als Token beibehalten kann.</li>
-<li><strong>Text mit gemischten Schriftzeichen</strong>: Gibt lateinische Wort-Token in gemischtem Thai/Englisch-Text aus.</li>
+<li><strong>Text mit gemischten Schriftzeichen</strong>: Gibt lateinische Wort-Token in gemischtem thailändisch-englischem Text aus.</li>
 <li><strong>Nur Tokenizer</strong>: Wandelt Token nicht in Kleinbuchstaben um, normalisiert keine Unicode-Ziffern und entfernt keine Stoppwörter. Fügen Sie Filter hinzu oder verwenden Sie den integrierten <a href="/docs/de/thai-analyzer.md"><code translate="no">thai</code></a> Analysator für diese Schritte.</li>
 <li><strong>Positionssemantik</strong>: Verwendet zeichenbasierte Token-Positionen, die übersprungene Leerzeichen und Satzzeichen einbeziehen, wodurch das Verhalten beim Phrasen- und Proximity-Abgleich mit anderen nicht-lateinischen Tokenizern konsistent bleibt.</li>
 </ul>

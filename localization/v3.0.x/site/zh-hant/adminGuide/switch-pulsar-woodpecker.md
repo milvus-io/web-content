@@ -23,7 +23,7 @@ summary: 使用 Helm 或 Milvus Operator，將 Milvus 叢集的訊息佇列在 P
 <p><strong>先決條件：</strong>MQ 切換功能僅適用於<strong>Milvus 3.0 及後續版本</strong>。開始操作前，請將您的 Milvus 實例升級至 Milvus 3.0 或後續版本 — 此功能在較早版本中不可用。</p>
 </div>
 <div class="alert warning">
-<p>切換訊息佇列是一項<strong>高風險操作</strong>。請選擇<strong>與您的</strong>部署方式相符的章節 —<strong>「使用 Helm</strong>」或<strong>「使用 Milvus Operator</strong>」— 並依序從上至下執行。請勿混用 Helm 與 Operator 指令。</p>
+<p>切換訊息佇列是一項<strong>高風險操作</strong>。請選擇<strong>與您的</strong>部署方式相符的章節——「<strong>使用 Helm</strong>」或<strong>「使用 Milvus Operator</strong>」——並依序從上至下執行。請勿混用 Helm 與 Operator 指令。</p>
 </div>
 <h2 id="With-Helm" class="common-anchor-header">使用 Helm<button data-href="#With-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -55,7 +55,7 @@ summary: 使用 Helm 或 Milvus Operator，將 Milvus 叢集的訊息佇列在 P
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><strong>步驟 1：確認 Milvus 實例正在運行。</strong>確保您的 Milvus 叢集運作正常 —— 例如，建立測試集合、插入資料並執行查詢。</p>
+    </button></h3><p><strong>步驟 1：確認 Milvus 實例正在運行。</strong>請確保您的 Milvus 叢集運作正常 —— 例如，建立測試集合、插入資料並執行查詢。</p>
 <p><strong>步驟 2：執行訊息佇列切換。</strong>公開 MixCoord 管理介面，然後呼叫切換 API：</p>
 <pre><code translate="no" class="language-shell">kubectl port-forward --address 0.0.0.0 service/my-release-milvus-mixcoord 29091:9091
 <button class="copy-code-btn"></button></code></pre>
@@ -99,7 +99,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>步驟 1：確認 Milvus 實例正在運行。</strong></p>
-<p><strong>步驟 2：配置目標 Pulsar 連線並重新啟動 Milvus。</strong>此切換操作需要 Milvus 已知曉 Pulsar 連線設定，因此請透過<code translate="no">extraConfigFiles</code> 將設定寫入<code translate="no">user.yaml</code> ，並使用<code translate="no">helm upgrade</code> 套用（此操作會滾動更新 Pod）。<code translate="no">streaming.enabled=true</code> 是「切換訊息佇列（Switch MQ）」功能所需的設定。</p>
+<p><strong>步驟 2：配置目標 Pulsar 連線並重新啟動 Milvus。</strong>此切換操作需要 Milvus 已知曉 Pulsar 連線設定，因此請透過<code translate="no">extraConfigFiles</code> 將設定寫入<code translate="no">user.yaml</code> ，並使用<code translate="no">helm upgrade</code> 套用（此操作會滾動更新 Pod）。<code translate="no">streaming.enabled=true</code> 是「切換訊息佇列 (Switch MQ)」功能所需的設定。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -160,7 +160,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><strong>步驟 1：確認 Milvus 實例正在運行。</strong></p>
+    </button></h3><p><strong>步驟 1：確認 Milvus 實例正在執行。</strong></p>
 <p><strong>步驟 2：執行 MQ 切換。</strong>由於 MixCoord 服務未對外公開，因此請從 MixCoord pod 內部執行切換 API：</p>
 <pre><code translate="no" class="language-shell">kubectl exec -it &lt;mixcoord-pod&gt; -- \
   curl -X POST http://localhost:9091/management/wal/alter \

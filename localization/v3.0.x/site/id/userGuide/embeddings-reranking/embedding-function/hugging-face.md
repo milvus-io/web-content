@@ -22,7 +22,7 @@ beta: Milvus v2.6.20+
         ></path>
       </svg>
     </button></h1><p>Penggunaan model embedding Hugging Face biasanya mengharuskan aplikasi Anda untuk mengelola kredensial, memanggil model secara terpisah, dan menghasilkan embedding secara konsisten untuk data yang dimasukkan dan kueri pencarian. Dengan Fungsi Embedding Teks, Milvus memanggil <a href="https://huggingface.co/docs/inference-providers/index">Penyedia Inferensi Hugging Face</a> yang dihosting untuk mengubah teks mentah menjadi vektor selama proses penyisipan dan pencarian.</p>
-<p>Integrasi ini menggunakan router Hugging Face yang dihosting. Untuk menghubungkan Milvus ke layanan Text Embeddings Inference (TEI) yang di-deploy secara terpisah, lihat <a href="/docs/id/hugging-face-tei.md">Hugging Face TEI</a>.</p>
+<p>Integrasi ini menggunakan router Hugging Face yang dihosting. Untuk menghubungkan Milvus ke layanan Text Embeddings Inference (TEI) yang diimplementasikan secara terpisah, lihat <a href="/docs/id/hugging-face-tei.md">Hugging Face TEI</a>.</p>
 <h2 id="Limits" class="common-anchor-header">Batasan<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

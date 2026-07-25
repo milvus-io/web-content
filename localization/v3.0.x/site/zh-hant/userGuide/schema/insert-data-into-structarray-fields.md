@@ -111,7 +111,7 @@ summary: >-
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">emb_list_vector</code> 和<code translate="no">emb</code> 是獨立的向量子欄位，因為它們支援不同的搜尋模式。EmbeddingList 搜尋會將 StructArray 欄位中的所有向量視為一個嵌入清單，並返回包含<code translate="no">MAX_SIM*</code> 指標的實體層級結果。元素層級搜尋則會獨立搜尋每個 Struct 元素，並可返回匹配元素的偏移量。為簡化說明，此範例在兩個欄位中儲存相同的向量值。 在生產環境的應用程式中，當兩種搜尋模式使用相同的區塊嵌入時，可將相同的嵌入向量儲存於兩個子欄位中；若兩種搜尋模式使用不同的表示法，則可儲存不同的嵌入向量。</p>
+<p><code translate="no">emb_list_vector</code> 和<code translate="no">emb</code> 是獨立的向量子欄位，因為它們支援不同的搜尋模式。EmbeddingList 搜尋會將 StructArray 欄位中的所有向量視為一個嵌入清單，並返回帶有<code translate="no">MAX_SIM*</code> 指標的實體層級結果。元素層級搜尋則會獨立搜尋每個 Struct 元素，並可返回匹配元素的偏移量。為簡化說明，此範例在兩個欄位中儲存相同的向量值。 在生產環境的應用程式中，當兩種搜尋模式使用相同的區塊嵌入時，可將相同的嵌入向量儲存於兩個子欄位中；若兩種搜尋模式使用不同的表示法，則可儲存不同的嵌入向量。</p>
 <h2 id="Insert-rows" class="common-anchor-header">插入資料列<button data-href="#Insert-rows" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -325,7 +325,7 @@ result = client.insert(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>在插入有效載荷中使用如<code translate="no">chunks[text]</code> 之類的欄位路徑。</p></li>
+<li><p>在插入有效載荷中使用如 `<code translate="no">chunks[text]</code> ` 這樣的欄位路徑。</p></li>
 <li><p>從 Struct 元素中省略必填子欄位。</p></li>
 <li><p>插入維數錯誤的向量。</p></li>
 <li><p>插入的 Struct 元素數量超過<code translate="no">max_capacity</code> 所允許的數量。</p></li>
@@ -351,5 +351,5 @@ result = client.insert(
     </button></h2><ol>
 <li><p>若要為<code translate="no">chunks[emb_list_vector]</code> 、<code translate="no">chunks[emb]</code> 及標量子欄位建立索引，請參閱《<a href="/docs/zh-hant/index-structarray-fields.md">索引 StructArray 欄位</a>》。</p></li>
 <li><p>若要搜尋 StructArray 向量子欄位，請參閱《使用 StructArray 進行基本向量搜尋》。</p></li>
-<li><p>若要了解可為空的行為及特定版本的限制，請參閱《<a href="/docs/zh-hant/structarray-limits.md">StructArray 限制</a>》。</p></li>
+<li><p>若要檢視可為空的行為及特定版本的限制，請參閱《<a href="/docs/zh-hant/structarray-limits.md">StructArray 限制</a>》。</p></li>
 </ol>

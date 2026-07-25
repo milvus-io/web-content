@@ -82,7 +82,7 @@ beta: Milvus v2.6.20+
 <ol>
 <li><strong>Préparation des entrées textuelles.</strong> Le Ranker lit le texte de la requête à partir de <code translate="no">params.queries</code> et le texte des candidats à partir du champ <code translate="no">VARCHAR</code> configuré.</li>
 <li><strong>Création de représentations distinctes pour le modèle.</strong> Milvus envoie la requête sous la forme <code translate="no">source_sentence</code> et les textes candidats sous la forme <code translate="no">sentences</code>. Le modèle encode en interne la requête et chaque candidat séparément.</li>
-<li><strong>Comparaison et retour des scores.</strong> Le modèle compare la représentation de la requête à celle de chaque candidat et renvoie un score de similarité par candidat.</li>
+<li><strong>Comparaison et renvoi des scores.</strong> Le modèle compare la représentation de la requête à celle de chaque candidat et renvoie un score de similarité par candidat.</li>
 </ol>
 <p>Les embeddings ou représentations utilisés par le modèle Hugging Face constituent une étape intermédiaire du traitement du modèle. Hugging Face renvoie des scores, et non des vecteurs. La récupération initiale des vecteurs et le reclassement par le modèle utilisent donc des représentations distinctes et peuvent faire appel à des modèles différents.</p>
 <h2 id="Before-you-start" class="common-anchor-header">Avant de commencer<button data-href="#Before-you-start" class="anchor-icon" translate="no">
@@ -340,7 +340,7 @@ results = client.search(
 
 <span class="hljs-built_in">print</span>(results)
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus récupère d’abord les candidats à partir de <code translate="no">dense</code>, puis utilise le texte de la requête dans <code translate="no">queries</code> et le texte des candidats dans <code translate="no">document</code> pour calculer les scores de similarité entre phrases. Les candidats renvoyés sont classés selon les scores Hugging Face.</p>
+<p>Milvus récupère d’abord les candidats à partir de <code translate="no">dense</code>, puis utilise le texte de la requête dans <code translate="no">queries</code> et le texte des candidats dans <code translate="no">document</code> pour calculer les scores de similarité des phrases. Les candidats renvoyés sont classés selon les scores Hugging Face.</p>
 <h2 id="Troubleshooting" class="common-anchor-header">Dépannage<button data-href="#Troubleshooting" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -419,7 +419,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Vérifiez que le libellé « Function credential » existe dans ` <code translate="no">milvus.yaml</code>`, que le libellé au niveau du fournisseur est valide, ou que ` <code translate="no">MILVUS_HUGGINGFACE_API_KEY</code> ` est présent dans l’environnement de service Milvus.</p>
+    </button></h3><p>Vérifiez que le libellé « Function credential » existe dans ` <code translate="no">milvus.yaml</code>`, que le libellé au niveau du fournisseur est valide ou que ` <code translate="no">MILVUS_HUGGINGFACE_API_KEY</code> ` est présent dans l’environnement de service Milvus.</p>
 <h2 id="Next-steps" class="common-anchor-header">Étapes suivantes<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -438,5 +438,5 @@ results = client.search(
     </button></h2><ul>
 <li>Pour connaître le comportement et les limites du Model Ranker partagé, consultez <a href="/docs/fr/model-ranker-overview.md">la présentation du Model Ranker</a>.</li>
 <li>Pour générer des représentations vectorielles via les fournisseurs d’inférence Hugging Face hébergés, consultez la section <a href="/docs/fr/hugging-face.md">Hugging Face</a>.</li>
-<li>Pour appliquer le classificateur à la recherche hybride, consultez la section « <a href="/docs/fr/multi-vector-search.md">Recherche hybride multi-vecteurs</a> ».</li>
+<li>Pour appliquer le classificateur à la recherche hybride, consultez la section « <a href="/docs/fr/multi-vector-search.md">Recherche hybride multivectorielle</a> ».</li>
 </ul>

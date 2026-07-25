@@ -171,5 +171,5 @@ bash standalone_embed.sh delete
       </svg>
     </button></h2><ul>
 <li><a href="/docs/ar/woodpecker.md">Woodpecker (قائمة انتظار الرسائل الافتراضية)</a></li>
-<li><a href="/docs/ar/switch-rocksmq-woodpecker.md">التبديل من RocksMQ إلى Woodpecker</a></li>
+<li><a href="/docs/ar/switch-rocksmq-woodpecker.md">التحول من RocksMQ إلى Woodpecker</a></li>
 </ul>

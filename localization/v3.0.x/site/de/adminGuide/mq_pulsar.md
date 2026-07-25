@@ -263,7 +263,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Upgrade von 2.5.x auf 2.6.x:</strong> <strong>Einschränkungen bei der Nachrichtenwarteschlange</strong>: Beim Upgrade auf Milvus v3.0-beta müssen Sie Ihre aktuelle Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.
+<li><strong>Upgrade von 2.5.x auf 2.6.x:</strong> <strong>Einschränkungen bei der Nachrichtenwarteschlange</strong>: Beim Upgrade auf Milvus v3.0-beta müssen Sie Ihre aktuelle Auswahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.
 Wenn Sie Pulsar einsetzen und weiterhin nutzen möchten, ändern Sie die Nachrichtenwarteschlange während des Upgrades nicht.</li>
 <li><strong>Pulsar v2 → v3:</strong> Siehe <a href="/docs/de/upgrade-pulsar-v3.md">„Upgrade von Pulsar von v2 auf v3</a>“; um bei v2 zu bleiben, siehe <a href="/docs/de/use-pulsar-v2.md">„Weiterverwendung von Pulsar v2</a>“.</li>
 </ul>

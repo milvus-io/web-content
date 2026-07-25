@@ -88,7 +88,7 @@ summary: >-
 <li>Überwachen Sie die Protokolle, um sicherzustellen, dass die Umschaltung abgeschlossen ist.</li>
 </ol>
 <div class="alert note">
-<p>Stellen Sie vor der Umschaltung sicher, dass die Ziel-MQ keine Themen enthält, deren Namen mit denen der aktuellen Milvus-Instanz übereinstimmen. Dies ist besonders wichtig, wenn die Ziel-MQ bereits von einer anderen Milvus-Instanz verwendet wurde, da widersprüchliche Themennamen zu unerwartetem Verhalten führen können.</p>
+<p>Stellen Sie vor der Umstellung sicher, dass die Ziel-MQ keine Themen enthält, deren Namen mit denen der aktuellen Milvus-Instanz übereinstimmen. Dies ist besonders wichtig, wenn die Ziel-MQ bereits von einer anderen Milvus-Instanz verwendet wurde, da widersprüchliche Themennamen zu unerwartetem Verhalten führen können.</p>
 </div>
 <h2 id="Support-matrix" class="common-anchor-header">Unterstützungsmatrix<button data-href="#Support-matrix" class="anchor-icon" translate="no">
       <svg translate="no"

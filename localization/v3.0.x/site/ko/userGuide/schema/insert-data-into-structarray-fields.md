@@ -22,7 +22,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>각 엔티티가 정렬된 구조화된 요소 목록을 포함하는 경우, StructArray 필드에 데이터를 삽입합니다. 삽입 페이로드에서 StructArray 필드는 객체 배열로 표현됩니다. 각 객체는 하나의 Struct 요소를 나타내며, 컬렉션 스키마에 정의된 Struct 하위 필드 이름을 사용합니다.</p>
-<p>이 페이지에서는 <a href="/docs/ko/create-structarray-field.md">‘StructArray 필드 생성’의</a> <code translate="no">tech_articles</code> 컬렉션을 사용합니다. 각 엔티티는 기술 문서이며, ‘ <code translate="no">chunks</code> ’ 필드는 문서 청크를 Struct 요소로 저장합니다.</p>
+<p>이 페이지에서는 <a href="/docs/ko/create-structarray-field.md">‘StructArray 필드 생성</a>’의 <code translate="no">tech_articles</code> 컬렉션을 사용합니다. 각 엔티티는 기술 문서이며, <code translate="no">chunks</code> 필드는 문서 청크를 Struct 요소로 저장합니다.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">시작하기 전에<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -69,7 +69,7 @@ summary: >-
 <div class="alert note">
 <p>삽입 페이로드에서 ` <code translate="no">chunks</code> `는 값이 Struct 객체 배열인 일반 필드입니다. 각 객체 내부에서는 ` <code translate="no">text</code> ` 및 ` <code translate="no">emb</code>`와 같은 하위 필드 이름을 사용합니다. ` <code translate="no">chunks[text]</code> ` 또는 ` <code translate="no">chunks[emb]</code>`와 같은 경로 구문은 삽입 후 인덱스를 생성하거나, 검색을 실행하거나, 필터를 구축하거나, 출력 필드를 지정할 때만 사용하십시오.</p>
 </div>
-<h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">삽입 페이로드의 구조를 이해하세요<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
+<h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">삽입 페이로드의 구조를 이해하십시오<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -244,10 +244,10 @@ result = client.insert(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Nullable StructArray 필드에 유효한 StructArray 값이 포함된 경우, 해당 값 내의 모든 하위 필드는 null이거나 유효한 값을 가져야 합니다. 일부 하위 필드는 null로, 다른 하위 필드는 유효한 값으로 설정된 엔티티를 삽입하면 오류가 발생합니다.</p>
+<p>Nullable StructArray 필드에 유효한 StructArray 값이 포함된 경우, 해당 값의 모든 하위 필드는 null이거나 유효한 값을 가져야 합니다. 일부 하위 필드는 null로, 다른 하위 필드는 유효한 값으로 설정된 엔티티를 삽입하면 오류가 발생합니다.</p>
 <div class="alert note">
 <p>경고
-null 허용 StructArray 필드는 Milvus v3.0.x에서만 사용할 수 있습니다. 기존 컬렉션에 StructArray 필드를 동적으로 추가하는 경우, 추가된 필드는 null 허용이어야 하며, 기존 엔티티는 새 필드의 모든 하위 필드에 대해 ` <code translate="no">null</code> `를 반환해야 합니다.</p>
+Nullable StructArray 필드는 Milvus v3.0.x에서만 사용할 수 있습니다. 기존 컬렉션에 StructArray 필드를 동적으로 추가하는 경우, 추가된 필드는 nullable이어야 하며, 기존 엔티티는 새 필드의 모든 하위 필드에 대해 ` <code translate="no">null</code> `를 반환해야 합니다.</p>
 </div>
 <h2 id="Validate-inserted-data" class="common-anchor-header">삽입된 데이터 유효성 검사<button data-href="#Validate-inserted-data" class="anchor-icon" translate="no">
       <svg translate="no"

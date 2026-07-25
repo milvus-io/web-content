@@ -72,7 +72,7 @@ title: Importação em massa na replicação CDC
   <span class="hljs-attr">import:</span>
     <span class="hljs-attr">enableInReplicatingCluster:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Esta configuração é atualizável, pelo que pode entrar em vigor sem ser necessário um reinício completo.</p>
+<p>Esta configuração é atualizável, pelo que pode entrar em vigor sem necessidade de um reinício completo.</p>
 <p>Quando esta configuração está ativada, um cluster de replicação aceita apenas importações com ` <code translate="no">auto_commit=false</code>`. A tabela seguinte lista os pedidos rejeitados mais comuns:</p>
 <table>
 <thead>
@@ -99,7 +99,7 @@ title: Importação em massa na replicação CDC
         ></path>
       </svg>
     </button></h2><p>Execute todas as chamadas de importação no cluster primário. Os dados importados e a decisão de confirmação são replicados automaticamente para o cluster de reserva; por isso, não envie nem confirme a importação no cluster de reserva manualmente.</p>
-<p>Cada cluster lê os ficheiros de importação a partir do seu próprio armazenamento de objetos. Certifique-se de que os ficheiros a importar existem tanto no armazenamento de objetos primário como no de reserva. Pode carregar os ficheiros para ambos os clusters ou utilizar um armazenamento de objetos que ambos os clusters possam ler. Se os ficheiros não existirem no cluster de reserva, a importação replicada falhará nesse cluster com um erro de objeto não encontrado.</p>
+<p>Cada cluster lê os ficheiros de importação a partir do seu próprio armazenamento de objetos. Certifique-se de que os ficheiros a importar existem tanto no armazenamento de objetos primário como no de reserva. Pode carregar os ficheiros para ambos os clusters ou utilizar um armazenamento de objetos que ambos os clusters possam ler. Se os ficheiros não estiverem presentes no cluster de reserva, a importação replicada falhará nesse cluster com um erro de objeto não encontrado.</p>
 <p>O exemplo seguinte utiliza os auxiliares de importação baseados em REST disponíveis em <code translate="no">pymilvus.bulk_writer</code>. Os valores de <code translate="no">url</code> correspondem aos mesmos endereços Milvus que utiliza para outras chamadas de API.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> time
 
@@ -273,4 +273,4 @@ wait_for_state(standby_url, job_id, <span class="hljs-string">&quot;Completed&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Num cluster de replicação, apenas são aceites importações 2PC com « <code translate="no">auto_commit=false</code> ». Defina « <code translate="no">options={&quot;auto_commit&quot;: &quot;false&quot;}</code> » na solicitação de importação.</p>
+    </button></h3><p>Num cluster de replicação, apenas são aceites importações 2PC com « <code translate="no">auto_commit=false</code> ». Defina « <code translate="no">options={&quot;auto_commit&quot;: &quot;false&quot;}</code> » no pedido de importação.</p>

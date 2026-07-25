@@ -85,7 +85,7 @@ EOF
 bash standalone_embed.sh restart
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-A alteração de <code translate="no">mq.type</code> desta forma destina-se a uma instância <b>totalmente nova</b> (sem coleções ainda). Para alterar a fila de mensagens de uma instância que já contém dados, siga, em vez disso, o <a href="/docs/pt/switch-rocksmq-woodpecker.md">procedimento de mudança</a>.
+A alteração de <code translate="no">mq.type</code> desta forma destina-se a uma instância <b>totalmente nova</b> (sem coleções ainda). Para alterar a fila de mensagens de uma instância que já contém dados, siga o <a href="/docs/pt/switch-rocksmq-woodpecker.md">procedimento de mudança</a>.
 </div>
 <h3 id="Configure" class="common-anchor-header">Configurar<button data-href="#Configure" class="anchor-icon" translate="no">
       <svg translate="no"

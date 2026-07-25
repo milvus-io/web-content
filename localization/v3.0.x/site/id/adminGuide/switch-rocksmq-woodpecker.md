@@ -2,7 +2,7 @@
 id: switch-rocksmq-woodpecker.md
 title: Beralih antara RocksMQ dan Woodpecker
 summary: >-
-  Beralihkan antrian pesan pada penyebaran Milvus Standalone (Docker Compose)
+  Beralihkan antrian pesan pada implementasi Milvus Standalone (Docker Compose)
   antara RocksMQ dan Woodpecker.
 ---
 <h1 id="Switch-between-RocksMQ-and-Woodpecker" class="common-anchor-header">Beralih antara RocksMQ dan Woodpecker<button data-href="#Switch-between-RocksMQ-and-Woodpecker" class="anchor-icon" translate="no">

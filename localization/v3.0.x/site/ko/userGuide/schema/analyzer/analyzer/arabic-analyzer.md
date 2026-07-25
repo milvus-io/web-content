@@ -55,7 +55,7 @@ beta: Milvus 3.0.0+
      <td><p><code translate="no">stop_words</code></p></td>
      <td><p><code translate="no">list[str]</code></p></td>
      <td><p><code translate="no">_arabic_</code></p></td>
-     <td><p>토큰화 과정에서 제외할 추가 스톱워드 목록입니다. 기본적으로 ' <code translate="no">arabic</code> ' 분석기는 내장된 ' <code translate="no">_arabic_</code> ' 사전(dictionary)을 사용합니다. 기본 사전 내용을 확인하려면 Milvus <a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/arabic.txt">아랍어 스톱워드 목록을</a> 참조하십시오. 이 목록은 Apache Lucene <a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/ar/stopwords.txt">아랍어 스톱워드 파일에서</a> 가져온 것입니다.</p></td>
+     <td><p>토큰화 과정에서 제외할 추가 스톱워드 목록입니다. 기본적으로 <code translate="no">arabic</code> 분석기는 내장된 <code translate="no">_arabic_</code> 사전(dictionary)을 사용합니다. 기본 사전을 확인하려면 Milvus <a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/arabic.txt">아랍어 스톱워드 목록을</a> 참조하십시오. 이 목록은 Apache Lucene <a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/ar/stopwords.txt">아랍어 스톱워드 파일에서</a> 가져온 것입니다.</p></td>
    </tr>
 </table>
 <p>사용자 정의 스톱워드를 추가하려면 <code translate="no">stop_words</code> 를 포함하십시오:</p>

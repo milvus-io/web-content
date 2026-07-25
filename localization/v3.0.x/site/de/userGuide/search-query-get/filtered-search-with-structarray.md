@@ -179,7 +179,7 @@ results = client.search(
 <tr><td><code translate="no">MATCH_ALL</code></td><td>Alle Struct-Elemente müssen das Prädikat erfüllen.</td><td><code translate="no">MATCH_ALL(chunks, $[quality_score] &gt; 0.5)</code></td></tr>
 <tr><td><code translate="no">MATCH_LEAST</code></td><td>Mindestens <code translate="no">N</code> -Struktur-Elemente müssen das Prädikat erfüllen.</td><td><code translate="no">MATCH_LEAST(chunks, $[has_code] == true, threshold=2)</code></td></tr>
 <tr><td><code translate="no">MATCH_MOST</code></td><td>Höchstens <code translate="no">N</code> Struct-Elemente müssen das Prädikat erfüllen.</td><td><code translate="no">MATCH_MOST(chunks, $[section] == &quot;appendix&quot;, threshold=1)</code></td></tr>
-<tr><td><code translate="no">MATCH_EXACT</code></td><td>Genau „ <code translate="no">N</code> “ Struct-Elemente müssen das Prädikat erfüllen.</td><td><code translate="no">MATCH_EXACT(chunks, $[section] == &quot;summary&quot;, threshold=1)</code></td></tr>
+<tr><td><code translate="no">MATCH_EXACT</code></td><td>Genau <code translate="no">N</code> Struct-Elemente müssen das Prädikat erfüllen.</td><td><code translate="no">MATCH_EXACT(chunks, $[section] == &quot;summary&quot;, threshold=1)</code></td></tr>
 </tbody>
 </table>
 <pre><code translate="no" class="language-python">filter_expr = (
@@ -203,7 +203,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Verwenden Sie hier „ <code translate="no">MATCH_ANY</code> “, da das Suchergebnis von „EmbeddingList“ auf Entitätsebene erfolgt. Der Filter erfordert, dass mindestens ein Chunk in der Entität ein „ <code translate="no">&quot;index&quot;</code> “-Chunk mit hoher Qualität ist, aber das Suchergebnis selbst repräsentiert weiterhin die übergeordnete Entität.</p>
+<p>Verwenden Sie hier „ <code translate="no">MATCH_ANY</code> “, da das Suchergebnis von „EmbeddingList“ auf Entitätsebene erfolgt. Der Filter erfordert, dass mindestens ein Chunk in der Entität ein „ <code translate="no">&quot;index&quot;</code> “-Chunk mit hoher Qualität ist, doch das Suchergebnis selbst repräsentiert weiterhin die übergeordnete Entität.</p>
 <h2 id="Use-filters-in-hybrid-search" class="common-anchor-header">Verwenden Sie Filter in der hybriden Suche<button data-href="#Use-filters-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -300,7 +300,7 @@ results = client.hybrid_search(
       </svg>
     </button></h2><ul>
 <li><p>Verwendung von „ <code translate="no">$[subfield]</code> “ außerhalb von „ <code translate="no">element_filter</code> “ oder „ <code translate="no">MATCH_*</code> “.</p></li>
-<li><p>Verwendung von „ <code translate="no">chunks.section</code> “ anstelle der StructArray-Operatorsyntax wie beispielsweise „ <code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code> “.</p></li>
+<li><p>Verwendung von „ <code translate="no">chunks.section</code> “ anstelle der StructArray-Operatorsyntax wie z. B. „ <code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code> “.</p></li>
 <li><p>Verwendung von „ <code translate="no">element_filter</code> “, wenn nur eine Filterung auf Zeilenebene erforderlich ist. Verwenden Sie stattdessen „ <code translate="no">MATCH_ANY</code> “, wenn Sie lediglich Entitäten auswählen müssen.</p></li>
 <li><p>Die Erwartung, dass ` <code translate="no">MATCH_*</code> ` Element-Offsets zurückgibt. Diese Operatoren wählen Entitäten aus und identifizieren selbst kein einzelnes übereinstimmendes Element.</p></li>
 <li><p>Das Schreiben von bloßen booleschen Prädikaten wie „ <code translate="no">$[has_code]</code> “. Verwenden Sie explizite Vergleiche wie „ <code translate="no">$[has_code] == true</code> “.</p></li>

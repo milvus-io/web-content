@@ -48,11 +48,11 @@ summary: >-
 <tbody>
 <tr><td>Búsqueda en EmbeddingList</td><td>No compatible.</td><td>No aplicable.</td></tr>
 <tr><td>Búsqueda a nivel de elemento</td><td>Utiliza una consulta vectorial normal con ` <code translate="no">radius</code> ` y, opcionalmente, ` <code translate="no">range_filter</code>`.</td><td>Nivel de elemento de estructura.</td></tr>
-<tr><td>Búsqueda híbrida</td><td>Compatible cuando la solicitud de StructArray se dirige a un campo vectorial a nivel de elemento. Las solicitudes a nivel de EmbeddingList no admiten la búsqueda por rango.</td><td>Subbúsqueda a nivel de elemento, seguida de una reordenación híbrida.</td></tr>
+<tr><td>Búsqueda híbrida</td><td>Compatible cuando la solicitud de StructArray se dirige a un campo vectorial a nivel de elemento. Las solicitudes a nivel de EmbeddingList no admiten la búsqueda por rango.</td><td>Subbúsqueda a nivel de elemento, seguida de una reclasificación híbrida.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
-<p>Si solo necesitas los elementos Struct más cercanos, empieza con <a href="/docs/es/basic-vector-search-with-structarray.md">la búsqueda vectorial básica con StructArray</a>. Utiliza la búsqueda por rango cuando el resultado deba cumplir un límite de puntuación o distancia, en lugar de limitarse a una clasificación de los K primeros resultados.</p>
+<p>Si solo necesitas los elementos Struct más cercanos, empieza con <a href="/docs/es/basic-vector-search-with-structarray.md">la búsqueda vectorial básica con StructArray</a>. Utiliza la búsqueda por rango cuando el resultado deba cumplir un límite de puntuación o distancia, en lugar de limitarse a una clasificación de los K primeros.</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">Antes de empezar<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -327,7 +327,7 @@ results = client.hybrid_search(
     </button></h2><ul>
 <li><p>Realizar una búsqueda por rango en ` <code translate="no">chunks[emb_list_vector]</code>`, que está pensada para la búsqueda en `EmbeddingList`.</p></li>
 <li><p>Utilizar ` <code translate="no">MAX_SIM_COSINE</code> ` en lugar de una métrica habitual, como ` <code translate="no">COSINE</code> `, para la búsqueda por rango a nivel de elemento.</p></li>
-<li><p>Utilizar una consulta « <code translate="no">EmbeddingList</code> » en lugar de una consulta vectorial normal.</p></li>
+<li><p>Utilizar una consulta de « <code translate="no">EmbeddingList</code> » en lugar de una consulta vectorial normal.</p></li>
 <li><p>Esperar que los resultados de la búsqueda por rango sean únicos por entidad principal. La búsqueda por rango devuelve resultados que coinciden con elementos de Struct.</p></li>
 <li><p>Utilizar <code translate="no">chunks.emb</code> en lugar de la sintaxis de ruta de subcampo requerida <code translate="no">chunks[emb]</code>.</p></li>
 </ul>
@@ -350,5 +350,5 @@ results = client.hybrid_search(
 <li><p>Para conocer los dos modos básicos de búsqueda vectorial con StructArray, consulta <a href="/docs/es/basic-vector-search-with-structarray.md">«Búsqueda vectorial básica con StructArray</a>».</p></li>
 <li><p>Para añadir filtros escalares a la búsqueda por rango, consulta <a href="/docs/es/filtered-search-with-structarray.md">«Búsqueda filtrada con StructArray</a>».</p></li>
 <li><p>Para obtener como máximo un resultado por entidad principal cuando sea posible, consulta <a href="/docs/es/grouping-search-with-structarray.md">«Búsqueda agrupada con StructArray</a>».</p></li>
-<li><p>Para consultar los límites de búsqueda específicos de cada versión, consulta <a href="/docs/es/structarray-limits.md">«Límites de StructArray</a>».</p></li>
+<li><p>Para consultar los límites de búsqueda específicos de cada versión, lee <a href="/docs/es/structarray-limits.md">«Límites de StructArray</a>».</p></li>
 </ol>
