@@ -84,6 +84,10 @@ err := client.CreateCollection(ctx, option)
 
     Sets the number of partitions for the collection.
 
+## Validation
+
+CreateCollection validates the supplied schema before sending the request. In v2.6.5, struct-array field validation is applied automatically and invalid struct sub-field definitions return an error before the request is sent.
+
 **RETURN TYPE:**
 
 *error*
@@ -112,7 +116,7 @@ import (
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-collectionName := `customized_setup_1`
+collectionName := \`customized_setup_1\`
 
 cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
 	Address: milvusAddr,

@@ -1,130 +1,120 @@
 # bulk_import()
 
-This function submits a bulk import job for open-source Milvus or Zilliz Cloud, including project/region routing for project databases.
+Adds project_id/region_id routing and project-database import behavior.
 
 ## Request Syntax
 
 ```python
+# include-start milvus
 bulk_import(
     url: str,
     collection_name: str,
     db_name: str = "",
-    files: list[list[str]] | None = None,
+    files: Optional[List[List[str]]] = None,
+    api_key: str = "",
+    verify: Optional[Union[bool, str]] = True,
+    cert: Optional[Union[str, tuple]] = None,
+    **kwargs,
+) -> requests.Response
+# include-end
+# include-start zilliz
+bulk_import(
+    url: str,
+    collection_name: str,
+    db_name: str = "",
     object_url: str = "",
-    object_urls: list[list[str]] | None = None,
+    object_urls: Optional[List[List[str]]] = None,
     cluster_id: str = "",
+    project_id: str = "",
+    region_id: str = "",
     api_key: str = "",
     access_key: str = "",
     secret_key: str = "",
     token: str = "",
     volume_name: str = "",
-    data_paths: list[list[str]] | None = None,
-    
-    verify: bool | str = True,
-    cert: str | tuple | None = None,
+    data_paths: Optional[List[List[str]]] = None,
+    verify: Optional[Union[bool, str]] = True,
+    cert: Optional[Union[str, tuple]] = None,
     **kwargs,
-)
+) -> requests.Response
+# include-end
 ```
 
 **PARAMETERS:**
 
 - **url** (*str*) -
+**[REQUIRED]**
 
-    **[REQUIRED]**
-
-    Server endpoint for Milvus or Zilliz Cloud bulk import APIs.
+    The Milvus server endpoint, such as `http://localhost:19530`.
 
 - **collection_name** (*str*) -
-
-    **[REQUIRED]**
-
-    Target collection name.
+**[REQUIRED]**
+The name of the target collection.
 
 - **db_name** (*str*) -
+Default: `""`
+The name of the target database.
 
-    Target database name.
+- **files** (*Optional[List[List[str]]]*) -
+Default: `None`
+The local import files. Each nested list contains one JSON or Parquet file, or a related set of NumPy files.
 
-- **files** (*list[list[str]]*) -
+- **api_key** (*str*) -
+Default: `""`
 
-    Local file groups for import.
+    The Milvus authentication token, such as `root:Milvus`.
 
-- **object_url** (*str*) -
+- **verify** (*Optional[Union[bool, str]]*) -
+Default: `True`
+The TLS verification setting. Use `True` to verify with the default trust store or provide a CA certificate path.
 
-    An object storage URL for cloud import.
+- **cert** (*Optional[Union[str, tuple]]*) -
+Default: `None`
+The client certificate path, or a certificate and private-key pair for mutual TLS.
 
-- **object_urls** (*list[list[str]]*) -
-
-    Object storage URL groups for cloud import.
-
-- **cluster_id** (*str*) -
-
-    Cloud cluster ID for import jobs.
-
-- **access_key** (*str*) -
-
-    Object storage access key.
-
-- **secret_key** (*str*) -
-
-    Object storage secret key.
-
-- **token** (*str*) -
-
-    Temporary session token for object storage access.
-
-- **volume_name** (*str*) -
-
-    Volume name for volume-based imports.
-
-- **data_paths** (*list[list[str]]*) -
-
-    Volume-relative paths for data files.
-
-- **verify** (*bool | str*) -
-
-    TLS verification setting.
-
-- **cert** (*str | tuple*) -
-
-    Client certificate path or `(cert, key)` tuple.
-
-- **kwargs** (*dict*) -
-
-    Optional fields such as `partition_name` and `options`.
+- **kwargs** (*Any*) -
+The additional options forwarded to the HTTP request.
 
 **RETURN TYPE:**
+
 *requests.Response*
 
-Returns the import-job creation response.
+**RETURNS:**
 
-HTTP response containing created import job metadata.
+HTTP response returned by the bulk-import endpoint. Inspect the JSON payload for the submitted job identifier.
 
 **EXCEPTIONS:**
 
 - **MilvusException**
-
-    Raised when request submission fails or the server rejects the job.
+Raised when the server rejects the request or the RPC fails. Inspect the server error message for exact failure details.
 
 ## Examples
 
-<include  target="milvus">
+The example submits local files to a Milvus server.
 
 ```python
+# include-start milvus
 from pymilvus.bulk_writer import bulk_import
 
-resp = bulk_import(
-    url="https://localhost:19530",
-    api_key="username:password", # replace this with your actual credentials
-    collection_name="book_catalog",
-    files=[
-        ["s3://demo-bucket/books/part-0001.parquet"],
-        ["s3://demo-bucket/books/part-0002.parquet"],
-    ],
-    access_key="AKIA...",
-    secret_key="SECRET...",
+response = bulk_import(
+    url="http://localhost:19530",
+    api_key="root:Milvus",
+    collection_name="book_chunks",
+    files=[["./data/part-0001.parquet"]],
 )
+print(response.json())
+# include-end
+# include-start zilliz
+from pymilvus.bulk_writer import bulk_import
 
-print(resp.json())
+response = bulk_import(
+    url="https://api.cloud.zilliz.com",
+    api_key="YOUR_API_KEY",
+    project_id="proj-xxxx",
+    region_id="aws-us-west-2",
+    collection_name="book_chunks",
+    object_urls=[["s3://bucket/books/part-0001.parquet"]],
+)
+print(response.json())
+# include-end
 ```
-
-</include>

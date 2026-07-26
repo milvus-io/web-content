@@ -16,7 +16,7 @@ err := client.DropCollectionProperties(ctx, option)
 
 **PARAMETERS:**
 
-- **collection** (*string*)
+- **[collection](Collection.md)** (*string*)
 
     The collection.
 

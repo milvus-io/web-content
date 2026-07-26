@@ -1,10 +1,22 @@
 # get_import_progress()
 
-This function returns the current status of a bulk import job, including project/region scoped jobs for cloud project databases.
+Adds project_id, region_id, db_name, and DB-Name header behavior.
 
 ## Request Syntax
 
 ```python
+# include-start milvus
+get_import_progress(
+    url: str,
+    job_id: str,
+    api_key: str = "",
+    db_name: str = "",
+    verify: Optional[Union[bool, str]] = True,
+    cert: Optional[Union[str, tuple]] = None,
+    **kwargs,
+) -> requests.Response
+# include-end
+# include-start zilliz
 get_import_progress(
     url: str,
     job_id: str,
@@ -13,74 +25,82 @@ get_import_progress(
     region_id: str = "",
     api_key: str = "",
     db_name: str = "",
-    
-    verify: bool | str = True,
-    cert: str | tuple | None = None,
+    verify: Optional[Union[bool, str]] = True,
+    cert: Optional[Union[str, tuple]] = None,
     **kwargs,
-)
+) -> requests.Response
+# include-end
 ```
 
 **PARAMETERS:**
 
 - **url** (*str*) -
+**[REQUIRED]**
 
-    **[REQUIRED]**
-
-    Server endpoint for bulk import APIs.
+    The Milvus server endpoint, such as `http://localhost:19530`.
 
 - **job_id** (*str*) -
-
-    **[REQUIRED]**
-
-    Import job ID returned by `bulk_import()`.
-
-- **cluster_id** (*str*) -
-
-    Cloud cluster ID.
+**[REQUIRED]**
+The ID of the import job to inspect.
 
 - **api_key** (*str*) -
+Default: `""`
 
-    API key for cloud authentication.
+    The Milvus authentication token, such as `root:Milvus`.
 
 - **db_name** (*str*) -
+Default: `""`
+The database name sent in the `DB-Name` header for role-based access control.
 
-    Database name for request routing.
+- **verify** (*Optional[Union[bool, str]]*) -
+Default: `True`
+The TLS verification setting. Use `True` to verify with the default trust store or provide a CA certificate path.
 
-- **verify** (*bool | str*) -
+- **cert** (*Optional[Union[str, tuple]]*) -
+Default: `None`
+The client certificate path, or a certificate and private-key pair for mutual TLS.
 
-    TLS verification setting.
-
-- **cert** (*str | tuple*) -
-
-    Client certificate path or `(cert, key)` tuple.
-
-- **project_id** (*str*) -
-
-    Additional HTTP request options.
+- **kwargs** (*Any*) -
+The additional options forwarded to the HTTP request.
 
 **RETURN TYPE:**
+
 *requests.Response*
 
-Returns the current import-job progress payload.
+**RETURNS:**
+
+HTTP response containing the current bulk-import job state and progress.
 
 **EXCEPTIONS:**
 
 - **MilvusException**
-
-    Raised when progress lookup fails.
+Raised when the server rejects the request or the RPC fails. Inspect the server error message for exact failure details.
 
 ## Examples
 
+The example retrieves import progress from a Milvus server.
+
 ```python
+# include-start milvus
 from pymilvus.bulk_writer import get_import_progress
 
-resp = get_import_progress(
+response = get_import_progress(
     url="http://localhost:19530",
-    api_key="username:password",
-    job_id="448996221577371648",
-    db_name="book_db",
+    api_key="root:Milvus",
+    job_id="job-123",
 )
+print(response.json())
+# include-end
+# include-start zilliz
+from pymilvus.bulk_writer import get_import_progress
 
-print(resp.json())
+response = get_import_progress(
+    url="https://api.cloud.zilliz.com",
+    api_key="YOUR_API_KEY",
+    project_id="proj-xxxx",
+    region_id="aws-us-west-2",
+    job_id="job-123",
+)
+print(response.json())
+# include-end
 ```
-

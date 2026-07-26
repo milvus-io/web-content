@@ -25,7 +25,7 @@ result, err := client.CreateIndex(ctx, option)
 
     The name of the field.
 
-- **index** (*[index.Index](Index/Index.md)*)
+- **[index](Index/Index.md)** (*[index.Index](Index/Index.md)*)
 
     The index.
 

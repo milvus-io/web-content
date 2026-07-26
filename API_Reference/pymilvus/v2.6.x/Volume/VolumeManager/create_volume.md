@@ -1,83 +1,49 @@
 # create_volume()
 
-This function creates a new Zilliz Cloud volume in a project and region, with support for managed or external volume configuration.
+Adds project/region and external-volume parameters.
 
 ## Request Syntax
 
 ```python
-volume_manager.create_volume(
+# include-start zilliz
+create_volume(
     project_id: str,
     region_id: str,
     volume_name: str,
-    volume_type: str | None = None,
-    storage_integration_id: str | None = None,
-    path: str | None = None,
-)
+    volume_type: Optional[str] = None,
+    storage_integration_id: Optional[str] = None,
+    path: Optional[str] = None,
+) -> requests.Response
+# include-end
 ```
 
 **PARAMETERS:**
 
-- **project_id** (*str*) -
-
-    **[REQUIRED]**
-
-    Project ID that owns the volume.
-
-- **region_id** (*str*) -
-
-    **[REQUIRED]**
-
-    Region ID where the volume is created.
-
-- **volume_name** (*str*) -
-
-    **[REQUIRED]**
-
-    Name of the volume.
-
-- **volume_type** (*str*) -
-
-    Volume type. Supported values are `MANAGED` and `EXTERNAL`. If omitted, `MANAGED` is used.
-
-- **storage_integration_id** (*str*) -
-
-    Storage Integration ID. Required when `volume_type="EXTERNAL"`.
-
-- **path** (*str*) -
-
-    Path for external storage. If set, it must end with `/`.
-
 **RETURN TYPE:**
+
 *requests.Response*
 
-Returns the volume creation response.
+**RETURNS:**
 
-HTTP response from the create volume API.
+HTTP response describing the volume creation request.
 
 **EXCEPTIONS:**
 
 - **MilvusException**
-
-    Raised when volume creation fails.
+Raised when the server rejects the request or the RPC fails. Inspect the server error message for exact failure details.
 
 ## Examples
 
 ```python
-from pymilvus.bulk_writer import VolumeManager
+# include-start zilliz
+from pymilvus.bulk_writer import VolumeFileManager, VolumeManager
 
-volume_manager = VolumeManager(
-    cloud_endpoint="https://api.cloud.zilliz.com",
-    api_key="YOUR_API_KEY",
-)
+manager = VolumeManager(cloud_endpoint="https://api.cloud.zilliz.com", api_key="YOUR_API_KEY")
+manager.create_volume(project_id="proj-xxxx", region_id="aws-us-west-2", volume_name="book-volume", volume_type="EXTERNAL")
+manager.describe_volume("book-volume")
+manager.list_volumes(project_id="proj-xxxx", volume_type="EXTERNAL")
 
-resp = volume_manager.create_volume(
-    project_id="proj-xxx",
-    region_id="aws-us-west-2",
-    volume_name="books-volume",
-    volume_type="EXTERNAL",
-    storage_integration_id="integ-xxx",
-    path="book-data/",
-)
-
-print(resp.json())
+file_manager = VolumeFileManager(cloud_endpoint="https://api.cloud.zilliz.com", api_key="YOUR_API_KEY", volume_name="book-volume")
+file_manager.upload_file_to_volume(source_file_path="./data/books.parquet", target_volume_path="datasets/books/books.parquet", upload_concurrency=4)
+# include-end
 ```

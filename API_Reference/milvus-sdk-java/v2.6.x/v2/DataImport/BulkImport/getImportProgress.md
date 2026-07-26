@@ -1,6 +1,6 @@
 # getImportProgress()
 
-This operation gets the progress of the specified bulk-import job.
+Retrieves the current state and progress of a bulk import job in Milvus or Zilliz Cloud.
 
 ```java
 public static String getImportProgress(String url, BaseDescribeImportRequest request)
@@ -8,52 +8,38 @@ public static String getImportProgress(String url, BaseDescribeImportRequest req
 
 ## Request Syntax
 
+Use this request for an import job created in open-source Milvus.
+
 ```java
-bulkImport.getImportProgress(
-    url,
-    request
-)
+MilvusDescribeImportRequest.builder()
+    .apiKey(apiKey)
+    .jobId(jobId)
+    .build();
 ```
 
 **PARAMETERS:**
 
-- **url** (*String*) -
+- **apiKey** (*String*) -
+Milvus authentication in `username:password` form.
 
-    The endpoint of the connected Milvus instance.
-
-- **request** (*[BaseDescribeImportRequest](getImportProgress.md)*) -  
-
-    A **BaseImportRequest** instance.
-
-**RETURN TYPE:**
-
-*String*
+- **jobId** (*String*) -
+Identifier of the import job to inspect.
 
 **RETURNS:**
 
-The import progress of the specified import job.
+*String*
 
-## BaseDescribeImportRequest
-
-A **BaseDescribeImportRequest** instance is implemented in **MilvusDescribeImportRequest**.
-
-### MilvusDescribeImportRequest
-
-```java
-MilvusDescribeImportRequest.builder()
-    .jobId(String jobId)
-    .build()
-```
-
-**BUILDER METHODS:**
-
-- `jobId(String jobId)`
-
-    The ID of an existing import job.
+A JSON response containing the import job state, progress, and related details.
 
 ## Example
 
-```java
+Gets import progress for a job created in Milvus.
 
+```java
+MilvusDescribeImportRequest request = MilvusDescribeImportRequest.builder()
+    .jobId(jobId)
+    .apiKey("root:Milvus")
+    .build();
+String response = BulkImportUtils.getImportProgress("http://localhost:19530", request);
 ```
 

@@ -1,47 +1,25 @@
 # StructFieldSchema
 
-A StructFieldSchema instance represents the schema of a struct element in an array of structs field. A schema sketches the structure of a struct element.
+Constructor behavior changed. New nullable property documented on the existing class page.
+
+## Request Syntax
 
 ```python
-class pymilvus.StructFieldSchema
-```
-
-## Constructor
-
-Constructs the schema of a struct element in an array of structs field by defining fields, data types, and other parameters.
-
-```python
-CollectionSchema(
-    fields: list,
-    description: str
+StructFieldSchema(
+    nullable: bool = False,
+    description: str = "",
 )
 ```
 
 **PARAMETERS:**
 
-- **name** (*str*) -
+- **nullable** (*bool*) -
+Default: `False`
+The flag that allows the struct field to contain null values.
 
-    **[REQUIRED]**
-
-    The name of the schema. 
-
-- **fields** (*list*) -
-
-    **[REQUIRED]**
-
-    A list of **[FieldSchema](../../ORM/FieldSchema/FieldSchema.md)** objects that define the fields in the schema of a struct in an array of structs field.
-
-    <div class="alert note">
-    
-    A field schema represents and contains metadata for a single field, while **StructFieldSchema** ties together a list of **[FieldSchema](../../ORM/FieldSchema/FieldSchema.md)** objects to define the schema of a struct in an array of structs field.
-
-    </div>
-
-- **description** (*string*) -
-
-    The description of the schema.
-
-    If a description is not provided, it will be set to an empty string.
+- **description** (*str*) -
+Default: `""`
+The description of the struct field.
 
 **RETURN TYPE:**
 
@@ -49,54 +27,26 @@ CollectionSchema(
 
 **RETURNS:**
 
-A **StructFieldSchema** object.
+Struct field schema instance containing nested fields and nullable/default metadata.
 
 **EXCEPTIONS:**
 
-- **FieldsTypeException**: 
+- **MilvusException**
+Raised when the server rejects the request or the RPC fails. Inspect the server error message for exact failure details.
 
-    This exception will be raised when the **fields** parameter is not a list.
+## Examples
 
-- **FieldTypeException**: 
-
-    This exception will be raised when a field in the **fields** list is not a **[FieldSchema](../../ORM/FieldSchema/FieldSchema.md)** object.
+Demonstrates StructFieldSchema usage.
 
 ```python
-from pymilvus import StructFieldSchema, FieldSchema, DataType
+from pymilvus import CollectionSchema, DataType, FieldSchema, StructFieldSchema
 
-vector = FieldSchema(
-    name="vector",
-    dtype=DataType.FLOAT_VECTOR,
-    dim=768
-)
+chunk = StructFieldSchema(nullable=True, description="Optional chunk metadata")
+chunk.add_field("source", DataType.VARCHAR, max_length=128)
 
-varchar = FieldSchema(
-    name="varchar",
-    dtype=DataType.VARCHAR,
-    max_length=512
-)
-
-# Construct a schema with the predefined fields
-schema = StructFieldSchema(
-    name="struct_schema",
-    fields=[vector, varchar],
-    description="example_schema"
-)
+schema = CollectionSchema(fields=[
+    FieldSchema(name="id", dtype=DataType.INT64, is_primary=True),
+    FieldSchema(name="vector", dtype=DataType.FLOAT_VECTOR, dim=3),
+])
+print(schema)
 ```
-
-## Properties
-
-- **fields** (*list*) -
-
-    A list of **[FieldSchema](../../ORM/FieldSchema/FieldSchema.md)** objects that define the fields in the schema of a struct in an array of structs field.
-
-- **description** (*string*) -
-
-    The description of the schema.
-
-    If a description is not provided, it will be an empty string.
-
-## Methods
-
-The following are the methods of the `StructFieldSchema` class:
-

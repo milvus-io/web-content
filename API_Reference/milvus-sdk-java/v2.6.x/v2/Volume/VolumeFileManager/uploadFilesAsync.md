@@ -1,6 +1,6 @@
-# uploadFilesAsync
+# uploadFilesAsync()
 
-This operation uploads the local file at the specified source path to the target file path within the specified volume.
+Uploads a local file or directory to a volume asynchronously.
 
 ```java
 public CompletableFuture<UploadFilesResult> uploadFilesAsync(UploadFilesRequest request)
@@ -9,78 +9,108 @@ public CompletableFuture<UploadFilesResult> uploadFilesAsync(UploadFilesRequest 
 ## Request Syntax
 
 ```java
-uploadFileAsync(UploadFilesRequest.builder()
-    .sourceFilePath(String sourceFilePath)
-    .targetVolumePath(String targetVolumePath)
+UploadFilesRequest.builder()
+    .sourceFilePath(sourceFilePath)
+    .targetVolumePath(targetVolumePath)
+    .uploadConcurrency(uploadConcurrency)
+    .maxRetries(maxRetries)
+    .retryIntervalMillis(retryIntervalMillis)
+    .progressListener(progressListener)
+    .partSizeBytes(partSizeBytes)
     .build();
-)
 ```
 
-**PARAMETERS**
+**BUILDER METHODS:**
 
-- **sourceFilePath** (*str*) -
+- `sourceFilePath(String sourceFilePath)`
 
-    **[REQUIRED]**
+    The full path of the local file or directory to upload. Directory paths must end with `/`.
 
-    The path to the local data file to be uploaded to the specified volume.
+- `targetVolumePath(String targetVolumePath)`
 
-- **targetVolumePath** (*str*) -
+    The destination directory in the volume. Leave it empty for the root directory, or end it with `/` for a folder.
 
-    **[REQUIRED]**
+- `uploadConcurrency(int uploadConcurrency)`
 
-    The path to the data file within the specified volume after this operation.
+    The maximum number of files uploaded concurrently. Defaults to **5**.
 
-**RETURN TYPE**
+- `maxRetries(int maxRetries)`
+
+    The maximum number of retries for each file. Defaults to **5**.
+
+- `retryIntervalMillis(long retryIntervalMillis)`
+
+    The interval between retries, in milliseconds. Defaults to **5,000** milliseconds.
+
+- `progressListener(ProgressListener progressListener)`
+
+    The optional `UploadFilesRequest.ProgressListener` callback that receives `UploadProgress` snapshots.
+
+    - `UploadProgress` -
+
+        The snapshot passed to `UploadFilesRequest.ProgressListener.onProgress(...)`.
+
+        - `getUploadedBytes()` -
+
+            Returns the bytes uploaded across all files.
+
+        - `getTotalBytes()` -
+
+            Returns the total bytes scheduled for upload.
+
+        - `getCompletedFiles()` -
+
+            Returns the number of files uploaded successfully.
+
+        - `getTotalFiles()` -
+
+            Returns the total number of files scheduled for upload.
+
+        - `getCurrentFile()` -
+
+            Returns the path of the file currently being uploaded.
+
+        - `getCurrentFileUploadedBytes()` -
+
+            Returns the uploaded bytes for the current file.
+
+        - `getCurrentFileTotalBytes()` -
+
+            Returns the total bytes in the current file.
+
+        - `getPercent()` -
+
+            Returns the aggregate upload percentage.
+
+- `partSizeBytes(long partSizeBytes)`
+
+    The multipart upload part size in bytes. A value of **0** or less selects the part size automatically.
+
+**RETURNS:**
 
 *CompletableFuture<UploadFilesResult>*
 
-**RETURNS**
+**EXCEPTIONS:**
 
-A **CompletableFuture<UploadFilesResult>** instance that resolves to an **UploadFilesResult** instance that has the following attributes.
+- **MilvusClientExceptions**
 
-- **volumeName** (*str*) -
-
-    **[REQUIRED]**
-
-    The name of the target volume of this operation.
-
-- **path** (*str*) -
-
-    **[REQUIRED]**
-
-    The path to the data file within the specified volume after this operation.
+    Raised when any error occurs during this operation. Inspect the exception message for the exact failure reason.
 
 ## Example
 
+Uploads a local file or directory to a volume asynchronously.
+
 ```java
-import com.google.gson.Gson;
-import java.util.concurrent.CompletableFuture;
-import io.milvus.bulkwriter.VolumeFileManager;
-import io.milvus.bulkwriter.VolumeFileManagerParam;
-import io.milvus.bulkwriter.request.volume.UploadFilesRequest;
-import io.milvus.bulkwriter.model.UploadFilesResult;
-
-VolumeFileManagerParam volumeFileManagerParam = VolumeFileManagerParam.newBuilder()
-    .withCloudEndpoint("https://api.cloud.zilliz.com")
-    .withApiKey("YOUR_API_KEY")
-    .withVolumeName("my_volume")
-    .build();
-
-VolumeFileManager volumeFileManager = new VolumeFileManager(volumeFileManagerParam);
-
-UploadFilesRequest request = UploadFilesRequest.builder()
-    .sourceFilePath("/path/to/your/local/data/file")
-    .targetVolumePath("data/")
-    .build();
-
-UploadFilesResult result = volumeFileManager.uploadFilesAsync(request).get();
-
-System.out.println("\nuploadFiles results: " + new Gson().toJson(result));
-
-// uploadFiles results: 
-// 
-// {
-//     "volumeName": "my_volume",
-//     "path": "data/"
-// }
+CompletableFuture<UploadFilesResult> future = volumeFileManager.uploadFilesAsync(
+    UploadFilesRequest.builder()
+        .sourceFilePath("/data/books.json")
+        .targetVolumePath("imports/books.json")
+        .uploadConcurrency(5)
+        .progressListener(progress ->
+            System.out.printf("Uploaded %.2f%% (%d/%d bytes)%n",
+                progress.getPercent(),
+                progress.getUploadedBytes(),
+                progress.getTotalBytes()))
+        .build());
+UploadFilesResult result = future.get();
 ```

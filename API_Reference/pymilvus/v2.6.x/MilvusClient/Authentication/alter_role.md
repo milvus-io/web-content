@@ -1,6 +1,6 @@
 # alter_role()
 
-This operation updates the description of an existing role.
+New public helper for changing a role description. Async variant shares the sync method parameter and response contract.
 
 ## Request Syntax
 
@@ -8,49 +8,53 @@ This operation updates the description of an existing role.
 alter_role(
     role_name: str,
     description: str,
-    timeout: Optional[float] = None
+    timeout: Optional[float] = None,
+    **kwargs,
 ) -> None
 ```
 
 **PARAMETERS:**
 
 - **role_name** (*str*) -
-
-    **[REQUIRED]**
-
-    The name of the role to update.
+**[REQUIRED]**
+The name of the role to update.
 
 - **description** (*str*) -
+**[REQUIRED]**
+The new description for the role.
 
-    **[REQUIRED]**
+- **timeout** (*Optional[float]*) -
+Default: `None`
+The maximum time, in seconds, to wait for the RPC to complete.
 
-    The new description of the role. Use an empty string to clear the description.
-
-- **timeout** (*float*) -
-
-    The timeout duration for this operation.
+- **kwargs** (*Any*) -
+The additional request context options.
 
 **RETURN TYPE:**
 
 *None*
 
-This operation returns no value.
+**RETURNS:**
+
+Returns no value after the role description is updated successfully.
 
 **EXCEPTIONS:**
 
 - **MilvusException**
-
-    This exception will be raised when any error occurs during this operation.
-
-- **ParamError**
-
-    This exception will be raised when a parameter value is invalid.
+Raised when the server rejects the request or the RPC fails. Inspect the server error message for exact failure details.
 
 ## Examples
 
+Demonstrates alter role usage.
+
 ```python
-client.alter_role(
-    role_name="analytics_reader",
-    description="Grants read-only access to analytics collections",
-)
+from pymilvus import MilvusClient
+
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
+client.create_user("analyst", "Milvus123", description="Analytics account")
+client.update_user("analyst", description="Updated analytics account")
+client.create_role("read_only", description="Read-only role")
+client.alter_role("read_only", description="Updated read-only role")
+print(client.describe_user("analyst"))
+print(client.describe_role("read_only"))
 ```
