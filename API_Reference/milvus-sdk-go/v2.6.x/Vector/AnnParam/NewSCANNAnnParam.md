@@ -18,7 +18,7 @@ func NewSCANNAnnParam(nprobe int, reorderK int) scannAnnParam
 
 **RETURNS:**
 
-*AnnParam*
+*[AnnParam](AnnParam.md)*
 
 An ANN search parameter instance. Pass this to a search option via `WithAnnParam()`.
 

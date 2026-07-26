@@ -1,6 +1,6 @@
 # renameCollection()
 
-This operation renames an existing collection.
+Renames a collection and can move it to another database.
 
 ```java
 public void renameCollection(RenameCollectionReq request)
@@ -9,57 +9,47 @@ public void renameCollection(RenameCollectionReq request)
 ## Request Syntax
 
 ```java
-renameCollection(RenameCollectionReq.builder()
-    .databaseName(String databaseName)
-    .collectionName(String collectionName)
-    .newCollectionName(String newCollectionName)
-    .build()
-);
+RenameCollectionReq.builder()
+    .databaseName(databaseName)
+    .collectionName(collectionName)
+    .newCollectionName(newCollectionName)
+    .targetDbName(targetDbName)
+    .build();
 ```
 
 **BUILDER METHODS:**
 
-- `databaseName(String databaseName)` -
+- `databaseName(String databaseName)`
 
-    The name of the database. Defaults to the current database if not specified.
+    The name of the database that contains the target resource.
 
-- `collectionName(String collectionName)` -
+- `collectionName(String collectionName)`
 
     The name of the target collection.
 
-- `newCollectionName(String newCollectionName)` -
+- `newCollectionName(String newCollectionName)`
 
-    The new name for the collection.
+    The new name to assign to the collection.
 
-**RETURNS:**
+- `targetDbName(String targetDbName)`
 
-*void*
+    The name of the database to which the collection is moved.
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **MilvusClientExceptions**
 
-    This exception will be raised when any error occurs during this operation.
+    Raised when any error occurs during this operation. Inspect the exception message for the exact failure reason.
 
 ## Example
 
+Renames a collection and can move it to another database.
+
 ```java
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
-import io.milvus.v2.service.collection.request.RenameCollectionReq;
-
-// 1. Set up a client
-ConnectConfig connectConfig = ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
-        .build();
-        
-MilvusClientV2 client = new MilvusClientV2(connectConfig);
-
-// 2. Rename collection "test" to "test2"
-RenameCollectionReq renameCollectionReq = RenameCollectionReq.builder()
-        .collectionName("test")
-        .newCollectionName("test2")
-        .build();
-client.renameCollection(renameCollectionReq);
+client.renameCollection(RenameCollectionReq.builder()
+    .databaseName("default")
+    .collectionName("books")
+    .newCollectionName("archive_books")
+    .targetDbName("archive")
+    .build());
 ```

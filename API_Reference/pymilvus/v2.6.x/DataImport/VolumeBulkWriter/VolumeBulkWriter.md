@@ -1,14 +1,11 @@
 # VolumeBulkWriter
 
-A VolumeBulkWriter instance rewrites your raw data locally in a format that Milvus understands, and then uploads the resulting files to a remote volume in Zilliz Cloud.
+Adds connection and local output-path behavior.
+
+## Request Syntax
 
 ```python
-class pymilvus.bulk_writer.VolumeBulkWriter(LocalBulkWriter)
-```
-
-## Constructor
-
-```python
+# include-start zilliz
 VolumeBulkWriter(
     schema: CollectionSchema,
     remote_path: str,
@@ -18,109 +15,39 @@ VolumeBulkWriter(
     chunk_size: int = 1024 * MB,
     file_type: BulkFileType = BulkFileType.PARQUET,
     config: Optional[dict] = None,
+    connect_type: ConnectType = ConnectType.AUTO,
     **kwargs,
 )
+# include-end
 ```
 
 **PARAMETERS:**
 
-- **schema** (*[CollectionSchema](../../MilvusClient/CollectionSchema/CollectionSchema.md)*) -
+**RETURN TYPE:**
 
-    **[REQUIRED]**
+*VolumeBulkWriter*
 
-    The schema of a target collection to which the rewritten data is to be imported.
+**RETURNS:**
 
-- **remote_path** (*str*) -
+A writer that stages bulk files locally and uploads committed files to the configured Zilliz Cloud volume.
 
-    **[REQUIRED]**
+**EXCEPTIONS:**
 
-    The path to the directory in the remote volume that is to hold the rewritten data.
-
-- **cloud_endpoint** (*str*) -
-
-    **[REQUIRED]**
-
-    The endpoint URL of the Zilliz Cloud instance.
-
-- **api_key** (*str*) -
-
-    **[REQUIRED]**
-
-    The API key used to authenticate with the Zilliz Cloud instance.
-
-- **volume_name** (*str*) -
-
-    **[REQUIRED]**
-
-    The name of the remote volume in Zilliz Cloud to which the files are uploaded.
-
-- **chunk_size** (*int*) -
-
-    The maximum size of a file segment.
-
-    While rewriting your raw data, Milvus segments the data into batches and stores each batch in a separate file.
-
-    The value defaults to 1,073,741,824 in bytes, which is 1 GB.
-
-- **file_type** (*[BulkFileType](../BulkFileType.md)*) -
-
-    The file type of the output files.
-
-    The value defaults to *BulkFileType.PARQUET*.
-
-- **config** (*dict*) -
-
-    Optional configuration parameters for the bulk writer.
-
-**Notes**
-
-A VolumeBulkWriter is a context manager and can be used in a `with` statement. When the context exits, the local working directory is cleaned up.
-
-## Properties
-
-The following are the properties of the VolumeBulkWriter class.
-
-- **data_path** (*str*)
-
-    Returns the remote path where the uploaded files are stored.
-
-- **batch_files** (*List[List[str]]*)
-
-    Returns the list of uploaded file batches. Each inner list contains the remote paths of files uploaded in a single commit.
+- **MilvusException**
+Raised when the server rejects the request or the RPC fails. Inspect the server error message for exact failure details.
 
 ## Examples
 
 ```python
-from pymilvus.bulk_writer.volume_bulk_writer import VolumeBulkWriter
-from pymilvus import CollectionSchema, FieldSchema, DataType
+# include-start zilliz
+from pymilvus.bulk_writer import VolumeFileManager, VolumeManager
 
-# Define collection schema
-fields = [
-    FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, auto_id=False),
-    FieldSchema(name="vector", dtype=DataType.FLOAT_VECTOR, dim=128),
-]
-schema = CollectionSchema(fields, "example_collection")
+manager = VolumeManager(cloud_endpoint="https://api.cloud.zilliz.com", api_key="YOUR_API_KEY")
+manager.create_volume(project_id="proj-xxxx", region_id="aws-us-west-2", volume_name="book-volume", volume_type="EXTERNAL")
+manager.describe_volume("book-volume")
+manager.list_volumes(project_id="proj-xxxx", volume_type="EXTERNAL")
 
-# Create VolumeBulkWriter
-with VolumeBulkWriter(
-    schema=schema,
-    remote_path="/data/bulk_import",
-    cloud_endpoint="https://your-cloud-endpoint.zillizcloud.com",
-    api_key="your-api-key",
-    volume_name="my-volume",
-    chunk_size=1024 * 1024 * 1024,
-    file_type=BulkFileType.PARQUET,
-) as writer:
-    # Append rows
-    for i in range(1000):
-        writer.append_row({
-            "id": i,
-            "vector": [0.1] * 128,
-        })
-
-    # Commit and upload
-    writer.commit()
-
-    print(writer.data_path)
-    print(writer.batch_files)
+file_manager = VolumeFileManager(cloud_endpoint="https://api.cloud.zilliz.com", api_key="YOUR_API_KEY", volume_name="book-volume")
+file_manager.upload_file_to_volume(source_file_path="./data/books.parquet", target_volume_path="datasets/books/books.parquet", upload_concurrency=4)
+# include-end
 ```

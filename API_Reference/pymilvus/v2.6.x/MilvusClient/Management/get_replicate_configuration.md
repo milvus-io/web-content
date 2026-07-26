@@ -1,6 +1,6 @@
 # get_replicate_configuration()
 
-This operation retrieves the current cross-cluster replication configuration from Milvus so you can inspect cluster topology, pchannel assignments, and failover state before orchestration changes.
+Adds replication configuration retrieval. Async variant shares the sync method contract.
 
 ## Request Syntax
 
@@ -8,38 +8,39 @@ This operation retrieves the current cross-cluster replication configuration fro
 get_replicate_configuration(
     timeout: Optional[float] = None,
     **kwargs,
-)
+) -> ReplicateConfiguration
 ```
 
 **PARAMETERS:**
 
-- **timeout** (*float*) -
+- **timeout** (*Optional[float]*) -
+Default: `None`
+The maximum time, in seconds, to wait for the RPC.
 
-    Optional RPC timeout in seconds. If omitted, the client waits according to the default request timeout behavior.
-
-- **kwargs** (*dict*) -
-
-    Optional request context parameters, such as database routing context or request-scoped metadata.
+- **kwargs** (*Any*) -
+The additional request arguments.
 
 **RETURN TYPE:**
 
 *ReplicateConfiguration*
 
-The current replication configuration, including configured clusters and cross-cluster topology relationships.
+**RETURNS:**
+
+Current replication configuration returned by Milvus.
 
 **EXCEPTIONS:**
 
 - **MilvusException**
-
-    Raised when the RPC fails or the server returns a non-success status.
+Raised when the server rejects the request or the RPC fails. Inspect the server error message for exact failure details.
 
 ## Examples
+
+Demonstrates get replicate configuration usage.
 
 ```python
 from pymilvus import MilvusClient
 
 client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
 config = client.get_replicate_configuration()
-
 print(config)
 ```

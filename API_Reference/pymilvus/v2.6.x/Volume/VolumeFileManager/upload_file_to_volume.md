@@ -1,6 +1,6 @@
 # upload_file_to_volume()
 
-This operation uploads the local file at the specified source path to the target file path within the specified managed volume.
+Adds concurrency, retry, multipart-size, path, and progress callback controls.
 
 <div class="alert note">
 
@@ -11,75 +11,46 @@ This applies only to managed volumes. External volumes are read-only.
 ## Request Syntax
 
 ```python
+# include-start zilliz
 upload_file_to_volume(
     source_file_path: str,
-    target_volume_path: str
-)
+    target_volume_path: str,
+    upload_concurrency: int = 5,
+    max_retries: int = 5,
+    retry_interval: float = 5.0,
+    progress_callback: Callable[[UploadProgress], None] | None = None,
+    part_size: int = 0,
+) -> dict
+# include-end
 ```
 
-**PARAMETERS**
+**PARAMETERS:**
 
-- **source_file_path** (*str*) -
+**RETURN TYPE:**
 
-    **[REQUIRED]**
+*dict*
 
-    The path to the local data file to be uploaded to the specified volume.
+**RETURNS:**
 
-- **target_volume_path** (*str*) -
+Dictionary containing volumeName, volume_name, and the uploaded target path.
 
-    **[REQUIRED]**
+**EXCEPTIONS:**
 
-    The path to the data file within the specified volume after this operation.
+- **MilvusException**
+Raised when the server rejects the request or the RPC fails. Inspect the server error message for exact failure details.
 
-**RETURN TYPE**
-
-An object.
-
-**RETURNS**
-
-An object with the following data structure:
+## Examples
 
 ```python
-{
-    "volumeName": "my_volume",
-    "path": "path/to/your/data/file/in/the/volume"
-}
-```
+# include-start zilliz
+from pymilvus.bulk_writer import VolumeFileManager, VolumeManager
 
-- **volumeName** (*str*) -
+manager = VolumeManager(cloud_endpoint="https://api.cloud.zilliz.com", api_key="YOUR_API_KEY")
+manager.create_volume(project_id="proj-xxxx", region_id="aws-us-west-2", volume_name="book-volume", volume_type="EXTERNAL")
+manager.describe_volume("book-volume")
+manager.list_volumes(project_id="proj-xxxx", volume_type="EXTERNAL")
 
-    **[REQUIRED]**
-
-    The name of the target volume of this operation.
-
-- **path** (*str*) -
-
-    **[REQUIRED]**
-
-    The path to the data file within the specified volume after this operation.
-
-## Example
-
-```python
-from pymilvus.bulk_writer.volume_file_manager import VolumeFileManager
-
-volume_file_manager = VolumeFileManager(
-    cloud_endpoint="https://api.cloud.zilliz.com",
-    api_key="YOUR_API_KEY",
-    volume_name="my_volume"
-)
-
-result = volume_file_manager.upload_file_to_volume(
-    source_file_path="/path/to/your/local/data/file", 
-    target_volume_path="data/"
-)
-
-print(f"\nuploadFileToVolume results\n: {result}")
-
-# target_volume_path results: 
-# 
-# {
-#     "volumeName": "my_volume",
-#     "path": "data/"
-# }
+file_manager = VolumeFileManager(cloud_endpoint="https://api.cloud.zilliz.com", api_key="YOUR_API_KEY", volume_name="book-volume")
+file_manager.upload_file_to_volume(source_file_path="./data/books.parquet", target_volume_path="datasets/books/books.parquet", upload_concurrency=4)
+# include-end
 ```

@@ -1,6 +1,6 @@
 # updateUser()
 
-This operation updates the description of an existing user without changing the user password.
+Updates the description of an existing user.
 
 ```java
 public void updateUser(UpdateUserReq request)
@@ -9,44 +9,35 @@ public void updateUser(UpdateUserReq request)
 ## Request Syntax
 
 ```java
-client.updateUser(UpdateUserReq.builder()
-    .userName(String userName)
-    .description(String description)
-    .build()
-);
+UpdateUserReq.builder()
+    .userName(userName)
+    .description(description)
+    .build();
 ```
 
 **BUILDER METHODS:**
 
 - `userName(String userName)`
 
-    **[REQUIRED]**
-
-    The name of the user to update.
+    The name of the user account.
 
 - `description(String description)`
 
-    The new description of the user. Use an empty string to clear the description.
-
-**RETURNS:**
-
-*void*
-
-This operation returns no value.
+    The human-readable description of the user account.
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **MilvusClientExceptions**
 
-    This exception will be raised when any error occurs during this operation.
+    Raised when any error occurs during this operation. Inspect the exception message for the exact failure reason.
 
 ## Example
 
-```java
-import io.milvus.v2.service.rbac.request.UpdateUserReq;
+Updates the description of an existing user.
 
+```java
 client.updateUser(UpdateUserReq.builder()
-    .userName("analyst_user")
-    .description("Read-only analyst account")
+    .userName("alice")
+    .description("Senior analytics user")
     .build());
 ```

@@ -1,6 +1,6 @@
 # bulkImport()
 
-This operation imports the prepared data files to Milvus. To learn how to prepare your data files, read [Prepare Source Data](https://milvus.io/docs/prepare-source-data.md).
+Creates a bulk import job from prepared data files in Milvus or Zilliz Cloud.
 
 ```java
 public static String bulkImport(String url, BaseImportRequest request)
@@ -8,88 +8,57 @@ public static String bulkImport(String url, BaseImportRequest request)
 
 ## Request Syntax
 
+Use this request when importing files into open-source Milvus.
+
 ```java
-bulkImport.bulkImport(
-    url, 
-    request
-)
+MilvusImportRequest.builder()
+    .apiKey(apiKey)
+    .dbName(dbName)
+    .collectionName(collectionName)
+    .partitionName(partitionName)
+    .files(files)
+    .options(options)
+    .build();
 ```
 
 **PARAMETERS:**
 
-- **url** (*String*) -
+- **apiKey** (*String*) -
+Milvus authentication in `username:password` form.
 
-    The endpoint of the connected Milvus instance.
+- **dbName** (*String*) -
+Default: `default`
+Target database name.
 
-- **request** (*[BaseImportRequest](bulkImport-2.md)*) -  
+- **collectionName** (*String*) -
+Target collection name.
 
-    A **BaseImportRequest** instance.
+- **partitionName** (*String*) -
+Default: `default`
+Target partition name when the collection does not use a partition key.
 
-**RETURN TYPE:**
+- **files** (*List<List<String>>*) -
+Files or file groups stored in the bucket accessible to Milvus.
 
-*String*
+- **options** (*Map<String, Object>*) -
+Additional import options passed to the server.
 
 **RETURNS:**
 
-The ID of the created import job.
+*String*
 
-## BaseImportRequest
-
-A **BaseImportRequest** instance is implemented in **MilvusImportRequest**.
-
-### MilvusImportRequest
-
-```java
-MilvusImportRequest.builder()
-    .dbName(String dbName)
-    .collectionName(String collectionName)
-    .partitionName(String partitionName)
-    .files(List<List<String>> files)
-    .build()
-```
-
-**BUILDER METHODS:**
-
-- `dbName(String dbName)`
-
-    The name of the target database. The value of this parameter defaults to `default`.
-
-- `collectionName(String collectionName)`
-
-    The name of a collection in the target cluster of this operation.
-
-- `partitionName(String partitionName)`
-
-    The name of the partition in the target cluster of this operation. The value defaults to `default`.
-
-- `files(List<List<String>> files)`
-
-    The list of string lists, each string list contains a singular row-based file path or multiple column-based file paths.
+A JSON response whose `data.jobId` identifies the created import job.
 
 ## Example
 
+Creates an import job for files accessible to Milvus.
+
 ```java
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import io.milvus.bulkwriter.request.import_.MilvusImportRequest;
-import io.milvus.bulkwriter.restful.BulkImportUtils;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-List<List<String>> batchFiles = new ArrayList<>();
-batchFiles.add(Collections.singletonList("bulk_data/1.parquet"));
-batchFiles.add(Collections.singletonList("bulk_data/2.parquet"));
-MilvusImportRequest milvusImportRequest = MilvusImportRequest.builder()
-        .collectionName(collectionName)
-        .files(batchFiles)
-        .build();
-String bulkImportResult = BulkImportUtils.bulkImport(url, milvusImportRequest);
-
-Gson GSON_INSTANCE = new Gson();
-JsonObject result = GSON_INSTANCE.fromJson(bulkImportResult, JsonObject.class);
-String jobId = result.getAsJsonObject("data").get("jobId").getAsString();
-System.out.println("Create a bulkInert task, job id: " + jobId);
+MilvusImportRequest request = MilvusImportRequest.builder()
+    .collectionName("books")
+    .files(List.of(List.of("bulk_data/books.parquet")))
+    .apiKey("root:Milvus")
+    .build();
+String response = BulkImportUtils.bulkImport("http://localhost:19530", request);
 ```
 

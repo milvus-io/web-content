@@ -35,7 +35,7 @@ result, err := client.SearchIterator(ctx, option)
 
     The name of the target collection.
 
-- **vector** (*entity.Vector*)
+- **[vector](Vector.md)** (*entity.Vector*)
 
     The query vectors for similarity search.
 
