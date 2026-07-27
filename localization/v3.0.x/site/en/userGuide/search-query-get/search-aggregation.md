@@ -48,15 +48,16 @@ beta: Milvus 3.0.x
       </svg>
     </button></h2><p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v3.0.x/assets/search-aggregation-bucketing.png" alt="Three-stage Search Aggregation workflow from ANN retrieval to bucket results" class="doc-image" id="three-stage-search-aggregation-workflow-from-ann-retrieval-to-bucket-results" />
-    <span>Three-stage Search Aggregation workflow from ANN retrieval to bucket results</span>
+    <img translate="no" src="/docs/v3.0.x/assets/search-aggregation-bucketing.png" alt="ANN candidates grouped by bucket keys and returned with counts, metrics, and representative hits" class="doc-image" id="ann-candidates-grouped-by-bucket-keys-and-returned-with-counts,-metrics,-and-representative-hits" />
+    <span>ANN candidates grouped by bucket keys and returned with counts, metrics, and representative hits</span>
   </span>
 </p>
 <ol>
 <li><p><strong>Retrieve candidates.</strong> Milvus runs ANN search to create a retrieval pool of entities that are closest to the query vector. Search Aggregation operates on this pool rather than on every entity in the collection, so the pool determines which entities can contribute to the buckets.</p></li>
-<li><p><strong>Build buckets.</strong> <code translate="no">SearchAggregation.fields</code> specifies the scalar fields that form each bucket key. In the figure, <code translate="no">brand</code> places the six candidates into Nike, Adidas, and Puma buckets. When you specify multiple fields, entities share a bucket only when their field-value combinations match.</p></li>
-<li><p><strong>Calculate and return results.</strong> Milvus calculates the configured metrics for each bucket, orders the completed buckets, and uses <code translate="no">TopHits</code> to select representative entities. Each bucket in <code translate="no">result.agg_buckets</code> contains its key, count, metrics, hits, and optional child buckets.</p></li>
+<li><p><strong>Build buckets.</strong> <code translate="no">SearchAggregation.fields</code> defines the bucket key. Each unique combination of field values creates a separate key. In the figure, <code translate="no">fields=[&quot;brand&quot;]</code> creates <code translate="no">(Nike)</code>, <code translate="no">(Adidas)</code>, and <code translate="no">(Puma)</code> bucket keys. All retrieved entities with the same key belong to the same bucket and contribute to its <code translate="no">count</code>. <code translate="no">SearchAggregation.size</code> limits how many buckets Milvus returns; it does not limit how many entities belong to each bucket.</p></li>
+<li><p><strong>Calculate and return results.</strong> Each returned bucket contains its key and retrieval-pool entity count. Milvus can also calculate configured metrics, order the buckets, and return representative entities. <code translate="no">TopHits.size</code> controls how many representative entities are returned from each bucket. Each bucket in <code translate="no">result.agg_buckets</code> contains its key, count, metrics, hits, and optional child buckets.</p></li>
 </ol>
+<p>In the diagram, the four entity IDs inside the Nike bucket produce <code translate="no">count: 4</code>. The three brand cards illustrate three returned buckets, while the two product cards in the completed Nike bucket illustrate two representative hits.</p>
 <p>With <code translate="no">sub_aggregation</code>, Milvus repeats steps 2 and 3 inside each parent bucket. Because every stage operates on the ANN retrieval pool, changes in search recall can change bucket counts, metrics, ordering, hits, and nested results.</p>
 <h2 id="Limits" class="common-anchor-header">Limits<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -79,7 +80,7 @@ beta: Milvus 3.0.x
 <li><p><strong>Fields used to create bucket keys:</strong> <code translate="no">SearchAggregation.fields</code> does not support <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, vector, <code translate="no">JSON</code>, or dynamic fields.</p></li>
 <li><p><strong>Metric and sorting fields:</strong> <code translate="no">metrics</code> and <code translate="no">TopHits.sort</code> do not support <code translate="no">JSON</code> or dynamic fields.</p></li>
 <li><p><strong>Repeated fields:</strong> The same field cannot appear in more than one <code translate="no">SearchAggregation.fields</code> list. For example, if the root aggregation uses <code translate="no">fields=[&quot;category&quot;]</code>, a nested <code translate="no">sub_aggregation</code> cannot also use <code translate="no">fields=[&quot;category&quot;]</code>.</p></li>
-<li><p><strong>Unsupported combinations:</strong> Search Aggregation cannot be combined with <code translate="no">offset</code>, Search Iterators, Hybrid Search, a Highlighter, <code translate="no">group_by_field</code>, or <code translate="no">group_by_fields</code>.</p></li>
+<li><p><strong>Unsupported combinations:</strong> Search Aggregation cannot be combined with <code translate="no">offset</code>, Search Iterators, Hybrid Search, a Highlighter, or Grouping Search.</p></li>
 <li><p><strong>Returned entries:</strong> Keep the configured maximum number of result entries at or below 10,000. Calculate this maximum as:</p>
 <p><code translate="no">number of query vectors × size at every aggregation level × largest TopHits.size at any level</code></p>
 <p>Use <code translate="no">1</code> for the last factor when no level configures <code translate="no">TopHits</code>. For example, one query vector, 10 root buckets, five child buckets per root bucket, and two hits per child bucket produce a configured maximum of:</p>
@@ -100,16 +101,15 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Choose the example that matches what you want to configure:</p>
+    </button></h2><p>Choose an example based on what you want to accomplish:</p>
 <table>
 <thead>
-<tr><th>Goal</th><th>Key settings</th><th>Example</th></tr>
+<tr><th>Go to</th><th>Description</th><th>Key settings</th></tr>
 </thead>
 <tbody>
-<tr><td>Build bucket keys</td><td><code translate="no">fields</code>, <code translate="no">size</code></td><td><a href="#Build-bucket-keys">Build bucket keys</a></td></tr>
-<tr><td>Calculate statistics and order buckets</td><td><code translate="no">metrics</code>, <code translate="no">order</code></td><td><a href="#Calculate-metrics-and-order-buckets">Calculate metrics and order buckets</a></td></tr>
-<tr><td>Return and sort representative hits</td><td><code translate="no">top_hits</code>, <code translate="no">TopHits.size</code>, <code translate="no">TopHits.sort</code></td><td><a href="#Return-and-sort-representative-hits">Return and sort representative hits</a></td></tr>
-<tr><td>Create hierarchical results</td><td><code translate="no">sub_aggregation</code></td><td><a href="#Create-nested-buckets">Create nested buckets</a></td></tr>
+<tr><td><a href="#Compare-and-sort-buckets">Compare and sort buckets</a></td><td>Calculate per-bucket statistics to compare buckets, then sort the returned buckets by metrics, counts, or keys.</td><td><code translate="no">fields</code>, <code translate="no">size</code>, <code translate="no">metrics</code>, <code translate="no">order</code></td></tr>
+<tr><td><a href="#Show-representative-results-from-each-bucket">Show representative results from each bucket</a></td><td>Return a limited number of entities from each bucket and sort those entities independently by scalar fields or vector score.</td><td><code translate="no">top_hits</code>, <code translate="no">TopHits.size</code>, <code translate="no">TopHits.sort</code></td></tr>
+<tr><td><a href="#Group-results-at-multiple-levels">Group results at multiple levels</a></td><td>Organize results into parent and child bucket levels to analyze multiple dimensions in sequence.</td><td><code translate="no">sub_aggregation</code></td></tr>
 </tbody>
 </table>
 <p>The examples below use a product collection with brand, category, color, price, and rating fields. Expand the following section to create the collection and define the shared search variables.</p>
@@ -149,6 +149,8 @@ client.create_collection(
     collection_name=collection_name,
     schema=schema,
     index_params=index_params,
+    <span class="hljs-comment"># Make preceding writes visible to searches from this client.</span>
+    consistency_level=<span class="hljs-string">&quot;Session&quot;</span>,
 )
 
 client.insert(
@@ -245,7 +247,6 @@ client.insert(
     ],
 )
 
-client.flush(collection_name)
 client.load_collection(collection_name)
 
 query_vector = [<span class="hljs-number">0.11</span>, <span class="hljs-number">0.40</span>, <span class="hljs-number">0.19</span>, <span class="hljs-number">0.64</span>, <span class="hljs-number">0.30</span>]
@@ -256,7 +257,7 @@ search_params = {
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <p>The setup above configures <code translate="no">COSINE</code> for both the vector index and the search parameters. Therefore, later examples use <code translate="no">{&quot;_score&quot;: &quot;desc&quot;}</code> to place higher cosine similarity first. For a distance metric such as <code translate="no">L2</code>, use <code translate="no">{&quot;_score&quot;: &quot;asc&quot;}</code>.</p>
-<h3 id="Build-bucket-keys" class="common-anchor-header">Build bucket keys<button data-href="#Build-bucket-keys" class="anchor-icon" translate="no">
+<h3 id="Compare-and-sort-buckets" class="common-anchor-header">Compare and sort buckets<button data-href="#Compare-and-sort-buckets" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -271,24 +272,28 @@ search_params = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Start by creating a <code translate="no">SearchAggregation</code> object. The following configuration creates one bucket for each distinct <code translate="no">brand</code> value and selects up to three buckets to return:</p>
+    </button></h3><p>Use this pattern when you need to compare groups of retrieved entities using calculated statistics and control the order in which the buckets are returned. In this example, Milvus groups retrieved products by <code translate="no">brand</code>, calculates price metrics for each brand bucket, and sorts the buckets by average price.</p>
+<p>If your goal is only to improve result diversity by returning one or more entities per field value, use <a href="/docs/grouping-search.md">Grouping Search</a> instead.</p>
+<p>The following configuration creates up to three brand buckets, calculates metrics for each bucket, and sorts the buckets by average price:</p>
 <pre><code translate="no" class="language-python">aggregation = SearchAggregation(
-    <span class="hljs-comment"># Form one bucket for each distinct brand value.</span>
-    fields=[<span class="hljs-string">&quot;brand&quot;</span>],
-    <span class="hljs-comment"># Return up to three buckets at this aggregation level.</span>
-    size=<span class="hljs-number">3</span>,
+<span class="highlighted-comment-line">    <span class="hljs-comment"># Form one bucket for each distinct brand value.</span></span>
+<span class="highlighted-comment-line">    fields=[<span class="hljs-string">&quot;brand&quot;</span>],</span>
+<span class="highlighted-comment-line">    <span class="hljs-comment"># Return up to three buckets at this aggregation level.</span></span>
+<span class="highlighted-comment-line">    size=<span class="hljs-number">3</span>,</span>
+<span class="highlighted-comment-line">    <span class="hljs-comment"># Calculate named metrics for every selected bucket.</span></span>
+<span class="highlighted-comment-line">    metrics={</span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;product_count&quot;</span>: {<span class="hljs-string">&quot;count&quot;</span>: <span class="hljs-string">&quot;*&quot;</span>},</span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;avg_price&quot;</span>: {<span class="hljs-string">&quot;avg&quot;</span>: <span class="hljs-string">&quot;price&quot;</span>},</span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;min_price&quot;</span>: {<span class="hljs-string">&quot;min&quot;</span>: <span class="hljs-string">&quot;price&quot;</span>},</span>
+<span class="highlighted-comment-line">    },</span>
+<span class="highlighted-comment-line">    <span class="hljs-comment"># Sort buckets by average price, highest first.</span></span>
+<span class="highlighted-comment-line">    order=[</span>
+<span class="highlighted-comment-line">        {<span class="hljs-string">&quot;avg_price&quot;</span>: <span class="hljs-string">&quot;desc&quot;</span>},</span>
+<span class="highlighted-comment-line">        <span class="hljs-comment"># If average prices are equal, sort by bucket key in ascending order.</span></span>
+<span class="highlighted-comment-line">        {<span class="hljs-string">&quot;_key&quot;</span>: <span class="hljs-string">&quot;asc&quot;</span>},</span>
+<span class="highlighted-comment-line">    ],</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>The commonly used parameters are:</p>
-<table>
-<thead>
-<tr><th>Parameter</th><th>Value in this example</th><th>Purpose</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">fields</code></td><td><code translate="no">[&quot;brand&quot;]</code></td><td>A non-empty list of scalar fields that form the bucket key. One field creates a one-part key.</td></tr>
-<tr><td><code translate="no">size</code></td><td><code translate="no">3</code></td><td>The maximum number of buckets returned at this aggregation level.</td></tr>
-</tbody>
-</table>
 <p>Pass the object to the <code translate="no">search_aggregation</code> parameter of <code translate="no">MilvusClient.search()</code>:</p>
 <pre><code translate="no" class="language-python">result = client.search(
     collection_name=collection_name,
@@ -316,11 +321,15 @@ search_params = {
       <span class="hljs-punctuation">{</span>
         <span class="hljs-attr">&quot;field_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">103</span><span class="hljs-punctuation">,</span>
         <span class="hljs-attr">&quot;field_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;brand&quot;</span><span class="hljs-punctuation">,</span>
-        <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Nike&quot;</span>
+        <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Adidas&quot;</span>
       <span class="hljs-punctuation">}</span>
     <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;count&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;metrics&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;metrics&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;product_count&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;avg_price&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">159.99</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;min_price&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">159.99</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;hits&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;sub_groups&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span>
   <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
@@ -329,11 +338,15 @@ search_params = {
       <span class="hljs-punctuation">{</span>
         <span class="hljs-attr">&quot;field_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">103</span><span class="hljs-punctuation">,</span>
         <span class="hljs-attr">&quot;field_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;brand&quot;</span><span class="hljs-punctuation">,</span>
-        <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Adidas&quot;</span>
+        <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Nike&quot;</span>
       <span class="hljs-punctuation">}</span>
     <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;count&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;metrics&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;metrics&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;product_count&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;avg_price&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">129.99</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;min_price&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">129.99</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;hits&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;sub_groups&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span>
   <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
@@ -346,7 +359,11 @@ search_params = {
       <span class="hljs-punctuation">}</span>
     <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;count&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;metrics&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;metrics&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;product_count&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;avg_price&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">119.99</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;min_price&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">119.99</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;hits&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;sub_groups&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span>
   <span class="hljs-punctuation">}</span>
@@ -354,88 +371,70 @@ search_params = {
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <p>For the single query vector in this guide, read the returned top-level buckets from <code translate="no">result.agg_buckets[0]</code>. Each bucket exposes its <code translate="no">key</code>, retrieval-pool entity <code translate="no">count</code>, calculated <code translate="no">metrics</code>, representative <code translate="no">hits</code>, and nested buckets in <code translate="no">sub_groups</code>.</p>
-<p>The following sections redefine <code translate="no">aggregation</code> for other use cases. Pass the updated object to the same <code translate="no">search_aggregation</code> parameter and rerun the search call.</p>
+<p>Read the configuration as follows:</p>
+<table>
+<thead>
+<tr><th>Setting</th><th>What it controls</th><th>In this example</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">fields</code></td><td>How Milvus creates bucket keys</td><td>Creates one bucket for each distinct <code translate="no">brand</code> value.</td></tr>
+<tr><td><code translate="no">size</code></td><td>The maximum number of returned buckets</td><td>Returns up to three brand buckets.</td></tr>
+<tr><td><code translate="no">metrics</code></td><td>The statistics calculated for each bucket</td><td>Calculates product count, average price, and minimum price.</td></tr>
+<tr><td><code translate="no">order</code></td><td>How Milvus sorts the returned buckets</td><td>Sorts by average price, then uses the bucket key to break ties.</td></tr>
+</tbody>
+</table>
 <p>Milvus ignores <code translate="no">limit</code> when <code translate="no">search_aggregation</code> is set. Use the root <code translate="no">SearchAggregation.size</code> value to control the number of top-level buckets.</p>
-<p>To create a composite bucket key, pass multiple field names in the same list:</p>
-<pre><code translate="no" class="language-python">aggregation = SearchAggregation(
-    <span class="hljs-comment"># Combine brand and color to form a composite bucket key.</span>
-    fields=[<span class="hljs-string">&quot;brand&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>],
-    size=<span class="hljs-number">6</span>,
-)
-<button class="copy-code-btn"></button></code></pre>
-<p>This configuration can produce keys such as <code translate="no">(Nike, black)</code>, <code translate="no">(Nike, blue)</code>, and <code translate="no">(Adidas, white)</code>. Two entities share a bucket only when both values match. Milvus preserves the list order, so <code translate="no">brand</code> is the first key component and <code translate="no">color</code> is the second. Pass multiple strings in one flat list; nested lists are not supported.</p>
-<p><code translate="no">size=6</code> is the maximum number of composite buckets returned at this aggregation level. The example data contains five distinct brand-color combinations, so all five can be returned. In the <a href="#Limits">returned-entry limit</a>, this request contributes <code translate="no">1 query vector × 6 buckets × 1 = 6</code> configured result entries.</p>
-<h3 id="Calculate-metrics-and-order-buckets" class="common-anchor-header">Calculate metrics and order buckets<button data-href="#Calculate-metrics-and-order-buckets" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>Add <code translate="no">metrics</code> and <code translate="no">order</code> when you need bucket statistics and a deterministic bucket order:</p>
-<pre><code translate="no" class="language-python">aggregation = SearchAggregation(
-    fields=[<span class="hljs-string">&quot;brand&quot;</span>],
-    size=<span class="hljs-number">3</span>,
-<span class="highlighted-comment-line">    <span class="hljs-comment"># Calculate named metrics for every selected bucket.</span></span>
-<span class="highlighted-comment-line">    metrics={</span>
-<span class="highlighted-comment-line">        <span class="hljs-string">&quot;product_count&quot;</span>: {<span class="hljs-string">&quot;count&quot;</span>: <span class="hljs-string">&quot;*&quot;</span>},</span>
-<span class="highlighted-comment-line">        <span class="hljs-string">&quot;avg_price&quot;</span>: {<span class="hljs-string">&quot;avg&quot;</span>: <span class="hljs-string">&quot;price&quot;</span>},</span>
-<span class="highlighted-comment-line">        <span class="hljs-string">&quot;min_price&quot;</span>: {<span class="hljs-string">&quot;min&quot;</span>: <span class="hljs-string">&quot;price&quot;</span>},</span>
-<span class="highlighted-comment-line">    },</span>
-<span class="highlighted-comment-line">    <span class="hljs-comment"># Sort buckets by average price, highest first.</span></span>
-<span class="highlighted-comment-line">    order=[</span>
-<span class="highlighted-comment-line">        {<span class="hljs-string">&quot;avg_price&quot;</span>: <span class="hljs-string">&quot;desc&quot;</span>},</span>
-<span class="highlighted-comment-line">        <span class="hljs-comment"># If average prices are equal, sort by bucket key in ascending order.</span></span>
-<span class="highlighted-comment-line">        {<span class="hljs-string">&quot;_key&quot;</span>: <span class="hljs-string">&quot;asc&quot;</span>},</span>
-<span class="highlighted-comment-line">    ],</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<p><strong>Define bucket metrics.</strong></p>
+<p>With these settings, Milvus returns the Adidas, Nike, and Puma buckets in descending <code translate="no">avg_price</code> order. The <code translate="no">_key</code> criterion applies only when buckets have the same average price. Because this configuration does not define <code translate="no">top_hits</code>, every bucket’s <code translate="no">hits</code> list is empty.</p>
+<p><details></p>
+<p><summary>Metric and ordering rules</summary></p>
 <p>Each <code translate="no">SearchAggregation.metrics</code> entry maps a user-defined alias to <code translate="no">{operation: source}</code>:</p>
 <table>
 <thead>
-<tr><th>Alias</th><th>Operation</th><th>Source</th><th>Result</th></tr>
+<tr><th>Source</th><th>Supported operations</th><th>Behavior</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">product_count</code></td><td><code translate="no">count</code></td><td><code translate="no">&quot;*&quot;</code></td><td>Counts every retrieval-pool entity assigned to the bucket.</td></tr>
-<tr><td><code translate="no">avg_price</code></td><td><code translate="no">avg</code></td><td><code translate="no">price</code></td><td>Calculates the average of the non-null <code translate="no">price</code> values.</td></tr>
-<tr><td><code translate="no">min_price</code></td><td><code translate="no">min</code></td><td><code translate="no">price</code></td><td>Returns the lowest non-null <code translate="no">price</code> value.</td></tr>
+<tr><td>A field name</td><td><code translate="no">count</code>, <code translate="no">sum</code>, <code translate="no">avg</code>, <code translate="no">min</code>, <code translate="no">max</code></td><td><code translate="no">count</code> counts non-null field values. The other operations calculate over supported values and skip <code translate="no">NULL</code>.</td></tr>
+<tr><td><code translate="no">&quot;*&quot;</code></td><td><code translate="no">count</code></td><td>Counts every retrieval-pool entity assigned to the bucket. The result matches <code translate="no">bucket.count</code>.</td></tr>
+<tr><td><code translate="no">_score</code></td><td><code translate="no">sum</code>, <code translate="no">avg</code>, <code translate="no">min</code>, <code translate="no">max</code></td><td>Aggregates the ANN similarity or distance values of entities in the bucket.</td></tr>
 </tbody>
 </table>
-<p>Search Aggregation supports these metric operations:</p>
-<ul>
-<li><code translate="no">count</code> accepts the special source <code translate="no">&quot;*&quot;</code> to count every entity in the bucket, or a field name to count entities whose field value is not <code translate="no">NULL</code>. For example, if a bucket contains 10 entities and two have <code translate="no">price</code> set to <code translate="no">NULL</code>, a <code translate="no">count</code> metric with source <code translate="no">&quot;*&quot;</code> returns 10, while one with source <code translate="no">&quot;price&quot;</code> returns 8.</li>
-<li><code translate="no">sum</code>, <code translate="no">avg</code>, <code translate="no">min</code>, and <code translate="no">max</code> accept a supported numeric field or the built-in <code translate="no">_score</code> source, which represents the ANN similarity or distance. These operations skip <code translate="no">NULL</code> values.</li>
-</ul>
-<p>To order buckets by a value derived from <code translate="no">_score</code>, define a metric alias based on <code translate="no">_score</code>, and then use that alias in <code translate="no">order</code>. <code translate="no">_score</code> is not a direct bucket-order key. For example, because this guide uses <code translate="no">COSINE</code>, define <code translate="no">&quot;max_score&quot;: {&quot;max&quot;: &quot;_score&quot;}</code> in <code translate="no">metrics</code>, and then use <code translate="no">{&quot;max_score&quot;: &quot;desc&quot;}</code> in <code translate="no">order</code>. This places buckets whose best-matching entity has the higher similarity score first.</p>
-<p><strong>Order buckets.</strong></p>
-<p><code translate="no">SearchAggregation.order</code> controls the order of the returned buckets. Each entry maps a sort key to <code translate="no">&quot;asc&quot;</code> or <code translate="no">&quot;desc&quot;</code>. Milvus evaluates multiple entries from first to last.</p>
-<p>The sort key can be:</p>
-<ul>
-<li>a metric alias defined in <code translate="no">metrics</code> at the same aggregation level, such as <code translate="no">avg_price</code>;</li>
-<li>the built-in <code translate="no">_count</code> key, which represents the number of retrieval-pool entities in the bucket; or</li>
-<li>the built-in <code translate="no">_key</code> key, which represents the bucket key rather than a collection field named <code translate="no">_key</code>.</li>
-</ul>
-<p>If you omit <code translate="no">order</code>, Milvus keeps the bucket discovery order from the retrieval pool. Set <code translate="no">order</code> when buckets must follow a metric, count, or key.</p>
-<p>In this example:</p>
+<p><code translate="no">SearchAggregation.order</code> accepts the following keys:</p>
 <table>
 <thead>
-<tr><th>Entry</th><th>Effect</th></tr>
+<tr><th>Order key</th><th>Meaning</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">{&quot;avg_price&quot;: &quot;desc&quot;}</code></td><td>Orders buckets from highest to lowest <code translate="no">avg_price</code>.</td></tr>
-<tr><td><code translate="no">{&quot;_key&quot;: &quot;asc&quot;}</code></td><td>Breaks ties in ascending bucket-key order. With <code translate="no">fields=[&quot;brand&quot;]</code>, equal-price buckets follow lexical order: <code translate="no">Adidas</code>, <code translate="no">Nike</code>, then <code translate="no">Puma</code>. Buckets with different <code translate="no">avg_price</code> values are unaffected. With <code translate="no">fields=[&quot;brand&quot;, &quot;color&quot;]</code>, Milvus compares <code translate="no">brand</code> first and compares <code translate="no">color</code> only when the brand values are equal.</td></tr>
+<tr><td>A metric alias</td><td>Sorts by a value calculated in <code translate="no">metrics</code> at the same aggregation level, such as <code translate="no">avg_price</code>.</td></tr>
+<tr><td><code translate="no">_count</code></td><td>Sorts by the number of retrieval-pool entities in each bucket.</td></tr>
+<tr><td><code translate="no">_key</code></td><td>Sorts by the bucket key rather than a collection field named <code translate="no">_key</code>.</td></tr>
 </tbody>
 </table>
-<h3 id="Return-and-sort-representative-hits" class="common-anchor-header">Return and sort representative hits<button data-href="#Return-and-sort-representative-hits" class="anchor-icon" translate="no">
+<p>Each <code translate="no">order</code> entry maps a key to <code translate="no">&quot;asc&quot;</code> or <code translate="no">&quot;desc&quot;</code>. Milvus evaluates multiple entries from first to last. If you omit <code translate="no">order</code>, Milvus keeps the bucket discovery order from the retrieval pool.</p>
+<p>To sort buckets by vector match quality, first calculate a bucket-level metric from <code translate="no">_score</code>, and then use the metric alias in <code translate="no">order</code>. You cannot use <code translate="no">_score</code> directly as a bucket-order key because each bucket can contain multiple entity scores. For example, with <code translate="no">COSINE</code> or <code translate="no">IP</code>:</p>
+<pre><code translate="no" class="language-python">aggregation = SearchAggregation(
+    fields=[<span class="hljs-string">&quot;brand&quot;</span>],
+    size=<span class="hljs-number">3</span>,
+    metrics={<span class="hljs-string">&quot;max_score&quot;</span>: {<span class="hljs-string">&quot;max&quot;</span>: <span class="hljs-string">&quot;_score&quot;</span>}},
+    order=[{<span class="hljs-string">&quot;max_score&quot;</span>: <span class="hljs-string">&quot;desc&quot;</span>}],
+)
+<button class="copy-code-btn"></button></code></pre>
+<p>With <code translate="no">L2</code>, calculate the minimum <code translate="no">_score</code> value and sort the metric alias in ascending order so that buckets with the lowest distance come first.</p>
+<p></details></p>
+<p><details></p>
+<p><summary>Create composite bucket keys</summary></p>
+<p>To create a composite bucket key, pass multiple field names in the same list:</p>
+<pre><code translate="no" class="language-python">aggregation = SearchAggregation(
+<span class="highlighted-comment-line">    <span class="hljs-comment"># Combine brand and color to form a composite bucket key.</span></span>
+<span class="highlighted-comment-line">    fields=[<span class="hljs-string">&quot;brand&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>],</span>
+    size=<span class="hljs-number">6</span>,
+)
+<button class="copy-code-btn"></button></code></pre>
+<p>This configuration can produce keys such as <code translate="no">(Nike, black)</code>, <code translate="no">(Nike, blue)</code>, and <code translate="no">(Adidas, white)</code>. Two entities share a bucket only when both values match. Milvus preserves the list order, so <code translate="no">brand</code> is the first key component and <code translate="no">color</code> is the second. When <code translate="no">_key</code> is used in <code translate="no">order</code>, Milvus compares composite key components in the same order. Pass multiple strings in one flat list; nested lists are not supported.</p>
+<p><code translate="no">size=6</code> is the maximum number of composite buckets returned at this aggregation level. The example data contains five distinct brand-color combinations, so all five can be returned. In the <a href="#Limits">returned-entry limit</a>, this request contributes <code translate="no">1 query vector × 6 buckets × 1 = 6</code> configured result entries.</p>
+<p>Multiple fields in one <code translate="no">SearchAggregation.fields</code> list create a composite bucket key at that aggregation level. To create a parent-child bucket hierarchy, use a <a href="#Group-results-at-multiple-levels">nested aggregation</a>.</p>
+<p></details></p>
+<p>The examples that follow redefine <code translate="no">aggregation</code>. Pass the updated object to the same <code translate="no">search_aggregation</code> parameter and rerun the search call.</p>
+<h3 id="Show-representative-results-from-each-bucket" class="common-anchor-header">Show representative results from each bucket<button data-href="#Show-representative-results-from-each-bucket" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -450,7 +449,8 @@ search_params = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Use <code translate="no">TopHits</code> to return and sort representative entities from each selected bucket:</p>
+    </button></h3><p>Include representative entities when the application needs to show actual products from each bucket. In this example, Milvus returns up to two products from each brand bucket, ordered by rating and then by vector score.</p>
+<p>Configure <code translate="no">TopHits</code> as follows:</p>
 <pre><code translate="no" class="language-python">aggregation = SearchAggregation(
     fields=[<span class="hljs-string">&quot;brand&quot;</span>],
     size=<span class="hljs-number">3</span>,
@@ -519,7 +519,7 @@ search_params = {
 <p><code translate="no">SearchAggregation.order</code> sorts buckets, while <code translate="no">TopHits.sort</code> sorts entities inside each bucket. <code translate="no">TopHits.sort</code> accepts supported scalar field names and the built-in <code translate="no">_score</code> field, which represents the ANN similarity or distance. Milvus evaluates the <code translate="no">sort</code> entries from first to last. In this example, it orders products by <code translate="no">rating</code> from highest to lowest and uses <code translate="no">_score</code> only when two ratings are equal. Because the setup uses <code translate="no">COSINE</code>, descending <code translate="no">_score</code> places the more similar product first.</p>
 <p>The fields used by <code translate="no">TopHits.sort</code> do not have to appear in <code translate="no">output_fields</code>. However, only fields in <code translate="no">output_fields</code> are included in each returned hit’s <code translate="no">fields</code> mapping.</p>
 <p>Each returned <code translate="no">AggregationHit</code> exposes its primary key in <code translate="no">pk</code>, vector score in <code translate="no">score</code>, and requested output fields in <code translate="no">fields</code>.</p>
-<h3 id="Create-nested-buckets" class="common-anchor-header">Create nested buckets<button data-href="#Create-nested-buckets" class="anchor-icon" translate="no">
+<h3 id="Group-results-at-multiple-levels" class="common-anchor-header">Group results at multiple levels<button data-href="#Group-results-at-multiple-levels" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -534,7 +534,19 @@ search_params = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Use <code translate="no">sub_aggregation</code> to run another aggregation within each parent bucket. The child aggregation receives only the entities assigned to its parent bucket. The following configuration first groups products by category and then groups the products in each category by brand:</p>
+    </button></h3><p>Use nested aggregation when you need one level of buckets inside another. In this example, Milvus creates category buckets first, and then creates brand buckets within each category.</p>
+<p>The child aggregation receives only the entities assigned to its parent bucket. <code translate="no">fields</code> controls the bucket key at each aggregation level, while <code translate="no">sub_aggregation</code> creates the parent-child hierarchy.</p>
+<p>The configuration below creates a category bucket with the key <code translate="no">(running_shoes)</code>. Within that parent bucket, the child aggregation creates separate brand buckets with keys such as <code translate="no">(Nike)</code>, <code translate="no">(Adidas)</code>, and <code translate="no">(Puma)</code>.</p>
+<pre><code translate="no" class="language-text">Parent bucket key:
+(running_shoes)
+
+Child bucket keys:
+├── (Nike)
+├── (Adidas)
+└── (Puma)
+<button class="copy-code-btn"></button></code></pre>
+<p>Each level can independently use multiple fields. For example, using <code translate="no">fields=[&quot;brand&quot;, &quot;color&quot;]</code> in the child aggregation would create composite child keys such as <code translate="no">(Nike, black)</code>.</p>
+<p>The following configuration implements this hierarchy:</p>
 <pre><code translate="no" class="language-python">aggregation = SearchAggregation(
     fields=[<span class="hljs-string">&quot;category&quot;</span>],
     size=<span class="hljs-number">2</span>,
@@ -611,6 +623,7 @@ search_params = {
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
+<p>The displayed result represents the bucket path <code translate="no">(running_shoes) → (Adidas)</code>, not a single composite bucket key <code translate="no">(running_shoes, Adidas)</code>.</p>
 <p>Milvus first selects up to two category buckets, ordered by <code translate="no">product_count</code>. It then runs <code translate="no">sub_aggregation</code> independently within each selected category and returns up to three brand buckets, ordered by <code translate="no">avg_rating</code>.</p>
 <p>In the output above:</p>
 <ul>
