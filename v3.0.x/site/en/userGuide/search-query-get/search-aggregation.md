@@ -57,10 +57,10 @@ Choose the example that matches what you want to configure:
 
 | Goal | Key settings | Example |
 |---|---|---|
-| Build bucket keys | `fields`, `size` | [Build bucket keys](#build-bucket-keys) |
-| Calculate statistics and order buckets | `metrics`, `order` | [Calculate metrics and order buckets](#calculate-metrics-and-order-buckets) |
-| Return and sort representative hits | `top_hits`, `TopHits.size`, `TopHits.sort` | [Return and sort representative hits](#return-and-sort-representative-hits) |
-| Create hierarchical results | `sub_aggregation` | [Create nested buckets](#create-nested-buckets) |
+| Build bucket keys | `fields`, `size` | [Build bucket keys](#Build-bucket-keys) |
+| Calculate statistics and order buckets | `metrics`, `order` | [Calculate metrics and order buckets](#Calculate-metrics-and-order-buckets) |
+| Return and sort representative hits | `top_hits`, `TopHits.size`, `TopHits.sort` | [Return and sort representative hits](#Return-and-sort-representative-hits) |
+| Create hierarchical results | `sub_aggregation` | [Create nested buckets](#Create-nested-buckets) |
 
 The examples below use a product collection with brand, category, color, price, and rating fields. Expand the following section to create the collection and define the shared search variables.
 
@@ -325,7 +325,7 @@ aggregation = SearchAggregation(
 
 This configuration can produce keys such as `(Nike, black)`, `(Nike, blue)`, and `(Adidas, white)`. Two entities share a bucket only when both values match. Milvus preserves the list order, so `brand` is the first key component and `color` is the second. Pass multiple strings in one flat list; nested lists are not supported.
 
-`size=6` is the maximum number of composite buckets returned at this aggregation level. The example data contains five distinct brand-color combinations, so all five can be returned. In the [returned-entry limit](#limits), this request contributes `1 query vector × 6 buckets × 1 = 6` configured result entries.
+`size=6` is the maximum number of composite buckets returned at this aggregation level. The example data contains five distinct brand-color combinations, so all five can be returned. In the [returned-entry limit](#Limits), this request contributes `1 query vector × 6 buckets × 1 = 6` configured result entries.
 
 ### Calculate metrics and order buckets
 
