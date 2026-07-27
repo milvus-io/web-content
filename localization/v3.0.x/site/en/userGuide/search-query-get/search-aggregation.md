@@ -106,10 +106,10 @@ beta: Milvus 3.0.x
 <tr><th>Goal</th><th>Key settings</th><th>Example</th></tr>
 </thead>
 <tbody>
-<tr><td>Build bucket keys</td><td><code translate="no">fields</code>, <code translate="no">size</code></td><td><a href="#build-bucket-keys">Build bucket keys</a></td></tr>
-<tr><td>Calculate statistics and order buckets</td><td><code translate="no">metrics</code>, <code translate="no">order</code></td><td><a href="#calculate-metrics-and-order-buckets">Calculate metrics and order buckets</a></td></tr>
-<tr><td>Return and sort representative hits</td><td><code translate="no">top_hits</code>, <code translate="no">TopHits.size</code>, <code translate="no">TopHits.sort</code></td><td><a href="#return-and-sort-representative-hits">Return and sort representative hits</a></td></tr>
-<tr><td>Create hierarchical results</td><td><code translate="no">sub_aggregation</code></td><td><a href="#create-nested-buckets">Create nested buckets</a></td></tr>
+<tr><td>Build bucket keys</td><td><code translate="no">fields</code>, <code translate="no">size</code></td><td><a href="#Build-bucket-keys">Build bucket keys</a></td></tr>
+<tr><td>Calculate statistics and order buckets</td><td><code translate="no">metrics</code>, <code translate="no">order</code></td><td><a href="#Calculate-metrics-and-order-buckets">Calculate metrics and order buckets</a></td></tr>
+<tr><td>Return and sort representative hits</td><td><code translate="no">top_hits</code>, <code translate="no">TopHits.size</code>, <code translate="no">TopHits.sort</code></td><td><a href="#Return-and-sort-representative-hits">Return and sort representative hits</a></td></tr>
+<tr><td>Create hierarchical results</td><td><code translate="no">sub_aggregation</code></td><td><a href="#Create-nested-buckets">Create nested buckets</a></td></tr>
 </tbody>
 </table>
 <p>The examples below use a product collection with brand, category, color, price, and rating fields. Expand the following section to create the collection and define the shared search variables.</p>
@@ -364,7 +364,7 @@ search_params = {
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>This configuration can produce keys such as <code translate="no">(Nike, black)</code>, <code translate="no">(Nike, blue)</code>, and <code translate="no">(Adidas, white)</code>. Two entities share a bucket only when both values match. Milvus preserves the list order, so <code translate="no">brand</code> is the first key component and <code translate="no">color</code> is the second. Pass multiple strings in one flat list; nested lists are not supported.</p>
-<p><code translate="no">size=6</code> is the maximum number of composite buckets returned at this aggregation level. The example data contains five distinct brand-color combinations, so all five can be returned. In the <a href="#limits">returned-entry limit</a>, this request contributes <code translate="no">1 query vector × 6 buckets × 1 = 6</code> configured result entries.</p>
+<p><code translate="no">size=6</code> is the maximum number of composite buckets returned at this aggregation level. The example data contains five distinct brand-color combinations, so all five can be returned. In the <a href="#Limits">returned-entry limit</a>, this request contributes <code translate="no">1 query vector × 6 buckets × 1 = 6</code> configured result entries.</p>
 <h3 id="Calculate-metrics-and-order-buckets" class="common-anchor-header">Calculate metrics and order buckets<button data-href="#Calculate-metrics-and-order-buckets" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
