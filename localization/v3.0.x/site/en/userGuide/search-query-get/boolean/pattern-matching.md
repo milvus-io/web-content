@@ -24,6 +24,9 @@ summary: >-
       </svg>
     </button></h1><p>In agentic search applications, vector search and grep-style pattern matching often complement each other. Vector search retrieves entities that are semantically relevant, while pattern matching narrows those results by exact string structures, such as error codes, log prefixes, email domains, URL paths, or identifiers.</p>
 <p>In Milvus, you can express these pattern constraints in scalar filters with <code translate="no">LIKE</code> for simple wildcard matching, and <code translate="no">=~</code> or <code translate="no">!~</code> for <a href="https://github.com/google/re2/wiki/syntax">RE2</a> regular expressions. You can combine these filters with <code translate="no">query</code>, <code translate="no">search</code>, or hybrid search.</p>
+<div class="alert note">
+<p>This page describes pattern matching in scalar filter expressions used by <code translate="no">query</code>, <code translate="no">search</code>, and hybrid search. These expressions evaluate field values and do not change the tokens produced by an analyzer. To filter tokens during text analysis, refer to <a href="/docs/regex-filter.md">Regex Analyzer Filter</a>.</p>
+</div>
 <p>Pattern matching expressions are written in the <code translate="no">filter</code> parameter. For example, the following query matches log messages that contain an error code such as <code translate="no">E1001</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
