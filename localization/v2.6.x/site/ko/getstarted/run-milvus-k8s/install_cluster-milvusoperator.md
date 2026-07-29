@@ -175,7 +175,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Milvus Operator 포드가 실행 중이면 다음과 같이 Milvus 클러스터를 배포할 수 있습니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>위의 명령어는 <strong>Woodpecker를</strong> 메시지 큐로 사용하고(v2.6.20 권장), 스트리밍 노드를 포함한 모든 새로운 아키텍처 구성 요소를 갖춘 Milvus 클러스터를 배포합니다.</p>
+<p>위의 명령어는 <strong>Woodpecker를</strong> 메시지 큐로 사용하고(v2.6.21 권장), 스트리밍 노드를 포함한 모든 새로운 아키텍처 구성 요소를 갖춘 Milvus 클러스터를 배포합니다.</p>
 <p><strong>이번 배포의 아키텍처 주요 특징:</strong></p>
 <ul>
 <li><strong>메시지 큐</strong>: <a href="/docs/ko/v2.6.x/use-woodpecker.md">Woodpecker 사용</a> (인프라 유지 관리 부담 감소)</li>
@@ -186,7 +186,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 <div class="alert note">
 <ul>
 <li>릴리스 이름에는 영문자, 숫자 및 대시만 포함되어야 합니다. 릴리스 이름에는 점(.)을 사용할 수 없습니다.</li>
-<li>모든 구성 요소가 단일 포드 내에 포함되는 독립 실행 모드(standalone mode)로 Milvus 인스턴스를 배포할 수도 있습니다. 이를 위해서는 위 명령어의 구성 파일 URL을 다음과 같이 변경하십시오. <code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
+<li>모든 구성 요소가 단일 파드 내에 포함되는 독립 실행 모드(standalone mode)로 Milvus 인스턴스를 배포할 수도 있습니다. 이를 위해서는 위 명령어의 구성 파일 URL을 다음과 같이 변경하십시오. <code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
 </ul>
 </div>
 <h3 id="2-Check-Milvus-cluster-status" class="common-anchor-header">2. Milvus 클러스터 상태 확인<button data-href="#2-Check-Milvus-cluster-status" class="anchor-icon" translate="no">
@@ -237,7 +237,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
   <span class="hljs-attr">status:</span> <span class="hljs-string">Healthy</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus Operator는 etcd, Pulsar, MinIO와 같은 Milvus 종속성을 생성한 다음, 프록시, 코디네이터, 노드와 같은 Milvus 구성 요소를 생성합니다.</p>
-<p>Milvus 클러스터가 준비되면, Milvus 클러스터 내 모든 파드의 상태는 다음과 비슷해야 합니다.</p>
+<p>Milvus 클러스터가 준비되면, Milvus 클러스터 내 모든 포드의 상태는 다음과 비슷해야 합니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods</span>
 
 NAME                                             READY   STATUS    RESTARTS   AGE
@@ -274,7 +274,7 @@ my-release-minio-3                               1/1     Running   0          2m
 =&#x27;{{(index (index .spec.containers 0).ports 0).containerPort}}{{&quot;\n&quot;}}&#x27;
 19530
 <button class="copy-code-btn"></button></code></pre>
-<p>출력 결과를 보면 Milvus 인스턴스가 기본 <strong>포트인 19530에서</strong> 서비스를 제공하는 것을 확인할 수 있습니다.</p>
+<p>출력 결과를 보면 Milvus 인스턴스가 기본 포트 <strong>19530에서</strong> 서비스를 제공하는 것을 확인할 수 있습니다.</p>
 <div class="alert note">
 <p>Milvus를 독립형 모드로 배포한 경우, pod 이름을 <code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> 에서 <code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code> 로 변경하십시오.</p>
 </div>
@@ -283,7 +283,7 @@ my-release-minio-3                               1/1     Running   0          2m
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>선택적으로, 위 명령어에서 <code translate="no">27017:19530</code> 대신 <code translate="no">:19530</code> 을 사용하여 <code translate="no">kubectl</code> 가 로컬 포트를 자동으로 할당하도록 할 수 있습니다. 이렇게 하면 포트 충돌을 직접 관리할 필요가 없습니다.</p>
-<p>기본적으로 kubectl의 포트 포워딩은 <code translate="no">localhost</code> 에서만 수신 대기합니다. Milvus가 선택한 IP 주소 또는 모든 IP 주소에서 수신 대기하도록 하려면 <code translate="no">address</code> 플래그를 사용하십시오. 다음 명령은 포트 포워딩이 호스트 머신의 모든 IP 주소에서 수신 대기하도록 설정합니다.</p>
+<p>기본적으로 kubectl의 포트 포워딩은 <code translate="no">localhost</code> 에서만 수신 대기합니다. Milvus가 선택한 IP 주소 또는 모든 IP 주소에서 수신 대기하도록 하려면 <code translate="no">address</code> 플래그를 사용하십시오. 다음 명령어는 호스트 머신의 모든 IP 주소에서 포트 포워딩이 수신 대기하도록 설정합니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>

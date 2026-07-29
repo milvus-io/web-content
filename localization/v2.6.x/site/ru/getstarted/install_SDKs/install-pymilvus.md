@@ -39,8 +39,8 @@ title: Установка Python SDK для Milvus
       </svg>
     </button></h2><ul>
 <li>Требуется Python 3.7 или более поздней версии.</li>
-<li>Должен быть установлен Google protobuf. Его можно установить с помощью команды ` <code translate="no">pip3 install protobuf==3.20.0</code>`.</li>
-<li>grpcio-tools должен быть установлен. Его можно установить с помощью команды ` <code translate="no">pip3 install grpcio-tools</code>`.</li>
+<li>Установлен Google protobuf. Его можно установить с помощью команды ` <code translate="no">pip3 install protobuf==3.20.0</code>`.</li>
+<li>Установлен пакет grpcio-tools. Его можно установить с помощью команды ` <code translate="no">pip3 install grpcio-tools</code>`.</li>
 </ul>
 <h2 id="Install-PyMilvus-via-pip" class="common-anchor-header">Установка PyMilvus через pip<button data-href="#Install-PyMilvus-via-pip" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -61,7 +61,7 @@ title: Установка Python SDK для Milvus
 <div class="alert note">
 Рекомендуется установить версию PyMilvus, соответствующую версии установленного вами сервера Milvus. Дополнительную информацию см. в <a href="/docs/ru/v2.6.x/release_notes.md">«Примечаниях к выпуску</a>».
 </div>
-<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.6</span>.<span class="hljs-number">16</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.6</span>.<span class="hljs-number">17</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">Проверка установки<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"

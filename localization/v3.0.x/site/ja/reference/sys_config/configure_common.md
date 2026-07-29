@@ -2,9 +2,9 @@
 id: configure_common.md
 related_key: configure
 group: system_configuration.md
-summary: Milvusの共通設定方法をご紹介します。
+summary: Milvusの一般的な設定方法について学びましょう。
 ---
-<h1 id="common-related-Configurations" class="common-anchor-header">共通関連設定<button data-href="#common-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="common-related-Configurations" class="common-anchor-header">共通関連の設定<button data-href="#common-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,8 +43,8 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        コレクション作成時のデフォルトパーティション名      </td>
-      <td>デフォルト</td>
+      <td>        コレクション作成時のデフォルトのパーティション名      </td>
+      <td>_default</td>
     </tr>
   </tbody>
 </table>
@@ -72,7 +72,7 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        名前未指定でインデックスが作成された場合のインデックス名      </td>
+      <td>        名前を指定せずにインデックスが作成された際のインデックス名      </td>
       <td>_default_idx</td>
     </tr>
   </tbody>
@@ -101,7 +101,7 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        エンティティの有効期限を秒単位で指定。      </td>
+      <td>        エンティティの有効期限（秒単位）。注意：-1 は有効期限なしを意味します。      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -130,7 +130,7 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        インデックススライスサイズ（MB      </td>
+      <td>        インデックスのスライスサイズ（MB単位）      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -159,7 +159,7 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        このパラメータは、スレッド数が高優先度プールのコア数の何倍になるかを指定する。      </td>
+      <td>        このパラメータは、高優先度プール内のスレッド数がコア数の何倍になるかを指定します。      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -188,7 +188,7 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        このパラメータは、スレッド数を中優先度プールのコア数の何倍にするかを指定する。      </td>
+      <td>        このパラメータは、中優先度プールにおけるスレッド数がコア数の何倍になるかを指定します。      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -217,7 +217,7 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        このパラメータは、スレッド数を低優先度プールのコア数の何倍にするかを指定する。      </td>
+      <td>        このパラメータは、低優先度プールにおけるスレッド数がコア数の何倍になるかを指定します。      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -246,7 +246,7 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        ミリ秒。これは、Bounded Consistencyの場合にリクエスト到着時間を 引く必要がある間隔(ミリ秒)を表す。      </td>
+      <td>        ミリ秒。これは、Bounded Consistency の場合にリクエストの到着時刻から差し引く必要がある間隔（ミリ秒単位）を表します。      </td>
       <td>5000</td>
     </tr>
   </tbody>
@@ -275,8 +275,8 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        秒。この時間内にgraceful stop処理が完了しないと、サーバーを強制終了する。      </td>
-      <td>1800</td>
+      <td>        秒。この時間内に正常な停止プロセスが完了しない場合、サーバーを強制終了します。      </td>
+      <td>1800説明</td>
     </tr>
   </tbody>
 </table>
@@ -304,8 +304,37 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        利用可能な値は[local, remote, opendal]で、minioは非推奨です。      </td>
-      <td>リモート</td>
+      <td>        組み込み Milvus で調整してください：local、使用可能な値は [local、remote、opendal] です。値 minio は非推奨です。代わりに remote を使用してください。      </td>
+      <td>remote</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonstorageuseLoonFFI" class="common-anchor-header"><code translate="no">common.storage.useLoonFFI</code><button data-href="#commonstorageuseLoonFFI" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.storage.useLoonFFI">
+  <thead>
+    <tr>
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        新しい書き込みおよびコンパクション出力に Storage V3 を使用するかどうか。このパラメータは更新可能です。      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -335,9 +364,9 @@ summary: Milvusの共通設定方法をご紹介します。
     <tr>
       <td>
         <li>デフォルト値: auto</li>      
-        <li>有効な値：[auto、avx512、avx2、avx、sse4_2]。</li>      
-        <li>このコンフィギュレーションはquerynodeとindexnodeでのみ使用され、検索とインデックス構築のためのCPU命令セットを選択する。</li>      </td>
-      <td>オート</td>
+        <li>有効な値：[auto、avx512、avx2、avx、sse4_2]</li>      
+        <li>この設定は querynode および indexnode でのみ使用され、検索およびインデックス構築に使用する CPU 命令セットを選択します。</li>      </td>
+      <td>auto</td>
     </tr>
   </tbody>
 </table>
@@ -366,8 +395,8 @@ summary: Milvusの共通設定方法をご紹介します。
   <tbody>
     <tr>
       <td>
-        <li>スーパーユーザはいくつかのシステムチェック処理を無視します、</li>      
-        <li>例えば、クレデンシャルを更新する際の古いパスワードの確認など。</li>      </td>
+        <li>スーパーユーザーは、一部のシステムチェック処理を無視します。</li>      
+        <li>（例：認証情報を更新する際の古いパスワードの検証など）</li>      </td>
       <td></td>
     </tr>
   </tbody>
@@ -396,8 +425,8 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        rootユーザーのデフォルトパスワード。最大長は72文字で、二重引用符が必要です。      </td>
-      <td>milvus</td>
+      <td>        root ユーザーのデフォルトパスワード。最大長は 72 文字で、二重引用符での指定が必須です。      </td>
+      <td>Milvus</td>
     </tr>
   </tbody>
 </table>
@@ -425,7 +454,7 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        認証が有効な場合に、rootユーザがロールをバインドするかどうか。      </td>
+      <td>        認証が有効になっている場合、root ユーザーがロールをバインドすべきかどうか。      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -454,7 +483,7 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        組み込みの特権グループを上書きするかどうか      </td>
+      <td>        組み込みの権限グループを上書きするかどうか。      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -483,7 +512,7 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        クラスタレベルの読み取り専用特権      </td>
+      <td>        クラスタレベルの読み取り専用権限      </td>
       <td>ListDatabases、SelectOwnership、SelectUser、DescribeResourceGroup、ListResourceGroups、ListPrivilegeGroups</td>
     </tr>
   </tbody>
@@ -512,7 +541,7 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        クラスタレベルの読み書き権限      </td>
+      <td>        クラスタレベルの読み取り/書き込み権限      </td>
       <td>ListDatabases、SelectOwnership、SelectUser、DescribeResourceGroup、ListResourceGroups、ListPrivilegeGroups、FlushAll、TransferNode、TransferReplica、UpdateResourceGroups</td>
     </tr>
   </tbody>
@@ -541,8 +570,8 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        クラスタ・レベルの管理者権限      </td>
-      <td>ListDatabases、SelectOwnership、SelectUser、DescribeResourceGroup、ListResourceGroups、ListPrivilegeGroups、FlushAll、TransferNode、TransferReplica、UpdateResourceGroups、BackupRBAC、RestoreRBAC、CreateDatabase、DropDatabase,CreateOwnership,DropOwnership,ManageOwnership,CreateResourceGroup,DropResourceGroup,UpdateUser,RenameCollection,CreatePrivilegeGroup,DropPrivilegeGroup,OperatePrivilegeGroup</td>
+      <td>        クラスタレベルの管理者権限      </td>
+      <td>ListDatabases、SelectOwnership、SelectUser、DescribeResourceGroup、ListResourceGroups、ListPrivilegeGroups、FlushAll、TransferNode、TransferReplica、UpdateResourceGroups、BackupRBAC、RestoreRBAC、CreateDatabase、DropDatabase、CreateOwnership、DropOwnership、ManageOwnership、CreateResourceGroup、DropResourceGroup、UpdateUser、RenameCollection、CreatePrivilegeGroup、DropPrivilegeGroup、OperatePrivilegeGroup</td>
     </tr>
   </tbody>
 </table>
@@ -570,7 +599,7 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        データベース・レベルの読み取り専用特権      </td>
+      <td>        データベースレベルの読み取り専用権限      </td>
       <td>ShowCollections、DescribeDatabase</td>
     </tr>
   </tbody>
@@ -599,8 +628,8 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        データベース・レベルの読み書き権限      </td>
-      <td>データベースの表示,データベース記述,データベース変更</td>
+      <td>        データベースレベルの読み取り・書き込み権限      </td>
+      <td>ShowCollections、DescribeDatabase、AlterDatabase</td>
     </tr>
   </tbody>
 </table>
@@ -628,7 +657,7 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        データベース・レベルの管理者権限      </td>
+      <td>        データベースレベルの管理者権限      </td>
       <td>ShowCollections、DescribeDatabase、AlterDatabase、CreateCollection、DropCollection</td>
     </tr>
   </tbody>
@@ -657,8 +686,8 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        コレクション・レベルの読み取り専用権限      </td>
-      <td>クエリ,検索,インデックス詳細,GetFlushState,GetLoadState,GetLoadingProgress,HasPartition,ShowPartitions,DescribeCollection,DescribeAlias,GetStatistics,ListAliases</td>
+      <td>        コレクションレベルの読み取り専用権限      </td>
+      <td>Query、Search、IndexDetail、GetFlushState、GetLoadState、GetLoadingProgress、HasPartition、ShowPartitions、DescribeCollection、DescribeAlias、GetStatistics、ListAliases</td>
     </tr>
   </tbody>
 </table>
@@ -686,8 +715,8 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        コレクション・レベルの読み書き権限      </td>
-      <td>クエリ,検索,インデックス詳細,GetFlushState,GetLoadState,GetLoadingProgress,HasPartition,ShowPartitions,DescribeCollection,DescribeAlias,GetStatistics,ListAliases,ロード,リリース,挿入,削除,アップサート,インポート,フラッシュ,コンパクション,ロードバランス,CreateIndex,DropIndex,CreatePartition,DropPartition</td>
+      <td>        コレクションレベルの読み取り/書き込み権限      </td>
+      <td>Query、Search、IndexDetail、GetFlushState、GetLoadState、GetLoadingProgress、HasPartition、ShowPartitions、DescribeCollection、DescribeAlias、GetStatistics、ListAliases、Load、Release、Insert、Delete、Upsert、Import、Flush、Compaction、LoadBalance、CreateIndex、DropIndex、CreatePartition、DropPartition</td>
     </tr>
   </tbody>
 </table>
@@ -715,8 +744,8 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        コレクション・レベルの管理者権限      </td>
-      <td>クエリ、検索、インデックス詳細、GetFlushState、GetLoadState、GetLoadingProgress、HasPartition、ShowPartitions、DescribeCollection、DescribeAlias、GetStatistics、ListAlias、ロード、リリース、挿入、削除、アップサート、インポート、フラッシュ、コンパクション、ロードバランス、CreateIndex、DropIndex、CreatePartition、DropPartition、CreateAlias、DropAlias</td>
+      <td>        コレクションレベルの管理者権限      </td>
+      <td>クエリ、検索、インデックス詳細、フラッシュ状態の取得、ロード状態の取得、ロード進捗の取得、パーティションの有無、パーティションの表示、コレクションの説明、DescribeAlias、GetStatistics、ListAliases、Load、Release、Insert、Delete、Upsert、Import、Flush、Compaction、LoadBalance、CreateIndex、DropIndex、CreatePartition、DropPartition、CreateAlias、DropAlias</td>
     </tr>
   </tbody>
 </table>
@@ -744,7 +773,7 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        セッションが登録サービスにリースを付与するときのttl値      </td>
+      <td>        セッションがサービス登録に対してリースを付与する際の TTL 値      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -773,7 +802,7 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        セッションがetcdリクエストを送信する際のリトライ回数      </td>
+      <td>        セッションが etcd リクエストを送信する際のリトライ回数      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -802,7 +831,7 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        メトリクス・ロックの統計情報を収集するかどうか      </td>
+      <td>        メトリクスのロックに関する統計情報を収集するかどうか      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -831,7 +860,7 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        情報レベルの印刷時間の最小ミリ秒数      </td>
+      <td>        info レベルで継続時間を表示するための最小ミリ秒数      </td>
       <td>500</td>
     </tr>
   </tbody>
@@ -860,7 +889,7 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        警告レベルの印刷時間の最小ミリ秒数      </td>
+      <td>        warn レベルで継続時間を表示するための最小ミリ秒数      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -889,7 +918,7 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        ロック条件待ちの最大秒数      </td>
+      <td>        wlock 条件付き処理の待機時間の上限（秒）      </td>
       <td>600</td>
     </tr>
   </tbody>
@@ -919,10 +948,10 @@ summary: Milvusの共通設定方法をご紹介します。
   <tbody>
     <tr>
       <td>
-        <li>システムの内部時間メッセージ・メカニズムを無効にするかどうか。 </li>      
-        <li>無効にした場合（falseに設定した場合）、システムは挿入、削除、クエリ、検索を含むDML操作を許可しません。 </li>      
-        <li>これはMilvus-CDCが増分データを同期するのに役立ちます。</li>      </td>
-      <td>真</td>
+        <li>システムの内部タイムメッセージングメカニズムを無効にするかどうか。 </li>      
+        <li>無効化（false に設定）された場合、システムは挿入、削除、クエリ、検索を含む DML 操作を許可しません。 </li>      
+        <li>これにより、Milvus-CDC が増分データを同期しやすくなります</li>      </td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
@@ -950,7 +979,7 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        トレースリクエスト情報      </td>
+      <td>        リクエスト情報のトレース      </td>
       <td>0</td>
     </tr>
   </tbody>
@@ -979,7 +1008,7 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        ブルームフィルタ初期サイズ      </td>
+      <td>        ブルームフィルターの初期サイズ      </td>
       <td>100000</td>
     </tr>
   </tbody>
@@ -1008,8 +1037,8 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        BasicBloomFilterとBlockedBloomFilterをサポートします。      </td>
-      <td>ブロックブルームフィルタ</td>
+      <td>        ブルームフィルターのタイプ。BasicBloomFilter および BlockedBloomFilter をサポート      </td>
+      <td>BlockedBloomFilter</td>
     </tr>
   </tbody>
 </table>
@@ -1037,7 +1066,7 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        ブルームフィルタの最大偽陽性率      </td>
+      <td>        ブルームフィルターの最大誤検知率      </td>
       <td>0.001</td>
     </tr>
   </tbody>
@@ -1061,12 +1090,12 @@ summary: Milvusの共通設定方法をご紹介します。
   <thead>
     <tr>
       <th class="width80">説明</th>
-      <th class="width20">デフォルト値</th> 
+      <th class="width20">デフォルト値batch size</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        ブルームフィルタにpkを適用する際のバッチサイズ      </td>
+      <td>        ブルームフィルタに PK を適用する際のバッチサイズ      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -1095,7 +1124,7 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        コレクションの複製を有効にするかどうか。      </td>
+      <td>        コレクションのレプリケーションを有効にするかどうか。      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1124,7 +1153,7 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        trueの場合、パーティション・キー・フィールドでクラスタリング・コンパクションとセグメント・プルーンを行う      </td>
+      <td>        true の場合、パーティションキーフィールドに対してクラスタリングのコンパクテーションとセグメントのプルーニングを実行します。      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1153,7 +1182,7 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        trueの場合、ベクトルフィールドでクラスタリングコンパクションとセグメントプルーンを行う      </td>
+      <td>        true の場合、ベクトルフィールドに対してクラスタリング・コンパクションおよびセグメントのプルーニングを実行します。      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1182,7 +1211,7 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        trueの場合、ベクトル・クラスタリング・キーとベクトル・クラスタリング・コンパクションを有効にする      </td>
+      <td>        true の場合、ベクトルクラスタリングキーおよびベクトルクラスタリングの圧縮を有効にする。      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1211,7 +1240,7 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        mixまたはstandaloneモードのとき、内部通信にローカルRPCを有効にする。      </td>
+      <td>        ミックスモードまたはスタンドアロンモードの場合、内部通信用にローカル RPC を有効にします。      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1240,7 +1269,7 @@ summary: Milvusの共通設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        タスクが終了してプールのリソースが解放されるまでの最大待機時間      </td>
+      <td>        タスクが完了し、プール内のリソースが解放されるまで待機する最大時間。      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -1270,11 +1299,11 @@ summary: Milvusの共通設定方法をご紹介します。
   <tbody>
     <tr>
       <td>
-        <li>複数のMilvusクラスタ間でグローバルな一意性を確保するためにAutoID生成で使用されるクラスタの一意識別子。</li>      
-        <li>有効な値：[0, 1, 2, 3, 4, 5, 6, 7] (最大8クラスタまでサポート)</li>      
-        <li>複数のクラスタを実行する際にAutoIDの重複を防ぐため、各クラスタは一意のclusterIDを持つ必要があります。</li>      
-        <li>このIDはcluster_idセグメントの一部として64ビットAutoID構造体に埋め込まれます。</li>      
-        <li>詳細については、「<a href="/docs/ja/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">プライマリ・フィールドとAutoID</a>」を参照してください。</li>      </td>
+        <li>複数のMilvusクラスター間でグローバルな一意性を確保するために、AutoID生成で使用されるクラスターの一意の識別子。</li>      
+        <li>有効な値：[0, 1, 2, 3, 4, 5, 6, 7]（最大8つのクラスターまで対応）</li>      
+        <li>複数のクラスターを実行する際、AutoIDの重複を防ぐため、各クラスターには一意のclusterIDが必要です。</li>      
+        <li>この ID は、64 ビットの AutoID 構造体の cluster_id セグメントの一部として埋め込まれます。</li>      
+        <li>詳細については、「<a href="/docs/ja/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">プライマリフィールドとAutoID</a>」を参照してください。</li>      </td>
       <td>0</td>
     </tr>
   </tbody>

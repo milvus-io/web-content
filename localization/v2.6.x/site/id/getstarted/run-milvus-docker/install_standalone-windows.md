@@ -91,7 +91,7 @@ To change the default Milvus configuration, edit user.yaml and restart the servi
 <p>Setelah menjalankan skrip instalasi:​</p>
 <ul>
 <li><p>Sebuah kontainer Docker bernama <strong>milvus-standalone</strong> telah dimulai pada port <strong>19530</strong>.​</p></li>
-<li><p>Embed etcd telah diinstal bersama Milvus di kontainer yang sama dan berjalan di port <strong>2379</strong>. Berkas konfigurasinya dipetakan ke ` <strong>embedEtcd.yaml</strong> ` di folder saat ini.​</p></li>
+<li><p>Embed etcd telah diinstal bersama Milvus dalam kontainer yang sama dan berjalan di port <strong>2379</strong>. Berkas konfigurasinya dipetakan ke ` <strong>embedEtcd.yaml</strong> ` di folder saat ini.​</p></li>
 <li><p>Volume data Milvus dipetakan ke ` <strong>volumes/milvus</strong> ` di folder saat ini.​</p></li>
 </ul>
 <p>Anda dapat menggunakan perintah berikut untuk mengelola kontainer Milvus dan data yang disimpan.​</p>
@@ -191,7 +191,7 @@ Delete successfully.​
 <li><p>Buka Docker Desktop dalam mode administrator dengan mengklik kanan dan memilih <strong>Jalankan sebagai administrator</strong>.</p></li>
 <li><p>Jalankan perintah berikut di PowerShell atau Command Prompt Windows untuk mengunduh berkas konfigurasi Docker Compose untuk Milvus Standalone dan memulai Milvus.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.20/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.21/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -202,7 +202,7 @@ Creating milvus-standalone ... done​
 </code></pre>
 <p>Tergantung pada koneksi jaringan Anda, mengunduh gambar untuk instalasi Milvus mungkin memerlukan waktu cukup lama. Setelah kontainer bernama <strong>milvus-standalone</strong>, <strong>milvus-minio</strong>, dan <strong>milvus-etcd</strong> aktif, Anda dapat melihat bahwa ​</p>
 <ul>
-<li><p>Kontainer <strong>milvus-etcd</strong> tidak mengekspos port apa pun ke host dan memetakan datanya ke <strong>volumes/etcd</strong> di folder saat ini.</p></li>
+<li><p>Kontainer <strong>milvus-etcd</strong> tidak mengekspos port apa pun ke host dan memetakan datanya ke <strong>volumes/etcd</strong> di folder saat ini.​</p></li>
 <li><p>Kontainer <strong>milvus-minio</strong> melayani port <strong>9090</strong> dan <strong>9091</strong> secara lokal dengan kredensial otentikasi default dan memetakan datanya ke <strong>volumes/minio</strong> di folder saat ini.​</p></li>
 <li><p>Kontainer <strong>milvus-standalone</strong> melayani port <strong>19530</strong> secara lokal dengan pengaturan default dan memetakan datanya ke <strong>volumes/milvus</strong> di folder saat ini.​</p></li>
 </ul></li>
@@ -225,14 +225,14 @@ Creating milvus-standalone ... done​
       </svg>
     </button></h3><p>Prosedurnya serupa dengan menggunakan Docker Compose untuk menginstal Milvus di sistem Linux.​</p>
 <ol>
-<li><p>Jalankan WSL 2.​</p>
+<li><p>Jalankan WSL 2.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --install​
 Ubuntu already installed.​
 Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Unduh berkas konfigurasi Milvus.​</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.20/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.21/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Jalankan Milvus.​</p>
@@ -294,7 +294,7 @@ The Docker for Windows Service service was started successfully.​
 
 </code></pre></li>
 <li><p>Periksa apakah WSL telah terinstal dengan benar.</p>
-<p>Anda dapat menjalankan perintah berikut untuk menginstal atau memperbarui WSL 2.</p>
+<p>Anda dapat menjalankan perintah berikut untuk menginstal atau memperbarui WSL 2.​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --update​
 Checking for updates.​
 The most recent version of Windows Subsystem for Linux is already installed.​

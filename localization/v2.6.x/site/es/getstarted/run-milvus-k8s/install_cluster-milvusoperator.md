@@ -177,7 +177,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Una vez que el pod de Milvus Operator esté en ejecución, puedes implementar un clúster de Milvus de la siguiente manera.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>El comando anterior implementa un clúster de Milvus con <strong>Woodpecker</strong> como cola de mensajes (recomendado para la versión 2.6.20) y todos los nuevos componentes arquitectónicos, incluido el nodo de streaming.</p>
+<p>El comando anterior implementa un clúster de Milvus con <strong>Woodpecker</strong> como cola de mensajes (recomendado para la versión 2.6.21) y todos los nuevos componentes arquitectónicos, incluido el nodo de streaming.</p>
 <p><strong>Aspectos destacados de la arquitectura en esta implementación:</strong></p>
 <ul>
 <li><strong>Cola de mensajes</strong>: <a href="/docs/es/v2.6.x/use-woodpecker.md">utiliza Woodpecker</a> (reduce el mantenimiento de la infraestructura)</li>
@@ -256,7 +256,7 @@ my-release-minio-1                               1/1     Running   0          2m
 my-release-minio-2                               1/1     Running   0          2m35s
 my-release-minio-3                               1/1     Running   0          2m35s
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Forward-a-local-port-to-Milvus" class="common-anchor-header">3. Reenviar un puerto local a Milvus<button data-href="#3-Forward-a-local-port-to-Milvus" class="anchor-icon" translate="no">
+<h3 id="3-Forward-a-local-port-to-Milvus" class="common-anchor-header">3. Redirige un puerto local a Milvus<button data-href="#3-Forward-a-local-port-to-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -285,7 +285,7 @@ my-release-minio-3                               1/1     Running   0          2m
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>Si lo prefieres, puedes utilizar <code translate="no">:19530</code> en lugar de <code translate="no">27017:19530</code> en el comando anterior para que <code translate="no">kubectl</code> te asigne un puerto local y así no tengas que gestionar conflictos de puertos.</p>
-<p>Por defecto, el reenvío de puertos de kubectl solo escucha en <code translate="no">localhost</code>. Utiliza el indicador <code translate="no">address</code> si quieres que Milvus escuche en la dirección IP seleccionada o en todas ellas. El siguiente comando hace que el reenvío de puertos escuche en todas las direcciones IP de la máquina host.</p>
+<p>Por defecto, el reenvío de puertos de kubectl solo escucha en <code translate="no">localhost</code>. Utiliza el indicador <code translate="no">address</code> si quieres que Milvus escuche en la dirección IP seleccionada o en todas las direcciones IP. El siguiente comando hace que el reenvío de puertos escuche en todas las direcciones IP de la máquina host.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
@@ -313,7 +313,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span> \
   --dry-run=client -o yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para conocer los elementos de configuración aplicables, consulta <a href="/docs/es/v2.6.x/system_configuration.md">«Configuración del sistema</a>».</p></li>
+<p>Para conocer los elementos de configuración aplicables, consulte <a href="/docs/es/v2.6.x/system_configuration.md">«Configuración del sistema</a>».</p></li>
 <li><p>Actualice las configuraciones.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl patch milvus my-release --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;merge&#x27;</span>\
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span></span> 
@@ -334,7 +334,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus incluye una herramienta GUI integrada llamada Milvus WebUI a la que puede acceder a través de su navegador. Milvus WebUI mejora la observabilidad del sistema con una interfaz sencilla e intuitiva. Puede utilizar Milvus WebUI para observar las estadísticas y métricas de los componentes y dependencias de Milvus, comprobar los detalles de la base de datos y la recopilación de datos, y ver una lista detallada de las configuraciones de Milvus. Para obtener más información sobre la interfaz web de Milvus, consulta <a href="/docs/es/v2.6.x/milvus-webui.md">«Interfaz web de Milvus»</a></p>
+    </button></h2><p>Milvus incluye una herramienta GUI integrada llamada Milvus WebUI a la que puede acceder a través de su navegador. Milvus WebUI mejora la observabilidad del sistema con una interfaz sencilla e intuitiva. Puede utilizar Milvus WebUI para observar las estadísticas y métricas de los componentes y dependencias de Milvus, comprobar los detalles de la base de datos y la recopilación de datos, y ver una lista detallada de las configuraciones de Milvus. Para obtener más información sobre la interfaz de usuario web de Milvus, consulta <a href="/docs/es/v2.6.x/milvus-webui.md">«Milvus WebUI»</a></p>
 <p>Para habilitar el acceso a Milvus WebUI, es necesario redirigir el puerto del pod del proxy a un puerto local.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
@@ -411,7 +411,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li><a href="/docs/es/v2.6.x/manage_databases.md">Gestionar bases de datos</a></li>
 <li><a href="/docs/es/v2.6.x/manage-collections.md">Gestionar colecciones</a></li>
 <li><a href="/docs/es/v2.6.x/manage-partitions.md">Gestionar particiones</a></li>
-<li><a href="/docs/es/v2.6.x/insert-update-delete.md">Insertar, actualizar o insertar y eliminar</a></li>
+<li><a href="/docs/es/v2.6.x/insert-update-delete.md">Insertar, actualizar o insertar (upsert) y eliminar</a></li>
 <li><a href="/docs/es/v2.6.x/single-vector-search.md">Búsqueda de un solo vector</a></li>
 <li><a href="/docs/es/v2.6.x/multi-vector-search.md">Búsqueda híbrida</a></li>
 </ul></li>
@@ -425,7 +425,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 </ul></li>
 <li><p>Descubre <a href="/docs/es/v2.6.x/milvus-webui.md">Milvus WebUI</a>, una interfaz web intuitiva para la observabilidad y la gestión de Milvus.</p></li>
 <li><p>Descubre <a href="/docs/es/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, una herramienta de código abierto para realizar copias de seguridad de los datos de Milvus.</p></li>
-<li><p>Descubre <a href="/docs/es/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, una herramienta de código abierto para la depuración de Milvus y las actualizaciones dinámicas de configuración.</p></li>
+<li><p>Descubre <a href="/docs/es/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, una herramienta de código abierto para la depuración de Milvus y las actualizaciones dinámicas de la configuración.</p></li>
 <li><p>Descubre <a href="https://github.com/zilliztech/attu">Attu</a>, una herramienta GUI de código abierto para la gestión intuitiva de Milvus.</p></li>
 <li><p><a href="/docs/es/v2.6.x/monitor.md">Supervisa Milvus con Prometheus</a>.</p></li>
 </ul>

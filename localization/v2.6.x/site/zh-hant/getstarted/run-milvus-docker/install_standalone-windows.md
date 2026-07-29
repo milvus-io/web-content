@@ -89,7 +89,7 @@ To change the default Milvus configuration, edit user.yaml and restart the servi
 <p>執行安裝腳本後：​</p>
 <ul>
 <li><p>一個名為<strong>milvus-standalone</strong>的 Docker 容器已於<strong>19530</strong> 埠啟動。​</p></li>
-<li><p>嵌入式 etcd 已隨 Milvus 一起安裝在同一個容器中，並於<strong>2379</strong> 埠提供服務。其設定檔已映射至當前資料夾中的<strong>embedEtcd.yaml</strong>。​</p></li>
+<li><p>嵌入式 etcd 已隨 Milvus 一起安裝在同一容器中，並於<strong>2379</strong> 埠提供服務。其設定檔已映射至當前資料夾中的<strong>embedEtcd.yaml</strong>。​</p></li>
 <li><p>Milvus 資料卷已映射至當前資料夾中的<strong>volumes/milvus​</strong></p></li>
 </ul>
 <p>您可以使用以下指令來管理 Milvus 容器及儲存的資料。​</p>
@@ -187,9 +187,9 @@ Delete successfully.​
       </svg>
     </button></h3><ol>
 <li><p>以管理員模式開啟 Docker Desktop：右鍵點擊並選擇「<strong>以管理員身分執行</strong>」。​</p></li>
-<li><p>在 PowerShell 或 Windows 命令提示字元中執行以下指令，以下載 Milvus 獨立版（Standalone）的 Docker Compose 配置檔案並啟動 Milvus。​</p>
+<li><p>在 PowerShell 或 Windows 命令提示字元中執行以下指令，以下載 Milvus 獨立版（Standalone）的 Docker Compose 配置檔並啟動 Milvus。​</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.20/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.21/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -202,7 +202,7 @@ Creating milvus-standalone ... done​
 <ul>
 <li><p><strong>milvus-etcd</strong>容器並未向主機公開任何端口，且將其資料映射至當前資料夾中的<strong>volumes/etcd​</strong></p></li>
 <li><p><strong>milvus-minio</strong>容器在本地端提供<strong>9090</strong>和<strong>9091</strong>埠，使用預設的驗證憑證，並將其資料映射至當前資料夾中的<strong>volumes/minio</strong>。​</p></li>
-<li><p><strong>milvus-standalone</strong>容器在本地端以預設設定提供<strong>19530</strong>埠，並將其資料映射至當前資料夾中的<strong>volumes/milvus</strong>目錄。​</p></li>
+<li><p><strong>milvus-standalone</strong>容器在本地端以預設設定提供<strong>19530</strong>埠，並將其資料映射至當前資料夾中的<strong>volumes/milvus</strong>。​</p></li>
 </ul></li>
 </ol>
 <p>若您已安裝 WSL 2，亦可呼叫 Linux 版本的 Docker Compose 指令。​</p>
@@ -230,7 +230,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>下載 Milvus 配置檔案。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.20/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.21/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>啟動 Milvus。​</p>
@@ -410,9 +410,9 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 <li><a href="/docs/zh-hant/v2.6.x/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/zh-hant/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus-webui.md">Milvus WebUI</a>，這是專為 Milvus 可觀察性與管理設計的直觀網頁介面。</p></li>
+<li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus-webui.md">Milvus WebUI</a>，這是專為 Milvus 可觀察性與管理設計的直覺式網頁介面。</p></li>
 <li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>，這是一款用於 Milvus 資料備份的開源工具。</p></li>
 <li><p>探索<a href="/docs/zh-hant/v2.6.x/birdwatcher_overview.md">Birdwatcher，這</a>是一款用於 Milvus 除錯與動態配置更新的開源工具。</p></li>
-<li><p>探索<a href="https://github.com/zilliztech/attu">Attu，</a>這是一款用於直觀管理 Milvus 的開源 GUI 工具。</p></li>
+<li><p>探索<a href="https://github.com/zilliztech/attu">Attu，這</a>是一款用於直觀管理 Milvus 的開源圖形化介面工具。</p></li>
 <li><p><a href="/docs/zh-hant/v2.6.x/monitor.md">透過 Prometheus 監控 Milvus</a>。</p></li>
 </ul>

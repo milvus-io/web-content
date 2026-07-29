@@ -191,7 +191,7 @@ Delete successfully.​
 <li><p>Откройте Docker Desktop в режиме администратора, щелкнув правой кнопкой мыши и выбрав <strong>«Запуск от имени администратора</strong>».​</p></li>
 <li><p>Выполните следующие команды в PowerShell или командной строке Windows, чтобы загрузить файл конфигурации Docker Compose для Milvus Standalone и запустить Milvus.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.20/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.21/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -232,7 +232,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Загрузите файл конфигурации Milvus.​</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.20/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.21/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Запустите Milvus.</p>
@@ -284,7 +284,7 @@ Creating milvus-standalone ... done​
    <span>Виртуализация в «Диспетчере задач»</span>
   
  </span></p>
-<p>Если виртуализация отключена, вам, возможно, потребуется проверить настройки BIOS прошивки материнской платы. Способ включения виртуализации в настройках BIOS зависит от производителя материнской платы. Например, для материнских плат ASUS вы можете воспользоваться <a href="https://www.asus.com/support/faq/1043786/">этой статьёй</a> о включении виртуализации.​</p>
+<p>Если виртуализация отключена, вам, возможно, потребуется проверить настройки BIOS прошивки материнской платы. Способ включения виртуализации в настройках BIOS зависит от производителя материнской платы. Например, для материнских плат ASUS вы можете воспользоваться <a href="https://www.asus.com/support/faq/1043786/">этой статьёй</a> по включению виртуализации.​</p>
 <p>Затем необходимо перезагрузить компьютер и включить Hyper-V. Подробности см. в этой <a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">статье Microsoft</a>.​</p></li>
 <li><p>Проверьте, запущена ли служба Docker Desktop.</p>
 <p>Для запуска службы Docker Desktop можно выполнить следующую команду.</p>

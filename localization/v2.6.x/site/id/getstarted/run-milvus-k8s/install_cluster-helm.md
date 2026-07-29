@@ -127,7 +127,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Butuh penyebaran mandiri?</strong></p>
 <p>Jika Anda lebih memilih untuk menyebarkan Milvus dalam mode mandiri (satu node) untuk pengembangan atau pengujian, gunakan perintah ini:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.20 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.21 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
@@ -136,10 +136,10 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Catatan</strong>: Mode mandiri menggunakan Woodpecker sebagai antrian pesan default dan mengaktifkan komponen Streaming Node. Untuk detailnya, lihat <a href="/docs/id/v2.6.x/architecture_overview.md">Ikhtisar Arsitektur</a> dan <a href="/docs/id/v2.6.x/use-woodpecker.md">Menggunakan Woodpecker</a>.</p>
 </div>
-<p><strong>Deploy kluster Milvus:</strong></p>
-<p>Perintah berikut ini menyebarkan kluster Milvus dengan pengaturan yang dioptimalkan untuk v2.6.20, menggunakan Woodpecker sebagai antrian pesan yang direkomendasikan:</p>
+<p><strong>Menyebarkan kluster Milvus:</strong></p>
+<p>Perintah berikut ini menyebarkan kluster Milvus dengan pengaturan yang dioptimalkan untuk v2.6.21, menggunakan Woodpecker sebagai antrian pesan yang direkomendasikan:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.20 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.21 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -149,7 +149,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <ul>
 <li>Menggunakan <strong>Woodpecker</strong> sebagai antrian pesan (direkomendasikan untuk mengurangi beban pemeliharaan)</li>
 <li>Mengaktifkan komponen <strong>Streaming Node</strong> yang baru untuk meningkatkan kinerja</li>
-<li>Menonaktifkan <strong>Index Node</strong> versi lama (fungsionalitasnya kini ditangani oleh Data Node)</li>
+<li>Menonaktifkan <strong>Index Node</strong> versi lama (fungsinya kini ditangani oleh Data Node)</li>
 <li>Menonaktifkan Pulsar dan menggantinya dengan Woodpecker</li>
 </ul>
 <div class="alert note">
@@ -164,7 +164,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Opsi Antrian Pesan Alternatif:</strong></p>
 <p>Jika Anda lebih memilih menggunakan <strong>Pulsar</strong> (pilihan tradisional) daripada Woodpecker:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.20 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.21 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -206,7 +206,7 @@ Perintah di atas mengimplementasikan Milvus dengan konfigurasi yang direkomendas
     </button></h3><p>Pastikan deployment Anda berhasil dengan memeriksa status pod:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Tunggu hingga semua pod menunjukkan status “Running”.</strong> Dengan konfigurasi v2.6.20, Anda seharusnya melihat pod yang mirip dengan:</p>
+<p><strong>Tunggu hingga semua pod menunjukkan status “Running”.</strong> Dengan konfigurasi v2.6.21, Anda seharusnya melihat pod yang mirip dengan:</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s

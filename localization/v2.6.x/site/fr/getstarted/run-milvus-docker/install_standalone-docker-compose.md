@@ -57,7 +57,7 @@ title: Exécuter Milvus avec Docker Compose (Linux)
       </svg>
     </button></h2><p>Milvus fournit un fichier de configuration Docker Compose dans le référentiel Milvus. Pour installer Milvus à l'aide de Docker Compose, il suffit d'exécuter</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.20/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.21/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,21 +67,21 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Nouveautés de la version 2.6.20 :</strong></p>
+<p><strong>Nouveautés de la version 2.6.21 :</strong></p>
 <ul>
 <li><strong>Architecture améliorée</strong>: intègre le nouveau nœud de streaming et des composants optimisés</li>
 <li><strong>Dépendances mises à jour</strong>: inclut les dernières versions de MinIO et d’etcd</li>
 <li><strong>Configuration améliorée</strong>: paramètres optimisés pour de meilleures performances</li>
 </ul>
-<p>Téléchargez toujours la dernière configuration Docker Compose pour garantir la compatibilité avec les fonctionnalités de la v2.6.20.</p>
+<p>Téléchargez toujours la dernière configuration Docker Compose pour garantir la compatibilité avec les fonctionnalités de la v2.6.21.</p>
 <ul>
-<li><p>Si vous n'avez pas réussi à exécuter la commande ci-dessus, veuillez vérifier si Docker Compose V1 est installé sur votre système. Si tel est le cas, il est recommandé de migrer vers Docker Compose V2, conformément aux remarques figurant sur <a href="https://docs.docker.com/compose/">cette page</a>.</p></li>
+<li><p>Si vous ne parvenez pas à exécuter la commande ci-dessus, veuillez vérifier si Docker Compose V1 est installé sur votre système. Si tel est le cas, il est recommandé de migrer vers Docker Compose V2, conformément aux remarques figurant sur <a href="https://docs.docker.com/compose/">cette page</a>.</p></li>
 <li><p>Si vous rencontrez des difficultés pour récupérer l’image, contactez-nous à <a href="mailto:community@zilliz.com">l’adresse community@zilliz.com</a> en précisant les détails du problème, et nous vous fournirons l’assistance nécessaire.</p></li>
 </ul>
 </div>
 <p>Après le démarrage de Milvus,</p>
 <ul>
-<li>les conteneurs nommés <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> et <strong>milvus-etcd</strong> sont en cours d’exécution.
+<li>les conteneurs nommés <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> et <strong>milvus-etcd</strong> sont opérationnels.
 <ul>
 <li>Le conteneur <strong>milvus-etcd</strong> n’expose aucun port vers l’hôte et mappe ses données vers <strong>le</strong> répertoire <strong>volumes/etcd</strong> du dossier actuel.</li>
 <li>Le conteneur <strong>milvus-minio</strong> expose localement les ports <strong>9090</strong> et <strong>9091</strong> avec les identifiants d’authentification par défaut et mappe ses données vers le répertoire <strong>volumes/minio</strong> du dossier actuel.</li>

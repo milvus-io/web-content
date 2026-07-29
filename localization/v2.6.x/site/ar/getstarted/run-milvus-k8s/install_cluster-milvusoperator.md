@@ -175,7 +175,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>بمجرد تشغيل بود Milvus Operator، يمكنك نشر مجموعة Milvus على النحو التالي.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يقوم الأمر أعلاه بنشر مجموعة Milvus باستخدام <strong>Woodpecker</strong> كقائمة انتظار الرسائل (موصى به للإصدار v2.6.20) وجميع المكونات المعمارية الجديدة بما في ذلك Streaming Node.</p>
+<p>يقوم الأمر أعلاه بنشر مجموعة Milvus باستخدام <strong>Woodpecker</strong> كقائمة انتظار الرسائل (موصى به للإصدار v2.6.21) وجميع المكونات المعمارية الجديدة بما في ذلك Streaming Node.</p>
 <p><strong>أبرز ميزات البنية في هذا النشر:</strong></p>
 <ul>
 <li><strong>قائمة انتظار الرسائل</strong>: <a href="/docs/ar/v2.6.x/use-woodpecker.md">تستخدم Woodpecker</a> (تقلل من صيانة البنية التحتية)</li>
@@ -207,7 +207,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>قم بتشغيل الأمر التالي للتحقق من حالة مجموعة Milvus</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get milvus my-release -o yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>بمجرد أن تصبح مجموعة Milvus جاهزة، يجب أن يكون ناتج الأمر أعلاه مشابهًا لما يلي. إذا ظل حقل « <code translate="no">status.status</code> » (حالة المجموعة) على « <code translate="no">Unhealthy</code> » (قيد الإنشاء)، فهذا يعني أن مجموعة Milvus لا تزال قيد الإنشاء.</p>
+<p>بمجرد أن تصبح مجموعة Milvus جاهزة، يجب أن يكون ناتج الأمر أعلاه مشابهًا لما يلي. إذا ظل حقل « <code translate="no">status.status</code> » (حالة المجموعة) على « <code translate="no">Unhealthy</code> » (قيد الإنشاء)، فإن مجموعة Milvus الخاصة بك لا تزال قيد الإنشاء.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -306,7 +306,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
     </button></h2><p>يمكنك عرض تحديث تكوينات مجموعة Milvus الخاصة بك عن طريق استدعاء الأمر <code translate="no">patch</code> كما يلي:</p>
 <ol>
 <li><p>قم بتشغيل الأمر التالي لمعاينة الإعدادات المقترحة.</p>
-<p>يفترض ما يلي أنك تريد تحديث المعلمة <code translate="no">spec.components.disableMetric</code> إلى <code translate="no">false</code> ms.</p>
+<p>يفترض ما يلي أنك تريد تحديث معلمة <code translate="no">spec.components.disableMetric</code> إلى <code translate="no">false</code> ms.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl patch milvus my-release --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;merge&#x27;</span>\
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span> \
   --dry-run=client -o yaml</span>

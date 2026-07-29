@@ -191,7 +191,7 @@ Delete successfully.​
 <li><p>Öffnen Sie Docker Desktop im Administratormodus, indem Sie mit der rechten Maustaste darauf klicken und <strong>„Als Administrator ausführen“</strong> auswählen.</p></li>
 <li><p>Führen Sie die folgenden Befehle in der PowerShell oder der Windows-Eingabeaufforderung aus, um die Docker-Compose-Konfigurationsdatei für Milvus Standalone herunterzuladen und Milvus zu starten.​</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.20/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.21/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -232,7 +232,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Laden Sie die Milvus-Konfigurationsdatei herunter.​</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.20/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.21/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Starten Sie Milvus.</p>
@@ -286,7 +286,7 @@ Creating milvus-standalone ... done​
  </span></p>
 <p>Wenn die Virtualisierung deaktiviert ist, müssen Sie möglicherweise die BIOS-Einstellungen der Firmware Ihres Motherboards überprüfen. Die Vorgehensweise zum Aktivieren der Virtualisierung in den BIOS-Einstellungen variiert je nach Motherboard-Hersteller. Für ASUS-Motherboards können Sie beispielsweise <a href="https://www.asus.com/support/faq/1043786/">diesen Artikel</a> zur Aktivierung der Virtualisierung zu Rate ziehen.​</p>
 <p>Anschließend müssen Sie Ihren Computer neu starten und Hyper-V aktivieren. Weitere Informationen finden Sie in diesem <a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">Microsoft-Artikel</a>.​</p></li>
-<li><p>Überprüfen Sie, ob der Docker Desktop-Dienst gestartet wurde.</p>
+<li><p>Überprüfen Sie, ob der Docker Desktop-Dienst gestartet wurde.​</p>
 <p>Sie können den folgenden Befehl ausführen, um den Docker Desktop-Dienst zu starten.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;net start com.docker.service​
 The Docker for Windows Service service is starting.​

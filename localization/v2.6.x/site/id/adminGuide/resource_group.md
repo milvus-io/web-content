@@ -1,10 +1,10 @@
 ---
 id: resource_group.md
 related_key: Manage Resource Groups
-summary: Pelajari cara mengelola kelompok sumber daya.
-title: Mengelola Kelompok Sumber Daya
+summary: Pelajari cara mengelola grup sumber daya.
+title: Mengelola Grup Sumber Daya
 ---
-<h1 id="Manage-Resource-Groups" class="common-anchor-header">Mengelola Kelompok Sumber Daya<button data-href="#Manage-Resource-Groups" class="anchor-icon" translate="no">
+<h1 id="Manage-Resource-Groups" class="common-anchor-header">Mengelola Grup Sumber Daya<button data-href="#Manage-Resource-Groups" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,10 +35,10 @@ title: Mengelola Kelompok Sumber Daya
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sebuah grup sumber daya dapat menampung beberapa atau seluruh node kueri dalam sebuah kluster Milvus. Anda dapat menentukan sendiri bagaimana Anda ingin mengalokasikan node kueri di antara kelompok sumber daya berdasarkan apa yang paling sesuai bagi Anda. Misalnya, dalam skenario multi-koleksi, Anda dapat mengalokasikan jumlah node kueri yang sesuai ke setiap kelompok sumber daya dan memuat koleksi ke dalam kelompok sumber daya yang berbeda, sehingga operasi di dalam setiap koleksi secara fisik terpisah dari operasi di koleksi lainnya.</p>
-<p>Perhatikan bahwa sebuah instance Milvus mempertahankan grup sumber daya default untuk menampung semua node kueri saat startup dan menamainya <strong>__default_resource_group</strong>.</p>
-<p>Mulai versi 2.4.1, Milvus menyediakan API grup sumber daya deklaratif, sedangkan API grup sumber daya lama sudah tidak digunakan lagi. API deklaratif baru ini memungkinkan pengguna mencapai idempotensi, sehingga pengembangan sekunder di lingkungan cloud-native menjadi lebih mudah.</p>
-<h2 id="Concepts-of-resource-group" class="common-anchor-header">Konsep grup sumber daya<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
+    </button></h2><p>Sebuah grup sumber daya dapat menampung beberapa atau seluruh node kueri dalam sebuah kluster Milvus. Anda dapat menentukan sendiri bagaimana ingin mengalokasikan node kueri di antara kelompok sumber daya berdasarkan apa yang paling sesuai bagi Anda. Misalnya, dalam skenario multi-koleksi, Anda dapat mengalokasikan jumlah node kueri yang sesuai ke setiap kelompok sumber daya dan memuat koleksi ke dalam kelompok sumber daya yang berbeda, sehingga operasi di dalam setiap koleksi secara fisik terpisah dari operasi di koleksi lainnya.</p>
+<p>Perhatikan bahwa sebuah instance Milvus mempertahankan grup sumber daya default untuk menampung semua node kueri pada saat startup dan menamainya <strong>__default_resource_group</strong>.</p>
+<p>Mulai versi 2.4.1, Milvus menyediakan API grup sumber daya deklaratif, sementara API grup sumber daya lama telah dihentikan penggunaannya. API deklaratif baru ini memungkinkan pengguna mencapai idempotensi, sehingga pengembangan lanjutan di lingkungan cloud-native menjadi lebih mudah.</p>
+<h2 id="Concepts-of-resource-group" class="common-anchor-header">Konsep kelompok sumber daya<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -62,7 +62,7 @@ title: Mengelola Kelompok Sumber Daya
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>Atribut <strong>requests</strong> menentukan kondisi yang harus dipenuhi oleh grup sumber daya.</li>
+<li>Atribut ` <strong>requests</strong> ` menentukan kondisi yang harus dipenuhi oleh grup sumber daya.</li>
 <li>Atribut ` <strong>limits</strong> ` menentukan batas maksimum untuk grup sumber daya.</li>
 <li>Atribut ` <strong>transfer_from</strong> ` dan <strong>`transfer_to`</strong> masing-masing menjelaskan dari kelompok sumber daya mana kelompok sumber daya sebaiknya memperoleh sumber daya dan ke kelompok sumber daya mana sumber daya tersebut harus ditransfer.</li>
 </ul>
@@ -90,7 +90,7 @@ title: Mengelola Kelompok Sumber Daya
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Semua contoh kode di halaman ini menggunakan PyMilvus 2.6.16. Perbarui instalasi PyMilvus Anda sebelum menjalankannya.</p>
+<p>Semua contoh kode di halaman ini menggunakan PyMilvus 2.6.17. Perbarui instalasi PyMilvus Anda sebelum menjalankannya.</p>
 </div>
 <ol>
 <li><p>Buat grup sumber daya.</p>
@@ -137,7 +137,7 @@ node_num = <span class="hljs-number">0</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Pindahkan node antar grup sumber daya.</p>
 <p>Anda mungkin memperhatikan bahwa grup sumber daya yang dijelaskan belum memiliki node kueri sama sekali. Pindahkan beberapa node dari grup sumber daya default ke grup yang Anda buat sebagai berikut:
-Asumsikan saat ini terdapat 1 QueryNode di <strong>__default_resource_group</strong> kluster, dan kita ingin memindahkan satu node ke <strong>grup sumber daya</strong> yang telah dibuat.<code translate="no">update_resource_groups</code> memastikan keutuhan (atomicity) untuk perubahan konfigurasi ganda, sehingga tidak ada keadaan antara yang terlihat oleh Milvus.</p>
+Dengan asumsi saat ini ada 1 QueryNodes di <strong>__default_resource_group</strong> dari cluster, dan kita ingin memindahkan satu node ke <strong>rg</strong> yang telah dibuat.<code translate="no">update_resource_groups</code> memastikan atomisitas untuk beberapa perubahan konfigurasi, sehingga tidak ada status antara yang akan terlihat oleh Milvus.</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 expected_num_nodes_in_default = <span class="hljs-number">0</span>
@@ -174,7 +174,7 @@ milvus_client.load_collection(collection_name, replica_number=<span class="hljs-
 resource_groups = [<span class="hljs-string">&#x27;rg&#x27;</span>]
 milvus_client.load_collection(replica_number=<span class="hljs-number">2</span>, _resource_groups=resource_groups) 
 <button class="copy-code-btn"></button></code></pre>
-<p>Selain itu, Anda dapat memuat partisi ke dalam grup sumber daya dan membagi replikanya ke beberapa grup sumber daya. Contoh berikut mengasumsikan bahwa koleksi bernama <code translate="no">Books</code> sudah ada dan memiliki partisi bernama <code translate="no">Novels</code>.</p>
+<p>Selain itu, Anda dapat memuat partisi ke dalam grup sumber daya dan membagi replikanya ke beberapa grup sumber daya. Berikut ini mengasumsikan bahwa koleksi bernama <code translate="no">Books</code> sudah ada dan memiliki partisi bernama <code translate="no">Novels</code>.</p>
 <pre><code translate="no" class="language-python">collection = <span class="hljs-string">&quot;Books&quot;</span>
 partition = <span class="hljs-string">&quot;Novels&quot;</span>
 
@@ -233,9 +233,9 @@ except Exception:
     </button></h2><p>Saat ini, Milvus tidak dapat melakukan penskalaan masuk dan keluar secara mandiri di lingkungan cloud-native. Namun, dengan menggunakan <strong>API Kelompok Sumber Daya Deklaratif</strong> bersama dengan orkestrasi kontainer, Milvus dapat dengan mudah mencapai isolasi dan pengelolaan sumber daya untuk QueryNodes.
 Berikut adalah praktik terbaik untuk mengelola QueryNodes di lingkungan cloud:</p>
 <ol>
-<li><p>Secara default, Milvus membuat <strong>__default_resource_group</strong>. Grup sumber daya ini tidak dapat dihapus dan juga berfungsi sebagai grup sumber daya pemuatan default untuk semua koleksi, serta QueryNodes redundan selalu ditugaskan ke dalamnya. Oleh karena itu, kita dapat membuat grup sumber daya "pending" untuk menampung sumber daya QueryNode yang tidak terpakai, sehingga mencegah sumber daya QueryNode tersebut diduduki oleh <strong>__default_resource_group</strong>.</p>
-<p>Selain itu, jika kita menerapkan batasan <code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code> secara ketat, kita dapat mengontrol penugasan QueryNodes di dalam kluster dengan tepat. Mari kita asumsikan saat ini hanya ada satu QueryNode di dalam kluster dan inisialisasi kluster tersebut.
-Berikut adalah contoh pengaturan:</p>
+<li><p>Secara default, Milvus membuat <strong>__default_resource_group</strong>. Grup sumber daya ini tidak dapat dihapus dan juga berfungsi sebagai grup sumber daya pemuatan default untuk semua koleksi, serta QueryNodes redundan selalu ditugaskan ke dalamnya. Oleh karena itu, kita dapat membuat grup sumber daya "pending" untuk menampung sumber daya QueryNode yang tidak digunakan, sehingga mencegah sumber daya QueryNode tersebut diduduki oleh <strong>__default_resource_group</strong>.</p>
+<p>Selain itu, jika kita menerapkan batasan ` <code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code>` secara ketat, kita dapat mengontrol penugasan QueryNodes di dalam kluster dengan tepat. Mari kita asumsikan saat ini hanya ada satu QueryNode di dalam kluster dan inisialisasi kluster tersebut.
+Berikut adalah contoh konfigurasi:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.client.types <span class="hljs-keyword">import</span> ResourceGroupConfig
 
 _PENDING_NODES_RESOURCE_GROUP=<span class="hljs-string">&quot;__pending_nodes&quot;</span>

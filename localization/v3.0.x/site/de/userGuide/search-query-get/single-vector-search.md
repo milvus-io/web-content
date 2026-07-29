@@ -2,8 +2,8 @@
 id: single-vector-search.md
 title: Einfache Vektorsuche
 summary: >-
-  Führen Sie grundlegende ANN-Suchen in Milvus mit Abfragevektoren,
-  Ausgabefeldern, Filtern, Bereichen und Iteratoren durch.
+  Führen Sie in Milvus einfache ANN-Suchen mit Abfragevektoren, Ausgabefeldern,
+  Filtern, Bereichen und Iteratoren durch.
 ---
 <h1 id="Basic-Vector-Search" class="common-anchor-header">Einfache Vektorsuche<button data-href="#Basic-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,9 +20,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Auf der Grundlage einer Indexdatei, in der die sortierte Reihenfolge der Vektoreinbettungen aufgezeichnet ist, findet die ANN-Suche (Approximate Nearest Neighbor) eine Untergruppe von Vektoreinbettungen auf der Grundlage des Abfragevektors in einer empfangenen Suchanfrage, vergleicht den Abfragevektor mit denen in der Untergruppe und liefert die ähnlichsten Ergebnisse. Mit der ANN-Suche bietet Milvus ein effizientes Sucherlebnis. Auf dieser Seite erfahren Sie, wie Sie grundlegende ANN-Suchen durchführen können.</p>
+    </button></h1><p>Auf der Grundlage einer Indexdatei, in der die sortierte Reihenfolge der Vektor-Einbettungen gespeichert ist, ermittelt die ANN-Suche (Approximate Nearest Neighbor) anhand des in einer eingegangenen Suchanfrage enthaltenen Suchvektors eine Teilmenge von Vektor-Einbettungen, vergleicht den Suchvektor mit denen in dieser Teilmenge und gibt die ähnlichsten Ergebnisse zurück. Mit der ANN-Suche bietet Milvus ein effizientes Sucherlebnis. Auf dieser Seite erfahren Sie, wie Sie grundlegende ANN-Suchen durchführen.</p>
 <div class="alert note">
-<p>Wenn Sie neue Felder dynamisch hinzufügen, nachdem die Sammlung erstellt wurde, geben Suchen, die diese Felder einschließen, die definierten Standardwerte oder NULL für Entitäten zurück, die nicht explizit Werte festgelegt haben. Einzelheiten finden Sie unter <a href="/docs/de/add-fields-to-an-existing-collection.md">Felder zu einer bestehenden Sammlung hinzufügen</a>.</p>
+<p>Wenn Sie nach der Erstellung der Sammlung neue Felder hinzufügen, geben Suchanfragen, die diese Felder enthalten, für Entitäten, für die keine Werte explizit festgelegt wurden, die definierten Standardwerte oder „ <code translate="no">NULL</code> “ zurück. Weitere Informationen finden Sie unter <a href="/docs/de/add-fields-to-an-existing-collection.md">„Sammlungsschema ändern</a>“.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Übersicht<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,20 +39,20 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die ANN- und die k-Nächste-Nachbarn-Suche (kNN) sind die üblichen Methoden bei Vektorähnlichkeitssuchen. Bei der kNN-Suche müssen Sie alle Vektoren in einem Vektorraum mit dem Abfragevektor in der Suchanfrage vergleichen, bevor Sie die ähnlichsten herausfinden, was zeit- und ressourcenaufwändig ist.</p>
-<p>Im Gegensatz zur kNN-Suche wird bei einem ANN-Suchalgorithmus eine <strong>Indexdatei</strong> angefordert, die die sortierte Reihenfolge der Vektoreinbettungen aufzeichnet. Wenn eine Suchanfrage eingeht, können Sie die Indexdatei als Referenz verwenden, um schnell eine Untergruppe zu finden, die wahrscheinlich die Vektoreinbettungen enthält, die dem Abfragevektor am ähnlichsten sind. Dann können Sie den angegebenen <strong>metrischen Typ</strong> verwenden, um die Ähnlichkeit zwischen dem Abfragevektor und den Vektoren in der Untergruppe zu messen, die Gruppenmitglieder auf der Grundlage der Ähnlichkeit mit dem Abfragevektor zu sortieren und die <strong>Top-K-Gruppenmitglieder</strong> zu ermitteln.</p>
-<p>ANN-Suchen hängen von vorgefertigten Indizes ab, und der Suchdurchsatz, die Speichernutzung und die Korrektheit der Suche können je nach den gewählten Indextypen variieren. Sie müssen ein Gleichgewicht zwischen Suchleistung und Korrektheit finden.</p>
-<p>Um die Lernkurve zu reduzieren, bietet Milvus <strong>AUTOINDEX</strong>. Mit <strong>AUTOINDEX</strong> kann Milvus die Datenverteilung innerhalb Ihrer Sammlung analysieren, während der Index aufgebaut wird, und stellt die optimalsten Indexparameter auf der Grundlage der Analyse ein, um ein Gleichgewicht zwischen Suchleistung und Korrektheit herzustellen.</p>
+    </button></h2><p>Die ANN- und die k-Nearest-Neighbors-Suche (kNN) sind die gängigen Methoden bei der Vektorähnlichkeitssuche. Bei einer kNN-Suche müssen Sie alle Vektoren in einem Vektorraum mit dem in der Suchanfrage enthaltenen Abfragevektor vergleichen, bevor Sie die ähnlichsten ermitteln können, was zeitaufwendig und ressourcenintensiv ist.</p>
+<p>Im Gegensatz zur kNN-Suche benötigt der ANN-Suchalgorithmus eine <strong>Indexdatei</strong>, in der die sortierte Reihenfolge der Vektoreinbettungen gespeichert ist. Wenn eine Suchanfrage eingeht, können Sie die Indexdatei als Referenz verwenden, um schnell eine Untergruppe zu finden, die wahrscheinlich die dem Suchvektor am ähnlichsten Vektoreinbettungen enthält. Anschließend können Sie den angegebenen <strong>Metriktyp</strong> verwenden, um die Ähnlichkeit zwischen dem Suchvektor und den Vektoren in der Untergruppe zu messen, die Gruppenmitglieder nach ihrer Ähnlichkeit mit dem Suchvektor zu sortieren und die <strong>Top-K-Gruppenmitglieder</strong> zu ermitteln.</p>
+<p>ANN-Suchen basieren auf vorgefertigten Indizes, und der Suchdurchsatz, der Speicherverbrauch sowie die Suchgenauigkeit können je nach den von Ihnen gewählten Indextypen variieren. Sie müssen ein Gleichgewicht zwischen Suchleistung und Suchgenauigkeit finden.</p>
+<p>Um den Lernaufwand zu verringern, bietet Milvus <strong>die Funktion „AUTOINDEX“</strong> an. Mit <strong>„AUTOINDEX“</strong> kann Milvus die Datenverteilung innerhalb Ihrer Sammlung während der Indexerstellung analysieren und auf der Grundlage dieser Analyse die optimalsten Indexparameter festlegen, um ein Gleichgewicht zwischen Suchleistung und Suchgenauigkeit herzustellen.</p>
 <p>In diesem Abschnitt finden Sie detaillierte Informationen zu den folgenden Themen:</p>
 <ul>
-<li><p><a href="/docs/de/single-vector-search.md#Single-Vector-Search">Ein-Vektor-Suche</a></p></li>
-<li><p><a href="/docs/de/single-vector-search.md#Bulk-Vector-Search">Bulk-Vektor-Suche</a></p></li>
+<li><p><a href="/docs/de/single-vector-search.md#Single-Vector-Search">Einzelvektor-Suche</a></p></li>
+<li><p><a href="/docs/de/single-vector-search.md#Bulk-Vector-Search">Massenvektorsuche</a></p></li>
 <li><p><a href="/docs/de/single-vector-search.md#ANN-Search-in-Partition">ANN-Suche in Partitionen</a></p></li>
 <li><p><a href="/docs/de/single-vector-search.md#Use-Output-Fields">Verwendung von Ausgabefeldern</a></p></li>
-<li><p><a href="/docs/de/single-vector-search.md#Use-Limit-and-Offset">Limit und Offset verwenden</a></p></li>
-<li><p><a href="/docs/de/single-vector-search.md#Use-Level">Level verwenden</a></p></li>
-<li><p><a href="/docs/de/single-vector-search.md#Get-Recall-Rate">Recall-Rate erhalten</a></p></li>
-<li><p><a href="/docs/de/single-vector-search.md#Enhancing-ANN-Search">Verbessern der ANN-Suche</a></p></li>
+<li><p><a href="/docs/de/single-vector-search.md#Use-Limit-and-Offset">Verwendung von „limit“ und „offset“</a></p></li>
+<li><p><a href="/docs/de/single-vector-search.md#Use-Level">Ebene verwenden</a></p></li>
+<li><p><a href="/docs/de/single-vector-search.md#Get-Recall-Rate">Recall-Rate ermitteln</a></p></li>
+<li><p><a href="/docs/de/single-vector-search.md#Enhancing-ANN-Search">Verbesserung der ANN-Suche</a></p></li>
 </ul>
 <h2 id="Single-Vector-Search" class="common-anchor-header">Ein-Vektor-Suche<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -69,10 +69,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bei der ANN-Suche bezieht sich eine Ein-Vektor-Suche auf eine Suche, die nur einen Abfragevektor umfasst. Basierend auf dem vorgefertigten Index und dem metrischen Typ, der in der Suchanfrage enthalten ist, findet Milvus die Top-K Vektoren, die dem Abfragevektor am ähnlichsten sind.</p>
-<p>In diesem Abschnitt erfahren Sie, wie Sie eine Ein-Vektor-Suche durchführen können. Die Suchanfrage enthält einen einzigen Abfragevektor und bittet Milvus, das Innere Produkt (IP) zu verwenden, um die Ähnlichkeit zwischen den Abfragevektoren und den Vektoren in der Sammlung zu berechnen und die drei ähnlichsten Vektoren zurückzugeben.</p>
+    </button></h2><p>Bei ANN-Suchen bezeichnet eine Einzelvektor-Suche eine Suche, bei der nur ein Abfragevektor verwendet wird. Basierend auf dem vorgefertigten Index und dem in der Suchanfrage enthaltenen Metriktyp ermittelt Milvus die Top-K-Vektoren, die dem Abfragevektor am ähnlichsten sind.</p>
+<p>In diesem Abschnitt erfahren Sie, wie Sie eine Ein-Vektor-Suche durchführen. Die Suchanfrage enthält einen einzigen Abfragevektor und weist Milvus an, die Ähnlichkeit zwischen dem Abfragevektor und den Vektoren in der Sammlung mithilfe des Skalarprodukts (IP) zu berechnen und die drei ähnlichsten Vektoren zurückzugeben.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -251,17 +256,17 @@ curl --request POST \
 <span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus ordnet die Suchergebnisse nach ihren Ähnlichkeitswerten zum Abfragevektor in absteigender Reihenfolge. Der Ähnlichkeitswert wird auch als Abstand zum Abfragevektor bezeichnet, und seine Wertebereiche variieren je nach den verwendeten metrischen Typen.</p>
-<p>In der folgenden Tabelle sind die anwendbaren metrischen Typen und die entsprechenden Abstandsbereiche aufgeführt.</p>
+<p>Milvus ordnet die Suchergebnisse nach ihren Ähnlichkeitswerten zum Abfragevektor in absteigender Reihenfolge. Der Ähnlichkeitswert wird auch als Abstand zum Abfragevektor bezeichnet, und seine Wertebereiche variieren je nach den verwendeten Metriktypen.</p>
+<p>Die folgende Tabelle listet die anwendbaren Metriktypen und die entsprechenden Abstandsbereiche auf.</p>
 <table>
    <tr>
-     <th><p>Metrik Typ</p></th>
-     <th><p>Merkmale</p></th>
+     <th><p>Metriktyp</p></th>
+     <th><p>Eigenschaften</p></th>
      <th><p>Abstandsbereich</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">L2</code></p></td>
-     <td><p>Ein kleinerer Wert bedeutet eine höhere Ähnlichkeit.</p></td>
+     <td><p>Ein kleinerer Wert weist auf eine höhere Ähnlichkeit hin.</p></td>
      <td><p>[0, ∞)</p></td>
    </tr>
    <tr>
@@ -281,11 +286,11 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">HAMMING</code></p></td>
-     <td><p>Ein kleinerer Wert deutet auf eine größere Ähnlichkeit hin.</p></td>
-     <td><p>[0, dim(vector)]</p></td>
+     <td><p>Ein kleinerer Wert weist auf eine höhere Ähnlichkeit hin.</p></td>
+     <td><p>[0, dim(Vektor)]</p></td>
    </tr>
 </table>
-<h2 id="Bulk-Vector-Search" class="common-anchor-header">Bulk-Vektor-Suche<button data-href="#Bulk-Vector-Search" class="anchor-icon" translate="no">
+<h2 id="Bulk-Vector-Search" class="common-anchor-header">Massen-Vektorsuche<button data-href="#Bulk-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -300,9 +305,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In ähnlicher Weise können Sie mehrere Abfragevektoren in eine Suchanfrage aufnehmen. Milvus führt dann parallel ANN-Suchen nach den Abfragevektoren durch und gibt zwei Ergebnismengen zurück.</p>
+    </button></h2><p>Ebenso können Sie mehrere Abfragevektoren in eine Suchanfrage einbeziehen. Milvus führt dann parallel ANN-Suchen für die Abfragevektoren durch und gibt zwei Ergebnismengen zurück.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Search with multiple vectors</span>
 <span class="hljs-comment"># 7.1. Prepare query vectors</span>
 query_vectors = [
@@ -515,9 +525,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Anstatt Abfragevektoren zu setzen, können Sie Primärschlüssel verwenden, wenn die Abfragevektoren bereits in der Zielsammlung existieren.</p>
+    </button></h2><p>Anstelle der Angabe von Abfragevektoren können Sie Primärschlüssel verwenden, wenn die Abfragevektoren bereits in der Zielsammlung vorhanden sind.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     anns_field=<span class="hljs-string">&quot;vector&quot;</span>,
@@ -551,7 +566,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="ANN-Search-in-Partition" class="common-anchor-header">ANN-Suche in Partition<button data-href="#ANN-Search-in-Partition" class="anchor-icon" translate="no">
+<h2 id="ANN-Search-in-Partition" class="common-anchor-header">ANN-Suche in Partitionen<button data-href="#ANN-Search-in-Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -566,10 +581,15 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Angenommen, Sie haben mehrere Partitionen in einer Sammlung erstellt und können den Suchbereich auf eine bestimmte Anzahl von Partitionen eingrenzen. In diesem Fall können Sie die Namen der Zielpartitionen in die Suchanfrage aufnehmen, um den Suchbereich auf die angegebenen Partitionen zu beschränken. Die Verringerung der Anzahl der an der Suche beteiligten Partitionen verbessert die Suchleistung.</p>
-<p>Das folgende Codeschnipsel geht von einer Partition namens <strong>PartitionA</strong> in Ihrer Sammlung aus.</p>
+    </button></h2><p>Angenommen, Sie haben mehrere Partitionen in einer Sammlung erstellt und können den Suchbereich auf eine bestimmte Anzahl von Partitionen eingrenzen. In diesem Fall können Sie die Namen der Zielpartitionen in die Suchanfrage aufnehmen, um den Suchbereich auf die angegebenen Partitionen zu beschränken. Durch die Reduzierung der Anzahl der an der Suche beteiligten Partitionen wird die Suchleistung verbessert.</p>
+<p>Der folgende Codeausschnitt geht von einer Partition namens <strong>„PartitionA“</strong> in Ihrer Sammlung aus.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search</span>
 query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]
 res = client.search(
@@ -721,9 +741,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In einem Suchergebnis enthält Milvus standardmäßig die Werte der Primärfelder und die Ähnlichkeitsdistanzen/-punkte der Entitäten, die die Top-K-Vektoreinbettungen enthalten. Sie können die Namen der Zielfelder, einschließlich der Vektor- und Skalarfelder, als Ausgabefelder in eine Suchanfrage aufnehmen, damit die Suchergebnisse die Werte anderer Felder in diesen Entitäten enthalten.</p>
+    </button></h2><p>In einem Suchergebnis gibt Milvus standardmäßig die Werte der Primärfelder sowie die Ähnlichkeitsabstände/-werte der Entitäten an, die die Top-K-Vektor-Einbettungen enthalten. Sie können die Namen der Zielfelder – einschließlich der Vektor- und Skalarfelder – in einer Suchanfrage als Ausgabefelder angeben, damit die Suchergebnisse die Werte aus anderen Feldern dieser Entitäten enthalten.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search</span>
 query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>],
 
@@ -869,7 +894,7 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;topks&quot;:[3]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Sort-Search-Results-by-Scalar-Fields--Milvus-30x" class="common-anchor-header">Suchergebnisse nach skalaren Feldern sortieren<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Sort-Search-Results-by-Scalar-Fields--Milvus-30x" class="anchor-icon" translate="no">
+<h2 id="Sort-Search-Results-by-Scalar-Fields--Milvus-30x" class="common-anchor-header">Suchergebnisse nach Skalarfeldern sortieren<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Sort-Search-Results-by-Scalar-Fields--Milvus-30x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -884,11 +909,16 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Standardmäßig sortiert Milvus die Suchergebnisse nach ihrem Ähnlichkeitswert zum Abfragevektor. Wenn Sie möchten, dass die zurückgegebenen Entitäten einer skalaren Feldreihenfolge folgen, fügen Sie <code translate="no">order_by_fields</code> zur Suchanfrage hinzu.</p>
-<p>Jedes Element in <code translate="no">order_by_fields</code> spezifiziert ein Skalarfeld und eine Sortierrichtung. Verwenden Sie <code translate="no">&quot;asc&quot;</code> für aufsteigende Reihenfolge oder <code translate="no">&quot;desc&quot;</code> für absteigende Reihenfolge. Wenn Sie <code translate="no">order</code> weglassen, sortiert Milvus das Feld in aufsteigender Reihenfolge.</p>
-<p>Das folgende Beispiel sortiert die Suchergebnisse nach <code translate="no">price</code> von unten nach oben. Fügen Sie das Sortierfeld in <code translate="no">output_fields</code> ein, wenn Sie den Feldwert in der Antwort überprüfen möchten.</p>
+    </button></h2><p>Standardmäßig sortiert Milvus die Suchergebnisse nach ihrem Ähnlichkeitswert zum Abfragevektor. Wenn Sie möchten, dass die zurückgegebenen Entitäten einer Skalarfeldreihenfolge folgen, fügen Sie <code translate="no">order_by_fields</code> zur Suchanfrage hinzu.</p>
+<p>Jeder Eintrag in ` <code translate="no">order_by_fields</code> ` gibt ein skalares Feld und eine Sortierrichtung an. Verwenden Sie ` <code translate="no">&quot;asc&quot;</code> ` für aufsteigende Reihenfolge oder ` <code translate="no">&quot;desc&quot;</code> ` für absteigende Reihenfolge. Wenn Sie ` <code translate="no">order</code>` weglassen, sortiert Milvus das Feld in aufsteigender Reihenfolge.</p>
+<p>Im folgenden Beispiel werden die Suchergebnisse nach „ <code translate="no">price</code> “ von niedrig nach hoch sortiert. Fügen Sie das Sortierfeld in „ <code translate="no">output_fields</code> “ ein, wenn Sie den Feldwert in der Antwort überprüfen möchten.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
     data=query_vectors,
@@ -908,9 +938,14 @@ curl --request POST \
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Sie können auch nach mehreren skalaren Feldern sortieren. Milvus wendet die Felder in der Reihenfolge an, die Sie angeben. Im folgenden Beispiel sortiert Milvus die Ergebnisse nach <code translate="no">price</code> in aufsteigender Reihenfolge. Für Entitäten mit demselben <code translate="no">price</code> sortiert Milvus dann nach <code translate="no">rating</code> in absteigender Reihenfolge.</p>
+<p>Sie können auch nach mehreren skalaren Feldern sortieren. Milvus wendet die Felder in der von Ihnen angegebenen Reihenfolge an. Im folgenden Beispiel sortiert Milvus die Ergebnisse nach „ <code translate="no">price</code> “ in aufsteigender Reihenfolge. Bei Entitäten mit demselben „ <code translate="no">price</code> “ sortiert Milvus anschließend nach „ <code translate="no">rating</code> “ in absteigender Reihenfolge.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
     data=query_vectors,
@@ -931,8 +966,8 @@ curl --request POST \
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Für Entitäten mit denselben Werten in allen angegebenen order-by-Feldern behält Milvus die ursprüngliche Reihenfolge der Ähnlichkeitsbewertung bei.</p>
-<h2 id="Use-Limit-and-Offset" class="common-anchor-header">Limit und Offset verwenden<button data-href="#Use-Limit-and-Offset" class="anchor-icon" translate="no">
+<p>Bei Entitäten mit identischen Werten in allen angegebenen Sortierfeldern behält Milvus die ursprüngliche Reihenfolge der Ähnlichkeitswerte bei.</p>
+<h2 id="Use-Limit-and-Offset" class="common-anchor-header">Verwenden von „Limit“ und „Offset“<button data-href="#Use-Limit-and-Offset" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -947,39 +982,44 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie werden feststellen, dass der Parameter <code translate="no">limit</code>, der in den Suchanfragen enthalten ist, die Anzahl der Entitäten bestimmt, die in die Suchergebnisse aufgenommen werden. Dieser Parameter gibt die maximale Anzahl von Entitäten an, die in einer einzigen Suche zurückgegeben werden sollen, und wird normalerweise als <strong>Top-K</strong> bezeichnet.</p>
-<p>Wenn Sie paginierte Suchanfragen durchführen möchten, können Sie eine Schleife verwenden, um mehrere Suchanfragen zu senden, wobei die Parameter <strong>Limit</strong> und <strong>Offset</strong> in jeder Suchanfrage enthalten sind. Insbesondere können Sie den Parameter <strong>Limit</strong> auf die Anzahl der Entitäten setzen, die Sie in die aktuellen Abfrageergebnisse aufnehmen möchten, und den Parameter <strong>Offset</strong> auf die Gesamtzahl der Entitäten, die bereits zurückgegeben wurden.</p>
-<p>Die nachstehende Tabelle zeigt, wie Sie die Parameter <strong>Limit</strong> und <strong>Offset</strong> für paginierte Abfragen einstellen, wenn 100 Entitäten auf einmal zurückgegeben werden.</p>
+    </button></h2><p>Möglicherweise ist Ihnen aufgefallen, dass der in den Suchanfragen übergebene Parameter „ <code translate="no">limit</code> “ die Anzahl der Entitäten bestimmt, die in die Suchergebnisse aufgenommen werden sollen. Dieser Parameter gibt die maximale Anzahl der Entitäten an, die bei einer einzelnen Suche zurückgegeben werden sollen, und wird üblicherweise als <strong>„Top-K“</strong> bezeichnet.</p>
+<p>Wenn Sie paginierte Abfragen durchführen möchten, können Sie mithilfe einer Schleife mehrere Suchanfragen senden, wobei die Parameter <strong>„Limit“</strong> und <strong>„Offset“</strong> in jeder Suchanfrage enthalten sind. Konkret können Sie den <strong>„Limit“-Parameter</strong> auf die Anzahl der Entitäten setzen, die Sie in die aktuellen Suchergebnisse aufnehmen möchten, und den <strong>„Offset“-Parameter</strong> auf die Gesamtzahl der bereits zurückgegebenen Entitäten setzen.</p>
+<p>Die folgende Tabelle zeigt, wie die Parameter <strong>„Limit“</strong> und <strong>„Offset“</strong> für paginierte Abfragen eingestellt werden, wenn jeweils 100 Entitäten zurückgegeben werden.</p>
 <table>
    <tr>
      <th><p>Abfragen</p></th>
-     <th><p>Zurückzugebende Entitäten pro Abfrage</p></th>
-     <th><p>Bereits zurückgegebene Einträge insgesamt</p></th>
+     <th><p>Pro Abfrage zurückzugebende Entitäten</p></th>
+     <th><p>Gesamtzahl der bereits zurückgegebenen Entitäten</p></th>
    </tr>
    <tr>
-     <td><p>Die <strong>1.</strong> Abfrage</p></td>
+     <td><p>Die <strong>erste</strong> Abfrage</p></td>
      <td><p>100</p></td>
      <td><p>0</p></td>
    </tr>
    <tr>
-     <td><p>Die <strong>2.</strong> Abfrage</p></td>
+     <td><p>Die <strong>zweite</strong> Abfrage</p></td>
      <td><p>100</p></td>
      <td><p>100</p></td>
    </tr>
    <tr>
-     <td><p>Die <strong>3.</strong> Abfrage</p></td>
+     <td><p>Die <strong>dritte</strong> Abfrage</p></td>
      <td><p>100</p></td>
      <td><p>200</p></td>
    </tr>
    <tr>
      <td><p>Die <strong>n-te</strong> Abfrage</p></td>
      <td><p>100</p></td>
-     <td><p>100 x (n-1)</p></td>
+     <td><p>100 × (n-1)</p></td>
    </tr>
 </table>
-<p>Beachten Sie, dass die Summe von <code translate="no">limit</code> und <code translate="no">offset</code> in einer einzigen ANN-Suche weniger als 16.384 betragen sollte.</p>
+<p>Beachten Sie, dass die Summe aus <code translate="no">limit</code> und <code translate="no">offset</code> bei einer einzelnen ANN-Suche kleiner als 16.384 sein sollte.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search</span>
 query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>],
 
@@ -1068,7 +1108,7 @@ curl --request POST \
     &quot;offset&quot;: 10
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Temporarily-set-a-timezone-for-a-search" class="common-anchor-header">Vorübergehend eine Zeitzone für eine Suche festlegen<button data-href="#Temporarily-set-a-timezone-for-a-search" class="anchor-icon" translate="no">
+<h2 id="Temporarily-set-a-timezone-for-a-search" class="common-anchor-header">Zeitlich begrenzte Festlegung einer Zeitzone für eine Suche<button data-href="#Temporarily-set-a-timezone-for-a-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1083,11 +1123,16 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Wenn Ihre Sammlung ein Feld <code translate="no">TIMESTAMPTZ</code> hat, können Sie die Standardzeitzone der Datenbank oder Sammlung für einen einzelnen Vorgang vorübergehend außer Kraft setzen, indem Sie den Parameter <code translate="no">timezone</code> im Suchaufruf setzen. Dies steuert, wie <code translate="no">TIMESTAMPTZ</code> Werte während des Vorgangs angezeigt und verglichen werden.</p>
-<p>Der Wert von <code translate="no">timezone</code> muss eine gültige <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA-Zeitzonenkennung</a> sein (z. B. <strong>Asien/Shanghai</strong>, <strong>Amerika/Chicago</strong> oder <strong>UTC</strong>). Einzelheiten zur Verwendung des Feldes <code translate="no">TIMESTAMPTZ</code> finden Sie unter <a href="/docs/de/timestamptz-field.md">TIMESTAMPTZ-Feld</a>.</p>
-<p>Das folgende Beispiel zeigt, wie eine Zeitzone für einen Suchvorgang vorübergehend festgelegt wird:</p>
+    </button></h2><p>Wenn Ihre Sammlung über ein Feld „ <code translate="no">TIMESTAMPTZ</code> “ verfügt, können Sie die Standardzeitzone der Datenbank oder der Sammlung für einen einzelnen Vorgang vorübergehend überschreiben, indem Sie den Parameter „ <code translate="no">timezone</code> “ im Suchaufruf festlegen. Dadurch wird gesteuert, wie „ <code translate="no">TIMESTAMPTZ</code> “-Werte während des Vorgangs angezeigt und verglichen werden.</p>
+<p>Der Wert von „ <code translate="no">timezone</code> “ muss eine gültige <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA-Zeitzonenkennung</a> sein (z. B. <strong>„Asia/Shanghai“</strong>, <strong>„America/Chicago“</strong> oder <strong>„UTC“</strong>). Weitere Informationen zur Verwendung des Felds „ <code translate="no">TIMESTAMPTZ</code> “ finden Sie unter <a href="/docs/de/timestamptz-field.md">„TIMESTAMPTZ-Feld</a>“.</p>
+<p>Das folgende Beispiel zeigt, wie Sie vorübergehend eine Zeitzone für eine Suchoperation festlegen können:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     anns_field=<span class="hljs-string">&quot;vector&quot;</span>,
@@ -1120,7 +1165,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
   }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Enhancing-ANN-Search" class="common-anchor-header">Verbessern der ANN-Suche<button data-href="#Enhancing-ANN-Search" class="anchor-icon" translate="no">
+<h2 id="Enhancing-ANN-Search" class="common-anchor-header">Verbesserung der ANN-Suche<button data-href="#Enhancing-ANN-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1135,36 +1180,36 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>AUTOINDEX flacht die Lernkurve der ANN-Suche erheblich ab. Allerdings sind die Suchergebnisse nicht immer korrekt, wenn der Top-K-Wert steigt. Durch die Reduzierung des Suchumfangs, die Verbesserung der Relevanz der Suchergebnisse und die Diversifizierung der Suchergebnisse arbeitet Milvus die folgenden Suchverbesserungen aus.</p>
+    </button></h2><p>AUTOINDEX vereinfacht die Einarbeitung in ANN-Suchen erheblich. Mit steigendem „Top-K“-Wert sind die Suchergebnisse jedoch möglicherweise nicht immer korrekt. Durch die Verringerung des Suchumfangs, die Verbesserung der Relevanz der Suchergebnisse und die Diversifizierung der Suchergebnisse realisiert Milvus die folgenden Suchverbesserungen.</p>
 <ul>
 <li><p>Gefilterte Suche</p>
-<p>Sie können Filterbedingungen in eine Suchanfrage aufnehmen, so dass Milvus vor der Durchführung von ANN-Suchen eine Metadatenfilterung durchführt und den Suchbereich von der gesamten Sammlung auf die Entitäten reduziert, die den angegebenen Filterbedingungen entsprechen.</p>
-<p>Weitere Informationen über Metadatenfilterung und Filterbedingungen finden Sie unter <a href="/docs/de/filtered-search.md">Gefilterte Suche</a>, <a href="/docs/de/boolean.md">Filterung erklärt</a> und verwandte Themen.</p></li>
+<p>Sie können Filterbedingungen in eine Suchanfrage einbeziehen, sodass Milvus vor der Durchführung von ANN-Suchen eine Metadatenfilterung durchführt und den Suchumfang von der gesamten Sammlung auf nur die Entitäten reduziert, die den angegebenen Filterbedingungen entsprechen.</p>
+<p>Weitere Informationen zur Metadatenfilterung und zu Filterbedingungen finden Sie unter <a href="/docs/de/filtered-search.md">„Gefilterte Suche“</a>, <a href="/docs/de/boolean.md">„Erläuterungen zur Filterung</a>“ und in verwandten Themen.</p></li>
 <li><p>Bereichssuche</p>
-<p>Sie können die Relevanz der Suchergebnisse verbessern, indem Sie den Abstand oder die Punktzahl der zurückgegebenen Entitäten innerhalb eines bestimmten Bereichs einschränken. In Milvus beinhaltet eine Bereichssuche das Zeichnen von zwei konzentrischen Kreisen mit der Vektoreinbettung, die dem Abfragevektor am ähnlichsten ist, als Zentrum. Die Suchanfrage gibt den Radius der beiden Kreise an, und Milvus gibt alle Vektoreinbettungen zurück, die in den äußeren Kreis, aber nicht in den inneren Kreis fallen.</p>
-<p>Weitere Informationen zur Bereichssuche finden Sie unter <a href="/docs/de/range-search.md">Bereichssuche</a>.</p></li>
-<li><p>Gruppierungssuche</p>
-<p>Wenn die zurückgegebenen Entitäten in einem bestimmten Feld denselben Wert haben, repräsentieren die Suchergebnisse möglicherweise nicht die Verteilung aller Vektoreinbettungen im Vektorraum. Um die Suchergebnisse zu diversifizieren, sollten Sie die gruppierende Suche verwenden.</p>
-<p>Weitere Informationen zur Gruppierungssuche finden Sie unter <a href="/docs/de/grouping-search.md">Gruppierungssuche</a>,</p></li>
+<p>Sie können die Relevanz der Suchergebnisse verbessern, indem Sie den Abstand oder den Score der zurückgegebenen Entitäten auf einen bestimmten Bereich beschränken. In Milvus erfolgt eine Bereichssuche durch das Zeichnen zweier konzentrischer Kreise, deren Mittelpunkt jeweils die Vektor-Einbettung ist, die dem Abfragevektor am ähnlichsten ist. Die Suchanfrage gibt den Radius beider Kreise vor, und Milvus gibt alle Vektor-Einbettungen zurück, die innerhalb des äußeren Kreises, aber nicht innerhalb des inneren Kreises liegen.</p>
+<p>Weitere Informationen zur Bereichssuche finden Sie unter <a href="/docs/de/range-search.md">„Bereichssuche</a>“.</p></li>
+<li><p>Gruppensuche</p>
+<p>Wenn die zurückgegebenen Entitäten in einem bestimmten Feld denselben Wert aufweisen, spiegeln die Suchergebnisse möglicherweise nicht die Verteilung aller Vektor-Einbettungen im Vektorraum wider. Um die Suchergebnisse zu diversifizieren, sollten Sie die Gruppensuche in Betracht ziehen.</p>
+<p>Weitere Informationen zur Gruppensuche finden Sie unter <a href="/docs/de/grouping-search.md">„Gruppensuche“</a>,</p></li>
 <li><p>Hybride Suche</p>
-<p>Eine Sammlung kann mehrere Vektorfelder enthalten, um die Vektoreinbettungen zu speichern, die mit verschiedenen Einbettungsmodellen erzeugt wurden. Auf diese Weise können Sie eine hybride Suche verwenden, um die Suchergebnisse aus diesen Vektorfeldern neu zu ordnen und so die Auffindungsrate zu verbessern.</p>
-<p>Weitere Informationen zur hybriden Suche finden Sie unter <a href="/docs/de/multi-vector-search.md">Hybride Suche</a>.</p></li>
+<p>Eine Sammlung kann mehrere Vektorfelder enthalten, um die mit verschiedenen Einbettungsmodellen generierten Vektoreinbettungen zu speichern. Auf diese Weise können Sie eine hybride Suche verwenden, um die Suchergebnisse aus diesen Vektorfeldern neu zu ordnen und so die Recall-Rate zu verbessern.</p>
+<p>Weitere Informationen zur hybriden Suche finden Sie unter <a href="/docs/de/multi-vector-search.md">„Hybride Suche</a>“.</p></li>
 <li><p>Such-Iterator</p>
-<p>Eine einzelne ANN-Suche liefert maximal 16.384 Entitäten. Ziehen Sie die Verwendung von Such-Iteratoren in Betracht, wenn Sie mehr Entitäten in einer einzigen Suche zurückgeben möchten.</p>
-<p>Details zu Such-Iteratoren finden Sie unter <a href="/docs/de/with-iterators.md">Such-Iterator</a>.</p></li>
+<p>Eine einzelne ANN-Suche liefert maximal 16.384 Entitäten. Ziehen Sie den Einsatz von Suchiteratoren in Betracht, wenn Sie bei einer einzelnen Suche mehr Entitäten zurückerhalten möchten.</p>
+<p>Weitere Informationen zu Suchiteratoren finden Sie unter <a href="/docs/de/with-iterators.md">„Suchiterator</a>“.</p></li>
 <li><p>Volltextsuche</p>
-<p>Die Volltextsuche ist eine Funktion, die Dokumente abruft, die bestimmte Begriffe oder Phrasen in Textdatensätzen enthalten, und dann die Ergebnisse nach Relevanz einstuft. Diese Funktion überwindet die Einschränkungen der semantischen Suche, bei der präzise Begriffe übersehen werden können, und stellt sicher, dass Sie die genauesten und kontextrelevanten Ergebnisse erhalten. Darüber hinaus vereinfacht sie die Vektorsuche, indem sie Rohtexteingaben akzeptiert und Ihre Textdaten automatisch in spärliche Einbettungen konvertiert, ohne dass Sie manuell Vektoreinbettungen erstellen müssen.</p>
-<p>Einzelheiten zur Volltextsuche finden Sie unter <a href="/docs/de/full-text-search.md">Volltextsuche</a>.</p></li>
-<li><p>Text-Abgleich</p>
-<p>Der Schlüsselwortabgleich in Milvus ermöglicht das präzise Auffinden von Dokumenten auf der Grundlage bestimmter Begriffe. Diese Funktion wird in erster Linie für die gefilterte Suche nach bestimmten Bedingungen verwendet und kann eine skalare Filterung zur Verfeinerung der Abfrageergebnisse beinhalten, die eine Ähnlichkeitssuche innerhalb von Vektoren ermöglicht, die skalare Kriterien erfüllen.</p>
-<p>Weitere Informationen zur Schlüsselwortsuche finden Sie unter <a href="/docs/de/keyword-match.md">Schlüsselwortsuche</a>.</p></li>
+<p>Die Volltextsuche ist eine Funktion, die Dokumente aus Textdatensätzen abruft, die bestimmte Begriffe oder Phrasen enthalten, und die Ergebnisse anschließend nach Relevanz sortiert. Diese Funktion überwindet die Einschränkungen der semantischen Suche, bei der präzise Begriffe möglicherweise übersehen werden, und stellt sicher, dass Sie die genauesten und kontextuell relevantesten Ergebnisse erhalten. Zudem vereinfacht sie die Vektorsuche, indem sie Rohtext als Eingabe akzeptiert und Ihre Textdaten automatisch in spärliche Einbettungen umwandelt, ohne dass Vektoreinbettungen manuell generiert werden müssen.</p>
+<p>Weitere Informationen zur Volltextsuche finden Sie unter <a href="/docs/de/full-text-search.md">„Volltextsuche</a>“.</p></li>
+<li><p>Textabgleich</p>
+<p>Die Schlüsselwortübereinstimmung in Milvus ermöglicht eine präzise Dokumentensuche anhand bestimmter Begriffe. Diese Funktion wird in erster Linie für die gefilterte Suche verwendet, um bestimmte Bedingungen zu erfüllen, und kann skalare Filterung einbeziehen, um Suchergebnisse zu verfeinern, was Ähnlichkeitssuchen innerhalb von Vektoren ermöglicht, die skalare Kriterien erfüllen.</p>
+<p>Weitere Informationen zum Schlüsselwortabgleich finden Sie unter <a href="/docs/de/keyword-match.md">„Schlüsselwortabgleich</a>“.</p></li>
 <li><p>Partitionsschlüssel verwenden</p>
-<p>Die Einbeziehung mehrerer skalarer Felder in die Metadatenfilterung und die Verwendung einer ziemlich komplizierten Filterbedingung können die Sucheffizienz beeinträchtigen. Wenn Sie ein skalares Feld als Partitionsschlüssel festlegen und eine Filterbedingung verwenden, die den Partitionsschlüssel in der Suchanfrage einbezieht, kann dies dazu beitragen, den Suchbereich auf die Partitionen zu beschränken, die den angegebenen Partitionsschlüsselwerten entsprechen.</p>
-<p>Einzelheiten zum Partitionsschlüssel finden Sie unter <a href="/docs/de/use-partition-key.md">Partitionsschlüssel verwenden</a>.</p></li>
+<p>Die Einbeziehung mehrerer skalärer Felder in die Metadatenfilterung und die Verwendung einer relativ komplexen Filterbedingung können die Sucheffizienz beeinträchtigen. Wenn Sie ein skalares Feld als Partitionsschlüssel festlegen und in der Suchanfrage eine Filterbedingung verwenden, die den Partitionsschlüssel einbezieht, kann dies dazu beitragen, den Suchbereich auf die Partitionen zu beschränken, die den angegebenen Partitionsschlüsselwerten entsprechen.</p>
+<p>Weitere Informationen zum Partitionsschlüssel finden Sie unter <a href="/docs/de/use-partition-key.md">„Partitionsschlüssel verwenden</a>“.</p></li>
 <li><p>mmap verwenden</p>
-<p>Details zu den mmap-Einstellungen finden Sie unter <a href="/docs/de/mmap.md">mmap verwenden</a>.</p></li>
-<li><p>Clustering-Verdichtung</p>
-<p>Details zur Clustering-Kompaktierung finden Sie unter <a href="/docs/de/clustering-compaction.md">Clustering-Kompaktierung</a>.</p></li>
+<p>Weitere Informationen zu den mmap-Einstellungen finden Sie unter <a href="/docs/de/mmap.md">„mmap verwenden</a>“.</p></li>
+<li><p>Clustering-Kompaktierung</p>
+<p>Weitere Informationen zur Clustering-Kompaktierung finden Sie unter <a href="/docs/de/clustering-compaction.md">„Clustering-Kompaktierung</a>“.</p></li>
 <li><p>Reranking verwenden</p>
-<p>Details zur Verwendung von Rankern zur Verbesserung der Relevanz von Suchergebnissen finden Sie unter <a href="/docs/de/decay-ranker-overview.md">Decay Ranker Overview</a> und <a href="/docs/de/model-ranker-overview.md">Model Ranker Overview</a>.</p></li>
+<p>Weitere Informationen zur Verwendung von Rankern zur Verbesserung der Relevanz von Suchergebnissen finden Sie unter <a href="/docs/de/decay-ranker-overview.md">„Übersicht über den Decay-Ranker</a> “ und <a href="/docs/de/model-ranker-overview.md">„Übersicht über den Model-Ranker</a>“.</p></li>
 </ul>

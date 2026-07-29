@@ -60,7 +60,7 @@ summary: 'Узнайте, как настроить хранилище сооб�
 </ul></li>
 <li>Хранилище сообщений нельзя изменить во время работы системы Milvus.</li>
 <li>Поддерживаются только версии Kafka 2.x или 3.x.</li>
-<li><strong>Ограничения при обновлении</strong>: <strong>Ограничения</strong>, связанные <strong>с очередями сообщений</strong>: при обновлении до Milvus v2.6.20 необходимо сохранить текущий выбор системы очередей сообщений. Переключение между различными системами очередей сообщений во время обновления не поддерживается. Поддержка смены системы очередей сообщений будет доступна в будущих версиях.</li>
+<li><strong>Ограничения при обновлении</strong>: <strong>Ограничения</strong>, связанные с <strong>очередями сообщений</strong>: при обновлении до Milvus v2.6.21 необходимо сохранить текущий выбор системы очередей сообщений. Переключение между различными системами очередей сообщений во время обновления не поддерживается. Поддержка смены систем очередей сообщений будет доступна в будущих версиях.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Настройка RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -144,7 +144,7 @@ summary: 'Узнайте, как настроить хранилище сооб�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pulsar управляет журналами недавних изменений, выводит потоковые журналы и обеспечивает подписку на журналы. Настройка Pulsar в качестве хранилища сообщений поддерживается как в автономном режиме Milvus, так и в кластере Milvus. Однако с помощью Milvus Operator вы можете настроить Pulsar в качестве хранилища сообщений только для кластера Milvus. Добавьте необходимые поля в разделе « <code translate="no">spec.dependencies.pulsar</code> » (Настройки хранилища), чтобы настроить Pulsar.</p>
+    </button></h2><p>Pulsar управляет журналами недавних изменений, выводит потоковые журналы и обеспечивает подписку на журналы. Настройка Pulsar в качестве хранилища сообщений поддерживается как в автономном режиме Milvus, так и в кластере Milvus. Однако с помощью Milvus Operator вы можете настроить Pulsar в качестве хранилища сообщений только для кластера Milvus. Добавьте необходимые поля в разделе « <code translate="no">spec.dependencies.pulsar</code> » (Настройки хранилища сообщений), чтобы настроить Pulsar.</p>
 <p><code translate="no">pulsar</code> Поддерживаются <code translate="no">external</code> и <code translate="no">inCluster</code>.</p>
 <h3 id="External-Pulsar" class="common-anchor-header">External Pulsar<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -312,7 +312,7 @@ summary: 'Узнайте, как настроить хранилище сооб�
         <span class="hljs-comment"># ...</span>
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
-<p>Настройки SASL поддерживаются в версии оператора v0.8.5 или выше.</p>
+<p>Настройки SASL поддерживаются в версии оператора v0.8.5 и выше.</p>
 </blockquote>
 <h3 id="Internal-Kafka" class="common-anchor-header">Внутренний Kafka<button data-href="#Internal-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -346,7 +346,7 @@ summary: 'Узнайте, как настроить хранилище сооб�
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<p>Полный список элементов конфигурации для настройки внутреннего сервиса Kafka можно найти <a href="https://artifacthub.io/packages/helm/bitnami/kafka">здесь</a>. Добавьте необходимые элементы конфигурации в файле « <code translate="no">kafka.inCluster.values</code> ».</p>
+<p>Полный список элементов конфигурации для настройки внутреннего сервиса Kafka можно найти <a href="https://artifacthub.io/packages/helm/bitnami/kafka">здесь</a>. Добавьте необходимые элементы конфигурации в файле ` <code translate="no">kafka.inCluster.values</code>`.</p>
 <p>Предполагая, что файл конфигурации называется « <code translate="no">milvuscluster.yaml</code> », выполните следующую команду для применения конфигурации.</p>
 <pre><code translate="no"><span class="hljs-attribute">kubectl</span> apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>

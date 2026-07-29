@@ -63,7 +63,7 @@ title: Exécuter Milvus dans Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Nouveautés de la version 2.6.20 :</strong></p>
+<p><strong>Nouveautés de la version 2.6.21 :</strong></p>
 <ul>
 <li><strong>Nœud de streaming</strong>: capacités de traitement des données améliorées</li>
 <li><strong>Woodpecker MQ</strong>: file d’attente de messages améliorée avec une charge de maintenance réduite ; voir « <a href="/docs/fr/v2.6.x/use-woodpecker.md">Utiliser Woodpecker</a> » pour plus de détails</li>
@@ -78,7 +78,7 @@ title: Exécuter Milvus dans Docker (Linux)
 <li>Un conteneur Docker nommé milvus a été démarré sur le port <strong>19530</strong>.</li>
 <li>Un embed etcd est installé avec Milvus dans le même conteneur et est accessible sur le port <strong>2379</strong>. Son fichier de configuration correspond au <strong>fichier embedEtcd.yaml</strong> situé dans le dossier actuel.</li>
 <li>Pour modifier la configuration par défaut de Milvus, ajoutez vos paramètres au fichier <strong>user.yaml</strong> situé dans le dossier actuel, puis redémarrez le service.</li>
-<li>Le volume de données Milvus est mappé vers le répertoire ` <strong>volumes/milvus</strong> ` du dossier actuel.</li>
+<li>Le volume de données Milvus est mappé vers <strong>volumes/milvus</strong> dans le dossier actuel.</li>
 </ul>
 <p>Vous pouvez accéder à l’interface Web de Milvus à l’adresse <code translate="no">http://127.0.0.1:9091/webui/</code> pour en savoir plus sur votre instance Milvus. Pour plus de détails, consultez la documentation relative à <a href="/docs/fr/v2.6.x/milvus-webui.md">l’interface Web de Milvus</a>.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Facultatif) Mise à jour des configurations de Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">

@@ -127,7 +127,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>대신 독립형(스탠드얼론) 배포를 원하시나요?</strong></p>
 <p>개발이나 테스트를 위해 Milvus를 독립형 모드(단일 노드)로 배포하려는 경우 다음 명령어를 사용하십시오.</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.20 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.21 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
@@ -137,9 +137,9 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>참고</strong>: 독립 실행형 모드에서는 Woodpecker를 기본 메시지 큐로 사용하며, Streaming Node 구성 요소를 활성화합니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/architecture_overview.md">아키텍처 개요</a> 및 <a href="/docs/ko/v2.6.x/use-woodpecker.md">Woodpecker 사용을</a> 참조하십시오.</p>
 </div>
 <p><strong>Milvus 클러스터 배포:</strong></p>
-<p>다음 명령어는 권장 메시지 큐로 Woodpecker를 사용하여 v2.6.20에 최적화된 설정으로 Milvus 클러스터를 배포합니다:</p>
+<p>다음 명령어는 권장 메시지 큐로 Woodpecker를 사용하여 v2.6.21에 최적화된 설정으로 Milvus 클러스터를 배포합니다:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.20 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.21 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -147,9 +147,9 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>이 명령어의 기능:</strong></p>
 <ul>
-<li><strong>Woodpecker를</strong> 메시지 큐로 사용합니다(유지보수 부담 경감을 위해 권장됨).</li>
+<li><strong>Woodpecker를</strong> 메시지 큐로 사용합니다(유지 관리 부담 감소를 위해 권장됨).</li>
 <li>성능 향상을 위해 새로운 <strong>스트리밍 노드</strong> (Streaming <strong>Node</strong> ) 컴포넌트를 활성화합니다</li>
-<li>기존 <strong>Index Node를</strong> 비활성화합니다(해당 기능은 이제 Data Node에서 처리됨)</li>
+<li>기존 <strong>인덱스 노드를</strong> 비활성화합니다(해당 기능은 이제 데이터 노드에서 처리됨)</li>
 <li>Pulsar를 비활성화하고 대신 Woodpecker를 사용하도록 설정합니다</li>
 </ul>
 <div class="alert note">
@@ -164,7 +164,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>대체 메시지 큐 옵션:</strong></p>
 <p>Woodpecker 대신 <strong>Pulsar</strong> (기존 선택지)를 사용하려는 경우:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.20 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.21 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -177,7 +177,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <div class="alert note">
 <p><strong>중요 사항:</strong></p>
 <ul>
-<li><strong>릴리스 명명</strong> 규칙: 영문자, 숫자, 하이픈만 사용하십시오(점은 허용되지 않음).</li>
+<li><strong>릴리스 명명</strong> 규칙: 영문자, 숫자, 하이픈만 사용하십시오(점은 허용되지 않음)</li>
 <li><strong>Kubernetes v1.25 이상</strong>: PodDisruptionBudget 관련 문제가 발생하면 다음 해결 방법을 사용하십시오:
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> pulsar.bookkeeper.pdb.usePolicy=<span class="hljs-literal">false</span> \
@@ -206,7 +206,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
     </button></h3><p>팟 상태를 확인하여 배포가 성공적으로 완료되었는지 확인하십시오:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>모든 파드가 “Running” 상태를 표시할 때까지 기다리십시오.</strong> v2.6.20 구성의 경우 다음과 유사한 파드 상태를 확인할 수 있습니다:</p>
+<p><strong>모든 파드가 “Running” 상태를 표시할 때까지 기다리십시오.</strong> v2.6.21 구성의 경우 다음과 유사한 파드가 표시되어야 합니다:</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s

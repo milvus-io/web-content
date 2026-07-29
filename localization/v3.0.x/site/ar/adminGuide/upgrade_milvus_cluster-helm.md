@@ -23,74 +23,35 @@ title: ترقية مجموعة Milvus باستخدام مخطط Helm
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يصف هذا الدليل كيفية ترقية مجموعة Milvus الخاصة بك من الإصدار v2.5.x إلى الإصدار v3.0-beta باستخدام مخطط Helm.</p>
-<h2 id="Before-you-start" class="common-anchor-header">قبل البدء<button data-href="#Before-you-start" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><h3 id="Whats-new-in-v30-beta" class="common-anchor-header">ما الجديد في الإصدار v3.0-beta<button data-href="#Whats-new-in-v30-beta" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>تتضمن الترقية من Milvus 2.5.x إلى 3.0-beta تغييرات كبيرة في البنية:</p>
-<ul>
-<li><strong>دمج المنسقين</strong>: تم دمج المنسقين المنفصلين القدامى (<code translate="no">dataCoord</code> ، <code translate="no">queryCoord</code> ، <code translate="no">indexCoord</code>) في منسق واحد <code translate="no">mixCoord</code></li>
-<li><strong>مكونات جديدة</strong>: إدخال «عقدة البث» (Streaming Node) لتحسين معالجة البيانات</li>
-<li><strong>إزالة المكونات</strong>: تمت إزالة <code translate="no">indexNode</code> ودمجها</li>
-</ul>
-<p>تضمن عملية الترقية هذه الترحيل السليم إلى البنية الجديدة. لمزيد من المعلومات حول تغييرات البنية، راجع <a href="/docs/ar/architecture_overview.md">«نظرة عامة</a> على <a href="/docs/ar/architecture_overview.md">بنية Milvus</a>».</p>
-<h3 id="Requirements" class="common-anchor-header">المتطلبات<button data-href="#Requirements" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p><strong>متطلبات النظام:</strong></p>
-<ul>
-<li>إصدار Helm &gt;= 3.14.0</li>
-<li>إصدار Kubernetes &gt;= 1.20.0</li>
-<li>نشر مجموعة Milvus عبر Helm Chart</li>
-</ul>
-<p><strong>متطلبات التوافق:</strong></p>
-<ul>
-<li>Milvus v2.6.0-rc1 <strong>غير متوافق</strong> مع الإصدار v3.0-beta. لا يتم دعم الترقيات المباشرة من الإصدارات التجريبية.</li>
-<li>إذا كنت تستخدم الإصدار v2.6.0-rc1 حاليًا وتحتاج إلى الحفاظ على بياناتك، فيرجى الرجوع إلى <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">دليل المجتمع هذا</a> للحصول على المساعدة في عملية الترحيل.</li>
-<li><strong>يجب</strong> عليك الترقية إلى الإصدار v2.5.16 أو أحدث مع تمكين ميزة " <code translate="no">mixCoordinator</code> " قبل الترقية إلى الإصدار v3.0-beta.</li>
-</ul>
-<p><strong>قيود قائمة انتظار الرسائل</strong>: عند الترقية إلى Milvus v3.0-beta، يجب الحفاظ على اختيارك الحالي لقائمة انتظار الرسائل. لا يتم دعم التبديل بين أنظمة قوائم انتظار الرسائل المختلفة أثناء الترقية. سيتوفر دعم تغيير أنظمة قوائم انتظار الرسائل في الإصدارات المستقبلية.</p>
+    </button></h1><p>يصف هذا الدليل كيفية ترقية مجموعة Milvus 2.6.x إلى الإصدار v3.0.0 باستخدام Helm.</p>
 <div class="alert note">
-بدءًا من الإصدار 4.2.21 من مخطط Helm الخاص بـ Milvus، أدخلنا مخطط pulsar-v3.x كاعتماد. من أجل التوافق مع الإصدارات السابقة، يرجى ترقية Helm إلى الإصدار v3.14 أو أحدث، وتأكد من إضافة خيار <code translate="no">--reset-then-reuse-values</code> كلما استخدمت <code translate="no">helm upgrade</code>.
+<p>تم التحقق من صحة هذا الإجراء من Milvus 2.6.20 إلى Milvus v3.0.0 باستخدام مخطط Helm الخاص بـ Milvus الإصدار 5.0.22. إذا كنت تستخدم إصدار تصحيح آخر من Milvus 2.6.x أو إصدارًا آخر من مخطط Helm، فقم أولاً بالتحقق من صحة الترقية في بيئة غير إنتاجية.</p>
+</div>
+<h2 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><ul>
+<li>Helm 3.14.0 أو أحدث</li>
+<li>نشر Milvus 2.6.x موجود يُدار بواسطة Helm</li>
+<li>قيم Helm المستخدمة في النشر الحالي</li>
+<li>نسخة احتياطية حديثة من بيانات Milvus الوصفية والبيانات الدائمة</li>
+</ul>
+<p><strong>قيود قائمة انتظار الرسائل</strong>: عند الترقية إلى Milvus v3.0.0، يجب الحفاظ على اختيارك الحالي لقائمة انتظار الرسائل. لا يُدعم التبديل بين أنظمة قوائم انتظار الرسائل المختلفة أثناء الترقية. سيتوفر دعم تغيير أنظمة قوائم انتظار الرسائل في الإصدارات المستقبلية.</p>
+<div class="alert warning">
+<p>لا تقم بتغيير مخطط Helm أو الرجوع إلى إصدار أقدم منه كجزء من هذا الإجراء. احتفظ بإصدار المخطط المثبت بالفعل لإصدار Helm الخاص بك. احتفظت القاعدة المرجعية التي تم اختبارها بمخطط Helm 5.0.22 وقامت فقط بتغيير علامة صورة Milvus إلى <code translate="no">v3.0.0</code>.</p>
+<p>لا يتحقق هذا الإجراء من صحة الرجوع إلى إصدار أقدم أو التراجع عن الترقية عن طريق إعادة صورة Milvus إلى الإصدار 2.6.x. بعد أن تقوم الإصدارة v3.0.0 بكتابة البيانات، قد يفشل التراجع الذي يقتصر على الصورة في قراءة الحالة المحدثة. إذا فشل الترقية، أوقف عمليات الكتابة واستخدم خطة استعادة تعيد البيانات الوصفية قبل الترقية ونسخ البيانات الدائمة الاحتياطية. تحقق من صحة خطة الاستعادة في بيئة غير إنتاجية أولاً.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">عملية الترقية<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -107,7 +68,8 @@ title: ترقية مجموعة Milvus باستخدام مخطط Helm
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Upgrade-Helm-Chart" class="common-anchor-header">الخطوة 1: ترقية مخطط Helm<button data-href="#Step-1-Upgrade-Helm-Chart" class="anchor-icon" translate="no">
+    </button></h2><p>تم إنشاء نشر Milvus 2.6.20 الذي تم التحقق من صحته باستخدام Helm Chart 5.0.22 باستخدام MixCoord وStreamingNode ولم يتم تشغيل IndexNode. لا تحتاج إلى خطوة منفصلة لترحيل المنسق عندما يستخدم النشر الخاص بك نفس الطوبولوجيا.</p>
+<h3 id="Step-1-Confirm-the-current-topology" class="common-anchor-header">الخطوة 1: تأكيد التوبولوجيا الحالية<button data-href="#Step-1-Confirm-the-current-topology" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -122,18 +84,37 @@ title: ترقية مجموعة Milvus باستخدام مخطط Helm
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>أولاً، قم بترقية مخطط Milvus Helm إلى الإصدار 5.0.22:</p>
-<pre><code translate="no" class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm
+    </button></h3><p>احفظ القيم الكاملة للإصدار الحالي وتحقق من Pods قيد التشغيل:</p>
+<pre><code translate="no" class="language-bash">helm get values &lt;release-name&gt; \
+  --namespace &lt;namespace&gt; \
+  --all &gt; milvus-values-before-upgrade.yaml
+
+kubectl get pods --namespace &lt;namespace&gt;
+<button class="copy-code-btn"></button></code></pre>
+<p>تأكد من أن المجموعة تستخدم MixCoord وStreamingNode وأنه لا يوجد أي Pod لـ IndexNode قيد التشغيل. يحافظ أمر الترقية الوارد لاحقًا في هذا الدليل على قيم Helm الحالية. إذا كانت قيمك الحالية تُفعّل IndexNode أو تستخدم طوبولوجيا مكونات أخرى، فلا تقم بتشغيل عملية الترقية هذه التي تقتصر على الصورة فقط. قم بإعادة إنتاج الطوبولوجيا في بيئة غير إنتاجية واحصل أولاً على خطة ترحيل معتمدة من قسم الهندسة.</p>
+<h3 id="Step-2-Update-the-Helm-repository" class="common-anchor-header">الخطوة 2: تحديث مستودع Helm<button data-href="#Step-2-Update-the-Helm-repository" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>أضف مستودع Milvus Helm أو قم بتحديثه:</p>
+<pre><code translate="no" class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm --force-update
 helm repo update zilliztech
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-تم أرشفة مستودع مخططات Helm الخاصة بـ Milvus الموجود على <code translate="no">https://milvus-io.github.io/milvus-helm/</code>. استخدم المستودع الجديد <code translate="no">https://zilliztech.github.io/milvus-helm/</code> لإصدارات المخططات 4.0.31 والإصدارات الأحدث.
+تم أرشفة مستودع Milvus Helm Charts الموجود على <code translate="no">https://milvus-io.github.io/milvus-helm/</code>. استخدم المستودع الجديد <code translate="no">https://zilliztech.github.io/milvus-helm/</code> لإصدارات المخططات 4.0.31 والإصدارات الأحدث.
 </div>
-<p>للتحقق من توافق إصدار مخطط Helm مع إصدارات Milvus:</p>
-<pre><code translate="no" class="language-bash">helm search repo zilliztech/milvus --versions
-<button class="copy-code-btn"></button></code></pre>
-<p>يفترض هذا الدليل أنك تقوم بتثبيت أحدث إصدار. إذا كنت بحاجة إلى تثبيت إصدار معين، فحدد المعلمة <code translate="no">--version</code> وفقًا لذلك.</p>
-<h3 id="Step-2-Upgrade-to-v2516-with-mixCoordinator" class="common-anchor-header">الخطوة 2: الترقية إلى الإصدار v2.5.16 باستخدام mixCoordinator<button data-href="#Step-2-Upgrade-to-v2516-with-mixCoordinator" class="anchor-icon" translate="no">
+<h3 id="Step-3-Upgrade-Milvus" class="common-anchor-header">الخطوة 3: ترقية Milvus<button data-href="#Step-3-Upgrade-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -148,55 +129,19 @@ helm repo update zilliztech
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>تحقق مما إذا كانت مجموعتك تستخدم حاليًا منسقين منفصلين:</p>
-<pre><code translate="no" class="language-bash">kubectl get pods
+    </button></h3><p>تحقق من إصدار المخطط المثبت لإصدار Helm الخاص بك:</p>
+<pre><code translate="no" class="language-bash">helm list --namespace &lt;namespace&gt;
 <button class="copy-code-btn"></button></code></pre>
-<p>إذا رأيت وحدات pod منسقة منفصلة (<code translate="no">datacoord</code> ، <code translate="no">querycoord</code> ، <code translate="no">indexcoord</code>)، فقم بالترقية إلى الإصدار v2.5.16 وقم بتمكين <code translate="no">mixCoordinator</code>:</p>
-<pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.5.16&quot;</span> \
-  --<span class="hljs-built_in">set</span> mixCoordinator.enabled=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> rootCoordinator.enabled=<span class="hljs-literal">false</span> \
-  --<span class="hljs-built_in">set</span> indexCoordinator.enabled=<span class="hljs-literal">false</span> \
-  --<span class="hljs-built_in">set</span> queryCoordinator.enabled=<span class="hljs-literal">false</span> \
-  --<span class="hljs-built_in">set</span> dataCoordinator.enabled=<span class="hljs-literal">false</span> \
+<p>في عمود <code translate="no">CHART</code> ، قم بإزالة البادئة <code translate="no">milvus-</code> من القيمة واستخدم الإصدار المتبقي على النحو التالي: <code translate="no">&lt;current-chart-version&gt;</code>. ثم قم بتشغيل أمر الترقية:</p>
+<pre><code translate="no" class="language-bash">helm upgrade &lt;release-name&gt; zilliztech/milvus \
+  --namespace &lt;namespace&gt; \
+  --version &lt;current-chart-version&gt; \
+  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v3.0.0&quot;</span> \
   --reset-then-reuse-values \
-  --version=4.2.58
+  --<span class="hljs-built_in">wait</span> \
+  --<span class="hljs-built_in">timeout</span> 30m
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert-note">
-<p>إذا كانت المجموعة تستخدم بالفعل <code translate="no">mixCoordinator</code> ، فما عليك سوى ترقية الصورة:</p>
-<pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.5.16&quot;</span> \
-  --reset-then-reuse-values \
-  --version=4.2.58
-<button class="copy-code-btn"></button></code></pre>
-</div>
-<p>انتظر حتى تكتمل عملية الترقية:</p>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
-kubectl get pods
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Upgrade-to-v30-beta" class="common-anchor-header">الخطوة 3: الترقية إلى الإصدار v3.0-beta<button data-href="#Step-3-Upgrade-to-v30-beta" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>بمجرد تشغيل الإصدار v2.5.16 بنجاح مع <code translate="no">mixCoordinator</code> ، قم بالترقية إلى الإصدار v3.0-beta:</p>
-<pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v3.0-beta&quot;</span> \
-  --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span> \
-  --reset-then-reuse-values \
-  --version=5.0.22
-<button class="copy-code-btn"></button></code></pre>
+<p>يحتفظ الخيار <code translate="no">--reset-then-reuse-values</code> بالقيم من الإصدار السابق مع تطبيق تجاوز الصورة الصريح على الإعدادات الافتراضية المحددة لـ Chart.</p>
 <h2 id="Verify-the-upgrade" class="common-anchor-header">تحقق من الترقية<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -212,11 +157,15 @@ kubectl get pods
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تأكد من أن المجموعة تعمل بالإصدار الجديد:</p>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check pod status</span>
-kubectl get pods
+    </button></h2><p>تحقق من مراجعة Helm وحالة Pod وصور الحاويات:</p>
+<pre><code translate="no" class="language-bash">helm <span class="hljs-built_in">history</span> &lt;release-name&gt; --namespace &lt;namespace&gt;
 
-<span class="hljs-comment"># Verify Helm release</span>
-helm list
+kubectl get pods --namespace &lt;namespace&gt;
+
+kubectl get pods --namespace &lt;namespace&gt; \
+  -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>للحصول على دعم إضافي، راجع <a href="https://milvus.io/docs">وثائق Milvus</a> أو <a href="https://github.com/milvus-io/milvus/discussions">منتدى المجتمع</a>.</p>
+<p>تأكد من أن جميع أحمال العمل المطلوبة جاهزة، وأن جميع مكونات Milvus تستخدم <code translate="no">v3.0.0</code> ، وأن مجموعاتك الحالية لا تزال قابلة للاستعلام والبحث. أكمل هذه الفحوصات قبل تمكين أي ميزة خاصة بالإصدار v3.0.0.</p>
+<div class="alert note">
+<p>لا يؤدي الترقية إلى Milvus 3.0 إلى تمكين Storage V3. بعد التحقق من الترقية، راجع <a href="/docs/ar/storage-v3.md">Storage V3</a> قبل تمكين الميزات التي تعتمد عليه. بمجرد أن يقوم Milvus بكتابة بيانات Storage V3، لن يتم دعم الرجوع إلى إصدار أقدم من Milvus لا يمكنه قراءة Storage V3.</p>
+</div>

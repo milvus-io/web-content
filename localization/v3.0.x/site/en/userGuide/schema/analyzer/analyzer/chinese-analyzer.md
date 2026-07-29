@@ -42,6 +42,9 @@ summary: >-
 <li><p><strong>Filter</strong>: Uses the <code translate="no">cnalphanumonly</code> filter to remove tokens that contain any non-Chinese characters. For more information, refer to <a href="/docs/cnalphanumonly-filter.md">Cnalphanumonly</a>.</p></li>
 </ul>
 <p>The functionality of the <code translate="no">chinese</code> analyzer is equivalent to the following custom analyzer configuration:</p>
+<div class="alert note">
+<p>The built-in <code translate="no">chinese</code> analyzer does not emit Pinyin tokens. To match Chinese text with Pinyin query terms, use a custom analyzer with the <code translate="no">jieba</code> tokenizer and the <a href="/docs/pinyin-filter.md"><code translate="no">pinyin</code></a> filter.</p>
+</div>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>

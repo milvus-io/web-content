@@ -2,10 +2,10 @@
 id: create-an-external-collection.md
 title: إنشاء مجموعة خارجيةCompatible with Milvus 3.0.x
 summary: >-
-  التجميع الخارجي هو نوع من تجميع البيانات في Milvus الذي يصل إلى البيانات من
-  أنظمة التخزين الخارجية أو جداول قواعد البيانات مثل AWS S3 و Iceberg دون نسخها
-  إلى Milvus. تعمل كطبقة استعلام فوق بحيرات البيانات مع الحفاظ على التوافق مع
-  واجهات استعلام Milvus.
+  المجموعة الخارجية هي نوع من مجموعات البيانات في Milvus التي تتيح الوصول إلى
+  البيانات من أنظمة التخزين الخارجية أو جداول قواعد البيانات، مثل AWS S3
+  وIceberg، دون نسخها إلى Milvus. وهي تعمل كطبقة استعلام فوق بحيرات البيانات مع
+  الحفاظ على التوافق مع واجهات الاستعلام في Milvus.
 beta: Milvus 3.0.x
 ---
 <h1 id="Create-an-External-Collection" class="common-anchor-header">إنشاء مجموعة خارجية<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Create-an-External-Collection" class="anchor-icon" translate="no">
@@ -23,7 +23,10 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>المجموعة الخارجية هي نوع من مجموعات البيانات في Milvus التي تصل إلى البيانات من أنظمة التخزين الخارجية أو جداول قواعد البيانات مثل AWS S3 و Iceberg دون نسخها إلى Milvus. تعمل كطبقة استعلام فوق بحيرات البيانات مع الحفاظ على التوافق مع واجهات استعلام Milvus.</p>
+    </button></h1><p>المجموعة الخارجية هي نوع من مجموعات البيانات في Milvus التي تصل إلى البيانات من أنظمة التخزين الخارجية أو جداول قواعد البيانات مثل AWS S3 و Iceberg دون نسخها إلى Milvus. وهي تعمل كطبقة استعلام فوق بحيرات البيانات مع الحفاظ على التوافق مع واجهات الاستعلام في Milvus.</p>
+<div class="alert note">
+<p>تتطلب هذه الميزة Storage V3. للاطلاع على إرشادات التفعيل واعتبارات التوافق، راجع <a href="/docs/ar/storage-v3.md">Storage V3</a>.</p>
+</div>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,19 +42,23 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>في خط أنابيب بيانات الذكاء الاصطناعي النموذجي، قد يكون المستخدمون قد قاموا بالفعل بتخزين بياناتهم في Parquet أو بتنسيقات أخرى على نظام التخزين الخاص بهم، مثل AWS S3. لجعل Milvus يستهلك هذه البيانات المخزنة خارجيًا، يحتاج المستخدمون عادةً إلى استيرادها إلى وحدة تخزين Milvus الخاصة باستخدام خطوط أنابيب الاستخراج والتحويل والتحميل (ETL).</p>
-<p>يؤدي سير عمل إحضار البيانات إلى ميلفوس هذا إلى إنشاء بيانات زائدة عن الحاجة يصعب مزامنتها ويضيف إلى عبء الصيانة الهندسية لضمان اتساق البيانات.</p>
-<p>
+    </button></h2><p>في مسار بيانات الذكاء الاصطناعي النموذجي، قد يكون المستخدمون قد خزنوا بياناتهم بالفعل بتنسيق Parquet أو تنسيقات أخرى على نظام التخزين الخاص بهم، مثل AWS S3. لكي يتمكن Milvus من استخدام هذه البيانات المخزنة خارجيًا، يحتاج المستخدمون عادةً إلى استيرادها إلى وحدة التخزين الخاصة بـ Milvus باستخدام مسارات استخراج-تحويل-تحميل (ETL).</p>
+<p>يؤدي سير العمل هذا، الذي يعتمد على «جلب البيانات إلى Milvus»، إلى إنشاء بيانات مكررة يصعب مزامنتها، كما يزيد من عبء الصيانة الهندسية لضمان اتساق البيانات.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-data-to-compute.png" alt="Bring data to compute workflow" class="doc-image" id="bring-data-to-compute-workflow" />
-   </span> <span class="img-wrapper"> <span>إحضار البيانات لحساب سير العمل</span> </span></p>
-<p>لحل هذه المشكلات، توفر Milvus مجموعات خارجية تتيح لك الوصول إلى بياناتك المخزنة خارجيًا من Milvus دون القلق بشأن مزامنة البيانات وخطوط أنابيب ETL.</p>
-<p>
+   <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-data-to-compute.png" alt="Bring data to compute workflow" class="doc-image" id="bring-data-to-compute-workflow" /> 
+   <span>سير عمل «جلب البيانات إلى الحوسبة»</span>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-compute-to-data.png" alt="Bring compute to data workflow" class="doc-image" id="bring-compute-to-data-workflow" />
-   </span> <span class="img-wrapper"> <span>جلب الحوسبة إلى سير عمل البيانات</span> </span></p>
-<p>بمجرد إنشائها، يمكن للمجموعة الخارجية الوصول إلى بياناتك مباشرةً والاحتفاظ بها في نفس المكان الذي تخزنها فيه. في الخلفية، ينشئ Milvus ملفات البيان لتسجيل التعيينات بين بيانات Milvus الوصفية والصفوف في ملفات البيانات الخارجية. بعد أن تصبح ملفات البيان جاهزة، يمكنك إنشاء فهارس في المجموعة الخارجية كما تفعل في أي مجموعة مُدارة.</p>
-<p>عندما تتغير بياناتك، يؤدي تشغيل تحديث البيانات الوصفية يدويًا في الثانية إلى تحديث البيانات الوصفية يدويًا، مما يجعل Milvus محدثًا دائمًا.</p>
+ </span></p>
+<p>لحل هذه المشكلات، يوفر Milvus مجموعات خارجية تتيح لك الوصول إلى بياناتك المخزنة خارجيًا من Milvus دون القلق بشأن مزامنة البيانات ومسارات ETL.</p>
+<p><span class="img-wrapper">
+  
+   <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-compute-to-data.png" alt="Bring compute to data workflow" class="doc-image" id="bring-compute-to-data-workflow" /> 
+   <span>سير عمل "جلب الحوسبة إلى البيانات</span> </span>" <span class="img-wrapper">
+  
+ </span></p>
+<p>بمجرد إنشاء المجموعة الخارجية، يمكنها الوصول إلى بياناتك مباشرةً والاحتفاظ بها في نفس المكان الذي تخزنها فيه. في الخلفية، يقوم Milvus بإنشاء ملفات بيان لتسجيل التعيينات بين بيانات Milvus الوصفية والصفوف في ملفات البيانات الخارجية. بعد أن تصبح ملفات البيان جاهزة، يمكنك إنشاء فهارس في المجموعة الخارجية كما تفعل في أي مجموعة مُدارة.</p>
+<p>عندما تتغير بياناتك، يؤدي تشغيل التحديث يدويًا في أقل من ثانية إلى تحديث البيانات الوصفية، مما يحافظ على تحديث Milvus دائمًا.</p>
 <h2 id="Step-1-Create-schema" class="common-anchor-header">الخطوة 1: إنشاء مخطط<button data-href="#Step-1-Create-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -67,9 +74,14 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>كما هو الحال مع إنشاء مجموعة مُدارة، تحتاج أيضًا إلى إنشاء مخطط قبل إنشاء مجموعة خارجية. ومع ذلك، يختلف المخطط قليلاً عن مخطط المجموعة المُدارة.</p>
+    </button></h2><p>كما هو الحال عند إنشاء مجموعة مُدارة، تحتاج أيضًا إلى إنشاء مخطط قبل إنشاء مجموعة خارجية. ومع ذلك، يختلف المخطط قليلاً عن مخطط المجموعة المُدارة.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 schema = MilvusClient.create_schema(
@@ -128,31 +140,31 @@ schema := entity.NewSchema().
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>لإنشاء مخطط لمجموعة خارجية، تحتاج إلى تحديد URI للبيانات المصدر وتنسيق البيانات وإعدادات المصادقة.</p>
+<p>لإنشاء مخطط لمجموعة خارجية، تحتاج إلى تحديد عنوان URI لبيانات المصدر، وتنسيق البيانات، وإعدادات المصادقة.</p>
 <table>
    <tr>
      <th><p>اسم المعلمة</p></th>
      <th><p>وصف المعلمة</p></th>
-     <th><p>مثال القيمة</p></th>
+     <th><p>قيمة مثال</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">format</code></p></td>
-     <td><p>تنسيق ملفات بيانات المصدر الهدف المصدر.</p></td>
+     <td><p>تنسيق ملفات البيانات المصدر المستهدفة.</p></td>
      <td><p><code translate="no">parquet</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">snapshot_id</code></p></td>
-     <td><p>معرف لقطة جدول Iceberg صالح. تنطبق هذه المعلمة فقط عند تعيين <code translate="no">format</code> إلى <code translate="no">iceberg_table</code>.</p></td>
+     <td><p>معرف لقطة جدول Iceberg صالح. لا ينطبق هذا المعامل إلا عند تعيين " <code translate="no">format</code> " إلى " <code translate="no">iceberg_table</code>".</p></td>
      <td><p><code translate="no">473984310232959286</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs</code></p></td>
-     <td><p>إعدادات نظام الملفات الخارجية في بنية JSON متسلسلة.</p></td>
+     <td><p>إعدادات نظام الملفات الخارجية في بنية JSON محولة إلى سلسلة نصية.</p></td>
      <td><p>--</p></td>
    </tr>
 </table>
 <p><details summary="Authentication Options"></p>
-<p>لديك الخيارات التالية لتعيين إعدادات المصادقة:</p>
+<p>تتوفر لك الخيارات التالية لتعيين إعدادات المصادقة:</p>
 <h3 id="Use-AWS-AKSK" class="common-anchor-header">استخدام AWS AK/SK<button data-href="#Use-AWS-AKSK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -168,7 +180,7 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>ينطبق هذا الخيار على MinIO المستضاف ذاتيًا أو السيناريو الذي يكون لديك فيه AK/SK للعمل.</p>
+    </button></h3><p>ينطبق هذا الخيار على MinIO المُستضاف ذاتيًا أو في الحالة التي يكون لديك فيها AK/SK للعمل.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -185,7 +197,7 @@ schema := entity.NewSchema().
    <tr>
      <th><p>اسم المعلمة</p></th>
      <th><p>وصف المعلمة</p></th>
-     <th><p>مثال القيمة</p></th>
+     <th><p>مثال على القيمة</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.access_key_id</code></p></td>
@@ -199,22 +211,22 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.region</code></p></td>
-     <td><p>معرّف منطقة السحابة</p></td>
+     <td><p>معرف منطقة السحابة</p></td>
      <td><p><code translate="no">us-west-2</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.cloud_provider</code></p></td>
-     <td><p>معرف موفر السحابة</p></td>
+     <td><p>معرف مزود الخدمة السحابية</p></td>
      <td><p><code translate="no">aws</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_ssl</code></p></td>
-     <td><p>ما إذا كان يتم استخدام SSL لإنشاء اتصالات.</p></td>
+     <td><p>ما إذا كان يتم استخدام SSL لإنشاء الاتصالات.</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_virtual_host</code></p></td>
-     <td><p>ما إذا كان سيتم استخدام الاستضافة الافتراضية للوصول إلى دلو الخاص بك.</p><p>لمزيد من التفاصيل، راجع <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">هذه المقالة</a>.</p></td>
+     <td><p>ما إذا كان سيتم استخدام الاستضافة الافتراضية للوصول إلى دلو التخزين الخاص بك.</p><p>للحصول على التفاصيل، راجع <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">هذه المقالة</a>.</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
 </table>
@@ -233,7 +245,7 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>ينطبق هذا الخيار على السيناريو الذي يتم فيه تشغيل Milvus على مثيل EC2 أو مجموعة EKS. في هذه الحالة، لا تحتاج إلى ترميز AK/SK.</p>
+    </button></h3><p>ينطبق هذا الخيار على السيناريو الذي يعمل فيه Milvus على مثيل EC2 أو مجموعة EKS. في هذه الحالة، لا تحتاج إلى ترميز AK/SK بشكل ثابت.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -249,16 +261,16 @@ schema := entity.NewSchema().
    <tr>
      <th><p>اسم المعلمة</p></th>
      <th><p>وصف المعلمة</p></th>
-     <th><p>مثال القيمة</p></th>
+     <th><p>مثال على القيمة</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_iam</code></p></td>
-     <td><p>ما إذا كنت تريد استخدام AWS IAM.</p><p>اضبط هذا على <code translate="no">"true"</code> لهذا الخيار.</p></td>
+     <td><p>ما إذا كان سيتم استخدام AWS IAM أم لا.</p><p>اضبط هذا الخيار على <code translate="no">"true"</code>.</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.iam_endpoint</code></p></td>
-     <td><p>نقطة نهاية AWS STS صالحة. </p><p>لمزيد من التفاصيل، راجع <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_region-endpoints.html">هذه المقالة</a>.</p></td>
+     <td><p>نقطة نهاية AWS STS صالحة. </p><p>للحصول على التفاصيل، راجع <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_region-endpoints.html">هذه المقالة</a>.</p></td>
      <td><p><code translate="no">https:&ast;//&ast;sts.&lt;region&gt;.amazonaws.com</code></p></td>
    </tr>
    <tr>
@@ -268,16 +280,16 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.cloud_provider</code></p></td>
-     <td><p>معرف موفر السحابة</p></td>
+     <td><p>معرف مزود الخدمة السحابية</p></td>
      <td><p><code translate="no">aws</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_ssl</code></p></td>
-     <td><p>ما إذا كان يتم استخدام SSL لإنشاء اتصالات.</p></td>
+     <td><p>ما إذا كان يتم استخدام SSL لإنشاء الاتصالات.</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
 </table>
-<h3 id="Use-Milvus-global-credentials" class="common-anchor-header">استخدام بيانات اعتماد Milvus العامة<button data-href="#Use-Milvus-global-credentials" class="anchor-icon" translate="no">
+<h3 id="Use-Milvus-global-credentials" class="common-anchor-header">استخدام بيانات اعتماد Milvus العالمية<button data-href="#Use-Milvus-global-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -292,7 +304,7 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>ينطبق هذا الخيار عندما تقوم بتخزين بيانات خارجية في دلو Milvus، ويمكن استخدام إعدادات MinIO العامة المحددة في <code translate="no">milvus.yaml</code> مباشرة للوصول إلى البيانات.</p>
+    </button></h3><p>ينطبق هذا الخيار عند تخزين البيانات الخارجية في دلو Milvus، ويمكن استخدام إعدادات MinIO العامة المحددة في <code translate="no">milvus.yaml</code> مباشرةً للوصول إلى البيانات.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -300,7 +312,7 @@ schema := entity.NewSchema().
     <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-IAM-Role-ARN" class="common-anchor-header">استخدام دور IAM ARN<button data-href="#Use-IAM-Role-ARN" class="anchor-icon" translate="no">
+<h3 id="Use-IAM-Role-ARN" class="common-anchor-header">استخدام ARN دور IAM<button data-href="#Use-IAM-Role-ARN" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -315,14 +327,14 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يطبق هذا الخيار عندما تستخدم مؤسستك حسابات AWS مختلفة لإدارة مجموعة Milvus والحاوية التي تحتوي على ملفات البيانات المستهدفة.</p>
-<p>في هذه الحالة، يجب أن يقوم مالك الدلو بإنشاء دور IAM الذي</p>
+    </button></h3><p>ينطبق هذا الخيار عندما تستخدم مؤسستك حسابات AWS مختلفة لإدارة مجموعة Milvus وحاوية البيانات التي تحتوي على ملفات البيانات المستهدفة.</p>
+<p>في هذه الحالة، يجب على مالك الحاوية إنشاء دور IAM يقوم بما يلي</p>
 <ul>
-<li><p>إرفاق <code translate="no">AmazonS3FullAccess</code> أو سياسة أكثر دقة للوصول إلى الجرافة.</p></li>
-<li><p>يتضمن <code translate="no">sts:ExternalId</code> معرّف ذاتيًا في حقل الحالة في نهج الثقة الخاص بالدور.</p></li>
+<li><p>يربط سياسة « <code translate="no">AmazonS3FullAccess</code> » أو سياسة أكثر تفصيلاً للوصول إلى الحاوية.</p></li>
+<li><p>يتضمن سياسة " <code translate="no">sts:ExternalId</code> " محددة ذاتيًا في حقل "Condition" (الشرط) في سياسة الثقة الخاصة بالدور.</p></li>
 </ul>
-<p>بعد ذلك، يجب على مالك الدلو تزويدك بدور IAM ARN والمعرف الخارجي حتى تتمكن من الاتصال بـ <code translate="no">sts:AssumeRole</code> بهذه القيم لتولي دور IAM.</p>
-<p>فيما يلي مثال على سياسة الأذونات التي سيتم إرفاقها بدور IAM مع الأذونات المسموح بها. يمكنك تعديل ذلك لتلبية متطلباتك.</p>
+<p>بعد ذلك، يجب على مالك الحاوية تزويدك برقم تعريف دور IAM (ARN) والمعرف الخارجي (External ID) حتى تتمكن من استدعاء <code translate="no">sts:AssumeRole</code> باستخدام هذه القيم لتولي دور IAM.</p>
+<p>فيما يلي مثال على سياسة أذونات تُرفق بدور IAM مع الأذونات المسموح بها. يمكنك تعديلها لتلبية متطلباتك.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2012-10-17&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;Statement&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
@@ -346,7 +358,7 @@ schema := entity.NewSchema().
     <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>ونهج الثقة المرتبط بدور IAM يحدد من المسموح له بتوليه.</p>
+<p>وتحدد سياسة الثقة المرتبطة بدور IAM من يُسمح له بتولي هذا الدور.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2012-10-17&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;Statement&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
@@ -365,7 +377,7 @@ schema := entity.NewSchema().
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>بمجرد حصولك على ARN دور IAM والمعرف الخارجي، يمكنك إعداد المعلمة <code translate="no">external_spec</code> على النحو التالي:</p>
+<p>بمجرد حصولك على معرّف دور IAM (ARN) والمعرف الخارجي، يمكنك إعداد معلمة <code translate="no">external_spec</code> على النحو التالي:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -384,11 +396,11 @@ schema := entity.NewSchema().
    <tr>
      <th><p>اسم المعلمة</p></th>
      <th><p>وصف المعلمة</p></th>
-     <th><p>مثال القيمة</p></th>
+     <th><p>قيمة مثال</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.cloud_provider</code></p></td>
-     <td><p>معرف موفر السحابة</p></td>
+     <td><p>معرف مزود الخدمة السحابية</p></td>
      <td><p><code translate="no">aws</code></p></td>
    </tr>
    <tr>
@@ -398,7 +410,7 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_ssl</code></p></td>
-     <td><p>ما إذا كان يتم استخدام SSL لإنشاء اتصالات.</p></td>
+     <td><p>ما إذا كان يتم استخدام SSL لإنشاء الاتصالات.</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
    <tr>
@@ -408,12 +420,12 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.role_arn</code></p></td>
-     <td><p>معرف دور IAM الذي تم الحصول عليه من مالك الجرافة.</p></td>
+     <td><p>ARN دور IAM الذي تم الحصول عليه من مالك الحاوية.</p></td>
      <td><p><code translate="no">arn:aws:iam::306787000000:role/...</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.external_id</code></p></td>
-     <td><p>المعرف الخارجي الذي تم الحصول عليه من مالك الجرافة.</p></td>
+     <td><p>المعرف الخارجي الذي تم الحصول عليه من مالك الحاوية.</p></td>
      <td><p>--</p></td>
    </tr>
    <tr>
@@ -438,28 +450,30 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بمجرد أن يصبح المخطط جاهزًا، يمكنك إضافة حقول على النحو التالي:</p>
+    </button></h2><p>بمجرد أن يصبح المخطط جاهزًا، يمكنك إضافة الحقول على النحو التالي:</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;product_id&quot;</span>,
     datatype=DataType.INT64,
-    <span class="hljs-comment"># highlight-next</span>
-    external_field=<span class="hljs-string">&quot;id&quot;</span> <span class="hljs-comment"># field name in the external data file</span>
+<span class="highlighted-wrapper-line">    external_field=<span class="hljs-string">&quot;id&quot;</span> <span class="hljs-comment"># field name in the external data file</span></span>
 )
 schema.add_field(
     field_name=<span class="hljs-string">&quot;product_name&quot;</span>,
     datatype=DataType.VARCHAR,
     max_length=<span class="hljs-number">512</span>,
-    <span class="hljs-comment"># highlight-next</span>
-    external_field=<span class="hljs-string">&quot;name&quot;</span>
+<span class="highlighted-wrapper-line">    external_field=<span class="hljs-string">&quot;name&quot;</span></span>
 )
 schema.add_field(
     field_name=<span class="hljs-string">&quot;embedding&quot;</span>,
     datatype=DataType.FLOAT_VECTOR,
     dim=<span class="hljs-number">768</span>,
-    <span class="hljs-comment"># highlight-next</span>
-    external_field=<span class="hljs-string">&quot;vector&quot;</span>
+<span class="highlighted-wrapper-line">    external_field=<span class="hljs-string">&quot;vector&quot;</span></span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -535,7 +549,12 @@ schema = schema.
       </svg>
     </button></h2><p>بعد إضافة جميع الحقول إلى المخطط، يمكنك إنشاء المجموعة الخارجية.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -598,7 +617,7 @@ err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span 
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Step-4-Create-indexes" class="common-anchor-header">الخطوة 4: إنشاء فهارس<button data-href="#Step-4-Create-indexes" class="anchor-icon" translate="no">
+<h2 id="Step-4-Create-indexes" class="common-anchor-header">الخطوة 4: إنشاء الفهارس<button data-href="#Step-4-Create-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -613,9 +632,14 @@ err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكنك إنشاء فهارس لأعمدة المجموعة الخارجية كما تفعل في المجموعات المُدارة.</p>
+    </button></h2><p>يمكنك إنشاء فهارس لحقول المجموعة الخارجية كما تفعل في المجموعات المُدارة.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا</a> <a href="#go">جافا جو</a> <a href="#javascript">نودجيز</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 <span class="hljs-comment"># Add indexes</span>
 index_params.add_index(
@@ -731,7 +755,12 @@ curl --request POST \
       </svg>
     </button></h2><p>بمجرد أن تصبح المجموعة جاهزة، قم بتحديثها لإنشاء البيانات الوصفية والفهارس لبياناتك.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">job_id = client.refresh_external_collection(
     db_name=<span class="hljs-string">&quot;my_database&quot;</span>,
     collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>
@@ -807,13 +836,13 @@ jobID := refreshResult.JobID
 <p>عملية التحديث غير متزامنة، لذا تحتاج إلى إعداد تكرار لمراقبة تقدمها.</p>
 <div class="alert note">
 <ul>
-<li><p>تفحص عملية التحديث البيانات الوصفية لملفات البيانات وتنشئ ملفات البيان وفقًا لذلك. تستغرق عادةً 150-250 مللي ثانية.</p></li>
-<li><p>تقوم ملفات البيان بتسجيل التعيين بين البيانات الوصفية في ملف Milvus والصفوف في الملفات الخارجية.</p></li>
-<li><p>إذا كان هناك تحديث لبيانات المصدر، فأنت بحاجة إلى استدعاء التحديث يدويًا مرة أخرى لإبقاء ملف Milvus محدثًا.</p></li>
-<li><p>يؤدي التحديث الذي يتطلب إزالة جميع البيانات الوصفية النشطة دون أي عمليات إدراج إلى رفض.</p></li>
+<li><p>تقوم عملية التحديث بمسح البيانات الوصفية لملفات البيانات وإنشاء ملفات البيان وفقًا لذلك. وعادةً ما تستغرق هذه العملية ما بين 150 و250 مللي ثانية.</p></li>
+<li><p>تسجل ملفات البيان التعيين بين البيانات الوصفية في Milvus والصفوف في الملفات الخارجية.</p></li>
+<li><p>إذا كان هناك تحديث لبياناتك المصدرية، فستحتاج إلى استدعاء عملية التحديث يدويًا مرة أخرى للحفاظ على تحديث Milvus.</p></li>
+<li><p>يؤدي التحديث الذي يتطلب إزالة جميع البيانات الوصفية النشطة دون أي إدخالات إلى رفض الطلب.</p></li>
 </ul>
 </div>
-<h2 id="Follow-ups" class="common-anchor-header">المتابعة<button data-href="#Follow-ups" class="anchor-icon" translate="no">
+<h2 id="Next-steps" class="common-anchor-header">الخطوات التالية<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -828,5 +857,6 @@ jobID := refreshResult.JobID
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بمجرد أن تقوم بتحديث المجموعة الخارجية، يمكنك تحميل المجموعة وإصدارها وإجراء عمليات بحث واستعلامات التشابه في المجموعة الخارجية كما تفعل في أي مجموعة مُدارة، باستثناء أن المجموعات في قاعدة بيانات للحوسبة عند الطلب يجب أن تكون مرفقة بمجموعة عند الطلب لعمليات البحث والاستعلامات.</p>
-<p>قبل إجراء عمليات DQL، مثل البحث والاستعلام والحصول والبحث المختلط، تحتاج إلى إنشاء جلسة عمل لإرفاق موارد الحوسبة الخاصة بمجموعة حسب الطلب.</p>
+    </button></h2><p>بمجرد تحديث المجموعة الخارجية، يمكنك تحميل المجموعة وإطلاقها وإجراء عمليات البحث عن التشابه والاستعلامات في المجموعة الخارجية كما تفعل في أي مجموعة مُدارة، باستثناء أن المجموعات الموجودة في قاعدة بيانات للحوسبة عند الطلب يجب أن تكون مرفقة بمجموعة عند الطلب لإجراء عمليات البحث والاستعلامات.</p>
+<p>قبل إجراء عمليات DQL، مثل البحث والاستعلام والحصول والبحث المختلط، تحتاج إلى إنشاء جلسة عمل لربط موارد الحوسبة الخاصة بمجموعة عند الطلب.</p>
+<p>إذا احتوى مصدر البيانات الخارجي لاحقًا على حقل آخر تريد عرضه في Milvus، فقم بإضافة حقل إلى مخطط المجموعة الخارجية وقم بتحديث المجموعة الخارجية مرة أخرى. للحصول على التفاصيل، راجع <a href="/docs/ar/alter-external-collection-schema.md">«تعديل مخطط المجموعة الخارجية</a>».</p>

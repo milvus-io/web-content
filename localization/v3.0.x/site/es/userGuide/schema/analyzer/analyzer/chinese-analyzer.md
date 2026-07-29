@@ -2,8 +2,8 @@
 id: chinese-analyzer.md
 title: Chino
 summary: >-
-  El analizador chino se ha diseñado específicamente para tratar texto chino y
-  ofrece una segmentación y tokenización eficaces.
+  El analizador chino está diseñado específicamente para procesar texto en
+  chino, lo que permite una segmentación y una tokenización eficaces.
 ---
 <h1 id="Chinese" class="common-anchor-header">Chino<button data-href="#Chinese" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>El analizador <code translate="no">chinese</code> se ha diseñado específicamente para tratar texto chino, proporcionando una segmentación y tokenización eficaces.</p>
+    </button></h1><p>El analizador <code translate="no">chinese</code> está diseñado específicamente para procesar texto en chino, proporcionando una segmentación y tokenización eficaces.</p>
 <h3 id="Definition" class="common-anchor-header">Definición<button data-href="#Definition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,14 +36,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>El analizador <code translate="no">chinese</code> consta de</p>
+    </button></h3><p>El analizador « <code translate="no">chinese</code> » consta de:</p>
 <ul>
-<li><p><strong>Tokenizador</strong>: Utiliza el tokenizador <code translate="no">jieba</code> para segmentar el texto chino en tokens basados en el vocabulario y el contexto. Para más información, consulte <a href="/docs/es/jieba-tokenizer.md">Jieba</a>.</p></li>
-<li><p><strong>Filtro</strong>: Utiliza el filtro <code translate="no">cnalphanumonly</code> para eliminar los tokens que contienen caracteres no chinos. Para más información, consulte <a href="/docs/es/cnalphanumonly-filter.md">Cnalphanumonly</a>.</p></li>
+<li><p><strong>Tokenizador</strong>: utiliza el tokenizador « <code translate="no">jieba</code> » para segmentar el texto en chino en tokens basándose en el vocabulario y el contexto. Para obtener más información, consulta <a href="/docs/es/jieba-tokenizer.md">Jieba</a>.</p></li>
+<li><p><strong>Filtro</strong>: utiliza el filtro « <code translate="no">cnalphanumonly</code> » para eliminar los tokens que contengan caracteres que no sean chinos. Para obtener más información, consulta <a href="/docs/es/cnalphanumonly-filter.md">Cnalphanumonly</a>.</p></li>
 </ul>
-<p>La funcionalidad del analizador <code translate="no">chinese</code> es equivalente a la siguiente configuración personalizada del analizador:</p>
+<p>La funcionalidad del analizador <code translate="no">chinese</code> es equivalente a la siguiente configuración de analizador personalizado:</p>
+<div class="alert note">
+<p>El analizador integrado « <code translate="no">chinese</code> » no genera tokens de pinyin. Para realizar coincidencias entre texto chino y términos de búsqueda en pinyin, utiliza un analizador personalizado con el tokenizador « <code translate="no">jieba</code> » y el <a href="/docs/es/pinyin-filter.md"><code translate="no">pinyin</code></a> filtro.</p>
+</div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;cnalphanumonly&quot;</span>]
@@ -84,9 +92,14 @@ analyzerParams=<span class="hljs-string">&#x27;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Para aplicar el analizador <code translate="no">chinese</code> a un campo, basta con establecer <code translate="no">type</code> en <code translate="no">chinese</code> en <code translate="no">analyzer_params</code>.</p>
+    </button></h3><p>Para aplicar el analizador « <code translate="no">chinese</code> » a un campo, basta con establecer « <code translate="no">type</code> » en « <code translate="no">chinese</code> » en <code translate="no">analyzer_params</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;chinese&quot;</span>,
 }
@@ -106,7 +119,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>El analizador <code translate="no">chinese</code> no acepta ningún parámetro opcional.</p>
+<p>El analizador « <code translate="no">chinese</code> » no admite ningún parámetro opcional.</p>
 </div>
 <h2 id="Examples" class="common-anchor-header">Ejemplos<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -123,7 +136,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Antes de aplicar la configuración del analizador al esquema de su colección, verifique su comportamiento utilizando el método <code translate="no">run_analyzer</code>.</p>
+    </button></h2><p>Antes de aplicar la configuración del analizador al esquema de tu colección, comprueba su comportamiento utilizando el método <code translate="no">run_analyzer</code>.</p>
 <h3 id="Analyzer-configuration" class="common-anchor-header">Configuración del analizador<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -140,7 +153,12 @@ analyzerParams=<span class="hljs-string">&#x27;{
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;chinese&quot;</span>,
 }
@@ -170,7 +188,12 @@ analyzerParams.put(<span class="hljs-string">&quot;type&quot;</span>, <span clas
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,
 )
@@ -235,7 +258,7 @@ result, err := client.RunAnalyzer(ctx, option)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Expected-output" class="common-anchor-header">Salida esperada<button data-href="#Expected-output" class="anchor-icon" translate="no">
+<h3 id="Expected-output" class="common-anchor-header">Resultado esperado<button data-href="#Expected-output" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -36,7 +36,7 @@ title: Milvus Operator を使用して Milvus クラスターをインストー�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Operatorは、Kubernetes（K8s）クラスター向けにMilvusのサービススタック全体をデプロイおよび管理するためのソリューションです。このスタックには、すべてのMilvusコンポーネントに加え、etcd、Pulsar、MinIOなどの関連依存関係が含まれます。</p>
+    </button></h2><p>Milvus Operatorは、Kubernetes（K8s）クラスター向けにMilvusのサービススタック全体をデプロイおよび管理するためのソリューションです。このスタックには、すべてのMilvusコンポーネントと、etcdやMinIOなどの関連依存関係が含まれており、組み込みのメッセージキューとしてWoodpeckerが使用されます。</p>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -119,7 +119,7 @@ CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/
 <p><code translate="no">kubectl</code> を使用してMilvus Operatorをインストールするには、次のコマンドを実行してください。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/deploy/manifests/deployment.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>インストール処理が完了すると、次のような出力が表示されます。</p>
+<p>インストール処理が終了すると、次のような出力が表示されます。</p>
 <pre><code translate="no" class="language-shell">namespace/milvus-operator created
 customresourcedefinition.apiextensions.k8s.io/milvusclusters.milvus.io created
 serviceaccount/milvus-operator-controller-manager created
@@ -135,7 +135,7 @@ service/milvus-operator-controller-manager-metrics-service created
 service/milvus-operator-webhook-service created
 deployment.apps/milvus-operator-controller-manager created
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus OperatorのPodが実行中かどうかは、次のように確認できます：</p>
+<p>Milvus OperatorのPodが実行中かどうかは、次のように確認できます:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods -n milvus-operator</span>
 
 NAME                               READY   STATUS    RESTARTS   AGE
@@ -175,10 +175,10 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Milvus OperatorのPodが実行されている状態になったら、次のようにMilvusクラスタをデプロイできます。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上記のコマンドは、メッセージキューとして<strong>Woodpecker</strong>（v3.0-betaで推奨）を使用し、Streaming Nodeを含むすべての新しいアーキテクチャコンポーネントを備えたMilvusクラスターをデプロイします。</p>
+<p>上記のコマンドは、メッセージキューとして<strong>Woodpecker</strong>（v3.0.0で推奨）を使用し、Streaming Nodeを含むすべての新しいアーキテクチャコンポーネントを備えたMilvusクラスターをデプロイします。</p>
 <p><strong>このデプロイにおけるアーキテクチャの主な特徴:</strong></p>
 <ul>
-<li><strong>メッセージキュー</strong>：<a href="/docs/ja/use-woodpecker.md">Woodpecker を使用</a>（インフラのメンテナンス負担を軽減）</li>
+<li><strong>メッセージキュー</strong>：<a href="/docs/ja/woodpecker.md">Woodpecker を使用</a>（インフラのメンテナンス負担を軽減）</li>
 <li><strong>ストリーミングノード</strong>：データ処理能力の向上のために有効化</li>
 <li><strong>Mix Coordinator</strong>：効率向上のためにコーディネーターコンポーネントを統合</li>
 </ul>
@@ -186,7 +186,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 <div class="alert note">
 <ul>
 <li>リリース名には、英字、数字、ハイフンのみを含めることができます。リリース名にドットを使用することはできません。</li>
-<li>また、すべてのコンポーネントが単一のポッド内に収まるスタンドアロンモードでMilvusインスタンスをデプロイすることも可能です。その場合は、上記のコマンド内の設定ファイルのURLを次のように変更してください。<code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
+<li>Milvusインスタンスをスタンドアロンモードでデプロイすることも可能です。このモードでは、すべてのコンポーネントが単一のポッド内に収められます。これを行うには、上記のコマンド内の設定ファイルのURLを次のように変更してください。<code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
 </ul>
 </div>
 <h3 id="2-Check-Milvus-cluster-status" class="common-anchor-header">2. Milvusクラスタの状態を確認する<button data-href="#2-Check-Milvus-cluster-status" class="anchor-icon" translate="no">
@@ -219,11 +219,6 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     <span class="hljs-attr">status:</span> <span class="hljs-string">&quot;True&quot;</span>
     <span class="hljs-attr">type:</span> <span class="hljs-string">StorageReady</span>
   <span class="hljs-bullet">-</span> <span class="hljs-attr">lastTransitionTime:</span> <span class="hljs-string">&quot;xxxx-xx-xxTxx:xx:xxZ&quot;</span>
-    <span class="hljs-attr">message:</span> <span class="hljs-string">Pulsar</span> <span class="hljs-string">is</span> <span class="hljs-string">ready</span>
-    <span class="hljs-attr">reason:</span> <span class="hljs-string">PulsarReady</span>
-    <span class="hljs-attr">status:</span> <span class="hljs-string">&quot;True&quot;</span>
-    <span class="hljs-attr">type:</span> <span class="hljs-string">PulsarReady</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-attr">lastTransitionTime:</span> <span class="hljs-string">&quot;xxxx-xx-xxTxx:xx:xxZ&quot;</span>
     <span class="hljs-attr">message:</span> <span class="hljs-string">Etcd</span> <span class="hljs-string">endpoints</span> <span class="hljs-string">is</span> <span class="hljs-string">healthy</span>
     <span class="hljs-attr">reason:</span> <span class="hljs-string">EtcdReady</span>
     <span class="hljs-attr">status:</span> <span class="hljs-string">&quot;True&quot;</span>
@@ -236,7 +231,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
   <span class="hljs-attr">endpoint:</span> <span class="hljs-string">my-release-milvus.default:19530</span>
   <span class="hljs-attr">status:</span> <span class="hljs-string">Healthy</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus Operatorは、etcd、Pulsar、MinIOなどのMilvus依存関係を構築した後、プロキシ、コーディネーター、ノードなどのMilvusコンポーネントを作成します。</p>
+<p>Milvus Operatorは、etcdやMinIOなどのMilvus依存関係を構築した後、プロキシ、コーディネーター、ノードなどのMilvusコンポーネントを作成します。</p>
 <p>Milvusクラスタの準備が完了すると、Milvusクラスタ内のすべてのポッドのステータスは以下のようになります。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods</span>
 
@@ -276,14 +271,14 @@ my-release-minio-3                               1/1     Running   0          2m
 <button class="copy-code-btn"></button></code></pre>
 <p>出力結果から、Milvus インスタンスがデフォルトのポート<strong>19530</strong> でサービスを提供していることがわかります。</p>
 <div class="alert note">
-<p>Milvusをスタンドアロンモードでデプロイした場合は、pod名を<code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> から<code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code> に変更してください。</p>
+<p>Milvusをスタンドアロンモードでデプロイした場合は、Pod名を `<code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> ` から `<code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code>` に変更してください。</p>
 </div>
 <p>次に、以下のコマンドを実行して、ローカルポートを Milvus がサービスを提供しているポートに転送します。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward service/my-release-milvus 27017:19530</span>
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>オプションとして、上記のコマンドで `<code translate="no">27017:19530</code> ` の代わりに `<code translate="no">:19530</code> ` を使用すると、<code translate="no">kubectl</code> がローカルポートを自動的に割り当ててくれるため、ポートの競合を管理する必要がなくなります。</p>
-<p>デフォルトでは、kubectl のポート転送は<code translate="no">localhost</code> でのみリスニングします。Milvus に選択した IP アドレスまたはすべての IP アドレスでリスニングさせたい場合は、<code translate="no">address</code> フラグを使用してください。次のコマンドを実行すると、ポート転送がホストマシンのすべての IP アドレスでリスニングするようになります。</p>
+<p>デフォルトでは、kubectl のポートフォワーディングは<code translate="no">localhost</code> でのみリスニングします。Milvus に選択した IP アドレスまたはすべての IP アドレスでリスニングさせたい場合は、<code translate="no">address</code> フラグを使用してください。次のコマンドを実行すると、ポートフォワーディングがホストマシンのすべての IP アドレスでリスニングするようになります。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
@@ -358,7 +353,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>デフォルトの設定で Milvus クラスタを削除した場合、etcd、Pulsar、MinIO などの依存関係は削除されません。そのため、次回同じ Milvus クラスタインスタンスをインストールする際には、これらの依存関係が再利用されます。</li>
+<li>デフォルトの設定で Milvus クラスタを削除する場合、etcd や MinIO などの依存関係は削除されません。そのため、次回同じ Milvus クラスタインスタンスをインストールする際には、これらの依存関係が再利用されます。</li>
 <li>Milvus クラスタとともに依存関係および永続ボリュームクレーム (PVC) を削除するには、<a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">設定ファイルを</a>参照してください。</li>
 </ul>
 </div>
@@ -377,7 +372,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Operator をアンインストールするには、2 つの方法があります。</p>
+    </button></h2><p>Milvus Operator をアンインストールするには、2つの方法があります。</p>
 <ul>
 <li><a href="#Uninstall-with-Helm">Helm を使用したアンインストール</a></li>
 <li><a href="#Uninstall-with-kubectl">kubectl を使用したアンインストール</a></li>
@@ -386,6 +381,30 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Uninstall-with-kubectl" class="common-anchor-header">kubectl を使用したアンインストール</h4><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v1.3.7/deploy/manifests/deployment.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Optional-dependencies" class="common-anchor-header">オプションの依存関係<button data-href="#Optional-dependencies" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>このデプロイメントでは、メッセージキューとして<strong>Woodpecker</strong>、メタデータとして<strong>etcd</strong>、オブジェクトストレージとして<strong>MinIO</strong>を使用しており、これらはすべてMilvus Operatorによってプロビジョニングされます。Operatorで別のバックエンドを使用するには、以下を参照してください:</p>
+<ul>
+<li>メッセージキュー：<a href="/docs/ja/woodpecker.md">Woodpecker</a>（デフォルト） ·<a href="/docs/ja/message_storage_operator.md#Configure-Pulsar">Pulsar</a>·<a href="/docs/ja/message_storage_operator.md#Configure-Kafka">Kafka</a>·<a href="/docs/ja/message_storage_operator.md#Configure-RocksMQ">RocksMQ</a></li>
+<li>オブジェクトストレージ:<a href="/docs/ja/object_storage_operator.md">Milvus Operator を使用したオブジェクトストレージの設定</a></li>
+<li>メタデータ:<a href="/docs/ja/meta_storage_operator.md">Milvus Operator による etcd の設定</a></li>
+</ul>
+<div class="alert note">
+<p>Storage V3はデフォルトで無効になっています。Storage V3に依存する機能を使用する前に、有効にしてください。要件および互換性に関する注意事項については、「<a href="/docs/ja/storage-v3.md">Storage V3</a>」を参照してください。</p>
+</div>
 <h2 id="Whats-next" class="common-anchor-header">次の手順<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -404,7 +423,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
     </button></h2><p>Docker に Milvus をインストールしたら、次のことができます:</p>
 <ul>
 <li><p>「<a href="/docs/ja/quickstart.md">Hello Milvus</a>」を確認して、Milvusの機能を確認してください。</p></li>
-<li><p>Milvusの基本的な操作を学びましょう：</p>
+<li><p>Milvusの基本操作を学ぶ:</p>
 <ul>
 <li><a href="/docs/ja/manage_databases.md">データベースの管理</a></li>
 <li><a href="/docs/ja/manage-collections.md">コレクションの管理</a></li>

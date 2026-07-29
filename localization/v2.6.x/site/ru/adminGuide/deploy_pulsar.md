@@ -22,7 +22,7 @@ summary: 'Узнайте, как настроить хранилище сооб�
     </button></h1><p>Milvus использует Pulsar или Kafka для управления журналами последних изменений, вывода потоковых журналов и предоставления подписок на журналы. Pulsar является системой хранения сообщений по умолчанию. В этом разделе описано, как настроить хранение сообщений с помощью Docker Compose или Helm.</p>
 <p>Вы можете настроить Pulsar с помощью <a href="https://docs.docker.com/get-started/overview/">Docker Compose</a> или в K8s, а Kafka — в K8s.</p>
 <div class="alert note">
-<p><strong>Ограничения</strong>, связанные с<strong>очередью сообщений</strong>: при обновлении до Milvus v2.6.20 необходимо сохранить текущий выбор системы очереди сообщений. Переключение между различными системами очередей сообщений во время обновления не поддерживается. Поддержка смены систем очередей сообщений будет доступна в будущих версиях.</p>
+<p><strong>Ограничения</strong>, связанные с<strong>очередью сообщений</strong>: при обновлении до Milvus v2.6.21 необходимо сохранить текущий выбор системы очереди сообщений. Переключение между различными системами очередей сообщений во время обновления не поддерживается. Поддержка смены систем очередей сообщений будет доступна в будущих версиях.</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Настройка Pulsar с помощью Docker Compose<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -54,7 +54,7 @@ summary: 'Узнайте, как настроить хранилище сооб�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Чтобы настроить Pulsar с помощью Docker Compose, укажите свои значения в разделе « <code translate="no">pulsar</code> » в файле ` <code translate="no">milvus.yaml</code> `, расположенном в каталоге `milvus/configs`.</p>
+    </button></h3><p>Чтобы настроить Pulsar с помощью Docker Compose, укажите свои значения в разделе « <code translate="no">pulsar</code> » в файле « <code translate="no">milvus.yaml</code> », расположенном в каталоге «milvus/configs».</p>
 <pre><code translate="no"><span class="hljs-attr">pulsar:</span>
   <span class="hljs-attr">address:</span> <span class="hljs-string">localhost</span> <span class="hljs-comment"># Address of pulsar</span>
   <span class="hljs-attr">port:</span> <span class="hljs-number">6650</span> <span class="hljs-comment"># Port of pulsar</span>
@@ -127,7 +127,7 @@ summary: 'Узнайте, как настроить хранилище сооб�
       namespace: default    
 </span><button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>После настройки вышеуказанных разделов и сохранения файла ` <code translate="no">values.yaml</code> ` выполните следующую команду для установки Milvus с использованием конфигураций Pulsar.</li>
+<li>После настройки вышеуказанных разделов и сохранения файла ` <code translate="no">values.yaml</code> ` выполните следующую команду для установки Milvus с использованием настроек Pulsar.</li>
 </ol>
 <pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -205,7 +205,7 @@ summary: 'Узнайте, как настроить хранилище сооб�
         rootPath: /var/lib/milvus/woodpecker # The root path of the storage provider.    
 </span><button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>После настройки вышеуказанных разделов и сохранения файла ` <code translate="no">values.yaml</code> ` выполните следующую команду для установки Milvus с использованием конфигураций Woodpecker.</li>
+<li>После настройки вышеуказанных разделов и сохранения файла ` <code translate="no">values.yaml</code> ` выполните следующую команду для установки Milvus с использованием настроек Woodpecker.</li>
 </ol>
 <pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>

@@ -2,10 +2,10 @@
 id: standard-analyzer.md
 title: Стандартный анализатор
 summary: >-
-  Стандартный анализатор - это анализатор по умолчанию в Milvus, который
-  автоматически применяется к текстовым полям, если анализатор не указан. Он
-  использует грамматическую токенизацию, что делает его эффективным для
-  большинства языков.
+  Стандартный анализатор — это анализатор по умолчанию в Milvus, который
+  автоматически применяется к текстовым полям, если не указан другой анализатор.
+  Он использует токенизацию на основе грамматики, благодаря чему эффективно
+  работает с большинством языков.
 ---
 <h1 id="Standard-Analyzer" class="common-anchor-header">Стандартный анализатор<button data-href="#Standard-Analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,9 +22,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Анализатор <code translate="no">standard</code> - это анализатор по умолчанию в Milvus, который автоматически применяется к текстовым полям, если анализатор не указан. Он использует грамматическую токенизацию, что делает его эффективным для большинства языков.</p>
+    </button></h1><p>Анализатор « <code translate="no">standard</code> » является анализатором по умолчанию в Milvus, который автоматически применяется к текстовым полям, если не указан другой анализатор. Он использует токенизацию на основе грамматики, что делает его эффективным для большинства языков.</p>
 <div class="alert note">
-<p>Анализатор <code translate="no">standard</code> подходит для языков, в которых границы слов определяются разделителями (например, пробелами и пунктуацией). Однако такие языки, как китайский, японский и корейский, требуют токенизации на основе словаря. В таких случаях следует использовать анализатор для конкретного языка, например <a href="/docs/ru/chinese-analyzer.md"><code translate="no">chinese</code></a> или пользовательских анализаторов со специализированными токенизаторами (такими как <a href="/docs/ru/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/ru/icu-tokenizer.md"><code translate="no">icu</code></a>) и фильтрами, чтобы обеспечить точную токенизацию и лучшие результаты поиска.</p>
+<p>Анализатор « <code translate="no">standard</code> » подходит для языков, в которых границы слов определяются с помощью разделителей (таких как пробелы и знаки препинания). Однако для таких языков, как китайский, арабский, тайский, японский и корейский, требуется токенизация или нормализация с учётом особенностей конкретного языка. В таких случаях следует использовать языкоспецифический анализатор, например <a href="/docs/ru/chinese-analyzer.md"><code translate="no">chinese</code></a>, <a href="/docs/ru/arabic-analyzer.md"><code translate="no">arabic</code></a>, или <a href="/docs/ru/thai-analyzer.md"><code translate="no">thai</code></a>, либо пользовательские анализаторы со специализированными токенизаторами, например <a href="/docs/ru/lindera-tokenizer.md"><code translate="no">lindera</code></a> и <a href="/docs/ru/icu-tokenizer.md"><code translate="no">icu</code></a>.</p>
 </div>
 <h2 id="Definition" class="common-anchor-header">Определение<button data-href="#Definition" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,14 +41,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Анализатор <code translate="no">standard</code> состоит из:</p>
+    </button></h2><p>Анализатор « <code translate="no">standard</code> » состоит из:</p>
 <ul>
-<li><p><strong>Токенизатор</strong>: Использует токенизатор <code translate="no">standard</code> для разбиения текста на отдельные единицы слов на основе правил грамматики. Дополнительную информацию см. в разделе <a href="/docs/ru/standard-tokenizer.md">Стандартный токенизатор</a>.</p></li>
-<li><p><strong>Фильтр</strong>: Использует фильтр <code translate="no">lowercase</code> для преобразования всех лексем в нижний регистр, что позволяет осуществлять поиск без учета регистра. Дополнительные сведения см. в разделе <a href="/docs/ru/lowercase-filter.md">Нижний регистр</a>.</p></li>
+<li><p><strong>Токенизатор</strong>: использует токенизатор « <code translate="no">standard</code> » для разбиения текста на отдельные слова в соответствии с грамматическими правилами. Дополнительные сведения см. в разделе <a href="/docs/ru/standard-tokenizer.md">«Стандартный токенизатор</a>».</p></li>
+<li><p><strong>Фильтр</strong>: использует фильтр « <code translate="no">lowercase</code> » для преобразования всех токенов в нижний регистр, что позволяет выполнять поиск без учета регистра. Дополнительные сведения см. в разделе <a href="/docs/ru/lowercase-filter.md">«Преобразование в нижний регистр</a>».</p></li>
 </ul>
-<p>Функциональность анализатора <code translate="no">standard</code> эквивалентна следующей конфигурации пользовательского анализатора:</p>
+<p>Функциональность анализатора « <code translate="no">standard</code> » эквивалентна следующей конфигурации пользовательского анализатора:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;lowercase&quot;</span>]
@@ -73,7 +78,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Configuration" class="common-anchor-header">Конфигурация<button data-href="#Configuration" class="anchor-icon" translate="no">
+<h2 id="Configuration" class="common-anchor-header">Настройка<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -88,9 +93,14 @@ analyzerParams=<span class="hljs-string">&#x27;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Чтобы применить анализатор <code translate="no">standard</code> к полю, просто установите <code translate="no">type</code> на <code translate="no">standard</code> в <code translate="no">analyzer_params</code>, и включите дополнительные параметры по мере необходимости.</p>
+    </button></h2><p>Чтобы применить анализатор « <code translate="no">standard</code> » к полю, просто установите значение параметра ` <code translate="no">type</code> ` равным ` <code translate="no">standard</code> ` в файле ` <code translate="no">analyzer_params</code>` и добавьте дополнительные параметры по мере необходимости.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-comment"># Specifies the standard analyzer type</span>
 }
@@ -109,7 +119,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
   &quot;type&quot;: &quot;standard&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Анализатор <code translate="no">standard</code> принимает следующие необязательные параметры:</p>
+<p>Анализатор <code translate="no">standard</code> принимает следующие дополнительные параметры:</p>
 <table>
    <tr>
      <th><p>Параметр</p></th>
@@ -117,12 +127,17 @@ analyzerParams=<span class="hljs-string">&#x27;{
    </tr>
    <tr>
      <td><p><code translate="no">stop_words</code></p></td>
-     <td><p>Массив, содержащий список стоп-слов, которые будут удалены при токенизации. По умолчанию используется <code translate="no">_english_</code>, встроенный набор распространенных английских стоп-слов.</p></td>
+     <td><p>Массив, содержащий список стоп-слов, которые будут исключены при токенизации. По умолчанию используется <code translate="no">_english_</code> — встроенный набор распространенных английских стоп-слов.</p></td>
    </tr>
 </table>
 <p>Пример настройки пользовательских стоп-слов:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-comment"># Specifies the standard analyzer type</span>
     <span class="hljs-string">&quot;stop_words&quot;</span>, [<span class="hljs-string">&quot;of&quot;</span>] <span class="hljs-comment"># Optional: List of words to exclude from tokenization</span>
@@ -141,7 +156,7 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Coll
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Определив <code translate="no">analyzer_params</code>, вы можете применить их к полю <code translate="no">VARCHAR</code> при определении схемы коллекции. Это позволит Milvus обрабатывать текст в этом поле с помощью указанного анализатора для эффективной токенизации и фильтрации. Для получения дополнительной информации обратитесь к <a href="/docs/ru/analyzer-overview.md#Example-use">примеру использования</a>.</p>
+<p>После определения <code translate="no">analyzer_params</code> вы можете применить их к полю <code translate="no">VARCHAR</code> при определении схемы коллекции. Это позволяет Milvus обрабатывать текст в этом поле с использованием указанного анализатора для эффективной токенизации и фильтрации. Для получения дополнительной информации см. раздел <a href="/docs/ru/analyzer-overview.md#Example-use">«Пример использования</a>».</p>
 <h2 id="Examples" class="common-anchor-header">Примеры<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -157,7 +172,7 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Прежде чем применять конфигурацию анализатора к схеме коллекции, проверьте его работу с помощью метода <code translate="no">run_analyzer</code>.</p>
+    </button></h2><p>Прежде чем применять конфигурацию анализатора к схеме коллекции, проверьте его поведение с помощью метода <code translate="no">run_analyzer</code>.</p>
 <h3 id="Analyzer-configuration" class="common-anchor-header">Конфигурация анализатора<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -174,7 +189,12 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Coll
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,  <span class="hljs-comment"># Standard analyzer configuration</span>
     <span class="hljs-string">&quot;stop_words&quot;</span>: [<span class="hljs-string">&quot;for&quot;</span>] <span class="hljs-comment"># Optional: Custom stop words parameter</span>
@@ -212,7 +232,12 @@ analyzerParams=<span class="hljs-string">&#x27;{
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,
 )

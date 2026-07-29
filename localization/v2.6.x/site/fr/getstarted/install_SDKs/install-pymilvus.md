@@ -61,7 +61,7 @@ title: Installer le SDK Python de Milvus
 <div class="alert note">
 Il est recommandé d’installer une version de PyMilvus correspondant à celle du serveur Milvus que vous avez installé. Pour plus d’informations, consultez <a href="/docs/fr/v2.6.x/release_notes.md">les notes de mise à jour</a>.
 </div>
-<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.6</span>.<span class="hljs-number">16</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.6</span>.<span class="hljs-number">17</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">Vérification de l’installation<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -98,7 +98,7 @@ Il est recommandé d’installer une version de PyMilvus correspondant à celle 
       </svg>
     </button></h2><p>Une fois PyMilvus installé, vous pouvez :</p>
 <ul>
-<li><p>Apprendre les opérations de base de Milvus :</p>
+<li><p>Découvrir les opérations de base de Milvus :</p>
 <ul>
 <li><a href="/docs/fr/v2.6.x/manage-collections.md">Gérer les collections</a></li>
 <li><a href="/docs/fr/v2.6.x/manage-partitions.md">Gérer les partitions</a></li>
@@ -106,5 +106,5 @@ Il est recommandé d’installer une version de PyMilvus correspondant à celle 
 <li><a href="/docs/fr/v2.6.x/single-vector-search.md">Effectuer une recherche sur un vecteur unique</a></li>
 <li><a href="/docs/fr/v2.6.x/multi-vector-search.md">Recherche hybride</a></li>
 </ul></li>
-<li><p>Explorer <a href="/api-reference/pymilvus/v2.6.x/About.md">la documentation de l'API PyMilvus</a></p></li>
+<li><p>Découvrez <a href="/api-reference/pymilvus/v2.6.x/About.md">la documentation de l'API PyMilvus</a></p></li>
 </ul>

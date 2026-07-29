@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>전체 텍스트 검색은 텍스트 데이터 세트에서 특정 용어나 구문이 포함된 문서를 검색한 후, 관련성에 따라 결과의 순위를 매기는 기능입니다. 이 기능은 정확한 용어를 간과할 수 있는 의미 기반 검색의 한계를 극복하여, 가장 정확하고 문맥에 적합한 결과를 제공해 드립니다. 또한, 원시 텍스트 입력을 허용하여 벡터 검색을 간소화하며, 벡터 임베딩을 수동으로 생성할 필요 없이 텍스트 데이터를 스파스 임베딩으로 자동 변환합니다.</p>
+    </button></h1><p>전체 텍스트 검색은 텍스트 데이터 세트에서 특정 용어나 구문이 포함된 문서를 검색한 후, 관련성에 따라 결과의 순위를 매기는 기능입니다. 이 기능은 정확한 용어를 간과할 수 있는 의미 기반 검색의 한계를 극복하여, 가장 정확하고 문맥에 적합한 결과를 제공해 드립니다. 또한, 원시 텍스트 입력을 허용하여 벡터 검색을 간소화하며, 사용자가 수동으로 벡터 임베딩을 생성할 필요 없이 텍스트 데이터를 스파스 임베딩으로 자동 변환합니다.</p>
 <p>관련성 점수 산출에 BM25 알고리즘을 사용하는 이 기능은, 특정 검색어와 밀접하게 일치하는 문서를 우선적으로 선정하는 검색 강화 생성(RAG) 시나리오에서 특히 유용합니다.</p>
 <div class="alert note">
 <p>전체 텍스트 검색과 의미 기반 고밀도 벡터 검색을 통합함으로써 검색 결과의 정확성과 관련성을 높일 수 있습니다. 자세한 내용은 <a href="/docs/ko/multi-vector-search.md">하이브리드 검색을</a> 참조하십시오.</p>
@@ -45,7 +45,7 @@ summary: >-
     </button></h2><p>Milvus는 정보 검색 시스템에서 널리 채택된 점수 산정 함수인 BM25 관련성 알고리즘을 기반으로 한 전체 텍스트 검색 기능을 제공하며, 이를 검색 워크플로우에 통합하여 정확하고 관련성 순위가 매겨진 텍스트 결과를 제공합니다.</p>
 <p>Milvus의 전체 텍스트 검색은 다음 워크플로를 따릅니다:</p>
 <ol>
-<li><p><strong>원본 텍스트 입력</strong>: 임베딩 모델 없이도 텍스트 문서를 삽입하거나 일반 텍스트로 쿼리를 입력할 수 있습니다.</p></li>
+<li><p><strong>원본 텍스트 입력</strong>: 임베딩 모델 없이도 일반 텍스트로 텍스트 문서를 삽입하거나 쿼리를 입력할 수 있습니다.</p></li>
 <li><p><strong>텍스트 분석</strong>: Milvus는 <a href="/docs/ko/analyzer-overview.md">분석기를</a> 사용하여 텍스트를 색인화 및 검색이 가능한 의미 있는 용어로 처리합니다.</p></li>
 <li><p><strong>BM25 함수 처리</strong>: 내장된 함수가 이러한 용어를 BM25 점수 산정에 최적화된 스파스 벡터 표현으로 변환합니다.</p></li>
 <li><p><strong>컬렉션 저장</strong>: Milvus는 빠른 검색 및 순위 지정을 위해 결과로 생성된 스파스 임베딩을 컬렉션에 저장합니다.</p></li>
@@ -61,7 +61,7 @@ summary: >-
 <ol>
 <li><p><a href="/docs/ko/full-text-search.md#Create-a-collection-for-BM25-full-text-search">컬렉션 생성</a>: 필수 필드를 설정하고, 원본 텍스트를 스파스 임베딩으로 변환하는 BM25 함수를 정의합니다.</p></li>
 <li><p><a href="/docs/ko/full-text-search.md#Insert-text-data">데이터 삽입</a>: 원본 텍스트 문서를 컬렉션에 수집합니다.</p></li>
-<li><p><a href="/docs/ko/full-text-search.md#Perform-full-text-search">검색 수행</a>: 자연어 쿼리 텍스트를 사용하여 BM25 관련도에 기반한 순위가 매겨진 결과를 검색합니다.</p></li>
+<li><p><a href="/docs/ko/full-text-search.md#Perform-full-text-search">검색 수행</a>: 자연어 쿼리 텍스트를 사용하여 BM25 관련성에 기반한 순위가 매겨진 결과를 검색합니다.</p></li>
 </ol>
 <h2 id="Create-a-collection-for-BM25-full-text-search" class="common-anchor-header">BM25 전체 텍스트 검색용 컬렉션 생성<button data-href="#Create-a-collection-for-BM25-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -78,7 +78,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>BM25 기반 전체 텍스트 검색을 활성화하려면, 필수 필드가 포함된 컬렉션을 준비하고, 스파스 벡터를 생성하는 BM25 함수를 정의하며, 인덱스를 구성한 다음 컬렉션을 생성해야 합니다.</p>
+    </button></h2><p>BM25 기반 전체 텍스트 검색을 활성화하려면, 필수 필드가 포함된 컬렉션을 준비하고, 스파스 벡터를 생성하는 BM25 함수를 정의하고, 인덱스를 구성한 다음 컬렉션을 생성해야 합니다.</p>
 <h3 id="Define-schema-fields" class="common-anchor-header">스키마 필드 정의<button data-href="#Define-schema-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -97,8 +97,8 @@ summary: >-
     </button></h3><p>컬렉션 스키마에는 최소한 다음 세 가지 필수 필드가 포함되어야 합니다.</p>
 <ul>
 <li><p><strong>기본 필드</strong>: 컬렉션 내 각 엔티티를 고유하게 식별합니다.</p></li>
-<li><p><strong>텍스트 필드</strong> (<code translate="no">VARCHAR</code>): 원본 텍스트 문서를 저장합니다. Milvus가 BM25 관련성 순위를 위해 텍스트를 처리할 수 있도록 ` <code translate="no">enable_analyzer=True</code> `를 설정해야 합니다. 기본적으로 Milvus는 <a href="/docs/ko/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/ko/standard-analyzer.md"> 분석기를</a> 사용합니다. 다른 분석기를 구성하려면 <a href="/docs/ko/analyzer-overview.md">‘분석기 개요’를</a> 참조하십시오.</p></li>
-<li><p><strong>스파스 벡터 필드</strong> (<code translate="no">SPARSE_FLOAT_VECTOR</code>): BM25 함수에 의해 자동으로 생성된 스파스 임베딩을 저장합니다.</p></li>
+<li><p><strong>문자열 필드</strong> (<code translate="no">VARCHAR</code> 또는 <code translate="no">TEXT</code>): 원본 텍스트 문서를 저장합니다. Milvus가 BM25 관련성 순위를 위해 텍스트를 처리할 수 있도록 <code translate="no">enable_analyzer=True</code> 를 설정해야 합니다. 기본적으로 Milvus는 <a href="/docs/ko/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/ko/standard-analyzer.md"> analyzer를</a> 사용합니다. 다른 분석기를 구성하려면 <a href="/docs/ko/analyzer-overview.md">‘분석기 개요’를</a> 참조하십시오. 이 페이지의 예제에서는 <code translate="no">VARCHAR</code> 를 사용합니다. 긴 텍스트의 경우 입력 필드를 <code translate="no">TEXT</code> 로 정의하고 <code translate="no">max_length</code> 를 생략할 수 있습니다. 전체 예제는 <a href="/docs/ko/text.md">‘텍스트 필드’를</a> 참조하십시오.</p></li>
+<li><p><strong>스파스 벡터 필드</strong> (<code translate="no">SPARSE_FLOAT_VECTOR</code>): BM25 함수에 의해 자동 생성된 스파스 임베딩을 저장합니다.</p></li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -234,8 +234,8 @@ schema.WithField(entity.NewField().
 <button class="copy-code-btn"></button></code></pre>
 <p>앞서 제시된 구성에서,</p>
 <ul>
-<li><p><code translate="no">id</code>:는 기본 키 역할을 하며 <code translate="no">auto_id=True</code> 를 사용하여 자동 생성됩니다.</p></li>
-<li><p><code translate="no">text</code>: 전체 텍스트 검색 작업을 위해 원시 텍스트 데이터를 저장합니다. 데이터 유형은 <code translate="no">VARCHAR</code> 이어야 하며, <code translate="no">VARCHAR</code> 는 텍스트 저장을 위한 Milvus의 문자열 데이터 유형입니다.</p></li>
+<li><p><code translate="no">id</code>:는 기본 키 역할을 하며 <code translate="no">auto_id=True</code> 를 사용하여 자동으로 생성됩니다.</p></li>
+<li><p><code translate="no">text</code>: 전체 텍스트 검색 작업을 위해 원시 텍스트 데이터를 저장합니다. 이 필드는 분량이 제한된 텍스트의 경우 <code translate="no">VARCHAR</code> 를, 긴 원본 콘텐츠의 경우 <code translate="no">TEXT</code> 를 사용할 수 있습니다.</p></li>
 <li><p><code translate="no">sparse</code>: 전체 텍스트 검색 작업을 위해 내부적으로 생성된 스파스 임베딩을 저장하기 위해 예약된 벡터 필드입니다. 데이터 유형은 반드시 <code translate="no">SPARSE_FLOAT_VECTOR</code> 이어야 합니다.</p></li>
 </ul>
 <h3 id="Define-the-BM25-function" class="common-anchor-header">BM25 함수 정의<button data-href="#Define-the-BM25-function" class="anchor-icon" translate="no">
@@ -264,7 +264,7 @@ schema.WithField(entity.NewField().
 </div>
 <pre><code translate="no" class="language-python">bm25_function = Function(
     name=<span class="hljs-string">&quot;text_bm25_emb&quot;</span>, <span class="hljs-comment"># Function name</span>
-    input_field_names=[<span class="hljs-string">&quot;text&quot;</span>], <span class="hljs-comment"># Name of the VARCHAR field containing raw text data</span>
+    input_field_names=[<span class="hljs-string">&quot;text&quot;</span>], <span class="hljs-comment"># Name of the VARCHAR or TEXT field containing raw text data</span>
     output_field_names=[<span class="hljs-string">&quot;sparse&quot;</span>], <span class="hljs-comment"># Name of the SPARSE_FLOAT_VECTOR field reserved to store generated embeddings</span>
 <span class="highlighted-wrapper-line">    function_type=FunctionType.BM25, <span class="hljs-comment"># Set to `BM25`</span></span>
 )
@@ -341,11 +341,11 @@ schema.WithFunction(function)
    </tr>
    <tr>
      <td><p><code translate="no">name</code></p></td>
-     <td><p>함수 이름입니다. 이 함수는 ` <code translate="no">text</code> ` 필드의 원시 텍스트를 BM25와 호환되는 스파스 벡터로 변환하며, 변환된 벡터는 ` <code translate="no">sparse</code> ` 필드에 저장됩니다.</p></td>
+     <td><p>함수의 이름입니다. 이 함수는 ` <code translate="no">text</code> ` 필드의 원시 텍스트를 BM25와 호환되는 스파스 벡터로 변환하며, 변환된 벡터는 ` <code translate="no">sparse</code> ` 필드에 저장됩니다.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
-     <td><p>텍스트를 스파스 벡터로 변환해야 하는 ` <code translate="no">VARCHAR</code> ` 필드의 이름입니다. ` <code translate="no">FunctionType.BM25</code>`의 경우, 이 매개변수는 하나의 필드 이름만 허용합니다.</p></td>
+     <td><p>텍스트를 스파스 벡터로 변환해야 하는 ` <code translate="no">VARCHAR</code> ` 또는 ` <code translate="no">TEXT</code> ` 필드의 이름입니다. ` <code translate="no">FunctionType.BM25</code>`의 경우, 이 매개변수는 하나의 필드 이름만 허용합니다.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">output_field_names</code></p></td>
@@ -353,11 +353,11 @@ schema.WithFunction(function)
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>사용할 함수의 유형입니다. 반드시 ` <code translate="no">FunctionType.BM25</code>`이어야 합니다.</p></td>
+     <td><p>사용할 함수의 유형입니다. 반드시 <code translate="no">FunctionType.BM25</code> 이어야 합니다.</p></td>
    </tr>
 </table>
 <div class="alert note">
-<p>여러 <code translate="no">VARCHAR</code> 필드에 BM25 처리가 필요한 경우, <strong>필드당 하나의 BM25 함수를</strong> 정의하고, 각 함수마다 고유한 이름과 출력 필드를 지정해야 합니다.</p>
+<p>여러 텍스트 필드에 BM25 처리가 필요한 경우, <strong>필드당 하나의 BM25 함수를</strong> 정의하고, 각 함수마다 고유한 이름과 출력 필드를 지정하십시오.</p>
 </div>
 <h3 id="Configure-the-index" class="common-anchor-header">인덱스 구성<button data-href="#Configure-the-index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -451,27 +451,27 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">field_name</code></p></td>
-     <td><p>인덱싱할 벡터 필드의 이름입니다. 전체 텍스트 검색의 경우, 생성된 스파스 벡터가 저장된 필드여야 합니다. 이 예제에서는 값을 ` <code translate="no">sparse</code>`로 설정합니다.</p></td>
+     <td><p>인덱싱할 벡터 필드의 이름입니다. 전체 텍스트 검색의 경우, 생성된 스파스 벡터가 저장된 필드여야 합니다. 이 예제에서는 값을 <code translate="no">sparse</code> 로 설정합니다.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">index_type</code></p></td>
-     <td><p>생성할 인덱스의 유형입니다. ` <code translate="no">AUTOINDEX</code> `를 사용하면 Milvus가 인덱스 설정을 자동으로 최적화합니다. 인덱스 설정을 더 세밀하게 제어해야 하는 경우, Milvus에서 스파스 벡터용으로 제공되는 다양한 인덱스 유형 중에서 선택할 수 있습니다. 자세한 내용은 <a href="/docs/ko/index.md#Indexes-supported-in-Milvus">Milvus에서 지원하는 인덱스를</a> 참조하십시오.</p></td>
+     <td><p>생성할 인덱스의 유형입니다. Milvus에서 BM25 전체 텍스트 검색을 수행하려면 이 값을 <code translate="no">SPARSE_INVERTED_INDEX</code> 로 설정하십시오. 자세한 내용은 <a href="/docs/ko/sparse-inverted-index.md">SPARSE_INVERTED_INDEX를</a> 참조하십시오.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">metric_type</code></p></td>
-     <td><p>이 매개변수의 값은 특히 전체 텍스트 검색 기능을 사용하려면 반드시 ` <code translate="no">BM25</code> `로 설정해야 합니다.</p></td>
+     <td><p>이 매개변수의 값은 특히 전체 텍스트 검색 기능을 위해 반드시 <code translate="no">BM25</code> 로 설정해야 합니다.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params</code></p></td>
-     <td><p>인덱스에 특화된 추가 매개변수 사전입니다.</p></td>
+     <td><p>인덱스에 특화된 추가 매개변수들의 사전입니다.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>인덱스 구축 및 쿼리 실행에 사용되는 알고리즘입니다. 유효한 값:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (기본값): MaxScore 알고리즘을 사용하는 최적화된 Document-at-a-Time(DAAT) 쿼리 처리. MaxScore는 영향도가 미미할 것으로 예상되는 용어와 문서를 건너뛰어, 높은 <em>k</em> 값이나 용어가 많은 쿼리에서 더 나은 성능을 제공합니다. 이는 용어의 최대 영향 점수를 기준으로 필수 그룹과 비필수 그룹으로 분류하여, 상위 k개 결과에 기여할 수 있는 용어에 집중함으로써 달성됩니다.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: WAND 알고리즘을 사용한 최적화된 DAAT 쿼리 처리. WAND는 최대 영향 점수를 활용하여 경쟁력이 없는 문서를 건너뛰어 평가해야 할 히트 문서의 수를 줄이지만, 히트당 오버헤드가 더 큽니다. 따라서 건너뛰기가 더 용이한 작은 <em>k</em> 값을 가진 쿼리나 짧은 쿼리의 경우 WAND가 더 효율적입니다.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: 기본 Term-at-a-Time (TAAT) 쿼리 처리. <code translate="no">DAAT_MAXSCORE</code> 및 <code translate="no">DAAT_WAND</code> 에 비해 속도는 느리지만, <code translate="no">TAAT_NAIVE</code> 는 독특한 장점을 제공합니다. 전역 컬렉션 매개변수(avgdl)의 변경과 무관하게 고정된 상태로 유지되는 캐시된 최대 영향 점수를 사용하는 DAAT 알고리즘과 달리, <code translate="no">TAAT_NAIVE</code> 는 이러한 변화에 동적으로 적응합니다.</p></li></ul></td>
+     <td><p>BM25 스파스 인버티드 인덱스를 구축하고 쿼리하는 데 사용되는 알고리즘입니다. 유효한 값:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (기본값): Document-at-a-Time MaxScore 쿼리 처리. 이 옵션은 <em>k</em> 값이 높거나 검색어가 많은 쿼리가 포함된 전체 텍스트 검색 워크로드에 적합합니다. 배경 정보는 <a href="https://dl.acm.org/doi/10.1016/0306-4573%2895%2900020-H">‘쿼리 평가: 전략 및 최적화’를</a> 참조하십시오.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Document-at-a-Time WAND 쿼리 처리. 이 옵션은 <em>k</em> 값이 작거나 쿼리가 짧은 전체 텍스트 검색 워크로드에 적합합니다. 자세한 내용은 <a href="https://dl.acm.org/doi/10.1145/956863.956944">‘2단계 검색 프로세스를 사용한 효율적인 쿼리 평가’를</a> 참조하십시오.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: 기본 Term-at-a-Time 쿼리 처리. 이 옵션은 기준선으로 사용하거나, 평균 문서 길이 등 전체 컬렉션 통계에 따라 점수가 동적으로 조정되어야 할 때 사용합니다.</p></li><li><p><code translate="no">"BLOCK_MAX_MAXSCORE"</code>: 블록 수준 최대 점수 메타데이터를 사용하는 MaxScore 쿼리 처리. 배경 정보는 <a href="https://dl.acm.org/doi/10.1145/2009916.2010048">‘블록-맥스 인덱스를 사용한 더 빠른 상위 k개 문서 검색’을</a> 참조하십시오.</p></li><li><p><code translate="no">"BLOCK_MAX_WAND"</code>: 블록 수준 최대 점수 메타데이터를 사용하는 WAND 쿼리 처리. 배경 정보는 <a href="https://dl.acm.org/doi/10.1145/2009916.2010048">‘블록-맥스 인덱스를 사용한 더 빠른 상위 k개 문서 검색’을</a> 참조하십시오.</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
-     <td><p>용어 빈도 포화도를 제어합니다. 값이 높을수록 문서 순위 결정 시 용어 빈도의 중요도가 높아집니다. 값 범위: [1.2, 2.0].</p></td>
+     <td><p>용어 빈도 포화도를 제어합니다. 값이 높을수록 문서 순위 결정 시 용어 빈도의 중요도가 증가합니다. 권장 범위: [1.2, 2.0]. 기본값: 1.2.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_b</code></p></td>
@@ -631,7 +631,7 @@ client.insert(InsertReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>컬렉션에 데이터를 삽입한 후에는 원본 텍스트 쿼리를 사용하여 전체 텍스트 검색을 수행할 수 있습니다. Milvus는 쿼리를 자동으로 스파스 벡터로 변환하고, BM25 알고리즘을 사용하여 일치하는 검색 결과를 순위 지정한 후, 상위 K개(<code translate="no">limit</code>) 결과를 반환합니다.</p>
+    </button></h2><p>컬렉션에 데이터를 삽입한 후에는 원본 텍스트 쿼리를 사용하여 전체 텍스트 검색을 수행할 수 있습니다. Milvus는 쿼리를 자동으로 스파스 벡터로 변환하고, BM25 알고리즘을 사용하여 일치하는 검색 결과를 순위 매긴 다음, 상위 K개(<code translate="no">limit</code>) 결과를 반환합니다.</p>
 <div class="alert note">
 <p>텍스트 하이라이터를 구성하여 검색 결과에서 일치하는 용어를 강조 표시할 수 있습니다. 자세한 내용은 <a href="/docs/ko/text-highlighter.md">텍스트 하이라이터를</a> 참조하십시오.</p>
 </div>
@@ -726,7 +726,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">params.drop_ratio_search</code></p></td>
-     <td><p>검색 시 무시할 중요도가 낮은 용어의 비율입니다. 자세한 내용은 <a href="/docs/ko/sparse_vector.md">‘스파스 벡터</a>’를 참조하십시오.</p></td>
+     <td><p>검색 시 무시할 중요도가 낮은 용어의 비율입니다. 값은 [0.0, 1.0) 범위 내에 있어야 합니다. 자세한 내용은 <a href="/docs/ko/sparse_vector.md">‘스파스 벡터’를</a> 참조하십시오.</p></td>
    </tr>
    <tr>
      <td></td>
@@ -734,7 +734,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">data</code></p></td>
-     <td><p>자연어로 작성된 원본 쿼리 텍스트. Milvus는 BM25 함수를 사용하여 텍스트 쿼리를 스파스 벡터로 자동 변환하므로, 미리 계산된 벡터를 제공하지 마십시오.</p></td>
+     <td><p>자연어로 작성된 원본 쿼리 텍스트입니다. Milvus는 BM25 함수를 사용하여 텍스트 쿼리를 스파스 벡터로 자동 변환하므로, 미리 계산된 벡터를 제공하지 마십시오.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">anns_field</code></p></td>

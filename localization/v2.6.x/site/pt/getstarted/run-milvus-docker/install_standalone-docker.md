@@ -63,7 +63,7 @@ title: Executar o Milvus no Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Novidades na versão 2.6.20:</strong></p>
+<p><strong>Novidades na versão 2.6.21:</strong></p>
 <ul>
 <li><strong>Nó de streaming</strong>: Capacidades de processamento de dados melhoradas</li>
 <li><strong>Woodpecker MQ</strong>: Fila de mensagens melhorada com menor sobrecarga de manutenção; consulte <a href="/docs/pt/v2.6.x/use-woodpecker.md">«Utilizar o Woodpecker</a> » para mais detalhes</li>

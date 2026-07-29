@@ -1,7 +1,7 @@
 ---
 id: schema_design.md
-title: '프롬프트: 밀버스 스키마 디자인'
-summary: AI 코딩 어시스턴트가 올바른 Milvus 컬렉션 스키마를 설계하기 위한 규칙입니다.
+title: '프롬프트: Milvus 스키마 설계'
+summary: AI 코딩 도우미가 올바른 Milvus 컬렉션 스키마를 설계하기 위한 규칙.
 ---
 <h1 id="Schema-Design" class="common-anchor-header">스키마 설계<button data-href="#Schema-Design" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,8 +18,8 @@ summary: AI 코딩 어시스턴트가 올바른 Milvus 컬렉션 스키마를 �
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>필드 유형, 기본 키, BM25 구성 및 스키마 불변성 제약 조건을 포함하여 올바른 Milvus 컬렉션 스키마를 설계하기 위한 규칙 및 의사 결정 가이드입니다. 아래의 전체 프롬프트를 AI 도구에 복사하여 이러한 규칙을 자동으로 적용하세요. 모든 프롬프트에 대한 개요는 <a href="/docs/ko/milvus_for_agents.md">AI 프롬프트를</a> 참조하세요.</p>
-<h2 id="How-to-use-this-prompt" class="common-anchor-header">이 프롬프트를 사용하는 방법<button data-href="#How-to-use-this-prompt" class="anchor-icon" translate="no">
+    </button></h1><p>필드 유형, 기본 키, BM25 구성 및 스키마 불변성 제약 조건을 포함하여 올바른 Milvus 컬렉션 스키마를 설계하기 위한 규칙 및 결정 가이드입니다. 아래의 전체 프롬프트를 AI 도구에 복사하여 이러한 규칙을 자동으로 적용하세요. 모든 프롬프트에 대한 개요는 <a href="/docs/ko/milvus_for_agents.md">AI 프롬프트를</a> 참조하세요.</p>
+<h2 id="How-to-use-this-prompt" class="common-anchor-header">이 프롬프트 사용 방법<button data-href="#How-to-use-this-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,11 +35,11 @@ summary: AI 코딩 어시스턴트가 올바른 Milvus 컬렉션 스키마를 �
         ></path>
       </svg>
     </button></h2><ol>
-<li>아래의 <a href="#full-prompt">전체</a> 프롬프트 섹션에서 전체 프롬프트를<strong>복사합니다</strong>.</li>
-<li>AI 도구가 예상하는 위치에<strong>저장합니다</strong> (배치에 대한 자세한 내용은 <a href="/docs/ko/milvus_for_agents.md">환경 표를</a> 참조하세요).</li>
+<li>아래 <a href="#full-prompt">‘전체 프롬프트’</a> 섹션에서 전체 프롬프트를<strong>복사하십시오</strong>.</li>
+<li>AI 도구가 요구하는 위치에<strong>저장하십시오</strong>. 배치에 대한 자세한 내용은 <a href="/docs/ko/milvus_for_agents.md">환경 표를</a> 참조하십시오.</li>
 <li>AI 어시스턴트는 Milvus 코드를 생성하거나 검토할 때 이러한 규칙을 자동으로 적용합니다.</li>
 </ol>
-<p><strong>커서</strong> 사용자의 경우: <a href="#full-prompt">전체 프롬프트</a> 섹션에서 프롬프트를 복사하여 프로젝트의 <code translate="no">.cursor/rules/</code> 아래에 저장합니다.</p>
+<p><strong>Cursor</strong> 사용자의 경우: <a href="#full-prompt">‘전체 프롬프트’</a> 섹션에서 프롬프트를 복사하여 프로젝트 내 ` <code translate="no">.cursor/rules/</code> ` 폴더에 저장하십시오.</p>
 <h2 id="Full-prompt" class="common-anchor-header">전체 프롬프트<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -57,7 +57,7 @@ summary: AI 코딩 어시스턴트가 올바른 Milvus 컬렉션 스키마를 �
       </svg>
     </button></h2><pre><code translate="no" class="language-text">You are a Milvus schema design expert. You use the `MilvusClient` interface from PyMilvus v2.4+. You NEVER use the legacy ORM API (`connections.connect()`, `Collection()`).
 
-IMPORTANT: Schema is immutable in Milvus v2.5.x and earlier — you CANNOT add, modify, or delete fields after creation. BM25 functions MUST be defined at collection creation time. Always check the user&#x27;s Milvus version before suggesting schema modifications.
+IMPORTANT: Schema is immutable in Milvus v2.5.x and earlier — you CANNOT add, modify, or delete fields after creation. Milvus v2.6.x supports adding nullable scalar fields with `add_collection_field()`, and Milvus v3.0.x supports dropping scalar fields and non-last vector fields with `drop_collection_field()`. Function-generated output fields are removed by dropping the function. BM25 functions MUST be defined at collection creation time. Always check the user&#x27;s Milvus version before suggesting schema modifications.
 
 ## Rules
 
@@ -82,7 +82,7 @@ schema.add_field(&quot;category&quot;, DataType.VARCHAR, max_length=128)  # new 
 # ... re-insert data after recreation
 ```
 
-2. **Schema modification (v2.6+):** You can add new fields using `client.add_collection_field()`, but you CANNOT modify or delete existing fields. Changing a field&#x27;s data type (e.g., INT64 to VARCHAR) is NOT supported in any version — drop and recreate.
+2. **Schema updates (v2.6.x and later):** In Milvus v2.6.x, you can add new nullable scalar fields using `client.add_collection_field()`. In Milvus v3.0.x, you can also drop scalar fields and non-last vector fields using `client.drop_collection_field()`. Function-generated output fields are removed by dropping the function. Changing a field&#x27;s data type (e.g., INT64 to VARCHAR), renaming fields, changing vector dimensions, adding vector fields, or changing primary/partition/clustering keys is NOT supported in place — drop and recreate or migrate the collection.
 
 ```python
 # ✅ CORRECT in v2.6+ — adding a new field is supported
@@ -94,9 +94,16 @@ client.add_collection_field(
     nullable=True,  # added fields must be nullable
 )
 
-# ❌ STILL WRONG in v2.6+ — cannot modify or delete existing fields
-# Changing INT64 to VARCHAR, renaming fields, or removing fields
-# is not supported. Drop and recreate the collection instead.
+# ❌ STILL WRONG — cannot rewrite existing field meaning or vector layout in place
+# Changing INT64 to VARCHAR, renaming fields, changing vector dimensions,
+# adding vector fields, or changing primary/partition/clustering keys is not supported.
+# Drop and recreate or migrate the collection instead.
+
+# ✅ CORRECT in v3.0.x — dropping a scalar field
+client.drop_collection_field(
+    collection_name=&quot;my_collection&quot;,
+    field_name=&quot;obsolete_field&quot;,
+)
 ```
 
 3. **Primary key types:** Primary keys MUST be `DataType.INT64` or `DataType.VARCHAR`. No other types are supported. Composite primary keys are NOT supported.
@@ -242,7 +249,7 @@ Before finishing, verify:
 - [ ] Field types use `DataType` enum, not strings
 - [ ] Primary key is `DataType.INT64` or `DataType.VARCHAR` — no other types
 - [ ] Only one primary key field per collection — no composite keys
-- [ ] Schema modifications account for version: immutable in v2.5.x, add-only in v2.6+
+- [ ] Schema modifications account for version: immutable in v2.5.x, add nullable scalar fields in v2.6.x, drop scalar fields and non-last vector fields in v3.0.x
 - [ ] BM25 function and analyzer are defined at collection creation time, not added later
 - [ ] Nullable is only used on scalar fields, not on vector, JSON, or Array fields
 <button class="copy-code-btn"></button></code></pre>

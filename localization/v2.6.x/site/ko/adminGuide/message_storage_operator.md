@@ -20,12 +20,12 @@ summary: Milvus Operator를 사용하여 메시지 저장소를 구성하는 방
         ></path>
       </svg>
     </button></h1><p>Milvus는 최근 변경 내역의 로그 관리, 스트림 로그 출력 및 로그 구독 제공을 위해 RocksMQ, Pulsar 또는 Kafka를 사용합니다. 이 항목에서는 Milvus Operator를 사용하여 Milvus를 설치할 때 메시지 저장소 종속성을 구성하는 방법을 설명합니다. 자세한 내용은 Milvus Operator 저장소의 " <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">Milvus Operator를 사용한 메시지 저장소 구성</a> "을 참조하십시오.</p>
-<p>이 항목은 Milvus Operator가 이미 배포되어 있음을 전제로 합니다.</p>
+<p>이 항목은 Milvus Operator가 이미 배포되어 있다고 가정합니다.</p>
 <div class="alert note">자세한 내용은 <a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">‘Milvus Operator 배포’를</a> 참조하십시오. </div>
 <p>Milvus Operator를 사용하여 Milvus 클러스터를 시작하려면 구성 파일을 지정해야 합니다.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-string">kubectl</span> <span class="hljs-string">apply</span> <span class="hljs-string">-f</span> <span class="hljs-string">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>타사 종속성을 구성하려면 <code translate="no">milvus_cluster_default.yaml</code> 에 있는 코드 템플릿만 편집하면 됩니다. 다음 섹션에서는 오브젝트 스토리지, etcd 및 Pulsar를 각각 구성하는 방법을 설명합니다.</p>
+<p>타사 종속성을 구성하려면 <code translate="no">milvus_cluster_default.yaml</code> 에 있는 코드 템플릿만 편집하면 됩니다. 다음 섹션에서는 오브젝트 스토리지, etcd 및 Pulsar를 각각 구성하는 방법을 소개합니다.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">시작하기 전에<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -60,7 +60,7 @@ summary: Milvus Operator를 사용하여 메시지 저장소를 구성하는 방
 </ul></li>
 <li>Milvus 시스템이 실행 중인 동안에는 메시지 저장소를 변경할 수 없습니다.</li>
 <li>Kafka 2.x 또는 3.x 버전만 지원됩니다.</li>
-<li><strong>업그레이드 제한 사항</strong>: <strong>메시지 큐 제한 사항</strong>: Milvus v2.6.20으로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경 기능은 향후 버전에서 제공될 예정입니다.</li>
+<li><strong>업그레이드 제한 사항</strong>: <strong>메시지 큐 제한 사항</strong>: Milvus v2.6.21로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경 기능은 향후 버전에서 제공될 예정입니다.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">RocksMQ 구성<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -144,7 +144,7 @@ summary: Milvus Operator를 사용하여 메시지 저장소를 구성하는 방
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pulsar는 최근 변경 사항에 대한 로그를 관리하고, 스트림 로그를 출력하며, 로그 구독 기능을 제공합니다. 메시지 스토리지를 위한 Pulsar 구성은 Milvus 독립 실행형 및 Milvus 클러스터 모두에서 지원됩니다. 그러나 Milvus Operator를 사용하는 경우, Milvus 클러스터의 메시지 스토리지로만 Pulsar를 구성할 수 있습니다. Pulsar를 구성하려면 ‘ <code translate="no">spec.dependencies.pulsar</code> ’ 아래에 필수 필드를 추가하십시오.</p>
+    </button></h2><p>Pulsar는 최근 변경 사항에 대한 로그를 관리하고, 스트림 로그를 출력하며, 로그 구독 기능을 제공합니다. 메시지 저장을 위한 Pulsar 구성은 Milvus 독립 실행형 및 Milvus 클러스터 모두에서 지원됩니다. 그러나 Milvus Operator를 사용하는 경우, Milvus 클러스터의 메시지 저장소로만 Pulsar를 구성할 수 있습니다. Pulsar를 구성하려면 ‘ <code translate="no">spec.dependencies.pulsar</code> ’ 아래에 필수 필드를 추가하십시오.</p>
 <p><code translate="no">pulsar</code> <code translate="no">external</code> 및 를 지원합니다. <code translate="no">inCluster</code></p>
 <h3 id="External-Pulsar" class="common-anchor-header">외부 Pulsar<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -261,7 +261,7 @@ summary: Milvus Operator를 사용하여 메시지 저장소를 구성하는 방
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pulsar는 Milvus 클러스터의 기본 메시지 저장소입니다. Kafka를 사용하려면 선택적 필드인 <code translate="no">msgStreamType</code> 를 추가하여 Kafka를 구성하십시오.</p>
+    </button></h2><p>Pulsar는 Milvus 클러스터의 기본 메시지 저장소입니다. Kafka를 사용하려면 선택적 필드인 <code translate="no">msgStreamType</code> 을 추가하여 Kafka를 구성하십시오.</p>
 <p><code translate="no">kafka</code> <code translate="no">external</code> 및 을 지원합니다. <code translate="no">inCluster</code></p>
 <h3 id="External-Kafka" class="common-anchor-header">외부 Kafka<button data-href="#External-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -367,6 +367,6 @@ summary: Milvus Operator를 사용하여 메시지 저장소를 구성하는 방
       </svg>
     </button></h2><p>Milvus Operator를 사용하여 다른 Milvus 종속성을 구성하는 방법을 알아보세요:</p>
 <ul>
-<li><a href="/docs/ko/v2.6.x/object_storage_operator.md">Milvus Operator를 사용하여 오브젝트 스토리지 구성하기</a></li>
+<li><a href="/docs/ko/v2.6.x/object_storage_operator.md">Milvus Operator를 사용하여 오브젝트 스토리지 구성</a></li>
 <li><a href="/docs/ko/v2.6.x/meta_storage_operator.md">Milvus Operator를 사용하여 메타 스토리지 구성</a></li>
 </ul>

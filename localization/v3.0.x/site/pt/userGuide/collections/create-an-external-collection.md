@@ -3,10 +3,10 @@ id: create-an-external-collection.md
 title: Criar uma coleção externaCompatible with Milvus 3.0.x
 summary: >-
   Uma coleção externa é um tipo de coleção de dados no Milvus que acede a dados
-  de sistemas de armazenamento externos ou tabelas de bases de dados, como o AWS
-  S3 e o Iceberg, sem os copiar para o Milvus. Actua como uma camada de consulta
-  sobre os lagos de dados, mantendo a compatibilidade com as interfaces de
-  consulta do Milvus.
+  provenientes de sistemas de armazenamento externos ou tabelas de bases de
+  dados, como o AWS S3 e o Iceberg, sem os copiar para o Milvus. Funciona como
+  uma camada de consulta sobre os lagos de dados, mantendo simultaneamente a
+  compatibilidade com as interfaces de consulta do Milvus.
 beta: Milvus 3.0.x
 ---
 <h1 id="Create-an-External-Collection" class="common-anchor-header">Criar uma coleção externa<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Create-an-External-Collection" class="anchor-icon" translate="no">
@@ -24,7 +24,10 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Uma coleção externa é um tipo de coleção de dados no Milvus que acede a dados de sistemas de armazenamento externos ou tabelas de bases de dados como o AWS S3 e o Iceberg sem os copiar para o Milvus. Actua como uma camada de consulta sobre os lagos de dados, mantendo a compatibilidade com as interfaces de consulta do Milvus.</p>
+    </button></h1><p>Uma coleção externa é um tipo de coleção de dados no Milvus que acede a dados provenientes de sistemas de armazenamento externos ou tabelas de bases de dados, como o AWS S3 e o Iceberg, sem os copiar para o Milvus. Funciona como uma camada de consulta sobre lagos de dados, mantendo a compatibilidade com as interfaces de consulta do Milvus.</p>
+<div class="alert note">
+<p>Esta funcionalidade requer o Storage V3. Para obter instruções de ativação e considerações de compatibilidade, consulte <a href="/docs/pt/storage-v3.md">Storage V3</a>.</p>
+</div>
 <h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,19 +43,23 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Num pipeline de dados de IA típico, os utilizadores podem já ter armazenado os seus dados em Parquet ou noutros formatos no seu sistema de armazenamento, como o AWS S3. Para fazer com que o Milvus consuma esses dados armazenados externamente, os usuários geralmente precisam importá-los para o próprio armazenamento do Milvus usando pipelines Extract-Transform-Load (ETL).</p>
-<p>Este fluxo de trabalho "traga os seus dados para o Milvus" cria dados redundantes que são difíceis de sincronizar e aumenta a carga de manutenção da engenharia para garantir a consistência dos dados.</p>
-<p>
+    </button></h2><p>Num pipeline de dados de IA típico, os utilizadores podem já ter armazenado os seus dados em Parquet ou noutros formatos no seu sistema de armazenamento, como o AWS S3. Para que o Milvus possa utilizar estes dados armazenados externamente, os utilizadores têm normalmente de os importar para o próprio armazenamento do Milvus utilizando pipelines de Extração-Transformação-Carregamento (ETL).</p>
+<p>Este fluxo de trabalho de «trazer os dados para o Milvus» cria dados redundantes que são difíceis de sincronizar e aumenta a carga de manutenção de engenharia necessária para garantir a consistência dos dados.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-data-to-compute.png" alt="Bring data to compute workflow" class="doc-image" id="bring-data-to-compute-workflow" />
-   </span> <span class="img-wrapper"> <span>Fluxo de trabalho "Bring data to compute</span> </span></p>
-<p>Para resolver estes problemas, o Milvus fornece colecções externas que lhe permitem aceder aos seus dados armazenados externamente a partir do Milvus sem se preocupar com a sincronização dos dados e com os pipelines ETL.</p>
-<p>
+   <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-data-to-compute.png" alt="Bring data to compute workflow" class="doc-image" id="bring-data-to-compute-workflow" /> 
+   <span>Fluxo de trabalho «Trazer dados para a computação</span> </span>» <span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-compute-to-data.png" alt="Bring compute to data workflow" class="doc-image" id="bring-compute-to-data-workflow" />
-   </span> <span class="img-wrapper"> <span>Trazer a computação para o fluxo de trabalho de dados</span> </span></p>
-<p>Uma vez criada, uma coleção externa pode aceder diretamente aos seus dados e mantê-los no mesmo local onde os armazena. Em segundo plano, o Milvus cria ficheiros de manifesto para registar os mapeamentos entre os metadados do Milvus e as linhas nos ficheiros de dados externos. Depois que os arquivos de manifesto estiverem prontos, você pode criar índices na coleção externa como faria em qualquer coleção gerenciada.</p>
-<p>Quando os dados são alterados, o acionamento manual de uma atualização de sub-segundo atualiza os metadados, mantendo o Milvus sempre atualizado.</p>
+ </span></p>
+<p>Para resolver estas questões, o Milvus disponibiliza coleções externas que lhe permitem aceder aos seus dados armazenados externamente a partir do Milvus, sem se preocupar com a sincronização de dados e com os pipelines ETL.</p>
+<p><span class="img-wrapper">
+  
+   <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-compute-to-data.png" alt="Bring compute to data workflow" class="doc-image" id="bring-compute-to-data-workflow" /> 
+   <span>Fluxo de trabalho «Levar a computação até aos dados</span> </span>» <span class="img-wrapper">
+  
+ </span></p>
+<p>Uma vez criada, uma coleção externa pode aceder diretamente aos seus dados e mantê-los no mesmo local onde os armazena. Em segundo plano, o Milvus cria ficheiros de manifesto para registar os mapeamentos entre os metadados do Milvus e as linhas nos ficheiros de dados externos. Depois de os ficheiros de manifesto estarem prontos, pode criar índices na coleção externa tal como faria em qualquer coleção gerida.</p>
+<p>Quando os seus dados mudam, o acionamento manual de uma atualização em menos de um segundo atualiza os metadados, mantendo o Milvus sempre atualizado.</p>
 <h2 id="Step-1-Create-schema" class="common-anchor-header">Passo 1: Criar esquema<button data-href="#Step-1-Create-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -68,9 +75,14 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Tal como acontece com a criação de uma coleção gerida, também é necessário criar um esquema antes de criar uma coleção externa. No entanto, o esquema é ligeiramente diferente do de uma coleção gerida.</p>
+    </button></h2><p>Tal como na criação de uma coleção gerida, também é necessário criar um esquema antes de criar uma coleção externa. No entanto, o esquema é ligeiramente diferente do de uma coleção gerida.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 schema = MilvusClient.create_schema(
@@ -129,12 +141,12 @@ schema := entity.NewSchema().
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para criar o esquema para uma coleção externa, é necessário especificar o URI dos dados de origem, o formato dos dados e as definições de autenticação.</p>
+<p>Para criar o esquema de uma coleção externa, é necessário especificar o URI dos dados de origem, o formato dos dados e as definições de autenticação.</p>
 <table>
    <tr>
      <th><p>Nome do parâmetro</p></th>
      <th><p>Descrição do parâmetro</p></th>
-     <th><p>Exemplo Valor</p></th>
+     <th><p>Valor de exemplo</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">format</code></p></td>
@@ -143,18 +155,18 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">snapshot_id</code></p></td>
-     <td><p>Um ID de instantâneo de tabela Iceberg válido. Este parâmetro aplica-se apenas quando define <code translate="no">format</code> para <code translate="no">iceberg_table</code>.</p></td>
+     <td><p>Um ID válido de instantâneo de tabela do Iceberg. Este parâmetro aplica-se apenas quando define « <code translate="no">format</code> » como « <code translate="no">iceberg_table</code> ».</p></td>
      <td><p><code translate="no">473984310232959286</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs</code></p></td>
-     <td><p>Definições do sistema de ficheiros externo numa estrutura JSON encadeada.</p></td>
+     <td><p>Definições do sistema de ficheiros externo numa estrutura JSON convertida em cadeia de caracteres.</p></td>
      <td><p>--</p></td>
    </tr>
 </table>
 <p><details summary="Authentication Options"></p>
-<p>Tem as seguintes opções para definir as definições de autenticação:</p>
-<h3 id="Use-AWS-AKSK" class="common-anchor-header">Usar AWS AK/SK<button data-href="#Use-AWS-AKSK" class="anchor-icon" translate="no">
+<p>Tem as seguintes opções para definir as configurações de autenticação:</p>
+<h3 id="Use-AWS-AKSK" class="common-anchor-header">Utilizar AWS AK/SK<button data-href="#Use-AWS-AKSK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -169,7 +181,7 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Esta opção aplica-se ao MinIO auto-hospedado ou ao cenário em que tem AK/SK para trabalhar.</p>
+    </button></h3><p>Esta opção aplica-se ao MinIO auto-hospedado ou ao cenário em que dispõe de AK/SK para trabalhar.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -186,7 +198,7 @@ schema := entity.NewSchema().
    <tr>
      <th><p>Nome do parâmetro</p></th>
      <th><p>Descrição do parâmetro</p></th>
-     <th><p>Exemplo Valor</p></th>
+     <th><p>Valor de exemplo</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.access_key_id</code></p></td>
@@ -200,26 +212,26 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.region</code></p></td>
-     <td><p>ID da região de nuvem</p></td>
+     <td><p>ID da região da nuvem</p></td>
      <td><p><code translate="no">us-west-2</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.cloud_provider</code></p></td>
-     <td><p>ID do fornecedor de serviços de computação em nuvem</p></td>
+     <td><p>ID do fornecedor de serviços na nuvem</p></td>
      <td><p><code translate="no">aws</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_ssl</code></p></td>
-     <td><p>Se o SSL é usado para estabelecer conexões.</p></td>
+     <td><p>Se o SSL é utilizado para estabelecer ligações.</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_virtual_host</code></p></td>
-     <td><p>Se deve usar a hospedagem virtual para acessar o seu bucket.</p><p>Para obter detalhes, consulte <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">este artigo</a>.</p></td>
+     <td><p>Se deve ser utilizada a hospedagem virtual para aceder ao seu bucket.</p><p>Para mais detalhes, consulte <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">este artigo</a>.</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
 </table>
-<h3 id="Use-AWS-IAM" class="common-anchor-header">Usar AWS IAM<button data-href="#Use-AWS-IAM" class="anchor-icon" translate="no">
+<h3 id="Use-AWS-IAM" class="common-anchor-header">Utilizar o AWS IAM<button data-href="#Use-AWS-IAM" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -234,7 +246,7 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Esta opção se aplica ao cenário em que o Milvus é executado em uma instância EC2 ou em um cluster EKS. Neste caso, não é necessário codificar o AK/SK.</p>
+    </button></h3><p>Esta opção aplica-se ao cenário em que o Milvus é executado numa instância EC2 ou num cluster EKS. Neste caso, não é necessário codificar de forma estática a AK/SK.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -250,35 +262,35 @@ schema := entity.NewSchema().
    <tr>
      <th><p>Nome do parâmetro</p></th>
      <th><p>Descrição do parâmetro</p></th>
-     <th><p>Exemplo Valor</p></th>
+     <th><p>Valor de exemplo</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_iam</code></p></td>
-     <td><p>Se deve utilizar o AWS IAM.</p><p>Defina este valor como <code translate="no">"true"</code> para esta opção.</p></td>
+     <td><p>Se deve utilizar o AWS IAM.</p><p>Defina este parâmetro como « <code translate="no">"true"</code> » para esta opção.</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.iam_endpoint</code></p></td>
-     <td><p>Um ponto de extremidade válido do AWS STS. </p><p>Para obter detalhes, consulte <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_region-endpoints.html">este artigo</a>.</p></td>
+     <td><p>Um ponto de extremidade AWS STS válido. </p><p>Para mais detalhes, consulte <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_region-endpoints.html">este artigo</a>.</p></td>
      <td><p><code translate="no">https:&ast;//&ast;sts.&lt;region&gt;.amazonaws.com</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.region</code></p></td>
-     <td><p>ID da região de nuvem</p></td>
+     <td><p>ID da região da nuvem</p></td>
      <td><p><code translate="no">us-west-2</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.cloud_provider</code></p></td>
-     <td><p>ID do provedor de nuvem</p></td>
+     <td><p>ID do fornecedor de serviços na nuvem</p></td>
      <td><p><code translate="no">aws</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_ssl</code></p></td>
-     <td><p>Se o SSL é usado para estabelecer conexões.</p></td>
+     <td><p>Se o SSL é utilizado para estabelecer ligações.</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
 </table>
-<h3 id="Use-Milvus-global-credentials" class="common-anchor-header">Usar credenciais globais do Milvus<button data-href="#Use-Milvus-global-credentials" class="anchor-icon" translate="no">
+<h3 id="Use-Milvus-global-credentials" class="common-anchor-header">Utilizar credenciais globais do Milvus<button data-href="#Use-Milvus-global-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -293,7 +305,7 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Esta opção aplica-se quando armazena dados externos no bucket do Milvus e as definições globais do MinIO especificadas em <code translate="no">milvus.yaml</code> podem ser utilizadas diretamente para aceder aos dados.</p>
+    </button></h3><p>Esta opção aplica-se quando armazena dados externos no bucket do Milvus, e as definições globais do MinIO especificadas em <code translate="no">milvus.yaml</code> podem ser utilizadas diretamente para aceder aos dados.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -301,7 +313,7 @@ schema := entity.NewSchema().
     <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-IAM-Role-ARN" class="common-anchor-header">Usar ARN de função do IAM<button data-href="#Use-IAM-Role-ARN" class="anchor-icon" translate="no">
+<h3 id="Use-IAM-Role-ARN" class="common-anchor-header">Utilizar ARN da função IAM<button data-href="#Use-IAM-Role-ARN" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -316,14 +328,14 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Esta opção se aplica quando sua organização usa contas AWS diferentes para gerenciar o cluster do Milvus e o bucket que contém os arquivos de dados de destino.</p>
-<p>Nesse caso, o proprietário do bucket deve criar uma função do IAM que</p>
+    </button></h3><p>Esta opção aplica-se quando a sua organização utiliza contas AWS diferentes para gerir o cluster do Milvus e o bucket que contém os ficheiros de dados de destino.</p>
+<p>Neste caso, o proprietário do bucket deve criar uma função IAM que</p>
 <ul>
-<li><p>Anexa <code translate="no">AmazonS3FullAccess</code> ou uma política mais refinada para acesso ao bucket.</p></li>
-<li><p>Inclui uma autodefinição <code translate="no">sts:ExternalId</code> no campo Condição da Política de Confiança da função.</p></li>
+<li><p>associe a política <code translate="no">AmazonS3FullAccess</code> ou uma política mais detalhada para o acesso ao bucket.</p></li>
+<li><p>Inclua um « <code translate="no">sts:ExternalId</code> » definido pelo próprio no campo «Condição» da «Política de Confiança» da função.</p></li>
 </ul>
-<p>Em seguida, o proprietário do bucket deve fornecer o ARN da função de IAM e a ID externa para que você possa chamar <code translate="no">sts:AssumeRole</code> com esses valores para assumir a função de IAM.</p>
-<p>A seguir, um exemplo de política de permissão a ser anexada à função de IAM com as permissões permitidas. Pode ajustar isto para satisfazer os seus requisitos.</p>
+<p>Em seguida, o proprietário do bucket deve fornecer-lhe o ARN da função IAM e o ID externo para que possa chamar ` <code translate="no">sts:AssumeRole</code> ` com esses valores para assumir a função IAM.</p>
+<p>Segue-se um exemplo de política de permissões a ser associada à função IAM com as permissões autorizadas. Pode ajustá-la de acordo com os seus requisitos.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2012-10-17&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;Statement&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
@@ -347,7 +359,7 @@ schema := entity.NewSchema().
     <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>E a política de confiança associada à função de IAM define quem tem permissão para a assumir.</p>
+<p>E a política de confiança associada à função IAM define quem está autorizado a assumi-la.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2012-10-17&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;Statement&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
@@ -366,7 +378,7 @@ schema := entity.NewSchema().
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Depois de obter o ARN da função de IAM e a ID externa, pode configurar o parâmetro <code translate="no">external_spec</code> da seguinte forma:</p>
+<p>Depois de obter o ARN da função IAM e o ID externo, pode configurar o parâmetro <code translate="no">external_spec</code> da seguinte forma:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -385,46 +397,46 @@ schema := entity.NewSchema().
    <tr>
      <th><p>Nome do parâmetro</p></th>
      <th><p>Descrição do parâmetro</p></th>
-     <th><p>Exemplo Valor</p></th>
+     <th><p>Valor de exemplo</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.cloud_provider</code></p></td>
-     <td><p>ID do provedor de nuvem</p></td>
+     <td><p>ID do fornecedor de serviços na nuvem</p></td>
      <td><p><code translate="no">aws</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.region</code></p></td>
-     <td><p>ID da região de nuvem</p></td>
+     <td><p>ID da região da nuvem</p></td>
      <td><p><code translate="no">us-west-2</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_ssl</code></p></td>
-     <td><p>Se o SSL é usado para estabelecer conexões.</p></td>
+     <td><p>Se o SSL é utilizado para estabelecer ligações.</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_iam</code></p></td>
-     <td><p>Se deve ser usado o AWS IAM.</p><p>Defina isso como <code translate="no">"true"</code> para essa opção.</p></td>
+     <td><p>Se deve ser utilizado o AWS IAM.</p><p>Defina esta opção como « <code translate="no">"true"</code> ».</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.role_arn</code></p></td>
-     <td><p>ARN de função do IAM obtido do proprietário do bucket.</p></td>
+     <td><p>ARN da função IAM obtido junto do proprietário do bucket.</p></td>
      <td><p><code translate="no">arn:aws:iam::306787000000:role/...</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.external_id</code></p></td>
-     <td><p>ID externo obtido do proprietário do bucket.</p></td>
+     <td><p>ID externo obtido junto do proprietário do bucket.</p></td>
      <td><p>--</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.load_frequency</code></p></td>
-     <td><p>Intervalo em que Milvus recupera credenciais de autenticação temporárias em segundos.</p></td>
+     <td><p>Intervalo, em segundos, em que o Milvus recupera as credenciais de autenticação temporárias.</p></td>
      <td><p><code translate="no">900</code></p></td>
    </tr>
 </table>
 <p></details></p>
-<h2 id="Step-2-Add-fields" class="common-anchor-header">Etapa 2: Adicionar campos<button data-href="#Step-2-Add-fields" class="anchor-icon" translate="no">
+<h2 id="Step-2-Add-fields" class="common-anchor-header">Passo 2: Adicionar campos<button data-href="#Step-2-Add-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -439,28 +451,30 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Quando o esquema estiver pronto, pode adicionar campos da seguinte forma:</p>
+    </button></h2><p>Assim que o esquema estiver pronto, pode adicionar campos da seguinte forma:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;product_id&quot;</span>,
     datatype=DataType.INT64,
-    <span class="hljs-comment"># highlight-next</span>
-    external_field=<span class="hljs-string">&quot;id&quot;</span> <span class="hljs-comment"># field name in the external data file</span>
+<span class="highlighted-wrapper-line">    external_field=<span class="hljs-string">&quot;id&quot;</span> <span class="hljs-comment"># field name in the external data file</span></span>
 )
 schema.add_field(
     field_name=<span class="hljs-string">&quot;product_name&quot;</span>,
     datatype=DataType.VARCHAR,
     max_length=<span class="hljs-number">512</span>,
-    <span class="hljs-comment"># highlight-next</span>
-    external_field=<span class="hljs-string">&quot;name&quot;</span>
+<span class="highlighted-wrapper-line">    external_field=<span class="hljs-string">&quot;name&quot;</span></span>
 )
 schema.add_field(
     field_name=<span class="hljs-string">&quot;embedding&quot;</span>,
     datatype=DataType.FLOAT_VECTOR,
     dim=<span class="hljs-number">768</span>,
-    <span class="hljs-comment"># highlight-next</span>
-    external_field=<span class="hljs-string">&quot;vector&quot;</span>
+<span class="highlighted-wrapper-line">    external_field=<span class="hljs-string">&quot;vector&quot;</span></span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -536,7 +550,12 @@ schema = schema.
       </svg>
     </button></h2><p>Depois de adicionar todos os campos ao esquema, pode criar a coleção externa.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -614,9 +633,14 @@ err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pode criar índices para colunas de colecções externas, tal como faz nas colecções geridas.</p>
+    </button></h2><p>Pode criar índices para os campos da coleção externa, tal como faz nas coleções geridas.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 <span class="hljs-comment"># Add indexes</span>
 index_params.add_index(
@@ -715,7 +739,7 @@ curl --request POST \
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Step-5-Refresh-data" class="common-anchor-header">Etapa 5: atualizar dados<button data-href="#Step-5-Refresh-data" class="anchor-icon" translate="no">
+<h2 id="Step-5-Refresh-data" class="common-anchor-header">Passo 5: Atualizar os dados<button data-href="#Step-5-Refresh-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -730,9 +754,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Quando a coleção estiver pronta, atualize-a para criar os metadados e índices para seus dados.</p>
+    </button></h2><p>Assim que a coleção estiver pronta, atualize-a para criar os metadados e os índices para os seus dados.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">job_id = client.refresh_external_collection(
     db_name=<span class="hljs-string">&quot;my_database&quot;</span>,
     collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>
@@ -805,16 +834,16 @@ jobID := refreshResult.JobID
     \&quot;externalSpec\&quot;: \&quot;{\\\&quot;format\\\&quot;: \\\&quot;parquet\\\&quot;}\&quot;
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>A operação de atualização é assíncrona, portanto, é necessário configurar uma iteração para monitorar seu progresso.</p>
+<p>A operação de atualização é assíncrona, pelo que é necessário configurar uma iteração para monitorizar o seu progresso.</p>
 <div class="alert note">
 <ul>
-<li><p>A operação de atualização verifica os metadados dos ficheiros de dados e gera os ficheiros de manifesto em conformidade. Normalmente demora 150-250 ms.</p></li>
+<li><p>A operação de atualização analisa os metadados dos ficheiros de dados e gera os ficheiros de manifesto em conformidade. Normalmente, demora entre 150 e 250 ms.</p></li>
 <li><p>Os ficheiros de manifesto registam o mapeamento entre os metadados no Milvus e as linhas nos ficheiros externos.</p></li>
-<li><p>Se houver uma atualização dos dados de origem, é necessário chamar manualmente o refresh novamente para manter o Milvus atualizado.</p></li>
-<li><p>Uma atualização que exija a remoção de todos os metadados activos sem quaisquer inserções resulta numa recusa.</p></li>
+<li><p>Se houver uma atualização nos seus dados de origem, terá de chamar manualmente a atualização novamente para manter o Milvus atualizado.</p></li>
+<li><p>Uma atualização que exija a remoção de todos os metadados ativos sem quaisquer inserções resulta numa recusa.</p></li>
 </ul>
 </div>
-<h2 id="Follow-ups" class="common-anchor-header">Acompanhamento<button data-href="#Follow-ups" class="anchor-icon" translate="no">
+<h2 id="Next-steps" class="common-anchor-header">Próximos passos<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -829,5 +858,6 @@ jobID := refreshResult.JobID
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de atualizar a coleção externa, pode carregar e libertar a coleção e efetuar pesquisas e consultas semelhantes na coleção externa como faria em qualquer coleção gerida, exceto que as colecções numa base de dados para computação a pedido devem ser anexadas a um cluster a pedido para pesquisas e consultas.</p>
-<p>Antes de realizar operações DQL, como pesquisa, consulta, get e pesquisa híbrida, é necessário criar uma sessão para anexar os recursos de computação de um cluster on-demand.</p>
+    </button></h2><p>Depois de atualizar a coleção externa, pode carregar e libertar a coleção e realizar pesquisas de similaridade e consultas na coleção externa, tal como faria em qualquer coleção gerida, com a exceção de que as coleções numa base de dados para computação a pedido têm de estar associadas a um cluster a pedido para pesquisas e consultas.</p>
+<p>Antes de realizar operações DQL, tais como pesquisa, consulta, obtenção e pesquisa híbrida, é necessário criar uma sessão para associar os recursos de computação de um cluster sob demanda.</p>
+<p>Se, posteriormente, a fonte de dados externa contiver outro campo que pretenda expor no Milvus, adicione um campo ao esquema da coleção externa e atualize novamente a coleção externa. Para mais detalhes, consulte <a href="/docs/pt/alter-external-collection-schema.md">«Alterar o esquema da coleção externa</a>».</p>

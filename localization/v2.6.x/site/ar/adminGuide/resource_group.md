@@ -35,7 +35,7 @@ title: إدارة مجموعات الموارد
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكن لمجموعة الموارد أن تحتوي على عدد من عقد الاستعلام أو جميعها في مجموعة Milvus. أنت من يقرر كيفية توزيع عقد الاستعلام بين مجموعات الموارد بناءً على ما يناسبك بشكل أفضل. على سبيل المثال، في سيناريو متعدد المجموعات، يمكنك تخصيص عدد مناسب من عقد الاستعلام لكل مجموعة موارد وتحميل المجموعات في مجموعات موارد مختلفة، بحيث تكون العمليات داخل كل مجموعة مستقلة فعليًا عن تلك الموجودة في المجموعات الأخرى.</p>
+    </button></h2><p>يمكن لمجموعة الموارد أن تحتوي على عدد من عقد الاستعلام أو جميعها في مجموعة Milvus. أنت تقرر كيف تريد توزيع عقد الاستعلام بين مجموعات الموارد بناءً على ما يناسبك بشكل أفضل. على سبيل المثال، في سيناريو متعدد المجموعات، يمكنك تخصيص عدد مناسب من عقد الاستعلام لكل مجموعة موارد وتحميل المجموعات في مجموعات موارد مختلفة، بحيث تكون العمليات داخل كل مجموعة مستقلة فعليًا عن تلك الموجودة في المجموعات الأخرى.</p>
 <p>لاحظ أن مثيل Milvus يحتفظ بمجموعة موارد افتراضية لتضم جميع عقد الاستعلام عند بدء التشغيل ويطلق عليها اسم <strong>__default_resource_group</strong>.</p>
 <p>بدءًا من الإصدار 2.4.1، يوفر Milvus واجهة برمجة تطبيقات (API) تعريفية لمجموعات الموارد، في حين تم إهمال واجهة برمجة التطبيقات القديمة لمجموعات الموارد. تتيح واجهة برمجة التطبيقات التعريفية الجديدة للمستخدمين تحقيق خاصية الإيدمبوتنس، مما يسهل إجراء التطوير الثانوي في البيئات السحابية الأصلية.</p>
 <h2 id="Concepts-of-resource-group" class="common-anchor-header">مفاهيم مجموعة الموارد<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
@@ -62,11 +62,11 @@ title: إدارة مجموعات الموارد
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>تحدد السمة <strong>requests</strong> الشروط التي يجب أن تفي بها مجموعة الموارد.</li>
+<li>تحدد السمة <strong>requests</strong> الشروط التي يجب أن تستوفيها مجموعة الموارد.</li>
 <li>تحدد السمة <strong>limits</strong> الحدود القصوى لمجموعة الموارد.</li>
 <li>تصف السمتان <strong>transfer_from</strong> و <strong>transfer_to</strong> مجموعات الموارد التي يُفضل أن تحصل منها مجموعة الموارد على الموارد، ومجموعات الموارد التي يجب أن تنقل إليها الموارد، على التوالي.</li>
 </ul>
-<p>بمجرد تغيير تكوين مجموعة الموارد، سيقوم Milvus بتعديل موارد عقدة الاستعلام الحالية قدر الإمكان وفقًا للتكوين الجديد، مما يضمن أن جميع مجموعات الموارد ستستوفي في النهاية الشرط التالي:</p>
+<p>بمجرد تغيير تكوين مجموعة الموارد، سيقوم Milvus بتعديل موارد عقدة الاستعلام الحالية قدر الإمكان وفقًا للتكوين الجديد، مما يضمن أن جميع مجموعات الموارد تستوفي في النهاية الشرط التالي:</p>
 <p><code translate="no">.requests.nodeNum &lt; nodeNumOfResourceGroup &lt; .limits.nodeNum.</code></p>
 <p>باستثناء الحالات التالية:</p>
 <ul>
@@ -90,7 +90,7 @@ title: إدارة مجموعات الموارد
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>جميع أمثلة الكود في هذه الصفحة مكتوبة بلغة PyMilvus 2.6.16. قم بترقية إصدار PyMilvus المثبت لديك قبل تشغيلها.</p>
+<p>جميع أمثلة الكود في هذه الصفحة مكتوبة بلغة PyMilvus 2.6.17. قم بترقية إصدار PyMilvus المثبت لديك قبل تشغيلها.</p>
 </div>
 <ol>
 <li><p>إنشاء مجموعة موارد.</p>
@@ -175,14 +175,14 @@ milvus_client.load_collection(collection_name, replica_number=<span class="hljs-
 resource_groups = [<span class="hljs-string">&#x27;rg&#x27;</span>]
 milvus_client.load_collection(replica_number=<span class="hljs-number">2</span>, _resource_groups=resource_groups) 
 <button class="copy-code-btn"></button></code></pre>
-<p>كما يمكنك ببساطة تحميل قسم إلى مجموعة موارد وتوزيع نسخه المتماثلة على عدة مجموعات موارد. يفترض المقتطف التالي وجود مجموعة باسم <code translate="no">Books</code> بالفعل وأنها تحتوي على قسم باسم <code translate="no">Novels</code>.</p>
+<p>كما يمكنك تحميل قسم واحد فقط إلى مجموعة موارد وتوزيع نسخه المتماثلة على عدة مجموعات موارد. يفترض المقتطف التالي وجود مجموعة باسم <code translate="no">Books</code> بالفعل وأنها تحتوي على قسم باسم <code translate="no">Novels</code>.</p>
 <pre><code translate="no" class="language-python">collection = <span class="hljs-string">&quot;Books&quot;</span>
 partition = <span class="hljs-string">&quot;Novels&quot;</span>
 
 <span class="hljs-comment"># Use the load method of a collection to load one of its partition</span>
 milvus_client.load_partitions(collection, [partition], replica_number=<span class="hljs-number">2</span>, _resource_groups=resource_groups)
 <button class="copy-code-btn"></button></code></pre>
-<p>لاحظ أن <code translate="no">_resource_groups</code> هو معلمة اختيارية، وتركها غير محددة سيؤدي إلى قيام Milvus بتحميل النسخ المتماثلة على عقد الاستعلام في مجموعة الموارد الافتراضية.</p>
+<p>لاحظ أن <code translate="no">_resource_groups</code> هي معلمة اختيارية، وتركها غير محددة سيؤدي إلى قيام Milvus بتحميل النسخ المتماثلة على عقد الاستعلام في مجموعة الموارد الافتراضية.</p>
 <p>لجعل Milvus يقوم بتحميل كل نسخة متماثلة لمجموعة في مجموعة موارد منفصلة، تأكد من أن عدد مجموعات الموارد يساوي عدد النسخ المتماثلة.</p></li>
 <li><p>نقل النسخ المتماثلة بين مجموعات الموارد.</p>
 <p>يستخدم Milvus <a href="/docs/ar/v2.6.x/replica.md">النسخ المتماثلة</a> لتحقيق توازن الحمل بين <a href="/docs/ar/v2.6.x/glossary.md#Segment">المقاطع</a> الموزعة عبر عدة عقد استعلام. يمكنك نقل نسخ متماثلة معينة من مجموعة ما من مجموعة موارد إلى أخرى على النحو التالي:</p>
@@ -199,7 +199,7 @@ num_replicas = <span class="hljs-number">1</span>
 
 <span class="hljs-comment"># Succeeded in moving 1 replica(s) of c from __default_resource_group to rg.</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>إزالة مجموعة موارد.</p>
+<li><p>إلغاء مجموعة موارد.</p>
 <p>يمكنك حذف مجموعة موارد لا تحتوي على أي عقدة استعلام (<code translate="no">limits.node_num = 0</code>) في أي وقت. في هذا الدليل، تحتوي مجموعة الموارد <code translate="no">rg</code> الآن على عقدة استعلام واحدة. تحتاج أولاً إلى تغيير التكوين <code translate="no">limits.node_num</code> لمجموعة الموارد إلى صفر.</p>
 <pre><code translate="no" class="language-python">resource_group = <span class="hljs-string">&quot;rg
 try:
@@ -234,8 +234,8 @@ except Exception:
     </button></h2><p>حاليًا، لا يمكن لـ Milvus توسيع نطاقه أو تقليصه بشكل مستقل في البيئات السحابية الأصلية. ومع ذلك، باستخدام <strong>واجهة برمجة تطبيقات مجموعة الموارد التصريحية (Declarative Resource Group API)</strong> بالاقتران مع تنسيق الحاويات، يمكن لـ Milvus تحقيق عزل الموارد وإدارتها بسهولة لعقد الاستعلام (QueryNodes).
 فيما يلي ممارسة جيدة لإدارة عقد الاستعلام (QueryNodes) في بيئة سحابية:</p>
 <ol>
-<li><p>بشكل افتراضي، يقوم Milvus بإنشاء <strong>__default_resource_group</strong>. لا يمكن حذف مجموعة الموارد هذه، كما أنها تعمل كمجموعة الموارد الافتراضية للتحميل لجميع المجموعات، ويتم تخصيص عقد الاستعلام الزائدة لها دائمًا. لذلك، يمكننا إنشاء مجموعة موارد معلقة لاحتواء موارد «QueryNode» غير المستخدمة، مما يمنع احتلال موارد «QueryNode» من قبل مجموعة <strong> الموارد __default_resource_group</strong>.</p>
-<p>بالإضافة إلى ذلك، إذا قمنا بفرض القيد <code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code> بصرامة، فيمكننا التحكم بدقة في تخصيص عقد الاستعلام (QueryNodes) في المجموعة. لنفترض أن هناك حاليًا عقدة استعلام واحدة فقط في المجموعة، ثم نقوم بتهيئة المجموعة.
+<li><p>بشكل افتراضي، يقوم Milvus بإنشاء <strong>__default_resource_group</strong>. لا يمكن حذف مجموعة الموارد هذه، كما أنها تعمل كمجموعة الموارد الافتراضية للتحميل لجميع المجموعات، ويتم تخصيص عقد الاستعلام الزائدة لها دائمًا. لذلك، يمكننا إنشاء مجموعة موارد معلقة لاحتواء موارد «QueryNode» غير المستخدمة، مما يمنع احتلال موارد «QueryNode» من قِبل مجموعة الموارد <strong>__default_resource_group</strong>.</p>
+<p>بالإضافة إلى ذلك، إذا قمنا بفرض القيد <code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code> بصرامة، يمكننا التحكم بدقة في تخصيص عقد الاستعلام (QueryNodes) في المجموعة. لنفترض أن هناك حاليًا عقدة استعلام واحدة فقط في المجموعة، ثم نقوم بتهيئة المجموعة.
 فيما يلي مثال على الإعداد:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.client.types <span class="hljs-keyword">import</span> ResourceGroupConfig
 
@@ -332,8 +332,8 @@ scale_to(<span class="hljs-number">4</span>)
         ></path>
       </svg>
     </button></h2><ul>
-<li>ترتبط النسخ المتماثلة لمجموعة واحدة ومجموعات الموارد بعلاقة N-إلى-N.</li>
-<li>عند تحميل نسخ متعددة من مجموعة واحدة إلى مجموعة موارد واحدة، يتم توزيع عقد الاستعلام (QueryNodes) الخاصة بتلك المجموعة بالتساوي بين النسخ، مما يضمن ألا يتجاوز الفرق في عدد عقد الاستعلام لكل نسخة 1.</li>
+<li>ترتبط النسخ المتماثلة لمجموعة واحدة ومجموعات الموارد بعلاقة N-to-N.</li>
+<li>عند تحميل نسخ متماثلة متعددة لمجموعة واحدة في مجموعة موارد واحدة، يتم توزيع عقد الاستعلام (QueryNodes) لتلك المجموعة بالتساوي بين النسخ المتماثلة، مما يضمن ألا يتجاوز الفرق في عدد عقد الاستعلام لكل نسخة متماثلة 1.</li>
 </ul>
 <h1 id="Whats-next" class="common-anchor-header">الخطوة التالية<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

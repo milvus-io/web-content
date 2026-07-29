@@ -19,7 +19,7 @@ title: Gérer les groupes de ressources
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Dans Milvus, vous pouvez utiliser un groupe de ressources pour isoler physiquement certains nœuds de requête des autres. Ce guide vous explique comment créer et gérer des groupes de ressources personnalisés, ainsi que comment transférer des nœuds d’un groupe à l’autre.</p>
+    </button></h1><p>Dans Milvus, vous pouvez utiliser un groupe de ressources pour isoler physiquement certains nœuds de requête des autres. Ce guide vous explique comment créer et gérer des groupes de ressources personnalisés, ainsi que comment transférer des nœuds d'un groupe à l'autre.</p>
 <h2 id="What-is-a-resource-group" class="common-anchor-header">Qu'est-ce qu'un groupe de ressources ?<button data-href="#What-is-a-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,9 +35,9 @@ title: Gérer les groupes de ressources
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un groupe de ressources peut contenir plusieurs nœuds de requête, voire tous les nœuds de requête d’un cluster Milvus. C’est à vous de décider comment répartir les nœuds de requête entre les groupes de ressources, en fonction de ce qui vous semble le plus judicieux. Par exemple, dans un scénario à collections multiples, vous pouvez attribuer un nombre approprié de nœuds de requête à chaque groupe de ressources et charger les collections dans des groupes de ressources différents, de sorte que les opérations au sein de chaque collection soient physiquement indépendantes de celles des autres collections.</p>
-<p>Notez qu’une instance Milvus gère un groupe de ressources par défaut contenant tous les nœuds de requête au démarrage et le nomme <strong>__default_resource_group</strong>.</p>
-<p>À partir de la version 2.4.1, Milvus fournit une API déclarative pour les groupes de ressources, tandis que l’ancienne API a été dépréciée. La nouvelle API déclarative permet aux utilisateurs d’atteindre l’idempotence et de réaliser plus facilement des développements secondaires dans des environnements cloud natifs.</p>
+    </button></h2><p>Un groupe de ressources peut contenir plusieurs nœuds de requête, voire tous les nœuds de requête d’un cluster Milvus. C’est vous qui décidez comment répartir les nœuds de requête entre les groupes de ressources, en fonction de ce qui vous semble le plus judicieux. Par exemple, dans un scénario à collections multiples, vous pouvez attribuer un nombre approprié de nœuds de requête à chaque groupe de ressources et charger les collections dans des groupes de ressources différents, de sorte que les opérations au sein de chaque collection soient physiquement indépendantes de celles des autres collections.</p>
+<p>Notez qu’une instance Milvus gère un groupe de ressources par défaut destiné à contenir tous les nœuds de requête au démarrage et le nomme <strong>__default_resource_group</strong>.</p>
+<p>À partir de la version 2.4.1, Milvus fournit une API déclarative pour les groupes de ressources, tandis que l’ancienne API a été dépréciée. La nouvelle API déclarative permet aux utilisateurs d’obtenir l’idempotence et de réaliser plus facilement des développements secondaires dans des environnements cloud natifs.</p>
 <h2 id="Concepts-of-resource-group" class="common-anchor-header">Concepts relatifs aux groupes de ressources<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -62,16 +62,16 @@ title: Gérer les groupes de ressources
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>L’attribut ` <strong>requests</strong> ` spécifie les conditions qu’un groupe de ressources doit remplir.</li>
-<li>L’attribut ` <strong>limits</strong> ` spécifie les limites maximales d’un groupe de ressources.</li>
-<li>Les attributs <strong>`transfer_from</strong> ` et <strong>`transfer_to`</strong> décrivent respectivement les groupes de ressources auprès desquels un groupe de ressources doit de préférence acquérir des ressources et vers lesquels il doit transférer des ressources.</li>
+<li>L’attribut ` <strong>requests</strong> ` spécifie les conditions auxquelles un groupe de ressources doit satisfaire.</li>
+<li>L'attribut ` <strong>limits</strong> ` spécifie les limites maximales d'un groupe de ressources.</li>
+<li>Les attributs <strong>`transfer_from</strong> ` et <strong>`transfer_to</strong> ` décrivent respectivement à partir de quels groupes de ressources un groupe de ressources doit de préférence acquérir des ressources et vers quels groupes de ressources il doit transférer des ressources.</li>
 </ul>
-<p>Dès que la configuration d’un groupe de ressources change, Milvus ajuste autant que possible les ressources actuelles des nœuds de requête en fonction de la nouvelle configuration, en veillant à ce que tous les groupes de ressources finissent par satisfaire à la condition suivante :</p>
+<p>Dès que la configuration d’un groupe de ressources change, Milvus ajuste autant que possible les ressources actuelles des nœuds de requête en fonction de la nouvelle configuration, en veillant à ce que tous les groupes de ressources finissent par satisfaire la condition suivante :</p>
 <p><code translate="no">.requests.nodeNum &lt; nodeNumOfResourceGroup &lt; .limits.nodeNum.</code></p>
 <p>Sauf dans les cas suivants :</p>
 <ul>
 <li>Lorsque le nombre de nœuds de requête (QueryNodes) dans le cluster Milvus est insuffisant, c’est-à-dire lorsque <code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code>, il y aura toujours des groupes de ressources ne disposant pas d’un nombre suffisant de nœuds de requête.</li>
-<li>Lorsque le nombre de nœuds de requête dans le cluster Milvus est excessif, c’est-à-dire <code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code>, les nœuds de requête redondants seront toujours placés en premier dans le <strong> groupe de ressources __default_resource_group</strong>.</li>
+<li>Lorsque le nombre de nœuds de requête dans le cluster Milvus est excessif, c’est-à-dire <code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code>, les nœuds de requête redondants seront toujours placés en priorité dans le <strong> groupe de ressources __default_resource_group</strong>.</li>
 </ul>
 <p>Bien entendu, si le nombre de QueryNodes dans le cluster change, Milvus tentera en permanence de s’adapter pour répondre aux conditions finales. Par conséquent, vous pouvez d’abord appliquer les modifications de configuration des groupes de ressources, puis procéder à la mise à l’échelle des QueryNodes.</p>
 <h2 id="Use-declarative-api-to-manage-resource-group" class="common-anchor-header">Utilisation de l’API déclarative pour gérer les groupes de ressources<button data-href="#Use-declarative-api-to-manage-resource-group" class="anchor-icon" translate="no">
@@ -90,11 +90,11 @@ title: Gérer les groupes de ressources
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Tous les exemples de code présentés sur cette page sont basés sur PyMilvus 2.6.16. Mettez à jour votre installation de PyMilvus avant de les exécuter.</p>
+<p>Tous les exemples de code présentés sur cette page sont écrits en PyMilvus 2.6.17. Mettez à jour votre installation de PyMilvus avant de les exécuter.</p>
 </div>
 <ol>
 <li><p>Créer un groupe de ressources.</p>
-<p>Pour créer un groupe de ressources, exécutez la commande suivante après vous être connecté à une instance Milvus. L’extrait de code suivant part du principe que <code translate="no">default</code> est l’alias de votre connexion Milvus.</p>
+<p>Pour créer un groupe de ressources, exécutez la commande suivante après vous être connecté à une instance Milvus. L'extrait de code suivant part du principe que <code translate="no">default</code> est l'alias de votre connexion Milvus.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pymilvus
 
 <span class="hljs-comment"># A resource group name should be a string of 1 to 255 characters, starting with a letter or an underscore (_) and containing only numbers, letters, and underscores (_).</span>
@@ -137,7 +137,7 @@ node_num = <span class="hljs-number">0</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Transférer des nœuds entre des groupes de ressources.</p>
 <p>Vous remarquerez peut-être que le groupe de ressources décrit ne comporte encore aucun nœud de requête. Déplacez quelques nœuds du groupe de ressources par défaut vers celui que vous venez de créer, comme suit :
-Supposons qu’il y ait actuellement 1 QueryNode dans le groupe <strong> de ressources __default_resource_group</strong> du cluster, et que nous souhaitions transférer un nœud vers <strong>le groupe de ressources</strong> créé.
+En supposant qu’il y ait actuellement 1 QueryNode dans le groupe <strong> de ressources __default_resource_group</strong> du cluster, et que nous souhaitions transférer un nœud vers <strong>le groupe de ressources</strong> créé.
 La commande `<code translate="no">update_resource_groups</code> ` garantit l’atomicité des modifications de configuration multiples ; ainsi, aucun état intermédiaire ne sera visible par Milvus.</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
@@ -215,7 +215,7 @@ except Exception:
     print(f&quot;</span>Something went wrong <span class="hljs-keyword">while</span> dropping {resource_group}.<span class="hljs-string">&quot;)
 </span><button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<p>Pour plus de détails, veuillez vous reporter aux <a href="https://github.com/milvus-io/pymilvus/blob/v2.4.3/examples/resource_group_declarative_api.py">exemples correspondants dans pymilvus</a></p>
+<p>Pour plus de détails, veuillez vous reporter aux <a href="https://github.com/milvus-io/pymilvus/blob/v2.4.3/examples/resource_group_declarative_api.py">exemples pertinents dans pymilvus</a></p>
 <h2 id="A-good-practice-to-manage-cluster-scaling" class="common-anchor-header">Une bonne pratique pour gérer la mise à l’échelle du cluster<button data-href="#A-good-practice-to-manage-cluster-scaling" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -234,7 +234,7 @@ except Exception:
     </button></h2><p>Actuellement, Milvus ne peut pas s’adapter de manière autonome (augmentation ou réduction) dans les environnements cloud natifs. Cependant, en utilisant <strong>l’API déclarative des groupes de ressources</strong> en conjonction avec l’orchestration des conteneurs, Milvus peut facilement assurer l’isolation et la gestion des ressources pour les QueryNodes.
 Voici une bonne pratique pour gérer les QueryNodes dans un environnement cloud :</p>
 <ol>
-<li><p>Par défaut, Milvus crée un <strong>__default_resource_group</strong>. Ce groupe de ressources ne peut pas être supprimé et sert également de groupe de ressources de chargement par défaut pour toutes les collections ; les QueryNodes redondants y sont toujours affectés. Par conséquent, nous pouvons créer un groupe de ressources « en attente » pour accueillir les ressources QueryNode inutilisées, empêchant ainsi le groupe de ressources <strong>__default_resource_group</strong> de les occuper.</p>
+<li><p>Par défaut, Milvus crée un <strong> groupe de ressources __default_resource_group</strong>. Ce groupe de ressources ne peut pas être supprimé et sert également de groupe de ressources de chargement par défaut pour toutes les collections ; les QueryNodes redondants y sont toujours affectés. Par conséquent, nous pouvons créer un groupe de ressources « en attente » pour accueillir les ressources QueryNode inutilisées, empêchant ainsi le groupe de ressources <strong>__default_resource_group</strong> de les occuper.</p>
 <p>De plus, si nous appliquons strictement la contrainte <code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code>, nous pouvons contrôler avec précision l’affectation des QueryNodes au sein du cluster. Supposons qu’il n’y ait actuellement qu’un seul QueryNode dans le cluster et initialisons le cluster.
 Voici un exemple de configuration :</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.client.types <span class="hljs-keyword">import</span> ResourceGroupConfig
@@ -274,7 +274,7 @@ init_cluster(<span class="hljs-number">1</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>À l’aide du code d’exemple ci-dessus, nous créons un groupe de ressources nommé <strong>__pending_nodes</strong> destiné à contenir des QueryNodes supplémentaires. Nous créons également deux groupes de ressources spécifiques à l’utilisateur, nommés <strong>rg1</strong> et <strong>rg2</strong>. De plus, nous nous assurons que l’autre groupe de ressources donne la priorité à la récupération des QueryNodes manquants ou redondants à partir de <strong>__pending_nodes</strong>.</p></li>
 <li><p>Extension horizontale du cluster</p>
-<p>En supposant que nous disposions de la fonction d’évolutivité suivante :</p>
+<p>Supposons que nous disposions de la fonction d’évolutivité suivante :</p>
 <pre><code translate="no" class="language-python">
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">scale_to</span>(<span class="hljs-params">node_num: <span class="hljs-built_in">int</span></span>):
     <span class="hljs-comment"># scale the querynode number in Milvus into node_num.</span>
@@ -299,8 +299,8 @@ milvus_client.update_resource_groups({
 scale_to(<span class="hljs-number">5</span>)
 <span class="hljs-comment"># rg1 has 3 nodes, rg2 has 1 node, __default_resource_group has 1 node.</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Réduction de la taille du cluster</p>
-<p>De même, nous pouvons définir des règles de réduction de capacité qui donnent la priorité à la sélection de nœuds de requête (QueryNodes) issus du groupe de ressources <strong>__pending_nodes</strong>. Ces informations peuvent être obtenues via l’API <code translate="no">describe_resource_group</code>. Atteindre l’objectif de réduction de capacité d’un groupe de ressources spécifié.</p>
+<li><p>Réduction de la capacité du cluster</p>
+<p>De la même manière, nous pouvons définir des règles de réduction de capacité qui donnent la priorité à la sélection de nœuds de requête issus du groupe de ressources <strong>__pending_nodes</strong>. Ces informations peuvent être obtenues via l’API <code translate="no">describe_resource_group</code>. Atteindre l’objectif de réduction de capacité d’un groupe de ressources spécifié.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># scale rg1 from 3 nodes into 2 nodes</span>
 milvus_client.update_resource_groups({
     <span class="hljs-string">&quot;rg1&quot;</span>: ResourceGroupConfig(
@@ -333,7 +333,7 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h2><ul>
 <li>Les répliques d’une même collection et les groupes de ressources entretiennent une relation N-à-N.</li>
-<li>Lorsque plusieurs répliques d’une même collection sont chargées dans un même groupe de ressources, les nœuds de requête (QueryNodes) de ce groupe sont répartis de manière uniforme entre les répliques, garantissant ainsi que la différence entre le nombre de nœuds de requête de chaque réplique ne dépasse pas 1.</li>
+<li>Lorsque plusieurs répliques d’une même collection sont chargées dans un même groupe de ressources, les nœuds de requête (QueryNodes) de ce groupe sont répartis de manière uniforme entre les répliques, ce qui garantit que la différence entre le nombre de nœuds de requête de chaque réplique ne dépasse pas 1.</li>
 </ul>
 <h1 id="Whats-next" class="common-anchor-header">Prochaines étapes<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

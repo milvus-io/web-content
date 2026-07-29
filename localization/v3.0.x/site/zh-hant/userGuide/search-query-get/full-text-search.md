@@ -3,7 +3,7 @@ id: full-text-search.md
 title: 全文搜尋
 summary: >-
   全文搜尋是一項功能，可從文字資料集中檢索包含特定術語或短語的文件，並根據相關性對結果進行排序。此功能克服了語義搜尋的限制——語義搜尋可能會忽略精確的術語——確保您獲得最準確且符合上下文的搜尋結果。
-  此外，它透過接受原始文字輸入，將您的文字資料自動轉換為稀疏嵌入向量，無需手動生成向量嵌入，從而簡化了向量搜尋流程。
+  此外，它透過接受原始文字輸入來簡化向量搜尋，能自動將您的文字資料轉換為稀疏嵌入向量，無需手動生成向量嵌入。
 ---
 <h1 id="Full-Text-Search" class="common-anchor-header">全文搜尋<button data-href="#Full-Text-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>全文搜尋是一項功能，可從文字資料集中檢索包含特定術語或短語的文件，並根據相關性對結果進行排序。此功能克服了語義搜尋的局限性——語義搜尋可能會忽略精確的術語——確保您獲得最準確且符合上下文的搜尋結果。 此外，它支援原始文字輸入，能自動將您的文字資料轉換為稀疏嵌入向量，無需手動生成向量嵌入，從而簡化向量搜尋流程。</p>
+    </button></h1><p>全文搜尋是一項功能，可從文字資料集中檢索包含特定術語或短語的文件，並根據相關性對結果進行排序。此功能克服了語義搜尋的限制——語義搜尋可能會忽略精確的術語——確保您獲得最準確且符合上下文的結果。 此外，它支援原始文字輸入，能自動將您的文字資料轉換為稀疏嵌入向量，無需手動生成向量嵌入，從而簡化向量搜尋流程。</p>
 <p>此功能採用 BM25 演算法進行相關性評分，在檢索增強生成（RAG）情境中尤為實用，能優先呈現與特定搜尋詞彙高度吻合的文件。</p>
 <div class="alert note">
 <p>透過將全文搜尋與基於語義的密集向量搜尋整合，您可以提升搜尋結果的準確性與相關性。如需更多資訊，請參閱「<a href="/docs/zh-hant/multi-vector-search.md">混合搜尋</a>」。</p>
@@ -43,7 +43,7 @@ summary: >-
     </button></h2><p>Milvus 提供由 BM25 相關性演算法驅動的全文檢索功能，該演算法是資訊檢索系統中廣泛採用的評分函數，Milvus 將其整合至搜尋工作流程中，以提供精準且按相關性排序的文字結果。</p>
 <p>Milvus 中的全文搜尋遵循以下工作流程：</p>
 <ol>
-<li><p><strong>原始文字輸入</strong>：您可直接插入文字文件或以純文字形式提交查詢，無需任何嵌入模型。</p></li>
+<li><p><strong>原始文字輸入</strong>：您可插入文字文件或以純文字形式提交查詢，無需任何嵌入模型。</p></li>
 <li><p><strong>文字分析</strong>：Milvus 會使用<a href="/docs/zh-hant/analyzer-overview.md">分析器</a>將您的文字處理成具有意義的術語，以便進行索引與搜尋。</p></li>
 <li><p><strong>BM25 函數處理</strong>：內建函數會將這些術語轉換為針對 BM25 評分進行優化的稀疏向量表示。</p></li>
 <li><p><strong>集合儲存</strong>：Milvus 將生成的稀疏嵌入向量儲存於集合中，以便快速檢索與排序。</p></li>
@@ -55,7 +55,7 @@ summary: >-
    <span>全文搜尋</span>
   
  </span></p>
-<p>若要使用全文搜尋，請依照以下主要步驟操作：</p>
+<p>若要使用全文搜尋，請遵循以下主要步驟：</p>
 <ol>
 <li><p><a href="/docs/zh-hant/full-text-search.md#Create-a-collection-for-BM25-full-text-search">建立集合</a>：設定所需欄位，並定義一個可將原始文字轉換為稀疏嵌入向量的 BM25 函式。</p></li>
 <li><p><a href="/docs/zh-hant/full-text-search.md#Insert-text-data">插入資料</a>：將原始文字文件導入集合中。</p></li>
@@ -95,8 +95,8 @@ summary: >-
     </button></h3><p>您的資料集架構必須包含至少三個必填欄位：</p>
 <ul>
 <li><p><strong>主要欄位</strong>：用於唯一識別集合中的每個實體。</p></li>
-<li><p><strong>文字欄位</strong>（<code translate="no">VARCHAR</code> ）：儲存原始文字文件。必須設定<code translate="no">enable_analyzer=True</code> ，以便 Milvus 能處理文字以進行 BM25 相關性排序。預設情況下，Milvus 會使用 <a href="/docs/zh-hant/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/zh-hant/standard-analyzer.md"> 分析器進行</a>文字分析。若要設定其他分析器，請參閱《<a href="/docs/zh-hant/analyzer-overview.md">分析器概覽</a>》。</p></li>
-<li><p><strong>稀疏向量欄位</strong>（<code translate="no">SPARSE_FLOAT_VECTOR</code> ）：儲存由 BM25 函式自動生成的稀疏嵌入向量。</p></li>
+<li><p><strong>字串欄位</strong>（<code translate="no">VARCHAR</code> 或<code translate="no">TEXT</code> ）：儲存原始文字文件。必須設定<code translate="no">enable_analyzer=True</code> ，以便 Milvus 能處理文字以進行 BM25 相關性排序。預設情況下，Milvus 會使用 <a href="/docs/zh-hant/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/zh-hant/standard-analyzer.md"> 分析器進行</a>文字分析。若要設定其他分析器，請參閱《<a href="/docs/zh-hant/analyzer-overview.md">分析器概覽</a>》。本頁範例使用<code translate="no">VARCHAR</code> ；若為長篇文字，可將輸入欄位定義為<code translate="no">TEXT</code> 並省略<code translate="no">max_length</code> 。完整範例請參閱《<a href="/docs/zh-hant/text.md">文字欄位</a>》。</p></li>
+<li><p><strong>稀疏向量欄位</strong>(<code translate="no">SPARSE_FLOAT_VECTOR</code>)：儲存由 BM25 函式自動生成的稀疏嵌入向量。</p></li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -232,9 +232,9 @@ schema.WithField(entity.NewField().
 <button class="copy-code-btn"></button></code></pre>
 <p>在上述設定中，</p>
 <ul>
-<li><p><code translate="no">id</code>：用作主鍵，並會透過<code translate="no">auto_id=True</code> 自動產生。</p></li>
-<li><p><code translate="no">text</code>：用於儲存您用於全文檢索操作的原始文字資料。資料類型必須為<code translate="no">VARCHAR</code> ，因為<code translate="no">VARCHAR</code> 是 Milvus 用於文字儲存的字串資料類型。</p></li>
-<li><p><code translate="no">sparse</code>：一個向量欄位，專門用於儲存為全文檢索操作而內部生成的稀疏嵌入向量。資料類型必須為<code translate="no">SPARSE_FLOAT_VECTOR</code> 。</p></li>
+<li><p><code translate="no">id</code>: 作為主鍵，並透過<code translate="no">auto_id=True</code> 自動產生。</p></li>
+<li><p><code translate="no">text</code>：用於儲存用於全文檢索操作的原始文字資料。該欄位可針對有限長度的文字使用 `<code translate="no">VARCHAR</code> `，或針對長篇來源內容使用 `<code translate="no">TEXT</code> `。</p></li>
+<li><p><code translate="no">sparse</code>：一個向量欄位，專門用於儲存全文字搜尋操作中內部生成的稀疏嵌入向量。資料類型必須為<code translate="no">SPARSE_FLOAT_VECTOR</code> 。</p></li>
 </ul>
 <h3 id="Define-the-BM25-function" class="common-anchor-header">定義 BM25 函式<button data-href="#Define-the-BM25-function" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -251,8 +251,8 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>BM25 函式會將分詞後的文字轉換為支援 BM25 評分演算的稀疏向量。</p>
-<p>定義該函式並將其新增至您的資料結構：</p>
+    </button></h3><p>BM25 函式將分詞後的文字轉換為支援 BM25 評分演算法的稀疏向量。</p>
+<p>定義該函式並將其新增至您的資料模型：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -262,7 +262,7 @@ schema.WithField(entity.NewField().
 </div>
 <pre><code translate="no" class="language-python">bm25_function = Function(
     name=<span class="hljs-string">&quot;text_bm25_emb&quot;</span>, <span class="hljs-comment"># Function name</span>
-    input_field_names=[<span class="hljs-string">&quot;text&quot;</span>], <span class="hljs-comment"># Name of the VARCHAR field containing raw text data</span>
+    input_field_names=[<span class="hljs-string">&quot;text&quot;</span>], <span class="hljs-comment"># Name of the VARCHAR or TEXT field containing raw text data</span>
     output_field_names=[<span class="hljs-string">&quot;sparse&quot;</span>], <span class="hljs-comment"># Name of the SPARSE_FLOAT_VECTOR field reserved to store generated embeddings</span>
 <span class="highlighted-wrapper-line">    function_type=FunctionType.BM25, <span class="hljs-comment"># Set to `BM25`</span></span>
 )
@@ -339,23 +339,23 @@ schema.WithFunction(function)
    </tr>
    <tr>
      <td><p><code translate="no">name</code></p></td>
-     <td><p>函式的名稱。此函式會將您來自 `<code translate="no">text</code> ` 欄位的原始文字，轉換為相容於 BM25 的稀疏向量，並將其儲存於 `<code translate="no">sparse</code> ` 欄位中。</p></td>
+     <td><p>函式名稱。此函式會將您從 `<code translate="no">text</code> ` 欄位取得的原始文字，轉換為相容於 BM25 的稀疏向量，並儲存至 `<code translate="no">sparse</code> ` 欄位中。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
-     <td><p>需要進行「文字轉稀疏向量」轉換的<code translate="no">VARCHAR</code> 欄位名稱。針對<code translate="no">FunctionType.BM25</code> ，此參數僅接受一個欄位名稱。</p></td>
+     <td><p>需要進行「文字轉稀疏向量」轉換的<code translate="no">VARCHAR</code> 或<code translate="no">TEXT</code> 欄位名稱。若為<code translate="no">FunctionType.BM25</code> ，此參數僅接受一個欄位名稱。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">output_field_names</code></p></td>
-     <td><p>將內部生成的稀疏向量儲存至其中的欄位名稱。對於 `<code translate="no">FunctionType.BM25</code>`，此參數僅接受一個欄位名稱。</p></td>
+     <td><p>將用於儲存內部生成的稀疏向量的欄位名稱。對於 `<code translate="no">FunctionType.BM25</code>`，此參數僅接受一個欄位名稱。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>要使用的函式類型。必須為 `<code translate="no">FunctionType.BM25</code>`。</p></td>
+     <td><p>要使用的函式類型。必須為<code translate="no">FunctionType.BM25</code> 。</p></td>
    </tr>
 </table>
 <div class="alert note">
-<p>若多個<code translate="no">VARCHAR</code> 欄位需要進行 BM25 處理，請<strong>針對每個欄位定義一個 BM25 函式，</strong>且每個<strong>函式</strong>皆須具有唯一的名稱與輸出欄位。</p>
+<p>若多個文字欄位需要進行 BM25 處理，請<strong>針對每個欄位定義一個 BM25 函式，</strong>且每個<strong>函式</strong>皆須具有唯一的名稱與輸出欄位。</p>
 </div>
 <h3 id="Configure-the-index" class="common-anchor-header">設定索引<button data-href="#Configure-the-index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -449,27 +449,27 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">field_name</code></p></td>
-     <td><p>要建立索引的向量欄位名稱。對於全文搜尋，此欄位應為儲存所產生稀疏向量的欄位。在此範例中，請將值設定為<code translate="no">sparse</code> 。</p></td>
+     <td><p>要建立索引的向量欄位名稱。對於全文檢索，此欄位應為儲存所產生稀疏向量的欄位。在此範例中，請將值設定為<code translate="no">sparse</code> 。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">index_type</code></p></td>
-     <td><p>要建立的索引類型。<code translate="no">AUTOINDEX</code> 可讓 Milvus 自動優化索引設定。若需更精細地控制索引設定，可從 Milvus 中支援稀疏向量的各種索引類型中進行選擇。如需更多資訊，請參閱<a href="/docs/zh-hant/index.md#Indexes-supported-in-Milvus">《Milvus 支援的索引》</a>。</p></td>
+     <td><p>要建立的索引類型。若要在 Milvus 中進行 BM25 全文檢索，請將此值設定為<code translate="no">SPARSE_INVERTED_INDEX</code> 。如需更多資訊，請參閱<a href="/docs/zh-hant/sparse-inverted-index.md">SPARSE_INVERTED_INDEX</a>。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">metric_type</code></p></td>
-     <td><p>此參數的值必須設定為 `<code translate="no">BM25</code> `，才能啟用全文搜尋功能。</p></td>
+     <td><p>此參數的值必須明確設定為<code translate="no">BM25</code> ，以啟用全文檢索功能。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params</code></p></td>
-     <td><p>該索引專屬的附加參數字典。</p></td>
+     <td><p>針對該索引的額外參數字典。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>用於建立和查詢索引的演算法。有效值：</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (預設)：採用 MaxScore 演算法進行的優化版「逐份文件處理」（DAAT）查詢處理。MaxScore 透過跳過影響力較低的詞彙與文件，在<em>k</em>值較高或包含大量詞彙的查詢中提供更佳的效能。 其實現方式是根據術語的最大影響分數，將術語劃分為「重要」與「非重要」兩組，並聚焦於能貢獻前 k 項結果的術語。</p></li><li><p><code translate="no">"DAAT_WAND"</code>：採用 WAND 演算法進行優化的 DAAT 查詢處理。WAND 透過利用最大影響分數跳過非競爭性文件，從而減少需評估的命中文件數量，但其每筆命中的開銷較高。這使得 WAND 對於<em>k</em>值較小或查詢較短的情況更為高效，因為在這些情況下跳過文件更為可行。</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>：基本「逐詞處理」（TAAT）查詢處理。雖然相較於「逐詞處理」（<code translate="no">DAAT_MAXSCORE</code> ）和「逐詞處理」（<code translate="no">DAAT_WAND</code> ）較為緩慢，但「逐詞處理」（<code translate="no">TAAT_NAIVE</code> ）具備獨特優勢。與 DAAT 演算法不同，後者使用的快取最大影響分數會保持靜態，不受全局集合參數（avgdl）變更的影響；而「逐詞處理」（<code translate="no">TAAT_NAIVE</code> ）則能動態適應此類變更。</p></li></ul></td>
+     <td><p>用於建立及查詢 BM25 稀疏反向索引的演算法。有效值：</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (預設)：逐份文件 (Document-at-a-Time) MaxScore 查詢處理。此選項適用於<em>k</em>值較高或包含大量術語的全文檢索工作負載。相關背景請參閱《<a href="https://dl.acm.org/doi/10.1016/0306-4573%2895%2900020-H">查詢評估：策略與最佳化</a>》。</p></li><li><p><code translate="no">"DAAT_WAND"</code>：逐份文件 WAND 查詢處理。此選項適用於<em>k</em>值較小或查詢詞彙較短的全文檢索工作負載。相關背景請參閱《<a href="https://dl.acm.org/doi/10.1145/956863.956944">使用兩級檢索流程進行高效查詢評估</a>》。</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>：基本「逐詞」查詢處理。請將此選項用作基準，或當您需要讓評分動態適應整體資料集統計資料（例如平均文件長度）時使用。</p></li><li><p><code translate="no">"BLOCK_MAX_MAXSCORE"</code>: 採用區塊層級最高分數元資料的 MaxScore 查詢處理。有關背景資訊，請參閱《<a href="https://dl.acm.org/doi/10.1145/2009916.2010048">使用區塊最大分數索引加速 Top-k 文件檢索</a>》。</p></li><li><p><code translate="no">"BLOCK_MAX_WAND"</code>: 採用區塊級最高分數元資料的 WAND 查詢處理。有關背景資訊，請參閱《<a href="https://dl.acm.org/doi/10.1145/2009916.2010048">使用區塊最高分數索引加速 Top-k 文件檢索</a>》。</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
-     <td><p>控制詞頻飽和度。較高的數值會提高詞頻在文件排序中的權重。數值範圍：[1.2, 2.0]。</p></td>
+     <td><p>控制詞頻飽和度。較高的數值會提高詞頻在文件排序中的權重。建議範圍：[1.2, 2.0]。預設值：1.2。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_b</code></p></td>
@@ -491,7 +491,7 @@ indexes.add(IndexParam.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>現在請使用已定義的模式和索引參數建立集合。</p>
+    </button></h3><p>現在請使用已定義的架構和索引參數來建立集合。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -724,7 +724,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">params.drop_ratio_search</code></p></td>
-     <td><p>搜尋過程中應忽略的低重要性詞彙比例。詳情請參閱「<a href="/docs/zh-hant/sparse_vector.md">稀疏向量</a>」。</p></td>
+     <td><p>搜尋時應忽略的低重要性詞彙比例。數值必須位於 [0.0, 1.0) 範圍內。詳情請參閱「<a href="/docs/zh-hant/sparse_vector.md">稀疏向量</a>」。</p></td>
    </tr>
    <tr>
      <td></td>
@@ -740,7 +740,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">output_fields</code></p></td>
-     <td><p>搜尋結果中要回傳的欄位名稱清單。支援所有欄位<strong>，惟包含</strong>由 BM25 產生嵌入<strong>向量的稀疏向量欄位除外</strong>。常見的輸出欄位包括主鍵欄位（例如：<code translate="no">id</code> ）和原始文字欄位（例如：<code translate="no">text</code> ）。如需更多資訊，請參閱<a href="/docs/zh-hant/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">常見問題</a>。</p></td>
+     <td><p>搜尋結果中要回傳的欄位名稱清單。支援所有欄位<strong>，但</strong>包含由 BM25 產生嵌入<strong>向量的稀疏向量欄位除外</strong>。常見的輸出欄位包括主鍵欄位（例如：<code translate="no">id</code> ）和原始文字欄位（例如：<code translate="no">text</code> ）。如需更多資訊，請參閱<a href="/docs/zh-hant/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">常見問題</a>。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">limit</code></p></td>
@@ -777,7 +777,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>不可以，在全文檢索中無法直接存取或輸出由 BM25 函式所產生的稀疏向量。詳細說明如下：</p>
+    </button></h3><p>不可以，在全文搜尋中無法直接存取或輸出由 BM25 函式所產生的稀疏向量。詳細說明如下：</p>
 <ul>
 <li><p>BM25 函式會在內部產生稀疏向量，用於排序與檢索</p></li>
 <li><p>這些向量儲存於稀疏欄位中，但無法包含在<code translate="no">output_fields</code></p></li>
@@ -824,7 +824,7 @@ client.search(
 <ul>
 <li><p>關注點分離：您負責處理文字（輸入／輸出），Milvus 則負責處理向量（內部處理）</p></li>
 <li><p>效能：預先計算的稀疏向量可讓查詢過程中的 BM25 排序更為快速</p></li>
-<li><p>使用者體驗：透過簡單的文字介面，將複雜的向量運算進行抽象化處理</p></li>
+<li><p>使用者體驗：透過簡單的文字介面，將複雜的向量運算抽象化</p></li>
 </ul>
 <p><strong>若需存取向量</strong>：</p>
 <ul>

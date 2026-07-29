@@ -2,8 +2,8 @@
 id: single-vector-search.md
 title: Базовый векторный поиск
 summary: >-
-  Выполняйте базовые ANN-поиски в Milvus с помощью векторов запросов, полей
-  вывода, фильтров, диапазонов и итераторов.
+  Выполняйте базовый поиск с использованием нейронных сетей (ANN) в Milvus с
+  помощью векторов запроса, полей вывода, фильтров, диапазонов и итераторов.
 ---
 <h1 id="Basic-Vector-Search" class="common-anchor-header">Базовый векторный поиск<button data-href="#Basic-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,9 +20,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>На основе индексного файла, в котором хранится отсортированный порядок векторных вкраплений, поиск по методу приближенного ближайшего соседа (ANN) находит подгруппу векторных вкраплений на основе вектора запроса, содержащегося в полученном поисковом запросе, сравнивает вектор запроса с векторами в подгруппе и возвращает наиболее похожие результаты. С помощью ANN-поиска Milvus обеспечивает эффективный поиск. Эта страница поможет вам узнать, как проводить базовый ANN-поиск.</p>
+    </button></h1><p>На основе индексного файла, в котором зафиксирован отсортированный порядок векторных вложений, поиск по методу приближенного ближайшего соседа (ANN) находит подмножество векторных вложений на основе вектора запроса, содержащегося в полученном запросе на поиск, сравнивает вектор запроса с векторами из этого подмножества и возвращает наиболее похожие результаты. Благодаря поиску ANN Milvus обеспечивает эффективный поиск. На этой странице вы узнаете, как выполнять базовый поиск ANN.</p>
 <div class="alert note">
-<p>Если вы динамически добавляете новые поля после создания коллекции, поиск, включающий эти поля, будет возвращать определенные значения по умолчанию или NULL для сущностей, которые не задали значения в явном виде. Подробнее см. в разделе <a href="/docs/ru/add-fields-to-an-existing-collection.md">Добавление полей в существующую коллекцию</a>.</p>
+<p>Если вы добавите новые поля после создания коллекции, поиск, включающий эти поля, будет возвращать заданные значения по умолчанию или значение « <code translate="no">NULL</code> » для объектов, для которых значения явно не заданы. Подробности см. в разделе <a href="/docs/ru/add-fields-to-an-existing-collection.md">«Изменение схемы коллекции</a>».</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,22 +39,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Поиск ANN и k-Nearest Neighbors (kNN) - это обычные методы поиска векторного сходства. При kNN-поиске необходимо сравнить все векторы в векторном пространстве с вектором запроса, переданным в поисковом запросе, прежде чем определить наиболее похожие, что занимает много времени и ресурсов.</p>
-<p>В отличие от kNN-поиска, алгоритм ANN-поиска запрашивает <strong>индексный</strong> файл, в котором записан отсортированный порядок векторных вкраплений. Когда поступает запрос на поиск, вы можете использовать индексный файл в качестве справочника, чтобы быстро найти подгруппу, вероятно, содержащую векторные вложения, наиболее похожие на вектор запроса. Затем можно использовать указанный <strong>тип метрики</strong> для измерения сходства между вектором запроса и векторами в подгруппе, отсортировать членов группы по сходству с вектором запроса и определить <strong>топ-K</strong> членов группы.</p>
-<p>Поиск в ANN зависит от предварительно созданных индексов, поэтому производительность поиска, использование памяти и корректность поиска могут отличаться в зависимости от выбранного типа индекса. Необходимо найти баланс между производительностью и корректностью поиска.</p>
-<p>Чтобы сократить время обучения, Milvus предоставляет <strong>AUTOINDEX</strong>. С помощью <strong>AUTOINDEX</strong> Milvus анализирует распределение данных в вашей коллекции во время создания индекса и устанавливает наиболее оптимизированные параметры индекса на основе анализа, чтобы найти баланс между производительностью и корректностью поиска.</p>
+    </button></h2><p>Поиск с использованием ANN и алгоритма k-ближайших соседей (kNN) являются стандартными методами векторного поиска по схожести. При поиске по kNN необходимо сравнить все векторы в векторном пространстве с вектором запроса, переданным в поисковом запросе, прежде чем определить наиболее похожие из них, что требует значительных затрат времени и ресурсов.</p>
+<p>В отличие от поиска по методу kNN, алгоритм поиска с использованием нейронной сети (ANN) требует наличия <strong>индексного</strong> файла, в котором зафиксирован отсортированный порядок векторных вложений. При поступлении запроса на поиск можно использовать индексный файл в качестве справочного материала, чтобы быстро найти подгруппу, которая, вероятно, содержит векторные вложения, наиболее схожие с вектором-запросом. Затем можно использовать указанный <strong>тип метрики</strong> для измерения сходства между вектором запроса и векторами из этой подгруппы, отсортировать элементы подгруппы по степени сходства с вектором запроса и определить <strong>K лучших</strong> элементов подгруппы.</p>
+<p>Поиск с помощью ANN зависит от заранее построенных индексов, а пропускная способность поиска, использование памяти и точность результатов могут варьироваться в зависимости от выбранных типов индексов. Необходимо найти баланс между производительностью и точностью поиска.</p>
+<p>Чтобы сократить время освоения, Milvus предоставляет <strong>функцию AUTOINDEX</strong>. С помощью <strong>AUTOINDEX</strong> Milvus может анализировать распределение данных в вашей коллекции во время построения индекса и настраивать наиболее оптимизированные параметры индекса на основе этого анализа, чтобы обеспечить баланс между производительностью и корректностью поиска.</p>
 <p>В этом разделе вы найдете подробную информацию по следующим темам:</p>
 <ul>
-<li><p><a href="/docs/ru/single-vector-search.md#Single-Vector-Search">Одновекторный поиск</a></p></li>
-<li><p><a href="/docs/ru/single-vector-search.md#Bulk-Vector-Search">Поиск по объемному вектору</a></p></li>
-<li><p><a href="/docs/ru/single-vector-search.md#ANN-Search-in-Partition">ANN-поиск в разделах</a></p></li>
+<li><p><a href="/docs/ru/single-vector-search.md#Single-Vector-Search">Поиск по одному вектору</a></p></li>
+<li><p><a href="/docs/ru/single-vector-search.md#Bulk-Vector-Search">Массовый векторный поиск</a></p></li>
+<li><p><a href="/docs/ru/single-vector-search.md#ANN-Search-in-Partition">Поиск с использованием нейронной сети в разделах</a></p></li>
 <li><p><a href="/docs/ru/single-vector-search.md#Use-Output-Fields">Использование полей вывода</a></p></li>
-<li><p><a href="/docs/ru/single-vector-search.md#Use-Limit-and-Offset">Использование ограничения и смещения</a></p></li>
-<li><p><a href="/docs/ru/single-vector-search.md#Use-Level">Использовать уровень</a></p></li>
-<li><p><a href="/docs/ru/single-vector-search.md#Get-Recall-Rate">Получение коэффициента возврата</a></p></li>
+<li><p><a href="/docs/ru/single-vector-search.md#Use-Limit-and-Offset">Использование параметров limit и offset</a></p></li>
+<li><p><a href="/docs/ru/single-vector-search.md#Use-Level">Использование уровня</a></p></li>
+<li><p><a href="/docs/ru/single-vector-search.md#Get-Recall-Rate">Получить коэффициент полноты</a></p></li>
 <li><p><a href="/docs/ru/single-vector-search.md#Enhancing-ANN-Search">Улучшение поиска с помощью ANN</a></p></li>
 </ul>
-<h2 id="Single-Vector-Search" class="common-anchor-header">Одновекторный поиск<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
+<h2 id="Single-Vector-Search" class="common-anchor-header">Поиск по одному вектору<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -69,10 +69,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В ANN-поиске одновекторный поиск означает поиск, который включает только один вектор запроса. На основе предварительно созданного индекса и типа метрики, указанного в поисковом запросе, Milvus найдет топ-K векторов, наиболее похожих на вектор запроса.</p>
-<p>В этом разделе вы узнаете, как выполнить одновекторный поиск. Запрос на поиск содержит один вектор запроса и просит Milvus использовать Inner Product (IP) для вычисления сходства между векторами запроса и векторами в коллекции и возвращает три наиболее похожих.</p>
+    </button></h2><p>В контексте поиска с использованием нейронных сетей поиск по одному вектору означает поиск, в котором задействован только один вектор запроса. На основе предварительно сформированного индекса и типа метрики, указанной в поисковом запросе, Milvus найдет K векторов, наиболее схожих с вектором запроса.</p>
+<p>В этом разделе вы узнаете, как выполнить поиск по одному вектору. Поисковый запрос содержит один вектор-запрос и просит Milvus использовать внутреннее произведение (IP) для вычисления сходства между вектором-запросом и векторами в коллекции, а также возвращает три наиболее схожих вектора.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -251,8 +256,8 @@ curl --request POST \
 <span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus ранжирует результаты поиска по степени сходства с вектором запроса в порядке убывания. Показатель сходства также называется расстоянием до вектора запроса, и его значения зависят от используемых типов метрик.</p>
-<p>В следующей таблице перечислены используемые типы метрик и соответствующие диапазоны расстояний.</p>
+<p>Milvus ранжирует результаты поиска по степени сходства с вектором запроса в порядке убывания. Степень сходства также называется расстоянием до вектора запроса, и диапазоны её значений зависят от используемых типов метрик.</p>
+<p>В следующей таблице приведены применимые типы метрик и соответствующие диапазоны расстояний.</p>
 <table>
    <tr>
      <th><p>Тип метрики</p></th>
@@ -261,31 +266,31 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">L2</code></p></td>
-     <td><p>Меньшее значение указывает на большее сходство.</p></td>
+     <td><p>Чем меньше значение, тем выше степень сходства.</p></td>
      <td><p>[0, ∞)</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">IP</code></p></td>
-     <td><p>Большее значение указывает на большее сходство.</p></td>
+     <td><p>Более высокое значение указывает на более высокую степень сходства.</p></td>
      <td><p>[-1, 1]</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">COSINE</code></p></td>
-     <td><p>Большее значение указывает на большее сходство.</p></td>
+     <td><p>Более высокое значение указывает на более высокую степень сходства.</p></td>
      <td><p>[-1, 1]</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">JACCARD</code></p></td>
-     <td><p>Меньшее значение указывает на большее сходство.</p></td>
+     <td><p>Чем меньше значение, тем выше степень сходства.</p></td>
      <td><p>[0, 1]</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">HAMMING</code></p></td>
-     <td><p>Меньшее значение указывает на большее сходство.</p></td>
+     <td><p>Меньшее значение указывает на более высокую степень сходства.</p></td>
      <td><p>[0, dim(vector)]</p></td>
    </tr>
 </table>
-<h2 id="Bulk-Vector-Search" class="common-anchor-header">Поиск по векторам<button data-href="#Bulk-Vector-Search" class="anchor-icon" translate="no">
+<h2 id="Bulk-Vector-Search" class="common-anchor-header">Массовый векторный поиск<button data-href="#Bulk-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -300,9 +305,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Аналогичным образом вы можете включить в поисковый запрос несколько векторов запроса. Milvus проведет параллельный поиск ANN по векторам запроса и вернет два набора результатов.</p>
+    </button></h2><p>Аналогичным образом вы можете включить несколько векторов запроса в поисковый запрос. Milvus будет параллельно выполнять поиск с помощью нейронных сетей (ANN) по векторам запроса и возвращать два набора результатов.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Search with multiple vectors</span>
 <span class="hljs-comment"># 7.1. Prepare query vectors</span>
 query_vectors = [
@@ -517,7 +527,12 @@ curl --request POST \
       </svg>
     </button></h2><p>Вместо задания векторов запроса можно использовать первичные ключи, если векторы запроса уже существуют в целевой коллекции.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     anns_field=<span class="hljs-string">&quot;vector&quot;</span>,
@@ -551,7 +566,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="ANN-Search-in-Partition" class="common-anchor-header">ANN-поиск в разделах<button data-href="#ANN-Search-in-Partition" class="anchor-icon" translate="no">
+<h2 id="ANN-Search-in-Partition" class="common-anchor-header">Поиск с помощью ANN в разделе<button data-href="#ANN-Search-in-Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -566,10 +581,15 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Предположим, что в коллекции создано несколько разделов, и вы можете сузить область поиска до определенного количества разделов. В этом случае вы можете включить имена целевых разделов в запрос на поиск, чтобы ограничить область поиска указанными разделами. Сокращение числа разделов, участвующих в поиске, повышает производительность поиска.</p>
-<p>Следующий фрагмент кода предполагает наличие в коллекции раздела с именем <strong>PartitionA</strong>.</p>
+    </button></h2><p>Предположим, что вы создали несколько раздела в коллекции и можете сузить область поиска до определенного числа разделов. В этом случае вы можете включить имена целевых разделов в запрос на поиск, чтобы ограничить область поиска указанными разделами. Уменьшение количества разделов, участвующих в поиске, повышает производительность поиска.</p>
+<p>В следующем фрагменте кода предполагается, что в вашей коллекции имеется раздел с именем <strong>PartitionA</strong>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search</span>
 query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]
 res = client.search(
@@ -706,7 +726,7 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;topks&quot;:[3]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-Output-Fields" class="common-anchor-header">Использование выходных полей<button data-href="#Use-Output-Fields" class="anchor-icon" translate="no">
+<h2 id="Use-Output-Fields" class="common-anchor-header">Использование полей вывода<button data-href="#Use-Output-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -721,9 +741,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В результат поиска Milvus по умолчанию включает значения первичных полей и расстояния/коэффициенты сходства сущностей, содержащих векторные вкрапления top-K. Вы можете включить имена целевых полей, включая векторные и скалярные поля, в поисковый запрос в качестве выходных полей, чтобы результаты поиска содержали значения других полей в этих сущностях.</p>
+    </button></h2><p>В результатах поиска Milvus по умолчанию включает значения основных полей и расстояния/оценки сходства сущностей, содержащих векторные вложения из топ-K. Вы можете включить имена целевых полей, включая как векторные, так и скалярные, в запрос на поиск в качестве полей вывода, чтобы результаты поиска содержали значения из других полей этих сущностей.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search</span>
 query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>],
 
@@ -884,11 +909,16 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>По умолчанию Milvus упорядочивает результаты поиска по их сходству с вектором запроса. Если вы хотите, чтобы возвращаемые сущности следовали порядку скалярных полей, добавьте <code translate="no">order_by_fields</code> к поисковому запросу.</p>
-<p>Каждый элемент в <code translate="no">order_by_fields</code> определяет скалярное поле и направление сортировки. Используйте <code translate="no">&quot;asc&quot;</code> для сортировки по возрастанию или <code translate="no">&quot;desc&quot;</code> для сортировки по убыванию. Если вы опустите <code translate="no">order</code>, Milvus отсортирует поле по возрастанию.</p>
-<p>В следующем примере результаты поиска сортируются по <code translate="no">price</code> от низкого к высокому. Включите поле сортировки в <code translate="no">output_fields</code>, если хотите просмотреть значение поля в ответе.</p>
+    </button></h2><p>По умолчанию Milvus сортирует результаты поиска по оценке сходства с вектором запроса. Если вы хотите, чтобы возвращаемые сущности упорядочивались по скалярным полям, добавьте <code translate="no">order_by_fields</code> в поисковый запрос.</p>
+<p>Каждый элемент в <code translate="no">order_by_fields</code> указывает скалярное поле и направление сортировки. Используйте <code translate="no">&quot;asc&quot;</code> для восходящего порядка или <code translate="no">&quot;desc&quot;</code> для нисходящего порядка. Если вы опустите <code translate="no">order</code>, Milvus отсортирует поле в восходящем порядке.</p>
+<p>В следующем примере результаты поиска сортируются по <code translate="no">price</code> от меньшего к большему. Включите поле сортировки в <code translate="no">output_fields</code>, если хотите проверить значение поля в ответе.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
     data=query_vectors,
@@ -908,9 +938,14 @@ curl --request POST \
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Вы также можете сортировать по нескольким скалярным полям. Milvus применяет поля в том порядке, который вы укажете. В следующем примере Milvus сортирует результаты по <code translate="no">price</code> в порядке возрастания. Для сущностей с одинаковыми <code translate="no">price</code>, Milvus затем сортирует по <code translate="no">rating</code> в порядке убывания.</p>
+<p>Также можно выполнять сортировку по нескольким скалярным полям. Milvus применяет поля в указанном вами порядке. В следующем примере Milvus сортирует результаты по <code translate="no">price</code> в порядке возрастания. Для объектов с одинаковым значением <code translate="no">price</code> Milvus затем сортирует по <code translate="no">rating</code> в порядке убывания.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
     data=query_vectors,
@@ -931,8 +966,8 @@ curl --request POST \
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Для сущностей с одинаковыми значениями во всех указанных полях order-by, Milvus сохраняет исходный порядок по шкале сходства.</p>
-<h2 id="Use-Limit-and-Offset" class="common-anchor-header">Использование лимита и смещения<button data-href="#Use-Limit-and-Offset" class="anchor-icon" translate="no">
+<p>Для объектов с одинаковыми значениями во всех указанных полях сортировки Milvus сохраняет исходный порядок по показателю схожести.</p>
+<h2 id="Use-Limit-and-Offset" class="common-anchor-header">Использование параметров Limit и Offset<button data-href="#Use-Limit-and-Offset" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -947,22 +982,22 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Вы можете заметить, что параметр <code translate="no">limit</code>, передаваемый в поисковых запросах, определяет количество сущностей, включаемых в результаты поиска. Этот параметр определяет максимальное количество сущностей, возвращаемых при одном поиске, и обычно называется <strong>top-K</strong>.</p>
-<p>Если вы хотите выполнять постраничные запросы, вы можете использовать цикл для отправки нескольких запросов на поиск, при этом параметры <strong>Limit</strong> и <strong>Offset</strong> будут передаваться в каждом запросе. В частности, вы можете установить параметр <strong>Limit</strong> на количество сущностей, которые вы хотите включить в результаты текущего запроса, а <strong>Offset</strong> - на общее количество сущностей, которые уже были возвращены.</p>
-<p>В таблице ниже показано, как задать параметры <strong>Limit</strong> и <strong>Offset</strong> для постраничных запросов, возвращающих 100 сущностей за раз.</p>
+    </button></h2><p>Вы можете заметить, что параметр <code translate="no">limit</code>, передаваемый в запросах на поиск, определяет количество сущностей, которые будут включены в результаты поиска. Этот параметр указывает максимальное количество сущностей, возвращаемых за один поиск, и обычно называется <strong>top-K</strong>.</p>
+<p>Если вы хотите выполнять запросы с пагинацией, вы можете использовать цикл для отправки нескольких запросов Search, в каждом из которых будут указаны параметры <strong>Limit</strong> и <strong>Offset</strong>. В частности, вы можете установить для параметра <strong>Limit</strong> количество сущностей, которые вы хотите включить в результаты текущего запроса, а для параметра <strong>Offset</strong> — общее количество сущностей, которые уже были возвращены.</p>
+<p>В таблице ниже приведено описание того, как настроить параметры <strong>Limit</strong> и <strong>Offset</strong> для запросов с пагинацией при возврате 100 сущностей за раз.</p>
 <table>
    <tr>
      <th><p>Запросы</p></th>
-     <th><p>Сущности, возвращаемые по одному запросу</p></th>
-     <th><p>Сущности, которые уже были возвращены в общей сложности</p></th>
+     <th><p>Количество сущностей, возвращаемых за один запрос</p></th>
+     <th><p>Общее количество уже возвращенных сущностей</p></th>
    </tr>
    <tr>
-     <td><p><strong>1-й</strong> запрос</p></td>
+     <td><p><strong>Первый</strong> запрос</p></td>
      <td><p>100</p></td>
      <td><p>0</p></td>
    </tr>
    <tr>
-     <td><p><strong>2-й</strong> запрос</p></td>
+     <td><p><strong>Второй</strong> запрос</p></td>
      <td><p>100</p></td>
      <td><p>100</p></td>
    </tr>
@@ -972,14 +1007,19 @@ curl --request POST \
      <td><p>200</p></td>
    </tr>
    <tr>
-     <td><p><strong>Пятый</strong> запрос</p></td>
+     <td><p><strong>n-й</strong> запрос</p></td>
      <td><p>100</p></td>
-     <td><p>100 x (n-1)</p></td>
+     <td><p>100 × (n-1)</p></td>
    </tr>
 </table>
-<p>Обратите внимание, что сумма <code translate="no">limit</code> и <code translate="no">offset</code> в одном ANN-поиске должна быть меньше 16 384.</p>
+<p>Обратите внимание, что сумма значений <code translate="no">limit</code> и <code translate="no">offset</code> за один поиск в ANN должна быть меньше 16 384.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search</span>
 query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>],
 
@@ -1068,7 +1108,7 @@ curl --request POST \
     &quot;offset&quot;: 10
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Temporarily-set-a-timezone-for-a-search" class="common-anchor-header">Временная установка часового пояса для поиска<button data-href="#Temporarily-set-a-timezone-for-a-search" class="anchor-icon" translate="no">
+<h2 id="Temporarily-set-a-timezone-for-a-search" class="common-anchor-header">Временная настройка часового пояса для поиска<button data-href="#Temporarily-set-a-timezone-for-a-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1083,11 +1123,16 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Если в вашей коллекции есть поле <code translate="no">TIMESTAMPTZ</code>, вы можете временно изменить часовой пояс базы данных или коллекции по умолчанию для одной операции, задав параметр <code translate="no">timezone</code> в вызове поиска. Это позволяет контролировать отображение и сравнение значений <code translate="no">TIMESTAMPTZ</code> во время выполнения операции.</p>
-<p>Значение <code translate="no">timezone</code> должно быть действительным <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">идентификатором часового пояса IANA</a> (например, <strong>Азия/Шанхай</strong>, <strong>Америка/Чикаго</strong> или <strong>UTC</strong>). Подробнее о том, как использовать поле <code translate="no">TIMESTAMPTZ</code>, см. в разделе <a href="/docs/ru/timestamptz-field.md">Поле TIMESTAMPTZ</a>.</p>
+    </button></h2><p>Если в вашей коллекции есть поле <code translate="no">TIMESTAMPTZ</code>, вы можете временно переопределить часовой пояс по умолчанию базы данных или коллекции для одной операции, установив параметр <code translate="no">timezone</code> в вызове поиска. Это определяет, как значения <code translate="no">TIMESTAMPTZ</code> отображаются и сравниваются во время операции.</p>
+<p>Значение <code translate="no">timezone</code> должно быть допустимым <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">идентификатором часового пояса IANA</a> (например, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> или <strong>UTC</strong>). Подробные сведения об использовании поля <code translate="no">TIMESTAMPTZ</code> см. в <a href="/docs/ru/timestamptz-field.md">разделе «Поле TIMESTAMPTZ</a>».</p>
 <p>В примере ниже показано, как временно установить часовой пояс для операции поиска:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     anns_field=<span class="hljs-string">&quot;vector&quot;</span>,
@@ -1120,7 +1165,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
   }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Enhancing-ANN-Search" class="common-anchor-header">Улучшение поиска по ANN<button data-href="#Enhancing-ANN-Search" class="anchor-icon" translate="no">
+<h2 id="Enhancing-ANN-Search" class="common-anchor-header">Улучшение поиска в ANN<button data-href="#Enhancing-ANN-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1135,36 +1180,36 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>AUTOINDEX значительно сглаживает кривую обучения поиску по ANN. Однако результаты поиска могут быть не всегда корректными по мере увеличения top-K. Уменьшив область поиска, улучшив релевантность результатов поиска и разнообразив их, Milvus разработал следующие усовершенствования поиска.</p>
+    </button></h2><p>Функция AUTOINDEX значительно упрощает освоение поиска с использованием нейронных сетей. Однако по мере увеличения значения top-K результаты поиска не всегда могут быть корректными. За счёт сужения области поиска, повышения релевантности результатов и их диверсификации Milvus реализует следующие усовершенствования поиска.</p>
 <ul>
 <li><p>Фильтрованный поиск</p>
-<p>Вы можете включить условия фильтрации в поисковый запрос, чтобы Milvus выполнял фильтрацию метаданных перед проведением ANN-поиска, сокращая область поиска со всей коллекции до сущностей, соответствующих заданным условиям фильтрации.</p>
-<p>Дополнительные сведения о фильтрации метаданных и условиях фильтрации см. в разделах <a href="/docs/ru/filtered-search.md">"Фильтрованный поиск"</a>, <a href="/docs/ru/boolean.md">"Объяснение фильтрации"</a> и смежных темах.</p></li>
+<p>Вы можете включить условия фильтрации в запрос на поиск, чтобы Milvus проводил фильтрацию по метаданным перед выполнением поиска с использованием нейронной сети, сужая область поиска со всей коллекции до сущностей, соответствующих указанным условиям фильтрации.</p>
+<p>Подробнее о фильтрации метаданных и условиях фильтрации см. в <a href="/docs/ru/filtered-search.md">разделах «Фильтрованный поиск»</a>, <a href="/docs/ru/boolean.md">«Объяснение фильтрации</a>» и связанных темах.</p></li>
 <li><p>Поиск по диапазону</p>
-<p>Вы можете улучшить релевантность результатов поиска, ограничив расстояние или оценку возвращаемых сущностей определенным диапазоном. В Milvus поиск по диапазону включает в себя рисование двух концентрических окружностей с векторной вставкой, наиболее похожей на вектор запроса, в качестве центра. В поисковом запросе указывается радиус обеих окружностей, и Milvus возвращает все векторные вкрапления, которые попадают во внешнюю окружность, но не во внутреннюю.</p>
-<p>Подробнее о поиске по диапазону см. в разделе <a href="/docs/ru/range-search.md">Поиск по диапазону</a>.</p></li>
-<li><p>Группировочный поиск</p>
-<p>Если возвращаемые сущности имеют одинаковое значение в определенном поле, результаты поиска могут не отражать распределение всех векторных вкраплений в векторном пространстве. Чтобы разнообразить результаты поиска, воспользуйтесь группирующим поиском.</p>
-<p>Подробнее о группирующем поиске см. в разделе <a href="/docs/ru/grouping-search.md">Группирующий поиск</a>,</p></li>
+<p>Вы можете повысить релевантность результатов поиска, ограничив расстояние или оценку возвращаемых объектов в пределах определенного диапазона. В Milvus поиск по диапазону заключается в построении двух концентрических окружностей с векторным вложением, наиболее схожим с вектором запроса, в качестве центра. В поисковом запросе указывается радиус обеих окружностей, и Milvus возвращает все векторные вложения, которые попадают в пределы внешней окружности, но не внутренней.</p>
+<p>Подробнее о поиске по диапазону см. в разделе <a href="/docs/ru/range-search.md">«Поиск по диапазону</a>».</p></li>
+<li><p>Поиск по группам</p>
+<p>Если возвращаемые объекты имеют одинаковое значение в определенном поле, результаты поиска могут не отражать распределение всех векторных вложений в векторном пространстве. Чтобы разнообразить результаты поиска, рекомендуется использовать поиск по группам.</p>
+<p>Подробнее о групповом поиске см. в разделе <a href="/docs/ru/grouping-search.md">«Групповой поиск</a>»,</p></li>
 <li><p>Гибридный поиск</p>
-<p>Коллекция может включать несколько векторных полей для сохранения векторных вкраплений, созданных с помощью различных моделей вкраплений. При этом можно использовать гибридный поиск для ранжирования результатов поиска по этим векторным полям, что повышает коэффициент запоминания.</p>
-<p>Подробнее о гибридном поиске см. в разделе <a href="/docs/ru/multi-vector-search.md">Гибридный поиск</a>.</p></li>
+<p>Коллекция может включать несколько векторных полей для сохранения векторных вложений, сгенерированных с использованием различных моделей вложения. Таким образом, вы можете использовать гибридный поиск для переранжирования результатов поиска из этих векторных полей, повышая коэффициент полноты.</p>
+<p>Подробнее о гибридном поиске см. в разделе <a href="/docs/ru/multi-vector-search.md">«Гибридный поиск</a>».</p></li>
 <li><p>Итератор поиска</p>
-<p>Один поиск ANN возвращает максимум 16 384 сущности. Если вам нужно вернуть больше сущностей за один поиск, используйте итераторы поиска.</p>
-<p>Подробнее об итераторах поиска см. в разделе <a href="/docs/ru/with-iterators.md">Итератор поиска</a>.</p></li>
+<p>Один поиск с использованием нейронной сети возвращает не более 16 384 объектов. Если вам необходимо, чтобы в результате одного поиска возвращалось больше объектов, рассмотрите возможность использования итераторов поиска.</p>
+<p>Подробнее об итераторах поиска см. в разделе <a href="/docs/ru/with-iterators.md">«Итератор поиска</a>».</p></li>
 <li><p>Полнотекстовый поиск</p>
-<p>Полнотекстовый поиск - это функция поиска документов, содержащих определенные термины или фразы в текстовых наборах данных, с последующим ранжированием результатов на основе релевантности. Эта функция позволяет преодолеть ограничения семантического поиска, который может упускать из виду точные термины, обеспечивая получение наиболее точных и контекстуально релевантных результатов. Кроме того, она упрощает векторный поиск, принимая исходный текст, автоматически преобразуя текстовые данные в разреженные вкрапления без необходимости вручную генерировать векторные вкрапления.</p>
-<p>Подробнее о полнотекстовом поиске см. в разделе <a href="/docs/ru/full-text-search.md">Полнотекстовый поиск</a>.</p></li>
-<li><p>Сопоставление текста</p>
-<p>Функция поиска по ключевым словам в Milvus позволяет точно находить документы по определенным терминам. Эта функция используется в основном для фильтрованного поиска по определенным условиям и может включать скалярную фильтрацию для уточнения результатов запроса, позволяя искать сходство в векторах, которые удовлетворяют скалярным критериям.</p>
-<p>Подробные сведения о подборе ключевых слов см. в разделе <a href="/docs/ru/keyword-match.md">Подбор ключевых слов</a>.</p></li>
-<li><p>Использование ключа раздела</p>
-<p>Вовлечение нескольких скалярных полей в фильтрацию метаданных и использование довольно сложных условий фильтрации может повлиять на эффективность поиска. Если задать скалярное поле в качестве ключа раздела и использовать в поисковом запросе условие фильтрации, включающее ключ раздела, это поможет ограничить область поиска разделами, соответствующими указанным значениям ключа раздела.</p>
-<p>Подробнее о ключе раздела см. в разделе <a href="/docs/ru/use-partition-key.md">Использование ключа раздела</a>.</p></li>
-<li><p>Использовать mmap</p>
-<p>Подробнее о настройках mmap см. в разделе <a href="/docs/ru/mmap.md">Использовать mmap</a>.</p></li>
-<li><p>Компактификация кластеризации</p>
-<p>Подробные сведения о кластерном уплотнении см. в разделе <a href="/docs/ru/clustering-compaction.md">Clustering Compaction</a>.</p></li>
-<li><p>Использовать ранжирование</p>
-<p>Подробные сведения об использовании ранжирования для повышения релевантности результатов поиска см. в разделах <a href="/docs/ru/decay-ranker-overview.md">Обзор ранжирования по распаду</a> и <a href="/docs/ru/model-ranker-overview.md">Обзор ранжирования по модели</a>.</p></li>
+<p>Полнотекстовый поиск — это функция, которая извлекает документы, содержащие определенные термины или фразы в текстовых наборах данных, а затем ранжирует результаты по релевантности. Эта функция преодолевает ограничения семантического поиска, который может упускать точные термины, гарантируя получение наиболее точных и контекстуально релевантных результатов. Кроме того, она упрощает векторный поиск, принимая входные данные в виде необработанного текста и автоматически преобразуя ваши текстовые данные в разреженные вложения без необходимости вручную генерировать векторные вложения.</p>
+<p>Подробнее о полнотекстовом поиске см. в разделе <a href="/docs/ru/full-text-search.md">«Полнотекстовый поиск</a>».</p></li>
+<li><p>Совпадение текста</p>
+<p>Сопоставление по ключевым словам в Milvus позволяет точно находить документы на основе конкретных терминов. Эта функция в основном используется для фильтрованного поиска, отвечающего конкретным условиям, и может включать скалярную фильтрацию для уточнения результатов запроса, что позволяет выполнять поиск по схожести среди векторов, отвечающих скалярным критериям.</p>
+<p>Подробнее о сопоставлении по ключевым словам см. в разделе <a href="/docs/ru/keyword-match.md">«Сопоставление по ключевым словам</a>».</p></li>
+<li><p>Использование ключа разбиения</p>
+<p>Использование нескольких скалярных полей при фильтрации метаданных и применение достаточно сложных условий фильтрации может снизить эффективность поиска. Если вы установите скалярное поле в качестве ключа разбиения и будете использовать в поисковом запросе условие фильтрации, включающее этот ключ разбиения, это поможет ограничить область поиска разделами, соответствующими указанным значениям ключа разбиения.</p>
+<p>Подробнее о ключе разбиения см. в разделе <a href="/docs/ru/use-partition-key.md">«Использование ключа разбиения</a>».</p></li>
+<li><p>Использование mmap</p>
+<p>Подробнее о настройках mmap см. в разделе <a href="/docs/ru/mmap.md">«Использование mmap</a>».</p></li>
+<li><p>Кластерная уплотнение</p>
+<p>Подробнее о компактизации с кластеризацией см. в разделе <a href="/docs/ru/clustering-compaction.md">«Компактизация с кластеризацией</a>».</p></li>
+<li><p>Использование переранжирования</p>
+<p>Подробнее об использовании ранжеров для повышения релевантности результатов поиска см. в разделах <a href="/docs/ru/decay-ranker-overview.md">«Обзор ранжера Decay</a> » и <a href="/docs/ru/model-ranker-overview.md">«Обзор ранжера Model</a>».</p></li>
 </ul>

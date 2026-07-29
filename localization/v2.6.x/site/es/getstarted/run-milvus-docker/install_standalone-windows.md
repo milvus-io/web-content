@@ -90,8 +90,8 @@ To change the default Milvus configuration, edit user.yaml and restart the servi
 </code></pre>
 <p>Tras ejecutar el script de instalación:​</p>
 <ul>
-<li><p>Se ha iniciado un contenedor de Docker llamado <strong>«milvus-standalone»</strong> en el puerto <strong>19530</strong>.​</p></li>
-<li><p>Se ha instalado un etcd integrado junto con Milvus en el mismo contenedor y está disponible en el puerto <strong>2379</strong>. Su archivo de configuración está asignado a <strong>«embedEtcd.yaml»</strong> en la carpeta actual.</p></li>
+<li><p>Se ha iniciado un contenedor de Docker llamado <strong>milvus-standalone</strong> en el puerto <strong>19530</strong>.​</p></li>
+<li><p>Se ha instalado un etcd integrado junto con Milvus en el mismo contenedor y está disponible en el puerto <strong>2379</strong>. Su archivo de configuración está asignado a <strong>embedEtcd.yaml</strong> en la carpeta actual.</p></li>
 <li><p>El volumen de datos de Milvus está asignado a <strong>volumes/milvus</strong> en la carpeta actual.​</p></li>
 </ul>
 <p>Puede utilizar los siguientes comandos para gestionar el contenedor de Milvus y los datos almacenados.​</p>
@@ -191,7 +191,7 @@ Delete successfully.​
 <li><p>Abre Docker Desktop en modo administrador haciendo clic con el botón derecho del ratón y seleccionando <strong>«Ejecutar como administrador</strong>».​</p></li>
 <li><p>Ejecuta los siguientes comandos en PowerShell o en el símbolo del sistema de Windows para descargar el archivo de configuración de Docker Compose para Milvus Standalone e iniciar Milvus.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.20/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.21/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -232,7 +232,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Descarga el archivo de configuración de Milvus.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.20/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.21/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Inicia Milvus.</p>
@@ -277,11 +277,11 @@ Creating milvus-standalone ... done​
     </button></h3><p>Una vez instalado Docker Desktop en Windows, es posible que aparezca el error « <code translate="no">Docker Engine stopped</code> » si tu ordenador no está configurado correctamente. En ese caso, es posible que tengas que comprobar lo siguiente:​</p>
 <ol>
 <li><p>Comprueba si la virtualización está habilitada.</p>
-<p>Puedes comprobar si la virtualización está activada en la pestaña <strong>«Rendimiento»</strong> del <strong>Administrador de tareas</strong>.</p>
+<p>Puedes comprobar si la virtualización está activada en la pestaña <strong>«Rendimiento»</strong> del <strong>Administrador de tareas</strong>.​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/task-manager.png" alt="Virtualization in Task Manager" class="doc-image" id="virtualization-in-task-manager" /> 
-   <span>Virtualización en el Gestor de tareas</span>
+   <span>Virtualización en el Administrador de tareas</span>
   
  </span></p>
 <p>Si la virtualización está desactivada, es posible que tengas que comprobar la configuración de la BIOS del firmware de tu placa base. La forma de habilitar la virtualización en la configuración de la BIOS varía según el fabricante de la placa base. En el caso de las placas base ASUS, por ejemplo, puedes consultar <a href="https://www.asus.com/support/faq/1043786/">este artículo</a> sobre cómo habilitar la virtualización.​</p>
@@ -301,7 +301,7 @@ The most recent version of Windows Subsystem for Linux is already installed.​
 
 </code></pre></li>
 <li><p>Comprueba si se ha iniciado el daemon de Docker.</p>
-<p>Debes ir al directorio de instalación de Docker Desktop y ejecutar « <code translate="no">.\DockerCli.exe -SwitchDaemon</code> » para iniciar el daemon de Docker.​</p>
+<p>Debes ir al directorio de instalación de Docker Desktop y ejecutar « <code translate="no">.\DockerCli.exe -SwitchDaemon</code> » para iniciar el daemon de Docker.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;cd &quot;C:\Program Files\Docker\Docker&quot;​
 C:\Program Files\Docker\Docker&gt;.\DockerCli.exe -SwitchDaemon​
 Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.\pipe\dockerBackendApiServer: The system cannot find the file specified.​
@@ -348,7 +348,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
   
  </span></p></li>
 </ol>
-<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">¿Cómo puedo solucionar los errores relacionados con el volumen que aparecen durante el inicio de Milvus y que indican « <code translate="no">Read config failed</code> »?​<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
+<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">¿Cómo puedo solucionar los errores relacionados con el volumen que aparecen al iniciar Milvus y que indican « <code translate="no">Read config failed</code> »?​<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

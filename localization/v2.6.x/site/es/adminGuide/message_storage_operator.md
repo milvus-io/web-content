@@ -25,7 +25,7 @@ summary: Descubre cómo configurar el almacenamiento de mensajes con Milvus Oper
 <p>Debe especificar un archivo de configuración para utilizar Milvus Operator e iniciar un clúster de Milvus.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-string">kubectl</span> <span class="hljs-string">apply</span> <span class="hljs-string">-f</span> <span class="hljs-string">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Solo tiene que editar la plantilla de código en « <code translate="no">milvus_cluster_default.yaml</code> » para configurar las dependencias de terceros. En las siguientes secciones se explica cómo configurar el almacenamiento de objetos, etcd y Pulsar, respectivamente.</p>
+<p>Solo tiene que editar la plantilla de código en <code translate="no">milvus_cluster_default.yaml</code> para configurar las dependencias de terceros. En las siguientes secciones se explica cómo configurar el almacenamiento de objetos, etcd y Pulsar, respectivamente.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Antes de empezar<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -60,7 +60,7 @@ summary: Descubre cómo configurar el almacenamiento de mensajes con Milvus Oper
 </ul></li>
 <li>El almacenamiento de mensajes no se puede cambiar mientras el sistema Milvus está en ejecución.</li>
 <li>Solo se admiten las versiones 2.x o 3.x de Kafka.</li>
-<li><strong>Limitaciones de la actualización</strong>: <strong>Limitaciones de la cola de mensajes</strong>: al actualizar a Milvus v2.6.20, debes mantener tu elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</li>
+<li><strong>Limitaciones de la actualización</strong>: <strong>Limitaciones de la cola de mensajes</strong>: Al actualizar a Milvus v2.6.21, debes mantener tu elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Configurar RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"

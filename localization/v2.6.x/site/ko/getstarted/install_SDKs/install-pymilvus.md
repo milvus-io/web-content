@@ -42,7 +42,7 @@ title: Milvus Python SDK 설치
 <li>Google protobuf가 설치되어 있어야 합니다. ` <code translate="no">pip3 install protobuf==3.20.0</code>` 명령어를 사용하여 설치할 수 있습니다.</li>
 <li>grpcio-tools가 설치되어 있어야 합니다. ` <code translate="no">pip3 install grpcio-tools</code>` 명령어를 사용하여 설치할 수 있습니다.</li>
 </ul>
-<h2 id="Install-PyMilvus-via-pip" class="common-anchor-header">pip을 통해 PyMilvus 설치<button data-href="#Install-PyMilvus-via-pip" class="anchor-icon" translate="no">
+<h2 id="Install-PyMilvus-via-pip" class="common-anchor-header">pip를 통해 PyMilvus 설치<button data-href="#Install-PyMilvus-via-pip" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,7 +61,7 @@ title: Milvus Python SDK 설치
 <div class="alert note">
 설치한 Milvus 서버의 버전과 일치하는 PyMilvus 버전을 설치하는 것이 좋습니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/release_notes.md">릴리스 노트를</a> 참조하십시오.
 </div>
-<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.6</span>.<span class="hljs-number">16</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.6</span>.<span class="hljs-number">17</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">설치 확인<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"

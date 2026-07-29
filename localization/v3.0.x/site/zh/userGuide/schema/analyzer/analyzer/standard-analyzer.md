@@ -1,7 +1,7 @@
 ---
 id: standard-analyzer.md
 title: 标准分析器
-summary: 标准分析器是 Milvus 的默认分析器，如果没有指定分析器，它将自动应用于文本字段。它使用基于语法的标记化，因此对大多数语言都很有效。
+summary: 标准分析器是 Milvus 中的默认分析器，如果未指定分析器，它会自动应用于文本字段。它采用基于语法的分词方式，因此对大多数语言都很有效。
 ---
 <h1 id="Standard-Analyzer" class="common-anchor-header">标准分析器<button data-href="#Standard-Analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,9 +18,9 @@ summary: 标准分析器是 Milvus 的默认分析器，如果没有指定分析
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">standard</code> 分析器是 Milvus 的默认分析器，如果没有指定分析器，它将自动应用于文本字段。它使用基于语法的标记化，对大多数语言都很有效。</p>
+    </button></h1><p><code translate="no">standard</code> 分析器是 Milvus 中的默认分析器，若未指定分析器，系统会自动将其应用于文本字段。它采用基于语法的分词方式，因此对大多数语言都十分有效。</p>
 <div class="alert note">
-<p><code translate="no">standard</code> 分析器适用于依赖分隔符（如空格、标点符号）作为单词边界的语言。但是，中文、日文和韩文等语言需要基于词典的标记化。在这种情况下，使用特定语言的分析器，如 <a href="/docs/zh/chinese-analyzer.md"><code translate="no">chinese</code></a>或带有专门标记符号化器的自定义分析器（如 <a href="/docs/zh/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/zh/icu-tokenizer.md"><code translate="no">icu</code></a>）和过滤器，以确保准确的标记化和更好的搜索结果。</p>
+<p><code translate="no">standard</code> 分析器适用于那些依赖分隔符（如空格、标点符号）来确定词界限的语言。然而，中文、阿拉伯语、泰语、日语和韩语等语言则需要特定于该语言的词法分析或规范化处理。在这种情况下，请使用特定于该语言的分析器，例如 <a href="/docs/zh/chinese-analyzer.md"><code translate="no">chinese</code></a>、 <a href="/docs/zh/arabic-analyzer.md"><code translate="no">arabic</code></a>，或 <a href="/docs/zh/thai-analyzer.md"><code translate="no">thai</code></a>，或使用带有专用分词器的自定义分析器，例如 <a href="/docs/zh/lindera-tokenizer.md"><code translate="no">lindera</code></a> 和 <a href="/docs/zh/icu-tokenizer.md"><code translate="no">icu</code></a>。</p>
 </div>
 <h2 id="Definition" class="common-anchor-header">定义<button data-href="#Definition" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -37,14 +37,19 @@ summary: 标准分析器是 Milvus 的默认分析器，如果没有指定分析
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">standard</code> 分析器包括</p>
+    </button></h2><p><code translate="no">standard</code> 分析器由以下部分组成：</p>
 <ul>
-<li><p><strong>标记化器</strong>：使用<code translate="no">standard</code> 标记符号化器，根据语法规则将文本分割成离散的单词单元。更多信息，请参阅<a href="/docs/zh/standard-tokenizer.md">标准标记符</a>。</p></li>
-<li><p><strong>过滤器</strong>：使用<code translate="no">lowercase</code> 过滤器将所有标记转换为小写，从而实现不区分大小写的搜索。更多信息，请参阅<a href="/docs/zh/lowercase-filter.md">小写</a>。</p></li>
+<li><p><strong>分词器</strong>：使用<code translate="no">standard</code> 分词器，根据语法规则将文本拆分为离散的单词单元。有关详细信息，请参阅<a href="/docs/zh/standard-tokenizer.md">“标准分词器”</a>。</p></li>
+<li><p><strong>过滤器</strong>：使用<code translate="no">lowercase</code> 过滤器将所有词元转换为小写，从而支持不区分大小写的搜索。有关详细信息，请参阅<a href="/docs/zh/lowercase-filter.md">“小写转换”</a>。</p></li>
 </ul>
-<p><code translate="no">standard</code> 分析器的功能相当于以下自定义分析器配置：</p>
+<p><code translate="no">standard</code> 分析器的功能等同于以下自定义分析器配置：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;lowercase&quot;</span>]
@@ -84,9 +89,14 @@ analyzerParams=<span class="hljs-string">&#x27;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要将<code translate="no">standard</code> 分析器应用到一个字段，只需在<code translate="no">analyzer_params</code> 中将<code translate="no">type</code> 设置为<code translate="no">standard</code> ，并根据需要加入可选参数即可。</p>
+    </button></h2><p>要将<code translate="no">standard</code> 分析器应用于字段，只需在<code translate="no">analyzer_params</code> 中将<code translate="no">type</code> 设置为<code translate="no">standard</code> ，并根据需要包含可选参数。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-comment"># Specifies the standard analyzer type</span>
 }
@@ -105,20 +115,25 @@ analyzerParams=<span class="hljs-string">&#x27;{
   &quot;type&quot;: &quot;standard&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">standard</code> 分析器接受以下可选参数：</p>
+<p><code translate="no">standard</code> 分析器支持以下可选参数：</p>
 <table>
    <tr>
      <th><p>参数</p></th>
-     <th><p>说明</p></th>
+     <th><p>描述</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">stop_words</code></p></td>
-     <td><p>一个数组，包含将从标记化中删除的停用词列表。默认为<code translate="no">_english_</code> ，这是一组内置的常用英语停止词。</p></td>
+     <td><p>包含停用词列表的数组，这些词将在分词过程中被移除。默认值为<code translate="no">_english_</code> ，即一组内置的常见英语停用词。</p></td>
    </tr>
 </table>
-<p>自定义停止词配置示例：</p>
+<p>自定义停用词的配置示例：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-comment"># Specifies the standard analyzer type</span>
     <span class="hljs-string">&quot;stop_words&quot;</span>, [<span class="hljs-string">&quot;of&quot;</span>] <span class="hljs-comment"># Optional: List of words to exclude from tokenization</span>
@@ -137,7 +152,7 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Coll
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>定义<code translate="no">analyzer_params</code> 后，您可以在定义 Collections Schema 时将其应用到<code translate="no">VARCHAR</code> 字段。这样，Milvus 就能使用指定的分析器处理该字段中的文本，从而实现高效的标记化和过滤。有关详细信息，请参阅<a href="/docs/zh/analyzer-overview.md#Example-use">示例使用</a>。</p>
+<p>定义<code translate="no">analyzer_params</code> 后，您可以在定义Collection Schema时将其应用于<code translate="no">VARCHAR</code> 字段。这使Milvus能够使用指定的分析器处理该字段中的文本，从而实现高效的分词和过滤。有关更多信息，请参阅<a href="/docs/zh/analyzer-overview.md#Example-use">使用示例</a>。</p>
 <h2 id="Examples" class="common-anchor-header">示例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -153,7 +168,7 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在将分析器配置应用到 Collections 模式之前，请使用<code translate="no">run_analyzer</code> 方法验证其行为。</p>
+    </button></h2><p>在将分析器配置应用到Collection Schema之前，请使用<code translate="no">run_analyzer</code> 方法验证其行为。</p>
 <h3 id="Analyzer-configuration" class="common-anchor-header">分析器配置<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -170,7 +185,12 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Coll
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,  <span class="hljs-comment"># Standard analyzer configuration</span>
     <span class="hljs-string">&quot;stop_words&quot;</span>: [<span class="hljs-string">&quot;for&quot;</span>] <span class="hljs-comment"># Optional: Custom stop words parameter</span>
@@ -192,7 +212,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">验证使用<code translate="no">run_analyzer</code><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
+<h3 id="Verification-using-runanalyzer" class="common-anchor-header">使用以下方式进行验证<code translate="no">run_analyzer</code><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -208,7 +228,12 @@ analyzerParams=<span class="hljs-string">&#x27;{
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,
 )

@@ -36,7 +36,7 @@ title: تثبيت Milvus Cluster باستخدام Helm
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يستخدم Helm تنسيق حزم يُسمى "الرسوم البيانية". والرسوم البيانية عبارة عن مجموعة من الملفات التي تصف مجموعة ذات صلة من موارد Kubernetes. يوفر Milvus مجموعة من الرسوم البيانية لمساعدتك في نشر تبعيات ومكونات Milvus.</p>
+    </button></h2><p>يستخدم Helm تنسيق حزم يُسمى "الرسوم البيانية". والرسوم البيانية عبارة عن مجموعة من الملفات التي تصف مجموعة مترابطة من موارد Kubernetes. يوفر Milvus مجموعة من الرسوم البيانية لمساعدتك في نشر تبعيات ومكونات Milvus.</p>
 <h2 id="Prerequisites" class="common-anchor-header">المتطلبات<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -62,7 +62,7 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>تحقق <a href="/docs/ar/v2.6.x/prerequisite-helm.md">من متطلبات الأجهزة والبرامج</a> قبل التثبيت.</p></li>
-<li><p>قبل تثبيت Milvus، يُنصح باستخدام أداة <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> لتقدير متطلبات الأجهزة بناءً على حجم البيانات لديك. يساعد ذلك في ضمان الأداء الأمثل وتخصيص الموارد بشكل مثالي لتثبيت Milvus الخاص بك.</p></li>
+<li><p>قبل تثبيت Milvus، يوصى باستخدام أداة <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> لتقدير متطلبات الأجهزة بناءً على حجم البيانات لديك. يساعد ذلك في ضمان الأداء الأمثل وتخصيص الموارد بشكل مثالي لتثبيت Milvus الخاص بك.</p></li>
 </ul>
 <div class="alert note">
 <p>إذا واجهت أي مشكلات في سحب الصورة، فاتصل بنا على <a href="mailto:community@zilliz.com">community@zilliz.com</a> مع تفاصيل حول المشكلة، وسنقدم لك الدعم اللازم.</p>
@@ -127,7 +127,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>هل تحتاج إلى نشر مستقل بدلاً من ذلك؟</strong></p>
 <p>إذا كنت تفضل نشر Milvus في الوضع المستقل (عقدة واحدة) لأغراض التطوير أو الاختبار، فاستخدم هذا الأمر:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.20 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.21 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
@@ -137,9 +137,9 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>ملاحظة</strong>: يستخدم الوضع المستقل Woodpecker كقائمة انتظار الرسائل الافتراضية ويقوم بتمكين مكون Streaming Node. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.6.x/architecture_overview.md">«نظرة عامة</a> على <a href="/docs/ar/v2.6.x/architecture_overview.md">البنية</a> » <a href="/docs/ar/v2.6.x/use-woodpecker.md">و«استخدام Woodpecker</a>».</p>
 </div>
 <p><strong>نشر مجموعة Milvus:</strong></p>
-<p>ينشر الأمر التالي مجموعة Milvus بإعدادات مُحسّنة للإصدار v2.6.20، باستخدام Woodpecker كقائمة انتظار الرسائل الموصى بها:</p>
+<p>يقوم الأمر التالي بنشر مجموعة Milvus بإعدادات مُحسَّنة للإصدار v2.6.21، باستخدام Woodpecker كقائمة انتظار الرسائل الموصى بها:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.20 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.21 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -164,7 +164,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>خيارات بديلة لقائمة انتظار الرسائل:</strong></p>
 <p>إذا كنت تفضل استخدام <strong>Pulsar</strong> (الخيار التقليدي) بدلاً من Woodpecker:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.20 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.21 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -206,7 +206,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
     </button></h3><p>تأكد من نجاح عملية النشر عن طريق التحقق من حالة البودات:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>انتظر حتى تظهر حالة «Running» لجميع البودات.</strong> مع التكوين v2.6.20، من المفترض أن ترى بودات مشابهة لما يلي:</p>
+<p><strong>انتظر حتى تظهر حالة «قيد التشغيل» لجميع البودات.</strong> مع التكوين v2.6.21، من المفترض أن ترى بودات مشابهة لما يلي:</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
@@ -323,7 +323,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يأتي Milvus مزودًا بأداة واجهة مستخدم رسومية مدمجة تسمى Milvus WebUI يمكنك الوصول إليها من خلال متصفحك. تعمل واجهة Milvus WebUI على تحسين قابلية مراقبة النظام بفضل واجهة بسيطة وسهلة الاستخدام. يمكنك استخدام واجهة Milvus WebUI لمراقبة الإحصائيات والمقاييس الخاصة بمكونات Milvus وتبعياته، والتحقق من تفاصيل قاعدة البيانات والمجموعات، وعرض قائمة بتكوينات Milvus التفصيلية. للحصول على تفاصيل حول واجهة المستخدم الرسومية لـ Milvus، راجع <a href="/docs/ar/v2.6.x/milvus-webui.md">Milvus WebUI</a></p>
+    </button></h2><p>يأتي Milvus مزودًا بأداة واجهة مستخدم رسومية مدمجة تسمى Milvus WebUI يمكنك الوصول إليها من خلال متصفحك. تعزز واجهة Milvus WebUI قابلية مراقبة النظام بفضل واجهة بسيطة وسهلة الاستخدام. يمكنك استخدام واجهة Milvus WebUI لمراقبة الإحصائيات والمقاييس الخاصة بمكونات Milvus وتبعياته، والتحقق من تفاصيل قاعدة البيانات والمجموعات، وعرض قائمة بتكوينات Milvus التفصيلية. للحصول على تفاصيل حول واجهة المستخدم الرسومية لـ Milvus، راجع <a href="/docs/ar/v2.6.x/milvus-webui.md">Milvus WebUI</a></p>
 <p>لتمكين الوصول إلى واجهة المستخدم الرسومية لـ Milvus WebUI، تحتاج إلى إعادة توجيه منفذ pod الوكيل إلى منفذ محلي.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
@@ -424,7 +424,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يمكنك الآن تحميل الصور إلى المضيفات في البيئة المقيدة شبكيًا على النحو التالي:</p>
+    </button></h3><p>يمكنك الآن تحميل الصور إلى المضيفات في البيئة المقيدة بالشبكة على النحو التالي:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-keyword">for</span> image <span class="hljs-keyword">in</span> $(find . -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&quot;*.tar.gz&quot;</span>) ; <span class="hljs-keyword">do</span> gunzip -c <span class="hljs-variable">$image</span> | docker load; <span class="hljs-keyword">done</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="5-Deploy-Milvus" class="common-anchor-header">5. نشر Milvus<button data-href="#5-Deploy-Milvus" class="anchor-icon" translate="no">

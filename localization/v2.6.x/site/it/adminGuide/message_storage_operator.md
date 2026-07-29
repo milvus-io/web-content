@@ -19,7 +19,7 @@ summary: Scopri come configurare l'archiviazione dei messaggi con Milvus Operato
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus utilizza RocksMQ, Pulsar o Kafka per gestire i log delle modifiche recenti, generare log di flusso e fornire sottoscrizioni ai log. Questo argomento illustra come configurare le dipendenze relative all'archiviazione dei messaggi quando si installa Milvus con Milvus Operator. Per ulteriori dettagli, consultare la sezione <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">"Configurazione dell'archiviazione dei messaggi con Milvus Operator</a> " nel repository di Milvus Operator.</p>
+    </button></h1><p>Milvus utilizza RocksMQ, Pulsar o Kafka per gestire i log delle modifiche recenti, generare log in streaming e fornire sottoscrizioni ai log. Questo argomento illustra come configurare le dipendenze relative all'archiviazione dei messaggi quando si installa Milvus con Milvus Operator. Per ulteriori dettagli, consultare la sezione <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">"Configurazione dell'archiviazione dei messaggi con Milvus Operator</a> " nel repository di Milvus Operator.</p>
 <p>Questo argomento presuppone che Milvus Operator sia già stato distribuito.</p>
 <div class="alert note">Per ulteriori informazioni, consultare " <a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">Distribuzione di Milvus Operator</a> ". </div>
 <p>È necessario specificare un file di configurazione per utilizzare Milvus Operator e avviare un cluster Milvus.</p>
@@ -53,14 +53,14 @@ summary: Scopri come configurare l'archiviazione dei messaggi con Milvus Operato
 </table>
 <p>Esistono anche altre limitazioni relative alla specificazione dell'archivio messaggi:</p>
 <ul>
-<li>È supportato un solo archivio messaggi per ogni istanza di Milvus. Tuttavia, è ancora garantita la retrocompatibilità con la configurazione di più archivi messaggi per una singola istanza. L'ordine di priorità è il seguente:
+<li>È supportato un solo archivio messaggi per ogni istanza di Milvus. Tuttavia, è ancora garantita la retrocompatibilità con più archivi messaggi configurati per una singola istanza. L'ordine di priorità è il seguente:
 <ul>
 <li>modalità standalone:  RocksMQ (predefinito) &gt; Pulsar &gt; Kafka</li>
 <li>modalità cluster: Pulsar (predefinito) &gt; Kafka</li>
 </ul></li>
-<li>L'archivio messaggi non può essere modificato mentre il sistema Milvus è in esecuzione.</li>
+<li>L'archivio dei messaggi non può essere modificato mentre il sistema Milvus è in esecuzione.</li>
 <li>Sono supportate solo le versioni 2.x o 3.x di Kafka.</li>
-<li><strong>Limiti dell’aggiornamento</strong>: <strong>Limiti relativi alle code di messaggi</strong>: durante l’aggiornamento a Milvus v2.6.20, è necessario mantenere la scelta attuale della coda di messaggi. Il passaggio da un sistema di code di messaggi a un altro durante l’aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code di messaggi sarà disponibile nelle versioni future.</li>
+<li><strong>Limiti dell'aggiornamento</strong>: <strong>Limiti della coda dei messaggi</strong>: durante l'aggiornamento a Milvus v2.6.21, è necessario mantenere la coda dei messaggi attualmente in uso. Il passaggio da un sistema di code dei messaggi a un altro durante l'aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code dei messaggi sarà disponibile nelle versioni future.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Configurazione di RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -79,7 +79,7 @@ summary: Scopri come configurare l'archiviazione dei messaggi con Milvus Operato
       </svg>
     </button></h2><p>RocksMQ è l’archivio messaggi predefinito in Milvus standalone.</p>
 <div class="alert note">
-<p>Attualmente, è possibile configurare RocksMQ come archivio dei messaggi per Milvus standalone solo tramite Milvus Operator.</p>
+<p>Attualmente, è possibile configurare RocksMQ come archivio messaggi per Milvus standalone solo tramite Milvus Operator.</p>
 </div>
 <h4 id="Example" class="common-anchor-header">Esempio</h4><p>L'esempio seguente illustra la configurazione di un servizio RocksMQ.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
@@ -144,7 +144,7 @@ summary: Scopri come configurare l'archiviazione dei messaggi con Milvus Operato
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pulsar gestisce i log delle modifiche recenti, genera log di stream e fornisce sottoscrizioni ai log. La configurazione di Pulsar come archivio dei messaggi è supportata sia in Milvus standalone che nel cluster Milvus. Tuttavia, con Milvus Operator, è possibile configurare Pulsar come archivio dei messaggi solo per il cluster Milvus. Aggiungere i campi obbligatori in " <code translate="no">spec.dependencies.pulsar</code> " per configurare Pulsar.</p>
+    </button></h2><p>Pulsar gestisce i log delle modifiche recenti, genera log di streaming e fornisce sottoscrizioni ai log. La configurazione di Pulsar come archivio dei messaggi è supportata sia in Milvus standalone che nel cluster Milvus. Tuttavia, con Milvus Operator, è possibile configurare Pulsar come archivio dei messaggi solo per il cluster Milvus. Aggiungere i campi obbligatori in " <code translate="no">spec.dependencies.pulsar</code> " per configurare Pulsar.</p>
 <p><code translate="no">pulsar</code> Supporta <code translate="no">external</code> e <code translate="no">inCluster</code>.</p>
 <h3 id="External-Pulsar" class="common-anchor-header">Pulsar esterno<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"

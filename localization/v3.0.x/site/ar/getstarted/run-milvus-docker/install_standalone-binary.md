@@ -55,13 +55,13 @@ title: تثبيت Milvus المستقل باستخدام حزمة RPM/DEB
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكنك تنزيل حزمة RPM/DEB وفقًا لهيكل نظامك من <a href="https://github.com/milvus-io/milvus/releases/tag/v3.0-beta">صفحة إصدارات Milvus</a>.</p>
+    </button></h2><p>يمكنك تنزيل حزمة RPM/DEB وفقًا لهيكل نظامك من <a href="https://github.com/milvus-io/milvus/releases/tag/v3.0.0">صفحة إصدارات Milvus</a>.</p>
 <ul>
-<li>بالنسبة لـ x86_64/amd64، قم بتنزيل الحزمة <strong>milvus_2.6.17-1_amd64.deb</strong> أو <strong>milvus_2.6.17-1_amd64.rpm</strong>.</li>
-<li>بالنسبة لنظام ARM64، قم بتنزيل حزمة <strong>milvus_2.6.17-1_arm64.deb</strong> أو <strong>milvus_2.6.17-1_arm64.rpm</strong>.</li>
+<li>بالنسبة لـ x86_64/amd64، قم بتنزيل حزمة <strong>milvus_3.0.0-1_amd64.deb</strong> أو <strong>milvus_3.0.0-1_amd64.rpm</strong>.</li>
+<li>بالنسبة لنظام ARM64، قم بتنزيل حزمة <strong>milvus_3.0.0-1_arm64.deb</strong> أو <strong>milvus_3.0.0-1_arm64.rpm</strong>.</li>
 </ul>
 <p>يفترض الأمر التالي أنك ستقوم بتشغيل Milvus Standalone على جهاز x86_64/amd64.</p>
-<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus_2.6.17-1_amd64.rpm -O milvus_2.6.17-1_amd64.rpm
+<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v3.0.0/milvus_3.0.0-1_amd64.rpm -O milvus_3.0.0-1_amd64.rpm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-the-RPMDEB-Package" class="common-anchor-header">تثبيت حزمة RPM/DEB<button data-href="#Install-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -79,12 +79,12 @@ title: تثبيت Milvus المستقل باستخدام حزمة RPM/DEB
         ></path>
       </svg>
     </button></h2><p>لتثبيت حزمة RPM/DEB، يمكنك استخدام مدير الحزم في نظامك.</p>
-<p>بالنسبة للأنظمة القائمة على RPM (مثل CentOS و Fedora و RHEL)، استخدم الأمر <code translate="no">yum</code> لتثبيت الحزمة.</p>
-<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.17-1_amd64.rpm
+<p>بالنسبة للأنظمة القائمة على RPM (مثل CentOS وFedora وRHEL)، استخدم الأمر <code translate="no">yum</code> لتثبيت الحزمة.</p>
+<pre><code translate="no" class="language-shell">yum install -y ./milvus_3.0.0-1_amd64.rpm
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>بالنسبة للأنظمة القائمة على DEB (مثل Ubuntu وDebian)، استخدم الأمر <code translate="no">apt</code> لتثبيت الحزمة.</p>
-<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.17-1_amd64.deb
+<pre><code translate="no" class="language-shell">apt install -y  ./milvus_3.0.0-1_amd64.deb
 dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Start-Milvus-Standalone" class="common-anchor-header">تشغيل Milvus بشكل مستقل<button data-href="#Start-Milvus-Standalone" class="anchor-icon" translate="no">
@@ -118,6 +118,9 @@ dpkg -l | grep milvus
            <span class="hljs-string">└─1044122</span> <span class="hljs-string">/usr/bin/milvus</span> <span class="hljs-string">run</span> <span class="hljs-string">standalone</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>يمكنك العثور على ملف Milvus الثنائي على <code translate="no">/usr/bin/milvus</code> ، وملف خدمة systemd على <code translate="no">/lib/systemd/system/milvus.service</code> ، والتبعيات على <code translate="no">/usr/lib/milvus/</code>.</p>
+<div class="alert note">
+<p>بشكل افتراضي، يعمل Milvus Standalone على تشغيل <strong>Woodpecker</strong> (نظام الملفات المحلي) كقائمة انتظار الرسائل الخاصة به مع etcd المدمج، لذلك لا توجد حاجة إلى خدمة مراسلة خارجية أو خدمة بيانات وصفية. انظر <a href="/docs/ar/woodpecker.md">Woodpecker</a>.</p>
+</div>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(اختياري) تحديث تكوينات Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -174,6 +177,9 @@ dpkg -l | grep milvus
 <p>بالنسبة للأنظمة القائمة على DEB:</p>
 <pre><code translate="no" class="language-shell">apt remove milvus
 <button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>يتم تعطيل Storage V3 افتراضيًا. قم بتمكينه قبل استخدام الميزات التي تعتمد عليه. للاطلاع على المتطلبات واعتبارات التوافق، راجع <a href="/docs/ar/storage-v3.md">Storage V3</a>.</p>
+</div>
 <h2 id="Whats-next" class="common-anchor-header">الخطوة التالية<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -191,7 +197,7 @@ dpkg -l | grep milvus
       </svg>
     </button></h2><p>بعد تثبيت Milvus Standalone، يمكنك:</p>
 <ul>
-<li><p>الاطلاع على <a href="/docs/ar/quickstart.md">«البدء السريع»</a> لمعرفة ما يمكن لـ Milvus القيام به.</p></li>
+<li><p>راجع <a href="/docs/ar/quickstart.md">«البدء السريع</a> » لمعرفة ما يمكن لـ Milvus القيام به.</p></li>
 <li><p>تعلم العمليات الأساسية لـ Milvus:</p>
 <ul>
 <li><a href="/docs/ar/manage_databases.md">إدارة قواعد البيانات</a></li>
@@ -210,7 +216,7 @@ dpkg -l | grep milvus
 <li><a href="/docs/ar/azure.md">Microsoft Azure</a></li>
 </ul></li>
 <li><p>استكشف <a href="/docs/ar/milvus-webui.md">Milvus WebUI،</a> وهي واجهة ويب سهلة الاستخدام لمراقبة وإدارة Milvus.</p></li>
-<li><p>استكشف <a href="/docs/ar/milvus_backup_overview.md">Milvus Backup</a>، وهي أداة مفتوحة المصدر لنسخ بيانات Milvus احتياطيًا.</p></li>
+<li><p>اكتشف <a href="/docs/ar/milvus_backup_overview.md">Milvus Backup</a>، وهي أداة مفتوحة المصدر لنسخ بيانات Milvus احتياطيًا.</p></li>
 <li><p>اكتشف <a href="/docs/ar/birdwatcher_overview.md">Birdwatcher،</a> وهي أداة مفتوحة المصدر لتصحيح أخطاء Milvus وتحديثات التكوين الديناميكية.</p></li>
 <li><p>اكتشف <a href="https://github.com/zilliztech/attu">Attu،</a> وهي أداة واجهة مستخدم رسومية مفتوحة المصدر لإدارة Milvus بطريقة بديهية.</p></li>
 <li><p><a href="/docs/ar/monitor.md">راقب Milvus باستخدام Prometheus</a>.</p></li>

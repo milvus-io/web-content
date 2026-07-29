@@ -1,12 +1,13 @@
 ---
 id: insert-update-delete.md
-title: Inserire entità
+title: Inserimento di entità
 summary: >-
-  Le entità di una raccolta sono record di dati che condividono lo stesso
-  insieme di campi. I valori dei campi in ogni record di dati formano un'entità.
-  Questa pagina spiega come inserire le entità in una collezione.
+  Le entità presenti in una raccolta sono record di dati che condividono lo
+  stesso insieme di campi. I valori dei campi presenti in ogni record di dati
+  formano un'entità. Questa pagina illustra come inserire entità in una
+  raccolta.
 ---
-<h1 id="Insert-Entities" class="common-anchor-header">Inserire entità<button data-href="#Insert-Entities" class="anchor-icon" translate="no">
+<h1 id="Insert-Entities" class="common-anchor-header">Inserimento di entità<button data-href="#Insert-Entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,11 +22,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Le entità di una raccolta sono record di dati che condividono lo stesso insieme di campi. I valori dei campi in ogni record di dati formano un'entità. Questa pagina spiega come inserire le entità in una raccolta.</p>
+    </button></h1><p>Le entità in una raccolta sono record di dati che condividono lo stesso insieme di campi. I valori dei campi in ogni record di dati formano un'entità. Questa pagina illustra come inserire entità in una raccolta.</p>
 <div class="alert note">
 <ul>
-<li><p><strong>Campi aggiunti dopo la creazione della raccolta</strong>: Se si aggiungono nuovi campi a una raccolta dopo la creazione e non si specificano i valori durante l'inserimento, Milvus li popola automaticamente con i valori predefiniti definiti o con NULL se non sono stati impostati valori predefiniti. Per ulteriori informazioni, consultare <a href="/docs/it/add-fields-to-an-existing-collection.md">Aggiungi campi a una raccolta esistente</a>.</p></li>
-<li><p><strong>Gestione dei duplicati</strong>: L'operazione standard <code translate="no">insert</code> non controlla la presenza di chiavi primarie duplicate. L'inserimento di dati con una chiave primaria esistente crea una nuova entità con la stessa chiave, causando la duplicazione dei dati e potenziali problemi di applicazione. Per aggiornare le entità esistenti o evitare i duplicati, utilizzare l'operazione <strong><code translate="no">upsert</code></strong> invece di utilizzare l'operazione. Per ulteriori informazioni, consultare <a href="/docs/it/upsert-entities.md">Upsert Entities</a>.</p></li>
+<li><p><strong>Campi aggiunti dopo la creazione della collezione</strong>: se si aggiungono nuovi campi a una collezione dopo la sua creazione e non si specificano valori durante l’inserimento, Milvus li popola automaticamente con i valori predefiniti definiti o con " <code translate="no">NULL</code> " se non sono stati impostati valori predefiniti. Per ulteriori dettagli, consultare la sezione <a href="/docs/it/add-fields-to-an-existing-collection.md">Modifica dello schema della collezione</a>.</p></li>
+<li><p><strong>Gestione dei duplicati</strong>: l’operazione standard " <code translate="no">insert</code> " non verifica la presenza di chiavi primarie duplicate. L’inserimento di dati con una chiave primaria già esistente crea una nuova entità con la stessa chiave, causando la duplicazione dei dati e potenziali problemi nell’applicazione. Per aggiornare le entità esistenti o evitare duplicati, utilizzare invece l’ <strong><code translate="no">upsert</code></strong> . Per ulteriori informazioni, consultare la sezione " <a href="/docs/it/upsert-entities.md">Upsert delle entità</a>".</p></li>
 </ul>
 </div>
 <h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
@@ -43,10 +44,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Milvus, un'<strong>Entità</strong> si riferisce ai record di dati in una <strong>Collezione</strong> che condividono lo stesso <strong>Schema</strong>, con i dati in ogni campo di una riga che costituiscono un'Entità. Pertanto, le Entità all'interno della stessa Collezione hanno gli stessi attributi (come i nomi dei campi, i tipi di dati e altri vincoli).</p>
-<p>Quando si inserisce un'entità in una collezione, l'entità da inserire può essere aggiunta con successo solo se contiene tutti i campi definiti nello schema. L'entità inserita entrerà in una partizione denominata <strong>_default</strong> nell'ordine di inserimento. A condizione che esista una determinata partizione, è possibile inserire Entità in quella partizione specificando il nome della partizione nella richiesta di inserimento.</p>
-<p>Milvus supporta anche i campi dinamici per mantenere la scalabilità della collezione. Quando il campo dinamico è abilitato, è possibile inserire nella Collezione campi non definiti nello Schema. Questi campi e valori saranno memorizzati come coppie chiave-valore in un campo riservato chiamato <strong>$meta</strong>. Per ulteriori informazioni sui campi dinamici, consultare Campo dinamico.</p>
-<h2 id="Insert-Entities-into-a-Collection" class="common-anchor-header">Inserire entità in una collezione<button data-href="#Insert-Entities-into-a-Collection" class="anchor-icon" translate="no">
+    </button></h2><p>In Milvus, <strong>un’entità</strong> si riferisce ai record di dati in una <strong>raccolta</strong> che condividono lo stesso <strong>schema</strong>, dove i dati in ciascun campo di una riga costituiscono un’entità. Pertanto, le entità all’interno della stessa raccolta hanno gli stessi attributi (come nomi dei campi, tipi di dati e altri vincoli).</p>
+<p>Quando si inserisce un’entità in una collezione, l’entità da inserire può essere aggiunta con successo solo se contiene tutti i campi definiti nello schema. L’entità inserita entrerà in una partizione denominata <strong>_default</strong> nell’ordine di inserimento. A condizione che esista una determinata partizione, è anche possibile inserire entità in quella partizione specificando il nome della partizione nella richiesta di inserimento.</p>
+<p>Milvus supporta inoltre i campi dinamici per mantenere la scalabilità della collezione. Quando il campo dinamico è abilitato, è possibile inserire nella collezione campi non definiti nello schema. Questi campi e valori saranno memorizzati come coppie chiave-valore in un campo riservato denominato <strong>$meta</strong>. Per ulteriori informazioni sui campi dinamici, consultare la sezione Campi dinamici.</p>
+<h2 id="Insert-Entities-into-a-Collection" class="common-anchor-header">Inserimento di entità in una collezione<button data-href="#Insert-Entities-into-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,10 +62,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Prima di inserire i dati, è necessario organizzare i dati in un elenco di dizionari secondo lo Schema, con ogni dizionario che rappresenta un'Entità e contiene tutti i campi definiti nello Schema. Se la Collezione ha il campo dinamico abilitato, ogni dizionario può includere anche campi non definiti nello Schema.</p>
-<p>In questa sezione, si inseriranno le entità in una Raccolta creata in modo rapido. Una raccolta creata in questo modo ha solo due campi, denominati <strong>id</strong> e <strong>vector</strong>. Inoltre, questa Raccolta ha il campo dinamico abilitato, quindi le Entità nel codice di esempio includono un campo chiamato <strong>colore</strong> che non è definito nello Schema.</p>
+    </button></h2><p>Prima di inserire i dati, è necessario organizzare i dati in un elenco di dizionari secondo lo schema, dove ogni dizionario rappresenta un’entità e contiene tutti i campi definiti nello schema. Se nella collezione è abilitato il campo dinamico, ogni dizionario può includere anche campi non definiti nello schema.</p>
+<p>In questa sezione, inserirai entità in una collezione creata tramite la configurazione rapida. Una collezione creata in questo modo presenta solo due campi, denominati <strong>id</strong> e <strong>vector</strong>. Inoltre, in questa collezione è abilitato il campo dinamico, pertanto le entità nel codice di esempio includono un campo denominato <strong>color</strong> che non è definito nello schema.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -221,7 +227,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},
@@ -257,7 +262,7 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-Entities-into-a-Partition" class="common-anchor-header">Inserire entità in una partizione<button data-href="#Insert-Entities-into-a-Partition" class="anchor-icon" translate="no">
+<h2 id="Insert-Entities-into-a-Partition" class="common-anchor-header">Inserimento di entità in una partizione<button data-href="#Insert-Entities-into-a-Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -272,9 +277,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>È anche possibile inserire entità in una partizione specificata. I seguenti frammenti di codice presuppongono che nella collezione sia presente una partizione denominata <strong>PartitionA</strong>.</p>
+    </button></h2><p>È anche possibile inserire entità in una partizione specificata. I seguenti frammenti di codice presuppongono che nella propria collezione sia presente una partizione denominata <strong>PartitionA</strong>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data=[
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">11</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -396,7 +406,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 10, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},

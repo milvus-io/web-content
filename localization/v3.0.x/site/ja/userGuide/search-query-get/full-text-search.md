@@ -21,7 +21,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>全文検索とは、テキストデータセットの中から特定の用語やフレーズを含むドキュメントを検索し、関連性に基づいて結果をランク付けする機能です。この機能により、正確な用語を見逃してしまう可能性のあるセマンティック検索の限界を克服し、最も正確で文脈に即した検索結果を得ることができます。 さらに、生のテキスト入力を受け付け、手動でベクトル埋め込みを生成する必要なく、テキストデータを自動的にスパース埋め込みに変換することで、ベクトル検索を簡素化します。</p>
-<p>関連性スコアリングにBM25アルゴリズムを採用しているこの機能は、特定の検索用語と密接に一致する文書を優先する「検索強化生成（RAG）」のシナリオにおいて、特に有用です。</p>
+<p>関連性スコアリングにBM25アルゴリズムを採用しているこの機能は、特定の検索用語と密接に一致するドキュメントを優先する「検索強化生成（RAG）」のシナリオにおいて、特に有用です。</p>
 <div class="alert note">
 <p>全文検索とセマンティックベースの密ベクトル検索を統合することで、検索結果の精度と関連性を高めることができます。詳細については、「<a href="/docs/ja/multi-vector-search.md">ハイブリッド検索</a>」を参照してください。</p>
 </div>
@@ -57,7 +57,7 @@ summary: >-
  </span></p>
 <p>全文検索を使用するには、以下の主な手順に従ってください：</p>
 <ol>
-<li><p><a href="/docs/ja/full-text-search.md#Create-a-collection-for-BM25-full-text-search">コレクションの作成</a>：必要なフィールドを設定し、生テキストをスパース埋め込みに変換するBM25関数を定義します。</p></li>
+<li><p><a href="/docs/ja/full-text-search.md#Create-a-collection-for-BM25-full-text-search">コレクションの作成</a>：必要なフィールドを設定し、生テキストを疎な埋め込み表現に変換するBM25関数を定義します。</p></li>
 <li><p><a href="/docs/ja/full-text-search.md#Insert-text-data">データの挿入</a>：生のテキスト文書をコレクションに取り込みます。</p></li>
 <li><p><a href="/docs/ja/full-text-search.md#Perform-full-text-search">検索の実行</a>：自然言語のクエリテキストを使用して、BM25の関連性に基づいてランク付けされた検索結果を取得します。</p></li>
 </ol>
@@ -95,8 +95,8 @@ summary: >-
     </button></h3><p>コレクションのスキーマには、少なくとも以下の 3 つの必須フィールドを含める必要があります。</p>
 <ul>
 <li><p><strong>プライマリフィールド</strong>：コレクション内の各エンティティを一意に識別します。</p></li>
-<li><p><strong>テキストフィールド</strong>（<code translate="no">VARCHAR</code> ）：生のテキストドキュメントを格納します。MilvusがBM25の関連性ランキング処理のためにテキストを処理できるよう、<code translate="no">enable_analyzer=True</code> を設定する必要があります。デフォルトでは、Milvusは <a href="/docs/ja/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/ja/standard-analyzer.md"> アナライザー</a>を使用します。別のアナライザーを設定するには、「<a href="/docs/ja/analyzer-overview.md">アナライザーの概要</a>」を参照してください。</p></li>
-<li><p><strong>スパースベクトルフィールド</strong>(<code translate="no">SPARSE_FLOAT_VECTOR</code>): BM25 関数によって自動的に生成されたスパース埋め込みを格納します。</p></li>
+<li><p><strong>文字列フィールド</strong>（<code translate="no">VARCHAR</code> または<code translate="no">TEXT</code> ）：生のテキストドキュメントを格納します。MilvusがBM25の関連性ランキングのためにテキストを処理できるよう、<code translate="no">enable_analyzer=True</code> を設定する必要があります。デフォルトでは、Milvusは <a href="/docs/ja/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/ja/standard-analyzer.md"> アナライザーを使用します</a>。別のアナライザーを設定するには、「<a href="/docs/ja/analyzer-overview.md">アナライザーの概要」</a>を参照してください。このページの例では<code translate="no">VARCHAR</code> を使用しています。長いテキストの場合は、入力フィールドを<code translate="no">TEXT</code> として定義し、<code translate="no">max_length</code> を省略できます。完全な例については、<a href="/docs/ja/text.md">「テキストフィールド</a>」を参照してください。</p></li>
+<li><p><strong>スパースベクトルフィールド</strong>(<code translate="no">SPARSE_FLOAT_VECTOR</code>)：BM25関数によって自動的に生成されたスパース埋め込みを格納します。</p></li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -232,9 +232,9 @@ schema.WithField(entity.NewField().
 <button class="copy-code-btn"></button></code></pre>
 <p>前述の設定では、</p>
 <ul>
-<li><p><code translate="no">id</code>: は主キーとして機能し、<code translate="no">auto_id=True</code> を使用して自動的に生成されます。</p></li>
-<li><p><code translate="no">text</code>: 全文検索操作用の生のテキストデータを格納します。<code translate="no">VARCHAR</code> はMilvusのテキスト格納用文字列データ型であるため、データ型は<code translate="no">VARCHAR</code> でなければなりません。</p></li>
-<li><p><code translate="no">sparse</code>: 全文検索処理のために内部で生成されたスパース・エンベディングを格納するために予約されたベクトルフィールドです。データ型は<code translate="no">SPARSE_FLOAT_VECTOR</code> でなければなりません。</p></li>
+<li><p><code translate="no">id</code>: は主キーとして機能し、<code translate="no">auto_id=True</code> によって自動的に生成されます。</p></li>
+<li><p><code translate="no">text</code>: 全文検索操作用の生テキストデータを格納します。このフィールドでは、範囲が限定されたテキストの場合は `<code translate="no">VARCHAR</code> ` を、長文のソースコンテンツの場合は `<code translate="no">TEXT</code> ` を使用できます。</p></li>
+<li><p><code translate="no">sparse</code>: 全文検索操作用に内部で生成されたスパース埋め込みを格納するために予約されたベクトルフィールドです。データ型は<code translate="no">SPARSE_FLOAT_VECTOR</code> でなければなりません。</p></li>
 </ul>
 <h3 id="Define-the-BM25-function" class="common-anchor-header">BM25関数の定義<button data-href="#Define-the-BM25-function" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -262,7 +262,7 @@ schema.WithField(entity.NewField().
 </div>
 <pre><code translate="no" class="language-python">bm25_function = Function(
     name=<span class="hljs-string">&quot;text_bm25_emb&quot;</span>, <span class="hljs-comment"># Function name</span>
-    input_field_names=[<span class="hljs-string">&quot;text&quot;</span>], <span class="hljs-comment"># Name of the VARCHAR field containing raw text data</span>
+    input_field_names=[<span class="hljs-string">&quot;text&quot;</span>], <span class="hljs-comment"># Name of the VARCHAR or TEXT field containing raw text data</span>
     output_field_names=[<span class="hljs-string">&quot;sparse&quot;</span>], <span class="hljs-comment"># Name of the SPARSE_FLOAT_VECTOR field reserved to store generated embeddings</span>
 <span class="highlighted-wrapper-line">    function_type=FunctionType.BM25, <span class="hljs-comment"># Set to `BM25`</span></span>
 )
@@ -339,23 +339,23 @@ schema.WithFunction(function)
    </tr>
    <tr>
      <td><p><code translate="no">name</code></p></td>
-     <td><p>関数の名前。この関数は、<code translate="no">text</code> フィールドの生のテキストを、BM25互換のスパースベクトルに変換し、<code translate="no">sparse</code> フィールドに格納します。</p></td>
+     <td><p>関数の名前。この関数は、<code translate="no">text</code> フィールドの生のテキストを、<code translate="no">sparse</code> フィールドに格納されるBM25互換のスパースベクトルに変換します。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
-     <td><p>テキストからスパースベクトルへの変換が必要な<code translate="no">VARCHAR</code> フィールドの名前。<code translate="no">FunctionType.BM25</code> の場合、このパラメータには1つのフィールド名のみ指定できます。</p></td>
+     <td><p>テキストからスパースベクトルへの変換が必要な<code translate="no">VARCHAR</code> または<code translate="no">TEXT</code> フィールドの名前。<code translate="no">FunctionType.BM25</code> の場合、このパラメータには1つのフィールド名のみ指定できます。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">output_field_names</code></p></td>
-     <td><p>内部で生成されたスパースベクトルが格納されるフィールド名。<code translate="no">FunctionType.BM25</code> の場合、このパラメータには1つのフィールド名のみ指定可能です。</p></td>
+     <td><p>内部で生成されたスパースベクトルが格納されるフィールド名。<code translate="no">FunctionType.BM25</code> の場合、このパラメータには1つのフィールド名のみ指定できます。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>使用する関数の型。<code translate="no">FunctionType.BM25</code> でなければなりません。</p></td>
+     <td><p>使用する関数のタイプ。<code translate="no">FunctionType.BM25</code> でなければなりません。</p></td>
    </tr>
 </table>
 <div class="alert note">
-<p>複数の `<code translate="no">VARCHAR</code> ` フィールドで BM25 処理が必要な場合は、<strong>フィールドごとに 1 つの BM25 関数を定義し</strong>、それぞれに一意の名前と出力フィールドを指定してください。</p>
+<p>複数のテキストフィールドで BM25 処理が必要な場合は、<strong>フィールドごとに 1 つの BM25 関数を定義し</strong>、それぞれに一意の名前と出力フィールドを指定してください。</p>
 </div>
 <h3 id="Configure-the-index" class="common-anchor-header">インデックスの設定<button data-href="#Configure-the-index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -453,7 +453,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">index_type</code></p></td>
-     <td><p>作成するインデックスのタイプです。「<code translate="no">AUTOINDEX</code> 」を指定すると、Milvusがインデックス設定を自動的に最適化します。インデックス設定をより細かく制御する必要がある場合は、Milvusでスパースベクトル用に利用可能なさまざまなインデックスタイプから選択できます。詳細については、<a href="/docs/ja/index.md#Indexes-supported-in-Milvus">「Milvusでサポートされているインデックス」</a>を参照してください。</p></td>
+     <td><p>作成するインデックスのタイプ。MilvusでのBM25全文検索の場合、この値を<code translate="no">SPARSE_INVERTED_INDEX</code> に設定します。詳細については、<a href="/docs/ja/sparse-inverted-index.md">SPARSE_INVERTED_INDEXを</a>参照してください。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">metric_type</code></p></td>
@@ -465,11 +465,11 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>インデックスの構築およびクエリ実行に使用されるアルゴリズム。有効な値：</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (デフォルト): MaxScore アルゴリズムを使用した、最適化された Document-at-a-Time (DAAT) クエリ処理。MaxScore は、影響度が最小である可能性が高い用語やドキュメントをスキップすることで、<em>k</em>値が高い場合や用語数の多いクエリにおいて、より優れたパフォーマンスを発揮します。 これは、最大影響スコアに基づいて用語を「必須」と「非必須」のグループに分割し、トップkの結果に寄与する可能性のある用語に焦点を当てることで実現されます。</p></li><li><p><code translate="no">"DAAT_WAND"</code>: WANDアルゴリズムを用いた最適化されたDAATクエリ処理。WANDは、最大影響スコアを活用して競争力のないドキュメントをスキップすることで、評価対象となるヒットドキュメントの数を減らしますが、ヒットごとのオーバーヘッドは高くなります。このため、スキップがより実行しやすい、<em>k値が</em>小さいクエリや短いクエリでは、WANDの方が効率的です。</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: 基本的なTerm-at-a-Time (TAAT) クエリ処理。<code translate="no">DAAT_MAXSCORE</code> や<code translate="no">DAAT_WAND</code> と比較すると処理速度は遅くなりますが、<code translate="no">TAAT_NAIVE</code> には独自の利点があります。グローバルコレクションパラメータ（avgdl）の変更にかかわらず静的なままのキャッシュされた最大インパクトスコアを使用するDAATアルゴリズムとは異なり、<code translate="no">TAAT_NAIVE</code> はそうした変更に動的に適応します。</p></li></ul></td>
+     <td><p>BM25スパース反転インデックスの構築およびクエリ実行に使用されるアルゴリズム。有効な値：</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (デフォルト): Document-at-a-Time MaxScore クエリ処理。このオプションは、<em>k</em>値が大きい全文検索ワークロードや、多くの検索語を含むクエリに適しています。背景については、「<a href="https://dl.acm.org/doi/10.1016/0306-4573%2895%2900020-H">クエリ評価: 戦略と最適化</a>」を参照してください。</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Document-at-a-Time WAND クエリ処理。このオプションは、<em>k</em>値が小さいフルテキスト検索ワークロードや、短いクエリに適しています。背景については、「<a href="https://dl.acm.org/doi/10.1145/956863.956944">2 段階検索プロセスを用いた効率的なクエリ評価</a>」を参照してください。</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: 基本的な「Term-at-a-Time」クエリ処理。このオプションは、ベースラインとして、または平均ドキュメント長などのコレクション全体の統計情報に合わせてスコアリングを動的に調整する必要がある場合に使用します。</p></li><li><p><code translate="no">"BLOCK_MAX_MAXSCORE"</code>: ブロックレベルの最大スコアメタデータを用いた MaxScore クエリ処理。背景については、「<a href="https://dl.acm.org/doi/10.1145/2009916.2010048">Block-Max インデックスを用いた高速なトップ k ドキュメント検索</a>」を参照してください。</p></li><li><p><code translate="no">"BLOCK_MAX_WAND"</code>: ブロックレベルの最大スコアメタデータを用いた WAND クエリ処理。背景については、「<a href="https://dl.acm.org/doi/10.1145/2009916.2010048">Block-Max インデックスを用いた高速なトップ k ドキュメント検索</a>」を参照してください。</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
-     <td><p>用語頻度の飽和度を制御します。値が大きいほど、文書ランキングにおける用語頻度の重要度が高まります。値の範囲：[1.2, 2.0]。</p></td>
+     <td><p>用語頻度の飽和度を制御します。値が大きいほど、ドキュメントのランキングにおける用語頻度の重要度が高まります。推奨範囲：[1.2, 2.0]。デフォルト値：1.2。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_b</code></p></td>
@@ -724,7 +724,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">params.drop_ratio_search</code></p></td>
-     <td><p>検索時に無視する重要度の低い用語の割合。詳細については、「<a href="/docs/ja/sparse_vector.md">スパースベクトル</a>」を参照してください。</p></td>
+     <td><p>検索時に無視する重要度の低い用語の割合。値は [0.0, 1.0) の範囲で指定する必要があります。詳細については、「<a href="/docs/ja/sparse_vector.md">スパースベクトル</a>」を参照してください。</p></td>
    </tr>
    <tr>
      <td></td>
@@ -777,7 +777,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>いいえ、全文検索において、BM25関数によって生成されたスパースベクトルに直接アクセスしたり、出力したりすることはできません。詳細は以下の通りです：</p>
+    </button></h3><p>いいえ、フルテキスト検索において、BM25関数によって生成されたスパースベクトルに直接アクセスしたり、出力したりすることはできません。詳細は以下の通りです：</p>
 <ul>
 <li><p>BM25 関数は、ランキングおよび検索のために内部でスパースベクトルを生成します</p></li>
 <li><p>これらのベクトルはスパースフィールドに格納されますが、<code translate="no">output_fields</code></p></li>

@@ -27,7 +27,7 @@ summary: >-
 <p>Sie müssen eine Konfigurationsdatei angeben, um mit dem Milvus Operator einen Milvus-Cluster zu starten.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-string">kubectl</span> <span class="hljs-string">apply</span> <span class="hljs-string">-f</span> <span class="hljs-string">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Sie müssen lediglich die Codevorlage unter „ <code translate="no">milvus_cluster_default.yaml</code> “ bearbeiten, um Abhängigkeiten von Drittanbietern zu konfigurieren. In den folgenden Abschnitten wird erläutert, wie Sie den Objektspeicher, etcd und Pulsar jeweils konfigurieren.</p>
+<p>Sie müssen lediglich die Codevorlage unter „ <code translate="no">milvus_cluster_default.yaml</code> “ bearbeiten, um Abhängigkeiten von Drittanbietern zu konfigurieren. In den folgenden Abschnitten wird beschrieben, wie Sie den Objektspeicher, etcd und Pulsar jeweils konfigurieren.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Bevor Sie beginnen<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -62,7 +62,7 @@ summary: >-
 </ul></li>
 <li>Der Nachrichtenspeicher kann nicht geändert werden, während das Milvus-System läuft.</li>
 <li>Es werden nur die Versionen Kafka 2.x oder 3.x unterstützt.</li>
-<li><strong>Einschränkungen beim Upgrade</strong>: <strong>Einschränkungen bei den Nachrichtenwarteschlangen</strong>: Beim Upgrade auf Milvus v2.6.20 müssen Sie Ihre aktuelle Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</li>
+<li><strong>Einschränkungen beim Upgrade</strong>: <strong>Einschränkungen bei den Nachrichtenwarteschlangen</strong>: Beim Upgrade auf Milvus v2.6.21 müssen Sie Ihre aktuelle Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">RocksMQ konfigurieren<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -283,7 +283,7 @@ Zu den Feldern zur Konfiguration eines externen Pulsar-Dienstes gehören:</p>
     </button></h3><p><code translate="no">external</code> Gibt die Verwendung eines externen Kafka-Dienstes an.</p>
 <p>Zu den Feldern, die zur Konfiguration eines externen Kafka-Dienstes verwendet werden, gehören:</p>
 <ul>
-<li><code translate="no">external</code>: Ein Wert von „ <code translate="no">true</code> “ gibt an, dass Milvus einen externen Kafka-Dienst nutzt.</li>
+<li><code translate="no">external</code>: Ein Wert von „ <code translate="no">true</code> “ gibt an, dass Milvus einen externen Kafka-Dienst verwendet.</li>
 <li><code translate="no">brokerList</code>: Die Liste der Broker, an die die Nachrichten gesendet werden sollen.</li>
 </ul>
 <h4 id="Example" class="common-anchor-header">Beispiel</h4><p>Das folgende Beispiel konfiguriert einen externen Kafka-Dienst.</p>

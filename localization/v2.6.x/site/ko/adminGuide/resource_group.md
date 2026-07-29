@@ -19,7 +19,7 @@ title: 리소스 그룹 관리
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus에서는 리소스 그룹을 사용하여 특정 쿼리 노드를 다른 노드들과 물리적으로 분리할 수 있습니다. 이 가이드에서는 사용자 정의 리소스 그룹을 생성 및 관리하는 방법과 그룹 간에 노드를 이동하는 방법을 단계별로 안내합니다.</p>
+    </button></h1><p>Milvus에서는 리소스 그룹을 사용하여 특정 쿼리 노드를 다른 노드들로부터 물리적으로 분리할 수 있습니다. 이 가이드에서는 사용자 정의 리소스 그룹을 생성 및 관리하는 방법과 그룹 간에 노드를 이동하는 방법을 단계별로 안내합니다.</p>
 <h2 id="What-is-a-resource-group" class="common-anchor-header">리소스 그룹이란?<button data-href="#What-is-a-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,9 +35,9 @@ title: 리소스 그룹 관리
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>리소스 그룹은 Milvus 클러스터 내의 여러 쿼리 노드 또는 모든 쿼리 노드를 포함할 수 있습니다. 사용자에게 가장 적합한 방식에 따라 리소스 그룹 간에 쿼리 노드를 어떻게 할당할지 결정할 수 있습니다. 예를 들어, 다중 컬렉션 환경에서는 각 리소스 그룹에 적절한 수의 쿼리 노드를 할당하고 컬렉션을 서로 다른 리소스 그룹에 로드함으로써, 각 컬렉션 내의 작업이 다른 컬렉션의 작업과 물리적으로 독립적으로 수행되도록 할 수 있습니다.</p>
+    </button></h2><p>리소스 그룹은 Milvus 클러스터 내의 여러 쿼리 노드 또는 모든 쿼리 노드를 포함할 수 있습니다. 사용자에게 가장 적합한 방식에 따라 리소스 그룹 간에 쿼리 노드를 어떻게 할당할지 결정할 수 있습니다. 예를 들어, 다중 컬렉션 환경에서는 각 리소스 그룹에 적절한 수의 쿼리 노드를 할당하고 컬렉션을 서로 다른 리소스 그룹에 로드함으로써, 각 컬렉션 내의 작업이 다른 컬렉션의 작업과 물리적으로 독립적으로 처리되도록 할 수 있습니다.</p>
 <p>Milvus 인스턴스는 시작 시 모든 쿼리 노드를 포함하는 기본 리소스 그룹을 유지하며, 이를 <strong>__default_resource_group으로</strong> 명명합니다.</p>
-<p>버전 2.4.1부터 Milvus는 선언형 리소스 그룹 API를 제공하며, 기존 리소스 그룹 API는 더 이상 사용되지 않습니다. 새로운 선언형 API를 통해 사용자는 항등성을 확보할 수 있어 클라우드 네이티브 환경에서 2차 개발을 더 쉽게 수행할 수 있습니다.</p>
+<p>버전 2.4.1부터 Milvus는 선언형 리소스 그룹 API를 제공하며, 기존 리소스 그룹 API는 더 이상 사용되지 않습니다. 새로운 선언형 API를 통해 사용자는 항등성을 확보할 수 있어, 클라우드 네이티브 환경에서 2차 개발을 보다 쉽게 수행할 수 있습니다.</p>
 <h2 id="Concepts-of-resource-group" class="common-anchor-header">리소스 그룹의 개념<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -71,7 +71,7 @@ title: 리소스 그룹 관리
 <p>단, 다음의 경우는 예외입니다:</p>
 <ul>
 <li>Milvus 클러스터의 쿼리 노드(QueryNodes) 수가 부족할 경우, 즉 <code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code> 인 경우, 항상 충분한 쿼리 노드를 확보하지 못한 리소스 그룹이 존재하게 됩니다.</li>
-<li>Milvus 클러스터의 쿼리 노드 수가 과다한 경우( <code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code>), 중복된 쿼리 노드는 항상 <strong>__default_resource_group에</strong> 우선 배치됩니다.</li>
+<li>Milvus 클러스터의 쿼리 노드 수가 과도한 경우( <code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code>), 중복된 쿼리 노드는 항상 <strong>__default_resource_group에</strong> 우선 배치됩니다.</li>
 </ul>
 <p>물론 클러스터 내 쿼리 노드(QueryNodes)의 수가 변경되면, Milvus는 최종 조건을 충족하도록 지속적으로 조정을 시도합니다. 따라서 먼저 리소스 그룹 구성 변경 사항을 적용한 다음 쿼리 노드(QueryNodes) 스케일링을 수행할 수 있습니다.</p>
 <h2 id="Use-declarative-api-to-manage-resource-group" class="common-anchor-header">선언형 API를 사용하여 리소스 그룹 관리<button data-href="#Use-declarative-api-to-manage-resource-group" class="anchor-icon" translate="no">
@@ -90,7 +90,7 @@ title: 리소스 그룹 관리
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>이 페이지의 모든 코드 예제는 PyMilvus 2.6.16 버전입니다. 코드를 실행하기 전에 PyMilvus를 최신 버전으로 업그레이드하십시오.</p>
+<p>이 페이지의 모든 코드 예제는 PyMilvus 2.6.17 버전입니다. 코드를 실행하기 전에 PyMilvus를 최신 버전으로 업그레이드하십시오.</p>
 </div>
 <ol>
 <li><p>리소스 그룹 생성</p>
@@ -136,7 +136,7 @@ node_num = <span class="hljs-number">0</span>
 <span class="hljs-comment">#   &lt;nodes:[]&gt;              // node detail info</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>리소스 그룹 간에 노드를 이동합니다.</p>
-<p>설명된 리소스 그룹에는 아직 쿼리 노드가 하나도 없다는 것을 알 수 있습니다. 다음과 같이 기본 리소스 그룹에서 생성한 리소스 그룹으로 일부 노드를 이동합니다:
+<p>설명된 리소스 그룹에는 아직 쿼리 노드가 하나도 없다는 것을 알 수 있습니다. 다음과 같이 기본 리소스 그룹에서 생성한 리소스 그룹으로 일부 노드를 이동하십시오:
 클러스터의 <strong>__default_resource_group에</strong> 현재 1개의 QueryNode가 있으며, 생성한 <strong>rg로</strong> 노드 하나를 이동한다고 가정합니다.<code translate="no">update_resource_groups</code> 는 여러 구성 변경에 대한 원자성을 보장하므로, Milvus에서는 중간 상태가 표시되지 않습니다.</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
@@ -174,7 +174,7 @@ milvus_client.load_collection(collection_name, replica_number=<span class="hljs-
 resource_groups = [<span class="hljs-string">&#x27;rg&#x27;</span>]
 milvus_client.load_collection(replica_number=<span class="hljs-number">2</span>, _resource_groups=resource_groups) 
 <button class="copy-code-btn"></button></code></pre>
-<p>또한, 리소스 그룹에 파티션 하나만 로드하고 그 복제본을 여러 리소스 그룹에 분산시킬 수도 있습니다. 다음 예제는 <code translate="no">Books</code> 라는 이름의 컬렉션이 이미 존재하며, 이 컬렉션에 <code translate="no">Novels</code> 라는 이름의 파티션이 있다고 가정합니다.</p>
+<p>또한, 리소스 그룹에 파티션 하나만 로드하고 그 복제본을 여러 리소스 그룹에 분산시킬 수도 있습니다. 다음 예제는 <code translate="no">Books</code> 라는 이름의 컬렉션이 이미 존재하며, 이 컬렉션에 <code translate="no">Novels</code> 라는 파티션이 있다고 가정합니다.</p>
 <pre><code translate="no" class="language-python">collection = <span class="hljs-string">&quot;Books&quot;</span>
 partition = <span class="hljs-string">&quot;Novels&quot;</span>
 
@@ -182,7 +182,7 @@ partition = <span class="hljs-string">&quot;Novels&quot;</span>
 milvus_client.load_partitions(collection, [partition], replica_number=<span class="hljs-number">2</span>, _resource_groups=resource_groups)
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">_resource_groups</code> 는 선택적 매개변수이며, 이를 지정하지 않으면 Milvus가 복제본을 기본 리소스 그룹의 쿼리 노드에 로드합니다.</p>
-<p>Milvus가 컬렉션의 각 복제본을 별도의 리소스 그룹에 로드하도록 하려면, 리소스 그룹의 수가 복제본의 수와 동일해야 합니다.</p></li>
+<p>Milvus가 컬렉션의 각 복제본을 별도의 리소스 그룹에 로드하도록 하려면, 리소스 그룹의 수가 복제본의 수와 같도록 해야 합니다.</p></li>
 <li><p>리소스 그룹 간에 복제본을 이동합니다.</p>
 <p>Milvus는 여러 쿼리 노드에 분산된 <a href="/docs/ko/v2.6.x/glossary.md#Segment">세그먼트</a> 간에 부하 분산을 달성하기 위해 <a href="/docs/ko/v2.6.x/replica.md">복제본을</a> 사용합니다. 다음과 같이 컬렉션의 특정 복제본을 한 리소스 그룹에서 다른 리소스 그룹으로 이동할 수 있습니다.</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
@@ -199,7 +199,7 @@ num_replicas = <span class="hljs-number">1</span>
 <span class="hljs-comment"># Succeeded in moving 1 replica(s) of c from __default_resource_group to rg.</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>리소스 그룹 삭제.</p>
-<p>쿼리 노드가 하나도 없는 리소스 그룹(<code translate="no">limits.node_num = 0</code>)은 언제든지 삭제할 수 있습니다. 이 가이드에서 리소스 그룹 <code translate="no">rg</code> 에는 현재 쿼리 노드가 하나 있습니다. 먼저 리소스 그룹의 구성 <code translate="no">limits.node_num</code> 을 0으로 변경해야 합니다.</p>
+<p>쿼리 노드가 없는 리소스 그룹(<code translate="no">limits.node_num = 0</code>)은 언제든지 삭제할 수 있습니다. 이 가이드에서 리소스 그룹 <code translate="no">rg</code> 에는 현재 쿼리 노드가 하나 있습니다. 먼저 리소스 그룹의 구성 <code translate="no">limits.node_num</code> 을 0으로 변경해야 합니다.</p>
 <pre><code translate="no" class="language-python">resource_group = <span class="hljs-string">&quot;rg
 try:
     milvus_client.update_resource_groups({
@@ -271,8 +271,8 @@ _PENDING_NODES_RESOURCE_GROUP=<span class="hljs-string">&quot;__pending_nodes&qu
 
 init_cluster(<span class="hljs-number">1</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>위의 예제 코드를 사용하여 추가 QueryNode를 보관할 <strong>__pending_nodes라는</strong> 리소스 그룹을 생성합니다. 또한 <strong>rg1과 rg2라는</strong> 두 개의 사용자 전용 리소스 그룹도 생성합니다. 아울러 다른 리소스 그룹이 <strong>__pending_nodes에서</strong> 누락되거나 중복된 QueryNode를 우선적으로 복구하도록 설정합니다.</p></li>
-<li><p>클러스터 수평 확장</p>
+<p>위의 예제 코드를 사용하여 추가 QueryNode를 보관할 <strong>__pending_nodes라는</strong> 리소스 그룹을 생성합니다. 또한 <strong>rg1과 rg2라는</strong> 두 개의 사용자 전용 리소스 그룹을 생성합니다. 아울러 다른 리소스 그룹이 누락되거나 중복된 QueryNode를 <strong>__pending_nodes에서</strong> 우선적으로 복구하도록 설정합니다.</p></li>
+<li><p>클러스터 스케일 아웃</p>
 <p>다음과 같은 확장 기능이 있다고 가정해 봅시다:</p>
 <pre><code translate="no" class="language-python">
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">scale_to</span>(<span class="hljs-params">node_num: <span class="hljs-built_in">int</span></span>):
@@ -315,7 +315,7 @@ scale_to(<span class="hljs-number">4</span>)
 <span class="hljs-comment"># scale the node in __pending_nodes</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h2 id="How-resource-groups-interacts-with-multiple-replicas" class="common-anchor-header">리소스 그룹과 여러 복제본 간의 상호 작용<button data-href="#How-resource-groups-interacts-with-multiple-replicas" class="anchor-icon" translate="no">
+<h2 id="How-resource-groups-interacts-with-multiple-replicas" class="common-anchor-header">리소스 그룹과 여러 레플리카 간의 상호 작용<button data-href="#How-resource-groups-interacts-with-multiple-replicas" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -349,7 +349,7 @@ scale_to(<span class="hljs-number">4</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>다중 테넌트 Milvus 인스턴스를 배포하려면 다음 내용을 참조하십시오:</p>
+    </button></h1><p>다중 테넌트 Milvus 인스턴스를 배포하려면 다음을 참조하십시오:</p>
 <ul>
 <li><a href="/docs/ko/v2.6.x/rbac.md">RBAC 활성화</a></li>
 <li><a href="/docs/ko/v2.6.x/users_and_roles.md">사용자 및 역할</a></li>

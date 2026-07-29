@@ -23,74 +23,35 @@ title: Helmチャートを使用したMilvusクラスタのアップグレード
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>このガイドでは、Helmチャートを使用してMilvusクラスターをv2.5.xからv3.0-betaにアップグレードする方法について説明します。</p>
-<h2 id="Before-you-start" class="common-anchor-header">開始する前に<button data-href="#Before-you-start" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><h3 id="Whats-new-in-v30-beta" class="common-anchor-header">v3.0-betaの新機能<button data-href="#Whats-new-in-v30-beta" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>Milvus 2.5.x から 3.0-beta へのアップグレードには、アーキテクチャ上の大幅な変更が伴います：</p>
-<ul>
-<li><strong>コーディネーターの統合</strong>：従来別々に存在していたコーディネーター（<code translate="no">dataCoord</code> 、<code translate="no">queryCoord</code> 、<code translate="no">indexCoord</code> ）が、単一の<code translate="no">mixCoord</code></li>
-<li><strong>新コンポーネント</strong>：データ処理機能を強化するためのストリーミングノードの導入</li>
-<li><strong>コンポーネントの削除</strong>：<code translate="no">indexNode</code> が削除され、統合されました</li>
-</ul>
-<p>このアップグレードプロセスにより、新しいアーキテクチャへの適切な移行が保証されます。アーキテクチャの変更に関する詳細については、『<a href="/docs/ja/architecture_overview.md">Milvus アーキテクチャ概要</a>』を参照してください。</p>
-<h3 id="Requirements" class="common-anchor-header">要件<button data-href="#Requirements" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p><strong>システム要件：</strong></p>
-<ul>
-<li>Helm バージョン &gt;= 3.14.0</li>
-<li>Kubernetes バージョン &gt;= 1.20.0</li>
-<li>Helmチャート経由でデプロイされたMilvusクラスター</li>
-</ul>
-<p><strong>互換性に関する要件：</strong></p>
-<ul>
-<li>Milvus v2.6.0-rc1 は v3.0-beta<strong>と互換性がありません</strong>。リリース候補版からの直接アップグレードはサポートされていません。</li>
-<li>現在 v2.6.0-rc1 を実行しており、データを保持する必要がある場合は、移行の参考として<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">こちらのコミュニティガイド</a>を参照してください。</li>
-<li>v3.0-beta にアップグレードする前に、<code translate="no">mixCoordinator</code> を有効にした状態で v2.5.16 以降にアップグレード<strong>する必要があります</strong>。</li>
-</ul>
-<p><strong>メッセージキューの制限事項</strong>：Milvus v3.0-beta へアップグレードする際は、現在のメッセージキューの設定を維持する必要があります。アップグレード中に異なるメッセージキューシステムへ切り替えることはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。</p>
+    </button></h1><p>このガイドでは、Helm を使用して Milvus 2.6.x クラスターを v3.0.0 にアップグレードする方法について説明します。</p>
 <div class="alert note">
-Milvus Helmチャートバージョン4.2.21以降、依存関係としてpulsar-v3.xチャートを導入しました。下位互換性を確保するため、Helmをv3.14以降のバージョンにアップグレードし、<code translate="no">helm upgrade</code> を使用する際は必ず<code translate="no">--reset-then-reuse-values</code> オプションを追加してください。
+<p>この手順は、Milvus 2.6.20 から Milvus v3.0.0 へのアップグレードにおいて、Milvus Helm Chart 5.0.22 を使用して検証済みです。他の Milvus 2.6.x パッチリリースや Helm Chart バージョンを使用する場合は、まず本番環境以外でアップグレードを検証してください。</p>
+</div>
+<h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><ul>
+<li>Helm 3.14.0 以降</li>
+<li>Helmによって管理されている既存のMilvus 2.6.xデプロイメント</li>
+<li>既存のデプロイメントで使用されている Helm 値</li>
+<li>Milvus メタデータおよび永続データの最新のバックアップ</li>
+</ul>
+<p><strong>メッセージキューの制限事項</strong>：Milvus v3.0.0 へのアップグレード時には、現在のメッセージキューの設定を維持する必要があります。アップグレード中に異なるメッセージキューシステムへ切り替えることはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。</p>
+<div class="alert warning">
+<p>この手順の一環として、Helm Chartを変更またはダウングレードしないでください。Helmリリース用にすでにインストールされているChartバージョンを維持してください。テスト済みのベースラインでは、Helm Chart 5.0.22を維持し、Milvusイメージタグのみを<code translate="no">v3.0.0</code> に変更しました。</p>
+<p>この手順では、Milvus イメージを 2.6.x に戻すことによるダウングレードやロールバックの妥当性は検証されていません。 v3.0.0 がデータを書き込んだ後、イメージのみのロールバックでは、更新後の状態を読み取れない場合があります。アップグレードに失敗した場合は、書き込みを停止し、アップグレード前のメタデータと永続データのバックアップを復元するリカバリ計画を実行してください。リカバリ計画は、まず本番環境以外で検証してください。</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">アップグレード手順<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -107,7 +68,8 @@ Milvus Helmチャートバージョン4.2.21以降、依存関係としてpulsar
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Upgrade-Helm-Chart" class="common-anchor-header">手順 1: Helm チャートのアップグレード<button data-href="#Step-1-Upgrade-Helm-Chart" class="anchor-icon" translate="no">
+    </button></h2><p>Helm Chart 5.0.22 を使用して作成された検証済みの Milvus 2.6.20 デプロイメントでは、MixCoord および StreamingNode を使用しており、IndexNode は実行されていませんでした。デプロイメントが同じトポロジーを使用している場合、別途 coordinator-migration ステップを行う必要はありません。</p>
+<h3 id="Step-1-Confirm-the-current-topology" class="common-anchor-header">ステップ 1: 現在のトポロジーの確認<button data-href="#Step-1-Confirm-the-current-topology" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -122,17 +84,36 @@ Milvus Helmチャートバージョン4.2.21以降、依存関係としてpulsar
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>まず、Milvus Helmチャートをバージョン5.0.22にアップグレードしてください：</p>
-<pre><code translate="no" class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm
+    </button></h3><p>現在のリリースの全値を保存し、実行中のPodを確認します:</p>
+<pre><code translate="no" class="language-bash">helm get values &lt;release-name&gt; \
+  --namespace &lt;namespace&gt; \
+  --all &gt; milvus-values-before-upgrade.yaml
+
+kubectl get pods --namespace &lt;namespace&gt;
+<button class="copy-code-btn"></button></code></pre>
+<p>クラスターが MixCoord および StreamingNode を使用しており、IndexNode Pod が実行されていないことを確認してください。このガイドの後半で説明するアップグレードコマンドは、既存の Helm 設定値を保持します。現在の設定で IndexNode が有効になっている場合や、別のコンポーネント構成が使用されている場合は、このイメージのみのアップグレードを実行しないでください。 まず、本番環境以外の環境でトポロジーを再現し、エンジニアリング部門が承認した移行計画を策定してください。</p>
+<h3 id="Step-2-Update-the-Helm-repository" class="common-anchor-header">ステップ 2: Helm リポジトリを更新する<button data-href="#Step-2-Update-the-Helm-repository" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus Helmリポジトリを追加または更新します:</p>
+<pre><code translate="no" class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm --force-update
 helm repo update zilliztech
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note"><code translate="no">https://milvus-io.github.io/milvus-helm/</code> にある Milvus Helm チャートリポジトリはアーカイブされました。バージョン 4.0.31 以降のチャートについては、新しいリポジトリ<code translate="no">https://zilliztech.github.io/milvus-helm/</code> をご利用ください。
+<div class="alert note"><code translate="no">https://milvus-io.github.io/milvus-helm/</code> にある Milvus Helm Charts リポジトリはアーカイブされました。チャートバージョン 4.0.31 以降については、新しいリポジトリ<code translate="no">https://zilliztech.github.io/milvus-helm/</code> を使用してください。
 </div>
-<p>HelmチャートのバージョンとMilvusのバージョンの互換性を確認するには：</p>
-<pre><code translate="no" class="language-bash">helm search repo zilliztech/milvus --versions
-<button class="copy-code-btn"></button></code></pre>
-<p>このガイドでは、最新バージョンをインストールすることを前提としています。特定のバージョンをインストールする必要がある場合は、<code translate="no">--version</code> パラメータを適宜指定してください。</p>
-<h3 id="Step-2-Upgrade-to-v2516-with-mixCoordinator" class="common-anchor-header">ステップ 2: mixCoordinator を使用して v2.5.16 にアップグレードする<button data-href="#Step-2-Upgrade-to-v2516-with-mixCoordinator" class="anchor-icon" translate="no">
+<h3 id="Step-3-Upgrade-Milvus" class="common-anchor-header">ステップ 3: Milvus のアップグレード<button data-href="#Step-3-Upgrade-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -147,55 +128,19 @@ helm repo update zilliztech
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>クラスタが現在、個別のコーディネーターを使用しているかどうかを確認します:</p>
-<pre><code translate="no" class="language-bash">kubectl get pods
+    </button></h3><p>Helm リリースにインストールされているチャートのバージョンを確認します:</p>
+<pre><code translate="no" class="language-bash">helm list --namespace &lt;namespace&gt;
 <button class="copy-code-btn"></button></code></pre>
-<p>個別のコーディネーターポッド（<code translate="no">datacoord</code> 、<code translate="no">querycoord</code> 、<code translate="no">indexcoord</code> ）が存在する場合は、v2.5.16 にアップグレードし、<code translate="no">mixCoordinator</code> を有効にしてください:</p>
-<pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.5.16&quot;</span> \
-  --<span class="hljs-built_in">set</span> mixCoordinator.enabled=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> rootCoordinator.enabled=<span class="hljs-literal">false</span> \
-  --<span class="hljs-built_in">set</span> indexCoordinator.enabled=<span class="hljs-literal">false</span> \
-  --<span class="hljs-built_in">set</span> queryCoordinator.enabled=<span class="hljs-literal">false</span> \
-  --<span class="hljs-built_in">set</span> dataCoordinator.enabled=<span class="hljs-literal">false</span> \
+<p>「<code translate="no">CHART</code> 」列の値から「<code translate="no">milvus-</code> 」というプレフィックスを削除し、残りのバージョンを「<code translate="no">&lt;current-chart-version&gt;</code> 」として使用します。その後、アップグレードコマンドを実行します:</p>
+<pre><code translate="no" class="language-bash">helm upgrade &lt;release-name&gt; zilliztech/milvus \
+  --namespace &lt;namespace&gt; \
+  --version &lt;current-chart-version&gt; \
+  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v3.0.0&quot;</span> \
   --reset-then-reuse-values \
-  --version=4.2.58
+  --<span class="hljs-built_in">wait</span> \
+  --<span class="hljs-built_in">timeout</span> 30m
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert-note">
-<p>クラスタがすでに<code translate="no">mixCoordinator</code> を使用している場合は、イメージをアップグレードするだけです:</p>
-<pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.5.16&quot;</span> \
-  --reset-then-reuse-values \
-  --version=4.2.58
-<button class="copy-code-btn"></button></code></pre>
-</div>
-<p>アップグレードが完了するまでお待ちください:</p>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
-kubectl get pods
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Upgrade-to-v30-beta" class="common-anchor-header">ステップ 3: v3.0-beta へのアップグレード<button data-href="#Step-3-Upgrade-to-v30-beta" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p><code translate="no">mixCoordinator</code> を使用して v2.5.16 が正常に動作していることを確認したら、v3.0-beta にアップグレードします:</p>
-<pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v3.0-beta&quot;</span> \
-  --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span> \
-  --reset-then-reuse-values \
-  --version=5.0.22
-<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">--reset-then-reuse-values</code> オプションは、選択したChartのデフォルト設定に対して明示的なイメージのオーバーライドを適用しつつ、以前のリリースからの値を保持します。</p>
 <h2 id="Verify-the-upgrade" class="common-anchor-header">アップグレードの確認<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -211,11 +156,15 @@ kubectl get pods
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>クラスターが新しいバージョンで実行されていることを確認してください:</p>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check pod status</span>
-kubectl get pods
+    </button></h2><p>Helmのリビジョン、Podのステータス、およびコンテナイメージを確認します:</p>
+<pre><code translate="no" class="language-bash">helm <span class="hljs-built_in">history</span> &lt;release-name&gt; --namespace &lt;namespace&gt;
 
-<span class="hljs-comment"># Verify Helm release</span>
-helm list
+kubectl get pods --namespace &lt;namespace&gt;
+
+kubectl get pods --namespace &lt;namespace&gt; \
+  -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>さらにサポートが必要な場合は、<a href="https://milvus.io/docs">Milvusのドキュメント</a>または<a href="https://github.com/milvus-io/milvus/discussions">コミュニティフォーラム</a>をご参照ください。</p>
+<p>必要なすべてのワークロードが利用可能であり、すべての Milvus コンポーネントが `<code translate="no">v3.0.0</code>` を使用しており、既存のコレクションに対してクエリや検索が引き続き可能であることを確認してください。v3.0.0 固有の機能を有効にする前に、これらの確認を完了してください。</p>
+<div class="alert note">
+<p>Milvus 3.0 へのアップグレードだけでは、Storage V3 は有効になりません。アップグレードを確認した後、<a href="/docs/ja/storage-v3.md">Storage V3</a>に依存する機能を有効にする前に、<a href="/docs/ja/storage-v3.md">Storage V3</a>について確認してください。Milvus が Storage V3 データを書き込んだ後は、Storage V3 を読み取れない古いバージョンの Milvus へのダウングレードはサポートされません。</p>
+</div>

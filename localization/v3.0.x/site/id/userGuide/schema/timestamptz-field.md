@@ -1,15 +1,15 @@
 ---
 id: timestamptz-field.md
-title: Bidang TIMESTAMPTZCompatible with Milvus 2.6.6+
+title: Kolom TIMESTAMPTZCompatible with Milvus 2.6.6+
 summary: >-
-  Aplikasi yang melacak waktu di seluruh wilayah, seperti sistem e-commerce,
-  alat kolaborasi, atau pencatatan terdistribusi, membutuhkan penanganan stempel
-  waktu dengan zona waktu yang tepat. Tipe data TIMESTAMPTZ di Milvus
-  menyediakan kemampuan ini dengan menyimpan stempel waktu dengan zona waktu
-  terkait.
+  Aplikasi yang melacak waktu di berbagai wilayah, seperti sistem e-commerce,
+  alat kolaborasi, atau pencatatan terdesentralisasi, memerlukan penanganan cap
+  waktu yang akurat dengan mempertimbangkan zona waktu. Tipe data TIMESTAMPTZ di
+  Milvus menyediakan kemampuan ini dengan menyimpan cap waktu beserta zona waktu
+  yang terkait.
 beta: Milvus 2.6.6+
 ---
-<h1 id="TIMESTAMPTZ-Field" class="common-anchor-header">Bidang TIMESTAMPTZ<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.6+</span><button data-href="#TIMESTAMPTZ-Field" class="anchor-icon" translate="no">
+<h1 id="TIMESTAMPTZ-Field" class="common-anchor-header">Kolom TIMESTAMPTZ<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.6+</span><button data-href="#TIMESTAMPTZ-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,8 +24,8 @@ beta: Milvus 2.6.6+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Aplikasi yang melacak waktu di seluruh wilayah, seperti sistem e-commerce, alat kolaborasi, atau penebangan terdistribusi, membutuhkan penanganan stempel waktu yang tepat dengan zona waktu. Tipe data <code translate="no">TIMESTAMPTZ</code> di Milvus menyediakan kemampuan ini dengan menyimpan stempel waktu dengan zona waktu terkait.</p>
-<h2 id="What-is-a-TIMESTAMPTZ-field" class="common-anchor-header">Apa yang dimaksud dengan bidang TIMESTAMPTZ?<button data-href="#What-is-a-TIMESTAMPTZ-field" class="anchor-icon" translate="no">
+    </button></h1><p>Aplikasi yang melacak waktu di berbagai wilayah, seperti sistem e-commerce, alat kolaborasi, atau pencatatan terdistribusi, memerlukan penanganan yang akurat terhadap cap waktu beserta zona waktunya. Tipe data ` <code translate="no">TIMESTAMPTZ</code> ` di Milvus menyediakan kemampuan ini dengan menyimpan cap waktu beserta zona waktu yang terkait.</p>
+<h2 id="What-is-a-TIMESTAMPTZ-field" class="common-anchor-header">Apa itu bidang TIMESTAMPTZ?<button data-href="#What-is-a-TIMESTAMPTZ-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,16 +40,16 @@ beta: Milvus 2.6.6+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bidang <code translate="no">TIMESTAMPTZ</code> adalah tipe data yang ditentukan skema (<code translate="no">DataType.TIMESTAMPTZ</code>) di Milvus yang memproses input yang sadar zona waktu dan menyimpan semua titik waktu secara internal sebagai waktu absolut UTC:</p>
+    </button></h2><p>Kolom <code translate="no">TIMESTAMPTZ</code> adalah tipe data yang didefinisikan dalam skema (<code translate="no">DataType.TIMESTAMPTZ</code>) di Milvus yang memproses input yang menyertakan zona waktu dan menyimpan semua titik waktu secara internal sebagai waktu absolut UTC:</p>
 <ul>
-<li><p><strong>Format masukan yang diterima</strong>: String <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> dengan offset zona waktu (misalnya, <code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> menunjukkan pukul 11:59:59 malam pada tanggal 1 Mei 2025 (UTC+08:00)).</p></li>
+<li><p><strong>Format masukan yang diterima</strong>: string <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> dengan selisih zona waktu (misalnya, <code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> menunjukkan pukul 11:59:59 malam pada 1 Mei 2025 (UTC+08:00)).</p></li>
 <li><p><strong>Penyimpanan internal</strong>: Semua nilai <code translate="no">TIMESTAMPTZ</code> dinormalisasi dan disimpan dalam <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">Waktu Universal Terkoordinasi</a> (UTC).</p></li>
-<li><p><strong>Perbandingan dan penyaringan</strong>: Semua operasi pemfilteran dan pemesanan dilakukan dalam UTC, untuk memastikan hasil yang konsisten dan dapat diprediksi di berbagai zona waktu.</p></li>
+<li><p><strong>Perbandingan dan penyaringan</strong>: Semua operasi penyaringan dan pengurutan dilakukan dalam UTC, memastikan hasil yang konsisten dan dapat diprediksi di berbagai zona waktu.</p></li>
 </ul>
 <div class="alert note">
 <ul>
-<li><p>Anda dapat mengatur <code translate="no">nullable=True</code> untuk bidang <code translate="no">TIMESTAMPTZ</code> untuk mengizinkan nilai yang hilang.</p></li>
-<li><p>Anda dapat menentukan nilai stempel waktu default menggunakan atribut <code translate="no">default_value</code> dalam format <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>.</p></li>
+<li><p>Anda dapat mengatur atribut " <code translate="no">nullable=True</code> " untuk bidang " <code translate="no">TIMESTAMPTZ</code> " agar mengizinkan nilai yang hilang.</p></li>
+<li><p>Anda dapat menentukan nilai cap waktu default menggunakan atribut ` <code translate="no">default_value</code> ` dalam format <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>.</p></li>
 </ul>
 <p>Lihat <a href="/docs/id/nullable-and-default.md">Nullable &amp; Default</a> untuk detailnya.</p>
 </div>
@@ -68,8 +68,8 @@ beta: Milvus 2.6.6+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Alur kerja dasar penggunaan bidang <code translate="no">TIMESTAMPTZ</code> mencerminkan bidang skalar lainnya di Milvus: tentukan bidang → masukkan data → kueri/filter.</p>
-<h3 id="Step-1-Define-a-TIMESTAMPTZ-field" class="common-anchor-header">Langkah 1: Mendefinisikan bidang TIMESTAMPTZ<button data-href="#Step-1-Define-a-TIMESTAMPTZ-field" class="anchor-icon" translate="no">
+    </button></h2><p>Alur kerja dasar dalam menggunakan bidang ` <code translate="no">TIMESTAMPTZ</code> ` mirip dengan bidang skalar lainnya di Milvus: tentukan bidang → masukkan data → lakukan kueri/filter.</p>
+<h3 id="Step-1-Define-a-TIMESTAMPTZ-field" class="common-anchor-header">Langkah 1: Menentukan bidang TIMESTAMPTZ<button data-href="#Step-1-Define-a-TIMESTAMPTZ-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -84,9 +84,14 @@ beta: Milvus 2.6.6+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Untuk menggunakan field <code translate="no">TIMESTAMPTZ</code>, secara eksplisit mendefinisikannya di dalam skema koleksi Anda ketika membuat koleksi. Contoh berikut ini menunjukkan cara membuat koleksi dengan bidang <code translate="no">tsz</code> bertipe <code translate="no">DataType.TIMESTAMPTZ</code>.</p>
+    </button></h3><p>Untuk menggunakan bidang ` <code translate="no">TIMESTAMPTZ</code> `, tentukan secara eksplisit dalam skema koleksi Anda saat membuat koleksi. Contoh berikut menunjukkan cara membuat koleksi dengan bidang ` <code translate="no">tsz</code> ` bertipe ` <code translate="no">DataType.TIMESTAMPTZ</code>`.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> time
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 <span class="hljs-keyword">import</span> datetime
@@ -119,7 +124,7 @@ client.create_collection(collection_name, schema=schema, consistency_level=<span
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Insert-data" class="common-anchor-header">Langkah 2: Memasukkan data<button data-href="#Step-2-Insert-data" class="anchor-icon" translate="no">
+<h3 id="Step-2-Insert-data" class="common-anchor-header">Langkah 2: Menyisipkan data<button data-href="#Step-2-Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -134,15 +139,20 @@ client.create_collection(collection_name, schema=schema, consistency_level=<span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Sisipkan entitas yang berisi string ISO 8601 dengan offset zona waktu.</p>
-<p>Contoh di bawah ini menyisipkan 8.193 baris data sampel ke dalam koleksi. Setiap baris meliputi:</p>
+    </button></h3><p>Masukkan entitas yang berisi string ISO 8601 dengan selisih zona waktu.</p>
+<p>Contoh di bawah ini menyisipkan 8.193 baris data sampel ke dalam koleksi. Setiap baris mencakup:</p>
 <ul>
 <li><p>ID unik</p></li>
-<li><p>stempel waktu yang sadar zona waktu (waktu Shanghai)</p></li>
-<li><p>vektor 4 dimensi sederhana</p></li>
+<li><p>cap waktu yang menyertakan zona waktu (waktu Shanghai)</p></li>
+<li><p>vektor 4-dimensi sederhana</p></li>
 </ul>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data_size = <span class="hljs-number">8193</span>
 
 <span class="hljs-comment"># Get the Asia/Shanghai time zone using the pytz library</span>
@@ -177,7 +187,7 @@ client.insert(collection_name, data)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Filtering-operations" class="common-anchor-header">Langkah 3: Operasi pemfilteran<button data-href="#Step-3-Filtering-operations" class="anchor-icon" translate="no">
+<h3 id="Step-3-Filtering-operations" class="common-anchor-header">Langkah 3: Operasi penyaringan<button data-href="#Step-3-Filtering-operations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -193,15 +203,20 @@ client.insert(collection_name, data)
         ></path>
       </svg>
     </button></h3><p><code translate="no">TIMESTAMPTZ</code> mendukung perbandingan skalar, aritmatika interval, dan ekstraksi komponen waktu.</p>
-<p>Sebelum Anda dapat melakukan operasi pemfilteran pada bidang <code translate="no">TIMESTAMPTZ</code>, pastikan:</p>
+<p>Sebelum Anda dapat melakukan operasi penyaringan pada bidang-bid <code translate="no">TIMESTAMPTZ</code>, pastikan:</p>
 <ul>
 <li><p>Anda telah membuat indeks pada setiap bidang vektor.</p></li>
-<li><p>Koleksi dimuat ke dalam memori.</p></li>
+<li><p>Koleksi telah dimuat ke dalam memori.</p></li>
 </ul>
 <p><details></p>
-<p><summary>Tampilkan contoh kode</summary></p>
+<p><summary>Tampilkan kode contoh</summary></p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create index on vector field</span>
 index_params = client.prepare_index_params()
 index_params.add_index(
@@ -226,10 +241,15 @@ client.load_collection(collection_name)
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<h4 id="Query-with-timestamp-filtering" class="common-anchor-header">Kueri dengan pemfilteran stempel waktu</h4><p>Gunakan operator aritmatika seperti <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;=</code>. Untuk daftar lengkap operator aritmatika yang tersedia di Milvus, lihat <a href="/docs/id/basic-operators.md#Arithmetic-Operators">Operator Aritmatika</a>.</p>
-<p>Contoh di bawah ini memfilter entitas dengan stempel waktu (<code translate="no">tsz</code>) yang tidak sama dengan <strong>2025-01-03T00:00:00+08:00</strong>:</p>
+<h4 id="Query-with-timestamp-filtering" class="common-anchor-header">Kueri dengan penyaringan berdasarkan cap waktu</h4><p>Gunakan operator aritmatika seperti <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;=</code>. Untuk daftar lengkap operator aritmatika yang tersedia di Milvus, lihat <a href="/docs/id/basic-operators.md#Arithmetic-operators">Operator Aritmatika</a>.</p>
+<p>Contoh di bawah ini menyaring entitas dengan cap waktu (<code translate="no">tsz</code>) yang tidak sama dengan <strong>2025-01-03T00:00:00+08:00</strong>:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query for entities where tsz is not equal to &#x27;2025-01-03T00:00:00+08:00&#x27;</span>
 <span class="highlighted-wrapper-line">expr = <span class="hljs-string">&quot;tsz != ISO &#x27;2025-01-03T00:00:00+08:00&#x27;&quot;</span></span>
 
@@ -255,14 +275,19 @@ results = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <p>Dalam contoh di atas,</p>
 <ul>
-<li><p><code translate="no">tsz</code> adalah nama bidang <code translate="no">TIMESTAMPTZ</code> yang didefinisikan dalam skema.</p></li>
-<li><p><code translate="no">ISO '2025-01-03T00:00:00+08:00'</code> adalah literal stempel waktu dalam format <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>, termasuk offset zona waktu.</p></li>
-<li><p><code translate="no">!=</code> membandingkan nilai bidang dengan literal tersebut. Operator lain yang didukung termasuk <code translate="no">==</code>, <code translate="no">&lt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;</code>, dan <code translate="no">&gt;=</code>.</p></li>
+<li><p><code translate="no">tsz</code> adalah nama kolom ` <code translate="no">TIMESTAMPTZ</code> ` yang didefinisikan dalam skema.</p></li>
+<li><p><code translate="no">ISO '2025-01-03T00:00:00+08:00'</code> adalah literal cap waktu dalam format <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>, termasuk offset zona waktunya.</p></li>
+<li><p><code translate="no">!=</code> membandingkan nilai bidang dengan literal tersebut. Operator lain yang didukung meliputi <code translate="no">==</code>, <code translate="no">&lt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;</code>, dan <code translate="no">&gt;=</code>.</p></li>
 </ul>
-<h4 id="Interval-operations" class="common-anchor-header">Operasi interval</h4><p>Anda dapat melakukan aritmatika pada bidang <code translate="no">TIMESTAMPTZ</code> menggunakan nilai <strong>INTERVAL</strong> dalam <a href="https://en.wikipedia.org/wiki/ISO_8601#Durations">format durasi ISO 8601</a>. Hal ini memungkinkan Anda menambah atau mengurangi durasi, seperti hari, jam, atau menit, dari stempel waktu saat memfilter data.</p>
-<p>Sebagai contoh, kueri berikut ini memfilter entitas dengan cap waktu (<code translate="no">tsz</code>) ditambah nol hari <strong>tidak sama</strong> dengan <strong>2025-01-03T00:00:00+08:00</strong>:</p>
+<h4 id="Interval-operations" class="common-anchor-header">Operasi interval</h4><p>Anda dapat melakukan operasi aritmatika pada bidang ` <code translate="no">TIMESTAMPTZ</code> ` menggunakan nilai <strong>`INTERVAL</strong> ` dalam <a href="https://en.wikipedia.org/wiki/ISO_8601#Durations">format durasi ISO 8601</a>. Hal ini memungkinkan Anda untuk menambahkan atau mengurangkan durasi, seperti hari, jam, atau menit, dari sebuah cap waktu saat menyaring data.</p>
+<p>Misalnya, kueri berikut menyaring entitas di mana cap waktu (<code translate="no">tsz</code>) ditambah nol hari <strong>tidak sama</strong> dengan <strong>2025-01-03T00:00:00+08:00</strong>:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="highlighted-wrapper-line">expr = <span class="hljs-string">&quot;tsz + INTERVAL &#x27;P0D&#x27; != ISO &#x27;2025-01-03T00:00:00+08:00&#x27;&quot;</span></span>
 
 results = client.query(
@@ -286,21 +311,26 @@ results = client.query(
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><code translate="no">INTERVAL</code> mengikuti <a href="https://www.w3.org/TR/xmlschema-2/#duration">sintaks durasi ISO 8601</a>. Sebagai contoh:</p>
+<p><code translate="no">INTERVAL</code> Nilai-nilai tersebut mengikuti <a href="https://www.w3.org/TR/xmlschema-2/#duration">sintaks durasi ISO 8601</a>. Contoh:</p>
 <ul>
 <li><p><code translate="no">P1D</code> → 1 hari</p></li>
 <li><p><code translate="no">PT3H</code> → 3 jam</p></li>
 <li><p><code translate="no">P2DT6H</code> → 2 hari dan 6 jam</p></li>
 </ul>
-<p>Anda dapat menggunakan aritmatika <code translate="no">INTERVAL</code> secara langsung dalam ekspresi filter, seperti:</p>
+<p>Anda dapat menggunakan perhitungan <code translate="no">INTERVAL</code> secara langsung dalam ekspresi filter, seperti:</p>
 <ul>
 <li><p><code translate="no">tsz + INTERVAL 'P3D'</code> → Menambahkan 3 hari</p></li>
 <li><p><code translate="no">tsz - INTERVAL 'PT2H'</code> → Mengurangi 2 jam</p></li>
 </ul>
 </div>
-<h4 id="Search-with-timestamp-filtering" class="common-anchor-header">Mencari dengan pemfilteran stempel waktu</h4><p>Anda dapat menggabungkan pemfilteran <code translate="no">TIMESTAMPTZ</code> dengan pencarian kemiripan vektor untuk mempersempit hasil berdasarkan waktu dan kemiripan.</p>
+<h4 id="Search-with-timestamp-filtering" class="common-anchor-header">Pencarian dengan penyaringan berdasarkan cap waktu</h4><p>Anda dapat menggabungkan penyaring <code translate="no">TIMESTAMPTZ</code> e dengan pencarian kesamaan vektor untuk mempersempit hasil berdasarkan waktu dan kesamaan.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define a time-based filter expression</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;tsz &gt; ISO &#x27;2025-01-05T00:00:00+08:00&#x27;&quot;</span>
 
@@ -326,7 +356,7 @@ res = client.search(
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Jika koleksi Anda memiliki dua atau lebih bidang vektor, Anda dapat melakukan operasi pencarian gabungan dengan pemfilteran stempel waktu. Untuk detailnya, lihat <a href="/docs/id/multi-vector-search.md">Pencarian Hibrida Multi-Vektor</a>.</p>
+<p>Jika koleksi Anda memiliki dua atau lebih bidang vektor, Anda dapat melakukan operasi pencarian hibrida dengan penyaringan berdasarkan cap waktu. Untuk detailnya, lihat <a href="/docs/id/multi-vector-search.md">Pencarian Hibrida Multi-Vektor</a>.</p>
 </div>
 <h2 id="Advanced-usage" class="common-anchor-header">Penggunaan lanjutan<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -343,8 +373,8 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk penggunaan tingkat lanjut, Anda dapat mengelola zona waktu pada tingkat yang berbeda (misalnya basis data, koleksi, atau kueri) atau mempercepat kueri pada bidang <code translate="no">TIMESTAMPTZ</code> menggunakan indeks.</p>
-<h3 id="Manage-time-zones-at-different-levels" class="common-anchor-header">Mengelola zona waktu di tingkat yang berbeda<button data-href="#Manage-time-zones-at-different-levels" class="anchor-icon" translate="no">
+    </button></h2><p>Untuk penggunaan lanjutan, Anda dapat mengelola zona waktu pada berbagai tingkatan (misalnya, basis data, koleksi, atau kueri) atau mempercepat kueri pada bidang <code translate="no">TIMESTAMPTZ</code> menggunakan indeks.</p>
+<h3 id="Manage-time-zones-at-different-levels" class="common-anchor-header">Mengelola zona waktu pada berbagai tingkatan<button data-href="#Manage-time-zones-at-different-levels" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -359,7 +389,7 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Anda dapat mengontrol zona waktu untuk bidang <code translate="no">TIMESTAMPTZ</code> di tingkat <strong>basis data</strong>, <strong>koleksi</strong>, atau <strong>kueri/pencarian</strong>.</p>
+    </button></h3><p>Anda dapat mengontrol zona waktu untuk bidang- <code translate="no">TIMESTAMPTZ</code> pada tingkat <strong>basis data</strong>, <strong>koleksi</strong>, atau <strong>kueri/pencarian</strong>.</p>
 <table>
    <tr>
      <th><p>Tingkat</p></th>
@@ -368,29 +398,29 @@ res = client.search(
      <th><p>Prioritas</p></th>
    </tr>
    <tr>
-     <td><p>Basis data</p></td>
+     <td><p>Database</p></td>
      <td><p><code translate="no">timezone</code></p></td>
-     <td><p>Default untuk semua koleksi dalam basis data</p></td>
+     <td><p>Nilai default untuk semua koleksi dalam basis data</p></td>
      <td><p>Terendah</p></td>
    </tr>
    <tr>
      <td><p>Koleksi</p></td>
      <td><p><code translate="no">timezone</code></p></td>
-     <td><p>Mengganti pengaturan zona waktu default basis data untuk koleksi tersebut</p></td>
+     <td><p>Menggantikan pengaturan zona waktu default basis data untuk koleksi tersebut</p></td>
      <td><p>Sedang</p></td>
    </tr>
    <tr>
-     <td><p>Kueri/pencarian/pencarian gabungan</p></td>
+     <td><p>Kueri/pencarian/pencarian hibrida</p></td>
      <td><p><code translate="no">timezone</code></p></td>
      <td><p>Penggantian sementara untuk satu operasi tertentu</p></td>
      <td><p>Tertinggi</p></td>
    </tr>
 </table>
-<p>Untuk petunjuk langkah demi langkah dan contoh kode, lihat halaman khusus:</p>
+<p>Untuk petunjuk langkah demi langkah dan contoh kode, lihat halaman khusus berikut:</p>
 <ul>
-<li><p><a href="/docs/id/modify-collection.md#Example-6-Set-collection-time-zone">Memodifikasi Koleksi</a></p></li>
-<li><p><a href="/docs/id/manage_databases.md#Manage-database-properties">Basis data</a></p></li>
-<li><p><a href="/docs/id/get-and-scalar-query.md#Temporarily-set-a-timezone-for-a-query">Permintaan</a></p></li>
+<li><p><a href="/docs/id/modify-collection.md#Example-6-Set-collection-time-zone">Mengubah Koleksi</a></p></li>
+<li><p><a href="/docs/id/manage_databases.md#Manage-database-properties">Database</a></p></li>
+<li><p><a href="/docs/id/get-and-scalar-query.md#Temporarily-set-a-timezone-for-a-query">Kueri</a></p></li>
 <li><p><a href="/docs/id/single-vector-search.md#Temporarily-set-a-timezone-for-a-search">Pencarian Vektor Dasar</a></p></li>
 <li><p><a href="/docs/id/multi-vector-search.md">Pencarian Hibrida Multi-Vektor</a></p></li>
 </ul>
@@ -409,5 +439,5 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Secara default, kueri pada bidang <code translate="no">TIMESTAMPTZ</code> tanpa indeks akan melakukan pemindaian penuh terhadap semua baris, yang dapat berjalan lambat pada kumpulan data yang besar. Untuk mempercepat kueri stempel waktu, buat indeks <code translate="no">STL_SORT</code> pada bidang <code translate="no">TIMESTAMPTZ</code> Anda.</p>
+    </button></h3><p>Secara default, kueri pada kolom ` <code translate="no">TIMESTAMPTZ</code> ` yang tidak memiliki indeks akan melakukan pemindaian penuh terhadap semua baris, yang dapat memakan waktu lama pada dataset besar. Untuk mempercepat kueri berdasarkan cap waktu, buatlah indeks ` <code translate="no">STL_SORT</code> ` pada kolom ` <code translate="no">TIMESTAMPTZ</code> ` Anda.</p>
 <p>Untuk detailnya, lihat <a href="/docs/id/stl-sort.md">STL_SORT</a>.</p>

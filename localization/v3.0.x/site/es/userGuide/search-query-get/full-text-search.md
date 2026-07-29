@@ -27,10 +27,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>La búsqueda de texto completo es una función que recupera documentos que contienen términos o frases específicos en conjuntos de datos de texto y, a continuación, clasifica los resultados según su relevancia. Esta función supera las limitaciones de la búsqueda semántica, que podría pasar por alto términos precisos, garantizando que obtengas los resultados más precisos y contextualmente relevantes. Además, simplifica las búsquedas vectoriales al aceptar entradas de texto sin procesar, convirtiendo automáticamente los datos de texto en representaciones vectoriales dispersas sin necesidad de generar manualmente dichas representaciones.</p>
-<p>Al utilizar el algoritmo BM25 para la puntuación de relevancia, esta función resulta especialmente valiosa en escenarios de generación aumentada por recuperación (RAG), en los que da prioridad a los documentos que coinciden estrechamente con términos de búsqueda específicos.</p>
+    </button></h1><p>La búsqueda de texto completo es una función que recupera documentos que contienen términos o frases específicos en conjuntos de datos de texto y, a continuación, clasifica los resultados en función de su relevancia. Esta función supera las limitaciones de la búsqueda semántica, que podría pasar por alto términos precisos, garantizando que obtengas los resultados más precisos y contextualmente relevantes. Además, simplifica las búsquedas vectoriales al aceptar entradas de texto sin procesar, convirtiendo automáticamente sus datos de texto en incrustaciones dispersas sin necesidad de generar manualmente incrustaciones vectoriales.</p>
+<p>Al utilizar el algoritmo BM25 para la puntuación de relevancia, esta función resulta especialmente valiosa en escenarios de generación aumentada por recuperación (RAG), donde da prioridad a los documentos que coinciden estrechamente con términos de búsqueda específicos.</p>
 <div class="alert note">
-<p>Al integrar la búsqueda de texto completo con la búsqueda vectorial densa basada en la semántica, puede mejorar la precisión y la relevancia de los resultados de búsqueda. Para obtener más información, consulte <a href="/docs/es/multi-vector-search.md">«Búsqueda híbrida</a>».</p>
+<p>Al integrar la búsqueda de texto completo con la búsqueda vectorial densa basada en la semántica, puedes mejorar la precisión y la relevancia de los resultados de búsqueda. Para obtener más información, consulta <a href="/docs/es/multi-vector-search.md">«Búsqueda híbrida</a>».</p>
 </div>
 <h2 id="BM25-implementation" class="common-anchor-header">Implementación de BM25<button data-href="#BM25-implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -66,7 +66,7 @@ summary: >-
 <ol>
 <li><p><a href="/docs/es/full-text-search.md#Create-a-collection-for-BM25-full-text-search">Crear una colección</a>: Configura los campos necesarios y define una función BM25 que convierta el texto sin procesar en representaciones dispersas.</p></li>
 <li><p><a href="/docs/es/full-text-search.md#Insert-text-data">Introducir datos</a>: Importa tus documentos de texto sin procesar a la colección.</p></li>
-<li><p><a href="/docs/es/full-text-search.md#Perform-full-text-search">Realizar búsquedas</a>: Utiliza consultas en lenguaje natural para obtener resultados ordenados según la relevancia de BM25.</p></li>
+<li><p><a href="/docs/es/full-text-search.md#Perform-full-text-search">Realizar búsquedas</a>: Utiliza consultas en lenguaje natural para recuperar resultados ordenados según la relevancia de BM25.</p></li>
 </ol>
 <h2 id="Create-a-collection-for-BM25-full-text-search" class="common-anchor-header">Crear una colección para la búsqueda de texto completo con BM25<button data-href="#Create-a-collection-for-BM25-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -102,8 +102,8 @@ summary: >-
     </button></h3><p>El esquema de su colección debe incluir al menos tres campos obligatorios:</p>
 <ul>
 <li><p><strong>Campo principal</strong>: identifica de forma única cada entidad de la colección.</p></li>
-<li><p><strong>Campo de texto</strong> (<code translate="no">VARCHAR</code>): almacena documentos de texto sin procesar. Debe establecerse como « <code translate="no">enable_analyzer=True</code> » para que Milvus pueda procesar el texto para la clasificación por relevancia de BM25. De forma predeterminada, Milvus utiliza el <a href="/docs/es/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/es/standard-analyzer.md"> analizador</a> para el análisis de texto. Para configurar un analizador diferente, consulta <a href="/docs/es/analyzer-overview.md">la Descripción general del analizador</a>.</p></li>
-<li><p><strong>Campo de vector disperso</strong> (<code translate="no">SPARSE_FLOAT_VECTOR</code>): almacena incrustaciones dispersas generadas automáticamente por la función BM25.</p></li>
+<li><p><strong>Campo de cadena</strong> (<code translate="no">VARCHAR</code> o <code translate="no">TEXT</code>): almacena documentos de texto sin procesar. Debe establecerse <code translate="no">enable_analyzer=True</code> para que Milvus pueda procesar el texto para la clasificación por relevancia de BM25. De forma predeterminada, Milvus utiliza el <a href="/docs/es/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/es/standard-analyzer.md"> analizador</a> para el análisis de texto. Para configurar un analizador diferente, consulta <a href="/docs/es/analyzer-overview.md">la Descripción general del analizador</a>. Los ejemplos de esta página utilizan <code translate="no">VARCHAR</code>; para textos largos, puedes definir el campo de entrada como <code translate="no">TEXT</code> y omitir <code translate="no">max_length</code>. Para ver un ejemplo completo, consulta <a href="/docs/es/text.md">Campo de texto</a>.</p></li>
+<li><p><strong>Campo de vectores dispersos</strong> (<code translate="no">SPARSE_FLOAT_VECTOR</code>): almacena incrustaciones dispersas generadas automáticamente por la función BM25.</p></li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -240,8 +240,8 @@ schema.WithField(entity.NewField().
 <p>En la configuración anterior,</p>
 <ul>
 <li><p><code translate="no">id</code>: actúa como clave principal y se genera automáticamente con <code translate="no">auto_id=True</code>.</p></li>
-<li><p><code translate="no">text</code>: almacena los datos de texto sin procesar para las operaciones de búsqueda de texto completo. El tipo de datos debe ser <code translate="no">VARCHAR</code>, ya que <code translate="no">VARCHAR</code> es el tipo de datos de cadena de Milvus para el almacenamiento de texto.</p></li>
-<li><p><code translate="no">sparse</code>: un campo vectorial reservado para almacenar representaciones dispersas generadas internamente para operaciones de búsqueda de texto completo. El tipo de datos debe ser ` <code translate="no">SPARSE_FLOAT_VECTOR</code>`.</p></li>
+<li><p><code translate="no">text</code>: almacena los datos de texto sin procesar para las operaciones de búsqueda de texto completo. El campo puede utilizar <code translate="no">VARCHAR</code> para texto de tamaño limitado o <code translate="no">TEXT</code> para contenido de origen extenso.</p></li>
+<li><p><code translate="no">sparse</code>: un campo vectorial reservado para almacenar representaciones dispersas generadas internamente para operaciones de búsqueda de texto completo. El tipo de datos debe ser <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 </ul>
 <h3 id="Define-the-BM25-function" class="common-anchor-header">Definir la función BM25<button data-href="#Define-the-BM25-function" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -269,7 +269,7 @@ schema.WithField(entity.NewField().
 </div>
 <pre><code translate="no" class="language-python">bm25_function = Function(
     name=<span class="hljs-string">&quot;text_bm25_emb&quot;</span>, <span class="hljs-comment"># Function name</span>
-    input_field_names=[<span class="hljs-string">&quot;text&quot;</span>], <span class="hljs-comment"># Name of the VARCHAR field containing raw text data</span>
+    input_field_names=[<span class="hljs-string">&quot;text&quot;</span>], <span class="hljs-comment"># Name of the VARCHAR or TEXT field containing raw text data</span>
     output_field_names=[<span class="hljs-string">&quot;sparse&quot;</span>], <span class="hljs-comment"># Name of the SPARSE_FLOAT_VECTOR field reserved to store generated embeddings</span>
 <span class="highlighted-wrapper-line">    function_type=FunctionType.BM25, <span class="hljs-comment"># Set to `BM25`</span></span>
 )
@@ -350,11 +350,11 @@ schema.WithFunction(function)
    </tr>
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
-     <td><p>El nombre del campo « <code translate="no">VARCHAR</code> » cuyo texto debe convertirse en vectores dispersos. Para « <code translate="no">FunctionType.BM25</code> », este parámetro solo admite un nombre de campo.</p></td>
+     <td><p>El nombre del campo « <code translate="no">VARCHAR</code> » o « <code translate="no">TEXT</code> » que requiere la conversión de texto a vector disperso. Para « <code translate="no">FunctionType.BM25</code> », este parámetro solo admite un nombre de campo.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">output_field_names</code></p></td>
-     <td><p>El nombre del campo en el que se almacenarán los vectores dispersos generados internamente. Para « <code translate="no">FunctionType.BM25</code> », este parámetro solo admite un nombre de campo.</p></td>
+     <td><p>El nombre del campo en el que se almacenarán los vectores dispersos generados internamente. Para <code translate="no">FunctionType.BM25</code>, este parámetro solo admite un nombre de campo.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
@@ -362,7 +362,7 @@ schema.WithFunction(function)
    </tr>
 </table>
 <div class="alert note">
-<p>Si varios campos de « <code translate="no">VARCHAR</code> » requieren procesamiento BM25, defina <strong>una función BM25 por campo</strong>, cada una con un nombre y un campo de salida únicos.</p>
+<p>Si varios campos de texto requieren procesamiento BM25, defina <strong>una función BM25 por campo</strong>, cada una con un nombre y un campo de salida únicos.</p>
 </div>
 <h3 id="Configure-the-index" class="common-anchor-header">Configurar el índice<button data-href="#Configure-the-index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -456,15 +456,15 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">field_name</code></p></td>
-     <td><p>El nombre del campo vectorial que se va a indexar. Para la búsqueda de texto completo, debe ser el campo que almacena los vectores dispersos generados. En este ejemplo, establece el valor en « <code translate="no">sparse</code> ».</p></td>
+     <td><p>El nombre del campo vectorial que se va a indexar. Para la búsqueda de texto completo, debe ser el campo que almacena los vectores dispersos generados. En este ejemplo, establece el valor en <code translate="no">sparse</code>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">index_type</code></p></td>
-     <td><p>El tipo de índice que se va a crear. « <code translate="no">AUTOINDEX</code> » permite a Milvus optimizar automáticamente la configuración del índice. Si necesitas un mayor control sobre la configuración del índice, puedes elegir entre los distintos tipos de índice disponibles para vectores dispersos en Milvus. Para obtener más información, consulta <a href="/docs/es/index.md#Indexes-supported-in-Milvus">«Índices compatibles con Milvus</a>».</p></td>
+     <td><p>El tipo de índice que se va a crear. Para la búsqueda de texto completo BM25 en Milvus, establece este valor en <code translate="no">SPARSE_INVERTED_INDEX</code>. Para obtener más información, consulta <a href="/docs/es/sparse-inverted-index.md">SPARSE_INVERTED_INDEX</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">metric_type</code></p></td>
-     <td><p>El valor de este parámetro debe establecerse en « <code translate="no">BM25</code> » específicamente para la funcionalidad de búsqueda de texto completo.</p></td>
+     <td><p>El valor de este parámetro debe establecerse en <code translate="no">BM25</code> específicamente para la funcionalidad de búsqueda de texto completo.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params</code></p></td>
@@ -472,11 +472,11 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>El algoritmo utilizado para crear y consultar el índice. Valores válidos:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (por defecto): Procesamiento optimizado de consultas «Document-at-a-Time» (DAAT) mediante el algoritmo MaxScore. MaxScore ofrece un mejor rendimiento para valores <em>k</em> elevados o consultas con muchos términos, ya que omite los términos y documentos que probablemente tengan un impacto mínimo. Esto se consigue dividiendo los términos en grupos esenciales y no esenciales en función de sus puntuaciones de impacto máximo, centrándose en los términos que pueden contribuir a los resultados «top-k».</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Procesamiento optimizado de consultas DAAT mediante el algoritmo WAND. WAND evalúa un menor número de documentos coincidentes aprovechando las puntuaciones de impacto máximo para omitir documentos no competitivos, pero presenta una mayor sobrecarga por coincidencia. Esto hace que WAND sea más eficiente para consultas con valores <em>k</em> pequeños o consultas cortas, en las que la omisión resulta más factible.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Procesamiento básico de consultas «Term-at-a-Time» (TAAT). Aunque es más lento en comparación con <code translate="no">DAAT_MAXSCORE</code> y <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> ofrece una ventaja única. A diferencia de los algoritmos DAAT, que utilizan puntuaciones de impacto máximo almacenadas en caché que permanecen estáticas independientemente de los cambios en el parámetro de colección global (avgdl), <code translate="no">TAAT_NAIVE</code> se adapta dinámicamente a dichos cambios.</p></li></ul></td>
+     <td><p>El algoritmo utilizado para crear y consultar el índice invertido disperso BM25. Valores válidos:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (por defecto): Procesamiento de consultas MaxScore «Document-at-a-Time». Esta opción es adecuada para cargas de trabajo de búsqueda de texto completo con valores <em>k</em> elevados o consultas con muchos términos. Para obtener más información, consulte <a href="https://dl.acm.org/doi/10.1016/0306-4573%2895%2900020-H">«Evaluación de consultas: estrategias y optimizaciones</a>».</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Procesamiento de consultas «Document-at-a-Time» WAND. Esta opción es adecuada para cargas de trabajo de búsqueda de texto completo con valores <em>k</em> pequeños o consultas cortas. Para más información, consulte <a href="https://dl.acm.org/doi/10.1145/956863.956944">«Evaluación eficiente de consultas mediante un proceso de recuperación de dos niveles</a>».</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Procesamiento básico de consultas «término por término». Utilice esta opción como referencia o cuando necesite que la puntuación se adapte dinámicamente a las estadísticas globales de la colección, como la longitud media de los documentos.</p></li><li><p><code translate="no">"BLOCK_MAX_MAXSCORE"</code>: Procesamiento de consultas MaxScore con metadatos de puntuación máxima a nivel de bloque. Para obtener información adicional, consulte <a href="https://dl.acm.org/doi/10.1145/2009916.2010048">«Recuperación más rápida de los k documentos principales mediante índices Block-Max</a>».</p></li><li><p><code translate="no">"BLOCK_MAX_WAND"</code>: Procesamiento de consultas WAND con metadatos de puntuación máxima a nivel de bloque. Para más información, consulte <a href="https://dl.acm.org/doi/10.1145/2009916.2010048">«Recuperación más rápida</a> de <a href="https://dl.acm.org/doi/10.1145/2009916.2010048">los k documentos principales mediante índices Block-Max</a>».</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
-     <td><p>Controla la saturación de la frecuencia de los términos. Los valores más altos aumentan la importancia de la frecuencia de los términos en la clasificación de los documentos. Rango de valores: [1,2; 2,0].</p></td>
+     <td><p>Controla la saturación de la frecuencia de los términos. Los valores más altos aumentan la importancia de la frecuencia de los términos en la clasificación de los documentos. Rango recomendado: [1,2; 2,0]. Valor por defecto: 1,2.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_b</code></p></td>
@@ -731,7 +731,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">params.drop_ratio_search</code></p></td>
-     <td><p>Proporción de términos de baja importancia que se deben ignorar durante la búsqueda. Para más detalles, consulta <a href="/docs/es/sparse_vector.md">«Vector disperso</a>».</p></td>
+     <td><p>Proporción de términos de baja importancia que se deben ignorar durante la búsqueda. El valor debe estar comprendido en el intervalo [0,0; 1,0). Para más detalles, consulta <a href="/docs/es/sparse_vector.md">«Vector disperso</a>».</p></td>
    </tr>
    <tr>
      <td></td>
@@ -747,7 +747,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">output_fields</code></p></td>
-     <td><p>Lista de nombres de campos que se mostrarán en los resultados de la búsqueda. Admite todos los campos <strong>excepto el campo de vectores dispersos</strong> que contiene las representaciones generadas por BM25. Entre los campos de salida habituales se incluyen el campo de clave principal (p. ej., <code translate="no">id</code>) y el campo de texto original (p. ej., <code translate="no">text</code>). Para obtener más información, consulta <a href="/docs/es/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">las Preguntas frecuentes</a>.</p></td>
+     <td><p>Lista de nombres de campos que se mostrarán en los resultados de la búsqueda. Admite todos los campos <strong>excepto el campo de vectores dispersos</strong> que contiene las representaciones generadas por BM25. Entre los campos de salida habituales se incluyen el campo de clave primaria (p. ej., <code translate="no">id</code>) y el campo de texto original (p. ej., <code translate="no">text</code>). Para obtener más información, consulta <a href="/docs/es/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">las Preguntas frecuentes</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">limit</code></p></td>
@@ -769,7 +769,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search" class="common-anchor-header">¿Puedo obtener o acceder a los vectores dispersos generados por la función BM25 en la búsqueda de texto completo?<button data-href="#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search" class="common-anchor-header">¿Puedo generar o acceder a los vectores dispersos generados por la función BM25 en la búsqueda de texto completo?<button data-href="#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

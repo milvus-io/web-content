@@ -63,20 +63,20 @@ title: Milvus in Docker ausführen (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Neuerungen in Version 2.6.20:</strong></p>
+<p><strong>Neuerungen in Version 2.6.21:</strong></p>
 <ul>
 <li><strong>Streaming-Knoten</strong>: Erweiterte Datenverarbeitungsfunktionen</li>
 <li><strong>Woodpecker MQ</strong>: Verbesserte Nachrichtenwarteschlange mit reduziertem Wartungsaufwand; weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/use-woodpecker.md">„Woodpecker verwenden“</a> </li>
 <li><strong>Optimierte Architektur</strong>: Konsolidierte Komponenten für bessere Leistung</li>
 </ul>
 <p>Laden Sie immer das aktuellste Skript herunter, um sicherzustellen, dass Sie die neuesten Konfigurationen und Architekturverbesserungen erhalten.</p>
-<p>Wenn Sie <a href="https://milvus.io/docs/milvus_backup_overview.md">„Backup“</a> im Standalone-Bereitstellungsmodus nutzen möchten, wird die Verwendung der <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker-Compose-</a> Bereitstellungsmethode empfohlen.</p>
+<p>Wenn Sie <a href="https://milvus.io/docs/milvus_backup_overview.md">„Backup“</a> im Standalone-Bereitstellungsmodus nutzen möchten, wird die Verwendung der <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker-Compose</a> -Bereitstellungsmethode empfohlen.</p>
 <p>Sollten beim Abrufen des Images Probleme auftreten, kontaktieren Sie uns bitte unter <a href="mailto:community@zilliz.com">community@zilliz.com</a> mit detaillierten Angaben zum Problem, und wir werden Ihnen die erforderliche Unterstützung zukommen lassen.</p>
 </div>
 <p>Nach Ausführung des Installationsskripts:</p>
 <ul>
 <li>Ein Docker-Container namens „milvus“ wurde am Port <strong>19530</strong> gestartet.</li>
-<li>Zusammen mit Milvus ist im selben Container ein „embed etcd“ installiert, das auf Port <strong>2379</strong> läuft. Seine Konfigurationsdatei ist auf <strong>„embedEtcd.yaml“</strong> im aktuellen Ordner abgebildet.</li>
+<li>Zusammen mit Milvus ist im selben Container ein „embed etcd“ installiert, das auf Port <strong>2379</strong> läuft. Seine Konfigurationsdatei ist auf <strong>„embedEtcd.yaml“</strong> im aktuellen Ordner verweist.</li>
 <li>Um die Standardkonfiguration von Milvus zu ändern, fügen Sie Ihre Einstellungen zur Datei <strong>„user.yaml“</strong> im aktuellen Ordner hinzu und starten Sie den Dienst anschließend neu.</li>
 <li>Das Milvus-Datenvolume ist auf <strong>„volumes/milvus“</strong> im aktuellen Ordner abgebildet.</li>
 </ul>
@@ -175,7 +175,7 @@ EOF
       </svg>
     </button></h2><p>Nachdem Sie Milvus in Docker installiert haben, können Sie:</p>
 <ul>
-<li><p>Schauen Sie sich <a href="/docs/de/v2.6.x/quickstart.md">den Schnellstart</a> an, um zu sehen, was Milvus alles kann.</p></li>
+<li><p>Schauen Sie sich <a href="/docs/de/v2.6.x/quickstart.md">den Schnellstart</a> an, um zu erfahren, was Milvus alles kann.</p></li>
 <li><p>Lernen Sie die grundlegenden Funktionen von Milvus kennen:</p>
 <ul>
 <li><a href="/docs/de/v2.6.x/manage_databases.md">Datenbanken verwalten</a></li>

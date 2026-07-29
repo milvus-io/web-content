@@ -2,9 +2,9 @@
 id: configure_common.md
 related_key: configure
 group: system_configuration.md
-summary: 學習如何為 Milvus 設定共用。
+summary: 瞭解如何為 Milvus 進行常見設定。
 ---
-<h1 id="common-related-Configurations" class="common-anchor-header">共用相關組態<button data-href="#common-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="common-related-Configurations" class="common-anchor-header">常見相關設定<button data-href="#common-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,7 +43,7 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        建立集合時的預設分割區名稱      </td>
+      <td>        建立集合時預設區段的名稱      </td>
       <td>_default</td>
     </tr>
   </tbody>
@@ -72,7 +72,7 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        索引名稱未指定時的名稱      </td>
+      <td>        未指定名稱時，索引建立時的名稱      </td>
       <td>_default_idx</td>
     </tr>
   </tbody>
@@ -101,7 +101,7 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        實體過期時間，以秒為單位，注意 -1 表示永不過期      </td>
+      <td>        實體過期時間（以秒為單位），注意：-1 表示永不過期      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -130,7 +130,7 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        索引分割大小 (MB)    </td>
+      <td>        索引區段大小（以 MB 為單位）      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -159,7 +159,7 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        此參數指定線程數是高優先級池核心數的幾倍      </td>
+      <td>        此參數指定高優先級池中的執行緒數應為核心數的多少倍      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -188,7 +188,7 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        此參數指定線程數是中優先級池核心數的幾倍      </td>
+      <td>        此參數指定中優先級池中的執行緒數應為核心數的多少倍      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -217,7 +217,7 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        此參數指定線程數是低優先級池核心數的幾倍      </td>
+      <td>        此參數指定低優先級池中的執行緒數應為核心數的多少倍      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -246,7 +246,7 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        毫秒。它表示在有界一致性的情況下，需要減去請求到達時間的間隔（以毫秒為單位）。      </td>
+      <td>        毫秒。此參數代表在「有限一致性」情境下，需從請求到達時間中減去的間隔（單位為毫秒）。      </td>
       <td>5000</td>
     </tr>
   </tbody>
@@ -275,7 +275,7 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        秒。如果在這段時間內未完成優化停止程序，它會強制退出伺服器。      </td>
+      <td>        秒。若在此時間內未能完成平穩停止程序，系統將強制關閉伺服器。      </td>
       <td>1800</td>
     </tr>
   </tbody>
@@ -304,8 +304,37 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        請在內嵌的 Milvus 中調整：local，可用值為 [local、remote、opendal]，值 minio 已經被淘汰，請使用 remote 代替      </td>
-      <td>遠端</td>
+      <td>        請在嵌入式 Milvus 中進行調整：local，可用值為 [local、remote、opendal]，值 minio 已廢棄，請改用 remote      </td>
+      <td>remote</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonstorageuseLoonFFI" class="common-anchor-header"><code translate="no">common.storage.useLoonFFI</code><button data-href="#commonstorageuseLoonFFI" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.storage.useLoonFFI">
+  <thead>
+    <tr>
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        是否對新寫入資料及壓縮輸出使用 Storage V3。此參數可重新載入。      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -334,10 +363,10 @@ summary: 學習如何為 Milvus 設定共用。
   <tbody>
     <tr>
       <td>
-        <li>預設值：自動</li>      
-        <li>有效值：[auto、avx512、avx2、avx、sse4_2］</li>      
-        <li>此設定僅供 querynode 和 indexnode 使用，它選擇搜尋和建立索引的 CPU 指令集。</li>      </td>
-      <td>自動</td>
+        <li>預設值：auto</li>      
+        <li>有效值：[auto, avx512, avx2, avx, sse4_2]</li>      
+        <li>此設定僅由 querynode 和 indexnode 使用，用於為搜尋和建立索引選擇 CPU 指令集。</li>      </td>
+      <td>auto</td>
     </tr>
   </tbody>
 </table>
@@ -366,8 +395,8 @@ summary: 學習如何為 Milvus 設定共用。
   <tbody>
     <tr>
       <td>
-        <li>超級使用者會忽略某些系統檢查程序、</li>      
-        <li>如更新認證時的舊密碼驗證。</li>      </td>
+        <li>超級使用者將忽略某些系統檢查程序，</li>      
+        <li>例如在更新憑證時對舊密碼的驗證</li>      </td>
       <td></td>
     </tr>
   </tbody>
@@ -397,7 +426,7 @@ summary: 學習如何為 Milvus 設定共用。
   <tbody>
     <tr>
       <td>        root 使用者的預設密碼。最大長度為 72 個字元，且必須使用雙引號。      </td>
-      <td>密碼</td>
+      <td>Milvus</td>
     </tr>
   </tbody>
 </table>
@@ -425,8 +454,8 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        啟用授權時，root 使用者是否應該綁定角色。      </td>
-      <td>假</td>
+      <td>        當啟用授權時，root 使用者是否應綁定某個角色。      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -454,7 +483,7 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        是否覆寫內建的權限群組      </td>
+      <td>        是否覆寫內建權限群組      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -483,8 +512,8 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        群集層級唯讀權限      </td>
-      <td>ListDatabases,SelectOwnership,SelectUser,DescribeResourceGroup,ListResourceGroups,ListPrivilegeGroups</td>
+      <td>        叢集層級唯讀權限      </td>
+      <td>ListDatabases、SelectOwnership、SelectUser、DescribeResourceGroup、ListResourceGroups、ListPrivilegeGroups</td>
     </tr>
   </tbody>
 </table>
@@ -512,8 +541,8 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        群集層級讀寫權限      </td>
-      <td>資料庫清單,選擇所有權,選擇使用者,描述資源群組,資源群組清單,權限群組清單,FlushAll,TransferNode,TransferReplica,UpdateResourceGroups...</td>
+      <td>        叢集層級讀寫權限      </td>
+      <td>ListDatabases、SelectOwnership、SelectUser、DescribeResourceGroup、ListResourceGroups、ListPrivilegeGroups、FlushAll、TransferNode、TransferReplica、UpdateResourceGroups</td>
     </tr>
   </tbody>
 </table>
@@ -541,8 +570,8 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        群集層級管理權限      </td>
-      <td>ListDatabases,SelectOwnership,SelectUser,DescribeResourceGroup,ListResourceGroups,ListPrivilegeGroups,FlushAll,TransferNode,TransferReplica,UpdateResourceGroups,BackupRBAC,RestoreRBAC,CreateDatabase、DropDatabase,CreateOwnership,DropOwnership,ManageOwnership,CreateResourceGroup,DropResourceGroup,UpdateUser,RenameCollection,CreatePrivilegeGroup,DropPrivilegeGroup,OperatePrivilegeGroup</td>
+      <td>        叢集層級管理員權限      </td>
+      <td>ListDatabases、SelectOwnership、SelectUser、DescribeResourceGroup、ListResourceGroups、ListPrivilegeGroups、FlushAll、TransferNode、TransferReplica、更新資源群組、備份 RBAC、還原 RBAC、建立資料庫、刪除資料庫、建立所有權、刪除所有權、管理所有權、建立資源群組、刪除資源群組、更新使用者、重新命名集合、建立權限群組、刪除權限群組、操作權限群組</td>
     </tr>
   </tbody>
 </table>
@@ -570,8 +599,8 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        資料庫層級的唯讀權限      </td>
-      <td>顯示資料集、描述資料庫</td>
+      <td>        資料庫層級唯讀權限      </td>
+      <td>顯示集合、描述資料庫</td>
     </tr>
   </tbody>
 </table>
@@ -599,8 +628,8 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        資料庫層級讀寫權限      </td>
-      <td>顯示收藏集,描述資料庫,變更資料庫</td>
+      <td>        資料庫層級的讀寫權限      </td>
+      <td>ShowCollections、DescribeDatabase、AlterDatabase</td>
     </tr>
   </tbody>
 </table>
@@ -628,8 +657,8 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        資料庫層級管理權限      </td>
-      <td>ShowCollections,DescribeDatabase,AlterDatabase,CreateCollection,DropCollection</td>
+      <td>        資料庫層級的管理權限      </td>
+      <td>ShowCollections、DescribeDatabase、AlterDatabase、CreateCollection、DropCollection</td>
     </tr>
   </tbody>
 </table>
@@ -657,8 +686,8 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        資料庫層級唯讀權限      </td>
-      <td>查詢,搜尋,索引詳細資料,GetFlushState,GetLoadState,GetLoadingProgress,HasPartition,ShowPartitions,DescribeCollection,DescribeAlias,GetStatistics,ListAliases。</td>
+      <td>        集合層級唯讀權限      </td>
+      <td>Query、Search、IndexDetail、GetFlushState、GetLoadState、GetLoadingProgress、HasPartition、ShowPartitions、DescribeCollection、DescribeAlias、GetStatistics、ListAliases</td>
     </tr>
   </tbody>
 </table>
@@ -686,8 +715,8 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        集合層級讀寫權限      </td>
-      <td>查詢,搜尋,IndexDetail,GetFlushState,GetLoadState,GetLoadingProgress,HasPartition,ShowPartitions,DescribeCollection,DescribeAlias,GetStatistics,ListAliases,Load,Release,Insert,Delete,Upsert,Import,Flush,Compaction,LoadBalance,CreateIndex,DropIndex,CreatePartition,DropPartition。</td>
+      <td>        集合層級的讀寫權限      </td>
+      <td>查詢、搜尋、索引詳細資訊、取得刷新狀態、取得載入狀態、取得載入進度、是否具有分區、顯示分區、描述集合、描述別名、取得統計資料、列出別名、載入、釋放、插入、刪除、Upsert、匯入、刷新、壓縮、負載平衡、建立索引、刪除索引、建立分區、刪除分區</td>
     </tr>
   </tbody>
 </table>
@@ -715,8 +744,8 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        集合層級管理權限      </td>
-      <td>Query,Search,IndexDetail,GetFlushState,GetLoadState,GetLoadingProgress,HasPartition,ShowPartitions,DescribeCollection,DescribeAlias,GetStatistics,ListAliases,Load,Release,Insert,Delete,Upsert,Import,Flush,Compaction,LoadBalance,CreateIndex,DropIndex,CreatePartition,DropPartition,CreateAlias,DropAlias</td>
+      <td>        集合層級管理員權限      </td>
+      <td>查詢、搜尋、索引詳細資訊、取得刷新狀態、取得載入狀態、取得載入進度、是否具有分區、顯示分區、描述集合、描述別名、取得統計資料、列出別名、載入、釋放、插入、刪除、更新或插入、匯入、刷新、壓縮、負載平衡、建立索引、刪除索引、建立分區、刪除分區、建立別名、刪除別名</td>
     </tr>
   </tbody>
 </table>
@@ -744,7 +773,7 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        會話授予註冊服務租約時的 ttl 值   </td>
+      <td>        當工作階段向註冊服務授予租約時的 TTL 值      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -802,8 +831,8 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        是否收集度量鎖的統計資料      </td>
-      <td>假</td>
+      <td>        是否針對指標鎖進行統計資料彙整      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -831,7 +860,7 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        在資訊層級中列印持續時間的最小毫秒數      </td>
+      <td>        在資訊級別中輸出持續時間所需的最小毫秒數      </td>
       <td>500</td>
     </tr>
   </tbody>
@@ -860,7 +889,7 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        警告層級中列印時間的最小毫秒數      </td>
+      <td>        在「警告」級別中，輸出持續時間所需的最低毫秒數      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -889,7 +918,7 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        等待 wlock 條件的最長秒數      </td>
+      <td>        等待 wlock 條件的最大秒數      </td>
       <td>600</td>
     </tr>
   </tbody>
@@ -919,10 +948,10 @@ summary: 學習如何為 Milvus 設定共用。
   <tbody>
     <tr>
       <td>
-        <li>是否停用系統的內部時間訊息機制。 </li>      
-        <li>如果停用 (設定為 false)，系統將不允許 DML 操作，包括插入、刪除、查詢和搜尋。 </li>      
+        <li>是否要停用系統的內部時間訊息傳遞機制。 </li>      
+        <li>若停用（設定為 false），系統將不允許執行 DML 操作，包括插入、刪除、查詢及搜尋。 </li>      
         <li>這有助於 Milvus-CDC 同步增量資料</li>      </td>
-      <td>真</td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
@@ -979,7 +1008,7 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        bloom filter 初始大小      </td>
+      <td>        布隆濾波器初始大小      </td>
       <td>100000</td>
     </tr>
   </tbody>
@@ -1008,8 +1037,8 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        bloom filter 類型，支援 BasicBloomFilter 和 BlockedBloomFilter      </td>
-      <td>封鎖 BloomFilter</td>
+      <td>        布魯姆篩選器的類型，支援 BasicBloomFilter 和 BlockedBloomFilter      </td>
+      <td>BlockedBloomFilter</td>
     </tr>
   </tbody>
 </table>
@@ -1037,7 +1066,7 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        bloom 過濾器的最大誤判率      </td>
+      <td>        布隆篩選器的最大假陽性率      </td>
       <td>0.001</td>
     </tr>
   </tbody>
@@ -1066,7 +1095,7 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        將 pk 應用於 bloom filter 時的批次大小      </td>
+      <td>        將 PK 套用至布隆篩選器時的批次大小      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -1095,8 +1124,8 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        是否啟用收集複製。      </td>
-      <td>假</td>
+      <td>        是否啟用集合複製。      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -1124,8 +1153,8 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        若為 true，則在分割區鍵欄位上執行群集壓縮和分割修剪      </td>
-      <td>假</td>
+      <td>        若為 true，則針對分區鍵欄位執行叢集緊湊化與區段修剪      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -1153,8 +1182,8 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        如果為 true，會對向量欄位做聚類壓縮和分割修剪      </td>
-      <td>假</td>
+      <td>        若為 true，則對向量欄位執行叢集壓縮與區段修剪      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -1182,8 +1211,8 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        如果為 true，啟用向量聚類關鍵和向量聚類壓縮      </td>
-      <td>假</td>
+      <td>        若為 true，則啟用向量叢集鍵及向量叢集壓縮      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -1211,8 +1240,8 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        當混合或獨立模式時，啟用本機 rpc 進行內部通訊。      </td>
-      <td>假</td>
+      <td>        在混合模式或獨立模式下，啟用用於內部通訊的本地 RPC。      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -1240,7 +1269,7 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        等待任務完成並釋放池中資源的最長時間      </td>
+      <td>        等待任務完成並釋放資源池中資源的最大時間      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -1270,11 +1299,11 @@ summary: 學習如何為 Milvus 設定共用。
   <tbody>
     <tr>
       <td>
-        <li>群集的唯一識別碼，用於自動識別碼的產生，以確保在多個 Milvus 群集中的全局唯一性。</li>      
-        <li>有效值：[0、1、2、3、4、5、6、7] (最多支援 8 個群集)</li>      
-        <li>每個群集必須有唯一的 clusterID，以防止執行多個群集時 AutoID 重疊。</li>      
-        <li>此 ID 嵌入在 64 位 AutoID 結構中，作為 cluster_id 段的一部分。</li>      
-        <li>如需詳細資訊，請參閱<a href="/docs/zh-hant/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">Primary Field &amp; AutoID</a>。</li>      </td>
+        <li>用於自動產生識別碼 (AutoID) 的叢集唯一識別碼，以確保在多個 Milvus 叢集間具有全域唯一性。</li>      
+        <li>有效值：[0, 1, 2, 3, 4, 5, 6, 7]（最多支援 8 個叢集）</li>      
+        <li>每個叢集必須擁有唯一的 clusterID，以避免在運行多個叢集時發生 AutoID 重疊的情況。</li>      
+        <li>此識別碼會作為 cluster_id 區段的一部分，嵌入 64 位元的 AutoID 結構中。</li>      
+        <li>如需更多資訊，請參閱「<a href="/docs/zh-hant/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">主要欄位與 AutoID</a>」。</li>      </td>
       <td>0</td>
     </tr>
   </tbody>

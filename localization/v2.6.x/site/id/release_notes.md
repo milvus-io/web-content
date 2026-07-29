@@ -19,6 +19,75 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.6.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v2621" class="common-anchor-header">v2.6.21<button data-href="#v2621" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release date: July 28, 2026</p>
+<table>
+<thead>
+<tr><th>Milvus Version</th><th>Python SDK Version</th><th>Node.js SDK Version</th><th>Java SDK Version</th><th>Go SDK Version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.6.21</td><td>2.6.17</td><td>2.6.17</td><td>2.6.22</td><td>2.6.21</td></tr>
+</tbody>
+</table>
+<p>We are excited to announce the release of Milvus v2.6.21! This release improves task scheduling, concurrent future registration, and policy listing efficiency. It also strengthens query readiness, WAL switching, index reconstruction, compaction resilience, and GPU CAGRA search correctness.</p>
+<h3 id="Improvements" class="common-anchor-header">Improvements<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Improved concurrent future registration scalability by sharding the active future manager and increasing its registration buffer (<a href="https://github.com/milvus-io/milvus/pull/50900">#50900</a>)</li>
+<li>Improved load balancing for import, compaction, index, and statistics tasks across DataNodes by selecting the least-loaded node during scheduling (<a href="https://github.com/milvus-io/milvus/pull/51101">#51101</a>)</li>
+<li>Reduced redundant grantee scans when listing policies containing legacy grants (<a href="https://github.com/milvus-io/milvus/pull/51422">#51422</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Fixed an issue where single-field <code translate="no">group_by_fields</code> search parameters were silently ignored, allowing unsupported BinaryVector group-by searches to return ordinary top-k results (<a href="https://github.com/milvus-io/milvus/pull/51159">#51159</a>)</li>
+<li>Fixed an issue where collections could be reported as load-ready before their delegators were able to serve queries (<a href="https://github.com/milvus-io/milvus/pull/51298">#51298</a>)</li>
+<li>Fixed an issue where Milvus could continue using a stale message queue type after switching WAL backends (<a href="https://github.com/milvus-io/milvus/pull/51552">#51552</a>)</li>
+<li>Fixed text index reconstruction failures for nullable VARCHAR fields when rebuilding from scalar index data (<a href="https://github.com/milvus-io/milvus/pull/51630">#51630</a>)</li>
+<li>Fixed an issue where DataNode could crash and enter CrashLoopBackOff when sort compaction encountered a missing binlog object (<a href="https://github.com/milvus-io/milvus/pull/51685">#51685</a>)</li>
+<li>Fixed an issue where QueryNode could crash while releasing segments if the target worker was unavailable (<a href="https://github.com/milvus-io/milvus/pull/51701">#51701</a>)</li>
+<li>Fixed incorrect cosine normalization for INT8 vectors in GPU CAGRA searches by upgrading Knowhere to v2.6.18 (<a href="https://github.com/milvus-io/milvus/pull/51766">#51766</a>)</li>
+</ul>
 <h2 id="v2620" class="common-anchor-header">v2.6.20<button data-href="#v2620" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

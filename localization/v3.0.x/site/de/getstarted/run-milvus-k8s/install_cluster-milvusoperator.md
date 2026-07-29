@@ -38,7 +38,7 @@ title: Milvus-Cluster mit Milvus Operator installieren
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Der Milvus Operator ist eine Lösung, die Ihnen dabei hilft, einen vollständigen Milvus-Service-Stack für Kubernetes-Cluster (K8s) bereitzustellen und zu verwalten. Der Stack umfasst alle Milvus-Komponenten sowie relevante Abhängigkeiten wie etcd, Pulsar und MinIO.</p>
+    </button></h2><p>Der Milvus Operator ist eine Lösung, die Ihnen dabei hilft, einen vollständigen Milvus-Service-Stack in Kubernetes-Clustern (K8s) bereitzustellen und zu verwalten. Der Stack umfasst alle Milvus-Komponenten und relevante Abhängigkeiten wie etcd und MinIO, wobei Woodpecker als integrierte Nachrichtenwarteschlange dient.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Voraussetzungen<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -63,10 +63,10 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Überprüfen Sie vor der Installation <a href="/docs/de/prerequisite-helm.md">die Hardware- und Softwareanforderungen</a>.</p></li>
-<li><p>Vor der Installation von Milvus wird empfohlen, das <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> zu verwenden, um die Hardwareanforderungen auf der Grundlage Ihrer Datenmenge abzuschätzen. Dies trägt dazu bei, eine optimale Leistung und Ressourcenzuweisung für Ihre Milvus-Installation sicherzustellen.</p></li>
+<li><p>Vor der Installation von Milvus wird empfohlen, das <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> zu verwenden, um die Hardwareanforderungen basierend auf Ihrer Datenmenge abzuschätzen. Dies trägt dazu bei, eine optimale Leistung und Ressourcenzuweisung für Ihre Milvus-Installation sicherzustellen.</p></li>
 </ul>
 <div class="alert note">
-<p>Sollten beim Abrufen des Images Probleme auftreten, kontaktieren Sie uns bitte unter <a href="mailto:community@zilliz.com">community@zilliz.com</a> mit Details zum Problem, und wir werden Ihnen die erforderliche Unterstützung zukommen lassen.</p>
+<p>Sollten beim Herunterladen des Images Probleme auftreten, kontaktieren Sie uns bitte unter <a href="mailto:community@zilliz.com">community@zilliz.com</a> mit Details zum Problem, und wir werden Ihnen die erforderliche Unterstützung zukommen lassen.</p>
 </div>
 <h2 id="Install-Milvus-Operator" class="common-anchor-header">Installieren Sie den Milvus Operator<button data-href="#Install-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -137,7 +137,7 @@ service/milvus-operator-controller-manager-metrics-service created
 service/milvus-operator-webhook-service created
 deployment.apps/milvus-operator-controller-manager created
 <button class="copy-code-btn"></button></code></pre>
-<p>Sie können wie folgt überprüfen, ob der Milvus Operator-Pod läuft:</p>
+<p>So können Sie überprüfen, ob der Milvus Operator-Pod läuft:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods -n milvus-operator</span>
 
 NAME                               READY   STATUS    RESTARTS   AGE
@@ -159,7 +159,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1. Einen Milvus-Cluster bereitstellen<button data-href="#1-Deploy-a-Milvus-cluster" class="anchor-icon" translate="no">
+    </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1. Milvus-Cluster bereitstellen<button data-href="#1-Deploy-a-Milvus-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -177,10 +177,10 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Sobald der Milvus-Operator-Pod läuft, können Sie wie folgt einen Milvus-Cluster bereitstellen.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Der obige Befehl stellt einen Milvus-Cluster bereit, der <strong>Woodpecker</strong> als Nachrichtenwarteschlange verwendet (empfohlen für v3.0-beta) und alle neuen Architekturkomponenten einschließlich des Streaming-Knotens enthält.</p>
+<p>Der obige Befehl stellt einen Milvus-Cluster bereit, bei dem <strong>Woodpecker</strong> als Nachrichtenwarteschlange verwendet wird (empfohlen für v3.0.0) und alle neuen Architekturkomponenten einschließlich des Streaming-Knotens enthalten sind.</p>
 <p><strong>Architektur-Highlights dieser Bereitstellung:</strong></p>
 <ul>
-<li><strong>Nachrichtenwarteschlange</strong>: <a href="/docs/de/use-woodpecker.md">Verwendet Woodpecker</a> (reduziert den Wartungsaufwand für die Infrastruktur)</li>
+<li><strong>Nachrichtenwarteschlange</strong>: <a href="/docs/de/woodpecker.md">Verwendet Woodpecker</a> (reduziert den Wartungsaufwand für die Infrastruktur)</li>
 <li><strong>Streaming-Knoten</strong>: Aktiviert für eine verbesserte Datenverarbeitung</li>
 <li><strong>Mix-Koordinator</strong>: Konsolidierte Koordinatorkomponenten für verbesserte Effizienz</li>
 </ul>
@@ -221,11 +221,6 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     <span class="hljs-attr">status:</span> <span class="hljs-string">&quot;True&quot;</span>
     <span class="hljs-attr">type:</span> <span class="hljs-string">StorageReady</span>
   <span class="hljs-bullet">-</span> <span class="hljs-attr">lastTransitionTime:</span> <span class="hljs-string">&quot;xxxx-xx-xxTxx:xx:xxZ&quot;</span>
-    <span class="hljs-attr">message:</span> <span class="hljs-string">Pulsar</span> <span class="hljs-string">is</span> <span class="hljs-string">ready</span>
-    <span class="hljs-attr">reason:</span> <span class="hljs-string">PulsarReady</span>
-    <span class="hljs-attr">status:</span> <span class="hljs-string">&quot;True&quot;</span>
-    <span class="hljs-attr">type:</span> <span class="hljs-string">PulsarReady</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-attr">lastTransitionTime:</span> <span class="hljs-string">&quot;xxxx-xx-xxTxx:xx:xxZ&quot;</span>
     <span class="hljs-attr">message:</span> <span class="hljs-string">Etcd</span> <span class="hljs-string">endpoints</span> <span class="hljs-string">is</span> <span class="hljs-string">healthy</span>
     <span class="hljs-attr">reason:</span> <span class="hljs-string">EtcdReady</span>
     <span class="hljs-attr">status:</span> <span class="hljs-string">&quot;True&quot;</span>
@@ -238,7 +233,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
   <span class="hljs-attr">endpoint:</span> <span class="hljs-string">my-release-milvus.default:19530</span>
   <span class="hljs-attr">status:</span> <span class="hljs-string">Healthy</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Der Milvus-Operator erstellt zunächst die Milvus-Abhängigkeiten wie etcd, Pulsar und MinIO und anschließend die Milvus-Komponenten wie Proxy, Koordinatoren und Knoten.</p>
+<p>Der Milvus-Operator erstellt zunächst die Milvus-Abhängigkeiten wie etcd und MinIO und anschließend die Milvus-Komponenten wie Proxy, Koordinatoren und Knoten.</p>
 <p>Sobald Ihr Milvus-Cluster bereit ist, sollte der Status aller Pods im Milvus-Cluster in etwa wie folgt aussehen.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods</span>
 
@@ -285,11 +280,11 @@ my-release-minio-3                               1/1     Running   0          2m
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>Optional können Sie im obigen Befehl „ <code translate="no">:19530</code> “ anstelle von „ <code translate="no">27017:19530</code> “ verwenden, damit „ <code translate="no">kubectl</code> “ einen lokalen Port für Sie zuweist und Sie sich nicht um Portkonflikte kümmern müssen.</p>
-<p>Standardmäßig lauscht die Portweiterleitung von `kubectl` nur auf <code translate="no">localhost</code>. Verwenden Sie das Flag <code translate="no">address</code>, wenn Milvus auf die ausgewählte oder alle IP-Adressen lauschen soll. Der folgende Befehl sorgt dafür, dass die Portweiterleitung auf alle IP-Adressen des Host-Rechners lauscht.</p>
+<p>Standardmäßig lauscht die Portweiterleitung von `kubectl` nur auf <code translate="no">localhost</code>. Verwenden Sie das Flag <code translate="no">address</code>, wenn Milvus auf die ausgewählte oder alle IP-Adressen lauschen soll. Der folgende Befehl bewirkt, dass die Portweiterleitung auf allen IP-Adressen des Host-Rechners lauscht.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
-<p>Nun können Sie über den weitergeleiteten Port eine Verbindung zu Milvus herstellen.</p>
+<p>Nun kannst du über den weitergeleiteten Port eine Verbindung zu Milvus herstellen.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Optional) Milvus-Konfigurationen aktualisieren<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -305,7 +300,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie können die Konfigurationen Ihres Milvus-Clusters anzeigen und aktualisieren, indem Sie den Befehl ` <code translate="no">patch</code> ` wie folgt aufrufen:</p>
+    </button></h2><p>Sie können die Konfigurationen Ihres Milvus-Clusters anzeigen und aktualisieren, indem Sie den Befehl „ <code translate="no">patch</code> “ wie folgt aufrufen:</p>
 <ol>
 <li><p>Führen Sie den folgenden Befehl aus, um eine Vorschau der geplanten Konfigurationen anzuzeigen.</p>
 <p>Im Folgenden wird davon ausgegangen, dass Sie den Parameter „ <code translate="no">spec.components.disableMetric</code> “ auf „ <code translate="no">false</code> “ ms aktualisieren möchten.</p>
@@ -360,7 +355,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>Wenn Sie den Milvus-Cluster mit der Standardkonfiguration löschen, werden Abhängigkeiten wie etcd, Pulsar und MinIO nicht gelöscht. Daher werden diese Abhängigkeiten bei der nächsten Installation derselben Milvus-Cluster-Instanz erneut verwendet.</li>
+<li>Wenn Sie den Milvus-Cluster mit der Standardkonfiguration löschen, werden Abhängigkeiten wie etcd und MinIO nicht gelöscht. Daher werden diese Abhängigkeiten bei der nächsten Installation derselben Milvus-Cluster-Instanz erneut verwendet.</li>
 <li>Informationen zum Löschen der Abhängigkeiten und der Persistent Volume Claims (PVCs) zusammen mit dem Milvus-Cluster finden Sie in <a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">der Konfigurationsdatei</a>.</li>
 </ul>
 </div>
@@ -379,7 +374,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Es gibt zwei Möglichkeiten, den Milvus Operator zu deinstallieren.</p>
+    </button></h2><p>Es gibt außerdem zwei Möglichkeiten, den Milvus Operator zu deinstallieren.</p>
 <ul>
 <li><a href="#Uninstall-with-Helm">Deinstallation mit Helm</a></li>
 <li><a href="#Uninstall-with-kubectl">Deinstallation mit kubectl</a></li>
@@ -388,7 +383,31 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Uninstall-with-kubectl" class="common-anchor-header">Deinstallation mit kubectl</h4><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v1.3.7/deploy/manifests/deployment.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Whats-next" class="common-anchor-header">Was nun?<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Optional-dependencies" class="common-anchor-header">Optionale Abhängigkeiten<button data-href="#Optional-dependencies" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Dieser Deployment verwendet <strong>Woodpecker</strong> als Nachrichtenwarteschlange, <strong>etcd</strong> für Metadaten und <strong>MinIO</strong> für den Objektspeicher, die alle vom Milvus Operator bereitgestellt werden. Informationen zur Verwendung eines anderen Backends mit dem Operator finden Sie hier:</p>
+<ul>
+<li>Nachrichtenwarteschlange: <a href="/docs/de/woodpecker.md">Woodpecker</a> (Standard) · <a href="/docs/de/message_storage_operator.md#Configure-Pulsar">Pulsar</a> · <a href="/docs/de/message_storage_operator.md#Configure-Kafka">Kafka</a> · <a href="/docs/de/message_storage_operator.md#Configure-RocksMQ">RocksMQ</a></li>
+<li>Objektspeicher: <a href="/docs/de/object_storage_operator.md">Konfigurieren Sie den Objektspeicher mit dem Milvus Operator</a></li>
+<li>Metadaten: <a href="/docs/de/meta_storage_operator.md">Konfigurieren Sie etcd mit dem Milvus Operator</a></li>
+</ul>
+<div class="alert note">
+<p>Storage V3 ist standardmäßig deaktiviert. Aktivieren Sie es, bevor Sie Funktionen nutzen, die davon abhängen. Informationen zu Anforderungen und Kompatibilitätsaspekten finden Sie unter <a href="/docs/de/storage-v3.md">Storage V3</a>.</p>
+</div>
+<h2 id="Whats-next" class="common-anchor-header">Was kommt als Nächstes<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -405,7 +424,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>Nachdem Sie Milvus in Docker installiert haben, können Sie:</p>
 <ul>
-<li><p>Schauen Sie sich <a href="/docs/de/quickstart.md">„Hello Milvus“</a> an, um zu sehen, was Milvus leisten kann.</p></li>
+<li><p>Schauen Sie sich <a href="/docs/de/quickstart.md">„Hello Milvus</a> “ an, um zu sehen, was Milvus alles kann.</p></li>
 <li><p>Lernen Sie die grundlegenden Funktionen von Milvus kennen:</p>
 <ul>
 <li><a href="/docs/de/manage_databases.md">Datenbanken verwalten</a></li>

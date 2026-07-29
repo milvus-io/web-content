@@ -1,12 +1,9 @@
 ---
 id: add-fields-to-an-existing-collection.md
-title: 向现有 Collections 添加字段Compatible with Milvus 2.6.x
-summary: >-
-  Milvus 允许你在现有的 Collections 中动态添加新字段，使你可以根据应用需求的变化，轻松地发展你的数据
-  Schema。本指南通过实际示例向你展示如何在不同情况下添加字段。
-beta: Milvus 2.6.x
+title: 修改Collection Schema
+summary: 通过添加或删除标量字段、向量字段以及由函数生成的向量字段，来修改现有 Collection Schema，而无需重新创建该 Collection。
 ---
-<h1 id="Add-Fields-to-an-Existing-Collection" class="common-anchor-header">向现有 Collections 添加字段<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Add-Fields-to-an-Existing-Collection" class="anchor-icon" translate="no">
+<h1 id="Alter-Collection-Schema" class="common-anchor-header">修改Collection Schema<button data-href="#Alter-Collection-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +18,11 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 允许你动态地添加新字段到现有的 Collections 中，使你可以很容易地随着应用需求的变化而发展你的数据 Schema。本指南通过实际例子向你展示如何在不同情况下添加字段。</p>
-<h2 id="Considerations" class="common-anchor-header">注意事项<button data-href="#Considerations" class="anchor-icon" translate="no">
+    </button></h1><p>当Collection从开发环境迁移到生产环境时，每个实体周围的字段通常会发生变化。 您可能会添加用于过滤和应用逻辑的标量字段（如<code translate="no">source_uri</code> 或<code translate="no">review_status</code> ），为应用程序生成的Embeddings添加新的向量字段，为对现有文本进行词汇搜索而添加由BM25生成的稀疏向量字段，或者移除不再使用的字段。“修改Schema”功能允许您就地进行受支持的字段更改，而无需重新创建Collection。</p>
+<div class="alert note">
+<p>本指南涵盖托管 Collection 中的字段级 Schema 更改，包括用户定义字段和由函数生成的向量字段。若要向外部 Collection 添加字段，请参阅<a href="/docs/zh/alter-external-collection-schema.md">“修改外部 Collection Schema”</a>。对于字段属性更改（例如，更改<code translate="no">VARCHAR</code> 字段的<code translate="no">max_length</code> 或<code translate="no">ARRAY</code> 字段的<code translate="no">max_capacity</code> ），请参阅<a href="/docs/zh/alter-collection-field.md">“修改 Collection 字段”</a>。 有关动态字段行为，请参阅<a href="/docs/zh/enable-dynamic-field.md">“Dynamic Field</a>”和<a href="/docs/zh/modify-collection.md">“修改Collection”</a>。</p>
+</div>
+<h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,40 +37,37 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在向 Collections 添加字段之前，请牢记以下要点：</p>
+    </button></h2><p><strong>添加用户定义字段</strong></p>
 <ul>
-<li><p>您可以添加标量字段（<code translate="no">INT64</code>,<code translate="no">VARCHAR</code>,<code translate="no">FLOAT</code>,<code translate="no">DOUBLE</code> 等）。向量字段不能添加到现有的 Collections 中。</p></li>
-<li><p>新字段必须是可归零的（nullable=True），以适应没有新字段值的现有实体。</p></li>
-<li><p>向已加载的 Collections 添加字段会增加内存使用量。</p></li>
-<li><p>每个 Collection 的字段总数有最大限制。详情请参阅<a href="/docs/zh/limitations.md#Number-of-resources-in-a-collection">Milvus 限制</a>。</p></li>
-<li><p>在静态字段中，字段名必须是唯一的。</p></li>
-<li><p>对于最初未使用<code translate="no">enable_dynamic_field=True</code> 创建的 Collections，不能添加<code translate="no">$meta</code> 字段来启用动态字段功能。</p></li>
+<li><p>添加的用户定义字段必须允许为空。在调用<code translate="no">add_collection_field()</code> 时，请设置<code translate="no">nullable=True</code> 。对于现有实体，除非您添加的是带有<code translate="no">default_value</code> 的标量字段，否则新增字段的类型默认为<code translate="no">NULL</code> 。</p></li>
+<li><p>Milvus 2.6.x 及更高版本支持添加用户定义的标量字段。Milvus 2.6.18 及更高版本支持添加用户定义的向量字段。</p></li>
+<li><p>Milvus 3.0.0 及更高版本支持添加 StructArray 字段。添加的 StructArray 字段必须为可空类型。</p></li>
+<li><p>字段名称在Collection中的所有字段中必须是唯一的。</p></li>
 </ul>
-<h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>本指南假定您拥有</p>
+<p><strong>添加由函数生成的向量字段</strong></p>
 <ul>
-<li><p>运行中的 Milvus 实例</p></li>
-<li><p>已安装 Milvus SDK</p></li>
-<li><p>现有的 Collections</p></li>
+<li><p>每次Schema更新只能添加一个函数和一个生成的向量字段。</p></li>
+<li><p>支持的函数决定了生成的向量字段类型：<code translate="no">BM25</code> 生成一个<code translate="no">SPARSE_FLOAT_VECTOR</code> 字段，而<code translate="no">MINHASH</code> 生成一个<code translate="no">BINARY_VECTOR</code> 字段。</p></li>
+<li><p>生成的向量字段必须是新字段。它不能指向Collection Schema中已存在的字段。</p></li>
+<li><p>生成的向量字段不能为可空。</p></li>
+<li><p>该函数使用的输入字段必须已在Collection中存在。</p></li>
+<li><p>将 BM25 或 MinHash 函数添加到现有 Collection 时，该函数的输入必须是<code translate="no">VARCHAR</code> 字段。此工作流不支持<code translate="no">TEXT</code> 输入，因为 Milvus 无法根据该输入类型为现有实体回填生成的输出。</p></li>
+</ul>
+<p><strong>删除用户定义字段</strong></p>
+<ul>
+<li><p>您无法删除 Collection 的主键字段、Partition Key 字段、聚簇键字段或最后一个向量字段。</p></li>
+<li><p>您可以删除整个<code translate="no">ARRAY&lt;STRUCT&gt;</code> 字段，但无法删除<code translate="no">ARRAY&lt;STRUCT&gt;</code> 字段内的单个子字段。</p></li>
+<li><p>您无法直接删除用作函数输入字段或作为函数输出字段生成的字段。要删除函数输出字段，请删除生成该字段的函数。</p></li>
+</ul>
+<p><strong>删除由函数生成的向量字段</strong></p>
+<ul>
+<li><p>在此模式更改工作流中，删除函数将同时移除该函数及其生成的输出字段。函数输入字段仍保留在 Collection 模式中。</p></li>
+<li><p>如果删除函数的输出字段会导致Collection中不再包含任何向量字段，则删除该函数的操作将被拒绝。</p></li>
 </ul>
 <div class="alert note">
-<p>有关<a href="/docs/zh/create-collection.md">Collections</a>的创建和基本操作，请参阅我们的创建 Collections。</p>
+<p>对于超出支持的添加和删除操作范围的 Schema 变更，请重新创建或迁移该 Collection。</p>
 </div>
-<h2 id="Basic-usage" class="common-anchor-header">基本用法<button data-href="#Basic-usage" class="anchor-icon" translate="no">
+<h2 id="Add-fields-to-an-existing-collection" class="common-anchor-header">向现有Collection添加字段<button data-href="#Add-fields-to-an-existing-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -85,132 +82,15 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
-
-<span class="hljs-comment"># Connect to your Milvus server</span>
-client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>  <span class="hljs-comment"># Replace with your Milvus server URI</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
-<span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
-
-<span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">config</span> <span class="hljs-operator">=</span> ConnectConfig.builder()
-        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
-        .build();
-<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(config);
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>;
-
-<span class="hljs-keyword">const</span> milvusClient = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
-    <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;localhost:19530&#x27;</span>
-});
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;localhost:19530&quot;</span>
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Scenario-1-Quickly-add-nullable-fields" class="common-anchor-header">场景 1：快速添加可空字段<button data-href="#Scenario-1-Quickly-add-nullable-fields" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>扩展 Collections 的最简单方法是添加可归零字段。当您需要为数据快速添加新属性时，这种方法再合适不过了。</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Add a nullable field to an existing collection</span>
-<span class="hljs-comment"># This operation:</span>
-<span class="hljs-comment"># - Returns almost immediately (non-blocking)</span>
-<span class="hljs-comment"># - Makes the field available for use with minimal delay</span>
-<span class="hljs-comment"># - Sets NULL for all existing entities</span>
-client.add_collection_field(
-    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
-    field_name=<span class="hljs-string">&quot;created_timestamp&quot;</span>,  <span class="hljs-comment"># Name of the new field to add</span>
-    data_type=DataType.INT64,        <span class="hljs-comment"># Data type must be a scalar type</span>
-    nullable=<span class="hljs-literal">True</span>                    <span class="hljs-comment"># Must be True for added fields</span>
-    <span class="hljs-comment"># Allows NULL values for existing entities</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddCollectionFieldReq;
-
-client.addCollectionField(AddCollectionFieldReq.builder()
-        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
-        .fieldName(<span class="hljs-string">&quot;created_timestamp&quot;</span>)
-        .dataType(DataType.Int64)
-        .isNullable(<span class="hljs-literal">true</span>)
-        .build());
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">addCollectionField</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;product_catalog&#x27;</span>,
-    <span class="hljs-attr">field</span>: {
-        <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;created_timestamp&#x27;</span>,
-        <span class="hljs-attr">dataType</span>: <span class="hljs-string">&#x27;Int64&#x27;</span>,
-        <span class="hljs-attr">nullable</span>: <span class="hljs-literal">true</span>
-     }
-});
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/fields/add&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
-  -d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;product_catalog&quot;,
-    &quot;schema&quot;: {
-      &quot;fieldName&quot;: &quot;created_timestamp&quot;,
-      &quot;dataType&quot;: &quot;Int64&quot;,
-      &quot;nullable&quot;: true
-    }
-  }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>预期行为：</p>
+    </button></h2><p>根据字段值的生成方式选择添加字段的路径：</p>
 <ul>
-<li><p><strong>现有实体的</strong>新字段将为 NULL</p></li>
-<li><p><strong>新实体</strong>可以有 NULL 或实际值</p></li>
-<li><p>由于内部 Schema 同步，<strong>字段可用性</strong>几乎立即发生，延迟极小</p></li>
-<li><p>短暂同步后<strong>可立即查询</strong></p></li>
+<li><p>当需要用于过滤、查询输出或应用逻辑的新元数据时，<a href="#add-user-defined-scalar-fields--milvus-26x">请添加用户定义的标量字段</a>。</p></li>
+<li><p>当需要一个其元素共享相同 Struct Schema 的数组字段时，<a href="#add-structarray-fields--milvus-300">请添加 StructArray 字段</a>。</p></li>
+<li><p>当您的应用程序生成 Embeddings 并将向量值写入 Milvus 时，<a href="#add-user-defined-vector-fields--milvus-2618">请添加用户定义的向量字段</a>。</p></li>
+<li><p>当 Milvus 需要根据现有字段生成向量值（例如来自文本的 BM25 稀疏向量或 MinHash 签名）时，<a href="#add-vector-fields-generated-by-functions--milvus-30x">请添加由函数生成的向量字段</a>。</p></li>
 </ul>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Example query result</span>
-{
-    <span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>, 
-    <span class="hljs-string">&#x27;created_timestamp&#x27;</span>: <span class="hljs-literal">None</span>  <span class="hljs-comment"># New field shows NULL for existing entities</span>
-}
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
-{
-    <span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>, 
-    <span class="hljs-string">&#x27;created_timestamp&#x27;</span>: <span class="hljs-title class_">None</span>  # <span class="hljs-title class_">New</span> field shows <span class="hljs-variable constant_">NULL</span> <span class="hljs-keyword">for</span> existing entities
-}
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-{
-  <span class="hljs-string">&quot;code&quot;</span>: 0,
-  <span class="hljs-string">&quot;data&quot;</span>: {},
-  <span class="hljs-string">&quot;cost&quot;</span>: 0
-}
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Scenario-2-Add-fields-with-default-values" class="common-anchor-header">方案 2：添加带默认值的字段<button data-href="#Scenario-2-Add-fields-with-default-values" class="anchor-icon" translate="no">
+<p>在所有情况下，新字段名称在 Collection 中必须不存在，且字段总数不能超过 Milvus 的字段数量限制。详情请参阅《<a href="/docs/zh/limitations.md#number-of-resources-in-a-collection">Milvus 限制</a>》。</p>
+<h3 id="Add-user-defined-scalar-fields--Milvus-26x" class="common-anchor-header">添加用户定义的标量字段<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Add-user-defined-scalar-fields--Milvus-26x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -225,92 +105,337 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>当您希望现有实体有一个有意义的初始值而不是 NULL 时，可指定默认值。</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Add a field with default value</span>
-<span class="hljs-comment"># This operation:</span>
-<span class="hljs-comment"># - Sets the default value for all existing entities</span>
-<span class="hljs-comment"># - Makes the field available with minimal delay</span>
-<span class="hljs-comment"># - Maintains data consistency with the default value</span>
-client.add_collection_field(
+    </button></h3><p>使用 `<code translate="no">add_collection_field()</code> ` 将用户定义的标量字段添加到现有 Collection 中。</p>
+<p>这与在Dynamic Field中存储任意键不同：在Schema更新生效后，新的标量字段将成为Collection模式的常规组成部分。您可以向其中插入或更新值，在支持的情况下为其创建索引，在查询和搜索过滤器中使用它，并在查询或搜索结果中返回该字段的值。</p>
+<p>由于现有实体是在新字段创建之前插入的，因此每个新增的用户定义标量字段都必须允许为空：</p>
+<ul>
+<li><p>如果您添加的标量字段使用<code translate="no">nullable=True</code> 且未指定<code translate="no">default_value</code> ，现有实体在新字段中将返回<code translate="no">NULL</code> 。</p></li>
+<li><p>如果您添加的标量字段同时包含<code translate="no">nullable=True</code> 和<code translate="no">default_value</code> ，现有实体将返回默认值，而非<code translate="no">NULL</code> 。</p></li>
+</ul>
+<p>标量过滤表达式无法匹配<code translate="no">NULL</code> 标量值。有关详细信息，请参阅<a href="/docs/zh/nullable-and-default.md">“可为空字段”</a>。</p>
+<p><strong>示例：添加一个可为空的标量字段</strong></p>
+<p>以下示例向名为<code translate="no">product_catalog</code> 的现有 Collection 中添加了一个可为空的<code translate="no">source</code> 字段。</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="highlighted-comment-line">client.add_collection_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;source&quot;</span>,</span>
+<span class="highlighted-comment-line">    data_type=DataType.VARCHAR,</span>
+<span class="highlighted-comment-line">    max_length=<span class="hljs-number">128</span>,</span>
+<span class="highlighted-comment-line">    nullable=<span class="hljs-literal">True</span>,</span>
+<span class="highlighted-comment-line">)</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>添加该字段后，Collection 中已存在的实体在访问<code translate="no">source</code> 时将返回<code translate="no">NULL</code> 。新实体可在插入或更新时将<code translate="no">source</code> 设置为相应值。</p>
+<p><strong>示例：添加一个具有默认值的标量字段</strong></p>
+<p>如果希望现有实体返回具体值而非 `<code translate="no">NULL</code>`，请在添加标量字段时指定 `<code translate="no">default_value</code> `。以下示例添加了一个 `<code translate="no">review_status</code> ` 字段，并使用 `<code translate="no">&quot;unreviewed&quot;</code> ` 作为默认值。</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="highlighted-comment-line">client.add_collection_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;review_status&quot;</span>,</span>
+<span class="highlighted-comment-line">    data_type=DataType.VARCHAR,</span>
+<span class="highlighted-comment-line">    max_length=<span class="hljs-number">32</span>,</span>
+<span class="highlighted-comment-line">    nullable=<span class="hljs-literal">True</span>,</span>
+<span class="highlighted-comment-line">    default_value=<span class="hljs-string">&quot;unreviewed&quot;</span>,</span>
+<span class="highlighted-comment-line">)</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>添加字段后，Collection中已存在的实体在<code translate="no">review_status</code> 字段上将返回<code translate="no">&quot;unreviewed&quot;</code> 。新实体可以设置不同的值，或在未提供值时使用默认值。</p>
+<h3 id="Add-StructArray-fields--Milvus-300" class="common-anchor-header">添加 StructArray 字段<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0</span><button data-href="#Add-StructArray-fields--Milvus-300" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>使用 `<code translate="no">add_collection_struct_field()</code> ` 添加一个可接受 Struct 元素数组的 StructArray 字段。要添加 StructArray 字段，请按以下步骤操作：</p>
+<ol>
+<li><p>创建一个 Struct Schema，其中包含所需的支持数据类型的子字段。有关适用的数据类型，请参阅<a href="/docs/zh/structarray-limits.md#Supported-subfield-data-types">StructArray 限制</a>。</p></li>
+<li><p>引用上述创建的 Struct Schema，并在 `<code translate="no">add_collection_struct_field()</code>` 中设置该字段的最大容量。</p></li>
+<li><p>在请求中设置 `<code translate="no">nullable=True</code> `。</p></li>
+</ol>
+<p><strong>示例：添加一个可为空的 StructArray 字段</strong></p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="hljs-comment"># Create a Struct schema.</span>
+struct_schema = client.create_struct_field_schema()
+
+<span class="hljs-comment"># Add scalar fields to the Struct.</span>
+struct_schema.add_field(<span class="hljs-string">&quot;text&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">65535</span>)
+struct_schema.add_field(<span class="hljs-string">&quot;chapter&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">512</span>)
+
+<span class="hljs-comment"># Add vector fields to the Struct with mmap enabled.</span>
+struct_schema.add_field(<span class="hljs-string">&quot;text_vector&quot;</span>, DataType.FLOAT_VECTOR, mmap_enabled=<span class="hljs-literal">True</span>, dim=<span class="hljs-number">5</span>)
+struct_schema.add_field(<span class="hljs-string">&quot;chapter_vector&quot;</span>, DataType.FLOAT_VECTOR, mmap_enabled=<span class="hljs-literal">True</span>, dim=<span class="hljs-number">5</span>)
+
+<span class="highlighted-comment-line">client.add_collection_struct_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;books&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;chunks&quot;</span>,</span>
+<span class="highlighted-comment-line">    struct_schema=struct_schema,</span>
+<span class="highlighted-comment-line">    max_capacity=<span class="hljs-number">1024</span>,</span>
+<span class="highlighted-comment-line">    nullable=<span class="hljs-literal">True</span>,</span>
+<span class="highlighted-comment-line">)</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>添加 StructArray 字段后，Collection 中已存在的实体在其所有子字段上返回<code translate="no">NULL</code> 状态，表示<code translate="no">chunks</code> 。插入新实体时，请确保所有子字段要么为<code translate="no">NULL</code> ，要么具有有效值。如果插入的实体中部分子字段设置为<code translate="no">NULL</code> 而其他子字段设置为有效值，将会导致错误。</p>
+<h3 id="Add-user-defined-vector-fields--Milvus-2618+" class="common-anchor-header">添加用户定义的向量字段<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.18+</span><button data-href="#Add-user-defined-vector-fields--Milvus-2618+" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>当您的应用程序生成 Embeddings 并将向量值写入 Milvus 时，请使用<code translate="no">add_collection_field()</code> 添加用户定义的向量字段。</p>
+<p>每个添加的用户定义向量字段都必须为可空。对于现有实体，新向量字段的值默认为<code translate="no">NULL</code> ，直到您通过upsert或回填工作流写入向量值为止。新实体可在插入时包含该向量字段。向量搜索会跳过向量值为<code translate="no">NULL</code> 的实体。有关详细信息，请参阅《<a href="/docs/zh/nullable-and-default.md">可空字段》</a>。</p>
+<p><strong>示例：添加可为空的向量字段</strong></p>
+<p>以下示例向现有 Collection 中添加了一个名为<code translate="no">embedding_v2</code> 的可空稠密向量字段。请将<code translate="no">dim</code> 设置为应用程序生成的 Embeddings 的维度。</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="highlighted-comment-line">client.add_collection_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;embedding_v2&quot;</span>,</span>
+<span class="highlighted-comment-line">    data_type=DataType.FLOAT_VECTOR,</span>
+<span class="highlighted-comment-line">    dim=<span class="hljs-number">768</span>,</span>
+<span class="highlighted-comment-line">    nullable=<span class="hljs-literal">True</span>,</span>
+<span class="highlighted-comment-line">)</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>添加字段后，请在搜索该新向量字段之前为其创建索引：</p>
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;embedding_v2&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>,
+)
+
+client.create_index(
     collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
-    field_name=<span class="hljs-string">&quot;priority_level&quot;</span>,     <span class="hljs-comment"># Name of the new field</span>
-    data_type=DataType.VARCHAR,      <span class="hljs-comment"># String type field</span>
-    max_length=<span class="hljs-number">20</span>,                   <span class="hljs-comment"># Maximum string length</span>
-    nullable=<span class="hljs-literal">True</span>,                   <span class="hljs-comment"># Required for added fields</span>
-    default_value=<span class="hljs-string">&quot;standard&quot;</span>         <span class="hljs-comment"># Value assigned to existing entities</span>
-    <span class="hljs-comment"># Also used for new entities if no value provided</span>
+    index_params=index_params,
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">client.addCollectionField(AddCollectionFieldReq.builder()
-        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
-        .fieldName(<span class="hljs-string">&quot;priority_level&quot;</span>)
-        .dataType(DataType.VarChar)
-        .maxLength(<span class="hljs-number">20</span>)
-        .isNullable(<span class="hljs-literal">true</span>)
-        .build());
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">addCollectionField</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;product_catalog&#x27;</span>,
-    <span class="hljs-attr">field</span>: {
-        <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;priority_level&#x27;</span>,
-        <span class="hljs-attr">dataType</span>: <span class="hljs-string">&#x27;VarChar&#x27;</span>,
-        <span class="hljs-attr">nullable</span>: <span class="hljs-literal">true</span>,
-        <span class="hljs-attr">default_value</span>: <span class="hljs-string">&#x27;standard&#x27;</span>,
-     }
-});
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/fields/add&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
-  -d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;product_catalog&quot;,
-    &quot;schema&quot;: {
-      &quot;fieldName&quot;: &quot;priority_level&quot;,
-      &quot;dataType&quot;: &quot;VarChar&quot;,
-      &quot;nullable&quot;: true,
-      &quot;defaultValue&quot;: &quot;standard&quot;,
-      &quot;elementTypeParams&quot;: {
-        &quot;max_length&quot;: &quot;20&quot;
-      }
-    }
-  }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>预期行为：</p>
+<p>现有实体的 `<code translate="no">embedding_v2</code> ` 值为 `<code translate="no">NULL</code> `，当您按此字段搜索时，这些实体将被跳过。若要使现有实体可通过 `<code translate="no">embedding_v2</code>` 进行搜索，请通过 upsert 或回填工作流写入非空向量值。新实体可在插入时包含 `<code translate="no">embedding_v2</code> `。</p>
+<h3 id="Add-vector-fields-generated-by-functions--Milvus-30x" class="common-anchor-header">添加由函数生成的向量字段<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Add-vector-fields-generated-by-functions--Milvus-30x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>当需要 Milvus 根据现有 Collection 中已存储的数据生成新的向量字段时，请使用此工作流。该操作将添加两个相关的 Schema 元素：</p>
 <ul>
-<li><p><strong>现有实体</strong>将拥有新添加字段的默认值 (<code translate="no">&quot;standard&quot;</code>)</p></li>
-<li><p><strong>新实体</strong>可以覆盖默认值，或者在没有提供默认值的情况下使用默认值</p></li>
-<li><p><strong>字段</strong>几乎立即<strong>可用</strong>，延迟极小</p></li>
-<li><p>短暂同步后<strong>可立即查询</strong></p></li>
+<li><p>一个读取一个或多个现有输入字段的函数。</p></li>
+<li><p>一个新的向量输出字段，用于存储该函数生成的值。</p></li>
 </ul>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Example query result</span>
-{
-    <span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>,
-    <span class="hljs-string">&#x27;priority_level&#x27;</span>: <span class="hljs-string">&#x27;standard&#x27;</span>  <span class="hljs-comment"># Shows default value for existing entities</span>
-}
+<p>例如，BM25 函数读取现有的<code translate="no">VARCHAR</code> 字段，并生成用于词法搜索的<code translate="no">SPARSE_FLOAT_VECTOR</code> 字段；MinHash 函数则生成用于近似重复检测的<code translate="no">BINARY_VECTOR</code> 字段。此工作流不会添加或替换函数的输入字段。</p>
+<div class="alert note">
+<p>此功能需要 Storage V3。有关启用说明和兼容性注意事项，请参阅<a href="/docs/zh/storage-v3.md">Storage V3</a>。</p>
+</div>
+<p>将函数及其生成的向量字段添加到现有 Collection 中，还需进行 Schema 版本压缩和存储版本压缩。如果任一设置被禁用，Milvus 将拒绝该请求。这些额外先决条件仅在修改现有 Collection 时适用；在初始 Schema 中定义函数时，不会使用此现有数据回填工作流。</p>
+<p>支持的函数决定了生成的向量字段类型：</p>
+<table>
+<thead>
+<tr><th>函数</th><th>生成的向量字段类型</th><th>典型输入字段</th><th>典型用例</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BM25</code></td><td><code translate="no">SPARSE_FLOAT_VECTOR</code></td><td>启用了分析器的<code translate="no">VARCHAR</code> 场</td><td>词法搜索与关键词相关性</td></tr>
+<tr><td><code translate="no">MINHASH</code></td><td><code translate="no">BINARY_VECTOR</code></td><td>一个<code translate="no">VARCHAR</code> 字段</td><td>近似重复检测</td></tr>
+</tbody>
+</table>
+<p>有关各函数工作原理的详细信息，请参阅<a href="/docs/zh/bm25-function.md">BM25 函数</a>和<a href="/docs/zh/minhash-function.md">MinHash 函数</a>。</p>
+<p>生成的向量字段在Collection中不得已存在，且不能为可空字段。函数的输入字段必须已存在。</p>
+<p><strong>示例：添加一个用于词汇搜索的由 BM25 生成的稀疏向量字段</strong></p>
+<p>以下示例向现有 Collection 中添加了一个名为<code translate="no">text_bm25</code> 的 BM25 函数，以及一个名为<code translate="no">text_sparse</code> 的生成的稀疏向量字段。该 Collection 必须已包含一个名为<code translate="no">text</code> 的<code translate="no">VARCHAR</code> 字段，且已启用分析器。</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, Function, FunctionType, MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+sparse_field = client.create_field_schema(
+    name=<span class="hljs-string">&quot;text_sparse&quot;</span>,
+    data_type=DataType.SPARSE_FLOAT_VECTOR,
+    desc=<span class="hljs-string">&quot;BM25-generated sparse vector field&quot;</span>,
+)
+
+bm25_function = Function(
+    name=<span class="hljs-string">&quot;text_bm25&quot;</span>,
+    input_field_names=[<span class="hljs-string">&quot;text&quot;</span>],
+    output_field_names=[<span class="hljs-string">&quot;text_sparse&quot;</span>],
+    function_type=FunctionType.BM25,
+)
+
+<span class="highlighted-comment-line">client.add_function_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_schema=sparse_field,</span>
+<span class="highlighted-comment-line">    func=bm25_function,</span>
+<span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<p>添加 BM25 函数和生成的字段后，请在将该稀疏向量字段用于 BM25 搜索之前，为其创建索引：</p>
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;text_sparse&quot;</span>,
+    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;BM25&quot;</span>,
+    params={
+        <span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>,
+        <span class="hljs-string">&quot;bm25_k1&quot;</span>: <span class="hljs-number">1.2</span>,
+        <span class="hljs-string">&quot;bm25_b&quot;</span>: <span class="hljs-number">0.75</span>,
+    },
+)
+
+client.create_index(
+    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
+    index_params=index_params,
+)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">{
-    <span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>,
-    <span class="hljs-string">&#x27;priority_level&#x27;</span>: <span class="hljs-string">&#x27;standard&#x27;</span>  # <span class="hljs-title class_">Shows</span> <span class="hljs-keyword">default</span> value <span class="hljs-keyword">for</span> existing entities
-}
+<p>从概念上讲，此操作会添加以下字段和函数定义：</p>
+<pre><code translate="no" class="language-plaintext">New generated output field:
+  name: &quot;text_sparse&quot;
+  data_type: SPARSE_FLOAT_VECTOR
+  nullable: false
+
+New function:
+  name: &quot;text_bm25&quot;
+  type: BM25
+  input_field_names: [&quot;text&quot;]
+  output_field_names: [&quot;text_sparse&quot;]
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<p>请求成功后，<code translate="no">describe_collection()</code> 会在Collection Schema中同时返回新的<code translate="no">text_sparse</code> 向量字段和<code translate="no">text_bm25</code> 函数。Milvus会在新实体写入时生成该函数的输出。 对于现有实体，Milvus 会通过后台压缩异步填充生成的向量字段。Schema可见性确认了Schema更新成功，但并不表示所有现有实体的回填都已完成。有关完整的 BM25 搜索工作流，请参阅<a href="/docs/zh/full-text-search.md">全文搜索</a>。</p>
+<p>Milvus 还支持由 MinHash 生成的二进制向量字段，用于近似重复项检测。MinHash 函数使用<code translate="no">FunctionType.MINHASH</code> ，并将结果写入新的<code translate="no">BINARY_VECTOR</code> 输出字段。有关配置详情，请参阅《<a href="/docs/zh/minhash-function.md">MinHash 函数</a>》。</p>
+<h2 id="Drop-fields-from-an-existing-collection" class="common-anchor-header">从现有 Collection 中删除字段<button data-href="#Drop-fields-from-an-existing-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>您可以通过两种方式从现有 Collection 中移除字段。当用户定义的标量或向量字段不再属于 Collection 模型时，可直接将其删除。对于由函数生成的向量字段，可通过删除生成该字段的函数来移除。</p>
+<h3 id="Drop-user-defined-fields--Milvus-30x" class="common-anchor-header">删除用户定义的字段<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Drop-user-defined-fields--Milvus-30x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>使用 `<code translate="no">drop_collection_field()</code> ` 删除不再属于 Collection 模型的用户定义标量、向量或 StructArray 字段。</p>
+<p>删除字段会首先更改 Collection Schema 和字段可见性：</p>
+<ul>
+<li><p><code translate="no">drop_collection_field()</code> 执行成功后，Collection Schema 将得到更新：`<code translate="no">describe_collection()</code> ` 不再返回已删除的字段，且查询或搜索将无法在 `<code translate="no">output_fields</code> ` 中返回该字段，也无法在表达式中使用该字段。</p></li>
+<li><p>基于已删除字段构建的索引将作为Schema更新的一部分被清理。</p></li>
+</ul>
+<p>存储清理与Schema清理是分开处理的。有关详细信息，请参阅<a href="#when-is-storage-space-reclaimed-after-dropping-a-field">“删除字段后何时回收存储空间？</a>”。</p>
+<p><strong>示例：删除用户定义的标量字段</strong></p>
+<p>以下示例假设<code translate="no">experiment_tag</code> 是<code translate="no">product_catalog</code> 中的一个用户定义标量字段，并将该字段从 Collection 中删除。</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="highlighted-comment-line">client.drop_collection_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;experiment_tag&quot;</span>,</span>
+<span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-{
-    <span class="hljs-string">&#x27;id&#x27;</span>: 1,
-    <span class="hljs-string">&#x27;priority_level&#x27;</span>: <span class="hljs-string">&#x27;standard&#x27;</span>  <span class="hljs-comment"># Shows default value for existing entities</span>
-}
+<p>删除字段后，您可以调用<code translate="no">describe_collection()</code> 来验证该字段是否已不再属于Schema。</p>
+<p><strong>示例：删除 StructArray 字段</strong></p>
+<p>以下示例假设<code translate="no">chunks</code> 是<code translate="no">my_collection</code> 中的一个 StructArray 字段，并将它从 Collection 中删除。</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="highlighted-comment-line">client.drop_collection_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;chunks&quot;</span>,</span>
+<span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
+<p><strong>示例：删除用户定义的向量字段</strong></p>
+<p>您可以使用相同的<code translate="no">drop_collection_field()</code> 方法删除向量字段，但删除后 Collection 中仍必须至少包含一个向量字段。这对于那些暂时包含多种向量表示形式、随后将其中一种作为标准表示形式的 Collection 非常有用。</p>
+<p>以下示例假设 `<code translate="no">image_vector</code> ` 是 `<code translate="no">hybrid_catalog</code>` 中的用户定义向量场，且该 Collection 仍保留另一个向量场，例如 `<code translate="no">text_vector</code>`。</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="highlighted-comment-line">client.drop_collection_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;hybrid_catalog&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;image_vector&quot;</span>,</span>
+<span class="highlighted-comment-line">)</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>如果<code translate="no">image_vector</code> 是 Collection 中的最后一个向量场，则删除操作将被拒绝。</p>
+<h3 id="Drop-vector-fields-generated-by-functions--Milvus-30x" class="common-anchor-header">删除由函数生成的向量场<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Drop-vector-fields-generated-by-functions--Milvus-30x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>当您不再需要由函数生成的向量字段（例如由 BM25 生成的稀疏向量字段）时，请使用此操作。</p>
+<p>要删除生成的向量字段，请对生成该字段的函数调用<code translate="no">drop_collection_function()</code> 。在此工作流中，Milvus 会将该函数从 Collection Schema 中移除，并同时删除其生成的向量输出字段。</p>
+<p>请勿对函数输入字段或函数输出字段调用<code translate="no">drop_collection_field()</code> 。如果目标字段是函数输出字段，请改用<code translate="no">drop_collection_function()</code> 。删除函数后，函数输入字段将被保留。</p>
+<p><strong>示例：删除 BM25 函数及其生成的字段</strong></p>
+<p>以下示例假设<code translate="no">text_bm25</code> 是<code translate="no">product_catalog</code> 中的一个 BM25 函数，并生成一个名为<code translate="no">text_sparse</code> 的稀疏向量输出字段。</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="highlighted-comment-line">client.drop_collection_function(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
+<span class="highlighted-comment-line">    function_name=<span class="hljs-string">&quot;text_bm25&quot;</span>,</span>
+<span class="highlighted-comment-line">)</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>操作成功后，<code translate="no">describe_collection()</code> 将不再返回已删除的函数及其生成的输出字段。函数输入字段仍保留在 Schema 中。</p>
+<p>如果移除函数输出字段会导致Collection中没有任何向量字段，则该操作将被拒绝。</p>
 <h2 id="FAQ" class="common-anchor-header">常见问题<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -326,7 +451,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Can-I-enable-dynamic-schema-functionality-by-adding-a-meta-field" class="common-anchor-header">是否可以通过添加<code translate="no">$meta</code> 字段来启用动态 Schema 功能？<button data-href="#Can-I-enable-dynamic-schema-functionality-by-adding-a-meta-field" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Which-add-field-method-should-I-use" class="common-anchor-header">我应该使用哪种 add-field 方法？<button data-href="#Which-add-field-method-should-I-use" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -341,55 +466,11 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>不能，您不能使用<code translate="no">add_collection_field</code> 添加<code translate="no">$meta</code> 字段来启用动态字段功能。例如，下面的代码将不起作用：</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># ❌ This is NOT supported</span>
-client.add_collection_field(
-    collection_name=<span class="hljs-string">&quot;existing_collection&quot;</span>,
-    field_name=<span class="hljs-string">&quot;$meta&quot;</span>,
-    data_type=DataType.JSON  <span class="hljs-comment"># This operation will fail</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// ❌ This is NOT supported</span>
-client.addCollectionField(AddCollectionFieldReq.builder()
-        .collectionName(<span class="hljs-string">&quot;existing_collection&quot;</span>)
-        .fieldName(<span class="hljs-string">&quot;$meta&quot;</span>)
-        .dataType(DataType.JSON)
-        .build());
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// ❌ This is NOT supported</span>
-<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">addCollectionField</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;product_catalog&#x27;</span>,
-    <span class="hljs-attr">field</span>: {
-        <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;$meta&#x27;</span>,
-        <span class="hljs-attr">dataType</span>: <span class="hljs-string">&#x27;JSON&#x27;</span>,
-     }
-});
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<span class="hljs-comment"># ❌ This is NOT supported</span>
-curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/fields/add&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
-  -d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;existing_collection&quot;,
-    &quot;schema&quot;: {
-      &quot;fieldName&quot;: &quot;$meta&quot;,
-      &quot;dataType&quot;: &quot;JSON&quot;,
-      &quot;nullable&quot;: true
-    }
-  }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>启用动态 Schema 功能：</p>
-<ul>
-<li><p><strong>新建 Collections</strong>：创建 Collection 时将<code translate="no">enable_dynamic_field</code> 设置为 True。有关详情，请参阅<a href="/docs/zh/create-collection.md#Create-Schema">创建 Collections</a></p></li>
-<li><p><strong>现有 Collections</strong>：将 Collection-level 属性<code translate="no">dynamicfield.enabled</code> 设置为 True。有关详情，请参阅<a href="/docs/zh/modify-collection.md#Example-4-Enable-dynamic-field">修改 Collections</a>。</p></li>
-</ul>
-<h3 id="What-happens-when-I-add-a-field-with-the-same-name-as-a-dynamic-field-key" class="common-anchor-header">添加与动态字段关键字同名的字段时会发生什么情况？<button data-href="#What-happens-when-I-add-a-field-with-the-same-name-as-a-dynamic-field-key" class="anchor-icon" translate="no">
+    </button></h3><p>当您的应用程序为过滤、查询输出或应用程序逻辑提供标量值时，请使用<code translate="no">add_collection_field()</code> 来添加用户定义的标量字段。</p>
+<p>当您需要一个其元素共享相同 Struct Schema 的数组字段时，请使用 `<code translate="no">add_collection_struct_field()</code> ` 来添加 StructArray 字段。</p>
+<p>当您的应用程序生成 Embeddings 并将向量值写入 Milvus 时，请使用 `<code translate="no">add_collection_field()</code> ` 添加用户定义的向量字段。</p>
+<p>当 Milvus 需要从现有字段生成向量值时，请使用 generated-vector-field 工作流。本指南展示了使用<code translate="no">add_function_field()</code> 进行词法搜索的 BM25 路径。Milvus 还支持由 MinHash 生成的二进制向量字段，用于近似重复检测。</p>
+<h3 id="Why-must-added-user-defined-fields-be-nullable" class="common-anchor-header">为什么添加的用户定义字段必须允许为空？<button data-href="#Why-must-added-user-defined-fields-be-nullable" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -404,270 +485,9 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>当你的 Collections 启用了动态字段 (<code translate="no">$meta</code> exists) 时，你可以添加与现有动态字段键同名的静态字段。新的静态字段将屏蔽动态字段键，但会保留原始动态数据。</p>
-<p>为避免字段名称可能出现的冲突，在实际添加前，请参考现有字段和动态字段键，考虑要添加的字段名称。</p>
-<p><strong>示例场景：</strong></p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Original collection with dynamic field enabled</span>
-<span class="hljs-comment"># Insert data with dynamic field keys</span>
-data = [{
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
-    <span class="hljs-string">&quot;my_vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, ...],
-    <span class="hljs-string">&quot;extra_info&quot;</span>: <span class="hljs-string">&quot;this is a dynamic field key&quot;</span>,  <span class="hljs-comment"># Dynamic field key as string</span>
-    <span class="hljs-string">&quot;score&quot;</span>: <span class="hljs-number">99.5</span>                                 <span class="hljs-comment"># Another dynamic field key</span>
-}]
-client.insert(collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>, data=data)
-
-<span class="hljs-comment"># Add static field with same name as existing dynamic field key</span>
-client.add_collection_field(
-    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
-    field_name=<span class="hljs-string">&quot;extra_info&quot;</span>,         <span class="hljs-comment"># Same name as dynamic field key</span>
-    data_type=DataType.INT64,        <span class="hljs-comment"># Data type can differ from dynamic field key</span>
-    nullable=<span class="hljs-literal">True</span>                    <span class="hljs-comment"># Must be True for added fields</span>
-)
-
-<span class="hljs-comment"># Insert new data after adding static field</span>
-new_data = [{
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>,
-    <span class="hljs-string">&quot;my_vector&quot;</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, ...],
-    <span class="hljs-string">&quot;extra_info&quot;</span>: <span class="hljs-number">100</span>,               <span class="hljs-comment"># Now must use INT64 type (static field)</span>
-    <span class="hljs-string">&quot;score&quot;</span>: <span class="hljs-number">88.0</span>                    <span class="hljs-comment"># Still a dynamic field key</span>
-}]
-client.insert(collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>, data=new_data)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.*;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.InsertResp;
-
-<span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
-<span class="hljs-type">JsonObject</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
-row.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">1</span>);
-row.add(<span class="hljs-string">&quot;my_vector&quot;</span>, gson.toJsonTree(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, ...}));
-row.addProperty(<span class="hljs-string">&quot;extra_info&quot;</span>, <span class="hljs-string">&quot;this is a dynamic field key&quot;</span>);
-row.addProperty(<span class="hljs-string">&quot;score&quot;</span>, <span class="hljs-number">99.5</span>);
-
-<span class="hljs-type">InsertResp</span> <span class="hljs-variable">insertR</span> <span class="hljs-operator">=</span> client.insert(InsertReq.builder()
-        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
-        .data(Collections.singletonList(row))
-        .build());
-        
-client.addCollectionField(AddCollectionFieldReq.builder()
-        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
-        .fieldName(<span class="hljs-string">&quot;extra_info&quot;</span>)
-        .dataType(DataType.Int64)
-        .isNullable(<span class="hljs-literal">true</span>)
-        .build());
-        
-<span class="hljs-type">JsonObject</span> <span class="hljs-variable">newRow</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
-newRow.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">2</span>);
-newRow.add(<span class="hljs-string">&quot;my_vector&quot;</span>, gson.toJsonTree(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>, ...}));
-newRow.addProperty(<span class="hljs-string">&quot;extra_info&quot;</span>, <span class="hljs-number">100</span>);
-newRow.addProperty(<span class="hljs-string">&quot;score&quot;</span>, <span class="hljs-number">88.0</span>);
-
-insertR = client.insert(InsertReq.builder()
-        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
-        .data(Collections.singletonList(newRow))
-        .build());
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Original collection with dynamic field enabled</span>
-<span class="hljs-comment">// Insert data with dynamic field keys</span>
-<span class="hljs-keyword">const</span> data = [{
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
-    <span class="hljs-string">&quot;my_vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, ...],
-    <span class="hljs-string">&quot;extra_info&quot;</span>: <span class="hljs-string">&quot;this is a dynamic field key&quot;</span>,  <span class="hljs-comment">// Dynamic field key as string</span>
-    <span class="hljs-string">&quot;score&quot;</span>: <span class="hljs-number">99.5</span>                                 <span class="hljs-comment">// Another dynamic field key</span>
-}]
-<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>, 
-    <span class="hljs-attr">data</span>: data
-});
-
-<span class="hljs-comment">// Add static field with same name as existing dynamic field key</span>
-<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">add_collection_field</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>,
-    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;extra_info&quot;</span>,         <span class="hljs-comment">// Same name as dynamic field key</span>
-    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">INT64</span>,        <span class="hljs-comment">// Data type can differ from dynamic field key</span>
-    <span class="hljs-attr">nullable</span>: <span class="hljs-literal">true</span>                   <span class="hljs-comment">// Must be True for added fields</span>
-});
-
-<span class="hljs-comment">// Insert new data after adding static field</span>
-<span class="hljs-keyword">const</span> new_data = [{
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>,
-    <span class="hljs-string">&quot;my_vector&quot;</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, ...],
-    <span class="hljs-string">&quot;extra_info&quot;</span>: <span class="hljs-number">100</span>,               # <span class="hljs-title class_">Now</span> must use <span class="hljs-title class_">INT64</span> <span class="hljs-title function_">type</span> (<span class="hljs-keyword">static</span> field)
-    <span class="hljs-string">&quot;score&quot;</span>: <span class="hljs-number">88.0</span>                    # <span class="hljs-title class_">Still</span> a dynamic field key
-}];
-
-<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({
-    <span class="hljs-attr">collection_name</span>:<span class="hljs-string">&quot;product_catalog&quot;</span>, 
-    <span class="hljs-attr">data</span>: new_data
-});
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<span class="hljs-comment">#!/bin/bash</span>
-
-<span class="hljs-built_in">export</span> MILVUS_HOST=<span class="hljs-string">&quot;localhost:19530&quot;</span>
-<span class="hljs-built_in">export</span> AUTH_TOKEN=<span class="hljs-string">&quot;your_token_here&quot;</span>
-<span class="hljs-built_in">export</span> COLLECTION_NAME=<span class="hljs-string">&quot;product_catalog&quot;</span>
-
-<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Step 1: Insert initial data with dynamic fields...&quot;</span>
-curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/entities/insert&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
-  -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
-    \&quot;data\&quot;: [{
-      \&quot;id\&quot;: 1,
-      \&quot;my_vector\&quot;: [0.1, 0.2, 0.3, 0.4, 0.5],
-      \&quot;extra_info\&quot;: \&quot;this is a dynamic field key\&quot;,
-      \&quot;score\&quot;: 99.5
-    }]
-  }&quot;</span>
-
-<span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\nStep 2: Add static field with same name as dynamic field...&quot;</span>
-curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/collections/fields/add&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
-  -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
-    \&quot;schema\&quot;: {
-      \&quot;fieldName\&quot;: \&quot;extra_info\&quot;,
-      \&quot;dataType\&quot;: \&quot;Int64\&quot;,
-      \&quot;nullable\&quot;: true
-    }
-  }&quot;</span>
-
-<span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\nStep 3: Insert new data after adding static field...&quot;</span>
-curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/entities/insert&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
-  -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
-    \&quot;data\&quot;: [{
-      \&quot;id\&quot;: 2,
-      \&quot;my_vector\&quot;: [0.3, 0.4, 0.5, 0.6, 0.7],
-      \&quot;extra_info\&quot;: 100,
-      \&quot;score\&quot;: 88.0
-    }]
-  }&quot;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>预期行为：</p>
-<ul>
-<li><p><strong>现有实体</strong>将为新的静态字段设置 NULL<code translate="no">extra_info</code></p></li>
-<li><p><strong>新实体</strong>必须使用静态字段的数据类型 (<code translate="no">INT64</code>)</p></li>
-<li><p>保留<strong>原始动态字段键值</strong>，并可通过<code translate="no">$meta</code> 语法访问</p></li>
-<li><p>在正常查询中，<strong>静态字段会屏蔽动态字段键值</strong></p></li>
-</ul>
-<p><strong>同时访问静态值和动态值：</strong></p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># 1. Query static field only (dynamic field key is masked)</span>
-results = client.query(
-    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;id == 1&quot;</span>,
-    output_fields=[<span class="hljs-string">&quot;extra_info&quot;</span>]
-)
-<span class="hljs-comment"># Returns: {&quot;id&quot;: 1, &quot;extra_info&quot;: None}  # NULL for existing entity</span>
-
-<span class="hljs-comment"># 2. Query both static and original dynamic values</span>
-results = client.query(
-    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>, 
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;id == 1&quot;</span>,
-    output_fields=[<span class="hljs-string">&quot;extra_info&quot;</span>, <span class="hljs-string">&quot;$meta[&#x27;extra_info&#x27;]&quot;</span>]
-)
-<span class="hljs-comment"># Returns: {</span>
-<span class="hljs-comment">#     &quot;id&quot;: 1,</span>
-<span class="hljs-comment">#     &quot;extra_info&quot;: None,                           # Static field value (NULL)</span>
-<span class="hljs-comment">#     &quot;$meta[&#x27;extra_info&#x27;]&quot;: &quot;this is a dynamic field key&quot;  # Original dynamic value</span>
-<span class="hljs-comment"># }</span>
-
-<span class="hljs-comment"># 3. Query new entity with static field value</span>
-results = client.query(
-    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;id == 2&quot;</span>, 
-    output_fields=[<span class="hljs-string">&quot;extra_info&quot;</span>]
-)
-<span class="hljs-comment"># Returns: {&quot;id&quot;: 2, &quot;extra_info&quot;: 100}  # Static field value</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 1. Query static field only (dynamic field key is masked)</span>
-<span class="hljs-keyword">let</span> results = client.<span class="hljs-title function_">query</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>,
-    <span class="hljs-attr">filter</span>: <span class="hljs-string">&quot;id == 1&quot;</span>,
-    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;extra_info&quot;</span>]
-})
-<span class="hljs-comment">// Returns: {&quot;id&quot;: 1, &quot;extra_info&quot;: None}  # NULL for existing entity</span>
-
-<span class="hljs-comment">// 2. Query both static and original dynamic values</span>
-results = client.<span class="hljs-title function_">query</span>({
-    <span class="hljs-attr">collection_name</span>:<span class="hljs-string">&quot;product_catalog&quot;</span>, 
-    <span class="hljs-attr">filter</span>: <span class="hljs-string">&quot;id == 1&quot;</span>,
-    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;extra_info&quot;</span>, <span class="hljs-string">&quot;$meta[&#x27;extra_info&#x27;]&quot;</span>]
-});
-<span class="hljs-comment">// Returns: {</span>
-<span class="hljs-comment">//     &quot;id&quot;: 1,</span>
-<span class="hljs-comment">//     &quot;extra_info&quot;: None,                           # Static field value (NULL)</span>
-<span class="hljs-comment">//     &quot;$meta[&#x27;extra_info&#x27;]&quot;: &quot;this is a dynamic field key&quot;  # Original dynamic value</span>
-<span class="hljs-comment">// }</span>
-
-<span class="hljs-comment">// 3. Query new entity with static field value</span>
-results = client.<span class="hljs-title function_">query</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>,
-    <span class="hljs-attr">filter</span>: <span class="hljs-string">&quot;id == 2&quot;</span>, 
-    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;extra_info&quot;</span>]
-})
-<span class="hljs-comment">// Returns: {&quot;id&quot;: 2, &quot;extra_info&quot;: 100}  # Static field value</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<span class="hljs-comment">#!/bin/bash</span>
-
-<span class="hljs-built_in">export</span> MILVUS_HOST=<span class="hljs-string">&quot;localhost:19530&quot;</span>
-<span class="hljs-built_in">export</span> AUTH_TOKEN=<span class="hljs-string">&quot;your_token_here&quot;</span>
-<span class="hljs-built_in">export</span> COLLECTION_NAME=<span class="hljs-string">&quot;product_catalog&quot;</span>
-
-<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Query 1: Static field only (dynamic field masked)...&quot;</span>
-curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/entities/query&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
-  -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
-    \&quot;filter\&quot;: \&quot;id == 1\&quot;,
-    \&quot;outputFields\&quot;: [\&quot;extra_info\&quot;]
-  }&quot;</span>
-
-<span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\nQuery 2: Both static and original dynamic values...&quot;</span>
-curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/entities/query&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
-  -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
-    \&quot;filter\&quot;: \&quot;id == 1\&quot;,
-    \&quot;outputFields\&quot;: [\&quot;extra_info\&quot;, \&quot;\$meta[&#x27;extra_info&#x27;]\&quot;]
-  }&quot;</span>
-
-<span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\nQuery 3: New entity with static field value...&quot;</span>
-curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/entities/query&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
-  -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
-    \&quot;filter\&quot;: \&quot;id == 2\&quot;,
-    \&quot;outputFields\&quot;: [\&quot;extra_info\&quot;]
-  }&quot;</span>
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="How-long-does-it-take-for-a-new-field-to-become-available" class="common-anchor-header">新字段可用需要多长时间？<button data-href="#How-long-does-it-take-for-a-new-field-to-become-available" class="anchor-icon" translate="no">
+    </button></h3><p>现有实体是在新字段创建之前插入的，因此它们不包含该字段的值。设置<code translate="no">nullable=True</code> 可让Milvus将缺失值表示为<code translate="no">NULL</code> ，直到您的应用程序写入值，或者对于标量字段，直到应用默认值为止。</p>
+<p>此规则适用于使用<code translate="no">add_collection_field()</code> 添加的用户定义标量字段和用户定义向量字段，以及使用<code translate="no">add_collection_struct_field()</code> 添加的StructArray字段。它不适用于由函数生成的向量字段，因为这些字段不能为空。</p>
+<h3 id="What-happens-to-existing-entities-after-I-add-a-user-defined-field" class="common-anchor-header">添加用户定义字段后，现有实体会发生什么变化？<button data-href="#What-happens-to-existing-entities-after-I-add-a-user-defined-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -682,4 +502,90 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>添加的字段几乎立即可用，但由于整个 Milvus 集群的内部 Schema 变化广播，可能会有短暂的延迟。这种同步可确保在处理涉及新字段的查询之前，所有节点都知道 Schema 的更新。</p>
+    </button></h3><p>对于用户定义的标量字段，除非您设置了<code translate="no">default_value</code> ，否则现有实体将返回<code translate="no">NULL</code> 。如果您设置了<code translate="no">default_value</code> ，现有实体将返回该默认值。</p>
+<p>对于用户定义的向量字段，现有实体的该新向量字段值为<code translate="no">NULL</code> 。针对新增字段进行的向量搜索会跳过向量值为<code translate="no">NULL</code> 的实体。若要使现有实体可通过新向量字段进行搜索，请通过upsert或回填工作流写入非NULL的向量值。新建实体可在插入时包含该新向量字段。</p>
+<p>对于 StructArray 字段，现有实体在其所有子字段中针对新 StructArray 字段返回<code translate="no">NULL</code> 。新实体必须为所有子字段提供<code translate="no">NULL</code> ，或者为所有子字段提供有效值。</p>
+<h3 id="Can-I-add-BM25-lexical-search-to-an-existing-collection" class="common-anchor-header">我可以将 BM25 词汇搜索功能添加到现有 Collection 中吗？<button data-href="#Can-I-add-BM25-lexical-search-to-an-existing-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>可以。如果Collection中已有启用分析器的<code translate="no">VARCHAR</code> 字段，您可以添加一个由BM25生成的稀疏向量字段用于词汇搜索。在此工作流中，Milvus会添加新的<code translate="no">SPARSE_FLOAT_VECTOR</code> 输出字段以及为其生成值的BM25函数。 在此模式变更工作流中，您无法将现有的<code translate="no">TEXT</code> 字段用作BM25的输入。若要使用<code translate="no">TEXT</code> 作为输入，请在创建Collection时定义该字段及BM25函数。</p>
+<p>添加由 BM25 生成的稀疏向量字段后，请先使用<code translate="no">metric_type=&quot;BM25&quot;</code> 创建<code translate="no">SPARSE_INVERTED_INDEX</code> 索引，然后才能将该字段用于 BM25 搜索。</p>
+<h3 id="Can-I-drop-a-vector-field-generated-by-a-function-directly" class="common-anchor-header">我可以直接删除由函数生成的向量字段吗？<button data-href="#Can-I-drop-a-vector-field-generated-by-a-function-directly" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>不可以。由函数生成的向量字段是该函数Schema的一部分。请改用<code translate="no">drop_collection_function()</code> 。在此模式变更工作流中，Milvus会同时移除该函数及其生成的向量输出字段，同时保留输入字段。</p>
+<h3 id="Do-I-need-to-wait-after-altering-a-collection-schema" class="common-anchor-header">修改Schema后需要等待吗？<button data-href="#Do-I-need-to-wait-after-altering-a-collection-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>通常无需手动等待。如果后续操作依赖于更新后的 Schema，您可以先调用 `<code translate="no">describe_collection()</code> ` 以确认 Milvus 当前返回的 Schema。</p>
+<p>在分布式部署中，Milvus 组件刷新 Collection 元数据时可能会存在短暂的传播窗口。如果 Schema 变更后立即执行的操作因 Schema 相关错误而失败，请刷新 Schema 并重试该操作。</p>
+<h3 id="When-is-storage-space-reclaimed-after-dropping-a-field" class="common-anchor-header">删除字段后，存储空间何时会被回收？<button data-href="#When-is-storage-space-reclaimed-after-dropping-a-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>删除字段会将其从当前Schema和常规查询/搜索可见范围内移除，但该字段的历史数据不会立即从对象存储中物理删除。</p>
+<p>存储空间可在后续的压缩过程中被回收。压缩是一个后台进程，它将现有数据文件重组为新的、更紧凑的文件。字段被删除后，新压缩的文件将遵循当前 Schema 并省略已删除的字段。Milvus 不保证在删除字段后能立即或在固定时间内减少存储空间。</p>
+<h3 id="What-happens-if-I-add-a-scalar-field-with-the-same-name-as-a-dynamic-field-key" class="common-anchor-header">如果添加一个与Dynamic Field键同名的标量字段会发生什么？<button data-href="#What-happens-if-I-add-a-scalar-field-with-the-same-name-as-a-dynamic-field-key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>如果启用了 Dynamic Field，您可以添加一个与现有 Dynamic Field 键同名的标量字段。在常规查询输出中，新标量字段会掩盖 Dynamic Field 键，但原始动态数据仍保存在<code translate="no">$meta</code> 中。</p>
+<p>例如，如果现有实体存储了一个名为<code translate="no">source</code> 的动态键，而您随后添加了一个名为<code translate="no">source</code> 的标量字段，则<code translate="no">source</code> 的常规查询结果将引用该标量字段。若要访问原始动态值，请使用<code translate="no">$meta</code> 路径语法，例如<code translate="no">$meta[&quot;source&quot;]</code> 。</p>

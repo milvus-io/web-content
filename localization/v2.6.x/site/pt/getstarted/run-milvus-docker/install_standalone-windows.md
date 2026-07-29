@@ -91,7 +91,7 @@ To change the default Milvus configuration, edit user.yaml and restart the servi
 <p>Após executar o script de instalação:​</p>
 <ul>
 <li><p>Foi iniciado um contentor Docker denominado <strong>milvus-standalone</strong> na porta <strong>19530</strong>.​</p></li>
-<li><p>Um etcd incorporado está instalado juntamente com o Milvus no mesmo contentor e está disponível na porta <strong>2379</strong>. O seu ficheiro de configuração está mapeado para <strong>embedEtcd.yaml</strong> na pasta atual.​</p></li>
+<li><p>Um etcd incorporado está instalado juntamente com o Milvus no mesmo contentor e funciona na porta <strong>2379</strong>. O seu ficheiro de configuração está mapeado para <strong>embedEtcd.yaml</strong> na pasta atual.​</p></li>
 <li><p>O volume de dados do Milvus está mapeado para <strong>volumes/milvus</strong> na pasta atual.​</p></li>
 </ul>
 <p>Pode utilizar os seguintes comandos para gerir o contentor do Milvus e os dados armazenados.​</p>
@@ -191,7 +191,7 @@ Delete successfully.​
 <li><p>Abra o Docker Desktop no modo de administrador clicando com o botão direito do rato e selecionando <strong>«Executar como administrador</strong>».​</p></li>
 <li><p>Execute os seguintes comandos no PowerShell ou no Prompt de Comando do Windows para descarregar o ficheiro de configuração do Docker Compose para o Milvus Standalone e iniciar o Milvus.​</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.20/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.21/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -232,7 +232,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Descarregue o ficheiro de configuração do Milvus.​</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.20/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.21/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Inicie o Milvus.​</p>

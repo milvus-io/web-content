@@ -127,7 +127,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Vous préférez un déploiement autonome ?</strong></p>
 <p>Si vous préférez déployer Milvus en mode autonome (un seul nœud) à des fins de développement ou de test, utilisez cette commande :</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.20 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.21 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
@@ -137,9 +137,9 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Remarque</strong>: le mode autonome utilise Woodpecker comme file d’attente de messages par défaut et active le composant Streaming Node. Pour plus de détails, consultez la section <a href="/docs/fr/v2.6.x/architecture_overview.md">Présentation de l’architecture</a> et <a href="/docs/fr/v2.6.x/use-woodpecker.md">Utilisation de Woodpecker</a>.</p>
 </div>
 <p><strong>Déployer un cluster Milvus :</strong></p>
-<p>La commande suivante déploie un cluster Milvus avec des paramètres optimisés pour la version 2.6.20, en utilisant Woodpecker comme file d’attente de messages recommandée :</p>
+<p>La commande suivante déploie un cluster Milvus avec des paramètres optimisés pour la version 2.6.21, en utilisant Woodpecker comme file d'attente de messages recommandée :</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.20 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.21 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -147,9 +147,9 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Fonctionnalités de cette commande :</strong></p>
 <ul>
-<li>Utilise <strong>Woodpecker</strong> comme file d’attente de messages (recommandé pour réduire la maintenance)</li>
+<li>Utilise <strong>Woodpecker</strong> comme file d'attente de messages (recommandé pour réduire la maintenance)</li>
 <li>Active le nouveau composant « <strong>Streaming Node</strong> » pour améliorer les performances</li>
-<li>Désactive l’ancien <strong>nœud d’indexation</strong> (cette fonctionnalité est désormais gérée par le nœud de données)</li>
+<li>Désactive l’ancien <strong>nœud d’index</strong> (cette fonctionnalité est désormais gérée par le nœud de données)</li>
 <li>Désactive Pulsar pour utiliser Woodpecker à la place</li>
 </ul>
 <div class="alert note">
@@ -164,7 +164,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Autres options de file d'attente de messages :</strong></p>
 <p>Si vous préférez utiliser <strong>Pulsar</strong> (choix traditionnel) plutôt que Woodpecker :</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.20 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.21 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -206,7 +206,7 @@ La commande ci-dessus déploie Milvus avec les configurations recommandées. Pou
     </button></h3><p>Vérifiez que votre déploiement s’est bien déroulé en vérifiant l’état des pods :</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Attendez que tous les pods affichent le statut « Running ».</strong> Avec la configuration v2.6.20, vous devriez voir des pods similaires à ceux-ci :</p>
+<p><strong>Attendez que tous les pods affichent le statut « Running ».</strong> Avec la configuration v2.6.21, vous devriez voir des pods similaires à ceux-ci :</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
@@ -366,7 +366,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <p>La commande ci-dessus génère des modèles de chart pour un cluster Milvus et enregistre le résultat dans un fichier de manifeste nommé <code translate="no">milvus_manifest.yaml</code>. À l’aide de ce manifeste, vous pouvez installer un cluster Milvus dont les composants et les dépendances sont répartis dans des pods distincts.</p>
 <div class="alert note">
 <ul>
-<li>Pour installer une instance Milvus en mode autonome, où tous les composants Milvus sont regroupés dans un seul pod, vous devez plutôt exécuter la commande ` <code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false zilliztech/milvus &gt; milvus_manifest.yaml</code> ` afin de générer les modèles de chart pour une instance Milvus en mode autonome.</li>
+<li>Pour installer une instance Milvus en mode autonome, dans laquelle tous les composants Milvus sont regroupés dans un seul pod, vous devez plutôt exécuter la commande ` <code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false zilliztech/milvus &gt; milvus_manifest.yaml</code> ` afin de générer les modèles de chart pour une instance Milvus en mode autonome.</li>
 <li>Pour modifier les configurations de Milvus, téléchargez le <a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml"><code translate="no">value.yaml</code></a> modèle, y indiquer les paramètres souhaités, puis utiliser <code translate="no">helm template -f values.yaml my-release zilliztech/milvus &gt; milvus_manifest.yaml</code> pour générer le manifeste en conséquence.</li>
 </ul>
 </div>

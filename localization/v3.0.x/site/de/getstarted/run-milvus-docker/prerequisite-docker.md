@@ -3,11 +3,11 @@ id: prerequisite-docker.md
 label: Standalone requirements
 related_key: Standalone
 summary: >-
-  Lernen Sie die notwendigen Vorbereitungen vor der Installation von Milvus
-  Standalone kennen.
-title: Voraussetzungen für die Installation von Milvus Standalone
+  Informieren Sie sich über die erforderlichen Vorbereitungen vor der
+  Installation von Milvus Standalone.
+title: Anforderungen für die Installation von Milvus Standalone
 ---
-<h1 id="Requirements-for-Installing-Milvus-Standalone" class="common-anchor-header">Voraussetzungen für die Installation von Milvus Standalone<button data-href="#Requirements-for-Installing-Milvus-Standalone" class="anchor-icon" translate="no">
+<h1 id="Requirements-for-Installing-Milvus-Standalone" class="common-anchor-header">Anforderungen für die Installation von Milvus Standalone<button data-href="#Requirements-for-Installing-Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,8 +22,8 @@ title: Voraussetzungen für die Installation von Milvus Standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Bevor Sie eine Milvus Standalone-Instanz installieren, überprüfen Sie, ob Ihre Hardware und Software den Anforderungen entspricht.</p>
-<h2 id="Hardware-requirements" class="common-anchor-header">Hardware-Anforderungen<button data-href="#Hardware-requirements" class="anchor-icon" translate="no">
+    </button></h1><p>Bevor Sie eine Milvus-Standalone-Instanz installieren, überprüfen Sie bitte Ihre Hardware und Software, um sicherzustellen, dass sie die Anforderungen erfüllen.</p>
+<h2 id="Hardware-requirements" class="common-anchor-header">Hardwareanforderungen<button data-href="#Hardware-requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,13 +43,13 @@ title: Voraussetzungen für die Installation von Milvus Standalone
 <tr><th>Komponente</th><th>Anforderung</th><th>Empfehlung</th><th>Hinweis</th></tr>
 </thead>
 <tbody>
-<tr><td>CPU</td><td><ul><li>Intel 2nd Gen Core CPU oder höher</li><li>Apple Silizium</li></ul></td><td><ul><li>Eigenständig: 4 Kerne oder mehr</li><li>Cluster: 8 Kerne oder mehr</li></ul></td><td></td></tr>
-<tr><td>CPU-Befehlssatz</td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td>Die Vektorähnlichkeitssuche und die Indexerstellung in Milvus erfordern die Unterstützung von SIMD-Erweiterungen (Single Instruction, Multiple Data) durch die CPU. Stellen Sie sicher, dass die CPU mindestens eine der aufgeführten SIMD-Erweiterungen unterstützt. Siehe <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX">CPUs mit AVX</a> für weitere Informationen.</td></tr>
-<tr><td>RAM</td><td><ul><li>Eigenständig: 8G</li><li>Cluster: 32G</li></ul></td><td><ul><li>Eigenständig: 16G</li><li>Cluster: 128G</li></ul></td><td>Die Größe des Arbeitsspeichers hängt von der Datenmenge ab.</td></tr>
-<tr><td>Festplattenlaufwerk</td><td>SATA 3.0 SSD oder höher</td><td>NVMe SSD oder höher</td><td>Die Größe des Festplattenlaufwerks hängt vom Datenvolumen ab.</td></tr>
+<tr><td>CPU</td><td><ul><li>Intel Core-CPU der 2. Generation oder höher</li><li>Apple Silicon</li></ul></td><td><ul><li>Einzelrechner: 4 Kerne oder mehr</li><li>Cluster: 8 Kerne oder mehr</li></ul></td><td></td></tr>
+<tr><td>CPU-Befehlssatz</td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td>Die Vektor-Ähnlichkeitssuche und die Indexerstellung in Milvus erfordern die Unterstützung von SIMD-Erweiterungssätzen (Single Instruction, Multiple Data) durch die CPU. Stellen Sie sicher, dass die CPU mindestens eine der aufgeführten SIMD-Erweiterungen unterstützt. Weitere Informationen finden Sie unter <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX">„CPUs mit AVX</a> “.</td></tr>
+<tr><td>RAM</td><td><ul><li>Einzelrechner: 8 G</li><li>Cluster: 32 G</li></ul></td><td><ul><li>Einzelrechner: 16 G</li><li>Cluster: 128 G</li></ul></td><td>Die Größe des Arbeitsspeichers hängt vom Datenvolumen ab.</td></tr>
+<tr><td>Festplatte</td><td>SATA 3.0 SSD oder höher</td><td>NVMe-SSD oder höher</td><td>Die Größe der Festplatte hängt vom Datenvolumen ab.</td></tr>
 </tbody>
 </table>
-<h2 id="Software-requirements" class="common-anchor-header">Software-Anforderungen<button data-href="#Software-requirements" class="anchor-icon" translate="no">
+<h2 id="Software-requirements" class="common-anchor-header">Softwareanforderungen<button data-href="#Software-requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -66,23 +66,24 @@ title: Voraussetzungen für die Installation von Milvus Standalone
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Betriebssytem</th><th>Software</th><th>Hinweis</th></tr>
+<tr><th>Betriebssystem</th><th>Software</th><th>Hinweis</th></tr>
 </thead>
 <tbody>
-<tr><td>macOS 10.14 oder höher</td><td>Docker-Schreibtisch</td><td>Stellen Sie die virtuelle Maschine (VM) von Docker so ein, dass sie mindestens 2 virtuelle CPUs (vCPUs) und 8 GB Anfangsspeicher verwendet. Andernfalls kann die Installation fehlschlagen. <br/>Weitere Informationen finden Sie unter <a href="https://docs.docker.com/desktop/mac/install/">Installieren von Docker Desktop auf Mac</a>.</td></tr>
-<tr><td>Linux-Plattformen</td><td><ul><li>Docker 19.03 oder höher</li><li>Docker Compose 1.25.1 oder höher</li></ul></td><td>Weitere Informationen finden Sie unter <a href="https://docs.docker.com/engine/install/">Docker-Engine installieren</a> und <a href="https://docs.docker.com/compose/install/">Docker Compose installieren</a>.</td></tr>
-<tr><td>Windows mit aktivierter WSL 2</td><td>Docker-Arbeitsplatz</td><td>Wir empfehlen, Quellcode und andere Daten, die in Linux-Containern gebunden sind, im Linux-Dateisystem statt im Windows-Dateisystem zu speichern.<br/>Weitere Informationen finden Sie unter <a href="https://docs.docker.com/desktop/windows/install/#wsl-2-backend">Installieren von Docker Desktop unter Windows mit WSL 2-Backend</a>.</td></tr>
+<tr><td>macOS 10.14 oder höher</td><td>Docker Desktop</td><td>Stellen Sie die virtuelle Maschine (VM) von Docker so ein, dass mindestens 2 virtuelle CPUs (vCPUs) und 8 GB Startspeicher verwendet werden. Andernfalls kann die Installation fehlschlagen. <br/>Weitere Informationen finden Sie unter <a href="https://docs.docker.com/desktop/mac/install/">„Docker Desktop auf dem Mac installieren</a> “.</td></tr>
+<tr><td>Linux-Plattformen</td><td><ul><li>Docker 19.03 oder höher</li><li>Docker Compose 1.25.1 oder höher</li></ul></td><td>Weitere Informationen finden Sie unter <a href="https://docs.docker.com/engine/install/">„Docker Engine installieren</a> “ und <a href="https://docs.docker.com/compose/install/">„Docker Compose installieren</a> “.</td></tr>
+<tr><td>Windows mit aktiviertem WSL 2</td><td>Docker Desktop</td><td>Wir empfehlen, Quellcode und andere Daten, die per Bind-Mount in Linux-Container eingebunden sind, im Linux-Dateisystem statt im Windows-Dateisystem zu speichern.<br/>Weitere Informationen finden Sie unter <a href="https://docs.docker.com/desktop/windows/install/#wsl-2-backend">„Docker Desktop unter Windows mit WSL 2-Backend installieren</a> “.</td></tr>
 </tbody>
 </table>
-<p>Die folgenden Abhängigkeiten werden automatisch beschafft und konfiguriert, wenn Milvus Standalone mit dem Docker-Skript oder der Docker Compose-Konfiguration installiert wird:</p>
+<p>Die folgenden Abhängigkeiten werden automatisch heruntergeladen und konfiguriert, wenn Milvus Standalone mithilfe des Docker-Skripts oder der Docker Compose-Konfiguration installiert wird:</p>
 <table>
 <thead>
 <tr><th>Software</th><th>Version</th><th>Hinweis</th></tr>
 </thead>
 <tbody>
-<tr><td>etcd</td><td>3.5.0</td><td>Siehe <a href="#Additional-disk-requirements">zusätzliche Festplattenanforderungen</a>.</td></tr>
+<tr><td>etcd</td><td>3.5.0</td><td>Siehe <a href="#Additional-disk-requirements">zusätzliche Speicherplatzanforderungen</a>.</td></tr>
 <tr><td>MinIO</td><td>RELEASE.2024-12-18T13-15-44Z</td><td></td></tr>
-<tr><td>Pulsar</td><td>2.8.2</td><td></td></tr>
+<tr><td>Woodpecker</td><td>Im Lieferumfang von Milvus enthalten</td><td>Standard-Nachrichtenwarteschlange (integriert); kein separater Dienst zur Installation erforderlich.</td></tr>
+<tr><td>Pulsar</td><td>2.8.2</td><td>Optional – nur, wenn Sie die Nachrichtenwarteschlange auf Pulsar umstellen; wird standardmäßig nicht installiert.</td></tr>
 </tbody>
 </table>
 <h3 id="Additional-disk-requirements" class="common-anchor-header">Zusätzliche Festplattenanforderungen<button data-href="#Additional-disk-requirements" class="anchor-icon" translate="no">
@@ -100,13 +101,13 @@ title: Voraussetzungen für die Installation von Milvus Standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Die Festplattenleistung ist entscheidend für etcd. Es wird dringend empfohlen, dass Sie lokale NVMe-SSDs verwenden. Langsame Festplattenreaktionen können zu häufigen Clusterwahlen führen, die schließlich den etcd-Dienst beeinträchtigen.</p>
+    </button></h3><p>Die Festplattenleistung ist für etcd entscheidend. Es wird dringend empfohlen, lokale NVMe-SSDs zu verwenden. Eine langsamere Festplattenreaktion kann zu häufigen Cluster-Wahlen führen, die letztendlich die Leistung des etcd-Dienstes beeinträchtigen.</p>
 <p>Um zu testen, ob Ihre Festplatte geeignet ist, verwenden Sie <a href="https://github.com/axboe/fio">fio</a>.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> test-data
 fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 --directory=test-data --size=2200m --bs=2300 --name=mytest
 <button class="copy-code-btn"></button></code></pre>
-<p>Idealerweise sollte Ihre für etcd dedizierte Festplatte mehr als 500 IOPS und eine fsync-Latenz von unter 10 ms (99. Perzentil) erreichen. Detaillierte Anforderungen finden Sie in den etcd <a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">Docs</a>.</p>
-<h2 id="Whats-next" class="common-anchor-header">Was kommt als Nächstes?<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<p>Im Idealfall sollte Ihr für etcd vorgesehener Speicher über 500 IOPS und eine fsync-Latenz von unter 10 ms im 99. Perzentil erreichen. Lesen Sie die <a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">etcd-Dokumentation</a> für detailliertere Anforderungen.</p>
+<h2 id="Whats-next" class="common-anchor-header">Was nun<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

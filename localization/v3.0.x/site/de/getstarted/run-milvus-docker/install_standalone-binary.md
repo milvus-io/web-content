@@ -57,13 +57,13 @@ title: Milvus Standalone mit RPM-/DEB-Paket installieren
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie können das RPM-/DEB-Paket entsprechend Ihrer Systemarchitektur von der <a href="https://github.com/milvus-io/milvus/releases/tag/v3.0-beta">Seite „Milvus Releases“</a> herunterladen.</p>
+    </button></h2><p>Sie können das RPM-/DEB-Paket entsprechend Ihrer Systemarchitektur von der <a href="https://github.com/milvus-io/milvus/releases/tag/v3.0.0">Seite „Milvus Releases“</a> herunterladen.</p>
 <ul>
-<li>Für x86_64/amd64 laden Sie das Paket <strong>„milvus_2.6.17-1_amd64.deb“</strong> oder <strong>„milvus_2.6.17-1_amd64.rpm“</strong> herunter.</li>
-<li>Für ARM64 laden Sie das Paket <strong>„milvus_2.6.17-1_arm64.deb“</strong> oder <strong>„milvus_2.6.17-1_arm64.rpm“</strong> herunter.</li>
+<li>Für x86_64/amd64 laden Sie das Paket <strong>„milvus_3.0.0-1_amd64.deb“</strong> oder <strong>„milvus_3.0.0-1_amd64.rpm“</strong> herunter.</li>
+<li>Für ARM64 laden Sie das Paket <strong>„milvus_3.0.0-1_arm64.deb“</strong> oder <strong>„milvus_3.0.0-1_arm64.rpm“</strong> herunter.</li>
 </ul>
 <p>Der folgende Befehl geht davon aus, dass Sie Milvus Standalone auf einem x86_64/amd64-Rechner ausführen werden.</p>
-<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus_2.6.17-1_amd64.rpm -O milvus_2.6.17-1_amd64.rpm
+<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v3.0.0/milvus_3.0.0-1_amd64.rpm -O milvus_3.0.0-1_amd64.rpm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-the-RPMDEB-Package" class="common-anchor-header">Installieren Sie das RPM-/DEB-Paket<button data-href="#Install-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -82,11 +82,11 @@ title: Milvus Standalone mit RPM-/DEB-Paket installieren
       </svg>
     </button></h2><p>Zur Installation des RPM-/DEB-Pakets können Sie den Paketmanager Ihres Systems verwenden.</p>
 <p>Bei RPM-basierten Systemen (wie CentOS, Fedora und RHEL) verwenden Sie den Befehl „ <code translate="no">yum</code> “, um das Paket zu installieren.</p>
-<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.17-1_amd64.rpm
+<pre><code translate="no" class="language-shell">yum install -y ./milvus_3.0.0-1_amd64.rpm
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Bei DEB-basierten Systemen (wie Ubuntu und Debian) verwenden Sie den Befehl ` <code translate="no">apt</code> `, um das Paket zu installieren.</p>
-<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.17-1_amd64.deb
+<p>Bei DEB-basierten Systemen (wie Ubuntu und Debian) verwenden Sie den Befehl „ <code translate="no">apt</code> “, um das Paket zu installieren.</p>
+<pre><code translate="no" class="language-shell">apt install -y  ./milvus_3.0.0-1_amd64.deb
 dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Start-Milvus-Standalone" class="common-anchor-header">Milvus Standalone starten<button data-href="#Start-Milvus-Standalone" class="anchor-icon" translate="no">
@@ -120,6 +120,9 @@ dpkg -l | grep milvus
            <span class="hljs-string">└─1044122</span> <span class="hljs-string">/usr/bin/milvus</span> <span class="hljs-string">run</span> <span class="hljs-string">standalone</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Die Milvus-Binärdatei finden Sie unter <code translate="no">/usr/bin/milvus</code>, die systemd-Dienstdatei unter <code translate="no">/lib/systemd/system/milvus.service</code> und die Abhängigkeiten unter <code translate="no">/usr/lib/milvus/</code>.</p>
+<div class="alert note">
+<p>Standardmäßig verwendet Milvus Standalone <strong>Woodpecker</strong> (lokales Dateisystem) als Nachrichtenwarteschlange mit eingebettetem etcd, sodass kein externer Messaging- oder Metadatendienst erforderlich ist. Siehe <a href="/docs/de/woodpecker.md">Woodpecker</a>.</p>
+</div>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Optional) Milvus-Konfigurationen aktualisieren<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -135,7 +138,7 @@ dpkg -l | grep milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie können die Milvus-Konfigurationen in der Datei <code translate="no">/etc/milvus/configs/milvus.yaml</code> ändern. Um beispielsweise die URL von <code translate="no">proxy.healthCheckTimeout</code> auf <code translate="no">1000</code> ms zu ändern, suchen Sie nach dem Parameter „target“ und passen Sie ihn entsprechend an. Informationen zu den entsprechenden Konfigurationselementen finden Sie unter <a href="/docs/de/system_configuration.md">„Systemkonfiguration</a>“.</p>
+    </button></h2><p>Sie können die Milvus-Konfigurationen in der Datei „ <code translate="no">/etc/milvus/configs/milvus.yaml</code> “ ändern. Um beispielsweise die Message-Queue von <code translate="no">proxy.healthCheckTimeout</code> auf <code translate="no">1000</code> umzustellen, können Sie nach dem Parameter „target“ suchen und diesen entsprechend anpassen. Informationen zu den relevanten Konfigurationselementen finden Sie unter <a href="/docs/de/system_configuration.md">„Systemkonfiguration</a>“.</p>
 <h2 id="Stop-Milvus-Standalone" class="common-anchor-header">Milvus Standalone beenden<button data-href="#Stop-Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -176,6 +179,9 @@ dpkg -l | grep milvus
 <p>Für DEB-basierte Systeme:</p>
 <pre><code translate="no" class="language-shell">apt remove milvus
 <button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>Storage V3 ist standardmäßig deaktiviert. Aktivieren Sie es, bevor Sie Funktionen nutzen, die davon abhängen. Informationen zu Anforderungen und Kompatibilitätsaspekten finden Sie unter <a href="/docs/de/storage-v3.md">Storage V3</a>.</p>
+</div>
 <h2 id="Whats-next" class="common-anchor-header">Was nun<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -205,7 +211,7 @@ dpkg -l | grep milvus
 </ul></li>
 <li><p><a href="/docs/de/upgrade_milvus_cluster-helm.md">Milvus mit Helm-Chart aktualisieren</a>.</p></li>
 <li><p><a href="/docs/de/scaleout.md">Skalieren Sie Ihren Milvus-Cluster</a>.</p></li>
-<li><p>Stellen Sie Ihren Milvus-Cluster in der Cloud bereit:</p>
+<li><p>Stellen Sie Ihren Milvus-Cluster in folgenden Clouds bereit:</p>
 <ul>
 <li><a href="/docs/de/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/de/gcp.md">Google Cloud</a></li>

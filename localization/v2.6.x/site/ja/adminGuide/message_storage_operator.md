@@ -60,7 +60,7 @@ summary: Milvus Operator を使用してメッセージストレージを設定�
 </ul></li>
 <li>Milvusシステムの稼働中は、メッセージストレージを変更することはできません。</li>
 <li>Kafka 2.x または 3.x バージョンのみがサポートされています。</li>
-<li><strong>アップグレードに関する制限事項</strong>：<strong>メッセージキューの制限事項</strong>：Milvus v2.6.20 へのアップグレード時には、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステムへの切り替えはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。</li>
+<li><strong>アップグレードに関する制限事項</strong>：<strong>メッセージキューの制限事項</strong>：Milvus v2.6.21 へのアップグレード時には、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステムへの切り替えはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">RocksMQ の設定<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -104,7 +104,7 @@ summary: Milvus Operator を使用してメッセージストレージを設定�
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<h5 id="Key-configuration-options" class="common-anchor-header">主な設定オプション：</h5><ul>
+<h5 id="Key-configuration-options" class="common-anchor-header">主な設定オプション:</h5><ul>
 <li><code translate="no">msgStreamType</code>: rocksmq: RocksMQをメッセージキューとして明示的に設定します</li>
 <li><code translate="no">persistence.enabled</code>: RocksMQ データの永続ストレージを有効にします</li>
 <li><code translate="no">persistence.pvcDeletion</code>: true に設定すると、Milvus インスタンスが削除された際に PVC も削除されます</li>

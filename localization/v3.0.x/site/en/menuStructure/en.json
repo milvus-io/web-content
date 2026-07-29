@@ -235,15 +235,21 @@
             "children": []
           },
           {
+            "label": "Storage V3",
+            "id": "storage-v3.md",
+            "order": 4,
+            "children": []
+          },
+          {
             "label": "Woodpecker",
             "id": "woodpecker_architecture.md",
-            "order": 4,
+            "order": 5,
             "children": []
           },
           {
             "label": "Knowhere",
             "id": "knowhere.md",
-            "order": 5,
+            "order": 6,
             "children": []
           }
         ]
@@ -413,21 +419,27 @@
             "children": []
           },
           {
-            "label": "String Field",
+            "label": "VarChar Field",
             "id": "string.md",
             "order": 5,
             "children": []
           },
           {
+            "label": "Text Field",
+            "id": "text.md",
+            "order": 6,
+            "children": []
+          },
+          {
             "label": "Number Field",
             "id": "number.md",
-            "order": 6,
+            "order": 7,
             "children": []
           },
           {
             "label": "JSON Field",
             "id": "json-field",
-            "order": 7,
+            "order": 8,
             "children": [
               {
                 "label": "JSON Field Overview",
@@ -452,49 +464,80 @@
           {
             "label": "Array Field",
             "id": "array_data_type.md",
-            "order": 8,
-            "children": []
-          },
-          {
-            "label": "Array of Structs",
-            "id": "array-of-structs.md",
             "order": 9,
             "children": []
           },
           {
+            "label": "StructArray",
+            "id": "structarray",
+            "order": 10,
+            "children": [
+              {
+                "label": "StructArray Overview",
+                "id": "array-of-structs.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Create a StructArray Field",
+                "id": "create-structarray-field.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Insert Data into StructArray Fields",
+                "id": "insert-data-into-structarray-fields.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Index StructArray Fields",
+                "id": "index-structarray-fields.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "StructArray Limits",
+                "id": "structarray-limits.md",
+                "order": 4,
+                "children": []
+              }
+            ]
+          },
+          {
             "label": "Geometry Field",
             "id": "geometry-field.md",
-            "order": 10,
+            "order": 11,
             "children": []
           },
           {
             "label": "TIMESTAMPTZ Field",
             "id": "timestamptz-field.md",
-            "order": 11,
+            "order": 12,
             "children": []
           },
           {
             "label": "Dynamic Field",
             "id": "enable-dynamic-field.md",
-            "order": 12,
+            "order": 13,
             "children": []
           },
           {
             "label": "Nullable Fields",
             "id": "nullable-and-default.md",
-            "order": 13,
+            "order": 14,
             "children": []
           },
           {
             "label": "Default Values",
             "id": "default-values.md",
-            "order": 14,
+            "order": 15,
             "children": []
           },
           {
             "label": "Analyzer",
             "id": "analyzer",
-            "order": 15,
+            "order": 16,
             "children": [
               {
                 "label": "Analyzer Overview",
@@ -524,6 +567,18 @@
                     "id": "chinese-analyzer.md",
                     "order": 2,
                     "children": []
+                  },
+                  {
+                    "label": "Arabic",
+                    "id": "arabic-analyzer.md",
+                    "order": 3,
+                    "children": []
+                  },
+                  {
+                    "label": "Thai",
+                    "id": "thai-analyzer.md",
+                    "order": 4,
+                    "children": []
                   }
                 ]
               },
@@ -551,21 +606,27 @@
                     "children": []
                   },
                   {
+                    "label": "Thai",
+                    "id": "thai-tokenizer.md",
+                    "order": 3,
+                    "children": []
+                  },
+                  {
                     "label": "Lindera",
                     "id": "lindera-tokenizer.md",
-                    "order": 3,
+                    "order": 4,
                     "children": []
                   },
                   {
                     "label": "ICU",
                     "id": "icu-tokenizer.md",
-                    "order": 4,
+                    "order": 5,
                     "children": []
                   },
                   {
                     "label": "Language Identifier",
                     "id": "language-identifier.md",
-                    "order": 5,
+                    "order": 6,
                     "children": []
                   }
                 ]
@@ -588,63 +649,81 @@
                     "children": []
                   },
                   {
+                    "label": "Arabic Normalization",
+                    "id": "arabic-normalization-filter.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Decimal Digit",
+                    "id": "decimaldigit-filter.md",
+                    "order": 3,
+                    "children": []
+                  },
+                  {
                     "label": "Alphanumonly",
                     "id": "alphanumonly-filter.md",
-                    "order": 2,
+                    "order": 4,
                     "children": []
                   },
                   {
                     "label": "Cnalphanumonly",
                     "id": "cnalphanumonly-filter.md",
-                    "order": 3,
+                    "order": 5,
                     "children": []
                   },
                   {
                     "label": "Cncharonly",
                     "id": "cncharonly-filter.md",
-                    "order": 4,
+                    "order": 6,
+                    "children": []
+                  },
+                  {
+                    "label": "Pinyin",
+                    "id": "pinyin-filter.md",
+                    "order": 7,
                     "children": []
                   },
                   {
                     "label": "Length",
                     "id": "length-filter.md",
-                    "order": 5,
+                    "order": 8,
                     "children": []
                   },
                   {
                     "label": "Stop",
                     "id": "stop-filter.md",
-                    "order": 6,
+                    "order": 9,
                     "children": []
                   },
                   {
                     "label": "Decompounder",
                     "id": "decompounder-filter.md",
-                    "order": 7,
+                    "order": 10,
                     "children": []
                   },
                   {
                     "label": "Stemmer",
                     "id": "stemmer-filter.md",
-                    "order": 8,
+                    "order": 11,
                     "children": []
                   },
                   {
                     "label": "Remove Punct",
                     "id": "removepunct-filter.md",
-                    "order": 9,
+                    "order": 12,
                     "children": []
                   },
                   {
                     "label": "Regex",
                     "id": "regex-filter.md",
-                    "order": 10,
+                    "order": 13,
                     "children": []
                   },
                   {
                     "label": "Synonym",
                     "id": "synonym-filter.md",
-                    "order": 11,
+                    "order": 14,
                     "children": []
                   }
                 ]
@@ -676,16 +755,22 @@
             "children": []
           },
           {
-            "label": "Add Fields to an Existing Collection",
+            "label": "Alter Collection Schema",
             "id": "add-fields-to-an-existing-collection.md",
             "order": 17,
+            "children": []
+          },
+          {
+            "label": "Alter External Collection Schema",
+            "id": "alter-external-collection-schema.md",
+            "order": 18,
             "children": []
           },
           {
             "label": "Best Practices",
             "id": "best-practices",
             "isMenu": true,
-            "order": 18,
+            "order": 19,
             "children": [
               {
                 "label": "Data Model Design for Search",
@@ -968,27 +1053,33 @@
             "children": []
           },
           {
+            "label": "Search Aggregation",
+            "id": "search-aggregation.md",
+            "order": 4,
+            "children": []
+          },
+          {
             "label": "Primary-Key Search",
             "id": "primary-key-search.md",
-            "order": 4,
+            "order": 5,
             "children": []
           },
           {
             "label": "Hybrid Search",
             "id": "multi-vector-search.md",
-            "order": 5,
+            "order": 6,
             "children": []
           },
           {
             "label": "Query",
             "id": "get-and-scalar-query.md",
-            "order": 6,
+            "order": 7,
             "children": []
           },
           {
             "label": "Filtering",
             "id": "filtering",
-            "order": 7,
+            "order": 8,
             "children": [
               {
                 "label": "Filtering Explained",
@@ -1003,39 +1094,45 @@
                 "children": []
               },
               {
+                "label": "Pattern Matching",
+                "id": "pattern-matching.md",
+                "order": 2,
+                "children": []
+              },
+              {
                 "label": "Filtering Templating",
                 "id": "filtering-templating.md",
-                "order": 2,
+                "order": 3,
                 "children": []
               },
               {
                 "label": "JSON Operators",
                 "id": "json-operators.md",
-                "order": 3,
+                "order": 4,
                 "children": []
               },
               {
                 "label": "Array Operators",
                 "id": "array-operators.md",
-                "order": 4,
+                "order": 5,
                 "children": []
               },
               {
                 "label": "StructArray Operators",
                 "id": "struct-array-operators.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "Random Sampling",
                 "id": "random-sampling.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               },
               {
                 "label": "Geometry Operators",
                 "id": "geometry-operators.md",
-                "order": 7,
+                "order": 8,
                 "children": []
               }
             ]
@@ -1043,49 +1140,92 @@
           {
             "label": "Full Text Search",
             "id": "full-text-search.md",
-            "order": 8,
+            "order": 9,
             "children": []
           },
           {
             "label": "Text Match",
             "id": "keyword-match.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "Text Highlighter",
             "id": "text-highlighter.md",
-            "order": 10,
+            "order": 11,
             "children": []
           },
           {
             "label": "Phrase Match",
             "id": "phrase-match.md",
-            "order": 11,
-            "children": []
-          },
-          {
-            "label": "Search with Embedding Lists",
-            "id": "search-with-embedding-lists.md",
             "order": 12,
             "children": []
           },
           {
+            "label": "Search with StructArray",
+            "id": "search-with-structarray",
+            "order": 13,
+            "children": [
+              {
+                "label": "Basic Vector Search with StructArray",
+                "id": "basic-vector-search-with-structarray.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Filtered Search with StructArray",
+                "id": "filtered-search-with-structarray.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Range Search with StructArray",
+                "id": "range-search-with-structarray.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Grouping Search with StructArray",
+                "id": "grouping-search-with-structarray.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "Hybrid Search with StructArray",
+                "id": "hybrid-search-with-structarray.md",
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "Search with EmbeddingLists: ColBERT and ColPali",
+                "id": "search-with-embedding-lists.md",
+                "order": 5,
+                "children": []
+              },
+              {
+                "label": "Choose an EmbeddingList Search Strategy",
+                "id": "choose-an-embeddinglist-search-strategy.md",
+                "order": 6,
+                "children": []
+              }
+            ]
+          },
+          {
             "label": "Elasticsearch Queries to Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
-            "order": 13,
+            "order": 14,
             "children": []
           },
           {
             "label": "Search Iterators",
             "id": "with-iterators.md",
-            "order": 14,
+            "order": 15,
             "children": []
           },
           {
             "label": "Use Partition Key",
             "id": "use-partition-key.md",
-            "order": 15,
+            "order": 16,
             "children": []
           }
         ]
@@ -1169,9 +1309,15 @@
                 "children": []
               },
               {
+                "label": "Hugging Face",
+                "id": "hugging-face.md",
+                "order": 10,
+                "children": []
+              },
+              {
                 "label": "Google Gemini",
                 "id": "google-gemini.md",
-                "order": 10,
+                "order": 11,
                 "children": []
               }
             ]
@@ -1284,6 +1430,12 @@
                     "label": "SiliconFlow Ranker",
                     "id": "siliconflow-ranker.md",
                     "order": 5,
+                    "children": []
+                  },
+                  {
+                    "label": "Hugging Face Ranker",
+                    "id": "hugging-face-ranker.md",
+                    "order": 6,
                     "children": []
                   }
                 ]
@@ -1472,10 +1624,95 @@
     ]
   },
   {
+    "label": "Data Infrastructure & Integration",
+    "id": "data_infra_integration",
+    "isMenu": true,
+    "order": 9,
+    "children": [
+      {
+        "label": "Overview",
+        "id": "data-infra-integration-overview.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "Metadata",
+        "id": "metadata",
+        "isMenu": true,
+        "order": 1,
+        "children": [
+          {
+            "label": "etcd",
+            "id": "etcd.md",
+            "order": 0,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Object Storage",
+        "id": "object-storage.md",
+        "order": 2,
+        "children": []
+      },
+      {
+        "label": "Message Queue (mqType)",
+        "id": "mqtype",
+        "isMenu": true,
+        "order": 4,
+        "children": [
+          {
+            "label": "Overview",
+            "id": "mqtype-overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Woodpecker",
+            "id": "woodpecker.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Pulsar",
+            "id": "mq_pulsar.md",
+            "order": 2,
+            "children": [
+              {
+                "label": "Upgrade to Pulsar v3",
+                "id": "upgrade-pulsar-v3.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Continue Using Pulsar v2",
+                "id": "use-pulsar-v2.md",
+                "order": 1,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "Kafka",
+            "id": "mq_kafka.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "RocksMQ",
+            "id": "mq_rocksmq.md",
+            "order": 4,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
     "label": "Administration Guide",
     "id": "admin_guide",
     "isMenu": true,
-    "order": 9,
+    "order": 10,
     "children": [
       {
         "label": "Deployment",
@@ -1642,86 +1879,6 @@
             "id": "configure-querynode-localdisk.md",
             "order": 5,
             "children": []
-          }
-        ]
-      },
-      {
-        "label": "Manage Dependencies",
-        "id": "manage_dependencies",
-        "order": 2,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "With Docker or Helm",
-            "id": "docker_helm_dependencies",
-            "order": 0,
-            "isMenu": true,
-            "children": [
-              {
-                "label": "Object Storage",
-                "id": "deploy_s3.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Meta Storage",
-                "id": "deploy_etcd.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "Message Storage",
-                "id": "deploy_pulsar.md",
-                "order": 2,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "With Milvus Operator",
-            "id": "milvus_operator_dependencies",
-            "order": 1,
-            "isMenu": true,
-            "children": [
-              {
-                "label": "Object Storage",
-                "id": "object_storage_operator.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Meta Storage",
-                "id": "meta_storage_operator.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "Message Storage",
-                "id": "message_storage_operator.md",
-                "order": 2,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "Use Pulsar with Milvus",
-            "id": "pulsar_dependencies",
-            "order": 2,
-            "isMenu": true,
-            "children": [
-              {
-                "label": "Upgrade to Pulsar v3",
-                "id": "upgrade-pulsar-v3.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Continue Using Pulsar v2",
-                "id": "use-pulsar-v2.md",
-                "order": 1,
-                "children": []
-              }
-            ]
           }
         ]
       },
@@ -1954,26 +2111,32 @@
         "children": []
       },
       {
-        "label": "Woodpecker",
-        "id": "use-woodpecker.md",
-        "order": 13,
-        "children": []
-      },
-      {
         "label": "Switch MQ Type",
         "id": "switch_milvus_mq_type",
         "order": 14,
         "children": [
           {
-            "label": "Milvus Cluster switch MQ Type",
-            "id": "switch_milvus_cluster_mq_type-operator.md",
+            "label": "Overview",
+            "id": "switch-mq-type.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "Milvus Standalone switch MQ type",
-            "id": "switch_milvus_standalone_mq_type-operator.md",
+            "label": "RocksMQ ↔ Woodpecker",
+            "id": "switch-rocksmq-woodpecker.md",
             "order": 1,
+            "children": []
+          },
+          {
+            "label": "Pulsar ↔ Woodpecker",
+            "id": "switch-pulsar-woodpecker.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Kafka ↔ Woodpecker",
+            "id": "switch-kafka-woodpecker.md",
+            "order": 3,
             "children": []
           }
         ]
@@ -3049,7 +3212,7 @@
     "label": "FAQs",
     "id": "faq",
     "isMenu": true,
-    "order": 9,
+    "order": 11,
     "children": [
       {
         "label": "Performance FAQs",

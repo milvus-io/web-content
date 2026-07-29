@@ -6,7 +6,7 @@ summary: >-
   des documents contenant des termes ou des expressions spécifiques dans des
   ensembles de données textuelles, puis de classer les résultats en fonction de
   leur pertinence. Cette fonctionnalité pallie les limites de la recherche
-  sémantique, qui peut passer à côté de termes précis, et vous garantit ainsi
+  sémantique, qui peut passer à côté de termes précis, vous garantissant ainsi
   d’obtenir les résultats les plus précis et les plus pertinents d’un point de
   vue contextuel. De plus, elle simplifie les recherches vectorielles en
   acceptant des entrées de texte brut, convertissant automatiquement vos données
@@ -28,7 +28,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>La recherche en texte intégral est une fonctionnalité qui permet de récupérer des documents contenant des termes ou des expressions spécifiques dans des ensembles de données textuelles, puis de classer les résultats en fonction de leur pertinence. Cette fonctionnalité pallie les limites de la recherche sémantique, qui peut passer à côté de termes précis, et vous garantit ainsi d'obtenir les résultats les plus précis et les plus pertinents d'un point de vue contextuel. De plus, elle simplifie les recherches vectorielles en acceptant la saisie de texte brut, convertissant automatiquement vos données textuelles en représentations vectorielles clairsemées sans qu'il soit nécessaire de générer manuellement ces représentations.</p>
+    </button></h1><p>La recherche en texte intégral est une fonctionnalité qui permet de récupérer des documents contenant des termes ou des expressions spécifiques dans des ensembles de données textuelles, puis de classer les résultats en fonction de leur pertinence. Cette fonctionnalité pallie les limites de la recherche sémantique, qui peut passer à côté de termes précis, vous garantissant ainsi d'obtenir les résultats les plus précis et les plus pertinents d'un point de vue contextuel. De plus, elle simplifie les recherches vectorielles en acceptant la saisie de texte brut, convertissant automatiquement vos données textuelles en représentations vectorielles clairsemées sans qu'il soit nécessaire de générer manuellement ces représentations.</p>
 <p>Utilisant l’algorithme BM25 pour le calcul de la pertinence, cette fonctionnalité est particulièrement utile dans les scénarios de génération augmentée par la recherche (RAG), où elle donne la priorité aux documents qui correspondent étroitement à des termes de recherche spécifiques.</p>
 <div class="alert note">
 <p>En intégrant la recherche en texte intégral à la recherche vectorielle dense basée sur la sémantique, vous pouvez améliorer la précision et la pertinence des résultats de recherche. Pour plus d’informations, consultez la section <a href="/docs/fr/multi-vector-search.md">Recherche hybride</a>.</p>
@@ -53,7 +53,7 @@ summary: >-
 <ol>
 <li><p><strong>Saisie de texte brut</strong>: vous insérez des documents textuels ou saisissez une requête en texte brut, sans qu’aucun modèle d’encodage ne soit nécessaire.</p></li>
 <li><p><strong>Analyse du texte</strong>: Milvus utilise un <a href="/docs/fr/analyzer-overview.md">analyseur</a> pour traiter votre texte en termes significatifs pouvant être indexés et recherchés.</p></li>
-<li><p><strong>Traitement par la fonction BM25</strong>: une fonction intégrée transforme ces termes en représentations vectorielles clairsemées optimisées pour le calcul de score BM25.</p></li>
+<li><p><strong>Traitement par la fonction BM25</strong>: une fonction intégrée transforme ces termes en représentations vectorielles creuses optimisées pour le calcul de score BM25.</p></li>
 <li><p><strong>Stockage dans une collection</strong>: Milvus stocke les représentations vectorielles clairsemées obtenues dans une collection afin de permettre une récupération et un classement rapides.</p></li>
 <li><p><strong>Notation de pertinence BM25</strong>: au moment de la recherche, Milvus applique la fonction de notation BM25 pour calculer la pertinence des documents et renvoyer les résultats classés qui correspondent le mieux aux termes de la requête.</p></li>
 </ol>
@@ -67,7 +67,7 @@ summary: >-
 <ol>
 <li><p><a href="/docs/fr/full-text-search.md#Create-a-collection-for-BM25-full-text-search">Créer une collection</a>: configurez les champs requis et définissez une fonction BM25 qui convertit le texte brut en représentations clairsemées.</p></li>
 <li><p><a href="/docs/fr/full-text-search.md#Insert-text-data">Insérez les données</a>: importez vos documents de texte brut dans la collection.</p></li>
-<li><p><a href="/docs/fr/full-text-search.md#Perform-full-text-search">Effectuez des recherches</a>: utilisez une requête en langage naturel pour récupérer des résultats classés en fonction de la pertinence BM25.</p></li>
+<li><p><a href="/docs/fr/full-text-search.md#Perform-full-text-search">Effectuez des recherches</a>: utilisez une requête en langage naturel pour obtenir des résultats classés en fonction de la pertinence BM25.</p></li>
 </ol>
 <h2 id="Create-a-collection-for-BM25-full-text-search" class="common-anchor-header">Créer une collection pour la recherche en texte intégral BM25<button data-href="#Create-a-collection-for-BM25-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -103,7 +103,7 @@ summary: >-
     </button></h3><p>Le schéma de votre collection doit inclure au moins trois champs obligatoires :</p>
 <ul>
 <li><p><strong>Champ principal</strong>: identifie de manière unique chaque entité de la collection.</p></li>
-<li><p><strong>Champ texte</strong> (<code translate="no">VARCHAR</code>) : stocke les documents texte bruts. Vous devez définir l’ <code translate="no">enable_analyzer=True</code> afin que Milvus puisse traiter le texte pour le classement par pertinence BM25. Par défaut, Milvus utilise l’ <a href="/docs/fr/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/fr/standard-analyzer.md"> analyzer</a> pour l’analyse de texte. Pour configurer un autre analyzer, consultez la section <a href="/docs/fr/analyzer-overview.md">Présentation des analyzers</a>.</p></li>
+<li><p><strong>Champ de type chaîne</strong> (<code translate="no">VARCHAR</code> ou <code translate="no">TEXT</code>) : stocke les documents texte bruts. Vous devez définir l'<code translate="no">enable_analyzer=True</code> afin que Milvus puisse traiter le texte pour le classement par pertinence BM25. Par défaut, Milvus utilise l' <a href="/docs/fr/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/fr/standard-analyzer.md"> analyzer</a> pour l’analyse de texte. Pour configurer un autre analyzer, consultez <a href="/docs/fr/analyzer-overview.md">la section Présentation des analyzers</a>. Les exemples de cette page utilisent <code translate="no">VARCHAR</code>; pour les textes longs, vous pouvez définir le champ d’entrée comme <code translate="no">TEXT</code> et omettre <code translate="no">max_length</code>. Pour un exemple complet, consultez la <a href="/docs/fr/text.md">section Champ de texte</a>.</p></li>
 <li><p><strong>Champ de vecteurs clairsemés</strong> (<code translate="no">SPARSE_FLOAT_VECTOR</code>) : stocke les représentations clairsemées générées automatiquement par la fonction BM25.</p></li>
 </ul>
 <div class="multipleCode">
@@ -241,7 +241,7 @@ schema.WithField(entity.NewField().
 <p>Dans la configuration ci-dessus,</p>
 <ul>
 <li><p><code translate="no">id</code>: sert de clé primaire et est généré automatiquement avec <code translate="no">auto_id=True</code>.</p></li>
-<li><p><code translate="no">text</code>: stocke vos données textuelles brutes pour les opérations de recherche en texte intégral. Le type de données doit être <code translate="no">VARCHAR</code>, car <code translate="no">VARCHAR</code> correspond au type de données chaîne de caractères de Milvus pour le stockage de texte.</p></li>
+<li><p><code translate="no">text</code>: stocke vos données textuelles brutes pour les opérations de recherche en texte intégral. Le champ peut utiliser <code translate="no">VARCHAR</code> pour le texte court ou <code translate="no">TEXT</code> pour les contenus sources volumineux.</p></li>
 <li><p><code translate="no">sparse</code>: un champ vectoriel réservé au stockage d’embeddings clairsemés générés en interne pour les opérations de recherche en texte intégral. Le type de données doit être <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 </ul>
 <h3 id="Define-the-BM25-function" class="common-anchor-header">Définir la fonction BM25<button data-href="#Define-the-BM25-function" class="anchor-icon" translate="no">
@@ -259,7 +259,7 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>La fonction BM25 convertit un texte tokenisé en vecteurs clairsemés prenant en charge le calcul de score BM25.</p>
+    </button></h3><p>La fonction BM25 convertit le texte tokenisé en vecteurs clairsemés prenant en charge le calcul de score BM25.</p>
 <p>Définissez la fonction et ajoutez-la à votre schéma :</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -270,7 +270,7 @@ schema.WithField(entity.NewField().
 </div>
 <pre><code translate="no" class="language-python">bm25_function = Function(
     name=<span class="hljs-string">&quot;text_bm25_emb&quot;</span>, <span class="hljs-comment"># Function name</span>
-    input_field_names=[<span class="hljs-string">&quot;text&quot;</span>], <span class="hljs-comment"># Name of the VARCHAR field containing raw text data</span>
+    input_field_names=[<span class="hljs-string">&quot;text&quot;</span>], <span class="hljs-comment"># Name of the VARCHAR or TEXT field containing raw text data</span>
     output_field_names=[<span class="hljs-string">&quot;sparse&quot;</span>], <span class="hljs-comment"># Name of the SPARSE_FLOAT_VECTOR field reserved to store generated embeddings</span>
 <span class="highlighted-wrapper-line">    function_type=FunctionType.BM25, <span class="hljs-comment"># Set to `BM25`</span></span>
 )
@@ -351,19 +351,19 @@ schema.WithFunction(function)
    </tr>
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
-     <td><p>Nom du champ « <code translate="no">VARCHAR</code> » dont le contenu doit être converti en vecteurs clairsemés. Pour « <code translate="no">FunctionType.BM25</code> », ce paramètre n’accepte qu’un seul nom de champ.</p></td>
+     <td><p>Nom du champ « <code translate="no">VARCHAR</code> » ou « <code translate="no">TEXT</code> » nécessitant une conversion de texte en vecteur clairsemé. Pour « <code translate="no">FunctionType.BM25</code> », ce paramètre n’accepte qu’un seul nom de champ.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">output_field_names</code></p></td>
-     <td><p>Nom du champ dans lequel les vecteurs creux générés en interne seront stockés. Pour « <code translate="no">FunctionType.BM25</code> », ce paramètre n’accepte qu’un seul nom de champ.</p></td>
+     <td><p>Nom du champ dans lequel les vecteurs creux générés en interne seront stockés. Pour <code translate="no">FunctionType.BM25</code>, ce paramètre n’accepte qu’un seul nom de champ.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>Le type de la fonction à utiliser. Doit être « <code translate="no">FunctionType.BM25</code> ».</p></td>
+     <td><p>Le type de fonction à utiliser. Doit être <code translate="no">FunctionType.BM25</code>.</p></td>
    </tr>
 </table>
 <div class="alert note">
-<p>Si plusieurs champs « <code translate="no">VARCHAR</code> » nécessitent un traitement BM25, définissez <strong>une fonction BM25 par champ</strong>, chacune avec un nom et un champ de sortie uniques.</p>
+<p>Si plusieurs champs de texte nécessitent un traitement BM25, définissez <strong>une fonction BM25 par champ</strong>, chacune avec un nom et un champ de sortie uniques.</p>
 </div>
 <h3 id="Configure-the-index" class="common-anchor-header">Configurer l’index<button data-href="#Configure-the-index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -457,11 +457,11 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">field_name</code></p></td>
-     <td><p>Nom du champ vectoriel à indexer. Pour la recherche en texte intégral, il doit s’agir du champ qui stocke les vecteurs creux générés. Dans cet exemple, définissez la valeur sur <code translate="no">sparse</code>.</p></td>
+     <td><p>Nom du champ vectoriel à indexer. Pour la recherche en texte intégral, il doit s'agir du champ qui stocke les vecteurs clairsemés générés. Dans cet exemple, définissez la valeur sur <code translate="no">sparse</code>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">index_type</code></p></td>
-     <td><p>Type d’index à créer. La valeur « <code translate="no">AUTOINDEX</code> » permet à Milvus d’optimiser automatiquement les paramètres d’indexation. Si vous souhaitez disposer d’un contrôle accru sur ces paramètres, vous pouvez choisir parmi les différents types d’index disponibles pour les vecteurs creux dans Milvus. Pour plus d’informations, consultez la section « <a href="/docs/fr/index.md#Indexes-supported-in-Milvus">Index pris en charge par Milvus</a> ».</p></td>
+     <td><p>Type d’index à créer. Pour la recherche en texte intégral BM25 dans Milvus, définissez cette valeur sur <code translate="no">SPARSE_INVERTED_INDEX</code>. Pour plus d’informations, consultez <a href="/docs/fr/sparse-inverted-index.md">SPARSE_INVERTED_INDEX</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">metric_type</code></p></td>
@@ -473,11 +473,11 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>L’algorithme utilisé pour la construction et l’interrogation de l’index. Valeurs valides :</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (par défaut) : traitement optimisé des requêtes « Document-at-a-Time » (DAAT) à l’aide de l’algorithme MaxScore. MaxScore offre de meilleures performances pour les valeurs <em>k</em> élevées ou les requêtes comportant de nombreux termes, en ignorant les termes et les documents susceptibles d’avoir un impact minimal. Pour ce faire, il répartit les termes en groupes essentiels et non essentiels en fonction de leurs scores d’impact maximaux, en se concentrant sur les termes susceptibles de contribuer aux k premiers résultats.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Traitement optimisé des requêtes DAAT à l’aide de l’algorithme WAND. WAND évalue moins de documents correspondants en s’appuyant sur les scores d’impact maximaux pour ignorer les documents non compétitifs, mais il présente une surcharge plus élevée par résultat. Cela rend WAND plus efficace pour les requêtes avec de petites valeurs <em>de k</em> ou les requêtes courtes, où l’ignorance de documents est plus facile à mettre en œuvre.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Traitement de base des requêtes « Term-at-a-Time » (TAAT). Bien qu’il soit plus lent que les algorithmes « <code translate="no">DAAT_MAXSCORE</code> » et « <code translate="no">DAAT_WAND</code> », « <code translate="no">TAAT_NAIVE</code> » offre un avantage unique. Contrairement aux algorithmes DAAT, qui utilisent des scores d’impact maximaux mis en cache et restant statiques indépendamment des modifications apportées au paramètre global de la collection (avgdl), « <code translate="no">TAAT_NAIVE</code> » s’adapte dynamiquement à ces changements.</p></li></ul></td>
+     <td><p>L'algorithme utilisé pour la construction et l'interrogation de l'index inversé clairsemé BM25. Valeurs valides :</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (par défaut) : traitement des requêtes MaxScore « Document-at-a-Time ». Cette option convient aux charges de travail de recherche en texte intégral présentant des valeurs <em>k</em> élevées ou aux requêtes comportant de nombreux termes. Pour plus d’informations, consultez la section <a href="https://dl.acm.org/doi/10.1016/0306-4573%2895%2900020-H">Évaluation des requêtes : stratégies et optimisations</a>.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Traitement des requêtes WAND « Document-at-a-Time ». Cette option est adaptée aux charges de travail de recherche en texte intégral présentant de faibles valeurs <em>de k</em> ou aux requêtes courtes. Pour plus d’informations, consultez la section « <a href="https://dl.acm.org/doi/10.1145/956863.956944">Évaluation efficace des requêtes à l’aide d’un processus de recherche à deux niveaux</a> ».</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Traitement de requêtes « terme par terme » de base. Utilisez cette option comme référence, ou lorsque vous avez besoin que le score s’adapte dynamiquement aux statistiques globales de la collection, telles que la longueur moyenne des documents.</p></li><li><p><code translate="no">"BLOCK_MAX_MAXSCORE"</code>: Traitement des requêtes MaxScore avec des métadonnées de score maximal au niveau des blocs. Pour plus d’informations, consultez la section « <a href="https://dl.acm.org/doi/10.1145/2009916.2010048">Récupération plus rapide des k meilleurs documents à l’aide d’index Block-Max</a> ».</p></li><li><p><code translate="no">"BLOCK_MAX_WAND"</code>: Traitement des requêtes WAND avec des métadonnées de score maximal au niveau des blocs. Pour plus d’informations, consultez la section « <a href="https://dl.acm.org/doi/10.1145/2009916.2010048">Récupération plus rapide des k meilleurs documents à l’aide d’index Block-Max</a> ».</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
-     <td><p>Contrôle la saturation de la fréquence des termes. Des valeurs plus élevées augmentent l’importance de la fréquence des termes dans le classement des documents. Plage de valeurs : [1,2 ; 2,0].</p></td>
+     <td><p>Contrôle la saturation de la fréquence des termes. Des valeurs plus élevées augmentent l’importance de la fréquence des termes dans le classement des documents. Plage recommandée : [1,2 ; 2,0]. Valeur par défaut : 1,2.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_b</code></p></td>
@@ -499,7 +499,7 @@ indexes.add(IndexParam.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Créez maintenant la collection à l'aide du schéma et des paramètres d'index définis.</p>
+    </button></h3><p>Créez maintenant la collection à l’aide du schéma et des paramètres d’index définis.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -732,7 +732,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">params.drop_ratio_search</code></p></td>
-     <td><p>Proportion de termes de faible importance à ignorer lors de la recherche. Pour plus de détails, consultez la section « <a href="/docs/fr/sparse_vector.md">Vecteur clairsemé</a> ».</p></td>
+     <td><p>Proportion de termes de faible importance à ignorer lors de la recherche. La valeur doit être comprise dans l'intervalle [0,0 ; 1,0). Pour plus de détails, consultez la section « <a href="/docs/fr/sparse_vector.md">Vecteur clairsemé</a> ».</p></td>
    </tr>
    <tr>
      <td></td>
@@ -740,7 +740,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">data</code></p></td>
-     <td><p>Texte brut de la requête en langage naturel. Milvus convertit automatiquement votre requête textuelle en vecteurs clairsemés à l'aide de la fonction BM25 – ne fournissez pas de vecteurs précalculés.</p></td>
+     <td><p>Texte brut de la requête en langage naturel. Milvus convertit automatiquement votre requête textuelle en vecteurs clairsemés à l’aide de la fonction BM25 — ne fournissez pas de vecteurs précalculés.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">anns_field</code></p></td>
@@ -837,6 +837,6 @@ client.search(
 <p><strong>Si vous avez besoin d'accéder aux vecteurs</strong>:</p>
 <ul>
 <li><p>Utilisez des opérations manuelles sur les vecteurs creux plutôt que la recherche en texte intégral</p></li>
-<li><p>Créez des collections distinctes pour les workflows personnalisés utilisant des vecteurs creux</p></li>
+<li><p>Créez des collections distinctes pour les workflows personnalisés impliquant des vecteurs creux</p></li>
 </ul>
 <p>Pour plus de détails, consultez la section « <a href="/docs/fr/sparse_vector.md">Vecteurs creux</a> ».</p>

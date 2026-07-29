@@ -1,12 +1,12 @@
 ---
 id: alter-collection-field.md
-title: Modifier un champ de collecte
+title: Modifier un champ de collection
 summary: >-
-  Vous pouvez modifier les propriétés d'un champ de collecte pour changer les
-  contraintes de colonne ou appliquer des règles d'intégrité des données plus
-  strictes.
+  Vous pouvez modifier les propriétés d'un champ de collection afin de modifier
+  les contraintes de colonne ou d'imposer des règles d'intégrité des données
+  plus strictes.
 ---
-<h1 id="Alter-Collection-Field" class="common-anchor-header">Modifier un champ de collecte<button data-href="#Alter-Collection-Field" class="anchor-icon" translate="no">
+<h1 id="Alter-Collection-Field" class="common-anchor-header">Modifier un champ de collection<button data-href="#Alter-Collection-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,14 +21,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Vous pouvez modifier les propriétés d'un champ de collection pour changer les contraintes de colonne ou appliquer des règles d'intégrité des données plus strictes.</p>
+    </button></h1><p>Vous pouvez modifier les propriétés d’un champ de collection afin de modifier les contraintes de colonne ou d’appliquer des règles d’intégrité des données plus strictes.</p>
+<p>Cette page traite des modifications des propriétés des champs, et non des modifications de la structure du schéma, telles que l'ajout ou la suppression de champs. Pour ajouter des champs scalaires ou supprimer des champs d'une collection existante, reportez-vous à <a href="/docs/fr/add-fields-to-an-existing-collection.md">la</a> section <a href="/docs/fr/add-fields-to-an-existing-collection.md">Modifier le schéma d'une collection</a>.</p>
 <div class="alert note">
 <ul>
-<li><p>Chaque collection ne comporte qu'un seul champ primaire. Une fois défini lors de la création de la collection, vous ne pouvez pas modifier le champ primaire ni altérer ses propriétés.</p></li>
-<li><p>Chaque collection ne peut avoir qu'une seule clé de partition. Une fois définie lors de la création de la collection, vous ne pouvez pas modifier la clé de partition.</p></li>
+<li><p>Chaque collection ne comporte qu’un seul champ principal. Une fois défini lors de la création de la collection, vous ne pouvez plus modifier le champ principal ni ses propriétés.</p></li>
+<li><p>Chaque collection ne peut avoir qu’une seule clé de partition. Une fois définie lors de la création de la collection, vous ne pouvez plus modifier la clé de partition.</p></li>
 </ul>
 </div>
-<h2 id="Alter-VarChar-field" class="common-anchor-header">Modifier un champ VarChar<button data-href="#Alter-VarChar-field" class="anchor-icon" translate="no">
+<h2 id="Alter-VarChar-field" class="common-anchor-header">Modification d’un champ VarChar<button data-href="#Alter-VarChar-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,10 +44,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un champ VarChar possède une propriété appelée <code translate="no">max_length</code>, qui limite le nombre maximum de caractères que les valeurs du champ peuvent contenir. Vous pouvez modifier la propriété <code translate="no">max_length</code>.</p>
-<p>L'exemple suivant suppose que la collection possède un champ VarChar nommé <code translate="no">varchar</code> et définit sa propriété <code translate="no">max_length</code>.</p>
+    </button></h2><p>Un champ VarChar possède une propriété nommée « <code translate="no">max_length</code> », qui limite le nombre maximal de caractères que les valeurs du champ peuvent contenir. Vous pouvez modifier la propriété « <code translate="no">max_length</code> ».</p>
+<p>L’exemple suivant part du principe que la collection comporte un champ VarChar nommé « <code translate="no">varchar</code> » et définit sa propriété « <code translate="no">max_length</code> ».</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -79,7 +82,10 @@ client.alterCollectionField(AlterCollectionFieldReq.builder()
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <div class="multipleCode">
-   <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#javascript">NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterCollectionFieldProperties</span>({
   <span class="hljs-attr">collection_name</span>: <span class="hljs-variable constant_">LOAD_COLLECTION_NAME</span>,
   <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;varchar&#x27;</span>,
@@ -144,10 +150,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un champ de type tableau possède deux propriétés, à savoir <code translate="no">element_type</code> et <code translate="no">max_capacity</code>. La première détermine le type de données des éléments d'un tableau, tandis que la seconde limite le nombre maximal d'éléments du tableau. Vous ne pouvez modifier que la propriété <code translate="no">max_capacity</code>.</p>
-<p>L'exemple suivant suppose que la collection possède un champ de tableau nommé <code translate="no">array</code> et définit sa propriété <code translate="no">max_capacity</code>.</p>
+    </button></h2><p>Un champ de type tableau possède deux propriétés : <code translate="no">element_type</code> et <code translate="no">max_capacity</code>. La première détermine le type de données des éléments du tableau, tandis que la seconde limite le nombre maximal d’éléments du tableau. Vous ne pouvez modifier que la propriété <code translate="no">max_capacity</code>.</p>
+<p>L'exemple suivant part du principe que la collection comporte un champ de type tableau nommé <code translate="no">array</code> et définit sa propriété <code translate="no">max_capacity</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.alter_collection_field(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     field_name=<span class="hljs-string">&quot;array&quot;</span>,
@@ -205,10 +216,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Le mappage de la mémoire (Mmap) permet d'accéder directement à la mémoire des fichiers volumineux sur le disque, ce qui permet à Milvus de stocker des index et des données à la fois dans la mémoire et sur les disques durs. Cette approche permet d'optimiser la politique de placement des données en fonction de la fréquence d'accès, en augmentant la capacité de stockage des collections sans affecter les performances de recherche.</p>
-<p>L'exemple suivant suppose que la collection possède un champ nommé <code translate="no">doc_chunk</code> et définit sa propriété <code translate="no">mmap_enabled</code>.</p>
+    </button></h2><p>Le mappage mémoire (Mmap) permet un accès direct en mémoire aux fichiers volumineux stockés sur le disque, ce qui permet à Milvus de stocker les index et les données à la fois en mémoire et sur les disques durs. Cette approche contribue à optimiser la politique de placement des données en fonction de la fréquence d’accès, augmentant ainsi la capacité de stockage des collections sans impact sur les performances de recherche.</p>
+<p>L'exemple suivant part du principe que la collection comporte un champ nommé « <code translate="no">doc_chunk</code> » et définit sa propriété « <code translate="no">mmap_enabled</code> ».</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.alter_collection_field(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,

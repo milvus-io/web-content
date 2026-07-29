@@ -1,13 +1,13 @@
 ---
 id: standard-analyzer.md
-title: Analyseur standard
+title: Analyseur par défaut
 summary: >-
-  L'analyseur standard est l'analyseur par défaut de Milvus, qui est
+  L'analyseur standard est l'analyseur par défaut dans Milvus ; il est
   automatiquement appliqué aux champs de texte si aucun analyseur n'est
-  spécifié. Il utilise une tokénisation basée sur la grammaire, ce qui le rend
+  spécifié. Il utilise une tokenisation basée sur la grammaire, ce qui le rend
   efficace pour la plupart des langues.
 ---
-<h1 id="Standard-Analyzer" class="common-anchor-header">Analyseur standard<button data-href="#Standard-Analyzer" class="anchor-icon" translate="no">
+<h1 id="Standard-Analyzer" class="common-anchor-header">Analyseur par défaut<button data-href="#Standard-Analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,9 +22,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>L'analyseur <code translate="no">standard</code> est l'analyseur par défaut de Milvus, qui est automatiquement appliqué aux champs de texte si aucun analyseur n'est spécifié. Il utilise une tokénisation basée sur la grammaire, ce qui le rend efficace pour la plupart des langues.</p>
+    </button></h1><p>L'analyseur « <code translate="no">standard</code> » est l'analyseur par défaut de Milvus ; il est automatiquement appliqué aux champs de texte si aucun analyseur n'est spécifié. Il utilise une tokenisation basée sur la grammaire, ce qui le rend efficace pour la plupart des langues.</p>
 <div class="alert note">
-<p>L'analyseur <code translate="no">standard</code> convient aux langues qui s'appuient sur des séparateurs (tels que les espaces, la ponctuation) pour délimiter les mots. Cependant, des langues comme le chinois, le japonais et le coréen nécessitent une tokénisation basée sur le dictionnaire. Dans ce cas, l'utilisation d'un analyseur spécifique à la langue comme <a href="/docs/fr/chinese-analyzer.md"><code translate="no">chinese</code></a> ou des analyseurs personnalisés avec des tokenizers spécialisés (tels que <a href="/docs/fr/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/fr/icu-tokenizer.md"><code translate="no">icu</code></a>) et des filtres est fortement recommandée pour garantir une tokénisation précise et de meilleurs résultats de recherche.</p>
+<p>L'analyseur « <code translate="no">standard</code> » convient aux langues qui s'appuient sur des séparateurs (tels que les espaces ou la ponctuation) pour délimiter les mots. Cependant, des langues comme le chinois, l'arabe, le thaï, le japonais et le coréen nécessitent une tokenisation ou une normalisation spécifique à la langue. Dans ces cas-là, utilisez un analyseur spécifique à la langue, tel que <a href="/docs/fr/chinese-analyzer.md"><code translate="no">chinese</code></a>, <a href="/docs/fr/arabic-analyzer.md"><code translate="no">arabic</code></a>, ou <a href="/docs/fr/thai-analyzer.md"><code translate="no">thai</code></a>, ou des analyseurs personnalisés dotés de tokeniseurs spécialisés tels que <a href="/docs/fr/lindera-tokenizer.md"><code translate="no">lindera</code></a> et <a href="/docs/fr/icu-tokenizer.md"><code translate="no">icu</code></a>.</p>
 </div>
 <h2 id="Definition" class="common-anchor-header">Définition<button data-href="#Definition" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,14 +41,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>L'analyseur <code translate="no">standard</code> se compose des éléments suivants</p>
+    </button></h2><p>L'analyseur « <code translate="no">standard</code> » se compose des éléments suivants :</p>
 <ul>
-<li><p>Un<strong>tokenizer</strong>: Utilise le tokenizer <code translate="no">standard</code> pour diviser le texte en unités de mots discrètes basées sur des règles de grammaire. Pour plus d'informations, voir <a href="/docs/fr/standard-tokenizer.md">Tokenizer standard</a>.</p></li>
-<li><p><strong>Filtre</strong>: Utilise le filtre <code translate="no">lowercase</code> pour convertir tous les tokens en minuscules, ce qui permet d'effectuer des recherches insensibles à la casse. Pour plus d'informations, voir <a href="/docs/fr/lowercase-filter.md">Minuscules</a>.</p></li>
+<li><p><strong>Tokeniseur</strong>: utilise le tokeniseur « <code translate="no">standard</code> » pour diviser le texte en unités lexicales distinctes selon des règles grammaticales. Pour plus d’informations, consultez la section « <a href="/docs/fr/standard-tokenizer.md">Tokeniseur standard</a> ».</p></li>
+<li><p><strong>Filtre</strong>: utilise le filtre « <code translate="no">lowercase</code> » pour convertir tous les tokens en minuscules, ce qui permet d’effectuer des recherches insensibles à la casse. Pour plus d’informations, reportez-vous à <a href="/docs/fr/lowercase-filter.md">la section « Minuscules</a> ».</p></li>
 </ul>
-<p>Les fonctionnalités de l'analyseur <code translate="no">standard</code> sont équivalentes à la configuration personnalisée suivante de l'analyseur :</p>
+<p>Les fonctionnalités de l’analyseur « <code translate="no">standard</code> » sont équivalentes à la configuration d’analyseur personnalisé suivante :</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;lowercase&quot;</span>]
@@ -73,7 +78,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Configuration" class="common-anchor-header">Configuration de l'analyseur<button data-href="#Configuration" class="anchor-icon" translate="no">
+<h2 id="Configuration" class="common-anchor-header">Configuration<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -88,9 +93,14 @@ analyzerParams=<span class="hljs-string">&#x27;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pour appliquer l'analyseur <code translate="no">standard</code> à un champ, il suffit de définir <code translate="no">type</code> sur <code translate="no">standard</code> dans <code translate="no">analyzer_params</code>, et d'inclure des paramètres facultatifs si nécessaire.</p>
+    </button></h2><p>Pour appliquer l’analyseur « <code translate="no">standard</code> » à un champ, il suffit de définir ` <code translate="no">type</code> ` sur ` <code translate="no">standard</code> ` dans ` <code translate="no">analyzer_params</code>`, et d’inclure des paramètres facultatifs si nécessaire.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-comment"># Specifies the standard analyzer type</span>
 }
@@ -117,12 +127,17 @@ analyzerParams=<span class="hljs-string">&#x27;{
    </tr>
    <tr>
      <td><p><code translate="no">stop_words</code></p></td>
-     <td><p>Un tableau contenant une liste de mots vides, qui seront supprimés de la tokenisation. La valeur par défaut est <code translate="no">_english_</code>, un ensemble intégré de mots d'arrêt anglais courants.</p></td>
+     <td><p>Tableau contenant une liste de mots vides, qui seront supprimés lors de la tokenisation. La valeur par défaut est <code translate="no">_english_</code>, un ensemble intégré de mots vides courants en anglais.</p></td>
    </tr>
 </table>
 <p>Exemple de configuration de mots vides personnalisés :</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-comment"># Specifies the standard analyzer type</span>
     <span class="hljs-string">&quot;stop_words&quot;</span>, [<span class="hljs-string">&quot;of&quot;</span>] <span class="hljs-comment"># Optional: List of words to exclude from tokenization</span>
@@ -141,7 +156,7 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Coll
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Après avoir défini <code translate="no">analyzer_params</code>, vous pouvez les appliquer à un champ <code translate="no">VARCHAR</code> lors de la définition d'un schéma de collecte. Cela permet à Milvus de traiter le texte de ce champ à l'aide de l'analyseur spécifié pour une tokenisation et un filtrage efficaces. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/analyzer-overview.md#Example-use">Exemple d'utilisation</a>.</p>
+<p>Après avoir défini <code translate="no">analyzer_params</code>, vous pouvez les appliquer à un champ <code translate="no">VARCHAR</code> lors de la définition d’un schéma de collection. Cela permet à Milvus de traiter le texte de ce champ à l’aide de l’analyseur spécifié, pour une tokenisation et un filtrage efficaces. Pour plus d’informations, consultez la section <a href="/docs/fr/analyzer-overview.md#Example-use">Exemple d’utilisation</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Exemples<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -157,8 +172,8 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Avant d'appliquer la configuration de l'analyseur à votre schéma de collecte, vérifiez son comportement à l'aide de la méthode <code translate="no">run_analyzer</code>.</p>
-<h3 id="Analyzer-configuration" class="common-anchor-header">Configuration de l'analyseur<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
+    </button></h2><p>Avant d’appliquer la configuration de l’analyseur à votre schéma de collection, vérifiez son comportement à l’aide de la méthode ` <code translate="no">run_analyzer</code> `.</p>
+<h3 id="Analyzer-configuration" class="common-anchor-header">Configuration de l’analyseur<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -174,7 +189,12 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Coll
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,  <span class="hljs-comment"># Standard analyzer configuration</span>
     <span class="hljs-string">&quot;stop_words&quot;</span>: [<span class="hljs-string">&quot;for&quot;</span>] <span class="hljs-comment"># Optional: Custom stop words parameter</span>
@@ -196,7 +216,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Vérification à l'aide de <code translate="no">run_analyzer</code><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
+<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Vérification à l’aide de <code translate="no">run_analyzer</code><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -212,7 +232,12 @@ analyzerParams=<span class="hljs-string">&#x27;{
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,
 )

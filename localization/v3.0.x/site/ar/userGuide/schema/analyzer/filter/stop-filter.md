@@ -1,11 +1,11 @@
 ---
 id: stop-filter.md
-title: التوقف
+title: إيقاف
 summary: >-
-  استخدم عامل تصفية الإيقاف لإزالة كلمات الإيقاف المكوّنة من النص الرمزي أثناء
-  التحليل.
+  استخدم مرشح الكلمات الممنوعة لإزالة الكلمات الممنوعة التي تم تكوينها من النص
+  الذي تم تقسيمه إلى رموز أثناء التحليل.
 ---
-<h1 id="Stop" class="common-anchor-header">التوقف<button data-href="#Stop" class="anchor-icon" translate="no">
+<h1 id="Stop" class="common-anchor-header">إيقاف<button data-href="#Stop" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يقوم عامل التصفية <code translate="no">stop</code> بإزالة كلمات الإيقاف المحددة من النص المرموز، مما يساعد على التخلص من الكلمات الشائعة الأقل معنى. يمكنك تكوين قائمة كلمات الإيقاف باستخدام المعلمة <code translate="no">stop_words</code>.</p>
+    </button></h1><p>يقوم مرشح " <code translate="no">stop</code> " بإزالة الكلمات الممنوعة المحددة من النص الذي تم تقسيمه إلى رموز، مما يساعد على التخلص من الكلمات الشائعة الأقل دلالة. يمكنك تكوين قائمة الكلمات الممنوعة باستخدام المعلمة <code translate="no">stop_words</code>.</p>
 <h2 id="Configuration" class="common-anchor-header">التكوين<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,8 +36,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يقبل عامل التصفية <code translate="no">stop</code> قائمة كلمات الإيقاف إما مضمنة عبر المعلمة <code translate="no">stop_words</code> أو من مورد ملف مسجل عبر المعلمة <code translate="no">stop_words_file</code>.</p>
-<h3 id="Inline-stop-words-list" class="common-anchor-header">قائمة كلمات الإيقاف المضمنة<button data-href="#Inline-stop-words-list" class="anchor-icon" translate="no">
+    </button></h2><p>يقبل مرشح " <code translate="no">stop</code> " قائمة كلمات التوقف الخاصة به إما مضمنة عبر المعلمة <code translate="no">stop_words</code> أو من مورد ملف مسجل عبر المعلمة <code translate="no">stop_words_file</code>.</p>
+<h3 id="Inline-stop-words-list" class="common-anchor-header">قائمة الكلمات الممنوعة المضمنة<button data-href="#Inline-stop-words-list" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -52,9 +52,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>لاستخدام عامل التصفية <code translate="no">stop</code> مع قائمة مضمنة، حدد <code translate="no">&quot;type&quot;: &quot;stop&quot;</code> في تكوين عامل التصفية، إلى جانب معلمة <code translate="no">stop_words</code> التي توفر قائمة الكلمات الإيقاف.</p>
+    </button></h3><p>لاستخدام مرشح <code translate="no">stop</code> مع قائمة مضمنة، حدد <code translate="no">&quot;type&quot;: &quot;stop&quot;</code> في تكوين المرشح، إلى جانب المعلمة <code translate="no">stop_words</code> التي توفر قائمة الكلمات الممنوعة.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>:[{
@@ -104,7 +109,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>يقبل عامل التصفية <code translate="no">stop</code> المعلمات التالية القابلة للتكوين.</p>
+<p>يقبل مرشح <code translate="no">stop</code> المعلمات القابلة للتكوين التالية.</p>
 <table>
    <tr>
      <th><p>المعلمة</p></th>
@@ -112,12 +117,12 @@ analyzerParams=<span class="hljs-string">&#x27;{
    </tr>
    <tr>
      <td><p><code translate="no">stop_words</code></p></td>
-     <td><p>قائمة الكلمات المراد إزالتها من الترميز. بشكل افتراضي، يستخدم الفلتر قاموس <code translate="no">_english_</code> المدمج. يمكنك تجاوزه أو توسيعه بثلاث طرق:</p><ul><li><p><strong>القواميس الم</strong> دمجة - قم بتوفير أحد هذه الأسماء المستعارة للغة لاستخدام قاموس محدد مسبقًا:</p><p><code translate="no">"_english_"</code> <code translate="no">"_danish_"</code>, , , , , , , , , , , , , <code translate="no">"_dutch_"</code> <code translate="no">"_finnish_"</code> <code translate="no">"_french_"</code> <code translate="no">"_german_"</code> <code translate="no">"_hungarian_"</code> <code translate="no">"_italian_"</code> <code translate="no">"_norwegian_"</code> <code translate="no">"_portuguese_"</code> <code translate="no">"_russian_"</code> <code translate="no">"_spanish_"</code> <code translate="no">"_swedish_"</code></p></li><li><p><strong>قائمة مخصصة</strong> - تمرير مصفوفة من المصطلحات الخاصة بك، على سبيل المثال <code translate="no">["foo", "bar", "baz"]</code>.</p></li><li><p><strong>قائمة مختلطة</strong> - الجمع بين الأسماء المستعارة والمصطلحات المخصصة، على سبيل المثال <code translate="no">["of", "to", "_english_"]</code>.</p><p>للحصول على تفاصيل حول المحتوى الدقيق لكل قاموس محدد مسبقًا، راجع <a href="https://github.com/milvus-io/milvus/blob/master/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words.rs">stop_words</a>.</p></li></ul></td>
+     <td><p>قائمة بالكلمات المراد إزالتها من عملية التقطيع إلى رموز. بشكل افتراضي، يستخدم المرشح قاموس <code translate="no">_english_</code> المدمج. يمكنك تجاوزه أو توسيعه بثلاث طرق:</p><ul><li><p><strong>القواميس المدمجة</strong> – أدخل أحد أسماء اللغات المستعارة التالية لاستخدام قاموس محدد مسبقًا:</p><p><code translate="no">"_arabic_"</code>، <code translate="no">"_english_"</code> ، <code translate="no">"_danish_"</code> ، <code translate="no">"_dutch_"</code> ، <code translate="no">"_finnish_"</code> ، <code translate="no">"_french_"</code> ، <code translate="no">"_german_"</code> ، <code translate="no">"_hungarian_"</code> ، <code translate="no">"_italian_"</code> ، <code translate="no">"_norwegian_"</code> ، <code translate="no">"_portuguese_"</code> ، <code translate="no">"_russian_"</code> ، <code translate="no">"_spanish_"</code> ، <code translate="no">"_swedish_"</code> ، <code translate="no">"_thai_"</code></p></li><li><p><strong>قائمة مخصصة</strong> – قم بتمرير مصفوفة من المصطلحات الخاصة بك، على سبيل المثال <code translate="no">["foo", "bar", "baz"]</code>.</p></li><li><p><strong>قائمة مختلطة</strong> – اجمع بين الأسماء المستعارة والمصطلحات المخصصة، على سبيل المثال: <code translate="no">["of", "to", "_english_"]</code>.</p><p>للحصول على تفاصيل حول المحتوى الدقيق لكل قاموس محدد مسبقًا، راجع <a href="https://github.com/milvus-io/milvus/blob/master/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words.rs">stop_words</a>. لفحص القاموس العربي أو التايلاندي، راجع <a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/arabic.txt">قائمة الكلمات الممنوعة العربية</a> أو <a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/thai.txt">قائمة الكلمات الممنوعة التايلاندية</a>.</p></li></ul></td>
    </tr>
 </table>
-<p>يعمل عامل التصفية <code translate="no">stop</code> على المصطلحات التي تم إنشاؤها بواسطة أداة الترميز، لذلك يجب استخدامه مع أداة الترميز. للحصول على قائمة بأدوات الترميز المتوفرة في ميلفوس، راجع <a href="/docs/ar/standard-tokenizer.md">أداة الترميز القياسية</a> وصفحاتها الشقيقة.</p>
-<p>بعد تحديد <code translate="no">analyzer_params</code> ، يمكنك تطبيقها على حقل <code translate="no">VARCHAR</code> عند تحديد مخطط المجموعة. يسمح ذلك لـ Milvus بمعالجة النص في ذلك الحقل باستخدام المحلل المحدد من أجل ترميز وتصفية فعالة. لمزيد من التفاصيل، راجع <a href="/docs/ar/analyzer-overview.md#Example-use">مثال الاستخدام</a>.</p>
-<h3 id="Load-stop-words-from-a-file-resource--Milvus-30x" class="common-anchor-header">تحميل كلمات التوقف من مورد ملف<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Load-stop-words-from-a-file-resource--Milvus-30x" class="anchor-icon" translate="no">
+<p>يعمل مرشح <code translate="no">stop</code> على المصطلحات التي تم إنشاؤها بواسطة أداة التقطيع، لذا يجب استخدامه بالاقتران مع أداة التقطيع. للحصول على قائمة بأدوات التقطيع المتاحة في Milvus، راجع <a href="/docs/ar/standard-tokenizer.md">أداة التقطيع القياسية</a> والصفحات المرتبطة بها.</p>
+<p>بعد تعريف « <code translate="no">analyzer_params</code> »، يمكنك تطبيقها على حقل « <code translate="no">VARCHAR</code> » عند تعريف مخطط المجموعة. وهذا يسمح لـ Milvus بمعالجة النص في هذا الحقل باستخدام أداة التحليل المحددة من أجل التقطيع والتصفية بكفاءة. لمزيد من التفاصيل، راجع <a href="/docs/ar/analyzer-overview.md#Example-use">«مثال على الاستخدام</a>».</p>
+<h3 id="Load-stop-words-from-a-file-resource--Milvus-30x" class="common-anchor-header">تحميل الكلمات الممنوعة من مورد ملف<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Load-stop-words-from-a-file-resource--Milvus-30x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -132,13 +137,13 @@ analyzerParams=<span class="hljs-string">&#x27;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>بالنسبة لقوائم كلمات التوقف الكبيرة المخصصة - القوائم الخاصة باللغة أو مفردات المجال أو القوائم التي تريد مشاركتها عبر العديد من المجموعات - قم بتخزين الكلمات في ملف وسجل الملف كمورد ملف بعيد، ثم قم بالإشارة إليه من عامل التصفية عبر المعلمة <code translate="no">stop_words_file</code>. يمكنك استخدام <code translate="no">stop_words_file</code> بمفرده أو إلى جانب المضمنة <code translate="no">stop_words</code> ؛ عند تعيين كليهما، يدمج المرشح المصدرين في قائمة واحدة للكلمات المحظورة.</p>
-<p>الملف هو نص UTF-8 عادي مع <strong>كلمة توقف واحدة في كل سطر</strong>. على سبيل المثال:</p>
+    </button></h3><p>بالنسبة لقوائم كلمات التوقف المخصصة الكبيرة — مثل القوائم الخاصة بلغة معينة، أو مفردات المجال، أو القوائم التي ترغب في مشاركتها عبر العديد من المجموعات — قم بتخزين الكلمات في ملف وتسجيل الملف كمورد ملف بعيد، ثم قم بالإشارة إليه من المرشح عبر المعلمة <code translate="no">stop_words_file</code>. يمكنك استخدام المعلمة « <code translate="no">stop_words_file</code> » بمفردها أو جنبًا إلى جنب مع المعلمة المضمنة « <code translate="no">stop_words</code> »؛ وعند تعيينهما معًا، يقوم المرشح بدمج المصدرين في قائمة كلمات توقف واحدة.</p>
+<p>الملف عبارة عن نص عادي بتنسيق UTF‑8 يحتوي على <strong>كلمة محظورة واحدة في كل سطر</strong>. على سبيل المثال:</p>
 <pre><code translate="no" class="language-plaintext">the
 of
 for
 <button class="copy-code-btn"></button></code></pre>
-<p>قم بتحميل الملف إلى مخزن الكائنات الذي تم تكوين مجموعة ميلفوس لاستخدامه، ثم قم بتسجيله:</p>
+<p>قم بتحميل الملف إلى مخزن الكائنات الذي تم تكوين مجموعة Milvus الخاصة بك لاستخدامه، ثم قم بتسجيله:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -149,7 +154,7 @@ client.add_file_resource(
     path=<span class="hljs-string">&quot;file/stop_words.txt&quot;</span>,    <span class="hljs-comment"># full S3 object key, including the rootPath prefix</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>قم بالإشارة إلى المورد المسجل في عامل التصفية عبر <code translate="no">stop_words_file</code>:</p>
+<p>أشر إلى المورد المسجل في المرشح عبر <code translate="no">stop_words_file</code>:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [{
@@ -162,7 +167,7 @@ client.add_file_resource(
     }],
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>تقبل المعلمة <code translate="no">stop_words_file</code> كائنًا يحتوي على الحقول التالية:</p>
+<p>يقبل المعلمة <code translate="no">stop_words_file</code> كائنًا يحتوي على الحقول التالية:</p>
 <table>
    <tr>
      <th><p><strong>الحقل</strong></p></th>
@@ -170,15 +175,15 @@ client.add_file_resource(
    </tr>
    <tr>
      <td><p><code translate="no">type</code></p></td>
-     <td><p>نوع المورد. استخدم <code translate="no">"remote"</code> لملف مسجل عبر <code translate="no">add_file_resource</code>. بالنسبة للمتغير <code translate="no">"local"</code> المستخدم في عمليات النشر المستضافة ذاتيًا، راجع <a href="/docs/ar/manage-file-resources.md">إدارة موارد الملف</a>.</p></td>
+     <td><p>نوع المورد. استخدم <code translate="no">"remote"</code> لملف مسجل عبر <code translate="no">add_file_resource</code>. بالنسبة لمتغير <code translate="no">"local"</code> المستخدم في عمليات النشر ذاتية الاستضافة، راجع <a href="/docs/ar/manage-file-resources.md">إدارة موارد الملفات</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">resource_name</code></p></td>
-     <td><p>الاسم المستخدم عند تسجيل الملف على <code translate="no">add_file_resource</code>.</p></td>
+     <td><p>الاسم المستخدم عند تسجيل الملف باستخدام <code translate="no">add_file_resource</code>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">file_name</code></p></td>
-     <td><p>جزء اسم الملف من مسار مخزن الكائنات الخاص بالمورد المسجل (على سبيل المثال، <code translate="no">"stop_words.txt"</code> إذا كان المورد مسجلاً مع <code translate="no">path="file/stop_words.txt"</code>).</p></td>
+     <td><p>جزء اسم الملف من مسار مخزن الكائنات للمورد المسجل (على سبيل المثال، <code translate="no">"stop_words.txt"</code> إذا تم تسجيل المورد عبر <code translate="no">path="file/stop_words.txt"</code>).</p></td>
    </tr>
 </table>
 <h2 id="Examples" class="common-anchor-header">أمثلة<button data-href="#Examples" class="anchor-icon" translate="no">
@@ -196,8 +201,8 @@ client.add_file_resource(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>قبل تطبيق تكوين المحلل على مخطط المجموعة، تحقق من سلوكه باستخدام الأسلوب <code translate="no">run_analyzer</code>.</p>
-<h3 id="Analyzer-configuration" class="common-anchor-header">تكوين المحلّل<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
+    </button></h2><p>قبل تطبيق تكوين المحلل على مخطط المجموعة الخاص بك، تحقق من سلوكه باستخدام طريقة <code translate="no">run_analyzer</code>.</p>
+<h3 id="Analyzer-configuration" class="common-anchor-header">تكوين المحلل<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -213,7 +218,12 @@ client.add_file_resource(
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>:[{
@@ -259,7 +269,12 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,
 )
@@ -324,7 +339,7 @@ result, err := client.RunAnalyzer(ctx, option)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Expected-output" class="common-anchor-header">المخرجات المتوقعة<button data-href="#Expected-output" class="anchor-icon" translate="no">
+<h3 id="Expected-output" class="common-anchor-header">الناتج المتوقع<button data-href="#Expected-output" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

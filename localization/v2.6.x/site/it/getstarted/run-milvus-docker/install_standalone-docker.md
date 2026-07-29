@@ -63,15 +63,15 @@ title: Eseguire Milvus in Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Novità della versione 2.6.20:</strong></p>
+<p><strong>Novità della versione 2.6.21:</strong></p>
 <ul>
-<li><strong>Nodo di streaming</strong>: funzionalità di elaborazione dei dati potenziate</li>
+<li><strong>Nodo di streaming</strong>: funzionalità di elaborazione dei dati migliorate</li>
 <li><strong>Woodpecker MQ</strong>: coda di messaggi migliorata con minori costi di manutenzione; per i dettagli, consultare la sezione " <a href="/docs/it/v2.6.x/use-woodpecker.md">Utilizzo di Woodpecker</a> "</li>
 <li><strong>Architettura ottimizzata</strong>: componenti consolidati per prestazioni migliori</li>
 </ul>
-<p>Scaricare sempre lo script più recente per assicurarsi di disporre delle configurazioni e dei miglioramenti architetturali più aggiornati.</p>
+<p>Scarica sempre lo script più recente per assicurarti di ottenere le configurazioni e i miglioramenti dell’architettura più aggiornati.</p>
 <p>Se si desidera utilizzare <a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a> in modalità di distribuzione autonoma, si consiglia di utilizzare il metodo di distribuzione <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
-<p>Se si riscontrano problemi durante il download dell’immagine, contattateci all’indirizzo <a href="mailto:community@zilliz.com">community@zilliz.com</a> fornendo i dettagli del problema e vi forniremo l’assistenza necessaria.</p>
+<p>Se si riscontrano problemi durante il download dell’immagine, contattateci all’indirizzo <a href="mailto:community@zilliz.com">community@zilliz.com</a> fornendo i dettagli del problema e vi forniremo il supporto necessario.</p>
 </div>
 <p>Dopo aver eseguito lo script di installazione:</p>
 <ul>
@@ -80,7 +80,7 @@ title: Eseguire Milvus in Docker (Linux)
 <li>Per modificare la configurazione predefinita di Milvus, aggiungete le vostre impostazioni al file <strong>user.yaml</strong> nella cartella corrente e quindi riavviate il servizio.</li>
 <li>Il volume dati di Milvus è mappato su <strong>volumes/milvus</strong> nella cartella corrente.</li>
 </ul>
-<p>È possibile accedere all’interfaccia Web di Milvus all’indirizzo <code translate="no">http://127.0.0.1:9091/webui/</code> per ottenere ulteriori informazioni sull’istanza di Milvus in uso. Per i dettagli, consultare la documentazione relativa <a href="/docs/it/v2.6.x/milvus-webui.md">all’interfaccia Web di Milvus</a>.</p>
+<p>È possibile accedere all’interfaccia Web di Milvus all’indirizzo <code translate="no">http://127.0.0.1:9091/webui/</code> per ulteriori informazioni sull’istanza di Milvus in uso. Per i dettagli, consultare la documentazione relativa <a href="/docs/it/v2.6.x/milvus-webui.md">all’interfaccia Web di Milvus</a>.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Facoltativo) Aggiornamento delle configurazioni di Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -175,7 +175,7 @@ EOF
       </svg>
     </button></h2><p>Dopo aver installato Milvus in Docker, è possibile:</p>
 <ul>
-<li><p>Consultare <a href="/docs/it/v2.6.x/quickstart.md">la Guida rapida</a> per scoprire cosa può fare Milvus.</p></li>
+<li><p>Consultare <a href="/docs/it/v2.6.x/quickstart.md">la Guida rapida</a> per scoprire le funzionalità di Milvus.</p></li>
 <li><p>Imparare le operazioni di base di Milvus:</p>
 <ul>
 <li><a href="/docs/it/v2.6.x/manage_databases.md">Gestire i database</a></li>
@@ -186,7 +186,7 @@ EOF
 <li><a href="/docs/it/v2.6.x/multi-vector-search.md">Ricerca ibrida</a></li>
 </ul></li>
 <li><p><a href="/docs/it/v2.6.x/upgrade_milvus_cluster-helm.md">Eseguire l'aggiornamento di Milvus utilizzando Helm Chart</a>.</p></li>
-<li><p><a href="/docs/it/v2.6.x/scaleout.md">Scalare il proprio cluster Milvus</a>.</p></li>
+<li><p><a href="/docs/it/v2.6.x/scaleout.md">Scalare il cluster Milvus</a>.</p></li>
 <li><p>Distribuisci il tuo cluster Milvus su cloud:</p>
 <ul>
 <li><a href="/docs/it/v2.6.x/eks.md">Amazon EKS</a></li>

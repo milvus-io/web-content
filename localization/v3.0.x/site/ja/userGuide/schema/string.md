@@ -1,9 +1,9 @@
 ---
 id: string.md
-title: 文字列フィールド
-summary: milvusでは、VARCHARは文字列データを格納するために使用されるデータ型です。
+title: VarChar フィールド
+summary: VARCHAR は、Milvus において、長さが制限された短い文字列メタデータを格納するためのスカラーフィールド型です。
 ---
-<h1 id="String-Field" class="common-anchor-header">文字列フィールド<button data-href="#String-Field" class="anchor-icon" translate="no">
+<h1 id="VarChar-Field" class="common-anchor-header">VarChar フィールド<button data-href="#VarChar-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,16 +18,17 @@ summary: milvusでは、VARCHARは文字列データを格納するために使�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvusにおいて、<code translate="no">VARCHAR</code> は文字列データを格納するために使用されるデータ型です。</p>
-<p><code translate="no">VARCHAR</code> フィールドを定義する場合、2つのパラメータが必須です：</p>
+    </button></h1><p>Milvusは、<code translate="no">VARCHAR</code> および<code translate="no">TEXT</code> フィールドによるテキスト型スカラーデータをサポートしています。このページでは、名前、タグ、カテゴリ、外部IDなど、短く範囲が限定された文字列メタデータ向けに設計された<code translate="no">VARCHAR</code> について説明します。</p>
+<p>より長いソーステキスト、ドキュメントの抜粋、記事本文、チケット、またはログなどをエンティティと共に保存・返却する必要がある場合は、代わりに<code translate="no">TEXT</code> フィールドを使用してください。値が<code translate="no">65,535</code> バイトを超える可能性がある場合や、コレクションスキーマに固定の<code translate="no">max_length</code> を設定したくない場合は、<code translate="no">TEXT</code> を使用してください。詳細については、<a href="/docs/ja/text.md">「テキストフィールド」</a>を参照してください。</p>
+<p><code translate="no">VARCHAR</code> フィールドを定義する際、次の2つのパラメータは必須です。</p>
 <ul>
-<li><p><code translate="no">datatype</code> を<code translate="no">DataType.VARCHAR</code> に設定する。</p></li>
-<li><p><code translate="no">VARCHAR</code> フィールドが格納できる最大バイト数を定義する<code translate="no">max_length</code> を指定します。<code translate="no">max_length</code> の有効範囲は 1 から 65,535 です。</p></li>
+<li><p><code translate="no">datatype</code> を<code translate="no">DataType.VARCHAR</code> に設定します。</p></li>
+<li><p><code translate="no">max_length</code> を指定します。これは、<code translate="no">VARCHAR</code> フィールドが格納できる最大バイト数を定義します。<code translate="no">max_length</code> の有効範囲は1から65,535です。</p></li>
 </ul>
 <div class="alert note">
-<p>Milvus は<code translate="no">VARCHAR</code> フィールドのヌル値とデフォルト値をサポートしています。これらの機能を有効にするには、<code translate="no">nullable</code> を<code translate="no">True</code> に、<code translate="no">default_value</code> を文字列値に設定してください。詳細については、<a href="/docs/ja/nullable-and-default.md">Nullable &amp; Defaultを</a>参照してください。</p>
+<p>Milvusは、<code translate="no">VARCHAR</code> フィールドのNULL値およびデフォルト値をサポートしています。これらの機能を有効にするには、<code translate="no">nullable</code> を<code translate="no">True</code> に設定し、<code translate="no">default_value</code> に文字列値を指定してください。詳細については、<a href="/docs/ja/nullable-and-default.md">「Nullable &amp; Default</a>」を参照してください。</p>
 </div>
-<h2 id="Add-VARCHAR-field" class="common-anchor-header">VARCHAR フィールドの追加<button data-href="#Add-VARCHAR-field" class="anchor-icon" translate="no">
+<h2 id="Add-VARCHAR-field" class="common-anchor-header">VARCHARフィールドの追加<button data-href="#Add-VARCHAR-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,16 +43,21 @@ summary: milvusでは、VARCHARは文字列データを格納するために使�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusに文字列データを格納するには、コレクションスキーマに<code translate="no">VARCHAR</code> フィールドを定義してください。以下は、2つの<code translate="no">VARCHAR</code> フィールドを持つコレクションスキーマを定義する例です：</p>
+    </button></h2><p>Milvusに短く、長さが制限された文字列メタデータを格納するには、コレクションスキーマに<code translate="no">VARCHAR</code> フィールドを定義します。以下は、2つの<code translate="no">VARCHAR</code> フィールドを持つコレクションスキーマを定義する例です：</p>
 <ul>
-<li><p><code translate="no">varchar_field1</code>: 100 バイトまで保存でき、NULL 値を許容し、デフォルト値は<code translate="no">&quot;Unknown&quot;</code> です。</p></li>
-<li><p><code translate="no">varchar_field2</code>: は最大 200 バイトを格納し、NULL 値を許可しますが、デフォルト値はありません。</p></li>
+<li><p><code translate="no">varchar_field1</code>: 最大100バイトまで格納可能で、NULL値を許可し、デフォルト値は<code translate="no">&quot;Unknown&quot;</code> です。</p></li>
+<li><p><code translate="no">varchar_field2</code>: 最大200バイトを格納し、NULL値を許可しますが、デフォルト値はありません。</p></li>
 </ul>
 <div class="alert note">
-<p>スキーマ定義時に<code translate="no">enable_dynamic_fields=True</code> を設定すると、milvusは事前に定義されていないスカラーフィールドを挿入することができます。しかし、これによりクエリや管理が複雑になり、パフォーマンスに影響を与える可能性があります。詳細については、<a href="/docs/ja/enable-dynamic-field.md">動的フィールドを</a>参照してください。</p>
+<p>スキーマ定義時に `<code translate="no">enable_dynamic_fields=True</code> ` を設定すると、Milvus では事前に定義されていないスカラーフィールドの挿入が可能になります。ただし、これによりクエリや管理の複雑さが増し、パフォーマンスに影響を与える可能性があります。詳細については、<a href="/docs/ja/enable-dynamic-field.md">「動的フィールド」</a>を参照してください。</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -231,7 +237,7 @@ schema.WithField(entity.NewField().
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-index-params" class="common-anchor-header">インデックス・パラメータの設定<button data-href="#Set-index-params" class="anchor-icon" translate="no">
+<h2 id="Set-index-params" class="common-anchor-header">インデックスパラメータの設定<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -246,13 +252,18 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>インデックスは検索とクエリのパフォーマンス向上に役立ちます。Milvusでは、インデックス作成はベクトルフィールドでは必須ですが、スカラーフィールドではオプションです。</p>
-<p>以下の例では、<code translate="no">AUTOINDEX</code> インデックス・タイプを使用して、ベクトル・フィールド<code translate="no">embedding</code> とスカラー・フィールド<code translate="no">varchar_field1</code> にインデックスを作成しています。このタイプでは、Milvusはデータ型に基づいて自動的に最適なインデックスを選択します。また、各フィールドのインデックスタイプとパラメータをカスタマイズすることもできます。詳細は<a href="/docs/ja/index-explained.md">インデックスの</a>説明を参照してください。</p>
+    </button></h2><p>インデックス作成は、検索およびクエリのパフォーマンス向上に役立ちます。Milvusでは、ベクトルフィールドに対してインデックス作成は必須ですが、スカラーフィールドに対してはオプションです。</p>
+<p>次の例では、ベクトルフィールド `<code translate="no">embedding</code> ` およびスカラーフィールド `<code translate="no">varchar_field1</code>` に対して、いずれも `<code translate="no">AUTOINDEX</code> ` インデックスタイプを使用してインデックスを作成しています。このタイプを使用すると、Milvus はデータ型に基づいて最適なインデックスを自動的に選択します。また、フィールドごとにインデックスタイプやパラメータをカスタマイズすることも可能です。詳細については、<a href="/docs/ja/index-explained.md">「インデックスの解説</a>」を参照してください。</p>
 <div class="alert note">
-<p>また、<code translate="no">VARCHAR</code> フィールドの<code translate="no">LIKE</code> フィルタリングを高速化するために、<code translate="no">NGRAM</code> インデックスを構築することもできます。詳細は<a href="/docs/ja/ngram.md">NGRAMを</a>参照。</p>
+<p>また、`<code translate="no">VARCHAR</code> `フィールドでの`<code translate="no">LIKE</code> `フィルタリングを高速化するために、<code translate="no">NGRAM</code> インデックスを構築することもできます。詳細については、「<a href="/docs/ja/ngram.md">NGRAM</a>」を参照してください。</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
 
 index_params = client.prepare_index_params()
@@ -341,9 +352,14 @@ indexParams.<span class="hljs-title function_">push</span>({
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>スキーマとインデックスが定義されたら、文字列フィールドを含むコレクションを作成する。</p>
+    </button></h2><p>スキーマとインデックスを定義したら、文字列フィールドを含むコレクションを作成します。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create Collection</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -399,9 +415,14 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクションを作成したら、スキーマに一致するエンティティを挿入する。</p>
+    </button></h2><p>コレクションを作成したら、スキーマに一致するエンティティを挿入します。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample data</span>
 data = [
     {<span class="hljs-string">&quot;varchar_field1&quot;</span>: <span class="hljs-string">&quot;Product A&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>: <span class="hljs-string">&quot;High quality product&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>]},
@@ -511,7 +532,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:3,&quot;insertIds&quot;:[1,2,3]}}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Query-with-filter-expressions" class="common-anchor-header">フィルタ式によるクエリ<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
+<h2 id="Query-with-filter-expressions" class="common-anchor-header">フィルタ式を使用したクエリ<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -526,10 +547,15 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>エンティティの挿入後、<code translate="no">query</code> メソッドを使用して、指定されたフィルター式に一致するエンティティを取得します。</p>
-<p><code translate="no">varchar_field1</code> が文字列<code translate="no">&quot;Product A&quot;</code> と一致するエンティティを取得するには、次のようにします：</p>
+    </button></h2><p>エンティティを挿入した後、<code translate="no">query</code> メソッドを使用して、指定されたフィルタ式に一致するエンティティを取得します。</p>
+<p><code translate="no">varchar_field1</code> が文字列「<code translate="no">&quot;Product A&quot;</code> 」に一致するエンティティを取得するには：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter `varchar_field1` with value &quot;Product A&quot;</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field1 == &quot;Product A&quot;&#x27;</span>
 
@@ -596,9 +622,14 @@ fmt.Println(<span class="hljs-string">&quot;varchar_field2&quot;</span>, queryRe
 }&#x27;</span>
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;pk&quot;:1,&quot;varchar_field1&quot;:&quot;Product A&quot;,&quot;varchar_field2&quot;:&quot;High quality product&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">varchar_field2</code> が NULL であるエンティティを検索する：</p>
+<p><code translate="no">varchar_field2</code> がnullであるエンティティを取得するには：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter entities where `varchar_field2` is null</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field2 is null&#x27;</span>
 
@@ -665,9 +696,14 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;varchar_field1&quot;, &quot;varchar_field2&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">varchar_field1</code> が値<code translate="no">&quot;Unknown&quot;</code> を持つエンティティを検索するには、以下の式を使用する。<code translate="no">varchar_field1</code> のデフォルト値は<code translate="no">&quot;Unknown&quot;</code> であるため、期待される結果には、<code translate="no">varchar_field1</code> が明示的に<code translate="no">&quot;Unknown&quot;</code> に設定されたエンティティ、または<code translate="no">varchar_field1</code> が NULL に設定されたエンティティが含まれるはずです。</p>
+<p><code translate="no">varchar_field1</code> の値が<code translate="no">&quot;Unknown&quot;</code> であるエンティティを取得するには、以下の式を使用します。<code translate="no">varchar_field1</code> のデフォルト値は<code translate="no">&quot;Unknown&quot;</code> であるため、期待される結果には、<code translate="no">varchar_field1</code> が明示的に<code translate="no">&quot;Unknown&quot;</code> に設定されているエンティティ、または<code translate="no">varchar_field1</code> がnullに設定されているエンティティが含まれるはずです。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter entities with `varchar_field1` with value `Unknown`</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field1 == &quot;Unknown&quot;&#x27;</span>
 
@@ -733,7 +769,7 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;varchar_field1&quot;, &quot;varchar_field2&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">フィルター式によるベクトル検索<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
+<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">フィルタ式を使用したベクトル検索<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -748,9 +784,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>基本的なスカラー・フィールド・フィルターに加えて、ベクトルの類似性検索をスカラー・フィールド・フィルターと組み合わせることができます。例えば、次のコードはベクトル検索にスカラー・フィールド・フィルターを追加する方法を示している：</p>
+    </button></h2><p>基本的なスカラーフィールドによるフィルタリングに加え、ベクトル類似度検索とスカラーフィールドフィルタを組み合わせることができます。たとえば、次のコードは、ベクトル検索にスカラーフィールドフィルタを追加する方法を示しています。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with string filtering</span>
 
 <span class="hljs-comment"># Filter `varchar_field2` with value &quot;Best seller&quot;</span>

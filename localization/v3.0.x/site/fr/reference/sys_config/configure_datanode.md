@@ -4,7 +4,7 @@ related_key: configure
 group: system_configuration.md
 summary: Découvrez comment configurer dataNode pour Milvus.
 ---
-<h1 id="dataNode-related-Configurations" class="common-anchor-header">Configurations liées au nœud de données<button data-href="#dataNode-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="dataNode-related-Configurations" class="common-anchor-header">Configurations liées à dataNode<button data-href="#dataNode-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,13 +37,13 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.dataSync.flowGraph.maxQueueLength">
   <thead>
     <tr>
-      <th class="width80">Description de la configuration</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Longueur maximale de la file d'attente des tâches dans l'organigramme      </td>
+      <td>        Longueur maximale de la file d'attente des tâches dans le graphe de flux      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -66,14 +66,14 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.dataSync.flowGraph.maxParallelism">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Nombre maximal de tâches exécutées en parallèle dans le graphe de flux    </td>
-      <td>1024</td>
+      <td>        Nombre maximal de tâches exécutées en parallèle dans le graphe de flux      </td>
+      <td>1 024</td>
     </tr>
   </tbody>
 </table>
@@ -95,13 +95,13 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.dataSync.maxParallelSyncMgrTasks">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Nombre maximal de tâches de synchronisation simultanées de la gestion de la synchronisation du datanode au niveau mondial      </td>
+      <td>        Nombre maximal de tâches de synchronisation simultanées du gestionnaire de synchronisation des nœuds de données à l'échelle globale      </td>
       <td>256</td>
     </tr>
   </tbody>
@@ -124,14 +124,14 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.dataSync.skipMode.enable">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Supporte le saut de certains messages de timetick pour réduire l'utilisation du CPU   </td>
-      <td>vrai</td>
+      <td>        Prise en charge de l'omission de certains messages de synchronisation pour réduire l'utilisation du processeur      </td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
@@ -159,7 +159,7 @@ summary: Découvrez comment configurer dataNode pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Consomme un pour n enregistrements ignorés      </td>
+      <td>        Consomme un pour chaque n enregistrements ignorés      </td>
       <td>4</td>
     </tr>
   </tbody>
@@ -182,13 +182,13 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.dataSync.skipMode.coldTime">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Activer le mode saut après qu'il n'y ait eu que des messages de timetick pendant x secondes      </td>
+      <td>        Activer le mode « skip » lorsqu'il n'y a plus que des messages « timetick » pendant x secondes      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -218,9 +218,9 @@ summary: Découvrez comment configurer dataNode pour Milvus.
   <tbody>
     <tr>
       <td>
-        <li>Taille maximale de chaque fichier d'historique dans un segment mis en mémoire tampon. Les fichiers binlogs dont la taille dépasse cette valeur sont ensuite transférés vers MinIO ou le service S3.</li>      
-        <li>Unité : Octet</li>      
-        <li>Si ce paramètre est trop petit, le système stocke trop fréquemment une petite quantité de données. Un paramètre trop élevé augmente la demande de mémoire du système.</li>      </td>
+        <li>Taille maximale de chaque fichier binlog d’un segment mis en mémoire tampon. Les fichiers binlog dont la taille dépasse cette valeur sont alors transférés vers MinIO ou le service S3.</li>      
+        <li>Unité : octet</li>      
+        <li>Si ce paramètre est défini sur une valeur trop faible, le système stocke trop fréquemment de petites quantités de données. Si cette valeur est trop élevée, cela augmente les besoins en mémoire du système.</li>      </td>
       <td>16777216</td>
     </tr>
   </tbody>
@@ -243,13 +243,13 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.segment.deleteBufBytes">
   <thead>
     <tr>
-      <th class="width80">Description du paramètre</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Taille maximale de la mémoire tampon en octets pour l'évacuation des données d'un seul canal, 16 Mo par défaut.      </td>
+      <td>        Taille maximale du tampon en octets à vider pour un canal unique ; la valeur par défaut est de 16 Mo      </td>
       <td>16777216</td>
     </tr>
   </tbody>
@@ -272,7 +272,7 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.segment.syncPeriod">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
@@ -301,14 +301,14 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.memory.forceSyncEnable">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Mettre true pour forcer la synchronisation si l'utilisation de la mémoire est trop élevée      </td>
-      <td>vrai</td>
+      <td>        Définir sur « true » pour forcer la synchronisation si l'utilisation de la mémoire est trop élevée      </td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
@@ -330,13 +330,13 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.memory.forceSyncSegmentNum">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        nombre de segments à synchroniser, les segments dont le tampon est le plus grand seront synchronisés.      </td>
+      <td>        Nombre de segments à synchroniser ; les segments dont le tampon est le plus volumineux seront synchronisés.      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -359,13 +359,13 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.memory.checkInterval">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        intervalle de vérification de l'utilisation de la mémoire du datanode, en millisecondes      </td>
+      <td>        Intervalle de vérification de l'utilisation de la mémoire des nœuds de données, en millisecondes      </td>
       <td>3000</td>
     </tr>
   </tbody>
@@ -388,14 +388,14 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.memory.forceSyncWatermark">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        filigrane de mémoire pour l'autonome, lorsque ce filigrane est atteint, les segments sont synchronisés.      </td>
-      <td>0.5</td>
+      <td>        Seuil de mémoire pour les instances autonomes ; lorsque ce seuil est atteint, les segments sont synchronisés.      </td>
+      <td>0,5</td>
     </tr>
   </tbody>
 </table>
@@ -417,16 +417,16 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.channel.workPoolSize">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>spécifie la taille de la réserve de travail globale de tous les canaux</li>      
-        <li>si ce paramètre &lt;= 0, il sera défini comme le nombre maximum de CPU pouvant être exécutés</li>      
-        <li>il est conseillé de l'augmenter pour les grandes collections afin d'éviter les blocages.</li>      </td>
+        <li>Spécifie la taille du pool de travail global de tous les canaux</li>      
+        <li>si ce paramètre est &lt;= 0, il sera défini comme le nombre maximal de cœurs de processeur pouvant être utilisés</li>      
+        <li>Il est recommandé de le définir sur une valeur plus élevée lorsque le nombre de collections est important afin d’éviter tout blocage</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -456,8 +456,8 @@ summary: Découvrez comment configurer dataNode pour Milvus.
   <tbody>
     <tr>
       <td>
-        <li>spécifie la taille de la réserve de travail globale pour la mise à jour des points de contrôle du canal</li>      
-        <li>si ce paramètre &lt;= 0, il est fixé à 10</li>      </td>
+        <li>Spécifie la taille du pool de travail global pour la mise à jour des points de contrôle des canaux</li>      
+        <li>si ce paramètre est &lt;= 0, il sera défini sur 10</li>      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -480,13 +480,13 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.channel.updateChannelCheckpointInterval">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        la durée de l'intervalle (en secondes) pour que le datanode mette à jour le point de contrôle de chaque canal     </td>
+      <td>        Durée (en secondes) de l'intervalle pendant lequel le nœud de données met à jour le point de contrôle de chaque canal      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -509,13 +509,13 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.channel.updateChannelCheckpointRPCTimeout">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        délai d'attente en secondes pour l'appel RPC UpdateChannelCheckpoint      </td>
+      <td>        Délai d'expiration, en secondes, pour l'appel RPC UpdateChannelCheckpoint      </td>
       <td>20</td>
     </tr>
   </tbody>
@@ -538,13 +538,13 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.channel.maxChannelCheckpointsPerPRC">
   <thead>
     <tr>
-      <th class="width80">Valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Nombre maximal de points de contrôle du canal par appel RPC UpdateChannelCheckpoint.      </td>
+      <td>        Nombre maximal de points de contrôle de canal par appel RPC UpdateChannelCheckpoint.      </td>
       <td>128</td>
     </tr>
   </tbody>
@@ -567,13 +567,13 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.channel.channelCheckpointUpdateTickInSeconds">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Fréquence, en secondes, à laquelle l'outil de mise à jour des points de contrôle du canal exécute les mises à jour.      </td>
+      <td>        Fréquence, en secondes, à laquelle le programme de mise à jour des points de contrôle de canal exécute les mises à jour.      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -596,13 +596,13 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.import.maxConcurrentTaskNum">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Nombre maximal de tâches d'importation/pré-importation pouvant être exécutées simultanément sur un datanode.      </td>
+      <td>        Nombre maximal de tâches d'importation/pré-importation pouvant s'exécuter simultanément sur un nœud de données.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -625,13 +625,13 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.import.maxImportFileSizeInGB">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Taille maximale (en Go) d'un fichier d'importation, un fichier d'importation étant un fichier basé sur des lignes ou un ensemble de fichiers basés sur des colonnes.      </td>
+      <td>        Taille maximale (en Go) d’un fichier d’importation, ce terme désignant soit un fichier basé sur les lignes, soit un ensemble de fichiers basés sur les colonnes.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -654,13 +654,13 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.import.readBufferSizeInMB">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Taille du bloc de données (en Mo) lu dans le gestionnaire de blocs par le datanode lors de l'importation.      </td>
+      <td>        Taille du bloc de données (en Mo) lu par le nœud de données à partir du gestionnaire de blocs lors de l’importation.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -683,13 +683,13 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.import.maxTaskSlotNum">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Nombre maximal d'emplacements occupés par chaque tâche d'importation/pré-importation.      </td>
+      <td>        Nombre maximal d'emplacements occupés par chaque tâche d'importation ou de pré-importation.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -712,14 +712,14 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.compaction.levelZeroBatchMemoryRatio">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Ratio minimal de mémoire libre pour le compactage de niveau zéro exécuté en mode batch     </td>
-      <td>0.5</td>
+      <td>        Le pourcentage minimal de mémoire libre pour la compaction de niveau zéro s'exécutant en mode batch.      </td>
+      <td>0,5</td>
     </tr>
   </tbody>
 </table>
@@ -741,13 +741,13 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.compaction.levelZeroMaxBatchSize">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        La taille maximale du lot correspond au nombre maximal de segments L1/L2 dans un lot lors de l'exécution du compactage L0. La valeur par défaut est -1, toute valeur inférieure à 1 signifie qu'il n'y a pas de limite. Plage valide : &gt;= 1.  </td>
+      <td>        La taille maximale du lot correspond au nombre maximal de segments L1/L2 dans un lot lors de l'exécution d'une compaction de niveau 0. La valeur par défaut est -1 ; toute valeur inférieure à 1 signifie qu'il n'y a pas de limite. Plage valide : &gt;= 1.      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -776,8 +776,8 @@ summary: Découvrez comment configurer dataNode pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Activation ou non du mode mergeSort lors de l'exécution du mixCompaction.      </td>
-      <td>faux</td>
+      <td>        Indique s'il faut activer le mode mergeSort lors de l'exécution de mixCompaction.      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -799,7 +799,7 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.compaction.maxSegmentMergeSort">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
@@ -807,6 +807,35 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     <tr>
       <td>        Nombre maximal de segments à fusionner en mode mergeSort.      </td>
       <td>30</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodecompactionlobHoleRatioThreshold" class="common-anchor-header"><code translate="no">dataNode.compaction.lobHoleRatioThreshold</code><button data-href="#dataNodecompactionlobHoleRatioThreshold" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.compaction.lobHoleRatioThreshold">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Valeur par défaut</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Seuil du ratio d’espace inutilisé dans les fichiers LOB existants pour les champs TEXT. Lors de la compaction, si ce ratio est inférieur au seuil, Milvus réutilise les fichiers LOB existants. Si ce ratio est supérieur ou égal au seuil, Milvus réécrit les données LOB restantes dans de nouveaux fichiers LOB afin de libérer de l’espace.      </td>
+      <td>0,3</td>
     </tr>
   </tbody>
 </table>
@@ -828,13 +857,13 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.gracefulStopTimeout">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        secondes. force stop node without graceful stop    </td>
+      <td>        secondes. Arrêt forcé du nœud sans arrêt progressif      </td>
       <td>1800</td>
     </tr>
   </tbody>
@@ -857,13 +886,13 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.slot.slotCap">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Nombre maximal de tâches (par exemple, compactage, importation) autorisées à s'exécuter simultanément sur un datanode.      </td>
+      <td>        Nombre maximal de tâches (par exemple, compactage, importation) autorisées à s'exécuter simultanément sur un nœud de données      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -886,14 +915,14 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.clusteringCompaction.memoryBufferRatio">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Le ratio de la mémoire tampon du compactage en grappe. Les données dont la taille est supérieure au seuil sont évacuées vers le stockage.      </td>
-      <td>0.3</td>
+      <td>        Taux d'utilisation du tampon mémoire lors de la compaction en cluster. Les données dépassant ce seuil seront transférées vers le stockage.      </td>
+      <td>0,3</td>
     </tr>
   </tbody>
 </table>
@@ -915,13 +944,13 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.clusteringCompaction.workPoolSize">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Taille du pool de travailleurs pour un travail de compactage de clustering.      </td>
+      <td>        Taille du pool de travailleurs pour une tâche de compactage par grappes.      </td>
       <td>8</td>
     </tr>
   </tbody>
@@ -944,13 +973,13 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.bloomFilterApplyParallelFactor">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        facteur parallèle lors de l'application de pk au filtre Bloom, par défaut 4*CPU_CORE_NUM      </td>
+      <td>        Facteur de parallélisation à appliquer à la clé primaire (pk) dans le filtre de Bloom ; valeur par défaut : 4*CPU_CORE_NUM      </td>
       <td>4</td>
     </tr>
   </tbody>
@@ -973,14 +1002,101 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.storage.deltalog">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        format deltalog, options : [json, parquet]      </td>
+      <td>        Format du journal des modifications, options : [json, parquet]      </td>
       <td>json</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodetextinlineThreshold" class="common-anchor-header"><code translate="no">dataNode.text.inlineThreshold</code><button data-href="#dataNodetextinlineThreshold" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.text.inlineThreshold">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Valeur par défaut</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Seuil de taille, en octets, utilisé pour choisir le chemin de stockage d’une valeur de champ TEXT. Les valeurs inférieures à ce seuil sont stockées en ligne dans les données du champ. Les valeurs supérieures ou égales à ce seuil sont stockées séparément sous forme de charges utiles LOB, et les données du champ stockent une référence interne.      </td>
+      <td>65536</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodetextmaxLobFileBytes" class="common-anchor-header"><code translate="no">dataNode.text.maxLobFileBytes</code><button data-href="#dataNodetextmaxLobFileBytes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.text.maxLobFileBytes">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Valeur par défaut</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Taille maximale, en octets, d’un fichier LOB unique stockant des charges utiles de type TEXT. Lorsqu’un fichier LOB atteint cette taille, Milvus écrit les charges utiles TEXT LOB suivantes dans un autre fichier LOB.      </td>
+      <td>67108864</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodetextflushThresholdBytes" class="common-anchor-header"><code translate="no">dataNode.text.flushThresholdBytes</code><button data-href="#dataNodetextflushThresholdBytes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.text.flushThresholdBytes">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Valeur par défaut</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Seuil de taille de la mémoire tampon, en octets, à partir duquel Milvus vide les données TEXT LOB mises en mémoire tampon d'un segment en expansion vers le stockage.      </td>
+      <td>16777216</td>
     </tr>
   </tbody>
 </table>
@@ -1008,7 +1124,7 @@ summary: Découvrez comment configurer dataNode pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Adresse TCP/IP du nœud de données. Si elle n'est pas spécifiée, la première adresse non diffusable est utilisée.      </td>
+      <td>        Adresse TCP/IP du dataNode. Si elle n’est pas spécifiée, utilise la première adresse unicastable.      </td>
       <td></td>
     </tr>
   </tbody>
@@ -1037,7 +1153,7 @@ summary: Découvrez comment configurer dataNode pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Port TCP du nœud de données      </td>
+      <td>        Port TCP du dataNode      </td>
       <td>21124</td>
     </tr>
   </tbody>
@@ -1060,13 +1176,13 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.grpc.serverMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Taille maximale de chaque requête RPC que le dataNode peut envoyer, unité : octet     </td>
+      <td>        Taille maximale de chaque requête RPC que le dataNode peut envoyer, unité : octet      </td>
       <td>536870912</td>
     </tr>
   </tbody>
@@ -1089,13 +1205,13 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.grpc.serverMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Taille maximale de chaque requête RPC que le dataNode peut recevoir, unité : octet     </td>
+      <td>        Taille maximale de chaque requête RPC que le dataNode peut recevoir, unité : octet      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1118,13 +1234,13 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.grpc.clientMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        La taille maximale de chaque requête RPC que les clients du dataNode peuvent envoyer, unité : byte    </td>
+      <td>        Taille maximale de chaque requête RPC que les clients du dataNode peuvent envoyer, unité : octet      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1147,14 +1263,14 @@ summary: Découvrez comment configurer dataNode pour Milvus.
     </button></h2><table id="dataNode.grpc.clientMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Taille maximale de chaque requête RPC que les clients du dataNode peuvent recevoir, unité : octet     </td>
-      <td>536870912</td>
+      <td>        Taille maximale de chaque requête RPC que les clients sur dataNode peuvent recevoir, unité : octet      </td>
+      <td>536 870 912</td>
     </tr>
   </tbody>
 </table>

@@ -1,7 +1,7 @@
 ---
 id: schema_design.md
 title: 提示：Milvus Schema 设计
-summary: 人工智能编码助手设计正确的 Milvus Collections Schema 的规则。
+summary: AI 编码助手设计正确的 Milvus Collection Schema 的规则。
 ---
 <h1 id="Schema-Design" class="common-anchor-header">模式设计<button data-href="#Schema-Design" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,7 +18,7 @@ summary: 人工智能编码助手设计正确的 Milvus Collections Schema 的�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>设计正确的 Milvus Collections 模式的规则和决策指南，包括字段类型、主键、BM25 配置和模式不变性约束。将下面的完整提示复制到您的人工智能工具中，以自动应用这些规则。有关所有提示的概述，请参阅<a href="/docs/zh/milvus_for_agents.md">AI 提示</a>。</p>
+    </button></h1><p>设计正确的 Milvus Collection Schema 的规则和决策指南，包括字段类型、主键、BM25 配置以及 Schema 不可变性约束。将下面的完整提示复制到您的 AI 工具中，即可自动应用这些规则。有关所有提示的概述，请参阅<a href="/docs/zh/milvus_for_agents.md">AI 提示</a>。</p>
 <h2 id="How-to-use-this-prompt" class="common-anchor-header">如何使用此提示<button data-href="#How-to-use-this-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,12 +35,12 @@ summary: 人工智能编码助手设计正确的 Milvus Collections Schema 的�
         ></path>
       </svg>
     </button></h2><ol>
-<li>从下面的完整提示部分<strong>复制</strong>完整<a href="#full-prompt">提示</a>。</li>
-<li>将其<strong>保存</strong>到人工智能工具所需的位置 - 有关位置的详细信息，请参阅<a href="/docs/zh/milvus_for_agents.md">环境表</a>。</li>
-<li>在生成或审查 Milvus 代码时，您的人工智能助手将自动应用这些规则。</li>
+<li>从下方的<a href="#full-prompt">“完整提示</a>”部分<strong>复制</strong>完整的提示。</li>
+<li>将其<strong>保存</strong>到您的 AI 工具指定的位置——具体放置位置请参阅<a href="/docs/zh/milvus_for_agents.md">环境表</a>。</li>
+<li>您的 AI 助手在生成或审查 Milvus 代码时将自动应用这些规则。</li>
 </ol>
-<p>对于<strong>Cursor</strong>用户：从<a href="#full-prompt">完整提示</a>部分复制提示，并将其保存在项目中的<code translate="no">.cursor/rules/</code> 下。</p>
-<h2 id="Full-prompt" class="common-anchor-header">完整提示<button data-href="#Full-prompt" class="anchor-icon" translate="no">
+<p>针对<strong>Cursor</strong>用户：请从<a href="#full-prompt">“完整提示</a>”部分复制提示，并将其保存至项目中的 `<code translate="no">.cursor/rules/</code> ` 目录下。</p>
+<h2 id="Full-prompt" class="common-anchor-header">完整提示词<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -57,7 +57,7 @@ summary: 人工智能编码助手设计正确的 Milvus Collections Schema 的�
       </svg>
     </button></h2><pre><code translate="no" class="language-text">You are a Milvus schema design expert. You use the `MilvusClient` interface from PyMilvus v2.4+. You NEVER use the legacy ORM API (`connections.connect()`, `Collection()`).
 
-IMPORTANT: Schema is immutable in Milvus v2.5.x and earlier — you CANNOT add, modify, or delete fields after creation. BM25 functions MUST be defined at collection creation time. Always check the user&#x27;s Milvus version before suggesting schema modifications.
+IMPORTANT: Schema is immutable in Milvus v2.5.x and earlier — you CANNOT add, modify, or delete fields after creation. Milvus v2.6.x supports adding nullable scalar fields with `add_collection_field()`, and Milvus v3.0.x supports dropping scalar fields and non-last vector fields with `drop_collection_field()`. Function-generated output fields are removed by dropping the function. BM25 functions MUST be defined at collection creation time. Always check the user&#x27;s Milvus version before suggesting schema modifications.
 
 ## Rules
 
@@ -82,7 +82,7 @@ schema.add_field(&quot;category&quot;, DataType.VARCHAR, max_length=128)  # new 
 # ... re-insert data after recreation
 ```
 
-2. **Schema modification (v2.6+):** You can add new fields using `client.add_collection_field()`, but you CANNOT modify or delete existing fields. Changing a field&#x27;s data type (e.g., INT64 to VARCHAR) is NOT supported in any version — drop and recreate.
+2. **Schema updates (v2.6.x and later):** In Milvus v2.6.x, you can add new nullable scalar fields using `client.add_collection_field()`. In Milvus v3.0.x, you can also drop scalar fields and non-last vector fields using `client.drop_collection_field()`. Function-generated output fields are removed by dropping the function. Changing a field&#x27;s data type (e.g., INT64 to VARCHAR), renaming fields, changing vector dimensions, adding vector fields, or changing primary/partition/clustering keys is NOT supported in place — drop and recreate or migrate the collection.
 
 ```python
 # ✅ CORRECT in v2.6+ — adding a new field is supported
@@ -94,9 +94,16 @@ client.add_collection_field(
     nullable=True,  # added fields must be nullable
 )
 
-# ❌ STILL WRONG in v2.6+ — cannot modify or delete existing fields
-# Changing INT64 to VARCHAR, renaming fields, or removing fields
-# is not supported. Drop and recreate the collection instead.
+# ❌ STILL WRONG — cannot rewrite existing field meaning or vector layout in place
+# Changing INT64 to VARCHAR, renaming fields, changing vector dimensions,
+# adding vector fields, or changing primary/partition/clustering keys is not supported.
+# Drop and recreate or migrate the collection instead.
+
+# ✅ CORRECT in v3.0.x — dropping a scalar field
+client.drop_collection_field(
+    collection_name=&quot;my_collection&quot;,
+    field_name=&quot;obsolete_field&quot;,
+)
 ```
 
 3. **Primary key types:** Primary keys MUST be `DataType.INT64` or `DataType.VARCHAR`. No other types are supported. Composite primary keys are NOT supported.
@@ -242,7 +249,7 @@ Before finishing, verify:
 - [ ] Field types use `DataType` enum, not strings
 - [ ] Primary key is `DataType.INT64` or `DataType.VARCHAR` — no other types
 - [ ] Only one primary key field per collection — no composite keys
-- [ ] Schema modifications account for version: immutable in v2.5.x, add-only in v2.6+
+- [ ] Schema modifications account for version: immutable in v2.5.x, add nullable scalar fields in v2.6.x, drop scalar fields and non-last vector fields in v3.0.x
 - [ ] BM25 function and analyzer are defined at collection creation time, not added later
 - [ ] Nullable is only used on scalar fields, not on vector, JSON, or Array fields
 <button class="copy-code-btn"></button></code></pre>
