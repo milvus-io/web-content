@@ -8,6 +8,32 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.6.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.6.21
+
+Release date: July 28, 2026
+
+| Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
+| -------------- | ------------------ | ------------------- | ---------------- | -------------- |
+| 2.6.21         | 2.6.17             | 2.6.17              | 2.6.22           | 2.6.21         |
+
+We are excited to announce the release of Milvus v2.6.21! This release improves task scheduling, concurrent future registration, and policy listing efficiency. It also strengthens query readiness, WAL switching, index reconstruction, compaction resilience, and GPU CAGRA search correctness.
+
+### Improvements
+
+- Improved concurrent future registration scalability by sharding the active future manager and increasing its registration buffer ([#50900](https://github.com/milvus-io/milvus/pull/50900))
+- Improved load balancing for import, compaction, index, and statistics tasks across DataNodes by selecting the least-loaded node during scheduling ([#51101](https://github.com/milvus-io/milvus/pull/51101))
+- Reduced redundant grantee scans when listing policies containing legacy grants ([#51422](https://github.com/milvus-io/milvus/pull/51422))
+
+### Bug fixes
+
+- Fixed an issue where single-field `group_by_fields` search parameters were silently ignored, allowing unsupported BinaryVector group-by searches to return ordinary top-k results ([#51159](https://github.com/milvus-io/milvus/pull/51159))
+- Fixed an issue where collections could be reported as load-ready before their delegators were able to serve queries ([#51298](https://github.com/milvus-io/milvus/pull/51298))
+- Fixed an issue where Milvus could continue using a stale message queue type after switching WAL backends ([#51552](https://github.com/milvus-io/milvus/pull/51552))
+- Fixed text index reconstruction failures for nullable VARCHAR fields when rebuilding from scalar index data ([#51630](https://github.com/milvus-io/milvus/pull/51630))
+- Fixed an issue where DataNode could crash and enter CrashLoopBackOff when sort compaction encountered a missing binlog object ([#51685](https://github.com/milvus-io/milvus/pull/51685))
+- Fixed an issue where QueryNode could crash while releasing segments if the target worker was unavailable ([#51701](https://github.com/milvus-io/milvus/pull/51701))
+- Fixed incorrect cosine normalization for INT8 vectors in GPU CAGRA searches by upgrading Knowhere to v2.6.18 ([#51766](https://github.com/milvus-io/milvus/pull/51766))
+
 ## v2.6.20
 
 Release date: July 14, 2026
