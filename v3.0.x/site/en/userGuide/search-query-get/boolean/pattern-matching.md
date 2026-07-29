@@ -10,6 +10,12 @@ In agentic search applications, vector search and grep-style pattern matching of
 
 In Milvus, you can express these pattern constraints in scalar filters with `LIKE` for simple wildcard matching, and `=~` or `!~` for [RE2](https://github.com/google/re2/wiki/syntax) regular expressions. You can combine these filters with `query`, `search`, or hybrid search.
 
+<div class="alert note">
+
+This page describes pattern matching in scalar filter expressions used by `query`, `search`, and hybrid search. These expressions evaluate field values and do not change the tokens produced by an analyzer. To filter tokens during text analysis, refer to [Regex Analyzer Filter](regex-filter.md).
+
+</div>
+
 Pattern matching expressions are written in the `filter` parameter. For example, the following query matches log messages that contain an error code such as `E1001`:
 
 ```python
