@@ -177,6 +177,9 @@ dpkg -l | grep milvus
 <p>For DEB-based systems:</p>
 <pre><code translate="no" class="language-shell">apt remove milvus
 <button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>Storage V3 is disabled by default. Enable it before using features that depend on it. For requirements and compatibility considerations, see <a href="/docs/storage-v3.md">Storage V3</a>.</p>
+</div>
 <h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

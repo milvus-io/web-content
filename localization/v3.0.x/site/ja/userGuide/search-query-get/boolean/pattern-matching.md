@@ -23,7 +23,10 @@ summary: >-
       </svg>
     </button></h1><p>エージェント型検索アプリケーションでは、ベクトル検索とgrepスタイルのパターンマッチングが互いに補完し合うことがよくあります。ベクトル検索は意味的に関連性の高いエンティティを検索し、パターンマッチングはエラーコード、ログのプレフィックス、メールドメイン、URLパス、識別子などの正確な文字列構造に基づいて、それらの検索結果を絞り込みます。</p>
 <p>Milvusでは、これらのパターン制約をスカラーフィルターで表現できます。単純なワイルドカードマッチングには<code translate="no">LIKE</code> を、<a href="https://github.com/google/re2/wiki/syntax">RE2</a>正規表現には<code translate="no">=~</code> または<code translate="no">!~</code> を使用します。これらのフィルターは、<code translate="no">query</code> 、<code translate="no">search</code> 、またはハイブリッド検索と組み合わせることができます。</p>
-<p>パターン一致式は、<code translate="no">filter</code> パラメータに記述します。たとえば、次のクエリは、<code translate="no">E1001</code> などのエラーコードを含むログメッセージに一致します。</p>
+<div class="alert note">
+<p>このページでは、<code translate="no">query</code> 、<code translate="no">search</code> 、およびハイブリッド検索で使用されるスカラーフィルタ式におけるパターンマッチングについて説明します。これらの式はフィールド値を評価するものであり、アナライザによって生成されたトークンを変更することはありません。テキスト解析中にトークンをフィルタリングするには、「<a href="/docs/ja/regex-filter.md">Regex Analyzer Filter</a>」を参照してください。</p>
+</div>
+<p>パターンマッチング式は、<code translate="no">filter</code> パラメータ内で記述します。たとえば、次のクエリは、<code translate="no">E1001</code> などのエラーコードを含むログメッセージに一致します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -34,7 +37,7 @@ res = client.query(
     output_fields=[<span class="hljs-string">&quot;message&quot;</span>, <span class="hljs-string">&quot;severity&quot;</span>],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>このページの例では、<code translate="no">filter</code> に割り当てられた式に焦点を当てています。<code translate="no">query</code> 、<code translate="no">search</code> 、ハイブリッド検索など、スカラーフィルターを受け付けるMilvus操作では、同じフィルター式構文を使用できます。</p>
+<p>このページの例では、<code translate="no">filter</code> に割り当てられた式に焦点を当てています。<code translate="no">query</code> 、<code translate="no">search</code> 、ハイブリッド検索など、スカラーフィルターを受け入れるMilvus操作では、同じフィルター式構文を使用できます。</p>
 <h2 id="Supported-field-types" class="common-anchor-header">サポートされているフィールド型<button data-href="#Supported-field-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -56,7 +59,7 @@ res = client.query(
 <tr><th>対象</th><th><code translate="no">LIKE</code></th><th>正規表現<code translate="no">=~</code> /<code translate="no">!~</code></th><th>注</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">VARCHAR</code> フィールド</td><td>はい</td><td>はい</td><td>文字列フィールドでのパターンマッチングの一般的な対象。</td></tr>
+<tr><td><code translate="no">VARCHAR</code> フィールド</td><td>はい</td><td>はい</td><td>文字列フィールドでのパターンマッチングの典型的な対象。</td></tr>
 <tr><td><code translate="no">JSON</code> <code translate="no">VARCHAR</code> 型にキャストされたパス</td><td>はい</td><td>はい</td><td>JSON パスの値は、正の一致を得るためには文字列でなければなりません。高速化のために JSON パスにインデックスを作成する場合は、<code translate="no">json_cast_type=&quot;varchar&quot;</code> を設定してください。</td></tr>
 <tr><td><code translate="no">ARRAY&lt;VARCHAR&gt;</code> element</td><td>はい</td><td>はい</td><td><code translate="no">tags[0]</code> など、インデックスによって特定の要素に一致させます。パターンマッチングはすべての要素をスキャン<strong>するわけではなく</strong>、指定されたインデックスの要素にのみ適用されます。</td></tr>
 <tr><td>数値、ブール値、ベクトル、<code translate="no">TEXT</code> 、またはその他の非<code translate="no">VARCHAR</code> ターゲット</td><td>いいえ</td><td>いいえ</td><td>パターンマッチングは、<code translate="no">VARCHAR</code> 値、文字列に解決される JSON パス、またはインデックス付き<code translate="no">ARRAY&lt;VARCHAR&gt;</code> 要素でのみ使用できます。</td></tr>
@@ -87,7 +90,7 @@ res = client.query(
 <tr><td>文字列の完全一致</td><td><code translate="no">==</code></td><td><code translate="no">status == &quot;active&quot;</code></td><td>文字列「<code translate="no">active</code> 」との完全一致。</td></tr>
 <tr><td>単純な接頭辞一致</td><td><code translate="no">LIKE</code></td><td><code translate="no">name LIKE &quot;Prod%&quot;</code></td><td>「<code translate="no">Prod</code> 」で始まる文字列に一致します。</td></tr>
 <tr><td>単純なサフィックス一致</td><td><code translate="no">LIKE</code></td><td><code translate="no">filename LIKE &quot;%.json&quot;</code></td><td><code translate="no">.json</code> で終わる文字列に一致します。</td></tr>
-<tr><td>単純な部分一致</td><td><code translate="no">LIKE</code></td><td><code translate="no">description LIKE &quot;%vector database%&quot;</code></td><td>文字列内のどこかに<code translate="no">vector database</code> が含まれる値に一致します。</td></tr>
+<tr><td>単純な「含む」一致</td><td><code translate="no">LIKE</code></td><td><code translate="no">description LIKE &quot;%vector database%&quot;</code></td><td>文字列内のどこかに<code translate="no">vector database</code> が含まれる値に一致します。</td></tr>
 <tr><td>構造化されたコードまたは固定長のパターンに一致させる</td><td><code translate="no">=~</code></td><td><code translate="no">code =~ &quot;E[0-9]{4}&quot;</code></td><td>大文字と小文字を区別して、<code translate="no">E</code> の後に 4 桁の数字が続く文字列（例:<code translate="no">E1001</code> ）に一致します。</td></tr>
 <tr><td>大文字小文字を区別しないパターン一致</td><td><code translate="no">=~</code> で<code translate="no">(?i)</code></td><td><code translate="no">message =~ &quot;(?i)error&quot;</code></td><td><code translate="no">error</code> 、<code translate="no">ERROR</code> 、またはその他の大文字小文字のバリエーションに一致します。</td></tr>
 <tr><td>正規表現パターンに一致する値を除外する</td><td><code translate="no">!~</code></td><td><code translate="no">message !~ &quot;^DEBUG&quot;</code></td><td><code translate="no">DEBUG</code> で始まる文字列を除外します。</td></tr>
@@ -200,7 +203,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>パターンに文字クラス、反復、選択、アンカー、大文字小文字を区別しない一致などの正規表現機能が必要な場合は、正規表現フィルターを使用してください。Milvusは、文字列値に対して<a href="https://github.com/google/re2/wiki/syntax">RE2</a>正規表現を適用します。</p>
+    </button></h2><p>パターンに文字クラス、反復、選択、アンカー、大文字小文字を区別しないマッチングなどの正規表現機能が必要な場合は、正規表現フィルターを使用してください。Milvusは、文字列値に対して<a href="https://github.com/google/re2/wiki/syntax">RE2</a>正規表現を適用します。</p>
 <p><code translate="no">=~</code> または<code translate="no">!~</code> の右辺は、文字列リテラルでなければなりません。</p>
 <table>
 <thead>
@@ -263,7 +266,7 @@ res = client.query(
 <tr><td>文字列全体に一致</td><td><code translate="no">^prod-[0-9]+$</code></td><td><code translate="no">filter = 'name =~ &quot;^prod-[0-9]+$&quot;'</code></td></tr>
 </tbody>
 </table>
-<p>複数の単語のうちいずれか1つに一致させるには、<code translate="no">|</code> を使用した選択（alternation）を利用します：</p>
+<p>複数の単語のうちいずれか1つに一致させるには、<code translate="no">|</code> を使用した選択（alternation）を用います：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ &quot;error|failed|timeout&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>正規表現のメタ文字をリテラルとして一致させる場合は、正規表現パターン内でエスケープしてください。たとえば、リテラルとしてのドット（正規表現では `<code translate="no">\.</code> `）に一致させるには、Python フィルター文字列で `<code translate="no">\\.</code> ` と記述します:</p>
@@ -332,7 +335,7 @@ res = client.query(
 </thead>
 <tbody>
 <tr><td><code translate="no">message =~ &quot;error.*timeout&quot;</code> のような固定のリテラル部分文字列を含む場合、または<code translate="no">message LIKE &quot;%database%&quot;</code></td><td><code translate="no">NGRAM</code></td><td>Milvus がパターンから意味のあるリテラル部分文字列を抽出できる場合に有効です。詳細については、<a href="/docs/ja/ngram.md">NGRAM</a> を参照してください。</td></tr>
-<tr><td>プレフィックス、完全一致、または等価のような文字列フィルター。特に、カーディナリティが低～中程度のフィールドで有効</td><td><code translate="no">STL_SORT</code>、<code translate="no">INVERTED</code> 、または<code translate="no">BITMAP</code></td><td>フィールドに重複する値がある場合や、フィルタが完全一致に近い場合に、より効果的である可能性があります。詳細については、<a href="/docs/ja/stl-sort.md">STL_SORT</a>、<a href="/docs/ja/inverted.md">INVERTED</a>、<a href="/docs/ja/bitmap.md">およびBITMAP</a>を参照してください。</td></tr>
-<tr><td>固定リテラルを含まない正規表現パターン、または文字クラス、短いトークン、ワイルドカードが主体となるパターン</td><td>インデックスによる高速化を頼りにする前にベンチマークを実行してください</td><td>これらのパターンは、インデックスによる選択性が限定的となり、より広範囲なスキャンに切り替わってしまう可能性があります。</td></tr>
+<tr><td>プレフィックス、完全一致、または等価のような文字列フィルター。特に、カーディナリティが低～中程度のフィールドで有効</td><td><code translate="no">STL_SORT</code>、<code translate="no">INVERTED</code> 、または<code translate="no">BITMAP</code></td><td>フィールドに重複する値がある場合や、フィルタが完全一致に近い場合に、より効果的である可能性があります。詳細については、<a href="/docs/ja/stl-sort.md">STL_SORT</a>、<a href="/docs/ja/inverted.md">INVERTED</a>、および<a href="/docs/ja/bitmap.md">BITMAP</a> を参照してください。</td></tr>
+<tr><td>固定リテラルを含まない正規表現パターン、または文字クラス、短いトークン、ワイルドカードが主体となるパターン</td><td>インデックスによる高速化を前提とする前にベンチマークを実施してください</td><td>これらのパターンは、インデックスによる選択性が限定的となり、より広範囲なスキャンに切り替わってしまう可能性があります。</td></tr>
 </tbody>
 </table>

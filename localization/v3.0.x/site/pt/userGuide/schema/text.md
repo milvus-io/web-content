@@ -24,14 +24,18 @@ beta: Milvus 3.0.x
     </button></h1><p>Nas aplicações de pesquisa com IA, a pesquisa vetorial ajuda a encontrar entidades semanticamente semelhantes, mas a aplicação muitas vezes também necessita do texto original subjacente a cada correspondência. Um LLM ou agente pode utilizar esse texto como contexto para ler, citar, resumir ou incluir o resultado num prompt.</p>
 <p>O Milvus disponibiliza o tipo de campo escalar « <code translate="no">TEXT</code> » para armazenar texto-fonte extenso diretamente com as entidades. Os valores típicos incluem passagens, documentos longos, corpos de artigos, tickets e registos. Ao contrário do « <code translate="no">VARCHAR</code> », que requer um comprimento máximo fixo de bytes ( <code translate="no">max_length</code>), o « <code translate="no">TEXT</code> » não exige que se defina um comprimento máximo de bytes no esquema da coleção.</p>
 <p>Para definir um campo « <code translate="no">TEXT</code> », defina « <code translate="no">datatype</code> » como « <code translate="no">DataType.TEXT</code> ».</p>
+<div class="alert note">
+<p>Esta funcionalidade requer o Storage V3. Para obter instruções de ativação e considerações de compatibilidade, consulte <a href="/docs/pt/storage-v3.md">Storage V3</a>.</p>
+</div>
+<p>O Milvus rejeita um esquema de coleção que contenha um campo « <code translate="no">TEXT</code> » enquanto o Storage V3 estiver desativado.</p>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;content&quot;</span>,
 <span class="highlighted-wrapper-line">    datatype=DataType.TEXT,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Depois de o campo estar definido, cada entidade pode incluir um valor de cadeia nesse campo. Os valores « <code translate="no">TEXT</code> » são inseridos tal como os outros campos escalares e são devolvidos nos resultados de consultas ou pesquisas, listando o campo em « <code translate="no">output_fields</code> ».</p>
+<p>Após a definição do campo, cada entidade pode incluir um valor de cadeia de caracteres nesse campo. Os valores de « <code translate="no">TEXT</code> » são inseridos tal como noutros campos escalares e são devolvidos nos resultados de consultas ou pesquisas, listando o campo em « <code translate="no">output_fields</code> ».</p>
 <div class="alert note">
-<p><code translate="no">TEXT</code> Os campos suportam valores nulos. Para ativar esta funcionalidade, defina <code translate="no">nullable</code> como <code translate="no">True</code>. Para mais detalhes, consulte <a href="/docs/pt/nullable-and-default.md">«Campo nulo</a>».</p>
+<p><code translate="no">TEXT</code> Os campos suportam valores nulos. Para ativar esta funcionalidade, defina « <code translate="no">nullable</code> » como « <code translate="no">True</code> ». Para mais detalhes, consulte <a href="/docs/pt/nullable-and-default.md">«Campo nulo</a>».</p>
 </div>
 <h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"

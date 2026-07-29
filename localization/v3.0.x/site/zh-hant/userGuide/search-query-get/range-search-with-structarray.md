@@ -43,12 +43,12 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>EmbeddingList 搜尋</td><td>不支援。</td><td>不適用。</td></tr>
-<tr><td>元素層級搜尋</td><td>請使用帶有 `<code translate="no">radius</code> ` 及（可選）`<code translate="no">range_filter</code>` 的常規向量查詢。</td><td>結構體元素層級。</td></tr>
+<tr><td>元素層級搜尋</td><td>請使用帶有 `<code translate="no">radius</code> ` 的常規向量查詢，並可選擇性地使用 `<code translate="no">range_filter</code>`。</td><td>結構體元素層級。</td></tr>
 <tr><td>混合搜尋</td><td>當 StructArray 請求針對元素層級向量欄位時，此功能受支援。EmbeddingList 層級的請求不支援範圍搜尋。</td><td>先進行元素層級子搜尋，再進行混合重新排序。</td></tr>
 </tbody>
 </table>
 <div class="alert note">
-<p>若您僅需最接近的 Struct 元素，請先<a href="/docs/zh-hant/basic-vector-search-with-structarray.md">使用 StructArray 進行基本向量搜尋</a>。當結果必須滿足分數或距離的邊界條件，而非僅滿足前 K 名排名時，請使用範圍搜尋。</p>
+<p>若您僅需最接近的 Struct 元素，請先<a href="/docs/zh-hant/basic-vector-search-with-structarray.md">使用 StructArray 進行基本向量搜尋</a>。當結果必須滿足分數或距離邊界（而非僅限前 K 名排名）時，請使用範圍搜尋。</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">開始之前<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -93,7 +93,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>設定 `<code translate="no">radius</code> ` 以定義搜尋邊界。若同時需要內側邊界，請設定 `<code translate="no">range_filter</code> `。方向取決於「較短的距離」與「較高的相似度分數」何者更為理想。</p>
+    </button></h2><p>設定 `<code translate="no">radius</code> ` 以定義搜尋邊界。若同時需要內側邊界，請設定 `<code translate="no">range_filter</code> `。方向取決於「較小的距離」與「較高的相似度分數」何者更為理想。</p>
 <table>
 <thead>
 <tr><th>度量類型</th><th>分數越高越好？</th><th>使用 `<code translate="no">range_filter</code> ` 時的範圍條件</th></tr>
@@ -103,7 +103,7 @@ summary: >-
 <tr><td><code translate="no">IP</code>,<code translate="no">COSINE</code></td><td>是。分數越高越好。</td><td><code translate="no">radius &lt; distance &lt;= range_filter</code></td></tr>
 </tbody>
 </table>
-<p>當僅設定 `<code translate="no">radius</code> ` 時，範圍搜尋會回傳符合該度量外界限的結果。請根據您的嵌入向量之分數或距離尺度來選擇數值。</p>
+<p>當僅設定 `<code translate="no">radius</code> ` 時，範圍搜尋會回傳符合該度量外界限的結果。請根據您的嵌入向量的分數或距離尺度來選擇數值。</p>
 <h2 id="Run-element-level-range-search" class="common-anchor-header">執行元素層級範圍搜尋<button data-href="#Run-element-level-range-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -160,7 +160,7 @@ results = client.search(
         )
 <button class="copy-code-btn"></button></code></pre>
 <p>在此範例中，<code translate="no">COSINE</code> 為相似度型指標，因此結果範圍大於<code translate="no">radius</code> 且小於或等於<code translate="no">range_filter</code> 。當結果返回時，<code translate="no">offset</code> 值可識別<code translate="no">chunks</code> 陣列中匹配的 Struct 元素。</p>
-<h2 id="Add-scalar-filters" class="common-anchor-header">新增標量篩選條件<button data-href="#Add-scalar-filters" class="anchor-icon" translate="no">
+<h2 id="Add-scalar-filters" class="common-anchor-header">新增標量篩選器<button data-href="#Add-scalar-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -257,7 +257,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>在此範例中，僅有 `<code translate="no">chunks[emb]</code> ` 子請求使用範圍搜尋參數。StructArray 請求仍遵循元素層級語義：範圍邊界適用於混合搜尋合併並重新排序結果之前所找到的 Struct 元素命中項目。</p>
+<p>在此範例中，僅有 `<code translate="no">chunks[emb]</code> ` 子請求會使用範圍搜尋參數。StructArray 請求仍遵循元素層級語義：範圍邊界適用於混合搜尋將結果合併並重新排序之前所找到的 Struct 元素命中項目。</p>
 <h2 id="Interpret-range-results" class="common-anchor-header">解析範圍結果<button data-href="#Interpret-range-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

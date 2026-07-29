@@ -166,3 +166,6 @@ kubectl get pods --namespace &lt;namespace&gt; \
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Verify that all required workloads are ready, all Milvus components use <code translate="no">v3.0-beta</code>, and your existing collections remain queryable and searchable. Complete these checks before you enable any v3.0-beta-specific feature.</p>
+<div class="alert note">
+<p>Upgrading to Milvus 3.0 does not enable Storage V3. After you verify the upgrade, review <a href="/docs/storage-v3.md">Storage V3</a> before enabling features that depend on it. Once Milvus writes Storage V3 data, downgrading to an older Milvus version that cannot read Storage V3 is not supported.</p>
+</div>

@@ -48,12 +48,12 @@ summary: >-
 <tr><td><code translate="no">chunks[emb_list_vector]</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Recherche dans EmbeddingList à l’aide des métriques d’ <code translate="no">MAX_SIM*</code>.</td></tr>
 <tr><td><code translate="no">chunks[emb]</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Recherche au niveau des éléments avec des métriques vectorielles classiques.</td></tr>
 <tr><td><code translate="no">chunks[section]</code></td><td><code translate="no">VARCHAR</code></td><td>Filtrage catégoriel.</td></tr>
-<tr><td><code translate="no">chunks[quality_score]</code></td><td><code translate="no">FLOAT</code></td><td>Filtrage numérique et prédicats de type « plage ».</td></tr>
+<tr><td><code translate="no">chunks[quality_score]</code></td><td><code translate="no">FLOAT</code></td><td>Filtrage numérique et prédicats de type plage.</td></tr>
 <tr><td><code translate="no">chunks[has_code]</code></td><td><code translate="no">BOOL</code></td><td>Filtrage booléen.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
-<p>Un champ vectoriel ou un sous-champ vectoriel n’accepte qu’un seul index. Si vous avez besoin à la fois de la recherche EmbeddingList et de la recherche au niveau des éléments, créez deux sous-champs vectoriels distincts et indexez-les séparément. Sur cette page, <code translate="no">chunks[emb_list_vector]</code> est indexé pour la recherche EmbeddingList, et <code translate="no">chunks[emb]</code> est indexé pour la recherche au niveau des éléments.</p>
+<p>Un champ vectoriel ou un sous-champ vectoriel n’accepte qu’un seul index. Si vous avez besoin à la fois d’une recherche EmbeddingList et d’une recherche au niveau des éléments, créez deux sous-champs vectoriels distincts et indexez-les séparément. Sur cette page, <code translate="no">chunks[emb_list_vector]</code> est indexé pour la recherche EmbeddingList, et <code translate="no">chunks[emb]</code> est indexé pour la recherche au niveau des éléments.</p>
 </div>
 <h2 id="Choose-indexes" class="common-anchor-header">Choisissez les index<button data-href="#Choose-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -222,7 +222,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>La recherche EmbeddingList utilise les métriques de type « <code translate="no">MAX_SIM*</code> ». Elle traite les vecteurs d’un sous-champ vectoriel StructArray comme une liste d’embeddings et renvoie des résultats au niveau des entités.</p>
+    </button></h3><p>La recherche EmbeddingList utilise les métriques de type « <code translate="no">MAX_SIM*</code> ». Elle traite les vecteurs d’un sous-champ vectoriel StructArray comme une liste d’embeddings et renvoie des résultats au niveau de l’entité.</p>
 <table>
 <thead>
 <tr><th>Type de données du sous-champ vectoriel</th><th>Type d’index</th><th>Type de métrique</th></tr>
@@ -277,7 +277,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Après avoir créé des index, décrivez les index de la collection ou de la liste pour vérifier que les chemins d’accès aux sous-champs attendus sont bien indexés.</p>
+    </button></h2><p>Après avoir créé des index, décrivez les index de la collection ou de la liste pour vous assurer que les chemins de sous-champs attendus sont bien indexés.</p>
 <pre><code translate="no" class="language-python">indexes = client.list_indexes(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
 )
@@ -312,7 +312,7 @@ client.create_index(
 <tr><th>Règle</th><th>Explication</th></tr>
 </thead>
 <tbody>
-<tr><td>Utilisez la syntaxe de chemin d'accès pour les index de sous-champs.</td><td><code translate="no">chunks[emb]</code> d'index , et non <code translate="no">emb</code> ou <code translate="no">chunks.emb</code>.</td></tr>
+<tr><td>Utilisez la syntaxe de chemin d’accès pour les index de sous-champs.</td><td><code translate="no">chunks[emb]</code> d'index , et non <code translate="no">emb</code> ou <code translate="no">chunks.emb</code>.</td></tr>
 <tr><td>Un sous-champ vectoriel n'accepte qu'un seul index.</td><td>Utilisez des sous-champs vectoriels distincts si vous avez besoin de familles de métriques différentes.</td></tr>
 <tr><td>Utilisez les métriques de type « <code translate="no">MAX_SIM*</code> » pour la recherche EmbeddingList.</td><td>Les données de requête EmbeddingList nécessitent un index créé avec une métrique de type « <code translate="no">MAX_SIM*</code> ».</td></tr>
 <tr><td>Utilisez des métriques vectorielles standard pour la recherche au niveau des éléments.</td><td>La recherche au niveau des éléments utilise des données de requête vectorielles standard et des métriques telles que « <code translate="no">COSINE</code> », « <code translate="no">IP</code> » ou « <code translate="no">L2</code> ».</td></tr>

@@ -19,7 +19,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>向量搜尋會根據向量距離對結果進行排序，但初始排序未必能反映各候選文本對查詢的回應程度。Hugging Face Ranker 會將查詢與候選文本傳送至託管的<a href="https://huggingface.co/docs/inference-providers/index">Hugging Face 推論提供者</a>，並利用<code translate="no">sentence-similarity</code> 的評分來重新排序 Milvus 所回傳的候選結果。</p>
+    </button></h1><p>向量搜尋會根據向量距離對結果進行排序，但初始排序順序未必能反映各候選文本對查詢的回應程度。Hugging Face Ranker 會將查詢與候選文本傳送至託管的<a href="https://huggingface.co/docs/inference-providers/index">Hugging Face 推論提供者</a>，並利用<code translate="no">sentence-similarity</code> 的評分來重新排序 Milvus 所回傳的候選結果。</p>
 <p>此整合功能使用託管的 Hugging Face 路由器。若要透過獨立部署的文字嵌入推論 (TEI) 服務進行重新排序，請參閱<a href="/docs/zh-hant/tei-ranker.md">TEI Ranker</a>。</p>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -100,7 +100,7 @@ beta: Milvus v2.6.20+
     </button></h2><p>在使用 Hugging Face Ranker 之前，請確保您已具備：</p>
 <ul>
 <li>2.6 發行版本線中的 Milvus 2.6.20 或更新版本。</li>
-<li>PyMilvus 2.6.16 或更高版本。</li>
+<li>PyMilvus 2.6.16 或更新版本。</li>
 <li>一個可呼叫推論提供者的 Hugging Face 使用者存取憑證。</li>
 <li>目前由<code translate="no">hf-inference</code> 提供服務的模型，適用於 <a href="https://huggingface.co/tasks/sentence-similarity"><code translate="no">sentence-similarity</code></a> 任務所提供的模型。</li>
 <li>一個用於將候選文字儲存於<code translate="no">VARCHAR</code> 非空欄位的集合。</li>
@@ -400,7 +400,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>請確保 `<code translate="no">input_field_names</code> ` 中包含且僅包含一個不可為空的 `<code translate="no">VARCHAR</code> ` 欄位，且每個候選實體在該欄位中皆含有文字。</p>
+    </button></h3><p>請確保 `<code translate="no">input_field_names</code> ` 包含且僅包含一個不可為空的 `<code translate="no">VARCHAR</code> ` 欄位，且每個候選實體在該欄位中皆含有文字。</p>
 <h3 id="Milvus-reports-missing-Hugging-Face-credentials" class="common-anchor-header">Milvus 報告 Hugging Face 憑證缺失<button data-href="#Milvus-reports-missing-Hugging-Face-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

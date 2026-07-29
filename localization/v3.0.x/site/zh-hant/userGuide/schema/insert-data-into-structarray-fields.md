@@ -243,7 +243,7 @@ result = client.insert(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>當可為空的 StructArray 欄位包含有效的 StructArray 值時，該值中的所有子欄位應皆為 null 或具有有效值。若插入的實體中，部分子欄位設定為 null 而其他子欄位設定為有效值，將會導致錯誤。</p>
+<p>當可為空的 StructArray 欄位包含有效的 StructArray 值時，該值中的所有子欄位應皆為 null 或具有有效值。若插入的實體中部分子欄位設定為 null 而其他子欄位設定為有效值，將會導致錯誤。</p>
 <div class="alert note">
 <p>警告
 可為空的 StructArray 欄位僅在 Milvus v3.0.x 中提供。若您要動態將 StructArray 欄位新增至現有集合，該新增欄位必須為可為空，且現有實體針對該新欄位的所有子欄位均會傳回 `<code translate="no">null</code> `。</p>

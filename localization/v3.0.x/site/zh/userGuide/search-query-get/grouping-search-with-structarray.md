@@ -43,7 +43,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>EmbeddingList 搜索</td><td>不支持。</td><td>不适用。</td></tr>
-<tr><td>元素级搜索</td><td>支持按主键分组。</td><td>每个父实体最多返回一个结果。元素级元数据得以保留，因此当 API 或 SDK 公开时，可以返回所选元素的索引或偏移量。</td></tr>
+<tr><td>元素级搜索</td><td>支持按主键分组。</td><td>每个父实体最多返回一个结果。元素级元数据得以保留，因此当通过 API 或 SDK 暴露时，可以返回所选元素的索引或偏移量。</td></tr>
 <tr><td>混合搜索</td><td>仅当所有子搜索都针对同一 StructArray 字段下的元素级向量字段时才受支持。</td><td>在最终结果处理之前，元素级子搜索会按主键进行分组。</td></tr>
 </tbody>
 </table>
@@ -71,7 +71,7 @@ summary: >-
 <tr><th>要求</th><th>详细信息</th></tr>
 </thead>
 <tbody>
-<tr><td>元素级向量量子字段</td><td>请使用 StructArray 向量子字段（例如<code translate="no">chunks[emb]</code> ），并使用常规向量度量进行索引。</td></tr>
+<tr><td>元素级向量子字段</td><td>请使用 StructArray 向量子字段（例如<code translate="no">chunks[emb]</code> ），并使用常规向量度量进行索引。</td></tr>
 <tr><td>常规向量查询</td><td>请使用常规查询向量，而非<code translate="no">EmbeddingList</code> 。</td></tr>
 <tr><td>主键分组</td><td>将Collection主键设置为<code translate="no">group_by_field</code> ，例如<code translate="no">doc_id</code> 。</td></tr>
 <tr><td>不使用范围参数</td><td>请勿将分组搜索与范围搜索参数（如<code translate="no">radius</code> 或<code translate="no">range_filter</code> ）结合使用。</td></tr>
@@ -128,7 +128,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>如果不进行分组，当多个块匹配查询时，相同的<code translate="no">doc_id</code> 可能会出现多次。使用<code translate="no">group_by_field=&quot;doc_id&quot;</code> 时，每个父实体最多出现一次。分组会保留元素级元数据，因此当API或SDK公开相关信息时，分组后的结果仍可包含所选的Struct元素索引或偏移量。</p>
+<p>如果不进行分组，当多个块匹配查询时，相同的<code translate="no">doc_id</code> 可能会出现多次。使用<code translate="no">group_by_field=&quot;doc_id&quot;</code> 时，每个父实体最多出现一次。分组会保留元素级元数据，因此当API或SDK公开时，分组后的结果仍可包含所选的Struct元素索引或偏移量。</p>
 <h2 id="Add-scalar-filters" class="common-anchor-header">添加标量过滤器<button data-href="#Add-scalar-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -217,7 +217,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>在此示例中，两个子请求均针对同一 StructArray 字段（<code translate="no">chunks</code> ）下的元素级向量字段。如果混合了普通向量字段、不同的 StructArray 字段或 EmbeddingList 级别的请求，混合搜索将不支持元素级分组。</p>
+<p>在此示例中，两个子请求均针对同一 StructArray 字段（<code translate="no">chunks</code> ）下的元素级向量字段。如果混合了普通向量字段、不同的 StructArray 字段或 EmbeddingList 级别的请求，混合搜索将不支持元素级的分组操作。</p>
 <h2 id="Interpret-grouped-results" class="common-anchor-header">解析分组结果<button data-href="#Interpret-grouped-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -287,7 +287,7 @@ results = client.hybrid_search(
 <li><p>将分组与<code translate="no">chunks[emb_list_vector]</code> 结合使用，而该字段专用于EmbeddingList搜索。</p></li>
 <li><p>按非主键标量字段进行分组。</p></li>
 <li><p>按多个字段进行分组。元素级 StructArray 分组仅支持主键分组。</p></li>
-<li><p>期望分组结果能代表每个匹配的 Struct 元素。分组每个父实体最多返回一个结果。</p></li>
+<li><p>期望分组结果能代表每个匹配的 Struct 元素。分组操作每个父实体最多返回一个结果。</p></li>
 <li><p>假设按元素级别分组的搜索会重新计算 EmbeddingList 风格的<code translate="no">MAX_SIM*</code> 得分。分组操作会合并元素级别的匹配结果，但不会改变评分模型。</p></li>
 <li><p>将<code translate="no">group_by_field</code> 与<code translate="no">radius</code> 或<code translate="no">range_filter</code> 结合使用。</p></li>
 </ul>

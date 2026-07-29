@@ -130,7 +130,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>حدد الرمز في قسم المستوى الأعلى <code translate="no">credential</code> في <code translate="no">milvus.yaml</code> ، ثم قم بتوجيه مزود التضمين Hugging Face إلى تسمية بيانات الاعتماد تلك:</p>
+    </button></h3><p>حدد الرمز في قسم المستوى الأعلى <code translate="no">credential</code> في <code translate="no">milvus.yaml</code> ، ثم وجه مزود التضمين Hugging Face إلى تسمية بيانات الاعتماد تلك:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">credential:</span>
   <span class="hljs-attr">huggingface_apikey:</span>
@@ -143,7 +143,7 @@ beta: Milvus v2.6.20+
         <span class="hljs-attr">credential:</span> <span class="hljs-string">huggingface_apikey</span>
         <span class="hljs-comment"># url: https://router.huggingface.co</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يمكنك أيضًا تعيين <code translate="no">credential</code> في معلمات الوظيفة. يجب أن تكون القيمة هي التسمية المحددة في قسم المستوى الأعلى <code translate="no">credential</code> ، وليس الرمز نفسه. وتكون لتسمية بيانات الاعتماد على مستوى الوظيفة الأسبقية على التسمية على مستوى المزود.</p>
+<p>يمكنك أيضًا تعيين <code translate="no">credential</code> في معلمات الوظيفة. يجب أن تكون القيمة هي التسمية المحددة في قسم المستوى الأعلى <code translate="no">credential</code> ، وليس الرمز نفسه. وتكون أولوية تسمية بيانات الاعتماد على مستوى الوظيفة أعلى من أولوية التسمية على مستوى المزود.</p>
 <h3 id="Option-2-Environment-variable" class="common-anchor-header">الخيار 2: متغير البيئة<button data-href="#Option-2-Environment-variable" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -159,7 +159,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>إذا لم تحدد إعدادات الدالة أو المزود تسمية بيانات الاعتماد، يقرأ Milvus الرمز المميز من <code translate="no">MILVUS_HUGGINGFACE_API_KEY</code>.</p>
+    </button></h3><p>إذا لم تحدد إعدادات الدالة أو المزود تسمية بيانات الاعتماد، فإن Milvus يقرأ الرمز المميز من <code translate="no">MILVUS_HUGGINGFACE_API_KEY</code>.</p>
 <p>بالنسبة إلى Docker Compose، قم بتعيين المتغير في خدمة Milvus المستقلة:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># docker-compose.yaml</span>
 <span class="hljs-attr">standalone:</span>
@@ -263,7 +263,7 @@ client.create_collection(
 </thead>
 <tbody>
 <tr><td><code translate="no">provider</code></td><td>نعم</td><td>مزود نموذج التضمين. اضبط هذه القيمة على <code translate="no">huggingface</code>.</td></tr>
-<tr><td><code translate="no">model_name</code></td><td>نعم</td><td>معرف نموذج Hugging Face الخاص بنموذج يتم تقديمه عبر <code translate="no">hf-inference</code> لمهمة <code translate="no">feature-extraction</code>.</td></tr>
+<tr><td><code translate="no">model_name</code></td><td>نعم</td><td>معرف نموذج Hugging Face لنموذج يتم تقديمه عبر <code translate="no">hf-inference</code> لمهمة <code translate="no">feature-extraction</code>.</td></tr>
 <tr><td><code translate="no">hf_provider</code></td><td>لا</td><td>مسار مزود الاستدلال في Hugging Face. القيمة الافتراضية والوحيدة المدعومة في Milvus 2.6.20 هي <code translate="no">hf-inference</code>.</td></tr>
 <tr><td><code translate="no">credential</code></td><td>لا</td><td>تسمية بيانات الاعتماد المحددة في قسم <code translate="no">credential</code> ذي المستوى الأعلى ضمن <code translate="no">milvus.yaml</code>. هذه القيمة ليست الرمز نفسه.</td></tr>
 <tr><td><code translate="no">normalize</code></td><td>لا</td><td>ما إذا كان يجب على Hugging Face إرجاع التضمينات المعيارية. القيم المدعومة هي <code translate="no">true</code> و <code translate="no">false</code>. إذا تم حذفها، فإن Milvus لا يضبط هذا الخيار في الطلب.</td></tr>
@@ -381,7 +381,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>تحقق من بُعد مخرجات النموذج وقارنه مع <code translate="no">dim</code> في حقل «مخرجات الدالة» (Function output). يرفض Milvus أي استجابة يختلف بُعد متجهها عن بُعد حقل «مخرجات الدالة» ( <code translate="no">FLOAT_VECTOR</code> ).</p>
+    </button></h3><p>تحقق من بُعد مخرجات النموذج وقارنه مع <code translate="no">dim</code> في حقل مخرجات الوظيفة. يرفض Milvus أي استجابة يختلف بُعد متجهها عن بُعد حقل <code translate="no">FLOAT_VECTOR</code>.</p>
 <h3 id="Milvus-reports-missing-Hugging-Face-credentials" class="common-anchor-header">يبلغ Milvus عن فقدان بيانات اعتماد Hugging Face<button data-href="#Milvus-reports-missing-Hugging-Face-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

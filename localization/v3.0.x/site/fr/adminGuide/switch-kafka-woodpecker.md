@@ -20,12 +20,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Cette page décrit comment basculer la file d’attente de messages (MQ) d’un <strong>cluster Milvus</strong> entre <strong>Kafka</strong> (intégré ou externe) et <strong>Woodpecker</strong> (backend MinIO), dans les deux sens. Pour connaître le déroulement général et les prérequis, consultez la section <a href="/docs/fr/switch-mq-type.md">Changer de type de MQ</a>.</p>
+    </button></h1><p>Cette page décrit comment basculer la file d’attente de messages (MQ) d’un <strong>cluster Milvus</strong> entre <strong>Kafka</strong> (intégré ou externe) et <strong>Woodpecker</strong> (backend MinIO), dans les deux sens. Pour connaître le workflow général et les prérequis, consultez la section <a href="/docs/fr/switch-mq-type.md">Changer de type de MQ</a>.</p>
 <div class="alert note">
 <p><strong>Prérequis :</strong> la fonctionnalité « Switch MQ » est disponible dans <strong>Milvus 3.0 et versions ultérieures</strong>. Mettez à niveau votre instance Milvus vers Milvus 3.0 ou une version ultérieure avant de commencer — cette fonctionnalité n’est pas disponible dans les versions antérieures.</p>
 </div>
 <div class="alert warning">
-<p>Le changement de file d’attente de messages est une <strong>opération à haut risque</strong>. Choisissez la section qui correspond <strong>à votre</strong> méthode de déploiement — <strong>« Avec Helm</strong> » ou <strong>« Avec Milvus Operator</strong> » — et suivez-la de A à Z. Ne mélangez pas les commandes Helm et Operator.</p>
+<p>Le changement de file d’attente de messages est une <strong>opération à haut risque</strong>. Choisissez la section qui correspond <strong>à votre</strong> méthode de déploiement — « <strong>Avec Helm</strong> » ou <strong>« Avec Milvus Operator</strong> » — et suivez-la dans son intégralité. Ne mélangez pas les commandes Helm et Operator.</p>
 </div>
 <h2 id="With-Helm" class="common-anchor-header">Avec Helm<button data-href="#With-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -70,7 +70,7 @@ summary: >-
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>Une migration réussie génère l'entrée suivante dans le journal : <code translate="no">[mqTypeValue=woodpecker]</code>.</p>
-<p><strong>Étape 4 : (Facultatif) Arrêtez Kafka et procédez au nettoyage.</strong> Pour Kafka <strong>intégré</strong>, supprimez les pods Kafka et leurs PVC. Pour Kafka <strong>externe</strong>, nettoyez les sujets Milvus dans l’instance Kafka externe — ils suivent le format <code translate="no">&lt;cluster_prefix&gt;-dml_&lt;seqNo&gt;_&lt;TimeTick&gt;&lt;Version&gt;</code>.</p>
+<p><strong>Étape 4 : (Facultatif) Arrêtez Kafka et effectuez le nettoyage.</strong> Pour Kafka <strong>intégré</strong>, supprimez les pods Kafka et leurs PVC. Pour Kafka <strong>externe</strong>, nettoyez les sujets Milvus dans l’instance Kafka externe — ils suivent le format <code translate="no">&lt;cluster_prefix&gt;-dml_&lt;seqNo&gt;_&lt;TimeTick&gt;&lt;Version&gt;</code>.</p>
 <div class="alert note">
 <p>Si vous prévoyez de revenir à Kafka ultérieurement, nettoyez d’abord les données/sujets afin d’éviter tout conflit.</p>
 </div>
@@ -166,7 +166,7 @@ summary: >-
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>Une migration réussie génère l'entrée suivante dans le journal : <code translate="no">[mqTypeValue=woodpecker]</code>.</p>
-<p><strong>Étape 4 : Mettez à jour le type de MQ dans l’Operator.</strong> Mettez à jour la configuration gérée par l’Operator afin que celui-ci ne revienne pas sur la migration. Créez <code translate="no">change_configmap.yaml</code>:</p>
+<p><strong>Étape 4 : Mettez à jour le type de MQ dans l’Operator.</strong> Mettez à jour la configuration gérée par l’Operator afin que celui-ci ne revienne pas en arrière. Créez <code translate="no">change_configmap.yaml</code>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -196,7 +196,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p><strong>Étape 1 : Vérifiez que l’instance Milvus est en cours d’exécution.</strong></p>
-<p><strong>Étape 2 : Configurez la connexion Kafka cible et redémarrez Milvus.</strong> Placez la connexion Kafka sous <code translate="no">spec.config</code> (l’opérateur convertit <code translate="no">spec.config</code> en <code translate="no">user.yaml</code>) et définissez le type de MQ ; l’application du CR met à jour les pods avec la nouvelle configuration. Pour plus de détails sur SASL/SSL, consultez la section « <a href="/docs/fr/connect_kafka_ssl.md">Se connecter à Kafka avec SASL/SSL</a> ».</p>
+<p><strong>Étape 2 : Configurez la connexion Kafka cible et redémarrez Milvus.</strong> Placez la connexion Kafka sous <code translate="no">spec.config</code> (l’opérateur convertit <code translate="no">spec.config</code> en <code translate="no">user.yaml</code>) et définissez le type de MQ ; l’application du CR actualise les pods avec la nouvelle configuration. Pour plus de détails sur SASL/SSL, consultez la section « <a href="/docs/fr/connect_kafka_ssl.md">Se connecter à Kafka avec SASL/SSL</a> ».</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># change_configmap.yaml</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -221,7 +221,7 @@ summary: >-
 <p>Attendez que tous les pods soient prêts, puis vérifiez que la configuration d’accès à Kafka a bien été intégrée à la configuration de Milvus.</p>
 <p><strong>Étape 3 : Exécutez la migration vers MQ.</strong></p>
 <div class="alert note">
-<p>Assurez-vous que le Kafka cible ne contient pas de sujets Milvus provenant d’une configuration précédente. S’il s’agit de votre premier basculement vers Kafka, ignorez cette remarque ; sinon, supprimez d’abord les sujets Milvus résiduels portant les mêmes noms.</p>
+<p>Assurez-vous que le Kafka cible ne contient pas de sujets Milvus issus d’une configuration précédente. S’il s’agit de votre premier basculement vers Kafka, ignorez cette remarque ; sinon, supprimez d’abord les sujets Milvus résiduels portant les mêmes noms.</p>
 </div>
 <pre><code translate="no" class="language-shell">kubectl exec -it &lt;mixcoord-pod&gt; -- \
   curl -X POST http://localhost:9091/management/wal/alter \

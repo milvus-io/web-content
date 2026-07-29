@@ -101,7 +101,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>الخطوة 1: تحقق من أن مثيل Milvus قيد التشغيل.</strong></p>
-<p><strong>الخطوة 2: قم بتكوين اتصال Pulsar المستهدف وأعد تشغيل Milvus.</strong> يتطلب التبديل أن يكون Milvus على دراية مسبقة باتصال Pulsar، لذا قم بكتابته في <code translate="no">user.yaml</code> عبر <code translate="no">extraConfigFiles</code> وقم بتطبيقه باستخدام <code translate="no">helm upgrade</code> (الذي يقوم بتدوير البودات). يُعد <code translate="no">streaming.enabled=true</code> ضروريًا لميزة Switch MQ.</p>
+<p><strong>الخطوة 2: قم بتكوين اتصال Pulsar المستهدف وأعد تشغيل Milvus.</strong> يتطلب التبديل أن يكون Milvus على دراية مسبقة باتصال Pulsar، لذا قم بكتابته في <code translate="no">user.yaml</code> عبر <code translate="no">extraConfigFiles</code> وقم بتطبيقه باستخدام <code translate="no">helm upgrade</code> (الذي يقوم بتدوير البودات). يعد <code translate="no">streaming.enabled=true</code> مطلوبًا لميزة Switch MQ.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -163,7 +163,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>الخطوة 1: تحقق من أن مثيل Milvus قيد التشغيل.</strong></p>
-<p><strong>الخطوة 2: تنفيذ عملية التبديل في MQ.</strong> خدمة MixCoord غير مكشوفة، لذا قم بتشغيل واجهة برمجة تطبيقات (API) التبديل من داخل بود MixCoord:</p>
+<p><strong>الخطوة 2: تنفيذ عملية التبديل في MQ.</strong> خدمة MixCoord غير مكشوفة، لذا قم بتشغيل واجهة برمجة التطبيقات (API) الخاصة بالتبديل من داخل بود MixCoord:</p>
 <pre><code translate="no" class="language-shell">kubectl exec -it &lt;mixcoord-pod&gt; -- \
   curl -X POST http://localhost:9091/management/wal/alter \
   -H &quot;Content-Type: application/json&quot; \

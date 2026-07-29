@@ -209,7 +209,7 @@ dashscope_ranker = Function(
    </tr>
 </table>
 <div class="alert note">
-<p>Общие параметры, общие для всех ранжеров моделей, такие как <code translate="no">provider</code> и <code translate="no">queries</code>, см. в разделе <a href="/docs/ru/model-ranker-overview.md#Create-a-model-ranker">«Создание ранжера моделей</a>».</p>
+<p>Общие параметры, общие для всех ранжировщиков моделей, такие как <code translate="no">provider</code> и <code translate="no">queries</code>, см. в разделе <a href="/docs/ru/model-ranker-overview.md#Create-a-model-ranker">«Создание ранжировщика моделей</a>».</p>
 </div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Применение к стандартному векторному поиску<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"

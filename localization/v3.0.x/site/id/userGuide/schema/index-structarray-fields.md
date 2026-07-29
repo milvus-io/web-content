@@ -48,7 +48,7 @@ summary: >-
 <tr><td><code translate="no">chunks[emb_list_vector]</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Pencarian EmbeddingList dengan metrik <code translate="no">MAX_SIM*</code>.</td></tr>
 <tr><td><code translate="no">chunks[emb]</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Pencarian tingkat elemen dengan metrik vektor biasa.</td></tr>
 <tr><td><code translate="no">chunks[section]</code></td><td><code translate="no">VARCHAR</code></td><td>Penyaringan kategorikal.</td></tr>
-<tr><td><code translate="no">chunks[quality_score]</code></td><td><code translate="no">FLOAT</code></td><td>Penyaringan numerik dan predikat gaya rentang.</td></tr>
+<tr><td><code translate="no">chunks[quality_score]</code></td><td><code translate="no">FLOAT</code></td><td>Penyaringan numerik dan predikat bergaya rentang.</td></tr>
 <tr><td><code translate="no">chunks[has_code]</code></td><td><code translate="no">BOOL</code></td><td>Penyaringan Boolean.</td></tr>
 </tbody>
 </table>
@@ -313,7 +313,7 @@ client.create_index(
 </thead>
 <tbody>
 <tr><td>Gunakan sintaks jalur untuk indeks subbidang.</td><td><code translate="no">chunks[emb]</code>, bukan <code translate="no">emb</code> atau <code translate="no">chunks.emb</code>.</td></tr>
-<tr><td>Satu subbidang vektor hanya menerima satu indeks.</td><td>Gunakan subbidang vektor terpisah jika Anda memerlukan keluarga metrik yang berbeda.</td></tr>
+<tr><td>Satu subbidang vektor hanya dapat memiliki satu indeks.</td><td>Gunakan subbidang vektor terpisah jika Anda memerlukan keluarga metrik yang berbeda.</td></tr>
 <tr><td>Gunakan metrik <code translate="no">MAX_SIM*</code> untuk pencarian EmbeddingList.</td><td>Data kueri EmbeddingList memerlukan indeks yang dibangun dengan metrik <code translate="no">MAX_SIM*</code>.</td></tr>
 <tr><td>Gunakan metrik vektor biasa untuk pencarian tingkat elemen.</td><td>Pencarian tingkat elemen menggunakan data kueri vektor biasa dan metrik seperti <code translate="no">COSINE</code>, <code translate="no">IP</code>, atau <code translate="no">L2</code>.</td></tr>
 <tr><td>Indeks subbidang skalar yang muncul dalam filter.</td><td>Gunakan tipe indeks skalar yang didukung oleh target Anda.</td></tr>
@@ -361,5 +361,5 @@ client.create_index(
     </button></h2><ol>
 <li><p>Untuk menjalankan pencarian EmbeddingList tingkat entitas atau pencarian vektor tingkat elemen, baca Pencarian Vektor Dasar dengan StructArray.</p></li>
 <li><p>Untuk menyaring subbidang skalar StructArray selama pencarian, baca "Pencarian yang Disaring dengan StructArray".</p></li>
-<li><p>Untuk meninjau batasan indeks dan metrik, baca " <a href="/docs/id/structarray-limits.md">Batasan StructArray</a>".</p></li>
+<li><p>Untuk meninjau batasan indeks dan metrik, baca <a href="/docs/id/structarray-limits.md">Batasan StructArray</a>.</p></li>
 </ol>

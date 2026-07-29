@@ -57,7 +57,7 @@ title: CDC 복제에서의 대량 가져오기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>복제 클러스터에서의 가져오기 기능은 기본적으로 비활성화되어 있습니다. 주 클러스터와 대기 클러스터 모두에서 ` <code translate="no">dataCoord.import.enableInReplicatingCluster</code> `를 ` <code translate="no">true</code> `로 설정하여 이 기능을 활성화하십시오.</p>
+    </button></h2><p>복제 클러스터의 가져오기 기능은 기본적으로 비활성화되어 있습니다. 주 클러스터와 대기 클러스터 모두에서 ` <code translate="no">dataCoord.import.enableInReplicatingCluster</code> `를 ` <code translate="no">true</code> `로 설정하여 이 기능을 활성화하십시오.</p>
 <p>Milvus Operator를 사용하여 Milvus를 배포하는 경우, 각 <code translate="no">Milvus</code> 리소스의 <code translate="no">spec.config</code> 에 다음 설정을 추가하십시오:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">spec:</span>
   <span class="hljs-attr">config:</span>
@@ -97,7 +97,7 @@ title: CDC 복제에서의 대량 가져오기
         ></path>
       </svg>
     </button></h2><p>모든 가져오기 호출을 주 클러스터에서 실행하십시오. 가져온 데이터와 커밋 결정은 스탠바이 클러스터로 자동으로 복제되므로, 스탠바이 클러스터에서 직접 가져오기를 제출하거나 커밋하지 마십시오.</p>
-<p>각 클러스터는 자체 오브젝트 스토리지에서 가져오기 파일을 읽습니다. 가져올 파일이 주 클러스터와 대기 클러스터의 오브젝트 스토리지 모두에 존재하는지 확인하십시오. 파일을 두 클러스터 모두에 업로드하거나, 두 클러스터가 모두 읽을 수 있는 오브젝트 스토리지를 사용할 수 있습니다. 대기 클러스터에 파일이 없는 경우, 복제된 가져오기 작업은 ‘오브젝트 없음(object-not-found)’ 오류와 함께 실패합니다.</p>
+<p>각 클러스터는 자체 오브젝트 스토리지에서 가져오기 파일을 읽습니다. 가져올 파일이 주 클러스터와 대기 클러스터의 오브젝트 스토리지 모두에 존재하는지 확인하십시오. 파일을 두 클러스터 모두에 업로드하거나, 두 클러스터가 모두 읽을 수 있는 오브젝트 스토리지를 사용할 수 있습니다. 대기 클러스터에 파일이 없는 경우, 복제된 가져오기 작업이 ‘오브젝트 없음(object-not-found)’ 오류와 함께 실패합니다.</p>
 <p>다음 예제에서는 <code translate="no">pymilvus.bulk_writer</code> 의 REST 기반 가져오기 헬퍼를 사용합니다. <code translate="no">url</code> 값은 다른 API 호출에 사용하는 것과 동일한 Milvus 주소입니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> time
 
@@ -239,7 +239,7 @@ wait_for_state(standby_url, job_id, <span class="hljs-string">&quot;Completed&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>아니요. 프라이머리 클러스터에서 커밋을 수행하면 해당 커밋이 단일 순서 지정 펜스(fence)로 스탠바이 클러스터에 복제됩니다.</p>
+    </button></h3><p>아니요. 프라이머리 클러스터에서 커밋을 수행하면 해당 커밋이 단일 순차적 펜스(fence)로 스탠바이 클러스터에 복제됩니다.</p>
 <h3 id="Why-does-my-import-fail-with-import-in-replicating-cluster-is-not-supported-yet" class="common-anchor-header">왜 ' <code translate="no">import in replicating cluster is not supported yet</code>' 오류로 인해 임포트가 실패하나요?<button data-href="#Why-does-my-import-fail-with-import-in-replicating-cluster-is-not-supported-yet" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

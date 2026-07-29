@@ -222,7 +222,7 @@ title: Kafka
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Atualização da versão 2.5.x para a 2.6.x:</strong> <strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v3.0-beta, deve manter a sua escolha atual de fila de mensagens. A alternância entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.
+<li><strong>Atualização da versão 2.5.x para a 2.6.x:</strong> <strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v3.0-beta, deve manter a sua escolha atual de fila de mensagens. A mudança entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.
 Se estiver a utilizar o Kafka e pretender mantê-lo, não altere a fila de mensagens durante a atualização.</li>
 <li>Apenas <strong>o Kafka 2.x e 3.x</strong> são suportados.</li>
 <li>Para conectividade SASL/SSL, consulte <a href="/docs/pt/connect_kafka_ssl.md">«Ligar-se ao Kafka com SASL/SSL</a>».</li>

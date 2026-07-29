@@ -6,7 +6,7 @@ summary: >-
   vectoriels de StructArray. La recherche par plage renvoie les résultats
   vectoriels dont le score ou la distance se situe dans une fourchette
   spécifiée. Pour les champs StructArray, utilisez la recherche par plage avec
-  une recherche vectorielle au niveau des éléments, dans laquelle chaque élément
+  la recherche vectorielle au niveau des éléments, dans laquelle chaque élément
   Struct est recherché indépendamment.
 ---
 <h1 id="Range-Search-with-StructArray" class="common-anchor-header">Recherche par intervalle avec StructArray<button data-href="#Range-Search-with-StructArray" class="anchor-icon" translate="no">
@@ -163,7 +163,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>Dans cet exemple, « <code translate="no">COSINE</code> » est une métrique de type « similarité » ; l’intervalle de résultats est donc supérieur à <code translate="no">radius</code> et inférieur ou égal à <code translate="no">range_filter</code>. La valeur « <code translate="no">offset</code> » identifie l’élément Struct correspondant dans le tableau « <code translate="no">chunks</code> » lors du renvoi.</p>
+<p>Dans cet exemple, « <code translate="no">COSINE</code> » est une métrique de type « similarité » ; l’intervalle de résultats est donc supérieur à <code translate="no">radius</code> et inférieur ou égal à <code translate="no">range_filter</code>. La valeur « <code translate="no">offset</code> » identifie l’élément Struct correspondant dans le tableau « <code translate="no">chunks</code> » lors de son retour.</p>
 <h2 id="Add-scalar-filters" class="common-anchor-header">Ajouter des filtres scalaires<button data-href="#Add-scalar-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -305,7 +305,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>N’utilisez pas de requête « <code translate="no">EmbeddingList</code> » ni de métrique « <code translate="no">MAX_SIM*</code> » pour la recherche par plage sur les sous-champs vectoriels de StructArray. La recherche au niveau de l’EmbeddingList ne prend pas en charge la recherche par plage.</p></li>
+<li><p>N’utilisez pas de requête de type « <code translate="no">EmbeddingList</code> » ni de métrique de type « <code translate="no">MAX_SIM*</code> » pour la recherche par plage sur les sous-champs vectoriels de StructArray. La recherche au niveau de l’EmbeddingList ne prend pas en charge la recherche par plage.</p></li>
 <li><p>Ne combinez pas la recherche par plage avec la recherche par regroupement. Si vous avez besoin d’un résultat par entité parente, effectuez une recherche au niveau des éléments sans paramètres de plage et utilisez le regroupement lorsque cela est pris en charge.</p></li>
 <li><p>La recherche par plage hybride est prise en charge pour les champs vectoriels au niveau des éléments de StructArray. Elle n’est pas prise en charge pour les requêtes StructArray au niveau de l’EmbeddingList.</p></li>
 </ul>

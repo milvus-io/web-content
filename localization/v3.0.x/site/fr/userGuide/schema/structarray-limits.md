@@ -23,7 +23,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>La prise en charge de StructArray couvre la définition du schéma, l'insertion de charges utiles, l'indexation, les modes de recherche et les filtres spécifiques à StructArray. Utilisez cette page comme référence concernant les limites avant de vous fier au comportement de StructArray en production.</p>
-<p>La plupart des limites de StructArray proviennent de l’une des trois sources suivantes : le modèle de schéma StructArray, le mode de recherche que vous choisissez pour les sous-champs vectoriels et la version de Milvus sur laquelle s’exécute votre collection.</p>
+<p>La plupart des limites de StructArray proviennent de l’une des trois sources suivantes : le modèle de schéma StructArray, le mode de recherche que vous choisissez pour les sous-champs vectoriels et la version de Milvus sur laquelle votre collection s’exécute.</p>
 <h2 id="Limits-at-a-glance" class="common-anchor-header">Aperçu des limites<button data-href="#Limits-at-a-glance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,7 +44,7 @@ summary: >-
 <tr><th>Domaine</th><th>Limite</th></tr>
 </thead>
 <tbody>
-<tr><td>Forme du schéma</td><td>Une structure (Struct) ne peut être utilisée que comme type d’élément d’un champ de type tableau (Array). La structure n’est pas prise en charge en tant que champ de collection de niveau supérieur.</td></tr>
+<tr><td>Forme du schéma</td><td>Une structure (Struct) ne peut être utilisée que comme type d’élément d’un champ de type tableau (Array). La structure (Struct) n’est pas prise en charge en tant que champ de collection de niveau supérieur.</td></tr>
 <tr><td>Schéma des sous-champs</td><td>Tous les éléments Struct d’un même champ StructArray partagent un schéma Struct prédéfini.</td></tr>
 <tr><td>La capacité</td><td><code translate="no">max_capacity</code> est obligatoire et limite le nombre d’éléments Struct qu’une entité peut stocker dans le champ StructArray.</td></tr>
 <tr><td>Modifications des sous-champs</td><td>Une fois qu’un champ StructArray a été créé, vous ne pouvez plus y ajouter de sous-champs.</td></tr>
@@ -52,7 +52,7 @@ summary: >-
 <tr><td>Insertion de forme</td><td>Insérez un champ StructArray sous la forme d’un tableau d’objets. N’utilisez pas la syntaxe de chemin d’accès à l’intérieur des charges utiles d’insertion.</td></tr>
 <tr><td>Index vectoriels</td><td>Un champ vecteur ou un sous-champ vecteur n’accepte qu’un seul index. Utilisez des sous-champs vecteurs distincts pour la recherche EmbeddingList et la recherche au niveau des éléments.</td></tr>
 <tr><td>Fonctions</td><td>Les fonctions de champ ne sont pas prises en charge pour les champs ou sous-champs situés à l'intérieur d'un champ StructArray.</td></tr>
-<tr><td>Champs pouvant prendre la valeur null</td><td>Les champs StructArray pouvant prendre la valeur null dépendent de la version. Lorsqu’ils sont pris en charge, la valeur null s’applique à l’ensemble du champ StructArray, et non à un élément Struct individuel de manière indépendante.</td></tr>
+<tr><td>Champs pouvant prendre la valeur null</td><td>Les champs StructArray pouvant prendre la valeur null sont soumis à des restrictions de version. Lorsqu’ils sont pris en charge, la valeur null s’applique à l’ensemble du champ StructArray, et non à un élément Struct individuel de manière indépendante.</td></tr>
 <tr><td>Ajout dynamique d’un champ</td><td>L'ajout d'un champ StructArray à une collection existante dépend de la version et nécessite que le champ ajouté soit nullable.</td></tr>
 </tbody>
 </table>
@@ -150,12 +150,12 @@ summary: >-
 <tr><td>Portée de la valeur nulle</td><td>La valeur nulle s'applique à l'ensemble du champ StructArray. Par exemple, <code translate="no">chunks=None</code> n'est valide que si <code translate="no">chunks</code> est de type « nullable ».</td></tr>
 <tr><td>Valeur StructArray partiellement nulle</td><td>Lorsqu’un champ StructArray contient une valeur de tableau valide, ne mélangez pas de sous-tableaux nuls avec des sous-tableaux valides au sein d’une même valeur.</td></tr>
 <tr><td>Ajout dynamique d’un champ StructArray</td><td>L'ajout d'un champ StructArray à une collection existante n'est pris en charge que dans les versions qui incluent la prise en charge des champs StructArray dynamiques.</td></tr>
-<tr><td>Exigence de nullabilité pour l’ajout dynamique</td><td>Un champ StructArray ajouté à une collection existante doit être nullable, car les entités existantes ne disposent d’aucune valeur pour ce nouveau champ.</td></tr>
+<tr><td>Exigence de nullabilité pour l’ajout dynamique</td><td>Un champ StructArray ajouté à une collection existante doit être nullable, car les entités existantes ne possèdent pas encore de valeur pour ce nouveau champ.</td></tr>
 <tr><td>Entités existantes après l'ajout dynamique</td><td>Les entités existantes renvoient la valeur « <code translate="no">null</code> » pour le champ StructArray ajouté, et ce pour chacun de ses sous-champs.</td></tr>
 </tbody>
 </table>
 <p>Dans Milvus v3.0.x, les champs StructArray pouvant prendre la valeur null, les tableaux vectoriels pouvant prendre la valeur null et l’ajout dynamique de champs StructArray sont disponibles.</p>
-<p>Pour des exemples d’insertion avec des champs StructArray pouvant accepter la valeur null, consultez la section « <a href="/docs/fr/insert-data-into-structarray-fields.md">Insérer des données dans des champs StructArray</a> ».</p>
+<p>Pour des exemples d’insertion avec des champs StructArray pouvant prendre la valeur null, consultez la section « <a href="/docs/fr/insert-data-into-structarray-fields.md">Insérer des données dans des champs StructArray</a> ».</p>
 <h2 id="Insert-limits" class="common-anchor-header">Limites d’insertion<button data-href="#Insert-limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -232,11 +232,11 @@ summary: >-
 <tr><th>Comportement de recherche</th><th>Prise en charge et limites</th></tr>
 </thead>
 <tbody>
-<tr><td>Recherche EmbeddingList de base</td><td>Prise en charge sur les sous-champs vectoriels StructArray indexés à l'aide de métriques de type « <code translate="no">MAX_SIM*</code> ». Renvoie des résultats au niveau des entités.</td></tr>
+<tr><td>Recherche EmbeddingList de base</td><td>Prise en charge sur les sous-champs vectoriels StructArray indexés à l’aide de métriques de type « <code translate="no">MAX_SIM*</code> ». Renvoie des résultats au niveau des entités.</td></tr>
 <tr><td>Recherche de base au niveau des éléments</td><td>Prise en charge sur les sous-champs vectoriels StructArray indexés à l'aide de métriques vectorielles classiques. Peut renvoyer les décalages des éléments correspondants.</td></tr>
 <tr><td>Recherche par plage</td><td>Prise en charge en fonction du mode de recherche et de la prise en charge des index/métriques de la version cible. Pour connaître le comportement de la recherche par plage dans le cadre des requêtes StructArray au niveau des éléments, vérifiez votre version cible.</td></tr>
-<tr><td>Recherche par regroupement</td><td>La recherche groupée au niveau des éléments peut renvoyer des indices de position. Le comportement de la recherche groupée hybride pour les requêtes StructArray au niveau des éléments dépend de la version.</td></tr>
-<tr><td>Recherche hybride</td><td>Une requête de recherche hybride ne peut inclure des requêtes sur des sous-champs vectoriels StructArray que si la version cible prend en charge cette combinaison de recherche. Chaque requête suit toujours la famille de métriques du sous-champ vectoriel indexé.</td></tr>
+<tr><td>Recherche par regroupement</td><td>La recherche groupée au niveau des éléments peut renvoyer des indices. Le comportement de la recherche hybride avec regroupement pour les requêtes StructArray au niveau des éléments dépend de la version.</td></tr>
+<tr><td>Recherche hybride</td><td>Une requête de recherche hybride ne peut inclure des requêtes de sous-champs vectoriels StructArray que si la version cible prend en charge cette combinaison de recherche. Chaque requête suit toujours la famille de métriques du sous-champ vectoriel indexé.</td></tr>
 <tr><td>Sortie de décalage</td><td>Les décalages sont disponibles pour les résultats de recherche au niveau des éléments. La recherche EmbeddingList renvoie des résultats au niveau des entités et n’utilise pas les décalages d’éléments comme unité de résultat principale.</td></tr>
 </tbody>
 </table>
@@ -260,7 +260,7 @@ summary: >-
 <ul>
 <li><p>Utilisez « <code translate="no">$[subfield]</code> » uniquement au sein d’opérateurs StructArray.</p></li>
 <li><p>Utilisez des sous-champs scalaires pour les prédicats scalaires.</p></li>
-<li><p>N’utilisez pas de sous-champs vectoriels comme entrées de prédicats scalaires de type « <code translate="no">$[...]</code> ».</p></li>
+<li><p>N’utilisez pas de sous-champs vectoriels comme entrées de prédicats scalaires « <code translate="no">$[...]</code> ».</p></li>
 <li><p>La syntaxe JSON Path, les fonctions JSON, les fonctions de conteneurs de tableaux, les fonctions de correspondance de texte, les fonctions de géométrie/SIG et les expressions Timestamptz ne sont pas prises en charge pour les prédicats au niveau des éléments StructArray.</p></li>
 <li><p>Privilégiez les comparaisons booléennes explicites telles que ` <code translate="no">$[has_code] == true</code> ` plutôt que les expressions booléennes nues.</p></li>
 </ul>

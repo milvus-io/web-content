@@ -21,8 +21,11 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>在基于代理的搜索应用中，向量搜索和 grep 风格的模式匹配通常相辅相成。向量搜索可检索语义相关的实体，而模式匹配则通过精确的字符串结构（如错误代码、日志前缀、电子邮件域名、URL 路径或标识符）来缩小搜索结果范围。</p>
-<p>在 Milvus 中，您可以在标量过滤器中使用 `<code translate="no">LIKE</code> ` 进行简单的通配符匹配，或使用 `<code translate="no">=~</code> ` 或 `<code translate="no">!~</code> ` 进行<a href="https://github.com/google/re2/wiki/syntax">RE2</a>正则表达式匹配，来表达这些模式约束。您可以将这些过滤器与 `<code translate="no">query</code>`、`<code translate="no">search</code>` 或混合搜索相结合。</p>
-<p>模式匹配表达式写在<code translate="no">filter</code> 参数中。例如，以下查询可匹配包含<code translate="no">E1001</code> 等错误代码的日志消息：</p>
+<p>在 Milvus 中，您可以在标量过滤器中使用<code translate="no">LIKE</code> 进行简单的通配符匹配，或使用<code translate="no">=~</code> 或<code translate="no">!~</code> 进行<a href="https://github.com/google/re2/wiki/syntax">RE2</a>正则表达式匹配，来表达这些模式约束。您可以将这些过滤器与<code translate="no">query</code> 、<code translate="no">search</code> 或混合搜索相结合。</p>
+<div class="alert note">
+<p>本页面介绍了<code translate="no">query</code> 、<code translate="no">search</code> 以及混合搜索所使用的标量过滤器表达式中的模式匹配。这些表达式对字段值进行评估，但不会更改分析器生成的令牌。若要在文本分析过程中过滤令牌，请参阅<a href="/docs/zh/regex-filter.md">“正则表达式分析器过滤器”</a>。</p>
+</div>
+<p>模式匹配表达式需编写在<code translate="no">filter</code> 参数中。例如，以下查询可匹配包含<code translate="no">E1001</code> 等错误代码的日志消息：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -33,7 +36,7 @@ res = client.query(
     output_fields=[<span class="hljs-string">&quot;message&quot;</span>, <span class="hljs-string">&quot;severity&quot;</span>],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>本页面的示例重点介绍分配给 `<code translate="no">filter</code>` 的表达式。在支持标量过滤器的 Milvus 操作中（例如 `<code translate="no">query</code>`、`<code translate="no">search</code>` 和混合搜索），您可以使用相同的过滤器表达式语法。</p>
+<p>本页面的示例重点介绍分配给 `<code translate="no">filter</code>` 的表达式。您可以在接受标量过滤器的 Milvus 操作中使用相同的过滤表达式语法，例如 `<code translate="no">query</code>`、`<code translate="no">search</code>` 和混合搜索。</p>
 <h2 id="Supported-field-types" class="common-anchor-header">支持的字段类型<button data-href="#Supported-field-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -56,7 +59,7 @@ res = client.query(
 </thead>
 <tbody>
 <tr><td><code translate="no">VARCHAR</code> 字段</td><td>是</td><td>是</td><td>字符串字段模式匹配的典型目标。</td></tr>
-<tr><td><code translate="no">JSON</code> 路径，使用<code translate="no">VARCHAR</code> 类型转换</td><td>是</td><td>是</td><td>JSON 路径值必须为字符串才能进行正向匹配。若要在 JSON 路径上创建索引以提高性能，请设置 `<code translate="no">json_cast_type=&quot;varchar&quot;</code>`。</td></tr>
+<tr><td><code translate="no">JSON</code> 路径，使用<code translate="no">VARCHAR</code> 类型转换</td><td>是</td><td>是</td><td>JSON路径值必须为字符串才能进行正向匹配。若要在JSON路径上创建索引以提高性能，请设置<code translate="no">json_cast_type=&quot;varchar&quot;</code> 。</td></tr>
 <tr><td><code translate="no">ARRAY&lt;VARCHAR&gt;</code> 元素</td><td>是</td><td>是</td><td>按索引匹配特定元素，例如<code translate="no">tags[0]</code> 。模式匹配<strong>不会</strong>扫描所有元素；它仅适用于指定索引处的元素。</td></tr>
 <tr><td>数值、布尔值、向量、<code translate="no">TEXT</code> 或其他非<code translate="no">VARCHAR</code> 目标</td><td>否</td><td>否</td><td>模式匹配仅适用于<code translate="no">VARCHAR</code> 值、解析为字符串的JSON路径，或带索引的<code translate="no">ARRAY&lt;VARCHAR&gt;</code> 元素。</td></tr>
 </tbody>
@@ -77,7 +80,7 @@ res = client.query(
         ></path>
       </svg>
     </button></h2><p>请选择能表达所需模式的最简单操作符。</p>
-<p>如果您需要精确的字符串匹配，建议使用<code translate="no">==</code> 而非模式匹配。仅当筛选条件需要匹配特定模式时，才使用<code translate="no">LIKE</code> 或正则表达式。</p>
+<p>如果您需要精确的字符串匹配，建议使用<code translate="no">==</code> 而非模式匹配。仅当筛选条件需要匹配特定模式时，才使用<code translate="no">LIKE</code> 或regex。</p>
 <table>
 <thead>
 <tr><th>要求</th><th>推荐操作符</th><th>示例</th><th>说明</th></tr>
@@ -331,7 +334,7 @@ res = client.query(
 </thead>
 <tbody>
 <tr><td>包含固定的字面量子字符串，例如<code translate="no">message =~ &quot;error.*timeout&quot;</code> 或<code translate="no">message LIKE &quot;%database%&quot;</code></td><td><code translate="no">NGRAM</code></td><td>当 Milvus 能从模式中提取有意义的字面量子字符串时，此项会有所帮助。详情请参阅<a href="/docs/zh/ngram.md">NGRAM</a>。</td></tr>
-<tr><td>前缀、精确或等值类型的字符串过滤器，特别适用于基数较低至中等的字段</td><td><code translate="no">STL_SORT</code>、<code translate="no">INVERTED</code> 或<code translate="no">BITMAP</code></td><td>当字段包含重复值或过滤条件接近精确匹配时，此方法可能更有效。详情请参阅<a href="/docs/zh/stl-sort.md">STL_SORT</a>、<a href="/docs/zh/inverted.md">INVERTED</a> 和<a href="/docs/zh/bitmap.md">BITMAP</a>。</td></tr>
+<tr><td>前缀、精确或等值类型的字符串过滤器，特别适用于基数较低至中等的字段</td><td><code translate="no">STL_SORT</code>、<code translate="no">INVERTED</code> 或<code translate="no">BITMAP</code></td><td>当字段包含重复值或过滤器接近精确匹配时，此方法可能更有效。详情请参阅<a href="/docs/zh/stl-sort.md">STL_SORT</a>、<a href="/docs/zh/inverted.md">INVERTED</a> 和<a href="/docs/zh/bitmap.md">BITMAP</a>。</td></tr>
 <tr><td>不包含固定字符的正则表达式模式，或以字符类、短令牌或通配符为主的模式</td><td>在依赖索引加速之前请先进行基准测试</td><td>这些模式可能提供的索引选择性有限，并可能退化为更广泛的扫描。</td></tr>
 </tbody>
 </table>

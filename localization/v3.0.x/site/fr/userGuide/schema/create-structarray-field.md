@@ -92,7 +92,7 @@ summary: >-
 <tr><th>Type physique des sous-champs Struct</th><th>Prise en charge</th><th>Remarques</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">Array</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme suit : <code translate="no">DataType.BOOL</code>.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme suit : ` <code translate="no">DataType.BOOL</code>`.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme suit : <code translate="no">DataType.INT8</code>, <code translate="no">DataType.INT16</code>, <code translate="no">DataType.INT32</code> ou <code translate="no">DataType.INT64</code>.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme suit : <code translate="no">DataType.FLOAT</code> ou <code translate="no">DataType.DOUBLE</code>.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme suit : <code translate="no">DataType.VARCHAR</code> et définissez <code translate="no">max_length</code>.</td></tr>
@@ -339,7 +339,7 @@ client.add_collection_struct_field(
     nullable=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Une fois le champ StructArray ajouté, les entités existantes renvoient ` <code translate="no">null</code> ` pour le nouveau champ, pour l’ensemble de ses sous-champs.</p>
+<p>Une fois le champ StructArray ajouté, les entités existantes renvoient ` <code translate="no">null</code> ` pour le nouveau champ sur l’ensemble de ses sous-champs.</p>
 <p>Une fois qu’un champ StructArray a été créé, vous ne pouvez plus ajouter de nouveaux sous-champs à ce champ StructArray existant. Si vous avez besoin d’attributs d’élément supplémentaires ultérieurement, appelez ` <code translate="no">drop_collection_field()</code> ` pour supprimer le champ StructArray, puis ajoutez un nouveau champ StructArray avec le schéma Struct mis à jour.</p>
 <pre><code translate="no" class="language-python">client.drop_collection_field(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
@@ -374,11 +374,11 @@ client.add_collection_struct_field(
 <tr><th>Règle</th><th>Explication</th></tr>
 </thead>
 <tbody>
-<tr><td>Struct est utilisé comme type d’élément Array.</td><td>Créez un champ StructArray en tant que champ de type Array à l’aide de la méthode <code translate="no">element_type=STRUCT</code>. Ne créez pas de champ Struct en tant que champ de collection de niveau supérieur.</td></tr>
+<tr><td>Struct est utilisé comme type d’élément Array.</td><td>Créez un champ StructArray en tant que champ de type Array à l'aide de la méthode <code translate="no">element_type=STRUCT</code>. Ne créez pas de champ Struct en tant que champ de collection de niveau supérieur.</td></tr>
 <tr><td>Tous les éléments partagent un même schéma.</td><td>Chaque élément Struct du même champ StructArray respecte le schéma Struct défini pour ce champ.</td></tr>
 <tr><td><code translate="no">max_capacity</code> est obligatoire.</td><td>Il limite le nombre d’éléments Struct que chaque entité peut stocker dans le champ StructArray.</td></tr>
 <tr><td>Seuls les types de sous-champs pris en charge sont autorisés.</td><td>Utilisez les types de sous-champs scalaires et vectoriels pris en charge par StructArray. Ne définissez pas de sous-champs JSON, Geometry, Text, Timestamptz, SparseFloatVector, ni de sous-champs Struct / Array imbriqués.</td></tr>
-<tr><td>Les sous-champs vectoriels nécessitent des index avant toute recherche.</td><td>Créez des index sur des chemins tels que <code translate="no">chunks[emb_list_vector]</code> ou <code translate="no">chunks[emb]</code> avant d’effectuer une recherche vectorielle.</td></tr>
+<tr><td>Les sous-champs vectoriels nécessitent des index avant toute recherche.</td><td>Créez des index sur des chemins tels que <code translate="no">chunks[emb_list_vector]</code> ou <code translate="no">chunks[emb]</code> avant d’exécuter une recherche vectorielle.</td></tr>
 <tr><td>Un sous-champ vectoriel ne peut avoir qu’un seul index.</td><td>Si vous avez besoin à la fois d’une recherche EmbeddingList et d’une recherche au niveau des éléments, créez deux sous-champs vectoriels distincts.</td></tr>
 <tr><td>Les sous-champs StructArray existants sont fixes.</td><td>Une fois un champ StructArray créé, vous ne pouvez plus y ajouter de sous-champs.</td></tr>
 <tr><td>Les fonctions ne sont pas prises en charge à l’intérieur de Struct.</td><td>Ne définissez pas de fonctions pour les champs ou les sous-champs à l’intérieur d’un champ StructArray.</td></tr>
@@ -408,7 +408,7 @@ client.add_collection_struct_field(
 <li><p>Utilisation d’un seul sous-champ vectoriel à la fois pour la recherche dans EmbeddingList et la recherche au niveau des éléments.</p></li>
 <li><p>Ajouter uniquement des sous-champs vectoriels et omettre les sous-champs scalaires nécessaires au filtrage, tels que <code translate="no">section</code>, <code translate="no">quality_score</code> ou <code translate="no">has_code</code>.</p></li>
 <li><p>Considérer les sous-champs vectoriels comme des entrées de prédicats scalaires de type <code translate="no">$[...]</code>. Utiliser les sous-champs vectoriels pour la recherche vectorielle, et les sous-champs scalaires pour les prédicats scalaires.</p></li>
-<li><p>Partir du principe que de nouveaux sous-champs peuvent être ajoutés à un champ StructArray existant après la création de ce champ.</p></li>
+<li><p>Partir du principe que de nouveaux sous-champs peuvent être ajoutés à un champ StructArray existant après la création de ce dernier.</p></li>
 <li><p>Utilisation de <code translate="no">chunks.emb</code> ou <code translate="no">chunks.emb_list_vector</code> au lieu de la syntaxe de chemin requise <code translate="no">chunks[emb]</code> ou <code translate="no">chunks[emb_list_vector]</code>.</p></li>
 <li><p>Considérer que le comportement des StructArray pouvant prendre la valeur null est disponible dans toutes les versions cibles.</p></li>
 </ul>

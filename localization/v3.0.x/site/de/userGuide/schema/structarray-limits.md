@@ -23,7 +23,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Die Unterstützung von StructArray umfasst Schemadefinitionen, Einfüge-Payloads, Indizierung, Suchmodi und StructArray-spezifische Filter. Nutzen Sie diese Seite als Referenz für die Einschränkungen, bevor Sie sich in der Produktion auf das Verhalten von StructArray verlassen.</p>
-<p>Die meisten StructArray-Einschränkungen ergeben sich aus einer der folgenden drei Quellen: dem StructArray-Schemamodell, dem von Ihnen für Vektor-Unterfelder gewählten Suchmodus und der Milvus-Version, auf der Ihre Sammlung läuft.</p>
+<p>Die meisten StructArray-Einschränkungen ergeben sich aus einer der folgenden drei Quellen: dem StructArray-Schemamodell, dem von Ihnen für Vektor-Unterfelder gewählten Suchmodus und der Milvus-Version, auf der Ihre Sammlung ausgeführt wird.</p>
 <h2 id="Limits-at-a-glance" class="common-anchor-header">Einschränkungen im Überblick<button data-href="#Limits-at-a-glance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,7 +44,7 @@ summary: >-
 <tr><th>Bereich</th><th>Beschränkung</th></tr>
 </thead>
 <tbody>
-<tr><td>Schemaform</td><td>Ein „Struct“ kann nur als Elementtyp eines Array-Feldes verwendet werden. „Struct“ wird nicht als Sammlungsfeld der obersten Ebene unterstützt.</td></tr>
+<tr><td>Schemaform</td><td>Ein „Struct“ kann nur als Elementtyp eines Array-Feldes verwendet werden. „Struct“ wird nicht als Sammlungsfeld auf oberster Ebene unterstützt.</td></tr>
 <tr><td>Schema der Unterfelder</td><td>Alle Struct-Elemente im selben StructArray-Feld teilen sich ein vordefiniertes Struct-Schema.</td></tr>
 <tr><td>Kapazität</td><td><code translate="no">max_capacity</code> ist erforderlich und begrenzt die Anzahl der Struct-Elemente, die eine Entität im StructArray-Feld speichern kann.</td></tr>
 <tr><td>Änderungen an Unterfeldern</td><td>Nachdem ein StructArray-Feld erstellt wurde, können Sie diesem bestehenden StructArray-Feld keine Unterfelder mehr hinzufügen.</td></tr>
@@ -147,11 +147,11 @@ summary: >-
 <tbody>
 <tr><td>Nullfähiges StructArray-Feld</td><td>Wird nur in Versionen unterstützt, die nullfähige StructArrays und nullfähige Vektor-Arrays unterstützen.</td></tr>
 <tr><td>Null-Wert in Python</td><td>Verwenden Sie „ <code translate="no">None</code> “, um einen Null-Wert in ein StructArray in Python einzufügen. Verwenden Sie nicht „ <code translate="no">Null</code> “ oder „ <code translate="no">null</code> “.</td></tr>
-<tr><td>Gültigkeitsbereich von „null“</td><td>„Null“ gilt für das gesamte StructArray-Feld. Beispielsweise ist „ <code translate="no">chunks=None</code> “ nur dann gültig, wenn „ <code translate="no">chunks</code> “ nullfähig ist.</td></tr>
+<tr><td>Gültigkeitsbereich von „null“</td><td>„Null“ gilt für das gesamte StructArray-Feld. Beispielsweise ist „ <code translate="no">chunks=None</code> “ nur gültig, wenn „ <code translate="no">chunks</code> “ nullfähig ist.</td></tr>
 <tr><td>Teilweise null-fähige StructArray-Werte</td><td>Wenn ein StructArray-Feld einen gültigen Array-Wert enthält, dürfen Sie in demselben Wert keine null-Subfeld-Arrays mit gültigen Subfeld-Arrays mischen.</td></tr>
-<tr><td>Dynamisches Hinzufügen eines StructArray-Feldes</td><td>Das Hinzufügen eines StructArray-Feldes zu einer bestehenden Sammlung wird nur in Versionen unterstützt, die die dynamische Unterstützung von StructArray-Feldern enthalten.</td></tr>
+<tr><td>Dynamisches Hinzufügen eines StructArray-Feldes</td><td>Das Hinzufügen eines StructArray-Feldes zu einer bestehenden Sammlung wird nur in Versionen unterstützt, die die dynamische Unterstützung für StructArray-Felder enthalten.</td></tr>
 <tr><td>Null-Anforderung für dynamisches Hinzufügen</td><td>Ein StructArray-Feld, das einer bestehenden Sammlung hinzugefügt wird, muss nullfähig sein, da bestehende Entitäten noch keinen Wert für das neue Feld haben.</td></tr>
-<tr><td>Vorhandene Entitäten nach dem dynamischen Hinzufügen</td><td>Bestehende Entitäten geben für das hinzugefügte StructArray-Feld in allen seinen Unterfeldern den Wert „ <code translate="no">null</code> “ zurück.</td></tr>
+<tr><td>Vorhandene Entitäten nach dem dynamischen Hinzufügen</td><td>Bestehende Entitäten geben für das hinzugefügte StructArray-Feld und dessen Unterfelder den Wert „ <code translate="no">null</code> “ zurück.</td></tr>
 </tbody>
 </table>
 <p>In Milvus v3.0.x sind nullfähige „StructArray“-Felder, nullfähige Vektor-Arrays und das dynamische Hinzufügen von „StructArray“-Feldern verfügbar.</p>
@@ -255,7 +255,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die skalare Filterung von StructArray wird durch StructArray-Operatoren wie „ <code translate="no">element_filter</code> “ und die „ <code translate="no">MATCH_*</code> “-Familie abgewickelt. Die detaillierte Matrix zur Prädikatsunterstützung ist unter <a href="/docs/de/struct-array-operators.md">„StructArray-Operatoren“</a> zu finden.</p>
+    </button></h2><p>Die skalare Filterung von StructArray wird durch StructArray-Operatoren wie „ <code translate="no">element_filter</code> “ und die „ <code translate="no">MATCH_*</code> “-Familie abgewickelt. Die detaillierte Matrix zur Prädikatunterstützung ist unter <a href="/docs/de/struct-array-operators.md">„StructArray-Operatoren“</a> zu finden.</p>
 <p>Allgemein gilt:</p>
 <ul>
 <li><p>Verwenden Sie „ <code translate="no">$[subfield]</code> “ ausschließlich innerhalb von StructArray-Operatoren.</p></li>

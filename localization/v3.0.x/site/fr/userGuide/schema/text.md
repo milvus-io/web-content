@@ -23,15 +23,19 @@ beta: Milvus 3.0.x
       </svg>
     </button></h1><p>Dans les applications de recherche basées sur l’IA, la recherche vectorielle permet de trouver des entités sémantiquement similaires, mais l’application a souvent également besoin du texte source original correspondant à chaque résultat. Un modèle de langage à grande échelle (LLM) ou un agent peut utiliser ce texte comme contexte pour lire, citer, résumer ou inclure le résultat dans une invite.</p>
 <p>Milvus fournit le type de champ scalaire « <code translate="no">TEXT</code> » pour stocker directement de longs textes sources avec les entités. Les valeurs typiques comprennent des passages, des documents longs, le corps d’articles, des tickets et des journaux. Contrairement à « <code translate="no">VARCHAR</code> », qui nécessite une longueur maximale fixe ( <code translate="no">max_length</code>), « <code translate="no">TEXT</code> » ne vous oblige pas à définir une longueur maximale en octets dans le schéma de la collection.</p>
-<p>Pour définir un champ de type « <code translate="no">TEXT</code> », définissez ` <code translate="no">datatype</code> ` sur ` <code translate="no">DataType.TEXT</code>`.</p>
+<p>Pour définir un champ « <code translate="no">TEXT</code> », définissez « <code translate="no">datatype</code> » sur « <code translate="no">DataType.TEXT</code> ».</p>
+<div class="alert note">
+<p>Cette fonctionnalité nécessite Storage V3. Pour obtenir des instructions d’activation et connaître les considérations de compatibilité, consultez la section <a href="/docs/fr/storage-v3.md">Storage V3</a>.</p>
+</div>
+<p>Milvus rejette tout schéma de collection contenant un champ de type « <code translate="no">TEXT</code> » lorsque Storage V3 est désactivé.</p>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;content&quot;</span>,
 <span class="highlighted-wrapper-line">    datatype=DataType.TEXT,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Une fois le champ défini, chaque entité peut inclure une valeur de type chaîne dans ce champ. Vous insérez les valeurs de type « <code translate="no">TEXT</code> » comme pour les autres champs scalaires et vous les récupérez dans les résultats de requête ou de recherche en répertoriant le champ dans « <code translate="no">output_fields</code> ».</p>
+<p>Une fois le champ défini, chaque entité peut inclure une valeur de type chaîne dans ce champ. Vous insérez les valeurs « <code translate="no">TEXT</code> » comme pour les autres champs scalaires et les récupérez dans les résultats de requête ou de recherche en listant le champ dans « <code translate="no">output_fields</code> ».</p>
 <div class="alert note">
-<p><code translate="no">TEXT</code> Les champs prennent en charge les valeurs nulles. Pour activer cette fonctionnalité, définissez <code translate="no">nullable</code> sur <code translate="no">True</code>. Pour plus de détails, reportez-vous à la section « <a href="/docs/fr/nullable-and-default.md">Champ pouvant prendre la valeur nulle</a> ».</p>
+<p><code translate="no">TEXT</code> Les champs prennent en charge les valeurs nulles. Pour activer cette fonctionnalité, définissez « <code translate="no">nullable</code> » sur « <code translate="no">True</code> ». Pour plus de détails, reportez-vous à la section « <a href="/docs/fr/nullable-and-default.md">Champ pouvant prendre la valeur nulle</a> ».</p>
 </div>
 <h2 id="Limits" class="common-anchor-header">Restrictions<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -101,7 +105,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><p><details></p>
-<p><summary>Développez pour découvrir le fonctionnement</summary></p>
+<p><summary>Développez pour voir comment cela fonctionne</summary></p>
 <p>Lorsque vous insérez une entité, la chaîne que vous fournissez pour un champ « <code translate="no">TEXT</code> » correspond à la valeur « <code translate="no">TEXT</code> ». Milvus compare la taille de cette valeur à <a href="/docs/fr/configure_datanode.md#dataNodetextinlineThreshold">dataNode.text.inlineThreshold</a>, qui est de <code translate="no">65,536</code> octets par défaut, puis choisit l’un des deux chemins de stockage internes.</p>
 <p><span class="img-wrapper">
   
@@ -113,8 +117,8 @@ beta: Milvus 3.0.x
 <li><strong>Stockage en ligne</strong>: si la valeur de ` <code translate="no">TEXT</code> ` est inférieure à ` <code translate="no">dataNode.text.inlineThreshold</code>`, Milvus stocke la valeur textuelle d’origine directement dans les données du champ ` <code translate="no">TEXT</code> `.</li>
 <li><strong>Stockage LOB</strong>: si la valeur d’un champ « <code translate="no">TEXT</code> » est supérieure ou égale à <code translate="no">dataNode.text.inlineThreshold</code>, Milvus traite cette valeur comme un objet volumineux et stocke le texte d’origine séparément dans un système de stockage d’objets, tel que MinIO. Les données du champ « <code translate="no">TEXT</code> » stockent une référence interne vers le texte stocké séparément. Lorsque le champ « <code translate="no">TEXT</code> » est demandé dans les résultats d’une requête ou d’une recherche, Milvus utilise cette référence pour récupérer et renvoyer le texte d’origine.</li>
 </ul>
-<p>Ce choix de stockage est interne. Vous insérez, interrogez et effectuez des recherches sur le champ « <code translate="no">TEXT</code> » de la même manière, quel que soit le chemin de stockage utilisé par Milvus. Pour ajuster le seuil ou le comportement associé en matière de stockage, de compactage et de collecte des déchets, reportez-vous aux <a href="/docs/fr/configure_datanode.md">configurations relatives à dataNode</a> et <a href="/docs/fr/configure_datacoord.md">à celles relatives à dataCoord</a>.</p>
-<p>Si votre déploiement utilise un stockage objet, les valeurs « <code translate="no">TEXT</code> » volumineuses peuvent apparaître sous forme d’objets gérés par Milvus dans des chemins tels que <code translate="no">lobs/...</code>. Ces objets relèvent des détails d’implémentation et ne doivent pas être déplacés, copiés ou supprimés manuellement. Après avoir supprimé des entités, supprimé des partitions ou compacté des données, l’utilisation du stockage d’objets ne diminuera qu’une fois que le ramasse-miettes de Milvus aura supprimé les données de grands objets non référencées, une fois la période de sécurité écoulée.</p>
+<p>Ce choix de stockage est interne. Vous insérez, interrogez et effectuez des recherches dans le champ « <code translate="no">TEXT</code> » de la même manière, quel que soit le chemin de stockage utilisé par Milvus. Pour ajuster le seuil ou le comportement associé en matière de stockage, de compactage et de collecte des données inutiles, reportez-vous aux <a href="/docs/fr/configure_datanode.md">configurations relatives à dataNode</a> et <a href="/docs/fr/configure_datacoord.md">à celles relatives à dataCoord</a>.</p>
+<p>Si votre déploiement utilise un stockage objet, les valeurs « <code translate="no">TEXT</code> » volumineuses peuvent apparaître sous forme d’objets gérés par Milvus sous des chemins tels que <code translate="no">lobs/...</code>. Ces objets relèvent des détails d’implémentation et ne doivent pas être déplacés, copiés ou supprimés manuellement. Après avoir supprimé des entités, supprimé des partitions ou compacté des données, l’utilisation du stockage d’objets ne diminuera qu’une fois que le ramasse-miettes de Milvus aura supprimé les données de grands objets non référencées, une fois la période de sécurité écoulée.</p>
 <p></details></p>
 <p>L’une des utilisations courantes d’ <code translate="no">TEXT</code> est la recherche en texte intégral avec BM25. Dans ce modèle, le champ <code translate="no">TEXT</code> stocke le contenu source d’origine, tandis que BM25 analyse le texte et génère des vecteurs clairsemés pour classer les correspondances basées sur des mots-clés. Les résultats de recherche peuvent alors renvoyer la valeur <code translate="no">TEXT</code> correspondante comme contexte pour les workflows LLM ou d’agents. L’exemple suivant montre comment utiliser un champ « <code translate="no">TEXT</code> » comme champ d’entrée pour BM25. Pour en savoir plus sur les concepts de la recherche en texte intégral et les options de requête, consultez la section <a href="/docs/fr/full-text-search.md">Recherche en texte intégral</a>.</p>
 <h2 id="Step-1-Create-a-collection-with-a-TEXT-field" class="common-anchor-header">Étape 1 : Créer une collection avec un champ TEXT<button data-href="#Step-1-Create-a-collection-with-a-TEXT-field" class="anchor-icon" translate="no">
@@ -242,7 +246,7 @@ client.load_collection(collection_name=COLLECTION_NAME)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilisez le texte brut de la requête comme données de recherche et effectuez la recherche sur le champ de vecteur creux. Milvus convertit le texte de la requête en vecteur creux, classe les résultats à l’aide de BM25 et renvoie le champ « <code translate="no">TEXT</code> » demandé dans « <code translate="no">output_fields</code> ».</p>
+    </button></h2><p>Utilisez le texte brut de la requête comme données de recherche et effectuez la recherche sur le champ de vecteur creux. Milvus convertit le texte de la requête en un vecteur creux, classe les résultats à l’aide de BM25 et renvoie le champ « <code translate="no">TEXT</code> » demandé dans « <code translate="no">output_fields</code> ».</p>
 <pre><code translate="no" class="language-python">results = client.search(
     collection_name=COLLECTION_NAME,
 <span class="highlighted-comment-line">    data=[<span class="hljs-string">&quot;how does Milvus store source text for retrieval&quot;</span>],</span>

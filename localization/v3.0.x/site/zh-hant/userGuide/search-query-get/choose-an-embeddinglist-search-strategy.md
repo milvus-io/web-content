@@ -112,13 +112,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">muvera</code> 透過隨機投影，將每個嵌入清單編碼為固定維度的向量。這將第一階段檢索轉變為標準的行級向量搜尋。隨後使用 MaxSim 對候選結果進行重新排序。</p>
+    </button></h2><p><code translate="no">muvera</code> 透過隨機投影，將每個嵌入清單編碼為固定維度的向量。這將第一階段檢索轉化為標準的行級向量搜尋。隨後使用 MaxSim 對候選結果進行重新排序。</p>
 <div class="alert note">
 <p><strong>當 TokenANN 過於耗資源，但您又不希望進行訓練步驟時，請使用 MUVERA。</strong>這是品質與成本之間務實的折衷方案。</p>
 </div>
 <ul>
 <li><p><strong>適用情境：</strong>長篇文本文件、高辨別力的嵌入空間，以及需要比 TokenANN 更小索引大小的作業負載。</p></li>
-<li><p><strong>較不適用：</strong>低辨別力的嵌入空間，或當 FDE 表示法因維度過高而超出延遲預算的情況。</p></li>
+<li><p><strong>較不適用：</strong>低辨別力的嵌入空間，或當 FDE 表示法因維度過高而超出延遲預算的情境。</p></li>
 <li><p><strong>重要參數：</strong><code translate="no">muvera_num_projections</code> 、<code translate="no">muvera_num_repeats</code> 以及<code translate="no">muvera_seed</code> 。</p></li>
 </ul>
 <h2 id="LEMUR" class="common-anchor-header">LEMUR<button data-href="#LEMUR" class="anchor-icon" translate="no">
@@ -136,9 +136,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">lemur</code> 透過訓練模型，將每個嵌入清單壓縮為固定維度的表示。第一階段的 ANN 搜尋會針對已學習的行級向量進行，並使用 MaxSim 對候選結果進行重新排序。</p>
+    </button></h2><p><code translate="no">lemur</code> 透過訓練模型，將每個嵌入清單壓縮為固定維度的表示。第一階段的 ANN 搜尋會針對已學習的列級向量進行，並使用 MaxSim 對候選結果進行重新排序。</p>
 <div class="alert note">
-<p><strong>當學習壓縮的效益足以抵銷訓練成本時，建議使用 LEMUR。</strong>它對於低辨別度嵌入空間和多模態檢索效果良好，但應針對目標語料庫進行驗證，因為其效果可能受文件長度分佈的影響。</p>
+<p><strong>當學習壓縮的效益足以抵銷訓練成本時，建議使用 LEMUR。</strong>它對於低區分度嵌入空間和多模態檢索效果良好，但應針對目標語料庫進行驗證，因為其效果可能受文件長度分佈的影響。</p>
 </div>
 <ul>
 <li><p><strong>適用情境：</strong>視覺文件檢索、多模態片段嵌入、低區分度嵌入空間，以及 TokenANN 難以實行的龐大嵌入清單。</p></li>
@@ -274,7 +274,7 @@ index_params.add_index(
       <span class="hljs-attr">emb_list_rerank:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>建議優先使用「按索引」的參數來選擇策略。</strong>Milvus 配置檔中的預設值會廣泛套用至該類型與階段的所有索引。當不同集合或欄位需要不同的 EmbeddingList 策略時，請使用<code translate="no">create_index</code> 中的參數。</p>
+<p><strong>建議優先使用「按索引設定」的參數來選擇策略。</strong>Milvus 配置檔中的預設值會廣泛套用至該類型與階段的所有索引。當不同集合或欄位需要不同的 EmbeddingList 策略時，請使用<code translate="no">create_index</code> 中的參數。</p>
 </div>
 <h2 id="Configure-Candidate-Retrieval-at-Search-Time" class="common-anchor-header">於搜尋時配置候選結果檢索<button data-href="#Configure-Candidate-Retrieval-at-Search-Time" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -291,7 +291,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>策略決定索引的建置方式。在搜尋時，請使用<code translate="no">retrieval_ann_ratio</code> 來控制在進行 MaxSim 重新排序之前，應檢索多少個第一階段候選結果。較高的數值通常能提升召回率，但會增加延遲。</p>
+    </button></h2><p>策略決定索引的建置方式。在搜尋時，請使用<code translate="no">retrieval_ann_ratio</code> 來控制在進行 MaxSim 重新排序之前，會檢索多少個第一階段候選結果。較高的數值通常能提升召回率，但會增加延遲。</p>
 <pre><code translate="no" class="language-python">results = client.search(
     collection_name=collection_name,
     data=[query_embedding_list],
@@ -369,7 +369,7 @@ index_params.add_index(
     </button></h2><ol>
 <li><p>當資料集大小允許時，請以<code translate="no">tokenann</code> 作為品質基準。</p></li>
 <li><p>使用<code translate="no">muvera</code> 執行相同的查詢，並比較召回率、nDCG、延遲及索引大小。</p></li>
-<li><p>當嵌入清單龐大、嵌入空間雜訊較多，或工作負載屬視覺或多模態性質時，請嘗試使用<code translate="no">lemur</code> 。</p></li>
+<li><p>當嵌入清單龐大、嵌入空間雜訊較多，或工作負載屬視覺或多模態時，請嘗試使用<code translate="no">lemur</code> 。</p></li>
 <li><p>在調整過多建置時參數之前，請先微調 `<code translate="no">retrieval_ann_ratio</code> `。若召回率偏低，請增加該參數；若延遲過高，則應減少該參數。</p></li>
 <li><p>務必使用具代表性的查詢及文件長度分佈進行驗證。適用於短文本的策略，未必適用於視覺文件或長尾語料庫。</p></li>
 </ol>

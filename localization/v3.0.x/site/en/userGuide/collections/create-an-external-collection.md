@@ -24,6 +24,9 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h1><p>An external collection is a type of data collection in Milvus that accesses data from external storage systems or database tables such as AWS S3 and Iceberg without copying it into Milvus. It acts as a query layer over data lakes while maintaining compatibility with Milvus query interfaces.</p>
+<div class="alert note">
+<p>This feature requires Storage V3. For enablement instructions and compatibility considerations, see <a href="/docs/storage-v3.md">Storage V3</a>.</p>
+</div>
 <h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

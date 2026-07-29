@@ -52,7 +52,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Utilisez le regroupement lorsque la recherche au niveau des éléments non regroupés renvoie trop d’entités parentes en double. Si vous souhaitez que chaque élément Struct correspondant soit considéré comme un résultat individuel, utilisez <a href="/docs/fr/basic-vector-search-with-structarray.md">la recherche vectorielle de base avec StructArray</a> sans l’option « <code translate="no">group_by_field</code> ».</p>
+<p>Utilisez le regroupement lorsque la recherche au niveau des éléments non regroupée renvoie trop d’entités parentes en double. Si vous souhaitez que chaque élément Struct correspondant soit considéré comme un résultat individuel, utilisez <a href="/docs/fr/basic-vector-search-with-structarray.md">la recherche vectorielle de base avec StructArray</a> sans l’option « <code translate="no">group_by_field</code> ».</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">Avant de commencer<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -132,7 +132,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>Sans regroupement, le même <code translate="no">doc_id</code> peut apparaître plusieurs fois si plusieurs blocs correspondent à la requête. Avec <code translate="no">group_by_field=&quot;doc_id&quot;</code>, chaque entité parente n’apparaît qu’une seule fois au maximum. Le regroupement préserve les métadonnées au niveau des éléments ; ainsi, le résultat regroupé peut toujours inclure l’index ou le décalage de l’élément Struct sélectionné lorsque l’API ou le SDK l’expose.</p>
+<p>Sans regroupement, le même <code translate="no">doc_id</code> peut apparaître plusieurs fois si plusieurs blocs correspondent à la requête. Avec <code translate="no">group_by_field=&quot;doc_id&quot;</code>, chaque entité parente n'apparaît qu'une seule fois au maximum. Le regroupement préserve les métadonnées au niveau des éléments ; ainsi, le résultat regroupé peut toujours inclure l'index ou le décalage de l'élément Struct sélectionné lorsque l'API ou le SDK l'expose.</p>
 <h2 id="Add-scalar-filters" class="common-anchor-header">Ajouter des filtres scalaires<button data-href="#Add-scalar-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -221,7 +221,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Dans cet exemple, les deux sous-requêtes ciblent des champs vectoriels au niveau des éléments appartenant au même champ StructArray, <code translate="no">chunks</code>. Une recherche hybride ne prend pas en charge le regroupement au niveau des éléments si elle mélange des champs vectoriels normaux, différents champs StructArray ou des requêtes au niveau de la liste d’intégration (EmbeddingList).</p>
+<p>Dans cet exemple, les deux sous-requêtes ciblent des champs vectoriels au niveau des éléments appartenant au même champ StructArray, <code translate="no">chunks</code>. Une recherche hybride ne prend pas en charge le regroupement au niveau des éléments si elle mélange des champs vectoriels normaux, différents champs StructArray ou des requêtes au niveau de la liste d’embedding.</p>
 <h2 id="Interpret-grouped-results" class="common-anchor-header">Interpréter les résultats regroupés<button data-href="#Interpret-grouped-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -267,7 +267,7 @@ results = client.hybrid_search(
     </button></h2><ul>
 <li><p>La recherche par regroupement s’applique uniquement à la recherche vectorielle StructArray au niveau des éléments. La recherche EmbeddingList et la recherche hybride au niveau EmbeddingList ne prennent pas en charge le regroupement.</p></li>
 <li><p>Utilisez la clé primaire comme « <code translate="no">group_by_field</code> ». Le regroupement au niveau des éléments StructArray n'est pas un regroupement polyvalent sur des champs scalaires arbitraires.</p></li>
-<li><p>Ne combinez pas la recherche groupée avec la recherche par plage.</p></li>
+<li><p>Ne combinez pas la recherche avec regroupement et la recherche par plage.</p></li>
 <li><p>N’utilisez pas de requête « <code translate="no">EmbeddingList</code> » ni de métrique « <code translate="no">MAX_SIM*</code> » pour la recherche groupée.</p></li>
 <li><p>Le regroupement hybride n’est pris en charge que lorsque toutes les sous-recherches ciblent des champs vectoriels au niveau des éléments appartenant au même champ StructArray.</p></li>
 <li><p>Le regroupement hybride n’est pas pris en charge lorsque la recherche hybride mélange un champ vectoriel normal, un autre champ StructArray ou une requête au niveau EmbeddingList.</p></li>

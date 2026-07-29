@@ -36,7 +36,7 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Per il testo in arabo, l’analizzatore integrato <a href="/docs/it/arabic-analyzer.md"><code translate="no">arabic</code></a> include già il filtro " <code translate="no">decimaldigit</code> ". Utilizzare direttamente " <code translate="no">decimaldigit</code> " quando è necessaria la normalizzazione delle cifre in una pipeline di analizzatori personalizzata.</p>
+<p>Per il testo in arabo, l'analizzatore integrato <a href="/docs/it/arabic-analyzer.md"><code translate="no">arabic</code></a> include già il filtro " <code translate="no">decimaldigit</code> ". Utilizzare direttamente " <code translate="no">decimaldigit</code> " quando è necessaria la normalizzazione delle cifre in una pipeline di analizzatori personalizzata.</p>
 </div>
 <p>Per utilizzare il filtro " <code translate="no">decimaldigit</code> " in un analizzatore personalizzato, aggiungerlo alla sezione " <code translate="no">filter</code> " in <code translate="no">analyzer_params</code>:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {

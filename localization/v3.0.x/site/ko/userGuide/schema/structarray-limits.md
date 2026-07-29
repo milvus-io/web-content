@@ -45,12 +45,12 @@ summary: >-
 <tr><td>스키마 구조</td><td>Struct는 Array 필드의 요소 유형으로만 사용할 수 있습니다. Struct는 최상위 컬렉션 필드로 지원되지 않습니다.</td></tr>
 <tr><td>하위 필드 스키마</td><td>동일한 StructArray 필드 내의 모든 Struct 요소는 하나의 미리 정의된 Struct 스키마를 공유합니다.</td></tr>
 <tr><td>용량</td><td><code translate="no">max_capacity</code> 는 필수 항목이며, 하나의 엔티티가 StructArray 필드에 저장할 수 있는 Struct 요소의 수를 제한합니다.</td></tr>
-<tr><td>하위 필드 변경</td><td>StructArray 필드가 생성된 후에는 기존 StructArray 필드에 하위 필드를 추가할 수 없습니다.</td></tr>
+<tr><td>하위 필드 변경</td><td>StructArray 필드가 생성된 후에는 해당 기존 StructArray 필드에 하위 필드를 추가할 수 없습니다.</td></tr>
 <tr><td>하위 필드 경로인덱스, 검색 대상, 출력 필드 및 필터에는 xml-ph-0001@deepl.internal와 같은 xml-ph-0000@deepl.internal 경로를 사용하십시오.</td><td>인덱스, 검색 대상, 출력 필드 및 필터에는 <code translate="no">chunks[emb]</code> 와 같은 <code translate="no">structArray[subfield]</code> 경로를 사용하십시오. <code translate="no">chunks.emb</code> 는 사용하지 마십시오.</td></tr>
 <tr><td>삽입 형상</td><td>StructArray 필드를 객체 배열로 삽입하십시오. 삽입 페이로드 내부에서는 경로 구문을 사용하지 마십시오.</td></tr>
 <tr><td>벡터 인덱스</td><td>벡터 필드 또는 벡터 하위 필드는 하나의 인덱스만 허용합니다. EmbeddingList 검색과 요소 수준 검색에는 별도의 벡터 하위 필드를 사용하십시오.</td></tr>
 <tr><td>함수</td><td>StructArray 필드 내부의 필드나 하위 필드에서는 필드 함수가 지원되지 않습니다.</td></tr>
-<tr><td>Nullable 필드</td><td>Nullable StructArray 필드는 버전 제한이 있습니다. 지원되는 경우, null은 개별 Struct 요소가 아닌 전체 StructArray 필드에 적용됩니다.</td></tr>
+<tr><td>Nullable 필드</td><td>Nullable StructArray 필드는 버전 제한이 있습니다. 지원되는 경우, null은 개별 Struct 요소에 독립적으로 적용되는 것이 아니라 전체 StructArray 필드에 적용됩니다.</td></tr>
 <tr><td>동적 필드 추가</td><td>기존 컬렉션에 StructArray 필드를 추가하는 기능은 버전에 따라 지원 여부가 다르며, 추가되는 필드는 null 허용형이어야 합니다.</td></tr>
 </tbody>
 </table>
@@ -112,7 +112,7 @@ summary: >-
 <tr><td><code translate="no">ArrayOfVector</code></td><td>지원됨</td><td>서브 필드를 <code translate="no">DataType.FLOAT16_VECTOR</code> 로 정의하고 <code translate="no">dim</code> 를 설정하십시오.</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>지원됨</td><td>서브 필드를 <code translate="no">DataType.BFLOAT16_VECTOR</code> 로 정의하고 <code translate="no">dim</code> 를 설정하십시오.</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>지원됨</td><td>서브 필드를 <code translate="no">DataType.INT8_VECTOR</code> 로 정의하고 <code translate="no">dim</code> 를 설정하십시오.</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>지원됨</td><td>서브 필드를 <code translate="no">DataType.BINARY_VECTOR</code> 로 정의하고 <code translate="no">dim</code> 를 설정하십시오.</td></tr>
+<tr><td><code translate="no">ArrayOfVector</code></td><td>지원됨</td><td>서브필드를 <code translate="no">DataType.BINARY_VECTOR</code> 로 정의하고 <code translate="no">dim</code> 를 설정하십시오.</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>지원되지 않음</td><td>StructArray 필드에서는 스파스 벡터 하위 필드가 지원되지 않습니다.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>지원되지 않음</td><td><code translate="no">String</code> 대신 <code translate="no">VARCHAR</code> 을 사용하십시오.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>지원되지 않음</td><td>StructArray 필드에서는 JSON 하위 필드가 지원되지 않습니다.</td></tr>
@@ -148,7 +148,7 @@ summary: >-
 <tr><td>Null 적용 범위</td><td>Null은 StructArray 필드 전체에 적용됩니다. 예를 들어, <code translate="no">chunks=None</code> 는 <code translate="no">chunks</code> 가 nullable일 때만 유효합니다.</td></tr>
 <tr><td>부분적으로 null인 StructArray 값</td><td>StructArray 필드에 유효한 배열 값이 포함된 경우, 동일한 값 내에서 null인 하위 필드 배열과 유효한 하위 필드 배열을 혼합하여 사용해서는 안 됩니다.</td></tr>
 <tr><td>StructArray 필드의 동적 추가</td><td>기존 컬렉션에 StructArray 필드를 추가하는 기능은 동적 StructArray 필드 지원이 포함된 버전에서만 지원됩니다.</td></tr>
-<tr><td>동적 추가에 대한 null 허용 요구 사항</td><td>기존 컬렉션에 추가된 StructArray 필드는 기존 엔티티에 새 필드의 값이 없으므로 null 허용 가능해야 합니다.</td></tr>
+<tr><td>동적 추가에 대한 null 허용 요구 사항</td><td>기존 컬렉션에 추가된 StructArray 필드는 기존 엔티티에 새 필드에 대한 값이 없으므로 null 허용 가능해야 합니다.</td></tr>
 <tr><td>동적 추가 후의 기존 엔티티</td><td>기존 엔티티는 추가된 StructArray 필드의 모든 하위 필드에 대해 ` <code translate="no">null</code> `를 반환합니다.</td></tr>
 </tbody>
 </table>
@@ -208,7 +208,7 @@ summary: >-
 </tbody>
 </table>
 <p>두 모드가 모두 필요한 경우 별도의 벡터 하위 필드를 사용하십시오. 예를 들어, EmbeddingList 검색에는 <code translate="no">chunks[emb_list_vector]</code> 를, 요소 수준 검색에는 <code translate="no">chunks[emb]</code> 를 사용하십시오.</p>
-<p>컬렉션 스키마를 계획할 때 StructArray 벡터 하위 필드는 벡터 하위 필드로 간주됩니다. 벡터 필드와 벡터 하위 필드의 총 개수가 대상 버전 및 서비스 계층의 제한 범위 내에 있도록 유지하십시오.</p>
+<p>컬렉션 스키마를 계획할 때 StructArray 벡터 하위 필드는 벡터 하위 필드로 간주됩니다. 벡터 필드 및 벡터 하위 필드의 총 개수가 대상 버전 및 서비스 계층의 제한 범위 내에 있도록 유지하십시오.</p>
 <p>지원되는 인덱스 유형 및 메트릭 유형 행렬에 대해서는 <a href="/docs/ko/index-structarray-fields.md">‘StructArray 필드 색인’을</a> 참조하십시오.</p>
 <h2 id="Search-limits" class="common-anchor-header">검색 제한<button data-href="#Search-limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -230,10 +230,10 @@ summary: >-
 <tr><th>검색 동작</th><th>지원 및 제한 사항</th></tr>
 </thead>
 <tbody>
-<tr><td>기본 EmbeddingList 검색</td><td><code translate="no">MAX_SIM*</code> 메트릭으로 인덱싱된 StructArray 벡터 하위 필드에서 지원됩니다. 엔티티 수준 결과를 반환합니다.</td></tr>
+<tr><td>기본 EmbeddingList 검색</td><td><code translate="no">MAX_SIM*</code> 메트릭으로 인덱싱된 StructArray 벡터 하위 필드에서 지원됩니다. 엔티티 수준의 결과를 반환합니다.</td></tr>
 <tr><td>기본 요소 수준 검색</td><td>일반 벡터 메트릭으로 인덱싱된 StructArray 벡터 하위 필드에서 지원됩니다. 일치하는 요소의 오프셋을 반환할 수 있습니다.</td></tr>
-<tr><td>범위 검색</td><td>대상 버전의 검색 모드 및 인덱스/메트릭 지원 여부에 따라 지원됩니다. 요소 수준 StructArray 요청에 대한 하이브리드 범위 검색 동작은 대상 버전을 확인하십시오.</td></tr>
-<tr><td>그룹화 검색</td><td>요소 수준 그룹화 검색은 오프셋을 반환할 수 있습니다. 요소 수준 StructArray 요청에 대한 하이브리드 검색의 그룹화 동작은 버전에 따라 다릅니다.</td></tr>
+<tr><td>범위 검색</td><td>대상 버전의 검색 모드 및 인덱스/메트릭 지원 여부에 따라 지원됩니다. 요소 수준 StructArray 요청에 대한 하이브리드 범위 검색 동작 여부는 대상 버전을 확인하십시오.</td></tr>
+<tr><td>그룹화 검색</td><td>요소 수준 그룹화 검색은 오프셋을 반환할 수 있습니다. 요소 수준 StructArray 요청에 대한 하이브리드 검색의 그룹화 동작은 버전에 따라 달라집니다.</td></tr>
 <tr><td>하이브리드 검색</td><td>하이브리드 검색 요청은 대상 버전이 해당 검색 조합을 지원하는 경우에만 StructArray 벡터 하위 필드 요청을 포함할 수 있습니다. 각 요청은 여전히 인덱싱된 벡터 하위 필드의 메트릭 패밀리를 따릅니다.</td></tr>
 <tr><td>오프셋 출력</td><td>오프셋은 요소 수준 검색 결과에 사용할 수 있습니다. EmbeddingList 검색은 엔티티 수준 결과를 반환하며, 요소 오프셋을 주요 결과 단위로 사용하지 않습니다.</td></tr>
 </tbody>
@@ -259,8 +259,8 @@ summary: >-
 <li><p><code translate="no">$[subfield]</code> 는 StructArray 연산자 내부에서만 사용하십시오.</p></li>
 <li><p>스칼라 술어에는 스칼라 하위 필드를 사용하십시오.</p></li>
 <li><p><code translate="no">$[...]</code> 스칼라 술어 입력으로 벡터 하위 필드를 사용하지 마십시오.</p></li>
-<li><p>JSON 경로 구문, JSON 함수, 배열 컨테이너 함수, 텍스트 일치 함수, 기하/GIS 함수 및 Timestamptz 표현식은 StructArray 요소 수준 술어에서 지원되지 않습니다.</p></li>
-<li><p>단순한 부울 표현식 대신 <code translate="no">$[has_code] == true</code> 와 같은 명시적인 부울 비교를 우선적으로 사용하십시오.</p></li>
+<li><p>JSON 경로 구문, JSON 함수, 배열 컨테이너 함수, 텍스트 일치 함수, 기하/GIS 함수 및 Timestamptz 표현식은 StructArray 요소 수준 조건식에서 지원되지 않습니다.</p></li>
+<li><p>단순한 부울 표현식 대신 <code translate="no">$[has_code] == true</code> 와 같은 명시적인 부울 비교를 사용하는 것이 좋습니다.</p></li>
 </ul>
 <h2 id="Related-pages" class="common-anchor-header">관련 페이지<button data-href="#Related-pages" class="anchor-icon" translate="no">
       <svg translate="no"

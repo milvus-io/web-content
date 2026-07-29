@@ -38,7 +38,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Milvus unterstützt Textvektorisierungsmodelle von Yandex Cloud AI Studio über den Anbieter „ <code translate="no">yc</code> “. Legen Sie in den Funktionsparametern unter „ <code translate="no">model_name</code> “ die URI des Yandex Cloud-Modells fest, das Milvus aufrufen soll.</p>
-<p>Beispielsweise verwenden „Yandex Text Embeddings“ für Dokumente eine Modell-URI wie <code translate="no">emb://&lt;folder_ID&gt;/text-search-doc/latest</code> und geben 256-dimensionale Vektoren zurück. Informationen zu verfügbaren Modell-URIs und Dimensionen finden Sie unter <a href="https://aistudio.yandex.ru/docs/en/ai-studio/concepts/embeddings">Textvektorisierungsmodelle</a>.</p>
+<p>Beispielsweise verwenden „Yandex Text Embeddings“ für Dokumente eine Modell-URI wie <code translate="no">emb://&lt;folder_ID&gt;/text-search-doc/latest</code> und geben 256-dimensionale Vektoren zurück. Informationen zu verfügbaren Modell-URIs und Dimensionen finden Sie unter <a href="https://aistudio.yandex.ru/docs/en/ai-studio/concepts/embeddings">„Textvektorisierungsmodelle</a>“.</p>
 <h2 id="Configure-credentials" class="common-anchor-header">Anmeldedaten konfigurieren<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

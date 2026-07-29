@@ -2,7 +2,9 @@
 id: hybrid-search-with-structarray.md
 title: StructArray を使用したハイブリッド検索
 summary: >-
-  このページを使用すると、StructArrayベクトル検索と他のベクトル検索を組み合わせて、1つのハイブリッド検索リクエストとして実行できます。StructArrayハイブリッド検索では、組み合わせるAnnSearchRequestオブジェクトに応じて、エンティティレベルの結果または要素レベルの結果のいずれかを生成できます。
+  このページを使用すると、StructArray
+  ベクトル検索と他のベクトル検索を組み合わせて、1つのハイブリッド検索リクエストとして実行できます。StructArray ハイブリッド検索では、組み合わせる
+  AnnSearchRequest オブジェクトに応じて、エンティティレベルの結果または要素レベルの結果のいずれかを生成できます。
 ---
 <h1 id="Hybrid-Search-with-StructArray" class="common-anchor-header">StructArray を使用したハイブリッド検索<button data-href="#Hybrid-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -49,7 +51,7 @@ summary: >-
 </table>
 <div class="alert note">
 <p>警告</p>
-<p><code translate="no">element_scope</code> は、異なる構造体間の要素レベルのハイブリッド検索において、StructArray 要素レベルの<code translate="no">AnnSearchRequest</code> オブジェクトの折りたたみを設定する場合にのみ使用してください。EmbeddingList リクエスト、コレクションレベルのベクトルリクエスト、または同一 StructArray 要素レベルのハイブリッド検索には使用しないでください。</p>
+<p><code translate="no">element_scope</code> は、異なる構造体（non-same-struct）の要素レベルのハイブリッド検索において、StructArray 要素レベルの<code translate="no">AnnSearchRequest</code> オブジェクトの折りたたみを設定する場合にのみ使用してください。EmbeddingList リクエスト、コレクションレベルのベクトルリクエスト、または同一 StructArray 要素レベルのハイブリッド検索には使用しないでください。</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">開始する前に<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -190,7 +192,7 @@ results = client.hybrid_search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>両方の<code translate="no">AnnSearchRequest</code> オブジェクトは、<code translate="no">chunks</code> 配下のベクトルサブフィールドを検索します。同じ0ベースのオフセットは同じStruct要素を指すため、ハイブリッド再ランク付け機能は要素候補を直接ランク付けできます。このモードではエンティティレベルの集約が行われないため、<code translate="no">element_scope</code> を設定しないでください。</p>
+<p>両方の<code translate="no">AnnSearchRequest</code> オブジェクトは、<code translate="no">chunks</code> 配下のベクトルサブフィールドを検索します。同じ0を基点とするオフセットは同じStruct要素を指すため、ハイブリッド再ランク付け機能は要素レベルの候補を直接ランク付けできます。このモードではエンティティレベルの集約が行われないため、<code translate="no">element_scope</code> を設定しないでください。</p>
 <h2 id="Collapse-element-level-hits-for-entity-level-hybrid-search" class="common-anchor-header">エンティティレベルのハイブリッド検索における要素レベルのヒットの集約<button data-href="#Collapse-element-level-hits-for-entity-level-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -206,7 +208,7 @@ results = client.hybrid_search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ハイブリッド検索において、StructArrayの要素レベルの<code translate="no">AnnSearchRequest</code> が、コレクションレベルのベクトルリクエスト、EmbeddingListリクエスト、または別のStructArrayフィールド下の要素レベルのリクエストと組み合わされる場合、最終的な候補の範囲はエンティティレベルとなります。この場合、ハイブリッド再ランク付けの前に、各StructArray要素レベルの<code translate="no">AnnSearchRequest</code> はエンティティレベルの候補に集約されます。</p>
+    </button></h2><p>ハイブリッド検索において、StructArrayの要素レベルの<code translate="no">AnnSearchRequest</code> が、コレクションレベルのベクトルリクエスト、EmbeddingListリクエスト、または別のStructArrayフィールド下の要素レベルのリクエストと組み合わされる場合、最終的な候補範囲はエンティティレベルとなります。この場合、ハイブリッド再ランク付けの前に、各StructArray要素レベルの<code translate="no">AnnSearchRequest</code> はエンティティレベルの候補に集約されます。</p>
 <p>同一エンティティからの複数の一致要素をどのように集約するかを制御する必要がある場合は、StructArray要素レベルの<code translate="no">AnnSearchRequest</code> の<code translate="no">params</code> 内で<code translate="no">element_scope</code> を使用してください。</p>
 <pre><code translate="no">title_req = AnnSearchRequest(
     data=[query_vector],
@@ -246,7 +248,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>この例では、<code translate="no">title_req</code> はエンティティレベルであるため、最終的なハイブリッド結果もエンティティレベルとなります。<code translate="no">chunk_req</code> リクエストは、まず<code translate="no">chunks[emb]</code> から要素ヒットを返し、次に同じエンティティからの返された要素を、上位3つの要素スコアの合計を算出することで集約します。エンティティレベルの集約が必要な場合に<code translate="no">element_scope</code> が省略されると、集約戦略はデフォルトで<code translate="no">max</code> になります。</p>
+<p>この例では、<code translate="no">title_req</code> はエンティティレベルであるため、最終的なハイブリッド結果もエンティティレベルになります。<code translate="no">chunk_req</code> リクエストは、まず<code translate="no">chunks[emb]</code> から要素ヒットを返し、次に同じエンティティからの返された要素を、上位3つの要素スコアの合計を算出することで集約します。エンティティレベルの集約が必要な場合に<code translate="no">element_scope</code> が省略されると、集約戦略はデフォルトで<code translate="no">max</code> になります。</p>
 <h2 id="Choose-a-collapse-strategy" class="common-anchor-header">集約戦略の選択<button data-href="#Choose-a-collapse-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -268,9 +270,9 @@ results = client.hybrid_search(
 </thead>
 <tbody>
 <tr><td><code translate="no">max</code></td><td>そのエンティティに対して、返された要素のうち最高のスコアを保持します。</td><td>使用不可。</td><td>サポートされている任意の正規ベクトルメトリック。</td></tr>
-<tr><td><code translate="no">sum</code></td><td>そのエンティティに対して返されたすべての要素のスコアを合計する。</td><td>使用不可。サポートされている任意の正規ベクトルメトリック。そのエンティティに対して返されたすべての要素のスコアを合計する。</td><td><code translate="no">IP</code> や<code translate="no">COSINE</code> など、正の相関を持つメトリクスのみ。</td></tr>
+<tr><td><code translate="no">sum</code></td><td>そのエンティティに対して返されたすべての要素のスコアを合計する。</td><td>使用不可。サポートされている任意の通常のベクトルメトリック。そのエンティティに対して返されたすべての要素のスコアを合計する。</td><td><code translate="no">IP</code> や<code translate="no">COSINE</code> など、正の相関を持つメトリクスのみ。</td></tr>
 <tr><td><code translate="no">avg</code></td><td>そのエンティティについて、返されたすべての要素スコアの平均を算出します。</td><td>使用不可。</td><td>サポートされている任意の正規ベクトルメトリック。</td></tr>
-<tr><td><code translate="no">topk_sum</code></td><td>そのエンティティに対して返された要素スコアのうち、<code translate="no">K</code> で最高となったものを合計します。</td><td>必須であり、正の値でなければなりません。</td><td><code translate="no">IP</code> や<code translate="no">COSINE</code> など、正の相関を持つメトリクスのみ。</td></tr>
+<tr><td><code translate="no">topk_sum</code></td><td>そのエンティティに対して返された要素スコアのうち、<code translate="no">K</code> で算出された最高スコアを合計します。</td><td>必須であり、正の値でなければなりません。</td><td><code translate="no">IP</code> や<code translate="no">COSINE</code> など、正の相関を持つメトリクスのみ。</td></tr>
 <tr><td><code translate="no">topk_avg</code></td><td>そのエンティティに対して返された<code translate="no">K</code> の要素スコアのうち、最も高いものの平均を算出します。</td><td>必須であり、正の値でなければなりません。xml-ph-0000@deepl.internal や xml-ph-0001@deepl.internal など、正の相関メトリクスのみ。そのエンティティに対して返された xml-ph-0000@deepl.internal の最高要素スコアの平均を算出します。</td><td>サポートされている任意の正規ベクトルメトリック。</td></tr>
 </tbody>
 </table>
@@ -290,8 +292,8 @@ results = client.hybrid_search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>スカラー条件を、ベクトル検索に参加する同じStruct要素に適用する必要がある場合は、StructArray要素レベルの<code translate="no">AnnSearchRequest</code> に<code translate="no">element_filter</code> を添付できます。また、親エンティティの条件については、<code translate="no">hybrid_search()</code> に対してトップレベルの<code translate="no">filter</code> を使用することもできます。</p>
-<p>StructArrayの要素レベルのベクトルフィールドは、ハイブリッド検索における範囲検索をサポートしています。要素レベルの<code translate="no">AnnSearchRequest</code> に<code translate="no">radius</code> を追加し、必要に応じて<code translate="no">range_filter</code> を追加してください。EmbeddingListレベルのStructArrayリクエストは範囲検索をサポートしていません。</p>
+    </button></h2><p>スカラー条件を、ベクトル検索に参加する同じStruct要素に適用する必要がある場合は、StructArray要素レベルの`<code translate="no">AnnSearchRequest</code> `に`<code translate="no">element_filter</code> `を添付できます。また、親エンティティの条件については、<code translate="no">hybrid_search()</code> に対してトップレベルの`<code translate="no">filter</code> `を使用することもできます。</p>
+<p>StructArrayの要素レベルのベクトルフィールドは、ハイブリッド検索における範囲検索をサポートしています。要素レベルの<code translate="no">AnnSearchRequest</code> に<code translate="no">radius</code> を追加し、必要に応じて<code translate="no">range_filter</code> を追加してください。EmbeddingListレベルのStructArrayリクエストは、範囲検索をサポートしていません。</p>
 <p>要素レベルのハイブリッドグループ化は、すべての<code translate="no">AnnSearchRequest</code> オブジェクトが同一のStructArrayフィールド下の要素レベルのベクトルフィールドを対象としている場合にのみサポートされ、<code translate="no">group_by_field</code> は主キーでなければなりません。リクエストにコレクションレベルのベクトルフィールド、異なるStructArrayフィールド、またはEmbeddingListレベルのリクエストが混在している場合、ハイブリッドグループ化はサポートされません。範囲検索とグループ化を組み合わせて使用しないでください。</p>
 <h2 id="Interpret-hybrid-results" class="common-anchor-header">ハイブリッド結果の解釈<button data-href="#Interpret-hybrid-results" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -314,7 +316,7 @@ results = client.hybrid_search(
 </thead>
 <tbody>
 <tr><td>エンティティレベル</td><td>主キー。</td><td>最終結果に要素オフセットは含まれません。</td><td>ハイブリッドリクエストには、コレクションレベルのベクトルフィールド、EmbeddingList リクエスト、または異なる StructArray フィールドの下にある要素レベルのリクエストが含まれています。</td></tr>
-<tr><td>要素レベル</td><td>主キーに加え、親の StructArray フィールドと要素オフセット。</td><td>選択された要素オフセットは、API または SDK によって公開されている場合、返されることがあります。</td><td>すべての<code translate="no">AnnSearchRequest</code> オブジェクトは要素レベルであり、同じStructArrayフィールドの下にあります。</td></tr>
+<tr><td>要素レベル</td><td>主キー、親の StructArray フィールド、および要素オフセット。</td><td>選択された要素オフセットは、API または SDK によって公開されている場合、返されることがあります。</td><td>すべての<code translate="no">AnnSearchRequest</code> オブジェクトは要素レベルであり、同じStructArrayフィールドの下にあります。</td></tr>
 </tbody>
 </table>
 <h2 id="Limitations" class="common-anchor-header">制限事項<button data-href="#Limitations" class="anchor-icon" translate="no">
@@ -336,7 +338,7 @@ results = client.hybrid_search(
 <li><p><code translate="no">element_scope</code> は、ハイブリッド検索においてエンティティレベルの候補に折りたたまれる必要がある、StructArray 要素レベルの<code translate="no">AnnSearchRequest</code> オブジェクトにのみ使用してください。</p></li>
 <li><p>EmbeddingList リクエスト、コレクションレベルのベクトルリクエスト、または同じ StructArray 要素レベルのハイブリッド検索には、<code translate="no">element_scope</code> を使用しないでください。</p></li>
 <li><p><code translate="no">sum</code> および<code translate="no">topk_sum</code> の折りたたみ戦略では、<code translate="no">IP</code> や<code translate="no">COSINE</code> などの正の相関メトリクスが必要です。<code translate="no">L2</code> と一緒に使用しないでください。</p></li>
-<li><p><code translate="no">topk_sum</code> また、<code translate="no">topk_avg</code> には、正の<code translate="no">topk</code> 値が必要です。その他の折りたたみ戦略には、<code translate="no">topk</code> を含めてはなりません。</p></li>
+<li><p><code translate="no">topk_sum</code> また、<code translate="no">topk_avg</code> では、正の<code translate="no">topk</code> 値が必要です。その他の折りたたみ戦略では、<code translate="no">topk</code> を含めてはなりません。</p></li>
 <li><p>EmbeddingList レベルの StructArray リクエストは、範囲検索やグループ化をサポートしていません。</p></li>
 <li><p>ハイブリッドグループ化は、同じ StructArray 要素レベルのハイブリッド検索においてのみ、かつ主キーによる場合のみサポートされます。</p></li>
 <li><p>範囲検索とグループ化を組み合わせて使用しないでください。</p></li>
@@ -357,10 +359,10 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>同じ StructArray 要素レベルのハイブリッドリクエストに<code translate="no">element_scope</code> を追加すること。そのリクエストは要素レベルのままとなり、エンティティレベルの折りたたみは実行されません。</p></li>
+<li><p>同じ StructArray 要素レベルのハイブリッドリクエストに<code translate="no">element_scope</code> を追加すること。そのリクエストは要素レベルのままであり、エンティティレベルの折りたたみは実行されません。</p></li>
 <li><p><code translate="no">chunks[emb_list_vector]</code> に<code translate="no">element_scope</code> を追加すること。EmbeddingList 検索はすでにエンティティレベルです。</p></li>
 <li><p>2つのStructArrayフィールドが要素オフセットを共有していると仮定すること。<code translate="no">chunks</code> 内のオフセット<code translate="no">3</code> と、別のStructArrayフィールド内のオフセット<code translate="no">3</code> は異なる要素であるため、ハイブリッドリクエストはエンティティレベルになります。</p></li>
-<li><p><code translate="no">topk_sum</code> を<code translate="no">L2</code> と併用します。負の距離メトリックについては、<code translate="no">max</code> 、<code translate="no">avg</code> 、または<code translate="no">topk_avg</code> を使用してください。</p></li>
+<li><p><code translate="no">topk_sum</code> を<code translate="no">L2</code> と共に使用します。負の距離メトリックについては、<code translate="no">max</code> 、<code translate="no">avg</code> 、または<code translate="no">topk_avg</code> を使用してください。</p></li>
 <li><p>エンティティレベルのハイブリッド検索結果には、折りたたみ後に選択された Struct 要素のオフセットが含まれることを期待しています。</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">次の手順<button data-href="#Next-steps" class="anchor-icon" translate="no">

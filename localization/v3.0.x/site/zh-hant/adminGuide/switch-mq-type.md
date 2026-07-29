@@ -112,7 +112,7 @@ summary: 在不造成服務中斷的情況下，將現有 Milvus 部署的訊息
 <tr><td>Pulsar（內建／外部）</td><td>Woodpecker（MinIO）</td><td>叢集 (Helm / Operator)</td><td><strong>已支援</strong></td></tr>
 <tr><td>Woodpecker（MinIO）</td><td>Pulsar（外部）</td><td>叢集（Helm / Operator）</td><td><strong>已支援</strong></td></tr>
 <tr><td>Kafka（內建／外部）</td><td>Woodpecker (MinIO)</td><td>叢集（Helm／Operator）</td><td><strong>受支援</strong></td></tr>
-<tr><td>Woodpecker（MinIO）</td><td>Kafka（外部）</td><td>叢集 (Helm / Operator)</td><td><strong>已支援</strong></td></tr>
+<tr><td>Woodpecker（MinIO）</td><td>Kafka（外部）</td><td>叢集（Helm / Operator）</td><td><strong>已支援</strong></td></tr>
 <tr><td>Woodpecker MinIO</td><td>Woodpecker 本地（或反之）</td><td>任何</td><td><strong>不支援</strong></td></tr>
 </tbody>
 </table>

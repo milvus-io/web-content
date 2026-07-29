@@ -54,7 +54,7 @@ summary: >-
 </table>
 <div class="alert note">
 <p>Warnung</p>
-<p>Ein Vektorfeld oder Vektor-Unterfeld akzeptiert nur einen Index. Wenn Sie sowohl die „EmbeddingList“-Suche als auch die Suche auf Elementebene benötigen, erstellen Sie zwei separate Vektor-Unterfelder. Auf dieser Seite wird „ <code translate="no">chunks[emb_list_vector]</code> “ für die „EmbeddingList“-Suche indiziert und „ <code translate="no">chunks[emb]</code> “ für die Suche auf Elementebene.</p>
+<p>Ein Vektorfeld oder Vektor-Teilfeld akzeptiert nur einen Index. Wenn Sie sowohl die „EmbeddingList“-Suche als auch die Suche auf Elementebene benötigen, erstellen Sie zwei separate Vektor-Teilfelder. Auf dieser Seite wird „ <code translate="no">chunks[emb_list_vector]</code> “ für die „EmbeddingList“-Suche indiziert und „ <code translate="no">chunks[emb]</code> “ für die Suche auf Elementebene.</p>
 </div>
 <h2 id="Choose-a-search-mode" class="common-anchor-header">Wählen Sie einen Suchmodus<button data-href="#Choose-a-search-mode" class="anchor-icon" translate="no">
       <svg translate="no"

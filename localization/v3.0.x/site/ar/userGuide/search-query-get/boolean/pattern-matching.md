@@ -23,7 +23,10 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>في تطبيقات البحث التفاعلي، غالبًا ما يكمل كل من البحث المتجه ومطابقة الأنماط على غرار grep بعضهما البعض. يسترد البحث المتجه الكيانات ذات الصلة من الناحية الدلالية، بينما تضيق مطابقة الأنماط نطاق تلك النتائج بناءً على هياكل سلاسل نصية محددة، مثل رموز الأخطاء، أو بادئات السجلات، أو نطاقات البريد الإلكتروني، أو مسارات عناوين URL، أو المعرفات.</p>
-<p>في Milvus، يمكنك التعبير عن قيود الأنماط هذه في عوامل التصفية القياسية باستخدام <code translate="no">LIKE</code> لمطابقة أحرف البدل البسيطة، و <code translate="no">=~</code> أو <code translate="no">!~</code> للتعبيرات العادية <a href="https://github.com/google/re2/wiki/syntax">RE2</a>. يمكنك دمج عوامل التصفية هذه مع <code translate="no">query</code> أو <code translate="no">search</code> أو البحث الهجين.</p>
+<p>في Milvus، يمكنك التعبير عن قيود الأنماط هذه في المرشحات القياسية باستخدام <code translate="no">LIKE</code> لمطابقة أحرف البدل البسيطة، و <code translate="no">=~</code> أو <code translate="no">!~</code> للتعبيرات العادية <a href="https://github.com/google/re2/wiki/syntax">RE2</a>. يمكنك دمج هذه المرشحات مع <code translate="no">query</code> أو <code translate="no">search</code> أو البحث الهجين.</p>
+<div class="alert note">
+<p>تصف هذه الصفحة مطابقة الأنماط في تعبيرات المرشحات القياسية المستخدمة في <code translate="no">query</code> و <code translate="no">search</code> والبحث المختلط. تقوم هذه التعبيرات بتقييم قيم الحقول ولا تغير الرموز التي ينتجها المحلل. لتصفية الرموز أثناء تحليل النص، راجع <a href="/docs/ar/regex-filter.md">مرشح محلل التعبيرات النمطية</a>.</p>
+</div>
 <p>تُكتب تعبيرات مطابقة الأنماط في المعلمة <code translate="no">filter</code>. على سبيل المثال، يطابق الاستعلام التالي رسائل السجل التي تحتوي على رمز خطأ مثل <code translate="no">E1001</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -35,7 +38,7 @@ res = client.query(
     output_fields=[<span class="hljs-string">&quot;message&quot;</span>, <span class="hljs-string">&quot;severity&quot;</span>],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>تركز الأمثلة الواردة في هذه الصفحة على التعبير المخصص لـ <code translate="no">filter</code>. يمكنك استخدام نفس صيغة تعبير المرشح في عمليات Milvus التي تقبل مرشحًا قياسيًا، مثل <code translate="no">query</code> و <code translate="no">search</code> والبحث الهجين.</p>
+<p>تركز الأمثلة الواردة في هذه الصفحة على التعبير المخصص لـ <code translate="no">filter</code>. يمكنك استخدام نفس صيغة تعبير التصفية في عمليات Milvus التي تقبل مرشحًا قياسيًا، مثل <code translate="no">query</code> و <code translate="no">search</code> والبحث الهجين.</p>
 <h2 id="Supported-field-types" class="common-anchor-header">أنواع الحقول المدعومة<button data-href="#Supported-field-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -135,7 +138,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>استخدم موضع <code translate="no">%</code> و <code translate="no">_</code> للتحكم في مكان ظهور النص الثابت في السلسلة المتطابقة.</p>
+    </button></h3><p>استخدم موضع <code translate="no">%</code> و <code translate="no">_</code> للتحكم في مكان ظهور النص الثابت في السلسلة المطابقة.</p>
 <table>
 <thead>
 <tr><th>المتطلبات</th><th>النمط</th><th>مثال على التصفية</th></tr>
@@ -227,7 +230,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يُنصح باستخدام سلاسل نصية خام لأنماط التعبيرات النمطية التي تحتوي على خطوط مائلة عكسية. في السلسلة النصية الخام، المكتوبة على النحو التالي: <code translate="no">r&quot;...&quot;</code> أو <code translate="no">r'...'</code> ، يتم تمرير الخطوط المائلة العكسية إلى محرك التعبيرات النمطية حرفياً. وهذا يتجنب الهروب الإضافي المطلوب في السلاسل النصية العادية.</p>
+    </button></h3><p>يُنصح باستخدام سلاسل نصية خام لأنماط التعبيرات العادية التي تحتوي على علامات مائلة عكسية. في السلسلة النصية الخام، المكتوبة على النحو التالي: <code translate="no">r&quot;...&quot;</code> أو <code translate="no">r'...'</code> ، يتم تمرير العلامات المائلة العكسية إلى محرك التعبيرات العادية حرفياً. وهذا يتجنب الهروب الإضافي المطلوب في السلاسل النصية العادية.</p>
 <p>على سبيل المثال:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ r&quot;\d{4}-\d{2}-\d{2}&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -302,7 +305,7 @@ res = client.query(
 <p>بالنسبة لمسارات JSON، تتصرف مرشحات التعبيرات النمطية بشكل مختلف عندما يكون المسار مفقودًا أو فارغًا أو يُحل إلى قيمة غير سلسلة:</p>
 <table>
 <thead>
-<tr><th>المرشح</th><th>هل يشمل القيم المفقودة/الصفرية/غير السلسلة؟</th><th>ملاحظات</th></tr>
+<tr><th>المرشح</th><th>هل يشمل القيم المفقودة/الصفرية/غير السلسلية؟</th><th>ملاحظات</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">json_field[&quot;path&quot;] =~ &quot;pattern&quot;</code></td><td>لا</td><td>يتطابق فقط مع القيم النصية التي تستوفي نمط التعبير العادي.</td></tr>

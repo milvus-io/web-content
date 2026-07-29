@@ -211,7 +211,7 @@ summary: >-
 </table>
 <p>Utilize subcampos vetoriais separados quando ambos os modos forem necessários. Por exemplo, utilize <code translate="no">chunks[emb_list_vector]</code> para a pesquisa EmbeddingList e <code translate="no">chunks[emb]</code> para a pesquisa ao nível do elemento.</p>
 <p>Os subcampos vetoriais do StructArray contam como subcampos vetoriais quando planear o esquema da sua coleção. Mantenha o número total de campos vetoriais e subcampos vetoriais dentro dos limites da sua versão de destino e nível de serviço.</p>
-<p>Para conhecer a matriz de tipos de índice e de métricas suportados, consulte <a href="/docs/pt/index-structarray-fields.md">Campos StructArray do índice</a>.</p>
+<p>Para conhecer a matriz de tipos de índice e de métrica suportados, consulte <a href="/docs/pt/index-structarray-fields.md">Campos StructArray do índice</a>.</p>
 <h2 id="Search-limits" class="common-anchor-header">Limites de pesquisa<button data-href="#Search-limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -232,11 +232,11 @@ summary: >-
 <tr><th>Comportamento da pesquisa</th><th>Suporte e limites</th></tr>
 </thead>
 <tbody>
-<tr><td>Pesquisa básica da EmbeddingList</td><td>Suportada em subcampos vetoriais do StructArray indexados com métric <code translate="no">MAX_SIM*</code>. Devolve resultados ao nível da entidade.</td></tr>
+<tr><td>Pesquisa básica no EmbeddingList</td><td>Suportada em subcampos vetoriais do StructArray indexados com métric <code translate="no">MAX_SIM*</code>. Devolve resultados ao nível da entidade.</td></tr>
 <tr><td>Pesquisa básica ao nível do elemento</td><td>Suportada em subcampos vetoriais de StructArray indexados com métricas vetoriais regulares. Pode devolver os deslocamentos dos elementos correspondentes.</td></tr>
 <tr><td>Pesquisa por intervalo</td><td>Suportada de acordo com o modo de pesquisa e o suporte a índices/métricas da versão de destino. Para o comportamento do intervalo de pesquisa híbrido em pedidos StructArray ao nível do elemento, verifique a sua versão de destino.</td></tr>
 <tr><td>Pesquisa por agrupamento</td><td>A pesquisa agrupada ao nível do elemento pode devolver deslocamentos. O comportamento de agrupamento da pesquisa híbrida para pedidos StructArray ao nível do elemento depende da versão.</td></tr>
-<tr><td>Pesquisa híbrida</td><td>Uma solicitação de pesquisa híbrida só pode incluir solicitações de subcampos do vetor StructArray se a versão de destino suportar essa combinação de pesquisa. Cada solicitação continua a seguir a família de métricas do subcampo do vetor indexado.</td></tr>
+<tr><td>Pesquisa híbrida</td><td>Uma solicitação de pesquisa híbrida só pode incluir solicitações de subcampos vetoriais StructArray se a versão de destino suportar essa combinação de pesquisa. Cada solicitação continua a seguir a família de métricas do subcampo vetorial indexado.</td></tr>
 <tr><td>Saída de deslocamento</td><td>O deslocamento está disponível para resultados de pesquisa ao nível do elemento. A pesquisa EmbeddingList devolve resultados ao nível da entidade e não utiliza deslocamentos de elementos como unidade principal de resultados.</td></tr>
 </tbody>
 </table>
@@ -281,7 +281,7 @@ summary: >-
       </svg>
     </button></h2><ol>
 <li><p>Para criar um campo StructArray, consulte <a href="/docs/pt/create-structarray-field.md">Criar um campo StructArray</a>.</p></li>
-<li><p>Para inserir dados, consulte <a href="/docs/pt/insert-data-into-structarray-fields.md">Inserir dados em campos StructArray</a>.</p></li>
+<li><p>Para inserir dados, leia <a href="/docs/pt/insert-data-into-structarray-fields.md">Inserir dados em campos StructArray</a>.</p></li>
 <li><p>Para criar índices vetoriais e escalares, leia <a href="/docs/pt/index-structarray-fields.md">«Indexar campos StructArray</a>».</p></li>
 <li><p>Para rever a sintaxe do filtro StructArray, leia <a href="/docs/pt/struct-array-operators.md">«Operadores StructArray</a>».</p></li>
 </ol>

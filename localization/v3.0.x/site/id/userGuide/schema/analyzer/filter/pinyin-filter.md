@@ -95,7 +95,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 
 sample_text = <span class="hljs-string">&quot;中文测试&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Match-Chinese-text-with-character-level-Pinyin" class="common-anchor-header">Mencocokkan teks bahasa Mandarin dengan Pinyin tingkat karakter<button data-href="#Match-Chinese-text-with-character-level-Pinyin" class="anchor-icon" translate="no">
+<h3 id="Match-Chinese-text-with-character-level-Pinyin" class="common-anchor-header">Mencocokkan teks bahasa Mandarin dengan token Pinyin tingkat karakter<button data-href="#Match-Chinese-text-with-character-level-Pinyin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

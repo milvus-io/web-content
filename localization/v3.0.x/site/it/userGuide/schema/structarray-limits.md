@@ -4,8 +4,9 @@ title: Limiti di StructArray
 summary: >-
   Il supporto per StructArray comprende la definizione dello schema,
   l'inserimento dei payload, l'indicizzazione, le modalità di ricerca e i filtri
-  specifici di StructArray. Utilizza questa pagina come riferimento per i limiti
-  prima di fare affidamento sul comportamento di StructArray in produzione.
+  specifici di StructArray. Utilizza questa pagina come riferimento sui limiti
+  prima di fare affidamento sul comportamento di StructArray in ambiente di
+  produzione.
 ---
 <h1 id="StructArray-Limits" class="common-anchor-header">Limiti di StructArray<button data-href="#StructArray-Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -23,7 +24,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Il supporto di StructArray comprende la definizione dello schema, l'inserimento dei payload, l'indicizzazione, le modalità di ricerca e i filtri specifici di StructArray. Utilizza questa pagina come riferimento per i limiti prima di affidarti al comportamento di StructArray in produzione.</p>
-<p>La maggior parte dei limiti di StructArray deriva da una delle tre fonti seguenti: il modello di schema di StructArray, la modalità di ricerca scelta per i sottocampi vettoriali e la versione di Milvus su cui viene eseguita la collezione.</p>
+<p>La maggior parte dei limiti di StructArray deriva da una delle tre fonti seguenti: il modello di schema di StructArray, la modalità di ricerca scelta per i sottocampi vettoriali e la versione di Milvus su cui gira la propria collezione.</p>
 <h2 id="Limits-at-a-glance" class="common-anchor-header">Panoramica dei limiti<button data-href="#Limits-at-a-glance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,7 +45,7 @@ summary: >-
 <tr><th>Area</th><th>Limite</th></tr>
 </thead>
 <tbody>
-<tr><td>Struttura dello schema</td><td>Una Struct può essere utilizzata solo come tipo di elemento di un campo Array. Struct non è supportata come campo di collezione di primo livello.</td></tr>
+<tr><td>Struttura dello schema</td><td>Una Struct può essere utilizzata solo come tipo di elemento di un campo Array. La Struct non è supportata come campo di collezione di primo livello.</td></tr>
 <tr><td>Schema dei sottocampi</td><td>Tutti gli elementi Struct presenti nello stesso campo StructArray condividono un unico schema Struct predefinito.</td></tr>
 <tr><td>Capacità</td><td><code translate="no">max_capacity</code> è obbligatorio e limita il numero di elementi Struct che un'entità può memorizzare nel campo StructArray.</td></tr>
 <tr><td>Modifiche ai sottocampi</td><td>Una volta creato un campo StructArray, non è possibile aggiungere sottocampi a quel campo StructArray esistente.</td></tr>
@@ -120,7 +121,7 @@ summary: >-
 <tr><td><code translate="no">Array</code></td><td>Non supportato</td><td>I sottocampi JSON non sono supportati nei campi StructArray.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Non supportato</td><td>I sottocampi Geometry e le funzioni GIS non sono supportati nei campi StructArray.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Non supportato</td><td>I sottocampi di tipo testo non sono supportati nei campi StructArray.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Non supportato</td><td>I sottocampi "timestamptz" e le espressioni relative al tempo non sono supportati nei campi StructArray.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Non supportato</td><td>I sottocampi "timestamptz" e le espressioni relative all'ora non sono supportati nei campi StructArray.</td></tr>
 <tr><td><code translate="no">Array</code>, <code translate="no">ArrayOfVector</code>, <code translate="no">Struct</code> o <code translate="no">ArrayOfStruct</code></td><td>Non supportato</td><td>I campi StructArray non supportano sottocampi annidati di tipo array, array vettoriale, Struct o Array-of-Struct.</td></tr>
 </tbody>
 </table>
@@ -180,7 +181,7 @@ summary: >-
 <tr><td>Nomi dei sottocampi</td><td>All'interno di ciascun oggetto Struct, utilizzare nomi di sottocampi come <code translate="no">text</code> e <code translate="no">emb</code>, non percorsi come <code translate="no">chunks[text]</code>.</td></tr>
 <tr><td>Allineamento allo schema</td><td>Ogni elemento Struct deve corrispondere allo schema Struct.</td></tr>
 <tr><td>Capacità</td><td>Il numero di elementi Struct in un'entità non deve superare <code translate="no">max_capacity</code>.</td></tr>
-<tr><td>Dimensioni del vettore</td><td>I valori vettoriali devono corrispondere all'<code translate="no">dim</code> e configurata per i relativi sottocampi vettoriali.</td></tr>
+<tr><td>Dimensioni del vettore</td><td>I valori vettoriali devono corrispondere all'<code translate="no">dim</code> configurato per i relativi sottocampi vettoriali.</td></tr>
 <tr><td>Duplicazione in modalità di ricerca</td><td>Se sono necessarie sia la ricerca EmbeddingList che quella a livello di elemento, scrivere i vettori in due sottocampi vettoriali separati.</td></tr>
 </tbody>
 </table>

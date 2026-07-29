@@ -47,7 +47,7 @@ summary: >-
 <tbody>
 <tr><td>قم بإنشاء حقل StructArray، مثل <code translate="no">chunks</code>.</td><td><a href="/docs/ar/create-structarray-field.md">إنشاء حقل StructArray</a></td></tr>
 <tr><td>أدخل الكيانات التي يحتوي حقل <code translate="no">chunks</code> الخاص بها على كائنات Struct.</td><td><a href="/docs/ar/insert-data-into-structarray-fields.md">إدراج البيانات في حقول StructArray</a></td></tr>
-<tr><td>قم بإنشاء فهرس " <code translate="no">MAX_SIM*</code> " على " <code translate="no">chunks[emb_list_vector]</code> " من أجل البحث في "EmbeddingList".</td><td><a href="/docs/ar/index-structarray-fields.md">فهرسة حقول StructArray</a></td></tr>
+<tr><td>قم بإنشاء فهرس <code translate="no">MAX_SIM*</code> على <code translate="no">chunks[emb_list_vector]</code> من أجل البحث في EmbeddingList.</td><td><a href="/docs/ar/index-structarray-fields.md">فهرسة حقول StructArray</a></td></tr>
 <tr><td>إنشاء فهرس متجهي قياسي على <code translate="no">chunks[emb]</code> للبحث على مستوى العناصر.</td><td><a href="/docs/ar/index-structarray-fields.md">فهرسة حقول StructArray</a></td></tr>
 </tbody>
 </table>
@@ -78,10 +78,10 @@ summary: >-
 <tr><td>الحقل الفرعي المستهدف</td><td><code translate="no">chunks[emb_list_vector]</code></td><td><code translate="no">chunks[emb]</code></td></tr>
 <tr><td>بيانات الاستعلام</td><td>قائمة تضمين تحتوي على متجه واحد أو أكثر.</td><td>متجه عادي.</td></tr>
 <tr><td>عائلة المقاييس</td><td><code translate="no">MAX_SIM*</code>، مثل <code translate="no">MAX_SIM_COSINE</code>.</td><td>مقاييس متجهات عادية، مثل <code translate="no">COSINE</code> أو <code translate="no">IP</code> أو <code translate="no">L2</code>.</td></tr>
-<tr><td>ما يمثله كل نتيجة</td><td>كيان مطابق يكون حقله الفرعي StructArray متشابهًا مع قائمة التضمين الخاصة بالاستعلام.</td><td>عنصر Struct مطابق داخل حقل StructArray.</td></tr>
+<tr><td>ما يمثله كل نتيجة</td><td>كيان مطابق يكون حقله الفرعي المتجه StructArray مشابهًا لقائمة التضمين الخاصة بالاستعلام.</td><td>عنصر Struct مطابق داخل حقل StructArray.</td></tr>
 <tr><td>تفصيل النتائج</td><td>مستوى الكيان.</td><td>مستوى عنصر Struct.</td></tr>
 <tr><td>الإزاحة</td><td>غير قابل للتطبيق.</td><td>يحدد الموضع الذي يبدأ من الصفر لعنصر Struct المطابق عند إرجاعه.</td></tr>
-<tr><td>الاستخدام النموذجي</td><td>ColBERT و ColPali وأنماط الاسترجاع الأخرى ذات التفاعل المتأخر.</td><td>الاسترجاع على مستوى المقطع، أو مستوى الفقرة، أو مستوى المقتطف، أو مستوى الرقعة، أو مستوى الحقيقة.</td></tr>
+<tr><td>الاستخدام النموذجي</td><td>ColBERT و ColPali وأنماط الاسترجاع الأخرى ذات التفاعل المتأخر.</td><td>الاسترجاع على مستوى المقطع، أو مستوى الفقرة، أو مستوى المقتطف، أو مستوى الجزء، أو مستوى الحقيقة.</td></tr>
 </tbody>
 </table>
 <h2 id="Run-EmbeddingList-search" class="common-anchor-header">تشغيل بحث EmbeddingList<button data-href="#Run-EmbeddingList-search" class="anchor-icon" translate="no">
@@ -99,7 +99,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>استخدم بحث EmbeddingList عندما يحتوي الاستعلام نفسه على متجهات متعددة ويتم فهرسة الحقل الفرعي للمتجه StructArray المستهدف باستخدام مقياس " <code translate="no">MAX_SIM*</code> ". والنتيجة هي تطابق على مستوى الكيان.</p>
+    </button></h2><p>استخدم بحث EmbeddingList عندما يحتوي الاستعلام نفسه على متجهات متعددة ويتم فهرسة الحقل الفرعي للمتجه StructArray المستهدف باستخدام مقياس " <code translate="no">MAX_SIM*</code> ". والنتيجة هي مطابقة على مستوى الكيان.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">from</span> pymilvus.client.embedding_list <span class="hljs-keyword">import</span> EmbeddingList
 
@@ -223,7 +223,7 @@ results = client.search(
 <li><p>استخدام <code translate="no">chunks.emb</code> بدلاً من صيغة مسار الحقل الفرعي المطلوبة <code translate="no">chunks[emb]</code>.</p></li>
 <li><p>استخدام استعلام EmbeddingList على حقل فرعي متجه تم فهرسته باستخدام مقياس متجه عادي.</p></li>
 <li><p>استخدام استعلام متجه عادي على حقل فرعي متجه مفهرس باستخدام مقياس <code translate="no">MAX_SIM*</code>.</p></li>
-<li><p>توقع أن يعيد البحث على مستوى العنصر <code translate="no">limit</code> هذا العدد من الكيانات الأصلية الفريدة. فهو يعيد نتائج العناصر المطابقة.</p></li>
+<li><p>توقع أن يعيد البحث على مستوى العنصر <code translate="no">limit</code> هذا العدد من الكيانات الأصلية الفريدة. فهو يعيد نتائج العناصر.</p></li>
 <li><p>توقع أن يعيد بحث EmbeddingList إزاحة عنصر واحد محدد. لكنه يعيد نتائج مطابقة على مستوى الكيان.</p></li>
 <li><p>إعادة استخدام حقل فرعي متجه واحد لكلا وضعي البحث. استخدم حقول فرعية متجهة منفصلة لأن كل حقل فرعي متجه لا يقبل سوى فهرس واحد.</p></li>
 </ul>

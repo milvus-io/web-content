@@ -22,7 +22,7 @@ beta: Milvus v2.6.20+
         ></path>
       </svg>
     </button></h1><p>La búsqueda vectorial ordena los resultados según la distancia vectorial, pero es posible que el orden inicial no refleje en qué medida el texto de cada candidato responde a la consulta. Hugging Face Ranker envía la consulta y el texto de los candidatos a <a href="https://huggingface.co/docs/inference-providers/index">los proveedores de inferencia</a> alojados <a href="https://huggingface.co/docs/inference-providers/index">de Hugging Face</a> y utiliza puntuaciones de « <code translate="no">sentence-similarity</code> » para reordenar los candidatos devueltos por Milvus.</p>
-<p>Esta integración utiliza el enrutador alojado de Hugging Face. Para volver a clasificar los resultados con un servicio de inferencia de incrustaciones de texto (TEI) implementado por separado, consulta <a href="/docs/es/tei-ranker.md">TEI Ranker</a>.</p>
+<p>Esta integración utiliza el enrutador alojado de Hugging Face. Para volver a clasificar los resultados con un servicio de inferencia de incrustaciones de texto (TEI) desplegado por separado, consulta <a href="/docs/es/tei-ranker.md">TEI Ranker</a>.</p>
 <h2 id="Limits" class="common-anchor-header">Límites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -67,7 +67,7 @@ beta: Milvus v2.6.20+
 <ol>
 <li><strong>Recupera las entidades candidatas.</strong> Milvus busca en el campo vectorial configurado y recopila las entidades candidatas.</li>
 <li><strong>Prepara el texto para la reclasificación.</strong> La función lee el texto de la consulta de <code translate="no">params.queries</code> y el texto de las entidades candidatas del campo <code translate="no">VARCHAR</code> especificado en <code translate="no">input_field_names</code>.</li>
-<li><strong>Solicita puntuaciones de similitud.</strong> Milvus envía la consulta como <code translate="no">source_sentence</code> y los textos candidatos como <code translate="no">sentences</code> a través de <code translate="no">hf-inference</code> al canal de procesamiento de Hugging Face <code translate="no">sentence-similarity</code>.</li>
+<li><strong>Solicita puntuaciones de similitud.</strong> Milvus envía la consulta como <code translate="no">source_sentence</code> y los textos candidatos como <code translate="no">sentences</code> a través de <code translate="no">hf-inference</code> al proceso de Hugging Face <code translate="no">sentence-similarity</code>.</li>
 <li><strong>Reordenar los candidatos.</strong> Hugging Face devuelve una puntuación por candidato. Milvus ordena los candidatos de mayor a menor puntuación y devuelve los resultados reordenados.</li>
 </ol>
 <p><strong>Cómo se calculan las puntuaciones de similitud</strong></p>
@@ -83,7 +83,7 @@ beta: Milvus v2.6.20+
 <li><strong>Creación de representaciones de modelo independientes.</strong> Milvus envía la consulta como <code translate="no">source_sentence</code> y los textos candidatos como <code translate="no">sentences</code>. El modelo codifica internamente la consulta y cada candidato por separado.</li>
 <li><strong>Compara y devuelve puntuaciones.</strong> El modelo compara la representación de la consulta con la de cada candidato y devuelve una puntuación de similitud por candidato.</li>
 </ol>
-<p>Las incrustaciones o representaciones utilizadas por el modelo de Hugging Face son un procesamiento intermedio del modelo. Hugging Face devuelve puntuaciones, no vectores. Por lo tanto, la recuperación inicial de vectores y la reclasificación del modelo utilizan representaciones independientes y pueden emplear modelos diferentes.</p>
+<p>Las incrustaciones o representaciones utilizadas por el modelo de Hugging Face son parte del procesamiento interno del modelo. Hugging Face devuelve puntuaciones, no vectores. Por lo tanto, la recuperación inicial de vectores y la reclasificación del modelo utilizan representaciones independientes y pueden emplear modelos diferentes.</p>
 <h2 id="Before-you-start" class="common-anchor-header">Antes de empezar<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -104,7 +104,7 @@ beta: Milvus v2.6.20+
 <li>Milvus 2.6.20 o posterior de la línea de versiones 2.6.</li>
 <li>PyMilvus 2.6.16 o posterior.</li>
 <li>Un token de acceso de usuario de Hugging Face que pueda llamar a los proveedores de inferencia.</li>
-<li>Un modelo que actualmente esté disponible en <code translate="no">hf-inference</code> para la <a href="https://huggingface.co/tasks/sentence-similarity"><code translate="no">sentence-similarity</code></a> tarea.</li>
+<li>Un modelo que actualmente esté siendo servido por <code translate="no">hf-inference</code> para la <a href="https://huggingface.co/tasks/sentence-similarity"><code translate="no">sentence-similarity</code></a> tarea.</li>
 <li>Una colección que almacena el texto candidato en un campo de <code translate="no">VARCHAR</code> que no admite valores nulos.</li>
 </ul>
 <div class="alert note">
@@ -145,7 +145,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Defina el token en la sección de nivel superior « <code translate="no">credential</code> » y, a continuación, asigne al proveedor de clasificación de Hugging Face la etiqueta de credencial:</p>
+    </button></h3><p>Defina el token en la sección de nivel superior « <code translate="no">credential</code> » y, a continuación, indique al proveedor de clasificación de Hugging Face la etiqueta de la credencial:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">credential:</span>
   <span class="hljs-attr">huggingface_apikey:</span>
@@ -435,7 +435,7 @@ results = client.search(
         ></path>
       </svg>
     </button></h2><ul>
-<li>Para conocer el comportamiento y los límites del clasificador de modelos compartido, consulta <a href="/docs/es/model-ranker-overview.md">la Descripción general del clasificador de modelos</a>.</li>
+<li>Para conocer el comportamiento y los límites del clasificador de modelos compartido, consulta <a href="/docs/es/model-ranker-overview.md">Descripción general del clasificador de modelos</a>.</li>
 <li>Para generar incrustaciones a través de los proveedores de inferencia alojados de Hugging Face, consulte <a href="/docs/es/hugging-face.md">Hugging Face</a>.</li>
 <li>Para aplicar el clasificador a la búsqueda híbrida, consulta <a href="/docs/es/multi-vector-search.md">«Búsqueda híbrida multivectorial</a>».</li>
 </ul>

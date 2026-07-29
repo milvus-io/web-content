@@ -86,7 +86,7 @@ beta: Milvus 3.0.0+
 <ul>
 <li><strong>トークン化</strong>：<code translate="no">standard</code> トークナイザーを使用して、テキストをトークンに分割します。</li>
 <li><strong>数字の正規化</strong>：<code translate="no">decimaldigit</code> フィルターを使用して、アラビア・インド系およびその他のUnicode 10進数字をASCII数字に変換します。</li>
-<li><strong>アラビア語の正規化</strong>：<code translate="no">arabic_normalization</code> フィルターを使用して、アレフの異体字、テ・マルブータ、アレフ・マクスラを正規化し、ハラカトおよびタトゥイールを削除します。</li>
+<li><strong>アラビア語の正規化</strong>：<code translate="no">arabic_normalization</code> フィルターを使用して、アレフの異体、テ・マルブータ、アレフ・マクスラを正規化し、ハラカトおよびタトゥイールを削除します。</li>
 <li><strong>ステミング</strong>：`<code translate="no">language</code> ` を `<code translate="no">arabic</code>` に設定した `<code translate="no">stemmer</code> ` フィルターを使用します。</li>
 <li><strong>ストップワードの除去</strong>：組み込みの<code translate="no">_arabic_</code> 辞書を使用して、<code translate="no">stop</code> フィルターを使用します。</li>
 </ul>

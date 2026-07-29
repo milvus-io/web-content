@@ -48,8 +48,8 @@ summary: 'Milvus가 지원하는 메시지 큐(mqType) 옵션에 대한 개요�
 <div class="alert note">
 <ul>
 <li><p>각 Milvus 인스턴스는 정확히 하나의 메시지 큐를 사용합니다.</p></li>
-<li><p><strong>메시지 큐 제한 사항</strong>: Milvus v3.0-beta로 업그레이드할 때는 현재 사용 중인 메시지 큐를 그대로 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경 기능은 향후 버전에서 제공될 예정입니다.</p></li>
-<li><p>실행 중인 인스턴스의 메시지 큐를 변경하려면 <a href="/docs/ko/switch-mq-type.md">‘MQ 유형 전환’을</a> 참조하십시오. MQ 전환 기능은 <strong>Milvus 3.0 이상에서</strong> 사용할 수 있으므로, 먼저 Milvus 3.0 이상으로 업그레이드해야 합니다.</p></li>
+<li><p><strong>메시지 큐 제한 사항</strong>: Milvus v3.0-beta로 업그레이드할 때는 현재 선택한 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경 기능은 향후 버전에서 제공될 예정입니다.</p></li>
+<li><p>실행 중인 인스턴스의 메시지 큐를 변경하려면 <a href="/docs/ko/switch-mq-type.md">‘MQ 유형 전환’을</a> 참조하십시오. MQ 전환 기능은 <strong>Milvus 3.0 이상에서</strong> 사용할 수 있으므로, 먼저 Milvus 3.0 이상으로 업그레이드하십시오.</p></li>
 </ul>
 </div>
 <h2 id="Choosing-a-message-queue" class="common-anchor-header">메시지 큐 선택<button data-href="#Choosing-a-message-queue" class="anchor-icon" translate="no">
@@ -68,7 +68,7 @@ summary: 'Milvus가 지원하는 메시지 큐(mqType) 옵션에 대한 개요�
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>새 배포(Milvus 3.x):</strong> <strong>Woodpecker</strong> (기본값) <strong>를</strong> 사용하십시오. 독립 실행형(Standalone)의 경우 내장형으로 실행되며, 분산형(클러스터)의 경우 Helm을 통해 배포된 전용 <a href="/docs/ko/woodpecker.md#Deployment-modes">서비스를</a> 기본값으로 권장하지만, 내장형도 지원됩니다.</li>
+<li><strong>새 배포(Milvus 3.x):</strong> <strong>Woodpecker</strong> (기본값) <strong>를</strong> 사용하십시오. 독립 실행형(Standalone) 환경에서는 임베디드 방식으로 실행되며, 분산(클러스터) 환경의 경우 Helm을 통해 배포된 전용 <a href="/docs/ko/woodpecker.md#Deployment-modes">서비스를</a> 기본값으로 권장하지만, 임베디드 방식도 지원됩니다.</li>
 <li><strong>기존 Pulsar 또는 Kafka 사용자:</strong> Pulsar와 Kafka는 계속해서 완벽하게 지원됩니다. 기존 설정을 유지하거나 <a href="/docs/ko/switch-mq-type.md">Woodpecker로 전환하십시오</a>.</li>
 <li><strong>RocksMQ:</strong> 독립형 환경에서만 사용 가능하며, Milvus 3.x에서는 내장형 Woodpecker로 대체되었습니다.</li>
 </ul>

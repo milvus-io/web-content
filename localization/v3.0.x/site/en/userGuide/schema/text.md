@@ -24,6 +24,10 @@ beta: Milvus 3.0.x
     </button></h1><p>In AI search applications, vector search helps you find semantically similar entities, but the application often also needs the original source text behind each match. An LLM or agent can use that text as context to read, cite, summarize, or include the result in a prompt.</p>
 <p>Milvus provides the <code translate="no">TEXT</code> scalar field type for storing long source text directly with entities. Typical values include passages, long documents, article bodies, tickets, and logs. Unlike <code translate="no">VARCHAR</code>, which requires a fixed <code translate="no">max_length</code>, <code translate="no">TEXT</code> does not require you to set a maximum byte length in the collection schema.</p>
 <p>To define a <code translate="no">TEXT</code> field, set <code translate="no">datatype</code> to <code translate="no">DataType.TEXT</code>.</p>
+<div class="alert note">
+<p>This feature requires Storage V3. For enablement instructions and compatibility considerations, see <a href="/docs/storage-v3.md">Storage V3</a>.</p>
+</div>
+<p>Milvus rejects a collection schema that contains a <code translate="no">TEXT</code> field while Storage V3 is disabled.</p>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;content&quot;</span>,
 <span class="highlighted-wrapper-line">    datatype=DataType.TEXT,</span>

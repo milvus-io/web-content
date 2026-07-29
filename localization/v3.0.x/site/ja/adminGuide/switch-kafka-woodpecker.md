@@ -1,11 +1,11 @@
 ---
 id: switch-kafka-woodpecker.md
-title: KafkaとWoodpeckerの切り替え
+title: Kafka と Woodpecker の切り替え
 summary: >-
   Helm または Milvus Operator を使用して、Milvus クラスタのメッセージキューを Kafka と Woodpecker
   の間で切り替えます。
 ---
-<h1 id="Switch-between-Kafka-and-Woodpecker" class="common-anchor-header">KafkaとWoodpeckerの切り替え<button data-href="#Switch-between-Kafka-and-Woodpecker" class="anchor-icon" translate="no">
+<h1 id="Switch-between-Kafka-and-Woodpecker" class="common-anchor-header">Kafka と Woodpecker の切り替え<button data-href="#Switch-between-Kafka-and-Woodpecker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -90,7 +90,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p><strong>ステップ 1: Milvus インスタンスが実行中であることを確認します。</strong></p>
-<p><strong>ステップ 2: 対象の Kafka 接続を設定し、Milvus を再起動します。</strong>この切り替えには、Milvus が Kafka 接続情報を既に認識している必要があるため、<code translate="no">extraConfigFiles</code> を使用して<code translate="no">user.yaml</code> に書き込み、<code translate="no">helm upgrade</code> で適用します（これによりポッドが再起動されます）。Switch MQ 機能には、<code translate="no">streaming.enabled=true</code> が必要です。SASL/SSL の詳細については、<a href="/docs/ja/connect_kafka_ssl.md">「SASL/SSL を使用した Kafka への接続」を</a>参照してください。</p>
+<p><strong>ステップ 2: 対象の Kafka 接続を設定し、Milvus を再起動します。</strong>この切り替えには、Milvus がすでに Kafka 接続を認識している必要があるため、<code translate="no">extraConfigFiles</code> を使用して<code translate="no">user.yaml</code> に書き込み、<code translate="no">helm upgrade</code> で適用します（これによりポッドが再起動されます）。Switch MQ 機能には、<code translate="no">streaming.enabled=true</code> が必要です。SASL/SSL の詳細については、<a href="/docs/ja/connect_kafka_ssl.md">「SASL/SSL を使用した Kafka への接続」を</a>参照してください。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -108,7 +108,7 @@ summary: >-
   --set streaming.enabled=true \
   -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>すべてのポッドの準備が整うまで待機し、Kafkaへのアクセス設定がMilvusの設定に反映されていることを確認してください。</p>
+<p>すべてのポッドの準備が整うまで待機し、Kafka へのアクセス設定が Milvus の設定に反映されていることを確認してください。</p>
 <p><strong>ステップ 3: MQ 切り替えを実行します。</strong></p>
 <div class="alert note">
 <p>対象のKafkaに、以前の設定からのMilvusトピックが含まれていないことを確認してください。今回がKafkaへの初めての切り替えである場合は、この注意事項をスキップしてください。そうでない場合は、まず同じ名前の残存するMilvusトピックをクリーンアップしてください。</p>

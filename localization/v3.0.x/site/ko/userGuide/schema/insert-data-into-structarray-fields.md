@@ -38,7 +38,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>컬렉션 스키마에 이미 <code translate="no">chunks</code> StructArray 필드가 포함되어 있는지 확인하십시오.</p>
+    </button></h2><p>컬렉션 스키마에 이미 ‘ <code translate="no">chunks</code> ’ StructArray 필드가 포함되어 있는지 확인하십시오.</p>
 <table>
 <thead>
 <tr><th>필드</th><th>유형</th><th>삽입 값</th></tr>
@@ -69,7 +69,7 @@ summary: >-
 <div class="alert note">
 <p>삽입 페이로드에서 ` <code translate="no">chunks</code> `는 값이 Struct 객체 배열인 일반 필드입니다. 각 객체 내부에서는 ` <code translate="no">text</code> ` 및 ` <code translate="no">emb</code>`와 같은 하위 필드 이름을 사용합니다. ` <code translate="no">chunks[text]</code> ` 또는 ` <code translate="no">chunks[emb]</code>`와 같은 경로 구문은 삽입 후 인덱스를 생성하거나, 검색을 실행하거나, 필터를 구축하거나, 출력 필드를 지정할 때만 사용하십시오.</p>
 </div>
-<h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">삽입 페이로드의 구조를 이해하십시오<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
+<h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">삽입 페이로드의 구조를 이해하세요<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -244,7 +244,7 @@ result = client.insert(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Nullable StructArray 필드에 유효한 StructArray 값이 포함된 경우, 해당 값의 모든 하위 필드는 null이거나 유효한 값을 가져야 합니다. 일부 하위 필드는 null로, 다른 하위 필드는 유효한 값으로 설정된 엔티티를 삽입하면 오류가 발생합니다.</p>
+<p>Nullable StructArray 필드에 유효한 StructArray 값이 포함된 경우, 해당 값 내의 모든 하위 필드는 null이거나 유효한 값을 가져야 합니다. 일부 하위 필드는 null로, 다른 하위 필드는 유효한 값으로 설정된 엔티티를 삽입하면 오류가 발생합니다.</p>
 <div class="alert note">
 <p>경고
 Nullable StructArray 필드는 Milvus v3.0.x에서만 사용할 수 있습니다. 기존 컬렉션에 StructArray 필드를 동적으로 추가하는 경우, 추가된 필드는 nullable이어야 하며, 기존 엔티티는 새 필드의 모든 하위 필드에 대해 ` <code translate="no">null</code> `를 반환해야 합니다.</p>

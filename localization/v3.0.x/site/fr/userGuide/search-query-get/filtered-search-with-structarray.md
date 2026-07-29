@@ -203,7 +203,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Utilisez « <code translate="no">MATCH_ANY</code> » ici car le résultat de recherche EmbeddingList est au niveau de l’entité. Le filtre exige qu’au moins un fragment de l’entité soit un fragment « <code translate="no">&quot;index&quot;</code> » de haute qualité, mais le résultat de recherche lui-même représente toujours l’entité parente.</p>
+<p>Utilisez « <code translate="no">MATCH_ANY</code> » ici car le résultat de recherche EmbeddingList est au niveau de l’entité. Le filtre exige qu’au moins un segment de l’entité soit un segment « <code translate="no">&quot;index&quot;</code> » de haute qualité, mais le résultat de recherche lui-même représente toujours l’entité parente.</p>
 <h2 id="Use-filters-in-hybrid-search" class="common-anchor-header">Utilisation des filtres dans la recherche hybride<button data-href="#Use-filters-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

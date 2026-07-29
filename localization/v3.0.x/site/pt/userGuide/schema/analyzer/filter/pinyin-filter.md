@@ -22,7 +22,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>A pesquisa de texto em chinês exige frequentemente que os utilizadores introduzam os caracteres chineses exatamente como aparecem no texto indexado. Em processos de pesquisa de nomes, preenchimento automático e pesquisa à medida que se digita, os utilizadores digitam frequentemente Pinyin em vez de caracteres chineses. Por exemplo, um utilizador pode digitar « <code translate="no">zuqiu</code> » para pesquisar « <code translate="no">足球</code> ». O filtro « <code translate="no">pinyin</code> » adiciona tokens de pinyin à saída do analisador, para que o texto em chinês possa corresponder à entrada em pinyin sem ser necessário manter um campo de pinyin separado.</p>
+    </button></h1><p>A pesquisa de texto em chinês exige frequentemente que os utilizadores introduzam os caracteres chineses exatamente como aparecem no texto indexado. Em processos de pesquisa de nomes, preenchimento automático e pesquisa à medida que se digita, os utilizadores digitam frequentemente pinyin em vez de caracteres chineses. Por exemplo, um utilizador pode digitar « <code translate="no">zuqiu</code> » para pesquisar « <code translate="no">足球</code> ». O filtro « <code translate="no">pinyin</code> » adiciona tokens de pinyin à saída do analisador, para que o texto em chinês possa corresponder à entrada em pinyin sem ser necessário manter um campo de pinyin separado.</p>
 <p>O filtro <code translate="no">pinyin</code> é normalmente utilizado com o tokenizador <a href="/docs/pt/jieba-tokenizer.md">Jieba</a> para texto em chinês. Funciona num pipeline de filtros de um analisador personalizado e pode emitir várias formas de tokens Pinyin para o mesmo token chinês.</p>
 <h2 id="Configuration" class="common-anchor-header">Configuração<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,7 +45,7 @@ beta: Milvus 3.0.x
 <span class="highlighted-wrapper-line">    <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;pinyin&quot;</span>],</span>
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Esta sintaxe abreviada mantém os tokens chineses originais e gera tokens Pinyin ao nível do caractere. Não gera Pinyin ligado nem iniciais Pinyin, a menos que ative essas opções explicitamente.</p>
+<p>Esta sintaxe abreviada mantém os tokens chineses originais e gera tokens Pinyin ao nível dos caracteres. Não gera Pinyin ligado nem iniciais Pinyin, a menos que ative essas opções explicitamente.</p>
 <p>Para um controlo total, especifique o filtro como um objeto e configure os formatos dos tokens Pinyin que o Milvus gera.</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
@@ -95,7 +95,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 
 sample_text = <span class="hljs-string">&quot;中文测试&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Match-Chinese-text-with-character-level-Pinyin" class="common-anchor-header">Correlacionar texto em chinês com pinyin ao nível do caractere<button data-href="#Match-Chinese-text-with-character-level-Pinyin" class="anchor-icon" translate="no">
+<h3 id="Match-Chinese-text-with-character-level-Pinyin" class="common-anchor-header">Correlacionar texto em chinês com pinyin ao nível dos caracteres<button data-href="#Match-Chinese-text-with-character-level-Pinyin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -122,7 +122,7 @@ result = client.run_analyzer(sample_text, analyzer_params)
 <p>Resultado esperado:</p>
 <pre><code translate="no" class="language-plaintext">[&#x27;中文&#x27;, &#x27;zhong&#x27;, &#x27;wen&#x27;, &#x27;测试&#x27;, &#x27;ce&#x27;, &#x27;shi&#x27;]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Match-Chinese-terms-with-joined-Pinyin" class="common-anchor-header">Corresponder termos chineses com pinyin combinado<button data-href="#Match-Chinese-terms-with-joined-Pinyin" class="anchor-icon" translate="no">
+<h3 id="Match-Chinese-terms-with-joined-Pinyin" class="common-anchor-header">Corresponder termos chineses com pinyin unificado<button data-href="#Match-Chinese-terms-with-joined-Pinyin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

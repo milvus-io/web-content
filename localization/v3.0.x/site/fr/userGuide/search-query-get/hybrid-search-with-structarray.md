@@ -48,12 +48,12 @@ summary: >-
 <tr><td>Champ vectoriel au niveau de la collection + sous-champ EmbeddingList de StructArray</td><td>Niveau de l’entité</td><td>Les candidats finaux sont indexés par clé primaire.</td><td>Ne pas utiliser.</td></tr>
 <tr><td>Champ vectoriel au niveau de la collection + sous-champ au niveau de l'élément de StructArray</td><td>Niveau de l’entité</td><td>Les résultats au niveau des éléments sont regroupés en candidats au niveau des entités avant le reclassement hybride.</td><td>Configuration facultative de regroupement sur l’ <code translate="no">AnnSearchRequest</code> au niveau des éléments de StructArray.</td></tr>
 <tr><td>Plusieurs sous-champs au niveau des éléments sous le même champ StructArray</td><td>Niveau élément</td><td>Les candidats finaux sont indexés par la clé primaire et le décalage de l'élément Struct.</td><td>À ne pas utiliser.</td></tr>
-<tr><td>Sous-champs au niveau des éléments sous différents champs StructArray</td><td>Niveau de l’entité</td><td>Les décalages d’éléments ne partagent pas d’identité commune ; par conséquent, chaque <code translate="no">AnnSearchRequest</code> au niveau des éléments de StructArray est regroupée avant le reclassement.</td><td><code translate="no">AnnSearchRequest</code>Configuration facultative de regroupement pour chaque sous-champ au niveau des éléments de StructArray.</td></tr>
+<tr><td>Sous-champs au niveau des éléments sous différents champs StructArray</td><td>Niveau de l’entité</td><td>Les décalages d’éléments ne partagent pas d’identité commune ; par conséquent, chaque <code translate="no">AnnSearchRequest</code> au niveau des éléments de StructArray est regroupée avant le reclassement.</td><td>Configuration facultative de regroupement pour chaque sous- <code translate="no">AnnSearchRequest</code> de niveau élément de StructArray.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
 <p>Avertissement</p>
-<p>Utilisez l’ <code translate="no">element_scope</code> uniquement pour configurer la réduction des objets d’ <code translate="no">AnnSearchRequest</code> s au niveau des éléments de StructArray dans une recherche hybride au niveau des éléments ne portant pas sur la même structure. Ne l’utilisez pas pour les requêtes EmbeddingList, les requêtes vectorielles au niveau des collections ou la recherche hybride au niveau des éléments portant sur la même structure StructArray.</p>
+<p>Utilisez l’ <code translate="no">element_scope</code> uniquement pour configurer la réduction des objets d’ <code translate="no">AnnSearchRequest</code> s au niveau des éléments de StructArray dans une recherche hybride au niveau des éléments ne portant pas la même structure. Ne l’utilisez pas pour les requêtes EmbeddingList, les requêtes vectorielles au niveau des collections ou la recherche hybride au niveau des éléments de StructArray portant la même structure.</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">Avant de commencer<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -210,8 +210,8 @@ results = client.hybrid_search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Si une recherche hybride combine une requête « <code translate="no">AnnSearchRequest</code> » au niveau des éléments d’un StructArray avec une requête vectorielle au niveau de la collection, une requête « EmbeddingList » ou une requête au niveau des éléments sous un autre champ du StructArray, le champ d’application final des candidats est le niveau de l’entité. Dans ce cas, chaque « <code translate="no">AnnSearchRequest</code> » au niveau des éléments du StructArray est regroupée en candidats au niveau de l’entité avant le reclassement hybride.</p>
-<p>Utilisez l’ <code translate="no">element_scope</code> à l’intérieur de l’ <code translate="no">params</code> de l’ <code translate="no">AnnSearchRequest</code> au niveau des éléments de StructArray lorsque vous devez contrôler la manière dont plusieurs éléments correspondants issus de la même entité sont regroupés.</p>
+    </button></h2><p>Si une recherche hybride combine une requête « <code translate="no">AnnSearchRequest</code> » au niveau des éléments d’un StructArray avec une requête vectorielle au niveau de la collection, une requête « EmbeddingList » ou une requête au niveau des éléments sous un autre champ du StructArray, le champ d’application final des candidats est au niveau de l’entité. Dans ce cas, chaque « <code translate="no">AnnSearchRequest</code> » au niveau des éléments du StructArray est regroupée en candidats au niveau de l’entité avant le reclassement hybride.</p>
+<p>Utilisez l’ <code translate="no">element_scope</code> à l’intérieur de l’ <code translate="no">params</code> de l’ <code translate="no">AnnSearchRequest</code> de niveau élément StructArray lorsque vous devez contrôler la manière dont plusieurs éléments correspondants issus de la même entité sont regroupés.</p>
 <pre><code translate="no">title_req = AnnSearchRequest(
     data=[query_vector],
     anns_field=<span class="hljs-string">&quot;title_vector&quot;</span>,
@@ -317,7 +317,7 @@ results = client.hybrid_search(
 <tr><th>Portée finale des candidats</th><th>Clé de résultat</th><th>Comportement du décalage</th><th>Quand cela se produit</th></tr>
 </thead>
 <tbody>
-<tr><td>Au niveau de l'entité</td><td>Clé primaire.</td><td>Aucun décalage d'élément dans le résultat final.</td><td>La requête hybride inclut un champ vectoriel au niveau de la collection, une requête EmbeddingList ou des requêtes au niveau des éléments sous différents champs StructArray.</td></tr>
+<tr><td>Au niveau de l'entité</td><td>Clé primaire.</td><td>Aucun décalage d’élément dans le résultat final.</td><td>La requête hybride inclut un champ vectoriel au niveau de la collection, une requête EmbeddingList ou des requêtes au niveau des éléments sous différents champs StructArray.</td></tr>
 <tr><td>Niveau élément</td><td>Clé primaire, champ StructArray parent et décalage de l'élément.</td><td>Le décalage de l’élément sélectionné peut être renvoyé lorsqu’il est exposé par l’API ou le SDK.</td><td>Tous les objets « <code translate="no">AnnSearchRequest</code> » sont au niveau des éléments et se trouvent sous le même champ StructArray.</td></tr>
 </tbody>
 </table>
@@ -362,7 +362,7 @@ results = client.hybrid_search(
       </svg>
     </button></h2><ul>
 <li><p>Ajouter « <code translate="no">element_scope</code> » à une requête hybride au niveau des éléments d’un même StructArray. Cette requête reste au niveau des éléments et n’effectue pas de regroupement au niveau des entités.</p></li>
-<li><p>Ajouter des « <code translate="no">element_scope</code> » à une requête de type « <code translate="no">chunks[emb_list_vector]</code> ». La recherche « » s’effectue déjà au niveau de l’entité.</p></li>
+<li><p>Ajouter des « <code translate="no">element_scope</code> » à une requête de type « <code translate="no">chunks[emb_list_vector]</code> ». La recherche « EmbeddingList » s’effectue déjà au niveau de l’entité.</p></li>
 <li><p>Supposer que deux champs StructArray partagent les mêmes décalages d’éléments. L’ <code translate="no">3</code> décalé dans <code translate="no">chunks</code> et l’ <code translate="no">3</code> décalé dans un autre champ StructArray correspondent à des éléments différents ; la requête hybride devient donc de niveau entité.</p></li>
 <li><p>Utilisation de <code translate="no">topk_sum</code> avec <code translate="no">L2</code>. Utilisez <code translate="no">max</code>, <code translate="no">avg</code> ou <code translate="no">topk_avg</code> pour les métriques de distance négatives.</p></li>
 <li><p>Les résultats hybrides au niveau de l’entité devraient inclure le décalage de l’élément Struct sélectionné après réduction.</p></li>

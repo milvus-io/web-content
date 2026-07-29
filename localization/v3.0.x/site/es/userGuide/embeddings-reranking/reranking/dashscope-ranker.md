@@ -205,7 +205,7 @@ dashscope_ranker = Function(
    <tr>
      <td><p><code translate="no">credential</code></p></td>
      <td><p>No</p></td>
-     <td><p>La etiqueta de una credencial definida en la sección de nivel superior « <code translate="no">credential:</code> » de <code translate="no">milvus.yaml</code>.</p></td>
+     <td><p>La etiqueta de una credencial definida en la sección de nivel superior <code translate="no">credential:</code> de <code translate="no">milvus.yaml</code>.</p></td>
      <td><p><code translate="no">"dashscope_apikey"</code></p></td>
    </tr>
 </table>

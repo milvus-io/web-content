@@ -3,8 +3,8 @@ id: hugging-face-ranker.md
 title: Hugging Face RankerCompatible with Milvus v2.6.20+
 summary: >-
   В этой статье описывается, как переранжировать результаты поиска Milvus с
-  помощью размещенных на хостинге моделей оценки сходства предложений от Hugging
-  Face.
+  помощью размещенных на хостинге моделей Hugging Face для оценки сходства
+  предложений.
 beta: Milvus v2.6.20+
 ---
 <h1 id="Hugging-Face-Ranker" class="common-anchor-header">Hugging Face Ranker<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.20+</span><button data-href="#Hugging-Face-Ranker" class="anchor-icon" translate="no">
@@ -109,7 +109,7 @@ beta: Milvus v2.6.20+
 <li>Коллекция, в которой хранится текст-кандидат в поле <code translate="no">VARCHAR</code>, не допускающем нулевого значения.</li>
 </ul>
 <div class="alert note">
-<p>Milvus не контролирует, останется ли модель Hugging Face доступной через <code translate="no">hf-inference</code>, а также не гарантирует, что модель будет соответствовать вашим требованиям к стабильности, задержке и качеству выходных данных. Перед использованием модели в производственной среде проверьте её на Hugging Face и оцените её применительно к вашей рабочей нагрузке.</p>
+<p>Milvus не контролирует, останется ли модель Hugging Face доступной через <code translate="no">hf-inference</code>, а также не гарантирует, что модель будет соответствовать вашим требованиям к стабильности, задержке и качеству вывода. Перед использованием модели в производственной среде проверьте её на Hugging Face и оцените её применительно к вашей рабочей нагрузке.</p>
 </div>
 <p>В примерах используется <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2"><code translate="no">sentence-transformers/all-MiniLM-L6-v2</code></a> используются исключительно для демонстрации конфигурации. Модель не является рекомендацией или сертификатом со стороны Milvus.</p>
 <h2 id="Configure-credentials" class="common-anchor-header">Настройка учетных данных<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
@@ -197,7 +197,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Hugging Face Ranker определяется и применяется во время поиска. Вы можете изменять или опускать ранжировщик для каждого поиска без изменения схемы коллекции.</p>
+    </button></h2><p>Hugging Face Ranker определяется и применяется во время поиска. Вы можете изменить или опустить ранжировщик для каждого поиска, не изменяя схему коллекции.</p>
 <h3 id="Step-1-Prepare-a-collection" class="common-anchor-header">Шаг 1: Подготовка коллекции<button data-href="#Step-1-Prepare-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -213,7 +213,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>В следующем примере создается коллекция с текстовым полем для повторного ранжирования и векторным полем для первоначального поиска:</p>
+    </button></h3><p>В следующем примере создается коллекция с текстовым полем для повторного ранжирования и векторным полем для первоначального извлечения:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, Function, FunctionType, MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -340,7 +340,7 @@ results = client.search(
 
 <span class="hljs-built_in">print</span>(results)
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus сначала извлекает кандидаты из <code translate="no">dense</code>, затем использует текст запроса в <code translate="no">queries</code> и текст кандидата в <code translate="no">document</code> для расчёта оценок сходства предложений. Возвращаемые кандидаты упорядочиваются по оценкам Hugging Face.</p>
+<p>Milvus сначала извлекает кандидаты из <code translate="no">dense</code>, затем использует текст запроса в <code translate="no">queries</code> и текст кандидата в <code translate="no">document</code> для расчёта оценок схожести предложений. Возвращаемые кандидаты упорядочиваются по оценкам Hugging Face.</p>
 <h2 id="Troubleshooting" class="common-anchor-header">Устранение неполадок<button data-href="#Troubleshooting" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

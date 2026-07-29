@@ -25,7 +25,7 @@ summary: >-
 <p><strong>前提条件：</strong>MQの切り替え機能は<strong>、Milvus 3.0以降で</strong>利用可能です。作業を開始する前に、MilvusインスタンスをMilvus 3.0以降にアップグレードしてください。以前のバージョンではこの機能は利用できません。</p>
 </div>
 <div class="alert warning">
-<p>メッセージキューの切り替えは、<strong>リスクの高い操作</strong>です。<strong>ご自身の</strong>デプロイ方法（<strong>Helm を使用する場合</strong>、または<strong>Milvus Operator を使用する場合</strong>）に該当するセクションを選択し、その手順を最初から最後まで順を追って実行してください。Helm コマンドと Operator コマンドを混在させて使用しないでください。</p>
+<p>メッセージキューの切り替えは、<strong>リスクの高い操作</strong>です。<strong>ご自身の</strong>デプロイ方法（<strong>Helm を使用する場合</strong>、または<strong>Milvus Operator を使用する場合</strong>）に該当するセクションを選択し、その手順を最初から最後まで順を追って実行してください。Helm コマンドと Operator コマンドを混在させないでください。</p>
 </div>
 <h2 id="With-Helm" class="common-anchor-header">Helm を使用する場合<button data-href="#With-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -58,7 +58,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p><strong>ステップ 1: Milvus インスタンスが実行中であることを確認します。</strong>テストコレクションの作成、データの挿入、クエリの実行などを行い、Milvus クラスタが正常に動作していることを確認してください。</p>
-<p><strong>ステップ 2: MQ の切り替えを実行します。</strong>MixCoord 管理インターフェースを公開し、switch API を呼び出します:</p>
+<p><strong>ステップ 2: MQ の切り替えを実行します。</strong>MixCoord 管理インターフェースを公開し、switch API を呼び出します。</p>
 <pre><code translate="no" class="language-shell">kubectl port-forward --address 0.0.0.0 service/my-release-milvus-mixcoord 29091:9091
 <button class="copy-code-btn"></button></code></pre>
 <p>別のターミナルで：</p>
@@ -101,7 +101,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>ステップ 1: Milvus インスタンスが実行中であることを確認します。</strong></p>
-<p><strong>ステップ 2: 対象の Pulsar 接続を設定し、Milvus を再起動します。</strong>切り替えを行うには、Milvus がすでに Pulsar 接続を認識している必要があるため、<code translate="no">extraConfigFiles</code> 経由で<code translate="no">user.yaml</code> に書き込み、<code translate="no">helm upgrade</code> で適用します（これによりポッドが再起動されます）。Switch MQ 機能には、<code translate="no">streaming.enabled=true</code> が必要です。</p>
+<p><strong>ステップ 2: 対象の Pulsar 接続を設定し、Milvus を再起動します。</strong>この切り替えには、Milvus がすでに Pulsar 接続を認識している必要があるため、<code translate="no">extraConfigFiles</code> 経由で<code translate="no">user.yaml</code> に書き込み、<code translate="no">helm upgrade</code> で適用します（これによりポッドが再起動されます）。Switch MQ 機能には、<code translate="no">streaming.enabled=true</code> が必要です。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -163,7 +163,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>ステップ 1: Milvus インスタンスが実行中であることを確認します。</strong></p>
-<p><strong>ステップ 2: MQ の切り替えを実行します。</strong>MixCoord サービスは外部からアクセスできないため、MixCoord ポッド内部から切り替え API を実行してください:</p>
+<p><strong>ステップ 2: MQ の切り替えを実行します。</strong>MixCoord サービスは外部に公開されていないため、MixCoord ポッド内部から切り替え API を実行してください:</p>
 <pre><code translate="no" class="language-shell">kubectl exec -it &lt;mixcoord-pod&gt; -- \
   curl -X POST http://localhost:9091/management/wal/alter \
   -H &quot;Content-Type: application/json&quot; \
@@ -173,7 +173,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>切り替えが成功すると、<code translate="no">[mqTypeValue=woodpecker]</code> がログに記録されます。</p>
-<p><strong>ステップ 4: Operator 内の MQ タイプを更新します。</strong>Operator が切り替えを元に戻さないように、<strong>Operator</strong>が管理する構成を更新します<strong>。</strong> <code translate="no">change_configmap.yaml</code> を作成します:</p>
+<p><strong>ステップ 4: Operator 内の MQ タイプを更新します。</strong>Operator が切り替えを元に戻さないように、<strong>Operator</strong>が管理する設定を更新します<strong>。</strong> <code translate="no">change_configmap.yaml</code> を作成します:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

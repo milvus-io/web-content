@@ -196,7 +196,7 @@ dashscope_ranker = Function(
    <tr>
      <td><p><code translate="no">max_client_batch_size</code></p></td>
      <td><p>아니요</p></td>
-     <td><p>요청당 모델 서비스로 전송할 문서의 최대 수입니다.</p></td>
+     <td><p>요청당 모델 서비스로 전송할 문서의 최대 개수입니다.</p></td>
      <td><p><code translate="no">128</code> (기본값)</p></td>
    </tr>
    <tr>
@@ -207,7 +207,7 @@ dashscope_ranker = Function(
    </tr>
 </table>
 <div class="alert note">
-<p><code translate="no">provider</code> 및 <code translate="no">queries</code> 와 같이 모든 모델 랭커에서 공통으로 사용되는 일반 매개 변수에 대해서는 <a href="/docs/ko/model-ranker-overview.md#Create-a-model-ranker">모델 랭커 만들기를</a> 참조하십시오.</p>
+<p><code translate="no">provider</code> 및 <code translate="no">queries</code> 와 같이 모든 모델 랭커에서 공통으로 사용되는 일반 매개변수에 대해서는 <a href="/docs/ko/model-ranker-overview.md#Create-a-model-ranker">모델 랭커 만들기를</a> 참조하십시오.</p>
 </div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">표준 벡터 검색에 적용<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"

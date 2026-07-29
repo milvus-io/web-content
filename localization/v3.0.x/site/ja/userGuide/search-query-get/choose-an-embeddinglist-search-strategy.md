@@ -44,7 +44,7 @@ summary: >-
 <p>これにより表現力は向上しますが、大規模な環境では厳密なMaxSimの計算コストが高くなります。ブルートフォース方式のMaxSim検索では、クエリベクトルを候補となる各行のすべてのベクトルと比較する必要があります。これは通常、本番環境での検索には遅すぎます。</p>
 <table>
 <thead>
-<tr><th>### 問題点 - 各行には多数のベクトルが含まれる可能性がある。 - すべての行に対して厳密なMaxSimを実行すると計算コストが高くなる。 - インデックスのサイズと検索のレイテンシが急速に増加する可能性がある。</th><th>### 戦略 - 第1段階の検索には近似手法を使用する。 - 要求されたトップKよりも多くの候補を抽出する。 - 正確なMaxSimを用いて候補を再ランク付けする。</th></tr>
+<tr><th>### 問題点 - 各行には多数のベクトルが含まれる可能性がある。 - すべての行に対して厳密なMaxSimを実行すると計算コストが高くなる。 - インデックスのサイズと検索のレイテンシが急速に増加する可能性がある。</th><th>### 戦略 - 第1段階の検索には近似手法を使用する。 - 要求されたtopKよりも多くの候補を抽出する。 - 正確なMaxSimを用いて候補を再ランク付けする。</th></tr>
 </thead>
 <tbody>
 </tbody>
@@ -93,7 +93,7 @@ summary: >-
       </svg>
     </button></h2><p><code translate="no">tokenann</code> 埋め込みリスト内のすべてのベクトルにインデックスを付与します。検索時には、各クエリベクトルに対してANN検索を実行し、一致したベクトルを行単位に集約し、その結果得られた行候補をMaxSimを用いて再ランク付けします。</p>
 <div class="alert note">
-<p><strong>品質を最優先する場合は、TokenANN を使用してください。</strong>第<strong>1</strong>段階のインデックスですべてのベクトルを保持するため、元の MaxSim 計算に最も近い近似となります<strong>。</strong></p>
+<p><strong>品質を最優先する場合に TokenANN を使用します。</strong>第<strong>1</strong>段階のインデックスですべてのベクトルを保持するため、元の MaxSim 計算に最も近い近似となります。</p>
 </div>
 <ul>
 <li><p><strong>適しているケース：</strong>短いテキストチャンク、ベクトル数が少ないまたは中程度の行、トークンレベルでの意味的な分離が明確な場合、品質を重視するベースライン。</p></li>
@@ -117,11 +117,11 @@ summary: >-
       </svg>
     </button></h2><p><code translate="no">muvera</code> は、ランダム投影を用いて各埋め込みリストを固定次元のベクトルにエンコードします。これにより、第1段階の検索は標準的な行レベルのベクトル検索となります。その後、候補はMaxSimを用いて再ランク付けされます。</p>
 <div class="alert note">
-<p><strong>TokenANNの処理負荷が高すぎるが、トレーニングステップは省きたい場合にMUVERAを使用します。</strong>これは、品質とコストのバランスが取れた実用的な中間的な選択肢です。</p>
+<p><strong>TokenANNの処理負荷が高すぎるが、トレーニングステップは省きたい場合にMUVERAを使用します。</strong>これは、品質とコストのバランスが取れた実用的な妥協案です。</p>
 </div>
 <ul>
-<li><p><strong>適しているケース：</strong>長文ドキュメント、識別能力の高い埋め込み空間、TokenANNよりもインデックスサイズを小さくする必要があるワークロード。</p></li>
-<li><p><strong>適さないケース：</strong>識別力の低い埋め込み空間、またはFDE表現の次元数が高すぎてレイテンシの制約に収まらない場合。</p></li>
+<li><p><strong>適しているケース：</strong>長文ドキュメント、識別力の高い埋め込み空間、TokenANNよりもインデックスサイズを小さくする必要があるワークロード。</p></li>
+<li><p><strong>適さないケース：</strong>識別度の低い埋め込み空間、またはFDE表現の次元数が遅延許容範囲を超えてしまう場合。</p></li>
 <li><p><strong>重要なパラメータ：</strong><code translate="no">muvera_num_projections</code> 、<code translate="no">muvera_num_repeats</code> 、および<code translate="no">muvera_seed</code> 。</p></li>
 </ul>
 <h2 id="LEMUR" class="common-anchor-header">LEMUR<button data-href="#LEMUR" class="anchor-icon" translate="no">
@@ -186,10 +186,10 @@ summary: >-
 <tr><th>戦略</th><th>設定項目</th><th>ステージ</th><th>デフォルト</th><th>変更が必要な場合</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">tokenann</code></td><td><code translate="no">emb_list_strategy=&quot;tokenann&quot;</code></td><td>インデックスの構築</td><td><code translate="no">tokenann</code></td><td>デフォルトの要素ベクトルインデックス作成動作を適用したい場合や、DiskANN を使用する場合は、明示的に指定してください。</td></tr>
+<tr><td><code translate="no">tokenann</code></td><td><code translate="no">emb_list_strategy=&quot;tokenann&quot;</code></td><td>インデックスの構築</td><td><code translate="no">tokenann</code></td><td>デフォルトの要素ベクトルインデックス作成動作を有効にしたい場合や、DiskANN を使用する場合は、明示的に使用してください。</td></tr>
 <tr><td><code translate="no">muvera</code></td><td><code translate="no">emb_list_strategy=&quot;muvera&quot;</code></td><td>インデックス構築</td><td><code translate="no">tokenann</code></td><td>トレーニングを行わずに、行レベルのエンコードされた検索を行いたい場合に使用します。</td></tr>
-<tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_num_projections</code></td><td>インデックスの構築</td><td><code translate="no">4</code></td><td>SimHash の投影数を制御します。値が大きいほどバケット数が増え、エンコーディング品質が向上する可能性がありますが、エンコード後の次元数は増加します。</td></tr>
-<tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_num_repeats</code></td><td>インデックスの構築</td><td><code translate="no">7</code></td><td>連結される独立したFDEエンコーディングの数を制御します。値を大きくすると堅牢性が向上する可能性がありますが、インデックス作成および検索のコストが増加します。</td></tr>
+<tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_num_projections</code></td><td>インデックスの構築</td><td><code translate="no">4</code></td><td>SimHash の投影数を制御します。値を大きくするとバケット数が増え、エンコーディング品質が向上する可能性がありますが、エンコード後の次元数は増加します。</td></tr>
+<tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_num_repeats</code></td><td>インデックスの構築</td><td><code translate="no">7</code></td><td>独立したFDEエンコーディングを連結する数を制御します。値を大きくすると堅牢性が向上する可能性がありますが、インデックス作成および検索のコストが増加します。</td></tr>
 <tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_seed</code></td><td>インデックス構築</td><td><code translate="no">42</code></td><td>特にテストやベンチマーク比較において、再現性のあるランダムな射影を行うために設定します。</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">emb_list_strategy=&quot;lemur&quot;</code></td><td>インデックス構築</td><td><code translate="no">tokenann</code></td><td>学習済み行レベル圧縮が、固定ランダム投影よりも優れた性能を発揮すると予想される場合に使用します。</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_hidden_dim</code></td><td>インデックス構築</td><td><code translate="no">256</code></td><td>圧縮後の表現サイズを制御します。容量を増やすには値を大きくし、メモリ使用量を抑え、検索速度を向上させるには値を小さくします。</td></tr>
@@ -263,7 +263,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusでは、<code translate="no">milvus.yaml</code> からインデックスパラメータを設定することも可能です。関連するセクションは<code translate="no">knowhere</code> です。パラメータは、<code translate="no">knowhere.&lt;INDEX_TYPE&gt;.&lt;stage&gt;.&lt;parameter&gt;</code> というパターンに従い、インデックスタイプおよびステージごとに整理されています。ユーザーが指定したインデックスパラメータは、これらのデフォルト設定よりも優先されます。</p>
+    </button></h2><p>Milvusでは、<code translate="no">milvus.yaml</code> からインデックスパラメータを設定することも可能です。関連するセクションは<code translate="no">knowhere</code> です。パラメータは、<code translate="no">knowhere.&lt;INDEX_TYPE&gt;.&lt;stage&gt;.&lt;parameter&gt;</code> というパターンに従い、インデックスタイプとステージごとに整理されています。ユーザーが指定したインデックスパラメータは、これらのデフォルト設定よりも優先されます。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">knowhere:</span>
   <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
   <span class="hljs-attr">HNSW:</span>
@@ -321,7 +321,7 @@ index_params.add_index(
 </tbody>
 </table>
 <div class="alert note">
-<p><strong>互換性に関する注意事項：</strong>MUVERA および LEMUR は現在、Knowhere での fp32 データをサポートしています。DiskANN は、TokenANN 戦略でのみ EmbeddingList をサポートしています。fp32 以外のベクトル型や DiskANN を使用する場合は、デフォルト設定を変更する前に、戦略のサポート状況を確認してください。</p>
+<p><strong>互換性に関する注意事項：</strong>MUVERA および LEMUR は現在、Knowhere での fp32 データをサポートしています。DiskANN は、TokenANN 戦略でのみ EmbeddingList をサポートしています。fp32 以外のベクトル型または DiskANN を使用する場合は、デフォルトを変更する前に、戦略のサポート状況を確認してください。</p>
 </div>
 <hr>
 <h2 id="How-to-Choose-a-Strategy" class="common-anchor-header">戦略の選び方<button data-href="#How-to-Choose-a-Strategy" class="anchor-icon" translate="no">
@@ -339,13 +339,13 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>普遍的に最良の戦略というものはありません。埋め込みリストの長さ、埋め込み空間の識別能力、許容可能なレイテンシ、インデックスのサイズ、およびトレーニングステップを実行できるかどうかに基づいて選択してください。</p>
+    </button></h2><p>普遍的に最良の戦略というものはありません。埋め込みリストの長さ、埋め込み空間の識別能力、レイテンシの許容範囲、インデックスのサイズ、およびトレーニングステップの実施が可能かどうかに基づいて選択してください。</p>
 <table>
 <thead>
 <tr><th>質問</th><th>シグナル</th><th>推奨される出発点</th></tr>
 </thead>
 <tbody>
-<tr><td>高品質なベースラインが必要ですか？</td><td>コストの最適化を行う前に、実用上最良の近似値を測定したい場合。</td><td><code translate="no">tokenann</code></td></tr>
+<tr><td>高品質なベースラインが必要ですか？</td><td>コストを最適化する前に、実用上最良の近似値を測定したい場合。</td><td><code translate="no">tokenann</code></td></tr>
 <tr><td>ベクトル数の行は少ないですか、それとも中程度ですか？</td><td>各行に含まれるトークン、パッチ、またはクリップベクトルの数は少ないですか？</td><td><code translate="no">tokenann</code></td></tr>
 <tr><td>TokenANNが大きすぎる、あるいは処理が遅すぎるでしょうか？</td><td>インデックスのサイズや第1段階の検索レイテンシがボトルネックとなっています。</td><td><code translate="no">muvera</code></td></tr>
 <tr><td>トレーニングを行わずに圧縮を行いたいですか？</td><td>よりシンプルな運用モデルと再現性のあるエンコーディングが必要です。</td><td><code translate="no">muvera</code></td></tr>
@@ -370,15 +370,15 @@ index_params.add_index(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>データセットのサイズが許す場合は、品質のベースラインとして `<code translate="no">tokenann</code> ` から開始してください。</p></li>
+<li><p>データセットのサイズが許す場合は、品質のベースラインとして<code translate="no">tokenann</code> から開始してください。</p></li>
 <li><p><code translate="no">muvera</code> を使用して同じクエリを実行し、リコール、nDCG、レイテンシ、およびインデックスサイズを比較してください。</p></li>
-<li><p>埋め込みリストが大きい場合、埋め込み空間にノイズが多い場合、またはワークロードがビジュアルまたはマルチモーダルである場合は、<code translate="no">lemur</code> を試してみてください。</p></li>
+<li><p>埋め込みリストが大きい場合、埋め込み空間にノイズが多い場合、またはワークロードが視覚的あるいはマルチモーダルである場合は、<code translate="no">lemur</code> を試してみてください。</p></li>
 <li><p>ビルド時のパラメータを大幅に変更する前に、<code translate="no">retrieval_ann_ratio</code> を調整してください。リコール率が低い場合は値を大きくし、レイテンシが高すぎる場合は値を小さくしてください。</p></li>
 <li><p>常に、代表的なクエリや文書長分布を用いて検証を行ってください。短いテキストで有効な戦略でも、視覚的ドキュメントやロングテールコーパスでは機能しない場合があります。</p></li>
 </ol>
 <table>
 <thead>
-<tr><th>### 品質優先 まず `<code translate="no">tokenann</code>` から始めましょう。これを MaxSim の近似品質のベースラインとして使用してください。</th><th>### バランス重視 トレーニングパイプラインを追加せずにコストを抑えたい場合は、<code translate="no">muvera</code> を試してみてください。</th><th>### 圧縮：学習された行レベルの圧縮が、固定のランダムプロジェクションよりも優れた性能を発揮する可能性が高い場合は、<code translate="no">lemur</code> を試してみてください。</th></tr>
+<tr><th>### 品質優先 まず `<code translate="no">tokenann</code>` から始めましょう。これを MaxSim の近似品質のベースラインとして使用してください。</th><th>### バランス重視 トレーニングパイプラインを追加せずにコストを抑えたい場合は、<code translate="no">muvera</code> を試してください。</th><th>### 圧縮：学習された行レベルの圧縮が、固定のランダムプロジェクションよりも優れた性能を発揮する可能性が高い場合は、<code translate="no">lemur</code> を試してみてください。</th></tr>
 </thead>
 <tbody>
 </tbody>

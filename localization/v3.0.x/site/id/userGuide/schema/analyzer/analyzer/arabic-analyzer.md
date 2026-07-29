@@ -4,7 +4,7 @@ title: Bahasa ArabCompatible with Milvus 3.0.0+
 summary: >-
   Penganalisis bahasa Arab bawaan memproses teks bahasa Arab dengan
   menstandarkan variasi huruf dan angka, melakukan stemming terhadap istilah,
-  serta menghapus kata-kata pengisi dalam bahasa Arab.
+  serta menghilangkan kata-kata pengisi dalam bahasa Arab.
 beta: Milvus 3.0.0+
 ---
 <h1 id="Arabic" class="common-anchor-header">Bahasa Arab<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Arabic" class="anchor-icon" translate="no">

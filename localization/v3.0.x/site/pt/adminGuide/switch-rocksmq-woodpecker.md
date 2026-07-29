@@ -97,7 +97,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><div class="alert note">
-<p>Se for a primeira vez que muda para o Woodpecker, ignore esta nota. Caso contrário, limpe os metadados e dados residuais do Woodpecker antes de mudar novamente — os dados residuais podem causar um comportamento inesperado.</p>
+<p>Se esta for a primeira vez que muda para o Woodpecker, ignore esta nota. Caso contrário, limpe os metadados e dados residuais do Woodpecker antes de mudar novamente — os dados residuais podem causar um comportamento inesperado.</p>
 </div>
 <pre><code translate="no" class="language-shell">curl -X POST http://&lt;mixcoord_addr&gt;:&lt;mixcoord_port&gt;/management/wal/alter \
   -H &quot;Content-Type: application/json&quot; \

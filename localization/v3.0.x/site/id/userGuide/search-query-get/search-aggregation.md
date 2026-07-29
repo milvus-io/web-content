@@ -22,16 +22,16 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Ketika seorang pembeli mencari “sepatu lari hitam untuk latihan harian,” pencarian approximate nearest neighbor (ANN) mengurutkan produk berdasarkan kesamaan vektor dan menghasilkan daftar Top-K yang datar. Hasilnya mungkin relevan tetapi berulang: dalam contoh di bawah ini, empat dari enam hasil pertama adalah produk Nike, sedangkan Adidas dan Puma masing-masing muncul satu kali.</p>
-<p>Daftar datar tidak dapat secara langsung memberikan keragaman atau statistik tingkat merek. Sebuah aplikasi mungkin memerlukan hingga dua produk representatif dari setiap merek, jumlah produk yang diambil untuk setiap merek, atau harga rata-rata untuk setiap merek.</p>
-<p>Agregasi Pencarian mengelompokkan entitas yang diambil ke dalam kelompok berdasarkan bidang skalar yang dipilih. Dalam contoh ini, setiap merek menjadi kelompok tersendiri. Milvus kemudian dapat menghitung statistik secara terpisah untuk setiap kelompok dan mengembalikan produk representatif dari setiap kelompok, sehingga hasil pencarian lebih mudah dibandingkan dan lebih beragam.</p>
+    </button></h1><p>Ketika seorang pembeli mencari “sepatu lari hitam untuk latihan harian,” pencarian approximate nearest neighbor (ANN) mengurutkan produk berdasarkan kemiripan vektor dan menghasilkan daftar Top-K yang datar. Hasilnya mungkin relevan tetapi berulang: dalam contoh di bawah ini, empat dari enam hasil pertama adalah produk Merek A, sedangkan Merek B dan Merek C masing-masing muncul satu kali.</p>
+<p>Daftar datar tidak dapat secara langsung memberikan ringkasan yang berorientasi pada kelompok. Sebuah aplikasi mungkin perlu membandingkan merek berdasarkan jumlah kandidat yang disimpan atau harga rata-rata, memeriksa sejumlah kecil produk representatif dari setiap merek, atau mengorganisir hasil ke dalam beberapa tingkatan kelompok.</p>
+<p>Agregasi Pencarian mengelompokkan kandidat ANN yang disimpan ke dalam bucket berdasarkan bidang skalar yang dipilih. Dalam contoh ini, setiap merek menjadi bucket tersendiri. Milvus dapat menghitung statistik untuk setiap bucket, mengurutkan bucket-bucket tersebut, dan melampirkan produk-produk yang representatif. Aplikasi mengonsumsi respons berbasis bucket ini melalui <code translate="no">result.agg_buckets</code>.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v3.0.x/assets/search-aggregation-overview.png" alt="A flat running-shoe search result becomes a set of comparable brand buckets" class="doc-image" id="a-flat-running-shoe-search-result-becomes-a-set-of-comparable-brand-buckets" /> 
    <span>Hasil pencarian sepatu lari yang datar berubah menjadi sekumpulan kelompok merek yang dapat dibandingkan</span>
   
  </span></p>
-<p>Agregasi Pencarian merangkum kandidat yang ditemukan, bukan setiap entitas dalam koleksi. Oleh karena itu, jumlah kelompok dan metrik bersifat perkiraan dan tetap terkait dengan relevansi vektor.</p>
+<p>Agregasi Pencarian tidak menjalankan agregasi koleksi penuh yang tepat. Keberadaan kelompok, jumlah, metrik, urutan, dan hasil yang representatif bergantung pada kandidat yang disimpan oleh ANN dan tahap pengelompokan.</p>
 <h2 id="How-it-works" class="common-anchor-header">Cara kerjanya<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -49,16 +49,17 @@ beta: Milvus 3.0.x
       </svg>
     </button></h2><p><span class="img-wrapper">
   
-   <img translate="no" src="/docs/v3.0.x/assets/search-aggregation-bucketing.png" alt="Three-stage Search Aggregation workflow from ANN retrieval to bucket results" class="doc-image" id="three-stage-search-aggregation-workflow-from-ann-retrieval-to-bucket-results" /> 
-   <span>Alur kerja Agregasi Pencarian tiga tahap dari pengambilan ANN hingga hasil bucket</span>
+   <img translate="no" src="/docs/v3.0.x/assets/search-aggregation-bucketing.png" alt="ANN candidates grouped by bucket keys and returned with counts, metrics, and representative hits" class="doc-image" id="ann-candidates-grouped-by-bucket-keys-and-returned-with-counts,-metrics,-and-representative-hits" /> 
+   <span>Kandidat ANN yang dikelompokkan berdasarkan kunci bucket dan dikembalikan bersama jumlah, metrik, serta hasil yang mewakili</span>
   
  </span></p>
 <ol>
-<li><p><strong>Mengambil kandidat.</strong> Milvus menjalankan pencarian ANN untuk membuat kumpulan entitas yang paling dekat dengan vektor kueri. Agregasi Pencarian beroperasi pada kumpulan ini, bukan pada setiap entitas dalam koleksi, sehingga kumpulan tersebut menentukan entitas mana yang dapat berkontribusi pada bucket.</p></li>
-<li><p><strong>Membuat bucket.</strong> Pengaturan " <code translate="no">SearchAggregation.fields</code> " menentukan bidang skalar yang membentuk kunci setiap bucket. Pada gambar, " <code translate="no">brand</code> " menempatkan enam kandidat ke dalam bucket Nike, Adidas, dan Puma. Saat Anda menentukan beberapa bidang, entitas hanya berbagi bucket jika kombinasi nilai bidangnya cocok.</p></li>
-<li><p><strong>Hitung dan kembalikan hasil.</strong> Milvus menghitung metrik yang dikonfigurasi untuk setiap bucket, mengurutkan bucket yang telah selesai, dan menggunakan ` <code translate="no">TopHits</code> ` untuk memilih entitas representatif. Setiap bucket di <code translate="no">result.agg_buckets</code> berisi kunci, jumlah, metrik, hit, dan bucket anak opsional.</p></li>
+<li><p><strong>Mengambil kandidat.</strong> Milvus menjalankan pencarian ANN untuk menemukan entitas yang paling dekat dengan vektor kueri. Tahap pengelompokan kemudian mempertahankan sejumlah kandidat yang dibatasi untuk setiap kunci komposit lengkap. Batas kandidat per kunci ini adalah yang terbesar <code translate="no">TopHits.size</code> di mana pun dalam pohon agregasi, atau <code translate="no">1</code> ketika tidak ada tingkat yang mengonfigurasi <code translate="no">top_hits</code>.</p></li>
+<li><p><strong>Membuat bucket.</strong> <code translate="no">SearchAggregation.fields</code> menentukan kunci bucket. Setiap kombinasi unik nilai bidang menghasilkan kunci terpisah. Pada gambar, <code translate="no">fields=[&quot;brand&quot;]</code> menghasilkan kunci bucket <code translate="no">(Brand A)</code>, <code translate="no">(Brand B)</code>, dan <code translate="no">(Brand C)</code>. Kandidat yang dipertahankan dengan kunci yang sama termasuk dalam bucket yang sama dan berkontribusi pada <code translate="no">count</code>-nya. <code translate="no">SearchAggregation.size</code> membatasi jumlah bucket yang dikembalikan oleh Milvus.</p></li>
+<li><p><strong>Hitung dan kembalikan hasil.</strong> Setiap bucket yang dikembalikan berisi kuncinya dan jumlah kandidat yang dipertahankan. Milvus juga dapat menghitung metrik yang dikonfigurasi, mengurutkan bucket, mengembalikan entitas representatif, dan membangun bucket anak. Setiap <code translate="no">AggregationBucket</code> di <code translate="no">result.agg_buckets</code> mengekspos <code translate="no">key</code>, <code translate="no">count</code>, <code translate="no">metrics</code>, <code translate="no">hits</code>, dan <code translate="no">sub_groups</code>. Saat Search Aggregation diaktifkan, daftar hasil pencarian biasa kosong.</p></li>
 </ol>
-<p>Dengan " <code translate="no">sub_aggregation</code>", Milvus mengulangi langkah 2 dan 3 di dalam setiap bucket induk. Karena setiap tahap beroperasi pada kumpulan pengambilan ANN, perubahan dalam recall pencarian dapat mengubah jumlah bucket, metrik, urutan, hits, dan hasil bersarang.</p>
+<p>Dalam diagram, <code translate="no">TopHits.size=4</code> menyediakan anggaran kandidat per kunci sebesar empat, sehingga empat kandidat Merek A yang dipertahankan menghasilkan <code translate="no">count: 4</code>. Kartu Merek A yang telah selesai hanya menampilkan dua dari empat hasil representatif yang dikembalikan agar gambar tetap ringkas.</p>
+<p>Dengan " <code translate="no">sub_aggregation</code>", Milvus mengulangi langkah 2 dan 3 di dalam setiap bucket induk. Perubahan pada recall ANN atau anggaran kandidat per kunci dapat mengubah jumlah bucket, metrik, urutan, hasil pencarian, dan hasil bersarang.</p>
 <h2 id="Limits" class="common-anchor-header">Batasan<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -77,13 +78,16 @@ beta: Milvus 3.0.x
     </button></h2><p>Sebelum menggunakan Search Aggregation, perhatikan batasan berikut:</p>
 <ul>
 <li><p><strong>Agregasi bersarang:</strong> Sebuah permintaan dapat berisi satu <code translate="no">SearchAggregation</code> akar dan hingga tiga tingkat <code translate="no">sub_aggregation</code> bersarang, dengan total maksimal empat tingkat.</p></li>
-<li><p><strong>Kolom yang digunakan untuk membuat kunci bucket:</strong> <code translate="no">SearchAggregation.fields</code> tidak mendukung kolom <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, vektor, <code translate="no">JSON</code>, atau kolom dinamis.</p></li>
-<li><p><strong>Kolom metrik dan pengurutan:</strong> <code translate="no">metrics</code> dan <code translate="no">TopHits.sort</code> tidak mendukung <code translate="no">JSON</code> atau kolom dinamis.</p></li>
-<li><p><strong>Bidang yang diulang:</strong> Bidang yang sama tidak boleh muncul di lebih dari satu daftar <code translate="no">SearchAggregation.fields</code>. Misalnya, jika agregasi akar menggunakan <code translate="no">fields=[&quot;category&quot;]</code>, <code translate="no">sub_aggregation</code> yang bersarang tidak boleh juga menggunakan <code translate="no">fields=[&quot;category&quot;]</code>.</p></li>
-<li><p><strong>Kombinasi yang tidak didukung:</strong> Search Aggregation tidak dapat digabungkan dengan <code translate="no">offset</code>, Search Iterators, Hybrid Search, Highlighter, <code translate="no">group_by_field</code>, atau <code translate="no">group_by_fields</code>.</p></li>
+<li><p><strong>Kolom yang digunakan untuk membuat kunci bucket:</strong> <code translate="no">SearchAggregation.fields</code> mendukung kolom Boolean, integer, <code translate="no">VARCHAR</code>, dan <code translate="no">TIMESTAMPTZ</code>. Fitur ini tidak mendukung kolom <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, <code translate="no">ARRAY</code>, <code translate="no">JSON</code>, <code translate="no">GEOMETRY</code>, <code translate="no">TEXT</code>, vektor, atau kolom dinamis.</p></li>
+<li><p><strong>Bidang metrik:</strong> <code translate="no">count</code> menerima <code translate="no">&quot;*&quot;</code> atau bidang apa pun yang bukan<code translate="no">JSON</code> dan bukan bidang dinamis, serta mengabaikan nilai <code translate="no">NULL</code> saat bidang ditentukan. <code translate="no">sum</code> dan <code translate="no">avg</code> menerima bidang bilangan bulat dan bilangan floating-point. <code translate="no">min</code> dan <code translate="no">max</code> juga menerima bidang string dan <code translate="no">TIMESTAMPTZ</code>.</p></li>
+<li><p><strong>Kolom penyortiran Top Hits:</strong> <code translate="no">TopHits.sort</code> mendukung kolom Boolean, integer, floating-point, string, dan <code translate="no">TIMESTAMPTZ</code> yang dapat dibandingkan, serta <code translate="no">_score</code>. Kolom ini tidak mendukung <code translate="no">ARRAY</code>, <code translate="no">JSON</code>, <code translate="no">GEOMETRY</code>, vektor, atau kolom dinamis.</p></li>
+<li><p><strong>Anggaran kandidat:</strong> Nilai <code translate="no">TopHits.size</code> terbesar di mana pun dalam pohon agregasi juga merupakan jumlah kandidat yang disimpan per kunci komposit lengkap. Jika tidak ada tingkat yang mengonfigurasi <code translate="no">top_hits</code>, Milvus menyimpan satu kandidat per kunci. Bucket <code translate="no">count</code> dan metrik dihitung dari kandidat yang disimpan ini, sehingga mengubah <code translate="no">TopHits.size</code> dapat mengubahnya.</p></li>
+<li><p><strong>Bidang bucket yang dapat bernilai null:</strong> Nilai ` <code translate="no">NULL</code> ` membentuk kunci bucket tersendiri. Untuk mengecualikan bucket null, tambahkan filter seperti ` <code translate="no">brand is not null</code> ` ke permintaan pencarian.</p></li>
+<li><p><strong>Kolom yang diulang:</strong> Kolom yang sama tidak boleh muncul di lebih dari satu daftar " <code translate="no">SearchAggregation.fields</code> ". Misalnya, jika agregasi akar menggunakan <code translate="no">fields=[&quot;category&quot;]</code>, agregasi bersarang <code translate="no">sub_aggregation</code> tidak boleh juga menggunakan <code translate="no">fields=[&quot;category&quot;]</code>.</p></li>
+<li><p><strong>Kombinasi yang tidak didukung:</strong> Search Aggregation tidak dapat digabungkan dengan <code translate="no">offset</code>, Search Iterators, Hybrid Search, Highlighter, atau Grouping Search.</p></li>
 <li><p><strong>Entri yang dikembalikan:</strong> Pertahankan jumlah maksimum entri hasil yang dikonfigurasi pada atau di bawah 10.000. Hitung batas maksimum ini sebagai berikut:</p>
 <p><code translate="no">number of query vectors × size at every aggregation level × largest TopHits.size at any level</code></p>
-<p>Gunakan <code translate="no">1</code> sebagai faktor terakhir saat tidak ada level yang mengonfigurasi <code translate="no">TopHits</code>. Misalnya, satu vektor kueri, 10 bucket akar, lima bucket anak per bucket akar, dan dua hit per bucket anak menghasilkan batas maksimum yang dikonfigurasi sebesar:</p>
+<p>Gunakan ` <code translate="no">1</code> ` sebagai faktor terakhir saat tidak ada tingkat yang dikonfigurasi dalam ` <code translate="no">TopHits</code>`. Misalnya, satu vektor kueri, 10 bucket akar, lima bucket anak per bucket akar, dan dua hit per bucket anak menghasilkan batas maksimum yang dikonfigurasi sebesar:</p>
 <p><code translate="no">1 × 10 × 5 × 2 = 100</code></p></li>
 </ul>
 <h2 id="Use-Search-Aggregation" class="common-anchor-header">Gunakan Agregasi Pencarian<button data-href="#Use-Search-Aggregation" class="anchor-icon" translate="no">
@@ -101,19 +105,18 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pilih contoh yang sesuai dengan apa yang ingin Anda konfigurasi:</p>
+    </button></h2><p>Pilih contoh berdasarkan apa yang ingin Anda capai:</p>
 <table>
 <thead>
-<tr><th>Tujuan</th><th>Pengaturan utama</th><th>Contoh</th></tr>
+<tr><th>Buka</th><th>Deskripsi</th><th>Pengaturan kunci</th></tr>
 </thead>
 <tbody>
-<tr><td>Buat kunci bucket</td><td><code translate="no">fields</code>, <code translate="no">size</code></td><td><a href="#build-bucket-keys">Buat kunci bucket</a></td></tr>
-<tr><td>Hitung statistik dan urutkan bucket</td><td><code translate="no">metrics</code>, <code translate="no">order</code></td><td><a href="#calculate-metrics-and-order-buckets">Hitung metrik dan urutkan bucket</a></td></tr>
-<tr><td>Mengembalikan dan mengurutkan hit yang representatif</td><td><code translate="no">top_hits</code>, <code translate="no">TopHits.size</code>, <code translate="no">TopHits.sort</code></td><td><a href="#return-and-sort-representative-hits">Mengembalikan dan mengurutkan hasil yang representatif</a></td></tr>
-<tr><td>Buat hasil hierarkis</td><td><code translate="no">sub_aggregation</code></td><td><a href="#create-nested-buckets">Buat kelompok bersarang</a></td></tr>
+<tr><td><a href="#Compare-and-sort-buckets">Bandingkan dan urutkan bucket</a></td><td>Hitung statistik per bucket untuk membandingkan bucket, lalu urutkan bucket yang ditampilkan berdasarkan metrik, jumlah, atau kunci.</td><td><code translate="no">fields</code>, <code translate="no">size</code>, <code translate="no">metrics</code>, <code translate="no">order</code></td></tr>
+<tr><td><a href="#Show-representative-results-from-each-bucket">Tampilkan hasil representatif dari setiap bucket</a></td><td>Kembalikan sejumlah entitas terbatas dari setiap bucket dan urutkan entitas-entitas tersebut secara terpisah berdasarkan bidang skalar atau skor vektor.</td><td><code translate="no">top_hits</code>, <code translate="no">TopHits.size</code>, <code translate="no">TopHits.sort</code></td></tr>
+<tr><td><a href="#Group-results-at-multiple-levels">Kelompokkan hasil pada beberapa tingkatan</a></td><td>Atur hasil ke dalam tingkatan bucket induk dan anak untuk menganalisis berbagai dimensi secara berurutan.</td><td><code translate="no">sub_aggregation</code></td></tr>
 </tbody>
 </table>
-<p>Contoh di bawah ini menggunakan koleksi produk dengan bidang merek, kategori, warna, harga, dan peringkat. Perluas bagian berikut untuk membuat koleksi dan mendefinisikan variabel pencarian bersama.</p>
+<p>Contoh di bawah ini menggunakan koleksi produk dengan bidang merek, kategori, warna, harga, dan peringkat. Semua nama merek, nama produk, harga, peringkat, dan hasil pencarian merupakan data contoh sintetis. Perluas bagian berikut untuk membuat koleksi dan mendefinisikan variabel pencarian bersama.</p>
 <p><details></p>
 <p><summary>Siapkan koleksi contoh</summary></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient, SearchAggregation, TopHits
@@ -150,6 +153,8 @@ client.create_collection(
     collection_name=collection_name,
     schema=schema,
     index_params=index_params,
+    <span class="hljs-comment"># Make preceding writes visible to searches from this client.</span>
+    consistency_level=<span class="hljs-string">&quot;Session&quot;</span>,
 )
 
 client.insert(
@@ -158,8 +163,8 @@ client.insert(
         {
             <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
             <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.12</span>, <span class="hljs-number">0.42</span>, <span class="hljs-number">0.18</span>, <span class="hljs-number">0.66</span>, <span class="hljs-number">0.31</span>],
-            <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Nike Air Zoom Runner&quot;</span>,
-            <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;Nike&quot;</span>,
+            <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Runner A1&quot;</span>,
+            <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;Brand A&quot;</span>,
             <span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;running_shoes&quot;</span>,
             <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;black&quot;</span>,
             <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">129.99</span>,
@@ -169,8 +174,8 @@ client.insert(
         {
             <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>,
             <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.10</span>, <span class="hljs-number">0.39</span>, <span class="hljs-number">0.20</span>, <span class="hljs-number">0.61</span>, <span class="hljs-number">0.29</span>],
-            <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Nike Pegasus Trail&quot;</span>,
-            <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;Nike&quot;</span>,
+            <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Trail A2&quot;</span>,
+            <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;Brand A&quot;</span>,
             <span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;running_shoes&quot;</span>,
             <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;blue&quot;</span>,
             <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">139.99</span>,
@@ -180,8 +185,8 @@ client.insert(
         {
             <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">3</span>,
             <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.14</span>, <span class="hljs-number">0.44</span>, <span class="hljs-number">0.19</span>, <span class="hljs-number">0.68</span>, <span class="hljs-number">0.33</span>],
-            <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Adidas Ultraboost Light&quot;</span>,
-            <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;Adidas&quot;</span>,
+            <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Runner B1&quot;</span>,
+            <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;Brand B&quot;</span>,
             <span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;running_shoes&quot;</span>,
             <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;white&quot;</span>,
             <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">159.99</span>,
@@ -191,8 +196,8 @@ client.insert(
         {
             <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">4</span>,
             <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.16</span>, <span class="hljs-number">0.41</span>, <span class="hljs-number">0.22</span>, <span class="hljs-number">0.62</span>, <span class="hljs-number">0.30</span>],
-            <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Puma Velocity Nitro&quot;</span>,
-            <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;Puma&quot;</span>,
+            <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Runner C1&quot;</span>,
+            <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;Brand C&quot;</span>,
             <span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;running_shoes&quot;</span>,
             <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red&quot;</span>,
             <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">119.99</span>,
@@ -202,8 +207,8 @@ client.insert(
         {
             <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">5</span>,
             <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.48</span>, <span class="hljs-number">0.20</span>, <span class="hljs-number">0.59</span>, <span class="hljs-number">0.15</span>, <span class="hljs-number">0.71</span>],
-            <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Nike Windrunner Jacket&quot;</span>,
-            <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;Nike&quot;</span>,
+            <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Jacket A1&quot;</span>,
+            <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;Brand A&quot;</span>,
             <span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;jackets&quot;</span>,
             <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;black&quot;</span>,
             <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>,
@@ -213,8 +218,8 @@ client.insert(
         {
             <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">6</span>,
             <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.45</span>, <span class="hljs-number">0.18</span>, <span class="hljs-number">0.55</span>, <span class="hljs-number">0.17</span>, <span class="hljs-number">0.69</span>],
-            <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Adidas Own The Run Jacket&quot;</span>,
-            <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;Adidas&quot;</span>,
+            <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Jacket B1&quot;</span>,
+            <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;Brand B&quot;</span>,
             <span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;jackets&quot;</span>,
             <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;blue&quot;</span>,
             <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">89.99</span>,
@@ -224,8 +229,8 @@ client.insert(
         {
             <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">7</span>,
             <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.09</span>, <span class="hljs-number">0.38</span>, <span class="hljs-number">0.17</span>, <span class="hljs-number">0.60</span>, <span class="hljs-number">0.27</span>],
-            <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Nike Vomero 17&quot;</span>,
-            <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;Nike&quot;</span>,
+            <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Runner A3&quot;</span>,
+            <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;Brand A&quot;</span>,
             <span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;running_shoes&quot;</span>,
             <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;black&quot;</span>,
             <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">159.99</span>,
@@ -235,8 +240,8 @@ client.insert(
         {
             <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">8</span>,
             <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.13</span>, <span class="hljs-number">0.43</span>, <span class="hljs-number">0.21</span>, <span class="hljs-number">0.65</span>, <span class="hljs-number">0.32</span>],
-            <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Nike InfinityRN 4&quot;</span>,
-            <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;Nike&quot;</span>,
+            <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Runner A4&quot;</span>,
+            <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;Brand A&quot;</span>,
             <span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;running_shoes&quot;</span>,
             <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;black&quot;</span>,
             <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">149.99</span>,
@@ -246,7 +251,6 @@ client.insert(
     ],
 )
 
-client.flush(collection_name)
 client.load_collection(collection_name)
 
 query_vector = [<span class="hljs-number">0.11</span>, <span class="hljs-number">0.40</span>, <span class="hljs-number">0.19</span>, <span class="hljs-number">0.64</span>, <span class="hljs-number">0.30</span>]
@@ -256,8 +260,8 @@ search_params = {
 }
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>Pengaturan di atas mengonfigurasi ` <code translate="no">COSINE</code> ` untuk indeks vektor dan parameter pencarian. Oleh karena itu, contoh-contoh selanjutnya menggunakan ` <code translate="no">{&quot;_score&quot;: &quot;desc&quot;}</code> ` untuk menempatkan kesamaan kosinus yang lebih tinggi di urutan pertama. Untuk metrik jarak seperti ` <code translate="no">L2</code>`, gunakan ` <code translate="no">{&quot;_score&quot;: &quot;asc&quot;}</code>`.</p>
-<h3 id="Build-bucket-keys" class="common-anchor-header">Buat kunci bucket<button data-href="#Build-bucket-keys" class="anchor-icon" translate="no">
+<p>Pengaturan di atas mengonfigurasi <code translate="no">COSINE</code> untuk indeks vektor dan parameter pencarian. Oleh karena itu, contoh-contoh selanjutnya menggunakan <code translate="no">{&quot;_score&quot;: &quot;desc&quot;}</code> untuk menempatkan kesamaan kosinus yang lebih tinggi terlebih dahulu. Untuk metrik jarak seperti <code translate="no">L2</code>, gunakan <code translate="no">{&quot;_score&quot;: &quot;asc&quot;}</code>.</p>
+<h3 id="Compare-and-sort-buckets" class="common-anchor-header">Membandingkan dan mengurutkan bucket<button data-href="#Compare-and-sort-buckets" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -272,24 +276,28 @@ search_params = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Mulailah dengan membuat objek <code translate="no">SearchAggregation</code>. Konfigurasi berikut membuat satu bucket untuk setiap nilai <code translate="no">brand</code> yang berbeda dan memilih hingga tiga bucket untuk dikembalikan:</p>
+    </button></h3><p>Gunakan pola ini saat Anda perlu membandingkan kelompok entitas yang diambil menggunakan statistik yang dihitung dan mengontrol urutan pengembalian bucket. Dalam contoh ini, Milvus mengelompokkan produk yang diambil berdasarkan <code translate="no">brand</code>, menghitung metrik harga untuk setiap bucket merek, dan mengurutkan bucket berdasarkan harga rata-rata.</p>
+<p>Jika tujuan Anda hanya untuk meningkatkan keragaman hasil dengan mengembalikan satu atau lebih entitas per nilai bidang, gunakan <a href="/docs/id/grouping-search.md">Pencarian Pengelompokan</a> sebagai gantinya.</p>
+<p>Konfigurasi berikut ini membuat hingga tiga bucket merek, menghitung metrik untuk setiap bucket, dan mengurutkan bucket berdasarkan harga rata-rata:</p>
 <pre><code translate="no" class="language-python">aggregation = SearchAggregation(
-    <span class="hljs-comment"># Form one bucket for each distinct brand value.</span>
-    fields=[<span class="hljs-string">&quot;brand&quot;</span>],
-    <span class="hljs-comment"># Return up to three buckets at this aggregation level.</span>
-    size=<span class="hljs-number">3</span>,
+<span class="highlighted-comment-line">    <span class="hljs-comment"># Form one bucket for each distinct brand value.</span></span>
+<span class="highlighted-comment-line">    fields=[<span class="hljs-string">&quot;brand&quot;</span>],</span>
+<span class="highlighted-comment-line">    <span class="hljs-comment"># Return up to three buckets at this aggregation level.</span></span>
+<span class="highlighted-comment-line">    size=<span class="hljs-number">3</span>,</span>
+<span class="highlighted-comment-line">    <span class="hljs-comment"># Calculate named metrics for every selected bucket.</span></span>
+<span class="highlighted-comment-line">    metrics={</span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;product_count&quot;</span>: {<span class="hljs-string">&quot;count&quot;</span>: <span class="hljs-string">&quot;*&quot;</span>},</span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;avg_price&quot;</span>: {<span class="hljs-string">&quot;avg&quot;</span>: <span class="hljs-string">&quot;price&quot;</span>},</span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;min_price&quot;</span>: {<span class="hljs-string">&quot;min&quot;</span>: <span class="hljs-string">&quot;price&quot;</span>},</span>
+<span class="highlighted-comment-line">    },</span>
+<span class="highlighted-comment-line">    <span class="hljs-comment"># Sort buckets by average price, highest first.</span></span>
+<span class="highlighted-comment-line">    order=[</span>
+<span class="highlighted-comment-line">        {<span class="hljs-string">&quot;avg_price&quot;</span>: <span class="hljs-string">&quot;desc&quot;</span>},</span>
+<span class="highlighted-comment-line">        <span class="hljs-comment"># If average prices are equal, sort by bucket key in ascending order.</span></span>
+<span class="highlighted-comment-line">        {<span class="hljs-string">&quot;_key&quot;</span>: <span class="hljs-string">&quot;asc&quot;</span>},</span>
+<span class="highlighted-comment-line">    ],</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Parameter yang umum digunakan adalah:</p>
-<table>
-<thead>
-<tr><th>Parameter</th><th>Nilai dalam contoh ini</th><th>Tujuan</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">fields</code></td><td><code translate="no">[&quot;brand&quot;]</code></td><td>Daftar bidang skalar yang tidak kosong yang membentuk kunci bucket. Satu bidang akan menghasilkan kunci satu bagian.</td></tr>
-<tr><td><code translate="no">size</code></td><td><code translate="no">3</code></td><td>Jumlah maksimum bucket yang dikembalikan pada tingkat agregasi ini.</td></tr>
-</tbody>
-</table>
 <p>Berikan objek tersebut ke parameter ` <code translate="no">search_aggregation</code> ` dari ` <code translate="no">MilvusClient.search()</code>`:</p>
 <pre><code translate="no" class="language-python">result = client.search(
     collection_name=collection_name,
@@ -308,20 +316,25 @@ search_params = {
 <span class="highlighted-wrapper-line">    search_aggregation=aggregation,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+<p>Saat ` <code translate="no">search_aggregation</code> ` diatur, PyMilvus tidak mengembalikan entitas biasa dalam ` <code translate="no">result[0]</code>`. Baca respons bucket dari ` <code translate="no">result.agg_buckets[0]</code> ` sebagai gantinya. Parameter ` <code translate="no">output_fields</code> ` mengontrol bidang skalar mana yang muncul dalam setiap pemetaan ` <code translate="no">AggregationHit.fields</code> ` yang dikembalikan; Milvus tetap dapat menggunakan bidang sumber metrik dan bidang urutan yang tidak tercantum dalam ` <code translate="no">output_fields</code>`.</p>
 <p><details></p>
 <p><summary>Lihat contoh keluaran bucket</summary></p>
-<p>Output berikut diambil dari permintaan di atas dan diserialisasikan sebagai JSON agar mudah dibaca. PyMilvus mengembalikan objek ` <code translate="no">AggregationBucket</code> `, bukan JSON.</p>
+<p>Output berikut diambil dari permintaan di atas dan diserialisasikan sebagai JSON agar mudah dibaca. PyMilvus mengembalikan objek ` <code translate="no">AggregationBucket</code> `, bukan JSON. Nilai ` <code translate="no">key</code> ` selalu berupa daftar terurut dari komponen kunci, bahkan ketika ` <code translate="no">fields</code> ` hanya berisi satu bidang. Hal ini menjaga urutan bidang untuk kunci gabungan.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
   <span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
       <span class="hljs-punctuation">{</span>
         <span class="hljs-attr">&quot;field_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">103</span><span class="hljs-punctuation">,</span>
         <span class="hljs-attr">&quot;field_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;brand&quot;</span><span class="hljs-punctuation">,</span>
-        <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Nike&quot;</span>
+        <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Brand B&quot;</span>
       <span class="hljs-punctuation">}</span>
     <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;count&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;metrics&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;metrics&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;product_count&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;avg_price&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">159.99</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;min_price&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">159.99</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;hits&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;sub_groups&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span>
   <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
@@ -330,11 +343,15 @@ search_params = {
       <span class="hljs-punctuation">{</span>
         <span class="hljs-attr">&quot;field_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">103</span><span class="hljs-punctuation">,</span>
         <span class="hljs-attr">&quot;field_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;brand&quot;</span><span class="hljs-punctuation">,</span>
-        <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Adidas&quot;</span>
+        <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Brand A&quot;</span>
       <span class="hljs-punctuation">}</span>
     <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;count&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;metrics&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;metrics&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;product_count&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;avg_price&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">129.99</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;min_price&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">129.99</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;hits&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;sub_groups&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span>
   <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
@@ -343,100 +360,88 @@ search_params = {
       <span class="hljs-punctuation">{</span>
         <span class="hljs-attr">&quot;field_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">103</span><span class="hljs-punctuation">,</span>
         <span class="hljs-attr">&quot;field_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;brand&quot;</span><span class="hljs-punctuation">,</span>
-        <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Puma&quot;</span>
+        <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Brand C&quot;</span>
       <span class="hljs-punctuation">}</span>
     <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;count&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;metrics&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;metrics&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;product_count&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;avg_price&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">119.99</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;min_price&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">119.99</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;hits&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;sub_groups&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span>
   <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>Untuk vektor kueri tunggal dalam panduan ini, baca bucket tingkat atas yang dikembalikan dari ` <code translate="no">result.agg_buckets[0]</code>`. Setiap bucket menampilkan ` <code translate="no">key</code>`, entitas `retrieval-pool` di ` <code translate="no">count</code>`, ` <code translate="no">metrics</code>` yang dihitung, ` <code translate="no">hits</code>` yang representatif, dan bucket bersarang di ` <code translate="no">sub_groups</code>`.</p>
-<p>Bagian-bagian berikut mendefinisikan ulang ` <code translate="no">aggregation</code> ` untuk kasus penggunaan lainnya. Berikan objek yang telah diperbarui ke parameter ` <code translate="no">search_aggregation</code> ` yang sama dan jalankan kembali panggilan pencarian.</p>
-<p>Milvus mengabaikan ` <code translate="no">limit</code> ` saat ` <code translate="no">search_aggregation</code> ` ditetapkan. Gunakan nilai akar ` <code translate="no">SearchAggregation.size</code> ` untuk mengontrol jumlah bucket tingkat atas.</p>
-<p>Untuk membuat kunci bucket gabungan, masukkan beberapa nama bidang dalam daftar yang sama:</p>
-<pre><code translate="no" class="language-python">aggregation = SearchAggregation(
-    <span class="hljs-comment"># Combine brand and color to form a composite bucket key.</span>
-    fields=[<span class="hljs-string">&quot;brand&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>],
-    size=<span class="hljs-number">6</span>,
-)
-<button class="copy-code-btn"></button></code></pre>
-<p>Konfigurasi ini dapat menghasilkan kunci seperti <code translate="no">(Nike, black)</code>, <code translate="no">(Nike, blue)</code>, dan <code translate="no">(Adidas, white)</code>. Dua entitas hanya berbagi bucket jika kedua nilainya cocok. Milvus mempertahankan urutan daftar, sehingga <code translate="no">brand</code> adalah komponen kunci pertama dan <code translate="no">color</code> adalah yang kedua. Masukkan beberapa string dalam satu daftar datar; daftar bersarang tidak didukung.</p>
-<p><code translate="no">size=6</code> adalah jumlah maksimum bucket gabungan yang dikembalikan pada tingkat agregasi ini. Data contoh berisi lima kombinasi merek-warna yang berbeda, sehingga kelimanya dapat dikembalikan. Dalam <a href="#limits">batas entri yang dikembalikan</a>, permintaan ini menyumbang <code translate="no">1 query vector × 6 buckets × 1 = 6</code> entri hasil yang dikonfigurasi.</p>
-<h3 id="Calculate-metrics-and-order-buckets" class="common-anchor-header">Hitung metrik dan urutkan bucket<button data-href="#Calculate-metrics-and-order-buckets" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>Tambahkan ` <code translate="no">metrics</code> ` dan ` <code translate="no">order</code> ` saat Anda memerlukan statistik bucket dan urutan bucket yang deterministik:</p>
-<pre><code translate="no" class="language-python">aggregation = SearchAggregation(
-    fields=[<span class="hljs-string">&quot;brand&quot;</span>],
-    size=<span class="hljs-number">3</span>,
-<span class="highlighted-comment-line">    <span class="hljs-comment"># Calculate named metrics for every selected bucket.</span></span>
-<span class="highlighted-comment-line">    metrics={</span>
-<span class="highlighted-comment-line">        <span class="hljs-string">&quot;product_count&quot;</span>: {<span class="hljs-string">&quot;count&quot;</span>: <span class="hljs-string">&quot;*&quot;</span>},</span>
-<span class="highlighted-comment-line">        <span class="hljs-string">&quot;avg_price&quot;</span>: {<span class="hljs-string">&quot;avg&quot;</span>: <span class="hljs-string">&quot;price&quot;</span>},</span>
-<span class="highlighted-comment-line">        <span class="hljs-string">&quot;min_price&quot;</span>: {<span class="hljs-string">&quot;min&quot;</span>: <span class="hljs-string">&quot;price&quot;</span>},</span>
-<span class="highlighted-comment-line">    },</span>
-<span class="highlighted-comment-line">    <span class="hljs-comment"># Sort buckets by average price, highest first.</span></span>
-<span class="highlighted-comment-line">    order=[</span>
-<span class="highlighted-comment-line">        {<span class="hljs-string">&quot;avg_price&quot;</span>: <span class="hljs-string">&quot;desc&quot;</span>},</span>
-<span class="highlighted-comment-line">        <span class="hljs-comment"># If average prices are equal, sort by bucket key in ascending order.</span></span>
-<span class="highlighted-comment-line">        {<span class="hljs-string">&quot;_key&quot;</span>: <span class="hljs-string">&quot;asc&quot;</span>},</span>
-<span class="highlighted-comment-line">    ],</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<p><strong>Tentukan metrik bucket.</strong></p>
+<p>Untuk vektor kueri tunggal dalam panduan ini, bacalah bucket tingkat atas yang dikembalikan dari ` <code translate="no">result.agg_buckets[0]</code>`. Setiap bucket menampilkan komponen kunci yang terurut, `retained-candidate` (` <code translate="no">count</code>`), `calculated` (` <code translate="no">metrics</code>`), `representative` (` <code translate="no">hits</code>`), dan bucket bersarang di ` <code translate="no">sub_groups</code>`.</p>
+<p>Baca konfigurasi sebagai berikut:</p>
+<table>
+<thead>
+<tr><th>Pengaturan</th><th>Apa yang dikendalikan</th><th>Dalam contoh ini</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">fields</code></td><td>Bagaimana Milvus membuat kunci bucket</td><td>Membuat satu bucket untuk setiap nilai <code translate="no">brand</code> yang berbeda.</td></tr>
+<tr><td><code translate="no">size</code></td><td>Jumlah maksimum bucket yang dikembalikan</td><td>Mengembalikan hingga tiga bucket merek.</td></tr>
+<tr><td><code translate="no">metrics</code></td><td>Statistik yang dihitung untuk setiap bucket</td><td>Menghitung jumlah produk, harga rata-rata, dan harga minimum.</td></tr>
+<tr><td><code translate="no">order</code></td><td>Cara Milvus mengurutkan bucket yang dikembalikan</td><td>Mengurutkan berdasarkan harga rata-rata, kemudian menggunakan kunci bucket untuk menentukan urutan jika terjadi kesamaan.</td></tr>
+</tbody>
+</table>
+<p>Milvus mengabaikan " <code translate="no">limit</code> " ketika " <code translate="no">search_aggregation</code> " diatur. Gunakan nilai " <code translate="no">SearchAggregation.size</code> " akar untuk mengontrol jumlah bucket tingkat atas.</p>
+<p>Dengan pengaturan ini, Milvus mengembalikan bucket Merek B, Merek A, dan Merek C dalam urutan harga rata-rata ( <code translate="no">avg_price</code> ) menurun. Kriteria ` <code translate="no">_key</code> ` hanya berlaku ketika bucket memiliki harga rata-rata yang sama. Karena konfigurasi ini tidak mendefinisikan ` <code translate="no">top_hits</code>`, daftar ` <code translate="no">hits</code> ` setiap bucket kosong dan anggaran kandidat per kunci adalah ` <code translate="no">1</code>`. Oleh karena itu, jumlah dan metrik yang ditampilkan menggambarkan satu kandidat yang dipertahankan per merek. Konfigurasikan ` <code translate="no">top_hits</code> ` dengan ` <code translate="no">TopHits.size</code> ` yang lebih besar ketika agregasi memerlukan jendela metrik per kunci yang lebih luas.</p>
+<p><details></p>
+<p><summary>Aturan metrik dan urutan</summary></p>
 <p>Setiap entri <code translate="no">SearchAggregation.metrics</code> memetakan alias yang ditentukan pengguna ke <code translate="no">{operation: source}</code>:</p>
 <table>
 <thead>
-<tr><th>Alias</th><th>Operasi</th><th>Sumber</th><th>Hasil</th></tr>
+<tr><th>Sumber</th><th>Operasi yang didukung</th><th>Perilaku</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">product_count</code></td><td><code translate="no">count</code></td><td><code translate="no">&quot;*&quot;</code></td><td>Menghitung setiap entitas retrieval-pool yang ditugaskan ke bucket.</td></tr>
-<tr><td><code translate="no">avg_price</code></td><td><code translate="no">avg</code></td><td><code translate="no">price</code></td><td>Menghitung rata-rata nilai <code translate="no">price</code> yang tidak null.</td></tr>
-<tr><td><code translate="no">min_price</code></td><td><code translate="no">min</code></td><td><code translate="no">price</code></td><td>Mengembalikan nilai terendah dari <code translate="no">price</code> yang tidak null.</td></tr>
+<tr><td>Setiap bidang yang bukan<code translate="no">JSON</code> dan bukan bidang dinamis</td><td><code translate="no">count</code></td><td>Menghitung kandidat yang dipertahankan yang bidang sumbernya bukan <code translate="no">NULL</code>.</td></tr>
+<tr><td>Bidang bilangan bulat atau bilangan pecahan</td><td><code translate="no">sum</code>, ` <code translate="no">avg</code>`, ` <code translate="no">min</code>`, <code translate="no">max</code></td><td>Menghitung berdasarkan nilai yang dipertahankan yang tidak null.</td></tr>
+<tr><td>Bidang string atau <code translate="no">TIMESTAMPTZ</code> </td><td><code translate="no">min</code>, <code translate="no">max</code></td><td>Memilih nilai yang disimpan non-null minimum atau maksimum.</td></tr>
+<tr><td><code translate="no">&quot;*&quot;</code></td><td><code translate="no">count</code></td><td>Menghitung setiap kandidat yang dipertahankan dalam bucket. Hasilnya sesuai dengan <code translate="no">bucket.count</code>.</td></tr>
+<tr><td><code translate="no">_score</code></td><td><code translate="no">sum</code>, <code translate="no">avg</code>, <code translate="no">min</code>, <code translate="no">max</code></td><td>Menghitung nilai kesamaan atau jarak ANN untuk kandidat yang dipertahankan.</td></tr>
 </tbody>
 </table>
-<p>Aggregasi Pencarian mendukung operasi metrik berikut:</p>
-<ul>
-<li><code translate="no">count</code> menerima sumber khusus ` <code translate="no">&quot;*&quot;</code> ` untuk menghitung setiap entitas dalam bucket, atau nama bidang untuk menghitung entitas yang nilai bidangnya bukan ` <code translate="no">NULL</code>`. Misalnya, jika sebuah bucket berisi 10 entitas dan dua di antaranya memiliki ` <code translate="no">price</code> ` yang ditetapkan ke ` <code translate="no">NULL</code>`, metrik ` <code translate="no">count</code> ` dengan sumber ` <code translate="no">&quot;*&quot;</code> ` akan mengembalikan 10, sedangkan metrik dengan sumber ` <code translate="no">&quot;price&quot;</code> ` akan mengembalikan 8.</li>
-<li><code translate="no">sum</code>, <code translate="no">avg</code>, <code translate="no">min</code>, dan <code translate="no">max</code> menerima bidang numerik yang didukung atau sumber bawaan <code translate="no">_score</code>, yang mewakili kemiripan atau jarak ANN. Operasi-operasi ini mengabaikan nilai-nilai <code translate="no">NULL</code>.</li>
-</ul>
-<p>Untuk mengurutkan bucket berdasarkan nilai yang diperoleh dari <code translate="no">_score</code>, tentukan alias metrik berdasarkan <code translate="no">_score</code>, lalu gunakan alias tersebut di <code translate="no">order</code>. <code translate="no">_score</code> bukanlah kunci urutan bucket langsung. Misalnya, karena panduan ini menggunakan <code translate="no">COSINE</code>, tentukan <code translate="no">&quot;max_score&quot;: {&quot;max&quot;: &quot;_score&quot;}</code> di <code translate="no">metrics</code>, lalu gunakan <code translate="no">{&quot;max_score&quot;: &quot;desc&quot;}</code> di <code translate="no">order</code>. Hal ini akan menempatkan bucket yang entitas pencocokannya terbaik memiliki skor kesamaan lebih tinggi di urutan pertama.</p>
-<p><strong>Urutkan bucket.</strong></p>
-<p><code translate="no">SearchAggregation.order</code> mengontrol urutan bucket yang dikembalikan. Setiap entri memetakan kunci urutan ke <code translate="no">&quot;asc&quot;</code> atau <code translate="no">&quot;desc&quot;</code>. Milvus mengevaluasi beberapa entri dari yang pertama hingga yang terakhir.</p>
-<p>Kunci urutan dapat berupa:</p>
-<ul>
-<li>alias metrik yang didefinisikan di <code translate="no">metrics</code> pada tingkat agregasi yang sama, seperti <code translate="no">avg_price</code>;</li>
-<li>kunci bawaan <code translate="no">_count</code>, yang mewakili jumlah entitas retrieval-pool di dalam bucket; atau</li>
-<li>kunci bawaan ` <code translate="no">_key</code> `, yang mewakili kunci bucket alih-alih bidang koleksi bernama ` <code translate="no">_key</code>`.</li>
-</ul>
-<p>Jika Anda mengabaikan ` <code translate="no">order</code>`, Milvus akan mempertahankan urutan penemuan bucket dari retrieval pool. Tetapkan ` <code translate="no">order</code> ` jika bucket harus mengikuti metrik, jumlah, atau kunci.</p>
-<p>Dalam contoh ini:</p>
+<p><code translate="no">SearchAggregation.order</code> menerima kunci-kunci berikut:</p>
 <table>
 <thead>
-<tr><th>Entri</th><th>Efek</th></tr>
+<tr><th>Kunci urutan</th><th>Arti</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">{&quot;avg_price&quot;: &quot;desc&quot;}</code></td><td>Mengurutkan bucket dari nilai <code translate="no">avg_price</code> tertinggi ke terendah.</td></tr>
-<tr><td><code translate="no">{&quot;_key&quot;: &quot;asc&quot;}</code></td><td>Memecahkan ikatan dalam urutan kunci bucket yang naik. Dengan ` <code translate="no">fields=[&quot;brand&quot;]</code>`, bucket dengan harga sama mengikuti urutan leksikal: ` <code translate="no">Adidas</code>`, ` <code translate="no">Nike</code>`, lalu ` <code translate="no">Puma</code>`. Bucket dengan nilai ` <code translate="no">avg_price</code> ` yang berbeda tidak terpengaruh. Dengan ` <code translate="no">fields=[&quot;brand&quot;, &quot;color&quot;]</code>`, Milvus membandingkan ` <code translate="no">brand</code> ` terlebih dahulu dan membandingkan ` <code translate="no">color</code> ` hanya jika nilai `brand` sama.</td></tr>
+<tr><td>Alias metrik</td><td>Mengurutkan berdasarkan nilai yang dihitung dalam <code translate="no">metrics</code> pada tingkat agregasi yang sama, seperti <code translate="no">avg_price</code>.</td></tr>
+<tr><td><code translate="no">_count</code></td><td>Mengurutkan berdasarkan jumlah kandidat yang disimpan di setiap bucket.</td></tr>
+<tr><td><code translate="no">_key</code></td><td>Mengurutkan berdasarkan kunci bucket, bukan berdasarkan bidang koleksi bernama <code translate="no">_key</code>.</td></tr>
 </tbody>
 </table>
-<h3 id="Return-and-sort-representative-hits" class="common-anchor-header">Mengembalikan dan mengurutkan hasil yang representatif<button data-href="#Return-and-sort-representative-hits" class="anchor-icon" translate="no">
+<p>Setiap entri ` <code translate="no">order</code> ` memetakan kunci ke ` <code translate="no">&quot;asc&quot;</code> ` atau ` <code translate="no">&quot;desc&quot;</code>`. Milvus mengevaluasi entri-entri tersebut dari yang pertama hingga yang terakhir. Jika Anda mengabaikan ` <code translate="no">order</code>`, Milvus mempertahankan urutan penemuan bucket dari himpunan kandidat yang dipertahankan.</p>
+<p>Untuk mengurutkan bucket berdasarkan kualitas kecocokan vektor, pertama-tama hitung metrik tingkat bucket dari <code translate="no">_score</code>, lalu gunakan alias metrik tersebut di <code translate="no">order</code>. Anda tidak dapat menggunakan <code translate="no">_score</code> secara langsung sebagai kunci urutan bucket karena setiap bucket dapat berisi beberapa skor entitas. Misalnya, dengan <code translate="no">COSINE</code> atau <code translate="no">IP</code>:</p>
+<pre><code translate="no" class="language-python">aggregation = SearchAggregation(
+    fields=[<span class="hljs-string">&quot;brand&quot;</span>],
+    size=<span class="hljs-number">3</span>,
+    metrics={<span class="hljs-string">&quot;max_score&quot;</span>: {<span class="hljs-string">&quot;max&quot;</span>: <span class="hljs-string">&quot;_score&quot;</span>}},
+    order=[{<span class="hljs-string">&quot;max_score&quot;</span>: <span class="hljs-string">&quot;desc&quot;</span>}],
+)
+<button class="copy-code-btn"></button></code></pre>
+<p>Dengan <code translate="no">L2</code>, hitung nilai <code translate="no">_score</code> terendah dan urutkan alias metrik secara ascending sehingga bucket dengan jarak terendah muncul terlebih dahulu.</p>
+<p></details></p>
+<p><details></p>
+<p><summary>Buat kunci bucket gabungan</summary></p>
+<p>Untuk membuat kunci bucket gabungan, masukkan beberapa nama bidang dalam daftar yang sama:</p>
+<pre><code translate="no" class="language-python">aggregation = SearchAggregation(
+<span class="highlighted-comment-line">    <span class="hljs-comment"># Combine brand and color to form a composite bucket key.</span></span>
+<span class="highlighted-comment-line">    fields=[<span class="hljs-string">&quot;brand&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>],</span>
+    size=<span class="hljs-number">6</span>,
+)
+<button class="copy-code-btn"></button></code></pre>
+<p>Konfigurasi ini dapat menghasilkan kunci seperti <code translate="no">(Brand A, black)</code>, <code translate="no">(Brand A, blue)</code>, dan <code translate="no">(Brand B, white)</code>. Dua entitas hanya berbagi bucket jika kedua nilainya cocok. Milvus mempertahankan urutan daftar, sehingga <code translate="no">brand</code> menjadi komponen kunci pertama dan <code translate="no">color</code> menjadi yang kedua. Saat <code translate="no">_key</code> digunakan dalam <code translate="no">order</code>, Milvus membandingkan komponen kunci gabungan dalam urutan yang sama. Masukkan beberapa string dalam satu daftar datar; daftar bersarang tidak didukung.</p>
+<p><code translate="no">size=6</code> adalah jumlah maksimum bucket gabungan yang dikembalikan pada tingkat agregasi ini. Data contoh berisi lima kombinasi merek-warna yang berbeda, sehingga kelimanya dapat dikembalikan. Dalam <a href="#Limits">batas entri yang dikembalikan</a>, permintaan ini menyumbang <code translate="no">1 query vector × 6 buckets × 1 = 6</code> entri hasil yang dikonfigurasi.</p>
+<p>Beberapa bidang dalam satu daftar ` <code translate="no">SearchAggregation.fields</code> ` membentuk kunci bucket komposit pada tingkat agregasi tersebut. Untuk membuat hierarki bucket induk-anak, gunakan <a href="#Group-results-at-multiple-levels">agregasi bersarang</a>.</p>
+<p></details></p>
+<p>Contoh-contoh berikut mendefinisikan ulang ` <code translate="no">aggregation</code>`. Berikan objek yang telah diperbarui ke parameter ` <code translate="no">search_aggregation</code> ` yang sama dan jalankan kembali panggilan pencarian.</p>
+<h3 id="Show-representative-results-from-each-bucket" class="common-anchor-header">Tampilkan hasil representatif dari setiap bucket<button data-href="#Show-representative-results-from-each-bucket" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -451,7 +456,8 @@ search_params = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Gunakan <code translate="no">TopHits</code> untuk mengembalikan dan mengurutkan entitas representatif dari setiap bucket yang dipilih:</p>
+    </button></h3><p>Sertakan entitas representatif saat aplikasi perlu menampilkan produk aktual dari setiap bucket. Dalam contoh ini, Milvus mengembalikan hingga dua produk dari setiap bucket merek, diurutkan berdasarkan peringkat dan kemudian berdasarkan skor vektor.</p>
+<p>Konfigurasikan ` <code translate="no">TopHits</code> ` sebagai berikut:</p>
 <pre><code translate="no" class="language-python">aggregation = SearchAggregation(
     fields=[<span class="hljs-string">&quot;brand&quot;</span>],
     size=<span class="hljs-number">3</span>,
@@ -468,14 +474,14 @@ search_params = {
 )
 <button class="copy-code-btn"></button></code></pre>
 <p><details></p>
-<p><summary>Lihat bucket dengan hasil yang mewakili</summary></p>
-<p>Bucket Nike berikut ini diambil dari permintaan di atas dan diserialisasikan sebagai JSON agar mudah dibaca.</p>
+<p><summary>Lihat bucket dengan hasil yang representatif</summary></p>
+<p>Bucket Merek A berikut ini diambil dari permintaan di atas dan diserialisasikan sebagai JSON agar mudah dibaca.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>
       <span class="hljs-attr">&quot;field_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">103</span><span class="hljs-punctuation">,</span>
       <span class="hljs-attr">&quot;field_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;brand&quot;</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Nike&quot;</span>
+      <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Brand A&quot;</span>
     <span class="hljs-punctuation">}</span>
   <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;count&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2</span><span class="hljs-punctuation">,</span>
@@ -483,20 +489,26 @@ search_params = {
   <span class="hljs-attr">&quot;hits&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>
       <span class="hljs-attr">&quot;pk&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">&quot;score&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.9997663497924805</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;score&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.99976646900177</span><span class="hljs-punctuation">,</span>
       <span class="hljs-attr">&quot;fields&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-        <span class="hljs-attr">&quot;brand&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Nike&quot;</span><span class="hljs-punctuation">,</span>
-        <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Nike Air Zoom Runner&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;brand&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Brand A&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;category&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;running_shoes&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;black&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;in_stock&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Runner A1&quot;</span><span class="hljs-punctuation">,</span>
         <span class="hljs-attr">&quot;price&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">129.99</span><span class="hljs-punctuation">,</span>
         <span class="hljs-attr">&quot;rating&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4.7</span>
       <span class="hljs-punctuation">}</span>
     <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
     <span class="hljs-punctuation">{</span>
       <span class="hljs-attr">&quot;pk&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">&quot;score&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.9997047781944275</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;score&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.9997048377990723</span><span class="hljs-punctuation">,</span>
       <span class="hljs-attr">&quot;fields&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-        <span class="hljs-attr">&quot;brand&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Nike&quot;</span><span class="hljs-punctuation">,</span>
-        <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Nike Pegasus Trail&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;brand&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Brand A&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;category&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;running_shoes&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;blue&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;in_stock&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Trail A2&quot;</span><span class="hljs-punctuation">,</span>
         <span class="hljs-attr">&quot;price&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">139.99</span><span class="hljs-punctuation">,</span>
         <span class="hljs-attr">&quot;rating&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4.6</span>
       <span class="hljs-punctuation">}</span>
@@ -511,16 +523,16 @@ search_params = {
 <tr><th>Parameter</th><th>Tujuan</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">top_hits</code></td><td>Opsional. Mengonfigurasi entitas representatif untuk tingkat agregasi ini. Jika diabaikan, Milvus tetap mengembalikan kunci bucket, jumlah, metrik, dan bucket anak, tetapi ` <code translate="no">bucket.hits</code> ` kosong.</td></tr>
-<tr><td><code translate="no">TopHits.size</code></td><td>Mengembalikan hingga dua entitas representatif dari setiap bucket yang dipilih.</td></tr>
+<tr><td><code translate="no">top_hits</code></td><td>Opsional. Mengonfigurasi entitas representatif untuk tingkat agregasi ini. Jika diabaikan, ` <code translate="no">bucket.hits</code> ` akan kosong dan anggaran kandidat per kunci secara default ditetapkan menjadi satu.</td></tr>
+<tr><td><code translate="no">TopHits.size</code></td><td>Mengembalikan hingga dua entitas representatif dari setiap bucket yang dipilih dan menetapkan anggaran kandidat per-kunci menjadi dua untuk seluruh pohon agregasi.</td></tr>
 <tr><td><code translate="no">TopHits.sort</code></td><td>Mengurutkan entitas di dalam setiap bucket menggunakan kriteria yang tercantum.</td></tr>
 </tbody>
 </table>
-<p>Tetapkan ` <code translate="no">top_hits</code> ` hanya jika aplikasi memerlukan entitas representatif dari setiap bucket.</p>
-<p><code translate="no">SearchAggregation.order</code> mengurutkan bucket, sedangkan ` <code translate="no">TopHits.sort</code> ` mengurutkan entitas di dalam setiap bucket. ` <code translate="no">TopHits.sort</code> ` menerima nama bidang skalar yang didukung dan bidang bawaan ` <code translate="no">_score</code> `, yang mewakili kemiripan atau jarak ANN. Milvus mengevaluasi entri ` <code translate="no">sort</code> ` dari yang pertama hingga yang terakhir. Dalam contoh ini, produk diurutkan berdasarkan <code translate="no">rating</code> dari nilai tertinggi ke terendah dan menggunakan <code translate="no">_score</code> hanya ketika dua peringkat sama. Karena pengaturan menggunakan <code translate="no">COSINE</code>, urutan menurun <code translate="no">_score</code> menempatkan produk yang lebih mirip di urutan pertama.</p>
-<p>Kolom yang digunakan oleh <code translate="no">TopHits.sort</code> tidak harus muncul di <code translate="no">output_fields</code>. Namun, hanya kolom di <code translate="no">output_fields</code> yang disertakan dalam pemetaan <code translate="no">fields</code> setiap hasil yang dikembalikan.</p>
-<p>Setiap hasil yang dikembalikan oleh <code translate="no">AggregationHit</code> menampilkan kunci utamanya di <code translate="no">pk</code>, skor vektor di <code translate="no">score</code>, dan bidang keluaran yang diminta di <code translate="no">fields</code>.</p>
-<h3 id="Create-nested-buckets" class="common-anchor-header">Buat bucket bersarang<button data-href="#Create-nested-buckets" class="anchor-icon" translate="no">
+<p>Konfigurasikan ` <code translate="no">top_hits</code> ` ketika aplikasi memerlukan entitas representatif atau ketika hitungan dan metrik memerlukan jendela kandidat per-kunci yang lebih luas. Nilai ` <code translate="no">TopHits.size</code> ` yang lebih besar meningkatkan baik anggaran kandidat maupun perhitungan entri maksimum yang dikembalikan di <a href="#Limits">`Limits`</a>.</p>
+<p><code translate="no">SearchAggregation.order</code> mengurutkan bucket, sedangkan " <code translate="no">TopHits.sort</code> " mengurutkan entitas yang dipertahankan di dalam setiap bucket. Urutan pengurutan tidak mengubah kandidat mana yang dipertahankan untuk " <code translate="no">count</code> " dan metrik. " <code translate="no">TopHits.sort</code> " menerima nama bidang skalar yang dapat dibandingkan yang didukung serta bidang bawaan " <code translate="no">_score</code> ", yang mewakili kemiripan atau jarak ANN. Milvus mengevaluasi entri " <code translate="no">sort</code> " dari awal hingga akhir. Dalam contoh ini, produk diurutkan berdasarkan <code translate="no">rating</code> dari nilai tertinggi ke terendah dan menggunakan <code translate="no">_score</code> hanya ketika dua peringkat sama. Karena pengaturan menggunakan <code translate="no">COSINE</code>, urutan menurun <code translate="no">_score</code> menempatkan produk yang lebih serupa di urutan pertama.</p>
+<p>Kolom yang digunakan oleh <code translate="no">metrics</code> atau <code translate="no">TopHits.sort</code> tidak harus muncul di <code translate="no">output_fields</code>. Milvus mengambil kolom-kolom tersebut secara internal, tetapi hanya kolom yang secara eksplisit tercantum di <code translate="no">output_fields</code> yang disertakan dalam pemetaan <code translate="no">fields</code> setiap hasil yang dikembalikan. Kunci utama dan skor vektor tetap tersedia melalui <code translate="no">AggregationHit.pk</code> dan <code translate="no">AggregationHit.score</code>.</p>
+<p>Setiap hasil yang dikembalikan <code translate="no">AggregationHit</code> menampilkan kunci utamanya di <code translate="no">pk</code>, skor vektor di <code translate="no">score</code>, dan bidang keluaran yang diminta di <code translate="no">fields</code>.</p>
+<h3 id="Group-results-at-multiple-levels" class="common-anchor-header">Mengelompokkan hasil pada beberapa tingkatan<button data-href="#Group-results-at-multiple-levels" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -535,7 +547,19 @@ search_params = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Gunakan <code translate="no">sub_aggregation</code> untuk menjalankan agregasi lain di dalam setiap bucket induk. Agregasi anak hanya menerima entitas yang ditugaskan ke bucket induknya. Konfigurasi berikut ini pertama-tama mengelompokkan produk berdasarkan kategori, lalu mengelompokkan produk dalam setiap kategori berdasarkan merek:</p>
+    </button></h3><p>Gunakan agregasi bersarang saat Anda memerlukan satu tingkat bucket di dalam tingkat lainnya. Dalam contoh ini, Milvus membuat bucket kategori terlebih dahulu, lalu membuat bucket merek di dalam setiap kategori.</p>
+<p>Agregasi anak hanya menerima entitas yang ditugaskan ke bucket induknya. <code translate="no">fields</code> mengontrol kunci bucket di setiap tingkat agregasi, sedangkan <code translate="no">sub_aggregation</code> menciptakan hierarki induk-anak.</p>
+<p>Konfigurasi di bawah ini membuat bucket kategori dengan kunci <code translate="no">(running_shoes)</code>. Di dalam bucket induk tersebut, agregasi anak membuat bucket merek terpisah dengan kunci seperti <code translate="no">(Brand A)</code>, <code translate="no">(Brand B)</code>, dan <code translate="no">(Brand C)</code>.</p>
+<pre><code translate="no" class="language-text">Parent bucket key:
+(running_shoes)
+
+Child bucket keys:
+├── (Brand A)
+├── (Brand B)
+└── (Brand C)
+<button class="copy-code-btn"></button></code></pre>
+<p>Setiap tingkatan dapat menggunakan beberapa bidang secara independen. Misalnya, penggunaan <code translate="no">fields=[&quot;brand&quot;, &quot;color&quot;]</code> dalam agregasi anak akan menghasilkan kunci anak gabungan seperti <code translate="no">(Brand A, black)</code>.</p>
+<p>Konfigurasi berikut mengimplementasikan hierarki ini:</p>
 <pre><code translate="no" class="language-python">aggregation = SearchAggregation(
     fields=[<span class="hljs-string">&quot;category&quot;</span>],
     size=<span class="hljs-number">2</span>,
@@ -562,7 +586,7 @@ search_params = {
 <button class="copy-code-btn"></button></code></pre>
 <p><details></p>
 <p><summary>Lihat hasil bucket bersarang</summary></p>
-<p>Cuplikan serialized berikut menunjukkan bucket induk <code translate="no">running_shoes</code> dan bucket anak Adidas-nya. Bucket anak Nike dan Puma dihilangkan demi kepraktisan.</p>
+<p>Kutipan serialisasi berikut menunjukkan bucket induk <code translate="no">running_shoes</code> dan bucket anak Brand B-nya. Bucket anak Brand A dan Brand C dihilangkan demi singkatnya.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>
@@ -583,7 +607,7 @@ search_params = {
         <span class="hljs-punctuation">{</span>
           <span class="hljs-attr">&quot;field_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">103</span><span class="hljs-punctuation">,</span>
           <span class="hljs-attr">&quot;field_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;brand&quot;</span><span class="hljs-punctuation">,</span>
-          <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Adidas&quot;</span>
+          <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Brand B&quot;</span>
         <span class="hljs-punctuation">}</span>
       <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
       <span class="hljs-attr">&quot;count&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
@@ -594,13 +618,13 @@ search_params = {
       <span class="hljs-attr">&quot;hits&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
         <span class="hljs-punctuation">{</span>
           <span class="hljs-attr">&quot;pk&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">3</span><span class="hljs-punctuation">,</span>
-          <span class="hljs-attr">&quot;score&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.999454140663147</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;score&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.9994542598724365</span><span class="hljs-punctuation">,</span>
           <span class="hljs-attr">&quot;fields&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-            <span class="hljs-attr">&quot;brand&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Adidas&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;brand&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Brand B&quot;</span><span class="hljs-punctuation">,</span>
             <span class="hljs-attr">&quot;category&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;running_shoes&quot;</span><span class="hljs-punctuation">,</span>
             <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;white&quot;</span><span class="hljs-punctuation">,</span>
             <span class="hljs-attr">&quot;in_stock&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
-            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Adidas Ultraboost Light&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Runner B1&quot;</span><span class="hljs-punctuation">,</span>
             <span class="hljs-attr">&quot;price&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">159.99</span><span class="hljs-punctuation">,</span>
             <span class="hljs-attr">&quot;rating&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4.8</span>
           <span class="hljs-punctuation">}</span>
@@ -612,14 +636,15 @@ search_params = {
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>Milvus pertama-tama memilih hingga dua bucket kategori, yang diurutkan berdasarkan <code translate="no">product_count</code>. Selanjutnya, Milvus menjalankan <code translate="no">sub_aggregation</code> secara independen di dalam setiap kategori yang dipilih dan mengembalikan hingga tiga bucket merek, yang diurutkan berdasarkan <code translate="no">avg_rating</code>.</p>
-<p>Pada hasil di atas:</p>
+<p>Hasil yang ditampilkan mewakili jalur bucket <code translate="no">(running_shoes) → (Brand B)</code>, bukan kunci bucket komposit tunggal <code translate="no">(running_shoes, Brand B)</code>.</p>
+<p>Milvus pertama-tama memilih hingga dua bucket kategori, diurutkan berdasarkan <code translate="no">product_count</code>. Selanjutnya, Milvus menjalankan <code translate="no">sub_aggregation</code> secara independen di dalam setiap kategori yang dipilih dan mengembalikan hingga tiga bucket merek, diurutkan berdasarkan <code translate="no">avg_rating</code>.</p>
+<p>Pada keluaran di atas:</p>
 <ul>
-<li>Bucket akar ` <code translate="no">running_shoes</code> ` berisi empat entitas `retrieval-pool`. ` <code translate="no">metrics</code> `-nya berisi nilai ` <code translate="no">avg_price</code> ` dan ` <code translate="no">product_count</code> ` tingkat akar.</li>
-<li>Daftar <code translate="no">sub_groups</code> pada bucket akar berisi bucket-bucket merek anak. Bucket Adidas yang ditampilkan berisi satu entitas serta nilai <code translate="no">avg_rating</code> dan <code translate="no">brand_count</code> miliknya sendiri.</li>
-<li>Daftar ` <code translate="no">hits</code> ` pada bucket akar kosong karena agregasi akar tidak mengonfigurasi ` <code translate="no">top_hits</code>`. Bucket anak Adidas berisi satu hit representatif karena ` <code translate="no">top_hits</code> ` dikonfigurasi dalam ` <code translate="no">sub_aggregation</code>`.</li>
+<li>Bucket akar ` <code translate="no">running_shoes</code> ` berisi empat kandidat yang dipertahankan di seluruh kunci komposit anaknya. Kunci ` <code translate="no">metrics</code> `-nya berisi nilai ` <code translate="no">avg_price</code> ` dan ` <code translate="no">product_count</code> ` tingkat akar.</li>
+<li>Daftar <code translate="no">sub_groups</code> bucket akar berisi bucket merek anak. Bucket Merek B yang ditampilkan berisi satu kandidat yang dipertahankan serta nilai <code translate="no">avg_rating</code> dan <code translate="no">brand_count</code> miliknya sendiri.</li>
+<li>Daftar <code translate="no">hits</code> pada bucket akar kosong karena agregasi akar tidak mengonfigurasi <code translate="no">top_hits</code>. Bucket anak Merek B berisi hit representatif karena <code translate="no">top_hits</code> dikonfigurasi di <code translate="no">sub_aggregation</code>.</li>
 </ul>
-<h2 id="FAQ" class="common-anchor-header">Pertanyaan Umum<button data-href="#FAQ" class="anchor-icon" translate="no">
+<h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -649,11 +674,12 @@ search_params = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Agregasi Pencarian merangkum kumpulan hasil pencarian ANN. Agregasi ini tidak menjalankan agregasi koleksi penuh.</p>
-<p>Misalnya, anggaplah sebuah koleksi berisi 5.000 produk Nike, tetapi kumpulan hasil pencarian untuk satu kueri hanya berisi 35 produk Nike. Metrik " <code translate="no">product_count</code> " di bucket Nike menggambarkan 35 produk yang diambil tersebut. Metrik ini tidak melaporkan angka 5.000.</p>
-<p>Perkiraan menjadi sangat penting ketika " <code translate="no">order</code> " menggunakan alias metrik. Perubahan pada recall pencarian dapat mengubah nilai metrik dan karenanya mengubah bucket mana yang termasuk dalam " <code translate="no">SearchAggregation.size</code>". Agregasi bersarang dapat memperkuat efek ini karena setiap tingkat anak beroperasi pada entitas yang tersedia di bucket induknya.</p>
+    </button></h3><p>Agregasi Pencarian merangkum kandidat ANN yang dipertahankan. Agregasi ini tidak menjalankan agregasi koleksi penuh.</p>
+<p>Retensi kandidat memiliki dua tahap perkiraan. Pencarian ANN dapat mengabaikan entitas koleksi yang relevan, dan tahap pengelompokan menyimpan paling banyak kandidat <code translate="no">TopHits.size</code> terbesar untuk setiap kunci komposit lengkap. Jika tidak ada tingkat yang mengonfigurasi <code translate="no">top_hits</code>, batas per kunci ini adalah satu.</p>
+<p>Misalnya, anggaplah sebuah koleksi berisi 5.000 produk Merek A dan banyak di antaranya relevan dengan kueri vektor. Jika agregasi menggunakan ` <code translate="no">TopHits(size=4)</code>`, bucket Merek A dapat mempertahankan paling banyak empat kandidat untuk satu kunci komposit lengkap. ` <code translate="no">count</code> ` dan metriknya menggambarkan kandidat-kandidat yang dipertahankan tersebut, bukan semua produk Merek A yang relevan dan bukan semua 5.000 entitas koleksi.</p>
+<p>Perkiraan menjadi sangat penting ketika ` <code translate="no">order</code> ` menggunakan alias metrik. Perubahan pada recall pencarian dapat mengubah nilai metrik dan karenanya mengubah bucket mana yang sesuai dengan ` <code translate="no">SearchAggregation.size</code>`. Agregasi bersarang dapat memperkuat efek ini karena setiap tingkat anak beroperasi pada entitas yang tersedia di bucket induknya.</p>
 <p>Jika Anda memerlukan statistik yang tepat untuk setiap entitas yang cocok, gunakan alur kerja agregasi kueri eksak alih-alih Agregasi Pencarian.</p>
-<h3 id="How-does-Search-Aggregation-differ-from-Grouping-Search" class="common-anchor-header">Apa perbedaan antara Search Aggregation dan Grouping Search?<button data-href="#How-does-Search-Aggregation-differ-from-Grouping-Search" class="anchor-icon" translate="no">
+<h3 id="How-does-Search-Aggregation-differ-from-Grouping-Search" class="common-anchor-header">Apa perbedaan antara Agregasi Pencarian dengan Pencarian Pengelompokan?<button data-href="#How-does-Search-Aggregation-differ-from-Grouping-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -668,6 +694,15 @@ search_params = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Gunakan <a href="/docs/id/grouping-search.md">Pencarian Pengelompokan</a> jika tujuan Anda adalah meningkatkan keragaman hasil dan mengontrol jumlah entitas yang dikembalikan oleh setiap kelompok.</p>
-<p>Gunakan Search Aggregation jika Anda memerlukan hasil bucket yang terstruktur, seperti kunci gabungan, metrik per bucket, urutan bucket, hasil yang diurutkan secara independen, atau bucket bersarang. Search Aggregation menggunakan API terpisah dan mengembalikan hasilnya melalui <code translate="no">result.agg_buckets</code>.</p>
-<p>Jangan menggabungkan <code translate="no">search_aggregation</code> dengan <code translate="no">group_by_field</code> atau <code translate="no">group_by_fields</code> dalam permintaan yang sama.</p>
+    </button></h3><p>Pilihlah berdasarkan bentuk hasil utama aplikasi:</p>
+<table>
+<thead>
+<tr><th>Kebutuhan utama</th><th>Pilihan</th><th>Respons yang akan digunakan</th></tr>
+</thead>
+<tbody>
+<tr><td>Mengembalikan daftar entitas yang diurutkan secara standar dengan lebih sedikit nilai berulang dalam bidang pengelompokan</td><td><a href="/docs/id/grouping-search.md">Pencarian Pengelompokan</a></td><td>Hasil pencarian datar untuk setiap vektor kueri</td></tr>
+<tr><td>Periksa atau bandingkan grup sebagai bucket, dengan kunci, jumlah, metrik, urutan, hasil yang representatif, atau bucket anak</td><td>Agregasi Pencarian</td><td><code translate="no">AggregationBucket</code> objek dalam <code translate="no">result.agg_buckets</code></td></tr>
+</tbody>
+</table>
+<p>Bahkan ketika Agregasi Pencarian mengonfigurasi ` <code translate="no">top_hits</code>`, respons utamanya tetap berupa pohon bucket. Pencarian Berkelompok tetap berguna ketika aplikasi sudah memproses hasil pencarian biasa dan terutama menginginkan keragaman hasil.</p>
+<p>API-API ini saling eksklusif. PyMilvus memicu pengecualian " <code translate="no">ParamError</code> " ketika " <code translate="no">search_aggregation</code> " digabungkan dengan " <code translate="no">group_by_field</code> " atau " <code translate="no">group_by_fields</code> " dalam permintaan yang sama.</p>

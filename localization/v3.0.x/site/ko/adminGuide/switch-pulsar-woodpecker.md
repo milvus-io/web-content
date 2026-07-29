@@ -20,7 +20,7 @@ summary: Helm 또는 Milvus Operator를 사용하여 Milvus 클러스터의 메�
       </svg>
     </button></h1><p>이 페이지에서는 <strong>Milvus 클러스터의</strong> 메시지 큐(MQ)를 <strong>Pulsar</strong> (내장형 또는 외부)와 <strong>Woodpecker</strong> (MinIO 백엔드) 간에 양방향으로 전환하는 방법을 설명합니다. 일반적인 워크플로우 및 필수 조건에 대해서는 <a href="/docs/ko/switch-mq-type.md">MQ 유형 전환을</a> 참조하십시오.</p>
 <div class="alert note">
-<p><strong>필수 조건:</strong> MQ 전환 기능은 <strong>Milvus 3.0 이상에서</strong> 사용할 수 있습니다. 시작하기 전에 Milvus 인스턴스를 Milvus 3.0 이상으로 업그레이드하십시오. 이전 버전에서는 이 기능을 사용할 수 없습니다.</p>
+<p><strong>필수 조건:</strong> MQ 전환 기능은 <strong>Milvus 3.0 이상</strong> 버전에서 사용할 수 있습니다. 시작하기 전에 Milvus 인스턴스를 Milvus 3.0 이상으로 업그레이드하십시오. 이전 버전에서는 이 기능을 사용할 수 없습니다.</p>
 </div>
 <div class="alert warning">
 <p>메시지 큐 전환은 <strong>위험도가 높은 작업입니다</strong>. <strong>배포 방식</strong> ( <strong>Helm 사용</strong> 또는 <strong>Milvus Operator 사용</strong> ) <strong>에</strong> 해당하는 섹션을 선택하고, 해당 섹션의 지침을 처음부터 끝까지 순서대로 따르십시오. Helm 명령어와 Operator 명령어를 혼용하지 마십시오.</p>
@@ -209,7 +209,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>1단계: Milvus 인스턴스가 실행 중인지 확인합니다.</strong></p>
-<p><strong>2단계: 대상 Pulsar 연결을 구성하고 Milvus를 다시 시작합니다.</strong> Pulsar 연결을 <code translate="no">spec.config</code> 아래에 배치하고(Operator는 <code translate="no">spec.config</code> 를 <code translate="no">user.yaml</code> 로 변환합니다), MQ 유형을 설정합니다. CR을 적용하면 포드가 새로운 구성으로 재시작됩니다.</p>
+<p><strong>2단계: 대상 Pulsar 연결을 구성하고 Milvus를 재시작합니다.</strong> Pulsar 연결을 <code translate="no">spec.config</code> 아래에 배치하고(Operator는 <code translate="no">spec.config</code> 를 <code translate="no">user.yaml</code> 로 변환합니다), MQ 유형을 설정합니다. CR을 적용하면 새로운 구성으로 포드가 재시작됩니다.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># change_configmap.yaml</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -241,7 +241,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>전환이 성공하면 <code translate="no">[mqTypeValue=pulsar]</code> 로깅됩니다.</p>
-<p><strong>5단계: (선택 사항) Woodpecker 데이터 정리.</strong> MinIO/S3( <code translate="no">&lt;rootPath&gt;/wp/...</code> 폴더 내, 일반적으로 <code translate="no">files/wp/...</code>)에 있는 Woodpecker 데이터와 etcd(<code translate="no">etcdctl get woodpecker --prefix</code>)에 있는 Woodpecker 메타데이터를 삭제하십시오. 나중에 Woodpecker로 다시 전환할 계획이라면, 먼저 이러한 파일을 정리하십시오.</p>
+<p><strong>5단계: (선택 사항) Woodpecker 데이터 정리.</strong> MinIO/S3( <code translate="no">&lt;rootPath&gt;/wp/...</code> 폴더 내, 일반적으로 <code translate="no">files/wp/...</code>)에 있는 Woodpecker 데이터와 etcd(<code translate="no">etcdctl get woodpecker --prefix</code>)에 있는 Woodpecker 메타데이터를 삭제합니다. 나중에 Woodpecker로 다시 전환할 계획이라면, 먼저 이러한 파일을 정리하십시오.</p>
 <h2 id="Supported-scenarios" class="common-anchor-header">지원되는 시나리오<button data-href="#Supported-scenarios" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

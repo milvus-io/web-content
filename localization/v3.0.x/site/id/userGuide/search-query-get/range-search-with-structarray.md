@@ -47,7 +47,7 @@ summary: >-
 <tbody>
 <tr><td>Pencarian EmbeddingList</td><td>Tidak didukung.</td><td>Tidak berlaku.</td></tr>
 <tr><td>Pencarian tingkat elemen</td><td>Gunakan kueri vektor biasa dengan ` <code translate="no">radius</code> ` dan, secara opsional, ` <code translate="no">range_filter</code>`.</td><td>Tingkat elemen struktur.</td></tr>
-<tr><td>Pencarian hibrida</td><td>Didukung jika permintaan StructArray menargetkan bidang vektor tingkat elemen. Permintaan tingkat EmbeddingList tidak mendukung pencarian rentang.</td><td>Pencarian sub-tingkat elemen, kemudian penentuan peringkat ulang hibrida.</td></tr>
+<tr><td>Pencarian hibrida</td><td>Didukung jika permintaan StructArray menargetkan bidang vektor tingkat elemen. Permintaan tingkat EmbeddingList tidak mendukung pencarian rentang.</td><td>Pencarian sub-tingkat elemen, kemudian penataan ulang peringkat hibrida.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -346,7 +346,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>Untuk mempelajari dua mode pencarian vektor StructArray dasar, baca <a href="/docs/id/basic-vector-search-with-structarray.md">Pencarian Vektor Dasar dengan StructArray</a>.</p></li>
+<li><p>Untuk mempelajari dua mode pencarian vektor StructArray dasar, baca " <a href="/docs/id/basic-vector-search-with-structarray.md">Pencarian Vektor Dasar dengan StructArray</a>".</p></li>
 <li><p>Untuk menambahkan filter skalar ke pencarian rentang, baca " <a href="/docs/id/filtered-search-with-structarray.md">Pencarian Terfilter dengan StructArray</a>".</p></li>
 <li><p>Untuk mengembalikan paling banyak satu hasil per entitas induk di mana hal ini didukung, baca <a href="/docs/id/grouping-search-with-structarray.md">Pencarian Berkelompok dengan StructArray</a>.</p></li>
 <li><p>Untuk memeriksa batasan pencarian berdasarkan versi, baca <a href="/docs/id/structarray-limits.md">Batasan StructArray</a>.</p></li>

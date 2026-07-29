@@ -198,7 +198,7 @@ beta: Milvus v2.6.20+
         ></path>
       </svg>
     </button></h2><p>Hugging Face Ranker viene definito e applicato al momento della ricerca. È possibile modificare o omettere il ranker per ogni ricerca senza modificare lo schema della collezione.</p>
-<h3 id="Step-1-Prepare-a-collection" class="common-anchor-header">Passaggio 1: Preparare una collezione<button data-href="#Step-1-Prepare-a-collection" class="anchor-icon" translate="no">
+<h3 id="Step-1-Prepare-a-collection" class="common-anchor-header">Passaggio 1: Preparare una raccolta<button data-href="#Step-1-Prepare-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -303,7 +303,7 @@ client.insert(
 <tbody>
 <tr><td><code translate="no">reranker</code></td><td>Sì</td><td>L'implementazione del reranking. Impostare questo valore su <code translate="no">model</code>.</td></tr>
 <tr><td><code translate="no">provider</code></td><td>Sì</td><td>Il fornitore del modello. Impostare questo valore su <code translate="no">huggingface</code>.</td></tr>
-<tr><td><code translate="no">model_name</code></td><td>Sì</td><td>L'ID del modello Hugging Face per un modello fornito tramite <code translate="no">hf-inference</code> per il task <code translate="no">sentence-similarity</code>.</td></tr>
+<tr><td><code translate="no">model_name</code></td><td>Sì</td><td>L'ID del modello Hugging Face per un modello fornito tramite <code translate="no">hf-inference</code> per il task " <code translate="no">sentence-similarity</code> ".</td></tr>
 <tr><td><code translate="no">queries</code></td><td>Sì</td><td>Stringhe di query utilizzate per il riclassamento. Fornire esattamente una stringa per ogni query di ricerca, anche quando il recupero iniziale utilizza vettori di query.</td></tr>
 <tr><td><code translate="no">hf_provider</code></td><td>No</td><td>Il percorso del provider di inferenza di Hugging Face. Il valore predefinito e l'unico supportato in Milvus 2.6.20 è <code translate="no">hf-inference</code>.</td></tr>
 <tr><td><code translate="no">credential</code></td><td>No</td><td>L'etichetta di una credenziale definita nella sezione di primo livello <code translate="no">credential</code> di <code translate="no">milvus.yaml</code>. Questo valore non è il token stesso.</td></tr>
@@ -436,7 +436,7 @@ results = client.search(
         ></path>
       </svg>
     </button></h2><ul>
-<li>Per informazioni sul comportamento e sui limiti del Model Ranker condiviso, consultare <a href="/docs/it/model-ranker-overview.md">Panoramica su Model Ranker</a>.</li>
+<li>Per informazioni sul comportamento e sui limiti del Model Ranker condiviso, consultare <a href="/docs/it/model-ranker-overview.md">la Panoramica su Model Ranker</a>.</li>
 <li>Per generare embedding tramite i provider di inferenza Hugging Face ospitati, consultare <a href="/docs/it/hugging-face.md">Hugging Face</a>.</li>
 <li>Per applicare il ranker alla ricerca ibrida, consultare <a href="/docs/it/multi-vector-search.md">Ricerca ibrida multivettoriale</a>.</li>
 </ul>

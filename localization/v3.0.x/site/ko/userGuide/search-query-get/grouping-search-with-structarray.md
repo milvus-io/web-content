@@ -43,13 +43,13 @@ summary: >-
 <tr><th>검색 모드</th><th>그룹화 동작</th><th>결과 동작</th></tr>
 </thead>
 <tbody>
-<tr><td>EmbeddingList 검색</td><td>지원되지 않음.</td><td>해당 사항 없음.</td></tr>
+<tr><td>EmbeddingList 검색</td><td>지원되지 않습니다.</td><td>해당 사항 없음.</td></tr>
 <tr><td>요소 수준 검색</td><td>기본 키를 기준으로 그룹화할 경우 지원됩니다.</td><td>상위 엔티티당 최대 하나의 결과를 반환합니다. 요소 수준 메타데이터는 보존되므로, API 또는 SDK를 통해 노출될 때 선택된 요소 인덱스 또는 오프셋을 반환할 수 있습니다.</td></tr>
 <tr><td>하이브리드 검색</td><td>모든 하위 검색이 동일한 StructArray 필드 아래의 요소 수준 벡터 필드를 대상으로 하는 경우에만 지원됩니다.</td><td>요소 수준 하위 검색은 최종 결과 처리 전에 기본 키를 기준으로 그룹화됩니다.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
-<p>그룹화되지 않은 요소 수준 검색에서 중복된 상위 엔티티가 너무 많이 반환되는 경우 그룹화를 사용하십시오. 일치하는 모든 Struct 요소를 개별 히트로 반환하려면 ` <code translate="no">group_by_field</code>`를 사용하지 않고 <a href="/docs/ko/basic-vector-search-with-structarray.md">StructArray와 함께 기본 벡터 검색을</a> 사용하십시오.</p>
+<p>그룹화되지 않은 요소 수준 검색에서 중복된 상위 엔티티가 너무 많이 반환될 경우 그룹화를 사용하십시오. 일치하는 모든 Struct 요소를 개별 히트로 반환하려면 ` <code translate="no">group_by_field</code>`를 사용하지 않고 <a href="/docs/ko/basic-vector-search-with-structarray.md">StructArray와 함께 기본 벡터 검색을</a> 사용하십시오.</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">시작하기 전에<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -75,7 +75,7 @@ summary: >-
 <tr><td>요소 수준 벡터 하위 필드</td><td><code translate="no">chunks[emb]</code> 와 같은 StructArray 벡터 하위 필드를 사용하고, 일반 벡터 메트릭으로 인덱싱하십시오.</td></tr>
 <tr><td>일반 벡터 쿼리</td><td><code translate="no">EmbeddingList</code> 가 아닌 일반 벡터 쿼리를 사용하십시오.</td></tr>
 <tr><td>기본 키 그룹화</td><td>컬렉션의 기본 키를 <code translate="no">group_by_field</code> 형태로 사용하십시오(예: <code translate="no">doc_id</code>).</td></tr>
-<tr><td>범위 매개변수 없음</td><td><code translate="no">radius</code> 또는 <code translate="no">range_filter</code> 와 같은 범위 검색 매개변수와 그룹화 검색을 함께 사용하지 마십시오.</td></tr>
+<tr><td>범위 매개변수 미사용</td><td><code translate="no">radius</code> 또는 <code translate="no">range_filter</code> 와 같은 범위 검색 매개변수와 그룹화 검색을 함께 사용하지 마십시오.</td></tr>
 </tbody>
 </table>
 <p>인덱스 설정에 대해서는 <a href="/docs/ko/index-structarray-fields.md">StructArray 필드 인덱스를</a> 참조하십시오.</p>
@@ -129,7 +129,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>그룹화를 하지 않으면, 여러 청크가 쿼리와 일치하는 경우 동일한 <code translate="no">doc_id</code> 가 여러 번 나타날 수 있습니다. <code translate="no">group_by_field=&quot;doc_id&quot;</code> 를 사용하면 각 부모 엔티티가 최대 한 번만 나타납니다. 그룹화는 요소 수준 메타데이터를 보존하므로, API 또는 SDK가 이를 노출하는 경우 그룹화된 결과에도 선택한 Struct 요소 인덱스나 오프셋이 포함될 수 있습니다.</p>
+<p>그룹화를 하지 않으면, 여러 청크가 쿼리와 일치하는 경우 동일한 <code translate="no">doc_id</code> 가 여러 번 나타날 수 있습니다. <code translate="no">group_by_field=&quot;doc_id&quot;</code> 를 사용하면 각 부모 엔티티가 최대 한 번만 나타납니다. 그룹화는 요소 수준 메타데이터를 보존하므로, API 또는 SDK가 노출하는 경우 그룹화된 결과에도 선택한 Struct 요소 인덱스나 오프셋이 포함될 수 있습니다.</p>
 <h2 id="Add-scalar-filters" class="common-anchor-header">스칼라 필터 추가<button data-href="#Add-scalar-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -218,7 +218,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>이 예제에서 두 하위 요청 모두 동일한 StructArray 필드인 <code translate="no">chunks</code> 하위의 요소 수준 벡터 필드를 대상으로 합니다. 하이브리드 검색은 일반 벡터 필드, 서로 다른 StructArray 필드 또는 EmbeddingList 수준 요청이 혼합된 경우 요소 수준 그룹화를 지원하지 않습니다.</p>
+<p>이 예제에서 두 하위 요청 모두 동일한 StructArray 필드( <code translate="no">chunks</code>) 아래의 요소 수준 벡터 필드를 대상으로 합니다. 하이브리드 검색은 일반 벡터 필드, 서로 다른 StructArray 필드 또는 EmbeddingList 수준 요청이 혼합된 경우 요소 수준 그룹화를 지원하지 않습니다.</p>
 <h2 id="Interpret-grouped-results" class="common-anchor-header">그룹화된 결과 해석<button data-href="#Interpret-grouped-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -262,7 +262,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>그룹화 검색은 요소 수준 StructArray 벡터 검색에만 적용됩니다. EmbeddingList 검색 및 EmbeddingList 수준 하이브리드 검색은 그룹화 기능을 지원하지 않습니다.</p></li>
+<li><p>그룹화 검색은 요소 수준의 StructArray 벡터 검색에만 적용됩니다. EmbeddingList 검색 및 EmbeddingList 수준의 하이브리드 검색은 그룹화 기능을 지원하지 않습니다.</p></li>
 <li><p>주키를 ` <code translate="no">group_by_field</code>` 형식으로 사용하십시오. StructArray 요소 수준 그룹화는 임의의 스칼라 필드에 대한 범용 그룹화 기능이 아닙니다.</p></li>
 <li><p>그룹화 검색을 범위 검색과 결합하지 마십시오.</p></li>
 <li><p>그룹화 검색에는 ` <code translate="no">EmbeddingList</code> ` 쿼리나 ` <code translate="no">MAX_SIM*</code> ` 메트릭을 사용하지 마십시오.</p></li>
@@ -289,7 +289,7 @@ results = client.hybrid_search(
 <li><p>주 키가 아닌 스칼라 필드를 기준으로 그룹화하는 경우.</p></li>
 <li><p>여러 필드를 기준으로 그룹화하는 경우. 요소 수준 StructArray 그룹화는 기본 키 그룹화만 지원합니다.</p></li>
 <li><p>그룹화된 결과가 일치하는 모든 Struct 요소를 나타낼 것이라고 기대하는 경우. 그룹화는 부모 엔티티당 최대 하나의 결과만 반환합니다.</p></li>
-<li><p>그룹화된 요소 수준 검색이 EmbeddingList 스타일의 <code translate="no">MAX_SIM*</code> 점수를 재계산한다고 가정하는 경우. 그룹화는 요소 수준 일치 결과를 통합할 뿐, 점수 산정 모델을 변경하지 않습니다.</p></li>
+<li><p>그룹화된 요소 수준 검색이 EmbeddingList 스타일의 <code translate="no">MAX_SIM*</code> 점수를 재계산한다고 가정하는 경우. 그룹화는 요소 수준의 일치 결과를 통합할 뿐, 점수 산정 모델을 변경하지 않습니다.</p></li>
 <li><p><code translate="no">group_by_field</code> 를 <code translate="no">radius</code> 또는 <code translate="no">range_filter</code> 와 결합하는 경우.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">다음 단계<button data-href="#Next-steps" class="anchor-icon" translate="no">
@@ -308,8 +308,8 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>먼저 그룹화되지 않은 요소 수준 검색에 대해 알아보려면 <a href="/docs/ko/basic-vector-search-with-structarray.md">‘StructArray를 사용한 기본 벡터 검색’을</a> 읽어보세요.</p></li>
+<li><p>먼저 그룹화되지 않은 요소 수준 검색을 배우려면 <a href="/docs/ko/basic-vector-search-with-structarray.md">‘StructArray를 사용한 기본 벡터 검색’을</a> 읽어보세요.</p></li>
 <li><p>그룹화된 검색에 스칼라 필터를 추가하려면 <a href="/docs/ko/filtered-search-with-structarray.md">‘StructArray를 사용한 필터링 검색’을</a> 참조하십시오.</p></li>
-<li><p>그룹화 대신 점수 또는 거리 경계를 사용하려면 <a href="/docs/ko/range-search-with-structarray.md">StructArray를 사용한 범위 검색을</a> 읽어보세요.</p></li>
+<li><p>그룹화 대신 점수 또는 거리 경계를 사용하려면 <a href="/docs/ko/range-search-with-structarray.md">StructArray를 사용한 범위 검색을</a> 참조하십시오.</p></li>
 <li><p>StructArray 검색 제한 사항을 확인하려면 <a href="/docs/ko/structarray-limits.md">‘StructArray 제한 사항’을</a> 참조하십시오.</p></li>
 </ol>

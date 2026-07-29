@@ -23,7 +23,7 @@ summary: 使用 Helm 或 Milvus Operator，將 Milvus 叢集的訊息佇列在 P
 <p><strong>先決條件：</strong>MQ 切換功能僅適用於<strong>Milvus 3.0 及後續版本</strong>。開始操作前，請將您的 Milvus 實例升級至 Milvus 3.0 或後續版本 — 此功能在較早版本中不可用。</p>
 </div>
 <div class="alert warning">
-<p>切換訊息佇列是一項<strong>高風險操作</strong>。請選擇<strong>與您的</strong>部署方式相符的章節——「<strong>使用 Helm</strong>」或<strong>「使用 Milvus Operator</strong>」——並依序從上至下執行。請勿混用 Helm 與 Operator 指令。</p>
+<p>切換訊息佇列是一項<strong>高風險操作</strong>。請選擇<strong>與您的</strong>部署方式相符的章節 —<strong>「使用 Helm</strong>」或<strong>「使用 Milvus Operator</strong>」— 並依序從上至下執行。請勿混用 Helm 與 Operator 指令。</p>
 </div>
 <h2 id="With-Helm" class="common-anchor-header">使用 Helm<button data-href="#With-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -99,7 +99,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>步驟 1：確認 Milvus 實例正在運行。</strong></p>
-<p><strong>步驟 2：配置目標 Pulsar 連線並重新啟動 Milvus。</strong>此切換操作需要 Milvus 已知曉 Pulsar 連線設定，因此請透過<code translate="no">extraConfigFiles</code> 將設定寫入<code translate="no">user.yaml</code> ，並使用<code translate="no">helm upgrade</code> 套用（此操作會滾動更新 Pod）。<code translate="no">streaming.enabled=true</code> 是「切換訊息佇列 (Switch MQ)」功能所需的設定。</p>
+<p><strong>步驟 2：配置目標 Pulsar 連線並重新啟動 Milvus。</strong>此切換操作需要 Milvus 已知曉 Pulsar 連線設定，因此請透過<code translate="no">extraConfigFiles</code> 將設定寫入<code translate="no">user.yaml</code> ，並使用<code translate="no">helm upgrade</code> 套用（此操作會滾動更新 Pod）。<code translate="no">streaming.enabled=true</code> 是「切換 MQ」功能的必要條件。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -230,7 +230,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <p>等待所有 Pod 準備就緒後，確認 Pulsar 存取設定已渲染至 Milvus 設定中。</p>
 <p><strong>步驟 3：執行 MQ 切換。</strong></p>
 <div class="alert note">
-<p>請確保目標 Pulsar 中不包含來自先前配置的 Milvus 主題。若這是您首次切換至 Pulsar，請跳過此說明；否則請先清理同名的殘留 Milvus 主題。</p>
+<p>請確保目標 Pulsar 中不包含來自先前配置的 Milvus 主題。若這是您首次切換至 Pulsar，請跳過此注意事項；否則請先清理同名的殘留 Milvus 主題。</p>
 </div>
 <pre><code translate="no" class="language-shell">kubectl exec -it &lt;mixcoord-pod&gt; -- \
   curl -X POST http://localhost:9091/management/wal/alter \

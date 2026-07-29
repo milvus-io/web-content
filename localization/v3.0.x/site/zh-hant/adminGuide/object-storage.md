@@ -48,7 +48,7 @@ title: 物件儲存
 <tr><td>其他相容 S3 的儲存服務</td><td style="text-align:center">✔️</td></tr>
 </tbody>
 </table>
-<p>有關設定詳情，請參閱<a href="/docs/zh-hant/deploy_s3.md">《使用 Docker Compose 或 Helm 設定物件儲存</a>》以及<a href="/docs/zh-hant/object_storage_operator.md">《使用 Milvus Operator 設定物件儲存</a>》。</p>
+<p>有關設定詳情，請參閱<a href="/docs/zh-hant/deploy_s3.md">《使用 Docker Compose 或 Helm 設定物件儲存》</a>以及<a href="/docs/zh-hant/object_storage_operator.md">《使用 Milvus Operator 設定物件儲存</a>》。</p>
 <h2 id="Additional-requirements-when-using-embedded-Woodpecker" class="common-anchor-header">使用內嵌式 Woodpecker 時的額外要求<button data-href="#Additional-requirements-when-using-embedded-Woodpecker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

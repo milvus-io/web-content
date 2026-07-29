@@ -203,7 +203,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Verwenden Sie hier „ <code translate="no">MATCH_ANY</code> “, da das Suchergebnis von „EmbeddingList“ auf Entitätsebene erfolgt. Der Filter erfordert, dass mindestens ein Chunk in der Entität ein „ <code translate="no">&quot;index&quot;</code> “-Chunk mit hoher Qualität ist, doch das Suchergebnis selbst repräsentiert weiterhin die übergeordnete Entität.</p>
+<p>Verwenden Sie hier „ <code translate="no">MATCH_ANY</code> “, da das Suchergebnis von „EmbeddingList“ auf Entitätsebene erfolgt. Der Filter erfordert, dass mindestens ein Chunk in der Entität ein „ <code translate="no">&quot;index&quot;</code> “-Chunk mit hoher Qualität ist, das Suchergebnis selbst repräsentiert jedoch weiterhin die übergeordnete Entität.</p>
 <h2 id="Use-filters-in-hybrid-search" class="common-anchor-header">Verwenden Sie Filter in der hybriden Suche<button data-href="#Use-filters-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -282,7 +282,7 @@ results = client.hybrid_search(
 <tr><td>Vektor-Teilfelder</td><td>Werden nicht als skalare Prädikate für „ <code translate="no">$[...]</code> “ unterstützt. Verwenden Sie stattdessen Vektor-Teilfelder über die Vektorsuche.</td></tr>
 </tbody>
 </table>
-<p>Für nicht unterstützte Fälle wie JSON-Pfade, Array-Container-Funktionen, Textabgleichsfunktionen, Null-Prädikate auf ` <code translate="no">$[...]</code>`, Geometrie-Funktionen, `Timestamptz`-Ausdrücke und generische Funktionsaufrufe siehe <a href="/docs/de/struct-array-operators.md">„StructArray-Operatoren</a>“.</p>
+<p>Für nicht unterstützte Fälle wie JSON-Pfade, Array-Container-Funktionen, Textabgleichsfunktionen, Null-Prädikate auf „ <code translate="no">$[...]</code> “, Geometrie-Funktionen, „Timestamptz“-Ausdrücke und generische Funktionsaufrufe siehe <a href="/docs/de/struct-array-operators.md">„StructArray-Operatoren</a>“.</p>
 <h2 id="Common-mistakes" class="common-anchor-header">Häufige Fehler<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

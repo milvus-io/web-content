@@ -58,7 +58,7 @@ beta: Milvus v2.6.20+
     </button></h2><p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v3.0.x/assets/hugging-face-embedding-flow.png" alt="Hugging Face text embedding workflow" class="doc-image" id="hugging-face-text-embedding-workflow" /> 
-   <span>Hugging Face 텍스트 임베딩 워크플로우</span>
+   <span>Hugging Face 텍스트 임베딩 워크플로</span>
   
  </span></p>
 <p>이 워크플로는 세 단계로 구성됩니다.</p>
@@ -141,7 +141,7 @@ beta: Milvus v2.6.20+
         <span class="hljs-attr">credential:</span> <span class="hljs-string">huggingface_apikey</span>
         <span class="hljs-comment"># url: https://router.huggingface.co</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>또한 함수 매개변수에서 <code translate="no">credential</code> 을 설정할 수도 있습니다. 이 값은 토큰 자체가 아니라 <code translate="no">credential</code> 섹션의 최상위 수준에서 정의된 레이블이어야 합니다. 함수 수준의 자격 증명 레이블은 제공자 수준의 레이블보다 우선합니다.</p>
+<p>또한 함수 매개변수에서 ` <code translate="no">credential</code> `을 설정할 수도 있습니다. 이 값은 토큰 자체가 아니라 ` <code translate="no">credential</code> ` 섹션의 최상위 수준에서 정의된 레이블이어야 합니다. 함수 수준의 자격 증명 레이블은 제공자 수준의 레이블보다 우선합니다.</p>
 <h3 id="Option-2-Environment-variable" class="common-anchor-header">옵션 2: 환경 변수<button data-href="#Option-2-Environment-variable" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -158,7 +158,7 @@ beta: Milvus v2.6.20+
         ></path>
       </svg>
     </button></h3><p>Function이나 제공자 구성에서 자격 증명 레이블이 지정되지 않은 경우, Milvus는 ` <code translate="no">MILVUS_HUGGINGFACE_API_KEY</code>`에서 토큰을 읽습니다.</p>
-<p>Docker Compose의 경우, Milvus 독립형 서비스에서 다음 변수를 설정하십시오:</p>
+<p>Docker Compose의 경우, Milvus 독립 실행형 서비스에서 다음 변수를 설정하십시오:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># docker-compose.yaml</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">environment:</span>
@@ -364,7 +364,7 @@ client.create_collection(
         ></path>
       </svg>
     </button></h3><p>Hugging Face에서 모델 페이지를 열고 <strong>‘Inference Providers’</strong> 섹션을 확인하십시오. <code translate="no">hf-inference</code> 가 <code translate="no">feature-extraction</code> 에 대한 모델을 제공하는지 확인하십시오. 그렇지 않은 경우, 다른 모델을 선택하고 필요한 경우 벡터 필드 차원을 업데이트하십시오.</p>
-<h3 id="The-returned-vector-dimension-does-not-match-the-field" class="common-anchor-header">반환된 벡터 차원이 필드와 일치하지 않습니다.<button data-href="#The-returned-vector-dimension-does-not-match-the-field" class="anchor-icon" translate="no">
+<h3 id="The-returned-vector-dimension-does-not-match-the-field" class="common-anchor-header">반환된 벡터 차원이 필드와 일치하지 않습니다<button data-href="#The-returned-vector-dimension-does-not-match-the-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

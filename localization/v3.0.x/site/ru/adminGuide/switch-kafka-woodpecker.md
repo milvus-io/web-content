@@ -90,7 +90,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p><strong>Шаг 1: Убедитесь, что экземпляр Milvus работает.</strong></p>
-<p><strong>Шаг 2: Настройте целевое соединение с Kafka и перезапустите Milvus.</strong> Для перехода необходимо, чтобы Milvus уже знал параметры соединения с Kafka, поэтому запишите их в файл ` <code translate="no">user.yaml</code> ` с помощью команды ` <code translate="no">extraConfigFiles</code> ` и примените изменения с помощью ` <code translate="no">helm upgrade</code> ` (команда перезапускает поды). Для работы функции Switch MQ требуется ` <code translate="no">streaming.enabled=true</code> `. Подробности о SASL/SSL см. в разделе <a href="/docs/ru/connect_kafka_ssl.md">«Подключение к Kafka с помощью SASL/SSL</a>».</p>
+<p><strong>Шаг 2: Настройте целевое соединение с Kafka и перезапустите Milvus.</strong> Для перехода необходимо, чтобы Milvus уже знал данные соединения с Kafka, поэтому запишите их в файл ` <code translate="no">user.yaml</code> ` с помощью команды ` <code translate="no">extraConfigFiles</code> ` и примените изменения с помощью ` <code translate="no">helm upgrade</code> ` (команда перезапускает поды). Для работы функции Switch MQ требуется ` <code translate="no">streaming.enabled=true</code> `. Подробности о SASL/SSL см. в разделе <a href="/docs/ru/connect_kafka_ssl.md">«Подключение к Kafka с помощью SASL/SSL</a>».</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -124,7 +124,7 @@ summary: >-
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>При успешном переключении в журнале появляется запись « <code translate="no">[mqTypeValue=kafka]</code> ».</p>
-<p><strong>Шаг 5: (Необязательно) Удалите данные Woodpecker.</strong> Удалите данные Woodpecker из MinIO/S3 (в каталоге <code translate="no">&lt;rootPath&gt;/wp/...</code>, обычно <code translate="no">files/wp/...</code>) и метаданные Woodpecker из etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). Если вы планируете позже вернуться к Woodpecker, сначала удалите эти файлы.</p>
+<p><strong>Шаг 5: (Необязательно) Удалите данные Woodpecker.</strong> Удалите данные Woodpecker из MinIO/S3 (в каталоге <code translate="no">&lt;rootPath&gt;/wp/...</code>, обычно <code translate="no">files/wp/...</code>) и метаданные Woodpecker из etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). Если вы планируете впоследствии вернуться к Woodpecker, сначала удалите эти файлы.</p>
 <h2 id="With-Milvus-Operator" class="common-anchor-header">С помощью Milvus Operator<button data-href="#With-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -232,7 +232,7 @@ summary: >-
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>При успешном переключении в журнале регистрируется сообщение « <code translate="no">[mqTypeValue=kafka]</code> ».</p>
-<p><strong>Шаг 5: (Необязательно) Удалите данные Woodpecker.</strong> Удалите данные Woodpecker из MinIO/S3 (в папке <code translate="no">&lt;rootPath&gt;/wp/...</code>, обычно <code translate="no">files/wp/...</code>) и метаданные Woodpecker из etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). Если вы планируете впоследствии вернуться к Woodpecker, сначала удалите эти файлы.</p>
+<p><strong>Шаг 5: (Необязательно) Удалите данные Woodpecker.</strong> Удалите данные Woodpecker на MinIO/S3 (в папке <code translate="no">&lt;rootPath&gt;/wp/...</code>, обычно <code translate="no">files/wp/...</code>) и метаданные Woodpecker в etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). Если вы планируете позже вернуться к Woodpecker, сначала удалите эти файлы.</p>
 <h2 id="Supported-scenarios" class="common-anchor-header">Поддерживаемые сценарии<button data-href="#Supported-scenarios" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

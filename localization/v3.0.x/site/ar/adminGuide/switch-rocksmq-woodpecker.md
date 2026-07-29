@@ -185,7 +185,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><div class="alert note">
-<p>تأكد من عدم وجود بيانات RocksMQ متبقية في المثيل من تشغيل سابق. إذا كانت هذه هي المرة الأولى التي تقوم فيها بالتحويل إلى RocksMQ، فتخط هذه الملاحظة؛ وإلا فقم أولاً بمسح البيانات والبيانات الوصفية ذات الصلة بـ RocksMQ.</p>
+<p>تأكد من عدم وجود بيانات RocksMQ متبقية في المثيل من تشغيل سابق. إذا كانت هذه هي المرة الأولى التي تقوم فيها بالتحويل إلى RocksMQ، فتخط هذه الملاحظة؛ وإلا فقم أولاً بمسح بيانات وبيانات تعريف RocksMQ ذات الصلة.</p>
 </div>
 <pre><code translate="no" class="language-shell">curl -X POST http://&lt;mixcoord_addr&gt;:&lt;mixcoord_port&gt;/management/wal/alter \
   -H &quot;Content-Type: application/json&quot; \

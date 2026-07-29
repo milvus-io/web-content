@@ -108,7 +108,7 @@ beta: Milvus v2.6.20+
 <li>Eine Sammlung, die Textvorschläge in einem nicht-nullfähigen „ <code translate="no">VARCHAR</code> “-Feld speichert.</li>
 </ul>
 <div class="alert note">
-<p>Milvus hat keinen Einfluss darauf, ob ein Hugging-Face-Modell über <code translate="no">hf-inference</code> weiterhin verfügbar bleibt oder ob das Modell Ihre Anforderungen an Stabilität, Latenz und Ausgabequalität erfüllt. Überprüfen Sie das Modell auf Hugging Face und bewerten Sie es im Hinblick auf Ihre Arbeitslast, bevor Sie es in der Produktion einsetzen.</p>
+<p>Milvus hat keinen Einfluss darauf, ob ein Hugging-Face-Modell über <code translate="no">hf-inference</code> weiterhin verfügbar bleibt oder ob das Modell Ihre Anforderungen hinsichtlich Stabilität, Latenz und Ausgabequalität erfüllt. Überprüfen Sie das Modell auf Hugging Face und bewerten Sie es im Hinblick auf Ihre Arbeitslast, bevor Sie es in der Produktion einsetzen.</p>
 </div>
 <p>Die Beispiele dienen <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2"><code translate="no">sentence-transformers/all-MiniLM-L6-v2</code></a> lediglich zur Veranschaulichung der Konfiguration. Das Modell stellt keine Empfehlung oder Zertifizierung durch Milvus dar.</p>
 <h2 id="Configure-credentials" class="common-anchor-header">Anmeldedaten konfigurieren<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
@@ -175,7 +175,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Wenn weder in der Funktions- noch in der Anbieter-Konfiguration ein Anmelde-Label angegeben ist, legen Sie „ <code translate="no">MILVUS_HUGGINGFACE_API_KEY</code> “ in der Milvus-Dienstumgebung fest:</p>
+    </button></h3><p>Wenn weder in der Funktions- noch in der Anbieter-Konfiguration ein Anmelde-Label angegeben ist, legen Sie „ <code translate="no">MILVUS_HUGGINGFACE_API_KEY</code> “ in der Milvus-Service-Umgebung fest:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># docker-compose.yaml</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">environment:</span>
@@ -303,7 +303,7 @@ client.insert(
 <tr><td><code translate="no">reranker</code></td><td>Ja</td><td>Die Reranking-Implementierung. Setzen Sie diesen Wert auf „ <code translate="no">model</code> “.</td></tr>
 <tr><td><code translate="no">provider</code></td><td>Ja</td><td>Der Modellanbieter. Setzen Sie diesen Wert auf „ <code translate="no">huggingface</code> “.</td></tr>
 <tr><td><code translate="no">model_name</code></td><td>Ja</td><td>Die Hugging-Face-Modell-ID für ein Modell, das über <code translate="no">hf-inference</code> für die Aufgabe „ <code translate="no">sentence-similarity</code> “ bereitgestellt wird.</td></tr>
-<tr><td><code translate="no">queries</code></td><td>Ja</td><td>Für die Neureihung verwendete Abfragezeichenfolgen. Geben Sie genau eine Zeichenfolge pro Suchanfrage an, auch wenn beim ersten Abruf Abfragevektoren verwendet werden.</td></tr>
+<tr><td><code translate="no">queries</code></td><td>Ja</td><td>Für die Neureihung verwendete Abfragezeichenfolgen. Geben Sie genau eine Zeichenfolge pro Suchanfrage an, auch wenn bei der anfänglichen Abfrage Abfragevektoren verwendet werden.</td></tr>
 <tr><td><code translate="no">hf_provider</code></td><td>Nein</td><td>Die Route des Hugging Face Inference Providers. Der Standardwert und der einzige in Milvus 2.6.20 unterstützte Wert ist <code translate="no">hf-inference</code>.</td></tr>
 <tr><td><code translate="no">credential</code></td><td>Nein</td><td>Die Bezeichnung einer Anmeldeinformation, die im obersten Abschnitt „ <code translate="no">credential</code> “ von „ <code translate="no">milvus.yaml</code> “ definiert ist. Dieser Wert ist nicht das Token selbst.</td></tr>
 <tr><td><code translate="no">max_client_batch_size</code></td><td>Nein</td><td>Die maximale Anzahl an Kandidatentexten, die in einer Hugging-Face-Anfrage gesendet werden. Der Standardwert ist „ <code translate="no">32</code> “, und der Wert muss größer sein als „ <code translate="no">0</code> “.</td></tr>
@@ -418,7 +418,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Stellen Sie sicher, dass das Anmelde-Label „Function“ in „ <code translate="no">milvus.yaml</code> “ vorhanden ist, dass das Label auf Anbieterebene gültig ist oder dass „ <code translate="no">MILVUS_HUGGINGFACE_API_KEY</code> “ in der Milvus-Serviceumgebung vorhanden ist.</p>
+    </button></h3><p>Stellen Sie sicher, dass das Label „Function credential“ in „ <code translate="no">milvus.yaml</code> “ vorhanden ist, dass das Label auf Anbieterebene gültig ist oder dass „ <code translate="no">MILVUS_HUGGINGFACE_API_KEY</code> “ in der Milvus-Serviceumgebung vorhanden ist.</p>
 <h2 id="Next-steps" class="common-anchor-header">Nächste Schritte<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

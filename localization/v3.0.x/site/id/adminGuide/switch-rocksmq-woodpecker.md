@@ -185,7 +185,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><div class="alert note">
-<p>Pastikan instance tidak memiliki sisa data RocksMQ dari eksekusi sebelumnya. Jika ini adalah pertama kalinya Anda beralih ke RocksMQ, lewati catatan ini; jika tidak, bersihkan meta dan data RocksMQ terkait terlebih dahulu.</p>
+<p>Pastikan instance tidak memiliki sisa data RocksMQ dari eksekusi sebelumnya. Jika ini adalah pertama kalinya Anda beralih ke RocksMQ, abaikan catatan ini; jika tidak, bersihkan terlebih dahulu meta dan data RocksMQ yang terkait.</p>
 </div>
 <pre><code translate="no" class="language-shell">curl -X POST http://&lt;mixcoord_addr&gt;:&lt;mixcoord_port&gt;/management/wal/alter \
   -H &quot;Content-Type: application/json&quot; \

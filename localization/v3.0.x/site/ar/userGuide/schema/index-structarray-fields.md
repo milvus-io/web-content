@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>قم بإنشاء فهارس على الحقول الفرعية لـ StructArray قبل إجراء البحث المتجه أو تسريع التصفية القياسية. بالنسبة لحقل StructArray، يكون هدف الفهرس هو مسار حقل فرعي، مثل <code translate="no">chunks[emb_list_vector]</code> أو <code translate="no">chunks[emb]</code> أو <code translate="no">chunks[section]</code>.</p>
+    </button></h1><p>قم بإنشاء فهارس على الحقول الفرعية لـ StructArray قبل تشغيل البحث المتجه أو تسريع التصفية القياسية. بالنسبة لحقل StructArray، يكون هدف الفهرس هو مسار الحقل الفرعي، مثل <code translate="no">chunks[emb_list_vector]</code> أو <code translate="no">chunks[emb]</code> أو <code translate="no">chunks[section]</code>.</p>
 <p>تستخدم هذه الصفحة مجموعة <code translate="no">tech_articles</code> من <a href="/docs/ar/create-structarray-field.md">«إنشاء حقل StructArray</a>». يحتوي حقل StructArray <code translate="no">chunks</code> على حقول فرعية سكالارية للتصفية وحقول فرعية متجهة للبحث.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">قبل البدء<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -53,7 +53,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>لا يقبل الحقل المتجه أو الحقل الفرعي المتجه سوى فهرس واحد. إذا كنت بحاجة إلى كل من البحث في EmbeddingList والبحث على مستوى العناصر، فأنشئ حقلين فرعيين متجهين منفصلين وقم بفهرستهما بشكل منفصل. في هذه الصفحة، يتم فهرسة <code translate="no">chunks[emb_list_vector]</code> للبحث في EmbeddingList، ويتم فهرسة <code translate="no">chunks[emb]</code> للبحث على مستوى العناصر.</p>
+<p>لا يقبل الحقل المتجه أو الحقل الفرعي المتجه سوى فهرس واحد. إذا كنت بحاجة إلى كل من البحث في قائمة التضمين (EmbeddingList) والبحث على مستوى العناصر، فأنشئ حقلين فرعيين متجهين منفصلين وقم بفهرستهما بشكل منفصل. في هذه الصفحة، يتم فهرسة " <code translate="no">chunks[emb_list_vector]</code> " للبحث في قائمة التضمين (EmbeddingList)، ويتم فهرسة " <code translate="no">chunks[emb]</code> " للبحث على مستوى العناصر.</p>
 </div>
 <h2 id="Choose-indexes" class="common-anchor-header">اختر الفهارس<button data-href="#Choose-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -83,7 +83,7 @@ summary: >-
 <tr><td>التصفية حسب القيمة المنطقية</td><td><code translate="no">chunks[has_code]</code></td><td>مؤشر قياسي يدعمه الهدف الخاص بك.</td></tr>
 </tbody>
 </table>
-<p>يعامل البحث في EmbeddingList المتجهات الموجودة في حقل فرعي من نوع StructArray على أنها قائمة تضمين ويُرجع نتائج على مستوى الكيان. أما البحث على مستوى العنصر فيبحث في كل عنصر من عناصر Struct بشكل مستقل ويمكنه إرجاع إزاحة العنصر المطابق.</p>
+<p>يعامل البحث في EmbeddingList المتجهات الموجودة في حقل فرعي من متجهات StructArray كقائمة تضمين ويُرجع نتائج على مستوى الكيان. أما البحث على مستوى العنصر فيبحث في كل عنصر من عناصر Struct بشكل مستقل ويمكنه إرجاع إزاحة العنصر المطابق.</p>
 <h2 id="Create-vector-indexes" class="common-anchor-header">إنشاء فهارس متجهة<button data-href="#Create-vector-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -140,7 +140,7 @@ client.create_index(
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>تحذير
-لا تقم بإنشاء فهرس « <code translate="no">MAX_SIM*</code> » وفهرس بمقياس متجه عادي في نفس الحقل الفرعي للمتجه. إذا كان كلا وضعي البحث مطلوبين، فاكتب المتجهات في حقلين فرعيين منفصلين للمتجه وأنشئ فهرسًا واحدًا لكل حقل فرعي.</p>
+لا تقم بإنشاء فهرس « <code translate="no">MAX_SIM*</code> » وفهرس بمقياس متجه عادي في نفس الحقل الفرعي للمتجه. إذا كان كلا وضعي البحث مطلوبين، فاكتب المتجهات في حقلين فرعيين منفصلين للمتجه وقم بإنشاء فهرس واحد لكل حقل فرعي.</p>
 </div>
 <h2 id="Create-scalar-indexes" class="common-anchor-header">إنشاء فهارس سكالارية<button data-href="#Create-scalar-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -205,7 +205,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>استخدم الجداول التالية لاختيار نوع الفهرس ونوع المقياس لحقل فرعي متجه من StructArray. ابدأ من الهدف، ثم اختر عائلة المقاييس حسب وضع البحث.</p>
+    </button></h2><p>استخدم الجداول التالية لاختيار نوع الفهرس ونوع المقياس لحقل فرعي متجهي من StructArray. ابدأ من الهدف، ثم اختر عائلة المقاييس حسب وضع البحث.</p>
 <p>اختر نوع فهرس Milvus ونوع المقياس من جداول التوافق التالية.</p>
 <h3 id="EmbeddingList-search" class="common-anchor-header">البحث في EmbeddingList<button data-href="#EmbeddingList-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -284,7 +284,7 @@ client.create_index(
 
 <span class="hljs-built_in">print</span>(indexes)
 <button class="copy-code-btn"></button></code></pre>
-<p>يمكنك أيضًا وصف فهرس معين إذا كان إصدار SDK الخاص بك يوفر واجهات برمجة تطبيقات (API) لوصف الفهارس.</p>
+<p>يمكنك أيضًا وصف فهرس معين إذا كان إصدار SDK الخاص بك يوفر واجهات برمجة تطبيقات (APIs) لوصف الفهارس.</p>
 <pre><code translate="no" class="language-python">index = client.describe_index(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
     index_name=<span class="hljs-string">&quot;chunks_emb_cosine&quot;</span>,
@@ -361,5 +361,5 @@ client.create_index(
     </button></h2><ol>
 <li><p>لتشغيل بحث EmbeddingList على مستوى الكيان أو البحث المتجه على مستوى العنصر، اقرأ "البحث المتجه الأساسي باستخدام StructArray".</p></li>
 <li><p>لتصفية الحقول الفرعية القياسية لـ StructArray أثناء البحث، اقرأ "البحث المُصفى باستخدام StructArray".</p></li>
-<li><p>لمراجعة حدود الفهرس والمقاييس، اقرأ " <a href="/docs/ar/structarray-limits.md">حدود StructArray</a>".</p></li>
+<li><p>لمراجعة حدود الفهرس والمقاييس، اقرأ <a href="/docs/ar/structarray-limits.md">«حدود StructArray</a>».</p></li>
 </ol>

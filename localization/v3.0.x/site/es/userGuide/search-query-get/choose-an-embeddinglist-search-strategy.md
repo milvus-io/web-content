@@ -25,7 +25,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Las estrategias de búsqueda de EmbeddingList determinan cómo Milvus crea un índice aproximado de candidatos para la búsqueda en EmbeddingList. La estrategia predeterminada es « <code translate="no">tokenann</code> ». Puedes cambiar a « <code translate="no">muvera</code> » o « <code translate="no">lemur</code> » cuando la lista de incrustaciones sea grande, TokenANN resulte demasiado costoso o una representación a nivel de fila aprendida o comprimida sea más adecuada. El resultado final sigue generándose mediante la reclasificación de MaxSim cuando se habilita la opción « <code translate="no">emb_list_rerank</code> ».</p>
+    </button></h1><p>Las estrategias de búsqueda de EmbeddingList determinan cómo Milvus crea un índice aproximado de candidatos para la búsqueda en EmbeddingList. La estrategia predeterminada es « <code translate="no">tokenann</code> ». Puedes cambiar a « <code translate="no">muvera</code> » o « <code translate="no">lemur</code> » cuando la lista de incrustaciones sea grande, TokenANN resulte demasiado costoso o una representación a nivel de fila aprendida o comprimida sea más adecuada. El resultado final sigue generándose mediante la reordenación de MaxSim cuando se habilita la opción « <code translate="no">emb_list_rerank</code> ».</p>
 <h2 id="Why-Search-Strategies-Exist" class="common-anchor-header">Por qué existen las estrategias de búsqueda<button data-href="#Why-Search-Strategies-Exist" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -146,7 +146,7 @@ summary: >-
 </div>
 <ul>
 <li><p><strong>Adecuado para:</strong> búsqueda de documentos visuales, incrustaciones de fragmentos multimodales, espacios de incrustación de baja discriminación, listas de incrustaciones grandes en las que TokenANN no resulta práctico.</p></li>
-<li><p><strong>Menos adecuado:</strong> corpus que cambian con frecuencia, incrustaciones de alta discriminación con longitudes de documento muy sesgadas, cargas de trabajo en las que el coste de entrenamiento es inaceptable.</p></li>
+<li><p><strong>Menos adecuado:</strong> corpus que cambian con frecuencia, incrustaciones de alta discriminación con longitudes de documentos muy sesgadas, cargas de trabajo en las que el coste de entrenamiento es inaceptable.</p></li>
 <li><p><strong>Parámetros importantes:</strong><code translate="no">lemur_hidden_dim</code>, <code translate="no">lemur_num_train_samples</code>, <code translate="no">lemur_num_epochs</code>, <code translate="no">lemur_batch_size</code>, <code translate="no">lemur_learning_rate</code>, <code translate="no">lemur_seed</code> y <code translate="no">lemur_num_layers</code>.</p></li>
 </ul>
 <hr>
@@ -194,7 +194,7 @@ summary: >-
 <tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_seed</code></td><td>Creación del índice</td><td><code translate="no">42</code></td><td>Se establece para obtener proyecciones aleatorias reproducibles, especialmente en pruebas y comparativas de rendimiento.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">emb_list_strategy=&quot;lemur&quot;</code></td><td>Creación de índices</td><td><code translate="no">tokenann</code></td><td>Utilízalo cuando se espere que la compresión aprendida a nivel de fila funcione mejor que la proyección aleatoria fija.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_hidden_dim</code></td><td>Creación de índices</td><td><code translate="no">256</code></td><td>Controla el tamaño de la representación comprimida. Aumenta este valor para obtener más capacidad; disminúyelo para reducir el consumo de memoria y acelerar la recuperación.</td></tr>
-<tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_num_train_samples</code></td><td>Creación de índices</td><td><code translate="no">20000</code></td><td>Aumenta este valor cuando el corpus sea diverso y la compresión aprendida no se ajuste bien; redúcelo solo para pruebas pequeñas o para creaciones más rápidas.</td></tr>
+<tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_num_train_samples</code></td><td>Creación de índices</td><td><code translate="no">20000</code></td><td>Aumenta este valor cuando el corpus sea diverso y la compresión aprendida no se ajuste lo suficiente; redúcelo solo para pruebas pequeñas o para creaciones más rápidas.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_num_epochs</code></td><td>Creación de índices</td><td><code translate="no">50</code></td><td>Aumenta si el entrenamiento no ha convergido; reduce cuando el tiempo de creación sea la principal limitación.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_batch_size</code></td><td>Creación del índice</td><td><code translate="no">512</code></td><td>Ajústalo en función del rendimiento del entrenamiento y del uso de memoria.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_learning_rate</code></td><td>Creación del índice</td><td><code translate="no">0.001</code></td><td>Ajustar cuando el entrenamiento sea inestable o converja demasiado lentamente.</td></tr>
@@ -219,7 +219,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>En Milvus, la estrategia se pasa como parámetro de índice al crear un índice en un campo EmbeddingList, como un subcampo vectorial de StructArray.</p>
+    </button></h2><p>En Milvus, la estrategia se pasa como parámetro de índice al crear un índice en un campo EmbeddingList, como un subcampo vectorial StructArray.</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;clips[clip_embedding]&quot;</span>,
@@ -278,7 +278,7 @@ index_params.add_index(
       <span class="hljs-attr">emb_list_rerank:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Es preferible utilizar parámetros por índice para la selección de estrategias.</strong> Un valor predeterminado del archivo de configuración de Milvus se aplica de forma general a los índices de ese tipo y etapa. Utiliza los parámetros de <code translate="no">create_index</code> cuando diferentes colecciones o campos requieran estrategias de EmbeddingList distintas.</p>
+<p><strong>Es preferible utilizar parámetros por índice para la selección de estrategias.</strong> Un valor por defecto del archivo de configuración de Milvus se aplica de forma general a los índices de ese tipo y etapa. Utiliza los parámetros de <code translate="no">create_index</code> cuando diferentes colecciones o campos requieran estrategias de EmbeddingList distintas.</p>
 </div>
 <h2 id="Configure-Candidate-Retrieval-at-Search-Time" class="common-anchor-header">Configurar la recuperación de candidatos en el momento de la búsqueda<button data-href="#Configure-Candidate-Retrieval-at-Search-Time" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -348,7 +348,7 @@ index_params.add_index(
 <tbody>
 <tr><td>¿Necesitas una línea de base de alta calidad?</td><td>Quieres medir la mejor aproximación práctica antes de optimizar el coste.</td><td><code translate="no">tokenann</code></td></tr>
 <tr><td>¿El número de vectores por fila es reducido o moderado?</td><td>Cada fila tiene un número reducido de vectores de token, patch o clip.</td><td><code translate="no">tokenann</code></td></tr>
-<tr><td>¿Es TokenANN demasiado grande o demasiado lento?</td><td>El tamaño del índice o la latencia de la recuperación en la primera etapa son el cuello de botella.</td><td><code translate="no">muvera</code></td></tr>
+<tr><td>¿TokANN es demasiado grande o demasiado lento?</td><td>El tamaño del índice o la latencia de la recuperación en la primera etapa son el cuello de botella.</td><td><code translate="no">muvera</code></td></tr>
 <tr><td>¿Quieres compresión sin entrenamiento?</td><td>Necesitas un modelo operativo más sencillo y una codificación reproducible.</td><td><code translate="no">muvera</code></td></tr>
 <tr><td>¿El espacio de incrustación tiene baja capacidad de discriminación?</td><td>Las redes neuronales artificiales (ANN) a nivel de token presentan ruido, y la proyección aleatoria no conserva suficiente señal.</td><td><code translate="no">lemur</code></td></tr>
 <tr><td>¿La carga de trabajo es visual o multimodal?</td><td>Las filas contienen muchos vectores de parches, y TokenANN resulta demasiado costoso.</td><td><code translate="no">lemur</code> o <code translate="no">muvera</code></td></tr>

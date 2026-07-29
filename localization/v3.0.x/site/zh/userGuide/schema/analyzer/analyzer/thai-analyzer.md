@@ -53,7 +53,7 @@ beta: Milvus 3.0.0+
      <td><p><code translate="no">stop_words</code></p></td>
      <td><p><code translate="no">list[str]</code></p></td>
      <td><p><code translate="no">_thai_</code></p></td>
-     <td><p>要从分词过程中移除的额外停用词列表。默认情况下，<code translate="no">thai</code> 分析器使用内置的<code translate="no">_thai_</code> 词典。要查看默认词典，请参阅 Milvus<a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/thai.txt">泰语停用词列表</a>。该列表源自 Apache Lucene<a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/th/stopwords.txt">泰语停用词文件</a>。</p></td>
+     <td><p>要从分词过程中剔除的额外停用词列表。默认情况下，<code translate="no">thai</code> 分析器使用内置的<code translate="no">_thai_</code> 词典。如需查看默认词典，请参阅 Milvus<a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/thai.txt">泰语停用词列表</a>。该列表源自 Apache Lucene<a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/th/stopwords.txt">泰语停用词文件</a>。</p></td>
    </tr>
 </table>
 <p>要添加自定义停用词，请包含<code translate="no">stop_words</code> ：</p>

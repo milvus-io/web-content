@@ -147,7 +147,7 @@ summary: >-
 <tr><td>حقل StructArray القابل للقيمة الفارغة</td><td>مدعوم فقط في الإصدارات التي تتضمن دعم StructArray القابل للقيمة الفارغة ودعم المصفوفات المتجهة القابلة للقيمة الفارغة.</td></tr>
 <tr><td>القيمة الفارغة في Python</td><td>استخدم ` <code translate="no">None</code> ` لإدراج قيمة StructArray فارغة في Python. لا تستخدم ` <code translate="no">Null</code> ` أو ` <code translate="no">null</code>`.</td></tr>
 <tr><td>نطاق القيمة الفارغة</td><td>تنطبق القيمة "null" على حقل StructArray بأكمله. على سبيل المثال، لا يكون <code translate="no">chunks=None</code> صالحًا إلا عندما يكون <code translate="no">chunks</code> قابلاً للقيمة "null".</td></tr>
-<tr><td>قيمة StructArray فارغة جزئيًا</td><td>عندما يحتوي حقل StructArray على قيمة صفيف صالحة، لا تخلط صفيفات الحقول الفرعية التي يمكن أن تكون null مع صفيفات الحقول الفرعية الصالحة في نفس القيمة.</td></tr>
+<tr><td>قيمة StructArray قابلة للصفر جزئيًا</td><td>عندما يحتوي حقل StructArray على قيمة صفيف صالحة، لا تخلط صفيفات الحقول الفرعية التي يمكن أن تكون null مع صفيفات الحقول الفرعية الصالحة في نفس القيمة.</td></tr>
 <tr><td>الإضافة الديناميكية لحقل StructArray</td><td>لا يتم دعم إضافة حقل StructArray إلى مجموعة موجودة إلا في الإصدارات التي تتضمن دعمًا ديناميكيًا لحقول StructArray.</td></tr>
 <tr><td>متطلبات القابلية للقيمة null للإضافة الديناميكية</td><td>يجب أن يكون حقل StructArray المضاف إلى مجموعة موجودة قابلاً للقيمة null لأن الكيانات الموجودة لا تحتوي على قيمة للحقل الجديد.</td></tr>
 <tr><td>الكيانات الموجودة بعد الإضافة الديناميكية</td><td>تُرجع الكيانات الموجودة القيمة " <code translate="no">null</code> " لحقل StructArray المضاف عبر حقوله الفرعية.</td></tr>
@@ -205,7 +205,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>البحث في EmbeddingList</td><td><code translate="no">MAX_SIM</code>، أو مقاييس « <code translate="no">MAX_SIM_COSINE</code> » أو « <code translate="no">MAX_SIM_IP</code> » أو « <code translate="no">MAX_SIM_L2</code> » أو المقاييس الثنائية « <code translate="no">MAX_SIM_*</code> »</td><td>نتائج على مستوى الكيان.</td></tr>
-<tr><td>البحث على مستوى العنصر</td><td>مقاييس متجهة عادية مثل <code translate="no">L2</code> ، <code translate="no">IP</code> ، <code translate="no">COSINE</code> ، <code translate="no">HAMMING</code> ، أو <code translate="no">JACCARD</code></td><td>نتائج على مستوى العنصر يمكن أن تتضمن إزاحة العنصر المطابق.</td></tr>
+<tr><td>البحث على مستوى العنصر</td><td>مقاييس متجهة عادية مثل <code translate="no">L2</code> أو <code translate="no">IP</code> أو <code translate="no">COSINE</code> أو <code translate="no">HAMMING</code> أو <code translate="no">JACCARD</code></td><td>نتائج على مستوى العنصر يمكن أن تتضمن إزاحة العنصر المطابق.</td></tr>
 </tbody>
 </table>
 <p>استخدم حقول فرعية متجهة منفصلة عندما يكون كلا الوضعين مطلوبين. على سبيل المثال، استخدم <code translate="no">chunks[emb_list_vector]</code> للبحث في EmbeddingList و <code translate="no">chunks[emb]</code> للبحث على مستوى العنصر.</p>
@@ -235,7 +235,7 @@ summary: >-
 <tr><td>البحث الأساسي على مستوى العناصر</td><td>مدعوم في الحقول الفرعية للمتجهات StructArray المفهرسة باستخدام مقاييس المتجهات العادية. يمكن أن يعرض إزاحات العناصر المطابقة.</td></tr>
 <tr><td>البحث في النطاق</td><td>مدعوم وفقًا لوضع البحث ودعم الفهرس/المقياس في الإصدار المستهدف. لمعرفة سلوك نطاق البحث المختلط في طلبات StructArray على مستوى العناصر، تحقق من الإصدار المستهدف.</td></tr>
 <tr><td>البحث بالتجميع</td><td>يمكن أن يُرجع البحث المجمّع على مستوى العناصر الإزاحات. يعتمد سلوك التجميع في البحث المختلط لطلبات StructArray على مستوى العناصر على الإصدار.</td></tr>
-<tr><td>البحث المختلط</td><td>يمكن أن يتضمن طلب البحث الهجين طلبات الحقول الفرعية للمتجه StructArray فقط عندما يدعم الإصدار المستهدف تركيبة البحث هذه. ولا يزال كل طلب يتبع عائلة المقاييس الخاصة بالحقل الفرعي للمتجه المفهرس.</td></tr>
+<tr><td>البحث المختلط</td><td>يمكن أن يتضمن طلب البحث الهجين طلبات الحقول الفرعية للمتجه StructArray فقط عندما تدعم النسخة المستهدفة تركيبة البحث هذه. ولا يزال كل طلب يتبع عائلة المقاييس الخاصة بالحقل الفرعي للمتجه المفهرس.</td></tr>
 <tr><td>إخراج الإزاحة</td><td>يتوفر الإزاحة لنتائج البحث على مستوى العنصر. يُرجع بحث EmbeddingList نتائج على مستوى الكيان ولا يستخدم إزاحات العناصر كوحدة النتيجة الأساسية.</td></tr>
 </tbody>
 </table>

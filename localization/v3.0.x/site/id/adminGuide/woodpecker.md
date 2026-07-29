@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Woodpecker adalah <strong>antrian pesan bawaan (write-ahead log, WAL)</strong> di Milvus 3.x. Ini adalah WAL berbasis cloud yang dirancang untuk penyimpanan objek, menawarkan throughput tinggi, beban operasional rendah, dan skalabilitas yang mulus. Untuk detail arsitektur dan benchmark, lihat <a href="/docs/id/woodpecker_architecture.md">Woodpecker</a>.</p>
+    </button></h1><p>Woodpecker adalah <strong>antrian pesan (write-ahead log, WAL) bawaan</strong> di Milvus 3.x. Ini adalah WAL berbasis cloud yang dirancang untuk penyimpanan objek, menawarkan throughput tinggi, beban operasional rendah, dan skalabilitas yang mulus. Untuk detail arsitektur dan benchmark, lihat <a href="/docs/id/woodpecker_architecture.md">Woodpecker</a>.</p>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -132,7 +132,7 @@ summary: >-
 <li><code translate="no">woodpecker.storage</code>
 <ul>
 <li><strong>type</strong>: <code translate="no">minio</code> untuk penyimpanan objek yang kompatibel dengan MinIO/S3 (MinIO/S3/GCS/OSS, dll.); <code translate="no">local</code> untuk sistem berkas lokal/bersama.</li>
-<li><strong>rootPath</strong>: Jalur akar untuk backend penyimpanan (berlaku untuk <code translate="no">local</code>; dengan <code translate="no">minio</code>, jalur ditentukan oleh bucket/prefix).</li>
+<li><strong>rootPath</strong>: Jalur akar untuk backend penyimpanan (berlaku untuk <code translate="no">local</code>; dengan <code translate="no">minio</code>, jalur ditentukan oleh bucket/prefiks).</li>
 </ul></li>
 </ul>
 <h2 id="Deployment-modes" class="common-anchor-header">Mode penerapan<button data-href="#Deployment-modes" class="anchor-icon" translate="no">
@@ -359,7 +359,7 @@ EOF&#x27;</span>
 <span class="hljs-comment"># Restart the container to apply the changes</span>
 docker restart milvus-standalone
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Enable-Woodpecker-service-mode-for-a-Milvus-Cluster-Helm" class="common-anchor-header">Aktifkan mode layanan Woodpecker untuk Kluster Milvus (Helm)<button data-href="#Enable-Woodpecker-service-mode-for-a-Milvus-Cluster-Helm" class="anchor-icon" translate="no">
+<h3 id="Enable-Woodpecker-service-mode-for-a-Milvus-Cluster-Helm" class="common-anchor-header">Aktifkan mode layanan Woodpecker untuk Milvus Cluster (Helm)<button data-href="#Enable-Woodpecker-service-mode-for-a-Milvus-Cluster-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -378,7 +378,7 @@ docker restart milvus-standalone
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0-beta \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.34 \
+  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.36 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -432,13 +432,13 @@ docker restart milvus-standalone
 <li>Pengaturan Woodpecker
 <ul>
 <li>Tingkatkan nilai ` <code translate="no">logstore.segmentSyncPolicy.maxFlushSize</code> ` dan ` <code translate="no">maxFlushThreads</code> ` untuk flush yang lebih besar dan paralelisme yang lebih tinggi.</li>
-<li>Sesuaikan nilai <code translate="no">maxInterval</code> sesuai dengan karakteristik media (tukar latensi dengan throughput dengan agregasi yang lebih lama).</li>
+<li>Sesuaikan nilai <code translate="no">maxInterval</code> sesuai dengan karakteristik media (tukar latensi dengan throughput dengan agregasi yang lebih panjang).</li>
 <li>Untuk penyimpanan objek, pertimbangkan untuk meningkatkan nilai ` <code translate="no">segmentRollingPolicy.maxSize</code> ` guna mengurangi pergantian segmen.</li>
 </ul></li>
 <li>Sisi klien/aplikasi
 <ul>
-<li>Gunakan ukuran batch yang lebih besar dan lebih banyak penulis/klien yang berjalan secara bersamaan.</li>
-<li>Kontrol waktu penyegaran/pembuatan indeks (lakukan pengelompokan sebelum memicu proses) untuk menghindari penulisan kecil yang sering.</li>
+<li>Gunakan ukuran batch yang lebih besar dan lebih banyak penulis/klien secara bersamaan.</li>
+<li>Kontrol waktu penyegaran/pembuatan indeks (lakukan pengelompokan sebelum memicu) untuk menghindari penulisan kecil yang sering.</li>
 </ul></li>
 </ul>
 <h3 id="Service-mode-Milvus-30+" class="common-anchor-header">Mode layanan (Milvus 3.0+)<button data-href="#Service-mode-Milvus-30+" class="anchor-icon" translate="no">
@@ -530,8 +530,8 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Woodpecker adalah WAL cloud-native yang dirancang untuk penyimpanan objek dengan kompromi antara throughput, biaya, dan latensi. Mode tertanam yang ringan memprioritaskan optimasi biaya dan throughput, karena sebagian besar skenario hanya memerlukan data ditulis dalam waktu tertentu daripada menuntut latensi rendah untuk permintaan penulisan individu. Oleh karena itu, Woodpecker menerapkan penulisan berbatch, dengan interval default 10 ms untuk backend penyimpanan sistem berkas lokal dan 200 ms untuk backend penyimpanan sejenis MinIO. Selama operasi penulisan yang lambat, latensi maksimum sama dengan waktu interval ditambah waktu flush.</p>
-<p>Perlu dicatat bahwa penyisipan batch dipicu tidak hanya oleh interval waktu tetapi juga oleh ukuran batch, yang secara default sebesar 2MB.</p>
+    </button></h3><p>Woodpecker adalah WAL cloud-native yang dirancang untuk penyimpanan objek dengan kompromi antara throughput, biaya, dan latensi. Mode tertanam yang ringan memprioritaskan optimasi biaya dan throughput, karena sebagian besar skenario hanya memerlukan data ditulis dalam waktu tertentu daripada menuntut latensi rendah untuk setiap permintaan penulisan. Oleh karena itu, Woodpecker menerapkan penulisan berbatch, dengan interval default 10 ms untuk backend penyimpanan sistem berkas lokal dan 200 ms untuk backend penyimpanan sejenis MinIO. Selama operasi penulisan yang lambat, latensi maksimum sama dengan waktu interval ditambah waktu flush.</p>
+<p>Perlu dicatat bahwa penyisipan batch dipicu tidak hanya oleh interval waktu tetapi juga oleh ukuran batch, yang secara default sebesar 2 MB.</p>
 <h3 id="Service-mode-Milvus-30+" class="common-anchor-header">Mode Layanan (Milvus 3.0+)<button data-href="#Service-mode-Milvus-30+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -551,9 +551,9 @@ batch_count = <span class="hljs-number">2000</span>
 <ul>
 <li><strong>Penulisan kuorum satu RTT</strong> — replikasi yang digerakkan klien menyelesaikan penulisan kuorum dalam satu putaran perjalanan (round trip), dengan lalu lintas lintas-AZ dibatasi pada data setara dua replika (dibandingkan dengan lalu lintas lintas-AZ tambahan sekitar 1/3 yang umum pada replikasi berbasis broker/leader).</li>
 <li><strong>Pembacaan satu lompatan yang sadar topologi</strong> — setiap pembacaan langsung menuju replika terdekat alih-alih diteruskan melalui broker, sehingga menghindari pembacaan lintas-AZ acak (≈2/3 lalu lintas pembacaan lintas-AZ) yang umum terjadi pada sistem berbasis broker.</li>
-<li><strong>Unggahan langsung ke penyimpanan objek setelah segment rolling</strong> — setiap segmen melacak siklus hidupnya secara penuh dan diunggah ke penyimpanan objek segera setelah digulirkan, sehingga menjaga jejak disk lokal dan biaya penyimpanan tetap rendah tanpa mengorbankan latensi.</li>
+<li><strong>Unggahan langsung ke penyimpanan objek setelah penggantian segmen</strong> — setiap segmen melacak siklus hidupnya secara penuh dan diunggah ke penyimpanan objek segera setelah diganti, sehingga menjaga penggunaan ruang disk lokal dan biaya penyimpanan tetap rendah tanpa mengorbankan latensi.</li>
 <li><strong>Tidak ada replikasi node-ke-node yang berkelanjutan</strong> — log disimpan ke penyimpanan objek yang berfungsi sebagai penyimpanan bersama, sehingga failover hanya mengunggah ulang replika yang masih berfungsi (tanpa menyalin seluruh node), penskalaan tidak dibatasi oleh bandwidth replikasi antar-node, dan penggantian node skala besar tidak menyebabkan badai replikasi.</li>
 </ul>
-<p>Dalam penerapan lintas-AZ, mode layanan juga menghemat sekitar <strong>1/3 lalu lintas jaringan tulis</strong> dan <strong>2/3 lalu lintas jaringan baca</strong> lintas-AZ dibandingkan dengan sistem log berbasis broker. Untuk analisis desain dan biaya selengkapnya, lihat <a href="/docs/id/woodpecker_architecture.md">Arsitektur Woodpecker</a>.</p>
+<p>Dalam penerapan lintas AZ, mode layanan juga menghemat sekitar <strong>1/3 lalu lintas jaringan tulis</strong> dan <strong>2/3 lalu lintas jaringan baca</strong> lintas AZ dibandingkan dengan sistem log berbasis broker. Untuk analisis desain dan biaya selengkapnya, lihat <a href="/docs/id/woodpecker_architecture.md">Arsitektur Woodpecker</a>.</p>
 <p>Untuk detail mengenai arsitektur, mode penerapan (MemoryBuffer / QuorumBuffer), dan kinerja, lihat <a href="/docs/id/woodpecker_architecture.md">Arsitektur Woodpecker</a>.</p>
 <p>Untuk detail parameter lebih lanjut, lihat <a href="https://github.com/zilliztech/woodpecker">repositori GitHub</a> Woodpecker.</p>

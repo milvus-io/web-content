@@ -75,7 +75,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>Subcampo vetorial ao nível do elemento</td><td>Utilize um subcampo vetorial StructArray, como <code translate="no">chunks[emb]</code>, indexado com uma métrica vetorial regular.</td></tr>
-<tr><td>Consulta vetorial normal</td><td>Utilize um vetor de consulta regular, e não um ` <code translate="no">EmbeddingList</code>`.</td></tr>
+<tr><td>Consulta vetorial normal</td><td>Utilize um vetor de consulta regular, e não um <code translate="no">EmbeddingList</code>.</td></tr>
 <tr><td>Agrupamento por chave primária</td><td>Utilize a chave primária da coleção como um ` <code translate="no">group_by_field</code>`, tal como ` <code translate="no">doc_id</code>`.</td></tr>
 <tr><td>Sem parâmetros de intervalo</td><td>Não combine a pesquisa de agrupamento com parâmetros de pesquisa de intervalo, como <code translate="no">radius</code> ou <code translate="no">range_filter</code>.</td></tr>
 </tbody>
@@ -241,7 +241,7 @@ results = client.hybrid_search(
 <tr><th>Item de resultado</th><th>Significado</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">id</code></td><td>Chave primária da entidade-pai agrupada.</td></tr>
+<tr><td><code translate="no">id</code></td><td>Chave primária da entidade pai agrupada.</td></tr>
 <tr><td><code translate="no">distance</code> ou pontuação</td><td>Pontuação ou distância do elemento Struct selecionado para essa entidade pai.</td></tr>
 <tr><td><code translate="no">offset</code></td><td>Posição, a partir de zero, do elemento Struct selecionado quando devolvido.</td></tr>
 <tr><td>Chaves primárias repetidas</td><td>Não esperadas ao agrupar pela chave primária.</td></tr>
@@ -265,7 +265,7 @@ results = client.hybrid_search(
       </svg>
     </button></h2><ul>
 <li><p>A pesquisa de agrupamento aplica-se apenas à pesquisa de vetores StructArray ao nível do elemento. A pesquisa EmbeddingList e a pesquisa híbrida ao nível de EmbeddingList não suportam o agrupamento.</p></li>
-<li><p>Utilize a chave primária como « <code translate="no">group_by_field</code> ». O agrupamento ao nível do elemento StructArray não é um agrupamento de uso geral sobre campos escalares arbitrários.</p></li>
+<li><p>Utilize a chave primária como « <code translate="no">group_by_field</code> ». O agrupamento ao nível dos elementos do StructArray não é um agrupamento de uso geral sobre campos escalares arbitrários.</p></li>
 <li><p>Não combine a pesquisa de agrupamento com a pesquisa por intervalo.</p></li>
 <li><p>Não utilize uma consulta « <code translate="no">EmbeddingList</code> » nem uma métrica « <code translate="no">MAX_SIM*</code> » para a pesquisa de agrupamento.</p></li>
 <li><p>O agrupamento híbrido só é suportado quando todas as sub-pesquisas têm como alvo campos vetoriais ao nível do elemento no âmbito do mesmo campo StructArray.</p></li>
@@ -291,7 +291,7 @@ results = client.hybrid_search(
 <li><p>Agrupamento por um campo escalar que não seja a chave primária.</p></li>
 <li><p>Agrupamento por vários campos. O agrupamento de StructArray ao nível do elemento suporta apenas o agrupamento por chave primária.</p></li>
 <li><p>Esperar que os resultados agrupados representem todos os elementos Struct correspondentes. O agrupamento devolve, no máximo, um resultado por entidade pai.</p></li>
-<li><p>Presumir que a pesquisa agrupada ao nível do elemento recalcula uma pontuação de tipo « <code translate="no">MAX_SIM*</code> » no estilo «EmbeddingList». O agrupamento agrupa os resultados ao nível do elemento; não altera o modelo de pontuação.</p></li>
+<li><p>Presumir que a pesquisa agrupada ao nível do elemento recalcula uma pontuação de « <code translate="no">MAX_SIM*</code> » ao estilo da «EmbeddingList». O agrupamento agrupa os resultados ao nível do elemento; não altera o modelo de pontuação.</p></li>
 <li><p>Combinação de « <code translate="no">group_by_field</code> » com « <code translate="no">radius</code> » ou « <code translate="no">range_filter</code> ».</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Próximos passos<button data-href="#Next-steps" class="anchor-icon" translate="no">
@@ -311,7 +311,7 @@ results = client.hybrid_search(
       </svg>
     </button></h2><ol>
 <li><p>Para aprender primeiro a pesquisa ao nível do elemento sem agrupamento, leia <a href="/docs/pt/basic-vector-search-with-structarray.md">«Pesquisa vetorial básica com StructArray</a>».</p></li>
-<li><p>Para adicionar filtros escalares à pesquisa agrupada, leia <a href="/docs/pt/filtered-search-with-structarray.md">«Pesquisa filtrada com StructArray</a>».</p></li>
-<li><p>Para utilizar limites de pontuação ou distância em vez de agrupamento, leia <a href="/docs/pt/range-search-with-structarray.md">«Pesquisa por intervalo com StructArray</a>».</p></li>
+<li><p>Para adicionar filtros escalares à pesquisa agrupada, leia <a href="/docs/pt/filtered-search-with-structarray.md">«Pesquisa Filtrada com StructArray</a>».</p></li>
+<li><p>Para utilizar limites de pontuação ou distância em vez do agrupamento, leia <a href="/docs/pt/range-search-with-structarray.md">«Pesquisa por intervalo com StructArray</a>».</p></li>
 <li><p>Para verificar os limites de pesquisa do StructArray, leia <a href="/docs/pt/structarray-limits.md">«Limites do StructArray</a>».</p></li>
 </ol>

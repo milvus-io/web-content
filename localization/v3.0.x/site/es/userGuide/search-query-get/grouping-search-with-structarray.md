@@ -172,7 +172,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>El predicado de nivel superior selecciona las entidades candidatas. El predicado « <code translate="no">element_filter</code> » restringe la búsqueda vectorial a nivel de elemento a los elementos de Struct que coincidan. A continuación, la agrupación agrupa los resultados de elementos coincidentes según la clave principal.</p>
+<p>El predicado de nivel superior selecciona las entidades candidatas. El predicado « <code translate="no">element_filter</code> » restringe la búsqueda vectorial a nivel de elemento a los elementos de Struct que coincidan. A continuación, la agrupación agrupa los resultados de elementos coincidentes por la clave primaria.</p>
 <h2 id="Use-grouping-in-hybrid-search" class="common-anchor-header">Utilice la agrupación en la búsqueda híbrida<button data-href="#Use-grouping-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

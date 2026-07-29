@@ -23,9 +23,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Em aplicações de pesquisa baseadas em agentes, a pesquisa vetorial e a correspondência de padrões ao estilo grep complementam-se frequentemente. A pesquisa vetorial recupera entidades semanticamente relevantes, enquanto a correspondência de padrões restringe esses resultados com base em estruturas exatas de cadeias de caracteres, tais como códigos de erro, prefixos de registos, domínios de e-mail, percursos de URL ou identificadores.</p>
-<p>No Milvus, pode expressar estas restrições de padrão em filtros escalares com « <code translate="no">LIKE</code> » para correspondência simples com caracteres curinga e « <code translate="no">=~</code> » ou « <code translate="no">!~</code> » para expressões regulares <a href="https://github.com/google/re2/wiki/syntax">RE2</a>. Pode combinar estes filtros com « <code translate="no">query</code> », « <code translate="no">search</code> » ou pesquisa híbrida.</p>
-<p>As expressões de correspondência de padrões são escritas no parâmetro <code translate="no">filter</code>. Por exemplo, a consulta seguinte corresponde a mensagens de registo que contenham um código de erro como <code translate="no">E1001</code>:</p>
+    </button></h1><p>Em aplicações de pesquisa agênica, a pesquisa vetorial e a correspondência de padrões ao estilo grep complementam-se frequentemente. A pesquisa vetorial recupera entidades semanticamente relevantes, enquanto a correspondência de padrões restringe esses resultados com base em estruturas exatas de cadeias de caracteres, tais como códigos de erro, prefixos de registos, domínios de e-mail, percursos de URL ou identificadores.</p>
+<p>No Milvus, é possível expressar estas restrições de padrão em filtros escalares com <code translate="no">LIKE</code> para correspondência simples com caracteres curinga e <code translate="no">=~</code> ou <code translate="no">!~</code> para expressões regulares <a href="https://github.com/google/re2/wiki/syntax">RE2</a>. É possível combinar estes filtros com <code translate="no">query</code>, <code translate="no">search</code> ou a pesquisa híbrida.</p>
+<div class="alert note">
+<p>Esta página descreve a correspondência de padrões em expressões de filtro escalares utilizadas por <code translate="no">query</code>, <code translate="no">search</code> e pela pesquisa híbrida. Estas expressões avaliam valores de campo e não alteram os tokens produzidos por um analisador. Para filtrar tokens durante a análise de texto, consulte <a href="/docs/pt/regex-filter.md">Filtro do Analisador Regex</a>.</p>
+</div>
+<p>As expressões de correspondência de padrões são escritas no parâmetro « <code translate="no">filter</code> ». Por exemplo, a consulta seguinte corresponde a mensagens de registo que contenham um código de erro como « <code translate="no">E1001</code> »:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -36,7 +39,7 @@ res = client.query(
     output_fields=[<span class="hljs-string">&quot;message&quot;</span>, <span class="hljs-string">&quot;severity&quot;</span>],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Os exemplos nesta página centram-se na expressão atribuída a <code translate="no">filter</code>. Pode utilizar a mesma sintaxe de expressão de filtro em operações do Milvus que aceitem um filtro escalar, tais como <code translate="no">query</code>, <code translate="no">search</code> e a pesquisa híbrida.</p>
+<p>Os exemplos nesta página centram-se na expressão atribuída a « <code translate="no">filter</code> ». Pode utilizar a mesma sintaxe de expressão de filtro em operações do Milvus que aceitem um filtro escalar, tais como « <code translate="no">query</code> », « <code translate="no">search</code> » e a pesquisa híbrida.</p>
 <h2 id="Supported-field-types" class="common-anchor-header">Tipos de campo suportados<button data-href="#Supported-field-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,7 +64,7 @@ res = client.query(
 <tr><td><code translate="no">VARCHAR</code> campo</td><td>Sim</td><td>Sim</td><td>Alvo típico para a correspondência de padrões em campos de cadeia de caracteres.</td></tr>
 <tr><td><code translate="no">JSON</code> caminho com tipo de conversão « <code translate="no">VARCHAR</code> »</td><td>Sim</td><td>Sim</td><td>O valor do caminho JSON deve ser uma cadeia de caracteres para que haja correspondências positivas. Se criar um índice no caminho JSON para aceleração, defina ` <code translate="no">json_cast_type=&quot;varchar&quot;</code>`.</td></tr>
 <tr><td><code translate="no">ARRAY&lt;VARCHAR&gt;</code> elemento</td><td>Sim</td><td>Sim</td><td>Corresponde a um elemento específico por índice, como <code translate="no">tags[0]</code>. A correspondência de padrões <strong>não</strong> analisa todos os elementos; aplica-se apenas ao elemento no índice especificado.</td></tr>
-<tr><td>Alvos numéricos, booleanos, vetoriais, « <code translate="no">TEXT</code> » ou outros alvos não «<code translate="no">VARCHAR</code> »</td><td>Não</td><td>Não</td><td>A correspondência de padrões está disponível apenas para valores « <code translate="no">VARCHAR</code> », caminhos JSON que resultam em cadeias de caracteres ou elementos « <code translate="no">ARRAY&lt;VARCHAR&gt;</code> » indexados.</td></tr>
+<tr><td>Alvos numéricos, booleanos, vetoriais, « <code translate="no">TEXT</code> » ou outros alvos não «<code translate="no">VARCHAR</code> »</td><td>Não</td><td>Não</td><td>A correspondência de padrões está disponível apenas para valores « <code translate="no">VARCHAR</code> », percursos JSON que se resolvem em cadeias de caracteres ou elementos « <code translate="no">ARRAY&lt;VARCHAR&gt;</code> » indexados.</td></tr>
 </tbody>
 </table>
 <h2 id="Choose-LIKE-or-regex" class="common-anchor-header">Escolha «LIKE» ou «regex»<button data-href="#Choose-LIKE-or-regex" class="anchor-icon" translate="no">
@@ -86,11 +89,11 @@ res = client.query(
 <tr><th>Requisito</th><th>Operador recomendado</th><th>Exemplo</th><th>Descrição</th></tr>
 </thead>
 <tbody>
-<tr><td>Igualdade exata da cadeia de caracteres</td><td><code translate="no">==</code></td><td><code translate="no">status == &quot;active&quot;</code></td><td>Correspondência exata da cadeia « <code translate="no">active</code> ».</td></tr>
+<tr><td>Igualdade exata da cadeia de caracteres</td><td><code translate="no">==</code></td><td><code translate="no">status == &quot;active&quot;</code></td><td>Correspondência exata da cadeia de caracteres « <code translate="no">active</code> ».</td></tr>
 <tr><td>Correspondência simples de prefixo</td><td><code translate="no">LIKE</code></td><td><code translate="no">name LIKE &quot;Prod%&quot;</code></td><td>Corresponde a cadeias que começam por <code translate="no">Prod</code>.</td></tr>
-<tr><td>Correspondência simples de sufixo</td><td><code translate="no">LIKE</code></td><td><code translate="no">filename LIKE &quot;%.json&quot;</code></td><td>Corresponde a cadeias que terminam com <code translate="no">.json</code>.</td></tr>
+<tr><td>Correspondência simples de sufixo</td><td><code translate="no">LIKE</code></td><td><code translate="no">filename LIKE &quot;%.json&quot;</code></td><td>Corresponde a cadeias que terminam em <code translate="no">.json</code>.</td></tr>
 <tr><td>Correspondência simples por «contém»</td><td><code translate="no">LIKE</code></td><td><code translate="no">description LIKE &quot;%vector database%&quot;</code></td><td>Corresponde a valores que contenham <code translate="no">vector database</code> em qualquer parte da cadeia de caracteres.</td></tr>
-<tr><td>Correspondência com um código estruturado ou padrão de comprimento fixo</td><td><code translate="no">=~</code></td><td><code translate="no">code =~ &quot;E[0-9]{4}&quot;</code></td><td>Corresponde a cadeias de caracteres que, distinguindo maiúsculas de minúsculas, contenham <code translate="no">E</code> seguido de quatro dígitos, como <code translate="no">E1001</code>.</td></tr>
+<tr><td>Correspondência com um código estruturado ou padrão de comprimento fixo</td><td><code translate="no">=~</code></td><td><code translate="no">code =~ &quot;E[0-9]{4}&quot;</code></td><td>Corresponde a cadeias de caracteres que contenham, distinguindo maiúsculas de minúsculas, « <code translate="no">E</code> » seguido de quatro dígitos, como « <code translate="no">E1001</code> ».</td></tr>
 <tr><td>Correspondência de padrões sem distinção entre maiúsculas e minúsculas</td><td><code translate="no">=~</code> com <code translate="no">(?i)</code></td><td><code translate="no">message =~ &quot;(?i)error&quot;</code></td><td>Corresponde a <code translate="no">error</code>, <code translate="no">ERROR</code> ou outras variantes de maiúsculas e minúsculas.</td></tr>
 <tr><td>Excluir valores que correspondam a um padrão de expressão regular</td><td><code translate="no">!~</code></td><td><code translate="no">message !~ &quot;^DEBUG&quot;</code></td><td>Exclui cadeias de caracteres que comecem por <code translate="no">DEBUG</code>.</td></tr>
 </tbody>
@@ -111,7 +114,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O operador <code translate="no">LIKE</code> destina-se à correspondência simples com caracteres curinga em valores de cadeia de caracteres. Apenas suporta os seguintes caracteres curinga:</p>
+    </button></h2><p>O operador <code translate="no">LIKE</code> destina-se à correspondência simples com caracteres curinga em valores de cadeia de caracteres. Suporta apenas os seguintes caracteres curinga:</p>
 <table>
 <thead>
 <tr><th>Caractere curinga</th><th>Descrição</th></tr>
@@ -164,7 +167,7 @@ res = client.query(
         ></path>
       </svg>
     </button></h3><p>Utilize « <code translate="no">LIKE</code> » para correspondências de prefixo, sufixo, «contém» e de um único carácter numa posição fixa. « <code translate="no">LIKE</code> » não suporta classes de caracteres como « <code translate="no">[0-9]</code> », alternâncias como « <code translate="no">error|failed</code> », contagens de repetições como « <code translate="no">{4}</code> », âncoras como « <code translate="no">^</code> » ou « <code translate="no">$</code> », nem sinalizadores de insensibilidade a maiúsculas e minúsculas como « <code translate="no">(?i)</code> ». Utilize expressões regulares (regex) para esses padrões.</p>
-<p>Utilize « <code translate="no">==</code> » para igualdade exata de cadeias completas. Utilize « <code translate="no">LIKE</code> » apenas quando o filtro necessitar de correspondência com caracteres curinga.</p>
+<p>Utilize « <code translate="no">==</code> » para igualdade exata de cadeias de caracteres completas. Utilize « <code translate="no">LIKE</code> » apenas quando o filtro necessitar de correspondência com caracteres curinga.</p>
 <h3 id="Escaping-wildcards-in-a-LIKE-pattern" class="common-anchor-header">Escapar caracteres curinga num padrão LIKE<button data-href="#Escaping-wildcards-in-a-LIKE-pattern" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -186,7 +189,7 @@ res = client.query(
 <li><code translate="no">name LIKE r&quot;\_%&quot;</code> corresponde a valores que começam com o literal « <code translate="no">_</code> ».</li>
 <li><code translate="no">name LIKE r&quot;\\%&quot;</code> corresponde a valores que começam com uma barra invertida literal.</li>
 </ul>
-<p>Os literais de cadeia de caracteres «raw», escritos como <code translate="no">r&quot;...&quot;</code> ou <code translate="no">r'...'</code>, mantêm as barras invertidas tal como estão nas expressões de filtro do Milvus. São recomendados para « <code translate="no">LIKE</code> » e padrões de expressões regulares que contenham barras invertidas. Sem uma cadeia de caracteres «raw», os literais de cadeia de caracteres normais continuam a processar sequências de escape antes de o padrão ser avaliado, pelo que podem ser necessárias mais barras invertidas.</p>
+<p>Os literais de cadeia de caracteres «raw», escritos como <code translate="no">r&quot;...&quot;</code> ou <code translate="no">r'...'</code>, mantêm as barras invertidas tal como estão nas expressões de filtro do Milvus. São recomendados para <code translate="no">LIKE</code> e padrões regex que contenham barras invertidas. Sem uma cadeia de caracteres «raw», os literais de cadeia de caracteres normais continuam a processar sequências de escape antes de o padrão ser avaliado, pelo que poderão ser necessárias mais barras invertidas.</p>
 <h2 id="Use-regex--Milvus-30x" class="common-anchor-header">Utilize expressões regulares<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Use-regex--Milvus-30x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -233,7 +236,7 @@ res = client.query(
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ r&quot;\d{4}-\d{2}-\d{2}&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Isto corresponde a cadeias que contenham um valor semelhante a uma data, como <code translate="no">2026-07-01</code>.</p>
-<p>Sem uma cadeia de caracteres «raw», as cadeias literais comuns processam sequências de escape antes de o padrão de expressão regular ser avaliado, pelo que padrões como <code translate="no">\d</code>, <code translate="no">\s</code> ou caracteres literais com escape podem requerer barras invertidas adicionais.</p>
+<p>Sem uma cadeia de caracteres «raw», as cadeias de caracteres literais comuns processam sequências de escape antes de o padrão de expressão regular ser avaliado, pelo que padrões como <code translate="no">\d</code>, <code translate="no">\s</code> ou caracteres literais com escape podem requerer barras invertidas adicionais.</p>
 <h3 id="Common-regex-patterns" class="common-anchor-header">Padrões comuns de expressões regulares<button data-href="#Common-regex-patterns" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -268,7 +271,7 @@ res = client.query(
 <p>Para corresponder a uma de várias palavras, utilize a alternância com <code translate="no">|</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ &quot;error|failed|timeout&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Ao corresponder metacaracteres de expressões regulares literalmente, utilize o escape no padrão de expressão regular. Por exemplo, para corresponder a um ponto literal (<code translate="no">\.</code> na expressão regular), escreva <code translate="no">\\.</code> numa cadeia de filtro Python:</p>
+<p>Ao corresponder metacaracteres de expressões regulares literalmente, escape-os no padrão de expressão regular. Por exemplo, para corresponder a um ponto literal (<code translate="no">\.</code> na expressão regular), escreva <code translate="no">\\.</code> numa cadeia de filtro Python:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;email =~ &quot;@gmail\\.com$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Nota: Os filtros de expressões regulares do Milvus seguem a sintaxe RE2. Se um padrão de expressão regular utilizar sintaxe que o RE2 não suporta ou for inválido por qualquer outro motivo, o Milvus rejeita a expressão do filtro. Para obter detalhes sobre metacaracteres de expressões regulares, sinalizadores e comportamento de correspondência, consulte a referência <a href="https://github.com/google/re2/wiki/syntax">de sintaxe RE2</a>.</p>

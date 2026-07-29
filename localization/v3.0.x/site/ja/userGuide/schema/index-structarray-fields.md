@@ -51,7 +51,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>ベクトルフィールドまたはベクトルサブフィールドは、1 つのインデックスのみを受け入れます。EmbeddingList 検索と要素レベルの検索の両方が必要な場合は、2 つの別々のベクトルサブフィールドを作成し、それぞれ個別にインデックスを作成してください。このページでは、<code translate="no">chunks[emb_list_vector]</code> は EmbeddingList 検索用にインデックス化され、<code translate="no">chunks[emb]</code> は要素レベルの検索用にインデックス化されています。</p>
+<p>ベクトルフィールドまたはベクトルサブフィールドは、1 つのインデックスのみを受け入れます。EmbeddingList 検索と要素レベルの検索の両方が必要な場合は、2 つの別々のベクトルサブフィールドを作成し、それぞれ個別にインデックスを作成してください。このページでは、<code translate="no">chunks[emb_list_vector]</code> は EmbeddingList 検索用にインデックスが作成され、<code translate="no">chunks[emb]</code> は要素レベルの検索用にインデックスが作成されています。</p>
 </div>
 <h2 id="Choose-indexes" class="common-anchor-header">インデックスの選択<button data-href="#Choose-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -312,7 +312,7 @@ client.create_index(
 <tbody>
 <tr><td>サブフィールドインデックスにはパス構文を使用してください。</td><td>インデックスは `<code translate="no">chunks[emb]</code>` とし、`<code translate="no">emb</code> ` や `<code translate="no">chunks.emb</code>` とはしないでください。</td></tr>
 <tr><td>1 つのベクトルサブフィールドには 1 つのインデックスしか指定できません。</td><td>異なるメトリックファミリーが必要な場合は、別々のベクトルサブフィールドを使用してください。</td></tr>
-<tr><td>EmbeddingList 検索には、<code translate="no">MAX_SIM*</code> メトリクスを使用してください。</td><td>EmbeddingList クエリデータには、<code translate="no">MAX_SIM*</code> メトリックを使用して構築されたインデックスが必要です。</td></tr>
+<tr><td>EmbeddingList 検索には、<code translate="no">MAX_SIM*</code> メトリックを使用してください。</td><td>EmbeddingList クエリデータには、<code translate="no">MAX_SIM*</code> メトリックを使用して構築されたインデックスが必要です。</td></tr>
 <tr><td>要素レベルの検索には、通常のベクトルメトリクスを使用してください。</td><td>要素レベルの検索では、通常のベクトルクエリデータと、<code translate="no">COSINE</code> 、<code translate="no">IP</code> 、<code translate="no">L2</code> などのメトリックが使用されます。</td></tr>
 <tr><td>フィルタに現れるスカラーサブフィールドをインデックス化してください。</td><td>ターゲットでサポートされているスカラーインデックス型を使用してください。</td></tr>
 <tr><td>ベクトルフィールドの制限に注意してください。</td><td>ベクトルフィールドとベクトルサブフィールドの合計数には制限があります。多数のベクトルサブフィールドを追加する前に、「StructArray の制限」を参照してください。</td></tr>

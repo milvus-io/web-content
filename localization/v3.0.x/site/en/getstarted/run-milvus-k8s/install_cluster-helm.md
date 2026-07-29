@@ -491,6 +491,9 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li>Object storage: <a href="/docs/deploy_s3.md">MinIO</a> (default) · <a href="/docs/deploy_s3.md">AWS S3</a> · <a href="/docs/abs.md">Azure Blob</a> · <a href="/docs/gcs.md">GCP Cloud Storage</a> · <a href="/docs/deploy_s3.md">Aliyun OSS</a> · <a href="/docs/deploy_s3.md">Tencent COS</a> · <a href="/docs/deploy_s3.md">Huawei OBS</a> · <a href="/docs/deploy_s3.md">S3-compatible</a></li>
 <li>Metadata: <a href="/docs/deploy_etcd.md">etcd</a></li>
 </ul>
+<div class="alert note">
+<p>Storage V3 is disabled by default. Enable it before using features that depend on it. For requirements and compatibility considerations, see <a href="/docs/storage-v3.md">Storage V3</a>.</p>
+</div>
 <h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

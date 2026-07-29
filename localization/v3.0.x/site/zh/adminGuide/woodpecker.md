@@ -19,7 +19,7 @@ summary: 了解 Woodpecker 如何作为 Milvus 中的默认消息队列（WAL）
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Woodpecker 是 Milvus 3.x 中的<strong>默认消息队列（预写日志，WAL）</strong>。它是一款专为对象存储设计的云原生 WAL，具有高吞吐量、低操作开销和无缝可扩展性等特点。有关架构和基准测试的详细信息，请参阅<a href="/docs/zh/woodpecker_architecture.md">Woodpecker</a>。</p>
+    </button></h1><p>Woodpecker 是 Milvus 3.x 中的<strong>默认消息队列（预写日志，WAL）</strong>。它是一款专为对象存储设计的云原生 WAL，具有高吞吐量、低运维开销和无缝可扩展性等特点。有关架构和基准测试的详细信息，请参阅<a href="/docs/zh/woodpecker_architecture.md">Woodpecker</a>。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +37,7 @@ summary: 了解 Woodpecker 如何作为 Milvus 中的默认消息队列（WAL）
       </svg>
     </button></h2><ul>
 <li>在 Milvus 3.x 中，Woodpecker 是<strong>默认的</strong>WAL/消息队列，作为日志服务提供有序写入和恢复功能。无需外部消息队列服务（如 Pulsar 或 Kafka）。</li>
-<li>Woodpecker 可以<strong>嵌入</strong>Milvus/流式处理节点中运行（默认），也可以作为具有独立 Pod 的<strong>专用服务</strong>运行（仅限分布式/集群环境）。</li>
+<li>Woodpecker 可以<strong>嵌入</strong>Milvus/流式处理节点中运行（默认），也可以作为拥有独立 Pod 的<strong>专用服务</strong>运行（仅限分布式/集群环境）。</li>
 <li>它支持三种<code translate="no">storage.type</code> 模式：对象存储（<code translate="no">minio</code> ，默认）、本地文件系统（<code translate="no">local</code> ）以及专用<code translate="no">service</code> 。请参阅<a href="#Deployment-modes">部署模式</a>。</li>
 </ul>
 <h2 id="Quick-start" class="common-anchor-header">快速入门<button data-href="#Quick-start" class="anchor-icon" translate="no">
@@ -155,7 +155,7 @@ summary: 了解 Woodpecker 如何作为 Milvus 中的默认消息队列（WAL）
 </thead>
 <tbody>
 <tr><td><code translate="no">minio</code> （默认）</td><td>嵌入 Milvus/流式处理节点中</td><td>对象存储（MinIO/S3兼容）</td><td>支持</td><td>支持</td></tr>
-<tr><td><code translate="no">local</code></td><td>嵌入在 Milvus/流式处理节点中</td><td>本地文件系统</td><td>支持</td><td>受限（所有节点都需要一个共享文件系统，例如 NFS）</td></tr>
+<tr><td><code translate="no">local</code></td><td>嵌入在 Milvus/流处理节点中</td><td>本地文件系统</td><td>支持</td><td>受限（所有节点都需要一个共享文件系统，例如 NFS）</td></tr>
 <tr><td><code translate="no">service</code></td><td><strong>专用的 Woodpecker 服务</strong>（拥有独立的 Pod）</td><td>对象存储（MinIO/S3兼容）</td><td><strong>不支持</strong></td><td>支持</td></tr>
 </tbody>
 </table>
@@ -376,11 +376,11 @@ docker restart milvus-standalone
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0-beta \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.34 \
+  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.36 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>这将 Woodpecker 部署为一个独立的 StatefulSet（<code translate="no">my-release-milvus-woodpecker</code> ，默认 4 个副本），由无头服务作为前端，通过端口<code translate="no">18080</code> （服务）、<code translate="no">17946</code> （闲聊）和<code translate="no">9091</code> （指标）进行闲聊集群通信，并使用 MinIO 作为其存储后端。 该服务需要<strong>3</strong>个节点的法定人数；默认的<strong>4</strong>个副本既能保持法定人数，又能容忍单节点故障，因此请勿将<code translate="no">woodpecker.replicaCount</code> 设置为小于 3。该集群还包含一个独立的<code translate="no">woodpecker</code> Pod 集合：</p>
+<p>这将 Woodpecker 部署为一个独立的 StatefulSet（<code translate="no">my-release-milvus-woodpecker</code> ，默认 4 个副本），由无头服务作为前端，通过端口<code translate="no">18080</code> （服务）、<code translate="no">17946</code> （流言）和<code translate="no">9091</code> （指标）进行流言集群通信，并使用 MinIO 作为其存储后端。 该服务需要<strong>3</strong>个节点的法定人数；默认的<strong>4</strong>个副本既能保持法定人数，又能容忍单节点故障，因此请勿将<code translate="no">woodpecker.replicaCount</code> 设置为小于 3。该集群还包含一个独立的<code translate="no">woodpecker</code> Pod 集合：</p>
 <pre><code translate="no"><span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">0</span>
 <span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">1</span>
 <span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">2</span>
@@ -550,7 +550,7 @@ batch_count = <span class="hljs-number">2000</span>
 <li><strong>单 RTT 法定多数写入</strong>——客户端驱动的复制可在单次往返内完成法定多数写入，跨可用区流量固定为两个副本的数据量（相比之下，基于代理/领导者的复制通常会产生额外约 1/3 的跨可用区流量）。</li>
 <li><strong>拓扑感知单跳读取</strong>——每次读取都直接发送到最近的副本，而不是通过代理转发，从而避免了基于代理系统中随机的跨可用区读取（约占跨可用区读取流量的 2/3）。</li>
 <li><strong>分段滚动后立即上传至对象存储</strong>——每个分段都会追踪其完整生命周期，并在滚动后立即上传至对象存储，从而在不牺牲延迟性能的前提下，保持本地磁盘占用空间和存储成本处于较低水平。</li>
-<li><strong>无需持续的节点间复制</strong>——日志持久化到充当共享存储的对象存储中，因此故障转移时仅需重新上传幸存的副本（无需复制整个节点），扩展不受节点间复制带宽的限制，且大规模节点替换不会引发复制风暴。</li>
+<li><strong>无需持续的节点间复制</strong>——日志持久化到充当共享存储的对象存储中，因此故障转移时仅需重新上传幸存的副本（无需复制整个节点），扩展不再受限于节点间复制带宽，且大规模节点替换不会引发复制风暴。</li>
 </ul>
 <p>在跨可用区（AZ）部署中，与基于代理的日志系统相比，服务模式还可节省约<strong>1/3 的跨可用区写入</strong>网络流量和<strong>2/3 的</strong>跨可用区<strong>读取</strong>网络流量。有关完整的设计和成本分析，请参阅《<a href="/docs/zh/woodpecker_architecture.md">Woodpecker 架构</a>》。</p>
 <p>有关架构、部署模式（MemoryBuffer / QuorumBuffer）和性能的详细信息，请参阅《<a href="/docs/zh/woodpecker_architecture.md">Woodpecker 架构</a>》。</p>

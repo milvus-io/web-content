@@ -3,7 +3,7 @@ id: hugging-face.md
 title: Hugging FaceCompatible with Milvus v2.6.20+
 summary: >-
   Cette rubrique explique comment utiliser les fournisseurs d'inférence hébergés
-  par Hugging Face pour l'intégration de texte dans Milvus.
+  par Hugging Face pour l'embedding de texte dans Milvus.
 beta: Milvus v2.6.20+
 ---
 <h1 id="Hugging-Face" class="common-anchor-header">Hugging Face<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.20+</span><button data-href="#Hugging-Face" class="anchor-icon" translate="no">
@@ -130,7 +130,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Définissez le jeton dans la section de premier niveau « <code translate="no">credential</code> » de ` <code translate="no">milvus.yaml</code>`, puis pointez le fournisseur d’embedding Hugging Face vers ce libellé d’identifiant :</p>
+    </button></h3><p>Définissez le jeton dans la section de niveau supérieur « <code translate="no">credential</code> » de ` <code translate="no">milvus.yaml</code>`, puis pointez le fournisseur d’embeddings Hugging Face vers ce libellé d’identifiant :</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">credential:</span>
   <span class="hljs-attr">huggingface_apikey:</span>
@@ -263,7 +263,7 @@ client.create_collection(
 </thead>
 <tbody>
 <tr><td><code translate="no">provider</code></td><td>Oui</td><td>Le fournisseur du modèle d'embedding. Définissez cette valeur sur <code translate="no">huggingface</code>.</td></tr>
-<tr><td><code translate="no">model_name</code></td><td>Oui</td><td>L'ID du modèle Hugging Face pour un modèle mis à disposition via <code translate="no">hf-inference</code> pour la tâche « <code translate="no">feature-extraction</code> ».</td></tr>
+<tr><td><code translate="no">model_name</code></td><td>Oui</td><td>L'ID Hugging Face d'un modèle mis à disposition via <code translate="no">hf-inference</code> pour la tâche « <code translate="no">feature-extraction</code> ».</td></tr>
 <tr><td><code translate="no">hf_provider</code></td><td>Non</td><td>La route du fournisseur d’inférence Hugging Face. La valeur par défaut et la seule prise en charge dans Milvus 2.6.20 est <code translate="no">hf-inference</code>.</td></tr>
 <tr><td><code translate="no">credential</code></td><td>Non</td><td>L'étiquette d'un identifiant défini dans la section de niveau supérieur <code translate="no">credential</code> de <code translate="no">milvus.yaml</code>. Cette valeur n'est pas le jeton lui-même.</td></tr>
 <tr><td><code translate="no">normalize</code></td><td>Non</td><td>Indique si Hugging Face doit renvoyer des représentations normalisées. Les valeurs prises en charge sont <code translate="no">true</code> et <code translate="no">false</code>. Si cette option est omise, Milvus ne la définit pas dans la requête.</td></tr>
@@ -365,7 +365,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Ouvrez la page du modèle sur Hugging Face et consultez la section « <strong>Inference Providers</strong> ». Vérifiez que « <code translate="no">hf-inference</code> » fournit le modèle pour « <code translate="no">feature-extraction</code> ». Si ce n'est pas le cas, sélectionnez un autre modèle et mettez à jour la dimension du champ vectoriel si nécessaire.</p>
+    </button></h3><p>Ouvrez la page du modèle sur Hugging Face et consultez la section « <strong>Inference Providers</strong> ». Vérifiez que <code translate="no">hf-inference</code> héberge le modèle pour <code translate="no">feature-extraction</code>. Si ce n'est pas le cas, sélectionnez un autre modèle et mettez à jour la dimension du champ vectoriel si nécessaire.</p>
 <h3 id="The-returned-vector-dimension-does-not-match-the-field" class="common-anchor-header">La dimension du vecteur renvoyé ne correspond pas au champ<button data-href="#The-returned-vector-dimension-does-not-match-the-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

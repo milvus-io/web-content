@@ -21,17 +21,21 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Dalam aplikasi pencarian berbasis AI, pencarian vektor membantu Anda menemukan entitas yang serupa secara semantik, namun aplikasi tersebut sering kali juga memerlukan teks sumber asli di balik setiap hasil pencocokan. Sebuah LLM atau agen dapat menggunakan teks tersebut sebagai konteks untuk membaca, mengutip, merangkum, atau menyertakan hasilnya dalam sebuah prompt.</p>
+    </button></h1><p>Dalam aplikasi pencarian berbasis AI, pencarian vektor membantu Anda menemukan entitas yang serupa secara semantik, tetapi aplikasi tersebut sering kali juga memerlukan teks sumber asli di balik setiap hasil pencocokan. Sebuah LLM atau agen dapat menggunakan teks tersebut sebagai konteks untuk membaca, mengutip, merangkum, atau menyertakan hasilnya dalam sebuah prompt.</p>
 <p>Milvus menyediakan tipe bidang skalar ` <code translate="no">TEXT</code> ` untuk menyimpan teks sumber yang panjang secara langsung bersama entitas. Nilai-nilai yang umum meliputi kutipan, dokumen panjang, isi artikel, tiket, dan log. Berbeda dengan ` <code translate="no">VARCHAR</code>`, yang memerlukan ` <code translate="no">max_length</code>` tetap, ` <code translate="no">TEXT</code> ` tidak mengharuskan Anda menetapkan panjang byte maksimum dalam skema koleksi.</p>
-<p>Untuk mendefinisikan bidang <code translate="no">TEXT</code>, atur <code translate="no">datatype</code> menjadi <code translate="no">DataType.TEXT</code>.</p>
+<p>Untuk mendefinisikan bidang " <code translate="no">TEXT</code> ", atur " <code translate="no">datatype</code> " menjadi " <code translate="no">DataType.TEXT</code>".</p>
+<div class="alert note">
+<p>Fitur ini memerlukan Storage V3. Untuk petunjuk pengaktifan dan pertimbangan kompatibilitas, lihat <a href="/docs/id/storage-v3.md">Storage V3</a>.</p>
+</div>
+<p>Milvus akan menolak skema koleksi yang berisi bidang ` <code translate="no">TEXT</code> ` jika Storage V3 dinonaktifkan.</p>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;content&quot;</span>,
 <span class="highlighted-wrapper-line">    datatype=DataType.TEXT,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Setelah bidang tersebut didefinisikan, setiap entitas dapat menyertakan nilai string di bidang tersebut. Anda dapat menyisipkan nilai " <code translate="no">TEXT</code> " seperti halnya bidang skalar lainnya dan mengembalikannya dari hasil kueri atau pencarian dengan mencantumkan bidang tersebut dalam " <code translate="no">output_fields</code>".</p>
+<p>Setelah bidang tersebut didefinisikan, setiap entitas dapat menyertakan nilai string di bidang tersebut. Anda dapat memasukkan nilai " <code translate="no">TEXT</code> " seperti halnya bidang skalar lainnya, dan mengembalikannya dari hasil kueri atau pencarian dengan mencantumkan bidang tersebut di <code translate="no">output_fields</code>.</p>
 <div class="alert note">
-<p><code translate="no">TEXT</code> Bidang mendukung nilai null. Untuk mengaktifkan fitur ini, atur <code translate="no">nullable</code> menjadi <code translate="no">True</code>. Untuk detailnya, lihat <a href="/docs/id/nullable-and-default.md">Bidang yang Dapat Bernilai Null</a>.</p>
+<p><code translate="no">TEXT</code> Bidang-bidang tersebut mendukung nilai null. Untuk mengaktifkan fitur ini, atur ` <code translate="no">nullable</code> ` menjadi ` <code translate="no">True</code>`. Untuk detailnya, lihat <a href="/docs/id/nullable-and-default.md">Bidang yang Dapat Bernilai Null</a>.</p>
 </div>
 <h2 id="Limits" class="common-anchor-header">Batasan<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -49,7 +53,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><ul>
-<li>Sebuah bidang ` <code translate="no">TEXT</code> ` tidak dapat dijadikan bidang utama. Bidang utama mendukung ` <code translate="no">INT64</code> ` dan ` <code translate="no">VARCHAR</code>`.</li>
+<li>Sebuah bidang ` <code translate="no">TEXT</code> ` tidak dapat menjadi bidang utama. Bidang utama mendukung ` <code translate="no">INT64</code> ` dan ` <code translate="no">VARCHAR</code>`.</li>
 <li>Di Milvus 3.0.0, bidang <code translate="no">TEXT</code> tidak mendukung <code translate="no">PHRASE_MATCH</code>.</li>
 <li>Di Milvus 3.0.0, bidang " <code translate="no">TEXT</code> " tidak mendukung nilai default.</li>
 <li>Di Milvus 3.0.0, bidang <code translate="no">TEXT</code> tidak didukung dalam koleksi eksternal.</li>

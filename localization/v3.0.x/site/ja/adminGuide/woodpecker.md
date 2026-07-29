@@ -126,7 +126,7 @@ summary: >-
 </ul></li>
 <li><code translate="no">woodpecker.logstore</code>
 <ul>
-<li>ログセグメントの同期・フラッシュ・コンパクション・読み取りポリシーを制御します。これらは、スループットとレイテンシのチューニングにおける主要な調整項目です。</li>
+<li>ログセグメントの同期・フラッシュ・コンパクション・読み取りポリシーを制御します。これらは、スループットおよびレイテンシの調整における主要な設定項目です。</li>
 </ul></li>
 <li><code translate="no">woodpecker.storage</code>
 <ul>
@@ -296,7 +296,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>デプロイ後は、ドキュメントに従ってポートフォワードを行い、接続してください。Woodpeckerのパラメータを調整するには、「<a href="#Configuration">設定」</a>に記載されている手順に従ってください。</p>
-<h3 id="Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="common-anchor-header">Docker 上の Milvus スタンドアロン（storage=local）で Woodpecker を有効にする<button data-href="#Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="anchor-icon" translate="no">
+<h3 id="Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="common-anchor-header">Docker での Milvus スタンドアロン（storage=local）で Woodpecker を有効にする<button data-href="#Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -377,7 +377,7 @@ docker restart milvus-standalone
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0-beta \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.34 \
+  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.36 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -425,8 +425,8 @@ docker restart milvus-standalone
 <ul>
 <li>ストレージ側
 <ul>
-<li><strong>オブジェクトストレージ（MinIO／S3互換）</strong>：同時実行数とオブジェクトサイズを増やしてください（極小のオブジェクトは避けてください）。ネットワークおよびバケットの帯域幅制限に注意してください。SSD上の単一のMinIOノードでは、ローカルでのスループットが100 MB/s前後で頭打ちになることがよくありますが、単一のEC2からS3への転送ではGB/sに達することがあります。</li>
-<li><strong>ローカル／共有ファイルシステム（ローカル）</strong>：NVMeや高速ディスクを優先してください。ファイルシステムが小規模な書き込みやfsyncのレイテンシに適切に対応していることを確認してください。</li>
+<li><strong>オブジェクトストレージ（MinIO／S3互換）</strong>：同時実行数とオブジェクトサイズを増やしてください（極小のオブジェクトは避けてください）。ネットワークおよびバケットの帯域幅制限に注意してください。SSD上の単一のMinIOノードでは、ローカルで100 MB/s程度が上限となることが多いですが、単一のEC2からS3への転送ではGB/sに達することがあります。</li>
+<li><strong>ローカル／共有ファイルシステム（ローカル）</strong>：NVMeや高速ディスクを優先します。ファイルシステムが小規模な書き込みやfsyncのレイテンシに適切に対応していることを確認してください。</li>
 </ul></li>
 <li>Woodpeckerの調整パラメータ
 <ul>
@@ -548,10 +548,10 @@ batch_count = <span class="hljs-number">2000</span>
       </svg>
     </button></h3><p>サービスモードでは、コストを低く抑えつつ、<strong>ミリ秒レベルの書き込みレイテンシ</strong>（従来の3レプリカ構成のローカルディスクWALと同等）を実現します。一般的な3レプリカのAZ横断展開において、書き込みレイテンシはミリ秒単位に収まります。これは以下の仕組みによって達成されます：</p>
 <ul>
-<li><strong>1 RTT クォーラム書き込み</strong>— クライアント主導型レプリケーションでは、1回のラウンドトリップ（RTT）以内にクォーラム書き込みを完了します。これにより、AZを跨ぐトラフィックは2つのレプリカ分のデータ量に固定されます（これに対し、ブローカー／リーダーベースのレプリケーションでは、通常、約1/3分の追加のAZを跨ぐトラフィックが発生します）。</li>
+<li><strong>1 RTT クォーラム書き込み</strong>— クライアント主導型レプリケーションでは、1回のラウンドトリップ（RTT）以内にクォーラム書き込みを完了します。これにより、AZをまたぐトラフィックは2つのレプリカ分のデータ量に固定されます（これに対し、ブローカー／リーダーベースのレプリケーションでは、通常、約1/3分の追加のAZをまたぐトラフィックが発生します）。</li>
 <li><strong>トポロジーを意識したシングルホップ読み取り</strong>— 各読み取りはブローカーを経由せずに最寄りのレプリカに直接行われるため、ブローカーベースのシステムに見られるランダムなAZ間読み取り（AZ間読み取りトラフィックの約2/3）を回避します。</li>
 <li><strong>セグメントのローリング後の即時オブジェクトストレージへのアップロード</strong>— 各セグメントはそのライフサイクル全体を追跡し、ローリングされるとすぐにオブジェクトストレージにアップロードされるため、レイテンシを犠牲にすることなく、ローカルディスクの占有容量とストレージコストを低く抑えることができる。</li>
-<li><strong>ノード間での継続的なレプリケーションなし</strong>— ログは共有ストレージとして機能するオブジェクトストレージに永続化されるため、フェイルオーバー時には生存しているレプリカのみを再アップロードし（ノード全体のコピーは行わない）、スケーリングはノード間レプリケーションの帯域幅に制限されず、大規模なノード交換でもレプリケーションストームが発生しない。</li>
+<li><strong>ノード間での継続的なレプリケーションなし</strong>— ログは共有ストレージとして機能するオブジェクトストレージに永続化されるため、フェイルオーバー時には生存しているレプリカのみを再アップロードします（ノード全体のコピーは行われません）。これにより、スケーリングがノード間レプリケーションの帯域幅に制限されることがなく、大規模なノード交換でもレプリケーションストームが発生しません。</li>
 </ul>
 <p>AZをまたぐ展開において、サービスモードでは、ブローカーベースのログシステムと比較して、AZ間ネットワーク<strong>トラフィックの書き込みを</strong>約<strong>1/3</strong>、<strong>読み取りを</strong>約<strong>2/3</strong>削減できます。詳細な設計およびコスト分析については、<a href="/docs/ja/woodpecker_architecture.md">「Woodpeckerアーキテクチャ」を</a>参照してください。</p>
 <p>アーキテクチャ、デプロイメントモード（MemoryBuffer / QuorumBuffer）、およびパフォーマンスの詳細については、「<a href="/docs/ja/woodpecker_architecture.md">Woodpecker Architecture</a>」を参照してください。</p>

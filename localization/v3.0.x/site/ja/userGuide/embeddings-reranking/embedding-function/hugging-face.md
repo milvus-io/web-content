@@ -19,7 +19,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Hugging Faceの埋め込みモデルを使用する場合、通常はアプリケーション側で認証情報を管理し、モデルを個別に呼び出し、挿入されたデータや検索クエリに対して一貫して埋め込みを生成する必要があります。テキスト埋め込み機能を使用すると、Milvusはホストされている<a href="https://huggingface.co/docs/inference-providers/index">Hugging Face推論プロバイダー</a>を呼び出し、データの挿入時および検索時に生のテキストをベクトルに変換します。</p>
+    </button></h1><p>Hugging Faceの埋め込みモデルを使用する場合、通常はアプリケーション側で認証情報を管理し、モデルを個別に呼び出し、挿入されたデータや検索クエリに対して一貫して埋め込みを生成する必要があります。テキスト埋め込み機能を使用すると、Milvusはホストされている<a href="https://huggingface.co/docs/inference-providers/index">Hugging Face推論プロバイダー</a>を呼び出し、データの挿入時および検索時に生テキストをベクトルに変換します。</p>
 <p>この統合では、ホスト型 Hugging Face ルーターが使用されます。Milvus を別途デプロイされた Text Embeddings Inference (TEI) サービスに接続するには、「<a href="/docs/ja/hugging-face-tei.md">Hugging Face TEI」を</a>参照してください。</p>
 <h2 id="Limits" class="common-anchor-header">制限事項<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -37,7 +37,7 @@ beta: Milvus v2.6.20+
         ></path>
       </svg>
     </button></h2><ul>
-<li>Functionの出力フィールドには、<code translate="no">FLOAT_VECTOR</code> データ型を使用する必要があります。MilvusにおけるHugging Faceの埋め込み機能では、<code translate="no">INT8_VECTOR</code> 、<code translate="no">BINARY_VECTOR</code> 、<code translate="no">FLOAT16_VECTOR</code> 、または<code translate="no">BFLOAT16_VECTOR</code> 出力フィールドはサポートされていません。</li>
+<li>Functionの出力フィールドには、<code translate="no">FLOAT_VECTOR</code> データ型を使用する必要があります。MilvusにおけるHugging Faceの埋め込み機能では、<code translate="no">INT8_VECTOR</code> 、<code translate="no">BINARY_VECTOR</code> 、<code translate="no">FLOAT16_VECTOR</code> 、または<code translate="no">BFLOAT16_VECTOR</code> の出力フィールドはサポートされていません。</li>
 <li>「Function」出力フィールドの次元は、選択したモデルの出力次元と一致している必要があります。</li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">仕組み<button data-href="#How-it-works" class="anchor-icon" translate="no">
@@ -64,7 +64,7 @@ beta: Milvus v2.6.20+
 <p>このワークフローは 3 つの段階で構成されています。</p>
 <ol>
 <li><strong>生テキストの送信。</strong>アプリケーションは、挿入または検索リクエストで生テキストを提供します。</li>
-<li><strong>埋め込みを生成します。</strong>「Text Embedding」関数は、<code translate="no">hf-inference</code> を経由して、Hugging Faceの<code translate="no">feature-extraction</code> パイプラインにテキストを送信します。この関数は<code translate="no">model_name</code> を使用してモデルを選択し、正規化や切り捨てなどのサポートされている推論オプションを渡すことができます。</li>
+<li><strong>埋め込みを生成します。</strong>「Text Embedding」関数は、<code translate="no">hf-inference</code> を介してテキストをHugging Faceの<code translate="no">feature-extraction</code> パイプラインに送信します。この関数は<code translate="no">model_name</code> を使用してモデルを選択し、正規化や切り捨てなどのサポートされている推論オプションを渡すことができます。</li>
 <li><strong>埋め込みを使用します。</strong>Hugging Faceは、入力テキスト1件につき1つの浮動小数点型埋め込みを返します。挿入時には、Milvusがこのベクトルを関数の出力フィールドに格納します。検索時には、Milvusがこのベクトルをクエリベクトルとして使用します。</li>
 </ol>
 <p>同じ関数設定で挿入と検索の両方を処理できるため、両操作においてモデルと推論パラメータの一貫性が保たれます。</p>
@@ -93,7 +93,7 @@ beta: Milvus v2.6.20+
 <div class="alert note">
 <p>Milvus は、Hugging Face モデルが<code translate="no">hf-inference</code> を通じて引き続き利用可能であるかどうか、あるいはそのモデルが安定性、レイテンシ、出力品質に関する要件を満たしているかどうかについては管理していません。本番環境で使用する前に、Hugging Face 上でモデルを確認し、ワークロードに対して評価を行ってください。</p>
 </div>
-<p>例では、 <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2"><code translate="no">sentence-transformers/all-MiniLM-L6-v2</code></a>を使用しており、384次元の埋め込みを生成します。このモデルは設定のデモ目的でのみ使用されており、Milvusによる推奨や認定を示すものではありません。</p>
+<p>例では、 <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2"><code translate="no">sentence-transformers/all-MiniLM-L6-v2</code></a>を使用しており、これにより384次元の埋め込みが生成されます。このモデルは設定のデモ目的でのみ使用されており、Milvusによる推奨や認定を示すものではありません。</p>
 <h2 id="Configure-credentials" class="common-anchor-header">認証情報の設定<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -363,7 +363,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Hugging Faceでモデルページを開き、「<strong>Inference Providers</strong>」セクションを確認してください。「<code translate="no">hf-inference</code> 」が<code translate="no">feature-extraction</code> のモデルを提供していることを確認してください。そうでない場合は、別のモデルを選択し、必要に応じてベクトルフィールドの次元を更新してください。</p>
+    </button></h3><p>Hugging Faceでモデルページを開き、「<strong>Inference Providers</strong>」セクションを確認してください。「<code translate="no">hf-inference</code> 」が<code translate="no">feature-extraction</code> 向けにモデルを提供していることを確認してください。そうでない場合は、別のモデルを選択し、必要に応じてベクトルフィールドの次元を更新してください。</p>
 <h3 id="The-returned-vector-dimension-does-not-match-the-field" class="common-anchor-header">返されたベクトルの次元がフィールドと一致しません<button data-href="#The-returned-vector-dimension-does-not-match-the-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -395,7 +395,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>トップレベルの「<code translate="no">credential</code> 」セクションに「Function」の認証情報ラベルが存在すること、プロバイダーレベルのラベルが有効であること、またはMilvusのサービス環境に<code translate="no">MILVUS_HUGGINGFACE_API_KEY</code> が存在することを確認してください。</p>
+    </button></h3><p>トップレベルの「<code translate="no">credential</code> 」セクションに「Function」の認証情報ラベルが存在すること、プロバイダーレベルのラベルが有効であること、またはMilvusサービス環境に<code translate="no">MILVUS_HUGGINGFACE_API_KEY</code> が存在することを確認してください。</p>
 <h2 id="Next-steps" class="common-anchor-header">次の手順<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -412,6 +412,6 @@ client.create_collection(
         ></path>
       </svg>
     </button></h2><ul>
-<li>Functionの一般的な概念および挿入/検索の動作については、「<a href="/docs/ja/embedding-function-overview.md">Embedding Functionの概要」を</a>参照してください。</li>
+<li>Function の一般的な概念および挿入/検索の動作については、「<a href="/docs/ja/embedding-function-overview.md">Embedding Function の概要</a>」を参照してください。</li>
 <li>ホスト型 Hugging Face の文類似度スコアを使用してベクトル検索の候補を再ランク付けするには、「<a href="/docs/ja/hugging-face-ranker.md">Hugging Face Ranker</a>」を参照してください。</li>
 </ul>

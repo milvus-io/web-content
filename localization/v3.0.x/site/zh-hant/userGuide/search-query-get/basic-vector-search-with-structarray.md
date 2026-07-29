@@ -80,7 +80,7 @@ summary: >-
 <tr><td>一個搜尋結果代表什麼</td><td>一個匹配的實體，其 StructArray 向量子欄位與查詢嵌入清單相似。</td><td>StructArray 欄位內的匹配 Struct 元素。</td></tr>
 <tr><td>結果的細粒度</td><td>實體層級。</td><td>Struct 元素層級。</td></tr>
 <tr><td>偏移量</td><td>不適用。</td><td>識別在返回時，匹配的結構體元素以零為起點的位置。</td></tr>
-<tr><td>典型用途</td><td>ColBERT、ColPali 及其他後期交互檢索模式。</td><td>塊級、段落級、片段級、區塊級或事實級檢索。</td></tr>
+<tr><td>典型用途</td><td>ColBERT、ColPali 及其他後期交互檢索模式。</td><td>塊級、段落級、片段級、補丁級或事實級檢索。</td></tr>
 </tbody>
 </table>
 <h2 id="Run-EmbeddingList-search" class="common-anchor-header">執行 EmbeddingList 搜尋<button data-href="#Run-EmbeddingList-search" class="anchor-icon" translate="no">
@@ -131,7 +131,7 @@ results = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <p>在此搜尋模式下，<code translate="no">limit</code> 會控制每個查詢所返回的實體數量。輸出結果可能包含 StructArray 子欄位，但搜尋結果本身代表的是匹配的父實體，而非某個特定的 Struct 元素。</p>
 <div class="alert note">
-<p>如需完整的 ColBERT 或 ColPali 風格操作指南，請參閱<a href="/docs/zh-hant/search-with-embedding-lists.md">《使用嵌入式清單進行搜尋</a>》。本頁面僅涵蓋 StructArray 的基本搜尋行為。</p>
+<p>如需完整的 ColBERT 或 ColPali 風格操作指南，請參閱<a href="/docs/zh-hant/search-with-embedding-lists.md">《使用嵌入式清單進行搜尋</a>》。本頁僅涵蓋 StructArray 的基本搜尋行為。</p>
 </div>
 <h2 id="Run-element-level-search" class="common-anchor-header">執行元素層級搜尋<button data-href="#Run-element-level-search" class="anchor-icon" translate="no">
       <svg translate="no"

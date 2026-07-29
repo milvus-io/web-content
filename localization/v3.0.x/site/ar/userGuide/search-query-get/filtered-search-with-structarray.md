@@ -3,9 +3,9 @@ id: filtered-search-with-structarray.md
 title: البحث المُصفى باستخدام StructArray
 summary: >-
   استخدم هذه الصفحة لإضافة تصفية قيمية إلى البحث المتجهي في حقول StructArray.
-  تتكون تصفية StructArray من مستويين: حيث تحدد المرشحات على مستوى الصف الكيانات
-  الأصلية، بينما تحدد المرشحات على مستوى العنصر عناصر Struct التي تشارك في البحث
-  المتجهي على مستوى العنصر.
+  تتكون تصفية StructArray من مستويين: تعمل المرشحات على مستوى الصفوف على تحديد
+  الكيانات الأصلية، بينما تحدد المرشحات على مستوى العناصر عناصر Struct التي
+  تشارك في البحث المتجهي على مستوى العناصر.
 ---
 <h1 id="Filtered-Search-with-StructArray" class="common-anchor-header">البحث المُصفى باستخدام StructArray<button data-href="#Filtered-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>استخدم هذه الصفحة لإضافة تصفية قيمية إلى البحث المتجهي في حقول StructArray. تتكون تصفية StructArray من مستويين: تعمل المرشحات على مستوى الصف على تحديد الكيانات الأصلية، بينما تحدد المرشحات على مستوى العنصر عناصر Struct التي تشارك في البحث المتجهي على مستوى العنصر.</p>
+    </button></h1><p>استخدم هذه الصفحة لإضافة تصفية قياسية إلى البحث المتجهي في حقول StructArray. تتكون تصفية StructArray من مستويين: تعمل المرشحات على مستوى الصف على تحديد الكيانات الأصلية، بينما تحدد المرشحات على مستوى العنصر عناصر Struct التي تشارك في البحث المتجهي على مستوى العنصر.</p>
 <p>تستخدم هذه الصفحة مجموعة « <code translate="no">tech_articles</code> » من <a href="/docs/ar/create-structarray-field.md">«إنشاء حقل StructArray</a>». تحتوي المجموعة على حقل StructArray باسم « <code translate="no">chunks</code> »، مع حقول فرعية قياسية مثل « <code translate="no">section</code> » و« <code translate="no">page</code> » و« <code translate="no">quality_score</code> » و« <code translate="no">has_code</code> »، بالإضافة إلى حقول فرعية متجهة للبحث.</p>
 <h2 id="Choose-a-filter-type" class="common-anchor-header">اختر نوع المرشح<button data-href="#Choose-a-filter-type" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -95,7 +95,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>يختار التصفية أعلاه فقط الكيانات التي يكون حقل المستوى الأعلى الخاص بـ « <code translate="no">category</code> » فيها هو « <code translate="no">&quot;search&quot;</code> ». ولا يحدد عنصر Struct واحدًا مطابقًا.</p>
+<p>يختار التصفية أعلاه فقط الكيانات التي يكون حقل المستوى الأعلى الخاص بها ( <code translate="no">category</code> ) هو <code translate="no">&quot;search&quot;</code>. ولا يحدد عنصر Struct واحدًا مطابقًا.</p>
 <h2 id="Filter-element-level-vector-search" class="common-anchor-header">تصفية البحث المتجهي على مستوى العنصر<button data-href="#Filter-element-level-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -168,7 +168,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>استخدم مشغلات <code translate="no">MATCH_*</code> عندما يتعين على التصفية تحديد ما إذا كانت الكيانات الأصلية مؤهلة بناءً على عناصر Struct الخاصة بها. هذه المشغلات هي عوامل تصفية على مستوى الصف: فهي تحدد الكيانات، ولكنها لا تُرجع إزاحات العناصر بحد ذاتها.</p>
+    </button></h2><p>استخدم مشغلات <code translate="no">MATCH_*</code> عندما يتعين على التصفية تحديد ما إذا كانت الكيانات الأصلية مؤهلة بناءً على عناصر Struct الخاصة بها. هذه المشغلات هي عوامل تصفية على مستوى الصف: فهي تحدد الكيانات، ولكنها لا تُرجع إزاحات العناصر من تلقاء نفسها.</p>
 <table>
 <thead>
 <tr><th>المشغل</th><th>استخدمه عندما</th><th>مثال</th></tr>
@@ -252,7 +252,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>تطبق وسيطة <code translate="no">filter</code> شرط الكيان من المستوى الأعلى، بينما يقيد <code translate="no">expr</code> في <code translate="no">chunk_req</code> طلب المتجه على مستوى عنصر StructArray فقط. للاطلاع على تركيبات البحث الهجين المدعومة والقيود الخاصة بالإصدارات، راجع <a href="/docs/ar/hybrid-search-with-structarray.md">البحث الهجين باستخدام StructArray</a> <a href="/docs/ar/structarray-limits.md">وحدود StructArray</a>.</p>
+<p>تطبق وسيطة <code translate="no">filter</code> شرط الكيان من المستوى الأعلى، بينما يقيد <code translate="no">expr</code> في <code translate="no">chunk_req</code> طلب المتجه على مستوى عنصر StructArray فقط. للاطلاع على تركيبات البحث الهجين المدعومة والقيود الخاصة بالإصدارات، راجع <a href="/docs/ar/hybrid-search-with-structarray.md">البحث الهجين باستخدام StructArray</a> <a href="/docs/ar/structarray-limits.md">وقيود StructArray</a>.</p>
 <h2 id="Predicate-support-summary" class="common-anchor-header">ملخص دعم المسندات<button data-href="#Predicate-support-summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

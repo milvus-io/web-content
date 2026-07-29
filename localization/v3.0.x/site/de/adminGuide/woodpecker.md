@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Woodpecker ist die <strong>Standard-Nachrichtenwarteschlange (Write-Ahead-Log, WAL)</strong> in Milvus 3.x. Es handelt sich um ein cloud-natives WAL, das speziell für den Objektspeicher entwickelt wurde und einen hohen Durchsatz, geringen Betriebsaufwand sowie nahtlose Skalierbarkeit bietet. Details zur Architektur und zu Benchmarks finden Sie unter <a href="/docs/de/woodpecker_architecture.md">Woodpecker</a>.</p>
+    </button></h1><p>Woodpecker ist die <strong>Standard-Nachrichtenwarteschlange (Write-Ahead-Log, WAL)</strong> in Milvus 3.x. Es handelt sich um ein cloud-natives WAL, das für den Objektspeicher entwickelt wurde und einen hohen Durchsatz, geringen Betriebsaufwand sowie nahtlose Skalierbarkeit bietet. Details zur Architektur und zu Benchmarks finden Sie unter <a href="/docs/de/woodpecker_architecture.md">Woodpecker</a>.</p>
 <h2 id="Overview" class="common-anchor-header">Übersicht<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +39,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li>In Milvus 3.x ist Woodpecker die <strong>Standard-</strong> WAL/Nachrichtenwarteschlange, die als Protokollierungsdienst geordnete Schreibvorgänge und Wiederherstellung ermöglicht. Es ist kein externer Nachrichtenwarteschlangendienst (wie Pulsar oder Kafka) erforderlich.</li>
+<li>In Milvus 3.x ist Woodpecker die <strong>Standard-</strong> WAL/Nachrichtenwarteschlange, die als Protokollierungsdienst geordnete Schreibvorgänge und Wiederherstellung ermöglicht. Ein externer Nachrichtenwarteschlangendienst (wie Pulsar oder Kafka) ist nicht erforderlich.</li>
 <li>Woodpecker kann <strong>eingebettet</strong> im Milvus-/Streaming-Knoten (Standard) oder als <strong>dedizierter Dienst</strong> mit eigenen Pods (nur verteilt/Cluster) ausgeführt werden.</li>
 <li>Er unterstützt drei „ <code translate="no">storage.type</code> “-Modi: Objektspeicher (<code translate="no">minio</code>, Standard), lokales Dateisystem (<code translate="no">local</code>) und den dedizierten <code translate="no">service</code>. Siehe <a href="#Deployment-modes">Bereitstellungsmodi</a>.</li>
 </ul>
@@ -318,7 +318,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
 bash standalone_embed.sh start
 <button class="copy-code-btn"></button></code></pre>
-<p>Um Woodpecker anzupassen, bearbeiten Sie nach dem ersten Start die generierte Datei „ <code translate="no">user.yaml</code> “ und führen Sie „ <code translate="no">bash standalone_embed.sh restart</code> “ aus, um die Änderungen zu übernehmen (ein neuer „ <code translate="no">start</code> “ generiert „ <code translate="no">user.yaml</code> “ neu, wenden Sie die Änderungen daher mit „ <code translate="no">restart</code> “ an):</p>
+<p>Um Woodpecker anzupassen, bearbeiten Sie nach dem ersten Start die generierte Datei „ <code translate="no">user.yaml</code> “ und führen Sie „ <code translate="no">bash standalone_embed.sh restart</code> “ aus, um die Änderungen zu übernehmen (ein frisches „ <code translate="no">start</code> “ generiert „ <code translate="no">user.yaml</code> “ neu, wenden Sie die Änderungen daher mit „ <code translate="no">restart</code> “ an):</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml</span>
 <span class="hljs-attr">woodpecker:</span>
   <span class="hljs-attr">logstore:</span>
@@ -379,7 +379,7 @@ docker restart milvus-standalone
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0-beta \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.34 \
+  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.36 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -390,7 +390,7 @@ docker restart milvus-standalone
 <span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">3</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Der „ <code translate="no">service</code> “-Modus von Woodpecker ist ausschließlich für <strong>verteilte/Cluster-</strong> Bereitstellungen vorgesehen – bei eigenständigen Bereitstellungen wird Woodpecker eingebettet ausgeführt (<code translate="no">minio</code> oder <code translate="no">local</code>). Der Milvus Operator unterstützt den Woodpecker-Servicemodus noch nicht.</p>
+<p>Der „ <code translate="no">service</code> “-Modus von Woodpecker ist ausschließlich für <strong>verteilte/Cluster-</strong> Bereitstellungen vorgesehen – bei eigenständigen Bereitstellungen wird Woodpecker eingebettet ausgeführt (<code translate="no">minio</code> oder <code translate="no">local</code>). Der Milvus Operator unterstützt den „ “-Modus von Woodpecker noch nicht.</p>
 </div>
 <h2 id="Throughput-tuning-tips" class="common-anchor-header">Tipps zur Durchsatzoptimierung<button data-href="#Throughput-tuning-tips" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -553,7 +553,7 @@ batch_count = <span class="hljs-number">2000</span>
 <li><strong>Quorum-Schreibvorgänge mit einer RTT</strong> – die clientgesteuerte Replikation schließt einen Quorum-Schreibvorgang innerhalb einer einzigen Round-Trip-Zeit ab, wobei der AZ-übergreifende Datenverkehr auf das Datenvolumen von zwei Replikaten begrenzt ist (im Gegensatz zu dem zusätzlichen AZ-übergreifenden Datenverkehr von etwa einem Drittel, der für Broker-/Leader-basierte Replikation typisch ist).</li>
 <li><strong>Topologiebewusste Single-Hop-Lesevorgänge</strong> – Jeder Lesevorgang erfolgt direkt bei der nächstgelegenen Replik, anstatt über einen Broker weitergeleitet zu werden, wodurch die zufälligen Lesevorgänge über AZ-Grenzen hinweg (≈2/3 des Leseverkehrs über AZ-Grenzen hinweg) von Broker-basierten Systemen vermieden werden.</li>
 <li><strong>Sofortiges Hochladen in den Objektspeicher nach Segment-Rollover</strong> – jedes Segment verfolgt seinen gesamten Lebenszyklus und wird sofort nach dem Rollover in den Objektspeicher hochgeladen, wodurch der Speicherplatzbedarf auf der lokalen Festplatte und die Speicherkosten gering gehalten werden, ohne dass dies zu Lasten der Latenz geht.</li>
-<li><strong>Keine kontinuierliche Replikation von Knoten zu Knoten</strong> – Protokolle werden im Objektspeicher als gemeinsamer Speicher persistent gespeichert, sodass beim Failover nur die überlebenden Replikate erneut hochgeladen werden (keine Kopie des gesamten Knotens); die Skalierung ist nicht an die Bandbreite der Replikation zwischen den Knoten gebunden, und der Austausch zahlreicher Knoten verursacht keine Replikationsstürme.</li>
+<li><strong>Keine kontinuierliche Replikation von Knoten zu Knoten</strong> – Protokolle werden im Objektspeicher als gemeinsamer Speicher persistent gespeichert, sodass beim Failover nur die überlebenden Replikate erneut hochgeladen werden (keine Kopie des gesamten Knotens); die Skalierung ist nicht durch die Bandbreite der Replikation zwischen den Knoten begrenzt, und der groß angelegte Austausch von Knoten verursacht keine Replikationsstürme.</li>
 </ul>
 <p>Bei bereichsübergreifenden Bereitstellungen spart der Servicemodus im Vergleich zu Broker-basierten Protokollsystemen zudem etwa <strong>1/3 des Schreib-</strong> und <strong>2/3 des Lese-Netzwerkverkehrs</strong> zwischen den Verfügbarkeitszonen ein. Die vollständige Design- und Kostenanalyse finden Sie unter <a href="/docs/de/woodpecker_architecture.md">„Woodpecker-Architektur</a>“.</p>
 <p>Einzelheiten zur Architektur, zu den Bereitstellungsmodi (MemoryBuffer / QuorumBuffer) und zur Leistung finden Sie unter <a href="/docs/de/woodpecker_architecture.md">„Woodpecker-Architektur</a>“.</p>

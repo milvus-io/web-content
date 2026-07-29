@@ -18,7 +18,7 @@ summary: 在不造成停机的情况下，将现有 Milvus 部署的消息队列
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本指南介绍了如何将现有 Milvus 部署的消息队列 (MQ)<strong>在 Woodpecker 与另一消息队列之间</strong>进行切换，该操作可在系统在线状态下进行，且不会造成停机。</p>
+    </button></h1><p>本指南介绍了如何将现有 Milvus 部署的消息队列 (MQ)<strong>在 Woodpecker 与另一消息队列之间</strong>进行切换，该操作可在在线状态下进行，且不会造成停机。</p>
 <div class="alert warning">
 <p>此功能尚待发布，具体内容可能会有变动。如果您想试用该功能或有任何疑问，请联系 Milvus 支持团队。</p>
 </div>
@@ -38,7 +38,7 @@ summary: 在不造成停机的情况下，将现有 Milvus 部署的消息队列
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>“切换消息队列”功能仅在 Milvus 3.0 及更高版本中提供。</strong>使用前请将您的 Milvus 实例升级至 Milvus 3.0 或更高版本——此功能在早期版本中不可用。</li>
+<li><strong>“切换消息队列”功能仅在 Milvus 3.0 及更高版本中提供。</strong>使用前请将您的 Milvus 实例升级至 Milvus 3.0 或更高版本——该功能在早期版本中不可用。</li>
 <li>实例运行正常。</li>
 </ul>
 <h2 id="Scope" class="common-anchor-header">适用范围<button data-href="#Scope" class="anchor-icon" translate="no">

@@ -69,9 +69,9 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>In einer Einfüge-Nutzlast ist „ <code translate="no">chunks</code> “ ein reguläres Feld, dessen Wert ein Array von Struct-Objekten ist. Verwenden Sie innerhalb jedes Objekts Unterfeldnamen wie „ <code translate="no">text</code> “ und „ <code translate="no">emb</code> “. Verwenden Sie die Pfadsyntax, wie z. B. „ <code translate="no">chunks[text]</code> “ oder „ <code translate="no">chunks[emb]</code> “, erst nach dem Einfügen, wenn Sie Indizes erstellen, Suchvorgänge ausführen, Filter erstellen oder Ausgabefelder angeben.</p>
+<p>In einer Einfüge-Nutzlast ist „ <code translate="no">chunks</code> “ ein reguläres Feld, dessen Wert ein Array von Struct-Objekten ist. Verwenden Sie innerhalb jedes Objekts Unterfeldnamen wie „ <code translate="no">text</code> “ und „ <code translate="no">emb</code> “. Verwenden Sie die Pfadsyntax, z. B. „ <code translate="no">chunks[text]</code> “ oder „ <code translate="no">chunks[emb]</code> “, erst nach dem Einfügen, wenn Sie Indizes erstellen, Suchvorgänge ausführen, Filter erstellen oder Ausgabefelder angeben.</p>
 </div>
-<h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">Die Struktur der Einfüge-Nutzdaten verstehen<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
+<h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">Die Struktur der Einfügungs-Nutzdaten verstehen<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -283,7 +283,7 @@ Nullfähige „StructArray“-Felder sind nur in Milvus v3.0.x verfügbar. Wenn 
     <span class="hljs-built_in">print</span>(row)
 <button class="copy-code-btn"></button></code></pre>
 <p>Verwenden Sie StructArray-Feldpfade wie „ <code translate="no">chunks[text]</code> “ nur bei Abfragen, Suchvorgängen, Filtern oder beim Erstellen von Indizes. Bei Einfügungen sollten weiterhin verschachtelte Objekte unter „ <code translate="no">chunks</code> “ verwendet werden.</p>
-<h2 id="Insert-rules" class="common-anchor-header">Einfügerichtlinien<button data-href="#Insert-rules" class="anchor-icon" translate="no">
+<h2 id="Insert-rules" class="common-anchor-header">Einfüge-Regeln<button data-href="#Insert-rules" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

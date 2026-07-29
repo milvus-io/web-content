@@ -5,10 +5,9 @@ summary: >-
   Strategi pencarian EmbeddingList menentukan cara Milvus membangun indeks
   kandidat perkiraan untuk pencarian EmbeddingList. Strategi defaultnya adalah
   tokenann. Anda dapat beralih ke muvera atau lemur jika daftar embedding
-  berukuran besar, TokenANN terlalu memakan sumber daya, atau representasi
-  tingkat baris yang telah dilatih/dikompresi lebih sesuai. Hasil akhir tetap
-  dihasilkan oleh proses penataan ulang MaxSim ketika opsi `emb_list_rerank`
-  diaktifkan.
+  berukuran besar, TokenANN terlalu boros sumber daya, atau representasi tingkat
+  baris yang telah dilatih/dikompresi lebih sesuai. Hasil akhir tetap dihasilkan
+  oleh proses penataan ulang MaxSim ketika opsi `emb_list_rerank` diaktifkan.
 ---
 <h1 id="Choose-an-EmbeddingList-Search-Strategy" class="common-anchor-header">Pilih Strategi Pencarian EmbeddingList<button data-href="#Choose-an-EmbeddingList-Search-Strategy" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -42,7 +41,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Daftar Embedding dirancang untuk baris yang berisi beberapa vektor, seperti embedding token dalam dokumen teks, embedding patch dalam dokumen visual, atau embedding klip dalam video. Alih-alih membandingkan satu vektor kueri dengan satu vektor baris, MaxSim membandingkan daftar embedding kueri dengan daftar embedding dokumen dan mengagregasi kecocokan terbaik.</p>
-<p>Hal ini memberikan kemampuan representasi yang lebih baik, tetapi MaxSim yang tepat membutuhkan biaya tinggi dalam skala besar. Pencarian MaxSim dengan metode brute-force perlu membandingkan vektor kueri dengan setiap vektor di setiap baris kandidat. Hal ini biasanya terlalu lambat untuk pencarian produksi.</p>
+<p>Hal ini memberikan kemampuan representasi yang lebih baik, tetapi MaxSim yang tepat membutuhkan biaya yang mahal dalam skala besar. Pencarian MaxSim dengan metode brute-force perlu membandingkan vektor kueri dengan setiap vektor di setiap baris kandidat. Hal ini biasanya terlalu lambat untuk pencarian produksi.</p>
 <table>
 <thead>
 <tr><th>### Masalah - Setiap baris mungkin berisi banyak vektor. - MaxSim yang tepat pada semua baris memakan sumber daya. - Ukuran indeks dan latensi pencarian dapat meningkat dengan cepat.</th><th>### Strategi - Gunakan metode pengambilan tahap pertama yang mendekati. - Ambil lebih banyak kandidat daripada topK yang diminta. - Urutkan ulang kandidat dengan MaxSim yang tepat.</th></tr>
@@ -99,7 +98,7 @@ summary: >-
 <ul>
 <li><p><strong>Cocok untuk:</strong> potongan teks pendek, baris dengan jumlah vektor kecil atau sedang, pemisahan semantik tingkat token yang kuat, baseline yang sensitif terhadap kualitas.</p></li>
 <li><p><strong>Kurang cocok:</strong> dokumen yang sangat panjang, halaman visual dengan ribuan vektor patch, batasan memori atau latensi yang ketat.</p></li>
-<li><p><strong>Perilaku tingkat elemen:</strong> TokenANN dapat mengambil kandidat dari vektor individual sebelum menggabungkannya kembali ke baris. Hasil pencarian EmbeddingList akhir tetap berada pada tingkat baris setelah penilaian MaxSim.</p></li>
+<li><p><strong>Perilaku tingkat elemen:</strong> TokenANN dapat mengambil kandidat dari vektor individual sebelum menggabungkannya kembali menjadi baris. Hasil pencarian EmbeddingList akhir tetap berada pada tingkat baris setelah penilaian MaxSim.</p></li>
 </ul>
 <h2 id="MUVERA" class="common-anchor-header">MUVERA<button data-href="#MUVERA" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -278,7 +277,7 @@ index_params.add_index(
       <span class="hljs-attr">emb_list_rerank:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Gunakan parameter per-indeks untuk pemilihan strategi.</strong> Pengaturan default berkas konfigurasi Milvus berlaku secara luas untuk indeks dengan jenis dan tahap yang sama. Gunakan parameter <code translate="no">create_index</code> ketika koleksi atau bidang yang berbeda memerlukan strategi EmbeddingList yang berbeda.</p>
+<p><strong>Gunakan parameter per-indeks untuk pemilihan strategi.</strong> Pengaturan default dalam berkas konfigurasi Milvus berlaku secara umum untuk indeks dengan jenis dan tahap yang sama. Gunakan parameter <code translate="no">create_index</code> jika koleksi atau bidang yang berbeda memerlukan strategi EmbeddingList yang berbeda.</p>
 </div>
 <h2 id="Configure-Candidate-Retrieval-at-Search-Time" class="common-anchor-header">Konfigurasikan Pengambilan Kandidat pada Saat Pencarian<button data-href="#Configure-Candidate-Retrieval-at-Search-Time" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -348,7 +347,7 @@ index_params.add_index(
 <tbody>
 <tr><td>Apakah Anda memerlukan baseline berkualitas tinggi?</td><td>Anda ingin mengukur aproksimasi praktis terbaik sebelum mengoptimalkan biaya.</td><td><code translate="no">tokenann</code></td></tr>
 <tr><td>Apakah jumlah vektor pada setiap baris sedikit atau sedang?</td><td>Setiap baris memiliki sejumlah kecil vektor token, patch, atau klip.</td><td><code translate="no">tokenann</code></td></tr>
-<tr><td>Apakah TokenANN terlalu besar atau terlalu lambat?</td><td>Ukuran indeks atau latensi pengambilan tahap pertama menjadi titik leher botol.</td><td><code translate="no">muvera</code></td></tr>
+<tr><td>Apakah TokenANN terlalu besar atau terlalu lambat?</td><td>Ukuran indeks atau latensi pengambilan tahap pertama menjadi kendala.</td><td><code translate="no">muvera</code></td></tr>
 <tr><td>Apakah Anda ingin kompresi tanpa pelatihan?</td><td>Anda memerlukan model operasional yang lebih sederhana dan pengkodean yang dapat direproduksi.</td><td><code translate="no">muvera</code></td></tr>
 <tr><td>Apakah ruang embedding memiliki tingkat diskriminasi yang rendah?</td><td>Kandidat ANN tingkat token berisik, dan proyeksi acak tidak mempertahankan sinyal yang cukup.</td><td><code translate="no">lemur</code></td></tr>
 <tr><td>Apakah beban kerjanya bersifat visual atau multimodal?</td><td>Baris berisi banyak vektor patch, dan TokenANN terlalu mahal.</td><td><code translate="no">lemur</code> atau <code translate="no">muvera</code></td></tr>

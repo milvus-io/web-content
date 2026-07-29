@@ -339,7 +339,7 @@ client.add_collection_struct_field(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Após a adição do campo StructArray, as entidades existentes devolvem ` <code translate="no">null</code> ` para o novo campo em todos os seus subcampos.</p>
-<p>Após a criação de um campo StructArray, não é possível adicionar novos subcampos a esse campo StructArray existente. Se necessitar de atributos de elemento adicionais posteriormente, chame <code translate="no">drop_collection_field()</code> para eliminar o campo StructArray e, em seguida, adicione um novo campo StructArray com o esquema Struct atualizado.</p>
+<p>Após a criação de um campo StructArray, não é possível adicionar novos subcampos a esse campo StructArray existente. Se, posteriormente, necessitar de atributos de elemento adicionais, chame <code translate="no">drop_collection_field()</code> para eliminar o campo StructArray e, em seguida, adicione um novo campo StructArray com o esquema Struct atualizado.</p>
 <pre><code translate="no" class="language-python">client.drop_collection_field(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
     field_name=<span class="hljs-string">&quot;chunks&quot;</span>,
@@ -381,7 +381,7 @@ client.add_collection_struct_field(
 <tr><td>Cada subcampo vetorial tem um índice.</td><td>Se precisar tanto da pesquisa EmbeddingList como da pesquisa ao nível do elemento, crie dois subcampos vetoriais separados.</td></tr>
 <tr><td>Os subcampos StructArray existentes são fixos.</td><td>Após criar um campo StructArray, não espere poder adicionar mais subcampos a esse mesmo campo StructArray.</td></tr>
 <tr><td>As funções não são suportadas dentro de Struct.</td><td>Não defina funções para campos ou subcampos dentro de um campo StructArray.</td></tr>
-<tr><td>Os subcampos escalares devem corresponder aos requisitos de filtragem.</td><td>Adicione campos como <code translate="no">section</code>, <code translate="no">quality_score</code> ou <code translate="no">has_code</code> apenas quando precisar de os filtrar, agrupar ou apresentar posteriormente.</td></tr>
+<tr><td>Os subcampos escalares devem corresponder às necessidades de filtragem.</td><td>Adicione campos como <code translate="no">section</code>, <code translate="no">quality_score</code> ou <code translate="no">has_code</code> apenas quando precisar de os filtrar, agrupar ou apresentar posteriormente.</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">Erros comuns<button data-href="#Common-mistakes" class="anchor-icon" translate="no">

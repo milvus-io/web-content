@@ -114,7 +114,7 @@ summary: >-
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">emb_list_vector</code> и <code translate="no">emb</code> являются отдельными подполями векторного типа, поскольку поддерживают разные режимы поиска. Поиск по EmbeddingList рассматривает все векторы в поле StructArray как один список вложений и возвращает результаты на уровне сущностей с метриками <code translate="no">MAX_SIM*</code>. Поиск на уровне элементов выполняет поиск по каждому элементу Struct независимо и может возвращать смещение найденного элемента. В этом примере для простоты в обоих полях хранятся одинаковые векторные значения. В рабочей версии приложения можно хранить одинаковые вложения в обоих подполях, если оба режима поиска используют одно и то же вложение блоков, или хранить разные вложения, если эти два режима поиска используют разные представления.</p>
+<p><code translate="no">emb_list_vector</code> и <code translate="no">emb</code> являются отдельными подполями векторного типа, поскольку поддерживают разные режимы поиска. Поиск по EmbeddingList рассматривает все векторы в поле StructArray как один список вложений и возвращает результаты на уровне сущностей с метриками <code translate="no">MAX_SIM*</code>. Поиск на уровне элементов выполняет поиск по каждому элементу Struct независимо и может возвращать смещение найденного элемента. В данном примере для простоты в обоих полях хранятся одинаковые векторные значения. В рабочей версии приложения можно хранить одинаковые вложения в обоих подполях, если оба режима поиска используют одно и то же вложение блоков, или хранить разные вложения, если эти два режима поиска используют разные представления.</p>
 <h2 id="Insert-rows" class="common-anchor-header">Вставка строк<button data-href="#Insert-rows" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -333,7 +333,7 @@ result = client.insert(
 <li><p>Вставка векторов с неправильным размером.</p></li>
 <li><p>Вставка большего количества элементов Struct, чем допускает <code translate="no">max_capacity</code>.</p></li>
 <li><p>Установка значения <code translate="no">null</code> только для одного подполя, в то время как другие подполя в том же значении StructArray являются допустимыми.</p></li>
-<li><p>Запись векторов только в ` <code translate="no">emb_list_vector</code> `, а затем попытка выполнить поиск на уровне элементов в ` <code translate="no">chunks[emb]</code>`.</p></li>
+<li><p>Запись векторов только в ` <code translate="no">emb_list_vector</code> `, а затем попытка запустить поиск на уровне элементов в ` <code translate="no">chunks[emb]</code>`.</p></li>
 <li><p>Запись векторов только в поле « <code translate="no">emb</code> », а затем попытка выполнить поиск по EmbeddingList в поле « <code translate="no">chunks[emb_list_vector]</code> ».</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Следующие шаги<button data-href="#Next-steps" class="anchor-icon" translate="no">
@@ -354,5 +354,5 @@ result = client.insert(
     </button></h2><ol>
 <li><p>Чтобы создать индексы для полей <code translate="no">chunks[emb_list_vector]</code>, <code translate="no">chunks[emb]</code> и скалярных подполей, ознакомьтесь с разделом <a href="/docs/ru/index-structarray-fields.md">«Индексирование полей StructArray</a>».</p></li>
 <li><p>Чтобы выполнить поиск по векторным подполям StructArray, ознакомьтесь с разделом «Базовый поиск по векторам с помощью StructArray».</p></li>
-<li><p>Чтобы ознакомиться с поведением при наличии значений null и ограничениями, связанными с конкретными версиями, ознакомьтесь с разделом <a href="/docs/ru/structarray-limits.md">«Ограничения StructArray</a>».</p></li>
+<li><p>Чтобы ознакомиться с поведением при наличии нулевых значений и ограничениями, связанными с конкретными версиями, ознакомьтесь с разделом <a href="/docs/ru/structarray-limits.md">«Ограничения StructArray</a>».</p></li>
 </ol>

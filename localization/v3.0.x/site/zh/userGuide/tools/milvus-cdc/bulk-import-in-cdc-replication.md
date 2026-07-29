@@ -40,7 +40,7 @@ title: CDC 复制中的批量导入
 <p>因此，请通过设置<code translate="no">auto_commit=false</code> ，以两阶段提交模式运行导入任务：</p>
 <ol>
 <li><p><strong>导入阶段</strong>：Milvus 在主集群上加载数据并将导入任务复制到备用集群，但导入的数据仍不可见。导入任务停留在“<code translate="no">Uncommitted</code> ”状态并进入等待状态。</p></li>
-<li><p><strong>提交阶段</strong>：您在主集群上显式提交导入任务。该提交操作将作为单个有序屏障复制到备用集群，因此两个集群都在同一逻辑点上使导入的数据可见。</p></li>
+<li><p><strong>提交阶段</strong>：您在主集群上显式提交导入任务。该提交将作为单个有序屏障复制到备用集群，因此两个集群都在同一逻辑点上使导入的数据可见。</p></li>
 </ol>
 <h2 id="Step-1-Enable-import-in-a-replicating-cluster" class="common-anchor-header">步骤 1：在复制集群中启用导入<button data-href="#Step-1-Enable-import-in-a-replicating-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -71,7 +71,7 @@ title: CDC 复制中的批量导入
     <span class="hljs-attr">enableInReplicatingCluster:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>该设置支持热更新，因此无需完全重启即可生效。</p>
-<p>启用此设置后，复制集群仅接受包含 `<code translate="no">auto_commit=false</code>` 的导入请求。下表列出了常见的被拒绝的请求：</p>
+<p>启用此设置后，复制集群仅接受包含 `<code translate="no">auto_commit=false</code>` 的导入请求。下表列出了常见的被拒绝请求：</p>
 <table>
 <thead>
 <tr><th>情况</th><th>错误信息</th></tr>
@@ -97,7 +97,7 @@ title: CDC 复制中的批量导入
         ></path>
       </svg>
     </button></h2><p>请在主集群上执行所有导入调用。导入的数据和提交决策会自动复制到备用集群，因此请勿在备用集群上自行提交或确认导入操作。</p>
-<p>每个集群都会从各自的对象存储中读取导入文件。请确保待导入的文件同时存在于主集群和备用集群的对象存储中。您可以将文件上传到两个集群，或者使用两个集群均可读取的对象存储。如果备用集群上缺少文件，则该集群上的复制导入将因“对象未找到”错误而失败。</p>
+<p>每个集群都会从各自的对象存储中读取导入文件。请确保待导入的文件同时存在于主集群和备用集群的对象存储中。您可以将文件上传到两个集群，或者使用两个集群均可读取的对象存储。如果备用集群上缺少文件，则该处的复制导入将因“对象未找到”错误而失败。</p>
 <p>以下示例使用了来自<code translate="no">pymilvus.bulk_writer</code> 的基于 REST 的导入辅助函数。<code translate="no">url</code> 中的值即为您在其他 API 调用中使用的 Milvus 地址。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> time
 

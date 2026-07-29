@@ -41,7 +41,7 @@ title: Importación masiva en la replicación CDC
     </button></h2><p>Una importación masiva normal se confirma automáticamente cuando finaliza el trabajo de importación, lo que hace que los datos importados sean visibles de inmediato. En una topología de replicación CDC, este comportamiento no está permitido porque los clústeres primario y de reserva deben hacer que los datos importados sean visibles en el mismo punto lógico.</p>
 <p>En su lugar, ejecute la importación en modo de confirmación en dos fases configurando « <code translate="no">auto_commit=false</code> »:</p>
 <ol>
-<li><p><strong>Fase de importación</strong>: Milvus carga los datos en el clúster primario y replica la importación al clúster de reserva, pero los datos importados permanecen invisibles. El trabajo de importación se detiene en el estado « <code translate="no">Uncommitted</code> » y queda en espera.</p></li>
+<li><p><strong>Fase de importación</strong>: Milvus carga los datos en el clúster primario y replica la importación al clúster de reserva, pero los datos importados permanecen ocultos. El trabajo de importación se detiene en el estado « <code translate="no">Uncommitted</code> » y queda en espera.</p></li>
 <li><p><strong>Fase de confirmación</strong>: Se confirma explícitamente el trabajo de importación en el clúster primario. La confirmación se replica en el clúster de reserva como una única valla ordenada, de modo que ambos clústeres hacen visibles los datos importados en el mismo punto lógico.</p></li>
 </ol>
 <h2 id="Step-1-Enable-import-in-a-replicating-cluster" class="common-anchor-header">Paso 1: Habilitar la importación en un clúster de replicación<button data-href="#Step-1-Enable-import-in-a-replicating-cluster" class="anchor-icon" translate="no">
@@ -59,7 +59,7 @@ title: Importación masiva en la replicación CDC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La importación en un clúster de replicación está desactivada por defecto. Actívala configurando ` <code translate="no">dataCoord.import.enableInReplicatingCluster</code> ` como ` <code translate="no">true</code> ` tanto en el clúster primario como en el clúster de reserva.</p>
+    </button></h2><p>La importación en un clúster de replicación está desactivada por defecto. Actívala configurando ` <code translate="no">dataCoord.import.enableInReplicatingCluster</code> ` como ` <code translate="no">true</code> ` tanto en el clúster primario como en el de reserva.</p>
 <p>Si implementa Milvus con Milvus Operator, añada la siguiente configuración a ` <code translate="no">spec.config</code> ` de cada recurso ` <code translate="no">Milvus</code> `:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">spec:</span>
   <span class="hljs-attr">config:</span>
@@ -241,7 +241,7 @@ wait_for_state(standby_url, job_id, <span class="hljs-string">&quot;Completed&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>No. Al realizar la confirmación en el clúster primario, esta se replica en el clúster de reserva como una única valla ordenada.</p>
+    </button></h3><p>No. Al realizar la confirmación en el clúster primario, esta se replica en el clúster de espera como una única valla ordenada.</p>
 <h3 id="Why-does-my-import-fail-with-import-in-replicating-cluster-is-not-supported-yet" class="common-anchor-header">¿Por qué falla mi importación con el error « <code translate="no">import in replicating cluster is not supported yet</code> »?<button data-href="#Why-does-my-import-fail-with-import-in-replicating-cluster-is-not-supported-yet" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

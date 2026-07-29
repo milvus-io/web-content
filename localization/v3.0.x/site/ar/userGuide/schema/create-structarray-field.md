@@ -237,7 +237,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بعد إنشاء حقل StructArray، قم بالإشارة إلى حقوله الفرعية باستخدام صيغة مسار <code translate="no">structArray[subfield]</code>. استخدم هذه الصيغة عند إنشاء الفهارس، أو البحث في الحقول الفرعية المتجهة، أو إخراج الحقول الفرعية، أو إنشاء عوامل تصفية قياسية.</p>
+    </button></h2><p>بعد إنشاء حقل StructArray، قم بالإشارة إلى حقوله الفرعية باستخدام صيغة مسار <code translate="no">structArray[subfield]</code>. استخدم هذه الصيغة عند إنشاء الفهارس، أو البحث في الحقول الفرعية المتجهة، أو إخراج الحقول الفرعية، أو إنشاء عوامل تصفية سكالارية.</p>
 <table>
 <thead>
 <tr><th>المسار</th><th>المعنى</th><th>الاستخدام الشائع</th></tr>
@@ -277,7 +277,7 @@ client.create_collection(
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>تحذير
-الحقول StructArray القابلة للقيمة الفارغة متاحة فقط في Milvus v3.0.x. بالنسبة لحقل StructArray القابل للقيمة الفارغة، يمكن للكيان توفير قيمة StructArray صالحة أو تعيين الحقل بأكمله إلى <code translate="no">null</code>. عند إدراج قيمة StructArray صالحة، يجب أن تكون جميع الحقول الفرعية إما فارغة أو ذات قيم صالحة. يؤدي إدراج كيان مع تعيين بعض الحقول الفرعية على القيمة null وتعيين أخرى على قيم صالحة إلى حدوث خطأ. لمزيد من التفاصيل، راجع <a href="/docs/ar/structarray-limits.md">حدود StructArray</a>.</p>
+الحقول StructArray القابلة للقيمة الفارغة متاحة فقط في Milvus v3.0.x. بالنسبة لحقل StructArray القابل للقيمة الفارغة، يمكن للكيان توفير قيمة StructArray صالحة أو تعيين الحقل بأكمله إلى <code translate="no">null</code>. عند إدراج قيمة StructArray صالحة، يجب أن تكون جميع الحقول الفرعية إما فارغة أو ذات قيم صالحة. يؤدي إدراج كيان مع تعيين بعض الحقول الفرعية على null وتعيين أخرى على قيم صالحة إلى حدوث خطأ. لمزيد من التفاصيل، راجع <a href="/docs/ar/structarray-limits.md">حدود StructArray</a>.</p>
 </div>
 <h2 id="Add-a-StructArray-field-to-an-existing-collection" class="common-anchor-header">إضافة حقل StructArray إلى مجموعة موجودة<button data-href="#Add-a-StructArray-field-to-an-existing-collection" class="anchor-icon" translate="no">
       <svg translate="no"

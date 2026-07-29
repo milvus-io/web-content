@@ -2,7 +2,7 @@
 id: insert-data-into-structarray-fields.md
 title: StructArrayフィールドへのデータの挿入
 summary: >-
-  各エンティティが構造化された要素の順序付きリストを含む場合、StructArrayフィールドにデータを挿入します。挿入ペイロードでは、StructArrayフィールドはオブジェクトの配列として表現されます。各オブジェクトは1つのStruct要素を表し、コレクションスキーマで定義されたStructサブフィールド名を使用します。
+  各エンティティが順序付き構造化要素のリストを含む場合、StructArrayフィールドにデータを挿入します。挿入ペイロードにおいて、StructArrayフィールドはオブジェクトの配列として表現されます。各オブジェクトは1つのStruct要素を表し、コレクションスキーマで定義されたStructサブフィールド名を使用します。
 ---
 <h1 id="Insert-Data-into-StructArray-Fields" class="common-anchor-header">StructArrayフィールドへのデータの挿入<button data-href="#Insert-Data-into-StructArray-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -110,7 +110,7 @@ summary: >-
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">emb_list_vector</code> および<code translate="no">emb</code> は、サポートする検索モードが異なるため、別々のベクトルサブフィールドとなります。EmbeddingList 検索では、StructArray フィールド内のすべてのベクトルを 1 つの埋め込みリストとして扱い、<code translate="no">MAX_SIM*</code> メトリクスを使用したエンティティレベルの結果を返します。要素レベル検索では、各 Struct 要素を個別に検索し、一致した要素のオフセットを返すことができます。この例では、簡略化のため、両方のフィールドに同じベクトル値を格納しています。 本番環境のアプリケーションでは、両方の検索モードで同じチャンク埋め込みが使用される場合は、両方のサブフィールドに同じ埋め込みを格納し、2つの検索モードで異なる表現が使用される場合は、異なる埋め込みを格納することができます。</p>
+<p><code translate="no">emb_list_vector</code> および<code translate="no">emb</code> は、サポートする検索モードが異なるため、別々のベクトルサブフィールドとなります。EmbeddingList 検索では、StructArray フィールド内のすべてのベクトルが 1 つの埋め込みリストとして扱われ、<code translate="no">MAX_SIM*</code> メトリクスを使用したエンティティレベルの結果が返されます。要素レベル検索では、各 Struct 要素が個別に検索され、一致した要素のオフセットが返される場合があります。この例では、簡略化のため、両方のフィールドに同じベクトル値を格納しています。 本番環境のアプリケーションでは、両方の検索モードで同じチャンク埋め込みが使用される場合は、両方のサブフィールドに同じ埋め込みを格納し、2つの検索モードで異なる表現が使用される場合は、異なる埋め込みを格納することができます。</p>
 <h2 id="Insert-rows" class="common-anchor-header">行の挿入<button data-href="#Insert-rows" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -278,7 +278,7 @@ Nullable StructArrayフィールドは、Milvus v3.0.xでのみ利用可能で�
 <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> rows:
     <span class="hljs-built_in">print</span>(row)
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">chunks[text]</code> などの StructArray フィールドパスは、クエリ、検索、フィルタリング、またはインデックスの作成時のみ使用してください。挿入ペイロードでは、引き続き<code translate="no">chunks</code> の下にネストされたオブジェクトを使用する必要があります。</p>
+<p><code translate="no">chunks[text]</code> などの StructArray フィールドパスは、クエリ、検索、フィルタリング、またはインデックスの作成時のみ使用してください。挿入ペイロードでは、引き続き<code translate="no">chunks</code> の下にあるネストされたオブジェクトを使用する必要があります。</p>
 <h2 id="Insert-rules" class="common-anchor-header">挿入ルール<button data-href="#Insert-rules" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

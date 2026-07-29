@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>當某個實體需要包含一組有序的結構化元素清單時，請建立 StructArray 欄位。StructArray 欄位是一種陣列欄位，其元素類型為 Struct。每個 Struct 元素皆遵循相同的架構，並可包含標量子欄位、向量子欄位，或兩者兼具。</p>
+    </button></h1><p>當某個實體需要包含一組有序的結構化元素清單時，請建立 StructArray 欄位。StructArray 欄位是一種 Array 欄位，其元素類型為 Struct。每個 Struct 元素皆遵循相同的架構，並可包含標量子欄位、向量子欄位，或兩者兼具。</p>
 <p>本頁說明如何定義 Struct 模式、將其新增為 StructArray 欄位、選擇日後用於搜尋與篩選的子欄位，以及在插入或建立資料索引之前，了解適用的模式規則。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">開始之前<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -101,7 +101,7 @@ summary: >-
 <tr><td><code translate="no">ArrayOfVector</code></td><td>不支援</td><td>StructArray 欄位不支援稀疏向量子欄位。</td></tr>
 <tr><td><code translate="no">Array</code></td><td>不支援</td><td>請使用 `<code translate="no">VARCHAR</code>`，而非 `<code translate="no">String</code>`。</td></tr>
 <tr><td><code translate="no">Array</code></td><td>不支援</td><td>StructArray 欄位不支援 JSON 子欄位。</td></tr>
-<tr><td><code translate="no">Array</code></td><td>不支援</td><td>StructArray 欄位不支援幾何子欄位和 GIS 函式。</td></tr>
+<tr><td><code translate="no">Array</code></td><td>不支援</td><td>StructArray 欄位不支援幾何子欄位及 GIS 函式。</td></tr>
 <tr><td><code translate="no">Array</code></td><td>不支援</td><td>StructArray 欄位不支援文字子欄位。</td></tr>
 <tr><td><code translate="no">Array</code></td><td>不支援</td><td>StructArray 欄位不支援 Timestamptz 子欄位及時間特定表達式。</td></tr>
 <tr><td>嵌套的<code translate="no">Array</code> 、<code translate="no">ArrayOfVector</code> 、<code translate="no">Struct</code> 或<code translate="no">ArrayOfStruct</code></td><td>不支援</td><td>StructArray 欄位不能包含嵌套陣列、嵌套向量陣列、嵌套 Struct 欄位或嵌套 Array-of-Struct 欄位。</td></tr>
@@ -127,9 +127,9 @@ summary: >-
 <ol>
 <li><p>建立集合模式。</p></li>
 <li><p>新增集合層級的欄位，例如主鍵和文章層級的欄位。</p></li>
-<li><p>為儲存於 StructArray 欄位內的元素建立 Struct 模式。</p></li>
+<li><p>為儲存於 StructArray 欄位內的元素建立 Struct 架構。</p></li>
 <li><p>在 Struct 模式中新增標量與向量子欄位。</p></li>
-<li><p>新增一個陣列欄位，並將其<code translate="no">element_type=DataType.STRUCT</code> 設為 Struct。</p></li>
+<li><p>新增一個陣列欄位，並將其<code translate="no">element_type=DataType.STRUCT</code> 設為 Struct 模式。</p></li>
 <li><p>將 `<code translate="no">struct_schema</code> ` 設定為 `Struct` 模式。</p></li>
 <li><p>設定 `<code translate="no">max_capacity</code> ` 以限制每個實體可在該欄位中儲存的 `Struct` 元素數量。</p></li>
 </ol>

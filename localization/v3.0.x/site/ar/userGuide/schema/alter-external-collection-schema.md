@@ -39,7 +39,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>تدعم المجموعات الخارجية حاليًا إضافة الحقول بعد إنشائها. أما التغييرات الأخرى في المخطط، مثل حذف الحقول أو إعادة تسميتها أو تغيير أنواع بيانات الحقول أو تغيير أبعاد المتجهات أو إعادة تعيين <code translate="no">external_field</code> ، فهي غير مدعومة.</p></li>
+<li><p>تدعم المجموعات الخارجية حاليًا إضافة الحقول بعد إنشائها. ولا يتم دعم التغييرات الأخرى في المخطط، مثل حذف الحقول أو إعادة تسميتها أو تغيير أنواع بيانات الحقول أو تغيير أبعاد المتجهات أو إعادة تعيين <code translate="no">external_field</code>.</p></li>
 <li><p>يمكنك فقط إضافة حقل موجود بالفعل في مصدر البيانات الخارجي. تعمل هذه العملية على ربط حقل خارجي موجود بحقل في Milvus. ولا تؤدي إلى إنشاء حقل جديد في مصدر البيانات الخارجي أو ملء البيانات المصدر بأثر رجعي.</p></li>
 <li><p>لا يتم دعم إضافة حقول <code translate="no">SPARSE_FLOAT_VECTOR</code> إلى مجموعة خارجية موجودة.</p></li>
 <li><p>لا يتم دعم إضافة حقول StructArray إلى مجموعة خارجية موجودة. إذا كانت مجموعتك الخارجية تحتاج إلى حقل StructArray، فقم بتعريفه في مخطط المجموعة عند إنشاء المجموعة.</p></li>
@@ -92,7 +92,7 @@ client.add_collection_field(
 <span class="highlighted-wrapper-line">    external_field=<span class="hljs-string">&quot;score&quot;</span>,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>في هذا المثال، يُعد « <code translate="no">score</code> » اسم الحقل في Milvus، ويقوم « <code translate="no">external_field=&quot;score&quot;</code> » بتعيينه إلى الحقل « <code translate="no">score</code> » في مصدر البيانات الخارجي. قم بتعيين « <code translate="no">nullable=True</code> » لأن الحقل يُضاف بعد إنشاء المجموعة بالفعل.</p>
+<p>في هذا المثال، يُعد « <code translate="no">score</code> » اسم الحقل في Milvus، ويقوم « <code translate="no">external_field=&quot;score&quot;</code> » بربطه بحقل « <code translate="no">score</code> » في مصدر البيانات الخارجي. قم بتعيين « <code translate="no">nullable=True</code> » لأن الحقل يُضاف بعد إنشاء المجموعة بالفعل.</p>
 <h3 id="Add-a-vector-field" class="common-anchor-header">إضافة حقل متجه<button data-href="#Add-a-vector-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -109,7 +109,7 @@ client.add_collection_field(
         ></path>
       </svg>
     </button></h3><p>يمكنك أيضًا إضافة حقل متجه إذا كان مصدر البيانات الخارجي يحتوي بالفعل على قيم متجهة. قم بتعيين المتجه <code translate="no">data_type</code> و <code translate="no">dim</code> بحيث يتطابقان مع الحقل المتجه في مصدر البيانات الخارجي.</p>
-<p>يضيف المثال التالي حقل متجه كثيف يُسمى <code translate="no">image_embedding_v2</code>.</p>
+<p>يضيف المثال التالي حقل متجه كثيفًا باسم <code translate="no">image_embedding_v2</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient
 
 client = MilvusClient(

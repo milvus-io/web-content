@@ -232,7 +232,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <p>Aguarde até que todos os pods estejam prontos e, em seguida, confirme se a configuração de acesso ao Pulsar foi incorporada na configuração do Milvus.</p>
 <p><strong>Passo 3: Execute a mudança para o MQ.</strong></p>
 <div class="alert note">
-<p>Certifique-se de que o Pulsar de destino não contém tópicos do Milvus de uma configuração anterior. Se esta for a sua primeira transição para o Pulsar, ignore esta nota; caso contrário, elimine primeiro os tópicos residuais do Milvus com os mesmos nomes.</p>
+<p>Certifique-se de que o Pulsar de destino não contém tópicos do Milvus de uma configuração anterior. Se esta for a sua primeira mudança para o Pulsar, ignore esta nota; caso contrário, elimine primeiro os tópicos residuais do Milvus com os mesmos nomes.</p>
 </div>
 <pre><code translate="no" class="language-shell">kubectl exec -it &lt;mixcoord-pod&gt; -- \
   curl -X POST http://localhost:9091/management/wal/alter \

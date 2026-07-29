@@ -40,7 +40,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>A funcionalidade «Mudar MQ» está disponível no Milvus 3.0 e versões posteriores.</strong> Atualize a sua instância do Milvus para o Milvus 3.0 ou posterior antes de a utilizar — a funcionalidade não está disponível em versões anteriores.</li>
+<li><strong>A funcionalidade «Mudar MQ» está disponível no Milvus 3.0 e versões posteriores.</strong> Atualize a sua instância do Milvus para a versão 3.0 ou posterior antes de a utilizar — a funcionalidade não está disponível em versões anteriores.</li>
 <li>A instância está a funcionar corretamente.</li>
 </ul>
 <h2 id="Scope" class="common-anchor-header">Âmbito<button data-href="#Scope" class="anchor-icon" translate="no">
@@ -119,5 +119,5 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Evite alternar repetidamente entre tipos de MQ. Se for necessário alternar, certifique-se de limpar os dados relacionados antes de cada alternância — os dados residuais podem causar um comportamento inesperado.</p>
+<p>Evite alternar repetidamente entre tipos de MQ. Se for necessário alternar, certifique-se de que limpa os dados relacionados antes de cada alternância — os dados residuais podem causar um comportamento inesperado.</p>
 </div>

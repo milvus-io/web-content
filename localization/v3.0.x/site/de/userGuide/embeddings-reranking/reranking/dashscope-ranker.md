@@ -39,7 +39,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>Bevor Sie den DashScope Ranker verwenden, stellen Sie sicher, dass Sie über Folgendes verfügen:</p>
 <ul>
-<li><p>Eine Milvus-Sammlung mit einem Feld „ <code translate="no">VARCHAR</code> “, das den zu neu gewerteten Text enthält.</p></li>
+<li><p>Eine Milvus-Sammlung mit einem Feld „ <code translate="no">VARCHAR</code> “, das den zu neu zuordnenden Text enthält.</p></li>
 <li><p>Einen gültigen DashScope-API-Schlüssel.</p></li>
 <li><p>Zugriff auf ein DashScope-Reranking-Modell, z. B. „ <code translate="no">gte-rerank-v2</code> “.</p></li>
 </ul>
@@ -180,7 +180,7 @@ dashscope_ranker = Function(
    <tr>
      <td><p><code translate="no">provider</code></p></td>
      <td><p>Ja</p></td>
-     <td><p>Der für die Neubewertung zu verwendende Modelldienstanbieter. Verwenden Sie für DashScope „ <code translate="no">"ali"</code> “.</p></td>
+     <td><p>Der für die Neubewertung zu verwendende Modell-Dienstanbieter. Verwenden Sie für DashScope „ <code translate="no">"ali"</code> “.</p></td>
      <td><p><code translate="no">"ali"</code></p></td>
    </tr>
    <tr>

@@ -22,14 +22,18 @@ beta: Milvus 3.0.x
     </button></h1><p>在 AI 搜尋應用中，向量搜尋可協助您找出語義相似的實體，但應用程式通常也需要每個搜尋結果背後原始的來源文字。大型語言模型（LLM）或代理程式可將該文字作為上下文，用於閱讀、引用、摘要，或將結果納入提示字串中。</p>
 <p>Milvus 提供「<code translate="no">TEXT</code> 」標量欄位類型，可直接將長篇來源文字與實體一併儲存。典型值包括段落、長篇文件、文章正文、工單及日誌。與「<code translate="no">VARCHAR</code> 」不同，後者需要設定固定的「<code translate="no">max_length</code> 」，而「<code translate="no">TEXT</code> 」則無需在集合架構中設定最大位元組長度。</p>
 <p>要定義<code translate="no">TEXT</code> 欄位，請將<code translate="no">datatype</code> 設定為<code translate="no">DataType.TEXT</code> 。</p>
+<div class="alert note">
+<p>此功能需要 Storage V3。有關啟用說明及相容性考量，請參閱<a href="/docs/zh-hant/storage-v3.md">Storage V3</a>。</p>
+</div>
+<p>當 Storage V3 處於停用狀態時，Milvus 會拒絕包含「<code translate="no">TEXT</code> 」欄位的集合架構。</p>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;content&quot;</span>,
 <span class="highlighted-wrapper-line">    datatype=DataType.TEXT,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>定義該欄位後，每個實體皆可在該欄位中包含字串值。您可像處理其他標量欄位一樣插入<code translate="no">TEXT</code> 值，並透過在<code translate="no">output_fields</code> 中列出該欄位，從查詢或搜尋結果中擷取這些值。</p>
+<p>定義該欄位後，每個實體皆可在該欄位中包含字串值。您可像處理其他標量欄位一樣插入 `<code translate="no">TEXT</code> ` 值，並透過在 `<code translate="no">output_fields</code>` 中列出該欄位，從查詢或搜尋結果中擷取這些值。</p>
 <div class="alert note">
-<p><code translate="no">TEXT</code> 字段支援空值。若要啟用此功能，請將<code translate="no">nullable</code> 設定為<code translate="no">True</code> 。詳細資訊請參閱「<a href="/docs/zh-hant/nullable-and-default.md">可為空字段</a>」。</p>
+<p><code translate="no">TEXT</code> 字段支援 null 值。若要啟用此功能，請將<code translate="no">nullable</code> 設定為<code translate="no">True</code> 。詳細資訊請參閱「<a href="/docs/zh-hant/nullable-and-default.md">可為 null 的字段</a>」。</p>
 </div>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -69,7 +73,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">TEXT</code> 與<code translate="no">VARCHAR</code> 皆用於儲存字串值，但它們支援不同的應用需求。請使用<code translate="no">VARCHAR</code> 來處理用於識別、分類或篩選實體的短且有長度限制的元資料。請使用<code translate="no">TEXT</code> 來處理較長的來源內容，以便為大型語言模型（LLM）或代理程式提供足夠的上下文，以進行閱讀、引用、摘要或建構提示詞。</p>
+    </button></h2><p><code translate="no">TEXT</code> 與<code translate="no">VARCHAR</code> 皆用於儲存字串值，但它們支援不同的應用需求。請使用<code translate="no">VARCHAR</code> 來處理用於識別、分類或篩選實體的短且有限長度的元資料。請使用<code translate="no">TEXT</code> 來處理較長的來源內容，以便為大型語言模型（LLM）或代理程式提供足夠的上下文，以進行閱讀、引用、摘要或建構提示詞。</p>
 <table>
 <thead>
 <tr><th>適用情境</th><th><code translate="no">VARCHAR</code></th><th><code translate="no">TEXT</code></th></tr>
@@ -108,13 +112,13 @@ beta: Milvus 3.0.x
   
  </span></p>
 <ul>
-<li><strong>內聯儲存</strong>：若<code translate="no">TEXT</code> 值小於<code translate="no">dataNode.text.inlineThreshold</code> ，Milvus 會將原始文字值直接儲存於<code translate="no">TEXT</code> 欄位的 data 中。</li>
-<li><strong>LOB 儲存</strong>：若 `<code translate="no">TEXT</code> ` 的值大於或等於 `<code translate="no">dataNode.text.inlineThreshold</code>`，Milvus 會將該值視為大型物件，並將原始文字分別儲存於物件儲存空間（例如 MinIO）中。`<code translate="no">TEXT</code> ` 欄位資料則儲存指向該獨立儲存文字的內部參照。當在查詢或搜尋結果中請求 `<code translate="no">TEXT</code> ` 欄位時，Milvus 會使用該參照來擷取並回傳原始文字。</li>
+<li><strong>內嵌儲存</strong>：若<code translate="no">TEXT</code> 值小於<code translate="no">dataNode.text.inlineThreshold</code> ，Milvus 會將原始文字值直接儲存於<code translate="no">TEXT</code> 欄位的 data 中。</li>
+<li><strong>LOB 儲存</strong>：若 `<code translate="no">TEXT</code> ` 的值大於或等於 `<code translate="no">dataNode.text.inlineThreshold</code>`，Milvus 會將該值視為大型物件，並將原始文字分別儲存於物件儲存空間（例如 MinIO）中。此時，<code translate="no">TEXT</code> 欄位的資料會儲存一個指向該獨立儲存文字的內部參照。當在查詢或搜尋結果中請求 `<code translate="no">TEXT</code> ` 欄位時，Milvus 會使用該參照來檢索並回傳原始文字。</li>
 </ul>
 <p>此儲存選項屬內部機制。無論 Milvus 使用哪種儲存路徑，您對<code translate="no">TEXT</code> 欄位的插入、查詢及搜尋操作方式皆相同。若要調整閾值或相關的儲存、壓縮及垃圾回收行為，請參閱與<a href="/docs/zh-hant/configure_datanode.md">dataNode 相關的設定</a>以及<a href="/docs/zh-hant/configure_datacoord.md">與 dataCoord 相關的設定</a>。</p>
-<p>若您的部署使用物件儲存，較大的 `<code translate="no">TEXT</code> ` 值可能會以 Milvus 管理的物件形式，出現在如<code translate="no">lobs/...</code> 等路徑下。這些物件屬於實作細節，不應手動移動、複製或刪除。 在刪除實體、釋放分區或壓縮資料後，物件儲存的使用量可能僅會在 Milvus 垃圾回收於安全時窗結束後，移除未被引用的巨型物件資料時才會減少。</p>
+<p>若您的部署使用物件儲存，較大的 `<code translate="no">TEXT</code> ` 值可能會以 Milvus 管理的物件形式，出現在類似<code translate="no">lobs/...</code> 的路徑下。這些物件屬於實作細節，不應手動移動、複製或刪除。 在刪除實體、釋放分區或壓縮資料後，物件儲存的使用量可能僅會在 Milvus 垃圾回收於安全時窗結束後，移除未被引用的巨型物件資料時才會減少。</p>
 <p></details></p>
-<p><code translate="no">TEXT</code> 的常見應用之一是搭配 BM25 進行全文檢索。在此模式下，<code translate="no">TEXT</code> 欄位儲存原始來源內容，而 BM25 會分析文字並產生稀疏向量，以針對基於關鍵字的匹配結果進行排序。搜尋結果隨後可回傳匹配的<code translate="no">TEXT</code> 值，作為大型語言模型 (LLM) 或代理程式工作流程的上下文。 以下範例展示如何將「<code translate="no">TEXT</code> 」欄位用作 BM25 的輸入欄位。如需瞭解全文搜尋的概念與查詢選項，請參閱《<a href="/docs/zh-hant/full-text-search.md">全文搜尋》</a>。</p>
+<p><code translate="no">TEXT</code> 的常見應用之一是搭配 BM25 進行全文檢索。在此模式下，<code translate="no">TEXT</code> 欄位儲存原始來源內容，而 BM25 會分析文字並產生稀疏向量，以針對基於關鍵字的匹配結果進行排序。搜尋結果隨後可返回匹配的<code translate="no">TEXT</code> 值，作為大型語言模型（LLM）或代理程式工作流程的上下文。 以下範例展示如何將「<code translate="no">TEXT</code> 」欄位用作 BM25 的輸入欄位。如需瞭解全文搜尋的概念與查詢選項，請參閱《<a href="/docs/zh-hant/full-text-search.md">全文搜尋》</a>。</p>
 <h2 id="Step-1-Create-a-collection-with-a-TEXT-field" class="common-anchor-header">步驟 1：建立包含 TEXT 欄位的集合<button data-href="#Step-1-Create-a-collection-with-a-TEXT-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -240,7 +244,7 @@ client.load_collection(collection_name=COLLECTION_NAME)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>將原始查詢文字用作搜尋資料，並針對稀疏向量欄位進行搜尋。Milvus 會將查詢文字轉換為稀疏向量，透過 BM25 對匹配結果進行排序，並將請求的<code translate="no">TEXT</code> 欄位結果回傳至<code translate="no">output_fields</code> 。</p>
+    </button></h2><p>將原始查詢文字用作搜尋資料，並針對稀疏向量欄位進行搜尋。Milvus 會將查詢文字轉換為稀疏向量，透過 BM25 對比結果進行排序，並將請求的<code translate="no">TEXT</code> 欄位結果回傳至<code translate="no">output_fields</code> 中。</p>
 <pre><code translate="no" class="language-python">results = client.search(
     collection_name=COLLECTION_NAME,
 <span class="highlighted-comment-line">    data=[<span class="hljs-string">&quot;how does Milvus store source text for retrieval&quot;</span>],</span>

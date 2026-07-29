@@ -40,7 +40,7 @@ summary: >-
     </button></h2><ul>
 <li>Milvus 3.x에서 Woodpecker는 <strong>기본</strong> WAL/메시지 큐로, 로깅 서비스로서 순차적 쓰기 및 복구 기능을 제공합니다. Pulsar나 Kafka와 같은 외부 메시지 큐 서비스는 필요하지 않습니다.</li>
 <li>Woodpecker는 Milvus/스트리밍 노드에 <strong>내장된</strong> 형태로(기본값) 실행되거나, 자체 포드를 갖춘 <strong>전용 서비스로</strong> (분산/클러스터 전용) 실행될 수 있습니다.</li>
-<li>다음 세 가지 데이터 저장소( <code translate="no">storage.type</code> ) 모드를 지원합니다: 오브젝트 스토리지(<code translate="no">minio</code>, 기본값), 로컬 파일 시스템(<code translate="no">local</code>), 전용 <code translate="no">service</code>. <a href="#Deployment-modes">‘배포 모드’를</a> 참조하십시오.</li>
+<li>다음 세 가지 데이터 저장소( <code translate="no">storage.type</code> ) 모드를 지원합니다: 객체 스토리지(<code translate="no">minio</code>, 기본값), 로컬 파일 시스템(<code translate="no">local</code>), 전용 <code translate="no">service</code>. <a href="#Deployment-modes">‘배포 모드’를</a> 참조하십시오.</li>
 </ul>
 <h2 id="Quick-start" class="common-anchor-header">빠른 시작<button data-href="#Quick-start" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -165,7 +165,7 @@ summary: >-
 <ul>
 <li><code translate="no">minio</code> 의 경우, Woodpecker는 Milvus와 동일한 오브젝트 스토리지(MinIO/S3/GCS/OSS 등)를 공유합니다.</li>
 <li><code translate="no">local</code> 의 경우, 단일 노드 로컬 디스크는 독립 실행형(Standalone) 모드에서만 적합합니다. 모든 파드(pod)가 공유 파일 시스템(예: NFS)에 액세스할 수 있는 경우, 클러스터(Cluster) 모드에서도 로컬 디스크( <code translate="no">local</code>)를 사용할 수 있습니다.</li>
-<li><strong><code translate="no">service</code> 이 모드는 Woodpecker를 별도로 독립적으로 확장 가능한 서비스로 실행하며, 분산/클러스터 배포에서만 사용할 수 있습니다.</strong> 독립형<strong>(</strong> Standalone) 배포는 내장 모드(<code translate="no">minio</code> 또는 <code translate="no">local</code>)를 사용합니다.</li>
+<li><strong><code translate="no">service</code> 이 모드는 Woodpecker를 별도로 독립적으로 확장 가능한 서비스로 실행하며, 분산/클러스터 배포에서만 사용할 수 있습니다.</strong> 독립형(Standalone) 배포는 내장 모드(<code translate="no">minio</code> 또는 <code translate="no">local</code>)를 사용합니다.</li>
 </ul>
 <h2 id="Object-storage-compatibility-for-storagetypeminio" class="common-anchor-header">Woodpecker의 객체 스토리지 호환성 <code translate="no">storage.type=minio</code><button data-href="#Object-storage-compatibility-for-storagetypeminio" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -278,7 +278,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
         ></path>
       </svg>
     </button></h3><p>먼저 <a href="/docs/ko/install_cluster-helm.md">‘Helm을 사용하여 Kubernetes에서 Milvus</a> 실행’에 설명된 대로 Milvus Helm 차트를 추가하고 업데이트하십시오.</p>
-<p>그런 다음 다음 예시 중 하나를 사용하여 배포하십시오:</p>
+<p>그런 다음 다음 예시 중 하나를 사용하여 배포하십시오.</p>
 <p>– 클러스터 배포 (Woodpecker 및 스트리밍 노드 활성화 권장 설정):</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0-beta \
@@ -378,11 +378,11 @@ docker restart milvus-standalone
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0-beta \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.34 \
+  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.36 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>이렇게 하면 Woodpecker가 전용 StatefulSet(<code translate="no">my-release-milvus-woodpecker</code>, 기본적으로 4개의 레플리카)으로 배포되며, 헤드리스 서비스가 프론트엔드로 작동하고, 포트 <code translate="no">18080</code> (서비스), <code translate="no">17946</code> (가십), <code translate="no">9091</code> (메트릭)에서 가십 클러스터링을 수행하며, MinIO를 스토리지 백엔드로 사용합니다. 이 서비스는 <strong>3노드의</strong> 쿼럼이 필요합니다. 기본값인 <strong>4개의</strong> 복제본은 단일 노드 장애를 허용하면서도 쿼럼을 유지하므로, ` <code translate="no">woodpecker.replicaCount</code> `을 3보다 작게 설정하지 마십시오. 그러면 클러스터에는 별도의 ` <code translate="no">woodpecker</code> ` 포드 세트가 포함됩니다:</p>
+<p>이렇게 하면 Woodpecker가 전용 StatefulSet(<code translate="no">my-release-milvus-woodpecker</code>, 기본적으로 4개의 복제본)으로 배포되며, 헤드리스 서비스가 전면에 배치되고, 포트 <code translate="no">18080</code> (서비스), <code translate="no">17946</code> (가십), <code translate="no">9091</code> (메트릭)에서 가십 클러스터링되며, MinIO를 스토리지 백엔드로 사용합니다. 이 서비스는 <strong>3노드의</strong> 쿼럼이 필요합니다. 기본값인 <strong>4개의</strong> 복제본은 단일 노드 장애를 허용하면서도 쿼럼을 유지하므로, ` <code translate="no">woodpecker.replicaCount</code> `을 3보다 작게 설정하지 마십시오. 그러면 클러스터에는 별도의 ` <code translate="no">woodpecker</code> ` 파드 세트가 포함됩니다:</p>
 <pre><code translate="no"><span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">0</span>
 <span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">1</span>
 <span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">2</span>
@@ -431,7 +431,7 @@ docker restart milvus-standalone
 </ul></li>
 <li>Woodpecker 조정 매개변수
 <ul>
-<li><code translate="no">logstore.segmentSyncPolicy.maxFlushSize</code> 및 <code translate="no">maxFlushThreads</code> 값을 높여 더 큰 플러시 크기와 더 높은 병렬 처리를 구현하십시오.</li>
+<li><code translate="no">logstore.segmentSyncPolicy.maxFlushSize</code> 및 <code translate="no">maxFlushThreads</code> 값을 높여 더 큰 플러시 크기와 더 높은 병렬 처리를 확보하십시오.</li>
 <li>매체 특성에 따라 <code translate="no">maxInterval</code> 을 조정하십시오(집계 단위를 늘려 처리량을 확보하는 대신 지연 시간을 감수).</li>
 <li>오브젝트 스토리지의 경우, 세그먼트 전환을 줄이기 위해 <code translate="no">segmentRollingPolicy.maxSize</code> 값을 늘리는 것을 고려하십시오.</li>
 </ul></li>
@@ -549,10 +549,10 @@ batch_count = <span class="hljs-number">2000</span>
       </svg>
     </button></h3><p>서비스 모드는 비용을 낮게 유지하면서도 <strong>밀리초 수준의 쓰기 지연 시간을</strong> 제공하며, 이는 기존의 3개 복제본을 사용하는 로컬 디스크 WAL과 비슷한 수준입니다. 일반적인 3개 복제본, AZ 간 배포 환경에서 쓰기 지연 시간은 밀리초 범위를 유지합니다. 이는 다음을 통해 달성됩니다.</p>
 <ul>
-<li><strong>단일 RTT 쿼럼 쓰기</strong> — 클라이언트 주도형 복제는 단일 왕복(RTT) 내에 쿼럼 쓰기를 완료하며, AZ 간 트래픽은 2개의 리플리카에 해당하는 데이터 양으로 고정됩니다(브로커/리더 기반 복제에서 일반적으로 발생하는 추가적인 약 1/3의 AZ 간 트래픽과 대비).</li>
+<li><strong>단일 RTT 쿼럼 쓰기</strong> — 클라이언트 주도형 복제는 단일 왕복(RTT) 내에 쿼럼 쓰기를 완료하며, AZ 간 트래픽은 2개의 레플리카에 해당하는 데이터 양으로 고정됩니다(브로커/리더 기반 복제에서 일반적으로 발생하는 추가적인 약 1/3의 AZ 간 트래픽과 대비).</li>
 <li><strong>토폴로지를 고려한 단일 홉 읽기</strong> — 각 읽기 요청은 브로커를 통해 전달되지 않고 가장 가까운 복제본으로 직접 전송되므로, 브로커 기반 시스템에서 발생하는 무작위 AZ 간 읽기(AZ 간 읽기 트래픽의 약 2/3)를 피할 수 있습니다.</li>
 <li><strong>세그먼트 롤링 후 즉시 오브젝트 스토리지 업로드</strong> — 각 세그먼트는 전체 수명 주기를 추적하며, 롤링되는 즉시 오브젝트 스토리지에 업로드되므로, 지연 시간을 희생하지 않고도 로컬 디스크 사용량과 스토리지 비용을 낮게 유지합니다.</li>
-<li><strong>지속적인 노드 간 복제 없음</strong> — 로그는 공유 스토리지 역할을 하는 오브젝트 스토리지에 영구 저장되므로, 장애 조치 시 생존한 복제본만 재업로드되며(전체 노드 복사 없음), 확장성이 노드 간 복제 대역폭에 제한받지 않고, 대규모 노드 교체 시에도 복제 폭주가 발생하지 않습니다.</li>
+<li><strong>지속적인 노드 간 복제 없음</strong> — 로그가 공유 스토리지 역할을 하는 오브젝트 스토리지에 영구 저장되므로, 장애 조치 시 생존한 복제본만 재업로드되며(전체 노드 복사 없음), 확장성이 노드 간 복제 대역폭에 제한받지 않고, 대규모 노드 교체 시에도 복제 폭주가 발생하지 않습니다.</li>
 </ul>
 <p>AZ 간 배포 환경에서 서비스 모드는 브로커 기반 로그 시스템에 비해 AZ 간 <strong>쓰기 트래픽의</strong> 약 <strong>1/3</strong>, <strong>읽기 트래픽의 약 2/3를</strong> 절감합니다. 전체 설계 및 비용 분석에 대해서는 <a href="/docs/ko/woodpecker_architecture.md">Woodpecker 아키텍처를</a> 참조하십시오.</p>
 <p>아키텍처, 배포 모드(MemoryBuffer / QuorumBuffer) 및 성능에 대한 자세한 내용은 <a href="/docs/ko/woodpecker_architecture.md">Woodpecker 아키텍처를</a> 참조하십시오.</p>

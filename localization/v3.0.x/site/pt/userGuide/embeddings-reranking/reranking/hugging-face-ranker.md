@@ -21,7 +21,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>A pesquisa vetorial ordena os resultados por distância vetorial, mas a ordem inicial pode não refletir a adequação das respostas de cada candidato à consulta. O Hugging Face Ranker envia a consulta e o texto dos candidatos para <a href="https://huggingface.co/docs/inference-providers/index">os Provedores de Inferência do Hugging Face</a> hospedados e utiliza pontuações de « <code translate="no">sentence-similarity</code> » para reordenar os candidatos devolvidos pelo Milvus.</p>
+    </button></h1><p>A pesquisa vetorial ordena os resultados por distância vetorial, mas a ordem inicial pode não refletir a adequação das respostas de cada candidato à consulta. O Hugging Face Ranker envia a consulta e o texto dos candidatos para <a href="https://huggingface.co/docs/inference-providers/index">os Provedores de Inferência do Hugging Face</a> hospedados e utiliza pontuações d <code translate="no">sentence-similarity</code> para reordenar os candidatos devolvidos pelo Milvus.</p>
 <p>Esta integração utiliza o router Hugging Face alojado. Para reordenar a classificação com um serviço de Inferência de Embeddings de Texto (TEI) implementado separadamente, consulte <a href="/docs/pt/tei-ranker.md">o TEI Ranker</a>.</p>
 <h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -212,7 +212,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>O exemplo seguinte cria uma coleção com um campo de texto para reclassificação e um campo vetorial para recuperação inicial:</p>
+    </button></h3><p>O exemplo seguinte cria uma coleção com um campo de texto para reclassificação e um campo vetorial para a recuperação inicial:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, Function, FunctionType, MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)

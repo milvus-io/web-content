@@ -25,8 +25,11 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>В приложениях агентного поиска векторный поиск и сопоставление шаблонов в стиле grep часто дополняют друг друга. Векторный поиск извлекает семантически релевантные объекты, а сопоставление шаблонов сужает эти результаты по точным строковым структурам, таким как коды ошибок, префиксы журналов, домены электронной почты, пути URL или идентификаторы.</p>
-<p>В Milvus эти ограничения по шаблонам можно выразить в скалярных фильтрах с помощью <code translate="no">LIKE</code> для простого сопоставления с подстановочными знаками, а также <code translate="no">=~</code> или <code translate="no">!~</code> для регулярных выражений <a href="https://github.com/google/re2/wiki/syntax">RE2</a>. Эти фильтры можно комбинировать с <code translate="no">query</code>, <code translate="no">search</code> или гибридным поиском.</p>
-<p>Выражения для сопоставления шаблонов задаются в параметре <code translate="no">filter</code>. Например, следующий запрос находит сообщения журнала, содержащие код ошибки, такой как <code translate="no">E1001</code>:</p>
+<p>В Milvus эти ограничения по шаблонам можно выражать в скалярных фильтрах с помощью <code translate="no">LIKE</code> для простого сопоставления с подстановочными знаками, а также <code translate="no">=~</code> или <code translate="no">!~</code> для регулярных выражений <a href="https://github.com/google/re2/wiki/syntax">RE2</a>. Эти фильтры можно комбинировать с <code translate="no">query</code>, <code translate="no">search</code> или гибридным поиском.</p>
+<div class="alert note">
+<p>На этой странице описывается сопоставление шаблонов в скалярных выражениях фильтров, используемых в режимах « <code translate="no">query</code> », « <code translate="no">search</code> » и гибридном поиске. Эти выражения оценивают значения полей и не изменяют токены, сгенерированные анализатором. Для фильтрации токенов во время анализа текста см. раздел <a href="/docs/ru/regex-filter.md">«Фильтр Regex Analyzer</a>».</p>
+</div>
+<p>Выражения сопоставления шаблонов задаются в параметре « <code translate="no">filter</code> ». Например, следующий запрос находит сообщения журнала, содержащие код ошибки, такой как <code translate="no">E1001</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -37,7 +40,7 @@ res = client.query(
     output_fields=[<span class="hljs-string">&quot;message&quot;</span>, <span class="hljs-string">&quot;severity&quot;</span>],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Примеры на этой странице посвящены выражению, заданному в параметре « <code translate="no">filter</code> ». Тот же синтаксис выражений фильтрации можно использовать в операциях Milvus, поддерживающих скалярный фильтр, таких как « <code translate="no">query</code> », « <code translate="no">search</code> » и гибридный поиск.</p>
+<p>Примеры на этой странице посвящены выражению, назначенному параметру « <code translate="no">filter</code> ». Тот же синтаксис выражений фильтрации можно использовать в операциях Milvus, поддерживающих скалярный фильтр, таких как « <code translate="no">query</code> », « <code translate="no">search</code> » и гибридный поиск.</p>
 <h2 id="Supported-field-types" class="common-anchor-header">Поддерживаемые типы полей<button data-href="#Supported-field-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -164,7 +167,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Используйте <code translate="no">LIKE</code> для префиксов, суффиксов, содержания и совпадений одного символа в фиксированной позиции. <code translate="no">LIKE</code> не поддерживает классы символов, такие как <code translate="no">[0-9]</code>, альтернативы, такие как <code translate="no">error|failed</code>, количество повторений, такие как <code translate="no">{4}</code>, анкоры, такие как <code translate="no">^</code> или <code translate="no">$</code>, или флаги, игнорирующие регистр, такие как <code translate="no">(?i)</code>. Для этих шаблонов используйте регулярные выражения.</p>
+    </button></h3><p>Используйте <code translate="no">LIKE</code> для префиксов, суффиксов, содержания и совпадений одного символа в фиксированной позиции. <code translate="no">LIKE</code> не поддерживает классы символов, такие как <code translate="no">[0-9]</code>, альтернативы, такие как <code translate="no">error|failed</code>, количество повторений, такие как <code translate="no">{4}</code>, якоря, такие как <code translate="no">^</code> или <code translate="no">$</code>, или флаги, игнорирующие регистр, такие как <code translate="no">(?i)</code>. Для этих шаблонов используйте регулярные выражения.</p>
 <p>Используйте <code translate="no">==</code> для точного сравнения полных строк. Используйте <code translate="no">LIKE</code> только в том случае, если фильтру требуется сопоставление с подстановочными знаками.</p>
 <h3 id="Escaping-wildcards-in-a-LIKE-pattern" class="common-anchor-header">Экранирование символов-заменителей в шаблоне LIKE<button data-href="#Escaping-wildcards-in-a-LIKE-pattern" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -181,7 +184,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>В шаблонах типа <code translate="no">LIKE</code> символ <code translate="no">%</code> соответствует нулю или большему количеству символов, а <code translate="no">_</code> — ровно одному символу. Чтобы буквально сопоставить <code translate="no">%</code>, <code translate="no">_</code> или <code translate="no">\</code>, используйте экранирование символа обратной косой чертой (<code translate="no">\</code>):</p>
+    </button></h3><p>В шаблонах типа <code translate="no">LIKE</code> символ <code translate="no">%</code> соответствует нулю или большему количеству символов, а <code translate="no">_</code> — ровно одному символу. Чтобы буквально сопоставить <code translate="no">%</code>, <code translate="no">_</code> или <code translate="no">\</code>, следует экранировать символ обратной косой чертой (<code translate="no">\</code>):</p>
 <ul>
 <li><code translate="no">name LIKE r&quot;\%&quot;</code> соответствует литеральному значению <code translate="no">%</code>.</li>
 <li><code translate="no">name LIKE r&quot;\_%&quot;</code> соответствует значениям, начинающимся с литерала <code translate="no">_</code>.</li>
@@ -233,8 +236,8 @@ res = client.query(
 <p>Например:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ r&quot;\d{4}-\d{2}-\d{2}&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Это соответствует строкам, содержащим значение, похожее на дату, например <code translate="no">2026-07-01</code>.</p>
-<p>Без использования сырой строки обычные строковые литералы обрабатывают экранирующие последовательности до того, как шаблон регулярного выражения будет оценен, поэтому шаблоны, такие как <code translate="no">\d</code>, <code translate="no">\s</code> или экранированные литеральные символы, могут потребовать дополнительных обратных косых черт.</p>
+<p>Это сопоставляется со строками, содержащими значение, похожее на дату, например <code translate="no">2026-07-01</code>.</p>
+<p>Без использования сырой строки обычные строковые литералы обрабатывают экранирующие последовательности до оценки шаблона регулярного выражения, поэтому такие шаблоны, как <code translate="no">\d</code>, <code translate="no">\s</code> или экранированные литеральные символы, могут потребовать дополнительных обратных косых черт.</p>
 <h3 id="Common-regex-patterns" class="common-anchor-header">Распространённые шаблоны регулярных выражений<button data-href="#Common-regex-patterns" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -272,7 +275,7 @@ res = client.query(
 <p>При буквальном сопоставлении метасимволов регулярных выражений следует экранировать их в шаблоне регулярного выражения. Например, чтобы найти буквальную точку (<code translate="no">\.</code> в регулярном выражении), в строке фильтра Python следует написать <code translate="no">\\.</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;email =~ &quot;@gmail\\.com$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Примечание: Фильтры Milvus на основе регулярных выражений следуют синтаксису RE2. Если шаблон регулярного выражения использует синтаксис, который RE2 не поддерживает, или является недействительным по иным причинам, Milvus отклоняет выражение фильтра. Подробности о метасимволах, флагах и поведении сопоставления регулярных выражений см. в справочнике <a href="https://github.com/google/re2/wiki/syntax">по синтаксису RE2</a>.</p>
+<p>Примечание: Фильтры Milvus на основе регулярных выражений следуют синтаксису RE2. Если шаблон регулярного выражения использует синтаксис, который RE2 не поддерживает, или является недействительным по иным причинам, Milvus отклоняет выражение фильтра. Подробную информацию о метасимволах регулярных выражений, флагах и поведении при сопоставлении см. в справочнике <a href="https://github.com/google/re2/wiki/syntax">по синтаксису RE2</a>.</p>
 <h3 id="Matching-behavior" class="common-anchor-header">Поведение сопоставления<button data-href="#Matching-behavior" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -326,7 +329,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus поддерживает несколько типов индексов для строковых полей, которые можно использовать совместно с фильтрами « <code translate="no">LIKE</code> » и фильтрами на основе регулярных выражений для полей « <code translate="no">VARCHAR</code> » или строковых путей JSON, например: <code translate="no">NGRAM</code>, <code translate="no">STL_SORT</code>, <code translate="no">INVERTED</code> и <code translate="no">BITMAP</code>. Сопоставление по шаблонам может работать и без индекса, однако индекс позволяет повысить производительность при работе с большими наборами данных.</p>
+    </button></h2><p>Milvus поддерживает несколько типов индексов для строковых полей, которые можно использовать вместе с фильтрами « <code translate="no">LIKE</code> » и фильтрами на основе регулярных выражений для полей « <code translate="no">VARCHAR</code> » или строковых путей JSON, например: <code translate="no">NGRAM</code>, <code translate="no">STL_SORT</code>, <code translate="no">INVERTED</code> и <code translate="no">BITMAP</code>. Сопоставление по шаблонам может работать и без индекса, но индекс позволяет повысить производительность при работе с большими наборами данных.</p>
 <p>Эффективность индекса зависит от выражения шаблона, от того, может ли Milvus извлекать фиксированные литеральные подстроки, а также от кардинальности и распределения целевого поля. Для шаблонов префиксного типа, таких как <code translate="no">name LIKE &quot;Prod%&quot;</code>, могут быть более эффективны другие стратегии индексирования, чем для шаблонов инфиксного или суффиксного типа, таких как <code translate="no">description LIKE &quot;%vector%&quot;</code> или <code translate="no">filename LIKE &quot;%.json&quot;</code>.</p>
 <p>Используйте приведенную ниже таблицу в качестве отправной точки, а затем проведите тестирование с вашей собственной рабочей нагрузкой:</p>
 <table>
@@ -335,7 +338,7 @@ res = client.query(
 </thead>
 <tbody>
 <tr><td>Содержит фиксированные литеральные подстроки, такие как <code translate="no">message =~ &quot;error.*timeout&quot;</code> или <code translate="no">message LIKE &quot;%database%&quot;</code></td><td><code translate="no">NGRAM</code></td><td>Помогает, когда Milvus может извлечь значимые литеральные подстроки из шаблона. Подробности см. в разделе <a href="/docs/ru/ngram.md">NGRAM</a>.</td></tr>
-<tr><td>Префиксные, точные или фильтры строк, основанные на равенстве, особенно для полей с низкой или умеренной кардинальностью</td><td><code translate="no">STL_SORT</code>, <code translate="no">INVERTED</code> или <code translate="no">BITMAP</code></td><td>Могут быть более эффективны, если в поле встречаются повторяющиеся значения или если фильтр близок к точному совпадению. Подробности см. в разделах <a href="/docs/ru/stl-sort.md">STL_SORT</a>, <a href="/docs/ru/inverted.md">INVERTED</a> и <a href="/docs/ru/bitmap.md">BITMAP</a>.</td></tr>
+<tr><td>Префиксные, точные или фильтры строк, основанные на равенстве, особенно для полей с низкой или умеренной кардинальностью</td><td><code translate="no">STL_SORT</code>, <code translate="no">INVERTED</code> или <code translate="no">BITMAP</code></td><td>Могут быть более эффективны, если поле содержит повторяющиеся значения или если фильтр близок к точному сопоставлению. Подробности см. в разделах <a href="/docs/ru/stl-sort.md">STL_SORT</a>, <a href="/docs/ru/inverted.md">INVERTED</a> и <a href="/docs/ru/bitmap.md">BITMAP</a>.</td></tr>
 <tr><td>Шаблоны Regex без фиксированных литералов или шаблоны, в которых преобладают классы символов, короткие токены или подстановочные знаки</td><td>Проведите тестирование производительности, прежде чем полагаться на ускорение за счёт индекса</td><td>Эти шаблоны могут обеспечивать ограниченную селективность индекса и привести к переходу на более широкое сканирование.</td></tr>
 </tbody>
 </table>

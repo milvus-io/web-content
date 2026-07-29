@@ -85,7 +85,7 @@ summary: 既存のMilvusデプロイメントのメッセージキューを、�
 <li>ログを監視し、切り替えが完了したことを確認します。</li>
 </ol>
 <div class="alert note">
-<p>切り替えを行う前に、ターゲット MQ に、現在の Milvus インスタンスで使用されているものと同じ名前のトピックが含まれていないことを確認してください。ターゲット MQ が別の Milvus インスタンスで使用されていた場合、トピック名の競合により予期しない動作が発生する可能性があるため、この確認は特に重要です。</p>
+<p>切り替えを行う前に、ターゲット MQ に、現在の Milvus インスタンスで使用されているものと同じ名前のトピックが含まれていないことを確認してください。ターゲット MQ が別の Milvus インスタンスで使用されていた場合は、トピック名の競合により予期しない動作が発生する可能性があるため、この確認が特に重要です。</p>
 </div>
 <h2 id="Support-matrix" class="common-anchor-header">サポートマトリックス<button data-href="#Support-matrix" class="anchor-icon" translate="no">
       <svg translate="no"

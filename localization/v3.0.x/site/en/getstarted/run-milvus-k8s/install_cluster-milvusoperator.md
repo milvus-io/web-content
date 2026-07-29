@@ -402,6 +402,9 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li>Object storage: <a href="/docs/object_storage_operator.md">Configure object storage with Milvus Operator</a></li>
 <li>Metadata: <a href="/docs/meta_storage_operator.md">Configure etcd with Milvus Operator</a></li>
 </ul>
+<div class="alert note">
+<p>Storage V3 is disabled by default. Enable it before using features that depend on it. For requirements and compatibility considerations, see <a href="/docs/storage-v3.md">Storage V3</a>.</p>
+</div>
 <h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

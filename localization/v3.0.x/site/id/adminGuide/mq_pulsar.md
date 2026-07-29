@@ -183,7 +183,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Internal-in-cluster-Pulsar" class="common-anchor-header">Pulsar Internal (dalam kluster)<button data-href="#Internal-in-cluster-Pulsar" class="anchor-icon" translate="no">
+<h3 id="Internal-in-cluster-Pulsar" class="common-anchor-header">Pulsar Internal (di dalam kluster)<button data-href="#Internal-in-cluster-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

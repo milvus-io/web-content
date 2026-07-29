@@ -2,7 +2,7 @@
 id: hybrid-search-with-structarray.md
 title: 使用 StructArray 進行混合搜尋
 summary: >-
-  請使用此頁面，將 StructArray 向量搜尋與其他向量搜尋結合，形成單一的混合搜尋請求。StructArray
+  請使用此頁面，將 StructArray 向量搜尋與其他向量搜尋結合，整合為單一的混合搜尋請求。StructArray
   混合搜尋可產生實體層級的結果或元素層級的結果，具體取決於您所組合的 AnnSearchRequest 物件。
 ---
 <h1 id="Hybrid-Search-with-StructArray" class="common-anchor-header">使用 StructArray 進行混合搜尋<button data-href="#Hybrid-Search-with-StructArray" class="anchor-icon" translate="no">
@@ -45,7 +45,7 @@ summary: >-
 <tr><td>集合層級向量欄位 + StructArray 的 EmbeddingList 子欄位</td><td>實體層級</td><td>最終候選項以主鍵作為索引。</td><td>請勿使用。</td></tr>
 <tr><td>集合層級向量場 + StructArray 元素層級子場</td><td>實體層級</td><td>元素層級的命中結果會在混合重新排序之前，彙總為實體層級的候選結果。</td><td>StructArray 元素層級<code translate="no">AnnSearchRequest</code> 上的可選摺疊設定。</td></tr>
 <tr><td>同一 StructArray 欄位下的多個元素層級子欄位</td><td>元素層級</td><td>最終候選項以主鍵加上 Struct 元素偏移量作為索引。</td><td>請勿使用。</td></tr>
-<tr><td>位於不同 StructArray 字段下的元素層級子字段</td><td>實體層級</td><td>元素偏移量不共享標識，因此每個 StructArray 元素層級的<code translate="no">AnnSearchRequest</code> 都會在重新排序前被摺疊。</td><td>每個 StructArray 元素級別的<code translate="no">AnnSearchRequest</code> 皆可選用摺疊設定。</td></tr>
+<tr><td>位於不同 StructArray 字段下的元素層級子字段</td><td>實體層級</td><td>元素偏移量不共享標識，因此每個 StructArray 元素層級的<code translate="no">AnnSearchRequest</code> 會在重新排序前被摺疊。</td><td>每個 StructArray 元素級別的<code translate="no">AnnSearchRequest</code> 皆可選用摺疊設定。</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -95,7 +95,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在混合搜尋中，針對 StructArray 向量子欄位的 EmbeddingList 搜尋屬於實體層級。其運作方式類似實體層級的向量搜尋請求，且不會返回單一匹配的 Struct 元素偏移量。</p>
+    </button></h2><p>在混合搜尋中，針對 StructArray 向量子欄位的 EmbeddingList 搜尋屬於實體層級。其運作方式類似實體層級的向量搜尋請求，且不會回傳單一匹配的 Struct 元素偏移量。</p>
 <pre><code translate="no">from pymilvus import AnnSearchRequest, MilvusClient, RRFRanker
 from pymilvus.client.embedding_list import EmbeddingList
 
@@ -152,8 +152,8 @@ results = client.hybrid_search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>當所有 `<code translate="no">AnnSearchRequest</code> ` 物件皆針對同一 `StructArray` 欄位下的元素級向量子欄位時，混合搜尋可透過重新排序來保留元素級候選結果。這是唯一一種最終結果仍維持在元素級的 `StructArray` 混合模式。</p>
-<p>以下範例假設<code translate="no">chunks</code> 的 StructArray 欄位包含兩個元素級向量子欄位：<code translate="no">chunks[emb]</code> 與<code translate="no">chunks[code_emb]</code> ，且兩者均使用常規向量度量標準。</p>
+    </button></h2><p>當所有 `<code translate="no">AnnSearchRequest</code> ` 物件皆針對同一 `StructArray` 欄位下的元素級向量子欄位時，混合搜尋可透過重新排序來保留元素級候選結果。這是唯一一種最終結果仍維持為元素級的 `StructArray` 混合模式。</p>
+<p>以下範例假設<code translate="no">chunks</code> 的 StructArray 欄位包含兩個元素級向量子欄位：<code translate="no">chunks[emb]</code> 與<code translate="no">chunks[code_emb]</code> ，且兩者均使用標準向量度量。</p>
 <pre><code translate="no">index_chunk_req = AnnSearchRequest(
     data=[query_vector],
     anns_field=<span class="hljs-string">&quot;chunks[emb]&quot;</span>,
@@ -293,7 +293,7 @@ results = client.hybrid_search(
       </svg>
     </button></h2><p>當標量條件需套用至參與向量搜尋的相同 Struct 元素時，可將<code translate="no">element_filter</code> 附加至 StructArray 元素層級的<code translate="no">AnnSearchRequest</code> 。您亦可針對父實體條件，在<code translate="no">hybrid_search()</code> 上使用頂層的<code translate="no">filter</code> 。</p>
 <p>StructArray 元素層級向量欄位在混合搜尋中支援範圍搜尋。請將<code translate="no">radius</code> 以及（若需）<code translate="no">range_filter</code> 新增至元素層級的<code translate="no">AnnSearchRequest</code> 中。EmbeddingList 層級的 StructArray 請求不支援範圍搜尋。</p>
-<p>僅當所有 `<code translate="no">AnnSearchRequest</code> ` 物件皆指向同一 `StructArray` 欄位下的元素層級向量欄位，且 `<code translate="no">group_by_field</code> ` 必須為主鍵時，才支援元素層級的混合分組。若請求混合了集合層級的向量欄位、不同的 `StructArray` 欄位，或 `EmbeddingList` 層級的請求，則不支援混合分組。請勿將範圍搜尋與分組結合使用。</p>
+<p>僅當所有 `<code translate="no">AnnSearchRequest</code> ` 物件皆針對同一 `StructArray` 欄位下的元素層級向量欄位，且 `<code translate="no">group_by_field</code> ` 必須為主鍵時，才支援元素層級的混合分組。若請求混合了集合層級的向量欄位、不同的 `StructArray` 欄位，或 `EmbeddingList` 層級的請求，則不支援混合分組。請勿將範圍搜尋與分組結合使用。</p>
 <h2 id="Interpret-hybrid-results" class="common-anchor-header">解讀混合結果<button data-href="#Interpret-hybrid-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

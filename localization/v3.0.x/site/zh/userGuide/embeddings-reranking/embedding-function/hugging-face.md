@@ -64,7 +64,7 @@ beta: Milvus v2.6.20+
 <p>该工作流分为三个阶段：</p>
 <ol>
 <li><strong>发送原始文本。</strong>您的应用程序通过插入或搜索请求提供原始文本。</li>
-<li><strong>生成嵌入向量。</strong>文本嵌入函数将文本通过<code translate="no">hf-inference</code> 发送至Hugging Face的<code translate="no">feature-extraction</code> 管道。该函数使用<code translate="no">model_name</code> 选择模型，并可传递支持的推理选项（如归一化和截断）。</li>
+<li><strong>生成Embeddings。</strong>文本嵌入函数将文本通过<code translate="no">hf-inference</code> 发送至Hugging Face的<code translate="no">feature-extraction</code> 管道。该函数使用<code translate="no">model_name</code> 选择模型，并可传递支持的推理选项（如归一化和截断）。</li>
 <li><strong>使用嵌入向量。</strong>Hugging Face 针对每条输入文本返回一个浮点型嵌入向量。在插入操作中，Milvus 将该向量存储在函数的输出字段中；在搜索操作中，Milvus 将该向量用作查询向量。</li>
 </ol>
 <p>同一函数配置可同时处理插入和搜索操作，确保模型及推理参数在两种操作中保持一致。</p>
@@ -141,7 +141,7 @@ beta: Milvus v2.6.20+
         <span class="hljs-attr">credential:</span> <span class="hljs-string">huggingface_apikey</span>
         <span class="hljs-comment"># url: https://router.huggingface.co</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>您还可以在函数参数中设置 `<code translate="no">credential</code> `。该值必须是 `<code translate="no">credential</code> ` 顶级部分中定义的标签，而非令牌本身。函数级凭据标签的优先级高于提供程序级标签。</p>
+<p>您还可以在函数参数中设置 `<code translate="no">credential</code> `。该值必须是 `<code translate="no">credential</code> ` 顶级部分中定义的标签，而非令牌本身。函数级凭证标签的优先级高于提供程序级标签。</p>
 <h3 id="Option-2-Environment-variable" class="common-anchor-header">选项 2：环境变量<button data-href="#Option-2-Environment-variable" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -262,7 +262,7 @@ client.create_collection(
 <tbody>
 <tr><td><code translate="no">provider</code></td><td>是</td><td>嵌入模型提供商。请将此值设置为<code translate="no">huggingface</code> 。</td></tr>
 <tr><td><code translate="no">model_name</code></td><td>是</td><td>通过<code translate="no">hf-inference</code> 提供的、用于<code translate="no">feature-extraction</code> 任务的 Hugging Face 模型 ID。</td></tr>
-<tr><td><code translate="no">hf_provider</code></td><td>否</td><td>Hugging Face 推理提供程序的路由。在 Milvus 2.6.20 中，默认值且唯一受支持的值为<code translate="no">hf-inference</code> 。</td></tr>
+<tr><td><code translate="no">hf_provider</code></td><td>否</td><td>Hugging Face 推理提供程序的路由。在 Milvus 2.6.20 中，默认值且唯一受支持的值是<code translate="no">hf-inference</code> 。</td></tr>
 <tr><td><code translate="no">credential</code></td><td>否</td><td>在<code translate="no">milvus.yaml</code> 的顶级<code translate="no">credential</code> 部分中定义的凭据标签。此值并非令牌本身。</td></tr>
 <tr><td><code translate="no">normalize</code></td><td>否</td><td>是否应由 Hugging Face 返回归一化 Embeddings。支持的值为<code translate="no">true</code> 和<code translate="no">false</code> 。若省略，Milvus 不会在请求中设置此选项。</td></tr>
 <tr><td><code translate="no">prompt_name</code></td><td>否</td><td>在所选模型的 Sentence Transformers 配置中定义的提示词名称。</td></tr>

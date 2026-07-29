@@ -40,7 +40,7 @@ summary: >-
     </button></h2><ul>
 <li>En Milvus 3.x, Woodpecker es el WAL/cola de mensajes <strong>predeterminado</strong>, que proporciona escrituras ordenadas y recuperación como servicio de registro. No se requiere ningún servicio externo de colas de mensajes (como Pulsar o Kafka).</li>
 <li>Woodpecker puede ejecutarse <strong>integrado</strong> en el nodo Milvus/streaming (por defecto) o como un <strong>servicio dedicado</strong> con sus propios pods (solo en modo distribuido/clúster).</li>
-<li>Admite tres modos de « <code translate="no">storage.type</code> »: almacenamiento de objetos (<code translate="no">minio</code>, el predeterminado), sistema de archivos local (<code translate="no">local</code>) y el modo dedicado <code translate="no">service</code>. Consulte <a href="#Deployment-modes">Modos de implementación</a>.</li>
+<li>Admite tres modos de « <code translate="no">storage.type</code> »: almacenamiento de objetos (<code translate="no">minio</code>, el predeterminado), sistema de archivos local (<code translate="no">local</code>) y el modo dedicado <code translate="no">service</code>. Véase <a href="#Deployment-modes">Modos de implementación</a>.</li>
 </ul>
 <h2 id="Quick-start" class="common-anchor-header">Inicio rápido<button data-href="#Quick-start" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -202,7 +202,7 @@ summary: >-
 <p>Notas:</p>
 <ul>
 <li>La compatibilidad depende de la compatibilidad nativa con el SDK o de la compatibilidad con la semántica de escritura condicional de S3.</li>
-<li>Si alojas MinIO por tu cuenta para Woodpecker, utiliza la versión <code translate="no">RELEASE.2024-12-18T13-15-44Z</code> o posterior.</li>
+<li>Si alojas tú mismo MinIO para Woodpecker, utiliza la versión <code translate="no">RELEASE.2024-12-18T13-15-44Z</code> o posterior.</li>
 <li>Esta matriz refleja <a href="https://github.com/zilliztech/woodpecker/discussions/150">el estado actual de las conversaciones</a> y puede evolucionar a medida que se valide más a fondo la compatibilidad del backend.</li>
 </ul>
 <h2 id="Deployment-guides" class="common-anchor-header">Guías de implementación<button data-href="#Deployment-guides" class="anchor-icon" translate="no">
@@ -239,7 +239,7 @@ summary: >-
 <pre><code translate="no" class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Este ejemplo configura Woodpecker como cola de mensajes y habilita el nodo de streaming. El primer arranque puede tardar un tiempo en descargar las imágenes; espera hasta que todos los pods estén listos:</p>
+<p>Este ejemplo configura Woodpecker como cola de mensajes y habilita el nodo de streaming. El primer inicio puede tardar un tiempo en descargar las imágenes; espera hasta que todos los pods estén listos:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 kubectl get milvus my-release -o yaml | grep -A2 status
 <button class="copy-code-btn"></button></code></pre>
@@ -317,7 +317,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
 bash standalone_embed.sh start
 <button class="copy-code-btn"></button></code></pre>
-<p>Para ajustar Woodpecker, edita el archivo generado <code translate="no">user.yaml</code> tras el primer inicio y ejecuta <code translate="no">bash standalone_embed.sh restart</code> para aplicar los cambios (un nuevo <code translate="no">start</code> regenera <code translate="no">user.yaml</code>, por lo que debes aplicar los cambios con <code translate="no">restart</code>):</p>
+<p>Para ajustar Woodpecker, edita el archivo generado « <code translate="no">user.yaml</code> » tras el primer inicio y ejecuta « <code translate="no">bash standalone_embed.sh restart</code> » para aplicar los cambios (un nuevo « <code translate="no">start</code> » regenera « <code translate="no">user.yaml</code> », por lo que debes aplicar los cambios con « <code translate="no">restart</code> »):</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml</span>
 <span class="hljs-attr">woodpecker:</span>
   <span class="hljs-attr">logstore:</span>
@@ -378,11 +378,11 @@ docker restart milvus-standalone
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0-beta \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.34 \
+  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.36 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Esto implementa Woodpecker como un StatefulSet dedicado (<code translate="no">my-release-milvus-woodpecker</code>, 4 réplicas por defecto) respaldado por un servicio sin interfaz gráfica, agrupado mediante gossip en los puertos <code translate="no">18080</code> (servicio), <code translate="no">17946</code> (gossip) y <code translate="no">9091</code> (métricas), con MinIO como backend de almacenamiento. El servicio necesita un quórum de <strong>3</strong> nodos; el valor predeterminado de <strong>4</strong> réplicas mantiene el quórum al tiempo que tolera el fallo de un único nodo, por lo que no se debe establecer <code translate="no">woodpecker.replicaCount</code> por debajo de 3. El clúster incluye entonces un conjunto independiente de pods <code translate="no">woodpecker</code>:</p>
+<p>Esto implementa Woodpecker como un StatefulSet dedicado (<code translate="no">my-release-milvus-woodpecker</code>, 4 réplicas por defecto) respaldado por un servicio sin interfaz gráfica, agrupado mediante el protocolo «gossip» en los puertos <code translate="no">18080</code> (servicio), <code translate="no">17946</code> (gossip) y <code translate="no">9091</code> (métricas), con MinIO como backend de almacenamiento. El servicio necesita un quórum de <strong>3</strong> nodos; el valor predeterminado de <strong>4</strong> réplicas mantiene el quórum al tiempo que tolera el fallo de un único nodo, por lo que no se debe establecer <code translate="no">woodpecker.replicaCount</code> por debajo de 3. El clúster incluye entonces un conjunto independiente de pods <code translate="no">woodpecker</code>:</p>
 <pre><code translate="no"><span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">0</span>
 <span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">1</span>
 <span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">2</span>
@@ -422,12 +422,12 @@ docker restart milvus-standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Basándote en las pruebas de rendimiento y los límites del backend de <a href="/docs/es/woodpecker_architecture.md">Woodpecker</a>, optimiza el rendimiento de escritura de extremo a extremo teniendo en cuenta los siguientes aspectos:</p>
+    </button></h3><p>Basándose en las pruebas de rendimiento y los límites del backend de <a href="/docs/es/woodpecker_architecture.md">Woodpecker</a>, optimice el rendimiento de escritura de extremo a extremo teniendo en cuenta los siguientes aspectos:</p>
 <ul>
 <li>Lado del almacenamiento
 <ul>
 <li><strong>Almacenamiento de objetos (compatible con MinIO/S3)</strong>: Aumenta la concurrencia y el tamaño de los objetos (evita los objetos muy pequeños). Presta atención a los límites de ancho de banda de la red y del bucket. Un único nodo MinIO en SSD suele tener un límite de unos 100 MB/s a nivel local; un único EC2 conectado a S3 puede alcanzar GB/s.</li>
-<li><strong>Sistemas de archivos locales/compartidos (locales)</strong>: da preferencia a NVMe o discos rápidos. Asegúrate de que el sistema de archivos gestione bien las escrituras pequeñas y la latencia de fsync.</li>
+<li><strong>Sistemas de archivos locales/compartidos (locales)</strong>: da prioridad a NVMe o discos rápidos. Asegúrate de que el sistema de archivos gestione bien las escrituras pequeñas y la latencia de fsync.</li>
 </ul></li>
 <li>Parámetros de Woodpecker
 <ul>
@@ -435,7 +435,7 @@ docker restart milvus-standalone
 <li>Ajuste <code translate="no">maxInterval</code> según las características del soporte (sacrifique latencia a cambio de rendimiento con una agregación más larga).</li>
 <li>En el caso del almacenamiento de objetos, plantéate aumentar <code translate="no">segmentRollingPolicy.maxSize</code> para reducir los cambios de segmento.</li>
 </ul></li>
-<li>Lado del cliente/aplicación
+<li>Lado del cliente/de la aplicación
 <ul>
 <li>Utilice lotes de mayor tamaño y un mayor número de escritores/clientes simultáneos.</li>
 <li>Controle el momento de la actualización o la creación del índice (agrupe los datos antes de activarlo) para evitar pequeñas escrituras frecuentes.</li>
@@ -456,7 +456,7 @@ docker restart milvus-standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>El modo de servicio mantiene el alto rendimiento de escritura de un WAL respaldado por almacenamiento de objetos, al tiempo que añade baja latencia (véase <a href="#Latency">Latencia</a>). El ajuste del lado del almacenamiento y del lado del cliente mencionado anteriormente sigue siendo válido; además, dado que Woodpecker se ejecuta como un servicio independiente, la capacidad de escritura se escala horizontalmente añadiendo réplicas (<code translate="no">woodpecker.replicaCount</code>, 4 por defecto), y las escrituras se benefician de la replicación por quórum de un RTT y de lecturas que tienen en cuenta la topología, lo que evita el reenvío por parte del broker.</p>
+    </button></h3><p>El modo de servicio mantiene el alto rendimiento de escritura de un WAL respaldado por almacenamiento de objetos, al tiempo que añade baja latencia (véase <a href="#Latency">«Latencia»</a>). El ajuste tanto en el lado del almacenamiento como en el del cliente descrito anteriormente sigue siendo válido; además, dado que Woodpecker se ejecuta como un servicio independiente, la capacidad de escritura se escala horizontalmente añadiendo réplicas (<code translate="no">woodpecker.replicaCount</code>, 4 por defecto), y las escrituras se benefician de la replicación por quórum de un RTT y de lecturas que tienen en cuenta la topología, lo que evita el reenvío por parte del broker.</p>
 <p><strong>Demostración de inserción por lotes</strong>: utiliza lo siguiente para medir el rendimiento de escritura:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">import</span> random
@@ -530,7 +530,7 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Woodpecker es un WAL nativo de la nube diseñado para el almacenamiento de objetos que ofrece un equilibrio entre rendimiento, coste y latencia. El modo integrado, de bajo peso, da prioridad a la optimización del coste y el rendimiento, ya que la mayoría de los escenarios solo requieren que los datos se escriban dentro de un plazo determinado, en lugar de exigir una baja latencia para las solicitudes de escritura individuales. Por lo tanto, Woodpecker emplea escrituras por lotes, con intervalos predeterminados de 10 ms para backends de almacenamiento en sistemas de archivos locales y de 200 ms para backends de almacenamiento tipo MinIO. Durante las operaciones de escritura lentas, la latencia máxima es igual al tiempo del intervalo más el tiempo de vaciado.</p>
+    </button></h3><p>Woodpecker es un WAL nativo de la nube diseñado para el almacenamiento de objetos, que ofrece un equilibrio entre rendimiento, coste y latencia. El modo integrado, de bajo peso, da prioridad a la optimización del coste y el rendimiento, ya que la mayoría de los escenarios solo requieren que los datos se escriban en un plazo determinado, en lugar de exigir una baja latencia para las solicitudes de escritura individuales. Por lo tanto, Woodpecker emplea escrituras por lotes, con intervalos predeterminados de 10 ms para backends de almacenamiento en sistemas de archivos locales y de 200 ms para backends de almacenamiento tipo MinIO. Durante las operaciones de escritura lentas, la latencia máxima es igual al tiempo del intervalo más el tiempo de vaciado.</p>
 <p>Cabe señalar que la inserción por lotes se activa no solo por intervalos de tiempo, sino también por el tamaño del lote, cuyo valor por defecto es de 2 MB.</p>
 <h3 id="Service-mode-Milvus-30+" class="common-anchor-header">Modo de servicio (Milvus 3.0+)<button data-href="#Service-mode-Milvus-30+" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -547,10 +547,10 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>El modo de servicio ofrece <strong>una latencia de escritura del orden de los milisegundos</strong> —del mismo orden que un WAL tradicional en disco local con tres réplicas— al tiempo que mantiene bajos los costes. En una implementación típica con tres réplicas y entre zonas de disponibilidad (AZ), la latencia de escritura se mantiene en el rango de los milisegundos. Esto se consigue mediante:</p>
+    </button></h3><p>El modo de servicio ofrece <strong>una latencia de escritura del orden de los milisegundos</strong> —del mismo orden que un WAL tradicional en disco local con tres réplicas— al tiempo que mantiene bajos los costes. En una implementación típica con tres réplicas entre zonas de disponibilidad (AZ), la latencia de escritura se mantiene en el rango de los milisegundos. Esto se consigue mediante:</p>
 <ul>
-<li><strong>Escrituras de quórum en un solo RTT</strong>: la replicación impulsada por el cliente completa una escritura de quórum en un solo viaje de ida y vuelta, con el tráfico entre zonas fijado en el volumen de datos equivalente a dos réplicas (frente al tráfico adicional entre zonas de aproximadamente un tercio, típico de la replicación basada en broker o líder).</li>
-<li><strong>Lecturas de un solo salto que tienen en cuenta la topología</strong>: cada lectura se dirige directamente a la réplica más cercana en lugar de reenviarse a través de un broker, lo que evita las lecturas aleatorias entre zonas (aproximadamente dos tercios del tráfico de lectura entre zonas) propias de los sistemas basados en brokers.</li>
+<li><strong>Escrituras de quórum en un solo RTT</strong>: la replicación impulsada por el cliente completa una escritura de quórum en un solo viaje de ida y vuelta, con el tráfico entre zonas (AZ) limitado al volumen de datos de dos réplicas (frente al tráfico adicional entre zonas de aproximadamente un tercio que suele caracterizar a la replicación basada en brokers o líderes).</li>
+<li><strong>Lecturas de un solo salto que tienen en cuenta la topología</strong>: cada lectura se dirige directamente a la réplica más cercana en lugar de reenviarse a través de un broker, lo que evita las lecturas aleatorias entre zonas (≈2/3 del tráfico de lectura entre zonas) propias de los sistemas basados en brokers.</li>
 <li><strong>Carga inmediata al almacenamiento de objetos tras la rotación de segmentos</strong>: cada segmento realiza un seguimiento de todo su ciclo de vida y se carga al almacenamiento de objetos tan pronto como se rota, lo que mantiene bajo el espacio ocupado en el disco local y el coste de almacenamiento sin sacrificar la latencia.</li>
 <li><strong>No hay replicación continua de nodo a nodo</strong>: los registros persisten en el almacenamiento de objetos, que actúa como almacenamiento compartido, por lo que la conmutación por error solo vuelve a cargar las réplicas supervivientes (sin copia completa del nodo); el escalado no está limitado por el ancho de banda de replicación entre nodos, y la sustitución de nodos a gran escala no provoca «tormentas de replicación».</li>
 </ul>

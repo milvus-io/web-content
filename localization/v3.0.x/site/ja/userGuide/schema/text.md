@@ -22,12 +22,16 @@ beta: Milvus 3.0.x
     </button></h1><p>AI検索アプリケーションにおいて、ベクトル検索は意味的に類似したエンティティを見つけるのに役立ちますが、多くの場合、各一致結果の背後にある元のソーステキストもアプリケーションに必要となります。LLMやエージェントは、そのテキストをコンテキストとして利用し、読み上げ、引用、要約、あるいはプロンプトに結果を含めることができます。</p>
 <p>Milvusでは、長いソーステキストをエンティティと共に直接格納するためのスカラーフィールド型「<code translate="no">TEXT</code> 」を提供しています。代表的な値としては、文章の抜粋、長文のドキュメント、記事本文、チケット、ログなどが挙げられます。固定の<code translate="no">max_length</code> を必要とする<code translate="no">VARCHAR</code> とは異なり、<code translate="no">TEXT</code> では、コレクションスキーマで最大バイト長を設定する必要はありません。</p>
 <p><code translate="no">TEXT</code> フィールドを定義するには、<code translate="no">datatype</code> を<code translate="no">DataType.TEXT</code> に設定します。</p>
+<div class="alert note">
+<p>この機能を利用するには、Storage V3 が必要です。有効化の手順および互換性に関する注意事項については、「<a href="/docs/ja/storage-v3.md">Storage V3</a>」を参照してください。</p>
+</div>
+<p>Storage V3が無効になっている場合、Milvusは<code translate="no">TEXT</code> フィールドを含むコレクションスキーマを拒否します。</p>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;content&quot;</span>,
 <span class="highlighted-wrapper-line">    datatype=DataType.TEXT,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>フィールドの定義後、各エンティティはそのフィールドに文字列値を格納できるようになります。<code translate="no">TEXT</code> の値は他のスカラーフィールドと同様に挿入でき、クエリや検索結果から返す際には、<code translate="no">output_fields</code> にそのフィールドを指定することで取得できます。</p>
+<p>フィールドが定義されると、各エンティティはそのフィールドに文字列値を格納できるようになります。<code translate="no">TEXT</code> の値は他のスカラーフィールドと同様に挿入でき、クエリや検索結果から取得するには、<code translate="no">output_fields</code> でそのフィールドを指定します。</p>
 <div class="alert note">
 <p><code translate="no">TEXT</code> フィールドはNULL値をサポートしています。この機能を有効にするには、<code translate="no">nullable</code> を<code translate="no">True</code> に設定します。詳細については、「<a href="/docs/ja/nullable-and-default.md">NULL許容フィールド</a>」を参照してください。</p>
 </div>
@@ -109,7 +113,7 @@ beta: Milvus 3.0.x
  </span></p>
 <ul>
 <li><strong>インライン保存</strong>：<code translate="no">TEXT</code> の値が<code translate="no">dataNode.text.inlineThreshold</code> より小さい場合、Milvus は元のテキスト値を<code translate="no">TEXT</code> フィールド data に直接保存します。</li>
-<li><strong>LOB ストレージ</strong>：<code translate="no">TEXT</code> の値が<code translate="no">dataNode.text.inlineThreshold</code> 以上の場合、Milvusはその値を大容量オブジェクトとして扱い、元のテキストをMinIOなどのオブジェクトストレージに別途保存します。<code translate="no">TEXT</code> フィールドのデータには、別途保存されたテキストへの内部参照が格納されます。クエリや検索結果で<code translate="no">TEXT</code> フィールドが要求されると、Milvusはこの参照を使用して元のテキストを取得し、返します。</li>
+<li><strong>LOB ストレージ</strong>：<code translate="no">TEXT</code> の値が<code translate="no">dataNode.text.inlineThreshold</code> 以上の場合、Milvusはその値を大容量オブジェクトとして扱い、元のテキストをMinIOなどのオブジェクトストレージに個別に保存します。<code translate="no">TEXT</code> フィールドのデータには、個別に保存されたテキストへの内部参照が格納されます。クエリや検索結果で<code translate="no">TEXT</code> フィールドが要求されると、Milvusはこの参照を使用して元のテキストを取得し、返します。</li>
 </ul>
 <p>このストレージの選択は内部的なものです。Milvusがどのストレージパスを使用するかに関係なく、<code translate="no">TEXT</code> フィールドへの挿入、クエリ、検索は同じ方法で行います。しきい値や、関連するストレージ、コンパクション、ガベージコレクションの動作を調整するには、<a href="/docs/ja/configure_datanode.md">dataNode関連の設定</a> <a href="/docs/ja/configure_datacoord.md">およびdataCoord関連の設定</a>を参照してください。</p>
 <p>デプロイメントでオブジェクトストレージを使用している場合、大きな<code translate="no">TEXT</code> 値は、<code translate="no">lobs/...</code> などのパス下にMilvusが管理するオブジェクトとして表示されることがあります。これらのオブジェクトは実装上の詳細であり、手動で移動、コピー、または削除してはなりません。 エンティティの削除、パーティションの削除、またはデータの圧縮を行った後、オブジェクトストレージの使用量が減少するのは、Milvusのガベージコレクションがセーフティウィンドウ経過後に参照されていない大容量オブジェクトデータを削除してからとなります。</p>
@@ -240,7 +244,7 @@ client.load_collection(collection_name=COLLECTION_NAME)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>生のクエリテキストを検索データとして使用し、スパースベクトルフィールドに対して検索を行います。Milvusはクエリテキストをスパースベクトルに変換し、BM25を用いて一致する結果をランク付けし、要求された<code translate="no">TEXT</code> フィールドを<code translate="no">output_fields</code> として返します。</p>
+    </button></h2><p>生のクエリテキストを検索データとして使用し、スパースベクトルフィールドに対して検索を実行します。Milvusはクエリテキストをスパースベクトルに変換し、BM25を用いて一致する結果をランク付けし、要求された<code translate="no">TEXT</code> フィールドを<code translate="no">output_fields</code> として返します。</p>
 <pre><code translate="no" class="language-python">results = client.search(
     collection_name=COLLECTION_NAME,
 <span class="highlighted-comment-line">    data=[<span class="hljs-string">&quot;how does Milvus store source text for retrieval&quot;</span>],</span>

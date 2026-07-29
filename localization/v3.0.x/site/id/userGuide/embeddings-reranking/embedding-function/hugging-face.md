@@ -197,7 +197,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Buat skema dengan bidang utama, bidang masukan " <code translate="no">VARCHAR</code> ", dan bidang keluaran " <code translate="no">FLOAT_VECTOR</code> ". Dimensi keluaran harus sesuai dengan model yang dipilih.</p>
+    </button></h3><p>Buat skema dengan bidang utama, bidang masukan <code translate="no">VARCHAR</code>, dan bidang keluaran <code translate="no">FLOAT_VECTOR</code>. Dimensi keluaran harus sesuai dengan model yang dipilih.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, Function, FunctionType, MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -307,7 +307,7 @@ client.create_collection(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Search-with-raw-text" class="common-anchor-header">Langkah 3: Pencarian dengan teks mentah<button data-href="#Step-3-Search-with-raw-text" class="anchor-icon" translate="no">
+<h3 id="Step-3-Search-with-raw-text" class="common-anchor-header">Langkah 3: Cari dengan teks mentah<button data-href="#Step-3-Search-with-raw-text" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -365,7 +365,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Buka halaman model di Hugging Face dan periksa bagian " <strong>Inference Providers</strong> ". Pastikan " <code translate="no">hf-inference</code> " menyediakan model untuk " <code translate="no">feature-extraction</code>". Jika tidak, pilih model lain dan perbarui dimensi bidang vektor jika diperlukan.</p>
+    </button></h3><p>Buka halaman model di Hugging Face dan periksa bagian " <strong>Inference Providers</strong> ". Pastikan bahwa " <code translate="no">hf-inference</code> " menyediakan model untuk " <code translate="no">feature-extraction</code>". Jika tidak, pilih model lain dan perbarui dimensi bidang vektor jika diperlukan.</p>
 <h3 id="The-returned-vector-dimension-does-not-match-the-field" class="common-anchor-header">Dimensi vektor yang dikembalikan tidak sesuai dengan bidang<button data-href="#The-returned-vector-dimension-does-not-match-the-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

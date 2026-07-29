@@ -64,5 +64,5 @@ title: 오브젝트 스토리지
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>기본 <strong>Woodpecker</strong> 메시지 큐를 오브젝트 스토리지 백엔드(<code translate="no">storage.type=minio</code>)와 함께 실행할 경우, Woodpecker는 사전 기록 로그(write-ahead log)를 동일한 오브젝트 스토리지에 기록하며 <strong>엄격한 S3 조건부 쓰기(Conditional-Write) 세манти크를</strong> 요구합니다. 모든 오브젝트 스토리지가 이 요건을 충족하는 것은 아닙니다. 예를 들어, Huawei Cloud OBS는 일반 Milvus 오브젝트 스토리지로는 작동하지만, 현재 Woodpecker 백엔드로는 <strong>지원되지</strong> 않습니다.</p>
+    </button></h2><p>기본 <strong>Woodpecker</strong> 메시지 큐를 오브젝트 스토리지 백엔드(<code translate="no">storage.type=minio</code>)와 함께 실행할 경우, Woodpecker는 사전 기록 로그(write-ahead log)를 동일한 오브젝트 스토리지에 기록하며 <strong>엄격한 S3 조건부 쓰기(Conditional-Write) 세манти크를</strong> 요구합니다. 모든 오브젝트 스토리지 서비스가 이 요건을 충족하는 것은 아닙니다. 예를 들어, Huawei Cloud OBS는 일반 Milvus 오브젝트 스토리지로는 작동하지만, 현재 Woodpecker 백엔드로는 <strong>지원되지</strong> 않습니다.</p>
 <p>제공업체별 정확한 요구 사항은 <a href="/docs/ko/woodpecker.md">Woodpecker</a> 페이지의 오브젝트 스토리지 호환성 매트릭스를 참조하십시오.</p>

@@ -41,7 +41,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>La fonctionnalité « Changer de file d'attente de messages » est disponible à partir de Milvus 3.0.</strong> Mettez à jour votre instance Milvus vers la version 3.0 ou une version<strong>ultérieure</strong> avant de l'utiliser — cette fonctionnalité n'est pas disponible sur les versions antérieures.</li>
+<li><strong>La fonctionnalité « Changer de file d'attente de messages » est disponible à partir de Milvus 3.0.</strong> Mettez à niveau votre instance Milvus vers la version 3.0 ou une version<strong>ultérieure</strong> avant de l'utiliser — cette fonctionnalité n'est pas disponible sur les versions antérieures.</li>
 <li>L’instance fonctionne correctement.</li>
 </ul>
 <h2 id="Scope" class="common-anchor-header">Portée<button data-href="#Scope" class="anchor-icon" translate="no">
@@ -120,5 +120,5 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Évitez de changer de type de MQ à plusieurs reprises. Si vous devez changer de type, veillez à nettoyer les données associées avant chaque changement — les données résiduelles peuvent entraîner un comportement inattendu.</p>
+<p>Évitez de changer de type de MQ à plusieurs reprises. Si vous devez effectuer un changement, veillez à nettoyer les données associées avant chaque changement — les données résiduelles peuvent entraîner un comportement inattendu.</p>
 </div>

@@ -5,9 +5,9 @@ summary: >-
   Utilizza questa pagina per eseguire una ricerca per intervallo sui sottocampi
   vettoriali di StructArray. La ricerca per intervallo restituisce i risultati
   vettoriali il cui punteggio o distanza rientra in un intervallo specificato.
-  Per i campi StructArray, utilizza la ricerca per intervallo con la ricerca
-  vettoriale a livello di elemento, in cui ogni elemento Struct viene cercato in
-  modo indipendente.
+  Per i campi StructArray, utilizza la ricerca per intervallo insieme alla
+  ricerca vettoriale a livello di elemento, in cui ogni elemento Struct viene
+  cercato in modo indipendente.
 ---
 <h1 id="Range-Search-with-StructArray" class="common-anchor-header">Ricerca per intervallo con StructArray<button data-href="#Range-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -325,7 +325,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Eseguire la ricerca per intervallo su <code translate="no">chunks[emb_list_vector]</code>, che è destinato alla ricerca a livello di EmbeddingList.</p></li>
+<li><p>Eseguire la ricerca per intervallo su <code translate="no">chunks[emb_list_vector]</code>, che è destinata alla ricerca a livello di EmbeddingList.</p></li>
 <li><p>Utilizzo di ` <code translate="no">MAX_SIM_COSINE</code> ` al posto di una metrica standard come ` <code translate="no">COSINE</code> ` per la ricerca per intervallo a livello di elemento.</p></li>
 <li><p>Utilizzo di una query <code translate="no">EmbeddingList</code> al posto di una normale query vettoriale.</p></li>
 <li><p>Aspettarsi che i risultati della ricerca per intervallo siano univoci per entità padre. La ricerca per intervallo restituisce risultati corrispondenti a elementi Struct.</p></li>

@@ -73,7 +73,7 @@ title: Importation en masse dans le cadre d'une réplication CDC
     <span class="hljs-attr">enableInReplicatingCluster:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Ce paramètre est actualisable ; il peut donc prendre effet sans redémarrage complet.</p>
-<p>Lorsque ce paramètre est activé, un cluster de réplication n’accepte que les importations via <code translate="no">auto_commit=false</code>. Le tableau suivant répertorie les requêtes couramment rejetées :</p>
+<p>Lorsque ce paramètre est activé, un cluster de réplication n’accepte que les importations effectuées via <code translate="no">auto_commit=false</code>. Le tableau suivant répertorie les requêtes couramment rejetées :</p>
 <table>
 <thead>
 <tr><th>Situation</th><th>Message d'erreur</th></tr>

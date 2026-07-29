@@ -121,7 +121,7 @@ summary: >-
 <tr><td><code translate="no">Array</code></td><td>Не поддерживается</td><td>По podpolu «Геометрия» и функции ГИС не поддерживаются в полях StructArray.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Не поддерживается</td><td>По podpolu «Текст» в полях StructArray не поддерживаются.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Не поддерживается</td><td>В полях StructArray не поддерживаются подполя типа «Timestamptz» и выражения, связанные со временем.</td></tr>
-<tr><td>Вложенные « <code translate="no">Array</code> », « <code translate="no">ArrayOfVector</code> », « <code translate="no">Struct</code> » или <code translate="no">ArrayOfStruct</code></td><td>Не поддерживается</td><td>Поля StructArray не поддерживают вложенные подполя типа массива, вектор-массива, Struct или массива структур.</td></tr>
+<tr><td>Вложенные « <code translate="no">Array</code> », « <code translate="no">ArrayOfVector</code> », « <code translate="no">Struct</code> » или <code translate="no">ArrayOfStruct</code></td><td>Не поддерживается</td><td>Поля StructArray не поддерживают вложенные подполя типа массив, вектор-массив, Struct или массив структур.</td></tr>
 </tbody>
 </table>
 <h2 id="Nullable-and-dynamic-schema-limits" class="common-anchor-header">Ограничения, связанные с допускающими нулевые значения и динамическими схемами<button data-href="#Nullable-and-dynamic-schema-limits" class="anchor-icon" translate="no">
@@ -150,7 +150,7 @@ summary: >-
 <tr><td>Область действия нулевого значения</td><td>Значение null распространяется на всё поле StructArray. Например, выражение <code translate="no">chunks=None</code> допустимо только в том случае, если <code translate="no">chunks</code> допускает значение null.</td></tr>
 <tr><td>Частично нулевое значение StructArray</td><td>Если поле StructArray содержит допустимое значение массива, не смешивайте массивы подполей с нулевым значением с массивами подполей с допустимыми значениями в одном и том же значении.</td></tr>
 <tr><td>Динамическое добавление поля StructArray</td><td>Добавление поля StructArray в существующую коллекцию поддерживается только в версиях, в которых реализована поддержка динамических полей StructArray.</td></tr>
-<tr><td>Требование к допускаемости нулевых значений при динамическом добавлении</td><td>Поле StructArray, добавляемое в существующую коллекцию, должно допускать значение null, поскольку у существующих сущностей отсутствует значение для нового поля.</td></tr>
+<tr><td>Требование к допустимости нулевых значений при динамическом добавлении</td><td>Поле StructArray, добавляемое в существующую коллекцию, должно допускать значение null, поскольку у существующих сущностей отсутствует значение для нового поля.</td></tr>
 <tr><td>Сущности после динамического добавления</td><td>Существующие сущности возвращают значение « <code translate="no">null</code> » для добавленного поля StructArray по всем его подполям.</td></tr>
 </tbody>
 </table>
@@ -180,7 +180,7 @@ summary: >-
 <tr><td>Имена подполей</td><td>Внутри каждого объекта Struct используйте имена подполей, такие как <code translate="no">text</code> и <code translate="no">emb</code>, а не пути, такие как <code translate="no">chunks[text]</code>.</td></tr>
 <tr><td>Соответствие схеме</td><td>Каждый элемент Struct должен соответствовать схеме Struct.</td></tr>
 <tr><td>Емкость</td><td>Количество элементов Struct в одной сущности не должно превышать <code translate="no">max_capacity</code>.</td></tr>
-<tr><td>Размеры вектора</td><td>Значения вектора должны соответствовать параметрам « <code translate="no">dim</code> », настроенным для их векторных подполей.</td></tr>
+<tr><td>Размеры вектора</td><td>Значения вектора должны соответствовать параметру « <code translate="no">dim</code> », настроенному для их векторных подполей.</td></tr>
 <tr><td>Дублирование в режиме поиска</td><td>Если вам требуется как поиск по EmbeddingList, так и поиск на уровне элементов, записывайте векторы в два отдельных векторных подполя.</td></tr>
 </tbody>
 </table>

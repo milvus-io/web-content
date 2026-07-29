@@ -94,7 +94,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>위의 필터는 최상위 ` <code translate="no">category</code> ` 필드가 ` <code translate="no">&quot;search&quot;</code>`인 엔티티만 선택합니다. 이 필터는 일치하는 단일 Struct 요소를 식별하지 않습니다.</p>
+<p>위의 필터는 최상위 <code translate="no">category</code> 필드가 <code translate="no">&quot;search&quot;</code> 인 엔티티만 선택합니다. 이 필터는 일치하는 단일 Struct 요소를 식별하지 않습니다.</p>
 <h2 id="Filter-element-level-vector-search" class="common-anchor-header">요소 수준 벡터 검색 필터링<button data-href="#Filter-element-level-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -280,7 +280,7 @@ results = client.hybrid_search(
 <tr><td>벡터 하위 필드</td><td><code translate="no">$[...]</code> 의 스칼라 술어 입력으로는 지원되지 않습니다. 대신 벡터 검색을 통해 벡터 하위 필드를 사용하십시오.</td></tr>
 </tbody>
 </table>
-<p>JSON 경로, 배열 컨테이너 함수, 텍스트 일치 함수, ` <code translate="no">$[...]</code>`에 대한 null 술어, 기하 함수, `Timestamptz` 표현식 및 제네릭 함수 호출과 같이 지원되지 않는 사례에 대해서는 <a href="/docs/ko/struct-array-operators.md">StructArray 연산자를</a> 참조하십시오.</p>
+<p>JSON 경로, 배열 컨테이너 함수, 텍스트 일치 함수, ` <code translate="no">$[...]</code>`에 대한 null 술어, 기하학 함수, `Timestamptz` 표현식 및 제네릭 함수 호출과 같이 지원되지 않는 사례에 대해서는 <a href="/docs/ko/struct-array-operators.md">StructArray 연산자를</a> 참조하십시오.</p>
 <h2 id="Common-mistakes" class="common-anchor-header">흔히 저지르는 실수<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

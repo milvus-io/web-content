@@ -113,7 +113,7 @@ summary: >-
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">emb_list_vector</code> و <code translate="no">emb</code> هما حقلان فرعيان متجهان منفصلان لأنهما يدعمان أوضاع بحث مختلفة. يعامل البحث في EmbeddingList جميع المتجهات في حقل StructArray كقائمة تضمين واحدة ويعرض نتائج على مستوى الكيان باستخدام مقاييس <code translate="no">MAX_SIM*</code>. أما البحث على مستوى العنصر فيبحث في كل عنصر Struct بشكل مستقل ويمكنه عرض إزاحة العنصر المطابق. يخزن هذا المثال نفس قيم المتجهات في كلا الحقلين للتبسيط. في تطبيق الإنتاج، يمكنك تخزين نفس التضمينات في كلا الحقلين الفرعيين عندما يستخدم وضعا البحث نفس تضمين المقطع، أو تخزين تضمينات مختلفة عندما يستخدم وضعا البحث تمثيلات مختلفة.</p>
+<p><code translate="no">emb_list_vector</code> و <code translate="no">emb</code> هما حقلان فرعيان متجهان منفصلان لأنهما يدعمان أوضاع بحث مختلفة. يعامل البحث في EmbeddingList جميع المتجهات في حقل StructArray كقائمة تضمين واحدة ويعرض نتائج على مستوى الكيان باستخدام مقاييس <code translate="no">MAX_SIM*</code>. أما البحث على مستوى العنصر فيبحث في كل عنصر Struct بشكل مستقل ويمكنه عرض إزاحة العنصر المطابق. يخزن هذا المثال نفس قيم المتجهات في كلا الحقلين للتبسيط. في تطبيق الإنتاج، يمكنك تخزين نفس التضمينات في كلا الحقلين الفرعيين عندما يستخدم كلا وضعي البحث نفس تضمين المقطع، أو تخزين تضمينات مختلفة عندما يستخدم وضعي البحث تمثيلات مختلفة.</p>
 <h2 id="Insert-rows" class="common-anchor-header">إدراج الصفوف<button data-href="#Insert-rows" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -231,7 +231,7 @@ result = client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>إذا كان حقل ` <code translate="no">chunks</code> ` قابلاً للقيمة `null`، فيمكن للكيان تعيين حقل ` <code translate="no">chunks</code> ` بأكمله إلى `null`. في لغة Python، استخدم ` <code translate="no">None</code> ` لتمثيل قيمة `null`.</p>
+    </button></h2><p>إذا كان حقل ` <code translate="no">chunks</code> ` قابلاً للقيمة الفارغة، فيمكن للكيان تعيين حقل ` <code translate="no">chunks</code> ` بأكمله إلى القيمة الفارغة. في لغة Python، استخدم ` <code translate="no">None</code> ` لتمثيل القيمة الفارغة.</p>
 <pre><code translate="no" class="language-python">client.insert(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
     data=[

@@ -2,9 +2,9 @@
 id: arabic-analyzer.md
 title: AraboCompatible with Milvus 3.0.0+
 summary: >-
-  L'analizzatore arabo integrato elabora il testo arabo normalizzando le
+  L'analizzatore arabo integrato elabora il testo in arabo normalizzando le
   varianti delle lettere e le cifre, effettuando lo stemming dei termini ed
-  eliminando le parole vuote arabe.
+  eliminando le parole vuote in arabo.
 beta: Milvus 3.0.0+
 ---
 <h1 id="Arabic" class="common-anchor-header">Arabo<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Arabic" class="anchor-icon" translate="no">
@@ -66,7 +66,7 @@ beta: Milvus 3.0.0+
 }
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus applica le parole di stop personalizzate in aggiunta al dizionario <code translate="no">_arabic_</code> integrato.</p>
-<p>L'analizzatore <code translate="no">arabic</code> integrato è equivalente alla seguente configurazione dell'analizzatore personalizzato:</p>
+<p>L'analizzatore " <code translate="no">arabic</code> " integrato è equivalente alla seguente configurazione dell'analizzatore personalizzato:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [

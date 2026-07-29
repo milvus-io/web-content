@@ -23,7 +23,7 @@ beta: Milvus 3.0.x
       </svg>
     </button></h1><p>As fontes de dados externas evoluem frequentemente após a criação de uma coleção externa. Por exemplo, uma tabela do Lakehouse que já armazena embeddings pode vir a incluir posteriormente um novo campo escalar, como uma pontuação, categoria ou carimbo de data/hora, que se pretenda devolver nos resultados da consulta ou utilizar em filtros.</p>
 <p>Em vez de recriar a coleção externa ou copiar os dados de origem para o Milvus, adicione um campo do Milvus que corresponda ao campo existente na fonte de dados externa. Após adicionar o campo, atualize a coleção externa para que o novo campo possa ser utilizado em consultas e pesquisas.</p>
-<h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
+<h2 id="Limits" class="common-anchor-header">Limitações<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -65,7 +65,7 @@ beta: Milvus 3.0.0+
 <li><strong>Nur Tokenizer</strong>: Wandelt Token nicht in Kleinbuchstaben um, normalisiert keine Unicode-Ziffern und entfernt keine Stoppwörter. Fügen Sie Filter hinzu oder verwenden Sie den integrierten <a href="/docs/de/thai-analyzer.md"><code translate="no">thai</code></a> Analysator für diese Schritte.</li>
 <li><strong>Positionssemantik</strong>: Verwendet zeichenbasierte Token-Positionen, die übersprungene Leerzeichen und Satzzeichen einbeziehen, wodurch das Verhalten beim Phrasen- und Proximity-Abgleich mit anderen nicht-lateinischen Tokenizern konsistent bleibt.</li>
 </ul>
-<p>Nachdem Sie „ <code translate="no">analyzer_params</code> “ definiert haben, können Sie den Analysator bei der Definition eines Sammlungsschemas auf ein Feld vom Typ „ <code translate="no">VARCHAR</code> “ anwenden. Weitere Informationen finden Sie unter <a href="/docs/de/analyzer-overview.md#Example-use">„Anwendungsbeispiel</a>“.</p>
+<p>Nachdem Sie „ <code translate="no">analyzer_params</code> “ definiert haben, können Sie den Analysator bei der Definition eines Sammlungsschemas auf ein „ <code translate="no">VARCHAR</code> “-Feld anwenden. Weitere Informationen finden Sie unter <a href="/docs/de/analyzer-overview.md#Example-use">„Anwendungsbeispiel</a>“.</p>
 <h2 id="Examples" class="common-anchor-header">Beispiele<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

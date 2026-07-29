@@ -3,7 +3,7 @@ id: hugging-face-ranker.md
 title: Hugging Face RankerCompatible with Milvus v2.6.20+
 summary: >-
   Cette rubrique explique comment réorganiser le classement des résultats de
-  recherche Milvus à l'aide des modèles de similarité entre phrases hébergés par
+  recherche Milvus à l'aide des modèles de similarité de phrases hébergés par
   Hugging Face.
 beta: Milvus v2.6.20+
 ---
@@ -68,7 +68,7 @@ beta: Milvus v2.6.20+
 <ol>
 <li><strong>Récupération des entités candidates.</strong> Milvus effectue une recherche dans le champ vectoriel configuré et collecte les entités candidates.</li>
 <li><strong>Préparation du texte pour le reclassement.</strong> La fonction lit le texte de la requête à partir de <code translate="no">params.queries</code> et le texte des entités candidates à partir du champ <code translate="no">VARCHAR</code> spécifié dans <code translate="no">input_field_names</code>.</li>
-<li><strong>Demande des scores de similarité.</strong> Milvus envoie la requête via <code translate="no">source_sentence</code> et les textes candidats via <code translate="no">sentences</code>, en passant par <code translate="no">hf-inference</code>, vers le pipeline Hugging Face <code translate="no">sentence-similarity</code>.</li>
+<li><strong>Demande des scores de similarité.</strong> Milvus envoie la requête via <code translate="no">source_sentence</code> et les textes candidats via <code translate="no">sentences</code>, via <code translate="no">hf-inference</code>, au pipeline Hugging Face <code translate="no">sentence-similarity</code>.</li>
 <li><strong>Réclassement des candidats.</strong> Hugging Face renvoie un score par candidat. Milvus classe les candidats du score le plus élevé au plus bas et renvoie les résultats reclassés.</li>
 </ol>
 <p><strong>Comment les scores de similarité sont-ils calculés ?</strong></p>
@@ -82,7 +82,7 @@ beta: Milvus v2.6.20+
 <ol>
 <li><strong>Préparation des entrées textuelles.</strong> Le Ranker lit le texte de la requête à partir de <code translate="no">params.queries</code> et le texte des candidats à partir du champ <code translate="no">VARCHAR</code> configuré.</li>
 <li><strong>Création de représentations distinctes pour le modèle.</strong> Milvus envoie la requête sous la forme <code translate="no">source_sentence</code> et les textes candidats sous la forme <code translate="no">sentences</code>. Le modèle encode en interne la requête et chaque candidat séparément.</li>
-<li><strong>Comparaison et renvoi des scores.</strong> Le modèle compare la représentation de la requête à celle de chaque candidat et renvoie un score de similarité par candidat.</li>
+<li><strong>Comparaison et retour des scores.</strong> Le modèle compare la représentation de la requête à celle de chaque candidat et renvoie un score de similarité par candidat.</li>
 </ol>
 <p>Les embeddings ou représentations utilisés par le modèle Hugging Face constituent une étape intermédiaire du traitement du modèle. Hugging Face renvoie des scores, et non des vecteurs. La récupération initiale des vecteurs et le reclassement par le modèle utilisent donc des représentations distinctes et peuvent faire appel à des modèles différents.</p>
 <h2 id="Before-you-start" class="common-anchor-header">Avant de commencer<button data-href="#Before-you-start" class="anchor-icon" translate="no">
@@ -106,7 +106,7 @@ beta: Milvus v2.6.20+
 <li>PyMilvus 2.6.16 ou une version ultérieure.</li>
 <li>Un jeton d’accès utilisateur Hugging Face permettant d’appeler les fournisseurs d’inférence.</li>
 <li>Un modèle actuellement hébergé par <code translate="no">hf-inference</code> pour la <a href="https://huggingface.co/tasks/sentence-similarity"><code translate="no">sentence-similarity</code></a> tâche.</li>
-<li>Une collection stockant les textes candidats dans un champ <code translate="no">VARCHAR</code> non nul.</li>
+<li>Une collection stockant le texte candidat dans un champ <code translate="no">VARCHAR</code> non nul.</li>
 </ul>
 <div class="alert note">
 <p>Milvus ne contrôle pas si un modèle Hugging Face reste disponible via <code translate="no">hf-inference</code>, ni si le modèle répond à vos exigences en matière de stabilité, de latence et de qualité de sortie. Vérifiez le modèle sur Hugging Face et évaluez-le pour votre charge de travail avant de l’utiliser en production.</p>
@@ -146,7 +146,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Définissez le jeton dans la section de niveau supérieur « <code translate="no">credential</code> », puis pointez le fournisseur de classement Hugging Face vers le libellé des identifiants :</p>
+    </button></h3><p>Définissez le jeton dans la section de niveau supérieur « <code translate="no">credential</code> », puis indiquez au fournisseur de classement Hugging Face le libellé des identifiants :</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">credential:</span>
   <span class="hljs-attr">huggingface_apikey:</span>
@@ -160,7 +160,7 @@ beta: Milvus v2.6.20+
           <span class="hljs-attr">credential:</span> <span class="hljs-string">huggingface_apikey</span>
           <span class="hljs-comment"># url: https://router.huggingface.co</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Un paramètre « <code translate="no">credential</code> » au niveau de la fonction peut remplacer le libellé au niveau du fournisseur. Sa valeur doit être un libellé d’identifiant défini dans <code translate="no">milvus.yaml</code>, et non le jeton lui-même.</p>
+<p>Un paramètre « <code translate="no">credential</code> » au niveau de la fonction peut remplacer le libellé au niveau du fournisseur. Sa valeur doit être un libellé d’identifiants défini dans <code translate="no">milvus.yaml</code>, et non le jeton lui-même.</p>
 <h3 id="Option-2-Environment-variable" class="common-anchor-header">Option 2 : variable d’environnement<button data-href="#Option-2-Environment-variable" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -305,7 +305,7 @@ client.insert(
 <tr><td><code translate="no">provider</code></td><td>Oui</td><td>Le fournisseur de modèle. Définissez cette valeur sur <code translate="no">huggingface</code>.</td></tr>
 <tr><td><code translate="no">model_name</code></td><td>Oui</td><td>L'ID du modèle Hugging Face pour un modèle fourni via <code translate="no">hf-inference</code> pour la tâche « <code translate="no">sentence-similarity</code> ».</td></tr>
 <tr><td><code translate="no">queries</code></td><td>Oui</td><td>Chaînes de requête utilisées pour le reclassement. Indiquez exactement une chaîne par requête de recherche, même lorsque la récupération initiale utilise des vecteurs de requête.</td></tr>
-<tr><td><code translate="no">hf_provider</code></td><td>Non</td><td>La route du fournisseur d'inférence Hugging Face. La valeur par défaut et la seule prise en charge dans Milvus 2.6.20 est <code translate="no">hf-inference</code>.</td></tr>
+<tr><td><code translate="no">hf_provider</code></td><td>Non</td><td>La route du fournisseur d’inférence Hugging Face. La valeur par défaut et la seule prise en charge dans Milvus 2.6.20 est <code translate="no">hf-inference</code>.</td></tr>
 <tr><td><code translate="no">credential</code></td><td>Non</td><td>L'étiquette d'un identifiant défini dans la section de niveau supérieur <code translate="no">credential</code> de <code translate="no">milvus.yaml</code>. Cette valeur n'est pas le jeton lui-même.</td></tr>
 <tr><td><code translate="no">max_client_batch_size</code></td><td>Non</td><td>Le nombre maximal de textes candidats envoyés dans une seule requête Hugging Face. La valeur par défaut est <code translate="no">32</code>, et cette valeur doit être supérieure à <code translate="no">0</code>.</td></tr>
 </tbody>
@@ -419,7 +419,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Vérifiez que le libellé « Function credential » existe dans ` <code translate="no">milvus.yaml</code>`, que le libellé au niveau du fournisseur est valide ou que ` <code translate="no">MILVUS_HUGGINGFACE_API_KEY</code> ` est présent dans l’environnement de service Milvus.</p>
+    </button></h3><p>Vérifiez que le libellé « Function credential » existe dans ` <code translate="no">milvus.yaml</code>`, que le libellé au niveau du fournisseur est valide, ou que ` <code translate="no">MILVUS_HUGGINGFACE_API_KEY</code> ` est présent dans l’environnement de service Milvus.</p>
 <h2 id="Next-steps" class="common-anchor-header">Étapes suivantes<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -438,5 +438,5 @@ results = client.search(
     </button></h2><ul>
 <li>Pour connaître le comportement et les limites du Model Ranker partagé, consultez <a href="/docs/fr/model-ranker-overview.md">la présentation du Model Ranker</a>.</li>
 <li>Pour générer des représentations vectorielles via les fournisseurs d’inférence Hugging Face hébergés, consultez la section <a href="/docs/fr/hugging-face.md">Hugging Face</a>.</li>
-<li>Pour appliquer le classificateur à la recherche hybride, consultez la section « <a href="/docs/fr/multi-vector-search.md">Recherche hybride multivectorielle</a> ».</li>
+<li>Pour appliquer le classificateur à la recherche hybride, consultez la section « <a href="/docs/fr/multi-vector-search.md">Recherche hybride multi-vecteurs</a> ».</li>
 </ul>
