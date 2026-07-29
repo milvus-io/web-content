@@ -235,15 +235,21 @@
             "children": []
           },
           {
+            "label": "Storage V3",
+            "id": "storage-v3.md",
+            "order": 4,
+            "children": []
+          },
+          {
             "label": "Woodpecker",
             "id": "woodpecker_architecture.md",
-            "order": 4,
+            "order": 5,
             "children": []
           },
           {
             "label": "Knowhere",
             "id": "knowhere.md",
-            "order": 5,
+            "order": 6,
             "children": []
           }
         ]

@@ -256,6 +256,13 @@ To deal with the error prompted during Milvus startup that reads "Read config fa
 ![List Milvus config files](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-read-config-fails-02.png)
 
 ​
+<div class="alert note">
+
+Storage V3 is disabled by default. Enable it before using features that depend on it. For requirements and compatibility considerations, see [Storage V3](storage-v3.md).
+
+</div>
+
+
 ## What's next
 
 Having installed Milvus in Docker, you can:
@@ -281,4 +288,3 @@ Having installed Milvus in Docker, you can:
 - Explore [Birdwatcher](birdwatcher_overview.md), an open-source tool for debugging Milvus and dynamic configuration updates.
 - Explore [Attu](https://github.com/zilliztech/attu), an open-source GUI tool for intuitive Milvus management.
 - [Monitor Milvus with Prometheus](monitor.md).
-

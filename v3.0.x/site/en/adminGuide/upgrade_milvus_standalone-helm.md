@@ -89,3 +89,10 @@ kubectl get pods --namespace <namespace> \
 ```
 
 Verify that all required workloads are ready, Milvus uses `v3.0-beta`, and your existing collections remain queryable and searchable. Complete these checks before you enable any v3.0-beta-specific feature.
+
+<div class="alert note">
+
+Upgrading to Milvus 3.0 does not enable Storage V3. After you verify the upgrade, review [Storage V3](storage-v3.md) before enabling features that depend on it. Once Milvus writes Storage V3 data, downgrading to an older Milvus version that cannot read Storage V3 is not supported.
+
+</div>
+

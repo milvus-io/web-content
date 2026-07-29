@@ -13,6 +13,15 @@ Milvus provides the `TEXT` scalar field type for storing long source text direct
 
 To define a `TEXT` field, set `datatype` to `DataType.TEXT`.
 
+<div class="alert note">
+
+This feature requires Storage V3. For enablement instructions and compatibility considerations, see [Storage V3](storage-v3.md).
+
+</div>
+
+
+Milvus rejects a collection schema that contains a `TEXT` field while Storage V3 is disabled.
+
 ```python
 schema.add_field(
     field_name="content",

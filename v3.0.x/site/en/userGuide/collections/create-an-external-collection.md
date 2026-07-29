@@ -9,6 +9,13 @@ beta: Milvus 3.0.x
 
 An external collection is a type of data collection in Milvus that accesses data from external storage systems or database tables such as AWS S3 and Iceberg without copying it into Milvus. It acts as a query layer over data lakes while maintaining compatibility with Milvus query interfaces.
 
+<div class="alert note">
+
+This feature requires Storage V3. For enablement instructions and compatibility considerations, see [Storage V3](storage-v3.md).
+
+</div>
+
+
 ## Overview
 
 In a typical AI data pipeline, users may already have stored their data in Parquet or other formats on their storage system, such as AWS S3. To make Milvus consume this externally stored data, users usually need to import it into Milvus' own storage using Extract-Transform-Load (ETL) pipelines.
