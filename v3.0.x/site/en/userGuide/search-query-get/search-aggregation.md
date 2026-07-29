@@ -7,29 +7,29 @@ beta: Milvus 3.0.x
 
 # Search Aggregation
 
-When a shopper searches for "black running shoes for daily training," approximate nearest neighbor (ANN) search ranks products by vector similarity and returns a flat Top-K list. The results can be relevant but repetitive: in the example below, four of the first six results are Nike products, while Adidas and Puma appear once each.
+When a shopper searches for "black running shoes for daily training," approximate nearest neighbor (ANN) search ranks products by vector similarity and returns a flat Top-K list. The results can be relevant but repetitive: in the example below, four of the first six results are Brand A products, while Brand B and Brand C appear once each.
 
-A flat list cannot directly provide brand-level diversity or statistics. An application may need up to two representative products from each brand, the number of retrieved products for each brand, or the average price for each brand.
+A flat list cannot directly provide a bucket-oriented summary. An application may need to compare brands by retained candidate count or average price, inspect a small number of representative products from each brand, or organize the results into multiple bucket levels.
 
-Search Aggregation organizes the retrieved entities into buckets based on a selected scalar field. In this example, each brand becomes a separate bucket. Milvus can then calculate statistics independently for each bucket and return representative products from each bucket, making the search results easier to compare and more diverse.
+Search Aggregation organizes retained ANN candidates into buckets based on selected scalar fields. In this example, each brand becomes a separate bucket. Milvus can calculate statistics for each bucket, order the buckets, and attach representative products. The application consumes this bucket-first response through `result.agg_buckets`.
 
 ![A flat running-shoe search result becomes a set of comparable brand buckets](../../../../assets/search-aggregation-overview.png)
 
-Search Aggregation summarizes the retrieved candidates rather than every entity in the collection. The bucket counts and metrics are therefore approximate and remain tied to vector relevance.
+Search Aggregation does not run an exact full-collection aggregation. Bucket existence, counts, metrics, ordering, and representative hits depend on the candidates retained by the ANN and grouping stages.
 
 ## How it works
 
 ![ANN candidates grouped by bucket keys and returned with counts, metrics, and representative hits](../../../../assets/search-aggregation-bucketing.png)
 
-1. **Retrieve candidates.** Milvus runs ANN search to create a retrieval pool of entities that are closest to the query vector. Search Aggregation operates on this pool rather than on every entity in the collection, so the pool determines which entities can contribute to the buckets.
+1. **Retrieve candidates.** Milvus runs ANN search to find entities closest to the query vector. The grouping stage then retains a bounded number of candidates for each full composite key. This per-key candidate budget is the largest `TopHits.size` anywhere in the aggregation tree, or `1` when no level configures `top_hits`.
 
-2. **Build buckets.** `SearchAggregation.fields` defines the bucket key. Each unique combination of field values creates a separate key. In the figure, `fields=["brand"]` creates `(Nike)`, `(Adidas)`, and `(Puma)` bucket keys. All retrieved entities with the same key belong to the same bucket and contribute to its `count`. `SearchAggregation.size` limits how many buckets Milvus returns; it does not limit how many entities belong to each bucket.
+2. **Build buckets.** `SearchAggregation.fields` defines the bucket key. Each unique combination of field values creates a separate key. In the figure, `fields=["brand"]` creates `(Brand A)`, `(Brand B)`, and `(Brand C)` bucket keys. Retained candidates with the same key belong to the same bucket and contribute to its `count`. `SearchAggregation.size` limits how many buckets Milvus returns.
 
-3. **Calculate and return results.** Each returned bucket contains its key and retrieval-pool entity count. Milvus can also calculate configured metrics, order the buckets, and return representative entities. `TopHits.size` controls how many representative entities are returned from each bucket. Each bucket in `result.agg_buckets` contains its key, count, metrics, hits, and optional child buckets.
+3. **Calculate and return results.** Each returned bucket contains its key and retained-candidate count. Milvus can also calculate configured metrics, order the buckets, return representative entities, and build child buckets. Each `AggregationBucket` in `result.agg_buckets` exposes `key`, `count`, `metrics`, `hits`, and `sub_groups`. When Search Aggregation is enabled, the ordinary search-hit list is empty.
 
-In the diagram, the four entity IDs inside the Nike bucket produce `count: 4`. The three brand cards illustrate three returned buckets, while the two product cards in the completed Nike bucket illustrate two representative hits.
+In the diagram, `TopHits.size=4` supplies a per-key candidate budget of four, so the four retained Brand A candidates produce `count: 4`. The completed Brand A card shows only two of the four returned representative hits to keep the figure compact.
 
-With `sub_aggregation`, Milvus repeats steps 2 and 3 inside each parent bucket. Because every stage operates on the ANN retrieval pool, changes in search recall can change bucket counts, metrics, ordering, hits, and nested results.
+With `sub_aggregation`, Milvus repeats steps 2 and 3 inside each parent bucket. Changes in ANN recall or the per-key candidate budget can change bucket counts, metrics, ordering, hits, and nested results.
 
 ## Limits
 
@@ -37,9 +37,15 @@ Before using Search Aggregation, note the following limits:
 
 - **Nested aggregations:** A request can contain one root `SearchAggregation` and up to three nested `sub_aggregation` levels, for a maximum of four levels in total.
 
-- **Fields used to create bucket keys:** `SearchAggregation.fields` does not support `FLOAT`, `DOUBLE`, vector, `JSON`, or dynamic fields.
+- **Fields used to create bucket keys:** `SearchAggregation.fields` supports Boolean, integer, `VARCHAR`, and `TIMESTAMPTZ` fields. It does not support `FLOAT`, `DOUBLE`, `ARRAY`, `JSON`, `GEOMETRY`, `TEXT`, vector, or dynamic fields.
 
-- **Metric and sorting fields:** `metrics` and `TopHits.sort` do not support `JSON` or dynamic fields.
+- **Metric fields:** `count` accepts `"*"` or any non-`JSON`, non-dynamic field and skips `NULL` values when a field is specified. `sum` and `avg` accept integer and floating-point fields. `min` and `max` additionally accept string and `TIMESTAMPTZ` fields.
+
+- **Top Hits sorting fields:** `TopHits.sort` accepts comparable Boolean, integer, floating-point, string, and `TIMESTAMPTZ` fields, plus `_score`. It does not support `ARRAY`, `JSON`, `GEOMETRY`, vector, or dynamic fields.
+
+- **Candidate budget:** The largest `TopHits.size` anywhere in the aggregation tree is also the number of candidates retained per full composite key. If no level configures `top_hits`, Milvus retains one candidate per key. Bucket `count` and metrics are calculated from these retained candidates, so changing `TopHits.size` can change them.
+
+- **Nullable bucket fields:** A `NULL` value forms its own bucket key. To exclude the null bucket, add a filter such as `brand is not null` to the search request.
 
 - **Repeated fields:** The same field cannot appear in more than one `SearchAggregation.fields` list. For example, if the root aggregation uses `fields=["category"]`, a nested `sub_aggregation` cannot also use `fields=["category"]`.
 
@@ -63,7 +69,7 @@ Choose an example based on what you want to accomplish:
 | [Show representative results from each bucket](#Show-representative-results-from-each-bucket) | Return a limited number of entities from each bucket and sort those entities independently by scalar fields or vector score. | `top_hits`, `TopHits.size`, `TopHits.sort` |
 | [Group results at multiple levels](#Group-results-at-multiple-levels) | Organize results into parent and child bucket levels to analyze multiple dimensions in sequence. | `sub_aggregation` |
 
-The examples below use a product collection with brand, category, color, price, and rating fields. Expand the following section to create the collection and define the shared search variables.
+The examples below use a product collection with brand, category, color, price, and rating fields. All brand names, product names, prices, ratings, and search results are synthetic example data. Expand the following section to create the collection and define the shared search variables.
 
 <details>
 
@@ -114,8 +120,8 @@ client.insert(
         {
             "id": 1,
             "embedding": [0.12, 0.42, 0.18, 0.66, 0.31],
-            "name": "Nike Air Zoom Runner",
-            "brand": "Nike",
+            "name": "Runner A1",
+            "brand": "Brand A",
             "category": "running_shoes",
             "color": "black",
             "price": 129.99,
@@ -125,8 +131,8 @@ client.insert(
         {
             "id": 2,
             "embedding": [0.10, 0.39, 0.20, 0.61, 0.29],
-            "name": "Nike Pegasus Trail",
-            "brand": "Nike",
+            "name": "Trail A2",
+            "brand": "Brand A",
             "category": "running_shoes",
             "color": "blue",
             "price": 139.99,
@@ -136,8 +142,8 @@ client.insert(
         {
             "id": 3,
             "embedding": [0.14, 0.44, 0.19, 0.68, 0.33],
-            "name": "Adidas Ultraboost Light",
-            "brand": "Adidas",
+            "name": "Runner B1",
+            "brand": "Brand B",
             "category": "running_shoes",
             "color": "white",
             "price": 159.99,
@@ -147,8 +153,8 @@ client.insert(
         {
             "id": 4,
             "embedding": [0.16, 0.41, 0.22, 0.62, 0.30],
-            "name": "Puma Velocity Nitro",
-            "brand": "Puma",
+            "name": "Runner C1",
+            "brand": "Brand C",
             "category": "running_shoes",
             "color": "red",
             "price": 119.99,
@@ -158,8 +164,8 @@ client.insert(
         {
             "id": 5,
             "embedding": [0.48, 0.20, 0.59, 0.15, 0.71],
-            "name": "Nike Windrunner Jacket",
-            "brand": "Nike",
+            "name": "Jacket A1",
+            "brand": "Brand A",
             "category": "jackets",
             "color": "black",
             "price": 99.99,
@@ -169,8 +175,8 @@ client.insert(
         {
             "id": 6,
             "embedding": [0.45, 0.18, 0.55, 0.17, 0.69],
-            "name": "Adidas Own The Run Jacket",
-            "brand": "Adidas",
+            "name": "Jacket B1",
+            "brand": "Brand B",
             "category": "jackets",
             "color": "blue",
             "price": 89.99,
@@ -180,8 +186,8 @@ client.insert(
         {
             "id": 7,
             "embedding": [0.09, 0.38, 0.17, 0.60, 0.27],
-            "name": "Nike Vomero 17",
-            "brand": "Nike",
+            "name": "Runner A3",
+            "brand": "Brand A",
             "category": "running_shoes",
             "color": "black",
             "price": 159.99,
@@ -191,8 +197,8 @@ client.insert(
         {
             "id": 8,
             "embedding": [0.13, 0.43, 0.21, 0.65, 0.32],
-            "name": "Nike InfinityRN 4",
-            "brand": "Nike",
+            "name": "Runner A4",
+            "brand": "Brand A",
             "category": "running_shoes",
             "color": "black",
             "price": 149.99,
@@ -268,11 +274,13 @@ result = client.search(
 )
 ```
 
+When `search_aggregation` is set, PyMilvus returns no ordinary entity hits in `result[0]`. Read the bucket response from `result.agg_buckets[0]` instead. The `output_fields` parameter controls which scalar fields appear in each returned `AggregationHit.fields` mapping; Milvus can still use metric-source and sort fields that are not listed in `output_fields`.
+
 <details>
 
 <summary>View the example bucket output</summary>
 
-The following output was captured from the request above and serialized as JSON for readability. PyMilvus returns `AggregationBucket` objects rather than JSON.
+The following output was captured from the request above and serialized as JSON for readability. PyMilvus returns `AggregationBucket` objects rather than JSON. The `key` value is always an ordered list of key components, even when `fields` contains only one field. This preserves field order for composite keys.
 
 ```json
 [
@@ -281,7 +289,7 @@ The following output was captured from the request above and serialized as JSON 
       {
         "field_id": 103,
         "field_name": "brand",
-        "value": "Adidas"
+        "value": "Brand B"
       }
     ],
     "count": 1,
@@ -298,7 +306,7 @@ The following output was captured from the request above and serialized as JSON 
       {
         "field_id": 103,
         "field_name": "brand",
-        "value": "Nike"
+        "value": "Brand A"
       }
     ],
     "count": 1,
@@ -315,7 +323,7 @@ The following output was captured from the request above and serialized as JSON 
       {
         "field_id": 103,
         "field_name": "brand",
-        "value": "Puma"
+        "value": "Brand C"
       }
     ],
     "count": 1,
@@ -332,7 +340,7 @@ The following output was captured from the request above and serialized as JSON 
 
 </details>
 
-For the single query vector in this guide, read the returned top-level buckets from `result.agg_buckets[0]`. Each bucket exposes its `key`, retrieval-pool entity `count`, calculated `metrics`, representative `hits`, and nested buckets in `sub_groups`.
+For the single query vector in this guide, read the returned top-level buckets from `result.agg_buckets[0]`. Each bucket exposes its ordered key components, retained-candidate `count`, calculated `metrics`, representative `hits`, and nested buckets in `sub_groups`.
 
 Read the configuration as follows:
 
@@ -345,7 +353,7 @@ Read the configuration as follows:
 
 Milvus ignores `limit` when `search_aggregation` is set. Use the root `SearchAggregation.size` value to control the number of top-level buckets.
 
-With these settings, Milvus returns the Adidas, Nike, and Puma buckets in descending `avg_price` order. The `_key` criterion applies only when buckets have the same average price. Because this configuration does not define `top_hits`, every bucket's `hits` list is empty.
+With these settings, Milvus returns the Brand B, Brand A, and Brand C buckets in descending `avg_price` order. The `_key` criterion applies only when buckets have the same average price. Because this configuration does not define `top_hits`, every bucket's `hits` list is empty and the per-key candidate budget is `1`. The displayed counts and metrics therefore describe one retained candidate per brand. Configure `top_hits` with a larger `TopHits.size` when the aggregation needs a wider per-key metric window.
 
 <details>
 
@@ -355,19 +363,21 @@ Each `SearchAggregation.metrics` entry maps a user-defined alias to `{operation:
 
 | Source | Supported operations | Behavior |
 |---|---|---|
-| A field name | `count`, `sum`, `avg`, `min`, `max` | `count` counts non-null field values. The other operations calculate over supported values and skip `NULL`. |
-| `"*"` | `count` | Counts every retrieval-pool entity assigned to the bucket. The result matches `bucket.count`. |
-| `_score` | `sum`, `avg`, `min`, `max` | Aggregates the ANN similarity or distance values of entities in the bucket. |
+| Any non-`JSON`, non-dynamic field | `count` | Counts retained candidates whose source field is not `NULL`. |
+| Integer or floating-point field | `sum`, `avg`, `min`, `max` | Calculates over non-null retained values. |
+| String or `TIMESTAMPTZ` field | `min`, `max` | Selects the minimum or maximum non-null retained value. |
+| `"*"` | `count` | Counts every retained candidate in the bucket. The result matches `bucket.count`. |
+| `_score` | `sum`, `avg`, `min`, `max` | Aggregates ANN similarity or distance values for retained candidates. |
 
 `SearchAggregation.order` accepts the following keys:
 
 | Order key | Meaning |
 |---|---|
 | A metric alias | Sorts by a value calculated in `metrics` at the same aggregation level, such as `avg_price`. |
-| `_count` | Sorts by the number of retrieval-pool entities in each bucket. |
+| `_count` | Sorts by the number of retained candidates in each bucket. |
 | `_key` | Sorts by the bucket key rather than a collection field named `_key`. |
 
-Each `order` entry maps a key to `"asc"` or `"desc"`. Milvus evaluates multiple entries from first to last. If you omit `order`, Milvus keeps the bucket discovery order from the retrieval pool.
+Each `order` entry maps a key to `"asc"` or `"desc"`. Milvus evaluates multiple entries from first to last. If you omit `order`, Milvus keeps the bucket discovery order from the retained candidate set.
 
 To sort buckets by vector match quality, first calculate a bucket-level metric from `_score`, and then use the metric alias in `order`. You cannot use `_score` directly as a bucket-order key because each bucket can contain multiple entity scores. For example, with `COSINE` or `IP`:
 
@@ -400,7 +410,7 @@ aggregation = SearchAggregation(
 )
 ```
 
-This configuration can produce keys such as `(Nike, black)`, `(Nike, blue)`, and `(Adidas, white)`. Two entities share a bucket only when both values match. Milvus preserves the list order, so `brand` is the first key component and `color` is the second. When `_key` is used in `order`, Milvus compares composite key components in the same order. Pass multiple strings in one flat list; nested lists are not supported.
+This configuration can produce keys such as `(Brand A, black)`, `(Brand A, blue)`, and `(Brand B, white)`. Two entities share a bucket only when both values match. Milvus preserves the list order, so `brand` is the first key component and `color` is the second. When `_key` is used in `order`, Milvus compares composite key components in the same order. Pass multiple strings in one flat list; nested lists are not supported.
 
 `size=6` is the maximum number of composite buckets returned at this aggregation level. The example data contains five distinct brand-color combinations, so all five can be returned. In the [returned-entry limit](#Limits), this request contributes `1 query vector × 6 buckets × 1 = 6` configured result entries.
 
@@ -439,7 +449,7 @@ aggregation = SearchAggregation(
 
 <summary>View a bucket with representative hits</summary>
 
-The following Nike bucket was captured from the request above and serialized as JSON for readability.
+The following Brand A bucket was captured from the request above and serialized as JSON for readability.
 
 ```json
 {
@@ -447,7 +457,7 @@ The following Nike bucket was captured from the request above and serialized as 
     {
       "field_id": 103,
       "field_name": "brand",
-      "value": "Nike"
+      "value": "Brand A"
     }
   ],
   "count": 2,
@@ -455,20 +465,26 @@ The following Nike bucket was captured from the request above and serialized as 
   "hits": [
     {
       "pk": 1,
-      "score": 0.9997663497924805,
+      "score": 0.99976646900177,
       "fields": {
-        "brand": "Nike",
-        "name": "Nike Air Zoom Runner",
+        "brand": "Brand A",
+        "category": "running_shoes",
+        "color": "black",
+        "in_stock": true,
+        "name": "Runner A1",
         "price": 129.99,
         "rating": 4.7
       }
     },
     {
       "pk": 2,
-      "score": 0.9997047781944275,
+      "score": 0.9997048377990723,
       "fields": {
-        "brand": "Nike",
-        "name": "Nike Pegasus Trail",
+        "brand": "Brand A",
+        "category": "running_shoes",
+        "color": "blue",
+        "in_stock": true,
+        "name": "Trail A2",
         "price": 139.99,
         "rating": 4.6
       }
@@ -482,15 +498,15 @@ The following Nike bucket was captured from the request above and serialized as 
 
 | Parameter | Purpose |
 |---|---|
-| `top_hits` | Optional. Configures representative entities for this aggregation level. If omitted, Milvus still returns the bucket key, count, metrics, and child buckets, but `bucket.hits` is empty. |
-| `TopHits.size` | Returns up to two representative entities from each selected bucket. |
+| `top_hits` | Optional. Configures representative entities for this aggregation level. If omitted, `bucket.hits` is empty and the per-key candidate budget defaults to one. |
+| `TopHits.size` | Returns up to two representative entities from each selected bucket and sets the per-key candidate budget to two for the entire aggregation tree. |
 | `TopHits.sort` | Orders entities inside each bucket using the listed criteria. |
 
-Set `top_hits` only when the application needs representative entities from each bucket.
+Configure `top_hits` when the application needs representative entities or when counts and metrics need a wider per-key candidate window. A larger `TopHits.size` increases both the candidate budget and the maximum returned-entry calculation in [Limits](#Limits).
 
-`SearchAggregation.order` sorts buckets, while `TopHits.sort` sorts entities inside each bucket. `TopHits.sort` accepts supported scalar field names and the built-in `_score` field, which represents the ANN similarity or distance. Milvus evaluates the `sort` entries from first to last. In this example, it orders products by `rating` from highest to lowest and uses `_score` only when two ratings are equal. Because the setup uses `COSINE`, descending `_score` places the more similar product first.
+`SearchAggregation.order` sorts buckets, while `TopHits.sort` sorts the retained entities inside each bucket. The sort order does not change which candidates were retained for `count` and metrics. `TopHits.sort` accepts supported comparable scalar field names and the built-in `_score` field, which represents the ANN similarity or distance. Milvus evaluates the `sort` entries from first to last. In this example, it orders products by `rating` from highest to lowest and uses `_score` only when two ratings are equal. Because the setup uses `COSINE`, descending `_score` places the more similar product first.
 
-The fields used by `TopHits.sort` do not have to appear in `output_fields`. However, only fields in `output_fields` are included in each returned hit's `fields` mapping.
+The fields used by `metrics` or `TopHits.sort` do not have to appear in `output_fields`. Milvus fetches those fields internally, but only fields explicitly listed in `output_fields` are included in each returned hit's `fields` mapping. Primary keys and vector scores remain available through `AggregationHit.pk` and `AggregationHit.score`.
 
 Each returned `AggregationHit` exposes its primary key in `pk`, vector score in `score`, and requested output fields in `fields`.
 
@@ -500,19 +516,19 @@ Use nested aggregation when you need one level of buckets inside another. In thi
 
 The child aggregation receives only the entities assigned to its parent bucket. `fields` controls the bucket key at each aggregation level, while `sub_aggregation` creates the parent-child hierarchy.
 
-The configuration below creates a category bucket with the key `(running_shoes)`. Within that parent bucket, the child aggregation creates separate brand buckets with keys such as `(Nike)`, `(Adidas)`, and `(Puma)`.
+The configuration below creates a category bucket with the key `(running_shoes)`. Within that parent bucket, the child aggregation creates separate brand buckets with keys such as `(Brand A)`, `(Brand B)`, and `(Brand C)`.
 
 ```text
 Parent bucket key:
 (running_shoes)
 
 Child bucket keys:
-├── (Nike)
-├── (Adidas)
-└── (Puma)
+├── (Brand A)
+├── (Brand B)
+└── (Brand C)
 ```
 
-Each level can independently use multiple fields. For example, using `fields=["brand", "color"]` in the child aggregation would create composite child keys such as `(Nike, black)`.
+Each level can independently use multiple fields. For example, using `fields=["brand", "color"]` in the child aggregation would create composite child keys such as `(Brand A, black)`.
 
 The following configuration implements this hierarchy:
 
@@ -548,7 +564,7 @@ aggregation = SearchAggregation(
 
 <summary>View a nested bucket result</summary>
 
-The following serialized excerpt shows the `running_shoes` parent bucket and its Adidas child bucket. The Nike and Puma child buckets are omitted for brevity.
+The following serialized excerpt shows the `running_shoes` parent bucket and its Brand B child bucket. The Brand A and Brand C child buckets are omitted for brevity.
 
 ```json
 {
@@ -571,7 +587,7 @@ The following serialized excerpt shows the `running_shoes` parent bucket and its
         {
           "field_id": 103,
           "field_name": "brand",
-          "value": "Adidas"
+          "value": "Brand B"
         }
       ],
       "count": 1,
@@ -582,13 +598,13 @@ The following serialized excerpt shows the `running_shoes` parent bucket and its
       "hits": [
         {
           "pk": 3,
-          "score": 0.999454140663147,
+          "score": 0.9994542598724365,
           "fields": {
-            "brand": "Adidas",
+            "brand": "Brand B",
             "category": "running_shoes",
             "color": "white",
             "in_stock": true,
-            "name": "Adidas Ultraboost Light",
+            "name": "Runner B1",
             "price": 159.99,
             "rating": 4.8
           }
@@ -602,23 +618,25 @@ The following serialized excerpt shows the `running_shoes` parent bucket and its
 
 </details>
 
-The displayed result represents the bucket path `(running_shoes) → (Adidas)`, not a single composite bucket key `(running_shoes, Adidas)`.
+The displayed result represents the bucket path `(running_shoes) → (Brand B)`, not a single composite bucket key `(running_shoes, Brand B)`.
 
 Milvus first selects up to two category buckets, ordered by `product_count`. It then runs `sub_aggregation` independently within each selected category and returns up to three brand buckets, ordered by `avg_rating`.
 
 In the output above:
 
-- The root `running_shoes` bucket contains four retrieval-pool entities. Its `metrics` contain the root-level `avg_price` and `product_count` values.
-- The root bucket's `sub_groups` list contains the child brand buckets. The displayed Adidas bucket contains one entity and its own `avg_rating` and `brand_count` values.
-- The root bucket's `hits` list is empty because the root aggregation does not configure `top_hits`. The Adidas child contains a representative hit because `top_hits` is configured in `sub_aggregation`.
+- The root `running_shoes` bucket contains four retained candidates across its child composite keys. Its `metrics` contain the root-level `avg_price` and `product_count` values.
+- The root bucket's `sub_groups` list contains the child brand buckets. The displayed Brand B bucket contains one retained candidate and its own `avg_rating` and `brand_count` values.
+- The root bucket's `hits` list is empty because the root aggregation does not configure `top_hits`. The Brand B child contains a representative hit because `top_hits` is configured in `sub_aggregation`.
 
 ## FAQ
 
 ### How accurate are bucket counts and metrics?
 
-Search Aggregation summarizes the ANN retrieval pool. It does not run a full-collection aggregation.
+Search Aggregation summarizes retained ANN candidates. It does not run a full-collection aggregation.
 
-For example, suppose a collection contains 5,000 Nike products, but the retrieval pool for one query contains 35 Nike products. A `product_count` metric in the Nike bucket describes those 35 retrieved products. It does not report 5,000.
+Candidate retention has two approximation stages. ANN search can omit relevant collection entities, and the grouping stage retains at most the largest `TopHits.size` candidates for each full composite key. If no level configures `top_hits`, this per-key limit is one.
+
+For example, suppose a collection contains 5,000 Brand A products and many are relevant to the vector query. If the aggregation uses `TopHits(size=4)`, the Brand A bucket can retain at most four candidates for a full composite key. Its `count` and metrics describe those retained candidates, not all relevant Brand A products and not all 5,000 collection entities.
 
 Approximation matters most when `order` uses a metric alias. Changes in search recall can change the metric values and therefore change which buckets fit within `SearchAggregation.size`. Nested aggregation can amplify this effect because each child level operates on the entities available in its parent bucket.
 
@@ -626,8 +644,13 @@ If you need exact statistics over every matching entity, use an exact query aggr
 
 ### How does Search Aggregation differ from Grouping Search?
 
-Use [Grouping Search](grouping-search.md) when your goal is to improve result diversity and control how many entities each group returns.
+Choose based on the application's primary result shape:
 
-Use Search Aggregation when you need structured bucket results, such as composite keys, per-bucket metrics, bucket ordering, independently sorted representative hits, or nested buckets. Search Aggregation uses a separate API and returns its results through `result.agg_buckets`.
+| Primary need | Prefer | Response to consume |
+|---|---|---|
+| Return a standard ranked entity list with fewer repeated values in a grouping field | [Grouping Search](grouping-search.md) | Flat search hits for each query vector |
+| Inspect or compare groups as buckets, with keys, counts, metrics, ordering, representative hits, or child buckets | Search Aggregation | `AggregationBucket` objects in `result.agg_buckets` |
 
-Do not combine `search_aggregation` with `group_by_field` or `group_by_fields` in the same request.
+Even when Search Aggregation configures `top_hits`, its primary response remains a bucket tree. Grouping Search remains useful when the application already processes ordinary search hits and primarily wants result diversity.
+
+The APIs are mutually exclusive. PyMilvus raises `ParamError` when `search_aggregation` is combined with `group_by_field` or `group_by_fields` in the same request.
