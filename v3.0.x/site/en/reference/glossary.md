@@ -43,7 +43,7 @@ In Milvus, a collection is equivalent to a table in a relational database manage
 
 ## Dependency
 
-A dependency is a program that another program relies on to work. Milvus' dependencies include etcd (stores meta data), MinIO or S3 (object storage), and Pulsar (manages snapshot logs). For more information, refer to [Manage Dependencies](https://milvus.io/docs/manage_dependencies.md#Manage-Dependencies).
+A dependency is a program that another program relies on to work. Milvus' dependencies include etcd (stores meta data), MinIO or S3 (object storage), and a message queue such as Woodpecker (manages snapshot logs). For more information, refer to [Data Infrastructure & Integration](https://milvus.io/docs/data-infra-integration-overview.md).
 
 ## Dynamic schema
 

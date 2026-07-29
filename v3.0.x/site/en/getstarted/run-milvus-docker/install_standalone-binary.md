@@ -17,15 +17,15 @@ This page illustrates how to install Milvus standalone with a pre-built RPM/DEB 
 
 ## Download the RPM/DEB Package
 
-You can download the RPM/DEB package according to your system architecture from the [Milvus Releases page](https://github.com/milvus-io/milvus/releases/tag/v3.0-beta).
+You can download the RPM/DEB package according to your system architecture from the [Milvus Releases page](https://github.com/milvus-io/milvus/releases/tag/v3.0.0).
 
-- For x86_64/amd64, download the **milvus_2.6.17-1_amd64.deb** or **milvus_2.6.17-1_amd64.rpm** package.
-- For ARM64, download the **milvus_2.6.17-1_arm64.deb** or **milvus_2.6.17-1_arm64.rpm** package.
+- For x86_64/amd64, download the **milvus_3.0.0-1_amd64.deb** or **milvus_3.0.0-1_amd64.rpm** package.
+- For ARM64, download the **milvus_3.0.0-1_arm64.deb** or **milvus_3.0.0-1_arm64.rpm** package.
 
 The following command assumes that you are going to run Milvus Standalone on a x86_64/amd64 machine.
 
 ```shell
-wget https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus_2.6.17-1_amd64.rpm -O milvus_2.6.17-1_amd64.rpm
+wget https://github.com/milvus-io/milvus/releases/download/v3.0.0/milvus_3.0.0-1_amd64.rpm -O milvus_3.0.0-1_amd64.rpm
 ```
 
 ## Install the RPM/DEB Package
@@ -35,14 +35,14 @@ To install the RPM/DEB package, you can use the package manager of your system.
 For RPM-based systems (such as CentOS, Fedora, and RHEL), use the `yum` command to install the package.
 
 ```shell
-yum install -y ./milvus_2.6.17-1_amd64.rpm
+yum install -y ./milvus_3.0.0-1_amd64.rpm
 rpm -qa| grep milvus
 ```
 
 For DEB-based systems (such as Ubuntu and Debian), use the `apt` command to install the package.
 
 ```shell
-apt install -y  ./milvus_2.6.17-1_amd64.deb
+apt install -y  ./milvus_3.0.0-1_amd64.deb
 dpkg -l | grep milvus
 ```
 
@@ -74,6 +74,12 @@ If Milvus is running successfully, you should see the following output:
 
 You can find the Milvus binary at `/usr/bin/milvus`, the systemd service file at `/lib/systemd/system/milvus.service`, and the dependencies at `/usr/lib/milvus/`.
 
+<div class="alert note">
+
+By default, Milvus Standalone runs **Woodpecker** (local filesystem) as its message queue with embedded etcd, so no external messaging or metadata service is required. See [Woodpecker](woodpecker.md).
+
+</div>
+
 ## (Optional) Update Milvus configurations
 
 You can modify the Milvus configurations in the `/etc/milvus/configs/milvus.yaml` file. For example, to change the `proxy.healthCheckTimeout` to `1000` ms, you can search for the target parameter and modify accordingly. For applicable configuration items, refer to [System Configuration](system_configuration.md).
@@ -101,6 +107,13 @@ For DEB-based systems:
 ```shell
 apt remove milvus
 ```
+
+<div class="alert note">
+
+Storage V3 is disabled by default. Enable it before using features that depend on it. For requirements and compatibility considerations, see [Storage V3](storage-v3.md).
+
+</div>
+
 
 ## What's next
 

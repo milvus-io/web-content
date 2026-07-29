@@ -14,13 +14,15 @@ Milvus supports several basic operators for filtering data:
 
 - **Comparison Operators**: `==`, `!=`, `>`, `<`, `>=`, and `<=` allow filtering based on numeric or text fields.
 
-- **Range Filters**: `IN` and `LIKE` help match specific value ranges or sets.
+- **Range and pattern filters**: `IN`, `LIKE`, `=~`, and `!~` match values, wildcard patterns, or regex patterns. For details about string patterns, refer to [Pattern Matching](pattern-matching.md).
 
 - **Arithmetic Operators**: `+`, `-`, `*`, `/`, `%`, and `**` are used for calculations involving numeric fields.
 
+- **Bitwise Operators**: In Milvus 3.0.0 and later, `&`, `|`, and `^` filter integer fields that encode multiple flags, such as permissions or status bits. For details, refer to [Basic Operators](basic-operators.md#Bitwise-operators).
+
 - **Logical Operators**: `AND`, `OR`, and `NOT` combine multiple conditions into complex expressions.
 
-- **IS NULL and IS NOT NULL Operators**: The `IS NULL` and `IS NOT NULL` operators are used to filter fields based on whether they contain a null value (absence of data). For details, refer to [Basic Operators](basic-operators.md#IS-NULL-and-IS-NOT-NULL-Operators).
+- **IS NULL and IS NOT NULL Operators**: The `IS NULL` and `IS NOT NULL` operators are used to filter fields based on whether they contain a null value (absence of data). For details, refer to [Basic Operators](basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators).
 
 ### Example: Filtering by Color
 
@@ -29,6 +31,24 @@ To find entities with primary colors (red, green, or blue) in a scalar field `co
 ```python
 filter='color in ["red", "green", "blue"]'
 ```
+
+### Example: Filtering by Permission Bits
+
+To find entities whose integer `permissions` field has the `SHARE` bit set, use the bitwise AND operator (`&`):
+
+```python
+filter='(permissions & 4) == 4'
+```
+
+### Example: Filtering by Regex Pattern
+
+To find entities whose `message` field contains an error code such as `E1001`, use the regex match operator `=~`:
+
+```python
+filter='message =~ "E[0-9]{4}"'
+```
+
+Regex filters use substring matching. To require the entire field value to match the pattern, add `^` and `$` anchors. For details, refer to [Pattern Matching](pattern-matching.md).
 
 ### Example: Filtering JSON Fields
 
@@ -136,6 +156,12 @@ For more details on array operators, see [ARRAY Operators](array-operators.md).
 
 Milvus provides specialized operators for precise text-based searches on VARCHAR fields:
 
+#### Pattern matching operators
+
+The `LIKE`, `=~`, and `!~` operators match string patterns on `VARCHAR` fields, JSON string paths, and specific `ARRAY<VARCHAR>` elements. Use `LIKE` for simple wildcard patterns. Use `=~` and `!~` for RE2 regular expressions.
+
+For details, refer to [Pattern Matching](pattern-matching.md).
+
 #### `TEXT_MATCH` operator
 
 The `TEXT_MATCH` operator allows precise document retrieval based on specific query terms. It is particularly useful for filtered searches that combine scalar filters with vector similarity searches. Unlike semantic searches, Text Match focuses on exact term occurrences.
@@ -153,4 +179,3 @@ For more details, refer to [Text Match](keyword-match.md).
 The **PHRASE_MATCH** operator enables precise retrieval of documents based on exact phrase matches, considering both the order and adjacency of query terms.
 
 For more details, refer to [Phrase Match](phrase-match.md).
-

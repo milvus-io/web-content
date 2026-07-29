@@ -1,12 +1,12 @@
 ---
 id: array-operators.md
 title: "ARRAY Operators"
-summary: "Milvus provides powerful operators to query array fields, allowing you to filter and retrieve entities based on the contents of arrays."
+summary: "Milvus provides ARRAY operators for filtering ARRAY fields and partially updating ARRAY field values."
 ---
 
 # ARRAY Operators
 
-Milvus provides powerful operators to query array fields, allowing you to filter and retrieve entities based on the contents of arrays. 
+Milvus provides ARRAY operators for filtering ARRAY fields and partially updating ARRAY field values.
 
 <div class="alert note">
 
@@ -14,17 +14,24 @@ All elements within an array must be the same type, and nested structures within
 
 </div>
 
-## Available ARRAY Operators
+ARRAY operators in Milvus cover two usage scenarios:
 
-The ARRAY operators allow for fine-grained querying of array fields in Milvus. These operators are:
+- Filter expressions for query and search.
 
-- [`ARRAY_CONTAINS(identifier, expr)`](array-operators.md#ARRAYCONTAINS): checks if a specific element exists in an array field.
+- Partial updates in `upsert` requests.
 
-- [`ARRAY_CONTAINS_ALL(identifier, expr)`](array-operators.md#ARRAYCONTAINSALL): ensures that all elements of the specified list are present in the array field.
+## Available ARRAY operators
 
-- [`ARRAY_CONTAINS_ANY(identifier, expr)`](array-operators.md#ARRAYCONTAINSANY): checks if any of the elements from the specified list are present in the array field.
+The following table lists ARRAY operators available in Milvus.
 
-- [`ARRAY_LENGTH(identifier)`](array-operators.md#ARRAYLENGTH): returns the number of elements in an array field and can be combined with comparison operators for filtering.
+| Operator | Use in | Description |
+| --- | --- | --- |
+| [ARRAY_CONTAINS(identifier, expr)](array-operators.md#ARRAYCONTAINS) | Filter expression | Checks whether a specific element exists in an ARRAY field. |
+| [ARRAY_CONTAINS_ALL(identifier, expr)](array-operators.md#ARRAYCONTAINSALL) | Filter expression | Checks whether all elements in a specified list exist in an ARRAY field. |
+| [ARRAY_CONTAINS_ANY(identifier, expr)](array-operators.md#ARRAYCONTAINSANY) | Filter expression | Checks whether any element in a specified list exists in an ARRAY field. |
+| [ARRAY_LENGTH(identifier)](array-operators.md#ARRAYLENGTH) | Filter expression | Returns the number of elements in an ARRAY field and can be combined with comparison operators for filtering. |
+| [ARRAY_APPEND](array-operators.md#ARRAYAPPEND) | `upsert` with `field_ops` | Appends payload elements to an existing ARRAY field. Available in Milvus v2.6.17 and later. |
+| [ARRAY_REMOVE](array-operators.md#ARRAYREMOVE) | `upsert` with `field_ops` | Removes every element from an existing ARRAY field that matches a value in the request payload. Available in Milvus v2.6.17 and later. |
 
 ## ARRAY_CONTAINS
 
@@ -81,3 +88,51 @@ filter = 'ARRAY_LENGTH(history_temperatures) < 10'
 ```
 
 This will return all entities where the `history_temperatures` array has fewer than 10 elements.
+
+## ARRAY_APPEND | Milvus 2.6.17+
+
+The `ARRAY_APPEND` operator appends payload elements to an existing ARRAY field during an `upsert` request. It is not a filter expression. Use it when you want to add values to an array without first querying the current array value.
+
+The following Python example appends `"premium"` to the `tags` ARRAY field of the entity whose primary key is `1`:
+
+```python
+from pymilvus import FieldOp, MilvusClient
+
+client = MilvusClient(
+    uri="http://localhost:19530",
+    token="root:Milvus"
+)
+
+client.upsert(
+    collection_name="users",
+    data=[{"pk": 1, "tags": ["premium"]}],
+    # highlight-next-line
+    field_ops={"tags": FieldOp.array_append()},
+)
+```
+
+Attaching `ARRAY_APPEND` to a field through `field_ops` enables partial-update semantics for that field. For the full workflow, supported element types, and limits, refer to [Upsert ARRAY fields in merge mode](upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode).
+
+## ARRAY_REMOVE | Milvus 2.6.17+
+
+The `ARRAY_REMOVE` operator removes every element from an existing ARRAY field that matches a value in the request payload during an `upsert` request. It is not a filter expression. Use it when you want to remove matching values from an array without first querying the current array value.
+
+The following Python example removes `"trial"` from the `tags` ARRAY field of the entity whose primary key is `1`:
+
+```python
+from pymilvus import FieldOp, MilvusClient
+
+client = MilvusClient(
+    uri="http://localhost:19530",
+    token="root:Milvus"
+)
+
+client.upsert(
+    collection_name="users",
+    data=[{"pk": 1, "tags": ["trial"]}],
+    # highlight-next-line
+    field_ops={"tags": FieldOp.array_remove()},
+)
+```
+
+Attaching `ARRAY_REMOVE` to a field through `field_ops` enables partial-update semantics for that field. For the full workflow, supported element types, and limits, refer to [Upsert ARRAY fields in merge mode](upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode).

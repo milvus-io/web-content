@@ -49,7 +49,7 @@ Milvus provides two types of analyzers to meet different text processing needs:
 <div class="alert note">
 
 - If you omit analyzer configurations during collection creation, Milvus uses the `standard` analyzer for all text processing by default. For details, refer to [Standard Analyzer](standard-analyzer.md). 
-- For optimal search and query performance, choose an analyzer that matches the language of your text data. For instance, while the `standard` analyzer is versatile, it may not be the best choice for languages with unique grammatical structures, such as Chinese, Japanese, or Korean. In such cases, using a language-specific analyzer like [`chinese`](chinese-analyzer.md) or custom analyzers with specialized tokenizers (such as [`lindera`](lindera-tokenizer.md), [`icu`](icu-tokenizer.md)) and filters is highly recommended to ensure accurate tokenization and better search results.
+- For optimal search and query performance, choose an analyzer that matches the language of your text data. For instance, while the `standard` analyzer is versatile, it may not be the best choice for languages with unique grammatical structures, such as Chinese, Arabic, Thai, Japanese, or Korean. In such cases, using a language-specific analyzer like [`chinese`](chinese-analyzer.md), [`arabic`](arabic-analyzer.md), or [`thai`](thai-analyzer.md), or custom analyzers with specialized tokenizers (such as [`lindera`](lindera-tokenizer.md), [`icu`](icu-tokenizer.md)) and filters is highly recommended to ensure accurate tokenization and better search results.
 
 </div>
 
@@ -253,6 +253,10 @@ Milvus offers the following built-in analyzers, each designed for specific text 
 
 - `chinese`: Specialized for processing Chinese text, including tokenization adapted for Chinese language structures.
 
+- `arabic`: Specialized for Arabic text, with Arabic normalization, decimal digit normalization, Arabic stemming, and Arabic stop-word removal.
+
+- `thai`: Specialized for Thai text, with Thai word segmentation, decimal digit normalization, and Thai stop-word removal.
+
 ### Custom analyzer
 
 For more advanced text processing, custom analyzers in Milvus allow you to build a tailored text-handling pipeline by specifying both a **tokenizer** and **filters**. This setup is ideal for specialized use cases where precise control is required.
@@ -325,6 +329,8 @@ Filters in a custom analyzer can be either **built-in** or **custom**, depending
     - `cnalphanumonly`: Removes tokens that contain any characters other than Chinese characters, English letters, or digits. For details, refer to [Cnalphanumonly](cnalphanumonly-filter.md).
 
     - `cncharonly`: Removes tokens that contain any non-Chinese characters. For details, refer to [Cncharonly](cncharonly-filter.md).
+
+    - `pinyin`: Adds Pinyin token forms for Chinese tokens, enabling Pinyin-based matching for Chinese text. For details, refer to [Pinyin](pinyin-filter.md).
 
     **Example of using a built-in filter:**
 
@@ -945,4 +951,3 @@ After configuring an analyzer, you can integrate with text retrieval features pr
 - [Text Match](keyword-match.md)
 
 - [Phrase Match](phrase-match.md)
-

@@ -503,6 +503,24 @@ summary: Learn how to configure dataNode for Milvus.
 </table>
 
 
+## `dataNode.compaction.lobHoleRatioThreshold`
+
+<table id="dataNode.compaction.lobHoleRatioThreshold">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        The threshold for the ratio of unused space in existing LOB files for TEXT fields. During compaction, if this ratio is lower than the threshold, Milvus reuses the existing LOB files. If this ratio is greater than or equal to the threshold, Milvus rewrites the remaining LOB payloads into new LOB files to reclaim space.      </td>
+      <td>0.3</td>
+    </tr>
+  </tbody>
+</table>
+
+
 ## `dataNode.gracefulStopTimeout`
 
 <table id="dataNode.gracefulStopTimeout">
@@ -606,6 +624,60 @@ summary: Learn how to configure dataNode for Milvus.
     <tr>
       <td>        deltalog format, options: [json, parquet]      </td>
       <td>json</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataNode.text.inlineThreshold`
+
+<table id="dataNode.text.inlineThreshold">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        The size threshold, in bytes, used to choose the storage path for a TEXT field value. Values smaller than this threshold are stored inline in field data. Values greater than or equal to this threshold are stored separately as LOB payloads, and field data stores an internal reference.      </td>
+      <td>65536</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataNode.text.maxLobFileBytes`
+
+<table id="dataNode.text.maxLobFileBytes">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        The maximum size, in bytes, of a single LOB file that stores TEXT payloads. When a LOB file reaches this size, Milvus writes subsequent TEXT LOB payloads to another LOB file.      </td>
+      <td>67108864</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataNode.text.flushThresholdBytes`
+
+<table id="dataNode.text.flushThresholdBytes">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        The buffer size threshold, in bytes, that triggers Milvus to flush buffered TEXT LOB payloads from a growing segment to storage.      </td>
+      <td>16777216</td>
     </tr>
   </tbody>
 </table>
@@ -717,5 +789,3 @@ summary: Learn how to configure dataNode for Milvus.
     </tr>
   </tbody>
 </table>
-
-

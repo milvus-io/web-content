@@ -27,10 +27,10 @@ To install Milvus with GPU support using Docker Compose, follow these steps.
 
 ### 1. Download and configure the YAML file
 
-Download [`milvus-standalone-docker-compose-gpu.yml`](https://github.com/milvus-io/milvus/releases/download/v3.0-beta/milvus-standalone-docker-compose-gpu.yml) and save it as docker-compose.yml manually, or with the following command.
+Download [`milvus-standalone-docker-compose-gpu.yml`](https://github.com/milvus-io/milvus/releases/download/v3.0.0/milvus-standalone-docker-compose-gpu.yml) and save it as docker-compose.yml manually, or with the following command.
 
 ```shell
-$ wget https://github.com/milvus-io/milvus/releases/download/v3.0-beta/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v3.0.0/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
 ```
 
 You need to make some changes to the environment variables of the standalone service in the YAML file as follows:
@@ -181,6 +181,13 @@ To confgiure the memory pool, modify the `initMemSize` and `maxMemSize` settings
     docker stop <milvus_container_id>
     docker start <milvus_container_id>
     ```
+
+<div class="alert note">
+
+Storage V3 is disabled by default. Enable it before using features that depend on it. For requirements and compatibility considerations, see [Storage V3](storage-v3.md).
+
+</div>
+
 
 ## What's next
 

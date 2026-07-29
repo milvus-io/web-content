@@ -67,6 +67,13 @@ The following table summarizes common problems caused by improper analyzer selec
      <td><p><a href="english-analyzer.md"><code>english</code></a> analyzer</p></td>
      <td><p>Use a language-specific analyzer, such as <a href="chinese-analyzer.md"><code>chinese</code></a>.</p></td>
    </tr>
+   <tr>
+     <td><p>Input method mismatch</p></td>
+     <td><p>Users type Pinyin, but the indexed text uses Chinese characters.</p></td>
+     <td><p>Chinese text: <code>"足球"</code>; query text: <code>"zuqiu"</code></p></td>
+     <td><p>Analyzer that emits only Chinese-character tokens</p></td>
+     <td><p>Use a custom analyzer with the <a href="jieba-tokenizer.md"><code>jieba</code></a> tokenizer and <a href="pinyin-filter.md"><code>pinyin</code></a> filter.</p></td>
+   </tr>
 </table>
 
 ## First question: Do you need to choose an analyzer?
@@ -114,6 +121,18 @@ Use this table to quickly determine if the default `standard` analyzer meets you
      <td><p>❌ No</p></td>
      <td><p>Chinese words have no spaces and will be treated as one token.</p></td>
      <td><p>Use a built-in <a href="chinese-analyzer.md"><code>chinese</code></a> analyzer.</p></td>
+   </tr>
+   <tr>
+     <td><p>Arabic documents</p></td>
+     <td><p>❌ No</p></td>
+     <td><p>Arabic text may include letter variants, diacritics, Tatweel, Arabic-Indic digits, and common Arabic stop words that need language-specific handling.</p></td>
+     <td><p>Use a built-in <a href="arabic-analyzer.md"><code>arabic</code></a> analyzer.</p></td>
+   </tr>
+   <tr>
+     <td><p>Thai documents</p></td>
+     <td><p>❌ No</p></td>
+     <td><p>Thai text usually does not use spaces between words, so it needs language-specific word segmentation.</p></td>
+     <td><p>Use a built-in <a href="thai-analyzer.md"><code>thai</code></a> analyzer.</p></td>
    </tr>
    <tr>
      <td><p>Technical documentation</p></td>
@@ -171,6 +190,18 @@ Built-in analyzers are pre-configured solutions for common languages. They are t
      <td><p>Chinese</p></td>
      <td><ul><li><p>Tokenizer: <code>jieba</code></p></li><li><p>Filters: <code>cnalphanumonly</code></p></li></ul></td>
      <td><p>Currently uses Simplified Chinese dictionary by default.</p></td>
+   </tr>
+   <tr>
+     <td><p><a href="arabic-analyzer.md"><code>arabic</code></a></p></td>
+     <td><p>Arabic</p></td>
+     <td><ul><li><p>Tokenizer: <code>standard</code></p></li><li><p>Filters: <code>lowercase</code>, <code>decimaldigit</code>, <code>arabic_normalization</code>, <code>stemmer</code>, <code>stop</code></p></li></ul></td>
+     <td><p>Recommended for Arabic text over <code>standard</code>.</p></td>
+   </tr>
+   <tr>
+     <td><p><a href="thai-analyzer.md"><code>thai</code></a></p></td>
+     <td><p>Thai</p></td>
+     <td><ul><li><p>Tokenizer: <code>thai</code></p></li><li><p>Filters: <code>lowercase</code>, <code>decimaldigit</code>, <code>stop</code></p></li></ul></td>
+     <td><p>Recommended for Thai text over <code>standard</code> or whitespace-based tokenization.</p></td>
    </tr>
 </table>
 
@@ -236,7 +267,7 @@ For space-separated languages, you have these options:
 
 #### East Asian languages
 
-Dictionary-based languages require specialized tokenizers for proper word segmentation:
+Languages that do not use spaces consistently between words require specialized tokenizers for proper word segmentation:
 
 ##### Chinese
 
@@ -258,6 +289,25 @@ Dictionary-based languages require specialized tokenizers for proper word segmen
      <td><p>Pure dictionary-based morphological analysis with Chinese dictionary (<a href="https://cc-cedict.org/wiki/">cc-cedict</a>)</p></td>
      <td><p>Compared to <code>jieba</code>, processes Chinese text in a more generic manner</p></td>
      <td><ul><li><p>Input: <code>"机器学习算法"</code></p></li><li><p>Output: <code>["机器", "学习", "算法"]</code></p></li></ul></td>
+   </tr>
+</table>
+
+##### Thai
+
+For most Thai text, use the built-in [`thai`](thai-analyzer.md) analyzer. Use the standalone [`thai`](thai-tokenizer.md) tokenizer only when you need to build a custom analyzer pipeline.
+
+<table>
+   <tr>
+     <th><p>Tokenizer</p></th>
+     <th><p>How It Works</p></th>
+     <th><p>Best For</p></th>
+     <th><p>Examples</p></th>
+   </tr>
+   <tr>
+     <td><p><a href="thai-tokenizer.md"><code>thai</code></a></p></td>
+     <td><p>Segments Thai text into word tokens and filters out whitespace and punctuation-only segments</p></td>
+     <td><p>Custom analyzer pipelines for Thai or mixed Thai/English text</p></td>
+     <td><ul><li><p>Input: <code>"สวัสดี! ทดสอบ, ระบบ Milvus"</code></p></li><li><p>Output: <code>['สวัสดี', 'ทดสอบ', 'ระบบ', 'Milvus']</code></p></li></ul></td>
    </tr>
 </table>
 
@@ -442,6 +492,12 @@ These filters handle specific language characteristics:
      <td><p>Keeps only Chinese characters</p></td>
      <td><ul><li><p>Input: <code>["Hello", "世界", "123"]</code></p></li><li><p>Output: <code>[[], ['世界'], []]</code></p></li></ul></td>
    </tr>
+   <tr>
+     <td><p><a href="pinyin-filter.md"><code>pinyin</code></a></p></td>
+     <td><p>Chinese</p></td>
+     <td><p>Emits Pinyin token forms for Chinese tokens</p></td>
+     <td><ul><li><p>Input: <code>["中文"]</code></p></li><li><p>Output: <code>[['中文', 'zhong', 'wen']]</code></p></li></ul></td>
+   </tr>
 </table>
 
 ### Step 3: Combine and implement
@@ -574,6 +630,15 @@ analyzer_params = {
 For Simplified Chinese, `cnalphanumonly` removes all tokens except Chinese characters, alphanumeric text, and digits. This prevents punctuation from affecting search quality.
 
 </div>
+
+If users may search Chinese text by typing Pinyin, use a custom analyzer with the `jieba` tokenizer and the [`pinyin`](pinyin-filter.md) filter instead of the built-in `chinese` analyzer.
+
+```python
+analyzer_params = {
+    "tokenizer": "jieba",
+    "filter": ["pinyin"]
+}
+```
 
 ### Japanese content
 
