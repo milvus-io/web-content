@@ -28,7 +28,7 @@ If you are new to the 3.0 line, the Core 3.0 features recall section below summa
 
 This release also adds a `milvus-table` external format that treats Milvus Snapshot metadata and Storage V3 manifests as an external source, so a collection snapshot can itself be served as an external table — batch and serving systems get a shared, manifest-backed view of the same data.
 
-For more information, refer to [Create an External Collection](https://milvus.io/docs/v3.0.x/create-an-external-collection.md) and [Snapshots](https://milvus.io/docs/v3.0.x/snapshots.md).
+For more information, refer to [Create an External Collection](create-an-external-collection.md) and [Snapshots](snapshots.md).
 
 #### Flexible schema: add, backfill, and drop columns online
 
@@ -36,7 +36,7 @@ Schemas do not stay static in production — embedding models get replaced, feat
 
 Backfill works in both directions. External backfill handles values computed outside Milvus: add a column, snapshot the collection as a consistent starting point, run the job offline, write the values back, and Milvus indexes the new column incrementally — an embedding-model upgrade across hundreds of millions of rows becomes a hot path with no downtime. Inner backfill covers kernel-derived values: attach a BM25 or MinHash function to an existing collection and its output field is computed over existing data automatically.
 
-For more information, refer to [Add Fields to an Existing Collection](https://milvus.io/docs/v3.0.x/add-fields-to-an-existing-collection.md).
+For more information, refer to [Add Fields to an Existing Collection](add-fields-to-an-existing-collection.md).
 
 #### Sparse index overhaul: SINDI, Block-Max WAND, and Block-Max MaxScore
 
@@ -48,7 +48,7 @@ StructArray now supports null values, bitmap indexes, dynamic field addition on 
 
 Element-level search adds hybrid search across vector sub-fields with configurable per-entity collapse (max / sum / avg / top-k variants), plus range search and group-by within it. Nested filtering covers `element_filter` predicates, the `MATCH_ANY` / `MATCH_ALL` / `MATCH_LEAST` / `MATCH_MOST` / `MATCH_EXACT` quantifiers, positional sub-field access such as `tags[0][name]`, and `array_length()` on the struct column.
 
-For more information, refer to [StructArray](https://milvus.io/docs/v3.0.x/array-of-structs.md) and [StructArray Operators](https://milvus.io/docs/v3.0.x/struct-array-operators.md).
+For more information, refer to [StructArray](array-of-structs.md) and [StructArray Operators](struct-array-operators.md).
 
 #### Search Aggregation and faceted search
 
