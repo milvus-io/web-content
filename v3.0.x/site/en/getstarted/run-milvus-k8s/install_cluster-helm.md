@@ -98,7 +98,7 @@ The following command deploys a Milvus cluster with optimized settings for v3.0.
 helm install my-release zilliztech/milvus \
   --set image.all.tag=v3.0.0 \
   --set woodpecker.enabled=true \
-  --set woodpecker.image.tag=v \
+  --set woodpecker.image.tag=v0.1.36 \
   --set streaming.enabled=true \
   --set streaming.woodpecker.embedded=false \
   --set indexNode.enabled=false
