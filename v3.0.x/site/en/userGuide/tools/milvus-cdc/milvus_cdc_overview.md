@@ -74,6 +74,10 @@ CDC lag affects both recovery options:
 
 You should monitor CDC lag continuously and keep it as low as possible. The [Set Up CDC Replication](set_up_cdc_replication.md) page includes a PromQL example for estimating CDC lag.
 
+## Bulk Import in CDC Replication
+
+In a CDC replication topology, bulk import must use two-phase commit (2PC) mode with `auto_commit=false`. Run the import and commit against the primary cluster only, and make sure the import files are available to both the primary and standby clusters. For details, refer to [Bulk Import in CDC Replication](bulk_import_in_cdc_replication.md).
+
 ## Limitations
 
 Milvus CDC currently has the following limits:

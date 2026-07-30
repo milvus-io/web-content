@@ -2278,6 +2278,12 @@
             "id": "cdc_failover.md",
             "order": 3,
             "children": []
+          },
+          {
+            "label": "Bulk Import in CDC Replication",
+            "id": "bulk_import_in_cdc_replication.md",
+            "order": 4,
+            "children": []
           }
         ]
       },
