@@ -22,7 +22,7 @@ Milvus relies on a message queue (write-ahead log, WAL) to manage logs of recent
 - Each Milvus instance uses exactly one message queue.
 - **Message Queue limitations**: When upgrading to Milvus v3.0-beta, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
 
-- To change the message queue of a running instance, see [Switch MQ Type](switch-mq-type.md). The Switch MQ feature is available in **Milvus 3.0 and later** — upgrade to Milvus 3.0 or later first.
+- To change the message queue of a running instance, see [Switch Message Queue](switch-mq-type.md). The Switch MQ feature is available in **Milvus 3.0 and later** — upgrade to Milvus 3.0 or later first.
 
 </div>
 

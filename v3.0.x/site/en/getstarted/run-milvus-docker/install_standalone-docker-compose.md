@@ -119,7 +119,7 @@ mq:
   type: rocksmq
 ```
 
-To switch the message queue *after* upgrading, see [Switch MQ Type](switch-mq-type.md).
+To switch the message queue *after* upgrading, see [Switch Message Queue](switch-mq-type.md).
 
 ## Optional dependencies
 
