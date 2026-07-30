@@ -1,11 +1,11 @@
 ---
 id: switch-mq-type.md
-title: Switch MQ Type
+title: Switch Message Queue
 summary: >-
-  Switch the message queue of an existing Milvus deployment between Woodpecker
-  and another message queue without downtime.
+  Switch an existing Milvus deployment between Woodpecker and another message
+  queue without downtime.
 ---
-<h1 id="Switch-MQ-Type" class="common-anchor-header">Switch MQ Type<button data-href="#Switch-MQ-Type" class="anchor-icon" translate="no">
+<h1 id="Switch-Message-Queue" class="common-anchor-header">Switch Message Queue<button data-href="#Switch-Message-Queue" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
