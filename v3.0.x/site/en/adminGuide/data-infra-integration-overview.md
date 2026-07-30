@@ -1,12 +1,12 @@
 ---
 id: data-infra-integration-overview.md
-title: Data Infrastructure & Integration
-summary: Overview of the third-party infrastructure Milvus integrates with — metadata, object storage, and message queues.
+title: Data Infrastructure
+summary: Overview of the metadata storage, object storage, and message queues that Milvus uses.
 ---
 
-# Data Infrastructure & Integration
+# Data Infrastructure
 
-Milvus builds on open data infrastructure for its core dependencies. This chapter covers the components you can plug in and configure:
+Milvus relies on metadata storage, object storage, and a message queue for its core data infrastructure. This chapter covers the components you can configure:
 
 - **[Metadata](etcd.md)** — Milvus stores metadata (collection schemas, node status, consumption checkpoints) in etcd.
 - **[Object Storage](object-storage.md)** — Milvus stores index files and binary logs in MinIO, AWS S3, or other S3-compatible / cloud object storage.

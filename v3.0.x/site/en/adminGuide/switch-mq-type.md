@@ -1,10 +1,10 @@
 ---
 id: switch-mq-type.md
-title: Switch MQ Type
-summary: Switch the message queue of an existing Milvus deployment between Woodpecker and another message queue without downtime.
+title: Switch Message Queue
+summary: Switch an existing Milvus deployment between Woodpecker and another message queue without downtime.
 ---
 
-# Switch MQ Type
+# Switch Message Queue
 
 This guide describes how to switch the message queue (MQ) of an existing Milvus deployment **between Woodpecker and another message queue**, online and without downtime.
 

@@ -6,7 +6,7 @@ summary: Switch the message queue of a Milvus cluster between Kafka and Woodpeck
 
 # Switch between Kafka and Woodpecker
 
-This page describes how to switch the message queue (MQ) of a **Milvus cluster** between **Kafka** (builtin or external) and **Woodpecker** (MinIO backend), in both directions. For the general workflow and prerequisites, see [Switch MQ Type](switch-mq-type.md).
+This page describes how to switch the message queue (MQ) of a **Milvus cluster** between **Kafka** (builtin or external) and **Woodpecker** (MinIO backend), in both directions. For the general workflow and prerequisites, see [Switch Message Queue](switch-mq-type.md).
 
 <div class="alert note">
 

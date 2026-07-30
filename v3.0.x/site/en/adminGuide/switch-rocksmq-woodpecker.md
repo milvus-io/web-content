@@ -6,7 +6,7 @@ summary: Switch the message queue of a Milvus Standalone (Docker Compose) deploy
 
 # Switch between RocksMQ and Woodpecker
 
-This page describes how to switch the message queue (MQ) of a **Milvus Standalone (Docker Compose)** deployment between **RocksMQ** and **Woodpecker** (local or MinIO backend), in both directions. For the general workflow and prerequisites, see [Switch MQ Type](switch-mq-type.md).
+This page describes how to switch the message queue (MQ) of a **Milvus Standalone (Docker Compose)** deployment between **RocksMQ** and **Woodpecker** (local or MinIO backend), in both directions. For the general workflow and prerequisites, see [Switch Message Queue](switch-mq-type.md).
 
 <div class="alert note">
 
