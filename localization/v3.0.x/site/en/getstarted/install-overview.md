@@ -105,7 +105,7 @@ title: Overview of Milvus Deployment Options
 <li><strong>Milvus Standalone</strong> is suitable for medium-sized datasets, scaling up to 100 million vectors.</li>
 <li><strong>Milvus Distributed</strong> is designed for large-scale deployments, capable of handling datasets from 100 million up to tens of billions of vectors.</li>
 </ul>
-<p>Regardless of the deployment mode, every Milvus instance relies on a message queue, object storage, and a metadata store — by default <strong>Woodpecker</strong>, <strong>MinIO</strong>, and <strong>etcd</strong>. To learn about these dependencies, tune them, or connect external services, see <a href="/docs/data-infra-integration-overview.md">Data Infrastructure & Integration</a>.</p>
+<p>Regardless of the deployment mode, every Milvus instance relies on a message queue, object storage, and a metadata store — by default <strong>Woodpecker</strong>, <strong>MinIO</strong>, and <strong>etcd</strong>. To learn about these dependencies, tune them, or connect external services, see <a href="/docs/data-infra-integration-overview.md">Data Infrastructure</a>.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/select-deployment-option.png" alt="Select deployment option for your use case" class="doc-image" id="select-deployment-option-for-your-use-case" />
